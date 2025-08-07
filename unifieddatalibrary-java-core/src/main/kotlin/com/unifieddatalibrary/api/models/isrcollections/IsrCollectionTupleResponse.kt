@@ -1,0 +1,4449 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.isrcollections
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.unifieddatalibrary.api.core.Enum
+import com.unifieddatalibrary.api.core.ExcludeMissing
+import com.unifieddatalibrary.api.core.JsonField
+import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
+import com.unifieddatalibrary.api.core.checkKnown
+import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.core.toImmutable
+import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import java.time.OffsetDateTime
+import java.util.Collections
+import java.util.Objects
+import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
+
+/** ISR Collection data. */
+class IsrCollectionTupleResponse
+private constructor(
+    private val classificationMarking: JsonField<String>,
+    private val dataMode: JsonField<DataMode>,
+    private val source: JsonField<String>,
+    private val id: JsonField<String>,
+    private val collectionRequirements: JsonField<List<IsrCollectionRequirementsFull>>,
+    private val createdAt: JsonField<OffsetDateTime>,
+    private val createdBy: JsonField<String>,
+    private val idexVersion: JsonField<Int>,
+    private val missionAor: JsonField<String>,
+    private val missionCollectionArea: JsonField<String>,
+    private val missionCountry: JsonField<String>,
+    private val missionEmphasis: JsonField<String>,
+    private val missionId: JsonField<String>,
+    private val missionJoa: JsonField<String>,
+    private val missionOperation: JsonField<String>,
+    private val missionPrimaryIntelDiscipline: JsonField<String>,
+    private val missionPrimarySubCategory: JsonField<String>,
+    private val missionPriority: JsonField<Int>,
+    private val missionRegion: JsonField<String>,
+    private val missionRole: JsonField<String>,
+    private val missionSecondaryIntelDiscipline: JsonField<String>,
+    private val missionSecondarySubCategory: JsonField<String>,
+    private val missionStartPointLat: JsonField<Double>,
+    private val missionStartPointLong: JsonField<Double>,
+    private val missionSubRegion: JsonField<String>,
+    private val missionSupportedUnit: JsonField<String>,
+    private val missionSyncMatrixBin: JsonField<String>,
+    private val name: JsonField<String>,
+    private val origin: JsonField<String>,
+    private val origNetwork: JsonField<String>,
+    private val taskings: JsonField<List<Tasking>>,
+    private val transit: JsonField<List<Transit>>,
+    private val updatedAt: JsonField<OffsetDateTime>,
+    private val updatedBy: JsonField<String>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
+) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
+        @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("collectionRequirements")
+        @ExcludeMissing
+        collectionRequirements: JsonField<List<IsrCollectionRequirementsFull>> = JsonMissing.of(),
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("idexVersion") @ExcludeMissing idexVersion: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("missionAOR")
+        @ExcludeMissing
+        missionAor: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionCollectionArea")
+        @ExcludeMissing
+        missionCollectionArea: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionCountry")
+        @ExcludeMissing
+        missionCountry: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionEmphasis")
+        @ExcludeMissing
+        missionEmphasis: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionId") @ExcludeMissing missionId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionJoa")
+        @ExcludeMissing
+        missionJoa: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionOperation")
+        @ExcludeMissing
+        missionOperation: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionPrimaryIntelDiscipline")
+        @ExcludeMissing
+        missionPrimaryIntelDiscipline: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionPrimarySubCategory")
+        @ExcludeMissing
+        missionPrimarySubCategory: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionPriority")
+        @ExcludeMissing
+        missionPriority: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("missionRegion")
+        @ExcludeMissing
+        missionRegion: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionRole")
+        @ExcludeMissing
+        missionRole: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionSecondaryIntelDiscipline")
+        @ExcludeMissing
+        missionSecondaryIntelDiscipline: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionSecondarySubCategory")
+        @ExcludeMissing
+        missionSecondarySubCategory: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionStartPointLat")
+        @ExcludeMissing
+        missionStartPointLat: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("missionStartPointLong")
+        @ExcludeMissing
+        missionStartPointLong: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("missionSubRegion")
+        @ExcludeMissing
+        missionSubRegion: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionSupportedUnit")
+        @ExcludeMissing
+        missionSupportedUnit: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("missionSyncMatrixBin")
+        @ExcludeMissing
+        missionSyncMatrixBin: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("name") @ExcludeMissing name: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origNetwork")
+        @ExcludeMissing
+        origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("taskings")
+        @ExcludeMissing
+        taskings: JsonField<List<Tasking>> = JsonMissing.of(),
+        @JsonProperty("transit")
+        @ExcludeMissing
+        transit: JsonField<List<Transit>> = JsonMissing.of(),
+        @JsonProperty("updatedAt")
+        @ExcludeMissing
+        updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("updatedBy") @ExcludeMissing updatedBy: JsonField<String> = JsonMissing.of(),
+    ) : this(
+        classificationMarking,
+        dataMode,
+        source,
+        id,
+        collectionRequirements,
+        createdAt,
+        createdBy,
+        idexVersion,
+        missionAor,
+        missionCollectionArea,
+        missionCountry,
+        missionEmphasis,
+        missionId,
+        missionJoa,
+        missionOperation,
+        missionPrimaryIntelDiscipline,
+        missionPrimarySubCategory,
+        missionPriority,
+        missionRegion,
+        missionRole,
+        missionSecondaryIntelDiscipline,
+        missionSecondarySubCategory,
+        missionStartPointLat,
+        missionStartPointLong,
+        missionSubRegion,
+        missionSupportedUnit,
+        missionSyncMatrixBin,
+        name,
+        origin,
+        origNetwork,
+        taskings,
+        transit,
+        updatedAt,
+        updatedBy,
+        mutableMapOf(),
+    )
+
+    /**
+     * Classification marking of the data in IC/CAPCO Portion-marked format.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
+
+    /**
+     * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+     *
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
+     *
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
+     *
+     * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+     *
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun dataMode(): DataMode = dataMode.getRequired("dataMode")
+
+    /**
+     * Source of the data.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun source(): String = source.getRequired("source")
+
+    /**
+     * Unique identifier of the record, auto-generated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun id(): Optional<String> = id.getOptional("id")
+
+    /**
+     * Mission desired collection requirements.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun collectionRequirements(): Optional<List<IsrCollectionRequirementsFull>> =
+        collectionRequirements.getOptional("collectionRequirements")
+
+    /**
+     * Time the row was created in the database, auto-populated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
+
+    /**
+     * Application user who created the row in the database, auto-populated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
+
+    /**
+     * Version of the IDEX software the request came from for compatibility.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun idexVersion(): Optional<Int> = idexVersion.getOptional("idexVersion")
+
+    /**
+     * Designation of mission Area Of Responsibility.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionAor(): Optional<String> = missionAor.getOptional("missionAOR")
+
+    /**
+     * Mission geographical collection area.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionCollectionArea(): Optional<String> =
+        missionCollectionArea.getOptional("missionCollectionArea")
+
+    /**
+     * Country code of the mission. A Country may represent countries, multi-national consortiums,
+     * and international organizations.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionCountry(): Optional<String> = missionCountry.getOptional("missionCountry")
+
+    /**
+     * Text version of what we are emphasizing in this mission.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionEmphasis(): Optional<String> = missionEmphasis.getOptional("missionEmphasis")
+
+    /**
+     * Mission Identifier.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionId(): Optional<String> = missionId.getOptional("missionId")
+
+    /**
+     * Joint Operations Area.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionJoa(): Optional<String> = missionJoa.getOptional("missionJoa")
+
+    /**
+     * Mission operation name.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionOperation(): Optional<String> = missionOperation.getOptional("missionOperation")
+
+    /**
+     * Primary type of intelligence to be collected during the mission.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionPrimaryIntelDiscipline(): Optional<String> =
+        missionPrimaryIntelDiscipline.getOptional("missionPrimaryIntelDiscipline")
+
+    /**
+     * Sub category of primary intelligence to be collected.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionPrimarySubCategory(): Optional<String> =
+        missionPrimarySubCategory.getOptional("missionPrimarySubCategory")
+
+    /**
+     * Mission Priority (1-n).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionPriority(): Optional<Int> = missionPriority.getOptional("missionPriority")
+
+    /**
+     * Region of the mission.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionRegion(): Optional<String> = missionRegion.getOptional("missionRegion")
+
+    /**
+     * What is the primary objective(Role) of this mission.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionRole(): Optional<String> = missionRole.getOptional("missionRole")
+
+    /**
+     * Type of intelligence to be collected second.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionSecondaryIntelDiscipline(): Optional<String> =
+        missionSecondaryIntelDiscipline.getOptional("missionSecondaryIntelDiscipline")
+
+    /**
+     * Mission sub category for secondary intelligence discipline to be collected.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionSecondarySubCategory(): Optional<String> =
+        missionSecondarySubCategory.getOptional("missionSecondarySubCategory")
+
+    /**
+     * WGS-84 latitude of the start position, in degrees. -90 to 90 degrees (negative values south
+     * of equator).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionStartPointLat(): Optional<Double> =
+        missionStartPointLat.getOptional("missionStartPointLat")
+
+    /**
+     * WGS-84 longitude of the start position, in degrees. -180 to 180 degrees (negative values west
+     * of Prime Meridian).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionStartPointLong(): Optional<Double> =
+        missionStartPointLong.getOptional("missionStartPointLong")
+
+    /**
+     * Subregion of the mission.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionSubRegion(): Optional<String> = missionSubRegion.getOptional("missionSubRegion")
+
+    /**
+     * Name of the Supporting unit/Location that is performing this mission.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionSupportedUnit(): Optional<String> =
+        missionSupportedUnit.getOptional("missionSupportedUnit")
+
+    /**
+     * A synchronization matrix is used to organize the logistics synchronization process during a
+     * mission.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun missionSyncMatrixBin(): Optional<String> =
+        missionSyncMatrixBin.getOptional("missionSyncMatrixBin")
+
+    /**
+     * Human readable Mission Name.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun name(): Optional<String> = name.getOptional("name")
+
+    /**
+     * Originating system or organization which produced the data, if different from the source. The
+     * origin may be different than the source if the source was a mediating system which forwarded
+     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origin(): Optional<String> = origin.getOptional("origin")
+
+    /**
+     * The originating source network on which this record was created, auto-populated by the
+     * system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
+
+    /**
+     * Individual taskings to complete the mission.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun taskings(): Optional<List<Tasking>> = taskings.getOptional("taskings")
+
+    /**
+     * Object for data dissemination.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun transit(): Optional<List<Transit>> = transit.getOptional("transit")
+
+    /**
+     * Time the row was updated in the database, auto-populated by the system, example =
+     * 2018-01-01T16:00:00.123Z.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun updatedAt(): Optional<OffsetDateTime> = updatedAt.getOptional("updatedAt")
+
+    /**
+     * Application user who updated the row in the database, auto-populated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun updatedBy(): Optional<String> = updatedBy.getOptional("updatedBy")
+
+    /**
+     * Returns the raw JSON value of [classificationMarking].
+     *
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("classificationMarking")
+    @ExcludeMissing
+    fun _classificationMarking(): JsonField<String> = classificationMarking
+
+    /**
+     * Returns the raw JSON value of [dataMode].
+     *
+     * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+
+    /**
+     * Returns the raw JSON value of [source].
+     *
+     * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+
+    /**
+     * Returns the raw JSON value of [id].
+     *
+     * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+
+    /**
+     * Returns the raw JSON value of [collectionRequirements].
+     *
+     * Unlike [collectionRequirements], this method doesn't throw if the JSON field has an
+     * unexpected type.
+     */
+    @JsonProperty("collectionRequirements")
+    @ExcludeMissing
+    fun _collectionRequirements(): JsonField<List<IsrCollectionRequirementsFull>> =
+        collectionRequirements
+
+    /**
+     * Returns the raw JSON value of [createdAt].
+     *
+     * Unlike [createdAt], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("createdAt")
+    @ExcludeMissing
+    fun _createdAt(): JsonField<OffsetDateTime> = createdAt
+
+    /**
+     * Returns the raw JSON value of [createdBy].
+     *
+     * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+
+    /**
+     * Returns the raw JSON value of [idexVersion].
+     *
+     * Unlike [idexVersion], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("idexVersion") @ExcludeMissing fun _idexVersion(): JsonField<Int> = idexVersion
+
+    /**
+     * Returns the raw JSON value of [missionAor].
+     *
+     * Unlike [missionAor], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("missionAOR") @ExcludeMissing fun _missionAor(): JsonField<String> = missionAor
+
+    /**
+     * Returns the raw JSON value of [missionCollectionArea].
+     *
+     * Unlike [missionCollectionArea], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("missionCollectionArea")
+    @ExcludeMissing
+    fun _missionCollectionArea(): JsonField<String> = missionCollectionArea
+
+    /**
+     * Returns the raw JSON value of [missionCountry].
+     *
+     * Unlike [missionCountry], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("missionCountry")
+    @ExcludeMissing
+    fun _missionCountry(): JsonField<String> = missionCountry
+
+    /**
+     * Returns the raw JSON value of [missionEmphasis].
+     *
+     * Unlike [missionEmphasis], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("missionEmphasis")
+    @ExcludeMissing
+    fun _missionEmphasis(): JsonField<String> = missionEmphasis
+
+    /**
+     * Returns the raw JSON value of [missionId].
+     *
+     * Unlike [missionId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("missionId") @ExcludeMissing fun _missionId(): JsonField<String> = missionId
+
+    /**
+     * Returns the raw JSON value of [missionJoa].
+     *
+     * Unlike [missionJoa], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("missionJoa") @ExcludeMissing fun _missionJoa(): JsonField<String> = missionJoa
+
+    /**
+     * Returns the raw JSON value of [missionOperation].
+     *
+     * Unlike [missionOperation], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("missionOperation")
+    @ExcludeMissing
+    fun _missionOperation(): JsonField<String> = missionOperation
+
+    /**
+     * Returns the raw JSON value of [missionPrimaryIntelDiscipline].
+     *
+     * Unlike [missionPrimaryIntelDiscipline], this method doesn't throw if the JSON field has an
+     * unexpected type.
+     */
+    @JsonProperty("missionPrimaryIntelDiscipline")
+    @ExcludeMissing
+    fun _missionPrimaryIntelDiscipline(): JsonField<String> = missionPrimaryIntelDiscipline
+
+    /**
+     * Returns the raw JSON value of [missionPrimarySubCategory].
+     *
+     * Unlike [missionPrimarySubCategory], this method doesn't throw if the JSON field has an
+     * unexpected type.
+     */
+    @JsonProperty("missionPrimarySubCategory")
+    @ExcludeMissing
+    fun _missionPrimarySubCategory(): JsonField<String> = missionPrimarySubCategory
+
+    /**
+     * Returns the raw JSON value of [missionPriority].
+     *
+     * Unlike [missionPriority], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("missionPriority")
+    @ExcludeMissing
+    fun _missionPriority(): JsonField<Int> = missionPriority
+
+    /**
+     * Returns the raw JSON value of [missionRegion].
+     *
+     * Unlike [missionRegion], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("missionRegion")
+    @ExcludeMissing
+    fun _missionRegion(): JsonField<String> = missionRegion
+
+    /**
+     * Returns the raw JSON value of [missionRole].
+     *
+     * Unlike [missionRole], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("missionRole") @ExcludeMissing fun _missionRole(): JsonField<String> = missionRole
+
+    /**
+     * Returns the raw JSON value of [missionSecondaryIntelDiscipline].
+     *
+     * Unlike [missionSecondaryIntelDiscipline], this method doesn't throw if the JSON field has an
+     * unexpected type.
+     */
+    @JsonProperty("missionSecondaryIntelDiscipline")
+    @ExcludeMissing
+    fun _missionSecondaryIntelDiscipline(): JsonField<String> = missionSecondaryIntelDiscipline
+
+    /**
+     * Returns the raw JSON value of [missionSecondarySubCategory].
+     *
+     * Unlike [missionSecondarySubCategory], this method doesn't throw if the JSON field has an
+     * unexpected type.
+     */
+    @JsonProperty("missionSecondarySubCategory")
+    @ExcludeMissing
+    fun _missionSecondarySubCategory(): JsonField<String> = missionSecondarySubCategory
+
+    /**
+     * Returns the raw JSON value of [missionStartPointLat].
+     *
+     * Unlike [missionStartPointLat], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("missionStartPointLat")
+    @ExcludeMissing
+    fun _missionStartPointLat(): JsonField<Double> = missionStartPointLat
+
+    /**
+     * Returns the raw JSON value of [missionStartPointLong].
+     *
+     * Unlike [missionStartPointLong], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("missionStartPointLong")
+    @ExcludeMissing
+    fun _missionStartPointLong(): JsonField<Double> = missionStartPointLong
+
+    /**
+     * Returns the raw JSON value of [missionSubRegion].
+     *
+     * Unlike [missionSubRegion], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("missionSubRegion")
+    @ExcludeMissing
+    fun _missionSubRegion(): JsonField<String> = missionSubRegion
+
+    /**
+     * Returns the raw JSON value of [missionSupportedUnit].
+     *
+     * Unlike [missionSupportedUnit], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("missionSupportedUnit")
+    @ExcludeMissing
+    fun _missionSupportedUnit(): JsonField<String> = missionSupportedUnit
+
+    /**
+     * Returns the raw JSON value of [missionSyncMatrixBin].
+     *
+     * Unlike [missionSyncMatrixBin], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("missionSyncMatrixBin")
+    @ExcludeMissing
+    fun _missionSyncMatrixBin(): JsonField<String> = missionSyncMatrixBin
+
+    /**
+     * Returns the raw JSON value of [name].
+     *
+     * Unlike [name], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("name") @ExcludeMissing fun _name(): JsonField<String> = name
+
+    /**
+     * Returns the raw JSON value of [origin].
+     *
+     * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+
+    /**
+     * Returns the raw JSON value of [origNetwork].
+     *
+     * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
+
+    /**
+     * Returns the raw JSON value of [taskings].
+     *
+     * Unlike [taskings], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("taskings") @ExcludeMissing fun _taskings(): JsonField<List<Tasking>> = taskings
+
+    /**
+     * Returns the raw JSON value of [transit].
+     *
+     * Unlike [transit], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("transit") @ExcludeMissing fun _transit(): JsonField<List<Transit>> = transit
+
+    /**
+     * Returns the raw JSON value of [updatedAt].
+     *
+     * Unlike [updatedAt], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("updatedAt")
+    @ExcludeMissing
+    fun _updatedAt(): JsonField<OffsetDateTime> = updatedAt
+
+    /**
+     * Returns the raw JSON value of [updatedBy].
+     *
+     * Unlike [updatedBy], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("updatedBy") @ExcludeMissing fun _updatedBy(): JsonField<String> = updatedBy
+
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
+    @JsonAnyGetter
+    @ExcludeMissing
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
+
+    fun toBuilder() = Builder().from(this)
+
+    companion object {
+
+        /**
+         * Returns a mutable builder for constructing an instance of [IsrCollectionTupleResponse].
+         *
+         * The following fields are required:
+         * ```java
+         * .classificationMarking()
+         * .dataMode()
+         * .source()
+         * ```
+         */
+        @JvmStatic fun builder() = Builder()
+    }
+
+    /** A builder for [IsrCollectionTupleResponse]. */
+    class Builder internal constructor() {
+
+        private var classificationMarking: JsonField<String>? = null
+        private var dataMode: JsonField<DataMode>? = null
+        private var source: JsonField<String>? = null
+        private var id: JsonField<String> = JsonMissing.of()
+        private var collectionRequirements: JsonField<MutableList<IsrCollectionRequirementsFull>>? =
+            null
+        private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var createdBy: JsonField<String> = JsonMissing.of()
+        private var idexVersion: JsonField<Int> = JsonMissing.of()
+        private var missionAor: JsonField<String> = JsonMissing.of()
+        private var missionCollectionArea: JsonField<String> = JsonMissing.of()
+        private var missionCountry: JsonField<String> = JsonMissing.of()
+        private var missionEmphasis: JsonField<String> = JsonMissing.of()
+        private var missionId: JsonField<String> = JsonMissing.of()
+        private var missionJoa: JsonField<String> = JsonMissing.of()
+        private var missionOperation: JsonField<String> = JsonMissing.of()
+        private var missionPrimaryIntelDiscipline: JsonField<String> = JsonMissing.of()
+        private var missionPrimarySubCategory: JsonField<String> = JsonMissing.of()
+        private var missionPriority: JsonField<Int> = JsonMissing.of()
+        private var missionRegion: JsonField<String> = JsonMissing.of()
+        private var missionRole: JsonField<String> = JsonMissing.of()
+        private var missionSecondaryIntelDiscipline: JsonField<String> = JsonMissing.of()
+        private var missionSecondarySubCategory: JsonField<String> = JsonMissing.of()
+        private var missionStartPointLat: JsonField<Double> = JsonMissing.of()
+        private var missionStartPointLong: JsonField<Double> = JsonMissing.of()
+        private var missionSubRegion: JsonField<String> = JsonMissing.of()
+        private var missionSupportedUnit: JsonField<String> = JsonMissing.of()
+        private var missionSyncMatrixBin: JsonField<String> = JsonMissing.of()
+        private var name: JsonField<String> = JsonMissing.of()
+        private var origin: JsonField<String> = JsonMissing.of()
+        private var origNetwork: JsonField<String> = JsonMissing.of()
+        private var taskings: JsonField<MutableList<Tasking>>? = null
+        private var transit: JsonField<MutableList<Transit>>? = null
+        private var updatedAt: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var updatedBy: JsonField<String> = JsonMissing.of()
+        private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+        @JvmSynthetic
+        internal fun from(isrCollectionTupleResponse: IsrCollectionTupleResponse) = apply {
+            classificationMarking = isrCollectionTupleResponse.classificationMarking
+            dataMode = isrCollectionTupleResponse.dataMode
+            source = isrCollectionTupleResponse.source
+            id = isrCollectionTupleResponse.id
+            collectionRequirements =
+                isrCollectionTupleResponse.collectionRequirements.map { it.toMutableList() }
+            createdAt = isrCollectionTupleResponse.createdAt
+            createdBy = isrCollectionTupleResponse.createdBy
+            idexVersion = isrCollectionTupleResponse.idexVersion
+            missionAor = isrCollectionTupleResponse.missionAor
+            missionCollectionArea = isrCollectionTupleResponse.missionCollectionArea
+            missionCountry = isrCollectionTupleResponse.missionCountry
+            missionEmphasis = isrCollectionTupleResponse.missionEmphasis
+            missionId = isrCollectionTupleResponse.missionId
+            missionJoa = isrCollectionTupleResponse.missionJoa
+            missionOperation = isrCollectionTupleResponse.missionOperation
+            missionPrimaryIntelDiscipline = isrCollectionTupleResponse.missionPrimaryIntelDiscipline
+            missionPrimarySubCategory = isrCollectionTupleResponse.missionPrimarySubCategory
+            missionPriority = isrCollectionTupleResponse.missionPriority
+            missionRegion = isrCollectionTupleResponse.missionRegion
+            missionRole = isrCollectionTupleResponse.missionRole
+            missionSecondaryIntelDiscipline =
+                isrCollectionTupleResponse.missionSecondaryIntelDiscipline
+            missionSecondarySubCategory = isrCollectionTupleResponse.missionSecondarySubCategory
+            missionStartPointLat = isrCollectionTupleResponse.missionStartPointLat
+            missionStartPointLong = isrCollectionTupleResponse.missionStartPointLong
+            missionSubRegion = isrCollectionTupleResponse.missionSubRegion
+            missionSupportedUnit = isrCollectionTupleResponse.missionSupportedUnit
+            missionSyncMatrixBin = isrCollectionTupleResponse.missionSyncMatrixBin
+            name = isrCollectionTupleResponse.name
+            origin = isrCollectionTupleResponse.origin
+            origNetwork = isrCollectionTupleResponse.origNetwork
+            taskings = isrCollectionTupleResponse.taskings.map { it.toMutableList() }
+            transit = isrCollectionTupleResponse.transit.map { it.toMutableList() }
+            updatedAt = isrCollectionTupleResponse.updatedAt
+            updatedBy = isrCollectionTupleResponse.updatedBy
+            additionalProperties = isrCollectionTupleResponse.additionalProperties.toMutableMap()
+        }
+
+        /** Classification marking of the data in IC/CAPCO Portion-marked format. */
+        fun classificationMarking(classificationMarking: String) =
+            classificationMarking(JsonField.of(classificationMarking))
+
+        /**
+         * Sets [Builder.classificationMarking] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            this.classificationMarking = classificationMarking
+        }
+
+        /**
+         * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+         *
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
+         *
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
+         *
+         * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+         *
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
+         */
+        fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
+
+        /**
+         * Sets [Builder.dataMode] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+
+        /** Source of the data. */
+        fun source(source: String) = source(JsonField.of(source))
+
+        /**
+         * Sets [Builder.source] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun source(source: JsonField<String>) = apply { this.source = source }
+
+        /** Unique identifier of the record, auto-generated by the system. */
+        fun id(id: String) = id(JsonField.of(id))
+
+        /**
+         * Sets [Builder.id] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun id(id: JsonField<String>) = apply { this.id = id }
+
+        /** Mission desired collection requirements. */
+        fun collectionRequirements(collectionRequirements: List<IsrCollectionRequirementsFull>) =
+            collectionRequirements(JsonField.of(collectionRequirements))
+
+        /**
+         * Sets [Builder.collectionRequirements] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.collectionRequirements] with a well-typed
+         * `List<IsrCollectionRequirementsFull>` value instead. This method is primarily for setting
+         * the field to an undocumented or not yet supported value.
+         */
+        fun collectionRequirements(
+            collectionRequirements: JsonField<List<IsrCollectionRequirementsFull>>
+        ) = apply {
+            this.collectionRequirements = collectionRequirements.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [IsrCollectionRequirementsFull] to [collectionRequirements].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addCollectionRequirement(collectionRequirement: IsrCollectionRequirementsFull) = apply {
+            collectionRequirements =
+                (collectionRequirements ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("collectionRequirements", it).add(collectionRequirement)
+                }
+        }
+
+        /** Time the row was created in the database, auto-populated by the system. */
+        fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
+
+        /**
+         * Sets [Builder.createdAt] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
+
+        /** Application user who created the row in the database, auto-populated by the system. */
+        fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
+
+        /**
+         * Sets [Builder.createdBy] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+
+        /** Version of the IDEX software the request came from for compatibility. */
+        fun idexVersion(idexVersion: Int) = idexVersion(JsonField.of(idexVersion))
+
+        /**
+         * Sets [Builder.idexVersion] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.idexVersion] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun idexVersion(idexVersion: JsonField<Int>) = apply { this.idexVersion = idexVersion }
+
+        /** Designation of mission Area Of Responsibility. */
+        fun missionAor(missionAor: String) = missionAor(JsonField.of(missionAor))
+
+        /**
+         * Sets [Builder.missionAor] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionAor] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun missionAor(missionAor: JsonField<String>) = apply { this.missionAor = missionAor }
+
+        /** Mission geographical collection area. */
+        fun missionCollectionArea(missionCollectionArea: String) =
+            missionCollectionArea(JsonField.of(missionCollectionArea))
+
+        /**
+         * Sets [Builder.missionCollectionArea] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionCollectionArea] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun missionCollectionArea(missionCollectionArea: JsonField<String>) = apply {
+            this.missionCollectionArea = missionCollectionArea
+        }
+
+        /**
+         * Country code of the mission. A Country may represent countries, multi-national
+         * consortiums, and international organizations.
+         */
+        fun missionCountry(missionCountry: String) = missionCountry(JsonField.of(missionCountry))
+
+        /**
+         * Sets [Builder.missionCountry] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionCountry] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun missionCountry(missionCountry: JsonField<String>) = apply {
+            this.missionCountry = missionCountry
+        }
+
+        /** Text version of what we are emphasizing in this mission. */
+        fun missionEmphasis(missionEmphasis: String) =
+            missionEmphasis(JsonField.of(missionEmphasis))
+
+        /**
+         * Sets [Builder.missionEmphasis] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionEmphasis] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun missionEmphasis(missionEmphasis: JsonField<String>) = apply {
+            this.missionEmphasis = missionEmphasis
+        }
+
+        /** Mission Identifier. */
+        fun missionId(missionId: String) = missionId(JsonField.of(missionId))
+
+        /**
+         * Sets [Builder.missionId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun missionId(missionId: JsonField<String>) = apply { this.missionId = missionId }
+
+        /** Joint Operations Area. */
+        fun missionJoa(missionJoa: String) = missionJoa(JsonField.of(missionJoa))
+
+        /**
+         * Sets [Builder.missionJoa] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionJoa] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun missionJoa(missionJoa: JsonField<String>) = apply { this.missionJoa = missionJoa }
+
+        /** Mission operation name. */
+        fun missionOperation(missionOperation: String) =
+            missionOperation(JsonField.of(missionOperation))
+
+        /**
+         * Sets [Builder.missionOperation] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionOperation] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun missionOperation(missionOperation: JsonField<String>) = apply {
+            this.missionOperation = missionOperation
+        }
+
+        /** Primary type of intelligence to be collected during the mission. */
+        fun missionPrimaryIntelDiscipline(missionPrimaryIntelDiscipline: String) =
+            missionPrimaryIntelDiscipline(JsonField.of(missionPrimaryIntelDiscipline))
+
+        /**
+         * Sets [Builder.missionPrimaryIntelDiscipline] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionPrimaryIntelDiscipline] with a well-typed
+         * [String] value instead. This method is primarily for setting the field to an undocumented
+         * or not yet supported value.
+         */
+        fun missionPrimaryIntelDiscipline(missionPrimaryIntelDiscipline: JsonField<String>) =
+            apply {
+                this.missionPrimaryIntelDiscipline = missionPrimaryIntelDiscipline
+            }
+
+        /** Sub category of primary intelligence to be collected. */
+        fun missionPrimarySubCategory(missionPrimarySubCategory: String) =
+            missionPrimarySubCategory(JsonField.of(missionPrimarySubCategory))
+
+        /**
+         * Sets [Builder.missionPrimarySubCategory] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionPrimarySubCategory] with a well-typed [String]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
+         */
+        fun missionPrimarySubCategory(missionPrimarySubCategory: JsonField<String>) = apply {
+            this.missionPrimarySubCategory = missionPrimarySubCategory
+        }
+
+        /** Mission Priority (1-n). */
+        fun missionPriority(missionPriority: Int) = missionPriority(JsonField.of(missionPriority))
+
+        /**
+         * Sets [Builder.missionPriority] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionPriority] with a well-typed [Int] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun missionPriority(missionPriority: JsonField<Int>) = apply {
+            this.missionPriority = missionPriority
+        }
+
+        /** Region of the mission. */
+        fun missionRegion(missionRegion: String) = missionRegion(JsonField.of(missionRegion))
+
+        /**
+         * Sets [Builder.missionRegion] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionRegion] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun missionRegion(missionRegion: JsonField<String>) = apply {
+            this.missionRegion = missionRegion
+        }
+
+        /** What is the primary objective(Role) of this mission. */
+        fun missionRole(missionRole: String) = missionRole(JsonField.of(missionRole))
+
+        /**
+         * Sets [Builder.missionRole] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionRole] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun missionRole(missionRole: JsonField<String>) = apply { this.missionRole = missionRole }
+
+        /** Type of intelligence to be collected second. */
+        fun missionSecondaryIntelDiscipline(missionSecondaryIntelDiscipline: String) =
+            missionSecondaryIntelDiscipline(JsonField.of(missionSecondaryIntelDiscipline))
+
+        /**
+         * Sets [Builder.missionSecondaryIntelDiscipline] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionSecondaryIntelDiscipline] with a well-typed
+         * [String] value instead. This method is primarily for setting the field to an undocumented
+         * or not yet supported value.
+         */
+        fun missionSecondaryIntelDiscipline(missionSecondaryIntelDiscipline: JsonField<String>) =
+            apply {
+                this.missionSecondaryIntelDiscipline = missionSecondaryIntelDiscipline
+            }
+
+        /** Mission sub category for secondary intelligence discipline to be collected. */
+        fun missionSecondarySubCategory(missionSecondarySubCategory: String) =
+            missionSecondarySubCategory(JsonField.of(missionSecondarySubCategory))
+
+        /**
+         * Sets [Builder.missionSecondarySubCategory] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionSecondarySubCategory] with a well-typed [String]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
+         */
+        fun missionSecondarySubCategory(missionSecondarySubCategory: JsonField<String>) = apply {
+            this.missionSecondarySubCategory = missionSecondarySubCategory
+        }
+
+        /**
+         * WGS-84 latitude of the start position, in degrees. -90 to 90 degrees (negative values
+         * south of equator).
+         */
+        fun missionStartPointLat(missionStartPointLat: Double) =
+            missionStartPointLat(JsonField.of(missionStartPointLat))
+
+        /**
+         * Sets [Builder.missionStartPointLat] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionStartPointLat] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun missionStartPointLat(missionStartPointLat: JsonField<Double>) = apply {
+            this.missionStartPointLat = missionStartPointLat
+        }
+
+        /**
+         * WGS-84 longitude of the start position, in degrees. -180 to 180 degrees (negative values
+         * west of Prime Meridian).
+         */
+        fun missionStartPointLong(missionStartPointLong: Double) =
+            missionStartPointLong(JsonField.of(missionStartPointLong))
+
+        /**
+         * Sets [Builder.missionStartPointLong] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionStartPointLong] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun missionStartPointLong(missionStartPointLong: JsonField<Double>) = apply {
+            this.missionStartPointLong = missionStartPointLong
+        }
+
+        /** Subregion of the mission. */
+        fun missionSubRegion(missionSubRegion: String) =
+            missionSubRegion(JsonField.of(missionSubRegion))
+
+        /**
+         * Sets [Builder.missionSubRegion] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionSubRegion] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun missionSubRegion(missionSubRegion: JsonField<String>) = apply {
+            this.missionSubRegion = missionSubRegion
+        }
+
+        /** Name of the Supporting unit/Location that is performing this mission. */
+        fun missionSupportedUnit(missionSupportedUnit: String) =
+            missionSupportedUnit(JsonField.of(missionSupportedUnit))
+
+        /**
+         * Sets [Builder.missionSupportedUnit] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionSupportedUnit] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun missionSupportedUnit(missionSupportedUnit: JsonField<String>) = apply {
+            this.missionSupportedUnit = missionSupportedUnit
+        }
+
+        /**
+         * A synchronization matrix is used to organize the logistics synchronization process during
+         * a mission.
+         */
+        fun missionSyncMatrixBin(missionSyncMatrixBin: String) =
+            missionSyncMatrixBin(JsonField.of(missionSyncMatrixBin))
+
+        /**
+         * Sets [Builder.missionSyncMatrixBin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.missionSyncMatrixBin] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun missionSyncMatrixBin(missionSyncMatrixBin: JsonField<String>) = apply {
+            this.missionSyncMatrixBin = missionSyncMatrixBin
+        }
+
+        /** Human readable Mission Name. */
+        fun name(name: String) = name(JsonField.of(name))
+
+        /**
+         * Sets [Builder.name] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.name] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun name(name: JsonField<String>) = apply { this.name = name }
+
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         */
+        fun origin(origin: String) = origin(JsonField.of(origin))
+
+        /**
+         * Sets [Builder.origin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         */
+        fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
+
+        /**
+         * Sets [Builder.origNetwork] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
+
+        /** Individual taskings to complete the mission. */
+        fun taskings(taskings: List<Tasking>) = taskings(JsonField.of(taskings))
+
+        /**
+         * Sets [Builder.taskings] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.taskings] with a well-typed `List<Tasking>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun taskings(taskings: JsonField<List<Tasking>>) = apply {
+            this.taskings = taskings.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [Tasking] to [taskings].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addTasking(tasking: Tasking) = apply {
+            taskings =
+                (taskings ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("taskings", it).add(tasking)
+                }
+        }
+
+        /** Object for data dissemination. */
+        fun transit(transit: List<Transit>) = transit(JsonField.of(transit))
+
+        /**
+         * Sets [Builder.transit] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.transit] with a well-typed `List<Transit>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun transit(transit: JsonField<List<Transit>>) = apply {
+            this.transit = transit.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [Transit] to [Builder.transit].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addTransit(transit: Transit) = apply {
+            this.transit =
+                (this.transit ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("transit", it).add(transit)
+                }
+        }
+
+        /**
+         * Time the row was updated in the database, auto-populated by the system, example =
+         * 2018-01-01T16:00:00.123Z.
+         */
+        fun updatedAt(updatedAt: OffsetDateTime) = updatedAt(JsonField.of(updatedAt))
+
+        /**
+         * Sets [Builder.updatedAt] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.updatedAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun updatedAt(updatedAt: JsonField<OffsetDateTime>) = apply { this.updatedAt = updatedAt }
+
+        /** Application user who updated the row in the database, auto-populated by the system. */
+        fun updatedBy(updatedBy: String) = updatedBy(JsonField.of(updatedBy))
+
+        /**
+         * Sets [Builder.updatedBy] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.updatedBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun updatedBy(updatedBy: JsonField<String>) = apply { this.updatedBy = updatedBy }
+
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
+
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
+
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
+
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
+
+        /**
+         * Returns an immutable instance of [IsrCollectionTupleResponse].
+         *
+         * Further updates to this [Builder] will not mutate the returned instance.
+         *
+         * The following fields are required:
+         * ```java
+         * .classificationMarking()
+         * .dataMode()
+         * .source()
+         * ```
+         *
+         * @throws IllegalStateException if any required field is unset.
+         */
+        fun build(): IsrCollectionTupleResponse =
+            IsrCollectionTupleResponse(
+                checkRequired("classificationMarking", classificationMarking),
+                checkRequired("dataMode", dataMode),
+                checkRequired("source", source),
+                id,
+                (collectionRequirements ?: JsonMissing.of()).map { it.toImmutable() },
+                createdAt,
+                createdBy,
+                idexVersion,
+                missionAor,
+                missionCollectionArea,
+                missionCountry,
+                missionEmphasis,
+                missionId,
+                missionJoa,
+                missionOperation,
+                missionPrimaryIntelDiscipline,
+                missionPrimarySubCategory,
+                missionPriority,
+                missionRegion,
+                missionRole,
+                missionSecondaryIntelDiscipline,
+                missionSecondarySubCategory,
+                missionStartPointLat,
+                missionStartPointLong,
+                missionSubRegion,
+                missionSupportedUnit,
+                missionSyncMatrixBin,
+                name,
+                origin,
+                origNetwork,
+                (taskings ?: JsonMissing.of()).map { it.toImmutable() },
+                (transit ?: JsonMissing.of()).map { it.toImmutable() },
+                updatedAt,
+                updatedBy,
+                additionalProperties.toMutableMap(),
+            )
+    }
+
+    private var validated: Boolean = false
+
+    fun validate(): IsrCollectionTupleResponse = apply {
+        if (validated) {
+            return@apply
+        }
+
+        classificationMarking()
+        dataMode().validate()
+        source()
+        id()
+        collectionRequirements().ifPresent { it.forEach { it.validate() } }
+        createdAt()
+        createdBy()
+        idexVersion()
+        missionAor()
+        missionCollectionArea()
+        missionCountry()
+        missionEmphasis()
+        missionId()
+        missionJoa()
+        missionOperation()
+        missionPrimaryIntelDiscipline()
+        missionPrimarySubCategory()
+        missionPriority()
+        missionRegion()
+        missionRole()
+        missionSecondaryIntelDiscipline()
+        missionSecondarySubCategory()
+        missionStartPointLat()
+        missionStartPointLong()
+        missionSubRegion()
+        missionSupportedUnit()
+        missionSyncMatrixBin()
+        name()
+        origin()
+        origNetwork()
+        taskings().ifPresent { it.forEach { it.validate() } }
+        transit().ifPresent { it.forEach { it.validate() } }
+        updatedAt()
+        updatedBy()
+        validated = true
+    }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: UnifieddatalibraryInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    @JvmSynthetic
+    internal fun validity(): Int =
+        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (source.asKnown().isPresent) 1 else 0) +
+            (if (id.asKnown().isPresent) 1 else 0) +
+            (collectionRequirements.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
+            (if (createdAt.asKnown().isPresent) 1 else 0) +
+            (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (idexVersion.asKnown().isPresent) 1 else 0) +
+            (if (missionAor.asKnown().isPresent) 1 else 0) +
+            (if (missionCollectionArea.asKnown().isPresent) 1 else 0) +
+            (if (missionCountry.asKnown().isPresent) 1 else 0) +
+            (if (missionEmphasis.asKnown().isPresent) 1 else 0) +
+            (if (missionId.asKnown().isPresent) 1 else 0) +
+            (if (missionJoa.asKnown().isPresent) 1 else 0) +
+            (if (missionOperation.asKnown().isPresent) 1 else 0) +
+            (if (missionPrimaryIntelDiscipline.asKnown().isPresent) 1 else 0) +
+            (if (missionPrimarySubCategory.asKnown().isPresent) 1 else 0) +
+            (if (missionPriority.asKnown().isPresent) 1 else 0) +
+            (if (missionRegion.asKnown().isPresent) 1 else 0) +
+            (if (missionRole.asKnown().isPresent) 1 else 0) +
+            (if (missionSecondaryIntelDiscipline.asKnown().isPresent) 1 else 0) +
+            (if (missionSecondarySubCategory.asKnown().isPresent) 1 else 0) +
+            (if (missionStartPointLat.asKnown().isPresent) 1 else 0) +
+            (if (missionStartPointLong.asKnown().isPresent) 1 else 0) +
+            (if (missionSubRegion.asKnown().isPresent) 1 else 0) +
+            (if (missionSupportedUnit.asKnown().isPresent) 1 else 0) +
+            (if (missionSyncMatrixBin.asKnown().isPresent) 1 else 0) +
+            (if (name.asKnown().isPresent) 1 else 0) +
+            (if (origin.asKnown().isPresent) 1 else 0) +
+            (if (origNetwork.asKnown().isPresent) 1 else 0) +
+            (taskings.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
+            (transit.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
+            (if (updatedAt.asKnown().isPresent) 1 else 0) +
+            (if (updatedBy.asKnown().isPresent) 1 else 0)
+
+    /**
+     * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+     *
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
+     *
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
+     *
+     * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+     *
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
+     */
+    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+
+        /**
+         * Returns this class instance's raw value.
+         *
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
+         */
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+        companion object {
+
+            @JvmField val REAL = of("REAL")
+
+            @JvmField val TEST = of("TEST")
+
+            @JvmField val SIMULATED = of("SIMULATED")
+
+            @JvmField val EXERCISE = of("EXERCISE")
+
+            @JvmStatic fun of(value: String) = DataMode(JsonField.of(value))
+        }
+
+        /** An enum containing [DataMode]'s known values. */
+        enum class Known {
+            REAL,
+            TEST,
+            SIMULATED,
+            EXERCISE,
+        }
+
+        /**
+         * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
+         *
+         * An instance of [DataMode] can contain an unknown value in a couple of cases:
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
+         * - It was constructed with an arbitrary value using the [of] method.
+         */
+        enum class Value {
+            REAL,
+            TEST,
+            SIMULATED,
+            EXERCISE,
+            /** An enum member indicating that [DataMode] was instantiated with an unknown value. */
+            _UNKNOWN,
+        }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
+         *
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
+         */
+        fun value(): Value =
+            when (this) {
+                REAL -> Value.REAL
+                TEST -> Value.TEST
+                SIMULATED -> Value.SIMULATED
+                EXERCISE -> Value.EXERCISE
+                else -> Value._UNKNOWN
+            }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value.
+         *
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
+         */
+        fun known(): Known =
+            when (this) {
+                REAL -> Known.REAL
+                TEST -> Known.TEST
+                SIMULATED -> Known.SIMULATED
+                EXERCISE -> Known.EXERCISE
+                else -> throw UnifieddatalibraryInvalidDataException("Unknown DataMode: $value")
+            }
+
+        /**
+         * Returns this class instance's primitive wire representation.
+         *
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
+         */
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
+
+        private var validated: Boolean = false
+
+        fun validate(): DataMode = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: UnifieddatalibraryInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+        }
+
+        override fun hashCode() = value.hashCode()
+
+        override fun toString() = value.toString()
+    }
+
+    class Tasking
+    private constructor(
+        private val id: JsonField<String>,
+        private val collectionPeriods: JsonField<CollectionPeriods>,
+        private val collectionType: JsonField<CollectionType>,
+        private val eightLine: JsonField<String>,
+        private val specialComGuidance: JsonField<String>,
+        private val sroTrack: JsonField<String>,
+        private val taskingAor: JsonField<String>,
+        private val taskingCollectionArea: JsonField<String>,
+        private val taskingCollectionRequirements: JsonField<List<IsrCollectionRequirementsFull>>,
+        private val taskingCountry: JsonField<String>,
+        private val taskingEmphasis: JsonField<String>,
+        private val taskingJoa: JsonField<String>,
+        private val taskingOperation: JsonField<String>,
+        private val taskingPrimaryIntelDiscipline: JsonField<String>,
+        private val taskingPrimarySubCategory: JsonField<String>,
+        private val taskingPriority: JsonField<Double>,
+        private val taskingRegion: JsonField<String>,
+        private val taskingRetaskTime: JsonField<OffsetDateTime>,
+        private val taskingRole: JsonField<String>,
+        private val taskingSecondaryIntelDiscipline: JsonField<String>,
+        private val taskingSecondarySubCategory: JsonField<String>,
+        private val taskingStartPointLat: JsonField<Double>,
+        private val taskingStartPointLong: JsonField<Double>,
+        private val taskingSubRegion: JsonField<String>,
+        private val taskingSupportedUnit: JsonField<String>,
+        private val taskingSyncMatrixBin: JsonField<String>,
+        private val type: JsonField<Type>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
+    ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("collectionPeriods")
+            @ExcludeMissing
+            collectionPeriods: JsonField<CollectionPeriods> = JsonMissing.of(),
+            @JsonProperty("collectionType")
+            @ExcludeMissing
+            collectionType: JsonField<CollectionType> = JsonMissing.of(),
+            @JsonProperty("eightLine")
+            @ExcludeMissing
+            eightLine: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("specialComGuidance")
+            @ExcludeMissing
+            specialComGuidance: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sroTrack")
+            @ExcludeMissing
+            sroTrack: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingAOR")
+            @ExcludeMissing
+            taskingAor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingCollectionArea")
+            @ExcludeMissing
+            taskingCollectionArea: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingCollectionRequirements")
+            @ExcludeMissing
+            taskingCollectionRequirements: JsonField<List<IsrCollectionRequirementsFull>> =
+                JsonMissing.of(),
+            @JsonProperty("taskingCountry")
+            @ExcludeMissing
+            taskingCountry: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingEmphasis")
+            @ExcludeMissing
+            taskingEmphasis: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingJoa")
+            @ExcludeMissing
+            taskingJoa: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingOperation")
+            @ExcludeMissing
+            taskingOperation: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingPrimaryIntelDiscipline")
+            @ExcludeMissing
+            taskingPrimaryIntelDiscipline: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingPrimarySubCategory")
+            @ExcludeMissing
+            taskingPrimarySubCategory: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingPriority")
+            @ExcludeMissing
+            taskingPriority: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("taskingRegion")
+            @ExcludeMissing
+            taskingRegion: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingRetaskTime")
+            @ExcludeMissing
+            taskingRetaskTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("taskingRole")
+            @ExcludeMissing
+            taskingRole: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingSecondaryIntelDiscipline")
+            @ExcludeMissing
+            taskingSecondaryIntelDiscipline: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingSecondarySubCategory")
+            @ExcludeMissing
+            taskingSecondarySubCategory: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingStartPointLat")
+            @ExcludeMissing
+            taskingStartPointLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("taskingStartPointLong")
+            @ExcludeMissing
+            taskingStartPointLong: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("taskingSubRegion")
+            @ExcludeMissing
+            taskingSubRegion: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingSupportedUnit")
+            @ExcludeMissing
+            taskingSupportedUnit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskingSyncMatrixBin")
+            @ExcludeMissing
+            taskingSyncMatrixBin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<Type> = JsonMissing.of(),
+        ) : this(
+            id,
+            collectionPeriods,
+            collectionType,
+            eightLine,
+            specialComGuidance,
+            sroTrack,
+            taskingAor,
+            taskingCollectionArea,
+            taskingCollectionRequirements,
+            taskingCountry,
+            taskingEmphasis,
+            taskingJoa,
+            taskingOperation,
+            taskingPrimaryIntelDiscipline,
+            taskingPrimarySubCategory,
+            taskingPriority,
+            taskingRegion,
+            taskingRetaskTime,
+            taskingRole,
+            taskingSecondaryIntelDiscipline,
+            taskingSecondarySubCategory,
+            taskingStartPointLat,
+            taskingStartPointLong,
+            taskingSubRegion,
+            taskingSupportedUnit,
+            taskingSyncMatrixBin,
+            type,
+            mutableMapOf(),
+        )
+
+        /**
+         * Tasking Unique Identifier.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun id(): Optional<String> = id.getOptional("id")
+
+        /**
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun collectionPeriods(): Optional<CollectionPeriods> =
+            collectionPeriods.getOptional("collectionPeriods")
+
+        /**
+         * Type of collection tasked.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun collectionType(): Optional<CollectionType> =
+            collectionType.getOptional("collectionType")
+
+        /**
+         * Eight line.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun eightLine(): Optional<String> = eightLine.getOptional("eightLine")
+
+        /**
+         * Free text field for the user to specify special instructions needed for this collection.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun specialComGuidance(): Optional<String> =
+            specialComGuidance.getOptional("specialComGuidance")
+
+        /**
+         * Value of the Sensitive Reconnaissance Operations Track.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun sroTrack(): Optional<String> = sroTrack.getOptional("sroTrack")
+
+        /**
+         * Human readable definition of this taskings Area Of Responsibility.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingAor(): Optional<String> = taskingAor.getOptional("taskingAOR")
+
+        /**
+         * Tasking geographical collection area.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingCollectionArea(): Optional<String> =
+            taskingCollectionArea.getOptional("taskingCollectionArea")
+
+        /**
+         * Tasking desired collection requirements.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingCollectionRequirements(): Optional<List<IsrCollectionRequirementsFull>> =
+            taskingCollectionRequirements.getOptional("taskingCollectionRequirements")
+
+        /**
+         * Country code of the tasking. A Country may represent countries, multi-national
+         * consortiums, and international organizations.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingCountry(): Optional<String> = taskingCountry.getOptional("taskingCountry")
+
+        /**
+         * Tasking emphasis.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingEmphasis(): Optional<String> = taskingEmphasis.getOptional("taskingEmphasis")
+
+        /**
+         * Joint Operations Area.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingJoa(): Optional<String> = taskingJoa.getOptional("taskingJoa")
+
+        /**
+         * Tasking operation name.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingOperation(): Optional<String> = taskingOperation.getOptional("taskingOperation")
+
+        /**
+         * Primary type of intelligence to be collected during the mission.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingPrimaryIntelDiscipline(): Optional<String> =
+            taskingPrimaryIntelDiscipline.getOptional("taskingPrimaryIntelDiscipline")
+
+        /**
+         * Sub category of primary intelligence to be collected.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingPrimarySubCategory(): Optional<String> =
+            taskingPrimarySubCategory.getOptional("taskingPrimarySubCategory")
+
+        /**
+         * Tasking Priority (1-n).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingPriority(): Optional<Double> = taskingPriority.getOptional("taskingPriority")
+
+        /**
+         * Region of the tasking.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingRegion(): Optional<String> = taskingRegion.getOptional("taskingRegion")
+
+        /**
+         * Time of retasking, in ISO 8601 UTC format.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingRetaskTime(): Optional<OffsetDateTime> =
+            taskingRetaskTime.getOptional("taskingRetaskTime")
+
+        /**
+         * What is the primary objective (role) of this task.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingRole(): Optional<String> = taskingRole.getOptional("taskingRole")
+
+        /**
+         * Type of tasking intelligence to be collected second.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingSecondaryIntelDiscipline(): Optional<String> =
+            taskingSecondaryIntelDiscipline.getOptional("taskingSecondaryIntelDiscipline")
+
+        /**
+         * Mission sub category for secondary intelligence discipline to be collected.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingSecondarySubCategory(): Optional<String> =
+            taskingSecondarySubCategory.getOptional("taskingSecondarySubCategory")
+
+        /**
+         * WGS-84 latitude of the start position, in degrees. -90 to 90 degrees (negative values
+         * south of equator).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingStartPointLat(): Optional<Double> =
+            taskingStartPointLat.getOptional("taskingStartPointLat")
+
+        /**
+         * WGS-84 longitude of the start position, in degrees. -180 to 180 degrees (negative values
+         * west of Prime Meridian).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingStartPointLong(): Optional<Double> =
+            taskingStartPointLong.getOptional("taskingStartPointLong")
+
+        /**
+         * Subregion of the tasking.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingSubRegion(): Optional<String> = taskingSubRegion.getOptional("taskingSubRegion")
+
+        /**
+         * Military Base to transmit the dissemination of this data.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingSupportedUnit(): Optional<String> =
+            taskingSupportedUnit.getOptional("taskingSupportedUnit")
+
+        /**
+         * A synchronization matrix is used to organize the logistics synchronization process during
+         * a mission.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun taskingSyncMatrixBin(): Optional<String> =
+            taskingSyncMatrixBin.getOptional("taskingSyncMatrixBin")
+
+        /**
+         * Type of tasking.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun type(): Optional<Type> = type.getOptional("type")
+
+        /**
+         * Returns the raw JSON value of [id].
+         *
+         * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+
+        /**
+         * Returns the raw JSON value of [collectionPeriods].
+         *
+         * Unlike [collectionPeriods], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("collectionPeriods")
+        @ExcludeMissing
+        fun _collectionPeriods(): JsonField<CollectionPeriods> = collectionPeriods
+
+        /**
+         * Returns the raw JSON value of [collectionType].
+         *
+         * Unlike [collectionType], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("collectionType")
+        @ExcludeMissing
+        fun _collectionType(): JsonField<CollectionType> = collectionType
+
+        /**
+         * Returns the raw JSON value of [eightLine].
+         *
+         * Unlike [eightLine], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("eightLine") @ExcludeMissing fun _eightLine(): JsonField<String> = eightLine
+
+        /**
+         * Returns the raw JSON value of [specialComGuidance].
+         *
+         * Unlike [specialComGuidance], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("specialComGuidance")
+        @ExcludeMissing
+        fun _specialComGuidance(): JsonField<String> = specialComGuidance
+
+        /**
+         * Returns the raw JSON value of [sroTrack].
+         *
+         * Unlike [sroTrack], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("sroTrack") @ExcludeMissing fun _sroTrack(): JsonField<String> = sroTrack
+
+        /**
+         * Returns the raw JSON value of [taskingAor].
+         *
+         * Unlike [taskingAor], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("taskingAOR")
+        @ExcludeMissing
+        fun _taskingAor(): JsonField<String> = taskingAor
+
+        /**
+         * Returns the raw JSON value of [taskingCollectionArea].
+         *
+         * Unlike [taskingCollectionArea], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("taskingCollectionArea")
+        @ExcludeMissing
+        fun _taskingCollectionArea(): JsonField<String> = taskingCollectionArea
+
+        /**
+         * Returns the raw JSON value of [taskingCollectionRequirements].
+         *
+         * Unlike [taskingCollectionRequirements], this method doesn't throw if the JSON field has
+         * an unexpected type.
+         */
+        @JsonProperty("taskingCollectionRequirements")
+        @ExcludeMissing
+        fun _taskingCollectionRequirements(): JsonField<List<IsrCollectionRequirementsFull>> =
+            taskingCollectionRequirements
+
+        /**
+         * Returns the raw JSON value of [taskingCountry].
+         *
+         * Unlike [taskingCountry], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("taskingCountry")
+        @ExcludeMissing
+        fun _taskingCountry(): JsonField<String> = taskingCountry
+
+        /**
+         * Returns the raw JSON value of [taskingEmphasis].
+         *
+         * Unlike [taskingEmphasis], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("taskingEmphasis")
+        @ExcludeMissing
+        fun _taskingEmphasis(): JsonField<String> = taskingEmphasis
+
+        /**
+         * Returns the raw JSON value of [taskingJoa].
+         *
+         * Unlike [taskingJoa], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("taskingJoa")
+        @ExcludeMissing
+        fun _taskingJoa(): JsonField<String> = taskingJoa
+
+        /**
+         * Returns the raw JSON value of [taskingOperation].
+         *
+         * Unlike [taskingOperation], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("taskingOperation")
+        @ExcludeMissing
+        fun _taskingOperation(): JsonField<String> = taskingOperation
+
+        /**
+         * Returns the raw JSON value of [taskingPrimaryIntelDiscipline].
+         *
+         * Unlike [taskingPrimaryIntelDiscipline], this method doesn't throw if the JSON field has
+         * an unexpected type.
+         */
+        @JsonProperty("taskingPrimaryIntelDiscipline")
+        @ExcludeMissing
+        fun _taskingPrimaryIntelDiscipline(): JsonField<String> = taskingPrimaryIntelDiscipline
+
+        /**
+         * Returns the raw JSON value of [taskingPrimarySubCategory].
+         *
+         * Unlike [taskingPrimarySubCategory], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("taskingPrimarySubCategory")
+        @ExcludeMissing
+        fun _taskingPrimarySubCategory(): JsonField<String> = taskingPrimarySubCategory
+
+        /**
+         * Returns the raw JSON value of [taskingPriority].
+         *
+         * Unlike [taskingPriority], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("taskingPriority")
+        @ExcludeMissing
+        fun _taskingPriority(): JsonField<Double> = taskingPriority
+
+        /**
+         * Returns the raw JSON value of [taskingRegion].
+         *
+         * Unlike [taskingRegion], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("taskingRegion")
+        @ExcludeMissing
+        fun _taskingRegion(): JsonField<String> = taskingRegion
+
+        /**
+         * Returns the raw JSON value of [taskingRetaskTime].
+         *
+         * Unlike [taskingRetaskTime], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("taskingRetaskTime")
+        @ExcludeMissing
+        fun _taskingRetaskTime(): JsonField<OffsetDateTime> = taskingRetaskTime
+
+        /**
+         * Returns the raw JSON value of [taskingRole].
+         *
+         * Unlike [taskingRole], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("taskingRole")
+        @ExcludeMissing
+        fun _taskingRole(): JsonField<String> = taskingRole
+
+        /**
+         * Returns the raw JSON value of [taskingSecondaryIntelDiscipline].
+         *
+         * Unlike [taskingSecondaryIntelDiscipline], this method doesn't throw if the JSON field has
+         * an unexpected type.
+         */
+        @JsonProperty("taskingSecondaryIntelDiscipline")
+        @ExcludeMissing
+        fun _taskingSecondaryIntelDiscipline(): JsonField<String> = taskingSecondaryIntelDiscipline
+
+        /**
+         * Returns the raw JSON value of [taskingSecondarySubCategory].
+         *
+         * Unlike [taskingSecondarySubCategory], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("taskingSecondarySubCategory")
+        @ExcludeMissing
+        fun _taskingSecondarySubCategory(): JsonField<String> = taskingSecondarySubCategory
+
+        /**
+         * Returns the raw JSON value of [taskingStartPointLat].
+         *
+         * Unlike [taskingStartPointLat], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("taskingStartPointLat")
+        @ExcludeMissing
+        fun _taskingStartPointLat(): JsonField<Double> = taskingStartPointLat
+
+        /**
+         * Returns the raw JSON value of [taskingStartPointLong].
+         *
+         * Unlike [taskingStartPointLong], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("taskingStartPointLong")
+        @ExcludeMissing
+        fun _taskingStartPointLong(): JsonField<Double> = taskingStartPointLong
+
+        /**
+         * Returns the raw JSON value of [taskingSubRegion].
+         *
+         * Unlike [taskingSubRegion], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("taskingSubRegion")
+        @ExcludeMissing
+        fun _taskingSubRegion(): JsonField<String> = taskingSubRegion
+
+        /**
+         * Returns the raw JSON value of [taskingSupportedUnit].
+         *
+         * Unlike [taskingSupportedUnit], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("taskingSupportedUnit")
+        @ExcludeMissing
+        fun _taskingSupportedUnit(): JsonField<String> = taskingSupportedUnit
+
+        /**
+         * Returns the raw JSON value of [taskingSyncMatrixBin].
+         *
+         * Unlike [taskingSyncMatrixBin], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("taskingSyncMatrixBin")
+        @ExcludeMissing
+        fun _taskingSyncMatrixBin(): JsonField<String> = taskingSyncMatrixBin
+
+        /**
+         * Returns the raw JSON value of [type].
+         *
+         * Unlike [type], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("type") @ExcludeMissing fun _type(): JsonField<Type> = type
+
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
+        fun toBuilder() = Builder().from(this)
+
+        companion object {
+
+            /** Returns a mutable builder for constructing an instance of [Tasking]. */
+            @JvmStatic fun builder() = Builder()
+        }
+
+        /** A builder for [Tasking]. */
+        class Builder internal constructor() {
+
+            private var id: JsonField<String> = JsonMissing.of()
+            private var collectionPeriods: JsonField<CollectionPeriods> = JsonMissing.of()
+            private var collectionType: JsonField<CollectionType> = JsonMissing.of()
+            private var eightLine: JsonField<String> = JsonMissing.of()
+            private var specialComGuidance: JsonField<String> = JsonMissing.of()
+            private var sroTrack: JsonField<String> = JsonMissing.of()
+            private var taskingAor: JsonField<String> = JsonMissing.of()
+            private var taskingCollectionArea: JsonField<String> = JsonMissing.of()
+            private var taskingCollectionRequirements:
+                JsonField<MutableList<IsrCollectionRequirementsFull>>? =
+                null
+            private var taskingCountry: JsonField<String> = JsonMissing.of()
+            private var taskingEmphasis: JsonField<String> = JsonMissing.of()
+            private var taskingJoa: JsonField<String> = JsonMissing.of()
+            private var taskingOperation: JsonField<String> = JsonMissing.of()
+            private var taskingPrimaryIntelDiscipline: JsonField<String> = JsonMissing.of()
+            private var taskingPrimarySubCategory: JsonField<String> = JsonMissing.of()
+            private var taskingPriority: JsonField<Double> = JsonMissing.of()
+            private var taskingRegion: JsonField<String> = JsonMissing.of()
+            private var taskingRetaskTime: JsonField<OffsetDateTime> = JsonMissing.of()
+            private var taskingRole: JsonField<String> = JsonMissing.of()
+            private var taskingSecondaryIntelDiscipline: JsonField<String> = JsonMissing.of()
+            private var taskingSecondarySubCategory: JsonField<String> = JsonMissing.of()
+            private var taskingStartPointLat: JsonField<Double> = JsonMissing.of()
+            private var taskingStartPointLong: JsonField<Double> = JsonMissing.of()
+            private var taskingSubRegion: JsonField<String> = JsonMissing.of()
+            private var taskingSupportedUnit: JsonField<String> = JsonMissing.of()
+            private var taskingSyncMatrixBin: JsonField<String> = JsonMissing.of()
+            private var type: JsonField<Type> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+            @JvmSynthetic
+            internal fun from(tasking: Tasking) = apply {
+                id = tasking.id
+                collectionPeriods = tasking.collectionPeriods
+                collectionType = tasking.collectionType
+                eightLine = tasking.eightLine
+                specialComGuidance = tasking.specialComGuidance
+                sroTrack = tasking.sroTrack
+                taskingAor = tasking.taskingAor
+                taskingCollectionArea = tasking.taskingCollectionArea
+                taskingCollectionRequirements =
+                    tasking.taskingCollectionRequirements.map { it.toMutableList() }
+                taskingCountry = tasking.taskingCountry
+                taskingEmphasis = tasking.taskingEmphasis
+                taskingJoa = tasking.taskingJoa
+                taskingOperation = tasking.taskingOperation
+                taskingPrimaryIntelDiscipline = tasking.taskingPrimaryIntelDiscipline
+                taskingPrimarySubCategory = tasking.taskingPrimarySubCategory
+                taskingPriority = tasking.taskingPriority
+                taskingRegion = tasking.taskingRegion
+                taskingRetaskTime = tasking.taskingRetaskTime
+                taskingRole = tasking.taskingRole
+                taskingSecondaryIntelDiscipline = tasking.taskingSecondaryIntelDiscipline
+                taskingSecondarySubCategory = tasking.taskingSecondarySubCategory
+                taskingStartPointLat = tasking.taskingStartPointLat
+                taskingStartPointLong = tasking.taskingStartPointLong
+                taskingSubRegion = tasking.taskingSubRegion
+                taskingSupportedUnit = tasking.taskingSupportedUnit
+                taskingSyncMatrixBin = tasking.taskingSyncMatrixBin
+                type = tasking.type
+                additionalProperties = tasking.additionalProperties.toMutableMap()
+            }
+
+            /** Tasking Unique Identifier. */
+            fun id(id: String) = id(JsonField.of(id))
+
+            /**
+             * Sets [Builder.id] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.id] with a well-typed [String] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun id(id: JsonField<String>) = apply { this.id = id }
+
+            fun collectionPeriods(collectionPeriods: CollectionPeriods) =
+                collectionPeriods(JsonField.of(collectionPeriods))
+
+            /**
+             * Sets [Builder.collectionPeriods] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.collectionPeriods] with a well-typed
+             * [CollectionPeriods] value instead. This method is primarily for setting the field to
+             * an undocumented or not yet supported value.
+             */
+            fun collectionPeriods(collectionPeriods: JsonField<CollectionPeriods>) = apply {
+                this.collectionPeriods = collectionPeriods
+            }
+
+            /** Type of collection tasked. */
+            fun collectionType(collectionType: CollectionType) =
+                collectionType(JsonField.of(collectionType))
+
+            /**
+             * Sets [Builder.collectionType] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.collectionType] with a well-typed [CollectionType]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun collectionType(collectionType: JsonField<CollectionType>) = apply {
+                this.collectionType = collectionType
+            }
+
+            /** Eight line. */
+            fun eightLine(eightLine: String) = eightLine(JsonField.of(eightLine))
+
+            /**
+             * Sets [Builder.eightLine] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.eightLine] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun eightLine(eightLine: JsonField<String>) = apply { this.eightLine = eightLine }
+
+            /**
+             * Free text field for the user to specify special instructions needed for this
+             * collection.
+             */
+            fun specialComGuidance(specialComGuidance: String) =
+                specialComGuidance(JsonField.of(specialComGuidance))
+
+            /**
+             * Sets [Builder.specialComGuidance] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.specialComGuidance] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun specialComGuidance(specialComGuidance: JsonField<String>) = apply {
+                this.specialComGuidance = specialComGuidance
+            }
+
+            /** Value of the Sensitive Reconnaissance Operations Track. */
+            fun sroTrack(sroTrack: String) = sroTrack(JsonField.of(sroTrack))
+
+            /**
+             * Sets [Builder.sroTrack] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.sroTrack] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun sroTrack(sroTrack: JsonField<String>) = apply { this.sroTrack = sroTrack }
+
+            /** Human readable definition of this taskings Area Of Responsibility. */
+            fun taskingAor(taskingAor: String) = taskingAor(JsonField.of(taskingAor))
+
+            /**
+             * Sets [Builder.taskingAor] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingAor] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun taskingAor(taskingAor: JsonField<String>) = apply { this.taskingAor = taskingAor }
+
+            /** Tasking geographical collection area. */
+            fun taskingCollectionArea(taskingCollectionArea: String) =
+                taskingCollectionArea(JsonField.of(taskingCollectionArea))
+
+            /**
+             * Sets [Builder.taskingCollectionArea] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingCollectionArea] with a well-typed [String]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun taskingCollectionArea(taskingCollectionArea: JsonField<String>) = apply {
+                this.taskingCollectionArea = taskingCollectionArea
+            }
+
+            /** Tasking desired collection requirements. */
+            fun taskingCollectionRequirements(
+                taskingCollectionRequirements: List<IsrCollectionRequirementsFull>
+            ) = taskingCollectionRequirements(JsonField.of(taskingCollectionRequirements))
+
+            /**
+             * Sets [Builder.taskingCollectionRequirements] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingCollectionRequirements] with a well-typed
+             * `List<IsrCollectionRequirementsFull>` value instead. This method is primarily for
+             * setting the field to an undocumented or not yet supported value.
+             */
+            fun taskingCollectionRequirements(
+                taskingCollectionRequirements: JsonField<List<IsrCollectionRequirementsFull>>
+            ) = apply {
+                this.taskingCollectionRequirements =
+                    taskingCollectionRequirements.map { it.toMutableList() }
+            }
+
+            /**
+             * Adds a single [IsrCollectionRequirementsFull] to [taskingCollectionRequirements].
+             *
+             * @throws IllegalStateException if the field was previously set to a non-list.
+             */
+            fun addTaskingCollectionRequirement(
+                taskingCollectionRequirement: IsrCollectionRequirementsFull
+            ) = apply {
+                taskingCollectionRequirements =
+                    (taskingCollectionRequirements ?: JsonField.of(mutableListOf())).also {
+                        checkKnown("taskingCollectionRequirements", it)
+                            .add(taskingCollectionRequirement)
+                    }
+            }
+
+            /**
+             * Country code of the tasking. A Country may represent countries, multi-national
+             * consortiums, and international organizations.
+             */
+            fun taskingCountry(taskingCountry: String) =
+                taskingCountry(JsonField.of(taskingCountry))
+
+            /**
+             * Sets [Builder.taskingCountry] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingCountry] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun taskingCountry(taskingCountry: JsonField<String>) = apply {
+                this.taskingCountry = taskingCountry
+            }
+
+            /** Tasking emphasis. */
+            fun taskingEmphasis(taskingEmphasis: String) =
+                taskingEmphasis(JsonField.of(taskingEmphasis))
+
+            /**
+             * Sets [Builder.taskingEmphasis] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingEmphasis] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun taskingEmphasis(taskingEmphasis: JsonField<String>) = apply {
+                this.taskingEmphasis = taskingEmphasis
+            }
+
+            /** Joint Operations Area. */
+            fun taskingJoa(taskingJoa: String) = taskingJoa(JsonField.of(taskingJoa))
+
+            /**
+             * Sets [Builder.taskingJoa] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingJoa] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun taskingJoa(taskingJoa: JsonField<String>) = apply { this.taskingJoa = taskingJoa }
+
+            /** Tasking operation name. */
+            fun taskingOperation(taskingOperation: String) =
+                taskingOperation(JsonField.of(taskingOperation))
+
+            /**
+             * Sets [Builder.taskingOperation] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingOperation] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun taskingOperation(taskingOperation: JsonField<String>) = apply {
+                this.taskingOperation = taskingOperation
+            }
+
+            /** Primary type of intelligence to be collected during the mission. */
+            fun taskingPrimaryIntelDiscipline(taskingPrimaryIntelDiscipline: String) =
+                taskingPrimaryIntelDiscipline(JsonField.of(taskingPrimaryIntelDiscipline))
+
+            /**
+             * Sets [Builder.taskingPrimaryIntelDiscipline] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingPrimaryIntelDiscipline] with a well-typed
+             * [String] value instead. This method is primarily for setting the field to an
+             * undocumented or not yet supported value.
+             */
+            fun taskingPrimaryIntelDiscipline(taskingPrimaryIntelDiscipline: JsonField<String>) =
+                apply {
+                    this.taskingPrimaryIntelDiscipline = taskingPrimaryIntelDiscipline
+                }
+
+            /** Sub category of primary intelligence to be collected. */
+            fun taskingPrimarySubCategory(taskingPrimarySubCategory: String) =
+                taskingPrimarySubCategory(JsonField.of(taskingPrimarySubCategory))
+
+            /**
+             * Sets [Builder.taskingPrimarySubCategory] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingPrimarySubCategory] with a well-typed
+             * [String] value instead. This method is primarily for setting the field to an
+             * undocumented or not yet supported value.
+             */
+            fun taskingPrimarySubCategory(taskingPrimarySubCategory: JsonField<String>) = apply {
+                this.taskingPrimarySubCategory = taskingPrimarySubCategory
+            }
+
+            /** Tasking Priority (1-n). */
+            fun taskingPriority(taskingPriority: Double) =
+                taskingPriority(JsonField.of(taskingPriority))
+
+            /**
+             * Sets [Builder.taskingPriority] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingPriority] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun taskingPriority(taskingPriority: JsonField<Double>) = apply {
+                this.taskingPriority = taskingPriority
+            }
+
+            /** Region of the tasking. */
+            fun taskingRegion(taskingRegion: String) = taskingRegion(JsonField.of(taskingRegion))
+
+            /**
+             * Sets [Builder.taskingRegion] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingRegion] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun taskingRegion(taskingRegion: JsonField<String>) = apply {
+                this.taskingRegion = taskingRegion
+            }
+
+            /** Time of retasking, in ISO 8601 UTC format. */
+            fun taskingRetaskTime(taskingRetaskTime: OffsetDateTime) =
+                taskingRetaskTime(JsonField.of(taskingRetaskTime))
+
+            /**
+             * Sets [Builder.taskingRetaskTime] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingRetaskTime] with a well-typed
+             * [OffsetDateTime] value instead. This method is primarily for setting the field to an
+             * undocumented or not yet supported value.
+             */
+            fun taskingRetaskTime(taskingRetaskTime: JsonField<OffsetDateTime>) = apply {
+                this.taskingRetaskTime = taskingRetaskTime
+            }
+
+            /** What is the primary objective (role) of this task. */
+            fun taskingRole(taskingRole: String) = taskingRole(JsonField.of(taskingRole))
+
+            /**
+             * Sets [Builder.taskingRole] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingRole] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun taskingRole(taskingRole: JsonField<String>) = apply {
+                this.taskingRole = taskingRole
+            }
+
+            /** Type of tasking intelligence to be collected second. */
+            fun taskingSecondaryIntelDiscipline(taskingSecondaryIntelDiscipline: String) =
+                taskingSecondaryIntelDiscipline(JsonField.of(taskingSecondaryIntelDiscipline))
+
+            /**
+             * Sets [Builder.taskingSecondaryIntelDiscipline] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingSecondaryIntelDiscipline] with a well-typed
+             * [String] value instead. This method is primarily for setting the field to an
+             * undocumented or not yet supported value.
+             */
+            fun taskingSecondaryIntelDiscipline(
+                taskingSecondaryIntelDiscipline: JsonField<String>
+            ) = apply { this.taskingSecondaryIntelDiscipline = taskingSecondaryIntelDiscipline }
+
+            /** Mission sub category for secondary intelligence discipline to be collected. */
+            fun taskingSecondarySubCategory(taskingSecondarySubCategory: String) =
+                taskingSecondarySubCategory(JsonField.of(taskingSecondarySubCategory))
+
+            /**
+             * Sets [Builder.taskingSecondarySubCategory] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingSecondarySubCategory] with a well-typed
+             * [String] value instead. This method is primarily for setting the field to an
+             * undocumented or not yet supported value.
+             */
+            fun taskingSecondarySubCategory(taskingSecondarySubCategory: JsonField<String>) =
+                apply {
+                    this.taskingSecondarySubCategory = taskingSecondarySubCategory
+                }
+
+            /**
+             * WGS-84 latitude of the start position, in degrees. -90 to 90 degrees (negative values
+             * south of equator).
+             */
+            fun taskingStartPointLat(taskingStartPointLat: Double) =
+                taskingStartPointLat(JsonField.of(taskingStartPointLat))
+
+            /**
+             * Sets [Builder.taskingStartPointLat] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingStartPointLat] with a well-typed [Double]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun taskingStartPointLat(taskingStartPointLat: JsonField<Double>) = apply {
+                this.taskingStartPointLat = taskingStartPointLat
+            }
+
+            /**
+             * WGS-84 longitude of the start position, in degrees. -180 to 180 degrees (negative
+             * values west of Prime Meridian).
+             */
+            fun taskingStartPointLong(taskingStartPointLong: Double) =
+                taskingStartPointLong(JsonField.of(taskingStartPointLong))
+
+            /**
+             * Sets [Builder.taskingStartPointLong] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingStartPointLong] with a well-typed [Double]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun taskingStartPointLong(taskingStartPointLong: JsonField<Double>) = apply {
+                this.taskingStartPointLong = taskingStartPointLong
+            }
+
+            /** Subregion of the tasking. */
+            fun taskingSubRegion(taskingSubRegion: String) =
+                taskingSubRegion(JsonField.of(taskingSubRegion))
+
+            /**
+             * Sets [Builder.taskingSubRegion] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingSubRegion] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun taskingSubRegion(taskingSubRegion: JsonField<String>) = apply {
+                this.taskingSubRegion = taskingSubRegion
+            }
+
+            /** Military Base to transmit the dissemination of this data. */
+            fun taskingSupportedUnit(taskingSupportedUnit: String) =
+                taskingSupportedUnit(JsonField.of(taskingSupportedUnit))
+
+            /**
+             * Sets [Builder.taskingSupportedUnit] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingSupportedUnit] with a well-typed [String]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun taskingSupportedUnit(taskingSupportedUnit: JsonField<String>) = apply {
+                this.taskingSupportedUnit = taskingSupportedUnit
+            }
+
+            /**
+             * A synchronization matrix is used to organize the logistics synchronization process
+             * during a mission.
+             */
+            fun taskingSyncMatrixBin(taskingSyncMatrixBin: String) =
+                taskingSyncMatrixBin(JsonField.of(taskingSyncMatrixBin))
+
+            /**
+             * Sets [Builder.taskingSyncMatrixBin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.taskingSyncMatrixBin] with a well-typed [String]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun taskingSyncMatrixBin(taskingSyncMatrixBin: JsonField<String>) = apply {
+                this.taskingSyncMatrixBin = taskingSyncMatrixBin
+            }
+
+            /** Type of tasking. */
+            fun type(type: Type) = type(JsonField.of(type))
+
+            /**
+             * Sets [Builder.type] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.type] with a well-typed [Type] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun type(type: JsonField<Type>) = apply { this.type = type }
+
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
+            /**
+             * Returns an immutable instance of [Tasking].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
+            fun build(): Tasking =
+                Tasking(
+                    id,
+                    collectionPeriods,
+                    collectionType,
+                    eightLine,
+                    specialComGuidance,
+                    sroTrack,
+                    taskingAor,
+                    taskingCollectionArea,
+                    (taskingCollectionRequirements ?: JsonMissing.of()).map { it.toImmutable() },
+                    taskingCountry,
+                    taskingEmphasis,
+                    taskingJoa,
+                    taskingOperation,
+                    taskingPrimaryIntelDiscipline,
+                    taskingPrimarySubCategory,
+                    taskingPriority,
+                    taskingRegion,
+                    taskingRetaskTime,
+                    taskingRole,
+                    taskingSecondaryIntelDiscipline,
+                    taskingSecondarySubCategory,
+                    taskingStartPointLat,
+                    taskingStartPointLong,
+                    taskingSubRegion,
+                    taskingSupportedUnit,
+                    taskingSyncMatrixBin,
+                    type,
+                    additionalProperties.toMutableMap(),
+                )
+        }
+
+        private var validated: Boolean = false
+
+        fun validate(): Tasking = apply {
+            if (validated) {
+                return@apply
+            }
+
+            id()
+            collectionPeriods().ifPresent { it.validate() }
+            collectionType().ifPresent { it.validate() }
+            eightLine()
+            specialComGuidance()
+            sroTrack()
+            taskingAor()
+            taskingCollectionArea()
+            taskingCollectionRequirements().ifPresent { it.forEach { it.validate() } }
+            taskingCountry()
+            taskingEmphasis()
+            taskingJoa()
+            taskingOperation()
+            taskingPrimaryIntelDiscipline()
+            taskingPrimarySubCategory()
+            taskingPriority()
+            taskingRegion()
+            taskingRetaskTime()
+            taskingRole()
+            taskingSecondaryIntelDiscipline()
+            taskingSecondarySubCategory()
+            taskingStartPointLat()
+            taskingStartPointLong()
+            taskingSubRegion()
+            taskingSupportedUnit()
+            taskingSyncMatrixBin()
+            type().ifPresent { it.validate() }
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: UnifieddatalibraryInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic
+        internal fun validity(): Int =
+            (if (id.asKnown().isPresent) 1 else 0) +
+                (collectionPeriods.asKnown().getOrNull()?.validity() ?: 0) +
+                (collectionType.asKnown().getOrNull()?.validity() ?: 0) +
+                (if (eightLine.asKnown().isPresent) 1 else 0) +
+                (if (specialComGuidance.asKnown().isPresent) 1 else 0) +
+                (if (sroTrack.asKnown().isPresent) 1 else 0) +
+                (if (taskingAor.asKnown().isPresent) 1 else 0) +
+                (if (taskingCollectionArea.asKnown().isPresent) 1 else 0) +
+                (taskingCollectionRequirements.asKnown().getOrNull()?.sumOf {
+                    it.validity().toInt()
+                } ?: 0) +
+                (if (taskingCountry.asKnown().isPresent) 1 else 0) +
+                (if (taskingEmphasis.asKnown().isPresent) 1 else 0) +
+                (if (taskingJoa.asKnown().isPresent) 1 else 0) +
+                (if (taskingOperation.asKnown().isPresent) 1 else 0) +
+                (if (taskingPrimaryIntelDiscipline.asKnown().isPresent) 1 else 0) +
+                (if (taskingPrimarySubCategory.asKnown().isPresent) 1 else 0) +
+                (if (taskingPriority.asKnown().isPresent) 1 else 0) +
+                (if (taskingRegion.asKnown().isPresent) 1 else 0) +
+                (if (taskingRetaskTime.asKnown().isPresent) 1 else 0) +
+                (if (taskingRole.asKnown().isPresent) 1 else 0) +
+                (if (taskingSecondaryIntelDiscipline.asKnown().isPresent) 1 else 0) +
+                (if (taskingSecondarySubCategory.asKnown().isPresent) 1 else 0) +
+                (if (taskingStartPointLat.asKnown().isPresent) 1 else 0) +
+                (if (taskingStartPointLong.asKnown().isPresent) 1 else 0) +
+                (if (taskingSubRegion.asKnown().isPresent) 1 else 0) +
+                (if (taskingSupportedUnit.asKnown().isPresent) 1 else 0) +
+                (if (taskingSyncMatrixBin.asKnown().isPresent) 1 else 0) +
+                (type.asKnown().getOrNull()?.validity() ?: 0)
+
+        class CollectionPeriods
+        private constructor(
+            private val actual: JsonField<List<Actual>>,
+            private val planned: JsonField<Planned>,
+            private val additionalProperties: MutableMap<String, JsonValue>,
+        ) {
+
+            @JsonCreator
+            private constructor(
+                @JsonProperty("actual")
+                @ExcludeMissing
+                actual: JsonField<List<Actual>> = JsonMissing.of(),
+                @JsonProperty("planned")
+                @ExcludeMissing
+                planned: JsonField<Planned> = JsonMissing.of(),
+            ) : this(actual, planned, mutableMapOf())
+
+            /**
+             * Actual start and stop for the collection.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
+             *   type (e.g. if the server responded with an unexpected value).
+             */
+            fun actual(): Optional<List<Actual>> = actual.getOptional("actual")
+
+            /**
+             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
+             *   type (e.g. if the server responded with an unexpected value).
+             */
+            fun planned(): Optional<Planned> = planned.getOptional("planned")
+
+            /**
+             * Returns the raw JSON value of [actual].
+             *
+             * Unlike [actual], this method doesn't throw if the JSON field has an unexpected type.
+             */
+            @JsonProperty("actual") @ExcludeMissing fun _actual(): JsonField<List<Actual>> = actual
+
+            /**
+             * Returns the raw JSON value of [planned].
+             *
+             * Unlike [planned], this method doesn't throw if the JSON field has an unexpected type.
+             */
+            @JsonProperty("planned") @ExcludeMissing fun _planned(): JsonField<Planned> = planned
+
+            @JsonAnySetter
+            private fun putAdditionalProperty(key: String, value: JsonValue) {
+                additionalProperties.put(key, value)
+            }
+
+            @JsonAnyGetter
+            @ExcludeMissing
+            fun _additionalProperties(): Map<String, JsonValue> =
+                Collections.unmodifiableMap(additionalProperties)
+
+            fun toBuilder() = Builder().from(this)
+
+            companion object {
+
+                /**
+                 * Returns a mutable builder for constructing an instance of [CollectionPeriods].
+                 */
+                @JvmStatic fun builder() = Builder()
+            }
+
+            /** A builder for [CollectionPeriods]. */
+            class Builder internal constructor() {
+
+                private var actual: JsonField<MutableList<Actual>>? = null
+                private var planned: JsonField<Planned> = JsonMissing.of()
+                private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+                @JvmSynthetic
+                internal fun from(collectionPeriods: CollectionPeriods) = apply {
+                    actual = collectionPeriods.actual.map { it.toMutableList() }
+                    planned = collectionPeriods.planned
+                    additionalProperties = collectionPeriods.additionalProperties.toMutableMap()
+                }
+
+                /** Actual start and stop for the collection. */
+                fun actual(actual: List<Actual>) = actual(JsonField.of(actual))
+
+                /**
+                 * Sets [Builder.actual] to an arbitrary JSON value.
+                 *
+                 * You should usually call [Builder.actual] with a well-typed `List<Actual>` value
+                 * instead. This method is primarily for setting the field to an undocumented or not
+                 * yet supported value.
+                 */
+                fun actual(actual: JsonField<List<Actual>>) = apply {
+                    this.actual = actual.map { it.toMutableList() }
+                }
+
+                /**
+                 * Adds a single [Actual] to [Builder.actual].
+                 *
+                 * @throws IllegalStateException if the field was previously set to a non-list.
+                 */
+                fun addActual(actual: Actual) = apply {
+                    this.actual =
+                        (this.actual ?: JsonField.of(mutableListOf())).also {
+                            checkKnown("actual", it).add(actual)
+                        }
+                }
+
+                fun planned(planned: Planned) = planned(JsonField.of(planned))
+
+                /**
+                 * Sets [Builder.planned] to an arbitrary JSON value.
+                 *
+                 * You should usually call [Builder.planned] with a well-typed [Planned] value
+                 * instead. This method is primarily for setting the field to an undocumented or not
+                 * yet supported value.
+                 */
+                fun planned(planned: JsonField<Planned>) = apply { this.planned = planned }
+
+                fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                    this.additionalProperties.clear()
+                    putAllAdditionalProperties(additionalProperties)
+                }
+
+                fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                    additionalProperties.put(key, value)
+                }
+
+                fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
+                    apply {
+                        this.additionalProperties.putAll(additionalProperties)
+                    }
+
+                fun removeAdditionalProperty(key: String) = apply {
+                    additionalProperties.remove(key)
+                }
+
+                fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                    keys.forEach(::removeAdditionalProperty)
+                }
+
+                /**
+                 * Returns an immutable instance of [CollectionPeriods].
+                 *
+                 * Further updates to this [Builder] will not mutate the returned instance.
+                 */
+                fun build(): CollectionPeriods =
+                    CollectionPeriods(
+                        (actual ?: JsonMissing.of()).map { it.toImmutable() },
+                        planned,
+                        additionalProperties.toMutableMap(),
+                    )
+            }
+
+            private var validated: Boolean = false
+
+            fun validate(): CollectionPeriods = apply {
+                if (validated) {
+                    return@apply
+                }
+
+                actual().ifPresent { it.forEach { it.validate() } }
+                planned().ifPresent { it.validate() }
+                validated = true
+            }
+
+            fun isValid(): Boolean =
+                try {
+                    validate()
+                    true
+                } catch (e: UnifieddatalibraryInvalidDataException) {
+                    false
+                }
+
+            /**
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
+             *
+             * Used for best match union deserialization.
+             */
+            @JvmSynthetic
+            internal fun validity(): Int =
+                (actual.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
+                    (planned.asKnown().getOrNull()?.validity() ?: 0)
+
+            class Actual
+            private constructor(
+                private val id: JsonField<String>,
+                private val start: JsonField<OffsetDateTime>,
+                private val stop: JsonField<OffsetDateTime>,
+                private val additionalProperties: MutableMap<String, JsonValue>,
+            ) {
+
+                @JsonCreator
+                private constructor(
+                    @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+                    @JsonProperty("start")
+                    @ExcludeMissing
+                    start: JsonField<OffsetDateTime> = JsonMissing.of(),
+                    @JsonProperty("stop")
+                    @ExcludeMissing
+                    stop: JsonField<OffsetDateTime> = JsonMissing.of(),
+                ) : this(id, start, stop, mutableMapOf())
+
+                /**
+                 * Unique Identifier of actual collection period for historical archive.
+                 *
+                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an
+                 *   unexpected type (e.g. if the server responded with an unexpected value).
+                 */
+                fun id(): Optional<String> = id.getOptional("id")
+
+                /**
+                 * Start time the collection actually occurred, in ISO 8601 UTC format.
+                 *
+                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an
+                 *   unexpected type (e.g. if the server responded with an unexpected value).
+                 */
+                fun start(): Optional<OffsetDateTime> = start.getOptional("start")
+
+                /**
+                 * Stop time the collection actually occurred, in ISO 8601 UTC format.
+                 *
+                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an
+                 *   unexpected type (e.g. if the server responded with an unexpected value).
+                 */
+                fun stop(): Optional<OffsetDateTime> = stop.getOptional("stop")
+
+                /**
+                 * Returns the raw JSON value of [id].
+                 *
+                 * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
+                 */
+                @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+
+                /**
+                 * Returns the raw JSON value of [start].
+                 *
+                 * Unlike [start], this method doesn't throw if the JSON field has an unexpected
+                 * type.
+                 */
+                @JsonProperty("start")
+                @ExcludeMissing
+                fun _start(): JsonField<OffsetDateTime> = start
+
+                /**
+                 * Returns the raw JSON value of [stop].
+                 *
+                 * Unlike [stop], this method doesn't throw if the JSON field has an unexpected
+                 * type.
+                 */
+                @JsonProperty("stop") @ExcludeMissing fun _stop(): JsonField<OffsetDateTime> = stop
+
+                @JsonAnySetter
+                private fun putAdditionalProperty(key: String, value: JsonValue) {
+                    additionalProperties.put(key, value)
+                }
+
+                @JsonAnyGetter
+                @ExcludeMissing
+                fun _additionalProperties(): Map<String, JsonValue> =
+                    Collections.unmodifiableMap(additionalProperties)
+
+                fun toBuilder() = Builder().from(this)
+
+                companion object {
+
+                    /** Returns a mutable builder for constructing an instance of [Actual]. */
+                    @JvmStatic fun builder() = Builder()
+                }
+
+                /** A builder for [Actual]. */
+                class Builder internal constructor() {
+
+                    private var id: JsonField<String> = JsonMissing.of()
+                    private var start: JsonField<OffsetDateTime> = JsonMissing.of()
+                    private var stop: JsonField<OffsetDateTime> = JsonMissing.of()
+                    private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+                    @JvmSynthetic
+                    internal fun from(actual: Actual) = apply {
+                        id = actual.id
+                        start = actual.start
+                        stop = actual.stop
+                        additionalProperties = actual.additionalProperties.toMutableMap()
+                    }
+
+                    /** Unique Identifier of actual collection period for historical archive. */
+                    fun id(id: String) = id(JsonField.of(id))
+
+                    /**
+                     * Sets [Builder.id] to an arbitrary JSON value.
+                     *
+                     * You should usually call [Builder.id] with a well-typed [String] value
+                     * instead. This method is primarily for setting the field to an undocumented or
+                     * not yet supported value.
+                     */
+                    fun id(id: JsonField<String>) = apply { this.id = id }
+
+                    /** Start time the collection actually occurred, in ISO 8601 UTC format. */
+                    fun start(start: OffsetDateTime) = start(JsonField.of(start))
+
+                    /**
+                     * Sets [Builder.start] to an arbitrary JSON value.
+                     *
+                     * You should usually call [Builder.start] with a well-typed [OffsetDateTime]
+                     * value instead. This method is primarily for setting the field to an
+                     * undocumented or not yet supported value.
+                     */
+                    fun start(start: JsonField<OffsetDateTime>) = apply { this.start = start }
+
+                    /** Stop time the collection actually occurred, in ISO 8601 UTC format. */
+                    fun stop(stop: OffsetDateTime) = stop(JsonField.of(stop))
+
+                    /**
+                     * Sets [Builder.stop] to an arbitrary JSON value.
+                     *
+                     * You should usually call [Builder.stop] with a well-typed [OffsetDateTime]
+                     * value instead. This method is primarily for setting the field to an
+                     * undocumented or not yet supported value.
+                     */
+                    fun stop(stop: JsonField<OffsetDateTime>) = apply { this.stop = stop }
+
+                    fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                        this.additionalProperties.clear()
+                        putAllAdditionalProperties(additionalProperties)
+                    }
+
+                    fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                        additionalProperties.put(key, value)
+                    }
+
+                    fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
+                        apply {
+                            this.additionalProperties.putAll(additionalProperties)
+                        }
+
+                    fun removeAdditionalProperty(key: String) = apply {
+                        additionalProperties.remove(key)
+                    }
+
+                    fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                        keys.forEach(::removeAdditionalProperty)
+                    }
+
+                    /**
+                     * Returns an immutable instance of [Actual].
+                     *
+                     * Further updates to this [Builder] will not mutate the returned instance.
+                     */
+                    fun build(): Actual =
+                        Actual(id, start, stop, additionalProperties.toMutableMap())
+                }
+
+                private var validated: Boolean = false
+
+                fun validate(): Actual = apply {
+                    if (validated) {
+                        return@apply
+                    }
+
+                    id()
+                    start()
+                    stop()
+                    validated = true
+                }
+
+                fun isValid(): Boolean =
+                    try {
+                        validate()
+                        true
+                    } catch (e: UnifieddatalibraryInvalidDataException) {
+                        false
+                    }
+
+                /**
+                 * Returns a score indicating how many valid values are contained in this object
+                 * recursively.
+                 *
+                 * Used for best match union deserialization.
+                 */
+                @JvmSynthetic
+                internal fun validity(): Int =
+                    (if (id.asKnown().isPresent) 1 else 0) +
+                        (if (start.asKnown().isPresent) 1 else 0) +
+                        (if (stop.asKnown().isPresent) 1 else 0)
+
+                override fun equals(other: Any?): Boolean {
+                    if (this === other) {
+                        return true
+                    }
+
+                    return /* spotless:off */ other is Actual && id == other.id && start == other.start && stop == other.stop && additionalProperties == other.additionalProperties /* spotless:on */
+                }
+
+                /* spotless:off */
+                private val hashCode: Int by lazy { Objects.hash(id, start, stop, additionalProperties) }
+                /* spotless:on */
+
+                override fun hashCode(): Int = hashCode
+
+                override fun toString() =
+                    "Actual{id=$id, start=$start, stop=$stop, additionalProperties=$additionalProperties}"
+            }
+
+            class Planned
+            private constructor(
+                private val additional: JsonField<List<Additional>>,
+                private val start: JsonField<OffsetDateTime>,
+                private val stop: JsonField<OffsetDateTime>,
+                private val additionalProperties: MutableMap<String, JsonValue>,
+            ) {
+
+                @JsonCreator
+                private constructor(
+                    @JsonProperty("additional")
+                    @ExcludeMissing
+                    additional: JsonField<List<Additional>> = JsonMissing.of(),
+                    @JsonProperty("start")
+                    @ExcludeMissing
+                    start: JsonField<OffsetDateTime> = JsonMissing.of(),
+                    @JsonProperty("stop")
+                    @ExcludeMissing
+                    stop: JsonField<OffsetDateTime> = JsonMissing.of(),
+                ) : this(additional, start, stop, mutableMapOf())
+
+                /**
+                 * Additional start and stop for the collection.
+                 *
+                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an
+                 *   unexpected type (e.g. if the server responded with an unexpected value).
+                 */
+                fun additional(): Optional<List<Additional>> = additional.getOptional("additional")
+
+                /**
+                 * Start time of collection, in ISO 8601 UTC format.
+                 *
+                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an
+                 *   unexpected type (e.g. if the server responded with an unexpected value).
+                 */
+                fun start(): Optional<OffsetDateTime> = start.getOptional("start")
+
+                /**
+                 * Stop time of collection, in ISO 8601 UTC format.
+                 *
+                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an
+                 *   unexpected type (e.g. if the server responded with an unexpected value).
+                 */
+                fun stop(): Optional<OffsetDateTime> = stop.getOptional("stop")
+
+                /**
+                 * Returns the raw JSON value of [additional].
+                 *
+                 * Unlike [additional], this method doesn't throw if the JSON field has an
+                 * unexpected type.
+                 */
+                @JsonProperty("additional")
+                @ExcludeMissing
+                fun _additional(): JsonField<List<Additional>> = additional
+
+                /**
+                 * Returns the raw JSON value of [start].
+                 *
+                 * Unlike [start], this method doesn't throw if the JSON field has an unexpected
+                 * type.
+                 */
+                @JsonProperty("start")
+                @ExcludeMissing
+                fun _start(): JsonField<OffsetDateTime> = start
+
+                /**
+                 * Returns the raw JSON value of [stop].
+                 *
+                 * Unlike [stop], this method doesn't throw if the JSON field has an unexpected
+                 * type.
+                 */
+                @JsonProperty("stop") @ExcludeMissing fun _stop(): JsonField<OffsetDateTime> = stop
+
+                @JsonAnySetter
+                private fun putAdditionalProperty(key: String, value: JsonValue) {
+                    additionalProperties.put(key, value)
+                }
+
+                @JsonAnyGetter
+                @ExcludeMissing
+                fun _additionalProperties(): Map<String, JsonValue> =
+                    Collections.unmodifiableMap(additionalProperties)
+
+                fun toBuilder() = Builder().from(this)
+
+                companion object {
+
+                    /** Returns a mutable builder for constructing an instance of [Planned]. */
+                    @JvmStatic fun builder() = Builder()
+                }
+
+                /** A builder for [Planned]. */
+                class Builder internal constructor() {
+
+                    private var additional: JsonField<MutableList<Additional>>? = null
+                    private var start: JsonField<OffsetDateTime> = JsonMissing.of()
+                    private var stop: JsonField<OffsetDateTime> = JsonMissing.of()
+                    private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+                    @JvmSynthetic
+                    internal fun from(planned: Planned) = apply {
+                        additional = planned.additional.map { it.toMutableList() }
+                        start = planned.start
+                        stop = planned.stop
+                        additionalProperties = planned.additionalProperties.toMutableMap()
+                    }
+
+                    /** Additional start and stop for the collection. */
+                    fun additional(additional: List<Additional>) =
+                        additional(JsonField.of(additional))
+
+                    /**
+                     * Sets [Builder.additional] to an arbitrary JSON value.
+                     *
+                     * You should usually call [Builder.additional] with a well-typed
+                     * `List<Additional>` value instead. This method is primarily for setting the
+                     * field to an undocumented or not yet supported value.
+                     */
+                    fun additional(additional: JsonField<List<Additional>>) = apply {
+                        this.additional = additional.map { it.toMutableList() }
+                    }
+
+                    /**
+                     * Adds a single [Additional] to [Builder.additional].
+                     *
+                     * @throws IllegalStateException if the field was previously set to a non-list.
+                     */
+                    fun addAdditional(additional: Additional) = apply {
+                        this.additional =
+                            (this.additional ?: JsonField.of(mutableListOf())).also {
+                                checkKnown("additional", it).add(additional)
+                            }
+                    }
+
+                    /** Start time of collection, in ISO 8601 UTC format. */
+                    fun start(start: OffsetDateTime) = start(JsonField.of(start))
+
+                    /**
+                     * Sets [Builder.start] to an arbitrary JSON value.
+                     *
+                     * You should usually call [Builder.start] with a well-typed [OffsetDateTime]
+                     * value instead. This method is primarily for setting the field to an
+                     * undocumented or not yet supported value.
+                     */
+                    fun start(start: JsonField<OffsetDateTime>) = apply { this.start = start }
+
+                    /** Stop time of collection, in ISO 8601 UTC format. */
+                    fun stop(stop: OffsetDateTime) = stop(JsonField.of(stop))
+
+                    /**
+                     * Sets [Builder.stop] to an arbitrary JSON value.
+                     *
+                     * You should usually call [Builder.stop] with a well-typed [OffsetDateTime]
+                     * value instead. This method is primarily for setting the field to an
+                     * undocumented or not yet supported value.
+                     */
+                    fun stop(stop: JsonField<OffsetDateTime>) = apply { this.stop = stop }
+
+                    fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                        this.additionalProperties.clear()
+                        putAllAdditionalProperties(additionalProperties)
+                    }
+
+                    fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                        additionalProperties.put(key, value)
+                    }
+
+                    fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
+                        apply {
+                            this.additionalProperties.putAll(additionalProperties)
+                        }
+
+                    fun removeAdditionalProperty(key: String) = apply {
+                        additionalProperties.remove(key)
+                    }
+
+                    fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                        keys.forEach(::removeAdditionalProperty)
+                    }
+
+                    /**
+                     * Returns an immutable instance of [Planned].
+                     *
+                     * Further updates to this [Builder] will not mutate the returned instance.
+                     */
+                    fun build(): Planned =
+                        Planned(
+                            (additional ?: JsonMissing.of()).map { it.toImmutable() },
+                            start,
+                            stop,
+                            additionalProperties.toMutableMap(),
+                        )
+                }
+
+                private var validated: Boolean = false
+
+                fun validate(): Planned = apply {
+                    if (validated) {
+                        return@apply
+                    }
+
+                    additional().ifPresent { it.forEach { it.validate() } }
+                    start()
+                    stop()
+                    validated = true
+                }
+
+                fun isValid(): Boolean =
+                    try {
+                        validate()
+                        true
+                    } catch (e: UnifieddatalibraryInvalidDataException) {
+                        false
+                    }
+
+                /**
+                 * Returns a score indicating how many valid values are contained in this object
+                 * recursively.
+                 *
+                 * Used for best match union deserialization.
+                 */
+                @JvmSynthetic
+                internal fun validity(): Int =
+                    (additional.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
+                        (if (start.asKnown().isPresent) 1 else 0) +
+                        (if (stop.asKnown().isPresent) 1 else 0)
+
+                class Additional
+                private constructor(
+                    private val id: JsonField<String>,
+                    private val start: JsonField<OffsetDateTime>,
+                    private val stop: JsonField<OffsetDateTime>,
+                    private val additionalProperties: MutableMap<String, JsonValue>,
+                ) {
+
+                    @JsonCreator
+                    private constructor(
+                        @JsonProperty("id")
+                        @ExcludeMissing
+                        id: JsonField<String> = JsonMissing.of(),
+                        @JsonProperty("start")
+                        @ExcludeMissing
+                        start: JsonField<OffsetDateTime> = JsonMissing.of(),
+                        @JsonProperty("stop")
+                        @ExcludeMissing
+                        stop: JsonField<OffsetDateTime> = JsonMissing.of(),
+                    ) : this(id, start, stop, mutableMapOf())
+
+                    /**
+                     * Unique Identifier of additional collection period.
+                     *
+                     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an
+                     *   unexpected type (e.g. if the server responded with an unexpected value).
+                     */
+                    fun id(): Optional<String> = id.getOptional("id")
+
+                    /**
+                     * Start time of collection, in ISO 8601 UTC format.
+                     *
+                     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an
+                     *   unexpected type (e.g. if the server responded with an unexpected value).
+                     */
+                    fun start(): Optional<OffsetDateTime> = start.getOptional("start")
+
+                    /**
+                     * Stop time of collection, in ISO 8601 UTC format.
+                     *
+                     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an
+                     *   unexpected type (e.g. if the server responded with an unexpected value).
+                     */
+                    fun stop(): Optional<OffsetDateTime> = stop.getOptional("stop")
+
+                    /**
+                     * Returns the raw JSON value of [id].
+                     *
+                     * Unlike [id], this method doesn't throw if the JSON field has an unexpected
+                     * type.
+                     */
+                    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+
+                    /**
+                     * Returns the raw JSON value of [start].
+                     *
+                     * Unlike [start], this method doesn't throw if the JSON field has an unexpected
+                     * type.
+                     */
+                    @JsonProperty("start")
+                    @ExcludeMissing
+                    fun _start(): JsonField<OffsetDateTime> = start
+
+                    /**
+                     * Returns the raw JSON value of [stop].
+                     *
+                     * Unlike [stop], this method doesn't throw if the JSON field has an unexpected
+                     * type.
+                     */
+                    @JsonProperty("stop")
+                    @ExcludeMissing
+                    fun _stop(): JsonField<OffsetDateTime> = stop
+
+                    @JsonAnySetter
+                    private fun putAdditionalProperty(key: String, value: JsonValue) {
+                        additionalProperties.put(key, value)
+                    }
+
+                    @JsonAnyGetter
+                    @ExcludeMissing
+                    fun _additionalProperties(): Map<String, JsonValue> =
+                        Collections.unmodifiableMap(additionalProperties)
+
+                    fun toBuilder() = Builder().from(this)
+
+                    companion object {
+
+                        /**
+                         * Returns a mutable builder for constructing an instance of [Additional].
+                         */
+                        @JvmStatic fun builder() = Builder()
+                    }
+
+                    /** A builder for [Additional]. */
+                    class Builder internal constructor() {
+
+                        private var id: JsonField<String> = JsonMissing.of()
+                        private var start: JsonField<OffsetDateTime> = JsonMissing.of()
+                        private var stop: JsonField<OffsetDateTime> = JsonMissing.of()
+                        private var additionalProperties: MutableMap<String, JsonValue> =
+                            mutableMapOf()
+
+                        @JvmSynthetic
+                        internal fun from(additional: Additional) = apply {
+                            id = additional.id
+                            start = additional.start
+                            stop = additional.stop
+                            additionalProperties = additional.additionalProperties.toMutableMap()
+                        }
+
+                        /** Unique Identifier of additional collection period. */
+                        fun id(id: String) = id(JsonField.of(id))
+
+                        /**
+                         * Sets [Builder.id] to an arbitrary JSON value.
+                         *
+                         * You should usually call [Builder.id] with a well-typed [String] value
+                         * instead. This method is primarily for setting the field to an
+                         * undocumented or not yet supported value.
+                         */
+                        fun id(id: JsonField<String>) = apply { this.id = id }
+
+                        /** Start time of collection, in ISO 8601 UTC format. */
+                        fun start(start: OffsetDateTime) = start(JsonField.of(start))
+
+                        /**
+                         * Sets [Builder.start] to an arbitrary JSON value.
+                         *
+                         * You should usually call [Builder.start] with a well-typed
+                         * [OffsetDateTime] value instead. This method is primarily for setting the
+                         * field to an undocumented or not yet supported value.
+                         */
+                        fun start(start: JsonField<OffsetDateTime>) = apply { this.start = start }
+
+                        /** Stop time of collection, in ISO 8601 UTC format. */
+                        fun stop(stop: OffsetDateTime) = stop(JsonField.of(stop))
+
+                        /**
+                         * Sets [Builder.stop] to an arbitrary JSON value.
+                         *
+                         * You should usually call [Builder.stop] with a well-typed [OffsetDateTime]
+                         * value instead. This method is primarily for setting the field to an
+                         * undocumented or not yet supported value.
+                         */
+                        fun stop(stop: JsonField<OffsetDateTime>) = apply { this.stop = stop }
+
+                        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
+                            apply {
+                                this.additionalProperties.clear()
+                                putAllAdditionalProperties(additionalProperties)
+                            }
+
+                        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                            additionalProperties.put(key, value)
+                        }
+
+                        fun putAllAdditionalProperties(
+                            additionalProperties: Map<String, JsonValue>
+                        ) = apply { this.additionalProperties.putAll(additionalProperties) }
+
+                        fun removeAdditionalProperty(key: String) = apply {
+                            additionalProperties.remove(key)
+                        }
+
+                        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                            keys.forEach(::removeAdditionalProperty)
+                        }
+
+                        /**
+                         * Returns an immutable instance of [Additional].
+                         *
+                         * Further updates to this [Builder] will not mutate the returned instance.
+                         */
+                        fun build(): Additional =
+                            Additional(id, start, stop, additionalProperties.toMutableMap())
+                    }
+
+                    private var validated: Boolean = false
+
+                    fun validate(): Additional = apply {
+                        if (validated) {
+                            return@apply
+                        }
+
+                        id()
+                        start()
+                        stop()
+                        validated = true
+                    }
+
+                    fun isValid(): Boolean =
+                        try {
+                            validate()
+                            true
+                        } catch (e: UnifieddatalibraryInvalidDataException) {
+                            false
+                        }
+
+                    /**
+                     * Returns a score indicating how many valid values are contained in this object
+                     * recursively.
+                     *
+                     * Used for best match union deserialization.
+                     */
+                    @JvmSynthetic
+                    internal fun validity(): Int =
+                        (if (id.asKnown().isPresent) 1 else 0) +
+                            (if (start.asKnown().isPresent) 1 else 0) +
+                            (if (stop.asKnown().isPresent) 1 else 0)
+
+                    override fun equals(other: Any?): Boolean {
+                        if (this === other) {
+                            return true
+                        }
+
+                        return /* spotless:off */ other is Additional && id == other.id && start == other.start && stop == other.stop && additionalProperties == other.additionalProperties /* spotless:on */
+                    }
+
+                    /* spotless:off */
+                    private val hashCode: Int by lazy { Objects.hash(id, start, stop, additionalProperties) }
+                    /* spotless:on */
+
+                    override fun hashCode(): Int = hashCode
+
+                    override fun toString() =
+                        "Additional{id=$id, start=$start, stop=$stop, additionalProperties=$additionalProperties}"
+                }
+
+                override fun equals(other: Any?): Boolean {
+                    if (this === other) {
+                        return true
+                    }
+
+                    return /* spotless:off */ other is Planned && additional == other.additional && start == other.start && stop == other.stop && additionalProperties == other.additionalProperties /* spotless:on */
+                }
+
+                /* spotless:off */
+                private val hashCode: Int by lazy { Objects.hash(additional, start, stop, additionalProperties) }
+                /* spotless:on */
+
+                override fun hashCode(): Int = hashCode
+
+                override fun toString() =
+                    "Planned{additional=$additional, start=$start, stop=$stop, additionalProperties=$additionalProperties}"
+            }
+
+            override fun equals(other: Any?): Boolean {
+                if (this === other) {
+                    return true
+                }
+
+                return /* spotless:off */ other is CollectionPeriods && actual == other.actual && planned == other.planned && additionalProperties == other.additionalProperties /* spotless:on */
+            }
+
+            /* spotless:off */
+            private val hashCode: Int by lazy { Objects.hash(actual, planned, additionalProperties) }
+            /* spotless:on */
+
+            override fun hashCode(): Int = hashCode
+
+            override fun toString() =
+                "CollectionPeriods{actual=$actual, planned=$planned, additionalProperties=$additionalProperties}"
+        }
+
+        /** Type of collection tasked. */
+        class CollectionType
+        @JsonCreator
+        private constructor(private val value: JsonField<String>) : Enum {
+
+            /**
+             * Returns this class instance's raw value.
+             *
+             * This is usually only useful if this instance was deserialized from data that doesn't
+             * match any known member, and you want to know that value. For example, if the SDK is
+             * on an older version than the API, then the API may respond with new members that the
+             * SDK is unaware of.
+             */
+            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+            companion object {
+
+                @JvmField val SIMULTANEOUS = of("Simultaneous")
+
+                @JvmField val SEQUENTIAL = of("Sequential")
+
+                @JvmField val OPERATIONALLY = of("Operationally")
+
+                @JvmField val DRIVEN = of("Driven")
+
+                @JvmField val PRIORITY = of("Priority")
+
+                @JvmField val ORDER = of("Order")
+
+                @JvmStatic fun of(value: String) = CollectionType(JsonField.of(value))
+            }
+
+            /** An enum containing [CollectionType]'s known values. */
+            enum class Known {
+                SIMULTANEOUS,
+                SEQUENTIAL,
+                OPERATIONALLY,
+                DRIVEN,
+                PRIORITY,
+                ORDER,
+            }
+
+            /**
+             * An enum containing [CollectionType]'s known values, as well as an [_UNKNOWN] member.
+             *
+             * An instance of [CollectionType] can contain an unknown value in a couple of cases:
+             * - It was deserialized from data that doesn't match any known member. For example, if
+             *   the SDK is on an older version than the API, then the API may respond with new
+             *   members that the SDK is unaware of.
+             * - It was constructed with an arbitrary value using the [of] method.
+             */
+            enum class Value {
+                SIMULTANEOUS,
+                SEQUENTIAL,
+                OPERATIONALLY,
+                DRIVEN,
+                PRIORITY,
+                ORDER,
+                /**
+                 * An enum member indicating that [CollectionType] was instantiated with an unknown
+                 * value.
+                 */
+                _UNKNOWN,
+            }
+
+            /**
+             * Returns an enum member corresponding to this class instance's value, or
+             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
+             *
+             * Use the [known] method instead if you're certain the value is always known or if you
+             * want to throw for the unknown case.
+             */
+            fun value(): Value =
+                when (this) {
+                    SIMULTANEOUS -> Value.SIMULTANEOUS
+                    SEQUENTIAL -> Value.SEQUENTIAL
+                    OPERATIONALLY -> Value.OPERATIONALLY
+                    DRIVEN -> Value.DRIVEN
+                    PRIORITY -> Value.PRIORITY
+                    ORDER -> Value.ORDER
+                    else -> Value._UNKNOWN
+                }
+
+            /**
+             * Returns an enum member corresponding to this class instance's value.
+             *
+             * Use the [value] method instead if you're uncertain the value is always known and
+             * don't want to throw for the unknown case.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
+             *   not a known member.
+             */
+            fun known(): Known =
+                when (this) {
+                    SIMULTANEOUS -> Known.SIMULTANEOUS
+                    SEQUENTIAL -> Known.SEQUENTIAL
+                    OPERATIONALLY -> Known.OPERATIONALLY
+                    DRIVEN -> Known.DRIVEN
+                    PRIORITY -> Known.PRIORITY
+                    ORDER -> Known.ORDER
+                    else ->
+                        throw UnifieddatalibraryInvalidDataException(
+                            "Unknown CollectionType: $value"
+                        )
+                }
+
+            /**
+             * Returns this class instance's primitive wire representation.
+             *
+             * This differs from the [toString] method because that method is primarily for
+             * debugging and generally doesn't throw.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
+             *   not have the expected primitive type.
+             */
+            fun asString(): String =
+                _value().asString().orElseThrow {
+                    UnifieddatalibraryInvalidDataException("Value is not a String")
+                }
+
+            private var validated: Boolean = false
+
+            fun validate(): CollectionType = apply {
+                if (validated) {
+                    return@apply
+                }
+
+                known()
+                validated = true
+            }
+
+            fun isValid(): Boolean =
+                try {
+                    validate()
+                    true
+                } catch (e: UnifieddatalibraryInvalidDataException) {
+                    false
+                }
+
+            /**
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
+             *
+             * Used for best match union deserialization.
+             */
+            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+            override fun equals(other: Any?): Boolean {
+                if (this === other) {
+                    return true
+                }
+
+                return /* spotless:off */ other is CollectionType && value == other.value /* spotless:on */
+            }
+
+            override fun hashCode() = value.hashCode()
+
+            override fun toString() = value.toString()
+        }
+
+        /** Type of tasking. */
+        class Type @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+
+            /**
+             * Returns this class instance's raw value.
+             *
+             * This is usually only useful if this instance was deserialized from data that doesn't
+             * match any known member, and you want to know that value. For example, if the SDK is
+             * on an older version than the API, then the API may respond with new members that the
+             * SDK is unaware of.
+             */
+            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+            companion object {
+
+                @JvmField val DELIBERATE = of("Deliberate")
+
+                @JvmField val DYNAMIC = of("Dynamic")
+
+                @JvmField val TRAINING = of("Training")
+
+                @JvmField val TRANSIT = of("Transit")
+
+                @JvmStatic fun of(value: String) = Type(JsonField.of(value))
+            }
+
+            /** An enum containing [Type]'s known values. */
+            enum class Known {
+                DELIBERATE,
+                DYNAMIC,
+                TRAINING,
+                TRANSIT,
+            }
+
+            /**
+             * An enum containing [Type]'s known values, as well as an [_UNKNOWN] member.
+             *
+             * An instance of [Type] can contain an unknown value in a couple of cases:
+             * - It was deserialized from data that doesn't match any known member. For example, if
+             *   the SDK is on an older version than the API, then the API may respond with new
+             *   members that the SDK is unaware of.
+             * - It was constructed with an arbitrary value using the [of] method.
+             */
+            enum class Value {
+                DELIBERATE,
+                DYNAMIC,
+                TRAINING,
+                TRANSIT,
+                /** An enum member indicating that [Type] was instantiated with an unknown value. */
+                _UNKNOWN,
+            }
+
+            /**
+             * Returns an enum member corresponding to this class instance's value, or
+             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
+             *
+             * Use the [known] method instead if you're certain the value is always known or if you
+             * want to throw for the unknown case.
+             */
+            fun value(): Value =
+                when (this) {
+                    DELIBERATE -> Value.DELIBERATE
+                    DYNAMIC -> Value.DYNAMIC
+                    TRAINING -> Value.TRAINING
+                    TRANSIT -> Value.TRANSIT
+                    else -> Value._UNKNOWN
+                }
+
+            /**
+             * Returns an enum member corresponding to this class instance's value.
+             *
+             * Use the [value] method instead if you're uncertain the value is always known and
+             * don't want to throw for the unknown case.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
+             *   not a known member.
+             */
+            fun known(): Known =
+                when (this) {
+                    DELIBERATE -> Known.DELIBERATE
+                    DYNAMIC -> Known.DYNAMIC
+                    TRAINING -> Known.TRAINING
+                    TRANSIT -> Known.TRANSIT
+                    else -> throw UnifieddatalibraryInvalidDataException("Unknown Type: $value")
+                }
+
+            /**
+             * Returns this class instance's primitive wire representation.
+             *
+             * This differs from the [toString] method because that method is primarily for
+             * debugging and generally doesn't throw.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
+             *   not have the expected primitive type.
+             */
+            fun asString(): String =
+                _value().asString().orElseThrow {
+                    UnifieddatalibraryInvalidDataException("Value is not a String")
+                }
+
+            private var validated: Boolean = false
+
+            fun validate(): Type = apply {
+                if (validated) {
+                    return@apply
+                }
+
+                known()
+                validated = true
+            }
+
+            fun isValid(): Boolean =
+                try {
+                    validate()
+                    true
+                } catch (e: UnifieddatalibraryInvalidDataException) {
+                    false
+                }
+
+            /**
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
+             *
+             * Used for best match union deserialization.
+             */
+            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+            override fun equals(other: Any?): Boolean {
+                if (this === other) {
+                    return true
+                }
+
+                return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+            }
+
+            override fun hashCode() = value.hashCode()
+
+            override fun toString() = value.toString()
+        }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is Tasking && id == other.id && collectionPeriods == other.collectionPeriods && collectionType == other.collectionType && eightLine == other.eightLine && specialComGuidance == other.specialComGuidance && sroTrack == other.sroTrack && taskingAor == other.taskingAor && taskingCollectionArea == other.taskingCollectionArea && taskingCollectionRequirements == other.taskingCollectionRequirements && taskingCountry == other.taskingCountry && taskingEmphasis == other.taskingEmphasis && taskingJoa == other.taskingJoa && taskingOperation == other.taskingOperation && taskingPrimaryIntelDiscipline == other.taskingPrimaryIntelDiscipline && taskingPrimarySubCategory == other.taskingPrimarySubCategory && taskingPriority == other.taskingPriority && taskingRegion == other.taskingRegion && taskingRetaskTime == other.taskingRetaskTime && taskingRole == other.taskingRole && taskingSecondaryIntelDiscipline == other.taskingSecondaryIntelDiscipline && taskingSecondarySubCategory == other.taskingSecondarySubCategory && taskingStartPointLat == other.taskingStartPointLat && taskingStartPointLong == other.taskingStartPointLong && taskingSubRegion == other.taskingSubRegion && taskingSupportedUnit == other.taskingSupportedUnit && taskingSyncMatrixBin == other.taskingSyncMatrixBin && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+        }
+
+        /* spotless:off */
+        private val hashCode: Int by lazy { Objects.hash(id, collectionPeriods, collectionType, eightLine, specialComGuidance, sroTrack, taskingAor, taskingCollectionArea, taskingCollectionRequirements, taskingCountry, taskingEmphasis, taskingJoa, taskingOperation, taskingPrimaryIntelDiscipline, taskingPrimarySubCategory, taskingPriority, taskingRegion, taskingRetaskTime, taskingRole, taskingSecondaryIntelDiscipline, taskingSecondarySubCategory, taskingStartPointLat, taskingStartPointLong, taskingSubRegion, taskingSupportedUnit, taskingSyncMatrixBin, type, additionalProperties) }
+        /* spotless:on */
+
+        override fun hashCode(): Int = hashCode
+
+        override fun toString() =
+            "Tasking{id=$id, collectionPeriods=$collectionPeriods, collectionType=$collectionType, eightLine=$eightLine, specialComGuidance=$specialComGuidance, sroTrack=$sroTrack, taskingAor=$taskingAor, taskingCollectionArea=$taskingCollectionArea, taskingCollectionRequirements=$taskingCollectionRequirements, taskingCountry=$taskingCountry, taskingEmphasis=$taskingEmphasis, taskingJoa=$taskingJoa, taskingOperation=$taskingOperation, taskingPrimaryIntelDiscipline=$taskingPrimaryIntelDiscipline, taskingPrimarySubCategory=$taskingPrimarySubCategory, taskingPriority=$taskingPriority, taskingRegion=$taskingRegion, taskingRetaskTime=$taskingRetaskTime, taskingRole=$taskingRole, taskingSecondaryIntelDiscipline=$taskingSecondaryIntelDiscipline, taskingSecondarySubCategory=$taskingSecondarySubCategory, taskingStartPointLat=$taskingStartPointLat, taskingStartPointLong=$taskingStartPointLong, taskingSubRegion=$taskingSubRegion, taskingSupportedUnit=$taskingSupportedUnit, taskingSyncMatrixBin=$taskingSyncMatrixBin, type=$type, additionalProperties=$additionalProperties}"
+    }
+
+    class Transit
+    private constructor(
+        private val id: JsonField<String>,
+        private val base: JsonField<String>,
+        private val duration: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
+    ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("base") @ExcludeMissing base: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("duration") @ExcludeMissing duration: JsonField<Double> = JsonMissing.of(),
+        ) : this(id, base, duration, mutableMapOf())
+
+        /**
+         * Transit Unique Identifier.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun id(): Optional<String> = id.getOptional("id")
+
+        /**
+         * Military Base to transmit the dissemination of this data.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun base(): Optional<String> = base.getOptional("base")
+
+        /**
+         * Length of mission in milliseconds.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun duration(): Optional<Double> = duration.getOptional("duration")
+
+        /**
+         * Returns the raw JSON value of [id].
+         *
+         * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+
+        /**
+         * Returns the raw JSON value of [base].
+         *
+         * Unlike [base], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("base") @ExcludeMissing fun _base(): JsonField<String> = base
+
+        /**
+         * Returns the raw JSON value of [duration].
+         *
+         * Unlike [duration], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("duration") @ExcludeMissing fun _duration(): JsonField<Double> = duration
+
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
+        fun toBuilder() = Builder().from(this)
+
+        companion object {
+
+            /** Returns a mutable builder for constructing an instance of [Transit]. */
+            @JvmStatic fun builder() = Builder()
+        }
+
+        /** A builder for [Transit]. */
+        class Builder internal constructor() {
+
+            private var id: JsonField<String> = JsonMissing.of()
+            private var base: JsonField<String> = JsonMissing.of()
+            private var duration: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+            @JvmSynthetic
+            internal fun from(transit: Transit) = apply {
+                id = transit.id
+                base = transit.base
+                duration = transit.duration
+                additionalProperties = transit.additionalProperties.toMutableMap()
+            }
+
+            /** Transit Unique Identifier. */
+            fun id(id: String) = id(JsonField.of(id))
+
+            /**
+             * Sets [Builder.id] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.id] with a well-typed [String] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun id(id: JsonField<String>) = apply { this.id = id }
+
+            /** Military Base to transmit the dissemination of this data. */
+            fun base(base: String) = base(JsonField.of(base))
+
+            /**
+             * Sets [Builder.base] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.base] with a well-typed [String] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun base(base: JsonField<String>) = apply { this.base = base }
+
+            /** Length of mission in milliseconds. */
+            fun duration(duration: Double) = duration(JsonField.of(duration))
+
+            /**
+             * Sets [Builder.duration] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.duration] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun duration(duration: JsonField<Double>) = apply { this.duration = duration }
+
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
+            /**
+             * Returns an immutable instance of [Transit].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
+            fun build(): Transit = Transit(id, base, duration, additionalProperties.toMutableMap())
+        }
+
+        private var validated: Boolean = false
+
+        fun validate(): Transit = apply {
+            if (validated) {
+                return@apply
+            }
+
+            id()
+            base()
+            duration()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: UnifieddatalibraryInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic
+        internal fun validity(): Int =
+            (if (id.asKnown().isPresent) 1 else 0) +
+                (if (base.asKnown().isPresent) 1 else 0) +
+                (if (duration.asKnown().isPresent) 1 else 0)
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is Transit && id == other.id && base == other.base && duration == other.duration && additionalProperties == other.additionalProperties /* spotless:on */
+        }
+
+        /* spotless:off */
+        private val hashCode: Int by lazy { Objects.hash(id, base, duration, additionalProperties) }
+        /* spotless:on */
+
+        override fun hashCode(): Int = hashCode
+
+        override fun toString() =
+            "Transit{id=$id, base=$base, duration=$duration, additionalProperties=$additionalProperties}"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        return /* spotless:off */ other is IsrCollectionTupleResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && collectionRequirements == other.collectionRequirements && createdAt == other.createdAt && createdBy == other.createdBy && idexVersion == other.idexVersion && missionAor == other.missionAor && missionCollectionArea == other.missionCollectionArea && missionCountry == other.missionCountry && missionEmphasis == other.missionEmphasis && missionId == other.missionId && missionJoa == other.missionJoa && missionOperation == other.missionOperation && missionPrimaryIntelDiscipline == other.missionPrimaryIntelDiscipline && missionPrimarySubCategory == other.missionPrimarySubCategory && missionPriority == other.missionPriority && missionRegion == other.missionRegion && missionRole == other.missionRole && missionSecondaryIntelDiscipline == other.missionSecondaryIntelDiscipline && missionSecondarySubCategory == other.missionSecondarySubCategory && missionStartPointLat == other.missionStartPointLat && missionStartPointLong == other.missionStartPointLong && missionSubRegion == other.missionSubRegion && missionSupportedUnit == other.missionSupportedUnit && missionSyncMatrixBin == other.missionSyncMatrixBin && name == other.name && origin == other.origin && origNetwork == other.origNetwork && taskings == other.taskings && transit == other.transit && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+    }
+
+    /* spotless:off */
+    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, id, collectionRequirements, createdAt, createdBy, idexVersion, missionAor, missionCollectionArea, missionCountry, missionEmphasis, missionId, missionJoa, missionOperation, missionPrimaryIntelDiscipline, missionPrimarySubCategory, missionPriority, missionRegion, missionRole, missionSecondaryIntelDiscipline, missionSecondarySubCategory, missionStartPointLat, missionStartPointLong, missionSubRegion, missionSupportedUnit, missionSyncMatrixBin, name, origin, origNetwork, taskings, transit, updatedAt, updatedBy, additionalProperties) }
+    /* spotless:on */
+
+    override fun hashCode(): Int = hashCode
+
+    override fun toString() =
+        "IsrCollectionTupleResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, collectionRequirements=$collectionRequirements, createdAt=$createdAt, createdBy=$createdBy, idexVersion=$idexVersion, missionAor=$missionAor, missionCollectionArea=$missionCollectionArea, missionCountry=$missionCountry, missionEmphasis=$missionEmphasis, missionId=$missionId, missionJoa=$missionJoa, missionOperation=$missionOperation, missionPrimaryIntelDiscipline=$missionPrimaryIntelDiscipline, missionPrimarySubCategory=$missionPrimarySubCategory, missionPriority=$missionPriority, missionRegion=$missionRegion, missionRole=$missionRole, missionSecondaryIntelDiscipline=$missionSecondaryIntelDiscipline, missionSecondarySubCategory=$missionSecondarySubCategory, missionStartPointLat=$missionStartPointLat, missionStartPointLong=$missionStartPointLong, missionSubRegion=$missionSubRegion, missionSupportedUnit=$missionSupportedUnit, missionSyncMatrixBin=$missionSyncMatrixBin, name=$name, origin=$origin, origNetwork=$origNetwork, taskings=$taskings, transit=$transit, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
+}

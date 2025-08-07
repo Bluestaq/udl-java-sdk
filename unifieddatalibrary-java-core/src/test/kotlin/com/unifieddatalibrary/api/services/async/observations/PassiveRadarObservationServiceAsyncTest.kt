@@ -1,0 +1,395 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.services.async.observations
+
+import com.unifieddatalibrary.api.TestServerExtension
+import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
+import com.unifieddatalibrary.api.models.observations.passiveradarobservation.PassiveRadarObservationCountParams
+import com.unifieddatalibrary.api.models.observations.passiveradarobservation.PassiveRadarObservationCreateBulkParams
+import com.unifieddatalibrary.api.models.observations.passiveradarobservation.PassiveRadarObservationCreateParams
+import com.unifieddatalibrary.api.models.observations.passiveradarobservation.PassiveRadarObservationFileCreateParams
+import com.unifieddatalibrary.api.models.observations.passiveradarobservation.PassiveRadarObservationGetParams
+import com.unifieddatalibrary.api.models.observations.passiveradarobservation.PassiveRadarObservationListParams
+import com.unifieddatalibrary.api.models.observations.passiveradarobservation.PassiveRadarObservationTupleParams
+import java.time.OffsetDateTime
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+
+@ExtendWith(TestServerExtension::class)
+internal class PassiveRadarObservationServiceAsyncTest {
+
+    @Test
+    fun create() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val passiveRadarObservationServiceAsync = client.observations().passiveRadarObservation()
+
+        val future =
+            passiveRadarObservationServiceAsync.create(
+                PassiveRadarObservationCreateParams.builder()
+                    .classificationMarking("U")
+                    .dataMode(PassiveRadarObservationCreateParams.DataMode.TEST)
+                    .obTime(OffsetDateTime.parse("2023-01-24T23:35:26.518152Z"))
+                    .source("Bluestaq")
+                    .id("bdcacfb0-3c47-4bd0-9d6c-9fa7d2c4fbb0")
+                    .accel(1.23)
+                    .accelUnc(0.1)
+                    .alt(478.056378)
+                    .azimuth(134.5)
+                    .azimuthBias(0.123)
+                    .azimuthRate(0.5)
+                    .azimuthUnc(0.5)
+                    .bistaticRange(754.8212)
+                    .bistaticRangeAccel(1.23)
+                    .bistaticRangeAccelUnc(0.1)
+                    .bistaticRangeBias(2.34)
+                    .bistaticRangeRate(-0.30222)
+                    .bistaticRangeRateUnc(0.123)
+                    .bistaticRangeUnc(5.1)
+                    .coning(60.1)
+                    .coningUnc(0.5)
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .declination(10.23)
+                    .delay(0.00505820232809312)
+                    .delayBias(0.00000123)
+                    .delayUnc(0.0000031)
+                    .descriptor("Descriptor")
+                    .doppler(-101.781641000597)
+                    .dopplerUnc(0.2)
+                    .elevation(76.1)
+                    .elevationBias(0.123)
+                    .elevationRate(0.5)
+                    .elevationUnc(0.5)
+                    .extObservationId("26892")
+                    .idOnOrbit("40699")
+                    .idRfEmitter("RED_CLIFFS_3ABCRN")
+                    .idSensor("OCULUSA")
+                    .idSensorRefReceiver("OculusRef1")
+                    .lat(-35.1181763996856)
+                    .lon(139.613567052763)
+                    .obPosition("FIRST")
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("ORIG")
+                    .origObjectId("ORIGOBJECT-ID")
+                    .origSensorId("ORIGSENSOR-ID")
+                    .orthogonalRcs(10.23)
+                    .orthogonalRcsUnc(1.23)
+                    .ra(1.23)
+                    .rcs(100.23)
+                    .rcsUnc(1.23)
+                    .satNo(40699)
+                    .snr(17.292053)
+                    .sourceDl("AXE")
+                    .addTag("TAG1")
+                    .addTag("TAG2")
+                    .taskId("TASK-ID")
+                    .timingBias(1.23)
+                    .tof(0.00592856674135648)
+                    .tofBias(0.00000123)
+                    .tofUnc(0.0000031)
+                    .trackId("12212")
+                    .transactionId("TRANSACTION-ID")
+                    .type("RADAR")
+                    .uct(false)
+                    .xvel(1.23)
+                    .yvel(3.21)
+                    .zvel(3.12)
+                    .build()
+            )
+
+        val response = future.get()
+    }
+
+    @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val passiveRadarObservationServiceAsync = client.observations().passiveRadarObservation()
+
+        val pageFuture =
+            passiveRadarObservationServiceAsync.list(
+                PassiveRadarObservationListParams.builder()
+                    .obTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .build()
+            )
+
+        val page = pageFuture.get()
+        page.items().forEach { it.validate() }
+    }
+
+    @Test
+    fun count() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val passiveRadarObservationServiceAsync = client.observations().passiveRadarObservation()
+
+        val responseFuture =
+            passiveRadarObservationServiceAsync.count(
+                PassiveRadarObservationCountParams.builder()
+                    .obTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .firstResult(0L)
+                    .maxResults(0L)
+                    .build()
+            )
+
+        val response = responseFuture.get()
+    }
+
+    @Test
+    fun createBulk() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val passiveRadarObservationServiceAsync = client.observations().passiveRadarObservation()
+
+        val future =
+            passiveRadarObservationServiceAsync.createBulk(
+                PassiveRadarObservationCreateBulkParams.builder()
+                    .addBody(
+                        PassiveRadarObservationCreateBulkParams.Body.builder()
+                            .classificationMarking("U")
+                            .dataMode(PassiveRadarObservationCreateBulkParams.Body.DataMode.TEST)
+                            .obTime(OffsetDateTime.parse("2023-01-24T23:35:26.518152Z"))
+                            .source("Bluestaq")
+                            .id("bdcacfb0-3c47-4bd0-9d6c-9fa7d2c4fbb0")
+                            .accel(1.23)
+                            .accelUnc(0.1)
+                            .alt(478.056378)
+                            .azimuth(134.5)
+                            .azimuthBias(0.123)
+                            .azimuthRate(0.5)
+                            .azimuthUnc(0.5)
+                            .bistaticRange(754.8212)
+                            .bistaticRangeAccel(1.23)
+                            .bistaticRangeAccelUnc(0.1)
+                            .bistaticRangeBias(2.34)
+                            .bistaticRangeRate(-0.30222)
+                            .bistaticRangeRateUnc(0.123)
+                            .bistaticRangeUnc(5.1)
+                            .coning(60.1)
+                            .coningUnc(0.5)
+                            .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                            .createdBy("some.user")
+                            .declination(10.23)
+                            .delay(0.00505820232809312)
+                            .delayBias(0.00000123)
+                            .delayUnc(0.0000031)
+                            .descriptor("Descriptor")
+                            .doppler(-101.781641000597)
+                            .dopplerUnc(0.2)
+                            .elevation(76.1)
+                            .elevationBias(0.123)
+                            .elevationRate(0.5)
+                            .elevationUnc(0.5)
+                            .extObservationId("26892")
+                            .idOnOrbit("40699")
+                            .idRfEmitter("RED_CLIFFS_3ABCRN")
+                            .idSensor("OCULUSA")
+                            .idSensorRefReceiver("OculusRef1")
+                            .lat(-35.1181763996856)
+                            .lon(139.613567052763)
+                            .obPosition("FIRST")
+                            .origin("THIRD_PARTY_DATASOURCE")
+                            .origNetwork("ORIG")
+                            .origObjectId("ORIGOBJECT-ID")
+                            .origSensorId("ORIGSENSOR-ID")
+                            .orthogonalRcs(10.23)
+                            .orthogonalRcsUnc(1.23)
+                            .ra(1.23)
+                            .rcs(100.23)
+                            .rcsUnc(1.23)
+                            .satNo(40699)
+                            .snr(17.292053)
+                            .sourceDl("AXE")
+                            .addTag("TAG1")
+                            .addTag("TAG2")
+                            .taskId("TASK-ID")
+                            .timingBias(1.23)
+                            .tof(0.00592856674135648)
+                            .tofBias(0.00000123)
+                            .tofUnc(0.0000031)
+                            .trackId("12212")
+                            .transactionId("TRANSACTION-ID")
+                            .type("RADAR")
+                            .uct(false)
+                            .xvel(1.23)
+                            .yvel(3.21)
+                            .zvel(3.12)
+                            .build()
+                    )
+                    .build()
+            )
+
+        val response = future.get()
+    }
+
+    @Test
+    fun fileCreate() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val passiveRadarObservationServiceAsync = client.observations().passiveRadarObservation()
+
+        val future =
+            passiveRadarObservationServiceAsync.fileCreate(
+                PassiveRadarObservationFileCreateParams.builder()
+                    .addBody(
+                        PassiveRadarObservationFileCreateParams.Body.builder()
+                            .classificationMarking("U")
+                            .dataMode(PassiveRadarObservationFileCreateParams.Body.DataMode.TEST)
+                            .obTime(OffsetDateTime.parse("2023-01-24T23:35:26.518152Z"))
+                            .source("Bluestaq")
+                            .id("bdcacfb0-3c47-4bd0-9d6c-9fa7d2c4fbb0")
+                            .accel(1.23)
+                            .accelUnc(0.1)
+                            .alt(478.056378)
+                            .azimuth(134.5)
+                            .azimuthBias(0.123)
+                            .azimuthRate(0.5)
+                            .azimuthUnc(0.5)
+                            .bistaticRange(754.8212)
+                            .bistaticRangeAccel(1.23)
+                            .bistaticRangeAccelUnc(0.1)
+                            .bistaticRangeBias(2.34)
+                            .bistaticRangeRate(-0.30222)
+                            .bistaticRangeRateUnc(0.123)
+                            .bistaticRangeUnc(5.1)
+                            .coning(60.1)
+                            .coningUnc(0.5)
+                            .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                            .createdBy("some.user")
+                            .declination(10.23)
+                            .delay(0.00505820232809312)
+                            .delayBias(0.00000123)
+                            .delayUnc(0.0000031)
+                            .descriptor("Descriptor")
+                            .doppler(-101.781641000597)
+                            .dopplerUnc(0.2)
+                            .elevation(76.1)
+                            .elevationBias(0.123)
+                            .elevationRate(0.5)
+                            .elevationUnc(0.5)
+                            .extObservationId("26892")
+                            .idOnOrbit("40699")
+                            .idRfEmitter("RED_CLIFFS_3ABCRN")
+                            .idSensor("OCULUSA")
+                            .idSensorRefReceiver("OculusRef1")
+                            .lat(-35.1181763996856)
+                            .lon(139.613567052763)
+                            .obPosition("FIRST")
+                            .origin("THIRD_PARTY_DATASOURCE")
+                            .origNetwork("ORIG")
+                            .origObjectId("ORIGOBJECT-ID")
+                            .origSensorId("ORIGSENSOR-ID")
+                            .orthogonalRcs(10.23)
+                            .orthogonalRcsUnc(1.23)
+                            .ra(1.23)
+                            .rcs(100.23)
+                            .rcsUnc(1.23)
+                            .satNo(40699)
+                            .snr(17.292053)
+                            .sourceDl("AXE")
+                            .addTag("TAG1")
+                            .addTag("TAG2")
+                            .taskId("TASK-ID")
+                            .timingBias(1.23)
+                            .tof(0.00592856674135648)
+                            .tofBias(0.00000123)
+                            .tofUnc(0.0000031)
+                            .trackId("12212")
+                            .transactionId("TRANSACTION-ID")
+                            .type("RADAR")
+                            .uct(false)
+                            .xvel(1.23)
+                            .yvel(3.21)
+                            .zvel(3.12)
+                            .build()
+                    )
+                    .build()
+            )
+
+        val response = future.get()
+    }
+
+    @Test
+    fun get() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val passiveRadarObservationServiceAsync = client.observations().passiveRadarObservation()
+
+        val passiveRadarObservationFuture =
+            passiveRadarObservationServiceAsync.get(
+                PassiveRadarObservationGetParams.builder()
+                    .id("id")
+                    .firstResult(0L)
+                    .maxResults(0L)
+                    .build()
+            )
+
+        val passiveRadarObservation = passiveRadarObservationFuture.get()
+        passiveRadarObservation.validate()
+    }
+
+    @Test
+    fun queryhelp() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val passiveRadarObservationServiceAsync = client.observations().passiveRadarObservation()
+
+        val responseFuture = passiveRadarObservationServiceAsync.queryhelp()
+
+        val response = responseFuture.get()
+        response.validate()
+    }
+
+    @Test
+    fun tuple() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val passiveRadarObservationServiceAsync = client.observations().passiveRadarObservation()
+
+        val responseFuture =
+            passiveRadarObservationServiceAsync.tuple(
+                PassiveRadarObservationTupleParams.builder()
+                    .columns("columns")
+                    .obTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .firstResult(0L)
+                    .maxResults(0L)
+                    .build()
+            )
+
+        val response = responseFuture.get()
+        response.forEach { it.validate() }
+    }
+}

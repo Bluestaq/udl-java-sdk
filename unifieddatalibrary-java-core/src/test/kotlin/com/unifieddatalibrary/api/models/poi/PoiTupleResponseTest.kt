@@ -1,0 +1,231 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.poi
+
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import com.unifieddatalibrary.api.core.jsonMapper
+import java.time.OffsetDateTime
+import kotlin.jvm.optionals.getOrNull
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+
+internal class PoiTupleResponseTest {
+
+    @Test
+    fun create() {
+        val poiTupleResponse =
+            PoiTupleResponse.builder()
+                .classificationMarking("U")
+                .dataMode(PoiTupleResponse.DataMode.TEST)
+                .name("POI_NAME")
+                .poiid("POI-ID")
+                .source("Bluestaq")
+                .ts(OffsetDateTime.parse("2020-01-01T16:00:00.123456Z"))
+                .id("POI-ID")
+                .activity("TRAINING")
+                .agjson(
+                    "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
+                )
+                .alt(5.23)
+                .andims(3)
+                .area(
+                    "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                )
+                .asrid(3)
+                .asset("PLATFORM_NAME")
+                .atext(
+                    "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                )
+                .atype("Type1")
+                .az(45.23)
+                .beNumber("0427RT1030")
+                .ce(10.23)
+                .cntct("Contact Info")
+                .conf(0.5)
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .desc("Description of the object")
+                .el(45.23)
+                .elle(listOf(125.5, 85.1, 125.75))
+                .env("SURFACE")
+                .addGroup("GROUP1")
+                .addGroup("GROUP2")
+                .how("h-g-i-g-o")
+                .ident("FRIEND")
+                .addIdWeatherReport("WEATHER-EVENT-ID1")
+                .addIdWeatherReport("WEATHER-EVENT-ID2")
+                .lat(45.23)
+                .le(10.23)
+                .lon(45.23)
+                .msnid("MSN-ID")
+                .orientation(45.23)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .plat("COMBAT_VEHICLE")
+                .pps("BDA")
+                .pri(2)
+                .sourceDl("AXE")
+                .spec("LIGHT_TANK")
+                .addSrcId("ID1")
+                .addSrcId("ID2")
+                .addSrcTyp("TYPE1")
+                .addSrcTyp("TYPE2")
+                .stale(OffsetDateTime.parse("2020-01-01T16:00:00.123456Z"))
+                .start(OffsetDateTime.parse("2020-01-01T16:00:00.123456Z"))
+                .addTag("TAG1")
+                .addTag("TAG2")
+                .transactionId("TRANSACTION-ID")
+                .trkid("TRK-ID")
+                .type("a-h-G")
+                .addUrl("URL1")
+                .addUrl("URL2")
+                .build()
+
+        assertThat(poiTupleResponse.classificationMarking()).isEqualTo("U")
+        assertThat(poiTupleResponse.dataMode()).isEqualTo(PoiTupleResponse.DataMode.TEST)
+        assertThat(poiTupleResponse.name()).isEqualTo("POI_NAME")
+        assertThat(poiTupleResponse.poiid()).isEqualTo("POI-ID")
+        assertThat(poiTupleResponse.source()).isEqualTo("Bluestaq")
+        assertThat(poiTupleResponse.ts())
+            .isEqualTo(OffsetDateTime.parse("2020-01-01T16:00:00.123456Z"))
+        assertThat(poiTupleResponse.id()).contains("POI-ID")
+        assertThat(poiTupleResponse.activity()).contains("TRAINING")
+        assertThat(poiTupleResponse.agjson())
+            .contains(
+                "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
+            )
+        assertThat(poiTupleResponse.alt()).contains(5.23)
+        assertThat(poiTupleResponse.andims()).contains(3)
+        assertThat(poiTupleResponse.area())
+            .contains(
+                "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+            )
+        assertThat(poiTupleResponse.asrid()).contains(3)
+        assertThat(poiTupleResponse.asset()).contains("PLATFORM_NAME")
+        assertThat(poiTupleResponse.atext())
+            .contains(
+                "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+            )
+        assertThat(poiTupleResponse.atype()).contains("Type1")
+        assertThat(poiTupleResponse.az()).contains(45.23)
+        assertThat(poiTupleResponse.beNumber()).contains("0427RT1030")
+        assertThat(poiTupleResponse.ce()).contains(10.23)
+        assertThat(poiTupleResponse.cntct()).contains("Contact Info")
+        assertThat(poiTupleResponse.conf()).contains(0.5)
+        assertThat(poiTupleResponse.createdAt())
+            .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(poiTupleResponse.createdBy()).contains("some.user")
+        assertThat(poiTupleResponse.desc()).contains("Description of the object")
+        assertThat(poiTupleResponse.el()).contains(45.23)
+        assertThat(poiTupleResponse.elle().getOrNull()).containsExactly(125.5, 85.1, 125.75)
+        assertThat(poiTupleResponse.env()).contains("SURFACE")
+        assertThat(poiTupleResponse.groups().getOrNull()).containsExactly("GROUP1", "GROUP2")
+        assertThat(poiTupleResponse.how()).contains("h-g-i-g-o")
+        assertThat(poiTupleResponse.ident()).contains("FRIEND")
+        assertThat(poiTupleResponse.idWeatherReport().getOrNull())
+            .containsExactly("WEATHER-EVENT-ID1", "WEATHER-EVENT-ID2")
+        assertThat(poiTupleResponse.lat()).contains(45.23)
+        assertThat(poiTupleResponse.le()).contains(10.23)
+        assertThat(poiTupleResponse.lon()).contains(45.23)
+        assertThat(poiTupleResponse.msnid()).contains("MSN-ID")
+        assertThat(poiTupleResponse.orientation()).contains(45.23)
+        assertThat(poiTupleResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
+        assertThat(poiTupleResponse.origNetwork()).contains("ORIG")
+        assertThat(poiTupleResponse.plat()).contains("COMBAT_VEHICLE")
+        assertThat(poiTupleResponse.pps()).contains("BDA")
+        assertThat(poiTupleResponse.pri()).contains(2)
+        assertThat(poiTupleResponse.sourceDl()).contains("AXE")
+        assertThat(poiTupleResponse.spec()).contains("LIGHT_TANK")
+        assertThat(poiTupleResponse.srcIds().getOrNull()).containsExactly("ID1", "ID2")
+        assertThat(poiTupleResponse.srcTyps().getOrNull()).containsExactly("TYPE1", "TYPE2")
+        assertThat(poiTupleResponse.stale())
+            .contains(OffsetDateTime.parse("2020-01-01T16:00:00.123456Z"))
+        assertThat(poiTupleResponse.start())
+            .contains(OffsetDateTime.parse("2020-01-01T16:00:00.123456Z"))
+        assertThat(poiTupleResponse.tags().getOrNull()).containsExactly("TAG1", "TAG2")
+        assertThat(poiTupleResponse.transactionId()).contains("TRANSACTION-ID")
+        assertThat(poiTupleResponse.trkid()).contains("TRK-ID")
+        assertThat(poiTupleResponse.type()).contains("a-h-G")
+        assertThat(poiTupleResponse.urls().getOrNull()).containsExactly("URL1", "URL2")
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val poiTupleResponse =
+            PoiTupleResponse.builder()
+                .classificationMarking("U")
+                .dataMode(PoiTupleResponse.DataMode.TEST)
+                .name("POI_NAME")
+                .poiid("POI-ID")
+                .source("Bluestaq")
+                .ts(OffsetDateTime.parse("2020-01-01T16:00:00.123456Z"))
+                .id("POI-ID")
+                .activity("TRAINING")
+                .agjson(
+                    "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
+                )
+                .alt(5.23)
+                .andims(3)
+                .area(
+                    "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                )
+                .asrid(3)
+                .asset("PLATFORM_NAME")
+                .atext(
+                    "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                )
+                .atype("Type1")
+                .az(45.23)
+                .beNumber("0427RT1030")
+                .ce(10.23)
+                .cntct("Contact Info")
+                .conf(0.5)
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .desc("Description of the object")
+                .el(45.23)
+                .elle(listOf(125.5, 85.1, 125.75))
+                .env("SURFACE")
+                .addGroup("GROUP1")
+                .addGroup("GROUP2")
+                .how("h-g-i-g-o")
+                .ident("FRIEND")
+                .addIdWeatherReport("WEATHER-EVENT-ID1")
+                .addIdWeatherReport("WEATHER-EVENT-ID2")
+                .lat(45.23)
+                .le(10.23)
+                .lon(45.23)
+                .msnid("MSN-ID")
+                .orientation(45.23)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .plat("COMBAT_VEHICLE")
+                .pps("BDA")
+                .pri(2)
+                .sourceDl("AXE")
+                .spec("LIGHT_TANK")
+                .addSrcId("ID1")
+                .addSrcId("ID2")
+                .addSrcTyp("TYPE1")
+                .addSrcTyp("TYPE2")
+                .stale(OffsetDateTime.parse("2020-01-01T16:00:00.123456Z"))
+                .start(OffsetDateTime.parse("2020-01-01T16:00:00.123456Z"))
+                .addTag("TAG1")
+                .addTag("TAG2")
+                .transactionId("TRANSACTION-ID")
+                .trkid("TRK-ID")
+                .type("a-h-G")
+                .addUrl("URL1")
+                .addUrl("URL2")
+                .build()
+
+        val roundtrippedPoiTupleResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(poiTupleResponse),
+                jacksonTypeRef<PoiTupleResponse>(),
+            )
+
+        assertThat(roundtrippedPoiTupleResponse).isEqualTo(poiTupleResponse)
+    }
+}

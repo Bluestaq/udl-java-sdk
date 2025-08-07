@@ -1,0 +1,156 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.stage
+
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import com.unifieddatalibrary.api.core.jsonMapper
+import java.time.OffsetDateTime
+import kotlin.jvm.optionals.getOrNull
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+
+internal class StageListResponseTest {
+
+    @Test
+    fun create() {
+        val stageListResponse =
+            StageListResponse.builder()
+                .classificationMarking("U")
+                .dataMode(StageListResponse.DataMode.TEST)
+                .idEngine("ENGINE-ID")
+                .idLaunchVehicle("LAUNCHVEHICLE-ID")
+                .source("Bluestaq")
+                .id("STAGE-ID")
+                .avionicsNotes("Sample Notes")
+                .burnTime(256.3)
+                .controlThruster1("controlThruster1")
+                .controlThruster2("controlThruster2")
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .diameter(3.95)
+                .length(25.13)
+                .mainEngineThrustSeaLevel(733.4)
+                .mainEngineThrustVacuum(733.4)
+                .manufacturerOrgId("5feed5d7-d131-57e5-a3fd-acc173bca736")
+                .mass(9956.1)
+                .notes("Sample Notes")
+                .numBurns(1)
+                .numControlThruster1(1)
+                .numControlThruster2(1)
+                .numEngines(1)
+                .numStageElements(2)
+                .numVernier(3)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .addPhotoUrl("photoURL")
+                .restartable(true)
+                .reusable(true)
+                .stageNumber(2)
+                .thrustSeaLevel(733.4)
+                .thrustVacuum(733.4)
+                .type("Electrostatic Ion")
+                .vernier("vernier")
+                .vernierBurnTime(1.1)
+                .vernierNumBurns(4)
+                .vernierThrustSeaLevel(4.1)
+                .vernierThrustVacuum(3.2)
+                .build()
+
+        assertThat(stageListResponse.classificationMarking()).isEqualTo("U")
+        assertThat(stageListResponse.dataMode()).isEqualTo(StageListResponse.DataMode.TEST)
+        assertThat(stageListResponse.idEngine()).isEqualTo("ENGINE-ID")
+        assertThat(stageListResponse.idLaunchVehicle()).isEqualTo("LAUNCHVEHICLE-ID")
+        assertThat(stageListResponse.source()).isEqualTo("Bluestaq")
+        assertThat(stageListResponse.id()).contains("STAGE-ID")
+        assertThat(stageListResponse.avionicsNotes()).contains("Sample Notes")
+        assertThat(stageListResponse.burnTime()).contains(256.3)
+        assertThat(stageListResponse.controlThruster1()).contains("controlThruster1")
+        assertThat(stageListResponse.controlThruster2()).contains("controlThruster2")
+        assertThat(stageListResponse.createdAt())
+            .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(stageListResponse.createdBy()).contains("some.user")
+        assertThat(stageListResponse.diameter()).contains(3.95)
+        assertThat(stageListResponse.length()).contains(25.13)
+        assertThat(stageListResponse.mainEngineThrustSeaLevel()).contains(733.4)
+        assertThat(stageListResponse.mainEngineThrustVacuum()).contains(733.4)
+        assertThat(stageListResponse.manufacturerOrgId())
+            .contains("5feed5d7-d131-57e5-a3fd-acc173bca736")
+        assertThat(stageListResponse.mass()).contains(9956.1)
+        assertThat(stageListResponse.notes()).contains("Sample Notes")
+        assertThat(stageListResponse.numBurns()).contains(1)
+        assertThat(stageListResponse.numControlThruster1()).contains(1)
+        assertThat(stageListResponse.numControlThruster2()).contains(1)
+        assertThat(stageListResponse.numEngines()).contains(1)
+        assertThat(stageListResponse.numStageElements()).contains(2)
+        assertThat(stageListResponse.numVernier()).contains(3)
+        assertThat(stageListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
+        assertThat(stageListResponse.origNetwork()).contains("ORIG")
+        assertThat(stageListResponse.photoUrls().getOrNull()).containsExactly("photoURL")
+        assertThat(stageListResponse.restartable()).contains(true)
+        assertThat(stageListResponse.reusable()).contains(true)
+        assertThat(stageListResponse.stageNumber()).contains(2)
+        assertThat(stageListResponse.thrustSeaLevel()).contains(733.4)
+        assertThat(stageListResponse.thrustVacuum()).contains(733.4)
+        assertThat(stageListResponse.type()).contains("Electrostatic Ion")
+        assertThat(stageListResponse.vernier()).contains("vernier")
+        assertThat(stageListResponse.vernierBurnTime()).contains(1.1)
+        assertThat(stageListResponse.vernierNumBurns()).contains(4)
+        assertThat(stageListResponse.vernierThrustSeaLevel()).contains(4.1)
+        assertThat(stageListResponse.vernierThrustVacuum()).contains(3.2)
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val stageListResponse =
+            StageListResponse.builder()
+                .classificationMarking("U")
+                .dataMode(StageListResponse.DataMode.TEST)
+                .idEngine("ENGINE-ID")
+                .idLaunchVehicle("LAUNCHVEHICLE-ID")
+                .source("Bluestaq")
+                .id("STAGE-ID")
+                .avionicsNotes("Sample Notes")
+                .burnTime(256.3)
+                .controlThruster1("controlThruster1")
+                .controlThruster2("controlThruster2")
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .diameter(3.95)
+                .length(25.13)
+                .mainEngineThrustSeaLevel(733.4)
+                .mainEngineThrustVacuum(733.4)
+                .manufacturerOrgId("5feed5d7-d131-57e5-a3fd-acc173bca736")
+                .mass(9956.1)
+                .notes("Sample Notes")
+                .numBurns(1)
+                .numControlThruster1(1)
+                .numControlThruster2(1)
+                .numEngines(1)
+                .numStageElements(2)
+                .numVernier(3)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .addPhotoUrl("photoURL")
+                .restartable(true)
+                .reusable(true)
+                .stageNumber(2)
+                .thrustSeaLevel(733.4)
+                .thrustVacuum(733.4)
+                .type("Electrostatic Ion")
+                .vernier("vernier")
+                .vernierBurnTime(1.1)
+                .vernierNumBurns(4)
+                .vernierThrustSeaLevel(4.1)
+                .vernierThrustVacuum(3.2)
+                .build()
+
+        val roundtrippedStageListResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(stageListResponse),
+                jacksonTypeRef<StageListResponse>(),
+            )
+
+        assertThat(roundtrippedStageListResponse).isEqualTo(stageListResponse)
+    }
+}

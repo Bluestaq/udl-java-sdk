@@ -1,0 +1,153 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.seradatacommdetails
+
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import com.unifieddatalibrary.api.core.jsonMapper
+import java.time.OffsetDateTime
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+
+internal class SeraDataCommDetailListResponseTest {
+
+    @Test
+    fun create() {
+        val seraDataCommDetailListResponse =
+            SeraDataCommDetailListResponse.builder()
+                .classificationMarking("U")
+                .dataMode(SeraDataCommDetailListResponse.DataMode.TEST)
+                .source("Bluestaq")
+                .id("SERADATACOMMDETAILS-ID")
+                .band("X")
+                .bandwidth(1.23)
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .eirp(1.23)
+                .estHtsTotalCapacity(1.23)
+                .estHtsTotalUserDownlinkBandwidthPerBeam(1.23)
+                .estHtsTotalUserUplinkBandwidthPerBeam(1.23)
+                .gatewayDownlinkFrom(1.23)
+                .gatewayDownlinkTo(1.23)
+                .gatewayUplinkFrom(1.23)
+                .gatewayUplinkTo(1.23)
+                .hostedForCompanyOrgId("hostedForCompanyOrgId")
+                .htsNumUserSpotBeams(1)
+                .htsUserDownlinkBandwidthPerBeam(1.23)
+                .htsUserUplinkBandwidthPerBeam(1.23)
+                .idComm("idComm")
+                .manufacturerOrgId("manufacturerOrgId")
+                .num36MhzEquivalentTransponders(1)
+                .numOperationalTransponders(1)
+                .numSpareTransponders(1)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .payloadNotes("Sample Notes")
+                .polarization("polarization")
+                .solidStatePowerAmp(1.23)
+                .spacecraftId("spacecraftId")
+                .tradeLeaseOrgId("tradeLeaseOrgId")
+                .travelingWaveTubeAmplifier(1.23)
+                .userDownlinkFrom(1.23)
+                .userDownlinkTo(1.23)
+                .userUplinkFrom(1.23)
+                .userUplinkTo(1.23)
+                .build()
+
+        assertThat(seraDataCommDetailListResponse.classificationMarking()).isEqualTo("U")
+        assertThat(seraDataCommDetailListResponse.dataMode())
+            .isEqualTo(SeraDataCommDetailListResponse.DataMode.TEST)
+        assertThat(seraDataCommDetailListResponse.source()).isEqualTo("Bluestaq")
+        assertThat(seraDataCommDetailListResponse.id()).contains("SERADATACOMMDETAILS-ID")
+        assertThat(seraDataCommDetailListResponse.band()).contains("X")
+        assertThat(seraDataCommDetailListResponse.bandwidth()).contains(1.23)
+        assertThat(seraDataCommDetailListResponse.createdAt())
+            .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(seraDataCommDetailListResponse.createdBy()).contains("some.user")
+        assertThat(seraDataCommDetailListResponse.eirp()).contains(1.23)
+        assertThat(seraDataCommDetailListResponse.estHtsTotalCapacity()).contains(1.23)
+        assertThat(seraDataCommDetailListResponse.estHtsTotalUserDownlinkBandwidthPerBeam())
+            .contains(1.23)
+        assertThat(seraDataCommDetailListResponse.estHtsTotalUserUplinkBandwidthPerBeam())
+            .contains(1.23)
+        assertThat(seraDataCommDetailListResponse.gatewayDownlinkFrom()).contains(1.23)
+        assertThat(seraDataCommDetailListResponse.gatewayDownlinkTo()).contains(1.23)
+        assertThat(seraDataCommDetailListResponse.gatewayUplinkFrom()).contains(1.23)
+        assertThat(seraDataCommDetailListResponse.gatewayUplinkTo()).contains(1.23)
+        assertThat(seraDataCommDetailListResponse.hostedForCompanyOrgId())
+            .contains("hostedForCompanyOrgId")
+        assertThat(seraDataCommDetailListResponse.htsNumUserSpotBeams()).contains(1)
+        assertThat(seraDataCommDetailListResponse.htsUserDownlinkBandwidthPerBeam()).contains(1.23)
+        assertThat(seraDataCommDetailListResponse.htsUserUplinkBandwidthPerBeam()).contains(1.23)
+        assertThat(seraDataCommDetailListResponse.idComm()).contains("idComm")
+        assertThat(seraDataCommDetailListResponse.manufacturerOrgId()).contains("manufacturerOrgId")
+        assertThat(seraDataCommDetailListResponse.num36MhzEquivalentTransponders()).contains(1)
+        assertThat(seraDataCommDetailListResponse.numOperationalTransponders()).contains(1)
+        assertThat(seraDataCommDetailListResponse.numSpareTransponders()).contains(1)
+        assertThat(seraDataCommDetailListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
+        assertThat(seraDataCommDetailListResponse.origNetwork()).contains("ORIG")
+        assertThat(seraDataCommDetailListResponse.payloadNotes()).contains("Sample Notes")
+        assertThat(seraDataCommDetailListResponse.polarization()).contains("polarization")
+        assertThat(seraDataCommDetailListResponse.solidStatePowerAmp()).contains(1.23)
+        assertThat(seraDataCommDetailListResponse.spacecraftId()).contains("spacecraftId")
+        assertThat(seraDataCommDetailListResponse.tradeLeaseOrgId()).contains("tradeLeaseOrgId")
+        assertThat(seraDataCommDetailListResponse.travelingWaveTubeAmplifier()).contains(1.23)
+        assertThat(seraDataCommDetailListResponse.userDownlinkFrom()).contains(1.23)
+        assertThat(seraDataCommDetailListResponse.userDownlinkTo()).contains(1.23)
+        assertThat(seraDataCommDetailListResponse.userUplinkFrom()).contains(1.23)
+        assertThat(seraDataCommDetailListResponse.userUplinkTo()).contains(1.23)
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val seraDataCommDetailListResponse =
+            SeraDataCommDetailListResponse.builder()
+                .classificationMarking("U")
+                .dataMode(SeraDataCommDetailListResponse.DataMode.TEST)
+                .source("Bluestaq")
+                .id("SERADATACOMMDETAILS-ID")
+                .band("X")
+                .bandwidth(1.23)
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .eirp(1.23)
+                .estHtsTotalCapacity(1.23)
+                .estHtsTotalUserDownlinkBandwidthPerBeam(1.23)
+                .estHtsTotalUserUplinkBandwidthPerBeam(1.23)
+                .gatewayDownlinkFrom(1.23)
+                .gatewayDownlinkTo(1.23)
+                .gatewayUplinkFrom(1.23)
+                .gatewayUplinkTo(1.23)
+                .hostedForCompanyOrgId("hostedForCompanyOrgId")
+                .htsNumUserSpotBeams(1)
+                .htsUserDownlinkBandwidthPerBeam(1.23)
+                .htsUserUplinkBandwidthPerBeam(1.23)
+                .idComm("idComm")
+                .manufacturerOrgId("manufacturerOrgId")
+                .num36MhzEquivalentTransponders(1)
+                .numOperationalTransponders(1)
+                .numSpareTransponders(1)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .payloadNotes("Sample Notes")
+                .polarization("polarization")
+                .solidStatePowerAmp(1.23)
+                .spacecraftId("spacecraftId")
+                .tradeLeaseOrgId("tradeLeaseOrgId")
+                .travelingWaveTubeAmplifier(1.23)
+                .userDownlinkFrom(1.23)
+                .userDownlinkTo(1.23)
+                .userUplinkFrom(1.23)
+                .userUplinkTo(1.23)
+                .build()
+
+        val roundtrippedSeraDataCommDetailListResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(seraDataCommDetailListResponse),
+                jacksonTypeRef<SeraDataCommDetailListResponse>(),
+            )
+
+        assertThat(roundtrippedSeraDataCommDetailListResponse)
+            .isEqualTo(seraDataCommDetailListResponse)
+    }
+}

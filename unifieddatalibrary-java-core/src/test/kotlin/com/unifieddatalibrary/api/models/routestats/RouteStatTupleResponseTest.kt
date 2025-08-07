@@ -1,0 +1,150 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.routestats
+
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import com.unifieddatalibrary.api.core.jsonMapper
+import java.time.OffsetDateTime
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+
+internal class RouteStatTupleResponseTest {
+
+    @Test
+    fun create() {
+        val routeStatTupleResponse =
+            RouteStatTupleResponse.builder()
+                .classificationMarking("U")
+                .dataMode(RouteStatTupleResponse.DataMode.TEST)
+                .locationEnd("KCOS")
+                .locationStart("KDEN")
+                .source("Bluestaq")
+                .id("0167f577-e06c-358e-85aa-0a07a730bdd0")
+                .avgDuration(47.1)
+                .avgSpeed(450.1)
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .dataPtsUsed(6)
+                .distance(63.1)
+                .distUnit("Nautical miles")
+                .firstPt(OffsetDateTime.parse("2024-01-01T16:00:00.123Z"))
+                .idealDesc("Block speed using great circle path")
+                .idealDuration(45.1)
+                .idSiteEnd("77b5550c-c0f4-47bd-94ce-d71cdaa52f62")
+                .idSiteStart("23370387-5e8e-4a74-89db-ad81145aa4df")
+                .lastPt(OffsetDateTime.parse("2024-03-31T16:00:00.123Z"))
+                .locationType("ICAO")
+                .maxDuration(52.1)
+                .maxSpeed(470.1)
+                .minDuration(42.1)
+                .minSpeed(420.1)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("OPS1")
+                .partialDesc("Performance speed using great circle path")
+                .partialDuration(38.1)
+                .sourceDl("AXE")
+                .speedUnit("knots")
+                .timePeriod("Q1")
+                .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .updatedBy("some.user")
+                .vehicleCategory("AIRCRAFT")
+                .vehicleType("C-17")
+                .build()
+
+        assertThat(routeStatTupleResponse.classificationMarking()).isEqualTo("U")
+        assertThat(routeStatTupleResponse.dataMode())
+            .isEqualTo(RouteStatTupleResponse.DataMode.TEST)
+        assertThat(routeStatTupleResponse.locationEnd()).isEqualTo("KCOS")
+        assertThat(routeStatTupleResponse.locationStart()).isEqualTo("KDEN")
+        assertThat(routeStatTupleResponse.source()).isEqualTo("Bluestaq")
+        assertThat(routeStatTupleResponse.id()).contains("0167f577-e06c-358e-85aa-0a07a730bdd0")
+        assertThat(routeStatTupleResponse.avgDuration()).contains(47.1)
+        assertThat(routeStatTupleResponse.avgSpeed()).contains(450.1)
+        assertThat(routeStatTupleResponse.createdAt())
+            .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(routeStatTupleResponse.createdBy()).contains("some.user")
+        assertThat(routeStatTupleResponse.dataPtsUsed()).contains(6)
+        assertThat(routeStatTupleResponse.distance()).contains(63.1)
+        assertThat(routeStatTupleResponse.distUnit()).contains("Nautical miles")
+        assertThat(routeStatTupleResponse.firstPt())
+            .contains(OffsetDateTime.parse("2024-01-01T16:00:00.123Z"))
+        assertThat(routeStatTupleResponse.idealDesc())
+            .contains("Block speed using great circle path")
+        assertThat(routeStatTupleResponse.idealDuration()).contains(45.1)
+        assertThat(routeStatTupleResponse.idSiteEnd())
+            .contains("77b5550c-c0f4-47bd-94ce-d71cdaa52f62")
+        assertThat(routeStatTupleResponse.idSiteStart())
+            .contains("23370387-5e8e-4a74-89db-ad81145aa4df")
+        assertThat(routeStatTupleResponse.lastPt())
+            .contains(OffsetDateTime.parse("2024-03-31T16:00:00.123Z"))
+        assertThat(routeStatTupleResponse.locationType()).contains("ICAO")
+        assertThat(routeStatTupleResponse.maxDuration()).contains(52.1)
+        assertThat(routeStatTupleResponse.maxSpeed()).contains(470.1)
+        assertThat(routeStatTupleResponse.minDuration()).contains(42.1)
+        assertThat(routeStatTupleResponse.minSpeed()).contains(420.1)
+        assertThat(routeStatTupleResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
+        assertThat(routeStatTupleResponse.origNetwork()).contains("OPS1")
+        assertThat(routeStatTupleResponse.partialDesc())
+            .contains("Performance speed using great circle path")
+        assertThat(routeStatTupleResponse.partialDuration()).contains(38.1)
+        assertThat(routeStatTupleResponse.sourceDl()).contains("AXE")
+        assertThat(routeStatTupleResponse.speedUnit()).contains("knots")
+        assertThat(routeStatTupleResponse.timePeriod()).contains("Q1")
+        assertThat(routeStatTupleResponse.updatedAt())
+            .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(routeStatTupleResponse.updatedBy()).contains("some.user")
+        assertThat(routeStatTupleResponse.vehicleCategory()).contains("AIRCRAFT")
+        assertThat(routeStatTupleResponse.vehicleType()).contains("C-17")
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val routeStatTupleResponse =
+            RouteStatTupleResponse.builder()
+                .classificationMarking("U")
+                .dataMode(RouteStatTupleResponse.DataMode.TEST)
+                .locationEnd("KCOS")
+                .locationStart("KDEN")
+                .source("Bluestaq")
+                .id("0167f577-e06c-358e-85aa-0a07a730bdd0")
+                .avgDuration(47.1)
+                .avgSpeed(450.1)
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .dataPtsUsed(6)
+                .distance(63.1)
+                .distUnit("Nautical miles")
+                .firstPt(OffsetDateTime.parse("2024-01-01T16:00:00.123Z"))
+                .idealDesc("Block speed using great circle path")
+                .idealDuration(45.1)
+                .idSiteEnd("77b5550c-c0f4-47bd-94ce-d71cdaa52f62")
+                .idSiteStart("23370387-5e8e-4a74-89db-ad81145aa4df")
+                .lastPt(OffsetDateTime.parse("2024-03-31T16:00:00.123Z"))
+                .locationType("ICAO")
+                .maxDuration(52.1)
+                .maxSpeed(470.1)
+                .minDuration(42.1)
+                .minSpeed(420.1)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("OPS1")
+                .partialDesc("Performance speed using great circle path")
+                .partialDuration(38.1)
+                .sourceDl("AXE")
+                .speedUnit("knots")
+                .timePeriod("Q1")
+                .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .updatedBy("some.user")
+                .vehicleCategory("AIRCRAFT")
+                .vehicleType("C-17")
+                .build()
+
+        val roundtrippedRouteStatTupleResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(routeStatTupleResponse),
+                jacksonTypeRef<RouteStatTupleResponse>(),
+            )
+
+        assertThat(roundtrippedRouteStatTupleResponse).isEqualTo(routeStatTupleResponse)
+    }
+}

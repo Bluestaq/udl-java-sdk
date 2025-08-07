@@ -1,0 +1,262 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.services.blocking
+
+import com.unifieddatalibrary.api.TestServerExtension
+import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
+import com.unifieddatalibrary.api.models.manifoldelset.ManifoldelsetCountParams
+import com.unifieddatalibrary.api.models.manifoldelset.ManifoldelsetCreateBulkParams
+import com.unifieddatalibrary.api.models.manifoldelset.ManifoldelsetCreateParams
+import com.unifieddatalibrary.api.models.manifoldelset.ManifoldelsetGetParams
+import com.unifieddatalibrary.api.models.manifoldelset.ManifoldelsetListParams
+import com.unifieddatalibrary.api.models.manifoldelset.ManifoldelsetTupleParams
+import com.unifieddatalibrary.api.models.manifoldelset.ManifoldelsetUpdateParams
+import java.time.OffsetDateTime
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+
+@ExtendWith(TestServerExtension::class)
+internal class ManifoldelsetServiceTest {
+
+    @Test
+    fun create() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val manifoldelsetService = client.manifoldelset()
+
+        manifoldelsetService.create(
+            ManifoldelsetCreateParams.builder()
+                .classificationMarking("U")
+                .dataMode(ManifoldelsetCreateParams.DataMode.TEST)
+                .epoch(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
+                .idManifold("REF-MANIFOLD-ID")
+                .source("Bluestaq")
+                .tmpSatNo(10)
+                .id("MANIFOLDELSET-ID")
+                .apogee(10.23)
+                .argOfPerigee(10.23)
+                .bStar(10.23)
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .eccentricity(0.5)
+                .inclination(90.23)
+                .line1("line1")
+                .line2("line2")
+                .meanAnomaly(10.23)
+                .meanMotion(10.23)
+                .meanMotionDDot(10.23)
+                .meanMotionDot(10.23)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .perigee(10.23)
+                .period(10.23)
+                .raan(10.23)
+                .revNo(123)
+                .semiMajorAxis(10.23)
+                .build()
+        )
+    }
+
+    @Test
+    fun update() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val manifoldelsetService = client.manifoldelset()
+
+        manifoldelsetService.update(
+            ManifoldelsetUpdateParams.builder()
+                .pathId("id")
+                .classificationMarking("U")
+                .dataMode(ManifoldelsetUpdateParams.DataMode.TEST)
+                .epoch(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
+                .idManifold("REF-MANIFOLD-ID")
+                .source("Bluestaq")
+                .tmpSatNo(10)
+                .bodyId("MANIFOLDELSET-ID")
+                .apogee(10.23)
+                .argOfPerigee(10.23)
+                .bStar(10.23)
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .eccentricity(0.5)
+                .inclination(90.23)
+                .line1("line1")
+                .line2("line2")
+                .meanAnomaly(10.23)
+                .meanMotion(10.23)
+                .meanMotionDDot(10.23)
+                .meanMotionDot(10.23)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .perigee(10.23)
+                .period(10.23)
+                .raan(10.23)
+                .revNo(123)
+                .semiMajorAxis(10.23)
+                .build()
+        )
+    }
+
+    @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val manifoldelsetService = client.manifoldelset()
+
+        val page =
+            manifoldelsetService.list(
+                ManifoldelsetListParams.builder()
+                    .epoch(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .build()
+            )
+
+        page.items().forEach { it.validate() }
+    }
+
+    @Test
+    fun delete() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val manifoldelsetService = client.manifoldelset()
+
+        manifoldelsetService.delete("id")
+    }
+
+    @Test
+    fun count() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val manifoldelsetService = client.manifoldelset()
+
+        manifoldelsetService.count(
+            ManifoldelsetCountParams.builder()
+                .epoch(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .firstResult(0L)
+                .maxResults(0L)
+                .build()
+        )
+    }
+
+    @Test
+    fun createBulk() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val manifoldelsetService = client.manifoldelset()
+
+        manifoldelsetService.createBulk(
+            ManifoldelsetCreateBulkParams.builder()
+                .addBody(
+                    ManifoldelsetCreateBulkParams.Body.builder()
+                        .classificationMarking("U")
+                        .dataMode(ManifoldelsetCreateBulkParams.Body.DataMode.TEST)
+                        .epoch(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
+                        .idManifold("REF-MANIFOLD-ID")
+                        .source("Bluestaq")
+                        .tmpSatNo(10)
+                        .id("MANIFOLDELSET-ID")
+                        .apogee(10.23)
+                        .argOfPerigee(10.23)
+                        .bStar(10.23)
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .eccentricity(0.5)
+                        .inclination(90.23)
+                        .line1("line1")
+                        .line2("line2")
+                        .meanAnomaly(10.23)
+                        .meanMotion(10.23)
+                        .meanMotionDDot(10.23)
+                        .meanMotionDot(10.23)
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .perigee(10.23)
+                        .period(10.23)
+                        .raan(10.23)
+                        .revNo(123)
+                        .semiMajorAxis(10.23)
+                        .build()
+                )
+                .build()
+        )
+    }
+
+    @Test
+    fun get() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val manifoldelsetService = client.manifoldelset()
+
+        val manifoldelset =
+            manifoldelsetService.get(
+                ManifoldelsetGetParams.builder().id("id").firstResult(0L).maxResults(0L).build()
+            )
+
+        manifoldelset.validate()
+    }
+
+    @Test
+    fun queryhelp() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val manifoldelsetService = client.manifoldelset()
+
+        val response = manifoldelsetService.queryhelp()
+
+        response.validate()
+    }
+
+    @Test
+    fun tuple() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val manifoldelsetService = client.manifoldelset()
+
+        val response =
+            manifoldelsetService.tuple(
+                ManifoldelsetTupleParams.builder()
+                    .columns("columns")
+                    .epoch(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .firstResult(0L)
+                    .maxResults(0L)
+                    .build()
+            )
+
+        response.forEach { it.validate() }
+    }
+}

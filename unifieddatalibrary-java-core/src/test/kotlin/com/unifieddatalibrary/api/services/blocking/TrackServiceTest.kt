@@ -1,0 +1,283 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.services.blocking
+
+import com.unifieddatalibrary.api.TestServerExtension
+import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
+import com.unifieddatalibrary.api.models.track.TrackCountParams
+import com.unifieddatalibrary.api.models.track.TrackCreateBulkParams
+import com.unifieddatalibrary.api.models.track.TrackListParams
+import com.unifieddatalibrary.api.models.track.TrackTupleParams
+import com.unifieddatalibrary.api.models.track.TrackUnvalidatedPublishParams
+import java.time.OffsetDateTime
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+
+@ExtendWith(TestServerExtension::class)
+internal class TrackServiceTest {
+
+    @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val trackService = client.track()
+
+        val page =
+            trackService.list(
+                TrackListParams.builder()
+                    .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .build()
+            )
+
+        page.items().forEach { it.validate() }
+    }
+
+    @Test
+    fun count() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val trackService = client.track()
+
+        trackService.count(
+            TrackCountParams.builder()
+                .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .firstResult(0L)
+                .maxResults(0L)
+                .build()
+        )
+    }
+
+    @Test
+    fun createBulk() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val trackService = client.track()
+
+        trackService.createBulk(
+            TrackCreateBulkParams.builder()
+                .addBody(
+                    TrackCreateBulkParams.Body.builder()
+                        .classificationMarking("U")
+                        .dataMode(TrackCreateBulkParams.Body.DataMode.TEST)
+                        .source("Bluestaq")
+                        .ts(OffsetDateTime.parse("2021-06-07T14:17:39.653043Z"))
+                        .id("TRACK-ID")
+                        .alt(1.23)
+                        .asset("asset")
+                        .assetNat("US")
+                        .attitude(listOf(10.0, 0.1, 1.0))
+                        .attitudeRate(listOf(0.0003, 1e-7, 0.00003))
+                        .callSign("callSign")
+                        .cntct("Contact Info")
+                        .course(88.37)
+                        .cov(listOf(1.1, 2.2, 3.3))
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .ecefAcc(listOf(1.23, 2.34, 3.45))
+                        .ecefPos(listOf(1.23, 2.34, 3.45))
+                        .ecefVel(listOf(1.23, 2.34, 3.45))
+                        .eNuAcc(listOf(0.0003, 0.014, 0.0003))
+                        .eNuPos(listOf(1.23, 2.34, 3.45))
+                        .eNuVel(listOf(1.23, 2.34, 3.45))
+                        .env("LAND")
+                        .envConf(1.23)
+                        .errEllp(listOf(1.23, 2.34, 3.45))
+                        .hdng(19.7)
+                        .identAmp("ZOMBIE")
+                        .identCred(0)
+                        .identRel(0)
+                        .jSeries("J12.5")
+                        .lat(1.23)
+                        .lcAcc(listOf(1.23, 2.34, 3.45))
+                        .lco(listOf(1.23, 2.34, 3.45))
+                        .lcPos(listOf(1.23, 2.34, 3.45))
+                        .lcs(listOf(1.23, 2.34, 3.45))
+                        .lcVel(listOf(1.23, 2.34, 3.45))
+                        .lon(1.23)
+                        .m1(1234)
+                        .m1v(1)
+                        .m2(1234)
+                        .m2v(1)
+                        .m3a(2636)
+                        .m3av(1)
+                        .modType("MASINT")
+                        .msgTs(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
+                        .msnId("msnId")
+                        .multiSource(true)
+                        .objAct("HOLDING")
+                        .objId("objId")
+                        .objIdent("FRIEND")
+                        .objNat("NATO")
+                        .objPlat("COMBAT_VEHICLE")
+                        .objSpec("LIGHT_TANK")
+                        .objType("WATERCRAFT")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .sen("sen")
+                        .senQual("senQual")
+                        .sourceDl("AXE")
+                        .spd(1.23)
+                        .addSrcId("f7c70cc8-f9b7-4467-b4ad-3904e360e842")
+                        .addSrcId("1da3fab000014e3133709830937387405")
+                        .addSrcTyp("MTI")
+                        .addSrcTyp("POI")
+                        .strength(14)
+                        .addTag("TAG1")
+                        .addTag("TAG2")
+                        .trkConf(1.23)
+                        .trkId("trkId")
+                        .trkItmId("trkItmId")
+                        .trkNum("trkNum")
+                        .trkPtType("MEASURED")
+                        .trkQual(0)
+                        .trkStat("INITIATING")
+                        .build()
+                )
+                .build()
+        )
+    }
+
+    @Test
+    fun queryhelp() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val trackService = client.track()
+
+        val response = trackService.queryhelp()
+
+        response.validate()
+    }
+
+    @Test
+    fun tuple() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val trackService = client.track()
+
+        val trackFulls =
+            trackService.tuple(
+                TrackTupleParams.builder()
+                    .columns("columns")
+                    .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .firstResult(0L)
+                    .maxResults(0L)
+                    .build()
+            )
+
+        trackFulls.forEach { it.validate() }
+    }
+
+    @Test
+    fun unvalidatedPublish() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val trackService = client.track()
+
+        trackService.unvalidatedPublish(
+            TrackUnvalidatedPublishParams.builder()
+                .addBody(
+                    TrackUnvalidatedPublishParams.Body.builder()
+                        .classificationMarking("U")
+                        .dataMode(TrackUnvalidatedPublishParams.Body.DataMode.TEST)
+                        .source("Bluestaq")
+                        .ts(OffsetDateTime.parse("2021-06-07T14:17:39.653043Z"))
+                        .id("TRACK-ID")
+                        .alt(1.23)
+                        .asset("asset")
+                        .assetNat("US")
+                        .attitude(listOf(10.0, 0.1, 1.0))
+                        .attitudeRate(listOf(0.0003, 1e-7, 0.00003))
+                        .callSign("callSign")
+                        .cntct("Contact Info")
+                        .course(88.37)
+                        .cov(listOf(1.1, 2.2, 3.3))
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .ecefAcc(listOf(1.23, 2.34, 3.45))
+                        .ecefPos(listOf(1.23, 2.34, 3.45))
+                        .ecefVel(listOf(1.23, 2.34, 3.45))
+                        .eNuAcc(listOf(0.0003, 0.014, 0.0003))
+                        .eNuPos(listOf(1.23, 2.34, 3.45))
+                        .eNuVel(listOf(1.23, 2.34, 3.45))
+                        .env("LAND")
+                        .envConf(1.23)
+                        .errEllp(listOf(1.23, 2.34, 3.45))
+                        .hdng(19.7)
+                        .identAmp("ZOMBIE")
+                        .identCred(0)
+                        .identRel(0)
+                        .jSeries("J12.5")
+                        .lat(1.23)
+                        .lcAcc(listOf(1.23, 2.34, 3.45))
+                        .lco(listOf(1.23, 2.34, 3.45))
+                        .lcPos(listOf(1.23, 2.34, 3.45))
+                        .lcs(listOf(1.23, 2.34, 3.45))
+                        .lcVel(listOf(1.23, 2.34, 3.45))
+                        .lon(1.23)
+                        .m1(1234)
+                        .m1v(1)
+                        .m2(1234)
+                        .m2v(1)
+                        .m3a(2636)
+                        .m3av(1)
+                        .modType("MASINT")
+                        .msgTs(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
+                        .msnId("msnId")
+                        .multiSource(true)
+                        .objAct("HOLDING")
+                        .objId("objId")
+                        .objIdent("FRIEND")
+                        .objNat("NATO")
+                        .objPlat("COMBAT_VEHICLE")
+                        .objSpec("LIGHT_TANK")
+                        .objType("WATERCRAFT")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .sen("sen")
+                        .senQual("senQual")
+                        .sourceDl("AXE")
+                        .spd(1.23)
+                        .addSrcId("f7c70cc8-f9b7-4467-b4ad-3904e360e842")
+                        .addSrcId("1da3fab000014e3133709830937387405")
+                        .addSrcTyp("MTI")
+                        .addSrcTyp("POI")
+                        .strength(14)
+                        .addTag("TAG1")
+                        .addTag("TAG2")
+                        .trkConf(1.23)
+                        .trkId("trkId")
+                        .trkItmId("trkItmId")
+                        .trkNum("trkNum")
+                        .trkPtType("MEASURED")
+                        .trkQual(0)
+                        .trkStat("INITIATING")
+                        .build()
+                )
+                .build()
+        )
+    }
+}

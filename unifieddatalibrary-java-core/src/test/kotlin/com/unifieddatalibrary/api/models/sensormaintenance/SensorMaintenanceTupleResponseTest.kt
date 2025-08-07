@@ -1,0 +1,142 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.sensormaintenance
+
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import com.unifieddatalibrary.api.core.jsonMapper
+import java.time.OffsetDateTime
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+
+internal class SensorMaintenanceTupleResponseTest {
+
+    @Test
+    fun create() {
+        val sensorMaintenanceTupleResponse =
+            SensorMaintenanceTupleResponse.builder()
+                .classificationMarking("U")
+                .dataMode(SensorMaintenanceTupleResponse.DataMode.TEST)
+                .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                .siteCode("site01")
+                .source("Bluestaq")
+                .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                .id("SENSORMAINTENANCE-ID")
+                .activity("Activity Description")
+                .approver("approver")
+                .changer("changer")
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .duration("128:16:52")
+                .eowId("eowId")
+                .equipStatus("FMC")
+                .idSensor("idSensor")
+                .impactedFaces("impactedFaces")
+                .inactiveDate(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .lineNumber("lineNumber")
+                .mdOpsCap("R")
+                .mwOpsCap("G")
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .priority("low")
+                .recall("128:16:52")
+                .rel("rel")
+                .remark("Remarks")
+                .requestor("requestor")
+                .resource("resource")
+                .rev("rev")
+                .ssOpsCap("Y")
+                .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .updatedBy("some.user")
+                .build()
+
+        assertThat(sensorMaintenanceTupleResponse.classificationMarking()).isEqualTo("U")
+        assertThat(sensorMaintenanceTupleResponse.dataMode())
+            .isEqualTo(SensorMaintenanceTupleResponse.DataMode.TEST)
+        assertThat(sensorMaintenanceTupleResponse.endTime())
+            .isEqualTo(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+        assertThat(sensorMaintenanceTupleResponse.siteCode()).isEqualTo("site01")
+        assertThat(sensorMaintenanceTupleResponse.source()).isEqualTo("Bluestaq")
+        assertThat(sensorMaintenanceTupleResponse.startTime())
+            .isEqualTo(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+        assertThat(sensorMaintenanceTupleResponse.id()).contains("SENSORMAINTENANCE-ID")
+        assertThat(sensorMaintenanceTupleResponse.activity()).contains("Activity Description")
+        assertThat(sensorMaintenanceTupleResponse.approver()).contains("approver")
+        assertThat(sensorMaintenanceTupleResponse.changer()).contains("changer")
+        assertThat(sensorMaintenanceTupleResponse.createdAt())
+            .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(sensorMaintenanceTupleResponse.createdBy()).contains("some.user")
+        assertThat(sensorMaintenanceTupleResponse.duration()).contains("128:16:52")
+        assertThat(sensorMaintenanceTupleResponse.eowId()).contains("eowId")
+        assertThat(sensorMaintenanceTupleResponse.equipStatus()).contains("FMC")
+        assertThat(sensorMaintenanceTupleResponse.idSensor()).contains("idSensor")
+        assertThat(sensorMaintenanceTupleResponse.impactedFaces()).contains("impactedFaces")
+        assertThat(sensorMaintenanceTupleResponse.inactiveDate())
+            .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(sensorMaintenanceTupleResponse.lineNumber()).contains("lineNumber")
+        assertThat(sensorMaintenanceTupleResponse.mdOpsCap()).contains("R")
+        assertThat(sensorMaintenanceTupleResponse.mwOpsCap()).contains("G")
+        assertThat(sensorMaintenanceTupleResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
+        assertThat(sensorMaintenanceTupleResponse.origNetwork()).contains("ORIG")
+        assertThat(sensorMaintenanceTupleResponse.priority()).contains("low")
+        assertThat(sensorMaintenanceTupleResponse.recall()).contains("128:16:52")
+        assertThat(sensorMaintenanceTupleResponse.rel()).contains("rel")
+        assertThat(sensorMaintenanceTupleResponse.remark()).contains("Remarks")
+        assertThat(sensorMaintenanceTupleResponse.requestor()).contains("requestor")
+        assertThat(sensorMaintenanceTupleResponse.resource()).contains("resource")
+        assertThat(sensorMaintenanceTupleResponse.rev()).contains("rev")
+        assertThat(sensorMaintenanceTupleResponse.ssOpsCap()).contains("Y")
+        assertThat(sensorMaintenanceTupleResponse.updatedAt())
+            .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(sensorMaintenanceTupleResponse.updatedBy()).contains("some.user")
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val sensorMaintenanceTupleResponse =
+            SensorMaintenanceTupleResponse.builder()
+                .classificationMarking("U")
+                .dataMode(SensorMaintenanceTupleResponse.DataMode.TEST)
+                .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                .siteCode("site01")
+                .source("Bluestaq")
+                .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                .id("SENSORMAINTENANCE-ID")
+                .activity("Activity Description")
+                .approver("approver")
+                .changer("changer")
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .duration("128:16:52")
+                .eowId("eowId")
+                .equipStatus("FMC")
+                .idSensor("idSensor")
+                .impactedFaces("impactedFaces")
+                .inactiveDate(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .lineNumber("lineNumber")
+                .mdOpsCap("R")
+                .mwOpsCap("G")
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .priority("low")
+                .recall("128:16:52")
+                .rel("rel")
+                .remark("Remarks")
+                .requestor("requestor")
+                .resource("resource")
+                .rev("rev")
+                .ssOpsCap("Y")
+                .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .updatedBy("some.user")
+                .build()
+
+        val roundtrippedSensorMaintenanceTupleResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(sensorMaintenanceTupleResponse),
+                jacksonTypeRef<SensorMaintenanceTupleResponse>(),
+            )
+
+        assertThat(roundtrippedSensorMaintenanceTupleResponse)
+            .isEqualTo(sensorMaintenanceTupleResponse)
+    }
+}

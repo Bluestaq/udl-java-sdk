@@ -1,0 +1,1189 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.beamcontours
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.unifieddatalibrary.api.core.Enum
+import com.unifieddatalibrary.api.core.ExcludeMissing
+import com.unifieddatalibrary.api.core.JsonField
+import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
+import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import java.time.OffsetDateTime
+import java.util.Collections
+import java.util.Objects
+import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
+
+/**
+ * Describes the beam contour associated with a beam entity. Beam contours are the geographic
+ * representation of the relative gain levels of beam power off of the maximum gain boresight
+ * points.
+ */
+class BeamcontourAbridged
+private constructor(
+    private val classificationMarking: JsonField<String>,
+    private val dataMode: JsonField<DataMode>,
+    private val idBeam: JsonField<String>,
+    private val source: JsonField<String>,
+    private val type: JsonField<Type>,
+    private val id: JsonField<String>,
+    private val contourIdx: JsonField<Long>,
+    private val createdAt: JsonField<OffsetDateTime>,
+    private val createdBy: JsonField<String>,
+    private val gain: JsonField<Double>,
+    private val geographyJson: JsonField<String>,
+    private val geographyNdims: JsonField<Int>,
+    private val geographySrid: JsonField<Int>,
+    private val geographyText: JsonField<String>,
+    private val geographyType: JsonField<String>,
+    private val origin: JsonField<String>,
+    private val origNetwork: JsonField<String>,
+    private val regionName: JsonField<String>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
+) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
+        @JsonProperty("idBeam") @ExcludeMissing idBeam: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("type") @ExcludeMissing type: JsonField<Type> = JsonMissing.of(),
+        @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("contourIdx") @ExcludeMissing contourIdx: JsonField<Long> = JsonMissing.of(),
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("gain") @ExcludeMissing gain: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("geographyJson")
+        @ExcludeMissing
+        geographyJson: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("geographyNdims")
+        @ExcludeMissing
+        geographyNdims: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("geographySrid")
+        @ExcludeMissing
+        geographySrid: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("geographyText")
+        @ExcludeMissing
+        geographyText: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("geographyType")
+        @ExcludeMissing
+        geographyType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origNetwork")
+        @ExcludeMissing
+        origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("regionName") @ExcludeMissing regionName: JsonField<String> = JsonMissing.of(),
+    ) : this(
+        classificationMarking,
+        dataMode,
+        idBeam,
+        source,
+        type,
+        id,
+        contourIdx,
+        createdAt,
+        createdBy,
+        gain,
+        geographyJson,
+        geographyNdims,
+        geographySrid,
+        geographyText,
+        geographyType,
+        origin,
+        origNetwork,
+        regionName,
+        mutableMapOf(),
+    )
+
+    /**
+     * Classification marking of the data in IC/CAPCO Portion-marked format.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
+
+    /**
+     * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+     *
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
+     *
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
+     *
+     * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+     *
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun dataMode(): DataMode = dataMode.getRequired("dataMode")
+
+    /**
+     * ID of the beam.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun idBeam(): String = idBeam.getRequired("idBeam")
+
+    /**
+     * Source of the data.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun source(): String = source.getRequired("source")
+
+    /**
+     * The type of object represented in this record (BORESIGHT, CONTOUR, SVC AREA). Boresight
+     * refers to the point of maximum/peak gain, and should not be confused with the 'aim point' of
+     * the related beam. Gain contours are regions of coverage referenced to the relative gain of
+     * the related beam. Service Areas are composed of one or more service regions, with each region
+     * being either discrete point(s) or a continuous contour.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun type(): Type = type.getRequired("type")
+
+    /**
+     * Unique identifier of the record, auto-generated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun id(): Optional<String> = id.getOptional("id")
+
+    /**
+     * The index number of this contour. The value is required if type = CONTOUR.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun contourIdx(): Optional<Long> = contourIdx.getOptional("contourIdx")
+
+    /**
+     * Time the row was created in the database, auto-populated by the system, example =
+     * 2018-01-01T16:00:00.123Z.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
+
+    /**
+     * Application user who created the row in the database, auto-populated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
+
+    /**
+     * The relative gain level in dB associated with this boresight or contour. Gain does not apply
+     * to service area records. The value is required if type = BORESIGHT or CONTOUR.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun gain(): Optional<Double> = gain.getOptional("gain")
+
+    /**
+     * Geographical region or polygon (lat/lon pairs), as depicted by the GeoJSON representation of
+     * the geometry/geography, of the image as projected on the ground. GeoJSON Reference:
+     * https://geojson.org/. Ignored if included with a POST or PUT request that also specifies a
+     * valid 'area' or 'atext' field.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun geographyJson(): Optional<String> = geographyJson.getOptional("geographyJson")
+
+    /**
+     * Number of dimensions of the geometry depicted by region.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun geographyNdims(): Optional<Int> = geographyNdims.getOptional("geographyNdims")
+
+    /**
+     * Geographical spatial_ref_sys for region.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun geographySrid(): Optional<Int> = geographySrid.getOptional("geographySrid")
+
+    /**
+     * Geographical region or polygon (lon/lat pairs), as depicted by the Well-Known Text
+     * representation of the geometry/geography, of the image as projected on the ground. WKT
+     * reference: https://www.opengeospatial.org/standards/wkt-crs. Ignored if included with a POST
+     * or PUT request that also specifies a valid 'area' field.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun geographyText(): Optional<String> = geographyText.getOptional("geographyText")
+
+    /**
+     * Type of region as projected.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun geographyType(): Optional<String> = geographyType.getOptional("geographyType")
+
+    /**
+     * Originating system or organization which produced the data, if different from the source. The
+     * origin may be different than the source if the source was a mediating system which forwarded
+     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origin(): Optional<String> = origin.getOptional("origin")
+
+    /**
+     * The originating source network on which this record was created, auto-populated by the
+     * system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
+
+    /**
+     * The region name within the service area.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun regionName(): Optional<String> = regionName.getOptional("regionName")
+
+    /**
+     * Returns the raw JSON value of [classificationMarking].
+     *
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("classificationMarking")
+    @ExcludeMissing
+    fun _classificationMarking(): JsonField<String> = classificationMarking
+
+    /**
+     * Returns the raw JSON value of [dataMode].
+     *
+     * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+
+    /**
+     * Returns the raw JSON value of [idBeam].
+     *
+     * Unlike [idBeam], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("idBeam") @ExcludeMissing fun _idBeam(): JsonField<String> = idBeam
+
+    /**
+     * Returns the raw JSON value of [source].
+     *
+     * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+
+    /**
+     * Returns the raw JSON value of [type].
+     *
+     * Unlike [type], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("type") @ExcludeMissing fun _type(): JsonField<Type> = type
+
+    /**
+     * Returns the raw JSON value of [id].
+     *
+     * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+
+    /**
+     * Returns the raw JSON value of [contourIdx].
+     *
+     * Unlike [contourIdx], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("contourIdx") @ExcludeMissing fun _contourIdx(): JsonField<Long> = contourIdx
+
+    /**
+     * Returns the raw JSON value of [createdAt].
+     *
+     * Unlike [createdAt], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("createdAt")
+    @ExcludeMissing
+    fun _createdAt(): JsonField<OffsetDateTime> = createdAt
+
+    /**
+     * Returns the raw JSON value of [createdBy].
+     *
+     * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+
+    /**
+     * Returns the raw JSON value of [gain].
+     *
+     * Unlike [gain], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("gain") @ExcludeMissing fun _gain(): JsonField<Double> = gain
+
+    /**
+     * Returns the raw JSON value of [geographyJson].
+     *
+     * Unlike [geographyJson], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("geographyJson")
+    @ExcludeMissing
+    fun _geographyJson(): JsonField<String> = geographyJson
+
+    /**
+     * Returns the raw JSON value of [geographyNdims].
+     *
+     * Unlike [geographyNdims], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("geographyNdims")
+    @ExcludeMissing
+    fun _geographyNdims(): JsonField<Int> = geographyNdims
+
+    /**
+     * Returns the raw JSON value of [geographySrid].
+     *
+     * Unlike [geographySrid], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("geographySrid")
+    @ExcludeMissing
+    fun _geographySrid(): JsonField<Int> = geographySrid
+
+    /**
+     * Returns the raw JSON value of [geographyText].
+     *
+     * Unlike [geographyText], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("geographyText")
+    @ExcludeMissing
+    fun _geographyText(): JsonField<String> = geographyText
+
+    /**
+     * Returns the raw JSON value of [geographyType].
+     *
+     * Unlike [geographyType], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("geographyType")
+    @ExcludeMissing
+    fun _geographyType(): JsonField<String> = geographyType
+
+    /**
+     * Returns the raw JSON value of [origin].
+     *
+     * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+
+    /**
+     * Returns the raw JSON value of [origNetwork].
+     *
+     * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
+
+    /**
+     * Returns the raw JSON value of [regionName].
+     *
+     * Unlike [regionName], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("regionName") @ExcludeMissing fun _regionName(): JsonField<String> = regionName
+
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
+    @JsonAnyGetter
+    @ExcludeMissing
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
+
+    fun toBuilder() = Builder().from(this)
+
+    companion object {
+
+        /**
+         * Returns a mutable builder for constructing an instance of [BeamcontourAbridged].
+         *
+         * The following fields are required:
+         * ```java
+         * .classificationMarking()
+         * .dataMode()
+         * .idBeam()
+         * .source()
+         * .type()
+         * ```
+         */
+        @JvmStatic fun builder() = Builder()
+    }
+
+    /** A builder for [BeamcontourAbridged]. */
+    class Builder internal constructor() {
+
+        private var classificationMarking: JsonField<String>? = null
+        private var dataMode: JsonField<DataMode>? = null
+        private var idBeam: JsonField<String>? = null
+        private var source: JsonField<String>? = null
+        private var type: JsonField<Type>? = null
+        private var id: JsonField<String> = JsonMissing.of()
+        private var contourIdx: JsonField<Long> = JsonMissing.of()
+        private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var createdBy: JsonField<String> = JsonMissing.of()
+        private var gain: JsonField<Double> = JsonMissing.of()
+        private var geographyJson: JsonField<String> = JsonMissing.of()
+        private var geographyNdims: JsonField<Int> = JsonMissing.of()
+        private var geographySrid: JsonField<Int> = JsonMissing.of()
+        private var geographyText: JsonField<String> = JsonMissing.of()
+        private var geographyType: JsonField<String> = JsonMissing.of()
+        private var origin: JsonField<String> = JsonMissing.of()
+        private var origNetwork: JsonField<String> = JsonMissing.of()
+        private var regionName: JsonField<String> = JsonMissing.of()
+        private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+        @JvmSynthetic
+        internal fun from(beamcontourAbridged: BeamcontourAbridged) = apply {
+            classificationMarking = beamcontourAbridged.classificationMarking
+            dataMode = beamcontourAbridged.dataMode
+            idBeam = beamcontourAbridged.idBeam
+            source = beamcontourAbridged.source
+            type = beamcontourAbridged.type
+            id = beamcontourAbridged.id
+            contourIdx = beamcontourAbridged.contourIdx
+            createdAt = beamcontourAbridged.createdAt
+            createdBy = beamcontourAbridged.createdBy
+            gain = beamcontourAbridged.gain
+            geographyJson = beamcontourAbridged.geographyJson
+            geographyNdims = beamcontourAbridged.geographyNdims
+            geographySrid = beamcontourAbridged.geographySrid
+            geographyText = beamcontourAbridged.geographyText
+            geographyType = beamcontourAbridged.geographyType
+            origin = beamcontourAbridged.origin
+            origNetwork = beamcontourAbridged.origNetwork
+            regionName = beamcontourAbridged.regionName
+            additionalProperties = beamcontourAbridged.additionalProperties.toMutableMap()
+        }
+
+        /** Classification marking of the data in IC/CAPCO Portion-marked format. */
+        fun classificationMarking(classificationMarking: String) =
+            classificationMarking(JsonField.of(classificationMarking))
+
+        /**
+         * Sets [Builder.classificationMarking] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            this.classificationMarking = classificationMarking
+        }
+
+        /**
+         * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+         *
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
+         *
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
+         *
+         * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+         *
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
+         */
+        fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
+
+        /**
+         * Sets [Builder.dataMode] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+
+        /** ID of the beam. */
+        fun idBeam(idBeam: String) = idBeam(JsonField.of(idBeam))
+
+        /**
+         * Sets [Builder.idBeam] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.idBeam] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun idBeam(idBeam: JsonField<String>) = apply { this.idBeam = idBeam }
+
+        /** Source of the data. */
+        fun source(source: String) = source(JsonField.of(source))
+
+        /**
+         * Sets [Builder.source] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun source(source: JsonField<String>) = apply { this.source = source }
+
+        /**
+         * The type of object represented in this record (BORESIGHT, CONTOUR, SVC AREA). Boresight
+         * refers to the point of maximum/peak gain, and should not be confused with the 'aim point'
+         * of the related beam. Gain contours are regions of coverage referenced to the relative
+         * gain of the related beam. Service Areas are composed of one or more service regions, with
+         * each region being either discrete point(s) or a continuous contour.
+         */
+        fun type(type: Type) = type(JsonField.of(type))
+
+        /**
+         * Sets [Builder.type] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.type] with a well-typed [Type] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun type(type: JsonField<Type>) = apply { this.type = type }
+
+        /** Unique identifier of the record, auto-generated by the system. */
+        fun id(id: String) = id(JsonField.of(id))
+
+        /**
+         * Sets [Builder.id] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun id(id: JsonField<String>) = apply { this.id = id }
+
+        /** The index number of this contour. The value is required if type = CONTOUR. */
+        fun contourIdx(contourIdx: Long) = contourIdx(JsonField.of(contourIdx))
+
+        /**
+         * Sets [Builder.contourIdx] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.contourIdx] with a well-typed [Long] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun contourIdx(contourIdx: JsonField<Long>) = apply { this.contourIdx = contourIdx }
+
+        /**
+         * Time the row was created in the database, auto-populated by the system, example =
+         * 2018-01-01T16:00:00.123Z.
+         */
+        fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
+
+        /**
+         * Sets [Builder.createdAt] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
+
+        /** Application user who created the row in the database, auto-populated by the system. */
+        fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
+
+        /**
+         * Sets [Builder.createdBy] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+
+        /**
+         * The relative gain level in dB associated with this boresight or contour. Gain does not
+         * apply to service area records. The value is required if type = BORESIGHT or CONTOUR.
+         */
+        fun gain(gain: Double) = gain(JsonField.of(gain))
+
+        /**
+         * Sets [Builder.gain] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.gain] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun gain(gain: JsonField<Double>) = apply { this.gain = gain }
+
+        /**
+         * Geographical region or polygon (lat/lon pairs), as depicted by the GeoJSON representation
+         * of the geometry/geography, of the image as projected on the ground. GeoJSON Reference:
+         * https://geojson.org/. Ignored if included with a POST or PUT request that also specifies
+         * a valid 'area' or 'atext' field.
+         */
+        fun geographyJson(geographyJson: String) = geographyJson(JsonField.of(geographyJson))
+
+        /**
+         * Sets [Builder.geographyJson] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.geographyJson] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun geographyJson(geographyJson: JsonField<String>) = apply {
+            this.geographyJson = geographyJson
+        }
+
+        /** Number of dimensions of the geometry depicted by region. */
+        fun geographyNdims(geographyNdims: Int) = geographyNdims(JsonField.of(geographyNdims))
+
+        /**
+         * Sets [Builder.geographyNdims] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.geographyNdims] with a well-typed [Int] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun geographyNdims(geographyNdims: JsonField<Int>) = apply {
+            this.geographyNdims = geographyNdims
+        }
+
+        /** Geographical spatial_ref_sys for region. */
+        fun geographySrid(geographySrid: Int) = geographySrid(JsonField.of(geographySrid))
+
+        /**
+         * Sets [Builder.geographySrid] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.geographySrid] with a well-typed [Int] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun geographySrid(geographySrid: JsonField<Int>) = apply {
+            this.geographySrid = geographySrid
+        }
+
+        /**
+         * Geographical region or polygon (lon/lat pairs), as depicted by the Well-Known Text
+         * representation of the geometry/geography, of the image as projected on the ground. WKT
+         * reference: https://www.opengeospatial.org/standards/wkt-crs. Ignored if included with a
+         * POST or PUT request that also specifies a valid 'area' field.
+         */
+        fun geographyText(geographyText: String) = geographyText(JsonField.of(geographyText))
+
+        /**
+         * Sets [Builder.geographyText] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.geographyText] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun geographyText(geographyText: JsonField<String>) = apply {
+            this.geographyText = geographyText
+        }
+
+        /** Type of region as projected. */
+        fun geographyType(geographyType: String) = geographyType(JsonField.of(geographyType))
+
+        /**
+         * Sets [Builder.geographyType] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.geographyType] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun geographyType(geographyType: JsonField<String>) = apply {
+            this.geographyType = geographyType
+        }
+
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         */
+        fun origin(origin: String) = origin(JsonField.of(origin))
+
+        /**
+         * Sets [Builder.origin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         */
+        fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
+
+        /**
+         * Sets [Builder.origNetwork] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
+
+        /** The region name within the service area. */
+        fun regionName(regionName: String) = regionName(JsonField.of(regionName))
+
+        /**
+         * Sets [Builder.regionName] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.regionName] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun regionName(regionName: JsonField<String>) = apply { this.regionName = regionName }
+
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
+
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
+
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
+
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
+
+        /**
+         * Returns an immutable instance of [BeamcontourAbridged].
+         *
+         * Further updates to this [Builder] will not mutate the returned instance.
+         *
+         * The following fields are required:
+         * ```java
+         * .classificationMarking()
+         * .dataMode()
+         * .idBeam()
+         * .source()
+         * .type()
+         * ```
+         *
+         * @throws IllegalStateException if any required field is unset.
+         */
+        fun build(): BeamcontourAbridged =
+            BeamcontourAbridged(
+                checkRequired("classificationMarking", classificationMarking),
+                checkRequired("dataMode", dataMode),
+                checkRequired("idBeam", idBeam),
+                checkRequired("source", source),
+                checkRequired("type", type),
+                id,
+                contourIdx,
+                createdAt,
+                createdBy,
+                gain,
+                geographyJson,
+                geographyNdims,
+                geographySrid,
+                geographyText,
+                geographyType,
+                origin,
+                origNetwork,
+                regionName,
+                additionalProperties.toMutableMap(),
+            )
+    }
+
+    private var validated: Boolean = false
+
+    fun validate(): BeamcontourAbridged = apply {
+        if (validated) {
+            return@apply
+        }
+
+        classificationMarking()
+        dataMode().validate()
+        idBeam()
+        source()
+        type().validate()
+        id()
+        contourIdx()
+        createdAt()
+        createdBy()
+        gain()
+        geographyJson()
+        geographyNdims()
+        geographySrid()
+        geographyText()
+        geographyType()
+        origin()
+        origNetwork()
+        regionName()
+        validated = true
+    }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: UnifieddatalibraryInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    @JvmSynthetic
+    internal fun validity(): Int =
+        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (idBeam.asKnown().isPresent) 1 else 0) +
+            (if (source.asKnown().isPresent) 1 else 0) +
+            (type.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (id.asKnown().isPresent) 1 else 0) +
+            (if (contourIdx.asKnown().isPresent) 1 else 0) +
+            (if (createdAt.asKnown().isPresent) 1 else 0) +
+            (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (gain.asKnown().isPresent) 1 else 0) +
+            (if (geographyJson.asKnown().isPresent) 1 else 0) +
+            (if (geographyNdims.asKnown().isPresent) 1 else 0) +
+            (if (geographySrid.asKnown().isPresent) 1 else 0) +
+            (if (geographyText.asKnown().isPresent) 1 else 0) +
+            (if (geographyType.asKnown().isPresent) 1 else 0) +
+            (if (origin.asKnown().isPresent) 1 else 0) +
+            (if (origNetwork.asKnown().isPresent) 1 else 0) +
+            (if (regionName.asKnown().isPresent) 1 else 0)
+
+    /**
+     * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+     *
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
+     *
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
+     *
+     * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+     *
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
+     */
+    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+
+        /**
+         * Returns this class instance's raw value.
+         *
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
+         */
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+        companion object {
+
+            @JvmField val REAL = of("REAL")
+
+            @JvmField val TEST = of("TEST")
+
+            @JvmField val SIMULATED = of("SIMULATED")
+
+            @JvmField val EXERCISE = of("EXERCISE")
+
+            @JvmStatic fun of(value: String) = DataMode(JsonField.of(value))
+        }
+
+        /** An enum containing [DataMode]'s known values. */
+        enum class Known {
+            REAL,
+            TEST,
+            SIMULATED,
+            EXERCISE,
+        }
+
+        /**
+         * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
+         *
+         * An instance of [DataMode] can contain an unknown value in a couple of cases:
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
+         * - It was constructed with an arbitrary value using the [of] method.
+         */
+        enum class Value {
+            REAL,
+            TEST,
+            SIMULATED,
+            EXERCISE,
+            /** An enum member indicating that [DataMode] was instantiated with an unknown value. */
+            _UNKNOWN,
+        }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
+         *
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
+         */
+        fun value(): Value =
+            when (this) {
+                REAL -> Value.REAL
+                TEST -> Value.TEST
+                SIMULATED -> Value.SIMULATED
+                EXERCISE -> Value.EXERCISE
+                else -> Value._UNKNOWN
+            }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value.
+         *
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
+         */
+        fun known(): Known =
+            when (this) {
+                REAL -> Known.REAL
+                TEST -> Known.TEST
+                SIMULATED -> Known.SIMULATED
+                EXERCISE -> Known.EXERCISE
+                else -> throw UnifieddatalibraryInvalidDataException("Unknown DataMode: $value")
+            }
+
+        /**
+         * Returns this class instance's primitive wire representation.
+         *
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
+         */
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
+
+        private var validated: Boolean = false
+
+        fun validate(): DataMode = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: UnifieddatalibraryInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+        }
+
+        override fun hashCode() = value.hashCode()
+
+        override fun toString() = value.toString()
+    }
+
+    /**
+     * The type of object represented in this record (BORESIGHT, CONTOUR, SVC AREA). Boresight
+     * refers to the point of maximum/peak gain, and should not be confused with the 'aim point' of
+     * the related beam. Gain contours are regions of coverage referenced to the relative gain of
+     * the related beam. Service Areas are composed of one or more service regions, with each region
+     * being either discrete point(s) or a continuous contour.
+     */
+    class Type @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+
+        /**
+         * Returns this class instance's raw value.
+         *
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
+         */
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+        companion object {
+
+            @JvmField val BORESIGHT = of("BORESIGHT")
+
+            @JvmField val CONTOUR = of("CONTOUR")
+
+            @JvmField val SVC_AREA = of("SVC AREA")
+
+            @JvmStatic fun of(value: String) = Type(JsonField.of(value))
+        }
+
+        /** An enum containing [Type]'s known values. */
+        enum class Known {
+            BORESIGHT,
+            CONTOUR,
+            SVC_AREA,
+        }
+
+        /**
+         * An enum containing [Type]'s known values, as well as an [_UNKNOWN] member.
+         *
+         * An instance of [Type] can contain an unknown value in a couple of cases:
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
+         * - It was constructed with an arbitrary value using the [of] method.
+         */
+        enum class Value {
+            BORESIGHT,
+            CONTOUR,
+            SVC_AREA,
+            /** An enum member indicating that [Type] was instantiated with an unknown value. */
+            _UNKNOWN,
+        }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
+         *
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
+         */
+        fun value(): Value =
+            when (this) {
+                BORESIGHT -> Value.BORESIGHT
+                CONTOUR -> Value.CONTOUR
+                SVC_AREA -> Value.SVC_AREA
+                else -> Value._UNKNOWN
+            }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value.
+         *
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
+         */
+        fun known(): Known =
+            when (this) {
+                BORESIGHT -> Known.BORESIGHT
+                CONTOUR -> Known.CONTOUR
+                SVC_AREA -> Known.SVC_AREA
+                else -> throw UnifieddatalibraryInvalidDataException("Unknown Type: $value")
+            }
+
+        /**
+         * Returns this class instance's primitive wire representation.
+         *
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
+         */
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
+
+        private var validated: Boolean = false
+
+        fun validate(): Type = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: UnifieddatalibraryInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+        }
+
+        override fun hashCode() = value.hashCode()
+
+        override fun toString() = value.toString()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        return /* spotless:off */ other is BeamcontourAbridged && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idBeam == other.idBeam && source == other.source && type == other.type && id == other.id && contourIdx == other.contourIdx && createdAt == other.createdAt && createdBy == other.createdBy && gain == other.gain && geographyJson == other.geographyJson && geographyNdims == other.geographyNdims && geographySrid == other.geographySrid && geographyText == other.geographyText && geographyType == other.geographyType && origin == other.origin && origNetwork == other.origNetwork && regionName == other.regionName && additionalProperties == other.additionalProperties /* spotless:on */
+    }
+
+    /* spotless:off */
+    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idBeam, source, type, id, contourIdx, createdAt, createdBy, gain, geographyJson, geographyNdims, geographySrid, geographyText, geographyType, origin, origNetwork, regionName, additionalProperties) }
+    /* spotless:on */
+
+    override fun hashCode(): Int = hashCode
+
+    override fun toString() =
+        "BeamcontourAbridged{classificationMarking=$classificationMarking, dataMode=$dataMode, idBeam=$idBeam, source=$source, type=$type, id=$id, contourIdx=$contourIdx, createdAt=$createdAt, createdBy=$createdBy, gain=$gain, geographyJson=$geographyJson, geographyNdims=$geographyNdims, geographySrid=$geographySrid, geographyText=$geographyText, geographyType=$geographyType, origin=$origin, origNetwork=$origNetwork, regionName=$regionName, additionalProperties=$additionalProperties}"
+}

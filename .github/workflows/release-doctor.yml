@@ -1,0 +1,25 @@
+name: Release Doctor
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  release_doctor:
+    name: release doctor
+    runs-on: ubuntu-latest
+    if: github.repository == 'Bluestaq/udl-java-sdk' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || startsWith(github.head_ref, 'release-please') || github.head_ref == 'next')
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check release environment
+        run: |
+          bash ./bin/check-release-environment
+        env:
+          STAINLESS_API_KEY: ${{ secrets.STAINLESS_API_KEY }}
+          SONATYPE_USERNAME: ${{ secrets.UNIFIEDDATALIBRARY_SONATYPE_USERNAME || secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.UNIFIEDDATALIBRARY_SONATYPE_PASSWORD || secrets.SONATYPE_PASSWORD }}
+          GPG_SIGNING_KEY: ${{ secrets.UNIFIEDDATALIBRARY_SONATYPE_GPG_SIGNING_KEY || secrets.GPG_SIGNING_KEY }}
+          GPG_SIGNING_PASSWORD: ${{ secrets.UNIFIEDDATALIBRARY_SONATYPE_GPG_SIGNING_PASSWORD || secrets.GPG_SIGNING_PASSWORD }}

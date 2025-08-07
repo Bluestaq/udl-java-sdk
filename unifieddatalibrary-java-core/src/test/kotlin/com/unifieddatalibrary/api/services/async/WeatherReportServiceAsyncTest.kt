@@ -1,0 +1,365 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.services.async
+
+import com.unifieddatalibrary.api.TestServerExtension
+import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
+import com.unifieddatalibrary.api.models.weatherreport.WeatherReportCountParams
+import com.unifieddatalibrary.api.models.weatherreport.WeatherReportCreateParams
+import com.unifieddatalibrary.api.models.weatherreport.WeatherReportGetParams
+import com.unifieddatalibrary.api.models.weatherreport.WeatherReportListParams
+import com.unifieddatalibrary.api.models.weatherreport.WeatherReportTupleParams
+import com.unifieddatalibrary.api.models.weatherreport.WeatherReportUnvalidatedPublishParams
+import java.time.OffsetDateTime
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+
+@ExtendWith(TestServerExtension::class)
+internal class WeatherReportServiceAsyncTest {
+
+    @Test
+    fun create() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val weatherReportServiceAsync = client.weatherReport()
+
+        val future =
+            weatherReportServiceAsync.create(
+                WeatherReportCreateParams.builder()
+                    .classificationMarking("U")
+                    .dataMode(WeatherReportCreateParams.DataMode.TEST)
+                    .lat(56.12)
+                    .lon(-156.6)
+                    .obTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                    .reportType("FORECAST")
+                    .source("Bluestaq")
+                    .id("WEATHER-REPORT-ID")
+                    .actWeather("NO STATEMENT")
+                    .agjson(
+                        "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
+                    )
+                    .alt(123.12)
+                    .andims(2L)
+                    .area(
+                        "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                    )
+                    .asrid(4326)
+                    .atext(
+                        "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                    )
+                    .atype("ST_Polygon")
+                    .barPress(101.2)
+                    .ccEvent(true)
+                    .addCloudCover("OVERCAST")
+                    .addCloudCover("BROKEN")
+                    .addCloudHght(1.2)
+                    .addCloudHght(2.2)
+                    .contrailHghtLower(123.123)
+                    .contrailHghtUpper(123.123)
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .dataLevel("MANDATORY")
+                    .dewPoint(15.6)
+                    .difRad(234.5)
+                    .dirDev(9.1)
+                    .enRouteWeather("THUNDERSTORMS")
+                    .externalId("GDSSMB022408301601304517")
+                    .externalLocationId("TMDS060AD4OG03CC")
+                    .forecastEndTime(OffsetDateTime.parse("2024-01-01T18:00:00.123Z"))
+                    .forecastStartTime(OffsetDateTime.parse("2024-01-01T16:00:00.123Z"))
+                    .geoPotentialAlt(1000.0)
+                    .hshear(3.8)
+                    .icao("KAFF")
+                    .icingLowerLimit(123.123)
+                    .icingUpperLimit(123.123)
+                    .idAirfield("8fb38d6d-a3de-45dd-8974-4e3ed73e9449")
+                    .idGroundImagery("GROUND-IMAGERY-ID")
+                    .idSensor("0129f577-e04c-441e-65ca-0a04a750bed9")
+                    .idSite("AIRFIELD-ID")
+                    .indexRefraction(1.1)
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("ORIG")
+                    .origSensorId("ORIGSENSOR-ID")
+                    .precipRate(3.4)
+                    .qnh(1234.456)
+                    .radVel(-0.04)
+                    .radVelBeam1(4.4)
+                    .radVelBeam2(-0.2)
+                    .radVelBeam3(-0.2)
+                    .radVelBeam4(11.4)
+                    .radVelBeam5(4.1)
+                    .rainHour(1.2)
+                    .rawMetar(
+                        "KXYZ 241456Z 19012G20KT 10SM FEW120 SCT200 BKN250 26/M04 A2981 RMK AO2 PK WND 19026/1420 SLP068 T02611039 51015"
+                    )
+                    .rawTaf(
+                        "KXYZ 051730Z 0518/0624 31008KT 3SM -SHRA BKN020 FM052300 30006KT 5SM -SHRA OVC030 PROB30 0604/0606 VRB20G35KT 1SM TSRA BKN015CB FM060600 25010KT 4SM -SHRA OVC050 TEMPO 0608/0611 2SM -SHRA OVC030 RMK NXT FCST BY 00Z="
+                    )
+                    .refRad(56.7)
+                    .relHumidity(34.456)
+                    .senalt(1.23)
+                    .senlat(12.456)
+                    .senlon(123.456)
+                    .soilMoisture(3.5)
+                    .soilTemp(22.4)
+                    .solarRad(1234.456)
+                    .addSrcId("e609a90d-4059-4043-9f1a-fd7b49a3e1d0")
+                    .addSrcId("c739fcdb-c0c9-43c0-97b6-bfc80d0ffd52")
+                    .addSrcTyp("SENSOR")
+                    .addSrcTyp("WEATHERDATA")
+                    .surroundingWeather("NO STATEMENT")
+                    .temperature(23.45)
+                    .visibility(1234.456)
+                    .vshear(3.8)
+                    .weatherAmp("NO STATEMENT")
+                    .weatherDesc("NO STATEMENT")
+                    .weatherId("WEATHER-ID")
+                    .weatherInt("NO STATEMENT")
+                    .windChill(15.6)
+                    .addWindCov(1.1)
+                    .addWindCov(2.2)
+                    .windDir(75.1234)
+                    .windDirAvg(57.1)
+                    .windDirPeak(78.4)
+                    .windDirPeak10(44.5)
+                    .windGust(10.23)
+                    .windGust10(13.2)
+                    .windSpd(1.23)
+                    .windSpdAvg(12.1)
+                    .windVar(false)
+                    .build()
+            )
+
+        val response = future.get()
+    }
+
+    @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val weatherReportServiceAsync = client.weatherReport()
+
+        val pageFuture =
+            weatherReportServiceAsync.list(
+                WeatherReportListParams.builder()
+                    .obTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .build()
+            )
+
+        val page = pageFuture.get()
+        page.items().forEach { it.validate() }
+    }
+
+    @Test
+    fun count() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val weatherReportServiceAsync = client.weatherReport()
+
+        val responseFuture =
+            weatherReportServiceAsync.count(
+                WeatherReportCountParams.builder()
+                    .obTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .firstResult(0L)
+                    .maxResults(0L)
+                    .build()
+            )
+
+        val response = responseFuture.get()
+    }
+
+    @Test
+    fun get() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val weatherReportServiceAsync = client.weatherReport()
+
+        val weatherReportFullFuture =
+            weatherReportServiceAsync.get(
+                WeatherReportGetParams.builder().id("id").firstResult(0L).maxResults(0L).build()
+            )
+
+        val weatherReportFull = weatherReportFullFuture.get()
+        weatherReportFull.validate()
+    }
+
+    @Test
+    fun queryhelp() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val weatherReportServiceAsync = client.weatherReport()
+
+        val responseFuture = weatherReportServiceAsync.queryhelp()
+
+        val response = responseFuture.get()
+        response.validate()
+    }
+
+    @Test
+    fun tuple() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val weatherReportServiceAsync = client.weatherReport()
+
+        val weatherReportFullsFuture =
+            weatherReportServiceAsync.tuple(
+                WeatherReportTupleParams.builder()
+                    .columns("columns")
+                    .obTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .firstResult(0L)
+                    .maxResults(0L)
+                    .build()
+            )
+
+        val weatherReportFulls = weatherReportFullsFuture.get()
+        weatherReportFulls.forEach { it.validate() }
+    }
+
+    @Test
+    fun unvalidatedPublish() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val weatherReportServiceAsync = client.weatherReport()
+
+        val future =
+            weatherReportServiceAsync.unvalidatedPublish(
+                WeatherReportUnvalidatedPublishParams.builder()
+                    .addBody(
+                        WeatherReportUnvalidatedPublishParams.Body.builder()
+                            .classificationMarking("U")
+                            .dataMode(WeatherReportUnvalidatedPublishParams.Body.DataMode.TEST)
+                            .lat(56.12)
+                            .lon(-156.6)
+                            .obTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                            .reportType("FORECAST")
+                            .source("Bluestaq")
+                            .id("WEATHER-REPORT-ID")
+                            .actWeather("NO STATEMENT")
+                            .agjson(
+                                "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
+                            )
+                            .alt(123.12)
+                            .andims(2L)
+                            .area(
+                                "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                            )
+                            .asrid(4326)
+                            .atext(
+                                "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                            )
+                            .atype("ST_Polygon")
+                            .barPress(101.2)
+                            .ccEvent(true)
+                            .addCloudCover("OVERCAST")
+                            .addCloudCover("BROKEN")
+                            .addCloudHght(1.2)
+                            .addCloudHght(2.2)
+                            .contrailHghtLower(123.123)
+                            .contrailHghtUpper(123.123)
+                            .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                            .createdBy("some.user")
+                            .dataLevel("MANDATORY")
+                            .dewPoint(15.6)
+                            .difRad(234.5)
+                            .dirDev(9.1)
+                            .enRouteWeather("THUNDERSTORMS")
+                            .externalId("GDSSMB022408301601304517")
+                            .externalLocationId("TMDS060AD4OG03CC")
+                            .forecastEndTime(OffsetDateTime.parse("2024-01-01T18:00:00.123Z"))
+                            .forecastStartTime(OffsetDateTime.parse("2024-01-01T16:00:00.123Z"))
+                            .geoPotentialAlt(1000.0)
+                            .hshear(3.8)
+                            .icao("KAFF")
+                            .icingLowerLimit(123.123)
+                            .icingUpperLimit(123.123)
+                            .idAirfield("8fb38d6d-a3de-45dd-8974-4e3ed73e9449")
+                            .idGroundImagery("GROUND-IMAGERY-ID")
+                            .idSensor("0129f577-e04c-441e-65ca-0a04a750bed9")
+                            .idSite("AIRFIELD-ID")
+                            .indexRefraction(1.1)
+                            .origin("THIRD_PARTY_DATASOURCE")
+                            .origNetwork("ORIG")
+                            .origSensorId("ORIGSENSOR-ID")
+                            .precipRate(3.4)
+                            .qnh(1234.456)
+                            .radVel(-0.04)
+                            .radVelBeam1(4.4)
+                            .radVelBeam2(-0.2)
+                            .radVelBeam3(-0.2)
+                            .radVelBeam4(11.4)
+                            .radVelBeam5(4.1)
+                            .rainHour(1.2)
+                            .rawMetar(
+                                "KXYZ 241456Z 19012G20KT 10SM FEW120 SCT200 BKN250 26/M04 A2981 RMK AO2 PK WND 19026/1420 SLP068 T02611039 51015"
+                            )
+                            .rawTaf(
+                                "KXYZ 051730Z 0518/0624 31008KT 3SM -SHRA BKN020 FM052300 30006KT 5SM -SHRA OVC030 PROB30 0604/0606 VRB20G35KT 1SM TSRA BKN015CB FM060600 25010KT 4SM -SHRA OVC050 TEMPO 0608/0611 2SM -SHRA OVC030 RMK NXT FCST BY 00Z="
+                            )
+                            .refRad(56.7)
+                            .relHumidity(34.456)
+                            .senalt(1.23)
+                            .senlat(12.456)
+                            .senlon(123.456)
+                            .soilMoisture(3.5)
+                            .soilTemp(22.4)
+                            .solarRad(1234.456)
+                            .addSrcId("e609a90d-4059-4043-9f1a-fd7b49a3e1d0")
+                            .addSrcId("c739fcdb-c0c9-43c0-97b6-bfc80d0ffd52")
+                            .addSrcTyp("SENSOR")
+                            .addSrcTyp("WEATHERDATA")
+                            .surroundingWeather("NO STATEMENT")
+                            .temperature(23.45)
+                            .visibility(1234.456)
+                            .vshear(3.8)
+                            .weatherAmp("NO STATEMENT")
+                            .weatherDesc("NO STATEMENT")
+                            .weatherId("WEATHER-ID")
+                            .weatherInt("NO STATEMENT")
+                            .windChill(15.6)
+                            .addWindCov(1.1)
+                            .addWindCov(2.2)
+                            .windDir(75.1234)
+                            .windDirAvg(57.1)
+                            .windDirPeak(78.4)
+                            .windDirPeak10(44.5)
+                            .windGust(10.23)
+                            .windGust10(13.2)
+                            .windSpd(1.23)
+                            .windSpdAvg(12.1)
+                            .windVar(false)
+                            .build()
+                    )
+                    .build()
+            )
+
+        val response = future.get()
+    }
+}

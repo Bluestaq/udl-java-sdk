@@ -1,0 +1,167 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models
+
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import com.unifieddatalibrary.api.core.jsonMapper
+import java.time.OffsetDateTime
+import kotlin.jvm.optionals.getOrNull
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+
+internal class BeamFullTest {
+
+    @Test
+    fun create() {
+        val beamFull =
+            BeamFull.builder()
+                .beamName("BEAMNAME-ID")
+                .classificationMarking("U")
+                .dataMode(BeamFull.DataMode.TEST)
+                .source("Bluestaq")
+                .id("BEAM-ID")
+                .addBeamContour(
+                    BeamcontourFull.builder()
+                        .classificationMarking("U")
+                        .dataMode(BeamcontourFull.DataMode.TEST)
+                        .idBeam("REF-BEAM-ID")
+                        .source("Bluestaq")
+                        .type(BeamcontourFull.Type.BORESIGHT)
+                        .id("BEAMCONTOUR-ID")
+                        .contourIdx(1L)
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .gain(17.1)
+                        .geography(
+                            "POLYGON((26.156175339112 67.3291113966927,26.0910220642717 67.2580009640721,26.6637992964562 67.1795862381682,26.730115808233 67.2501237475598,26.156175339112 67.3291113966927))"
+                        )
+                        .geographyJson(
+                            "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
+                        )
+                        .geographyNdims(2)
+                        .geographySrid(4326)
+                        .geographyText(
+                            "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                        )
+                        .geographyType("ST_Polygon")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .regionName("Example region name")
+                        .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .updatedBy("some.user")
+                        .build()
+                )
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .notes("Example notes")
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .updatedBy("some.user")
+                .build()
+
+        assertThat(beamFull.beamName()).isEqualTo("BEAMNAME-ID")
+        assertThat(beamFull.classificationMarking()).isEqualTo("U")
+        assertThat(beamFull.dataMode()).isEqualTo(BeamFull.DataMode.TEST)
+        assertThat(beamFull.source()).isEqualTo("Bluestaq")
+        assertThat(beamFull.id()).contains("BEAM-ID")
+        assertThat(beamFull.beamContours().getOrNull())
+            .containsExactly(
+                BeamcontourFull.builder()
+                    .classificationMarking("U")
+                    .dataMode(BeamcontourFull.DataMode.TEST)
+                    .idBeam("REF-BEAM-ID")
+                    .source("Bluestaq")
+                    .type(BeamcontourFull.Type.BORESIGHT)
+                    .id("BEAMCONTOUR-ID")
+                    .contourIdx(1L)
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .gain(17.1)
+                    .geography(
+                        "POLYGON((26.156175339112 67.3291113966927,26.0910220642717 67.2580009640721,26.6637992964562 67.1795862381682,26.730115808233 67.2501237475598,26.156175339112 67.3291113966927))"
+                    )
+                    .geographyJson(
+                        "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
+                    )
+                    .geographyNdims(2)
+                    .geographySrid(4326)
+                    .geographyText(
+                        "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                    )
+                    .geographyType("ST_Polygon")
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("ORIG")
+                    .regionName("Example region name")
+                    .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .updatedBy("some.user")
+                    .build()
+            )
+        assertThat(beamFull.createdAt()).contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(beamFull.createdBy()).contains("some.user")
+        assertThat(beamFull.notes()).contains("Example notes")
+        assertThat(beamFull.origin()).contains("THIRD_PARTY_DATASOURCE")
+        assertThat(beamFull.origNetwork()).contains("ORIG")
+        assertThat(beamFull.updatedAt()).contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(beamFull.updatedBy()).contains("some.user")
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val beamFull =
+            BeamFull.builder()
+                .beamName("BEAMNAME-ID")
+                .classificationMarking("U")
+                .dataMode(BeamFull.DataMode.TEST)
+                .source("Bluestaq")
+                .id("BEAM-ID")
+                .addBeamContour(
+                    BeamcontourFull.builder()
+                        .classificationMarking("U")
+                        .dataMode(BeamcontourFull.DataMode.TEST)
+                        .idBeam("REF-BEAM-ID")
+                        .source("Bluestaq")
+                        .type(BeamcontourFull.Type.BORESIGHT)
+                        .id("BEAMCONTOUR-ID")
+                        .contourIdx(1L)
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .gain(17.1)
+                        .geography(
+                            "POLYGON((26.156175339112 67.3291113966927,26.0910220642717 67.2580009640721,26.6637992964562 67.1795862381682,26.730115808233 67.2501237475598,26.156175339112 67.3291113966927))"
+                        )
+                        .geographyJson(
+                            "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
+                        )
+                        .geographyNdims(2)
+                        .geographySrid(4326)
+                        .geographyText(
+                            "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
+                        )
+                        .geographyType("ST_Polygon")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .regionName("Example region name")
+                        .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .updatedBy("some.user")
+                        .build()
+                )
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .notes("Example notes")
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .updatedBy("some.user")
+                .build()
+
+        val roundtrippedBeamFull =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(beamFull),
+                jacksonTypeRef<BeamFull>(),
+            )
+
+        assertThat(roundtrippedBeamFull).isEqualTo(beamFull)
+    }
+}

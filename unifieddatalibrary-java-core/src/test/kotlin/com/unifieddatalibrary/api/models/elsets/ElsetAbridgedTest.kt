@@ -1,0 +1,150 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.elsets
+
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import com.unifieddatalibrary.api.core.jsonMapper
+import java.time.OffsetDateTime
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+
+internal class ElsetAbridgedTest {
+
+    @Test
+    fun create() {
+        val elsetAbridged =
+            ElsetAbridged.builder()
+                .classificationMarking("U")
+                .dataMode(ElsetAbridged.DataMode.TEST)
+                .epoch(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                .source("Bluestaq")
+                .agom(0.0126)
+                .algorithm("Example algorithm")
+                .apogee(1.1)
+                .argOfPerigee(1.1)
+                .ballisticCoeff(0.00815)
+                .bStar(1.1)
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .descriptor("Example description")
+                .eccentricity(0.333)
+                .ephemType(1L)
+                .idElset("ELSET-ID")
+                .idOnOrbit("ONORBIT-ID")
+                .idOrbitDetermination("026dd511-8ba5-47d3-9909-836149f87686")
+                .inclination(45.1)
+                .line1("Example line1")
+                .line2("Example line2")
+                .meanAnomaly(179.1)
+                .meanMotion(1.1)
+                .meanMotionDDot(1.1)
+                .meanMotionDot(1.1)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .origObjectId("ORIGOBJECT-ID")
+                .perigee(1.1)
+                .period(1.1)
+                .raan(1.1)
+                .revNo(111)
+                .satNo(12)
+                .semiMajorAxis(1.1)
+                .sourceDl("AXE")
+                .transactionId("TRANSACTION-ID")
+                .uct(false)
+                .build()
+
+        assertThat(elsetAbridged.classificationMarking()).isEqualTo("U")
+        assertThat(elsetAbridged.dataMode()).isEqualTo(ElsetAbridged.DataMode.TEST)
+        assertThat(elsetAbridged.epoch())
+            .isEqualTo(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+        assertThat(elsetAbridged.source()).isEqualTo("Bluestaq")
+        assertThat(elsetAbridged.agom()).contains(0.0126)
+        assertThat(elsetAbridged.algorithm()).contains("Example algorithm")
+        assertThat(elsetAbridged.apogee()).contains(1.1)
+        assertThat(elsetAbridged.argOfPerigee()).contains(1.1)
+        assertThat(elsetAbridged.ballisticCoeff()).contains(0.00815)
+        assertThat(elsetAbridged.bStar()).contains(1.1)
+        assertThat(elsetAbridged.createdAt())
+            .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(elsetAbridged.createdBy()).contains("some.user")
+        assertThat(elsetAbridged.descriptor()).contains("Example description")
+        assertThat(elsetAbridged.eccentricity()).contains(0.333)
+        assertThat(elsetAbridged.ephemType()).contains(1L)
+        assertThat(elsetAbridged.idElset()).contains("ELSET-ID")
+        assertThat(elsetAbridged.idOnOrbit()).contains("ONORBIT-ID")
+        assertThat(elsetAbridged.idOrbitDetermination())
+            .contains("026dd511-8ba5-47d3-9909-836149f87686")
+        assertThat(elsetAbridged.inclination()).contains(45.1)
+        assertThat(elsetAbridged.line1()).contains("Example line1")
+        assertThat(elsetAbridged.line2()).contains("Example line2")
+        assertThat(elsetAbridged.meanAnomaly()).contains(179.1)
+        assertThat(elsetAbridged.meanMotion()).contains(1.1)
+        assertThat(elsetAbridged.meanMotionDDot()).contains(1.1)
+        assertThat(elsetAbridged.meanMotionDot()).contains(1.1)
+        assertThat(elsetAbridged.origin()).contains("THIRD_PARTY_DATASOURCE")
+        assertThat(elsetAbridged.origNetwork()).contains("ORIG")
+        assertThat(elsetAbridged.origObjectId()).contains("ORIGOBJECT-ID")
+        assertThat(elsetAbridged.perigee()).contains(1.1)
+        assertThat(elsetAbridged.period()).contains(1.1)
+        assertThat(elsetAbridged.raan()).contains(1.1)
+        assertThat(elsetAbridged.revNo()).contains(111)
+        assertThat(elsetAbridged.satNo()).contains(12)
+        assertThat(elsetAbridged.semiMajorAxis()).contains(1.1)
+        assertThat(elsetAbridged.sourceDl()).contains("AXE")
+        assertThat(elsetAbridged.transactionId()).contains("TRANSACTION-ID")
+        assertThat(elsetAbridged.uct()).contains(false)
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val elsetAbridged =
+            ElsetAbridged.builder()
+                .classificationMarking("U")
+                .dataMode(ElsetAbridged.DataMode.TEST)
+                .epoch(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                .source("Bluestaq")
+                .agom(0.0126)
+                .algorithm("Example algorithm")
+                .apogee(1.1)
+                .argOfPerigee(1.1)
+                .ballisticCoeff(0.00815)
+                .bStar(1.1)
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .descriptor("Example description")
+                .eccentricity(0.333)
+                .ephemType(1L)
+                .idElset("ELSET-ID")
+                .idOnOrbit("ONORBIT-ID")
+                .idOrbitDetermination("026dd511-8ba5-47d3-9909-836149f87686")
+                .inclination(45.1)
+                .line1("Example line1")
+                .line2("Example line2")
+                .meanAnomaly(179.1)
+                .meanMotion(1.1)
+                .meanMotionDDot(1.1)
+                .meanMotionDot(1.1)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .origObjectId("ORIGOBJECT-ID")
+                .perigee(1.1)
+                .period(1.1)
+                .raan(1.1)
+                .revNo(111)
+                .satNo(12)
+                .semiMajorAxis(1.1)
+                .sourceDl("AXE")
+                .transactionId("TRANSACTION-ID")
+                .uct(false)
+                .build()
+
+        val roundtrippedElsetAbridged =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(elsetAbridged),
+                jacksonTypeRef<ElsetAbridged>(),
+            )
+
+        assertThat(roundtrippedElsetAbridged).isEqualTo(elsetAbridged)
+    }
+}

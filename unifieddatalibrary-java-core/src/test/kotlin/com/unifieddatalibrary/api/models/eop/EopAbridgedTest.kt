@@ -1,0 +1,149 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.eop
+
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import com.unifieddatalibrary.api.core.jsonMapper
+import java.time.OffsetDateTime
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+
+internal class EopAbridgedTest {
+
+    @Test
+    fun create() {
+        val eopAbridged =
+            EopAbridged.builder()
+                .classificationMarking("U")
+                .dataMode(EopAbridged.DataMode.TEST)
+                .eopDate(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .source("Bluestaq")
+                .id("EOP-ID")
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .dEpsilon(-0.917)
+                .dEpsilonB(-1.7)
+                .dEpsilonUnc(0.165)
+                .dPsi(-10.437)
+                .dPsib(-9.9)
+                .dPsiUnc(0.507)
+                .dX(-0.086)
+                .dXb(0.129)
+                .dXUnc(0.202)
+                .dY(0.13)
+                .dYb(-0.653)
+                .dYUnc(0.165)
+                .lod(1.8335)
+                .lodUnc(0.0201)
+                .nutationState(EopAbridged.NutationState.I)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .polarMotionState(EopAbridged.PolarMotionState.I)
+                .polarMotionX(0.182987)
+                .polarMotionXb(0.1824)
+                .polarMotionXUnc(0.000672)
+                .polarMotionY(0.168775)
+                .polarMotionYb(0.1679)
+                .polarMotionYUnc(0.000345)
+                .precessionNutationStd("IAU1980")
+                .rawFileUri("Example URI")
+                .ut1Utc(-0.1251659)
+                .ut1Utcb(-0.1253)
+                .ut1UtcState(EopAbridged.Ut1UtcState.I)
+                .ut1UtcUnc(0.0000207)
+                .build()
+
+        assertThat(eopAbridged.classificationMarking()).isEqualTo("U")
+        assertThat(eopAbridged.dataMode()).isEqualTo(EopAbridged.DataMode.TEST)
+        assertThat(eopAbridged.eopDate())
+            .isEqualTo(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(eopAbridged.source()).isEqualTo("Bluestaq")
+        assertThat(eopAbridged.id()).contains("EOP-ID")
+        assertThat(eopAbridged.createdAt())
+            .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(eopAbridged.createdBy()).contains("some.user")
+        assertThat(eopAbridged.dEpsilon()).contains(-0.917)
+        assertThat(eopAbridged.dEpsilonB()).contains(-1.7)
+        assertThat(eopAbridged.dEpsilonUnc()).contains(0.165)
+        assertThat(eopAbridged.dPsi()).contains(-10.437)
+        assertThat(eopAbridged.dPsib()).contains(-9.9)
+        assertThat(eopAbridged.dPsiUnc()).contains(0.507)
+        assertThat(eopAbridged.dX()).contains(-0.086)
+        assertThat(eopAbridged.dXb()).contains(0.129)
+        assertThat(eopAbridged.dXUnc()).contains(0.202)
+        assertThat(eopAbridged.dY()).contains(0.13)
+        assertThat(eopAbridged.dYb()).contains(-0.653)
+        assertThat(eopAbridged.dYUnc()).contains(0.165)
+        assertThat(eopAbridged.lod()).contains(1.8335)
+        assertThat(eopAbridged.lodUnc()).contains(0.0201)
+        assertThat(eopAbridged.nutationState()).contains(EopAbridged.NutationState.I)
+        assertThat(eopAbridged.origin()).contains("THIRD_PARTY_DATASOURCE")
+        assertThat(eopAbridged.origNetwork()).contains("ORIG")
+        assertThat(eopAbridged.polarMotionState()).contains(EopAbridged.PolarMotionState.I)
+        assertThat(eopAbridged.polarMotionX()).contains(0.182987)
+        assertThat(eopAbridged.polarMotionXb()).contains(0.1824)
+        assertThat(eopAbridged.polarMotionXUnc()).contains(0.000672)
+        assertThat(eopAbridged.polarMotionY()).contains(0.168775)
+        assertThat(eopAbridged.polarMotionYb()).contains(0.1679)
+        assertThat(eopAbridged.polarMotionYUnc()).contains(0.000345)
+        assertThat(eopAbridged.precessionNutationStd()).contains("IAU1980")
+        assertThat(eopAbridged.rawFileUri()).contains("Example URI")
+        assertThat(eopAbridged.ut1Utc()).contains(-0.1251659)
+        assertThat(eopAbridged.ut1Utcb()).contains(-0.1253)
+        assertThat(eopAbridged.ut1UtcState()).contains(EopAbridged.Ut1UtcState.I)
+        assertThat(eopAbridged.ut1UtcUnc()).contains(0.0000207)
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val eopAbridged =
+            EopAbridged.builder()
+                .classificationMarking("U")
+                .dataMode(EopAbridged.DataMode.TEST)
+                .eopDate(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .source("Bluestaq")
+                .id("EOP-ID")
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .dEpsilon(-0.917)
+                .dEpsilonB(-1.7)
+                .dEpsilonUnc(0.165)
+                .dPsi(-10.437)
+                .dPsib(-9.9)
+                .dPsiUnc(0.507)
+                .dX(-0.086)
+                .dXb(0.129)
+                .dXUnc(0.202)
+                .dY(0.13)
+                .dYb(-0.653)
+                .dYUnc(0.165)
+                .lod(1.8335)
+                .lodUnc(0.0201)
+                .nutationState(EopAbridged.NutationState.I)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .polarMotionState(EopAbridged.PolarMotionState.I)
+                .polarMotionX(0.182987)
+                .polarMotionXb(0.1824)
+                .polarMotionXUnc(0.000672)
+                .polarMotionY(0.168775)
+                .polarMotionYb(0.1679)
+                .polarMotionYUnc(0.000345)
+                .precessionNutationStd("IAU1980")
+                .rawFileUri("Example URI")
+                .ut1Utc(-0.1251659)
+                .ut1Utcb(-0.1253)
+                .ut1UtcState(EopAbridged.Ut1UtcState.I)
+                .ut1UtcUnc(0.0000207)
+                .build()
+
+        val roundtrippedEopAbridged =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(eopAbridged),
+                jacksonTypeRef<EopAbridged>(),
+            )
+
+        assertThat(roundtrippedEopAbridged).isEqualTo(eopAbridged)
+    }
+}

@@ -1,0 +1,2483 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.status
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.unifieddatalibrary.api.core.Enum
+import com.unifieddatalibrary.api.core.ExcludeMissing
+import com.unifieddatalibrary.api.core.JsonField
+import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
+import com.unifieddatalibrary.api.core.checkKnown
+import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.core.toImmutable
+import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import java.time.OffsetDateTime
+import java.util.Collections
+import java.util.Objects
+import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
+
+/**
+ * Status for a particular Entity. An entity may have multiple status records collected by various
+ * sources.
+ */
+class StatusListResponse
+private constructor(
+    private val classificationMarking: JsonField<String>,
+    private val dataMode: JsonField<DataMode>,
+    private val idEntity: JsonField<String>,
+    private val source: JsonField<String>,
+    private val id: JsonField<String>,
+    private val createdAt: JsonField<OffsetDateTime>,
+    private val createdBy: JsonField<String>,
+    private val declassificationDate: JsonField<OffsetDateTime>,
+    private val declassificationString: JsonField<String>,
+    private val derivedFrom: JsonField<String>,
+    private val notes: JsonField<String>,
+    private val opsCap: JsonField<OpsCap>,
+    private val origin: JsonField<String>,
+    private val origNetwork: JsonField<String>,
+    private val state: JsonField<State>,
+    private val subStatusCollection: JsonField<List<SubStatusCollection>>,
+    private val sysCap: JsonField<SysCap>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
+) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
+        @JsonProperty("idEntity") @ExcludeMissing idEntity: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("declassificationDate")
+        @ExcludeMissing
+        declassificationDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("declassificationString")
+        @ExcludeMissing
+        declassificationString: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("derivedFrom")
+        @ExcludeMissing
+        derivedFrom: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("notes") @ExcludeMissing notes: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("opsCap") @ExcludeMissing opsCap: JsonField<OpsCap> = JsonMissing.of(),
+        @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origNetwork")
+        @ExcludeMissing
+        origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("state") @ExcludeMissing state: JsonField<State> = JsonMissing.of(),
+        @JsonProperty("subStatusCollection")
+        @ExcludeMissing
+        subStatusCollection: JsonField<List<SubStatusCollection>> = JsonMissing.of(),
+        @JsonProperty("sysCap") @ExcludeMissing sysCap: JsonField<SysCap> = JsonMissing.of(),
+    ) : this(
+        classificationMarking,
+        dataMode,
+        idEntity,
+        source,
+        id,
+        createdAt,
+        createdBy,
+        declassificationDate,
+        declassificationString,
+        derivedFrom,
+        notes,
+        opsCap,
+        origin,
+        origNetwork,
+        state,
+        subStatusCollection,
+        sysCap,
+        mutableMapOf(),
+    )
+
+    /**
+     * Classification marking of the data in IC/CAPCO Portion-marked format.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
+
+    /**
+     * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+     *
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
+     *
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
+     *
+     * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+     *
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun dataMode(): DataMode = dataMode.getRequired("dataMode")
+
+    /**
+     * Unique identifier of the parent entity.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun idEntity(): String = idEntity.getRequired("idEntity")
+
+    /**
+     * Source of the data.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun source(): String = source.getRequired("source")
+
+    /**
+     * Unique identifier of the record, auto-generated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun id(): Optional<String> = id.getOptional("id")
+
+    /**
+     * Time the row was created in the database, auto-populated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
+
+    /**
+     * Application user who created the row in the database, auto-populated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
+
+    /**
+     * The declassification date of this data, in ISO 8601 UTC format.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun declassificationDate(): Optional<OffsetDateTime> =
+        declassificationDate.getOptional("declassificationDate")
+
+    /**
+     * Declassification string of this data.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun declassificationString(): Optional<String> =
+        declassificationString.getOptional("declassificationString")
+
+    /**
+     * The sources or SCG references from which the classification of this data is derived.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun derivedFrom(): Optional<String> = derivedFrom.getOptional("derivedFrom")
+
+    /**
+     * Comments describing the status creation and or updates to an entity.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun notes(): Optional<String> = notes.getOptional("notes")
+
+    /**
+     * Operation capability of the entity, if applicable (e.g. FMC, NMC, PMC, UNK).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun opsCap(): Optional<OpsCap> = opsCap.getOptional("opsCap")
+
+    /**
+     * Originating system or organization which produced the data, if different from the source. The
+     * origin may be different than the source if the source was a mediating system which forwarded
+     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origin(): Optional<String> = origin.getOptional("origin")
+
+    /**
+     * The originating source network on which this record was created, auto-populated by the
+     * system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
+
+    /**
+     * Overall state of the entity, if applicable (e.g. UNKNOWN, DEAD, ACTIVE, RF ACTIVE, STANDBY).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun state(): Optional<State> = state.getOptional("state")
+
+    /**
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun subStatusCollection(): Optional<List<SubStatusCollection>> =
+        subStatusCollection.getOptional("subStatusCollection")
+
+    /**
+     * System capability of the entity, if applicable (e.g. FMC, NMC, PMC, UNK).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun sysCap(): Optional<SysCap> = sysCap.getOptional("sysCap")
+
+    /**
+     * Returns the raw JSON value of [classificationMarking].
+     *
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("classificationMarking")
+    @ExcludeMissing
+    fun _classificationMarking(): JsonField<String> = classificationMarking
+
+    /**
+     * Returns the raw JSON value of [dataMode].
+     *
+     * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+
+    /**
+     * Returns the raw JSON value of [idEntity].
+     *
+     * Unlike [idEntity], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("idEntity") @ExcludeMissing fun _idEntity(): JsonField<String> = idEntity
+
+    /**
+     * Returns the raw JSON value of [source].
+     *
+     * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+
+    /**
+     * Returns the raw JSON value of [id].
+     *
+     * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+
+    /**
+     * Returns the raw JSON value of [createdAt].
+     *
+     * Unlike [createdAt], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("createdAt")
+    @ExcludeMissing
+    fun _createdAt(): JsonField<OffsetDateTime> = createdAt
+
+    /**
+     * Returns the raw JSON value of [createdBy].
+     *
+     * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+
+    /**
+     * Returns the raw JSON value of [declassificationDate].
+     *
+     * Unlike [declassificationDate], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("declassificationDate")
+    @ExcludeMissing
+    fun _declassificationDate(): JsonField<OffsetDateTime> = declassificationDate
+
+    /**
+     * Returns the raw JSON value of [declassificationString].
+     *
+     * Unlike [declassificationString], this method doesn't throw if the JSON field has an
+     * unexpected type.
+     */
+    @JsonProperty("declassificationString")
+    @ExcludeMissing
+    fun _declassificationString(): JsonField<String> = declassificationString
+
+    /**
+     * Returns the raw JSON value of [derivedFrom].
+     *
+     * Unlike [derivedFrom], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("derivedFrom") @ExcludeMissing fun _derivedFrom(): JsonField<String> = derivedFrom
+
+    /**
+     * Returns the raw JSON value of [notes].
+     *
+     * Unlike [notes], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("notes") @ExcludeMissing fun _notes(): JsonField<String> = notes
+
+    /**
+     * Returns the raw JSON value of [opsCap].
+     *
+     * Unlike [opsCap], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("opsCap") @ExcludeMissing fun _opsCap(): JsonField<OpsCap> = opsCap
+
+    /**
+     * Returns the raw JSON value of [origin].
+     *
+     * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+
+    /**
+     * Returns the raw JSON value of [origNetwork].
+     *
+     * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
+
+    /**
+     * Returns the raw JSON value of [state].
+     *
+     * Unlike [state], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("state") @ExcludeMissing fun _state(): JsonField<State> = state
+
+    /**
+     * Returns the raw JSON value of [subStatusCollection].
+     *
+     * Unlike [subStatusCollection], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("subStatusCollection")
+    @ExcludeMissing
+    fun _subStatusCollection(): JsonField<List<SubStatusCollection>> = subStatusCollection
+
+    /**
+     * Returns the raw JSON value of [sysCap].
+     *
+     * Unlike [sysCap], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("sysCap") @ExcludeMissing fun _sysCap(): JsonField<SysCap> = sysCap
+
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
+    @JsonAnyGetter
+    @ExcludeMissing
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
+
+    fun toBuilder() = Builder().from(this)
+
+    companion object {
+
+        /**
+         * Returns a mutable builder for constructing an instance of [StatusListResponse].
+         *
+         * The following fields are required:
+         * ```java
+         * .classificationMarking()
+         * .dataMode()
+         * .idEntity()
+         * .source()
+         * ```
+         */
+        @JvmStatic fun builder() = Builder()
+    }
+
+    /** A builder for [StatusListResponse]. */
+    class Builder internal constructor() {
+
+        private var classificationMarking: JsonField<String>? = null
+        private var dataMode: JsonField<DataMode>? = null
+        private var idEntity: JsonField<String>? = null
+        private var source: JsonField<String>? = null
+        private var id: JsonField<String> = JsonMissing.of()
+        private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var createdBy: JsonField<String> = JsonMissing.of()
+        private var declassificationDate: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var declassificationString: JsonField<String> = JsonMissing.of()
+        private var derivedFrom: JsonField<String> = JsonMissing.of()
+        private var notes: JsonField<String> = JsonMissing.of()
+        private var opsCap: JsonField<OpsCap> = JsonMissing.of()
+        private var origin: JsonField<String> = JsonMissing.of()
+        private var origNetwork: JsonField<String> = JsonMissing.of()
+        private var state: JsonField<State> = JsonMissing.of()
+        private var subStatusCollection: JsonField<MutableList<SubStatusCollection>>? = null
+        private var sysCap: JsonField<SysCap> = JsonMissing.of()
+        private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+        @JvmSynthetic
+        internal fun from(statusListResponse: StatusListResponse) = apply {
+            classificationMarking = statusListResponse.classificationMarking
+            dataMode = statusListResponse.dataMode
+            idEntity = statusListResponse.idEntity
+            source = statusListResponse.source
+            id = statusListResponse.id
+            createdAt = statusListResponse.createdAt
+            createdBy = statusListResponse.createdBy
+            declassificationDate = statusListResponse.declassificationDate
+            declassificationString = statusListResponse.declassificationString
+            derivedFrom = statusListResponse.derivedFrom
+            notes = statusListResponse.notes
+            opsCap = statusListResponse.opsCap
+            origin = statusListResponse.origin
+            origNetwork = statusListResponse.origNetwork
+            state = statusListResponse.state
+            subStatusCollection = statusListResponse.subStatusCollection.map { it.toMutableList() }
+            sysCap = statusListResponse.sysCap
+            additionalProperties = statusListResponse.additionalProperties.toMutableMap()
+        }
+
+        /** Classification marking of the data in IC/CAPCO Portion-marked format. */
+        fun classificationMarking(classificationMarking: String) =
+            classificationMarking(JsonField.of(classificationMarking))
+
+        /**
+         * Sets [Builder.classificationMarking] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            this.classificationMarking = classificationMarking
+        }
+
+        /**
+         * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+         *
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
+         *
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
+         *
+         * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+         *
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
+         */
+        fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
+
+        /**
+         * Sets [Builder.dataMode] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+
+        /** Unique identifier of the parent entity. */
+        fun idEntity(idEntity: String) = idEntity(JsonField.of(idEntity))
+
+        /**
+         * Sets [Builder.idEntity] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.idEntity] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun idEntity(idEntity: JsonField<String>) = apply { this.idEntity = idEntity }
+
+        /** Source of the data. */
+        fun source(source: String) = source(JsonField.of(source))
+
+        /**
+         * Sets [Builder.source] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun source(source: JsonField<String>) = apply { this.source = source }
+
+        /** Unique identifier of the record, auto-generated by the system. */
+        fun id(id: String) = id(JsonField.of(id))
+
+        /**
+         * Sets [Builder.id] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun id(id: JsonField<String>) = apply { this.id = id }
+
+        /** Time the row was created in the database, auto-populated by the system. */
+        fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
+
+        /**
+         * Sets [Builder.createdAt] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
+
+        /** Application user who created the row in the database, auto-populated by the system. */
+        fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
+
+        /**
+         * Sets [Builder.createdBy] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+
+        /** The declassification date of this data, in ISO 8601 UTC format. */
+        fun declassificationDate(declassificationDate: OffsetDateTime) =
+            declassificationDate(JsonField.of(declassificationDate))
+
+        /**
+         * Sets [Builder.declassificationDate] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.declassificationDate] with a well-typed [OffsetDateTime]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
+         */
+        fun declassificationDate(declassificationDate: JsonField<OffsetDateTime>) = apply {
+            this.declassificationDate = declassificationDate
+        }
+
+        /** Declassification string of this data. */
+        fun declassificationString(declassificationString: String) =
+            declassificationString(JsonField.of(declassificationString))
+
+        /**
+         * Sets [Builder.declassificationString] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.declassificationString] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun declassificationString(declassificationString: JsonField<String>) = apply {
+            this.declassificationString = declassificationString
+        }
+
+        /** The sources or SCG references from which the classification of this data is derived. */
+        fun derivedFrom(derivedFrom: String) = derivedFrom(JsonField.of(derivedFrom))
+
+        /**
+         * Sets [Builder.derivedFrom] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.derivedFrom] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun derivedFrom(derivedFrom: JsonField<String>) = apply { this.derivedFrom = derivedFrom }
+
+        /** Comments describing the status creation and or updates to an entity. */
+        fun notes(notes: String) = notes(JsonField.of(notes))
+
+        /**
+         * Sets [Builder.notes] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.notes] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun notes(notes: JsonField<String>) = apply { this.notes = notes }
+
+        /** Operation capability of the entity, if applicable (e.g. FMC, NMC, PMC, UNK). */
+        fun opsCap(opsCap: OpsCap) = opsCap(JsonField.of(opsCap))
+
+        /**
+         * Sets [Builder.opsCap] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.opsCap] with a well-typed [OpsCap] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun opsCap(opsCap: JsonField<OpsCap>) = apply { this.opsCap = opsCap }
+
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         */
+        fun origin(origin: String) = origin(JsonField.of(origin))
+
+        /**
+         * Sets [Builder.origin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         */
+        fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
+
+        /**
+         * Sets [Builder.origNetwork] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
+
+        /**
+         * Overall state of the entity, if applicable (e.g. UNKNOWN, DEAD, ACTIVE, RF ACTIVE,
+         * STANDBY).
+         */
+        fun state(state: State) = state(JsonField.of(state))
+
+        /**
+         * Sets [Builder.state] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.state] with a well-typed [State] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun state(state: JsonField<State>) = apply { this.state = state }
+
+        fun subStatusCollection(subStatusCollection: List<SubStatusCollection>) =
+            subStatusCollection(JsonField.of(subStatusCollection))
+
+        /**
+         * Sets [Builder.subStatusCollection] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.subStatusCollection] with a well-typed
+         * `List<SubStatusCollection>` value instead. This method is primarily for setting the field
+         * to an undocumented or not yet supported value.
+         */
+        fun subStatusCollection(subStatusCollection: JsonField<List<SubStatusCollection>>) = apply {
+            this.subStatusCollection = subStatusCollection.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [SubStatusCollection] to [Builder.subStatusCollection].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addSubStatusCollection(subStatusCollection: SubStatusCollection) = apply {
+            this.subStatusCollection =
+                (this.subStatusCollection ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("subStatusCollection", it).add(subStatusCollection)
+                }
+        }
+
+        /** System capability of the entity, if applicable (e.g. FMC, NMC, PMC, UNK). */
+        fun sysCap(sysCap: SysCap) = sysCap(JsonField.of(sysCap))
+
+        /**
+         * Sets [Builder.sysCap] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.sysCap] with a well-typed [SysCap] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun sysCap(sysCap: JsonField<SysCap>) = apply { this.sysCap = sysCap }
+
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
+
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
+
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
+
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
+
+        /**
+         * Returns an immutable instance of [StatusListResponse].
+         *
+         * Further updates to this [Builder] will not mutate the returned instance.
+         *
+         * The following fields are required:
+         * ```java
+         * .classificationMarking()
+         * .dataMode()
+         * .idEntity()
+         * .source()
+         * ```
+         *
+         * @throws IllegalStateException if any required field is unset.
+         */
+        fun build(): StatusListResponse =
+            StatusListResponse(
+                checkRequired("classificationMarking", classificationMarking),
+                checkRequired("dataMode", dataMode),
+                checkRequired("idEntity", idEntity),
+                checkRequired("source", source),
+                id,
+                createdAt,
+                createdBy,
+                declassificationDate,
+                declassificationString,
+                derivedFrom,
+                notes,
+                opsCap,
+                origin,
+                origNetwork,
+                state,
+                (subStatusCollection ?: JsonMissing.of()).map { it.toImmutable() },
+                sysCap,
+                additionalProperties.toMutableMap(),
+            )
+    }
+
+    private var validated: Boolean = false
+
+    fun validate(): StatusListResponse = apply {
+        if (validated) {
+            return@apply
+        }
+
+        classificationMarking()
+        dataMode().validate()
+        idEntity()
+        source()
+        id()
+        createdAt()
+        createdBy()
+        declassificationDate()
+        declassificationString()
+        derivedFrom()
+        notes()
+        opsCap().ifPresent { it.validate() }
+        origin()
+        origNetwork()
+        state().ifPresent { it.validate() }
+        subStatusCollection().ifPresent { it.forEach { it.validate() } }
+        sysCap().ifPresent { it.validate() }
+        validated = true
+    }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: UnifieddatalibraryInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    @JvmSynthetic
+    internal fun validity(): Int =
+        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (idEntity.asKnown().isPresent) 1 else 0) +
+            (if (source.asKnown().isPresent) 1 else 0) +
+            (if (id.asKnown().isPresent) 1 else 0) +
+            (if (createdAt.asKnown().isPresent) 1 else 0) +
+            (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (declassificationDate.asKnown().isPresent) 1 else 0) +
+            (if (declassificationString.asKnown().isPresent) 1 else 0) +
+            (if (derivedFrom.asKnown().isPresent) 1 else 0) +
+            (if (notes.asKnown().isPresent) 1 else 0) +
+            (opsCap.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (origin.asKnown().isPresent) 1 else 0) +
+            (if (origNetwork.asKnown().isPresent) 1 else 0) +
+            (state.asKnown().getOrNull()?.validity() ?: 0) +
+            (subStatusCollection.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
+            (sysCap.asKnown().getOrNull()?.validity() ?: 0)
+
+    /**
+     * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+     *
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
+     *
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
+     *
+     * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+     *
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
+     */
+    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+
+        /**
+         * Returns this class instance's raw value.
+         *
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
+         */
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+        companion object {
+
+            @JvmField val REAL = of("REAL")
+
+            @JvmField val TEST = of("TEST")
+
+            @JvmField val SIMULATED = of("SIMULATED")
+
+            @JvmField val EXERCISE = of("EXERCISE")
+
+            @JvmStatic fun of(value: String) = DataMode(JsonField.of(value))
+        }
+
+        /** An enum containing [DataMode]'s known values. */
+        enum class Known {
+            REAL,
+            TEST,
+            SIMULATED,
+            EXERCISE,
+        }
+
+        /**
+         * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
+         *
+         * An instance of [DataMode] can contain an unknown value in a couple of cases:
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
+         * - It was constructed with an arbitrary value using the [of] method.
+         */
+        enum class Value {
+            REAL,
+            TEST,
+            SIMULATED,
+            EXERCISE,
+            /** An enum member indicating that [DataMode] was instantiated with an unknown value. */
+            _UNKNOWN,
+        }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
+         *
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
+         */
+        fun value(): Value =
+            when (this) {
+                REAL -> Value.REAL
+                TEST -> Value.TEST
+                SIMULATED -> Value.SIMULATED
+                EXERCISE -> Value.EXERCISE
+                else -> Value._UNKNOWN
+            }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value.
+         *
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
+         */
+        fun known(): Known =
+            when (this) {
+                REAL -> Known.REAL
+                TEST -> Known.TEST
+                SIMULATED -> Known.SIMULATED
+                EXERCISE -> Known.EXERCISE
+                else -> throw UnifieddatalibraryInvalidDataException("Unknown DataMode: $value")
+            }
+
+        /**
+         * Returns this class instance's primitive wire representation.
+         *
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
+         */
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
+
+        private var validated: Boolean = false
+
+        fun validate(): DataMode = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: UnifieddatalibraryInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+        }
+
+        override fun hashCode() = value.hashCode()
+
+        override fun toString() = value.toString()
+    }
+
+    /** Operation capability of the entity, if applicable (e.g. FMC, NMC, PMC, UNK). */
+    class OpsCap @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+
+        /**
+         * Returns this class instance's raw value.
+         *
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
+         */
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+        companion object {
+
+            @JvmField val FMC = of("FMC")
+
+            @JvmField val NMC = of("NMC")
+
+            @JvmField val PMC = of("PMC")
+
+            @JvmField val UNK = of("UNK")
+
+            @JvmStatic fun of(value: String) = OpsCap(JsonField.of(value))
+        }
+
+        /** An enum containing [OpsCap]'s known values. */
+        enum class Known {
+            FMC,
+            NMC,
+            PMC,
+            UNK,
+        }
+
+        /**
+         * An enum containing [OpsCap]'s known values, as well as an [_UNKNOWN] member.
+         *
+         * An instance of [OpsCap] can contain an unknown value in a couple of cases:
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
+         * - It was constructed with an arbitrary value using the [of] method.
+         */
+        enum class Value {
+            FMC,
+            NMC,
+            PMC,
+            UNK,
+            /** An enum member indicating that [OpsCap] was instantiated with an unknown value. */
+            _UNKNOWN,
+        }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
+         *
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
+         */
+        fun value(): Value =
+            when (this) {
+                FMC -> Value.FMC
+                NMC -> Value.NMC
+                PMC -> Value.PMC
+                UNK -> Value.UNK
+                else -> Value._UNKNOWN
+            }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value.
+         *
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
+         */
+        fun known(): Known =
+            when (this) {
+                FMC -> Known.FMC
+                NMC -> Known.NMC
+                PMC -> Known.PMC
+                UNK -> Known.UNK
+                else -> throw UnifieddatalibraryInvalidDataException("Unknown OpsCap: $value")
+            }
+
+        /**
+         * Returns this class instance's primitive wire representation.
+         *
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
+         */
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
+
+        private var validated: Boolean = false
+
+        fun validate(): OpsCap = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: UnifieddatalibraryInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is OpsCap && value == other.value /* spotless:on */
+        }
+
+        override fun hashCode() = value.hashCode()
+
+        override fun toString() = value.toString()
+    }
+
+    /**
+     * Overall state of the entity, if applicable (e.g. UNKNOWN, DEAD, ACTIVE, RF ACTIVE, STANDBY).
+     */
+    class State @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+
+        /**
+         * Returns this class instance's raw value.
+         *
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
+         */
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+        companion object {
+
+            @JvmField val UNKNOWN = of("UNKNOWN")
+
+            @JvmField val DEAD = of("DEAD")
+
+            @JvmField val ACTIVE = of("ACTIVE")
+
+            @JvmField val RF_ACTIVE = of("RF ACTIVE")
+
+            @JvmField val STANDBY = of("STANDBY")
+
+            @JvmStatic fun of(value: String) = State(JsonField.of(value))
+        }
+
+        /** An enum containing [State]'s known values. */
+        enum class Known {
+            UNKNOWN,
+            DEAD,
+            ACTIVE,
+            RF_ACTIVE,
+            STANDBY,
+        }
+
+        /**
+         * An enum containing [State]'s known values, as well as an [_UNKNOWN] member.
+         *
+         * An instance of [State] can contain an unknown value in a couple of cases:
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
+         * - It was constructed with an arbitrary value using the [of] method.
+         */
+        enum class Value {
+            UNKNOWN,
+            DEAD,
+            ACTIVE,
+            RF_ACTIVE,
+            STANDBY,
+            /** An enum member indicating that [State] was instantiated with an unknown value. */
+            _UNKNOWN,
+        }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
+         *
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
+         */
+        fun value(): Value =
+            when (this) {
+                UNKNOWN -> Value.UNKNOWN
+                DEAD -> Value.DEAD
+                ACTIVE -> Value.ACTIVE
+                RF_ACTIVE -> Value.RF_ACTIVE
+                STANDBY -> Value.STANDBY
+                else -> Value._UNKNOWN
+            }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value.
+         *
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
+         */
+        fun known(): Known =
+            when (this) {
+                UNKNOWN -> Known.UNKNOWN
+                DEAD -> Known.DEAD
+                ACTIVE -> Known.ACTIVE
+                RF_ACTIVE -> Known.RF_ACTIVE
+                STANDBY -> Known.STANDBY
+                else -> throw UnifieddatalibraryInvalidDataException("Unknown State: $value")
+            }
+
+        /**
+         * Returns this class instance's primitive wire representation.
+         *
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
+         */
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
+
+        private var validated: Boolean = false
+
+        fun validate(): State = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: UnifieddatalibraryInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is State && value == other.value /* spotless:on */
+        }
+
+        override fun hashCode() = value.hashCode()
+
+        override fun toString() = value.toString()
+    }
+
+    /** Additional sub-system or capability status for the parent entity. */
+    class SubStatusCollection
+    private constructor(
+        private val classificationMarking: JsonField<String>,
+        private val dataMode: JsonField<DataMode>,
+        private val notes: JsonField<String>,
+        private val source: JsonField<String>,
+        private val status: JsonField<Status>,
+        private val statusId: JsonField<String>,
+        private val type: JsonField<Type>,
+        private val id: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
+    ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("notes") @ExcludeMissing notes: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("status") @ExcludeMissing status: JsonField<Status> = JsonMissing.of(),
+            @JsonProperty("statusId")
+            @ExcludeMissing
+            statusId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<Type> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            notes,
+            source,
+            status,
+            statusId,
+            type,
+            id,
+            createdAt,
+            createdBy,
+            origin,
+            origNetwork,
+            mutableMapOf(),
+        )
+
+        /**
+         * Classification marking of the data in IC/CAPCO Portion-marked format.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
+         */
+        fun classificationMarking(): String =
+            classificationMarking.getRequired("classificationMarking")
+
+        /**
+         * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+         *
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
+         *
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
+         *
+         * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+         *
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
+         */
+        fun dataMode(): DataMode = dataMode.getRequired("dataMode")
+
+        /**
+         * Descriptions and/or comments associated with the sub-status.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
+         */
+        fun notes(): String = notes.getRequired("notes")
+
+        /**
+         * Source of the data.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
+         */
+        fun source(): String = source.getRequired("source")
+
+        /**
+         * Status of the sub-system/capability, e.g. FMC, NMC, PMC, UNK.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
+         */
+        fun status(): Status = status.getRequired("status")
+
+        /**
+         * Id of the parent status.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
+         */
+        fun statusId(): String = statusId.getRequired("statusId")
+
+        /**
+         * Parent entity's sub-system or capability status: mwCap, mdCap, ssCap, etc.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
+         */
+        fun type(): Type = type.getRequired("type")
+
+        /**
+         * Unique identifier of the record, auto-generated by the system.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun id(): Optional<String> = id.getOptional("id")
+
+        /**
+         * Time the row was created in the database, auto-populated by the system.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
+
+        /**
+         * Application user who created the row in the database, auto-populated by the system.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
+
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun origin(): Optional<String> = origin.getOptional("origin")
+
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
+
+        /**
+         * Returns the raw JSON value of [classificationMarking].
+         *
+         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        fun _classificationMarking(): JsonField<String> = classificationMarking
+
+        /**
+         * Returns the raw JSON value of [dataMode].
+         *
+         * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+
+        /**
+         * Returns the raw JSON value of [notes].
+         *
+         * Unlike [notes], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("notes") @ExcludeMissing fun _notes(): JsonField<String> = notes
+
+        /**
+         * Returns the raw JSON value of [source].
+         *
+         * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+
+        /**
+         * Returns the raw JSON value of [status].
+         *
+         * Unlike [status], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("status") @ExcludeMissing fun _status(): JsonField<Status> = status
+
+        /**
+         * Returns the raw JSON value of [statusId].
+         *
+         * Unlike [statusId], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("statusId") @ExcludeMissing fun _statusId(): JsonField<String> = statusId
+
+        /**
+         * Returns the raw JSON value of [type].
+         *
+         * Unlike [type], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("type") @ExcludeMissing fun _type(): JsonField<Type> = type
+
+        /**
+         * Returns the raw JSON value of [id].
+         *
+         * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+
+        /**
+         * Returns the raw JSON value of [createdAt].
+         *
+         * Unlike [createdAt], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        fun _createdAt(): JsonField<OffsetDateTime> = createdAt
+
+        /**
+         * Returns the raw JSON value of [createdBy].
+         *
+         * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+
+        /**
+         * Returns the raw JSON value of [origin].
+         *
+         * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+
+        /**
+         * Returns the raw JSON value of [origNetwork].
+         *
+         * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("origNetwork")
+        @ExcludeMissing
+        fun _origNetwork(): JsonField<String> = origNetwork
+
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
+        fun toBuilder() = Builder().from(this)
+
+        companion object {
+
+            /**
+             * Returns a mutable builder for constructing an instance of [SubStatusCollection].
+             *
+             * The following fields are required:
+             * ```java
+             * .classificationMarking()
+             * .dataMode()
+             * .notes()
+             * .source()
+             * .status()
+             * .statusId()
+             * .type()
+             * ```
+             */
+            @JvmStatic fun builder() = Builder()
+        }
+
+        /** A builder for [SubStatusCollection]. */
+        class Builder internal constructor() {
+
+            private var classificationMarking: JsonField<String>? = null
+            private var dataMode: JsonField<DataMode>? = null
+            private var notes: JsonField<String>? = null
+            private var source: JsonField<String>? = null
+            private var status: JsonField<Status>? = null
+            private var statusId: JsonField<String>? = null
+            private var type: JsonField<Type>? = null
+            private var id: JsonField<String> = JsonMissing.of()
+            private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
+            private var createdBy: JsonField<String> = JsonMissing.of()
+            private var origin: JsonField<String> = JsonMissing.of()
+            private var origNetwork: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+            @JvmSynthetic
+            internal fun from(subStatusCollection: SubStatusCollection) = apply {
+                classificationMarking = subStatusCollection.classificationMarking
+                dataMode = subStatusCollection.dataMode
+                notes = subStatusCollection.notes
+                source = subStatusCollection.source
+                status = subStatusCollection.status
+                statusId = subStatusCollection.statusId
+                type = subStatusCollection.type
+                id = subStatusCollection.id
+                createdAt = subStatusCollection.createdAt
+                createdBy = subStatusCollection.createdBy
+                origin = subStatusCollection.origin
+                origNetwork = subStatusCollection.origNetwork
+                additionalProperties = subStatusCollection.additionalProperties.toMutableMap()
+            }
+
+            /** Classification marking of the data in IC/CAPCO Portion-marked format. */
+            fun classificationMarking(classificationMarking: String) =
+                classificationMarking(JsonField.of(classificationMarking))
+
+            /**
+             * Sets [Builder.classificationMarking] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.classificationMarking] with a well-typed [String]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+                this.classificationMarking = classificationMarking
+            }
+
+            /**
+             * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+             *
+             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may
+             * include both real and simulated data.
+             *
+             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events,
+             * and analysis.
+             *
+             * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+             *
+             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+             * requirements, and for validating technical, functional, and performance
+             * characteristics.
+             */
+            fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
+
+            /**
+             * Sets [Builder.dataMode] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+
+            /** Descriptions and/or comments associated with the sub-status. */
+            fun notes(notes: String) = notes(JsonField.of(notes))
+
+            /**
+             * Sets [Builder.notes] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.notes] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun notes(notes: JsonField<String>) = apply { this.notes = notes }
+
+            /** Source of the data. */
+            fun source(source: String) = source(JsonField.of(source))
+
+            /**
+             * Sets [Builder.source] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.source] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun source(source: JsonField<String>) = apply { this.source = source }
+
+            /** Status of the sub-system/capability, e.g. FMC, NMC, PMC, UNK. */
+            fun status(status: Status) = status(JsonField.of(status))
+
+            /**
+             * Sets [Builder.status] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.status] with a well-typed [Status] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun status(status: JsonField<Status>) = apply { this.status = status }
+
+            /** Id of the parent status. */
+            fun statusId(statusId: String) = statusId(JsonField.of(statusId))
+
+            /**
+             * Sets [Builder.statusId] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.statusId] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun statusId(statusId: JsonField<String>) = apply { this.statusId = statusId }
+
+            /** Parent entity's sub-system or capability status: mwCap, mdCap, ssCap, etc. */
+            fun type(type: Type) = type(JsonField.of(type))
+
+            /**
+             * Sets [Builder.type] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.type] with a well-typed [Type] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun type(type: JsonField<Type>) = apply { this.type = type }
+
+            /** Unique identifier of the record, auto-generated by the system. */
+            fun id(id: String) = id(JsonField.of(id))
+
+            /**
+             * Sets [Builder.id] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.id] with a well-typed [String] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun id(id: JsonField<String>) = apply { this.id = id }
+
+            /** Time the row was created in the database, auto-populated by the system. */
+            fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
+
+            /**
+             * Sets [Builder.createdAt] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply {
+                this.createdAt = createdAt
+            }
+
+            /**
+             * Application user who created the row in the database, auto-populated by the system.
+             */
+            fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
+
+            /**
+             * Sets [Builder.createdBy] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+
+            /**
+             * Originating system or organization which produced the data, if different from the
+             * source. The origin may be different than the source if the source was a mediating
+             * system which forwarded the data on behalf of the origin system. If null, the source
+             * may be assumed to be the origin.
+             */
+            fun origin(origin: String) = origin(JsonField.of(origin))
+
+            /**
+             * Sets [Builder.origin] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.origin] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+
+            /**
+             * The originating source network on which this record was created, auto-populated by
+             * the system.
+             */
+            fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
+
+            /**
+             * Sets [Builder.origNetwork] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.origNetwork] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun origNetwork(origNetwork: JsonField<String>) = apply {
+                this.origNetwork = origNetwork
+            }
+
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
+            /**
+             * Returns an immutable instance of [SubStatusCollection].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             *
+             * The following fields are required:
+             * ```java
+             * .classificationMarking()
+             * .dataMode()
+             * .notes()
+             * .source()
+             * .status()
+             * .statusId()
+             * .type()
+             * ```
+             *
+             * @throws IllegalStateException if any required field is unset.
+             */
+            fun build(): SubStatusCollection =
+                SubStatusCollection(
+                    checkRequired("classificationMarking", classificationMarking),
+                    checkRequired("dataMode", dataMode),
+                    checkRequired("notes", notes),
+                    checkRequired("source", source),
+                    checkRequired("status", status),
+                    checkRequired("statusId", statusId),
+                    checkRequired("type", type),
+                    id,
+                    createdAt,
+                    createdBy,
+                    origin,
+                    origNetwork,
+                    additionalProperties.toMutableMap(),
+                )
+        }
+
+        private var validated: Boolean = false
+
+        fun validate(): SubStatusCollection = apply {
+            if (validated) {
+                return@apply
+            }
+
+            classificationMarking()
+            dataMode().validate()
+            notes()
+            source()
+            status().validate()
+            statusId()
+            type().validate()
+            id()
+            createdAt()
+            createdBy()
+            origin()
+            origNetwork()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: UnifieddatalibraryInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic
+        internal fun validity(): Int =
+            (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+                (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+                (if (notes.asKnown().isPresent) 1 else 0) +
+                (if (source.asKnown().isPresent) 1 else 0) +
+                (status.asKnown().getOrNull()?.validity() ?: 0) +
+                (if (statusId.asKnown().isPresent) 1 else 0) +
+                (type.asKnown().getOrNull()?.validity() ?: 0) +
+                (if (id.asKnown().isPresent) 1 else 0) +
+                (if (createdAt.asKnown().isPresent) 1 else 0) +
+                (if (createdBy.asKnown().isPresent) 1 else 0) +
+                (if (origin.asKnown().isPresent) 1 else 0) +
+                (if (origNetwork.asKnown().isPresent) 1 else 0)
+
+        /**
+         * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+         *
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
+         *
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
+         *
+         * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+         *
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
+         */
+        class DataMode @JsonCreator private constructor(private val value: JsonField<String>) :
+            Enum {
+
+            /**
+             * Returns this class instance's raw value.
+             *
+             * This is usually only useful if this instance was deserialized from data that doesn't
+             * match any known member, and you want to know that value. For example, if the SDK is
+             * on an older version than the API, then the API may respond with new members that the
+             * SDK is unaware of.
+             */
+            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+            companion object {
+
+                @JvmField val REAL = of("REAL")
+
+                @JvmField val TEST = of("TEST")
+
+                @JvmField val SIMULATED = of("SIMULATED")
+
+                @JvmField val EXERCISE = of("EXERCISE")
+
+                @JvmStatic fun of(value: String) = DataMode(JsonField.of(value))
+            }
+
+            /** An enum containing [DataMode]'s known values. */
+            enum class Known {
+                REAL,
+                TEST,
+                SIMULATED,
+                EXERCISE,
+            }
+
+            /**
+             * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
+             *
+             * An instance of [DataMode] can contain an unknown value in a couple of cases:
+             * - It was deserialized from data that doesn't match any known member. For example, if
+             *   the SDK is on an older version than the API, then the API may respond with new
+             *   members that the SDK is unaware of.
+             * - It was constructed with an arbitrary value using the [of] method.
+             */
+            enum class Value {
+                REAL,
+                TEST,
+                SIMULATED,
+                EXERCISE,
+                /**
+                 * An enum member indicating that [DataMode] was instantiated with an unknown value.
+                 */
+                _UNKNOWN,
+            }
+
+            /**
+             * Returns an enum member corresponding to this class instance's value, or
+             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
+             *
+             * Use the [known] method instead if you're certain the value is always known or if you
+             * want to throw for the unknown case.
+             */
+            fun value(): Value =
+                when (this) {
+                    REAL -> Value.REAL
+                    TEST -> Value.TEST
+                    SIMULATED -> Value.SIMULATED
+                    EXERCISE -> Value.EXERCISE
+                    else -> Value._UNKNOWN
+                }
+
+            /**
+             * Returns an enum member corresponding to this class instance's value.
+             *
+             * Use the [value] method instead if you're uncertain the value is always known and
+             * don't want to throw for the unknown case.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
+             *   not a known member.
+             */
+            fun known(): Known =
+                when (this) {
+                    REAL -> Known.REAL
+                    TEST -> Known.TEST
+                    SIMULATED -> Known.SIMULATED
+                    EXERCISE -> Known.EXERCISE
+                    else -> throw UnifieddatalibraryInvalidDataException("Unknown DataMode: $value")
+                }
+
+            /**
+             * Returns this class instance's primitive wire representation.
+             *
+             * This differs from the [toString] method because that method is primarily for
+             * debugging and generally doesn't throw.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
+             *   not have the expected primitive type.
+             */
+            fun asString(): String =
+                _value().asString().orElseThrow {
+                    UnifieddatalibraryInvalidDataException("Value is not a String")
+                }
+
+            private var validated: Boolean = false
+
+            fun validate(): DataMode = apply {
+                if (validated) {
+                    return@apply
+                }
+
+                known()
+                validated = true
+            }
+
+            fun isValid(): Boolean =
+                try {
+                    validate()
+                    true
+                } catch (e: UnifieddatalibraryInvalidDataException) {
+                    false
+                }
+
+            /**
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
+             *
+             * Used for best match union deserialization.
+             */
+            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+            override fun equals(other: Any?): Boolean {
+                if (this === other) {
+                    return true
+                }
+
+                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            }
+
+            override fun hashCode() = value.hashCode()
+
+            override fun toString() = value.toString()
+        }
+
+        /** Status of the sub-system/capability, e.g. FMC, NMC, PMC, UNK. */
+        class Status @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+
+            /**
+             * Returns this class instance's raw value.
+             *
+             * This is usually only useful if this instance was deserialized from data that doesn't
+             * match any known member, and you want to know that value. For example, if the SDK is
+             * on an older version than the API, then the API may respond with new members that the
+             * SDK is unaware of.
+             */
+            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+            companion object {
+
+                @JvmField val FMC = of("FMC")
+
+                @JvmField val NMC = of("NMC")
+
+                @JvmField val PMC = of("PMC")
+
+                @JvmField val UNK = of("UNK")
+
+                @JvmStatic fun of(value: String) = Status(JsonField.of(value))
+            }
+
+            /** An enum containing [Status]'s known values. */
+            enum class Known {
+                FMC,
+                NMC,
+                PMC,
+                UNK,
+            }
+
+            /**
+             * An enum containing [Status]'s known values, as well as an [_UNKNOWN] member.
+             *
+             * An instance of [Status] can contain an unknown value in a couple of cases:
+             * - It was deserialized from data that doesn't match any known member. For example, if
+             *   the SDK is on an older version than the API, then the API may respond with new
+             *   members that the SDK is unaware of.
+             * - It was constructed with an arbitrary value using the [of] method.
+             */
+            enum class Value {
+                FMC,
+                NMC,
+                PMC,
+                UNK,
+                /**
+                 * An enum member indicating that [Status] was instantiated with an unknown value.
+                 */
+                _UNKNOWN,
+            }
+
+            /**
+             * Returns an enum member corresponding to this class instance's value, or
+             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
+             *
+             * Use the [known] method instead if you're certain the value is always known or if you
+             * want to throw for the unknown case.
+             */
+            fun value(): Value =
+                when (this) {
+                    FMC -> Value.FMC
+                    NMC -> Value.NMC
+                    PMC -> Value.PMC
+                    UNK -> Value.UNK
+                    else -> Value._UNKNOWN
+                }
+
+            /**
+             * Returns an enum member corresponding to this class instance's value.
+             *
+             * Use the [value] method instead if you're uncertain the value is always known and
+             * don't want to throw for the unknown case.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
+             *   not a known member.
+             */
+            fun known(): Known =
+                when (this) {
+                    FMC -> Known.FMC
+                    NMC -> Known.NMC
+                    PMC -> Known.PMC
+                    UNK -> Known.UNK
+                    else -> throw UnifieddatalibraryInvalidDataException("Unknown Status: $value")
+                }
+
+            /**
+             * Returns this class instance's primitive wire representation.
+             *
+             * This differs from the [toString] method because that method is primarily for
+             * debugging and generally doesn't throw.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
+             *   not have the expected primitive type.
+             */
+            fun asString(): String =
+                _value().asString().orElseThrow {
+                    UnifieddatalibraryInvalidDataException("Value is not a String")
+                }
+
+            private var validated: Boolean = false
+
+            fun validate(): Status = apply {
+                if (validated) {
+                    return@apply
+                }
+
+                known()
+                validated = true
+            }
+
+            fun isValid(): Boolean =
+                try {
+                    validate()
+                    true
+                } catch (e: UnifieddatalibraryInvalidDataException) {
+                    false
+                }
+
+            /**
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
+             *
+             * Used for best match union deserialization.
+             */
+            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+            override fun equals(other: Any?): Boolean {
+                if (this === other) {
+                    return true
+                }
+
+                return /* spotless:off */ other is Status && value == other.value /* spotless:on */
+            }
+
+            override fun hashCode() = value.hashCode()
+
+            override fun toString() = value.toString()
+        }
+
+        /** Parent entity's sub-system or capability status: mwCap, mdCap, ssCap, etc. */
+        class Type @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+
+            /**
+             * Returns this class instance's raw value.
+             *
+             * This is usually only useful if this instance was deserialized from data that doesn't
+             * match any known member, and you want to know that value. For example, if the SDK is
+             * on an older version than the API, then the API may respond with new members that the
+             * SDK is unaware of.
+             */
+            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+            companion object {
+
+                @JvmField val MW_CAP = of("mwCap")
+
+                @JvmField val SS_CAP = of("ssCap")
+
+                @JvmField val MD_CAP = of("mdCap")
+
+                @JvmStatic fun of(value: String) = Type(JsonField.of(value))
+            }
+
+            /** An enum containing [Type]'s known values. */
+            enum class Known {
+                MW_CAP,
+                SS_CAP,
+                MD_CAP,
+            }
+
+            /**
+             * An enum containing [Type]'s known values, as well as an [_UNKNOWN] member.
+             *
+             * An instance of [Type] can contain an unknown value in a couple of cases:
+             * - It was deserialized from data that doesn't match any known member. For example, if
+             *   the SDK is on an older version than the API, then the API may respond with new
+             *   members that the SDK is unaware of.
+             * - It was constructed with an arbitrary value using the [of] method.
+             */
+            enum class Value {
+                MW_CAP,
+                SS_CAP,
+                MD_CAP,
+                /** An enum member indicating that [Type] was instantiated with an unknown value. */
+                _UNKNOWN,
+            }
+
+            /**
+             * Returns an enum member corresponding to this class instance's value, or
+             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
+             *
+             * Use the [known] method instead if you're certain the value is always known or if you
+             * want to throw for the unknown case.
+             */
+            fun value(): Value =
+                when (this) {
+                    MW_CAP -> Value.MW_CAP
+                    SS_CAP -> Value.SS_CAP
+                    MD_CAP -> Value.MD_CAP
+                    else -> Value._UNKNOWN
+                }
+
+            /**
+             * Returns an enum member corresponding to this class instance's value.
+             *
+             * Use the [value] method instead if you're uncertain the value is always known and
+             * don't want to throw for the unknown case.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
+             *   not a known member.
+             */
+            fun known(): Known =
+                when (this) {
+                    MW_CAP -> Known.MW_CAP
+                    SS_CAP -> Known.SS_CAP
+                    MD_CAP -> Known.MD_CAP
+                    else -> throw UnifieddatalibraryInvalidDataException("Unknown Type: $value")
+                }
+
+            /**
+             * Returns this class instance's primitive wire representation.
+             *
+             * This differs from the [toString] method because that method is primarily for
+             * debugging and generally doesn't throw.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
+             *   not have the expected primitive type.
+             */
+            fun asString(): String =
+                _value().asString().orElseThrow {
+                    UnifieddatalibraryInvalidDataException("Value is not a String")
+                }
+
+            private var validated: Boolean = false
+
+            fun validate(): Type = apply {
+                if (validated) {
+                    return@apply
+                }
+
+                known()
+                validated = true
+            }
+
+            fun isValid(): Boolean =
+                try {
+                    validate()
+                    true
+                } catch (e: UnifieddatalibraryInvalidDataException) {
+                    false
+                }
+
+            /**
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
+             *
+             * Used for best match union deserialization.
+             */
+            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+            override fun equals(other: Any?): Boolean {
+                if (this === other) {
+                    return true
+                }
+
+                return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+            }
+
+            override fun hashCode() = value.hashCode()
+
+            override fun toString() = value.toString()
+        }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is SubStatusCollection && classificationMarking == other.classificationMarking && dataMode == other.dataMode && notes == other.notes && source == other.source && status == other.status && statusId == other.statusId && type == other.type && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && origin == other.origin && origNetwork == other.origNetwork && additionalProperties == other.additionalProperties /* spotless:on */
+        }
+
+        /* spotless:off */
+        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, notes, source, status, statusId, type, id, createdAt, createdBy, origin, origNetwork, additionalProperties) }
+        /* spotless:on */
+
+        override fun hashCode(): Int = hashCode
+
+        override fun toString() =
+            "SubStatusCollection{classificationMarking=$classificationMarking, dataMode=$dataMode, notes=$notes, source=$source, status=$status, statusId=$statusId, type=$type, id=$id, createdAt=$createdAt, createdBy=$createdBy, origin=$origin, origNetwork=$origNetwork, additionalProperties=$additionalProperties}"
+    }
+
+    /** System capability of the entity, if applicable (e.g. FMC, NMC, PMC, UNK). */
+    class SysCap @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+
+        /**
+         * Returns this class instance's raw value.
+         *
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
+         */
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+        companion object {
+
+            @JvmField val FMC = of("FMC")
+
+            @JvmField val NMC = of("NMC")
+
+            @JvmField val PMC = of("PMC")
+
+            @JvmField val UNK = of("UNK")
+
+            @JvmStatic fun of(value: String) = SysCap(JsonField.of(value))
+        }
+
+        /** An enum containing [SysCap]'s known values. */
+        enum class Known {
+            FMC,
+            NMC,
+            PMC,
+            UNK,
+        }
+
+        /**
+         * An enum containing [SysCap]'s known values, as well as an [_UNKNOWN] member.
+         *
+         * An instance of [SysCap] can contain an unknown value in a couple of cases:
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
+         * - It was constructed with an arbitrary value using the [of] method.
+         */
+        enum class Value {
+            FMC,
+            NMC,
+            PMC,
+            UNK,
+            /** An enum member indicating that [SysCap] was instantiated with an unknown value. */
+            _UNKNOWN,
+        }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
+         *
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
+         */
+        fun value(): Value =
+            when (this) {
+                FMC -> Value.FMC
+                NMC -> Value.NMC
+                PMC -> Value.PMC
+                UNK -> Value.UNK
+                else -> Value._UNKNOWN
+            }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value.
+         *
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
+         */
+        fun known(): Known =
+            when (this) {
+                FMC -> Known.FMC
+                NMC -> Known.NMC
+                PMC -> Known.PMC
+                UNK -> Known.UNK
+                else -> throw UnifieddatalibraryInvalidDataException("Unknown SysCap: $value")
+            }
+
+        /**
+         * Returns this class instance's primitive wire representation.
+         *
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
+         */
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
+
+        private var validated: Boolean = false
+
+        fun validate(): SysCap = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: UnifieddatalibraryInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is SysCap && value == other.value /* spotless:on */
+        }
+
+        override fun hashCode() = value.hashCode()
+
+        override fun toString() = value.toString()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        return /* spotless:off */ other is StatusListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idEntity == other.idEntity && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && declassificationDate == other.declassificationDate && declassificationString == other.declassificationString && derivedFrom == other.derivedFrom && notes == other.notes && opsCap == other.opsCap && origin == other.origin && origNetwork == other.origNetwork && state == other.state && subStatusCollection == other.subStatusCollection && sysCap == other.sysCap && additionalProperties == other.additionalProperties /* spotless:on */
+    }
+
+    /* spotless:off */
+    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idEntity, source, id, createdAt, createdBy, declassificationDate, declassificationString, derivedFrom, notes, opsCap, origin, origNetwork, state, subStatusCollection, sysCap, additionalProperties) }
+    /* spotless:on */
+
+    override fun hashCode(): Int = hashCode
+
+    override fun toString() =
+        "StatusListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, idEntity=$idEntity, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, declassificationDate=$declassificationDate, declassificationString=$declassificationString, derivedFrom=$derivedFrom, notes=$notes, opsCap=$opsCap, origin=$origin, origNetwork=$origNetwork, state=$state, subStatusCollection=$subStatusCollection, sysCap=$sysCap, additionalProperties=$additionalProperties}"
+}

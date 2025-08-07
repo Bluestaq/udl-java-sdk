@@ -1,0 +1,141 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.observations.swir
+
+import java.time.OffsetDateTime
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+
+internal class SwirUnvalidatedPublishParamsTest {
+
+    @Test
+    fun create() {
+        SwirUnvalidatedPublishParams.builder()
+            .addBody(
+                SwirUnvalidatedPublishParams.Body.builder()
+                    .classificationMarking("U")
+                    .dataMode(SwirUnvalidatedPublishParams.Body.DataMode.TEST)
+                    .source("Bluestaq")
+                    .ts(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
+                    .id("SWIR-ID")
+                    .addAbsFlux(1.23)
+                    .addAbsFlux(4.56)
+                    .badWave("Example Comments")
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .addFluxRatio(1.23)
+                    .addFluxRatio(4.56)
+                    .idOnOrbit("45234")
+                    .lat(70.55208)
+                    .locationName("AeroTel")
+                    .lon(81.18191)
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("ORIG")
+                    .origObjectId("WildBlue-1")
+                    .addRatioWavelength(1.23)
+                    .addRatioWavelength(4.56)
+                    .satNo(25544)
+                    .solarPhaseAngle(1.23)
+                    .addWavelength(1.23)
+                    .addWavelength(4.56)
+                    .build()
+            )
+            .build()
+    }
+
+    @Test
+    fun body() {
+        val params =
+            SwirUnvalidatedPublishParams.builder()
+                .addBody(
+                    SwirUnvalidatedPublishParams.Body.builder()
+                        .classificationMarking("U")
+                        .dataMode(SwirUnvalidatedPublishParams.Body.DataMode.TEST)
+                        .source("Bluestaq")
+                        .ts(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
+                        .id("SWIR-ID")
+                        .addAbsFlux(1.23)
+                        .addAbsFlux(4.56)
+                        .badWave("Example Comments")
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .addFluxRatio(1.23)
+                        .addFluxRatio(4.56)
+                        .idOnOrbit("45234")
+                        .lat(70.55208)
+                        .locationName("AeroTel")
+                        .lon(81.18191)
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .origObjectId("WildBlue-1")
+                        .addRatioWavelength(1.23)
+                        .addRatioWavelength(4.56)
+                        .satNo(25544)
+                        .solarPhaseAngle(1.23)
+                        .addWavelength(1.23)
+                        .addWavelength(4.56)
+                        .build()
+                )
+                .build()
+
+        val body = params._body()
+
+        assertThat(body)
+            .containsExactly(
+                SwirUnvalidatedPublishParams.Body.builder()
+                    .classificationMarking("U")
+                    .dataMode(SwirUnvalidatedPublishParams.Body.DataMode.TEST)
+                    .source("Bluestaq")
+                    .ts(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
+                    .id("SWIR-ID")
+                    .addAbsFlux(1.23)
+                    .addAbsFlux(4.56)
+                    .badWave("Example Comments")
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .addFluxRatio(1.23)
+                    .addFluxRatio(4.56)
+                    .idOnOrbit("45234")
+                    .lat(70.55208)
+                    .locationName("AeroTel")
+                    .lon(81.18191)
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("ORIG")
+                    .origObjectId("WildBlue-1")
+                    .addRatioWavelength(1.23)
+                    .addRatioWavelength(4.56)
+                    .satNo(25544)
+                    .solarPhaseAngle(1.23)
+                    .addWavelength(1.23)
+                    .addWavelength(4.56)
+                    .build()
+            )
+    }
+
+    @Test
+    fun bodyWithoutOptionalFields() {
+        val params =
+            SwirUnvalidatedPublishParams.builder()
+                .addBody(
+                    SwirUnvalidatedPublishParams.Body.builder()
+                        .classificationMarking("U")
+                        .dataMode(SwirUnvalidatedPublishParams.Body.DataMode.TEST)
+                        .source("Bluestaq")
+                        .ts(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
+                        .build()
+                )
+                .build()
+
+        val body = params._body()
+
+        assertThat(body)
+            .containsExactly(
+                SwirUnvalidatedPublishParams.Body.builder()
+                    .classificationMarking("U")
+                    .dataMode(SwirUnvalidatedPublishParams.Body.DataMode.TEST)
+                    .source("Bluestaq")
+                    .ts(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
+                    .build()
+            )
+    }
+}

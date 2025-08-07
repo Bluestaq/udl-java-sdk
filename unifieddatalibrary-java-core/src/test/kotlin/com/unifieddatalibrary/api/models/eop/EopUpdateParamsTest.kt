@@ -1,0 +1,174 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.eop
+
+import java.time.OffsetDateTime
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+
+internal class EopUpdateParamsTest {
+
+    @Test
+    fun create() {
+        EopUpdateParams.builder()
+            .pathId("id")
+            .classificationMarking("U")
+            .dataMode(EopUpdateParams.DataMode.TEST)
+            .eopDate(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+            .source("Bluestaq")
+            .bodyId("EOP-ID")
+            .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+            .createdBy("some.user")
+            .dEpsilon(-0.917)
+            .dEpsilonB(-1.7)
+            .dEpsilonUnc(0.165)
+            .dPsi(-10.437)
+            .dPsib(-9.9)
+            .dPsiUnc(0.507)
+            .dX(-0.086)
+            .dXb(0.129)
+            .dXUnc(0.202)
+            .dY(0.13)
+            .dYb(-0.653)
+            .dYUnc(0.165)
+            .lod(1.8335)
+            .lodUnc(0.0201)
+            .nutationState(EopUpdateParams.NutationState.I)
+            .origin("THIRD_PARTY_DATASOURCE")
+            .origNetwork("ORIG")
+            .polarMotionState(EopUpdateParams.PolarMotionState.I)
+            .polarMotionX(0.182987)
+            .polarMotionXb(0.1824)
+            .polarMotionXUnc(0.000672)
+            .polarMotionY(0.168775)
+            .polarMotionYb(0.1679)
+            .polarMotionYUnc(0.000345)
+            .precessionNutationStd("IAU1980")
+            .rawFileUri("Example URI")
+            .ut1Utc(-0.1251659)
+            .ut1Utcb(-0.1253)
+            .ut1UtcState(EopUpdateParams.Ut1UtcState.I)
+            .ut1UtcUnc(0.0000207)
+            .build()
+    }
+
+    @Test
+    fun pathParams() {
+        val params =
+            EopUpdateParams.builder()
+                .pathId("id")
+                .classificationMarking("U")
+                .dataMode(EopUpdateParams.DataMode.TEST)
+                .eopDate(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .source("Bluestaq")
+                .build()
+
+        assertThat(params._pathParam(0)).isEqualTo("id")
+        // out-of-bound path param
+        assertThat(params._pathParam(1)).isEqualTo("")
+    }
+
+    @Test
+    fun body() {
+        val params =
+            EopUpdateParams.builder()
+                .pathId("id")
+                .classificationMarking("U")
+                .dataMode(EopUpdateParams.DataMode.TEST)
+                .eopDate(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .source("Bluestaq")
+                .bodyId("EOP-ID")
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .dEpsilon(-0.917)
+                .dEpsilonB(-1.7)
+                .dEpsilonUnc(0.165)
+                .dPsi(-10.437)
+                .dPsib(-9.9)
+                .dPsiUnc(0.507)
+                .dX(-0.086)
+                .dXb(0.129)
+                .dXUnc(0.202)
+                .dY(0.13)
+                .dYb(-0.653)
+                .dYUnc(0.165)
+                .lod(1.8335)
+                .lodUnc(0.0201)
+                .nutationState(EopUpdateParams.NutationState.I)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("ORIG")
+                .polarMotionState(EopUpdateParams.PolarMotionState.I)
+                .polarMotionX(0.182987)
+                .polarMotionXb(0.1824)
+                .polarMotionXUnc(0.000672)
+                .polarMotionY(0.168775)
+                .polarMotionYb(0.1679)
+                .polarMotionYUnc(0.000345)
+                .precessionNutationStd("IAU1980")
+                .rawFileUri("Example URI")
+                .ut1Utc(-0.1251659)
+                .ut1Utcb(-0.1253)
+                .ut1UtcState(EopUpdateParams.Ut1UtcState.I)
+                .ut1UtcUnc(0.0000207)
+                .build()
+
+        val body = params._body()
+
+        assertThat(body.classificationMarking()).isEqualTo("U")
+        assertThat(body.dataMode()).isEqualTo(EopUpdateParams.DataMode.TEST)
+        assertThat(body.eopDate()).isEqualTo(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(body.source()).isEqualTo("Bluestaq")
+        assertThat(body.bodyId()).contains("EOP-ID")
+        assertThat(body.createdAt()).contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(body.createdBy()).contains("some.user")
+        assertThat(body.dEpsilon()).contains(-0.917)
+        assertThat(body.dEpsilonB()).contains(-1.7)
+        assertThat(body.dEpsilonUnc()).contains(0.165)
+        assertThat(body.dPsi()).contains(-10.437)
+        assertThat(body.dPsib()).contains(-9.9)
+        assertThat(body.dPsiUnc()).contains(0.507)
+        assertThat(body.dX()).contains(-0.086)
+        assertThat(body.dXb()).contains(0.129)
+        assertThat(body.dXUnc()).contains(0.202)
+        assertThat(body.dY()).contains(0.13)
+        assertThat(body.dYb()).contains(-0.653)
+        assertThat(body.dYUnc()).contains(0.165)
+        assertThat(body.lod()).contains(1.8335)
+        assertThat(body.lodUnc()).contains(0.0201)
+        assertThat(body.nutationState()).contains(EopUpdateParams.NutationState.I)
+        assertThat(body.origin()).contains("THIRD_PARTY_DATASOURCE")
+        assertThat(body.origNetwork()).contains("ORIG")
+        assertThat(body.polarMotionState()).contains(EopUpdateParams.PolarMotionState.I)
+        assertThat(body.polarMotionX()).contains(0.182987)
+        assertThat(body.polarMotionXb()).contains(0.1824)
+        assertThat(body.polarMotionXUnc()).contains(0.000672)
+        assertThat(body.polarMotionY()).contains(0.168775)
+        assertThat(body.polarMotionYb()).contains(0.1679)
+        assertThat(body.polarMotionYUnc()).contains(0.000345)
+        assertThat(body.precessionNutationStd()).contains("IAU1980")
+        assertThat(body.rawFileUri()).contains("Example URI")
+        assertThat(body.ut1Utc()).contains(-0.1251659)
+        assertThat(body.ut1Utcb()).contains(-0.1253)
+        assertThat(body.ut1UtcState()).contains(EopUpdateParams.Ut1UtcState.I)
+        assertThat(body.ut1UtcUnc()).contains(0.0000207)
+    }
+
+    @Test
+    fun bodyWithoutOptionalFields() {
+        val params =
+            EopUpdateParams.builder()
+                .pathId("id")
+                .classificationMarking("U")
+                .dataMode(EopUpdateParams.DataMode.TEST)
+                .eopDate(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .source("Bluestaq")
+                .build()
+
+        val body = params._body()
+
+        assertThat(body.classificationMarking()).isEqualTo("U")
+        assertThat(body.dataMode()).isEqualTo(EopUpdateParams.DataMode.TEST)
+        assertThat(body.eopDate()).isEqualTo(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+        assertThat(body.source()).isEqualTo("Bluestaq")
+    }
+}

@@ -1,0 +1,240 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.sensormaintenance
+
+import com.unifieddatalibrary.api.core.http.QueryParams
+import java.time.OffsetDateTime
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+
+internal class SensorMaintenanceCreateBulkParamsTest {
+
+    @Test
+    fun create() {
+        SensorMaintenanceCreateBulkParams.builder()
+            .origin("origin")
+            .source("source")
+            .addBody(
+                SensorMaintenanceCreateBulkParams.Body.builder()
+                    .classificationMarking("U")
+                    .dataMode(SensorMaintenanceCreateBulkParams.Body.DataMode.TEST)
+                    .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                    .siteCode("site01")
+                    .source("Bluestaq")
+                    .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                    .id("SENSORMAINTENANCE-ID")
+                    .activity("Activity Description")
+                    .approver("approver")
+                    .changer("changer")
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .duration("128:16:52")
+                    .eowId("eowId")
+                    .equipStatus("FMC")
+                    .idSensor("idSensor")
+                    .impactedFaces("impactedFaces")
+                    .inactiveDate(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .lineNumber("lineNumber")
+                    .mdOpsCap("R")
+                    .mwOpsCap("G")
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("ORIG")
+                    .priority("low")
+                    .recall("128:16:52")
+                    .rel("rel")
+                    .remark("Remarks")
+                    .requestor("requestor")
+                    .resource("resource")
+                    .rev("rev")
+                    .ssOpsCap("Y")
+                    .build()
+            )
+            .build()
+    }
+
+    @Test
+    fun queryParams() {
+        val params =
+            SensorMaintenanceCreateBulkParams.builder()
+                .origin("origin")
+                .source("source")
+                .addBody(
+                    SensorMaintenanceCreateBulkParams.Body.builder()
+                        .classificationMarking("U")
+                        .dataMode(SensorMaintenanceCreateBulkParams.Body.DataMode.TEST)
+                        .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                        .siteCode("site01")
+                        .source("Bluestaq")
+                        .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                        .id("SENSORMAINTENANCE-ID")
+                        .activity("Activity Description")
+                        .approver("approver")
+                        .changer("changer")
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .duration("128:16:52")
+                        .eowId("eowId")
+                        .equipStatus("FMC")
+                        .idSensor("idSensor")
+                        .impactedFaces("impactedFaces")
+                        .inactiveDate(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .lineNumber("lineNumber")
+                        .mdOpsCap("R")
+                        .mwOpsCap("G")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .priority("low")
+                        .recall("128:16:52")
+                        .rel("rel")
+                        .remark("Remarks")
+                        .requestor("requestor")
+                        .resource("resource")
+                        .rev("rev")
+                        .ssOpsCap("Y")
+                        .build()
+                )
+                .build()
+
+        val queryParams = params._queryParams()
+
+        assertThat(queryParams)
+            .isEqualTo(
+                QueryParams.builder().put("origin", "origin").put("source", "source").build()
+            )
+    }
+
+    @Test
+    fun queryParamsWithoutOptionalFields() {
+        val params =
+            SensorMaintenanceCreateBulkParams.builder()
+                .addBody(
+                    SensorMaintenanceCreateBulkParams.Body.builder()
+                        .classificationMarking("U")
+                        .dataMode(SensorMaintenanceCreateBulkParams.Body.DataMode.TEST)
+                        .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                        .siteCode("site01")
+                        .source("Bluestaq")
+                        .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                        .build()
+                )
+                .build()
+
+        val queryParams = params._queryParams()
+
+        assertThat(queryParams).isEqualTo(QueryParams.builder().build())
+    }
+
+    @Test
+    fun body() {
+        val params =
+            SensorMaintenanceCreateBulkParams.builder()
+                .origin("origin")
+                .source("source")
+                .addBody(
+                    SensorMaintenanceCreateBulkParams.Body.builder()
+                        .classificationMarking("U")
+                        .dataMode(SensorMaintenanceCreateBulkParams.Body.DataMode.TEST)
+                        .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                        .siteCode("site01")
+                        .source("Bluestaq")
+                        .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                        .id("SENSORMAINTENANCE-ID")
+                        .activity("Activity Description")
+                        .approver("approver")
+                        .changer("changer")
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .duration("128:16:52")
+                        .eowId("eowId")
+                        .equipStatus("FMC")
+                        .idSensor("idSensor")
+                        .impactedFaces("impactedFaces")
+                        .inactiveDate(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .lineNumber("lineNumber")
+                        .mdOpsCap("R")
+                        .mwOpsCap("G")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .priority("low")
+                        .recall("128:16:52")
+                        .rel("rel")
+                        .remark("Remarks")
+                        .requestor("requestor")
+                        .resource("resource")
+                        .rev("rev")
+                        .ssOpsCap("Y")
+                        .build()
+                )
+                .build()
+
+        val body = params._body()
+
+        assertThat(body)
+            .containsExactly(
+                SensorMaintenanceCreateBulkParams.Body.builder()
+                    .classificationMarking("U")
+                    .dataMode(SensorMaintenanceCreateBulkParams.Body.DataMode.TEST)
+                    .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                    .siteCode("site01")
+                    .source("Bluestaq")
+                    .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                    .id("SENSORMAINTENANCE-ID")
+                    .activity("Activity Description")
+                    .approver("approver")
+                    .changer("changer")
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .duration("128:16:52")
+                    .eowId("eowId")
+                    .equipStatus("FMC")
+                    .idSensor("idSensor")
+                    .impactedFaces("impactedFaces")
+                    .inactiveDate(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .lineNumber("lineNumber")
+                    .mdOpsCap("R")
+                    .mwOpsCap("G")
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("ORIG")
+                    .priority("low")
+                    .recall("128:16:52")
+                    .rel("rel")
+                    .remark("Remarks")
+                    .requestor("requestor")
+                    .resource("resource")
+                    .rev("rev")
+                    .ssOpsCap("Y")
+                    .build()
+            )
+    }
+
+    @Test
+    fun bodyWithoutOptionalFields() {
+        val params =
+            SensorMaintenanceCreateBulkParams.builder()
+                .addBody(
+                    SensorMaintenanceCreateBulkParams.Body.builder()
+                        .classificationMarking("U")
+                        .dataMode(SensorMaintenanceCreateBulkParams.Body.DataMode.TEST)
+                        .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                        .siteCode("site01")
+                        .source("Bluestaq")
+                        .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                        .build()
+                )
+                .build()
+
+        val body = params._body()
+
+        assertThat(body)
+            .containsExactly(
+                SensorMaintenanceCreateBulkParams.Body.builder()
+                    .classificationMarking("U")
+                    .dataMode(SensorMaintenanceCreateBulkParams.Body.DataMode.TEST)
+                    .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                    .siteCode("site01")
+                    .source("Bluestaq")
+                    .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+                    .build()
+            )
+    }
+}

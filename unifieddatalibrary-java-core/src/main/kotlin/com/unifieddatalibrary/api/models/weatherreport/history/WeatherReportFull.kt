@@ -1,0 +1,3852 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.weatherreport.history
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.unifieddatalibrary.api.core.Enum
+import com.unifieddatalibrary.api.core.ExcludeMissing
+import com.unifieddatalibrary.api.core.JsonField
+import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
+import com.unifieddatalibrary.api.core.checkKnown
+import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.core.toImmutable
+import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import java.time.OffsetDateTime
+import java.util.Collections
+import java.util.Objects
+import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
+
+/**
+ * These services provide for posting and querying Weather Over Target information. The information
+ * contained within describes the current weather conditions over a target area or region to include
+ * navigational considerations such as altimeter settings, visibility, cloud heights etc.
+ */
+class WeatherReportFull
+private constructor(
+    private val classificationMarking: JsonField<String>,
+    private val dataMode: JsonField<DataMode>,
+    private val lat: JsonField<Double>,
+    private val lon: JsonField<Double>,
+    private val obTime: JsonField<OffsetDateTime>,
+    private val reportType: JsonField<String>,
+    private val source: JsonField<String>,
+    private val id: JsonField<String>,
+    private val actWeather: JsonField<String>,
+    private val agjson: JsonField<String>,
+    private val alt: JsonField<Double>,
+    private val andims: JsonField<Long>,
+    private val area: JsonField<String>,
+    private val asrid: JsonField<Int>,
+    private val atext: JsonField<String>,
+    private val atype: JsonField<String>,
+    private val barPress: JsonField<Double>,
+    private val ccEvent: JsonField<Boolean>,
+    private val cloudCover: JsonField<List<String>>,
+    private val cloudHght: JsonField<List<Double>>,
+    private val contrailHghtLower: JsonField<Double>,
+    private val contrailHghtUpper: JsonField<Double>,
+    private val createdAt: JsonField<OffsetDateTime>,
+    private val createdBy: JsonField<String>,
+    private val dataLevel: JsonField<String>,
+    private val dewPoint: JsonField<Double>,
+    private val difRad: JsonField<Double>,
+    private val dirDev: JsonField<Double>,
+    private val enRouteWeather: JsonField<String>,
+    private val externalId: JsonField<String>,
+    private val externalLocationId: JsonField<String>,
+    private val forecastEndTime: JsonField<OffsetDateTime>,
+    private val forecastStartTime: JsonField<OffsetDateTime>,
+    private val geoPotentialAlt: JsonField<Double>,
+    private val hshear: JsonField<Double>,
+    private val icao: JsonField<String>,
+    private val icingLowerLimit: JsonField<Double>,
+    private val icingUpperLimit: JsonField<Double>,
+    private val idAirfield: JsonField<String>,
+    private val idGroundImagery: JsonField<String>,
+    private val idSensor: JsonField<String>,
+    private val idSite: JsonField<String>,
+    private val indexRefraction: JsonField<Double>,
+    private val origin: JsonField<String>,
+    private val origNetwork: JsonField<String>,
+    private val origSensorId: JsonField<String>,
+    private val precipRate: JsonField<Double>,
+    private val qnh: JsonField<Double>,
+    private val radVel: JsonField<Double>,
+    private val radVelBeam1: JsonField<Double>,
+    private val radVelBeam2: JsonField<Double>,
+    private val radVelBeam3: JsonField<Double>,
+    private val radVelBeam4: JsonField<Double>,
+    private val radVelBeam5: JsonField<Double>,
+    private val rainHour: JsonField<Double>,
+    private val rawMetar: JsonField<String>,
+    private val rawTaf: JsonField<String>,
+    private val refRad: JsonField<Double>,
+    private val relHumidity: JsonField<Double>,
+    private val senalt: JsonField<Double>,
+    private val senlat: JsonField<Double>,
+    private val senlon: JsonField<Double>,
+    private val soilMoisture: JsonField<Double>,
+    private val soilTemp: JsonField<Double>,
+    private val solarRad: JsonField<Double>,
+    private val srcIds: JsonField<List<String>>,
+    private val srcTyps: JsonField<List<String>>,
+    private val surroundingWeather: JsonField<String>,
+    private val temperature: JsonField<Double>,
+    private val visibility: JsonField<Double>,
+    private val vshear: JsonField<Double>,
+    private val weatherAmp: JsonField<String>,
+    private val weatherDesc: JsonField<String>,
+    private val weatherId: JsonField<String>,
+    private val weatherInt: JsonField<String>,
+    private val windChill: JsonField<Double>,
+    private val windCov: JsonField<List<Double>>,
+    private val windDir: JsonField<Double>,
+    private val windDirAvg: JsonField<Double>,
+    private val windDirPeak: JsonField<Double>,
+    private val windDirPeak10: JsonField<Double>,
+    private val windGust: JsonField<Double>,
+    private val windGust10: JsonField<Double>,
+    private val windSpd: JsonField<Double>,
+    private val windSpdAvg: JsonField<Double>,
+    private val windVar: JsonField<Boolean>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
+) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
+        @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("obTime")
+        @ExcludeMissing
+        obTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("reportType")
+        @ExcludeMissing
+        reportType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("actWeather")
+        @ExcludeMissing
+        actWeather: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("agjson") @ExcludeMissing agjson: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("alt") @ExcludeMissing alt: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("andims") @ExcludeMissing andims: JsonField<Long> = JsonMissing.of(),
+        @JsonProperty("area") @ExcludeMissing area: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("asrid") @ExcludeMissing asrid: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("atext") @ExcludeMissing atext: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("atype") @ExcludeMissing atype: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("barPress") @ExcludeMissing barPress: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("ccEvent") @ExcludeMissing ccEvent: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("cloudCover")
+        @ExcludeMissing
+        cloudCover: JsonField<List<String>> = JsonMissing.of(),
+        @JsonProperty("cloudHght")
+        @ExcludeMissing
+        cloudHght: JsonField<List<Double>> = JsonMissing.of(),
+        @JsonProperty("contrailHghtLower")
+        @ExcludeMissing
+        contrailHghtLower: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("contrailHghtUpper")
+        @ExcludeMissing
+        contrailHghtUpper: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("dataLevel") @ExcludeMissing dataLevel: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("dewPoint") @ExcludeMissing dewPoint: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("difRad") @ExcludeMissing difRad: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("dirDev") @ExcludeMissing dirDev: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("enRouteWeather")
+        @ExcludeMissing
+        enRouteWeather: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("externalId")
+        @ExcludeMissing
+        externalId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("externalLocationId")
+        @ExcludeMissing
+        externalLocationId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("forecastEndTime")
+        @ExcludeMissing
+        forecastEndTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("forecastStartTime")
+        @ExcludeMissing
+        forecastStartTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("geoPotentialAlt")
+        @ExcludeMissing
+        geoPotentialAlt: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("hshear") @ExcludeMissing hshear: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("icao") @ExcludeMissing icao: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("icingLowerLimit")
+        @ExcludeMissing
+        icingLowerLimit: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("icingUpperLimit")
+        @ExcludeMissing
+        icingUpperLimit: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("idAirfield")
+        @ExcludeMissing
+        idAirfield: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("idGroundImagery")
+        @ExcludeMissing
+        idGroundImagery: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("idSensor") @ExcludeMissing idSensor: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("idSite") @ExcludeMissing idSite: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("indexRefraction")
+        @ExcludeMissing
+        indexRefraction: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origNetwork")
+        @ExcludeMissing
+        origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origSensorId")
+        @ExcludeMissing
+        origSensorId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("precipRate")
+        @ExcludeMissing
+        precipRate: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("qnh") @ExcludeMissing qnh: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("radVel") @ExcludeMissing radVel: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("radVelBeam1")
+        @ExcludeMissing
+        radVelBeam1: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("radVelBeam2")
+        @ExcludeMissing
+        radVelBeam2: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("radVelBeam3")
+        @ExcludeMissing
+        radVelBeam3: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("radVelBeam4")
+        @ExcludeMissing
+        radVelBeam4: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("radVelBeam5")
+        @ExcludeMissing
+        radVelBeam5: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("rainHour") @ExcludeMissing rainHour: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("rawMETAR") @ExcludeMissing rawMetar: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("rawTAF") @ExcludeMissing rawTaf: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("refRad") @ExcludeMissing refRad: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("relHumidity")
+        @ExcludeMissing
+        relHumidity: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("senalt") @ExcludeMissing senalt: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("senlat") @ExcludeMissing senlat: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("senlon") @ExcludeMissing senlon: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("soilMoisture")
+        @ExcludeMissing
+        soilMoisture: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("soilTemp") @ExcludeMissing soilTemp: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("solarRad") @ExcludeMissing solarRad: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("srcIds") @ExcludeMissing srcIds: JsonField<List<String>> = JsonMissing.of(),
+        @JsonProperty("srcTyps")
+        @ExcludeMissing
+        srcTyps: JsonField<List<String>> = JsonMissing.of(),
+        @JsonProperty("surroundingWeather")
+        @ExcludeMissing
+        surroundingWeather: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("temperature")
+        @ExcludeMissing
+        temperature: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("visibility")
+        @ExcludeMissing
+        visibility: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("vshear") @ExcludeMissing vshear: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("weatherAmp")
+        @ExcludeMissing
+        weatherAmp: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("weatherDesc")
+        @ExcludeMissing
+        weatherDesc: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("weatherId") @ExcludeMissing weatherId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("weatherInt")
+        @ExcludeMissing
+        weatherInt: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("windChill") @ExcludeMissing windChill: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("windCov")
+        @ExcludeMissing
+        windCov: JsonField<List<Double>> = JsonMissing.of(),
+        @JsonProperty("windDir") @ExcludeMissing windDir: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("windDirAvg")
+        @ExcludeMissing
+        windDirAvg: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("windDirPeak")
+        @ExcludeMissing
+        windDirPeak: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("windDirPeak10")
+        @ExcludeMissing
+        windDirPeak10: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("windGust") @ExcludeMissing windGust: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("windGust10")
+        @ExcludeMissing
+        windGust10: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("windSpd") @ExcludeMissing windSpd: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("windSpdAvg")
+        @ExcludeMissing
+        windSpdAvg: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("windVar") @ExcludeMissing windVar: JsonField<Boolean> = JsonMissing.of(),
+    ) : this(
+        classificationMarking,
+        dataMode,
+        lat,
+        lon,
+        obTime,
+        reportType,
+        source,
+        id,
+        actWeather,
+        agjson,
+        alt,
+        andims,
+        area,
+        asrid,
+        atext,
+        atype,
+        barPress,
+        ccEvent,
+        cloudCover,
+        cloudHght,
+        contrailHghtLower,
+        contrailHghtUpper,
+        createdAt,
+        createdBy,
+        dataLevel,
+        dewPoint,
+        difRad,
+        dirDev,
+        enRouteWeather,
+        externalId,
+        externalLocationId,
+        forecastEndTime,
+        forecastStartTime,
+        geoPotentialAlt,
+        hshear,
+        icao,
+        icingLowerLimit,
+        icingUpperLimit,
+        idAirfield,
+        idGroundImagery,
+        idSensor,
+        idSite,
+        indexRefraction,
+        origin,
+        origNetwork,
+        origSensorId,
+        precipRate,
+        qnh,
+        radVel,
+        radVelBeam1,
+        radVelBeam2,
+        radVelBeam3,
+        radVelBeam4,
+        radVelBeam5,
+        rainHour,
+        rawMetar,
+        rawTaf,
+        refRad,
+        relHumidity,
+        senalt,
+        senlat,
+        senlon,
+        soilMoisture,
+        soilTemp,
+        solarRad,
+        srcIds,
+        srcTyps,
+        surroundingWeather,
+        temperature,
+        visibility,
+        vshear,
+        weatherAmp,
+        weatherDesc,
+        weatherId,
+        weatherInt,
+        windChill,
+        windCov,
+        windDir,
+        windDirAvg,
+        windDirPeak,
+        windDirPeak10,
+        windGust,
+        windGust10,
+        windSpd,
+        windSpdAvg,
+        windVar,
+        mutableMapOf(),
+    )
+
+    /**
+     * Classification marking of the data in IC/CAPCO Portion-marked format.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
+
+    /**
+     * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+     *
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
+     *
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
+     *
+     * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+     *
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun dataMode(): DataMode = dataMode.getRequired("dataMode")
+
+    /**
+     * The central WGS-84 latitude of the weather report, in degrees. -90 to 90 degrees (negative
+     * values south of equator).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun lat(): Double = lat.getRequired("lat")
+
+    /**
+     * The central WGS-84 longitude of the weather report, in degrees. -180 to 180 degrees (negative
+     * values west of Prime Meridian).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun lon(): Double = lon.getRequired("lon")
+
+    /**
+     * Datetime when a weather observation was made or forecast was issued in ISO 8601 UTC datetime
+     * format with microsecond precision.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun obTime(): OffsetDateTime = obTime.getRequired("obTime")
+
+    /**
+     * Identifies the type of weather report (e.g. OBSERVATION, FORECAST, etc.).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun reportType(): String = reportType.getRequired("reportType")
+
+    /**
+     * Source of the data.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun source(): String = source.getRequired("source")
+
+    /**
+     * Unique identifier of the record, auto-generated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun id(): Optional<String> = id.getOptional("id")
+
+    /**
+     * Describes the actual weather at position. Intended as, but not constrained to, MIL-STD-6016
+     * actual weather (e.g. NO STATEMENT, NO SIGNIFICANT WEATHER, DRIZZLE, RAIN, SNOW, SNOW GRAINS,
+     * DIAMOND DUST, ICE PELLETS, HAIL, SMALL HAIL, MIST, FOG, SMOKE, VOLCANIC ASH, WIDESPREAD DUST,
+     * SAND, HAZE, WELL DEVELOPED DUST, SQUALLS, FUNNEL CLOUDS, SANDSTORM, DUSTSTORM, LOW CLOUDS,
+     * CLOUDY, GROUND FOG, DUST, HEAVY RAIN, THUNDERSTORMS AWT, HEAVY THUNDERSTORMS, HURRICANE
+     * TYPHOON CYCLONE, TROPICAL STORM, TORNADO, HIGH WINDS, LIGHTNING, FREEZING DRIZZLE, FREEZING
+     * RAIN, HEAVY SNOW, ICING, SNOW OR RAIN AND SNOW MIXED, SHOWERS, CLEAR).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun actWeather(): Optional<String> = actWeather.getOptional("actWeather")
+
+    /**
+     * Geographical region or polygon (lat/lon pairs), as depicted by the GeoJSON representation of
+     * the geometry/geography, of the image as projected on the ground. GeoJSON Reference:
+     * https://geojson.org/. Ignored if included with a POST or PUT request that also specifies a
+     * valid 'area' or 'atext' field.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun agjson(): Optional<String> = agjson.getOptional("agjson")
+
+    /**
+     * Point height above ellipsoid (WGS-84), in meters.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun alt(): Optional<Double> = alt.getOptional("alt")
+
+    /**
+     * Number of dimensions of the geometry depicted by region.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun andims(): Optional<Long> = andims.getOptional("andims")
+
+    /**
+     * Optional geographical region or polygon (lat/lon pairs) of the area surrounding the point of
+     * interest as projected on the ground.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun area(): Optional<String> = area.getOptional("area")
+
+    /**
+     * Geographical spatial_ref_sys for region.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun asrid(): Optional<Int> = asrid.getOptional("asrid")
+
+    /**
+     * Geographical region or polygon (lon/lat pairs), as depicted by the Well-Known Text
+     * representation of the geometry/geography, of the image as projected on the ground. WKT
+     * reference: https://www.opengeospatial.org/standards/wkt-crs. Ignored if included with a POST
+     * or PUT request that also specifies a valid 'area' field.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun atext(): Optional<String> = atext.getOptional("atext")
+
+    /**
+     * Type of region as projected on the ground.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun atype(): Optional<String> = atype.getOptional("atype")
+
+    /**
+     * The measurement of air pressure in the atmosphere in kilopascals.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun barPress(): Optional<Double> = barPress.getOptional("barPress")
+
+    /**
+     * Flag indicating detection of a cloud-to-cloud lightning event.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun ccEvent(): Optional<Boolean> = ccEvent.getOptional("ccEvent")
+
+    /**
+     * Array of cloud cover descriptions - each element can be maximum of 16 characters long.
+     * Intended as, but not constrained to, MIL-STD-6016 cloud cover designations (e.g. SKY CLEAR,
+     * SCATTERED, BROKEN, OVERCAST, SKY OBSCURED). Each element of the array corresponds to the
+     * elements in the cloudHght array specified respectively.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun cloudCover(): Optional<List<String>> = cloudCover.getOptional("cloudCover")
+
+    /**
+     * Array of cloud base heights in meters described by the cloudHght array. Each element of the
+     * array corresponds to the elements in the cloudCover array specified respectively.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun cloudHght(): Optional<List<Double>> = cloudHght.getOptional("cloudHght")
+
+    /**
+     * Reports the lowest altitude at which contrails are occurring, in meters.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun contrailHghtLower(): Optional<Double> = contrailHghtLower.getOptional("contrailHghtLower")
+
+    /**
+     * Reports the highest altitude at which contrails are occurring, in meters.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun contrailHghtUpper(): Optional<Double> = contrailHghtUpper.getOptional("contrailHghtUpper")
+
+    /**
+     * Time the row was created in the database.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
+
+    /**
+     * Application user who created the row in the database.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
+
+    /**
+     * Specific pressures or heights where measurements are taken, labeled as either MANDATORY or
+     * SIGNIFICANT levels. Mandatory levels are at particular pressures at geopotential heights.
+     * Significant levels are at particular geometric heights.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun dataLevel(): Optional<String> = dataLevel.getOptional("dataLevel")
+
+    /**
+     * The temperature at which air is saturated with water vapor, in degrees C.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun dewPoint(): Optional<Double> = dewPoint.getOptional("dewPoint")
+
+    /**
+     * The amount of radiation that reaches earth's surface after being scattered by the atmosphere,
+     * in Watts per square meter.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun difRad(): Optional<Double> = difRad.getOptional("difRad")
+
+    /**
+     * The difference in wind direction recorded over a period of time, in degrees.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun dirDev(): Optional<Double> = dirDev.getOptional("dirDev")
+
+    /**
+     * Describes the flight conditions in route to the target (NO STATEMENT, MAINLY IFR, MAINLY VFR,
+     * THUNDERSTORMS).
+     *
+     * MAINLY IFR:&nbsp;&nbsp;Predominantly Instrument Flight Rules.
+     *
+     * MAINLY VFR:&nbsp;&nbsp;Predominantly Visual Flight Rules.
+     *
+     * THUNDERSTORMS:&nbsp;&nbsp;Thunderstorms expected in route.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun enRouteWeather(): Optional<String> = enRouteWeather.getOptional("enRouteWeather")
+
+    /**
+     * Optional observation or forecast ID from external systems. This field has no meaning within
+     * UDL and is provided as a convenience for systems that require tracking of an internal system
+     * generated ID.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun externalId(): Optional<String> = externalId.getOptional("externalId")
+
+    /**
+     * Optional location ID from external systems. This field has no meaning within UDL and is
+     * provided as a convenience for systems that require tracking of an internal system generated
+     * ID.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun externalLocationId(): Optional<String> =
+        externalLocationId.getOptional("externalLocationId")
+
+    /**
+     * Valid end time of a weather forecast in ISO 8601 UTC datetime format with millisecond
+     * precision.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun forecastEndTime(): Optional<OffsetDateTime> = forecastEndTime.getOptional("forecastEndTime")
+
+    /**
+     * Valid start time of a weather forecast in ISO 8601 UTC datetime format with millisecond
+     * precision.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun forecastStartTime(): Optional<OffsetDateTime> =
+        forecastStartTime.getOptional("forecastStartTime")
+
+    /**
+     * Altitude of a pressure surface in the atmosphere above mean sea level, in meters.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun geoPotentialAlt(): Optional<Double> = geoPotentialAlt.getOptional("geoPotentialAlt")
+
+    /**
+     * The change in wind speed between two different lateral positions at a given altitude divided
+     * by the horizontal distance between them, in units of 1/sec.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun hshear(): Optional<Double> = hshear.getOptional("hshear")
+
+    /**
+     * The International Civil Aviation Organization (ICAO) code of the airfield associated with
+     * this weather report.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun icao(): Optional<String> = icao.getOptional("icao")
+
+    /**
+     * Reports the lowest altitude at which icing or freezing rain is occurring, in meters.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun icingLowerLimit(): Optional<Double> = icingLowerLimit.getOptional("icingLowerLimit")
+
+    /**
+     * Reports the highest altitude at which icing or freezing rain is occurring, in meters.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun icingUpperLimit(): Optional<Double> = icingUpperLimit.getOptional("icingUpperLimit")
+
+    /**
+     * Identifier of the Airfield associated with this weather report.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun idAirfield(): Optional<String> = idAirfield.getOptional("idAirfield")
+
+    /**
+     * Identifier of the ground imagery associated for this weather over target report.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun idGroundImagery(): Optional<String> = idGroundImagery.getOptional("idGroundImagery")
+
+    /**
+     * Unique identifier of the sensor making the weather measurement.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun idSensor(): Optional<String> = idSensor.getOptional("idSensor")
+
+    /**
+     * Identifier of the Site that is associated with this weather report.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun idSite(): Optional<String> = idSite.getOptional("idSite")
+
+    /**
+     * An indication of how much the atmosphere refracts light.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun indexRefraction(): Optional<Double> = indexRefraction.getOptional("indexRefraction")
+
+    /**
+     * Originating system or organization which produced the data, if different from the source. The
+     * origin may be different than the source if the source was a mediating system which forwarded
+     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origin(): Optional<String> = origin.getOptional("origin")
+
+    /**
+     * The originating source network on which this record was created, auto-populated by the
+     * system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
+
+    /**
+     * Optional identifier provided by the record source. This may be an internal identifier and not
+     * necessarily a valid sensor ID.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origSensorId(): Optional<String> = origSensorId.getOptional("origSensorId")
+
+    /**
+     * The speed at which water is being applied to a specific area in millimeters per hour.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun precipRate(): Optional<Double> = precipRate.getOptional("precipRate")
+
+    /**
+     * Altimeter set to read zero at mean sea level in kilopascals.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun qnh(): Optional<Double> = qnh.getOptional("qnh")
+
+    /**
+     * Average radial velocity of wind as measured by radar with multi-beam configurations. Radial
+     * velocity is the component of wind velocity moving directly toward or away from a sensor's
+     * radar beam, in meters per second. Values can either be positive (wind is moving away from the
+     * radar) or negative (wind is moving toward the radar).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun radVel(): Optional<Double> = radVel.getOptional("radVel")
+
+    /**
+     * Component of wind velocity moving directly toward or away from radar beam 1, in meters per
+     * second. Radial velocity values can either be positive (wind is moving away from the radar) or
+     * negative (wind is moving toward the radar). The beam number designation is defined by the
+     * data source.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun radVelBeam1(): Optional<Double> = radVelBeam1.getOptional("radVelBeam1")
+
+    /**
+     * Component of wind velocity moving directly toward or away from radar beam 2, in meters per
+     * second. Radial velocity values can either be positive (wind is moving away from the radar) or
+     * negative (wind is moving toward the radar). The beam number designation is defined by the
+     * data source.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun radVelBeam2(): Optional<Double> = radVelBeam2.getOptional("radVelBeam2")
+
+    /**
+     * Component of wind velocity moving directly toward or away from radar beam 3, in meters per
+     * second. Radial velocity values can either be positive (wind is moving away from the radar) or
+     * negative (wind is moving toward the radar). The beam number designation is defined by the
+     * data source.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun radVelBeam3(): Optional<Double> = radVelBeam3.getOptional("radVelBeam3")
+
+    /**
+     * Component of wind velocity moving directly toward or away from radar beam 4, in meters per
+     * second. Radial velocity values can either be positive (wind is moving away from the radar) or
+     * negative (wind is moving toward the radar). The beam number designation is defined by the
+     * data source.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun radVelBeam4(): Optional<Double> = radVelBeam4.getOptional("radVelBeam4")
+
+    /**
+     * Component of wind velocity moving directly toward or away from radar beam 5, in meters per
+     * second. Radial velocity values can either be positive (wind is moving away from the radar) or
+     * negative (wind is moving toward the radar). The beam number designation is defined by the
+     * data source.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun radVelBeam5(): Optional<Double> = radVelBeam5.getOptional("radVelBeam5")
+
+    /**
+     * The amount of rain that has fallen in the past hour, in centimeters.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun rainHour(): Optional<Double> = rainHour.getOptional("rainHour")
+
+    /**
+     * The Raw Meteorological Aerodrome Report (METAR) string.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun rawMetar(): Optional<String> = rawMetar.getOptional("rawMETAR")
+
+    /**
+     * Terminal Aerodrome Forecast (TAF) containing detailed weather predictions for a specific
+     * airport or aerodrome.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun rawTaf(): Optional<String> = rawTaf.getOptional("rawTAF")
+
+    /**
+     * The amount of radiation that changes direction as a function of atmospheric density, in Watts
+     * per square meter.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun refRad(): Optional<Double> = refRad.getOptional("refRad")
+
+    /**
+     * The percentage of water vapor in the atmosphere.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun relHumidity(): Optional<Double> = relHumidity.getOptional("relHumidity")
+
+    /**
+     * Sensor altitude at obTime in km. This includes pilot reports or other means of weather
+     * observation.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun senalt(): Optional<Double> = senalt.getOptional("senalt")
+
+    /**
+     * Sensor WGS84 latitude at obTime in degrees. -90 to 90 degrees (negative values south of
+     * equator). This includes pilot reports or other means of weather observation.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun senlat(): Optional<Double> = senlat.getOptional("senlat")
+
+    /**
+     * Sensor WGS84 longitude at obTime in degrees. -180 to 180 degrees (negative values west of
+     * Prime Meridian). This includes pilot reports or other means of weather observation.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun senlon(): Optional<Double> = senlon.getOptional("senlon")
+
+    /**
+     * The volumetric percentage of soil water contained in a given volume of soil.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun soilMoisture(): Optional<Double> = soilMoisture.getOptional("soilMoisture")
+
+    /**
+     * The measurement of soil temperature in degrees C.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun soilTemp(): Optional<Double> = soilTemp.getOptional("soilTemp")
+
+    /**
+     * The power per unit area received from the Sun in the form of electromagnetic radiation as
+     * measured in the wavelength range of the measuring instrument. The solar irradiance is
+     * measured in watt per square meter (W/m2).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun solarRad(): Optional<Double> = solarRad.getOptional("solarRad")
+
+    /**
+     * Array of UUID(s) of the UDL data record(s) that are related to this WeatherReport record. See
+     * the associated 'srcTyps' array for the specific types of data, positionally corresponding to
+     * the UUIDs in this array. The 'srcTyps' and 'srcIds' arrays must match in size. See the
+     * corresponding srcTyps array element for the data type of the UUID and use the appropriate API
+     * operation to retrieve that object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun srcIds(): Optional<List<String>> = srcIds.getOptional("srcIds")
+
+    /**
+     * Array of UDL record types (SENSOR, WEATHERDATA) that are related to this WeatherReport
+     * record. See the associated 'srcIds' array for the record UUIDs, positionally corresponding to
+     * the record types in this array. The 'srcTyps' and 'srcIds' arrays must match in size.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun srcTyps(): Optional<List<String>> = srcTyps.getOptional("srcTyps")
+
+    /**
+     * Describes in which direction (if any) that better weather conditions exist. Intended as, but
+     * not constrained to, MIL-STD-6016 surrounding weather designations (e.g. NO STATEMENT, BETTER
+     * TO NORTH, BETTER TO EAST, BETTER TO SOUTH, BETTER TO WEST).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun surroundingWeather(): Optional<String> =
+        surroundingWeather.getOptional("surroundingWeather")
+
+    /**
+     * The measurement of air temperature in degrees C.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun temperature(): Optional<Double> = temperature.getOptional("temperature")
+
+    /**
+     * Visual distance in meters.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun visibility(): Optional<Double> = visibility.getOptional("visibility")
+
+    /**
+     * The change in wind speed between two different altitudes divided by the vertical distance
+     * between them, in units of 1/sec.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun vshear(): Optional<Double> = vshear.getOptional("vshear")
+
+    /**
+     * Amplifies the actual weather being reported. Intended as, but not constrained to,
+     * MIL-STD-6016 weather amplification designations (e.g. NO STATEMENT, NO SCATTERED BROKEN
+     * MEDIUM CLOUD, SCATTERED BROKEN MEDIUM CLOUDS, GUSTY WINDS AT SERVICE, FOG IN VALLEYS, HIGHER
+     * TERRAIN OBSCURED, SURFACE CONDITIONS VARIABLE, SURFACE WIND NE, SURFACE WIND SE, SURFACE WIND
+     * SW, SURFACE WIND NW, PRESENCE OF CUMULONIMBUS).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun weatherAmp(): Optional<String> = weatherAmp.getOptional("weatherAmp")
+
+    /**
+     * Used in conjunction with actWeather and weatherInt. Intended as, but not constrained to,
+     * MIL-STD-6016 actual weather descriptor (e.g. NO STATEMENT, SHALLOW, PATCHES, LOW DRIFTING,
+     * BLOWING, SHOWERS, THUNDERSTORMS, SUPERCOOLED).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun weatherDesc(): Optional<String> = weatherDesc.getOptional("weatherDesc")
+
+    /**
+     * Identifier of the weather over target, which should remain the same on subsequent Weather
+     * Over Target records.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun weatherId(): Optional<String> = weatherId.getOptional("weatherId")
+
+    /**
+     * Weather Intensity. Used in conjunction with actWeather and weatherDesc. Intended as, but not
+     * constrained to, MIL-STD-6016 weather intensity (e.g. NO STATEMENT, LIGHT, MODERATE, HEAVY, IN
+     * VICINITY).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun weatherInt(): Optional<String> = weatherInt.getOptional("weatherInt")
+
+    /**
+     * The perceived temperature in degrees C.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun windChill(): Optional<Double> = windChill.getOptional("windChill")
+
+    /**
+     * Covariance matrix, in knots and second based units. The array values represent the lower
+     * triangular half of the covariance matrix. The size of the covariance matrix is 2x2. The
+     * covariance elements are position dependent within the array with values ordered as follows:
+     *
+     * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;&nbsp;&nbsp;&nbsp;y
+     *
+     * x&nbsp;&nbsp;&nbsp;&nbsp;1
+     *
+     * y&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3
+     *
+     * The cov array should contain only the lower left triangle values from top left down to bottom
+     * right, in order.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun windCov(): Optional<List<Double>> = windCov.getOptional("windCov")
+
+    /**
+     * Direction the wind is blowing, in degrees clockwise from true north.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun windDir(): Optional<Double> = windDir.getOptional("windDir")
+
+    /**
+     * Average wind direction over a 1 minute period, in degrees clockwise from true north.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun windDirAvg(): Optional<Double> = windDirAvg.getOptional("windDirAvg")
+
+    /**
+     * Wind direction corresponding to the peak wind speed during a 1 minute period, in degrees
+     * clockwise from true north.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun windDirPeak(): Optional<Double> = windDirPeak.getOptional("windDirPeak")
+
+    /**
+     * Wind direction corresponding to the peak wind speed during a 10 minute period, in degrees
+     * clockwise from true north.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun windDirPeak10(): Optional<Double> = windDirPeak10.getOptional("windDirPeak10")
+
+    /**
+     * Expresses the max gust speed of the wind, in meters/second.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun windGust(): Optional<Double> = windGust.getOptional("windGust")
+
+    /**
+     * Expresses the max gust speed of the wind recorded in a 10 minute period, in meters/second.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun windGust10(): Optional<Double> = windGust10.getOptional("windGust10")
+
+    /**
+     * Expresses the speed of the wind in meters/second.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun windSpd(): Optional<Double> = windSpd.getOptional("windSpd")
+
+    /**
+     * Average wind speed over a 1 minute period, in meters/second.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun windSpdAvg(): Optional<Double> = windSpdAvg.getOptional("windSpdAvg")
+
+    /**
+     * Boolean describing whether or not the wind direction and/or speed is variable.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun windVar(): Optional<Boolean> = windVar.getOptional("windVar")
+
+    /**
+     * Returns the raw JSON value of [classificationMarking].
+     *
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("classificationMarking")
+    @ExcludeMissing
+    fun _classificationMarking(): JsonField<String> = classificationMarking
+
+    /**
+     * Returns the raw JSON value of [dataMode].
+     *
+     * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+
+    /**
+     * Returns the raw JSON value of [lat].
+     *
+     * Unlike [lat], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("lat") @ExcludeMissing fun _lat(): JsonField<Double> = lat
+
+    /**
+     * Returns the raw JSON value of [lon].
+     *
+     * Unlike [lon], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("lon") @ExcludeMissing fun _lon(): JsonField<Double> = lon
+
+    /**
+     * Returns the raw JSON value of [obTime].
+     *
+     * Unlike [obTime], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("obTime") @ExcludeMissing fun _obTime(): JsonField<OffsetDateTime> = obTime
+
+    /**
+     * Returns the raw JSON value of [reportType].
+     *
+     * Unlike [reportType], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("reportType") @ExcludeMissing fun _reportType(): JsonField<String> = reportType
+
+    /**
+     * Returns the raw JSON value of [source].
+     *
+     * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+
+    /**
+     * Returns the raw JSON value of [id].
+     *
+     * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+
+    /**
+     * Returns the raw JSON value of [actWeather].
+     *
+     * Unlike [actWeather], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("actWeather") @ExcludeMissing fun _actWeather(): JsonField<String> = actWeather
+
+    /**
+     * Returns the raw JSON value of [agjson].
+     *
+     * Unlike [agjson], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("agjson") @ExcludeMissing fun _agjson(): JsonField<String> = agjson
+
+    /**
+     * Returns the raw JSON value of [alt].
+     *
+     * Unlike [alt], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("alt") @ExcludeMissing fun _alt(): JsonField<Double> = alt
+
+    /**
+     * Returns the raw JSON value of [andims].
+     *
+     * Unlike [andims], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("andims") @ExcludeMissing fun _andims(): JsonField<Long> = andims
+
+    /**
+     * Returns the raw JSON value of [area].
+     *
+     * Unlike [area], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("area") @ExcludeMissing fun _area(): JsonField<String> = area
+
+    /**
+     * Returns the raw JSON value of [asrid].
+     *
+     * Unlike [asrid], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("asrid") @ExcludeMissing fun _asrid(): JsonField<Int> = asrid
+
+    /**
+     * Returns the raw JSON value of [atext].
+     *
+     * Unlike [atext], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("atext") @ExcludeMissing fun _atext(): JsonField<String> = atext
+
+    /**
+     * Returns the raw JSON value of [atype].
+     *
+     * Unlike [atype], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("atype") @ExcludeMissing fun _atype(): JsonField<String> = atype
+
+    /**
+     * Returns the raw JSON value of [barPress].
+     *
+     * Unlike [barPress], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("barPress") @ExcludeMissing fun _barPress(): JsonField<Double> = barPress
+
+    /**
+     * Returns the raw JSON value of [ccEvent].
+     *
+     * Unlike [ccEvent], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("ccEvent") @ExcludeMissing fun _ccEvent(): JsonField<Boolean> = ccEvent
+
+    /**
+     * Returns the raw JSON value of [cloudCover].
+     *
+     * Unlike [cloudCover], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("cloudCover")
+    @ExcludeMissing
+    fun _cloudCover(): JsonField<List<String>> = cloudCover
+
+    /**
+     * Returns the raw JSON value of [cloudHght].
+     *
+     * Unlike [cloudHght], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("cloudHght") @ExcludeMissing fun _cloudHght(): JsonField<List<Double>> = cloudHght
+
+    /**
+     * Returns the raw JSON value of [contrailHghtLower].
+     *
+     * Unlike [contrailHghtLower], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("contrailHghtLower")
+    @ExcludeMissing
+    fun _contrailHghtLower(): JsonField<Double> = contrailHghtLower
+
+    /**
+     * Returns the raw JSON value of [contrailHghtUpper].
+     *
+     * Unlike [contrailHghtUpper], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("contrailHghtUpper")
+    @ExcludeMissing
+    fun _contrailHghtUpper(): JsonField<Double> = contrailHghtUpper
+
+    /**
+     * Returns the raw JSON value of [createdAt].
+     *
+     * Unlike [createdAt], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("createdAt")
+    @ExcludeMissing
+    fun _createdAt(): JsonField<OffsetDateTime> = createdAt
+
+    /**
+     * Returns the raw JSON value of [createdBy].
+     *
+     * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+
+    /**
+     * Returns the raw JSON value of [dataLevel].
+     *
+     * Unlike [dataLevel], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("dataLevel") @ExcludeMissing fun _dataLevel(): JsonField<String> = dataLevel
+
+    /**
+     * Returns the raw JSON value of [dewPoint].
+     *
+     * Unlike [dewPoint], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("dewPoint") @ExcludeMissing fun _dewPoint(): JsonField<Double> = dewPoint
+
+    /**
+     * Returns the raw JSON value of [difRad].
+     *
+     * Unlike [difRad], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("difRad") @ExcludeMissing fun _difRad(): JsonField<Double> = difRad
+
+    /**
+     * Returns the raw JSON value of [dirDev].
+     *
+     * Unlike [dirDev], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("dirDev") @ExcludeMissing fun _dirDev(): JsonField<Double> = dirDev
+
+    /**
+     * Returns the raw JSON value of [enRouteWeather].
+     *
+     * Unlike [enRouteWeather], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("enRouteWeather")
+    @ExcludeMissing
+    fun _enRouteWeather(): JsonField<String> = enRouteWeather
+
+    /**
+     * Returns the raw JSON value of [externalId].
+     *
+     * Unlike [externalId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("externalId") @ExcludeMissing fun _externalId(): JsonField<String> = externalId
+
+    /**
+     * Returns the raw JSON value of [externalLocationId].
+     *
+     * Unlike [externalLocationId], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("externalLocationId")
+    @ExcludeMissing
+    fun _externalLocationId(): JsonField<String> = externalLocationId
+
+    /**
+     * Returns the raw JSON value of [forecastEndTime].
+     *
+     * Unlike [forecastEndTime], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("forecastEndTime")
+    @ExcludeMissing
+    fun _forecastEndTime(): JsonField<OffsetDateTime> = forecastEndTime
+
+    /**
+     * Returns the raw JSON value of [forecastStartTime].
+     *
+     * Unlike [forecastStartTime], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("forecastStartTime")
+    @ExcludeMissing
+    fun _forecastStartTime(): JsonField<OffsetDateTime> = forecastStartTime
+
+    /**
+     * Returns the raw JSON value of [geoPotentialAlt].
+     *
+     * Unlike [geoPotentialAlt], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("geoPotentialAlt")
+    @ExcludeMissing
+    fun _geoPotentialAlt(): JsonField<Double> = geoPotentialAlt
+
+    /**
+     * Returns the raw JSON value of [hshear].
+     *
+     * Unlike [hshear], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("hshear") @ExcludeMissing fun _hshear(): JsonField<Double> = hshear
+
+    /**
+     * Returns the raw JSON value of [icao].
+     *
+     * Unlike [icao], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("icao") @ExcludeMissing fun _icao(): JsonField<String> = icao
+
+    /**
+     * Returns the raw JSON value of [icingLowerLimit].
+     *
+     * Unlike [icingLowerLimit], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("icingLowerLimit")
+    @ExcludeMissing
+    fun _icingLowerLimit(): JsonField<Double> = icingLowerLimit
+
+    /**
+     * Returns the raw JSON value of [icingUpperLimit].
+     *
+     * Unlike [icingUpperLimit], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("icingUpperLimit")
+    @ExcludeMissing
+    fun _icingUpperLimit(): JsonField<Double> = icingUpperLimit
+
+    /**
+     * Returns the raw JSON value of [idAirfield].
+     *
+     * Unlike [idAirfield], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("idAirfield") @ExcludeMissing fun _idAirfield(): JsonField<String> = idAirfield
+
+    /**
+     * Returns the raw JSON value of [idGroundImagery].
+     *
+     * Unlike [idGroundImagery], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("idGroundImagery")
+    @ExcludeMissing
+    fun _idGroundImagery(): JsonField<String> = idGroundImagery
+
+    /**
+     * Returns the raw JSON value of [idSensor].
+     *
+     * Unlike [idSensor], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("idSensor") @ExcludeMissing fun _idSensor(): JsonField<String> = idSensor
+
+    /**
+     * Returns the raw JSON value of [idSite].
+     *
+     * Unlike [idSite], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("idSite") @ExcludeMissing fun _idSite(): JsonField<String> = idSite
+
+    /**
+     * Returns the raw JSON value of [indexRefraction].
+     *
+     * Unlike [indexRefraction], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("indexRefraction")
+    @ExcludeMissing
+    fun _indexRefraction(): JsonField<Double> = indexRefraction
+
+    /**
+     * Returns the raw JSON value of [origin].
+     *
+     * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+
+    /**
+     * Returns the raw JSON value of [origNetwork].
+     *
+     * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
+
+    /**
+     * Returns the raw JSON value of [origSensorId].
+     *
+     * Unlike [origSensorId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origSensorId")
+    @ExcludeMissing
+    fun _origSensorId(): JsonField<String> = origSensorId
+
+    /**
+     * Returns the raw JSON value of [precipRate].
+     *
+     * Unlike [precipRate], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("precipRate") @ExcludeMissing fun _precipRate(): JsonField<Double> = precipRate
+
+    /**
+     * Returns the raw JSON value of [qnh].
+     *
+     * Unlike [qnh], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("qnh") @ExcludeMissing fun _qnh(): JsonField<Double> = qnh
+
+    /**
+     * Returns the raw JSON value of [radVel].
+     *
+     * Unlike [radVel], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("radVel") @ExcludeMissing fun _radVel(): JsonField<Double> = radVel
+
+    /**
+     * Returns the raw JSON value of [radVelBeam1].
+     *
+     * Unlike [radVelBeam1], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("radVelBeam1") @ExcludeMissing fun _radVelBeam1(): JsonField<Double> = radVelBeam1
+
+    /**
+     * Returns the raw JSON value of [radVelBeam2].
+     *
+     * Unlike [radVelBeam2], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("radVelBeam2") @ExcludeMissing fun _radVelBeam2(): JsonField<Double> = radVelBeam2
+
+    /**
+     * Returns the raw JSON value of [radVelBeam3].
+     *
+     * Unlike [radVelBeam3], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("radVelBeam3") @ExcludeMissing fun _radVelBeam3(): JsonField<Double> = radVelBeam3
+
+    /**
+     * Returns the raw JSON value of [radVelBeam4].
+     *
+     * Unlike [radVelBeam4], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("radVelBeam4") @ExcludeMissing fun _radVelBeam4(): JsonField<Double> = radVelBeam4
+
+    /**
+     * Returns the raw JSON value of [radVelBeam5].
+     *
+     * Unlike [radVelBeam5], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("radVelBeam5") @ExcludeMissing fun _radVelBeam5(): JsonField<Double> = radVelBeam5
+
+    /**
+     * Returns the raw JSON value of [rainHour].
+     *
+     * Unlike [rainHour], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("rainHour") @ExcludeMissing fun _rainHour(): JsonField<Double> = rainHour
+
+    /**
+     * Returns the raw JSON value of [rawMetar].
+     *
+     * Unlike [rawMetar], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("rawMETAR") @ExcludeMissing fun _rawMetar(): JsonField<String> = rawMetar
+
+    /**
+     * Returns the raw JSON value of [rawTaf].
+     *
+     * Unlike [rawTaf], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("rawTAF") @ExcludeMissing fun _rawTaf(): JsonField<String> = rawTaf
+
+    /**
+     * Returns the raw JSON value of [refRad].
+     *
+     * Unlike [refRad], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("refRad") @ExcludeMissing fun _refRad(): JsonField<Double> = refRad
+
+    /**
+     * Returns the raw JSON value of [relHumidity].
+     *
+     * Unlike [relHumidity], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("relHumidity") @ExcludeMissing fun _relHumidity(): JsonField<Double> = relHumidity
+
+    /**
+     * Returns the raw JSON value of [senalt].
+     *
+     * Unlike [senalt], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("senalt") @ExcludeMissing fun _senalt(): JsonField<Double> = senalt
+
+    /**
+     * Returns the raw JSON value of [senlat].
+     *
+     * Unlike [senlat], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("senlat") @ExcludeMissing fun _senlat(): JsonField<Double> = senlat
+
+    /**
+     * Returns the raw JSON value of [senlon].
+     *
+     * Unlike [senlon], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("senlon") @ExcludeMissing fun _senlon(): JsonField<Double> = senlon
+
+    /**
+     * Returns the raw JSON value of [soilMoisture].
+     *
+     * Unlike [soilMoisture], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("soilMoisture")
+    @ExcludeMissing
+    fun _soilMoisture(): JsonField<Double> = soilMoisture
+
+    /**
+     * Returns the raw JSON value of [soilTemp].
+     *
+     * Unlike [soilTemp], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("soilTemp") @ExcludeMissing fun _soilTemp(): JsonField<Double> = soilTemp
+
+    /**
+     * Returns the raw JSON value of [solarRad].
+     *
+     * Unlike [solarRad], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("solarRad") @ExcludeMissing fun _solarRad(): JsonField<Double> = solarRad
+
+    /**
+     * Returns the raw JSON value of [srcIds].
+     *
+     * Unlike [srcIds], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("srcIds") @ExcludeMissing fun _srcIds(): JsonField<List<String>> = srcIds
+
+    /**
+     * Returns the raw JSON value of [srcTyps].
+     *
+     * Unlike [srcTyps], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("srcTyps") @ExcludeMissing fun _srcTyps(): JsonField<List<String>> = srcTyps
+
+    /**
+     * Returns the raw JSON value of [surroundingWeather].
+     *
+     * Unlike [surroundingWeather], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("surroundingWeather")
+    @ExcludeMissing
+    fun _surroundingWeather(): JsonField<String> = surroundingWeather
+
+    /**
+     * Returns the raw JSON value of [temperature].
+     *
+     * Unlike [temperature], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("temperature") @ExcludeMissing fun _temperature(): JsonField<Double> = temperature
+
+    /**
+     * Returns the raw JSON value of [visibility].
+     *
+     * Unlike [visibility], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("visibility") @ExcludeMissing fun _visibility(): JsonField<Double> = visibility
+
+    /**
+     * Returns the raw JSON value of [vshear].
+     *
+     * Unlike [vshear], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("vshear") @ExcludeMissing fun _vshear(): JsonField<Double> = vshear
+
+    /**
+     * Returns the raw JSON value of [weatherAmp].
+     *
+     * Unlike [weatherAmp], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("weatherAmp") @ExcludeMissing fun _weatherAmp(): JsonField<String> = weatherAmp
+
+    /**
+     * Returns the raw JSON value of [weatherDesc].
+     *
+     * Unlike [weatherDesc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("weatherDesc") @ExcludeMissing fun _weatherDesc(): JsonField<String> = weatherDesc
+
+    /**
+     * Returns the raw JSON value of [weatherId].
+     *
+     * Unlike [weatherId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("weatherId") @ExcludeMissing fun _weatherId(): JsonField<String> = weatherId
+
+    /**
+     * Returns the raw JSON value of [weatherInt].
+     *
+     * Unlike [weatherInt], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("weatherInt") @ExcludeMissing fun _weatherInt(): JsonField<String> = weatherInt
+
+    /**
+     * Returns the raw JSON value of [windChill].
+     *
+     * Unlike [windChill], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("windChill") @ExcludeMissing fun _windChill(): JsonField<Double> = windChill
+
+    /**
+     * Returns the raw JSON value of [windCov].
+     *
+     * Unlike [windCov], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("windCov") @ExcludeMissing fun _windCov(): JsonField<List<Double>> = windCov
+
+    /**
+     * Returns the raw JSON value of [windDir].
+     *
+     * Unlike [windDir], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("windDir") @ExcludeMissing fun _windDir(): JsonField<Double> = windDir
+
+    /**
+     * Returns the raw JSON value of [windDirAvg].
+     *
+     * Unlike [windDirAvg], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("windDirAvg") @ExcludeMissing fun _windDirAvg(): JsonField<Double> = windDirAvg
+
+    /**
+     * Returns the raw JSON value of [windDirPeak].
+     *
+     * Unlike [windDirPeak], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("windDirPeak") @ExcludeMissing fun _windDirPeak(): JsonField<Double> = windDirPeak
+
+    /**
+     * Returns the raw JSON value of [windDirPeak10].
+     *
+     * Unlike [windDirPeak10], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("windDirPeak10")
+    @ExcludeMissing
+    fun _windDirPeak10(): JsonField<Double> = windDirPeak10
+
+    /**
+     * Returns the raw JSON value of [windGust].
+     *
+     * Unlike [windGust], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("windGust") @ExcludeMissing fun _windGust(): JsonField<Double> = windGust
+
+    /**
+     * Returns the raw JSON value of [windGust10].
+     *
+     * Unlike [windGust10], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("windGust10") @ExcludeMissing fun _windGust10(): JsonField<Double> = windGust10
+
+    /**
+     * Returns the raw JSON value of [windSpd].
+     *
+     * Unlike [windSpd], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("windSpd") @ExcludeMissing fun _windSpd(): JsonField<Double> = windSpd
+
+    /**
+     * Returns the raw JSON value of [windSpdAvg].
+     *
+     * Unlike [windSpdAvg], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("windSpdAvg") @ExcludeMissing fun _windSpdAvg(): JsonField<Double> = windSpdAvg
+
+    /**
+     * Returns the raw JSON value of [windVar].
+     *
+     * Unlike [windVar], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("windVar") @ExcludeMissing fun _windVar(): JsonField<Boolean> = windVar
+
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
+    @JsonAnyGetter
+    @ExcludeMissing
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
+
+    fun toBuilder() = Builder().from(this)
+
+    companion object {
+
+        /**
+         * Returns a mutable builder for constructing an instance of [WeatherReportFull].
+         *
+         * The following fields are required:
+         * ```java
+         * .classificationMarking()
+         * .dataMode()
+         * .lat()
+         * .lon()
+         * .obTime()
+         * .reportType()
+         * .source()
+         * ```
+         */
+        @JvmStatic fun builder() = Builder()
+    }
+
+    /** A builder for [WeatherReportFull]. */
+    class Builder internal constructor() {
+
+        private var classificationMarking: JsonField<String>? = null
+        private var dataMode: JsonField<DataMode>? = null
+        private var lat: JsonField<Double>? = null
+        private var lon: JsonField<Double>? = null
+        private var obTime: JsonField<OffsetDateTime>? = null
+        private var reportType: JsonField<String>? = null
+        private var source: JsonField<String>? = null
+        private var id: JsonField<String> = JsonMissing.of()
+        private var actWeather: JsonField<String> = JsonMissing.of()
+        private var agjson: JsonField<String> = JsonMissing.of()
+        private var alt: JsonField<Double> = JsonMissing.of()
+        private var andims: JsonField<Long> = JsonMissing.of()
+        private var area: JsonField<String> = JsonMissing.of()
+        private var asrid: JsonField<Int> = JsonMissing.of()
+        private var atext: JsonField<String> = JsonMissing.of()
+        private var atype: JsonField<String> = JsonMissing.of()
+        private var barPress: JsonField<Double> = JsonMissing.of()
+        private var ccEvent: JsonField<Boolean> = JsonMissing.of()
+        private var cloudCover: JsonField<MutableList<String>>? = null
+        private var cloudHght: JsonField<MutableList<Double>>? = null
+        private var contrailHghtLower: JsonField<Double> = JsonMissing.of()
+        private var contrailHghtUpper: JsonField<Double> = JsonMissing.of()
+        private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var createdBy: JsonField<String> = JsonMissing.of()
+        private var dataLevel: JsonField<String> = JsonMissing.of()
+        private var dewPoint: JsonField<Double> = JsonMissing.of()
+        private var difRad: JsonField<Double> = JsonMissing.of()
+        private var dirDev: JsonField<Double> = JsonMissing.of()
+        private var enRouteWeather: JsonField<String> = JsonMissing.of()
+        private var externalId: JsonField<String> = JsonMissing.of()
+        private var externalLocationId: JsonField<String> = JsonMissing.of()
+        private var forecastEndTime: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var forecastStartTime: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var geoPotentialAlt: JsonField<Double> = JsonMissing.of()
+        private var hshear: JsonField<Double> = JsonMissing.of()
+        private var icao: JsonField<String> = JsonMissing.of()
+        private var icingLowerLimit: JsonField<Double> = JsonMissing.of()
+        private var icingUpperLimit: JsonField<Double> = JsonMissing.of()
+        private var idAirfield: JsonField<String> = JsonMissing.of()
+        private var idGroundImagery: JsonField<String> = JsonMissing.of()
+        private var idSensor: JsonField<String> = JsonMissing.of()
+        private var idSite: JsonField<String> = JsonMissing.of()
+        private var indexRefraction: JsonField<Double> = JsonMissing.of()
+        private var origin: JsonField<String> = JsonMissing.of()
+        private var origNetwork: JsonField<String> = JsonMissing.of()
+        private var origSensorId: JsonField<String> = JsonMissing.of()
+        private var precipRate: JsonField<Double> = JsonMissing.of()
+        private var qnh: JsonField<Double> = JsonMissing.of()
+        private var radVel: JsonField<Double> = JsonMissing.of()
+        private var radVelBeam1: JsonField<Double> = JsonMissing.of()
+        private var radVelBeam2: JsonField<Double> = JsonMissing.of()
+        private var radVelBeam3: JsonField<Double> = JsonMissing.of()
+        private var radVelBeam4: JsonField<Double> = JsonMissing.of()
+        private var radVelBeam5: JsonField<Double> = JsonMissing.of()
+        private var rainHour: JsonField<Double> = JsonMissing.of()
+        private var rawMetar: JsonField<String> = JsonMissing.of()
+        private var rawTaf: JsonField<String> = JsonMissing.of()
+        private var refRad: JsonField<Double> = JsonMissing.of()
+        private var relHumidity: JsonField<Double> = JsonMissing.of()
+        private var senalt: JsonField<Double> = JsonMissing.of()
+        private var senlat: JsonField<Double> = JsonMissing.of()
+        private var senlon: JsonField<Double> = JsonMissing.of()
+        private var soilMoisture: JsonField<Double> = JsonMissing.of()
+        private var soilTemp: JsonField<Double> = JsonMissing.of()
+        private var solarRad: JsonField<Double> = JsonMissing.of()
+        private var srcIds: JsonField<MutableList<String>>? = null
+        private var srcTyps: JsonField<MutableList<String>>? = null
+        private var surroundingWeather: JsonField<String> = JsonMissing.of()
+        private var temperature: JsonField<Double> = JsonMissing.of()
+        private var visibility: JsonField<Double> = JsonMissing.of()
+        private var vshear: JsonField<Double> = JsonMissing.of()
+        private var weatherAmp: JsonField<String> = JsonMissing.of()
+        private var weatherDesc: JsonField<String> = JsonMissing.of()
+        private var weatherId: JsonField<String> = JsonMissing.of()
+        private var weatherInt: JsonField<String> = JsonMissing.of()
+        private var windChill: JsonField<Double> = JsonMissing.of()
+        private var windCov: JsonField<MutableList<Double>>? = null
+        private var windDir: JsonField<Double> = JsonMissing.of()
+        private var windDirAvg: JsonField<Double> = JsonMissing.of()
+        private var windDirPeak: JsonField<Double> = JsonMissing.of()
+        private var windDirPeak10: JsonField<Double> = JsonMissing.of()
+        private var windGust: JsonField<Double> = JsonMissing.of()
+        private var windGust10: JsonField<Double> = JsonMissing.of()
+        private var windSpd: JsonField<Double> = JsonMissing.of()
+        private var windSpdAvg: JsonField<Double> = JsonMissing.of()
+        private var windVar: JsonField<Boolean> = JsonMissing.of()
+        private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+        @JvmSynthetic
+        internal fun from(weatherReportFull: WeatherReportFull) = apply {
+            classificationMarking = weatherReportFull.classificationMarking
+            dataMode = weatherReportFull.dataMode
+            lat = weatherReportFull.lat
+            lon = weatherReportFull.lon
+            obTime = weatherReportFull.obTime
+            reportType = weatherReportFull.reportType
+            source = weatherReportFull.source
+            id = weatherReportFull.id
+            actWeather = weatherReportFull.actWeather
+            agjson = weatherReportFull.agjson
+            alt = weatherReportFull.alt
+            andims = weatherReportFull.andims
+            area = weatherReportFull.area
+            asrid = weatherReportFull.asrid
+            atext = weatherReportFull.atext
+            atype = weatherReportFull.atype
+            barPress = weatherReportFull.barPress
+            ccEvent = weatherReportFull.ccEvent
+            cloudCover = weatherReportFull.cloudCover.map { it.toMutableList() }
+            cloudHght = weatherReportFull.cloudHght.map { it.toMutableList() }
+            contrailHghtLower = weatherReportFull.contrailHghtLower
+            contrailHghtUpper = weatherReportFull.contrailHghtUpper
+            createdAt = weatherReportFull.createdAt
+            createdBy = weatherReportFull.createdBy
+            dataLevel = weatherReportFull.dataLevel
+            dewPoint = weatherReportFull.dewPoint
+            difRad = weatherReportFull.difRad
+            dirDev = weatherReportFull.dirDev
+            enRouteWeather = weatherReportFull.enRouteWeather
+            externalId = weatherReportFull.externalId
+            externalLocationId = weatherReportFull.externalLocationId
+            forecastEndTime = weatherReportFull.forecastEndTime
+            forecastStartTime = weatherReportFull.forecastStartTime
+            geoPotentialAlt = weatherReportFull.geoPotentialAlt
+            hshear = weatherReportFull.hshear
+            icao = weatherReportFull.icao
+            icingLowerLimit = weatherReportFull.icingLowerLimit
+            icingUpperLimit = weatherReportFull.icingUpperLimit
+            idAirfield = weatherReportFull.idAirfield
+            idGroundImagery = weatherReportFull.idGroundImagery
+            idSensor = weatherReportFull.idSensor
+            idSite = weatherReportFull.idSite
+            indexRefraction = weatherReportFull.indexRefraction
+            origin = weatherReportFull.origin
+            origNetwork = weatherReportFull.origNetwork
+            origSensorId = weatherReportFull.origSensorId
+            precipRate = weatherReportFull.precipRate
+            qnh = weatherReportFull.qnh
+            radVel = weatherReportFull.radVel
+            radVelBeam1 = weatherReportFull.radVelBeam1
+            radVelBeam2 = weatherReportFull.radVelBeam2
+            radVelBeam3 = weatherReportFull.radVelBeam3
+            radVelBeam4 = weatherReportFull.radVelBeam4
+            radVelBeam5 = weatherReportFull.radVelBeam5
+            rainHour = weatherReportFull.rainHour
+            rawMetar = weatherReportFull.rawMetar
+            rawTaf = weatherReportFull.rawTaf
+            refRad = weatherReportFull.refRad
+            relHumidity = weatherReportFull.relHumidity
+            senalt = weatherReportFull.senalt
+            senlat = weatherReportFull.senlat
+            senlon = weatherReportFull.senlon
+            soilMoisture = weatherReportFull.soilMoisture
+            soilTemp = weatherReportFull.soilTemp
+            solarRad = weatherReportFull.solarRad
+            srcIds = weatherReportFull.srcIds.map { it.toMutableList() }
+            srcTyps = weatherReportFull.srcTyps.map { it.toMutableList() }
+            surroundingWeather = weatherReportFull.surroundingWeather
+            temperature = weatherReportFull.temperature
+            visibility = weatherReportFull.visibility
+            vshear = weatherReportFull.vshear
+            weatherAmp = weatherReportFull.weatherAmp
+            weatherDesc = weatherReportFull.weatherDesc
+            weatherId = weatherReportFull.weatherId
+            weatherInt = weatherReportFull.weatherInt
+            windChill = weatherReportFull.windChill
+            windCov = weatherReportFull.windCov.map { it.toMutableList() }
+            windDir = weatherReportFull.windDir
+            windDirAvg = weatherReportFull.windDirAvg
+            windDirPeak = weatherReportFull.windDirPeak
+            windDirPeak10 = weatherReportFull.windDirPeak10
+            windGust = weatherReportFull.windGust
+            windGust10 = weatherReportFull.windGust10
+            windSpd = weatherReportFull.windSpd
+            windSpdAvg = weatherReportFull.windSpdAvg
+            windVar = weatherReportFull.windVar
+            additionalProperties = weatherReportFull.additionalProperties.toMutableMap()
+        }
+
+        /** Classification marking of the data in IC/CAPCO Portion-marked format. */
+        fun classificationMarking(classificationMarking: String) =
+            classificationMarking(JsonField.of(classificationMarking))
+
+        /**
+         * Sets [Builder.classificationMarking] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            this.classificationMarking = classificationMarking
+        }
+
+        /**
+         * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+         *
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
+         *
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
+         *
+         * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+         *
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
+         */
+        fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
+
+        /**
+         * Sets [Builder.dataMode] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+
+        /**
+         * The central WGS-84 latitude of the weather report, in degrees. -90 to 90 degrees
+         * (negative values south of equator).
+         */
+        fun lat(lat: Double) = lat(JsonField.of(lat))
+
+        /**
+         * Sets [Builder.lat] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.lat] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun lat(lat: JsonField<Double>) = apply { this.lat = lat }
+
+        /**
+         * The central WGS-84 longitude of the weather report, in degrees. -180 to 180 degrees
+         * (negative values west of Prime Meridian).
+         */
+        fun lon(lon: Double) = lon(JsonField.of(lon))
+
+        /**
+         * Sets [Builder.lon] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.lon] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun lon(lon: JsonField<Double>) = apply { this.lon = lon }
+
+        /**
+         * Datetime when a weather observation was made or forecast was issued in ISO 8601 UTC
+         * datetime format with microsecond precision.
+         */
+        fun obTime(obTime: OffsetDateTime) = obTime(JsonField.of(obTime))
+
+        /**
+         * Sets [Builder.obTime] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.obTime] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun obTime(obTime: JsonField<OffsetDateTime>) = apply { this.obTime = obTime }
+
+        /** Identifies the type of weather report (e.g. OBSERVATION, FORECAST, etc.). */
+        fun reportType(reportType: String) = reportType(JsonField.of(reportType))
+
+        /**
+         * Sets [Builder.reportType] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.reportType] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun reportType(reportType: JsonField<String>) = apply { this.reportType = reportType }
+
+        /** Source of the data. */
+        fun source(source: String) = source(JsonField.of(source))
+
+        /**
+         * Sets [Builder.source] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun source(source: JsonField<String>) = apply { this.source = source }
+
+        /** Unique identifier of the record, auto-generated by the system. */
+        fun id(id: String) = id(JsonField.of(id))
+
+        /**
+         * Sets [Builder.id] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun id(id: JsonField<String>) = apply { this.id = id }
+
+        /**
+         * Describes the actual weather at position. Intended as, but not constrained to,
+         * MIL-STD-6016 actual weather (e.g. NO STATEMENT, NO SIGNIFICANT WEATHER, DRIZZLE, RAIN,
+         * SNOW, SNOW GRAINS, DIAMOND DUST, ICE PELLETS, HAIL, SMALL HAIL, MIST, FOG, SMOKE,
+         * VOLCANIC ASH, WIDESPREAD DUST, SAND, HAZE, WELL DEVELOPED DUST, SQUALLS, FUNNEL CLOUDS,
+         * SANDSTORM, DUSTSTORM, LOW CLOUDS, CLOUDY, GROUND FOG, DUST, HEAVY RAIN, THUNDERSTORMS
+         * AWT, HEAVY THUNDERSTORMS, HURRICANE TYPHOON CYCLONE, TROPICAL STORM, TORNADO, HIGH WINDS,
+         * LIGHTNING, FREEZING DRIZZLE, FREEZING RAIN, HEAVY SNOW, ICING, SNOW OR RAIN AND SNOW
+         * MIXED, SHOWERS, CLEAR).
+         */
+        fun actWeather(actWeather: String) = actWeather(JsonField.of(actWeather))
+
+        /**
+         * Sets [Builder.actWeather] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.actWeather] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun actWeather(actWeather: JsonField<String>) = apply { this.actWeather = actWeather }
+
+        /**
+         * Geographical region or polygon (lat/lon pairs), as depicted by the GeoJSON representation
+         * of the geometry/geography, of the image as projected on the ground. GeoJSON Reference:
+         * https://geojson.org/. Ignored if included with a POST or PUT request that also specifies
+         * a valid 'area' or 'atext' field.
+         */
+        fun agjson(agjson: String) = agjson(JsonField.of(agjson))
+
+        /**
+         * Sets [Builder.agjson] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.agjson] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun agjson(agjson: JsonField<String>) = apply { this.agjson = agjson }
+
+        /** Point height above ellipsoid (WGS-84), in meters. */
+        fun alt(alt: Double) = alt(JsonField.of(alt))
+
+        /**
+         * Sets [Builder.alt] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.alt] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun alt(alt: JsonField<Double>) = apply { this.alt = alt }
+
+        /** Number of dimensions of the geometry depicted by region. */
+        fun andims(andims: Long) = andims(JsonField.of(andims))
+
+        /**
+         * Sets [Builder.andims] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.andims] with a well-typed [Long] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun andims(andims: JsonField<Long>) = apply { this.andims = andims }
+
+        /**
+         * Optional geographical region or polygon (lat/lon pairs) of the area surrounding the point
+         * of interest as projected on the ground.
+         */
+        fun area(area: String) = area(JsonField.of(area))
+
+        /**
+         * Sets [Builder.area] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.area] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun area(area: JsonField<String>) = apply { this.area = area }
+
+        /** Geographical spatial_ref_sys for region. */
+        fun asrid(asrid: Int) = asrid(JsonField.of(asrid))
+
+        /**
+         * Sets [Builder.asrid] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.asrid] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun asrid(asrid: JsonField<Int>) = apply { this.asrid = asrid }
+
+        /**
+         * Geographical region or polygon (lon/lat pairs), as depicted by the Well-Known Text
+         * representation of the geometry/geography, of the image as projected on the ground. WKT
+         * reference: https://www.opengeospatial.org/standards/wkt-crs. Ignored if included with a
+         * POST or PUT request that also specifies a valid 'area' field.
+         */
+        fun atext(atext: String) = atext(JsonField.of(atext))
+
+        /**
+         * Sets [Builder.atext] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.atext] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun atext(atext: JsonField<String>) = apply { this.atext = atext }
+
+        /** Type of region as projected on the ground. */
+        fun atype(atype: String) = atype(JsonField.of(atype))
+
+        /**
+         * Sets [Builder.atype] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.atype] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun atype(atype: JsonField<String>) = apply { this.atype = atype }
+
+        /** The measurement of air pressure in the atmosphere in kilopascals. */
+        fun barPress(barPress: Double) = barPress(JsonField.of(barPress))
+
+        /**
+         * Sets [Builder.barPress] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.barPress] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun barPress(barPress: JsonField<Double>) = apply { this.barPress = barPress }
+
+        /** Flag indicating detection of a cloud-to-cloud lightning event. */
+        fun ccEvent(ccEvent: Boolean) = ccEvent(JsonField.of(ccEvent))
+
+        /**
+         * Sets [Builder.ccEvent] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.ccEvent] with a well-typed [Boolean] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun ccEvent(ccEvent: JsonField<Boolean>) = apply { this.ccEvent = ccEvent }
+
+        /**
+         * Array of cloud cover descriptions - each element can be maximum of 16 characters long.
+         * Intended as, but not constrained to, MIL-STD-6016 cloud cover designations (e.g. SKY
+         * CLEAR, SCATTERED, BROKEN, OVERCAST, SKY OBSCURED). Each element of the array corresponds
+         * to the elements in the cloudHght array specified respectively.
+         */
+        fun cloudCover(cloudCover: List<String>) = cloudCover(JsonField.of(cloudCover))
+
+        /**
+         * Sets [Builder.cloudCover] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.cloudCover] with a well-typed `List<String>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun cloudCover(cloudCover: JsonField<List<String>>) = apply {
+            this.cloudCover = cloudCover.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [String] to [Builder.cloudCover].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addCloudCover(cloudCover: String) = apply {
+            this.cloudCover =
+                (this.cloudCover ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("cloudCover", it).add(cloudCover)
+                }
+        }
+
+        /**
+         * Array of cloud base heights in meters described by the cloudHght array. Each element of
+         * the array corresponds to the elements in the cloudCover array specified respectively.
+         */
+        fun cloudHght(cloudHght: List<Double>) = cloudHght(JsonField.of(cloudHght))
+
+        /**
+         * Sets [Builder.cloudHght] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.cloudHght] with a well-typed `List<Double>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun cloudHght(cloudHght: JsonField<List<Double>>) = apply {
+            this.cloudHght = cloudHght.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [Double] to [Builder.cloudHght].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addCloudHght(cloudHght: Double) = apply {
+            this.cloudHght =
+                (this.cloudHght ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("cloudHght", it).add(cloudHght)
+                }
+        }
+
+        /** Reports the lowest altitude at which contrails are occurring, in meters. */
+        fun contrailHghtLower(contrailHghtLower: Double) =
+            contrailHghtLower(JsonField.of(contrailHghtLower))
+
+        /**
+         * Sets [Builder.contrailHghtLower] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.contrailHghtLower] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun contrailHghtLower(contrailHghtLower: JsonField<Double>) = apply {
+            this.contrailHghtLower = contrailHghtLower
+        }
+
+        /** Reports the highest altitude at which contrails are occurring, in meters. */
+        fun contrailHghtUpper(contrailHghtUpper: Double) =
+            contrailHghtUpper(JsonField.of(contrailHghtUpper))
+
+        /**
+         * Sets [Builder.contrailHghtUpper] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.contrailHghtUpper] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun contrailHghtUpper(contrailHghtUpper: JsonField<Double>) = apply {
+            this.contrailHghtUpper = contrailHghtUpper
+        }
+
+        /** Time the row was created in the database. */
+        fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
+
+        /**
+         * Sets [Builder.createdAt] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
+
+        /** Application user who created the row in the database. */
+        fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
+
+        /**
+         * Sets [Builder.createdBy] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+
+        /**
+         * Specific pressures or heights where measurements are taken, labeled as either MANDATORY
+         * or SIGNIFICANT levels. Mandatory levels are at particular pressures at geopotential
+         * heights. Significant levels are at particular geometric heights.
+         */
+        fun dataLevel(dataLevel: String) = dataLevel(JsonField.of(dataLevel))
+
+        /**
+         * Sets [Builder.dataLevel] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dataLevel] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun dataLevel(dataLevel: JsonField<String>) = apply { this.dataLevel = dataLevel }
+
+        /** The temperature at which air is saturated with water vapor, in degrees C. */
+        fun dewPoint(dewPoint: Double) = dewPoint(JsonField.of(dewPoint))
+
+        /**
+         * Sets [Builder.dewPoint] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dewPoint] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun dewPoint(dewPoint: JsonField<Double>) = apply { this.dewPoint = dewPoint }
+
+        /**
+         * The amount of radiation that reaches earth's surface after being scattered by the
+         * atmosphere, in Watts per square meter.
+         */
+        fun difRad(difRad: Double) = difRad(JsonField.of(difRad))
+
+        /**
+         * Sets [Builder.difRad] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.difRad] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun difRad(difRad: JsonField<Double>) = apply { this.difRad = difRad }
+
+        /** The difference in wind direction recorded over a period of time, in degrees. */
+        fun dirDev(dirDev: Double) = dirDev(JsonField.of(dirDev))
+
+        /**
+         * Sets [Builder.dirDev] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dirDev] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun dirDev(dirDev: JsonField<Double>) = apply { this.dirDev = dirDev }
+
+        /**
+         * Describes the flight conditions in route to the target (NO STATEMENT, MAINLY IFR, MAINLY
+         * VFR, THUNDERSTORMS).
+         *
+         * MAINLY IFR:&nbsp;&nbsp;Predominantly Instrument Flight Rules.
+         *
+         * MAINLY VFR:&nbsp;&nbsp;Predominantly Visual Flight Rules.
+         *
+         * THUNDERSTORMS:&nbsp;&nbsp;Thunderstorms expected in route.
+         */
+        fun enRouteWeather(enRouteWeather: String) = enRouteWeather(JsonField.of(enRouteWeather))
+
+        /**
+         * Sets [Builder.enRouteWeather] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.enRouteWeather] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun enRouteWeather(enRouteWeather: JsonField<String>) = apply {
+            this.enRouteWeather = enRouteWeather
+        }
+
+        /**
+         * Optional observation or forecast ID from external systems. This field has no meaning
+         * within UDL and is provided as a convenience for systems that require tracking of an
+         * internal system generated ID.
+         */
+        fun externalId(externalId: String) = externalId(JsonField.of(externalId))
+
+        /**
+         * Sets [Builder.externalId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.externalId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun externalId(externalId: JsonField<String>) = apply { this.externalId = externalId }
+
+        /**
+         * Optional location ID from external systems. This field has no meaning within UDL and is
+         * provided as a convenience for systems that require tracking of an internal system
+         * generated ID.
+         */
+        fun externalLocationId(externalLocationId: String) =
+            externalLocationId(JsonField.of(externalLocationId))
+
+        /**
+         * Sets [Builder.externalLocationId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.externalLocationId] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun externalLocationId(externalLocationId: JsonField<String>) = apply {
+            this.externalLocationId = externalLocationId
+        }
+
+        /**
+         * Valid end time of a weather forecast in ISO 8601 UTC datetime format with millisecond
+         * precision.
+         */
+        fun forecastEndTime(forecastEndTime: OffsetDateTime) =
+            forecastEndTime(JsonField.of(forecastEndTime))
+
+        /**
+         * Sets [Builder.forecastEndTime] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.forecastEndTime] with a well-typed [OffsetDateTime]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
+         */
+        fun forecastEndTime(forecastEndTime: JsonField<OffsetDateTime>) = apply {
+            this.forecastEndTime = forecastEndTime
+        }
+
+        /**
+         * Valid start time of a weather forecast in ISO 8601 UTC datetime format with millisecond
+         * precision.
+         */
+        fun forecastStartTime(forecastStartTime: OffsetDateTime) =
+            forecastStartTime(JsonField.of(forecastStartTime))
+
+        /**
+         * Sets [Builder.forecastStartTime] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.forecastStartTime] with a well-typed [OffsetDateTime]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
+         */
+        fun forecastStartTime(forecastStartTime: JsonField<OffsetDateTime>) = apply {
+            this.forecastStartTime = forecastStartTime
+        }
+
+        /** Altitude of a pressure surface in the atmosphere above mean sea level, in meters. */
+        fun geoPotentialAlt(geoPotentialAlt: Double) =
+            geoPotentialAlt(JsonField.of(geoPotentialAlt))
+
+        /**
+         * Sets [Builder.geoPotentialAlt] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.geoPotentialAlt] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun geoPotentialAlt(geoPotentialAlt: JsonField<Double>) = apply {
+            this.geoPotentialAlt = geoPotentialAlt
+        }
+
+        /**
+         * The change in wind speed between two different lateral positions at a given altitude
+         * divided by the horizontal distance between them, in units of 1/sec.
+         */
+        fun hshear(hshear: Double) = hshear(JsonField.of(hshear))
+
+        /**
+         * Sets [Builder.hshear] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.hshear] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun hshear(hshear: JsonField<Double>) = apply { this.hshear = hshear }
+
+        /**
+         * The International Civil Aviation Organization (ICAO) code of the airfield associated with
+         * this weather report.
+         */
+        fun icao(icao: String) = icao(JsonField.of(icao))
+
+        /**
+         * Sets [Builder.icao] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.icao] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun icao(icao: JsonField<String>) = apply { this.icao = icao }
+
+        /** Reports the lowest altitude at which icing or freezing rain is occurring, in meters. */
+        fun icingLowerLimit(icingLowerLimit: Double) =
+            icingLowerLimit(JsonField.of(icingLowerLimit))
+
+        /**
+         * Sets [Builder.icingLowerLimit] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.icingLowerLimit] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun icingLowerLimit(icingLowerLimit: JsonField<Double>) = apply {
+            this.icingLowerLimit = icingLowerLimit
+        }
+
+        /** Reports the highest altitude at which icing or freezing rain is occurring, in meters. */
+        fun icingUpperLimit(icingUpperLimit: Double) =
+            icingUpperLimit(JsonField.of(icingUpperLimit))
+
+        /**
+         * Sets [Builder.icingUpperLimit] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.icingUpperLimit] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun icingUpperLimit(icingUpperLimit: JsonField<Double>) = apply {
+            this.icingUpperLimit = icingUpperLimit
+        }
+
+        /** Identifier of the Airfield associated with this weather report. */
+        fun idAirfield(idAirfield: String) = idAirfield(JsonField.of(idAirfield))
+
+        /**
+         * Sets [Builder.idAirfield] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.idAirfield] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun idAirfield(idAirfield: JsonField<String>) = apply { this.idAirfield = idAirfield }
+
+        /** Identifier of the ground imagery associated for this weather over target report. */
+        fun idGroundImagery(idGroundImagery: String) =
+            idGroundImagery(JsonField.of(idGroundImagery))
+
+        /**
+         * Sets [Builder.idGroundImagery] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.idGroundImagery] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun idGroundImagery(idGroundImagery: JsonField<String>) = apply {
+            this.idGroundImagery = idGroundImagery
+        }
+
+        /** Unique identifier of the sensor making the weather measurement. */
+        fun idSensor(idSensor: String) = idSensor(JsonField.of(idSensor))
+
+        /**
+         * Sets [Builder.idSensor] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.idSensor] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun idSensor(idSensor: JsonField<String>) = apply { this.idSensor = idSensor }
+
+        /** Identifier of the Site that is associated with this weather report. */
+        fun idSite(idSite: String) = idSite(JsonField.of(idSite))
+
+        /**
+         * Sets [Builder.idSite] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.idSite] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun idSite(idSite: JsonField<String>) = apply { this.idSite = idSite }
+
+        /** An indication of how much the atmosphere refracts light. */
+        fun indexRefraction(indexRefraction: Double) =
+            indexRefraction(JsonField.of(indexRefraction))
+
+        /**
+         * Sets [Builder.indexRefraction] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.indexRefraction] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun indexRefraction(indexRefraction: JsonField<Double>) = apply {
+            this.indexRefraction = indexRefraction
+        }
+
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         */
+        fun origin(origin: String) = origin(JsonField.of(origin))
+
+        /**
+         * Sets [Builder.origin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         */
+        fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
+
+        /**
+         * Sets [Builder.origNetwork] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
+
+        /**
+         * Optional identifier provided by the record source. This may be an internal identifier and
+         * not necessarily a valid sensor ID.
+         */
+        fun origSensorId(origSensorId: String) = origSensorId(JsonField.of(origSensorId))
+
+        /**
+         * Sets [Builder.origSensorId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origSensorId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun origSensorId(origSensorId: JsonField<String>) = apply {
+            this.origSensorId = origSensorId
+        }
+
+        /** The speed at which water is being applied to a specific area in millimeters per hour. */
+        fun precipRate(precipRate: Double) = precipRate(JsonField.of(precipRate))
+
+        /**
+         * Sets [Builder.precipRate] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.precipRate] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun precipRate(precipRate: JsonField<Double>) = apply { this.precipRate = precipRate }
+
+        /** Altimeter set to read zero at mean sea level in kilopascals. */
+        fun qnh(qnh: Double) = qnh(JsonField.of(qnh))
+
+        /**
+         * Sets [Builder.qnh] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.qnh] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun qnh(qnh: JsonField<Double>) = apply { this.qnh = qnh }
+
+        /**
+         * Average radial velocity of wind as measured by radar with multi-beam configurations.
+         * Radial velocity is the component of wind velocity moving directly toward or away from a
+         * sensor's radar beam, in meters per second. Values can either be positive (wind is moving
+         * away from the radar) or negative (wind is moving toward the radar).
+         */
+        fun radVel(radVel: Double) = radVel(JsonField.of(radVel))
+
+        /**
+         * Sets [Builder.radVel] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.radVel] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun radVel(radVel: JsonField<Double>) = apply { this.radVel = radVel }
+
+        /**
+         * Component of wind velocity moving directly toward or away from radar beam 1, in meters
+         * per second. Radial velocity values can either be positive (wind is moving away from the
+         * radar) or negative (wind is moving toward the radar). The beam number designation is
+         * defined by the data source.
+         */
+        fun radVelBeam1(radVelBeam1: Double) = radVelBeam1(JsonField.of(radVelBeam1))
+
+        /**
+         * Sets [Builder.radVelBeam1] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.radVelBeam1] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun radVelBeam1(radVelBeam1: JsonField<Double>) = apply { this.radVelBeam1 = radVelBeam1 }
+
+        /**
+         * Component of wind velocity moving directly toward or away from radar beam 2, in meters
+         * per second. Radial velocity values can either be positive (wind is moving away from the
+         * radar) or negative (wind is moving toward the radar). The beam number designation is
+         * defined by the data source.
+         */
+        fun radVelBeam2(radVelBeam2: Double) = radVelBeam2(JsonField.of(radVelBeam2))
+
+        /**
+         * Sets [Builder.radVelBeam2] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.radVelBeam2] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun radVelBeam2(radVelBeam2: JsonField<Double>) = apply { this.radVelBeam2 = radVelBeam2 }
+
+        /**
+         * Component of wind velocity moving directly toward or away from radar beam 3, in meters
+         * per second. Radial velocity values can either be positive (wind is moving away from the
+         * radar) or negative (wind is moving toward the radar). The beam number designation is
+         * defined by the data source.
+         */
+        fun radVelBeam3(radVelBeam3: Double) = radVelBeam3(JsonField.of(radVelBeam3))
+
+        /**
+         * Sets [Builder.radVelBeam3] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.radVelBeam3] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun radVelBeam3(radVelBeam3: JsonField<Double>) = apply { this.radVelBeam3 = radVelBeam3 }
+
+        /**
+         * Component of wind velocity moving directly toward or away from radar beam 4, in meters
+         * per second. Radial velocity values can either be positive (wind is moving away from the
+         * radar) or negative (wind is moving toward the radar). The beam number designation is
+         * defined by the data source.
+         */
+        fun radVelBeam4(radVelBeam4: Double) = radVelBeam4(JsonField.of(radVelBeam4))
+
+        /**
+         * Sets [Builder.radVelBeam4] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.radVelBeam4] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun radVelBeam4(radVelBeam4: JsonField<Double>) = apply { this.radVelBeam4 = radVelBeam4 }
+
+        /**
+         * Component of wind velocity moving directly toward or away from radar beam 5, in meters
+         * per second. Radial velocity values can either be positive (wind is moving away from the
+         * radar) or negative (wind is moving toward the radar). The beam number designation is
+         * defined by the data source.
+         */
+        fun radVelBeam5(radVelBeam5: Double) = radVelBeam5(JsonField.of(radVelBeam5))
+
+        /**
+         * Sets [Builder.radVelBeam5] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.radVelBeam5] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun radVelBeam5(radVelBeam5: JsonField<Double>) = apply { this.radVelBeam5 = radVelBeam5 }
+
+        /** The amount of rain that has fallen in the past hour, in centimeters. */
+        fun rainHour(rainHour: Double) = rainHour(JsonField.of(rainHour))
+
+        /**
+         * Sets [Builder.rainHour] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.rainHour] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun rainHour(rainHour: JsonField<Double>) = apply { this.rainHour = rainHour }
+
+        /** The Raw Meteorological Aerodrome Report (METAR) string. */
+        fun rawMetar(rawMetar: String) = rawMetar(JsonField.of(rawMetar))
+
+        /**
+         * Sets [Builder.rawMetar] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.rawMetar] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun rawMetar(rawMetar: JsonField<String>) = apply { this.rawMetar = rawMetar }
+
+        /**
+         * Terminal Aerodrome Forecast (TAF) containing detailed weather predictions for a specific
+         * airport or aerodrome.
+         */
+        fun rawTaf(rawTaf: String) = rawTaf(JsonField.of(rawTaf))
+
+        /**
+         * Sets [Builder.rawTaf] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.rawTaf] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun rawTaf(rawTaf: JsonField<String>) = apply { this.rawTaf = rawTaf }
+
+        /**
+         * The amount of radiation that changes direction as a function of atmospheric density, in
+         * Watts per square meter.
+         */
+        fun refRad(refRad: Double) = refRad(JsonField.of(refRad))
+
+        /**
+         * Sets [Builder.refRad] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.refRad] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun refRad(refRad: JsonField<Double>) = apply { this.refRad = refRad }
+
+        /** The percentage of water vapor in the atmosphere. */
+        fun relHumidity(relHumidity: Double) = relHumidity(JsonField.of(relHumidity))
+
+        /**
+         * Sets [Builder.relHumidity] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.relHumidity] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun relHumidity(relHumidity: JsonField<Double>) = apply { this.relHumidity = relHumidity }
+
+        /**
+         * Sensor altitude at obTime in km. This includes pilot reports or other means of weather
+         * observation.
+         */
+        fun senalt(senalt: Double) = senalt(JsonField.of(senalt))
+
+        /**
+         * Sets [Builder.senalt] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.senalt] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun senalt(senalt: JsonField<Double>) = apply { this.senalt = senalt }
+
+        /**
+         * Sensor WGS84 latitude at obTime in degrees. -90 to 90 degrees (negative values south of
+         * equator). This includes pilot reports or other means of weather observation.
+         */
+        fun senlat(senlat: Double) = senlat(JsonField.of(senlat))
+
+        /**
+         * Sets [Builder.senlat] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.senlat] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun senlat(senlat: JsonField<Double>) = apply { this.senlat = senlat }
+
+        /**
+         * Sensor WGS84 longitude at obTime in degrees. -180 to 180 degrees (negative values west of
+         * Prime Meridian). This includes pilot reports or other means of weather observation.
+         */
+        fun senlon(senlon: Double) = senlon(JsonField.of(senlon))
+
+        /**
+         * Sets [Builder.senlon] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.senlon] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun senlon(senlon: JsonField<Double>) = apply { this.senlon = senlon }
+
+        /** The volumetric percentage of soil water contained in a given volume of soil. */
+        fun soilMoisture(soilMoisture: Double) = soilMoisture(JsonField.of(soilMoisture))
+
+        /**
+         * Sets [Builder.soilMoisture] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.soilMoisture] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun soilMoisture(soilMoisture: JsonField<Double>) = apply {
+            this.soilMoisture = soilMoisture
+        }
+
+        /** The measurement of soil temperature in degrees C. */
+        fun soilTemp(soilTemp: Double) = soilTemp(JsonField.of(soilTemp))
+
+        /**
+         * Sets [Builder.soilTemp] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.soilTemp] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun soilTemp(soilTemp: JsonField<Double>) = apply { this.soilTemp = soilTemp }
+
+        /**
+         * The power per unit area received from the Sun in the form of electromagnetic radiation as
+         * measured in the wavelength range of the measuring instrument. The solar irradiance is
+         * measured in watt per square meter (W/m2).
+         */
+        fun solarRad(solarRad: Double) = solarRad(JsonField.of(solarRad))
+
+        /**
+         * Sets [Builder.solarRad] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.solarRad] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun solarRad(solarRad: JsonField<Double>) = apply { this.solarRad = solarRad }
+
+        /**
+         * Array of UUID(s) of the UDL data record(s) that are related to this WeatherReport record.
+         * See the associated 'srcTyps' array for the specific types of data, positionally
+         * corresponding to the UUIDs in this array. The 'srcTyps' and 'srcIds' arrays must match in
+         * size. See the corresponding srcTyps array element for the data type of the UUID and use
+         * the appropriate API operation to retrieve that object.
+         */
+        fun srcIds(srcIds: List<String>) = srcIds(JsonField.of(srcIds))
+
+        /**
+         * Sets [Builder.srcIds] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.srcIds] with a well-typed `List<String>` value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun srcIds(srcIds: JsonField<List<String>>) = apply {
+            this.srcIds = srcIds.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [String] to [srcIds].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addSrcId(srcId: String) = apply {
+            srcIds =
+                (srcIds ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("srcIds", it).add(srcId)
+                }
+        }
+
+        /**
+         * Array of UDL record types (SENSOR, WEATHERDATA) that are related to this WeatherReport
+         * record. See the associated 'srcIds' array for the record UUIDs, positionally
+         * corresponding to the record types in this array. The 'srcTyps' and 'srcIds' arrays must
+         * match in size.
+         */
+        fun srcTyps(srcTyps: List<String>) = srcTyps(JsonField.of(srcTyps))
+
+        /**
+         * Sets [Builder.srcTyps] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.srcTyps] with a well-typed `List<String>` value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun srcTyps(srcTyps: JsonField<List<String>>) = apply {
+            this.srcTyps = srcTyps.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [String] to [srcTyps].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addSrcTyp(srcTyp: String) = apply {
+            srcTyps =
+                (srcTyps ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("srcTyps", it).add(srcTyp)
+                }
+        }
+
+        /**
+         * Describes in which direction (if any) that better weather conditions exist. Intended as,
+         * but not constrained to, MIL-STD-6016 surrounding weather designations (e.g. NO STATEMENT,
+         * BETTER TO NORTH, BETTER TO EAST, BETTER TO SOUTH, BETTER TO WEST).
+         */
+        fun surroundingWeather(surroundingWeather: String) =
+            surroundingWeather(JsonField.of(surroundingWeather))
+
+        /**
+         * Sets [Builder.surroundingWeather] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.surroundingWeather] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun surroundingWeather(surroundingWeather: JsonField<String>) = apply {
+            this.surroundingWeather = surroundingWeather
+        }
+
+        /** The measurement of air temperature in degrees C. */
+        fun temperature(temperature: Double) = temperature(JsonField.of(temperature))
+
+        /**
+         * Sets [Builder.temperature] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.temperature] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun temperature(temperature: JsonField<Double>) = apply { this.temperature = temperature }
+
+        /** Visual distance in meters. */
+        fun visibility(visibility: Double) = visibility(JsonField.of(visibility))
+
+        /**
+         * Sets [Builder.visibility] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.visibility] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun visibility(visibility: JsonField<Double>) = apply { this.visibility = visibility }
+
+        /**
+         * The change in wind speed between two different altitudes divided by the vertical distance
+         * between them, in units of 1/sec.
+         */
+        fun vshear(vshear: Double) = vshear(JsonField.of(vshear))
+
+        /**
+         * Sets [Builder.vshear] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.vshear] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun vshear(vshear: JsonField<Double>) = apply { this.vshear = vshear }
+
+        /**
+         * Amplifies the actual weather being reported. Intended as, but not constrained to,
+         * MIL-STD-6016 weather amplification designations (e.g. NO STATEMENT, NO SCATTERED BROKEN
+         * MEDIUM CLOUD, SCATTERED BROKEN MEDIUM CLOUDS, GUSTY WINDS AT SERVICE, FOG IN VALLEYS,
+         * HIGHER TERRAIN OBSCURED, SURFACE CONDITIONS VARIABLE, SURFACE WIND NE, SURFACE WIND SE,
+         * SURFACE WIND SW, SURFACE WIND NW, PRESENCE OF CUMULONIMBUS).
+         */
+        fun weatherAmp(weatherAmp: String) = weatherAmp(JsonField.of(weatherAmp))
+
+        /**
+         * Sets [Builder.weatherAmp] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.weatherAmp] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun weatherAmp(weatherAmp: JsonField<String>) = apply { this.weatherAmp = weatherAmp }
+
+        /**
+         * Used in conjunction with actWeather and weatherInt. Intended as, but not constrained to,
+         * MIL-STD-6016 actual weather descriptor (e.g. NO STATEMENT, SHALLOW, PATCHES, LOW
+         * DRIFTING, BLOWING, SHOWERS, THUNDERSTORMS, SUPERCOOLED).
+         */
+        fun weatherDesc(weatherDesc: String) = weatherDesc(JsonField.of(weatherDesc))
+
+        /**
+         * Sets [Builder.weatherDesc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.weatherDesc] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun weatherDesc(weatherDesc: JsonField<String>) = apply { this.weatherDesc = weatherDesc }
+
+        /**
+         * Identifier of the weather over target, which should remain the same on subsequent Weather
+         * Over Target records.
+         */
+        fun weatherId(weatherId: String) = weatherId(JsonField.of(weatherId))
+
+        /**
+         * Sets [Builder.weatherId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.weatherId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun weatherId(weatherId: JsonField<String>) = apply { this.weatherId = weatherId }
+
+        /**
+         * Weather Intensity. Used in conjunction with actWeather and weatherDesc. Intended as, but
+         * not constrained to, MIL-STD-6016 weather intensity (e.g. NO STATEMENT, LIGHT, MODERATE,
+         * HEAVY, IN VICINITY).
+         */
+        fun weatherInt(weatherInt: String) = weatherInt(JsonField.of(weatherInt))
+
+        /**
+         * Sets [Builder.weatherInt] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.weatherInt] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun weatherInt(weatherInt: JsonField<String>) = apply { this.weatherInt = weatherInt }
+
+        /** The perceived temperature in degrees C. */
+        fun windChill(windChill: Double) = windChill(JsonField.of(windChill))
+
+        /**
+         * Sets [Builder.windChill] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.windChill] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun windChill(windChill: JsonField<Double>) = apply { this.windChill = windChill }
+
+        /**
+         * Covariance matrix, in knots and second based units. The array values represent the lower
+         * triangular half of the covariance matrix. The size of the covariance matrix is 2x2. The
+         * covariance elements are position dependent within the array with values ordered as
+         * follows:
+         *
+         * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;&nbsp;&nbsp;&nbsp;y
+         *
+         * x&nbsp;&nbsp;&nbsp;&nbsp;1
+         *
+         * y&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3
+         *
+         * The cov array should contain only the lower left triangle values from top left down to
+         * bottom right, in order.
+         */
+        fun windCov(windCov: List<Double>) = windCov(JsonField.of(windCov))
+
+        /**
+         * Sets [Builder.windCov] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.windCov] with a well-typed `List<Double>` value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun windCov(windCov: JsonField<List<Double>>) = apply {
+            this.windCov = windCov.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [Double] to [Builder.windCov].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addWindCov(windCov: Double) = apply {
+            this.windCov =
+                (this.windCov ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("windCov", it).add(windCov)
+                }
+        }
+
+        /** Direction the wind is blowing, in degrees clockwise from true north. */
+        fun windDir(windDir: Double) = windDir(JsonField.of(windDir))
+
+        /**
+         * Sets [Builder.windDir] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.windDir] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun windDir(windDir: JsonField<Double>) = apply { this.windDir = windDir }
+
+        /** Average wind direction over a 1 minute period, in degrees clockwise from true north. */
+        fun windDirAvg(windDirAvg: Double) = windDirAvg(JsonField.of(windDirAvg))
+
+        /**
+         * Sets [Builder.windDirAvg] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.windDirAvg] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun windDirAvg(windDirAvg: JsonField<Double>) = apply { this.windDirAvg = windDirAvg }
+
+        /**
+         * Wind direction corresponding to the peak wind speed during a 1 minute period, in degrees
+         * clockwise from true north.
+         */
+        fun windDirPeak(windDirPeak: Double) = windDirPeak(JsonField.of(windDirPeak))
+
+        /**
+         * Sets [Builder.windDirPeak] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.windDirPeak] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun windDirPeak(windDirPeak: JsonField<Double>) = apply { this.windDirPeak = windDirPeak }
+
+        /**
+         * Wind direction corresponding to the peak wind speed during a 10 minute period, in degrees
+         * clockwise from true north.
+         */
+        fun windDirPeak10(windDirPeak10: Double) = windDirPeak10(JsonField.of(windDirPeak10))
+
+        /**
+         * Sets [Builder.windDirPeak10] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.windDirPeak10] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun windDirPeak10(windDirPeak10: JsonField<Double>) = apply {
+            this.windDirPeak10 = windDirPeak10
+        }
+
+        /** Expresses the max gust speed of the wind, in meters/second. */
+        fun windGust(windGust: Double) = windGust(JsonField.of(windGust))
+
+        /**
+         * Sets [Builder.windGust] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.windGust] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun windGust(windGust: JsonField<Double>) = apply { this.windGust = windGust }
+
+        /**
+         * Expresses the max gust speed of the wind recorded in a 10 minute period, in
+         * meters/second.
+         */
+        fun windGust10(windGust10: Double) = windGust10(JsonField.of(windGust10))
+
+        /**
+         * Sets [Builder.windGust10] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.windGust10] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun windGust10(windGust10: JsonField<Double>) = apply { this.windGust10 = windGust10 }
+
+        /** Expresses the speed of the wind in meters/second. */
+        fun windSpd(windSpd: Double) = windSpd(JsonField.of(windSpd))
+
+        /**
+         * Sets [Builder.windSpd] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.windSpd] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun windSpd(windSpd: JsonField<Double>) = apply { this.windSpd = windSpd }
+
+        /** Average wind speed over a 1 minute period, in meters/second. */
+        fun windSpdAvg(windSpdAvg: Double) = windSpdAvg(JsonField.of(windSpdAvg))
+
+        /**
+         * Sets [Builder.windSpdAvg] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.windSpdAvg] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun windSpdAvg(windSpdAvg: JsonField<Double>) = apply { this.windSpdAvg = windSpdAvg }
+
+        /** Boolean describing whether or not the wind direction and/or speed is variable. */
+        fun windVar(windVar: Boolean) = windVar(JsonField.of(windVar))
+
+        /**
+         * Sets [Builder.windVar] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.windVar] with a well-typed [Boolean] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun windVar(windVar: JsonField<Boolean>) = apply { this.windVar = windVar }
+
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
+
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
+
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
+
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
+
+        /**
+         * Returns an immutable instance of [WeatherReportFull].
+         *
+         * Further updates to this [Builder] will not mutate the returned instance.
+         *
+         * The following fields are required:
+         * ```java
+         * .classificationMarking()
+         * .dataMode()
+         * .lat()
+         * .lon()
+         * .obTime()
+         * .reportType()
+         * .source()
+         * ```
+         *
+         * @throws IllegalStateException if any required field is unset.
+         */
+        fun build(): WeatherReportFull =
+            WeatherReportFull(
+                checkRequired("classificationMarking", classificationMarking),
+                checkRequired("dataMode", dataMode),
+                checkRequired("lat", lat),
+                checkRequired("lon", lon),
+                checkRequired("obTime", obTime),
+                checkRequired("reportType", reportType),
+                checkRequired("source", source),
+                id,
+                actWeather,
+                agjson,
+                alt,
+                andims,
+                area,
+                asrid,
+                atext,
+                atype,
+                barPress,
+                ccEvent,
+                (cloudCover ?: JsonMissing.of()).map { it.toImmutable() },
+                (cloudHght ?: JsonMissing.of()).map { it.toImmutable() },
+                contrailHghtLower,
+                contrailHghtUpper,
+                createdAt,
+                createdBy,
+                dataLevel,
+                dewPoint,
+                difRad,
+                dirDev,
+                enRouteWeather,
+                externalId,
+                externalLocationId,
+                forecastEndTime,
+                forecastStartTime,
+                geoPotentialAlt,
+                hshear,
+                icao,
+                icingLowerLimit,
+                icingUpperLimit,
+                idAirfield,
+                idGroundImagery,
+                idSensor,
+                idSite,
+                indexRefraction,
+                origin,
+                origNetwork,
+                origSensorId,
+                precipRate,
+                qnh,
+                radVel,
+                radVelBeam1,
+                radVelBeam2,
+                radVelBeam3,
+                radVelBeam4,
+                radVelBeam5,
+                rainHour,
+                rawMetar,
+                rawTaf,
+                refRad,
+                relHumidity,
+                senalt,
+                senlat,
+                senlon,
+                soilMoisture,
+                soilTemp,
+                solarRad,
+                (srcIds ?: JsonMissing.of()).map { it.toImmutable() },
+                (srcTyps ?: JsonMissing.of()).map { it.toImmutable() },
+                surroundingWeather,
+                temperature,
+                visibility,
+                vshear,
+                weatherAmp,
+                weatherDesc,
+                weatherId,
+                weatherInt,
+                windChill,
+                (windCov ?: JsonMissing.of()).map { it.toImmutable() },
+                windDir,
+                windDirAvg,
+                windDirPeak,
+                windDirPeak10,
+                windGust,
+                windGust10,
+                windSpd,
+                windSpdAvg,
+                windVar,
+                additionalProperties.toMutableMap(),
+            )
+    }
+
+    private var validated: Boolean = false
+
+    fun validate(): WeatherReportFull = apply {
+        if (validated) {
+            return@apply
+        }
+
+        classificationMarking()
+        dataMode().validate()
+        lat()
+        lon()
+        obTime()
+        reportType()
+        source()
+        id()
+        actWeather()
+        agjson()
+        alt()
+        andims()
+        area()
+        asrid()
+        atext()
+        atype()
+        barPress()
+        ccEvent()
+        cloudCover()
+        cloudHght()
+        contrailHghtLower()
+        contrailHghtUpper()
+        createdAt()
+        createdBy()
+        dataLevel()
+        dewPoint()
+        difRad()
+        dirDev()
+        enRouteWeather()
+        externalId()
+        externalLocationId()
+        forecastEndTime()
+        forecastStartTime()
+        geoPotentialAlt()
+        hshear()
+        icao()
+        icingLowerLimit()
+        icingUpperLimit()
+        idAirfield()
+        idGroundImagery()
+        idSensor()
+        idSite()
+        indexRefraction()
+        origin()
+        origNetwork()
+        origSensorId()
+        precipRate()
+        qnh()
+        radVel()
+        radVelBeam1()
+        radVelBeam2()
+        radVelBeam3()
+        radVelBeam4()
+        radVelBeam5()
+        rainHour()
+        rawMetar()
+        rawTaf()
+        refRad()
+        relHumidity()
+        senalt()
+        senlat()
+        senlon()
+        soilMoisture()
+        soilTemp()
+        solarRad()
+        srcIds()
+        srcTyps()
+        surroundingWeather()
+        temperature()
+        visibility()
+        vshear()
+        weatherAmp()
+        weatherDesc()
+        weatherId()
+        weatherInt()
+        windChill()
+        windCov()
+        windDir()
+        windDirAvg()
+        windDirPeak()
+        windDirPeak10()
+        windGust()
+        windGust10()
+        windSpd()
+        windSpdAvg()
+        windVar()
+        validated = true
+    }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: UnifieddatalibraryInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    @JvmSynthetic
+    internal fun validity(): Int =
+        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (lat.asKnown().isPresent) 1 else 0) +
+            (if (lon.asKnown().isPresent) 1 else 0) +
+            (if (obTime.asKnown().isPresent) 1 else 0) +
+            (if (reportType.asKnown().isPresent) 1 else 0) +
+            (if (source.asKnown().isPresent) 1 else 0) +
+            (if (id.asKnown().isPresent) 1 else 0) +
+            (if (actWeather.asKnown().isPresent) 1 else 0) +
+            (if (agjson.asKnown().isPresent) 1 else 0) +
+            (if (alt.asKnown().isPresent) 1 else 0) +
+            (if (andims.asKnown().isPresent) 1 else 0) +
+            (if (area.asKnown().isPresent) 1 else 0) +
+            (if (asrid.asKnown().isPresent) 1 else 0) +
+            (if (atext.asKnown().isPresent) 1 else 0) +
+            (if (atype.asKnown().isPresent) 1 else 0) +
+            (if (barPress.asKnown().isPresent) 1 else 0) +
+            (if (ccEvent.asKnown().isPresent) 1 else 0) +
+            (cloudCover.asKnown().getOrNull()?.size ?: 0) +
+            (cloudHght.asKnown().getOrNull()?.size ?: 0) +
+            (if (contrailHghtLower.asKnown().isPresent) 1 else 0) +
+            (if (contrailHghtUpper.asKnown().isPresent) 1 else 0) +
+            (if (createdAt.asKnown().isPresent) 1 else 0) +
+            (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (dataLevel.asKnown().isPresent) 1 else 0) +
+            (if (dewPoint.asKnown().isPresent) 1 else 0) +
+            (if (difRad.asKnown().isPresent) 1 else 0) +
+            (if (dirDev.asKnown().isPresent) 1 else 0) +
+            (if (enRouteWeather.asKnown().isPresent) 1 else 0) +
+            (if (externalId.asKnown().isPresent) 1 else 0) +
+            (if (externalLocationId.asKnown().isPresent) 1 else 0) +
+            (if (forecastEndTime.asKnown().isPresent) 1 else 0) +
+            (if (forecastStartTime.asKnown().isPresent) 1 else 0) +
+            (if (geoPotentialAlt.asKnown().isPresent) 1 else 0) +
+            (if (hshear.asKnown().isPresent) 1 else 0) +
+            (if (icao.asKnown().isPresent) 1 else 0) +
+            (if (icingLowerLimit.asKnown().isPresent) 1 else 0) +
+            (if (icingUpperLimit.asKnown().isPresent) 1 else 0) +
+            (if (idAirfield.asKnown().isPresent) 1 else 0) +
+            (if (idGroundImagery.asKnown().isPresent) 1 else 0) +
+            (if (idSensor.asKnown().isPresent) 1 else 0) +
+            (if (idSite.asKnown().isPresent) 1 else 0) +
+            (if (indexRefraction.asKnown().isPresent) 1 else 0) +
+            (if (origin.asKnown().isPresent) 1 else 0) +
+            (if (origNetwork.asKnown().isPresent) 1 else 0) +
+            (if (origSensorId.asKnown().isPresent) 1 else 0) +
+            (if (precipRate.asKnown().isPresent) 1 else 0) +
+            (if (qnh.asKnown().isPresent) 1 else 0) +
+            (if (radVel.asKnown().isPresent) 1 else 0) +
+            (if (radVelBeam1.asKnown().isPresent) 1 else 0) +
+            (if (radVelBeam2.asKnown().isPresent) 1 else 0) +
+            (if (radVelBeam3.asKnown().isPresent) 1 else 0) +
+            (if (radVelBeam4.asKnown().isPresent) 1 else 0) +
+            (if (radVelBeam5.asKnown().isPresent) 1 else 0) +
+            (if (rainHour.asKnown().isPresent) 1 else 0) +
+            (if (rawMetar.asKnown().isPresent) 1 else 0) +
+            (if (rawTaf.asKnown().isPresent) 1 else 0) +
+            (if (refRad.asKnown().isPresent) 1 else 0) +
+            (if (relHumidity.asKnown().isPresent) 1 else 0) +
+            (if (senalt.asKnown().isPresent) 1 else 0) +
+            (if (senlat.asKnown().isPresent) 1 else 0) +
+            (if (senlon.asKnown().isPresent) 1 else 0) +
+            (if (soilMoisture.asKnown().isPresent) 1 else 0) +
+            (if (soilTemp.asKnown().isPresent) 1 else 0) +
+            (if (solarRad.asKnown().isPresent) 1 else 0) +
+            (srcIds.asKnown().getOrNull()?.size ?: 0) +
+            (srcTyps.asKnown().getOrNull()?.size ?: 0) +
+            (if (surroundingWeather.asKnown().isPresent) 1 else 0) +
+            (if (temperature.asKnown().isPresent) 1 else 0) +
+            (if (visibility.asKnown().isPresent) 1 else 0) +
+            (if (vshear.asKnown().isPresent) 1 else 0) +
+            (if (weatherAmp.asKnown().isPresent) 1 else 0) +
+            (if (weatherDesc.asKnown().isPresent) 1 else 0) +
+            (if (weatherId.asKnown().isPresent) 1 else 0) +
+            (if (weatherInt.asKnown().isPresent) 1 else 0) +
+            (if (windChill.asKnown().isPresent) 1 else 0) +
+            (windCov.asKnown().getOrNull()?.size ?: 0) +
+            (if (windDir.asKnown().isPresent) 1 else 0) +
+            (if (windDirAvg.asKnown().isPresent) 1 else 0) +
+            (if (windDirPeak.asKnown().isPresent) 1 else 0) +
+            (if (windDirPeak10.asKnown().isPresent) 1 else 0) +
+            (if (windGust.asKnown().isPresent) 1 else 0) +
+            (if (windGust10.asKnown().isPresent) 1 else 0) +
+            (if (windSpd.asKnown().isPresent) 1 else 0) +
+            (if (windSpdAvg.asKnown().isPresent) 1 else 0) +
+            (if (windVar.asKnown().isPresent) 1 else 0)
+
+    /**
+     * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
+     *
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
+     *
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
+     *
+     * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+     *
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
+     */
+    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+
+        /**
+         * Returns this class instance's raw value.
+         *
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
+         */
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+        companion object {
+
+            @JvmField val REAL = of("REAL")
+
+            @JvmField val TEST = of("TEST")
+
+            @JvmField val SIMULATED = of("SIMULATED")
+
+            @JvmField val EXERCISE = of("EXERCISE")
+
+            @JvmStatic fun of(value: String) = DataMode(JsonField.of(value))
+        }
+
+        /** An enum containing [DataMode]'s known values. */
+        enum class Known {
+            REAL,
+            TEST,
+            SIMULATED,
+            EXERCISE,
+        }
+
+        /**
+         * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
+         *
+         * An instance of [DataMode] can contain an unknown value in a couple of cases:
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
+         * - It was constructed with an arbitrary value using the [of] method.
+         */
+        enum class Value {
+            REAL,
+            TEST,
+            SIMULATED,
+            EXERCISE,
+            /** An enum member indicating that [DataMode] was instantiated with an unknown value. */
+            _UNKNOWN,
+        }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
+         *
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
+         */
+        fun value(): Value =
+            when (this) {
+                REAL -> Value.REAL
+                TEST -> Value.TEST
+                SIMULATED -> Value.SIMULATED
+                EXERCISE -> Value.EXERCISE
+                else -> Value._UNKNOWN
+            }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value.
+         *
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
+         */
+        fun known(): Known =
+            when (this) {
+                REAL -> Known.REAL
+                TEST -> Known.TEST
+                SIMULATED -> Known.SIMULATED
+                EXERCISE -> Known.EXERCISE
+                else -> throw UnifieddatalibraryInvalidDataException("Unknown DataMode: $value")
+            }
+
+        /**
+         * Returns this class instance's primitive wire representation.
+         *
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
+         */
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
+
+        private var validated: Boolean = false
+
+        fun validate(): DataMode = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: UnifieddatalibraryInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+        }
+
+        override fun hashCode() = value.hashCode()
+
+        override fun toString() = value.toString()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        return /* spotless:off */ other is WeatherReportFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && lat == other.lat && lon == other.lon && obTime == other.obTime && reportType == other.reportType && source == other.source && id == other.id && actWeather == other.actWeather && agjson == other.agjson && alt == other.alt && andims == other.andims && area == other.area && asrid == other.asrid && atext == other.atext && atype == other.atype && barPress == other.barPress && ccEvent == other.ccEvent && cloudCover == other.cloudCover && cloudHght == other.cloudHght && contrailHghtLower == other.contrailHghtLower && contrailHghtUpper == other.contrailHghtUpper && createdAt == other.createdAt && createdBy == other.createdBy && dataLevel == other.dataLevel && dewPoint == other.dewPoint && difRad == other.difRad && dirDev == other.dirDev && enRouteWeather == other.enRouteWeather && externalId == other.externalId && externalLocationId == other.externalLocationId && forecastEndTime == other.forecastEndTime && forecastStartTime == other.forecastStartTime && geoPotentialAlt == other.geoPotentialAlt && hshear == other.hshear && icao == other.icao && icingLowerLimit == other.icingLowerLimit && icingUpperLimit == other.icingUpperLimit && idAirfield == other.idAirfield && idGroundImagery == other.idGroundImagery && idSensor == other.idSensor && idSite == other.idSite && indexRefraction == other.indexRefraction && origin == other.origin && origNetwork == other.origNetwork && origSensorId == other.origSensorId && precipRate == other.precipRate && qnh == other.qnh && radVel == other.radVel && radVelBeam1 == other.radVelBeam1 && radVelBeam2 == other.radVelBeam2 && radVelBeam3 == other.radVelBeam3 && radVelBeam4 == other.radVelBeam4 && radVelBeam5 == other.radVelBeam5 && rainHour == other.rainHour && rawMetar == other.rawMetar && rawTaf == other.rawTaf && refRad == other.refRad && relHumidity == other.relHumidity && senalt == other.senalt && senlat == other.senlat && senlon == other.senlon && soilMoisture == other.soilMoisture && soilTemp == other.soilTemp && solarRad == other.solarRad && srcIds == other.srcIds && srcTyps == other.srcTyps && surroundingWeather == other.surroundingWeather && temperature == other.temperature && visibility == other.visibility && vshear == other.vshear && weatherAmp == other.weatherAmp && weatherDesc == other.weatherDesc && weatherId == other.weatherId && weatherInt == other.weatherInt && windChill == other.windChill && windCov == other.windCov && windDir == other.windDir && windDirAvg == other.windDirAvg && windDirPeak == other.windDirPeak && windDirPeak10 == other.windDirPeak10 && windGust == other.windGust && windGust10 == other.windGust10 && windSpd == other.windSpd && windSpdAvg == other.windSpdAvg && windVar == other.windVar && additionalProperties == other.additionalProperties /* spotless:on */
+    }
+
+    /* spotless:off */
+    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, lat, lon, obTime, reportType, source, id, actWeather, agjson, alt, andims, area, asrid, atext, atype, barPress, ccEvent, cloudCover, cloudHght, contrailHghtLower, contrailHghtUpper, createdAt, createdBy, dataLevel, dewPoint, difRad, dirDev, enRouteWeather, externalId, externalLocationId, forecastEndTime, forecastStartTime, geoPotentialAlt, hshear, icao, icingLowerLimit, icingUpperLimit, idAirfield, idGroundImagery, idSensor, idSite, indexRefraction, origin, origNetwork, origSensorId, precipRate, qnh, radVel, radVelBeam1, radVelBeam2, radVelBeam3, radVelBeam4, radVelBeam5, rainHour, rawMetar, rawTaf, refRad, relHumidity, senalt, senlat, senlon, soilMoisture, soilTemp, solarRad, srcIds, srcTyps, surroundingWeather, temperature, visibility, vshear, weatherAmp, weatherDesc, weatherId, weatherInt, windChill, windCov, windDir, windDirAvg, windDirPeak, windDirPeak10, windGust, windGust10, windSpd, windSpdAvg, windVar, additionalProperties) }
+    /* spotless:on */
+
+    override fun hashCode(): Int = hashCode
+
+    override fun toString() =
+        "WeatherReportFull{classificationMarking=$classificationMarking, dataMode=$dataMode, lat=$lat, lon=$lon, obTime=$obTime, reportType=$reportType, source=$source, id=$id, actWeather=$actWeather, agjson=$agjson, alt=$alt, andims=$andims, area=$area, asrid=$asrid, atext=$atext, atype=$atype, barPress=$barPress, ccEvent=$ccEvent, cloudCover=$cloudCover, cloudHght=$cloudHght, contrailHghtLower=$contrailHghtLower, contrailHghtUpper=$contrailHghtUpper, createdAt=$createdAt, createdBy=$createdBy, dataLevel=$dataLevel, dewPoint=$dewPoint, difRad=$difRad, dirDev=$dirDev, enRouteWeather=$enRouteWeather, externalId=$externalId, externalLocationId=$externalLocationId, forecastEndTime=$forecastEndTime, forecastStartTime=$forecastStartTime, geoPotentialAlt=$geoPotentialAlt, hshear=$hshear, icao=$icao, icingLowerLimit=$icingLowerLimit, icingUpperLimit=$icingUpperLimit, idAirfield=$idAirfield, idGroundImagery=$idGroundImagery, idSensor=$idSensor, idSite=$idSite, indexRefraction=$indexRefraction, origin=$origin, origNetwork=$origNetwork, origSensorId=$origSensorId, precipRate=$precipRate, qnh=$qnh, radVel=$radVel, radVelBeam1=$radVelBeam1, radVelBeam2=$radVelBeam2, radVelBeam3=$radVelBeam3, radVelBeam4=$radVelBeam4, radVelBeam5=$radVelBeam5, rainHour=$rainHour, rawMetar=$rawMetar, rawTaf=$rawTaf, refRad=$refRad, relHumidity=$relHumidity, senalt=$senalt, senlat=$senlat, senlon=$senlon, soilMoisture=$soilMoisture, soilTemp=$soilTemp, solarRad=$solarRad, srcIds=$srcIds, srcTyps=$srcTyps, surroundingWeather=$surroundingWeather, temperature=$temperature, visibility=$visibility, vshear=$vshear, weatherAmp=$weatherAmp, weatherDesc=$weatherDesc, weatherId=$weatherId, weatherInt=$weatherInt, windChill=$windChill, windCov=$windCov, windDir=$windDir, windDirAvg=$windDirAvg, windDirPeak=$windDirPeak, windDirPeak10=$windDirPeak10, windGust=$windGust, windGust10=$windGust10, windSpd=$windSpd, windSpdAvg=$windSpdAvg, windVar=$windVar, additionalProperties=$additionalProperties}"
+}
