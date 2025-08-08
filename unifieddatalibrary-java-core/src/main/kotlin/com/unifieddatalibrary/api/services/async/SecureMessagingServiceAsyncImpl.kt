@@ -18,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingDescribeTopicParams
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingGetLatestOffsetParams
+import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingGetMessagesPageAsync
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingGetMessagesParams
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingListTopicsParams
 import com.unifieddatalibrary.api.models.securemessaging.TopicDetails
@@ -56,9 +57,9 @@ internal constructor(private val clientOptions: ClientOptions) : SecureMessaging
     override fun getMessages(
         params: SecureMessagingGetMessagesParams,
         requestOptions: RequestOptions,
-    ): CompletableFuture<Void?> =
+    ): CompletableFuture<SecureMessagingGetMessagesPageAsync> =
         // get /sm/getMessages/{topic}/{offset}
-        withRawResponse().getMessages(params, requestOptions).thenAccept {}
+        withRawResponse().getMessages(params, requestOptions).thenApply { it.parse() }
 
     override fun listTopics(
         params: SecureMessagingListTopicsParams,
@@ -139,12 +140,13 @@ internal constructor(private val clientOptions: ClientOptions) : SecureMessaging
                 }
         }
 
-        private val getMessagesHandler: Handler<Void?> = emptyHandler()
+        private val getMessagesHandler: Handler<List<Any>> =
+            jsonHandler<List<Any>>(clientOptions.jsonMapper)
 
         override fun getMessages(
             params: SecureMessagingGetMessagesParams,
             requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponse> {
+        ): CompletableFuture<HttpResponseFor<SecureMessagingGetMessagesPageAsync>> {
             // We check here instead of in the params builder because this can be specified
             // positionally or in the params class.
             checkRequired("offset", params.offset().getOrNull())
@@ -165,7 +167,15 @@ internal constructor(private val clientOptions: ClientOptions) : SecureMessaging
                 .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
-                        response.use { getMessagesHandler.handle(it) }
+                        val items = response.use { getMessagesHandler.handle(it) }
+
+                        SecureMessagingGetMessagesPageAsync.builder()
+                            .service(SecureMessagingServiceAsyncImpl(clientOptions))
+                            .streamHandlerExecutor(clientOptions.streamHandlerExecutor)
+                            .params(params)
+                            .headers(response.headers())
+                            .items(items)
+                            .build()
                     }
                 }
         }

@@ -9,6 +9,7 @@ import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingDescribeTopicParams
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingGetLatestOffsetParams
+import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingGetMessagesPage
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingGetMessagesParams
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingListTopicsParams
 import com.unifieddatalibrary.api.models.securemessaging.TopicDetails
@@ -102,17 +103,18 @@ interface SecureMessagingService {
         offset: Long,
         params: SecureMessagingGetMessagesParams,
         requestOptions: RequestOptions = RequestOptions.none(),
-    ) = getMessages(params.toBuilder().offset(offset).build(), requestOptions)
+    ): SecureMessagingGetMessagesPage =
+        getMessages(params.toBuilder().offset(offset).build(), requestOptions)
 
     /** @see getMessages */
-    fun getMessages(params: SecureMessagingGetMessagesParams) =
+    fun getMessages(params: SecureMessagingGetMessagesParams): SecureMessagingGetMessagesPage =
         getMessages(params, RequestOptions.none())
 
     /** @see getMessages */
     fun getMessages(
         params: SecureMessagingGetMessagesParams,
         requestOptions: RequestOptions = RequestOptions.none(),
-    )
+    ): SecureMessagingGetMessagesPage
 
     /** Retrieve the list of available secure messaging topics or data types available. */
     fun listTopics(): List<TopicDetails> = listTopics(SecureMessagingListTopicsParams.none())
@@ -239,7 +241,10 @@ interface SecureMessagingService {
          * the same as [SecureMessagingService.getMessages].
          */
         @MustBeClosed
-        fun getMessages(offset: Long, params: SecureMessagingGetMessagesParams): HttpResponse =
+        fun getMessages(
+            offset: Long,
+            params: SecureMessagingGetMessagesParams,
+        ): HttpResponseFor<SecureMessagingGetMessagesPage> =
             getMessages(offset, params, RequestOptions.none())
 
         /** @see getMessages */
@@ -248,11 +253,14 @@ interface SecureMessagingService {
             offset: Long,
             params: SecureMessagingGetMessagesParams,
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponse = getMessages(params.toBuilder().offset(offset).build(), requestOptions)
+        ): HttpResponseFor<SecureMessagingGetMessagesPage> =
+            getMessages(params.toBuilder().offset(offset).build(), requestOptions)
 
         /** @see getMessages */
         @MustBeClosed
-        fun getMessages(params: SecureMessagingGetMessagesParams): HttpResponse =
+        fun getMessages(
+            params: SecureMessagingGetMessagesParams
+        ): HttpResponseFor<SecureMessagingGetMessagesPage> =
             getMessages(params, RequestOptions.none())
 
         /** @see getMessages */
@@ -260,7 +268,7 @@ interface SecureMessagingService {
         fun getMessages(
             params: SecureMessagingGetMessagesParams,
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponse
+        ): HttpResponseFor<SecureMessagingGetMessagesPage>
 
         /**
          * Returns a raw HTTP response for `get /sm/listTopics`, but is otherwise the same as
