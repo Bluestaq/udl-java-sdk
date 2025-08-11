@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.exc.MismatchedInputException
 import com.fasterxml.jackson.module.kotlin.readValue
 import java.time.LocalDateTime
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
 import kotlin.reflect.KClass
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.catchThrowable
@@ -98,5 +100,71 @@ internal class ObjectMappersTest {
         val json = jsonMapper.writeValueAsString(testCase.string)
 
         assertDoesNotThrow { jsonMapper().readValue<LocalDateTime>(json) }
+    }
+
+    @Test
+    fun writeOffsetDateTime_withMicroseconds() {
+        val jsonMapper = jsonMapper()
+        val dateTime = OffsetDateTime.of(2025, 1, 24, 12, 4, 31, 299799000, ZoneOffset.UTC)
+
+        val json = jsonMapper.writeValueAsString(dateTime)
+
+        assertThat(json).isEqualTo("\"2025-01-24T12:04:31.299799Z\"")
+    }
+
+    @Test
+    fun writeOffsetDateTime_withNonUTCOffset() {
+        val jsonMapper = jsonMapper()
+        val dateTime = OffsetDateTime.of(2025, 1, 24, 15, 4, 31, 299799000, ZoneOffset.ofHours(3))
+
+        val json = jsonMapper.writeValueAsString(dateTime)
+
+        // Should convert to UTC and format with Z
+        assertThat(json).isEqualTo("\"2025-01-24T12:04:31.299799Z\"")
+    }
+
+    @Test
+    fun readOffsetDateTime_withMicroseconds() {
+        val jsonMapper = jsonMapper()
+        val json = "\"2025-01-24T12:04:31.299799Z\""
+
+        val dateTime = jsonMapper.readValue<OffsetDateTime>(json)
+
+        assertThat(dateTime.year).isEqualTo(2025)
+        assertThat(dateTime.monthValue).isEqualTo(1)
+        assertThat(dateTime.dayOfMonth).isEqualTo(24)
+        assertThat(dateTime.hour).isEqualTo(12)
+        assertThat(dateTime.minute).isEqualTo(4)
+        assertThat(dateTime.second).isEqualTo(31)
+        assertThat(dateTime.nano).isEqualTo(299799000)
+        assertThat(dateTime.offset).isEqualTo(ZoneOffset.UTC)
+    }
+
+    @Test
+    fun readOffsetDateTime_withOffset() {
+        val jsonMapper = jsonMapper()
+        val json = "\"2025-01-24T12:04:31.299799+00:00\""
+
+        val dateTime = jsonMapper.readValue<OffsetDateTime>(json)
+
+        assertThat(dateTime.year).isEqualTo(2025)
+        assertThat(dateTime.monthValue).isEqualTo(1)
+        assertThat(dateTime.dayOfMonth).isEqualTo(24)
+        assertThat(dateTime.hour).isEqualTo(12)
+        assertThat(dateTime.minute).isEqualTo(4)
+        assertThat(dateTime.second).isEqualTo(31)
+        assertThat(dateTime.nano).isEqualTo(299799000)
+        assertThat(dateTime.offset).isEqualTo(ZoneOffset.UTC)
+    }
+
+    @Test
+    fun roundTripOffsetDateTime() {
+        val jsonMapper = jsonMapper()
+        val original = OffsetDateTime.of(2025, 1, 24, 12, 4, 31, 299799000, ZoneOffset.UTC)
+
+        val json = jsonMapper.writeValueAsString(original)
+        val deserialized = jsonMapper.readValue<OffsetDateTime>(json)
+
+        assertThat(deserialized).isEqualTo(original)
     }
 }

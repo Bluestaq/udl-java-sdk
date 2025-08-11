@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.cfg.CoercionInputShape
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
+import com.fasterxml.jackson.databind.ser.std.StdSerializer
 import com.fasterxml.jackson.databind.type.LogicalType
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
@@ -24,8 +25,11 @@ import java.io.InputStream
 import java.time.DateTimeException
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatterBuilder
 import java.time.temporal.ChronoField
 
 fun jsonMapper(): JsonMapper =
@@ -36,7 +40,9 @@ fun jsonMapper(): JsonMapper =
         .addModule(
             SimpleModule()
                 .addSerializer(InputStreamSerializer)
+                .addSerializer(OffsetDateTime::class.java, CustomOffsetDateTimeSerializer())
                 .addDeserializer(LocalDateTime::class.java, LenientLocalDateTimeDeserializer())
+                .addDeserializer(OffsetDateTime::class.java, CustomOffsetDateTimeDeserializer())
         )
         .withCoercionConfig(LogicalType.Boolean) {
             it.setCoercion(CoercionInputShape.Integer, CoercionAction.Fail)
@@ -161,6 +167,80 @@ private class LenientLocalDateTimeDeserializer :
         }
 
         throw JsonParseException(p, "Cannot parse `LocalDateTime` from value: ${p.text}").apply {
+            exceptions.forEach { addSuppressed(it) }
+        }
+    }
+}
+
+/**
+ * A custom formatter for OffsetDateTime that uses microseconds with 'Z' suffix for UTC instead of
+ * '+00:00' timezone offset.
+ */
+private val CUSTOM_OFFSET_DATE_TIME_FORMATTER: DateTimeFormatter =
+    DateTimeFormatterBuilder()
+        .appendPattern("yyyy-MM-dd'T'HH:mm:ss")
+        .appendFraction(ChronoField.MICRO_OF_SECOND, 6, 6, true)
+        .appendLiteral('Z')
+        .toFormatter()
+
+/** A serializer that serializes [OffsetDateTime] with microseconds and 'Z' suffix. */
+private class CustomOffsetDateTimeSerializer :
+    StdSerializer<OffsetDateTime>(OffsetDateTime::class.java) {
+
+    override fun serialize(
+        value: OffsetDateTime?,
+        gen: JsonGenerator?,
+        provider: SerializerProvider?,
+    ) {
+        if (value == null) {
+            gen?.writeNull()
+        } else {
+            // Convert to UTC and format with microseconds
+            val utcValue = value.withOffsetSameInstant(ZoneOffset.UTC)
+            gen?.writeString(CUSTOM_OFFSET_DATE_TIME_FORMATTER.format(utcValue))
+        }
+    }
+}
+
+/** A deserializer that can deserialize [OffsetDateTime] from various formats. */
+private class CustomOffsetDateTimeDeserializer :
+    StdDeserializer<OffsetDateTime>(OffsetDateTime::class.java) {
+
+    companion object {
+        private val FORMATTERS =
+            listOf(
+                // Our custom format with 'Z'
+                CUSTOM_OFFSET_DATE_TIME_FORMATTER,
+                // Standard ISO format with offset
+                DateTimeFormatter.ISO_OFFSET_DATE_TIME,
+                // ISO instant format
+                DateTimeFormatter.ISO_INSTANT,
+            )
+    }
+
+    override fun logicalType(): LogicalType = LogicalType.DateTime
+
+    override fun deserialize(p: JsonParser, context: DeserializationContext?): OffsetDateTime {
+        val text = p.text
+        val exceptions = mutableListOf<Exception>()
+
+        for (formatter in FORMATTERS) {
+            try {
+                return if (formatter == CUSTOM_OFFSET_DATE_TIME_FORMATTER) {
+                    // For our custom format, parse as UTC
+                    OffsetDateTime.parse(
+                        text.replace("Z", "+00:00"),
+                        DateTimeFormatter.ISO_OFFSET_DATE_TIME,
+                    )
+                } else {
+                    OffsetDateTime.parse(text, formatter)
+                }
+            } catch (e: DateTimeException) {
+                exceptions.add(e)
+            }
+        }
+
+        throw JsonParseException(p, "Cannot parse `OffsetDateTime` from value: $text").apply {
             exceptions.forEach { addSuppressed(it) }
         }
     }
