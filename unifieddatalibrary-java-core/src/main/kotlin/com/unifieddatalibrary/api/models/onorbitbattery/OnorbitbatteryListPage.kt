@@ -5,23 +5,28 @@ package com.unifieddatalibrary.api.models.onorbitbattery
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.models.onorbitbattery.OnorbitbatteryListParams
+import com.unifieddatalibrary.api.models.onorbitbattery.OnorbitbatteryListResponse
 import com.unifieddatalibrary.api.services.blocking.OnorbitbatteryService
 import java.util.Objects
+import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see OnorbitbatteryService.list */
-class OnorbitbatteryListPage
-private constructor(
+class OnorbitbatteryListPage private constructor(
     private val service: OnorbitbatteryService,
     private val params: OnorbitbatteryListParams,
     private val items: List<OnorbitbatteryListResponse>,
+
 ) : Page<OnorbitbatteryListResponse> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): OnorbitbatteryListParams {
-        val offset = params.firstResult().getOrDefault(0)
-        return params.toBuilder().firstResult(offset + items().size).build()
+      val offset = params.firstResult().getOrDefault(0)
+      return params.toBuilder()
+          .firstResult(offset + items().size)
+          .build()
     }
 
     override fun nextPage(): OnorbitbatteryListPage = service.list(nextPageParams())
@@ -42,13 +47,15 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [OnorbitbatteryListPage].
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [OnorbitbatteryListPage]. */
@@ -59,19 +66,29 @@ private constructor(
         private var items: List<OnorbitbatteryListResponse>? = null
 
         @JvmSynthetic
-        internal fun from(onorbitbatteryListPage: OnorbitbatteryListPage) = apply {
-            service = onorbitbatteryListPage.service
-            params = onorbitbatteryListPage.params
-            items = onorbitbatteryListPage.items
-        }
+        internal fun from(onorbitbatteryListPage: OnorbitbatteryListPage) =
+            apply {
+                service = onorbitbatteryListPage.service
+                params = onorbitbatteryListPage.params
+                items = onorbitbatteryListPage.items
+            }
 
-        fun service(service: OnorbitbatteryService) = apply { this.service = service }
+        fun service(service: OnorbitbatteryService) =
+            apply {
+                this.service = service
+            }
 
         /** The parameters that were used to request this page. */
-        fun params(params: OnorbitbatteryListParams) = apply { this.params = params }
+        fun params(params: OnorbitbatteryListParams) =
+            apply {
+                this.params = params
+            }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<OnorbitbatteryListResponse>) = apply { this.items = items }
+        fun items(items: List<OnorbitbatteryListResponse>) =
+            apply {
+                this.items = items
+            }
 
         /**
          * Returns an immutable instance of [OnorbitbatteryListPage].
@@ -79,6 +96,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
@@ -89,22 +107,27 @@ private constructor(
          */
         fun build(): OnorbitbatteryListPage =
             OnorbitbatteryListPage(
-                checkRequired("service", service),
-                checkRequired("params", params),
-                checkRequired("items", items),
+              checkRequired(
+                "service", service
+              ),
+              checkRequired(
+                "params", params
+              ),
+              checkRequired(
+                "items", items
+              ),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is OnorbitbatteryListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+      return /* spotless:off */ other is OnorbitbatteryListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
 
-    override fun toString() =
-        "OnorbitbatteryListPage{service=$service, params=$params, items=$items}"
+    override fun toString() = "OnorbitbatteryListPage{service=$service, params=$params, items=$items}"
 }

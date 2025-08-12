@@ -2,6 +2,7 @@
 
 package com.unifieddatalibrary.api.core
 
+import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.core.http.HttpClient
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -18,12 +19,11 @@ internal class ClientOptionsTest {
 
     @Test
     fun toBuilder_whenOriginalClientOptionsGarbageCollected_doesNotCloseOriginalClient() {
-        var clientOptions =
-            ClientOptions.builder()
-                .httpClient(httpClient)
-                .password("My Password")
-                .username("My Username")
-                .build()
+        var clientOptions = ClientOptions.builder()
+        .httpClient(httpClient)
+        .password("My Password")
+        .username("My Username")
+        .build()
         verify(httpClient, never()).close()
 
         // Overwrite the `clientOptions` variable so that the original `ClientOptions` is GC'd.

@@ -12,14 +12,13 @@ import com.unifieddatalibrary.api.models.aircraftsorties.AircraftSortyQueryhelpR
 import com.unifieddatalibrary.api.models.aircraftsorties.AircraftSortyRetrieveParams
 import com.unifieddatalibrary.api.models.aircraftsorties.AircraftSortyTupleParams
 import com.unifieddatalibrary.api.models.aircraftsorties.AircraftSortyUpdateParams
+import com.unifieddatalibrary.api.services.async.AircraftSortyServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
 interface AircraftSortyServiceAsync {
 
-    /**
-     * Returns a view of this service that provides access to raw HTTP responses for each method.
-     */
+    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -29,114 +28,98 @@ interface AircraftSortyServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): AircraftSortyServiceAsync
 
-    /**
-     * Service operation to get a single AircraftSortie record by its unique ID passed as a path
-     * parameter.
-     */
+    /** Service operation to get a single AircraftSortie record by its unique ID passed as a path parameter. */
     fun retrieve(id: String): CompletableFuture<AircraftsortieFull> =
-        retrieve(id, AircraftSortyRetrieveParams.none())
+        retrieve(
+          id, AircraftSortyRetrieveParams.none()
+        )
 
     /** @see retrieve */
-    fun retrieve(
-        id: String,
-        params: AircraftSortyRetrieveParams = AircraftSortyRetrieveParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<AircraftsortieFull> =
-        retrieve(params.toBuilder().id(id).build(), requestOptions)
+    fun retrieve(id: String, params: AircraftSortyRetrieveParams = AircraftSortyRetrieveParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<AircraftsortieFull> =
+        retrieve(
+          params.toBuilder()
+              .id(id)
+              .build(), requestOptions
+        )
 
     /** @see retrieve */
-    fun retrieve(
-        id: String,
-        params: AircraftSortyRetrieveParams = AircraftSortyRetrieveParams.none(),
-    ): CompletableFuture<AircraftsortieFull> = retrieve(id, params, RequestOptions.none())
+    fun retrieve(id: String, params: AircraftSortyRetrieveParams = AircraftSortyRetrieveParams.none()): CompletableFuture<AircraftsortieFull> =
+        retrieve(
+          id,
+          params,
+          RequestOptions.none(),
+        )
 
     /** @see retrieve */
-    fun retrieve(
-        params: AircraftSortyRetrieveParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<AircraftsortieFull>
+    fun retrieve(params: AircraftSortyRetrieveParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<AircraftsortieFull>
 
     /** @see retrieve */
     fun retrieve(params: AircraftSortyRetrieveParams): CompletableFuture<AircraftsortieFull> =
-        retrieve(params, RequestOptions.none())
+        retrieve(
+          params, RequestOptions.none()
+        )
 
     /** @see retrieve */
-    fun retrieve(
-        id: String,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<AircraftsortieFull> =
-        retrieve(id, AircraftSortyRetrieveParams.none(), requestOptions)
+    fun retrieve(id: String, requestOptions: RequestOptions): CompletableFuture<AircraftsortieFull> =
+        retrieve(
+          id,
+          AircraftSortyRetrieveParams.none(),
+          requestOptions,
+        )
 
-    /**
-     * Service operation to update a single AircraftSortie. A specific role is required to perform
-     * this service operation. Please contact the UDL team for assistance.
-     */
+    /** Service operation to update a single AircraftSortie. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
     fun update(pathId: String, params: AircraftSortyUpdateParams): CompletableFuture<Void?> =
-        update(pathId, params, RequestOptions.none())
+        update(
+          pathId,
+          params,
+          RequestOptions.none(),
+        )
 
     /** @see update */
-    fun update(
-        pathId: String,
-        params: AircraftSortyUpdateParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<Void?> = update(params.toBuilder().pathId(pathId).build(), requestOptions)
+    fun update(pathId: String, params: AircraftSortyUpdateParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?> =
+        update(
+          params.toBuilder()
+              .pathId(pathId)
+              .build(), requestOptions
+        )
 
     /** @see update */
     fun update(params: AircraftSortyUpdateParams): CompletableFuture<Void?> =
-        update(params, RequestOptions.none())
+        update(
+          params, RequestOptions.none()
+        )
 
     /** @see update */
-    fun update(
-        params: AircraftSortyUpdateParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<Void?>
+    fun update(params: AircraftSortyUpdateParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?>
 
-    /**
-     * Service operation to provide detailed information on available dynamic query parameters for a
-     * particular data type.
-     */
-    fun queryhelp(): CompletableFuture<AircraftSortyQueryhelpResponse> =
-        queryhelp(AircraftSortyQueryhelpParams.none())
+    /** Service operation to provide detailed information on available dynamic query parameters for a particular data type. */
+    fun queryhelp(): CompletableFuture<AircraftSortyQueryhelpResponse> = queryhelp(AircraftSortyQueryhelpParams.none())
 
     /** @see queryhelp */
-    fun queryhelp(
-        params: AircraftSortyQueryhelpParams = AircraftSortyQueryhelpParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<AircraftSortyQueryhelpResponse>
+    fun queryhelp(params: AircraftSortyQueryhelpParams = AircraftSortyQueryhelpParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<AircraftSortyQueryhelpResponse>
 
     /** @see queryhelp */
-    fun queryhelp(
-        params: AircraftSortyQueryhelpParams = AircraftSortyQueryhelpParams.none()
-    ): CompletableFuture<AircraftSortyQueryhelpResponse> = queryhelp(params, RequestOptions.none())
+    fun queryhelp(params: AircraftSortyQueryhelpParams = AircraftSortyQueryhelpParams.none()): CompletableFuture<AircraftSortyQueryhelpResponse> =
+        queryhelp(
+          params, RequestOptions.none()
+        )
 
     /** @see queryhelp */
-    fun queryhelp(
-        requestOptions: RequestOptions
-    ): CompletableFuture<AircraftSortyQueryhelpResponse> =
-        queryhelp(AircraftSortyQueryhelpParams.none(), requestOptions)
+    fun queryhelp(requestOptions: RequestOptions): CompletableFuture<AircraftSortyQueryhelpResponse> =
+        queryhelp(
+          AircraftSortyQueryhelpParams.none(), requestOptions
+        )
 
-    /**
-     * Service operation to dynamically query data and only return specified columns/fields.
-     * Requested columns are specified by the 'columns' query parameter and should be a comma
-     * separated list of valid fields for the specified data type. classificationMarking is always
-     * returned. See the queryhelp operation (/udl/<datatype>/queryhelp) for more details on
-     * valid/required query parameter information. An example URI:
-     * /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours would return the satNo and period of
-     * elsets with an epoch greater than 5 hours ago.
-     */
+    /** Service operation to dynamically query data and only return specified columns/fields. Requested columns are specified by the 'columns' query parameter and should be a comma separated list of valid fields for the specified data type. classificationMarking is always returned. See the queryhelp operation (/udl/<datatype>/queryhelp) for more details on valid/required query parameter information. An example URI: /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours would return the satNo and period of elsets with an epoch greater than 5 hours ago. */
     fun tuple(params: AircraftSortyTupleParams): CompletableFuture<List<AircraftsortieFull>> =
-        tuple(params, RequestOptions.none())
+        tuple(
+          params, RequestOptions.none()
+        )
 
     /** @see tuple */
-    fun tuple(
-        params: AircraftSortyTupleParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<AircraftsortieFull>>
+    fun tuple(params: AircraftSortyTupleParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<List<AircraftsortieFull>>
 
-    /**
-     * A view of [AircraftSortyServiceAsync] that provides access to raw HTTP responses for each
-     * method.
-     */
+    /** A view of [AircraftSortyServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
         /**
@@ -144,116 +127,97 @@ interface AircraftSortyServiceAsync {
          *
          * The original service is not modified.
          */
-        fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): AircraftSortyServiceAsync.WithRawResponse
+        fun withOptions(modifier: Consumer<ClientOptions.Builder>): AircraftSortyServiceAsync.WithRawResponse
 
-        /**
-         * Returns a raw HTTP response for `get /udl/aircraftsortie/{id}`, but is otherwise the same
-         * as [AircraftSortyServiceAsync.retrieve].
-         */
+        /** Returns a raw HTTP response for `get /udl/aircraftsortie/{id}`, but is otherwise the same as [AircraftSortyServiceAsync.retrieve]. */
         fun retrieve(id: String): CompletableFuture<HttpResponseFor<AircraftsortieFull>> =
-            retrieve(id, AircraftSortyRetrieveParams.none())
+            retrieve(
+              id, AircraftSortyRetrieveParams.none()
+            )
 
         /** @see retrieve */
-        fun retrieve(
-            id: String,
-            params: AircraftSortyRetrieveParams = AircraftSortyRetrieveParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<AircraftsortieFull>> =
-            retrieve(params.toBuilder().id(id).build(), requestOptions)
+        fun retrieve(id: String, params: AircraftSortyRetrieveParams = AircraftSortyRetrieveParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<AircraftsortieFull>> =
+            retrieve(
+              params.toBuilder()
+                  .id(id)
+                  .build(), requestOptions
+            )
 
         /** @see retrieve */
-        fun retrieve(
-            id: String,
-            params: AircraftSortyRetrieveParams = AircraftSortyRetrieveParams.none(),
-        ): CompletableFuture<HttpResponseFor<AircraftsortieFull>> =
-            retrieve(id, params, RequestOptions.none())
+        fun retrieve(id: String, params: AircraftSortyRetrieveParams = AircraftSortyRetrieveParams.none()): CompletableFuture<HttpResponseFor<AircraftsortieFull>> =
+            retrieve(
+              id,
+              params,
+              RequestOptions.none(),
+            )
 
         /** @see retrieve */
-        fun retrieve(
-            params: AircraftSortyRetrieveParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<AircraftsortieFull>>
+        fun retrieve(params: AircraftSortyRetrieveParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<AircraftsortieFull>>
 
         /** @see retrieve */
-        fun retrieve(
-            params: AircraftSortyRetrieveParams
-        ): CompletableFuture<HttpResponseFor<AircraftsortieFull>> =
-            retrieve(params, RequestOptions.none())
+        fun retrieve(params: AircraftSortyRetrieveParams): CompletableFuture<HttpResponseFor<AircraftsortieFull>> =
+            retrieve(
+              params, RequestOptions.none()
+            )
 
         /** @see retrieve */
-        fun retrieve(
-            id: String,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<AircraftsortieFull>> =
-            retrieve(id, AircraftSortyRetrieveParams.none(), requestOptions)
+        fun retrieve(id: String, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<AircraftsortieFull>> =
+            retrieve(
+              id,
+              AircraftSortyRetrieveParams.none(),
+              requestOptions,
+            )
 
-        /**
-         * Returns a raw HTTP response for `put /udl/aircraftsortie/{id}`, but is otherwise the same
-         * as [AircraftSortyServiceAsync.update].
-         */
-        fun update(
-            pathId: String,
-            params: AircraftSortyUpdateParams,
-        ): CompletableFuture<HttpResponse> = update(pathId, params, RequestOptions.none())
+        /** Returns a raw HTTP response for `put /udl/aircraftsortie/{id}`, but is otherwise the same as [AircraftSortyServiceAsync.update]. */
+        fun update(pathId: String, params: AircraftSortyUpdateParams): CompletableFuture<HttpResponse> =
+            update(
+              pathId,
+              params,
+              RequestOptions.none(),
+            )
 
         /** @see update */
-        fun update(
-            pathId: String,
-            params: AircraftSortyUpdateParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponse> =
-            update(params.toBuilder().pathId(pathId).build(), requestOptions)
+        fun update(pathId: String, params: AircraftSortyUpdateParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse> =
+            update(
+              params.toBuilder()
+                  .pathId(pathId)
+                  .build(), requestOptions
+            )
 
         /** @see update */
         fun update(params: AircraftSortyUpdateParams): CompletableFuture<HttpResponse> =
-            update(params, RequestOptions.none())
+            update(
+              params, RequestOptions.none()
+            )
 
         /** @see update */
-        fun update(
-            params: AircraftSortyUpdateParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponse>
+        fun update(params: AircraftSortyUpdateParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse>
 
-        /**
-         * Returns a raw HTTP response for `get /udl/aircraftsortie/queryhelp`, but is otherwise the
-         * same as [AircraftSortyServiceAsync.queryhelp].
-         */
-        fun queryhelp(): CompletableFuture<HttpResponseFor<AircraftSortyQueryhelpResponse>> =
-            queryhelp(AircraftSortyQueryhelpParams.none())
+        /** Returns a raw HTTP response for `get /udl/aircraftsortie/queryhelp`, but is otherwise the same as [AircraftSortyServiceAsync.queryhelp]. */
+        fun queryhelp(): CompletableFuture<HttpResponseFor<AircraftSortyQueryhelpResponse>> = queryhelp(AircraftSortyQueryhelpParams.none())
 
         /** @see queryhelp */
-        fun queryhelp(
-            params: AircraftSortyQueryhelpParams = AircraftSortyQueryhelpParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<AircraftSortyQueryhelpResponse>>
+        fun queryhelp(params: AircraftSortyQueryhelpParams = AircraftSortyQueryhelpParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<AircraftSortyQueryhelpResponse>>
 
         /** @see queryhelp */
-        fun queryhelp(
-            params: AircraftSortyQueryhelpParams = AircraftSortyQueryhelpParams.none()
-        ): CompletableFuture<HttpResponseFor<AircraftSortyQueryhelpResponse>> =
-            queryhelp(params, RequestOptions.none())
+        fun queryhelp(params: AircraftSortyQueryhelpParams = AircraftSortyQueryhelpParams.none()): CompletableFuture<HttpResponseFor<AircraftSortyQueryhelpResponse>> =
+            queryhelp(
+              params, RequestOptions.none()
+            )
 
         /** @see queryhelp */
-        fun queryhelp(
-            requestOptions: RequestOptions
-        ): CompletableFuture<HttpResponseFor<AircraftSortyQueryhelpResponse>> =
-            queryhelp(AircraftSortyQueryhelpParams.none(), requestOptions)
+        fun queryhelp(requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<AircraftSortyQueryhelpResponse>> =
+            queryhelp(
+              AircraftSortyQueryhelpParams.none(), requestOptions
+            )
 
-        /**
-         * Returns a raw HTTP response for `get /udl/aircraftsortie/tuple`, but is otherwise the
-         * same as [AircraftSortyServiceAsync.tuple].
-         */
-        fun tuple(
-            params: AircraftSortyTupleParams
-        ): CompletableFuture<HttpResponseFor<List<AircraftsortieFull>>> =
-            tuple(params, RequestOptions.none())
+        /** Returns a raw HTTP response for `get /udl/aircraftsortie/tuple`, but is otherwise the same as [AircraftSortyServiceAsync.tuple]. */
+        fun tuple(params: AircraftSortyTupleParams): CompletableFuture<HttpResponseFor<List<AircraftsortieFull>>> =
+            tuple(
+              params, RequestOptions.none()
+            )
 
         /** @see tuple */
-        fun tuple(
-            params: AircraftSortyTupleParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<AircraftsortieFull>>>
+        fun tuple(params: AircraftSortyTupleParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<List<AircraftsortieFull>>>
     }
 }

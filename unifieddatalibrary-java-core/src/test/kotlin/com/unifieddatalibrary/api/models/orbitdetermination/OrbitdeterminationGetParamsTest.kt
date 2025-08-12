@@ -3,6 +3,7 @@
 package com.unifieddatalibrary.api.models.orbitdetermination
 
 import com.unifieddatalibrary.api.core.http.QueryParams
+import com.unifieddatalibrary.api.models.orbitdetermination.OrbitdeterminationGetParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -10,35 +11,48 @@ internal class OrbitdeterminationGetParamsTest {
 
     @Test
     fun create() {
-        OrbitdeterminationGetParams.builder().id("id").firstResult(0L).maxResults(0L).build()
+      OrbitdeterminationGetParams.builder()
+          .id("id")
+          .firstResult(0L)
+          .maxResults(0L)
+          .build()
     }
 
     @Test
     fun pathParams() {
-        val params = OrbitdeterminationGetParams.builder().id("id").build()
+      val params = OrbitdeterminationGetParams.builder()
+          .id("id")
+          .build()
 
-        assertThat(params._pathParam(0)).isEqualTo("id")
-        // out-of-bound path param
-        assertThat(params._pathParam(1)).isEqualTo("")
+      assertThat(params._pathParam(0)).isEqualTo("id")
+      // out-of-bound path param
+      assertThat(params._pathParam(1)).isEqualTo("")
     }
 
     @Test
     fun queryParams() {
-        val params =
-            OrbitdeterminationGetParams.builder().id("id").firstResult(0L).maxResults(0L).build()
+      val params = OrbitdeterminationGetParams.builder()
+          .id("id")
+          .firstResult(0L)
+          .maxResults(0L)
+          .build()
 
-        val queryParams = params._queryParams()
+      val queryParams = params._queryParams()
 
-        assertThat(queryParams)
-            .isEqualTo(QueryParams.builder().put("firstResult", "0").put("maxResults", "0").build())
+      assertThat(queryParams).isEqualTo(QueryParams.builder()
+          .put("firstResult", "0")
+          .put("maxResults", "0")
+          .build())
     }
 
     @Test
     fun queryParamsWithoutOptionalFields() {
-        val params = OrbitdeterminationGetParams.builder().id("id").build()
+      val params = OrbitdeterminationGetParams.builder()
+          .id("id")
+          .build()
 
-        val queryParams = params._queryParams()
+      val queryParams = params._queryParams()
 
-        assertThat(queryParams).isEqualTo(QueryParams.builder().build())
+      assertThat(queryParams).isEqualTo(QueryParams.builder().build())
     }
 }

@@ -15,15 +15,14 @@ import com.unifieddatalibrary.api.models.sigact.SigactQueryhelpResponse
 import com.unifieddatalibrary.api.models.sigact.SigactTupleParams
 import com.unifieddatalibrary.api.models.sigact.SigactTupleResponse
 import com.unifieddatalibrary.api.models.sigact.SigactUploadZipParams
+import com.unifieddatalibrary.api.services.async.SigactServiceAsync
 import com.unifieddatalibrary.api.services.async.sigact.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
 interface SigactServiceAsync {
 
-    /**
-     * Returns a view of this service that provides access to raw HTTP responses for each method.
-     */
+    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -35,122 +34,82 @@ interface SigactServiceAsync {
 
     fun history(): HistoryServiceAsync
 
-    /**
-     * Service operation to dynamically query data by a variety of query parameters not specified in
-     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
-     * more details on valid/required query parameter information.
-     */
+    /** Service operation to dynamically query data by a variety of query parameters not specified in this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
     fun list(params: SigactListParams): CompletableFuture<SigactListPageAsync> =
-        list(params, RequestOptions.none())
+        list(
+          params, RequestOptions.none()
+        )
 
     /** @see list */
-    fun list(
-        params: SigactListParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<SigactListPageAsync>
+    fun list(params: SigactListParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<SigactListPageAsync>
 
-    /**
-     * Service operation to return the count of records satisfying the specified query parameters.
-     * This operation is useful to determine how many records pass a particular query criteria
-     * without retrieving large amounts of data. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
-     */
+    /** Service operation to return the count of records satisfying the specified query parameters. This operation is useful to determine how many records pass a particular query criteria without retrieving large amounts of data. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
     fun count(params: SigactCountParams): CompletableFuture<String> =
-        count(params, RequestOptions.none())
+        count(
+          params, RequestOptions.none()
+        )
 
     /** @see count */
-    fun count(
-        params: SigactCountParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<String>
+    fun count(params: SigactCountParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<String>
 
-    /**
-     * Service operation intended for initial integration only, to take a list of SigAct records as
-     * a POST body and ingest into the database. Requires specific roles, please contact the UDL
-     * team to gain access. This operation is not intended to be used for automated feeds into
-     * UDL...data providers should contact the UDL team for instructions on setting up a permanent
-     * feed through an alternate mechanism.
-     */
+    /** Service operation intended for initial integration only, to take a list of SigAct records as a POST body and ingest into the database. Requires specific roles, please contact the UDL team to gain access. This operation is not intended to be used for automated feeds into UDL...data providers should contact the UDL team for instructions on setting up a permanent feed through an alternate mechanism. */
     fun createBulk(params: SigactCreateBulkParams): CompletableFuture<Void?> =
-        createBulk(params, RequestOptions.none())
+        createBulk(
+          params, RequestOptions.none()
+        )
 
     /** @see createBulk */
-    fun createBulk(
-        params: SigactCreateBulkParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<Void?>
+    fun createBulk(params: SigactCreateBulkParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?>
 
-    /**
-     * Service operation to provide detailed information on available dynamic query parameters for a
-     * particular data type.
-     */
-    fun queryhelp(): CompletableFuture<SigactQueryhelpResponse> =
-        queryhelp(SigactQueryhelpParams.none())
+    /** Service operation to provide detailed information on available dynamic query parameters for a particular data type. */
+    fun queryhelp(): CompletableFuture<SigactQueryhelpResponse> = queryhelp(SigactQueryhelpParams.none())
 
     /** @see queryhelp */
-    fun queryhelp(
-        params: SigactQueryhelpParams = SigactQueryhelpParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<SigactQueryhelpResponse>
+    fun queryhelp(params: SigactQueryhelpParams = SigactQueryhelpParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<SigactQueryhelpResponse>
 
     /** @see queryhelp */
-    fun queryhelp(
-        params: SigactQueryhelpParams = SigactQueryhelpParams.none()
-    ): CompletableFuture<SigactQueryhelpResponse> = queryhelp(params, RequestOptions.none())
+    fun queryhelp(params: SigactQueryhelpParams = SigactQueryhelpParams.none()): CompletableFuture<SigactQueryhelpResponse> =
+        queryhelp(
+          params, RequestOptions.none()
+        )
 
     /** @see queryhelp */
     fun queryhelp(requestOptions: RequestOptions): CompletableFuture<SigactQueryhelpResponse> =
-        queryhelp(SigactQueryhelpParams.none(), requestOptions)
+        queryhelp(
+          SigactQueryhelpParams.none(), requestOptions
+        )
 
-    /**
-     * Service operation to dynamically query data and only return specified columns/fields.
-     * Requested columns are specified by the 'columns' query parameter and should be a comma
-     * separated list of valid fields for the specified data type. classificationMarking is always
-     * returned. See the queryhelp operation (/udl/<datatype>/queryhelp) for more details on
-     * valid/required query parameter information. An example URI:
-     * /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours would return the satNo and period of
-     * elsets with an epoch greater than 5 hours ago.
-     */
+    /** Service operation to dynamically query data and only return specified columns/fields. Requested columns are specified by the 'columns' query parameter and should be a comma separated list of valid fields for the specified data type. classificationMarking is always returned. See the queryhelp operation (/udl/<datatype>/queryhelp) for more details on valid/required query parameter information. An example URI: /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours would return the satNo and period of elsets with an epoch greater than 5 hours ago. */
     fun tuple(params: SigactTupleParams): CompletableFuture<List<SigactTupleResponse>> =
-        tuple(params, RequestOptions.none())
+        tuple(
+          params, RequestOptions.none()
+        )
 
     /** @see tuple */
-    fun tuple(
-        params: SigactTupleParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<SigactTupleResponse>>
+    fun tuple(params: SigactTupleParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<List<SigactTupleResponse>>
 
     /**
-     * Upload a text file with its metadata. This operation bypasses the length constraints of the
-     * `eventDescription` field.
+     * Upload a text file with its metadata. This operation bypasses the length constraints of the `eventDescription` field.
      *
-     * The request body requires a zip file containing exactly two files:\ 1\) A file with the
-     * `.json` file extension whose content conforms to the `SigAct_Ingest` schema.\ 2\) A UTF-8
-     * encoded file with the `.txt` file extension.
+     * The request body requires a zip file containing exactly two files:\
+     * 1\) A file with the `.json` file extension whose content conforms to the `SigAct_Ingest` schema.\
+     * 2\) A UTF-8 encoded file with the `.txt` file extension.
      *
-     * The JSON and text files will be associated with each other via the `id` field. Query the
-     * metadata via `GET /udl/sigact` and use `GET /udl/sigact/getFile/{id}` to retrieve the text
-     * file.
+     * The JSON and text files will be associated with each other via the `id` field. Query the metadata via `GET /udl/sigact` and use `GET /udl/sigact/getFile/{id}` to retrieve the text file.
      *
-     * This operation only accepts application/zip media. The application/json request body is
-     * documented to provide a convenient reference to the ingest schema.
+     * This operation only accepts application/zip media. The application/json request body is documented to provide a convenient reference to the ingest schema.
      *
-     * This operation is intended to be used for automated feeds into UDL. A specific role is
-     * required to perform this service operation. Please contact the UDL team for assistance.
+     * This operation is intended to be used for automated feeds into UDL. A specific role is required to perform this service operation. Please contact the UDL team for assistance.
      */
     fun uploadZip(params: SigactUploadZipParams): CompletableFuture<Void?> =
-        uploadZip(params, RequestOptions.none())
+        uploadZip(
+          params, RequestOptions.none()
+        )
 
     /** @see uploadZip */
-    fun uploadZip(
-        params: SigactUploadZipParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<Void?>
+    fun uploadZip(params: SigactUploadZipParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?>
 
-    /**
-     * A view of [SigactServiceAsync] that provides access to raw HTTP responses for each method.
-     */
+    /** A view of [SigactServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
         /**
@@ -158,104 +117,71 @@ interface SigactServiceAsync {
          *
          * The original service is not modified.
          */
-        fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): SigactServiceAsync.WithRawResponse
+        fun withOptions(modifier: Consumer<ClientOptions.Builder>): SigactServiceAsync.WithRawResponse
 
         fun history(): HistoryServiceAsync.WithRawResponse
 
-        /**
-         * Returns a raw HTTP response for `get /udl/sigact`, but is otherwise the same as
-         * [SigactServiceAsync.list].
-         */
-        fun list(
-            params: SigactListParams
-        ): CompletableFuture<HttpResponseFor<SigactListPageAsync>> =
-            list(params, RequestOptions.none())
+        /** Returns a raw HTTP response for `get /udl/sigact`, but is otherwise the same as [SigactServiceAsync.list]. */
+        fun list(params: SigactListParams): CompletableFuture<HttpResponseFor<SigactListPageAsync>> =
+            list(
+              params, RequestOptions.none()
+            )
 
         /** @see list */
-        fun list(
-            params: SigactListParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<SigactListPageAsync>>
+        fun list(params: SigactListParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<SigactListPageAsync>>
 
-        /**
-         * Returns a raw HTTP response for `get /udl/sigact/count`, but is otherwise the same as
-         * [SigactServiceAsync.count].
-         */
+        /** Returns a raw HTTP response for `get /udl/sigact/count`, but is otherwise the same as [SigactServiceAsync.count]. */
         fun count(params: SigactCountParams): CompletableFuture<HttpResponseFor<String>> =
-            count(params, RequestOptions.none())
+            count(
+              params, RequestOptions.none()
+            )
 
         /** @see count */
-        fun count(
-            params: SigactCountParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<String>>
+        fun count(params: SigactCountParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<String>>
 
-        /**
-         * Returns a raw HTTP response for `post /udl/sigact/createBulk`, but is otherwise the same
-         * as [SigactServiceAsync.createBulk].
-         */
+        /** Returns a raw HTTP response for `post /udl/sigact/createBulk`, but is otherwise the same as [SigactServiceAsync.createBulk]. */
         fun createBulk(params: SigactCreateBulkParams): CompletableFuture<HttpResponse> =
-            createBulk(params, RequestOptions.none())
+            createBulk(
+              params, RequestOptions.none()
+            )
 
         /** @see createBulk */
-        fun createBulk(
-            params: SigactCreateBulkParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponse>
+        fun createBulk(params: SigactCreateBulkParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse>
 
-        /**
-         * Returns a raw HTTP response for `get /udl/sigact/queryhelp`, but is otherwise the same as
-         * [SigactServiceAsync.queryhelp].
-         */
-        fun queryhelp(): CompletableFuture<HttpResponseFor<SigactQueryhelpResponse>> =
-            queryhelp(SigactQueryhelpParams.none())
+        /** Returns a raw HTTP response for `get /udl/sigact/queryhelp`, but is otherwise the same as [SigactServiceAsync.queryhelp]. */
+        fun queryhelp(): CompletableFuture<HttpResponseFor<SigactQueryhelpResponse>> = queryhelp(SigactQueryhelpParams.none())
 
         /** @see queryhelp */
-        fun queryhelp(
-            params: SigactQueryhelpParams = SigactQueryhelpParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<SigactQueryhelpResponse>>
+        fun queryhelp(params: SigactQueryhelpParams = SigactQueryhelpParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<SigactQueryhelpResponse>>
 
         /** @see queryhelp */
-        fun queryhelp(
-            params: SigactQueryhelpParams = SigactQueryhelpParams.none()
-        ): CompletableFuture<HttpResponseFor<SigactQueryhelpResponse>> =
-            queryhelp(params, RequestOptions.none())
+        fun queryhelp(params: SigactQueryhelpParams = SigactQueryhelpParams.none()): CompletableFuture<HttpResponseFor<SigactQueryhelpResponse>> =
+            queryhelp(
+              params, RequestOptions.none()
+            )
 
         /** @see queryhelp */
-        fun queryhelp(
-            requestOptions: RequestOptions
-        ): CompletableFuture<HttpResponseFor<SigactQueryhelpResponse>> =
-            queryhelp(SigactQueryhelpParams.none(), requestOptions)
+        fun queryhelp(requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<SigactQueryhelpResponse>> =
+            queryhelp(
+              SigactQueryhelpParams.none(), requestOptions
+            )
 
-        /**
-         * Returns a raw HTTP response for `get /udl/sigact/tuple`, but is otherwise the same as
-         * [SigactServiceAsync.tuple].
-         */
-        fun tuple(
-            params: SigactTupleParams
-        ): CompletableFuture<HttpResponseFor<List<SigactTupleResponse>>> =
-            tuple(params, RequestOptions.none())
+        /** Returns a raw HTTP response for `get /udl/sigact/tuple`, but is otherwise the same as [SigactServiceAsync.tuple]. */
+        fun tuple(params: SigactTupleParams): CompletableFuture<HttpResponseFor<List<SigactTupleResponse>>> =
+            tuple(
+              params, RequestOptions.none()
+            )
 
         /** @see tuple */
-        fun tuple(
-            params: SigactTupleParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<SigactTupleResponse>>>
+        fun tuple(params: SigactTupleParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<List<SigactTupleResponse>>>
 
-        /**
-         * Returns a raw HTTP response for `post /filedrop/udl-sigact-text`, but is otherwise the
-         * same as [SigactServiceAsync.uploadZip].
-         */
+        /** Returns a raw HTTP response for `post /filedrop/udl-sigact-text`, but is otherwise the same as [SigactServiceAsync.uploadZip]. */
         fun uploadZip(params: SigactUploadZipParams): CompletableFuture<HttpResponse> =
-            uploadZip(params, RequestOptions.none())
+            uploadZip(
+              params, RequestOptions.none()
+            )
 
         /** @see uploadZip */
-        fun uploadZip(
-            params: SigactUploadZipParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponse>
+        fun uploadZip(params: SigactUploadZipParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse>
     }
 }

@@ -6,14 +6,13 @@ import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.scs.classificationmarkings.ClassificationMarkingListParams
+import com.unifieddatalibrary.api.services.async.scs.ClassificationMarkingServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
 interface ClassificationMarkingServiceAsync {
 
-    /**
-     * Returns a view of this service that provides access to raw HTTP responses for each method.
-     */
+    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -27,24 +26,21 @@ interface ClassificationMarkingServiceAsync {
     fun list(): CompletableFuture<List<String>> = list(ClassificationMarkingListParams.none())
 
     /** @see list */
-    fun list(
-        params: ClassificationMarkingListParams = ClassificationMarkingListParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<String>>
+    fun list(params: ClassificationMarkingListParams = ClassificationMarkingListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<List<String>>
 
     /** @see list */
-    fun list(
-        params: ClassificationMarkingListParams = ClassificationMarkingListParams.none()
-    ): CompletableFuture<List<String>> = list(params, RequestOptions.none())
+    fun list(params: ClassificationMarkingListParams = ClassificationMarkingListParams.none()): CompletableFuture<List<String>> =
+        list(
+          params, RequestOptions.none()
+        )
 
     /** @see list */
     fun list(requestOptions: RequestOptions): CompletableFuture<List<String>> =
-        list(ClassificationMarkingListParams.none(), requestOptions)
+        list(
+          ClassificationMarkingListParams.none(), requestOptions
+        )
 
-    /**
-     * A view of [ClassificationMarkingServiceAsync] that provides access to raw HTTP responses for
-     * each method.
-     */
+    /** A view of [ClassificationMarkingServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
         /**
@@ -52,30 +48,24 @@ interface ClassificationMarkingServiceAsync {
          *
          * The original service is not modified.
          */
-        fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): ClassificationMarkingServiceAsync.WithRawResponse
+        fun withOptions(modifier: Consumer<ClientOptions.Builder>): ClassificationMarkingServiceAsync.WithRawResponse
 
-        /**
-         * Returns a raw HTTP response for `get /scs/getClassificationMarkings`, but is otherwise
-         * the same as [ClassificationMarkingServiceAsync.list].
-         */
-        fun list(): CompletableFuture<HttpResponseFor<List<String>>> =
-            list(ClassificationMarkingListParams.none())
+        /** Returns a raw HTTP response for `get /scs/getClassificationMarkings`, but is otherwise the same as [ClassificationMarkingServiceAsync.list]. */
+        fun list(): CompletableFuture<HttpResponseFor<List<String>>> = list(ClassificationMarkingListParams.none())
 
         /** @see list */
-        fun list(
-            params: ClassificationMarkingListParams = ClassificationMarkingListParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<String>>>
+        fun list(params: ClassificationMarkingListParams = ClassificationMarkingListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<List<String>>>
 
         /** @see list */
-        fun list(
-            params: ClassificationMarkingListParams = ClassificationMarkingListParams.none()
-        ): CompletableFuture<HttpResponseFor<List<String>>> = list(params, RequestOptions.none())
+        fun list(params: ClassificationMarkingListParams = ClassificationMarkingListParams.none()): CompletableFuture<HttpResponseFor<List<String>>> =
+            list(
+              params, RequestOptions.none()
+            )
 
         /** @see list */
         fun list(requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<List<String>>> =
-            list(ClassificationMarkingListParams.none(), requestOptions)
+            list(
+              ClassificationMarkingListParams.none(), requestOptions
+            )
     }
 }

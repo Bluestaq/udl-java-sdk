@@ -3,6 +3,7 @@
 package com.unifieddatalibrary.api.models.drifthistory
 
 import com.unifieddatalibrary.api.core.http.QueryParams
+import com.unifieddatalibrary.api.models.drifthistory.DriftHistoryCountParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -10,25 +11,33 @@ internal class DriftHistoryCountParamsTest {
 
     @Test
     fun create() {
-        DriftHistoryCountParams.builder().firstResult(0L).maxResults(0L).build()
+      DriftHistoryCountParams.builder()
+          .firstResult(0L)
+          .maxResults(0L)
+          .build()
     }
 
     @Test
     fun queryParams() {
-        val params = DriftHistoryCountParams.builder().firstResult(0L).maxResults(0L).build()
+      val params = DriftHistoryCountParams.builder()
+          .firstResult(0L)
+          .maxResults(0L)
+          .build()
 
-        val queryParams = params._queryParams()
+      val queryParams = params._queryParams()
 
-        assertThat(queryParams)
-            .isEqualTo(QueryParams.builder().put("firstResult", "0").put("maxResults", "0").build())
+      assertThat(queryParams).isEqualTo(QueryParams.builder()
+          .put("firstResult", "0")
+          .put("maxResults", "0")
+          .build())
     }
 
     @Test
     fun queryParamsWithoutOptionalFields() {
-        val params = DriftHistoryCountParams.builder().build()
+      val params = DriftHistoryCountParams.builder().build()
 
-        val queryParams = params._queryParams()
+      val queryParams = params._queryParams()
 
-        assertThat(queryParams).isEqualTo(QueryParams.builder().build())
+      assertThat(queryParams).isEqualTo(QueryParams.builder().build())
     }
 }

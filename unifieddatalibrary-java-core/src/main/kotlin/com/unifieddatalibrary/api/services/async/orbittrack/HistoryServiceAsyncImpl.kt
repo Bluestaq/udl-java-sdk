@@ -18,140 +18,118 @@ import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.orbittrack.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.orbittrack.history.HistoryCountParams
+import com.unifieddatalibrary.api.models.orbittrack.history.HistoryListPage
 import com.unifieddatalibrary.api.models.orbittrack.history.HistoryListPageAsync
 import com.unifieddatalibrary.api.models.orbittrack.history.HistoryListParams
 import com.unifieddatalibrary.api.models.orbittrack.history.HistoryListResponse
+import com.unifieddatalibrary.api.services.async.orbittrack.HistoryServiceAsync
+import com.unifieddatalibrary.api.services.async.orbittrack.HistoryServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
-class HistoryServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
-    HistoryServiceAsync {
+class HistoryServiceAsyncImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: HistoryServiceAsync.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : HistoryServiceAsync {
+
+    private val withRawResponse: HistoryServiceAsync.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     override fun withRawResponse(): HistoryServiceAsync.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryServiceAsync =
-        HistoryServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryServiceAsync = HistoryServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-    override fun list(
-        params: HistoryListParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<HistoryListPageAsync> =
+    override fun list(params: HistoryListParams, requestOptions: RequestOptions): CompletableFuture<HistoryListPageAsync> =
         // get /udl/orbittrack/history
         withRawResponse().list(params, requestOptions).thenApply { it.parse() }
 
-    override fun aodr(
-        params: HistoryAodrParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<Void?> =
+    override fun aodr(params: HistoryAodrParams, requestOptions: RequestOptions): CompletableFuture<Void?> =
         // get /udl/orbittrack/history/aodr
         withRawResponse().aodr(params, requestOptions).thenAccept {}
 
-    override fun count(
-        params: HistoryCountParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<String> =
+    override fun count(params: HistoryCountParams, requestOptions: RequestOptions): CompletableFuture<String> =
         // get /udl/orbittrack/history/count
         withRawResponse().count(params, requestOptions).thenApply { it.parse() }
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        HistoryServiceAsync.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<HttpResponse> =
-            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+    ) : HistoryServiceAsync.WithRawResponse {
 
-        override fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): HistoryServiceAsync.WithRawResponse =
-            HistoryServiceAsyncImpl.WithRawResponseImpl(
-                clientOptions.toBuilder().apply(modifier::accept).build()
-            )
+        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val listHandler: Handler<List<HistoryListResponse>> =
-            jsonHandler<List<HistoryListResponse>>(clientOptions.jsonMapper)
+        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryServiceAsync.WithRawResponse = HistoryServiceAsyncImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-        override fun list(
-            params: HistoryListParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "orbittrack", "history")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response
-                            .use { listHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.forEach { it.validate() }
-                                }
-                            }
-                            .let {
-                                HistoryListPageAsync.builder()
-                                    .service(HistoryServiceAsyncImpl(clientOptions))
-                                    .streamHandlerExecutor(clientOptions.streamHandlerExecutor)
-                                    .params(params)
-                                    .items(it)
-                                    .build()
-                            }
-                    }
-                }
+        private val listHandler: Handler<List<HistoryListResponse>> = jsonHandler<List<HistoryListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(params: HistoryListParams, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "orbittrack", "history")
+            .build()
+            .prepareAsync(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
+            it, requestOptions
+          ) }.thenApply { response -> errorHandler.handle(response).parseable {
+              response.use {
+                  listHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.forEach { it.validate() }
+                  }
+              }
+              .let {
+                  HistoryListPageAsync.builder()
+                      .service(HistoryServiceAsyncImpl(clientOptions))
+                      .streamHandlerExecutor(clientOptions.streamHandlerExecutor)
+                      .params(params)
+                      .items(it)
+                      .build()
+              }
+          } }
         }
 
         private val aodrHandler: Handler<Void?> = emptyHandler()
 
-        override fun aodr(
-            params: HistoryAodrParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "orbittrack", "history", "aodr")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response.use { aodrHandler.handle(it) }
-                    }
-                }
+        override fun aodr(params: HistoryAodrParams, requestOptions: RequestOptions): CompletableFuture<HttpResponse> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "orbittrack", "history", "aodr")
+            .build()
+            .prepareAsync(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
+            it, requestOptions
+          ) }.thenApply { response -> errorHandler.handle(response).parseable {
+              response.use {
+                  aodrHandler.handle(it)
+              }
+          } }
         }
 
         private val countHandler: Handler<String> = stringHandler()
 
-        override fun count(
-            params: HistoryCountParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<String>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "orbittrack", "history", "count")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response.use { countHandler.handle(it) }
-                    }
-                }
+        override fun count(params: HistoryCountParams, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<String>> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "orbittrack", "history", "count")
+            .build()
+            .prepareAsync(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
+            it, requestOptions
+          ) }.thenApply { response -> errorHandler.handle(response).parseable {
+              response.use {
+                  countHandler.handle(it)
+              }
+          } }
         }
     }
 }

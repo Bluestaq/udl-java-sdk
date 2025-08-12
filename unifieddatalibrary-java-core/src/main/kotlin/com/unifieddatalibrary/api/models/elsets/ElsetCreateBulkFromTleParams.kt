@@ -10,14 +10,8 @@ import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/**
- * Service operation to take a multiple TLEs as a POST body and ingest into the database. This
- * operation is not intended to be used for automated feeds into UDL. Data providers should contact
- * the UDL team for specific role assignments and for instructions on setting up a permanent feed
- * through an alternate mechanism.
- */
-class ElsetCreateBulkFromTleParams
-private constructor(
+/** Service operation to take a multiple TLEs as a POST body and ingest into the database. This operation is not intended to be used for automated feeds into UDL. Data providers should contact the UDL team for specific role assignments and for instructions on setting up a permanent feed through an alternate mechanism. */
+class ElsetCreateBulkFromTleParams private constructor(
     private val dataMode: String,
     private val makeCurrent: Boolean,
     private val source: String,
@@ -28,41 +22,28 @@ private constructor(
     private val body: String,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
+
 ) : Params {
 
     /** Data mode of the passed elsets (REAL, TEST, etc). */
     fun dataMode(): String = dataMode
 
-    /**
-     * Boolean indicating if these elsets should be set as the 'current' for their corresponding
-     * on-orbit/satellite numbers.
-     */
+    /** Boolean indicating if these elsets should be set as the 'current' for their corresponding on-orbit/satellite numbers. */
     fun makeCurrent(): Boolean = makeCurrent
 
     /** Source of the elset data. */
     fun source(): String = source
 
-    /**
-     * Boolean indicating if a shell Onorbit/satellite should be created if the passed satellite
-     * number doesn't exist.
-     */
+    /** Boolean indicating if a shell Onorbit/satellite should be created if the passed satellite number doesn't exist. */
     fun autoCreateSats(): Optional<Boolean> = Optional.ofNullable(autoCreateSats)
 
-    /**
-     * Dissemination control of the passed elsets (e.g. to support tagging with proprietary
-     * markings).
-     */
+    /** Dissemination control of the passed elsets (e.g. to support tagging with proprietary markings). */
     fun control(): Optional<String> = Optional.ofNullable(control)
 
     /** Origin of the elset data. */
     fun origin(): Optional<String> = Optional.ofNullable(origin)
 
-    /**
-     * Optional comma-delineated list of provider/source specific tags for this data, where each
-     * element is no longer than 32 characters, used for implementing data owner conditional access
-     * controls to restrict access to the data. Should be left null by data providers unless
-     * conditional access controls are coordinated with the UDL team.
-     */
+    /** Optional comma-delineated list of provider/source specific tags for this data, where each element is no longer than 32 characters, used for implementing data owner conditional access controls to restrict access to the data. Should be left null by data providers unless conditional access controls are coordinated with the UDL team. */
     fun tags(): Optional<String> = Optional.ofNullable(tags)
 
     fun body(): String = body
@@ -81,6 +62,7 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [ElsetCreateBulkFromTleParams].
          *
          * The following fields are required:
+         *
          * ```java
          * .dataMode()
          * .makeCurrent()
@@ -88,7 +70,8 @@ private constructor(
          * .body()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [ElsetCreateBulkFromTleParams]. */
@@ -106,38 +89,43 @@ private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(elsetCreateBulkFromTleParams: ElsetCreateBulkFromTleParams) = apply {
-            dataMode = elsetCreateBulkFromTleParams.dataMode
-            makeCurrent = elsetCreateBulkFromTleParams.makeCurrent
-            source = elsetCreateBulkFromTleParams.source
-            autoCreateSats = elsetCreateBulkFromTleParams.autoCreateSats
-            control = elsetCreateBulkFromTleParams.control
-            origin = elsetCreateBulkFromTleParams.origin
-            tags = elsetCreateBulkFromTleParams.tags
-            body = elsetCreateBulkFromTleParams.body
-            additionalHeaders = elsetCreateBulkFromTleParams.additionalHeaders.toBuilder()
-            additionalQueryParams = elsetCreateBulkFromTleParams.additionalQueryParams.toBuilder()
-        }
+        internal fun from(elsetCreateBulkFromTleParams: ElsetCreateBulkFromTleParams) =
+            apply {
+                dataMode = elsetCreateBulkFromTleParams.dataMode
+                makeCurrent = elsetCreateBulkFromTleParams.makeCurrent
+                source = elsetCreateBulkFromTleParams.source
+                autoCreateSats = elsetCreateBulkFromTleParams.autoCreateSats
+                control = elsetCreateBulkFromTleParams.control
+                origin = elsetCreateBulkFromTleParams.origin
+                tags = elsetCreateBulkFromTleParams.tags
+                body = elsetCreateBulkFromTleParams.body
+                additionalHeaders = elsetCreateBulkFromTleParams.additionalHeaders.toBuilder()
+                additionalQueryParams = elsetCreateBulkFromTleParams.additionalQueryParams.toBuilder()
+            }
 
         /** Data mode of the passed elsets (REAL, TEST, etc). */
-        fun dataMode(dataMode: String) = apply { this.dataMode = dataMode }
+        fun dataMode(dataMode: String) =
+            apply {
+                this.dataMode = dataMode
+            }
 
-        /**
-         * Boolean indicating if these elsets should be set as the 'current' for their corresponding
-         * on-orbit/satellite numbers.
-         */
-        fun makeCurrent(makeCurrent: Boolean) = apply { this.makeCurrent = makeCurrent }
+        /** Boolean indicating if these elsets should be set as the 'current' for their corresponding on-orbit/satellite numbers. */
+        fun makeCurrent(makeCurrent: Boolean) =
+            apply {
+                this.makeCurrent = makeCurrent
+            }
 
         /** Source of the elset data. */
-        fun source(source: String) = apply { this.source = source }
+        fun source(source: String) =
+            apply {
+                this.source = source
+            }
 
-        /**
-         * Boolean indicating if a shell Onorbit/satellite should be created if the passed satellite
-         * number doesn't exist.
-         */
-        fun autoCreateSats(autoCreateSats: Boolean?) = apply {
-            this.autoCreateSats = autoCreateSats
-        }
+        /** Boolean indicating if a shell Onorbit/satellite should be created if the passed satellite number doesn't exist. */
+        fun autoCreateSats(autoCreateSats: Boolean?) =
+            apply {
+                this.autoCreateSats = autoCreateSats
+            }
 
         /**
          * Alias for [Builder.autoCreateSats].
@@ -147,134 +135,163 @@ private constructor(
         fun autoCreateSats(autoCreateSats: Boolean) = autoCreateSats(autoCreateSats as Boolean?)
 
         /** Alias for calling [Builder.autoCreateSats] with `autoCreateSats.orElse(null)`. */
-        fun autoCreateSats(autoCreateSats: Optional<Boolean>) =
-            autoCreateSats(autoCreateSats.getOrNull())
+        fun autoCreateSats(autoCreateSats: Optional<Boolean>) = autoCreateSats(autoCreateSats.getOrNull())
 
-        /**
-         * Dissemination control of the passed elsets (e.g. to support tagging with proprietary
-         * markings).
-         */
-        fun control(control: String?) = apply { this.control = control }
+        /** Dissemination control of the passed elsets (e.g. to support tagging with proprietary markings). */
+        fun control(control: String?) =
+            apply {
+                this.control = control
+            }
 
         /** Alias for calling [Builder.control] with `control.orElse(null)`. */
         fun control(control: Optional<String>) = control(control.getOrNull())
 
         /** Origin of the elset data. */
-        fun origin(origin: String?) = apply { this.origin = origin }
+        fun origin(origin: String?) =
+            apply {
+                this.origin = origin
+            }
 
         /** Alias for calling [Builder.origin] with `origin.orElse(null)`. */
         fun origin(origin: Optional<String>) = origin(origin.getOrNull())
 
-        /**
-         * Optional comma-delineated list of provider/source specific tags for this data, where each
-         * element is no longer than 32 characters, used for implementing data owner conditional
-         * access controls to restrict access to the data. Should be left null by data providers
-         * unless conditional access controls are coordinated with the UDL team.
-         */
-        fun tags(tags: String?) = apply { this.tags = tags }
+        /** Optional comma-delineated list of provider/source specific tags for this data, where each element is no longer than 32 characters, used for implementing data owner conditional access controls to restrict access to the data. Should be left null by data providers unless conditional access controls are coordinated with the UDL team. */
+        fun tags(tags: String?) =
+            apply {
+                this.tags = tags
+            }
 
         /** Alias for calling [Builder.tags] with `tags.orElse(null)`. */
         fun tags(tags: Optional<String>) = tags(tags.getOrNull())
 
-        fun body(body: String) = apply { this.body = body }
+        fun body(body: String) =
+            apply {
+                this.body = body
+            }
 
-        fun additionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun putAdditionalHeader(name: String, value: String) = apply {
-            additionalHeaders.put(name, value)
-        }
+        fun putAdditionalHeader(name: String, value: String) =
+            apply {
+                additionalHeaders.put(name, value)
+            }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.put(name, values)
-        }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.put(name, values)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun replaceAdditionalHeaders(name: String, value: String) = apply {
-            additionalHeaders.replace(name, value)
-        }
+        fun replaceAdditionalHeaders(name: String, value: String) =
+            apply {
+                additionalHeaders.replace(name, value)
+            }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.replace(name, values)
-        }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.replace(name, values)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
+        fun removeAdditionalHeaders(name: String) =
+            apply {
+                additionalHeaders.remove(name)
+            }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
-            additionalHeaders.removeAll(names)
-        }
+        fun removeAllAdditionalHeaders(names: Set<String>) =
+            apply {
+                additionalHeaders.removeAll(names)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun putAdditionalQueryParam(key: String, value: String) = apply {
-            additionalQueryParams.put(key, value)
-        }
+        fun putAdditionalQueryParam(key: String, value: String) =
+            apply {
+                additionalQueryParams.put(key, value)
+            }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.put(key, values)
-        }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.put(key, values)
+            }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.putAll(additionalQueryParams)
-        }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.putAll(additionalQueryParams)
+            }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
-            additionalQueryParams.replace(key, value)
-        }
+        fun replaceAdditionalQueryParams(key: String, value: String) =
+            apply {
+                additionalQueryParams.replace(key, value)
+            }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.replace(key, values)
-        }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.replace(key, values)
+            }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.replaceAll(additionalQueryParams)
-        }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.replaceAll(additionalQueryParams)
+            }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
+        fun removeAdditionalQueryParams(key: String) =
+            apply {
+                additionalQueryParams.remove(key)
+            }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
-            additionalQueryParams.removeAll(keys)
-        }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) =
+            apply {
+                additionalQueryParams.removeAll(keys)
+            }
 
         /**
          * Returns an immutable instance of [ElsetCreateBulkFromTleParams].
@@ -282,6 +299,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .dataMode()
          * .makeCurrent()
@@ -293,16 +311,24 @@ private constructor(
          */
         fun build(): ElsetCreateBulkFromTleParams =
             ElsetCreateBulkFromTleParams(
-                checkRequired("dataMode", dataMode),
-                checkRequired("makeCurrent", makeCurrent),
-                checkRequired("source", source),
-                autoCreateSats,
-                control,
-                origin,
-                tags,
-                checkRequired("body", body),
-                additionalHeaders.build(),
-                additionalQueryParams.build(),
+              checkRequired(
+                "dataMode", dataMode
+              ),
+              checkRequired(
+                "makeCurrent", makeCurrent
+              ),
+              checkRequired(
+                "source", source
+              ),
+              autoCreateSats,
+              control,
+              origin,
+              tags,
+              checkRequired(
+                "body", body
+              ),
+              additionalHeaders.build(),
+              additionalQueryParams.build(),
             )
     }
 
@@ -325,15 +351,14 @@ private constructor(
             .build()
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is ElsetCreateBulkFromTleParams && dataMode == other.dataMode && makeCurrent == other.makeCurrent && source == other.source && autoCreateSats == other.autoCreateSats && control == other.control && origin == other.origin && tags == other.tags && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+      return /* spotless:off */ other is ElsetCreateBulkFromTleParams && dataMode == other.dataMode && makeCurrent == other.makeCurrent && source == other.source && autoCreateSats == other.autoCreateSats && control == other.control && origin == other.origin && tags == other.tags && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(dataMode, makeCurrent, source, autoCreateSats, control, origin, tags, body, additionalHeaders, additionalQueryParams) /* spotless:on */
 
-    override fun toString() =
-        "ElsetCreateBulkFromTleParams{dataMode=$dataMode, makeCurrent=$makeCurrent, source=$source, autoCreateSats=$autoCreateSats, control=$control, origin=$origin, tags=$tags, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() = "ElsetCreateBulkFromTleParams{dataMode=$dataMode, makeCurrent=$makeCurrent, source=$source, autoCreateSats=$autoCreateSats, control=$control, origin=$origin, tags=$tags, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

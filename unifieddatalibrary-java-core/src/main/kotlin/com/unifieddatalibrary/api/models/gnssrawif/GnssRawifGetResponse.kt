@@ -28,7 +28,7 @@ import kotlin.jvm.optionals.getOrNull
  * applications and used to characterize Electromagnetic Interference (EMI) in the operating
  * environment.
  */
-class GnssRawifGetResponse
+class GnssRawIfGetResponse
 private constructor(
     private val centerFreq: JsonField<List<Double>>,
     private val classificationMarking: JsonField<String>,
@@ -893,7 +893,7 @@ private constructor(
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of [GnssRawifGetResponse].
+         * Returns a mutable builder for constructing an instance of [GnssRawIfGetResponse].
          *
          * The following fields are required:
          * ```java
@@ -909,7 +909,7 @@ private constructor(
         @JvmStatic fun builder() = Builder()
     }
 
-    /** A builder for [GnssRawifGetResponse]. */
+    /** A builder for [GnssRawIfGetResponse]. */
     class Builder internal constructor() {
 
         private var centerFreq: JsonField<MutableList<Double>>? = null
@@ -956,49 +956,49 @@ private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(gnssRawifGetResponse: GnssRawifGetResponse) = apply {
-            centerFreq = gnssRawifGetResponse.centerFreq.map { it.toMutableList() }
-            classificationMarking = gnssRawifGetResponse.classificationMarking
-            dataMode = gnssRawifGetResponse.dataMode
-            endTime = gnssRawifGetResponse.endTime
-            fileName = gnssRawifGetResponse.fileName
-            source = gnssRawifGetResponse.source
-            startTime = gnssRawifGetResponse.startTime
-            id = gnssRawifGetResponse.id
-            bitDepth = gnssRawifGetResponse.bitDepth
-            boresight = gnssRawifGetResponse.boresight.map { it.toMutableList() }
-            createdAt = gnssRawifGetResponse.createdAt
-            createdBy = gnssRawifGetResponse.createdBy
-            dataRate = gnssRawifGetResponse.dataRate
-            diffCodeBias = gnssRawifGetResponse.diffCodeBias.map { it.toMutableList() }
-            endAlt = gnssRawifGetResponse.endAlt
-            endLat = gnssRawifGetResponse.endLat
-            endLon = gnssRawifGetResponse.endLon
-            esId = gnssRawifGetResponse.esId
-            eventId = gnssRawifGetResponse.eventId
-            fileSize = gnssRawifGetResponse.fileSize
-            idOnOrbit = gnssRawifGetResponse.idOnOrbit
-            ifFreq = gnssRawifGetResponse.ifFreq.map { it.toMutableList() }
-            origin = gnssRawifGetResponse.origin
-            origNetwork = gnssRawifGetResponse.origNetwork
-            origObjectId = gnssRawifGetResponse.origObjectId
-            postFourier = gnssRawifGetResponse.postFourier.map { it.toMutableList() }
-            quat = gnssRawifGetResponse.quat.map { it.toMutableList() }
-            receiver = gnssRawifGetResponse.receiver
-            sampleRate = gnssRawifGetResponse.sampleRate.map { it.toMutableList() }
-            sampleType = gnssRawifGetResponse.sampleType
-            satNo = gnssRawifGetResponse.satNo
-            sequenceId = gnssRawifGetResponse.sequenceId
-            setId = gnssRawifGetResponse.setId
-            setLength = gnssRawifGetResponse.setLength
-            srcIds = gnssRawifGetResponse.srcIds.map { it.toMutableList() }
-            srcTyps = gnssRawifGetResponse.srcTyps.map { it.toMutableList() }
-            startAlt = gnssRawifGetResponse.startAlt
-            startIndex = gnssRawifGetResponse.startIndex
-            startLat = gnssRawifGetResponse.startLat
-            startLon = gnssRawifGetResponse.startLon
-            tags = gnssRawifGetResponse.tags.map { it.toMutableList() }
-            additionalProperties = gnssRawifGetResponse.additionalProperties.toMutableMap()
+        internal fun from(gnssRawIfGetResponse: GnssRawIfGetResponse) = apply {
+            centerFreq = gnssRawIfGetResponse.centerFreq.map { it.toMutableList() }
+            classificationMarking = gnssRawIfGetResponse.classificationMarking
+            dataMode = gnssRawIfGetResponse.dataMode
+            endTime = gnssRawIfGetResponse.endTime
+            fileName = gnssRawIfGetResponse.fileName
+            source = gnssRawIfGetResponse.source
+            startTime = gnssRawIfGetResponse.startTime
+            id = gnssRawIfGetResponse.id
+            bitDepth = gnssRawIfGetResponse.bitDepth
+            boresight = gnssRawIfGetResponse.boresight.map { it.toMutableList() }
+            createdAt = gnssRawIfGetResponse.createdAt
+            createdBy = gnssRawIfGetResponse.createdBy
+            dataRate = gnssRawIfGetResponse.dataRate
+            diffCodeBias = gnssRawIfGetResponse.diffCodeBias.map { it.toMutableList() }
+            endAlt = gnssRawIfGetResponse.endAlt
+            endLat = gnssRawIfGetResponse.endLat
+            endLon = gnssRawIfGetResponse.endLon
+            esId = gnssRawIfGetResponse.esId
+            eventId = gnssRawIfGetResponse.eventId
+            fileSize = gnssRawIfGetResponse.fileSize
+            idOnOrbit = gnssRawIfGetResponse.idOnOrbit
+            ifFreq = gnssRawIfGetResponse.ifFreq.map { it.toMutableList() }
+            origin = gnssRawIfGetResponse.origin
+            origNetwork = gnssRawIfGetResponse.origNetwork
+            origObjectId = gnssRawIfGetResponse.origObjectId
+            postFourier = gnssRawIfGetResponse.postFourier.map { it.toMutableList() }
+            quat = gnssRawIfGetResponse.quat.map { it.toMutableList() }
+            receiver = gnssRawIfGetResponse.receiver
+            sampleRate = gnssRawIfGetResponse.sampleRate.map { it.toMutableList() }
+            sampleType = gnssRawIfGetResponse.sampleType
+            satNo = gnssRawIfGetResponse.satNo
+            sequenceId = gnssRawIfGetResponse.sequenceId
+            setId = gnssRawIfGetResponse.setId
+            setLength = gnssRawIfGetResponse.setLength
+            srcIds = gnssRawIfGetResponse.srcIds.map { it.toMutableList() }
+            srcTyps = gnssRawIfGetResponse.srcTyps.map { it.toMutableList() }
+            startAlt = gnssRawIfGetResponse.startAlt
+            startIndex = gnssRawIfGetResponse.startIndex
+            startLat = gnssRawIfGetResponse.startLat
+            startLon = gnssRawIfGetResponse.startLon
+            tags = gnssRawIfGetResponse.tags.map { it.toMutableList() }
+            additionalProperties = gnssRawIfGetResponse.additionalProperties.toMutableMap()
         }
 
         /**
@@ -1764,7 +1764,7 @@ private constructor(
         }
 
         /**
-         * Returns an immutable instance of [GnssRawifGetResponse].
+         * Returns an immutable instance of [GnssRawIfGetResponse].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
          *
@@ -1781,8 +1781,8 @@ private constructor(
          *
          * @throws IllegalStateException if any required field is unset.
          */
-        fun build(): GnssRawifGetResponse =
-            GnssRawifGetResponse(
+        fun build(): GnssRawIfGetResponse =
+            GnssRawIfGetResponse(
                 checkRequired("centerFreq", centerFreq).map { it.toImmutable() },
                 checkRequired("classificationMarking", classificationMarking),
                 checkRequired("dataMode", dataMode),
@@ -1830,7 +1830,7 @@ private constructor(
 
     private var validated: Boolean = false
 
-    fun validate(): GnssRawifGetResponse = apply {
+    fun validate(): GnssRawIfGetResponse = apply {
         if (validated) {
             return@apply
         }
@@ -2094,7 +2094,7 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GnssRawifGetResponse && centerFreq == other.centerFreq && classificationMarking == other.classificationMarking && dataMode == other.dataMode && endTime == other.endTime && fileName == other.fileName && source == other.source && startTime == other.startTime && id == other.id && bitDepth == other.bitDepth && boresight == other.boresight && createdAt == other.createdAt && createdBy == other.createdBy && dataRate == other.dataRate && diffCodeBias == other.diffCodeBias && endAlt == other.endAlt && endLat == other.endLat && endLon == other.endLon && esId == other.esId && eventId == other.eventId && fileSize == other.fileSize && idOnOrbit == other.idOnOrbit && ifFreq == other.ifFreq && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && postFourier == other.postFourier && quat == other.quat && receiver == other.receiver && sampleRate == other.sampleRate && sampleType == other.sampleType && satNo == other.satNo && sequenceId == other.sequenceId && setId == other.setId && setLength == other.setLength && srcIds == other.srcIds && srcTyps == other.srcTyps && startAlt == other.startAlt && startIndex == other.startIndex && startLat == other.startLat && startLon == other.startLon && tags == other.tags && additionalProperties == other.additionalProperties /* spotless:on */
+        return /* spotless:off */ other is GnssRawIfGetResponse && centerFreq == other.centerFreq && classificationMarking == other.classificationMarking && dataMode == other.dataMode && endTime == other.endTime && fileName == other.fileName && source == other.source && startTime == other.startTime && id == other.id && bitDepth == other.bitDepth && boresight == other.boresight && createdAt == other.createdAt && createdBy == other.createdBy && dataRate == other.dataRate && diffCodeBias == other.diffCodeBias && endAlt == other.endAlt && endLat == other.endLat && endLon == other.endLon && esId == other.esId && eventId == other.eventId && fileSize == other.fileSize && idOnOrbit == other.idOnOrbit && ifFreq == other.ifFreq && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && postFourier == other.postFourier && quat == other.quat && receiver == other.receiver && sampleRate == other.sampleRate && sampleType == other.sampleType && satNo == other.satNo && sequenceId == other.sequenceId && setId == other.setId && setLength == other.setLength && srcIds == other.srcIds && srcTyps == other.srcTyps && startAlt == other.startAlt && startIndex == other.startIndex && startLat == other.startLat && startLon == other.startLon && tags == other.tags && additionalProperties == other.additionalProperties /* spotless:on */
     }
 
     /* spotless:off */
@@ -2104,5 +2104,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "GnssRawifGetResponse{centerFreq=$centerFreq, classificationMarking=$classificationMarking, dataMode=$dataMode, endTime=$endTime, fileName=$fileName, source=$source, startTime=$startTime, id=$id, bitDepth=$bitDepth, boresight=$boresight, createdAt=$createdAt, createdBy=$createdBy, dataRate=$dataRate, diffCodeBias=$diffCodeBias, endAlt=$endAlt, endLat=$endLat, endLon=$endLon, esId=$esId, eventId=$eventId, fileSize=$fileSize, idOnOrbit=$idOnOrbit, ifFreq=$ifFreq, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, postFourier=$postFourier, quat=$quat, receiver=$receiver, sampleRate=$sampleRate, sampleType=$sampleType, satNo=$satNo, sequenceId=$sequenceId, setId=$setId, setLength=$setLength, srcIds=$srcIds, srcTyps=$srcTyps, startAlt=$startAlt, startIndex=$startIndex, startLat=$startLat, startLon=$startLon, tags=$tags, additionalProperties=$additionalProperties}"
+        "GnssRawIfGetResponse{centerFreq=$centerFreq, classificationMarking=$classificationMarking, dataMode=$dataMode, endTime=$endTime, fileName=$fileName, source=$source, startTime=$startTime, id=$id, bitDepth=$bitDepth, boresight=$boresight, createdAt=$createdAt, createdBy=$createdBy, dataRate=$dataRate, diffCodeBias=$diffCodeBias, endAlt=$endAlt, endLat=$endLat, endLon=$endLon, esId=$esId, eventId=$eventId, fileSize=$fileSize, idOnOrbit=$idOnOrbit, ifFreq=$ifFreq, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, postFourier=$postFourier, quat=$quat, receiver=$receiver, sampleRate=$sampleRate, sampleType=$sampleType, satNo=$satNo, sequenceId=$sequenceId, setId=$setId, setLength=$setLength, srcIds=$srcIds, srcTyps=$srcTyps, startAlt=$startAlt, startIndex=$startIndex, startLat=$startLat, startLon=$startLon, tags=$tags, additionalProperties=$additionalProperties}"
 }

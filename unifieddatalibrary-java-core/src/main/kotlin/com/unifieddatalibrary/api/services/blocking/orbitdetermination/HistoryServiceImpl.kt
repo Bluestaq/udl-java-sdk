@@ -21,115 +21,116 @@ import com.unifieddatalibrary.api.models.orbitdetermination.history.HistoryCount
 import com.unifieddatalibrary.api.models.orbitdetermination.history.HistoryListPage
 import com.unifieddatalibrary.api.models.orbitdetermination.history.HistoryListParams
 import com.unifieddatalibrary.api.models.orbitdetermination.history.HistoryListResponse
+import com.unifieddatalibrary.api.services.blocking.orbitdetermination.HistoryService
+import com.unifieddatalibrary.api.services.blocking.orbitdetermination.HistoryServiceImpl
 import java.util.function.Consumer
 
-class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
-    HistoryService {
+class HistoryServiceImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: HistoryService.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : HistoryService {
+
+    private val withRawResponse: HistoryService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     override fun withRawResponse(): HistoryService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService =
-        HistoryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService = HistoryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun list(params: HistoryListParams, requestOptions: RequestOptions): HistoryListPage =
         // get /udl/orbitdetermination/history
         withRawResponse().list(params, requestOptions).parse()
 
     override fun aodr(params: HistoryAodrParams, requestOptions: RequestOptions) {
-        // get /udl/orbitdetermination/history/aodr
-        withRawResponse().aodr(params, requestOptions)
+      // get /udl/orbitdetermination/history/aodr
+      withRawResponse().aodr(params, requestOptions)
     }
 
     override fun count(params: HistoryCountParams, requestOptions: RequestOptions): String =
         // get /udl/orbitdetermination/history/count
         withRawResponse().count(params, requestOptions).parse()
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        HistoryService.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<HttpResponse> =
-            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+    ) : HistoryService.WithRawResponse {
 
-        override fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): HistoryService.WithRawResponse =
-            HistoryServiceImpl.WithRawResponseImpl(
-                clientOptions.toBuilder().apply(modifier::accept).build()
-            )
+        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val listHandler: Handler<List<HistoryListResponse>> =
-            jsonHandler<List<HistoryListResponse>>(clientOptions.jsonMapper)
+        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService.WithRawResponse = HistoryServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-        override fun list(
-            params: HistoryListParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<HistoryListPage> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "orbitdetermination", "history")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { listHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-                    .let {
-                        HistoryListPage.builder()
-                            .service(HistoryServiceImpl(clientOptions))
-                            .params(params)
-                            .items(it)
-                            .build()
-                    }
-            }
+        private val listHandler: Handler<List<HistoryListResponse>> = jsonHandler<List<HistoryListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(params: HistoryListParams, requestOptions: RequestOptions): HttpResponseFor<HistoryListPage> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "orbitdetermination", "history")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  listHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.forEach { it.validate() }
+                  }
+              }
+              .let {
+                  HistoryListPage.builder()
+                      .service(HistoryServiceImpl(clientOptions))
+                      .params(params)
+                      .items(it)
+                      .build()
+              }
+          }
         }
 
         private val aodrHandler: Handler<Void?> = emptyHandler()
 
         override fun aodr(params: HistoryAodrParams, requestOptions: RequestOptions): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "orbitdetermination", "history", "aodr")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { aodrHandler.handle(it) }
-            }
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "orbitdetermination", "history", "aodr")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  aodrHandler.handle(it)
+              }
+          }
         }
 
         private val countHandler: Handler<String> = stringHandler()
 
-        override fun count(
-            params: HistoryCountParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<String> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "orbitdetermination", "history", "count")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { countHandler.handle(it) }
-            }
+        override fun count(params: HistoryCountParams, requestOptions: RequestOptions): HttpResponseFor<String> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "orbitdetermination", "history", "count")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  countHandler.handle(it)
+              }
+          }
         }
     }
 }

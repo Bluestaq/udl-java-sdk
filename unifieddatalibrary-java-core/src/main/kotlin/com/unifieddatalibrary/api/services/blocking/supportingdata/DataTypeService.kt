@@ -8,13 +8,12 @@ import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.supportingdata.datatypes.DataTypeListPage
 import com.unifieddatalibrary.api.models.supportingdata.datatypes.DataTypeListParams
+import com.unifieddatalibrary.api.services.blocking.supportingdata.DataTypeService
 import java.util.function.Consumer
 
 interface DataTypeService {
 
-    /**
-     * Returns a view of this service that provides access to raw HTTP responses for each method.
-     */
+    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -28,18 +27,19 @@ interface DataTypeService {
     fun list(): DataTypeListPage = list(DataTypeListParams.none())
 
     /** @see list */
-    fun list(
-        params: DataTypeListParams = DataTypeListParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): DataTypeListPage
+    fun list(params: DataTypeListParams = DataTypeListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): DataTypeListPage
 
     /** @see list */
     fun list(params: DataTypeListParams = DataTypeListParams.none()): DataTypeListPage =
-        list(params, RequestOptions.none())
+        list(
+          params, RequestOptions.none()
+        )
 
     /** @see list */
     fun list(requestOptions: RequestOptions): DataTypeListPage =
-        list(DataTypeListParams.none(), requestOptions)
+        list(
+          DataTypeListParams.none(), requestOptions
+        )
 
     /** A view of [DataTypeService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -51,29 +51,26 @@ interface DataTypeService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): DataTypeService.WithRawResponse
 
-        /**
-         * Returns a raw HTTP response for `get /udl/dataowner/getDataTypes`, but is otherwise the
-         * same as [DataTypeService.list].
-         */
+        /** Returns a raw HTTP response for `get /udl/dataowner/getDataTypes`, but is otherwise the same as [DataTypeService.list]. */
         @MustBeClosed
         fun list(): HttpResponseFor<DataTypeListPage> = list(DataTypeListParams.none())
 
         /** @see list */
         @MustBeClosed
-        fun list(
-            params: DataTypeListParams = DataTypeListParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<DataTypeListPage>
+        fun list(params: DataTypeListParams = DataTypeListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<DataTypeListPage>
 
         /** @see list */
         @MustBeClosed
-        fun list(
-            params: DataTypeListParams = DataTypeListParams.none()
-        ): HttpResponseFor<DataTypeListPage> = list(params, RequestOptions.none())
+        fun list(params: DataTypeListParams = DataTypeListParams.none()): HttpResponseFor<DataTypeListPage> =
+            list(
+              params, RequestOptions.none()
+            )
 
         /** @see list */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<DataTypeListPage> =
-            list(DataTypeListParams.none(), requestOptions)
+            list(
+              DataTypeListParams.none(), requestOptions
+            )
     }
 }

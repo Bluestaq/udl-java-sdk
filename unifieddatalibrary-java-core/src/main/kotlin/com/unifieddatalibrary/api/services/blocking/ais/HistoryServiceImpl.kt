@@ -19,91 +19,91 @@ import com.unifieddatalibrary.api.models.AisFull
 import com.unifieddatalibrary.api.models.ais.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.ais.history.HistoryListPage
 import com.unifieddatalibrary.api.models.ais.history.HistoryListParams
+import com.unifieddatalibrary.api.services.blocking.ais.HistoryService
+import com.unifieddatalibrary.api.services.blocking.ais.HistoryServiceImpl
 import java.util.function.Consumer
 
-class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
-    HistoryService {
+class HistoryServiceImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: HistoryService.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : HistoryService {
+
+    private val withRawResponse: HistoryService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     override fun withRawResponse(): HistoryService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService =
-        HistoryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService = HistoryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun list(params: HistoryListParams, requestOptions: RequestOptions): HistoryListPage =
         // get /udl/ais/history
         withRawResponse().list(params, requestOptions).parse()
 
     override fun aodr(params: HistoryAodrParams, requestOptions: RequestOptions) {
-        // get /udl/ais/history/aodr
-        withRawResponse().aodr(params, requestOptions)
+      // get /udl/ais/history/aodr
+      withRawResponse().aodr(params, requestOptions)
     }
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        HistoryService.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<HttpResponse> =
-            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+    ) : HistoryService.WithRawResponse {
 
-        override fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): HistoryService.WithRawResponse =
-            HistoryServiceImpl.WithRawResponseImpl(
-                clientOptions.toBuilder().apply(modifier::accept).build()
-            )
+        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val listHandler: Handler<List<AisFull>> =
-            jsonHandler<List<AisFull>>(clientOptions.jsonMapper)
+        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService.WithRawResponse = HistoryServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-        override fun list(
-            params: HistoryListParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<HistoryListPage> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "ais", "history")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { listHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-                    .let {
-                        HistoryListPage.builder()
-                            .service(HistoryServiceImpl(clientOptions))
-                            .params(params)
-                            .items(it)
-                            .build()
-                    }
-            }
+        private val listHandler: Handler<List<AisFull>> = jsonHandler<List<AisFull>>(clientOptions.jsonMapper)
+
+        override fun list(params: HistoryListParams, requestOptions: RequestOptions): HttpResponseFor<HistoryListPage> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "ais", "history")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  listHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.forEach { it.validate() }
+                  }
+              }
+              .let {
+                  HistoryListPage.builder()
+                      .service(HistoryServiceImpl(clientOptions))
+                      .params(params)
+                      .items(it)
+                      .build()
+              }
+          }
         }
 
         private val aodrHandler: Handler<Void?> = emptyHandler()
 
         override fun aodr(params: HistoryAodrParams, requestOptions: RequestOptions): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "ais", "history", "aodr")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { aodrHandler.handle(it) }
-            }
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "ais", "history", "aodr")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  aodrHandler.handle(it)
+              }
+          }
         }
     }
 }

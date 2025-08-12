@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.models.gnssobservationset.history
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import com.unifieddatalibrary.api.core.jsonMapper
+import com.unifieddatalibrary.api.models.gnssobservationset.history.GnssObservationSetFull
 import java.time.OffsetDateTime
 import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
@@ -13,179 +14,209 @@ internal class GnssObservationSetFullTest {
 
     @Test
     fun create() {
-        val gnssObservationSetFull =
-            GnssObservationSetFull.builder()
-                .classificationMarking("U")
-                .dataMode(GnssObservationSetFull.DataMode.TEST)
-                .source("Bluestaq")
-                .ts(OffsetDateTime.parse("2022-01-01T00:00:00.123456Z"))
-                .id("GNSSObSet-ID")
-                .agcState(20)
-                .alt(200.0)
-                .addBoresight(1.23)
-                .addBoresight(3.23)
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .esId("ES-ID")
-                .eventId("2f2205c9-7bc2-4e1a-8416-2f80cc71f64b")
-                .gDop(0.33)
-                .addGnssObservationList(
-                    GnssObservationSetFull.GnssObservationList.builder()
-                        .agcState(20)
-                        .gnssSatId("GEJ")
-                        .ob(listOf(42.1, 1000.0, 0.9))
-                        .obsCodeSet(listOf("S1C", "C1C", "C1D"))
-                        .trackingStatus(0)
-                        .build()
-                )
-                .hDop(0.03)
-                .idOnOrbit("ONORBIT-ID")
-                .lat(32.021)
-                .lon(125.123)
-                .markerType("SPACEBORNE")
-                .navigationStatus("degraded")
-                .addObsCode("ACL")
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
-                .origObjectId("ORIGOBJECT-ID")
-                .outage(200)
-                .pDop(0.002)
-                .quat(listOf(0.03, 0.02, 0.01, 0.012))
-                .receiver("RECEIVER-ID")
-                .satNo(2)
-                .satPosition(listOf(1625.71954, 6782.15396, -1721.34267))
-                .satVelocity(listOf(2.03, 0.003, 0.12))
-                .addSrcId("SV_ID")
-                .addSrcId("SV_ID")
-                .addSrcTyp("SV")
-                .addSrcTyp("SV")
-                .addTag("TAG1")
-                .addTag("TAG2")
-                .tDop(0.05)
-                .trackingStatus(0)
-                .transactionId("TRANSACTION-ID")
-                .vDop(0.03)
-                .build()
+      val gnssObservationSetFull = GnssObservationSetFull.builder()
+          .classificationMarking("U")
+          .dataMode(GnssObservationSetFull.DataMode.TEST)
+          .source("Bluestaq")
+          .ts(OffsetDateTime.parse("2022-01-01T00:00:00.123456Z"))
+          .id("GNSSObSet-ID")
+          .agcState(20)
+          .alt(200.0)
+          .addBoresight(1.23)
+          .addBoresight(3.23)
+          .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+          .createdBy("some.user")
+          .esId("ES-ID")
+          .eventId("2f2205c9-7bc2-4e1a-8416-2f80cc71f64b")
+          .gDop(0.33)
+          .addGnssObservationList(GnssObservationSetFull.GnssObservationList.builder()
+              .agcState(20)
+              .gnssSatId("GEJ")
+              .ob(listOf(
+                42.1,
+                1000.0,
+                0.9,
+              ))
+              .obsCodeSet(listOf(
+                "S1C",
+                "C1C",
+                "C1D",
+              ))
+              .trackingStatus(0)
+              .build())
+          .hDop(0.03)
+          .idOnOrbit("ONORBIT-ID")
+          .lat(32.021)
+          .lon(125.123)
+          .markerType("SPACEBORNE")
+          .navigationStatus("degraded")
+          .addObsCode("ACL")
+          .origin("THIRD_PARTY_DATASOURCE")
+          .origNetwork("ORIG")
+          .origObjectId("ORIGOBJECT-ID")
+          .outage(200)
+          .pDop(0.002)
+          .quat(listOf(
+            0.03,
+            0.02,
+            0.01,
+            0.012,
+          ))
+          .receiver("RECEIVER-ID")
+          .satNo(2)
+          .satPosition(listOf(
+            1625.71954,
+            6782.15396,
+            -1721.34267,
+          ))
+          .satVelocity(listOf(
+            2.03,
+            0.003,
+            0.12,
+          ))
+          .addSrcId("SV_ID")
+          .addSrcId("SV_ID")
+          .addSrcTyp("SV")
+          .addSrcTyp("SV")
+          .addTag("TAG1")
+          .addTag("TAG2")
+          .tDop(0.05)
+          .trackingStatus(0)
+          .transactionId("TRANSACTION-ID")
+          .vDop(0.03)
+          .build()
 
-        assertThat(gnssObservationSetFull.classificationMarking()).isEqualTo("U")
-        assertThat(gnssObservationSetFull.dataMode())
-            .isEqualTo(GnssObservationSetFull.DataMode.TEST)
-        assertThat(gnssObservationSetFull.source()).isEqualTo("Bluestaq")
-        assertThat(gnssObservationSetFull.ts())
-            .isEqualTo(OffsetDateTime.parse("2022-01-01T00:00:00.123456Z"))
-        assertThat(gnssObservationSetFull.id()).contains("GNSSObSet-ID")
-        assertThat(gnssObservationSetFull.agcState()).contains(20)
-        assertThat(gnssObservationSetFull.alt()).contains(200.0)
-        assertThat(gnssObservationSetFull.boresight().getOrNull()).containsExactly(1.23, 3.23)
-        assertThat(gnssObservationSetFull.createdAt())
-            .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(gnssObservationSetFull.createdBy()).contains("some.user")
-        assertThat(gnssObservationSetFull.esId()).contains("ES-ID")
-        assertThat(gnssObservationSetFull.eventId())
-            .contains("2f2205c9-7bc2-4e1a-8416-2f80cc71f64b")
-        assertThat(gnssObservationSetFull.gDop()).contains(0.33)
-        assertThat(gnssObservationSetFull.gnssObservationList().getOrNull())
-            .containsExactly(
-                GnssObservationSetFull.GnssObservationList.builder()
-                    .agcState(20)
-                    .gnssSatId("GEJ")
-                    .ob(listOf(42.1, 1000.0, 0.9))
-                    .obsCodeSet(listOf("S1C", "C1C", "C1D"))
-                    .trackingStatus(0)
-                    .build()
-            )
-        assertThat(gnssObservationSetFull.hDop()).contains(0.03)
-        assertThat(gnssObservationSetFull.idOnOrbit()).contains("ONORBIT-ID")
-        assertThat(gnssObservationSetFull.lat()).contains(32.021)
-        assertThat(gnssObservationSetFull.lon()).contains(125.123)
-        assertThat(gnssObservationSetFull.markerType()).contains("SPACEBORNE")
-        assertThat(gnssObservationSetFull.navigationStatus()).contains("degraded")
-        assertThat(gnssObservationSetFull.obsCodes().getOrNull()).containsExactly("ACL")
-        assertThat(gnssObservationSetFull.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(gnssObservationSetFull.origNetwork()).contains("ORIG")
-        assertThat(gnssObservationSetFull.origObjectId()).contains("ORIGOBJECT-ID")
-        assertThat(gnssObservationSetFull.outage()).contains(200)
-        assertThat(gnssObservationSetFull.pDop()).contains(0.002)
-        assertThat(gnssObservationSetFull.quat().getOrNull())
-            .containsExactly(0.03, 0.02, 0.01, 0.012)
-        assertThat(gnssObservationSetFull.receiver()).contains("RECEIVER-ID")
-        assertThat(gnssObservationSetFull.satNo()).contains(2)
-        assertThat(gnssObservationSetFull.satPosition().getOrNull())
-            .containsExactly(1625.71954, 6782.15396, -1721.34267)
-        assertThat(gnssObservationSetFull.satVelocity().getOrNull())
-            .containsExactly(2.03, 0.003, 0.12)
-        assertThat(gnssObservationSetFull.srcIds().getOrNull()).containsExactly("SV_ID", "SV_ID")
-        assertThat(gnssObservationSetFull.srcTyps().getOrNull()).containsExactly("SV", "SV")
-        assertThat(gnssObservationSetFull.tags().getOrNull()).containsExactly("TAG1", "TAG2")
-        assertThat(gnssObservationSetFull.tDop()).contains(0.05)
-        assertThat(gnssObservationSetFull.trackingStatus()).contains(0)
-        assertThat(gnssObservationSetFull.transactionId()).contains("TRANSACTION-ID")
-        assertThat(gnssObservationSetFull.vDop()).contains(0.03)
+      assertThat(gnssObservationSetFull.classificationMarking()).isEqualTo("U")
+      assertThat(gnssObservationSetFull.dataMode()).isEqualTo(GnssObservationSetFull.DataMode.TEST)
+      assertThat(gnssObservationSetFull.source()).isEqualTo("Bluestaq")
+      assertThat(gnssObservationSetFull.ts()).isEqualTo(OffsetDateTime.parse("2022-01-01T00:00:00.123456Z"))
+      assertThat(gnssObservationSetFull.id()).contains("GNSSObSet-ID")
+      assertThat(gnssObservationSetFull.agcState()).contains(20)
+      assertThat(gnssObservationSetFull.alt()).contains(200.0)
+      assertThat(gnssObservationSetFull.boresight().getOrNull()).containsExactly(1.23, 3.23)
+      assertThat(gnssObservationSetFull.createdAt()).contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+      assertThat(gnssObservationSetFull.createdBy()).contains("some.user")
+      assertThat(gnssObservationSetFull.esId()).contains("ES-ID")
+      assertThat(gnssObservationSetFull.eventId()).contains("2f2205c9-7bc2-4e1a-8416-2f80cc71f64b")
+      assertThat(gnssObservationSetFull.gDop()).contains(0.33)
+      assertThat(gnssObservationSetFull.gnssObservationList().getOrNull()).containsExactly(GnssObservationSetFull.GnssObservationList.builder()
+          .agcState(20)
+          .gnssSatId("GEJ")
+          .ob(listOf(
+            42.1,
+            1000.0,
+            0.9,
+          ))
+          .obsCodeSet(listOf(
+            "S1C",
+            "C1C",
+            "C1D",
+          ))
+          .trackingStatus(0)
+          .build())
+      assertThat(gnssObservationSetFull.hDop()).contains(0.03)
+      assertThat(gnssObservationSetFull.idOnOrbit()).contains("ONORBIT-ID")
+      assertThat(gnssObservationSetFull.lat()).contains(32.021)
+      assertThat(gnssObservationSetFull.lon()).contains(125.123)
+      assertThat(gnssObservationSetFull.markerType()).contains("SPACEBORNE")
+      assertThat(gnssObservationSetFull.navigationStatus()).contains("degraded")
+      assertThat(gnssObservationSetFull.obsCodes().getOrNull()).containsExactly("ACL")
+      assertThat(gnssObservationSetFull.origin()).contains("THIRD_PARTY_DATASOURCE")
+      assertThat(gnssObservationSetFull.origNetwork()).contains("ORIG")
+      assertThat(gnssObservationSetFull.origObjectId()).contains("ORIGOBJECT-ID")
+      assertThat(gnssObservationSetFull.outage()).contains(200)
+      assertThat(gnssObservationSetFull.pDop()).contains(0.002)
+      assertThat(gnssObservationSetFull.quat().getOrNull()).containsExactly(0.03, 0.02, 0.01, 0.012)
+      assertThat(gnssObservationSetFull.receiver()).contains("RECEIVER-ID")
+      assertThat(gnssObservationSetFull.satNo()).contains(2)
+      assertThat(gnssObservationSetFull.satPosition().getOrNull()).containsExactly(1625.71954, 6782.15396, -1721.34267)
+      assertThat(gnssObservationSetFull.satVelocity().getOrNull()).containsExactly(2.03, 0.003, 0.12)
+      assertThat(gnssObservationSetFull.srcIds().getOrNull()).containsExactly("SV_ID", "SV_ID")
+      assertThat(gnssObservationSetFull.srcTyps().getOrNull()).containsExactly("SV", "SV")
+      assertThat(gnssObservationSetFull.tags().getOrNull()).containsExactly("TAG1", "TAG2")
+      assertThat(gnssObservationSetFull.tDop()).contains(0.05)
+      assertThat(gnssObservationSetFull.trackingStatus()).contains(0)
+      assertThat(gnssObservationSetFull.transactionId()).contains("TRANSACTION-ID")
+      assertThat(gnssObservationSetFull.vDop()).contains(0.03)
     }
 
     @Test
     fun roundtrip() {
-        val jsonMapper = jsonMapper()
-        val gnssObservationSetFull =
-            GnssObservationSetFull.builder()
-                .classificationMarking("U")
-                .dataMode(GnssObservationSetFull.DataMode.TEST)
-                .source("Bluestaq")
-                .ts(OffsetDateTime.parse("2022-01-01T00:00:00.123456Z"))
-                .id("GNSSObSet-ID")
-                .agcState(20)
-                .alt(200.0)
-                .addBoresight(1.23)
-                .addBoresight(3.23)
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .esId("ES-ID")
-                .eventId("2f2205c9-7bc2-4e1a-8416-2f80cc71f64b")
-                .gDop(0.33)
-                .addGnssObservationList(
-                    GnssObservationSetFull.GnssObservationList.builder()
-                        .agcState(20)
-                        .gnssSatId("GEJ")
-                        .ob(listOf(42.1, 1000.0, 0.9))
-                        .obsCodeSet(listOf("S1C", "C1C", "C1D"))
-                        .trackingStatus(0)
-                        .build()
-                )
-                .hDop(0.03)
-                .idOnOrbit("ONORBIT-ID")
-                .lat(32.021)
-                .lon(125.123)
-                .markerType("SPACEBORNE")
-                .navigationStatus("degraded")
-                .addObsCode("ACL")
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
-                .origObjectId("ORIGOBJECT-ID")
-                .outage(200)
-                .pDop(0.002)
-                .quat(listOf(0.03, 0.02, 0.01, 0.012))
-                .receiver("RECEIVER-ID")
-                .satNo(2)
-                .satPosition(listOf(1625.71954, 6782.15396, -1721.34267))
-                .satVelocity(listOf(2.03, 0.003, 0.12))
-                .addSrcId("SV_ID")
-                .addSrcId("SV_ID")
-                .addSrcTyp("SV")
-                .addSrcTyp("SV")
-                .addTag("TAG1")
-                .addTag("TAG2")
-                .tDop(0.05)
-                .trackingStatus(0)
-                .transactionId("TRANSACTION-ID")
-                .vDop(0.03)
-                .build()
+      val jsonMapper = jsonMapper()
+      val gnssObservationSetFull = GnssObservationSetFull.builder()
+          .classificationMarking("U")
+          .dataMode(GnssObservationSetFull.DataMode.TEST)
+          .source("Bluestaq")
+          .ts(OffsetDateTime.parse("2022-01-01T00:00:00.123456Z"))
+          .id("GNSSObSet-ID")
+          .agcState(20)
+          .alt(200.0)
+          .addBoresight(1.23)
+          .addBoresight(3.23)
+          .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+          .createdBy("some.user")
+          .esId("ES-ID")
+          .eventId("2f2205c9-7bc2-4e1a-8416-2f80cc71f64b")
+          .gDop(0.33)
+          .addGnssObservationList(GnssObservationSetFull.GnssObservationList.builder()
+              .agcState(20)
+              .gnssSatId("GEJ")
+              .ob(listOf(
+                42.1,
+                1000.0,
+                0.9,
+              ))
+              .obsCodeSet(listOf(
+                "S1C",
+                "C1C",
+                "C1D",
+              ))
+              .trackingStatus(0)
+              .build())
+          .hDop(0.03)
+          .idOnOrbit("ONORBIT-ID")
+          .lat(32.021)
+          .lon(125.123)
+          .markerType("SPACEBORNE")
+          .navigationStatus("degraded")
+          .addObsCode("ACL")
+          .origin("THIRD_PARTY_DATASOURCE")
+          .origNetwork("ORIG")
+          .origObjectId("ORIGOBJECT-ID")
+          .outage(200)
+          .pDop(0.002)
+          .quat(listOf(
+            0.03,
+            0.02,
+            0.01,
+            0.012,
+          ))
+          .receiver("RECEIVER-ID")
+          .satNo(2)
+          .satPosition(listOf(
+            1625.71954,
+            6782.15396,
+            -1721.34267,
+          ))
+          .satVelocity(listOf(
+            2.03,
+            0.003,
+            0.12,
+          ))
+          .addSrcId("SV_ID")
+          .addSrcId("SV_ID")
+          .addSrcTyp("SV")
+          .addSrcTyp("SV")
+          .addTag("TAG1")
+          .addTag("TAG2")
+          .tDop(0.05)
+          .trackingStatus(0)
+          .transactionId("TRANSACTION-ID")
+          .vDop(0.03)
+          .build()
 
-        val roundtrippedGnssObservationSetFull =
-            jsonMapper.readValue(
-                jsonMapper.writeValueAsString(gnssObservationSetFull),
-                jacksonTypeRef<GnssObservationSetFull>(),
-            )
+      val roundtrippedGnssObservationSetFull = jsonMapper.readValue(jsonMapper.writeValueAsString(gnssObservationSetFull), jacksonTypeRef<GnssObservationSetFull>())
 
-        assertThat(roundtrippedGnssObservationSetFull).isEqualTo(gnssObservationSetFull)
+      assertThat(roundtrippedGnssObservationSetFull).isEqualTo(gnssObservationSetFull)
     }
 }

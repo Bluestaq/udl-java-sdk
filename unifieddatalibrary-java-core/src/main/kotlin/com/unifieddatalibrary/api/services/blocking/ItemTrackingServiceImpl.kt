@@ -31,298 +31,276 @@ import com.unifieddatalibrary.api.models.itemtrackings.ItemTrackingQueryhelpResp
 import com.unifieddatalibrary.api.models.itemtrackings.ItemTrackingTupleParams
 import com.unifieddatalibrary.api.models.itemtrackings.ItemTrackingTupleResponse
 import com.unifieddatalibrary.api.models.itemtrackings.ItemTrackingUnvalidatedPublishParams
+import com.unifieddatalibrary.api.services.blocking.ItemTrackingService
+import com.unifieddatalibrary.api.services.blocking.ItemTrackingServiceImpl
 import com.unifieddatalibrary.api.services.blocking.itemtrackings.HistoryService
 import com.unifieddatalibrary.api.services.blocking.itemtrackings.HistoryServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
-class ItemTrackingServiceImpl internal constructor(private val clientOptions: ClientOptions) :
-    ItemTrackingService {
+class ItemTrackingServiceImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: ItemTrackingService.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : ItemTrackingService {
+
+    private val withRawResponse: ItemTrackingService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     private val history: HistoryService by lazy { HistoryServiceImpl(clientOptions) }
 
     override fun withRawResponse(): ItemTrackingService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ItemTrackingService =
-        ItemTrackingServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ItemTrackingService = ItemTrackingServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun history(): HistoryService = history
 
     override fun create(params: ItemTrackingCreateParams, requestOptions: RequestOptions) {
-        // post /udl/itemtracking
-        withRawResponse().create(params, requestOptions)
+      // post /udl/itemtracking
+      withRawResponse().create(params, requestOptions)
     }
 
-    override fun list(
-        params: ItemTrackingListParams,
-        requestOptions: RequestOptions,
-    ): ItemTrackingListPage =
+    override fun list(params: ItemTrackingListParams, requestOptions: RequestOptions): ItemTrackingListPage =
         // get /udl/itemtracking
         withRawResponse().list(params, requestOptions).parse()
 
     override fun delete(params: ItemTrackingDeleteParams, requestOptions: RequestOptions) {
-        // delete /udl/itemtracking/{id}
-        withRawResponse().delete(params, requestOptions)
+      // delete /udl/itemtracking/{id}
+      withRawResponse().delete(params, requestOptions)
     }
 
     override fun count(params: ItemTrackingCountParams, requestOptions: RequestOptions): String =
         // get /udl/itemtracking/count
         withRawResponse().count(params, requestOptions).parse()
 
-    override fun get(
-        params: ItemTrackingGetParams,
-        requestOptions: RequestOptions,
-    ): ItemTrackingGetResponse =
+    override fun get(params: ItemTrackingGetParams, requestOptions: RequestOptions): ItemTrackingGetResponse =
         // get /udl/itemtracking/{id}
         withRawResponse().get(params, requestOptions).parse()
 
-    override fun queryhelp(
-        params: ItemTrackingQueryhelpParams,
-        requestOptions: RequestOptions,
-    ): ItemTrackingQueryhelpResponse =
+    override fun queryhelp(params: ItemTrackingQueryhelpParams, requestOptions: RequestOptions): ItemTrackingQueryhelpResponse =
         // get /udl/itemtracking/queryhelp
         withRawResponse().queryhelp(params, requestOptions).parse()
 
-    override fun tuple(
-        params: ItemTrackingTupleParams,
-        requestOptions: RequestOptions,
-    ): List<ItemTrackingTupleResponse> =
+    override fun tuple(params: ItemTrackingTupleParams, requestOptions: RequestOptions): List<ItemTrackingTupleResponse> =
         // get /udl/itemtracking/tuple
         withRawResponse().tuple(params, requestOptions).parse()
 
-    override fun unvalidatedPublish(
-        params: ItemTrackingUnvalidatedPublishParams,
-        requestOptions: RequestOptions,
-    ) {
-        // post /filedrop/udl-itemtracking
-        withRawResponse().unvalidatedPublish(params, requestOptions)
+    override fun unvalidatedPublish(params: ItemTrackingUnvalidatedPublishParams, requestOptions: RequestOptions) {
+      // post /filedrop/udl-itemtracking
+      withRawResponse().unvalidatedPublish(params, requestOptions)
     }
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        ItemTrackingService.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<HttpResponse> =
-            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+    ) : ItemTrackingService.WithRawResponse {
 
-        private val history: HistoryService.WithRawResponse by lazy {
-            HistoryServiceImpl.WithRawResponseImpl(clientOptions)
-        }
+        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        override fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): ItemTrackingService.WithRawResponse =
-            ItemTrackingServiceImpl.WithRawResponseImpl(
-                clientOptions.toBuilder().apply(modifier::accept).build()
-            )
+        private val history: HistoryService.WithRawResponse by lazy { HistoryServiceImpl.WithRawResponseImpl(clientOptions) }
+
+        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ItemTrackingService.WithRawResponse = ItemTrackingServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
 
-        override fun create(
-            params: ItemTrackingCreateParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "itemtracking")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { createHandler.handle(it) }
-            }
+        override fun create(params: ItemTrackingCreateParams, requestOptions: RequestOptions): HttpResponse {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "itemtracking")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  createHandler.handle(it)
+              }
+          }
         }
 
-        private val listHandler: Handler<List<ItemTrackingListResponse>> =
-            jsonHandler<List<ItemTrackingListResponse>>(clientOptions.jsonMapper)
+        private val listHandler: Handler<List<ItemTrackingListResponse>> = jsonHandler<List<ItemTrackingListResponse>>(clientOptions.jsonMapper)
 
-        override fun list(
-            params: ItemTrackingListParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<ItemTrackingListPage> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "itemtracking")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { listHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-                    .let {
-                        ItemTrackingListPage.builder()
-                            .service(ItemTrackingServiceImpl(clientOptions))
-                            .params(params)
-                            .items(it)
-                            .build()
-                    }
-            }
+        override fun list(params: ItemTrackingListParams, requestOptions: RequestOptions): HttpResponseFor<ItemTrackingListPage> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "itemtracking")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  listHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.forEach { it.validate() }
+                  }
+              }
+              .let {
+                  ItemTrackingListPage.builder()
+                      .service(ItemTrackingServiceImpl(clientOptions))
+                      .params(params)
+                      .items(it)
+                      .build()
+              }
+          }
         }
 
         private val deleteHandler: Handler<Void?> = emptyHandler()
 
-        override fun delete(
-            params: ItemTrackingDeleteParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            // We check here instead of in the params builder because this can be specified
-            // positionally or in the params class.
-            checkRequired("id", params.id().getOrNull())
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.DELETE)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "itemtracking", params._pathParam(0))
-                    .apply { params._body().ifPresent { body(json(clientOptions.jsonMapper, it)) } }
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { deleteHandler.handle(it) }
-            }
+        override fun delete(params: ItemTrackingDeleteParams, requestOptions: RequestOptions): HttpResponse {
+          // We check here instead of in the params builder because this can be specified positionally or in the params class.
+          checkRequired("id", params.id().getOrNull())
+          val request = HttpRequest.builder()
+            .method(HttpMethod.DELETE)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "itemtracking", params._pathParam(0))
+            .apply { params._body().ifPresent{ body(json(clientOptions.jsonMapper, it)) } }
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  deleteHandler.handle(it)
+              }
+          }
         }
 
         private val countHandler: Handler<String> = stringHandler()
 
-        override fun count(
-            params: ItemTrackingCountParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<String> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "itemtracking", "count")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { countHandler.handle(it) }
-            }
+        override fun count(params: ItemTrackingCountParams, requestOptions: RequestOptions): HttpResponseFor<String> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "itemtracking", "count")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  countHandler.handle(it)
+              }
+          }
         }
 
-        private val getHandler: Handler<ItemTrackingGetResponse> =
-            jsonHandler<ItemTrackingGetResponse>(clientOptions.jsonMapper)
+        private val getHandler: Handler<ItemTrackingGetResponse> = jsonHandler<ItemTrackingGetResponse>(clientOptions.jsonMapper)
 
-        override fun get(
-            params: ItemTrackingGetParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<ItemTrackingGetResponse> {
-            // We check here instead of in the params builder because this can be specified
-            // positionally or in the params class.
-            checkRequired("id", params.id().getOrNull())
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "itemtracking", params._pathParam(0))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { getHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
+        override fun get(params: ItemTrackingGetParams, requestOptions: RequestOptions): HttpResponseFor<ItemTrackingGetResponse> {
+          // We check here instead of in the params builder because this can be specified positionally or in the params class.
+          checkRequired("id", params.id().getOrNull())
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "itemtracking", params._pathParam(0))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  getHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          }
         }
 
-        private val queryhelpHandler: Handler<ItemTrackingQueryhelpResponse> =
-            jsonHandler<ItemTrackingQueryhelpResponse>(clientOptions.jsonMapper)
+        private val queryhelpHandler: Handler<ItemTrackingQueryhelpResponse> = jsonHandler<ItemTrackingQueryhelpResponse>(clientOptions.jsonMapper)
 
-        override fun queryhelp(
-            params: ItemTrackingQueryhelpParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<ItemTrackingQueryhelpResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "itemtracking", "queryhelp")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { queryhelpHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
+        override fun queryhelp(params: ItemTrackingQueryhelpParams, requestOptions: RequestOptions): HttpResponseFor<ItemTrackingQueryhelpResponse> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "itemtracking", "queryhelp")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  queryhelpHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          }
         }
 
-        private val tupleHandler: Handler<List<ItemTrackingTupleResponse>> =
-            jsonHandler<List<ItemTrackingTupleResponse>>(clientOptions.jsonMapper)
+        private val tupleHandler: Handler<List<ItemTrackingTupleResponse>> = jsonHandler<List<ItemTrackingTupleResponse>>(clientOptions.jsonMapper)
 
-        override fun tuple(
-            params: ItemTrackingTupleParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<ItemTrackingTupleResponse>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "itemtracking", "tuple")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { tupleHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-            }
+        override fun tuple(params: ItemTrackingTupleParams, requestOptions: RequestOptions): HttpResponseFor<List<ItemTrackingTupleResponse>> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "itemtracking", "tuple")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  tupleHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.forEach { it.validate() }
+                  }
+              }
+          }
         }
 
         private val unvalidatedPublishHandler: Handler<Void?> = emptyHandler()
 
-        override fun unvalidatedPublish(
-            params: ItemTrackingUnvalidatedPublishParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("filedrop", "udl-itemtracking")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { unvalidatedPublishHandler.handle(it) }
-            }
+        override fun unvalidatedPublish(params: ItemTrackingUnvalidatedPublishParams, requestOptions: RequestOptions): HttpResponse {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("filedrop", "udl-itemtracking")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  unvalidatedPublishHandler.handle(it)
+              }
+          }
         }
     }
 }

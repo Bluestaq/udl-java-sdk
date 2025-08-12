@@ -3,6 +3,7 @@
 package com.unifieddatalibrary.api.models.location
 
 import com.unifieddatalibrary.api.core.http.QueryParams
+import com.unifieddatalibrary.api.models.location.LocationTupleParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -10,32 +11,40 @@ internal class LocationTupleParamsTest {
 
     @Test
     fun create() {
-        LocationTupleParams.builder().columns("columns").firstResult(0L).maxResults(0L).build()
+      LocationTupleParams.builder()
+          .columns("columns")
+          .firstResult(0L)
+          .maxResults(0L)
+          .build()
     }
 
     @Test
     fun queryParams() {
-        val params =
-            LocationTupleParams.builder().columns("columns").firstResult(0L).maxResults(0L).build()
+      val params = LocationTupleParams.builder()
+          .columns("columns")
+          .firstResult(0L)
+          .maxResults(0L)
+          .build()
 
-        val queryParams = params._queryParams()
+      val queryParams = params._queryParams()
 
-        assertThat(queryParams)
-            .isEqualTo(
-                QueryParams.builder()
-                    .put("columns", "columns")
-                    .put("firstResult", "0")
-                    .put("maxResults", "0")
-                    .build()
-            )
+      assertThat(queryParams).isEqualTo(QueryParams.builder()
+          .put("columns", "columns")
+          .put("firstResult", "0")
+          .put("maxResults", "0")
+          .build())
     }
 
     @Test
     fun queryParamsWithoutOptionalFields() {
-        val params = LocationTupleParams.builder().columns("columns").build()
+      val params = LocationTupleParams.builder()
+          .columns("columns")
+          .build()
 
-        val queryParams = params._queryParams()
+      val queryParams = params._queryParams()
 
-        assertThat(queryParams).isEqualTo(QueryParams.builder().put("columns", "columns").build())
+      assertThat(queryParams).isEqualTo(QueryParams.builder()
+          .put("columns", "columns")
+          .build())
     }
 }

@@ -2,6 +2,7 @@
 
 package com.unifieddatalibrary.api.models.aviationriskmanagement
 
+import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementDeleteParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -9,15 +10,19 @@ internal class AviationRiskManagementDeleteParamsTest {
 
     @Test
     fun create() {
-        AviationRiskManagementDeleteParams.builder().id("id").build()
+      AviationRiskManagementDeleteParams.builder()
+          .id("id")
+          .build()
     }
 
     @Test
     fun pathParams() {
-        val params = AviationRiskManagementDeleteParams.builder().id("id").build()
+      val params = AviationRiskManagementDeleteParams.builder()
+          .id("id")
+          .build()
 
-        assertThat(params._pathParam(0)).isEqualTo("id")
-        // out-of-bound path param
-        assertThat(params._pathParam(1)).isEqualTo("")
+      assertThat(params._pathParam(0)).isEqualTo("id")
+      // out-of-bound path param
+      assertThat(params._pathParam(1)).isEqualTo("")
     }
 }

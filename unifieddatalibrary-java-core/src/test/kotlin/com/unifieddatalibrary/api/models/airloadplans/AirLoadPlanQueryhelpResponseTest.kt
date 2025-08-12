@@ -9,12 +9,12 @@ import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class AirLoadPlanQueryhelpResponseTest {
+internal class AirloadPlanQueryhelpResponseTest {
 
     @Test
     fun create() {
-        val airLoadPlanQueryhelpResponse =
-            AirLoadPlanQueryhelpResponse.builder()
+        val airloadPlanQueryhelpResponse =
+            AirloadPlanQueryhelpResponse.builder()
                 .aodrSupported(true)
                 .classificationMarking("classificationMarking")
                 .description("description")
@@ -45,13 +45,13 @@ internal class AirLoadPlanQueryhelpResponseTest {
                 .uri("uri")
                 .build()
 
-        assertThat(airLoadPlanQueryhelpResponse.aodrSupported()).contains(true)
-        assertThat(airLoadPlanQueryhelpResponse.classificationMarking())
+        assertThat(airloadPlanQueryhelpResponse.aodrSupported()).contains(true)
+        assertThat(airloadPlanQueryhelpResponse.classificationMarking())
             .contains("classificationMarking")
-        assertThat(airLoadPlanQueryhelpResponse.description()).contains("description")
-        assertThat(airLoadPlanQueryhelpResponse.historySupported()).contains(true)
-        assertThat(airLoadPlanQueryhelpResponse.name()).contains("name")
-        assertThat(airLoadPlanQueryhelpResponse.parameters().getOrNull())
+        assertThat(airloadPlanQueryhelpResponse.description()).contains("description")
+        assertThat(airloadPlanQueryhelpResponse.historySupported()).contains(true)
+        assertThat(airloadPlanQueryhelpResponse.name()).contains("name")
+        assertThat(airloadPlanQueryhelpResponse.parameters().getOrNull())
             .containsExactly(
                 ParamDescriptor.builder()
                     .classificationMarking("classificationMarking")
@@ -70,19 +70,19 @@ internal class AirLoadPlanQueryhelpResponseTest {
                     .utcDate(true)
                     .build()
             )
-        assertThat(airLoadPlanQueryhelpResponse.requiredRoles().getOrNull())
+        assertThat(airloadPlanQueryhelpResponse.requiredRoles().getOrNull())
             .containsExactly("string")
-        assertThat(airLoadPlanQueryhelpResponse.restSupported()).contains(true)
-        assertThat(airLoadPlanQueryhelpResponse.sortSupported()).contains(true)
-        assertThat(airLoadPlanQueryhelpResponse.typeName()).contains("typeName")
-        assertThat(airLoadPlanQueryhelpResponse.uri()).contains("uri")
+        assertThat(airloadPlanQueryhelpResponse.restSupported()).contains(true)
+        assertThat(airloadPlanQueryhelpResponse.sortSupported()).contains(true)
+        assertThat(airloadPlanQueryhelpResponse.typeName()).contains("typeName")
+        assertThat(airloadPlanQueryhelpResponse.uri()).contains("uri")
     }
 
     @Test
     fun roundtrip() {
         val jsonMapper = jsonMapper()
-        val airLoadPlanQueryhelpResponse =
-            AirLoadPlanQueryhelpResponse.builder()
+        val airloadPlanQueryhelpResponse =
+            AirloadPlanQueryhelpResponse.builder()
                 .aodrSupported(true)
                 .classificationMarking("classificationMarking")
                 .description("description")
@@ -113,12 +113,12 @@ internal class AirLoadPlanQueryhelpResponseTest {
                 .uri("uri")
                 .build()
 
-        val roundtrippedAirLoadPlanQueryhelpResponse =
+        val roundtrippedAirloadPlanQueryhelpResponse =
             jsonMapper.readValue(
-                jsonMapper.writeValueAsString(airLoadPlanQueryhelpResponse),
-                jacksonTypeRef<AirLoadPlanQueryhelpResponse>(),
+                jsonMapper.writeValueAsString(airloadPlanQueryhelpResponse),
+                jacksonTypeRef<AirloadPlanQueryhelpResponse>(),
             )
 
-        assertThat(roundtrippedAirLoadPlanQueryhelpResponse).isEqualTo(airLoadPlanQueryhelpResponse)
+        assertThat(roundtrippedAirloadPlanQueryhelpResponse).isEqualTo(airloadPlanQueryhelpResponse)
     }
 }

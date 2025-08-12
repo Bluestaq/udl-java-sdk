@@ -14,22 +14,18 @@ import com.unifieddatalibrary.api.core.http.Headers
 import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import com.unifieddatalibrary.api.models.launchevent.LaunchEventCreateBulkParams
 import java.time.OffsetDateTime
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/**
- * Service operation intended for initial integration only, to take a list of LaunchEvent as a POST
- * body and ingest into the database. This operation is not intended to be used for automated feeds
- * into UDL. Data providers should contact the UDL team for specific role assignments and for
- * instructions on setting up a permanent feed through an alternate mechanism.
- */
-class LaunchEventCreateBulkParams
-private constructor(
+/** Service operation intended for initial integration only, to take a list of LaunchEvent as a POST body and ingest into the database. This operation is not intended to be used for automated feeds into UDL. Data providers should contact the UDL team for specific role assignments and for instructions on setting up a permanent feed through an alternate mechanism. */
+class LaunchEventCreateBulkParams private constructor(
     private val body: List<Body>,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
+
 ) : Params {
 
     fun body(): List<Body> = body
@@ -48,11 +44,13 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [LaunchEventCreateBulkParams].
          *
          * The following fields are required:
+         *
          * ```java
          * .body()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [LaunchEventCreateBulkParams]. */
@@ -63,120 +61,151 @@ private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(launchEventCreateBulkParams: LaunchEventCreateBulkParams) = apply {
-            body = launchEventCreateBulkParams.body.toMutableList()
-            additionalHeaders = launchEventCreateBulkParams.additionalHeaders.toBuilder()
-            additionalQueryParams = launchEventCreateBulkParams.additionalQueryParams.toBuilder()
-        }
+        internal fun from(launchEventCreateBulkParams: LaunchEventCreateBulkParams) =
+            apply {
+                body = launchEventCreateBulkParams.body.toMutableList()
+                additionalHeaders = launchEventCreateBulkParams.additionalHeaders.toBuilder()
+                additionalQueryParams = launchEventCreateBulkParams.additionalQueryParams.toBuilder()
+            }
 
-        fun body(body: List<Body>) = apply { this.body = body.toMutableList() }
+        fun body(body: List<Body>) =
+            apply {
+                this.body = body.toMutableList()
+            }
 
         /**
          * Adds a single [Body] to [Builder.body].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addBody(body: Body) = apply {
-            this.body = (this.body ?: mutableListOf()).apply { add(body) }
-        }
+        fun addBody(body: Body) =
+            apply {
+                this.body = (this.body ?: mutableListOf()).apply { add(body) }
+            }
 
-        fun additionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun putAdditionalHeader(name: String, value: String) = apply {
-            additionalHeaders.put(name, value)
-        }
+        fun putAdditionalHeader(name: String, value: String) =
+            apply {
+                additionalHeaders.put(name, value)
+            }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.put(name, values)
-        }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.put(name, values)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun replaceAdditionalHeaders(name: String, value: String) = apply {
-            additionalHeaders.replace(name, value)
-        }
+        fun replaceAdditionalHeaders(name: String, value: String) =
+            apply {
+                additionalHeaders.replace(name, value)
+            }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.replace(name, values)
-        }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.replace(name, values)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
+        fun removeAdditionalHeaders(name: String) =
+            apply {
+                additionalHeaders.remove(name)
+            }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
-            additionalHeaders.removeAll(names)
-        }
+        fun removeAllAdditionalHeaders(names: Set<String>) =
+            apply {
+                additionalHeaders.removeAll(names)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun putAdditionalQueryParam(key: String, value: String) = apply {
-            additionalQueryParams.put(key, value)
-        }
+        fun putAdditionalQueryParam(key: String, value: String) =
+            apply {
+                additionalQueryParams.put(key, value)
+            }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.put(key, values)
-        }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.put(key, values)
+            }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.putAll(additionalQueryParams)
-        }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.putAll(additionalQueryParams)
+            }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
-            additionalQueryParams.replace(key, value)
-        }
+        fun replaceAdditionalQueryParams(key: String, value: String) =
+            apply {
+                additionalQueryParams.replace(key, value)
+            }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.replace(key, values)
-        }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.replace(key, values)
+            }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.replaceAll(additionalQueryParams)
-        }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.replaceAll(additionalQueryParams)
+            }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
+        fun removeAdditionalQueryParams(key: String) =
+            apply {
+                additionalQueryParams.remove(key)
+            }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
-            additionalQueryParams.removeAll(keys)
-        }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) =
+            apply {
+                additionalQueryParams.removeAll(keys)
+            }
 
         /**
          * Returns an immutable instance of [LaunchEventCreateBulkParams].
@@ -184,6 +213,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .body()
          * ```
@@ -192,9 +222,11 @@ private constructor(
          */
         fun build(): LaunchEventCreateBulkParams =
             LaunchEventCreateBulkParams(
-                checkRequired("body", body).toImmutable(),
-                additionalHeaders.build(),
-                additionalQueryParams.build(),
+              checkRequired(
+                "body", body
+              ).toImmutable(),
+              additionalHeaders.build(),
+              additionalQueryParams.build(),
             )
     }
 
@@ -205,234 +237,182 @@ private constructor(
     override fun _queryParams(): QueryParams = additionalQueryParams
 
     /** Information on known launch events. */
-    class Body
-    @JsonCreator
-    private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
-        private val classificationMarking: JsonField<String>,
+    class Body @JsonCreator private constructor(
+        @JsonProperty("classificationMarking") @ExcludeMissing private val classificationMarking: JsonField<String>,
         @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("msgCreateDate")
-        @ExcludeMissing
-        private val msgCreateDate: JsonField<OffsetDateTime>,
+        @JsonProperty("msgCreateDate") @ExcludeMissing private val msgCreateDate: JsonField<OffsetDateTime>,
         @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
         @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
         @JsonProperty("beNumber") @ExcludeMissing private val beNumber: JsonField<String>,
         @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
         @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("declassificationDate")
-        @ExcludeMissing
-        private val declassificationDate: JsonField<OffsetDateTime>,
-        @JsonProperty("declassificationString")
-        @ExcludeMissing
-        private val declassificationString: JsonField<String>,
+        @JsonProperty("declassificationDate") @ExcludeMissing private val declassificationDate: JsonField<OffsetDateTime>,
+        @JsonProperty("declassificationString") @ExcludeMissing private val declassificationString: JsonField<String>,
         @JsonProperty("derivedFrom") @ExcludeMissing private val derivedFrom: JsonField<String>,
         @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("launchDate")
-        @ExcludeMissing
-        private val launchDate: JsonField<OffsetDateTime>,
-        @JsonProperty("launchFacilityName")
-        @ExcludeMissing
-        private val launchFacilityName: JsonField<String>,
-        @JsonProperty("launchFailureCode")
-        @ExcludeMissing
-        private val launchFailureCode: JsonField<String>,
+        @JsonProperty("launchDate") @ExcludeMissing private val launchDate: JsonField<OffsetDateTime>,
+        @JsonProperty("launchFacilityName") @ExcludeMissing private val launchFacilityName: JsonField<String>,
+        @JsonProperty("launchFailureCode") @ExcludeMissing private val launchFailureCode: JsonField<String>,
         @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
         @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
         @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
         @JsonProperty("oSuffix") @ExcludeMissing private val oSuffix: JsonField<String>,
         @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
+
     ) {
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
-        fun classificationMarking(): String =
-            classificationMarking.getRequired("classificationMarking")
+        fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-         * both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-         * analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-         * requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
         /**
          * Timestamp of the originating message in ISO8601 UTC format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun msgCreateDate(): OffsetDateTime = msgCreateDate.getRequired("msgCreateDate")
 
         /**
          * Source of the data.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun source(): String = source.getRequired("source")
 
         /**
          * Unique identifier of the record, auto-generated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun id(): Optional<String> = id.getOptional("id")
 
         /**
          * The Basic Encyclopedia Number, if applicable.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun beNumber(): Optional<String> = beNumber.getOptional("beNumber")
 
         /**
          * Time the row was created in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
         /**
          * Application user who created the row in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
         /**
          * The declassification date of this data, in ISO 8601 UTC format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
-        fun declassificationDate(): Optional<OffsetDateTime> =
-            declassificationDate.getOptional("declassificationDate")
+        fun declassificationDate(): Optional<OffsetDateTime> = declassificationDate.getOptional("declassificationDate")
 
         /**
          * Declassification string of this data.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
-        fun declassificationString(): Optional<String> =
-            declassificationString.getOptional("declassificationString")
+        fun declassificationString(): Optional<String> = declassificationString.getOptional("declassificationString")
 
         /**
          * The sources or SCG references from which the classification of this data is derived.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun derivedFrom(): Optional<String> = derivedFrom.getOptional("derivedFrom")
 
         /**
          * Unique identifier of the target on-orbit object, if correlated.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun idOnOrbit(): Optional<String> = idOnOrbit.getOptional("idOnOrbit")
 
         /**
          * The launch date, in ISO8601 UTC format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun launchDate(): Optional<OffsetDateTime> = launchDate.getOptional("launchDate")
 
         /**
          * The Launch facility name.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
-        fun launchFacilityName(): Optional<String> =
-            launchFacilityName.getOptional("launchFacilityName")
+        fun launchFacilityName(): Optional<String> = launchFacilityName.getOptional("launchFacilityName")
 
         /**
          * The DISOB launch Failure Code, if applicable.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
-        fun launchFailureCode(): Optional<String> =
-            launchFailureCode.getOptional("launchFailureCode")
+        fun launchFailureCode(): Optional<String> = launchFailureCode.getOptional("launchFailureCode")
 
         /**
-         * Originating system or organization which produced the data, if different from the source.
-         * The origin may be different than the source if the source was a mediating system which
-         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
-         * be the origin.
+         * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun origin(): Optional<String> = origin.getOptional("origin")
 
         /**
-         * The originating source network on which this record was created, auto-populated by the
-         * system.
+         * The originating source network on which this record was created, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
         /**
          * Optional target-id, if missing in UDL.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun origObjectId(): Optional<String> = origObjectId.getOptional("origObjectId")
 
         /**
          * The OSuffix, if applicable.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun oSuffix(): Optional<String> = oSuffix.getOptional("oSuffix")
 
         /**
          * Satellite/catalog number of the target on-orbit object.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun satNo(): Optional<Int> = satNo.getOptional("satNo")
 
         /**
          * Returns the raw JSON value of [classificationMarking].
          *
-         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an
-         * unexpected type.
+         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("classificationMarking")
         @ExcludeMissing
@@ -443,13 +423,14 @@ private constructor(
          *
          * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+        @JsonProperty("dataMode")
+        @ExcludeMissing
+        fun _dataMode(): JsonField<DataMode> = dataMode
 
         /**
          * Returns the raw JSON value of [msgCreateDate].
          *
-         * Unlike [msgCreateDate], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [msgCreateDate], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("msgCreateDate")
         @ExcludeMissing
@@ -460,21 +441,27 @@ private constructor(
          *
          * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+        @JsonProperty("source")
+        @ExcludeMissing
+        fun _source(): JsonField<String> = source
 
         /**
          * Returns the raw JSON value of [id].
          *
          * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+        @JsonProperty("id")
+        @ExcludeMissing
+        fun _id(): JsonField<String> = id
 
         /**
          * Returns the raw JSON value of [beNumber].
          *
          * Unlike [beNumber], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("beNumber") @ExcludeMissing fun _beNumber(): JsonField<String> = beNumber
+        @JsonProperty("beNumber")
+        @ExcludeMissing
+        fun _beNumber(): JsonField<String> = beNumber
 
         /**
          * Returns the raw JSON value of [createdAt].
@@ -490,13 +477,14 @@ private constructor(
          *
          * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+        @JsonProperty("createdBy")
+        @ExcludeMissing
+        fun _createdBy(): JsonField<String> = createdBy
 
         /**
          * Returns the raw JSON value of [declassificationDate].
          *
-         * Unlike [declassificationDate], this method doesn't throw if the JSON field has an
-         * unexpected type.
+         * Unlike [declassificationDate], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("declassificationDate")
         @ExcludeMissing
@@ -505,8 +493,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [declassificationString].
          *
-         * Unlike [declassificationString], this method doesn't throw if the JSON field has an
-         * unexpected type.
+         * Unlike [declassificationString], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("declassificationString")
         @ExcludeMissing
@@ -526,7 +513,9 @@ private constructor(
          *
          * Unlike [idOnOrbit], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("idOnOrbit") @ExcludeMissing fun _idOnOrbit(): JsonField<String> = idOnOrbit
+        @JsonProperty("idOnOrbit")
+        @ExcludeMissing
+        fun _idOnOrbit(): JsonField<String> = idOnOrbit
 
         /**
          * Returns the raw JSON value of [launchDate].
@@ -540,8 +529,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [launchFacilityName].
          *
-         * Unlike [launchFacilityName], this method doesn't throw if the JSON field has an
-         * unexpected type.
+         * Unlike [launchFacilityName], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("launchFacilityName")
         @ExcludeMissing
@@ -550,8 +538,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [launchFailureCode].
          *
-         * Unlike [launchFailureCode], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [launchFailureCode], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("launchFailureCode")
         @ExcludeMissing
@@ -562,7 +549,9 @@ private constructor(
          *
          * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+        @JsonProperty("origin")
+        @ExcludeMissing
+        fun _origin(): JsonField<String> = origin
 
         /**
          * Returns the raw JSON value of [origNetwork].
@@ -576,8 +565,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [origObjectId].
          *
-         * Unlike [origObjectId], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [origObjectId], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("origObjectId")
         @ExcludeMissing
@@ -588,14 +576,18 @@ private constructor(
          *
          * Unlike [oSuffix], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("oSuffix") @ExcludeMissing fun _oSuffix(): JsonField<String> = oSuffix
+        @JsonProperty("oSuffix")
+        @ExcludeMissing
+        fun _oSuffix(): JsonField<String> = oSuffix
 
         /**
          * Returns the raw JSON value of [satNo].
          *
          * Unlike [satNo], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("satNo") @ExcludeMissing fun _satNo(): JsonField<Int> = satNo
+        @JsonProperty("satNo")
+        @ExcludeMissing
+        fun _satNo(): JsonField<Int> = satNo
 
         fun toBuilder() = Builder().from(this)
 
@@ -605,6 +597,7 @@ private constructor(
              * Returns a mutable builder for constructing an instance of [Body].
              *
              * The following fields are required:
+             *
              * ```java
              * .classificationMarking()
              * .dataMode()
@@ -612,7 +605,8 @@ private constructor(
              * .source()
              * ```
              */
-            @JvmStatic fun builder() = Builder()
+            @JvmStatic
+            fun builder() = Builder()
         }
 
         /** A builder for [Body]. */
@@ -640,84 +634,81 @@ private constructor(
             private var satNo: JsonField<Int> = JsonMissing.of()
 
             @JvmSynthetic
-            internal fun from(body: Body) = apply {
-                classificationMarking = body.classificationMarking
-                dataMode = body.dataMode
-                msgCreateDate = body.msgCreateDate
-                source = body.source
-                id = body.id
-                beNumber = body.beNumber
-                createdAt = body.createdAt
-                createdBy = body.createdBy
-                declassificationDate = body.declassificationDate
-                declassificationString = body.declassificationString
-                derivedFrom = body.derivedFrom
-                idOnOrbit = body.idOnOrbit
-                launchDate = body.launchDate
-                launchFacilityName = body.launchFacilityName
-                launchFailureCode = body.launchFailureCode
-                origin = body.origin
-                origNetwork = body.origNetwork
-                origObjectId = body.origObjectId
-                oSuffix = body.oSuffix
-                satNo = body.satNo
-            }
+            internal fun from(body: Body) =
+                apply {
+                    classificationMarking = body.classificationMarking
+                    dataMode = body.dataMode
+                    msgCreateDate = body.msgCreateDate
+                    source = body.source
+                    id = body.id
+                    beNumber = body.beNumber
+                    createdAt = body.createdAt
+                    createdBy = body.createdBy
+                    declassificationDate = body.declassificationDate
+                    declassificationString = body.declassificationString
+                    derivedFrom = body.derivedFrom
+                    idOnOrbit = body.idOnOrbit
+                    launchDate = body.launchDate
+                    launchFacilityName = body.launchFacilityName
+                    launchFailureCode = body.launchFailureCode
+                    origin = body.origin
+                    origNetwork = body.origNetwork
+                    origObjectId = body.origObjectId
+                    oSuffix = body.oSuffix
+                    satNo = body.satNo
+                }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-            fun classificationMarking(classificationMarking: String) =
-                classificationMarking(JsonField.of(classificationMarking))
+            fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
 
             /**
              * Sets [Builder.classificationMarking] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.classificationMarking] with a well-typed [String]
-             * value instead. This method is primarily for setting the field to an undocumented or
-             * not yet supported value.
+             * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun classificationMarking(classificationMarking: JsonField<String>) = apply {
-                this.classificationMarking = classificationMarking
-            }
+            fun classificationMarking(classificationMarking: JsonField<String>) =
+                apply {
+                    this.classificationMarking = classificationMarking
+                }
 
             /**
              * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
              *
-             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may
-             * include both real and simulated data.
+             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
              *
-             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events,
-             * and analysis.
+             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
              *
              * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
              *
-             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-             * requirements, and for validating technical, functional, and performance
-             * characteristics.
+             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
              */
             fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
             /**
              * Sets [Builder.dataMode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+            fun dataMode(dataMode: JsonField<DataMode>) =
+                apply {
+                    this.dataMode = dataMode
+                }
 
             /** Timestamp of the originating message in ISO8601 UTC format. */
-            fun msgCreateDate(msgCreateDate: OffsetDateTime) =
-                msgCreateDate(JsonField.of(msgCreateDate))
+            fun msgCreateDate(msgCreateDate: OffsetDateTime) = msgCreateDate(JsonField.of(msgCreateDate))
 
             /**
              * Sets [Builder.msgCreateDate] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.msgCreateDate] with a well-typed [OffsetDateTime]
-             * value instead. This method is primarily for setting the field to an undocumented or
-             * not yet supported value.
+             * You should usually call [Builder.msgCreateDate] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun msgCreateDate(msgCreateDate: JsonField<OffsetDateTime>) = apply {
-                this.msgCreateDate = msgCreateDate
-            }
+            fun msgCreateDate(msgCreateDate: JsonField<OffsetDateTime>) =
+                apply {
+                    this.msgCreateDate = msgCreateDate
+                }
 
             /** Source of the data. */
             fun source(source: String) = source(JsonField.of(source))
@@ -725,11 +716,13 @@ private constructor(
             /**
              * Sets [Builder.source] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.source] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun source(source: JsonField<String>) = apply { this.source = source }
+            fun source(source: JsonField<String>) =
+                apply {
+                    this.source = source
+                }
 
             /** Unique identifier of the record, auto-generated by the system. */
             fun id(id: String) = id(JsonField.of(id))
@@ -737,11 +730,13 @@ private constructor(
             /**
              * Sets [Builder.id] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.id] with a well-typed [String] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun id(id: JsonField<String>) = apply { this.id = id }
+            fun id(id: JsonField<String>) =
+                apply {
+                    this.id = id
+                }
 
             /** The Basic Encyclopedia Number, if applicable. */
             fun beNumber(beNumber: String) = beNumber(JsonField.of(beNumber))
@@ -749,11 +744,13 @@ private constructor(
             /**
              * Sets [Builder.beNumber] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.beNumber] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.beNumber] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun beNumber(beNumber: JsonField<String>) = apply { this.beNumber = beNumber }
+            fun beNumber(beNumber: JsonField<String>) =
+                apply {
+                    this.beNumber = beNumber
+                }
 
             /** Time the row was created in the database, auto-populated by the system. */
             fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -761,73 +758,69 @@ private constructor(
             /**
              * Sets [Builder.createdAt] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply {
-                this.createdAt = createdAt
-            }
+            fun createdAt(createdAt: JsonField<OffsetDateTime>) =
+                apply {
+                    this.createdAt = createdAt
+                }
 
-            /**
-             * Application user who created the row in the database, auto-populated by the system.
-             */
+            /** Application user who created the row in the database, auto-populated by the system. */
             fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
 
             /**
              * Sets [Builder.createdBy] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+            fun createdBy(createdBy: JsonField<String>) =
+                apply {
+                    this.createdBy = createdBy
+                }
 
             /** The declassification date of this data, in ISO 8601 UTC format. */
-            fun declassificationDate(declassificationDate: OffsetDateTime) =
-                declassificationDate(JsonField.of(declassificationDate))
+            fun declassificationDate(declassificationDate: OffsetDateTime) = declassificationDate(JsonField.of(declassificationDate))
 
             /**
              * Sets [Builder.declassificationDate] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.declassificationDate] with a well-typed
-             * [OffsetDateTime] value instead. This method is primarily for setting the field to an
-             * undocumented or not yet supported value.
+             * You should usually call [Builder.declassificationDate] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun declassificationDate(declassificationDate: JsonField<OffsetDateTime>) = apply {
-                this.declassificationDate = declassificationDate
-            }
+            fun declassificationDate(declassificationDate: JsonField<OffsetDateTime>) =
+                apply {
+                    this.declassificationDate = declassificationDate
+                }
 
             /** Declassification string of this data. */
-            fun declassificationString(declassificationString: String) =
-                declassificationString(JsonField.of(declassificationString))
+            fun declassificationString(declassificationString: String) = declassificationString(JsonField.of(declassificationString))
 
             /**
              * Sets [Builder.declassificationString] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.declassificationString] with a well-typed [String]
-             * value instead. This method is primarily for setting the field to an undocumented or
-             * not yet supported value.
+             * You should usually call [Builder.declassificationString] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun declassificationString(declassificationString: JsonField<String>) = apply {
-                this.declassificationString = declassificationString
-            }
+            fun declassificationString(declassificationString: JsonField<String>) =
+                apply {
+                    this.declassificationString = declassificationString
+                }
 
-            /**
-             * The sources or SCG references from which the classification of this data is derived.
-             */
+            /** The sources or SCG references from which the classification of this data is derived. */
             fun derivedFrom(derivedFrom: String) = derivedFrom(JsonField.of(derivedFrom))
 
             /**
              * Sets [Builder.derivedFrom] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.derivedFrom] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.derivedFrom] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun derivedFrom(derivedFrom: JsonField<String>) = apply {
-                this.derivedFrom = derivedFrom
-            }
+            fun derivedFrom(derivedFrom: JsonField<String>) =
+                apply {
+                    this.derivedFrom = derivedFrom
+                }
 
             /** Unique identifier of the target on-orbit object, if correlated. */
             fun idOnOrbit(idOnOrbit: String) = idOnOrbit(JsonField.of(idOnOrbit))
@@ -835,11 +828,13 @@ private constructor(
             /**
              * Sets [Builder.idOnOrbit] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.idOnOrbit] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.idOnOrbit] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun idOnOrbit(idOnOrbit: JsonField<String>) = apply { this.idOnOrbit = idOnOrbit }
+            fun idOnOrbit(idOnOrbit: JsonField<String>) =
+                apply {
+                    this.idOnOrbit = idOnOrbit
+                }
 
             /** The launch date, in ISO8601 UTC format. */
             fun launchDate(launchDate: OffsetDateTime) = launchDate(JsonField.of(launchDate))
@@ -847,77 +842,69 @@ private constructor(
             /**
              * Sets [Builder.launchDate] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.launchDate] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.launchDate] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun launchDate(launchDate: JsonField<OffsetDateTime>) = apply {
-                this.launchDate = launchDate
-            }
+            fun launchDate(launchDate: JsonField<OffsetDateTime>) =
+                apply {
+                    this.launchDate = launchDate
+                }
 
             /** The Launch facility name. */
-            fun launchFacilityName(launchFacilityName: String) =
-                launchFacilityName(JsonField.of(launchFacilityName))
+            fun launchFacilityName(launchFacilityName: String) = launchFacilityName(JsonField.of(launchFacilityName))
 
             /**
              * Sets [Builder.launchFacilityName] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.launchFacilityName] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.launchFacilityName] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun launchFacilityName(launchFacilityName: JsonField<String>) = apply {
-                this.launchFacilityName = launchFacilityName
-            }
+            fun launchFacilityName(launchFacilityName: JsonField<String>) =
+                apply {
+                    this.launchFacilityName = launchFacilityName
+                }
 
             /** The DISOB launch Failure Code, if applicable. */
-            fun launchFailureCode(launchFailureCode: String) =
-                launchFailureCode(JsonField.of(launchFailureCode))
+            fun launchFailureCode(launchFailureCode: String) = launchFailureCode(JsonField.of(launchFailureCode))
 
             /**
              * Sets [Builder.launchFailureCode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.launchFailureCode] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.launchFailureCode] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun launchFailureCode(launchFailureCode: JsonField<String>) = apply {
-                this.launchFailureCode = launchFailureCode
-            }
+            fun launchFailureCode(launchFailureCode: JsonField<String>) =
+                apply {
+                    this.launchFailureCode = launchFailureCode
+                }
 
-            /**
-             * Originating system or organization which produced the data, if different from the
-             * source. The origin may be different than the source if the source was a mediating
-             * system which forwarded the data on behalf of the origin system. If null, the source
-             * may be assumed to be the origin.
-             */
+            /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
             fun origin(origin: String) = origin(JsonField.of(origin))
 
             /**
              * Sets [Builder.origin] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origin] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+            fun origin(origin: JsonField<String>) =
+                apply {
+                    this.origin = origin
+                }
 
-            /**
-             * The originating source network on which this record was created, auto-populated by
-             * the system.
-             */
+            /** The originating source network on which this record was created, auto-populated by the system. */
             fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
             /**
              * Sets [Builder.origNetwork] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origNetwork] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origNetwork(origNetwork: JsonField<String>) = apply {
-                this.origNetwork = origNetwork
-            }
+            fun origNetwork(origNetwork: JsonField<String>) =
+                apply {
+                    this.origNetwork = origNetwork
+                }
 
             /** Optional target-id, if missing in UDL. */
             fun origObjectId(origObjectId: String) = origObjectId(JsonField.of(origObjectId))
@@ -925,13 +912,13 @@ private constructor(
             /**
              * Sets [Builder.origObjectId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origObjectId] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origObjectId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origObjectId(origObjectId: JsonField<String>) = apply {
-                this.origObjectId = origObjectId
-            }
+            fun origObjectId(origObjectId: JsonField<String>) =
+                apply {
+                    this.origObjectId = origObjectId
+                }
 
             /** The OSuffix, if applicable. */
             fun oSuffix(oSuffix: String) = oSuffix(JsonField.of(oSuffix))
@@ -939,11 +926,13 @@ private constructor(
             /**
              * Sets [Builder.oSuffix] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.oSuffix] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.oSuffix] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun oSuffix(oSuffix: JsonField<String>) = apply { this.oSuffix = oSuffix }
+            fun oSuffix(oSuffix: JsonField<String>) =
+                apply {
+                    this.oSuffix = oSuffix
+                }
 
             /** Satellite/catalog number of the target on-orbit object. */
             fun satNo(satNo: Int) = satNo(JsonField.of(satNo))
@@ -951,11 +940,13 @@ private constructor(
             /**
              * Sets [Builder.satNo] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.satNo] with a well-typed [Int] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.satNo] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun satNo(satNo: JsonField<Int>) = apply { this.satNo = satNo }
+            fun satNo(satNo: JsonField<Int>) =
+                apply {
+                    this.satNo = satNo
+                }
 
             /**
              * Returns an immutable instance of [Body].
@@ -963,6 +954,7 @@ private constructor(
              * Further updates to this [Builder] will not mutate the returned instance.
              *
              * The following fields are required:
+             *
              * ```java
              * .classificationMarking()
              * .dataMode()
@@ -974,58 +966,67 @@ private constructor(
              */
             fun build(): Body =
                 Body(
-                    checkRequired("classificationMarking", classificationMarking),
-                    checkRequired("dataMode", dataMode),
-                    checkRequired("msgCreateDate", msgCreateDate),
-                    checkRequired("source", source),
-                    id,
-                    beNumber,
-                    createdAt,
-                    createdBy,
-                    declassificationDate,
-                    declassificationString,
-                    derivedFrom,
-                    idOnOrbit,
-                    launchDate,
-                    launchFacilityName,
-                    launchFailureCode,
-                    origin,
-                    origNetwork,
-                    origObjectId,
-                    oSuffix,
-                    satNo,
+                  checkRequired(
+                    "classificationMarking", classificationMarking
+                  ),
+                  checkRequired(
+                    "dataMode", dataMode
+                  ),
+                  checkRequired(
+                    "msgCreateDate", msgCreateDate
+                  ),
+                  checkRequired(
+                    "source", source
+                  ),
+                  id,
+                  beNumber,
+                  createdAt,
+                  createdBy,
+                  declassificationDate,
+                  declassificationString,
+                  derivedFrom,
+                  idOnOrbit,
+                  launchDate,
+                  launchFacilityName,
+                  launchFailureCode,
+                  origin,
+                  origNetwork,
+                  origObjectId,
+                  oSuffix,
+                  satNo,
                 )
         }
 
         private var validated: Boolean = false
 
-        fun validate(): Body = apply {
-            if (validated) {
-                return@apply
-            }
+        fun validate(): Body =
+            apply {
+                if (validated) {
+                  return@apply
+                }
 
-            classificationMarking()
-            dataMode().validate()
-            msgCreateDate()
-            source()
-            id()
-            beNumber()
-            createdAt()
-            createdBy()
-            declassificationDate()
-            declassificationString()
-            derivedFrom()
-            idOnOrbit()
-            launchDate()
-            launchFacilityName()
-            launchFailureCode()
-            origin()
-            origNetwork()
-            origObjectId()
-            oSuffix()
-            satNo()
-            validated = true
-        }
+                classificationMarking()
+                dataMode().validate()
+                msgCreateDate()
+                source()
+                id()
+                beNumber()
+                createdAt()
+                createdBy()
+                declassificationDate()
+                declassificationString()
+                derivedFrom()
+                idOnOrbit()
+                launchDate()
+                launchFacilityName()
+                launchFailureCode()
+                origin()
+                origNetwork()
+                origObjectId()
+                oSuffix()
+                satNo()
+                validated = true
+            }
 
         fun isValid(): Boolean =
             try {
@@ -1036,60 +1037,38 @@ private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
+         * Returns a score indicating how many valid values are contained in this object recursively.
          *
          * Used for best match union deserialization.
          */
         @JvmSynthetic
-        internal fun validity(): Int =
-            (if (classificationMarking.asKnown().isPresent) 1 else 0) +
-                (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
-                (if (msgCreateDate.asKnown().isPresent) 1 else 0) +
-                (if (source.asKnown().isPresent) 1 else 0) +
-                (if (id.asKnown().isPresent) 1 else 0) +
-                (if (beNumber.asKnown().isPresent) 1 else 0) +
-                (if (createdAt.asKnown().isPresent) 1 else 0) +
-                (if (createdBy.asKnown().isPresent) 1 else 0) +
-                (if (declassificationDate.asKnown().isPresent) 1 else 0) +
-                (if (declassificationString.asKnown().isPresent) 1 else 0) +
-                (if (derivedFrom.asKnown().isPresent) 1 else 0) +
-                (if (idOnOrbit.asKnown().isPresent) 1 else 0) +
-                (if (launchDate.asKnown().isPresent) 1 else 0) +
-                (if (launchFacilityName.asKnown().isPresent) 1 else 0) +
-                (if (launchFailureCode.asKnown().isPresent) 1 else 0) +
-                (if (origin.asKnown().isPresent) 1 else 0) +
-                (if (origNetwork.asKnown().isPresent) 1 else 0) +
-                (if (origObjectId.asKnown().isPresent) 1 else 0) +
-                (if (oSuffix.asKnown().isPresent) 1 else 0) +
-                (if (satNo.asKnown().isPresent) 1 else 0)
+        internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (msgCreateDate.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (if (beNumber.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (declassificationDate.asKnown().isPresent) 1 else 0) + (if (declassificationString.asKnown().isPresent) 1 else 0) + (if (derivedFrom.asKnown().isPresent) 1 else 0) + (if (idOnOrbit.asKnown().isPresent) 1 else 0) + (if (launchDate.asKnown().isPresent) 1 else 0) + (if (launchFacilityName.asKnown().isPresent) 1 else 0) + (if (launchFailureCode.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (origObjectId.asKnown().isPresent) 1 else 0) + (if (oSuffix.asKnown().isPresent) 1 else 0) + (if (satNo.asKnown().isPresent) 1 else 0)
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-         * both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-         * analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-         * requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
          */
-        class DataMode @JsonCreator private constructor(private val value: JsonField<String>) :
-            Enum {
+        class DataMode @JsonCreator private constructor(
+            private val value: JsonField<String>,
+
+        ) : Enum {
 
             /**
              * Returns this class instance's raw value.
              *
-             * This is usually only useful if this instance was deserialized from data that doesn't
-             * match any known member, and you want to know that value. For example, if the SDK is
-             * on an older version than the API, then the API may respond with new members that the
-             * SDK is unaware of.
+             * This is usually only useful if this instance was deserialized from data that doesn't match any known
+             * member, and you want to know that value. For example, if the SDK is on an older version than the
+             * API, then the API may respond with new members that the SDK is unaware of.
              */
-            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+            @com.fasterxml.jackson.annotation.JsonValue
+            fun _value(): JsonField<String> = value
 
             companion object {
 
@@ -1116,9 +1095,11 @@ private constructor(
              * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
              *
              * An instance of [DataMode] can contain an unknown value in a couple of cases:
-             * - It was deserialized from data that doesn't match any known member. For example, if
-             *   the SDK is on an older version than the API, then the API may respond with new
-             *   members that the SDK is unaware of.
+             *
+             * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
+             *   an older version than the API, then the API may respond with new members that the SDK is unaware
+             *   of.
+             *
              * - It was constructed with an arbitrary value using the [of] method.
              */
             enum class Value {
@@ -1126,18 +1107,16 @@ private constructor(
                 TEST,
                 SIMULATED,
                 EXERCISE,
-                /**
-                 * An enum member indicating that [DataMode] was instantiated with an unknown value.
-                 */
+                /** An enum member indicating that [DataMode] was instantiated with an unknown value. */
                 _UNKNOWN,
             }
 
             /**
-             * Returns an enum member corresponding to this class instance's value, or
-             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
+             * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
+             * class was instantiated with an unknown value.
              *
-             * Use the [known] method instead if you're certain the value is always known or if you
-             * want to throw for the unknown case.
+             * Use the [known] method instead if you're certain the value is always known or if you want to throw
+             * for the unknown case.
              */
             fun value(): Value =
                 when (this) {
@@ -1151,11 +1130,10 @@ private constructor(
             /**
              * Returns an enum member corresponding to this class instance's value.
              *
-             * Use the [value] method instead if you're uncertain the value is always known and
-             * don't want to throw for the unknown case.
+             * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
+             * for the unknown case.
              *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
-             *   not a known member.
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
              */
             fun known(): Known =
                 when (this) {
@@ -1169,27 +1147,25 @@ private constructor(
             /**
              * Returns this class instance's primitive wire representation.
              *
-             * This differs from the [toString] method because that method is primarily for
-             * debugging and generally doesn't throw.
+             * This differs from the [toString] method because that method is primarily for debugging and generally
+             * doesn't throw.
              *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
-             *   not have the expected primitive type.
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
+             * primitive type.
              */
-            fun asString(): String =
-                _value().asString().orElseThrow {
-                    UnifieddatalibraryInvalidDataException("Value is not a String")
-                }
+            fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
 
             private var validated: Boolean = false
 
-            fun validate(): DataMode = apply {
-                if (validated) {
-                    return@apply
-                }
+            fun validate(): DataMode =
+                apply {
+                    if (validated) {
+                      return@apply
+                    }
 
-                known()
-                validated = true
-            }
+                    known()
+                    validated = true
+                }
 
             fun isValid(): Boolean =
                 try {
@@ -1200,19 +1176,19 @@ private constructor(
                 }
 
             /**
-             * Returns a score indicating how many valid values are contained in this object
-             * recursively.
+             * Returns a score indicating how many valid values are contained in this object recursively.
              *
              * Used for best match union deserialization.
              */
-            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+            @JvmSynthetic
+            internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
             override fun equals(other: Any?): Boolean {
-                if (this === other) {
-                    return true
-                }
+              if (this === other) {
+                  return true
+              }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+              return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
             }
 
             override fun hashCode() = value.hashCode()
@@ -1221,11 +1197,11 @@ private constructor(
         }
 
         override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
+          if (this === other) {
+              return true
+          }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && msgCreateDate == other.msgCreateDate && source == other.source && id == other.id && beNumber == other.beNumber && createdAt == other.createdAt && createdBy == other.createdBy && declassificationDate == other.declassificationDate && declassificationString == other.declassificationString && derivedFrom == other.derivedFrom && idOnOrbit == other.idOnOrbit && launchDate == other.launchDate && launchFacilityName == other.launchFacilityName && launchFailureCode == other.launchFailureCode && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && oSuffix == other.oSuffix && satNo == other.satNo /* spotless:on */
+          return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && msgCreateDate == other.msgCreateDate && source == other.source && id == other.id && beNumber == other.beNumber && createdAt == other.createdAt && createdBy == other.createdBy && declassificationDate == other.declassificationDate && declassificationString == other.declassificationString && derivedFrom == other.derivedFrom && idOnOrbit == other.idOnOrbit && launchDate == other.launchDate && launchFacilityName == other.launchFacilityName && launchFailureCode == other.launchFailureCode && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && oSuffix == other.oSuffix && satNo == other.satNo /* spotless:on */
         }
 
         /* spotless:off */
@@ -1234,20 +1210,18 @@ private constructor(
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, msgCreateDate=$msgCreateDate, source=$source, id=$id, beNumber=$beNumber, createdAt=$createdAt, createdBy=$createdBy, declassificationDate=$declassificationDate, declassificationString=$declassificationString, derivedFrom=$derivedFrom, idOnOrbit=$idOnOrbit, launchDate=$launchDate, launchFacilityName=$launchFacilityName, launchFailureCode=$launchFailureCode, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, oSuffix=$oSuffix, satNo=$satNo}"
+        override fun toString() = "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, msgCreateDate=$msgCreateDate, source=$source, id=$id, beNumber=$beNumber, createdAt=$createdAt, createdBy=$createdBy, declassificationDate=$declassificationDate, declassificationString=$declassificationString, derivedFrom=$derivedFrom, idOnOrbit=$idOnOrbit, launchDate=$launchDate, launchFacilityName=$launchFacilityName, launchFailureCode=$launchFailureCode, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, oSuffix=$oSuffix, satNo=$satNo}"
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is LaunchEventCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+      return /* spotless:off */ other is LaunchEventCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
 
-    override fun toString() =
-        "LaunchEventCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() = "LaunchEventCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

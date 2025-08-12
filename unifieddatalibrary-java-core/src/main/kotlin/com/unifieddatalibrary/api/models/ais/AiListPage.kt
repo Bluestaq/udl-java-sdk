@@ -5,23 +5,28 @@ package com.unifieddatalibrary.api.models.ais
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.models.ais.AiListParams
+import com.unifieddatalibrary.api.models.ais.AisAbridged
 import com.unifieddatalibrary.api.services.blocking.AiService
 import java.util.Objects
+import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see AiService.list */
-class AiListPage
-private constructor(
+class AiListPage private constructor(
     private val service: AiService,
     private val params: AiListParams,
     private val items: List<AisAbridged>,
+
 ) : Page<AisAbridged> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): AiListParams {
-        val offset = params.firstResult().getOrDefault(0)
-        return params.toBuilder().firstResult(offset + items().size).build()
+      val offset = params.firstResult().getOrDefault(0)
+      return params.toBuilder()
+          .firstResult(offset + items().size)
+          .build()
     }
 
     override fun nextPage(): AiListPage = service.list(nextPageParams())
@@ -42,13 +47,15 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [AiListPage].
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [AiListPage]. */
@@ -59,19 +66,29 @@ private constructor(
         private var items: List<AisAbridged>? = null
 
         @JvmSynthetic
-        internal fun from(aiListPage: AiListPage) = apply {
-            service = aiListPage.service
-            params = aiListPage.params
-            items = aiListPage.items
-        }
+        internal fun from(aiListPage: AiListPage) =
+            apply {
+                service = aiListPage.service
+                params = aiListPage.params
+                items = aiListPage.items
+            }
 
-        fun service(service: AiService) = apply { this.service = service }
+        fun service(service: AiService) =
+            apply {
+                this.service = service
+            }
 
         /** The parameters that were used to request this page. */
-        fun params(params: AiListParams) = apply { this.params = params }
+        fun params(params: AiListParams) =
+            apply {
+                this.params = params
+            }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<AisAbridged>) = apply { this.items = items }
+        fun items(items: List<AisAbridged>) =
+            apply {
+                this.items = items
+            }
 
         /**
          * Returns an immutable instance of [AiListPage].
@@ -79,6 +96,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
@@ -89,18 +107,24 @@ private constructor(
          */
         fun build(): AiListPage =
             AiListPage(
-                checkRequired("service", service),
-                checkRequired("params", params),
-                checkRequired("items", items),
+              checkRequired(
+                "service", service
+              ),
+              checkRequired(
+                "params", params
+              ),
+              checkRequired(
+                "items", items
+              ),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is AiListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+      return /* spotless:off */ other is AiListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */

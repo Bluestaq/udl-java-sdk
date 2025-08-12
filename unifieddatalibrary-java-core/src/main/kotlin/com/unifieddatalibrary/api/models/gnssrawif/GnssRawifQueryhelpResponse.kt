@@ -19,7 +19,7 @@ import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-class GnssRawifQueryhelpResponse
+class GnssRawIfQueryhelpResponse
 private constructor(
     private val aodrSupported: JsonField<Boolean>,
     private val classificationMarking: JsonField<String>,
@@ -254,12 +254,12 @@ private constructor(
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of [GnssRawifQueryhelpResponse].
+         * Returns a mutable builder for constructing an instance of [GnssRawIfQueryhelpResponse].
          */
         @JvmStatic fun builder() = Builder()
     }
 
-    /** A builder for [GnssRawifQueryhelpResponse]. */
+    /** A builder for [GnssRawIfQueryhelpResponse]. */
     class Builder internal constructor() {
 
         private var aodrSupported: JsonField<Boolean> = JsonMissing.of()
@@ -276,19 +276,19 @@ private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(gnssRawifQueryhelpResponse: GnssRawifQueryhelpResponse) = apply {
-            aodrSupported = gnssRawifQueryhelpResponse.aodrSupported
-            classificationMarking = gnssRawifQueryhelpResponse.classificationMarking
-            description = gnssRawifQueryhelpResponse.description
-            historySupported = gnssRawifQueryhelpResponse.historySupported
-            name = gnssRawifQueryhelpResponse.name
-            parameters = gnssRawifQueryhelpResponse.parameters.map { it.toMutableList() }
-            requiredRoles = gnssRawifQueryhelpResponse.requiredRoles.map { it.toMutableList() }
-            restSupported = gnssRawifQueryhelpResponse.restSupported
-            sortSupported = gnssRawifQueryhelpResponse.sortSupported
-            typeName = gnssRawifQueryhelpResponse.typeName
-            uri = gnssRawifQueryhelpResponse.uri
-            additionalProperties = gnssRawifQueryhelpResponse.additionalProperties.toMutableMap()
+        internal fun from(gnssRawIfQueryhelpResponse: GnssRawIfQueryhelpResponse) = apply {
+            aodrSupported = gnssRawIfQueryhelpResponse.aodrSupported
+            classificationMarking = gnssRawIfQueryhelpResponse.classificationMarking
+            description = gnssRawIfQueryhelpResponse.description
+            historySupported = gnssRawIfQueryhelpResponse.historySupported
+            name = gnssRawIfQueryhelpResponse.name
+            parameters = gnssRawIfQueryhelpResponse.parameters.map { it.toMutableList() }
+            requiredRoles = gnssRawIfQueryhelpResponse.requiredRoles.map { it.toMutableList() }
+            restSupported = gnssRawIfQueryhelpResponse.restSupported
+            sortSupported = gnssRawIfQueryhelpResponse.sortSupported
+            typeName = gnssRawIfQueryhelpResponse.typeName
+            uri = gnssRawIfQueryhelpResponse.uri
+            additionalProperties = gnssRawIfQueryhelpResponse.additionalProperties.toMutableMap()
         }
 
         fun aodrSupported(aodrSupported: Boolean) = aodrSupported(JsonField.of(aodrSupported))
@@ -469,12 +469,12 @@ private constructor(
         }
 
         /**
-         * Returns an immutable instance of [GnssRawifQueryhelpResponse].
+         * Returns an immutable instance of [GnssRawIfQueryhelpResponse].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
          */
-        fun build(): GnssRawifQueryhelpResponse =
-            GnssRawifQueryhelpResponse(
+        fun build(): GnssRawIfQueryhelpResponse =
+            GnssRawIfQueryhelpResponse(
                 aodrSupported,
                 classificationMarking,
                 description,
@@ -492,7 +492,7 @@ private constructor(
 
     private var validated: Boolean = false
 
-    fun validate(): GnssRawifQueryhelpResponse = apply {
+    fun validate(): GnssRawIfQueryhelpResponse = apply {
         if (validated) {
             return@apply
         }
@@ -543,7 +543,7 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GnssRawifQueryhelpResponse && aodrSupported == other.aodrSupported && classificationMarking == other.classificationMarking && description == other.description && historySupported == other.historySupported && name == other.name && parameters == other.parameters && requiredRoles == other.requiredRoles && restSupported == other.restSupported && sortSupported == other.sortSupported && typeName == other.typeName && uri == other.uri && additionalProperties == other.additionalProperties /* spotless:on */
+        return /* spotless:off */ other is GnssRawIfQueryhelpResponse && aodrSupported == other.aodrSupported && classificationMarking == other.classificationMarking && description == other.description && historySupported == other.historySupported && name == other.name && parameters == other.parameters && requiredRoles == other.requiredRoles && restSupported == other.restSupported && sortSupported == other.sortSupported && typeName == other.typeName && uri == other.uri && additionalProperties == other.additionalProperties /* spotless:on */
     }
 
     /* spotless:off */
@@ -553,5 +553,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "GnssRawifQueryhelpResponse{aodrSupported=$aodrSupported, classificationMarking=$classificationMarking, description=$description, historySupported=$historySupported, name=$name, parameters=$parameters, requiredRoles=$requiredRoles, restSupported=$restSupported, sortSupported=$sortSupported, typeName=$typeName, uri=$uri, additionalProperties=$additionalProperties}"
+        "GnssRawIfQueryhelpResponse{aodrSupported=$aodrSupported, classificationMarking=$classificationMarking, description=$description, historySupported=$historySupported, name=$name, parameters=$parameters, requiredRoles=$requiredRoles, restSupported=$restSupported, sortSupported=$sortSupported, typeName=$typeName, uri=$uri, additionalProperties=$additionalProperties}"
 }

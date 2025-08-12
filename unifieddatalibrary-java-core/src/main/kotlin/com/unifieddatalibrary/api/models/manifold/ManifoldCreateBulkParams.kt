@@ -14,21 +14,18 @@ import com.unifieddatalibrary.api.core.http.Headers
 import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import com.unifieddatalibrary.api.models.manifold.ManifoldCreateBulkParams
 import java.time.OffsetDateTime
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/**
- * Service operation to take multiple Manifolds as a POST body and ingest into the database. A
- * specific role is required to perform this service operation. Please contact the UDL team for
- * assistance.
- */
-class ManifoldCreateBulkParams
-private constructor(
+/** Service operation to take multiple Manifolds as a POST body and ingest into the database. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
+class ManifoldCreateBulkParams private constructor(
     private val body: List<Body>,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
+
 ) : Params {
 
     fun body(): List<Body> = body
@@ -47,11 +44,13 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [ManifoldCreateBulkParams].
          *
          * The following fields are required:
+         *
          * ```java
          * .body()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [ManifoldCreateBulkParams]. */
@@ -62,120 +61,151 @@ private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(manifoldCreateBulkParams: ManifoldCreateBulkParams) = apply {
-            body = manifoldCreateBulkParams.body.toMutableList()
-            additionalHeaders = manifoldCreateBulkParams.additionalHeaders.toBuilder()
-            additionalQueryParams = manifoldCreateBulkParams.additionalQueryParams.toBuilder()
-        }
+        internal fun from(manifoldCreateBulkParams: ManifoldCreateBulkParams) =
+            apply {
+                body = manifoldCreateBulkParams.body.toMutableList()
+                additionalHeaders = manifoldCreateBulkParams.additionalHeaders.toBuilder()
+                additionalQueryParams = manifoldCreateBulkParams.additionalQueryParams.toBuilder()
+            }
 
-        fun body(body: List<Body>) = apply { this.body = body.toMutableList() }
+        fun body(body: List<Body>) =
+            apply {
+                this.body = body.toMutableList()
+            }
 
         /**
          * Adds a single [Body] to [Builder.body].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addBody(body: Body) = apply {
-            this.body = (this.body ?: mutableListOf()).apply { add(body) }
-        }
+        fun addBody(body: Body) =
+            apply {
+                this.body = (this.body ?: mutableListOf()).apply { add(body) }
+            }
 
-        fun additionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun putAdditionalHeader(name: String, value: String) = apply {
-            additionalHeaders.put(name, value)
-        }
+        fun putAdditionalHeader(name: String, value: String) =
+            apply {
+                additionalHeaders.put(name, value)
+            }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.put(name, values)
-        }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.put(name, values)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun replaceAdditionalHeaders(name: String, value: String) = apply {
-            additionalHeaders.replace(name, value)
-        }
+        fun replaceAdditionalHeaders(name: String, value: String) =
+            apply {
+                additionalHeaders.replace(name, value)
+            }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.replace(name, values)
-        }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.replace(name, values)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
+        fun removeAdditionalHeaders(name: String) =
+            apply {
+                additionalHeaders.remove(name)
+            }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
-            additionalHeaders.removeAll(names)
-        }
+        fun removeAllAdditionalHeaders(names: Set<String>) =
+            apply {
+                additionalHeaders.removeAll(names)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun putAdditionalQueryParam(key: String, value: String) = apply {
-            additionalQueryParams.put(key, value)
-        }
+        fun putAdditionalQueryParam(key: String, value: String) =
+            apply {
+                additionalQueryParams.put(key, value)
+            }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.put(key, values)
-        }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.put(key, values)
+            }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.putAll(additionalQueryParams)
-        }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.putAll(additionalQueryParams)
+            }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
-            additionalQueryParams.replace(key, value)
-        }
+        fun replaceAdditionalQueryParams(key: String, value: String) =
+            apply {
+                additionalQueryParams.replace(key, value)
+            }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.replace(key, values)
-        }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.replace(key, values)
+            }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.replaceAll(additionalQueryParams)
-        }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.replaceAll(additionalQueryParams)
+            }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
+        fun removeAdditionalQueryParams(key: String) =
+            apply {
+                additionalQueryParams.remove(key)
+            }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
-            additionalQueryParams.removeAll(keys)
-        }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) =
+            apply {
+                additionalQueryParams.removeAll(keys)
+            }
 
         /**
          * Returns an immutable instance of [ManifoldCreateBulkParams].
@@ -183,6 +213,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .body()
          * ```
@@ -191,9 +222,11 @@ private constructor(
          */
         fun build(): ManifoldCreateBulkParams =
             ManifoldCreateBulkParams(
-                checkRequired("body", body).toImmutable(),
-                additionalHeaders.build(),
-                additionalQueryParams.build(),
+              checkRequired(
+                "body", body
+              ).toImmutable(),
+              additionalHeaders.build(),
+              additionalQueryParams.build(),
             )
     }
 
@@ -203,20 +236,11 @@ private constructor(
 
     override fun _queryParams(): QueryParams = additionalQueryParams
 
-    /**
-     * A manifold represents a set of possible/theoretical orbits for an object of interest based on
-     * a delta V and delta T.
-     */
-    class Body
-    @JsonCreator
-    private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
-        private val classificationMarking: JsonField<String>,
+    /** A manifold represents a set of possible/theoretical orbits for an object of interest based on a delta V and delta T. */
+    class Body @JsonCreator private constructor(
+        @JsonProperty("classificationMarking") @ExcludeMissing private val classificationMarking: JsonField<String>,
         @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("idObjectOfInterest")
-        @ExcludeMissing
-        private val idObjectOfInterest: JsonField<String>,
+        @JsonProperty("idObjectOfInterest") @ExcludeMissing private val idObjectOfInterest: JsonField<String>,
         @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
         @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
         @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
@@ -227,139 +251,112 @@ private constructor(
         @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
         @JsonProperty("status") @ExcludeMissing private val status: JsonField<String>,
         @JsonProperty("weight") @ExcludeMissing private val weight: JsonField<Double>,
+
     ) {
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
-        fun classificationMarking(): String =
-            classificationMarking.getRequired("classificationMarking")
+        fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-         * both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-         * analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-         * requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
         /**
          * ID of the parent object of interest.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun idObjectOfInterest(): String = idObjectOfInterest.getRequired("idObjectOfInterest")
 
         /**
          * Source of the data.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun source(): String = source.getRequired("source")
 
         /**
          * Unique identifier of the record, auto-generated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun id(): Optional<String> = id.getOptional("id")
 
         /**
          * Time the row was created in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
         /**
          * Application user who created the row in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
         /**
          * Applied delta V duration for this manifold's calculations in seconds.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun deltaT(): Optional<Double> = deltaT.getOptional("deltaT")
 
         /**
          * Applied delta V for this manifold's calculations, in km/sec.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun deltaV(): Optional<Double> = deltaV.getOptional("deltaV")
 
         /**
-         * Originating system or organization which produced the data, if different from the source.
-         * The origin may be different than the source if the source was a mediating system which
-         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
-         * be the origin.
+         * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun origin(): Optional<String> = origin.getOptional("origin")
 
         /**
-         * The originating source network on which this record was created, auto-populated by the
-         * system.
+         * The originating source network on which this record was created, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
         /**
-         * Status of the manifold and its associated ManifoldElsets (e.g. PENDING, COMPLETE).
-         * PENDING status means element set generation is in progress and COMPLETE indicates all
-         * ManifoldElsets have been generated.
+         * Status of the manifold and its associated ManifoldElsets (e.g. PENDING, COMPLETE). PENDING status means element set generation is in progress and COMPLETE indicates all ManifoldElsets have been generated.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun status(): Optional<String> = status.getOptional("status")
 
         /**
          * Weight or probability of this manifold for prioritization purposes, between 0 and 1.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun weight(): Optional<Double> = weight.getOptional("weight")
 
         /**
          * Returns the raw JSON value of [classificationMarking].
          *
-         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an
-         * unexpected type.
+         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("classificationMarking")
         @ExcludeMissing
@@ -370,13 +367,14 @@ private constructor(
          *
          * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+        @JsonProperty("dataMode")
+        @ExcludeMissing
+        fun _dataMode(): JsonField<DataMode> = dataMode
 
         /**
          * Returns the raw JSON value of [idObjectOfInterest].
          *
-         * Unlike [idObjectOfInterest], this method doesn't throw if the JSON field has an
-         * unexpected type.
+         * Unlike [idObjectOfInterest], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("idObjectOfInterest")
         @ExcludeMissing
@@ -387,14 +385,18 @@ private constructor(
          *
          * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+        @JsonProperty("source")
+        @ExcludeMissing
+        fun _source(): JsonField<String> = source
 
         /**
          * Returns the raw JSON value of [id].
          *
          * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+        @JsonProperty("id")
+        @ExcludeMissing
+        fun _id(): JsonField<String> = id
 
         /**
          * Returns the raw JSON value of [createdAt].
@@ -410,28 +412,36 @@ private constructor(
          *
          * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+        @JsonProperty("createdBy")
+        @ExcludeMissing
+        fun _createdBy(): JsonField<String> = createdBy
 
         /**
          * Returns the raw JSON value of [deltaT].
          *
          * Unlike [deltaT], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("deltaT") @ExcludeMissing fun _deltaT(): JsonField<Double> = deltaT
+        @JsonProperty("deltaT")
+        @ExcludeMissing
+        fun _deltaT(): JsonField<Double> = deltaT
 
         /**
          * Returns the raw JSON value of [deltaV].
          *
          * Unlike [deltaV], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("deltaV") @ExcludeMissing fun _deltaV(): JsonField<Double> = deltaV
+        @JsonProperty("deltaV")
+        @ExcludeMissing
+        fun _deltaV(): JsonField<Double> = deltaV
 
         /**
          * Returns the raw JSON value of [origin].
          *
          * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+        @JsonProperty("origin")
+        @ExcludeMissing
+        fun _origin(): JsonField<String> = origin
 
         /**
          * Returns the raw JSON value of [origNetwork].
@@ -447,14 +457,18 @@ private constructor(
          *
          * Unlike [status], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("status") @ExcludeMissing fun _status(): JsonField<String> = status
+        @JsonProperty("status")
+        @ExcludeMissing
+        fun _status(): JsonField<String> = status
 
         /**
          * Returns the raw JSON value of [weight].
          *
          * Unlike [weight], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("weight") @ExcludeMissing fun _weight(): JsonField<Double> = weight
+        @JsonProperty("weight")
+        @ExcludeMissing
+        fun _weight(): JsonField<Double> = weight
 
         fun toBuilder() = Builder().from(this)
 
@@ -464,6 +478,7 @@ private constructor(
              * Returns a mutable builder for constructing an instance of [Body].
              *
              * The following fields are required:
+             *
              * ```java
              * .classificationMarking()
              * .dataMode()
@@ -471,7 +486,8 @@ private constructor(
              * .source()
              * ```
              */
-            @JvmStatic fun builder() = Builder()
+            @JvmStatic
+            fun builder() = Builder()
         }
 
         /** A builder for [Body]. */
@@ -492,77 +508,74 @@ private constructor(
             private var weight: JsonField<Double> = JsonMissing.of()
 
             @JvmSynthetic
-            internal fun from(body: Body) = apply {
-                classificationMarking = body.classificationMarking
-                dataMode = body.dataMode
-                idObjectOfInterest = body.idObjectOfInterest
-                source = body.source
-                id = body.id
-                createdAt = body.createdAt
-                createdBy = body.createdBy
-                deltaT = body.deltaT
-                deltaV = body.deltaV
-                origin = body.origin
-                origNetwork = body.origNetwork
-                status = body.status
-                weight = body.weight
-            }
+            internal fun from(body: Body) =
+                apply {
+                    classificationMarking = body.classificationMarking
+                    dataMode = body.dataMode
+                    idObjectOfInterest = body.idObjectOfInterest
+                    source = body.source
+                    id = body.id
+                    createdAt = body.createdAt
+                    createdBy = body.createdBy
+                    deltaT = body.deltaT
+                    deltaV = body.deltaV
+                    origin = body.origin
+                    origNetwork = body.origNetwork
+                    status = body.status
+                    weight = body.weight
+                }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-            fun classificationMarking(classificationMarking: String) =
-                classificationMarking(JsonField.of(classificationMarking))
+            fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
 
             /**
              * Sets [Builder.classificationMarking] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.classificationMarking] with a well-typed [String]
-             * value instead. This method is primarily for setting the field to an undocumented or
-             * not yet supported value.
+             * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun classificationMarking(classificationMarking: JsonField<String>) = apply {
-                this.classificationMarking = classificationMarking
-            }
+            fun classificationMarking(classificationMarking: JsonField<String>) =
+                apply {
+                    this.classificationMarking = classificationMarking
+                }
 
             /**
              * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
              *
-             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may
-             * include both real and simulated data.
+             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
              *
-             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events,
-             * and analysis.
+             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
              *
              * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
              *
-             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-             * requirements, and for validating technical, functional, and performance
-             * characteristics.
+             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
              */
             fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
             /**
              * Sets [Builder.dataMode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+            fun dataMode(dataMode: JsonField<DataMode>) =
+                apply {
+                    this.dataMode = dataMode
+                }
 
             /** ID of the parent object of interest. */
-            fun idObjectOfInterest(idObjectOfInterest: String) =
-                idObjectOfInterest(JsonField.of(idObjectOfInterest))
+            fun idObjectOfInterest(idObjectOfInterest: String) = idObjectOfInterest(JsonField.of(idObjectOfInterest))
 
             /**
              * Sets [Builder.idObjectOfInterest] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.idObjectOfInterest] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.idObjectOfInterest] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun idObjectOfInterest(idObjectOfInterest: JsonField<String>) = apply {
-                this.idObjectOfInterest = idObjectOfInterest
-            }
+            fun idObjectOfInterest(idObjectOfInterest: JsonField<String>) =
+                apply {
+                    this.idObjectOfInterest = idObjectOfInterest
+                }
 
             /** Source of the data. */
             fun source(source: String) = source(JsonField.of(source))
@@ -570,11 +583,13 @@ private constructor(
             /**
              * Sets [Builder.source] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.source] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun source(source: JsonField<String>) = apply { this.source = source }
+            fun source(source: JsonField<String>) =
+                apply {
+                    this.source = source
+                }
 
             /** Unique identifier of the record, auto-generated by the system. */
             fun id(id: String) = id(JsonField.of(id))
@@ -582,11 +597,13 @@ private constructor(
             /**
              * Sets [Builder.id] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.id] with a well-typed [String] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun id(id: JsonField<String>) = apply { this.id = id }
+            fun id(id: JsonField<String>) =
+                apply {
+                    this.id = id
+                }
 
             /** Time the row was created in the database, auto-populated by the system. */
             fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -594,27 +611,27 @@ private constructor(
             /**
              * Sets [Builder.createdAt] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply {
-                this.createdAt = createdAt
-            }
+            fun createdAt(createdAt: JsonField<OffsetDateTime>) =
+                apply {
+                    this.createdAt = createdAt
+                }
 
-            /**
-             * Application user who created the row in the database, auto-populated by the system.
-             */
+            /** Application user who created the row in the database, auto-populated by the system. */
             fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
 
             /**
              * Sets [Builder.createdBy] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+            fun createdBy(createdBy: JsonField<String>) =
+                apply {
+                    this.createdBy = createdBy
+                }
 
             /** Applied delta V duration for this manifold's calculations in seconds. */
             fun deltaT(deltaT: Double) = deltaT(JsonField.of(deltaT))
@@ -622,11 +639,13 @@ private constructor(
             /**
              * Sets [Builder.deltaT] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.deltaT] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.deltaT] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun deltaT(deltaT: JsonField<Double>) = apply { this.deltaT = deltaT }
+            fun deltaT(deltaT: JsonField<Double>) =
+                apply {
+                    this.deltaT = deltaT
+                }
 
             /** Applied delta V for this manifold's calculations, in km/sec. */
             fun deltaV(deltaV: Double) = deltaV(JsonField.of(deltaV))
@@ -634,75 +653,69 @@ private constructor(
             /**
              * Sets [Builder.deltaV] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.deltaV] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.deltaV] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun deltaV(deltaV: JsonField<Double>) = apply { this.deltaV = deltaV }
+            fun deltaV(deltaV: JsonField<Double>) =
+                apply {
+                    this.deltaV = deltaV
+                }
 
-            /**
-             * Originating system or organization which produced the data, if different from the
-             * source. The origin may be different than the source if the source was a mediating
-             * system which forwarded the data on behalf of the origin system. If null, the source
-             * may be assumed to be the origin.
-             */
+            /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
             fun origin(origin: String) = origin(JsonField.of(origin))
 
             /**
              * Sets [Builder.origin] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origin] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+            fun origin(origin: JsonField<String>) =
+                apply {
+                    this.origin = origin
+                }
 
-            /**
-             * The originating source network on which this record was created, auto-populated by
-             * the system.
-             */
+            /** The originating source network on which this record was created, auto-populated by the system. */
             fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
             /**
              * Sets [Builder.origNetwork] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origNetwork] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origNetwork(origNetwork: JsonField<String>) = apply {
-                this.origNetwork = origNetwork
-            }
+            fun origNetwork(origNetwork: JsonField<String>) =
+                apply {
+                    this.origNetwork = origNetwork
+                }
 
-            /**
-             * Status of the manifold and its associated ManifoldElsets (e.g. PENDING, COMPLETE).
-             * PENDING status means element set generation is in progress and COMPLETE indicates all
-             * ManifoldElsets have been generated.
-             */
+            /** Status of the manifold and its associated ManifoldElsets (e.g. PENDING, COMPLETE). PENDING status means element set generation is in progress and COMPLETE indicates all ManifoldElsets have been generated. */
             fun status(status: String) = status(JsonField.of(status))
 
             /**
              * Sets [Builder.status] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.status] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.status] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun status(status: JsonField<String>) = apply { this.status = status }
+            fun status(status: JsonField<String>) =
+                apply {
+                    this.status = status
+                }
 
-            /**
-             * Weight or probability of this manifold for prioritization purposes, between 0 and 1.
-             */
+            /** Weight or probability of this manifold for prioritization purposes, between 0 and 1. */
             fun weight(weight: Double) = weight(JsonField.of(weight))
 
             /**
              * Sets [Builder.weight] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.weight] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.weight] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun weight(weight: JsonField<Double>) = apply { this.weight = weight }
+            fun weight(weight: JsonField<Double>) =
+                apply {
+                    this.weight = weight
+                }
 
             /**
              * Returns an immutable instance of [Body].
@@ -710,6 +723,7 @@ private constructor(
              * Further updates to this [Builder] will not mutate the returned instance.
              *
              * The following fields are required:
+             *
              * ```java
              * .classificationMarking()
              * .dataMode()
@@ -721,44 +735,53 @@ private constructor(
              */
             fun build(): Body =
                 Body(
-                    checkRequired("classificationMarking", classificationMarking),
-                    checkRequired("dataMode", dataMode),
-                    checkRequired("idObjectOfInterest", idObjectOfInterest),
-                    checkRequired("source", source),
-                    id,
-                    createdAt,
-                    createdBy,
-                    deltaT,
-                    deltaV,
-                    origin,
-                    origNetwork,
-                    status,
-                    weight,
+                  checkRequired(
+                    "classificationMarking", classificationMarking
+                  ),
+                  checkRequired(
+                    "dataMode", dataMode
+                  ),
+                  checkRequired(
+                    "idObjectOfInterest", idObjectOfInterest
+                  ),
+                  checkRequired(
+                    "source", source
+                  ),
+                  id,
+                  createdAt,
+                  createdBy,
+                  deltaT,
+                  deltaV,
+                  origin,
+                  origNetwork,
+                  status,
+                  weight,
                 )
         }
 
         private var validated: Boolean = false
 
-        fun validate(): Body = apply {
-            if (validated) {
-                return@apply
-            }
+        fun validate(): Body =
+            apply {
+                if (validated) {
+                  return@apply
+                }
 
-            classificationMarking()
-            dataMode().validate()
-            idObjectOfInterest()
-            source()
-            id()
-            createdAt()
-            createdBy()
-            deltaT()
-            deltaV()
-            origin()
-            origNetwork()
-            status()
-            weight()
-            validated = true
-        }
+                classificationMarking()
+                dataMode().validate()
+                idObjectOfInterest()
+                source()
+                id()
+                createdAt()
+                createdBy()
+                deltaT()
+                deltaV()
+                origin()
+                origNetwork()
+                status()
+                weight()
+                validated = true
+            }
 
         fun isValid(): Boolean =
             try {
@@ -769,53 +792,38 @@ private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
+         * Returns a score indicating how many valid values are contained in this object recursively.
          *
          * Used for best match union deserialization.
          */
         @JvmSynthetic
-        internal fun validity(): Int =
-            (if (classificationMarking.asKnown().isPresent) 1 else 0) +
-                (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
-                (if (idObjectOfInterest.asKnown().isPresent) 1 else 0) +
-                (if (source.asKnown().isPresent) 1 else 0) +
-                (if (id.asKnown().isPresent) 1 else 0) +
-                (if (createdAt.asKnown().isPresent) 1 else 0) +
-                (if (createdBy.asKnown().isPresent) 1 else 0) +
-                (if (deltaT.asKnown().isPresent) 1 else 0) +
-                (if (deltaV.asKnown().isPresent) 1 else 0) +
-                (if (origin.asKnown().isPresent) 1 else 0) +
-                (if (origNetwork.asKnown().isPresent) 1 else 0) +
-                (if (status.asKnown().isPresent) 1 else 0) +
-                (if (weight.asKnown().isPresent) 1 else 0)
+        internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (idObjectOfInterest.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (deltaT.asKnown().isPresent) 1 else 0) + (if (deltaV.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (status.asKnown().isPresent) 1 else 0) + (if (weight.asKnown().isPresent) 1 else 0)
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-         * both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-         * analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-         * requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
          */
-        class DataMode @JsonCreator private constructor(private val value: JsonField<String>) :
-            Enum {
+        class DataMode @JsonCreator private constructor(
+            private val value: JsonField<String>,
+
+        ) : Enum {
 
             /**
              * Returns this class instance's raw value.
              *
-             * This is usually only useful if this instance was deserialized from data that doesn't
-             * match any known member, and you want to know that value. For example, if the SDK is
-             * on an older version than the API, then the API may respond with new members that the
-             * SDK is unaware of.
+             * This is usually only useful if this instance was deserialized from data that doesn't match any known
+             * member, and you want to know that value. For example, if the SDK is on an older version than the
+             * API, then the API may respond with new members that the SDK is unaware of.
              */
-            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+            @com.fasterxml.jackson.annotation.JsonValue
+            fun _value(): JsonField<String> = value
 
             companion object {
 
@@ -842,9 +850,11 @@ private constructor(
              * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
              *
              * An instance of [DataMode] can contain an unknown value in a couple of cases:
-             * - It was deserialized from data that doesn't match any known member. For example, if
-             *   the SDK is on an older version than the API, then the API may respond with new
-             *   members that the SDK is unaware of.
+             *
+             * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
+             *   an older version than the API, then the API may respond with new members that the SDK is unaware
+             *   of.
+             *
              * - It was constructed with an arbitrary value using the [of] method.
              */
             enum class Value {
@@ -852,18 +862,16 @@ private constructor(
                 TEST,
                 SIMULATED,
                 EXERCISE,
-                /**
-                 * An enum member indicating that [DataMode] was instantiated with an unknown value.
-                 */
+                /** An enum member indicating that [DataMode] was instantiated with an unknown value. */
                 _UNKNOWN,
             }
 
             /**
-             * Returns an enum member corresponding to this class instance's value, or
-             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
+             * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
+             * class was instantiated with an unknown value.
              *
-             * Use the [known] method instead if you're certain the value is always known or if you
-             * want to throw for the unknown case.
+             * Use the [known] method instead if you're certain the value is always known or if you want to throw
+             * for the unknown case.
              */
             fun value(): Value =
                 when (this) {
@@ -877,11 +885,10 @@ private constructor(
             /**
              * Returns an enum member corresponding to this class instance's value.
              *
-             * Use the [value] method instead if you're uncertain the value is always known and
-             * don't want to throw for the unknown case.
+             * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
+             * for the unknown case.
              *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
-             *   not a known member.
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
              */
             fun known(): Known =
                 when (this) {
@@ -895,27 +902,25 @@ private constructor(
             /**
              * Returns this class instance's primitive wire representation.
              *
-             * This differs from the [toString] method because that method is primarily for
-             * debugging and generally doesn't throw.
+             * This differs from the [toString] method because that method is primarily for debugging and generally
+             * doesn't throw.
              *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
-             *   not have the expected primitive type.
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
+             * primitive type.
              */
-            fun asString(): String =
-                _value().asString().orElseThrow {
-                    UnifieddatalibraryInvalidDataException("Value is not a String")
-                }
+            fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
 
             private var validated: Boolean = false
 
-            fun validate(): DataMode = apply {
-                if (validated) {
-                    return@apply
-                }
+            fun validate(): DataMode =
+                apply {
+                    if (validated) {
+                      return@apply
+                    }
 
-                known()
-                validated = true
-            }
+                    known()
+                    validated = true
+                }
 
             fun isValid(): Boolean =
                 try {
@@ -926,19 +931,19 @@ private constructor(
                 }
 
             /**
-             * Returns a score indicating how many valid values are contained in this object
-             * recursively.
+             * Returns a score indicating how many valid values are contained in this object recursively.
              *
              * Used for best match union deserialization.
              */
-            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+            @JvmSynthetic
+            internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
             override fun equals(other: Any?): Boolean {
-                if (this === other) {
-                    return true
-                }
+              if (this === other) {
+                  return true
+              }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+              return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
             }
 
             override fun hashCode() = value.hashCode()
@@ -947,11 +952,11 @@ private constructor(
         }
 
         override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
+          if (this === other) {
+              return true
+          }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idObjectOfInterest == other.idObjectOfInterest && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && deltaT == other.deltaT && deltaV == other.deltaV && origin == other.origin && origNetwork == other.origNetwork && status == other.status && weight == other.weight /* spotless:on */
+          return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idObjectOfInterest == other.idObjectOfInterest && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && deltaT == other.deltaT && deltaV == other.deltaV && origin == other.origin && origNetwork == other.origNetwork && status == other.status && weight == other.weight /* spotless:on */
         }
 
         /* spotless:off */
@@ -960,20 +965,18 @@ private constructor(
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idObjectOfInterest=$idObjectOfInterest, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, deltaT=$deltaT, deltaV=$deltaV, origin=$origin, origNetwork=$origNetwork, status=$status, weight=$weight}"
+        override fun toString() = "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idObjectOfInterest=$idObjectOfInterest, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, deltaT=$deltaT, deltaV=$deltaV, origin=$origin, origNetwork=$origNetwork, status=$status, weight=$weight}"
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is ManifoldCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+      return /* spotless:off */ other is ManifoldCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
 
-    override fun toString() =
-        "ManifoldCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() = "ManifoldCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

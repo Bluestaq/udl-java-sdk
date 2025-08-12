@@ -5,23 +5,28 @@ package com.unifieddatalibrary.api.models.seradatasigintpayload
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.models.seradatasigintpayload.SeradataSigintPayloadListParams
+import com.unifieddatalibrary.api.models.seradatasigintpayload.SeradataSigintPayloadListResponse
 import com.unifieddatalibrary.api.services.blocking.SeradataSigintPayloadService
 import java.util.Objects
+import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see SeradataSigintPayloadService.list */
-class SeradataSigintPayloadListPage
-private constructor(
+class SeradataSigintPayloadListPage private constructor(
     private val service: SeradataSigintPayloadService,
     private val params: SeradataSigintPayloadListParams,
     private val items: List<SeradataSigintPayloadListResponse>,
+
 ) : Page<SeradataSigintPayloadListResponse> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): SeradataSigintPayloadListParams {
-        val offset = params.firstResult().getOrDefault(0)
-        return params.toBuilder().firstResult(offset + items().size).build()
+      val offset = params.firstResult().getOrDefault(0)
+      return params.toBuilder()
+          .firstResult(offset + items().size)
+          .build()
     }
 
     override fun nextPage(): SeradataSigintPayloadListPage = service.list(nextPageParams())
@@ -39,17 +44,18 @@ private constructor(
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of
-         * [SeradataSigintPayloadListPage].
+         * Returns a mutable builder for constructing an instance of [SeradataSigintPayloadListPage].
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [SeradataSigintPayloadListPage]. */
@@ -60,19 +66,29 @@ private constructor(
         private var items: List<SeradataSigintPayloadListResponse>? = null
 
         @JvmSynthetic
-        internal fun from(seradataSigintPayloadListPage: SeradataSigintPayloadListPage) = apply {
-            service = seradataSigintPayloadListPage.service
-            params = seradataSigintPayloadListPage.params
-            items = seradataSigintPayloadListPage.items
-        }
+        internal fun from(seradataSigintPayloadListPage: SeradataSigintPayloadListPage) =
+            apply {
+                service = seradataSigintPayloadListPage.service
+                params = seradataSigintPayloadListPage.params
+                items = seradataSigintPayloadListPage.items
+            }
 
-        fun service(service: SeradataSigintPayloadService) = apply { this.service = service }
+        fun service(service: SeradataSigintPayloadService) =
+            apply {
+                this.service = service
+            }
 
         /** The parameters that were used to request this page. */
-        fun params(params: SeradataSigintPayloadListParams) = apply { this.params = params }
+        fun params(params: SeradataSigintPayloadListParams) =
+            apply {
+                this.params = params
+            }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<SeradataSigintPayloadListResponse>) = apply { this.items = items }
+        fun items(items: List<SeradataSigintPayloadListResponse>) =
+            apply {
+                this.items = items
+            }
 
         /**
          * Returns an immutable instance of [SeradataSigintPayloadListPage].
@@ -80,6 +96,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
@@ -90,22 +107,27 @@ private constructor(
          */
         fun build(): SeradataSigintPayloadListPage =
             SeradataSigintPayloadListPage(
-                checkRequired("service", service),
-                checkRequired("params", params),
-                checkRequired("items", items),
+              checkRequired(
+                "service", service
+              ),
+              checkRequired(
+                "params", params
+              ),
+              checkRequired(
+                "items", items
+              ),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is SeradataSigintPayloadListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+      return /* spotless:off */ other is SeradataSigintPayloadListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
 
-    override fun toString() =
-        "SeradataSigintPayloadListPage{service=$service, params=$params, items=$items}"
+    override fun toString() = "SeradataSigintPayloadListPage{service=$service, params=$params, items=$items}"
 }

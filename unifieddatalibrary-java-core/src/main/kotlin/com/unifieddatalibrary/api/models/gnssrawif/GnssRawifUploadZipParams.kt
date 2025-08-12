@@ -37,7 +37,7 @@ import kotlin.io.path.name
  * This operation is intended to be used for automated feeds into UDL. A specific role is required
  * to perform this service operation. Please contact the UDL team for assistance.
  */
-class GnssRawifUploadZipParams
+class GnssRawIfUploadZipParams
 private constructor(
     private val body: Body,
     private val additionalHeaders: Headers,
@@ -72,7 +72,7 @@ private constructor(
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of [GnssRawifUploadZipParams].
+         * Returns a mutable builder for constructing an instance of [GnssRawIfUploadZipParams].
          *
          * The following fields are required:
          * ```java
@@ -82,7 +82,7 @@ private constructor(
         @JvmStatic fun builder() = Builder()
     }
 
-    /** A builder for [GnssRawifUploadZipParams]. */
+    /** A builder for [GnssRawIfUploadZipParams]. */
     class Builder internal constructor() {
 
         private var body: Body.Builder = Body.builder()
@@ -90,10 +90,10 @@ private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(gnssRawifUploadZipParams: GnssRawifUploadZipParams) = apply {
-            body = gnssRawifUploadZipParams.body.toBuilder()
-            additionalHeaders = gnssRawifUploadZipParams.additionalHeaders.toBuilder()
-            additionalQueryParams = gnssRawifUploadZipParams.additionalQueryParams.toBuilder()
+        internal fun from(gnssRawIfUploadZipParams: GnssRawIfUploadZipParams) = apply {
+            body = gnssRawIfUploadZipParams.body.toBuilder()
+            additionalHeaders = gnssRawIfUploadZipParams.additionalHeaders.toBuilder()
+            additionalQueryParams = gnssRawIfUploadZipParams.additionalQueryParams.toBuilder()
         }
 
         /**
@@ -241,7 +241,7 @@ private constructor(
         }
 
         /**
-         * Returns an immutable instance of [GnssRawifUploadZipParams].
+         * Returns an immutable instance of [GnssRawIfUploadZipParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
          *
@@ -252,8 +252,8 @@ private constructor(
          *
          * @throws IllegalStateException if any required field is unset.
          */
-        fun build(): GnssRawifUploadZipParams =
-            GnssRawifUploadZipParams(
+        fun build(): GnssRawIfUploadZipParams =
+            GnssRawIfUploadZipParams(
                 body.build(),
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
@@ -428,11 +428,11 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GnssRawifUploadZipParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return /* spotless:off */ other is GnssRawIfUploadZipParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
 
     override fun toString() =
-        "GnssRawifUploadZipParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "GnssRawIfUploadZipParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

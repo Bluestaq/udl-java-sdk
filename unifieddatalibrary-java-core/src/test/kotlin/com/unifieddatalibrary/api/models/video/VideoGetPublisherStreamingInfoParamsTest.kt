@@ -3,6 +3,7 @@
 package com.unifieddatalibrary.api.models.video
 
 import com.unifieddatalibrary.api.core.http.QueryParams
+import com.unifieddatalibrary.api.models.video.VideoGetPublisherStreamingInfoParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -10,53 +11,45 @@ internal class VideoGetPublisherStreamingInfoParamsTest {
 
     @Test
     fun create() {
-        VideoGetPublisherStreamingInfoParams.builder()
-            .sourceName("sourceName")
-            .streamName("streamName")
-            .firstResult(0L)
-            .maxResults(0L)
-            .build()
+      VideoGetPublisherStreamingInfoParams.builder()
+          .sourceName("sourceName")
+          .streamName("streamName")
+          .firstResult(0L)
+          .maxResults(0L)
+          .build()
     }
 
     @Test
     fun queryParams() {
-        val params =
-            VideoGetPublisherStreamingInfoParams.builder()
-                .sourceName("sourceName")
-                .streamName("streamName")
-                .firstResult(0L)
-                .maxResults(0L)
-                .build()
+      val params = VideoGetPublisherStreamingInfoParams.builder()
+          .sourceName("sourceName")
+          .streamName("streamName")
+          .firstResult(0L)
+          .maxResults(0L)
+          .build()
 
-        val queryParams = params._queryParams()
+      val queryParams = params._queryParams()
 
-        assertThat(queryParams)
-            .isEqualTo(
-                QueryParams.builder()
-                    .put("sourceName", "sourceName")
-                    .put("streamName", "streamName")
-                    .put("firstResult", "0")
-                    .put("maxResults", "0")
-                    .build()
-            )
+      assertThat(queryParams).isEqualTo(QueryParams.builder()
+          .put("sourceName", "sourceName")
+          .put("streamName", "streamName")
+          .put("firstResult", "0")
+          .put("maxResults", "0")
+          .build())
     }
 
     @Test
     fun queryParamsWithoutOptionalFields() {
-        val params =
-            VideoGetPublisherStreamingInfoParams.builder()
-                .sourceName("sourceName")
-                .streamName("streamName")
-                .build()
+      val params = VideoGetPublisherStreamingInfoParams.builder()
+          .sourceName("sourceName")
+          .streamName("streamName")
+          .build()
 
-        val queryParams = params._queryParams()
+      val queryParams = params._queryParams()
 
-        assertThat(queryParams)
-            .isEqualTo(
-                QueryParams.builder()
-                    .put("sourceName", "sourceName")
-                    .put("streamName", "streamName")
-                    .build()
-            )
+      assertThat(queryParams).isEqualTo(QueryParams.builder()
+          .put("sourceName", "sourceName")
+          .put("streamName", "streamName")
+          .build())
     }
 }

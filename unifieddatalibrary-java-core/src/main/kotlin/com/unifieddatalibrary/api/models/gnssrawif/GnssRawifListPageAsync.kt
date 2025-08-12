@@ -5,46 +5,46 @@ package com.unifieddatalibrary.api.models.gnssrawif
 import com.unifieddatalibrary.api.core.AutoPagerAsync
 import com.unifieddatalibrary.api.core.PageAsync
 import com.unifieddatalibrary.api.core.checkRequired
-import com.unifieddatalibrary.api.services.async.GnssRawifServiceAsync
+import com.unifieddatalibrary.api.services.async.GnssRawIfServiceAsync
 import java.util.Objects
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor
 import kotlin.jvm.optionals.getOrDefault
 
-/** @see GnssRawifServiceAsync.list */
-class GnssRawifListPageAsync
+/** @see GnssRawIfServiceAsync.list */
+class GnssRawIfListPageAsync
 private constructor(
-    private val service: GnssRawifServiceAsync,
+    private val service: GnssRawIfServiceAsync,
     private val streamHandlerExecutor: Executor,
-    private val params: GnssRawifListParams,
-    private val items: List<GnssRawifListResponse>,
-) : PageAsync<GnssRawifListResponse> {
+    private val params: GnssRawIfListParams,
+    private val items: List<GnssRawIfListResponse>,
+) : PageAsync<GnssRawIfListResponse> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
-    fun nextPageParams(): GnssRawifListParams {
+    fun nextPageParams(): GnssRawIfListParams {
         val offset = params.firstResult().getOrDefault(0)
         return params.toBuilder().firstResult(offset + items().size).build()
     }
 
-    override fun nextPage(): CompletableFuture<GnssRawifListPageAsync> =
+    override fun nextPage(): CompletableFuture<GnssRawIfListPageAsync> =
         service.list(nextPageParams())
 
-    fun autoPager(): AutoPagerAsync<GnssRawifListResponse> =
+    fun autoPager(): AutoPagerAsync<GnssRawIfListResponse> =
         AutoPagerAsync.from(this, streamHandlerExecutor)
 
     /** The parameters that were used to request this page. */
-    fun params(): GnssRawifListParams = params
+    fun params(): GnssRawIfListParams = params
 
     /** The response that this page was parsed from. */
-    override fun items(): List<GnssRawifListResponse> = items
+    override fun items(): List<GnssRawIfListResponse> = items
 
     fun toBuilder() = Builder().from(this)
 
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of [GnssRawifListPageAsync].
+         * Returns a mutable builder for constructing an instance of [GnssRawIfListPageAsync].
          *
          * The following fields are required:
          * ```java
@@ -57,36 +57,36 @@ private constructor(
         @JvmStatic fun builder() = Builder()
     }
 
-    /** A builder for [GnssRawifListPageAsync]. */
+    /** A builder for [GnssRawIfListPageAsync]. */
     class Builder internal constructor() {
 
-        private var service: GnssRawifServiceAsync? = null
+        private var service: GnssRawIfServiceAsync? = null
         private var streamHandlerExecutor: Executor? = null
-        private var params: GnssRawifListParams? = null
-        private var items: List<GnssRawifListResponse>? = null
+        private var params: GnssRawIfListParams? = null
+        private var items: List<GnssRawIfListResponse>? = null
 
         @JvmSynthetic
-        internal fun from(gnssRawifListPageAsync: GnssRawifListPageAsync) = apply {
-            service = gnssRawifListPageAsync.service
-            streamHandlerExecutor = gnssRawifListPageAsync.streamHandlerExecutor
-            params = gnssRawifListPageAsync.params
-            items = gnssRawifListPageAsync.items
+        internal fun from(gnssRawIfListPageAsync: GnssRawIfListPageAsync) = apply {
+            service = gnssRawIfListPageAsync.service
+            streamHandlerExecutor = gnssRawIfListPageAsync.streamHandlerExecutor
+            params = gnssRawIfListPageAsync.params
+            items = gnssRawIfListPageAsync.items
         }
 
-        fun service(service: GnssRawifServiceAsync) = apply { this.service = service }
+        fun service(service: GnssRawIfServiceAsync) = apply { this.service = service }
 
         fun streamHandlerExecutor(streamHandlerExecutor: Executor) = apply {
             this.streamHandlerExecutor = streamHandlerExecutor
         }
 
         /** The parameters that were used to request this page. */
-        fun params(params: GnssRawifListParams) = apply { this.params = params }
+        fun params(params: GnssRawIfListParams) = apply { this.params = params }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<GnssRawifListResponse>) = apply { this.items = items }
+        fun items(items: List<GnssRawIfListResponse>) = apply { this.items = items }
 
         /**
-         * Returns an immutable instance of [GnssRawifListPageAsync].
+         * Returns an immutable instance of [GnssRawIfListPageAsync].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
          *
@@ -100,8 +100,8 @@ private constructor(
          *
          * @throws IllegalStateException if any required field is unset.
          */
-        fun build(): GnssRawifListPageAsync =
-            GnssRawifListPageAsync(
+        fun build(): GnssRawIfListPageAsync =
+            GnssRawIfListPageAsync(
                 checkRequired("service", service),
                 checkRequired("streamHandlerExecutor", streamHandlerExecutor),
                 checkRequired("params", params),
@@ -114,11 +114,11 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GnssRawifListPageAsync && service == other.service && streamHandlerExecutor == other.streamHandlerExecutor && params == other.params && items == other.items /* spotless:on */
+        return /* spotless:off */ other is GnssRawIfListPageAsync && service == other.service && streamHandlerExecutor == other.streamHandlerExecutor && params == other.params && items == other.items /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, streamHandlerExecutor, params, items) /* spotless:on */
 
     override fun toString() =
-        "GnssRawifListPageAsync{service=$service, streamHandlerExecutor=$streamHandlerExecutor, params=$params, items=$items}"
+        "GnssRawIfListPageAsync{service=$service, streamHandlerExecutor=$streamHandlerExecutor, params=$params, items=$items}"
 }

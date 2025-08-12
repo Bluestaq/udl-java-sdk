@@ -5,23 +5,28 @@ package com.unifieddatalibrary.api.models.observations.passiveradarobservation
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.models.observations.passiveradarobservation.PassiveRadarObservationListParams
+import com.unifieddatalibrary.api.models.observations.passiveradarobservation.PassiveRadarObservationListResponse
 import com.unifieddatalibrary.api.services.blocking.observations.PassiveRadarObservationService
 import java.util.Objects
+import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see PassiveRadarObservationService.list */
-class PassiveRadarObservationListPage
-private constructor(
+class PassiveRadarObservationListPage private constructor(
     private val service: PassiveRadarObservationService,
     private val params: PassiveRadarObservationListParams,
     private val items: List<PassiveRadarObservationListResponse>,
+
 ) : Page<PassiveRadarObservationListResponse> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): PassiveRadarObservationListParams {
-        val offset = params.firstResult().getOrDefault(0)
-        return params.toBuilder().firstResult(offset + items().size).build()
+      val offset = params.firstResult().getOrDefault(0)
+      return params.toBuilder()
+          .firstResult(offset + items().size)
+          .build()
     }
 
     override fun nextPage(): PassiveRadarObservationListPage = service.list(nextPageParams())
@@ -39,17 +44,18 @@ private constructor(
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of
-         * [PassiveRadarObservationListPage].
+         * Returns a mutable builder for constructing an instance of [PassiveRadarObservationListPage].
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [PassiveRadarObservationListPage]. */
@@ -67,13 +73,22 @@ private constructor(
                 items = passiveRadarObservationListPage.items
             }
 
-        fun service(service: PassiveRadarObservationService) = apply { this.service = service }
+        fun service(service: PassiveRadarObservationService) =
+            apply {
+                this.service = service
+            }
 
         /** The parameters that were used to request this page. */
-        fun params(params: PassiveRadarObservationListParams) = apply { this.params = params }
+        fun params(params: PassiveRadarObservationListParams) =
+            apply {
+                this.params = params
+            }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<PassiveRadarObservationListResponse>) = apply { this.items = items }
+        fun items(items: List<PassiveRadarObservationListResponse>) =
+            apply {
+                this.items = items
+            }
 
         /**
          * Returns an immutable instance of [PassiveRadarObservationListPage].
@@ -81,6 +96,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
@@ -91,22 +107,27 @@ private constructor(
          */
         fun build(): PassiveRadarObservationListPage =
             PassiveRadarObservationListPage(
-                checkRequired("service", service),
-                checkRequired("params", params),
-                checkRequired("items", items),
+              checkRequired(
+                "service", service
+              ),
+              checkRequired(
+                "params", params
+              ),
+              checkRequired(
+                "items", items
+              ),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is PassiveRadarObservationListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+      return /* spotless:off */ other is PassiveRadarObservationListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
 
-    override fun toString() =
-        "PassiveRadarObservationListPage{service=$service, params=$params, items=$items}"
+    override fun toString() = "PassiveRadarObservationListPage{service=$service, params=$params, items=$items}"
 }

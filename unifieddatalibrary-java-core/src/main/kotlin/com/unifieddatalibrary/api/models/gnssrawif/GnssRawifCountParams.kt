@@ -18,7 +18,7 @@ import kotlin.jvm.optionals.getOrNull
  * retrieving large amounts of data. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp)
  * for more details on valid/required query parameter information.
  */
-class GnssRawifCountParams
+class GnssRawIfCountParams
 private constructor(
     private val startTime: OffsetDateTime,
     private val firstResult: Long?,
@@ -48,7 +48,7 @@ private constructor(
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of [GnssRawifCountParams].
+         * Returns a mutable builder for constructing an instance of [GnssRawIfCountParams].
          *
          * The following fields are required:
          * ```java
@@ -58,7 +58,7 @@ private constructor(
         @JvmStatic fun builder() = Builder()
     }
 
-    /** A builder for [GnssRawifCountParams]. */
+    /** A builder for [GnssRawIfCountParams]. */
     class Builder internal constructor() {
 
         private var startTime: OffsetDateTime? = null
@@ -68,12 +68,12 @@ private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(gnssRawifCountParams: GnssRawifCountParams) = apply {
-            startTime = gnssRawifCountParams.startTime
-            firstResult = gnssRawifCountParams.firstResult
-            maxResults = gnssRawifCountParams.maxResults
-            additionalHeaders = gnssRawifCountParams.additionalHeaders.toBuilder()
-            additionalQueryParams = gnssRawifCountParams.additionalQueryParams.toBuilder()
+        internal fun from(gnssRawIfCountParams: GnssRawIfCountParams) = apply {
+            startTime = gnssRawIfCountParams.startTime
+            firstResult = gnssRawIfCountParams.firstResult
+            maxResults = gnssRawIfCountParams.maxResults
+            additionalHeaders = gnssRawIfCountParams.additionalHeaders.toBuilder()
+            additionalQueryParams = gnssRawIfCountParams.additionalQueryParams.toBuilder()
         }
 
         /**
@@ -205,7 +205,7 @@ private constructor(
         }
 
         /**
-         * Returns an immutable instance of [GnssRawifCountParams].
+         * Returns an immutable instance of [GnssRawIfCountParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
          *
@@ -216,8 +216,8 @@ private constructor(
          *
          * @throws IllegalStateException if any required field is unset.
          */
-        fun build(): GnssRawifCountParams =
-            GnssRawifCountParams(
+        fun build(): GnssRawIfCountParams =
+            GnssRawIfCountParams(
                 checkRequired("startTime", startTime),
                 firstResult,
                 maxResults,
@@ -243,11 +243,11 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GnssRawifCountParams && startTime == other.startTime && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return /* spotless:off */ other is GnssRawIfCountParams && startTime == other.startTime && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(startTime, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
 
     override fun toString() =
-        "GnssRawifCountParams{startTime=$startTime, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "GnssRawIfCountParams{startTime=$startTime, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

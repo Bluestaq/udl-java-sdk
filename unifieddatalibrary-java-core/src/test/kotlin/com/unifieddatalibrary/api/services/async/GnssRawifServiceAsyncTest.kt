@@ -10,12 +10,12 @@ import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo
 import com.github.tomakehurst.wiremock.junit5.WireMockTest
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
-import com.unifieddatalibrary.api.models.gnssrawif.GnssRawifCountParams
-import com.unifieddatalibrary.api.models.gnssrawif.GnssRawifFileGetParams
-import com.unifieddatalibrary.api.models.gnssrawif.GnssRawifGetParams
-import com.unifieddatalibrary.api.models.gnssrawif.GnssRawifListParams
-import com.unifieddatalibrary.api.models.gnssrawif.GnssRawifTupleParams
-import com.unifieddatalibrary.api.models.gnssrawif.GnssRawifUploadZipParams
+import com.unifieddatalibrary.api.models.gnssrawif.GnssRawIfCountParams
+import com.unifieddatalibrary.api.models.gnssrawif.GnssRawIfFileGetParams
+import com.unifieddatalibrary.api.models.gnssrawif.GnssRawIfGetParams
+import com.unifieddatalibrary.api.models.gnssrawif.GnssRawIfListParams
+import com.unifieddatalibrary.api.models.gnssrawif.GnssRawIfTupleParams
+import com.unifieddatalibrary.api.models.gnssrawif.GnssRawIfUploadZipParams
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -25,7 +25,7 @@ import org.junit.jupiter.api.parallel.ResourceLock
 @ExtendWith(TestServerExtension::class)
 @WireMockTest
 @ResourceLock("https://github.com/wiremock/wiremock/issues/169")
-internal class GnssRawifServiceAsyncTest {
+internal class GnssRawIfServiceAsyncTest {
 
     @Test
     fun list() {
@@ -35,11 +35,11 @@ internal class GnssRawifServiceAsyncTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val gnssRawifServiceAsync = client.gnssRawif()
+        val gnssRawIfServiceAsync = client.gnssRawIf()
 
         val pageFuture =
-            gnssRawifServiceAsync.list(
-                GnssRawifListParams.builder()
+            gnssRawIfServiceAsync.list(
+                GnssRawIfListParams.builder()
                     .startTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .build()
             )
@@ -56,11 +56,11 @@ internal class GnssRawifServiceAsyncTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val gnssRawifServiceAsync = client.gnssRawif()
+        val gnssRawIfServiceAsync = client.gnssRawIf()
 
         val responseFuture =
-            gnssRawifServiceAsync.count(
-                GnssRawifCountParams.builder()
+            gnssRawIfServiceAsync.count(
+                GnssRawIfCountParams.builder()
                     .startTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .firstResult(0L)
                     .maxResults(0L)
@@ -78,12 +78,12 @@ internal class GnssRawifServiceAsyncTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val gnssRawifServiceAsync = client.gnssRawif()
+        val gnssRawIfServiceAsync = client.gnssRawIf()
         stubFor(get(anyUrl()).willReturn(ok().withBody("abc")))
 
         val responseFuture =
-            gnssRawifServiceAsync.fileGet(
-                GnssRawifFileGetParams.builder().id("id").firstResult(0L).maxResults(0L).build()
+            gnssRawIfServiceAsync.fileGet(
+                GnssRawIfFileGetParams.builder().id("id").firstResult(0L).maxResults(0L).build()
             )
 
         val response = responseFuture.get()
@@ -98,15 +98,15 @@ internal class GnssRawifServiceAsyncTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val gnssRawifServiceAsync = client.gnssRawif()
+        val gnssRawIfServiceAsync = client.gnssRawIf()
 
-        val gnssRawifFuture =
-            gnssRawifServiceAsync.get(
-                GnssRawifGetParams.builder().id("id").firstResult(0L).maxResults(0L).build()
+        val gnssRawIfFuture =
+            gnssRawIfServiceAsync.get(
+                GnssRawIfGetParams.builder().id("id").firstResult(0L).maxResults(0L).build()
             )
 
-        val gnssRawif = gnssRawifFuture.get()
-        gnssRawif.validate()
+        val gnssRawIf = gnssRawIfFuture.get()
+        gnssRawIf.validate()
     }
 
     @Test
@@ -117,9 +117,9 @@ internal class GnssRawifServiceAsyncTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val gnssRawifServiceAsync = client.gnssRawif()
+        val gnssRawIfServiceAsync = client.gnssRawIf()
 
-        val responseFuture = gnssRawifServiceAsync.queryhelp()
+        val responseFuture = gnssRawIfServiceAsync.queryhelp()
 
         val response = responseFuture.get()
         response.validate()
@@ -133,11 +133,11 @@ internal class GnssRawifServiceAsyncTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val gnssRawifServiceAsync = client.gnssRawif()
+        val gnssRawIfServiceAsync = client.gnssRawIf()
 
         val responseFuture =
-            gnssRawifServiceAsync.tuple(
-                GnssRawifTupleParams.builder()
+            gnssRawIfServiceAsync.tuple(
+                GnssRawIfTupleParams.builder()
                     .columns("columns")
                     .startTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .firstResult(0L)
@@ -157,11 +157,11 @@ internal class GnssRawifServiceAsyncTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val gnssRawifServiceAsync = client.gnssRawif()
+        val gnssRawIfServiceAsync = client.gnssRawIf()
 
         val future =
-            gnssRawifServiceAsync.uploadZip(
-                GnssRawifUploadZipParams.builder().file("some content".byteInputStream()).build()
+            gnssRawIfServiceAsync.uploadZip(
+                GnssRawIfUploadZipParams.builder().file("some content".byteInputStream()).build()
             )
 
         val response = future.get()

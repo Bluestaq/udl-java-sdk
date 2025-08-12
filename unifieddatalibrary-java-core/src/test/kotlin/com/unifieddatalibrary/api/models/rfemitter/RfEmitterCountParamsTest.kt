@@ -3,6 +3,7 @@
 package com.unifieddatalibrary.api.models.rfemitter
 
 import com.unifieddatalibrary.api.core.http.QueryParams
+import com.unifieddatalibrary.api.models.rfemitter.RfEmitterCountParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -10,25 +11,33 @@ internal class RfEmitterCountParamsTest {
 
     @Test
     fun create() {
-        RfEmitterCountParams.builder().firstResult(0L).maxResults(0L).build()
+      RfEmitterCountParams.builder()
+          .firstResult(0L)
+          .maxResults(0L)
+          .build()
     }
 
     @Test
     fun queryParams() {
-        val params = RfEmitterCountParams.builder().firstResult(0L).maxResults(0L).build()
+      val params = RfEmitterCountParams.builder()
+          .firstResult(0L)
+          .maxResults(0L)
+          .build()
 
-        val queryParams = params._queryParams()
+      val queryParams = params._queryParams()
 
-        assertThat(queryParams)
-            .isEqualTo(QueryParams.builder().put("firstResult", "0").put("maxResults", "0").build())
+      assertThat(queryParams).isEqualTo(QueryParams.builder()
+          .put("firstResult", "0")
+          .put("maxResults", "0")
+          .build())
     }
 
     @Test
     fun queryParamsWithoutOptionalFields() {
-        val params = RfEmitterCountParams.builder().build()
+      val params = RfEmitterCountParams.builder().build()
 
-        val queryParams = params._queryParams()
+      val queryParams = params._queryParams()
 
-        assertThat(queryParams).isEqualTo(QueryParams.builder().build())
+      assertThat(queryParams).isEqualTo(QueryParams.builder().build())
     }
 }

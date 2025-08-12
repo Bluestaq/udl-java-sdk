@@ -4,17 +4,17 @@ package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
-import com.unifieddatalibrary.api.models.ionoobservation.IonOobservationCountParams
-import com.unifieddatalibrary.api.models.ionoobservation.IonOobservationCreateBulkParams
-import com.unifieddatalibrary.api.models.ionoobservation.IonOobservationListParams
-import com.unifieddatalibrary.api.models.ionoobservation.IonOobservationTupleParams
-import com.unifieddatalibrary.api.models.ionoobservation.IonOobservationUnvalidatedPublishParams
+import com.unifieddatalibrary.api.models.ionoobservations.IonoObservationCountParams
+import com.unifieddatalibrary.api.models.ionoobservations.IonoObservationCreateBulkParams
+import com.unifieddatalibrary.api.models.ionoobservations.IonoObservationListParams
+import com.unifieddatalibrary.api.models.ionoobservations.IonoObservationTupleParams
+import com.unifieddatalibrary.api.models.ionoobservations.IonoObservationUnvalidatedPublishParams
 import java.time.OffsetDateTime
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(TestServerExtension::class)
-internal class IonOobservationServiceTest {
+internal class IonoObservationServiceTest {
 
     @Test
     fun list() {
@@ -24,11 +24,11 @@ internal class IonOobservationServiceTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val ionOobservationService = client.ionOobservation()
+        val ionoObservationService = client.ionoObservations()
 
         val page =
-            ionOobservationService.list(
-                IonOobservationListParams.builder()
+            ionoObservationService.list(
+                IonoObservationListParams.builder()
                     .startTimeUtc(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .build()
             )
@@ -44,10 +44,10 @@ internal class IonOobservationServiceTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val ionOobservationService = client.ionOobservation()
+        val ionoObservationService = client.ionoObservations()
 
-        ionOobservationService.count(
-            IonOobservationCountParams.builder()
+        ionoObservationService.count(
+            IonoObservationCountParams.builder()
                 .startTimeUtc(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .firstResult(0L)
                 .maxResults(0L)
@@ -63,14 +63,14 @@ internal class IonOobservationServiceTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val ionOobservationService = client.ionOobservation()
+        val ionoObservationService = client.ionoObservations()
 
-        ionOobservationService.createBulk(
-            IonOobservationCreateBulkParams.builder()
+        ionoObservationService.createBulk(
+            IonoObservationCreateBulkParams.builder()
                 .addBody(
-                    IonOobservationCreateBulkParams.Body.builder()
+                    IonoObservationCreateBulkParams.Body.builder()
                         .classificationMarking("U")
-                        .dataMode(IonOobservationCreateBulkParams.Body.DataMode.TEST)
+                        .dataMode(IonoObservationCreateBulkParams.Body.DataMode.TEST)
                         .source("Bluestaq")
                         .startTimeUtc(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
                         .stationId("STATION-ID")
@@ -78,7 +78,7 @@ internal class IonOobservationServiceTest {
                         .systemInfo("Example settings")
                         .id("IONOOBSERVATION-ID")
                         .amplitude(
-                            IonOobservationCreateBulkParams.Body.Amplitude.builder()
+                            IonoObservationCreateBulkParams.Body.Amplitude.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -90,7 +90,7 @@ internal class IonOobservationServiceTest {
                                 .build()
                         )
                         .antennaElementPosition(
-                            IonOobservationCreateBulkParams.Body.AntennaElementPosition.builder()
+                            IonoObservationCreateBulkParams.Body.AntennaElementPosition.builder()
                                 .addData(listOf(1.23, 0.123))
                                 .addDimensionName("NAME1")
                                 .addDimensionName("NAME2")
@@ -99,13 +99,13 @@ internal class IonOobservationServiceTest {
                                 .build()
                         )
                         .antennaElementPositionCoordinateSystem(
-                            IonOobservationCreateBulkParams.Body
+                            IonoObservationCreateBulkParams.Body
                                 .AntennaElementPositionCoordinateSystem
                                 .J2000
                         )
                         .artistFlags(listOf(1, 2, 3))
                         .azimuth(
-                            IonOobservationCreateBulkParams.Body.Azimuth.builder()
+                            IonoObservationCreateBulkParams.Body.Azimuth.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -119,7 +119,7 @@ internal class IonOobservationServiceTest {
                         .b0(68.07)
                         .b1(1.87)
                         .addCharAtt(
-                            IonOobservationCreateBulkParams.Body.CharAtt.builder()
+                            IonoObservationCreateBulkParams.Body.CharAtt.builder()
                                 .charName("hprimeF2")
                                 .addClimateModelInputParam("ISSN1 88.1")
                                 .addClimateModelInputParam("Option 2")
@@ -139,16 +139,16 @@ internal class IonOobservationServiceTest {
                         .d(1.1)
                         .d1(1.94)
                         .datum(
-                            IonOobservationCreateBulkParams.Body.Datum.builder()
+                            IonoObservationCreateBulkParams.Body.Datum.builder()
                                 .data(listOf(1.1, 2.1, 3.1))
                                 .notes("NOTES")
                                 .build()
                         )
                         .deltafoF2(1.1)
                         .densityProfile(
-                            IonOobservationCreateBulkParams.Body.DensityProfile.builder()
+                            IonoObservationCreateBulkParams.Body.DensityProfile.builder()
                                 .iri(
-                                    IonOobservationCreateBulkParams.Body.DensityProfile.Iri
+                                    IonoObservationCreateBulkParams.Body.DensityProfile.Iri
                                         .builder()
                                         .b0(245.1)
                                         .b1(3.45)
@@ -177,11 +177,11 @@ internal class IonOobservationServiceTest {
                                         .build()
                                 )
                                 .parabolic(
-                                    IonOobservationCreateBulkParams.Body.DensityProfile.Parabolic
+                                    IonoObservationCreateBulkParams.Body.DensityProfile.Parabolic
                                         .builder()
                                         .description("Best-fit algorithm in NHPC software.")
                                         .addParabolicItem(
-                                            IonOobservationCreateBulkParams.Body.DensityProfile
+                                            IonoObservationCreateBulkParams.Body.DensityProfile
                                                 .Parabolic
                                                 .ParabolicItem
                                                 .builder()
@@ -194,7 +194,7 @@ internal class IonOobservationServiceTest {
                                         .build()
                                 )
                                 .quasiParabolic(
-                                    IonOobservationCreateBulkParams.Body.DensityProfile
+                                    IonoObservationCreateBulkParams.Body.DensityProfile
                                         .QuasiParabolic
                                         .builder()
                                         .description(
@@ -202,7 +202,7 @@ internal class IonOobservationServiceTest {
                                         )
                                         .earthRadius(6370.1)
                                         .addQuasiParabolicSegment(
-                                            IonOobservationCreateBulkParams.Body.DensityProfile
+                                            IonoObservationCreateBulkParams.Body.DensityProfile
                                                 .QuasiParabolic
                                                 .QuasiParabolicSegment
                                                 .builder()
@@ -218,14 +218,14 @@ internal class IonOobservationServiceTest {
                                         .build()
                                 )
                                 .shiftedChebyshev(
-                                    IonOobservationCreateBulkParams.Body.DensityProfile
+                                    IonoObservationCreateBulkParams.Body.DensityProfile
                                         .ShiftedChebyshev
                                         .builder()
                                         .description(
                                             "Best-fit Huang-Reinisch formalism based on shifted Chebyshev expansion."
                                         )
                                         .addShiftedChebyshev(
-                                            IonOobservationCreateBulkParams.Body.DensityProfile
+                                            IonoObservationCreateBulkParams.Body.DensityProfile
                                                 .ShiftedChebyshev
                                                 .InnerShiftedChebyshev
                                                 .builder()
@@ -244,7 +244,7 @@ internal class IonOobservationServiceTest {
                                         .build()
                                 )
                                 .topsideExtensionChapmanConst(
-                                    IonOobservationCreateBulkParams.Body.DensityProfile
+                                    IonoObservationCreateBulkParams.Body.DensityProfile
                                         .TopsideExtensionChapmanConst
                                         .builder()
                                         .chi(35.1)
@@ -257,7 +257,7 @@ internal class IonOobservationServiceTest {
                                         .build()
                                 )
                                 .topsideExtensionVaryChap(
-                                    IonOobservationCreateBulkParams.Body.DensityProfile
+                                    IonoObservationCreateBulkParams.Body.DensityProfile
                                         .TopsideExtensionVaryChap
                                         .builder()
                                         .alpha(30.1)
@@ -280,7 +280,7 @@ internal class IonOobservationServiceTest {
                                 .build()
                         )
                         .doppler(
-                            IonOobservationCreateBulkParams.Body.Doppler.builder()
+                            IonoObservationCreateBulkParams.Body.Doppler.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -297,7 +297,7 @@ internal class IonOobservationServiceTest {
                         .electronDensity(listOf(1.1, 2.1, 3.1))
                         .electronDensityUncertainty(listOf(0.8, 0.2, 0.5))
                         .elevation(
-                            IonOobservationCreateBulkParams.Body.Elevation.builder()
+                            IonoObservationCreateBulkParams.Body.Elevation.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -328,7 +328,7 @@ internal class IonOobservationServiceTest {
                         .foF2p(1.1)
                         .foP(87.21)
                         .frequency(
-                            IonOobservationCreateBulkParams.Body.Frequency.builder()
+                            IonoObservationCreateBulkParams.Body.Frequency.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -365,7 +365,7 @@ internal class IonOobservationServiceTest {
                         .origNetwork("ORIG")
                         .origSensorId("ORIGSENSOR-ID")
                         .phase(
-                            IonOobservationCreateBulkParams.Body.Phase.builder()
+                            IonoObservationCreateBulkParams.Body.Phase.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -380,7 +380,7 @@ internal class IonOobservationServiceTest {
                         .plasmaFrequencyUncertainty(listOf(0.8, 0.2, 0.5))
                         .platformName("Millstone Hill")
                         .polarization(
-                            IonOobservationCreateBulkParams.Body.Polarization.builder()
+                            IonoObservationCreateBulkParams.Body.Polarization.builder()
                                 .addData(
                                     listOf(
                                         listOf(
@@ -388,11 +388,11 @@ internal class IonOobservationServiceTest {
                                                 listOf(
                                                     listOf(
                                                         listOf(
-                                                            IonOobservationCreateBulkParams.Body
+                                                            IonoObservationCreateBulkParams.Body
                                                                 .Polarization
                                                                 .UnnamedSchemaWithArrayParent3
                                                                 .X,
-                                                            IonOobservationCreateBulkParams.Body
+                                                            IonoObservationCreateBulkParams.Body
                                                                 .Polarization
                                                                 .UnnamedSchemaWithArrayParent3
                                                                 .O,
@@ -411,7 +411,7 @@ internal class IonOobservationServiceTest {
                                 .build()
                         )
                         .power(
-                            IonOobservationCreateBulkParams.Body.Power.builder()
+                            IonoObservationCreateBulkParams.Body.Power.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -425,7 +425,7 @@ internal class IonOobservationServiceTest {
                         .qe(0.95)
                         .qf(1.83)
                         .range(
-                            IonOobservationCreateBulkParams.Body.Range.builder()
+                            IonoObservationCreateBulkParams.Body.Range.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -439,13 +439,13 @@ internal class IonOobservationServiceTest {
                         .addReceiveCoordinate(listOf(45.5, 179.3, 35.6))
                         .addReceiveCoordinate(listOf(-80.2, -20.5, 43.2))
                         .receiveSensorType(
-                            IonOobservationCreateBulkParams.Body.ReceiveSensorType.MOBILE
+                            IonoObservationCreateBulkParams.Body.ReceiveSensorType.MOBILE
                         )
                         .restrictedFrequency(listOf(12.5, 34.5, 45.3))
                         .restrictedFrequencyNotes("Example notes")
                         .scaleHeightF2Peak(35.613)
                         .scalerInfo(
-                            IonOobservationCreateBulkParams.Body.ScalerInfo.builder()
+                            IonoObservationCreateBulkParams.Body.ScalerInfo.builder()
                                 .confidenceLevel(11)
                                 .confidenceScore(75)
                                 .name("ARTIST-4")
@@ -455,7 +455,7 @@ internal class IonOobservationServiceTest {
                                 .build()
                         )
                         .stokes(
-                            IonOobservationCreateBulkParams.Body.Stokes.builder()
+                            IonoObservationCreateBulkParams.Body.Stokes.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -474,7 +474,7 @@ internal class IonOobservationServiceTest {
                         .tidPeriods(listOf(1.1, 2.1, 3.1))
                         .tidPhaseSpeeds(listOf(1.1, 2.1, 3.1))
                         .time(
-                            IonOobservationCreateBulkParams.Body.Time.builder()
+                            IonoObservationCreateBulkParams.Body.Time.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -486,7 +486,7 @@ internal class IonOobservationServiceTest {
                                 .build()
                         )
                         .traceGeneric(
-                            IonOobservationCreateBulkParams.Body.TraceGeneric.builder()
+                            IonoObservationCreateBulkParams.Body.TraceGeneric.builder()
                                 .addData(listOf(listOf(1.23, 1.0903)))
                                 .addDimensionName("NAME1")
                                 .addDimensionName("NAME2")
@@ -496,7 +496,7 @@ internal class IonOobservationServiceTest {
                         .addTransmitCoordinate(listOf(45.5, 179.3, 35.6))
                         .addTransmitCoordinate(listOf(-80.2, -20.5, 43.2))
                         .transmitSensorType(
-                            IonOobservationCreateBulkParams.Body.TransmitSensorType.MOBILE
+                            IonoObservationCreateBulkParams.Body.TransmitSensorType.MOBILE
                         )
                         .typeEs("Auroral")
                         .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
@@ -520,9 +520,9 @@ internal class IonOobservationServiceTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val ionOobservationService = client.ionOobservation()
+        val ionoObservationService = client.ionoObservations()
 
-        val response = ionOobservationService.queryhelp()
+        val response = ionoObservationService.queryhelp()
 
         response.validate()
     }
@@ -535,11 +535,11 @@ internal class IonOobservationServiceTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val ionOobservationService = client.ionOobservation()
+        val ionoObservationService = client.ionoObservations()
 
         val response =
-            ionOobservationService.tuple(
-                IonOobservationTupleParams.builder()
+            ionoObservationService.tuple(
+                IonoObservationTupleParams.builder()
                     .columns("columns")
                     .startTimeUtc(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .firstResult(0L)
@@ -558,14 +558,14 @@ internal class IonOobservationServiceTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val ionOobservationService = client.ionOobservation()
+        val ionoObservationService = client.ionoObservations()
 
-        ionOobservationService.unvalidatedPublish(
-            IonOobservationUnvalidatedPublishParams.builder()
+        ionoObservationService.unvalidatedPublish(
+            IonoObservationUnvalidatedPublishParams.builder()
                 .addBody(
-                    IonOobservationUnvalidatedPublishParams.Body.builder()
+                    IonoObservationUnvalidatedPublishParams.Body.builder()
                         .classificationMarking("U")
-                        .dataMode(IonOobservationUnvalidatedPublishParams.Body.DataMode.TEST)
+                        .dataMode(IonoObservationUnvalidatedPublishParams.Body.DataMode.TEST)
                         .source("Bluestaq")
                         .startTimeUtc(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
                         .stationId("STATION-ID")
@@ -573,7 +573,7 @@ internal class IonOobservationServiceTest {
                         .systemInfo("Example settings")
                         .id("IONOOBSERVATION-ID")
                         .amplitude(
-                            IonOobservationUnvalidatedPublishParams.Body.Amplitude.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.Amplitude.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -585,7 +585,7 @@ internal class IonOobservationServiceTest {
                                 .build()
                         )
                         .antennaElementPosition(
-                            IonOobservationUnvalidatedPublishParams.Body.AntennaElementPosition
+                            IonoObservationUnvalidatedPublishParams.Body.AntennaElementPosition
                                 .builder()
                                 .addData(listOf(1.23, 0.123))
                                 .addDimensionName("NAME1")
@@ -595,13 +595,13 @@ internal class IonOobservationServiceTest {
                                 .build()
                         )
                         .antennaElementPositionCoordinateSystem(
-                            IonOobservationUnvalidatedPublishParams.Body
+                            IonoObservationUnvalidatedPublishParams.Body
                                 .AntennaElementPositionCoordinateSystem
                                 .J2000
                         )
                         .artistFlags(listOf(1, 2, 3))
                         .azimuth(
-                            IonOobservationUnvalidatedPublishParams.Body.Azimuth.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.Azimuth.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -615,7 +615,7 @@ internal class IonOobservationServiceTest {
                         .b0(68.07)
                         .b1(1.87)
                         .addCharAtt(
-                            IonOobservationUnvalidatedPublishParams.Body.CharAtt.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.CharAtt.builder()
                                 .charName("hprimeF2")
                                 .addClimateModelInputParam("ISSN1 88.1")
                                 .addClimateModelInputParam("Option 2")
@@ -635,16 +635,16 @@ internal class IonOobservationServiceTest {
                         .d(1.1)
                         .d1(1.94)
                         .datum(
-                            IonOobservationUnvalidatedPublishParams.Body.Datum.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.Datum.builder()
                                 .data(listOf(1.1, 2.1, 3.1))
                                 .notes("NOTES")
                                 .build()
                         )
                         .deltafoF2(1.1)
                         .densityProfile(
-                            IonOobservationUnvalidatedPublishParams.Body.DensityProfile.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.DensityProfile.builder()
                                 .iri(
-                                    IonOobservationUnvalidatedPublishParams.Body.DensityProfile.Iri
+                                    IonoObservationUnvalidatedPublishParams.Body.DensityProfile.Iri
                                         .builder()
                                         .b0(245.1)
                                         .b1(3.45)
@@ -673,12 +673,12 @@ internal class IonOobservationServiceTest {
                                         .build()
                                 )
                                 .parabolic(
-                                    IonOobservationUnvalidatedPublishParams.Body.DensityProfile
+                                    IonoObservationUnvalidatedPublishParams.Body.DensityProfile
                                         .Parabolic
                                         .builder()
                                         .description("Best-fit algorithm in NHPC software.")
                                         .addParabolicItem(
-                                            IonOobservationUnvalidatedPublishParams.Body
+                                            IonoObservationUnvalidatedPublishParams.Body
                                                 .DensityProfile
                                                 .Parabolic
                                                 .ParabolicItem
@@ -692,7 +692,7 @@ internal class IonOobservationServiceTest {
                                         .build()
                                 )
                                 .quasiParabolic(
-                                    IonOobservationUnvalidatedPublishParams.Body.DensityProfile
+                                    IonoObservationUnvalidatedPublishParams.Body.DensityProfile
                                         .QuasiParabolic
                                         .builder()
                                         .description(
@@ -700,7 +700,7 @@ internal class IonOobservationServiceTest {
                                         )
                                         .earthRadius(6370.1)
                                         .addQuasiParabolicSegment(
-                                            IonOobservationUnvalidatedPublishParams.Body
+                                            IonoObservationUnvalidatedPublishParams.Body
                                                 .DensityProfile
                                                 .QuasiParabolic
                                                 .QuasiParabolicSegment
@@ -717,14 +717,14 @@ internal class IonOobservationServiceTest {
                                         .build()
                                 )
                                 .shiftedChebyshev(
-                                    IonOobservationUnvalidatedPublishParams.Body.DensityProfile
+                                    IonoObservationUnvalidatedPublishParams.Body.DensityProfile
                                         .ShiftedChebyshev
                                         .builder()
                                         .description(
                                             "Best-fit Huang-Reinisch formalism based on shifted Chebyshev expansion."
                                         )
                                         .addShiftedChebyshev(
-                                            IonOobservationUnvalidatedPublishParams.Body
+                                            IonoObservationUnvalidatedPublishParams.Body
                                                 .DensityProfile
                                                 .ShiftedChebyshev
                                                 .InnerShiftedChebyshev
@@ -744,7 +744,7 @@ internal class IonOobservationServiceTest {
                                         .build()
                                 )
                                 .topsideExtensionChapmanConst(
-                                    IonOobservationUnvalidatedPublishParams.Body.DensityProfile
+                                    IonoObservationUnvalidatedPublishParams.Body.DensityProfile
                                         .TopsideExtensionChapmanConst
                                         .builder()
                                         .chi(35.1)
@@ -757,7 +757,7 @@ internal class IonOobservationServiceTest {
                                         .build()
                                 )
                                 .topsideExtensionVaryChap(
-                                    IonOobservationUnvalidatedPublishParams.Body.DensityProfile
+                                    IonoObservationUnvalidatedPublishParams.Body.DensityProfile
                                         .TopsideExtensionVaryChap
                                         .builder()
                                         .alpha(30.1)
@@ -780,7 +780,7 @@ internal class IonOobservationServiceTest {
                                 .build()
                         )
                         .doppler(
-                            IonOobservationUnvalidatedPublishParams.Body.Doppler.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.Doppler.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -797,7 +797,7 @@ internal class IonOobservationServiceTest {
                         .electronDensity(listOf(1.1, 2.1, 3.1))
                         .electronDensityUncertainty(listOf(0.8, 0.2, 0.5))
                         .elevation(
-                            IonOobservationUnvalidatedPublishParams.Body.Elevation.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.Elevation.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -828,7 +828,7 @@ internal class IonOobservationServiceTest {
                         .foF2p(1.1)
                         .foP(87.21)
                         .frequency(
-                            IonOobservationUnvalidatedPublishParams.Body.Frequency.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.Frequency.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -865,7 +865,7 @@ internal class IonOobservationServiceTest {
                         .origNetwork("ORIG")
                         .origSensorId("ORIGSENSOR-ID")
                         .phase(
-                            IonOobservationUnvalidatedPublishParams.Body.Phase.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.Phase.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -880,7 +880,7 @@ internal class IonOobservationServiceTest {
                         .plasmaFrequencyUncertainty(listOf(0.8, 0.2, 0.5))
                         .platformName("Millstone Hill")
                         .polarization(
-                            IonOobservationUnvalidatedPublishParams.Body.Polarization.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.Polarization.builder()
                                 .addData(
                                     listOf(
                                         listOf(
@@ -888,12 +888,12 @@ internal class IonOobservationServiceTest {
                                                 listOf(
                                                     listOf(
                                                         listOf(
-                                                            IonOobservationUnvalidatedPublishParams
+                                                            IonoObservationUnvalidatedPublishParams
                                                                 .Body
                                                                 .Polarization
                                                                 .UnnamedSchemaWithArrayParent4
                                                                 .X,
-                                                            IonOobservationUnvalidatedPublishParams
+                                                            IonoObservationUnvalidatedPublishParams
                                                                 .Body
                                                                 .Polarization
                                                                 .UnnamedSchemaWithArrayParent4
@@ -913,7 +913,7 @@ internal class IonOobservationServiceTest {
                                 .build()
                         )
                         .power(
-                            IonOobservationUnvalidatedPublishParams.Body.Power.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.Power.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -927,7 +927,7 @@ internal class IonOobservationServiceTest {
                         .qe(0.95)
                         .qf(1.83)
                         .range(
-                            IonOobservationUnvalidatedPublishParams.Body.Range.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.Range.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -941,13 +941,13 @@ internal class IonOobservationServiceTest {
                         .addReceiveCoordinate(listOf(45.5, 179.3, 35.6))
                         .addReceiveCoordinate(listOf(-80.2, -20.5, 43.2))
                         .receiveSensorType(
-                            IonOobservationUnvalidatedPublishParams.Body.ReceiveSensorType.MOBILE
+                            IonoObservationUnvalidatedPublishParams.Body.ReceiveSensorType.MOBILE
                         )
                         .restrictedFrequency(listOf(12.5, 34.5, 45.3))
                         .restrictedFrequencyNotes("Example notes")
                         .scaleHeightF2Peak(35.613)
                         .scalerInfo(
-                            IonOobservationUnvalidatedPublishParams.Body.ScalerInfo.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.ScalerInfo.builder()
                                 .confidenceLevel(11)
                                 .confidenceScore(75)
                                 .name("ARTIST-4")
@@ -957,7 +957,7 @@ internal class IonOobservationServiceTest {
                                 .build()
                         )
                         .stokes(
-                            IonOobservationUnvalidatedPublishParams.Body.Stokes.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.Stokes.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -976,7 +976,7 @@ internal class IonOobservationServiceTest {
                         .tidPeriods(listOf(1.1, 2.1, 3.1))
                         .tidPhaseSpeeds(listOf(1.1, 2.1, 3.1))
                         .time(
-                            IonOobservationUnvalidatedPublishParams.Body.Time.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.Time.builder()
                                 .addData(
                                     listOf(listOf(listOf(listOf(listOf(listOf(0.02, 0.034))))))
                                 )
@@ -988,7 +988,7 @@ internal class IonOobservationServiceTest {
                                 .build()
                         )
                         .traceGeneric(
-                            IonOobservationUnvalidatedPublishParams.Body.TraceGeneric.builder()
+                            IonoObservationUnvalidatedPublishParams.Body.TraceGeneric.builder()
                                 .addData(listOf(listOf(1.23, 1.0903)))
                                 .addDimensionName("NAME1")
                                 .addDimensionName("NAME2")
@@ -998,7 +998,7 @@ internal class IonOobservationServiceTest {
                         .addTransmitCoordinate(listOf(45.5, 179.3, 35.6))
                         .addTransmitCoordinate(listOf(-80.2, -20.5, 43.2))
                         .transmitSensorType(
-                            IonOobservationUnvalidatedPublishParams.Body.TransmitSensorType.MOBILE
+                            IonoObservationUnvalidatedPublishParams.Body.TransmitSensorType.MOBILE
                         )
                         .typeEs("Auroral")
                         .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))

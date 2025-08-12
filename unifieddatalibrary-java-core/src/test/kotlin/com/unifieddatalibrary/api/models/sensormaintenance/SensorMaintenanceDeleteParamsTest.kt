@@ -2,6 +2,7 @@
 
 package com.unifieddatalibrary.api.models.sensormaintenance
 
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceDeleteParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -9,15 +10,19 @@ internal class SensorMaintenanceDeleteParamsTest {
 
     @Test
     fun create() {
-        SensorMaintenanceDeleteParams.builder().id("id").build()
+      SensorMaintenanceDeleteParams.builder()
+          .id("id")
+          .build()
     }
 
     @Test
     fun pathParams() {
-        val params = SensorMaintenanceDeleteParams.builder().id("id").build()
+      val params = SensorMaintenanceDeleteParams.builder()
+          .id("id")
+          .build()
 
-        assertThat(params._pathParam(0)).isEqualTo("id")
-        // out-of-bound path param
-        assertThat(params._pathParam(1)).isEqualTo("")
+      assertThat(params._pathParam(0)).isEqualTo("id")
+      // out-of-bound path param
+      assertThat(params._pathParam(1)).isEqualTo("")
     }
 }

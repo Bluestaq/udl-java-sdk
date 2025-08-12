@@ -10,7 +10,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 /** Service operation to get a single GNSSRawIF by its unique ID passed as a path parameter. */
-class GnssRawifGetParams
+class GnssRawIfGetParams
 private constructor(
     private val id: String?,
     private val firstResult: Long?,
@@ -35,13 +35,13 @@ private constructor(
 
     companion object {
 
-        @JvmStatic fun none(): GnssRawifGetParams = builder().build()
+        @JvmStatic fun none(): GnssRawIfGetParams = builder().build()
 
-        /** Returns a mutable builder for constructing an instance of [GnssRawifGetParams]. */
+        /** Returns a mutable builder for constructing an instance of [GnssRawIfGetParams]. */
         @JvmStatic fun builder() = Builder()
     }
 
-    /** A builder for [GnssRawifGetParams]. */
+    /** A builder for [GnssRawIfGetParams]. */
     class Builder internal constructor() {
 
         private var id: String? = null
@@ -51,12 +51,12 @@ private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(gnssRawifGetParams: GnssRawifGetParams) = apply {
-            id = gnssRawifGetParams.id
-            firstResult = gnssRawifGetParams.firstResult
-            maxResults = gnssRawifGetParams.maxResults
-            additionalHeaders = gnssRawifGetParams.additionalHeaders.toBuilder()
-            additionalQueryParams = gnssRawifGetParams.additionalQueryParams.toBuilder()
+        internal fun from(gnssRawIfGetParams: GnssRawIfGetParams) = apply {
+            id = gnssRawIfGetParams.id
+            firstResult = gnssRawIfGetParams.firstResult
+            maxResults = gnssRawIfGetParams.maxResults
+            additionalHeaders = gnssRawIfGetParams.additionalHeaders.toBuilder()
+            additionalQueryParams = gnssRawIfGetParams.additionalQueryParams.toBuilder()
         }
 
         fun id(id: String?) = apply { this.id = id }
@@ -187,12 +187,12 @@ private constructor(
         }
 
         /**
-         * Returns an immutable instance of [GnssRawifGetParams].
+         * Returns an immutable instance of [GnssRawIfGetParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
          */
-        fun build(): GnssRawifGetParams =
-            GnssRawifGetParams(
+        fun build(): GnssRawIfGetParams =
+            GnssRawIfGetParams(
                 id,
                 firstResult,
                 maxResults,
@@ -223,11 +223,11 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GnssRawifGetParams && id == other.id && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return /* spotless:off */ other is GnssRawIfGetParams && id == other.id && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(id, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
 
     override fun toString() =
-        "GnssRawifGetParams{id=$id, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "GnssRawIfGetParams{id=$id, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

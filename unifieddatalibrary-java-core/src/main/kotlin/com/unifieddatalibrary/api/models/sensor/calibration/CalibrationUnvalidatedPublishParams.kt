@@ -15,21 +15,18 @@ import com.unifieddatalibrary.api.core.http.Headers
 import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationUnvalidatedPublishParams
 import java.time.OffsetDateTime
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/**
- * Service operation to take multiple sensorcalibration records as a POST body and ingest into the
- * database. This operation is intended to be used for automated feeds into UDL. A specific role is
- * required to perform this service operation. Please contact the UDL team for assistance.
- */
-class CalibrationUnvalidatedPublishParams
-private constructor(
+/** Service operation to take multiple sensorcalibration records as a POST body and ingest into the database. This operation is intended to be used for automated feeds into UDL. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
+class CalibrationUnvalidatedPublishParams private constructor(
     private val body: List<Body>,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
+
 ) : Params {
 
     fun body(): List<Body> = body
@@ -45,15 +42,16 @@ private constructor(
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of
-         * [CalibrationUnvalidatedPublishParams].
+         * Returns a mutable builder for constructing an instance of [CalibrationUnvalidatedPublishParams].
          *
          * The following fields are required:
+         *
          * ```java
          * .body()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [CalibrationUnvalidatedPublishParams]. */
@@ -64,123 +62,151 @@ private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(
-            calibrationUnvalidatedPublishParams: CalibrationUnvalidatedPublishParams
-        ) = apply {
-            body = calibrationUnvalidatedPublishParams.body.toMutableList()
-            additionalHeaders = calibrationUnvalidatedPublishParams.additionalHeaders.toBuilder()
-            additionalQueryParams =
-                calibrationUnvalidatedPublishParams.additionalQueryParams.toBuilder()
-        }
+        internal fun from(calibrationUnvalidatedPublishParams: CalibrationUnvalidatedPublishParams) =
+            apply {
+                body = calibrationUnvalidatedPublishParams.body.toMutableList()
+                additionalHeaders = calibrationUnvalidatedPublishParams.additionalHeaders.toBuilder()
+                additionalQueryParams = calibrationUnvalidatedPublishParams.additionalQueryParams.toBuilder()
+            }
 
-        fun body(body: List<Body>) = apply { this.body = body.toMutableList() }
+        fun body(body: List<Body>) =
+            apply {
+                this.body = body.toMutableList()
+            }
 
         /**
          * Adds a single [Body] to [Builder.body].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addBody(body: Body) = apply {
-            this.body = (this.body ?: mutableListOf()).apply { add(body) }
-        }
+        fun addBody(body: Body) =
+            apply {
+                this.body = (this.body ?: mutableListOf()).apply { add(body) }
+            }
 
-        fun additionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun putAdditionalHeader(name: String, value: String) = apply {
-            additionalHeaders.put(name, value)
-        }
+        fun putAdditionalHeader(name: String, value: String) =
+            apply {
+                additionalHeaders.put(name, value)
+            }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.put(name, values)
-        }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.put(name, values)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun replaceAdditionalHeaders(name: String, value: String) = apply {
-            additionalHeaders.replace(name, value)
-        }
+        fun replaceAdditionalHeaders(name: String, value: String) =
+            apply {
+                additionalHeaders.replace(name, value)
+            }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.replace(name, values)
-        }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.replace(name, values)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
+        fun removeAdditionalHeaders(name: String) =
+            apply {
+                additionalHeaders.remove(name)
+            }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
-            additionalHeaders.removeAll(names)
-        }
+        fun removeAllAdditionalHeaders(names: Set<String>) =
+            apply {
+                additionalHeaders.removeAll(names)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun putAdditionalQueryParam(key: String, value: String) = apply {
-            additionalQueryParams.put(key, value)
-        }
+        fun putAdditionalQueryParam(key: String, value: String) =
+            apply {
+                additionalQueryParams.put(key, value)
+            }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.put(key, values)
-        }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.put(key, values)
+            }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.putAll(additionalQueryParams)
-        }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.putAll(additionalQueryParams)
+            }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
-            additionalQueryParams.replace(key, value)
-        }
+        fun replaceAdditionalQueryParams(key: String, value: String) =
+            apply {
+                additionalQueryParams.replace(key, value)
+            }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.replace(key, values)
-        }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.replace(key, values)
+            }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.replaceAll(additionalQueryParams)
-        }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.replaceAll(additionalQueryParams)
+            }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
+        fun removeAdditionalQueryParams(key: String) =
+            apply {
+                additionalQueryParams.remove(key)
+            }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
-            additionalQueryParams.removeAll(keys)
-        }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) =
+            apply {
+                additionalQueryParams.removeAll(keys)
+            }
 
         /**
          * Returns an immutable instance of [CalibrationUnvalidatedPublishParams].
@@ -188,6 +214,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .body()
          * ```
@@ -196,9 +223,11 @@ private constructor(
          */
         fun build(): CalibrationUnvalidatedPublishParams =
             CalibrationUnvalidatedPublishParams(
-                checkRequired("body", body).toImmutable(),
-                additionalHeaders.build(),
-                additionalQueryParams.build(),
+              checkRequired(
+                "body", body
+              ).toImmutable(),
+              additionalHeaders.build(),
+              additionalQueryParams.build(),
             )
     }
 
@@ -208,27 +237,16 @@ private constructor(
 
     override fun _queryParams(): QueryParams = additionalQueryParams
 
-    /**
-     * The Sensor Calibration service records data about a sensor's overall accuracy and is used to
-     * adjust sensor settings to achieve and maintain that accuracy in reported sensor observations.
-     * Calibration occurs periodically when needed to maintain sensor accuracy or on-demand to
-     * adjust a sensor for a specific reading.
-     */
-    class Body
-    @JsonCreator
-    private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
-        private val classificationMarking: JsonField<String>,
+    /** The Sensor Calibration service records data about a sensor's overall accuracy and is used to adjust sensor settings to achieve and maintain that accuracy in reported sensor observations. Calibration occurs periodically when needed to maintain sensor accuracy or on-demand to adjust a sensor for a specific reading. */
+    class Body @JsonCreator private constructor(
+        @JsonProperty("classificationMarking") @ExcludeMissing private val classificationMarking: JsonField<String>,
         @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
         @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
         @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
         @JsonProperty("startTime") @ExcludeMissing private val startTime: JsonField<OffsetDateTime>,
         @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
         @JsonProperty("azRaAccelBias") @ExcludeMissing private val azRaAccelBias: JsonField<Double>,
-        @JsonProperty("azRaAccelSigma")
-        @ExcludeMissing
-        private val azRaAccelSigma: JsonField<Double>,
+        @JsonProperty("azRaAccelSigma") @ExcludeMissing private val azRaAccelSigma: JsonField<Double>,
         @JsonProperty("azRaBias") @ExcludeMissing private val azRaBias: JsonField<Double>,
         @JsonProperty("azRaRateBias") @ExcludeMissing private val azRaRateBias: JsonField<Double>,
         @JsonProperty("azRaRateSigma") @ExcludeMissing private val azRaRateSigma: JsonField<Double>,
@@ -237,24 +255,16 @@ private constructor(
         @JsonProperty("calAngleRef") @ExcludeMissing private val calAngleRef: JsonField<String>,
         @JsonProperty("calTrackMode") @ExcludeMissing private val calTrackMode: JsonField<String>,
         @JsonProperty("calType") @ExcludeMissing private val calType: JsonField<String>,
-        @JsonProperty("confidenceNoiseBias")
-        @ExcludeMissing
-        private val confidenceNoiseBias: JsonField<Double>,
+        @JsonProperty("confidenceNoiseBias") @ExcludeMissing private val confidenceNoiseBias: JsonField<Double>,
         @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
         @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
         @JsonProperty("duration") @ExcludeMissing private val duration: JsonField<Double>,
         @JsonProperty("ecr") @ExcludeMissing private val ecr: JsonField<List<Double>>,
-        @JsonProperty("elDecAccelBias")
-        @ExcludeMissing
-        private val elDecAccelBias: JsonField<Double>,
-        @JsonProperty("elDecAccelSigma")
-        @ExcludeMissing
-        private val elDecAccelSigma: JsonField<Double>,
+        @JsonProperty("elDecAccelBias") @ExcludeMissing private val elDecAccelBias: JsonField<Double>,
+        @JsonProperty("elDecAccelSigma") @ExcludeMissing private val elDecAccelSigma: JsonField<Double>,
         @JsonProperty("elDecBias") @ExcludeMissing private val elDecBias: JsonField<Double>,
         @JsonProperty("elDecRateBias") @ExcludeMissing private val elDecRateBias: JsonField<Double>,
-        @JsonProperty("elDecRateSigma")
-        @ExcludeMissing
-        private val elDecRateSigma: JsonField<Double>,
+        @JsonProperty("elDecRateSigma") @ExcludeMissing private val elDecRateSigma: JsonField<Double>,
         @JsonProperty("elDecRms") @ExcludeMissing private val elDecRms: JsonField<Double>,
         @JsonProperty("elDecSigma") @ExcludeMissing private val elDecSigma: JsonField<Double>,
         @JsonProperty("endTime") @ExcludeMissing private val endTime: JsonField<OffsetDateTime>,
@@ -263,9 +273,7 @@ private constructor(
         @JsonProperty("numObs") @ExcludeMissing private val numObs: JsonField<Int>,
         @JsonProperty("numPhotoObs") @ExcludeMissing private val numPhotoObs: JsonField<Int>,
         @JsonProperty("numRangeObs") @ExcludeMissing private val numRangeObs: JsonField<Int>,
-        @JsonProperty("numRangeRateObs")
-        @ExcludeMissing
-        private val numRangeRateObs: JsonField<Int>,
+        @JsonProperty("numRangeRateObs") @ExcludeMissing private val numRangeRateObs: JsonField<Int>,
         @JsonProperty("numRcsObs") @ExcludeMissing private val numRcsObs: JsonField<Int>,
         @JsonProperty("numTimeObs") @ExcludeMissing private val numTimeObs: JsonField<Int>,
         @JsonProperty("numTracks") @ExcludeMissing private val numTracks: JsonField<Int>,
@@ -273,18 +281,12 @@ private constructor(
         @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
         @JsonProperty("photoBias") @ExcludeMissing private val photoBias: JsonField<Double>,
         @JsonProperty("photoSigma") @ExcludeMissing private val photoSigma: JsonField<Double>,
-        @JsonProperty("rangeAccelBias")
-        @ExcludeMissing
-        private val rangeAccelBias: JsonField<Double>,
-        @JsonProperty("rangeAccelSigma")
-        @ExcludeMissing
-        private val rangeAccelSigma: JsonField<Double>,
+        @JsonProperty("rangeAccelBias") @ExcludeMissing private val rangeAccelBias: JsonField<Double>,
+        @JsonProperty("rangeAccelSigma") @ExcludeMissing private val rangeAccelSigma: JsonField<Double>,
         @JsonProperty("rangeBias") @ExcludeMissing private val rangeBias: JsonField<Double>,
         @JsonProperty("rangeRateBias") @ExcludeMissing private val rangeRateBias: JsonField<Double>,
         @JsonProperty("rangeRateRms") @ExcludeMissing private val rangeRateRms: JsonField<Double>,
-        @JsonProperty("rangeRateSigma")
-        @ExcludeMissing
-        private val rangeRateSigma: JsonField<Double>,
+        @JsonProperty("rangeRateSigma") @ExcludeMissing private val rangeRateSigma: JsonField<Double>,
         @JsonProperty("rangeRms") @ExcludeMissing private val rangeRms: JsonField<Double>,
         @JsonProperty("rangeSigma") @ExcludeMissing private val rangeSigma: JsonField<Double>,
         @JsonProperty("rcsBias") @ExcludeMissing private val rcsBias: JsonField<Double>,
@@ -295,528 +297,427 @@ private constructor(
         @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
         @JsonProperty("timeBias") @ExcludeMissing private val timeBias: JsonField<Double>,
         @JsonProperty("timeBiasSigma") @ExcludeMissing private val timeBiasSigma: JsonField<Double>,
+
     ) {
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
-        fun classificationMarking(): String =
-            classificationMarking.getRequired("classificationMarking")
+        fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-         * both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-         * analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-         * requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
         /**
-         * Unique identifier of the sensor to which this calibration data applies. This ID can be
-         * used to obtain additional information on a sensor using the 'get by ID' operation (e.g.
-         * /udl/sensor/{id}). For example, the sensor with idSensor = abc would be queried as
-         * /udl/sensor/abc.
+         * Unique identifier of the sensor to which this calibration data applies. This ID can be used to obtain additional information on a sensor using the 'get by ID' operation (e.g. /udl/sensor/{id}). For example, the sensor with idSensor = abc would be queried as /udl/sensor/abc.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun idSensor(): String = idSensor.getRequired("idSensor")
 
         /**
          * Source of the data.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun source(): String = source.getRequired("source")
 
         /**
          * Calibration data span start time in ISO 8601 UTC format with millisecond precision.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun startTime(): OffsetDateTime = startTime.getRequired("startTime")
 
         /**
-         * Unique identifier of the record, auto-generated by the system if not provided on create
-         * operations.
+         * Unique identifier of the record, auto-generated by the system if not provided on create operations.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun id(): Optional<String> = id.getOptional("id")
 
         /**
          * Sensor azimuth/right-ascension acceleration bias, in degrees per second squared.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun azRaAccelBias(): Optional<Double> = azRaAccelBias.getOptional("azRaAccelBias")
 
         /**
-         * The standard deviation of the azimuth/right ascension acceleration residuals, in degrees,
-         * used to determine the sensor azimuth/right-ascension acceleration bias.
+         * The standard deviation of the azimuth/right ascension acceleration residuals, in degrees, used to determine the sensor azimuth/right-ascension acceleration bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun azRaAccelSigma(): Optional<Double> = azRaAccelSigma.getOptional("azRaAccelSigma")
 
         /**
          * Sensor azimuth/right-ascension bias, in degrees.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun azRaBias(): Optional<Double> = azRaBias.getOptional("azRaBias")
 
         /**
          * Sensor azimuth/right-ascension rate bias, in degrees per second.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun azRaRateBias(): Optional<Double> = azRaRateBias.getOptional("azRaRateBias")
 
         /**
-         * The standard deviation of the azimuth/right ascension rate residuals, in degrees, used to
-         * determine the sensor azimuth/right-ascension rate bias.
+         * The standard deviation of the azimuth/right ascension rate residuals, in degrees, used to determine the sensor azimuth/right-ascension rate bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun azRaRateSigma(): Optional<Double> = azRaRateSigma.getOptional("azRaRateSigma")
 
         /**
-         * The root mean square of the azimuth/right-ascension residuals, in degrees, used to
-         * determine the sensor azimuth/right-ascension bias.
+         * The root mean square of the azimuth/right-ascension residuals, in degrees, used to determine the sensor azimuth/right-ascension bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun azRaRms(): Optional<Double> = azRaRms.getOptional("azRaRms")
 
         /**
-         * The standard deviation of the azimuth/right ascension residuals, in degrees, used to
-         * determine the sensor azimuth/right-ascension bias.
+         * The standard deviation of the azimuth/right ascension residuals, in degrees, used to determine the sensor azimuth/right-ascension bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun azRaSigma(): Optional<Double> = azRaSigma.getOptional("azRaSigma")
 
         /**
-         * Specifies the calibration reference angle set for this calibration data set. Azimuth and
-         * Elevation (AZEL) or Right Ascension and Declination (RADEC).
+         * Specifies the calibration reference angle set for this calibration data set. Azimuth and Elevation (AZEL) or Right Ascension and Declination (RADEC).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun calAngleRef(): Optional<String> = calAngleRef.getOptional("calAngleRef")
 
         /**
          * Specifies that the calibration data are from INTRA_TRACK or INTER_TRACK residuals.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun calTrackMode(): Optional<String> = calTrackMode.getOptional("calTrackMode")
 
         /**
          * The basis of calibration values contained in this record (COMPUTED, OPERATIONAL).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun calType(): Optional<String> = calType.getOptional("calType")
 
         /**
          * The confidence noise bias of the duration span.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
-        fun confidenceNoiseBias(): Optional<Double> =
-            confidenceNoiseBias.getOptional("confidenceNoiseBias")
+        fun confidenceNoiseBias(): Optional<Double> = confidenceNoiseBias.getOptional("confidenceNoiseBias")
 
         /**
          * Time the row was created in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
         /**
          * Application user who created the row in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
         /**
          * Duration of the sensor calibration data which produced these values, measured in days.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun duration(): Optional<Double> = duration.getOptional("duration")
 
         /**
-         * Three element array, expressing the sensor location in Earth Centered Rotating (ECR)
-         * coordinates, in kilometers. The array element order is [x, y, z].
+         * Three element array, expressing the sensor location in Earth Centered Rotating (ECR) coordinates, in kilometers. The array element order is [x, y, z].
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun ecr(): Optional<List<Double>> = ecr.getOptional("ecr")
 
         /**
          * Sensor elevation/declination acceleration bias, in degrees per second squared.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun elDecAccelBias(): Optional<Double> = elDecAccelBias.getOptional("elDecAccelBias")
 
         /**
-         * The standard deviation of the elevation/declination acceleration residuals, in degrees,
-         * used to determine the sensor elevation/declination acceleration bias.
+         * The standard deviation of the elevation/declination acceleration residuals, in degrees, used to determine the sensor elevation/declination acceleration bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun elDecAccelSigma(): Optional<Double> = elDecAccelSigma.getOptional("elDecAccelSigma")
 
         /**
          * Sensor elevation/declination bias, in degrees.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun elDecBias(): Optional<Double> = elDecBias.getOptional("elDecBias")
 
         /**
          * Sensor elevation/declination rate bias, in degrees per second.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun elDecRateBias(): Optional<Double> = elDecRateBias.getOptional("elDecRateBias")
 
         /**
-         * The standard deviation of the elevation/declination rate residuals, in degrees, used to
-         * determine the sensor elevation/declination rate bias.
+         * The standard deviation of the elevation/declination rate residuals, in degrees, used to determine the sensor elevation/declination rate bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun elDecRateSigma(): Optional<Double> = elDecRateSigma.getOptional("elDecRateSigma")
 
         /**
-         * The root mean square of the elevation/declination residuals, in degrees, used to
-         * determine the sensor elevation/declination bias.
+         * The root mean square of the elevation/declination residuals, in degrees, used to determine the sensor elevation/declination bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun elDecRms(): Optional<Double> = elDecRms.getOptional("elDecRms")
 
         /**
-         * The standard deviation of the elevation/declination residuals, in degrees, used to
-         * determine the sensor elevation/declination bias.
+         * The standard deviation of the elevation/declination residuals, in degrees, used to determine the sensor elevation/declination bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun elDecSigma(): Optional<Double> = elDecSigma.getOptional("elDecSigma")
 
         /**
-         * Calibration data span end time in ISO 8601 UTC format with millisecond precision. If
-         * provided, the endTime must be greater than or equal to the startTime in the
-         * SensorCalibration record.
+         * Calibration data span end time in ISO 8601 UTC format with millisecond precision. If provided, the endTime must be greater than or equal to the startTime in the SensorCalibration record.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun endTime(): Optional<OffsetDateTime> = endTime.getOptional("endTime")
 
         /**
-         * The number of observables used in determining the azimuth or right-ascension calibration
-         * values.
+         * The number of observables used in determining the azimuth or right-ascension calibration values.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numAzRaObs(): Optional<Int> = numAzRaObs.getOptional("numAzRaObs")
 
         /**
-         * The number of observables used in determining the elevation or declination calibration
-         * values.
+         * The number of observables used in determining the elevation or declination calibration values.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numElDecObs(): Optional<Int> = numElDecObs.getOptional("numElDecObs")
 
         /**
          * The total number of observables available over the calibration span.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numObs(): Optional<Int> = numObs.getOptional("numObs")
 
         /**
          * The number of observables used in determining the photometric calibration values.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numPhotoObs(): Optional<Int> = numPhotoObs.getOptional("numPhotoObs")
 
         /**
          * The number of observables used in determining the range calibration values.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numRangeObs(): Optional<Int> = numRangeObs.getOptional("numRangeObs")
 
         /**
          * The number of observables used in determining the range rate calibration values.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numRangeRateObs(): Optional<Int> = numRangeRateObs.getOptional("numRangeRateObs")
 
         /**
-         * The number of observables used in determining the radar cross section (RCS) calibration
-         * values.
+         * The number of observables used in determining the radar cross section (RCS) calibration values.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numRcsObs(): Optional<Int> = numRcsObs.getOptional("numRcsObs")
 
         /**
          * The number of observables used in determining the time calibration values.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numTimeObs(): Optional<Int> = numTimeObs.getOptional("numTimeObs")
 
         /**
          * The total number of tracks available over the calibration span.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numTracks(): Optional<Int> = numTracks.getOptional("numTracks")
 
         /**
-         * Originating system or organization which produced the data, if different from the source.
-         * The origin may be different than the source if the source was a mediating system which
-         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
-         * be the origin.
+         * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun origin(): Optional<String> = origin.getOptional("origin")
 
         /**
-         * The originating source network on which this record was created, auto-populated by the
-         * system.
+         * The originating source network on which this record was created, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
         /**
          * The sensor photometric observation magnitude bias, in visual magnitude.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun photoBias(): Optional<Double> = photoBias.getOptional("photoBias")
 
         /**
-         * The standard deviation of the magnitude residuals, in visual magnitude, used to determine
-         * the photometric bias.
+         * The standard deviation of the magnitude residuals, in visual magnitude, used to determine the photometric bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun photoSigma(): Optional<Double> = photoSigma.getOptional("photoSigma")
 
         /**
          * Sensor range rate acceleration bias, in kilometers per second squared.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun rangeAccelBias(): Optional<Double> = rangeAccelBias.getOptional("rangeAccelBias")
 
         /**
-         * The standard deviation of the range acceleration residuals, in kilometers per second
-         * squared, used to determine the sensor range acceleration bias.
+         * The standard deviation of the range acceleration residuals, in kilometers per second squared, used to determine the sensor range acceleration bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun rangeAccelSigma(): Optional<Double> = rangeAccelSigma.getOptional("rangeAccelSigma")
 
         /**
          * Sensor range bias, in kilometers.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun rangeBias(): Optional<Double> = rangeBias.getOptional("rangeBias")
 
         /**
          * Sensor range rate bias, in kilometers per second.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun rangeRateBias(): Optional<Double> = rangeRateBias.getOptional("rangeRateBias")
 
         /**
-         * The root mean square of the range rate residuals, in kilometers per second, used to
-         * determine the sensor range rate bias.
+         * The root mean square of the range rate residuals, in kilometers per second, used to determine the sensor range rate bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun rangeRateRms(): Optional<Double> = rangeRateRms.getOptional("rangeRateRms")
 
         /**
-         * The standard deviation of the range rate residuals, in kilometers per second, used to
-         * determine the sensor range rate bias.
+         * The standard deviation of the range rate residuals, in kilometers per second, used to determine the sensor range rate bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun rangeRateSigma(): Optional<Double> = rangeRateSigma.getOptional("rangeRateSigma")
 
         /**
-         * The root mean square of the range residuals, in kilometers, used to determine the sensor
-         * range bias.
+         * The root mean square of the range residuals, in kilometers, used to determine the sensor range bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun rangeRms(): Optional<Double> = rangeRms.getOptional("rangeRms")
 
         /**
-         * The standard deviation of the range residuals, in kilometers, used to determine the
-         * sensor range bias.
+         * The standard deviation of the range residuals, in kilometers, used to determine the sensor range bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun rangeSigma(): Optional<Double> = rangeSigma.getOptional("rangeSigma")
 
         /**
          * The sensor radar cross section (RCS) observation bias, in square meters.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun rcsBias(): Optional<Double> = rcsBias.getOptional("rcsBias")
 
         /**
-         * The standard deviation of the radar cross section residuals, in square meters, used to
-         * determine the radar cross section bias.
+         * The standard deviation of the radar cross section residuals, in square meters, used to determine the radar cross section bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun rcsSigma(): Optional<Double> = rcsSigma.getOptional("rcsSigma")
 
         /**
          * Array of the catalog IDs of the reference targets used in the calibration.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun refTargets(): Optional<List<String>> = refTargets.getOptional("refTargets")
 
         /**
          * The reference type used in the calibration.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun refType(): Optional<String> = refType.getOptional("refType")
 
         /**
          * The sensor type (MECHANICAL, OPTICAL, PHASED ARRAY, RF).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun senType(): Optional<String> = senType.getOptional("senType")
 
         /**
-         * The source data library from which this record was received. This could be a remote or
-         * tactical UDL or another data library. If null, the record should be assumed to have
-         * originated from the primary Enterprise UDL.
+         * The source data library from which this record was received. This could be a remote or tactical UDL or another data library. If null, the record should be assumed to have originated from the primary Enterprise UDL.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun sourceDl(): Optional<String> = sourceDl.getOptional("sourceDL")
 
         /**
          * Sensor time bias, in seconds.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun timeBias(): Optional<Double> = timeBias.getOptional("timeBias")
 
         /**
-         * The standard deviation of the time residuals, in seconds, used to determine the sensor
-         * time bias.
+         * The standard deviation of the time residuals, in seconds, used to determine the sensor time bias.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun timeBiasSigma(): Optional<Double> = timeBiasSigma.getOptional("timeBiasSigma")
 
         /**
          * Returns the raw JSON value of [classificationMarking].
          *
-         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an
-         * unexpected type.
+         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("classificationMarking")
         @ExcludeMissing
@@ -827,21 +728,27 @@ private constructor(
          *
          * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+        @JsonProperty("dataMode")
+        @ExcludeMissing
+        fun _dataMode(): JsonField<DataMode> = dataMode
 
         /**
          * Returns the raw JSON value of [idSensor].
          *
          * Unlike [idSensor], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("idSensor") @ExcludeMissing fun _idSensor(): JsonField<String> = idSensor
+        @JsonProperty("idSensor")
+        @ExcludeMissing
+        fun _idSensor(): JsonField<String> = idSensor
 
         /**
          * Returns the raw JSON value of [source].
          *
          * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+        @JsonProperty("source")
+        @ExcludeMissing
+        fun _source(): JsonField<String> = source
 
         /**
          * Returns the raw JSON value of [startTime].
@@ -857,13 +764,14 @@ private constructor(
          *
          * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+        @JsonProperty("id")
+        @ExcludeMissing
+        fun _id(): JsonField<String> = id
 
         /**
          * Returns the raw JSON value of [azRaAccelBias].
          *
-         * Unlike [azRaAccelBias], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [azRaAccelBias], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("azRaAccelBias")
         @ExcludeMissing
@@ -872,8 +780,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [azRaAccelSigma].
          *
-         * Unlike [azRaAccelSigma], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [azRaAccelSigma], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("azRaAccelSigma")
         @ExcludeMissing
@@ -884,13 +791,14 @@ private constructor(
          *
          * Unlike [azRaBias], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("azRaBias") @ExcludeMissing fun _azRaBias(): JsonField<Double> = azRaBias
+        @JsonProperty("azRaBias")
+        @ExcludeMissing
+        fun _azRaBias(): JsonField<Double> = azRaBias
 
         /**
          * Returns the raw JSON value of [azRaRateBias].
          *
-         * Unlike [azRaRateBias], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [azRaRateBias], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("azRaRateBias")
         @ExcludeMissing
@@ -899,8 +807,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [azRaRateSigma].
          *
-         * Unlike [azRaRateSigma], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [azRaRateSigma], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("azRaRateSigma")
         @ExcludeMissing
@@ -911,14 +818,18 @@ private constructor(
          *
          * Unlike [azRaRms], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("azRaRms") @ExcludeMissing fun _azRaRms(): JsonField<Double> = azRaRms
+        @JsonProperty("azRaRms")
+        @ExcludeMissing
+        fun _azRaRms(): JsonField<Double> = azRaRms
 
         /**
          * Returns the raw JSON value of [azRaSigma].
          *
          * Unlike [azRaSigma], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("azRaSigma") @ExcludeMissing fun _azRaSigma(): JsonField<Double> = azRaSigma
+        @JsonProperty("azRaSigma")
+        @ExcludeMissing
+        fun _azRaSigma(): JsonField<Double> = azRaSigma
 
         /**
          * Returns the raw JSON value of [calAngleRef].
@@ -932,8 +843,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [calTrackMode].
          *
-         * Unlike [calTrackMode], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [calTrackMode], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("calTrackMode")
         @ExcludeMissing
@@ -944,13 +854,14 @@ private constructor(
          *
          * Unlike [calType], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("calType") @ExcludeMissing fun _calType(): JsonField<String> = calType
+        @JsonProperty("calType")
+        @ExcludeMissing
+        fun _calType(): JsonField<String> = calType
 
         /**
          * Returns the raw JSON value of [confidenceNoiseBias].
          *
-         * Unlike [confidenceNoiseBias], this method doesn't throw if the JSON field has an
-         * unexpected type.
+         * Unlike [confidenceNoiseBias], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("confidenceNoiseBias")
         @ExcludeMissing
@@ -970,27 +881,32 @@ private constructor(
          *
          * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+        @JsonProperty("createdBy")
+        @ExcludeMissing
+        fun _createdBy(): JsonField<String> = createdBy
 
         /**
          * Returns the raw JSON value of [duration].
          *
          * Unlike [duration], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("duration") @ExcludeMissing fun _duration(): JsonField<Double> = duration
+        @JsonProperty("duration")
+        @ExcludeMissing
+        fun _duration(): JsonField<Double> = duration
 
         /**
          * Returns the raw JSON value of [ecr].
          *
          * Unlike [ecr], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("ecr") @ExcludeMissing fun _ecr(): JsonField<List<Double>> = ecr
+        @JsonProperty("ecr")
+        @ExcludeMissing
+        fun _ecr(): JsonField<List<Double>> = ecr
 
         /**
          * Returns the raw JSON value of [elDecAccelBias].
          *
-         * Unlike [elDecAccelBias], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [elDecAccelBias], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("elDecAccelBias")
         @ExcludeMissing
@@ -999,8 +915,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [elDecAccelSigma].
          *
-         * Unlike [elDecAccelSigma], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [elDecAccelSigma], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("elDecAccelSigma")
         @ExcludeMissing
@@ -1011,13 +926,14 @@ private constructor(
          *
          * Unlike [elDecBias], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("elDecBias") @ExcludeMissing fun _elDecBias(): JsonField<Double> = elDecBias
+        @JsonProperty("elDecBias")
+        @ExcludeMissing
+        fun _elDecBias(): JsonField<Double> = elDecBias
 
         /**
          * Returns the raw JSON value of [elDecRateBias].
          *
-         * Unlike [elDecRateBias], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [elDecRateBias], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("elDecRateBias")
         @ExcludeMissing
@@ -1026,8 +942,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [elDecRateSigma].
          *
-         * Unlike [elDecRateSigma], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [elDecRateSigma], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("elDecRateSigma")
         @ExcludeMissing
@@ -1038,7 +953,9 @@ private constructor(
          *
          * Unlike [elDecRms], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("elDecRms") @ExcludeMissing fun _elDecRms(): JsonField<Double> = elDecRms
+        @JsonProperty("elDecRms")
+        @ExcludeMissing
+        fun _elDecRms(): JsonField<Double> = elDecRms
 
         /**
          * Returns the raw JSON value of [elDecSigma].
@@ -1054,14 +971,18 @@ private constructor(
          *
          * Unlike [endTime], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("endTime") @ExcludeMissing fun _endTime(): JsonField<OffsetDateTime> = endTime
+        @JsonProperty("endTime")
+        @ExcludeMissing
+        fun _endTime(): JsonField<OffsetDateTime> = endTime
 
         /**
          * Returns the raw JSON value of [numAzRaObs].
          *
          * Unlike [numAzRaObs], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("numAzRaObs") @ExcludeMissing fun _numAzRaObs(): JsonField<Int> = numAzRaObs
+        @JsonProperty("numAzRaObs")
+        @ExcludeMissing
+        fun _numAzRaObs(): JsonField<Int> = numAzRaObs
 
         /**
          * Returns the raw JSON value of [numElDecObs].
@@ -1077,7 +998,9 @@ private constructor(
          *
          * Unlike [numObs], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("numObs") @ExcludeMissing fun _numObs(): JsonField<Int> = numObs
+        @JsonProperty("numObs")
+        @ExcludeMissing
+        fun _numObs(): JsonField<Int> = numObs
 
         /**
          * Returns the raw JSON value of [numPhotoObs].
@@ -1100,8 +1023,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [numRangeRateObs].
          *
-         * Unlike [numRangeRateObs], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [numRangeRateObs], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("numRangeRateObs")
         @ExcludeMissing
@@ -1112,28 +1034,36 @@ private constructor(
          *
          * Unlike [numRcsObs], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("numRcsObs") @ExcludeMissing fun _numRcsObs(): JsonField<Int> = numRcsObs
+        @JsonProperty("numRcsObs")
+        @ExcludeMissing
+        fun _numRcsObs(): JsonField<Int> = numRcsObs
 
         /**
          * Returns the raw JSON value of [numTimeObs].
          *
          * Unlike [numTimeObs], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("numTimeObs") @ExcludeMissing fun _numTimeObs(): JsonField<Int> = numTimeObs
+        @JsonProperty("numTimeObs")
+        @ExcludeMissing
+        fun _numTimeObs(): JsonField<Int> = numTimeObs
 
         /**
          * Returns the raw JSON value of [numTracks].
          *
          * Unlike [numTracks], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("numTracks") @ExcludeMissing fun _numTracks(): JsonField<Int> = numTracks
+        @JsonProperty("numTracks")
+        @ExcludeMissing
+        fun _numTracks(): JsonField<Int> = numTracks
 
         /**
          * Returns the raw JSON value of [origin].
          *
          * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+        @JsonProperty("origin")
+        @ExcludeMissing
+        fun _origin(): JsonField<String> = origin
 
         /**
          * Returns the raw JSON value of [origNetwork].
@@ -1149,7 +1079,9 @@ private constructor(
          *
          * Unlike [photoBias], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("photoBias") @ExcludeMissing fun _photoBias(): JsonField<Double> = photoBias
+        @JsonProperty("photoBias")
+        @ExcludeMissing
+        fun _photoBias(): JsonField<Double> = photoBias
 
         /**
          * Returns the raw JSON value of [photoSigma].
@@ -1163,8 +1095,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [rangeAccelBias].
          *
-         * Unlike [rangeAccelBias], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [rangeAccelBias], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("rangeAccelBias")
         @ExcludeMissing
@@ -1173,8 +1104,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [rangeAccelSigma].
          *
-         * Unlike [rangeAccelSigma], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [rangeAccelSigma], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("rangeAccelSigma")
         @ExcludeMissing
@@ -1185,13 +1115,14 @@ private constructor(
          *
          * Unlike [rangeBias], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("rangeBias") @ExcludeMissing fun _rangeBias(): JsonField<Double> = rangeBias
+        @JsonProperty("rangeBias")
+        @ExcludeMissing
+        fun _rangeBias(): JsonField<Double> = rangeBias
 
         /**
          * Returns the raw JSON value of [rangeRateBias].
          *
-         * Unlike [rangeRateBias], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [rangeRateBias], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("rangeRateBias")
         @ExcludeMissing
@@ -1200,8 +1131,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [rangeRateRms].
          *
-         * Unlike [rangeRateRms], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [rangeRateRms], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("rangeRateRms")
         @ExcludeMissing
@@ -1210,8 +1140,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [rangeRateSigma].
          *
-         * Unlike [rangeRateSigma], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [rangeRateSigma], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("rangeRateSigma")
         @ExcludeMissing
@@ -1222,7 +1151,9 @@ private constructor(
          *
          * Unlike [rangeRms], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("rangeRms") @ExcludeMissing fun _rangeRms(): JsonField<Double> = rangeRms
+        @JsonProperty("rangeRms")
+        @ExcludeMissing
+        fun _rangeRms(): JsonField<Double> = rangeRms
 
         /**
          * Returns the raw JSON value of [rangeSigma].
@@ -1238,14 +1169,18 @@ private constructor(
          *
          * Unlike [rcsBias], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("rcsBias") @ExcludeMissing fun _rcsBias(): JsonField<Double> = rcsBias
+        @JsonProperty("rcsBias")
+        @ExcludeMissing
+        fun _rcsBias(): JsonField<Double> = rcsBias
 
         /**
          * Returns the raw JSON value of [rcsSigma].
          *
          * Unlike [rcsSigma], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("rcsSigma") @ExcludeMissing fun _rcsSigma(): JsonField<Double> = rcsSigma
+        @JsonProperty("rcsSigma")
+        @ExcludeMissing
+        fun _rcsSigma(): JsonField<Double> = rcsSigma
 
         /**
          * Returns the raw JSON value of [refTargets].
@@ -1261,34 +1196,41 @@ private constructor(
          *
          * Unlike [refType], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("refType") @ExcludeMissing fun _refType(): JsonField<String> = refType
+        @JsonProperty("refType")
+        @ExcludeMissing
+        fun _refType(): JsonField<String> = refType
 
         /**
          * Returns the raw JSON value of [senType].
          *
          * Unlike [senType], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("senType") @ExcludeMissing fun _senType(): JsonField<String> = senType
+        @JsonProperty("senType")
+        @ExcludeMissing
+        fun _senType(): JsonField<String> = senType
 
         /**
          * Returns the raw JSON value of [sourceDl].
          *
          * Unlike [sourceDl], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("sourceDL") @ExcludeMissing fun _sourceDl(): JsonField<String> = sourceDl
+        @JsonProperty("sourceDL")
+        @ExcludeMissing
+        fun _sourceDl(): JsonField<String> = sourceDl
 
         /**
          * Returns the raw JSON value of [timeBias].
          *
          * Unlike [timeBias], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("timeBias") @ExcludeMissing fun _timeBias(): JsonField<Double> = timeBias
+        @JsonProperty("timeBias")
+        @ExcludeMissing
+        fun _timeBias(): JsonField<Double> = timeBias
 
         /**
          * Returns the raw JSON value of [timeBiasSigma].
          *
-         * Unlike [timeBiasSigma], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [timeBiasSigma], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("timeBiasSigma")
         @ExcludeMissing
@@ -1302,6 +1244,7 @@ private constructor(
              * Returns a mutable builder for constructing an instance of [Body].
              *
              * The following fields are required:
+             *
              * ```java
              * .classificationMarking()
              * .dataMode()
@@ -1310,7 +1253,8 @@ private constructor(
              * .startTime()
              * ```
              */
-            @JvmStatic fun builder() = Builder()
+            @JvmStatic
+            fun builder() = Builder()
         }
 
         /** A builder for [Body]. */
@@ -1376,124 +1320,119 @@ private constructor(
             private var timeBiasSigma: JsonField<Double> = JsonMissing.of()
 
             @JvmSynthetic
-            internal fun from(body: Body) = apply {
-                classificationMarking = body.classificationMarking
-                dataMode = body.dataMode
-                idSensor = body.idSensor
-                source = body.source
-                startTime = body.startTime
-                id = body.id
-                azRaAccelBias = body.azRaAccelBias
-                azRaAccelSigma = body.azRaAccelSigma
-                azRaBias = body.azRaBias
-                azRaRateBias = body.azRaRateBias
-                azRaRateSigma = body.azRaRateSigma
-                azRaRms = body.azRaRms
-                azRaSigma = body.azRaSigma
-                calAngleRef = body.calAngleRef
-                calTrackMode = body.calTrackMode
-                calType = body.calType
-                confidenceNoiseBias = body.confidenceNoiseBias
-                createdAt = body.createdAt
-                createdBy = body.createdBy
-                duration = body.duration
-                ecr = body.ecr.map { it.toMutableList() }
-                elDecAccelBias = body.elDecAccelBias
-                elDecAccelSigma = body.elDecAccelSigma
-                elDecBias = body.elDecBias
-                elDecRateBias = body.elDecRateBias
-                elDecRateSigma = body.elDecRateSigma
-                elDecRms = body.elDecRms
-                elDecSigma = body.elDecSigma
-                endTime = body.endTime
-                numAzRaObs = body.numAzRaObs
-                numElDecObs = body.numElDecObs
-                numObs = body.numObs
-                numPhotoObs = body.numPhotoObs
-                numRangeObs = body.numRangeObs
-                numRangeRateObs = body.numRangeRateObs
-                numRcsObs = body.numRcsObs
-                numTimeObs = body.numTimeObs
-                numTracks = body.numTracks
-                origin = body.origin
-                origNetwork = body.origNetwork
-                photoBias = body.photoBias
-                photoSigma = body.photoSigma
-                rangeAccelBias = body.rangeAccelBias
-                rangeAccelSigma = body.rangeAccelSigma
-                rangeBias = body.rangeBias
-                rangeRateBias = body.rangeRateBias
-                rangeRateRms = body.rangeRateRms
-                rangeRateSigma = body.rangeRateSigma
-                rangeRms = body.rangeRms
-                rangeSigma = body.rangeSigma
-                rcsBias = body.rcsBias
-                rcsSigma = body.rcsSigma
-                refTargets = body.refTargets.map { it.toMutableList() }
-                refType = body.refType
-                senType = body.senType
-                sourceDl = body.sourceDl
-                timeBias = body.timeBias
-                timeBiasSigma = body.timeBiasSigma
-            }
+            internal fun from(body: Body) =
+                apply {
+                    classificationMarking = body.classificationMarking
+                    dataMode = body.dataMode
+                    idSensor = body.idSensor
+                    source = body.source
+                    startTime = body.startTime
+                    id = body.id
+                    azRaAccelBias = body.azRaAccelBias
+                    azRaAccelSigma = body.azRaAccelSigma
+                    azRaBias = body.azRaBias
+                    azRaRateBias = body.azRaRateBias
+                    azRaRateSigma = body.azRaRateSigma
+                    azRaRms = body.azRaRms
+                    azRaSigma = body.azRaSigma
+                    calAngleRef = body.calAngleRef
+                    calTrackMode = body.calTrackMode
+                    calType = body.calType
+                    confidenceNoiseBias = body.confidenceNoiseBias
+                    createdAt = body.createdAt
+                    createdBy = body.createdBy
+                    duration = body.duration
+                    ecr = body.ecr.map { it.toMutableList() }
+                    elDecAccelBias = body.elDecAccelBias
+                    elDecAccelSigma = body.elDecAccelSigma
+                    elDecBias = body.elDecBias
+                    elDecRateBias = body.elDecRateBias
+                    elDecRateSigma = body.elDecRateSigma
+                    elDecRms = body.elDecRms
+                    elDecSigma = body.elDecSigma
+                    endTime = body.endTime
+                    numAzRaObs = body.numAzRaObs
+                    numElDecObs = body.numElDecObs
+                    numObs = body.numObs
+                    numPhotoObs = body.numPhotoObs
+                    numRangeObs = body.numRangeObs
+                    numRangeRateObs = body.numRangeRateObs
+                    numRcsObs = body.numRcsObs
+                    numTimeObs = body.numTimeObs
+                    numTracks = body.numTracks
+                    origin = body.origin
+                    origNetwork = body.origNetwork
+                    photoBias = body.photoBias
+                    photoSigma = body.photoSigma
+                    rangeAccelBias = body.rangeAccelBias
+                    rangeAccelSigma = body.rangeAccelSigma
+                    rangeBias = body.rangeBias
+                    rangeRateBias = body.rangeRateBias
+                    rangeRateRms = body.rangeRateRms
+                    rangeRateSigma = body.rangeRateSigma
+                    rangeRms = body.rangeRms
+                    rangeSigma = body.rangeSigma
+                    rcsBias = body.rcsBias
+                    rcsSigma = body.rcsSigma
+                    refTargets = body.refTargets.map { it.toMutableList() }
+                    refType = body.refType
+                    senType = body.senType
+                    sourceDl = body.sourceDl
+                    timeBias = body.timeBias
+                    timeBiasSigma = body.timeBiasSigma
+                }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-            fun classificationMarking(classificationMarking: String) =
-                classificationMarking(JsonField.of(classificationMarking))
+            fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
 
             /**
              * Sets [Builder.classificationMarking] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.classificationMarking] with a well-typed [String]
-             * value instead. This method is primarily for setting the field to an undocumented or
-             * not yet supported value.
+             * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun classificationMarking(classificationMarking: JsonField<String>) = apply {
-                this.classificationMarking = classificationMarking
-            }
+            fun classificationMarking(classificationMarking: JsonField<String>) =
+                apply {
+                    this.classificationMarking = classificationMarking
+                }
 
             /**
              * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
              *
-             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may
-             * include both real and simulated data.
+             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
              *
-             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events,
-             * and analysis.
+             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
              *
              * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
              *
-             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-             * requirements, and for validating technical, functional, and performance
-             * characteristics.
+             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
              */
             fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
             /**
              * Sets [Builder.dataMode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+            fun dataMode(dataMode: JsonField<DataMode>) =
+                apply {
+                    this.dataMode = dataMode
+                }
 
-            /**
-             * Unique identifier of the sensor to which this calibration data applies. This ID can
-             * be used to obtain additional information on a sensor using the 'get by ID' operation
-             * (e.g. /udl/sensor/{id}). For example, the sensor with idSensor = abc would be queried
-             * as /udl/sensor/abc.
-             */
+            /** Unique identifier of the sensor to which this calibration data applies. This ID can be used to obtain additional information on a sensor using the 'get by ID' operation (e.g. /udl/sensor/{id}). For example, the sensor with idSensor = abc would be queried as /udl/sensor/abc. */
             fun idSensor(idSensor: String) = idSensor(JsonField.of(idSensor))
 
             /**
              * Sets [Builder.idSensor] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.idSensor] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.idSensor] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun idSensor(idSensor: JsonField<String>) = apply { this.idSensor = idSensor }
+            fun idSensor(idSensor: JsonField<String>) =
+                apply {
+                    this.idSensor = idSensor
+                }
 
             /** Source of the data. */
             fun source(source: String) = source(JsonField.of(source))
@@ -1501,42 +1440,41 @@ private constructor(
             /**
              * Sets [Builder.source] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.source] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun source(source: JsonField<String>) = apply { this.source = source }
+            fun source(source: JsonField<String>) =
+                apply {
+                    this.source = source
+                }
 
-            /**
-             * Calibration data span start time in ISO 8601 UTC format with millisecond precision.
-             */
+            /** Calibration data span start time in ISO 8601 UTC format with millisecond precision. */
             fun startTime(startTime: OffsetDateTime) = startTime(JsonField.of(startTime))
 
             /**
              * Sets [Builder.startTime] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.startTime] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.startTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun startTime(startTime: JsonField<OffsetDateTime>) = apply {
-                this.startTime = startTime
-            }
+            fun startTime(startTime: JsonField<OffsetDateTime>) =
+                apply {
+                    this.startTime = startTime
+                }
 
-            /**
-             * Unique identifier of the record, auto-generated by the system if not provided on
-             * create operations.
-             */
+            /** Unique identifier of the record, auto-generated by the system if not provided on create operations. */
             fun id(id: String) = id(JsonField.of(id))
 
             /**
              * Sets [Builder.id] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.id] with a well-typed [String] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun id(id: JsonField<String>) = apply { this.id = id }
+            fun id(id: JsonField<String>) =
+                apply {
+                    this.id = id
+                }
 
             /** Sensor azimuth/right-ascension acceleration bias, in degrees per second squared. */
             fun azRaAccelBias(azRaAccelBias: Double) = azRaAccelBias(JsonField.of(azRaAccelBias))
@@ -1544,31 +1482,27 @@ private constructor(
             /**
              * Sets [Builder.azRaAccelBias] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.azRaAccelBias] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.azRaAccelBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun azRaAccelBias(azRaAccelBias: JsonField<Double>) = apply {
-                this.azRaAccelBias = azRaAccelBias
-            }
+            fun azRaAccelBias(azRaAccelBias: JsonField<Double>) =
+                apply {
+                    this.azRaAccelBias = azRaAccelBias
+                }
 
-            /**
-             * The standard deviation of the azimuth/right ascension acceleration residuals, in
-             * degrees, used to determine the sensor azimuth/right-ascension acceleration bias.
-             */
-            fun azRaAccelSigma(azRaAccelSigma: Double) =
-                azRaAccelSigma(JsonField.of(azRaAccelSigma))
+            /** The standard deviation of the azimuth/right ascension acceleration residuals, in degrees, used to determine the sensor azimuth/right-ascension acceleration bias. */
+            fun azRaAccelSigma(azRaAccelSigma: Double) = azRaAccelSigma(JsonField.of(azRaAccelSigma))
 
             /**
              * Sets [Builder.azRaAccelSigma] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.azRaAccelSigma] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.azRaAccelSigma] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun azRaAccelSigma(azRaAccelSigma: JsonField<Double>) = apply {
-                this.azRaAccelSigma = azRaAccelSigma
-            }
+            fun azRaAccelSigma(azRaAccelSigma: JsonField<Double>) =
+                apply {
+                    this.azRaAccelSigma = azRaAccelSigma
+                }
 
             /** Sensor azimuth/right-ascension bias, in degrees. */
             fun azRaBias(azRaBias: Double) = azRaBias(JsonField.of(azRaBias))
@@ -1576,11 +1510,13 @@ private constructor(
             /**
              * Sets [Builder.azRaBias] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.azRaBias] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.azRaBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun azRaBias(azRaBias: JsonField<Double>) = apply { this.azRaBias = azRaBias }
+            fun azRaBias(azRaBias: JsonField<Double>) =
+                apply {
+                    this.azRaBias = azRaBias
+                }
 
             /** Sensor azimuth/right-ascension rate bias, in degrees per second. */
             fun azRaRateBias(azRaRateBias: Double) = azRaRateBias(JsonField.of(azRaRateBias))
@@ -1588,93 +1524,83 @@ private constructor(
             /**
              * Sets [Builder.azRaRateBias] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.azRaRateBias] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.azRaRateBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun azRaRateBias(azRaRateBias: JsonField<Double>) = apply {
-                this.azRaRateBias = azRaRateBias
-            }
+            fun azRaRateBias(azRaRateBias: JsonField<Double>) =
+                apply {
+                    this.azRaRateBias = azRaRateBias
+                }
 
-            /**
-             * The standard deviation of the azimuth/right ascension rate residuals, in degrees,
-             * used to determine the sensor azimuth/right-ascension rate bias.
-             */
+            /** The standard deviation of the azimuth/right ascension rate residuals, in degrees, used to determine the sensor azimuth/right-ascension rate bias. */
             fun azRaRateSigma(azRaRateSigma: Double) = azRaRateSigma(JsonField.of(azRaRateSigma))
 
             /**
              * Sets [Builder.azRaRateSigma] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.azRaRateSigma] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.azRaRateSigma] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun azRaRateSigma(azRaRateSigma: JsonField<Double>) = apply {
-                this.azRaRateSigma = azRaRateSigma
-            }
+            fun azRaRateSigma(azRaRateSigma: JsonField<Double>) =
+                apply {
+                    this.azRaRateSigma = azRaRateSigma
+                }
 
-            /**
-             * The root mean square of the azimuth/right-ascension residuals, in degrees, used to
-             * determine the sensor azimuth/right-ascension bias.
-             */
+            /** The root mean square of the azimuth/right-ascension residuals, in degrees, used to determine the sensor azimuth/right-ascension bias. */
             fun azRaRms(azRaRms: Double) = azRaRms(JsonField.of(azRaRms))
 
             /**
              * Sets [Builder.azRaRms] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.azRaRms] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.azRaRms] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun azRaRms(azRaRms: JsonField<Double>) = apply { this.azRaRms = azRaRms }
+            fun azRaRms(azRaRms: JsonField<Double>) =
+                apply {
+                    this.azRaRms = azRaRms
+                }
 
-            /**
-             * The standard deviation of the azimuth/right ascension residuals, in degrees, used to
-             * determine the sensor azimuth/right-ascension bias.
-             */
+            /** The standard deviation of the azimuth/right ascension residuals, in degrees, used to determine the sensor azimuth/right-ascension bias. */
             fun azRaSigma(azRaSigma: Double) = azRaSigma(JsonField.of(azRaSigma))
 
             /**
              * Sets [Builder.azRaSigma] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.azRaSigma] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.azRaSigma] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun azRaSigma(azRaSigma: JsonField<Double>) = apply { this.azRaSigma = azRaSigma }
+            fun azRaSigma(azRaSigma: JsonField<Double>) =
+                apply {
+                    this.azRaSigma = azRaSigma
+                }
 
-            /**
-             * Specifies the calibration reference angle set for this calibration data set. Azimuth
-             * and Elevation (AZEL) or Right Ascension and Declination (RADEC).
-             */
+            /** Specifies the calibration reference angle set for this calibration data set. Azimuth and Elevation (AZEL) or Right Ascension and Declination (RADEC). */
             fun calAngleRef(calAngleRef: String) = calAngleRef(JsonField.of(calAngleRef))
 
             /**
              * Sets [Builder.calAngleRef] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.calAngleRef] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.calAngleRef] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun calAngleRef(calAngleRef: JsonField<String>) = apply {
-                this.calAngleRef = calAngleRef
-            }
+            fun calAngleRef(calAngleRef: JsonField<String>) =
+                apply {
+                    this.calAngleRef = calAngleRef
+                }
 
-            /**
-             * Specifies that the calibration data are from INTRA_TRACK or INTER_TRACK residuals.
-             */
+            /** Specifies that the calibration data are from INTRA_TRACK or INTER_TRACK residuals. */
             fun calTrackMode(calTrackMode: String) = calTrackMode(JsonField.of(calTrackMode))
 
             /**
              * Sets [Builder.calTrackMode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.calTrackMode] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.calTrackMode] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun calTrackMode(calTrackMode: JsonField<String>) = apply {
-                this.calTrackMode = calTrackMode
-            }
+            fun calTrackMode(calTrackMode: JsonField<String>) =
+                apply {
+                    this.calTrackMode = calTrackMode
+                }
 
             /** The basis of calibration values contained in this record (COMPUTED, OPERATIONAL). */
             fun calType(calType: String) = calType(JsonField.of(calType))
@@ -1682,26 +1608,27 @@ private constructor(
             /**
              * Sets [Builder.calType] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.calType] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.calType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun calType(calType: JsonField<String>) = apply { this.calType = calType }
+            fun calType(calType: JsonField<String>) =
+                apply {
+                    this.calType = calType
+                }
 
             /** The confidence noise bias of the duration span. */
-            fun confidenceNoiseBias(confidenceNoiseBias: Double) =
-                confidenceNoiseBias(JsonField.of(confidenceNoiseBias))
+            fun confidenceNoiseBias(confidenceNoiseBias: Double) = confidenceNoiseBias(JsonField.of(confidenceNoiseBias))
 
             /**
              * Sets [Builder.confidenceNoiseBias] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.confidenceNoiseBias] with a well-typed [Double]
-             * value instead. This method is primarily for setting the field to an undocumented or
-             * not yet supported value.
+             * You should usually call [Builder.confidenceNoiseBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun confidenceNoiseBias(confidenceNoiseBias: JsonField<Double>) = apply {
-                this.confidenceNoiseBias = confidenceNoiseBias
-            }
+            fun confidenceNoiseBias(confidenceNoiseBias: JsonField<Double>) =
+                apply {
+                    this.confidenceNoiseBias = confidenceNoiseBias
+                }
 
             /** Time the row was created in the database, auto-populated by the system. */
             fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -1709,104 +1636,95 @@ private constructor(
             /**
              * Sets [Builder.createdAt] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply {
-                this.createdAt = createdAt
-            }
+            fun createdAt(createdAt: JsonField<OffsetDateTime>) =
+                apply {
+                    this.createdAt = createdAt
+                }
 
-            /**
-             * Application user who created the row in the database, auto-populated by the system.
-             */
+            /** Application user who created the row in the database, auto-populated by the system. */
             fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
 
             /**
              * Sets [Builder.createdBy] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+            fun createdBy(createdBy: JsonField<String>) =
+                apply {
+                    this.createdBy = createdBy
+                }
 
-            /**
-             * Duration of the sensor calibration data which produced these values, measured in
-             * days.
-             */
+            /** Duration of the sensor calibration data which produced these values, measured in days. */
             fun duration(duration: Double) = duration(JsonField.of(duration))
 
             /**
              * Sets [Builder.duration] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.duration] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.duration] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun duration(duration: JsonField<Double>) = apply { this.duration = duration }
+            fun duration(duration: JsonField<Double>) =
+                apply {
+                    this.duration = duration
+                }
 
-            /**
-             * Three element array, expressing the sensor location in Earth Centered Rotating (ECR)
-             * coordinates, in kilometers. The array element order is [x, y, z].
-             */
+            /** Three element array, expressing the sensor location in Earth Centered Rotating (ECR) coordinates, in kilometers. The array element order is [x, y, z]. */
             fun ecr(ecr: List<Double>) = ecr(JsonField.of(ecr))
 
             /**
              * Sets [Builder.ecr] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.ecr] with a well-typed `List<Double>` value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.ecr] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun ecr(ecr: JsonField<List<Double>>) = apply {
-                this.ecr = ecr.map { it.toMutableList() }
-            }
+            fun ecr(ecr: JsonField<List<Double>>) =
+                apply {
+                    this.ecr = ecr.map { it.toMutableList() }
+                }
 
             /**
              * Adds a single [Double] to [Builder.ecr].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addEcr(ecr: Double) = apply {
-                this.ecr =
-                    (this.ecr ?: JsonField.of(mutableListOf())).also {
+            fun addEcr(ecr: Double) =
+                apply {
+                    this.ecr = (this.ecr ?: JsonField.of(mutableListOf())).also {
                         checkKnown("ecr", it).add(ecr)
                     }
-            }
+                }
 
             /** Sensor elevation/declination acceleration bias, in degrees per second squared. */
-            fun elDecAccelBias(elDecAccelBias: Double) =
-                elDecAccelBias(JsonField.of(elDecAccelBias))
+            fun elDecAccelBias(elDecAccelBias: Double) = elDecAccelBias(JsonField.of(elDecAccelBias))
 
             /**
              * Sets [Builder.elDecAccelBias] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.elDecAccelBias] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.elDecAccelBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun elDecAccelBias(elDecAccelBias: JsonField<Double>) = apply {
-                this.elDecAccelBias = elDecAccelBias
-            }
+            fun elDecAccelBias(elDecAccelBias: JsonField<Double>) =
+                apply {
+                    this.elDecAccelBias = elDecAccelBias
+                }
 
-            /**
-             * The standard deviation of the elevation/declination acceleration residuals, in
-             * degrees, used to determine the sensor elevation/declination acceleration bias.
-             */
-            fun elDecAccelSigma(elDecAccelSigma: Double) =
-                elDecAccelSigma(JsonField.of(elDecAccelSigma))
+            /** The standard deviation of the elevation/declination acceleration residuals, in degrees, used to determine the sensor elevation/declination acceleration bias. */
+            fun elDecAccelSigma(elDecAccelSigma: Double) = elDecAccelSigma(JsonField.of(elDecAccelSigma))
 
             /**
              * Sets [Builder.elDecAccelSigma] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.elDecAccelSigma] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.elDecAccelSigma] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun elDecAccelSigma(elDecAccelSigma: JsonField<Double>) = apply {
-                this.elDecAccelSigma = elDecAccelSigma
-            }
+            fun elDecAccelSigma(elDecAccelSigma: JsonField<Double>) =
+                apply {
+                    this.elDecAccelSigma = elDecAccelSigma
+                }
 
             /** Sensor elevation/declination bias, in degrees. */
             fun elDecBias(elDecBias: Double) = elDecBias(JsonField.of(elDecBias))
@@ -1814,11 +1732,13 @@ private constructor(
             /**
              * Sets [Builder.elDecBias] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.elDecBias] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.elDecBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun elDecBias(elDecBias: JsonField<Double>) = apply { this.elDecBias = elDecBias }
+            fun elDecBias(elDecBias: JsonField<Double>) =
+                apply {
+                    this.elDecBias = elDecBias
+                }
 
             /** Sensor elevation/declination rate bias, in degrees per second. */
             fun elDecRateBias(elDecRateBias: Double) = elDecRateBias(JsonField.of(elDecRateBias))
@@ -1826,107 +1746,97 @@ private constructor(
             /**
              * Sets [Builder.elDecRateBias] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.elDecRateBias] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.elDecRateBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun elDecRateBias(elDecRateBias: JsonField<Double>) = apply {
-                this.elDecRateBias = elDecRateBias
-            }
+            fun elDecRateBias(elDecRateBias: JsonField<Double>) =
+                apply {
+                    this.elDecRateBias = elDecRateBias
+                }
 
-            /**
-             * The standard deviation of the elevation/declination rate residuals, in degrees, used
-             * to determine the sensor elevation/declination rate bias.
-             */
-            fun elDecRateSigma(elDecRateSigma: Double) =
-                elDecRateSigma(JsonField.of(elDecRateSigma))
+            /** The standard deviation of the elevation/declination rate residuals, in degrees, used to determine the sensor elevation/declination rate bias. */
+            fun elDecRateSigma(elDecRateSigma: Double) = elDecRateSigma(JsonField.of(elDecRateSigma))
 
             /**
              * Sets [Builder.elDecRateSigma] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.elDecRateSigma] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.elDecRateSigma] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun elDecRateSigma(elDecRateSigma: JsonField<Double>) = apply {
-                this.elDecRateSigma = elDecRateSigma
-            }
+            fun elDecRateSigma(elDecRateSigma: JsonField<Double>) =
+                apply {
+                    this.elDecRateSigma = elDecRateSigma
+                }
 
-            /**
-             * The root mean square of the elevation/declination residuals, in degrees, used to
-             * determine the sensor elevation/declination bias.
-             */
+            /** The root mean square of the elevation/declination residuals, in degrees, used to determine the sensor elevation/declination bias. */
             fun elDecRms(elDecRms: Double) = elDecRms(JsonField.of(elDecRms))
 
             /**
              * Sets [Builder.elDecRms] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.elDecRms] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.elDecRms] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun elDecRms(elDecRms: JsonField<Double>) = apply { this.elDecRms = elDecRms }
+            fun elDecRms(elDecRms: JsonField<Double>) =
+                apply {
+                    this.elDecRms = elDecRms
+                }
 
-            /**
-             * The standard deviation of the elevation/declination residuals, in degrees, used to
-             * determine the sensor elevation/declination bias.
-             */
+            /** The standard deviation of the elevation/declination residuals, in degrees, used to determine the sensor elevation/declination bias. */
             fun elDecSigma(elDecSigma: Double) = elDecSigma(JsonField.of(elDecSigma))
 
             /**
              * Sets [Builder.elDecSigma] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.elDecSigma] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.elDecSigma] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun elDecSigma(elDecSigma: JsonField<Double>) = apply { this.elDecSigma = elDecSigma }
+            fun elDecSigma(elDecSigma: JsonField<Double>) =
+                apply {
+                    this.elDecSigma = elDecSigma
+                }
 
-            /**
-             * Calibration data span end time in ISO 8601 UTC format with millisecond precision. If
-             * provided, the endTime must be greater than or equal to the startTime in the
-             * SensorCalibration record.
-             */
+            /** Calibration data span end time in ISO 8601 UTC format with millisecond precision. If provided, the endTime must be greater than or equal to the startTime in the SensorCalibration record. */
             fun endTime(endTime: OffsetDateTime) = endTime(JsonField.of(endTime))
 
             /**
              * Sets [Builder.endTime] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.endTime] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.endTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun endTime(endTime: JsonField<OffsetDateTime>) = apply { this.endTime = endTime }
+            fun endTime(endTime: JsonField<OffsetDateTime>) =
+                apply {
+                    this.endTime = endTime
+                }
 
-            /**
-             * The number of observables used in determining the azimuth or right-ascension
-             * calibration values.
-             */
+            /** The number of observables used in determining the azimuth or right-ascension calibration values. */
             fun numAzRaObs(numAzRaObs: Int) = numAzRaObs(JsonField.of(numAzRaObs))
 
             /**
              * Sets [Builder.numAzRaObs] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numAzRaObs] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numAzRaObs] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numAzRaObs(numAzRaObs: JsonField<Int>) = apply { this.numAzRaObs = numAzRaObs }
+            fun numAzRaObs(numAzRaObs: JsonField<Int>) =
+                apply {
+                    this.numAzRaObs = numAzRaObs
+                }
 
-            /**
-             * The number of observables used in determining the elevation or declination
-             * calibration values.
-             */
+            /** The number of observables used in determining the elevation or declination calibration values. */
             fun numElDecObs(numElDecObs: Int) = numElDecObs(JsonField.of(numElDecObs))
 
             /**
              * Sets [Builder.numElDecObs] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numElDecObs] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numElDecObs] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numElDecObs(numElDecObs: JsonField<Int>) = apply { this.numElDecObs = numElDecObs }
+            fun numElDecObs(numElDecObs: JsonField<Int>) =
+                apply {
+                    this.numElDecObs = numElDecObs
+                }
 
             /** The total number of observables available over the calibration span. */
             fun numObs(numObs: Int) = numObs(JsonField.of(numObs))
@@ -1934,11 +1844,13 @@ private constructor(
             /**
              * Sets [Builder.numObs] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numObs] with a well-typed [Int] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.numObs] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun numObs(numObs: JsonField<Int>) = apply { this.numObs = numObs }
+            fun numObs(numObs: JsonField<Int>) =
+                apply {
+                    this.numObs = numObs
+                }
 
             /** The number of observables used in determining the photometric calibration values. */
             fun numPhotoObs(numPhotoObs: Int) = numPhotoObs(JsonField.of(numPhotoObs))
@@ -1946,11 +1858,13 @@ private constructor(
             /**
              * Sets [Builder.numPhotoObs] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numPhotoObs] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numPhotoObs] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numPhotoObs(numPhotoObs: JsonField<Int>) = apply { this.numPhotoObs = numPhotoObs }
+            fun numPhotoObs(numPhotoObs: JsonField<Int>) =
+                apply {
+                    this.numPhotoObs = numPhotoObs
+                }
 
             /** The number of observables used in determining the range calibration values. */
             fun numRangeObs(numRangeObs: Int) = numRangeObs(JsonField.of(numRangeObs))
@@ -1958,41 +1872,41 @@ private constructor(
             /**
              * Sets [Builder.numRangeObs] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numRangeObs] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numRangeObs] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numRangeObs(numRangeObs: JsonField<Int>) = apply { this.numRangeObs = numRangeObs }
+            fun numRangeObs(numRangeObs: JsonField<Int>) =
+                apply {
+                    this.numRangeObs = numRangeObs
+                }
 
             /** The number of observables used in determining the range rate calibration values. */
-            fun numRangeRateObs(numRangeRateObs: Int) =
-                numRangeRateObs(JsonField.of(numRangeRateObs))
+            fun numRangeRateObs(numRangeRateObs: Int) = numRangeRateObs(JsonField.of(numRangeRateObs))
 
             /**
              * Sets [Builder.numRangeRateObs] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numRangeRateObs] with a well-typed [Int] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numRangeRateObs] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numRangeRateObs(numRangeRateObs: JsonField<Int>) = apply {
-                this.numRangeRateObs = numRangeRateObs
-            }
+            fun numRangeRateObs(numRangeRateObs: JsonField<Int>) =
+                apply {
+                    this.numRangeRateObs = numRangeRateObs
+                }
 
-            /**
-             * The number of observables used in determining the radar cross section (RCS)
-             * calibration values.
-             */
+            /** The number of observables used in determining the radar cross section (RCS) calibration values. */
             fun numRcsObs(numRcsObs: Int) = numRcsObs(JsonField.of(numRcsObs))
 
             /**
              * Sets [Builder.numRcsObs] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numRcsObs] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numRcsObs] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numRcsObs(numRcsObs: JsonField<Int>) = apply { this.numRcsObs = numRcsObs }
+            fun numRcsObs(numRcsObs: JsonField<Int>) =
+                apply {
+                    this.numRcsObs = numRcsObs
+                }
 
             /** The number of observables used in determining the time calibration values. */
             fun numTimeObs(numTimeObs: Int) = numTimeObs(JsonField.of(numTimeObs))
@@ -2000,11 +1914,13 @@ private constructor(
             /**
              * Sets [Builder.numTimeObs] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numTimeObs] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numTimeObs] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numTimeObs(numTimeObs: JsonField<Int>) = apply { this.numTimeObs = numTimeObs }
+            fun numTimeObs(numTimeObs: JsonField<Int>) =
+                apply {
+                    this.numTimeObs = numTimeObs
+                }
 
             /** The total number of tracks available over the calibration span. */
             fun numTracks(numTracks: Int) = numTracks(JsonField.of(numTracks))
@@ -2012,45 +1928,41 @@ private constructor(
             /**
              * Sets [Builder.numTracks] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numTracks] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numTracks] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numTracks(numTracks: JsonField<Int>) = apply { this.numTracks = numTracks }
+            fun numTracks(numTracks: JsonField<Int>) =
+                apply {
+                    this.numTracks = numTracks
+                }
 
-            /**
-             * Originating system or organization which produced the data, if different from the
-             * source. The origin may be different than the source if the source was a mediating
-             * system which forwarded the data on behalf of the origin system. If null, the source
-             * may be assumed to be the origin.
-             */
+            /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
             fun origin(origin: String) = origin(JsonField.of(origin))
 
             /**
              * Sets [Builder.origin] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origin] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+            fun origin(origin: JsonField<String>) =
+                apply {
+                    this.origin = origin
+                }
 
-            /**
-             * The originating source network on which this record was created, auto-populated by
-             * the system.
-             */
+            /** The originating source network on which this record was created, auto-populated by the system. */
             fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
             /**
              * Sets [Builder.origNetwork] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origNetwork] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origNetwork(origNetwork: JsonField<String>) = apply {
-                this.origNetwork = origNetwork
-            }
+            fun origNetwork(origNetwork: JsonField<String>) =
+                apply {
+                    this.origNetwork = origNetwork
+                }
 
             /** The sensor photometric observation magnitude bias, in visual magnitude. */
             fun photoBias(photoBias: Double) = photoBias(JsonField.of(photoBias))
@@ -2058,59 +1970,55 @@ private constructor(
             /**
              * Sets [Builder.photoBias] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.photoBias] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.photoBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun photoBias(photoBias: JsonField<Double>) = apply { this.photoBias = photoBias }
+            fun photoBias(photoBias: JsonField<Double>) =
+                apply {
+                    this.photoBias = photoBias
+                }
 
-            /**
-             * The standard deviation of the magnitude residuals, in visual magnitude, used to
-             * determine the photometric bias.
-             */
+            /** The standard deviation of the magnitude residuals, in visual magnitude, used to determine the photometric bias. */
             fun photoSigma(photoSigma: Double) = photoSigma(JsonField.of(photoSigma))
 
             /**
              * Sets [Builder.photoSigma] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.photoSigma] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.photoSigma] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun photoSigma(photoSigma: JsonField<Double>) = apply { this.photoSigma = photoSigma }
+            fun photoSigma(photoSigma: JsonField<Double>) =
+                apply {
+                    this.photoSigma = photoSigma
+                }
 
             /** Sensor range rate acceleration bias, in kilometers per second squared. */
-            fun rangeAccelBias(rangeAccelBias: Double) =
-                rangeAccelBias(JsonField.of(rangeAccelBias))
+            fun rangeAccelBias(rangeAccelBias: Double) = rangeAccelBias(JsonField.of(rangeAccelBias))
 
             /**
              * Sets [Builder.rangeAccelBias] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.rangeAccelBias] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.rangeAccelBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun rangeAccelBias(rangeAccelBias: JsonField<Double>) = apply {
-                this.rangeAccelBias = rangeAccelBias
-            }
+            fun rangeAccelBias(rangeAccelBias: JsonField<Double>) =
+                apply {
+                    this.rangeAccelBias = rangeAccelBias
+                }
 
-            /**
-             * The standard deviation of the range acceleration residuals, in kilometers per second
-             * squared, used to determine the sensor range acceleration bias.
-             */
-            fun rangeAccelSigma(rangeAccelSigma: Double) =
-                rangeAccelSigma(JsonField.of(rangeAccelSigma))
+            /** The standard deviation of the range acceleration residuals, in kilometers per second squared, used to determine the sensor range acceleration bias. */
+            fun rangeAccelSigma(rangeAccelSigma: Double) = rangeAccelSigma(JsonField.of(rangeAccelSigma))
 
             /**
              * Sets [Builder.rangeAccelSigma] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.rangeAccelSigma] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.rangeAccelSigma] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun rangeAccelSigma(rangeAccelSigma: JsonField<Double>) = apply {
-                this.rangeAccelSigma = rangeAccelSigma
-            }
+            fun rangeAccelSigma(rangeAccelSigma: JsonField<Double>) =
+                apply {
+                    this.rangeAccelSigma = rangeAccelSigma
+                }
 
             /** Sensor range bias, in kilometers. */
             fun rangeBias(rangeBias: Double) = rangeBias(JsonField.of(rangeBias))
@@ -2118,11 +2026,13 @@ private constructor(
             /**
              * Sets [Builder.rangeBias] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.rangeBias] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.rangeBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun rangeBias(rangeBias: JsonField<Double>) = apply { this.rangeBias = rangeBias }
+            fun rangeBias(rangeBias: JsonField<Double>) =
+                apply {
+                    this.rangeBias = rangeBias
+                }
 
             /** Sensor range rate bias, in kilometers per second. */
             fun rangeRateBias(rangeRateBias: Double) = rangeRateBias(JsonField.of(rangeRateBias))
@@ -2130,78 +2040,69 @@ private constructor(
             /**
              * Sets [Builder.rangeRateBias] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.rangeRateBias] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.rangeRateBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun rangeRateBias(rangeRateBias: JsonField<Double>) = apply {
-                this.rangeRateBias = rangeRateBias
-            }
+            fun rangeRateBias(rangeRateBias: JsonField<Double>) =
+                apply {
+                    this.rangeRateBias = rangeRateBias
+                }
 
-            /**
-             * The root mean square of the range rate residuals, in kilometers per second, used to
-             * determine the sensor range rate bias.
-             */
+            /** The root mean square of the range rate residuals, in kilometers per second, used to determine the sensor range rate bias. */
             fun rangeRateRms(rangeRateRms: Double) = rangeRateRms(JsonField.of(rangeRateRms))
 
             /**
              * Sets [Builder.rangeRateRms] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.rangeRateRms] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.rangeRateRms] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun rangeRateRms(rangeRateRms: JsonField<Double>) = apply {
-                this.rangeRateRms = rangeRateRms
-            }
+            fun rangeRateRms(rangeRateRms: JsonField<Double>) =
+                apply {
+                    this.rangeRateRms = rangeRateRms
+                }
 
-            /**
-             * The standard deviation of the range rate residuals, in kilometers per second, used to
-             * determine the sensor range rate bias.
-             */
-            fun rangeRateSigma(rangeRateSigma: Double) =
-                rangeRateSigma(JsonField.of(rangeRateSigma))
+            /** The standard deviation of the range rate residuals, in kilometers per second, used to determine the sensor range rate bias. */
+            fun rangeRateSigma(rangeRateSigma: Double) = rangeRateSigma(JsonField.of(rangeRateSigma))
 
             /**
              * Sets [Builder.rangeRateSigma] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.rangeRateSigma] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.rangeRateSigma] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun rangeRateSigma(rangeRateSigma: JsonField<Double>) = apply {
-                this.rangeRateSigma = rangeRateSigma
-            }
+            fun rangeRateSigma(rangeRateSigma: JsonField<Double>) =
+                apply {
+                    this.rangeRateSigma = rangeRateSigma
+                }
 
-            /**
-             * The root mean square of the range residuals, in kilometers, used to determine the
-             * sensor range bias.
-             */
+            /** The root mean square of the range residuals, in kilometers, used to determine the sensor range bias. */
             fun rangeRms(rangeRms: Double) = rangeRms(JsonField.of(rangeRms))
 
             /**
              * Sets [Builder.rangeRms] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.rangeRms] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.rangeRms] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun rangeRms(rangeRms: JsonField<Double>) = apply { this.rangeRms = rangeRms }
+            fun rangeRms(rangeRms: JsonField<Double>) =
+                apply {
+                    this.rangeRms = rangeRms
+                }
 
-            /**
-             * The standard deviation of the range residuals, in kilometers, used to determine the
-             * sensor range bias.
-             */
+            /** The standard deviation of the range residuals, in kilometers, used to determine the sensor range bias. */
             fun rangeSigma(rangeSigma: Double) = rangeSigma(JsonField.of(rangeSigma))
 
             /**
              * Sets [Builder.rangeSigma] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.rangeSigma] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.rangeSigma] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun rangeSigma(rangeSigma: JsonField<Double>) = apply { this.rangeSigma = rangeSigma }
+            fun rangeSigma(rangeSigma: JsonField<Double>) =
+                apply {
+                    this.rangeSigma = rangeSigma
+                }
 
             /** The sensor radar cross section (RCS) observation bias, in square meters. */
             fun rcsBias(rcsBias: Double) = rcsBias(JsonField.of(rcsBias))
@@ -2209,26 +2110,27 @@ private constructor(
             /**
              * Sets [Builder.rcsBias] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.rcsBias] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.rcsBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun rcsBias(rcsBias: JsonField<Double>) = apply { this.rcsBias = rcsBias }
+            fun rcsBias(rcsBias: JsonField<Double>) =
+                apply {
+                    this.rcsBias = rcsBias
+                }
 
-            /**
-             * The standard deviation of the radar cross section residuals, in square meters, used
-             * to determine the radar cross section bias.
-             */
+            /** The standard deviation of the radar cross section residuals, in square meters, used to determine the radar cross section bias. */
             fun rcsSigma(rcsSigma: Double) = rcsSigma(JsonField.of(rcsSigma))
 
             /**
              * Sets [Builder.rcsSigma] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.rcsSigma] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.rcsSigma] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun rcsSigma(rcsSigma: JsonField<Double>) = apply { this.rcsSigma = rcsSigma }
+            fun rcsSigma(rcsSigma: JsonField<Double>) =
+                apply {
+                    this.rcsSigma = rcsSigma
+                }
 
             /** Array of the catalog IDs of the reference targets used in the calibration. */
             fun refTargets(refTargets: List<String>) = refTargets(JsonField.of(refTargets))
@@ -2236,25 +2138,25 @@ private constructor(
             /**
              * Sets [Builder.refTargets] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.refTargets] with a well-typed `List<String>` value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.refTargets] with a well-typed `List<String>` value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun refTargets(refTargets: JsonField<List<String>>) = apply {
-                this.refTargets = refTargets.map { it.toMutableList() }
-            }
+            fun refTargets(refTargets: JsonField<List<String>>) =
+                apply {
+                    this.refTargets = refTargets.map { it.toMutableList() }
+                }
 
             /**
              * Adds a single [String] to [refTargets].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addRefTarget(refTarget: String) = apply {
-                refTargets =
-                    (refTargets ?: JsonField.of(mutableListOf())).also {
+            fun addRefTarget(refTarget: String) =
+                apply {
+                    refTargets = (refTargets ?: JsonField.of(mutableListOf())).also {
                         checkKnown("refTargets", it).add(refTarget)
                     }
-            }
+                }
 
             /** The reference type used in the calibration. */
             fun refType(refType: String) = refType(JsonField.of(refType))
@@ -2262,11 +2164,13 @@ private constructor(
             /**
              * Sets [Builder.refType] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.refType] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.refType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun refType(refType: JsonField<String>) = apply { this.refType = refType }
+            fun refType(refType: JsonField<String>) =
+                apply {
+                    this.refType = refType
+                }
 
             /** The sensor type (MECHANICAL, OPTICAL, PHASED ARRAY, RF). */
             fun senType(senType: String) = senType(JsonField.of(senType))
@@ -2274,27 +2178,27 @@ private constructor(
             /**
              * Sets [Builder.senType] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.senType] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.senType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun senType(senType: JsonField<String>) = apply { this.senType = senType }
+            fun senType(senType: JsonField<String>) =
+                apply {
+                    this.senType = senType
+                }
 
-            /**
-             * The source data library from which this record was received. This could be a remote
-             * or tactical UDL or another data library. If null, the record should be assumed to
-             * have originated from the primary Enterprise UDL.
-             */
+            /** The source data library from which this record was received. This could be a remote or tactical UDL or another data library. If null, the record should be assumed to have originated from the primary Enterprise UDL. */
             fun sourceDl(sourceDl: String) = sourceDl(JsonField.of(sourceDl))
 
             /**
              * Sets [Builder.sourceDl] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sourceDl] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sourceDl] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sourceDl(sourceDl: JsonField<String>) = apply { this.sourceDl = sourceDl }
+            fun sourceDl(sourceDl: JsonField<String>) =
+                apply {
+                    this.sourceDl = sourceDl
+                }
 
             /** Sensor time bias, in seconds. */
             fun timeBias(timeBias: Double) = timeBias(JsonField.of(timeBias))
@@ -2302,28 +2206,27 @@ private constructor(
             /**
              * Sets [Builder.timeBias] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.timeBias] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.timeBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun timeBias(timeBias: JsonField<Double>) = apply { this.timeBias = timeBias }
+            fun timeBias(timeBias: JsonField<Double>) =
+                apply {
+                    this.timeBias = timeBias
+                }
 
-            /**
-             * The standard deviation of the time residuals, in seconds, used to determine the
-             * sensor time bias.
-             */
+            /** The standard deviation of the time residuals, in seconds, used to determine the sensor time bias. */
             fun timeBiasSigma(timeBiasSigma: Double) = timeBiasSigma(JsonField.of(timeBiasSigma))
 
             /**
              * Sets [Builder.timeBiasSigma] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.timeBiasSigma] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.timeBiasSigma] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun timeBiasSigma(timeBiasSigma: JsonField<Double>) = apply {
-                this.timeBiasSigma = timeBiasSigma
-            }
+            fun timeBiasSigma(timeBiasSigma: JsonField<Double>) =
+                apply {
+                    this.timeBiasSigma = timeBiasSigma
+                }
 
             /**
              * Returns an immutable instance of [Body].
@@ -2331,6 +2234,7 @@ private constructor(
              * Further updates to this [Builder] will not mutate the returned instance.
              *
              * The following fields are required:
+             *
              * ```java
              * .classificationMarking()
              * .dataMode()
@@ -2343,134 +2247,145 @@ private constructor(
              */
             fun build(): Body =
                 Body(
-                    checkRequired("classificationMarking", classificationMarking),
-                    checkRequired("dataMode", dataMode),
-                    checkRequired("idSensor", idSensor),
-                    checkRequired("source", source),
-                    checkRequired("startTime", startTime),
-                    id,
-                    azRaAccelBias,
-                    azRaAccelSigma,
-                    azRaBias,
-                    azRaRateBias,
-                    azRaRateSigma,
-                    azRaRms,
-                    azRaSigma,
-                    calAngleRef,
-                    calTrackMode,
-                    calType,
-                    confidenceNoiseBias,
-                    createdAt,
-                    createdBy,
-                    duration,
-                    (ecr ?: JsonMissing.of()).map { it.toImmutable() },
-                    elDecAccelBias,
-                    elDecAccelSigma,
-                    elDecBias,
-                    elDecRateBias,
-                    elDecRateSigma,
-                    elDecRms,
-                    elDecSigma,
-                    endTime,
-                    numAzRaObs,
-                    numElDecObs,
-                    numObs,
-                    numPhotoObs,
-                    numRangeObs,
-                    numRangeRateObs,
-                    numRcsObs,
-                    numTimeObs,
-                    numTracks,
-                    origin,
-                    origNetwork,
-                    photoBias,
-                    photoSigma,
-                    rangeAccelBias,
-                    rangeAccelSigma,
-                    rangeBias,
-                    rangeRateBias,
-                    rangeRateRms,
-                    rangeRateSigma,
-                    rangeRms,
-                    rangeSigma,
-                    rcsBias,
-                    rcsSigma,
-                    (refTargets ?: JsonMissing.of()).map { it.toImmutable() },
-                    refType,
-                    senType,
-                    sourceDl,
-                    timeBias,
-                    timeBiasSigma,
+                  checkRequired(
+                    "classificationMarking", classificationMarking
+                  ),
+                  checkRequired(
+                    "dataMode", dataMode
+                  ),
+                  checkRequired(
+                    "idSensor", idSensor
+                  ),
+                  checkRequired(
+                    "source", source
+                  ),
+                  checkRequired(
+                    "startTime", startTime
+                  ),
+                  id,
+                  azRaAccelBias,
+                  azRaAccelSigma,
+                  azRaBias,
+                  azRaRateBias,
+                  azRaRateSigma,
+                  azRaRms,
+                  azRaSigma,
+                  calAngleRef,
+                  calTrackMode,
+                  calType,
+                  confidenceNoiseBias,
+                  createdAt,
+                  createdBy,
+                  duration,
+                  (ecr ?: JsonMissing.of()).map { it.toImmutable() },
+                  elDecAccelBias,
+                  elDecAccelSigma,
+                  elDecBias,
+                  elDecRateBias,
+                  elDecRateSigma,
+                  elDecRms,
+                  elDecSigma,
+                  endTime,
+                  numAzRaObs,
+                  numElDecObs,
+                  numObs,
+                  numPhotoObs,
+                  numRangeObs,
+                  numRangeRateObs,
+                  numRcsObs,
+                  numTimeObs,
+                  numTracks,
+                  origin,
+                  origNetwork,
+                  photoBias,
+                  photoSigma,
+                  rangeAccelBias,
+                  rangeAccelSigma,
+                  rangeBias,
+                  rangeRateBias,
+                  rangeRateRms,
+                  rangeRateSigma,
+                  rangeRms,
+                  rangeSigma,
+                  rcsBias,
+                  rcsSigma,
+                  (refTargets ?: JsonMissing.of()).map { it.toImmutable() },
+                  refType,
+                  senType,
+                  sourceDl,
+                  timeBias,
+                  timeBiasSigma,
                 )
         }
 
         private var validated: Boolean = false
 
-        fun validate(): Body = apply {
-            if (validated) {
-                return@apply
-            }
+        fun validate(): Body =
+            apply {
+                if (validated) {
+                  return@apply
+                }
 
-            classificationMarking()
-            dataMode().validate()
-            idSensor()
-            source()
-            startTime()
-            id()
-            azRaAccelBias()
-            azRaAccelSigma()
-            azRaBias()
-            azRaRateBias()
-            azRaRateSigma()
-            azRaRms()
-            azRaSigma()
-            calAngleRef()
-            calTrackMode()
-            calType()
-            confidenceNoiseBias()
-            createdAt()
-            createdBy()
-            duration()
-            ecr()
-            elDecAccelBias()
-            elDecAccelSigma()
-            elDecBias()
-            elDecRateBias()
-            elDecRateSigma()
-            elDecRms()
-            elDecSigma()
-            endTime()
-            numAzRaObs()
-            numElDecObs()
-            numObs()
-            numPhotoObs()
-            numRangeObs()
-            numRangeRateObs()
-            numRcsObs()
-            numTimeObs()
-            numTracks()
-            origin()
-            origNetwork()
-            photoBias()
-            photoSigma()
-            rangeAccelBias()
-            rangeAccelSigma()
-            rangeBias()
-            rangeRateBias()
-            rangeRateRms()
-            rangeRateSigma()
-            rangeRms()
-            rangeSigma()
-            rcsBias()
-            rcsSigma()
-            refTargets()
-            refType()
-            senType()
-            sourceDl()
-            timeBias()
-            timeBiasSigma()
-            validated = true
-        }
+                classificationMarking()
+                dataMode().validate()
+                idSensor()
+                source()
+                startTime()
+                id()
+                azRaAccelBias()
+                azRaAccelSigma()
+                azRaBias()
+                azRaRateBias()
+                azRaRateSigma()
+                azRaRms()
+                azRaSigma()
+                calAngleRef()
+                calTrackMode()
+                calType()
+                confidenceNoiseBias()
+                createdAt()
+                createdBy()
+                duration()
+                ecr()
+                elDecAccelBias()
+                elDecAccelSigma()
+                elDecBias()
+                elDecRateBias()
+                elDecRateSigma()
+                elDecRms()
+                elDecSigma()
+                endTime()
+                numAzRaObs()
+                numElDecObs()
+                numObs()
+                numPhotoObs()
+                numRangeObs()
+                numRangeRateObs()
+                numRcsObs()
+                numTimeObs()
+                numTracks()
+                origin()
+                origNetwork()
+                photoBias()
+                photoSigma()
+                rangeAccelBias()
+                rangeAccelSigma()
+                rangeBias()
+                rangeRateBias()
+                rangeRateRms()
+                rangeRateSigma()
+                rangeRms()
+                rangeSigma()
+                rcsBias()
+                rcsSigma()
+                refTargets()
+                refType()
+                senType()
+                sourceDl()
+                timeBias()
+                timeBiasSigma()
+                validated = true
+            }
 
         fun isValid(): Boolean =
             try {
@@ -2481,98 +2396,38 @@ private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
+         * Returns a score indicating how many valid values are contained in this object recursively.
          *
          * Used for best match union deserialization.
          */
         @JvmSynthetic
-        internal fun validity(): Int =
-            (if (classificationMarking.asKnown().isPresent) 1 else 0) +
-                (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
-                (if (idSensor.asKnown().isPresent) 1 else 0) +
-                (if (source.asKnown().isPresent) 1 else 0) +
-                (if (startTime.asKnown().isPresent) 1 else 0) +
-                (if (id.asKnown().isPresent) 1 else 0) +
-                (if (azRaAccelBias.asKnown().isPresent) 1 else 0) +
-                (if (azRaAccelSigma.asKnown().isPresent) 1 else 0) +
-                (if (azRaBias.asKnown().isPresent) 1 else 0) +
-                (if (azRaRateBias.asKnown().isPresent) 1 else 0) +
-                (if (azRaRateSigma.asKnown().isPresent) 1 else 0) +
-                (if (azRaRms.asKnown().isPresent) 1 else 0) +
-                (if (azRaSigma.asKnown().isPresent) 1 else 0) +
-                (if (calAngleRef.asKnown().isPresent) 1 else 0) +
-                (if (calTrackMode.asKnown().isPresent) 1 else 0) +
-                (if (calType.asKnown().isPresent) 1 else 0) +
-                (if (confidenceNoiseBias.asKnown().isPresent) 1 else 0) +
-                (if (createdAt.asKnown().isPresent) 1 else 0) +
-                (if (createdBy.asKnown().isPresent) 1 else 0) +
-                (if (duration.asKnown().isPresent) 1 else 0) +
-                (ecr.asKnown().getOrNull()?.size ?: 0) +
-                (if (elDecAccelBias.asKnown().isPresent) 1 else 0) +
-                (if (elDecAccelSigma.asKnown().isPresent) 1 else 0) +
-                (if (elDecBias.asKnown().isPresent) 1 else 0) +
-                (if (elDecRateBias.asKnown().isPresent) 1 else 0) +
-                (if (elDecRateSigma.asKnown().isPresent) 1 else 0) +
-                (if (elDecRms.asKnown().isPresent) 1 else 0) +
-                (if (elDecSigma.asKnown().isPresent) 1 else 0) +
-                (if (endTime.asKnown().isPresent) 1 else 0) +
-                (if (numAzRaObs.asKnown().isPresent) 1 else 0) +
-                (if (numElDecObs.asKnown().isPresent) 1 else 0) +
-                (if (numObs.asKnown().isPresent) 1 else 0) +
-                (if (numPhotoObs.asKnown().isPresent) 1 else 0) +
-                (if (numRangeObs.asKnown().isPresent) 1 else 0) +
-                (if (numRangeRateObs.asKnown().isPresent) 1 else 0) +
-                (if (numRcsObs.asKnown().isPresent) 1 else 0) +
-                (if (numTimeObs.asKnown().isPresent) 1 else 0) +
-                (if (numTracks.asKnown().isPresent) 1 else 0) +
-                (if (origin.asKnown().isPresent) 1 else 0) +
-                (if (origNetwork.asKnown().isPresent) 1 else 0) +
-                (if (photoBias.asKnown().isPresent) 1 else 0) +
-                (if (photoSigma.asKnown().isPresent) 1 else 0) +
-                (if (rangeAccelBias.asKnown().isPresent) 1 else 0) +
-                (if (rangeAccelSigma.asKnown().isPresent) 1 else 0) +
-                (if (rangeBias.asKnown().isPresent) 1 else 0) +
-                (if (rangeRateBias.asKnown().isPresent) 1 else 0) +
-                (if (rangeRateRms.asKnown().isPresent) 1 else 0) +
-                (if (rangeRateSigma.asKnown().isPresent) 1 else 0) +
-                (if (rangeRms.asKnown().isPresent) 1 else 0) +
-                (if (rangeSigma.asKnown().isPresent) 1 else 0) +
-                (if (rcsBias.asKnown().isPresent) 1 else 0) +
-                (if (rcsSigma.asKnown().isPresent) 1 else 0) +
-                (refTargets.asKnown().getOrNull()?.size ?: 0) +
-                (if (refType.asKnown().isPresent) 1 else 0) +
-                (if (senType.asKnown().isPresent) 1 else 0) +
-                (if (sourceDl.asKnown().isPresent) 1 else 0) +
-                (if (timeBias.asKnown().isPresent) 1 else 0) +
-                (if (timeBiasSigma.asKnown().isPresent) 1 else 0)
+        internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (idSensor.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (startTime.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (if (azRaAccelBias.asKnown().isPresent) 1 else 0) + (if (azRaAccelSigma.asKnown().isPresent) 1 else 0) + (if (azRaBias.asKnown().isPresent) 1 else 0) + (if (azRaRateBias.asKnown().isPresent) 1 else 0) + (if (azRaRateSigma.asKnown().isPresent) 1 else 0) + (if (azRaRms.asKnown().isPresent) 1 else 0) + (if (azRaSigma.asKnown().isPresent) 1 else 0) + (if (calAngleRef.asKnown().isPresent) 1 else 0) + (if (calTrackMode.asKnown().isPresent) 1 else 0) + (if (calType.asKnown().isPresent) 1 else 0) + (if (confidenceNoiseBias.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (duration.asKnown().isPresent) 1 else 0) + (ecr.asKnown().getOrNull()?.size ?: 0) + (if (elDecAccelBias.asKnown().isPresent) 1 else 0) + (if (elDecAccelSigma.asKnown().isPresent) 1 else 0) + (if (elDecBias.asKnown().isPresent) 1 else 0) + (if (elDecRateBias.asKnown().isPresent) 1 else 0) + (if (elDecRateSigma.asKnown().isPresent) 1 else 0) + (if (elDecRms.asKnown().isPresent) 1 else 0) + (if (elDecSigma.asKnown().isPresent) 1 else 0) + (if (endTime.asKnown().isPresent) 1 else 0) + (if (numAzRaObs.asKnown().isPresent) 1 else 0) + (if (numElDecObs.asKnown().isPresent) 1 else 0) + (if (numObs.asKnown().isPresent) 1 else 0) + (if (numPhotoObs.asKnown().isPresent) 1 else 0) + (if (numRangeObs.asKnown().isPresent) 1 else 0) + (if (numRangeRateObs.asKnown().isPresent) 1 else 0) + (if (numRcsObs.asKnown().isPresent) 1 else 0) + (if (numTimeObs.asKnown().isPresent) 1 else 0) + (if (numTracks.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (photoBias.asKnown().isPresent) 1 else 0) + (if (photoSigma.asKnown().isPresent) 1 else 0) + (if (rangeAccelBias.asKnown().isPresent) 1 else 0) + (if (rangeAccelSigma.asKnown().isPresent) 1 else 0) + (if (rangeBias.asKnown().isPresent) 1 else 0) + (if (rangeRateBias.asKnown().isPresent) 1 else 0) + (if (rangeRateRms.asKnown().isPresent) 1 else 0) + (if (rangeRateSigma.asKnown().isPresent) 1 else 0) + (if (rangeRms.asKnown().isPresent) 1 else 0) + (if (rangeSigma.asKnown().isPresent) 1 else 0) + (if (rcsBias.asKnown().isPresent) 1 else 0) + (if (rcsSigma.asKnown().isPresent) 1 else 0) + (refTargets.asKnown().getOrNull()?.size ?: 0) + (if (refType.asKnown().isPresent) 1 else 0) + (if (senType.asKnown().isPresent) 1 else 0) + (if (sourceDl.asKnown().isPresent) 1 else 0) + (if (timeBias.asKnown().isPresent) 1 else 0) + (if (timeBiasSigma.asKnown().isPresent) 1 else 0)
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-         * both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-         * analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-         * requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
          */
-        class DataMode @JsonCreator private constructor(private val value: JsonField<String>) :
-            Enum {
+        class DataMode @JsonCreator private constructor(
+            private val value: JsonField<String>,
+
+        ) : Enum {
 
             /**
              * Returns this class instance's raw value.
              *
-             * This is usually only useful if this instance was deserialized from data that doesn't
-             * match any known member, and you want to know that value. For example, if the SDK is
-             * on an older version than the API, then the API may respond with new members that the
-             * SDK is unaware of.
+             * This is usually only useful if this instance was deserialized from data that doesn't match any known
+             * member, and you want to know that value. For example, if the SDK is on an older version than the
+             * API, then the API may respond with new members that the SDK is unaware of.
              */
-            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+            @com.fasterxml.jackson.annotation.JsonValue
+            fun _value(): JsonField<String> = value
 
             companion object {
 
@@ -2599,9 +2454,11 @@ private constructor(
              * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
              *
              * An instance of [DataMode] can contain an unknown value in a couple of cases:
-             * - It was deserialized from data that doesn't match any known member. For example, if
-             *   the SDK is on an older version than the API, then the API may respond with new
-             *   members that the SDK is unaware of.
+             *
+             * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
+             *   an older version than the API, then the API may respond with new members that the SDK is unaware
+             *   of.
+             *
              * - It was constructed with an arbitrary value using the [of] method.
              */
             enum class Value {
@@ -2609,18 +2466,16 @@ private constructor(
                 TEST,
                 SIMULATED,
                 EXERCISE,
-                /**
-                 * An enum member indicating that [DataMode] was instantiated with an unknown value.
-                 */
+                /** An enum member indicating that [DataMode] was instantiated with an unknown value. */
                 _UNKNOWN,
             }
 
             /**
-             * Returns an enum member corresponding to this class instance's value, or
-             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
+             * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
+             * class was instantiated with an unknown value.
              *
-             * Use the [known] method instead if you're certain the value is always known or if you
-             * want to throw for the unknown case.
+             * Use the [known] method instead if you're certain the value is always known or if you want to throw
+             * for the unknown case.
              */
             fun value(): Value =
                 when (this) {
@@ -2634,11 +2489,10 @@ private constructor(
             /**
              * Returns an enum member corresponding to this class instance's value.
              *
-             * Use the [value] method instead if you're uncertain the value is always known and
-             * don't want to throw for the unknown case.
+             * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
+             * for the unknown case.
              *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
-             *   not a known member.
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
              */
             fun known(): Known =
                 when (this) {
@@ -2652,27 +2506,25 @@ private constructor(
             /**
              * Returns this class instance's primitive wire representation.
              *
-             * This differs from the [toString] method because that method is primarily for
-             * debugging and generally doesn't throw.
+             * This differs from the [toString] method because that method is primarily for debugging and generally
+             * doesn't throw.
              *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
-             *   not have the expected primitive type.
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
+             * primitive type.
              */
-            fun asString(): String =
-                _value().asString().orElseThrow {
-                    UnifieddatalibraryInvalidDataException("Value is not a String")
-                }
+            fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
 
             private var validated: Boolean = false
 
-            fun validate(): DataMode = apply {
-                if (validated) {
-                    return@apply
-                }
+            fun validate(): DataMode =
+                apply {
+                    if (validated) {
+                      return@apply
+                    }
 
-                known()
-                validated = true
-            }
+                    known()
+                    validated = true
+                }
 
             fun isValid(): Boolean =
                 try {
@@ -2683,19 +2535,19 @@ private constructor(
                 }
 
             /**
-             * Returns a score indicating how many valid values are contained in this object
-             * recursively.
+             * Returns a score indicating how many valid values are contained in this object recursively.
              *
              * Used for best match union deserialization.
              */
-            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+            @JvmSynthetic
+            internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
             override fun equals(other: Any?): Boolean {
-                if (this === other) {
-                    return true
-                }
+              if (this === other) {
+                  return true
+              }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+              return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
             }
 
             override fun hashCode() = value.hashCode()
@@ -2704,11 +2556,11 @@ private constructor(
         }
 
         override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
+          if (this === other) {
+              return true
+          }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSensor == other.idSensor && source == other.source && startTime == other.startTime && id == other.id && azRaAccelBias == other.azRaAccelBias && azRaAccelSigma == other.azRaAccelSigma && azRaBias == other.azRaBias && azRaRateBias == other.azRaRateBias && azRaRateSigma == other.azRaRateSigma && azRaRms == other.azRaRms && azRaSigma == other.azRaSigma && calAngleRef == other.calAngleRef && calTrackMode == other.calTrackMode && calType == other.calType && confidenceNoiseBias == other.confidenceNoiseBias && createdAt == other.createdAt && createdBy == other.createdBy && duration == other.duration && ecr == other.ecr && elDecAccelBias == other.elDecAccelBias && elDecAccelSigma == other.elDecAccelSigma && elDecBias == other.elDecBias && elDecRateBias == other.elDecRateBias && elDecRateSigma == other.elDecRateSigma && elDecRms == other.elDecRms && elDecSigma == other.elDecSigma && endTime == other.endTime && numAzRaObs == other.numAzRaObs && numElDecObs == other.numElDecObs && numObs == other.numObs && numPhotoObs == other.numPhotoObs && numRangeObs == other.numRangeObs && numRangeRateObs == other.numRangeRateObs && numRcsObs == other.numRcsObs && numTimeObs == other.numTimeObs && numTracks == other.numTracks && origin == other.origin && origNetwork == other.origNetwork && photoBias == other.photoBias && photoSigma == other.photoSigma && rangeAccelBias == other.rangeAccelBias && rangeAccelSigma == other.rangeAccelSigma && rangeBias == other.rangeBias && rangeRateBias == other.rangeRateBias && rangeRateRms == other.rangeRateRms && rangeRateSigma == other.rangeRateSigma && rangeRms == other.rangeRms && rangeSigma == other.rangeSigma && rcsBias == other.rcsBias && rcsSigma == other.rcsSigma && refTargets == other.refTargets && refType == other.refType && senType == other.senType && sourceDl == other.sourceDl && timeBias == other.timeBias && timeBiasSigma == other.timeBiasSigma /* spotless:on */
+          return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSensor == other.idSensor && source == other.source && startTime == other.startTime && id == other.id && azRaAccelBias == other.azRaAccelBias && azRaAccelSigma == other.azRaAccelSigma && azRaBias == other.azRaBias && azRaRateBias == other.azRaRateBias && azRaRateSigma == other.azRaRateSigma && azRaRms == other.azRaRms && azRaSigma == other.azRaSigma && calAngleRef == other.calAngleRef && calTrackMode == other.calTrackMode && calType == other.calType && confidenceNoiseBias == other.confidenceNoiseBias && createdAt == other.createdAt && createdBy == other.createdBy && duration == other.duration && ecr == other.ecr && elDecAccelBias == other.elDecAccelBias && elDecAccelSigma == other.elDecAccelSigma && elDecBias == other.elDecBias && elDecRateBias == other.elDecRateBias && elDecRateSigma == other.elDecRateSigma && elDecRms == other.elDecRms && elDecSigma == other.elDecSigma && endTime == other.endTime && numAzRaObs == other.numAzRaObs && numElDecObs == other.numElDecObs && numObs == other.numObs && numPhotoObs == other.numPhotoObs && numRangeObs == other.numRangeObs && numRangeRateObs == other.numRangeRateObs && numRcsObs == other.numRcsObs && numTimeObs == other.numTimeObs && numTracks == other.numTracks && origin == other.origin && origNetwork == other.origNetwork && photoBias == other.photoBias && photoSigma == other.photoSigma && rangeAccelBias == other.rangeAccelBias && rangeAccelSigma == other.rangeAccelSigma && rangeBias == other.rangeBias && rangeRateBias == other.rangeRateBias && rangeRateRms == other.rangeRateRms && rangeRateSigma == other.rangeRateSigma && rangeRms == other.rangeRms && rangeSigma == other.rangeSigma && rcsBias == other.rcsBias && rcsSigma == other.rcsSigma && refTargets == other.refTargets && refType == other.refType && senType == other.senType && sourceDl == other.sourceDl && timeBias == other.timeBias && timeBiasSigma == other.timeBiasSigma /* spotless:on */
         }
 
         /* spotless:off */
@@ -2717,20 +2569,18 @@ private constructor(
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idSensor=$idSensor, source=$source, startTime=$startTime, id=$id, azRaAccelBias=$azRaAccelBias, azRaAccelSigma=$azRaAccelSigma, azRaBias=$azRaBias, azRaRateBias=$azRaRateBias, azRaRateSigma=$azRaRateSigma, azRaRms=$azRaRms, azRaSigma=$azRaSigma, calAngleRef=$calAngleRef, calTrackMode=$calTrackMode, calType=$calType, confidenceNoiseBias=$confidenceNoiseBias, createdAt=$createdAt, createdBy=$createdBy, duration=$duration, ecr=$ecr, elDecAccelBias=$elDecAccelBias, elDecAccelSigma=$elDecAccelSigma, elDecBias=$elDecBias, elDecRateBias=$elDecRateBias, elDecRateSigma=$elDecRateSigma, elDecRms=$elDecRms, elDecSigma=$elDecSigma, endTime=$endTime, numAzRaObs=$numAzRaObs, numElDecObs=$numElDecObs, numObs=$numObs, numPhotoObs=$numPhotoObs, numRangeObs=$numRangeObs, numRangeRateObs=$numRangeRateObs, numRcsObs=$numRcsObs, numTimeObs=$numTimeObs, numTracks=$numTracks, origin=$origin, origNetwork=$origNetwork, photoBias=$photoBias, photoSigma=$photoSigma, rangeAccelBias=$rangeAccelBias, rangeAccelSigma=$rangeAccelSigma, rangeBias=$rangeBias, rangeRateBias=$rangeRateBias, rangeRateRms=$rangeRateRms, rangeRateSigma=$rangeRateSigma, rangeRms=$rangeRms, rangeSigma=$rangeSigma, rcsBias=$rcsBias, rcsSigma=$rcsSigma, refTargets=$refTargets, refType=$refType, senType=$senType, sourceDl=$sourceDl, timeBias=$timeBias, timeBiasSigma=$timeBiasSigma}"
+        override fun toString() = "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idSensor=$idSensor, source=$source, startTime=$startTime, id=$id, azRaAccelBias=$azRaAccelBias, azRaAccelSigma=$azRaAccelSigma, azRaBias=$azRaBias, azRaRateBias=$azRaRateBias, azRaRateSigma=$azRaRateSigma, azRaRms=$azRaRms, azRaSigma=$azRaSigma, calAngleRef=$calAngleRef, calTrackMode=$calTrackMode, calType=$calType, confidenceNoiseBias=$confidenceNoiseBias, createdAt=$createdAt, createdBy=$createdBy, duration=$duration, ecr=$ecr, elDecAccelBias=$elDecAccelBias, elDecAccelSigma=$elDecAccelSigma, elDecBias=$elDecBias, elDecRateBias=$elDecRateBias, elDecRateSigma=$elDecRateSigma, elDecRms=$elDecRms, elDecSigma=$elDecSigma, endTime=$endTime, numAzRaObs=$numAzRaObs, numElDecObs=$numElDecObs, numObs=$numObs, numPhotoObs=$numPhotoObs, numRangeObs=$numRangeObs, numRangeRateObs=$numRangeRateObs, numRcsObs=$numRcsObs, numTimeObs=$numTimeObs, numTracks=$numTracks, origin=$origin, origNetwork=$origNetwork, photoBias=$photoBias, photoSigma=$photoSigma, rangeAccelBias=$rangeAccelBias, rangeAccelSigma=$rangeAccelSigma, rangeBias=$rangeBias, rangeRateBias=$rangeRateBias, rangeRateRms=$rangeRateRms, rangeRateSigma=$rangeRateSigma, rangeRms=$rangeRms, rangeSigma=$rangeSigma, rcsBias=$rcsBias, rcsSigma=$rcsSigma, refTargets=$refTargets, refType=$refType, senType=$senType, sourceDl=$sourceDl, timeBias=$timeBias, timeBiasSigma=$timeBiasSigma}"
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is CalibrationUnvalidatedPublishParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+      return /* spotless:off */ other is CalibrationUnvalidatedPublishParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
 
-    override fun toString() =
-        "CalibrationUnvalidatedPublishParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() = "CalibrationUnvalidatedPublishParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

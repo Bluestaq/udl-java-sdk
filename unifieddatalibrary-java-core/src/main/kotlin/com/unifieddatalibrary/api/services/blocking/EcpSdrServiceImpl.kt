@@ -15,60 +15,55 @@ import com.unifieddatalibrary.api.core.http.json
 import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.ecpsdr.EcpSdrUnvalidatedPublishParams
+import com.unifieddatalibrary.api.services.blocking.EcpSdrService
+import com.unifieddatalibrary.api.services.blocking.EcpSdrServiceImpl
 import java.util.function.Consumer
 
-class EcpSdrServiceImpl internal constructor(private val clientOptions: ClientOptions) :
-    EcpSdrService {
+class EcpSdrServiceImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: EcpSdrService.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : EcpSdrService {
+
+    private val withRawResponse: EcpSdrService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     override fun withRawResponse(): EcpSdrService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EcpSdrService =
-        EcpSdrServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EcpSdrService = EcpSdrServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-    override fun unvalidatedPublish(
-        params: EcpSdrUnvalidatedPublishParams,
-        requestOptions: RequestOptions,
-    ) {
-        // post /filedrop/udl-ecpsdr
-        withRawResponse().unvalidatedPublish(params, requestOptions)
+    override fun unvalidatedPublish(params: EcpSdrUnvalidatedPublishParams, requestOptions: RequestOptions) {
+      // post /filedrop/udl-ecpsdr
+      withRawResponse().unvalidatedPublish(params, requestOptions)
     }
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        EcpSdrService.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<HttpResponse> =
-            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+    ) : EcpSdrService.WithRawResponse {
 
-        override fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): EcpSdrService.WithRawResponse =
-            EcpSdrServiceImpl.WithRawResponseImpl(
-                clientOptions.toBuilder().apply(modifier::accept).build()
-            )
+        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+
+        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EcpSdrService.WithRawResponse = EcpSdrServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
         private val unvalidatedPublishHandler: Handler<Void?> = emptyHandler()
 
-        override fun unvalidatedPublish(
-            params: EcpSdrUnvalidatedPublishParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("filedrop", "udl-ecpsdr")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { unvalidatedPublishHandler.handle(it) }
-            }
+        override fun unvalidatedPublish(params: EcpSdrUnvalidatedPublishParams, requestOptions: RequestOptions): HttpResponse {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("filedrop", "udl-ecpsdr")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  unvalidatedPublishHandler.handle(it)
+              }
+          }
         }
     }
 }

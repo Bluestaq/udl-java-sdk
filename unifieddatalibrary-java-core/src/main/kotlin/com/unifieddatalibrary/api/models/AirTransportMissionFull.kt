@@ -15,19 +15,16 @@ import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import com.unifieddatalibrary.api.models.AirTransportMissionFull
+import com.unifieddatalibrary.api.models.AircraftsortieFull
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/**
- * The information in an Air Transport Mission contains unique identification, description of the
- * mission objective, aircraft and crew assignments, mission alias, embarkation/debarkation cargo
- * locations, priority, and other mission characteristics.
- */
-class AirTransportMissionFull
-private constructor(
+/** The information in an Air Transport Mission contains unique identification, description of the mission objective, aircraft and crew assignments, mission alias, embarkation/debarkation cargo locations, priority, and other mission characteristics. */
+class AirTransportMissionFull private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
     private val source: JsonField<String>,
@@ -75,562 +72,441 @@ private constructor(
     private val updatedAt: JsonField<OffsetDateTime>,
     private val updatedBy: JsonField<String>,
     private val additionalProperties: MutableMap<String, JsonValue>,
+
 ) {
 
     @JsonCreator
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
-        classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
         @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
         @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
         @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
         @JsonProperty("abp") @ExcludeMissing abp: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("aircraftSorties")
-        @ExcludeMissing
-        aircraftSorties: JsonField<List<AircraftsortieFull>> = JsonMissing.of(),
+        @JsonProperty("aircraftSorties") @ExcludeMissing aircraftSorties: JsonField<List<AircraftsortieFull>> = JsonMissing.of(),
         @JsonProperty("alias") @ExcludeMissing alias: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("allocatedUnit")
-        @ExcludeMissing
-        allocatedUnit: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("amcMissionId")
-        @ExcludeMissing
-        amcMissionId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("allocatedUnit") @ExcludeMissing allocatedUnit: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("amcMissionId") @ExcludeMissing amcMissionId: JsonField<String> = JsonMissing.of(),
         @JsonProperty("apacsId") @ExcludeMissing apacsId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("atoCallSign")
-        @ExcludeMissing
-        atoCallSign: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("atoMissionId")
-        @ExcludeMissing
-        atoMissionId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("atoCallSign") @ExcludeMissing atoCallSign: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("atoMissionId") @ExcludeMissing atoMissionId: JsonField<String> = JsonMissing.of(),
         @JsonProperty("callSign") @ExcludeMissing callSign: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("createdAt")
-        @ExcludeMissing
-        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
         @JsonProperty("cw") @ExcludeMissing cw: JsonField<Boolean> = JsonMissing.of(),
-        @JsonProperty("dipWorksheetName")
-        @ExcludeMissing
-        dipWorksheetName: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("firstPickUp")
-        @ExcludeMissing
-        firstPickUp: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("gdssMissionId")
-        @ExcludeMissing
-        gdssMissionId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("dipWorksheetName") @ExcludeMissing dipWorksheetName: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("firstPickUp") @ExcludeMissing firstPickUp: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("gdssMissionId") @ExcludeMissing gdssMissionId: JsonField<String> = JsonMissing.of(),
         @JsonProperty("hazMat") @ExcludeMissing hazMat: JsonField<List<HazMat>> = JsonMissing.of(),
-        @JsonProperty("jcsPriority")
-        @ExcludeMissing
-        jcsPriority: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("lastDropOff")
-        @ExcludeMissing
-        lastDropOff: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("loadCategoryType")
-        @ExcludeMissing
-        loadCategoryType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("jcsPriority") @ExcludeMissing jcsPriority: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("lastDropOff") @ExcludeMissing lastDropOff: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("loadCategoryType") @ExcludeMissing loadCategoryType: JsonField<String> = JsonMissing.of(),
         @JsonProperty("m1") @ExcludeMissing m1: JsonField<String> = JsonMissing.of(),
         @JsonProperty("m2") @ExcludeMissing m2: JsonField<String> = JsonMissing.of(),
         @JsonProperty("m3a") @ExcludeMissing m3a: JsonField<String> = JsonMissing.of(),
         @JsonProperty("naf") @ExcludeMissing naf: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("nextAMCMissionId")
-        @ExcludeMissing
-        nextAmcMissionId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("nextMissionId")
-        @ExcludeMissing
-        nextMissionId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("nextAMCMissionId") @ExcludeMissing nextAmcMissionId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("nextMissionId") @ExcludeMissing nextMissionId: JsonField<String> = JsonMissing.of(),
         @JsonProperty("node") @ExcludeMissing node: JsonField<String> = JsonMissing.of(),
         @JsonProperty("objective") @ExcludeMissing objective: JsonField<String> = JsonMissing.of(),
         @JsonProperty("operation") @ExcludeMissing operation: JsonField<String> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origMissionId")
-        @ExcludeMissing
-        origMissionId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origNetwork")
-        @ExcludeMissing
-        origNetwork: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("prevAMCMissionId")
-        @ExcludeMissing
-        prevAmcMissionId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("prevMissionId")
-        @ExcludeMissing
-        prevMissionId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origMissionId") @ExcludeMissing origMissionId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origNetwork") @ExcludeMissing origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("prevAMCMissionId") @ExcludeMissing prevAmcMissionId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("prevMissionId") @ExcludeMissing prevMissionId: JsonField<String> = JsonMissing.of(),
         @JsonProperty("purpose") @ExcludeMissing purpose: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("remarks")
-        @ExcludeMissing
-        remarks: JsonField<List<Remark>> = JsonMissing.of(),
-        @JsonProperty("requirements")
-        @ExcludeMissing
-        requirements: JsonField<List<Requirement>> = JsonMissing.of(),
+        @JsonProperty("remarks") @ExcludeMissing remarks: JsonField<List<Remark>> = JsonMissing.of(),
+        @JsonProperty("requirements") @ExcludeMissing requirements: JsonField<List<Requirement>> = JsonMissing.of(),
         @JsonProperty("sourceDL") @ExcludeMissing sourceDl: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("sourceSysDeviation")
-        @ExcludeMissing
-        sourceSysDeviation: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("sourceSysDeviation") @ExcludeMissing sourceSysDeviation: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("state") @ExcludeMissing state: JsonField<String> = JsonMissing.of(),
         @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("updatedAt")
-        @ExcludeMissing
-        updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("updatedBy") @ExcludeMissing updatedBy: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("updatedAt") @ExcludeMissing updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("updatedBy") @ExcludeMissing updatedBy: JsonField<String> = JsonMissing.of()
     ) : this(
-        classificationMarking,
-        dataMode,
-        source,
-        id,
-        abp,
-        aircraftSorties,
-        alias,
-        allocatedUnit,
-        amcMissionId,
-        apacsId,
-        atoCallSign,
-        atoMissionId,
-        callSign,
-        createdAt,
-        createdBy,
-        cw,
-        dipWorksheetName,
-        firstPickUp,
-        gdssMissionId,
-        hazMat,
-        jcsPriority,
-        lastDropOff,
-        loadCategoryType,
-        m1,
-        m2,
-        m3a,
-        naf,
-        nextAmcMissionId,
-        nextMissionId,
-        node,
-        objective,
-        operation,
-        origin,
-        origMissionId,
-        origNetwork,
-        prevAmcMissionId,
-        prevMissionId,
-        purpose,
-        remarks,
-        requirements,
-        sourceDl,
-        sourceSysDeviation,
-        state,
-        type,
-        updatedAt,
-        updatedBy,
-        mutableMapOf(),
+      classificationMarking,
+      dataMode,
+      source,
+      id,
+      abp,
+      aircraftSorties,
+      alias,
+      allocatedUnit,
+      amcMissionId,
+      apacsId,
+      atoCallSign,
+      atoMissionId,
+      callSign,
+      createdAt,
+      createdBy,
+      cw,
+      dipWorksheetName,
+      firstPickUp,
+      gdssMissionId,
+      hazMat,
+      jcsPriority,
+      lastDropOff,
+      loadCategoryType,
+      m1,
+      m2,
+      m3a,
+      naf,
+      nextAmcMissionId,
+      nextMissionId,
+      node,
+      objective,
+      operation,
+      origin,
+      origMissionId,
+      origNetwork,
+      prevAmcMissionId,
+      prevMissionId,
+      purpose,
+      remarks,
+      requirements,
+      sourceDl,
+      sourceSysDeviation,
+      state,
+      type,
+      updatedAt,
+      updatedBy,
+      mutableMapOf(),
     )
 
     /**
      * Classification marking of the data in IC/CAPCO Portion-marked format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-     * both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-     * analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-     * requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
     /**
      * Source of the data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun source(): String = source.getRequired("source")
 
     /**
      * Unique identifier of the record, auto-generated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun id(): Optional<String> = id.getOptional("id")
 
     /**
      * The Air Battle Plan used to coordinate and integrate air assets for this mission.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun abp(): Optional<String> = abp.getOptional("abp")
 
     /**
-     * The Aircraft Sortie Records linked to this mission. Do not set this field to send data to the
-     * UDL. This field is set by the UDL when returning full Air Transport Mission records.
+     * The Aircraft Sortie Records linked to this mission. Do not set this field to send data to the UDL. This field is set by the UDL when returning full Air Transport Mission records.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
-    fun aircraftSorties(): Optional<List<AircraftsortieFull>> =
-        aircraftSorties.getOptional("aircraftSorties")
+    fun aircraftSorties(): Optional<List<AircraftsortieFull>> = aircraftSorties.getOptional("aircraftSorties")
 
     /**
      * Mission alias.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun alias(): Optional<String> = alias.getOptional("alias")
 
     /**
      * The unit the mission is allocated to.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun allocatedUnit(): Optional<String> = allocatedUnit.getOptional("allocatedUnit")
 
     /**
-     * Air Mobility Command (AMC) mission identifier according to Mobility Air Forces (MAF)
-     * Encode/Decode procedures.
+     * Air Mobility Command (AMC) mission identifier according to Mobility Air Forces (MAF) Encode/Decode procedures.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun amcMissionId(): Optional<String> = amcMissionId.getOptional("amcMissionId")
 
     /**
-     * The Aircraft and Personnel Automated Clearance System (APACS) system identifier used to
-     * process and approve clearance requests.
+     * The Aircraft and Personnel Automated Clearance System (APACS) system identifier used to process and approve clearance requests.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun apacsId(): Optional<String> = apacsId.getOptional("apacsId")
 
     /**
      * The call sign assigned to this mission according to the Air Tasking Order (ATO).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun atoCallSign(): Optional<String> = atoCallSign.getOptional("atoCallSign")
 
     /**
      * The mission number according to the Air Tasking Order (ATO).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun atoMissionId(): Optional<String> = atoMissionId.getOptional("atoMissionId")
 
     /**
      * The call sign for this mission.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun callSign(): Optional<String> = callSign.getOptional("callSign")
 
     /**
      * Time the row was created in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
     /**
      * Application user who created the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
      * Flag indicating this is a close watch mission.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun cw(): Optional<Boolean> = cw.getOptional("cw")
 
     /**
-     * Identifier of the Diplomatic Clearance Worksheet used to coordinate aircraft clearance
-     * requests.
+     * Identifier of the Diplomatic Clearance Worksheet used to coordinate aircraft clearance requests.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun dipWorksheetName(): Optional<String> = dipWorksheetName.getOptional("dipWorksheetName")
 
     /**
      * The International Civil Aviation Organization (ICAO) site code of first cargo pick up.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun firstPickUp(): Optional<String> = firstPickUp.getOptional("firstPickUp")
 
     /**
      * Global Decision Support System (GDSS) mission unique identifier.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun gdssMissionId(): Optional<String> = gdssMissionId.getOptional("gdssMissionId")
 
     /**
-     * Collection of Hazardous Material information planned to be associated with this Air Transport
-     * Mission.
+     * Collection of Hazardous Material information planned to be associated with this Air Transport Mission.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun hazMat(): Optional<List<HazMat>> = hazMat.getOptional("hazMat")
 
     /**
      * Highest Joint Chiefs of Staff priority of this mission.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun jcsPriority(): Optional<String> = jcsPriority.getOptional("jcsPriority")
 
     /**
      * The International Civil Aviation Organization (ICAO) site code of last cargo drop off.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun lastDropOff(): Optional<String> = lastDropOff.getOptional("lastDropOff")
 
     /**
      * Load type of this mission (e.g. CARGO, MIXED, PASSENGER).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun loadCategoryType(): Optional<String> = loadCategoryType.getOptional("loadCategoryType")
 
     /**
      * Mode-1 interrogation response (mission code), indicating mission or aircraft type.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun m1(): Optional<String> = m1.getOptional("m1")
 
     /**
      * Mode-2 interrogation response (military identification code).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun m2(): Optional<String> = m2.getOptional("m2")
 
     /**
-     * Mode-3/A interrogation response (aircraft identification), provides a 4-digit octal
-     * identification code for the aircraft, assigned by the air traffic controller. Mode-3/A is
-     * shared military/civilian use.
+     * Mode-3/A interrogation response (aircraft identification), provides a 4-digit octal identification code for the aircraft, assigned by the air traffic controller. Mode-3/A is shared military/civilian use.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun m3a(): Optional<String> = m3a.getOptional("m3a")
 
     /**
      * Numbered Air Force (NAF) organization that owns the mission.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun naf(): Optional<String> = naf.getOptional("naf")
 
     /**
-     * Air Mobility Command (AMC) mission identifier of the next air transport mission. Provides a
-     * method for AMC to link air transport missions together chronologically for tasking and
-     * planning purposes.
+     * Air Mobility Command (AMC) mission identifier of the next air transport mission. Provides a method for AMC to link air transport missions together chronologically for tasking and planning purposes.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun nextAmcMissionId(): Optional<String> = nextAmcMissionId.getOptional("nextAMCMissionId")
 
     /**
-     * Unique identifier of the next mission provided by the originating source. Provides a method
-     * for the data provider to link air transport missions together chronologically for tasking and
-     * planning purposes.
+     * Unique identifier of the next mission provided by the originating source. Provides a method for the data provider to link air transport missions together chronologically for tasking and planning purposes.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun nextMissionId(): Optional<String> = nextMissionId.getOptional("nextMissionId")
 
     /**
-     * Designates the location responsible for mission transportation, logistics, or distribution
-     * activities for an Area of Responsibility (AOR) within USTRANSCOM.
+     * Designates the location responsible for mission transportation, logistics, or distribution activities for an Area of Responsibility (AOR) within USTRANSCOM.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun node(): Optional<String> = node.getOptional("node")
 
     /**
      * A description of this mission's objective.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun objective(): Optional<String> = objective.getOptional("objective")
 
     /**
      * The name of the operation that this mission supports.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun operation(): Optional<String> = operation.getOptional("operation")
 
     /**
-     * Originating system or organization which produced the data, if different from the source. The
-     * origin may be different than the source if the source was a mediating system which forwarded
-     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun origin(): Optional<String> = origin.getOptional("origin")
 
     /**
      * The mission identifier provided by the originating source.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun origMissionId(): Optional<String> = origMissionId.getOptional("origMissionId")
 
     /**
-     * The originating source network on which this record was created, auto-populated by the
-     * system.
+     * The originating source network on which this record was created, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
     /**
-     * Air Mobility Command (AMC) mission identifier of the previous air transport mission. Provides
-     * a method for AMC to link air transport missions together chronologically for tasking and
-     * planning purposes.
+     * Air Mobility Command (AMC) mission identifier of the previous air transport mission. Provides a method for AMC to link air transport missions together chronologically for tasking and planning purposes.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun prevAmcMissionId(): Optional<String> = prevAmcMissionId.getOptional("prevAMCMissionId")
 
     /**
-     * Unique identifier of the previous air transport mission provided by the originating source.
-     * Provides a method for the data provider to link air transport missions together
-     * chronologically for tasking and planning purposes.
+     * Unique identifier of the previous air transport mission provided by the originating source. Provides a method for the data provider to link air transport missions together chronologically for tasking and planning purposes.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun prevMissionId(): Optional<String> = prevMissionId.getOptional("prevMissionId")
 
     /**
-     * A description of this mission's purpose (e.g. why this mission needs to happen, what is the
-     * mission supporting, etc.).
+     * A description of this mission's purpose (e.g. why this mission needs to happen, what is the mission supporting, etc.).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun purpose(): Optional<String> = purpose.getOptional("purpose")
 
     /**
-     * Information related to the planning, load, status, and deployment or dispatch of one aircraft
-     * to carry out a mission.
+     * Information related to the planning, load, status, and deployment or dispatch of one aircraft to carry out a mission.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun remarks(): Optional<List<Remark>> = remarks.getOptional("remarks")
 
     /**
      * Collection of Requirements planned to be associated with this Air Transport Mission.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun requirements(): Optional<List<Requirement>> = requirements.getOptional("requirements")
 
     /**
-     * The source data library from which this record was received. This could be a remote or
-     * tactical UDL or another data library. If null, the record should be assumed to have
-     * originated from the primary Enterprise UDL.
+     * The source data library from which this record was received. This could be a remote or tactical UDL or another data library. If null, the record should be assumed to have originated from the primary Enterprise UDL.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun sourceDl(): Optional<String> = sourceDl.getOptional("sourceDL")
 
     /**
-     * The number of minutes a mission is off schedule based on the source system's business rules.
-     * Positive numbers are early, negative numbers are late.
+     * The number of minutes a mission is off schedule based on the source system's business rules. Positive numbers are early, negative numbers are late.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
-    fun sourceSysDeviation(): Optional<Double> =
-        sourceSysDeviation.getOptional("sourceSysDeviation")
+    fun sourceSysDeviation(): Optional<Double> = sourceSysDeviation.getOptional("sourceSysDeviation")
 
     /**
      * Current state of the mission.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun state(): Optional<String> = state.getOptional("state")
 
     /**
      * The type of mission (e.g. SAAM, CHNL, etc.).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun type(): Optional<String> = type.getOptional("type")
 
     /**
      * Time the row was updated in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun updatedAt(): Optional<OffsetDateTime> = updatedAt.getOptional("updatedAt")
 
     /**
      * Application user who updated the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun updatedBy(): Optional<String> = updatedBy.getOptional("updatedBy")
 
     /**
      * Returns the raw JSON value of [classificationMarking].
      *
-     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
-     * type.
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("classificationMarking")
     @ExcludeMissing
@@ -641,28 +517,36 @@ private constructor(
      *
      * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+    @JsonProperty("dataMode")
+    @ExcludeMissing
+    fun _dataMode(): JsonField<DataMode> = dataMode
 
     /**
      * Returns the raw JSON value of [source].
      *
      * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+    @JsonProperty("source")
+    @ExcludeMissing
+    fun _source(): JsonField<String> = source
 
     /**
      * Returns the raw JSON value of [id].
      *
      * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+    @JsonProperty("id")
+    @ExcludeMissing
+    fun _id(): JsonField<String> = id
 
     /**
      * Returns the raw JSON value of [abp].
      *
      * Unlike [abp], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("abp") @ExcludeMissing fun _abp(): JsonField<String> = abp
+    @JsonProperty("abp")
+    @ExcludeMissing
+    fun _abp(): JsonField<String> = abp
 
     /**
      * Returns the raw JSON value of [aircraftSorties].
@@ -678,7 +562,9 @@ private constructor(
      *
      * Unlike [alias], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("alias") @ExcludeMissing fun _alias(): JsonField<String> = alias
+    @JsonProperty("alias")
+    @ExcludeMissing
+    fun _alias(): JsonField<String> = alias
 
     /**
      * Returns the raw JSON value of [allocatedUnit].
@@ -703,14 +589,18 @@ private constructor(
      *
      * Unlike [apacsId], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("apacsId") @ExcludeMissing fun _apacsId(): JsonField<String> = apacsId
+    @JsonProperty("apacsId")
+    @ExcludeMissing
+    fun _apacsId(): JsonField<String> = apacsId
 
     /**
      * Returns the raw JSON value of [atoCallSign].
      *
      * Unlike [atoCallSign], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("atoCallSign") @ExcludeMissing fun _atoCallSign(): JsonField<String> = atoCallSign
+    @JsonProperty("atoCallSign")
+    @ExcludeMissing
+    fun _atoCallSign(): JsonField<String> = atoCallSign
 
     /**
      * Returns the raw JSON value of [atoMissionId].
@@ -726,7 +616,9 @@ private constructor(
      *
      * Unlike [callSign], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("callSign") @ExcludeMissing fun _callSign(): JsonField<String> = callSign
+    @JsonProperty("callSign")
+    @ExcludeMissing
+    fun _callSign(): JsonField<String> = callSign
 
     /**
      * Returns the raw JSON value of [createdAt].
@@ -742,20 +634,23 @@ private constructor(
      *
      * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+    @JsonProperty("createdBy")
+    @ExcludeMissing
+    fun _createdBy(): JsonField<String> = createdBy
 
     /**
      * Returns the raw JSON value of [cw].
      *
      * Unlike [cw], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("cw") @ExcludeMissing fun _cw(): JsonField<Boolean> = cw
+    @JsonProperty("cw")
+    @ExcludeMissing
+    fun _cw(): JsonField<Boolean> = cw
 
     /**
      * Returns the raw JSON value of [dipWorksheetName].
      *
-     * Unlike [dipWorksheetName], this method doesn't throw if the JSON field has an unexpected
-     * type.
+     * Unlike [dipWorksheetName], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("dipWorksheetName")
     @ExcludeMissing
@@ -766,7 +661,9 @@ private constructor(
      *
      * Unlike [firstPickUp], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("firstPickUp") @ExcludeMissing fun _firstPickUp(): JsonField<String> = firstPickUp
+    @JsonProperty("firstPickUp")
+    @ExcludeMissing
+    fun _firstPickUp(): JsonField<String> = firstPickUp
 
     /**
      * Returns the raw JSON value of [gdssMissionId].
@@ -782,27 +679,32 @@ private constructor(
      *
      * Unlike [hazMat], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("hazMat") @ExcludeMissing fun _hazMat(): JsonField<List<HazMat>> = hazMat
+    @JsonProperty("hazMat")
+    @ExcludeMissing
+    fun _hazMat(): JsonField<List<HazMat>> = hazMat
 
     /**
      * Returns the raw JSON value of [jcsPriority].
      *
      * Unlike [jcsPriority], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("jcsPriority") @ExcludeMissing fun _jcsPriority(): JsonField<String> = jcsPriority
+    @JsonProperty("jcsPriority")
+    @ExcludeMissing
+    fun _jcsPriority(): JsonField<String> = jcsPriority
 
     /**
      * Returns the raw JSON value of [lastDropOff].
      *
      * Unlike [lastDropOff], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("lastDropOff") @ExcludeMissing fun _lastDropOff(): JsonField<String> = lastDropOff
+    @JsonProperty("lastDropOff")
+    @ExcludeMissing
+    fun _lastDropOff(): JsonField<String> = lastDropOff
 
     /**
      * Returns the raw JSON value of [loadCategoryType].
      *
-     * Unlike [loadCategoryType], this method doesn't throw if the JSON field has an unexpected
-     * type.
+     * Unlike [loadCategoryType], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("loadCategoryType")
     @ExcludeMissing
@@ -813,34 +715,41 @@ private constructor(
      *
      * Unlike [m1], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("m1") @ExcludeMissing fun _m1(): JsonField<String> = m1
+    @JsonProperty("m1")
+    @ExcludeMissing
+    fun _m1(): JsonField<String> = m1
 
     /**
      * Returns the raw JSON value of [m2].
      *
      * Unlike [m2], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("m2") @ExcludeMissing fun _m2(): JsonField<String> = m2
+    @JsonProperty("m2")
+    @ExcludeMissing
+    fun _m2(): JsonField<String> = m2
 
     /**
      * Returns the raw JSON value of [m3a].
      *
      * Unlike [m3a], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("m3a") @ExcludeMissing fun _m3a(): JsonField<String> = m3a
+    @JsonProperty("m3a")
+    @ExcludeMissing
+    fun _m3a(): JsonField<String> = m3a
 
     /**
      * Returns the raw JSON value of [naf].
      *
      * Unlike [naf], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("naf") @ExcludeMissing fun _naf(): JsonField<String> = naf
+    @JsonProperty("naf")
+    @ExcludeMissing
+    fun _naf(): JsonField<String> = naf
 
     /**
      * Returns the raw JSON value of [nextAmcMissionId].
      *
-     * Unlike [nextAmcMissionId], this method doesn't throw if the JSON field has an unexpected
-     * type.
+     * Unlike [nextAmcMissionId], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("nextAMCMissionId")
     @ExcludeMissing
@@ -860,28 +769,36 @@ private constructor(
      *
      * Unlike [node], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("node") @ExcludeMissing fun _node(): JsonField<String> = node
+    @JsonProperty("node")
+    @ExcludeMissing
+    fun _node(): JsonField<String> = node
 
     /**
      * Returns the raw JSON value of [objective].
      *
      * Unlike [objective], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("objective") @ExcludeMissing fun _objective(): JsonField<String> = objective
+    @JsonProperty("objective")
+    @ExcludeMissing
+    fun _objective(): JsonField<String> = objective
 
     /**
      * Returns the raw JSON value of [operation].
      *
      * Unlike [operation], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("operation") @ExcludeMissing fun _operation(): JsonField<String> = operation
+    @JsonProperty("operation")
+    @ExcludeMissing
+    fun _operation(): JsonField<String> = operation
 
     /**
      * Returns the raw JSON value of [origin].
      *
      * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+    @JsonProperty("origin")
+    @ExcludeMissing
+    fun _origin(): JsonField<String> = origin
 
     /**
      * Returns the raw JSON value of [origMissionId].
@@ -897,13 +814,14 @@ private constructor(
      *
      * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
+    @JsonProperty("origNetwork")
+    @ExcludeMissing
+    fun _origNetwork(): JsonField<String> = origNetwork
 
     /**
      * Returns the raw JSON value of [prevAmcMissionId].
      *
-     * Unlike [prevAmcMissionId], this method doesn't throw if the JSON field has an unexpected
-     * type.
+     * Unlike [prevAmcMissionId], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("prevAMCMissionId")
     @ExcludeMissing
@@ -923,14 +841,18 @@ private constructor(
      *
      * Unlike [purpose], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("purpose") @ExcludeMissing fun _purpose(): JsonField<String> = purpose
+    @JsonProperty("purpose")
+    @ExcludeMissing
+    fun _purpose(): JsonField<String> = purpose
 
     /**
      * Returns the raw JSON value of [remarks].
      *
      * Unlike [remarks], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("remarks") @ExcludeMissing fun _remarks(): JsonField<List<Remark>> = remarks
+    @JsonProperty("remarks")
+    @ExcludeMissing
+    fun _remarks(): JsonField<List<Remark>> = remarks
 
     /**
      * Returns the raw JSON value of [requirements].
@@ -946,13 +868,14 @@ private constructor(
      *
      * Unlike [sourceDl], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("sourceDL") @ExcludeMissing fun _sourceDl(): JsonField<String> = sourceDl
+    @JsonProperty("sourceDL")
+    @ExcludeMissing
+    fun _sourceDl(): JsonField<String> = sourceDl
 
     /**
      * Returns the raw JSON value of [sourceSysDeviation].
      *
-     * Unlike [sourceSysDeviation], this method doesn't throw if the JSON field has an unexpected
-     * type.
+     * Unlike [sourceSysDeviation], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("sourceSysDeviation")
     @ExcludeMissing
@@ -963,14 +886,18 @@ private constructor(
      *
      * Unlike [state], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("state") @ExcludeMissing fun _state(): JsonField<String> = state
+    @JsonProperty("state")
+    @ExcludeMissing
+    fun _state(): JsonField<String> = state
 
     /**
      * Returns the raw JSON value of [type].
      *
      * Unlike [type], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("type") @ExcludeMissing fun _type(): JsonField<String> = type
+    @JsonProperty("type")
+    @ExcludeMissing
+    fun _type(): JsonField<String> = type
 
     /**
      * Returns the raw JSON value of [updatedAt].
@@ -986,17 +913,18 @@ private constructor(
      *
      * Unlike [updatedBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("updatedBy") @ExcludeMissing fun _updatedBy(): JsonField<String> = updatedBy
+    @JsonProperty("updatedBy")
+    @ExcludeMissing
+    fun _updatedBy(): JsonField<String> = updatedBy
 
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
-        additionalProperties.put(key, value)
+      additionalProperties.put(key, value)
     }
 
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> =
-        Collections.unmodifiableMap(additionalProperties)
+    fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -1006,13 +934,15 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [AirTransportMissionFull].
          *
          * The following fields are required:
+         *
          * ```java
          * .classificationMarking()
          * .dataMode()
          * .source()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [AirTransportMissionFull]. */
@@ -1067,95 +997,94 @@ private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(airTransportMissionFull: AirTransportMissionFull) = apply {
-            classificationMarking = airTransportMissionFull.classificationMarking
-            dataMode = airTransportMissionFull.dataMode
-            source = airTransportMissionFull.source
-            id = airTransportMissionFull.id
-            abp = airTransportMissionFull.abp
-            aircraftSorties = airTransportMissionFull.aircraftSorties.map { it.toMutableList() }
-            alias = airTransportMissionFull.alias
-            allocatedUnit = airTransportMissionFull.allocatedUnit
-            amcMissionId = airTransportMissionFull.amcMissionId
-            apacsId = airTransportMissionFull.apacsId
-            atoCallSign = airTransportMissionFull.atoCallSign
-            atoMissionId = airTransportMissionFull.atoMissionId
-            callSign = airTransportMissionFull.callSign
-            createdAt = airTransportMissionFull.createdAt
-            createdBy = airTransportMissionFull.createdBy
-            cw = airTransportMissionFull.cw
-            dipWorksheetName = airTransportMissionFull.dipWorksheetName
-            firstPickUp = airTransportMissionFull.firstPickUp
-            gdssMissionId = airTransportMissionFull.gdssMissionId
-            hazMat = airTransportMissionFull.hazMat.map { it.toMutableList() }
-            jcsPriority = airTransportMissionFull.jcsPriority
-            lastDropOff = airTransportMissionFull.lastDropOff
-            loadCategoryType = airTransportMissionFull.loadCategoryType
-            m1 = airTransportMissionFull.m1
-            m2 = airTransportMissionFull.m2
-            m3a = airTransportMissionFull.m3a
-            naf = airTransportMissionFull.naf
-            nextAmcMissionId = airTransportMissionFull.nextAmcMissionId
-            nextMissionId = airTransportMissionFull.nextMissionId
-            node = airTransportMissionFull.node
-            objective = airTransportMissionFull.objective
-            operation = airTransportMissionFull.operation
-            origin = airTransportMissionFull.origin
-            origMissionId = airTransportMissionFull.origMissionId
-            origNetwork = airTransportMissionFull.origNetwork
-            prevAmcMissionId = airTransportMissionFull.prevAmcMissionId
-            prevMissionId = airTransportMissionFull.prevMissionId
-            purpose = airTransportMissionFull.purpose
-            remarks = airTransportMissionFull.remarks.map { it.toMutableList() }
-            requirements = airTransportMissionFull.requirements.map { it.toMutableList() }
-            sourceDl = airTransportMissionFull.sourceDl
-            sourceSysDeviation = airTransportMissionFull.sourceSysDeviation
-            state = airTransportMissionFull.state
-            type = airTransportMissionFull.type
-            updatedAt = airTransportMissionFull.updatedAt
-            updatedBy = airTransportMissionFull.updatedBy
-            additionalProperties = airTransportMissionFull.additionalProperties.toMutableMap()
-        }
+        internal fun from(airTransportMissionFull: AirTransportMissionFull) =
+            apply {
+                classificationMarking = airTransportMissionFull.classificationMarking
+                dataMode = airTransportMissionFull.dataMode
+                source = airTransportMissionFull.source
+                id = airTransportMissionFull.id
+                abp = airTransportMissionFull.abp
+                aircraftSorties = airTransportMissionFull.aircraftSorties.map { it.toMutableList() }
+                alias = airTransportMissionFull.alias
+                allocatedUnit = airTransportMissionFull.allocatedUnit
+                amcMissionId = airTransportMissionFull.amcMissionId
+                apacsId = airTransportMissionFull.apacsId
+                atoCallSign = airTransportMissionFull.atoCallSign
+                atoMissionId = airTransportMissionFull.atoMissionId
+                callSign = airTransportMissionFull.callSign
+                createdAt = airTransportMissionFull.createdAt
+                createdBy = airTransportMissionFull.createdBy
+                cw = airTransportMissionFull.cw
+                dipWorksheetName = airTransportMissionFull.dipWorksheetName
+                firstPickUp = airTransportMissionFull.firstPickUp
+                gdssMissionId = airTransportMissionFull.gdssMissionId
+                hazMat = airTransportMissionFull.hazMat.map { it.toMutableList() }
+                jcsPriority = airTransportMissionFull.jcsPriority
+                lastDropOff = airTransportMissionFull.lastDropOff
+                loadCategoryType = airTransportMissionFull.loadCategoryType
+                m1 = airTransportMissionFull.m1
+                m2 = airTransportMissionFull.m2
+                m3a = airTransportMissionFull.m3a
+                naf = airTransportMissionFull.naf
+                nextAmcMissionId = airTransportMissionFull.nextAmcMissionId
+                nextMissionId = airTransportMissionFull.nextMissionId
+                node = airTransportMissionFull.node
+                objective = airTransportMissionFull.objective
+                operation = airTransportMissionFull.operation
+                origin = airTransportMissionFull.origin
+                origMissionId = airTransportMissionFull.origMissionId
+                origNetwork = airTransportMissionFull.origNetwork
+                prevAmcMissionId = airTransportMissionFull.prevAmcMissionId
+                prevMissionId = airTransportMissionFull.prevMissionId
+                purpose = airTransportMissionFull.purpose
+                remarks = airTransportMissionFull.remarks.map { it.toMutableList() }
+                requirements = airTransportMissionFull.requirements.map { it.toMutableList() }
+                sourceDl = airTransportMissionFull.sourceDl
+                sourceSysDeviation = airTransportMissionFull.sourceSysDeviation
+                state = airTransportMissionFull.state
+                type = airTransportMissionFull.type
+                updatedAt = airTransportMissionFull.updatedAt
+                updatedBy = airTransportMissionFull.updatedBy
+                additionalProperties = airTransportMissionFull.additionalProperties.toMutableMap()
+            }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-        fun classificationMarking(classificationMarking: String) =
-            classificationMarking(JsonField.of(classificationMarking))
+        fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
 
         /**
          * Sets [Builder.classificationMarking] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
-            this.classificationMarking = classificationMarking
-        }
+        fun classificationMarking(classificationMarking: JsonField<String>) =
+            apply {
+                this.classificationMarking = classificationMarking
+            }
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-         * both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-         * analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-         * requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
          */
         fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
         /**
          * Sets [Builder.dataMode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+        fun dataMode(dataMode: JsonField<DataMode>) =
+            apply {
+                this.dataMode = dataMode
+            }
 
         /** Source of the data. */
         fun source(source: String) = source(JsonField.of(source))
@@ -1163,10 +1092,13 @@ private constructor(
         /**
          * Sets [Builder.source] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.source] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun source(source: JsonField<String>) = apply { this.source = source }
+        fun source(source: JsonField<String>) =
+            apply {
+                this.source = source
+            }
 
         /** Unique identifier of the record, auto-generated by the system. */
         fun id(id: String) = id(JsonField.of(id))
@@ -1174,10 +1106,13 @@ private constructor(
         /**
          * Sets [Builder.id] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.id] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun id(id: JsonField<String>) = apply { this.id = id }
+        fun id(id: JsonField<String>) =
+            apply {
+                this.id = id
+            }
 
         /** The Air Battle Plan used to coordinate and integrate air assets for this mission. */
         fun abp(abp: String) = abp(JsonField.of(abp))
@@ -1185,40 +1120,39 @@ private constructor(
         /**
          * Sets [Builder.abp] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.abp] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.abp] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun abp(abp: JsonField<String>) = apply { this.abp = abp }
+        fun abp(abp: JsonField<String>) =
+            apply {
+                this.abp = abp
+            }
 
-        /**
-         * The Aircraft Sortie Records linked to this mission. Do not set this field to send data to
-         * the UDL. This field is set by the UDL when returning full Air Transport Mission records.
-         */
-        fun aircraftSorties(aircraftSorties: List<AircraftsortieFull>) =
-            aircraftSorties(JsonField.of(aircraftSorties))
+        /** The Aircraft Sortie Records linked to this mission. Do not set this field to send data to the UDL. This field is set by the UDL when returning full Air Transport Mission records. */
+        fun aircraftSorties(aircraftSorties: List<AircraftsortieFull>) = aircraftSorties(JsonField.of(aircraftSorties))
 
         /**
          * Sets [Builder.aircraftSorties] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.aircraftSorties] with a well-typed
-         * `List<AircraftsortieFull>` value instead. This method is primarily for setting the field
-         * to an undocumented or not yet supported value.
+         * You should usually call [Builder.aircraftSorties] with a well-typed `List<AircraftsortieFull>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun aircraftSorties(aircraftSorties: JsonField<List<AircraftsortieFull>>) = apply {
-            this.aircraftSorties = aircraftSorties.map { it.toMutableList() }
-        }
+        fun aircraftSorties(aircraftSorties: JsonField<List<AircraftsortieFull>>) =
+            apply {
+                this.aircraftSorties = aircraftSorties.map { it.toMutableList() }
+            }
 
         /**
          * Adds a single [AircraftsortieFull] to [aircraftSorties].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addAircraftSorty(aircraftSorty: AircraftsortieFull) = apply {
-            aircraftSorties =
-                (aircraftSorties ?: JsonField.of(mutableListOf())).also {
+        fun addAircraftSorty(aircraftSorty: AircraftsortieFull) =
+            apply {
+                aircraftSorties = (aircraftSorties ?: JsonField.of(mutableListOf())).also {
                     checkKnown("aircraftSorties", it).add(aircraftSorty)
                 }
-        }
+            }
 
         /** Mission alias. */
         fun alias(alias: String) = alias(JsonField.of(alias))
@@ -1226,10 +1160,13 @@ private constructor(
         /**
          * Sets [Builder.alias] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.alias] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.alias] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun alias(alias: JsonField<String>) = apply { this.alias = alias }
+        fun alias(alias: JsonField<String>) =
+            apply {
+                this.alias = alias
+            }
 
         /** The unit the mission is allocated to. */
         fun allocatedUnit(allocatedUnit: String) = allocatedUnit(JsonField.of(allocatedUnit))
@@ -1237,44 +1174,41 @@ private constructor(
         /**
          * Sets [Builder.allocatedUnit] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.allocatedUnit] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.allocatedUnit] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun allocatedUnit(allocatedUnit: JsonField<String>) = apply {
-            this.allocatedUnit = allocatedUnit
-        }
+        fun allocatedUnit(allocatedUnit: JsonField<String>) =
+            apply {
+                this.allocatedUnit = allocatedUnit
+            }
 
-        /**
-         * Air Mobility Command (AMC) mission identifier according to Mobility Air Forces (MAF)
-         * Encode/Decode procedures.
-         */
+        /** Air Mobility Command (AMC) mission identifier according to Mobility Air Forces (MAF) Encode/Decode procedures. */
         fun amcMissionId(amcMissionId: String) = amcMissionId(JsonField.of(amcMissionId))
 
         /**
          * Sets [Builder.amcMissionId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.amcMissionId] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.amcMissionId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun amcMissionId(amcMissionId: JsonField<String>) = apply {
-            this.amcMissionId = amcMissionId
-        }
+        fun amcMissionId(amcMissionId: JsonField<String>) =
+            apply {
+                this.amcMissionId = amcMissionId
+            }
 
-        /**
-         * The Aircraft and Personnel Automated Clearance System (APACS) system identifier used to
-         * process and approve clearance requests.
-         */
+        /** The Aircraft and Personnel Automated Clearance System (APACS) system identifier used to process and approve clearance requests. */
         fun apacsId(apacsId: String) = apacsId(JsonField.of(apacsId))
 
         /**
          * Sets [Builder.apacsId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.apacsId] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.apacsId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun apacsId(apacsId: JsonField<String>) = apply { this.apacsId = apacsId }
+        fun apacsId(apacsId: JsonField<String>) =
+            apply {
+                this.apacsId = apacsId
+            }
 
         /** The call sign assigned to this mission according to the Air Tasking Order (ATO). */
         fun atoCallSign(atoCallSign: String) = atoCallSign(JsonField.of(atoCallSign))
@@ -1282,11 +1216,13 @@ private constructor(
         /**
          * Sets [Builder.atoCallSign] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.atoCallSign] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.atoCallSign] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun atoCallSign(atoCallSign: JsonField<String>) = apply { this.atoCallSign = atoCallSign }
+        fun atoCallSign(atoCallSign: JsonField<String>) =
+            apply {
+                this.atoCallSign = atoCallSign
+            }
 
         /** The mission number according to the Air Tasking Order (ATO). */
         fun atoMissionId(atoMissionId: String) = atoMissionId(JsonField.of(atoMissionId))
@@ -1294,13 +1230,13 @@ private constructor(
         /**
          * Sets [Builder.atoMissionId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.atoMissionId] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.atoMissionId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun atoMissionId(atoMissionId: JsonField<String>) = apply {
-            this.atoMissionId = atoMissionId
-        }
+        fun atoMissionId(atoMissionId: JsonField<String>) =
+            apply {
+                this.atoMissionId = atoMissionId
+            }
 
         /** The call sign for this mission. */
         fun callSign(callSign: String) = callSign(JsonField.of(callSign))
@@ -1308,10 +1244,13 @@ private constructor(
         /**
          * Sets [Builder.callSign] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.callSign] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.callSign] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun callSign(callSign: JsonField<String>) = apply { this.callSign = callSign }
+        fun callSign(callSign: JsonField<String>) =
+            apply {
+                this.callSign = callSign
+            }
 
         /** Time the row was created in the database, auto-populated by the system. */
         fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -1319,11 +1258,13 @@ private constructor(
         /**
          * Sets [Builder.createdAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) =
+            apply {
+                this.createdAt = createdAt
+            }
 
         /** Application user who created the row in the database, auto-populated by the system. */
         fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
@@ -1331,11 +1272,13 @@ private constructor(
         /**
          * Sets [Builder.createdBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+        fun createdBy(createdBy: JsonField<String>) =
+            apply {
+                this.createdBy = createdBy
+            }
 
         /** Flag indicating this is a close watch mission. */
         fun cw(cw: Boolean) = cw(JsonField.of(cw))
@@ -1343,42 +1286,41 @@ private constructor(
         /**
          * Sets [Builder.cw] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.cw] with a well-typed [Boolean] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.cw] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun cw(cw: JsonField<Boolean>) = apply { this.cw = cw }
+        fun cw(cw: JsonField<Boolean>) =
+            apply {
+                this.cw = cw
+            }
 
-        /**
-         * Identifier of the Diplomatic Clearance Worksheet used to coordinate aircraft clearance
-         * requests.
-         */
-        fun dipWorksheetName(dipWorksheetName: String) =
-            dipWorksheetName(JsonField.of(dipWorksheetName))
+        /** Identifier of the Diplomatic Clearance Worksheet used to coordinate aircraft clearance requests. */
+        fun dipWorksheetName(dipWorksheetName: String) = dipWorksheetName(JsonField.of(dipWorksheetName))
 
         /**
          * Sets [Builder.dipWorksheetName] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dipWorksheetName] with a well-typed [String] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.dipWorksheetName] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun dipWorksheetName(dipWorksheetName: JsonField<String>) = apply {
-            this.dipWorksheetName = dipWorksheetName
-        }
+        fun dipWorksheetName(dipWorksheetName: JsonField<String>) =
+            apply {
+                this.dipWorksheetName = dipWorksheetName
+            }
 
-        /**
-         * The International Civil Aviation Organization (ICAO) site code of first cargo pick up.
-         */
+        /** The International Civil Aviation Organization (ICAO) site code of first cargo pick up. */
         fun firstPickUp(firstPickUp: String) = firstPickUp(JsonField.of(firstPickUp))
 
         /**
          * Sets [Builder.firstPickUp] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.firstPickUp] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.firstPickUp] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun firstPickUp(firstPickUp: JsonField<String>) = apply { this.firstPickUp = firstPickUp }
+        fun firstPickUp(firstPickUp: JsonField<String>) =
+            apply {
+                this.firstPickUp = firstPickUp
+            }
 
         /** Global Decision Support System (GDSS) mission unique identifier. */
         fun gdssMissionId(gdssMissionId: String) = gdssMissionId(JsonField.of(gdssMissionId))
@@ -1386,42 +1328,39 @@ private constructor(
         /**
          * Sets [Builder.gdssMissionId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.gdssMissionId] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.gdssMissionId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun gdssMissionId(gdssMissionId: JsonField<String>) = apply {
-            this.gdssMissionId = gdssMissionId
-        }
+        fun gdssMissionId(gdssMissionId: JsonField<String>) =
+            apply {
+                this.gdssMissionId = gdssMissionId
+            }
 
-        /**
-         * Collection of Hazardous Material information planned to be associated with this Air
-         * Transport Mission.
-         */
+        /** Collection of Hazardous Material information planned to be associated with this Air Transport Mission. */
         fun hazMat(hazMat: List<HazMat>) = hazMat(JsonField.of(hazMat))
 
         /**
          * Sets [Builder.hazMat] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.hazMat] with a well-typed `List<HazMat>` value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.hazMat] with a well-typed `List<HazMat>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun hazMat(hazMat: JsonField<List<HazMat>>) = apply {
-            this.hazMat = hazMat.map { it.toMutableList() }
-        }
+        fun hazMat(hazMat: JsonField<List<HazMat>>) =
+            apply {
+                this.hazMat = hazMat.map { it.toMutableList() }
+            }
 
         /**
          * Adds a single [HazMat] to [Builder.hazMat].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addHazMat(hazMat: HazMat) = apply {
-            this.hazMat =
-                (this.hazMat ?: JsonField.of(mutableListOf())).also {
+        fun addHazMat(hazMat: HazMat) =
+            apply {
+                this.hazMat = (this.hazMat ?: JsonField.of(mutableListOf())).also {
                     checkKnown("hazMat", it).add(hazMat)
                 }
-        }
+            }
 
         /** Highest Joint Chiefs of Staff priority of this mission. */
         fun jcsPriority(jcsPriority: String) = jcsPriority(JsonField.of(jcsPriority))
@@ -1429,40 +1368,41 @@ private constructor(
         /**
          * Sets [Builder.jcsPriority] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.jcsPriority] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.jcsPriority] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun jcsPriority(jcsPriority: JsonField<String>) = apply { this.jcsPriority = jcsPriority }
+        fun jcsPriority(jcsPriority: JsonField<String>) =
+            apply {
+                this.jcsPriority = jcsPriority
+            }
 
-        /**
-         * The International Civil Aviation Organization (ICAO) site code of last cargo drop off.
-         */
+        /** The International Civil Aviation Organization (ICAO) site code of last cargo drop off. */
         fun lastDropOff(lastDropOff: String) = lastDropOff(JsonField.of(lastDropOff))
 
         /**
          * Sets [Builder.lastDropOff] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.lastDropOff] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.lastDropOff] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun lastDropOff(lastDropOff: JsonField<String>) = apply { this.lastDropOff = lastDropOff }
+        fun lastDropOff(lastDropOff: JsonField<String>) =
+            apply {
+                this.lastDropOff = lastDropOff
+            }
 
         /** Load type of this mission (e.g. CARGO, MIXED, PASSENGER). */
-        fun loadCategoryType(loadCategoryType: String) =
-            loadCategoryType(JsonField.of(loadCategoryType))
+        fun loadCategoryType(loadCategoryType: String) = loadCategoryType(JsonField.of(loadCategoryType))
 
         /**
          * Sets [Builder.loadCategoryType] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.loadCategoryType] with a well-typed [String] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.loadCategoryType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun loadCategoryType(loadCategoryType: JsonField<String>) = apply {
-            this.loadCategoryType = loadCategoryType
-        }
+        fun loadCategoryType(loadCategoryType: JsonField<String>) =
+            apply {
+                this.loadCategoryType = loadCategoryType
+            }
 
         /** Mode-1 interrogation response (mission code), indicating mission or aircraft type. */
         fun m1(m1: String) = m1(JsonField.of(m1))
@@ -1470,10 +1410,13 @@ private constructor(
         /**
          * Sets [Builder.m1] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.m1] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.m1] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun m1(m1: JsonField<String>) = apply { this.m1 = m1 }
+        fun m1(m1: JsonField<String>) =
+            apply {
+                this.m1 = m1
+            }
 
         /** Mode-2 interrogation response (military identification code). */
         fun m2(m2: String) = m2(JsonField.of(m2))
@@ -1481,25 +1424,27 @@ private constructor(
         /**
          * Sets [Builder.m2] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.m2] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.m2] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun m2(m2: JsonField<String>) = apply { this.m2 = m2 }
+        fun m2(m2: JsonField<String>) =
+            apply {
+                this.m2 = m2
+            }
 
-        /**
-         * Mode-3/A interrogation response (aircraft identification), provides a 4-digit octal
-         * identification code for the aircraft, assigned by the air traffic controller. Mode-3/A is
-         * shared military/civilian use.
-         */
+        /** Mode-3/A interrogation response (aircraft identification), provides a 4-digit octal identification code for the aircraft, assigned by the air traffic controller. Mode-3/A is shared military/civilian use. */
         fun m3a(m3a: String) = m3a(JsonField.of(m3a))
 
         /**
          * Sets [Builder.m3a] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.m3a] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.m3a] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun m3a(m3a: JsonField<String>) = apply { this.m3a = m3a }
+        fun m3a(m3a: JsonField<String>) =
+            apply {
+                this.m3a = m3a
+            }
 
         /** Numbered Air Force (NAF) organization that owns the mission. */
         fun naf(naf: String) = naf(JsonField.of(naf))
@@ -1507,61 +1452,55 @@ private constructor(
         /**
          * Sets [Builder.naf] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.naf] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.naf] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun naf(naf: JsonField<String>) = apply { this.naf = naf }
+        fun naf(naf: JsonField<String>) =
+            apply {
+                this.naf = naf
+            }
 
-        /**
-         * Air Mobility Command (AMC) mission identifier of the next air transport mission. Provides
-         * a method for AMC to link air transport missions together chronologically for tasking and
-         * planning purposes.
-         */
-        fun nextAmcMissionId(nextAmcMissionId: String) =
-            nextAmcMissionId(JsonField.of(nextAmcMissionId))
+        /** Air Mobility Command (AMC) mission identifier of the next air transport mission. Provides a method for AMC to link air transport missions together chronologically for tasking and planning purposes. */
+        fun nextAmcMissionId(nextAmcMissionId: String) = nextAmcMissionId(JsonField.of(nextAmcMissionId))
 
         /**
          * Sets [Builder.nextAmcMissionId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.nextAmcMissionId] with a well-typed [String] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.nextAmcMissionId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun nextAmcMissionId(nextAmcMissionId: JsonField<String>) = apply {
-            this.nextAmcMissionId = nextAmcMissionId
-        }
+        fun nextAmcMissionId(nextAmcMissionId: JsonField<String>) =
+            apply {
+                this.nextAmcMissionId = nextAmcMissionId
+            }
 
-        /**
-         * Unique identifier of the next mission provided by the originating source. Provides a
-         * method for the data provider to link air transport missions together chronologically for
-         * tasking and planning purposes.
-         */
+        /** Unique identifier of the next mission provided by the originating source. Provides a method for the data provider to link air transport missions together chronologically for tasking and planning purposes. */
         fun nextMissionId(nextMissionId: String) = nextMissionId(JsonField.of(nextMissionId))
 
         /**
          * Sets [Builder.nextMissionId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.nextMissionId] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.nextMissionId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun nextMissionId(nextMissionId: JsonField<String>) = apply {
-            this.nextMissionId = nextMissionId
-        }
+        fun nextMissionId(nextMissionId: JsonField<String>) =
+            apply {
+                this.nextMissionId = nextMissionId
+            }
 
-        /**
-         * Designates the location responsible for mission transportation, logistics, or
-         * distribution activities for an Area of Responsibility (AOR) within USTRANSCOM.
-         */
+        /** Designates the location responsible for mission transportation, logistics, or distribution activities for an Area of Responsibility (AOR) within USTRANSCOM. */
         fun node(node: String) = node(JsonField.of(node))
 
         /**
          * Sets [Builder.node] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.node] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.node] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun node(node: JsonField<String>) = apply { this.node = node }
+        fun node(node: JsonField<String>) =
+            apply {
+                this.node = node
+            }
 
         /** A description of this mission's objective. */
         fun objective(objective: String) = objective(JsonField.of(objective))
@@ -1569,11 +1508,13 @@ private constructor(
         /**
          * Sets [Builder.objective] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.objective] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.objective] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun objective(objective: JsonField<String>) = apply { this.objective = objective }
+        fun objective(objective: JsonField<String>) =
+            apply {
+                this.objective = objective
+            }
 
         /** The name of the operation that this mission supports. */
         fun operation(operation: String) = operation(JsonField.of(operation))
@@ -1581,27 +1522,27 @@ private constructor(
         /**
          * Sets [Builder.operation] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.operation] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.operation] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun operation(operation: JsonField<String>) = apply { this.operation = operation }
+        fun operation(operation: JsonField<String>) =
+            apply {
+                this.operation = operation
+            }
 
-        /**
-         * Originating system or organization which produced the data, if different from the source.
-         * The origin may be different than the source if the source was a mediating system which
-         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
-         * be the origin.
-         */
+        /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
         fun origin(origin: String) = origin(JsonField.of(origin))
 
         /**
          * Sets [Builder.origin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+        fun origin(origin: JsonField<String>) =
+            apply {
+                this.origin = origin
+            }
 
         /** The mission identifier provided by the originating source. */
         fun origMissionId(origMissionId: String) = origMissionId(JsonField.of(origMissionId))
@@ -1609,108 +1550,95 @@ private constructor(
         /**
          * Sets [Builder.origMissionId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origMissionId] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.origMissionId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun origMissionId(origMissionId: JsonField<String>) = apply {
-            this.origMissionId = origMissionId
-        }
+        fun origMissionId(origMissionId: JsonField<String>) =
+            apply {
+                this.origMissionId = origMissionId
+            }
 
-        /**
-         * The originating source network on which this record was created, auto-populated by the
-         * system.
-         */
+        /** The originating source network on which this record was created, auto-populated by the system. */
         fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
         /**
          * Sets [Builder.origNetwork] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
+        fun origNetwork(origNetwork: JsonField<String>) =
+            apply {
+                this.origNetwork = origNetwork
+            }
 
-        /**
-         * Air Mobility Command (AMC) mission identifier of the previous air transport mission.
-         * Provides a method for AMC to link air transport missions together chronologically for
-         * tasking and planning purposes.
-         */
-        fun prevAmcMissionId(prevAmcMissionId: String) =
-            prevAmcMissionId(JsonField.of(prevAmcMissionId))
+        /** Air Mobility Command (AMC) mission identifier of the previous air transport mission. Provides a method for AMC to link air transport missions together chronologically for tasking and planning purposes. */
+        fun prevAmcMissionId(prevAmcMissionId: String) = prevAmcMissionId(JsonField.of(prevAmcMissionId))
 
         /**
          * Sets [Builder.prevAmcMissionId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.prevAmcMissionId] with a well-typed [String] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.prevAmcMissionId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun prevAmcMissionId(prevAmcMissionId: JsonField<String>) = apply {
-            this.prevAmcMissionId = prevAmcMissionId
-        }
+        fun prevAmcMissionId(prevAmcMissionId: JsonField<String>) =
+            apply {
+                this.prevAmcMissionId = prevAmcMissionId
+            }
 
-        /**
-         * Unique identifier of the previous air transport mission provided by the originating
-         * source. Provides a method for the data provider to link air transport missions together
-         * chronologically for tasking and planning purposes.
-         */
+        /** Unique identifier of the previous air transport mission provided by the originating source. Provides a method for the data provider to link air transport missions together chronologically for tasking and planning purposes. */
         fun prevMissionId(prevMissionId: String) = prevMissionId(JsonField.of(prevMissionId))
 
         /**
          * Sets [Builder.prevMissionId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.prevMissionId] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.prevMissionId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun prevMissionId(prevMissionId: JsonField<String>) = apply {
-            this.prevMissionId = prevMissionId
-        }
+        fun prevMissionId(prevMissionId: JsonField<String>) =
+            apply {
+                this.prevMissionId = prevMissionId
+            }
 
-        /**
-         * A description of this mission's purpose (e.g. why this mission needs to happen, what is
-         * the mission supporting, etc.).
-         */
+        /** A description of this mission's purpose (e.g. why this mission needs to happen, what is the mission supporting, etc.). */
         fun purpose(purpose: String) = purpose(JsonField.of(purpose))
 
         /**
          * Sets [Builder.purpose] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.purpose] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.purpose] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun purpose(purpose: JsonField<String>) = apply { this.purpose = purpose }
+        fun purpose(purpose: JsonField<String>) =
+            apply {
+                this.purpose = purpose
+            }
 
-        /**
-         * Information related to the planning, load, status, and deployment or dispatch of one
-         * aircraft to carry out a mission.
-         */
+        /** Information related to the planning, load, status, and deployment or dispatch of one aircraft to carry out a mission. */
         fun remarks(remarks: List<Remark>) = remarks(JsonField.of(remarks))
 
         /**
          * Sets [Builder.remarks] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.remarks] with a well-typed `List<Remark>` value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.remarks] with a well-typed `List<Remark>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun remarks(remarks: JsonField<List<Remark>>) = apply {
-            this.remarks = remarks.map { it.toMutableList() }
-        }
+        fun remarks(remarks: JsonField<List<Remark>>) =
+            apply {
+                this.remarks = remarks.map { it.toMutableList() }
+            }
 
         /**
          * Adds a single [Remark] to [remarks].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addRemark(remark: Remark) = apply {
-            remarks =
-                (remarks ?: JsonField.of(mutableListOf())).also {
+        fun addRemark(remark: Remark) =
+            apply {
+                remarks = (remarks ?: JsonField.of(mutableListOf())).also {
                     checkKnown("remarks", it).add(remark)
                 }
-        }
+            }
 
         /** Collection of Requirements planned to be associated with this Air Transport Mission. */
         fun requirements(requirements: List<Requirement>) = requirements(JsonField.of(requirements))
@@ -1718,58 +1646,53 @@ private constructor(
         /**
          * Sets [Builder.requirements] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.requirements] with a well-typed `List<Requirement>`
-         * value instead. This method is primarily for setting the field to an undocumented or not
-         * yet supported value.
+         * You should usually call [Builder.requirements] with a well-typed `List<Requirement>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun requirements(requirements: JsonField<List<Requirement>>) = apply {
-            this.requirements = requirements.map { it.toMutableList() }
-        }
+        fun requirements(requirements: JsonField<List<Requirement>>) =
+            apply {
+                this.requirements = requirements.map { it.toMutableList() }
+            }
 
         /**
          * Adds a single [Requirement] to [requirements].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addRequirement(requirement: Requirement) = apply {
-            requirements =
-                (requirements ?: JsonField.of(mutableListOf())).also {
+        fun addRequirement(requirement: Requirement) =
+            apply {
+                requirements = (requirements ?: JsonField.of(mutableListOf())).also {
                     checkKnown("requirements", it).add(requirement)
                 }
-        }
+            }
 
-        /**
-         * The source data library from which this record was received. This could be a remote or
-         * tactical UDL or another data library. If null, the record should be assumed to have
-         * originated from the primary Enterprise UDL.
-         */
+        /** The source data library from which this record was received. This could be a remote or tactical UDL or another data library. If null, the record should be assumed to have originated from the primary Enterprise UDL. */
         fun sourceDl(sourceDl: String) = sourceDl(JsonField.of(sourceDl))
 
         /**
          * Sets [Builder.sourceDl] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.sourceDl] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.sourceDl] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun sourceDl(sourceDl: JsonField<String>) = apply { this.sourceDl = sourceDl }
+        fun sourceDl(sourceDl: JsonField<String>) =
+            apply {
+                this.sourceDl = sourceDl
+            }
 
-        /**
-         * The number of minutes a mission is off schedule based on the source system's business
-         * rules. Positive numbers are early, negative numbers are late.
-         */
-        fun sourceSysDeviation(sourceSysDeviation: Double) =
-            sourceSysDeviation(JsonField.of(sourceSysDeviation))
+        /** The number of minutes a mission is off schedule based on the source system's business rules. Positive numbers are early, negative numbers are late. */
+        fun sourceSysDeviation(sourceSysDeviation: Double) = sourceSysDeviation(JsonField.of(sourceSysDeviation))
 
         /**
          * Sets [Builder.sourceSysDeviation] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.sourceSysDeviation] with a well-typed [Double] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.sourceSysDeviation] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun sourceSysDeviation(sourceSysDeviation: JsonField<Double>) = apply {
-            this.sourceSysDeviation = sourceSysDeviation
-        }
+        fun sourceSysDeviation(sourceSysDeviation: JsonField<Double>) =
+            apply {
+                this.sourceSysDeviation = sourceSysDeviation
+            }
 
         /** Current state of the mission. */
         fun state(state: String) = state(JsonField.of(state))
@@ -1777,10 +1700,13 @@ private constructor(
         /**
          * Sets [Builder.state] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.state] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.state] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun state(state: JsonField<String>) = apply { this.state = state }
+        fun state(state: JsonField<String>) =
+            apply {
+                this.state = state
+            }
 
         /** The type of mission (e.g. SAAM, CHNL, etc.). */
         fun type(type: String) = type(JsonField.of(type))
@@ -1788,10 +1714,13 @@ private constructor(
         /**
          * Sets [Builder.type] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.type] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.type] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun type(type: JsonField<String>) = apply { this.type = type }
+        fun type(type: JsonField<String>) =
+            apply {
+                this.type = type
+            }
 
         /** Time the row was updated in the database, auto-populated by the system. */
         fun updatedAt(updatedAt: OffsetDateTime) = updatedAt(JsonField.of(updatedAt))
@@ -1799,11 +1728,13 @@ private constructor(
         /**
          * Sets [Builder.updatedAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.updatedAt] with a well-typed [OffsetDateTime] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.updatedAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun updatedAt(updatedAt: JsonField<OffsetDateTime>) = apply { this.updatedAt = updatedAt }
+        fun updatedAt(updatedAt: JsonField<OffsetDateTime>) =
+            apply {
+                this.updatedAt = updatedAt
+            }
 
         /** Application user who updated the row in the database, auto-populated by the system. */
         fun updatedBy(updatedBy: String) = updatedBy(JsonField.of(updatedBy))
@@ -1811,30 +1742,39 @@ private constructor(
         /**
          * Sets [Builder.updatedBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.updatedBy] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.updatedBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun updatedBy(updatedBy: JsonField<String>) = apply { this.updatedBy = updatedBy }
+        fun updatedBy(updatedBy: JsonField<String>) =
+            apply {
+                this.updatedBy = updatedBy
+            }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-            this.additionalProperties.clear()
-            putAllAdditionalProperties(additionalProperties)
-        }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
+            apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-            additionalProperties.put(key, value)
-        }
+        fun putAdditionalProperty(key: String, value: JsonValue) =
+            apply {
+                additionalProperties.put(key, value)
+            }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-            this.additionalProperties.putAll(additionalProperties)
-        }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
+            apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
 
-        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+        fun removeAdditionalProperty(key: String) =
+            apply {
+                additionalProperties.remove(key)
+            }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-            keys.forEach(::removeAdditionalProperty)
-        }
+        fun removeAllAdditionalProperties(keys: Set<String>) =
+            apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
 
         /**
          * Returns an immutable instance of [AirTransportMissionFull].
@@ -1842,6 +1782,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -1852,111 +1793,118 @@ private constructor(
          */
         fun build(): AirTransportMissionFull =
             AirTransportMissionFull(
-                checkRequired("classificationMarking", classificationMarking),
-                checkRequired("dataMode", dataMode),
-                checkRequired("source", source),
-                id,
-                abp,
-                (aircraftSorties ?: JsonMissing.of()).map { it.toImmutable() },
-                alias,
-                allocatedUnit,
-                amcMissionId,
-                apacsId,
-                atoCallSign,
-                atoMissionId,
-                callSign,
-                createdAt,
-                createdBy,
-                cw,
-                dipWorksheetName,
-                firstPickUp,
-                gdssMissionId,
-                (hazMat ?: JsonMissing.of()).map { it.toImmutable() },
-                jcsPriority,
-                lastDropOff,
-                loadCategoryType,
-                m1,
-                m2,
-                m3a,
-                naf,
-                nextAmcMissionId,
-                nextMissionId,
-                node,
-                objective,
-                operation,
-                origin,
-                origMissionId,
-                origNetwork,
-                prevAmcMissionId,
-                prevMissionId,
-                purpose,
-                (remarks ?: JsonMissing.of()).map { it.toImmutable() },
-                (requirements ?: JsonMissing.of()).map { it.toImmutable() },
-                sourceDl,
-                sourceSysDeviation,
-                state,
-                type,
-                updatedAt,
-                updatedBy,
-                additionalProperties.toMutableMap(),
+              checkRequired(
+                "classificationMarking", classificationMarking
+              ),
+              checkRequired(
+                "dataMode", dataMode
+              ),
+              checkRequired(
+                "source", source
+              ),
+              id,
+              abp,
+              (aircraftSorties ?: JsonMissing.of()).map { it.toImmutable() },
+              alias,
+              allocatedUnit,
+              amcMissionId,
+              apacsId,
+              atoCallSign,
+              atoMissionId,
+              callSign,
+              createdAt,
+              createdBy,
+              cw,
+              dipWorksheetName,
+              firstPickUp,
+              gdssMissionId,
+              (hazMat ?: JsonMissing.of()).map { it.toImmutable() },
+              jcsPriority,
+              lastDropOff,
+              loadCategoryType,
+              m1,
+              m2,
+              m3a,
+              naf,
+              nextAmcMissionId,
+              nextMissionId,
+              node,
+              objective,
+              operation,
+              origin,
+              origMissionId,
+              origNetwork,
+              prevAmcMissionId,
+              prevMissionId,
+              purpose,
+              (remarks ?: JsonMissing.of()).map { it.toImmutable() },
+              (requirements ?: JsonMissing.of()).map { it.toImmutable() },
+              sourceDl,
+              sourceSysDeviation,
+              state,
+              type,
+              updatedAt,
+              updatedBy,
+              additionalProperties.toMutableMap(),
             )
     }
 
     private var validated: Boolean = false
 
-    fun validate(): AirTransportMissionFull = apply {
-        if (validated) {
-            return@apply
-        }
+    fun validate(): AirTransportMissionFull =
+        apply {
+            if (validated) {
+              return@apply
+            }
 
-        classificationMarking()
-        dataMode().validate()
-        source()
-        id()
-        abp()
-        aircraftSorties().ifPresent { it.forEach { it.validate() } }
-        alias()
-        allocatedUnit()
-        amcMissionId()
-        apacsId()
-        atoCallSign()
-        atoMissionId()
-        callSign()
-        createdAt()
-        createdBy()
-        cw()
-        dipWorksheetName()
-        firstPickUp()
-        gdssMissionId()
-        hazMat().ifPresent { it.forEach { it.validate() } }
-        jcsPriority()
-        lastDropOff()
-        loadCategoryType()
-        m1()
-        m2()
-        m3a()
-        naf()
-        nextAmcMissionId()
-        nextMissionId()
-        node()
-        objective()
-        operation()
-        origin()
-        origMissionId()
-        origNetwork()
-        prevAmcMissionId()
-        prevMissionId()
-        purpose()
-        remarks().ifPresent { it.forEach { it.validate() } }
-        requirements().ifPresent { it.forEach { it.validate() } }
-        sourceDl()
-        sourceSysDeviation()
-        state()
-        type()
-        updatedAt()
-        updatedBy()
-        validated = true
-    }
+            classificationMarking()
+            dataMode().validate()
+            source()
+            id()
+            abp()
+            aircraftSorties().ifPresent { it.forEach { it.validate() } }
+            alias()
+            allocatedUnit()
+            amcMissionId()
+            apacsId()
+            atoCallSign()
+            atoMissionId()
+            callSign()
+            createdAt()
+            createdBy()
+            cw()
+            dipWorksheetName()
+            firstPickUp()
+            gdssMissionId()
+            hazMat().ifPresent { it.forEach { it.validate() } }
+            jcsPriority()
+            lastDropOff()
+            loadCategoryType()
+            m1()
+            m2()
+            m3a()
+            naf()
+            nextAmcMissionId()
+            nextMissionId()
+            node()
+            objective()
+            operation()
+            origin()
+            origMissionId()
+            origNetwork()
+            prevAmcMissionId()
+            prevMissionId()
+            purpose()
+            remarks().ifPresent { it.forEach { it.validate() } }
+            requirements().ifPresent { it.forEach { it.validate() } }
+            sourceDl()
+            sourceSysDeviation()
+            state()
+            type()
+            updatedAt()
+            updatedBy()
+            validated = true
+        }
 
     fun isValid(): Boolean =
         try {
@@ -1972,79 +1920,33 @@ private constructor(
      * Used for best match union deserialization.
      */
     @JvmSynthetic
-    internal fun validity(): Int =
-        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
-            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
-            (if (source.asKnown().isPresent) 1 else 0) +
-            (if (id.asKnown().isPresent) 1 else 0) +
-            (if (abp.asKnown().isPresent) 1 else 0) +
-            (aircraftSorties.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
-            (if (alias.asKnown().isPresent) 1 else 0) +
-            (if (allocatedUnit.asKnown().isPresent) 1 else 0) +
-            (if (amcMissionId.asKnown().isPresent) 1 else 0) +
-            (if (apacsId.asKnown().isPresent) 1 else 0) +
-            (if (atoCallSign.asKnown().isPresent) 1 else 0) +
-            (if (atoMissionId.asKnown().isPresent) 1 else 0) +
-            (if (callSign.asKnown().isPresent) 1 else 0) +
-            (if (createdAt.asKnown().isPresent) 1 else 0) +
-            (if (createdBy.asKnown().isPresent) 1 else 0) +
-            (if (cw.asKnown().isPresent) 1 else 0) +
-            (if (dipWorksheetName.asKnown().isPresent) 1 else 0) +
-            (if (firstPickUp.asKnown().isPresent) 1 else 0) +
-            (if (gdssMissionId.asKnown().isPresent) 1 else 0) +
-            (hazMat.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
-            (if (jcsPriority.asKnown().isPresent) 1 else 0) +
-            (if (lastDropOff.asKnown().isPresent) 1 else 0) +
-            (if (loadCategoryType.asKnown().isPresent) 1 else 0) +
-            (if (m1.asKnown().isPresent) 1 else 0) +
-            (if (m2.asKnown().isPresent) 1 else 0) +
-            (if (m3a.asKnown().isPresent) 1 else 0) +
-            (if (naf.asKnown().isPresent) 1 else 0) +
-            (if (nextAmcMissionId.asKnown().isPresent) 1 else 0) +
-            (if (nextMissionId.asKnown().isPresent) 1 else 0) +
-            (if (node.asKnown().isPresent) 1 else 0) +
-            (if (objective.asKnown().isPresent) 1 else 0) +
-            (if (operation.asKnown().isPresent) 1 else 0) +
-            (if (origin.asKnown().isPresent) 1 else 0) +
-            (if (origMissionId.asKnown().isPresent) 1 else 0) +
-            (if (origNetwork.asKnown().isPresent) 1 else 0) +
-            (if (prevAmcMissionId.asKnown().isPresent) 1 else 0) +
-            (if (prevMissionId.asKnown().isPresent) 1 else 0) +
-            (if (purpose.asKnown().isPresent) 1 else 0) +
-            (remarks.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
-            (requirements.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
-            (if (sourceDl.asKnown().isPresent) 1 else 0) +
-            (if (sourceSysDeviation.asKnown().isPresent) 1 else 0) +
-            (if (state.asKnown().isPresent) 1 else 0) +
-            (if (type.asKnown().isPresent) 1 else 0) +
-            (if (updatedAt.asKnown().isPresent) 1 else 0) +
-            (if (updatedBy.asKnown().isPresent) 1 else 0)
+    internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (if (abp.asKnown().isPresent) 1 else 0) + (aircraftSorties.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) + (if (alias.asKnown().isPresent) 1 else 0) + (if (allocatedUnit.asKnown().isPresent) 1 else 0) + (if (amcMissionId.asKnown().isPresent) 1 else 0) + (if (apacsId.asKnown().isPresent) 1 else 0) + (if (atoCallSign.asKnown().isPresent) 1 else 0) + (if (atoMissionId.asKnown().isPresent) 1 else 0) + (if (callSign.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (cw.asKnown().isPresent) 1 else 0) + (if (dipWorksheetName.asKnown().isPresent) 1 else 0) + (if (firstPickUp.asKnown().isPresent) 1 else 0) + (if (gdssMissionId.asKnown().isPresent) 1 else 0) + (hazMat.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) + (if (jcsPriority.asKnown().isPresent) 1 else 0) + (if (lastDropOff.asKnown().isPresent) 1 else 0) + (if (loadCategoryType.asKnown().isPresent) 1 else 0) + (if (m1.asKnown().isPresent) 1 else 0) + (if (m2.asKnown().isPresent) 1 else 0) + (if (m3a.asKnown().isPresent) 1 else 0) + (if (naf.asKnown().isPresent) 1 else 0) + (if (nextAmcMissionId.asKnown().isPresent) 1 else 0) + (if (nextMissionId.asKnown().isPresent) 1 else 0) + (if (node.asKnown().isPresent) 1 else 0) + (if (objective.asKnown().isPresent) 1 else 0) + (if (operation.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origMissionId.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (prevAmcMissionId.asKnown().isPresent) 1 else 0) + (if (prevMissionId.asKnown().isPresent) 1 else 0) + (if (purpose.asKnown().isPresent) 1 else 0) + (remarks.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) + (requirements.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) + (if (sourceDl.asKnown().isPresent) 1 else 0) + (if (sourceSysDeviation.asKnown().isPresent) 1 else 0) + (if (state.asKnown().isPresent) 1 else 0) + (if (type.asKnown().isPresent) 1 else 0) + (if (updatedAt.asKnown().isPresent) 1 else 0) + (if (updatedBy.asKnown().isPresent) 1 else 0)
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-     * both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-     * analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-     * requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
      */
-    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+    class DataMode @JsonCreator private constructor(
+        private val value: JsonField<String>,
+
+    ) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't
-         * match any known member, and you want to know that value. For example, if the SDK is on an
-         * older version than the API, then the API may respond with new members that the SDK is
-         * unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't match any known
+         * member, and you want to know that value. For example, if the SDK is on an older version than the
+         * API, then the API may respond with new members that the SDK is unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue
+        fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -2071,9 +1973,11 @@ private constructor(
          * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [DataMode] can contain an unknown value in a couple of cases:
-         * - It was deserialized from data that doesn't match any known member. For example, if the
-         *   SDK is on an older version than the API, then the API may respond with new members that
-         *   the SDK is unaware of.
+         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
+         *   an older version than the API, then the API may respond with new members that the SDK is unaware
+         *   of.
+         *
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -2086,11 +1990,11 @@ private constructor(
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
-         * if the class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
+         * class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want
-         * to throw for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want to throw
+         * for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -2104,11 +2008,10 @@ private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't
-         * want to throw for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
+         * for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
-         *   known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
          */
         fun known(): Known =
             when (this) {
@@ -2122,27 +2025,25 @@ private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging
-         * and generally doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging and generally
+         * doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
-         *   have the expected primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
+         * primitive type.
          */
-        fun asString(): String =
-            _value().asString().orElseThrow {
-                UnifieddatalibraryInvalidDataException("Value is not a String")
-            }
+        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
 
         private var validated: Boolean = false
 
-        fun validate(): DataMode = apply {
-            if (validated) {
-                return@apply
-            }
+        fun validate(): DataMode =
+            apply {
+                if (validated) {
+                  return@apply
+                }
 
-            known()
-            validated = true
-        }
+                known()
+                validated = true
+            }
 
         fun isValid(): Boolean =
             try {
@@ -2153,19 +2054,19 @@ private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
+         * Returns a score indicating how many valid values are contained in this object recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic
+        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
+          if (this === other) {
+              return true
+          }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+          return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
         }
 
         override fun hashCode() = value.hashCode()
@@ -2173,12 +2074,8 @@ private constructor(
         override fun toString() = value.toString()
     }
 
-    /**
-     * Collection of Hazardous Material information planned to be associated with this Air Transport
-     * Mission.
-     */
-    class HazMat
-    private constructor(
+    /** Collection of Hazardous Material information planned to be associated with this Air Transport Mission. */
+    class HazMat private constructor(
         private val applicableNotes: JsonField<String>,
         private val cgc: JsonField<String>,
         private val cgn: JsonField<String>,
@@ -2195,27 +2092,18 @@ private constructor(
         private val unNum: JsonField<String>,
         private val weight: JsonField<Double>,
         private val additionalProperties: MutableMap<String, JsonValue>,
+
     ) {
 
         @JsonCreator
         private constructor(
-            @JsonProperty("applicableNotes")
-            @ExcludeMissing
-            applicableNotes: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("applicableNotes") @ExcludeMissing applicableNotes: JsonField<String> = JsonMissing.of(),
             @JsonProperty("cgc") @ExcludeMissing cgc: JsonField<String> = JsonMissing.of(),
             @JsonProperty("cgn") @ExcludeMissing cgn: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("classDiv")
-            @ExcludeMissing
-            classDiv: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("extHazMatId")
-            @ExcludeMissing
-            extHazMatId: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("itemName")
-            @ExcludeMissing
-            itemName: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("netExpWt")
-            @ExcludeMissing
-            netExpWt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("classDiv") @ExcludeMissing classDiv: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("extHazMatId") @ExcludeMissing extHazMatId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("itemName") @ExcludeMissing itemName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("netExpWt") @ExcludeMissing netExpWt: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("offICAO") @ExcludeMissing offIcao: JsonField<String> = JsonMissing.of(),
             @JsonProperty("offItin") @ExcludeMissing offItin: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("onICAO") @ExcludeMissing onIcao: JsonField<String> = JsonMissing.of(),
@@ -2223,162 +2111,135 @@ private constructor(
             @JsonProperty("pieces") @ExcludeMissing pieces: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("planned") @ExcludeMissing planned: JsonField<String> = JsonMissing.of(),
             @JsonProperty("unNum") @ExcludeMissing unNum: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("weight") @ExcludeMissing weight: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("weight") @ExcludeMissing weight: JsonField<Double> = JsonMissing.of()
         ) : this(
-            applicableNotes,
-            cgc,
-            cgn,
-            classDiv,
-            extHazMatId,
-            itemName,
-            netExpWt,
-            offIcao,
-            offItin,
-            onIcao,
-            onItin,
-            pieces,
-            planned,
-            unNum,
-            weight,
-            mutableMapOf(),
+          applicableNotes,
+          cgc,
+          cgn,
+          classDiv,
+          extHazMatId,
+          itemName,
+          netExpWt,
+          offIcao,
+          offItin,
+          onIcao,
+          onItin,
+          pieces,
+          planned,
+          unNum,
+          weight,
+          mutableMapOf(),
         )
 
         /**
-         * Comma delimited list of Note IDs for Item Class Segregation groups, specific to GDSS
-         * systems.
+         * Comma delimited list of Note IDs for Item Class Segregation groups, specific to GDSS systems.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun applicableNotes(): Optional<String> = applicableNotes.getOptional("applicableNotes")
 
         /**
-         * Compatibility group code used to specify the controls for the transportation and storage
-         * of hazardous materials according to the Hazardous Materials Regulations issued by the
-         * U.S. Department of Transportation.
+         * Compatibility group code used to specify the controls for the transportation and storage of hazardous materials according to the Hazardous Materials Regulations issued by the U.S. Department of Transportation.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun cgc(): Optional<String> = cgc.getOptional("cgc")
 
         /**
          * Comma delimited list of Note IDs for compatibility groups, specific to GDSS systems.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun cgn(): Optional<String> = cgn.getOptional("cgn")
 
         /**
-         * Class and division of the hazardous material according to the Hazardous Materials
-         * Regulations issued by the U.S. Department of Transportation.
+         * Class and division of the hazardous material according to the Hazardous Materials Regulations issued by the U.S. Department of Transportation.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun classDiv(): Optional<Double> = classDiv.getOptional("classDiv")
 
         /**
          * The hazMat identifier provided by the originating source.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun extHazMatId(): Optional<String> = extHazMatId.getOptional("extHazMatId")
 
         /**
-         * United Nations proper shipping name of the hazardous material according to the Hazardous
-         * Materials Regulations issued by the U.S. Department of Transportation.
+         * United Nations proper shipping name of the hazardous material according to the Hazardous Materials Regulations issued by the U.S. Department of Transportation.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun itemName(): Optional<String> = itemName.getOptional("itemName")
 
         /**
          * Net explosive weight of the hazardous material, in kilograms.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun netExpWt(): Optional<Double> = netExpWt.getOptional("netExpWt")
 
         /**
-         * The International Civil Aviation Organization (ICAO) code of the site where the hazardous
-         * material is unloaded.
+         * The International Civil Aviation Organization (ICAO) code of the site where the hazardous material is unloaded.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun offIcao(): Optional<String> = offIcao.getOptional("offICAO")
 
         /**
          * Itinerary number that identifies where the hazardous material is unloaded.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun offItin(): Optional<Int> = offItin.getOptional("offItin")
 
         /**
-         * The International Civil Aviation Organization (ICAO) code of the site where the hazardous
-         * material is loaded.
+         * The International Civil Aviation Organization (ICAO) code of the site where the hazardous material is loaded.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun onIcao(): Optional<String> = onIcao.getOptional("onICAO")
 
         /**
          * Itinerary number that identifies where the hazardous material is loaded.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun onItin(): Optional<Int> = onItin.getOptional("onItin")
 
         /**
          * Number of pieces of hazardous cargo.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun pieces(): Optional<Int> = pieces.getOptional("pieces")
 
         /**
-         * Flag indicating if hazardous material is associated with this air transport mission.
-         * Possible values are P (planned to be associated with the mission) or A (actually
-         * associated with the mission). Enum: [P, A].
+         * Flag indicating if hazardous material is associated with this air transport mission. Possible values are P (planned to be associated with the mission) or A (actually associated with the mission). Enum: [P, A].
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun planned(): Optional<String> = planned.getOptional("planned")
 
         /**
-         * United Nations number or North America number that identifies hazardous materials
-         * according to the Hazardous Materials Regulations issued by the U.S. Department of
-         * Transportation.
+         * United Nations number or North America number that identifies hazardous materials according to the Hazardous Materials Regulations issued by the U.S. Department of Transportation.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun unNum(): Optional<String> = unNum.getOptional("unNum")
 
         /**
          * Total weight of hazardous cargo, including non-explosive parts, in kilograms.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun weight(): Optional<Double> = weight.getOptional("weight")
 
         /**
          * Returns the raw JSON value of [applicableNotes].
          *
-         * Unlike [applicableNotes], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [applicableNotes], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("applicableNotes")
         @ExcludeMissing
@@ -2389,21 +2250,27 @@ private constructor(
          *
          * Unlike [cgc], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("cgc") @ExcludeMissing fun _cgc(): JsonField<String> = cgc
+        @JsonProperty("cgc")
+        @ExcludeMissing
+        fun _cgc(): JsonField<String> = cgc
 
         /**
          * Returns the raw JSON value of [cgn].
          *
          * Unlike [cgn], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("cgn") @ExcludeMissing fun _cgn(): JsonField<String> = cgn
+        @JsonProperty("cgn")
+        @ExcludeMissing
+        fun _cgn(): JsonField<String> = cgn
 
         /**
          * Returns the raw JSON value of [classDiv].
          *
          * Unlike [classDiv], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("classDiv") @ExcludeMissing fun _classDiv(): JsonField<Double> = classDiv
+        @JsonProperty("classDiv")
+        @ExcludeMissing
+        fun _classDiv(): JsonField<Double> = classDiv
 
         /**
          * Returns the raw JSON value of [extHazMatId].
@@ -2419,87 +2286,107 @@ private constructor(
          *
          * Unlike [itemName], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("itemName") @ExcludeMissing fun _itemName(): JsonField<String> = itemName
+        @JsonProperty("itemName")
+        @ExcludeMissing
+        fun _itemName(): JsonField<String> = itemName
 
         /**
          * Returns the raw JSON value of [netExpWt].
          *
          * Unlike [netExpWt], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("netExpWt") @ExcludeMissing fun _netExpWt(): JsonField<Double> = netExpWt
+        @JsonProperty("netExpWt")
+        @ExcludeMissing
+        fun _netExpWt(): JsonField<Double> = netExpWt
 
         /**
          * Returns the raw JSON value of [offIcao].
          *
          * Unlike [offIcao], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("offICAO") @ExcludeMissing fun _offIcao(): JsonField<String> = offIcao
+        @JsonProperty("offICAO")
+        @ExcludeMissing
+        fun _offIcao(): JsonField<String> = offIcao
 
         /**
          * Returns the raw JSON value of [offItin].
          *
          * Unlike [offItin], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("offItin") @ExcludeMissing fun _offItin(): JsonField<Int> = offItin
+        @JsonProperty("offItin")
+        @ExcludeMissing
+        fun _offItin(): JsonField<Int> = offItin
 
         /**
          * Returns the raw JSON value of [onIcao].
          *
          * Unlike [onIcao], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("onICAO") @ExcludeMissing fun _onIcao(): JsonField<String> = onIcao
+        @JsonProperty("onICAO")
+        @ExcludeMissing
+        fun _onIcao(): JsonField<String> = onIcao
 
         /**
          * Returns the raw JSON value of [onItin].
          *
          * Unlike [onItin], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("onItin") @ExcludeMissing fun _onItin(): JsonField<Int> = onItin
+        @JsonProperty("onItin")
+        @ExcludeMissing
+        fun _onItin(): JsonField<Int> = onItin
 
         /**
          * Returns the raw JSON value of [pieces].
          *
          * Unlike [pieces], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("pieces") @ExcludeMissing fun _pieces(): JsonField<Int> = pieces
+        @JsonProperty("pieces")
+        @ExcludeMissing
+        fun _pieces(): JsonField<Int> = pieces
 
         /**
          * Returns the raw JSON value of [planned].
          *
          * Unlike [planned], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("planned") @ExcludeMissing fun _planned(): JsonField<String> = planned
+        @JsonProperty("planned")
+        @ExcludeMissing
+        fun _planned(): JsonField<String> = planned
 
         /**
          * Returns the raw JSON value of [unNum].
          *
          * Unlike [unNum], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("unNum") @ExcludeMissing fun _unNum(): JsonField<String> = unNum
+        @JsonProperty("unNum")
+        @ExcludeMissing
+        fun _unNum(): JsonField<String> = unNum
 
         /**
          * Returns the raw JSON value of [weight].
          *
          * Unlike [weight], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("weight") @ExcludeMissing fun _weight(): JsonField<Double> = weight
+        @JsonProperty("weight")
+        @ExcludeMissing
+        fun _weight(): JsonField<Double> = weight
 
         @JsonAnySetter
         private fun putAdditionalProperty(key: String, value: JsonValue) {
-            additionalProperties.put(key, value)
+          additionalProperties.put(key, value)
         }
 
         @JsonAnyGetter
         @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> =
-            Collections.unmodifiableMap(additionalProperties)
+        fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
 
         fun toBuilder() = Builder().from(this)
 
         companion object {
 
             /** Returns a mutable builder for constructing an instance of [HazMat]. */
-            @JvmStatic fun builder() = Builder()
+            @JvmStatic
+            fun builder() = Builder()
         }
 
         /** A builder for [HazMat]. */
@@ -2523,87 +2410,81 @@ private constructor(
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
-            internal fun from(hazMat: HazMat) = apply {
-                applicableNotes = hazMat.applicableNotes
-                cgc = hazMat.cgc
-                cgn = hazMat.cgn
-                classDiv = hazMat.classDiv
-                extHazMatId = hazMat.extHazMatId
-                itemName = hazMat.itemName
-                netExpWt = hazMat.netExpWt
-                offIcao = hazMat.offIcao
-                offItin = hazMat.offItin
-                onIcao = hazMat.onIcao
-                onItin = hazMat.onItin
-                pieces = hazMat.pieces
-                planned = hazMat.planned
-                unNum = hazMat.unNum
-                weight = hazMat.weight
-                additionalProperties = hazMat.additionalProperties.toMutableMap()
-            }
+            internal fun from(hazMat: HazMat) =
+                apply {
+                    applicableNotes = hazMat.applicableNotes
+                    cgc = hazMat.cgc
+                    cgn = hazMat.cgn
+                    classDiv = hazMat.classDiv
+                    extHazMatId = hazMat.extHazMatId
+                    itemName = hazMat.itemName
+                    netExpWt = hazMat.netExpWt
+                    offIcao = hazMat.offIcao
+                    offItin = hazMat.offItin
+                    onIcao = hazMat.onIcao
+                    onItin = hazMat.onItin
+                    pieces = hazMat.pieces
+                    planned = hazMat.planned
+                    unNum = hazMat.unNum
+                    weight = hazMat.weight
+                    additionalProperties = hazMat.additionalProperties.toMutableMap()
+                }
 
-            /**
-             * Comma delimited list of Note IDs for Item Class Segregation groups, specific to GDSS
-             * systems.
-             */
-            fun applicableNotes(applicableNotes: String) =
-                applicableNotes(JsonField.of(applicableNotes))
+            /** Comma delimited list of Note IDs for Item Class Segregation groups, specific to GDSS systems. */
+            fun applicableNotes(applicableNotes: String) = applicableNotes(JsonField.of(applicableNotes))
 
             /**
              * Sets [Builder.applicableNotes] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.applicableNotes] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.applicableNotes] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun applicableNotes(applicableNotes: JsonField<String>) = apply {
-                this.applicableNotes = applicableNotes
-            }
+            fun applicableNotes(applicableNotes: JsonField<String>) =
+                apply {
+                    this.applicableNotes = applicableNotes
+                }
 
-            /**
-             * Compatibility group code used to specify the controls for the transportation and
-             * storage of hazardous materials according to the Hazardous Materials Regulations
-             * issued by the U.S. Department of Transportation.
-             */
+            /** Compatibility group code used to specify the controls for the transportation and storage of hazardous materials according to the Hazardous Materials Regulations issued by the U.S. Department of Transportation. */
             fun cgc(cgc: String) = cgc(JsonField.of(cgc))
 
             /**
              * Sets [Builder.cgc] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.cgc] with a well-typed [String] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.cgc] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun cgc(cgc: JsonField<String>) = apply { this.cgc = cgc }
+            fun cgc(cgc: JsonField<String>) =
+                apply {
+                    this.cgc = cgc
+                }
 
-            /**
-             * Comma delimited list of Note IDs for compatibility groups, specific to GDSS systems.
-             */
+            /** Comma delimited list of Note IDs for compatibility groups, specific to GDSS systems. */
             fun cgn(cgn: String) = cgn(JsonField.of(cgn))
 
             /**
              * Sets [Builder.cgn] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.cgn] with a well-typed [String] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.cgn] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun cgn(cgn: JsonField<String>) = apply { this.cgn = cgn }
+            fun cgn(cgn: JsonField<String>) =
+                apply {
+                    this.cgn = cgn
+                }
 
-            /**
-             * Class and division of the hazardous material according to the Hazardous Materials
-             * Regulations issued by the U.S. Department of Transportation.
-             */
+            /** Class and division of the hazardous material according to the Hazardous Materials Regulations issued by the U.S. Department of Transportation. */
             fun classDiv(classDiv: Double) = classDiv(JsonField.of(classDiv))
 
             /**
              * Sets [Builder.classDiv] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.classDiv] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.classDiv] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun classDiv(classDiv: JsonField<Double>) = apply { this.classDiv = classDiv }
+            fun classDiv(classDiv: JsonField<Double>) =
+                apply {
+                    this.classDiv = classDiv
+                }
 
             /** The hazMat identifier provided by the originating source. */
             fun extHazMatId(extHazMatId: String) = extHazMatId(JsonField.of(extHazMatId))
@@ -2611,28 +2492,27 @@ private constructor(
             /**
              * Sets [Builder.extHazMatId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.extHazMatId] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.extHazMatId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun extHazMatId(extHazMatId: JsonField<String>) = apply {
-                this.extHazMatId = extHazMatId
-            }
+            fun extHazMatId(extHazMatId: JsonField<String>) =
+                apply {
+                    this.extHazMatId = extHazMatId
+                }
 
-            /**
-             * United Nations proper shipping name of the hazardous material according to the
-             * Hazardous Materials Regulations issued by the U.S. Department of Transportation.
-             */
+            /** United Nations proper shipping name of the hazardous material according to the Hazardous Materials Regulations issued by the U.S. Department of Transportation. */
             fun itemName(itemName: String) = itemName(JsonField.of(itemName))
 
             /**
              * Sets [Builder.itemName] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.itemName] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.itemName] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun itemName(itemName: JsonField<String>) = apply { this.itemName = itemName }
+            fun itemName(itemName: JsonField<String>) =
+                apply {
+                    this.itemName = itemName
+                }
 
             /** Net explosive weight of the hazardous material, in kilograms. */
             fun netExpWt(netExpWt: Double) = netExpWt(JsonField.of(netExpWt))
@@ -2640,26 +2520,27 @@ private constructor(
             /**
              * Sets [Builder.netExpWt] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.netExpWt] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.netExpWt] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun netExpWt(netExpWt: JsonField<Double>) = apply { this.netExpWt = netExpWt }
+            fun netExpWt(netExpWt: JsonField<Double>) =
+                apply {
+                    this.netExpWt = netExpWt
+                }
 
-            /**
-             * The International Civil Aviation Organization (ICAO) code of the site where the
-             * hazardous material is unloaded.
-             */
+            /** The International Civil Aviation Organization (ICAO) code of the site where the hazardous material is unloaded. */
             fun offIcao(offIcao: String) = offIcao(JsonField.of(offIcao))
 
             /**
              * Sets [Builder.offIcao] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.offIcao] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.offIcao] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun offIcao(offIcao: JsonField<String>) = apply { this.offIcao = offIcao }
+            fun offIcao(offIcao: JsonField<String>) =
+                apply {
+                    this.offIcao = offIcao
+                }
 
             /** Itinerary number that identifies where the hazardous material is unloaded. */
             fun offItin(offItin: Int) = offItin(JsonField.of(offItin))
@@ -2667,26 +2548,27 @@ private constructor(
             /**
              * Sets [Builder.offItin] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.offItin] with a well-typed [Int] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.offItin] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun offItin(offItin: JsonField<Int>) = apply { this.offItin = offItin }
+            fun offItin(offItin: JsonField<Int>) =
+                apply {
+                    this.offItin = offItin
+                }
 
-            /**
-             * The International Civil Aviation Organization (ICAO) code of the site where the
-             * hazardous material is loaded.
-             */
+            /** The International Civil Aviation Organization (ICAO) code of the site where the hazardous material is loaded. */
             fun onIcao(onIcao: String) = onIcao(JsonField.of(onIcao))
 
             /**
              * Sets [Builder.onIcao] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.onIcao] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.onIcao] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun onIcao(onIcao: JsonField<String>) = apply { this.onIcao = onIcao }
+            fun onIcao(onIcao: JsonField<String>) =
+                apply {
+                    this.onIcao = onIcao
+                }
 
             /** Itinerary number that identifies where the hazardous material is loaded. */
             fun onItin(onItin: Int) = onItin(JsonField.of(onItin))
@@ -2694,11 +2576,13 @@ private constructor(
             /**
              * Sets [Builder.onItin] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.onItin] with a well-typed [Int] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.onItin] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun onItin(onItin: JsonField<Int>) = apply { this.onItin = onItin }
+            fun onItin(onItin: JsonField<Int>) =
+                apply {
+                    this.onItin = onItin
+                }
 
             /** Number of pieces of hazardous cargo. */
             fun pieces(pieces: Int) = pieces(JsonField.of(pieces))
@@ -2706,43 +2590,41 @@ private constructor(
             /**
              * Sets [Builder.pieces] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.pieces] with a well-typed [Int] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.pieces] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun pieces(pieces: JsonField<Int>) = apply { this.pieces = pieces }
+            fun pieces(pieces: JsonField<Int>) =
+                apply {
+                    this.pieces = pieces
+                }
 
-            /**
-             * Flag indicating if hazardous material is associated with this air transport mission.
-             * Possible values are P (planned to be associated with the mission) or A (actually
-             * associated with the mission). Enum: [P, A].
-             */
+            /** Flag indicating if hazardous material is associated with this air transport mission. Possible values are P (planned to be associated with the mission) or A (actually associated with the mission). Enum: [P, A]. */
             fun planned(planned: String) = planned(JsonField.of(planned))
 
             /**
              * Sets [Builder.planned] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.planned] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.planned] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun planned(planned: JsonField<String>) = apply { this.planned = planned }
+            fun planned(planned: JsonField<String>) =
+                apply {
+                    this.planned = planned
+                }
 
-            /**
-             * United Nations number or North America number that identifies hazardous materials
-             * according to the Hazardous Materials Regulations issued by the U.S. Department of
-             * Transportation.
-             */
+            /** United Nations number or North America number that identifies hazardous materials according to the Hazardous Materials Regulations issued by the U.S. Department of Transportation. */
             fun unNum(unNum: String) = unNum(JsonField.of(unNum))
 
             /**
              * Sets [Builder.unNum] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.unNum] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.unNum] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun unNum(unNum: JsonField<String>) = apply { this.unNum = unNum }
+            fun unNum(unNum: JsonField<String>) =
+                apply {
+                    this.unNum = unNum
+                }
 
             /** Total weight of hazardous cargo, including non-explosive parts, in kilograms. */
             fun weight(weight: Double) = weight(JsonField.of(weight))
@@ -2750,30 +2632,39 @@ private constructor(
             /**
              * Sets [Builder.weight] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.weight] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.weight] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun weight(weight: JsonField<Double>) = apply { this.weight = weight }
+            fun weight(weight: JsonField<Double>) =
+                apply {
+                    this.weight = weight
+                }
 
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
+                apply {
+                    this.additionalProperties.clear()
+                    putAllAdditionalProperties(additionalProperties)
+                }
 
-            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-                additionalProperties.put(key, value)
-            }
+            fun putAdditionalProperty(key: String, value: JsonValue) =
+                apply {
+                    additionalProperties.put(key, value)
+                }
 
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
+                apply {
+                    this.additionalProperties.putAll(additionalProperties)
+                }
 
-            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+            fun removeAdditionalProperty(key: String) =
+                apply {
+                    additionalProperties.remove(key)
+                }
 
-            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
+            fun removeAllAdditionalProperties(keys: Set<String>) =
+                apply {
+                    keys.forEach(::removeAdditionalProperty)
+                }
 
             /**
              * Returns an immutable instance of [HazMat].
@@ -2782,49 +2673,50 @@ private constructor(
              */
             fun build(): HazMat =
                 HazMat(
-                    applicableNotes,
-                    cgc,
-                    cgn,
-                    classDiv,
-                    extHazMatId,
-                    itemName,
-                    netExpWt,
-                    offIcao,
-                    offItin,
-                    onIcao,
-                    onItin,
-                    pieces,
-                    planned,
-                    unNum,
-                    weight,
-                    additionalProperties.toMutableMap(),
+                  applicableNotes,
+                  cgc,
+                  cgn,
+                  classDiv,
+                  extHazMatId,
+                  itemName,
+                  netExpWt,
+                  offIcao,
+                  offItin,
+                  onIcao,
+                  onItin,
+                  pieces,
+                  planned,
+                  unNum,
+                  weight,
+                  additionalProperties.toMutableMap(),
                 )
         }
 
         private var validated: Boolean = false
 
-        fun validate(): HazMat = apply {
-            if (validated) {
-                return@apply
-            }
+        fun validate(): HazMat =
+            apply {
+                if (validated) {
+                  return@apply
+                }
 
-            applicableNotes()
-            cgc()
-            cgn()
-            classDiv()
-            extHazMatId()
-            itemName()
-            netExpWt()
-            offIcao()
-            offItin()
-            onIcao()
-            onItin()
-            pieces()
-            planned()
-            unNum()
-            weight()
-            validated = true
-        }
+                applicableNotes()
+                cgc()
+                cgn()
+                classDiv()
+                extHazMatId()
+                itemName()
+                netExpWt()
+                offIcao()
+                offItin()
+                onIcao()
+                onItin()
+                pieces()
+                planned()
+                unNum()
+                weight()
+                validated = true
+            }
 
         fun isValid(): Boolean =
             try {
@@ -2835,35 +2727,19 @@ private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
+         * Returns a score indicating how many valid values are contained in this object recursively.
          *
          * Used for best match union deserialization.
          */
         @JvmSynthetic
-        internal fun validity(): Int =
-            (if (applicableNotes.asKnown().isPresent) 1 else 0) +
-                (if (cgc.asKnown().isPresent) 1 else 0) +
-                (if (cgn.asKnown().isPresent) 1 else 0) +
-                (if (classDiv.asKnown().isPresent) 1 else 0) +
-                (if (extHazMatId.asKnown().isPresent) 1 else 0) +
-                (if (itemName.asKnown().isPresent) 1 else 0) +
-                (if (netExpWt.asKnown().isPresent) 1 else 0) +
-                (if (offIcao.asKnown().isPresent) 1 else 0) +
-                (if (offItin.asKnown().isPresent) 1 else 0) +
-                (if (onIcao.asKnown().isPresent) 1 else 0) +
-                (if (onItin.asKnown().isPresent) 1 else 0) +
-                (if (pieces.asKnown().isPresent) 1 else 0) +
-                (if (planned.asKnown().isPresent) 1 else 0) +
-                (if (unNum.asKnown().isPresent) 1 else 0) +
-                (if (weight.asKnown().isPresent) 1 else 0)
+        internal fun validity(): Int = (if (applicableNotes.asKnown().isPresent) 1 else 0) + (if (cgc.asKnown().isPresent) 1 else 0) + (if (cgn.asKnown().isPresent) 1 else 0) + (if (classDiv.asKnown().isPresent) 1 else 0) + (if (extHazMatId.asKnown().isPresent) 1 else 0) + (if (itemName.asKnown().isPresent) 1 else 0) + (if (netExpWt.asKnown().isPresent) 1 else 0) + (if (offIcao.asKnown().isPresent) 1 else 0) + (if (offItin.asKnown().isPresent) 1 else 0) + (if (onIcao.asKnown().isPresent) 1 else 0) + (if (onItin.asKnown().isPresent) 1 else 0) + (if (pieces.asKnown().isPresent) 1 else 0) + (if (planned.asKnown().isPresent) 1 else 0) + (if (unNum.asKnown().isPresent) 1 else 0) + (if (weight.asKnown().isPresent) 1 else 0)
 
         override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
+          if (this === other) {
+              return true
+          }
 
-            return /* spotless:off */ other is HazMat && applicableNotes == other.applicableNotes && cgc == other.cgc && cgn == other.cgn && classDiv == other.classDiv && extHazMatId == other.extHazMatId && itemName == other.itemName && netExpWt == other.netExpWt && offIcao == other.offIcao && offItin == other.offItin && onIcao == other.onIcao && onItin == other.onItin && pieces == other.pieces && planned == other.planned && unNum == other.unNum && weight == other.weight && additionalProperties == other.additionalProperties /* spotless:on */
+          return /* spotless:off */ other is HazMat && applicableNotes == other.applicableNotes && cgc == other.cgc && cgn == other.cgn && classDiv == other.classDiv && extHazMatId == other.extHazMatId && itemName == other.itemName && netExpWt == other.netExpWt && offIcao == other.offIcao && offItin == other.offItin && onIcao == other.onIcao && onItin == other.onItin && pieces == other.pieces && planned == other.planned && unNum == other.unNum && weight == other.weight && additionalProperties == other.additionalProperties /* spotless:on */
         }
 
         /* spotless:off */
@@ -2872,13 +2748,11 @@ private constructor(
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() =
-            "HazMat{applicableNotes=$applicableNotes, cgc=$cgc, cgn=$cgn, classDiv=$classDiv, extHazMatId=$extHazMatId, itemName=$itemName, netExpWt=$netExpWt, offIcao=$offIcao, offItin=$offItin, onIcao=$onIcao, onItin=$onItin, pieces=$pieces, planned=$planned, unNum=$unNum, weight=$weight, additionalProperties=$additionalProperties}"
+        override fun toString() = "HazMat{applicableNotes=$applicableNotes, cgc=$cgc, cgn=$cgn, classDiv=$classDiv, extHazMatId=$extHazMatId, itemName=$itemName, netExpWt=$netExpWt, offIcao=$offIcao, offItin=$offItin, onIcao=$onIcao, onItin=$onItin, pieces=$pieces, planned=$planned, unNum=$unNum, weight=$weight, additionalProperties=$additionalProperties}"
     }
 
     /** Collection of Remarks associated with this Air Transport Mission. */
-    class Remark
-    private constructor(
+    class Remark private constructor(
         private val date: JsonField<OffsetDateTime>,
         private val gdssRemarkId: JsonField<String>,
         private val itineraryNum: JsonField<Int>,
@@ -2886,69 +2760,66 @@ private constructor(
         private val type: JsonField<String>,
         private val user: JsonField<String>,
         private val additionalProperties: MutableMap<String, JsonValue>,
+
     ) {
 
         @JsonCreator
         private constructor(
-            @JsonProperty("date")
-            @ExcludeMissing
-            date: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("gdssRemarkId")
-            @ExcludeMissing
-            gdssRemarkId: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("itineraryNum")
-            @ExcludeMissing
-            itineraryNum: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("date") @ExcludeMissing date: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("gdssRemarkId") @ExcludeMissing gdssRemarkId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("itineraryNum") @ExcludeMissing itineraryNum: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("text") @ExcludeMissing text: JsonField<String> = JsonMissing.of(),
             @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("user") @ExcludeMissing user: JsonField<String> = JsonMissing.of(),
-        ) : this(date, gdssRemarkId, itineraryNum, text, type, user, mutableMapOf())
+            @JsonProperty("user") @ExcludeMissing user: JsonField<String> = JsonMissing.of()
+        ) : this(
+          date,
+          gdssRemarkId,
+          itineraryNum,
+          text,
+          type,
+          user,
+          mutableMapOf(),
+        )
 
         /**
          * Date the remark was published, in ISO 8601 UTC format, with millisecond precision.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun date(): Optional<OffsetDateTime> = date.getOptional("date")
 
         /**
          * Global Decision Support System (GDSS) remark identifier.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun gdssRemarkId(): Optional<String> = gdssRemarkId.getOptional("gdssRemarkId")
 
         /**
          * If the remark is sortie specific, this is the number of the sortie it applies to.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun itineraryNum(): Optional<Int> = itineraryNum.getOptional("itineraryNum")
 
         /**
          * Text of the remark.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun text(): Optional<String> = text.getOptional("text")
 
         /**
          * Remark type.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun type(): Optional<String> = type.getOptional("type")
 
         /**
          * User who published the remark.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun user(): Optional<String> = user.getOptional("user")
 
@@ -2957,13 +2828,14 @@ private constructor(
          *
          * Unlike [date], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("date") @ExcludeMissing fun _date(): JsonField<OffsetDateTime> = date
+        @JsonProperty("date")
+        @ExcludeMissing
+        fun _date(): JsonField<OffsetDateTime> = date
 
         /**
          * Returns the raw JSON value of [gdssRemarkId].
          *
-         * Unlike [gdssRemarkId], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [gdssRemarkId], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("gdssRemarkId")
         @ExcludeMissing
@@ -2972,8 +2844,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [itineraryNum].
          *
-         * Unlike [itineraryNum], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [itineraryNum], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("itineraryNum")
         @ExcludeMissing
@@ -2984,38 +2855,44 @@ private constructor(
          *
          * Unlike [text], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("text") @ExcludeMissing fun _text(): JsonField<String> = text
+        @JsonProperty("text")
+        @ExcludeMissing
+        fun _text(): JsonField<String> = text
 
         /**
          * Returns the raw JSON value of [type].
          *
          * Unlike [type], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("type") @ExcludeMissing fun _type(): JsonField<String> = type
+        @JsonProperty("type")
+        @ExcludeMissing
+        fun _type(): JsonField<String> = type
 
         /**
          * Returns the raw JSON value of [user].
          *
          * Unlike [user], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("user") @ExcludeMissing fun _user(): JsonField<String> = user
+        @JsonProperty("user")
+        @ExcludeMissing
+        fun _user(): JsonField<String> = user
 
         @JsonAnySetter
         private fun putAdditionalProperty(key: String, value: JsonValue) {
-            additionalProperties.put(key, value)
+          additionalProperties.put(key, value)
         }
 
         @JsonAnyGetter
         @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> =
-            Collections.unmodifiableMap(additionalProperties)
+        fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
 
         fun toBuilder() = Builder().from(this)
 
         companion object {
 
             /** Returns a mutable builder for constructing an instance of [Remark]. */
-            @JvmStatic fun builder() = Builder()
+            @JvmStatic
+            fun builder() = Builder()
         }
 
         /** A builder for [Remark]. */
@@ -3030,29 +2907,30 @@ private constructor(
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
-            internal fun from(remark: Remark) = apply {
-                date = remark.date
-                gdssRemarkId = remark.gdssRemarkId
-                itineraryNum = remark.itineraryNum
-                text = remark.text
-                type = remark.type
-                user = remark.user
-                additionalProperties = remark.additionalProperties.toMutableMap()
-            }
+            internal fun from(remark: Remark) =
+                apply {
+                    date = remark.date
+                    gdssRemarkId = remark.gdssRemarkId
+                    itineraryNum = remark.itineraryNum
+                    text = remark.text
+                    type = remark.type
+                    user = remark.user
+                    additionalProperties = remark.additionalProperties.toMutableMap()
+                }
 
-            /**
-             * Date the remark was published, in ISO 8601 UTC format, with millisecond precision.
-             */
+            /** Date the remark was published, in ISO 8601 UTC format, with millisecond precision. */
             fun date(date: OffsetDateTime) = date(JsonField.of(date))
 
             /**
              * Sets [Builder.date] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.date] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.date] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun date(date: JsonField<OffsetDateTime>) = apply { this.date = date }
+            fun date(date: JsonField<OffsetDateTime>) =
+                apply {
+                    this.date = date
+                }
 
             /** Global Decision Support System (GDSS) remark identifier. */
             fun gdssRemarkId(gdssRemarkId: String) = gdssRemarkId(JsonField.of(gdssRemarkId))
@@ -3060,13 +2938,13 @@ private constructor(
             /**
              * Sets [Builder.gdssRemarkId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.gdssRemarkId] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.gdssRemarkId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun gdssRemarkId(gdssRemarkId: JsonField<String>) = apply {
-                this.gdssRemarkId = gdssRemarkId
-            }
+            fun gdssRemarkId(gdssRemarkId: JsonField<String>) =
+                apply {
+                    this.gdssRemarkId = gdssRemarkId
+                }
 
             /** If the remark is sortie specific, this is the number of the sortie it applies to. */
             fun itineraryNum(itineraryNum: Int) = itineraryNum(JsonField.of(itineraryNum))
@@ -3074,13 +2952,13 @@ private constructor(
             /**
              * Sets [Builder.itineraryNum] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.itineraryNum] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.itineraryNum] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun itineraryNum(itineraryNum: JsonField<Int>) = apply {
-                this.itineraryNum = itineraryNum
-            }
+            fun itineraryNum(itineraryNum: JsonField<Int>) =
+                apply {
+                    this.itineraryNum = itineraryNum
+                }
 
             /** Text of the remark. */
             fun text(text: String) = text(JsonField.of(text))
@@ -3088,11 +2966,13 @@ private constructor(
             /**
              * Sets [Builder.text] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.text] with a well-typed [String] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.text] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun text(text: JsonField<String>) = apply { this.text = text }
+            fun text(text: JsonField<String>) =
+                apply {
+                    this.text = text
+                }
 
             /** Remark type. */
             fun type(type: String) = type(JsonField.of(type))
@@ -3100,11 +2980,13 @@ private constructor(
             /**
              * Sets [Builder.type] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.type] with a well-typed [String] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.type] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun type(type: JsonField<String>) = apply { this.type = type }
+            fun type(type: JsonField<String>) =
+                apply {
+                    this.type = type
+                }
 
             /** User who published the remark. */
             fun user(user: String) = user(JsonField.of(user))
@@ -3112,30 +2994,39 @@ private constructor(
             /**
              * Sets [Builder.user] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.user] with a well-typed [String] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.user] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun user(user: JsonField<String>) = apply { this.user = user }
+            fun user(user: JsonField<String>) =
+                apply {
+                    this.user = user
+                }
 
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
+                apply {
+                    this.additionalProperties.clear()
+                    putAllAdditionalProperties(additionalProperties)
+                }
 
-            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-                additionalProperties.put(key, value)
-            }
+            fun putAdditionalProperty(key: String, value: JsonValue) =
+                apply {
+                    additionalProperties.put(key, value)
+                }
 
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
+                apply {
+                    this.additionalProperties.putAll(additionalProperties)
+                }
 
-            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+            fun removeAdditionalProperty(key: String) =
+                apply {
+                    additionalProperties.remove(key)
+                }
 
-            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
+            fun removeAllAdditionalProperties(keys: Set<String>) =
+                apply {
+                    keys.forEach(::removeAdditionalProperty)
+                }
 
             /**
              * Returns an immutable instance of [Remark].
@@ -3144,31 +3035,32 @@ private constructor(
              */
             fun build(): Remark =
                 Remark(
-                    date,
-                    gdssRemarkId,
-                    itineraryNum,
-                    text,
-                    type,
-                    user,
-                    additionalProperties.toMutableMap(),
+                  date,
+                  gdssRemarkId,
+                  itineraryNum,
+                  text,
+                  type,
+                  user,
+                  additionalProperties.toMutableMap(),
                 )
         }
 
         private var validated: Boolean = false
 
-        fun validate(): Remark = apply {
-            if (validated) {
-                return@apply
-            }
+        fun validate(): Remark =
+            apply {
+                if (validated) {
+                  return@apply
+                }
 
-            date()
-            gdssRemarkId()
-            itineraryNum()
-            text()
-            type()
-            user()
-            validated = true
-        }
+                date()
+                gdssRemarkId()
+                itineraryNum()
+                text()
+                type()
+                user()
+                validated = true
+            }
 
         fun isValid(): Boolean =
             try {
@@ -3179,26 +3071,19 @@ private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
+         * Returns a score indicating how many valid values are contained in this object recursively.
          *
          * Used for best match union deserialization.
          */
         @JvmSynthetic
-        internal fun validity(): Int =
-            (if (date.asKnown().isPresent) 1 else 0) +
-                (if (gdssRemarkId.asKnown().isPresent) 1 else 0) +
-                (if (itineraryNum.asKnown().isPresent) 1 else 0) +
-                (if (text.asKnown().isPresent) 1 else 0) +
-                (if (type.asKnown().isPresent) 1 else 0) +
-                (if (user.asKnown().isPresent) 1 else 0)
+        internal fun validity(): Int = (if (date.asKnown().isPresent) 1 else 0) + (if (gdssRemarkId.asKnown().isPresent) 1 else 0) + (if (itineraryNum.asKnown().isPresent) 1 else 0) + (if (text.asKnown().isPresent) 1 else 0) + (if (type.asKnown().isPresent) 1 else 0) + (if (user.asKnown().isPresent) 1 else 0)
 
         override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
+          if (this === other) {
+              return true
+          }
 
-            return /* spotless:off */ other is Remark && date == other.date && gdssRemarkId == other.gdssRemarkId && itineraryNum == other.itineraryNum && text == other.text && type == other.type && user == other.user && additionalProperties == other.additionalProperties /* spotless:on */
+          return /* spotless:off */ other is Remark && date == other.date && gdssRemarkId == other.gdssRemarkId && itineraryNum == other.itineraryNum && text == other.text && type == other.type && user == other.user && additionalProperties == other.additionalProperties /* spotless:on */
         }
 
         /* spotless:off */
@@ -3207,13 +3092,11 @@ private constructor(
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() =
-            "Remark{date=$date, gdssRemarkId=$gdssRemarkId, itineraryNum=$itineraryNum, text=$text, type=$type, user=$user, additionalProperties=$additionalProperties}"
+        override fun toString() = "Remark{date=$date, gdssRemarkId=$gdssRemarkId, itineraryNum=$itineraryNum, text=$text, type=$type, user=$user, additionalProperties=$additionalProperties}"
     }
 
     /** Collection of Requirements planned to be associated with this Air Transport Mission. */
-    class Requirement
-    private constructor(
+    class Requirement private constructor(
         private val bulkWeight: JsonField<Double>,
         private val ead: JsonField<OffsetDateTime>,
         private val gdssReqId: JsonField<String>,
@@ -3233,213 +3116,174 @@ private constructor(
         private val transReqNum: JsonField<String>,
         private val uln: JsonField<String>,
         private val additionalProperties: MutableMap<String, JsonValue>,
+
     ) {
 
         @JsonCreator
         private constructor(
-            @JsonProperty("bulkWeight")
-            @ExcludeMissing
-            bulkWeight: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("bulkWeight") @ExcludeMissing bulkWeight: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("ead") @ExcludeMissing ead: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("gdssReqId")
-            @ExcludeMissing
-            gdssReqId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("gdssReqId") @ExcludeMissing gdssReqId: JsonField<String> = JsonMissing.of(),
             @JsonProperty("lad") @ExcludeMissing lad: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("numAmbulatory")
-            @ExcludeMissing
-            numAmbulatory: JsonField<Int> = JsonMissing.of(),
-            @JsonProperty("numAttendant")
-            @ExcludeMissing
-            numAttendant: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numAmbulatory") @ExcludeMissing numAmbulatory: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numAttendant") @ExcludeMissing numAttendant: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("numLitter") @ExcludeMissing numLitter: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("numPax") @ExcludeMissing numPax: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("offloadId") @ExcludeMissing offloadId: JsonField<Int> = JsonMissing.of(),
-            @JsonProperty("offloadLOCode")
-            @ExcludeMissing
-            offloadLoCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("offloadLOCode") @ExcludeMissing offloadLoCode: JsonField<String> = JsonMissing.of(),
             @JsonProperty("onloadId") @ExcludeMissing onloadId: JsonField<Int> = JsonMissing.of(),
-            @JsonProperty("onloadLOCode")
-            @ExcludeMissing
-            onloadLoCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("onloadLOCode") @ExcludeMissing onloadLoCode: JsonField<String> = JsonMissing.of(),
             @JsonProperty("oplan") @ExcludeMissing oplan: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("outsizeWeight")
-            @ExcludeMissing
-            outsizeWeight: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("oversizeWeight")
-            @ExcludeMissing
-            oversizeWeight: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("projName")
-            @ExcludeMissing
-            projName: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("transReqNum")
-            @ExcludeMissing
-            transReqNum: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("uln") @ExcludeMissing uln: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("outsizeWeight") @ExcludeMissing outsizeWeight: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("oversizeWeight") @ExcludeMissing oversizeWeight: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("projName") @ExcludeMissing projName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("transReqNum") @ExcludeMissing transReqNum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("uln") @ExcludeMissing uln: JsonField<String> = JsonMissing.of()
         ) : this(
-            bulkWeight,
-            ead,
-            gdssReqId,
-            lad,
-            numAmbulatory,
-            numAttendant,
-            numLitter,
-            numPax,
-            offloadId,
-            offloadLoCode,
-            onloadId,
-            onloadLoCode,
-            oplan,
-            outsizeWeight,
-            oversizeWeight,
-            projName,
-            transReqNum,
-            uln,
-            mutableMapOf(),
+          bulkWeight,
+          ead,
+          gdssReqId,
+          lad,
+          numAmbulatory,
+          numAttendant,
+          numLitter,
+          numPax,
+          offloadId,
+          offloadLoCode,
+          onloadId,
+          onloadLoCode,
+          oplan,
+          outsizeWeight,
+          oversizeWeight,
+          projName,
+          transReqNum,
+          uln,
+          mutableMapOf(),
         )
 
         /**
          * Total weight of the bulk cargo, in kilograms.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun bulkWeight(): Optional<Double> = bulkWeight.getOptional("bulkWeight")
 
         /**
-         * Earliest available date the cargo can be picked up, in ISO 8601 UTC format with
-         * millisecond precision.
+         * Earliest available date the cargo can be picked up, in ISO 8601 UTC format with millisecond precision.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun ead(): Optional<OffsetDateTime> = ead.getOptional("ead")
 
         /**
          * Global Decision Support System (GDSS) mission requirement identifier.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun gdssReqId(): Optional<String> = gdssReqId.getOptional("gdssReqId")
 
         /**
-         * Latest available date the cargo may be delivered, in ISO 8601 UTC format with millisecond
-         * precision.
+         * Latest available date the cargo may be delivered, in ISO 8601 UTC format with millisecond precision.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun lad(): Optional<OffsetDateTime> = lad.getOptional("lad")
 
         /**
          * Number of ambulatory patients tasked for the mission.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numAmbulatory(): Optional<Int> = numAmbulatory.getOptional("numAmbulatory")
 
         /**
          * Number of attendants tasked for the mission.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numAttendant(): Optional<Int> = numAttendant.getOptional("numAttendant")
 
         /**
          * Number of litter patients tasked for the mission.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numLitter(): Optional<Int> = numLitter.getOptional("numLitter")
 
         /**
          * Number of passengers associated with the mission.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numPax(): Optional<Int> = numPax.getOptional("numPax")
 
         /**
          * Identifier of the offload itinerary location.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun offloadId(): Optional<Int> = offloadId.getOptional("offloadId")
 
         /**
          * Offload location code.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun offloadLoCode(): Optional<String> = offloadLoCode.getOptional("offloadLOCode")
 
         /**
          * Identifier of the onload itinerary location.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun onloadId(): Optional<Int> = onloadId.getOptional("onloadId")
 
         /**
          * Onload location code.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun onloadLoCode(): Optional<String> = onloadLoCode.getOptional("onloadLOCode")
 
         /**
          * Identification number of the Operation Plan (OPLAN) associated with this mission.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun oplan(): Optional<String> = oplan.getOptional("oplan")
 
         /**
          * Total weight of the outsize cargo, in kilograms.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun outsizeWeight(): Optional<Double> = outsizeWeight.getOptional("outsizeWeight")
 
         /**
          * Total weight of the oversized cargo, in kilograms.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun oversizeWeight(): Optional<Double> = oversizeWeight.getOptional("oversizeWeight")
 
         /**
          * Project name.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun projName(): Optional<String> = projName.getOptional("projName")
 
         /**
          * Transportation requirement number.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun transReqNum(): Optional<String> = transReqNum.getOptional("transReqNum")
 
         /**
          * Unit line number.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun uln(): Optional<String> = uln.getOptional("uln")
 
@@ -3457,27 +3301,32 @@ private constructor(
          *
          * Unlike [ead], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("ead") @ExcludeMissing fun _ead(): JsonField<OffsetDateTime> = ead
+        @JsonProperty("ead")
+        @ExcludeMissing
+        fun _ead(): JsonField<OffsetDateTime> = ead
 
         /**
          * Returns the raw JSON value of [gdssReqId].
          *
          * Unlike [gdssReqId], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("gdssReqId") @ExcludeMissing fun _gdssReqId(): JsonField<String> = gdssReqId
+        @JsonProperty("gdssReqId")
+        @ExcludeMissing
+        fun _gdssReqId(): JsonField<String> = gdssReqId
 
         /**
          * Returns the raw JSON value of [lad].
          *
          * Unlike [lad], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("lad") @ExcludeMissing fun _lad(): JsonField<OffsetDateTime> = lad
+        @JsonProperty("lad")
+        @ExcludeMissing
+        fun _lad(): JsonField<OffsetDateTime> = lad
 
         /**
          * Returns the raw JSON value of [numAmbulatory].
          *
-         * Unlike [numAmbulatory], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [numAmbulatory], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("numAmbulatory")
         @ExcludeMissing
@@ -3486,8 +3335,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [numAttendant].
          *
-         * Unlike [numAttendant], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [numAttendant], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("numAttendant")
         @ExcludeMissing
@@ -3498,27 +3346,32 @@ private constructor(
          *
          * Unlike [numLitter], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("numLitter") @ExcludeMissing fun _numLitter(): JsonField<Int> = numLitter
+        @JsonProperty("numLitter")
+        @ExcludeMissing
+        fun _numLitter(): JsonField<Int> = numLitter
 
         /**
          * Returns the raw JSON value of [numPax].
          *
          * Unlike [numPax], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("numPax") @ExcludeMissing fun _numPax(): JsonField<Int> = numPax
+        @JsonProperty("numPax")
+        @ExcludeMissing
+        fun _numPax(): JsonField<Int> = numPax
 
         /**
          * Returns the raw JSON value of [offloadId].
          *
          * Unlike [offloadId], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("offloadId") @ExcludeMissing fun _offloadId(): JsonField<Int> = offloadId
+        @JsonProperty("offloadId")
+        @ExcludeMissing
+        fun _offloadId(): JsonField<Int> = offloadId
 
         /**
          * Returns the raw JSON value of [offloadLoCode].
          *
-         * Unlike [offloadLoCode], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [offloadLoCode], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("offloadLOCode")
         @ExcludeMissing
@@ -3529,13 +3382,14 @@ private constructor(
          *
          * Unlike [onloadId], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("onloadId") @ExcludeMissing fun _onloadId(): JsonField<Int> = onloadId
+        @JsonProperty("onloadId")
+        @ExcludeMissing
+        fun _onloadId(): JsonField<Int> = onloadId
 
         /**
          * Returns the raw JSON value of [onloadLoCode].
          *
-         * Unlike [onloadLoCode], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [onloadLoCode], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("onloadLOCode")
         @ExcludeMissing
@@ -3546,13 +3400,14 @@ private constructor(
          *
          * Unlike [oplan], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("oplan") @ExcludeMissing fun _oplan(): JsonField<String> = oplan
+        @JsonProperty("oplan")
+        @ExcludeMissing
+        fun _oplan(): JsonField<String> = oplan
 
         /**
          * Returns the raw JSON value of [outsizeWeight].
          *
-         * Unlike [outsizeWeight], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [outsizeWeight], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("outsizeWeight")
         @ExcludeMissing
@@ -3561,8 +3416,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [oversizeWeight].
          *
-         * Unlike [oversizeWeight], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [oversizeWeight], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("oversizeWeight")
         @ExcludeMissing
@@ -3573,7 +3427,9 @@ private constructor(
          *
          * Unlike [projName], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("projName") @ExcludeMissing fun _projName(): JsonField<String> = projName
+        @JsonProperty("projName")
+        @ExcludeMissing
+        fun _projName(): JsonField<String> = projName
 
         /**
          * Returns the raw JSON value of [transReqNum].
@@ -3589,24 +3445,26 @@ private constructor(
          *
          * Unlike [uln], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("uln") @ExcludeMissing fun _uln(): JsonField<String> = uln
+        @JsonProperty("uln")
+        @ExcludeMissing
+        fun _uln(): JsonField<String> = uln
 
         @JsonAnySetter
         private fun putAdditionalProperty(key: String, value: JsonValue) {
-            additionalProperties.put(key, value)
+          additionalProperties.put(key, value)
         }
 
         @JsonAnyGetter
         @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> =
-            Collections.unmodifiableMap(additionalProperties)
+        fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
 
         fun toBuilder() = Builder().from(this)
 
         companion object {
 
             /** Returns a mutable builder for constructing an instance of [Requirement]. */
-            @JvmStatic fun builder() = Builder()
+            @JvmStatic
+            fun builder() = Builder()
         }
 
         /** A builder for [Requirement]. */
@@ -3633,27 +3491,28 @@ private constructor(
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
-            internal fun from(requirement: Requirement) = apply {
-                bulkWeight = requirement.bulkWeight
-                ead = requirement.ead
-                gdssReqId = requirement.gdssReqId
-                lad = requirement.lad
-                numAmbulatory = requirement.numAmbulatory
-                numAttendant = requirement.numAttendant
-                numLitter = requirement.numLitter
-                numPax = requirement.numPax
-                offloadId = requirement.offloadId
-                offloadLoCode = requirement.offloadLoCode
-                onloadId = requirement.onloadId
-                onloadLoCode = requirement.onloadLoCode
-                oplan = requirement.oplan
-                outsizeWeight = requirement.outsizeWeight
-                oversizeWeight = requirement.oversizeWeight
-                projName = requirement.projName
-                transReqNum = requirement.transReqNum
-                uln = requirement.uln
-                additionalProperties = requirement.additionalProperties.toMutableMap()
-            }
+            internal fun from(requirement: Requirement) =
+                apply {
+                    bulkWeight = requirement.bulkWeight
+                    ead = requirement.ead
+                    gdssReqId = requirement.gdssReqId
+                    lad = requirement.lad
+                    numAmbulatory = requirement.numAmbulatory
+                    numAttendant = requirement.numAttendant
+                    numLitter = requirement.numLitter
+                    numPax = requirement.numPax
+                    offloadId = requirement.offloadId
+                    offloadLoCode = requirement.offloadLoCode
+                    onloadId = requirement.onloadId
+                    onloadLoCode = requirement.onloadLoCode
+                    oplan = requirement.oplan
+                    outsizeWeight = requirement.outsizeWeight
+                    oversizeWeight = requirement.oversizeWeight
+                    projName = requirement.projName
+                    transReqNum = requirement.transReqNum
+                    uln = requirement.uln
+                    additionalProperties = requirement.additionalProperties.toMutableMap()
+                }
 
             /** Total weight of the bulk cargo, in kilograms. */
             fun bulkWeight(bulkWeight: Double) = bulkWeight(JsonField.of(bulkWeight))
@@ -3661,26 +3520,27 @@ private constructor(
             /**
              * Sets [Builder.bulkWeight] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.bulkWeight] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.bulkWeight] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun bulkWeight(bulkWeight: JsonField<Double>) = apply { this.bulkWeight = bulkWeight }
+            fun bulkWeight(bulkWeight: JsonField<Double>) =
+                apply {
+                    this.bulkWeight = bulkWeight
+                }
 
-            /**
-             * Earliest available date the cargo can be picked up, in ISO 8601 UTC format with
-             * millisecond precision.
-             */
+            /** Earliest available date the cargo can be picked up, in ISO 8601 UTC format with millisecond precision. */
             fun ead(ead: OffsetDateTime) = ead(JsonField.of(ead))
 
             /**
              * Sets [Builder.ead] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.ead] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.ead] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun ead(ead: JsonField<OffsetDateTime>) = apply { this.ead = ead }
+            fun ead(ead: JsonField<OffsetDateTime>) =
+                apply {
+                    this.ead = ead
+                }
 
             /** Global Decision Support System (GDSS) mission requirement identifier. */
             fun gdssReqId(gdssReqId: String) = gdssReqId(JsonField.of(gdssReqId))
@@ -3688,26 +3548,27 @@ private constructor(
             /**
              * Sets [Builder.gdssReqId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.gdssReqId] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.gdssReqId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun gdssReqId(gdssReqId: JsonField<String>) = apply { this.gdssReqId = gdssReqId }
+            fun gdssReqId(gdssReqId: JsonField<String>) =
+                apply {
+                    this.gdssReqId = gdssReqId
+                }
 
-            /**
-             * Latest available date the cargo may be delivered, in ISO 8601 UTC format with
-             * millisecond precision.
-             */
+            /** Latest available date the cargo may be delivered, in ISO 8601 UTC format with millisecond precision. */
             fun lad(lad: OffsetDateTime) = lad(JsonField.of(lad))
 
             /**
              * Sets [Builder.lad] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.lad] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.lad] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun lad(lad: JsonField<OffsetDateTime>) = apply { this.lad = lad }
+            fun lad(lad: JsonField<OffsetDateTime>) =
+                apply {
+                    this.lad = lad
+                }
 
             /** Number of ambulatory patients tasked for the mission. */
             fun numAmbulatory(numAmbulatory: Int) = numAmbulatory(JsonField.of(numAmbulatory))
@@ -3715,13 +3576,13 @@ private constructor(
             /**
              * Sets [Builder.numAmbulatory] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numAmbulatory] with a well-typed [Int] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numAmbulatory] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numAmbulatory(numAmbulatory: JsonField<Int>) = apply {
-                this.numAmbulatory = numAmbulatory
-            }
+            fun numAmbulatory(numAmbulatory: JsonField<Int>) =
+                apply {
+                    this.numAmbulatory = numAmbulatory
+                }
 
             /** Number of attendants tasked for the mission. */
             fun numAttendant(numAttendant: Int) = numAttendant(JsonField.of(numAttendant))
@@ -3729,13 +3590,13 @@ private constructor(
             /**
              * Sets [Builder.numAttendant] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numAttendant] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numAttendant] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numAttendant(numAttendant: JsonField<Int>) = apply {
-                this.numAttendant = numAttendant
-            }
+            fun numAttendant(numAttendant: JsonField<Int>) =
+                apply {
+                    this.numAttendant = numAttendant
+                }
 
             /** Number of litter patients tasked for the mission. */
             fun numLitter(numLitter: Int) = numLitter(JsonField.of(numLitter))
@@ -3743,11 +3604,13 @@ private constructor(
             /**
              * Sets [Builder.numLitter] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numLitter] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numLitter] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numLitter(numLitter: JsonField<Int>) = apply { this.numLitter = numLitter }
+            fun numLitter(numLitter: JsonField<Int>) =
+                apply {
+                    this.numLitter = numLitter
+                }
 
             /** Number of passengers associated with the mission. */
             fun numPax(numPax: Int) = numPax(JsonField.of(numPax))
@@ -3755,11 +3618,13 @@ private constructor(
             /**
              * Sets [Builder.numPax] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numPax] with a well-typed [Int] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.numPax] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun numPax(numPax: JsonField<Int>) = apply { this.numPax = numPax }
+            fun numPax(numPax: JsonField<Int>) =
+                apply {
+                    this.numPax = numPax
+                }
 
             /** Identifier of the offload itinerary location. */
             fun offloadId(offloadId: Int) = offloadId(JsonField.of(offloadId))
@@ -3767,11 +3632,13 @@ private constructor(
             /**
              * Sets [Builder.offloadId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.offloadId] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.offloadId] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun offloadId(offloadId: JsonField<Int>) = apply { this.offloadId = offloadId }
+            fun offloadId(offloadId: JsonField<Int>) =
+                apply {
+                    this.offloadId = offloadId
+                }
 
             /** Offload location code. */
             fun offloadLoCode(offloadLoCode: String) = offloadLoCode(JsonField.of(offloadLoCode))
@@ -3779,13 +3646,13 @@ private constructor(
             /**
              * Sets [Builder.offloadLoCode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.offloadLoCode] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.offloadLoCode] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun offloadLoCode(offloadLoCode: JsonField<String>) = apply {
-                this.offloadLoCode = offloadLoCode
-            }
+            fun offloadLoCode(offloadLoCode: JsonField<String>) =
+                apply {
+                    this.offloadLoCode = offloadLoCode
+                }
 
             /** Identifier of the onload itinerary location. */
             fun onloadId(onloadId: Int) = onloadId(JsonField.of(onloadId))
@@ -3793,11 +3660,13 @@ private constructor(
             /**
              * Sets [Builder.onloadId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.onloadId] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.onloadId] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun onloadId(onloadId: JsonField<Int>) = apply { this.onloadId = onloadId }
+            fun onloadId(onloadId: JsonField<Int>) =
+                apply {
+                    this.onloadId = onloadId
+                }
 
             /** Onload location code. */
             fun onloadLoCode(onloadLoCode: String) = onloadLoCode(JsonField.of(onloadLoCode))
@@ -3805,13 +3674,13 @@ private constructor(
             /**
              * Sets [Builder.onloadLoCode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.onloadLoCode] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.onloadLoCode] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun onloadLoCode(onloadLoCode: JsonField<String>) = apply {
-                this.onloadLoCode = onloadLoCode
-            }
+            fun onloadLoCode(onloadLoCode: JsonField<String>) =
+                apply {
+                    this.onloadLoCode = onloadLoCode
+                }
 
             /** Identification number of the Operation Plan (OPLAN) associated with this mission. */
             fun oplan(oplan: String) = oplan(JsonField.of(oplan))
@@ -3819,11 +3688,13 @@ private constructor(
             /**
              * Sets [Builder.oplan] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.oplan] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.oplan] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun oplan(oplan: JsonField<String>) = apply { this.oplan = oplan }
+            fun oplan(oplan: JsonField<String>) =
+                apply {
+                    this.oplan = oplan
+                }
 
             /** Total weight of the outsize cargo, in kilograms. */
             fun outsizeWeight(outsizeWeight: Double) = outsizeWeight(JsonField.of(outsizeWeight))
@@ -3831,28 +3702,27 @@ private constructor(
             /**
              * Sets [Builder.outsizeWeight] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.outsizeWeight] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.outsizeWeight] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun outsizeWeight(outsizeWeight: JsonField<Double>) = apply {
-                this.outsizeWeight = outsizeWeight
-            }
+            fun outsizeWeight(outsizeWeight: JsonField<Double>) =
+                apply {
+                    this.outsizeWeight = outsizeWeight
+                }
 
             /** Total weight of the oversized cargo, in kilograms. */
-            fun oversizeWeight(oversizeWeight: Double) =
-                oversizeWeight(JsonField.of(oversizeWeight))
+            fun oversizeWeight(oversizeWeight: Double) = oversizeWeight(JsonField.of(oversizeWeight))
 
             /**
              * Sets [Builder.oversizeWeight] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.oversizeWeight] with a well-typed [Double] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.oversizeWeight] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun oversizeWeight(oversizeWeight: JsonField<Double>) = apply {
-                this.oversizeWeight = oversizeWeight
-            }
+            fun oversizeWeight(oversizeWeight: JsonField<Double>) =
+                apply {
+                    this.oversizeWeight = oversizeWeight
+                }
 
             /** Project name. */
             fun projName(projName: String) = projName(JsonField.of(projName))
@@ -3860,11 +3730,13 @@ private constructor(
             /**
              * Sets [Builder.projName] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.projName] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.projName] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun projName(projName: JsonField<String>) = apply { this.projName = projName }
+            fun projName(projName: JsonField<String>) =
+                apply {
+                    this.projName = projName
+                }
 
             /** Transportation requirement number. */
             fun transReqNum(transReqNum: String) = transReqNum(JsonField.of(transReqNum))
@@ -3872,13 +3744,13 @@ private constructor(
             /**
              * Sets [Builder.transReqNum] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.transReqNum] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.transReqNum] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun transReqNum(transReqNum: JsonField<String>) = apply {
-                this.transReqNum = transReqNum
-            }
+            fun transReqNum(transReqNum: JsonField<String>) =
+                apply {
+                    this.transReqNum = transReqNum
+                }
 
             /** Unit line number. */
             fun uln(uln: String) = uln(JsonField.of(uln))
@@ -3886,30 +3758,39 @@ private constructor(
             /**
              * Sets [Builder.uln] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.uln] with a well-typed [String] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.uln] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun uln(uln: JsonField<String>) = apply { this.uln = uln }
+            fun uln(uln: JsonField<String>) =
+                apply {
+                    this.uln = uln
+                }
 
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
+                apply {
+                    this.additionalProperties.clear()
+                    putAllAdditionalProperties(additionalProperties)
+                }
 
-            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-                additionalProperties.put(key, value)
-            }
+            fun putAdditionalProperty(key: String, value: JsonValue) =
+                apply {
+                    additionalProperties.put(key, value)
+                }
 
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
+                apply {
+                    this.additionalProperties.putAll(additionalProperties)
+                }
 
-            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+            fun removeAdditionalProperty(key: String) =
+                apply {
+                    additionalProperties.remove(key)
+                }
 
-            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
+            fun removeAllAdditionalProperties(keys: Set<String>) =
+                apply {
+                    keys.forEach(::removeAdditionalProperty)
+                }
 
             /**
              * Returns an immutable instance of [Requirement].
@@ -3918,55 +3799,56 @@ private constructor(
              */
             fun build(): Requirement =
                 Requirement(
-                    bulkWeight,
-                    ead,
-                    gdssReqId,
-                    lad,
-                    numAmbulatory,
-                    numAttendant,
-                    numLitter,
-                    numPax,
-                    offloadId,
-                    offloadLoCode,
-                    onloadId,
-                    onloadLoCode,
-                    oplan,
-                    outsizeWeight,
-                    oversizeWeight,
-                    projName,
-                    transReqNum,
-                    uln,
-                    additionalProperties.toMutableMap(),
+                  bulkWeight,
+                  ead,
+                  gdssReqId,
+                  lad,
+                  numAmbulatory,
+                  numAttendant,
+                  numLitter,
+                  numPax,
+                  offloadId,
+                  offloadLoCode,
+                  onloadId,
+                  onloadLoCode,
+                  oplan,
+                  outsizeWeight,
+                  oversizeWeight,
+                  projName,
+                  transReqNum,
+                  uln,
+                  additionalProperties.toMutableMap(),
                 )
         }
 
         private var validated: Boolean = false
 
-        fun validate(): Requirement = apply {
-            if (validated) {
-                return@apply
-            }
+        fun validate(): Requirement =
+            apply {
+                if (validated) {
+                  return@apply
+                }
 
-            bulkWeight()
-            ead()
-            gdssReqId()
-            lad()
-            numAmbulatory()
-            numAttendant()
-            numLitter()
-            numPax()
-            offloadId()
-            offloadLoCode()
-            onloadId()
-            onloadLoCode()
-            oplan()
-            outsizeWeight()
-            oversizeWeight()
-            projName()
-            transReqNum()
-            uln()
-            validated = true
-        }
+                bulkWeight()
+                ead()
+                gdssReqId()
+                lad()
+                numAmbulatory()
+                numAttendant()
+                numLitter()
+                numPax()
+                offloadId()
+                offloadLoCode()
+                onloadId()
+                onloadLoCode()
+                oplan()
+                outsizeWeight()
+                oversizeWeight()
+                projName()
+                transReqNum()
+                uln()
+                validated = true
+            }
 
         fun isValid(): Boolean =
             try {
@@ -3977,38 +3859,19 @@ private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
+         * Returns a score indicating how many valid values are contained in this object recursively.
          *
          * Used for best match union deserialization.
          */
         @JvmSynthetic
-        internal fun validity(): Int =
-            (if (bulkWeight.asKnown().isPresent) 1 else 0) +
-                (if (ead.asKnown().isPresent) 1 else 0) +
-                (if (gdssReqId.asKnown().isPresent) 1 else 0) +
-                (if (lad.asKnown().isPresent) 1 else 0) +
-                (if (numAmbulatory.asKnown().isPresent) 1 else 0) +
-                (if (numAttendant.asKnown().isPresent) 1 else 0) +
-                (if (numLitter.asKnown().isPresent) 1 else 0) +
-                (if (numPax.asKnown().isPresent) 1 else 0) +
-                (if (offloadId.asKnown().isPresent) 1 else 0) +
-                (if (offloadLoCode.asKnown().isPresent) 1 else 0) +
-                (if (onloadId.asKnown().isPresent) 1 else 0) +
-                (if (onloadLoCode.asKnown().isPresent) 1 else 0) +
-                (if (oplan.asKnown().isPresent) 1 else 0) +
-                (if (outsizeWeight.asKnown().isPresent) 1 else 0) +
-                (if (oversizeWeight.asKnown().isPresent) 1 else 0) +
-                (if (projName.asKnown().isPresent) 1 else 0) +
-                (if (transReqNum.asKnown().isPresent) 1 else 0) +
-                (if (uln.asKnown().isPresent) 1 else 0)
+        internal fun validity(): Int = (if (bulkWeight.asKnown().isPresent) 1 else 0) + (if (ead.asKnown().isPresent) 1 else 0) + (if (gdssReqId.asKnown().isPresent) 1 else 0) + (if (lad.asKnown().isPresent) 1 else 0) + (if (numAmbulatory.asKnown().isPresent) 1 else 0) + (if (numAttendant.asKnown().isPresent) 1 else 0) + (if (numLitter.asKnown().isPresent) 1 else 0) + (if (numPax.asKnown().isPresent) 1 else 0) + (if (offloadId.asKnown().isPresent) 1 else 0) + (if (offloadLoCode.asKnown().isPresent) 1 else 0) + (if (onloadId.asKnown().isPresent) 1 else 0) + (if (onloadLoCode.asKnown().isPresent) 1 else 0) + (if (oplan.asKnown().isPresent) 1 else 0) + (if (outsizeWeight.asKnown().isPresent) 1 else 0) + (if (oversizeWeight.asKnown().isPresent) 1 else 0) + (if (projName.asKnown().isPresent) 1 else 0) + (if (transReqNum.asKnown().isPresent) 1 else 0) + (if (uln.asKnown().isPresent) 1 else 0)
 
         override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
+          if (this === other) {
+              return true
+          }
 
-            return /* spotless:off */ other is Requirement && bulkWeight == other.bulkWeight && ead == other.ead && gdssReqId == other.gdssReqId && lad == other.lad && numAmbulatory == other.numAmbulatory && numAttendant == other.numAttendant && numLitter == other.numLitter && numPax == other.numPax && offloadId == other.offloadId && offloadLoCode == other.offloadLoCode && onloadId == other.onloadId && onloadLoCode == other.onloadLoCode && oplan == other.oplan && outsizeWeight == other.outsizeWeight && oversizeWeight == other.oversizeWeight && projName == other.projName && transReqNum == other.transReqNum && uln == other.uln && additionalProperties == other.additionalProperties /* spotless:on */
+          return /* spotless:off */ other is Requirement && bulkWeight == other.bulkWeight && ead == other.ead && gdssReqId == other.gdssReqId && lad == other.lad && numAmbulatory == other.numAmbulatory && numAttendant == other.numAttendant && numLitter == other.numLitter && numPax == other.numPax && offloadId == other.offloadId && offloadLoCode == other.offloadLoCode && onloadId == other.onloadId && onloadLoCode == other.onloadLoCode && oplan == other.oplan && outsizeWeight == other.outsizeWeight && oversizeWeight == other.oversizeWeight && projName == other.projName && transReqNum == other.transReqNum && uln == other.uln && additionalProperties == other.additionalProperties /* spotless:on */
         }
 
         /* spotless:off */
@@ -4017,16 +3880,15 @@ private constructor(
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() =
-            "Requirement{bulkWeight=$bulkWeight, ead=$ead, gdssReqId=$gdssReqId, lad=$lad, numAmbulatory=$numAmbulatory, numAttendant=$numAttendant, numLitter=$numLitter, numPax=$numPax, offloadId=$offloadId, offloadLoCode=$offloadLoCode, onloadId=$onloadId, onloadLoCode=$onloadLoCode, oplan=$oplan, outsizeWeight=$outsizeWeight, oversizeWeight=$oversizeWeight, projName=$projName, transReqNum=$transReqNum, uln=$uln, additionalProperties=$additionalProperties}"
+        override fun toString() = "Requirement{bulkWeight=$bulkWeight, ead=$ead, gdssReqId=$gdssReqId, lad=$lad, numAmbulatory=$numAmbulatory, numAttendant=$numAttendant, numLitter=$numLitter, numPax=$numPax, offloadId=$offloadId, offloadLoCode=$offloadLoCode, onloadId=$onloadId, onloadLoCode=$onloadLoCode, oplan=$oplan, outsizeWeight=$outsizeWeight, oversizeWeight=$oversizeWeight, projName=$projName, transReqNum=$transReqNum, uln=$uln, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is AirTransportMissionFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && abp == other.abp && aircraftSorties == other.aircraftSorties && alias == other.alias && allocatedUnit == other.allocatedUnit && amcMissionId == other.amcMissionId && apacsId == other.apacsId && atoCallSign == other.atoCallSign && atoMissionId == other.atoMissionId && callSign == other.callSign && createdAt == other.createdAt && createdBy == other.createdBy && cw == other.cw && dipWorksheetName == other.dipWorksheetName && firstPickUp == other.firstPickUp && gdssMissionId == other.gdssMissionId && hazMat == other.hazMat && jcsPriority == other.jcsPriority && lastDropOff == other.lastDropOff && loadCategoryType == other.loadCategoryType && m1 == other.m1 && m2 == other.m2 && m3a == other.m3a && naf == other.naf && nextAmcMissionId == other.nextAmcMissionId && nextMissionId == other.nextMissionId && node == other.node && objective == other.objective && operation == other.operation && origin == other.origin && origMissionId == other.origMissionId && origNetwork == other.origNetwork && prevAmcMissionId == other.prevAmcMissionId && prevMissionId == other.prevMissionId && purpose == other.purpose && remarks == other.remarks && requirements == other.requirements && sourceDl == other.sourceDl && sourceSysDeviation == other.sourceSysDeviation && state == other.state && type == other.type && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+      return /* spotless:off */ other is AirTransportMissionFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && abp == other.abp && aircraftSorties == other.aircraftSorties && alias == other.alias && allocatedUnit == other.allocatedUnit && amcMissionId == other.amcMissionId && apacsId == other.apacsId && atoCallSign == other.atoCallSign && atoMissionId == other.atoMissionId && callSign == other.callSign && createdAt == other.createdAt && createdBy == other.createdBy && cw == other.cw && dipWorksheetName == other.dipWorksheetName && firstPickUp == other.firstPickUp && gdssMissionId == other.gdssMissionId && hazMat == other.hazMat && jcsPriority == other.jcsPriority && lastDropOff == other.lastDropOff && loadCategoryType == other.loadCategoryType && m1 == other.m1 && m2 == other.m2 && m3a == other.m3a && naf == other.naf && nextAmcMissionId == other.nextAmcMissionId && nextMissionId == other.nextMissionId && node == other.node && objective == other.objective && operation == other.operation && origin == other.origin && origMissionId == other.origMissionId && origNetwork == other.origNetwork && prevAmcMissionId == other.prevAmcMissionId && prevMissionId == other.prevMissionId && purpose == other.purpose && remarks == other.remarks && requirements == other.requirements && sourceDl == other.sourceDl && sourceSysDeviation == other.sourceSysDeviation && state == other.state && type == other.type && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
     }
 
     /* spotless:off */
@@ -4035,6 +3897,5 @@ private constructor(
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() =
-        "AirTransportMissionFull{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, abp=$abp, aircraftSorties=$aircraftSorties, alias=$alias, allocatedUnit=$allocatedUnit, amcMissionId=$amcMissionId, apacsId=$apacsId, atoCallSign=$atoCallSign, atoMissionId=$atoMissionId, callSign=$callSign, createdAt=$createdAt, createdBy=$createdBy, cw=$cw, dipWorksheetName=$dipWorksheetName, firstPickUp=$firstPickUp, gdssMissionId=$gdssMissionId, hazMat=$hazMat, jcsPriority=$jcsPriority, lastDropOff=$lastDropOff, loadCategoryType=$loadCategoryType, m1=$m1, m2=$m2, m3a=$m3a, naf=$naf, nextAmcMissionId=$nextAmcMissionId, nextMissionId=$nextMissionId, node=$node, objective=$objective, operation=$operation, origin=$origin, origMissionId=$origMissionId, origNetwork=$origNetwork, prevAmcMissionId=$prevAmcMissionId, prevMissionId=$prevMissionId, purpose=$purpose, remarks=$remarks, requirements=$requirements, sourceDl=$sourceDl, sourceSysDeviation=$sourceSysDeviation, state=$state, type=$type, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
+    override fun toString() = "AirTransportMissionFull{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, abp=$abp, aircraftSorties=$aircraftSorties, alias=$alias, allocatedUnit=$allocatedUnit, amcMissionId=$amcMissionId, apacsId=$apacsId, atoCallSign=$atoCallSign, atoMissionId=$atoMissionId, callSign=$callSign, createdAt=$createdAt, createdBy=$createdBy, cw=$cw, dipWorksheetName=$dipWorksheetName, firstPickUp=$firstPickUp, gdssMissionId=$gdssMissionId, hazMat=$hazMat, jcsPriority=$jcsPriority, lastDropOff=$lastDropOff, loadCategoryType=$loadCategoryType, m1=$m1, m2=$m2, m3a=$m3a, naf=$naf, nextAmcMissionId=$nextAmcMissionId, nextMissionId=$nextMissionId, node=$node, objective=$objective, operation=$operation, origin=$origin, origMissionId=$origMissionId, origNetwork=$origNetwork, prevAmcMissionId=$prevAmcMissionId, prevMissionId=$prevMissionId, purpose=$purpose, remarks=$remarks, requirements=$requirements, sourceDl=$sourceDl, sourceSysDeviation=$sourceSysDeviation, state=$state, type=$type, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
 }

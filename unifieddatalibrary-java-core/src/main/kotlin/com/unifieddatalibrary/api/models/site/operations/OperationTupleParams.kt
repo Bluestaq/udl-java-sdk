@@ -10,29 +10,18 @@ import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/**
- * Service operation to dynamically query data and only return specified columns/fields. Requested
- * columns are specified by the 'columns' query parameter and should be a comma separated list of
- * valid fields for the specified data type. classificationMarking is always returned. See the
- * queryhelp operation (/udl/<datatype>/queryhelp) for more details on valid/required query
- * parameter information. An example URI: /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours
- * would return the satNo and period of elsets with an epoch greater than 5 hours ago.
- */
-class OperationTupleParams
-private constructor(
+/** Service operation to dynamically query data and only return specified columns/fields. Requested columns are specified by the 'columns' query parameter and should be a comma separated list of valid fields for the specified data type. classificationMarking is always returned. See the queryhelp operation (/udl/<datatype>/queryhelp) for more details on valid/required query parameter information. An example URI: /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours would return the satNo and period of elsets with an epoch greater than 5 hours ago. */
+class OperationTupleParams private constructor(
     private val columns: String,
     private val idSite: String,
     private val firstResult: Long?,
     private val maxResults: Long?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
+
 ) : Params {
 
-    /**
-     * Comma-separated list of valid field names for this data type to be returned in the response.
-     * Only the fields specified will be returned as well as the classification marking of the data,
-     * if applicable. See the ‘queryhelp’ operation for a complete list of possible fields.
-     */
+    /** Comma-separated list of valid field names for this data type to be returned in the response. Only the fields specified will be returned as well as the classification marking of the data, if applicable. See the ‘queryhelp’ operation for a complete list of possible fields. */
     fun columns(): String = columns
 
     /** The ID of the parent site. */
@@ -56,12 +45,14 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [OperationTupleParams].
          *
          * The following fields are required:
+         *
          * ```java
          * .columns()
          * .idSite()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [OperationTupleParams]. */
@@ -75,27 +66,32 @@ private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(operationTupleParams: OperationTupleParams) = apply {
-            columns = operationTupleParams.columns
-            idSite = operationTupleParams.idSite
-            firstResult = operationTupleParams.firstResult
-            maxResults = operationTupleParams.maxResults
-            additionalHeaders = operationTupleParams.additionalHeaders.toBuilder()
-            additionalQueryParams = operationTupleParams.additionalQueryParams.toBuilder()
-        }
+        internal fun from(operationTupleParams: OperationTupleParams) =
+            apply {
+                columns = operationTupleParams.columns
+                idSite = operationTupleParams.idSite
+                firstResult = operationTupleParams.firstResult
+                maxResults = operationTupleParams.maxResults
+                additionalHeaders = operationTupleParams.additionalHeaders.toBuilder()
+                additionalQueryParams = operationTupleParams.additionalQueryParams.toBuilder()
+            }
 
-        /**
-         * Comma-separated list of valid field names for this data type to be returned in the
-         * response. Only the fields specified will be returned as well as the classification
-         * marking of the data, if applicable. See the ‘queryhelp’ operation for a complete list of
-         * possible fields.
-         */
-        fun columns(columns: String) = apply { this.columns = columns }
+        /** Comma-separated list of valid field names for this data type to be returned in the response. Only the fields specified will be returned as well as the classification marking of the data, if applicable. See the ‘queryhelp’ operation for a complete list of possible fields. */
+        fun columns(columns: String) =
+            apply {
+                this.columns = columns
+            }
 
         /** The ID of the parent site. */
-        fun idSite(idSite: String) = apply { this.idSite = idSite }
+        fun idSite(idSite: String) =
+            apply {
+                this.idSite = idSite
+            }
 
-        fun firstResult(firstResult: Long?) = apply { this.firstResult = firstResult }
+        fun firstResult(firstResult: Long?) =
+            apply {
+                this.firstResult = firstResult
+            }
 
         /**
          * Alias for [Builder.firstResult].
@@ -107,7 +103,10 @@ private constructor(
         /** Alias for calling [Builder.firstResult] with `firstResult.orElse(null)`. */
         fun firstResult(firstResult: Optional<Long>) = firstResult(firstResult.getOrNull())
 
-        fun maxResults(maxResults: Long?) = apply { this.maxResults = maxResults }
+        fun maxResults(maxResults: Long?) =
+            apply {
+                this.maxResults = maxResults
+            }
 
         /**
          * Alias for [Builder.maxResults].
@@ -119,103 +118,129 @@ private constructor(
         /** Alias for calling [Builder.maxResults] with `maxResults.orElse(null)`. */
         fun maxResults(maxResults: Optional<Long>) = maxResults(maxResults.getOrNull())
 
-        fun additionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun putAdditionalHeader(name: String, value: String) = apply {
-            additionalHeaders.put(name, value)
-        }
+        fun putAdditionalHeader(name: String, value: String) =
+            apply {
+                additionalHeaders.put(name, value)
+            }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.put(name, values)
-        }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.put(name, values)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun replaceAdditionalHeaders(name: String, value: String) = apply {
-            additionalHeaders.replace(name, value)
-        }
+        fun replaceAdditionalHeaders(name: String, value: String) =
+            apply {
+                additionalHeaders.replace(name, value)
+            }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.replace(name, values)
-        }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.replace(name, values)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
+        fun removeAdditionalHeaders(name: String) =
+            apply {
+                additionalHeaders.remove(name)
+            }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
-            additionalHeaders.removeAll(names)
-        }
+        fun removeAllAdditionalHeaders(names: Set<String>) =
+            apply {
+                additionalHeaders.removeAll(names)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun putAdditionalQueryParam(key: String, value: String) = apply {
-            additionalQueryParams.put(key, value)
-        }
+        fun putAdditionalQueryParam(key: String, value: String) =
+            apply {
+                additionalQueryParams.put(key, value)
+            }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.put(key, values)
-        }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.put(key, values)
+            }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.putAll(additionalQueryParams)
-        }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.putAll(additionalQueryParams)
+            }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
-            additionalQueryParams.replace(key, value)
-        }
+        fun replaceAdditionalQueryParams(key: String, value: String) =
+            apply {
+                additionalQueryParams.replace(key, value)
+            }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.replace(key, values)
-        }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.replace(key, values)
+            }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.replaceAll(additionalQueryParams)
-        }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.replaceAll(additionalQueryParams)
+            }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
+        fun removeAdditionalQueryParams(key: String) =
+            apply {
+                additionalQueryParams.remove(key)
+            }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
-            additionalQueryParams.removeAll(keys)
-        }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) =
+            apply {
+                additionalQueryParams.removeAll(keys)
+            }
 
         /**
          * Returns an immutable instance of [OperationTupleParams].
@@ -223,6 +248,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .columns()
          * .idSite()
@@ -232,12 +258,16 @@ private constructor(
          */
         fun build(): OperationTupleParams =
             OperationTupleParams(
-                checkRequired("columns", columns),
-                checkRequired("idSite", idSite),
-                firstResult,
-                maxResults,
-                additionalHeaders.build(),
-                additionalQueryParams.build(),
+              checkRequired(
+                "columns", columns
+              ),
+              checkRequired(
+                "idSite", idSite
+              ),
+              firstResult,
+              maxResults,
+              additionalHeaders.build(),
+              additionalQueryParams.build(),
             )
     }
 
@@ -255,15 +285,14 @@ private constructor(
             .build()
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is OperationTupleParams && columns == other.columns && idSite == other.idSite && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+      return /* spotless:off */ other is OperationTupleParams && columns == other.columns && idSite == other.idSite && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, idSite, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
 
-    override fun toString() =
-        "OperationTupleParams{columns=$columns, idSite=$idSite, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() = "OperationTupleParams{columns=$columns, idSite=$idSite, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

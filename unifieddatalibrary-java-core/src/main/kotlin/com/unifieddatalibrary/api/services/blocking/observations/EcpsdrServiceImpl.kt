@@ -29,24 +29,25 @@ import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrQueryHelpPara
 import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrQueryHelpResponse
 import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrRetrieveParams
 import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrTupleParams
+import com.unifieddatalibrary.api.services.blocking.observations.EcpsdrService
+import com.unifieddatalibrary.api.services.blocking.observations.EcpsdrServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
-class EcpsdrServiceImpl internal constructor(private val clientOptions: ClientOptions) :
-    EcpsdrService {
+class EcpsdrServiceImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: EcpsdrService.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : EcpsdrService {
+
+    private val withRawResponse: EcpsdrService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     override fun withRawResponse(): EcpsdrService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EcpsdrService =
-        EcpsdrServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EcpsdrService = EcpsdrServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun create(params: EcpsdrCreateParams, requestOptions: RequestOptions) {
-        // post /udl/ecpsdr
-        withRawResponse().create(params, requestOptions)
+      // post /udl/ecpsdr
+      withRawResponse().create(params, requestOptions)
     }
 
     override fun retrieve(params: EcpsdrRetrieveParams, requestOptions: RequestOptions): Ecpsdr =
@@ -62,14 +63,11 @@ class EcpsdrServiceImpl internal constructor(private val clientOptions: ClientOp
         withRawResponse().count(params, requestOptions).parse()
 
     override fun createBulk(params: EcpsdrCreateBulkParams, requestOptions: RequestOptions) {
-        // post /udl/ecpsdr/createBulk
-        withRawResponse().createBulk(params, requestOptions)
+      // post /udl/ecpsdr/createBulk
+      withRawResponse().createBulk(params, requestOptions)
     }
 
-    override fun queryHelp(
-        params: EcpsdrQueryHelpParams,
-        requestOptions: RequestOptions,
-    ): EcpsdrQueryHelpResponse =
+    override fun queryHelp(params: EcpsdrQueryHelpParams, requestOptions: RequestOptions): EcpsdrQueryHelpResponse =
         // get /udl/ecpsdr/queryhelp
         withRawResponse().queryHelp(params, requestOptions).parse()
 
@@ -77,196 +75,191 @@ class EcpsdrServiceImpl internal constructor(private val clientOptions: ClientOp
         // get /udl/ecpsdr/tuple
         withRawResponse().tuple(params, requestOptions).parse()
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        EcpsdrService.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<HttpResponse> =
-            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+    ) : EcpsdrService.WithRawResponse {
 
-        override fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): EcpsdrService.WithRawResponse =
-            EcpsdrServiceImpl.WithRawResponseImpl(
-                clientOptions.toBuilder().apply(modifier::accept).build()
-            )
+        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+
+        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EcpsdrService.WithRawResponse = EcpsdrServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
         private val createHandler: Handler<Void?> = emptyHandler()
 
-        override fun create(
-            params: EcpsdrCreateParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "ecpsdr")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { createHandler.handle(it) }
-            }
+        override fun create(params: EcpsdrCreateParams, requestOptions: RequestOptions): HttpResponse {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "ecpsdr")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  createHandler.handle(it)
+              }
+          }
         }
 
         private val retrieveHandler: Handler<Ecpsdr> = jsonHandler<Ecpsdr>(clientOptions.jsonMapper)
 
-        override fun retrieve(
-            params: EcpsdrRetrieveParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<Ecpsdr> {
-            // We check here instead of in the params builder because this can be specified
-            // positionally or in the params class.
-            checkRequired("id", params.id().getOrNull())
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "ecpsdr", params._pathParam(0))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { retrieveHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
+        override fun retrieve(params: EcpsdrRetrieveParams, requestOptions: RequestOptions): HttpResponseFor<Ecpsdr> {
+          // We check here instead of in the params builder because this can be specified positionally or in the params class.
+          checkRequired("id", params.id().getOrNull())
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "ecpsdr", params._pathParam(0))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  retrieveHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          }
         }
 
-        private val listHandler: Handler<List<EcpsdrAbridged>> =
-            jsonHandler<List<EcpsdrAbridged>>(clientOptions.jsonMapper)
+        private val listHandler: Handler<List<EcpsdrAbridged>> = jsonHandler<List<EcpsdrAbridged>>(clientOptions.jsonMapper)
 
-        override fun list(
-            params: EcpsdrListParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<EcpsdrListPage> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "ecpsdr")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { listHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-                    .let {
-                        EcpsdrListPage.builder()
-                            .service(EcpsdrServiceImpl(clientOptions))
-                            .params(params)
-                            .items(it)
-                            .build()
-                    }
-            }
+        override fun list(params: EcpsdrListParams, requestOptions: RequestOptions): HttpResponseFor<EcpsdrListPage> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "ecpsdr")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  listHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.forEach { it.validate() }
+                  }
+              }
+              .let {
+                  EcpsdrListPage.builder()
+                      .service(EcpsdrServiceImpl(clientOptions))
+                      .params(params)
+                      .items(it)
+                      .build()
+              }
+          }
         }
 
         private val countHandler: Handler<String> = stringHandler()
 
-        override fun count(
-            params: EcpsdrCountParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<String> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "ecpsdr", "count")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { countHandler.handle(it) }
-            }
+        override fun count(params: EcpsdrCountParams, requestOptions: RequestOptions): HttpResponseFor<String> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "ecpsdr", "count")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  countHandler.handle(it)
+              }
+          }
         }
 
         private val createBulkHandler: Handler<Void?> = emptyHandler()
 
-        override fun createBulk(
-            params: EcpsdrCreateBulkParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "ecpsdr", "createBulk")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { createBulkHandler.handle(it) }
-            }
+        override fun createBulk(params: EcpsdrCreateBulkParams, requestOptions: RequestOptions): HttpResponse {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "ecpsdr", "createBulk")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  createBulkHandler.handle(it)
+              }
+          }
         }
 
-        private val queryHelpHandler: Handler<EcpsdrQueryHelpResponse> =
-            jsonHandler<EcpsdrQueryHelpResponse>(clientOptions.jsonMapper)
+        private val queryHelpHandler: Handler<EcpsdrQueryHelpResponse> = jsonHandler<EcpsdrQueryHelpResponse>(clientOptions.jsonMapper)
 
-        override fun queryHelp(
-            params: EcpsdrQueryHelpParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<EcpsdrQueryHelpResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "ecpsdr", "queryhelp")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { queryHelpHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
+        override fun queryHelp(params: EcpsdrQueryHelpParams, requestOptions: RequestOptions): HttpResponseFor<EcpsdrQueryHelpResponse> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "ecpsdr", "queryhelp")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  queryHelpHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          }
         }
 
-        private val tupleHandler: Handler<List<Ecpsdr>> =
-            jsonHandler<List<Ecpsdr>>(clientOptions.jsonMapper)
+        private val tupleHandler: Handler<List<Ecpsdr>> = jsonHandler<List<Ecpsdr>>(clientOptions.jsonMapper)
 
-        override fun tuple(
-            params: EcpsdrTupleParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<Ecpsdr>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "ecpsdr", "tuple")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { tupleHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-            }
+        override fun tuple(params: EcpsdrTupleParams, requestOptions: RequestOptions): HttpResponseFor<List<Ecpsdr>> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "ecpsdr", "tuple")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  tupleHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.forEach { it.validate() }
+                  }
+              }
+          }
         }
     }
 }

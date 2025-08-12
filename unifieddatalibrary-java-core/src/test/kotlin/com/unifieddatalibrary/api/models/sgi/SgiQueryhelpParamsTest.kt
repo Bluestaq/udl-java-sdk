@@ -2,12 +2,13 @@
 
 package com.unifieddatalibrary.api.models.sgi
 
+import com.unifieddatalibrary.api.models.sgi.SgiQueryhelpParams
 import org.junit.jupiter.api.Test
 
 internal class SgiQueryhelpParamsTest {
 
     @Test
     fun create() {
-        SgiQueryhelpParams.builder().build()
+      SgiQueryhelpParams.builder().build()
     }
 }

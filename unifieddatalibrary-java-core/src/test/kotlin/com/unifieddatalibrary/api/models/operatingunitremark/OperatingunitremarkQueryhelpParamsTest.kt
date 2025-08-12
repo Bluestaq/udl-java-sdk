@@ -2,12 +2,13 @@
 
 package com.unifieddatalibrary.api.models.operatingunitremark
 
+import com.unifieddatalibrary.api.models.operatingunitremark.OperatingunitremarkQueryhelpParams
 import org.junit.jupiter.api.Test
 
 internal class OperatingunitremarkQueryhelpParamsTest {
 
     @Test
     fun create() {
-        OperatingunitremarkQueryhelpParams.builder().build()
+      OperatingunitremarkQueryhelpParams.builder().build()
     }
 }

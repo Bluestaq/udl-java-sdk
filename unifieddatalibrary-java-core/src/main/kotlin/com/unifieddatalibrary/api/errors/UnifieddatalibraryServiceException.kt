@@ -4,10 +4,15 @@ package com.unifieddatalibrary.api.errors
 
 import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.http.Headers
+import com.unifieddatalibrary.api.errors.UnifieddatalibraryException
 
-abstract class UnifieddatalibraryServiceException
-protected constructor(message: String, cause: Throwable? = null) :
-    UnifieddatalibraryException(message, cause) {
+abstract class UnifieddatalibraryServiceException protected constructor(
+    message: String,
+    cause: Throwable? = null,
+
+) : UnifieddatalibraryException(
+  message, cause
+) {
 
     abstract fun statusCode(): Int
 

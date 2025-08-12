@@ -2,12 +2,13 @@
 
 package com.unifieddatalibrary.api.models.gnssrawif
 
+import com.unifieddatalibrary.api.models.gnssrawif.GnssRawIfQueryhelpParams
 import org.junit.jupiter.api.Test
 
-internal class GnssRawifQueryhelpParamsTest {
+internal class GnssRawIfQueryhelpParamsTest {
 
     @Test
     fun create() {
-        GnssRawifQueryhelpParams.builder().build()
+      GnssRawIfQueryhelpParams.builder().build()
     }
 }

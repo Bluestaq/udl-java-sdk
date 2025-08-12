@@ -10,13 +10,12 @@ import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.tdoafdoa.diffofarrival.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.tdoafdoa.diffofarrival.history.HistoryListPage
 import com.unifieddatalibrary.api.models.tdoafdoa.diffofarrival.history.HistoryListParams
+import com.unifieddatalibrary.api.services.blocking.tdoafdoa.diffofarrival.HistoryService
 import java.util.function.Consumer
 
 interface HistoryService {
 
-    /**
-     * Returns a view of this service that provides access to raw HTTP responses for each method.
-     */
+    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -26,27 +25,20 @@ interface HistoryService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService
 
-    /**
-     * Service operation to dynamically query historical data by a variety of query parameters not
-     * specified in this API documentation. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
-     */
-    fun list(params: HistoryListParams): HistoryListPage = list(params, RequestOptions.none())
+    /** Service operation to dynamically query historical data by a variety of query parameters not specified in this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
+    fun list(params: HistoryListParams): HistoryListPage =
+        list(
+          params, RequestOptions.none()
+        )
 
     /** @see list */
-    fun list(
-        params: HistoryListParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): HistoryListPage
+    fun list(params: HistoryListParams, requestOptions: RequestOptions = RequestOptions.none()): HistoryListPage
 
-    /**
-     * Service operation to dynamically query historical data by a variety of query parameters not
-     * specified in this API documentation, then write that data to the Secure Content Store. See
-     * the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required
-     * query parameter information.
-     */
-    fun aodr(params: HistoryAodrParams) = aodr(params, RequestOptions.none())
+    /** Service operation to dynamically query historical data by a variety of query parameters not specified in this API documentation, then write that data to the Secure Content Store. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
+    fun aodr(params: HistoryAodrParams) =
+        aodr(
+          params, RequestOptions.none()
+        )
 
     /** @see aodr */
     fun aodr(params: HistoryAodrParams, requestOptions: RequestOptions = RequestOptions.none())
@@ -61,33 +53,26 @@ interface HistoryService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService.WithRawResponse
 
-        /**
-         * Returns a raw HTTP response for `get /udl/diffofarrival/history`, but is otherwise the
-         * same as [HistoryService.list].
-         */
+        /** Returns a raw HTTP response for `get /udl/diffofarrival/history`, but is otherwise the same as [HistoryService.list]. */
         @MustBeClosed
         fun list(params: HistoryListParams): HttpResponseFor<HistoryListPage> =
-            list(params, RequestOptions.none())
+            list(
+              params, RequestOptions.none()
+            )
 
         /** @see list */
         @MustBeClosed
-        fun list(
-            params: HistoryListParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<HistoryListPage>
+        fun list(params: HistoryListParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<HistoryListPage>
 
-        /**
-         * Returns a raw HTTP response for `get /udl/diffofarrival/history/aodr`, but is otherwise
-         * the same as [HistoryService.aodr].
-         */
+        /** Returns a raw HTTP response for `get /udl/diffofarrival/history/aodr`, but is otherwise the same as [HistoryService.aodr]. */
         @MustBeClosed
-        fun aodr(params: HistoryAodrParams): HttpResponse = aodr(params, RequestOptions.none())
+        fun aodr(params: HistoryAodrParams): HttpResponse =
+            aodr(
+              params, RequestOptions.none()
+            )
 
         /** @see aodr */
         @MustBeClosed
-        fun aodr(
-            params: HistoryAodrParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponse
+        fun aodr(params: HistoryAodrParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponse
     }
 }

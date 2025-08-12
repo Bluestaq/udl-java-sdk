@@ -12,14 +12,8 @@ import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/**
- * Service operation to dynamically query historical data by a variety of query parameters not
- * specified in this API documentation, then write that data to the Secure Content Store. See the
- * queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query
- * parameter information.
- */
-class AnalyticImageryHistoryAodrParams
-private constructor(
+/** Service operation to dynamically query historical data by a variety of query parameters not specified in this API documentation, then write that data to the Secure Content Store. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
+class AnalyticImageryHistoryAodrParams private constructor(
     private val msgTime: OffsetDateTime,
     private val columns: String?,
     private val firstResult: Long?,
@@ -29,42 +23,26 @@ private constructor(
     private val outputFormat: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
+
 ) : Params {
 
-    /**
-     * The message time of this image record, in ISO8601 UTC format with millisecond precision.
-     * (YYYY-MM-DDTHH:MM:SS.sssZ)
-     */
+    /** The message time of this image record, in ISO8601 UTC format with millisecond precision. (YYYY-MM-DDTHH:MM:SS.sssZ) */
     fun msgTime(): OffsetDateTime = msgTime
 
-    /**
-     * optional, fields for retrieval. When omitted, ALL fields are assumed. See the queryhelp
-     * operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid query fields that can
-     * be selected.
-     */
+    /** optional, fields for retrieval. When omitted, ALL fields are assumed. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid query fields that can be selected. */
     fun columns(): Optional<String> = Optional.ofNullable(columns)
 
     fun firstResult(): Optional<Long> = Optional.ofNullable(firstResult)
 
     fun maxResults(): Optional<Long> = Optional.ofNullable(maxResults)
 
-    /**
-     * optional, notification method for the created file link. When omitted, EMAIL is assumed.
-     * Current valid values are: EMAIL, SMS.
-     */
+    /** optional, notification method for the created file link. When omitted, EMAIL is assumed. Current valid values are: EMAIL, SMS. */
     fun notification(): Optional<String> = Optional.ofNullable(notification)
 
-    /**
-     * optional, field delimiter when the created file is not JSON. Must be a single character
-     * chosen from this set: (',', ';', ':', '|'). When omitted, "," is used. It is strongly
-     * encouraged that your field delimiter be a character unlikely to occur within the data.
-     */
+    /** optional, field delimiter when the created file is not JSON. Must be a single character chosen from this set: (',', ';', ':', '|'). When omitted, "," is used. It is strongly encouraged that your field delimiter be a character unlikely to occur within the data. */
     fun outputDelimiter(): Optional<String> = Optional.ofNullable(outputDelimiter)
 
-    /**
-     * optional, output format for the file. When omitted, JSON is assumed. Current valid values
-     * are: JSON and CSV.
-     */
+    /** optional, output format for the file. When omitted, JSON is assumed. Current valid values are: JSON and CSV. */
     fun outputFormat(): Optional<String> = Optional.ofNullable(outputFormat)
 
     /** Additional headers to send with the request. */
@@ -78,15 +56,16 @@ private constructor(
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of
-         * [AnalyticImageryHistoryAodrParams].
+         * Returns a mutable builder for constructing an instance of [AnalyticImageryHistoryAodrParams].
          *
          * The following fields are required:
+         *
          * ```java
          * .msgTime()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [AnalyticImageryHistoryAodrParams]. */
@@ -113,27 +92,28 @@ private constructor(
                 outputDelimiter = analyticImageryHistoryAodrParams.outputDelimiter
                 outputFormat = analyticImageryHistoryAodrParams.outputFormat
                 additionalHeaders = analyticImageryHistoryAodrParams.additionalHeaders.toBuilder()
-                additionalQueryParams =
-                    analyticImageryHistoryAodrParams.additionalQueryParams.toBuilder()
+                additionalQueryParams = analyticImageryHistoryAodrParams.additionalQueryParams.toBuilder()
             }
 
-        /**
-         * The message time of this image record, in ISO8601 UTC format with millisecond precision.
-         * (YYYY-MM-DDTHH:MM:SS.sssZ)
-         */
-        fun msgTime(msgTime: OffsetDateTime) = apply { this.msgTime = msgTime }
+        /** The message time of this image record, in ISO8601 UTC format with millisecond precision. (YYYY-MM-DDTHH:MM:SS.sssZ) */
+        fun msgTime(msgTime: OffsetDateTime) =
+            apply {
+                this.msgTime = msgTime
+            }
 
-        /**
-         * optional, fields for retrieval. When omitted, ALL fields are assumed. See the queryhelp
-         * operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid query fields that
-         * can be selected.
-         */
-        fun columns(columns: String?) = apply { this.columns = columns }
+        /** optional, fields for retrieval. When omitted, ALL fields are assumed. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid query fields that can be selected. */
+        fun columns(columns: String?) =
+            apply {
+                this.columns = columns
+            }
 
         /** Alias for calling [Builder.columns] with `columns.orElse(null)`. */
         fun columns(columns: Optional<String>) = columns(columns.getOrNull())
 
-        fun firstResult(firstResult: Long?) = apply { this.firstResult = firstResult }
+        fun firstResult(firstResult: Long?) =
+            apply {
+                this.firstResult = firstResult
+            }
 
         /**
          * Alias for [Builder.firstResult].
@@ -145,7 +125,10 @@ private constructor(
         /** Alias for calling [Builder.firstResult] with `firstResult.orElse(null)`. */
         fun firstResult(firstResult: Optional<Long>) = firstResult(firstResult.getOrNull())
 
-        fun maxResults(maxResults: Long?) = apply { this.maxResults = maxResults }
+        fun maxResults(maxResults: Long?) =
+            apply {
+                this.maxResults = maxResults
+            }
 
         /**
          * Alias for [Builder.maxResults].
@@ -157,134 +140,156 @@ private constructor(
         /** Alias for calling [Builder.maxResults] with `maxResults.orElse(null)`. */
         fun maxResults(maxResults: Optional<Long>) = maxResults(maxResults.getOrNull())
 
-        /**
-         * optional, notification method for the created file link. When omitted, EMAIL is assumed.
-         * Current valid values are: EMAIL, SMS.
-         */
-        fun notification(notification: String?) = apply { this.notification = notification }
+        /** optional, notification method for the created file link. When omitted, EMAIL is assumed. Current valid values are: EMAIL, SMS. */
+        fun notification(notification: String?) =
+            apply {
+                this.notification = notification
+            }
 
         /** Alias for calling [Builder.notification] with `notification.orElse(null)`. */
         fun notification(notification: Optional<String>) = notification(notification.getOrNull())
 
-        /**
-         * optional, field delimiter when the created file is not JSON. Must be a single character
-         * chosen from this set: (',', ';', ':', '|'). When omitted, "," is used. It is strongly
-         * encouraged that your field delimiter be a character unlikely to occur within the data.
-         */
-        fun outputDelimiter(outputDelimiter: String?) = apply {
-            this.outputDelimiter = outputDelimiter
-        }
+        /** optional, field delimiter when the created file is not JSON. Must be a single character chosen from this set: (',', ';', ':', '|'). When omitted, "," is used. It is strongly encouraged that your field delimiter be a character unlikely to occur within the data. */
+        fun outputDelimiter(outputDelimiter: String?) =
+            apply {
+                this.outputDelimiter = outputDelimiter
+            }
 
         /** Alias for calling [Builder.outputDelimiter] with `outputDelimiter.orElse(null)`. */
-        fun outputDelimiter(outputDelimiter: Optional<String>) =
-            outputDelimiter(outputDelimiter.getOrNull())
+        fun outputDelimiter(outputDelimiter: Optional<String>) = outputDelimiter(outputDelimiter.getOrNull())
 
-        /**
-         * optional, output format for the file. When omitted, JSON is assumed. Current valid values
-         * are: JSON and CSV.
-         */
-        fun outputFormat(outputFormat: String?) = apply { this.outputFormat = outputFormat }
+        /** optional, output format for the file. When omitted, JSON is assumed. Current valid values are: JSON and CSV. */
+        fun outputFormat(outputFormat: String?) =
+            apply {
+                this.outputFormat = outputFormat
+            }
 
         /** Alias for calling [Builder.outputFormat] with `outputFormat.orElse(null)`. */
         fun outputFormat(outputFormat: Optional<String>) = outputFormat(outputFormat.getOrNull())
 
-        fun additionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun putAdditionalHeader(name: String, value: String) = apply {
-            additionalHeaders.put(name, value)
-        }
+        fun putAdditionalHeader(name: String, value: String) =
+            apply {
+                additionalHeaders.put(name, value)
+            }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.put(name, values)
-        }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.put(name, values)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun replaceAdditionalHeaders(name: String, value: String) = apply {
-            additionalHeaders.replace(name, value)
-        }
+        fun replaceAdditionalHeaders(name: String, value: String) =
+            apply {
+                additionalHeaders.replace(name, value)
+            }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.replace(name, values)
-        }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.replace(name, values)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
+        fun removeAdditionalHeaders(name: String) =
+            apply {
+                additionalHeaders.remove(name)
+            }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
-            additionalHeaders.removeAll(names)
-        }
+        fun removeAllAdditionalHeaders(names: Set<String>) =
+            apply {
+                additionalHeaders.removeAll(names)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun putAdditionalQueryParam(key: String, value: String) = apply {
-            additionalQueryParams.put(key, value)
-        }
+        fun putAdditionalQueryParam(key: String, value: String) =
+            apply {
+                additionalQueryParams.put(key, value)
+            }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.put(key, values)
-        }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.put(key, values)
+            }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.putAll(additionalQueryParams)
-        }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.putAll(additionalQueryParams)
+            }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
-            additionalQueryParams.replace(key, value)
-        }
+        fun replaceAdditionalQueryParams(key: String, value: String) =
+            apply {
+                additionalQueryParams.replace(key, value)
+            }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.replace(key, values)
-        }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.replace(key, values)
+            }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.replaceAll(additionalQueryParams)
-        }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.replaceAll(additionalQueryParams)
+            }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
+        fun removeAdditionalQueryParams(key: String) =
+            apply {
+                additionalQueryParams.remove(key)
+            }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
-            additionalQueryParams.removeAll(keys)
-        }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) =
+            apply {
+                additionalQueryParams.removeAll(keys)
+            }
 
         /**
          * Returns an immutable instance of [AnalyticImageryHistoryAodrParams].
@@ -292,6 +297,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .msgTime()
          * ```
@@ -300,15 +306,17 @@ private constructor(
          */
         fun build(): AnalyticImageryHistoryAodrParams =
             AnalyticImageryHistoryAodrParams(
-                checkRequired("msgTime", msgTime),
-                columns,
-                firstResult,
-                maxResults,
-                notification,
-                outputDelimiter,
-                outputFormat,
-                additionalHeaders.build(),
-                additionalQueryParams.build(),
+              checkRequired(
+                "msgTime", msgTime
+              ),
+              columns,
+              firstResult,
+              maxResults,
+              notification,
+              outputDelimiter,
+              outputFormat,
+              additionalHeaders.build(),
+              additionalQueryParams.build(),
             )
     }
 
@@ -329,15 +337,14 @@ private constructor(
             .build()
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is AnalyticImageryHistoryAodrParams && msgTime == other.msgTime && columns == other.columns && firstResult == other.firstResult && maxResults == other.maxResults && notification == other.notification && outputDelimiter == other.outputDelimiter && outputFormat == other.outputFormat && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+      return /* spotless:off */ other is AnalyticImageryHistoryAodrParams && msgTime == other.msgTime && columns == other.columns && firstResult == other.firstResult && maxResults == other.maxResults && notification == other.notification && outputDelimiter == other.outputDelimiter && outputFormat == other.outputFormat && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(msgTime, columns, firstResult, maxResults, notification, outputDelimiter, outputFormat, additionalHeaders, additionalQueryParams) /* spotless:on */
 
-    override fun toString() =
-        "AnalyticImageryHistoryAodrParams{msgTime=$msgTime, columns=$columns, firstResult=$firstResult, maxResults=$maxResults, notification=$notification, outputDelimiter=$outputDelimiter, outputFormat=$outputFormat, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() = "AnalyticImageryHistoryAodrParams{msgTime=$msgTime, columns=$columns, firstResult=$firstResult, maxResults=$maxResults, notification=$notification, outputDelimiter=$outputDelimiter, outputFormat=$outputFormat, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

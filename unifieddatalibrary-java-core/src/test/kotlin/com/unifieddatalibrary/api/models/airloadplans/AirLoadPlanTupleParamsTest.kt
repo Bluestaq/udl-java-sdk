@@ -7,11 +7,11 @@ import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class AirLoadPlanTupleParamsTest {
+internal class AirloadPlanTupleParamsTest {
 
     @Test
     fun create() {
-        AirLoadPlanTupleParams.builder()
+        AirloadPlanTupleParams.builder()
             .columns("columns")
             .estDepTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
             .firstResult(0L)
@@ -22,7 +22,7 @@ internal class AirLoadPlanTupleParamsTest {
     @Test
     fun queryParams() {
         val params =
-            AirLoadPlanTupleParams.builder()
+            AirloadPlanTupleParams.builder()
                 .columns("columns")
                 .estDepTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .firstResult(0L)
@@ -45,7 +45,7 @@ internal class AirLoadPlanTupleParamsTest {
     @Test
     fun queryParamsWithoutOptionalFields() {
         val params =
-            AirLoadPlanTupleParams.builder()
+            AirloadPlanTupleParams.builder()
                 .columns("columns")
                 .estDepTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .build()

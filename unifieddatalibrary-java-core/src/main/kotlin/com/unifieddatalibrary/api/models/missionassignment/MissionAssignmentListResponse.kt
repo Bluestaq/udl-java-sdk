@@ -13,6 +13,7 @@ import com.unifieddatalibrary.api.core.JsonMissing
 import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import com.unifieddatalibrary.api.models.missionassignment.MissionAssignmentListResponse
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
@@ -20,8 +21,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 /** Platform mission assignment data. */
-class MissionAssignmentListResponse
-private constructor(
+class MissionAssignmentListResponse private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
     private val mad: JsonField<String>,
@@ -89,40 +89,29 @@ private constructor(
     private val trkId: JsonField<String>,
     private val twenv: JsonField<String>,
     private val additionalProperties: MutableMap<String, JsonValue>,
+
 ) {
 
     @JsonCreator
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
-        classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
         @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
         @JsonProperty("mad") @ExcludeMissing mad: JsonField<String> = JsonMissing.of(),
         @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
         @JsonProperty("ts") @ExcludeMissing ts: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("c1associateddmpis")
-        @ExcludeMissing
-        c1associateddmpis: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("c1associateddmpis") @ExcludeMissing c1associateddmpis: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("c2air") @ExcludeMissing c2air: JsonField<String> = JsonMissing.of(),
         @JsonProperty("c2alt") @ExcludeMissing c2alt: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("c2crs") @ExcludeMissing c2crs: JsonField<Int> = JsonMissing.of(),
-        @JsonProperty("c2exerciseindicator")
-        @ExcludeMissing
-        c2exerciseindicator: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("c2exercisemof")
-        @ExcludeMissing
-        c2exercisemof: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("c2exerciseindicator") @ExcludeMissing c2exerciseindicator: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("c2exercisemof") @ExcludeMissing c2exercisemof: JsonField<String> = JsonMissing.of(),
         @JsonProperty("c2id") @ExcludeMissing c2id: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("c2idamplifyingdescriptor")
-        @ExcludeMissing
-        c2idamplifyingdescriptor: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("c2idamplifyingdescriptor") @ExcludeMissing c2idamplifyingdescriptor: JsonField<String> = JsonMissing.of(),
         @JsonProperty("c2lnd") @ExcludeMissing c2lnd: JsonField<String> = JsonMissing.of(),
         @JsonProperty("c2spc") @ExcludeMissing c2spc: JsonField<String> = JsonMissing.of(),
         @JsonProperty("c2spd") @ExcludeMissing c2spd: JsonField<Int> = JsonMissing.of(),
-        @JsonProperty("c2specialinterestindicator")
-        @ExcludeMissing
-        c2specialinterestindicator: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("c2specialinterestindicator") @ExcludeMissing c2specialinterestindicator: JsonField<String> = JsonMissing.of(),
         @JsonProperty("c2sur") @ExcludeMissing c2sur: JsonField<String> = JsonMissing.of(),
         @JsonProperty("c3elv") @ExcludeMissing c3elv: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("c3lat") @ExcludeMissing c3lat: JsonField<Double> = JsonMissing.of(),
@@ -133,22 +122,14 @@ private constructor(
         @JsonProperty("c4def") @ExcludeMissing c4def: JsonField<String> = JsonMissing.of(),
         @JsonProperty("c4egress") @ExcludeMissing c4egress: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("c4mod") @ExcludeMissing c4mod: JsonField<Int> = JsonMissing.of(),
-        @JsonProperty("c4numberofstores")
-        @ExcludeMissing
-        c4numberofstores: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("c4numberofstores") @ExcludeMissing c4numberofstores: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("c4runin") @ExcludeMissing c4runin: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("c4tgt") @ExcludeMissing c4tgt: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("c4timediscrete")
-        @ExcludeMissing
-        c4timediscrete: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("c4timediscrete") @ExcludeMissing c4timediscrete: JsonField<String> = JsonMissing.of(),
         @JsonProperty("c4tm") @ExcludeMissing c4tm: JsonField<Int> = JsonMissing.of(),
-        @JsonProperty("c4typeofstores")
-        @ExcludeMissing
-        c4typeofstores: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("c4typeofstores") @ExcludeMissing c4typeofstores: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("c5colon") @ExcludeMissing c5colon: JsonField<Int> = JsonMissing.of(),
-        @JsonProperty("c5elevationlsbs")
-        @ExcludeMissing
-        c5elevationlsbs: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("c5elevationlsbs") @ExcludeMissing c5elevationlsbs: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("c5haeadj") @ExcludeMissing c5haeadj: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("c5latlsb") @ExcludeMissing c5latlsb: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("c5lonlsb") @ExcludeMissing c5lonlsb: JsonField<Int> = JsonMissing.of(),
@@ -164,9 +145,7 @@ private constructor(
         @JsonProperty("c7elang2") @ExcludeMissing c7elang2: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("c7in3p") @ExcludeMissing c7in3p: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("c7tnor") @ExcludeMissing c7tnor: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("createdAt")
-        @ExcludeMissing
-        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
         @JsonProperty("env") @ExcludeMissing env: JsonField<String> = JsonMissing.of(),
         @JsonProperty("index") @ExcludeMissing index: JsonField<Int> = JsonMissing.of(),
@@ -174,635 +153,557 @@ private constructor(
         @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("orginx") @ExcludeMissing orginx: JsonField<String> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origNetwork")
-        @ExcludeMissing
-        origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origNetwork") @ExcludeMissing origNetwork: JsonField<String> = JsonMissing.of(),
         @JsonProperty("rc") @ExcludeMissing rc: JsonField<String> = JsonMissing.of(),
         @JsonProperty("rr") @ExcludeMissing rr: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("sz") @ExcludeMissing sz: JsonField<String> = JsonMissing.of(),
         @JsonProperty("tno") @ExcludeMissing tno: JsonField<String> = JsonMissing.of(),
         @JsonProperty("trkId") @ExcludeMissing trkId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("twenv") @ExcludeMissing twenv: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("twenv") @ExcludeMissing twenv: JsonField<String> = JsonMissing.of()
     ) : this(
-        classificationMarking,
-        dataMode,
-        mad,
-        source,
-        ts,
-        id,
-        c1associateddmpis,
-        c2air,
-        c2alt,
-        c2crs,
-        c2exerciseindicator,
-        c2exercisemof,
-        c2id,
-        c2idamplifyingdescriptor,
-        c2lnd,
-        c2spc,
-        c2spd,
-        c2specialinterestindicator,
-        c2sur,
-        c3elv,
-        c3lat,
-        c3lon,
-        c3ptl,
-        c3ptnum,
-        c4colon,
-        c4def,
-        c4egress,
-        c4mod,
-        c4numberofstores,
-        c4runin,
-        c4tgt,
-        c4timediscrete,
-        c4tm,
-        c4typeofstores,
-        c5colon,
-        c5elevationlsbs,
-        c5haeadj,
-        c5latlsb,
-        c5lonlsb,
-        c5tgtbrng,
-        c5tw,
-        c6dspc,
-        c6dspct,
-        c6fplpm,
-        c6intel,
-        c6laser,
-        c6longpm,
-        c6tnr3,
-        c7elang2,
-        c7in3p,
-        c7tnor,
-        createdAt,
-        createdBy,
-        env,
-        index,
-        lat,
-        lon,
-        orginx,
-        origin,
-        origNetwork,
-        rc,
-        rr,
-        sz,
-        tno,
-        trkId,
-        twenv,
-        mutableMapOf(),
+      classificationMarking,
+      dataMode,
+      mad,
+      source,
+      ts,
+      id,
+      c1associateddmpis,
+      c2air,
+      c2alt,
+      c2crs,
+      c2exerciseindicator,
+      c2exercisemof,
+      c2id,
+      c2idamplifyingdescriptor,
+      c2lnd,
+      c2spc,
+      c2spd,
+      c2specialinterestindicator,
+      c2sur,
+      c3elv,
+      c3lat,
+      c3lon,
+      c3ptl,
+      c3ptnum,
+      c4colon,
+      c4def,
+      c4egress,
+      c4mod,
+      c4numberofstores,
+      c4runin,
+      c4tgt,
+      c4timediscrete,
+      c4tm,
+      c4typeofstores,
+      c5colon,
+      c5elevationlsbs,
+      c5haeadj,
+      c5latlsb,
+      c5lonlsb,
+      c5tgtbrng,
+      c5tw,
+      c6dspc,
+      c6dspct,
+      c6fplpm,
+      c6intel,
+      c6laser,
+      c6longpm,
+      c6tnr3,
+      c7elang2,
+      c7in3p,
+      c7tnor,
+      createdAt,
+      createdBy,
+      env,
+      index,
+      lat,
+      lon,
+      orginx,
+      origin,
+      origNetwork,
+      rc,
+      rr,
+      sz,
+      tno,
+      trkId,
+      twenv,
+      mutableMapOf(),
     )
 
     /**
      * Classification marking of the data in IC/CAPCO Portion-marked format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-     * both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-     * analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-     * requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
     /**
      * The mission assignment discrete value.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun mad(): String = mad.getRequired("mad")
 
     /**
      * Source of the data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun source(): String = source.getRequired("source")
 
     /**
      * The timestamp of the mission data, in ISO 8601 UTC format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun ts(): OffsetDateTime = ts.getRequired("ts")
 
     /**
      * Unique identifier of the record, auto-generated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun id(): Optional<String> = id.getOptional("id")
 
     /**
      * TARGET POSITION CONTINUATION WORD - number of associated dmpis.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c1associateddmpis(): Optional<Int> = c1associateddmpis.getOptional("c1associateddmpis")
 
     /**
      * TARGET DATA CONTINUATION WORD - air specific type, see TABLE B-21.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c2air(): Optional<String> = c2air.getOptional("c2air")
 
     /**
      * TARGET DATA CONTINUATION WORD - altitude, 100 FT, 2047=NS.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c2alt(): Optional<Int> = c2alt.getOptional("c2alt")
 
     /**
      * TARGET DATA CONTINUATION WORD - course in increments of 1 degree.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c2crs(): Optional<Int> = c2crs.getOptional("c2crs")
 
     /**
      * TARGET DATA CONTINUATION WORD - exercise indicator.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
-    fun c2exerciseindicator(): Optional<String> =
-        c2exerciseindicator.getOptional("c2exerciseindicator")
+    fun c2exerciseindicator(): Optional<String> = c2exerciseindicator.getOptional("c2exerciseindicator")
 
     /**
      * TARGET DATA CONTINUATION WORD - method of fire.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c2exercisemof(): Optional<String> = c2exercisemof.getOptional("c2exercisemof")
 
     /**
      * TARGET DATA CONTINUATION WORD - identity.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c2id(): Optional<String> = c2id.getOptional("c2id")
 
     /**
      * TARGET DATA CONTINUATION WORD - identity amplifying descriptor.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
-    fun c2idamplifyingdescriptor(): Optional<String> =
-        c2idamplifyingdescriptor.getOptional("c2idamplifyingdescriptor")
+    fun c2idamplifyingdescriptor(): Optional<String> = c2idamplifyingdescriptor.getOptional("c2idamplifyingdescriptor")
 
     /**
      * TARGET DATA CONTINUATION WORD - land specific type, see TABLE B-21.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c2lnd(): Optional<String> = c2lnd.getOptional("c2lnd")
 
     /**
      * TARGET DATA CONTINUATION WORD - space specific type, see TABLE B-39.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c2spc(): Optional<String> = c2spc.getOptional("c2spc")
 
     /**
      * TARGET DATA CONTINUATION WORD - speed in 2 DM/HR, 2047=NS.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c2spd(): Optional<Int> = c2spd.getOptional("c2spd")
 
     /**
      * TARGET DATA CONTINUATION WORD - special interest indicator.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
-    fun c2specialinterestindicator(): Optional<String> =
-        c2specialinterestindicator.getOptional("c2specialinterestindicator")
+    fun c2specialinterestindicator(): Optional<String> = c2specialinterestindicator.getOptional("c2specialinterestindicator")
 
     /**
      * TARGET DATA CONTINUATION WORD - surface specific type, see TABLE B-21.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c2sur(): Optional<String> = c2sur.getOptional("c2sur")
 
     /**
      * POINT LOCATION CONTINUATION WORD - elevation, 25 FT, 1023=NS.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c3elv(): Optional<Double> = c3elv.getOptional("c3elv")
 
     /**
      * POINT LOCATION CONTINUATION WORD - latitude, 0.0013 MINUTE.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c3lat(): Optional<Double> = c3lat.getOptional("c3lat")
 
     /**
      * POINT LOCATION CONTINUATION WORD - longitude, 0.0013 MINUTE.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c3lon(): Optional<Double> = c3lon.getOptional("c3lon")
 
     /**
      * TARGET DATA CONTINUATION WORD - point type 1.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c3ptl(): Optional<String> = c3ptl.getOptional("c3ptl")
 
     /**
      * TARGET DATA CONTINUATION WORD - point number.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c3ptnum(): Optional<String> = c3ptnum.getOptional("c3ptnum")
 
     /**
      * SURFACE ATTACK CONTINUATION WORD - minute.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c4colon(): Optional<Int> = c4colon.getOptional("c4colon")
 
     /**
      * SURFACE ATTACK CONTINUATION WORD - target defenses.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c4def(): Optional<String> = c4def.getOptional("c4def")
 
     /**
      * SURFACE ATTACK CONTINUATION WORD - run in heading, NS=511.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c4egress(): Optional<Int> = c4egress.getOptional("c4egress")
 
     /**
      * SURFACE ATTACK CONTINUATION WORD - mode of delivery.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c4mod(): Optional<Int> = c4mod.getOptional("c4mod")
 
     /**
      * SURFACE ATTACK CONTINUATION WORD - number of stores, NS=63.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c4numberofstores(): Optional<Int> = c4numberofstores.getOptional("c4numberofstores")
 
     /**
      * SURFACE ATTACK CONTINUATION WORD - run in heading, NS=511.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c4runin(): Optional<Int> = c4runin.getOptional("c4runin")
 
     /**
      * SURFACE ATTACK CONTINUATION WORD - target type - see TABLE B-32.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c4tgt(): Optional<String> = c4tgt.getOptional("c4tgt")
 
     /**
      * SURFACE ATTACK CONTINUATION WORD - time discrete.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c4timediscrete(): Optional<String> = c4timediscrete.getOptional("c4timediscrete")
 
     /**
      * SURFACE ATTACK CONTINUATION WORD - hour.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c4tm(): Optional<Int> = c4tm.getOptional("c4tm")
 
     /**
      * SURFACE ATTACK CONTINUATION WORD - type of stores.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c4typeofstores(): Optional<Int> = c4typeofstores.getOptional("c4typeofstores")
 
     /**
      * SURFACE ATTACK CONTINUATION WORD - seconds in increments of 1 sec.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c5colon(): Optional<Int> = c5colon.getOptional("c5colon")
 
     /**
      * CONTINUATION WORD - used with c3_elv to double precision to approx 3 ft.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c5elevationlsbs(): Optional<Int> = c5elevationlsbs.getOptional("c5elevationlsbs")
 
     /**
      * CONTINUATION WORD - hae adjustment, measured in 3.125 FT.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c5haeadj(): Optional<Int> = c5haeadj.getOptional("c5haeadj")
 
     /**
      * CONTINUATION WORD - used with c3_lat to double precision to approx 4 ft.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c5latlsb(): Optional<Int> = c5latlsb.getOptional("c5latlsb")
 
     /**
      * CONTINUATION WORD - used with c3_lon to double precision to approx 4 ft.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c5lonlsb(): Optional<Int> = c5lonlsb.getOptional("c5lonlsb")
 
     /**
      * CONTINUATION WORD - target bearing.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c5tgtbrng(): Optional<Int> = c5tgtbrng.getOptional("c5tgtbrng")
 
     /**
      * CONTINUATION WORD - time window.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c5tw(): Optional<Int> = c5tw.getOptional("c5tw")
 
     /**
      * TARGETING CONTINUATION WORD - designator/seeker pulse code.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c6dspc(): Optional<String> = c6dspc.getOptional("c6dspc")
 
     /**
      * TARGETING CONTINUATION WORD - designator/seeker pulse code type.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c6dspct(): Optional<String> = c6dspct.getOptional("c6dspct")
 
     /**
      * TARGETING CONTINUATION WORD - first pulse/last pulse mode.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c6fplpm(): Optional<String> = c6fplpm.getOptional("c6fplpm")
 
     /**
      * TARGETING CONTINUATION WORD - index number, related, 0=NS.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c6intel(): Optional<Int> = c6intel.getOptional("c6intel")
 
     /**
      * TARGETING CONTINUATION WORD - laser illuminator code.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c6laser(): Optional<Int> = c6laser.getOptional("c6laser")
 
     /**
      * TARGETING CONTINUATION WORD - long pulse mode.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c6longpm(): Optional<String> = c6longpm.getOptional("c6longpm")
 
     /**
      * TARGETING CONTINUATION WORD - track number, related to 3.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c6tnr3(): Optional<Int> = c6tnr3.getOptional("c6tnr3")
 
     /**
      * THIRD PARTY CONTINUATION WORD - elevation angle, 2.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c7elang2(): Optional<Double> = c7elang2.getOptional("c7elang2")
 
     /**
      * THIRD PARTY CONTINUATION WORD - index number, third party.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c7in3p(): Optional<Int> = c7in3p.getOptional("c7in3p")
 
     /**
      * THIRD PARTY CONTINUATION WORD - track number, index originator.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun c7tnor(): Optional<String> = c7tnor.getOptional("c7tnor")
 
     /**
      * Time the row was created in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
     /**
      * Application user who created the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
      * Environment.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun env(): Optional<String> = env.getOptional("env")
 
     /**
      * Index number.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun index(): Optional<Int> = index.getOptional("index")
 
     /**
      * WGS84 latitude, in degrees. -90 to 90 degrees (negative values south of equator).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun lat(): Optional<Double> = lat.getOptional("lat")
 
     /**
      * WGS84 longitude, in degrees. -180 to 180 degrees (negative values west of Prime Meridian).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun lon(): Optional<Double> = lon.getOptional("lon")
 
     /**
      * Origin of index number.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun orginx(): Optional<String> = orginx.getOptional("orginx")
 
     /**
-     * Originating system or organization which produced the data, if different from the source. The
-     * origin may be different than the source if the source was a mediating system which forwarded
-     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun origin(): Optional<String> = origin.getOptional("origin")
 
     /**
-     * The originating source network on which this record was created, auto-populated by the
-     * system.
+     * The originating source network on which this record was created, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
     /**
      * Receipt/Compliance, values from TABLE B-9.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun rc(): Optional<String> = rc.getOptional("rc")
 
     /**
      * Recurrence rate, receipt/compliance.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun rr(): Optional<Int> = rr.getOptional("rr")
 
     /**
      * Strength.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun sz(): Optional<String> = sz.getOptional("sz")
 
     /**
      * Track number objective.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun tno(): Optional<String> = tno.getOptional("tno")
 
     /**
      * The track ID that the status is referencing, addressee.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun trkId(): Optional<String> = trkId.getOptional("trkId")
 
     /**
      * Threat warning environment.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun twenv(): Optional<String> = twenv.getOptional("twenv")
 
     /**
      * Returns the raw JSON value of [classificationMarking].
      *
-     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
-     * type.
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("classificationMarking")
     @ExcludeMissing
@@ -813,41 +714,50 @@ private constructor(
      *
      * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+    @JsonProperty("dataMode")
+    @ExcludeMissing
+    fun _dataMode(): JsonField<DataMode> = dataMode
 
     /**
      * Returns the raw JSON value of [mad].
      *
      * Unlike [mad], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("mad") @ExcludeMissing fun _mad(): JsonField<String> = mad
+    @JsonProperty("mad")
+    @ExcludeMissing
+    fun _mad(): JsonField<String> = mad
 
     /**
      * Returns the raw JSON value of [source].
      *
      * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+    @JsonProperty("source")
+    @ExcludeMissing
+    fun _source(): JsonField<String> = source
 
     /**
      * Returns the raw JSON value of [ts].
      *
      * Unlike [ts], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("ts") @ExcludeMissing fun _ts(): JsonField<OffsetDateTime> = ts
+    @JsonProperty("ts")
+    @ExcludeMissing
+    fun _ts(): JsonField<OffsetDateTime> = ts
 
     /**
      * Returns the raw JSON value of [id].
      *
      * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+    @JsonProperty("id")
+    @ExcludeMissing
+    fun _id(): JsonField<String> = id
 
     /**
      * Returns the raw JSON value of [c1associateddmpis].
      *
-     * Unlike [c1associateddmpis], this method doesn't throw if the JSON field has an unexpected
-     * type.
+     * Unlike [c1associateddmpis], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("c1associateddmpis")
     @ExcludeMissing
@@ -858,27 +768,32 @@ private constructor(
      *
      * Unlike [c2air], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c2air") @ExcludeMissing fun _c2air(): JsonField<String> = c2air
+    @JsonProperty("c2air")
+    @ExcludeMissing
+    fun _c2air(): JsonField<String> = c2air
 
     /**
      * Returns the raw JSON value of [c2alt].
      *
      * Unlike [c2alt], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c2alt") @ExcludeMissing fun _c2alt(): JsonField<Int> = c2alt
+    @JsonProperty("c2alt")
+    @ExcludeMissing
+    fun _c2alt(): JsonField<Int> = c2alt
 
     /**
      * Returns the raw JSON value of [c2crs].
      *
      * Unlike [c2crs], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c2crs") @ExcludeMissing fun _c2crs(): JsonField<Int> = c2crs
+    @JsonProperty("c2crs")
+    @ExcludeMissing
+    fun _c2crs(): JsonField<Int> = c2crs
 
     /**
      * Returns the raw JSON value of [c2exerciseindicator].
      *
-     * Unlike [c2exerciseindicator], this method doesn't throw if the JSON field has an unexpected
-     * type.
+     * Unlike [c2exerciseindicator], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("c2exerciseindicator")
     @ExcludeMissing
@@ -898,13 +813,14 @@ private constructor(
      *
      * Unlike [c2id], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c2id") @ExcludeMissing fun _c2id(): JsonField<String> = c2id
+    @JsonProperty("c2id")
+    @ExcludeMissing
+    fun _c2id(): JsonField<String> = c2id
 
     /**
      * Returns the raw JSON value of [c2idamplifyingdescriptor].
      *
-     * Unlike [c2idamplifyingdescriptor], this method doesn't throw if the JSON field has an
-     * unexpected type.
+     * Unlike [c2idamplifyingdescriptor], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("c2idamplifyingdescriptor")
     @ExcludeMissing
@@ -915,27 +831,32 @@ private constructor(
      *
      * Unlike [c2lnd], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c2lnd") @ExcludeMissing fun _c2lnd(): JsonField<String> = c2lnd
+    @JsonProperty("c2lnd")
+    @ExcludeMissing
+    fun _c2lnd(): JsonField<String> = c2lnd
 
     /**
      * Returns the raw JSON value of [c2spc].
      *
      * Unlike [c2spc], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c2spc") @ExcludeMissing fun _c2spc(): JsonField<String> = c2spc
+    @JsonProperty("c2spc")
+    @ExcludeMissing
+    fun _c2spc(): JsonField<String> = c2spc
 
     /**
      * Returns the raw JSON value of [c2spd].
      *
      * Unlike [c2spd], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c2spd") @ExcludeMissing fun _c2spd(): JsonField<Int> = c2spd
+    @JsonProperty("c2spd")
+    @ExcludeMissing
+    fun _c2spd(): JsonField<Int> = c2spd
 
     /**
      * Returns the raw JSON value of [c2specialinterestindicator].
      *
-     * Unlike [c2specialinterestindicator], this method doesn't throw if the JSON field has an
-     * unexpected type.
+     * Unlike [c2specialinterestindicator], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("c2specialinterestindicator")
     @ExcludeMissing
@@ -946,76 +867,95 @@ private constructor(
      *
      * Unlike [c2sur], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c2sur") @ExcludeMissing fun _c2sur(): JsonField<String> = c2sur
+    @JsonProperty("c2sur")
+    @ExcludeMissing
+    fun _c2sur(): JsonField<String> = c2sur
 
     /**
      * Returns the raw JSON value of [c3elv].
      *
      * Unlike [c3elv], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c3elv") @ExcludeMissing fun _c3elv(): JsonField<Double> = c3elv
+    @JsonProperty("c3elv")
+    @ExcludeMissing
+    fun _c3elv(): JsonField<Double> = c3elv
 
     /**
      * Returns the raw JSON value of [c3lat].
      *
      * Unlike [c3lat], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c3lat") @ExcludeMissing fun _c3lat(): JsonField<Double> = c3lat
+    @JsonProperty("c3lat")
+    @ExcludeMissing
+    fun _c3lat(): JsonField<Double> = c3lat
 
     /**
      * Returns the raw JSON value of [c3lon].
      *
      * Unlike [c3lon], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c3lon") @ExcludeMissing fun _c3lon(): JsonField<Double> = c3lon
+    @JsonProperty("c3lon")
+    @ExcludeMissing
+    fun _c3lon(): JsonField<Double> = c3lon
 
     /**
      * Returns the raw JSON value of [c3ptl].
      *
      * Unlike [c3ptl], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c3ptl") @ExcludeMissing fun _c3ptl(): JsonField<String> = c3ptl
+    @JsonProperty("c3ptl")
+    @ExcludeMissing
+    fun _c3ptl(): JsonField<String> = c3ptl
 
     /**
      * Returns the raw JSON value of [c3ptnum].
      *
      * Unlike [c3ptnum], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c3ptnum") @ExcludeMissing fun _c3ptnum(): JsonField<String> = c3ptnum
+    @JsonProperty("c3ptnum")
+    @ExcludeMissing
+    fun _c3ptnum(): JsonField<String> = c3ptnum
 
     /**
      * Returns the raw JSON value of [c4colon].
      *
      * Unlike [c4colon], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c4colon") @ExcludeMissing fun _c4colon(): JsonField<Int> = c4colon
+    @JsonProperty("c4colon")
+    @ExcludeMissing
+    fun _c4colon(): JsonField<Int> = c4colon
 
     /**
      * Returns the raw JSON value of [c4def].
      *
      * Unlike [c4def], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c4def") @ExcludeMissing fun _c4def(): JsonField<String> = c4def
+    @JsonProperty("c4def")
+    @ExcludeMissing
+    fun _c4def(): JsonField<String> = c4def
 
     /**
      * Returns the raw JSON value of [c4egress].
      *
      * Unlike [c4egress], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c4egress") @ExcludeMissing fun _c4egress(): JsonField<Int> = c4egress
+    @JsonProperty("c4egress")
+    @ExcludeMissing
+    fun _c4egress(): JsonField<Int> = c4egress
 
     /**
      * Returns the raw JSON value of [c4mod].
      *
      * Unlike [c4mod], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c4mod") @ExcludeMissing fun _c4mod(): JsonField<Int> = c4mod
+    @JsonProperty("c4mod")
+    @ExcludeMissing
+    fun _c4mod(): JsonField<Int> = c4mod
 
     /**
      * Returns the raw JSON value of [c4numberofstores].
      *
-     * Unlike [c4numberofstores], this method doesn't throw if the JSON field has an unexpected
-     * type.
+     * Unlike [c4numberofstores], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("c4numberofstores")
     @ExcludeMissing
@@ -1026,14 +966,18 @@ private constructor(
      *
      * Unlike [c4runin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c4runin") @ExcludeMissing fun _c4runin(): JsonField<Int> = c4runin
+    @JsonProperty("c4runin")
+    @ExcludeMissing
+    fun _c4runin(): JsonField<Int> = c4runin
 
     /**
      * Returns the raw JSON value of [c4tgt].
      *
      * Unlike [c4tgt], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c4tgt") @ExcludeMissing fun _c4tgt(): JsonField<String> = c4tgt
+    @JsonProperty("c4tgt")
+    @ExcludeMissing
+    fun _c4tgt(): JsonField<String> = c4tgt
 
     /**
      * Returns the raw JSON value of [c4timediscrete].
@@ -1049,7 +993,9 @@ private constructor(
      *
      * Unlike [c4tm], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c4tm") @ExcludeMissing fun _c4tm(): JsonField<Int> = c4tm
+    @JsonProperty("c4tm")
+    @ExcludeMissing
+    fun _c4tm(): JsonField<Int> = c4tm
 
     /**
      * Returns the raw JSON value of [c4typeofstores].
@@ -1065,7 +1011,9 @@ private constructor(
      *
      * Unlike [c5colon], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c5colon") @ExcludeMissing fun _c5colon(): JsonField<Int> = c5colon
+    @JsonProperty("c5colon")
+    @ExcludeMissing
+    fun _c5colon(): JsonField<Int> = c5colon
 
     /**
      * Returns the raw JSON value of [c5elevationlsbs].
@@ -1081,105 +1029,135 @@ private constructor(
      *
      * Unlike [c5haeadj], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c5haeadj") @ExcludeMissing fun _c5haeadj(): JsonField<Int> = c5haeadj
+    @JsonProperty("c5haeadj")
+    @ExcludeMissing
+    fun _c5haeadj(): JsonField<Int> = c5haeadj
 
     /**
      * Returns the raw JSON value of [c5latlsb].
      *
      * Unlike [c5latlsb], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c5latlsb") @ExcludeMissing fun _c5latlsb(): JsonField<Int> = c5latlsb
+    @JsonProperty("c5latlsb")
+    @ExcludeMissing
+    fun _c5latlsb(): JsonField<Int> = c5latlsb
 
     /**
      * Returns the raw JSON value of [c5lonlsb].
      *
      * Unlike [c5lonlsb], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c5lonlsb") @ExcludeMissing fun _c5lonlsb(): JsonField<Int> = c5lonlsb
+    @JsonProperty("c5lonlsb")
+    @ExcludeMissing
+    fun _c5lonlsb(): JsonField<Int> = c5lonlsb
 
     /**
      * Returns the raw JSON value of [c5tgtbrng].
      *
      * Unlike [c5tgtbrng], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c5tgtbrng") @ExcludeMissing fun _c5tgtbrng(): JsonField<Int> = c5tgtbrng
+    @JsonProperty("c5tgtbrng")
+    @ExcludeMissing
+    fun _c5tgtbrng(): JsonField<Int> = c5tgtbrng
 
     /**
      * Returns the raw JSON value of [c5tw].
      *
      * Unlike [c5tw], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c5tw") @ExcludeMissing fun _c5tw(): JsonField<Int> = c5tw
+    @JsonProperty("c5tw")
+    @ExcludeMissing
+    fun _c5tw(): JsonField<Int> = c5tw
 
     /**
      * Returns the raw JSON value of [c6dspc].
      *
      * Unlike [c6dspc], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c6dspc") @ExcludeMissing fun _c6dspc(): JsonField<String> = c6dspc
+    @JsonProperty("c6dspc")
+    @ExcludeMissing
+    fun _c6dspc(): JsonField<String> = c6dspc
 
     /**
      * Returns the raw JSON value of [c6dspct].
      *
      * Unlike [c6dspct], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c6dspct") @ExcludeMissing fun _c6dspct(): JsonField<String> = c6dspct
+    @JsonProperty("c6dspct")
+    @ExcludeMissing
+    fun _c6dspct(): JsonField<String> = c6dspct
 
     /**
      * Returns the raw JSON value of [c6fplpm].
      *
      * Unlike [c6fplpm], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c6fplpm") @ExcludeMissing fun _c6fplpm(): JsonField<String> = c6fplpm
+    @JsonProperty("c6fplpm")
+    @ExcludeMissing
+    fun _c6fplpm(): JsonField<String> = c6fplpm
 
     /**
      * Returns the raw JSON value of [c6intel].
      *
      * Unlike [c6intel], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c6intel") @ExcludeMissing fun _c6intel(): JsonField<Int> = c6intel
+    @JsonProperty("c6intel")
+    @ExcludeMissing
+    fun _c6intel(): JsonField<Int> = c6intel
 
     /**
      * Returns the raw JSON value of [c6laser].
      *
      * Unlike [c6laser], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c6laser") @ExcludeMissing fun _c6laser(): JsonField<Int> = c6laser
+    @JsonProperty("c6laser")
+    @ExcludeMissing
+    fun _c6laser(): JsonField<Int> = c6laser
 
     /**
      * Returns the raw JSON value of [c6longpm].
      *
      * Unlike [c6longpm], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c6longpm") @ExcludeMissing fun _c6longpm(): JsonField<String> = c6longpm
+    @JsonProperty("c6longpm")
+    @ExcludeMissing
+    fun _c6longpm(): JsonField<String> = c6longpm
 
     /**
      * Returns the raw JSON value of [c6tnr3].
      *
      * Unlike [c6tnr3], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c6tnr3") @ExcludeMissing fun _c6tnr3(): JsonField<Int> = c6tnr3
+    @JsonProperty("c6tnr3")
+    @ExcludeMissing
+    fun _c6tnr3(): JsonField<Int> = c6tnr3
 
     /**
      * Returns the raw JSON value of [c7elang2].
      *
      * Unlike [c7elang2], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c7elang2") @ExcludeMissing fun _c7elang2(): JsonField<Double> = c7elang2
+    @JsonProperty("c7elang2")
+    @ExcludeMissing
+    fun _c7elang2(): JsonField<Double> = c7elang2
 
     /**
      * Returns the raw JSON value of [c7in3p].
      *
      * Unlike [c7in3p], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c7in3p") @ExcludeMissing fun _c7in3p(): JsonField<Int> = c7in3p
+    @JsonProperty("c7in3p")
+    @ExcludeMissing
+    fun _c7in3p(): JsonField<Int> = c7in3p
 
     /**
      * Returns the raw JSON value of [c7tnor].
      *
      * Unlike [c7tnor], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("c7tnor") @ExcludeMissing fun _c7tnor(): JsonField<String> = c7tnor
+    @JsonProperty("c7tnor")
+    @ExcludeMissing
+    fun _c7tnor(): JsonField<String> = c7tnor
 
     /**
      * Returns the raw JSON value of [createdAt].
@@ -1195,118 +1173,145 @@ private constructor(
      *
      * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+    @JsonProperty("createdBy")
+    @ExcludeMissing
+    fun _createdBy(): JsonField<String> = createdBy
 
     /**
      * Returns the raw JSON value of [env].
      *
      * Unlike [env], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("env") @ExcludeMissing fun _env(): JsonField<String> = env
+    @JsonProperty("env")
+    @ExcludeMissing
+    fun _env(): JsonField<String> = env
 
     /**
      * Returns the raw JSON value of [index].
      *
      * Unlike [index], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("index") @ExcludeMissing fun _index(): JsonField<Int> = index
+    @JsonProperty("index")
+    @ExcludeMissing
+    fun _index(): JsonField<Int> = index
 
     /**
      * Returns the raw JSON value of [lat].
      *
      * Unlike [lat], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("lat") @ExcludeMissing fun _lat(): JsonField<Double> = lat
+    @JsonProperty("lat")
+    @ExcludeMissing
+    fun _lat(): JsonField<Double> = lat
 
     /**
      * Returns the raw JSON value of [lon].
      *
      * Unlike [lon], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("lon") @ExcludeMissing fun _lon(): JsonField<Double> = lon
+    @JsonProperty("lon")
+    @ExcludeMissing
+    fun _lon(): JsonField<Double> = lon
 
     /**
      * Returns the raw JSON value of [orginx].
      *
      * Unlike [orginx], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("orginx") @ExcludeMissing fun _orginx(): JsonField<String> = orginx
+    @JsonProperty("orginx")
+    @ExcludeMissing
+    fun _orginx(): JsonField<String> = orginx
 
     /**
      * Returns the raw JSON value of [origin].
      *
      * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+    @JsonProperty("origin")
+    @ExcludeMissing
+    fun _origin(): JsonField<String> = origin
 
     /**
      * Returns the raw JSON value of [origNetwork].
      *
      * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
+    @JsonProperty("origNetwork")
+    @ExcludeMissing
+    fun _origNetwork(): JsonField<String> = origNetwork
 
     /**
      * Returns the raw JSON value of [rc].
      *
      * Unlike [rc], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("rc") @ExcludeMissing fun _rc(): JsonField<String> = rc
+    @JsonProperty("rc")
+    @ExcludeMissing
+    fun _rc(): JsonField<String> = rc
 
     /**
      * Returns the raw JSON value of [rr].
      *
      * Unlike [rr], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("rr") @ExcludeMissing fun _rr(): JsonField<Int> = rr
+    @JsonProperty("rr")
+    @ExcludeMissing
+    fun _rr(): JsonField<Int> = rr
 
     /**
      * Returns the raw JSON value of [sz].
      *
      * Unlike [sz], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("sz") @ExcludeMissing fun _sz(): JsonField<String> = sz
+    @JsonProperty("sz")
+    @ExcludeMissing
+    fun _sz(): JsonField<String> = sz
 
     /**
      * Returns the raw JSON value of [tno].
      *
      * Unlike [tno], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("tno") @ExcludeMissing fun _tno(): JsonField<String> = tno
+    @JsonProperty("tno")
+    @ExcludeMissing
+    fun _tno(): JsonField<String> = tno
 
     /**
      * Returns the raw JSON value of [trkId].
      *
      * Unlike [trkId], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("trkId") @ExcludeMissing fun _trkId(): JsonField<String> = trkId
+    @JsonProperty("trkId")
+    @ExcludeMissing
+    fun _trkId(): JsonField<String> = trkId
 
     /**
      * Returns the raw JSON value of [twenv].
      *
      * Unlike [twenv], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("twenv") @ExcludeMissing fun _twenv(): JsonField<String> = twenv
+    @JsonProperty("twenv")
+    @ExcludeMissing
+    fun _twenv(): JsonField<String> = twenv
 
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
-        additionalProperties.put(key, value)
+      additionalProperties.put(key, value)
     }
 
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> =
-        Collections.unmodifiableMap(additionalProperties)
+    fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of
-         * [MissionAssignmentListResponse].
+         * Returns a mutable builder for constructing an instance of [MissionAssignmentListResponse].
          *
          * The following fields are required:
+         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -1315,7 +1320,8 @@ private constructor(
          * .ts()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [MissionAssignmentListResponse]. */
@@ -1390,115 +1396,114 @@ private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(missionAssignmentListResponse: MissionAssignmentListResponse) = apply {
-            classificationMarking = missionAssignmentListResponse.classificationMarking
-            dataMode = missionAssignmentListResponse.dataMode
-            mad = missionAssignmentListResponse.mad
-            source = missionAssignmentListResponse.source
-            ts = missionAssignmentListResponse.ts
-            id = missionAssignmentListResponse.id
-            c1associateddmpis = missionAssignmentListResponse.c1associateddmpis
-            c2air = missionAssignmentListResponse.c2air
-            c2alt = missionAssignmentListResponse.c2alt
-            c2crs = missionAssignmentListResponse.c2crs
-            c2exerciseindicator = missionAssignmentListResponse.c2exerciseindicator
-            c2exercisemof = missionAssignmentListResponse.c2exercisemof
-            c2id = missionAssignmentListResponse.c2id
-            c2idamplifyingdescriptor = missionAssignmentListResponse.c2idamplifyingdescriptor
-            c2lnd = missionAssignmentListResponse.c2lnd
-            c2spc = missionAssignmentListResponse.c2spc
-            c2spd = missionAssignmentListResponse.c2spd
-            c2specialinterestindicator = missionAssignmentListResponse.c2specialinterestindicator
-            c2sur = missionAssignmentListResponse.c2sur
-            c3elv = missionAssignmentListResponse.c3elv
-            c3lat = missionAssignmentListResponse.c3lat
-            c3lon = missionAssignmentListResponse.c3lon
-            c3ptl = missionAssignmentListResponse.c3ptl
-            c3ptnum = missionAssignmentListResponse.c3ptnum
-            c4colon = missionAssignmentListResponse.c4colon
-            c4def = missionAssignmentListResponse.c4def
-            c4egress = missionAssignmentListResponse.c4egress
-            c4mod = missionAssignmentListResponse.c4mod
-            c4numberofstores = missionAssignmentListResponse.c4numberofstores
-            c4runin = missionAssignmentListResponse.c4runin
-            c4tgt = missionAssignmentListResponse.c4tgt
-            c4timediscrete = missionAssignmentListResponse.c4timediscrete
-            c4tm = missionAssignmentListResponse.c4tm
-            c4typeofstores = missionAssignmentListResponse.c4typeofstores
-            c5colon = missionAssignmentListResponse.c5colon
-            c5elevationlsbs = missionAssignmentListResponse.c5elevationlsbs
-            c5haeadj = missionAssignmentListResponse.c5haeadj
-            c5latlsb = missionAssignmentListResponse.c5latlsb
-            c5lonlsb = missionAssignmentListResponse.c5lonlsb
-            c5tgtbrng = missionAssignmentListResponse.c5tgtbrng
-            c5tw = missionAssignmentListResponse.c5tw
-            c6dspc = missionAssignmentListResponse.c6dspc
-            c6dspct = missionAssignmentListResponse.c6dspct
-            c6fplpm = missionAssignmentListResponse.c6fplpm
-            c6intel = missionAssignmentListResponse.c6intel
-            c6laser = missionAssignmentListResponse.c6laser
-            c6longpm = missionAssignmentListResponse.c6longpm
-            c6tnr3 = missionAssignmentListResponse.c6tnr3
-            c7elang2 = missionAssignmentListResponse.c7elang2
-            c7in3p = missionAssignmentListResponse.c7in3p
-            c7tnor = missionAssignmentListResponse.c7tnor
-            createdAt = missionAssignmentListResponse.createdAt
-            createdBy = missionAssignmentListResponse.createdBy
-            env = missionAssignmentListResponse.env
-            index = missionAssignmentListResponse.index
-            lat = missionAssignmentListResponse.lat
-            lon = missionAssignmentListResponse.lon
-            orginx = missionAssignmentListResponse.orginx
-            origin = missionAssignmentListResponse.origin
-            origNetwork = missionAssignmentListResponse.origNetwork
-            rc = missionAssignmentListResponse.rc
-            rr = missionAssignmentListResponse.rr
-            sz = missionAssignmentListResponse.sz
-            tno = missionAssignmentListResponse.tno
-            trkId = missionAssignmentListResponse.trkId
-            twenv = missionAssignmentListResponse.twenv
-            additionalProperties = missionAssignmentListResponse.additionalProperties.toMutableMap()
-        }
+        internal fun from(missionAssignmentListResponse: MissionAssignmentListResponse) =
+            apply {
+                classificationMarking = missionAssignmentListResponse.classificationMarking
+                dataMode = missionAssignmentListResponse.dataMode
+                mad = missionAssignmentListResponse.mad
+                source = missionAssignmentListResponse.source
+                ts = missionAssignmentListResponse.ts
+                id = missionAssignmentListResponse.id
+                c1associateddmpis = missionAssignmentListResponse.c1associateddmpis
+                c2air = missionAssignmentListResponse.c2air
+                c2alt = missionAssignmentListResponse.c2alt
+                c2crs = missionAssignmentListResponse.c2crs
+                c2exerciseindicator = missionAssignmentListResponse.c2exerciseindicator
+                c2exercisemof = missionAssignmentListResponse.c2exercisemof
+                c2id = missionAssignmentListResponse.c2id
+                c2idamplifyingdescriptor = missionAssignmentListResponse.c2idamplifyingdescriptor
+                c2lnd = missionAssignmentListResponse.c2lnd
+                c2spc = missionAssignmentListResponse.c2spc
+                c2spd = missionAssignmentListResponse.c2spd
+                c2specialinterestindicator = missionAssignmentListResponse.c2specialinterestindicator
+                c2sur = missionAssignmentListResponse.c2sur
+                c3elv = missionAssignmentListResponse.c3elv
+                c3lat = missionAssignmentListResponse.c3lat
+                c3lon = missionAssignmentListResponse.c3lon
+                c3ptl = missionAssignmentListResponse.c3ptl
+                c3ptnum = missionAssignmentListResponse.c3ptnum
+                c4colon = missionAssignmentListResponse.c4colon
+                c4def = missionAssignmentListResponse.c4def
+                c4egress = missionAssignmentListResponse.c4egress
+                c4mod = missionAssignmentListResponse.c4mod
+                c4numberofstores = missionAssignmentListResponse.c4numberofstores
+                c4runin = missionAssignmentListResponse.c4runin
+                c4tgt = missionAssignmentListResponse.c4tgt
+                c4timediscrete = missionAssignmentListResponse.c4timediscrete
+                c4tm = missionAssignmentListResponse.c4tm
+                c4typeofstores = missionAssignmentListResponse.c4typeofstores
+                c5colon = missionAssignmentListResponse.c5colon
+                c5elevationlsbs = missionAssignmentListResponse.c5elevationlsbs
+                c5haeadj = missionAssignmentListResponse.c5haeadj
+                c5latlsb = missionAssignmentListResponse.c5latlsb
+                c5lonlsb = missionAssignmentListResponse.c5lonlsb
+                c5tgtbrng = missionAssignmentListResponse.c5tgtbrng
+                c5tw = missionAssignmentListResponse.c5tw
+                c6dspc = missionAssignmentListResponse.c6dspc
+                c6dspct = missionAssignmentListResponse.c6dspct
+                c6fplpm = missionAssignmentListResponse.c6fplpm
+                c6intel = missionAssignmentListResponse.c6intel
+                c6laser = missionAssignmentListResponse.c6laser
+                c6longpm = missionAssignmentListResponse.c6longpm
+                c6tnr3 = missionAssignmentListResponse.c6tnr3
+                c7elang2 = missionAssignmentListResponse.c7elang2
+                c7in3p = missionAssignmentListResponse.c7in3p
+                c7tnor = missionAssignmentListResponse.c7tnor
+                createdAt = missionAssignmentListResponse.createdAt
+                createdBy = missionAssignmentListResponse.createdBy
+                env = missionAssignmentListResponse.env
+                index = missionAssignmentListResponse.index
+                lat = missionAssignmentListResponse.lat
+                lon = missionAssignmentListResponse.lon
+                orginx = missionAssignmentListResponse.orginx
+                origin = missionAssignmentListResponse.origin
+                origNetwork = missionAssignmentListResponse.origNetwork
+                rc = missionAssignmentListResponse.rc
+                rr = missionAssignmentListResponse.rr
+                sz = missionAssignmentListResponse.sz
+                tno = missionAssignmentListResponse.tno
+                trkId = missionAssignmentListResponse.trkId
+                twenv = missionAssignmentListResponse.twenv
+                additionalProperties = missionAssignmentListResponse.additionalProperties.toMutableMap()
+            }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-        fun classificationMarking(classificationMarking: String) =
-            classificationMarking(JsonField.of(classificationMarking))
+        fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
 
         /**
          * Sets [Builder.classificationMarking] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
-            this.classificationMarking = classificationMarking
-        }
+        fun classificationMarking(classificationMarking: JsonField<String>) =
+            apply {
+                this.classificationMarking = classificationMarking
+            }
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-         * both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-         * analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-         * requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
          */
         fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
         /**
          * Sets [Builder.dataMode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+        fun dataMode(dataMode: JsonField<DataMode>) =
+            apply {
+                this.dataMode = dataMode
+            }
 
         /** The mission assignment discrete value. */
         fun mad(mad: String) = mad(JsonField.of(mad))
@@ -1506,10 +1511,13 @@ private constructor(
         /**
          * Sets [Builder.mad] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.mad] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.mad] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun mad(mad: JsonField<String>) = apply { this.mad = mad }
+        fun mad(mad: JsonField<String>) =
+            apply {
+                this.mad = mad
+            }
 
         /** Source of the data. */
         fun source(source: String) = source(JsonField.of(source))
@@ -1517,10 +1525,13 @@ private constructor(
         /**
          * Sets [Builder.source] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.source] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun source(source: JsonField<String>) = apply { this.source = source }
+        fun source(source: JsonField<String>) =
+            apply {
+                this.source = source
+            }
 
         /** The timestamp of the mission data, in ISO 8601 UTC format. */
         fun ts(ts: OffsetDateTime) = ts(JsonField.of(ts))
@@ -1528,11 +1539,13 @@ private constructor(
         /**
          * Sets [Builder.ts] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.ts] with a well-typed [OffsetDateTime] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.ts] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun ts(ts: JsonField<OffsetDateTime>) = apply { this.ts = ts }
+        fun ts(ts: JsonField<OffsetDateTime>) =
+            apply {
+                this.ts = ts
+            }
 
         /** Unique identifier of the record, auto-generated by the system. */
         fun id(id: String) = id(JsonField.of(id))
@@ -1540,25 +1553,27 @@ private constructor(
         /**
          * Sets [Builder.id] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.id] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun id(id: JsonField<String>) = apply { this.id = id }
+        fun id(id: JsonField<String>) =
+            apply {
+                this.id = id
+            }
 
         /** TARGET POSITION CONTINUATION WORD - number of associated dmpis. */
-        fun c1associateddmpis(c1associateddmpis: Int) =
-            c1associateddmpis(JsonField.of(c1associateddmpis))
+        fun c1associateddmpis(c1associateddmpis: Int) = c1associateddmpis(JsonField.of(c1associateddmpis))
 
         /**
          * Sets [Builder.c1associateddmpis] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c1associateddmpis] with a well-typed [Int] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.c1associateddmpis] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun c1associateddmpis(c1associateddmpis: JsonField<Int>) = apply {
-            this.c1associateddmpis = c1associateddmpis
-        }
+        fun c1associateddmpis(c1associateddmpis: JsonField<Int>) =
+            apply {
+                this.c1associateddmpis = c1associateddmpis
+            }
 
         /** TARGET DATA CONTINUATION WORD - air specific type, see TABLE B-21. */
         fun c2air(c2air: String) = c2air(JsonField.of(c2air))
@@ -1566,10 +1581,13 @@ private constructor(
         /**
          * Sets [Builder.c2air] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c2air] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c2air] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c2air(c2air: JsonField<String>) = apply { this.c2air = c2air }
+        fun c2air(c2air: JsonField<String>) =
+            apply {
+                this.c2air = c2air
+            }
 
         /** TARGET DATA CONTINUATION WORD - altitude, 100 FT, 2047=NS. */
         fun c2alt(c2alt: Int) = c2alt(JsonField.of(c2alt))
@@ -1577,10 +1595,13 @@ private constructor(
         /**
          * Sets [Builder.c2alt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c2alt] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c2alt] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c2alt(c2alt: JsonField<Int>) = apply { this.c2alt = c2alt }
+        fun c2alt(c2alt: JsonField<Int>) =
+            apply {
+                this.c2alt = c2alt
+            }
 
         /** TARGET DATA CONTINUATION WORD - course in increments of 1 degree. */
         fun c2crs(c2crs: Int) = c2crs(JsonField.of(c2crs))
@@ -1588,25 +1609,27 @@ private constructor(
         /**
          * Sets [Builder.c2crs] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c2crs] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c2crs] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c2crs(c2crs: JsonField<Int>) = apply { this.c2crs = c2crs }
+        fun c2crs(c2crs: JsonField<Int>) =
+            apply {
+                this.c2crs = c2crs
+            }
 
         /** TARGET DATA CONTINUATION WORD - exercise indicator. */
-        fun c2exerciseindicator(c2exerciseindicator: String) =
-            c2exerciseindicator(JsonField.of(c2exerciseindicator))
+        fun c2exerciseindicator(c2exerciseindicator: String) = c2exerciseindicator(JsonField.of(c2exerciseindicator))
 
         /**
          * Sets [Builder.c2exerciseindicator] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c2exerciseindicator] with a well-typed [String] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.c2exerciseindicator] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun c2exerciseindicator(c2exerciseindicator: JsonField<String>) = apply {
-            this.c2exerciseindicator = c2exerciseindicator
-        }
+        fun c2exerciseindicator(c2exerciseindicator: JsonField<String>) =
+            apply {
+                this.c2exerciseindicator = c2exerciseindicator
+            }
 
         /** TARGET DATA CONTINUATION WORD - method of fire. */
         fun c2exercisemof(c2exercisemof: String) = c2exercisemof(JsonField.of(c2exercisemof))
@@ -1614,13 +1637,13 @@ private constructor(
         /**
          * Sets [Builder.c2exercisemof] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c2exercisemof] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.c2exercisemof] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c2exercisemof(c2exercisemof: JsonField<String>) = apply {
-            this.c2exercisemof = c2exercisemof
-        }
+        fun c2exercisemof(c2exercisemof: JsonField<String>) =
+            apply {
+                this.c2exercisemof = c2exercisemof
+            }
 
         /** TARGET DATA CONTINUATION WORD - identity. */
         fun c2id(c2id: String) = c2id(JsonField.of(c2id))
@@ -1628,25 +1651,27 @@ private constructor(
         /**
          * Sets [Builder.c2id] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c2id] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c2id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c2id(c2id: JsonField<String>) = apply { this.c2id = c2id }
+        fun c2id(c2id: JsonField<String>) =
+            apply {
+                this.c2id = c2id
+            }
 
         /** TARGET DATA CONTINUATION WORD - identity amplifying descriptor. */
-        fun c2idamplifyingdescriptor(c2idamplifyingdescriptor: String) =
-            c2idamplifyingdescriptor(JsonField.of(c2idamplifyingdescriptor))
+        fun c2idamplifyingdescriptor(c2idamplifyingdescriptor: String) = c2idamplifyingdescriptor(JsonField.of(c2idamplifyingdescriptor))
 
         /**
          * Sets [Builder.c2idamplifyingdescriptor] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c2idamplifyingdescriptor] with a well-typed [String]
-         * value instead. This method is primarily for setting the field to an undocumented or not
-         * yet supported value.
+         * You should usually call [Builder.c2idamplifyingdescriptor] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c2idamplifyingdescriptor(c2idamplifyingdescriptor: JsonField<String>) = apply {
-            this.c2idamplifyingdescriptor = c2idamplifyingdescriptor
-        }
+        fun c2idamplifyingdescriptor(c2idamplifyingdescriptor: JsonField<String>) =
+            apply {
+                this.c2idamplifyingdescriptor = c2idamplifyingdescriptor
+            }
 
         /** TARGET DATA CONTINUATION WORD - land specific type, see TABLE B-21. */
         fun c2lnd(c2lnd: String) = c2lnd(JsonField.of(c2lnd))
@@ -1654,10 +1679,13 @@ private constructor(
         /**
          * Sets [Builder.c2lnd] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c2lnd] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c2lnd] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c2lnd(c2lnd: JsonField<String>) = apply { this.c2lnd = c2lnd }
+        fun c2lnd(c2lnd: JsonField<String>) =
+            apply {
+                this.c2lnd = c2lnd
+            }
 
         /** TARGET DATA CONTINUATION WORD - space specific type, see TABLE B-39. */
         fun c2spc(c2spc: String) = c2spc(JsonField.of(c2spc))
@@ -1665,10 +1693,13 @@ private constructor(
         /**
          * Sets [Builder.c2spc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c2spc] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c2spc] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c2spc(c2spc: JsonField<String>) = apply { this.c2spc = c2spc }
+        fun c2spc(c2spc: JsonField<String>) =
+            apply {
+                this.c2spc = c2spc
+            }
 
         /** TARGET DATA CONTINUATION WORD - speed in 2 DM/HR, 2047=NS. */
         fun c2spd(c2spd: Int) = c2spd(JsonField.of(c2spd))
@@ -1676,25 +1707,27 @@ private constructor(
         /**
          * Sets [Builder.c2spd] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c2spd] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c2spd] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c2spd(c2spd: JsonField<Int>) = apply { this.c2spd = c2spd }
+        fun c2spd(c2spd: JsonField<Int>) =
+            apply {
+                this.c2spd = c2spd
+            }
 
         /** TARGET DATA CONTINUATION WORD - special interest indicator. */
-        fun c2specialinterestindicator(c2specialinterestindicator: String) =
-            c2specialinterestindicator(JsonField.of(c2specialinterestindicator))
+        fun c2specialinterestindicator(c2specialinterestindicator: String) = c2specialinterestindicator(JsonField.of(c2specialinterestindicator))
 
         /**
          * Sets [Builder.c2specialinterestindicator] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c2specialinterestindicator] with a well-typed [String]
-         * value instead. This method is primarily for setting the field to an undocumented or not
-         * yet supported value.
+         * You should usually call [Builder.c2specialinterestindicator] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c2specialinterestindicator(c2specialinterestindicator: JsonField<String>) = apply {
-            this.c2specialinterestindicator = c2specialinterestindicator
-        }
+        fun c2specialinterestindicator(c2specialinterestindicator: JsonField<String>) =
+            apply {
+                this.c2specialinterestindicator = c2specialinterestindicator
+            }
 
         /** TARGET DATA CONTINUATION WORD - surface specific type, see TABLE B-21. */
         fun c2sur(c2sur: String) = c2sur(JsonField.of(c2sur))
@@ -1702,10 +1735,13 @@ private constructor(
         /**
          * Sets [Builder.c2sur] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c2sur] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c2sur] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c2sur(c2sur: JsonField<String>) = apply { this.c2sur = c2sur }
+        fun c2sur(c2sur: JsonField<String>) =
+            apply {
+                this.c2sur = c2sur
+            }
 
         /** POINT LOCATION CONTINUATION WORD - elevation, 25 FT, 1023=NS. */
         fun c3elv(c3elv: Double) = c3elv(JsonField.of(c3elv))
@@ -1713,10 +1749,13 @@ private constructor(
         /**
          * Sets [Builder.c3elv] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c3elv] with a well-typed [Double] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c3elv] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c3elv(c3elv: JsonField<Double>) = apply { this.c3elv = c3elv }
+        fun c3elv(c3elv: JsonField<Double>) =
+            apply {
+                this.c3elv = c3elv
+            }
 
         /** POINT LOCATION CONTINUATION WORD - latitude, 0.0013 MINUTE. */
         fun c3lat(c3lat: Double) = c3lat(JsonField.of(c3lat))
@@ -1724,10 +1763,13 @@ private constructor(
         /**
          * Sets [Builder.c3lat] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c3lat] with a well-typed [Double] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c3lat] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c3lat(c3lat: JsonField<Double>) = apply { this.c3lat = c3lat }
+        fun c3lat(c3lat: JsonField<Double>) =
+            apply {
+                this.c3lat = c3lat
+            }
 
         /** POINT LOCATION CONTINUATION WORD - longitude, 0.0013 MINUTE. */
         fun c3lon(c3lon: Double) = c3lon(JsonField.of(c3lon))
@@ -1735,10 +1777,13 @@ private constructor(
         /**
          * Sets [Builder.c3lon] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c3lon] with a well-typed [Double] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c3lon] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c3lon(c3lon: JsonField<Double>) = apply { this.c3lon = c3lon }
+        fun c3lon(c3lon: JsonField<Double>) =
+            apply {
+                this.c3lon = c3lon
+            }
 
         /** TARGET DATA CONTINUATION WORD - point type 1. */
         fun c3ptl(c3ptl: String) = c3ptl(JsonField.of(c3ptl))
@@ -1746,10 +1791,13 @@ private constructor(
         /**
          * Sets [Builder.c3ptl] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c3ptl] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c3ptl] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c3ptl(c3ptl: JsonField<String>) = apply { this.c3ptl = c3ptl }
+        fun c3ptl(c3ptl: JsonField<String>) =
+            apply {
+                this.c3ptl = c3ptl
+            }
 
         /** TARGET DATA CONTINUATION WORD - point number. */
         fun c3ptnum(c3ptnum: String) = c3ptnum(JsonField.of(c3ptnum))
@@ -1757,10 +1805,13 @@ private constructor(
         /**
          * Sets [Builder.c3ptnum] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c3ptnum] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c3ptnum] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c3ptnum(c3ptnum: JsonField<String>) = apply { this.c3ptnum = c3ptnum }
+        fun c3ptnum(c3ptnum: JsonField<String>) =
+            apply {
+                this.c3ptnum = c3ptnum
+            }
 
         /** SURFACE ATTACK CONTINUATION WORD - minute. */
         fun c4colon(c4colon: Int) = c4colon(JsonField.of(c4colon))
@@ -1768,10 +1819,13 @@ private constructor(
         /**
          * Sets [Builder.c4colon] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c4colon] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c4colon] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c4colon(c4colon: JsonField<Int>) = apply { this.c4colon = c4colon }
+        fun c4colon(c4colon: JsonField<Int>) =
+            apply {
+                this.c4colon = c4colon
+            }
 
         /** SURFACE ATTACK CONTINUATION WORD - target defenses. */
         fun c4def(c4def: String) = c4def(JsonField.of(c4def))
@@ -1779,10 +1833,13 @@ private constructor(
         /**
          * Sets [Builder.c4def] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c4def] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c4def] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c4def(c4def: JsonField<String>) = apply { this.c4def = c4def }
+        fun c4def(c4def: JsonField<String>) =
+            apply {
+                this.c4def = c4def
+            }
 
         /** SURFACE ATTACK CONTINUATION WORD - run in heading, NS=511. */
         fun c4egress(c4egress: Int) = c4egress(JsonField.of(c4egress))
@@ -1790,10 +1847,13 @@ private constructor(
         /**
          * Sets [Builder.c4egress] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c4egress] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c4egress] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c4egress(c4egress: JsonField<Int>) = apply { this.c4egress = c4egress }
+        fun c4egress(c4egress: JsonField<Int>) =
+            apply {
+                this.c4egress = c4egress
+            }
 
         /** SURFACE ATTACK CONTINUATION WORD - mode of delivery. */
         fun c4mod(c4mod: Int) = c4mod(JsonField.of(c4mod))
@@ -1801,25 +1861,27 @@ private constructor(
         /**
          * Sets [Builder.c4mod] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c4mod] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c4mod] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c4mod(c4mod: JsonField<Int>) = apply { this.c4mod = c4mod }
+        fun c4mod(c4mod: JsonField<Int>) =
+            apply {
+                this.c4mod = c4mod
+            }
 
         /** SURFACE ATTACK CONTINUATION WORD - number of stores, NS=63. */
-        fun c4numberofstores(c4numberofstores: Int) =
-            c4numberofstores(JsonField.of(c4numberofstores))
+        fun c4numberofstores(c4numberofstores: Int) = c4numberofstores(JsonField.of(c4numberofstores))
 
         /**
          * Sets [Builder.c4numberofstores] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c4numberofstores] with a well-typed [Int] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.c4numberofstores] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c4numberofstores(c4numberofstores: JsonField<Int>) = apply {
-            this.c4numberofstores = c4numberofstores
-        }
+        fun c4numberofstores(c4numberofstores: JsonField<Int>) =
+            apply {
+                this.c4numberofstores = c4numberofstores
+            }
 
         /** SURFACE ATTACK CONTINUATION WORD - run in heading, NS=511. */
         fun c4runin(c4runin: Int) = c4runin(JsonField.of(c4runin))
@@ -1827,10 +1889,13 @@ private constructor(
         /**
          * Sets [Builder.c4runin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c4runin] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c4runin] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c4runin(c4runin: JsonField<Int>) = apply { this.c4runin = c4runin }
+        fun c4runin(c4runin: JsonField<Int>) =
+            apply {
+                this.c4runin = c4runin
+            }
 
         /** SURFACE ATTACK CONTINUATION WORD - target type - see TABLE B-32. */
         fun c4tgt(c4tgt: String) = c4tgt(JsonField.of(c4tgt))
@@ -1838,10 +1903,13 @@ private constructor(
         /**
          * Sets [Builder.c4tgt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c4tgt] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c4tgt] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c4tgt(c4tgt: JsonField<String>) = apply { this.c4tgt = c4tgt }
+        fun c4tgt(c4tgt: JsonField<String>) =
+            apply {
+                this.c4tgt = c4tgt
+            }
 
         /** SURFACE ATTACK CONTINUATION WORD - time discrete. */
         fun c4timediscrete(c4timediscrete: String) = c4timediscrete(JsonField.of(c4timediscrete))
@@ -1849,13 +1917,13 @@ private constructor(
         /**
          * Sets [Builder.c4timediscrete] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c4timediscrete] with a well-typed [String] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.c4timediscrete] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun c4timediscrete(c4timediscrete: JsonField<String>) = apply {
-            this.c4timediscrete = c4timediscrete
-        }
+        fun c4timediscrete(c4timediscrete: JsonField<String>) =
+            apply {
+                this.c4timediscrete = c4timediscrete
+            }
 
         /** SURFACE ATTACK CONTINUATION WORD - hour. */
         fun c4tm(c4tm: Int) = c4tm(JsonField.of(c4tm))
@@ -1863,10 +1931,13 @@ private constructor(
         /**
          * Sets [Builder.c4tm] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c4tm] with a well-typed [Int] value instead. This method
-         * is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c4tm] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c4tm(c4tm: JsonField<Int>) = apply { this.c4tm = c4tm }
+        fun c4tm(c4tm: JsonField<Int>) =
+            apply {
+                this.c4tm = c4tm
+            }
 
         /** SURFACE ATTACK CONTINUATION WORD - type of stores. */
         fun c4typeofstores(c4typeofstores: Int) = c4typeofstores(JsonField.of(c4typeofstores))
@@ -1874,13 +1945,13 @@ private constructor(
         /**
          * Sets [Builder.c4typeofstores] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c4typeofstores] with a well-typed [Int] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.c4typeofstores] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c4typeofstores(c4typeofstores: JsonField<Int>) = apply {
-            this.c4typeofstores = c4typeofstores
-        }
+        fun c4typeofstores(c4typeofstores: JsonField<Int>) =
+            apply {
+                this.c4typeofstores = c4typeofstores
+            }
 
         /** SURFACE ATTACK CONTINUATION WORD - seconds in increments of 1 sec. */
         fun c5colon(c5colon: Int) = c5colon(JsonField.of(c5colon))
@@ -1888,10 +1959,13 @@ private constructor(
         /**
          * Sets [Builder.c5colon] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c5colon] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c5colon] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c5colon(c5colon: JsonField<Int>) = apply { this.c5colon = c5colon }
+        fun c5colon(c5colon: JsonField<Int>) =
+            apply {
+                this.c5colon = c5colon
+            }
 
         /** CONTINUATION WORD - used with c3_elv to double precision to approx 3 ft. */
         fun c5elevationlsbs(c5elevationlsbs: Int) = c5elevationlsbs(JsonField.of(c5elevationlsbs))
@@ -1899,13 +1973,13 @@ private constructor(
         /**
          * Sets [Builder.c5elevationlsbs] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c5elevationlsbs] with a well-typed [Int] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.c5elevationlsbs] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c5elevationlsbs(c5elevationlsbs: JsonField<Int>) = apply {
-            this.c5elevationlsbs = c5elevationlsbs
-        }
+        fun c5elevationlsbs(c5elevationlsbs: JsonField<Int>) =
+            apply {
+                this.c5elevationlsbs = c5elevationlsbs
+            }
 
         /** CONTINUATION WORD - hae adjustment, measured in 3.125 FT. */
         fun c5haeadj(c5haeadj: Int) = c5haeadj(JsonField.of(c5haeadj))
@@ -1913,10 +1987,13 @@ private constructor(
         /**
          * Sets [Builder.c5haeadj] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c5haeadj] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c5haeadj] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c5haeadj(c5haeadj: JsonField<Int>) = apply { this.c5haeadj = c5haeadj }
+        fun c5haeadj(c5haeadj: JsonField<Int>) =
+            apply {
+                this.c5haeadj = c5haeadj
+            }
 
         /** CONTINUATION WORD - used with c3_lat to double precision to approx 4 ft. */
         fun c5latlsb(c5latlsb: Int) = c5latlsb(JsonField.of(c5latlsb))
@@ -1924,10 +2001,13 @@ private constructor(
         /**
          * Sets [Builder.c5latlsb] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c5latlsb] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c5latlsb] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c5latlsb(c5latlsb: JsonField<Int>) = apply { this.c5latlsb = c5latlsb }
+        fun c5latlsb(c5latlsb: JsonField<Int>) =
+            apply {
+                this.c5latlsb = c5latlsb
+            }
 
         /** CONTINUATION WORD - used with c3_lon to double precision to approx 4 ft. */
         fun c5lonlsb(c5lonlsb: Int) = c5lonlsb(JsonField.of(c5lonlsb))
@@ -1935,10 +2015,13 @@ private constructor(
         /**
          * Sets [Builder.c5lonlsb] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c5lonlsb] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c5lonlsb] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c5lonlsb(c5lonlsb: JsonField<Int>) = apply { this.c5lonlsb = c5lonlsb }
+        fun c5lonlsb(c5lonlsb: JsonField<Int>) =
+            apply {
+                this.c5lonlsb = c5lonlsb
+            }
 
         /** CONTINUATION WORD - target bearing. */
         fun c5tgtbrng(c5tgtbrng: Int) = c5tgtbrng(JsonField.of(c5tgtbrng))
@@ -1946,10 +2029,13 @@ private constructor(
         /**
          * Sets [Builder.c5tgtbrng] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c5tgtbrng] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c5tgtbrng] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c5tgtbrng(c5tgtbrng: JsonField<Int>) = apply { this.c5tgtbrng = c5tgtbrng }
+        fun c5tgtbrng(c5tgtbrng: JsonField<Int>) =
+            apply {
+                this.c5tgtbrng = c5tgtbrng
+            }
 
         /** CONTINUATION WORD - time window. */
         fun c5tw(c5tw: Int) = c5tw(JsonField.of(c5tw))
@@ -1957,10 +2043,13 @@ private constructor(
         /**
          * Sets [Builder.c5tw] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c5tw] with a well-typed [Int] value instead. This method
-         * is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c5tw] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c5tw(c5tw: JsonField<Int>) = apply { this.c5tw = c5tw }
+        fun c5tw(c5tw: JsonField<Int>) =
+            apply {
+                this.c5tw = c5tw
+            }
 
         /** TARGETING CONTINUATION WORD - designator/seeker pulse code. */
         fun c6dspc(c6dspc: String) = c6dspc(JsonField.of(c6dspc))
@@ -1968,10 +2057,13 @@ private constructor(
         /**
          * Sets [Builder.c6dspc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c6dspc] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c6dspc] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c6dspc(c6dspc: JsonField<String>) = apply { this.c6dspc = c6dspc }
+        fun c6dspc(c6dspc: JsonField<String>) =
+            apply {
+                this.c6dspc = c6dspc
+            }
 
         /** TARGETING CONTINUATION WORD - designator/seeker pulse code type. */
         fun c6dspct(c6dspct: String) = c6dspct(JsonField.of(c6dspct))
@@ -1979,10 +2071,13 @@ private constructor(
         /**
          * Sets [Builder.c6dspct] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c6dspct] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c6dspct] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c6dspct(c6dspct: JsonField<String>) = apply { this.c6dspct = c6dspct }
+        fun c6dspct(c6dspct: JsonField<String>) =
+            apply {
+                this.c6dspct = c6dspct
+            }
 
         /** TARGETING CONTINUATION WORD - first pulse/last pulse mode. */
         fun c6fplpm(c6fplpm: String) = c6fplpm(JsonField.of(c6fplpm))
@@ -1990,10 +2085,13 @@ private constructor(
         /**
          * Sets [Builder.c6fplpm] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c6fplpm] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c6fplpm] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c6fplpm(c6fplpm: JsonField<String>) = apply { this.c6fplpm = c6fplpm }
+        fun c6fplpm(c6fplpm: JsonField<String>) =
+            apply {
+                this.c6fplpm = c6fplpm
+            }
 
         /** TARGETING CONTINUATION WORD - index number, related, 0=NS. */
         fun c6intel(c6intel: Int) = c6intel(JsonField.of(c6intel))
@@ -2001,10 +2099,13 @@ private constructor(
         /**
          * Sets [Builder.c6intel] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c6intel] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c6intel] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c6intel(c6intel: JsonField<Int>) = apply { this.c6intel = c6intel }
+        fun c6intel(c6intel: JsonField<Int>) =
+            apply {
+                this.c6intel = c6intel
+            }
 
         /** TARGETING CONTINUATION WORD - laser illuminator code. */
         fun c6laser(c6laser: Int) = c6laser(JsonField.of(c6laser))
@@ -2012,10 +2113,13 @@ private constructor(
         /**
          * Sets [Builder.c6laser] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c6laser] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c6laser] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c6laser(c6laser: JsonField<Int>) = apply { this.c6laser = c6laser }
+        fun c6laser(c6laser: JsonField<Int>) =
+            apply {
+                this.c6laser = c6laser
+            }
 
         /** TARGETING CONTINUATION WORD - long pulse mode. */
         fun c6longpm(c6longpm: String) = c6longpm(JsonField.of(c6longpm))
@@ -2023,10 +2127,13 @@ private constructor(
         /**
          * Sets [Builder.c6longpm] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c6longpm] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c6longpm] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c6longpm(c6longpm: JsonField<String>) = apply { this.c6longpm = c6longpm }
+        fun c6longpm(c6longpm: JsonField<String>) =
+            apply {
+                this.c6longpm = c6longpm
+            }
 
         /** TARGETING CONTINUATION WORD - track number, related to 3. */
         fun c6tnr3(c6tnr3: Int) = c6tnr3(JsonField.of(c6tnr3))
@@ -2034,10 +2141,13 @@ private constructor(
         /**
          * Sets [Builder.c6tnr3] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c6tnr3] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c6tnr3] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c6tnr3(c6tnr3: JsonField<Int>) = apply { this.c6tnr3 = c6tnr3 }
+        fun c6tnr3(c6tnr3: JsonField<Int>) =
+            apply {
+                this.c6tnr3 = c6tnr3
+            }
 
         /** THIRD PARTY CONTINUATION WORD - elevation angle, 2. */
         fun c7elang2(c7elang2: Double) = c7elang2(JsonField.of(c7elang2))
@@ -2045,10 +2155,13 @@ private constructor(
         /**
          * Sets [Builder.c7elang2] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c7elang2] with a well-typed [Double] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c7elang2] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c7elang2(c7elang2: JsonField<Double>) = apply { this.c7elang2 = c7elang2 }
+        fun c7elang2(c7elang2: JsonField<Double>) =
+            apply {
+                this.c7elang2 = c7elang2
+            }
 
         /** THIRD PARTY CONTINUATION WORD - index number, third party. */
         fun c7in3p(c7in3p: Int) = c7in3p(JsonField.of(c7in3p))
@@ -2056,10 +2169,13 @@ private constructor(
         /**
          * Sets [Builder.c7in3p] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c7in3p] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c7in3p] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c7in3p(c7in3p: JsonField<Int>) = apply { this.c7in3p = c7in3p }
+        fun c7in3p(c7in3p: JsonField<Int>) =
+            apply {
+                this.c7in3p = c7in3p
+            }
 
         /** THIRD PARTY CONTINUATION WORD - track number, index originator. */
         fun c7tnor(c7tnor: String) = c7tnor(JsonField.of(c7tnor))
@@ -2067,10 +2183,13 @@ private constructor(
         /**
          * Sets [Builder.c7tnor] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.c7tnor] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.c7tnor] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun c7tnor(c7tnor: JsonField<String>) = apply { this.c7tnor = c7tnor }
+        fun c7tnor(c7tnor: JsonField<String>) =
+            apply {
+                this.c7tnor = c7tnor
+            }
 
         /** Time the row was created in the database, auto-populated by the system. */
         fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -2078,11 +2197,13 @@ private constructor(
         /**
          * Sets [Builder.createdAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) =
+            apply {
+                this.createdAt = createdAt
+            }
 
         /** Application user who created the row in the database, auto-populated by the system. */
         fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
@@ -2090,11 +2211,13 @@ private constructor(
         /**
          * Sets [Builder.createdBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+        fun createdBy(createdBy: JsonField<String>) =
+            apply {
+                this.createdBy = createdBy
+            }
 
         /** Environment. */
         fun env(env: String) = env(JsonField.of(env))
@@ -2102,10 +2225,13 @@ private constructor(
         /**
          * Sets [Builder.env] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.env] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.env] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun env(env: JsonField<String>) = apply { this.env = env }
+        fun env(env: JsonField<String>) =
+            apply {
+                this.env = env
+            }
 
         /** Index number. */
         fun index(index: Int) = index(JsonField.of(index))
@@ -2113,10 +2239,13 @@ private constructor(
         /**
          * Sets [Builder.index] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.index] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.index] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun index(index: JsonField<Int>) = apply { this.index = index }
+        fun index(index: JsonField<Int>) =
+            apply {
+                this.index = index
+            }
 
         /** WGS84 latitude, in degrees. -90 to 90 degrees (negative values south of equator). */
         fun lat(lat: Double) = lat(JsonField.of(lat))
@@ -2124,24 +2253,27 @@ private constructor(
         /**
          * Sets [Builder.lat] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.lat] with a well-typed [Double] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.lat] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun lat(lat: JsonField<Double>) = apply { this.lat = lat }
+        fun lat(lat: JsonField<Double>) =
+            apply {
+                this.lat = lat
+            }
 
-        /**
-         * WGS84 longitude, in degrees. -180 to 180 degrees (negative values west of Prime
-         * Meridian).
-         */
+        /** WGS84 longitude, in degrees. -180 to 180 degrees (negative values west of Prime Meridian). */
         fun lon(lon: Double) = lon(JsonField.of(lon))
 
         /**
          * Sets [Builder.lon] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.lon] with a well-typed [Double] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.lon] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun lon(lon: JsonField<Double>) = apply { this.lon = lon }
+        fun lon(lon: JsonField<Double>) =
+            apply {
+                this.lon = lon
+            }
 
         /** Origin of index number. */
         fun orginx(orginx: String) = orginx(JsonField.of(orginx))
@@ -2149,41 +2281,41 @@ private constructor(
         /**
          * Sets [Builder.orginx] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.orginx] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.orginx] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun orginx(orginx: JsonField<String>) = apply { this.orginx = orginx }
+        fun orginx(orginx: JsonField<String>) =
+            apply {
+                this.orginx = orginx
+            }
 
-        /**
-         * Originating system or organization which produced the data, if different from the source.
-         * The origin may be different than the source if the source was a mediating system which
-         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
-         * be the origin.
-         */
+        /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
         fun origin(origin: String) = origin(JsonField.of(origin))
 
         /**
          * Sets [Builder.origin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+        fun origin(origin: JsonField<String>) =
+            apply {
+                this.origin = origin
+            }
 
-        /**
-         * The originating source network on which this record was created, auto-populated by the
-         * system.
-         */
+        /** The originating source network on which this record was created, auto-populated by the system. */
         fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
         /**
          * Sets [Builder.origNetwork] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
+        fun origNetwork(origNetwork: JsonField<String>) =
+            apply {
+                this.origNetwork = origNetwork
+            }
 
         /** Receipt/Compliance, values from TABLE B-9. */
         fun rc(rc: String) = rc(JsonField.of(rc))
@@ -2191,10 +2323,13 @@ private constructor(
         /**
          * Sets [Builder.rc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.rc] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.rc] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun rc(rc: JsonField<String>) = apply { this.rc = rc }
+        fun rc(rc: JsonField<String>) =
+            apply {
+                this.rc = rc
+            }
 
         /** Recurrence rate, receipt/compliance. */
         fun rr(rr: Int) = rr(JsonField.of(rr))
@@ -2202,10 +2337,13 @@ private constructor(
         /**
          * Sets [Builder.rr] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.rr] with a well-typed [Int] value instead. This method
-         * is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.rr] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun rr(rr: JsonField<Int>) = apply { this.rr = rr }
+        fun rr(rr: JsonField<Int>) =
+            apply {
+                this.rr = rr
+            }
 
         /** Strength. */
         fun sz(sz: String) = sz(JsonField.of(sz))
@@ -2213,10 +2351,13 @@ private constructor(
         /**
          * Sets [Builder.sz] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.sz] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.sz] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun sz(sz: JsonField<String>) = apply { this.sz = sz }
+        fun sz(sz: JsonField<String>) =
+            apply {
+                this.sz = sz
+            }
 
         /** Track number objective. */
         fun tno(tno: String) = tno(JsonField.of(tno))
@@ -2224,10 +2365,13 @@ private constructor(
         /**
          * Sets [Builder.tno] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.tno] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.tno] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun tno(tno: JsonField<String>) = apply { this.tno = tno }
+        fun tno(tno: JsonField<String>) =
+            apply {
+                this.tno = tno
+            }
 
         /** The track ID that the status is referencing, addressee. */
         fun trkId(trkId: String) = trkId(JsonField.of(trkId))
@@ -2235,10 +2379,13 @@ private constructor(
         /**
          * Sets [Builder.trkId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.trkId] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.trkId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun trkId(trkId: JsonField<String>) = apply { this.trkId = trkId }
+        fun trkId(trkId: JsonField<String>) =
+            apply {
+                this.trkId = trkId
+            }
 
         /** Threat warning environment. */
         fun twenv(twenv: String) = twenv(JsonField.of(twenv))
@@ -2246,29 +2393,39 @@ private constructor(
         /**
          * Sets [Builder.twenv] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.twenv] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.twenv] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun twenv(twenv: JsonField<String>) = apply { this.twenv = twenv }
+        fun twenv(twenv: JsonField<String>) =
+            apply {
+                this.twenv = twenv
+            }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-            this.additionalProperties.clear()
-            putAllAdditionalProperties(additionalProperties)
-        }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
+            apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-            additionalProperties.put(key, value)
-        }
+        fun putAdditionalProperty(key: String, value: JsonValue) =
+            apply {
+                additionalProperties.put(key, value)
+            }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-            this.additionalProperties.putAll(additionalProperties)
-        }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
+            apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
 
-        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+        fun removeAdditionalProperty(key: String) =
+            apply {
+                additionalProperties.remove(key)
+            }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-            keys.forEach(::removeAdditionalProperty)
-        }
+        fun removeAllAdditionalProperties(keys: Set<String>) =
+            apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
 
         /**
          * Returns an immutable instance of [MissionAssignmentListResponse].
@@ -2276,6 +2433,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -2288,151 +2446,162 @@ private constructor(
          */
         fun build(): MissionAssignmentListResponse =
             MissionAssignmentListResponse(
-                checkRequired("classificationMarking", classificationMarking),
-                checkRequired("dataMode", dataMode),
-                checkRequired("mad", mad),
-                checkRequired("source", source),
-                checkRequired("ts", ts),
-                id,
-                c1associateddmpis,
-                c2air,
-                c2alt,
-                c2crs,
-                c2exerciseindicator,
-                c2exercisemof,
-                c2id,
-                c2idamplifyingdescriptor,
-                c2lnd,
-                c2spc,
-                c2spd,
-                c2specialinterestindicator,
-                c2sur,
-                c3elv,
-                c3lat,
-                c3lon,
-                c3ptl,
-                c3ptnum,
-                c4colon,
-                c4def,
-                c4egress,
-                c4mod,
-                c4numberofstores,
-                c4runin,
-                c4tgt,
-                c4timediscrete,
-                c4tm,
-                c4typeofstores,
-                c5colon,
-                c5elevationlsbs,
-                c5haeadj,
-                c5latlsb,
-                c5lonlsb,
-                c5tgtbrng,
-                c5tw,
-                c6dspc,
-                c6dspct,
-                c6fplpm,
-                c6intel,
-                c6laser,
-                c6longpm,
-                c6tnr3,
-                c7elang2,
-                c7in3p,
-                c7tnor,
-                createdAt,
-                createdBy,
-                env,
-                index,
-                lat,
-                lon,
-                orginx,
-                origin,
-                origNetwork,
-                rc,
-                rr,
-                sz,
-                tno,
-                trkId,
-                twenv,
-                additionalProperties.toMutableMap(),
+              checkRequired(
+                "classificationMarking", classificationMarking
+              ),
+              checkRequired(
+                "dataMode", dataMode
+              ),
+              checkRequired(
+                "mad", mad
+              ),
+              checkRequired(
+                "source", source
+              ),
+              checkRequired(
+                "ts", ts
+              ),
+              id,
+              c1associateddmpis,
+              c2air,
+              c2alt,
+              c2crs,
+              c2exerciseindicator,
+              c2exercisemof,
+              c2id,
+              c2idamplifyingdescriptor,
+              c2lnd,
+              c2spc,
+              c2spd,
+              c2specialinterestindicator,
+              c2sur,
+              c3elv,
+              c3lat,
+              c3lon,
+              c3ptl,
+              c3ptnum,
+              c4colon,
+              c4def,
+              c4egress,
+              c4mod,
+              c4numberofstores,
+              c4runin,
+              c4tgt,
+              c4timediscrete,
+              c4tm,
+              c4typeofstores,
+              c5colon,
+              c5elevationlsbs,
+              c5haeadj,
+              c5latlsb,
+              c5lonlsb,
+              c5tgtbrng,
+              c5tw,
+              c6dspc,
+              c6dspct,
+              c6fplpm,
+              c6intel,
+              c6laser,
+              c6longpm,
+              c6tnr3,
+              c7elang2,
+              c7in3p,
+              c7tnor,
+              createdAt,
+              createdBy,
+              env,
+              index,
+              lat,
+              lon,
+              orginx,
+              origin,
+              origNetwork,
+              rc,
+              rr,
+              sz,
+              tno,
+              trkId,
+              twenv,
+              additionalProperties.toMutableMap(),
             )
     }
 
     private var validated: Boolean = false
 
-    fun validate(): MissionAssignmentListResponse = apply {
-        if (validated) {
-            return@apply
-        }
+    fun validate(): MissionAssignmentListResponse =
+        apply {
+            if (validated) {
+              return@apply
+            }
 
-        classificationMarking()
-        dataMode().validate()
-        mad()
-        source()
-        ts()
-        id()
-        c1associateddmpis()
-        c2air()
-        c2alt()
-        c2crs()
-        c2exerciseindicator()
-        c2exercisemof()
-        c2id()
-        c2idamplifyingdescriptor()
-        c2lnd()
-        c2spc()
-        c2spd()
-        c2specialinterestindicator()
-        c2sur()
-        c3elv()
-        c3lat()
-        c3lon()
-        c3ptl()
-        c3ptnum()
-        c4colon()
-        c4def()
-        c4egress()
-        c4mod()
-        c4numberofstores()
-        c4runin()
-        c4tgt()
-        c4timediscrete()
-        c4tm()
-        c4typeofstores()
-        c5colon()
-        c5elevationlsbs()
-        c5haeadj()
-        c5latlsb()
-        c5lonlsb()
-        c5tgtbrng()
-        c5tw()
-        c6dspc()
-        c6dspct()
-        c6fplpm()
-        c6intel()
-        c6laser()
-        c6longpm()
-        c6tnr3()
-        c7elang2()
-        c7in3p()
-        c7tnor()
-        createdAt()
-        createdBy()
-        env()
-        index()
-        lat()
-        lon()
-        orginx()
-        origin()
-        origNetwork()
-        rc()
-        rr()
-        sz()
-        tno()
-        trkId()
-        twenv()
-        validated = true
-    }
+            classificationMarking()
+            dataMode().validate()
+            mad()
+            source()
+            ts()
+            id()
+            c1associateddmpis()
+            c2air()
+            c2alt()
+            c2crs()
+            c2exerciseindicator()
+            c2exercisemof()
+            c2id()
+            c2idamplifyingdescriptor()
+            c2lnd()
+            c2spc()
+            c2spd()
+            c2specialinterestindicator()
+            c2sur()
+            c3elv()
+            c3lat()
+            c3lon()
+            c3ptl()
+            c3ptnum()
+            c4colon()
+            c4def()
+            c4egress()
+            c4mod()
+            c4numberofstores()
+            c4runin()
+            c4tgt()
+            c4timediscrete()
+            c4tm()
+            c4typeofstores()
+            c5colon()
+            c5elevationlsbs()
+            c5haeadj()
+            c5latlsb()
+            c5lonlsb()
+            c5tgtbrng()
+            c5tw()
+            c6dspc()
+            c6dspct()
+            c6fplpm()
+            c6intel()
+            c6laser()
+            c6longpm()
+            c6tnr3()
+            c7elang2()
+            c7in3p()
+            c7tnor()
+            createdAt()
+            createdBy()
+            env()
+            index()
+            lat()
+            lon()
+            orginx()
+            origin()
+            origNetwork()
+            rc()
+            rr()
+            sz()
+            tno()
+            trkId()
+            twenv()
+            validated = true
+        }
 
     fun isValid(): Boolean =
         try {
@@ -2448,99 +2617,33 @@ private constructor(
      * Used for best match union deserialization.
      */
     @JvmSynthetic
-    internal fun validity(): Int =
-        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
-            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
-            (if (mad.asKnown().isPresent) 1 else 0) +
-            (if (source.asKnown().isPresent) 1 else 0) +
-            (if (ts.asKnown().isPresent) 1 else 0) +
-            (if (id.asKnown().isPresent) 1 else 0) +
-            (if (c1associateddmpis.asKnown().isPresent) 1 else 0) +
-            (if (c2air.asKnown().isPresent) 1 else 0) +
-            (if (c2alt.asKnown().isPresent) 1 else 0) +
-            (if (c2crs.asKnown().isPresent) 1 else 0) +
-            (if (c2exerciseindicator.asKnown().isPresent) 1 else 0) +
-            (if (c2exercisemof.asKnown().isPresent) 1 else 0) +
-            (if (c2id.asKnown().isPresent) 1 else 0) +
-            (if (c2idamplifyingdescriptor.asKnown().isPresent) 1 else 0) +
-            (if (c2lnd.asKnown().isPresent) 1 else 0) +
-            (if (c2spc.asKnown().isPresent) 1 else 0) +
-            (if (c2spd.asKnown().isPresent) 1 else 0) +
-            (if (c2specialinterestindicator.asKnown().isPresent) 1 else 0) +
-            (if (c2sur.asKnown().isPresent) 1 else 0) +
-            (if (c3elv.asKnown().isPresent) 1 else 0) +
-            (if (c3lat.asKnown().isPresent) 1 else 0) +
-            (if (c3lon.asKnown().isPresent) 1 else 0) +
-            (if (c3ptl.asKnown().isPresent) 1 else 0) +
-            (if (c3ptnum.asKnown().isPresent) 1 else 0) +
-            (if (c4colon.asKnown().isPresent) 1 else 0) +
-            (if (c4def.asKnown().isPresent) 1 else 0) +
-            (if (c4egress.asKnown().isPresent) 1 else 0) +
-            (if (c4mod.asKnown().isPresent) 1 else 0) +
-            (if (c4numberofstores.asKnown().isPresent) 1 else 0) +
-            (if (c4runin.asKnown().isPresent) 1 else 0) +
-            (if (c4tgt.asKnown().isPresent) 1 else 0) +
-            (if (c4timediscrete.asKnown().isPresent) 1 else 0) +
-            (if (c4tm.asKnown().isPresent) 1 else 0) +
-            (if (c4typeofstores.asKnown().isPresent) 1 else 0) +
-            (if (c5colon.asKnown().isPresent) 1 else 0) +
-            (if (c5elevationlsbs.asKnown().isPresent) 1 else 0) +
-            (if (c5haeadj.asKnown().isPresent) 1 else 0) +
-            (if (c5latlsb.asKnown().isPresent) 1 else 0) +
-            (if (c5lonlsb.asKnown().isPresent) 1 else 0) +
-            (if (c5tgtbrng.asKnown().isPresent) 1 else 0) +
-            (if (c5tw.asKnown().isPresent) 1 else 0) +
-            (if (c6dspc.asKnown().isPresent) 1 else 0) +
-            (if (c6dspct.asKnown().isPresent) 1 else 0) +
-            (if (c6fplpm.asKnown().isPresent) 1 else 0) +
-            (if (c6intel.asKnown().isPresent) 1 else 0) +
-            (if (c6laser.asKnown().isPresent) 1 else 0) +
-            (if (c6longpm.asKnown().isPresent) 1 else 0) +
-            (if (c6tnr3.asKnown().isPresent) 1 else 0) +
-            (if (c7elang2.asKnown().isPresent) 1 else 0) +
-            (if (c7in3p.asKnown().isPresent) 1 else 0) +
-            (if (c7tnor.asKnown().isPresent) 1 else 0) +
-            (if (createdAt.asKnown().isPresent) 1 else 0) +
-            (if (createdBy.asKnown().isPresent) 1 else 0) +
-            (if (env.asKnown().isPresent) 1 else 0) +
-            (if (index.asKnown().isPresent) 1 else 0) +
-            (if (lat.asKnown().isPresent) 1 else 0) +
-            (if (lon.asKnown().isPresent) 1 else 0) +
-            (if (orginx.asKnown().isPresent) 1 else 0) +
-            (if (origin.asKnown().isPresent) 1 else 0) +
-            (if (origNetwork.asKnown().isPresent) 1 else 0) +
-            (if (rc.asKnown().isPresent) 1 else 0) +
-            (if (rr.asKnown().isPresent) 1 else 0) +
-            (if (sz.asKnown().isPresent) 1 else 0) +
-            (if (tno.asKnown().isPresent) 1 else 0) +
-            (if (trkId.asKnown().isPresent) 1 else 0) +
-            (if (twenv.asKnown().isPresent) 1 else 0)
+    internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (mad.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (ts.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (if (c1associateddmpis.asKnown().isPresent) 1 else 0) + (if (c2air.asKnown().isPresent) 1 else 0) + (if (c2alt.asKnown().isPresent) 1 else 0) + (if (c2crs.asKnown().isPresent) 1 else 0) + (if (c2exerciseindicator.asKnown().isPresent) 1 else 0) + (if (c2exercisemof.asKnown().isPresent) 1 else 0) + (if (c2id.asKnown().isPresent) 1 else 0) + (if (c2idamplifyingdescriptor.asKnown().isPresent) 1 else 0) + (if (c2lnd.asKnown().isPresent) 1 else 0) + (if (c2spc.asKnown().isPresent) 1 else 0) + (if (c2spd.asKnown().isPresent) 1 else 0) + (if (c2specialinterestindicator.asKnown().isPresent) 1 else 0) + (if (c2sur.asKnown().isPresent) 1 else 0) + (if (c3elv.asKnown().isPresent) 1 else 0) + (if (c3lat.asKnown().isPresent) 1 else 0) + (if (c3lon.asKnown().isPresent) 1 else 0) + (if (c3ptl.asKnown().isPresent) 1 else 0) + (if (c3ptnum.asKnown().isPresent) 1 else 0) + (if (c4colon.asKnown().isPresent) 1 else 0) + (if (c4def.asKnown().isPresent) 1 else 0) + (if (c4egress.asKnown().isPresent) 1 else 0) + (if (c4mod.asKnown().isPresent) 1 else 0) + (if (c4numberofstores.asKnown().isPresent) 1 else 0) + (if (c4runin.asKnown().isPresent) 1 else 0) + (if (c4tgt.asKnown().isPresent) 1 else 0) + (if (c4timediscrete.asKnown().isPresent) 1 else 0) + (if (c4tm.asKnown().isPresent) 1 else 0) + (if (c4typeofstores.asKnown().isPresent) 1 else 0) + (if (c5colon.asKnown().isPresent) 1 else 0) + (if (c5elevationlsbs.asKnown().isPresent) 1 else 0) + (if (c5haeadj.asKnown().isPresent) 1 else 0) + (if (c5latlsb.asKnown().isPresent) 1 else 0) + (if (c5lonlsb.asKnown().isPresent) 1 else 0) + (if (c5tgtbrng.asKnown().isPresent) 1 else 0) + (if (c5tw.asKnown().isPresent) 1 else 0) + (if (c6dspc.asKnown().isPresent) 1 else 0) + (if (c6dspct.asKnown().isPresent) 1 else 0) + (if (c6fplpm.asKnown().isPresent) 1 else 0) + (if (c6intel.asKnown().isPresent) 1 else 0) + (if (c6laser.asKnown().isPresent) 1 else 0) + (if (c6longpm.asKnown().isPresent) 1 else 0) + (if (c6tnr3.asKnown().isPresent) 1 else 0) + (if (c7elang2.asKnown().isPresent) 1 else 0) + (if (c7in3p.asKnown().isPresent) 1 else 0) + (if (c7tnor.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (env.asKnown().isPresent) 1 else 0) + (if (index.asKnown().isPresent) 1 else 0) + (if (lat.asKnown().isPresent) 1 else 0) + (if (lon.asKnown().isPresent) 1 else 0) + (if (orginx.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (rc.asKnown().isPresent) 1 else 0) + (if (rr.asKnown().isPresent) 1 else 0) + (if (sz.asKnown().isPresent) 1 else 0) + (if (tno.asKnown().isPresent) 1 else 0) + (if (trkId.asKnown().isPresent) 1 else 0) + (if (twenv.asKnown().isPresent) 1 else 0)
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-     * both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-     * analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-     * requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
      */
-    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+    class DataMode @JsonCreator private constructor(
+        private val value: JsonField<String>,
+
+    ) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't
-         * match any known member, and you want to know that value. For example, if the SDK is on an
-         * older version than the API, then the API may respond with new members that the SDK is
-         * unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't match any known
+         * member, and you want to know that value. For example, if the SDK is on an older version than the
+         * API, then the API may respond with new members that the SDK is unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue
+        fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -2567,9 +2670,11 @@ private constructor(
          * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [DataMode] can contain an unknown value in a couple of cases:
-         * - It was deserialized from data that doesn't match any known member. For example, if the
-         *   SDK is on an older version than the API, then the API may respond with new members that
-         *   the SDK is unaware of.
+         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
+         *   an older version than the API, then the API may respond with new members that the SDK is unaware
+         *   of.
+         *
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -2582,11 +2687,11 @@ private constructor(
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
-         * if the class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
+         * class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want
-         * to throw for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want to throw
+         * for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -2600,11 +2705,10 @@ private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't
-         * want to throw for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
+         * for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
-         *   known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
          */
         fun known(): Known =
             when (this) {
@@ -2618,27 +2722,25 @@ private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging
-         * and generally doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging and generally
+         * doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
-         *   have the expected primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
+         * primitive type.
          */
-        fun asString(): String =
-            _value().asString().orElseThrow {
-                UnifieddatalibraryInvalidDataException("Value is not a String")
-            }
+        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
 
         private var validated: Boolean = false
 
-        fun validate(): DataMode = apply {
-            if (validated) {
-                return@apply
-            }
+        fun validate(): DataMode =
+            apply {
+                if (validated) {
+                  return@apply
+                }
 
-            known()
-            validated = true
-        }
+                known()
+                validated = true
+            }
 
         fun isValid(): Boolean =
             try {
@@ -2649,19 +2751,19 @@ private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
+         * Returns a score indicating how many valid values are contained in this object recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic
+        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
+          if (this === other) {
+              return true
+          }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+          return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
         }
 
         override fun hashCode() = value.hashCode()
@@ -2670,11 +2772,11 @@ private constructor(
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is MissionAssignmentListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && mad == other.mad && source == other.source && ts == other.ts && id == other.id && c1associateddmpis == other.c1associateddmpis && c2air == other.c2air && c2alt == other.c2alt && c2crs == other.c2crs && c2exerciseindicator == other.c2exerciseindicator && c2exercisemof == other.c2exercisemof && c2id == other.c2id && c2idamplifyingdescriptor == other.c2idamplifyingdescriptor && c2lnd == other.c2lnd && c2spc == other.c2spc && c2spd == other.c2spd && c2specialinterestindicator == other.c2specialinterestindicator && c2sur == other.c2sur && c3elv == other.c3elv && c3lat == other.c3lat && c3lon == other.c3lon && c3ptl == other.c3ptl && c3ptnum == other.c3ptnum && c4colon == other.c4colon && c4def == other.c4def && c4egress == other.c4egress && c4mod == other.c4mod && c4numberofstores == other.c4numberofstores && c4runin == other.c4runin && c4tgt == other.c4tgt && c4timediscrete == other.c4timediscrete && c4tm == other.c4tm && c4typeofstores == other.c4typeofstores && c5colon == other.c5colon && c5elevationlsbs == other.c5elevationlsbs && c5haeadj == other.c5haeadj && c5latlsb == other.c5latlsb && c5lonlsb == other.c5lonlsb && c5tgtbrng == other.c5tgtbrng && c5tw == other.c5tw && c6dspc == other.c6dspc && c6dspct == other.c6dspct && c6fplpm == other.c6fplpm && c6intel == other.c6intel && c6laser == other.c6laser && c6longpm == other.c6longpm && c6tnr3 == other.c6tnr3 && c7elang2 == other.c7elang2 && c7in3p == other.c7in3p && c7tnor == other.c7tnor && createdAt == other.createdAt && createdBy == other.createdBy && env == other.env && index == other.index && lat == other.lat && lon == other.lon && orginx == other.orginx && origin == other.origin && origNetwork == other.origNetwork && rc == other.rc && rr == other.rr && sz == other.sz && tno == other.tno && trkId == other.trkId && twenv == other.twenv && additionalProperties == other.additionalProperties /* spotless:on */
+      return /* spotless:off */ other is MissionAssignmentListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && mad == other.mad && source == other.source && ts == other.ts && id == other.id && c1associateddmpis == other.c1associateddmpis && c2air == other.c2air && c2alt == other.c2alt && c2crs == other.c2crs && c2exerciseindicator == other.c2exerciseindicator && c2exercisemof == other.c2exercisemof && c2id == other.c2id && c2idamplifyingdescriptor == other.c2idamplifyingdescriptor && c2lnd == other.c2lnd && c2spc == other.c2spc && c2spd == other.c2spd && c2specialinterestindicator == other.c2specialinterestindicator && c2sur == other.c2sur && c3elv == other.c3elv && c3lat == other.c3lat && c3lon == other.c3lon && c3ptl == other.c3ptl && c3ptnum == other.c3ptnum && c4colon == other.c4colon && c4def == other.c4def && c4egress == other.c4egress && c4mod == other.c4mod && c4numberofstores == other.c4numberofstores && c4runin == other.c4runin && c4tgt == other.c4tgt && c4timediscrete == other.c4timediscrete && c4tm == other.c4tm && c4typeofstores == other.c4typeofstores && c5colon == other.c5colon && c5elevationlsbs == other.c5elevationlsbs && c5haeadj == other.c5haeadj && c5latlsb == other.c5latlsb && c5lonlsb == other.c5lonlsb && c5tgtbrng == other.c5tgtbrng && c5tw == other.c5tw && c6dspc == other.c6dspc && c6dspct == other.c6dspct && c6fplpm == other.c6fplpm && c6intel == other.c6intel && c6laser == other.c6laser && c6longpm == other.c6longpm && c6tnr3 == other.c6tnr3 && c7elang2 == other.c7elang2 && c7in3p == other.c7in3p && c7tnor == other.c7tnor && createdAt == other.createdAt && createdBy == other.createdBy && env == other.env && index == other.index && lat == other.lat && lon == other.lon && orginx == other.orginx && origin == other.origin && origNetwork == other.origNetwork && rc == other.rc && rr == other.rr && sz == other.sz && tno == other.tno && trkId == other.trkId && twenv == other.twenv && additionalProperties == other.additionalProperties /* spotless:on */
     }
 
     /* spotless:off */
@@ -2683,6 +2785,5 @@ private constructor(
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() =
-        "MissionAssignmentListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, mad=$mad, source=$source, ts=$ts, id=$id, c1associateddmpis=$c1associateddmpis, c2air=$c2air, c2alt=$c2alt, c2crs=$c2crs, c2exerciseindicator=$c2exerciseindicator, c2exercisemof=$c2exercisemof, c2id=$c2id, c2idamplifyingdescriptor=$c2idamplifyingdescriptor, c2lnd=$c2lnd, c2spc=$c2spc, c2spd=$c2spd, c2specialinterestindicator=$c2specialinterestindicator, c2sur=$c2sur, c3elv=$c3elv, c3lat=$c3lat, c3lon=$c3lon, c3ptl=$c3ptl, c3ptnum=$c3ptnum, c4colon=$c4colon, c4def=$c4def, c4egress=$c4egress, c4mod=$c4mod, c4numberofstores=$c4numberofstores, c4runin=$c4runin, c4tgt=$c4tgt, c4timediscrete=$c4timediscrete, c4tm=$c4tm, c4typeofstores=$c4typeofstores, c5colon=$c5colon, c5elevationlsbs=$c5elevationlsbs, c5haeadj=$c5haeadj, c5latlsb=$c5latlsb, c5lonlsb=$c5lonlsb, c5tgtbrng=$c5tgtbrng, c5tw=$c5tw, c6dspc=$c6dspc, c6dspct=$c6dspct, c6fplpm=$c6fplpm, c6intel=$c6intel, c6laser=$c6laser, c6longpm=$c6longpm, c6tnr3=$c6tnr3, c7elang2=$c7elang2, c7in3p=$c7in3p, c7tnor=$c7tnor, createdAt=$createdAt, createdBy=$createdBy, env=$env, index=$index, lat=$lat, lon=$lon, orginx=$orginx, origin=$origin, origNetwork=$origNetwork, rc=$rc, rr=$rr, sz=$sz, tno=$tno, trkId=$trkId, twenv=$twenv, additionalProperties=$additionalProperties}"
+    override fun toString() = "MissionAssignmentListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, mad=$mad, source=$source, ts=$ts, id=$id, c1associateddmpis=$c1associateddmpis, c2air=$c2air, c2alt=$c2alt, c2crs=$c2crs, c2exerciseindicator=$c2exerciseindicator, c2exercisemof=$c2exercisemof, c2id=$c2id, c2idamplifyingdescriptor=$c2idamplifyingdescriptor, c2lnd=$c2lnd, c2spc=$c2spc, c2spd=$c2spd, c2specialinterestindicator=$c2specialinterestindicator, c2sur=$c2sur, c3elv=$c3elv, c3lat=$c3lat, c3lon=$c3lon, c3ptl=$c3ptl, c3ptnum=$c3ptnum, c4colon=$c4colon, c4def=$c4def, c4egress=$c4egress, c4mod=$c4mod, c4numberofstores=$c4numberofstores, c4runin=$c4runin, c4tgt=$c4tgt, c4timediscrete=$c4timediscrete, c4tm=$c4tm, c4typeofstores=$c4typeofstores, c5colon=$c5colon, c5elevationlsbs=$c5elevationlsbs, c5haeadj=$c5haeadj, c5latlsb=$c5latlsb, c5lonlsb=$c5lonlsb, c5tgtbrng=$c5tgtbrng, c5tw=$c5tw, c6dspc=$c6dspc, c6dspct=$c6dspct, c6fplpm=$c6fplpm, c6intel=$c6intel, c6laser=$c6laser, c6longpm=$c6longpm, c6tnr3=$c6tnr3, c7elang2=$c7elang2, c7in3p=$c7in3p, c7tnor=$c7tnor, createdAt=$createdAt, createdBy=$createdBy, env=$env, index=$index, lat=$lat, lon=$lon, orginx=$orginx, origin=$origin, origNetwork=$origNetwork, rc=$rc, rr=$rr, sz=$sz, tno=$tno, trkId=$trkId, twenv=$twenv, additionalProperties=$additionalProperties}"
 }

@@ -3,8 +3,8 @@
 package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.core.ClientOptions
+import com.unifieddatalibrary.api.services.blocking.AirOperationService
 import com.unifieddatalibrary.api.services.blocking.airoperations.AirTaskingOrderService
-import com.unifieddatalibrary.api.services.blocking.airoperations.AircraftSortieService
 import com.unifieddatalibrary.api.services.blocking.airoperations.AircraftSortyService
 import com.unifieddatalibrary.api.services.blocking.airoperations.AirspaceControlOrderService
 import com.unifieddatalibrary.api.services.blocking.airoperations.CrewpaperService
@@ -13,9 +13,7 @@ import java.util.function.Consumer
 
 interface AirOperationService {
 
-    /**
-     * Returns a view of this service that provides access to raw HTTP responses for each method.
-     */
+    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -27,8 +25,6 @@ interface AirOperationService {
 
     fun airTaskingOrders(): AirTaskingOrderService
 
-    fun aircraftSortie(): AircraftSortieService
-
     fun aircraftSorties(): AircraftSortyService
 
     fun airspaceControlOrders(): AirspaceControlOrderService
@@ -37,9 +33,7 @@ interface AirOperationService {
 
     fun diplomaticClearance(): DiplomaticClearanceService
 
-    /**
-     * A view of [AirOperationService] that provides access to raw HTTP responses for each method.
-     */
+    /** A view of [AirOperationService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
         /**
@@ -47,13 +41,9 @@ interface AirOperationService {
          *
          * The original service is not modified.
          */
-        fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): AirOperationService.WithRawResponse
+        fun withOptions(modifier: Consumer<ClientOptions.Builder>): AirOperationService.WithRawResponse
 
         fun airTaskingOrders(): AirTaskingOrderService.WithRawResponse
-
-        fun aircraftSortie(): AircraftSortieService.WithRawResponse
 
         fun aircraftSorties(): AircraftSortyService.WithRawResponse
 

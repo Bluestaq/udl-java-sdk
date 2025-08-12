@@ -13,18 +13,15 @@ import com.unifieddatalibrary.api.core.JsonMissing
 import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import com.unifieddatalibrary.api.models.routestats.RouteStatRetrieveResponse
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/**
- * General statistics applying to navigation routes utilized by vessels, aircraft, ground vehicles,
- * etc.
- */
-class RouteStatRetrieveResponse
-private constructor(
+/** General statistics applying to navigation routes utilized by vessels, aircraft, ground vehicles, etc. */
+class RouteStatRetrieveResponse private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
     private val locationEnd: JsonField<String>,
@@ -61,433 +58,342 @@ private constructor(
     private val vehicleCategory: JsonField<String>,
     private val vehicleType: JsonField<String>,
     private val additionalProperties: MutableMap<String, JsonValue>,
+
 ) {
 
     @JsonCreator
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
-        classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
         @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
-        @JsonProperty("locationEnd")
-        @ExcludeMissing
-        locationEnd: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("locationStart")
-        @ExcludeMissing
-        locationStart: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("locationEnd") @ExcludeMissing locationEnd: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("locationStart") @ExcludeMissing locationStart: JsonField<String> = JsonMissing.of(),
         @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
         @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("avgDuration")
-        @ExcludeMissing
-        avgDuration: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("avgDuration") @ExcludeMissing avgDuration: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("avgSpeed") @ExcludeMissing avgSpeed: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("createdAt")
-        @ExcludeMissing
-        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
         @JsonProperty("dataPtsUsed") @ExcludeMissing dataPtsUsed: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("distance") @ExcludeMissing distance: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("distUnit") @ExcludeMissing distUnit: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("firstPt")
-        @ExcludeMissing
-        firstPt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("firstPt") @ExcludeMissing firstPt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("idealDesc") @ExcludeMissing idealDesc: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("idealDuration")
-        @ExcludeMissing
-        idealDuration: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("idealDuration") @ExcludeMissing idealDuration: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("idSiteEnd") @ExcludeMissing idSiteEnd: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("idSiteStart")
-        @ExcludeMissing
-        idSiteStart: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("lastPt")
-        @ExcludeMissing
-        lastPt: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("locationType")
-        @ExcludeMissing
-        locationType: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("maxDuration")
-        @ExcludeMissing
-        maxDuration: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("idSiteStart") @ExcludeMissing idSiteStart: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("lastPt") @ExcludeMissing lastPt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("locationType") @ExcludeMissing locationType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("maxDuration") @ExcludeMissing maxDuration: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("maxSpeed") @ExcludeMissing maxSpeed: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("minDuration")
-        @ExcludeMissing
-        minDuration: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("minDuration") @ExcludeMissing minDuration: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("minSpeed") @ExcludeMissing minSpeed: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origNetwork")
-        @ExcludeMissing
-        origNetwork: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("partialDesc")
-        @ExcludeMissing
-        partialDesc: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("partialDuration")
-        @ExcludeMissing
-        partialDuration: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("origNetwork") @ExcludeMissing origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("partialDesc") @ExcludeMissing partialDesc: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("partialDuration") @ExcludeMissing partialDuration: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("sourceDL") @ExcludeMissing sourceDl: JsonField<String> = JsonMissing.of(),
         @JsonProperty("speedUnit") @ExcludeMissing speedUnit: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("timePeriod")
-        @ExcludeMissing
-        timePeriod: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("updatedAt")
-        @ExcludeMissing
-        updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("timePeriod") @ExcludeMissing timePeriod: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("updatedAt") @ExcludeMissing updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("updatedBy") @ExcludeMissing updatedBy: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("vehicleCategory")
-        @ExcludeMissing
-        vehicleCategory: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("vehicleType")
-        @ExcludeMissing
-        vehicleType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("vehicleCategory") @ExcludeMissing vehicleCategory: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("vehicleType") @ExcludeMissing vehicleType: JsonField<String> = JsonMissing.of()
     ) : this(
-        classificationMarking,
-        dataMode,
-        locationEnd,
-        locationStart,
-        source,
-        id,
-        avgDuration,
-        avgSpeed,
-        createdAt,
-        createdBy,
-        dataPtsUsed,
-        distance,
-        distUnit,
-        firstPt,
-        idealDesc,
-        idealDuration,
-        idSiteEnd,
-        idSiteStart,
-        lastPt,
-        locationType,
-        maxDuration,
-        maxSpeed,
-        minDuration,
-        minSpeed,
-        origin,
-        origNetwork,
-        partialDesc,
-        partialDuration,
-        sourceDl,
-        speedUnit,
-        timePeriod,
-        updatedAt,
-        updatedBy,
-        vehicleCategory,
-        vehicleType,
-        mutableMapOf(),
+      classificationMarking,
+      dataMode,
+      locationEnd,
+      locationStart,
+      source,
+      id,
+      avgDuration,
+      avgSpeed,
+      createdAt,
+      createdBy,
+      dataPtsUsed,
+      distance,
+      distUnit,
+      firstPt,
+      idealDesc,
+      idealDuration,
+      idSiteEnd,
+      idSiteStart,
+      lastPt,
+      locationType,
+      maxDuration,
+      maxSpeed,
+      minDuration,
+      minSpeed,
+      origin,
+      origNetwork,
+      partialDesc,
+      partialDuration,
+      sourceDl,
+      speedUnit,
+      timePeriod,
+      updatedAt,
+      updatedBy,
+      vehicleCategory,
+      vehicleType,
+      mutableMapOf(),
     )
 
     /**
      * Classification marking of the data in IC/CAPCO Portion-marked format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-     * both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-     * analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-     * requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
     /**
      * End location of the vehicle.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun locationEnd(): String = locationEnd.getRequired("locationEnd")
 
     /**
      * Starting location of the vehicle.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun locationStart(): String = locationStart.getRequired("locationStart")
 
     /**
      * Source of the data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun source(): String = source.getRequired("source")
 
     /**
      * Unique identifier of the record, auto-generated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun id(): Optional<String> = id.getOptional("id")
 
     /**
      * Average travel duration for the indicated distance and type of vehicle in hours.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun avgDuration(): Optional<Double> = avgDuration.getOptional("avgDuration")
 
     /**
      * Average speed during travel in the indicated unit of measurement, speedUnit.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun avgSpeed(): Optional<Double> = avgSpeed.getOptional("avgSpeed")
 
     /**
      * Time the row was created in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
     /**
      * Application user who created the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
      * The number of data points used in this travel duration calculation.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun dataPtsUsed(): Optional<Int> = dataPtsUsed.getOptional("dataPtsUsed")
 
     /**
-     * Distance between the departure and arrival locations in the indicated unit of measurement,
-     * distUnit.
+     * Distance between the departure and arrival locations in the indicated unit of measurement, distUnit.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun distance(): Optional<Double> = distance.getOptional("distance")
 
     /**
      * The unit of measurement used for distance in this calculation.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun distUnit(): Optional<String> = distUnit.getOptional("distUnit")
 
     /**
-     * Date of the first data point used in this calculation, in ISO8601 UTC format with millisecond
-     * precision.
+     * Date of the first data point used in this calculation, in ISO8601 UTC format with millisecond precision.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun firstPt(): Optional<OffsetDateTime> = firstPt.getOptional("firstPt")
 
     /**
      * Description of the portion of travel used to estimate the value of the idealDuration field.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun idealDesc(): Optional<String> = idealDesc.getOptional("idealDesc")
 
     /**
-     * Estimated ideal travel duration in hours for the full distance using the indicated vehicle
-     * type. The field "idealDesc" should be used to describe the ideal travel route.
+     * Estimated ideal travel duration in hours for the full distance using the indicated vehicle type. The field "idealDesc" should be used to describe the ideal travel route.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun idealDuration(): Optional<Double> = idealDuration.getOptional("idealDuration")
 
     /**
-     * Unique identifier of the Site at the route's end location. This ID can be used to obtain
-     * additional information on a Site using the 'get by ID' operation (e.g. /udl/site/{id}). For
-     * example, the Site object with idSite = abc would be queried as /udl/site/abc.
+     * Unique identifier of the Site at the route's end location. This ID can be used to obtain additional information on a Site using the 'get by ID' operation (e.g. /udl/site/{id}). For example, the Site object with idSite = abc would be queried as /udl/site/abc.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun idSiteEnd(): Optional<String> = idSiteEnd.getOptional("idSiteEnd")
 
     /**
-     * Unique identifier of the Site at the route's starting location. This ID can be used to obtain
-     * additional information on a Site using the 'get by ID' operation (e.g. /udl/site/{id}). For
-     * example, the Site object with idSite = abc would be queried as /udl/site/abc.
+     * Unique identifier of the Site at the route's starting location. This ID can be used to obtain additional information on a Site using the 'get by ID' operation (e.g. /udl/site/{id}). For example, the Site object with idSite = abc would be queried as /udl/site/abc.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun idSiteStart(): Optional<String> = idSiteStart.getOptional("idSiteStart")
 
     /**
-     * Date of the last data point used in this calculation, in ISO8601 UTC format with millisecond
-     * precision.
+     * Date of the last data point used in this calculation, in ISO8601 UTC format with millisecond precision.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun lastPt(): Optional<OffsetDateTime> = lastPt.getOptional("lastPt")
 
     /**
      * Type of location used for route start and end points (e.g., ICAO, PORT, etc.).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun locationType(): Optional<String> = locationType.getOptional("locationType")
 
     /**
      * Maximum travel duration for the indicated distance and type of vehicle in hours.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun maxDuration(): Optional<Double> = maxDuration.getOptional("maxDuration")
 
     /**
      * Maximum speed during travel in the indicated unit of measurement, speedUnit.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun maxSpeed(): Optional<Double> = maxSpeed.getOptional("maxSpeed")
 
     /**
      * Minimum travel duration for the indicated distance and type of vehicle in hours.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun minDuration(): Optional<Double> = minDuration.getOptional("minDuration")
 
     /**
      * Minimum speed during travel in the indicated unit of measurement, speedUnit.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun minSpeed(): Optional<Double> = minSpeed.getOptional("minSpeed")
 
     /**
-     * Originating system or organization which produced the data, if different from the source. The
-     * origin may be different than the source if the source was a mediating system which forwarded
-     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun origin(): Optional<String> = origin.getOptional("origin")
 
     /**
-     * The originating source network on which this record was created, auto-populated by the
-     * system.
+     * The originating source network on which this record was created, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
     /**
      * Description of the portion of travel used to estimate the value of the partialDuration field.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun partialDesc(): Optional<String> = partialDesc.getOptional("partialDesc")
 
     /**
-     * Estimated ideal travel duration in hours for a partial distance using the indicated vehicle
-     * type. The field "partialDesc" should be used to specify the intended portion of travel.
+     * Estimated ideal travel duration in hours for a partial distance using the indicated vehicle type. The field "partialDesc" should be used to specify the intended portion of travel.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun partialDuration(): Optional<Double> = partialDuration.getOptional("partialDuration")
 
     /**
-     * The source data library from which this record was received. This could be a remote or
-     * tactical UDL or another data library. If null, the record should be assumed to have
-     * originated from the primary Enterprise UDL.
+     * The source data library from which this record was received. This could be a remote or tactical UDL or another data library. If null, the record should be assumed to have originated from the primary Enterprise UDL.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun sourceDl(): Optional<String> = sourceDl.getOptional("sourceDL")
 
     /**
      * The unit of measurement used for speed in this calculation.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun speedUnit(): Optional<String> = speedUnit.getOptional("speedUnit")
 
     /**
      * The time period this data was collected.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun timePeriod(): Optional<String> = timePeriod.getOptional("timePeriod")
 
     /**
      * Time the row was updated in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun updatedAt(): Optional<OffsetDateTime> = updatedAt.getOptional("updatedAt")
 
     /**
      * Application user who updated the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun updatedBy(): Optional<String> = updatedBy.getOptional("updatedBy")
 
     /**
-     * The vehicle category that is the subject of this calculation (e.g., AIRCRAFT, CAR, BOAT,
-     * etc.).
+     * The vehicle category that is the subject of this calculation (e.g., AIRCRAFT, CAR, BOAT, etc.).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun vehicleCategory(): Optional<String> = vehicleCategory.getOptional("vehicleCategory")
 
     /**
      * The vehicle type that is the subject of this calculation (e.g., C-17, F-15, etc.).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun vehicleType(): Optional<String> = vehicleType.getOptional("vehicleType")
 
     /**
      * Returns the raw JSON value of [classificationMarking].
      *
-     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
-     * type.
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("classificationMarking")
     @ExcludeMissing
@@ -498,14 +404,18 @@ private constructor(
      *
      * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+    @JsonProperty("dataMode")
+    @ExcludeMissing
+    fun _dataMode(): JsonField<DataMode> = dataMode
 
     /**
      * Returns the raw JSON value of [locationEnd].
      *
      * Unlike [locationEnd], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("locationEnd") @ExcludeMissing fun _locationEnd(): JsonField<String> = locationEnd
+    @JsonProperty("locationEnd")
+    @ExcludeMissing
+    fun _locationEnd(): JsonField<String> = locationEnd
 
     /**
      * Returns the raw JSON value of [locationStart].
@@ -521,28 +431,36 @@ private constructor(
      *
      * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+    @JsonProperty("source")
+    @ExcludeMissing
+    fun _source(): JsonField<String> = source
 
     /**
      * Returns the raw JSON value of [id].
      *
      * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+    @JsonProperty("id")
+    @ExcludeMissing
+    fun _id(): JsonField<String> = id
 
     /**
      * Returns the raw JSON value of [avgDuration].
      *
      * Unlike [avgDuration], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("avgDuration") @ExcludeMissing fun _avgDuration(): JsonField<Double> = avgDuration
+    @JsonProperty("avgDuration")
+    @ExcludeMissing
+    fun _avgDuration(): JsonField<Double> = avgDuration
 
     /**
      * Returns the raw JSON value of [avgSpeed].
      *
      * Unlike [avgSpeed], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("avgSpeed") @ExcludeMissing fun _avgSpeed(): JsonField<Double> = avgSpeed
+    @JsonProperty("avgSpeed")
+    @ExcludeMissing
+    fun _avgSpeed(): JsonField<Double> = avgSpeed
 
     /**
      * Returns the raw JSON value of [createdAt].
@@ -558,42 +476,54 @@ private constructor(
      *
      * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+    @JsonProperty("createdBy")
+    @ExcludeMissing
+    fun _createdBy(): JsonField<String> = createdBy
 
     /**
      * Returns the raw JSON value of [dataPtsUsed].
      *
      * Unlike [dataPtsUsed], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("dataPtsUsed") @ExcludeMissing fun _dataPtsUsed(): JsonField<Int> = dataPtsUsed
+    @JsonProperty("dataPtsUsed")
+    @ExcludeMissing
+    fun _dataPtsUsed(): JsonField<Int> = dataPtsUsed
 
     /**
      * Returns the raw JSON value of [distance].
      *
      * Unlike [distance], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("distance") @ExcludeMissing fun _distance(): JsonField<Double> = distance
+    @JsonProperty("distance")
+    @ExcludeMissing
+    fun _distance(): JsonField<Double> = distance
 
     /**
      * Returns the raw JSON value of [distUnit].
      *
      * Unlike [distUnit], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("distUnit") @ExcludeMissing fun _distUnit(): JsonField<String> = distUnit
+    @JsonProperty("distUnit")
+    @ExcludeMissing
+    fun _distUnit(): JsonField<String> = distUnit
 
     /**
      * Returns the raw JSON value of [firstPt].
      *
      * Unlike [firstPt], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("firstPt") @ExcludeMissing fun _firstPt(): JsonField<OffsetDateTime> = firstPt
+    @JsonProperty("firstPt")
+    @ExcludeMissing
+    fun _firstPt(): JsonField<OffsetDateTime> = firstPt
 
     /**
      * Returns the raw JSON value of [idealDesc].
      *
      * Unlike [idealDesc], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("idealDesc") @ExcludeMissing fun _idealDesc(): JsonField<String> = idealDesc
+    @JsonProperty("idealDesc")
+    @ExcludeMissing
+    fun _idealDesc(): JsonField<String> = idealDesc
 
     /**
      * Returns the raw JSON value of [idealDuration].
@@ -609,21 +539,27 @@ private constructor(
      *
      * Unlike [idSiteEnd], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("idSiteEnd") @ExcludeMissing fun _idSiteEnd(): JsonField<String> = idSiteEnd
+    @JsonProperty("idSiteEnd")
+    @ExcludeMissing
+    fun _idSiteEnd(): JsonField<String> = idSiteEnd
 
     /**
      * Returns the raw JSON value of [idSiteStart].
      *
      * Unlike [idSiteStart], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("idSiteStart") @ExcludeMissing fun _idSiteStart(): JsonField<String> = idSiteStart
+    @JsonProperty("idSiteStart")
+    @ExcludeMissing
+    fun _idSiteStart(): JsonField<String> = idSiteStart
 
     /**
      * Returns the raw JSON value of [lastPt].
      *
      * Unlike [lastPt], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("lastPt") @ExcludeMissing fun _lastPt(): JsonField<OffsetDateTime> = lastPt
+    @JsonProperty("lastPt")
+    @ExcludeMissing
+    fun _lastPt(): JsonField<OffsetDateTime> = lastPt
 
     /**
      * Returns the raw JSON value of [locationType].
@@ -639,49 +575,63 @@ private constructor(
      *
      * Unlike [maxDuration], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("maxDuration") @ExcludeMissing fun _maxDuration(): JsonField<Double> = maxDuration
+    @JsonProperty("maxDuration")
+    @ExcludeMissing
+    fun _maxDuration(): JsonField<Double> = maxDuration
 
     /**
      * Returns the raw JSON value of [maxSpeed].
      *
      * Unlike [maxSpeed], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("maxSpeed") @ExcludeMissing fun _maxSpeed(): JsonField<Double> = maxSpeed
+    @JsonProperty("maxSpeed")
+    @ExcludeMissing
+    fun _maxSpeed(): JsonField<Double> = maxSpeed
 
     /**
      * Returns the raw JSON value of [minDuration].
      *
      * Unlike [minDuration], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("minDuration") @ExcludeMissing fun _minDuration(): JsonField<Double> = minDuration
+    @JsonProperty("minDuration")
+    @ExcludeMissing
+    fun _minDuration(): JsonField<Double> = minDuration
 
     /**
      * Returns the raw JSON value of [minSpeed].
      *
      * Unlike [minSpeed], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("minSpeed") @ExcludeMissing fun _minSpeed(): JsonField<Double> = minSpeed
+    @JsonProperty("minSpeed")
+    @ExcludeMissing
+    fun _minSpeed(): JsonField<Double> = minSpeed
 
     /**
      * Returns the raw JSON value of [origin].
      *
      * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+    @JsonProperty("origin")
+    @ExcludeMissing
+    fun _origin(): JsonField<String> = origin
 
     /**
      * Returns the raw JSON value of [origNetwork].
      *
      * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
+    @JsonProperty("origNetwork")
+    @ExcludeMissing
+    fun _origNetwork(): JsonField<String> = origNetwork
 
     /**
      * Returns the raw JSON value of [partialDesc].
      *
      * Unlike [partialDesc], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("partialDesc") @ExcludeMissing fun _partialDesc(): JsonField<String> = partialDesc
+    @JsonProperty("partialDesc")
+    @ExcludeMissing
+    fun _partialDesc(): JsonField<String> = partialDesc
 
     /**
      * Returns the raw JSON value of [partialDuration].
@@ -697,21 +647,27 @@ private constructor(
      *
      * Unlike [sourceDl], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("sourceDL") @ExcludeMissing fun _sourceDl(): JsonField<String> = sourceDl
+    @JsonProperty("sourceDL")
+    @ExcludeMissing
+    fun _sourceDl(): JsonField<String> = sourceDl
 
     /**
      * Returns the raw JSON value of [speedUnit].
      *
      * Unlike [speedUnit], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("speedUnit") @ExcludeMissing fun _speedUnit(): JsonField<String> = speedUnit
+    @JsonProperty("speedUnit")
+    @ExcludeMissing
+    fun _speedUnit(): JsonField<String> = speedUnit
 
     /**
      * Returns the raw JSON value of [timePeriod].
      *
      * Unlike [timePeriod], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("timePeriod") @ExcludeMissing fun _timePeriod(): JsonField<String> = timePeriod
+    @JsonProperty("timePeriod")
+    @ExcludeMissing
+    fun _timePeriod(): JsonField<String> = timePeriod
 
     /**
      * Returns the raw JSON value of [updatedAt].
@@ -727,7 +683,9 @@ private constructor(
      *
      * Unlike [updatedBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("updatedBy") @ExcludeMissing fun _updatedBy(): JsonField<String> = updatedBy
+    @JsonProperty("updatedBy")
+    @ExcludeMissing
+    fun _updatedBy(): JsonField<String> = updatedBy
 
     /**
      * Returns the raw JSON value of [vehicleCategory].
@@ -743,17 +701,18 @@ private constructor(
      *
      * Unlike [vehicleType], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("vehicleType") @ExcludeMissing fun _vehicleType(): JsonField<String> = vehicleType
+    @JsonProperty("vehicleType")
+    @ExcludeMissing
+    fun _vehicleType(): JsonField<String> = vehicleType
 
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
-        additionalProperties.put(key, value)
+      additionalProperties.put(key, value)
     }
 
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> =
-        Collections.unmodifiableMap(additionalProperties)
+    fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -763,6 +722,7 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [RouteStatRetrieveResponse].
          *
          * The following fields are required:
+         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -771,7 +731,8 @@ private constructor(
          * .source()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [RouteStatRetrieveResponse]. */
@@ -815,84 +776,83 @@ private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(routeStatRetrieveResponse: RouteStatRetrieveResponse) = apply {
-            classificationMarking = routeStatRetrieveResponse.classificationMarking
-            dataMode = routeStatRetrieveResponse.dataMode
-            locationEnd = routeStatRetrieveResponse.locationEnd
-            locationStart = routeStatRetrieveResponse.locationStart
-            source = routeStatRetrieveResponse.source
-            id = routeStatRetrieveResponse.id
-            avgDuration = routeStatRetrieveResponse.avgDuration
-            avgSpeed = routeStatRetrieveResponse.avgSpeed
-            createdAt = routeStatRetrieveResponse.createdAt
-            createdBy = routeStatRetrieveResponse.createdBy
-            dataPtsUsed = routeStatRetrieveResponse.dataPtsUsed
-            distance = routeStatRetrieveResponse.distance
-            distUnit = routeStatRetrieveResponse.distUnit
-            firstPt = routeStatRetrieveResponse.firstPt
-            idealDesc = routeStatRetrieveResponse.idealDesc
-            idealDuration = routeStatRetrieveResponse.idealDuration
-            idSiteEnd = routeStatRetrieveResponse.idSiteEnd
-            idSiteStart = routeStatRetrieveResponse.idSiteStart
-            lastPt = routeStatRetrieveResponse.lastPt
-            locationType = routeStatRetrieveResponse.locationType
-            maxDuration = routeStatRetrieveResponse.maxDuration
-            maxSpeed = routeStatRetrieveResponse.maxSpeed
-            minDuration = routeStatRetrieveResponse.minDuration
-            minSpeed = routeStatRetrieveResponse.minSpeed
-            origin = routeStatRetrieveResponse.origin
-            origNetwork = routeStatRetrieveResponse.origNetwork
-            partialDesc = routeStatRetrieveResponse.partialDesc
-            partialDuration = routeStatRetrieveResponse.partialDuration
-            sourceDl = routeStatRetrieveResponse.sourceDl
-            speedUnit = routeStatRetrieveResponse.speedUnit
-            timePeriod = routeStatRetrieveResponse.timePeriod
-            updatedAt = routeStatRetrieveResponse.updatedAt
-            updatedBy = routeStatRetrieveResponse.updatedBy
-            vehicleCategory = routeStatRetrieveResponse.vehicleCategory
-            vehicleType = routeStatRetrieveResponse.vehicleType
-            additionalProperties = routeStatRetrieveResponse.additionalProperties.toMutableMap()
-        }
+        internal fun from(routeStatRetrieveResponse: RouteStatRetrieveResponse) =
+            apply {
+                classificationMarking = routeStatRetrieveResponse.classificationMarking
+                dataMode = routeStatRetrieveResponse.dataMode
+                locationEnd = routeStatRetrieveResponse.locationEnd
+                locationStart = routeStatRetrieveResponse.locationStart
+                source = routeStatRetrieveResponse.source
+                id = routeStatRetrieveResponse.id
+                avgDuration = routeStatRetrieveResponse.avgDuration
+                avgSpeed = routeStatRetrieveResponse.avgSpeed
+                createdAt = routeStatRetrieveResponse.createdAt
+                createdBy = routeStatRetrieveResponse.createdBy
+                dataPtsUsed = routeStatRetrieveResponse.dataPtsUsed
+                distance = routeStatRetrieveResponse.distance
+                distUnit = routeStatRetrieveResponse.distUnit
+                firstPt = routeStatRetrieveResponse.firstPt
+                idealDesc = routeStatRetrieveResponse.idealDesc
+                idealDuration = routeStatRetrieveResponse.idealDuration
+                idSiteEnd = routeStatRetrieveResponse.idSiteEnd
+                idSiteStart = routeStatRetrieveResponse.idSiteStart
+                lastPt = routeStatRetrieveResponse.lastPt
+                locationType = routeStatRetrieveResponse.locationType
+                maxDuration = routeStatRetrieveResponse.maxDuration
+                maxSpeed = routeStatRetrieveResponse.maxSpeed
+                minDuration = routeStatRetrieveResponse.minDuration
+                minSpeed = routeStatRetrieveResponse.minSpeed
+                origin = routeStatRetrieveResponse.origin
+                origNetwork = routeStatRetrieveResponse.origNetwork
+                partialDesc = routeStatRetrieveResponse.partialDesc
+                partialDuration = routeStatRetrieveResponse.partialDuration
+                sourceDl = routeStatRetrieveResponse.sourceDl
+                speedUnit = routeStatRetrieveResponse.speedUnit
+                timePeriod = routeStatRetrieveResponse.timePeriod
+                updatedAt = routeStatRetrieveResponse.updatedAt
+                updatedBy = routeStatRetrieveResponse.updatedBy
+                vehicleCategory = routeStatRetrieveResponse.vehicleCategory
+                vehicleType = routeStatRetrieveResponse.vehicleType
+                additionalProperties = routeStatRetrieveResponse.additionalProperties.toMutableMap()
+            }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-        fun classificationMarking(classificationMarking: String) =
-            classificationMarking(JsonField.of(classificationMarking))
+        fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
 
         /**
          * Sets [Builder.classificationMarking] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
-            this.classificationMarking = classificationMarking
-        }
+        fun classificationMarking(classificationMarking: JsonField<String>) =
+            apply {
+                this.classificationMarking = classificationMarking
+            }
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-         * both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-         * analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-         * requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
          */
         fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
         /**
          * Sets [Builder.dataMode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+        fun dataMode(dataMode: JsonField<DataMode>) =
+            apply {
+                this.dataMode = dataMode
+            }
 
         /** End location of the vehicle. */
         fun locationEnd(locationEnd: String) = locationEnd(JsonField.of(locationEnd))
@@ -900,11 +860,13 @@ private constructor(
         /**
          * Sets [Builder.locationEnd] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.locationEnd] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.locationEnd] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun locationEnd(locationEnd: JsonField<String>) = apply { this.locationEnd = locationEnd }
+        fun locationEnd(locationEnd: JsonField<String>) =
+            apply {
+                this.locationEnd = locationEnd
+            }
 
         /** Starting location of the vehicle. */
         fun locationStart(locationStart: String) = locationStart(JsonField.of(locationStart))
@@ -912,13 +874,13 @@ private constructor(
         /**
          * Sets [Builder.locationStart] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.locationStart] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.locationStart] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun locationStart(locationStart: JsonField<String>) = apply {
-            this.locationStart = locationStart
-        }
+        fun locationStart(locationStart: JsonField<String>) =
+            apply {
+                this.locationStart = locationStart
+            }
 
         /** Source of the data. */
         fun source(source: String) = source(JsonField.of(source))
@@ -926,10 +888,13 @@ private constructor(
         /**
          * Sets [Builder.source] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.source] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun source(source: JsonField<String>) = apply { this.source = source }
+        fun source(source: JsonField<String>) =
+            apply {
+                this.source = source
+            }
 
         /** Unique identifier of the record, auto-generated by the system. */
         fun id(id: String) = id(JsonField.of(id))
@@ -937,10 +902,13 @@ private constructor(
         /**
          * Sets [Builder.id] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.id] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun id(id: JsonField<String>) = apply { this.id = id }
+        fun id(id: JsonField<String>) =
+            apply {
+                this.id = id
+            }
 
         /** Average travel duration for the indicated distance and type of vehicle in hours. */
         fun avgDuration(avgDuration: Double) = avgDuration(JsonField.of(avgDuration))
@@ -948,11 +916,13 @@ private constructor(
         /**
          * Sets [Builder.avgDuration] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.avgDuration] with a well-typed [Double] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.avgDuration] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun avgDuration(avgDuration: JsonField<Double>) = apply { this.avgDuration = avgDuration }
+        fun avgDuration(avgDuration: JsonField<Double>) =
+            apply {
+                this.avgDuration = avgDuration
+            }
 
         /** Average speed during travel in the indicated unit of measurement, speedUnit. */
         fun avgSpeed(avgSpeed: Double) = avgSpeed(JsonField.of(avgSpeed))
@@ -960,10 +930,13 @@ private constructor(
         /**
          * Sets [Builder.avgSpeed] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.avgSpeed] with a well-typed [Double] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.avgSpeed] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun avgSpeed(avgSpeed: JsonField<Double>) = apply { this.avgSpeed = avgSpeed }
+        fun avgSpeed(avgSpeed: JsonField<Double>) =
+            apply {
+                this.avgSpeed = avgSpeed
+            }
 
         /** Time the row was created in the database, auto-populated by the system. */
         fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -971,11 +944,13 @@ private constructor(
         /**
          * Sets [Builder.createdAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) =
+            apply {
+                this.createdAt = createdAt
+            }
 
         /** Application user who created the row in the database, auto-populated by the system. */
         fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
@@ -983,11 +958,13 @@ private constructor(
         /**
          * Sets [Builder.createdBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+        fun createdBy(createdBy: JsonField<String>) =
+            apply {
+                this.createdBy = createdBy
+            }
 
         /** The number of data points used in this travel duration calculation. */
         fun dataPtsUsed(dataPtsUsed: Int) = dataPtsUsed(JsonField.of(dataPtsUsed))
@@ -995,24 +972,27 @@ private constructor(
         /**
          * Sets [Builder.dataPtsUsed] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dataPtsUsed] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.dataPtsUsed] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun dataPtsUsed(dataPtsUsed: JsonField<Int>) = apply { this.dataPtsUsed = dataPtsUsed }
+        fun dataPtsUsed(dataPtsUsed: JsonField<Int>) =
+            apply {
+                this.dataPtsUsed = dataPtsUsed
+            }
 
-        /**
-         * Distance between the departure and arrival locations in the indicated unit of
-         * measurement, distUnit.
-         */
+        /** Distance between the departure and arrival locations in the indicated unit of measurement, distUnit. */
         fun distance(distance: Double) = distance(JsonField.of(distance))
 
         /**
          * Sets [Builder.distance] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.distance] with a well-typed [Double] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.distance] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun distance(distance: JsonField<Double>) = apply { this.distance = distance }
+        fun distance(distance: JsonField<Double>) =
+            apply {
+                this.distance = distance
+            }
 
         /** The unit of measurement used for distance in this calculation. */
         fun distUnit(distUnit: String) = distUnit(JsonField.of(distUnit))
@@ -1020,105 +1000,97 @@ private constructor(
         /**
          * Sets [Builder.distUnit] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.distUnit] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.distUnit] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun distUnit(distUnit: JsonField<String>) = apply { this.distUnit = distUnit }
+        fun distUnit(distUnit: JsonField<String>) =
+            apply {
+                this.distUnit = distUnit
+            }
 
-        /**
-         * Date of the first data point used in this calculation, in ISO8601 UTC format with
-         * millisecond precision.
-         */
+        /** Date of the first data point used in this calculation, in ISO8601 UTC format with millisecond precision. */
         fun firstPt(firstPt: OffsetDateTime) = firstPt(JsonField.of(firstPt))
 
         /**
          * Sets [Builder.firstPt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.firstPt] with a well-typed [OffsetDateTime] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.firstPt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun firstPt(firstPt: JsonField<OffsetDateTime>) = apply { this.firstPt = firstPt }
+        fun firstPt(firstPt: JsonField<OffsetDateTime>) =
+            apply {
+                this.firstPt = firstPt
+            }
 
-        /**
-         * Description of the portion of travel used to estimate the value of the idealDuration
-         * field.
-         */
+        /** Description of the portion of travel used to estimate the value of the idealDuration field. */
         fun idealDesc(idealDesc: String) = idealDesc(JsonField.of(idealDesc))
 
         /**
          * Sets [Builder.idealDesc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idealDesc] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.idealDesc] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun idealDesc(idealDesc: JsonField<String>) = apply { this.idealDesc = idealDesc }
+        fun idealDesc(idealDesc: JsonField<String>) =
+            apply {
+                this.idealDesc = idealDesc
+            }
 
-        /**
-         * Estimated ideal travel duration in hours for the full distance using the indicated
-         * vehicle type. The field "idealDesc" should be used to describe the ideal travel route.
-         */
+        /** Estimated ideal travel duration in hours for the full distance using the indicated vehicle type. The field "idealDesc" should be used to describe the ideal travel route. */
         fun idealDuration(idealDuration: Double) = idealDuration(JsonField.of(idealDuration))
 
         /**
          * Sets [Builder.idealDuration] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idealDuration] with a well-typed [Double] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.idealDuration] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun idealDuration(idealDuration: JsonField<Double>) = apply {
-            this.idealDuration = idealDuration
-        }
+        fun idealDuration(idealDuration: JsonField<Double>) =
+            apply {
+                this.idealDuration = idealDuration
+            }
 
-        /**
-         * Unique identifier of the Site at the route's end location. This ID can be used to obtain
-         * additional information on a Site using the 'get by ID' operation (e.g. /udl/site/{id}).
-         * For example, the Site object with idSite = abc would be queried as /udl/site/abc.
-         */
+        /** Unique identifier of the Site at the route's end location. This ID can be used to obtain additional information on a Site using the 'get by ID' operation (e.g. /udl/site/{id}). For example, the Site object with idSite = abc would be queried as /udl/site/abc. */
         fun idSiteEnd(idSiteEnd: String) = idSiteEnd(JsonField.of(idSiteEnd))
 
         /**
          * Sets [Builder.idSiteEnd] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idSiteEnd] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.idSiteEnd] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun idSiteEnd(idSiteEnd: JsonField<String>) = apply { this.idSiteEnd = idSiteEnd }
+        fun idSiteEnd(idSiteEnd: JsonField<String>) =
+            apply {
+                this.idSiteEnd = idSiteEnd
+            }
 
-        /**
-         * Unique identifier of the Site at the route's starting location. This ID can be used to
-         * obtain additional information on a Site using the 'get by ID' operation (e.g.
-         * /udl/site/{id}). For example, the Site object with idSite = abc would be queried as
-         * /udl/site/abc.
-         */
+        /** Unique identifier of the Site at the route's starting location. This ID can be used to obtain additional information on a Site using the 'get by ID' operation (e.g. /udl/site/{id}). For example, the Site object with idSite = abc would be queried as /udl/site/abc. */
         fun idSiteStart(idSiteStart: String) = idSiteStart(JsonField.of(idSiteStart))
 
         /**
          * Sets [Builder.idSiteStart] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idSiteStart] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.idSiteStart] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun idSiteStart(idSiteStart: JsonField<String>) = apply { this.idSiteStart = idSiteStart }
+        fun idSiteStart(idSiteStart: JsonField<String>) =
+            apply {
+                this.idSiteStart = idSiteStart
+            }
 
-        /**
-         * Date of the last data point used in this calculation, in ISO8601 UTC format with
-         * millisecond precision.
-         */
+        /** Date of the last data point used in this calculation, in ISO8601 UTC format with millisecond precision. */
         fun lastPt(lastPt: OffsetDateTime) = lastPt(JsonField.of(lastPt))
 
         /**
          * Sets [Builder.lastPt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.lastPt] with a well-typed [OffsetDateTime] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.lastPt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun lastPt(lastPt: JsonField<OffsetDateTime>) = apply { this.lastPt = lastPt }
+        fun lastPt(lastPt: JsonField<OffsetDateTime>) =
+            apply {
+                this.lastPt = lastPt
+            }
 
         /** Type of location used for route start and end points (e.g., ICAO, PORT, etc.). */
         fun locationType(locationType: String) = locationType(JsonField.of(locationType))
@@ -1126,13 +1098,13 @@ private constructor(
         /**
          * Sets [Builder.locationType] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.locationType] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.locationType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun locationType(locationType: JsonField<String>) = apply {
-            this.locationType = locationType
-        }
+        fun locationType(locationType: JsonField<String>) =
+            apply {
+                this.locationType = locationType
+            }
 
         /** Maximum travel duration for the indicated distance and type of vehicle in hours. */
         fun maxDuration(maxDuration: Double) = maxDuration(JsonField.of(maxDuration))
@@ -1140,11 +1112,13 @@ private constructor(
         /**
          * Sets [Builder.maxDuration] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.maxDuration] with a well-typed [Double] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.maxDuration] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun maxDuration(maxDuration: JsonField<Double>) = apply { this.maxDuration = maxDuration }
+        fun maxDuration(maxDuration: JsonField<Double>) =
+            apply {
+                this.maxDuration = maxDuration
+            }
 
         /** Maximum speed during travel in the indicated unit of measurement, speedUnit. */
         fun maxSpeed(maxSpeed: Double) = maxSpeed(JsonField.of(maxSpeed))
@@ -1152,10 +1126,13 @@ private constructor(
         /**
          * Sets [Builder.maxSpeed] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.maxSpeed] with a well-typed [Double] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.maxSpeed] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun maxSpeed(maxSpeed: JsonField<Double>) = apply { this.maxSpeed = maxSpeed }
+        fun maxSpeed(maxSpeed: JsonField<Double>) =
+            apply {
+                this.maxSpeed = maxSpeed
+            }
 
         /** Minimum travel duration for the indicated distance and type of vehicle in hours. */
         fun minDuration(minDuration: Double) = minDuration(JsonField.of(minDuration))
@@ -1163,11 +1140,13 @@ private constructor(
         /**
          * Sets [Builder.minDuration] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.minDuration] with a well-typed [Double] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.minDuration] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun minDuration(minDuration: JsonField<Double>) = apply { this.minDuration = minDuration }
+        fun minDuration(minDuration: JsonField<Double>) =
+            apply {
+                this.minDuration = minDuration
+            }
 
         /** Minimum speed during travel in the indicated unit of measurement, speedUnit. */
         fun minSpeed(minSpeed: Double) = minSpeed(JsonField.of(minSpeed))
@@ -1175,90 +1154,83 @@ private constructor(
         /**
          * Sets [Builder.minSpeed] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.minSpeed] with a well-typed [Double] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.minSpeed] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun minSpeed(minSpeed: JsonField<Double>) = apply { this.minSpeed = minSpeed }
+        fun minSpeed(minSpeed: JsonField<Double>) =
+            apply {
+                this.minSpeed = minSpeed
+            }
 
-        /**
-         * Originating system or organization which produced the data, if different from the source.
-         * The origin may be different than the source if the source was a mediating system which
-         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
-         * be the origin.
-         */
+        /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
         fun origin(origin: String) = origin(JsonField.of(origin))
 
         /**
          * Sets [Builder.origin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+        fun origin(origin: JsonField<String>) =
+            apply {
+                this.origin = origin
+            }
 
-        /**
-         * The originating source network on which this record was created, auto-populated by the
-         * system.
-         */
+        /** The originating source network on which this record was created, auto-populated by the system. */
         fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
         /**
          * Sets [Builder.origNetwork] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
+        fun origNetwork(origNetwork: JsonField<String>) =
+            apply {
+                this.origNetwork = origNetwork
+            }
 
-        /**
-         * Description of the portion of travel used to estimate the value of the partialDuration
-         * field.
-         */
+        /** Description of the portion of travel used to estimate the value of the partialDuration field. */
         fun partialDesc(partialDesc: String) = partialDesc(JsonField.of(partialDesc))
 
         /**
          * Sets [Builder.partialDesc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.partialDesc] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.partialDesc] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun partialDesc(partialDesc: JsonField<String>) = apply { this.partialDesc = partialDesc }
+        fun partialDesc(partialDesc: JsonField<String>) =
+            apply {
+                this.partialDesc = partialDesc
+            }
 
-        /**
-         * Estimated ideal travel duration in hours for a partial distance using the indicated
-         * vehicle type. The field "partialDesc" should be used to specify the intended portion of
-         * travel.
-         */
-        fun partialDuration(partialDuration: Double) =
-            partialDuration(JsonField.of(partialDuration))
+        /** Estimated ideal travel duration in hours for a partial distance using the indicated vehicle type. The field "partialDesc" should be used to specify the intended portion of travel. */
+        fun partialDuration(partialDuration: Double) = partialDuration(JsonField.of(partialDuration))
 
         /**
          * Sets [Builder.partialDuration] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.partialDuration] with a well-typed [Double] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.partialDuration] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun partialDuration(partialDuration: JsonField<Double>) = apply {
-            this.partialDuration = partialDuration
-        }
+        fun partialDuration(partialDuration: JsonField<Double>) =
+            apply {
+                this.partialDuration = partialDuration
+            }
 
-        /**
-         * The source data library from which this record was received. This could be a remote or
-         * tactical UDL or another data library. If null, the record should be assumed to have
-         * originated from the primary Enterprise UDL.
-         */
+        /** The source data library from which this record was received. This could be a remote or tactical UDL or another data library. If null, the record should be assumed to have originated from the primary Enterprise UDL. */
         fun sourceDl(sourceDl: String) = sourceDl(JsonField.of(sourceDl))
 
         /**
          * Sets [Builder.sourceDl] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.sourceDl] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.sourceDl] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun sourceDl(sourceDl: JsonField<String>) = apply { this.sourceDl = sourceDl }
+        fun sourceDl(sourceDl: JsonField<String>) =
+            apply {
+                this.sourceDl = sourceDl
+            }
 
         /** The unit of measurement used for speed in this calculation. */
         fun speedUnit(speedUnit: String) = speedUnit(JsonField.of(speedUnit))
@@ -1266,11 +1238,13 @@ private constructor(
         /**
          * Sets [Builder.speedUnit] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.speedUnit] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.speedUnit] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun speedUnit(speedUnit: JsonField<String>) = apply { this.speedUnit = speedUnit }
+        fun speedUnit(speedUnit: JsonField<String>) =
+            apply {
+                this.speedUnit = speedUnit
+            }
 
         /** The time period this data was collected. */
         fun timePeriod(timePeriod: String) = timePeriod(JsonField.of(timePeriod))
@@ -1278,11 +1252,13 @@ private constructor(
         /**
          * Sets [Builder.timePeriod] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.timePeriod] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.timePeriod] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun timePeriod(timePeriod: JsonField<String>) = apply { this.timePeriod = timePeriod }
+        fun timePeriod(timePeriod: JsonField<String>) =
+            apply {
+                this.timePeriod = timePeriod
+            }
 
         /** Time the row was updated in the database, auto-populated by the system. */
         fun updatedAt(updatedAt: OffsetDateTime) = updatedAt(JsonField.of(updatedAt))
@@ -1290,11 +1266,13 @@ private constructor(
         /**
          * Sets [Builder.updatedAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.updatedAt] with a well-typed [OffsetDateTime] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.updatedAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun updatedAt(updatedAt: JsonField<OffsetDateTime>) = apply { this.updatedAt = updatedAt }
+        fun updatedAt(updatedAt: JsonField<OffsetDateTime>) =
+            apply {
+                this.updatedAt = updatedAt
+            }
 
         /** Application user who updated the row in the database, auto-populated by the system. */
         fun updatedBy(updatedBy: String) = updatedBy(JsonField.of(updatedBy))
@@ -1302,29 +1280,27 @@ private constructor(
         /**
          * Sets [Builder.updatedBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.updatedBy] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.updatedBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun updatedBy(updatedBy: JsonField<String>) = apply { this.updatedBy = updatedBy }
+        fun updatedBy(updatedBy: JsonField<String>) =
+            apply {
+                this.updatedBy = updatedBy
+            }
 
-        /**
-         * The vehicle category that is the subject of this calculation (e.g., AIRCRAFT, CAR, BOAT,
-         * etc.).
-         */
-        fun vehicleCategory(vehicleCategory: String) =
-            vehicleCategory(JsonField.of(vehicleCategory))
+        /** The vehicle category that is the subject of this calculation (e.g., AIRCRAFT, CAR, BOAT, etc.). */
+        fun vehicleCategory(vehicleCategory: String) = vehicleCategory(JsonField.of(vehicleCategory))
 
         /**
          * Sets [Builder.vehicleCategory] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.vehicleCategory] with a well-typed [String] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.vehicleCategory] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun vehicleCategory(vehicleCategory: JsonField<String>) = apply {
-            this.vehicleCategory = vehicleCategory
-        }
+        fun vehicleCategory(vehicleCategory: JsonField<String>) =
+            apply {
+                this.vehicleCategory = vehicleCategory
+            }
 
         /** The vehicle type that is the subject of this calculation (e.g., C-17, F-15, etc.). */
         fun vehicleType(vehicleType: String) = vehicleType(JsonField.of(vehicleType))
@@ -1332,30 +1308,39 @@ private constructor(
         /**
          * Sets [Builder.vehicleType] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.vehicleType] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.vehicleType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun vehicleType(vehicleType: JsonField<String>) = apply { this.vehicleType = vehicleType }
+        fun vehicleType(vehicleType: JsonField<String>) =
+            apply {
+                this.vehicleType = vehicleType
+            }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-            this.additionalProperties.clear()
-            putAllAdditionalProperties(additionalProperties)
-        }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
+            apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-            additionalProperties.put(key, value)
-        }
+        fun putAdditionalProperty(key: String, value: JsonValue) =
+            apply {
+                additionalProperties.put(key, value)
+            }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-            this.additionalProperties.putAll(additionalProperties)
-        }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
+            apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
 
-        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+        fun removeAdditionalProperty(key: String) =
+            apply {
+                additionalProperties.remove(key)
+            }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-            keys.forEach(::removeAdditionalProperty)
-        }
+        fun removeAllAdditionalProperties(keys: Set<String>) =
+            apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
 
         /**
          * Returns an immutable instance of [RouteStatRetrieveResponse].
@@ -1363,6 +1348,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -1375,89 +1361,100 @@ private constructor(
          */
         fun build(): RouteStatRetrieveResponse =
             RouteStatRetrieveResponse(
-                checkRequired("classificationMarking", classificationMarking),
-                checkRequired("dataMode", dataMode),
-                checkRequired("locationEnd", locationEnd),
-                checkRequired("locationStart", locationStart),
-                checkRequired("source", source),
-                id,
-                avgDuration,
-                avgSpeed,
-                createdAt,
-                createdBy,
-                dataPtsUsed,
-                distance,
-                distUnit,
-                firstPt,
-                idealDesc,
-                idealDuration,
-                idSiteEnd,
-                idSiteStart,
-                lastPt,
-                locationType,
-                maxDuration,
-                maxSpeed,
-                minDuration,
-                minSpeed,
-                origin,
-                origNetwork,
-                partialDesc,
-                partialDuration,
-                sourceDl,
-                speedUnit,
-                timePeriod,
-                updatedAt,
-                updatedBy,
-                vehicleCategory,
-                vehicleType,
-                additionalProperties.toMutableMap(),
+              checkRequired(
+                "classificationMarking", classificationMarking
+              ),
+              checkRequired(
+                "dataMode", dataMode
+              ),
+              checkRequired(
+                "locationEnd", locationEnd
+              ),
+              checkRequired(
+                "locationStart", locationStart
+              ),
+              checkRequired(
+                "source", source
+              ),
+              id,
+              avgDuration,
+              avgSpeed,
+              createdAt,
+              createdBy,
+              dataPtsUsed,
+              distance,
+              distUnit,
+              firstPt,
+              idealDesc,
+              idealDuration,
+              idSiteEnd,
+              idSiteStart,
+              lastPt,
+              locationType,
+              maxDuration,
+              maxSpeed,
+              minDuration,
+              minSpeed,
+              origin,
+              origNetwork,
+              partialDesc,
+              partialDuration,
+              sourceDl,
+              speedUnit,
+              timePeriod,
+              updatedAt,
+              updatedBy,
+              vehicleCategory,
+              vehicleType,
+              additionalProperties.toMutableMap(),
             )
     }
 
     private var validated: Boolean = false
 
-    fun validate(): RouteStatRetrieveResponse = apply {
-        if (validated) {
-            return@apply
-        }
+    fun validate(): RouteStatRetrieveResponse =
+        apply {
+            if (validated) {
+              return@apply
+            }
 
-        classificationMarking()
-        dataMode().validate()
-        locationEnd()
-        locationStart()
-        source()
-        id()
-        avgDuration()
-        avgSpeed()
-        createdAt()
-        createdBy()
-        dataPtsUsed()
-        distance()
-        distUnit()
-        firstPt()
-        idealDesc()
-        idealDuration()
-        idSiteEnd()
-        idSiteStart()
-        lastPt()
-        locationType()
-        maxDuration()
-        maxSpeed()
-        minDuration()
-        minSpeed()
-        origin()
-        origNetwork()
-        partialDesc()
-        partialDuration()
-        sourceDl()
-        speedUnit()
-        timePeriod()
-        updatedAt()
-        updatedBy()
-        vehicleCategory()
-        vehicleType()
-        validated = true
-    }
+            classificationMarking()
+            dataMode().validate()
+            locationEnd()
+            locationStart()
+            source()
+            id()
+            avgDuration()
+            avgSpeed()
+            createdAt()
+            createdBy()
+            dataPtsUsed()
+            distance()
+            distUnit()
+            firstPt()
+            idealDesc()
+            idealDuration()
+            idSiteEnd()
+            idSiteStart()
+            lastPt()
+            locationType()
+            maxDuration()
+            maxSpeed()
+            minDuration()
+            minSpeed()
+            origin()
+            origNetwork()
+            partialDesc()
+            partialDuration()
+            sourceDl()
+            speedUnit()
+            timePeriod()
+            updatedAt()
+            updatedBy()
+            vehicleCategory()
+            vehicleType()
+            validated = true
+        }
 
     fun isValid(): Boolean =
         try {
@@ -1473,68 +1470,33 @@ private constructor(
      * Used for best match union deserialization.
      */
     @JvmSynthetic
-    internal fun validity(): Int =
-        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
-            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
-            (if (locationEnd.asKnown().isPresent) 1 else 0) +
-            (if (locationStart.asKnown().isPresent) 1 else 0) +
-            (if (source.asKnown().isPresent) 1 else 0) +
-            (if (id.asKnown().isPresent) 1 else 0) +
-            (if (avgDuration.asKnown().isPresent) 1 else 0) +
-            (if (avgSpeed.asKnown().isPresent) 1 else 0) +
-            (if (createdAt.asKnown().isPresent) 1 else 0) +
-            (if (createdBy.asKnown().isPresent) 1 else 0) +
-            (if (dataPtsUsed.asKnown().isPresent) 1 else 0) +
-            (if (distance.asKnown().isPresent) 1 else 0) +
-            (if (distUnit.asKnown().isPresent) 1 else 0) +
-            (if (firstPt.asKnown().isPresent) 1 else 0) +
-            (if (idealDesc.asKnown().isPresent) 1 else 0) +
-            (if (idealDuration.asKnown().isPresent) 1 else 0) +
-            (if (idSiteEnd.asKnown().isPresent) 1 else 0) +
-            (if (idSiteStart.asKnown().isPresent) 1 else 0) +
-            (if (lastPt.asKnown().isPresent) 1 else 0) +
-            (if (locationType.asKnown().isPresent) 1 else 0) +
-            (if (maxDuration.asKnown().isPresent) 1 else 0) +
-            (if (maxSpeed.asKnown().isPresent) 1 else 0) +
-            (if (minDuration.asKnown().isPresent) 1 else 0) +
-            (if (minSpeed.asKnown().isPresent) 1 else 0) +
-            (if (origin.asKnown().isPresent) 1 else 0) +
-            (if (origNetwork.asKnown().isPresent) 1 else 0) +
-            (if (partialDesc.asKnown().isPresent) 1 else 0) +
-            (if (partialDuration.asKnown().isPresent) 1 else 0) +
-            (if (sourceDl.asKnown().isPresent) 1 else 0) +
-            (if (speedUnit.asKnown().isPresent) 1 else 0) +
-            (if (timePeriod.asKnown().isPresent) 1 else 0) +
-            (if (updatedAt.asKnown().isPresent) 1 else 0) +
-            (if (updatedBy.asKnown().isPresent) 1 else 0) +
-            (if (vehicleCategory.asKnown().isPresent) 1 else 0) +
-            (if (vehicleType.asKnown().isPresent) 1 else 0)
+    internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (locationEnd.asKnown().isPresent) 1 else 0) + (if (locationStart.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (if (avgDuration.asKnown().isPresent) 1 else 0) + (if (avgSpeed.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (dataPtsUsed.asKnown().isPresent) 1 else 0) + (if (distance.asKnown().isPresent) 1 else 0) + (if (distUnit.asKnown().isPresent) 1 else 0) + (if (firstPt.asKnown().isPresent) 1 else 0) + (if (idealDesc.asKnown().isPresent) 1 else 0) + (if (idealDuration.asKnown().isPresent) 1 else 0) + (if (idSiteEnd.asKnown().isPresent) 1 else 0) + (if (idSiteStart.asKnown().isPresent) 1 else 0) + (if (lastPt.asKnown().isPresent) 1 else 0) + (if (locationType.asKnown().isPresent) 1 else 0) + (if (maxDuration.asKnown().isPresent) 1 else 0) + (if (maxSpeed.asKnown().isPresent) 1 else 0) + (if (minDuration.asKnown().isPresent) 1 else 0) + (if (minSpeed.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (partialDesc.asKnown().isPresent) 1 else 0) + (if (partialDuration.asKnown().isPresent) 1 else 0) + (if (sourceDl.asKnown().isPresent) 1 else 0) + (if (speedUnit.asKnown().isPresent) 1 else 0) + (if (timePeriod.asKnown().isPresent) 1 else 0) + (if (updatedAt.asKnown().isPresent) 1 else 0) + (if (updatedBy.asKnown().isPresent) 1 else 0) + (if (vehicleCategory.asKnown().isPresent) 1 else 0) + (if (vehicleType.asKnown().isPresent) 1 else 0)
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-     * both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-     * analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-     * requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
      */
-    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+    class DataMode @JsonCreator private constructor(
+        private val value: JsonField<String>,
+
+    ) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't
-         * match any known member, and you want to know that value. For example, if the SDK is on an
-         * older version than the API, then the API may respond with new members that the SDK is
-         * unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't match any known
+         * member, and you want to know that value. For example, if the SDK is on an older version than the
+         * API, then the API may respond with new members that the SDK is unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue
+        fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -1561,9 +1523,11 @@ private constructor(
          * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [DataMode] can contain an unknown value in a couple of cases:
-         * - It was deserialized from data that doesn't match any known member. For example, if the
-         *   SDK is on an older version than the API, then the API may respond with new members that
-         *   the SDK is unaware of.
+         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
+         *   an older version than the API, then the API may respond with new members that the SDK is unaware
+         *   of.
+         *
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -1576,11 +1540,11 @@ private constructor(
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
-         * if the class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
+         * class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want
-         * to throw for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want to throw
+         * for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -1594,11 +1558,10 @@ private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't
-         * want to throw for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
+         * for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
-         *   known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
          */
         fun known(): Known =
             when (this) {
@@ -1612,27 +1575,25 @@ private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging
-         * and generally doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging and generally
+         * doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
-         *   have the expected primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
+         * primitive type.
          */
-        fun asString(): String =
-            _value().asString().orElseThrow {
-                UnifieddatalibraryInvalidDataException("Value is not a String")
-            }
+        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
 
         private var validated: Boolean = false
 
-        fun validate(): DataMode = apply {
-            if (validated) {
-                return@apply
-            }
+        fun validate(): DataMode =
+            apply {
+                if (validated) {
+                  return@apply
+                }
 
-            known()
-            validated = true
-        }
+                known()
+                validated = true
+            }
 
         fun isValid(): Boolean =
             try {
@@ -1643,19 +1604,19 @@ private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
+         * Returns a score indicating how many valid values are contained in this object recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic
+        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
+          if (this === other) {
+              return true
+          }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+          return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
         }
 
         override fun hashCode() = value.hashCode()
@@ -1664,11 +1625,11 @@ private constructor(
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is RouteStatRetrieveResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && locationEnd == other.locationEnd && locationStart == other.locationStart && source == other.source && id == other.id && avgDuration == other.avgDuration && avgSpeed == other.avgSpeed && createdAt == other.createdAt && createdBy == other.createdBy && dataPtsUsed == other.dataPtsUsed && distance == other.distance && distUnit == other.distUnit && firstPt == other.firstPt && idealDesc == other.idealDesc && idealDuration == other.idealDuration && idSiteEnd == other.idSiteEnd && idSiteStart == other.idSiteStart && lastPt == other.lastPt && locationType == other.locationType && maxDuration == other.maxDuration && maxSpeed == other.maxSpeed && minDuration == other.minDuration && minSpeed == other.minSpeed && origin == other.origin && origNetwork == other.origNetwork && partialDesc == other.partialDesc && partialDuration == other.partialDuration && sourceDl == other.sourceDl && speedUnit == other.speedUnit && timePeriod == other.timePeriod && updatedAt == other.updatedAt && updatedBy == other.updatedBy && vehicleCategory == other.vehicleCategory && vehicleType == other.vehicleType && additionalProperties == other.additionalProperties /* spotless:on */
+      return /* spotless:off */ other is RouteStatRetrieveResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && locationEnd == other.locationEnd && locationStart == other.locationStart && source == other.source && id == other.id && avgDuration == other.avgDuration && avgSpeed == other.avgSpeed && createdAt == other.createdAt && createdBy == other.createdBy && dataPtsUsed == other.dataPtsUsed && distance == other.distance && distUnit == other.distUnit && firstPt == other.firstPt && idealDesc == other.idealDesc && idealDuration == other.idealDuration && idSiteEnd == other.idSiteEnd && idSiteStart == other.idSiteStart && lastPt == other.lastPt && locationType == other.locationType && maxDuration == other.maxDuration && maxSpeed == other.maxSpeed && minDuration == other.minDuration && minSpeed == other.minSpeed && origin == other.origin && origNetwork == other.origNetwork && partialDesc == other.partialDesc && partialDuration == other.partialDuration && sourceDl == other.sourceDl && speedUnit == other.speedUnit && timePeriod == other.timePeriod && updatedAt == other.updatedAt && updatedBy == other.updatedBy && vehicleCategory == other.vehicleCategory && vehicleType == other.vehicleType && additionalProperties == other.additionalProperties /* spotless:on */
     }
 
     /* spotless:off */
@@ -1677,6 +1638,5 @@ private constructor(
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() =
-        "RouteStatRetrieveResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, locationEnd=$locationEnd, locationStart=$locationStart, source=$source, id=$id, avgDuration=$avgDuration, avgSpeed=$avgSpeed, createdAt=$createdAt, createdBy=$createdBy, dataPtsUsed=$dataPtsUsed, distance=$distance, distUnit=$distUnit, firstPt=$firstPt, idealDesc=$idealDesc, idealDuration=$idealDuration, idSiteEnd=$idSiteEnd, idSiteStart=$idSiteStart, lastPt=$lastPt, locationType=$locationType, maxDuration=$maxDuration, maxSpeed=$maxSpeed, minDuration=$minDuration, minSpeed=$minSpeed, origin=$origin, origNetwork=$origNetwork, partialDesc=$partialDesc, partialDuration=$partialDuration, sourceDl=$sourceDl, speedUnit=$speedUnit, timePeriod=$timePeriod, updatedAt=$updatedAt, updatedBy=$updatedBy, vehicleCategory=$vehicleCategory, vehicleType=$vehicleType, additionalProperties=$additionalProperties}"
+    override fun toString() = "RouteStatRetrieveResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, locationEnd=$locationEnd, locationStart=$locationStart, source=$source, id=$id, avgDuration=$avgDuration, avgSpeed=$avgSpeed, createdAt=$createdAt, createdBy=$createdBy, dataPtsUsed=$dataPtsUsed, distance=$distance, distUnit=$distUnit, firstPt=$firstPt, idealDesc=$idealDesc, idealDuration=$idealDuration, idSiteEnd=$idSiteEnd, idSiteStart=$idSiteStart, lastPt=$lastPt, locationType=$locationType, maxDuration=$maxDuration, maxSpeed=$maxSpeed, minDuration=$minDuration, minSpeed=$minSpeed, origin=$origin, origNetwork=$origNetwork, partialDesc=$partialDesc, partialDuration=$partialDuration, sourceDl=$sourceDl, speedUnit=$speedUnit, timePeriod=$timePeriod, updatedAt=$updatedAt, updatedBy=$updatedBy, vehicleCategory=$vehicleCategory, vehicleType=$vehicleType, additionalProperties=$additionalProperties}"
 }

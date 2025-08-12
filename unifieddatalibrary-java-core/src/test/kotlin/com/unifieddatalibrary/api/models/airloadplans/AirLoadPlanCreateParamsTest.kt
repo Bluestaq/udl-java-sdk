@@ -7,13 +7,13 @@ import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class AirLoadPlanCreateParamsTest {
+internal class AirloadPlanCreateParamsTest {
 
     @Test
     fun create() {
-        AirLoadPlanCreateParams.builder()
+        AirloadPlanCreateParams.builder()
             .classificationMarking("U")
-            .dataMode(AirLoadPlanCreateParams.DataMode.TEST)
+            .dataMode(AirloadPlanCreateParams.DataMode.TEST)
             .estDepTime(OffsetDateTime.parse("2024-01-01T01:00:00.123Z"))
             .source("source")
             .id("0457f578-e29c-312e-85aa-0a04a430bdd0")
@@ -21,7 +21,7 @@ internal class AirLoadPlanCreateParamsTest {
             .aclReleased(200.1)
             .aircraftMds("C17A")
             .addAirLoadPlanHazmatActual(
-                AirLoadPlanCreateParams.AirLoadPlanHazmatActual.builder()
+                AirloadPlanCreateParams.AirLoadPlanHazmatActual.builder()
                     .ashc("RFL")
                     .cgc("A")
                     .classDiv("1.1")
@@ -42,7 +42,7 @@ internal class AirLoadPlanCreateParamsTest {
                     .build()
             )
             .addAirLoadPlanHr(
-                AirLoadPlanCreateParams.AirLoadPlanHr.builder()
+                AirloadPlanCreateParams.AirLoadPlanHr.builder()
                     .container("Metal")
                     .escort("Jane Doe")
                     .hrEstArrTime(OffsetDateTime.parse("2024-01-01T01:00:00.123Z"))
@@ -59,7 +59,7 @@ internal class AirLoadPlanCreateParamsTest {
                     .build()
             )
             .addAirLoadPlanPalletDetail(
-                AirLoadPlanCreateParams.AirLoadPlanPalletDetail.builder()
+                AirloadPlanCreateParams.AirLoadPlanPalletDetail.builder()
                     .category("AMCMICAP")
                     .pp("2")
                     .ppDescription("Ammunition")
@@ -72,7 +72,7 @@ internal class AirLoadPlanCreateParamsTest {
                     .build()
             )
             .addAirLoadPlanPaxCargo(
-                AirLoadPlanCreateParams.AirLoadPlanPaxCargo.builder()
+                AirloadPlanCreateParams.AirLoadPlanPaxCargo.builder()
                     .ambPax(5)
                     .attPax(6)
                     .availablePax(20)
@@ -91,7 +91,7 @@ internal class AirLoadPlanCreateParamsTest {
                     .build()
             )
             .addAirLoadPlanUlnActual(
-                AirLoadPlanCreateParams.AirLoadPlanUlnActual.builder()
+                AirloadPlanCreateParams.AirLoadPlanUlnActual.builder()
                     .numAmbulatory(10)
                     .numAttendant(10)
                     .numLitter(10)
@@ -170,9 +170,9 @@ internal class AirLoadPlanCreateParamsTest {
     @Test
     fun body() {
         val params =
-            AirLoadPlanCreateParams.builder()
+            AirloadPlanCreateParams.builder()
                 .classificationMarking("U")
-                .dataMode(AirLoadPlanCreateParams.DataMode.TEST)
+                .dataMode(AirloadPlanCreateParams.DataMode.TEST)
                 .estDepTime(OffsetDateTime.parse("2024-01-01T01:00:00.123Z"))
                 .source("source")
                 .id("0457f578-e29c-312e-85aa-0a04a430bdd0")
@@ -180,7 +180,7 @@ internal class AirLoadPlanCreateParamsTest {
                 .aclReleased(200.1)
                 .aircraftMds("C17A")
                 .addAirLoadPlanHazmatActual(
-                    AirLoadPlanCreateParams.AirLoadPlanHazmatActual.builder()
+                    AirloadPlanCreateParams.AirLoadPlanHazmatActual.builder()
                         .ashc("RFL")
                         .cgc("A")
                         .classDiv("1.1")
@@ -201,7 +201,7 @@ internal class AirLoadPlanCreateParamsTest {
                         .build()
                 )
                 .addAirLoadPlanHr(
-                    AirLoadPlanCreateParams.AirLoadPlanHr.builder()
+                    AirloadPlanCreateParams.AirLoadPlanHr.builder()
                         .container("Metal")
                         .escort("Jane Doe")
                         .hrEstArrTime(OffsetDateTime.parse("2024-01-01T01:00:00.123Z"))
@@ -218,7 +218,7 @@ internal class AirLoadPlanCreateParamsTest {
                         .build()
                 )
                 .addAirLoadPlanPalletDetail(
-                    AirLoadPlanCreateParams.AirLoadPlanPalletDetail.builder()
+                    AirloadPlanCreateParams.AirLoadPlanPalletDetail.builder()
                         .category("AMCMICAP")
                         .pp("2")
                         .ppDescription("Ammunition")
@@ -231,7 +231,7 @@ internal class AirLoadPlanCreateParamsTest {
                         .build()
                 )
                 .addAirLoadPlanPaxCargo(
-                    AirLoadPlanCreateParams.AirLoadPlanPaxCargo.builder()
+                    AirloadPlanCreateParams.AirLoadPlanPaxCargo.builder()
                         .ambPax(5)
                         .attPax(6)
                         .availablePax(20)
@@ -250,7 +250,7 @@ internal class AirLoadPlanCreateParamsTest {
                         .build()
                 )
                 .addAirLoadPlanUlnActual(
-                    AirLoadPlanCreateParams.AirLoadPlanUlnActual.builder()
+                    AirloadPlanCreateParams.AirLoadPlanUlnActual.builder()
                         .numAmbulatory(10)
                         .numAttendant(10)
                         .numLitter(10)
@@ -328,7 +328,7 @@ internal class AirLoadPlanCreateParamsTest {
         val body = params._body()
 
         assertThat(body.classificationMarking()).isEqualTo("U")
-        assertThat(body.dataMode()).isEqualTo(AirLoadPlanCreateParams.DataMode.TEST)
+        assertThat(body.dataMode()).isEqualTo(AirloadPlanCreateParams.DataMode.TEST)
         assertThat(body.estDepTime()).isEqualTo(OffsetDateTime.parse("2024-01-01T01:00:00.123Z"))
         assertThat(body.source()).isEqualTo("source")
         assertThat(body.id()).contains("0457f578-e29c-312e-85aa-0a04a430bdd0")
@@ -337,7 +337,7 @@ internal class AirLoadPlanCreateParamsTest {
         assertThat(body.aircraftMds()).contains("C17A")
         assertThat(body.airLoadPlanHazmatActuals().getOrNull())
             .containsExactly(
-                AirLoadPlanCreateParams.AirLoadPlanHazmatActual.builder()
+                AirloadPlanCreateParams.AirLoadPlanHazmatActual.builder()
                     .ashc("RFL")
                     .cgc("A")
                     .classDiv("1.1")
@@ -359,7 +359,7 @@ internal class AirLoadPlanCreateParamsTest {
             )
         assertThat(body.airLoadPlanHr().getOrNull())
             .containsExactly(
-                AirLoadPlanCreateParams.AirLoadPlanHr.builder()
+                AirloadPlanCreateParams.AirLoadPlanHr.builder()
                     .container("Metal")
                     .escort("Jane Doe")
                     .hrEstArrTime(OffsetDateTime.parse("2024-01-01T01:00:00.123Z"))
@@ -377,7 +377,7 @@ internal class AirLoadPlanCreateParamsTest {
             )
         assertThat(body.airLoadPlanPalletDetails().getOrNull())
             .containsExactly(
-                AirLoadPlanCreateParams.AirLoadPlanPalletDetail.builder()
+                AirloadPlanCreateParams.AirLoadPlanPalletDetail.builder()
                     .category("AMCMICAP")
                     .pp("2")
                     .ppDescription("Ammunition")
@@ -391,7 +391,7 @@ internal class AirLoadPlanCreateParamsTest {
             )
         assertThat(body.airLoadPlanPaxCargo().getOrNull())
             .containsExactly(
-                AirLoadPlanCreateParams.AirLoadPlanPaxCargo.builder()
+                AirloadPlanCreateParams.AirLoadPlanPaxCargo.builder()
                     .ambPax(5)
                     .attPax(6)
                     .availablePax(20)
@@ -411,7 +411,7 @@ internal class AirLoadPlanCreateParamsTest {
             )
         assertThat(body.airLoadPlanUlnActuals().getOrNull())
             .containsExactly(
-                AirLoadPlanCreateParams.AirLoadPlanUlnActual.builder()
+                AirloadPlanCreateParams.AirLoadPlanUlnActual.builder()
                     .numAmbulatory(10)
                     .numAttendant(10)
                     .numLitter(10)
@@ -489,9 +489,9 @@ internal class AirLoadPlanCreateParamsTest {
     @Test
     fun bodyWithoutOptionalFields() {
         val params =
-            AirLoadPlanCreateParams.builder()
+            AirloadPlanCreateParams.builder()
                 .classificationMarking("U")
-                .dataMode(AirLoadPlanCreateParams.DataMode.TEST)
+                .dataMode(AirloadPlanCreateParams.DataMode.TEST)
                 .estDepTime(OffsetDateTime.parse("2024-01-01T01:00:00.123Z"))
                 .source("source")
                 .build()
@@ -499,7 +499,7 @@ internal class AirLoadPlanCreateParamsTest {
         val body = params._body()
 
         assertThat(body.classificationMarking()).isEqualTo("U")
-        assertThat(body.dataMode()).isEqualTo(AirLoadPlanCreateParams.DataMode.TEST)
+        assertThat(body.dataMode()).isEqualTo(AirloadPlanCreateParams.DataMode.TEST)
         assertThat(body.estDepTime()).isEqualTo(OffsetDateTime.parse("2024-01-01T01:00:00.123Z"))
         assertThat(body.source()).isEqualTo("source")
     }

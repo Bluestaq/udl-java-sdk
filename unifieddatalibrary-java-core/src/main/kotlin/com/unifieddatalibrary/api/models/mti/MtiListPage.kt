@@ -5,23 +5,28 @@ package com.unifieddatalibrary.api.models.mti
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.models.mti.MtiListParams
+import com.unifieddatalibrary.api.models.mti.MtiListResponse
 import com.unifieddatalibrary.api.services.blocking.MtiService
 import java.util.Objects
+import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see MtiService.list */
-class MtiListPage
-private constructor(
+class MtiListPage private constructor(
     private val service: MtiService,
     private val params: MtiListParams,
     private val items: List<MtiListResponse>,
+
 ) : Page<MtiListResponse> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): MtiListParams {
-        val offset = params.firstResult().getOrDefault(0)
-        return params.toBuilder().firstResult(offset + items().size).build()
+      val offset = params.firstResult().getOrDefault(0)
+      return params.toBuilder()
+          .firstResult(offset + items().size)
+          .build()
     }
 
     override fun nextPage(): MtiListPage = service.list(nextPageParams())
@@ -42,13 +47,15 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [MtiListPage].
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [MtiListPage]. */
@@ -59,19 +66,29 @@ private constructor(
         private var items: List<MtiListResponse>? = null
 
         @JvmSynthetic
-        internal fun from(mtiListPage: MtiListPage) = apply {
-            service = mtiListPage.service
-            params = mtiListPage.params
-            items = mtiListPage.items
-        }
+        internal fun from(mtiListPage: MtiListPage) =
+            apply {
+                service = mtiListPage.service
+                params = mtiListPage.params
+                items = mtiListPage.items
+            }
 
-        fun service(service: MtiService) = apply { this.service = service }
+        fun service(service: MtiService) =
+            apply {
+                this.service = service
+            }
 
         /** The parameters that were used to request this page. */
-        fun params(params: MtiListParams) = apply { this.params = params }
+        fun params(params: MtiListParams) =
+            apply {
+                this.params = params
+            }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<MtiListResponse>) = apply { this.items = items }
+        fun items(items: List<MtiListResponse>) =
+            apply {
+                this.items = items
+            }
 
         /**
          * Returns an immutable instance of [MtiListPage].
@@ -79,6 +96,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
@@ -89,18 +107,24 @@ private constructor(
          */
         fun build(): MtiListPage =
             MtiListPage(
-                checkRequired("service", service),
-                checkRequired("params", params),
-                checkRequired("items", items),
+              checkRequired(
+                "service", service
+              ),
+              checkRequired(
+                "params", params
+              ),
+              checkRequired(
+                "items", items
+              ),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is MtiListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+      return /* spotless:off */ other is MtiListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */

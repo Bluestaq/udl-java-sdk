@@ -10,12 +10,12 @@ import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo
 import com.github.tomakehurst.wiremock.junit5.WireMockTest
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
-import com.unifieddatalibrary.api.models.gnssrawif.GnssRawifCountParams
-import com.unifieddatalibrary.api.models.gnssrawif.GnssRawifFileGetParams
-import com.unifieddatalibrary.api.models.gnssrawif.GnssRawifGetParams
-import com.unifieddatalibrary.api.models.gnssrawif.GnssRawifListParams
-import com.unifieddatalibrary.api.models.gnssrawif.GnssRawifTupleParams
-import com.unifieddatalibrary.api.models.gnssrawif.GnssRawifUploadZipParams
+import com.unifieddatalibrary.api.models.gnssrawif.GnssRawIfCountParams
+import com.unifieddatalibrary.api.models.gnssrawif.GnssRawIfFileGetParams
+import com.unifieddatalibrary.api.models.gnssrawif.GnssRawIfGetParams
+import com.unifieddatalibrary.api.models.gnssrawif.GnssRawIfListParams
+import com.unifieddatalibrary.api.models.gnssrawif.GnssRawIfTupleParams
+import com.unifieddatalibrary.api.models.gnssrawif.GnssRawIfUploadZipParams
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -25,7 +25,7 @@ import org.junit.jupiter.api.parallel.ResourceLock
 @ExtendWith(TestServerExtension::class)
 @WireMockTest
 @ResourceLock("https://github.com/wiremock/wiremock/issues/169")
-internal class GnssRawifServiceTest {
+internal class GnssRawIfServiceTest {
 
     @Test
     fun list() {
@@ -35,11 +35,11 @@ internal class GnssRawifServiceTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val gnssRawifService = client.gnssRawif()
+        val gnssRawIfService = client.gnssRawIf()
 
         val page =
-            gnssRawifService.list(
-                GnssRawifListParams.builder()
+            gnssRawIfService.list(
+                GnssRawIfListParams.builder()
                     .startTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .build()
             )
@@ -55,10 +55,10 @@ internal class GnssRawifServiceTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val gnssRawifService = client.gnssRawif()
+        val gnssRawIfService = client.gnssRawIf()
 
-        gnssRawifService.count(
-            GnssRawifCountParams.builder()
+        gnssRawIfService.count(
+            GnssRawIfCountParams.builder()
                 .startTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .firstResult(0L)
                 .maxResults(0L)
@@ -74,12 +74,12 @@ internal class GnssRawifServiceTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val gnssRawifService = client.gnssRawif()
+        val gnssRawIfService = client.gnssRawIf()
         stubFor(get(anyUrl()).willReturn(ok().withBody("abc")))
 
         val response =
-            gnssRawifService.fileGet(
-                GnssRawifFileGetParams.builder().id("id").firstResult(0L).maxResults(0L).build()
+            gnssRawIfService.fileGet(
+                GnssRawIfFileGetParams.builder().id("id").firstResult(0L).maxResults(0L).build()
             )
 
         assertThat(response.body()).hasContent("abc")
@@ -93,14 +93,14 @@ internal class GnssRawifServiceTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val gnssRawifService = client.gnssRawif()
+        val gnssRawIfService = client.gnssRawIf()
 
-        val gnssRawif =
-            gnssRawifService.get(
-                GnssRawifGetParams.builder().id("id").firstResult(0L).maxResults(0L).build()
+        val gnssRawIf =
+            gnssRawIfService.get(
+                GnssRawIfGetParams.builder().id("id").firstResult(0L).maxResults(0L).build()
             )
 
-        gnssRawif.validate()
+        gnssRawIf.validate()
     }
 
     @Test
@@ -111,9 +111,9 @@ internal class GnssRawifServiceTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val gnssRawifService = client.gnssRawif()
+        val gnssRawIfService = client.gnssRawIf()
 
-        val response = gnssRawifService.queryhelp()
+        val response = gnssRawIfService.queryhelp()
 
         response.validate()
     }
@@ -126,11 +126,11 @@ internal class GnssRawifServiceTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val gnssRawifService = client.gnssRawif()
+        val gnssRawIfService = client.gnssRawIf()
 
         val response =
-            gnssRawifService.tuple(
-                GnssRawifTupleParams.builder()
+            gnssRawIfService.tuple(
+                GnssRawIfTupleParams.builder()
                     .columns("columns")
                     .startTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .firstResult(0L)
@@ -149,10 +149,10 @@ internal class GnssRawifServiceTest {
                 .password("My Password")
                 .username("My Username")
                 .build()
-        val gnssRawifService = client.gnssRawif()
+        val gnssRawIfService = client.gnssRawIf()
 
-        gnssRawifService.uploadZip(
-            GnssRawifUploadZipParams.builder().file("some content".byteInputStream()).build()
+        gnssRawIfService.uploadZip(
+            GnssRawIfUploadZipParams.builder().file("some content".byteInputStream()).build()
         )
     }
 }

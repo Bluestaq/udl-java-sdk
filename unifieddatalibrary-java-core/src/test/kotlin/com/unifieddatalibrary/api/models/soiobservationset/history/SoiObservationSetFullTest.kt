@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.models.soiobservationset.history
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import com.unifieddatalibrary.api.core.jsonMapper
+import com.unifieddatalibrary.api.models.soiobservationset.history.SoiObservationSetFull
 import java.time.OffsetDateTime
 import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
@@ -13,527 +14,1019 @@ internal class SoiObservationSetFullTest {
 
     @Test
     fun create() {
-        val soiObservationSetFull =
-            SoiObservationSetFull.builder()
-                .classificationMarking("U")
-                .dataMode(SoiObservationSetFull.DataMode.TEST)
-                .numObs(1)
-                .source("Bluestaq")
-                .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
-                .type(SoiObservationSetFull.Type.OPTICAL)
-                .id("026dd511-8ba5-47d3-9909-836149f87686")
-                .binningHoriz(2)
-                .binningVert(2)
-                .brightnessVarianceChangeDetected(true)
-                .addCalibration(
-                    SoiObservationSetFull.Calibration.builder()
-                        .calBgIntensity(1.1)
-                        .calExtinctionCoeff(0.2)
-                        .calExtinctionCoeffMaxUnc(0.19708838)
-                        .calExtinctionCoeffUnc(0.06474939)
-                        .calNumCorrelatedStars(1)
-                        .calNumDetectedStars(1)
-                        .calSkyBg(30086.25)
-                        .calSpectralFilterSolarMag(19.23664587)
-                        .calTime(OffsetDateTime.parse("2023-01-02T16:00:00.123Z"))
-                        .calType("PRE")
-                        .calZeroPoint(25.15682157)
-                        .build()
-                )
-                .calibrationType("ALL SKY")
-                .changeConf("MEDIUM")
-                .changeDetected(true)
-                .collectionDensityConf("MEDIUM")
-                .collectionId("b5133288-ab63-4b15-81f6-c7eec0cdb0c0")
-                .collectionMode("RATE TRACK")
-                .corrQuality(0.327)
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
-                .gain(234.2)
-                .idElset("REF-ELSET-ID")
-                .idOnOrbit("ONORBIT-ID")
-                .idSensor("SENSOR-ID")
-                .losDeclinationEnd(1.1)
-                .losDeclinationStart(1.1)
-                .msgCreateDate(OffsetDateTime.parse("2022-07-07T16:00:00.123Z"))
-                .numSpectralFilters(10)
-                .addOpticalSoiObservationList(
-                    SoiObservationSetFull.OpticalSoiObservationList.builder()
-                        .obStartTime(OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"))
-                        .currentSpectralFilterNum(0L)
-                        .declinations(listOf(-0.45, -0.45, -0.45))
-                        .expDuration(0.455)
-                        .extinctionCoeffs(listOf(0.32, 0.32, 0.32))
-                        .extinctionCoeffsUnc(listOf(0.06, 0.06, 0.06))
-                        .intensities(listOf(1.1, 1.1, 1.1))
-                        .intensityTimes(
-                            listOf(
-                                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
-                                OffsetDateTime.parse("2018-01-01T16:00:00.898456Z"),
-                                OffsetDateTime.parse("2018-01-01T16:00:00.998456Z"),
-                            )
-                        )
-                        .localSkyBgs(listOf(100625.375, 100625.375, 100625.375))
-                        .localSkyBgsUnc(listOf(0.065, 0.065, 0.065))
-                        .numCorrelatedStars(listOf(3, 3, 3))
-                        .numDetectedStars(listOf(6, 6, 6))
-                        .percentSats(listOf(0.1, 0.2, 1.0))
-                        .raRates(listOf(0.0, 0.0, 0.0))
-                        .ras(listOf(107.4, 107.4, 107.4))
-                        .skyBgs(listOf(100625.375, 100625.375, 100625.375))
-                        .zeroPoints(listOf(24.711, 24.711, 24.711))
-                        .build()
-                )
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("OPS1")
-                .origObjectId("ORIGOBJECT-ID")
-                .origSensorId("ORIGSENSOR-ID")
-                .percentSatThreshold(0.1)
-                .periodicityChangeDetected(true)
-                .periodicityDetectionConf("MEDIUM")
-                .periodicitySamplingConf("MEDIUM")
-                .pixelArrayHeight(32)
-                .pixelArrayWidth(32)
-                .pixelMax(16383)
-                .pixelMin(0)
-                .pointingAngleAzEnd(1.1)
-                .pointingAngleAzStart(1.1)
-                .pointingAngleElEnd(1.1)
-                .pointingAngleElStart(1.1)
-                .polarAngleEnd(1.1)
-                .polarAngleStart(1.1)
-                .addRadarSoiObservationList(
-                    SoiObservationSetFull.RadarSoiObservationList.builder()
-                        .obStartTime(OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"))
-                        .aspectAngles(listOf(4.278, 4.278, 4.278))
-                        .azimuthBiases(listOf(45.23, 45.23, 45.23))
-                        .azimuthRates(listOf(-1.481, -1.481, -1.481))
-                        .azimuths(listOf(278.27, 278.27, 278.27))
-                        .beta(-89.97)
-                        .centerFrequency(160047.0625)
-                        .crossRangeRes(listOf(11.301, 11.301, 11.301))
-                        .deltaTimes(listOf(0.005, 0.005, 0.005))
-                        .doppler2XRs(listOf(5644.27, 5644.27, 5644.27))
-                        .elevationBiases(listOf(1.23, 1.23, 1.23))
-                        .elevationRates(listOf(-0.074, -0.074, -0.074))
-                        .elevations(listOf(70.85, 70.85, 70.85))
-                        .idAttitudeSet("99a0de63-b38f-4d81-b057")
-                        .idStateVector("99a0de63-b38f-4d81-b057")
-                        .integrationAngles(listOf(8.594, 8.594, 8.594))
-                        .kappa(103.04)
-                        .peakAmplitudes(listOf(33.1, 33.1, 33.1))
-                        .polarizations(listOf("H", "L", "V"))
-                        .projAngVels(listOf(0.166, 0.166, 0.166))
-                        .pulseBandwidth(24094.12)
-                        .rangeAccels(listOf(0.12, 0.01, 0.2))
-                        .rangeBiases(listOf(1.23, 1.23, 1.23))
-                        .rangeRates(listOf(0.317, 0.317, 0.317))
-                        .ranges(listOf(877.938, 877.938, 877.938))
-                        .rcsErrorEsts(listOf(0.01, 0.003, 0.001))
-                        .rcsValues(listOf(12.34, 26.11, 43.21))
-                        .rspaces(listOf(0.006, 0.006, 0.006))
-                        .spectralWidths(listOf(23.45, 20.57, 12.21))
-                        .tovs(
-                            listOf(
-                                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
-                                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
-                                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
-                            )
-                        )
-                        .xaccel(listOf(-0.075, -0.74, -0.4))
-                        .xpos(listOf(-1118.577381, -1118.577381, -1118.577381))
-                        .xspaces(listOf(0.006, 0.006, 0.006))
-                        .xvel(listOf(-4.25242784, -4.25242784, -4.25242784))
-                        .yaccel(listOf(-0.007, 0.003, 0.1))
-                        .ypos(listOf(3026.231084, 3026.231084, 3026.231084))
-                        .yvel(listOf(5.291107434, 5.291107434, 5.291107434))
-                        .zaccel(listOf(0.1, 0.2, 0.3))
-                        .zpos(listOf(6167.831808, 6167.831808, 6167.831808))
-                        .zvel(listOf(-3.356493869, -3.356493869, -3.356493869))
-                        .build()
-                )
-                .referenceFrame(SoiObservationSetFull.ReferenceFrame.J2000)
-                .satelliteName("TITAN 3C TRANSTAGE R/B")
-                .satNo(101)
-                .senalt(1.1)
-                .senlat(45.1)
-                .senlon(179.1)
-                .senReferenceFrame(SoiObservationSetFull.SenReferenceFrame.J2000)
-                .sensorAsId("026dd511-8ba5-47d3-9909-836149f87686")
-                .senvelx(1.1)
-                .senvely(1.1)
-                .senvelz(1.1)
-                .senx(1.1)
-                .seny(1.1)
-                .senz(1.1)
-                .softwareVersion("GSV99/17-1")
-                .solarMag(-26.91)
-                .solarPhaseAngleBrightnessChangeDetected(true)
-                .sourceDl("AXE")
-                .addSpectralFilter("Keyword1")
-                .addSpectralFilter("Keyword2")
-                .starCatName("SSTRC5")
-                .addTag("TAG1")
-                .addTag("TAG2")
-                .transactionId("TRANSACTION-ID")
-                .uct(true)
-                .validCalibrations("BOTH")
-                .build()
+      val soiObservationSetFull = SoiObservationSetFull.builder()
+          .classificationMarking("U")
+          .dataMode(SoiObservationSetFull.DataMode.TEST)
+          .numObs(1)
+          .source("Bluestaq")
+          .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+          .type(SoiObservationSetFull.Type.OPTICAL)
+          .id("026dd511-8ba5-47d3-9909-836149f87686")
+          .binningHoriz(2)
+          .binningVert(2)
+          .brightnessVarianceChangeDetected(true)
+          .addCalibration(SoiObservationSetFull.Calibration.builder()
+              .calBgIntensity(1.1)
+              .calExtinctionCoeff(0.2)
+              .calExtinctionCoeffMaxUnc(0.19708838)
+              .calExtinctionCoeffUnc(0.06474939)
+              .calNumCorrelatedStars(1)
+              .calNumDetectedStars(1)
+              .calSkyBg(30086.25)
+              .calSpectralFilterSolarMag(19.23664587)
+              .calTime(OffsetDateTime.parse("2023-01-02T16:00:00.123Z"))
+              .calType("PRE")
+              .calZeroPoint(25.15682157)
+              .build())
+          .calibrationType("ALL SKY")
+          .changeConf("MEDIUM")
+          .changeDetected(true)
+          .collectionDensityConf("MEDIUM")
+          .collectionId("b5133288-ab63-4b15-81f6-c7eec0cdb0c0")
+          .collectionMode("RATE TRACK")
+          .corrQuality(0.327)
+          .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+          .createdBy("some.user")
+          .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+          .gain(234.2)
+          .idElset("REF-ELSET-ID")
+          .idOnOrbit("ONORBIT-ID")
+          .idSensor("SENSOR-ID")
+          .losDeclinationEnd(1.1)
+          .losDeclinationStart(1.1)
+          .msgCreateDate(OffsetDateTime.parse("2022-07-07T16:00:00.123Z"))
+          .numSpectralFilters(10)
+          .addOpticalSoiObservationList(SoiObservationSetFull.OpticalSoiObservationList.builder()
+              .obStartTime(OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"))
+              .currentSpectralFilterNum(0L)
+              .declinations(listOf(
+                -0.45,
+                -0.45,
+                -0.45,
+              ))
+              .expDuration(0.455)
+              .extinctionCoeffs(listOf(
+                0.32,
+                0.32,
+                0.32,
+              ))
+              .extinctionCoeffsUnc(listOf(
+                0.06,
+                0.06,
+                0.06,
+              ))
+              .intensities(listOf(
+                1.1,
+                1.1,
+                1.1,
+              ))
+              .intensityTimes(listOf(
+                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
+                OffsetDateTime.parse("2018-01-01T16:00:00.898456Z"),
+                OffsetDateTime.parse("2018-01-01T16:00:00.998456Z"),
+              ))
+              .localSkyBgs(listOf(
+                100625.375,
+                100625.375,
+                100625.375,
+              ))
+              .localSkyBgsUnc(listOf(
+                0.065,
+                0.065,
+                0.065,
+              ))
+              .numCorrelatedStars(listOf(
+                3,
+                3,
+                3,
+              ))
+              .numDetectedStars(listOf(
+                6,
+                6,
+                6,
+              ))
+              .percentSats(listOf(
+                0.1,
+                0.2,
+                1.0,
+              ))
+              .raRates(listOf(
+                0.0,
+                0.0,
+                0.0,
+              ))
+              .ras(listOf(
+                107.4,
+                107.4,
+                107.4,
+              ))
+              .skyBgs(listOf(
+                100625.375,
+                100625.375,
+                100625.375,
+              ))
+              .zeroPoints(listOf(
+                24.711,
+                24.711,
+                24.711,
+              ))
+              .build())
+          .origin("THIRD_PARTY_DATASOURCE")
+          .origNetwork("OPS1")
+          .origObjectId("ORIGOBJECT-ID")
+          .origSensorId("ORIGSENSOR-ID")
+          .percentSatThreshold(0.1)
+          .periodicityChangeDetected(true)
+          .periodicityDetectionConf("MEDIUM")
+          .periodicitySamplingConf("MEDIUM")
+          .pixelArrayHeight(32)
+          .pixelArrayWidth(32)
+          .pixelMax(16383)
+          .pixelMin(0)
+          .pointingAngleAzEnd(1.1)
+          .pointingAngleAzStart(1.1)
+          .pointingAngleElEnd(1.1)
+          .pointingAngleElStart(1.1)
+          .polarAngleEnd(1.1)
+          .polarAngleStart(1.1)
+          .addRadarSoiObservationList(SoiObservationSetFull.RadarSoiObservationList.builder()
+              .obStartTime(OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"))
+              .aspectAngles(listOf(
+                4.278,
+                4.278,
+                4.278,
+              ))
+              .azimuthBiases(listOf(
+                45.23,
+                45.23,
+                45.23,
+              ))
+              .azimuthRates(listOf(
+                -1.481,
+                -1.481,
+                -1.481,
+              ))
+              .azimuths(listOf(
+                278.27,
+                278.27,
+                278.27,
+              ))
+              .beta(-89.97)
+              .centerFrequency(160047.0625)
+              .crossRangeRes(listOf(
+                11.301,
+                11.301,
+                11.301,
+              ))
+              .deltaTimes(listOf(
+                0.005,
+                0.005,
+                0.005,
+              ))
+              .doppler2XRs(listOf(
+                5644.27,
+                5644.27,
+                5644.27,
+              ))
+              .elevationBiases(listOf(
+                1.23,
+                1.23,
+                1.23,
+              ))
+              .elevationRates(listOf(
+                -0.074,
+                -0.074,
+                -0.074,
+              ))
+              .elevations(listOf(
+                70.85,
+                70.85,
+                70.85,
+              ))
+              .idAttitudeSet("99a0de63-b38f-4d81-b057")
+              .idStateVector("99a0de63-b38f-4d81-b057")
+              .integrationAngles(listOf(
+                8.594,
+                8.594,
+                8.594,
+              ))
+              .kappa(103.04)
+              .peakAmplitudes(listOf(
+                33.1,
+                33.1,
+                33.1,
+              ))
+              .polarizations(listOf(
+                "H",
+                "L",
+                "V",
+              ))
+              .projAngVels(listOf(
+                0.166,
+                0.166,
+                0.166,
+              ))
+              .pulseBandwidth(24094.12)
+              .rangeAccels(listOf(
+                0.12,
+                0.01,
+                0.2,
+              ))
+              .rangeBiases(listOf(
+                1.23,
+                1.23,
+                1.23,
+              ))
+              .rangeRates(listOf(
+                0.317,
+                0.317,
+                0.317,
+              ))
+              .ranges(listOf(
+                877.938,
+                877.938,
+                877.938,
+              ))
+              .rcsErrorEsts(listOf(
+                0.01,
+                0.003,
+                0.001,
+              ))
+              .rcsValues(listOf(
+                12.34,
+                26.11,
+                43.21,
+              ))
+              .rspaces(listOf(
+                0.006,
+                0.006,
+                0.006,
+              ))
+              .spectralWidths(listOf(
+                23.45,
+                20.57,
+                12.21,
+              ))
+              .tovs(listOf(
+                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
+                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
+                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
+              ))
+              .xaccel(listOf(
+                -0.075,
+                -0.74,
+                -0.4,
+              ))
+              .xpos(listOf(
+                -1118.577381,
+                -1118.577381,
+                -1118.577381,
+              ))
+              .xspaces(listOf(
+                0.006,
+                0.006,
+                0.006,
+              ))
+              .xvel(listOf(
+                -4.25242784,
+                -4.25242784,
+                -4.25242784,
+              ))
+              .yaccel(listOf(
+                -0.007,
+                0.003,
+                0.1,
+              ))
+              .ypos(listOf(
+                3026.231084,
+                3026.231084,
+                3026.231084,
+              ))
+              .yvel(listOf(
+                5.291107434,
+                5.291107434,
+                5.291107434,
+              ))
+              .zaccel(listOf(
+                0.1,
+                0.2,
+                0.3,
+              ))
+              .zpos(listOf(
+                6167.831808,
+                6167.831808,
+                6167.831808,
+              ))
+              .zvel(listOf(
+                -3.356493869,
+                -3.356493869,
+                -3.356493869,
+              ))
+              .build())
+          .referenceFrame(SoiObservationSetFull.ReferenceFrame.J2000)
+          .satelliteName("TITAN 3C TRANSTAGE R/B")
+          .satNo(101)
+          .senalt(1.1)
+          .senlat(45.1)
+          .senlon(179.1)
+          .senReferenceFrame(SoiObservationSetFull.SenReferenceFrame.J2000)
+          .sensorAsId("026dd511-8ba5-47d3-9909-836149f87686")
+          .senvelx(1.1)
+          .senvely(1.1)
+          .senvelz(1.1)
+          .senx(1.1)
+          .seny(1.1)
+          .senz(1.1)
+          .softwareVersion("GSV99/17-1")
+          .solarMag(-26.91)
+          .solarPhaseAngleBrightnessChangeDetected(true)
+          .sourceDl("AXE")
+          .addSpectralFilter("Keyword1")
+          .addSpectralFilter("Keyword2")
+          .starCatName("SSTRC5")
+          .addTag("TAG1")
+          .addTag("TAG2")
+          .transactionId("TRANSACTION-ID")
+          .uct(true)
+          .validCalibrations("BOTH")
+          .build()
 
-        assertThat(soiObservationSetFull.classificationMarking()).isEqualTo("U")
-        assertThat(soiObservationSetFull.dataMode()).isEqualTo(SoiObservationSetFull.DataMode.TEST)
-        assertThat(soiObservationSetFull.numObs()).isEqualTo(1)
-        assertThat(soiObservationSetFull.source()).isEqualTo("Bluestaq")
-        assertThat(soiObservationSetFull.startTime())
-            .isEqualTo(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
-        assertThat(soiObservationSetFull.type()).isEqualTo(SoiObservationSetFull.Type.OPTICAL)
-        assertThat(soiObservationSetFull.id()).contains("026dd511-8ba5-47d3-9909-836149f87686")
-        assertThat(soiObservationSetFull.binningHoriz()).contains(2)
-        assertThat(soiObservationSetFull.binningVert()).contains(2)
-        assertThat(soiObservationSetFull.brightnessVarianceChangeDetected()).contains(true)
-        assertThat(soiObservationSetFull.calibrations().getOrNull())
-            .containsExactly(
-                SoiObservationSetFull.Calibration.builder()
-                    .calBgIntensity(1.1)
-                    .calExtinctionCoeff(0.2)
-                    .calExtinctionCoeffMaxUnc(0.19708838)
-                    .calExtinctionCoeffUnc(0.06474939)
-                    .calNumCorrelatedStars(1)
-                    .calNumDetectedStars(1)
-                    .calSkyBg(30086.25)
-                    .calSpectralFilterSolarMag(19.23664587)
-                    .calTime(OffsetDateTime.parse("2023-01-02T16:00:00.123Z"))
-                    .calType("PRE")
-                    .calZeroPoint(25.15682157)
-                    .build()
-            )
-        assertThat(soiObservationSetFull.calibrationType()).contains("ALL SKY")
-        assertThat(soiObservationSetFull.changeConf()).contains("MEDIUM")
-        assertThat(soiObservationSetFull.changeDetected()).contains(true)
-        assertThat(soiObservationSetFull.collectionDensityConf()).contains("MEDIUM")
-        assertThat(soiObservationSetFull.collectionId())
-            .contains("b5133288-ab63-4b15-81f6-c7eec0cdb0c0")
-        assertThat(soiObservationSetFull.collectionMode()).contains("RATE TRACK")
-        assertThat(soiObservationSetFull.corrQuality()).contains(0.327)
-        assertThat(soiObservationSetFull.createdAt())
-            .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(soiObservationSetFull.createdBy()).contains("some.user")
-        assertThat(soiObservationSetFull.endTime())
-            .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
-        assertThat(soiObservationSetFull.gain()).contains(234.2)
-        assertThat(soiObservationSetFull.idElset()).contains("REF-ELSET-ID")
-        assertThat(soiObservationSetFull.idOnOrbit()).contains("ONORBIT-ID")
-        assertThat(soiObservationSetFull.idSensor()).contains("SENSOR-ID")
-        assertThat(soiObservationSetFull.losDeclinationEnd()).contains(1.1)
-        assertThat(soiObservationSetFull.losDeclinationStart()).contains(1.1)
-        assertThat(soiObservationSetFull.msgCreateDate())
-            .contains(OffsetDateTime.parse("2022-07-07T16:00:00.123Z"))
-        assertThat(soiObservationSetFull.numSpectralFilters()).contains(10)
-        assertThat(soiObservationSetFull.opticalSoiObservationList().getOrNull())
-            .containsExactly(
-                SoiObservationSetFull.OpticalSoiObservationList.builder()
-                    .obStartTime(OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"))
-                    .currentSpectralFilterNum(0L)
-                    .declinations(listOf(-0.45, -0.45, -0.45))
-                    .expDuration(0.455)
-                    .extinctionCoeffs(listOf(0.32, 0.32, 0.32))
-                    .extinctionCoeffsUnc(listOf(0.06, 0.06, 0.06))
-                    .intensities(listOf(1.1, 1.1, 1.1))
-                    .intensityTimes(
-                        listOf(
-                            OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
-                            OffsetDateTime.parse("2018-01-01T16:00:00.898456Z"),
-                            OffsetDateTime.parse("2018-01-01T16:00:00.998456Z"),
-                        )
-                    )
-                    .localSkyBgs(listOf(100625.375, 100625.375, 100625.375))
-                    .localSkyBgsUnc(listOf(0.065, 0.065, 0.065))
-                    .numCorrelatedStars(listOf(3, 3, 3))
-                    .numDetectedStars(listOf(6, 6, 6))
-                    .percentSats(listOf(0.1, 0.2, 1.0))
-                    .raRates(listOf(0.0, 0.0, 0.0))
-                    .ras(listOf(107.4, 107.4, 107.4))
-                    .skyBgs(listOf(100625.375, 100625.375, 100625.375))
-                    .zeroPoints(listOf(24.711, 24.711, 24.711))
-                    .build()
-            )
-        assertThat(soiObservationSetFull.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(soiObservationSetFull.origNetwork()).contains("OPS1")
-        assertThat(soiObservationSetFull.origObjectId()).contains("ORIGOBJECT-ID")
-        assertThat(soiObservationSetFull.origSensorId()).contains("ORIGSENSOR-ID")
-        assertThat(soiObservationSetFull.percentSatThreshold()).contains(0.1)
-        assertThat(soiObservationSetFull.periodicityChangeDetected()).contains(true)
-        assertThat(soiObservationSetFull.periodicityDetectionConf()).contains("MEDIUM")
-        assertThat(soiObservationSetFull.periodicitySamplingConf()).contains("MEDIUM")
-        assertThat(soiObservationSetFull.pixelArrayHeight()).contains(32)
-        assertThat(soiObservationSetFull.pixelArrayWidth()).contains(32)
-        assertThat(soiObservationSetFull.pixelMax()).contains(16383)
-        assertThat(soiObservationSetFull.pixelMin()).contains(0)
-        assertThat(soiObservationSetFull.pointingAngleAzEnd()).contains(1.1)
-        assertThat(soiObservationSetFull.pointingAngleAzStart()).contains(1.1)
-        assertThat(soiObservationSetFull.pointingAngleElEnd()).contains(1.1)
-        assertThat(soiObservationSetFull.pointingAngleElStart()).contains(1.1)
-        assertThat(soiObservationSetFull.polarAngleEnd()).contains(1.1)
-        assertThat(soiObservationSetFull.polarAngleStart()).contains(1.1)
-        assertThat(soiObservationSetFull.radarSoiObservationList().getOrNull())
-            .containsExactly(
-                SoiObservationSetFull.RadarSoiObservationList.builder()
-                    .obStartTime(OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"))
-                    .aspectAngles(listOf(4.278, 4.278, 4.278))
-                    .azimuthBiases(listOf(45.23, 45.23, 45.23))
-                    .azimuthRates(listOf(-1.481, -1.481, -1.481))
-                    .azimuths(listOf(278.27, 278.27, 278.27))
-                    .beta(-89.97)
-                    .centerFrequency(160047.0625)
-                    .crossRangeRes(listOf(11.301, 11.301, 11.301))
-                    .deltaTimes(listOf(0.005, 0.005, 0.005))
-                    .doppler2XRs(listOf(5644.27, 5644.27, 5644.27))
-                    .elevationBiases(listOf(1.23, 1.23, 1.23))
-                    .elevationRates(listOf(-0.074, -0.074, -0.074))
-                    .elevations(listOf(70.85, 70.85, 70.85))
-                    .idAttitudeSet("99a0de63-b38f-4d81-b057")
-                    .idStateVector("99a0de63-b38f-4d81-b057")
-                    .integrationAngles(listOf(8.594, 8.594, 8.594))
-                    .kappa(103.04)
-                    .peakAmplitudes(listOf(33.1, 33.1, 33.1))
-                    .polarizations(listOf("H", "L", "V"))
-                    .projAngVels(listOf(0.166, 0.166, 0.166))
-                    .pulseBandwidth(24094.12)
-                    .rangeAccels(listOf(0.12, 0.01, 0.2))
-                    .rangeBiases(listOf(1.23, 1.23, 1.23))
-                    .rangeRates(listOf(0.317, 0.317, 0.317))
-                    .ranges(listOf(877.938, 877.938, 877.938))
-                    .rcsErrorEsts(listOf(0.01, 0.003, 0.001))
-                    .rcsValues(listOf(12.34, 26.11, 43.21))
-                    .rspaces(listOf(0.006, 0.006, 0.006))
-                    .spectralWidths(listOf(23.45, 20.57, 12.21))
-                    .tovs(
-                        listOf(
-                            OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
-                            OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
-                            OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
-                        )
-                    )
-                    .xaccel(listOf(-0.075, -0.74, -0.4))
-                    .xpos(listOf(-1118.577381, -1118.577381, -1118.577381))
-                    .xspaces(listOf(0.006, 0.006, 0.006))
-                    .xvel(listOf(-4.25242784, -4.25242784, -4.25242784))
-                    .yaccel(listOf(-0.007, 0.003, 0.1))
-                    .ypos(listOf(3026.231084, 3026.231084, 3026.231084))
-                    .yvel(listOf(5.291107434, 5.291107434, 5.291107434))
-                    .zaccel(listOf(0.1, 0.2, 0.3))
-                    .zpos(listOf(6167.831808, 6167.831808, 6167.831808))
-                    .zvel(listOf(-3.356493869, -3.356493869, -3.356493869))
-                    .build()
-            )
-        assertThat(soiObservationSetFull.referenceFrame())
-            .contains(SoiObservationSetFull.ReferenceFrame.J2000)
-        assertThat(soiObservationSetFull.satelliteName()).contains("TITAN 3C TRANSTAGE R/B")
-        assertThat(soiObservationSetFull.satNo()).contains(101)
-        assertThat(soiObservationSetFull.senalt()).contains(1.1)
-        assertThat(soiObservationSetFull.senlat()).contains(45.1)
-        assertThat(soiObservationSetFull.senlon()).contains(179.1)
-        assertThat(soiObservationSetFull.senReferenceFrame())
-            .contains(SoiObservationSetFull.SenReferenceFrame.J2000)
-        assertThat(soiObservationSetFull.sensorAsId())
-            .contains("026dd511-8ba5-47d3-9909-836149f87686")
-        assertThat(soiObservationSetFull.senvelx()).contains(1.1)
-        assertThat(soiObservationSetFull.senvely()).contains(1.1)
-        assertThat(soiObservationSetFull.senvelz()).contains(1.1)
-        assertThat(soiObservationSetFull.senx()).contains(1.1)
-        assertThat(soiObservationSetFull.seny()).contains(1.1)
-        assertThat(soiObservationSetFull.senz()).contains(1.1)
-        assertThat(soiObservationSetFull.softwareVersion()).contains("GSV99/17-1")
-        assertThat(soiObservationSetFull.solarMag()).contains(-26.91)
-        assertThat(soiObservationSetFull.solarPhaseAngleBrightnessChangeDetected()).contains(true)
-        assertThat(soiObservationSetFull.sourceDl()).contains("AXE")
-        assertThat(soiObservationSetFull.spectralFilters().getOrNull())
-            .containsExactly("Keyword1", "Keyword2")
-        assertThat(soiObservationSetFull.starCatName()).contains("SSTRC5")
-        assertThat(soiObservationSetFull.tags().getOrNull()).containsExactly("TAG1", "TAG2")
-        assertThat(soiObservationSetFull.transactionId()).contains("TRANSACTION-ID")
-        assertThat(soiObservationSetFull.uct()).contains(true)
-        assertThat(soiObservationSetFull.validCalibrations()).contains("BOTH")
+      assertThat(soiObservationSetFull.classificationMarking()).isEqualTo("U")
+      assertThat(soiObservationSetFull.dataMode()).isEqualTo(SoiObservationSetFull.DataMode.TEST)
+      assertThat(soiObservationSetFull.numObs()).isEqualTo(1)
+      assertThat(soiObservationSetFull.source()).isEqualTo("Bluestaq")
+      assertThat(soiObservationSetFull.startTime()).isEqualTo(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+      assertThat(soiObservationSetFull.type()).isEqualTo(SoiObservationSetFull.Type.OPTICAL)
+      assertThat(soiObservationSetFull.id()).contains("026dd511-8ba5-47d3-9909-836149f87686")
+      assertThat(soiObservationSetFull.binningHoriz()).contains(2)
+      assertThat(soiObservationSetFull.binningVert()).contains(2)
+      assertThat(soiObservationSetFull.brightnessVarianceChangeDetected()).contains(true)
+      assertThat(soiObservationSetFull.calibrations().getOrNull()).containsExactly(SoiObservationSetFull.Calibration.builder()
+          .calBgIntensity(1.1)
+          .calExtinctionCoeff(0.2)
+          .calExtinctionCoeffMaxUnc(0.19708838)
+          .calExtinctionCoeffUnc(0.06474939)
+          .calNumCorrelatedStars(1)
+          .calNumDetectedStars(1)
+          .calSkyBg(30086.25)
+          .calSpectralFilterSolarMag(19.23664587)
+          .calTime(OffsetDateTime.parse("2023-01-02T16:00:00.123Z"))
+          .calType("PRE")
+          .calZeroPoint(25.15682157)
+          .build())
+      assertThat(soiObservationSetFull.calibrationType()).contains("ALL SKY")
+      assertThat(soiObservationSetFull.changeConf()).contains("MEDIUM")
+      assertThat(soiObservationSetFull.changeDetected()).contains(true)
+      assertThat(soiObservationSetFull.collectionDensityConf()).contains("MEDIUM")
+      assertThat(soiObservationSetFull.collectionId()).contains("b5133288-ab63-4b15-81f6-c7eec0cdb0c0")
+      assertThat(soiObservationSetFull.collectionMode()).contains("RATE TRACK")
+      assertThat(soiObservationSetFull.corrQuality()).contains(0.327)
+      assertThat(soiObservationSetFull.createdAt()).contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+      assertThat(soiObservationSetFull.createdBy()).contains("some.user")
+      assertThat(soiObservationSetFull.endTime()).contains(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+      assertThat(soiObservationSetFull.gain()).contains(234.2)
+      assertThat(soiObservationSetFull.idElset()).contains("REF-ELSET-ID")
+      assertThat(soiObservationSetFull.idOnOrbit()).contains("ONORBIT-ID")
+      assertThat(soiObservationSetFull.idSensor()).contains("SENSOR-ID")
+      assertThat(soiObservationSetFull.losDeclinationEnd()).contains(1.1)
+      assertThat(soiObservationSetFull.losDeclinationStart()).contains(1.1)
+      assertThat(soiObservationSetFull.msgCreateDate()).contains(OffsetDateTime.parse("2022-07-07T16:00:00.123Z"))
+      assertThat(soiObservationSetFull.numSpectralFilters()).contains(10)
+      assertThat(soiObservationSetFull.opticalSoiObservationList().getOrNull()).containsExactly(SoiObservationSetFull.OpticalSoiObservationList.builder()
+          .obStartTime(OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"))
+          .currentSpectralFilterNum(0L)
+          .declinations(listOf(
+            -0.45,
+            -0.45,
+            -0.45,
+          ))
+          .expDuration(0.455)
+          .extinctionCoeffs(listOf(
+            0.32,
+            0.32,
+            0.32,
+          ))
+          .extinctionCoeffsUnc(listOf(
+            0.06,
+            0.06,
+            0.06,
+          ))
+          .intensities(listOf(
+            1.1,
+            1.1,
+            1.1,
+          ))
+          .intensityTimes(listOf(
+            OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
+            OffsetDateTime.parse("2018-01-01T16:00:00.898456Z"),
+            OffsetDateTime.parse("2018-01-01T16:00:00.998456Z"),
+          ))
+          .localSkyBgs(listOf(
+            100625.375,
+            100625.375,
+            100625.375,
+          ))
+          .localSkyBgsUnc(listOf(
+            0.065,
+            0.065,
+            0.065,
+          ))
+          .numCorrelatedStars(listOf(
+            3,
+            3,
+            3,
+          ))
+          .numDetectedStars(listOf(
+            6,
+            6,
+            6,
+          ))
+          .percentSats(listOf(
+            0.1,
+            0.2,
+            1.0,
+          ))
+          .raRates(listOf(
+            0.0,
+            0.0,
+            0.0,
+          ))
+          .ras(listOf(
+            107.4,
+            107.4,
+            107.4,
+          ))
+          .skyBgs(listOf(
+            100625.375,
+            100625.375,
+            100625.375,
+          ))
+          .zeroPoints(listOf(
+            24.711,
+            24.711,
+            24.711,
+          ))
+          .build())
+      assertThat(soiObservationSetFull.origin()).contains("THIRD_PARTY_DATASOURCE")
+      assertThat(soiObservationSetFull.origNetwork()).contains("OPS1")
+      assertThat(soiObservationSetFull.origObjectId()).contains("ORIGOBJECT-ID")
+      assertThat(soiObservationSetFull.origSensorId()).contains("ORIGSENSOR-ID")
+      assertThat(soiObservationSetFull.percentSatThreshold()).contains(0.1)
+      assertThat(soiObservationSetFull.periodicityChangeDetected()).contains(true)
+      assertThat(soiObservationSetFull.periodicityDetectionConf()).contains("MEDIUM")
+      assertThat(soiObservationSetFull.periodicitySamplingConf()).contains("MEDIUM")
+      assertThat(soiObservationSetFull.pixelArrayHeight()).contains(32)
+      assertThat(soiObservationSetFull.pixelArrayWidth()).contains(32)
+      assertThat(soiObservationSetFull.pixelMax()).contains(16383)
+      assertThat(soiObservationSetFull.pixelMin()).contains(0)
+      assertThat(soiObservationSetFull.pointingAngleAzEnd()).contains(1.1)
+      assertThat(soiObservationSetFull.pointingAngleAzStart()).contains(1.1)
+      assertThat(soiObservationSetFull.pointingAngleElEnd()).contains(1.1)
+      assertThat(soiObservationSetFull.pointingAngleElStart()).contains(1.1)
+      assertThat(soiObservationSetFull.polarAngleEnd()).contains(1.1)
+      assertThat(soiObservationSetFull.polarAngleStart()).contains(1.1)
+      assertThat(soiObservationSetFull.radarSoiObservationList().getOrNull()).containsExactly(SoiObservationSetFull.RadarSoiObservationList.builder()
+          .obStartTime(OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"))
+          .aspectAngles(listOf(
+            4.278,
+            4.278,
+            4.278,
+          ))
+          .azimuthBiases(listOf(
+            45.23,
+            45.23,
+            45.23,
+          ))
+          .azimuthRates(listOf(
+            -1.481,
+            -1.481,
+            -1.481,
+          ))
+          .azimuths(listOf(
+            278.27,
+            278.27,
+            278.27,
+          ))
+          .beta(-89.97)
+          .centerFrequency(160047.0625)
+          .crossRangeRes(listOf(
+            11.301,
+            11.301,
+            11.301,
+          ))
+          .deltaTimes(listOf(
+            0.005,
+            0.005,
+            0.005,
+          ))
+          .doppler2XRs(listOf(
+            5644.27,
+            5644.27,
+            5644.27,
+          ))
+          .elevationBiases(listOf(
+            1.23,
+            1.23,
+            1.23,
+          ))
+          .elevationRates(listOf(
+            -0.074,
+            -0.074,
+            -0.074,
+          ))
+          .elevations(listOf(
+            70.85,
+            70.85,
+            70.85,
+          ))
+          .idAttitudeSet("99a0de63-b38f-4d81-b057")
+          .idStateVector("99a0de63-b38f-4d81-b057")
+          .integrationAngles(listOf(
+            8.594,
+            8.594,
+            8.594,
+          ))
+          .kappa(103.04)
+          .peakAmplitudes(listOf(
+            33.1,
+            33.1,
+            33.1,
+          ))
+          .polarizations(listOf(
+            "H",
+            "L",
+            "V",
+          ))
+          .projAngVels(listOf(
+            0.166,
+            0.166,
+            0.166,
+          ))
+          .pulseBandwidth(24094.12)
+          .rangeAccels(listOf(
+            0.12,
+            0.01,
+            0.2,
+          ))
+          .rangeBiases(listOf(
+            1.23,
+            1.23,
+            1.23,
+          ))
+          .rangeRates(listOf(
+            0.317,
+            0.317,
+            0.317,
+          ))
+          .ranges(listOf(
+            877.938,
+            877.938,
+            877.938,
+          ))
+          .rcsErrorEsts(listOf(
+            0.01,
+            0.003,
+            0.001,
+          ))
+          .rcsValues(listOf(
+            12.34,
+            26.11,
+            43.21,
+          ))
+          .rspaces(listOf(
+            0.006,
+            0.006,
+            0.006,
+          ))
+          .spectralWidths(listOf(
+            23.45,
+            20.57,
+            12.21,
+          ))
+          .tovs(listOf(
+            OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
+            OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
+            OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
+          ))
+          .xaccel(listOf(
+            -0.075,
+            -0.74,
+            -0.4,
+          ))
+          .xpos(listOf(
+            -1118.577381,
+            -1118.577381,
+            -1118.577381,
+          ))
+          .xspaces(listOf(
+            0.006,
+            0.006,
+            0.006,
+          ))
+          .xvel(listOf(
+            -4.25242784,
+            -4.25242784,
+            -4.25242784,
+          ))
+          .yaccel(listOf(
+            -0.007,
+            0.003,
+            0.1,
+          ))
+          .ypos(listOf(
+            3026.231084,
+            3026.231084,
+            3026.231084,
+          ))
+          .yvel(listOf(
+            5.291107434,
+            5.291107434,
+            5.291107434,
+          ))
+          .zaccel(listOf(
+            0.1,
+            0.2,
+            0.3,
+          ))
+          .zpos(listOf(
+            6167.831808,
+            6167.831808,
+            6167.831808,
+          ))
+          .zvel(listOf(
+            -3.356493869,
+            -3.356493869,
+            -3.356493869,
+          ))
+          .build())
+      assertThat(soiObservationSetFull.referenceFrame()).contains(SoiObservationSetFull.ReferenceFrame.J2000)
+      assertThat(soiObservationSetFull.satelliteName()).contains("TITAN 3C TRANSTAGE R/B")
+      assertThat(soiObservationSetFull.satNo()).contains(101)
+      assertThat(soiObservationSetFull.senalt()).contains(1.1)
+      assertThat(soiObservationSetFull.senlat()).contains(45.1)
+      assertThat(soiObservationSetFull.senlon()).contains(179.1)
+      assertThat(soiObservationSetFull.senReferenceFrame()).contains(SoiObservationSetFull.SenReferenceFrame.J2000)
+      assertThat(soiObservationSetFull.sensorAsId()).contains("026dd511-8ba5-47d3-9909-836149f87686")
+      assertThat(soiObservationSetFull.senvelx()).contains(1.1)
+      assertThat(soiObservationSetFull.senvely()).contains(1.1)
+      assertThat(soiObservationSetFull.senvelz()).contains(1.1)
+      assertThat(soiObservationSetFull.senx()).contains(1.1)
+      assertThat(soiObservationSetFull.seny()).contains(1.1)
+      assertThat(soiObservationSetFull.senz()).contains(1.1)
+      assertThat(soiObservationSetFull.softwareVersion()).contains("GSV99/17-1")
+      assertThat(soiObservationSetFull.solarMag()).contains(-26.91)
+      assertThat(soiObservationSetFull.solarPhaseAngleBrightnessChangeDetected()).contains(true)
+      assertThat(soiObservationSetFull.sourceDl()).contains("AXE")
+      assertThat(soiObservationSetFull.spectralFilters().getOrNull()).containsExactly("Keyword1", "Keyword2")
+      assertThat(soiObservationSetFull.starCatName()).contains("SSTRC5")
+      assertThat(soiObservationSetFull.tags().getOrNull()).containsExactly("TAG1", "TAG2")
+      assertThat(soiObservationSetFull.transactionId()).contains("TRANSACTION-ID")
+      assertThat(soiObservationSetFull.uct()).contains(true)
+      assertThat(soiObservationSetFull.validCalibrations()).contains("BOTH")
     }
 
     @Test
     fun roundtrip() {
-        val jsonMapper = jsonMapper()
-        val soiObservationSetFull =
-            SoiObservationSetFull.builder()
-                .classificationMarking("U")
-                .dataMode(SoiObservationSetFull.DataMode.TEST)
-                .numObs(1)
-                .source("Bluestaq")
-                .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
-                .type(SoiObservationSetFull.Type.OPTICAL)
-                .id("026dd511-8ba5-47d3-9909-836149f87686")
-                .binningHoriz(2)
-                .binningVert(2)
-                .brightnessVarianceChangeDetected(true)
-                .addCalibration(
-                    SoiObservationSetFull.Calibration.builder()
-                        .calBgIntensity(1.1)
-                        .calExtinctionCoeff(0.2)
-                        .calExtinctionCoeffMaxUnc(0.19708838)
-                        .calExtinctionCoeffUnc(0.06474939)
-                        .calNumCorrelatedStars(1)
-                        .calNumDetectedStars(1)
-                        .calSkyBg(30086.25)
-                        .calSpectralFilterSolarMag(19.23664587)
-                        .calTime(OffsetDateTime.parse("2023-01-02T16:00:00.123Z"))
-                        .calType("PRE")
-                        .calZeroPoint(25.15682157)
-                        .build()
-                )
-                .calibrationType("ALL SKY")
-                .changeConf("MEDIUM")
-                .changeDetected(true)
-                .collectionDensityConf("MEDIUM")
-                .collectionId("b5133288-ab63-4b15-81f6-c7eec0cdb0c0")
-                .collectionMode("RATE TRACK")
-                .corrQuality(0.327)
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
-                .gain(234.2)
-                .idElset("REF-ELSET-ID")
-                .idOnOrbit("ONORBIT-ID")
-                .idSensor("SENSOR-ID")
-                .losDeclinationEnd(1.1)
-                .losDeclinationStart(1.1)
-                .msgCreateDate(OffsetDateTime.parse("2022-07-07T16:00:00.123Z"))
-                .numSpectralFilters(10)
-                .addOpticalSoiObservationList(
-                    SoiObservationSetFull.OpticalSoiObservationList.builder()
-                        .obStartTime(OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"))
-                        .currentSpectralFilterNum(0L)
-                        .declinations(listOf(-0.45, -0.45, -0.45))
-                        .expDuration(0.455)
-                        .extinctionCoeffs(listOf(0.32, 0.32, 0.32))
-                        .extinctionCoeffsUnc(listOf(0.06, 0.06, 0.06))
-                        .intensities(listOf(1.1, 1.1, 1.1))
-                        .intensityTimes(
-                            listOf(
-                                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
-                                OffsetDateTime.parse("2018-01-01T16:00:00.898456Z"),
-                                OffsetDateTime.parse("2018-01-01T16:00:00.998456Z"),
-                            )
-                        )
-                        .localSkyBgs(listOf(100625.375, 100625.375, 100625.375))
-                        .localSkyBgsUnc(listOf(0.065, 0.065, 0.065))
-                        .numCorrelatedStars(listOf(3, 3, 3))
-                        .numDetectedStars(listOf(6, 6, 6))
-                        .percentSats(listOf(0.1, 0.2, 1.0))
-                        .raRates(listOf(0.0, 0.0, 0.0))
-                        .ras(listOf(107.4, 107.4, 107.4))
-                        .skyBgs(listOf(100625.375, 100625.375, 100625.375))
-                        .zeroPoints(listOf(24.711, 24.711, 24.711))
-                        .build()
-                )
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("OPS1")
-                .origObjectId("ORIGOBJECT-ID")
-                .origSensorId("ORIGSENSOR-ID")
-                .percentSatThreshold(0.1)
-                .periodicityChangeDetected(true)
-                .periodicityDetectionConf("MEDIUM")
-                .periodicitySamplingConf("MEDIUM")
-                .pixelArrayHeight(32)
-                .pixelArrayWidth(32)
-                .pixelMax(16383)
-                .pixelMin(0)
-                .pointingAngleAzEnd(1.1)
-                .pointingAngleAzStart(1.1)
-                .pointingAngleElEnd(1.1)
-                .pointingAngleElStart(1.1)
-                .polarAngleEnd(1.1)
-                .polarAngleStart(1.1)
-                .addRadarSoiObservationList(
-                    SoiObservationSetFull.RadarSoiObservationList.builder()
-                        .obStartTime(OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"))
-                        .aspectAngles(listOf(4.278, 4.278, 4.278))
-                        .azimuthBiases(listOf(45.23, 45.23, 45.23))
-                        .azimuthRates(listOf(-1.481, -1.481, -1.481))
-                        .azimuths(listOf(278.27, 278.27, 278.27))
-                        .beta(-89.97)
-                        .centerFrequency(160047.0625)
-                        .crossRangeRes(listOf(11.301, 11.301, 11.301))
-                        .deltaTimes(listOf(0.005, 0.005, 0.005))
-                        .doppler2XRs(listOf(5644.27, 5644.27, 5644.27))
-                        .elevationBiases(listOf(1.23, 1.23, 1.23))
-                        .elevationRates(listOf(-0.074, -0.074, -0.074))
-                        .elevations(listOf(70.85, 70.85, 70.85))
-                        .idAttitudeSet("99a0de63-b38f-4d81-b057")
-                        .idStateVector("99a0de63-b38f-4d81-b057")
-                        .integrationAngles(listOf(8.594, 8.594, 8.594))
-                        .kappa(103.04)
-                        .peakAmplitudes(listOf(33.1, 33.1, 33.1))
-                        .polarizations(listOf("H", "L", "V"))
-                        .projAngVels(listOf(0.166, 0.166, 0.166))
-                        .pulseBandwidth(24094.12)
-                        .rangeAccels(listOf(0.12, 0.01, 0.2))
-                        .rangeBiases(listOf(1.23, 1.23, 1.23))
-                        .rangeRates(listOf(0.317, 0.317, 0.317))
-                        .ranges(listOf(877.938, 877.938, 877.938))
-                        .rcsErrorEsts(listOf(0.01, 0.003, 0.001))
-                        .rcsValues(listOf(12.34, 26.11, 43.21))
-                        .rspaces(listOf(0.006, 0.006, 0.006))
-                        .spectralWidths(listOf(23.45, 20.57, 12.21))
-                        .tovs(
-                            listOf(
-                                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
-                                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
-                                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
-                            )
-                        )
-                        .xaccel(listOf(-0.075, -0.74, -0.4))
-                        .xpos(listOf(-1118.577381, -1118.577381, -1118.577381))
-                        .xspaces(listOf(0.006, 0.006, 0.006))
-                        .xvel(listOf(-4.25242784, -4.25242784, -4.25242784))
-                        .yaccel(listOf(-0.007, 0.003, 0.1))
-                        .ypos(listOf(3026.231084, 3026.231084, 3026.231084))
-                        .yvel(listOf(5.291107434, 5.291107434, 5.291107434))
-                        .zaccel(listOf(0.1, 0.2, 0.3))
-                        .zpos(listOf(6167.831808, 6167.831808, 6167.831808))
-                        .zvel(listOf(-3.356493869, -3.356493869, -3.356493869))
-                        .build()
-                )
-                .referenceFrame(SoiObservationSetFull.ReferenceFrame.J2000)
-                .satelliteName("TITAN 3C TRANSTAGE R/B")
-                .satNo(101)
-                .senalt(1.1)
-                .senlat(45.1)
-                .senlon(179.1)
-                .senReferenceFrame(SoiObservationSetFull.SenReferenceFrame.J2000)
-                .sensorAsId("026dd511-8ba5-47d3-9909-836149f87686")
-                .senvelx(1.1)
-                .senvely(1.1)
-                .senvelz(1.1)
-                .senx(1.1)
-                .seny(1.1)
-                .senz(1.1)
-                .softwareVersion("GSV99/17-1")
-                .solarMag(-26.91)
-                .solarPhaseAngleBrightnessChangeDetected(true)
-                .sourceDl("AXE")
-                .addSpectralFilter("Keyword1")
-                .addSpectralFilter("Keyword2")
-                .starCatName("SSTRC5")
-                .addTag("TAG1")
-                .addTag("TAG2")
-                .transactionId("TRANSACTION-ID")
-                .uct(true)
-                .validCalibrations("BOTH")
-                .build()
+      val jsonMapper = jsonMapper()
+      val soiObservationSetFull = SoiObservationSetFull.builder()
+          .classificationMarking("U")
+          .dataMode(SoiObservationSetFull.DataMode.TEST)
+          .numObs(1)
+          .source("Bluestaq")
+          .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+          .type(SoiObservationSetFull.Type.OPTICAL)
+          .id("026dd511-8ba5-47d3-9909-836149f87686")
+          .binningHoriz(2)
+          .binningVert(2)
+          .brightnessVarianceChangeDetected(true)
+          .addCalibration(SoiObservationSetFull.Calibration.builder()
+              .calBgIntensity(1.1)
+              .calExtinctionCoeff(0.2)
+              .calExtinctionCoeffMaxUnc(0.19708838)
+              .calExtinctionCoeffUnc(0.06474939)
+              .calNumCorrelatedStars(1)
+              .calNumDetectedStars(1)
+              .calSkyBg(30086.25)
+              .calSpectralFilterSolarMag(19.23664587)
+              .calTime(OffsetDateTime.parse("2023-01-02T16:00:00.123Z"))
+              .calType("PRE")
+              .calZeroPoint(25.15682157)
+              .build())
+          .calibrationType("ALL SKY")
+          .changeConf("MEDIUM")
+          .changeDetected(true)
+          .collectionDensityConf("MEDIUM")
+          .collectionId("b5133288-ab63-4b15-81f6-c7eec0cdb0c0")
+          .collectionMode("RATE TRACK")
+          .corrQuality(0.327)
+          .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+          .createdBy("some.user")
+          .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
+          .gain(234.2)
+          .idElset("REF-ELSET-ID")
+          .idOnOrbit("ONORBIT-ID")
+          .idSensor("SENSOR-ID")
+          .losDeclinationEnd(1.1)
+          .losDeclinationStart(1.1)
+          .msgCreateDate(OffsetDateTime.parse("2022-07-07T16:00:00.123Z"))
+          .numSpectralFilters(10)
+          .addOpticalSoiObservationList(SoiObservationSetFull.OpticalSoiObservationList.builder()
+              .obStartTime(OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"))
+              .currentSpectralFilterNum(0L)
+              .declinations(listOf(
+                -0.45,
+                -0.45,
+                -0.45,
+              ))
+              .expDuration(0.455)
+              .extinctionCoeffs(listOf(
+                0.32,
+                0.32,
+                0.32,
+              ))
+              .extinctionCoeffsUnc(listOf(
+                0.06,
+                0.06,
+                0.06,
+              ))
+              .intensities(listOf(
+                1.1,
+                1.1,
+                1.1,
+              ))
+              .intensityTimes(listOf(
+                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
+                OffsetDateTime.parse("2018-01-01T16:00:00.898456Z"),
+                OffsetDateTime.parse("2018-01-01T16:00:00.998456Z"),
+              ))
+              .localSkyBgs(listOf(
+                100625.375,
+                100625.375,
+                100625.375,
+              ))
+              .localSkyBgsUnc(listOf(
+                0.065,
+                0.065,
+                0.065,
+              ))
+              .numCorrelatedStars(listOf(
+                3,
+                3,
+                3,
+              ))
+              .numDetectedStars(listOf(
+                6,
+                6,
+                6,
+              ))
+              .percentSats(listOf(
+                0.1,
+                0.2,
+                1.0,
+              ))
+              .raRates(listOf(
+                0.0,
+                0.0,
+                0.0,
+              ))
+              .ras(listOf(
+                107.4,
+                107.4,
+                107.4,
+              ))
+              .skyBgs(listOf(
+                100625.375,
+                100625.375,
+                100625.375,
+              ))
+              .zeroPoints(listOf(
+                24.711,
+                24.711,
+                24.711,
+              ))
+              .build())
+          .origin("THIRD_PARTY_DATASOURCE")
+          .origNetwork("OPS1")
+          .origObjectId("ORIGOBJECT-ID")
+          .origSensorId("ORIGSENSOR-ID")
+          .percentSatThreshold(0.1)
+          .periodicityChangeDetected(true)
+          .periodicityDetectionConf("MEDIUM")
+          .periodicitySamplingConf("MEDIUM")
+          .pixelArrayHeight(32)
+          .pixelArrayWidth(32)
+          .pixelMax(16383)
+          .pixelMin(0)
+          .pointingAngleAzEnd(1.1)
+          .pointingAngleAzStart(1.1)
+          .pointingAngleElEnd(1.1)
+          .pointingAngleElStart(1.1)
+          .polarAngleEnd(1.1)
+          .polarAngleStart(1.1)
+          .addRadarSoiObservationList(SoiObservationSetFull.RadarSoiObservationList.builder()
+              .obStartTime(OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"))
+              .aspectAngles(listOf(
+                4.278,
+                4.278,
+                4.278,
+              ))
+              .azimuthBiases(listOf(
+                45.23,
+                45.23,
+                45.23,
+              ))
+              .azimuthRates(listOf(
+                -1.481,
+                -1.481,
+                -1.481,
+              ))
+              .azimuths(listOf(
+                278.27,
+                278.27,
+                278.27,
+              ))
+              .beta(-89.97)
+              .centerFrequency(160047.0625)
+              .crossRangeRes(listOf(
+                11.301,
+                11.301,
+                11.301,
+              ))
+              .deltaTimes(listOf(
+                0.005,
+                0.005,
+                0.005,
+              ))
+              .doppler2XRs(listOf(
+                5644.27,
+                5644.27,
+                5644.27,
+              ))
+              .elevationBiases(listOf(
+                1.23,
+                1.23,
+                1.23,
+              ))
+              .elevationRates(listOf(
+                -0.074,
+                -0.074,
+                -0.074,
+              ))
+              .elevations(listOf(
+                70.85,
+                70.85,
+                70.85,
+              ))
+              .idAttitudeSet("99a0de63-b38f-4d81-b057")
+              .idStateVector("99a0de63-b38f-4d81-b057")
+              .integrationAngles(listOf(
+                8.594,
+                8.594,
+                8.594,
+              ))
+              .kappa(103.04)
+              .peakAmplitudes(listOf(
+                33.1,
+                33.1,
+                33.1,
+              ))
+              .polarizations(listOf(
+                "H",
+                "L",
+                "V",
+              ))
+              .projAngVels(listOf(
+                0.166,
+                0.166,
+                0.166,
+              ))
+              .pulseBandwidth(24094.12)
+              .rangeAccels(listOf(
+                0.12,
+                0.01,
+                0.2,
+              ))
+              .rangeBiases(listOf(
+                1.23,
+                1.23,
+                1.23,
+              ))
+              .rangeRates(listOf(
+                0.317,
+                0.317,
+                0.317,
+              ))
+              .ranges(listOf(
+                877.938,
+                877.938,
+                877.938,
+              ))
+              .rcsErrorEsts(listOf(
+                0.01,
+                0.003,
+                0.001,
+              ))
+              .rcsValues(listOf(
+                12.34,
+                26.11,
+                43.21,
+              ))
+              .rspaces(listOf(
+                0.006,
+                0.006,
+                0.006,
+              ))
+              .spectralWidths(listOf(
+                23.45,
+                20.57,
+                12.21,
+              ))
+              .tovs(listOf(
+                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
+                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
+                OffsetDateTime.parse("2018-01-01T16:00:00.888456Z"),
+              ))
+              .xaccel(listOf(
+                -0.075,
+                -0.74,
+                -0.4,
+              ))
+              .xpos(listOf(
+                -1118.577381,
+                -1118.577381,
+                -1118.577381,
+              ))
+              .xspaces(listOf(
+                0.006,
+                0.006,
+                0.006,
+              ))
+              .xvel(listOf(
+                -4.25242784,
+                -4.25242784,
+                -4.25242784,
+              ))
+              .yaccel(listOf(
+                -0.007,
+                0.003,
+                0.1,
+              ))
+              .ypos(listOf(
+                3026.231084,
+                3026.231084,
+                3026.231084,
+              ))
+              .yvel(listOf(
+                5.291107434,
+                5.291107434,
+                5.291107434,
+              ))
+              .zaccel(listOf(
+                0.1,
+                0.2,
+                0.3,
+              ))
+              .zpos(listOf(
+                6167.831808,
+                6167.831808,
+                6167.831808,
+              ))
+              .zvel(listOf(
+                -3.356493869,
+                -3.356493869,
+                -3.356493869,
+              ))
+              .build())
+          .referenceFrame(SoiObservationSetFull.ReferenceFrame.J2000)
+          .satelliteName("TITAN 3C TRANSTAGE R/B")
+          .satNo(101)
+          .senalt(1.1)
+          .senlat(45.1)
+          .senlon(179.1)
+          .senReferenceFrame(SoiObservationSetFull.SenReferenceFrame.J2000)
+          .sensorAsId("026dd511-8ba5-47d3-9909-836149f87686")
+          .senvelx(1.1)
+          .senvely(1.1)
+          .senvelz(1.1)
+          .senx(1.1)
+          .seny(1.1)
+          .senz(1.1)
+          .softwareVersion("GSV99/17-1")
+          .solarMag(-26.91)
+          .solarPhaseAngleBrightnessChangeDetected(true)
+          .sourceDl("AXE")
+          .addSpectralFilter("Keyword1")
+          .addSpectralFilter("Keyword2")
+          .starCatName("SSTRC5")
+          .addTag("TAG1")
+          .addTag("TAG2")
+          .transactionId("TRANSACTION-ID")
+          .uct(true)
+          .validCalibrations("BOTH")
+          .build()
 
-        val roundtrippedSoiObservationSetFull =
-            jsonMapper.readValue(
-                jsonMapper.writeValueAsString(soiObservationSetFull),
-                jacksonTypeRef<SoiObservationSetFull>(),
-            )
+      val roundtrippedSoiObservationSetFull = jsonMapper.readValue(jsonMapper.writeValueAsString(soiObservationSetFull), jacksonTypeRef<SoiObservationSetFull>())
 
-        assertThat(roundtrippedSoiObservationSetFull).isEqualTo(soiObservationSetFull)
+      assertThat(roundtrippedSoiObservationSetFull).isEqualTo(soiObservationSetFull)
     }
 }

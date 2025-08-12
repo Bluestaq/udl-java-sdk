@@ -15,68 +15,54 @@ import com.unifieddatalibrary.api.core.http.json
 import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.airoperations.airspacecontrolorders.AirspaceControlOrderUnvalidatedPublishParams
+import com.unifieddatalibrary.api.services.async.airoperations.AirspaceControlOrderServiceAsync
+import com.unifieddatalibrary.api.services.async.airoperations.AirspaceControlOrderServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
-class AirspaceControlOrderServiceAsyncImpl
-internal constructor(private val clientOptions: ClientOptions) : AirspaceControlOrderServiceAsync {
+class AirspaceControlOrderServiceAsyncImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: AirspaceControlOrderServiceAsync.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : AirspaceControlOrderServiceAsync {
 
-    override fun withRawResponse(): AirspaceControlOrderServiceAsync.WithRawResponse =
-        withRawResponse
+    private val withRawResponse: AirspaceControlOrderServiceAsync.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
-    override fun withOptions(
-        modifier: Consumer<ClientOptions.Builder>
-    ): AirspaceControlOrderServiceAsync =
-        AirspaceControlOrderServiceAsyncImpl(
-            clientOptions.toBuilder().apply(modifier::accept).build()
-        )
+    override fun withRawResponse(): AirspaceControlOrderServiceAsync.WithRawResponse = withRawResponse
 
-    override fun unvalidatedPublish(
-        params: AirspaceControlOrderUnvalidatedPublishParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<Void?> =
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): AirspaceControlOrderServiceAsync = AirspaceControlOrderServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+
+    override fun unvalidatedPublish(params: AirspaceControlOrderUnvalidatedPublishParams, requestOptions: RequestOptions): CompletableFuture<Void?> =
         // post /filedrop/udl-airspacecontrolorder
         withRawResponse().unvalidatedPublish(params, requestOptions).thenAccept {}
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        AirspaceControlOrderServiceAsync.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<HttpResponse> =
-            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+    ) : AirspaceControlOrderServiceAsync.WithRawResponse {
 
-        override fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): AirspaceControlOrderServiceAsync.WithRawResponse =
-            AirspaceControlOrderServiceAsyncImpl.WithRawResponseImpl(
-                clientOptions.toBuilder().apply(modifier::accept).build()
-            )
+        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+
+        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): AirspaceControlOrderServiceAsync.WithRawResponse = AirspaceControlOrderServiceAsyncImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
         private val unvalidatedPublishHandler: Handler<Void?> = emptyHandler()
 
-        override fun unvalidatedPublish(
-            params: AirspaceControlOrderUnvalidatedPublishParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("filedrop", "udl-airspacecontrolorder")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response.use { unvalidatedPublishHandler.handle(it) }
-                    }
-                }
+        override fun unvalidatedPublish(params: AirspaceControlOrderUnvalidatedPublishParams, requestOptions: RequestOptions): CompletableFuture<HttpResponse> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("filedrop", "udl-airspacecontrolorder")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepareAsync(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
+            it, requestOptions
+          ) }.thenApply { response -> errorHandler.handle(response).parseable {
+              response.use {
+                  unvalidatedPublishHandler.handle(it)
+              }
+          } }
         }
     }
 }

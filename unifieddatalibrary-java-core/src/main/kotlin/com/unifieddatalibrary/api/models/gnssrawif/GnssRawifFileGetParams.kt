@@ -13,7 +13,7 @@ import kotlin.jvm.optionals.getOrNull
  * Service operation to get a single GNSSRAWIF hdf5 file by its unique ID passed as a path
  * parameter. The file is returned as an attachment Content-Disposition.
  */
-class GnssRawifFileGetParams
+class GnssRawIfFileGetParams
 private constructor(
     private val id: String?,
     private val firstResult: Long?,
@@ -38,13 +38,13 @@ private constructor(
 
     companion object {
 
-        @JvmStatic fun none(): GnssRawifFileGetParams = builder().build()
+        @JvmStatic fun none(): GnssRawIfFileGetParams = builder().build()
 
-        /** Returns a mutable builder for constructing an instance of [GnssRawifFileGetParams]. */
+        /** Returns a mutable builder for constructing an instance of [GnssRawIfFileGetParams]. */
         @JvmStatic fun builder() = Builder()
     }
 
-    /** A builder for [GnssRawifFileGetParams]. */
+    /** A builder for [GnssRawIfFileGetParams]. */
     class Builder internal constructor() {
 
         private var id: String? = null
@@ -54,12 +54,12 @@ private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(gnssRawifFileGetParams: GnssRawifFileGetParams) = apply {
-            id = gnssRawifFileGetParams.id
-            firstResult = gnssRawifFileGetParams.firstResult
-            maxResults = gnssRawifFileGetParams.maxResults
-            additionalHeaders = gnssRawifFileGetParams.additionalHeaders.toBuilder()
-            additionalQueryParams = gnssRawifFileGetParams.additionalQueryParams.toBuilder()
+        internal fun from(gnssRawIfFileGetParams: GnssRawIfFileGetParams) = apply {
+            id = gnssRawIfFileGetParams.id
+            firstResult = gnssRawIfFileGetParams.firstResult
+            maxResults = gnssRawIfFileGetParams.maxResults
+            additionalHeaders = gnssRawIfFileGetParams.additionalHeaders.toBuilder()
+            additionalQueryParams = gnssRawIfFileGetParams.additionalQueryParams.toBuilder()
         }
 
         fun id(id: String?) = apply { this.id = id }
@@ -190,12 +190,12 @@ private constructor(
         }
 
         /**
-         * Returns an immutable instance of [GnssRawifFileGetParams].
+         * Returns an immutable instance of [GnssRawIfFileGetParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
          */
-        fun build(): GnssRawifFileGetParams =
-            GnssRawifFileGetParams(
+        fun build(): GnssRawIfFileGetParams =
+            GnssRawIfFileGetParams(
                 id,
                 firstResult,
                 maxResults,
@@ -226,11 +226,11 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GnssRawifFileGetParams && id == other.id && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return /* spotless:off */ other is GnssRawIfFileGetParams && id == other.id && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(id, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
 
     override fun toString() =
-        "GnssRawifFileGetParams{id=$id, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "GnssRawIfFileGetParams{id=$id, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

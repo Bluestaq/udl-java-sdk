@@ -18,24 +18,19 @@ import com.unifieddatalibrary.api.core.http.Headers
 import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import com.unifieddatalibrary.api.models.sigact.SigactCreateBulkParams
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/**
- * Service operation intended for initial integration only, to take a list of SigAct records as a
- * POST body and ingest into the database. Requires specific roles, please contact the UDL team to
- * gain access. This operation is not intended to be used for automated feeds into UDL...data
- * providers should contact the UDL team for instructions on setting up a permanent feed through an
- * alternate mechanism.
- */
-class SigactCreateBulkParams
-private constructor(
+/** Service operation intended for initial integration only, to take a list of SigAct records as a POST body and ingest into the database. Requires specific roles, please contact the UDL team to gain access. This operation is not intended to be used for automated feeds into UDL...data providers should contact the UDL team for instructions on setting up a permanent feed through an alternate mechanism. */
+class SigactCreateBulkParams private constructor(
     private val body: List<Body>,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
+
 ) : Params {
 
     fun body(): List<Body> = body
@@ -54,11 +49,13 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [SigactCreateBulkParams].
          *
          * The following fields are required:
+         *
          * ```java
          * .body()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [SigactCreateBulkParams]. */
@@ -69,120 +66,151 @@ private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(sigactCreateBulkParams: SigactCreateBulkParams) = apply {
-            body = sigactCreateBulkParams.body.toMutableList()
-            additionalHeaders = sigactCreateBulkParams.additionalHeaders.toBuilder()
-            additionalQueryParams = sigactCreateBulkParams.additionalQueryParams.toBuilder()
-        }
+        internal fun from(sigactCreateBulkParams: SigactCreateBulkParams) =
+            apply {
+                body = sigactCreateBulkParams.body.toMutableList()
+                additionalHeaders = sigactCreateBulkParams.additionalHeaders.toBuilder()
+                additionalQueryParams = sigactCreateBulkParams.additionalQueryParams.toBuilder()
+            }
 
-        fun body(body: List<Body>) = apply { this.body = body.toMutableList() }
+        fun body(body: List<Body>) =
+            apply {
+                this.body = body.toMutableList()
+            }
 
         /**
          * Adds a single [Body] to [Builder.body].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addBody(body: Body) = apply {
-            this.body = (this.body ?: mutableListOf()).apply { add(body) }
-        }
+        fun addBody(body: Body) =
+            apply {
+                this.body = (this.body ?: mutableListOf()).apply { add(body) }
+            }
 
-        fun additionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun putAdditionalHeader(name: String, value: String) = apply {
-            additionalHeaders.put(name, value)
-        }
+        fun putAdditionalHeader(name: String, value: String) =
+            apply {
+                additionalHeaders.put(name, value)
+            }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.put(name, values)
-        }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.put(name, values)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun replaceAdditionalHeaders(name: String, value: String) = apply {
-            additionalHeaders.replace(name, value)
-        }
+        fun replaceAdditionalHeaders(name: String, value: String) =
+            apply {
+                additionalHeaders.replace(name, value)
+            }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.replace(name, values)
-        }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.replace(name, values)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
+        fun removeAdditionalHeaders(name: String) =
+            apply {
+                additionalHeaders.remove(name)
+            }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
-            additionalHeaders.removeAll(names)
-        }
+        fun removeAllAdditionalHeaders(names: Set<String>) =
+            apply {
+                additionalHeaders.removeAll(names)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun putAdditionalQueryParam(key: String, value: String) = apply {
-            additionalQueryParams.put(key, value)
-        }
+        fun putAdditionalQueryParam(key: String, value: String) =
+            apply {
+                additionalQueryParams.put(key, value)
+            }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.put(key, values)
-        }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.put(key, values)
+            }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.putAll(additionalQueryParams)
-        }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.putAll(additionalQueryParams)
+            }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
-            additionalQueryParams.replace(key, value)
-        }
+        fun replaceAdditionalQueryParams(key: String, value: String) =
+            apply {
+                additionalQueryParams.replace(key, value)
+            }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.replace(key, values)
-        }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.replace(key, values)
+            }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.replaceAll(additionalQueryParams)
-        }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.replaceAll(additionalQueryParams)
+            }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
+        fun removeAdditionalQueryParams(key: String) =
+            apply {
+                additionalQueryParams.remove(key)
+            }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
-            additionalQueryParams.removeAll(keys)
-        }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) =
+            apply {
+                additionalQueryParams.removeAll(keys)
+            }
 
         /**
          * Returns an immutable instance of [SigactCreateBulkParams].
@@ -190,6 +218,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .body()
          * ```
@@ -198,9 +227,11 @@ private constructor(
          */
         fun build(): SigactCreateBulkParams =
             SigactCreateBulkParams(
-                checkRequired("body", body).toImmutable(),
-                additionalHeaders.build(),
-                additionalQueryParams.build(),
+              checkRequired(
+                "body", body
+              ).toImmutable(),
+              additionalHeaders.build(),
+              additionalQueryParams.build(),
             )
     }
 
@@ -210,20 +241,11 @@ private constructor(
 
     override fun _queryParams(): QueryParams = additionalQueryParams
 
-    /**
-     * Provides information on the dates, actors, locations, fatalities, and types of all reported
-     * political violence and protest events across the world.
-     */
-    class Body
-    @JsonCreator
-    private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
-        private val classificationMarking: JsonField<String>,
+    /** Provides information on the dates, actors, locations, fatalities, and types of all reported political violence and protest events across the world. */
+    class Body @JsonCreator private constructor(
+        @JsonProperty("classificationMarking") @ExcludeMissing private val classificationMarking: JsonField<String>,
         @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("reportDate")
-        @ExcludeMissing
-        private val reportDate: JsonField<OffsetDateTime>,
+        @JsonProperty("reportDate") @ExcludeMissing private val reportDate: JsonField<OffsetDateTime>,
         @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
         @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
         @JsonProperty("accuracy") @ExcludeMissing private val accuracy: JsonField<Int>,
@@ -249,30 +271,20 @@ private constructor(
         @JsonProperty("coalDet") @ExcludeMissing private val coalDet: JsonField<Int>,
         @JsonProperty("coalKIA") @ExcludeMissing private val coalKia: JsonField<Int>,
         @JsonProperty("coalWound") @ExcludeMissing private val coalWound: JsonField<Int>,
-        @JsonProperty("complexAttack")
-        @ExcludeMissing
-        private val complexAttack: JsonField<Boolean>,
+        @JsonProperty("complexAttack") @ExcludeMissing private val complexAttack: JsonField<Boolean>,
         @JsonProperty("confidence") @ExcludeMissing private val confidence: JsonField<Int>,
         @JsonProperty("countryCode") @ExcludeMissing private val countryCode: JsonField<String>,
         @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
         @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
         @JsonProperty("district") @ExcludeMissing private val district: JsonField<String>,
-        @JsonProperty("documentFilename")
-        @ExcludeMissing
-        private val documentFilename: JsonField<String>,
-        @JsonProperty("documentSource")
-        @ExcludeMissing
-        private val documentSource: JsonField<String>,
+        @JsonProperty("documentFilename") @ExcludeMissing private val documentFilename: JsonField<String>,
+        @JsonProperty("documentSource") @ExcludeMissing private val documentSource: JsonField<String>,
         @JsonProperty("enemyAbd") @ExcludeMissing private val enemyAbd: JsonField<Int>,
         @JsonProperty("enemyDet") @ExcludeMissing private val enemyDet: JsonField<Int>,
         @JsonProperty("enemyKIA") @ExcludeMissing private val enemyKia: JsonField<Int>,
-        @JsonProperty("eventDescription")
-        @ExcludeMissing
-        private val eventDescription: JsonField<String>,
+        @JsonProperty("eventDescription") @ExcludeMissing private val eventDescription: JsonField<String>,
         @JsonProperty("eventEnd") @ExcludeMissing private val eventEnd: JsonField<OffsetDateTime>,
-        @JsonProperty("eventStart")
-        @ExcludeMissing
-        private val eventStart: JsonField<OffsetDateTime>,
+        @JsonProperty("eventStart") @ExcludeMissing private val eventStart: JsonField<OffsetDateTime>,
         @JsonProperty("eventType") @ExcludeMissing private val eventType: JsonField<String>,
         @JsonProperty("filesize") @ExcludeMissing private val filesize: JsonField<Long>,
         @JsonProperty("friendlyAbd") @ExcludeMissing private val friendlyAbd: JsonField<Int>,
@@ -280,9 +292,7 @@ private constructor(
         @JsonProperty("friendlyKIA") @ExcludeMissing private val friendlyKia: JsonField<Int>,
         @JsonProperty("friendlyWound") @ExcludeMissing private val friendlyWound: JsonField<Int>,
         @JsonProperty("goldstein") @ExcludeMissing private val goldstein: JsonField<Double>,
-        @JsonProperty("hasAttachment")
-        @ExcludeMissing
-        private val hasAttachment: JsonField<Boolean>,
+        @JsonProperty("hasAttachment") @ExcludeMissing private val hasAttachment: JsonField<Boolean>,
         @JsonProperty("hostNatAbd") @ExcludeMissing private val hostNatAbd: JsonField<Int>,
         @JsonProperty("hostNatDet") @ExcludeMissing private val hostNatDet: JsonField<Int>,
         @JsonProperty("hostNatKIA") @ExcludeMissing private val hostNatKia: JsonField<Int>,
@@ -298,13 +308,9 @@ private constructor(
         @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
         @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
         @JsonProperty("province") @ExcludeMissing private val province: JsonField<String>,
-        @JsonProperty("relatedDocs")
-        @ExcludeMissing
-        private val relatedDocs: JsonField<List<RelatedDoc>>,
+        @JsonProperty("relatedDocs") @ExcludeMissing private val relatedDocs: JsonField<List<RelatedDoc>>,
         @JsonProperty("repUnit") @ExcludeMissing private val repUnit: JsonField<String>,
-        @JsonProperty("repUnitActivity")
-        @ExcludeMissing
-        private val repUnitActivity: JsonField<String>,
+        @JsonProperty("repUnitActivity") @ExcludeMissing private val repUnitActivity: JsonField<String>,
         @JsonProperty("repUnitType") @ExcludeMissing private val repUnitType: JsonField<String>,
         @JsonProperty("sideAAbd") @ExcludeMissing private val sideAAbd: JsonField<Int>,
         @JsonProperty("sideADet") @ExcludeMissing private val sideADet: JsonField<Int>,
@@ -314,778 +320,616 @@ private constructor(
         @JsonProperty("sideBDet") @ExcludeMissing private val sideBDet: JsonField<Int>,
         @JsonProperty("sideBKIA") @ExcludeMissing private val sideBkia: JsonField<Int>,
         @JsonProperty("sideBWound") @ExcludeMissing private val sideBWound: JsonField<Int>,
-        @JsonProperty("sourceLanguage")
-        @ExcludeMissing
-        private val sourceLanguage: JsonField<String>,
+        @JsonProperty("sourceLanguage") @ExcludeMissing private val sourceLanguage: JsonField<String>,
         @JsonProperty("sourceUrl") @ExcludeMissing private val sourceUrl: JsonField<String>,
         @JsonProperty("summary") @ExcludeMissing private val summary: JsonField<String>,
         @JsonProperty("target") @ExcludeMissing private val target: JsonField<String>,
         @JsonProperty("theater") @ExcludeMissing private val theater: JsonField<String>,
         @JsonProperty("typeOfAttack") @ExcludeMissing private val typeOfAttack: JsonField<String>,
+
     ) {
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
-        fun classificationMarking(): String =
-            classificationMarking.getRequired("classificationMarking")
+        fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-         * both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-         * analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-         * requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
         /**
          * Date of the report or filing.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun reportDate(): OffsetDateTime = reportDate.getRequired("reportDate")
 
         /**
          * Source of the data.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun source(): String = source.getRequired("source")
 
         /**
          * Unique identifier of the record, auto-generated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun id(): Optional<String> = id.getOptional("id")
 
         /**
          * Estimate of the accuracy that this event occurred as described/reported.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun accuracy(): Optional<Int> = accuracy.getOptional("accuracy")
 
         /**
          * A list of one or more actors involved in the event.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun actors(): Optional<List<String>> = actors.getOptional("actors")
 
         /**
-         * Geographical region or polygon (lat/lon pairs), as depicted by the GeoJSON representation
-         * of the geometry/geography, of the image as projected on the ground. GeoJSON Reference:
-         * https://geojson.org/. Ignored if included with a POST or PUT request that also specifies
-         * a valid 'area' or 'atext' field.
+         * Geographical region or polygon (lat/lon pairs), as depicted by the GeoJSON representation of the geometry/geography, of the image as projected on the ground. GeoJSON Reference: https://geojson.org/. Ignored if included with a POST or PUT request that also specifies a valid 'area' or 'atext' field.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun agjson(): Optional<String> = agjson.getOptional("agjson")
 
         /**
          * Number of dimensions of the geometry depicted by region.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun andims(): Optional<Long> = andims.getOptional("andims")
 
         /**
-         * Optional geographical region or polygon (lat/lon pairs) of the area surrounding the point
-         * of interest as projected on the ground.
+         * Optional geographical region or polygon (lat/lon pairs) of the area surrounding the point of interest as projected on the ground.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun area(): Optional<String> = area.getOptional("area")
 
         /**
          * Geographical spatial_ref_sys for region.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun asrid(): Optional<Int> = asrid.getOptional("asrid")
 
         /**
-         * Geographical region or polygon (lon/lat pairs), as depicted by the Well-Known Text
-         * representation of the geometry/geography, of the image as projected on the ground. WKT
-         * reference: https://www.opengeospatial.org/standards/wkt-crs. Ignored if included with a
-         * POST or PUT request that also specifies a valid 'area' field.
+         * Geographical region or polygon (lon/lat pairs), as depicted by the Well-Known Text representation of the geometry/geography, of the image as projected on the ground. WKT reference: https://www.opengeospatial.org/standards/wkt-crs. Ignored if included with a POST or PUT request that also specifies a valid 'area' field.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun atext(): Optional<String> = atext.getOptional("atext")
 
         /**
          * Type of region as projected on the ground.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun atype(): Optional<String> = atype.getOptional("atype")
 
         /**
-         * This is the average tone of all documents containing one or more mentions of this event
-         * during the 15 minute update in which it was first seen. The score ranges from -100
-         * (extremely negative) to +100 (extremely positive). Common values range between -10 and
-         * +10, with 0 indicating neutral.
+         * This is the average tone of all documents containing one or more mentions of this event during the 15 minute update in which it was first seen. The score ranges from -100 (extremely negative) to +100 (extremely positive). Common values range between -10 and +10, with 0 indicating neutral.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun avgTone(): Optional<Double> = avgTone.getOptional("avgTone")
 
         /**
-         * CAMEO event codes are defined in a three-level taxonomy. For events at level three in the
-         * taxonomy, this yields its level two leaf root node. For example, code 0251 (Appeal for
-         * easing of administrative sanctions) would yield an EventBaseCode of 025 (Appeal to
-         * yield). This makes it possible to aggregate events at various resolutions of specificity.
-         * For events at levels two or one, this field will be set to EventCode.
+         * CAMEO event codes are defined in a three-level taxonomy. For events at level three in the taxonomy, this yields its level two leaf root node. For example, code 0251 (Appeal for easing of administrative sanctions) would yield an EventBaseCode of 025 (Appeal to yield). This makes it possible to aggregate events at various resolutions of specificity. For events at levels two or one, this field will be set to EventCode.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun cameoBaseCode(): Optional<String> = cameoBaseCode.getOptional("cameoBaseCode")
 
         /**
-         * This is the raw CAMEO action code describing the action that Actor1 performed upon
-         * Actor2. Additional information about Cameo Codes can be obtained from the GDELT project
-         * documentation here: https://www.gdeltproject.org/data.html#documentation.
+         * This is the raw CAMEO action code describing the action that Actor1 performed upon Actor2. Additional information about Cameo Codes can be obtained from the GDELT project documentation here: https://www.gdeltproject.org/data.html#documentation.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun cameoCode(): Optional<String> = cameoCode.getOptional("cameoCode")
 
         /**
-         * Similar to EventBaseCode, this defines the root-level category the event code falls
-         * under. For example, code 0251 (Appeal for easing of administrative sanctions) has a root
-         * code of 02 (Appeal). This makes it possible to aggregate events at various resolutions of
-         * specificity. For events at levels two or one, this field will be set to EventCode.
+         * Similar to EventBaseCode, this defines the root-level category the event code falls under. For example, code 0251 (Appeal for easing of administrative sanctions) has a root code of 02 (Appeal). This makes it possible to aggregate events at various resolutions of specificity. For events at levels two or one, this field will be set to EventCode.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun cameoRootCode(): Optional<String> = cameoRootCode.getOptional("cameoRootCode")
 
         /**
          * MD5 value of the file. The ingest/create operation will automatically generate the value.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun checksumValue(): Optional<String> = checksumValue.getOptional("checksumValue")
 
         /**
          * The city in or near which this event occurred.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun city(): Optional<String> = city.getOptional("city")
 
         /**
          * Number of civilians abducted in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun civAbd(): Optional<Int> = civAbd.getOptional("civAbd")
 
         /**
          * Number of civilians detained in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun civDet(): Optional<Int> = civDet.getOptional("civDet")
 
         /**
          * Number of civilians killed in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun civKia(): Optional<Int> = civKia.getOptional("civKIA")
 
         /**
          * Number of civilians wounded in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun civWound(): Optional<Int> = civWound.getOptional("civWound")
 
         /**
-         * 1 (high) for events where the reporting allows the coder to identify the event in full.
-         * That is, events where the individual happening is described by the original source in a
-         * sufficiently detailed way as to identify individual incidents, i.e. separate activities
-         * of fighting in a single location:
+         * 1 (high) for events where the reporting allows the coder to identify the event in full. That is, events where the individual happening is described by the original source in a sufficiently detailed way as to identify individual incidents, i.e. separate activities of fighting in a single location:
          *
-         * 2 (lower) for events where an aggregation of information was already made by the source
-         * material that is impossible to undo in the coding process. Such events are described by
-         * the original source only as aggregates (totals) of multiple separate activities of
-         * fighting spanning over a longer period than a single, clearly defined day.
+         * 2 (lower) for events where an aggregation of information was already made by the source material that is impossible to undo in the coding process. Such events are described by the original source only as aggregates (totals) of multiple separate activities of fighting spanning over a longer period than a single, clearly defined day.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun clarity(): Optional<Int> = clarity.getOptional("clarity")
 
         /**
          * Number of coalition members abducted in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun coalAbd(): Optional<Int> = coalAbd.getOptional("coalAbd")
 
         /**
          * Number of coalition members detained in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun coalDet(): Optional<Int> = coalDet.getOptional("coalDet")
 
         /**
          * Number of coalition members killed in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun coalKia(): Optional<Int> = coalKia.getOptional("coalKIA")
 
         /**
          * Number of coalition members wounded in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun coalWound(): Optional<Int> = coalWound.getOptional("coalWound")
 
         /**
          * Flag indicating that this attack was of a complex or coordinated nature.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun complexAttack(): Optional<Boolean> = complexAttack.getOptional("complexAttack")
 
         /**
          * Estimate of the confidence that this event occurred.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun confidence(): Optional<Int> = confidence.getOptional("confidence")
 
         /**
-         * The country code. This value is typically the ISO 3166 Alpha-2 two-character country
-         * code, however it can also represent various consortiums that do not appear in the ISO
-         * document. The code must correspond to an existing country in the UDL’s country API. Call
-         * udl/country/{code} to get any associated FIPS code, ISO Alpha-3 code, or alternate code
-         * values that exist for the specified country code.
+         * The country code. This value is typically the ISO 3166 Alpha-2 two-character country code, however it can also represent various consortiums that do not appear in the ISO document. The code must correspond to an existing country in the UDL’s country API. Call udl/country/{code} to get any associated FIPS code, ISO Alpha-3 code, or alternate code values that exist for the specified country code.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun countryCode(): Optional<String> = countryCode.getOptional("countryCode")
 
         /**
-         * Time the row was created in the database, auto-populated by the system, example =
-         * 2018-01-01T16:00:00.123Z.
+         * Time the row was created in the database, auto-populated by the system, example = 2018-01-01T16:00:00.123Z.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
         /**
          * Application user who created the row in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
         /**
          * The district in which this event occurred.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun district(): Optional<String> = district.getOptional("district")
 
         /**
          * The filename of the document or report.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun documentFilename(): Optional<String> = documentFilename.getOptional("documentFilename")
 
         /**
          * The source of the document or report.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun documentSource(): Optional<String> = documentSource.getOptional("documentSource")
 
         /**
          * Number of enemy combatants abducted in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun enemyAbd(): Optional<Int> = enemyAbd.getOptional("enemyAbd")
 
         /**
          * Number of enemy combatants detained in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun enemyDet(): Optional<Int> = enemyDet.getOptional("enemyDet")
 
         /**
          * Number of enemy combatants killed in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun enemyKia(): Optional<Int> = enemyKia.getOptional("enemyKIA")
 
         /**
          * A description of the event.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun eventDescription(): Optional<String> = eventDescription.getOptional("eventDescription")
 
         /**
          * The approximate end time of the event, in ISO 8601 UTC format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun eventEnd(): Optional<OffsetDateTime> = eventEnd.getOptional("eventEnd")
 
         /**
          * The approximate start time of the event, in ISO 8601 UTC format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun eventStart(): Optional<OffsetDateTime> = eventStart.getOptional("eventStart")
 
         /**
          * The type of event (e.g. Military, Natural, Political, Social, etc.).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun eventType(): Optional<String> = eventType.getOptional("eventType")
 
         /**
-         * Size of the associated text file. Units in bytes. If filesize is provided without an
-         * associated file, it defaults to 0.
+         * Size of the associated text file. Units in bytes. If filesize is provided without an associated file, it defaults to 0.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun filesize(): Optional<Long> = filesize.getOptional("filesize")
 
         /**
          * Number of friendlies abducted in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun friendlyAbd(): Optional<Int> = friendlyAbd.getOptional("friendlyAbd")
 
         /**
          * Number of friendlies in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun friendlyDet(): Optional<Int> = friendlyDet.getOptional("friendlyDet")
 
         /**
          * Number of friendlies killed in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun friendlyKia(): Optional<Int> = friendlyKia.getOptional("friendlyKIA")
 
         /**
          * Number of friendlies wounded in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun friendlyWound(): Optional<Int> = friendlyWound.getOptional("friendlyWound")
 
         /**
-         * Each CAMEO event code is assigned a numeric score from -10 to +10, capturing the
-         * theoretical potential impact that type of event will have on the stability of a country.
-         * This is known as the Goldstein Scale. NOTE: this score is based on the type of event, not
-         * the specifics of the actual event record being recorded thus two riots, one with 10
-         * people and one with 10,000, will both receive the same Goldstein score. This can be
-         * aggregated to various levels of time resolution to yield an approximation of the
-         * stability of a location over time.
+         * Each CAMEO event code is assigned a numeric score from -10 to +10, capturing the theoretical potential impact that type of event will have on the stability of a country. This is known as the Goldstein Scale. NOTE: this score is based on the type of event, not the specifics of the actual event record being recorded thus two riots, one with 10 people and one with 10,000, will both receive the same Goldstein score. This can be aggregated to various levels of time resolution to yield an approximation of the stability of a location over time.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun goldstein(): Optional<Double> = goldstein.getOptional("goldstein")
 
         /**
-         * Flag indicating this SigAct record has an associated txt file stored in the UDL. Retrieve
-         * the txt file by using the GET/udl/sigact/getFile/{id} where id is the same as the SigAct
-         * record id. The maximum file size for this service is 10,000,000 bytes (10MB). Files
-         * exceeding the maximum size will be rejected.
+         * Flag indicating this SigAct record has an associated txt file stored in the UDL. Retrieve the txt file by using the GET/udl/sigact/getFile/{id} where id is the same as the SigAct record id. The maximum file size for this service is 10,000,000 bytes (10MB). Files exceeding the maximum size will be rejected.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun hasAttachment(): Optional<Boolean> = hasAttachment.getOptional("hasAttachment")
 
         /**
          * Number of Host Nation members abducted in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun hostNatAbd(): Optional<Int> = hostNatAbd.getOptional("hostNatAbd")
 
         /**
          * Number of Host Nation members detained in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun hostNatDet(): Optional<Int> = hostNatDet.getOptional("hostNatDet")
 
         /**
          * Number of Host Nation members killed in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun hostNatKia(): Optional<Int> = hostNatKia.getOptional("hostNatKIA")
 
         /**
          * Number of Host Nation members wounded in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun hostNatWound(): Optional<Int> = hostNatWound.getOptional("hostNatWound")
 
         /**
-         * Unique identifier assigned to each event record that uniquely identifies it in the master
-         * dataset. This ID is provided for convenience of mapping to external systems.
+         * Unique identifier assigned to each event record that uniquely identifies it in the master dataset. This ID is provided for convenience of mapping to external systems.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun idNumber(): Optional<String> = idNumber.getOptional("idNumber")
 
         /**
-         * WGS-84 centroid latitude of the event location, in degrees. -90 to 90 degrees (negative
-         * values south of equator).
+         * WGS-84 centroid latitude of the event location, in degrees. -90 to 90 degrees (negative values south of equator).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun lat(): Optional<Double> = lat.getOptional("lat")
 
         /**
-         * WGS-84 centroid longitude of the event location, in degrees. -180 to 180 degrees
-         * (negative values west of Prime Meridian).
+         * WGS-84 centroid longitude of the event location, in degrees. -180 to 180 degrees (negative values west of Prime Meridian).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun lon(): Optional<Double> = lon.getOptional("lon")
 
         /**
-         * The Military Grid Reference System is the geocoordinate standard used by NATO militaries
-         * for locating points on Earth. The MGRS is derived from the Universal Transverse Mercator
-         * (UTM) grid system and the Universal Polar Stereographic (UPS) grid system, but uses a
-         * different labeling convention. The MGRS is used as geocode for the entire Earth. Example
-         * of an milgrid coordinate, or grid reference, would be 4QFJ12345678, which consists of
-         * three parts:
+         * The Military Grid Reference System is the geocoordinate standard used by NATO militaries for locating points on Earth. The MGRS is derived from the Universal Transverse Mercator (UTM) grid system and the Universal Polar Stereographic (UPS) grid system, but uses a different labeling convention. The MGRS is used as geocode for the entire Earth. Example of an milgrid coordinate, or grid reference, would be 4QFJ12345678, which consists of three parts:
          *
          * &nbsp;&nbsp;4Q (grid zone designator, GZD)
          *
          * &nbsp;&nbsp;FJ (the 100,000-meter square identifier)
          *
-         * &nbsp;&nbsp;12345678 (numerical location; easting is 1234 and northing is 5678, in this
-         * case specifying a location with 10 m resolution).
+         * &nbsp;&nbsp;12345678 (numerical location; easting is 1234 and northing is 5678, in this case specifying a location with 10 m resolution).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun milgrid(): Optional<String> = milgrid.getOptional("milgrid")
 
         /**
          * Notes related to the documents or event.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun notes(): Optional<String> = notes.getOptional("notes")
 
         /**
-         * This is the total number of source documents containing one or more mentions of this
-         * event during the 15 minute update in which it was first seen. This can be used as a
-         * method of assessing the importance of an event: the more discussion of that event, the
-         * more likely it is to be significant.
+         * This is the total number of source documents containing one or more mentions of this event during the 15 minute update in which it was first seen. This can be used as a method of assessing the importance of an event: the more discussion of that event, the more likely it is to be significant.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numArticles(): Optional<Int> = numArticles.getOptional("numArticles")
 
         /**
-         * This is the total number of mentions of this event across all source documents during the
-         * 15 minute update in which it was first seen. Multiple references to an event within a
-         * single document also contribute to this count. This can be used as a method of assessing
-         * the importance of an event: the more discussion of that event, the more likely it is to
-         * be significant.
+         * This is the total number of mentions of this event across all source documents during the 15 minute update in which it was first seen. Multiple references to an event within a single document also contribute to this count. This can be used as a method of assessing the importance of an event: the more discussion of that event, the more likely it is to be significant.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numMentions(): Optional<Int> = numMentions.getOptional("numMentions")
 
         /**
-         * This is the total number of information sources containing one or more mentions of this
-         * event during the 15 minute update in which it was first seen. This can be used as a
-         * method of assessing the importance of an event: the more discussion of that event, the
-         * more likely it is to be significant.
+         * This is the total number of information sources containing one or more mentions of this event during the 15 minute update in which it was first seen. This can be used as a method of assessing the importance of an event: the more discussion of that event, the more likely it is to be significant.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun numSources(): Optional<Int> = numSources.getOptional("numSources")
 
         /**
-         * Originating system or organization which produced the data, if different from the source.
-         * The origin may be different than the source if the source was a mediating system which
-         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
-         * be the origin.
+         * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun origin(): Optional<String> = origin.getOptional("origin")
 
         /**
-         * The originating source network on which this record was created, auto-populated by the
-         * system.
+         * The originating source network on which this record was created, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
         /**
          * The province in which this event occurred.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun province(): Optional<String> = province.getOptional("province")
 
         /**
          * Related document ids.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun relatedDocs(): Optional<List<RelatedDoc>> = relatedDocs.getOptional("relatedDocs")
 
         /**
          * The reporting unit.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun repUnit(): Optional<String> = repUnit.getOptional("repUnit")
 
         /**
          * The activity the unit was engaged in.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun repUnitActivity(): Optional<String> = repUnitActivity.getOptional("repUnitActivity")
 
         /**
          * The reporting unit type.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun repUnitType(): Optional<String> = repUnitType.getOptional("repUnitType")
 
         /**
          * Number of side A members abducted in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun sideAAbd(): Optional<Int> = sideAAbd.getOptional("sideAAbd")
 
         /**
          * Number of side A members detained in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun sideADet(): Optional<Int> = sideADet.getOptional("sideADet")
 
         /**
          * Number of side A members killed in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun sideAkia(): Optional<Int> = sideAkia.getOptional("sideAKIA")
 
         /**
          * Number of side A members wounded in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun sideAWound(): Optional<Int> = sideAWound.getOptional("sideAWound")
 
         /**
          * Number of side B members abducted in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun sideBAbd(): Optional<Int> = sideBAbd.getOptional("sideBAbd")
 
         /**
          * Number of side B members detained in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun sideBDet(): Optional<Int> = sideBDet.getOptional("sideBDet")
 
         /**
          * Number of side B members killed in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun sideBkia(): Optional<Int> = sideBkia.getOptional("sideBKIA")
 
         /**
          * Number of side B members wounded in the activity.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun sideBWound(): Optional<Int> = sideBWound.getOptional("sideBWound")
 
         /**
-         * The source language of the significant event using the ISO 639-3, 3 character code
-         * definition.
+         * The source language of the significant event using the ISO 639-3, 3 character code definition.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun sourceLanguage(): Optional<String> = sourceLanguage.getOptional("sourceLanguage")
 
         /**
-         * This field records the URL or citation of the first news report it found this event in.
-         * In most cases this is the first report it saw the article in, but due to the timing and
-         * flow of news reports through the processing pipeline, this may not always be the very
-         * first report, but is at least in the first few reports.
+         * This field records the URL or citation of the first news report it found this event in. In most cases this is the first report it saw the article in, but due to the timing and flow of news reports through the processing pipeline, this may not always be the very first report, but is at least in the first few reports.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun sourceUrl(): Optional<String> = sourceUrl.getOptional("sourceUrl")
 
         /**
          * A summary of the event.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun summary(): Optional<String> = summary.getOptional("summary")
 
         /**
          * The name of the target. The target may be an individual, an entity, or a country/region.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun target(): Optional<String> = target.getOptional("target")
 
         /**
-         * Area in which important military events occur or are progressing. A theater can include
-         * the entirety of the airspace, land and sea area that is or that may potentially become
-         * involved in war operations.
+         * Area in which important military events occur or are progressing. A theater can include the entirety of the airspace, land and sea area that is or that may potentially become involved in war operations.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun theater(): Optional<String> = theater.getOptional("theater")
 
         /**
          * The mode of this attack or event (e.g. Direct Fire, IED Explosion, etc.).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
          */
         fun typeOfAttack(): Optional<String> = typeOfAttack.getOptional("typeOfAttack")
 
         /**
          * Returns the raw JSON value of [classificationMarking].
          *
-         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an
-         * unexpected type.
+         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("classificationMarking")
         @ExcludeMissing
@@ -1096,7 +940,9 @@ private constructor(
          *
          * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+        @JsonProperty("dataMode")
+        @ExcludeMissing
+        fun _dataMode(): JsonField<DataMode> = dataMode
 
         /**
          * Returns the raw JSON value of [reportDate].
@@ -1112,83 +958,104 @@ private constructor(
          *
          * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+        @JsonProperty("source")
+        @ExcludeMissing
+        fun _source(): JsonField<String> = source
 
         /**
          * Returns the raw JSON value of [id].
          *
          * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+        @JsonProperty("id")
+        @ExcludeMissing
+        fun _id(): JsonField<String> = id
 
         /**
          * Returns the raw JSON value of [accuracy].
          *
          * Unlike [accuracy], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("accuracy") @ExcludeMissing fun _accuracy(): JsonField<Int> = accuracy
+        @JsonProperty("accuracy")
+        @ExcludeMissing
+        fun _accuracy(): JsonField<Int> = accuracy
 
         /**
          * Returns the raw JSON value of [actors].
          *
          * Unlike [actors], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("actors") @ExcludeMissing fun _actors(): JsonField<List<String>> = actors
+        @JsonProperty("actors")
+        @ExcludeMissing
+        fun _actors(): JsonField<List<String>> = actors
 
         /**
          * Returns the raw JSON value of [agjson].
          *
          * Unlike [agjson], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("agjson") @ExcludeMissing fun _agjson(): JsonField<String> = agjson
+        @JsonProperty("agjson")
+        @ExcludeMissing
+        fun _agjson(): JsonField<String> = agjson
 
         /**
          * Returns the raw JSON value of [andims].
          *
          * Unlike [andims], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("andims") @ExcludeMissing fun _andims(): JsonField<Long> = andims
+        @JsonProperty("andims")
+        @ExcludeMissing
+        fun _andims(): JsonField<Long> = andims
 
         /**
          * Returns the raw JSON value of [area].
          *
          * Unlike [area], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("area") @ExcludeMissing fun _area(): JsonField<String> = area
+        @JsonProperty("area")
+        @ExcludeMissing
+        fun _area(): JsonField<String> = area
 
         /**
          * Returns the raw JSON value of [asrid].
          *
          * Unlike [asrid], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("asrid") @ExcludeMissing fun _asrid(): JsonField<Int> = asrid
+        @JsonProperty("asrid")
+        @ExcludeMissing
+        fun _asrid(): JsonField<Int> = asrid
 
         /**
          * Returns the raw JSON value of [atext].
          *
          * Unlike [atext], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("atext") @ExcludeMissing fun _atext(): JsonField<String> = atext
+        @JsonProperty("atext")
+        @ExcludeMissing
+        fun _atext(): JsonField<String> = atext
 
         /**
          * Returns the raw JSON value of [atype].
          *
          * Unlike [atype], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("atype") @ExcludeMissing fun _atype(): JsonField<String> = atype
+        @JsonProperty("atype")
+        @ExcludeMissing
+        fun _atype(): JsonField<String> = atype
 
         /**
          * Returns the raw JSON value of [avgTone].
          *
          * Unlike [avgTone], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("avgTone") @ExcludeMissing fun _avgTone(): JsonField<Double> = avgTone
+        @JsonProperty("avgTone")
+        @ExcludeMissing
+        fun _avgTone(): JsonField<Double> = avgTone
 
         /**
          * Returns the raw JSON value of [cameoBaseCode].
          *
-         * Unlike [cameoBaseCode], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [cameoBaseCode], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("cameoBaseCode")
         @ExcludeMissing
@@ -1199,13 +1066,14 @@ private constructor(
          *
          * Unlike [cameoCode], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("cameoCode") @ExcludeMissing fun _cameoCode(): JsonField<String> = cameoCode
+        @JsonProperty("cameoCode")
+        @ExcludeMissing
+        fun _cameoCode(): JsonField<String> = cameoCode
 
         /**
          * Returns the raw JSON value of [cameoRootCode].
          *
-         * Unlike [cameoRootCode], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [cameoRootCode], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("cameoRootCode")
         @ExcludeMissing
@@ -1214,8 +1082,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [checksumValue].
          *
-         * Unlike [checksumValue], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [checksumValue], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("checksumValue")
         @ExcludeMissing
@@ -1226,76 +1093,95 @@ private constructor(
          *
          * Unlike [city], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("city") @ExcludeMissing fun _city(): JsonField<String> = city
+        @JsonProperty("city")
+        @ExcludeMissing
+        fun _city(): JsonField<String> = city
 
         /**
          * Returns the raw JSON value of [civAbd].
          *
          * Unlike [civAbd], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("civAbd") @ExcludeMissing fun _civAbd(): JsonField<Int> = civAbd
+        @JsonProperty("civAbd")
+        @ExcludeMissing
+        fun _civAbd(): JsonField<Int> = civAbd
 
         /**
          * Returns the raw JSON value of [civDet].
          *
          * Unlike [civDet], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("civDet") @ExcludeMissing fun _civDet(): JsonField<Int> = civDet
+        @JsonProperty("civDet")
+        @ExcludeMissing
+        fun _civDet(): JsonField<Int> = civDet
 
         /**
          * Returns the raw JSON value of [civKia].
          *
          * Unlike [civKia], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("civKIA") @ExcludeMissing fun _civKia(): JsonField<Int> = civKia
+        @JsonProperty("civKIA")
+        @ExcludeMissing
+        fun _civKia(): JsonField<Int> = civKia
 
         /**
          * Returns the raw JSON value of [civWound].
          *
          * Unlike [civWound], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("civWound") @ExcludeMissing fun _civWound(): JsonField<Int> = civWound
+        @JsonProperty("civWound")
+        @ExcludeMissing
+        fun _civWound(): JsonField<Int> = civWound
 
         /**
          * Returns the raw JSON value of [clarity].
          *
          * Unlike [clarity], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("clarity") @ExcludeMissing fun _clarity(): JsonField<Int> = clarity
+        @JsonProperty("clarity")
+        @ExcludeMissing
+        fun _clarity(): JsonField<Int> = clarity
 
         /**
          * Returns the raw JSON value of [coalAbd].
          *
          * Unlike [coalAbd], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("coalAbd") @ExcludeMissing fun _coalAbd(): JsonField<Int> = coalAbd
+        @JsonProperty("coalAbd")
+        @ExcludeMissing
+        fun _coalAbd(): JsonField<Int> = coalAbd
 
         /**
          * Returns the raw JSON value of [coalDet].
          *
          * Unlike [coalDet], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("coalDet") @ExcludeMissing fun _coalDet(): JsonField<Int> = coalDet
+        @JsonProperty("coalDet")
+        @ExcludeMissing
+        fun _coalDet(): JsonField<Int> = coalDet
 
         /**
          * Returns the raw JSON value of [coalKia].
          *
          * Unlike [coalKia], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("coalKIA") @ExcludeMissing fun _coalKia(): JsonField<Int> = coalKia
+        @JsonProperty("coalKIA")
+        @ExcludeMissing
+        fun _coalKia(): JsonField<Int> = coalKia
 
         /**
          * Returns the raw JSON value of [coalWound].
          *
          * Unlike [coalWound], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("coalWound") @ExcludeMissing fun _coalWound(): JsonField<Int> = coalWound
+        @JsonProperty("coalWound")
+        @ExcludeMissing
+        fun _coalWound(): JsonField<Int> = coalWound
 
         /**
          * Returns the raw JSON value of [complexAttack].
          *
-         * Unlike [complexAttack], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [complexAttack], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("complexAttack")
         @ExcludeMissing
@@ -1306,7 +1192,9 @@ private constructor(
          *
          * Unlike [confidence], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("confidence") @ExcludeMissing fun _confidence(): JsonField<Int> = confidence
+        @JsonProperty("confidence")
+        @ExcludeMissing
+        fun _confidence(): JsonField<Int> = confidence
 
         /**
          * Returns the raw JSON value of [countryCode].
@@ -1331,20 +1219,23 @@ private constructor(
          *
          * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+        @JsonProperty("createdBy")
+        @ExcludeMissing
+        fun _createdBy(): JsonField<String> = createdBy
 
         /**
          * Returns the raw JSON value of [district].
          *
          * Unlike [district], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("district") @ExcludeMissing fun _district(): JsonField<String> = district
+        @JsonProperty("district")
+        @ExcludeMissing
+        fun _district(): JsonField<String> = district
 
         /**
          * Returns the raw JSON value of [documentFilename].
          *
-         * Unlike [documentFilename], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [documentFilename], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("documentFilename")
         @ExcludeMissing
@@ -1353,8 +1244,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [documentSource].
          *
-         * Unlike [documentSource], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [documentSource], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("documentSource")
         @ExcludeMissing
@@ -1365,27 +1255,32 @@ private constructor(
          *
          * Unlike [enemyAbd], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("enemyAbd") @ExcludeMissing fun _enemyAbd(): JsonField<Int> = enemyAbd
+        @JsonProperty("enemyAbd")
+        @ExcludeMissing
+        fun _enemyAbd(): JsonField<Int> = enemyAbd
 
         /**
          * Returns the raw JSON value of [enemyDet].
          *
          * Unlike [enemyDet], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("enemyDet") @ExcludeMissing fun _enemyDet(): JsonField<Int> = enemyDet
+        @JsonProperty("enemyDet")
+        @ExcludeMissing
+        fun _enemyDet(): JsonField<Int> = enemyDet
 
         /**
          * Returns the raw JSON value of [enemyKia].
          *
          * Unlike [enemyKia], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("enemyKIA") @ExcludeMissing fun _enemyKia(): JsonField<Int> = enemyKia
+        @JsonProperty("enemyKIA")
+        @ExcludeMissing
+        fun _enemyKia(): JsonField<Int> = enemyKia
 
         /**
          * Returns the raw JSON value of [eventDescription].
          *
-         * Unlike [eventDescription], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [eventDescription], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("eventDescription")
         @ExcludeMissing
@@ -1414,14 +1309,18 @@ private constructor(
          *
          * Unlike [eventType], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("eventType") @ExcludeMissing fun _eventType(): JsonField<String> = eventType
+        @JsonProperty("eventType")
+        @ExcludeMissing
+        fun _eventType(): JsonField<String> = eventType
 
         /**
          * Returns the raw JSON value of [filesize].
          *
          * Unlike [filesize], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("filesize") @ExcludeMissing fun _filesize(): JsonField<Long> = filesize
+        @JsonProperty("filesize")
+        @ExcludeMissing
+        fun _filesize(): JsonField<Long> = filesize
 
         /**
          * Returns the raw JSON value of [friendlyAbd].
@@ -1453,8 +1352,7 @@ private constructor(
         /**
          * Returns the raw JSON value of [friendlyWound].
          *
-         * Unlike [friendlyWound], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [friendlyWound], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("friendlyWound")
         @ExcludeMissing
@@ -1465,13 +1363,14 @@ private constructor(
          *
          * Unlike [goldstein], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("goldstein") @ExcludeMissing fun _goldstein(): JsonField<Double> = goldstein
+        @JsonProperty("goldstein")
+        @ExcludeMissing
+        fun _goldstein(): JsonField<Double> = goldstein
 
         /**
          * Returns the raw JSON value of [hasAttachment].
          *
-         * Unlike [hasAttachment], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [hasAttachment], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("hasAttachment")
         @ExcludeMissing
@@ -1482,27 +1381,32 @@ private constructor(
          *
          * Unlike [hostNatAbd], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("hostNatAbd") @ExcludeMissing fun _hostNatAbd(): JsonField<Int> = hostNatAbd
+        @JsonProperty("hostNatAbd")
+        @ExcludeMissing
+        fun _hostNatAbd(): JsonField<Int> = hostNatAbd
 
         /**
          * Returns the raw JSON value of [hostNatDet].
          *
          * Unlike [hostNatDet], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("hostNatDet") @ExcludeMissing fun _hostNatDet(): JsonField<Int> = hostNatDet
+        @JsonProperty("hostNatDet")
+        @ExcludeMissing
+        fun _hostNatDet(): JsonField<Int> = hostNatDet
 
         /**
          * Returns the raw JSON value of [hostNatKia].
          *
          * Unlike [hostNatKia], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("hostNatKIA") @ExcludeMissing fun _hostNatKia(): JsonField<Int> = hostNatKia
+        @JsonProperty("hostNatKIA")
+        @ExcludeMissing
+        fun _hostNatKia(): JsonField<Int> = hostNatKia
 
         /**
          * Returns the raw JSON value of [hostNatWound].
          *
-         * Unlike [hostNatWound], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [hostNatWound], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("hostNatWound")
         @ExcludeMissing
@@ -1513,35 +1417,45 @@ private constructor(
          *
          * Unlike [idNumber], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("idNumber") @ExcludeMissing fun _idNumber(): JsonField<String> = idNumber
+        @JsonProperty("idNumber")
+        @ExcludeMissing
+        fun _idNumber(): JsonField<String> = idNumber
 
         /**
          * Returns the raw JSON value of [lat].
          *
          * Unlike [lat], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("lat") @ExcludeMissing fun _lat(): JsonField<Double> = lat
+        @JsonProperty("lat")
+        @ExcludeMissing
+        fun _lat(): JsonField<Double> = lat
 
         /**
          * Returns the raw JSON value of [lon].
          *
          * Unlike [lon], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("lon") @ExcludeMissing fun _lon(): JsonField<Double> = lon
+        @JsonProperty("lon")
+        @ExcludeMissing
+        fun _lon(): JsonField<Double> = lon
 
         /**
          * Returns the raw JSON value of [milgrid].
          *
          * Unlike [milgrid], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("milgrid") @ExcludeMissing fun _milgrid(): JsonField<String> = milgrid
+        @JsonProperty("milgrid")
+        @ExcludeMissing
+        fun _milgrid(): JsonField<String> = milgrid
 
         /**
          * Returns the raw JSON value of [notes].
          *
          * Unlike [notes], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("notes") @ExcludeMissing fun _notes(): JsonField<String> = notes
+        @JsonProperty("notes")
+        @ExcludeMissing
+        fun _notes(): JsonField<String> = notes
 
         /**
          * Returns the raw JSON value of [numArticles].
@@ -1566,14 +1480,18 @@ private constructor(
          *
          * Unlike [numSources], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("numSources") @ExcludeMissing fun _numSources(): JsonField<Int> = numSources
+        @JsonProperty("numSources")
+        @ExcludeMissing
+        fun _numSources(): JsonField<Int> = numSources
 
         /**
          * Returns the raw JSON value of [origin].
          *
          * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+        @JsonProperty("origin")
+        @ExcludeMissing
+        fun _origin(): JsonField<String> = origin
 
         /**
          * Returns the raw JSON value of [origNetwork].
@@ -1589,7 +1507,9 @@ private constructor(
          *
          * Unlike [province], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("province") @ExcludeMissing fun _province(): JsonField<String> = province
+        @JsonProperty("province")
+        @ExcludeMissing
+        fun _province(): JsonField<String> = province
 
         /**
          * Returns the raw JSON value of [relatedDocs].
@@ -1605,13 +1525,14 @@ private constructor(
          *
          * Unlike [repUnit], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("repUnit") @ExcludeMissing fun _repUnit(): JsonField<String> = repUnit
+        @JsonProperty("repUnit")
+        @ExcludeMissing
+        fun _repUnit(): JsonField<String> = repUnit
 
         /**
          * Returns the raw JSON value of [repUnitActivity].
          *
-         * Unlike [repUnitActivity], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [repUnitActivity], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("repUnitActivity")
         @ExcludeMissing
@@ -1631,62 +1552,77 @@ private constructor(
          *
          * Unlike [sideAAbd], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("sideAAbd") @ExcludeMissing fun _sideAAbd(): JsonField<Int> = sideAAbd
+        @JsonProperty("sideAAbd")
+        @ExcludeMissing
+        fun _sideAAbd(): JsonField<Int> = sideAAbd
 
         /**
          * Returns the raw JSON value of [sideADet].
          *
          * Unlike [sideADet], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("sideADet") @ExcludeMissing fun _sideADet(): JsonField<Int> = sideADet
+        @JsonProperty("sideADet")
+        @ExcludeMissing
+        fun _sideADet(): JsonField<Int> = sideADet
 
         /**
          * Returns the raw JSON value of [sideAkia].
          *
          * Unlike [sideAkia], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("sideAKIA") @ExcludeMissing fun _sideAkia(): JsonField<Int> = sideAkia
+        @JsonProperty("sideAKIA")
+        @ExcludeMissing
+        fun _sideAkia(): JsonField<Int> = sideAkia
 
         /**
          * Returns the raw JSON value of [sideAWound].
          *
          * Unlike [sideAWound], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("sideAWound") @ExcludeMissing fun _sideAWound(): JsonField<Int> = sideAWound
+        @JsonProperty("sideAWound")
+        @ExcludeMissing
+        fun _sideAWound(): JsonField<Int> = sideAWound
 
         /**
          * Returns the raw JSON value of [sideBAbd].
          *
          * Unlike [sideBAbd], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("sideBAbd") @ExcludeMissing fun _sideBAbd(): JsonField<Int> = sideBAbd
+        @JsonProperty("sideBAbd")
+        @ExcludeMissing
+        fun _sideBAbd(): JsonField<Int> = sideBAbd
 
         /**
          * Returns the raw JSON value of [sideBDet].
          *
          * Unlike [sideBDet], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("sideBDet") @ExcludeMissing fun _sideBDet(): JsonField<Int> = sideBDet
+        @JsonProperty("sideBDet")
+        @ExcludeMissing
+        fun _sideBDet(): JsonField<Int> = sideBDet
 
         /**
          * Returns the raw JSON value of [sideBkia].
          *
          * Unlike [sideBkia], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("sideBKIA") @ExcludeMissing fun _sideBkia(): JsonField<Int> = sideBkia
+        @JsonProperty("sideBKIA")
+        @ExcludeMissing
+        fun _sideBkia(): JsonField<Int> = sideBkia
 
         /**
          * Returns the raw JSON value of [sideBWound].
          *
          * Unlike [sideBWound], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("sideBWound") @ExcludeMissing fun _sideBWound(): JsonField<Int> = sideBWound
+        @JsonProperty("sideBWound")
+        @ExcludeMissing
+        fun _sideBWound(): JsonField<Int> = sideBWound
 
         /**
          * Returns the raw JSON value of [sourceLanguage].
          *
-         * Unlike [sourceLanguage], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [sourceLanguage], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("sourceLanguage")
         @ExcludeMissing
@@ -1697,34 +1633,41 @@ private constructor(
          *
          * Unlike [sourceUrl], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("sourceUrl") @ExcludeMissing fun _sourceUrl(): JsonField<String> = sourceUrl
+        @JsonProperty("sourceUrl")
+        @ExcludeMissing
+        fun _sourceUrl(): JsonField<String> = sourceUrl
 
         /**
          * Returns the raw JSON value of [summary].
          *
          * Unlike [summary], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("summary") @ExcludeMissing fun _summary(): JsonField<String> = summary
+        @JsonProperty("summary")
+        @ExcludeMissing
+        fun _summary(): JsonField<String> = summary
 
         /**
          * Returns the raw JSON value of [target].
          *
          * Unlike [target], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("target") @ExcludeMissing fun _target(): JsonField<String> = target
+        @JsonProperty("target")
+        @ExcludeMissing
+        fun _target(): JsonField<String> = target
 
         /**
          * Returns the raw JSON value of [theater].
          *
          * Unlike [theater], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("theater") @ExcludeMissing fun _theater(): JsonField<String> = theater
+        @JsonProperty("theater")
+        @ExcludeMissing
+        fun _theater(): JsonField<String> = theater
 
         /**
          * Returns the raw JSON value of [typeOfAttack].
          *
-         * Unlike [typeOfAttack], this method doesn't throw if the JSON field has an unexpected
-         * type.
+         * Unlike [typeOfAttack], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("typeOfAttack")
         @ExcludeMissing
@@ -1738,6 +1681,7 @@ private constructor(
              * Returns a mutable builder for constructing an instance of [Body].
              *
              * The following fields are required:
+             *
              * ```java
              * .classificationMarking()
              * .dataMode()
@@ -1745,7 +1689,8 @@ private constructor(
              * .source()
              * ```
              */
-            @JvmStatic fun builder() = Builder()
+            @JvmStatic
+            fun builder() = Builder()
         }
 
         /** A builder for [Body]. */
@@ -1836,132 +1781,130 @@ private constructor(
             private var typeOfAttack: JsonField<String> = JsonMissing.of()
 
             @JvmSynthetic
-            internal fun from(body: Body) = apply {
-                classificationMarking = body.classificationMarking
-                dataMode = body.dataMode
-                reportDate = body.reportDate
-                source = body.source
-                id = body.id
-                accuracy = body.accuracy
-                actors = body.actors.map { it.toMutableList() }
-                agjson = body.agjson
-                andims = body.andims
-                area = body.area
-                asrid = body.asrid
-                atext = body.atext
-                atype = body.atype
-                avgTone = body.avgTone
-                cameoBaseCode = body.cameoBaseCode
-                cameoCode = body.cameoCode
-                cameoRootCode = body.cameoRootCode
-                checksumValue = body.checksumValue
-                city = body.city
-                civAbd = body.civAbd
-                civDet = body.civDet
-                civKia = body.civKia
-                civWound = body.civWound
-                clarity = body.clarity
-                coalAbd = body.coalAbd
-                coalDet = body.coalDet
-                coalKia = body.coalKia
-                coalWound = body.coalWound
-                complexAttack = body.complexAttack
-                confidence = body.confidence
-                countryCode = body.countryCode
-                createdAt = body.createdAt
-                createdBy = body.createdBy
-                district = body.district
-                documentFilename = body.documentFilename
-                documentSource = body.documentSource
-                enemyAbd = body.enemyAbd
-                enemyDet = body.enemyDet
-                enemyKia = body.enemyKia
-                eventDescription = body.eventDescription
-                eventEnd = body.eventEnd
-                eventStart = body.eventStart
-                eventType = body.eventType
-                filesize = body.filesize
-                friendlyAbd = body.friendlyAbd
-                friendlyDet = body.friendlyDet
-                friendlyKia = body.friendlyKia
-                friendlyWound = body.friendlyWound
-                goldstein = body.goldstein
-                hasAttachment = body.hasAttachment
-                hostNatAbd = body.hostNatAbd
-                hostNatDet = body.hostNatDet
-                hostNatKia = body.hostNatKia
-                hostNatWound = body.hostNatWound
-                idNumber = body.idNumber
-                lat = body.lat
-                lon = body.lon
-                milgrid = body.milgrid
-                notes = body.notes
-                numArticles = body.numArticles
-                numMentions = body.numMentions
-                numSources = body.numSources
-                origin = body.origin
-                origNetwork = body.origNetwork
-                province = body.province
-                relatedDocs = body.relatedDocs.map { it.toMutableList() }
-                repUnit = body.repUnit
-                repUnitActivity = body.repUnitActivity
-                repUnitType = body.repUnitType
-                sideAAbd = body.sideAAbd
-                sideADet = body.sideADet
-                sideAkia = body.sideAkia
-                sideAWound = body.sideAWound
-                sideBAbd = body.sideBAbd
-                sideBDet = body.sideBDet
-                sideBkia = body.sideBkia
-                sideBWound = body.sideBWound
-                sourceLanguage = body.sourceLanguage
-                sourceUrl = body.sourceUrl
-                summary = body.summary
-                target = body.target
-                theater = body.theater
-                typeOfAttack = body.typeOfAttack
-            }
+            internal fun from(body: Body) =
+                apply {
+                    classificationMarking = body.classificationMarking
+                    dataMode = body.dataMode
+                    reportDate = body.reportDate
+                    source = body.source
+                    id = body.id
+                    accuracy = body.accuracy
+                    actors = body.actors.map { it.toMutableList() }
+                    agjson = body.agjson
+                    andims = body.andims
+                    area = body.area
+                    asrid = body.asrid
+                    atext = body.atext
+                    atype = body.atype
+                    avgTone = body.avgTone
+                    cameoBaseCode = body.cameoBaseCode
+                    cameoCode = body.cameoCode
+                    cameoRootCode = body.cameoRootCode
+                    checksumValue = body.checksumValue
+                    city = body.city
+                    civAbd = body.civAbd
+                    civDet = body.civDet
+                    civKia = body.civKia
+                    civWound = body.civWound
+                    clarity = body.clarity
+                    coalAbd = body.coalAbd
+                    coalDet = body.coalDet
+                    coalKia = body.coalKia
+                    coalWound = body.coalWound
+                    complexAttack = body.complexAttack
+                    confidence = body.confidence
+                    countryCode = body.countryCode
+                    createdAt = body.createdAt
+                    createdBy = body.createdBy
+                    district = body.district
+                    documentFilename = body.documentFilename
+                    documentSource = body.documentSource
+                    enemyAbd = body.enemyAbd
+                    enemyDet = body.enemyDet
+                    enemyKia = body.enemyKia
+                    eventDescription = body.eventDescription
+                    eventEnd = body.eventEnd
+                    eventStart = body.eventStart
+                    eventType = body.eventType
+                    filesize = body.filesize
+                    friendlyAbd = body.friendlyAbd
+                    friendlyDet = body.friendlyDet
+                    friendlyKia = body.friendlyKia
+                    friendlyWound = body.friendlyWound
+                    goldstein = body.goldstein
+                    hasAttachment = body.hasAttachment
+                    hostNatAbd = body.hostNatAbd
+                    hostNatDet = body.hostNatDet
+                    hostNatKia = body.hostNatKia
+                    hostNatWound = body.hostNatWound
+                    idNumber = body.idNumber
+                    lat = body.lat
+                    lon = body.lon
+                    milgrid = body.milgrid
+                    notes = body.notes
+                    numArticles = body.numArticles
+                    numMentions = body.numMentions
+                    numSources = body.numSources
+                    origin = body.origin
+                    origNetwork = body.origNetwork
+                    province = body.province
+                    relatedDocs = body.relatedDocs.map { it.toMutableList() }
+                    repUnit = body.repUnit
+                    repUnitActivity = body.repUnitActivity
+                    repUnitType = body.repUnitType
+                    sideAAbd = body.sideAAbd
+                    sideADet = body.sideADet
+                    sideAkia = body.sideAkia
+                    sideAWound = body.sideAWound
+                    sideBAbd = body.sideBAbd
+                    sideBDet = body.sideBDet
+                    sideBkia = body.sideBkia
+                    sideBWound = body.sideBWound
+                    sourceLanguage = body.sourceLanguage
+                    sourceUrl = body.sourceUrl
+                    summary = body.summary
+                    target = body.target
+                    theater = body.theater
+                    typeOfAttack = body.typeOfAttack
+                }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-            fun classificationMarking(classificationMarking: String) =
-                classificationMarking(JsonField.of(classificationMarking))
+            fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
 
             /**
              * Sets [Builder.classificationMarking] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.classificationMarking] with a well-typed [String]
-             * value instead. This method is primarily for setting the field to an undocumented or
-             * not yet supported value.
+             * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun classificationMarking(classificationMarking: JsonField<String>) = apply {
-                this.classificationMarking = classificationMarking
-            }
+            fun classificationMarking(classificationMarking: JsonField<String>) =
+                apply {
+                    this.classificationMarking = classificationMarking
+                }
 
             /**
              * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
              *
-             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may
-             * include both real and simulated data.
+             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
              *
-             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events,
-             * and analysis.
+             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
              *
              * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
              *
-             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-             * requirements, and for validating technical, functional, and performance
-             * characteristics.
+             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
              */
             fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
             /**
              * Sets [Builder.dataMode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+            fun dataMode(dataMode: JsonField<DataMode>) =
+                apply {
+                    this.dataMode = dataMode
+                }
 
             /** Date of the report or filing. */
             fun reportDate(reportDate: OffsetDateTime) = reportDate(JsonField.of(reportDate))
@@ -1969,13 +1912,13 @@ private constructor(
             /**
              * Sets [Builder.reportDate] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.reportDate] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.reportDate] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun reportDate(reportDate: JsonField<OffsetDateTime>) = apply {
-                this.reportDate = reportDate
-            }
+            fun reportDate(reportDate: JsonField<OffsetDateTime>) =
+                apply {
+                    this.reportDate = reportDate
+                }
 
             /** Source of the data. */
             fun source(source: String) = source(JsonField.of(source))
@@ -1983,11 +1926,13 @@ private constructor(
             /**
              * Sets [Builder.source] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.source] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun source(source: JsonField<String>) = apply { this.source = source }
+            fun source(source: JsonField<String>) =
+                apply {
+                    this.source = source
+                }
 
             /** Unique identifier of the record, auto-generated by the system. */
             fun id(id: String) = id(JsonField.of(id))
@@ -1995,11 +1940,13 @@ private constructor(
             /**
              * Sets [Builder.id] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.id] with a well-typed [String] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun id(id: JsonField<String>) = apply { this.id = id }
+            fun id(id: JsonField<String>) =
+                apply {
+                    this.id = id
+                }
 
             /** Estimate of the accuracy that this event occurred as described/reported. */
             fun accuracy(accuracy: Int) = accuracy(JsonField.of(accuracy))
@@ -2007,11 +1954,13 @@ private constructor(
             /**
              * Sets [Builder.accuracy] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.accuracy] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.accuracy] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun accuracy(accuracy: JsonField<Int>) = apply { this.accuracy = accuracy }
+            fun accuracy(accuracy: JsonField<Int>) =
+                apply {
+                    this.accuracy = accuracy
+                }
 
             /** A list of one or more actors involved in the event. */
             fun actors(actors: List<String>) = actors(JsonField.of(actors))
@@ -2019,42 +1968,39 @@ private constructor(
             /**
              * Sets [Builder.actors] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.actors] with a well-typed `List<String>` value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.actors] with a well-typed `List<String>` value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun actors(actors: JsonField<List<String>>) = apply {
-                this.actors = actors.map { it.toMutableList() }
-            }
+            fun actors(actors: JsonField<List<String>>) =
+                apply {
+                    this.actors = actors.map { it.toMutableList() }
+                }
 
             /**
              * Adds a single [String] to [actors].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addActor(actor: String) = apply {
-                actors =
-                    (actors ?: JsonField.of(mutableListOf())).also {
+            fun addActor(actor: String) =
+                apply {
+                    actors = (actors ?: JsonField.of(mutableListOf())).also {
                         checkKnown("actors", it).add(actor)
                     }
-            }
+                }
 
-            /**
-             * Geographical region or polygon (lat/lon pairs), as depicted by the GeoJSON
-             * representation of the geometry/geography, of the image as projected on the ground.
-             * GeoJSON Reference: https://geojson.org/. Ignored if included with a POST or PUT
-             * request that also specifies a valid 'area' or 'atext' field.
-             */
+            /** Geographical region or polygon (lat/lon pairs), as depicted by the GeoJSON representation of the geometry/geography, of the image as projected on the ground. GeoJSON Reference: https://geojson.org/. Ignored if included with a POST or PUT request that also specifies a valid 'area' or 'atext' field. */
             fun agjson(agjson: String) = agjson(JsonField.of(agjson))
 
             /**
              * Sets [Builder.agjson] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.agjson] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.agjson] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun agjson(agjson: JsonField<String>) = apply { this.agjson = agjson }
+            fun agjson(agjson: JsonField<String>) =
+                apply {
+                    this.agjson = agjson
+                }
 
             /** Number of dimensions of the geometry depicted by region. */
             fun andims(andims: Long) = andims(JsonField.of(andims))
@@ -2062,26 +2008,27 @@ private constructor(
             /**
              * Sets [Builder.andims] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.andims] with a well-typed [Long] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.andims] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun andims(andims: JsonField<Long>) = apply { this.andims = andims }
+            fun andims(andims: JsonField<Long>) =
+                apply {
+                    this.andims = andims
+                }
 
-            /**
-             * Optional geographical region or polygon (lat/lon pairs) of the area surrounding the
-             * point of interest as projected on the ground.
-             */
+            /** Optional geographical region or polygon (lat/lon pairs) of the area surrounding the point of interest as projected on the ground. */
             fun area(area: String) = area(JsonField.of(area))
 
             /**
              * Sets [Builder.area] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.area] with a well-typed [String] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.area] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun area(area: JsonField<String>) = apply { this.area = area }
+            fun area(area: JsonField<String>) =
+                apply {
+                    this.area = area
+                }
 
             /** Geographical spatial_ref_sys for region. */
             fun asrid(asrid: Int) = asrid(JsonField.of(asrid))
@@ -2089,28 +2036,27 @@ private constructor(
             /**
              * Sets [Builder.asrid] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.asrid] with a well-typed [Int] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.asrid] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun asrid(asrid: JsonField<Int>) = apply { this.asrid = asrid }
+            fun asrid(asrid: JsonField<Int>) =
+                apply {
+                    this.asrid = asrid
+                }
 
-            /**
-             * Geographical region or polygon (lon/lat pairs), as depicted by the Well-Known Text
-             * representation of the geometry/geography, of the image as projected on the ground.
-             * WKT reference: https://www.opengeospatial.org/standards/wkt-crs. Ignored if included
-             * with a POST or PUT request that also specifies a valid 'area' field.
-             */
+            /** Geographical region or polygon (lon/lat pairs), as depicted by the Well-Known Text representation of the geometry/geography, of the image as projected on the ground. WKT reference: https://www.opengeospatial.org/standards/wkt-crs. Ignored if included with a POST or PUT request that also specifies a valid 'area' field. */
             fun atext(atext: String) = atext(JsonField.of(atext))
 
             /**
              * Sets [Builder.atext] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.atext] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.atext] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun atext(atext: JsonField<String>) = apply { this.atext = atext }
+            fun atext(atext: JsonField<String>) =
+                apply {
+                    this.atext = atext
+                }
 
             /** Type of region as projected on the ground. */
             fun atype(atype: String) = atype(JsonField.of(atype))
@@ -2118,101 +2064,83 @@ private constructor(
             /**
              * Sets [Builder.atype] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.atype] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.atype] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun atype(atype: JsonField<String>) = apply { this.atype = atype }
+            fun atype(atype: JsonField<String>) =
+                apply {
+                    this.atype = atype
+                }
 
-            /**
-             * This is the average tone of all documents containing one or more mentions of this
-             * event during the 15 minute update in which it was first seen. The score ranges from
-             * -100 (extremely negative) to +100 (extremely positive). Common values range between
-             * -10 and +10, with 0 indicating neutral.
-             */
+            /** This is the average tone of all documents containing one or more mentions of this event during the 15 minute update in which it was first seen. The score ranges from -100 (extremely negative) to +100 (extremely positive). Common values range between -10 and +10, with 0 indicating neutral. */
             fun avgTone(avgTone: Double) = avgTone(JsonField.of(avgTone))
 
             /**
              * Sets [Builder.avgTone] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.avgTone] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.avgTone] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun avgTone(avgTone: JsonField<Double>) = apply { this.avgTone = avgTone }
+            fun avgTone(avgTone: JsonField<Double>) =
+                apply {
+                    this.avgTone = avgTone
+                }
 
-            /**
-             * CAMEO event codes are defined in a three-level taxonomy. For events at level three in
-             * the taxonomy, this yields its level two leaf root node. For example, code 0251
-             * (Appeal for easing of administrative sanctions) would yield an EventBaseCode of 025
-             * (Appeal to yield). This makes it possible to aggregate events at various resolutions
-             * of specificity. For events at levels two or one, this field will be set to EventCode.
-             */
+            /** CAMEO event codes are defined in a three-level taxonomy. For events at level three in the taxonomy, this yields its level two leaf root node. For example, code 0251 (Appeal for easing of administrative sanctions) would yield an EventBaseCode of 025 (Appeal to yield). This makes it possible to aggregate events at various resolutions of specificity. For events at levels two or one, this field will be set to EventCode. */
             fun cameoBaseCode(cameoBaseCode: String) = cameoBaseCode(JsonField.of(cameoBaseCode))
 
             /**
              * Sets [Builder.cameoBaseCode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.cameoBaseCode] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.cameoBaseCode] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun cameoBaseCode(cameoBaseCode: JsonField<String>) = apply {
-                this.cameoBaseCode = cameoBaseCode
-            }
+            fun cameoBaseCode(cameoBaseCode: JsonField<String>) =
+                apply {
+                    this.cameoBaseCode = cameoBaseCode
+                }
 
-            /**
-             * This is the raw CAMEO action code describing the action that Actor1 performed upon
-             * Actor2. Additional information about Cameo Codes can be obtained from the GDELT
-             * project documentation here: https://www.gdeltproject.org/data.html#documentation.
-             */
+            /** This is the raw CAMEO action code describing the action that Actor1 performed upon Actor2. Additional information about Cameo Codes can be obtained from the GDELT project documentation here: https://www.gdeltproject.org/data.html#documentation. */
             fun cameoCode(cameoCode: String) = cameoCode(JsonField.of(cameoCode))
 
             /**
              * Sets [Builder.cameoCode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.cameoCode] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.cameoCode] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun cameoCode(cameoCode: JsonField<String>) = apply { this.cameoCode = cameoCode }
+            fun cameoCode(cameoCode: JsonField<String>) =
+                apply {
+                    this.cameoCode = cameoCode
+                }
 
-            /**
-             * Similar to EventBaseCode, this defines the root-level category the event code falls
-             * under. For example, code 0251 (Appeal for easing of administrative sanctions) has a
-             * root code of 02 (Appeal). This makes it possible to aggregate events at various
-             * resolutions of specificity. For events at levels two or one, this field will be set
-             * to EventCode.
-             */
+            /** Similar to EventBaseCode, this defines the root-level category the event code falls under. For example, code 0251 (Appeal for easing of administrative sanctions) has a root code of 02 (Appeal). This makes it possible to aggregate events at various resolutions of specificity. For events at levels two or one, this field will be set to EventCode. */
             fun cameoRootCode(cameoRootCode: String) = cameoRootCode(JsonField.of(cameoRootCode))
 
             /**
              * Sets [Builder.cameoRootCode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.cameoRootCode] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.cameoRootCode] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun cameoRootCode(cameoRootCode: JsonField<String>) = apply {
-                this.cameoRootCode = cameoRootCode
-            }
+            fun cameoRootCode(cameoRootCode: JsonField<String>) =
+                apply {
+                    this.cameoRootCode = cameoRootCode
+                }
 
-            /**
-             * MD5 value of the file. The ingest/create operation will automatically generate the
-             * value.
-             */
+            /** MD5 value of the file. The ingest/create operation will automatically generate the value. */
             fun checksumValue(checksumValue: String) = checksumValue(JsonField.of(checksumValue))
 
             /**
              * Sets [Builder.checksumValue] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.checksumValue] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.checksumValue] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun checksumValue(checksumValue: JsonField<String>) = apply {
-                this.checksumValue = checksumValue
-            }
+            fun checksumValue(checksumValue: JsonField<String>) =
+                apply {
+                    this.checksumValue = checksumValue
+                }
 
             /** The city in or near which this event occurred. */
             fun city(city: String) = city(JsonField.of(city))
@@ -2220,11 +2148,13 @@ private constructor(
             /**
              * Sets [Builder.city] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.city] with a well-typed [String] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.city] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun city(city: JsonField<String>) = apply { this.city = city }
+            fun city(city: JsonField<String>) =
+                apply {
+                    this.city = city
+                }
 
             /** Number of civilians abducted in the activity. */
             fun civAbd(civAbd: Int) = civAbd(JsonField.of(civAbd))
@@ -2232,11 +2162,13 @@ private constructor(
             /**
              * Sets [Builder.civAbd] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.civAbd] with a well-typed [Int] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.civAbd] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun civAbd(civAbd: JsonField<Int>) = apply { this.civAbd = civAbd }
+            fun civAbd(civAbd: JsonField<Int>) =
+                apply {
+                    this.civAbd = civAbd
+                }
 
             /** Number of civilians detained in the activity. */
             fun civDet(civDet: Int) = civDet(JsonField.of(civDet))
@@ -2244,11 +2176,13 @@ private constructor(
             /**
              * Sets [Builder.civDet] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.civDet] with a well-typed [Int] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.civDet] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun civDet(civDet: JsonField<Int>) = apply { this.civDet = civDet }
+            fun civDet(civDet: JsonField<Int>) =
+                apply {
+                    this.civDet = civDet
+                }
 
             /** Number of civilians killed in the activity. */
             fun civKia(civKia: Int) = civKia(JsonField.of(civKia))
@@ -2256,11 +2190,13 @@ private constructor(
             /**
              * Sets [Builder.civKia] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.civKia] with a well-typed [Int] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.civKia] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun civKia(civKia: JsonField<Int>) = apply { this.civKia = civKia }
+            fun civKia(civKia: JsonField<Int>) =
+                apply {
+                    this.civKia = civKia
+                }
 
             /** Number of civilians wounded in the activity. */
             fun civWound(civWound: Int) = civWound(JsonField.of(civWound))
@@ -2268,34 +2204,31 @@ private constructor(
             /**
              * Sets [Builder.civWound] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.civWound] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.civWound] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun civWound(civWound: JsonField<Int>) = apply { this.civWound = civWound }
+            fun civWound(civWound: JsonField<Int>) =
+                apply {
+                    this.civWound = civWound
+                }
 
             /**
-             * 1 (high) for events where the reporting allows the coder to identify the event in
-             * full. That is, events where the individual happening is described by the original
-             * source in a sufficiently detailed way as to identify individual incidents, i.e.
-             * separate activities of fighting in a single location:
+             * 1 (high) for events where the reporting allows the coder to identify the event in full. That is, events where the individual happening is described by the original source in a sufficiently detailed way as to identify individual incidents, i.e. separate activities of fighting in a single location:
              *
-             * 2 (lower) for events where an aggregation of information was already made by the
-             * source material that is impossible to undo in the coding process. Such events are
-             * described by the original source only as aggregates (totals) of multiple separate
-             * activities of fighting spanning over a longer period than a single, clearly defined
-             * day.
+             * 2 (lower) for events where an aggregation of information was already made by the source material that is impossible to undo in the coding process. Such events are described by the original source only as aggregates (totals) of multiple separate activities of fighting spanning over a longer period than a single, clearly defined day.
              */
             fun clarity(clarity: Int) = clarity(JsonField.of(clarity))
 
             /**
              * Sets [Builder.clarity] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.clarity] with a well-typed [Int] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.clarity] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun clarity(clarity: JsonField<Int>) = apply { this.clarity = clarity }
+            fun clarity(clarity: JsonField<Int>) =
+                apply {
+                    this.clarity = clarity
+                }
 
             /** Number of coalition members abducted in the activity. */
             fun coalAbd(coalAbd: Int) = coalAbd(JsonField.of(coalAbd))
@@ -2303,11 +2236,13 @@ private constructor(
             /**
              * Sets [Builder.coalAbd] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.coalAbd] with a well-typed [Int] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.coalAbd] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun coalAbd(coalAbd: JsonField<Int>) = apply { this.coalAbd = coalAbd }
+            fun coalAbd(coalAbd: JsonField<Int>) =
+                apply {
+                    this.coalAbd = coalAbd
+                }
 
             /** Number of coalition members detained in the activity. */
             fun coalDet(coalDet: Int) = coalDet(JsonField.of(coalDet))
@@ -2315,11 +2250,13 @@ private constructor(
             /**
              * Sets [Builder.coalDet] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.coalDet] with a well-typed [Int] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.coalDet] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun coalDet(coalDet: JsonField<Int>) = apply { this.coalDet = coalDet }
+            fun coalDet(coalDet: JsonField<Int>) =
+                apply {
+                    this.coalDet = coalDet
+                }
 
             /** Number of coalition members killed in the activity. */
             fun coalKia(coalKia: Int) = coalKia(JsonField.of(coalKia))
@@ -2327,11 +2264,13 @@ private constructor(
             /**
              * Sets [Builder.coalKia] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.coalKia] with a well-typed [Int] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.coalKia] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun coalKia(coalKia: JsonField<Int>) = apply { this.coalKia = coalKia }
+            fun coalKia(coalKia: JsonField<Int>) =
+                apply {
+                    this.coalKia = coalKia
+                }
 
             /** Number of coalition members wounded in the activity. */
             fun coalWound(coalWound: Int) = coalWound(JsonField.of(coalWound))
@@ -2339,11 +2278,13 @@ private constructor(
             /**
              * Sets [Builder.coalWound] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.coalWound] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.coalWound] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun coalWound(coalWound: JsonField<Int>) = apply { this.coalWound = coalWound }
+            fun coalWound(coalWound: JsonField<Int>) =
+                apply {
+                    this.coalWound = coalWound
+                }
 
             /** Flag indicating that this attack was of a complex or coordinated nature. */
             fun complexAttack(complexAttack: Boolean) = complexAttack(JsonField.of(complexAttack))
@@ -2351,13 +2292,13 @@ private constructor(
             /**
              * Sets [Builder.complexAttack] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.complexAttack] with a well-typed [Boolean] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.complexAttack] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun complexAttack(complexAttack: JsonField<Boolean>) = apply {
-                this.complexAttack = complexAttack
-            }
+            fun complexAttack(complexAttack: JsonField<Boolean>) =
+                apply {
+                    this.complexAttack = complexAttack
+                }
 
             /** Estimate of the confidence that this event occurred. */
             fun confidence(confidence: Int) = confidence(JsonField.of(confidence))
@@ -2365,62 +2306,55 @@ private constructor(
             /**
              * Sets [Builder.confidence] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.confidence] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.confidence] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun confidence(confidence: JsonField<Int>) = apply { this.confidence = confidence }
+            fun confidence(confidence: JsonField<Int>) =
+                apply {
+                    this.confidence = confidence
+                }
 
-            /**
-             * The country code. This value is typically the ISO 3166 Alpha-2 two-character country
-             * code, however it can also represent various consortiums that do not appear in the ISO
-             * document. The code must correspond to an existing country in the UDL’s country API.
-             * Call udl/country/{code} to get any associated FIPS code, ISO Alpha-3 code, or
-             * alternate code values that exist for the specified country code.
-             */
+            /** The country code. This value is typically the ISO 3166 Alpha-2 two-character country code, however it can also represent various consortiums that do not appear in the ISO document. The code must correspond to an existing country in the UDL’s country API. Call udl/country/{code} to get any associated FIPS code, ISO Alpha-3 code, or alternate code values that exist for the specified country code. */
             fun countryCode(countryCode: String) = countryCode(JsonField.of(countryCode))
 
             /**
              * Sets [Builder.countryCode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.countryCode] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.countryCode] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun countryCode(countryCode: JsonField<String>) = apply {
-                this.countryCode = countryCode
-            }
+            fun countryCode(countryCode: JsonField<String>) =
+                apply {
+                    this.countryCode = countryCode
+                }
 
-            /**
-             * Time the row was created in the database, auto-populated by the system, example =
-             * 2018-01-01T16:00:00.123Z.
-             */
+            /** Time the row was created in the database, auto-populated by the system, example = 2018-01-01T16:00:00.123Z. */
             fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
 
             /**
              * Sets [Builder.createdAt] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply {
-                this.createdAt = createdAt
-            }
+            fun createdAt(createdAt: JsonField<OffsetDateTime>) =
+                apply {
+                    this.createdAt = createdAt
+                }
 
-            /**
-             * Application user who created the row in the database, auto-populated by the system.
-             */
+            /** Application user who created the row in the database, auto-populated by the system. */
             fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
 
             /**
              * Sets [Builder.createdBy] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+            fun createdBy(createdBy: JsonField<String>) =
+                apply {
+                    this.createdBy = createdBy
+                }
 
             /** The district in which this event occurred. */
             fun district(district: String) = district(JsonField.of(district))
@@ -2428,41 +2362,41 @@ private constructor(
             /**
              * Sets [Builder.district] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.district] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.district] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun district(district: JsonField<String>) = apply { this.district = district }
+            fun district(district: JsonField<String>) =
+                apply {
+                    this.district = district
+                }
 
             /** The filename of the document or report. */
-            fun documentFilename(documentFilename: String) =
-                documentFilename(JsonField.of(documentFilename))
+            fun documentFilename(documentFilename: String) = documentFilename(JsonField.of(documentFilename))
 
             /**
              * Sets [Builder.documentFilename] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.documentFilename] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.documentFilename] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun documentFilename(documentFilename: JsonField<String>) = apply {
-                this.documentFilename = documentFilename
-            }
+            fun documentFilename(documentFilename: JsonField<String>) =
+                apply {
+                    this.documentFilename = documentFilename
+                }
 
             /** The source of the document or report. */
-            fun documentSource(documentSource: String) =
-                documentSource(JsonField.of(documentSource))
+            fun documentSource(documentSource: String) = documentSource(JsonField.of(documentSource))
 
             /**
              * Sets [Builder.documentSource] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.documentSource] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.documentSource] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun documentSource(documentSource: JsonField<String>) = apply {
-                this.documentSource = documentSource
-            }
+            fun documentSource(documentSource: JsonField<String>) =
+                apply {
+                    this.documentSource = documentSource
+                }
 
             /** Number of enemy combatants abducted in the activity. */
             fun enemyAbd(enemyAbd: Int) = enemyAbd(JsonField.of(enemyAbd))
@@ -2470,11 +2404,13 @@ private constructor(
             /**
              * Sets [Builder.enemyAbd] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.enemyAbd] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.enemyAbd] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun enemyAbd(enemyAbd: JsonField<Int>) = apply { this.enemyAbd = enemyAbd }
+            fun enemyAbd(enemyAbd: JsonField<Int>) =
+                apply {
+                    this.enemyAbd = enemyAbd
+                }
 
             /** Number of enemy combatants detained in the activity. */
             fun enemyDet(enemyDet: Int) = enemyDet(JsonField.of(enemyDet))
@@ -2482,11 +2418,13 @@ private constructor(
             /**
              * Sets [Builder.enemyDet] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.enemyDet] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.enemyDet] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun enemyDet(enemyDet: JsonField<Int>) = apply { this.enemyDet = enemyDet }
+            fun enemyDet(enemyDet: JsonField<Int>) =
+                apply {
+                    this.enemyDet = enemyDet
+                }
 
             /** Number of enemy combatants killed in the activity. */
             fun enemyKia(enemyKia: Int) = enemyKia(JsonField.of(enemyKia))
@@ -2494,26 +2432,27 @@ private constructor(
             /**
              * Sets [Builder.enemyKia] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.enemyKia] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.enemyKia] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun enemyKia(enemyKia: JsonField<Int>) = apply { this.enemyKia = enemyKia }
+            fun enemyKia(enemyKia: JsonField<Int>) =
+                apply {
+                    this.enemyKia = enemyKia
+                }
 
             /** A description of the event. */
-            fun eventDescription(eventDescription: String) =
-                eventDescription(JsonField.of(eventDescription))
+            fun eventDescription(eventDescription: String) = eventDescription(JsonField.of(eventDescription))
 
             /**
              * Sets [Builder.eventDescription] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.eventDescription] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.eventDescription] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun eventDescription(eventDescription: JsonField<String>) = apply {
-                this.eventDescription = eventDescription
-            }
+            fun eventDescription(eventDescription: JsonField<String>) =
+                apply {
+                    this.eventDescription = eventDescription
+                }
 
             /** The approximate end time of the event, in ISO 8601 UTC format. */
             fun eventEnd(eventEnd: OffsetDateTime) = eventEnd(JsonField.of(eventEnd))
@@ -2521,11 +2460,13 @@ private constructor(
             /**
              * Sets [Builder.eventEnd] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.eventEnd] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.eventEnd] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun eventEnd(eventEnd: JsonField<OffsetDateTime>) = apply { this.eventEnd = eventEnd }
+            fun eventEnd(eventEnd: JsonField<OffsetDateTime>) =
+                apply {
+                    this.eventEnd = eventEnd
+                }
 
             /** The approximate start time of the event, in ISO 8601 UTC format. */
             fun eventStart(eventStart: OffsetDateTime) = eventStart(JsonField.of(eventStart))
@@ -2533,13 +2474,13 @@ private constructor(
             /**
              * Sets [Builder.eventStart] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.eventStart] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.eventStart] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun eventStart(eventStart: JsonField<OffsetDateTime>) = apply {
-                this.eventStart = eventStart
-            }
+            fun eventStart(eventStart: JsonField<OffsetDateTime>) =
+                apply {
+                    this.eventStart = eventStart
+                }
 
             /** The type of event (e.g. Military, Natural, Political, Social, etc.). */
             fun eventType(eventType: String) = eventType(JsonField.of(eventType))
@@ -2547,26 +2488,27 @@ private constructor(
             /**
              * Sets [Builder.eventType] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.eventType] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.eventType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun eventType(eventType: JsonField<String>) = apply { this.eventType = eventType }
+            fun eventType(eventType: JsonField<String>) =
+                apply {
+                    this.eventType = eventType
+                }
 
-            /**
-             * Size of the associated text file. Units in bytes. If filesize is provided without an
-             * associated file, it defaults to 0.
-             */
+            /** Size of the associated text file. Units in bytes. If filesize is provided without an associated file, it defaults to 0. */
             fun filesize(filesize: Long) = filesize(JsonField.of(filesize))
 
             /**
              * Sets [Builder.filesize] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.filesize] with a well-typed [Long] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.filesize] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun filesize(filesize: JsonField<Long>) = apply { this.filesize = filesize }
+            fun filesize(filesize: JsonField<Long>) =
+                apply {
+                    this.filesize = filesize
+                }
 
             /** Number of friendlies abducted in the activity. */
             fun friendlyAbd(friendlyAbd: Int) = friendlyAbd(JsonField.of(friendlyAbd))
@@ -2574,11 +2516,13 @@ private constructor(
             /**
              * Sets [Builder.friendlyAbd] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.friendlyAbd] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.friendlyAbd] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun friendlyAbd(friendlyAbd: JsonField<Int>) = apply { this.friendlyAbd = friendlyAbd }
+            fun friendlyAbd(friendlyAbd: JsonField<Int>) =
+                apply {
+                    this.friendlyAbd = friendlyAbd
+                }
 
             /** Number of friendlies in the activity. */
             fun friendlyDet(friendlyDet: Int) = friendlyDet(JsonField.of(friendlyDet))
@@ -2586,11 +2530,13 @@ private constructor(
             /**
              * Sets [Builder.friendlyDet] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.friendlyDet] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.friendlyDet] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun friendlyDet(friendlyDet: JsonField<Int>) = apply { this.friendlyDet = friendlyDet }
+            fun friendlyDet(friendlyDet: JsonField<Int>) =
+                apply {
+                    this.friendlyDet = friendlyDet
+                }
 
             /** Number of friendlies killed in the activity. */
             fun friendlyKia(friendlyKia: Int) = friendlyKia(JsonField.of(friendlyKia))
@@ -2598,11 +2544,13 @@ private constructor(
             /**
              * Sets [Builder.friendlyKia] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.friendlyKia] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.friendlyKia] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun friendlyKia(friendlyKia: JsonField<Int>) = apply { this.friendlyKia = friendlyKia }
+            fun friendlyKia(friendlyKia: JsonField<Int>) =
+                apply {
+                    this.friendlyKia = friendlyKia
+                }
 
             /** Number of friendlies wounded in the activity. */
             fun friendlyWound(friendlyWound: Int) = friendlyWound(JsonField.of(friendlyWound))
@@ -2610,52 +2558,41 @@ private constructor(
             /**
              * Sets [Builder.friendlyWound] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.friendlyWound] with a well-typed [Int] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.friendlyWound] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun friendlyWound(friendlyWound: JsonField<Int>) = apply {
-                this.friendlyWound = friendlyWound
-            }
+            fun friendlyWound(friendlyWound: JsonField<Int>) =
+                apply {
+                    this.friendlyWound = friendlyWound
+                }
 
-            /**
-             * Each CAMEO event code is assigned a numeric score from -10 to +10, capturing the
-             * theoretical potential impact that type of event will have on the stability of a
-             * country. This is known as the Goldstein Scale. NOTE: this score is based on the type
-             * of event, not the specifics of the actual event record being recorded thus two riots,
-             * one with 10 people and one with 10,000, will both receive the same Goldstein score.
-             * This can be aggregated to various levels of time resolution to yield an approximation
-             * of the stability of a location over time.
-             */
+            /** Each CAMEO event code is assigned a numeric score from -10 to +10, capturing the theoretical potential impact that type of event will have on the stability of a country. This is known as the Goldstein Scale. NOTE: this score is based on the type of event, not the specifics of the actual event record being recorded thus two riots, one with 10 people and one with 10,000, will both receive the same Goldstein score. This can be aggregated to various levels of time resolution to yield an approximation of the stability of a location over time. */
             fun goldstein(goldstein: Double) = goldstein(JsonField.of(goldstein))
 
             /**
              * Sets [Builder.goldstein] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.goldstein] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.goldstein] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun goldstein(goldstein: JsonField<Double>) = apply { this.goldstein = goldstein }
+            fun goldstein(goldstein: JsonField<Double>) =
+                apply {
+                    this.goldstein = goldstein
+                }
 
-            /**
-             * Flag indicating this SigAct record has an associated txt file stored in the UDL.
-             * Retrieve the txt file by using the GET/udl/sigact/getFile/{id} where id is the same
-             * as the SigAct record id. The maximum file size for this service is 10,000,000 bytes
-             * (10MB). Files exceeding the maximum size will be rejected.
-             */
+            /** Flag indicating this SigAct record has an associated txt file stored in the UDL. Retrieve the txt file by using the GET/udl/sigact/getFile/{id} where id is the same as the SigAct record id. The maximum file size for this service is 10,000,000 bytes (10MB). Files exceeding the maximum size will be rejected. */
             fun hasAttachment(hasAttachment: Boolean) = hasAttachment(JsonField.of(hasAttachment))
 
             /**
              * Sets [Builder.hasAttachment] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.hasAttachment] with a well-typed [Boolean] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.hasAttachment] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun hasAttachment(hasAttachment: JsonField<Boolean>) = apply {
-                this.hasAttachment = hasAttachment
-            }
+            fun hasAttachment(hasAttachment: JsonField<Boolean>) =
+                apply {
+                    this.hasAttachment = hasAttachment
+                }
 
             /** Number of Host Nation members abducted in the activity. */
             fun hostNatAbd(hostNatAbd: Int) = hostNatAbd(JsonField.of(hostNatAbd))
@@ -2663,11 +2600,13 @@ private constructor(
             /**
              * Sets [Builder.hostNatAbd] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.hostNatAbd] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.hostNatAbd] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun hostNatAbd(hostNatAbd: JsonField<Int>) = apply { this.hostNatAbd = hostNatAbd }
+            fun hostNatAbd(hostNatAbd: JsonField<Int>) =
+                apply {
+                    this.hostNatAbd = hostNatAbd
+                }
 
             /** Number of Host Nation members detained in the activity. */
             fun hostNatDet(hostNatDet: Int) = hostNatDet(JsonField.of(hostNatDet))
@@ -2675,11 +2614,13 @@ private constructor(
             /**
              * Sets [Builder.hostNatDet] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.hostNatDet] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.hostNatDet] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun hostNatDet(hostNatDet: JsonField<Int>) = apply { this.hostNatDet = hostNatDet }
+            fun hostNatDet(hostNatDet: JsonField<Int>) =
+                apply {
+                    this.hostNatDet = hostNatDet
+                }
 
             /** Number of Host Nation members killed in the activity. */
             fun hostNatKia(hostNatKia: Int) = hostNatKia(JsonField.of(hostNatKia))
@@ -2687,11 +2628,13 @@ private constructor(
             /**
              * Sets [Builder.hostNatKia] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.hostNatKia] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.hostNatKia] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun hostNatKia(hostNatKia: JsonField<Int>) = apply { this.hostNatKia = hostNatKia }
+            fun hostNatKia(hostNatKia: JsonField<Int>) =
+                apply {
+                    this.hostNatKia = hostNatKia
+                }
 
             /** Number of Host Nation members wounded in the activity. */
             fun hostNatWound(hostNatWound: Int) = hostNatWound(JsonField.of(hostNatWound))
@@ -2699,84 +2642,77 @@ private constructor(
             /**
              * Sets [Builder.hostNatWound] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.hostNatWound] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.hostNatWound] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun hostNatWound(hostNatWound: JsonField<Int>) = apply {
-                this.hostNatWound = hostNatWound
-            }
+            fun hostNatWound(hostNatWound: JsonField<Int>) =
+                apply {
+                    this.hostNatWound = hostNatWound
+                }
 
-            /**
-             * Unique identifier assigned to each event record that uniquely identifies it in the
-             * master dataset. This ID is provided for convenience of mapping to external systems.
-             */
+            /** Unique identifier assigned to each event record that uniquely identifies it in the master dataset. This ID is provided for convenience of mapping to external systems. */
             fun idNumber(idNumber: String) = idNumber(JsonField.of(idNumber))
 
             /**
              * Sets [Builder.idNumber] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.idNumber] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.idNumber] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun idNumber(idNumber: JsonField<String>) = apply { this.idNumber = idNumber }
+            fun idNumber(idNumber: JsonField<String>) =
+                apply {
+                    this.idNumber = idNumber
+                }
 
-            /**
-             * WGS-84 centroid latitude of the event location, in degrees. -90 to 90 degrees
-             * (negative values south of equator).
-             */
+            /** WGS-84 centroid latitude of the event location, in degrees. -90 to 90 degrees (negative values south of equator). */
             fun lat(lat: Double) = lat(JsonField.of(lat))
 
             /**
              * Sets [Builder.lat] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.lat] with a well-typed [Double] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.lat] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun lat(lat: JsonField<Double>) = apply { this.lat = lat }
+            fun lat(lat: JsonField<Double>) =
+                apply {
+                    this.lat = lat
+                }
 
-            /**
-             * WGS-84 centroid longitude of the event location, in degrees. -180 to 180 degrees
-             * (negative values west of Prime Meridian).
-             */
+            /** WGS-84 centroid longitude of the event location, in degrees. -180 to 180 degrees (negative values west of Prime Meridian). */
             fun lon(lon: Double) = lon(JsonField.of(lon))
 
             /**
              * Sets [Builder.lon] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.lon] with a well-typed [Double] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.lon] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun lon(lon: JsonField<Double>) = apply { this.lon = lon }
+            fun lon(lon: JsonField<Double>) =
+                apply {
+                    this.lon = lon
+                }
 
             /**
-             * The Military Grid Reference System is the geocoordinate standard used by NATO
-             * militaries for locating points on Earth. The MGRS is derived from the Universal
-             * Transverse Mercator (UTM) grid system and the Universal Polar Stereographic (UPS)
-             * grid system, but uses a different labeling convention. The MGRS is used as geocode
-             * for the entire Earth. Example of an milgrid coordinate, or grid reference, would be
-             * 4QFJ12345678, which consists of three parts:
+             * The Military Grid Reference System is the geocoordinate standard used by NATO militaries for locating points on Earth. The MGRS is derived from the Universal Transverse Mercator (UTM) grid system and the Universal Polar Stereographic (UPS) grid system, but uses a different labeling convention. The MGRS is used as geocode for the entire Earth. Example of an milgrid coordinate, or grid reference, would be 4QFJ12345678, which consists of three parts:
              *
              * &nbsp;&nbsp;4Q (grid zone designator, GZD)
              *
              * &nbsp;&nbsp;FJ (the 100,000-meter square identifier)
              *
-             * &nbsp;&nbsp;12345678 (numerical location; easting is 1234 and northing is 5678, in
-             * this case specifying a location with 10 m resolution).
+             * &nbsp;&nbsp;12345678 (numerical location; easting is 1234 and northing is 5678, in this case specifying a location with 10 m resolution).
              */
             fun milgrid(milgrid: String) = milgrid(JsonField.of(milgrid))
 
             /**
              * Sets [Builder.milgrid] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.milgrid] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.milgrid] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun milgrid(milgrid: JsonField<String>) = apply { this.milgrid = milgrid }
+            fun milgrid(milgrid: JsonField<String>) =
+                apply {
+                    this.milgrid = milgrid
+                }
 
             /** Notes related to the documents or event. */
             fun notes(notes: String) = notes(JsonField.of(notes))
@@ -2784,97 +2720,83 @@ private constructor(
             /**
              * Sets [Builder.notes] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.notes] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.notes] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun notes(notes: JsonField<String>) = apply { this.notes = notes }
+            fun notes(notes: JsonField<String>) =
+                apply {
+                    this.notes = notes
+                }
 
-            /**
-             * This is the total number of source documents containing one or more mentions of this
-             * event during the 15 minute update in which it was first seen. This can be used as a
-             * method of assessing the importance of an event: the more discussion of that event,
-             * the more likely it is to be significant.
-             */
+            /** This is the total number of source documents containing one or more mentions of this event during the 15 minute update in which it was first seen. This can be used as a method of assessing the importance of an event: the more discussion of that event, the more likely it is to be significant. */
             fun numArticles(numArticles: Int) = numArticles(JsonField.of(numArticles))
 
             /**
              * Sets [Builder.numArticles] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numArticles] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numArticles] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numArticles(numArticles: JsonField<Int>) = apply { this.numArticles = numArticles }
+            fun numArticles(numArticles: JsonField<Int>) =
+                apply {
+                    this.numArticles = numArticles
+                }
 
-            /**
-             * This is the total number of mentions of this event across all source documents during
-             * the 15 minute update in which it was first seen. Multiple references to an event
-             * within a single document also contribute to this count. This can be used as a method
-             * of assessing the importance of an event: the more discussion of that event, the more
-             * likely it is to be significant.
-             */
+            /** This is the total number of mentions of this event across all source documents during the 15 minute update in which it was first seen. Multiple references to an event within a single document also contribute to this count. This can be used as a method of assessing the importance of an event: the more discussion of that event, the more likely it is to be significant. */
             fun numMentions(numMentions: Int) = numMentions(JsonField.of(numMentions))
 
             /**
              * Sets [Builder.numMentions] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numMentions] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numMentions] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numMentions(numMentions: JsonField<Int>) = apply { this.numMentions = numMentions }
+            fun numMentions(numMentions: JsonField<Int>) =
+                apply {
+                    this.numMentions = numMentions
+                }
 
-            /**
-             * This is the total number of information sources containing one or more mentions of
-             * this event during the 15 minute update in which it was first seen. This can be used
-             * as a method of assessing the importance of an event: the more discussion of that
-             * event, the more likely it is to be significant.
-             */
+            /** This is the total number of information sources containing one or more mentions of this event during the 15 minute update in which it was first seen. This can be used as a method of assessing the importance of an event: the more discussion of that event, the more likely it is to be significant. */
             fun numSources(numSources: Int) = numSources(JsonField.of(numSources))
 
             /**
              * Sets [Builder.numSources] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numSources] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numSources] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numSources(numSources: JsonField<Int>) = apply { this.numSources = numSources }
+            fun numSources(numSources: JsonField<Int>) =
+                apply {
+                    this.numSources = numSources
+                }
 
-            /**
-             * Originating system or organization which produced the data, if different from the
-             * source. The origin may be different than the source if the source was a mediating
-             * system which forwarded the data on behalf of the origin system. If null, the source
-             * may be assumed to be the origin.
-             */
+            /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
             fun origin(origin: String) = origin(JsonField.of(origin))
 
             /**
              * Sets [Builder.origin] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origin] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+            fun origin(origin: JsonField<String>) =
+                apply {
+                    this.origin = origin
+                }
 
-            /**
-             * The originating source network on which this record was created, auto-populated by
-             * the system.
-             */
+            /** The originating source network on which this record was created, auto-populated by the system. */
             fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
             /**
              * Sets [Builder.origNetwork] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origNetwork] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origNetwork(origNetwork: JsonField<String>) = apply {
-                this.origNetwork = origNetwork
-            }
+            fun origNetwork(origNetwork: JsonField<String>) =
+                apply {
+                    this.origNetwork = origNetwork
+                }
 
             /** The province in which this event occurred. */
             fun province(province: String) = province(JsonField.of(province))
@@ -2882,11 +2804,13 @@ private constructor(
             /**
              * Sets [Builder.province] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.province] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.province] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun province(province: JsonField<String>) = apply { this.province = province }
+            fun province(province: JsonField<String>) =
+                apply {
+                    this.province = province
+                }
 
             /** Related document ids. */
             fun relatedDocs(relatedDocs: List<RelatedDoc>) = relatedDocs(JsonField.of(relatedDocs))
@@ -2894,25 +2818,25 @@ private constructor(
             /**
              * Sets [Builder.relatedDocs] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.relatedDocs] with a well-typed `List<RelatedDoc>`
-             * value instead. This method is primarily for setting the field to an undocumented or
-             * not yet supported value.
+             * You should usually call [Builder.relatedDocs] with a well-typed `List<RelatedDoc>` value instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun relatedDocs(relatedDocs: JsonField<List<RelatedDoc>>) = apply {
-                this.relatedDocs = relatedDocs.map { it.toMutableList() }
-            }
+            fun relatedDocs(relatedDocs: JsonField<List<RelatedDoc>>) =
+                apply {
+                    this.relatedDocs = relatedDocs.map { it.toMutableList() }
+                }
 
             /**
              * Adds a single [RelatedDoc] to [relatedDocs].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addRelatedDoc(relatedDoc: RelatedDoc) = apply {
-                relatedDocs =
-                    (relatedDocs ?: JsonField.of(mutableListOf())).also {
+            fun addRelatedDoc(relatedDoc: RelatedDoc) =
+                apply {
+                    relatedDocs = (relatedDocs ?: JsonField.of(mutableListOf())).also {
                         checkKnown("relatedDocs", it).add(relatedDoc)
                     }
-            }
+                }
 
             /** The reporting unit. */
             fun repUnit(repUnit: String) = repUnit(JsonField.of(repUnit))
@@ -2920,26 +2844,27 @@ private constructor(
             /**
              * Sets [Builder.repUnit] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.repUnit] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.repUnit] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun repUnit(repUnit: JsonField<String>) = apply { this.repUnit = repUnit }
+            fun repUnit(repUnit: JsonField<String>) =
+                apply {
+                    this.repUnit = repUnit
+                }
 
             /** The activity the unit was engaged in. */
-            fun repUnitActivity(repUnitActivity: String) =
-                repUnitActivity(JsonField.of(repUnitActivity))
+            fun repUnitActivity(repUnitActivity: String) = repUnitActivity(JsonField.of(repUnitActivity))
 
             /**
              * Sets [Builder.repUnitActivity] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.repUnitActivity] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.repUnitActivity] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun repUnitActivity(repUnitActivity: JsonField<String>) = apply {
-                this.repUnitActivity = repUnitActivity
-            }
+            fun repUnitActivity(repUnitActivity: JsonField<String>) =
+                apply {
+                    this.repUnitActivity = repUnitActivity
+                }
 
             /** The reporting unit type. */
             fun repUnitType(repUnitType: String) = repUnitType(JsonField.of(repUnitType))
@@ -2947,13 +2872,13 @@ private constructor(
             /**
              * Sets [Builder.repUnitType] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.repUnitType] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.repUnitType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun repUnitType(repUnitType: JsonField<String>) = apply {
-                this.repUnitType = repUnitType
-            }
+            fun repUnitType(repUnitType: JsonField<String>) =
+                apply {
+                    this.repUnitType = repUnitType
+                }
 
             /** Number of side A members abducted in the activity. */
             fun sideAAbd(sideAAbd: Int) = sideAAbd(JsonField.of(sideAAbd))
@@ -2961,11 +2886,13 @@ private constructor(
             /**
              * Sets [Builder.sideAAbd] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sideAAbd] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sideAAbd] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sideAAbd(sideAAbd: JsonField<Int>) = apply { this.sideAAbd = sideAAbd }
+            fun sideAAbd(sideAAbd: JsonField<Int>) =
+                apply {
+                    this.sideAAbd = sideAAbd
+                }
 
             /** Number of side A members detained in the activity. */
             fun sideADet(sideADet: Int) = sideADet(JsonField.of(sideADet))
@@ -2973,11 +2900,13 @@ private constructor(
             /**
              * Sets [Builder.sideADet] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sideADet] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sideADet] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sideADet(sideADet: JsonField<Int>) = apply { this.sideADet = sideADet }
+            fun sideADet(sideADet: JsonField<Int>) =
+                apply {
+                    this.sideADet = sideADet
+                }
 
             /** Number of side A members killed in the activity. */
             fun sideAkia(sideAkia: Int) = sideAkia(JsonField.of(sideAkia))
@@ -2985,11 +2914,13 @@ private constructor(
             /**
              * Sets [Builder.sideAkia] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sideAkia] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sideAkia] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sideAkia(sideAkia: JsonField<Int>) = apply { this.sideAkia = sideAkia }
+            fun sideAkia(sideAkia: JsonField<Int>) =
+                apply {
+                    this.sideAkia = sideAkia
+                }
 
             /** Number of side A members wounded in the activity. */
             fun sideAWound(sideAWound: Int) = sideAWound(JsonField.of(sideAWound))
@@ -2997,11 +2928,13 @@ private constructor(
             /**
              * Sets [Builder.sideAWound] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sideAWound] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sideAWound] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sideAWound(sideAWound: JsonField<Int>) = apply { this.sideAWound = sideAWound }
+            fun sideAWound(sideAWound: JsonField<Int>) =
+                apply {
+                    this.sideAWound = sideAWound
+                }
 
             /** Number of side B members abducted in the activity. */
             fun sideBAbd(sideBAbd: Int) = sideBAbd(JsonField.of(sideBAbd))
@@ -3009,11 +2942,13 @@ private constructor(
             /**
              * Sets [Builder.sideBAbd] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sideBAbd] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sideBAbd] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sideBAbd(sideBAbd: JsonField<Int>) = apply { this.sideBAbd = sideBAbd }
+            fun sideBAbd(sideBAbd: JsonField<Int>) =
+                apply {
+                    this.sideBAbd = sideBAbd
+                }
 
             /** Number of side B members detained in the activity. */
             fun sideBDet(sideBDet: Int) = sideBDet(JsonField.of(sideBDet))
@@ -3021,11 +2956,13 @@ private constructor(
             /**
              * Sets [Builder.sideBDet] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sideBDet] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sideBDet] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sideBDet(sideBDet: JsonField<Int>) = apply { this.sideBDet = sideBDet }
+            fun sideBDet(sideBDet: JsonField<Int>) =
+                apply {
+                    this.sideBDet = sideBDet
+                }
 
             /** Number of side B members killed in the activity. */
             fun sideBkia(sideBkia: Int) = sideBkia(JsonField.of(sideBkia))
@@ -3033,11 +2970,13 @@ private constructor(
             /**
              * Sets [Builder.sideBkia] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sideBkia] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sideBkia] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sideBkia(sideBkia: JsonField<Int>) = apply { this.sideBkia = sideBkia }
+            fun sideBkia(sideBkia: JsonField<Int>) =
+                apply {
+                    this.sideBkia = sideBkia
+                }
 
             /** Number of side B members wounded in the activity. */
             fun sideBWound(sideBWound: Int) = sideBWound(JsonField.of(sideBWound))
@@ -3045,46 +2984,41 @@ private constructor(
             /**
              * Sets [Builder.sideBWound] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sideBWound] with a well-typed [Int] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sideBWound] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sideBWound(sideBWound: JsonField<Int>) = apply { this.sideBWound = sideBWound }
+            fun sideBWound(sideBWound: JsonField<Int>) =
+                apply {
+                    this.sideBWound = sideBWound
+                }
 
-            /**
-             * The source language of the significant event using the ISO 639-3, 3 character code
-             * definition.
-             */
-            fun sourceLanguage(sourceLanguage: String) =
-                sourceLanguage(JsonField.of(sourceLanguage))
+            /** The source language of the significant event using the ISO 639-3, 3 character code definition. */
+            fun sourceLanguage(sourceLanguage: String) = sourceLanguage(JsonField.of(sourceLanguage))
 
             /**
              * Sets [Builder.sourceLanguage] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sourceLanguage] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sourceLanguage] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sourceLanguage(sourceLanguage: JsonField<String>) = apply {
-                this.sourceLanguage = sourceLanguage
-            }
+            fun sourceLanguage(sourceLanguage: JsonField<String>) =
+                apply {
+                    this.sourceLanguage = sourceLanguage
+                }
 
-            /**
-             * This field records the URL or citation of the first news report it found this event
-             * in. In most cases this is the first report it saw the article in, but due to the
-             * timing and flow of news reports through the processing pipeline, this may not always
-             * be the very first report, but is at least in the first few reports.
-             */
+            /** This field records the URL or citation of the first news report it found this event in. In most cases this is the first report it saw the article in, but due to the timing and flow of news reports through the processing pipeline, this may not always be the very first report, but is at least in the first few reports. */
             fun sourceUrl(sourceUrl: String) = sourceUrl(JsonField.of(sourceUrl))
 
             /**
              * Sets [Builder.sourceUrl] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sourceUrl] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sourceUrl] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sourceUrl(sourceUrl: JsonField<String>) = apply { this.sourceUrl = sourceUrl }
+            fun sourceUrl(sourceUrl: JsonField<String>) =
+                apply {
+                    this.sourceUrl = sourceUrl
+                }
 
             /** A summary of the event. */
             fun summary(summary: String) = summary(JsonField.of(summary))
@@ -3092,42 +3026,41 @@ private constructor(
             /**
              * Sets [Builder.summary] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.summary] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.summary] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun summary(summary: JsonField<String>) = apply { this.summary = summary }
+            fun summary(summary: JsonField<String>) =
+                apply {
+                    this.summary = summary
+                }
 
-            /**
-             * The name of the target. The target may be an individual, an entity, or a
-             * country/region.
-             */
+            /** The name of the target. The target may be an individual, an entity, or a country/region. */
             fun target(target: String) = target(JsonField.of(target))
 
             /**
              * Sets [Builder.target] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.target] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.target] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun target(target: JsonField<String>) = apply { this.target = target }
+            fun target(target: JsonField<String>) =
+                apply {
+                    this.target = target
+                }
 
-            /**
-             * Area in which important military events occur or are progressing. A theater can
-             * include the entirety of the airspace, land and sea area that is or that may
-             * potentially become involved in war operations.
-             */
+            /** Area in which important military events occur or are progressing. A theater can include the entirety of the airspace, land and sea area that is or that may potentially become involved in war operations. */
             fun theater(theater: String) = theater(JsonField.of(theater))
 
             /**
              * Sets [Builder.theater] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.theater] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.theater] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun theater(theater: JsonField<String>) = apply { this.theater = theater }
+            fun theater(theater: JsonField<String>) =
+                apply {
+                    this.theater = theater
+                }
 
             /** The mode of this attack or event (e.g. Direct Fire, IED Explosion, etc.). */
             fun typeOfAttack(typeOfAttack: String) = typeOfAttack(JsonField.of(typeOfAttack))
@@ -3135,13 +3068,13 @@ private constructor(
             /**
              * Sets [Builder.typeOfAttack] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.typeOfAttack] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.typeOfAttack] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun typeOfAttack(typeOfAttack: JsonField<String>) = apply {
-                this.typeOfAttack = typeOfAttack
-            }
+            fun typeOfAttack(typeOfAttack: JsonField<String>) =
+                apply {
+                    this.typeOfAttack = typeOfAttack
+                }
 
             /**
              * Returns an immutable instance of [Body].
@@ -3149,6 +3082,7 @@ private constructor(
              * Further updates to this [Builder] will not mutate the returned instance.
              *
              * The following fields are required:
+             *
              * ```java
              * .classificationMarking()
              * .dataMode()
@@ -3160,184 +3094,193 @@ private constructor(
              */
             fun build(): Body =
                 Body(
-                    checkRequired("classificationMarking", classificationMarking),
-                    checkRequired("dataMode", dataMode),
-                    checkRequired("reportDate", reportDate),
-                    checkRequired("source", source),
-                    id,
-                    accuracy,
-                    (actors ?: JsonMissing.of()).map { it.toImmutable() },
-                    agjson,
-                    andims,
-                    area,
-                    asrid,
-                    atext,
-                    atype,
-                    avgTone,
-                    cameoBaseCode,
-                    cameoCode,
-                    cameoRootCode,
-                    checksumValue,
-                    city,
-                    civAbd,
-                    civDet,
-                    civKia,
-                    civWound,
-                    clarity,
-                    coalAbd,
-                    coalDet,
-                    coalKia,
-                    coalWound,
-                    complexAttack,
-                    confidence,
-                    countryCode,
-                    createdAt,
-                    createdBy,
-                    district,
-                    documentFilename,
-                    documentSource,
-                    enemyAbd,
-                    enemyDet,
-                    enemyKia,
-                    eventDescription,
-                    eventEnd,
-                    eventStart,
-                    eventType,
-                    filesize,
-                    friendlyAbd,
-                    friendlyDet,
-                    friendlyKia,
-                    friendlyWound,
-                    goldstein,
-                    hasAttachment,
-                    hostNatAbd,
-                    hostNatDet,
-                    hostNatKia,
-                    hostNatWound,
-                    idNumber,
-                    lat,
-                    lon,
-                    milgrid,
-                    notes,
-                    numArticles,
-                    numMentions,
-                    numSources,
-                    origin,
-                    origNetwork,
-                    province,
-                    (relatedDocs ?: JsonMissing.of()).map { it.toImmutable() },
-                    repUnit,
-                    repUnitActivity,
-                    repUnitType,
-                    sideAAbd,
-                    sideADet,
-                    sideAkia,
-                    sideAWound,
-                    sideBAbd,
-                    sideBDet,
-                    sideBkia,
-                    sideBWound,
-                    sourceLanguage,
-                    sourceUrl,
-                    summary,
-                    target,
-                    theater,
-                    typeOfAttack,
+                  checkRequired(
+                    "classificationMarking", classificationMarking
+                  ),
+                  checkRequired(
+                    "dataMode", dataMode
+                  ),
+                  checkRequired(
+                    "reportDate", reportDate
+                  ),
+                  checkRequired(
+                    "source", source
+                  ),
+                  id,
+                  accuracy,
+                  (actors ?: JsonMissing.of()).map { it.toImmutable() },
+                  agjson,
+                  andims,
+                  area,
+                  asrid,
+                  atext,
+                  atype,
+                  avgTone,
+                  cameoBaseCode,
+                  cameoCode,
+                  cameoRootCode,
+                  checksumValue,
+                  city,
+                  civAbd,
+                  civDet,
+                  civKia,
+                  civWound,
+                  clarity,
+                  coalAbd,
+                  coalDet,
+                  coalKia,
+                  coalWound,
+                  complexAttack,
+                  confidence,
+                  countryCode,
+                  createdAt,
+                  createdBy,
+                  district,
+                  documentFilename,
+                  documentSource,
+                  enemyAbd,
+                  enemyDet,
+                  enemyKia,
+                  eventDescription,
+                  eventEnd,
+                  eventStart,
+                  eventType,
+                  filesize,
+                  friendlyAbd,
+                  friendlyDet,
+                  friendlyKia,
+                  friendlyWound,
+                  goldstein,
+                  hasAttachment,
+                  hostNatAbd,
+                  hostNatDet,
+                  hostNatKia,
+                  hostNatWound,
+                  idNumber,
+                  lat,
+                  lon,
+                  milgrid,
+                  notes,
+                  numArticles,
+                  numMentions,
+                  numSources,
+                  origin,
+                  origNetwork,
+                  province,
+                  (relatedDocs ?: JsonMissing.of()).map { it.toImmutable() },
+                  repUnit,
+                  repUnitActivity,
+                  repUnitType,
+                  sideAAbd,
+                  sideADet,
+                  sideAkia,
+                  sideAWound,
+                  sideBAbd,
+                  sideBDet,
+                  sideBkia,
+                  sideBWound,
+                  sourceLanguage,
+                  sourceUrl,
+                  summary,
+                  target,
+                  theater,
+                  typeOfAttack,
                 )
         }
 
         private var validated: Boolean = false
 
-        fun validate(): Body = apply {
-            if (validated) {
-                return@apply
-            }
+        fun validate(): Body =
+            apply {
+                if (validated) {
+                  return@apply
+                }
 
-            classificationMarking()
-            dataMode().validate()
-            reportDate()
-            source()
-            id()
-            accuracy()
-            actors()
-            agjson()
-            andims()
-            area()
-            asrid()
-            atext()
-            atype()
-            avgTone()
-            cameoBaseCode()
-            cameoCode()
-            cameoRootCode()
-            checksumValue()
-            city()
-            civAbd()
-            civDet()
-            civKia()
-            civWound()
-            clarity()
-            coalAbd()
-            coalDet()
-            coalKia()
-            coalWound()
-            complexAttack()
-            confidence()
-            countryCode()
-            createdAt()
-            createdBy()
-            district()
-            documentFilename()
-            documentSource()
-            enemyAbd()
-            enemyDet()
-            enemyKia()
-            eventDescription()
-            eventEnd()
-            eventStart()
-            eventType()
-            filesize()
-            friendlyAbd()
-            friendlyDet()
-            friendlyKia()
-            friendlyWound()
-            goldstein()
-            hasAttachment()
-            hostNatAbd()
-            hostNatDet()
-            hostNatKia()
-            hostNatWound()
-            idNumber()
-            lat()
-            lon()
-            milgrid()
-            notes()
-            numArticles()
-            numMentions()
-            numSources()
-            origin()
-            origNetwork()
-            province()
-            relatedDocs().ifPresent { it.forEach { it.validate() } }
-            repUnit()
-            repUnitActivity()
-            repUnitType()
-            sideAAbd()
-            sideADet()
-            sideAkia()
-            sideAWound()
-            sideBAbd()
-            sideBDet()
-            sideBkia()
-            sideBWound()
-            sourceLanguage()
-            sourceUrl()
-            summary()
-            target()
-            theater()
-            typeOfAttack()
-            validated = true
-        }
+                classificationMarking()
+                dataMode().validate()
+                reportDate()
+                source()
+                id()
+                accuracy()
+                actors()
+                agjson()
+                andims()
+                area()
+                asrid()
+                atext()
+                atype()
+                avgTone()
+                cameoBaseCode()
+                cameoCode()
+                cameoRootCode()
+                checksumValue()
+                city()
+                civAbd()
+                civDet()
+                civKia()
+                civWound()
+                clarity()
+                coalAbd()
+                coalDet()
+                coalKia()
+                coalWound()
+                complexAttack()
+                confidence()
+                countryCode()
+                createdAt()
+                createdBy()
+                district()
+                documentFilename()
+                documentSource()
+                enemyAbd()
+                enemyDet()
+                enemyKia()
+                eventDescription()
+                eventEnd()
+                eventStart()
+                eventType()
+                filesize()
+                friendlyAbd()
+                friendlyDet()
+                friendlyKia()
+                friendlyWound()
+                goldstein()
+                hasAttachment()
+                hostNatAbd()
+                hostNatDet()
+                hostNatKia()
+                hostNatWound()
+                idNumber()
+                lat()
+                lon()
+                milgrid()
+                notes()
+                numArticles()
+                numMentions()
+                numSources()
+                origin()
+                origNetwork()
+                province()
+                relatedDocs().ifPresent { it.forEach { it.validate() } }
+                repUnit()
+                repUnitActivity()
+                repUnitType()
+                sideAAbd()
+                sideADet()
+                sideAkia()
+                sideAWound()
+                sideBAbd()
+                sideBDet()
+                sideBkia()
+                sideBWound()
+                sourceLanguage()
+                sourceUrl()
+                summary()
+                target()
+                theater()
+                typeOfAttack()
+                validated = true
+            }
 
         fun isValid(): Boolean =
             try {
@@ -3348,123 +3291,38 @@ private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
+         * Returns a score indicating how many valid values are contained in this object recursively.
          *
          * Used for best match union deserialization.
          */
         @JvmSynthetic
-        internal fun validity(): Int =
-            (if (classificationMarking.asKnown().isPresent) 1 else 0) +
-                (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
-                (if (reportDate.asKnown().isPresent) 1 else 0) +
-                (if (source.asKnown().isPresent) 1 else 0) +
-                (if (id.asKnown().isPresent) 1 else 0) +
-                (if (accuracy.asKnown().isPresent) 1 else 0) +
-                (actors.asKnown().getOrNull()?.size ?: 0) +
-                (if (agjson.asKnown().isPresent) 1 else 0) +
-                (if (andims.asKnown().isPresent) 1 else 0) +
-                (if (area.asKnown().isPresent) 1 else 0) +
-                (if (asrid.asKnown().isPresent) 1 else 0) +
-                (if (atext.asKnown().isPresent) 1 else 0) +
-                (if (atype.asKnown().isPresent) 1 else 0) +
-                (if (avgTone.asKnown().isPresent) 1 else 0) +
-                (if (cameoBaseCode.asKnown().isPresent) 1 else 0) +
-                (if (cameoCode.asKnown().isPresent) 1 else 0) +
-                (if (cameoRootCode.asKnown().isPresent) 1 else 0) +
-                (if (checksumValue.asKnown().isPresent) 1 else 0) +
-                (if (city.asKnown().isPresent) 1 else 0) +
-                (if (civAbd.asKnown().isPresent) 1 else 0) +
-                (if (civDet.asKnown().isPresent) 1 else 0) +
-                (if (civKia.asKnown().isPresent) 1 else 0) +
-                (if (civWound.asKnown().isPresent) 1 else 0) +
-                (if (clarity.asKnown().isPresent) 1 else 0) +
-                (if (coalAbd.asKnown().isPresent) 1 else 0) +
-                (if (coalDet.asKnown().isPresent) 1 else 0) +
-                (if (coalKia.asKnown().isPresent) 1 else 0) +
-                (if (coalWound.asKnown().isPresent) 1 else 0) +
-                (if (complexAttack.asKnown().isPresent) 1 else 0) +
-                (if (confidence.asKnown().isPresent) 1 else 0) +
-                (if (countryCode.asKnown().isPresent) 1 else 0) +
-                (if (createdAt.asKnown().isPresent) 1 else 0) +
-                (if (createdBy.asKnown().isPresent) 1 else 0) +
-                (if (district.asKnown().isPresent) 1 else 0) +
-                (if (documentFilename.asKnown().isPresent) 1 else 0) +
-                (if (documentSource.asKnown().isPresent) 1 else 0) +
-                (if (enemyAbd.asKnown().isPresent) 1 else 0) +
-                (if (enemyDet.asKnown().isPresent) 1 else 0) +
-                (if (enemyKia.asKnown().isPresent) 1 else 0) +
-                (if (eventDescription.asKnown().isPresent) 1 else 0) +
-                (if (eventEnd.asKnown().isPresent) 1 else 0) +
-                (if (eventStart.asKnown().isPresent) 1 else 0) +
-                (if (eventType.asKnown().isPresent) 1 else 0) +
-                (if (filesize.asKnown().isPresent) 1 else 0) +
-                (if (friendlyAbd.asKnown().isPresent) 1 else 0) +
-                (if (friendlyDet.asKnown().isPresent) 1 else 0) +
-                (if (friendlyKia.asKnown().isPresent) 1 else 0) +
-                (if (friendlyWound.asKnown().isPresent) 1 else 0) +
-                (if (goldstein.asKnown().isPresent) 1 else 0) +
-                (if (hasAttachment.asKnown().isPresent) 1 else 0) +
-                (if (hostNatAbd.asKnown().isPresent) 1 else 0) +
-                (if (hostNatDet.asKnown().isPresent) 1 else 0) +
-                (if (hostNatKia.asKnown().isPresent) 1 else 0) +
-                (if (hostNatWound.asKnown().isPresent) 1 else 0) +
-                (if (idNumber.asKnown().isPresent) 1 else 0) +
-                (if (lat.asKnown().isPresent) 1 else 0) +
-                (if (lon.asKnown().isPresent) 1 else 0) +
-                (if (milgrid.asKnown().isPresent) 1 else 0) +
-                (if (notes.asKnown().isPresent) 1 else 0) +
-                (if (numArticles.asKnown().isPresent) 1 else 0) +
-                (if (numMentions.asKnown().isPresent) 1 else 0) +
-                (if (numSources.asKnown().isPresent) 1 else 0) +
-                (if (origin.asKnown().isPresent) 1 else 0) +
-                (if (origNetwork.asKnown().isPresent) 1 else 0) +
-                (if (province.asKnown().isPresent) 1 else 0) +
-                (relatedDocs.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
-                (if (repUnit.asKnown().isPresent) 1 else 0) +
-                (if (repUnitActivity.asKnown().isPresent) 1 else 0) +
-                (if (repUnitType.asKnown().isPresent) 1 else 0) +
-                (if (sideAAbd.asKnown().isPresent) 1 else 0) +
-                (if (sideADet.asKnown().isPresent) 1 else 0) +
-                (if (sideAkia.asKnown().isPresent) 1 else 0) +
-                (if (sideAWound.asKnown().isPresent) 1 else 0) +
-                (if (sideBAbd.asKnown().isPresent) 1 else 0) +
-                (if (sideBDet.asKnown().isPresent) 1 else 0) +
-                (if (sideBkia.asKnown().isPresent) 1 else 0) +
-                (if (sideBWound.asKnown().isPresent) 1 else 0) +
-                (if (sourceLanguage.asKnown().isPresent) 1 else 0) +
-                (if (sourceUrl.asKnown().isPresent) 1 else 0) +
-                (if (summary.asKnown().isPresent) 1 else 0) +
-                (if (target.asKnown().isPresent) 1 else 0) +
-                (if (theater.asKnown().isPresent) 1 else 0) +
-                (if (typeOfAttack.asKnown().isPresent) 1 else 0)
+        internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (reportDate.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (if (accuracy.asKnown().isPresent) 1 else 0) + (actors.asKnown().getOrNull()?.size ?: 0) + (if (agjson.asKnown().isPresent) 1 else 0) + (if (andims.asKnown().isPresent) 1 else 0) + (if (area.asKnown().isPresent) 1 else 0) + (if (asrid.asKnown().isPresent) 1 else 0) + (if (atext.asKnown().isPresent) 1 else 0) + (if (atype.asKnown().isPresent) 1 else 0) + (if (avgTone.asKnown().isPresent) 1 else 0) + (if (cameoBaseCode.asKnown().isPresent) 1 else 0) + (if (cameoCode.asKnown().isPresent) 1 else 0) + (if (cameoRootCode.asKnown().isPresent) 1 else 0) + (if (checksumValue.asKnown().isPresent) 1 else 0) + (if (city.asKnown().isPresent) 1 else 0) + (if (civAbd.asKnown().isPresent) 1 else 0) + (if (civDet.asKnown().isPresent) 1 else 0) + (if (civKia.asKnown().isPresent) 1 else 0) + (if (civWound.asKnown().isPresent) 1 else 0) + (if (clarity.asKnown().isPresent) 1 else 0) + (if (coalAbd.asKnown().isPresent) 1 else 0) + (if (coalDet.asKnown().isPresent) 1 else 0) + (if (coalKia.asKnown().isPresent) 1 else 0) + (if (coalWound.asKnown().isPresent) 1 else 0) + (if (complexAttack.asKnown().isPresent) 1 else 0) + (if (confidence.asKnown().isPresent) 1 else 0) + (if (countryCode.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (district.asKnown().isPresent) 1 else 0) + (if (documentFilename.asKnown().isPresent) 1 else 0) + (if (documentSource.asKnown().isPresent) 1 else 0) + (if (enemyAbd.asKnown().isPresent) 1 else 0) + (if (enemyDet.asKnown().isPresent) 1 else 0) + (if (enemyKia.asKnown().isPresent) 1 else 0) + (if (eventDescription.asKnown().isPresent) 1 else 0) + (if (eventEnd.asKnown().isPresent) 1 else 0) + (if (eventStart.asKnown().isPresent) 1 else 0) + (if (eventType.asKnown().isPresent) 1 else 0) + (if (filesize.asKnown().isPresent) 1 else 0) + (if (friendlyAbd.asKnown().isPresent) 1 else 0) + (if (friendlyDet.asKnown().isPresent) 1 else 0) + (if (friendlyKia.asKnown().isPresent) 1 else 0) + (if (friendlyWound.asKnown().isPresent) 1 else 0) + (if (goldstein.asKnown().isPresent) 1 else 0) + (if (hasAttachment.asKnown().isPresent) 1 else 0) + (if (hostNatAbd.asKnown().isPresent) 1 else 0) + (if (hostNatDet.asKnown().isPresent) 1 else 0) + (if (hostNatKia.asKnown().isPresent) 1 else 0) + (if (hostNatWound.asKnown().isPresent) 1 else 0) + (if (idNumber.asKnown().isPresent) 1 else 0) + (if (lat.asKnown().isPresent) 1 else 0) + (if (lon.asKnown().isPresent) 1 else 0) + (if (milgrid.asKnown().isPresent) 1 else 0) + (if (notes.asKnown().isPresent) 1 else 0) + (if (numArticles.asKnown().isPresent) 1 else 0) + (if (numMentions.asKnown().isPresent) 1 else 0) + (if (numSources.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (province.asKnown().isPresent) 1 else 0) + (relatedDocs.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) + (if (repUnit.asKnown().isPresent) 1 else 0) + (if (repUnitActivity.asKnown().isPresent) 1 else 0) + (if (repUnitType.asKnown().isPresent) 1 else 0) + (if (sideAAbd.asKnown().isPresent) 1 else 0) + (if (sideADet.asKnown().isPresent) 1 else 0) + (if (sideAkia.asKnown().isPresent) 1 else 0) + (if (sideAWound.asKnown().isPresent) 1 else 0) + (if (sideBAbd.asKnown().isPresent) 1 else 0) + (if (sideBDet.asKnown().isPresent) 1 else 0) + (if (sideBkia.asKnown().isPresent) 1 else 0) + (if (sideBWound.asKnown().isPresent) 1 else 0) + (if (sourceLanguage.asKnown().isPresent) 1 else 0) + (if (sourceUrl.asKnown().isPresent) 1 else 0) + (if (summary.asKnown().isPresent) 1 else 0) + (if (target.asKnown().isPresent) 1 else 0) + (if (theater.asKnown().isPresent) 1 else 0) + (if (typeOfAttack.asKnown().isPresent) 1 else 0)
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-         * both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-         * analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-         * requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
          */
-        class DataMode @JsonCreator private constructor(private val value: JsonField<String>) :
-            Enum {
+        class DataMode @JsonCreator private constructor(
+            private val value: JsonField<String>,
+
+        ) : Enum {
 
             /**
              * Returns this class instance's raw value.
              *
-             * This is usually only useful if this instance was deserialized from data that doesn't
-             * match any known member, and you want to know that value. For example, if the SDK is
-             * on an older version than the API, then the API may respond with new members that the
-             * SDK is unaware of.
+             * This is usually only useful if this instance was deserialized from data that doesn't match any known
+             * member, and you want to know that value. For example, if the SDK is on an older version than the
+             * API, then the API may respond with new members that the SDK is unaware of.
              */
-            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+            @com.fasterxml.jackson.annotation.JsonValue
+            fun _value(): JsonField<String> = value
 
             companion object {
 
@@ -3491,9 +3349,11 @@ private constructor(
              * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
              *
              * An instance of [DataMode] can contain an unknown value in a couple of cases:
-             * - It was deserialized from data that doesn't match any known member. For example, if
-             *   the SDK is on an older version than the API, then the API may respond with new
-             *   members that the SDK is unaware of.
+             *
+             * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
+             *   an older version than the API, then the API may respond with new members that the SDK is unaware
+             *   of.
+             *
              * - It was constructed with an arbitrary value using the [of] method.
              */
             enum class Value {
@@ -3501,18 +3361,16 @@ private constructor(
                 TEST,
                 SIMULATED,
                 EXERCISE,
-                /**
-                 * An enum member indicating that [DataMode] was instantiated with an unknown value.
-                 */
+                /** An enum member indicating that [DataMode] was instantiated with an unknown value. */
                 _UNKNOWN,
             }
 
             /**
-             * Returns an enum member corresponding to this class instance's value, or
-             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
+             * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
+             * class was instantiated with an unknown value.
              *
-             * Use the [known] method instead if you're certain the value is always known or if you
-             * want to throw for the unknown case.
+             * Use the [known] method instead if you're certain the value is always known or if you want to throw
+             * for the unknown case.
              */
             fun value(): Value =
                 when (this) {
@@ -3526,11 +3384,10 @@ private constructor(
             /**
              * Returns an enum member corresponding to this class instance's value.
              *
-             * Use the [value] method instead if you're uncertain the value is always known and
-             * don't want to throw for the unknown case.
+             * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
+             * for the unknown case.
              *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
-             *   not a known member.
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
              */
             fun known(): Known =
                 when (this) {
@@ -3544,27 +3401,25 @@ private constructor(
             /**
              * Returns this class instance's primitive wire representation.
              *
-             * This differs from the [toString] method because that method is primarily for
-             * debugging and generally doesn't throw.
+             * This differs from the [toString] method because that method is primarily for debugging and generally
+             * doesn't throw.
              *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
-             *   not have the expected primitive type.
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
+             * primitive type.
              */
-            fun asString(): String =
-                _value().asString().orElseThrow {
-                    UnifieddatalibraryInvalidDataException("Value is not a String")
-                }
+            fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
 
             private var validated: Boolean = false
 
-            fun validate(): DataMode = apply {
-                if (validated) {
-                    return@apply
-                }
+            fun validate(): DataMode =
+                apply {
+                    if (validated) {
+                      return@apply
+                    }
 
-                known()
-                validated = true
-            }
+                    known()
+                    validated = true
+                }
 
             fun isValid(): Boolean =
                 try {
@@ -3575,19 +3430,19 @@ private constructor(
                 }
 
             /**
-             * Returns a score indicating how many valid values are contained in this object
-             * recursively.
+             * Returns a score indicating how many valid values are contained in this object recursively.
              *
              * Used for best match union deserialization.
              */
-            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+            @JvmSynthetic
+            internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
             override fun equals(other: Any?): Boolean {
-                if (this === other) {
-                    return true
-                }
+              if (this === other) {
+                  return true
+              }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+              return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
             }
 
             override fun hashCode() = value.hashCode()
@@ -3595,45 +3450,41 @@ private constructor(
             override fun toString() = value.toString()
         }
 
-        class RelatedDoc
-        private constructor(
+        class RelatedDoc private constructor(
             private val dataSourceRefs: JsonField<List<DataSourceRef>>,
             private val documentId: JsonField<String>,
             private val additionalProperties: MutableMap<String, JsonValue>,
+
         ) {
 
             @JsonCreator
             private constructor(
-                @JsonProperty("dataSourceRefs")
-                @ExcludeMissing
-                dataSourceRefs: JsonField<List<DataSourceRef>> = JsonMissing.of(),
-                @JsonProperty("documentId")
-                @ExcludeMissing
-                documentId: JsonField<String> = JsonMissing.of(),
-            ) : this(dataSourceRefs, documentId, mutableMapOf())
+                @JsonProperty("dataSourceRefs") @ExcludeMissing dataSourceRefs: JsonField<List<DataSourceRef>> = JsonMissing.of(),
+                @JsonProperty("documentId") @ExcludeMissing documentId: JsonField<String> = JsonMissing.of()
+            ) : this(
+              dataSourceRefs,
+              documentId,
+              mutableMapOf(),
+            )
 
             /**
              * List of data sources related to this document.
              *
-             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
-             *   type (e.g. if the server responded with an unexpected value).
+             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
              */
-            fun dataSourceRefs(): Optional<List<DataSourceRef>> =
-                dataSourceRefs.getOptional("dataSourceRefs")
+            fun dataSourceRefs(): Optional<List<DataSourceRef>> = dataSourceRefs.getOptional("dataSourceRefs")
 
             /**
              * The document id of the related document.
              *
-             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
-             *   type (e.g. if the server responded with an unexpected value).
+             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
              */
             fun documentId(): Optional<String> = documentId.getOptional("documentId")
 
             /**
              * Returns the raw JSON value of [dataSourceRefs].
              *
-             * Unlike [dataSourceRefs], this method doesn't throw if the JSON field has an
-             * unexpected type.
+             * Unlike [dataSourceRefs], this method doesn't throw if the JSON field has an unexpected type.
              */
             @JsonProperty("dataSourceRefs")
             @ExcludeMissing
@@ -3642,8 +3493,7 @@ private constructor(
             /**
              * Returns the raw JSON value of [documentId].
              *
-             * Unlike [documentId], this method doesn't throw if the JSON field has an unexpected
-             * type.
+             * Unlike [documentId], this method doesn't throw if the JSON field has an unexpected type.
              */
             @JsonProperty("documentId")
             @ExcludeMissing
@@ -3651,20 +3501,20 @@ private constructor(
 
             @JsonAnySetter
             private fun putAdditionalProperty(key: String, value: JsonValue) {
-                additionalProperties.put(key, value)
+              additionalProperties.put(key, value)
             }
 
             @JsonAnyGetter
             @ExcludeMissing
-            fun _additionalProperties(): Map<String, JsonValue> =
-                Collections.unmodifiableMap(additionalProperties)
+            fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
 
             fun toBuilder() = Builder().from(this)
 
             companion object {
 
                 /** Returns a mutable builder for constructing an instance of [RelatedDoc]. */
-                @JvmStatic fun builder() = Builder()
+                @JvmStatic
+                fun builder() = Builder()
             }
 
             /** A builder for [RelatedDoc]. */
@@ -3675,38 +3525,38 @@ private constructor(
                 private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
                 @JvmSynthetic
-                internal fun from(relatedDoc: RelatedDoc) = apply {
-                    dataSourceRefs = relatedDoc.dataSourceRefs.map { it.toMutableList() }
-                    documentId = relatedDoc.documentId
-                    additionalProperties = relatedDoc.additionalProperties.toMutableMap()
-                }
+                internal fun from(relatedDoc: RelatedDoc) =
+                    apply {
+                        dataSourceRefs = relatedDoc.dataSourceRefs.map { it.toMutableList() }
+                        documentId = relatedDoc.documentId
+                        additionalProperties = relatedDoc.additionalProperties.toMutableMap()
+                    }
 
                 /** List of data sources related to this document. */
-                fun dataSourceRefs(dataSourceRefs: List<DataSourceRef>) =
-                    dataSourceRefs(JsonField.of(dataSourceRefs))
+                fun dataSourceRefs(dataSourceRefs: List<DataSourceRef>) = dataSourceRefs(JsonField.of(dataSourceRefs))
 
                 /**
                  * Sets [Builder.dataSourceRefs] to an arbitrary JSON value.
                  *
-                 * You should usually call [Builder.dataSourceRefs] with a well-typed
-                 * `List<DataSourceRef>` value instead. This method is primarily for setting the
-                 * field to an undocumented or not yet supported value.
+                 * You should usually call [Builder.dataSourceRefs] with a well-typed `List<DataSourceRef>` value instead. This method is primarily for setting the field to an undocumented or not yet
+                 * supported value.
                  */
-                fun dataSourceRefs(dataSourceRefs: JsonField<List<DataSourceRef>>) = apply {
-                    this.dataSourceRefs = dataSourceRefs.map { it.toMutableList() }
-                }
+                fun dataSourceRefs(dataSourceRefs: JsonField<List<DataSourceRef>>) =
+                    apply {
+                        this.dataSourceRefs = dataSourceRefs.map { it.toMutableList() }
+                    }
 
                 /**
                  * Adds a single [DataSourceRef] to [dataSourceRefs].
                  *
                  * @throws IllegalStateException if the field was previously set to a non-list.
                  */
-                fun addDataSourceRef(dataSourceRef: DataSourceRef) = apply {
-                    dataSourceRefs =
-                        (dataSourceRefs ?: JsonField.of(mutableListOf())).also {
+                fun addDataSourceRef(dataSourceRef: DataSourceRef) =
+                    apply {
+                        dataSourceRefs = (dataSourceRefs ?: JsonField.of(mutableListOf())).also {
                             checkKnown("dataSourceRefs", it).add(dataSourceRef)
                         }
-                }
+                    }
 
                 /** The document id of the related document. */
                 fun documentId(documentId: String) = documentId(JsonField.of(documentId))
@@ -3714,35 +3564,39 @@ private constructor(
                 /**
                  * Sets [Builder.documentId] to an arbitrary JSON value.
                  *
-                 * You should usually call [Builder.documentId] with a well-typed [String] value
-                 * instead. This method is primarily for setting the field to an undocumented or not
-                 * yet supported value.
+                 * You should usually call [Builder.documentId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+                 * supported value.
                  */
-                fun documentId(documentId: JsonField<String>) = apply {
-                    this.documentId = documentId
-                }
+                fun documentId(documentId: JsonField<String>) =
+                    apply {
+                        this.documentId = documentId
+                    }
 
-                fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                    this.additionalProperties.clear()
-                    putAllAdditionalProperties(additionalProperties)
-                }
+                fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
+                    apply {
+                        this.additionalProperties.clear()
+                        putAllAdditionalProperties(additionalProperties)
+                    }
 
-                fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-                    additionalProperties.put(key, value)
-                }
+                fun putAdditionalProperty(key: String, value: JsonValue) =
+                    apply {
+                        additionalProperties.put(key, value)
+                    }
 
                 fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
                     apply {
                         this.additionalProperties.putAll(additionalProperties)
                     }
 
-                fun removeAdditionalProperty(key: String) = apply {
-                    additionalProperties.remove(key)
-                }
+                fun removeAdditionalProperty(key: String) =
+                    apply {
+                        additionalProperties.remove(key)
+                    }
 
-                fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-                    keys.forEach(::removeAdditionalProperty)
-                }
+                fun removeAllAdditionalProperties(keys: Set<String>) =
+                    apply {
+                        keys.forEach(::removeAdditionalProperty)
+                    }
 
                 /**
                  * Returns an immutable instance of [RelatedDoc].
@@ -3751,23 +3605,24 @@ private constructor(
                  */
                 fun build(): RelatedDoc =
                     RelatedDoc(
-                        (dataSourceRefs ?: JsonMissing.of()).map { it.toImmutable() },
-                        documentId,
-                        additionalProperties.toMutableMap(),
+                      (dataSourceRefs ?: JsonMissing.of()).map { it.toImmutable() },
+                      documentId,
+                      additionalProperties.toMutableMap(),
                     )
             }
 
             private var validated: Boolean = false
 
-            fun validate(): RelatedDoc = apply {
-                if (validated) {
-                    return@apply
-                }
+            fun validate(): RelatedDoc =
+                apply {
+                    if (validated) {
+                      return@apply
+                    }
 
-                dataSourceRefs().ifPresent { it.forEach { it.validate() } }
-                documentId()
-                validated = true
-            }
+                    dataSourceRefs().ifPresent { it.forEach { it.validate() } }
+                    documentId()
+                    validated = true
+                }
 
             fun isValid(): Boolean =
                 try {
@@ -3778,99 +3633,78 @@ private constructor(
                 }
 
             /**
-             * Returns a score indicating how many valid values are contained in this object
-             * recursively.
+             * Returns a score indicating how many valid values are contained in this object recursively.
              *
              * Used for best match union deserialization.
              */
             @JvmSynthetic
-            internal fun validity(): Int =
-                (dataSourceRefs.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
-                    (if (documentId.asKnown().isPresent) 1 else 0)
+            internal fun validity(): Int = (dataSourceRefs.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) + (if (documentId.asKnown().isPresent) 1 else 0)
 
-            class DataSourceRef
-            private constructor(
+            class DataSourceRef private constructor(
                 private val dataSourceId: JsonField<String>,
                 private val endPosition: JsonField<String>,
                 private val paragraphNumber: JsonField<String>,
                 private val sentenceNumber: JsonField<String>,
                 private val startPosition: JsonField<String>,
                 private val additionalProperties: MutableMap<String, JsonValue>,
+
             ) {
 
                 @JsonCreator
                 private constructor(
-                    @JsonProperty("dataSourceId")
-                    @ExcludeMissing
-                    dataSourceId: JsonField<String> = JsonMissing.of(),
-                    @JsonProperty("endPosition")
-                    @ExcludeMissing
-                    endPosition: JsonField<String> = JsonMissing.of(),
-                    @JsonProperty("paragraphNumber")
-                    @ExcludeMissing
-                    paragraphNumber: JsonField<String> = JsonMissing.of(),
-                    @JsonProperty("sentenceNumber")
-                    @ExcludeMissing
-                    sentenceNumber: JsonField<String> = JsonMissing.of(),
-                    @JsonProperty("startPosition")
-                    @ExcludeMissing
-                    startPosition: JsonField<String> = JsonMissing.of(),
+                    @JsonProperty("dataSourceId") @ExcludeMissing dataSourceId: JsonField<String> = JsonMissing.of(),
+                    @JsonProperty("endPosition") @ExcludeMissing endPosition: JsonField<String> = JsonMissing.of(),
+                    @JsonProperty("paragraphNumber") @ExcludeMissing paragraphNumber: JsonField<String> = JsonMissing.of(),
+                    @JsonProperty("sentenceNumber") @ExcludeMissing sentenceNumber: JsonField<String> = JsonMissing.of(),
+                    @JsonProperty("startPosition") @ExcludeMissing startPosition: JsonField<String> = JsonMissing.of()
                 ) : this(
-                    dataSourceId,
-                    endPosition,
-                    paragraphNumber,
-                    sentenceNumber,
-                    startPosition,
-                    mutableMapOf(),
+                  dataSourceId,
+                  endPosition,
+                  paragraphNumber,
+                  sentenceNumber,
+                  startPosition,
+                  mutableMapOf(),
                 )
 
                 /**
                  * Data source id.
                  *
-                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an
-                 *   unexpected type (e.g. if the server responded with an unexpected value).
+                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
                  */
                 fun dataSourceId(): Optional<String> = dataSourceId.getOptional("dataSourceId")
 
                 /**
                  * end position.
                  *
-                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an
-                 *   unexpected type (e.g. if the server responded with an unexpected value).
+                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
                  */
                 fun endPosition(): Optional<String> = endPosition.getOptional("endPosition")
 
                 /**
                  * paragraph number.
                  *
-                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an
-                 *   unexpected type (e.g. if the server responded with an unexpected value).
+                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
                  */
-                fun paragraphNumber(): Optional<String> =
-                    paragraphNumber.getOptional("paragraphNumber")
+                fun paragraphNumber(): Optional<String> = paragraphNumber.getOptional("paragraphNumber")
 
                 /**
                  * sentence number.
                  *
-                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an
-                 *   unexpected type (e.g. if the server responded with an unexpected value).
+                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
                  */
-                fun sentenceNumber(): Optional<String> =
-                    sentenceNumber.getOptional("sentenceNumber")
+                fun sentenceNumber(): Optional<String> = sentenceNumber.getOptional("sentenceNumber")
 
                 /**
                  * start position.
                  *
-                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an
-                 *   unexpected type (e.g. if the server responded with an unexpected value).
+                 * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
                  */
                 fun startPosition(): Optional<String> = startPosition.getOptional("startPosition")
 
                 /**
                  * Returns the raw JSON value of [dataSourceId].
                  *
-                 * Unlike [dataSourceId], this method doesn't throw if the JSON field has an
-                 * unexpected type.
+                 * Unlike [dataSourceId], this method doesn't throw if the JSON field has an unexpected type.
                  */
                 @JsonProperty("dataSourceId")
                 @ExcludeMissing
@@ -3879,8 +3713,7 @@ private constructor(
                 /**
                  * Returns the raw JSON value of [endPosition].
                  *
-                 * Unlike [endPosition], this method doesn't throw if the JSON field has an
-                 * unexpected type.
+                 * Unlike [endPosition], this method doesn't throw if the JSON field has an unexpected type.
                  */
                 @JsonProperty("endPosition")
                 @ExcludeMissing
@@ -3889,8 +3722,7 @@ private constructor(
                 /**
                  * Returns the raw JSON value of [paragraphNumber].
                  *
-                 * Unlike [paragraphNumber], this method doesn't throw if the JSON field has an
-                 * unexpected type.
+                 * Unlike [paragraphNumber], this method doesn't throw if the JSON field has an unexpected type.
                  */
                 @JsonProperty("paragraphNumber")
                 @ExcludeMissing
@@ -3899,8 +3731,7 @@ private constructor(
                 /**
                  * Returns the raw JSON value of [sentenceNumber].
                  *
-                 * Unlike [sentenceNumber], this method doesn't throw if the JSON field has an
-                 * unexpected type.
+                 * Unlike [sentenceNumber], this method doesn't throw if the JSON field has an unexpected type.
                  */
                 @JsonProperty("sentenceNumber")
                 @ExcludeMissing
@@ -3909,8 +3740,7 @@ private constructor(
                 /**
                  * Returns the raw JSON value of [startPosition].
                  *
-                 * Unlike [startPosition], this method doesn't throw if the JSON field has an
-                 * unexpected type.
+                 * Unlike [startPosition], this method doesn't throw if the JSON field has an unexpected type.
                  */
                 @JsonProperty("startPosition")
                 @ExcludeMissing
@@ -3918,22 +3748,20 @@ private constructor(
 
                 @JsonAnySetter
                 private fun putAdditionalProperty(key: String, value: JsonValue) {
-                    additionalProperties.put(key, value)
+                  additionalProperties.put(key, value)
                 }
 
                 @JsonAnyGetter
                 @ExcludeMissing
-                fun _additionalProperties(): Map<String, JsonValue> =
-                    Collections.unmodifiableMap(additionalProperties)
+                fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
 
                 fun toBuilder() = Builder().from(this)
 
                 companion object {
 
-                    /**
-                     * Returns a mutable builder for constructing an instance of [DataSourceRef].
-                     */
-                    @JvmStatic fun builder() = Builder()
+                    /** Returns a mutable builder for constructing an instance of [DataSourceRef]. */
+                    @JvmStatic
+                    fun builder() = Builder()
                 }
 
                 /** A builder for [DataSourceRef]. */
@@ -3947,29 +3775,29 @@ private constructor(
                     private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
                     @JvmSynthetic
-                    internal fun from(dataSourceRef: DataSourceRef) = apply {
-                        dataSourceId = dataSourceRef.dataSourceId
-                        endPosition = dataSourceRef.endPosition
-                        paragraphNumber = dataSourceRef.paragraphNumber
-                        sentenceNumber = dataSourceRef.sentenceNumber
-                        startPosition = dataSourceRef.startPosition
-                        additionalProperties = dataSourceRef.additionalProperties.toMutableMap()
-                    }
+                    internal fun from(dataSourceRef: DataSourceRef) =
+                        apply {
+                            dataSourceId = dataSourceRef.dataSourceId
+                            endPosition = dataSourceRef.endPosition
+                            paragraphNumber = dataSourceRef.paragraphNumber
+                            sentenceNumber = dataSourceRef.sentenceNumber
+                            startPosition = dataSourceRef.startPosition
+                            additionalProperties = dataSourceRef.additionalProperties.toMutableMap()
+                        }
 
                     /** Data source id. */
-                    fun dataSourceId(dataSourceId: String) =
-                        dataSourceId(JsonField.of(dataSourceId))
+                    fun dataSourceId(dataSourceId: String) = dataSourceId(JsonField.of(dataSourceId))
 
                     /**
                      * Sets [Builder.dataSourceId] to an arbitrary JSON value.
                      *
-                     * You should usually call [Builder.dataSourceId] with a well-typed [String]
-                     * value instead. This method is primarily for setting the field to an
-                     * undocumented or not yet supported value.
+                     * You should usually call [Builder.dataSourceId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+                     * supported value.
                      */
-                    fun dataSourceId(dataSourceId: JsonField<String>) = apply {
-                        this.dataSourceId = dataSourceId
-                    }
+                    fun dataSourceId(dataSourceId: JsonField<String>) =
+                        apply {
+                            this.dataSourceId = dataSourceId
+                        }
 
                     /** end position. */
                     fun endPosition(endPosition: String) = endPosition(JsonField.of(endPosition))
@@ -3977,80 +3805,81 @@ private constructor(
                     /**
                      * Sets [Builder.endPosition] to an arbitrary JSON value.
                      *
-                     * You should usually call [Builder.endPosition] with a well-typed [String]
-                     * value instead. This method is primarily for setting the field to an
-                     * undocumented or not yet supported value.
+                     * You should usually call [Builder.endPosition] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+                     * supported value.
                      */
-                    fun endPosition(endPosition: JsonField<String>) = apply {
-                        this.endPosition = endPosition
-                    }
+                    fun endPosition(endPosition: JsonField<String>) =
+                        apply {
+                            this.endPosition = endPosition
+                        }
 
                     /** paragraph number. */
-                    fun paragraphNumber(paragraphNumber: String) =
-                        paragraphNumber(JsonField.of(paragraphNumber))
+                    fun paragraphNumber(paragraphNumber: String) = paragraphNumber(JsonField.of(paragraphNumber))
 
                     /**
                      * Sets [Builder.paragraphNumber] to an arbitrary JSON value.
                      *
-                     * You should usually call [Builder.paragraphNumber] with a well-typed [String]
-                     * value instead. This method is primarily for setting the field to an
-                     * undocumented or not yet supported value.
+                     * You should usually call [Builder.paragraphNumber] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+                     * supported value.
                      */
-                    fun paragraphNumber(paragraphNumber: JsonField<String>) = apply {
-                        this.paragraphNumber = paragraphNumber
-                    }
+                    fun paragraphNumber(paragraphNumber: JsonField<String>) =
+                        apply {
+                            this.paragraphNumber = paragraphNumber
+                        }
 
                     /** sentence number. */
-                    fun sentenceNumber(sentenceNumber: String) =
-                        sentenceNumber(JsonField.of(sentenceNumber))
+                    fun sentenceNumber(sentenceNumber: String) = sentenceNumber(JsonField.of(sentenceNumber))
 
                     /**
                      * Sets [Builder.sentenceNumber] to an arbitrary JSON value.
                      *
-                     * You should usually call [Builder.sentenceNumber] with a well-typed [String]
-                     * value instead. This method is primarily for setting the field to an
-                     * undocumented or not yet supported value.
+                     * You should usually call [Builder.sentenceNumber] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+                     * supported value.
                      */
-                    fun sentenceNumber(sentenceNumber: JsonField<String>) = apply {
-                        this.sentenceNumber = sentenceNumber
-                    }
+                    fun sentenceNumber(sentenceNumber: JsonField<String>) =
+                        apply {
+                            this.sentenceNumber = sentenceNumber
+                        }
 
                     /** start position. */
-                    fun startPosition(startPosition: String) =
-                        startPosition(JsonField.of(startPosition))
+                    fun startPosition(startPosition: String) = startPosition(JsonField.of(startPosition))
 
                     /**
                      * Sets [Builder.startPosition] to an arbitrary JSON value.
                      *
-                     * You should usually call [Builder.startPosition] with a well-typed [String]
-                     * value instead. This method is primarily for setting the field to an
-                     * undocumented or not yet supported value.
+                     * You should usually call [Builder.startPosition] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+                     * supported value.
                      */
-                    fun startPosition(startPosition: JsonField<String>) = apply {
-                        this.startPosition = startPosition
-                    }
+                    fun startPosition(startPosition: JsonField<String>) =
+                        apply {
+                            this.startPosition = startPosition
+                        }
 
-                    fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                        this.additionalProperties.clear()
-                        putAllAdditionalProperties(additionalProperties)
-                    }
+                    fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
+                        apply {
+                            this.additionalProperties.clear()
+                            putAllAdditionalProperties(additionalProperties)
+                        }
 
-                    fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-                        additionalProperties.put(key, value)
-                    }
+                    fun putAdditionalProperty(key: String, value: JsonValue) =
+                        apply {
+                            additionalProperties.put(key, value)
+                        }
 
                     fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
                         apply {
                             this.additionalProperties.putAll(additionalProperties)
                         }
 
-                    fun removeAdditionalProperty(key: String) = apply {
-                        additionalProperties.remove(key)
-                    }
+                    fun removeAdditionalProperty(key: String) =
+                        apply {
+                            additionalProperties.remove(key)
+                        }
 
-                    fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-                        keys.forEach(::removeAdditionalProperty)
-                    }
+                    fun removeAllAdditionalProperties(keys: Set<String>) =
+                        apply {
+                            keys.forEach(::removeAdditionalProperty)
+                        }
 
                     /**
                      * Returns an immutable instance of [DataSourceRef].
@@ -4059,29 +3888,30 @@ private constructor(
                      */
                     fun build(): DataSourceRef =
                         DataSourceRef(
-                            dataSourceId,
-                            endPosition,
-                            paragraphNumber,
-                            sentenceNumber,
-                            startPosition,
-                            additionalProperties.toMutableMap(),
+                          dataSourceId,
+                          endPosition,
+                          paragraphNumber,
+                          sentenceNumber,
+                          startPosition,
+                          additionalProperties.toMutableMap(),
                         )
                 }
 
                 private var validated: Boolean = false
 
-                fun validate(): DataSourceRef = apply {
-                    if (validated) {
-                        return@apply
-                    }
+                fun validate(): DataSourceRef =
+                    apply {
+                        if (validated) {
+                          return@apply
+                        }
 
-                    dataSourceId()
-                    endPosition()
-                    paragraphNumber()
-                    sentenceNumber()
-                    startPosition()
-                    validated = true
-                }
+                        dataSourceId()
+                        endPosition()
+                        paragraphNumber()
+                        sentenceNumber()
+                        startPosition()
+                        validated = true
+                    }
 
                 fun isValid(): Boolean =
                     try {
@@ -4092,25 +3922,19 @@ private constructor(
                     }
 
                 /**
-                 * Returns a score indicating how many valid values are contained in this object
-                 * recursively.
+                 * Returns a score indicating how many valid values are contained in this object recursively.
                  *
                  * Used for best match union deserialization.
                  */
                 @JvmSynthetic
-                internal fun validity(): Int =
-                    (if (dataSourceId.asKnown().isPresent) 1 else 0) +
-                        (if (endPosition.asKnown().isPresent) 1 else 0) +
-                        (if (paragraphNumber.asKnown().isPresent) 1 else 0) +
-                        (if (sentenceNumber.asKnown().isPresent) 1 else 0) +
-                        (if (startPosition.asKnown().isPresent) 1 else 0)
+                internal fun validity(): Int = (if (dataSourceId.asKnown().isPresent) 1 else 0) + (if (endPosition.asKnown().isPresent) 1 else 0) + (if (paragraphNumber.asKnown().isPresent) 1 else 0) + (if (sentenceNumber.asKnown().isPresent) 1 else 0) + (if (startPosition.asKnown().isPresent) 1 else 0)
 
                 override fun equals(other: Any?): Boolean {
-                    if (this === other) {
-                        return true
-                    }
+                  if (this === other) {
+                      return true
+                  }
 
-                    return /* spotless:off */ other is DataSourceRef && dataSourceId == other.dataSourceId && endPosition == other.endPosition && paragraphNumber == other.paragraphNumber && sentenceNumber == other.sentenceNumber && startPosition == other.startPosition && additionalProperties == other.additionalProperties /* spotless:on */
+                  return /* spotless:off */ other is DataSourceRef && dataSourceId == other.dataSourceId && endPosition == other.endPosition && paragraphNumber == other.paragraphNumber && sentenceNumber == other.sentenceNumber && startPosition == other.startPosition && additionalProperties == other.additionalProperties /* spotless:on */
                 }
 
                 /* spotless:off */
@@ -4119,16 +3943,15 @@ private constructor(
 
                 override fun hashCode(): Int = hashCode
 
-                override fun toString() =
-                    "DataSourceRef{dataSourceId=$dataSourceId, endPosition=$endPosition, paragraphNumber=$paragraphNumber, sentenceNumber=$sentenceNumber, startPosition=$startPosition, additionalProperties=$additionalProperties}"
+                override fun toString() = "DataSourceRef{dataSourceId=$dataSourceId, endPosition=$endPosition, paragraphNumber=$paragraphNumber, sentenceNumber=$sentenceNumber, startPosition=$startPosition, additionalProperties=$additionalProperties}"
             }
 
             override fun equals(other: Any?): Boolean {
-                if (this === other) {
-                    return true
-                }
+              if (this === other) {
+                  return true
+              }
 
-                return /* spotless:off */ other is RelatedDoc && dataSourceRefs == other.dataSourceRefs && documentId == other.documentId && additionalProperties == other.additionalProperties /* spotless:on */
+              return /* spotless:off */ other is RelatedDoc && dataSourceRefs == other.dataSourceRefs && documentId == other.documentId && additionalProperties == other.additionalProperties /* spotless:on */
             }
 
             /* spotless:off */
@@ -4137,16 +3960,15 @@ private constructor(
 
             override fun hashCode(): Int = hashCode
 
-            override fun toString() =
-                "RelatedDoc{dataSourceRefs=$dataSourceRefs, documentId=$documentId, additionalProperties=$additionalProperties}"
+            override fun toString() = "RelatedDoc{dataSourceRefs=$dataSourceRefs, documentId=$documentId, additionalProperties=$additionalProperties}"
         }
 
         override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
+          if (this === other) {
+              return true
+          }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && reportDate == other.reportDate && source == other.source && id == other.id && accuracy == other.accuracy && actors == other.actors && agjson == other.agjson && andims == other.andims && area == other.area && asrid == other.asrid && atext == other.atext && atype == other.atype && avgTone == other.avgTone && cameoBaseCode == other.cameoBaseCode && cameoCode == other.cameoCode && cameoRootCode == other.cameoRootCode && checksumValue == other.checksumValue && city == other.city && civAbd == other.civAbd && civDet == other.civDet && civKia == other.civKia && civWound == other.civWound && clarity == other.clarity && coalAbd == other.coalAbd && coalDet == other.coalDet && coalKia == other.coalKia && coalWound == other.coalWound && complexAttack == other.complexAttack && confidence == other.confidence && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && district == other.district && documentFilename == other.documentFilename && documentSource == other.documentSource && enemyAbd == other.enemyAbd && enemyDet == other.enemyDet && enemyKia == other.enemyKia && eventDescription == other.eventDescription && eventEnd == other.eventEnd && eventStart == other.eventStart && eventType == other.eventType && filesize == other.filesize && friendlyAbd == other.friendlyAbd && friendlyDet == other.friendlyDet && friendlyKia == other.friendlyKia && friendlyWound == other.friendlyWound && goldstein == other.goldstein && hasAttachment == other.hasAttachment && hostNatAbd == other.hostNatAbd && hostNatDet == other.hostNatDet && hostNatKia == other.hostNatKia && hostNatWound == other.hostNatWound && idNumber == other.idNumber && lat == other.lat && lon == other.lon && milgrid == other.milgrid && notes == other.notes && numArticles == other.numArticles && numMentions == other.numMentions && numSources == other.numSources && origin == other.origin && origNetwork == other.origNetwork && province == other.province && relatedDocs == other.relatedDocs && repUnit == other.repUnit && repUnitActivity == other.repUnitActivity && repUnitType == other.repUnitType && sideAAbd == other.sideAAbd && sideADet == other.sideADet && sideAkia == other.sideAkia && sideAWound == other.sideAWound && sideBAbd == other.sideBAbd && sideBDet == other.sideBDet && sideBkia == other.sideBkia && sideBWound == other.sideBWound && sourceLanguage == other.sourceLanguage && sourceUrl == other.sourceUrl && summary == other.summary && target == other.target && theater == other.theater && typeOfAttack == other.typeOfAttack /* spotless:on */
+          return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && reportDate == other.reportDate && source == other.source && id == other.id && accuracy == other.accuracy && actors == other.actors && agjson == other.agjson && andims == other.andims && area == other.area && asrid == other.asrid && atext == other.atext && atype == other.atype && avgTone == other.avgTone && cameoBaseCode == other.cameoBaseCode && cameoCode == other.cameoCode && cameoRootCode == other.cameoRootCode && checksumValue == other.checksumValue && city == other.city && civAbd == other.civAbd && civDet == other.civDet && civKia == other.civKia && civWound == other.civWound && clarity == other.clarity && coalAbd == other.coalAbd && coalDet == other.coalDet && coalKia == other.coalKia && coalWound == other.coalWound && complexAttack == other.complexAttack && confidence == other.confidence && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && district == other.district && documentFilename == other.documentFilename && documentSource == other.documentSource && enemyAbd == other.enemyAbd && enemyDet == other.enemyDet && enemyKia == other.enemyKia && eventDescription == other.eventDescription && eventEnd == other.eventEnd && eventStart == other.eventStart && eventType == other.eventType && filesize == other.filesize && friendlyAbd == other.friendlyAbd && friendlyDet == other.friendlyDet && friendlyKia == other.friendlyKia && friendlyWound == other.friendlyWound && goldstein == other.goldstein && hasAttachment == other.hasAttachment && hostNatAbd == other.hostNatAbd && hostNatDet == other.hostNatDet && hostNatKia == other.hostNatKia && hostNatWound == other.hostNatWound && idNumber == other.idNumber && lat == other.lat && lon == other.lon && milgrid == other.milgrid && notes == other.notes && numArticles == other.numArticles && numMentions == other.numMentions && numSources == other.numSources && origin == other.origin && origNetwork == other.origNetwork && province == other.province && relatedDocs == other.relatedDocs && repUnit == other.repUnit && repUnitActivity == other.repUnitActivity && repUnitType == other.repUnitType && sideAAbd == other.sideAAbd && sideADet == other.sideADet && sideAkia == other.sideAkia && sideAWound == other.sideAWound && sideBAbd == other.sideBAbd && sideBDet == other.sideBDet && sideBkia == other.sideBkia && sideBWound == other.sideBWound && sourceLanguage == other.sourceLanguage && sourceUrl == other.sourceUrl && summary == other.summary && target == other.target && theater == other.theater && typeOfAttack == other.typeOfAttack /* spotless:on */
         }
 
         /* spotless:off */
@@ -4155,20 +3977,18 @@ private constructor(
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, reportDate=$reportDate, source=$source, id=$id, accuracy=$accuracy, actors=$actors, agjson=$agjson, andims=$andims, area=$area, asrid=$asrid, atext=$atext, atype=$atype, avgTone=$avgTone, cameoBaseCode=$cameoBaseCode, cameoCode=$cameoCode, cameoRootCode=$cameoRootCode, checksumValue=$checksumValue, city=$city, civAbd=$civAbd, civDet=$civDet, civKia=$civKia, civWound=$civWound, clarity=$clarity, coalAbd=$coalAbd, coalDet=$coalDet, coalKia=$coalKia, coalWound=$coalWound, complexAttack=$complexAttack, confidence=$confidence, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, district=$district, documentFilename=$documentFilename, documentSource=$documentSource, enemyAbd=$enemyAbd, enemyDet=$enemyDet, enemyKia=$enemyKia, eventDescription=$eventDescription, eventEnd=$eventEnd, eventStart=$eventStart, eventType=$eventType, filesize=$filesize, friendlyAbd=$friendlyAbd, friendlyDet=$friendlyDet, friendlyKia=$friendlyKia, friendlyWound=$friendlyWound, goldstein=$goldstein, hasAttachment=$hasAttachment, hostNatAbd=$hostNatAbd, hostNatDet=$hostNatDet, hostNatKia=$hostNatKia, hostNatWound=$hostNatWound, idNumber=$idNumber, lat=$lat, lon=$lon, milgrid=$milgrid, notes=$notes, numArticles=$numArticles, numMentions=$numMentions, numSources=$numSources, origin=$origin, origNetwork=$origNetwork, province=$province, relatedDocs=$relatedDocs, repUnit=$repUnit, repUnitActivity=$repUnitActivity, repUnitType=$repUnitType, sideAAbd=$sideAAbd, sideADet=$sideADet, sideAkia=$sideAkia, sideAWound=$sideAWound, sideBAbd=$sideBAbd, sideBDet=$sideBDet, sideBkia=$sideBkia, sideBWound=$sideBWound, sourceLanguage=$sourceLanguage, sourceUrl=$sourceUrl, summary=$summary, target=$target, theater=$theater, typeOfAttack=$typeOfAttack}"
+        override fun toString() = "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, reportDate=$reportDate, source=$source, id=$id, accuracy=$accuracy, actors=$actors, agjson=$agjson, andims=$andims, area=$area, asrid=$asrid, atext=$atext, atype=$atype, avgTone=$avgTone, cameoBaseCode=$cameoBaseCode, cameoCode=$cameoCode, cameoRootCode=$cameoRootCode, checksumValue=$checksumValue, city=$city, civAbd=$civAbd, civDet=$civDet, civKia=$civKia, civWound=$civWound, clarity=$clarity, coalAbd=$coalAbd, coalDet=$coalDet, coalKia=$coalKia, coalWound=$coalWound, complexAttack=$complexAttack, confidence=$confidence, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, district=$district, documentFilename=$documentFilename, documentSource=$documentSource, enemyAbd=$enemyAbd, enemyDet=$enemyDet, enemyKia=$enemyKia, eventDescription=$eventDescription, eventEnd=$eventEnd, eventStart=$eventStart, eventType=$eventType, filesize=$filesize, friendlyAbd=$friendlyAbd, friendlyDet=$friendlyDet, friendlyKia=$friendlyKia, friendlyWound=$friendlyWound, goldstein=$goldstein, hasAttachment=$hasAttachment, hostNatAbd=$hostNatAbd, hostNatDet=$hostNatDet, hostNatKia=$hostNatKia, hostNatWound=$hostNatWound, idNumber=$idNumber, lat=$lat, lon=$lon, milgrid=$milgrid, notes=$notes, numArticles=$numArticles, numMentions=$numMentions, numSources=$numSources, origin=$origin, origNetwork=$origNetwork, province=$province, relatedDocs=$relatedDocs, repUnit=$repUnit, repUnitActivity=$repUnitActivity, repUnitType=$repUnitType, sideAAbd=$sideAAbd, sideADet=$sideADet, sideAkia=$sideAkia, sideAWound=$sideAWound, sideBAbd=$sideBAbd, sideBDet=$sideBDet, sideBkia=$sideBkia, sideBWound=$sideBWound, sourceLanguage=$sourceLanguage, sourceUrl=$sourceUrl, summary=$summary, target=$target, theater=$theater, typeOfAttack=$typeOfAttack}"
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is SigactCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+      return /* spotless:off */ other is SigactCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
 
-    override fun toString() =
-        "SigactCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() = "SigactCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

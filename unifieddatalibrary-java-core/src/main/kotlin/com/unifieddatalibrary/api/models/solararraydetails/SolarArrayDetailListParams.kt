@@ -9,13 +9,8 @@ import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/**
- * Service operation to dynamically query data by a variety of query parameters not specified in
- * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more
- * details on valid/required query parameter information.
- */
-class SolarArrayDetailListParams
-private constructor(
+/** Service operation to dynamically query data by a variety of query parameters not specified in this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
+class SolarArrayDetailListParams private constructor(
     private val classificationMarking: String?,
     private val dataMode: String?,
     private val firstResult: Long?,
@@ -23,29 +18,20 @@ private constructor(
     private val source: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
+
 ) : Params {
 
-    /**
-     * (One or more of fields 'classificationMarking, dataMode, source' are required.)
-     * Classification marking of the data in IC/CAPCO Portion-marked format.
-     */
+    /** (One or more of fields 'classificationMarking, dataMode, source' are required.) Classification marking of the data in IC/CAPCO Portion-marked format. */
     fun classificationMarking(): Optional<String> = Optional.ofNullable(classificationMarking)
 
-    /**
-     * (One or more of fields 'classificationMarking, dataMode, source' are required.) Indicator of
-     * whether the data is REAL, TEST, SIMULATED, or EXERCISE data. (REAL, TEST, SIMULATED, or
-     * EXERCISE)
-     */
+    /** (One or more of fields 'classificationMarking, dataMode, source' are required.) Indicator of whether the data is REAL, TEST, SIMULATED, or EXERCISE data. (REAL, TEST, SIMULATED, or EXERCISE) */
     fun dataMode(): Optional<String> = Optional.ofNullable(dataMode)
 
     fun firstResult(): Optional<Long> = Optional.ofNullable(firstResult)
 
     fun maxResults(): Optional<Long> = Optional.ofNullable(maxResults)
 
-    /**
-     * (One or more of fields 'classificationMarking, dataMode, source' are required.) Source of the
-     * data.
-     */
+    /** (One or more of fields 'classificationMarking, dataMode, source' are required.) Source of the data. */
     fun source(): Optional<String> = Optional.ofNullable(source)
 
     /** Additional headers to send with the request. */
@@ -58,12 +44,12 @@ private constructor(
 
     companion object {
 
-        @JvmStatic fun none(): SolarArrayDetailListParams = builder().build()
+        @JvmStatic
+        fun none(): SolarArrayDetailListParams = builder().build()
 
-        /**
-         * Returns a mutable builder for constructing an instance of [SolarArrayDetailListParams].
-         */
-        @JvmStatic fun builder() = Builder()
+        /** Returns a mutable builder for constructing an instance of [SolarArrayDetailListParams]. */
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [SolarArrayDetailListParams]. */
@@ -78,42 +64,39 @@ private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(solarArrayDetailListParams: SolarArrayDetailListParams) = apply {
-            classificationMarking = solarArrayDetailListParams.classificationMarking
-            dataMode = solarArrayDetailListParams.dataMode
-            firstResult = solarArrayDetailListParams.firstResult
-            maxResults = solarArrayDetailListParams.maxResults
-            source = solarArrayDetailListParams.source
-            additionalHeaders = solarArrayDetailListParams.additionalHeaders.toBuilder()
-            additionalQueryParams = solarArrayDetailListParams.additionalQueryParams.toBuilder()
-        }
+        internal fun from(solarArrayDetailListParams: SolarArrayDetailListParams) =
+            apply {
+                classificationMarking = solarArrayDetailListParams.classificationMarking
+                dataMode = solarArrayDetailListParams.dataMode
+                firstResult = solarArrayDetailListParams.firstResult
+                maxResults = solarArrayDetailListParams.maxResults
+                source = solarArrayDetailListParams.source
+                additionalHeaders = solarArrayDetailListParams.additionalHeaders.toBuilder()
+                additionalQueryParams = solarArrayDetailListParams.additionalQueryParams.toBuilder()
+            }
 
-        /**
-         * (One or more of fields 'classificationMarking, dataMode, source' are required.)
-         * Classification marking of the data in IC/CAPCO Portion-marked format.
-         */
-        fun classificationMarking(classificationMarking: String?) = apply {
-            this.classificationMarking = classificationMarking
-        }
+        /** (One or more of fields 'classificationMarking, dataMode, source' are required.) Classification marking of the data in IC/CAPCO Portion-marked format. */
+        fun classificationMarking(classificationMarking: String?) =
+            apply {
+                this.classificationMarking = classificationMarking
+            }
 
-        /**
-         * Alias for calling [Builder.classificationMarking] with
-         * `classificationMarking.orElse(null)`.
-         */
-        fun classificationMarking(classificationMarking: Optional<String>) =
-            classificationMarking(classificationMarking.getOrNull())
+        /** Alias for calling [Builder.classificationMarking] with `classificationMarking.orElse(null)`. */
+        fun classificationMarking(classificationMarking: Optional<String>) = classificationMarking(classificationMarking.getOrNull())
 
-        /**
-         * (One or more of fields 'classificationMarking, dataMode, source' are required.) Indicator
-         * of whether the data is REAL, TEST, SIMULATED, or EXERCISE data. (REAL, TEST, SIMULATED,
-         * or EXERCISE)
-         */
-        fun dataMode(dataMode: String?) = apply { this.dataMode = dataMode }
+        /** (One or more of fields 'classificationMarking, dataMode, source' are required.) Indicator of whether the data is REAL, TEST, SIMULATED, or EXERCISE data. (REAL, TEST, SIMULATED, or EXERCISE) */
+        fun dataMode(dataMode: String?) =
+            apply {
+                this.dataMode = dataMode
+            }
 
         /** Alias for calling [Builder.dataMode] with `dataMode.orElse(null)`. */
         fun dataMode(dataMode: Optional<String>) = dataMode(dataMode.getOrNull())
 
-        fun firstResult(firstResult: Long?) = apply { this.firstResult = firstResult }
+        fun firstResult(firstResult: Long?) =
+            apply {
+                this.firstResult = firstResult
+            }
 
         /**
          * Alias for [Builder.firstResult].
@@ -125,7 +108,10 @@ private constructor(
         /** Alias for calling [Builder.firstResult] with `firstResult.orElse(null)`. */
         fun firstResult(firstResult: Optional<Long>) = firstResult(firstResult.getOrNull())
 
-        fun maxResults(maxResults: Long?) = apply { this.maxResults = maxResults }
+        fun maxResults(maxResults: Long?) =
+            apply {
+                this.maxResults = maxResults
+            }
 
         /**
          * Alias for [Builder.maxResults].
@@ -137,112 +123,138 @@ private constructor(
         /** Alias for calling [Builder.maxResults] with `maxResults.orElse(null)`. */
         fun maxResults(maxResults: Optional<Long>) = maxResults(maxResults.getOrNull())
 
-        /**
-         * (One or more of fields 'classificationMarking, dataMode, source' are required.) Source of
-         * the data.
-         */
-        fun source(source: String?) = apply { this.source = source }
+        /** (One or more of fields 'classificationMarking, dataMode, source' are required.) Source of the data. */
+        fun source(source: String?) =
+            apply {
+                this.source = source
+            }
 
         /** Alias for calling [Builder.source] with `source.orElse(null)`. */
         fun source(source: Optional<String>) = source(source.getOrNull())
 
-        fun additionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.clear()
-            putAllAdditionalHeaders(additionalHeaders)
-        }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.clear()
+                putAllAdditionalHeaders(additionalHeaders)
+            }
 
-        fun putAdditionalHeader(name: String, value: String) = apply {
-            additionalHeaders.put(name, value)
-        }
+        fun putAdditionalHeader(name: String, value: String) =
+            apply {
+                additionalHeaders.put(name, value)
+            }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.put(name, values)
-        }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.put(name, values)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.putAll(additionalHeaders)
-        }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.putAll(additionalHeaders)
+            }
 
-        fun replaceAdditionalHeaders(name: String, value: String) = apply {
-            additionalHeaders.replace(name, value)
-        }
+        fun replaceAdditionalHeaders(name: String, value: String) =
+            apply {
+                additionalHeaders.replace(name, value)
+            }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
-            additionalHeaders.replace(name, values)
-        }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
+            apply {
+                additionalHeaders.replace(name, values)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
-            this.additionalHeaders.replaceAll(additionalHeaders)
-        }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalHeaders.replaceAll(additionalHeaders)
+            }
 
-        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
+        fun removeAdditionalHeaders(name: String) =
+            apply {
+                additionalHeaders.remove(name)
+            }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
-            additionalHeaders.removeAll(names)
-        }
+        fun removeAllAdditionalHeaders(names: Set<String>) =
+            apply {
+                additionalHeaders.removeAll(names)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
-            this.additionalQueryParams.clear()
-            putAllAdditionalQueryParams(additionalQueryParams)
-        }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
+            apply {
+                this.additionalQueryParams.clear()
+                putAllAdditionalQueryParams(additionalQueryParams)
+            }
 
-        fun putAdditionalQueryParam(key: String, value: String) = apply {
-            additionalQueryParams.put(key, value)
-        }
+        fun putAdditionalQueryParam(key: String, value: String) =
+            apply {
+                additionalQueryParams.put(key, value)
+            }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.put(key, values)
-        }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.put(key, values)
+            }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.putAll(additionalQueryParams)
-        }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.putAll(additionalQueryParams)
+            }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
-            additionalQueryParams.replace(key, value)
-        }
+        fun replaceAdditionalQueryParams(key: String, value: String) =
+            apply {
+                additionalQueryParams.replace(key, value)
+            }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
-            additionalQueryParams.replace(key, values)
-        }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
+            apply {
+                additionalQueryParams.replace(key, values)
+            }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
-            this.additionalQueryParams.replaceAll(additionalQueryParams)
-        }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
+            apply {
+                this.additionalQueryParams.replaceAll(additionalQueryParams)
+            }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
+        fun removeAdditionalQueryParams(key: String) =
+            apply {
+                additionalQueryParams.remove(key)
+            }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
-            additionalQueryParams.removeAll(keys)
-        }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) =
+            apply {
+                additionalQueryParams.removeAll(keys)
+            }
 
         /**
          * Returns an immutable instance of [SolarArrayDetailListParams].
@@ -251,13 +263,13 @@ private constructor(
          */
         fun build(): SolarArrayDetailListParams =
             SolarArrayDetailListParams(
-                classificationMarking,
-                dataMode,
-                firstResult,
-                maxResults,
-                source,
-                additionalHeaders.build(),
-                additionalQueryParams.build(),
+              classificationMarking,
+              dataMode,
+              firstResult,
+              maxResults,
+              source,
+              additionalHeaders.build(),
+              additionalQueryParams.build(),
             )
     }
 
@@ -276,15 +288,14 @@ private constructor(
             .build()
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is SolarArrayDetailListParams && classificationMarking == other.classificationMarking && dataMode == other.dataMode && firstResult == other.firstResult && maxResults == other.maxResults && source == other.source && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+      return /* spotless:off */ other is SolarArrayDetailListParams && classificationMarking == other.classificationMarking && dataMode == other.dataMode && firstResult == other.firstResult && maxResults == other.maxResults && source == other.source && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(classificationMarking, dataMode, firstResult, maxResults, source, additionalHeaders, additionalQueryParams) /* spotless:on */
 
-    override fun toString() =
-        "SolarArrayDetailListParams{classificationMarking=$classificationMarking, dataMode=$dataMode, firstResult=$firstResult, maxResults=$maxResults, source=$source, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() = "SolarArrayDetailListParams{classificationMarking=$classificationMarking, dataMode=$dataMode, firstResult=$firstResult, maxResults=$maxResults, source=$source, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

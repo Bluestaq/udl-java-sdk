@@ -2,12 +2,13 @@
 
 package com.unifieddatalibrary.api.models.substatus
 
+import com.unifieddatalibrary.api.models.substatus.SubstatusQueryhelpParams
 import org.junit.jupiter.api.Test
 
 internal class SubstatusQueryhelpParamsTest {
 
     @Test
     fun create() {
-        SubstatusQueryhelpParams.builder().build()
+      SubstatusQueryhelpParams.builder().build()
     }
 }

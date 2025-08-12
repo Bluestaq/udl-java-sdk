@@ -5,23 +5,28 @@ package com.unifieddatalibrary.api.models.effectresponses
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.models.effectresponses.EffectResponseListParams
+import com.unifieddatalibrary.api.models.effectresponses.EffectResponseListResponse
 import com.unifieddatalibrary.api.services.blocking.EffectResponseService
 import java.util.Objects
+import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see EffectResponseService.list */
-class EffectResponseListPage
-private constructor(
+class EffectResponseListPage private constructor(
     private val service: EffectResponseService,
     private val params: EffectResponseListParams,
     private val items: List<EffectResponseListResponse>,
+
 ) : Page<EffectResponseListResponse> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): EffectResponseListParams {
-        val offset = params.firstResult().getOrDefault(0)
-        return params.toBuilder().firstResult(offset + items().size).build()
+      val offset = params.firstResult().getOrDefault(0)
+      return params.toBuilder()
+          .firstResult(offset + items().size)
+          .build()
     }
 
     override fun nextPage(): EffectResponseListPage = service.list(nextPageParams())
@@ -42,13 +47,15 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [EffectResponseListPage].
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [EffectResponseListPage]. */
@@ -59,19 +66,29 @@ private constructor(
         private var items: List<EffectResponseListResponse>? = null
 
         @JvmSynthetic
-        internal fun from(effectResponseListPage: EffectResponseListPage) = apply {
-            service = effectResponseListPage.service
-            params = effectResponseListPage.params
-            items = effectResponseListPage.items
-        }
+        internal fun from(effectResponseListPage: EffectResponseListPage) =
+            apply {
+                service = effectResponseListPage.service
+                params = effectResponseListPage.params
+                items = effectResponseListPage.items
+            }
 
-        fun service(service: EffectResponseService) = apply { this.service = service }
+        fun service(service: EffectResponseService) =
+            apply {
+                this.service = service
+            }
 
         /** The parameters that were used to request this page. */
-        fun params(params: EffectResponseListParams) = apply { this.params = params }
+        fun params(params: EffectResponseListParams) =
+            apply {
+                this.params = params
+            }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<EffectResponseListResponse>) = apply { this.items = items }
+        fun items(items: List<EffectResponseListResponse>) =
+            apply {
+                this.items = items
+            }
 
         /**
          * Returns an immutable instance of [EffectResponseListPage].
@@ -79,6 +96,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
@@ -89,22 +107,27 @@ private constructor(
          */
         fun build(): EffectResponseListPage =
             EffectResponseListPage(
-                checkRequired("service", service),
-                checkRequired("params", params),
-                checkRequired("items", items),
+              checkRequired(
+                "service", service
+              ),
+              checkRequired(
+                "params", params
+              ),
+              checkRequired(
+                "items", items
+              ),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is EffectResponseListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+      return /* spotless:off */ other is EffectResponseListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
 
-    override fun toString() =
-        "EffectResponseListPage{service=$service, params=$params, items=$items}"
+    override fun toString() = "EffectResponseListPage{service=$service, params=$params, items=$items}"
 }

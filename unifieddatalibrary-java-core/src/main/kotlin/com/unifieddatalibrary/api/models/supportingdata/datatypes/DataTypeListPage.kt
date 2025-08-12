@@ -8,8 +8,6 @@ import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.services.blocking.supportingdata.DataTypeService
 import java.util.Objects
 import kotlin.jvm.optionals.getOrDefault
-import kotlin.jvm.optionals.getOrNull
-import kotlin.jvm.optionals.toList
 
 /** @see DataTypeService.list */
 class DataTypeListPage
@@ -20,7 +18,7 @@ private constructor(
 ) : Page<String> {
 
     /** Delegates to [List<String>], but gracefully handles missing data. */
-    override fun items(): List<String> = items.flatMap { it.toList() }.getOrNull() ?: emptyList()
+    override fun items(): List<String> = items
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
@@ -35,9 +33,6 @@ private constructor(
 
     /** The parameters that were used to request this page. */
     fun params(): DataTypeListParams = params
-
-    /** The response that this page was parsed from. */
-    override fun items(): List<String> = items
 
     fun toBuilder() = Builder().from(this)
 

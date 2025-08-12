@@ -17,69 +17,65 @@ import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.CollectResponseFull
 import com.unifieddatalibrary.api.models.collectresponses.tuple.TupleListPage
 import com.unifieddatalibrary.api.models.collectresponses.tuple.TupleListParams
+import com.unifieddatalibrary.api.services.blocking.collectresponses.TupleService
+import com.unifieddatalibrary.api.services.blocking.collectresponses.TupleServiceImpl
 import java.util.function.Consumer
 
-class TupleServiceImpl internal constructor(private val clientOptions: ClientOptions) :
-    TupleService {
+class TupleServiceImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: TupleService.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : TupleService {
+
+    private val withRawResponse: TupleService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     override fun withRawResponse(): TupleService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): TupleService =
-        TupleServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): TupleService = TupleServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun list(params: TupleListParams, requestOptions: RequestOptions): TupleListPage =
         // get /udl/collectresponse/tuple
         withRawResponse().list(params, requestOptions).parse()
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        TupleService.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<HttpResponse> =
-            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+    ) : TupleService.WithRawResponse {
 
-        override fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): TupleService.WithRawResponse =
-            TupleServiceImpl.WithRawResponseImpl(
-                clientOptions.toBuilder().apply(modifier::accept).build()
-            )
+        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val listHandler: Handler<List<CollectResponseFull>> =
-            jsonHandler<List<CollectResponseFull>>(clientOptions.jsonMapper)
+        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): TupleService.WithRawResponse = TupleServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-        override fun list(
-            params: TupleListParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<TupleListPage> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "collectresponse", "tuple")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { listHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-                    .let {
-                        TupleListPage.builder()
-                            .service(TupleServiceImpl(clientOptions))
-                            .params(params)
-                            .items(it)
-                            .build()
-                    }
-            }
+        private val listHandler: Handler<List<CollectResponseFull>> = jsonHandler<List<CollectResponseFull>>(clientOptions.jsonMapper)
+
+        override fun list(params: TupleListParams, requestOptions: RequestOptions): HttpResponseFor<TupleListPage> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "collectresponse", "tuple")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  listHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.forEach { it.validate() }
+                  }
+              }
+              .let {
+                  TupleListPage.builder()
+                      .service(TupleServiceImpl(clientOptions))
+                      .params(params)
+                      .items(it)
+                      .build()
+              }
+          }
         }
     }
 }

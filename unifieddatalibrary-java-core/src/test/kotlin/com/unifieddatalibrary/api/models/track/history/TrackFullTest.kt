@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.models.track.history
 
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import com.unifieddatalibrary.api.core.jsonMapper
+import com.unifieddatalibrary.api.models.track.history.TrackFull
 import java.time.OffsetDateTime
 import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
@@ -13,248 +14,358 @@ internal class TrackFullTest {
 
     @Test
     fun create() {
-        val trackFull =
-            TrackFull.builder()
-                .classificationMarking("U")
-                .dataMode(TrackFull.DataMode.TEST)
-                .source("Bluestaq")
-                .ts(OffsetDateTime.parse("2021-06-07T14:17:39.653043Z"))
-                .id("TRACK-ID")
-                .alt(1.23)
-                .asset("asset")
-                .assetNat("US")
-                .attitude(listOf(10.0, 0.1, 1.0))
-                .attitudeRate(listOf(0.0003, 1e-7, 0.00003))
-                .callSign("callSign")
-                .cntct("Contact Info")
-                .course(88.37)
-                .cov(listOf(1.1, 2.2, 3.3))
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .ecefAcc(listOf(1.23, 2.34, 3.45))
-                .ecefPos(listOf(1.23, 2.34, 3.45))
-                .ecefVel(listOf(1.23, 2.34, 3.45))
-                .eNuAcc(listOf(0.0003, 0.014, 0.0003))
-                .eNuPos(listOf(1.23, 2.34, 3.45))
-                .eNuVel(listOf(1.23, 2.34, 3.45))
-                .env("LAND")
-                .envConf(1.23)
-                .errEllp(listOf(1.23, 2.34, 3.45))
-                .hdng(19.7)
-                .identAmp("ZOMBIE")
-                .identCred(0)
-                .identRel(0)
-                .jSeries("J12.5")
-                .lat(1.23)
-                .lcAcc(listOf(1.23, 2.34, 3.45))
-                .lco(listOf(1.23, 2.34, 3.45))
-                .lcPos(listOf(1.23, 2.34, 3.45))
-                .lcs(listOf(1.23, 2.34, 3.45))
-                .lcVel(listOf(1.23, 2.34, 3.45))
-                .lon(1.23)
-                .m1(1234)
-                .m1v(1)
-                .m2(1234)
-                .m2v(1)
-                .m3a(2636)
-                .m3av(1)
-                .modType("MASINT")
-                .msgTs(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
-                .msnId("msnId")
-                .multiSource(true)
-                .objAct("HOLDING")
-                .objId("objId")
-                .objIdent("FRIEND")
-                .objNat("NATO")
-                .objPlat("COMBAT_VEHICLE")
-                .objSpec("LIGHT_TANK")
-                .objType("WATERCRAFT")
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
-                .sen("sen")
-                .senQual("senQual")
-                .sourceDl("AXE")
-                .spd(1.23)
-                .addSrcId("f7c70cc8-f9b7-4467-b4ad-3904e360e842")
-                .addSrcId("1da3fab000014e3133709830937387405")
-                .addSrcTyp("MTI")
-                .addSrcTyp("POI")
-                .strength(14)
-                .addTag("TAG1")
-                .addTag("TAG2")
-                .trkConf(1.23)
-                .trkId("trkId")
-                .trkItmId("trkItmId")
-                .trkNum("trkNum")
-                .trkPtType("MEASURED")
-                .trkQual(0)
-                .trkStat("INITIATING")
-                .build()
+      val trackFull = TrackFull.builder()
+          .classificationMarking("U")
+          .dataMode(TrackFull.DataMode.TEST)
+          .source("Bluestaq")
+          .ts(OffsetDateTime.parse("2021-06-07T14:17:39.653043Z"))
+          .id("TRACK-ID")
+          .alt(1.23)
+          .asset("asset")
+          .assetNat("US")
+          .attitude(listOf(
+            10.0,
+            0.1,
+            1.0,
+          ))
+          .attitudeRate(listOf(
+            0.0003,
+            1e-7,
+            0.00003,
+          ))
+          .callSign("callSign")
+          .cntct("Contact Info")
+          .course(88.37)
+          .cov(listOf(
+            1.1,
+            2.2,
+            3.3,
+          ))
+          .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+          .createdBy("some.user")
+          .ecefAcc(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .ecefPos(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .ecefVel(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .eNuAcc(listOf(
+            0.0003,
+            0.014,
+            0.0003,
+          ))
+          .eNuPos(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .eNuVel(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .env("LAND")
+          .envConf(1.23)
+          .errEllp(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .hdng(19.7)
+          .identAmp("ZOMBIE")
+          .identCred(0)
+          .identRel(0)
+          .jSeries("J12.5")
+          .lat(1.23)
+          .lcAcc(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .lco(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .lcPos(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .lcs(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .lcVel(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .lon(1.23)
+          .m1(1234)
+          .m1v(1)
+          .m2(1234)
+          .m2v(1)
+          .m3a(2636)
+          .m3av(1)
+          .modType("MASINT")
+          .msgTs(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
+          .msnId("msnId")
+          .multiSource(true)
+          .objAct("HOLDING")
+          .objId("objId")
+          .objIdent("FRIEND")
+          .objNat("NATO")
+          .objPlat("COMBAT_VEHICLE")
+          .objSpec("LIGHT_TANK")
+          .objType("WATERCRAFT")
+          .origin("THIRD_PARTY_DATASOURCE")
+          .origNetwork("ORIG")
+          .sen("sen")
+          .senQual("senQual")
+          .sourceDl("AXE")
+          .spd(1.23)
+          .addSrcId("f7c70cc8-f9b7-4467-b4ad-3904e360e842")
+          .addSrcId("1da3fab000014e3133709830937387405")
+          .addSrcTyp("MTI")
+          .addSrcTyp("POI")
+          .strength(14)
+          .addTag("TAG1")
+          .addTag("TAG2")
+          .trkConf(1.23)
+          .trkId("trkId")
+          .trkItmId("trkItmId")
+          .trkNum("trkNum")
+          .trkPtType("MEASURED")
+          .trkQual(0)
+          .trkStat("INITIATING")
+          .build()
 
-        assertThat(trackFull.classificationMarking()).isEqualTo("U")
-        assertThat(trackFull.dataMode()).isEqualTo(TrackFull.DataMode.TEST)
-        assertThat(trackFull.source()).isEqualTo("Bluestaq")
-        assertThat(trackFull.ts()).isEqualTo(OffsetDateTime.parse("2021-06-07T14:17:39.653043Z"))
-        assertThat(trackFull.id()).contains("TRACK-ID")
-        assertThat(trackFull.alt()).contains(1.23)
-        assertThat(trackFull.asset()).contains("asset")
-        assertThat(trackFull.assetNat()).contains("US")
-        assertThat(trackFull.attitude().getOrNull()).containsExactly(10.0, 0.1, 1.0)
-        assertThat(trackFull.attitudeRate().getOrNull()).containsExactly(0.0003, 1e-7, 0.00003)
-        assertThat(trackFull.callSign()).contains("callSign")
-        assertThat(trackFull.cntct()).contains("Contact Info")
-        assertThat(trackFull.course()).contains(88.37)
-        assertThat(trackFull.cov().getOrNull()).containsExactly(1.1, 2.2, 3.3)
-        assertThat(trackFull.createdAt()).contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(trackFull.createdBy()).contains("some.user")
-        assertThat(trackFull.ecefAcc().getOrNull()).containsExactly(1.23, 2.34, 3.45)
-        assertThat(trackFull.ecefPos().getOrNull()).containsExactly(1.23, 2.34, 3.45)
-        assertThat(trackFull.ecefVel().getOrNull()).containsExactly(1.23, 2.34, 3.45)
-        assertThat(trackFull.eNuAcc().getOrNull()).containsExactly(0.0003, 0.014, 0.0003)
-        assertThat(trackFull.eNuPos().getOrNull()).containsExactly(1.23, 2.34, 3.45)
-        assertThat(trackFull.eNuVel().getOrNull()).containsExactly(1.23, 2.34, 3.45)
-        assertThat(trackFull.env()).contains("LAND")
-        assertThat(trackFull.envConf()).contains(1.23)
-        assertThat(trackFull.errEllp().getOrNull()).containsExactly(1.23, 2.34, 3.45)
-        assertThat(trackFull.hdng()).contains(19.7)
-        assertThat(trackFull.identAmp()).contains("ZOMBIE")
-        assertThat(trackFull.identCred()).contains(0)
-        assertThat(trackFull.identRel()).contains(0)
-        assertThat(trackFull.jSeries()).contains("J12.5")
-        assertThat(trackFull.lat()).contains(1.23)
-        assertThat(trackFull.lcAcc().getOrNull()).containsExactly(1.23, 2.34, 3.45)
-        assertThat(trackFull.lco().getOrNull()).containsExactly(1.23, 2.34, 3.45)
-        assertThat(trackFull.lcPos().getOrNull()).containsExactly(1.23, 2.34, 3.45)
-        assertThat(trackFull.lcs().getOrNull()).containsExactly(1.23, 2.34, 3.45)
-        assertThat(trackFull.lcVel().getOrNull()).containsExactly(1.23, 2.34, 3.45)
-        assertThat(trackFull.lon()).contains(1.23)
-        assertThat(trackFull.m1()).contains(1234)
-        assertThat(trackFull.m1v()).contains(1)
-        assertThat(trackFull.m2()).contains(1234)
-        assertThat(trackFull.m2v()).contains(1)
-        assertThat(trackFull.m3a()).contains(2636)
-        assertThat(trackFull.m3av()).contains(1)
-        assertThat(trackFull.modType()).contains("MASINT")
-        assertThat(trackFull.msgTs()).contains(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
-        assertThat(trackFull.msnId()).contains("msnId")
-        assertThat(trackFull.multiSource()).contains(true)
-        assertThat(trackFull.objAct()).contains("HOLDING")
-        assertThat(trackFull.objId()).contains("objId")
-        assertThat(trackFull.objIdent()).contains("FRIEND")
-        assertThat(trackFull.objNat()).contains("NATO")
-        assertThat(trackFull.objPlat()).contains("COMBAT_VEHICLE")
-        assertThat(trackFull.objSpec()).contains("LIGHT_TANK")
-        assertThat(trackFull.objType()).contains("WATERCRAFT")
-        assertThat(trackFull.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(trackFull.origNetwork()).contains("ORIG")
-        assertThat(trackFull.sen()).contains("sen")
-        assertThat(trackFull.senQual()).contains("senQual")
-        assertThat(trackFull.sourceDl()).contains("AXE")
-        assertThat(trackFull.spd()).contains(1.23)
-        assertThat(trackFull.srcIds().getOrNull())
-            .containsExactly(
-                "f7c70cc8-f9b7-4467-b4ad-3904e360e842",
-                "1da3fab000014e3133709830937387405",
-            )
-        assertThat(trackFull.srcTyps().getOrNull()).containsExactly("MTI", "POI")
-        assertThat(trackFull.strength()).contains(14)
-        assertThat(trackFull.tags().getOrNull()).containsExactly("TAG1", "TAG2")
-        assertThat(trackFull.trkConf()).contains(1.23)
-        assertThat(trackFull.trkId()).contains("trkId")
-        assertThat(trackFull.trkItmId()).contains("trkItmId")
-        assertThat(trackFull.trkNum()).contains("trkNum")
-        assertThat(trackFull.trkPtType()).contains("MEASURED")
-        assertThat(trackFull.trkQual()).contains(0)
-        assertThat(trackFull.trkStat()).contains("INITIATING")
+      assertThat(trackFull.classificationMarking()).isEqualTo("U")
+      assertThat(trackFull.dataMode()).isEqualTo(TrackFull.DataMode.TEST)
+      assertThat(trackFull.source()).isEqualTo("Bluestaq")
+      assertThat(trackFull.ts()).isEqualTo(OffsetDateTime.parse("2021-06-07T14:17:39.653043Z"))
+      assertThat(trackFull.id()).contains("TRACK-ID")
+      assertThat(trackFull.alt()).contains(1.23)
+      assertThat(trackFull.asset()).contains("asset")
+      assertThat(trackFull.assetNat()).contains("US")
+      assertThat(trackFull.attitude().getOrNull()).containsExactly(10.0, 0.1, 1.0)
+      assertThat(trackFull.attitudeRate().getOrNull()).containsExactly(0.0003, 1e-7, 0.00003)
+      assertThat(trackFull.callSign()).contains("callSign")
+      assertThat(trackFull.cntct()).contains("Contact Info")
+      assertThat(trackFull.course()).contains(88.37)
+      assertThat(trackFull.cov().getOrNull()).containsExactly(1.1, 2.2, 3.3)
+      assertThat(trackFull.createdAt()).contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+      assertThat(trackFull.createdBy()).contains("some.user")
+      assertThat(trackFull.ecefAcc().getOrNull()).containsExactly(1.23, 2.34, 3.45)
+      assertThat(trackFull.ecefPos().getOrNull()).containsExactly(1.23, 2.34, 3.45)
+      assertThat(trackFull.ecefVel().getOrNull()).containsExactly(1.23, 2.34, 3.45)
+      assertThat(trackFull.eNuAcc().getOrNull()).containsExactly(0.0003, 0.014, 0.0003)
+      assertThat(trackFull.eNuPos().getOrNull()).containsExactly(1.23, 2.34, 3.45)
+      assertThat(trackFull.eNuVel().getOrNull()).containsExactly(1.23, 2.34, 3.45)
+      assertThat(trackFull.env()).contains("LAND")
+      assertThat(trackFull.envConf()).contains(1.23)
+      assertThat(trackFull.errEllp().getOrNull()).containsExactly(1.23, 2.34, 3.45)
+      assertThat(trackFull.hdng()).contains(19.7)
+      assertThat(trackFull.identAmp()).contains("ZOMBIE")
+      assertThat(trackFull.identCred()).contains(0)
+      assertThat(trackFull.identRel()).contains(0)
+      assertThat(trackFull.jSeries()).contains("J12.5")
+      assertThat(trackFull.lat()).contains(1.23)
+      assertThat(trackFull.lcAcc().getOrNull()).containsExactly(1.23, 2.34, 3.45)
+      assertThat(trackFull.lco().getOrNull()).containsExactly(1.23, 2.34, 3.45)
+      assertThat(trackFull.lcPos().getOrNull()).containsExactly(1.23, 2.34, 3.45)
+      assertThat(trackFull.lcs().getOrNull()).containsExactly(1.23, 2.34, 3.45)
+      assertThat(trackFull.lcVel().getOrNull()).containsExactly(1.23, 2.34, 3.45)
+      assertThat(trackFull.lon()).contains(1.23)
+      assertThat(trackFull.m1()).contains(1234)
+      assertThat(trackFull.m1v()).contains(1)
+      assertThat(trackFull.m2()).contains(1234)
+      assertThat(trackFull.m2v()).contains(1)
+      assertThat(trackFull.m3a()).contains(2636)
+      assertThat(trackFull.m3av()).contains(1)
+      assertThat(trackFull.modType()).contains("MASINT")
+      assertThat(trackFull.msgTs()).contains(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
+      assertThat(trackFull.msnId()).contains("msnId")
+      assertThat(trackFull.multiSource()).contains(true)
+      assertThat(trackFull.objAct()).contains("HOLDING")
+      assertThat(trackFull.objId()).contains("objId")
+      assertThat(trackFull.objIdent()).contains("FRIEND")
+      assertThat(trackFull.objNat()).contains("NATO")
+      assertThat(trackFull.objPlat()).contains("COMBAT_VEHICLE")
+      assertThat(trackFull.objSpec()).contains("LIGHT_TANK")
+      assertThat(trackFull.objType()).contains("WATERCRAFT")
+      assertThat(trackFull.origin()).contains("THIRD_PARTY_DATASOURCE")
+      assertThat(trackFull.origNetwork()).contains("ORIG")
+      assertThat(trackFull.sen()).contains("sen")
+      assertThat(trackFull.senQual()).contains("senQual")
+      assertThat(trackFull.sourceDl()).contains("AXE")
+      assertThat(trackFull.spd()).contains(1.23)
+      assertThat(trackFull.srcIds().getOrNull()).containsExactly("f7c70cc8-f9b7-4467-b4ad-3904e360e842", "1da3fab000014e3133709830937387405")
+      assertThat(trackFull.srcTyps().getOrNull()).containsExactly("MTI", "POI")
+      assertThat(trackFull.strength()).contains(14)
+      assertThat(trackFull.tags().getOrNull()).containsExactly("TAG1", "TAG2")
+      assertThat(trackFull.trkConf()).contains(1.23)
+      assertThat(trackFull.trkId()).contains("trkId")
+      assertThat(trackFull.trkItmId()).contains("trkItmId")
+      assertThat(trackFull.trkNum()).contains("trkNum")
+      assertThat(trackFull.trkPtType()).contains("MEASURED")
+      assertThat(trackFull.trkQual()).contains(0)
+      assertThat(trackFull.trkStat()).contains("INITIATING")
     }
 
     @Test
     fun roundtrip() {
-        val jsonMapper = jsonMapper()
-        val trackFull =
-            TrackFull.builder()
-                .classificationMarking("U")
-                .dataMode(TrackFull.DataMode.TEST)
-                .source("Bluestaq")
-                .ts(OffsetDateTime.parse("2021-06-07T14:17:39.653043Z"))
-                .id("TRACK-ID")
-                .alt(1.23)
-                .asset("asset")
-                .assetNat("US")
-                .attitude(listOf(10.0, 0.1, 1.0))
-                .attitudeRate(listOf(0.0003, 1e-7, 0.00003))
-                .callSign("callSign")
-                .cntct("Contact Info")
-                .course(88.37)
-                .cov(listOf(1.1, 2.2, 3.3))
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .ecefAcc(listOf(1.23, 2.34, 3.45))
-                .ecefPos(listOf(1.23, 2.34, 3.45))
-                .ecefVel(listOf(1.23, 2.34, 3.45))
-                .eNuAcc(listOf(0.0003, 0.014, 0.0003))
-                .eNuPos(listOf(1.23, 2.34, 3.45))
-                .eNuVel(listOf(1.23, 2.34, 3.45))
-                .env("LAND")
-                .envConf(1.23)
-                .errEllp(listOf(1.23, 2.34, 3.45))
-                .hdng(19.7)
-                .identAmp("ZOMBIE")
-                .identCred(0)
-                .identRel(0)
-                .jSeries("J12.5")
-                .lat(1.23)
-                .lcAcc(listOf(1.23, 2.34, 3.45))
-                .lco(listOf(1.23, 2.34, 3.45))
-                .lcPos(listOf(1.23, 2.34, 3.45))
-                .lcs(listOf(1.23, 2.34, 3.45))
-                .lcVel(listOf(1.23, 2.34, 3.45))
-                .lon(1.23)
-                .m1(1234)
-                .m1v(1)
-                .m2(1234)
-                .m2v(1)
-                .m3a(2636)
-                .m3av(1)
-                .modType("MASINT")
-                .msgTs(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
-                .msnId("msnId")
-                .multiSource(true)
-                .objAct("HOLDING")
-                .objId("objId")
-                .objIdent("FRIEND")
-                .objNat("NATO")
-                .objPlat("COMBAT_VEHICLE")
-                .objSpec("LIGHT_TANK")
-                .objType("WATERCRAFT")
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
-                .sen("sen")
-                .senQual("senQual")
-                .sourceDl("AXE")
-                .spd(1.23)
-                .addSrcId("f7c70cc8-f9b7-4467-b4ad-3904e360e842")
-                .addSrcId("1da3fab000014e3133709830937387405")
-                .addSrcTyp("MTI")
-                .addSrcTyp("POI")
-                .strength(14)
-                .addTag("TAG1")
-                .addTag("TAG2")
-                .trkConf(1.23)
-                .trkId("trkId")
-                .trkItmId("trkItmId")
-                .trkNum("trkNum")
-                .trkPtType("MEASURED")
-                .trkQual(0)
-                .trkStat("INITIATING")
-                .build()
+      val jsonMapper = jsonMapper()
+      val trackFull = TrackFull.builder()
+          .classificationMarking("U")
+          .dataMode(TrackFull.DataMode.TEST)
+          .source("Bluestaq")
+          .ts(OffsetDateTime.parse("2021-06-07T14:17:39.653043Z"))
+          .id("TRACK-ID")
+          .alt(1.23)
+          .asset("asset")
+          .assetNat("US")
+          .attitude(listOf(
+            10.0,
+            0.1,
+            1.0,
+          ))
+          .attitudeRate(listOf(
+            0.0003,
+            1e-7,
+            0.00003,
+          ))
+          .callSign("callSign")
+          .cntct("Contact Info")
+          .course(88.37)
+          .cov(listOf(
+            1.1,
+            2.2,
+            3.3,
+          ))
+          .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+          .createdBy("some.user")
+          .ecefAcc(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .ecefPos(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .ecefVel(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .eNuAcc(listOf(
+            0.0003,
+            0.014,
+            0.0003,
+          ))
+          .eNuPos(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .eNuVel(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .env("LAND")
+          .envConf(1.23)
+          .errEllp(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .hdng(19.7)
+          .identAmp("ZOMBIE")
+          .identCred(0)
+          .identRel(0)
+          .jSeries("J12.5")
+          .lat(1.23)
+          .lcAcc(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .lco(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .lcPos(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .lcs(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .lcVel(listOf(
+            1.23,
+            2.34,
+            3.45,
+          ))
+          .lon(1.23)
+          .m1(1234)
+          .m1v(1)
+          .m2(1234)
+          .m2v(1)
+          .m3a(2636)
+          .m3av(1)
+          .modType("MASINT")
+          .msgTs(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
+          .msnId("msnId")
+          .multiSource(true)
+          .objAct("HOLDING")
+          .objId("objId")
+          .objIdent("FRIEND")
+          .objNat("NATO")
+          .objPlat("COMBAT_VEHICLE")
+          .objSpec("LIGHT_TANK")
+          .objType("WATERCRAFT")
+          .origin("THIRD_PARTY_DATASOURCE")
+          .origNetwork("ORIG")
+          .sen("sen")
+          .senQual("senQual")
+          .sourceDl("AXE")
+          .spd(1.23)
+          .addSrcId("f7c70cc8-f9b7-4467-b4ad-3904e360e842")
+          .addSrcId("1da3fab000014e3133709830937387405")
+          .addSrcTyp("MTI")
+          .addSrcTyp("POI")
+          .strength(14)
+          .addTag("TAG1")
+          .addTag("TAG2")
+          .trkConf(1.23)
+          .trkId("trkId")
+          .trkItmId("trkItmId")
+          .trkNum("trkNum")
+          .trkPtType("MEASURED")
+          .trkQual(0)
+          .trkStat("INITIATING")
+          .build()
 
-        val roundtrippedTrackFull =
-            jsonMapper.readValue(
-                jsonMapper.writeValueAsString(trackFull),
-                jacksonTypeRef<TrackFull>(),
-            )
+      val roundtrippedTrackFull = jsonMapper.readValue(jsonMapper.writeValueAsString(trackFull), jacksonTypeRef<TrackFull>())
 
-        assertThat(roundtrippedTrackFull).isEqualTo(trackFull)
+      assertThat(roundtrippedTrackFull).isEqualTo(trackFull)
     }
 }

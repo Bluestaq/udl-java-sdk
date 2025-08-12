@@ -2,12 +2,13 @@
 
 package com.unifieddatalibrary.api.models.airspacecontrolorders
 
+import com.unifieddatalibrary.api.models.airspacecontrolorders.AirspaceControlOrderQueryHelpParams
 import org.junit.jupiter.api.Test
 
 internal class AirspaceControlOrderQueryHelpParamsTest {
 
     @Test
     fun create() {
-        AirspaceControlOrderQueryHelpParams.builder().build()
+      AirspaceControlOrderQueryHelpParams.builder().build()
     }
 }

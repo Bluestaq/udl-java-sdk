@@ -20,7 +20,7 @@ import kotlin.jvm.optionals.getOrNull
  * parameter information. An example URI: /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours
  * would return the satNo and period of elsets with an epoch greater than 5 hours ago.
  */
-class GnssRawifTupleParams
+class GnssRawIfTupleParams
 private constructor(
     private val columns: String,
     private val startTime: OffsetDateTime,
@@ -58,7 +58,7 @@ private constructor(
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of [GnssRawifTupleParams].
+         * Returns a mutable builder for constructing an instance of [GnssRawIfTupleParams].
          *
          * The following fields are required:
          * ```java
@@ -69,7 +69,7 @@ private constructor(
         @JvmStatic fun builder() = Builder()
     }
 
-    /** A builder for [GnssRawifTupleParams]. */
+    /** A builder for [GnssRawIfTupleParams]. */
     class Builder internal constructor() {
 
         private var columns: String? = null
@@ -80,13 +80,13 @@ private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(gnssRawifTupleParams: GnssRawifTupleParams) = apply {
-            columns = gnssRawifTupleParams.columns
-            startTime = gnssRawifTupleParams.startTime
-            firstResult = gnssRawifTupleParams.firstResult
-            maxResults = gnssRawifTupleParams.maxResults
-            additionalHeaders = gnssRawifTupleParams.additionalHeaders.toBuilder()
-            additionalQueryParams = gnssRawifTupleParams.additionalQueryParams.toBuilder()
+        internal fun from(gnssRawIfTupleParams: GnssRawIfTupleParams) = apply {
+            columns = gnssRawIfTupleParams.columns
+            startTime = gnssRawIfTupleParams.startTime
+            firstResult = gnssRawIfTupleParams.firstResult
+            maxResults = gnssRawIfTupleParams.maxResults
+            additionalHeaders = gnssRawIfTupleParams.additionalHeaders.toBuilder()
+            additionalQueryParams = gnssRawIfTupleParams.additionalQueryParams.toBuilder()
         }
 
         /**
@@ -226,7 +226,7 @@ private constructor(
         }
 
         /**
-         * Returns an immutable instance of [GnssRawifTupleParams].
+         * Returns an immutable instance of [GnssRawIfTupleParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
          *
@@ -238,8 +238,8 @@ private constructor(
          *
          * @throws IllegalStateException if any required field is unset.
          */
-        fun build(): GnssRawifTupleParams =
-            GnssRawifTupleParams(
+        fun build(): GnssRawIfTupleParams =
+            GnssRawIfTupleParams(
                 checkRequired("columns", columns),
                 checkRequired("startTime", startTime),
                 firstResult,
@@ -267,11 +267,11 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GnssRawifTupleParams && columns == other.columns && startTime == other.startTime && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return /* spotless:off */ other is GnssRawIfTupleParams && columns == other.columns && startTime == other.startTime && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, startTime, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
 
     override fun toString() =
-        "GnssRawifTupleParams{columns=$columns, startTime=$startTime, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "GnssRawIfTupleParams{columns=$columns, startTime=$startTime, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

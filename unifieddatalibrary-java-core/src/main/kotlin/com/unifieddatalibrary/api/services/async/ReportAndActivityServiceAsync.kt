@@ -3,16 +3,15 @@
 package com.unifieddatalibrary.api.services.async
 
 import com.unifieddatalibrary.api.core.ClientOptions
-import com.unifieddatalibrary.api.services.async.reportandactivity.PoiServiceAsync
-import com.unifieddatalibrary.api.services.async.reportandactivity.UdlH3geoServiceAsync
-import com.unifieddatalibrary.api.services.async.reportandactivity.UdlSigactServiceAsync
+import com.unifieddatalibrary.api.services.async.ReportAndActivityServiceAsync
+import com.unifieddatalibrary.api.services.async.reportandactivities.PoiServiceAsync
+import com.unifieddatalibrary.api.services.async.reportandactivities.UdlH3geoServiceAsync
+import com.unifieddatalibrary.api.services.async.reportandactivities.UdlSigactServiceAsync
 import java.util.function.Consumer
 
 interface ReportAndActivityServiceAsync {
 
-    /**
-     * Returns a view of this service that provides access to raw HTTP responses for each method.
-     */
+    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -28,10 +27,7 @@ interface ReportAndActivityServiceAsync {
 
     fun udlSigact(): UdlSigactServiceAsync
 
-    /**
-     * A view of [ReportAndActivityServiceAsync] that provides access to raw HTTP responses for each
-     * method.
-     */
+    /** A view of [ReportAndActivityServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
         /**
@@ -39,9 +35,7 @@ interface ReportAndActivityServiceAsync {
          *
          * The original service is not modified.
          */
-        fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): ReportAndActivityServiceAsync.WithRawResponse
+        fun withOptions(modifier: Consumer<ClientOptions.Builder>): ReportAndActivityServiceAsync.WithRawResponse
 
         fun poi(): PoiServiceAsync.WithRawResponse
 

@@ -3,14 +3,13 @@
 package com.unifieddatalibrary.api.services.async
 
 import com.unifieddatalibrary.api.core.ClientOptions
+import com.unifieddatalibrary.api.services.async.GnssObservationServiceAsync
 import com.unifieddatalibrary.api.services.async.gnssobservations.HistoryServiceAsync
 import java.util.function.Consumer
 
 interface GnssObservationServiceAsync {
 
-    /**
-     * Returns a view of this service that provides access to raw HTTP responses for each method.
-     */
+    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -22,10 +21,7 @@ interface GnssObservationServiceAsync {
 
     fun history(): HistoryServiceAsync
 
-    /**
-     * A view of [GnssObservationServiceAsync] that provides access to raw HTTP responses for each
-     * method.
-     */
+    /** A view of [GnssObservationServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
         /**
@@ -33,9 +29,7 @@ interface GnssObservationServiceAsync {
          *
          * The original service is not modified.
          */
-        fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): GnssObservationServiceAsync.WithRawResponse
+        fun withOptions(modifier: Consumer<ClientOptions.Builder>): GnssObservationServiceAsync.WithRawResponse
 
         fun history(): HistoryServiceAsync.WithRawResponse
     }

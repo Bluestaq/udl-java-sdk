@@ -5,23 +5,28 @@ package com.unifieddatalibrary.api.models.operatingunit
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.models.operatingunit.OperatingunitListParams
+import com.unifieddatalibrary.api.models.operatingunit.OperatingunitListResponse
 import com.unifieddatalibrary.api.services.blocking.OperatingunitService
 import java.util.Objects
+import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see OperatingunitService.list */
-class OperatingunitListPage
-private constructor(
+class OperatingunitListPage private constructor(
     private val service: OperatingunitService,
     private val params: OperatingunitListParams,
     private val items: List<OperatingunitListResponse>,
+
 ) : Page<OperatingunitListResponse> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): OperatingunitListParams {
-        val offset = params.firstResult().getOrDefault(0)
-        return params.toBuilder().firstResult(offset + items().size).build()
+      val offset = params.firstResult().getOrDefault(0)
+      return params.toBuilder()
+          .firstResult(offset + items().size)
+          .build()
     }
 
     override fun nextPage(): OperatingunitListPage = service.list(nextPageParams())
@@ -42,13 +47,15 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [OperatingunitListPage].
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [OperatingunitListPage]. */
@@ -59,19 +66,29 @@ private constructor(
         private var items: List<OperatingunitListResponse>? = null
 
         @JvmSynthetic
-        internal fun from(operatingunitListPage: OperatingunitListPage) = apply {
-            service = operatingunitListPage.service
-            params = operatingunitListPage.params
-            items = operatingunitListPage.items
-        }
+        internal fun from(operatingunitListPage: OperatingunitListPage) =
+            apply {
+                service = operatingunitListPage.service
+                params = operatingunitListPage.params
+                items = operatingunitListPage.items
+            }
 
-        fun service(service: OperatingunitService) = apply { this.service = service }
+        fun service(service: OperatingunitService) =
+            apply {
+                this.service = service
+            }
 
         /** The parameters that were used to request this page. */
-        fun params(params: OperatingunitListParams) = apply { this.params = params }
+        fun params(params: OperatingunitListParams) =
+            apply {
+                this.params = params
+            }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<OperatingunitListResponse>) = apply { this.items = items }
+        fun items(items: List<OperatingunitListResponse>) =
+            apply {
+                this.items = items
+            }
 
         /**
          * Returns an immutable instance of [OperatingunitListPage].
@@ -79,6 +96,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
@@ -89,22 +107,27 @@ private constructor(
          */
         fun build(): OperatingunitListPage =
             OperatingunitListPage(
-                checkRequired("service", service),
-                checkRequired("params", params),
-                checkRequired("items", items),
+              checkRequired(
+                "service", service
+              ),
+              checkRequired(
+                "params", params
+              ),
+              checkRequired(
+                "items", items
+              ),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is OperatingunitListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+      return /* spotless:off */ other is OperatingunitListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
 
-    override fun toString() =
-        "OperatingunitListPage{service=$service, params=$params, items=$items}"
+    override fun toString() = "OperatingunitListPage{service=$service, params=$params, items=$items}"
 }

@@ -11,7 +11,7 @@ import java.util.Objects
  * Service operation to provide detailed information on available dynamic query parameters for a
  * particular data type.
  */
-class GnssRawifQueryhelpParams
+class GnssRawIfQueryhelpParams
 private constructor(
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
@@ -27,22 +27,22 @@ private constructor(
 
     companion object {
 
-        @JvmStatic fun none(): GnssRawifQueryhelpParams = builder().build()
+        @JvmStatic fun none(): GnssRawIfQueryhelpParams = builder().build()
 
-        /** Returns a mutable builder for constructing an instance of [GnssRawifQueryhelpParams]. */
+        /** Returns a mutable builder for constructing an instance of [GnssRawIfQueryhelpParams]. */
         @JvmStatic fun builder() = Builder()
     }
 
-    /** A builder for [GnssRawifQueryhelpParams]. */
+    /** A builder for [GnssRawIfQueryhelpParams]. */
     class Builder internal constructor() {
 
         private var additionalHeaders: Headers.Builder = Headers.builder()
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(gnssRawifQueryhelpParams: GnssRawifQueryhelpParams) = apply {
-            additionalHeaders = gnssRawifQueryhelpParams.additionalHeaders.toBuilder()
-            additionalQueryParams = gnssRawifQueryhelpParams.additionalQueryParams.toBuilder()
+        internal fun from(gnssRawIfQueryhelpParams: GnssRawIfQueryhelpParams) = apply {
+            additionalHeaders = gnssRawIfQueryhelpParams.additionalHeaders.toBuilder()
+            additionalQueryParams = gnssRawIfQueryhelpParams.additionalQueryParams.toBuilder()
         }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
@@ -144,12 +144,12 @@ private constructor(
         }
 
         /**
-         * Returns an immutable instance of [GnssRawifQueryhelpParams].
+         * Returns an immutable instance of [GnssRawIfQueryhelpParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
          */
-        fun build(): GnssRawifQueryhelpParams =
-            GnssRawifQueryhelpParams(additionalHeaders.build(), additionalQueryParams.build())
+        fun build(): GnssRawIfQueryhelpParams =
+            GnssRawIfQueryhelpParams(additionalHeaders.build(), additionalQueryParams.build())
     }
 
     override fun _headers(): Headers = additionalHeaders
@@ -161,11 +161,11 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GnssRawifQueryhelpParams && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return /* spotless:off */ other is GnssRawIfQueryhelpParams && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(additionalHeaders, additionalQueryParams) /* spotless:on */
 
     override fun toString() =
-        "GnssRawifQueryhelpParams{additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "GnssRawIfQueryhelpParams{additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

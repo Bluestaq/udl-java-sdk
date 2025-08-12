@@ -4,10 +4,10 @@ package com.unifieddatalibrary.api.models.airloadplans
 
 import org.junit.jupiter.api.Test
 
-internal class AirLoadPlanQueryhelpParamsTest {
+internal class AirloadPlanQueryhelpParamsTest {
 
     @Test
     fun create() {
-        AirLoadPlanQueryhelpParams.builder().build()
+        AirloadPlanQueryhelpParams.builder().build()
     }
 }

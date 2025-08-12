@@ -15,53 +15,55 @@ import com.unifieddatalibrary.api.core.http.json
 import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.cots.CotCreateParams
+import com.unifieddatalibrary.api.services.blocking.CotService
+import com.unifieddatalibrary.api.services.blocking.CotServiceImpl
 import java.util.function.Consumer
 
-class CotServiceImpl internal constructor(private val clientOptions: ClientOptions) : CotService {
+class CotServiceImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: CotService.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : CotService {
+
+    private val withRawResponse: CotService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     override fun withRawResponse(): CotService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): CotService =
-        CotServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): CotService = CotServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun create(params: CotCreateParams, requestOptions: RequestOptions) {
-        // post /udl/cot
-        withRawResponse().create(params, requestOptions)
+      // post /udl/cot
+      withRawResponse().create(params, requestOptions)
     }
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        CotService.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<HttpResponse> =
-            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+    ) : CotService.WithRawResponse {
 
-        override fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): CotService.WithRawResponse =
-            CotServiceImpl.WithRawResponseImpl(
-                clientOptions.toBuilder().apply(modifier::accept).build()
-            )
+        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+
+        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): CotService.WithRawResponse = CotServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
         private val createHandler: Handler<Void?> = emptyHandler()
 
         override fun create(params: CotCreateParams, requestOptions: RequestOptions): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "cot")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { createHandler.handle(it) }
-            }
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "cot")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  createHandler.handle(it)
+              }
+          }
         }
     }
 }

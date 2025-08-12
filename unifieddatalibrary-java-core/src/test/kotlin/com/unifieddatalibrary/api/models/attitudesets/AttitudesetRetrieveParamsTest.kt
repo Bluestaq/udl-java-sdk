@@ -6,16 +6,16 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class AttitudesetRetrieveParamsTest {
+internal class AttitudeSetRetrieveParamsTest {
 
     @Test
     fun create() {
-        AttitudesetRetrieveParams.builder().id("id").firstResult(0L).maxResults(0L).build()
+        AttitudeSetRetrieveParams.builder().id("id").firstResult(0L).maxResults(0L).build()
     }
 
     @Test
     fun pathParams() {
-        val params = AttitudesetRetrieveParams.builder().id("id").build()
+        val params = AttitudeSetRetrieveParams.builder().id("id").build()
 
         assertThat(params._pathParam(0)).isEqualTo("id")
         // out-of-bound path param
@@ -25,7 +25,7 @@ internal class AttitudesetRetrieveParamsTest {
     @Test
     fun queryParams() {
         val params =
-            AttitudesetRetrieveParams.builder().id("id").firstResult(0L).maxResults(0L).build()
+            AttitudeSetRetrieveParams.builder().id("id").firstResult(0L).maxResults(0L).build()
 
         val queryParams = params._queryParams()
 
@@ -35,7 +35,7 @@ internal class AttitudesetRetrieveParamsTest {
 
     @Test
     fun queryParamsWithoutOptionalFields() {
-        val params = AttitudesetRetrieveParams.builder().id("id").build()
+        val params = AttitudeSetRetrieveParams.builder().id("id").build()
 
         val queryParams = params._queryParams()
 

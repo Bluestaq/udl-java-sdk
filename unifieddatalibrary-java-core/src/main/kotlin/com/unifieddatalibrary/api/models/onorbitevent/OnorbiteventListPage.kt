@@ -5,23 +5,28 @@ package com.unifieddatalibrary.api.models.onorbitevent
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.models.onorbitevent.OnorbiteventListParams
+import com.unifieddatalibrary.api.models.onorbitevent.OnorbiteventListResponse
 import com.unifieddatalibrary.api.services.blocking.OnorbiteventService
 import java.util.Objects
+import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see OnorbiteventService.list */
-class OnorbiteventListPage
-private constructor(
+class OnorbiteventListPage private constructor(
     private val service: OnorbiteventService,
     private val params: OnorbiteventListParams,
     private val items: List<OnorbiteventListResponse>,
+
 ) : Page<OnorbiteventListResponse> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): OnorbiteventListParams {
-        val offset = params.firstResult().getOrDefault(0)
-        return params.toBuilder().firstResult(offset + items().size).build()
+      val offset = params.firstResult().getOrDefault(0)
+      return params.toBuilder()
+          .firstResult(offset + items().size)
+          .build()
     }
 
     override fun nextPage(): OnorbiteventListPage = service.list(nextPageParams())
@@ -42,13 +47,15 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [OnorbiteventListPage].
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [OnorbiteventListPage]. */
@@ -59,19 +66,29 @@ private constructor(
         private var items: List<OnorbiteventListResponse>? = null
 
         @JvmSynthetic
-        internal fun from(onorbiteventListPage: OnorbiteventListPage) = apply {
-            service = onorbiteventListPage.service
-            params = onorbiteventListPage.params
-            items = onorbiteventListPage.items
-        }
+        internal fun from(onorbiteventListPage: OnorbiteventListPage) =
+            apply {
+                service = onorbiteventListPage.service
+                params = onorbiteventListPage.params
+                items = onorbiteventListPage.items
+            }
 
-        fun service(service: OnorbiteventService) = apply { this.service = service }
+        fun service(service: OnorbiteventService) =
+            apply {
+                this.service = service
+            }
 
         /** The parameters that were used to request this page. */
-        fun params(params: OnorbiteventListParams) = apply { this.params = params }
+        fun params(params: OnorbiteventListParams) =
+            apply {
+                this.params = params
+            }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<OnorbiteventListResponse>) = apply { this.items = items }
+        fun items(items: List<OnorbiteventListResponse>) =
+            apply {
+                this.items = items
+            }
 
         /**
          * Returns an immutable instance of [OnorbiteventListPage].
@@ -79,6 +96,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
@@ -89,18 +107,24 @@ private constructor(
          */
         fun build(): OnorbiteventListPage =
             OnorbiteventListPage(
-                checkRequired("service", service),
-                checkRequired("params", params),
-                checkRequired("items", items),
+              checkRequired(
+                "service", service
+              ),
+              checkRequired(
+                "params", params
+              ),
+              checkRequired(
+                "items", items
+              ),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is OnorbiteventListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+      return /* spotless:off */ other is OnorbiteventListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */

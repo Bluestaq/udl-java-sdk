@@ -27,228 +27,213 @@ import com.unifieddatalibrary.api.models.organizationdetails.OrganizationdetailL
 import com.unifieddatalibrary.api.models.organizationdetails.OrganizationdetailListParams
 import com.unifieddatalibrary.api.models.organizationdetails.OrganizationdetailListResponse
 import com.unifieddatalibrary.api.models.organizationdetails.OrganizationdetailUpdateParams
+import com.unifieddatalibrary.api.services.blocking.OrganizationdetailService
+import com.unifieddatalibrary.api.services.blocking.OrganizationdetailServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
-class OrganizationdetailServiceImpl internal constructor(private val clientOptions: ClientOptions) :
-    OrganizationdetailService {
+class OrganizationdetailServiceImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: OrganizationdetailService.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : OrganizationdetailService {
+
+    private val withRawResponse: OrganizationdetailService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     override fun withRawResponse(): OrganizationdetailService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): OrganizationdetailService =
-        OrganizationdetailServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): OrganizationdetailService = OrganizationdetailServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun create(params: OrganizationdetailCreateParams, requestOptions: RequestOptions) {
-        // post /udl/organizationdetails
-        withRawResponse().create(params, requestOptions)
+      // post /udl/organizationdetails
+      withRawResponse().create(params, requestOptions)
     }
 
     override fun update(params: OrganizationdetailUpdateParams, requestOptions: RequestOptions) {
-        // put /udl/organizationdetails/{id}
-        withRawResponse().update(params, requestOptions)
+      // put /udl/organizationdetails/{id}
+      withRawResponse().update(params, requestOptions)
     }
 
-    override fun list(
-        params: OrganizationdetailListParams,
-        requestOptions: RequestOptions,
-    ): OrganizationdetailListPage =
+    override fun list(params: OrganizationdetailListParams, requestOptions: RequestOptions): OrganizationdetailListPage =
         // get /udl/organizationdetails
         withRawResponse().list(params, requestOptions).parse()
 
     override fun delete(params: OrganizationdetailDeleteParams, requestOptions: RequestOptions) {
-        // delete /udl/organizationdetails/{id}
-        withRawResponse().delete(params, requestOptions)
+      // delete /udl/organizationdetails/{id}
+      withRawResponse().delete(params, requestOptions)
     }
 
-    override fun findBySource(
-        params: OrganizationdetailFindBySourceParams,
-        requestOptions: RequestOptions,
-    ): List<OrganizationdetailFindBySourceResponse> =
+    override fun findBySource(params: OrganizationdetailFindBySourceParams, requestOptions: RequestOptions): List<OrganizationdetailFindBySourceResponse> =
         // get /udl/organizationdetails/findBySource
         withRawResponse().findBySource(params, requestOptions).parse()
 
-    override fun get(
-        params: OrganizationdetailGetParams,
-        requestOptions: RequestOptions,
-    ): OrganizationDetailsFull =
+    override fun get(params: OrganizationdetailGetParams, requestOptions: RequestOptions): OrganizationDetailsFull =
         // get /udl/organizationdetails/{id}
         withRawResponse().get(params, requestOptions).parse()
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        OrganizationdetailService.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<HttpResponse> =
-            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+    ) : OrganizationdetailService.WithRawResponse {
 
-        override fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): OrganizationdetailService.WithRawResponse =
-            OrganizationdetailServiceImpl.WithRawResponseImpl(
-                clientOptions.toBuilder().apply(modifier::accept).build()
-            )
+        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+
+        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): OrganizationdetailService.WithRawResponse = OrganizationdetailServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
         private val createHandler: Handler<Void?> = emptyHandler()
 
-        override fun create(
-            params: OrganizationdetailCreateParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "organizationdetails")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { createHandler.handle(it) }
-            }
+        override fun create(params: OrganizationdetailCreateParams, requestOptions: RequestOptions): HttpResponse {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "organizationdetails")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  createHandler.handle(it)
+              }
+          }
         }
 
         private val updateHandler: Handler<Void?> = emptyHandler()
 
-        override fun update(
-            params: OrganizationdetailUpdateParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            // We check here instead of in the params builder because this can be specified
-            // positionally or in the params class.
-            checkRequired("pathId", params.pathId().getOrNull())
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.PUT)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "organizationdetails", params._pathParam(0))
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { updateHandler.handle(it) }
-            }
+        override fun update(params: OrganizationdetailUpdateParams, requestOptions: RequestOptions): HttpResponse {
+          // We check here instead of in the params builder because this can be specified positionally or in the params class.
+          checkRequired("pathId", params.pathId().getOrNull())
+          val request = HttpRequest.builder()
+            .method(HttpMethod.PUT)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "organizationdetails", params._pathParam(0))
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  updateHandler.handle(it)
+              }
+          }
         }
 
-        private val listHandler: Handler<List<OrganizationdetailListResponse>> =
-            jsonHandler<List<OrganizationdetailListResponse>>(clientOptions.jsonMapper)
+        private val listHandler: Handler<List<OrganizationdetailListResponse>> = jsonHandler<List<OrganizationdetailListResponse>>(clientOptions.jsonMapper)
 
-        override fun list(
-            params: OrganizationdetailListParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<OrganizationdetailListPage> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "organizationdetails")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { listHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-                    .let {
-                        OrganizationdetailListPage.builder()
-                            .service(OrganizationdetailServiceImpl(clientOptions))
-                            .params(params)
-                            .items(it)
-                            .build()
-                    }
-            }
+        override fun list(params: OrganizationdetailListParams, requestOptions: RequestOptions): HttpResponseFor<OrganizationdetailListPage> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "organizationdetails")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  listHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.forEach { it.validate() }
+                  }
+              }
+              .let {
+                  OrganizationdetailListPage.builder()
+                      .service(OrganizationdetailServiceImpl(clientOptions))
+                      .params(params)
+                      .items(it)
+                      .build()
+              }
+          }
         }
 
         private val deleteHandler: Handler<Void?> = emptyHandler()
 
-        override fun delete(
-            params: OrganizationdetailDeleteParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            // We check here instead of in the params builder because this can be specified
-            // positionally or in the params class.
-            checkRequired("id", params.id().getOrNull())
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.DELETE)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "organizationdetails", params._pathParam(0))
-                    .apply { params._body().ifPresent { body(json(clientOptions.jsonMapper, it)) } }
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { deleteHandler.handle(it) }
-            }
+        override fun delete(params: OrganizationdetailDeleteParams, requestOptions: RequestOptions): HttpResponse {
+          // We check here instead of in the params builder because this can be specified positionally or in the params class.
+          checkRequired("id", params.id().getOrNull())
+          val request = HttpRequest.builder()
+            .method(HttpMethod.DELETE)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "organizationdetails", params._pathParam(0))
+            .apply { params._body().ifPresent{ body(json(clientOptions.jsonMapper, it)) } }
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  deleteHandler.handle(it)
+              }
+          }
         }
 
-        private val findBySourceHandler: Handler<List<OrganizationdetailFindBySourceResponse>> =
-            jsonHandler<List<OrganizationdetailFindBySourceResponse>>(clientOptions.jsonMapper)
+        private val findBySourceHandler: Handler<List<OrganizationdetailFindBySourceResponse>> = jsonHandler<List<OrganizationdetailFindBySourceResponse>>(clientOptions.jsonMapper)
 
-        override fun findBySource(
-            params: OrganizationdetailFindBySourceParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<OrganizationdetailFindBySourceResponse>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "organizationdetails", "findBySource")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { findBySourceHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-            }
+        override fun findBySource(params: OrganizationdetailFindBySourceParams, requestOptions: RequestOptions): HttpResponseFor<List<OrganizationdetailFindBySourceResponse>> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "organizationdetails", "findBySource")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  findBySourceHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.forEach { it.validate() }
+                  }
+              }
+          }
         }
 
-        private val getHandler: Handler<OrganizationDetailsFull> =
-            jsonHandler<OrganizationDetailsFull>(clientOptions.jsonMapper)
+        private val getHandler: Handler<OrganizationDetailsFull> = jsonHandler<OrganizationDetailsFull>(clientOptions.jsonMapper)
 
-        override fun get(
-            params: OrganizationdetailGetParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<OrganizationDetailsFull> {
-            // We check here instead of in the params builder because this can be specified
-            // positionally or in the params class.
-            checkRequired("id", params.id().getOrNull())
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "organizationdetails", params._pathParam(0))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { getHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
+        override fun get(params: OrganizationdetailGetParams, requestOptions: RequestOptions): HttpResponseFor<OrganizationDetailsFull> {
+          // We check here instead of in the params builder because this can be specified positionally or in the params class.
+          checkRequired("id", params.id().getOrNull())
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "organizationdetails", params._pathParam(0))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  getHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          }
         }
     }
 }

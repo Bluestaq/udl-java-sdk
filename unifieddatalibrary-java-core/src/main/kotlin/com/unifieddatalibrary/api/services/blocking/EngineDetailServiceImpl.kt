@@ -25,194 +25,183 @@ import com.unifieddatalibrary.api.models.enginedetails.EngineDetailListParams
 import com.unifieddatalibrary.api.models.enginedetails.EngineDetailRetrieveParams
 import com.unifieddatalibrary.api.models.enginedetails.EngineDetailUpdateParams
 import com.unifieddatalibrary.api.models.enginedetails.EngineDetailsAbridged
+import com.unifieddatalibrary.api.services.blocking.EngineDetailService
+import com.unifieddatalibrary.api.services.blocking.EngineDetailServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
-class EngineDetailServiceImpl internal constructor(private val clientOptions: ClientOptions) :
-    EngineDetailService {
+class EngineDetailServiceImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: EngineDetailService.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : EngineDetailService {
+
+    private val withRawResponse: EngineDetailService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     override fun withRawResponse(): EngineDetailService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EngineDetailService =
-        EngineDetailServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EngineDetailService = EngineDetailServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun create(params: EngineDetailCreateParams, requestOptions: RequestOptions) {
-        // post /udl/enginedetails
-        withRawResponse().create(params, requestOptions)
+      // post /udl/enginedetails
+      withRawResponse().create(params, requestOptions)
     }
 
-    override fun retrieve(
-        params: EngineDetailRetrieveParams,
-        requestOptions: RequestOptions,
-    ): EngineDetailsFull =
+    override fun retrieve(params: EngineDetailRetrieveParams, requestOptions: RequestOptions): EngineDetailsFull =
         // get /udl/enginedetails/{id}
         withRawResponse().retrieve(params, requestOptions).parse()
 
     override fun update(params: EngineDetailUpdateParams, requestOptions: RequestOptions) {
-        // put /udl/enginedetails/{id}
-        withRawResponse().update(params, requestOptions)
+      // put /udl/enginedetails/{id}
+      withRawResponse().update(params, requestOptions)
     }
 
-    override fun list(
-        params: EngineDetailListParams,
-        requestOptions: RequestOptions,
-    ): EngineDetailListPage =
+    override fun list(params: EngineDetailListParams, requestOptions: RequestOptions): EngineDetailListPage =
         // get /udl/enginedetails
         withRawResponse().list(params, requestOptions).parse()
 
     override fun delete(params: EngineDetailDeleteParams, requestOptions: RequestOptions) {
-        // delete /udl/enginedetails/{id}
-        withRawResponse().delete(params, requestOptions)
+      // delete /udl/enginedetails/{id}
+      withRawResponse().delete(params, requestOptions)
     }
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        EngineDetailService.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<HttpResponse> =
-            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+    ) : EngineDetailService.WithRawResponse {
 
-        override fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): EngineDetailService.WithRawResponse =
-            EngineDetailServiceImpl.WithRawResponseImpl(
-                clientOptions.toBuilder().apply(modifier::accept).build()
-            )
+        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+
+        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): EngineDetailService.WithRawResponse = EngineDetailServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
         private val createHandler: Handler<Void?> = emptyHandler()
 
-        override fun create(
-            params: EngineDetailCreateParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "enginedetails")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { createHandler.handle(it) }
-            }
+        override fun create(params: EngineDetailCreateParams, requestOptions: RequestOptions): HttpResponse {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "enginedetails")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  createHandler.handle(it)
+              }
+          }
         }
 
-        private val retrieveHandler: Handler<EngineDetailsFull> =
-            jsonHandler<EngineDetailsFull>(clientOptions.jsonMapper)
+        private val retrieveHandler: Handler<EngineDetailsFull> = jsonHandler<EngineDetailsFull>(clientOptions.jsonMapper)
 
-        override fun retrieve(
-            params: EngineDetailRetrieveParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<EngineDetailsFull> {
-            // We check here instead of in the params builder because this can be specified
-            // positionally or in the params class.
-            checkRequired("id", params.id().getOrNull())
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "enginedetails", params._pathParam(0))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { retrieveHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
+        override fun retrieve(params: EngineDetailRetrieveParams, requestOptions: RequestOptions): HttpResponseFor<EngineDetailsFull> {
+          // We check here instead of in the params builder because this can be specified positionally or in the params class.
+          checkRequired("id", params.id().getOrNull())
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "enginedetails", params._pathParam(0))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  retrieveHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          }
         }
 
         private val updateHandler: Handler<Void?> = emptyHandler()
 
-        override fun update(
-            params: EngineDetailUpdateParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            // We check here instead of in the params builder because this can be specified
-            // positionally or in the params class.
-            checkRequired("pathId", params.pathId().getOrNull())
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.PUT)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "enginedetails", params._pathParam(0))
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { updateHandler.handle(it) }
-            }
+        override fun update(params: EngineDetailUpdateParams, requestOptions: RequestOptions): HttpResponse {
+          // We check here instead of in the params builder because this can be specified positionally or in the params class.
+          checkRequired("pathId", params.pathId().getOrNull())
+          val request = HttpRequest.builder()
+            .method(HttpMethod.PUT)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "enginedetails", params._pathParam(0))
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  updateHandler.handle(it)
+              }
+          }
         }
 
-        private val listHandler: Handler<List<EngineDetailsAbridged>> =
-            jsonHandler<List<EngineDetailsAbridged>>(clientOptions.jsonMapper)
+        private val listHandler: Handler<List<EngineDetailsAbridged>> = jsonHandler<List<EngineDetailsAbridged>>(clientOptions.jsonMapper)
 
-        override fun list(
-            params: EngineDetailListParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<EngineDetailListPage> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "enginedetails")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { listHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-                    .let {
-                        EngineDetailListPage.builder()
-                            .service(EngineDetailServiceImpl(clientOptions))
-                            .params(params)
-                            .items(it)
-                            .build()
-                    }
-            }
+        override fun list(params: EngineDetailListParams, requestOptions: RequestOptions): HttpResponseFor<EngineDetailListPage> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "enginedetails")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  listHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.forEach { it.validate() }
+                  }
+              }
+              .let {
+                  EngineDetailListPage.builder()
+                      .service(EngineDetailServiceImpl(clientOptions))
+                      .params(params)
+                      .items(it)
+                      .build()
+              }
+          }
         }
 
         private val deleteHandler: Handler<Void?> = emptyHandler()
 
-        override fun delete(
-            params: EngineDetailDeleteParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            // We check here instead of in the params builder because this can be specified
-            // positionally or in the params class.
-            checkRequired("id", params.id().getOrNull())
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.DELETE)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "enginedetails", params._pathParam(0))
-                    .apply { params._body().ifPresent { body(json(clientOptions.jsonMapper, it)) } }
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { deleteHandler.handle(it) }
-            }
+        override fun delete(params: EngineDetailDeleteParams, requestOptions: RequestOptions): HttpResponse {
+          // We check here instead of in the params builder because this can be specified positionally or in the params class.
+          checkRequired("id", params.id().getOrNull())
+          val request = HttpRequest.builder()
+            .method(HttpMethod.DELETE)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "enginedetails", params._pathParam(0))
+            .apply { params._body().ifPresent{ body(json(clientOptions.jsonMapper, it)) } }
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  deleteHandler.handle(it)
+              }
+          }
         }
     }
 }

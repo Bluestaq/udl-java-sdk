@@ -13,6 +13,7 @@ import com.unifieddatalibrary.api.core.JsonMissing
 import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import com.unifieddatalibrary.api.models.onorbit.OnorbitListResponse
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.util.Collections
@@ -21,8 +22,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 /** Model object representing on-orbit objects or satellites in the system. */
-class OnorbitListResponse
-private constructor(
+class OnorbitListResponse private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
     private val satNo: JsonField<Int>,
@@ -45,276 +45,216 @@ private constructor(
     private val origin: JsonField<String>,
     private val origNetwork: JsonField<String>,
     private val additionalProperties: MutableMap<String, JsonValue>,
+
 ) {
 
     @JsonCreator
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
-        classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
         @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
         @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
         @JsonProperty("altName") @ExcludeMissing altName: JsonField<String> = JsonMissing.of(),
         @JsonProperty("category") @ExcludeMissing category: JsonField<Category> = JsonMissing.of(),
-        @JsonProperty("commonName")
-        @ExcludeMissing
-        commonName: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("constellation")
-        @ExcludeMissing
-        constellation: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("countryCode")
-        @ExcludeMissing
-        countryCode: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("createdAt")
-        @ExcludeMissing
-        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("commonName") @ExcludeMissing commonName: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("constellation") @ExcludeMissing constellation: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("countryCode") @ExcludeMissing countryCode: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("decayDate")
-        @ExcludeMissing
-        decayDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("decayDate") @ExcludeMissing decayDate: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("idOnOrbit") @ExcludeMissing idOnOrbit: JsonField<String> = JsonMissing.of(),
         @JsonProperty("intlDes") @ExcludeMissing intlDes: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("launchDate")
-        @ExcludeMissing
-        launchDate: JsonField<LocalDate> = JsonMissing.of(),
-        @JsonProperty("launchSiteId")
-        @ExcludeMissing
-        launchSiteId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("lifetimeYears")
-        @ExcludeMissing
-        lifetimeYears: JsonField<Int> = JsonMissing.of(),
-        @JsonProperty("missionNumber")
-        @ExcludeMissing
-        missionNumber: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("objectType")
-        @ExcludeMissing
-        objectType: JsonField<ObjectType> = JsonMissing.of(),
+        @JsonProperty("launchDate") @ExcludeMissing launchDate: JsonField<LocalDate> = JsonMissing.of(),
+        @JsonProperty("launchSiteId") @ExcludeMissing launchSiteId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("lifetimeYears") @ExcludeMissing lifetimeYears: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("missionNumber") @ExcludeMissing missionNumber: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("objectType") @ExcludeMissing objectType: JsonField<ObjectType> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origNetwork")
-        @ExcludeMissing
-        origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origNetwork") @ExcludeMissing origNetwork: JsonField<String> = JsonMissing.of()
     ) : this(
-        classificationMarking,
-        dataMode,
-        satNo,
-        source,
-        altName,
-        category,
-        commonName,
-        constellation,
-        countryCode,
-        createdAt,
-        createdBy,
-        decayDate,
-        idOnOrbit,
-        intlDes,
-        launchDate,
-        launchSiteId,
-        lifetimeYears,
-        missionNumber,
-        objectType,
-        origin,
-        origNetwork,
-        mutableMapOf(),
+      classificationMarking,
+      dataMode,
+      satNo,
+      source,
+      altName,
+      category,
+      commonName,
+      constellation,
+      countryCode,
+      createdAt,
+      createdBy,
+      decayDate,
+      idOnOrbit,
+      intlDes,
+      launchDate,
+      launchSiteId,
+      lifetimeYears,
+      missionNumber,
+      objectType,
+      origin,
+      origNetwork,
+      mutableMapOf(),
     )
 
     /**
      * Classification marking of the data in IC/CAPCO Portion-marked format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-     * both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-     * analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-     * requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
     /**
      * Satellite/Catalog number of the target on-orbit object.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun satNo(): Int = satNo.getRequired("satNo")
 
     /**
      * Source of the data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
-     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun source(): String = source.getRequired("source")
 
     /**
      * Alternate name of the on-orbit object.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun altName(): Optional<String> = altName.getOptional("altName")
 
     /**
-     * Category of the on-orbit object. (Unknown, On-Orbit, Decayed, Cataloged Without State, Launch
-     * Nominal, Analyst Satellite, Cislunar, Lunar, Hyperbolic, Heliocentric, Interplanetary,
-     * Lagrangian, Docked).
+     * Category of the on-orbit object. (Unknown, On-Orbit, Decayed, Cataloged Without State, Launch Nominal, Analyst Satellite, Cislunar, Lunar, Hyperbolic, Heliocentric, Interplanetary, Lagrangian, Docked).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun category(): Optional<Category> = category.getOptional("category")
 
     /**
      * Common name of the on-orbit object.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun commonName(): Optional<String> = commonName.getOptional("commonName")
 
     /**
      * Constellation to which this satellite belongs.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun constellation(): Optional<String> = constellation.getOptional("constellation")
 
     /**
-     * The country code. This value is typically the ISO 3166 Alpha-2 two-character country code,
-     * however it can also represent various consortiums that do not appear in the ISO document. The
-     * code must correspond to an existing country in the UDL’s country API. Call udl/country/{code}
-     * to get any associated FIPS code, ISO Alpha-3 code, or alternate code values that exist for
-     * the specified country code.
+     * The country code. This value is typically the ISO 3166 Alpha-2 two-character country code, however it can also represent various consortiums that do not appear in the ISO document. The code must correspond to an existing country in the UDL’s country API. Call udl/country/{code} to get any associated FIPS code, ISO Alpha-3 code, or alternate code values that exist for the specified country code.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun countryCode(): Optional<String> = countryCode.getOptional("countryCode")
 
     /**
      * Time the row was created in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
     /**
      * Application user who created the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
      * Date of decay.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun decayDate(): Optional<OffsetDateTime> = decayDate.getOptional("decayDate")
 
     /**
-     * For the public catalog, the idOnOrbit is typically the satellite number as a string, but may
-     * be a UUID for analyst or other unknown or untracked satellites, auto-generated by the system.
+     * For the public catalog, the idOnOrbit is typically the satellite number as a string, but may be a UUID for analyst or other unknown or untracked satellites, auto-generated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun idOnOrbit(): Optional<String> = idOnOrbit.getOptional("idOnOrbit")
 
     /**
-     * International Designator, typically of the format YYYYLLLAAA, where YYYY is the launch year,
-     * LLL is the sequential launch number of that year, and AAA is an optional launch piece
-     * designator for the launch.
+     * International Designator, typically of the format YYYYLLLAAA, where YYYY is the launch year, LLL is the sequential launch number of that year, and AAA is an optional launch piece designator for the launch.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun intlDes(): Optional<String> = intlDes.getOptional("intlDes")
 
     /**
      * Date of launch.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun launchDate(): Optional<LocalDate> = launchDate.getOptional("launchDate")
 
     /**
      * Id of the associated launchSite entity.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun launchSiteId(): Optional<String> = launchSiteId.getOptional("launchSiteId")
 
     /**
      * Estimated lifetime of the on-orbit payload, if known.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun lifetimeYears(): Optional<Int> = lifetimeYears.getOptional("lifetimeYears")
 
     /**
      * Mission number of the on-orbit object.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun missionNumber(): Optional<String> = missionNumber.getOptional("missionNumber")
 
     /**
      * Type of on-orbit object: ROCKET BODY, DEBRIS, PAYLOAD, PLATFORM, MANNED, UNKNOWN.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun objectType(): Optional<ObjectType> = objectType.getOptional("objectType")
 
     /**
-     * Originating system or organization which produced the data, if different from the source. The
-     * origin may be different than the source if the source was a mediating system which forwarded
-     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun origin(): Optional<String> = origin.getOptional("origin")
 
     /**
-     * The originating source network on which this record was created, auto-populated by the
-     * system.
+     * The originating source network on which this record was created, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
      */
     fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
     /**
      * Returns the raw JSON value of [classificationMarking].
      *
-     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
-     * type.
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("classificationMarking")
     @ExcludeMissing
@@ -325,42 +265,54 @@ private constructor(
      *
      * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+    @JsonProperty("dataMode")
+    @ExcludeMissing
+    fun _dataMode(): JsonField<DataMode> = dataMode
 
     /**
      * Returns the raw JSON value of [satNo].
      *
      * Unlike [satNo], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("satNo") @ExcludeMissing fun _satNo(): JsonField<Int> = satNo
+    @JsonProperty("satNo")
+    @ExcludeMissing
+    fun _satNo(): JsonField<Int> = satNo
 
     /**
      * Returns the raw JSON value of [source].
      *
      * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+    @JsonProperty("source")
+    @ExcludeMissing
+    fun _source(): JsonField<String> = source
 
     /**
      * Returns the raw JSON value of [altName].
      *
      * Unlike [altName], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("altName") @ExcludeMissing fun _altName(): JsonField<String> = altName
+    @JsonProperty("altName")
+    @ExcludeMissing
+    fun _altName(): JsonField<String> = altName
 
     /**
      * Returns the raw JSON value of [category].
      *
      * Unlike [category], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("category") @ExcludeMissing fun _category(): JsonField<Category> = category
+    @JsonProperty("category")
+    @ExcludeMissing
+    fun _category(): JsonField<Category> = category
 
     /**
      * Returns the raw JSON value of [commonName].
      *
      * Unlike [commonName], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("commonName") @ExcludeMissing fun _commonName(): JsonField<String> = commonName
+    @JsonProperty("commonName")
+    @ExcludeMissing
+    fun _commonName(): JsonField<String> = commonName
 
     /**
      * Returns the raw JSON value of [constellation].
@@ -376,7 +328,9 @@ private constructor(
      *
      * Unlike [countryCode], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("countryCode") @ExcludeMissing fun _countryCode(): JsonField<String> = countryCode
+    @JsonProperty("countryCode")
+    @ExcludeMissing
+    fun _countryCode(): JsonField<String> = countryCode
 
     /**
      * Returns the raw JSON value of [createdAt].
@@ -392,7 +346,9 @@ private constructor(
      *
      * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+    @JsonProperty("createdBy")
+    @ExcludeMissing
+    fun _createdBy(): JsonField<String> = createdBy
 
     /**
      * Returns the raw JSON value of [decayDate].
@@ -408,21 +364,27 @@ private constructor(
      *
      * Unlike [idOnOrbit], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("idOnOrbit") @ExcludeMissing fun _idOnOrbit(): JsonField<String> = idOnOrbit
+    @JsonProperty("idOnOrbit")
+    @ExcludeMissing
+    fun _idOnOrbit(): JsonField<String> = idOnOrbit
 
     /**
      * Returns the raw JSON value of [intlDes].
      *
      * Unlike [intlDes], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("intlDes") @ExcludeMissing fun _intlDes(): JsonField<String> = intlDes
+    @JsonProperty("intlDes")
+    @ExcludeMissing
+    fun _intlDes(): JsonField<String> = intlDes
 
     /**
      * Returns the raw JSON value of [launchDate].
      *
      * Unlike [launchDate], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("launchDate") @ExcludeMissing fun _launchDate(): JsonField<LocalDate> = launchDate
+    @JsonProperty("launchDate")
+    @ExcludeMissing
+    fun _launchDate(): JsonField<LocalDate> = launchDate
 
     /**
      * Returns the raw JSON value of [launchSiteId].
@@ -465,24 +427,27 @@ private constructor(
      *
      * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+    @JsonProperty("origin")
+    @ExcludeMissing
+    fun _origin(): JsonField<String> = origin
 
     /**
      * Returns the raw JSON value of [origNetwork].
      *
      * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
+    @JsonProperty("origNetwork")
+    @ExcludeMissing
+    fun _origNetwork(): JsonField<String> = origNetwork
 
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
-        additionalProperties.put(key, value)
+      additionalProperties.put(key, value)
     }
 
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> =
-        Collections.unmodifiableMap(additionalProperties)
+    fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -492,6 +457,7 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [OnorbitListResponse].
          *
          * The following fields are required:
+         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -499,7 +465,8 @@ private constructor(
          * .source()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [OnorbitListResponse]. */
@@ -529,70 +496,69 @@ private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(onorbitListResponse: OnorbitListResponse) = apply {
-            classificationMarking = onorbitListResponse.classificationMarking
-            dataMode = onorbitListResponse.dataMode
-            satNo = onorbitListResponse.satNo
-            source = onorbitListResponse.source
-            altName = onorbitListResponse.altName
-            category = onorbitListResponse.category
-            commonName = onorbitListResponse.commonName
-            constellation = onorbitListResponse.constellation
-            countryCode = onorbitListResponse.countryCode
-            createdAt = onorbitListResponse.createdAt
-            createdBy = onorbitListResponse.createdBy
-            decayDate = onorbitListResponse.decayDate
-            idOnOrbit = onorbitListResponse.idOnOrbit
-            intlDes = onorbitListResponse.intlDes
-            launchDate = onorbitListResponse.launchDate
-            launchSiteId = onorbitListResponse.launchSiteId
-            lifetimeYears = onorbitListResponse.lifetimeYears
-            missionNumber = onorbitListResponse.missionNumber
-            objectType = onorbitListResponse.objectType
-            origin = onorbitListResponse.origin
-            origNetwork = onorbitListResponse.origNetwork
-            additionalProperties = onorbitListResponse.additionalProperties.toMutableMap()
-        }
+        internal fun from(onorbitListResponse: OnorbitListResponse) =
+            apply {
+                classificationMarking = onorbitListResponse.classificationMarking
+                dataMode = onorbitListResponse.dataMode
+                satNo = onorbitListResponse.satNo
+                source = onorbitListResponse.source
+                altName = onorbitListResponse.altName
+                category = onorbitListResponse.category
+                commonName = onorbitListResponse.commonName
+                constellation = onorbitListResponse.constellation
+                countryCode = onorbitListResponse.countryCode
+                createdAt = onorbitListResponse.createdAt
+                createdBy = onorbitListResponse.createdBy
+                decayDate = onorbitListResponse.decayDate
+                idOnOrbit = onorbitListResponse.idOnOrbit
+                intlDes = onorbitListResponse.intlDes
+                launchDate = onorbitListResponse.launchDate
+                launchSiteId = onorbitListResponse.launchSiteId
+                lifetimeYears = onorbitListResponse.lifetimeYears
+                missionNumber = onorbitListResponse.missionNumber
+                objectType = onorbitListResponse.objectType
+                origin = onorbitListResponse.origin
+                origNetwork = onorbitListResponse.origNetwork
+                additionalProperties = onorbitListResponse.additionalProperties.toMutableMap()
+            }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-        fun classificationMarking(classificationMarking: String) =
-            classificationMarking(JsonField.of(classificationMarking))
+        fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
 
         /**
          * Sets [Builder.classificationMarking] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
-            this.classificationMarking = classificationMarking
-        }
+        fun classificationMarking(classificationMarking: JsonField<String>) =
+            apply {
+                this.classificationMarking = classificationMarking
+            }
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-         * both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-         * analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-         * requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
          */
         fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
         /**
          * Sets [Builder.dataMode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+        fun dataMode(dataMode: JsonField<DataMode>) =
+            apply {
+                this.dataMode = dataMode
+            }
 
         /** Satellite/Catalog number of the target on-orbit object. */
         fun satNo(satNo: Int) = satNo(JsonField.of(satNo))
@@ -600,10 +566,13 @@ private constructor(
         /**
          * Sets [Builder.satNo] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.satNo] with a well-typed [Int] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.satNo] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun satNo(satNo: JsonField<Int>) = apply { this.satNo = satNo }
+        fun satNo(satNo: JsonField<Int>) =
+            apply {
+                this.satNo = satNo
+            }
 
         /** Source of the data. */
         fun source(source: String) = source(JsonField.of(source))
@@ -611,10 +580,13 @@ private constructor(
         /**
          * Sets [Builder.source] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.source] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun source(source: JsonField<String>) = apply { this.source = source }
+        fun source(source: JsonField<String>) =
+            apply {
+                this.source = source
+            }
 
         /** Alternate name of the on-orbit object. */
         fun altName(altName: String) = altName(JsonField.of(altName))
@@ -622,26 +594,27 @@ private constructor(
         /**
          * Sets [Builder.altName] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.altName] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.altName] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun altName(altName: JsonField<String>) = apply { this.altName = altName }
+        fun altName(altName: JsonField<String>) =
+            apply {
+                this.altName = altName
+            }
 
-        /**
-         * Category of the on-orbit object. (Unknown, On-Orbit, Decayed, Cataloged Without State,
-         * Launch Nominal, Analyst Satellite, Cislunar, Lunar, Hyperbolic, Heliocentric,
-         * Interplanetary, Lagrangian, Docked).
-         */
+        /** Category of the on-orbit object. (Unknown, On-Orbit, Decayed, Cataloged Without State, Launch Nominal, Analyst Satellite, Cislunar, Lunar, Hyperbolic, Heliocentric, Interplanetary, Lagrangian, Docked). */
         fun category(category: Category) = category(JsonField.of(category))
 
         /**
          * Sets [Builder.category] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.category] with a well-typed [Category] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.category] with a well-typed [Category] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun category(category: JsonField<Category>) = apply { this.category = category }
+        fun category(category: JsonField<Category>) =
+            apply {
+                this.category = category
+            }
 
         /** Common name of the on-orbit object. */
         fun commonName(commonName: String) = commonName(JsonField.of(commonName))
@@ -649,11 +622,13 @@ private constructor(
         /**
          * Sets [Builder.commonName] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.commonName] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.commonName] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun commonName(commonName: JsonField<String>) = apply { this.commonName = commonName }
+        fun commonName(commonName: JsonField<String>) =
+            apply {
+                this.commonName = commonName
+            }
 
         /** Constellation to which this satellite belongs. */
         fun constellation(constellation: String) = constellation(JsonField.of(constellation))
@@ -661,31 +636,27 @@ private constructor(
         /**
          * Sets [Builder.constellation] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.constellation] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.constellation] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun constellation(constellation: JsonField<String>) = apply {
-            this.constellation = constellation
-        }
+        fun constellation(constellation: JsonField<String>) =
+            apply {
+                this.constellation = constellation
+            }
 
-        /**
-         * The country code. This value is typically the ISO 3166 Alpha-2 two-character country
-         * code, however it can also represent various consortiums that do not appear in the ISO
-         * document. The code must correspond to an existing country in the UDL’s country API. Call
-         * udl/country/{code} to get any associated FIPS code, ISO Alpha-3 code, or alternate code
-         * values that exist for the specified country code.
-         */
+        /** The country code. This value is typically the ISO 3166 Alpha-2 two-character country code, however it can also represent various consortiums that do not appear in the ISO document. The code must correspond to an existing country in the UDL’s country API. Call udl/country/{code} to get any associated FIPS code, ISO Alpha-3 code, or alternate code values that exist for the specified country code. */
         fun countryCode(countryCode: String) = countryCode(JsonField.of(countryCode))
 
         /**
          * Sets [Builder.countryCode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.countryCode] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.countryCode] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun countryCode(countryCode: JsonField<String>) = apply { this.countryCode = countryCode }
+        fun countryCode(countryCode: JsonField<String>) =
+            apply {
+                this.countryCode = countryCode
+            }
 
         /** Time the row was created in the database, auto-populated by the system. */
         fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -693,11 +664,13 @@ private constructor(
         /**
          * Sets [Builder.createdAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) =
+            apply {
+                this.createdAt = createdAt
+            }
 
         /** Application user who created the row in the database, auto-populated by the system. */
         fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
@@ -705,11 +678,13 @@ private constructor(
         /**
          * Sets [Builder.createdBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+        fun createdBy(createdBy: JsonField<String>) =
+            apply {
+                this.createdBy = createdBy
+            }
 
         /** Date of decay. */
         fun decayDate(decayDate: OffsetDateTime) = decayDate(JsonField.of(decayDate))
@@ -717,42 +692,41 @@ private constructor(
         /**
          * Sets [Builder.decayDate] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.decayDate] with a well-typed [OffsetDateTime] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.decayDate] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun decayDate(decayDate: JsonField<OffsetDateTime>) = apply { this.decayDate = decayDate }
+        fun decayDate(decayDate: JsonField<OffsetDateTime>) =
+            apply {
+                this.decayDate = decayDate
+            }
 
-        /**
-         * For the public catalog, the idOnOrbit is typically the satellite number as a string, but
-         * may be a UUID for analyst or other unknown or untracked satellites, auto-generated by the
-         * system.
-         */
+        /** For the public catalog, the idOnOrbit is typically the satellite number as a string, but may be a UUID for analyst or other unknown or untracked satellites, auto-generated by the system. */
         fun idOnOrbit(idOnOrbit: String) = idOnOrbit(JsonField.of(idOnOrbit))
 
         /**
          * Sets [Builder.idOnOrbit] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idOnOrbit] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.idOnOrbit] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun idOnOrbit(idOnOrbit: JsonField<String>) = apply { this.idOnOrbit = idOnOrbit }
+        fun idOnOrbit(idOnOrbit: JsonField<String>) =
+            apply {
+                this.idOnOrbit = idOnOrbit
+            }
 
-        /**
-         * International Designator, typically of the format YYYYLLLAAA, where YYYY is the launch
-         * year, LLL is the sequential launch number of that year, and AAA is an optional launch
-         * piece designator for the launch.
-         */
+        /** International Designator, typically of the format YYYYLLLAAA, where YYYY is the launch year, LLL is the sequential launch number of that year, and AAA is an optional launch piece designator for the launch. */
         fun intlDes(intlDes: String) = intlDes(JsonField.of(intlDes))
 
         /**
          * Sets [Builder.intlDes] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.intlDes] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.intlDes] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun intlDes(intlDes: JsonField<String>) = apply { this.intlDes = intlDes }
+        fun intlDes(intlDes: JsonField<String>) =
+            apply {
+                this.intlDes = intlDes
+            }
 
         /** Date of launch. */
         fun launchDate(launchDate: LocalDate) = launchDate(JsonField.of(launchDate))
@@ -760,11 +734,13 @@ private constructor(
         /**
          * Sets [Builder.launchDate] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.launchDate] with a well-typed [LocalDate] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.launchDate] with a well-typed [LocalDate] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun launchDate(launchDate: JsonField<LocalDate>) = apply { this.launchDate = launchDate }
+        fun launchDate(launchDate: JsonField<LocalDate>) =
+            apply {
+                this.launchDate = launchDate
+            }
 
         /** Id of the associated launchSite entity. */
         fun launchSiteId(launchSiteId: String) = launchSiteId(JsonField.of(launchSiteId))
@@ -772,13 +748,13 @@ private constructor(
         /**
          * Sets [Builder.launchSiteId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.launchSiteId] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.launchSiteId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun launchSiteId(launchSiteId: JsonField<String>) = apply {
-            this.launchSiteId = launchSiteId
-        }
+        fun launchSiteId(launchSiteId: JsonField<String>) =
+            apply {
+                this.launchSiteId = launchSiteId
+            }
 
         /** Estimated lifetime of the on-orbit payload, if known. */
         fun lifetimeYears(lifetimeYears: Int) = lifetimeYears(JsonField.of(lifetimeYears))
@@ -786,13 +762,13 @@ private constructor(
         /**
          * Sets [Builder.lifetimeYears] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.lifetimeYears] with a well-typed [Int] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.lifetimeYears] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun lifetimeYears(lifetimeYears: JsonField<Int>) = apply {
-            this.lifetimeYears = lifetimeYears
-        }
+        fun lifetimeYears(lifetimeYears: JsonField<Int>) =
+            apply {
+                this.lifetimeYears = lifetimeYears
+            }
 
         /** Mission number of the on-orbit object. */
         fun missionNumber(missionNumber: String) = missionNumber(JsonField.of(missionNumber))
@@ -800,13 +776,13 @@ private constructor(
         /**
          * Sets [Builder.missionNumber] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.missionNumber] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.missionNumber] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun missionNumber(missionNumber: JsonField<String>) = apply {
-            this.missionNumber = missionNumber
-        }
+        fun missionNumber(missionNumber: JsonField<String>) =
+            apply {
+                this.missionNumber = missionNumber
+            }
 
         /** Type of on-orbit object: ROCKET BODY, DEBRIS, PAYLOAD, PLATFORM, MANNED, UNKNOWN. */
         fun objectType(objectType: ObjectType) = objectType(JsonField.of(objectType))
@@ -814,61 +790,67 @@ private constructor(
         /**
          * Sets [Builder.objectType] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.objectType] with a well-typed [ObjectType] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.objectType] with a well-typed [ObjectType] value instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun objectType(objectType: JsonField<ObjectType>) = apply { this.objectType = objectType }
+        fun objectType(objectType: JsonField<ObjectType>) =
+            apply {
+                this.objectType = objectType
+            }
 
-        /**
-         * Originating system or organization which produced the data, if different from the source.
-         * The origin may be different than the source if the source was a mediating system which
-         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
-         * be the origin.
-         */
+        /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
         fun origin(origin: String) = origin(JsonField.of(origin))
 
         /**
          * Sets [Builder.origin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+        fun origin(origin: JsonField<String>) =
+            apply {
+                this.origin = origin
+            }
 
-        /**
-         * The originating source network on which this record was created, auto-populated by the
-         * system.
-         */
+        /** The originating source network on which this record was created, auto-populated by the system. */
         fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
         /**
          * Sets [Builder.origNetwork] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
          */
-        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
+        fun origNetwork(origNetwork: JsonField<String>) =
+            apply {
+                this.origNetwork = origNetwork
+            }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-            this.additionalProperties.clear()
-            putAllAdditionalProperties(additionalProperties)
-        }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
+            apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-            additionalProperties.put(key, value)
-        }
+        fun putAdditionalProperty(key: String, value: JsonValue) =
+            apply {
+                additionalProperties.put(key, value)
+            }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-            this.additionalProperties.putAll(additionalProperties)
-        }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
+            apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
 
-        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+        fun removeAdditionalProperty(key: String) =
+            apply {
+                additionalProperties.remove(key)
+            }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-            keys.forEach(::removeAdditionalProperty)
-        }
+        fun removeAllAdditionalProperties(keys: Set<String>) =
+            apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
 
         /**
          * Returns an immutable instance of [OnorbitListResponse].
@@ -876,6 +858,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -887,61 +870,70 @@ private constructor(
          */
         fun build(): OnorbitListResponse =
             OnorbitListResponse(
-                checkRequired("classificationMarking", classificationMarking),
-                checkRequired("dataMode", dataMode),
-                checkRequired("satNo", satNo),
-                checkRequired("source", source),
-                altName,
-                category,
-                commonName,
-                constellation,
-                countryCode,
-                createdAt,
-                createdBy,
-                decayDate,
-                idOnOrbit,
-                intlDes,
-                launchDate,
-                launchSiteId,
-                lifetimeYears,
-                missionNumber,
-                objectType,
-                origin,
-                origNetwork,
-                additionalProperties.toMutableMap(),
+              checkRequired(
+                "classificationMarking", classificationMarking
+              ),
+              checkRequired(
+                "dataMode", dataMode
+              ),
+              checkRequired(
+                "satNo", satNo
+              ),
+              checkRequired(
+                "source", source
+              ),
+              altName,
+              category,
+              commonName,
+              constellation,
+              countryCode,
+              createdAt,
+              createdBy,
+              decayDate,
+              idOnOrbit,
+              intlDes,
+              launchDate,
+              launchSiteId,
+              lifetimeYears,
+              missionNumber,
+              objectType,
+              origin,
+              origNetwork,
+              additionalProperties.toMutableMap(),
             )
     }
 
     private var validated: Boolean = false
 
-    fun validate(): OnorbitListResponse = apply {
-        if (validated) {
-            return@apply
-        }
+    fun validate(): OnorbitListResponse =
+        apply {
+            if (validated) {
+              return@apply
+            }
 
-        classificationMarking()
-        dataMode().validate()
-        satNo()
-        source()
-        altName()
-        category().ifPresent { it.validate() }
-        commonName()
-        constellation()
-        countryCode()
-        createdAt()
-        createdBy()
-        decayDate()
-        idOnOrbit()
-        intlDes()
-        launchDate()
-        launchSiteId()
-        lifetimeYears()
-        missionNumber()
-        objectType().ifPresent { it.validate() }
-        origin()
-        origNetwork()
-        validated = true
-    }
+            classificationMarking()
+            dataMode().validate()
+            satNo()
+            source()
+            altName()
+            category().ifPresent { it.validate() }
+            commonName()
+            constellation()
+            countryCode()
+            createdAt()
+            createdBy()
+            decayDate()
+            idOnOrbit()
+            intlDes()
+            launchDate()
+            launchSiteId()
+            lifetimeYears()
+            missionNumber()
+            objectType().ifPresent { it.validate() }
+            origin()
+            origNetwork()
+            validated = true
+        }
 
     fun isValid(): Boolean =
         try {
@@ -957,54 +949,33 @@ private constructor(
      * Used for best match union deserialization.
      */
     @JvmSynthetic
-    internal fun validity(): Int =
-        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
-            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
-            (if (satNo.asKnown().isPresent) 1 else 0) +
-            (if (source.asKnown().isPresent) 1 else 0) +
-            (if (altName.asKnown().isPresent) 1 else 0) +
-            (category.asKnown().getOrNull()?.validity() ?: 0) +
-            (if (commonName.asKnown().isPresent) 1 else 0) +
-            (if (constellation.asKnown().isPresent) 1 else 0) +
-            (if (countryCode.asKnown().isPresent) 1 else 0) +
-            (if (createdAt.asKnown().isPresent) 1 else 0) +
-            (if (createdBy.asKnown().isPresent) 1 else 0) +
-            (if (decayDate.asKnown().isPresent) 1 else 0) +
-            (if (idOnOrbit.asKnown().isPresent) 1 else 0) +
-            (if (intlDes.asKnown().isPresent) 1 else 0) +
-            (if (launchDate.asKnown().isPresent) 1 else 0) +
-            (if (launchSiteId.asKnown().isPresent) 1 else 0) +
-            (if (lifetimeYears.asKnown().isPresent) 1 else 0) +
-            (if (missionNumber.asKnown().isPresent) 1 else 0) +
-            (objectType.asKnown().getOrNull()?.validity() ?: 0) +
-            (if (origin.asKnown().isPresent) 1 else 0) +
-            (if (origNetwork.asKnown().isPresent) 1 else 0)
+    internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (satNo.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (altName.asKnown().isPresent) 1 else 0) + (category.asKnown().getOrNull()?.validity() ?: 0) + (if (commonName.asKnown().isPresent) 1 else 0) + (if (constellation.asKnown().isPresent) 1 else 0) + (if (countryCode.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (decayDate.asKnown().isPresent) 1 else 0) + (if (idOnOrbit.asKnown().isPresent) 1 else 0) + (if (intlDes.asKnown().isPresent) 1 else 0) + (if (launchDate.asKnown().isPresent) 1 else 0) + (if (launchSiteId.asKnown().isPresent) 1 else 0) + (if (lifetimeYears.asKnown().isPresent) 1 else 0) + (if (missionNumber.asKnown().isPresent) 1 else 0) + (objectType.asKnown().getOrNull()?.validity() ?: 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0)
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-     * both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-     * analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-     * requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
      */
-    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+    class DataMode @JsonCreator private constructor(
+        private val value: JsonField<String>,
+
+    ) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't
-         * match any known member, and you want to know that value. For example, if the SDK is on an
-         * older version than the API, then the API may respond with new members that the SDK is
-         * unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't match any known
+         * member, and you want to know that value. For example, if the SDK is on an older version than the
+         * API, then the API may respond with new members that the SDK is unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue
+        fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -1031,9 +1002,11 @@ private constructor(
          * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [DataMode] can contain an unknown value in a couple of cases:
-         * - It was deserialized from data that doesn't match any known member. For example, if the
-         *   SDK is on an older version than the API, then the API may respond with new members that
-         *   the SDK is unaware of.
+         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
+         *   an older version than the API, then the API may respond with new members that the SDK is unaware
+         *   of.
+         *
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -1046,11 +1019,11 @@ private constructor(
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
-         * if the class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
+         * class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want
-         * to throw for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want to throw
+         * for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -1064,11 +1037,10 @@ private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't
-         * want to throw for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
+         * for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
-         *   known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
          */
         fun known(): Known =
             when (this) {
@@ -1082,27 +1054,25 @@ private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging
-         * and generally doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging and generally
+         * doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
-         *   have the expected primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
+         * primitive type.
          */
-        fun asString(): String =
-            _value().asString().orElseThrow {
-                UnifieddatalibraryInvalidDataException("Value is not a String")
-            }
+        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
 
         private var validated: Boolean = false
 
-        fun validate(): DataMode = apply {
-            if (validated) {
-                return@apply
-            }
+        fun validate(): DataMode =
+            apply {
+                if (validated) {
+                  return@apply
+                }
 
-            known()
-            validated = true
-        }
+                known()
+                validated = true
+            }
 
         fun isValid(): Boolean =
             try {
@@ -1113,19 +1083,19 @@ private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
+         * Returns a score indicating how many valid values are contained in this object recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic
+        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
+          if (this === other) {
+              return true
+          }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+          return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
         }
 
         override fun hashCode() = value.hashCode()
@@ -1133,22 +1103,21 @@ private constructor(
         override fun toString() = value.toString()
     }
 
-    /**
-     * Category of the on-orbit object. (Unknown, On-Orbit, Decayed, Cataloged Without State, Launch
-     * Nominal, Analyst Satellite, Cislunar, Lunar, Hyperbolic, Heliocentric, Interplanetary,
-     * Lagrangian, Docked).
-     */
-    class Category @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+    /** Category of the on-orbit object. (Unknown, On-Orbit, Decayed, Cataloged Without State, Launch Nominal, Analyst Satellite, Cislunar, Lunar, Hyperbolic, Heliocentric, Interplanetary, Lagrangian, Docked). */
+    class Category @JsonCreator private constructor(
+        private val value: JsonField<String>,
+
+    ) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't
-         * match any known member, and you want to know that value. For example, if the SDK is on an
-         * older version than the API, then the API may respond with new members that the SDK is
-         * unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't match any known
+         * member, and you want to know that value. For example, if the SDK is on an older version than the
+         * API, then the API may respond with new members that the SDK is unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue
+        fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -1202,9 +1171,11 @@ private constructor(
          * An enum containing [Category]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [Category] can contain an unknown value in a couple of cases:
-         * - It was deserialized from data that doesn't match any known member. For example, if the
-         *   SDK is on an older version than the API, then the API may respond with new members that
-         *   the SDK is unaware of.
+         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
+         *   an older version than the API, then the API may respond with new members that the SDK is unaware
+         *   of.
+         *
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -1226,11 +1197,11 @@ private constructor(
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
-         * if the class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
+         * class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want
-         * to throw for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want to throw
+         * for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -1253,11 +1224,10 @@ private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't
-         * want to throw for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
+         * for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
-         *   known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
          */
         fun known(): Known =
             when (this) {
@@ -1280,27 +1250,25 @@ private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging
-         * and generally doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging and generally
+         * doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
-         *   have the expected primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
+         * primitive type.
          */
-        fun asString(): String =
-            _value().asString().orElseThrow {
-                UnifieddatalibraryInvalidDataException("Value is not a String")
-            }
+        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
 
         private var validated: Boolean = false
 
-        fun validate(): Category = apply {
-            if (validated) {
-                return@apply
-            }
+        fun validate(): Category =
+            apply {
+                if (validated) {
+                  return@apply
+                }
 
-            known()
-            validated = true
-        }
+                known()
+                validated = true
+            }
 
         fun isValid(): Boolean =
             try {
@@ -1311,19 +1279,19 @@ private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
+         * Returns a score indicating how many valid values are contained in this object recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic
+        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
+          if (this === other) {
+              return true
+          }
 
-            return /* spotless:off */ other is Category && value == other.value /* spotless:on */
+          return /* spotless:off */ other is Category && value == other.value /* spotless:on */
         }
 
         override fun hashCode() = value.hashCode()
@@ -1332,17 +1300,20 @@ private constructor(
     }
 
     /** Type of on-orbit object: ROCKET BODY, DEBRIS, PAYLOAD, PLATFORM, MANNED, UNKNOWN. */
-    class ObjectType @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+    class ObjectType @JsonCreator private constructor(
+        private val value: JsonField<String>,
+
+    ) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't
-         * match any known member, and you want to know that value. For example, if the SDK is on an
-         * older version than the API, then the API may respond with new members that the SDK is
-         * unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't match any known
+         * member, and you want to know that value. For example, if the SDK is on an older version than the
+         * API, then the API may respond with new members that the SDK is unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue
+        fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -1375,9 +1346,11 @@ private constructor(
          * An enum containing [ObjectType]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [ObjectType] can contain an unknown value in a couple of cases:
-         * - It was deserialized from data that doesn't match any known member. For example, if the
-         *   SDK is on an older version than the API, then the API may respond with new members that
-         *   the SDK is unaware of.
+         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
+         *   an older version than the API, then the API may respond with new members that the SDK is unaware
+         *   of.
+         *
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -1387,18 +1360,16 @@ private constructor(
             PLATFORM,
             MANNED,
             UNKNOWN,
-            /**
-             * An enum member indicating that [ObjectType] was instantiated with an unknown value.
-             */
+            /** An enum member indicating that [ObjectType] was instantiated with an unknown value. */
             _UNKNOWN,
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
-         * if the class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
+         * class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want
-         * to throw for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want to throw
+         * for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -1414,11 +1385,10 @@ private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't
-         * want to throw for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
+         * for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
-         *   known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
          */
         fun known(): Known =
             when (this) {
@@ -1434,27 +1404,25 @@ private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging
-         * and generally doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging and generally
+         * doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
-         *   have the expected primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
+         * primitive type.
          */
-        fun asString(): String =
-            _value().asString().orElseThrow {
-                UnifieddatalibraryInvalidDataException("Value is not a String")
-            }
+        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
 
         private var validated: Boolean = false
 
-        fun validate(): ObjectType = apply {
-            if (validated) {
-                return@apply
-            }
+        fun validate(): ObjectType =
+            apply {
+                if (validated) {
+                  return@apply
+                }
 
-            known()
-            validated = true
-        }
+                known()
+                validated = true
+            }
 
         fun isValid(): Boolean =
             try {
@@ -1465,19 +1433,19 @@ private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
+         * Returns a score indicating how many valid values are contained in this object recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic
+        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
+          if (this === other) {
+              return true
+          }
 
-            return /* spotless:off */ other is ObjectType && value == other.value /* spotless:on */
+          return /* spotless:off */ other is ObjectType && value == other.value /* spotless:on */
         }
 
         override fun hashCode() = value.hashCode()
@@ -1486,11 +1454,11 @@ private constructor(
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is OnorbitListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && satNo == other.satNo && source == other.source && altName == other.altName && category == other.category && commonName == other.commonName && constellation == other.constellation && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && decayDate == other.decayDate && idOnOrbit == other.idOnOrbit && intlDes == other.intlDes && launchDate == other.launchDate && launchSiteId == other.launchSiteId && lifetimeYears == other.lifetimeYears && missionNumber == other.missionNumber && objectType == other.objectType && origin == other.origin && origNetwork == other.origNetwork && additionalProperties == other.additionalProperties /* spotless:on */
+      return /* spotless:off */ other is OnorbitListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && satNo == other.satNo && source == other.source && altName == other.altName && category == other.category && commonName == other.commonName && constellation == other.constellation && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && decayDate == other.decayDate && idOnOrbit == other.idOnOrbit && intlDes == other.intlDes && launchDate == other.launchDate && launchSiteId == other.launchSiteId && lifetimeYears == other.lifetimeYears && missionNumber == other.missionNumber && objectType == other.objectType && origin == other.origin && origNetwork == other.origNetwork && additionalProperties == other.additionalProperties /* spotless:on */
     }
 
     /* spotless:off */
@@ -1499,6 +1467,5 @@ private constructor(
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() =
-        "OnorbitListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, satNo=$satNo, source=$source, altName=$altName, category=$category, commonName=$commonName, constellation=$constellation, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, decayDate=$decayDate, idOnOrbit=$idOnOrbit, intlDes=$intlDes, launchDate=$launchDate, launchSiteId=$launchSiteId, lifetimeYears=$lifetimeYears, missionNumber=$missionNumber, objectType=$objectType, origin=$origin, origNetwork=$origNetwork, additionalProperties=$additionalProperties}"
+    override fun toString() = "OnorbitListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, satNo=$satNo, source=$source, altName=$altName, category=$category, commonName=$commonName, constellation=$constellation, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, decayDate=$decayDate, idOnOrbit=$idOnOrbit, intlDes=$intlDes, launchDate=$launchDate, launchSiteId=$launchSiteId, lifetimeYears=$lifetimeYears, missionNumber=$missionNumber, objectType=$objectType, origin=$origin, origNetwork=$origNetwork, additionalProperties=$additionalProperties}"
 }

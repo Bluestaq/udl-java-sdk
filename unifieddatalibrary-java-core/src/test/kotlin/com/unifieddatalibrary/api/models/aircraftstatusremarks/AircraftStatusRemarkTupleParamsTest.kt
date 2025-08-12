@@ -3,6 +3,7 @@
 package com.unifieddatalibrary.api.models.aircraftstatusremarks
 
 import com.unifieddatalibrary.api.core.http.QueryParams
+import com.unifieddatalibrary.api.models.aircraftstatusremarks.AircraftStatusRemarkTupleParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -10,40 +11,40 @@ internal class AircraftStatusRemarkTupleParamsTest {
 
     @Test
     fun create() {
-        AircraftStatusRemarkTupleParams.builder()
-            .columns("columns")
-            .firstResult(0L)
-            .maxResults(0L)
-            .build()
+      AircraftStatusRemarkTupleParams.builder()
+          .columns("columns")
+          .firstResult(0L)
+          .maxResults(0L)
+          .build()
     }
 
     @Test
     fun queryParams() {
-        val params =
-            AircraftStatusRemarkTupleParams.builder()
-                .columns("columns")
-                .firstResult(0L)
-                .maxResults(0L)
-                .build()
+      val params = AircraftStatusRemarkTupleParams.builder()
+          .columns("columns")
+          .firstResult(0L)
+          .maxResults(0L)
+          .build()
 
-        val queryParams = params._queryParams()
+      val queryParams = params._queryParams()
 
-        assertThat(queryParams)
-            .isEqualTo(
-                QueryParams.builder()
-                    .put("columns", "columns")
-                    .put("firstResult", "0")
-                    .put("maxResults", "0")
-                    .build()
-            )
+      assertThat(queryParams).isEqualTo(QueryParams.builder()
+          .put("columns", "columns")
+          .put("firstResult", "0")
+          .put("maxResults", "0")
+          .build())
     }
 
     @Test
     fun queryParamsWithoutOptionalFields() {
-        val params = AircraftStatusRemarkTupleParams.builder().columns("columns").build()
+      val params = AircraftStatusRemarkTupleParams.builder()
+          .columns("columns")
+          .build()
 
-        val queryParams = params._queryParams()
+      val queryParams = params._queryParams()
 
-        assertThat(queryParams).isEqualTo(QueryParams.builder().put("columns", "columns").build())
+      assertThat(queryParams).isEqualTo(QueryParams.builder()
+          .put("columns", "columns")
+          .build())
     }
 }

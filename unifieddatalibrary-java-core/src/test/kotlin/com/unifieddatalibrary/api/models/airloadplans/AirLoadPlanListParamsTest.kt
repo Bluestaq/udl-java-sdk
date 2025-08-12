@@ -7,11 +7,11 @@ import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class AirLoadPlanListParamsTest {
+internal class AirloadPlanListParamsTest {
 
     @Test
     fun create() {
-        AirLoadPlanListParams.builder()
+        AirloadPlanListParams.builder()
             .estDepTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
             .firstResult(0L)
             .maxResults(0L)
@@ -21,7 +21,7 @@ internal class AirLoadPlanListParamsTest {
     @Test
     fun queryParams() {
         val params =
-            AirLoadPlanListParams.builder()
+            AirloadPlanListParams.builder()
                 .estDepTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .firstResult(0L)
                 .maxResults(0L)
@@ -42,7 +42,7 @@ internal class AirLoadPlanListParamsTest {
     @Test
     fun queryParamsWithoutOptionalFields() {
         val params =
-            AirLoadPlanListParams.builder()
+            AirloadPlanListParams.builder()
                 .estDepTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .build()
 

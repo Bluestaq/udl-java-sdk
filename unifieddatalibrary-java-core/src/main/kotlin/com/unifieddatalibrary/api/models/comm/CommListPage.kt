@@ -5,23 +5,28 @@ package com.unifieddatalibrary.api.models.comm
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.models.comm.CommAbridged
+import com.unifieddatalibrary.api.models.comm.CommListParams
 import com.unifieddatalibrary.api.services.blocking.CommService
 import java.util.Objects
+import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see CommService.list */
-class CommListPage
-private constructor(
+class CommListPage private constructor(
     private val service: CommService,
     private val params: CommListParams,
     private val items: List<CommAbridged>,
+
 ) : Page<CommAbridged> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): CommListParams {
-        val offset = params.firstResult().getOrDefault(0)
-        return params.toBuilder().firstResult(offset + items().size).build()
+      val offset = params.firstResult().getOrDefault(0)
+      return params.toBuilder()
+          .firstResult(offset + items().size)
+          .build()
     }
 
     override fun nextPage(): CommListPage = service.list(nextPageParams())
@@ -42,13 +47,15 @@ private constructor(
          * Returns a mutable builder for constructing an instance of [CommListPage].
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic fun builder() = Builder()
+        @JvmStatic
+        fun builder() = Builder()
     }
 
     /** A builder for [CommListPage]. */
@@ -59,19 +66,29 @@ private constructor(
         private var items: List<CommAbridged>? = null
 
         @JvmSynthetic
-        internal fun from(commListPage: CommListPage) = apply {
-            service = commListPage.service
-            params = commListPage.params
-            items = commListPage.items
-        }
+        internal fun from(commListPage: CommListPage) =
+            apply {
+                service = commListPage.service
+                params = commListPage.params
+                items = commListPage.items
+            }
 
-        fun service(service: CommService) = apply { this.service = service }
+        fun service(service: CommService) =
+            apply {
+                this.service = service
+            }
 
         /** The parameters that were used to request this page. */
-        fun params(params: CommListParams) = apply { this.params = params }
+        fun params(params: CommListParams) =
+            apply {
+                this.params = params
+            }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<CommAbridged>) = apply { this.items = items }
+        fun items(items: List<CommAbridged>) =
+            apply {
+                this.items = items
+            }
 
         /**
          * Returns an immutable instance of [CommListPage].
@@ -79,6 +96,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
+         *
          * ```java
          * .service()
          * .params()
@@ -89,18 +107,24 @@ private constructor(
          */
         fun build(): CommListPage =
             CommListPage(
-                checkRequired("service", service),
-                checkRequired("params", params),
-                checkRequired("items", items),
+              checkRequired(
+                "service", service
+              ),
+              checkRequired(
+                "params", params
+              ),
+              checkRequired(
+                "items", items
+              ),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) {
-            return true
-        }
+      if (this === other) {
+          return true
+      }
 
-        return /* spotless:off */ other is CommListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+      return /* spotless:off */ other is CommListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
     }
 
     override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */

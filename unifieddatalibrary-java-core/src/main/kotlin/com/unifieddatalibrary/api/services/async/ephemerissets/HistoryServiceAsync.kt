@@ -10,14 +10,13 @@ import com.unifieddatalibrary.api.models.ephemerissets.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.ephemerissets.history.HistoryCountParams
 import com.unifieddatalibrary.api.models.ephemerissets.history.HistoryListPageAsync
 import com.unifieddatalibrary.api.models.ephemerissets.history.HistoryListParams
+import com.unifieddatalibrary.api.services.async.ephemerissets.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
 interface HistoryServiceAsync {
 
-    /**
-     * Returns a view of this service that provides access to raw HTTP responses for each method.
-     */
+    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -27,77 +26,61 @@ interface HistoryServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryServiceAsync
 
-    /**
-     * Service operation to dynamically query historical data by a variety of query parameters not
-     * specified in this API documentation. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
-     */
+    /** Service operation to dynamically query historical data by a variety of query parameters not specified in this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
     fun list(): CompletableFuture<HistoryListPageAsync> = list(HistoryListParams.none())
 
     /** @see list */
-    fun list(
-        params: HistoryListParams = HistoryListParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<HistoryListPageAsync>
+    fun list(params: HistoryListParams = HistoryListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HistoryListPageAsync>
 
     /** @see list */
-    fun list(
-        params: HistoryListParams = HistoryListParams.none()
-    ): CompletableFuture<HistoryListPageAsync> = list(params, RequestOptions.none())
+    fun list(params: HistoryListParams = HistoryListParams.none()): CompletableFuture<HistoryListPageAsync> =
+        list(
+          params, RequestOptions.none()
+        )
 
     /** @see list */
     fun list(requestOptions: RequestOptions): CompletableFuture<HistoryListPageAsync> =
-        list(HistoryListParams.none(), requestOptions)
+        list(
+          HistoryListParams.none(), requestOptions
+        )
 
-    /**
-     * Service operation to dynamically query historical data by a variety of query parameters not
-     * specified in this API documentation, then write that data to the Secure Content Store. See
-     * the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required
-     * query parameter information.
-     */
+    /** Service operation to dynamically query historical data by a variety of query parameters not specified in this API documentation, then write that data to the Secure Content Store. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
     fun aodr(): CompletableFuture<Void?> = aodr(HistoryAodrParams.none())
 
     /** @see aodr */
-    fun aodr(
-        params: HistoryAodrParams = HistoryAodrParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<Void?>
+    fun aodr(params: HistoryAodrParams = HistoryAodrParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?>
 
     /** @see aodr */
     fun aodr(params: HistoryAodrParams = HistoryAodrParams.none()): CompletableFuture<Void?> =
-        aodr(params, RequestOptions.none())
+        aodr(
+          params, RequestOptions.none()
+        )
 
     /** @see aodr */
     fun aodr(requestOptions: RequestOptions): CompletableFuture<Void?> =
-        aodr(HistoryAodrParams.none(), requestOptions)
+        aodr(
+          HistoryAodrParams.none(), requestOptions
+        )
 
-    /**
-     * Service operation to return the count of records satisfying the specified query parameters.
-     * This operation is useful to determine how many records pass a particular query criteria
-     * without retrieving large amounts of data. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
-     */
+    /** Service operation to return the count of records satisfying the specified query parameters. This operation is useful to determine how many records pass a particular query criteria without retrieving large amounts of data. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
     fun count(): CompletableFuture<String> = count(HistoryCountParams.none())
 
     /** @see count */
-    fun count(
-        params: HistoryCountParams = HistoryCountParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<String>
+    fun count(params: HistoryCountParams = HistoryCountParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<String>
 
     /** @see count */
     fun count(params: HistoryCountParams = HistoryCountParams.none()): CompletableFuture<String> =
-        count(params, RequestOptions.none())
+        count(
+          params, RequestOptions.none()
+        )
 
     /** @see count */
     fun count(requestOptions: RequestOptions): CompletableFuture<String> =
-        count(HistoryCountParams.none(), requestOptions)
+        count(
+          HistoryCountParams.none(), requestOptions
+        )
 
-    /**
-     * A view of [HistoryServiceAsync] that provides access to raw HTTP responses for each method.
-     */
+    /** A view of [HistoryServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
         /**
@@ -105,75 +88,60 @@ interface HistoryServiceAsync {
          *
          * The original service is not modified.
          */
-        fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): HistoryServiceAsync.WithRawResponse
+        fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryServiceAsync.WithRawResponse
 
-        /**
-         * Returns a raw HTTP response for `get /udl/ephemerisset/history`, but is otherwise the
-         * same as [HistoryServiceAsync.list].
-         */
-        fun list(): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> =
-            list(HistoryListParams.none())
+        /** Returns a raw HTTP response for `get /udl/ephemerisset/history`, but is otherwise the same as [HistoryServiceAsync.list]. */
+        fun list(): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> = list(HistoryListParams.none())
 
         /** @see list */
-        fun list(
-            params: HistoryListParams = HistoryListParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<HistoryListPageAsync>>
+        fun list(params: HistoryListParams = HistoryListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<HistoryListPageAsync>>
 
         /** @see list */
-        fun list(
-            params: HistoryListParams = HistoryListParams.none()
-        ): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> =
-            list(params, RequestOptions.none())
+        fun list(params: HistoryListParams = HistoryListParams.none()): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> =
+            list(
+              params, RequestOptions.none()
+            )
 
         /** @see list */
-        fun list(
-            requestOptions: RequestOptions
-        ): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> =
-            list(HistoryListParams.none(), requestOptions)
+        fun list(requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> =
+            list(
+              HistoryListParams.none(), requestOptions
+            )
 
-        /**
-         * Returns a raw HTTP response for `get /udl/ephemerisset/history/aodr`, but is otherwise
-         * the same as [HistoryServiceAsync.aodr].
-         */
+        /** Returns a raw HTTP response for `get /udl/ephemerisset/history/aodr`, but is otherwise the same as [HistoryServiceAsync.aodr]. */
         fun aodr(): CompletableFuture<HttpResponse> = aodr(HistoryAodrParams.none())
 
         /** @see aodr */
-        fun aodr(
-            params: HistoryAodrParams = HistoryAodrParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponse>
+        fun aodr(params: HistoryAodrParams = HistoryAodrParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse>
 
         /** @see aodr */
-        fun aodr(
-            params: HistoryAodrParams = HistoryAodrParams.none()
-        ): CompletableFuture<HttpResponse> = aodr(params, RequestOptions.none())
+        fun aodr(params: HistoryAodrParams = HistoryAodrParams.none()): CompletableFuture<HttpResponse> =
+            aodr(
+              params, RequestOptions.none()
+            )
 
         /** @see aodr */
         fun aodr(requestOptions: RequestOptions): CompletableFuture<HttpResponse> =
-            aodr(HistoryAodrParams.none(), requestOptions)
+            aodr(
+              HistoryAodrParams.none(), requestOptions
+            )
 
-        /**
-         * Returns a raw HTTP response for `get /udl/ephemerisset/history/count`, but is otherwise
-         * the same as [HistoryServiceAsync.count].
-         */
+        /** Returns a raw HTTP response for `get /udl/ephemerisset/history/count`, but is otherwise the same as [HistoryServiceAsync.count]. */
         fun count(): CompletableFuture<HttpResponseFor<String>> = count(HistoryCountParams.none())
 
         /** @see count */
-        fun count(
-            params: HistoryCountParams = HistoryCountParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<String>>
+        fun count(params: HistoryCountParams = HistoryCountParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<String>>
 
         /** @see count */
-        fun count(
-            params: HistoryCountParams = HistoryCountParams.none()
-        ): CompletableFuture<HttpResponseFor<String>> = count(params, RequestOptions.none())
+        fun count(params: HistoryCountParams = HistoryCountParams.none()): CompletableFuture<HttpResponseFor<String>> =
+            count(
+              params, RequestOptions.none()
+            )
 
         /** @see count */
         fun count(requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<String>> =
-            count(HistoryCountParams.none(), requestOptions)
+            count(
+              HistoryCountParams.none(), requestOptions
+            )
     }
 }

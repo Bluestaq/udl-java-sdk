@@ -10,8 +10,6 @@ import java.util.Objects
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor
 import kotlin.jvm.optionals.getOrDefault
-import kotlin.jvm.optionals.getOrNull
-import kotlin.jvm.optionals.toList
 
 /** @see DataTypeServiceAsync.list */
 class DataTypeListPageAsync
@@ -23,7 +21,7 @@ private constructor(
 ) : PageAsync<String> {
 
     /** Delegates to [List<String>], but gracefully handles missing data. */
-    override fun items(): List<String> = items.flatMap { it.toList() }.getOrNull() ?: emptyList()
+    override fun items(): List<String> = items
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
@@ -39,9 +37,6 @@ private constructor(
 
     /** The parameters that were used to request this page. */
     fun params(): DataTypeListParams = params
-
-    /** The response that this page was parsed from. */
-    override fun items(): List<String> = items
 
     fun toBuilder() = Builder().from(this)
 

@@ -12,13 +12,12 @@ import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservation
 import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeListParams
 import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeQueryhelpParams
 import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeQueryhelpResponse
+import com.unifieddatalibrary.api.services.blocking.SensorObservationTypeService
 import java.util.function.Consumer
 
 interface SensorObservationTypeService {
 
-    /**
-     * Returns a view of this service that provides access to raw HTTP responses for each method.
-     */
+    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -31,76 +30,77 @@ interface SensorObservationTypeService {
     fun list(): SensorObservationTypeListPage = list(SensorObservationTypeListParams.none())
 
     /** @see list */
-    fun list(
-        params: SensorObservationTypeListParams = SensorObservationTypeListParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): SensorObservationTypeListPage
+    fun list(params: SensorObservationTypeListParams = SensorObservationTypeListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): SensorObservationTypeListPage
 
     /** @see list */
-    fun list(
-        params: SensorObservationTypeListParams = SensorObservationTypeListParams.none()
-    ): SensorObservationTypeListPage = list(params, RequestOptions.none())
+    fun list(params: SensorObservationTypeListParams = SensorObservationTypeListParams.none()): SensorObservationTypeListPage =
+        list(
+          params, RequestOptions.none()
+        )
 
     /** @see list */
     fun list(requestOptions: RequestOptions): SensorObservationTypeListPage =
-        list(SensorObservationTypeListParams.none(), requestOptions)
+        list(
+          SensorObservationTypeListParams.none(), requestOptions
+        )
 
     fun get(id: String): SensorObservationTypeGetResponse =
-        get(id, SensorObservationTypeGetParams.none())
+        get(
+          id, SensorObservationTypeGetParams.none()
+        )
 
     /** @see get */
-    fun get(
-        id: String,
-        params: SensorObservationTypeGetParams = SensorObservationTypeGetParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): SensorObservationTypeGetResponse = get(params.toBuilder().id(id).build(), requestOptions)
+    fun get(id: String, params: SensorObservationTypeGetParams = SensorObservationTypeGetParams.none(), requestOptions: RequestOptions = RequestOptions.none()): SensorObservationTypeGetResponse =
+        get(
+          params.toBuilder()
+              .id(id)
+              .build(), requestOptions
+        )
 
     /** @see get */
-    fun get(
-        id: String,
-        params: SensorObservationTypeGetParams = SensorObservationTypeGetParams.none(),
-    ): SensorObservationTypeGetResponse = get(id, params, RequestOptions.none())
+    fun get(id: String, params: SensorObservationTypeGetParams = SensorObservationTypeGetParams.none()): SensorObservationTypeGetResponse =
+        get(
+          id,
+          params,
+          RequestOptions.none(),
+        )
 
     /** @see get */
-    fun get(
-        params: SensorObservationTypeGetParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): SensorObservationTypeGetResponse
+    fun get(params: SensorObservationTypeGetParams, requestOptions: RequestOptions = RequestOptions.none()): SensorObservationTypeGetResponse
 
     /** @see get */
     fun get(params: SensorObservationTypeGetParams): SensorObservationTypeGetResponse =
-        get(params, RequestOptions.none())
+        get(
+          params, RequestOptions.none()
+        )
 
     /** @see get */
     fun get(id: String, requestOptions: RequestOptions): SensorObservationTypeGetResponse =
-        get(id, SensorObservationTypeGetParams.none(), requestOptions)
+        get(
+          id,
+          SensorObservationTypeGetParams.none(),
+          requestOptions,
+        )
 
-    /**
-     * Service operation to provide detailed information on available dynamic query parameters for a
-     * particular data type.
-     */
-    fun queryhelp(): SensorObservationTypeQueryhelpResponse =
-        queryhelp(SensorObservationTypeQueryhelpParams.none())
-
-    /** @see queryhelp */
-    fun queryhelp(
-        params: SensorObservationTypeQueryhelpParams = SensorObservationTypeQueryhelpParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): SensorObservationTypeQueryhelpResponse
+    /** Service operation to provide detailed information on available dynamic query parameters for a particular data type. */
+    fun queryhelp(): SensorObservationTypeQueryhelpResponse = queryhelp(SensorObservationTypeQueryhelpParams.none())
 
     /** @see queryhelp */
-    fun queryhelp(
-        params: SensorObservationTypeQueryhelpParams = SensorObservationTypeQueryhelpParams.none()
-    ): SensorObservationTypeQueryhelpResponse = queryhelp(params, RequestOptions.none())
+    fun queryhelp(params: SensorObservationTypeQueryhelpParams = SensorObservationTypeQueryhelpParams.none(), requestOptions: RequestOptions = RequestOptions.none()): SensorObservationTypeQueryhelpResponse
+
+    /** @see queryhelp */
+    fun queryhelp(params: SensorObservationTypeQueryhelpParams = SensorObservationTypeQueryhelpParams.none()): SensorObservationTypeQueryhelpResponse =
+        queryhelp(
+          params, RequestOptions.none()
+        )
 
     /** @see queryhelp */
     fun queryhelp(requestOptions: RequestOptions): SensorObservationTypeQueryhelpResponse =
-        queryhelp(SensorObservationTypeQueryhelpParams.none(), requestOptions)
+        queryhelp(
+          SensorObservationTypeQueryhelpParams.none(), requestOptions
+        )
 
-    /**
-     * A view of [SensorObservationTypeService] that provides access to raw HTTP responses for each
-     * method.
-     */
+    /** A view of [SensorObservationTypeService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
         /**
@@ -108,111 +108,95 @@ interface SensorObservationTypeService {
          *
          * The original service is not modified.
          */
-        fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): SensorObservationTypeService.WithRawResponse
+        fun withOptions(modifier: Consumer<ClientOptions.Builder>): SensorObservationTypeService.WithRawResponse
 
-        /**
-         * Returns a raw HTTP response for `get /udl/sensorobservationtype`, but is otherwise the
-         * same as [SensorObservationTypeService.list].
-         */
+        /** Returns a raw HTTP response for `get /udl/sensorobservationtype`, but is otherwise the same as [SensorObservationTypeService.list]. */
         @MustBeClosed
-        fun list(): HttpResponseFor<SensorObservationTypeListPage> =
-            list(SensorObservationTypeListParams.none())
+        fun list(): HttpResponseFor<SensorObservationTypeListPage> = list(SensorObservationTypeListParams.none())
 
         /** @see list */
         @MustBeClosed
-        fun list(
-            params: SensorObservationTypeListParams = SensorObservationTypeListParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<SensorObservationTypeListPage>
+        fun list(params: SensorObservationTypeListParams = SensorObservationTypeListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<SensorObservationTypeListPage>
 
         /** @see list */
         @MustBeClosed
-        fun list(
-            params: SensorObservationTypeListParams = SensorObservationTypeListParams.none()
-        ): HttpResponseFor<SensorObservationTypeListPage> = list(params, RequestOptions.none())
+        fun list(params: SensorObservationTypeListParams = SensorObservationTypeListParams.none()): HttpResponseFor<SensorObservationTypeListPage> =
+            list(
+              params, RequestOptions.none()
+            )
 
         /** @see list */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<SensorObservationTypeListPage> =
-            list(SensorObservationTypeListParams.none(), requestOptions)
+            list(
+              SensorObservationTypeListParams.none(), requestOptions
+            )
 
-        /**
-         * Returns a raw HTTP response for `get /udl/sensorobservationtype/{id}`, but is otherwise
-         * the same as [SensorObservationTypeService.get].
-         */
+        /** Returns a raw HTTP response for `get /udl/sensorobservationtype/{id}`, but is otherwise the same as [SensorObservationTypeService.get]. */
         @MustBeClosed
         fun get(id: String): HttpResponseFor<SensorObservationTypeGetResponse> =
-            get(id, SensorObservationTypeGetParams.none())
+            get(
+              id, SensorObservationTypeGetParams.none()
+            )
 
         /** @see get */
         @MustBeClosed
-        fun get(
-            id: String,
-            params: SensorObservationTypeGetParams = SensorObservationTypeGetParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<SensorObservationTypeGetResponse> =
-            get(params.toBuilder().id(id).build(), requestOptions)
+        fun get(id: String, params: SensorObservationTypeGetParams = SensorObservationTypeGetParams.none(), requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<SensorObservationTypeGetResponse> =
+            get(
+              params.toBuilder()
+                  .id(id)
+                  .build(), requestOptions
+            )
 
         /** @see get */
         @MustBeClosed
-        fun get(
-            id: String,
-            params: SensorObservationTypeGetParams = SensorObservationTypeGetParams.none(),
-        ): HttpResponseFor<SensorObservationTypeGetResponse> =
-            get(id, params, RequestOptions.none())
+        fun get(id: String, params: SensorObservationTypeGetParams = SensorObservationTypeGetParams.none()): HttpResponseFor<SensorObservationTypeGetResponse> =
+            get(
+              id,
+              params,
+              RequestOptions.none(),
+            )
 
         /** @see get */
         @MustBeClosed
-        fun get(
-            params: SensorObservationTypeGetParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<SensorObservationTypeGetResponse>
+        fun get(params: SensorObservationTypeGetParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<SensorObservationTypeGetResponse>
 
         /** @see get */
         @MustBeClosed
-        fun get(
-            params: SensorObservationTypeGetParams
-        ): HttpResponseFor<SensorObservationTypeGetResponse> = get(params, RequestOptions.none())
+        fun get(params: SensorObservationTypeGetParams): HttpResponseFor<SensorObservationTypeGetResponse> =
+            get(
+              params, RequestOptions.none()
+            )
 
         /** @see get */
         @MustBeClosed
-        fun get(
-            id: String,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<SensorObservationTypeGetResponse> =
-            get(id, SensorObservationTypeGetParams.none(), requestOptions)
+        fun get(id: String, requestOptions: RequestOptions): HttpResponseFor<SensorObservationTypeGetResponse> =
+            get(
+              id,
+              SensorObservationTypeGetParams.none(),
+              requestOptions,
+            )
 
-        /**
-         * Returns a raw HTTP response for `get /udl/sensorobservationtype/queryhelp`, but is
-         * otherwise the same as [SensorObservationTypeService.queryhelp].
-         */
+        /** Returns a raw HTTP response for `get /udl/sensorobservationtype/queryhelp`, but is otherwise the same as [SensorObservationTypeService.queryhelp]. */
         @MustBeClosed
-        fun queryhelp(): HttpResponseFor<SensorObservationTypeQueryhelpResponse> =
-            queryhelp(SensorObservationTypeQueryhelpParams.none())
+        fun queryhelp(): HttpResponseFor<SensorObservationTypeQueryhelpResponse> = queryhelp(SensorObservationTypeQueryhelpParams.none())
 
         /** @see queryhelp */
         @MustBeClosed
-        fun queryhelp(
-            params: SensorObservationTypeQueryhelpParams =
-                SensorObservationTypeQueryhelpParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<SensorObservationTypeQueryhelpResponse>
+        fun queryhelp(params: SensorObservationTypeQueryhelpParams = SensorObservationTypeQueryhelpParams.none(), requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<SensorObservationTypeQueryhelpResponse>
 
         /** @see queryhelp */
         @MustBeClosed
-        fun queryhelp(
-            params: SensorObservationTypeQueryhelpParams =
-                SensorObservationTypeQueryhelpParams.none()
-        ): HttpResponseFor<SensorObservationTypeQueryhelpResponse> =
-            queryhelp(params, RequestOptions.none())
+        fun queryhelp(params: SensorObservationTypeQueryhelpParams = SensorObservationTypeQueryhelpParams.none()): HttpResponseFor<SensorObservationTypeQueryhelpResponse> =
+            queryhelp(
+              params, RequestOptions.none()
+            )
 
         /** @see queryhelp */
         @MustBeClosed
-        fun queryhelp(
-            requestOptions: RequestOptions
-        ): HttpResponseFor<SensorObservationTypeQueryhelpResponse> =
-            queryhelp(SensorObservationTypeQueryhelpParams.none(), requestOptions)
+        fun queryhelp(requestOptions: RequestOptions): HttpResponseFor<SensorObservationTypeQueryhelpResponse> =
+            queryhelp(
+              SensorObservationTypeQueryhelpParams.none(), requestOptions
+            )
     }
 }

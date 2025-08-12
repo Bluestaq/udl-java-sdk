@@ -2,12 +2,13 @@
 
 package com.unifieddatalibrary.api.models.rfband
 
+import com.unifieddatalibrary.api.models.rfband.RfBandQueryhelpParams
 import org.junit.jupiter.api.Test
 
 internal class RfBandQueryhelpParamsTest {
 
     @Test
     fun create() {
-        RfBandQueryhelpParams.builder().build()
+      RfBandQueryhelpParams.builder().build()
     }
 }

@@ -15,68 +15,53 @@ import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.scs.classificationmarkings.ClassificationMarkingListParams
+import com.unifieddatalibrary.api.services.async.scs.ClassificationMarkingServiceAsync
+import com.unifieddatalibrary.api.services.async.scs.ClassificationMarkingServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
-class ClassificationMarkingServiceAsyncImpl
-internal constructor(private val clientOptions: ClientOptions) : ClassificationMarkingServiceAsync {
+class ClassificationMarkingServiceAsyncImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: ClassificationMarkingServiceAsync.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : ClassificationMarkingServiceAsync {
 
-    override fun withRawResponse(): ClassificationMarkingServiceAsync.WithRawResponse =
-        withRawResponse
+    private val withRawResponse: ClassificationMarkingServiceAsync.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
-    override fun withOptions(
-        modifier: Consumer<ClientOptions.Builder>
-    ): ClassificationMarkingServiceAsync =
-        ClassificationMarkingServiceAsyncImpl(
-            clientOptions.toBuilder().apply(modifier::accept).build()
-        )
+    override fun withRawResponse(): ClassificationMarkingServiceAsync.WithRawResponse = withRawResponse
 
-    override fun list(
-        params: ClassificationMarkingListParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<List<String>> =
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ClassificationMarkingServiceAsync = ClassificationMarkingServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+
+    override fun list(params: ClassificationMarkingListParams, requestOptions: RequestOptions): CompletableFuture<List<String>> =
         // get /scs/getClassificationMarkings
         withRawResponse().list(params, requestOptions).thenApply { it.parse() }
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        ClassificationMarkingServiceAsync.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<HttpResponse> =
-            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+    ) : ClassificationMarkingServiceAsync.WithRawResponse {
 
-        override fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): ClassificationMarkingServiceAsync.WithRawResponse =
-            ClassificationMarkingServiceAsyncImpl.WithRawResponseImpl(
-                clientOptions.toBuilder().apply(modifier::accept).build()
-            )
+        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val listHandler: Handler<List<String>> =
-            jsonHandler<List<String>>(clientOptions.jsonMapper)
+        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ClassificationMarkingServiceAsync.WithRawResponse = ClassificationMarkingServiceAsyncImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-        override fun list(
-            params: ClassificationMarkingListParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<List<String>>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("scs", "getClassificationMarkings")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response.use { listHandler.handle(it) }
-                    }
-                }
+        private val listHandler: Handler<List<String>> = jsonHandler<List<String>>(clientOptions.jsonMapper)
+
+        override fun list(params: ClassificationMarkingListParams, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<List<String>>> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("scs", "getClassificationMarkings")
+            .build()
+            .prepareAsync(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
+            it, requestOptions
+          ) }.thenApply { response -> errorHandler.handle(response).parseable {
+              response.use {
+                  listHandler.handle(it)
+              }
+          } }
         }
     }
 }

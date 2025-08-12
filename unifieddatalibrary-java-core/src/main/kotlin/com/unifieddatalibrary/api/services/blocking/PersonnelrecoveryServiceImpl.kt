@@ -30,301 +30,274 @@ import com.unifieddatalibrary.api.models.personnelrecovery.PersonnelrecoveryList
 import com.unifieddatalibrary.api.models.personnelrecovery.PersonnelrecoveryQueryhelpParams
 import com.unifieddatalibrary.api.models.personnelrecovery.PersonnelrecoveryQueryhelpResponse
 import com.unifieddatalibrary.api.models.personnelrecovery.PersonnelrecoveryTupleParams
+import com.unifieddatalibrary.api.services.blocking.PersonnelrecoveryService
+import com.unifieddatalibrary.api.services.blocking.PersonnelrecoveryServiceImpl
 import com.unifieddatalibrary.api.services.blocking.personnelrecovery.HistoryService
 import com.unifieddatalibrary.api.services.blocking.personnelrecovery.HistoryServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
-class PersonnelrecoveryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
-    PersonnelrecoveryService {
+class PersonnelrecoveryServiceImpl internal constructor(
+    private val clientOptions: ClientOptions,
 
-    private val withRawResponse: PersonnelrecoveryService.WithRawResponse by lazy {
-        WithRawResponseImpl(clientOptions)
-    }
+) : PersonnelrecoveryService {
+
+    private val withRawResponse: PersonnelrecoveryService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
 
     private val history: HistoryService by lazy { HistoryServiceImpl(clientOptions) }
 
     override fun withRawResponse(): PersonnelrecoveryService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): PersonnelrecoveryService =
-        PersonnelrecoveryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): PersonnelrecoveryService = PersonnelrecoveryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun history(): HistoryService = history
 
     override fun create(params: PersonnelrecoveryCreateParams, requestOptions: RequestOptions) {
-        // post /udl/personnelrecovery
-        withRawResponse().create(params, requestOptions)
+      // post /udl/personnelrecovery
+      withRawResponse().create(params, requestOptions)
     }
 
-    override fun list(
-        params: PersonnelrecoveryListParams,
-        requestOptions: RequestOptions,
-    ): PersonnelrecoveryListPage =
+    override fun list(params: PersonnelrecoveryListParams, requestOptions: RequestOptions): PersonnelrecoveryListPage =
         // get /udl/personnelrecovery
         withRawResponse().list(params, requestOptions).parse()
 
-    override fun count(
-        params: PersonnelrecoveryCountParams,
-        requestOptions: RequestOptions,
-    ): String =
+    override fun count(params: PersonnelrecoveryCountParams, requestOptions: RequestOptions): String =
         // get /udl/personnelrecovery/count
         withRawResponse().count(params, requestOptions).parse()
 
-    override fun createBulk(
-        params: PersonnelrecoveryCreateBulkParams,
-        requestOptions: RequestOptions,
-    ) {
-        // post /udl/personnelrecovery/createBulk
-        withRawResponse().createBulk(params, requestOptions)
+    override fun createBulk(params: PersonnelrecoveryCreateBulkParams, requestOptions: RequestOptions) {
+      // post /udl/personnelrecovery/createBulk
+      withRawResponse().createBulk(params, requestOptions)
     }
 
-    override fun fileCreate(
-        params: PersonnelrecoveryFileCreateParams,
-        requestOptions: RequestOptions,
-    ) {
-        // post /filedrop/udl-personnelrecovery
-        withRawResponse().fileCreate(params, requestOptions)
+    override fun fileCreate(params: PersonnelrecoveryFileCreateParams, requestOptions: RequestOptions) {
+      // post /filedrop/udl-personnelrecovery
+      withRawResponse().fileCreate(params, requestOptions)
     }
 
-    override fun get(
-        params: PersonnelrecoveryGetParams,
-        requestOptions: RequestOptions,
-    ): PersonnelRecoveryFullL =
+    override fun get(params: PersonnelrecoveryGetParams, requestOptions: RequestOptions): PersonnelRecoveryFullL =
         // get /udl/personnelrecovery/{id}
         withRawResponse().get(params, requestOptions).parse()
 
-    override fun queryhelp(
-        params: PersonnelrecoveryQueryhelpParams,
-        requestOptions: RequestOptions,
-    ): PersonnelrecoveryQueryhelpResponse =
+    override fun queryhelp(params: PersonnelrecoveryQueryhelpParams, requestOptions: RequestOptions): PersonnelrecoveryQueryhelpResponse =
         // get /udl/personnelrecovery/queryhelp
         withRawResponse().queryhelp(params, requestOptions).parse()
 
-    override fun tuple(
-        params: PersonnelrecoveryTupleParams,
-        requestOptions: RequestOptions,
-    ): List<PersonnelRecoveryFullL> =
+    override fun tuple(params: PersonnelrecoveryTupleParams, requestOptions: RequestOptions): List<PersonnelRecoveryFullL> =
         // get /udl/personnelrecovery/tuple
         withRawResponse().tuple(params, requestOptions).parse()
 
-    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        PersonnelrecoveryService.WithRawResponse {
+    class WithRawResponseImpl internal constructor(
+        private val clientOptions: ClientOptions,
 
-        private val errorHandler: Handler<HttpResponse> =
-            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+    ) : PersonnelrecoveryService.WithRawResponse {
 
-        private val history: HistoryService.WithRawResponse by lazy {
-            HistoryServiceImpl.WithRawResponseImpl(clientOptions)
-        }
+        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        override fun withOptions(
-            modifier: Consumer<ClientOptions.Builder>
-        ): PersonnelrecoveryService.WithRawResponse =
-            PersonnelrecoveryServiceImpl.WithRawResponseImpl(
-                clientOptions.toBuilder().apply(modifier::accept).build()
-            )
+        private val history: HistoryService.WithRawResponse by lazy { HistoryServiceImpl.WithRawResponseImpl(clientOptions) }
+
+        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): PersonnelrecoveryService.WithRawResponse = PersonnelrecoveryServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
 
-        override fun create(
-            params: PersonnelrecoveryCreateParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "personnelrecovery")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { createHandler.handle(it) }
-            }
+        override fun create(params: PersonnelrecoveryCreateParams, requestOptions: RequestOptions): HttpResponse {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "personnelrecovery")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  createHandler.handle(it)
+              }
+          }
         }
 
-        private val listHandler: Handler<List<PersonnelrecoveryListResponse>> =
-            jsonHandler<List<PersonnelrecoveryListResponse>>(clientOptions.jsonMapper)
+        private val listHandler: Handler<List<PersonnelrecoveryListResponse>> = jsonHandler<List<PersonnelrecoveryListResponse>>(clientOptions.jsonMapper)
 
-        override fun list(
-            params: PersonnelrecoveryListParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<PersonnelrecoveryListPage> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "personnelrecovery")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { listHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-                    .let {
-                        PersonnelrecoveryListPage.builder()
-                            .service(PersonnelrecoveryServiceImpl(clientOptions))
-                            .params(params)
-                            .items(it)
-                            .build()
-                    }
-            }
+        override fun list(params: PersonnelrecoveryListParams, requestOptions: RequestOptions): HttpResponseFor<PersonnelrecoveryListPage> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "personnelrecovery")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  listHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.forEach { it.validate() }
+                  }
+              }
+              .let {
+                  PersonnelrecoveryListPage.builder()
+                      .service(PersonnelrecoveryServiceImpl(clientOptions))
+                      .params(params)
+                      .items(it)
+                      .build()
+              }
+          }
         }
 
         private val countHandler: Handler<String> = stringHandler()
 
-        override fun count(
-            params: PersonnelrecoveryCountParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<String> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "personnelrecovery", "count")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { countHandler.handle(it) }
-            }
+        override fun count(params: PersonnelrecoveryCountParams, requestOptions: RequestOptions): HttpResponseFor<String> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "personnelrecovery", "count")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  countHandler.handle(it)
+              }
+          }
         }
 
         private val createBulkHandler: Handler<Void?> = emptyHandler()
 
-        override fun createBulk(
-            params: PersonnelrecoveryCreateBulkParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "personnelrecovery", "createBulk")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { createBulkHandler.handle(it) }
-            }
+        override fun createBulk(params: PersonnelrecoveryCreateBulkParams, requestOptions: RequestOptions): HttpResponse {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "personnelrecovery", "createBulk")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  createBulkHandler.handle(it)
+              }
+          }
         }
 
         private val fileCreateHandler: Handler<Void?> = emptyHandler()
 
-        override fun fileCreate(
-            params: PersonnelrecoveryFileCreateParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.POST)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("filedrop", "udl-personnelrecovery")
-                    .body(json(clientOptions.jsonMapper, params._body()))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { fileCreateHandler.handle(it) }
-            }
+        override fun fileCreate(params: PersonnelrecoveryFileCreateParams, requestOptions: RequestOptions): HttpResponse {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.POST)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("filedrop", "udl-personnelrecovery")
+            .body(json(clientOptions.jsonMapper, params._body()))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  fileCreateHandler.handle(it)
+              }
+          }
         }
 
-        private val getHandler: Handler<PersonnelRecoveryFullL> =
-            jsonHandler<PersonnelRecoveryFullL>(clientOptions.jsonMapper)
+        private val getHandler: Handler<PersonnelRecoveryFullL> = jsonHandler<PersonnelRecoveryFullL>(clientOptions.jsonMapper)
 
-        override fun get(
-            params: PersonnelrecoveryGetParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<PersonnelRecoveryFullL> {
-            // We check here instead of in the params builder because this can be specified
-            // positionally or in the params class.
-            checkRequired("id", params.id().getOrNull())
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "personnelrecovery", params._pathParam(0))
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { getHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
+        override fun get(params: PersonnelrecoveryGetParams, requestOptions: RequestOptions): HttpResponseFor<PersonnelRecoveryFullL> {
+          // We check here instead of in the params builder because this can be specified positionally or in the params class.
+          checkRequired("id", params.id().getOrNull())
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "personnelrecovery", params._pathParam(0))
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  getHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          }
         }
 
-        private val queryhelpHandler: Handler<PersonnelrecoveryQueryhelpResponse> =
-            jsonHandler<PersonnelrecoveryQueryhelpResponse>(clientOptions.jsonMapper)
+        private val queryhelpHandler: Handler<PersonnelrecoveryQueryhelpResponse> = jsonHandler<PersonnelrecoveryQueryhelpResponse>(clientOptions.jsonMapper)
 
-        override fun queryhelp(
-            params: PersonnelrecoveryQueryhelpParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<PersonnelrecoveryQueryhelpResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "personnelrecovery", "queryhelp")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { queryhelpHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
+        override fun queryhelp(params: PersonnelrecoveryQueryhelpParams, requestOptions: RequestOptions): HttpResponseFor<PersonnelrecoveryQueryhelpResponse> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "personnelrecovery", "queryhelp")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  queryhelpHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.validate()
+                  }
+              }
+          }
         }
 
-        private val tupleHandler: Handler<List<PersonnelRecoveryFullL>> =
-            jsonHandler<List<PersonnelRecoveryFullL>>(clientOptions.jsonMapper)
+        private val tupleHandler: Handler<List<PersonnelRecoveryFullL>> = jsonHandler<List<PersonnelRecoveryFullL>>(clientOptions.jsonMapper)
 
-        override fun tuple(
-            params: PersonnelrecoveryTupleParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<PersonnelRecoveryFullL>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "personnelrecovery", "tuple")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { tupleHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-            }
+        override fun tuple(params: PersonnelrecoveryTupleParams, requestOptions: RequestOptions): HttpResponseFor<List<PersonnelRecoveryFullL>> {
+          val request = HttpRequest.builder()
+            .method(HttpMethod.GET)
+            .baseUrl(clientOptions.baseUrl())
+            .addPathSegments("udl", "personnelrecovery", "tuple")
+            .build()
+            .prepare(clientOptions, params)
+          val requestOptions = requestOptions
+              .applyDefaults(RequestOptions.from(clientOptions))
+          val response = clientOptions.httpClient.execute(
+            request, requestOptions
+          )
+          return errorHandler.handle(response).parseable {
+              response.use {
+                  tupleHandler.handle(it)
+              }
+              .also {
+                  if (requestOptions.responseValidation!!) {
+                    it.forEach { it.validate() }
+                  }
+              }
+          }
         }
     }
 }
