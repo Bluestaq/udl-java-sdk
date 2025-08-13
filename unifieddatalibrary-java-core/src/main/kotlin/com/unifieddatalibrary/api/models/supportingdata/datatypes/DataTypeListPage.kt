@@ -17,9 +17,6 @@ private constructor(
     private val items: List<String>,
 ) : Page<String> {
 
-    /** Delegates to [List<String>], but gracefully handles missing data. */
-    override fun items(): List<String> = items
-
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): DataTypeListParams {
@@ -33,6 +30,9 @@ private constructor(
 
     /** The parameters that were used to request this page. */
     fun params(): DataTypeListParams = params
+
+    /** The response that this page was parsed from. */
+    override fun items(): List<String> = items
 
     fun toBuilder() = Builder().from(this)
 
@@ -100,10 +100,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is DataTypeListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+        return other is DataTypeListPage &&
+            service == other.service &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, params, items)
 
     override fun toString() = "DataTypeListPage{service=$service, params=$params, items=$items}"
 }

@@ -5,28 +5,23 @@ package com.unifieddatalibrary.api.models.aircraftstatuses
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
-import com.unifieddatalibrary.api.models.aircraftstatuses.AircraftStatusListParams
-import com.unifieddatalibrary.api.models.aircraftstatuses.AircraftstatusAbridged
 import com.unifieddatalibrary.api.services.blocking.AircraftStatusService
 import java.util.Objects
-import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see AircraftStatusService.list */
-class AircraftStatusListPage private constructor(
+class AircraftStatusListPage
+private constructor(
     private val service: AircraftStatusService,
     private val params: AircraftStatusListParams,
     private val items: List<AircraftstatusAbridged>,
-
 ) : Page<AircraftstatusAbridged> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): AircraftStatusListParams {
-      val offset = params.firstResult().getOrDefault(0)
-      return params.toBuilder()
-          .firstResult(offset + items().size)
-          .build()
+        val offset = params.firstResult().getOrDefault(0)
+        return params.toBuilder().firstResult(offset + items().size).build()
     }
 
     override fun nextPage(): AircraftStatusListPage = service.list(nextPageParams())
@@ -47,15 +42,13 @@ class AircraftStatusListPage private constructor(
          * Returns a mutable builder for constructing an instance of [AircraftStatusListPage].
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [AircraftStatusListPage]. */
@@ -66,29 +59,19 @@ class AircraftStatusListPage private constructor(
         private var items: List<AircraftstatusAbridged>? = null
 
         @JvmSynthetic
-        internal fun from(aircraftStatusListPage: AircraftStatusListPage) =
-            apply {
-                service = aircraftStatusListPage.service
-                params = aircraftStatusListPage.params
-                items = aircraftStatusListPage.items
-            }
+        internal fun from(aircraftStatusListPage: AircraftStatusListPage) = apply {
+            service = aircraftStatusListPage.service
+            params = aircraftStatusListPage.params
+            items = aircraftStatusListPage.items
+        }
 
-        fun service(service: AircraftStatusService) =
-            apply {
-                this.service = service
-            }
+        fun service(service: AircraftStatusService) = apply { this.service = service }
 
         /** The parameters that were used to request this page. */
-        fun params(params: AircraftStatusListParams) =
-            apply {
-                this.params = params
-            }
+        fun params(params: AircraftStatusListParams) = apply { this.params = params }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<AircraftstatusAbridged>) =
-            apply {
-                this.items = items
-            }
+        fun items(items: List<AircraftstatusAbridged>) = apply { this.items = items }
 
         /**
          * Returns an immutable instance of [AircraftStatusListPage].
@@ -96,7 +79,6 @@ class AircraftStatusListPage private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .params()
@@ -107,27 +89,25 @@ class AircraftStatusListPage private constructor(
          */
         fun build(): AircraftStatusListPage =
             AircraftStatusListPage(
-              checkRequired(
-                "service", service
-              ),
-              checkRequired(
-                "params", params
-              ),
-              checkRequired(
-                "items", items
-              ),
+                checkRequired("service", service),
+                checkRequired("params", params),
+                checkRequired("items", items),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is AircraftStatusListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+        return other is AircraftStatusListPage &&
+            service == other.service &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, params, items)
 
-    override fun toString() = "AircraftStatusListPage{service=$service, params=$params, items=$items}"
+    override fun toString() =
+        "AircraftStatusListPage{service=$service, params=$params, items=$items}"
 }

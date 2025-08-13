@@ -5,28 +5,23 @@ package com.unifieddatalibrary.api.models.sigact
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
-import com.unifieddatalibrary.api.models.sigact.SigactListParams
-import com.unifieddatalibrary.api.models.sigact.SigactListResponse
 import com.unifieddatalibrary.api.services.blocking.SigactService
 import java.util.Objects
-import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see SigactService.list */
-class SigactListPage private constructor(
+class SigactListPage
+private constructor(
     private val service: SigactService,
     private val params: SigactListParams,
     private val items: List<SigactListResponse>,
-
 ) : Page<SigactListResponse> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): SigactListParams {
-      val offset = params.firstResult().getOrDefault(0)
-      return params.toBuilder()
-          .firstResult(offset + items().size)
-          .build()
+        val offset = params.firstResult().getOrDefault(0)
+        return params.toBuilder().firstResult(offset + items().size).build()
     }
 
     override fun nextPage(): SigactListPage = service.list(nextPageParams())
@@ -47,15 +42,13 @@ class SigactListPage private constructor(
          * Returns a mutable builder for constructing an instance of [SigactListPage].
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [SigactListPage]. */
@@ -66,29 +59,19 @@ class SigactListPage private constructor(
         private var items: List<SigactListResponse>? = null
 
         @JvmSynthetic
-        internal fun from(sigactListPage: SigactListPage) =
-            apply {
-                service = sigactListPage.service
-                params = sigactListPage.params
-                items = sigactListPage.items
-            }
+        internal fun from(sigactListPage: SigactListPage) = apply {
+            service = sigactListPage.service
+            params = sigactListPage.params
+            items = sigactListPage.items
+        }
 
-        fun service(service: SigactService) =
-            apply {
-                this.service = service
-            }
+        fun service(service: SigactService) = apply { this.service = service }
 
         /** The parameters that were used to request this page. */
-        fun params(params: SigactListParams) =
-            apply {
-                this.params = params
-            }
+        fun params(params: SigactListParams) = apply { this.params = params }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<SigactListResponse>) =
-            apply {
-                this.items = items
-            }
+        fun items(items: List<SigactListResponse>) = apply { this.items = items }
 
         /**
          * Returns an immutable instance of [SigactListPage].
@@ -96,7 +79,6 @@ class SigactListPage private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .params()
@@ -107,27 +89,24 @@ class SigactListPage private constructor(
          */
         fun build(): SigactListPage =
             SigactListPage(
-              checkRequired(
-                "service", service
-              ),
-              checkRequired(
-                "params", params
-              ),
-              checkRequired(
-                "items", items
-              ),
+                checkRequired("service", service),
+                checkRequired("params", params),
+                checkRequired("items", items),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is SigactListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+        return other is SigactListPage &&
+            service == other.service &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, params, items)
 
     override fun toString() = "SigactListPage{service=$service, params=$params, items=$items}"
 }

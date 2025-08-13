@@ -2049,7 +2049,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -2437,12 +2437,25 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is GnssObservationList && agcState == other.agcState && gnssSatId == other.gnssSatId && ob == other.ob && obsCodeSet == other.obsCodeSet && trackingStatus == other.trackingStatus && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is GnssObservationList &&
+                    agcState == other.agcState &&
+                    gnssSatId == other.gnssSatId &&
+                    ob == other.ob &&
+                    obsCodeSet == other.obsCodeSet &&
+                    trackingStatus == other.trackingStatus &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(agcState, gnssSatId, ob, obsCodeSet, trackingStatus, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    agcState,
+                    gnssSatId,
+                    ob,
+                    obsCodeSet,
+                    trackingStatus,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -2455,12 +2468,89 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && ts == other.ts && id == other.id && agcState == other.agcState && alt == other.alt && boresight == other.boresight && createdAt == other.createdAt && createdBy == other.createdBy && esId == other.esId && eventId == other.eventId && gDop == other.gDop && gnssObservationList == other.gnssObservationList && hDop == other.hDop && idOnOrbit == other.idOnOrbit && lat == other.lat && lon == other.lon && markerType == other.markerType && navigationStatus == other.navigationStatus && obsCodes == other.obsCodes && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && outage == other.outage && pDop == other.pDop && quat == other.quat && receiver == other.receiver && satNo == other.satNo && satPosition == other.satPosition && satVelocity == other.satVelocity && srcIds == other.srcIds && srcTyps == other.srcTyps && tags == other.tags && tDop == other.tDop && trackingStatus == other.trackingStatus && transactionId == other.transactionId && vDop == other.vDop /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                ts == other.ts &&
+                id == other.id &&
+                agcState == other.agcState &&
+                alt == other.alt &&
+                boresight == other.boresight &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                esId == other.esId &&
+                eventId == other.eventId &&
+                gDop == other.gDop &&
+                gnssObservationList == other.gnssObservationList &&
+                hDop == other.hDop &&
+                idOnOrbit == other.idOnOrbit &&
+                lat == other.lat &&
+                lon == other.lon &&
+                markerType == other.markerType &&
+                navigationStatus == other.navigationStatus &&
+                obsCodes == other.obsCodes &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                outage == other.outage &&
+                pDop == other.pDop &&
+                quat == other.quat &&
+                receiver == other.receiver &&
+                satNo == other.satNo &&
+                satPosition == other.satPosition &&
+                satVelocity == other.satVelocity &&
+                srcIds == other.srcIds &&
+                srcTyps == other.srcTyps &&
+                tags == other.tags &&
+                tDop == other.tDop &&
+                trackingStatus == other.trackingStatus &&
+                transactionId == other.transactionId &&
+                vDop == other.vDop
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, ts, id, agcState, alt, boresight, createdAt, createdBy, esId, eventId, gDop, gnssObservationList, hDop, idOnOrbit, lat, lon, markerType, navigationStatus, obsCodes, origin, origNetwork, origObjectId, outage, pDop, quat, receiver, satNo, satPosition, satVelocity, srcIds, srcTyps, tags, tDop, trackingStatus, transactionId, vDop) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                ts,
+                id,
+                agcState,
+                alt,
+                boresight,
+                createdAt,
+                createdBy,
+                esId,
+                eventId,
+                gDop,
+                gnssObservationList,
+                hDop,
+                idOnOrbit,
+                lat,
+                lon,
+                markerType,
+                navigationStatus,
+                obsCodes,
+                origin,
+                origNetwork,
+                origObjectId,
+                outage,
+                pDop,
+                quat,
+                receiver,
+                satNo,
+                satPosition,
+                satVelocity,
+                srcIds,
+                srcTyps,
+                tags,
+                tDop,
+                trackingStatus,
+                transactionId,
+                vDop,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2473,10 +2563,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GnssObservationsetUnvalidatedPublishParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is GnssObservationsetUnvalidatedPublishParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "GnssObservationsetUnvalidatedPublishParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

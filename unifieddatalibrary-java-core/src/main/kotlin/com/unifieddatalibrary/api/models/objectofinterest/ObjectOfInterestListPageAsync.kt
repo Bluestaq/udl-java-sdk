@@ -5,39 +5,33 @@ package com.unifieddatalibrary.api.models.objectofinterest
 import com.unifieddatalibrary.api.core.AutoPagerAsync
 import com.unifieddatalibrary.api.core.PageAsync
 import com.unifieddatalibrary.api.core.checkRequired
-import com.unifieddatalibrary.api.models.objectofinterest.ObjectOfInterestListParams
-import com.unifieddatalibrary.api.models.objectofinterest.ObjectOfInterestListResponse
 import com.unifieddatalibrary.api.services.async.ObjectOfInterestServiceAsync
 import java.util.Objects
-import java.util.Optional
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see ObjectOfInterestServiceAsync.list */
-class ObjectOfInterestListPageAsync private constructor(
+class ObjectOfInterestListPageAsync
+private constructor(
     private val service: ObjectOfInterestServiceAsync,
     private val streamHandlerExecutor: Executor,
     private val params: ObjectOfInterestListParams,
     private val items: List<ObjectOfInterestListResponse>,
-
 ) : PageAsync<ObjectOfInterestListResponse> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): ObjectOfInterestListParams {
-      val offset = params.firstResult().getOrDefault(0)
-      return params.toBuilder()
-          .firstResult(offset + items().size)
-          .build()
+        val offset = params.firstResult().getOrDefault(0)
+        return params.toBuilder().firstResult(offset + items().size).build()
     }
 
-    override fun nextPage(): CompletableFuture<ObjectOfInterestListPageAsync> = service.list(nextPageParams())
+    override fun nextPage(): CompletableFuture<ObjectOfInterestListPageAsync> =
+        service.list(nextPageParams())
 
     fun autoPager(): AutoPagerAsync<ObjectOfInterestListResponse> =
-        AutoPagerAsync.from(
-          this, streamHandlerExecutor
-        )
+        AutoPagerAsync.from(this, streamHandlerExecutor)
 
     /** The parameters that were used to request this page. */
     fun params(): ObjectOfInterestListParams = params
@@ -50,10 +44,10 @@ class ObjectOfInterestListPageAsync private constructor(
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of [ObjectOfInterestListPageAsync].
+         * Returns a mutable builder for constructing an instance of
+         * [ObjectOfInterestListPageAsync].
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .streamHandlerExecutor()
@@ -61,8 +55,7 @@ class ObjectOfInterestListPageAsync private constructor(
          * .items()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [ObjectOfInterestListPageAsync]. */
@@ -74,35 +67,24 @@ class ObjectOfInterestListPageAsync private constructor(
         private var items: List<ObjectOfInterestListResponse>? = null
 
         @JvmSynthetic
-        internal fun from(objectOfInterestListPageAsync: ObjectOfInterestListPageAsync) =
-            apply {
-                service = objectOfInterestListPageAsync.service
-                streamHandlerExecutor = objectOfInterestListPageAsync.streamHandlerExecutor
-                params = objectOfInterestListPageAsync.params
-                items = objectOfInterestListPageAsync.items
-            }
+        internal fun from(objectOfInterestListPageAsync: ObjectOfInterestListPageAsync) = apply {
+            service = objectOfInterestListPageAsync.service
+            streamHandlerExecutor = objectOfInterestListPageAsync.streamHandlerExecutor
+            params = objectOfInterestListPageAsync.params
+            items = objectOfInterestListPageAsync.items
+        }
 
-        fun service(service: ObjectOfInterestServiceAsync) =
-            apply {
-                this.service = service
-            }
+        fun service(service: ObjectOfInterestServiceAsync) = apply { this.service = service }
 
-        fun streamHandlerExecutor(streamHandlerExecutor: Executor) =
-            apply {
-                this.streamHandlerExecutor = streamHandlerExecutor
-            }
+        fun streamHandlerExecutor(streamHandlerExecutor: Executor) = apply {
+            this.streamHandlerExecutor = streamHandlerExecutor
+        }
 
         /** The parameters that were used to request this page. */
-        fun params(params: ObjectOfInterestListParams) =
-            apply {
-                this.params = params
-            }
+        fun params(params: ObjectOfInterestListParams) = apply { this.params = params }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<ObjectOfInterestListResponse>) =
-            apply {
-                this.items = items
-            }
+        fun items(items: List<ObjectOfInterestListResponse>) = apply { this.items = items }
 
         /**
          * Returns an immutable instance of [ObjectOfInterestListPageAsync].
@@ -110,7 +92,6 @@ class ObjectOfInterestListPageAsync private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .streamHandlerExecutor()
@@ -122,30 +103,27 @@ class ObjectOfInterestListPageAsync private constructor(
          */
         fun build(): ObjectOfInterestListPageAsync =
             ObjectOfInterestListPageAsync(
-              checkRequired(
-                "service", service
-              ),
-              checkRequired(
-                "streamHandlerExecutor", streamHandlerExecutor
-              ),
-              checkRequired(
-                "params", params
-              ),
-              checkRequired(
-                "items", items
-              ),
+                checkRequired("service", service),
+                checkRequired("streamHandlerExecutor", streamHandlerExecutor),
+                checkRequired("params", params),
+                checkRequired("items", items),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is ObjectOfInterestListPageAsync && service == other.service && streamHandlerExecutor == other.streamHandlerExecutor && params == other.params && items == other.items /* spotless:on */
+        return other is ObjectOfInterestListPageAsync &&
+            service == other.service &&
+            streamHandlerExecutor == other.streamHandlerExecutor &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, streamHandlerExecutor, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, streamHandlerExecutor, params, items)
 
-    override fun toString() = "ObjectOfInterestListPageAsync{service=$service, streamHandlerExecutor=$streamHandlerExecutor, params=$params, items=$items}"
+    override fun toString() =
+        "ObjectOfInterestListPageAsync{service=$service, streamHandlerExecutor=$streamHandlerExecutor, params=$params, items=$items}"
 }

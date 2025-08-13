@@ -878,7 +878,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -891,12 +891,45 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is H3GeoListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && numCells == other.numCells && source == other.source && startTime == other.startTime && id == other.id && centerFreq == other.centerFreq && createdAt == other.createdAt && createdBy == other.createdBy && endTime == other.endTime && origin == other.origin && origNetwork == other.origNetwork && resolution == other.resolution && sourceDl == other.sourceDl && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is H3GeoListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            numCells == other.numCells &&
+            source == other.source &&
+            startTime == other.startTime &&
+            id == other.id &&
+            centerFreq == other.centerFreq &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            endTime == other.endTime &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            resolution == other.resolution &&
+            sourceDl == other.sourceDl &&
+            type == other.type &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, numCells, source, startTime, id, centerFreq, createdAt, createdBy, endTime, origin, origNetwork, resolution, sourceDl, type, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            numCells,
+            source,
+            startTime,
+            id,
+            centerFreq,
+            createdAt,
+            createdBy,
+            endTime,
+            origin,
+            origNetwork,
+            resolution,
+            sourceDl,
+            type,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

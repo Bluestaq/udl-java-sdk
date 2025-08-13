@@ -195,10 +195,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is DatalinkCreateParams && datalinkIngest == other.datalinkIngest && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is DatalinkCreateParams &&
+            datalinkIngest == other.datalinkIngest &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(datalinkIngest, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(datalinkIngest, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "DatalinkCreateParams{datalinkIngest=$datalinkIngest, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

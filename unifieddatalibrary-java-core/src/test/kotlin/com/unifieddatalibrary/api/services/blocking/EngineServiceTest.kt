@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
+import com.unifieddatalibrary.api.models.EngineIngest
 import com.unifieddatalibrary.api.models.engines.EngineCountParams
 import com.unifieddatalibrary.api.models.engines.EngineCreateParams
 import com.unifieddatalibrary.api.models.engines.EngineRetrieveParams
@@ -28,15 +29,19 @@ internal class EngineServiceTest {
 
         engineService.create(
             EngineCreateParams.builder()
-                .classificationMarking("U")
-                .dataMode(EngineCreateParams.DataMode.TEST)
-                .name("ENGINE_VARIANT1")
-                .source("Bluestaq")
-                .id("ENGINE-ID")
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .engineIngest(
+                    EngineIngest.builder()
+                        .classificationMarking("U")
+                        .dataMode(EngineIngest.DataMode.TEST)
+                        .name("ENGINE_VARIANT1")
+                        .source("Bluestaq")
+                        .id("ENGINE-ID")
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .build()
+                )
                 .build()
         )
     }
@@ -72,15 +77,19 @@ internal class EngineServiceTest {
         engineService.update(
             EngineUpdateParams.builder()
                 .pathId("id")
-                .classificationMarking("U")
-                .dataMode(EngineUpdateParams.DataMode.TEST)
-                .name("ENGINE_VARIANT1")
-                .source("Bluestaq")
-                .bodyId("ENGINE-ID")
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .engineIngest(
+                    EngineIngest.builder()
+                        .classificationMarking("U")
+                        .dataMode(EngineIngest.DataMode.TEST)
+                        .name("ENGINE_VARIANT1")
+                        .source("Bluestaq")
+                        .id("ENGINE-ID")
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .build()
+                )
                 .build()
         )
     }

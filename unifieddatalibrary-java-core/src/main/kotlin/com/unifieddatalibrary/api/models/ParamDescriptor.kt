@@ -611,12 +611,43 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ParamDescriptor && classificationMarking == other.classificationMarking && derived == other.derived && description == other.description && elemMatch == other.elemMatch && format == other.format && histQuerySupported == other.histQuerySupported && histTupleSupported == other.histTupleSupported && name == other.name && required == other.required && restQuerySupported == other.restQuerySupported && restTupleSupported == other.restTupleSupported && type == other.type && unitOfMeasure == other.unitOfMeasure && utcDate == other.utcDate && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is ParamDescriptor &&
+            classificationMarking == other.classificationMarking &&
+            derived == other.derived &&
+            description == other.description &&
+            elemMatch == other.elemMatch &&
+            format == other.format &&
+            histQuerySupported == other.histQuerySupported &&
+            histTupleSupported == other.histTupleSupported &&
+            name == other.name &&
+            required == other.required &&
+            restQuerySupported == other.restQuerySupported &&
+            restTupleSupported == other.restTupleSupported &&
+            type == other.type &&
+            unitOfMeasure == other.unitOfMeasure &&
+            utcDate == other.utcDate &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, derived, description, elemMatch, format, histQuerySupported, histTupleSupported, name, required, restQuerySupported, restTupleSupported, type, unitOfMeasure, utcDate, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            derived,
+            description,
+            elemMatch,
+            format,
+            histQuerySupported,
+            histTupleSupported,
+            name,
+            required,
+            restQuerySupported,
+            restTupleSupported,
+            type,
+            unitOfMeasure,
+            utcDate,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

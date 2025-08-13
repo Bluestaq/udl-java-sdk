@@ -20,9 +20,6 @@ private constructor(
     private val items: List<String>,
 ) : PageAsync<String> {
 
-    /** Delegates to [List<String>], but gracefully handles missing data. */
-    override fun items(): List<String> = items
-
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): DataTypeListParams {
@@ -37,6 +34,9 @@ private constructor(
 
     /** The parameters that were used to request this page. */
     fun params(): DataTypeListParams = params
+
+    /** The response that this page was parsed from. */
+    override fun items(): List<String> = items
 
     fun toBuilder() = Builder().from(this)
 
@@ -113,10 +113,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is DataTypeListPageAsync && service == other.service && streamHandlerExecutor == other.streamHandlerExecutor && params == other.params && items == other.items /* spotless:on */
+        return other is DataTypeListPageAsync &&
+            service == other.service &&
+            streamHandlerExecutor == other.streamHandlerExecutor &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, streamHandlerExecutor, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, streamHandlerExecutor, params, items)
 
     override fun toString() =
         "DataTypeListPageAsync{service=$service, streamHandlerExecutor=$streamHandlerExecutor, params=$params, items=$items}"

@@ -779,7 +779,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -792,12 +792,41 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LaunchSiteListResponse && classificationMarking == other.classificationMarking && code == other.code && dataMode == other.dataMode && name == other.name && source == other.source && id == other.id && altCode == other.altCode && createdAt == other.createdAt && createdBy == other.createdBy && idSite == other.idSite && origin == other.origin && origNetwork == other.origNetwork && shortCode == other.shortCode && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is LaunchSiteListResponse &&
+            classificationMarking == other.classificationMarking &&
+            code == other.code &&
+            dataMode == other.dataMode &&
+            name == other.name &&
+            source == other.source &&
+            id == other.id &&
+            altCode == other.altCode &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            idSite == other.idSite &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            shortCode == other.shortCode &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, code, dataMode, name, source, id, altCode, createdAt, createdBy, idSite, origin, origNetwork, shortCode, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            code,
+            dataMode,
+            name,
+            source,
+            id,
+            altCode,
+            createdAt,
+            createdBy,
+            idSite,
+            origin,
+            origNetwork,
+            shortCode,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

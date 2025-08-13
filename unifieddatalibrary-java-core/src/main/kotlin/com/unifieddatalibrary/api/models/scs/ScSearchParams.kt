@@ -720,12 +720,25 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && contentCriteria == other.contentCriteria && metaDataCriteria == other.metaDataCriteria && nonRangeCriteria == other.nonRangeCriteria && rangeCriteria == other.rangeCriteria && searchAfter == other.searchAfter && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                contentCriteria == other.contentCriteria &&
+                metaDataCriteria == other.metaDataCriteria &&
+                nonRangeCriteria == other.nonRangeCriteria &&
+                rangeCriteria == other.rangeCriteria &&
+                searchAfter == other.searchAfter &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(contentCriteria, metaDataCriteria, nonRangeCriteria, rangeCriteria, searchAfter, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                contentCriteria,
+                metaDataCriteria,
+                nonRangeCriteria,
+                rangeCriteria,
+                searchAfter,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -822,12 +835,10 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is MetaDataCriteria && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is MetaDataCriteria && additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
         private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
-        /* spotless:on */
 
         override fun hashCode(): Int = hashCode
 
@@ -923,12 +934,10 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is NonRangeCriteria && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is NonRangeCriteria && additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
         private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
-        /* spotless:on */
 
         override fun hashCode(): Int = hashCode
 
@@ -1024,12 +1033,10 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is RangeCriteria && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is RangeCriteria && additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
         private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
-        /* spotless:on */
 
         override fun hashCode(): Int = hashCode
 
@@ -1041,10 +1048,17 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ScSearchParams && path == other.path && count == other.count && offset == other.offset && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is ScSearchParams &&
+            path == other.path &&
+            count == other.count &&
+            offset == other.offset &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(path, count, offset, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(path, count, offset, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "ScSearchParams{path=$path, count=$count, offset=$offset, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

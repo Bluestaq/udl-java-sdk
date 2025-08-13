@@ -375,12 +375,31 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is Attachment && author == other.author && content == other.content && contentLength == other.contentLength && contentType == other.contentType && date == other.date && keywords == other.keywords && language == other.language && title == other.title && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is Attachment &&
+            author == other.author &&
+            content == other.content &&
+            contentLength == other.contentLength &&
+            contentType == other.contentType &&
+            date == other.date &&
+            keywords == other.keywords &&
+            language == other.language &&
+            title == other.title &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(author, content, contentLength, contentType, date, keywords, language, title, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            author,
+            content,
+            contentLength,
+            contentType,
+            date,
+            keywords,
+            language,
+            title,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

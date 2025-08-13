@@ -10,14 +10,18 @@ import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/** Service operation to get a single LaunchSiteDetails by a source passed as a query parameter. A LaunchSiteDetails represents details compiled/collected on a launch site by a particular source. A launch site may have several details records. */
-class LaunchSiteDetailFindBySourceParams private constructor(
+/**
+ * Service operation to get a single LaunchSiteDetails by a source passed as a query parameter. A
+ * LaunchSiteDetails represents details compiled/collected on a launch site by a particular source.
+ * A launch site may have several details records.
+ */
+class LaunchSiteDetailFindBySourceParams
+private constructor(
     private val source: String,
     private val firstResult: Long?,
     private val maxResults: Long?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
-
 ) : Params {
 
     /** The source of the LaunchSiteDetails records to find. */
@@ -38,16 +42,15 @@ class LaunchSiteDetailFindBySourceParams private constructor(
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of [LaunchSiteDetailFindBySourceParams].
+         * Returns a mutable builder for constructing an instance of
+         * [LaunchSiteDetailFindBySourceParams].
          *
          * The following fields are required:
-         *
          * ```java
          * .source()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [LaunchSiteDetailFindBySourceParams]. */
@@ -66,19 +69,14 @@ class LaunchSiteDetailFindBySourceParams private constructor(
                 firstResult = launchSiteDetailFindBySourceParams.firstResult
                 maxResults = launchSiteDetailFindBySourceParams.maxResults
                 additionalHeaders = launchSiteDetailFindBySourceParams.additionalHeaders.toBuilder()
-                additionalQueryParams = launchSiteDetailFindBySourceParams.additionalQueryParams.toBuilder()
+                additionalQueryParams =
+                    launchSiteDetailFindBySourceParams.additionalQueryParams.toBuilder()
             }
 
         /** The source of the LaunchSiteDetails records to find. */
-        fun source(source: String) =
-            apply {
-                this.source = source
-            }
+        fun source(source: String) = apply { this.source = source }
 
-        fun firstResult(firstResult: Long?) =
-            apply {
-                this.firstResult = firstResult
-            }
+        fun firstResult(firstResult: Long?) = apply { this.firstResult = firstResult }
 
         /**
          * Alias for [Builder.firstResult].
@@ -90,10 +88,7 @@ class LaunchSiteDetailFindBySourceParams private constructor(
         /** Alias for calling [Builder.firstResult] with `firstResult.orElse(null)`. */
         fun firstResult(firstResult: Optional<Long>) = firstResult(firstResult.getOrNull())
 
-        fun maxResults(maxResults: Long?) =
-            apply {
-                this.maxResults = maxResults
-            }
+        fun maxResults(maxResults: Long?) = apply { this.maxResults = maxResults }
 
         /**
          * Alias for [Builder.maxResults].
@@ -105,129 +100,103 @@ class LaunchSiteDetailFindBySourceParams private constructor(
         /** Alias for calling [Builder.maxResults] with `maxResults.orElse(null)`. */
         fun maxResults(maxResults: Optional<Long>) = maxResults(maxResults.getOrNull())
 
-        fun additionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.clear()
-                putAllAdditionalHeaders(additionalHeaders)
-            }
+        fun additionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.clear()
+            putAllAdditionalHeaders(additionalHeaders)
+        }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.clear()
-                putAllAdditionalHeaders(additionalHeaders)
-            }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.clear()
+            putAllAdditionalHeaders(additionalHeaders)
+        }
 
-        fun putAdditionalHeader(name: String, value: String) =
-            apply {
-                additionalHeaders.put(name, value)
-            }
+        fun putAdditionalHeader(name: String, value: String) = apply {
+            additionalHeaders.put(name, value)
+        }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
-            apply {
-                additionalHeaders.put(name, values)
-            }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
+            additionalHeaders.put(name, values)
+        }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.putAll(additionalHeaders)
-            }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.putAll(additionalHeaders)
+        }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.putAll(additionalHeaders)
-            }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.putAll(additionalHeaders)
+        }
 
-        fun replaceAdditionalHeaders(name: String, value: String) =
-            apply {
-                additionalHeaders.replace(name, value)
-            }
+        fun replaceAdditionalHeaders(name: String, value: String) = apply {
+            additionalHeaders.replace(name, value)
+        }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
-            apply {
-                additionalHeaders.replace(name, values)
-            }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
+            additionalHeaders.replace(name, values)
+        }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.replaceAll(additionalHeaders)
-            }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.replaceAll(additionalHeaders)
+        }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.replaceAll(additionalHeaders)
-            }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.replaceAll(additionalHeaders)
+        }
 
-        fun removeAdditionalHeaders(name: String) =
-            apply {
-                additionalHeaders.remove(name)
-            }
+        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) =
-            apply {
-                additionalHeaders.removeAll(names)
-            }
+        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
+            additionalHeaders.removeAll(names)
+        }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.clear()
-                putAllAdditionalQueryParams(additionalQueryParams)
-            }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.clear()
+            putAllAdditionalQueryParams(additionalQueryParams)
+        }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalQueryParams.clear()
-                putAllAdditionalQueryParams(additionalQueryParams)
-            }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
+            this.additionalQueryParams.clear()
+            putAllAdditionalQueryParams(additionalQueryParams)
+        }
 
-        fun putAdditionalQueryParam(key: String, value: String) =
-            apply {
-                additionalQueryParams.put(key, value)
-            }
+        fun putAdditionalQueryParam(key: String, value: String) = apply {
+            additionalQueryParams.put(key, value)
+        }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
-            apply {
-                additionalQueryParams.put(key, values)
-            }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
+            additionalQueryParams.put(key, values)
+        }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.putAll(additionalQueryParams)
-            }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.putAll(additionalQueryParams)
+        }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) =
-            apply {
-                additionalQueryParams.replace(key, value)
-            }
+        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
+            additionalQueryParams.replace(key, value)
+        }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
-            apply {
-                additionalQueryParams.replace(key, values)
-            }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
+            additionalQueryParams.replace(key, values)
+        }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.replaceAll(additionalQueryParams)
-            }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.replaceAll(additionalQueryParams)
+        }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) =
-            apply {
-                additionalQueryParams.remove(key)
-            }
+        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) =
-            apply {
-                additionalQueryParams.removeAll(keys)
-            }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
+            additionalQueryParams.removeAll(keys)
+        }
 
         /**
          * Returns an immutable instance of [LaunchSiteDetailFindBySourceParams].
@@ -235,7 +204,6 @@ class LaunchSiteDetailFindBySourceParams private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .source()
          * ```
@@ -244,13 +212,11 @@ class LaunchSiteDetailFindBySourceParams private constructor(
          */
         fun build(): LaunchSiteDetailFindBySourceParams =
             LaunchSiteDetailFindBySourceParams(
-              checkRequired(
-                "source", source
-              ),
-              firstResult,
-              maxResults,
-              additionalHeaders.build(),
-              additionalQueryParams.build(),
+                checkRequired("source", source),
+                firstResult,
+                maxResults,
+                additionalHeaders.build(),
+                additionalQueryParams.build(),
             )
     }
 
@@ -267,14 +233,21 @@ class LaunchSiteDetailFindBySourceParams private constructor(
             .build()
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is LaunchSiteDetailFindBySourceParams && source == other.source && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is LaunchSiteDetailFindBySourceParams &&
+            source == other.source &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(source, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(source, firstResult, maxResults, additionalHeaders, additionalQueryParams)
 
-    override fun toString() = "LaunchSiteDetailFindBySourceParams{source=$source, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() =
+        "LaunchSiteDetailFindBySourceParams{source=$source, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

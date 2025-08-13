@@ -789,7 +789,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -802,12 +802,41 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OperatingunitremarkListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idOperatingUnit == other.idOperatingUnit && source == other.source && text == other.text && id == other.id && altRmkId == other.altRmkId && code == other.code && createdAt == other.createdAt && createdBy == other.createdBy && name == other.name && origin == other.origin && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is OperatingunitremarkListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idOperatingUnit == other.idOperatingUnit &&
+            source == other.source &&
+            text == other.text &&
+            id == other.id &&
+            altRmkId == other.altRmkId &&
+            code == other.code &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            name == other.name &&
+            origin == other.origin &&
+            type == other.type &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idOperatingUnit, source, text, id, altRmkId, code, createdAt, createdBy, name, origin, type, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idOperatingUnit,
+            source,
+            text,
+            id,
+            altRmkId,
+            code,
+            createdAt,
+            createdBy,
+            name,
+            origin,
+            type,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

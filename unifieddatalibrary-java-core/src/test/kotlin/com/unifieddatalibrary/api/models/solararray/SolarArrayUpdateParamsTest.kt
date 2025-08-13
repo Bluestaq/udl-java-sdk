@@ -2,6 +2,7 @@
 
 package com.unifieddatalibrary.api.models.solararray
 
+import com.unifieddatalibrary.api.models.SolarArrayIngest
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -12,14 +13,18 @@ internal class SolarArrayUpdateParamsTest {
     fun create() {
         SolarArrayUpdateParams.builder()
             .pathId("id")
-            .dataMode(SolarArrayUpdateParams.DataMode.TEST)
-            .name("Solar1")
-            .source("Bluestaq")
-            .bodyId("SOLARARRAY-ID")
-            .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-            .createdBy("some.user")
-            .origin("THIRD_PARTY_DATASOURCE")
-            .origNetwork("ORIG")
+            .solarArrayIngest(
+                SolarArrayIngest.builder()
+                    .dataMode(SolarArrayIngest.DataMode.TEST)
+                    .name("Solar1")
+                    .source("Bluestaq")
+                    .id("SOLARARRAY-ID")
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("ORIG")
+                    .build()
+            )
             .build()
     }
 
@@ -28,9 +33,13 @@ internal class SolarArrayUpdateParamsTest {
         val params =
             SolarArrayUpdateParams.builder()
                 .pathId("id")
-                .dataMode(SolarArrayUpdateParams.DataMode.TEST)
-                .name("Solar1")
-                .source("Bluestaq")
+                .solarArrayIngest(
+                    SolarArrayIngest.builder()
+                        .dataMode(SolarArrayIngest.DataMode.TEST)
+                        .name("Solar1")
+                        .source("Bluestaq")
+                        .build()
+                )
                 .build()
 
         assertThat(params._pathParam(0)).isEqualTo("id")
@@ -43,26 +52,35 @@ internal class SolarArrayUpdateParamsTest {
         val params =
             SolarArrayUpdateParams.builder()
                 .pathId("id")
-                .dataMode(SolarArrayUpdateParams.DataMode.TEST)
-                .name("Solar1")
-                .source("Bluestaq")
-                .bodyId("SOLARARRAY-ID")
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .solarArrayIngest(
+                    SolarArrayIngest.builder()
+                        .dataMode(SolarArrayIngest.DataMode.TEST)
+                        .name("Solar1")
+                        .source("Bluestaq")
+                        .id("SOLARARRAY-ID")
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .build()
+                )
                 .build()
 
         val body = params._body()
 
-        assertThat(body.dataMode()).isEqualTo(SolarArrayUpdateParams.DataMode.TEST)
-        assertThat(body.name()).isEqualTo("Solar1")
-        assertThat(body.source()).isEqualTo("Bluestaq")
-        assertThat(body.bodyId()).contains("SOLARARRAY-ID")
-        assertThat(body.createdAt()).contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(body.createdBy()).contains("some.user")
-        assertThat(body.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(body.origNetwork()).contains("ORIG")
+        assertThat(body)
+            .isEqualTo(
+                SolarArrayIngest.builder()
+                    .dataMode(SolarArrayIngest.DataMode.TEST)
+                    .name("Solar1")
+                    .source("Bluestaq")
+                    .id("SOLARARRAY-ID")
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("ORIG")
+                    .build()
+            )
     }
 
     @Test
@@ -70,15 +88,24 @@ internal class SolarArrayUpdateParamsTest {
         val params =
             SolarArrayUpdateParams.builder()
                 .pathId("id")
-                .dataMode(SolarArrayUpdateParams.DataMode.TEST)
-                .name("Solar1")
-                .source("Bluestaq")
+                .solarArrayIngest(
+                    SolarArrayIngest.builder()
+                        .dataMode(SolarArrayIngest.DataMode.TEST)
+                        .name("Solar1")
+                        .source("Bluestaq")
+                        .build()
+                )
                 .build()
 
         val body = params._body()
 
-        assertThat(body.dataMode()).isEqualTo(SolarArrayUpdateParams.DataMode.TEST)
-        assertThat(body.name()).isEqualTo("Solar1")
-        assertThat(body.source()).isEqualTo("Bluestaq")
+        assertThat(body)
+            .isEqualTo(
+                SolarArrayIngest.builder()
+                    .dataMode(SolarArrayIngest.DataMode.TEST)
+                    .name("Solar1")
+                    .source("Bluestaq")
+                    .build()
+            )
     }
 }

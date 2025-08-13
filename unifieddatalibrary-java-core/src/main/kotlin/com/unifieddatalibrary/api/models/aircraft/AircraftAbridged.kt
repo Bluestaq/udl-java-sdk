@@ -1179,7 +1179,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1192,12 +1192,61 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AircraftAbridged && aircraftMds == other.aircraftMds && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && category == other.category && command == other.command && createdAt == other.createdAt && createdBy == other.createdBy && cruiseSpeed == other.cruiseSpeed && dtd == other.dtd && idEntity == other.idEntity && maxSpeed == other.maxSpeed && minReqRunwayFt == other.minReqRunwayFt && minReqRunwayM == other.minReqRunwayM && nominalTaTime == other.nominalTaTime && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && owner == other.owner && serialNumber == other.serialNumber && sourceDl == other.sourceDl && tailNumber == other.tailNumber && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is AircraftAbridged &&
+            aircraftMds == other.aircraftMds &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            id == other.id &&
+            category == other.category &&
+            command == other.command &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            cruiseSpeed == other.cruiseSpeed &&
+            dtd == other.dtd &&
+            idEntity == other.idEntity &&
+            maxSpeed == other.maxSpeed &&
+            minReqRunwayFt == other.minReqRunwayFt &&
+            minReqRunwayM == other.minReqRunwayM &&
+            nominalTaTime == other.nominalTaTime &&
+            notes == other.notes &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            owner == other.owner &&
+            serialNumber == other.serialNumber &&
+            sourceDl == other.sourceDl &&
+            tailNumber == other.tailNumber &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(aircraftMds, classificationMarking, dataMode, source, id, category, command, createdAt, createdBy, cruiseSpeed, dtd, idEntity, maxSpeed, minReqRunwayFt, minReqRunwayM, nominalTaTime, notes, origin, origNetwork, owner, serialNumber, sourceDl, tailNumber, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            aircraftMds,
+            classificationMarking,
+            dataMode,
+            source,
+            id,
+            category,
+            command,
+            createdAt,
+            createdBy,
+            cruiseSpeed,
+            dtd,
+            idEntity,
+            maxSpeed,
+            minReqRunwayFt,
+            minReqRunwayM,
+            nominalTaTime,
+            notes,
+            origin,
+            origNetwork,
+            owner,
+            serialNumber,
+            sourceDl,
+            tailNumber,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

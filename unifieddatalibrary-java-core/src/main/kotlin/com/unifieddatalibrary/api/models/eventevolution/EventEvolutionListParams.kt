@@ -256,10 +256,24 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EventEvolutionListParams && eventId == other.eventId && firstResult == other.firstResult && maxResults == other.maxResults && startTime == other.startTime && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is EventEvolutionListParams &&
+            eventId == other.eventId &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            startTime == other.startTime &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(eventId, firstResult, maxResults, startTime, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            eventId,
+            firstResult,
+            maxResults,
+            startTime,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "EventEvolutionListParams{eventId=$eventId, firstResult=$firstResult, maxResults=$maxResults, startTime=$startTime, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

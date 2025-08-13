@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.services.async
 
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
+import com.unifieddatalibrary.api.models.BatteryIngest
 import com.unifieddatalibrary.api.models.onorbitbattery.OnorbitbatteryCreateParams
 import com.unifieddatalibrary.api.models.onorbitbattery.OnorbitbatteryGetParams
 import com.unifieddatalibrary.api.models.onorbitbattery.OnorbitbatteryUpdateParams
@@ -34,8 +35,8 @@ internal class OnorbitbatteryServiceAsyncTest {
                     .source("Bluestaq")
                     .id("ONORBITBATTERY-ID")
                     .battery(
-                        OnorbitbatteryCreateParams.Battery.builder()
-                            .dataMode(OnorbitbatteryCreateParams.Battery.DataMode.TEST)
+                        BatteryIngest.builder()
+                            .dataMode(BatteryIngest.DataMode.TEST)
                             .name("JAK-BATTERY-1479")
                             .source("Bluestaq")
                             .id("BATTERY-ID")
@@ -77,8 +78,8 @@ internal class OnorbitbatteryServiceAsyncTest {
                     .source("Bluestaq")
                     .bodyId("ONORBITBATTERY-ID")
                     .battery(
-                        OnorbitbatteryUpdateParams.Battery.builder()
-                            .dataMode(OnorbitbatteryUpdateParams.Battery.DataMode.TEST)
+                        BatteryIngest.builder()
+                            .dataMode(BatteryIngest.DataMode.TEST)
                             .name("JAK-BATTERY-1479")
                             .source("Bluestaq")
                             .id("BATTERY-ID")

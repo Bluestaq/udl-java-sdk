@@ -5,39 +5,33 @@ package com.unifieddatalibrary.api.models.observations.rfobservation
 import com.unifieddatalibrary.api.core.AutoPagerAsync
 import com.unifieddatalibrary.api.core.PageAsync
 import com.unifieddatalibrary.api.core.checkRequired
-import com.unifieddatalibrary.api.models.observations.rfobservation.RfObservationListParams
-import com.unifieddatalibrary.api.models.observations.rfobservation.RfObservationListResponse
 import com.unifieddatalibrary.api.services.async.observations.RfObservationServiceAsync
 import java.util.Objects
-import java.util.Optional
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see RfObservationServiceAsync.list */
-class RfObservationListPageAsync private constructor(
+class RfObservationListPageAsync
+private constructor(
     private val service: RfObservationServiceAsync,
     private val streamHandlerExecutor: Executor,
     private val params: RfObservationListParams,
     private val items: List<RfObservationListResponse>,
-
 ) : PageAsync<RfObservationListResponse> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): RfObservationListParams {
-      val offset = params.firstResult().getOrDefault(0)
-      return params.toBuilder()
-          .firstResult(offset + items().size)
-          .build()
+        val offset = params.firstResult().getOrDefault(0)
+        return params.toBuilder().firstResult(offset + items().size).build()
     }
 
-    override fun nextPage(): CompletableFuture<RfObservationListPageAsync> = service.list(nextPageParams())
+    override fun nextPage(): CompletableFuture<RfObservationListPageAsync> =
+        service.list(nextPageParams())
 
     fun autoPager(): AutoPagerAsync<RfObservationListResponse> =
-        AutoPagerAsync.from(
-          this, streamHandlerExecutor
-        )
+        AutoPagerAsync.from(this, streamHandlerExecutor)
 
     /** The parameters that were used to request this page. */
     fun params(): RfObservationListParams = params
@@ -53,7 +47,6 @@ class RfObservationListPageAsync private constructor(
          * Returns a mutable builder for constructing an instance of [RfObservationListPageAsync].
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .streamHandlerExecutor()
@@ -61,8 +54,7 @@ class RfObservationListPageAsync private constructor(
          * .items()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [RfObservationListPageAsync]. */
@@ -74,35 +66,24 @@ class RfObservationListPageAsync private constructor(
         private var items: List<RfObservationListResponse>? = null
 
         @JvmSynthetic
-        internal fun from(rfObservationListPageAsync: RfObservationListPageAsync) =
-            apply {
-                service = rfObservationListPageAsync.service
-                streamHandlerExecutor = rfObservationListPageAsync.streamHandlerExecutor
-                params = rfObservationListPageAsync.params
-                items = rfObservationListPageAsync.items
-            }
+        internal fun from(rfObservationListPageAsync: RfObservationListPageAsync) = apply {
+            service = rfObservationListPageAsync.service
+            streamHandlerExecutor = rfObservationListPageAsync.streamHandlerExecutor
+            params = rfObservationListPageAsync.params
+            items = rfObservationListPageAsync.items
+        }
 
-        fun service(service: RfObservationServiceAsync) =
-            apply {
-                this.service = service
-            }
+        fun service(service: RfObservationServiceAsync) = apply { this.service = service }
 
-        fun streamHandlerExecutor(streamHandlerExecutor: Executor) =
-            apply {
-                this.streamHandlerExecutor = streamHandlerExecutor
-            }
+        fun streamHandlerExecutor(streamHandlerExecutor: Executor) = apply {
+            this.streamHandlerExecutor = streamHandlerExecutor
+        }
 
         /** The parameters that were used to request this page. */
-        fun params(params: RfObservationListParams) =
-            apply {
-                this.params = params
-            }
+        fun params(params: RfObservationListParams) = apply { this.params = params }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<RfObservationListResponse>) =
-            apply {
-                this.items = items
-            }
+        fun items(items: List<RfObservationListResponse>) = apply { this.items = items }
 
         /**
          * Returns an immutable instance of [RfObservationListPageAsync].
@@ -110,7 +91,6 @@ class RfObservationListPageAsync private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .streamHandlerExecutor()
@@ -122,30 +102,27 @@ class RfObservationListPageAsync private constructor(
          */
         fun build(): RfObservationListPageAsync =
             RfObservationListPageAsync(
-              checkRequired(
-                "service", service
-              ),
-              checkRequired(
-                "streamHandlerExecutor", streamHandlerExecutor
-              ),
-              checkRequired(
-                "params", params
-              ),
-              checkRequired(
-                "items", items
-              ),
+                checkRequired("service", service),
+                checkRequired("streamHandlerExecutor", streamHandlerExecutor),
+                checkRequired("params", params),
+                checkRequired("items", items),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is RfObservationListPageAsync && service == other.service && streamHandlerExecutor == other.streamHandlerExecutor && params == other.params && items == other.items /* spotless:on */
+        return other is RfObservationListPageAsync &&
+            service == other.service &&
+            streamHandlerExecutor == other.streamHandlerExecutor &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, streamHandlerExecutor, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, streamHandlerExecutor, params, items)
 
-    override fun toString() = "RfObservationListPageAsync{service=$service, streamHandlerExecutor=$streamHandlerExecutor, params=$params, items=$items}"
+    override fun toString() =
+        "RfObservationListPageAsync{service=$service, streamHandlerExecutor=$streamHandlerExecutor, params=$params, items=$items}"
 }

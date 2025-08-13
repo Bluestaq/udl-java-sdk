@@ -5,28 +5,23 @@ package com.unifieddatalibrary.api.models.beam
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
-import com.unifieddatalibrary.api.models.beam.BeamAbridged
-import com.unifieddatalibrary.api.models.beam.BeamListParams
 import com.unifieddatalibrary.api.services.blocking.BeamService
 import java.util.Objects
-import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see BeamService.list */
-class BeamListPage private constructor(
+class BeamListPage
+private constructor(
     private val service: BeamService,
     private val params: BeamListParams,
     private val items: List<BeamAbridged>,
-
 ) : Page<BeamAbridged> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): BeamListParams {
-      val offset = params.firstResult().getOrDefault(0)
-      return params.toBuilder()
-          .firstResult(offset + items().size)
-          .build()
+        val offset = params.firstResult().getOrDefault(0)
+        return params.toBuilder().firstResult(offset + items().size).build()
     }
 
     override fun nextPage(): BeamListPage = service.list(nextPageParams())
@@ -47,15 +42,13 @@ class BeamListPage private constructor(
          * Returns a mutable builder for constructing an instance of [BeamListPage].
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [BeamListPage]. */
@@ -66,29 +59,19 @@ class BeamListPage private constructor(
         private var items: List<BeamAbridged>? = null
 
         @JvmSynthetic
-        internal fun from(beamListPage: BeamListPage) =
-            apply {
-                service = beamListPage.service
-                params = beamListPage.params
-                items = beamListPage.items
-            }
+        internal fun from(beamListPage: BeamListPage) = apply {
+            service = beamListPage.service
+            params = beamListPage.params
+            items = beamListPage.items
+        }
 
-        fun service(service: BeamService) =
-            apply {
-                this.service = service
-            }
+        fun service(service: BeamService) = apply { this.service = service }
 
         /** The parameters that were used to request this page. */
-        fun params(params: BeamListParams) =
-            apply {
-                this.params = params
-            }
+        fun params(params: BeamListParams) = apply { this.params = params }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<BeamAbridged>) =
-            apply {
-                this.items = items
-            }
+        fun items(items: List<BeamAbridged>) = apply { this.items = items }
 
         /**
          * Returns an immutable instance of [BeamListPage].
@@ -96,7 +79,6 @@ class BeamListPage private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .params()
@@ -107,27 +89,24 @@ class BeamListPage private constructor(
          */
         fun build(): BeamListPage =
             BeamListPage(
-              checkRequired(
-                "service", service
-              ),
-              checkRequired(
-                "params", params
-              ),
-              checkRequired(
-                "items", items
-              ),
+                checkRequired("service", service),
+                checkRequired("params", params),
+                checkRequired("items", items),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is BeamListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+        return other is BeamListPage &&
+            service == other.service &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, params, items)
 
     override fun toString() = "BeamListPage{service=$service, params=$params, items=$items}"
 }

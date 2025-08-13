@@ -5,39 +5,33 @@ package com.unifieddatalibrary.api.models.onorbit.antennadetails
 import com.unifieddatalibrary.api.core.AutoPagerAsync
 import com.unifieddatalibrary.api.core.PageAsync
 import com.unifieddatalibrary.api.core.checkRequired
-import com.unifieddatalibrary.api.models.onorbit.antennadetails.AntennaDetailListParams
-import com.unifieddatalibrary.api.models.onorbit.antennadetails.AntennaDetailsAbridged
 import com.unifieddatalibrary.api.services.async.onorbit.AntennaDetailServiceAsync
 import java.util.Objects
-import java.util.Optional
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see AntennaDetailServiceAsync.list */
-class AntennaDetailListPageAsync private constructor(
+class AntennaDetailListPageAsync
+private constructor(
     private val service: AntennaDetailServiceAsync,
     private val streamHandlerExecutor: Executor,
     private val params: AntennaDetailListParams,
     private val items: List<AntennaDetailsAbridged>,
-
 ) : PageAsync<AntennaDetailsAbridged> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): AntennaDetailListParams {
-      val offset = params.firstResult().getOrDefault(0)
-      return params.toBuilder()
-          .firstResult(offset + items().size)
-          .build()
+        val offset = params.firstResult().getOrDefault(0)
+        return params.toBuilder().firstResult(offset + items().size).build()
     }
 
-    override fun nextPage(): CompletableFuture<AntennaDetailListPageAsync> = service.list(nextPageParams())
+    override fun nextPage(): CompletableFuture<AntennaDetailListPageAsync> =
+        service.list(nextPageParams())
 
     fun autoPager(): AutoPagerAsync<AntennaDetailsAbridged> =
-        AutoPagerAsync.from(
-          this, streamHandlerExecutor
-        )
+        AutoPagerAsync.from(this, streamHandlerExecutor)
 
     /** The parameters that were used to request this page. */
     fun params(): AntennaDetailListParams = params
@@ -53,7 +47,6 @@ class AntennaDetailListPageAsync private constructor(
          * Returns a mutable builder for constructing an instance of [AntennaDetailListPageAsync].
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .streamHandlerExecutor()
@@ -61,8 +54,7 @@ class AntennaDetailListPageAsync private constructor(
          * .items()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [AntennaDetailListPageAsync]. */
@@ -74,35 +66,24 @@ class AntennaDetailListPageAsync private constructor(
         private var items: List<AntennaDetailsAbridged>? = null
 
         @JvmSynthetic
-        internal fun from(antennaDetailListPageAsync: AntennaDetailListPageAsync) =
-            apply {
-                service = antennaDetailListPageAsync.service
-                streamHandlerExecutor = antennaDetailListPageAsync.streamHandlerExecutor
-                params = antennaDetailListPageAsync.params
-                items = antennaDetailListPageAsync.items
-            }
+        internal fun from(antennaDetailListPageAsync: AntennaDetailListPageAsync) = apply {
+            service = antennaDetailListPageAsync.service
+            streamHandlerExecutor = antennaDetailListPageAsync.streamHandlerExecutor
+            params = antennaDetailListPageAsync.params
+            items = antennaDetailListPageAsync.items
+        }
 
-        fun service(service: AntennaDetailServiceAsync) =
-            apply {
-                this.service = service
-            }
+        fun service(service: AntennaDetailServiceAsync) = apply { this.service = service }
 
-        fun streamHandlerExecutor(streamHandlerExecutor: Executor) =
-            apply {
-                this.streamHandlerExecutor = streamHandlerExecutor
-            }
+        fun streamHandlerExecutor(streamHandlerExecutor: Executor) = apply {
+            this.streamHandlerExecutor = streamHandlerExecutor
+        }
 
         /** The parameters that were used to request this page. */
-        fun params(params: AntennaDetailListParams) =
-            apply {
-                this.params = params
-            }
+        fun params(params: AntennaDetailListParams) = apply { this.params = params }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<AntennaDetailsAbridged>) =
-            apply {
-                this.items = items
-            }
+        fun items(items: List<AntennaDetailsAbridged>) = apply { this.items = items }
 
         /**
          * Returns an immutable instance of [AntennaDetailListPageAsync].
@@ -110,7 +91,6 @@ class AntennaDetailListPageAsync private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .streamHandlerExecutor()
@@ -122,30 +102,27 @@ class AntennaDetailListPageAsync private constructor(
          */
         fun build(): AntennaDetailListPageAsync =
             AntennaDetailListPageAsync(
-              checkRequired(
-                "service", service
-              ),
-              checkRequired(
-                "streamHandlerExecutor", streamHandlerExecutor
-              ),
-              checkRequired(
-                "params", params
-              ),
-              checkRequired(
-                "items", items
-              ),
+                checkRequired("service", service),
+                checkRequired("streamHandlerExecutor", streamHandlerExecutor),
+                checkRequired("params", params),
+                checkRequired("items", items),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is AntennaDetailListPageAsync && service == other.service && streamHandlerExecutor == other.streamHandlerExecutor && params == other.params && items == other.items /* spotless:on */
+        return other is AntennaDetailListPageAsync &&
+            service == other.service &&
+            streamHandlerExecutor == other.streamHandlerExecutor &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, streamHandlerExecutor, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, streamHandlerExecutor, params, items)
 
-    override fun toString() = "AntennaDetailListPageAsync{service=$service, streamHandlerExecutor=$streamHandlerExecutor, params=$params, items=$items}"
+    override fun toString() =
+        "AntennaDetailListPageAsync{service=$service, streamHandlerExecutor=$streamHandlerExecutor, params=$params, items=$items}"
 }

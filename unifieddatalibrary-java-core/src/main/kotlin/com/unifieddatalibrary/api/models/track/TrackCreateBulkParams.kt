@@ -3515,7 +3515,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -3528,12 +3528,155 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && ts == other.ts && id == other.id && alt == other.alt && asset == other.asset && assetNat == other.assetNat && attitude == other.attitude && attitudeRate == other.attitudeRate && callSign == other.callSign && cntct == other.cntct && course == other.course && cov == other.cov && createdAt == other.createdAt && createdBy == other.createdBy && ecefAcc == other.ecefAcc && ecefPos == other.ecefPos && ecefVel == other.ecefVel && eNuAcc == other.eNuAcc && eNuPos == other.eNuPos && eNuVel == other.eNuVel && env == other.env && envConf == other.envConf && errEllp == other.errEllp && hdng == other.hdng && identAmp == other.identAmp && identCred == other.identCred && identRel == other.identRel && jSeries == other.jSeries && lat == other.lat && lcAcc == other.lcAcc && lco == other.lco && lcPos == other.lcPos && lcs == other.lcs && lcVel == other.lcVel && lon == other.lon && m1 == other.m1 && m1v == other.m1v && m2 == other.m2 && m2v == other.m2v && m3a == other.m3a && m3av == other.m3av && modType == other.modType && msgTs == other.msgTs && msnId == other.msnId && multiSource == other.multiSource && objAct == other.objAct && objId == other.objId && objIdent == other.objIdent && objNat == other.objNat && objPlat == other.objPlat && objSpec == other.objSpec && objType == other.objType && origin == other.origin && origNetwork == other.origNetwork && sen == other.sen && senQual == other.senQual && sourceDl == other.sourceDl && spd == other.spd && srcIds == other.srcIds && srcTyps == other.srcTyps && strength == other.strength && tags == other.tags && trkConf == other.trkConf && trkId == other.trkId && trkItmId == other.trkItmId && trkNum == other.trkNum && trkPtType == other.trkPtType && trkQual == other.trkQual && trkStat == other.trkStat /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                ts == other.ts &&
+                id == other.id &&
+                alt == other.alt &&
+                asset == other.asset &&
+                assetNat == other.assetNat &&
+                attitude == other.attitude &&
+                attitudeRate == other.attitudeRate &&
+                callSign == other.callSign &&
+                cntct == other.cntct &&
+                course == other.course &&
+                cov == other.cov &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                ecefAcc == other.ecefAcc &&
+                ecefPos == other.ecefPos &&
+                ecefVel == other.ecefVel &&
+                eNuAcc == other.eNuAcc &&
+                eNuPos == other.eNuPos &&
+                eNuVel == other.eNuVel &&
+                env == other.env &&
+                envConf == other.envConf &&
+                errEllp == other.errEllp &&
+                hdng == other.hdng &&
+                identAmp == other.identAmp &&
+                identCred == other.identCred &&
+                identRel == other.identRel &&
+                jSeries == other.jSeries &&
+                lat == other.lat &&
+                lcAcc == other.lcAcc &&
+                lco == other.lco &&
+                lcPos == other.lcPos &&
+                lcs == other.lcs &&
+                lcVel == other.lcVel &&
+                lon == other.lon &&
+                m1 == other.m1 &&
+                m1v == other.m1v &&
+                m2 == other.m2 &&
+                m2v == other.m2v &&
+                m3a == other.m3a &&
+                m3av == other.m3av &&
+                modType == other.modType &&
+                msgTs == other.msgTs &&
+                msnId == other.msnId &&
+                multiSource == other.multiSource &&
+                objAct == other.objAct &&
+                objId == other.objId &&
+                objIdent == other.objIdent &&
+                objNat == other.objNat &&
+                objPlat == other.objPlat &&
+                objSpec == other.objSpec &&
+                objType == other.objType &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                sen == other.sen &&
+                senQual == other.senQual &&
+                sourceDl == other.sourceDl &&
+                spd == other.spd &&
+                srcIds == other.srcIds &&
+                srcTyps == other.srcTyps &&
+                strength == other.strength &&
+                tags == other.tags &&
+                trkConf == other.trkConf &&
+                trkId == other.trkId &&
+                trkItmId == other.trkItmId &&
+                trkNum == other.trkNum &&
+                trkPtType == other.trkPtType &&
+                trkQual == other.trkQual &&
+                trkStat == other.trkStat
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, ts, id, alt, asset, assetNat, attitude, attitudeRate, callSign, cntct, course, cov, createdAt, createdBy, ecefAcc, ecefPos, ecefVel, eNuAcc, eNuPos, eNuVel, env, envConf, errEllp, hdng, identAmp, identCred, identRel, jSeries, lat, lcAcc, lco, lcPos, lcs, lcVel, lon, m1, m1v, m2, m2v, m3a, m3av, modType, msgTs, msnId, multiSource, objAct, objId, objIdent, objNat, objPlat, objSpec, objType, origin, origNetwork, sen, senQual, sourceDl, spd, srcIds, srcTyps, strength, tags, trkConf, trkId, trkItmId, trkNum, trkPtType, trkQual, trkStat) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                ts,
+                id,
+                alt,
+                asset,
+                assetNat,
+                attitude,
+                attitudeRate,
+                callSign,
+                cntct,
+                course,
+                cov,
+                createdAt,
+                createdBy,
+                ecefAcc,
+                ecefPos,
+                ecefVel,
+                eNuAcc,
+                eNuPos,
+                eNuVel,
+                env,
+                envConf,
+                errEllp,
+                hdng,
+                identAmp,
+                identCred,
+                identRel,
+                jSeries,
+                lat,
+                lcAcc,
+                lco,
+                lcPos,
+                lcs,
+                lcVel,
+                lon,
+                m1,
+                m1v,
+                m2,
+                m2v,
+                m3a,
+                m3av,
+                modType,
+                msgTs,
+                msnId,
+                multiSource,
+                objAct,
+                objId,
+                objIdent,
+                objNat,
+                objPlat,
+                objSpec,
+                objType,
+                origin,
+                origNetwork,
+                sen,
+                senQual,
+                sourceDl,
+                spd,
+                srcIds,
+                srcTyps,
+                strength,
+                tags,
+                trkConf,
+                trkId,
+                trkItmId,
+                trkNum,
+                trkPtType,
+                trkQual,
+                trkStat,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3546,10 +3689,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is TrackCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is TrackCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "TrackCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

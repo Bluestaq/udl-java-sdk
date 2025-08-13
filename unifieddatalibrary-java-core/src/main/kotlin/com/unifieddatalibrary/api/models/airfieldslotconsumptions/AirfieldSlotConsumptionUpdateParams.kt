@@ -3051,12 +3051,89 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idAirfieldSlot == other.idAirfieldSlot && numAircraft == other.numAircraft && source == other.source && startTime == other.startTime && bodyId == other.bodyId && altArrSortieId == other.altArrSortieId && altDepSortieId == other.altDepSortieId && appComment == other.appComment && appInitials == other.appInitials && appOrg == other.appOrg && callSigns == other.callSigns && consumer == other.consumer && createdAt == other.createdAt && createdBy == other.createdBy && endTime == other.endTime && idArrSortie == other.idArrSortie && idDepSortie == other.idDepSortie && missionId == other.missionId && occAircraftMds == other.occAircraftMds && occStartTime == other.occStartTime && occTailNumber == other.occTailNumber && occupied == other.occupied && origin == other.origin && origNetwork == other.origNetwork && reqComment == other.reqComment && reqInitials == other.reqInitials && reqOrg == other.reqOrg && resAircraftMds == other.resAircraftMds && resMissionId == other.resMissionId && resReason == other.resReason && resTailNumber == other.resTailNumber && resType == other.resType && sourceDl == other.sourceDl && status == other.status && targetTime == other.targetTime && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idAirfieldSlot == other.idAirfieldSlot &&
+                numAircraft == other.numAircraft &&
+                source == other.source &&
+                startTime == other.startTime &&
+                bodyId == other.bodyId &&
+                altArrSortieId == other.altArrSortieId &&
+                altDepSortieId == other.altDepSortieId &&
+                appComment == other.appComment &&
+                appInitials == other.appInitials &&
+                appOrg == other.appOrg &&
+                callSigns == other.callSigns &&
+                consumer == other.consumer &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                endTime == other.endTime &&
+                idArrSortie == other.idArrSortie &&
+                idDepSortie == other.idDepSortie &&
+                missionId == other.missionId &&
+                occAircraftMds == other.occAircraftMds &&
+                occStartTime == other.occStartTime &&
+                occTailNumber == other.occTailNumber &&
+                occupied == other.occupied &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                reqComment == other.reqComment &&
+                reqInitials == other.reqInitials &&
+                reqOrg == other.reqOrg &&
+                resAircraftMds == other.resAircraftMds &&
+                resMissionId == other.resMissionId &&
+                resReason == other.resReason &&
+                resTailNumber == other.resTailNumber &&
+                resType == other.resType &&
+                sourceDl == other.sourceDl &&
+                status == other.status &&
+                targetTime == other.targetTime &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idAirfieldSlot, numAircraft, source, startTime, bodyId, altArrSortieId, altDepSortieId, appComment, appInitials, appOrg, callSigns, consumer, createdAt, createdBy, endTime, idArrSortie, idDepSortie, missionId, occAircraftMds, occStartTime, occTailNumber, occupied, origin, origNetwork, reqComment, reqInitials, reqOrg, resAircraftMds, resMissionId, resReason, resTailNumber, resType, sourceDl, status, targetTime, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idAirfieldSlot,
+                numAircraft,
+                source,
+                startTime,
+                bodyId,
+                altArrSortieId,
+                altDepSortieId,
+                appComment,
+                appInitials,
+                appOrg,
+                callSigns,
+                consumer,
+                createdAt,
+                createdBy,
+                endTime,
+                idArrSortie,
+                idDepSortie,
+                missionId,
+                occAircraftMds,
+                occStartTime,
+                occTailNumber,
+                occupied,
+                origin,
+                origNetwork,
+                reqComment,
+                reqInitials,
+                reqOrg,
+                resAircraftMds,
+                resMissionId,
+                resReason,
+                resTailNumber,
+                resType,
+                sourceDl,
+                status,
+                targetTime,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3209,7 +3286,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3355,7 +3432,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Status && value == other.value /* spotless:on */
+            return other is Status && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3368,10 +3445,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AirfieldSlotConsumptionUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is AirfieldSlotConsumptionUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "AirfieldSlotConsumptionUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -317,12 +317,25 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SofDataSourceRefFull && dataSourceId == other.dataSourceId && endPosition == other.endPosition && paragraphNumber == other.paragraphNumber && sentenceNumber == other.sentenceNumber && startPosition == other.startPosition && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SofDataSourceRefFull &&
+            dataSourceId == other.dataSourceId &&
+            endPosition == other.endPosition &&
+            paragraphNumber == other.paragraphNumber &&
+            sentenceNumber == other.sentenceNumber &&
+            startPosition == other.startPosition &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(dataSourceId, endPosition, paragraphNumber, sentenceNumber, startPosition, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            dataSourceId,
+            endPosition,
+            paragraphNumber,
+            sentenceNumber,
+            startPosition,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

@@ -191,10 +191,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is FolderUpdateParams && fileData == other.fileData && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is FolderUpdateParams &&
+            fileData == other.fileData &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(fileData, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(fileData, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "FolderUpdateParams{fileData=$fileData, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

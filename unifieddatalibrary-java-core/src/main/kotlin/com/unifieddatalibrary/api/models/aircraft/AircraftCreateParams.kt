@@ -2070,12 +2070,63 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && aircraftMds == other.aircraftMds && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && category == other.category && command == other.command && createdAt == other.createdAt && createdBy == other.createdBy && cruiseSpeed == other.cruiseSpeed && dtd == other.dtd && entity == other.entity && idEntity == other.idEntity && maxSpeed == other.maxSpeed && minReqRunwayFt == other.minReqRunwayFt && minReqRunwayM == other.minReqRunwayM && nominalTaTime == other.nominalTaTime && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && owner == other.owner && serialNumber == other.serialNumber && sourceDl == other.sourceDl && tailNumber == other.tailNumber && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                aircraftMds == other.aircraftMds &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                id == other.id &&
+                category == other.category &&
+                command == other.command &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                cruiseSpeed == other.cruiseSpeed &&
+                dtd == other.dtd &&
+                entity == other.entity &&
+                idEntity == other.idEntity &&
+                maxSpeed == other.maxSpeed &&
+                minReqRunwayFt == other.minReqRunwayFt &&
+                minReqRunwayM == other.minReqRunwayM &&
+                nominalTaTime == other.nominalTaTime &&
+                notes == other.notes &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                owner == other.owner &&
+                serialNumber == other.serialNumber &&
+                sourceDl == other.sourceDl &&
+                tailNumber == other.tailNumber &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(aircraftMds, classificationMarking, dataMode, source, id, category, command, createdAt, createdBy, cruiseSpeed, dtd, entity, idEntity, maxSpeed, minReqRunwayFt, minReqRunwayM, nominalTaTime, notes, origin, origNetwork, owner, serialNumber, sourceDl, tailNumber, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                aircraftMds,
+                classificationMarking,
+                dataMode,
+                source,
+                id,
+                category,
+                command,
+                createdAt,
+                createdBy,
+                cruiseSpeed,
+                dtd,
+                entity,
+                idEntity,
+                maxSpeed,
+                minReqRunwayFt,
+                minReqRunwayM,
+                nominalTaTime,
+                notes,
+                origin,
+                origNetwork,
+                owner,
+                serialNumber,
+                sourceDl,
+                tailNumber,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2228,7 +2279,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2241,10 +2292,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AircraftCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is AircraftCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "AircraftCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

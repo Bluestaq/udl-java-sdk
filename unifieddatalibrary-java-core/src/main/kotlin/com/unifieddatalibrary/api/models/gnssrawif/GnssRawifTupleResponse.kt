@@ -2081,7 +2081,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2094,12 +2094,97 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GnssRawIfTupleResponse && centerFreq == other.centerFreq && classificationMarking == other.classificationMarking && dataMode == other.dataMode && endTime == other.endTime && fileName == other.fileName && source == other.source && startTime == other.startTime && id == other.id && bitDepth == other.bitDepth && boresight == other.boresight && createdAt == other.createdAt && createdBy == other.createdBy && dataRate == other.dataRate && diffCodeBias == other.diffCodeBias && endAlt == other.endAlt && endLat == other.endLat && endLon == other.endLon && esId == other.esId && eventId == other.eventId && fileSize == other.fileSize && idOnOrbit == other.idOnOrbit && ifFreq == other.ifFreq && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && postFourier == other.postFourier && quat == other.quat && receiver == other.receiver && sampleRate == other.sampleRate && sampleType == other.sampleType && satNo == other.satNo && sequenceId == other.sequenceId && setId == other.setId && setLength == other.setLength && srcIds == other.srcIds && srcTyps == other.srcTyps && startAlt == other.startAlt && startIndex == other.startIndex && startLat == other.startLat && startLon == other.startLon && tags == other.tags && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is GnssRawIfTupleResponse &&
+            centerFreq == other.centerFreq &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            endTime == other.endTime &&
+            fileName == other.fileName &&
+            source == other.source &&
+            startTime == other.startTime &&
+            id == other.id &&
+            bitDepth == other.bitDepth &&
+            boresight == other.boresight &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            dataRate == other.dataRate &&
+            diffCodeBias == other.diffCodeBias &&
+            endAlt == other.endAlt &&
+            endLat == other.endLat &&
+            endLon == other.endLon &&
+            esId == other.esId &&
+            eventId == other.eventId &&
+            fileSize == other.fileSize &&
+            idOnOrbit == other.idOnOrbit &&
+            ifFreq == other.ifFreq &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            postFourier == other.postFourier &&
+            quat == other.quat &&
+            receiver == other.receiver &&
+            sampleRate == other.sampleRate &&
+            sampleType == other.sampleType &&
+            satNo == other.satNo &&
+            sequenceId == other.sequenceId &&
+            setId == other.setId &&
+            setLength == other.setLength &&
+            srcIds == other.srcIds &&
+            srcTyps == other.srcTyps &&
+            startAlt == other.startAlt &&
+            startIndex == other.startIndex &&
+            startLat == other.startLat &&
+            startLon == other.startLon &&
+            tags == other.tags &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(centerFreq, classificationMarking, dataMode, endTime, fileName, source, startTime, id, bitDepth, boresight, createdAt, createdBy, dataRate, diffCodeBias, endAlt, endLat, endLon, esId, eventId, fileSize, idOnOrbit, ifFreq, origin, origNetwork, origObjectId, postFourier, quat, receiver, sampleRate, sampleType, satNo, sequenceId, setId, setLength, srcIds, srcTyps, startAlt, startIndex, startLat, startLon, tags, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            centerFreq,
+            classificationMarking,
+            dataMode,
+            endTime,
+            fileName,
+            source,
+            startTime,
+            id,
+            bitDepth,
+            boresight,
+            createdAt,
+            createdBy,
+            dataRate,
+            diffCodeBias,
+            endAlt,
+            endLat,
+            endLon,
+            esId,
+            eventId,
+            fileSize,
+            idOnOrbit,
+            ifFreq,
+            origin,
+            origNetwork,
+            origObjectId,
+            postFourier,
+            quat,
+            receiver,
+            sampleRate,
+            sampleType,
+            satNo,
+            sequenceId,
+            setId,
+            setLength,
+            srcIds,
+            srcTyps,
+            startAlt,
+            startIndex,
+            startLat,
+            startLon,
+            tags,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

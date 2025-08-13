@@ -4194,7 +4194,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -6104,7 +6104,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -6117,12 +6117,89 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is PostEventElset && classificationMarking == other.classificationMarking && dataMode == other.dataMode && epoch == other.epoch && source == other.source && agom == other.agom && algorithm == other.algorithm && apogee == other.apogee && argOfPerigee == other.argOfPerigee && ballisticCoeff == other.ballisticCoeff && bStar == other.bStar && createdAt == other.createdAt && createdBy == other.createdBy && descriptor == other.descriptor && eccentricity == other.eccentricity && ephemType == other.ephemType && idElset == other.idElset && idOnOrbit == other.idOnOrbit && idOrbitDetermination == other.idOrbitDetermination && inclination == other.inclination && line1 == other.line1 && line2 == other.line2 && meanAnomaly == other.meanAnomaly && meanMotion == other.meanMotion && meanMotionDDot == other.meanMotionDDot && meanMotionDot == other.meanMotionDot && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && perigee == other.perigee && period == other.period && raan == other.raan && revNo == other.revNo && satNo == other.satNo && semiMajorAxis == other.semiMajorAxis && sourceDl == other.sourceDl && transactionId == other.transactionId && uct == other.uct && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is PostEventElset &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                epoch == other.epoch &&
+                source == other.source &&
+                agom == other.agom &&
+                algorithm == other.algorithm &&
+                apogee == other.apogee &&
+                argOfPerigee == other.argOfPerigee &&
+                ballisticCoeff == other.ballisticCoeff &&
+                bStar == other.bStar &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                descriptor == other.descriptor &&
+                eccentricity == other.eccentricity &&
+                ephemType == other.ephemType &&
+                idElset == other.idElset &&
+                idOnOrbit == other.idOnOrbit &&
+                idOrbitDetermination == other.idOrbitDetermination &&
+                inclination == other.inclination &&
+                line1 == other.line1 &&
+                line2 == other.line2 &&
+                meanAnomaly == other.meanAnomaly &&
+                meanMotion == other.meanMotion &&
+                meanMotionDDot == other.meanMotionDDot &&
+                meanMotionDot == other.meanMotionDot &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                perigee == other.perigee &&
+                period == other.period &&
+                raan == other.raan &&
+                revNo == other.revNo &&
+                satNo == other.satNo &&
+                semiMajorAxis == other.semiMajorAxis &&
+                sourceDl == other.sourceDl &&
+                transactionId == other.transactionId &&
+                uct == other.uct &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, epoch, source, agom, algorithm, apogee, argOfPerigee, ballisticCoeff, bStar, createdAt, createdBy, descriptor, eccentricity, ephemType, idElset, idOnOrbit, idOrbitDetermination, inclination, line1, line2, meanAnomaly, meanMotion, meanMotionDDot, meanMotionDot, origin, origNetwork, origObjectId, perigee, period, raan, revNo, satNo, semiMajorAxis, sourceDl, transactionId, uct, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                epoch,
+                source,
+                agom,
+                algorithm,
+                apogee,
+                argOfPerigee,
+                ballisticCoeff,
+                bStar,
+                createdAt,
+                createdBy,
+                descriptor,
+                eccentricity,
+                ephemType,
+                idElset,
+                idOnOrbit,
+                idOrbitDetermination,
+                inclination,
+                line1,
+                line2,
+                meanAnomaly,
+                meanMotion,
+                meanMotionDDot,
+                meanMotionDot,
+                origin,
+                origNetwork,
+                origObjectId,
+                perigee,
+                period,
+                raan,
+                revNo,
+                satNo,
+                semiMajorAxis,
+                sourceDl,
+                transactionId,
+                uct,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -10602,7 +10679,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -10760,7 +10837,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is CovReferenceFrame && value == other.value /* spotless:on */
+                return other is CovReferenceFrame && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -10923,7 +11000,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is ReferenceFrame && value == other.value /* spotless:on */
+                return other is ReferenceFrame && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -10936,12 +11013,205 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is PostEventStateVector && classificationMarking == other.classificationMarking && dataMode == other.dataMode && epoch == other.epoch && source == other.source && actualOdSpan == other.actualOdSpan && algorithm == other.algorithm && alt1ReferenceFrame == other.alt1ReferenceFrame && alt2ReferenceFrame == other.alt2ReferenceFrame && area == other.area && bDot == other.bDot && cmOffset == other.cmOffset && cov == other.cov && covMethod == other.covMethod && covReferenceFrame == other.covReferenceFrame && createdAt == other.createdAt && createdBy == other.createdBy && descriptor == other.descriptor && dragArea == other.dragArea && dragCoeff == other.dragCoeff && dragModel == other.dragModel && edr == other.edr && eqCov == other.eqCov && errorControl == other.errorControl && fixedStep == other.fixedStep && geopotentialModel == other.geopotentialModel && iau1980Terms == other.iau1980Terms && idOnOrbit == other.idOnOrbit && idOrbitDetermination == other.idOrbitDetermination && idStateVector == other.idStateVector && integratorMode == other.integratorMode && inTrackThrust == other.inTrackThrust && lastObEnd == other.lastObEnd && lastObStart == other.lastObStart && leapSecondTime == other.leapSecondTime && lunarSolar == other.lunarSolar && mass == other.mass && obsAvailable == other.obsAvailable && obsUsed == other.obsUsed && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && partials == other.partials && pedigree == other.pedigree && polarMotionX == other.polarMotionX && polarMotionY == other.polarMotionY && posUnc == other.posUnc && recOdSpan == other.recOdSpan && referenceFrame == other.referenceFrame && residualsAcc == other.residualsAcc && revNo == other.revNo && rms == other.rms && satNo == other.satNo && sigmaPosUvw == other.sigmaPosUvw && sigmaVelUvw == other.sigmaVelUvw && solarFluxApAvg == other.solarFluxApAvg && solarFluxF10 == other.solarFluxF10 && solarFluxF10Avg == other.solarFluxF10Avg && solarRadPress == other.solarRadPress && solarRadPressCoeff == other.solarRadPressCoeff && solidEarthTides == other.solidEarthTides && sourceDl == other.sourceDl && srpArea == other.srpArea && stepMode == other.stepMode && stepSize == other.stepSize && stepSizeSelection == other.stepSizeSelection && taiUtc == other.taiUtc && thrustAccel == other.thrustAccel && tracksAvail == other.tracksAvail && tracksUsed == other.tracksUsed && transactionId == other.transactionId && uct == other.uct && ut1Rate == other.ut1Rate && ut1Utc == other.ut1Utc && velUnc == other.velUnc && xaccel == other.xaccel && xpos == other.xpos && xposAlt1 == other.xposAlt1 && xposAlt2 == other.xposAlt2 && xvel == other.xvel && xvelAlt1 == other.xvelAlt1 && xvelAlt2 == other.xvelAlt2 && yaccel == other.yaccel && ypos == other.ypos && yposAlt1 == other.yposAlt1 && yposAlt2 == other.yposAlt2 && yvel == other.yvel && yvelAlt1 == other.yvelAlt1 && yvelAlt2 == other.yvelAlt2 && zaccel == other.zaccel && zpos == other.zpos && zposAlt1 == other.zposAlt1 && zposAlt2 == other.zposAlt2 && zvel == other.zvel && zvelAlt1 == other.zvelAlt1 && zvelAlt2 == other.zvelAlt2 && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is PostEventStateVector &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                epoch == other.epoch &&
+                source == other.source &&
+                actualOdSpan == other.actualOdSpan &&
+                algorithm == other.algorithm &&
+                alt1ReferenceFrame == other.alt1ReferenceFrame &&
+                alt2ReferenceFrame == other.alt2ReferenceFrame &&
+                area == other.area &&
+                bDot == other.bDot &&
+                cmOffset == other.cmOffset &&
+                cov == other.cov &&
+                covMethod == other.covMethod &&
+                covReferenceFrame == other.covReferenceFrame &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                descriptor == other.descriptor &&
+                dragArea == other.dragArea &&
+                dragCoeff == other.dragCoeff &&
+                dragModel == other.dragModel &&
+                edr == other.edr &&
+                eqCov == other.eqCov &&
+                errorControl == other.errorControl &&
+                fixedStep == other.fixedStep &&
+                geopotentialModel == other.geopotentialModel &&
+                iau1980Terms == other.iau1980Terms &&
+                idOnOrbit == other.idOnOrbit &&
+                idOrbitDetermination == other.idOrbitDetermination &&
+                idStateVector == other.idStateVector &&
+                integratorMode == other.integratorMode &&
+                inTrackThrust == other.inTrackThrust &&
+                lastObEnd == other.lastObEnd &&
+                lastObStart == other.lastObStart &&
+                leapSecondTime == other.leapSecondTime &&
+                lunarSolar == other.lunarSolar &&
+                mass == other.mass &&
+                obsAvailable == other.obsAvailable &&
+                obsUsed == other.obsUsed &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                partials == other.partials &&
+                pedigree == other.pedigree &&
+                polarMotionX == other.polarMotionX &&
+                polarMotionY == other.polarMotionY &&
+                posUnc == other.posUnc &&
+                recOdSpan == other.recOdSpan &&
+                referenceFrame == other.referenceFrame &&
+                residualsAcc == other.residualsAcc &&
+                revNo == other.revNo &&
+                rms == other.rms &&
+                satNo == other.satNo &&
+                sigmaPosUvw == other.sigmaPosUvw &&
+                sigmaVelUvw == other.sigmaVelUvw &&
+                solarFluxApAvg == other.solarFluxApAvg &&
+                solarFluxF10 == other.solarFluxF10 &&
+                solarFluxF10Avg == other.solarFluxF10Avg &&
+                solarRadPress == other.solarRadPress &&
+                solarRadPressCoeff == other.solarRadPressCoeff &&
+                solidEarthTides == other.solidEarthTides &&
+                sourceDl == other.sourceDl &&
+                srpArea == other.srpArea &&
+                stepMode == other.stepMode &&
+                stepSize == other.stepSize &&
+                stepSizeSelection == other.stepSizeSelection &&
+                taiUtc == other.taiUtc &&
+                thrustAccel == other.thrustAccel &&
+                tracksAvail == other.tracksAvail &&
+                tracksUsed == other.tracksUsed &&
+                transactionId == other.transactionId &&
+                uct == other.uct &&
+                ut1Rate == other.ut1Rate &&
+                ut1Utc == other.ut1Utc &&
+                velUnc == other.velUnc &&
+                xaccel == other.xaccel &&
+                xpos == other.xpos &&
+                xposAlt1 == other.xposAlt1 &&
+                xposAlt2 == other.xposAlt2 &&
+                xvel == other.xvel &&
+                xvelAlt1 == other.xvelAlt1 &&
+                xvelAlt2 == other.xvelAlt2 &&
+                yaccel == other.yaccel &&
+                ypos == other.ypos &&
+                yposAlt1 == other.yposAlt1 &&
+                yposAlt2 == other.yposAlt2 &&
+                yvel == other.yvel &&
+                yvelAlt1 == other.yvelAlt1 &&
+                yvelAlt2 == other.yvelAlt2 &&
+                zaccel == other.zaccel &&
+                zpos == other.zpos &&
+                zposAlt1 == other.zposAlt1 &&
+                zposAlt2 == other.zposAlt2 &&
+                zvel == other.zvel &&
+                zvelAlt1 == other.zvelAlt1 &&
+                zvelAlt2 == other.zvelAlt2 &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, epoch, source, actualOdSpan, algorithm, alt1ReferenceFrame, alt2ReferenceFrame, area, bDot, cmOffset, cov, covMethod, covReferenceFrame, createdAt, createdBy, descriptor, dragArea, dragCoeff, dragModel, edr, eqCov, errorControl, fixedStep, geopotentialModel, iau1980Terms, idOnOrbit, idOrbitDetermination, idStateVector, integratorMode, inTrackThrust, lastObEnd, lastObStart, leapSecondTime, lunarSolar, mass, obsAvailable, obsUsed, origin, origNetwork, origObjectId, partials, pedigree, polarMotionX, polarMotionY, posUnc, recOdSpan, referenceFrame, residualsAcc, revNo, rms, satNo, sigmaPosUvw, sigmaVelUvw, solarFluxApAvg, solarFluxF10, solarFluxF10Avg, solarRadPress, solarRadPressCoeff, solidEarthTides, sourceDl, srpArea, stepMode, stepSize, stepSizeSelection, taiUtc, thrustAccel, tracksAvail, tracksUsed, transactionId, uct, ut1Rate, ut1Utc, velUnc, xaccel, xpos, xposAlt1, xposAlt2, xvel, xvelAlt1, xvelAlt2, yaccel, ypos, yposAlt1, yposAlt2, yvel, yvelAlt1, yvelAlt2, zaccel, zpos, zposAlt1, zposAlt2, zvel, zvelAlt1, zvelAlt2, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                epoch,
+                source,
+                actualOdSpan,
+                algorithm,
+                alt1ReferenceFrame,
+                alt2ReferenceFrame,
+                area,
+                bDot,
+                cmOffset,
+                cov,
+                covMethod,
+                covReferenceFrame,
+                createdAt,
+                createdBy,
+                descriptor,
+                dragArea,
+                dragCoeff,
+                dragModel,
+                edr,
+                eqCov,
+                errorControl,
+                fixedStep,
+                geopotentialModel,
+                iau1980Terms,
+                idOnOrbit,
+                idOrbitDetermination,
+                idStateVector,
+                integratorMode,
+                inTrackThrust,
+                lastObEnd,
+                lastObStart,
+                leapSecondTime,
+                lunarSolar,
+                mass,
+                obsAvailable,
+                obsUsed,
+                origin,
+                origNetwork,
+                origObjectId,
+                partials,
+                pedigree,
+                polarMotionX,
+                polarMotionY,
+                posUnc,
+                recOdSpan,
+                referenceFrame,
+                residualsAcc,
+                revNo,
+                rms,
+                satNo,
+                sigmaPosUvw,
+                sigmaVelUvw,
+                solarFluxApAvg,
+                solarFluxF10,
+                solarFluxF10Avg,
+                solarRadPress,
+                solarRadPressCoeff,
+                solidEarthTides,
+                sourceDl,
+                srpArea,
+                stepMode,
+                stepSize,
+                stepSizeSelection,
+                taiUtc,
+                thrustAccel,
+                tracksAvail,
+                tracksUsed,
+                transactionId,
+                uct,
+                ut1Rate,
+                ut1Utc,
+                velUnc,
+                xaccel,
+                xpos,
+                xposAlt1,
+                xposAlt2,
+                xvel,
+                xvelAlt1,
+                xvelAlt2,
+                yaccel,
+                ypos,
+                yposAlt1,
+                yposAlt2,
+                yvel,
+                yvelAlt1,
+                yvelAlt2,
+                zaccel,
+                zpos,
+                zposAlt1,
+                zposAlt2,
+                zvel,
+                zvelAlt1,
+                zvelAlt2,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -12851,7 +13121,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -12864,12 +13134,89 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is PreEventElset && classificationMarking == other.classificationMarking && dataMode == other.dataMode && epoch == other.epoch && source == other.source && agom == other.agom && algorithm == other.algorithm && apogee == other.apogee && argOfPerigee == other.argOfPerigee && ballisticCoeff == other.ballisticCoeff && bStar == other.bStar && createdAt == other.createdAt && createdBy == other.createdBy && descriptor == other.descriptor && eccentricity == other.eccentricity && ephemType == other.ephemType && idElset == other.idElset && idOnOrbit == other.idOnOrbit && idOrbitDetermination == other.idOrbitDetermination && inclination == other.inclination && line1 == other.line1 && line2 == other.line2 && meanAnomaly == other.meanAnomaly && meanMotion == other.meanMotion && meanMotionDDot == other.meanMotionDDot && meanMotionDot == other.meanMotionDot && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && perigee == other.perigee && period == other.period && raan == other.raan && revNo == other.revNo && satNo == other.satNo && semiMajorAxis == other.semiMajorAxis && sourceDl == other.sourceDl && transactionId == other.transactionId && uct == other.uct && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is PreEventElset &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                epoch == other.epoch &&
+                source == other.source &&
+                agom == other.agom &&
+                algorithm == other.algorithm &&
+                apogee == other.apogee &&
+                argOfPerigee == other.argOfPerigee &&
+                ballisticCoeff == other.ballisticCoeff &&
+                bStar == other.bStar &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                descriptor == other.descriptor &&
+                eccentricity == other.eccentricity &&
+                ephemType == other.ephemType &&
+                idElset == other.idElset &&
+                idOnOrbit == other.idOnOrbit &&
+                idOrbitDetermination == other.idOrbitDetermination &&
+                inclination == other.inclination &&
+                line1 == other.line1 &&
+                line2 == other.line2 &&
+                meanAnomaly == other.meanAnomaly &&
+                meanMotion == other.meanMotion &&
+                meanMotionDDot == other.meanMotionDDot &&
+                meanMotionDot == other.meanMotionDot &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                perigee == other.perigee &&
+                period == other.period &&
+                raan == other.raan &&
+                revNo == other.revNo &&
+                satNo == other.satNo &&
+                semiMajorAxis == other.semiMajorAxis &&
+                sourceDl == other.sourceDl &&
+                transactionId == other.transactionId &&
+                uct == other.uct &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, epoch, source, agom, algorithm, apogee, argOfPerigee, ballisticCoeff, bStar, createdAt, createdBy, descriptor, eccentricity, ephemType, idElset, idOnOrbit, idOrbitDetermination, inclination, line1, line2, meanAnomaly, meanMotion, meanMotionDDot, meanMotionDot, origin, origNetwork, origObjectId, perigee, period, raan, revNo, satNo, semiMajorAxis, sourceDl, transactionId, uct, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                epoch,
+                source,
+                agom,
+                algorithm,
+                apogee,
+                argOfPerigee,
+                ballisticCoeff,
+                bStar,
+                createdAt,
+                createdBy,
+                descriptor,
+                eccentricity,
+                ephemType,
+                idElset,
+                idOnOrbit,
+                idOrbitDetermination,
+                inclination,
+                line1,
+                line2,
+                meanAnomaly,
+                meanMotion,
+                meanMotionDDot,
+                meanMotionDot,
+                origin,
+                origNetwork,
+                origObjectId,
+                perigee,
+                period,
+                raan,
+                revNo,
+                satNo,
+                semiMajorAxis,
+                sourceDl,
+                transactionId,
+                uct,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -17349,7 +17696,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -17507,7 +17854,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is CovReferenceFrame && value == other.value /* spotless:on */
+                return other is CovReferenceFrame && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -17670,7 +18017,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is ReferenceFrame && value == other.value /* spotless:on */
+                return other is ReferenceFrame && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -17683,12 +18030,205 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is PreEventStateVector && classificationMarking == other.classificationMarking && dataMode == other.dataMode && epoch == other.epoch && source == other.source && actualOdSpan == other.actualOdSpan && algorithm == other.algorithm && alt1ReferenceFrame == other.alt1ReferenceFrame && alt2ReferenceFrame == other.alt2ReferenceFrame && area == other.area && bDot == other.bDot && cmOffset == other.cmOffset && cov == other.cov && covMethod == other.covMethod && covReferenceFrame == other.covReferenceFrame && createdAt == other.createdAt && createdBy == other.createdBy && descriptor == other.descriptor && dragArea == other.dragArea && dragCoeff == other.dragCoeff && dragModel == other.dragModel && edr == other.edr && eqCov == other.eqCov && errorControl == other.errorControl && fixedStep == other.fixedStep && geopotentialModel == other.geopotentialModel && iau1980Terms == other.iau1980Terms && idOnOrbit == other.idOnOrbit && idOrbitDetermination == other.idOrbitDetermination && idStateVector == other.idStateVector && integratorMode == other.integratorMode && inTrackThrust == other.inTrackThrust && lastObEnd == other.lastObEnd && lastObStart == other.lastObStart && leapSecondTime == other.leapSecondTime && lunarSolar == other.lunarSolar && mass == other.mass && obsAvailable == other.obsAvailable && obsUsed == other.obsUsed && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && partials == other.partials && pedigree == other.pedigree && polarMotionX == other.polarMotionX && polarMotionY == other.polarMotionY && posUnc == other.posUnc && recOdSpan == other.recOdSpan && referenceFrame == other.referenceFrame && residualsAcc == other.residualsAcc && revNo == other.revNo && rms == other.rms && satNo == other.satNo && sigmaPosUvw == other.sigmaPosUvw && sigmaVelUvw == other.sigmaVelUvw && solarFluxApAvg == other.solarFluxApAvg && solarFluxF10 == other.solarFluxF10 && solarFluxF10Avg == other.solarFluxF10Avg && solarRadPress == other.solarRadPress && solarRadPressCoeff == other.solarRadPressCoeff && solidEarthTides == other.solidEarthTides && sourceDl == other.sourceDl && srpArea == other.srpArea && stepMode == other.stepMode && stepSize == other.stepSize && stepSizeSelection == other.stepSizeSelection && taiUtc == other.taiUtc && thrustAccel == other.thrustAccel && tracksAvail == other.tracksAvail && tracksUsed == other.tracksUsed && transactionId == other.transactionId && uct == other.uct && ut1Rate == other.ut1Rate && ut1Utc == other.ut1Utc && velUnc == other.velUnc && xaccel == other.xaccel && xpos == other.xpos && xposAlt1 == other.xposAlt1 && xposAlt2 == other.xposAlt2 && xvel == other.xvel && xvelAlt1 == other.xvelAlt1 && xvelAlt2 == other.xvelAlt2 && yaccel == other.yaccel && ypos == other.ypos && yposAlt1 == other.yposAlt1 && yposAlt2 == other.yposAlt2 && yvel == other.yvel && yvelAlt1 == other.yvelAlt1 && yvelAlt2 == other.yvelAlt2 && zaccel == other.zaccel && zpos == other.zpos && zposAlt1 == other.zposAlt1 && zposAlt2 == other.zposAlt2 && zvel == other.zvel && zvelAlt1 == other.zvelAlt1 && zvelAlt2 == other.zvelAlt2 && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is PreEventStateVector &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                epoch == other.epoch &&
+                source == other.source &&
+                actualOdSpan == other.actualOdSpan &&
+                algorithm == other.algorithm &&
+                alt1ReferenceFrame == other.alt1ReferenceFrame &&
+                alt2ReferenceFrame == other.alt2ReferenceFrame &&
+                area == other.area &&
+                bDot == other.bDot &&
+                cmOffset == other.cmOffset &&
+                cov == other.cov &&
+                covMethod == other.covMethod &&
+                covReferenceFrame == other.covReferenceFrame &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                descriptor == other.descriptor &&
+                dragArea == other.dragArea &&
+                dragCoeff == other.dragCoeff &&
+                dragModel == other.dragModel &&
+                edr == other.edr &&
+                eqCov == other.eqCov &&
+                errorControl == other.errorControl &&
+                fixedStep == other.fixedStep &&
+                geopotentialModel == other.geopotentialModel &&
+                iau1980Terms == other.iau1980Terms &&
+                idOnOrbit == other.idOnOrbit &&
+                idOrbitDetermination == other.idOrbitDetermination &&
+                idStateVector == other.idStateVector &&
+                integratorMode == other.integratorMode &&
+                inTrackThrust == other.inTrackThrust &&
+                lastObEnd == other.lastObEnd &&
+                lastObStart == other.lastObStart &&
+                leapSecondTime == other.leapSecondTime &&
+                lunarSolar == other.lunarSolar &&
+                mass == other.mass &&
+                obsAvailable == other.obsAvailable &&
+                obsUsed == other.obsUsed &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                partials == other.partials &&
+                pedigree == other.pedigree &&
+                polarMotionX == other.polarMotionX &&
+                polarMotionY == other.polarMotionY &&
+                posUnc == other.posUnc &&
+                recOdSpan == other.recOdSpan &&
+                referenceFrame == other.referenceFrame &&
+                residualsAcc == other.residualsAcc &&
+                revNo == other.revNo &&
+                rms == other.rms &&
+                satNo == other.satNo &&
+                sigmaPosUvw == other.sigmaPosUvw &&
+                sigmaVelUvw == other.sigmaVelUvw &&
+                solarFluxApAvg == other.solarFluxApAvg &&
+                solarFluxF10 == other.solarFluxF10 &&
+                solarFluxF10Avg == other.solarFluxF10Avg &&
+                solarRadPress == other.solarRadPress &&
+                solarRadPressCoeff == other.solarRadPressCoeff &&
+                solidEarthTides == other.solidEarthTides &&
+                sourceDl == other.sourceDl &&
+                srpArea == other.srpArea &&
+                stepMode == other.stepMode &&
+                stepSize == other.stepSize &&
+                stepSizeSelection == other.stepSizeSelection &&
+                taiUtc == other.taiUtc &&
+                thrustAccel == other.thrustAccel &&
+                tracksAvail == other.tracksAvail &&
+                tracksUsed == other.tracksUsed &&
+                transactionId == other.transactionId &&
+                uct == other.uct &&
+                ut1Rate == other.ut1Rate &&
+                ut1Utc == other.ut1Utc &&
+                velUnc == other.velUnc &&
+                xaccel == other.xaccel &&
+                xpos == other.xpos &&
+                xposAlt1 == other.xposAlt1 &&
+                xposAlt2 == other.xposAlt2 &&
+                xvel == other.xvel &&
+                xvelAlt1 == other.xvelAlt1 &&
+                xvelAlt2 == other.xvelAlt2 &&
+                yaccel == other.yaccel &&
+                ypos == other.ypos &&
+                yposAlt1 == other.yposAlt1 &&
+                yposAlt2 == other.yposAlt2 &&
+                yvel == other.yvel &&
+                yvelAlt1 == other.yvelAlt1 &&
+                yvelAlt2 == other.yvelAlt2 &&
+                zaccel == other.zaccel &&
+                zpos == other.zpos &&
+                zposAlt1 == other.zposAlt1 &&
+                zposAlt2 == other.zposAlt2 &&
+                zvel == other.zvel &&
+                zvelAlt1 == other.zvelAlt1 &&
+                zvelAlt2 == other.zvelAlt2 &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, epoch, source, actualOdSpan, algorithm, alt1ReferenceFrame, alt2ReferenceFrame, area, bDot, cmOffset, cov, covMethod, covReferenceFrame, createdAt, createdBy, descriptor, dragArea, dragCoeff, dragModel, edr, eqCov, errorControl, fixedStep, geopotentialModel, iau1980Terms, idOnOrbit, idOrbitDetermination, idStateVector, integratorMode, inTrackThrust, lastObEnd, lastObStart, leapSecondTime, lunarSolar, mass, obsAvailable, obsUsed, origin, origNetwork, origObjectId, partials, pedigree, polarMotionX, polarMotionY, posUnc, recOdSpan, referenceFrame, residualsAcc, revNo, rms, satNo, sigmaPosUvw, sigmaVelUvw, solarFluxApAvg, solarFluxF10, solarFluxF10Avg, solarRadPress, solarRadPressCoeff, solidEarthTides, sourceDl, srpArea, stepMode, stepSize, stepSizeSelection, taiUtc, thrustAccel, tracksAvail, tracksUsed, transactionId, uct, ut1Rate, ut1Utc, velUnc, xaccel, xpos, xposAlt1, xposAlt2, xvel, xvelAlt1, xvelAlt2, yaccel, ypos, yposAlt1, yposAlt2, yvel, yvelAlt1, yvelAlt2, zaccel, zpos, zposAlt1, zposAlt2, zvel, zvelAlt1, zvelAlt2, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                epoch,
+                source,
+                actualOdSpan,
+                algorithm,
+                alt1ReferenceFrame,
+                alt2ReferenceFrame,
+                area,
+                bDot,
+                cmOffset,
+                cov,
+                covMethod,
+                covReferenceFrame,
+                createdAt,
+                createdBy,
+                descriptor,
+                dragArea,
+                dragCoeff,
+                dragModel,
+                edr,
+                eqCov,
+                errorControl,
+                fixedStep,
+                geopotentialModel,
+                iau1980Terms,
+                idOnOrbit,
+                idOrbitDetermination,
+                idStateVector,
+                integratorMode,
+                inTrackThrust,
+                lastObEnd,
+                lastObStart,
+                leapSecondTime,
+                lunarSolar,
+                mass,
+                obsAvailable,
+                obsUsed,
+                origin,
+                origNetwork,
+                origObjectId,
+                partials,
+                pedigree,
+                polarMotionX,
+                polarMotionY,
+                posUnc,
+                recOdSpan,
+                referenceFrame,
+                residualsAcc,
+                revNo,
+                rms,
+                satNo,
+                sigmaPosUvw,
+                sigmaVelUvw,
+                solarFluxApAvg,
+                solarFluxF10,
+                solarFluxF10Avg,
+                solarRadPress,
+                solarRadPressCoeff,
+                solidEarthTides,
+                sourceDl,
+                srpArea,
+                stepMode,
+                stepSize,
+                stepSizeSelection,
+                taiUtc,
+                thrustAccel,
+                tracksAvail,
+                tracksUsed,
+                transactionId,
+                uct,
+                ut1Rate,
+                ut1Utc,
+                velUnc,
+                xaccel,
+                xpos,
+                xposAlt1,
+                xposAlt2,
+                xvel,
+                xvelAlt1,
+                xvelAlt2,
+                yaccel,
+                ypos,
+                yposAlt1,
+                yposAlt2,
+                yvel,
+                yvelAlt1,
+                yvelAlt2,
+                zaccel,
+                zpos,
+                zposAlt1,
+                zposAlt2,
+                zvel,
+                zvelAlt1,
+                zvelAlt2,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -17701,12 +18241,205 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ManeuverListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && eventStartTime == other.eventStartTime && source == other.source && id == other.id && algorithm == other.algorithm && characterization == other.characterization && characterizationUnc == other.characterizationUnc && cov == other.cov && createdAt == other.createdAt && createdBy == other.createdBy && deltaMass == other.deltaMass && deltaPos == other.deltaPos && deltaPosU == other.deltaPosU && deltaPosV == other.deltaPosV && deltaPosW == other.deltaPosW && deltaVel == other.deltaVel && deltaVelU == other.deltaVelU && deltaVelV == other.deltaVelV && deltaVelW == other.deltaVelW && description == other.description && descriptor == other.descriptor && eventEndTime == other.eventEndTime && eventId == other.eventId && idOnOrbit == other.idOnOrbit && idSensor == other.idSensor && maneuverUnc == other.maneuverUnc && mnvrAccels == other.mnvrAccels && mnvrAccelTimes == other.mnvrAccelTimes && mnvrAccelUncs == other.mnvrAccelUncs && numAccelPoints == other.numAccelPoints && numObs == other.numObs && odFitEndTime == other.odFitEndTime && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId == other.origSensorId && postApogee == other.postApogee && postArea == other.postArea && postBallisticCoeff == other.postBallisticCoeff && postDriftRate == other.postDriftRate && postEccentricity == other.postEccentricity && postEventElset == other.postEventElset && postEventIdElset == other.postEventIdElset && postEventIdStateVector == other.postEventIdStateVector && postEventStateVector == other.postEventStateVector && postGeoLongitude == other.postGeoLongitude && postInclination == other.postInclination && postMass == other.postMass && postPerigee == other.postPerigee && postPeriod == other.postPeriod && postPosX == other.postPosX && postPosY == other.postPosY && postPosZ == other.postPosZ && postRaan == other.postRaan && postRadiationPressCoeff == other.postRadiationPressCoeff && postSigmaU == other.postSigmaU && postSigmaV == other.postSigmaV && postSigmaW == other.postSigmaW && postSma == other.postSma && postVelX == other.postVelX && postVelY == other.postVelY && postVelZ == other.postVelZ && preApogee == other.preApogee && preBallisticCoeff == other.preBallisticCoeff && preDriftRate == other.preDriftRate && preEccentricity == other.preEccentricity && preEventElset == other.preEventElset && preEventIdElset == other.preEventIdElset && preEventIdStateVector == other.preEventIdStateVector && preEventStateVector == other.preEventStateVector && preGeoLongitude == other.preGeoLongitude && preInclination == other.preInclination && prePerigee == other.prePerigee && prePeriod == other.prePeriod && prePosX == other.prePosX && prePosY == other.prePosY && prePosZ == other.prePosZ && preRaan == other.preRaan && preRadiationPressCoeff == other.preRadiationPressCoeff && preSigmaU == other.preSigmaU && preSigmaV == other.preSigmaV && preSigmaW == other.preSigmaW && preSma == other.preSma && preVelX == other.preVelX && preVelY == other.preVelY && preVelZ == other.preVelZ && reportTime == other.reportTime && satNo == other.satNo && stateModel == other.stateModel && stateModelVersion == other.stateModelVersion && status == other.status && totalBurnTime == other.totalBurnTime && transactionId == other.transactionId && uct == other.uct && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is ManeuverListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            eventStartTime == other.eventStartTime &&
+            source == other.source &&
+            id == other.id &&
+            algorithm == other.algorithm &&
+            characterization == other.characterization &&
+            characterizationUnc == other.characterizationUnc &&
+            cov == other.cov &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            deltaMass == other.deltaMass &&
+            deltaPos == other.deltaPos &&
+            deltaPosU == other.deltaPosU &&
+            deltaPosV == other.deltaPosV &&
+            deltaPosW == other.deltaPosW &&
+            deltaVel == other.deltaVel &&
+            deltaVelU == other.deltaVelU &&
+            deltaVelV == other.deltaVelV &&
+            deltaVelW == other.deltaVelW &&
+            description == other.description &&
+            descriptor == other.descriptor &&
+            eventEndTime == other.eventEndTime &&
+            eventId == other.eventId &&
+            idOnOrbit == other.idOnOrbit &&
+            idSensor == other.idSensor &&
+            maneuverUnc == other.maneuverUnc &&
+            mnvrAccels == other.mnvrAccels &&
+            mnvrAccelTimes == other.mnvrAccelTimes &&
+            mnvrAccelUncs == other.mnvrAccelUncs &&
+            numAccelPoints == other.numAccelPoints &&
+            numObs == other.numObs &&
+            odFitEndTime == other.odFitEndTime &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            origSensorId == other.origSensorId &&
+            postApogee == other.postApogee &&
+            postArea == other.postArea &&
+            postBallisticCoeff == other.postBallisticCoeff &&
+            postDriftRate == other.postDriftRate &&
+            postEccentricity == other.postEccentricity &&
+            postEventElset == other.postEventElset &&
+            postEventIdElset == other.postEventIdElset &&
+            postEventIdStateVector == other.postEventIdStateVector &&
+            postEventStateVector == other.postEventStateVector &&
+            postGeoLongitude == other.postGeoLongitude &&
+            postInclination == other.postInclination &&
+            postMass == other.postMass &&
+            postPerigee == other.postPerigee &&
+            postPeriod == other.postPeriod &&
+            postPosX == other.postPosX &&
+            postPosY == other.postPosY &&
+            postPosZ == other.postPosZ &&
+            postRaan == other.postRaan &&
+            postRadiationPressCoeff == other.postRadiationPressCoeff &&
+            postSigmaU == other.postSigmaU &&
+            postSigmaV == other.postSigmaV &&
+            postSigmaW == other.postSigmaW &&
+            postSma == other.postSma &&
+            postVelX == other.postVelX &&
+            postVelY == other.postVelY &&
+            postVelZ == other.postVelZ &&
+            preApogee == other.preApogee &&
+            preBallisticCoeff == other.preBallisticCoeff &&
+            preDriftRate == other.preDriftRate &&
+            preEccentricity == other.preEccentricity &&
+            preEventElset == other.preEventElset &&
+            preEventIdElset == other.preEventIdElset &&
+            preEventIdStateVector == other.preEventIdStateVector &&
+            preEventStateVector == other.preEventStateVector &&
+            preGeoLongitude == other.preGeoLongitude &&
+            preInclination == other.preInclination &&
+            prePerigee == other.prePerigee &&
+            prePeriod == other.prePeriod &&
+            prePosX == other.prePosX &&
+            prePosY == other.prePosY &&
+            prePosZ == other.prePosZ &&
+            preRaan == other.preRaan &&
+            preRadiationPressCoeff == other.preRadiationPressCoeff &&
+            preSigmaU == other.preSigmaU &&
+            preSigmaV == other.preSigmaV &&
+            preSigmaW == other.preSigmaW &&
+            preSma == other.preSma &&
+            preVelX == other.preVelX &&
+            preVelY == other.preVelY &&
+            preVelZ == other.preVelZ &&
+            reportTime == other.reportTime &&
+            satNo == other.satNo &&
+            stateModel == other.stateModel &&
+            stateModelVersion == other.stateModelVersion &&
+            status == other.status &&
+            totalBurnTime == other.totalBurnTime &&
+            transactionId == other.transactionId &&
+            uct == other.uct &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, eventStartTime, source, id, algorithm, characterization, characterizationUnc, cov, createdAt, createdBy, deltaMass, deltaPos, deltaPosU, deltaPosV, deltaPosW, deltaVel, deltaVelU, deltaVelV, deltaVelW, description, descriptor, eventEndTime, eventId, idOnOrbit, idSensor, maneuverUnc, mnvrAccels, mnvrAccelTimes, mnvrAccelUncs, numAccelPoints, numObs, odFitEndTime, origin, origNetwork, origObjectId, origSensorId, postApogee, postArea, postBallisticCoeff, postDriftRate, postEccentricity, postEventElset, postEventIdElset, postEventIdStateVector, postEventStateVector, postGeoLongitude, postInclination, postMass, postPerigee, postPeriod, postPosX, postPosY, postPosZ, postRaan, postRadiationPressCoeff, postSigmaU, postSigmaV, postSigmaW, postSma, postVelX, postVelY, postVelZ, preApogee, preBallisticCoeff, preDriftRate, preEccentricity, preEventElset, preEventIdElset, preEventIdStateVector, preEventStateVector, preGeoLongitude, preInclination, prePerigee, prePeriod, prePosX, prePosY, prePosZ, preRaan, preRadiationPressCoeff, preSigmaU, preSigmaV, preSigmaW, preSma, preVelX, preVelY, preVelZ, reportTime, satNo, stateModel, stateModelVersion, status, totalBurnTime, transactionId, uct, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            eventStartTime,
+            source,
+            id,
+            algorithm,
+            characterization,
+            characterizationUnc,
+            cov,
+            createdAt,
+            createdBy,
+            deltaMass,
+            deltaPos,
+            deltaPosU,
+            deltaPosV,
+            deltaPosW,
+            deltaVel,
+            deltaVelU,
+            deltaVelV,
+            deltaVelW,
+            description,
+            descriptor,
+            eventEndTime,
+            eventId,
+            idOnOrbit,
+            idSensor,
+            maneuverUnc,
+            mnvrAccels,
+            mnvrAccelTimes,
+            mnvrAccelUncs,
+            numAccelPoints,
+            numObs,
+            odFitEndTime,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            postApogee,
+            postArea,
+            postBallisticCoeff,
+            postDriftRate,
+            postEccentricity,
+            postEventElset,
+            postEventIdElset,
+            postEventIdStateVector,
+            postEventStateVector,
+            postGeoLongitude,
+            postInclination,
+            postMass,
+            postPerigee,
+            postPeriod,
+            postPosX,
+            postPosY,
+            postPosZ,
+            postRaan,
+            postRadiationPressCoeff,
+            postSigmaU,
+            postSigmaV,
+            postSigmaW,
+            postSma,
+            postVelX,
+            postVelY,
+            postVelZ,
+            preApogee,
+            preBallisticCoeff,
+            preDriftRate,
+            preEccentricity,
+            preEventElset,
+            preEventIdElset,
+            preEventIdStateVector,
+            preEventStateVector,
+            preGeoLongitude,
+            preInclination,
+            prePerigee,
+            prePeriod,
+            prePosX,
+            prePosY,
+            prePosZ,
+            preRaan,
+            preRadiationPressCoeff,
+            preSigmaU,
+            preSigmaV,
+            preSigmaW,
+            preSma,
+            preVelX,
+            preVelY,
+            preVelZ,
+            reportTime,
+            satNo,
+            stateModel,
+            stateModelVersion,
+            status,
+            totalBurnTime,
+            transactionId,
+            uct,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

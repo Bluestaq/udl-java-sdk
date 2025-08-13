@@ -15,14 +15,14 @@ import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
-import com.unifieddatalibrary.api.models.surfaceobstruction.SurfaceObstructionListResponse
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-class SurfaceObstructionListResponse private constructor(
+class SurfaceObstructionListResponse
+private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
     private val idSurface: JsonField<String>,
@@ -43,190 +43,247 @@ class SurfaceObstructionListResponse private constructor(
     private val origNetwork: JsonField<String>,
     private val sourceDl: JsonField<String>,
     private val additionalProperties: MutableMap<String, JsonValue>,
-
 ) {
 
     @JsonCreator
     private constructor(
-        @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        classificationMarking: JsonField<String> = JsonMissing.of(),
         @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
         @JsonProperty("idSurface") @ExcludeMissing idSurface: JsonField<String> = JsonMissing.of(),
         @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
         @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("advisoryRequired") @ExcludeMissing advisoryRequired: JsonField<List<String>> = JsonMissing.of(),
-        @JsonProperty("approvalRequired") @ExcludeMissing approvalRequired: JsonField<List<String>> = JsonMissing.of(),
-        @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("advisoryRequired")
+        @ExcludeMissing
+        advisoryRequired: JsonField<List<String>> = JsonMissing.of(),
+        @JsonProperty("approvalRequired")
+        @ExcludeMissing
+        approvalRequired: JsonField<List<String>> = JsonMissing.of(),
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("distanceFromCenterLine") @ExcludeMissing distanceFromCenterLine: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("distanceFromEdge") @ExcludeMissing distanceFromEdge: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("distanceFromThreshold") @ExcludeMissing distanceFromThreshold: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("idNavigationalObstruction") @ExcludeMissing idNavigationalObstruction: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("obstructionDesc") @ExcludeMissing obstructionDesc: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("obstructionHeight") @ExcludeMissing obstructionHeight: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("obstructionSideCode") @ExcludeMissing obstructionSideCode: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("distanceFromCenterLine")
+        @ExcludeMissing
+        distanceFromCenterLine: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("distanceFromEdge")
+        @ExcludeMissing
+        distanceFromEdge: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("distanceFromThreshold")
+        @ExcludeMissing
+        distanceFromThreshold: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("idNavigationalObstruction")
+        @ExcludeMissing
+        idNavigationalObstruction: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("obstructionDesc")
+        @ExcludeMissing
+        obstructionDesc: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("obstructionHeight")
+        @ExcludeMissing
+        obstructionHeight: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("obstructionSideCode")
+        @ExcludeMissing
+        obstructionSideCode: JsonField<String> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origNetwork") @ExcludeMissing origNetwork: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("sourceDL") @ExcludeMissing sourceDl: JsonField<String> = JsonMissing.of()
+        @JsonProperty("origNetwork")
+        @ExcludeMissing
+        origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("sourceDL") @ExcludeMissing sourceDl: JsonField<String> = JsonMissing.of(),
     ) : this(
-      classificationMarking,
-      dataMode,
-      idSurface,
-      source,
-      id,
-      advisoryRequired,
-      approvalRequired,
-      createdAt,
-      createdBy,
-      distanceFromCenterLine,
-      distanceFromEdge,
-      distanceFromThreshold,
-      idNavigationalObstruction,
-      obstructionDesc,
-      obstructionHeight,
-      obstructionSideCode,
-      origin,
-      origNetwork,
-      sourceDl,
-      mutableMapOf(),
+        classificationMarking,
+        dataMode,
+        idSurface,
+        source,
+        id,
+        advisoryRequired,
+        approvalRequired,
+        createdAt,
+        createdBy,
+        distanceFromCenterLine,
+        distanceFromEdge,
+        distanceFromThreshold,
+        idNavigationalObstruction,
+        obstructionDesc,
+        obstructionHeight,
+        obstructionSideCode,
+        origin,
+        origNetwork,
+        sourceDl,
+        mutableMapOf(),
     )
 
     /**
      * Classification marking of the data in IC/CAPCO Portion-marked format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
     /**
      * Indicator of whether the data is REAL, TEST, SIMULATED, or EXERCISE data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
     /**
-     * The unique identifier of the associated surface record. This field is required when posting, updating, or deleting a SurfaceObstruction record.
+     * The unique identifier of the associated surface record. This field is required when posting,
+     * updating, or deleting a SurfaceObstruction record.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun idSurface(): String = idSurface.getRequired("idSurface")
 
     /**
      * Source of the data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun source(): String = source.getRequired("source")
 
     /**
      * Unique identifier of the record, auto-generated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun id(): Optional<String> = id.getOptional("id")
 
     /**
-     * Array of all vehicles that are affected by this obstruction at the surface end-point, and require an advisory for usage.
+     * Array of all vehicles that are affected by this obstruction at the surface end-point, and
+     * require an advisory for usage.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun advisoryRequired(): Optional<List<String>> = advisoryRequired.getOptional("advisoryRequired")
+    fun advisoryRequired(): Optional<List<String>> =
+        advisoryRequired.getOptional("advisoryRequired")
 
     /**
-     * Array of all vehicles that are affected by this obstruction at the surface end-point, and require an approval for usage.
+     * Array of all vehicles that are affected by this obstruction at the surface end-point, and
+     * require an approval for usage.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun approvalRequired(): Optional<List<String>> = approvalRequired.getOptional("approvalRequired")
+    fun approvalRequired(): Optional<List<String>> =
+        approvalRequired.getOptional("approvalRequired")
 
     /**
      * Time the row was created in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
     /**
      * Application user who created the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
      * The distance from the surface center line to this obstruction, in feet.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun distanceFromCenterLine(): Optional<Double> = distanceFromCenterLine.getOptional("distanceFromCenterLine")
+    fun distanceFromCenterLine(): Optional<Double> =
+        distanceFromCenterLine.getOptional("distanceFromCenterLine")
 
     /**
      * The distance from the surface edge to this obstruction, in feet.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun distanceFromEdge(): Optional<Double> = distanceFromEdge.getOptional("distanceFromEdge")
 
     /**
      * The distance from the surface threshold to this obstruction, in feet.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun distanceFromThreshold(): Optional<Double> = distanceFromThreshold.getOptional("distanceFromThreshold")
+    fun distanceFromThreshold(): Optional<Double> =
+        distanceFromThreshold.getOptional("distanceFromThreshold")
 
     /**
      * The unique identifier of the associated NavigationalObstruction record.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun idNavigationalObstruction(): Optional<String> = idNavigationalObstruction.getOptional("idNavigationalObstruction")
+    fun idNavigationalObstruction(): Optional<String> =
+        idNavigationalObstruction.getOptional("idNavigationalObstruction")
 
     /**
      * Description of this surface obstruction.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun obstructionDesc(): Optional<String> = obstructionDesc.getOptional("obstructionDesc")
 
     /**
      * The height above ground level of the surface obstruction, in feet.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun obstructionHeight(): Optional<Double> = obstructionHeight.getOptional("obstructionHeight")
 
     /**
      * A code that indicates which side of the surface end is affected by this obstruction.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun obstructionSideCode(): Optional<String> = obstructionSideCode.getOptional("obstructionSideCode")
+    fun obstructionSideCode(): Optional<String> =
+        obstructionSideCode.getOptional("obstructionSideCode")
 
     /**
-     * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     * Originating system or organization which produced the data, if different from the source. The
+     * origin may be different than the source if the source was a mediating system which forwarded
+     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origin(): Optional<String> = origin.getOptional("origin")
 
     /**
-     * The originating source network on which this record was created, auto-populated by the system.
+     * The originating source network on which this record was created, auto-populated by the
+     * system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
     /**
-     * The source data library from which this record was received. This could be a remote or tactical UDL or another data library. If null, the record should be assumed to have originated from the primary Enterprise UDL.
+     * The source data library from which this record was received. This could be a remote or
+     * tactical UDL or another data library. If null, the record should be assumed to have
+     * originated from the primary Enterprise UDL.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun sourceDl(): Optional<String> = sourceDl.getOptional("sourceDL")
 
     /**
      * Returns the raw JSON value of [classificationMarking].
      *
-     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("classificationMarking")
     @ExcludeMissing
@@ -237,41 +294,34 @@ class SurfaceObstructionListResponse private constructor(
      *
      * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("dataMode")
-    @ExcludeMissing
-    fun _dataMode(): JsonField<DataMode> = dataMode
+    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
 
     /**
      * Returns the raw JSON value of [idSurface].
      *
      * Unlike [idSurface], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("idSurface")
-    @ExcludeMissing
-    fun _idSurface(): JsonField<String> = idSurface
+    @JsonProperty("idSurface") @ExcludeMissing fun _idSurface(): JsonField<String> = idSurface
 
     /**
      * Returns the raw JSON value of [source].
      *
      * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("source")
-    @ExcludeMissing
-    fun _source(): JsonField<String> = source
+    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
 
     /**
      * Returns the raw JSON value of [id].
      *
      * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("id")
-    @ExcludeMissing
-    fun _id(): JsonField<String> = id
+    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
 
     /**
      * Returns the raw JSON value of [advisoryRequired].
      *
-     * Unlike [advisoryRequired], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [advisoryRequired], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("advisoryRequired")
     @ExcludeMissing
@@ -280,7 +330,8 @@ class SurfaceObstructionListResponse private constructor(
     /**
      * Returns the raw JSON value of [approvalRequired].
      *
-     * Unlike [approvalRequired], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [approvalRequired], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("approvalRequired")
     @ExcludeMissing
@@ -300,14 +351,13 @@ class SurfaceObstructionListResponse private constructor(
      *
      * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("createdBy")
-    @ExcludeMissing
-    fun _createdBy(): JsonField<String> = createdBy
+    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
     /**
      * Returns the raw JSON value of [distanceFromCenterLine].
      *
-     * Unlike [distanceFromCenterLine], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [distanceFromCenterLine], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
     @JsonProperty("distanceFromCenterLine")
     @ExcludeMissing
@@ -316,7 +366,8 @@ class SurfaceObstructionListResponse private constructor(
     /**
      * Returns the raw JSON value of [distanceFromEdge].
      *
-     * Unlike [distanceFromEdge], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [distanceFromEdge], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("distanceFromEdge")
     @ExcludeMissing
@@ -325,7 +376,8 @@ class SurfaceObstructionListResponse private constructor(
     /**
      * Returns the raw JSON value of [distanceFromThreshold].
      *
-     * Unlike [distanceFromThreshold], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [distanceFromThreshold], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("distanceFromThreshold")
     @ExcludeMissing
@@ -334,7 +386,8 @@ class SurfaceObstructionListResponse private constructor(
     /**
      * Returns the raw JSON value of [idNavigationalObstruction].
      *
-     * Unlike [idNavigationalObstruction], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [idNavigationalObstruction], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
     @JsonProperty("idNavigationalObstruction")
     @ExcludeMissing
@@ -352,7 +405,8 @@ class SurfaceObstructionListResponse private constructor(
     /**
      * Returns the raw JSON value of [obstructionHeight].
      *
-     * Unlike [obstructionHeight], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [obstructionHeight], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("obstructionHeight")
     @ExcludeMissing
@@ -361,7 +415,8 @@ class SurfaceObstructionListResponse private constructor(
     /**
      * Returns the raw JSON value of [obstructionSideCode].
      *
-     * Unlike [obstructionSideCode], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [obstructionSideCode], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("obstructionSideCode")
     @ExcludeMissing
@@ -372,46 +427,41 @@ class SurfaceObstructionListResponse private constructor(
      *
      * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origin")
-    @ExcludeMissing
-    fun _origin(): JsonField<String> = origin
+    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
 
     /**
      * Returns the raw JSON value of [origNetwork].
      *
      * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origNetwork")
-    @ExcludeMissing
-    fun _origNetwork(): JsonField<String> = origNetwork
+    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
 
     /**
      * Returns the raw JSON value of [sourceDl].
      *
      * Unlike [sourceDl], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("sourceDL")
-    @ExcludeMissing
-    fun _sourceDl(): JsonField<String> = sourceDl
+    @JsonProperty("sourceDL") @ExcludeMissing fun _sourceDl(): JsonField<String> = sourceDl
 
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
-      additionalProperties.put(key, value)
+        additionalProperties.put(key, value)
     }
 
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of [SurfaceObstructionListResponse].
+         * Returns a mutable builder for constructing an instance of
+         * [SurfaceObstructionListResponse].
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -419,8 +469,7 @@ class SurfaceObstructionListResponse private constructor(
          * .source()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [SurfaceObstructionListResponse]. */
@@ -448,43 +497,46 @@ class SurfaceObstructionListResponse private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(surfaceObstructionListResponse: SurfaceObstructionListResponse) =
-            apply {
-                classificationMarking = surfaceObstructionListResponse.classificationMarking
-                dataMode = surfaceObstructionListResponse.dataMode
-                idSurface = surfaceObstructionListResponse.idSurface
-                source = surfaceObstructionListResponse.source
-                id = surfaceObstructionListResponse.id
-                advisoryRequired = surfaceObstructionListResponse.advisoryRequired.map { it.toMutableList() }
-                approvalRequired = surfaceObstructionListResponse.approvalRequired.map { it.toMutableList() }
-                createdAt = surfaceObstructionListResponse.createdAt
-                createdBy = surfaceObstructionListResponse.createdBy
-                distanceFromCenterLine = surfaceObstructionListResponse.distanceFromCenterLine
-                distanceFromEdge = surfaceObstructionListResponse.distanceFromEdge
-                distanceFromThreshold = surfaceObstructionListResponse.distanceFromThreshold
-                idNavigationalObstruction = surfaceObstructionListResponse.idNavigationalObstruction
-                obstructionDesc = surfaceObstructionListResponse.obstructionDesc
-                obstructionHeight = surfaceObstructionListResponse.obstructionHeight
-                obstructionSideCode = surfaceObstructionListResponse.obstructionSideCode
-                origin = surfaceObstructionListResponse.origin
-                origNetwork = surfaceObstructionListResponse.origNetwork
-                sourceDl = surfaceObstructionListResponse.sourceDl
-                additionalProperties = surfaceObstructionListResponse.additionalProperties.toMutableMap()
-            }
+        internal fun from(surfaceObstructionListResponse: SurfaceObstructionListResponse) = apply {
+            classificationMarking = surfaceObstructionListResponse.classificationMarking
+            dataMode = surfaceObstructionListResponse.dataMode
+            idSurface = surfaceObstructionListResponse.idSurface
+            source = surfaceObstructionListResponse.source
+            id = surfaceObstructionListResponse.id
+            advisoryRequired =
+                surfaceObstructionListResponse.advisoryRequired.map { it.toMutableList() }
+            approvalRequired =
+                surfaceObstructionListResponse.approvalRequired.map { it.toMutableList() }
+            createdAt = surfaceObstructionListResponse.createdAt
+            createdBy = surfaceObstructionListResponse.createdBy
+            distanceFromCenterLine = surfaceObstructionListResponse.distanceFromCenterLine
+            distanceFromEdge = surfaceObstructionListResponse.distanceFromEdge
+            distanceFromThreshold = surfaceObstructionListResponse.distanceFromThreshold
+            idNavigationalObstruction = surfaceObstructionListResponse.idNavigationalObstruction
+            obstructionDesc = surfaceObstructionListResponse.obstructionDesc
+            obstructionHeight = surfaceObstructionListResponse.obstructionHeight
+            obstructionSideCode = surfaceObstructionListResponse.obstructionSideCode
+            origin = surfaceObstructionListResponse.origin
+            origNetwork = surfaceObstructionListResponse.origNetwork
+            sourceDl = surfaceObstructionListResponse.sourceDl
+            additionalProperties =
+                surfaceObstructionListResponse.additionalProperties.toMutableMap()
+        }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-        fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
+        fun classificationMarking(classificationMarking: String) =
+            classificationMarking(JsonField.of(classificationMarking))
 
         /**
          * Sets [Builder.classificationMarking] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun classificationMarking(classificationMarking: JsonField<String>) =
-            apply {
-                this.classificationMarking = classificationMarking
-            }
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            this.classificationMarking = classificationMarking
+        }
 
         /** Indicator of whether the data is REAL, TEST, SIMULATED, or EXERCISE data. */
         fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
@@ -492,27 +544,26 @@ class SurfaceObstructionListResponse private constructor(
         /**
          * Sets [Builder.dataMode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun dataMode(dataMode: JsonField<DataMode>) =
-            apply {
-                this.dataMode = dataMode
-            }
+        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
 
-        /** The unique identifier of the associated surface record. This field is required when posting, updating, or deleting a SurfaceObstruction record. */
+        /**
+         * The unique identifier of the associated surface record. This field is required when
+         * posting, updating, or deleting a SurfaceObstruction record.
+         */
         fun idSurface(idSurface: String) = idSurface(JsonField.of(idSurface))
 
         /**
          * Sets [Builder.idSurface] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idSurface] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.idSurface] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun idSurface(idSurface: JsonField<String>) =
-            apply {
-                this.idSurface = idSurface
-            }
+        fun idSurface(idSurface: JsonField<String>) = apply { this.idSurface = idSurface }
 
         /** Source of the data. */
         fun source(source: String) = source(JsonField.of(source))
@@ -520,13 +571,10 @@ class SurfaceObstructionListResponse private constructor(
         /**
          * Sets [Builder.source] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun source(source: JsonField<String>) =
-            apply {
-                this.source = source
-            }
+        fun source(source: JsonField<String>) = apply { this.source = source }
 
         /** Unique identifier of the record, auto-generated by the system. */
         fun id(id: String) = id(JsonField.of(id))
@@ -534,65 +582,70 @@ class SurfaceObstructionListResponse private constructor(
         /**
          * Sets [Builder.id] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun id(id: JsonField<String>) =
-            apply {
-                this.id = id
-            }
+        fun id(id: JsonField<String>) = apply { this.id = id }
 
-        /** Array of all vehicles that are affected by this obstruction at the surface end-point, and require an advisory for usage. */
-        fun advisoryRequired(advisoryRequired: List<String>) = advisoryRequired(JsonField.of(advisoryRequired))
+        /**
+         * Array of all vehicles that are affected by this obstruction at the surface end-point, and
+         * require an advisory for usage.
+         */
+        fun advisoryRequired(advisoryRequired: List<String>) =
+            advisoryRequired(JsonField.of(advisoryRequired))
 
         /**
          * Sets [Builder.advisoryRequired] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.advisoryRequired] with a well-typed `List<String>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.advisoryRequired] with a well-typed `List<String>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun advisoryRequired(advisoryRequired: JsonField<List<String>>) =
-            apply {
-                this.advisoryRequired = advisoryRequired.map { it.toMutableList() }
-            }
+        fun advisoryRequired(advisoryRequired: JsonField<List<String>>) = apply {
+            this.advisoryRequired = advisoryRequired.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [String] to [Builder.advisoryRequired].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addAdvisoryRequired(advisoryRequired: String) =
-            apply {
-                this.advisoryRequired = (this.advisoryRequired ?: JsonField.of(mutableListOf())).also {
+        fun addAdvisoryRequired(advisoryRequired: String) = apply {
+            this.advisoryRequired =
+                (this.advisoryRequired ?: JsonField.of(mutableListOf())).also {
                     checkKnown("advisoryRequired", it).add(advisoryRequired)
                 }
-            }
+        }
 
-        /** Array of all vehicles that are affected by this obstruction at the surface end-point, and require an approval for usage. */
-        fun approvalRequired(approvalRequired: List<String>) = approvalRequired(JsonField.of(approvalRequired))
+        /**
+         * Array of all vehicles that are affected by this obstruction at the surface end-point, and
+         * require an approval for usage.
+         */
+        fun approvalRequired(approvalRequired: List<String>) =
+            approvalRequired(JsonField.of(approvalRequired))
 
         /**
          * Sets [Builder.approvalRequired] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.approvalRequired] with a well-typed `List<String>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.approvalRequired] with a well-typed `List<String>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun approvalRequired(approvalRequired: JsonField<List<String>>) =
-            apply {
-                this.approvalRequired = approvalRequired.map { it.toMutableList() }
-            }
+        fun approvalRequired(approvalRequired: JsonField<List<String>>) = apply {
+            this.approvalRequired = approvalRequired.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [String] to [Builder.approvalRequired].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addApprovalRequired(approvalRequired: String) =
-            apply {
-                this.approvalRequired = (this.approvalRequired ?: JsonField.of(mutableListOf())).also {
+        fun addApprovalRequired(approvalRequired: String) = apply {
+            this.approvalRequired =
+                (this.approvalRequired ?: JsonField.of(mutableListOf())).also {
                     checkKnown("approvalRequired", it).add(approvalRequired)
                 }
-            }
+        }
 
         /** Time the row was created in the database, auto-populated by the system. */
         fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -600,13 +653,11 @@ class SurfaceObstructionListResponse private constructor(
         /**
          * Sets [Builder.createdAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun createdAt(createdAt: JsonField<OffsetDateTime>) =
-            apply {
-                this.createdAt = createdAt
-            }
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
 
         /** Application user who created the row in the database, auto-populated by the system. */
         fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
@@ -614,179 +665,181 @@ class SurfaceObstructionListResponse private constructor(
         /**
          * Sets [Builder.createdBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun createdBy(createdBy: JsonField<String>) =
-            apply {
-                this.createdBy = createdBy
-            }
+        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
         /** The distance from the surface center line to this obstruction, in feet. */
-        fun distanceFromCenterLine(distanceFromCenterLine: Double) = distanceFromCenterLine(JsonField.of(distanceFromCenterLine))
+        fun distanceFromCenterLine(distanceFromCenterLine: Double) =
+            distanceFromCenterLine(JsonField.of(distanceFromCenterLine))
 
         /**
          * Sets [Builder.distanceFromCenterLine] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.distanceFromCenterLine] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.distanceFromCenterLine] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun distanceFromCenterLine(distanceFromCenterLine: JsonField<Double>) =
-            apply {
-                this.distanceFromCenterLine = distanceFromCenterLine
-            }
+        fun distanceFromCenterLine(distanceFromCenterLine: JsonField<Double>) = apply {
+            this.distanceFromCenterLine = distanceFromCenterLine
+        }
 
         /** The distance from the surface edge to this obstruction, in feet. */
-        fun distanceFromEdge(distanceFromEdge: Double) = distanceFromEdge(JsonField.of(distanceFromEdge))
+        fun distanceFromEdge(distanceFromEdge: Double) =
+            distanceFromEdge(JsonField.of(distanceFromEdge))
 
         /**
          * Sets [Builder.distanceFromEdge] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.distanceFromEdge] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.distanceFromEdge] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun distanceFromEdge(distanceFromEdge: JsonField<Double>) =
-            apply {
-                this.distanceFromEdge = distanceFromEdge
-            }
+        fun distanceFromEdge(distanceFromEdge: JsonField<Double>) = apply {
+            this.distanceFromEdge = distanceFromEdge
+        }
 
         /** The distance from the surface threshold to this obstruction, in feet. */
-        fun distanceFromThreshold(distanceFromThreshold: Double) = distanceFromThreshold(JsonField.of(distanceFromThreshold))
+        fun distanceFromThreshold(distanceFromThreshold: Double) =
+            distanceFromThreshold(JsonField.of(distanceFromThreshold))
 
         /**
          * Sets [Builder.distanceFromThreshold] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.distanceFromThreshold] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.distanceFromThreshold] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun distanceFromThreshold(distanceFromThreshold: JsonField<Double>) =
-            apply {
-                this.distanceFromThreshold = distanceFromThreshold
-            }
+        fun distanceFromThreshold(distanceFromThreshold: JsonField<Double>) = apply {
+            this.distanceFromThreshold = distanceFromThreshold
+        }
 
         /** The unique identifier of the associated NavigationalObstruction record. */
-        fun idNavigationalObstruction(idNavigationalObstruction: String) = idNavigationalObstruction(JsonField.of(idNavigationalObstruction))
+        fun idNavigationalObstruction(idNavigationalObstruction: String) =
+            idNavigationalObstruction(JsonField.of(idNavigationalObstruction))
 
         /**
          * Sets [Builder.idNavigationalObstruction] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idNavigationalObstruction] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.idNavigationalObstruction] with a well-typed [String]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun idNavigationalObstruction(idNavigationalObstruction: JsonField<String>) =
-            apply {
-                this.idNavigationalObstruction = idNavigationalObstruction
-            }
+        fun idNavigationalObstruction(idNavigationalObstruction: JsonField<String>) = apply {
+            this.idNavigationalObstruction = idNavigationalObstruction
+        }
 
         /** Description of this surface obstruction. */
-        fun obstructionDesc(obstructionDesc: String) = obstructionDesc(JsonField.of(obstructionDesc))
+        fun obstructionDesc(obstructionDesc: String) =
+            obstructionDesc(JsonField.of(obstructionDesc))
 
         /**
          * Sets [Builder.obstructionDesc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.obstructionDesc] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.obstructionDesc] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun obstructionDesc(obstructionDesc: JsonField<String>) =
-            apply {
-                this.obstructionDesc = obstructionDesc
-            }
+        fun obstructionDesc(obstructionDesc: JsonField<String>) = apply {
+            this.obstructionDesc = obstructionDesc
+        }
 
         /** The height above ground level of the surface obstruction, in feet. */
-        fun obstructionHeight(obstructionHeight: Double) = obstructionHeight(JsonField.of(obstructionHeight))
+        fun obstructionHeight(obstructionHeight: Double) =
+            obstructionHeight(JsonField.of(obstructionHeight))
 
         /**
          * Sets [Builder.obstructionHeight] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.obstructionHeight] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.obstructionHeight] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun obstructionHeight(obstructionHeight: JsonField<Double>) =
-            apply {
-                this.obstructionHeight = obstructionHeight
-            }
+        fun obstructionHeight(obstructionHeight: JsonField<Double>) = apply {
+            this.obstructionHeight = obstructionHeight
+        }
 
         /** A code that indicates which side of the surface end is affected by this obstruction. */
-        fun obstructionSideCode(obstructionSideCode: String) = obstructionSideCode(JsonField.of(obstructionSideCode))
+        fun obstructionSideCode(obstructionSideCode: String) =
+            obstructionSideCode(JsonField.of(obstructionSideCode))
 
         /**
          * Sets [Builder.obstructionSideCode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.obstructionSideCode] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.obstructionSideCode] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun obstructionSideCode(obstructionSideCode: JsonField<String>) =
-            apply {
-                this.obstructionSideCode = obstructionSideCode
-            }
+        fun obstructionSideCode(obstructionSideCode: JsonField<String>) = apply {
+            this.obstructionSideCode = obstructionSideCode
+        }
 
-        /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         */
         fun origin(origin: String) = origin(JsonField.of(origin))
 
         /**
          * Sets [Builder.origin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun origin(origin: JsonField<String>) =
-            apply {
-                this.origin = origin
-            }
+        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
 
-        /** The originating source network on which this record was created, auto-populated by the system. */
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         */
         fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
         /**
          * Sets [Builder.origNetwork] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun origNetwork(origNetwork: JsonField<String>) =
-            apply {
-                this.origNetwork = origNetwork
-            }
+        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
 
-        /** The source data library from which this record was received. This could be a remote or tactical UDL or another data library. If null, the record should be assumed to have originated from the primary Enterprise UDL. */
+        /**
+         * The source data library from which this record was received. This could be a remote or
+         * tactical UDL or another data library. If null, the record should be assumed to have
+         * originated from the primary Enterprise UDL.
+         */
         fun sourceDl(sourceDl: String) = sourceDl(JsonField.of(sourceDl))
 
         /**
          * Sets [Builder.sourceDl] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.sourceDl] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.sourceDl] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun sourceDl(sourceDl: JsonField<String>) =
-            apply {
-                this.sourceDl = sourceDl
-            }
+        fun sourceDl(sourceDl: JsonField<String>) = apply { this.sourceDl = sourceDl }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) =
-            apply {
-                additionalProperties.put(key, value)
-            }
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
 
-        fun removeAdditionalProperty(key: String) =
-            apply {
-                additionalProperties.remove(key)
-            }
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) =
-            apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
 
         /**
          * Returns an immutable instance of [SurfaceObstructionListResponse].
@@ -794,7 +847,6 @@ class SurfaceObstructionListResponse private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -806,66 +858,57 @@ class SurfaceObstructionListResponse private constructor(
          */
         fun build(): SurfaceObstructionListResponse =
             SurfaceObstructionListResponse(
-              checkRequired(
-                "classificationMarking", classificationMarking
-              ),
-              checkRequired(
-                "dataMode", dataMode
-              ),
-              checkRequired(
-                "idSurface", idSurface
-              ),
-              checkRequired(
-                "source", source
-              ),
-              id,
-              (advisoryRequired ?: JsonMissing.of()).map { it.toImmutable() },
-              (approvalRequired ?: JsonMissing.of()).map { it.toImmutable() },
-              createdAt,
-              createdBy,
-              distanceFromCenterLine,
-              distanceFromEdge,
-              distanceFromThreshold,
-              idNavigationalObstruction,
-              obstructionDesc,
-              obstructionHeight,
-              obstructionSideCode,
-              origin,
-              origNetwork,
-              sourceDl,
-              additionalProperties.toMutableMap(),
+                checkRequired("classificationMarking", classificationMarking),
+                checkRequired("dataMode", dataMode),
+                checkRequired("idSurface", idSurface),
+                checkRequired("source", source),
+                id,
+                (advisoryRequired ?: JsonMissing.of()).map { it.toImmutable() },
+                (approvalRequired ?: JsonMissing.of()).map { it.toImmutable() },
+                createdAt,
+                createdBy,
+                distanceFromCenterLine,
+                distanceFromEdge,
+                distanceFromThreshold,
+                idNavigationalObstruction,
+                obstructionDesc,
+                obstructionHeight,
+                obstructionSideCode,
+                origin,
+                origNetwork,
+                sourceDl,
+                additionalProperties.toMutableMap(),
             )
     }
 
     private var validated: Boolean = false
 
-    fun validate(): SurfaceObstructionListResponse =
-        apply {
-            if (validated) {
-              return@apply
-            }
-
-            classificationMarking()
-            dataMode().validate()
-            idSurface()
-            source()
-            id()
-            advisoryRequired()
-            approvalRequired()
-            createdAt()
-            createdBy()
-            distanceFromCenterLine()
-            distanceFromEdge()
-            distanceFromThreshold()
-            idNavigationalObstruction()
-            obstructionDesc()
-            obstructionHeight()
-            obstructionSideCode()
-            origin()
-            origNetwork()
-            sourceDl()
-            validated = true
+    fun validate(): SurfaceObstructionListResponse = apply {
+        if (validated) {
+            return@apply
         }
+
+        classificationMarking()
+        dataMode().validate()
+        idSurface()
+        source()
+        id()
+        advisoryRequired()
+        approvalRequired()
+        createdAt()
+        createdBy()
+        distanceFromCenterLine()
+        distanceFromEdge()
+        distanceFromThreshold()
+        idNavigationalObstruction()
+        obstructionDesc()
+        obstructionHeight()
+        obstructionSideCode()
+        origin()
+        origNetwork()
+        sourceDl()
+        validated = true
+    }
 
     fun isValid(): Boolean =
         try {
@@ -881,23 +924,39 @@ class SurfaceObstructionListResponse private constructor(
      * Used for best match union deserialization.
      */
     @JvmSynthetic
-    internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (idSurface.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (advisoryRequired.asKnown().getOrNull()?.size ?: 0) + (approvalRequired.asKnown().getOrNull()?.size ?: 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (distanceFromCenterLine.asKnown().isPresent) 1 else 0) + (if (distanceFromEdge.asKnown().isPresent) 1 else 0) + (if (distanceFromThreshold.asKnown().isPresent) 1 else 0) + (if (idNavigationalObstruction.asKnown().isPresent) 1 else 0) + (if (obstructionDesc.asKnown().isPresent) 1 else 0) + (if (obstructionHeight.asKnown().isPresent) 1 else 0) + (if (obstructionSideCode.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (sourceDl.asKnown().isPresent) 1 else 0)
+    internal fun validity(): Int =
+        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (idSurface.asKnown().isPresent) 1 else 0) +
+            (if (source.asKnown().isPresent) 1 else 0) +
+            (if (id.asKnown().isPresent) 1 else 0) +
+            (advisoryRequired.asKnown().getOrNull()?.size ?: 0) +
+            (approvalRequired.asKnown().getOrNull()?.size ?: 0) +
+            (if (createdAt.asKnown().isPresent) 1 else 0) +
+            (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (distanceFromCenterLine.asKnown().isPresent) 1 else 0) +
+            (if (distanceFromEdge.asKnown().isPresent) 1 else 0) +
+            (if (distanceFromThreshold.asKnown().isPresent) 1 else 0) +
+            (if (idNavigationalObstruction.asKnown().isPresent) 1 else 0) +
+            (if (obstructionDesc.asKnown().isPresent) 1 else 0) +
+            (if (obstructionHeight.asKnown().isPresent) 1 else 0) +
+            (if (obstructionSideCode.asKnown().isPresent) 1 else 0) +
+            (if (origin.asKnown().isPresent) 1 else 0) +
+            (if (origNetwork.asKnown().isPresent) 1 else 0) +
+            (if (sourceDl.asKnown().isPresent) 1 else 0)
 
     /** Indicator of whether the data is REAL, TEST, SIMULATED, or EXERCISE data. */
-    class DataMode @JsonCreator private constructor(
-        private val value: JsonField<String>,
-
-    ) : Enum {
+    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't match any known
-         * member, and you want to know that value. For example, if the SDK is on an older version than the
-         * API, then the API may respond with new members that the SDK is unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue
-        fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -924,11 +983,9 @@ class SurfaceObstructionListResponse private constructor(
          * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [DataMode] can contain an unknown value in a couple of cases:
-         *
-         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-         *   an older version than the API, then the API may respond with new members that the SDK is unaware
-         *   of.
-         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -941,11 +998,11 @@ class SurfaceObstructionListResponse private constructor(
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-         * class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want to throw
-         * for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -959,10 +1016,11 @@ class SurfaceObstructionListResponse private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-         * for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
          */
         fun known(): Known =
             when (this) {
@@ -976,25 +1034,27 @@ class SurfaceObstructionListResponse private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging and generally
-         * doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-         * primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
          */
-        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
 
         private var validated: Boolean = false
 
-        fun validate(): DataMode =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                known()
-                validated = true
+        fun validate(): DataMode = apply {
+            if (validated) {
+                return@apply
             }
+
+            known()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -1005,19 +1065,19 @@ class SurfaceObstructionListResponse private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic
-        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1026,18 +1086,60 @@ class SurfaceObstructionListResponse private constructor(
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is SurfaceObstructionListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSurface == other.idSurface && source == other.source && id == other.id && advisoryRequired == other.advisoryRequired && approvalRequired == other.approvalRequired && createdAt == other.createdAt && createdBy == other.createdBy && distanceFromCenterLine == other.distanceFromCenterLine && distanceFromEdge == other.distanceFromEdge && distanceFromThreshold == other.distanceFromThreshold && idNavigationalObstruction == other.idNavigationalObstruction && obstructionDesc == other.obstructionDesc && obstructionHeight == other.obstructionHeight && obstructionSideCode == other.obstructionSideCode && origin == other.origin && origNetwork == other.origNetwork && sourceDl == other.sourceDl && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SurfaceObstructionListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idSurface == other.idSurface &&
+            source == other.source &&
+            id == other.id &&
+            advisoryRequired == other.advisoryRequired &&
+            approvalRequired == other.approvalRequired &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            distanceFromCenterLine == other.distanceFromCenterLine &&
+            distanceFromEdge == other.distanceFromEdge &&
+            distanceFromThreshold == other.distanceFromThreshold &&
+            idNavigationalObstruction == other.idNavigationalObstruction &&
+            obstructionDesc == other.obstructionDesc &&
+            obstructionHeight == other.obstructionHeight &&
+            obstructionSideCode == other.obstructionSideCode &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            sourceDl == other.sourceDl &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSurface, source, id, advisoryRequired, approvalRequired, createdAt, createdBy, distanceFromCenterLine, distanceFromEdge, distanceFromThreshold, idNavigationalObstruction, obstructionDesc, obstructionHeight, obstructionSideCode, origin, origNetwork, sourceDl, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idSurface,
+            source,
+            id,
+            advisoryRequired,
+            approvalRequired,
+            createdAt,
+            createdBy,
+            distanceFromCenterLine,
+            distanceFromEdge,
+            distanceFromThreshold,
+            idNavigationalObstruction,
+            obstructionDesc,
+            obstructionHeight,
+            obstructionSideCode,
+            origin,
+            origNetwork,
+            sourceDl,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() = "SurfaceObstructionListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, idSurface=$idSurface, source=$source, id=$id, advisoryRequired=$advisoryRequired, approvalRequired=$approvalRequired, createdAt=$createdAt, createdBy=$createdBy, distanceFromCenterLine=$distanceFromCenterLine, distanceFromEdge=$distanceFromEdge, distanceFromThreshold=$distanceFromThreshold, idNavigationalObstruction=$idNavigationalObstruction, obstructionDesc=$obstructionDesc, obstructionHeight=$obstructionHeight, obstructionSideCode=$obstructionSideCode, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl, additionalProperties=$additionalProperties}"
+    override fun toString() =
+        "SurfaceObstructionListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, idSurface=$idSurface, source=$source, id=$id, advisoryRequired=$advisoryRequired, approvalRequired=$approvalRequired, createdAt=$createdAt, createdBy=$createdBy, distanceFromCenterLine=$distanceFromCenterLine, distanceFromEdge=$distanceFromEdge, distanceFromThreshold=$distanceFromThreshold, idNavigationalObstruction=$idNavigationalObstruction, obstructionDesc=$obstructionDesc, obstructionHeight=$obstructionHeight, obstructionSideCode=$obstructionSideCode, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl, additionalProperties=$additionalProperties}"
 }

@@ -1036,7 +1036,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1176,7 +1176,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is OpsCap && value == other.value /* spotless:on */
+            return other is OpsCap && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1324,7 +1324,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is State && value == other.value /* spotless:on */
+            return other is State && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1464,7 +1464,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SysCap && value == other.value /* spotless:on */
+            return other is SysCap && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1477,12 +1477,53 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is StatusFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idEntity == other.idEntity && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && declassificationDate == other.declassificationDate && declassificationString == other.declassificationString && derivedFrom == other.derivedFrom && notes == other.notes && opsCap == other.opsCap && origin == other.origin && origNetwork == other.origNetwork && state == other.state && subStatusCollection == other.subStatusCollection && sysCap == other.sysCap && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is StatusFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idEntity == other.idEntity &&
+            source == other.source &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            declassificationDate == other.declassificationDate &&
+            declassificationString == other.declassificationString &&
+            derivedFrom == other.derivedFrom &&
+            notes == other.notes &&
+            opsCap == other.opsCap &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            state == other.state &&
+            subStatusCollection == other.subStatusCollection &&
+            sysCap == other.sysCap &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idEntity, source, id, createdAt, createdBy, declassificationDate, declassificationString, derivedFrom, notes, opsCap, origin, origNetwork, state, subStatusCollection, sysCap, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idEntity,
+            source,
+            id,
+            createdAt,
+            createdBy,
+            declassificationDate,
+            declassificationString,
+            derivedFrom,
+            notes,
+            opsCap,
+            origin,
+            origNetwork,
+            state,
+            subStatusCollection,
+            sysCap,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

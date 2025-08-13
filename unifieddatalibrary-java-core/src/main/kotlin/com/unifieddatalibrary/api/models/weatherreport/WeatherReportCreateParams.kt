@@ -6774,12 +6774,187 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && lat == other.lat && lon == other.lon && obTime == other.obTime && reportType == other.reportType && source == other.source && id == other.id && actWeather == other.actWeather && agjson == other.agjson && alt == other.alt && andims == other.andims && area == other.area && asrid == other.asrid && atext == other.atext && atype == other.atype && barPress == other.barPress && ccEvent == other.ccEvent && cloudCover == other.cloudCover && cloudHght == other.cloudHght && contrailHghtLower == other.contrailHghtLower && contrailHghtUpper == other.contrailHghtUpper && createdAt == other.createdAt && createdBy == other.createdBy && dataLevel == other.dataLevel && dewPoint == other.dewPoint && difRad == other.difRad && dirDev == other.dirDev && enRouteWeather == other.enRouteWeather && externalId == other.externalId && externalLocationId == other.externalLocationId && forecastEndTime == other.forecastEndTime && forecastStartTime == other.forecastStartTime && geoPotentialAlt == other.geoPotentialAlt && hshear == other.hshear && icao == other.icao && icingLowerLimit == other.icingLowerLimit && icingUpperLimit == other.icingUpperLimit && idAirfield == other.idAirfield && idGroundImagery == other.idGroundImagery && idSensor == other.idSensor && idSite == other.idSite && indexRefraction == other.indexRefraction && origin == other.origin && origNetwork == other.origNetwork && origSensorId == other.origSensorId && precipRate == other.precipRate && qnh == other.qnh && radVel == other.radVel && radVelBeam1 == other.radVelBeam1 && radVelBeam2 == other.radVelBeam2 && radVelBeam3 == other.radVelBeam3 && radVelBeam4 == other.radVelBeam4 && radVelBeam5 == other.radVelBeam5 && rainHour == other.rainHour && rawMetar == other.rawMetar && rawTaf == other.rawTaf && refRad == other.refRad && relHumidity == other.relHumidity && senalt == other.senalt && senlat == other.senlat && senlon == other.senlon && soilMoisture == other.soilMoisture && soilTemp == other.soilTemp && solarRad == other.solarRad && srcIds == other.srcIds && srcTyps == other.srcTyps && surroundingWeather == other.surroundingWeather && temperature == other.temperature && visibility == other.visibility && vshear == other.vshear && weatherAmp == other.weatherAmp && weatherDesc == other.weatherDesc && weatherId == other.weatherId && weatherInt == other.weatherInt && windChill == other.windChill && windCov == other.windCov && windDir == other.windDir && windDirAvg == other.windDirAvg && windDirPeak == other.windDirPeak && windDirPeak10 == other.windDirPeak10 && windGust == other.windGust && windGust10 == other.windGust10 && windSpd == other.windSpd && windSpdAvg == other.windSpdAvg && windVar == other.windVar && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                lat == other.lat &&
+                lon == other.lon &&
+                obTime == other.obTime &&
+                reportType == other.reportType &&
+                source == other.source &&
+                id == other.id &&
+                actWeather == other.actWeather &&
+                agjson == other.agjson &&
+                alt == other.alt &&
+                andims == other.andims &&
+                area == other.area &&
+                asrid == other.asrid &&
+                atext == other.atext &&
+                atype == other.atype &&
+                barPress == other.barPress &&
+                ccEvent == other.ccEvent &&
+                cloudCover == other.cloudCover &&
+                cloudHght == other.cloudHght &&
+                contrailHghtLower == other.contrailHghtLower &&
+                contrailHghtUpper == other.contrailHghtUpper &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                dataLevel == other.dataLevel &&
+                dewPoint == other.dewPoint &&
+                difRad == other.difRad &&
+                dirDev == other.dirDev &&
+                enRouteWeather == other.enRouteWeather &&
+                externalId == other.externalId &&
+                externalLocationId == other.externalLocationId &&
+                forecastEndTime == other.forecastEndTime &&
+                forecastStartTime == other.forecastStartTime &&
+                geoPotentialAlt == other.geoPotentialAlt &&
+                hshear == other.hshear &&
+                icao == other.icao &&
+                icingLowerLimit == other.icingLowerLimit &&
+                icingUpperLimit == other.icingUpperLimit &&
+                idAirfield == other.idAirfield &&
+                idGroundImagery == other.idGroundImagery &&
+                idSensor == other.idSensor &&
+                idSite == other.idSite &&
+                indexRefraction == other.indexRefraction &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origSensorId == other.origSensorId &&
+                precipRate == other.precipRate &&
+                qnh == other.qnh &&
+                radVel == other.radVel &&
+                radVelBeam1 == other.radVelBeam1 &&
+                radVelBeam2 == other.radVelBeam2 &&
+                radVelBeam3 == other.radVelBeam3 &&
+                radVelBeam4 == other.radVelBeam4 &&
+                radVelBeam5 == other.radVelBeam5 &&
+                rainHour == other.rainHour &&
+                rawMetar == other.rawMetar &&
+                rawTaf == other.rawTaf &&
+                refRad == other.refRad &&
+                relHumidity == other.relHumidity &&
+                senalt == other.senalt &&
+                senlat == other.senlat &&
+                senlon == other.senlon &&
+                soilMoisture == other.soilMoisture &&
+                soilTemp == other.soilTemp &&
+                solarRad == other.solarRad &&
+                srcIds == other.srcIds &&
+                srcTyps == other.srcTyps &&
+                surroundingWeather == other.surroundingWeather &&
+                temperature == other.temperature &&
+                visibility == other.visibility &&
+                vshear == other.vshear &&
+                weatherAmp == other.weatherAmp &&
+                weatherDesc == other.weatherDesc &&
+                weatherId == other.weatherId &&
+                weatherInt == other.weatherInt &&
+                windChill == other.windChill &&
+                windCov == other.windCov &&
+                windDir == other.windDir &&
+                windDirAvg == other.windDirAvg &&
+                windDirPeak == other.windDirPeak &&
+                windDirPeak10 == other.windDirPeak10 &&
+                windGust == other.windGust &&
+                windGust10 == other.windGust10 &&
+                windSpd == other.windSpd &&
+                windSpdAvg == other.windSpdAvg &&
+                windVar == other.windVar &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, lat, lon, obTime, reportType, source, id, actWeather, agjson, alt, andims, area, asrid, atext, atype, barPress, ccEvent, cloudCover, cloudHght, contrailHghtLower, contrailHghtUpper, createdAt, createdBy, dataLevel, dewPoint, difRad, dirDev, enRouteWeather, externalId, externalLocationId, forecastEndTime, forecastStartTime, geoPotentialAlt, hshear, icao, icingLowerLimit, icingUpperLimit, idAirfield, idGroundImagery, idSensor, idSite, indexRefraction, origin, origNetwork, origSensorId, precipRate, qnh, radVel, radVelBeam1, radVelBeam2, radVelBeam3, radVelBeam4, radVelBeam5, rainHour, rawMetar, rawTaf, refRad, relHumidity, senalt, senlat, senlon, soilMoisture, soilTemp, solarRad, srcIds, srcTyps, surroundingWeather, temperature, visibility, vshear, weatherAmp, weatherDesc, weatherId, weatherInt, windChill, windCov, windDir, windDirAvg, windDirPeak, windDirPeak10, windGust, windGust10, windSpd, windSpdAvg, windVar, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                lat,
+                lon,
+                obTime,
+                reportType,
+                source,
+                id,
+                actWeather,
+                agjson,
+                alt,
+                andims,
+                area,
+                asrid,
+                atext,
+                atype,
+                barPress,
+                ccEvent,
+                cloudCover,
+                cloudHght,
+                contrailHghtLower,
+                contrailHghtUpper,
+                createdAt,
+                createdBy,
+                dataLevel,
+                dewPoint,
+                difRad,
+                dirDev,
+                enRouteWeather,
+                externalId,
+                externalLocationId,
+                forecastEndTime,
+                forecastStartTime,
+                geoPotentialAlt,
+                hshear,
+                icao,
+                icingLowerLimit,
+                icingUpperLimit,
+                idAirfield,
+                idGroundImagery,
+                idSensor,
+                idSite,
+                indexRefraction,
+                origin,
+                origNetwork,
+                origSensorId,
+                precipRate,
+                qnh,
+                radVel,
+                radVelBeam1,
+                radVelBeam2,
+                radVelBeam3,
+                radVelBeam4,
+                radVelBeam5,
+                rainHour,
+                rawMetar,
+                rawTaf,
+                refRad,
+                relHumidity,
+                senalt,
+                senlat,
+                senlon,
+                soilMoisture,
+                soilTemp,
+                solarRad,
+                srcIds,
+                srcTyps,
+                surroundingWeather,
+                temperature,
+                visibility,
+                vshear,
+                weatherAmp,
+                weatherDesc,
+                weatherId,
+                weatherInt,
+                windChill,
+                windCov,
+                windDir,
+                windDirAvg,
+                windDirPeak,
+                windDirPeak10,
+                windGust,
+                windGust10,
+                windSpd,
+                windSpdAvg,
+                windVar,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -6932,7 +7107,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -6945,10 +7120,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is WeatherReportCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is WeatherReportCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "WeatherReportCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

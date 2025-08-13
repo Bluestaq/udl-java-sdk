@@ -373,10 +373,34 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HistoryAodrParams && columns == other.columns && createdAt == other.createdAt && firstResult == other.firstResult && linkStartTime == other.linkStartTime && linkStopTime == other.linkStopTime && maxResults == other.maxResults && notification == other.notification && outputDelimiter == other.outputDelimiter && outputFormat == other.outputFormat && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HistoryAodrParams &&
+            columns == other.columns &&
+            createdAt == other.createdAt &&
+            firstResult == other.firstResult &&
+            linkStartTime == other.linkStartTime &&
+            linkStopTime == other.linkStopTime &&
+            maxResults == other.maxResults &&
+            notification == other.notification &&
+            outputDelimiter == other.outputDelimiter &&
+            outputFormat == other.outputFormat &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, createdAt, firstResult, linkStartTime, linkStopTime, maxResults, notification, outputDelimiter, outputFormat, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            columns,
+            createdAt,
+            firstResult,
+            linkStartTime,
+            linkStopTime,
+            maxResults,
+            notification,
+            outputDelimiter,
+            outputFormat,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "HistoryAodrParams{columns=$columns, createdAt=$createdAt, firstResult=$firstResult, linkStartTime=$linkStartTime, linkStopTime=$linkStopTime, maxResults=$maxResults, notification=$notification, outputDelimiter=$outputDelimiter, outputFormat=$outputFormat, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

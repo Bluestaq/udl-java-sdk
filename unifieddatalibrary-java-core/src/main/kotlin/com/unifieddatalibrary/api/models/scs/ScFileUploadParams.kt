@@ -324,10 +324,34 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ScFileUploadParams && classificationMarking == other.classificationMarking && fileName == other.fileName && path == other.path && deleteAfter == other.deleteAfter && description == other.description && overwrite == other.overwrite && sendNotification == other.sendNotification && tags == other.tags && fileContent == other.fileContent && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is ScFileUploadParams &&
+            classificationMarking == other.classificationMarking &&
+            fileName == other.fileName &&
+            path == other.path &&
+            deleteAfter == other.deleteAfter &&
+            description == other.description &&
+            overwrite == other.overwrite &&
+            sendNotification == other.sendNotification &&
+            tags == other.tags &&
+            fileContent == other.fileContent &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(classificationMarking, fileName, path, deleteAfter, description, overwrite, sendNotification, tags, fileContent, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            classificationMarking,
+            fileName,
+            path,
+            deleteAfter,
+            description,
+            overwrite,
+            sendNotification,
+            tags,
+            fileContent,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "ScFileUploadParams{classificationMarking=$classificationMarking, fileName=$fileName, path=$path, deleteAfter=$deleteAfter, description=$description, overwrite=$overwrite, sendNotification=$sendNotification, tags=$tags, fileContent=$fileContent, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

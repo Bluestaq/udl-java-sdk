@@ -4059,7 +4059,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4072,12 +4072,206 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SeradataSpacecraftDetailListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && id == other.id && additionalMissionsGroups == other.additionalMissionsGroups && altitude == other.altitude && annualInsuredDepreciationFactor == other.annualInsuredDepreciationFactor && annualInsuredDepreciationFactorEstimated == other.annualInsuredDepreciationFactorEstimated && apogee == other.apogee && busId == other.busId && capabilityLost == other.capabilityLost && capacityLost == other.capacityLost && catalogNumber == other.catalogNumber && collisionRiskCm == other.collisionRiskCm && collisionRiskMm == other.collisionRiskMm && combinedCostEstimated == other.combinedCostEstimated && combinedNewCost == other.combinedNewCost && commercialLaunch == other.commercialLaunch && constellation == other.constellation && costEstimated == other.costEstimated && createdAt == other.createdAt && createdBy == other.createdBy && cubesatDispenserType == other.cubesatDispenserType && currentAge == other.currentAge && dateOfObservation == other.dateOfObservation && description == other.description && designLife == other.designLife && dryMass == other.dryMass && expectedLife == other.expectedLife && geoPosition == other.geoPosition && idOnOrbit == other.idOnOrbit && inclination == other.inclination && insuranceLossesTotal == other.insuranceLossesTotal && insuranceNotes == other.insuranceNotes && insurancePremiumAtLaunch == other.insurancePremiumAtLaunch && insurancePremiumAtLaunchEstimated == other.insurancePremiumAtLaunchEstimated && insuredAtLaunch == other.insuredAtLaunch && insuredValueAtLaunch == other.insuredValueAtLaunch && insuredValueLaunchEstimated == other.insuredValueLaunchEstimated && intlNumber == other.intlNumber && lat == other.lat && launchArranger == other.launchArranger && launchArrangerCountry == other.launchArrangerCountry && launchCharacteristic == other.launchCharacteristic && launchCost == other.launchCost && launchCostEstimated == other.launchCostEstimated && launchCountry == other.launchCountry && launchDate == other.launchDate && launchDateRemarks == other.launchDateRemarks && launchId == other.launchId && launchMass == other.launchMass && launchNotes == other.launchNotes && launchNumber == other.launchNumber && launchProvider == other.launchProvider && launchProviderCountry == other.launchProviderCountry && launchProviderFlightNumber == other.launchProviderFlightNumber && launchSiteId == other.launchSiteId && launchSiteName == other.launchSiteName && launchType == other.launchType && launchVehicleId == other.launchVehicleId && leased == other.leased && lifeLost == other.lifeLost && lon == other.lon && massCategory == other.massCategory && nameAtLaunch == other.nameAtLaunch && newCost == other.newCost && notes == other.notes && numHumans == other.numHumans && operator == other.operator && operatorCountry == other.operatorCountry && orbitCategory == other.orbitCategory && orbitSubCategory == other.orbitSubCategory && orderDate == other.orderDate && origin == other.origin && origNetwork == other.origNetwork && owner == other.owner && ownerCountry == other.ownerCountry && perigee == other.perigee && period == other.period && primaryMissionGroup == other.primaryMissionGroup && primeManufacturerOrgId == other.primeManufacturerOrgId && programName == other.programName && quantity == other.quantity && reusableFlights == other.reusableFlights && reusedHullName == other.reusedHullName && sector == other.sector && serialNumber == other.serialNumber && stabilizer == other.stabilizer && status == other.status && totalClaims == other.totalClaims && totalFatalities == other.totalFatalities && totalInjuries == other.totalInjuries && totalPayloadPower == other.totalPayloadPower && youtubeLaunchLink == other.youtubeLaunchLink && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SeradataSpacecraftDetailListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            name == other.name &&
+            source == other.source &&
+            id == other.id &&
+            additionalMissionsGroups == other.additionalMissionsGroups &&
+            altitude == other.altitude &&
+            annualInsuredDepreciationFactor == other.annualInsuredDepreciationFactor &&
+            annualInsuredDepreciationFactorEstimated ==
+                other.annualInsuredDepreciationFactorEstimated &&
+            apogee == other.apogee &&
+            busId == other.busId &&
+            capabilityLost == other.capabilityLost &&
+            capacityLost == other.capacityLost &&
+            catalogNumber == other.catalogNumber &&
+            collisionRiskCm == other.collisionRiskCm &&
+            collisionRiskMm == other.collisionRiskMm &&
+            combinedCostEstimated == other.combinedCostEstimated &&
+            combinedNewCost == other.combinedNewCost &&
+            commercialLaunch == other.commercialLaunch &&
+            constellation == other.constellation &&
+            costEstimated == other.costEstimated &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            cubesatDispenserType == other.cubesatDispenserType &&
+            currentAge == other.currentAge &&
+            dateOfObservation == other.dateOfObservation &&
+            description == other.description &&
+            designLife == other.designLife &&
+            dryMass == other.dryMass &&
+            expectedLife == other.expectedLife &&
+            geoPosition == other.geoPosition &&
+            idOnOrbit == other.idOnOrbit &&
+            inclination == other.inclination &&
+            insuranceLossesTotal == other.insuranceLossesTotal &&
+            insuranceNotes == other.insuranceNotes &&
+            insurancePremiumAtLaunch == other.insurancePremiumAtLaunch &&
+            insurancePremiumAtLaunchEstimated == other.insurancePremiumAtLaunchEstimated &&
+            insuredAtLaunch == other.insuredAtLaunch &&
+            insuredValueAtLaunch == other.insuredValueAtLaunch &&
+            insuredValueLaunchEstimated == other.insuredValueLaunchEstimated &&
+            intlNumber == other.intlNumber &&
+            lat == other.lat &&
+            launchArranger == other.launchArranger &&
+            launchArrangerCountry == other.launchArrangerCountry &&
+            launchCharacteristic == other.launchCharacteristic &&
+            launchCost == other.launchCost &&
+            launchCostEstimated == other.launchCostEstimated &&
+            launchCountry == other.launchCountry &&
+            launchDate == other.launchDate &&
+            launchDateRemarks == other.launchDateRemarks &&
+            launchId == other.launchId &&
+            launchMass == other.launchMass &&
+            launchNotes == other.launchNotes &&
+            launchNumber == other.launchNumber &&
+            launchProvider == other.launchProvider &&
+            launchProviderCountry == other.launchProviderCountry &&
+            launchProviderFlightNumber == other.launchProviderFlightNumber &&
+            launchSiteId == other.launchSiteId &&
+            launchSiteName == other.launchSiteName &&
+            launchType == other.launchType &&
+            launchVehicleId == other.launchVehicleId &&
+            leased == other.leased &&
+            lifeLost == other.lifeLost &&
+            lon == other.lon &&
+            massCategory == other.massCategory &&
+            nameAtLaunch == other.nameAtLaunch &&
+            newCost == other.newCost &&
+            notes == other.notes &&
+            numHumans == other.numHumans &&
+            operator == other.operator &&
+            operatorCountry == other.operatorCountry &&
+            orbitCategory == other.orbitCategory &&
+            orbitSubCategory == other.orbitSubCategory &&
+            orderDate == other.orderDate &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            owner == other.owner &&
+            ownerCountry == other.ownerCountry &&
+            perigee == other.perigee &&
+            period == other.period &&
+            primaryMissionGroup == other.primaryMissionGroup &&
+            primeManufacturerOrgId == other.primeManufacturerOrgId &&
+            programName == other.programName &&
+            quantity == other.quantity &&
+            reusableFlights == other.reusableFlights &&
+            reusedHullName == other.reusedHullName &&
+            sector == other.sector &&
+            serialNumber == other.serialNumber &&
+            stabilizer == other.stabilizer &&
+            status == other.status &&
+            totalClaims == other.totalClaims &&
+            totalFatalities == other.totalFatalities &&
+            totalInjuries == other.totalInjuries &&
+            totalPayloadPower == other.totalPayloadPower &&
+            youtubeLaunchLink == other.youtubeLaunchLink &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, id, additionalMissionsGroups, altitude, annualInsuredDepreciationFactor, annualInsuredDepreciationFactorEstimated, apogee, busId, capabilityLost, capacityLost, catalogNumber, collisionRiskCm, collisionRiskMm, combinedCostEstimated, combinedNewCost, commercialLaunch, constellation, costEstimated, createdAt, createdBy, cubesatDispenserType, currentAge, dateOfObservation, description, designLife, dryMass, expectedLife, geoPosition, idOnOrbit, inclination, insuranceLossesTotal, insuranceNotes, insurancePremiumAtLaunch, insurancePremiumAtLaunchEstimated, insuredAtLaunch, insuredValueAtLaunch, insuredValueLaunchEstimated, intlNumber, lat, launchArranger, launchArrangerCountry, launchCharacteristic, launchCost, launchCostEstimated, launchCountry, launchDate, launchDateRemarks, launchId, launchMass, launchNotes, launchNumber, launchProvider, launchProviderCountry, launchProviderFlightNumber, launchSiteId, launchSiteName, launchType, launchVehicleId, leased, lifeLost, lon, massCategory, nameAtLaunch, newCost, notes, numHumans, operator, operatorCountry, orbitCategory, orbitSubCategory, orderDate, origin, origNetwork, owner, ownerCountry, perigee, period, primaryMissionGroup, primeManufacturerOrgId, programName, quantity, reusableFlights, reusedHullName, sector, serialNumber, stabilizer, status, totalClaims, totalFatalities, totalInjuries, totalPayloadPower, youtubeLaunchLink, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            name,
+            source,
+            id,
+            additionalMissionsGroups,
+            altitude,
+            annualInsuredDepreciationFactor,
+            annualInsuredDepreciationFactorEstimated,
+            apogee,
+            busId,
+            capabilityLost,
+            capacityLost,
+            catalogNumber,
+            collisionRiskCm,
+            collisionRiskMm,
+            combinedCostEstimated,
+            combinedNewCost,
+            commercialLaunch,
+            constellation,
+            costEstimated,
+            createdAt,
+            createdBy,
+            cubesatDispenserType,
+            currentAge,
+            dateOfObservation,
+            description,
+            designLife,
+            dryMass,
+            expectedLife,
+            geoPosition,
+            idOnOrbit,
+            inclination,
+            insuranceLossesTotal,
+            insuranceNotes,
+            insurancePremiumAtLaunch,
+            insurancePremiumAtLaunchEstimated,
+            insuredAtLaunch,
+            insuredValueAtLaunch,
+            insuredValueLaunchEstimated,
+            intlNumber,
+            lat,
+            launchArranger,
+            launchArrangerCountry,
+            launchCharacteristic,
+            launchCost,
+            launchCostEstimated,
+            launchCountry,
+            launchDate,
+            launchDateRemarks,
+            launchId,
+            launchMass,
+            launchNotes,
+            launchNumber,
+            launchProvider,
+            launchProviderCountry,
+            launchProviderFlightNumber,
+            launchSiteId,
+            launchSiteName,
+            launchType,
+            launchVehicleId,
+            leased,
+            lifeLost,
+            lon,
+            massCategory,
+            nameAtLaunch,
+            newCost,
+            notes,
+            numHumans,
+            operator,
+            operatorCountry,
+            orbitCategory,
+            orbitSubCategory,
+            orderDate,
+            origin,
+            origNetwork,
+            owner,
+            ownerCountry,
+            perigee,
+            period,
+            primaryMissionGroup,
+            primeManufacturerOrgId,
+            programName,
+            quantity,
+            reusableFlights,
+            reusedHullName,
+            sector,
+            serialNumber,
+            stabilizer,
+            status,
+            totalClaims,
+            totalFatalities,
+            totalInjuries,
+            totalPayloadPower,
+            youtubeLaunchLink,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

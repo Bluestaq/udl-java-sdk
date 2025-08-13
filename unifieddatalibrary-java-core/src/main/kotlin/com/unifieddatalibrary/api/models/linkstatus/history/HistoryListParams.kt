@@ -307,10 +307,28 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HistoryListParams && columns == other.columns && createdAt == other.createdAt && firstResult == other.firstResult && linkStartTime == other.linkStartTime && linkStopTime == other.linkStopTime && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HistoryListParams &&
+            columns == other.columns &&
+            createdAt == other.createdAt &&
+            firstResult == other.firstResult &&
+            linkStartTime == other.linkStartTime &&
+            linkStopTime == other.linkStopTime &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, createdAt, firstResult, linkStartTime, linkStopTime, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            columns,
+            createdAt,
+            firstResult,
+            linkStartTime,
+            linkStopTime,
+            maxResults,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "HistoryListParams{columns=$columns, createdAt=$createdAt, firstResult=$firstResult, linkStartTime=$linkStartTime, linkStopTime=$linkStopTime, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

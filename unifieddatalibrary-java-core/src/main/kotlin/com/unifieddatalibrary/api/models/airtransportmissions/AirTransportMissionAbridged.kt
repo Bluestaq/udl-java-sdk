@@ -2106,7 +2106,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2804,12 +2804,45 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is HazMat && applicableNotes == other.applicableNotes && cgc == other.cgc && cgn == other.cgn && classDiv == other.classDiv && extHazMatId == other.extHazMatId && itemName == other.itemName && netExpWt == other.netExpWt && offIcao == other.offIcao && offItin == other.offItin && onIcao == other.onIcao && onItin == other.onItin && pieces == other.pieces && planned == other.planned && unNum == other.unNum && weight == other.weight && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is HazMat &&
+                applicableNotes == other.applicableNotes &&
+                cgc == other.cgc &&
+                cgn == other.cgn &&
+                classDiv == other.classDiv &&
+                extHazMatId == other.extHazMatId &&
+                itemName == other.itemName &&
+                netExpWt == other.netExpWt &&
+                offIcao == other.offIcao &&
+                offItin == other.offItin &&
+                onIcao == other.onIcao &&
+                onItin == other.onItin &&
+                pieces == other.pieces &&
+                planned == other.planned &&
+                unNum == other.unNum &&
+                weight == other.weight &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(applicableNotes, cgc, cgn, classDiv, extHazMatId, itemName, netExpWt, offIcao, offItin, onIcao, onItin, pieces, planned, unNum, weight, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                applicableNotes,
+                cgc,
+                cgn,
+                classDiv,
+                extHazMatId,
+                itemName,
+                netExpWt,
+                offIcao,
+                offItin,
+                onIcao,
+                onItin,
+                pieces,
+                planned,
+                unNum,
+                weight,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3139,12 +3172,19 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Remark && date == other.date && gdssRemarkId == other.gdssRemarkId && itineraryNum == other.itineraryNum && text == other.text && type == other.type && user == other.user && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Remark &&
+                date == other.date &&
+                gdssRemarkId == other.gdssRemarkId &&
+                itineraryNum == other.itineraryNum &&
+                text == other.text &&
+                type == other.type &&
+                user == other.user &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(date, gdssRemarkId, itineraryNum, text, type, user, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(date, gdssRemarkId, itineraryNum, text, type, user, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3949,12 +3989,51 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Requirement && bulkWeight == other.bulkWeight && ead == other.ead && gdssReqId == other.gdssReqId && lad == other.lad && numAmbulatory == other.numAmbulatory && numAttendant == other.numAttendant && numLitter == other.numLitter && numPax == other.numPax && offloadId == other.offloadId && offloadLoCode == other.offloadLoCode && onloadId == other.onloadId && onloadLoCode == other.onloadLoCode && oplan == other.oplan && outsizeWeight == other.outsizeWeight && oversizeWeight == other.oversizeWeight && projName == other.projName && transReqNum == other.transReqNum && uln == other.uln && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Requirement &&
+                bulkWeight == other.bulkWeight &&
+                ead == other.ead &&
+                gdssReqId == other.gdssReqId &&
+                lad == other.lad &&
+                numAmbulatory == other.numAmbulatory &&
+                numAttendant == other.numAttendant &&
+                numLitter == other.numLitter &&
+                numPax == other.numPax &&
+                offloadId == other.offloadId &&
+                offloadLoCode == other.offloadLoCode &&
+                onloadId == other.onloadId &&
+                onloadLoCode == other.onloadLoCode &&
+                oplan == other.oplan &&
+                outsizeWeight == other.outsizeWeight &&
+                oversizeWeight == other.oversizeWeight &&
+                projName == other.projName &&
+                transReqNum == other.transReqNum &&
+                uln == other.uln &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(bulkWeight, ead, gdssReqId, lad, numAmbulatory, numAttendant, numLitter, numPax, offloadId, offloadLoCode, onloadId, onloadLoCode, oplan, outsizeWeight, oversizeWeight, projName, transReqNum, uln, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                bulkWeight,
+                ead,
+                gdssReqId,
+                lad,
+                numAmbulatory,
+                numAttendant,
+                numLitter,
+                numPax,
+                offloadId,
+                offloadLoCode,
+                onloadId,
+                onloadLoCode,
+                oplan,
+                outsizeWeight,
+                oversizeWeight,
+                projName,
+                transReqNum,
+                uln,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3967,12 +4046,105 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AirTransportMissionAbridged && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && abp == other.abp && alias == other.alias && allocatedUnit == other.allocatedUnit && amcMissionId == other.amcMissionId && apacsId == other.apacsId && atoCallSign == other.atoCallSign && atoMissionId == other.atoMissionId && callSign == other.callSign && createdAt == other.createdAt && createdBy == other.createdBy && cw == other.cw && dipWorksheetName == other.dipWorksheetName && firstPickUp == other.firstPickUp && gdssMissionId == other.gdssMissionId && hazMat == other.hazMat && jcsPriority == other.jcsPriority && lastDropOff == other.lastDropOff && loadCategoryType == other.loadCategoryType && m1 == other.m1 && m2 == other.m2 && m3a == other.m3a && naf == other.naf && nextAmcMissionId == other.nextAmcMissionId && nextMissionId == other.nextMissionId && node == other.node && objective == other.objective && operation == other.operation && origin == other.origin && origMissionId == other.origMissionId && origNetwork == other.origNetwork && prevAmcMissionId == other.prevAmcMissionId && prevMissionId == other.prevMissionId && purpose == other.purpose && remarks == other.remarks && requirements == other.requirements && sourceDl == other.sourceDl && sourceSysDeviation == other.sourceSysDeviation && state == other.state && type == other.type && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is AirTransportMissionAbridged &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            id == other.id &&
+            abp == other.abp &&
+            alias == other.alias &&
+            allocatedUnit == other.allocatedUnit &&
+            amcMissionId == other.amcMissionId &&
+            apacsId == other.apacsId &&
+            atoCallSign == other.atoCallSign &&
+            atoMissionId == other.atoMissionId &&
+            callSign == other.callSign &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            cw == other.cw &&
+            dipWorksheetName == other.dipWorksheetName &&
+            firstPickUp == other.firstPickUp &&
+            gdssMissionId == other.gdssMissionId &&
+            hazMat == other.hazMat &&
+            jcsPriority == other.jcsPriority &&
+            lastDropOff == other.lastDropOff &&
+            loadCategoryType == other.loadCategoryType &&
+            m1 == other.m1 &&
+            m2 == other.m2 &&
+            m3a == other.m3a &&
+            naf == other.naf &&
+            nextAmcMissionId == other.nextAmcMissionId &&
+            nextMissionId == other.nextMissionId &&
+            node == other.node &&
+            objective == other.objective &&
+            operation == other.operation &&
+            origin == other.origin &&
+            origMissionId == other.origMissionId &&
+            origNetwork == other.origNetwork &&
+            prevAmcMissionId == other.prevAmcMissionId &&
+            prevMissionId == other.prevMissionId &&
+            purpose == other.purpose &&
+            remarks == other.remarks &&
+            requirements == other.requirements &&
+            sourceDl == other.sourceDl &&
+            sourceSysDeviation == other.sourceSysDeviation &&
+            state == other.state &&
+            type == other.type &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, id, abp, alias, allocatedUnit, amcMissionId, apacsId, atoCallSign, atoMissionId, callSign, createdAt, createdBy, cw, dipWorksheetName, firstPickUp, gdssMissionId, hazMat, jcsPriority, lastDropOff, loadCategoryType, m1, m2, m3a, naf, nextAmcMissionId, nextMissionId, node, objective, operation, origin, origMissionId, origNetwork, prevAmcMissionId, prevMissionId, purpose, remarks, requirements, sourceDl, sourceSysDeviation, state, type, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            id,
+            abp,
+            alias,
+            allocatedUnit,
+            amcMissionId,
+            apacsId,
+            atoCallSign,
+            atoMissionId,
+            callSign,
+            createdAt,
+            createdBy,
+            cw,
+            dipWorksheetName,
+            firstPickUp,
+            gdssMissionId,
+            hazMat,
+            jcsPriority,
+            lastDropOff,
+            loadCategoryType,
+            m1,
+            m2,
+            m3a,
+            naf,
+            nextAmcMissionId,
+            nextMissionId,
+            node,
+            objective,
+            operation,
+            origin,
+            origMissionId,
+            origNetwork,
+            prevAmcMissionId,
+            prevMissionId,
+            purpose,
+            remarks,
+            requirements,
+            sourceDl,
+            sourceSysDeviation,
+            state,
+            type,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

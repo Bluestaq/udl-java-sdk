@@ -220,10 +220,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LocationUpdateParams && id == other.id && locationIngest == other.locationIngest && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is LocationUpdateParams &&
+            id == other.id &&
+            locationIngest == other.locationIngest &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(id, locationIngest, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(id, locationIngest, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "LocationUpdateParams{id=$id, locationIngest=$locationIngest, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

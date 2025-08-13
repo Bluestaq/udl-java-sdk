@@ -13,15 +13,18 @@ import com.unifieddatalibrary.api.core.JsonMissing
 import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
-import com.unifieddatalibrary.api.models.manifold.ManifoldTupleResponse
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/** A manifold represents a set of possible/theoretical orbits for an object of interest based on a delta V and delta T. */
-class ManifoldTupleResponse private constructor(
+/**
+ * A manifold represents a set of possible/theoretical orbits for an object of interest based on a
+ * delta V and delta T.
+ */
+class ManifoldTupleResponse
+private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
     private val idObjectOfInterest: JsonField<String>,
@@ -38,162 +41,197 @@ class ManifoldTupleResponse private constructor(
     private val updatedBy: JsonField<String>,
     private val weight: JsonField<Double>,
     private val additionalProperties: MutableMap<String, JsonValue>,
-
 ) {
 
     @JsonCreator
     private constructor(
-        @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        classificationMarking: JsonField<String> = JsonMissing.of(),
         @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
-        @JsonProperty("idObjectOfInterest") @ExcludeMissing idObjectOfInterest: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("idObjectOfInterest")
+        @ExcludeMissing
+        idObjectOfInterest: JsonField<String> = JsonMissing.of(),
         @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
         @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
         @JsonProperty("deltaT") @ExcludeMissing deltaT: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("deltaV") @ExcludeMissing deltaV: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origNetwork") @ExcludeMissing origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origNetwork")
+        @ExcludeMissing
+        origNetwork: JsonField<String> = JsonMissing.of(),
         @JsonProperty("status") @ExcludeMissing status: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("updatedAt") @ExcludeMissing updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("updatedAt")
+        @ExcludeMissing
+        updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("updatedBy") @ExcludeMissing updatedBy: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("weight") @ExcludeMissing weight: JsonField<Double> = JsonMissing.of()
+        @JsonProperty("weight") @ExcludeMissing weight: JsonField<Double> = JsonMissing.of(),
     ) : this(
-      classificationMarking,
-      dataMode,
-      idObjectOfInterest,
-      source,
-      id,
-      createdAt,
-      createdBy,
-      deltaT,
-      deltaV,
-      origin,
-      origNetwork,
-      status,
-      updatedAt,
-      updatedBy,
-      weight,
-      mutableMapOf(),
+        classificationMarking,
+        dataMode,
+        idObjectOfInterest,
+        source,
+        id,
+        createdAt,
+        createdBy,
+        deltaT,
+        deltaV,
+        origin,
+        origNetwork,
+        status,
+        updatedAt,
+        updatedBy,
+        weight,
+        mutableMapOf(),
     )
 
     /**
      * Classification marking of the data in IC/CAPCO Portion-marked format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
     /**
      * ID of the parent object of interest.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun idObjectOfInterest(): String = idObjectOfInterest.getRequired("idObjectOfInterest")
 
     /**
      * Source of the data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun source(): String = source.getRequired("source")
 
     /**
      * Unique identifier of the record, auto-generated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun id(): Optional<String> = id.getOptional("id")
 
     /**
      * Time the row was created in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
     /**
      * Application user who created the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
      * Applied delta V duration for this manifold's calculations in seconds.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun deltaT(): Optional<Double> = deltaT.getOptional("deltaT")
 
     /**
      * Applied delta V for this manifold's calculations, in km/sec.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun deltaV(): Optional<Double> = deltaV.getOptional("deltaV")
 
     /**
-     * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     * Originating system or organization which produced the data, if different from the source. The
+     * origin may be different than the source if the source was a mediating system which forwarded
+     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origin(): Optional<String> = origin.getOptional("origin")
 
     /**
-     * The originating source network on which this record was created, auto-populated by the system.
+     * The originating source network on which this record was created, auto-populated by the
+     * system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
     /**
-     * Status of the manifold and its associated ManifoldElsets (e.g. PENDING, COMPLETE). PENDING status means element set generation is in progress and COMPLETE indicates all ManifoldElsets have been generated.
+     * Status of the manifold and its associated ManifoldElsets (e.g. PENDING, COMPLETE). PENDING
+     * status means element set generation is in progress and COMPLETE indicates all ManifoldElsets
+     * have been generated.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun status(): Optional<String> = status.getOptional("status")
 
     /**
-     * Read-only time the row was updated in the database, set automatically by the system on update.
+     * Read-only time the row was updated in the database, set automatically by the system on
+     * update.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun updatedAt(): Optional<OffsetDateTime> = updatedAt.getOptional("updatedAt")
 
     /**
-     * Application user who last updated the row in the database, set by the system automatically and ignored on create/edit operations.
+     * Application user who last updated the row in the database, set by the system automatically
+     * and ignored on create/edit operations.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun updatedBy(): Optional<String> = updatedBy.getOptional("updatedBy")
 
     /**
      * Weight or probability of this manifold for prioritization purposes, between 0 and 1.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun weight(): Optional<Double> = weight.getOptional("weight")
 
     /**
      * Returns the raw JSON value of [classificationMarking].
      *
-     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("classificationMarking")
     @ExcludeMissing
@@ -204,14 +242,13 @@ class ManifoldTupleResponse private constructor(
      *
      * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("dataMode")
-    @ExcludeMissing
-    fun _dataMode(): JsonField<DataMode> = dataMode
+    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
 
     /**
      * Returns the raw JSON value of [idObjectOfInterest].
      *
-     * Unlike [idObjectOfInterest], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [idObjectOfInterest], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("idObjectOfInterest")
     @ExcludeMissing
@@ -222,18 +259,14 @@ class ManifoldTupleResponse private constructor(
      *
      * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("source")
-    @ExcludeMissing
-    fun _source(): JsonField<String> = source
+    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
 
     /**
      * Returns the raw JSON value of [id].
      *
      * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("id")
-    @ExcludeMissing
-    fun _id(): JsonField<String> = id
+    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
 
     /**
      * Returns the raw JSON value of [createdAt].
@@ -249,54 +282,42 @@ class ManifoldTupleResponse private constructor(
      *
      * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("createdBy")
-    @ExcludeMissing
-    fun _createdBy(): JsonField<String> = createdBy
+    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
     /**
      * Returns the raw JSON value of [deltaT].
      *
      * Unlike [deltaT], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("deltaT")
-    @ExcludeMissing
-    fun _deltaT(): JsonField<Double> = deltaT
+    @JsonProperty("deltaT") @ExcludeMissing fun _deltaT(): JsonField<Double> = deltaT
 
     /**
      * Returns the raw JSON value of [deltaV].
      *
      * Unlike [deltaV], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("deltaV")
-    @ExcludeMissing
-    fun _deltaV(): JsonField<Double> = deltaV
+    @JsonProperty("deltaV") @ExcludeMissing fun _deltaV(): JsonField<Double> = deltaV
 
     /**
      * Returns the raw JSON value of [origin].
      *
      * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origin")
-    @ExcludeMissing
-    fun _origin(): JsonField<String> = origin
+    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
 
     /**
      * Returns the raw JSON value of [origNetwork].
      *
      * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origNetwork")
-    @ExcludeMissing
-    fun _origNetwork(): JsonField<String> = origNetwork
+    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
 
     /**
      * Returns the raw JSON value of [status].
      *
      * Unlike [status], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("status")
-    @ExcludeMissing
-    fun _status(): JsonField<String> = status
+    @JsonProperty("status") @ExcludeMissing fun _status(): JsonField<String> = status
 
     /**
      * Returns the raw JSON value of [updatedAt].
@@ -312,27 +333,24 @@ class ManifoldTupleResponse private constructor(
      *
      * Unlike [updatedBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("updatedBy")
-    @ExcludeMissing
-    fun _updatedBy(): JsonField<String> = updatedBy
+    @JsonProperty("updatedBy") @ExcludeMissing fun _updatedBy(): JsonField<String> = updatedBy
 
     /**
      * Returns the raw JSON value of [weight].
      *
      * Unlike [weight], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("weight")
-    @ExcludeMissing
-    fun _weight(): JsonField<Double> = weight
+    @JsonProperty("weight") @ExcludeMissing fun _weight(): JsonField<Double> = weight
 
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
-      additionalProperties.put(key, value)
+        additionalProperties.put(key, value)
     }
 
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -342,7 +360,6 @@ class ManifoldTupleResponse private constructor(
          * Returns a mutable builder for constructing an instance of [ManifoldTupleResponse].
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -350,8 +367,7 @@ class ManifoldTupleResponse private constructor(
          * .source()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [ManifoldTupleResponse]. */
@@ -375,77 +391,79 @@ class ManifoldTupleResponse private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(manifoldTupleResponse: ManifoldTupleResponse) =
-            apply {
-                classificationMarking = manifoldTupleResponse.classificationMarking
-                dataMode = manifoldTupleResponse.dataMode
-                idObjectOfInterest = manifoldTupleResponse.idObjectOfInterest
-                source = manifoldTupleResponse.source
-                id = manifoldTupleResponse.id
-                createdAt = manifoldTupleResponse.createdAt
-                createdBy = manifoldTupleResponse.createdBy
-                deltaT = manifoldTupleResponse.deltaT
-                deltaV = manifoldTupleResponse.deltaV
-                origin = manifoldTupleResponse.origin
-                origNetwork = manifoldTupleResponse.origNetwork
-                status = manifoldTupleResponse.status
-                updatedAt = manifoldTupleResponse.updatedAt
-                updatedBy = manifoldTupleResponse.updatedBy
-                weight = manifoldTupleResponse.weight
-                additionalProperties = manifoldTupleResponse.additionalProperties.toMutableMap()
-            }
+        internal fun from(manifoldTupleResponse: ManifoldTupleResponse) = apply {
+            classificationMarking = manifoldTupleResponse.classificationMarking
+            dataMode = manifoldTupleResponse.dataMode
+            idObjectOfInterest = manifoldTupleResponse.idObjectOfInterest
+            source = manifoldTupleResponse.source
+            id = manifoldTupleResponse.id
+            createdAt = manifoldTupleResponse.createdAt
+            createdBy = manifoldTupleResponse.createdBy
+            deltaT = manifoldTupleResponse.deltaT
+            deltaV = manifoldTupleResponse.deltaV
+            origin = manifoldTupleResponse.origin
+            origNetwork = manifoldTupleResponse.origNetwork
+            status = manifoldTupleResponse.status
+            updatedAt = manifoldTupleResponse.updatedAt
+            updatedBy = manifoldTupleResponse.updatedBy
+            weight = manifoldTupleResponse.weight
+            additionalProperties = manifoldTupleResponse.additionalProperties.toMutableMap()
+        }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-        fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
+        fun classificationMarking(classificationMarking: String) =
+            classificationMarking(JsonField.of(classificationMarking))
 
         /**
          * Sets [Builder.classificationMarking] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun classificationMarking(classificationMarking: JsonField<String>) =
-            apply {
-                this.classificationMarking = classificationMarking
-            }
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            this.classificationMarking = classificationMarking
+        }
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          */
         fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
         /**
          * Sets [Builder.dataMode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun dataMode(dataMode: JsonField<DataMode>) =
-            apply {
-                this.dataMode = dataMode
-            }
+        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
 
         /** ID of the parent object of interest. */
-        fun idObjectOfInterest(idObjectOfInterest: String) = idObjectOfInterest(JsonField.of(idObjectOfInterest))
+        fun idObjectOfInterest(idObjectOfInterest: String) =
+            idObjectOfInterest(JsonField.of(idObjectOfInterest))
 
         /**
          * Sets [Builder.idObjectOfInterest] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idObjectOfInterest] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.idObjectOfInterest] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun idObjectOfInterest(idObjectOfInterest: JsonField<String>) =
-            apply {
-                this.idObjectOfInterest = idObjectOfInterest
-            }
+        fun idObjectOfInterest(idObjectOfInterest: JsonField<String>) = apply {
+            this.idObjectOfInterest = idObjectOfInterest
+        }
 
         /** Source of the data. */
         fun source(source: String) = source(JsonField.of(source))
@@ -453,13 +471,10 @@ class ManifoldTupleResponse private constructor(
         /**
          * Sets [Builder.source] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun source(source: JsonField<String>) =
-            apply {
-                this.source = source
-            }
+        fun source(source: JsonField<String>) = apply { this.source = source }
 
         /** Unique identifier of the record, auto-generated by the system. */
         fun id(id: String) = id(JsonField.of(id))
@@ -467,13 +482,10 @@ class ManifoldTupleResponse private constructor(
         /**
          * Sets [Builder.id] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun id(id: JsonField<String>) =
-            apply {
-                this.id = id
-            }
+        fun id(id: JsonField<String>) = apply { this.id = id }
 
         /** Time the row was created in the database, auto-populated by the system. */
         fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -481,13 +493,11 @@ class ManifoldTupleResponse private constructor(
         /**
          * Sets [Builder.createdAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun createdAt(createdAt: JsonField<OffsetDateTime>) =
-            apply {
-                this.createdAt = createdAt
-            }
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
 
         /** Application user who created the row in the database, auto-populated by the system. */
         fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
@@ -495,13 +505,11 @@ class ManifoldTupleResponse private constructor(
         /**
          * Sets [Builder.createdBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun createdBy(createdBy: JsonField<String>) =
-            apply {
-                this.createdBy = createdBy
-            }
+        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
         /** Applied delta V duration for this manifold's calculations in seconds. */
         fun deltaT(deltaT: Double) = deltaT(JsonField.of(deltaT))
@@ -509,13 +517,10 @@ class ManifoldTupleResponse private constructor(
         /**
          * Sets [Builder.deltaT] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.deltaT] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.deltaT] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun deltaT(deltaT: JsonField<Double>) =
-            apply {
-                this.deltaT = deltaT
-            }
+        fun deltaT(deltaT: JsonField<Double>) = apply { this.deltaT = deltaT }
 
         /** Applied delta V for this manifold's calculations, in km/sec. */
         fun deltaV(deltaV: Double) = deltaV(JsonField.of(deltaV))
@@ -523,83 +528,86 @@ class ManifoldTupleResponse private constructor(
         /**
          * Sets [Builder.deltaV] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.deltaV] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.deltaV] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun deltaV(deltaV: JsonField<Double>) =
-            apply {
-                this.deltaV = deltaV
-            }
+        fun deltaV(deltaV: JsonField<Double>) = apply { this.deltaV = deltaV }
 
-        /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         */
         fun origin(origin: String) = origin(JsonField.of(origin))
 
         /**
          * Sets [Builder.origin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun origin(origin: JsonField<String>) =
-            apply {
-                this.origin = origin
-            }
+        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
 
-        /** The originating source network on which this record was created, auto-populated by the system. */
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         */
         fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
         /**
          * Sets [Builder.origNetwork] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun origNetwork(origNetwork: JsonField<String>) =
-            apply {
-                this.origNetwork = origNetwork
-            }
+        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
 
-        /** Status of the manifold and its associated ManifoldElsets (e.g. PENDING, COMPLETE). PENDING status means element set generation is in progress and COMPLETE indicates all ManifoldElsets have been generated. */
+        /**
+         * Status of the manifold and its associated ManifoldElsets (e.g. PENDING, COMPLETE).
+         * PENDING status means element set generation is in progress and COMPLETE indicates all
+         * ManifoldElsets have been generated.
+         */
         fun status(status: String) = status(JsonField.of(status))
 
         /**
          * Sets [Builder.status] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.status] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.status] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun status(status: JsonField<String>) =
-            apply {
-                this.status = status
-            }
+        fun status(status: JsonField<String>) = apply { this.status = status }
 
-        /** Read-only time the row was updated in the database, set automatically by the system on update. */
+        /**
+         * Read-only time the row was updated in the database, set automatically by the system on
+         * update.
+         */
         fun updatedAt(updatedAt: OffsetDateTime) = updatedAt(JsonField.of(updatedAt))
 
         /**
          * Sets [Builder.updatedAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.updatedAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.updatedAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun updatedAt(updatedAt: JsonField<OffsetDateTime>) =
-            apply {
-                this.updatedAt = updatedAt
-            }
+        fun updatedAt(updatedAt: JsonField<OffsetDateTime>) = apply { this.updatedAt = updatedAt }
 
-        /** Application user who last updated the row in the database, set by the system automatically and ignored on create/edit operations. */
+        /**
+         * Application user who last updated the row in the database, set by the system
+         * automatically and ignored on create/edit operations.
+         */
         fun updatedBy(updatedBy: String) = updatedBy(JsonField.of(updatedBy))
 
         /**
          * Sets [Builder.updatedBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.updatedBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.updatedBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun updatedBy(updatedBy: JsonField<String>) =
-            apply {
-                this.updatedBy = updatedBy
-            }
+        fun updatedBy(updatedBy: JsonField<String>) = apply { this.updatedBy = updatedBy }
 
         /** Weight or probability of this manifold for prioritization purposes, between 0 and 1. */
         fun weight(weight: Double) = weight(JsonField.of(weight))
@@ -607,39 +615,29 @@ class ManifoldTupleResponse private constructor(
         /**
          * Sets [Builder.weight] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.weight] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.weight] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun weight(weight: JsonField<Double>) =
-            apply {
-                this.weight = weight
-            }
+        fun weight(weight: JsonField<Double>) = apply { this.weight = weight }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) =
-            apply {
-                additionalProperties.put(key, value)
-            }
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
 
-        fun removeAdditionalProperty(key: String) =
-            apply {
-                additionalProperties.remove(key)
-            }
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) =
-            apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
 
         /**
          * Returns an immutable instance of [ManifoldTupleResponse].
@@ -647,7 +645,6 @@ class ManifoldTupleResponse private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -659,58 +656,49 @@ class ManifoldTupleResponse private constructor(
          */
         fun build(): ManifoldTupleResponse =
             ManifoldTupleResponse(
-              checkRequired(
-                "classificationMarking", classificationMarking
-              ),
-              checkRequired(
-                "dataMode", dataMode
-              ),
-              checkRequired(
-                "idObjectOfInterest", idObjectOfInterest
-              ),
-              checkRequired(
-                "source", source
-              ),
-              id,
-              createdAt,
-              createdBy,
-              deltaT,
-              deltaV,
-              origin,
-              origNetwork,
-              status,
-              updatedAt,
-              updatedBy,
-              weight,
-              additionalProperties.toMutableMap(),
+                checkRequired("classificationMarking", classificationMarking),
+                checkRequired("dataMode", dataMode),
+                checkRequired("idObjectOfInterest", idObjectOfInterest),
+                checkRequired("source", source),
+                id,
+                createdAt,
+                createdBy,
+                deltaT,
+                deltaV,
+                origin,
+                origNetwork,
+                status,
+                updatedAt,
+                updatedBy,
+                weight,
+                additionalProperties.toMutableMap(),
             )
     }
 
     private var validated: Boolean = false
 
-    fun validate(): ManifoldTupleResponse =
-        apply {
-            if (validated) {
-              return@apply
-            }
-
-            classificationMarking()
-            dataMode().validate()
-            idObjectOfInterest()
-            source()
-            id()
-            createdAt()
-            createdBy()
-            deltaT()
-            deltaV()
-            origin()
-            origNetwork()
-            status()
-            updatedAt()
-            updatedBy()
-            weight()
-            validated = true
+    fun validate(): ManifoldTupleResponse = apply {
+        if (validated) {
+            return@apply
         }
+
+        classificationMarking()
+        dataMode().validate()
+        idObjectOfInterest()
+        source()
+        id()
+        createdAt()
+        createdBy()
+        deltaT()
+        deltaV()
+        origin()
+        origNetwork()
+        status()
+        updatedAt()
+        updatedBy()
+        weight()
+        validated = true
+    }
 
     fun isValid(): Boolean =
         try {
@@ -726,33 +714,48 @@ class ManifoldTupleResponse private constructor(
      * Used for best match union deserialization.
      */
     @JvmSynthetic
-    internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (idObjectOfInterest.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (deltaT.asKnown().isPresent) 1 else 0) + (if (deltaV.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (status.asKnown().isPresent) 1 else 0) + (if (updatedAt.asKnown().isPresent) 1 else 0) + (if (updatedBy.asKnown().isPresent) 1 else 0) + (if (weight.asKnown().isPresent) 1 else 0)
+    internal fun validity(): Int =
+        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (idObjectOfInterest.asKnown().isPresent) 1 else 0) +
+            (if (source.asKnown().isPresent) 1 else 0) +
+            (if (id.asKnown().isPresent) 1 else 0) +
+            (if (createdAt.asKnown().isPresent) 1 else 0) +
+            (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (deltaT.asKnown().isPresent) 1 else 0) +
+            (if (deltaV.asKnown().isPresent) 1 else 0) +
+            (if (origin.asKnown().isPresent) 1 else 0) +
+            (if (origNetwork.asKnown().isPresent) 1 else 0) +
+            (if (status.asKnown().isPresent) 1 else 0) +
+            (if (updatedAt.asKnown().isPresent) 1 else 0) +
+            (if (updatedBy.asKnown().isPresent) 1 else 0) +
+            (if (weight.asKnown().isPresent) 1 else 0)
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      */
-    class DataMode @JsonCreator private constructor(
-        private val value: JsonField<String>,
-
-    ) : Enum {
+    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't match any known
-         * member, and you want to know that value. For example, if the SDK is on an older version than the
-         * API, then the API may respond with new members that the SDK is unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue
-        fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -779,11 +782,9 @@ class ManifoldTupleResponse private constructor(
          * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [DataMode] can contain an unknown value in a couple of cases:
-         *
-         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-         *   an older version than the API, then the API may respond with new members that the SDK is unaware
-         *   of.
-         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -796,11 +797,11 @@ class ManifoldTupleResponse private constructor(
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-         * class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want to throw
-         * for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -814,10 +815,11 @@ class ManifoldTupleResponse private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-         * for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
          */
         fun known(): Known =
             when (this) {
@@ -831,25 +833,27 @@ class ManifoldTupleResponse private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging and generally
-         * doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-         * primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
          */
-        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
 
         private var validated: Boolean = false
 
-        fun validate(): DataMode =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                known()
-                validated = true
+        fun validate(): DataMode = apply {
+            if (validated) {
+                return@apply
             }
+
+            known()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -860,19 +864,19 @@ class ManifoldTupleResponse private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic
-        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -881,18 +885,52 @@ class ManifoldTupleResponse private constructor(
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is ManifoldTupleResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idObjectOfInterest == other.idObjectOfInterest && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && deltaT == other.deltaT && deltaV == other.deltaV && origin == other.origin && origNetwork == other.origNetwork && status == other.status && updatedAt == other.updatedAt && updatedBy == other.updatedBy && weight == other.weight && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is ManifoldTupleResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idObjectOfInterest == other.idObjectOfInterest &&
+            source == other.source &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            deltaT == other.deltaT &&
+            deltaV == other.deltaV &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            status == other.status &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            weight == other.weight &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idObjectOfInterest, source, id, createdAt, createdBy, deltaT, deltaV, origin, origNetwork, status, updatedAt, updatedBy, weight, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idObjectOfInterest,
+            source,
+            id,
+            createdAt,
+            createdBy,
+            deltaT,
+            deltaV,
+            origin,
+            origNetwork,
+            status,
+            updatedAt,
+            updatedBy,
+            weight,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() = "ManifoldTupleResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, idObjectOfInterest=$idObjectOfInterest, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, deltaT=$deltaT, deltaV=$deltaV, origin=$origin, origNetwork=$origNetwork, status=$status, updatedAt=$updatedAt, updatedBy=$updatedBy, weight=$weight, additionalProperties=$additionalProperties}"
+    override fun toString() =
+        "ManifoldTupleResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, idObjectOfInterest=$idObjectOfInterest, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, deltaT=$deltaT, deltaV=$deltaV, origin=$origin, origNetwork=$origNetwork, status=$status, updatedAt=$updatedAt, updatedBy=$updatedBy, weight=$weight, additionalProperties=$additionalProperties}"
 }

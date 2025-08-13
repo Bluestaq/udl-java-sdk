@@ -100,10 +100,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is IsrCollectionListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+        return other is IsrCollectionListPage &&
+            service == other.service &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, params, items)
 
     override fun toString() =
         "IsrCollectionListPage{service=$service, params=$params, items=$items}"

@@ -204,12 +204,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is RelatedDocumentFull && dataSourceRefs == other.dataSourceRefs && documentId == other.documentId && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is RelatedDocumentFull &&
+            dataSourceRefs == other.dataSourceRefs &&
+            documentId == other.documentId &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(dataSourceRefs, documentId, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(dataSourceRefs, documentId, additionalProperties)
+    }
 
     override fun hashCode(): Int = hashCode
 

@@ -465,12 +465,35 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is IsrCollectionPocFull && id == other.id && callsign == other.callsign && chatName == other.chatName && chatSystem == other.chatSystem && email == other.email && name == other.name && notes == other.notes && phone == other.phone && radioFrequency == other.radioFrequency && unit == other.unit && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is IsrCollectionPocFull &&
+            id == other.id &&
+            callsign == other.callsign &&
+            chatName == other.chatName &&
+            chatSystem == other.chatSystem &&
+            email == other.email &&
+            name == other.name &&
+            notes == other.notes &&
+            phone == other.phone &&
+            radioFrequency == other.radioFrequency &&
+            unit == other.unit &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(id, callsign, chatName, chatSystem, email, name, notes, phone, radioFrequency, unit, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            id,
+            callsign,
+            chatName,
+            chatSystem,
+            email,
+            name,
+            notes,
+            phone,
+            radioFrequency,
+            unit,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

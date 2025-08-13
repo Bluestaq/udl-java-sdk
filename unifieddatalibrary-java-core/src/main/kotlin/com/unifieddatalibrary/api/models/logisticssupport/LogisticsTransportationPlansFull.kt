@@ -13,16 +13,18 @@ import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
-import com.unifieddatalibrary.api.models.logisticssupport.LogisticsRemarksFull
-import com.unifieddatalibrary.api.models.logisticssupport.LogisticsSegmentsFull
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/** Transportation plans associated with this LogisticsSupport record, used to coordinate maintenance efforts. */
-class LogisticsTransportationPlansFull private constructor(
+/**
+ * Transportation plans associated with this LogisticsSupport record, used to coordinate maintenance
+ * efforts.
+ */
+class LogisticsTransportationPlansFull
+private constructor(
     private val actDepTime: JsonField<OffsetDateTime>,
     private val aircraftStatus: JsonField<String>,
     private val approxArrTime: JsonField<OffsetDateTime>,
@@ -50,246 +52,335 @@ class LogisticsTransportationPlansFull private constructor(
     private val tpAircraftMds: JsonField<String>,
     private val tpTailNumber: JsonField<String>,
     private val additionalProperties: MutableMap<String, JsonValue>,
-
 ) {
 
     @JsonCreator
     private constructor(
-        @JsonProperty("actDepTime") @ExcludeMissing actDepTime: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("aircraftStatus") @ExcludeMissing aircraftStatus: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("approxArrTime") @ExcludeMissing approxArrTime: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("cancelledDate") @ExcludeMissing cancelledDate: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("closedDate") @ExcludeMissing closedDate: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("coordinator") @ExcludeMissing coordinator: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("coordinatorUnit") @ExcludeMissing coordinatorUnit: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("destinationICAO") @ExcludeMissing destinationIcao: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("actDepTime")
+        @ExcludeMissing
+        actDepTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("aircraftStatus")
+        @ExcludeMissing
+        aircraftStatus: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("approxArrTime")
+        @ExcludeMissing
+        approxArrTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("cancelledDate")
+        @ExcludeMissing
+        cancelledDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("closedDate")
+        @ExcludeMissing
+        closedDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("coordinator")
+        @ExcludeMissing
+        coordinator: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("coordinatorUnit")
+        @ExcludeMissing
+        coordinatorUnit: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("destinationICAO")
+        @ExcludeMissing
+        destinationIcao: JsonField<String> = JsonMissing.of(),
         @JsonProperty("duration") @ExcludeMissing duration: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("estArrTime") @ExcludeMissing estArrTime: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("estDepTime") @ExcludeMissing estDepTime: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("lastChangedDate") @ExcludeMissing lastChangedDate: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("logisticMasterRecordId") @ExcludeMissing logisticMasterRecordId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("logisticsSegments") @ExcludeMissing logisticsSegments: JsonField<List<LogisticsSegmentsFull>> = JsonMissing.of(),
-        @JsonProperty("logisticsTransportationPlansRemarks") @ExcludeMissing logisticsTransportationPlansRemarks: JsonField<List<LogisticsRemarksFull>> = JsonMissing.of(),
+        @JsonProperty("estArrTime")
+        @ExcludeMissing
+        estArrTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("estDepTime")
+        @ExcludeMissing
+        estDepTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("lastChangedDate")
+        @ExcludeMissing
+        lastChangedDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("logisticMasterRecordId")
+        @ExcludeMissing
+        logisticMasterRecordId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("logisticsSegments")
+        @ExcludeMissing
+        logisticsSegments: JsonField<List<LogisticsSegmentsFull>> = JsonMissing.of(),
+        @JsonProperty("logisticsTransportationPlansRemarks")
+        @ExcludeMissing
+        logisticsTransportationPlansRemarks: JsonField<List<LogisticsRemarksFull>> =
+            JsonMissing.of(),
         @JsonProperty("majcom") @ExcludeMissing majcom: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("missionChange") @ExcludeMissing missionChange: JsonField<Boolean> = JsonMissing.of(),
-        @JsonProperty("numEnrouteStops") @ExcludeMissing numEnrouteStops: JsonField<Int> = JsonMissing.of(),
-        @JsonProperty("numTransLoads") @ExcludeMissing numTransLoads: JsonField<Int> = JsonMissing.of(),
-        @JsonProperty("originICAO") @ExcludeMissing originIcao: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("planDefinition") @ExcludeMissing planDefinition: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("plansNumber") @ExcludeMissing plansNumber: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("serialNumber") @ExcludeMissing serialNumber: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("statusCode") @ExcludeMissing statusCode: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("tpAircraftMDS") @ExcludeMissing tpAircraftMds: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("tpTailNumber") @ExcludeMissing tpTailNumber: JsonField<String> = JsonMissing.of()
+        @JsonProperty("missionChange")
+        @ExcludeMissing
+        missionChange: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("numEnrouteStops")
+        @ExcludeMissing
+        numEnrouteStops: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("numTransLoads")
+        @ExcludeMissing
+        numTransLoads: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("originICAO")
+        @ExcludeMissing
+        originIcao: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("planDefinition")
+        @ExcludeMissing
+        planDefinition: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("plansNumber")
+        @ExcludeMissing
+        plansNumber: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("serialNumber")
+        @ExcludeMissing
+        serialNumber: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("statusCode")
+        @ExcludeMissing
+        statusCode: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("tpAircraftMDS")
+        @ExcludeMissing
+        tpAircraftMds: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("tpTailNumber")
+        @ExcludeMissing
+        tpTailNumber: JsonField<String> = JsonMissing.of(),
     ) : this(
-      actDepTime,
-      aircraftStatus,
-      approxArrTime,
-      cancelledDate,
-      closedDate,
-      coordinator,
-      coordinatorUnit,
-      destinationIcao,
-      duration,
-      estArrTime,
-      estDepTime,
-      lastChangedDate,
-      logisticMasterRecordId,
-      logisticsSegments,
-      logisticsTransportationPlansRemarks,
-      majcom,
-      missionChange,
-      numEnrouteStops,
-      numTransLoads,
-      originIcao,
-      planDefinition,
-      plansNumber,
-      serialNumber,
-      statusCode,
-      tpAircraftMds,
-      tpTailNumber,
-      mutableMapOf(),
+        actDepTime,
+        aircraftStatus,
+        approxArrTime,
+        cancelledDate,
+        closedDate,
+        coordinator,
+        coordinatorUnit,
+        destinationIcao,
+        duration,
+        estArrTime,
+        estDepTime,
+        lastChangedDate,
+        logisticMasterRecordId,
+        logisticsSegments,
+        logisticsTransportationPlansRemarks,
+        majcom,
+        missionChange,
+        numEnrouteStops,
+        numTransLoads,
+        originIcao,
+        planDefinition,
+        plansNumber,
+        serialNumber,
+        statusCode,
+        tpAircraftMds,
+        tpTailNumber,
+        mutableMapOf(),
     )
 
     /**
      * Actual time of departure of first segment, in ISO 8601 UTC format with millisecond precision.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun actDepTime(): Optional<OffsetDateTime> = actDepTime.getOptional("actDepTime")
 
     /**
-     * These are the initial maintenance values entered based on the pilot descriptions or the official maintenance evaluation code.
+     * These are the initial maintenance values entered based on the pilot descriptions or the
+     * official maintenance evaluation code.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun aircraftStatus(): Optional<String> = aircraftStatus.getOptional("aircraftStatus")
 
     /**
-     * Approximate time of arrival of final segement, in ISO 8601 UTC format with millisecond precision.
+     * Approximate time of arrival of final segement, in ISO 8601 UTC format with millisecond
+     * precision.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun approxArrTime(): Optional<OffsetDateTime> = approxArrTime.getOptional("approxArrTime")
 
     /**
-     * GC. LGTP_CANX_DT. GD2: Date when the transportation plan was cancelled, in ISO 8601 UTC format with millisecond precision.
+     * GC. LGTP_CANX_DT. GD2: Date when the transportation plan was cancelled, in ISO 8601 UTC
+     * format with millisecond precision.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun cancelledDate(): Optional<OffsetDateTime> = cancelledDate.getOptional("cancelledDate")
 
     /**
-     * GC. LGTP_CLSD_DT. GD2: Date when the transportation plan was closed, in ISO 8601 UTC format with millisecond precision.
+     * GC. LGTP_CLSD_DT. GD2: Date when the transportation plan was closed, in ISO 8601 UTC format
+     * with millisecond precision.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun closedDate(): Optional<OffsetDateTime> = closedDate.getOptional("closedDate")
 
     /**
-     * The AMS username of the operator who alters the coordination status. Automatically captured by the system.
+     * The AMS username of the operator who alters the coordination status. Automatically captured
+     * by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun coordinator(): Optional<String> = coordinator.getOptional("coordinator")
 
     /**
-     * The AMS user unit_id of the operator who alters the coordination status. Automatically captured by the system from table AMS_USER.
+     * The AMS user unit_id of the operator who alters the coordination status. Automatically
+     * captured by the system from table AMS_USER.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun coordinatorUnit(): Optional<String> = coordinatorUnit.getOptional("coordinatorUnit")
 
     /**
      * Destination location ICAO.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun destinationIcao(): Optional<String> = destinationIcao.getOptional("destinationICAO")
 
     /**
      * Transportation plan duration, expressed in the format MMM:SS.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun duration(): Optional<String> = duration.getOptional("duration")
 
     /**
      * ETA of the final segment, in ISO 8601 UTC format with millisecond precision.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun estArrTime(): Optional<OffsetDateTime> = estArrTime.getOptional("estArrTime")
 
     /**
      * ETD of the first segment, in ISO 8601 UTC format with millisecond precision.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun estDepTime(): Optional<OffsetDateTime> = estDepTime.getOptional("estDepTime")
 
     /**
      * Last time transportation plan was updated, in ISO 8601 UTC format with millisecond precision.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun lastChangedDate(): Optional<OffsetDateTime> = lastChangedDate.getOptional("lastChangedDate")
 
     /**
      * The identifier that represents a Logistics Master Record.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun logisticMasterRecordId(): Optional<String> = logisticMasterRecordId.getOptional("logisticMasterRecordId")
+    fun logisticMasterRecordId(): Optional<String> =
+        logisticMasterRecordId.getOptional("logisticMasterRecordId")
 
     /**
      * The transportation segments associated with this transportation plan.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun logisticsSegments(): Optional<List<LogisticsSegmentsFull>> = logisticsSegments.getOptional("logisticsSegments")
+    fun logisticsSegments(): Optional<List<LogisticsSegmentsFull>> =
+        logisticsSegments.getOptional("logisticsSegments")
 
     /**
      * Remarks associated with this transportation plan.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun logisticsTransportationPlansRemarks(): Optional<List<LogisticsRemarksFull>> = logisticsTransportationPlansRemarks.getOptional("logisticsTransportationPlansRemarks")
+    fun logisticsTransportationPlansRemarks(): Optional<List<LogisticsRemarksFull>> =
+        logisticsTransportationPlansRemarks.getOptional("logisticsTransportationPlansRemarks")
 
     /**
      * The major command for the current unit.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun majcom(): Optional<String> = majcom.getOptional("majcom")
 
     /**
-     * Indicates whether there have been changes to changes to ICAOs, estArrTime, or estDepTime since this Transportation Plan was last edited.
+     * Indicates whether there have been changes to changes to ICAOs, estArrTime, or estDepTime
+     * since this Transportation Plan was last edited.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun missionChange(): Optional<Boolean> = missionChange.getOptional("missionChange")
 
     /**
      * Transportation plan enroute stops.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun numEnrouteStops(): Optional<Int> = numEnrouteStops.getOptional("numEnrouteStops")
 
     /**
      * The number of transloads for this Transportation Plan.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun numTransLoads(): Optional<Int> = numTransLoads.getOptional("numTransLoads")
 
     /**
      * The origin location.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun originIcao(): Optional<String> = originIcao.getOptional("originICAO")
 
     /**
      * Defines the transporation plan as either a deployment or redeployment.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun planDefinition(): Optional<String> = planDefinition.getOptional("planDefinition")
 
     /**
-     * System generated reference id for the transportation plan. Format: TXXXXXNNNN T - Transportation, Sequence Number, Node Id.
+     * System generated reference id for the transportation plan. Format: TXXXXXNNNN T -
+     * Transportation, Sequence Number, Node Id.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun plansNumber(): Optional<String> = plansNumber.getOptional("plansNumber")
 
     /**
-     * GDSS2 uses an 8 character serial number to uniquely identify the aircraft and MDS combination. This is a portion of the full manufacturer serial number.
+     * GDSS2 uses an 8 character serial number to uniquely identify the aircraft and MDS
+     * combination. This is a portion of the full manufacturer serial number.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun serialNumber(): Optional<String> = serialNumber.getOptional("serialNumber")
 
     /**
-     * Transporation Coordination status code. Cancel, Send to APCC, working, agree, disapprove or blank.
+     * Transporation Coordination status code. Cancel, Send to APCC, working, agree, disapprove or
+     * blank.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun statusCode(): Optional<String> = statusCode.getOptional("statusCode")
 
     /**
-     * The aircraft Model Design Series (MDS) designation (e.g. E-2C HAWKEYE, F-15 EAGLE, KC-130 HERCULES, etc.) of this aircraft. Intended as, but not constrained to, MIL-STD-6016 environment dependent specific type designations.
+     * The aircraft Model Design Series (MDS) designation (e.g. E-2C HAWKEYE, F-15 EAGLE, KC-130
+     * HERCULES, etc.) of this aircraft. Intended as, but not constrained to, MIL-STD-6016
+     * environment dependent specific type designations.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun tpAircraftMds(): Optional<String> = tpAircraftMds.getOptional("tpAircraftMDS")
 
     /**
      * Contains the tail number displayed by GDSS2.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun tpTailNumber(): Optional<String> = tpTailNumber.getOptional("tpTailNumber")
 
@@ -343,9 +434,7 @@ class LogisticsTransportationPlansFull private constructor(
      *
      * Unlike [coordinator], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("coordinator")
-    @ExcludeMissing
-    fun _coordinator(): JsonField<String> = coordinator
+    @JsonProperty("coordinator") @ExcludeMissing fun _coordinator(): JsonField<String> = coordinator
 
     /**
      * Returns the raw JSON value of [coordinatorUnit].
@@ -370,9 +459,7 @@ class LogisticsTransportationPlansFull private constructor(
      *
      * Unlike [duration], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("duration")
-    @ExcludeMissing
-    fun _duration(): JsonField<String> = duration
+    @JsonProperty("duration") @ExcludeMissing fun _duration(): JsonField<String> = duration
 
     /**
      * Returns the raw JSON value of [estArrTime].
@@ -404,7 +491,8 @@ class LogisticsTransportationPlansFull private constructor(
     /**
      * Returns the raw JSON value of [logisticMasterRecordId].
      *
-     * Unlike [logisticMasterRecordId], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [logisticMasterRecordId], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
     @JsonProperty("logisticMasterRecordId")
     @ExcludeMissing
@@ -413,7 +501,8 @@ class LogisticsTransportationPlansFull private constructor(
     /**
      * Returns the raw JSON value of [logisticsSegments].
      *
-     * Unlike [logisticsSegments], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [logisticsSegments], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("logisticsSegments")
     @ExcludeMissing
@@ -422,20 +511,20 @@ class LogisticsTransportationPlansFull private constructor(
     /**
      * Returns the raw JSON value of [logisticsTransportationPlansRemarks].
      *
-     * Unlike [logisticsTransportationPlansRemarks], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [logisticsTransportationPlansRemarks], this method doesn't throw if the JSON field has
+     * an unexpected type.
      */
     @JsonProperty("logisticsTransportationPlansRemarks")
     @ExcludeMissing
-    fun _logisticsTransportationPlansRemarks(): JsonField<List<LogisticsRemarksFull>> = logisticsTransportationPlansRemarks
+    fun _logisticsTransportationPlansRemarks(): JsonField<List<LogisticsRemarksFull>> =
+        logisticsTransportationPlansRemarks
 
     /**
      * Returns the raw JSON value of [majcom].
      *
      * Unlike [majcom], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("majcom")
-    @ExcludeMissing
-    fun _majcom(): JsonField<String> = majcom
+    @JsonProperty("majcom") @ExcludeMissing fun _majcom(): JsonField<String> = majcom
 
     /**
      * Returns the raw JSON value of [missionChange].
@@ -469,9 +558,7 @@ class LogisticsTransportationPlansFull private constructor(
      *
      * Unlike [originIcao], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("originICAO")
-    @ExcludeMissing
-    fun _originIcao(): JsonField<String> = originIcao
+    @JsonProperty("originICAO") @ExcludeMissing fun _originIcao(): JsonField<String> = originIcao
 
     /**
      * Returns the raw JSON value of [planDefinition].
@@ -487,9 +574,7 @@ class LogisticsTransportationPlansFull private constructor(
      *
      * Unlike [plansNumber], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("plansNumber")
-    @ExcludeMissing
-    fun _plansNumber(): JsonField<String> = plansNumber
+    @JsonProperty("plansNumber") @ExcludeMissing fun _plansNumber(): JsonField<String> = plansNumber
 
     /**
      * Returns the raw JSON value of [serialNumber].
@@ -505,9 +590,7 @@ class LogisticsTransportationPlansFull private constructor(
      *
      * Unlike [statusCode], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("statusCode")
-    @ExcludeMissing
-    fun _statusCode(): JsonField<String> = statusCode
+    @JsonProperty("statusCode") @ExcludeMissing fun _statusCode(): JsonField<String> = statusCode
 
     /**
      * Returns the raw JSON value of [tpAircraftMds].
@@ -529,20 +612,23 @@ class LogisticsTransportationPlansFull private constructor(
 
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
-      additionalProperties.put(key, value)
+        additionalProperties.put(key, value)
     }
 
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
     companion object {
 
-        /** Returns a mutable builder for constructing an instance of [LogisticsTransportationPlansFull]. */
-        @JvmStatic
-        fun builder() = Builder()
+        /**
+         * Returns a mutable builder for constructing an instance of
+         * [LogisticsTransportationPlansFull].
+         */
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [LogisticsTransportationPlansFull]. */
@@ -562,7 +648,9 @@ class LogisticsTransportationPlansFull private constructor(
         private var lastChangedDate: JsonField<OffsetDateTime> = JsonMissing.of()
         private var logisticMasterRecordId: JsonField<String> = JsonMissing.of()
         private var logisticsSegments: JsonField<MutableList<LogisticsSegmentsFull>>? = null
-        private var logisticsTransportationPlansRemarks: JsonField<MutableList<LogisticsRemarksFull>>? = null
+        private var logisticsTransportationPlansRemarks:
+            JsonField<MutableList<LogisticsRemarksFull>>? =
+            null
         private var majcom: JsonField<String> = JsonMissing.of()
         private var missionChange: JsonField<Boolean> = JsonMissing.of()
         private var numEnrouteStops: JsonField<Int> = JsonMissing.of()
@@ -592,8 +680,12 @@ class LogisticsTransportationPlansFull private constructor(
                 estDepTime = logisticsTransportationPlansFull.estDepTime
                 lastChangedDate = logisticsTransportationPlansFull.lastChangedDate
                 logisticMasterRecordId = logisticsTransportationPlansFull.logisticMasterRecordId
-                logisticsSegments = logisticsTransportationPlansFull.logisticsSegments.map { it.toMutableList() }
-                logisticsTransportationPlansRemarks = logisticsTransportationPlansFull.logisticsTransportationPlansRemarks.map { it.toMutableList() }
+                logisticsSegments =
+                    logisticsTransportationPlansFull.logisticsSegments.map { it.toMutableList() }
+                logisticsTransportationPlansRemarks =
+                    logisticsTransportationPlansFull.logisticsTransportationPlansRemarks.map {
+                        it.toMutableList()
+                    }
                 majcom = logisticsTransportationPlansFull.majcom
                 missionChange = logisticsTransportationPlansFull.missionChange
                 numEnrouteStops = logisticsTransportationPlansFull.numEnrouteStops
@@ -605,120 +697,144 @@ class LogisticsTransportationPlansFull private constructor(
                 statusCode = logisticsTransportationPlansFull.statusCode
                 tpAircraftMds = logisticsTransportationPlansFull.tpAircraftMds
                 tpTailNumber = logisticsTransportationPlansFull.tpTailNumber
-                additionalProperties = logisticsTransportationPlansFull.additionalProperties.toMutableMap()
+                additionalProperties =
+                    logisticsTransportationPlansFull.additionalProperties.toMutableMap()
             }
 
-        /** Actual time of departure of first segment, in ISO 8601 UTC format with millisecond precision. */
+        /**
+         * Actual time of departure of first segment, in ISO 8601 UTC format with millisecond
+         * precision.
+         */
         fun actDepTime(actDepTime: OffsetDateTime) = actDepTime(JsonField.of(actDepTime))
 
         /**
          * Sets [Builder.actDepTime] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.actDepTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.actDepTime] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun actDepTime(actDepTime: JsonField<OffsetDateTime>) =
-            apply {
-                this.actDepTime = actDepTime
-            }
+        fun actDepTime(actDepTime: JsonField<OffsetDateTime>) = apply {
+            this.actDepTime = actDepTime
+        }
 
-        /** These are the initial maintenance values entered based on the pilot descriptions or the official maintenance evaluation code. */
+        /**
+         * These are the initial maintenance values entered based on the pilot descriptions or the
+         * official maintenance evaluation code.
+         */
         fun aircraftStatus(aircraftStatus: String) = aircraftStatus(JsonField.of(aircraftStatus))
 
         /**
          * Sets [Builder.aircraftStatus] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.aircraftStatus] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.aircraftStatus] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun aircraftStatus(aircraftStatus: JsonField<String>) =
-            apply {
-                this.aircraftStatus = aircraftStatus
-            }
+        fun aircraftStatus(aircraftStatus: JsonField<String>) = apply {
+            this.aircraftStatus = aircraftStatus
+        }
 
-        /** Approximate time of arrival of final segement, in ISO 8601 UTC format with millisecond precision. */
-        fun approxArrTime(approxArrTime: OffsetDateTime) = approxArrTime(JsonField.of(approxArrTime))
+        /**
+         * Approximate time of arrival of final segement, in ISO 8601 UTC format with millisecond
+         * precision.
+         */
+        fun approxArrTime(approxArrTime: OffsetDateTime) =
+            approxArrTime(JsonField.of(approxArrTime))
 
         /**
          * Sets [Builder.approxArrTime] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.approxArrTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.approxArrTime] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun approxArrTime(approxArrTime: JsonField<OffsetDateTime>) =
-            apply {
-                this.approxArrTime = approxArrTime
-            }
+        fun approxArrTime(approxArrTime: JsonField<OffsetDateTime>) = apply {
+            this.approxArrTime = approxArrTime
+        }
 
-        /** GC. LGTP_CANX_DT. GD2: Date when the transportation plan was cancelled, in ISO 8601 UTC format with millisecond precision. */
-        fun cancelledDate(cancelledDate: OffsetDateTime) = cancelledDate(JsonField.of(cancelledDate))
+        /**
+         * GC. LGTP_CANX_DT. GD2: Date when the transportation plan was cancelled, in ISO 8601 UTC
+         * format with millisecond precision.
+         */
+        fun cancelledDate(cancelledDate: OffsetDateTime) =
+            cancelledDate(JsonField.of(cancelledDate))
 
         /**
          * Sets [Builder.cancelledDate] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.cancelledDate] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.cancelledDate] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun cancelledDate(cancelledDate: JsonField<OffsetDateTime>) =
-            apply {
-                this.cancelledDate = cancelledDate
-            }
+        fun cancelledDate(cancelledDate: JsonField<OffsetDateTime>) = apply {
+            this.cancelledDate = cancelledDate
+        }
 
-        /** GC. LGTP_CLSD_DT. GD2: Date when the transportation plan was closed, in ISO 8601 UTC format with millisecond precision. */
+        /**
+         * GC. LGTP_CLSD_DT. GD2: Date when the transportation plan was closed, in ISO 8601 UTC
+         * format with millisecond precision.
+         */
         fun closedDate(closedDate: OffsetDateTime) = closedDate(JsonField.of(closedDate))
 
         /**
          * Sets [Builder.closedDate] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.closedDate] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.closedDate] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun closedDate(closedDate: JsonField<OffsetDateTime>) =
-            apply {
-                this.closedDate = closedDate
-            }
+        fun closedDate(closedDate: JsonField<OffsetDateTime>) = apply {
+            this.closedDate = closedDate
+        }
 
-        /** The AMS username of the operator who alters the coordination status. Automatically captured by the system. */
+        /**
+         * The AMS username of the operator who alters the coordination status. Automatically
+         * captured by the system.
+         */
         fun coordinator(coordinator: String) = coordinator(JsonField.of(coordinator))
 
         /**
          * Sets [Builder.coordinator] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.coordinator] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.coordinator] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun coordinator(coordinator: JsonField<String>) =
-            apply {
-                this.coordinator = coordinator
-            }
+        fun coordinator(coordinator: JsonField<String>) = apply { this.coordinator = coordinator }
 
-        /** The AMS user unit_id of the operator who alters the coordination status. Automatically captured by the system from table AMS_USER. */
-        fun coordinatorUnit(coordinatorUnit: String) = coordinatorUnit(JsonField.of(coordinatorUnit))
+        /**
+         * The AMS user unit_id of the operator who alters the coordination status. Automatically
+         * captured by the system from table AMS_USER.
+         */
+        fun coordinatorUnit(coordinatorUnit: String) =
+            coordinatorUnit(JsonField.of(coordinatorUnit))
 
         /**
          * Sets [Builder.coordinatorUnit] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.coordinatorUnit] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.coordinatorUnit] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun coordinatorUnit(coordinatorUnit: JsonField<String>) =
-            apply {
-                this.coordinatorUnit = coordinatorUnit
-            }
+        fun coordinatorUnit(coordinatorUnit: JsonField<String>) = apply {
+            this.coordinatorUnit = coordinatorUnit
+        }
 
         /** Destination location ICAO. */
-        fun destinationIcao(destinationIcao: String) = destinationIcao(JsonField.of(destinationIcao))
+        fun destinationIcao(destinationIcao: String) =
+            destinationIcao(JsonField.of(destinationIcao))
 
         /**
          * Sets [Builder.destinationIcao] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.destinationIcao] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.destinationIcao] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun destinationIcao(destinationIcao: JsonField<String>) =
-            apply {
-                this.destinationIcao = destinationIcao
-            }
+        fun destinationIcao(destinationIcao: JsonField<String>) = apply {
+            this.destinationIcao = destinationIcao
+        }
 
         /** Transportation plan duration, expressed in the format MMM:SS. */
         fun duration(duration: String) = duration(JsonField.of(duration))
@@ -726,13 +842,10 @@ class LogisticsTransportationPlansFull private constructor(
         /**
          * Sets [Builder.duration] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.duration] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.duration] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun duration(duration: JsonField<String>) =
-            apply {
-                this.duration = duration
-            }
+        fun duration(duration: JsonField<String>) = apply { this.duration = duration }
 
         /** ETA of the final segment, in ISO 8601 UTC format with millisecond precision. */
         fun estArrTime(estArrTime: OffsetDateTime) = estArrTime(JsonField.of(estArrTime))
@@ -740,13 +853,13 @@ class LogisticsTransportationPlansFull private constructor(
         /**
          * Sets [Builder.estArrTime] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.estArrTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.estArrTime] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun estArrTime(estArrTime: JsonField<OffsetDateTime>) =
-            apply {
-                this.estArrTime = estArrTime
-            }
+        fun estArrTime(estArrTime: JsonField<OffsetDateTime>) = apply {
+            this.estArrTime = estArrTime
+        }
 
         /** ETD of the first segment, in ISO 8601 UTC format with millisecond precision. */
         fun estDepTime(estDepTime: OffsetDateTime) = estDepTime(JsonField.of(estDepTime))
@@ -754,93 +867,107 @@ class LogisticsTransportationPlansFull private constructor(
         /**
          * Sets [Builder.estDepTime] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.estDepTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.estDepTime] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun estDepTime(estDepTime: JsonField<OffsetDateTime>) =
-            apply {
-                this.estDepTime = estDepTime
-            }
+        fun estDepTime(estDepTime: JsonField<OffsetDateTime>) = apply {
+            this.estDepTime = estDepTime
+        }
 
-        /** Last time transportation plan was updated, in ISO 8601 UTC format with millisecond precision. */
-        fun lastChangedDate(lastChangedDate: OffsetDateTime) = lastChangedDate(JsonField.of(lastChangedDate))
+        /**
+         * Last time transportation plan was updated, in ISO 8601 UTC format with millisecond
+         * precision.
+         */
+        fun lastChangedDate(lastChangedDate: OffsetDateTime) =
+            lastChangedDate(JsonField.of(lastChangedDate))
 
         /**
          * Sets [Builder.lastChangedDate] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.lastChangedDate] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.lastChangedDate] with a well-typed [OffsetDateTime]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun lastChangedDate(lastChangedDate: JsonField<OffsetDateTime>) =
-            apply {
-                this.lastChangedDate = lastChangedDate
-            }
+        fun lastChangedDate(lastChangedDate: JsonField<OffsetDateTime>) = apply {
+            this.lastChangedDate = lastChangedDate
+        }
 
         /** The identifier that represents a Logistics Master Record. */
-        fun logisticMasterRecordId(logisticMasterRecordId: String) = logisticMasterRecordId(JsonField.of(logisticMasterRecordId))
+        fun logisticMasterRecordId(logisticMasterRecordId: String) =
+            logisticMasterRecordId(JsonField.of(logisticMasterRecordId))
 
         /**
          * Sets [Builder.logisticMasterRecordId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.logisticMasterRecordId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.logisticMasterRecordId] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun logisticMasterRecordId(logisticMasterRecordId: JsonField<String>) =
-            apply {
-                this.logisticMasterRecordId = logisticMasterRecordId
-            }
+        fun logisticMasterRecordId(logisticMasterRecordId: JsonField<String>) = apply {
+            this.logisticMasterRecordId = logisticMasterRecordId
+        }
 
         /** The transportation segments associated with this transportation plan. */
-        fun logisticsSegments(logisticsSegments: List<LogisticsSegmentsFull>) = logisticsSegments(JsonField.of(logisticsSegments))
+        fun logisticsSegments(logisticsSegments: List<LogisticsSegmentsFull>) =
+            logisticsSegments(JsonField.of(logisticsSegments))
 
         /**
          * Sets [Builder.logisticsSegments] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.logisticsSegments] with a well-typed `List<LogisticsSegmentsFull>` value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.logisticsSegments] with a well-typed
+         * `List<LogisticsSegmentsFull>` value instead. This method is primarily for setting the
+         * field to an undocumented or not yet supported value.
          */
-        fun logisticsSegments(logisticsSegments: JsonField<List<LogisticsSegmentsFull>>) =
-            apply {
-                this.logisticsSegments = logisticsSegments.map { it.toMutableList() }
-            }
+        fun logisticsSegments(logisticsSegments: JsonField<List<LogisticsSegmentsFull>>) = apply {
+            this.logisticsSegments = logisticsSegments.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [LogisticsSegmentsFull] to [logisticsSegments].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addLogisticsSegment(logisticsSegment: LogisticsSegmentsFull) =
-            apply {
-                logisticsSegments = (logisticsSegments ?: JsonField.of(mutableListOf())).also {
+        fun addLogisticsSegment(logisticsSegment: LogisticsSegmentsFull) = apply {
+            logisticsSegments =
+                (logisticsSegments ?: JsonField.of(mutableListOf())).also {
                     checkKnown("logisticsSegments", it).add(logisticsSegment)
                 }
-            }
+        }
 
         /** Remarks associated with this transportation plan. */
-        fun logisticsTransportationPlansRemarks(logisticsTransportationPlansRemarks: List<LogisticsRemarksFull>) = logisticsTransportationPlansRemarks(JsonField.of(logisticsTransportationPlansRemarks))
+        fun logisticsTransportationPlansRemarks(
+            logisticsTransportationPlansRemarks: List<LogisticsRemarksFull>
+        ) = logisticsTransportationPlansRemarks(JsonField.of(logisticsTransportationPlansRemarks))
 
         /**
          * Sets [Builder.logisticsTransportationPlansRemarks] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.logisticsTransportationPlansRemarks] with a well-typed `List<LogisticsRemarksFull>` value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.logisticsTransportationPlansRemarks] with a well-typed
+         * `List<LogisticsRemarksFull>` value instead. This method is primarily for setting the
+         * field to an undocumented or not yet supported value.
          */
-        fun logisticsTransportationPlansRemarks(logisticsTransportationPlansRemarks: JsonField<List<LogisticsRemarksFull>>) =
-            apply {
-                this.logisticsTransportationPlansRemarks = logisticsTransportationPlansRemarks.map { it.toMutableList() }
-            }
+        fun logisticsTransportationPlansRemarks(
+            logisticsTransportationPlansRemarks: JsonField<List<LogisticsRemarksFull>>
+        ) = apply {
+            this.logisticsTransportationPlansRemarks =
+                logisticsTransportationPlansRemarks.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [LogisticsRemarksFull] to [logisticsTransportationPlansRemarks].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addLogisticsTransportationPlansRemark(logisticsTransportationPlansRemark: LogisticsRemarksFull) =
-            apply {
-                logisticsTransportationPlansRemarks = (logisticsTransportationPlansRemarks ?: JsonField.of(mutableListOf())).also {
-                    checkKnown("logisticsTransportationPlansRemarks", it).add(logisticsTransportationPlansRemark)
+        fun addLogisticsTransportationPlansRemark(
+            logisticsTransportationPlansRemark: LogisticsRemarksFull
+        ) = apply {
+            logisticsTransportationPlansRemarks =
+                (logisticsTransportationPlansRemarks ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("logisticsTransportationPlansRemarks", it)
+                        .add(logisticsTransportationPlansRemark)
                 }
-            }
+        }
 
         /** The major command for the current unit. */
         fun majcom(majcom: String) = majcom(JsonField.of(majcom))
@@ -848,27 +975,27 @@ class LogisticsTransportationPlansFull private constructor(
         /**
          * Sets [Builder.majcom] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.majcom] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.majcom] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun majcom(majcom: JsonField<String>) =
-            apply {
-                this.majcom = majcom
-            }
+        fun majcom(majcom: JsonField<String>) = apply { this.majcom = majcom }
 
-        /** Indicates whether there have been changes to changes to ICAOs, estArrTime, or estDepTime since this Transportation Plan was last edited. */
+        /**
+         * Indicates whether there have been changes to changes to ICAOs, estArrTime, or estDepTime
+         * since this Transportation Plan was last edited.
+         */
         fun missionChange(missionChange: Boolean) = missionChange(JsonField.of(missionChange))
 
         /**
          * Sets [Builder.missionChange] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.missionChange] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.missionChange] with a well-typed [Boolean] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun missionChange(missionChange: JsonField<Boolean>) =
-            apply {
-                this.missionChange = missionChange
-            }
+        fun missionChange(missionChange: JsonField<Boolean>) = apply {
+            this.missionChange = missionChange
+        }
 
         /** Transportation plan enroute stops. */
         fun numEnrouteStops(numEnrouteStops: Int) = numEnrouteStops(JsonField.of(numEnrouteStops))
@@ -876,13 +1003,13 @@ class LogisticsTransportationPlansFull private constructor(
         /**
          * Sets [Builder.numEnrouteStops] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.numEnrouteStops] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.numEnrouteStops] with a well-typed [Int] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun numEnrouteStops(numEnrouteStops: JsonField<Int>) =
-            apply {
-                this.numEnrouteStops = numEnrouteStops
-            }
+        fun numEnrouteStops(numEnrouteStops: JsonField<Int>) = apply {
+            this.numEnrouteStops = numEnrouteStops
+        }
 
         /** The number of transloads for this Transportation Plan. */
         fun numTransLoads(numTransLoads: Int) = numTransLoads(JsonField.of(numTransLoads))
@@ -890,13 +1017,13 @@ class LogisticsTransportationPlansFull private constructor(
         /**
          * Sets [Builder.numTransLoads] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.numTransLoads] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.numTransLoads] with a well-typed [Int] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun numTransLoads(numTransLoads: JsonField<Int>) =
-            apply {
-                this.numTransLoads = numTransLoads
-            }
+        fun numTransLoads(numTransLoads: JsonField<Int>) = apply {
+            this.numTransLoads = numTransLoads
+        }
 
         /** The origin location. */
         fun originIcao(originIcao: String) = originIcao(JsonField.of(originIcao))
@@ -904,13 +1031,11 @@ class LogisticsTransportationPlansFull private constructor(
         /**
          * Sets [Builder.originIcao] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.originIcao] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.originIcao] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun originIcao(originIcao: JsonField<String>) =
-            apply {
-                this.originIcao = originIcao
-            }
+        fun originIcao(originIcao: JsonField<String>) = apply { this.originIcao = originIcao }
 
         /** Defines the transporation plan as either a deployment or redeployment. */
         fun planDefinition(planDefinition: String) = planDefinition(JsonField.of(planDefinition))
@@ -918,69 +1043,78 @@ class LogisticsTransportationPlansFull private constructor(
         /**
          * Sets [Builder.planDefinition] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.planDefinition] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.planDefinition] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun planDefinition(planDefinition: JsonField<String>) =
-            apply {
-                this.planDefinition = planDefinition
-            }
+        fun planDefinition(planDefinition: JsonField<String>) = apply {
+            this.planDefinition = planDefinition
+        }
 
-        /** System generated reference id for the transportation plan. Format: TXXXXXNNNN T - Transportation, Sequence Number, Node Id. */
+        /**
+         * System generated reference id for the transportation plan. Format: TXXXXXNNNN T -
+         * Transportation, Sequence Number, Node Id.
+         */
         fun plansNumber(plansNumber: String) = plansNumber(JsonField.of(plansNumber))
 
         /**
          * Sets [Builder.plansNumber] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.plansNumber] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.plansNumber] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun plansNumber(plansNumber: JsonField<String>) =
-            apply {
-                this.plansNumber = plansNumber
-            }
+        fun plansNumber(plansNumber: JsonField<String>) = apply { this.plansNumber = plansNumber }
 
-        /** GDSS2 uses an 8 character serial number to uniquely identify the aircraft and MDS combination. This is a portion of the full manufacturer serial number. */
+        /**
+         * GDSS2 uses an 8 character serial number to uniquely identify the aircraft and MDS
+         * combination. This is a portion of the full manufacturer serial number.
+         */
         fun serialNumber(serialNumber: String) = serialNumber(JsonField.of(serialNumber))
 
         /**
          * Sets [Builder.serialNumber] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.serialNumber] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.serialNumber] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun serialNumber(serialNumber: JsonField<String>) =
-            apply {
-                this.serialNumber = serialNumber
-            }
+        fun serialNumber(serialNumber: JsonField<String>) = apply {
+            this.serialNumber = serialNumber
+        }
 
-        /** Transporation Coordination status code. Cancel, Send to APCC, working, agree, disapprove or blank. */
+        /**
+         * Transporation Coordination status code. Cancel, Send to APCC, working, agree, disapprove
+         * or blank.
+         */
         fun statusCode(statusCode: String) = statusCode(JsonField.of(statusCode))
 
         /**
          * Sets [Builder.statusCode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.statusCode] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.statusCode] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun statusCode(statusCode: JsonField<String>) =
-            apply {
-                this.statusCode = statusCode
-            }
+        fun statusCode(statusCode: JsonField<String>) = apply { this.statusCode = statusCode }
 
-        /** The aircraft Model Design Series (MDS) designation (e.g. E-2C HAWKEYE, F-15 EAGLE, KC-130 HERCULES, etc.) of this aircraft. Intended as, but not constrained to, MIL-STD-6016 environment dependent specific type designations. */
+        /**
+         * The aircraft Model Design Series (MDS) designation (e.g. E-2C HAWKEYE, F-15 EAGLE, KC-130
+         * HERCULES, etc.) of this aircraft. Intended as, but not constrained to, MIL-STD-6016
+         * environment dependent specific type designations.
+         */
         fun tpAircraftMds(tpAircraftMds: String) = tpAircraftMds(JsonField.of(tpAircraftMds))
 
         /**
          * Sets [Builder.tpAircraftMds] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.tpAircraftMds] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.tpAircraftMds] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun tpAircraftMds(tpAircraftMds: JsonField<String>) =
-            apply {
-                this.tpAircraftMds = tpAircraftMds
-            }
+        fun tpAircraftMds(tpAircraftMds: JsonField<String>) = apply {
+            this.tpAircraftMds = tpAircraftMds
+        }
 
         /** Contains the tail number displayed by GDSS2. */
         fun tpTailNumber(tpTailNumber: String) = tpTailNumber(JsonField.of(tpTailNumber))
@@ -988,39 +1122,32 @@ class LogisticsTransportationPlansFull private constructor(
         /**
          * Sets [Builder.tpTailNumber] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.tpTailNumber] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.tpTailNumber] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun tpTailNumber(tpTailNumber: JsonField<String>) =
-            apply {
-                this.tpTailNumber = tpTailNumber
-            }
+        fun tpTailNumber(tpTailNumber: JsonField<String>) = apply {
+            this.tpTailNumber = tpTailNumber
+        }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) =
-            apply {
-                additionalProperties.put(key, value)
-            }
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
 
-        fun removeAdditionalProperty(key: String) =
-            apply {
-                additionalProperties.remove(key)
-            }
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) =
-            apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
 
         /**
          * Returns an immutable instance of [LogisticsTransportationPlansFull].
@@ -1029,72 +1156,71 @@ class LogisticsTransportationPlansFull private constructor(
          */
         fun build(): LogisticsTransportationPlansFull =
             LogisticsTransportationPlansFull(
-              actDepTime,
-              aircraftStatus,
-              approxArrTime,
-              cancelledDate,
-              closedDate,
-              coordinator,
-              coordinatorUnit,
-              destinationIcao,
-              duration,
-              estArrTime,
-              estDepTime,
-              lastChangedDate,
-              logisticMasterRecordId,
-              (logisticsSegments ?: JsonMissing.of()).map { it.toImmutable() },
-              (logisticsTransportationPlansRemarks ?: JsonMissing.of()).map { it.toImmutable() },
-              majcom,
-              missionChange,
-              numEnrouteStops,
-              numTransLoads,
-              originIcao,
-              planDefinition,
-              plansNumber,
-              serialNumber,
-              statusCode,
-              tpAircraftMds,
-              tpTailNumber,
-              additionalProperties.toMutableMap(),
+                actDepTime,
+                aircraftStatus,
+                approxArrTime,
+                cancelledDate,
+                closedDate,
+                coordinator,
+                coordinatorUnit,
+                destinationIcao,
+                duration,
+                estArrTime,
+                estDepTime,
+                lastChangedDate,
+                logisticMasterRecordId,
+                (logisticsSegments ?: JsonMissing.of()).map { it.toImmutable() },
+                (logisticsTransportationPlansRemarks ?: JsonMissing.of()).map { it.toImmutable() },
+                majcom,
+                missionChange,
+                numEnrouteStops,
+                numTransLoads,
+                originIcao,
+                planDefinition,
+                plansNumber,
+                serialNumber,
+                statusCode,
+                tpAircraftMds,
+                tpTailNumber,
+                additionalProperties.toMutableMap(),
             )
     }
 
     private var validated: Boolean = false
 
-    fun validate(): LogisticsTransportationPlansFull =
-        apply {
-            if (validated) {
-              return@apply
-            }
-
-            actDepTime()
-            aircraftStatus()
-            approxArrTime()
-            cancelledDate()
-            closedDate()
-            coordinator()
-            coordinatorUnit()
-            destinationIcao()
-            duration()
-            estArrTime()
-            estDepTime()
-            lastChangedDate()
-            logisticMasterRecordId()
-            logisticsSegments().ifPresent { it.forEach { it.validate() } }
-            logisticsTransportationPlansRemarks().ifPresent { it.forEach { it.validate() } }
-            majcom()
-            missionChange()
-            numEnrouteStops()
-            numTransLoads()
-            originIcao()
-            planDefinition()
-            plansNumber()
-            serialNumber()
-            statusCode()
-            tpAircraftMds()
-            tpTailNumber()
-            validated = true
+    fun validate(): LogisticsTransportationPlansFull = apply {
+        if (validated) {
+            return@apply
         }
+
+        actDepTime()
+        aircraftStatus()
+        approxArrTime()
+        cancelledDate()
+        closedDate()
+        coordinator()
+        coordinatorUnit()
+        destinationIcao()
+        duration()
+        estArrTime()
+        estDepTime()
+        lastChangedDate()
+        logisticMasterRecordId()
+        logisticsSegments().ifPresent { it.forEach { it.validate() } }
+        logisticsTransportationPlansRemarks().ifPresent { it.forEach { it.validate() } }
+        majcom()
+        missionChange()
+        numEnrouteStops()
+        numTransLoads()
+        originIcao()
+        planDefinition()
+        plansNumber()
+        serialNumber()
+        statusCode()
+        tpAircraftMds()
+        tpTailNumber()
+        validated = true
+    }
 
     fun isValid(): Boolean =
         try {
@@ -1110,21 +1236,105 @@ class LogisticsTransportationPlansFull private constructor(
      * Used for best match union deserialization.
      */
     @JvmSynthetic
-    internal fun validity(): Int = (if (actDepTime.asKnown().isPresent) 1 else 0) + (if (aircraftStatus.asKnown().isPresent) 1 else 0) + (if (approxArrTime.asKnown().isPresent) 1 else 0) + (if (cancelledDate.asKnown().isPresent) 1 else 0) + (if (closedDate.asKnown().isPresent) 1 else 0) + (if (coordinator.asKnown().isPresent) 1 else 0) + (if (coordinatorUnit.asKnown().isPresent) 1 else 0) + (if (destinationIcao.asKnown().isPresent) 1 else 0) + (if (duration.asKnown().isPresent) 1 else 0) + (if (estArrTime.asKnown().isPresent) 1 else 0) + (if (estDepTime.asKnown().isPresent) 1 else 0) + (if (lastChangedDate.asKnown().isPresent) 1 else 0) + (if (logisticMasterRecordId.asKnown().isPresent) 1 else 0) + (logisticsSegments.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) + (logisticsTransportationPlansRemarks.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) + (if (majcom.asKnown().isPresent) 1 else 0) + (if (missionChange.asKnown().isPresent) 1 else 0) + (if (numEnrouteStops.asKnown().isPresent) 1 else 0) + (if (numTransLoads.asKnown().isPresent) 1 else 0) + (if (originIcao.asKnown().isPresent) 1 else 0) + (if (planDefinition.asKnown().isPresent) 1 else 0) + (if (plansNumber.asKnown().isPresent) 1 else 0) + (if (serialNumber.asKnown().isPresent) 1 else 0) + (if (statusCode.asKnown().isPresent) 1 else 0) + (if (tpAircraftMds.asKnown().isPresent) 1 else 0) + (if (tpTailNumber.asKnown().isPresent) 1 else 0)
+    internal fun validity(): Int =
+        (if (actDepTime.asKnown().isPresent) 1 else 0) +
+            (if (aircraftStatus.asKnown().isPresent) 1 else 0) +
+            (if (approxArrTime.asKnown().isPresent) 1 else 0) +
+            (if (cancelledDate.asKnown().isPresent) 1 else 0) +
+            (if (closedDate.asKnown().isPresent) 1 else 0) +
+            (if (coordinator.asKnown().isPresent) 1 else 0) +
+            (if (coordinatorUnit.asKnown().isPresent) 1 else 0) +
+            (if (destinationIcao.asKnown().isPresent) 1 else 0) +
+            (if (duration.asKnown().isPresent) 1 else 0) +
+            (if (estArrTime.asKnown().isPresent) 1 else 0) +
+            (if (estDepTime.asKnown().isPresent) 1 else 0) +
+            (if (lastChangedDate.asKnown().isPresent) 1 else 0) +
+            (if (logisticMasterRecordId.asKnown().isPresent) 1 else 0) +
+            (logisticsSegments.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
+            (logisticsTransportationPlansRemarks.asKnown().getOrNull()?.sumOf {
+                it.validity().toInt()
+            } ?: 0) +
+            (if (majcom.asKnown().isPresent) 1 else 0) +
+            (if (missionChange.asKnown().isPresent) 1 else 0) +
+            (if (numEnrouteStops.asKnown().isPresent) 1 else 0) +
+            (if (numTransLoads.asKnown().isPresent) 1 else 0) +
+            (if (originIcao.asKnown().isPresent) 1 else 0) +
+            (if (planDefinition.asKnown().isPresent) 1 else 0) +
+            (if (plansNumber.asKnown().isPresent) 1 else 0) +
+            (if (serialNumber.asKnown().isPresent) 1 else 0) +
+            (if (statusCode.asKnown().isPresent) 1 else 0) +
+            (if (tpAircraftMds.asKnown().isPresent) 1 else 0) +
+            (if (tpTailNumber.asKnown().isPresent) 1 else 0)
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is LogisticsTransportationPlansFull && actDepTime == other.actDepTime && aircraftStatus == other.aircraftStatus && approxArrTime == other.approxArrTime && cancelledDate == other.cancelledDate && closedDate == other.closedDate && coordinator == other.coordinator && coordinatorUnit == other.coordinatorUnit && destinationIcao == other.destinationIcao && duration == other.duration && estArrTime == other.estArrTime && estDepTime == other.estDepTime && lastChangedDate == other.lastChangedDate && logisticMasterRecordId == other.logisticMasterRecordId && logisticsSegments == other.logisticsSegments && logisticsTransportationPlansRemarks == other.logisticsTransportationPlansRemarks && majcom == other.majcom && missionChange == other.missionChange && numEnrouteStops == other.numEnrouteStops && numTransLoads == other.numTransLoads && originIcao == other.originIcao && planDefinition == other.planDefinition && plansNumber == other.plansNumber && serialNumber == other.serialNumber && statusCode == other.statusCode && tpAircraftMds == other.tpAircraftMds && tpTailNumber == other.tpTailNumber && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is LogisticsTransportationPlansFull &&
+            actDepTime == other.actDepTime &&
+            aircraftStatus == other.aircraftStatus &&
+            approxArrTime == other.approxArrTime &&
+            cancelledDate == other.cancelledDate &&
+            closedDate == other.closedDate &&
+            coordinator == other.coordinator &&
+            coordinatorUnit == other.coordinatorUnit &&
+            destinationIcao == other.destinationIcao &&
+            duration == other.duration &&
+            estArrTime == other.estArrTime &&
+            estDepTime == other.estDepTime &&
+            lastChangedDate == other.lastChangedDate &&
+            logisticMasterRecordId == other.logisticMasterRecordId &&
+            logisticsSegments == other.logisticsSegments &&
+            logisticsTransportationPlansRemarks == other.logisticsTransportationPlansRemarks &&
+            majcom == other.majcom &&
+            missionChange == other.missionChange &&
+            numEnrouteStops == other.numEnrouteStops &&
+            numTransLoads == other.numTransLoads &&
+            originIcao == other.originIcao &&
+            planDefinition == other.planDefinition &&
+            plansNumber == other.plansNumber &&
+            serialNumber == other.serialNumber &&
+            statusCode == other.statusCode &&
+            tpAircraftMds == other.tpAircraftMds &&
+            tpTailNumber == other.tpTailNumber &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(actDepTime, aircraftStatus, approxArrTime, cancelledDate, closedDate, coordinator, coordinatorUnit, destinationIcao, duration, estArrTime, estDepTime, lastChangedDate, logisticMasterRecordId, logisticsSegments, logisticsTransportationPlansRemarks, majcom, missionChange, numEnrouteStops, numTransLoads, originIcao, planDefinition, plansNumber, serialNumber, statusCode, tpAircraftMds, tpTailNumber, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            actDepTime,
+            aircraftStatus,
+            approxArrTime,
+            cancelledDate,
+            closedDate,
+            coordinator,
+            coordinatorUnit,
+            destinationIcao,
+            duration,
+            estArrTime,
+            estDepTime,
+            lastChangedDate,
+            logisticMasterRecordId,
+            logisticsSegments,
+            logisticsTransportationPlansRemarks,
+            majcom,
+            missionChange,
+            numEnrouteStops,
+            numTransLoads,
+            originIcao,
+            planDefinition,
+            plansNumber,
+            serialNumber,
+            statusCode,
+            tpAircraftMds,
+            tpTailNumber,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() = "LogisticsTransportationPlansFull{actDepTime=$actDepTime, aircraftStatus=$aircraftStatus, approxArrTime=$approxArrTime, cancelledDate=$cancelledDate, closedDate=$closedDate, coordinator=$coordinator, coordinatorUnit=$coordinatorUnit, destinationIcao=$destinationIcao, duration=$duration, estArrTime=$estArrTime, estDepTime=$estDepTime, lastChangedDate=$lastChangedDate, logisticMasterRecordId=$logisticMasterRecordId, logisticsSegments=$logisticsSegments, logisticsTransportationPlansRemarks=$logisticsTransportationPlansRemarks, majcom=$majcom, missionChange=$missionChange, numEnrouteStops=$numEnrouteStops, numTransLoads=$numTransLoads, originIcao=$originIcao, planDefinition=$planDefinition, plansNumber=$plansNumber, serialNumber=$serialNumber, statusCode=$statusCode, tpAircraftMds=$tpAircraftMds, tpTailNumber=$tpTailNumber, additionalProperties=$additionalProperties}"
+    override fun toString() =
+        "LogisticsTransportationPlansFull{actDepTime=$actDepTime, aircraftStatus=$aircraftStatus, approxArrTime=$approxArrTime, cancelledDate=$cancelledDate, closedDate=$closedDate, coordinator=$coordinator, coordinatorUnit=$coordinatorUnit, destinationIcao=$destinationIcao, duration=$duration, estArrTime=$estArrTime, estDepTime=$estDepTime, lastChangedDate=$lastChangedDate, logisticMasterRecordId=$logisticMasterRecordId, logisticsSegments=$logisticsSegments, logisticsTransportationPlansRemarks=$logisticsTransportationPlansRemarks, majcom=$majcom, missionChange=$missionChange, numEnrouteStops=$numEnrouteStops, numTransLoads=$numTransLoads, originIcao=$originIcao, planDefinition=$planDefinition, plansNumber=$plansNumber, serialNumber=$serialNumber, statusCode=$statusCode, tpAircraftMds=$tpAircraftMds, tpTailNumber=$tpTailNumber, additionalProperties=$additionalProperties}"
 }

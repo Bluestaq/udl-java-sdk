@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
+import com.unifieddatalibrary.api.models.SubStatusIngest
 import com.unifieddatalibrary.api.models.status.StatusCountParams
 import com.unifieddatalibrary.api.models.status.StatusCreateParams
 import com.unifieddatalibrary.api.models.status.StatusGetByEntityIdParams
@@ -46,14 +47,14 @@ internal class StatusServiceTest {
                 .origNetwork("TST1")
                 .state(StatusCreateParams.State.ACTIVE)
                 .addSubStatusCollection(
-                    StatusCreateParams.SubStatusCollection.builder()
+                    SubStatusIngest.builder()
                         .classificationMarking("U")
-                        .dataMode(StatusCreateParams.SubStatusCollection.DataMode.TEST)
+                        .dataMode(SubStatusIngest.DataMode.TEST)
                         .notes("Sample Notes")
                         .source("Bluestaq")
-                        .status(StatusCreateParams.SubStatusCollection.Status.FMC)
+                        .status(SubStatusIngest.Status.FMC)
                         .statusId("REF-STATUS-ID")
-                        .type(StatusCreateParams.SubStatusCollection.Type.MD_CAP)
+                        .type(SubStatusIngest.Type.MD_CAP)
                         .id("SUBSTATUS-ID")
                         .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                         .createdBy("some.user")
@@ -95,14 +96,14 @@ internal class StatusServiceTest {
                 .origNetwork("TST1")
                 .state(StatusUpdateParams.State.ACTIVE)
                 .addSubStatusCollection(
-                    StatusUpdateParams.SubStatusCollection.builder()
+                    SubStatusIngest.builder()
                         .classificationMarking("U")
-                        .dataMode(StatusUpdateParams.SubStatusCollection.DataMode.TEST)
+                        .dataMode(SubStatusIngest.DataMode.TEST)
                         .notes("Sample Notes")
                         .source("Bluestaq")
-                        .status(StatusUpdateParams.SubStatusCollection.Status.FMC)
+                        .status(SubStatusIngest.Status.FMC)
                         .statusId("REF-STATUS-ID")
-                        .type(StatusUpdateParams.SubStatusCollection.Type.MD_CAP)
+                        .type(SubStatusIngest.Type.MD_CAP)
                         .id("SUBSTATUS-ID")
                         .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                         .createdBy("some.user")

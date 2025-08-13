@@ -1826,7 +1826,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2059,12 +2059,16 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AltitudeBlock && altitudeSequenceId == other.altitudeSequenceId && lowerAltitude == other.lowerAltitude && upperAltitude == other.upperAltitude && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is AltitudeBlock &&
+                altitudeSequenceId == other.altitudeSequenceId &&
+                lowerAltitude == other.lowerAltitude &&
+                upperAltitude == other.upperAltitude &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(altitudeSequenceId, lowerAltitude, upperAltitude, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(altitudeSequenceId, lowerAltitude, upperAltitude, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2506,12 +2510,33 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Poc && office == other.office && phone == other.phone && pocName == other.pocName && pocOrg == other.pocOrg && pocSequenceId == other.pocSequenceId && pocTypeName == other.pocTypeName && rank == other.rank && remark == other.remark && username == other.username && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Poc &&
+                office == other.office &&
+                phone == other.phone &&
+                pocName == other.pocName &&
+                pocOrg == other.pocOrg &&
+                pocSequenceId == other.pocSequenceId &&
+                pocTypeName == other.pocTypeName &&
+                rank == other.rank &&
+                remark == other.remark &&
+                username == other.username &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(office, phone, pocName, pocOrg, pocSequenceId, pocTypeName, rank, remark, username, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                office,
+                phone,
+                pocName,
+                pocOrg,
+                pocSequenceId,
+                pocTypeName,
+                rank,
+                remark,
+                username,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3161,12 +3186,41 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is RoutePoint && altCountryCode == other.altCountryCode && countryCode == other.countryCode && dafifPt == other.dafifPt && magDec == other.magDec && navaid == other.navaid && navaidLength == other.navaidLength && navaidType == other.navaidType && ptLat == other.ptLat && ptLon == other.ptLon && ptSequenceId == other.ptSequenceId && ptTypeCode == other.ptTypeCode && ptTypeName == other.ptTypeName && waypointName == other.waypointName && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is RoutePoint &&
+                altCountryCode == other.altCountryCode &&
+                countryCode == other.countryCode &&
+                dafifPt == other.dafifPt &&
+                magDec == other.magDec &&
+                navaid == other.navaid &&
+                navaidLength == other.navaidLength &&
+                navaidType == other.navaidType &&
+                ptLat == other.ptLat &&
+                ptLon == other.ptLon &&
+                ptSequenceId == other.ptSequenceId &&
+                ptTypeCode == other.ptTypeCode &&
+                ptTypeName == other.ptTypeName &&
+                waypointName == other.waypointName &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(altCountryCode, countryCode, dafifPt, magDec, navaid, navaidLength, navaidType, ptLat, ptLon, ptSequenceId, ptTypeCode, ptTypeName, waypointName, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                altCountryCode,
+                countryCode,
+                dafifPt,
+                magDec,
+                navaid,
+                navaidLength,
+                navaidType,
+                ptLat,
+                ptLon,
+                ptSequenceId,
+                ptTypeCode,
+                ptTypeName,
+                waypointName,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3179,12 +3233,91 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is TrackRouteFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && lastUpdateDate == other.lastUpdateDate && source == other.source && type == other.type && id == other.id && altitudeBlocks == other.altitudeBlocks && apnSetting == other.apnSetting && apxBeaconCode == other.apxBeaconCode && artccMessage == other.artccMessage && createdAt == other.createdAt && createdBy == other.createdBy && creatingOrg == other.creatingOrg && direction == other.direction && effectiveDate == other.effectiveDate && externalId == other.externalId && lastUsedDate == other.lastUsedDate && locationTrackId == other.locationTrackId && origin == other.origin && origNetwork == other.origNetwork && poc == other.poc && priFreq == other.priFreq && receiverTankerChCode == other.receiverTankerChCode && regionCode == other.regionCode && regionName == other.regionName && reviewDate == other.reviewDate && routePoints == other.routePoints && schedulerOrgName == other.schedulerOrgName && schedulerOrgUnit == other.schedulerOrgUnit && secFreq == other.secFreq && shortName == other.shortName && sic == other.sic && sourceDl == other.sourceDl && trackId == other.trackId && trackName == other.trackName && typeCode == other.typeCode && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is TrackRouteFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            lastUpdateDate == other.lastUpdateDate &&
+            source == other.source &&
+            type == other.type &&
+            id == other.id &&
+            altitudeBlocks == other.altitudeBlocks &&
+            apnSetting == other.apnSetting &&
+            apxBeaconCode == other.apxBeaconCode &&
+            artccMessage == other.artccMessage &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            creatingOrg == other.creatingOrg &&
+            direction == other.direction &&
+            effectiveDate == other.effectiveDate &&
+            externalId == other.externalId &&
+            lastUsedDate == other.lastUsedDate &&
+            locationTrackId == other.locationTrackId &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            poc == other.poc &&
+            priFreq == other.priFreq &&
+            receiverTankerChCode == other.receiverTankerChCode &&
+            regionCode == other.regionCode &&
+            regionName == other.regionName &&
+            reviewDate == other.reviewDate &&
+            routePoints == other.routePoints &&
+            schedulerOrgName == other.schedulerOrgName &&
+            schedulerOrgUnit == other.schedulerOrgUnit &&
+            secFreq == other.secFreq &&
+            shortName == other.shortName &&
+            sic == other.sic &&
+            sourceDl == other.sourceDl &&
+            trackId == other.trackId &&
+            trackName == other.trackName &&
+            typeCode == other.typeCode &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, lastUpdateDate, source, type, id, altitudeBlocks, apnSetting, apxBeaconCode, artccMessage, createdAt, createdBy, creatingOrg, direction, effectiveDate, externalId, lastUsedDate, locationTrackId, origin, origNetwork, poc, priFreq, receiverTankerChCode, regionCode, regionName, reviewDate, routePoints, schedulerOrgName, schedulerOrgUnit, secFreq, shortName, sic, sourceDl, trackId, trackName, typeCode, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            lastUpdateDate,
+            source,
+            type,
+            id,
+            altitudeBlocks,
+            apnSetting,
+            apxBeaconCode,
+            artccMessage,
+            createdAt,
+            createdBy,
+            creatingOrg,
+            direction,
+            effectiveDate,
+            externalId,
+            lastUsedDate,
+            locationTrackId,
+            origin,
+            origNetwork,
+            poc,
+            priFreq,
+            receiverTankerChCode,
+            regionCode,
+            regionName,
+            reviewDate,
+            routePoints,
+            schedulerOrgName,
+            schedulerOrgUnit,
+            secFreq,
+            shortName,
+            sic,
+            sourceDl,
+            trackId,
+            trackName,
+            typeCode,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

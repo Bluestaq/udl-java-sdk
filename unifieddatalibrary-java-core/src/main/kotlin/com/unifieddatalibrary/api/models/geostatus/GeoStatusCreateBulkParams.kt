@@ -14,18 +14,22 @@ import com.unifieddatalibrary.api.core.http.Headers
 import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
-import com.unifieddatalibrary.api.models.geostatus.GeoStatusCreateBulkParams
 import java.time.OffsetDateTime
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/** Service operation intended for initial integration only, to take a list of GEOStatus records as a POST body and ingest into the database. This operation is not intended to be used for automated feeds into UDL. Data providers should contact the UDL team for specific role assignments and for instructions on setting up a permanent feed through an alternate mechanism. */
-class GeoStatusCreateBulkParams private constructor(
+/**
+ * Service operation intended for initial integration only, to take a list of GEOStatus records as a
+ * POST body and ingest into the database. This operation is not intended to be used for automated
+ * feeds into UDL. Data providers should contact the UDL team for specific role assignments and for
+ * instructions on setting up a permanent feed through an alternate mechanism.
+ */
+class GeoStatusCreateBulkParams
+private constructor(
     private val body: List<Body>,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
-
 ) : Params {
 
     fun body(): List<Body> = body
@@ -44,13 +48,11 @@ class GeoStatusCreateBulkParams private constructor(
          * Returns a mutable builder for constructing an instance of [GeoStatusCreateBulkParams].
          *
          * The following fields are required:
-         *
          * ```java
          * .body()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [GeoStatusCreateBulkParams]. */
@@ -61,151 +63,120 @@ class GeoStatusCreateBulkParams private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(geoStatusCreateBulkParams: GeoStatusCreateBulkParams) =
-            apply {
-                body = geoStatusCreateBulkParams.body.toMutableList()
-                additionalHeaders = geoStatusCreateBulkParams.additionalHeaders.toBuilder()
-                additionalQueryParams = geoStatusCreateBulkParams.additionalQueryParams.toBuilder()
-            }
+        internal fun from(geoStatusCreateBulkParams: GeoStatusCreateBulkParams) = apply {
+            body = geoStatusCreateBulkParams.body.toMutableList()
+            additionalHeaders = geoStatusCreateBulkParams.additionalHeaders.toBuilder()
+            additionalQueryParams = geoStatusCreateBulkParams.additionalQueryParams.toBuilder()
+        }
 
-        fun body(body: List<Body>) =
-            apply {
-                this.body = body.toMutableList()
-            }
+        fun body(body: List<Body>) = apply { this.body = body.toMutableList() }
 
         /**
          * Adds a single [Body] to [Builder.body].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addBody(body: Body) =
-            apply {
-                this.body = (this.body ?: mutableListOf()).apply { add(body) }
-            }
+        fun addBody(body: Body) = apply {
+            this.body = (this.body ?: mutableListOf()).apply { add(body) }
+        }
 
-        fun additionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.clear()
-                putAllAdditionalHeaders(additionalHeaders)
-            }
+        fun additionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.clear()
+            putAllAdditionalHeaders(additionalHeaders)
+        }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.clear()
-                putAllAdditionalHeaders(additionalHeaders)
-            }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.clear()
+            putAllAdditionalHeaders(additionalHeaders)
+        }
 
-        fun putAdditionalHeader(name: String, value: String) =
-            apply {
-                additionalHeaders.put(name, value)
-            }
+        fun putAdditionalHeader(name: String, value: String) = apply {
+            additionalHeaders.put(name, value)
+        }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
-            apply {
-                additionalHeaders.put(name, values)
-            }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
+            additionalHeaders.put(name, values)
+        }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.putAll(additionalHeaders)
-            }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.putAll(additionalHeaders)
+        }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.putAll(additionalHeaders)
-            }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.putAll(additionalHeaders)
+        }
 
-        fun replaceAdditionalHeaders(name: String, value: String) =
-            apply {
-                additionalHeaders.replace(name, value)
-            }
+        fun replaceAdditionalHeaders(name: String, value: String) = apply {
+            additionalHeaders.replace(name, value)
+        }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
-            apply {
-                additionalHeaders.replace(name, values)
-            }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
+            additionalHeaders.replace(name, values)
+        }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.replaceAll(additionalHeaders)
-            }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.replaceAll(additionalHeaders)
+        }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.replaceAll(additionalHeaders)
-            }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.replaceAll(additionalHeaders)
+        }
 
-        fun removeAdditionalHeaders(name: String) =
-            apply {
-                additionalHeaders.remove(name)
-            }
+        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) =
-            apply {
-                additionalHeaders.removeAll(names)
-            }
+        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
+            additionalHeaders.removeAll(names)
+        }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.clear()
-                putAllAdditionalQueryParams(additionalQueryParams)
-            }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.clear()
+            putAllAdditionalQueryParams(additionalQueryParams)
+        }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalQueryParams.clear()
-                putAllAdditionalQueryParams(additionalQueryParams)
-            }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
+            this.additionalQueryParams.clear()
+            putAllAdditionalQueryParams(additionalQueryParams)
+        }
 
-        fun putAdditionalQueryParam(key: String, value: String) =
-            apply {
-                additionalQueryParams.put(key, value)
-            }
+        fun putAdditionalQueryParam(key: String, value: String) = apply {
+            additionalQueryParams.put(key, value)
+        }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
-            apply {
-                additionalQueryParams.put(key, values)
-            }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
+            additionalQueryParams.put(key, values)
+        }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.putAll(additionalQueryParams)
-            }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.putAll(additionalQueryParams)
+        }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) =
-            apply {
-                additionalQueryParams.replace(key, value)
-            }
+        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
+            additionalQueryParams.replace(key, value)
+        }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
-            apply {
-                additionalQueryParams.replace(key, values)
-            }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
+            additionalQueryParams.replace(key, values)
+        }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.replaceAll(additionalQueryParams)
-            }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.replaceAll(additionalQueryParams)
+        }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) =
-            apply {
-                additionalQueryParams.remove(key)
-            }
+        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) =
-            apply {
-                additionalQueryParams.removeAll(keys)
-            }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
+            additionalQueryParams.removeAll(keys)
+        }
 
         /**
          * Returns an immutable instance of [GeoStatusCreateBulkParams].
@@ -213,7 +184,6 @@ class GeoStatusCreateBulkParams private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .body()
          * ```
@@ -222,11 +192,9 @@ class GeoStatusCreateBulkParams private constructor(
          */
         fun build(): GeoStatusCreateBulkParams =
             GeoStatusCreateBulkParams(
-              checkRequired(
-                "body", body
-              ).toImmutable(),
-              additionalHeaders.build(),
-              additionalQueryParams.build(),
+                checkRequired("body", body).toImmutable(),
+                additionalHeaders.build(),
+                additionalQueryParams.build(),
             )
     }
 
@@ -236,13 +204,22 @@ class GeoStatusCreateBulkParams private constructor(
 
     override fun _queryParams(): QueryParams = additionalQueryParams
 
-    /** Information for the specified on-orbit GEO spacecraft, including status, expected longitude limits, and drift rates. */
-    class Body @JsonCreator private constructor(
-        @JsonProperty("classificationMarking") @ExcludeMissing private val classificationMarking: JsonField<String>,
+    /**
+     * Information for the specified on-orbit GEO spacecraft, including status, expected longitude
+     * limits, and drift rates.
+     */
+    class Body
+    @JsonCreator
+    private constructor(
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        private val classificationMarking: JsonField<String>,
         @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
         @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
         @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("confidenceLevel") @ExcludeMissing private val confidenceLevel: JsonField<String>,
+        @JsonProperty("confidenceLevel")
+        @ExcludeMissing
+        private val confidenceLevel: JsonField<String>,
         @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
         @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
         @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
@@ -254,183 +231,229 @@ class GeoStatusCreateBulkParams private constructor(
         @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
         @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
         @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("planeChangeStatus") @ExcludeMissing private val planeChangeStatus: JsonField<String>,
+        @JsonProperty("planeChangeStatus")
+        @ExcludeMissing
+        private val planeChangeStatus: JsonField<String>,
         @JsonProperty("rawFileURI") @ExcludeMissing private val rawFileUri: JsonField<String>,
-        @JsonProperty("relativeEnergy") @ExcludeMissing private val relativeEnergy: JsonField<Double>,
+        @JsonProperty("relativeEnergy")
+        @ExcludeMissing
+        private val relativeEnergy: JsonField<Double>,
         @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
         @JsonProperty("sc") @ExcludeMissing private val sc: JsonField<Double>,
-        @JsonProperty("semiAnnualCorrFlag") @ExcludeMissing private val semiAnnualCorrFlag: JsonField<Boolean>,
+        @JsonProperty("semiAnnualCorrFlag")
+        @ExcludeMissing
+        private val semiAnnualCorrFlag: JsonField<Boolean>,
         @JsonProperty("ss") @ExcludeMissing private val ss: JsonField<Double>,
         @JsonProperty("troughType") @ExcludeMissing private val troughType: JsonField<String>,
-
     ) {
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
-        fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
+        fun classificationMarking(): String =
+            classificationMarking.getRequired("classificationMarking")
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
         /**
          * Source of the data.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun source(): String = source.getRequired("source")
 
         /**
          * Unique identifier of the record, auto-generated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun id(): Optional<String> = id.getOptional("id")
 
         /**
          * Indicates the confidence level in the entry. (Low, Medium, High).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun confidenceLevel(): Optional<String> = confidenceLevel.getOptional("confidenceLevel")
 
         /**
          * Time the row was created in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
         /**
          * Application user who created the row in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
         /**
          * Unique identifier of the object on-orbit object.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun idOnOrbit(): Optional<String> = idOnOrbit.getOptional("idOnOrbit")
 
         /**
-         * Maximum longitude for this object. WGS-84 longitude of the spacecraft position, in degrees. 0 to 360 degrees.
+         * Maximum longitude for this object. WGS-84 longitude of the spacecraft position, in
+         * degrees. 0 to 360 degrees.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun longitudeMax(): Optional<Double> = longitudeMax.getOptional("longitudeMax")
 
         /**
-         * Minimum longitude for this object. WGS-84 longitude of the spacecraft position, in degrees. 0 to 360 degrees.
+         * Minimum longitude for this object. WGS-84 longitude of the spacecraft position, in
+         * degrees. 0 to 360 degrees.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun longitudeMin(): Optional<Double> = longitudeMin.getOptional("longitudeMin")
 
         /**
          * Corrective or overriding long term trend for longitudinal change in degrees/day.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun longitudeRate(): Optional<Double> = longitudeRate.getOptional("longitudeRate")
 
         /**
          * Lost space object indicator. (True or False).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun lostFlag(): Optional<Boolean> = lostFlag.getOptional("lostFlag")
 
         /**
          * Space object status. (Active, Dead, Unknown).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun objectStatus(): Optional<String> = objectStatus.getOptional("objectStatus")
 
         /**
-         * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun origin(): Optional<String> = origin.getOptional("origin")
 
         /**
-         * The originating source network on which this record was created, auto-populated by the system.
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
         /**
-         * Optional identifier provided to indicate the target onorbit. This may be an internal identifier and not necessarily map to a valid satellite number.
+         * Optional identifier provided to indicate the target onorbit. This may be an internal
+         * identifier and not necessarily map to a valid satellite number.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun origObjectId(): Optional<String> = origObjectId.getOptional("origObjectId")
 
         /**
          * Geosynchronous plane changing status. (Current, Never, Former, Future).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun planeChangeStatus(): Optional<String> = planeChangeStatus.getOptional("planeChangeStatus")
+        fun planeChangeStatus(): Optional<String> =
+            planeChangeStatus.getOptional("planeChangeStatus")
 
         /**
-         * Optional URI location in the document repository of the raw file parsed by the system to produce this record. To download the raw file, prepend https://udl-hostname/scs/download?id= to this value.
+         * Optional URI location in the document repository of the raw file parsed by the system to
+         * produce this record. To download the raw file, prepend
+         * https://udl-hostname/scs/download?id= to this value.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun rawFileUri(): Optional<String> = rawFileUri.getOptional("rawFileURI")
 
         /**
          * Objects displacement from geostationary orbit in deg^2/day^2.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun relativeEnergy(): Optional<Double> = relativeEnergy.getOptional("relativeEnergy")
 
         /**
          * Satellite/catalog number of the target on-orbit object.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun satNo(): Optional<Int> = satNo.getOptional("satNo")
 
         /**
          * Sine of inclination times the cosine of right ascension.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun sc(): Optional<Double> = sc.getOptional("sc")
 
         /**
          * Semi-annual correction. (True or False).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun semiAnnualCorrFlag(): Optional<Boolean> = semiAnnualCorrFlag.getOptional("semiAnnualCorrFlag")
+        fun semiAnnualCorrFlag(): Optional<Boolean> =
+            semiAnnualCorrFlag.getOptional("semiAnnualCorrFlag")
 
         /**
          * Sine of inclination times the sine of right ascension.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun ss(): Optional<Double> = ss.getOptional("ss")
 
@@ -447,14 +470,16 @@ class GeoStatusCreateBulkParams private constructor(
          *
          * West - Drifting westward; large relative energy and a period greater than 1436.2 minutes.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun troughType(): Optional<String> = troughType.getOptional("troughType")
 
         /**
          * Returns the raw JSON value of [classificationMarking].
          *
-         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("classificationMarking")
         @ExcludeMissing
@@ -465,32 +490,27 @@ class GeoStatusCreateBulkParams private constructor(
          *
          * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("dataMode")
-        @ExcludeMissing
-        fun _dataMode(): JsonField<DataMode> = dataMode
+        @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
 
         /**
          * Returns the raw JSON value of [source].
          *
          * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("source")
-        @ExcludeMissing
-        fun _source(): JsonField<String> = source
+        @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
 
         /**
          * Returns the raw JSON value of [id].
          *
          * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("id")
-        @ExcludeMissing
-        fun _id(): JsonField<String> = id
+        @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
 
         /**
          * Returns the raw JSON value of [confidenceLevel].
          *
-         * Unlike [confidenceLevel], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [confidenceLevel], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("confidenceLevel")
         @ExcludeMissing
@@ -510,23 +530,20 @@ class GeoStatusCreateBulkParams private constructor(
          *
          * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("createdBy")
-        @ExcludeMissing
-        fun _createdBy(): JsonField<String> = createdBy
+        @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
         /**
          * Returns the raw JSON value of [idOnOrbit].
          *
          * Unlike [idOnOrbit], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("idOnOrbit")
-        @ExcludeMissing
-        fun _idOnOrbit(): JsonField<String> = idOnOrbit
+        @JsonProperty("idOnOrbit") @ExcludeMissing fun _idOnOrbit(): JsonField<String> = idOnOrbit
 
         /**
          * Returns the raw JSON value of [longitudeMax].
          *
-         * Unlike [longitudeMax], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [longitudeMax], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("longitudeMax")
         @ExcludeMissing
@@ -535,7 +552,8 @@ class GeoStatusCreateBulkParams private constructor(
         /**
          * Returns the raw JSON value of [longitudeMin].
          *
-         * Unlike [longitudeMin], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [longitudeMin], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("longitudeMin")
         @ExcludeMissing
@@ -544,7 +562,8 @@ class GeoStatusCreateBulkParams private constructor(
         /**
          * Returns the raw JSON value of [longitudeRate].
          *
-         * Unlike [longitudeRate], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [longitudeRate], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("longitudeRate")
         @ExcludeMissing
@@ -555,14 +574,13 @@ class GeoStatusCreateBulkParams private constructor(
          *
          * Unlike [lostFlag], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("lostFlag")
-        @ExcludeMissing
-        fun _lostFlag(): JsonField<Boolean> = lostFlag
+        @JsonProperty("lostFlag") @ExcludeMissing fun _lostFlag(): JsonField<Boolean> = lostFlag
 
         /**
          * Returns the raw JSON value of [objectStatus].
          *
-         * Unlike [objectStatus], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [objectStatus], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("objectStatus")
         @ExcludeMissing
@@ -573,9 +591,7 @@ class GeoStatusCreateBulkParams private constructor(
          *
          * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("origin")
-        @ExcludeMissing
-        fun _origin(): JsonField<String> = origin
+        @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
 
         /**
          * Returns the raw JSON value of [origNetwork].
@@ -589,7 +605,8 @@ class GeoStatusCreateBulkParams private constructor(
         /**
          * Returns the raw JSON value of [origObjectId].
          *
-         * Unlike [origObjectId], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [origObjectId], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("origObjectId")
         @ExcludeMissing
@@ -598,7 +615,8 @@ class GeoStatusCreateBulkParams private constructor(
         /**
          * Returns the raw JSON value of [planeChangeStatus].
          *
-         * Unlike [planeChangeStatus], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [planeChangeStatus], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("planeChangeStatus")
         @ExcludeMissing
@@ -616,7 +634,8 @@ class GeoStatusCreateBulkParams private constructor(
         /**
          * Returns the raw JSON value of [relativeEnergy].
          *
-         * Unlike [relativeEnergy], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [relativeEnergy], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("relativeEnergy")
         @ExcludeMissing
@@ -627,23 +646,20 @@ class GeoStatusCreateBulkParams private constructor(
          *
          * Unlike [satNo], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("satNo")
-        @ExcludeMissing
-        fun _satNo(): JsonField<Int> = satNo
+        @JsonProperty("satNo") @ExcludeMissing fun _satNo(): JsonField<Int> = satNo
 
         /**
          * Returns the raw JSON value of [sc].
          *
          * Unlike [sc], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("sc")
-        @ExcludeMissing
-        fun _sc(): JsonField<Double> = sc
+        @JsonProperty("sc") @ExcludeMissing fun _sc(): JsonField<Double> = sc
 
         /**
          * Returns the raw JSON value of [semiAnnualCorrFlag].
          *
-         * Unlike [semiAnnualCorrFlag], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [semiAnnualCorrFlag], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("semiAnnualCorrFlag")
         @ExcludeMissing
@@ -654,9 +670,7 @@ class GeoStatusCreateBulkParams private constructor(
          *
          * Unlike [ss], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("ss")
-        @ExcludeMissing
-        fun _ss(): JsonField<Double> = ss
+        @JsonProperty("ss") @ExcludeMissing fun _ss(): JsonField<Double> = ss
 
         /**
          * Returns the raw JSON value of [troughType].
@@ -675,15 +689,13 @@ class GeoStatusCreateBulkParams private constructor(
              * Returns a mutable builder for constructing an instance of [Body].
              *
              * The following fields are required:
-             *
              * ```java
              * .classificationMarking()
              * .dataMode()
              * .source()
              * ```
              */
-            @JvmStatic
-            fun builder() = Builder()
+            @JvmStatic fun builder() = Builder()
         }
 
         /** A builder for [Body]. */
@@ -715,71 +727,73 @@ class GeoStatusCreateBulkParams private constructor(
             private var troughType: JsonField<String> = JsonMissing.of()
 
             @JvmSynthetic
-            internal fun from(body: Body) =
-                apply {
-                    classificationMarking = body.classificationMarking
-                    dataMode = body.dataMode
-                    source = body.source
-                    id = body.id
-                    confidenceLevel = body.confidenceLevel
-                    createdAt = body.createdAt
-                    createdBy = body.createdBy
-                    idOnOrbit = body.idOnOrbit
-                    longitudeMax = body.longitudeMax
-                    longitudeMin = body.longitudeMin
-                    longitudeRate = body.longitudeRate
-                    lostFlag = body.lostFlag
-                    objectStatus = body.objectStatus
-                    origin = body.origin
-                    origNetwork = body.origNetwork
-                    origObjectId = body.origObjectId
-                    planeChangeStatus = body.planeChangeStatus
-                    rawFileUri = body.rawFileUri
-                    relativeEnergy = body.relativeEnergy
-                    satNo = body.satNo
-                    sc = body.sc
-                    semiAnnualCorrFlag = body.semiAnnualCorrFlag
-                    ss = body.ss
-                    troughType = body.troughType
-                }
+            internal fun from(body: Body) = apply {
+                classificationMarking = body.classificationMarking
+                dataMode = body.dataMode
+                source = body.source
+                id = body.id
+                confidenceLevel = body.confidenceLevel
+                createdAt = body.createdAt
+                createdBy = body.createdBy
+                idOnOrbit = body.idOnOrbit
+                longitudeMax = body.longitudeMax
+                longitudeMin = body.longitudeMin
+                longitudeRate = body.longitudeRate
+                lostFlag = body.lostFlag
+                objectStatus = body.objectStatus
+                origin = body.origin
+                origNetwork = body.origNetwork
+                origObjectId = body.origObjectId
+                planeChangeStatus = body.planeChangeStatus
+                rawFileUri = body.rawFileUri
+                relativeEnergy = body.relativeEnergy
+                satNo = body.satNo
+                sc = body.sc
+                semiAnnualCorrFlag = body.semiAnnualCorrFlag
+                ss = body.ss
+                troughType = body.troughType
+            }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-            fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
+            fun classificationMarking(classificationMarking: String) =
+                classificationMarking(JsonField.of(classificationMarking))
 
             /**
              * Sets [Builder.classificationMarking] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.classificationMarking] with a well-typed [String]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun classificationMarking(classificationMarking: JsonField<String>) =
-                apply {
-                    this.classificationMarking = classificationMarking
-                }
+            fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+                this.classificationMarking = classificationMarking
+            }
 
             /**
              * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
              *
-             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may
+             * include both real and simulated data.
              *
-             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events,
+             * and analysis.
              *
              * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
              *
-             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+             * requirements, and for validating technical, functional, and performance
+             * characteristics.
              */
             fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
             /**
              * Sets [Builder.dataMode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun dataMode(dataMode: JsonField<DataMode>) =
-                apply {
-                    this.dataMode = dataMode
-                }
+            fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
 
             /** Source of the data. */
             fun source(source: String) = source(JsonField.of(source))
@@ -787,13 +801,11 @@ class GeoStatusCreateBulkParams private constructor(
             /**
              * Sets [Builder.source] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.source] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun source(source: JsonField<String>) =
-                apply {
-                    this.source = source
-                }
+            fun source(source: JsonField<String>) = apply { this.source = source }
 
             /** Unique identifier of the record, auto-generated by the system. */
             fun id(id: String) = id(JsonField.of(id))
@@ -801,27 +813,26 @@ class GeoStatusCreateBulkParams private constructor(
             /**
              * Sets [Builder.id] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.id] with a well-typed [String] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun id(id: JsonField<String>) =
-                apply {
-                    this.id = id
-                }
+            fun id(id: JsonField<String>) = apply { this.id = id }
 
             /** Indicates the confidence level in the entry. (Low, Medium, High). */
-            fun confidenceLevel(confidenceLevel: String) = confidenceLevel(JsonField.of(confidenceLevel))
+            fun confidenceLevel(confidenceLevel: String) =
+                confidenceLevel(JsonField.of(confidenceLevel))
 
             /**
              * Sets [Builder.confidenceLevel] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.confidenceLevel] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.confidenceLevel] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun confidenceLevel(confidenceLevel: JsonField<String>) =
-                apply {
-                    this.confidenceLevel = confidenceLevel
-                }
+            fun confidenceLevel(confidenceLevel: JsonField<String>) = apply {
+                this.confidenceLevel = confidenceLevel
+            }
 
             /** Time the row was created in the database, auto-populated by the system. */
             fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -829,27 +840,27 @@ class GeoStatusCreateBulkParams private constructor(
             /**
              * Sets [Builder.createdAt] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdAt(createdAt: JsonField<OffsetDateTime>) =
-                apply {
-                    this.createdAt = createdAt
-                }
+            fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply {
+                this.createdAt = createdAt
+            }
 
-            /** Application user who created the row in the database, auto-populated by the system. */
+            /**
+             * Application user who created the row in the database, auto-populated by the system.
+             */
             fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
 
             /**
              * Sets [Builder.createdBy] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdBy(createdBy: JsonField<String>) =
-                apply {
-                    this.createdBy = createdBy
-                }
+            fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
             /** Unique identifier of the object on-orbit object. */
             fun idOnOrbit(idOnOrbit: String) = idOnOrbit(JsonField.of(idOnOrbit))
@@ -857,41 +868,45 @@ class GeoStatusCreateBulkParams private constructor(
             /**
              * Sets [Builder.idOnOrbit] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.idOnOrbit] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.idOnOrbit] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun idOnOrbit(idOnOrbit: JsonField<String>) =
-                apply {
-                    this.idOnOrbit = idOnOrbit
-                }
+            fun idOnOrbit(idOnOrbit: JsonField<String>) = apply { this.idOnOrbit = idOnOrbit }
 
-            /** Maximum longitude for this object. WGS-84 longitude of the spacecraft position, in degrees. 0 to 360 degrees. */
+            /**
+             * Maximum longitude for this object. WGS-84 longitude of the spacecraft position, in
+             * degrees. 0 to 360 degrees.
+             */
             fun longitudeMax(longitudeMax: Double) = longitudeMax(JsonField.of(longitudeMax))
 
             /**
              * Sets [Builder.longitudeMax] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.longitudeMax] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.longitudeMax] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun longitudeMax(longitudeMax: JsonField<Double>) =
-                apply {
-                    this.longitudeMax = longitudeMax
-                }
+            fun longitudeMax(longitudeMax: JsonField<Double>) = apply {
+                this.longitudeMax = longitudeMax
+            }
 
-            /** Minimum longitude for this object. WGS-84 longitude of the spacecraft position, in degrees. 0 to 360 degrees. */
+            /**
+             * Minimum longitude for this object. WGS-84 longitude of the spacecraft position, in
+             * degrees. 0 to 360 degrees.
+             */
             fun longitudeMin(longitudeMin: Double) = longitudeMin(JsonField.of(longitudeMin))
 
             /**
              * Sets [Builder.longitudeMin] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.longitudeMin] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.longitudeMin] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun longitudeMin(longitudeMin: JsonField<Double>) =
-                apply {
-                    this.longitudeMin = longitudeMin
-                }
+            fun longitudeMin(longitudeMin: JsonField<Double>) = apply {
+                this.longitudeMin = longitudeMin
+            }
 
             /** Corrective or overriding long term trend for longitudinal change in degrees/day. */
             fun longitudeRate(longitudeRate: Double) = longitudeRate(JsonField.of(longitudeRate))
@@ -899,13 +914,13 @@ class GeoStatusCreateBulkParams private constructor(
             /**
              * Sets [Builder.longitudeRate] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.longitudeRate] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.longitudeRate] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun longitudeRate(longitudeRate: JsonField<Double>) =
-                apply {
-                    this.longitudeRate = longitudeRate
-                }
+            fun longitudeRate(longitudeRate: JsonField<Double>) = apply {
+                this.longitudeRate = longitudeRate
+            }
 
             /** Lost space object indicator. (True or False). */
             fun lostFlag(lostFlag: Boolean) = lostFlag(JsonField.of(lostFlag))
@@ -913,13 +928,11 @@ class GeoStatusCreateBulkParams private constructor(
             /**
              * Sets [Builder.lostFlag] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.lostFlag] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.lostFlag] with a well-typed [Boolean] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun lostFlag(lostFlag: JsonField<Boolean>) =
-                apply {
-                    this.lostFlag = lostFlag
-                }
+            fun lostFlag(lostFlag: JsonField<Boolean>) = apply { this.lostFlag = lostFlag }
 
             /** Space object status. (Active, Dead, Unknown). */
             fun objectStatus(objectStatus: String) = objectStatus(JsonField.of(objectStatus))
@@ -927,97 +940,110 @@ class GeoStatusCreateBulkParams private constructor(
             /**
              * Sets [Builder.objectStatus] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.objectStatus] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.objectStatus] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun objectStatus(objectStatus: JsonField<String>) =
-                apply {
-                    this.objectStatus = objectStatus
-                }
+            fun objectStatus(objectStatus: JsonField<String>) = apply {
+                this.objectStatus = objectStatus
+            }
 
-            /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
+            /**
+             * Originating system or organization which produced the data, if different from the
+             * source. The origin may be different than the source if the source was a mediating
+             * system which forwarded the data on behalf of the origin system. If null, the source
+             * may be assumed to be the origin.
+             */
             fun origin(origin: String) = origin(JsonField.of(origin))
 
             /**
              * Sets [Builder.origin] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origin] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origin(origin: JsonField<String>) =
-                apply {
-                    this.origin = origin
-                }
+            fun origin(origin: JsonField<String>) = apply { this.origin = origin }
 
-            /** The originating source network on which this record was created, auto-populated by the system. */
+            /**
+             * The originating source network on which this record was created, auto-populated by
+             * the system.
+             */
             fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
             /**
              * Sets [Builder.origNetwork] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origNetwork] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origNetwork(origNetwork: JsonField<String>) =
-                apply {
-                    this.origNetwork = origNetwork
-                }
+            fun origNetwork(origNetwork: JsonField<String>) = apply {
+                this.origNetwork = origNetwork
+            }
 
-            /** Optional identifier provided to indicate the target onorbit. This may be an internal identifier and not necessarily map to a valid satellite number. */
+            /**
+             * Optional identifier provided to indicate the target onorbit. This may be an internal
+             * identifier and not necessarily map to a valid satellite number.
+             */
             fun origObjectId(origObjectId: String) = origObjectId(JsonField.of(origObjectId))
 
             /**
              * Sets [Builder.origObjectId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origObjectId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origObjectId] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origObjectId(origObjectId: JsonField<String>) =
-                apply {
-                    this.origObjectId = origObjectId
-                }
+            fun origObjectId(origObjectId: JsonField<String>) = apply {
+                this.origObjectId = origObjectId
+            }
 
             /** Geosynchronous plane changing status. (Current, Never, Former, Future). */
-            fun planeChangeStatus(planeChangeStatus: String) = planeChangeStatus(JsonField.of(planeChangeStatus))
+            fun planeChangeStatus(planeChangeStatus: String) =
+                planeChangeStatus(JsonField.of(planeChangeStatus))
 
             /**
              * Sets [Builder.planeChangeStatus] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.planeChangeStatus] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.planeChangeStatus] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun planeChangeStatus(planeChangeStatus: JsonField<String>) =
-                apply {
-                    this.planeChangeStatus = planeChangeStatus
-                }
+            fun planeChangeStatus(planeChangeStatus: JsonField<String>) = apply {
+                this.planeChangeStatus = planeChangeStatus
+            }
 
-            /** Optional URI location in the document repository of the raw file parsed by the system to produce this record. To download the raw file, prepend https://udl-hostname/scs/download?id= to this value. */
+            /**
+             * Optional URI location in the document repository of the raw file parsed by the system
+             * to produce this record. To download the raw file, prepend
+             * https://udl-hostname/scs/download?id= to this value.
+             */
             fun rawFileUri(rawFileUri: String) = rawFileUri(JsonField.of(rawFileUri))
 
             /**
              * Sets [Builder.rawFileUri] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.rawFileUri] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.rawFileUri] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun rawFileUri(rawFileUri: JsonField<String>) =
-                apply {
-                    this.rawFileUri = rawFileUri
-                }
+            fun rawFileUri(rawFileUri: JsonField<String>) = apply { this.rawFileUri = rawFileUri }
 
             /** Objects displacement from geostationary orbit in deg^2/day^2. */
-            fun relativeEnergy(relativeEnergy: Double) = relativeEnergy(JsonField.of(relativeEnergy))
+            fun relativeEnergy(relativeEnergy: Double) =
+                relativeEnergy(JsonField.of(relativeEnergy))
 
             /**
              * Sets [Builder.relativeEnergy] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.relativeEnergy] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.relativeEnergy] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun relativeEnergy(relativeEnergy: JsonField<Double>) =
-                apply {
-                    this.relativeEnergy = relativeEnergy
-                }
+            fun relativeEnergy(relativeEnergy: JsonField<Double>) = apply {
+                this.relativeEnergy = relativeEnergy
+            }
 
             /** Satellite/catalog number of the target on-orbit object. */
             fun satNo(satNo: Int) = satNo(JsonField.of(satNo))
@@ -1025,13 +1051,11 @@ class GeoStatusCreateBulkParams private constructor(
             /**
              * Sets [Builder.satNo] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.satNo] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.satNo] with a well-typed [Int] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun satNo(satNo: JsonField<Int>) =
-                apply {
-                    this.satNo = satNo
-                }
+            fun satNo(satNo: JsonField<Int>) = apply { this.satNo = satNo }
 
             /** Sine of inclination times the cosine of right ascension. */
             fun sc(sc: Double) = sc(JsonField.of(sc))
@@ -1039,27 +1063,26 @@ class GeoStatusCreateBulkParams private constructor(
             /**
              * Sets [Builder.sc] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.sc] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun sc(sc: JsonField<Double>) =
-                apply {
-                    this.sc = sc
-                }
+            fun sc(sc: JsonField<Double>) = apply { this.sc = sc }
 
             /** Semi-annual correction. (True or False). */
-            fun semiAnnualCorrFlag(semiAnnualCorrFlag: Boolean) = semiAnnualCorrFlag(JsonField.of(semiAnnualCorrFlag))
+            fun semiAnnualCorrFlag(semiAnnualCorrFlag: Boolean) =
+                semiAnnualCorrFlag(JsonField.of(semiAnnualCorrFlag))
 
             /**
              * Sets [Builder.semiAnnualCorrFlag] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.semiAnnualCorrFlag] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.semiAnnualCorrFlag] with a well-typed [Boolean]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun semiAnnualCorrFlag(semiAnnualCorrFlag: JsonField<Boolean>) =
-                apply {
-                    this.semiAnnualCorrFlag = semiAnnualCorrFlag
-                }
+            fun semiAnnualCorrFlag(semiAnnualCorrFlag: JsonField<Boolean>) = apply {
+                this.semiAnnualCorrFlag = semiAnnualCorrFlag
+            }
 
             /** Sine of inclination times the sine of right ascension. */
             fun ss(ss: Double) = ss(JsonField.of(ss))
@@ -1067,13 +1090,11 @@ class GeoStatusCreateBulkParams private constructor(
             /**
              * Sets [Builder.ss] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.ss] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.ss] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun ss(ss: JsonField<Double>) =
-                apply {
-                    this.ss = ss
-                }
+            fun ss(ss: JsonField<Double>) = apply { this.ss = ss }
 
             /**
              * Indicates the trough (gravity well) or drift direction of a space object:
@@ -1084,22 +1105,22 @@ class GeoStatusCreateBulkParams private constructor(
              *
              * Both - Oscillating between both 255 and 75 troughs.
              *
-             * East - Drifting eastward; large relative energy and a period less than 1436.1 minutes.
+             * East - Drifting eastward; large relative energy and a period less than 1436.1
+             * minutes.
              *
-             * West - Drifting westward; large relative energy and a period greater than 1436.2 minutes.
+             * West - Drifting westward; large relative energy and a period greater than 1436.2
+             * minutes.
              */
             fun troughType(troughType: String) = troughType(JsonField.of(troughType))
 
             /**
              * Sets [Builder.troughType] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.troughType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.troughType] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun troughType(troughType: JsonField<String>) =
-                apply {
-                    this.troughType = troughType
-                }
+            fun troughType(troughType: JsonField<String>) = apply { this.troughType = troughType }
 
             /**
              * Returns an immutable instance of [Body].
@@ -1107,7 +1128,6 @@ class GeoStatusCreateBulkParams private constructor(
              * Further updates to this [Builder] will not mutate the returned instance.
              *
              * The following fields are required:
-             *
              * ```java
              * .classificationMarking()
              * .dataMode()
@@ -1118,73 +1138,66 @@ class GeoStatusCreateBulkParams private constructor(
              */
             fun build(): Body =
                 Body(
-                  checkRequired(
-                    "classificationMarking", classificationMarking
-                  ),
-                  checkRequired(
-                    "dataMode", dataMode
-                  ),
-                  checkRequired(
-                    "source", source
-                  ),
-                  id,
-                  confidenceLevel,
-                  createdAt,
-                  createdBy,
-                  idOnOrbit,
-                  longitudeMax,
-                  longitudeMin,
-                  longitudeRate,
-                  lostFlag,
-                  objectStatus,
-                  origin,
-                  origNetwork,
-                  origObjectId,
-                  planeChangeStatus,
-                  rawFileUri,
-                  relativeEnergy,
-                  satNo,
-                  sc,
-                  semiAnnualCorrFlag,
-                  ss,
-                  troughType,
+                    checkRequired("classificationMarking", classificationMarking),
+                    checkRequired("dataMode", dataMode),
+                    checkRequired("source", source),
+                    id,
+                    confidenceLevel,
+                    createdAt,
+                    createdBy,
+                    idOnOrbit,
+                    longitudeMax,
+                    longitudeMin,
+                    longitudeRate,
+                    lostFlag,
+                    objectStatus,
+                    origin,
+                    origNetwork,
+                    origObjectId,
+                    planeChangeStatus,
+                    rawFileUri,
+                    relativeEnergy,
+                    satNo,
+                    sc,
+                    semiAnnualCorrFlag,
+                    ss,
+                    troughType,
                 )
         }
 
         private var validated: Boolean = false
 
-        fun validate(): Body =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                classificationMarking()
-                dataMode().validate()
-                source()
-                id()
-                confidenceLevel()
-                createdAt()
-                createdBy()
-                idOnOrbit()
-                longitudeMax()
-                longitudeMin()
-                longitudeRate()
-                lostFlag()
-                objectStatus()
-                origin()
-                origNetwork()
-                origObjectId()
-                planeChangeStatus()
-                rawFileUri()
-                relativeEnergy()
-                satNo()
-                sc()
-                semiAnnualCorrFlag()
-                ss()
-                troughType()
-                validated = true
+        fun validate(): Body = apply {
+            if (validated) {
+                return@apply
             }
+
+            classificationMarking()
+            dataMode().validate()
+            source()
+            id()
+            confidenceLevel()
+            createdAt()
+            createdBy()
+            idOnOrbit()
+            longitudeMax()
+            longitudeMin()
+            longitudeRate()
+            lostFlag()
+            objectStatus()
+            origin()
+            origNetwork()
+            origObjectId()
+            planeChangeStatus()
+            rawFileUri()
+            relativeEnergy()
+            satNo()
+            sc()
+            semiAnnualCorrFlag()
+            ss()
+            troughType()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -1195,38 +1208,64 @@ class GeoStatusCreateBulkParams private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
         @JvmSynthetic
-        internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (if (confidenceLevel.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (idOnOrbit.asKnown().isPresent) 1 else 0) + (if (longitudeMax.asKnown().isPresent) 1 else 0) + (if (longitudeMin.asKnown().isPresent) 1 else 0) + (if (longitudeRate.asKnown().isPresent) 1 else 0) + (if (lostFlag.asKnown().isPresent) 1 else 0) + (if (objectStatus.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (origObjectId.asKnown().isPresent) 1 else 0) + (if (planeChangeStatus.asKnown().isPresent) 1 else 0) + (if (rawFileUri.asKnown().isPresent) 1 else 0) + (if (relativeEnergy.asKnown().isPresent) 1 else 0) + (if (satNo.asKnown().isPresent) 1 else 0) + (if (sc.asKnown().isPresent) 1 else 0) + (if (semiAnnualCorrFlag.asKnown().isPresent) 1 else 0) + (if (ss.asKnown().isPresent) 1 else 0) + (if (troughType.asKnown().isPresent) 1 else 0)
+        internal fun validity(): Int =
+            (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+                (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+                (if (source.asKnown().isPresent) 1 else 0) +
+                (if (id.asKnown().isPresent) 1 else 0) +
+                (if (confidenceLevel.asKnown().isPresent) 1 else 0) +
+                (if (createdAt.asKnown().isPresent) 1 else 0) +
+                (if (createdBy.asKnown().isPresent) 1 else 0) +
+                (if (idOnOrbit.asKnown().isPresent) 1 else 0) +
+                (if (longitudeMax.asKnown().isPresent) 1 else 0) +
+                (if (longitudeMin.asKnown().isPresent) 1 else 0) +
+                (if (longitudeRate.asKnown().isPresent) 1 else 0) +
+                (if (lostFlag.asKnown().isPresent) 1 else 0) +
+                (if (objectStatus.asKnown().isPresent) 1 else 0) +
+                (if (origin.asKnown().isPresent) 1 else 0) +
+                (if (origNetwork.asKnown().isPresent) 1 else 0) +
+                (if (origObjectId.asKnown().isPresent) 1 else 0) +
+                (if (planeChangeStatus.asKnown().isPresent) 1 else 0) +
+                (if (rawFileUri.asKnown().isPresent) 1 else 0) +
+                (if (relativeEnergy.asKnown().isPresent) 1 else 0) +
+                (if (satNo.asKnown().isPresent) 1 else 0) +
+                (if (sc.asKnown().isPresent) 1 else 0) +
+                (if (semiAnnualCorrFlag.asKnown().isPresent) 1 else 0) +
+                (if (ss.asKnown().isPresent) 1 else 0) +
+                (if (troughType.asKnown().isPresent) 1 else 0)
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          */
-        class DataMode @JsonCreator private constructor(
-            private val value: JsonField<String>,
-
-        ) : Enum {
+        class DataMode @JsonCreator private constructor(private val value: JsonField<String>) :
+            Enum {
 
             /**
              * Returns this class instance's raw value.
              *
-             * This is usually only useful if this instance was deserialized from data that doesn't match any known
-             * member, and you want to know that value. For example, if the SDK is on an older version than the
-             * API, then the API may respond with new members that the SDK is unaware of.
+             * This is usually only useful if this instance was deserialized from data that doesn't
+             * match any known member, and you want to know that value. For example, if the SDK is
+             * on an older version than the API, then the API may respond with new members that the
+             * SDK is unaware of.
              */
-            @com.fasterxml.jackson.annotation.JsonValue
-            fun _value(): JsonField<String> = value
+            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
             companion object {
 
@@ -1253,11 +1292,9 @@ class GeoStatusCreateBulkParams private constructor(
              * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
              *
              * An instance of [DataMode] can contain an unknown value in a couple of cases:
-             *
-             * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-             *   an older version than the API, then the API may respond with new members that the SDK is unaware
-             *   of.
-             *
+             * - It was deserialized from data that doesn't match any known member. For example, if
+             *   the SDK is on an older version than the API, then the API may respond with new
+             *   members that the SDK is unaware of.
              * - It was constructed with an arbitrary value using the [of] method.
              */
             enum class Value {
@@ -1265,16 +1302,18 @@ class GeoStatusCreateBulkParams private constructor(
                 TEST,
                 SIMULATED,
                 EXERCISE,
-                /** An enum member indicating that [DataMode] was instantiated with an unknown value. */
+                /**
+                 * An enum member indicating that [DataMode] was instantiated with an unknown value.
+                 */
                 _UNKNOWN,
             }
 
             /**
-             * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-             * class was instantiated with an unknown value.
+             * Returns an enum member corresponding to this class instance's value, or
+             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
              *
-             * Use the [known] method instead if you're certain the value is always known or if you want to throw
-             * for the unknown case.
+             * Use the [known] method instead if you're certain the value is always known or if you
+             * want to throw for the unknown case.
              */
             fun value(): Value =
                 when (this) {
@@ -1288,10 +1327,11 @@ class GeoStatusCreateBulkParams private constructor(
             /**
              * Returns an enum member corresponding to this class instance's value.
              *
-             * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-             * for the unknown case.
+             * Use the [value] method instead if you're uncertain the value is always known and
+             * don't want to throw for the unknown case.
              *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
+             *   not a known member.
              */
             fun known(): Known =
                 when (this) {
@@ -1305,25 +1345,27 @@ class GeoStatusCreateBulkParams private constructor(
             /**
              * Returns this class instance's primitive wire representation.
              *
-             * This differs from the [toString] method because that method is primarily for debugging and generally
-             * doesn't throw.
+             * This differs from the [toString] method because that method is primarily for
+             * debugging and generally doesn't throw.
              *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-             * primitive type.
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
+             *   not have the expected primitive type.
              */
-            fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+            fun asString(): String =
+                _value().asString().orElseThrow {
+                    UnifieddatalibraryInvalidDataException("Value is not a String")
+                }
 
             private var validated: Boolean = false
 
-            fun validate(): DataMode =
-                apply {
-                    if (validated) {
-                      return@apply
-                    }
-
-                    known()
-                    validated = true
+            fun validate(): DataMode = apply {
+                if (validated) {
+                    return@apply
                 }
+
+                known()
+                validated = true
+            }
 
             fun isValid(): Boolean =
                 try {
@@ -1334,19 +1376,19 @@ class GeoStatusCreateBulkParams private constructor(
                 }
 
             /**
-             * Returns a score indicating how many valid values are contained in this object recursively.
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
              *
              * Used for best match union deserialization.
              */
-            @JvmSynthetic
-            internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
             override fun equals(other: Any?): Boolean {
-              if (this === other) {
-                  return true
-              }
+                if (this === other) {
+                    return true
+                }
 
-              return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -1355,31 +1397,85 @@ class GeoStatusCreateBulkParams private constructor(
         }
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && confidenceLevel == other.confidenceLevel && createdAt == other.createdAt && createdBy == other.createdBy && idOnOrbit == other.idOnOrbit && longitudeMax == other.longitudeMax && longitudeMin == other.longitudeMin && longitudeRate == other.longitudeRate && lostFlag == other.lostFlag && objectStatus == other.objectStatus && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && planeChangeStatus == other.planeChangeStatus && rawFileUri == other.rawFileUri && relativeEnergy == other.relativeEnergy && satNo == other.satNo && sc == other.sc && semiAnnualCorrFlag == other.semiAnnualCorrFlag && ss == other.ss && troughType == other.troughType /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                id == other.id &&
+                confidenceLevel == other.confidenceLevel &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                idOnOrbit == other.idOnOrbit &&
+                longitudeMax == other.longitudeMax &&
+                longitudeMin == other.longitudeMin &&
+                longitudeRate == other.longitudeRate &&
+                lostFlag == other.lostFlag &&
+                objectStatus == other.objectStatus &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                planeChangeStatus == other.planeChangeStatus &&
+                rawFileUri == other.rawFileUri &&
+                relativeEnergy == other.relativeEnergy &&
+                satNo == other.satNo &&
+                sc == other.sc &&
+                semiAnnualCorrFlag == other.semiAnnualCorrFlag &&
+                ss == other.ss &&
+                troughType == other.troughType
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, id, confidenceLevel, createdAt, createdBy, idOnOrbit, longitudeMax, longitudeMin, longitudeRate, lostFlag, objectStatus, origin, origNetwork, origObjectId, planeChangeStatus, rawFileUri, relativeEnergy, satNo, sc, semiAnnualCorrFlag, ss, troughType) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                id,
+                confidenceLevel,
+                createdAt,
+                createdBy,
+                idOnOrbit,
+                longitudeMax,
+                longitudeMin,
+                longitudeRate,
+                lostFlag,
+                objectStatus,
+                origin,
+                origNetwork,
+                origObjectId,
+                planeChangeStatus,
+                rawFileUri,
+                relativeEnergy,
+                satNo,
+                sc,
+                semiAnnualCorrFlag,
+                ss,
+                troughType,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() = "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, confidenceLevel=$confidenceLevel, createdAt=$createdAt, createdBy=$createdBy, idOnOrbit=$idOnOrbit, longitudeMax=$longitudeMax, longitudeMin=$longitudeMin, longitudeRate=$longitudeRate, lostFlag=$lostFlag, objectStatus=$objectStatus, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, planeChangeStatus=$planeChangeStatus, rawFileUri=$rawFileUri, relativeEnergy=$relativeEnergy, satNo=$satNo, sc=$sc, semiAnnualCorrFlag=$semiAnnualCorrFlag, ss=$ss, troughType=$troughType}"
+        override fun toString() =
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, confidenceLevel=$confidenceLevel, createdAt=$createdAt, createdBy=$createdBy, idOnOrbit=$idOnOrbit, longitudeMax=$longitudeMax, longitudeMin=$longitudeMin, longitudeRate=$longitudeRate, lostFlag=$lostFlag, objectStatus=$objectStatus, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, planeChangeStatus=$planeChangeStatus, rawFileUri=$rawFileUri, relativeEnergy=$relativeEnergy, satNo=$satNo, sc=$sc, semiAnnualCorrFlag=$semiAnnualCorrFlag, ss=$ss, troughType=$troughType}"
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is GeoStatusCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is GeoStatusCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
-    override fun toString() = "GeoStatusCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() =
+        "GeoStatusCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

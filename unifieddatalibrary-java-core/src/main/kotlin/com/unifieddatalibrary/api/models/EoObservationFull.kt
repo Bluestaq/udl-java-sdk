@@ -15,16 +15,20 @@ import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
-import com.unifieddatalibrary.api.models.EoObservationFull
-import com.unifieddatalibrary.api.models.OnorbitFull
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/** Model representation of observation data for electro-optical based sensor phenomenologies. ECI J2K is the preferred reference frame for EOObservations, however, several user-specified reference frames are accommodated. Users should check the EOObservation record as well as the 'Discover' tab in the storefront to confirm the coordinate frames used by the data provider. */
-class EoObservationFull private constructor(
+/**
+ * Model representation of observation data for electro-optical based sensor phenomenologies. ECI
+ * J2K is the preferred reference frame for EOObservations, however, several user-specified
+ * reference frames are accommodated. Users should check the EOObservation record as well as the
+ * 'Discover' tab in the storefront to confirm the coordinate frames used by the data provider.
+ */
+class EoObservationFull
+private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
     private val obTime: JsonField<OffsetDateTime>,
@@ -127,39 +131,82 @@ class EoObservationFull private constructor(
     private val zeroptd: JsonField<Double>,
     private val zeroPtdUnc: JsonField<Double>,
     private val additionalProperties: MutableMap<String, JsonValue>,
-
 ) {
 
     @JsonCreator
     private constructor(
-        @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        classificationMarking: JsonField<String> = JsonMissing.of(),
         @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
-        @JsonProperty("obTime") @ExcludeMissing obTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("obTime")
+        @ExcludeMissing
+        obTime: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
         @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
         @JsonProperty("azimuth") @ExcludeMissing azimuth: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("azimuthBias") @ExcludeMissing azimuthBias: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("azimuthMeasured") @ExcludeMissing azimuthMeasured: JsonField<Boolean> = JsonMissing.of(),
-        @JsonProperty("azimuthRate") @ExcludeMissing azimuthRate: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("azimuthUnc") @ExcludeMissing azimuthUnc: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("bgIntensity") @ExcludeMissing bgIntensity: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("collectMethod") @ExcludeMissing collectMethod: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("corrQuality") @ExcludeMissing corrQuality: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("azimuthBias")
+        @ExcludeMissing
+        azimuthBias: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("azimuthMeasured")
+        @ExcludeMissing
+        azimuthMeasured: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("azimuthRate")
+        @ExcludeMissing
+        azimuthRate: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("azimuthUnc")
+        @ExcludeMissing
+        azimuthUnc: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("bgIntensity")
+        @ExcludeMissing
+        bgIntensity: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("collectMethod")
+        @ExcludeMissing
+        collectMethod: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("corrQuality")
+        @ExcludeMissing
+        corrQuality: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("declination") @ExcludeMissing declination: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("declinationBias") @ExcludeMissing declinationBias: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("declinationMeasured") @ExcludeMissing declinationMeasured: JsonField<Boolean> = JsonMissing.of(),
-        @JsonProperty("declinationRate") @ExcludeMissing declinationRate: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("declinationUnc") @ExcludeMissing declinationUnc: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("descriptor") @ExcludeMissing descriptor: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("declination")
+        @ExcludeMissing
+        declination: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("declinationBias")
+        @ExcludeMissing
+        declinationBias: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("declinationMeasured")
+        @ExcludeMissing
+        declinationMeasured: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("declinationRate")
+        @ExcludeMissing
+        declinationRate: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("declinationUnc")
+        @ExcludeMissing
+        declinationUnc: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("descriptor")
+        @ExcludeMissing
+        descriptor: JsonField<String> = JsonMissing.of(),
         @JsonProperty("elevation") @ExcludeMissing elevation: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("elevationBias") @ExcludeMissing elevationBias: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("elevationMeasured") @ExcludeMissing elevationMeasured: JsonField<Boolean> = JsonMissing.of(),
-        @JsonProperty("elevationRate") @ExcludeMissing elevationRate: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("elevationUnc") @ExcludeMissing elevationUnc: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("eoobservationDetails") @ExcludeMissing eoobservationDetails: JsonField<EoobservationDetails> = JsonMissing.of(),
-        @JsonProperty("expDuration") @ExcludeMissing expDuration: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("elevationBias")
+        @ExcludeMissing
+        elevationBias: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("elevationMeasured")
+        @ExcludeMissing
+        elevationMeasured: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("elevationRate")
+        @ExcludeMissing
+        elevationRate: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("elevationUnc")
+        @ExcludeMissing
+        elevationUnc: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("eoobservationDetails")
+        @ExcludeMissing
+        eoobservationDetails: JsonField<EoobservationDetails> = JsonMissing.of(),
+        @JsonProperty("expDuration")
+        @ExcludeMissing
+        expDuration: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("fovCount") @ExcludeMissing fovCount: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("fovCountUCT") @ExcludeMissing fovCountUct: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("geoalt") @ExcludeMissing geoalt: JsonField<Double> = JsonMissing.of(),
@@ -168,7 +215,9 @@ class EoObservationFull private constructor(
         @JsonProperty("georange") @ExcludeMissing georange: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("idOnOrbit") @ExcludeMissing idOnOrbit: JsonField<String> = JsonMissing.of(),
         @JsonProperty("idSensor") @ExcludeMissing idSensor: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("idSkyImagery") @ExcludeMissing idSkyImagery: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("idSkyImagery")
+        @ExcludeMissing
+        idSkyImagery: JsonField<String> = JsonMissing.of(),
         @JsonProperty("intensity") @ExcludeMissing intensity: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("losUnc") @ExcludeMissing losUnc: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("losx") @ExcludeMissing losx: JsonField<Double> = JsonMissing.of(),
@@ -178,885 +227,1126 @@ class EoObservationFull private constructor(
         @JsonProperty("losz") @ExcludeMissing losz: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("loszvel") @ExcludeMissing loszvel: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("mag") @ExcludeMissing mag: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("magNormRange") @ExcludeMissing magNormRange: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("magNormRange")
+        @ExcludeMissing
+        magNormRange: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("magUnc") @ExcludeMissing magUnc: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("netObjSig") @ExcludeMissing netObjSig: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("netObjSigUnc") @ExcludeMissing netObjSigUnc: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("obPosition") @ExcludeMissing obPosition: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("netObjSigUnc")
+        @ExcludeMissing
+        netObjSigUnc: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("obPosition")
+        @ExcludeMissing
+        obPosition: JsonField<String> = JsonMissing.of(),
         @JsonProperty("onOrbit") @ExcludeMissing onOrbit: JsonField<OnorbitFull> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origNetwork") @ExcludeMissing origNetwork: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origObjectId") @ExcludeMissing origObjectId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origSensorId") @ExcludeMissing origSensorId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origNetwork")
+        @ExcludeMissing
+        origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origObjectId")
+        @ExcludeMissing
+        origObjectId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origSensorId")
+        @ExcludeMissing
+        origSensorId: JsonField<String> = JsonMissing.of(),
         @JsonProperty("penumbra") @ExcludeMissing penumbra: JsonField<Boolean> = JsonMissing.of(),
-        @JsonProperty("primaryExtinction") @ExcludeMissing primaryExtinction: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("primaryExtinctionUnc") @ExcludeMissing primaryExtinctionUnc: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("primaryExtinction")
+        @ExcludeMissing
+        primaryExtinction: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("primaryExtinctionUnc")
+        @ExcludeMissing
+        primaryExtinctionUnc: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("ra") @ExcludeMissing ra: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("raBias") @ExcludeMissing raBias: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("raMeasured") @ExcludeMissing raMeasured: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("raMeasured")
+        @ExcludeMissing
+        raMeasured: JsonField<Boolean> = JsonMissing.of(),
         @JsonProperty("range") @ExcludeMissing range: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("rangeBias") @ExcludeMissing rangeBias: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("rangeMeasured") @ExcludeMissing rangeMeasured: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("rangeMeasured")
+        @ExcludeMissing
+        rangeMeasured: JsonField<Boolean> = JsonMissing.of(),
         @JsonProperty("rangeRate") @ExcludeMissing rangeRate: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("rangeRateMeasured") @ExcludeMissing rangeRateMeasured: JsonField<Boolean> = JsonMissing.of(),
-        @JsonProperty("rangeRateUnc") @ExcludeMissing rangeRateUnc: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("rangeRateMeasured")
+        @ExcludeMissing
+        rangeRateMeasured: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("rangeRateUnc")
+        @ExcludeMissing
+        rangeRateUnc: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("rangeUnc") @ExcludeMissing rangeUnc: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("raRate") @ExcludeMissing raRate: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("raUnc") @ExcludeMissing raUnc: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("rawFileURI") @ExcludeMissing rawFileUri: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("referenceFrame") @ExcludeMissing referenceFrame: JsonField<ReferenceFrame> = JsonMissing.of(),
+        @JsonProperty("rawFileURI")
+        @ExcludeMissing
+        rawFileUri: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("referenceFrame")
+        @ExcludeMissing
+        referenceFrame: JsonField<ReferenceFrame> = JsonMissing.of(),
         @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("senalt") @ExcludeMissing senalt: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("senlat") @ExcludeMissing senlat: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("senlon") @ExcludeMissing senlon: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("senQuat") @ExcludeMissing senQuat: JsonField<List<Double>> = JsonMissing.of(),
-        @JsonProperty("senReferenceFrame") @ExcludeMissing senReferenceFrame: JsonField<SenReferenceFrame> = JsonMissing.of(),
+        @JsonProperty("senQuat")
+        @ExcludeMissing
+        senQuat: JsonField<List<Double>> = JsonMissing.of(),
+        @JsonProperty("senReferenceFrame")
+        @ExcludeMissing
+        senReferenceFrame: JsonField<SenReferenceFrame> = JsonMissing.of(),
         @JsonProperty("senvelx") @ExcludeMissing senvelx: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("senvely") @ExcludeMissing senvely: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("senvelz") @ExcludeMissing senvelz: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("senx") @ExcludeMissing senx: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("seny") @ExcludeMissing seny: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("senz") @ExcludeMissing senz: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("shutterDelay") @ExcludeMissing shutterDelay: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("shutterDelay")
+        @ExcludeMissing
+        shutterDelay: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("skyBkgrnd") @ExcludeMissing skyBkgrnd: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("solarDecAngle") @ExcludeMissing solarDecAngle: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("solarEqPhaseAngle") @ExcludeMissing solarEqPhaseAngle: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("solarPhaseAngle") @ExcludeMissing solarPhaseAngle: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("solarDecAngle")
+        @ExcludeMissing
+        solarDecAngle: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("solarEqPhaseAngle")
+        @ExcludeMissing
+        solarEqPhaseAngle: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("solarPhaseAngle")
+        @ExcludeMissing
+        solarPhaseAngle: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("sourceDL") @ExcludeMissing sourceDl: JsonField<String> = JsonMissing.of(),
         @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
         @JsonProperty("taskId") @ExcludeMissing taskId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("timingBias") @ExcludeMissing timingBias: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("timingBias")
+        @ExcludeMissing
+        timingBias: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("trackId") @ExcludeMissing trackId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("transactionId") @ExcludeMissing transactionId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("transactionId")
+        @ExcludeMissing
+        transactionId: JsonField<String> = JsonMissing.of(),
         @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
         @JsonProperty("uct") @ExcludeMissing uct: JsonField<Boolean> = JsonMissing.of(),
         @JsonProperty("umbra") @ExcludeMissing umbra: JsonField<Boolean> = JsonMissing.of(),
         @JsonProperty("zeroptd") @ExcludeMissing zeroptd: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("zeroPtdUnc") @ExcludeMissing zeroPtdUnc: JsonField<Double> = JsonMissing.of()
+        @JsonProperty("zeroPtdUnc") @ExcludeMissing zeroPtdUnc: JsonField<Double> = JsonMissing.of(),
     ) : this(
-      classificationMarking,
-      dataMode,
-      obTime,
-      source,
-      id,
-      azimuth,
-      azimuthBias,
-      azimuthMeasured,
-      azimuthRate,
-      azimuthUnc,
-      bgIntensity,
-      collectMethod,
-      corrQuality,
-      createdAt,
-      createdBy,
-      declination,
-      declinationBias,
-      declinationMeasured,
-      declinationRate,
-      declinationUnc,
-      descriptor,
-      elevation,
-      elevationBias,
-      elevationMeasured,
-      elevationRate,
-      elevationUnc,
-      eoobservationDetails,
-      expDuration,
-      fovCount,
-      fovCountUct,
-      geoalt,
-      geolat,
-      geolon,
-      georange,
-      idOnOrbit,
-      idSensor,
-      idSkyImagery,
-      intensity,
-      losUnc,
-      losx,
-      losxvel,
-      losy,
-      losyvel,
-      losz,
-      loszvel,
-      mag,
-      magNormRange,
-      magUnc,
-      netObjSig,
-      netObjSigUnc,
-      obPosition,
-      onOrbit,
-      origin,
-      origNetwork,
-      origObjectId,
-      origSensorId,
-      penumbra,
-      primaryExtinction,
-      primaryExtinctionUnc,
-      ra,
-      raBias,
-      raMeasured,
-      range,
-      rangeBias,
-      rangeMeasured,
-      rangeRate,
-      rangeRateMeasured,
-      rangeRateUnc,
-      rangeUnc,
-      raRate,
-      raUnc,
-      rawFileUri,
-      referenceFrame,
-      satNo,
-      senalt,
-      senlat,
-      senlon,
-      senQuat,
-      senReferenceFrame,
-      senvelx,
-      senvely,
-      senvelz,
-      senx,
-      seny,
-      senz,
-      shutterDelay,
-      skyBkgrnd,
-      solarDecAngle,
-      solarEqPhaseAngle,
-      solarPhaseAngle,
-      sourceDl,
-      tags,
-      taskId,
-      timingBias,
-      trackId,
-      transactionId,
-      type,
-      uct,
-      umbra,
-      zeroptd,
-      zeroPtdUnc,
-      mutableMapOf(),
+        classificationMarking,
+        dataMode,
+        obTime,
+        source,
+        id,
+        azimuth,
+        azimuthBias,
+        azimuthMeasured,
+        azimuthRate,
+        azimuthUnc,
+        bgIntensity,
+        collectMethod,
+        corrQuality,
+        createdAt,
+        createdBy,
+        declination,
+        declinationBias,
+        declinationMeasured,
+        declinationRate,
+        declinationUnc,
+        descriptor,
+        elevation,
+        elevationBias,
+        elevationMeasured,
+        elevationRate,
+        elevationUnc,
+        eoobservationDetails,
+        expDuration,
+        fovCount,
+        fovCountUct,
+        geoalt,
+        geolat,
+        geolon,
+        georange,
+        idOnOrbit,
+        idSensor,
+        idSkyImagery,
+        intensity,
+        losUnc,
+        losx,
+        losxvel,
+        losy,
+        losyvel,
+        losz,
+        loszvel,
+        mag,
+        magNormRange,
+        magUnc,
+        netObjSig,
+        netObjSigUnc,
+        obPosition,
+        onOrbit,
+        origin,
+        origNetwork,
+        origObjectId,
+        origSensorId,
+        penumbra,
+        primaryExtinction,
+        primaryExtinctionUnc,
+        ra,
+        raBias,
+        raMeasured,
+        range,
+        rangeBias,
+        rangeMeasured,
+        rangeRate,
+        rangeRateMeasured,
+        rangeRateUnc,
+        rangeUnc,
+        raRate,
+        raUnc,
+        rawFileUri,
+        referenceFrame,
+        satNo,
+        senalt,
+        senlat,
+        senlon,
+        senQuat,
+        senReferenceFrame,
+        senvelx,
+        senvely,
+        senvelz,
+        senx,
+        seny,
+        senz,
+        shutterDelay,
+        skyBkgrnd,
+        solarDecAngle,
+        solarEqPhaseAngle,
+        solarPhaseAngle,
+        sourceDl,
+        tags,
+        taskId,
+        timingBias,
+        trackId,
+        transactionId,
+        type,
+        uct,
+        umbra,
+        zeroptd,
+        zeroPtdUnc,
+        mutableMapOf(),
     )
 
     /**
      * Classification marking of the data in IC/CAPCO Portion-marked format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
     /**
-     * Ob detection time in ISO 8601 UTC, up to microsecond precision. Consumers should contact the provider for details on their obTime specifications.
+     * Ob detection time in ISO 8601 UTC, up to microsecond precision. Consumers should contact the
+     * provider for details on their obTime specifications.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun obTime(): OffsetDateTime = obTime.getRequired("obTime")
 
     /**
      * Source of the data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun source(): String = source.getRequired("source")
 
     /**
      * Unique identifier of the record, auto-generated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun id(): Optional<String> = id.getOptional("id")
 
     /**
-     * Line of sight azimuth angle in degrees and topocentric frame. Reported value should include all applicable corrections as specified on the source provider data card. If uncertain, consumers should contact the provider for details on the applied corrections.
+     * Line of sight azimuth angle in degrees and topocentric frame. Reported value should include
+     * all applicable corrections as specified on the source provider data card. If uncertain,
+     * consumers should contact the provider for details on the applied corrections.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun azimuth(): Optional<Double> = azimuth.getOptional("azimuth")
 
     /**
      * Sensor line of sight azimuth angle bias in degrees.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun azimuthBias(): Optional<Double> = azimuthBias.getOptional("azimuthBias")
 
     /**
-     * Optional flag indicating whether the azimuth value is measured (true) or computed (false). If null, consumers may consult the data provider for information regarding whether the corresponding value is computed or measured.
+     * Optional flag indicating whether the azimuth value is measured (true) or computed (false). If
+     * null, consumers may consult the data provider for information regarding whether the
+     * corresponding value is computed or measured.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun azimuthMeasured(): Optional<Boolean> = azimuthMeasured.getOptional("azimuthMeasured")
 
     /**
      * Rate of change of the line of sight azimuth in degrees per second.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun azimuthRate(): Optional<Double> = azimuthRate.getOptional("azimuthRate")
 
     /**
      * One sigma uncertainty in the line of sight azimuth angle, in degrees.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun azimuthUnc(): Optional<Double> = azimuthUnc.getOptional("azimuthUnc")
 
     /**
      * Background intensity for IR observations, in kw/sr/um.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun bgIntensity(): Optional<Double> = bgIntensity.getOptional("bgIntensity")
 
     /**
-     * Method indicating telescope movement during collection (AUTOTRACK, MANUAL AUTOTRACK, MANUAL RATE TRACK, MANUAL SIDEREAL, SIDEREAL, RATE TRACK).
+     * Method indicating telescope movement during collection (AUTOTRACK, MANUAL AUTOTRACK, MANUAL
+     * RATE TRACK, MANUAL SIDEREAL, SIDEREAL, RATE TRACK).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun collectMethod(): Optional<String> = collectMethod.getOptional("collectMethod")
 
     /**
-     * Object Correlation Quality score of the observation when compared to a known orbit state, (non-standardized). Users should consult data providers regarding the expected range of values.
+     * Object Correlation Quality score of the observation when compared to a known orbit state,
+     * (non-standardized). Users should consult data providers regarding the expected range of
+     * values.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun corrQuality(): Optional<Double> = corrQuality.getOptional("corrQuality")
 
     /**
      * Time the row was created in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
     /**
      * Application user who created the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
-     * Line of sight declination, in degrees, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed. Reported value should include all applicable corrections as specified on the source provider data card. If uncertain, consumers should contact the provider for details on the applied corrections.
+     * Line of sight declination, in degrees, in the specified referenceFrame. If referenceFrame is
+     * null then J2K should be assumed. Reported value should include all applicable corrections as
+     * specified on the source provider data card. If uncertain, consumers should contact the
+     * provider for details on the applied corrections.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun declination(): Optional<Double> = declination.getOptional("declination")
 
     /**
      * Sensor line of sight declination angle bias in degrees.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun declinationBias(): Optional<Double> = declinationBias.getOptional("declinationBias")
 
     /**
-     * Optional flag indicating whether the declination value is measured (true) or computed (false). If null, consumers may consult the data provider for information regarding whether the corresponding value is computed or measured.
+     * Optional flag indicating whether the declination value is measured (true) or computed
+     * (false). If null, consumers may consult the data provider for information regarding whether
+     * the corresponding value is computed or measured.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun declinationMeasured(): Optional<Boolean> = declinationMeasured.getOptional("declinationMeasured")
+    fun declinationMeasured(): Optional<Boolean> =
+        declinationMeasured.getOptional("declinationMeasured")
 
     /**
-     * Line of sight declination rate of change, in degrees/sec, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed.
+     * Line of sight declination rate of change, in degrees/sec, in the specified referenceFrame. If
+     * referenceFrame is null then J2K should be assumed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun declinationRate(): Optional<Double> = declinationRate.getOptional("declinationRate")
 
     /**
      * One sigma uncertainty in the line of sight declination angle, in degrees.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun declinationUnc(): Optional<Double> = declinationUnc.getOptional("declinationUnc")
 
     /**
      * Optional source-provided and searchable metadata or descriptor of the data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun descriptor(): Optional<String> = descriptor.getOptional("descriptor")
 
     /**
-     * Line of sight elevation in degrees and topocentric frame. Reported value should include all applicable corrections as specified on the source provider data card. If uncertain, consumers should contact the provider for details on the applied corrections.
+     * Line of sight elevation in degrees and topocentric frame. Reported value should include all
+     * applicable corrections as specified on the source provider data card. If uncertain, consumers
+     * should contact the provider for details on the applied corrections.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun elevation(): Optional<Double> = elevation.getOptional("elevation")
 
     /**
      * Sensor line of sight elevation bias in degrees.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun elevationBias(): Optional<Double> = elevationBias.getOptional("elevationBias")
 
     /**
-     * Optional flag indicating whether the elevation value is measured (true) or computed (false). If null, consumers may consult the data provider for information regarding whether the corresponding value is computed or measured.
+     * Optional flag indicating whether the elevation value is measured (true) or computed (false).
+     * If null, consumers may consult the data provider for information regarding whether the
+     * corresponding value is computed or measured.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun elevationMeasured(): Optional<Boolean> = elevationMeasured.getOptional("elevationMeasured")
 
     /**
      * Rate of change of the line of sight elevation in degrees per second.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun elevationRate(): Optional<Double> = elevationRate.getOptional("elevationRate")
 
     /**
      * One sigma uncertainty in the line of sight elevation angle, in degrees.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun elevationUnc(): Optional<Double> = elevationUnc.getOptional("elevationUnc")
 
     /**
-     * Model representation of additional detailed observation data for electro-optical based sensor phenomenologies.
+     * Model representation of additional detailed observation data for electro-optical based sensor
+     * phenomenologies.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun eoobservationDetails(): Optional<EoobservationDetails> = eoobservationDetails.getOptional("eoobservationDetails")
+    fun eoobservationDetails(): Optional<EoobservationDetails> =
+        eoobservationDetails.getOptional("eoobservationDetails")
 
     /**
-     * Image exposure duration in seconds. For observations performed using frame stacking or synthetic tracking methods, the exposure duration should be the total integration time. This field is highly recommended / required if the observations are going to be used for photometric processing.
+     * Image exposure duration in seconds. For observations performed using frame stacking or
+     * synthetic tracking methods, the exposure duration should be the total integration time. This
+     * field is highly recommended / required if the observations are going to be used for
+     * photometric processing.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun expDuration(): Optional<Double> = expDuration.getOptional("expDuration")
 
     /**
      * The number of RSOs detected in the sensor field of view.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun fovCount(): Optional<Int> = fovCount.getOptional("fovCount")
 
     /**
      * The number of uncorrelated tracks in the field of view.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun fovCountUct(): Optional<Int> = fovCountUct.getOptional("fovCountUCT")
 
     /**
      * For GEO detections, the altitude in km.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun geoalt(): Optional<Double> = geoalt.getOptional("geoalt")
 
     /**
      * For GEO detections, the latitude in degrees north.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun geolat(): Optional<Double> = geolat.getOptional("geolat")
 
     /**
      * For GEO detections, the longitude in degrees east.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun geolon(): Optional<Double> = geolon.getOptional("geolon")
 
     /**
      * For GEO detections, the range in km.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun georange(): Optional<Double> = georange.getOptional("georange")
 
     /**
      * Unique identifier of the target on-orbit object, if correlated.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun idOnOrbit(): Optional<String> = idOnOrbit.getOptional("idOnOrbit")
 
     /**
      * Unique identifier of the reporting sensor.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun idSensor(): Optional<String> = idSensor.getOptional("idSensor")
 
     /**
      * Unique identifier of the Sky Imagery.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun idSkyImagery(): Optional<String> = idSkyImagery.getOptional("idSkyImagery")
 
     /**
      * Intensity of the target for IR observations, in kw/sr/um.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun intensity(): Optional<Double> = intensity.getOptional("intensity")
 
     /**
      * One sigma uncertainty in the line of sight pointing in micro-radians.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun losUnc(): Optional<Double> = losUnc.getOptional("losUnc")
 
     /**
-     * Line-of-sight cartesian X position of the target, in km, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed.
+     * Line-of-sight cartesian X position of the target, in km, in the specified referenceFrame. If
+     * referenceFrame is null then J2K should be assumed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun losx(): Optional<Double> = losx.getOptional("losx")
 
     /**
-     * Line-of-sight cartesian X velocity of target, in km/sec, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed.
+     * Line-of-sight cartesian X velocity of target, in km/sec, in the specified referenceFrame. If
+     * referenceFrame is null then J2K should be assumed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun losxvel(): Optional<Double> = losxvel.getOptional("losxvel")
 
     /**
-     * Line-of-sight cartesian Y position of the target, in km, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed.
+     * Line-of-sight cartesian Y position of the target, in km, in the specified referenceFrame. If
+     * referenceFrame is null then J2K should be assumed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun losy(): Optional<Double> = losy.getOptional("losy")
 
     /**
-     * Line-of-sight cartesian Y velocity of target, in km/sec, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed.
+     * Line-of-sight cartesian Y velocity of target, in km/sec, in the specified referenceFrame. If
+     * referenceFrame is null then J2K should be assumed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun losyvel(): Optional<Double> = losyvel.getOptional("losyvel")
 
     /**
-     * Line-of-sight cartesian Z position of the target, in km, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed.
+     * Line-of-sight cartesian Z position of the target, in km, in the specified referenceFrame. If
+     * referenceFrame is null then J2K should be assumed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun losz(): Optional<Double> = losz.getOptional("losz")
 
     /**
-     * Line-of-sight cartesian Z velocity of target, in km/sec, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed.
+     * Line-of-sight cartesian Z velocity of target, in km/sec, in the specified referenceFrame. If
+     * referenceFrame is null then J2K should be assumed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun loszvel(): Optional<Double> = loszvel.getOptional("loszvel")
 
     /**
      * Measure of observed brightness calibrated against the Gaia G-band in units of magnitudes.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun mag(): Optional<Double> = mag.getOptional("mag")
 
     /**
      * Formula: mag - 5.0 \* log_10(geo_range / 1000000.0).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun magNormRange(): Optional<Double> = magNormRange.getOptional("magNormRange")
 
     /**
      * Uncertainty of the observed brightness in units of magnitudes.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun magUnc(): Optional<Double> = magUnc.getOptional("magUnc")
 
     /**
      * Net object signature = counts / expDuration.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun netObjSig(): Optional<Double> = netObjSig.getOptional("netObjSig")
 
     /**
      * Net object signature uncertainty = counts uncertainty / expDuration.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun netObjSigUnc(): Optional<Double> = netObjSigUnc.getOptional("netObjSigUnc")
 
     /**
-     * The position of this observation within a track (FENCE, FIRST, IN, LAST, SINGLE). This identifier is optional and, if null, no assumption should be made regarding whether other observations may or may not exist to compose a track.
+     * The position of this observation within a track (FENCE, FIRST, IN, LAST, SINGLE). This
+     * identifier is optional and, if null, no assumption should be made regarding whether other
+     * observations may or may not exist to compose a track.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun obPosition(): Optional<String> = obPosition.getOptional("obPosition")
 
     /**
      * Model object representing on-orbit objects or satellites in the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun onOrbit(): Optional<OnorbitFull> = onOrbit.getOptional("onOrbit")
 
     /**
-     * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     * Originating system or organization which produced the data, if different from the source. The
+     * origin may be different than the source if the source was a mediating system which forwarded
+     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origin(): Optional<String> = origin.getOptional("origin")
 
     /**
-     * The originating source network on which this record was created, auto-populated by the system.
+     * The originating source network on which this record was created, auto-populated by the
+     * system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
     /**
-     * Optional identifier provided by observation source to indicate the target onorbit object of this observation. This may be an internal identifier and not necessarily a valid satellite number.
+     * Optional identifier provided by observation source to indicate the target onorbit object of
+     * this observation. This may be an internal identifier and not necessarily a valid satellite
+     * number.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origObjectId(): Optional<String> = origObjectId.getOptional("origObjectId")
 
     /**
-     * Optional identifier provided by observation source to indicate the sensor identifier which produced this observation. This may be an internal identifier and not necessarily a valid sensor ID.
+     * Optional identifier provided by observation source to indicate the sensor identifier which
+     * produced this observation. This may be an internal identifier and not necessarily a valid
+     * sensor ID.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origSensorId(): Optional<String> = origSensorId.getOptional("origSensorId")
 
     /**
-     * Boolean indicating that the target object was in a penumbral eclipse at the time of this observation.
+     * Boolean indicating that the target object was in a penumbral eclipse at the time of this
+     * observation.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun penumbra(): Optional<Boolean> = penumbra.getOptional("penumbra")
 
     /**
-     * Primary Extinction Coefficient, in Magnitudes. Primary Extinction is the coefficient applied to the airmass to determine how much the observed visual magnitude has been attenuated by the atmosphere. Extinction, in general, describes the absorption and scattering of electromagnetic radiation by dust and gas between an emitting astronomical object and the observer. See the EOObservationDetails API for specification of extinction coefficients for multiple spectral filters.
+     * Primary Extinction Coefficient, in Magnitudes. Primary Extinction is the coefficient applied
+     * to the airmass to determine how much the observed visual magnitude has been attenuated by the
+     * atmosphere. Extinction, in general, describes the absorption and scattering of
+     * electromagnetic radiation by dust and gas between an emitting astronomical object and the
+     * observer. See the EOObservationDetails API for specification of extinction coefficients for
+     * multiple spectral filters.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun primaryExtinction(): Optional<Double> = primaryExtinction.getOptional("primaryExtinction")
 
     /**
      * Primary Extinction Coefficient Uncertainty, in Magnitudes.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun primaryExtinctionUnc(): Optional<Double> = primaryExtinctionUnc.getOptional("primaryExtinctionUnc")
+    fun primaryExtinctionUnc(): Optional<Double> =
+        primaryExtinctionUnc.getOptional("primaryExtinctionUnc")
 
     /**
-     * Line of sight right ascension, in degrees, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed. Reported value should include all applicable corrections as specified on the source provider data card. If uncertain, consumers should contact the provider for details on the applied corrections.
+     * Line of sight right ascension, in degrees, in the specified referenceFrame. If referenceFrame
+     * is null then J2K should be assumed. Reported value should include all applicable corrections
+     * as specified on the source provider data card. If uncertain, consumers should contact the
+     * provider for details on the applied corrections.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun ra(): Optional<Double> = ra.getOptional("ra")
 
     /**
      * Sensor line of sight right ascension bias in degrees.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun raBias(): Optional<Double> = raBias.getOptional("raBias")
 
     /**
-     * Optional flag indicating whether the ra value is measured (true) or computed (false). If null, consumers may consult the data provider for information regarding whether the corresponding value is computed or measured.
+     * Optional flag indicating whether the ra value is measured (true) or computed (false). If
+     * null, consumers may consult the data provider for information regarding whether the
+     * corresponding value is computed or measured.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun raMeasured(): Optional<Boolean> = raMeasured.getOptional("raMeasured")
 
     /**
-     * Line of sight range in km. If referenceFrame is null then J2K should be assumed. Reported value should include all applicable corrections as specified on the source provider data card. If uncertain, consumers should contact the provider for details on the applied corrections.
+     * Line of sight range in km. If referenceFrame is null then J2K should be assumed. Reported
+     * value should include all applicable corrections as specified on the source provider data
+     * card. If uncertain, consumers should contact the provider for details on the applied
+     * corrections.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun range(): Optional<Double> = range.getOptional("range")
 
     /**
      * Sensor line of sight range bias in km.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun rangeBias(): Optional<Double> = rangeBias.getOptional("rangeBias")
 
     /**
-     * Optional flag indicating whether the range value is measured (true) or computed (false). If null, consumers may consult the data provider for information regarding whether the corresponding value is computed or measured.
+     * Optional flag indicating whether the range value is measured (true) or computed (false). If
+     * null, consumers may consult the data provider for information regarding whether the
+     * corresponding value is computed or measured.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun rangeMeasured(): Optional<Boolean> = rangeMeasured.getOptional("rangeMeasured")
 
     /**
-     * Range rate in km/s. If referenceFrame is null then J2K should be assumed. Reported value should include all applicable corrections as specified on the source provider data card. If uncertain, consumers should contact the provider for details on the applied corrections.
+     * Range rate in km/s. If referenceFrame is null then J2K should be assumed. Reported value
+     * should include all applicable corrections as specified on the source provider data card. If
+     * uncertain, consumers should contact the provider for details on the applied corrections.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun rangeRate(): Optional<Double> = rangeRate.getOptional("rangeRate")
 
     /**
-     * Optional flag indicating whether the rangeRate value is measured (true) or computed (false). If null, consumers may consult the data provider for information regarding whether the corresponding value is computed or measured.
+     * Optional flag indicating whether the rangeRate value is measured (true) or computed (false).
+     * If null, consumers may consult the data provider for information regarding whether the
+     * corresponding value is computed or measured.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun rangeRateMeasured(): Optional<Boolean> = rangeRateMeasured.getOptional("rangeRateMeasured")
 
     /**
      * One sigma uncertainty in the line of sight range rate, in kilometers/second.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun rangeRateUnc(): Optional<Double> = rangeRateUnc.getOptional("rangeRateUnc")
 
     /**
      * One sigma uncertainty in the line of sight range, in kilometers.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun rangeUnc(): Optional<Double> = rangeUnc.getOptional("rangeUnc")
 
     /**
-     * Line of sight right ascension rate of change, in degrees/sec, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed.
+     * Line of sight right ascension rate of change, in degrees/sec, in the specified
+     * referenceFrame. If referenceFrame is null then J2K should be assumed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun raRate(): Optional<Double> = raRate.getOptional("raRate")
 
     /**
      * One sigma uncertainty in the line of sight right ascension angle, in degrees.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun raUnc(): Optional<Double> = raUnc.getOptional("raUnc")
 
     /**
-     * Optional URI location in the document repository of the raw file parsed by the system to produce this record. To download the raw file, prepend https://udl-hostname/scs/download?id= to this value.
+     * Optional URI location in the document repository of the raw file parsed by the system to
+     * produce this record. To download the raw file, prepend https://udl-hostname/scs/download?id=
+     * to this value.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun rawFileUri(): Optional<String> = rawFileUri.getOptional("rawFileURI")
 
     /**
-     * The reference frame of the EOObservation measurements. If the referenceFrame is null it is assumed to be J2000.
+     * The reference frame of the EOObservation measurements. If the referenceFrame is null it is
+     * assumed to be J2000.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun referenceFrame(): Optional<ReferenceFrame> = referenceFrame.getOptional("referenceFrame")
 
     /**
      * Satellite/Catalog number of the target on-orbit object.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun satNo(): Optional<Int> = satNo.getOptional("satNo")
 
     /**
      * Sensor altitude at obTime (if mobile/onorbit) in km.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun senalt(): Optional<Double> = senalt.getOptional("senalt")
 
     /**
-     * Sensor WGS84 latitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained from sensor info. -90 to 90 degrees (negative values south of equator).
+     * Sensor WGS84 latitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained from
+     * sensor info. -90 to 90 degrees (negative values south of equator).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun senlat(): Optional<Double> = senlat.getOptional("senlat")
 
     /**
-     * Sensor WGS84 longitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained from sensor info. -180 to 180 degrees (negative values west of Prime Meridian).
+     * Sensor WGS84 longitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained
+     * from sensor info. -180 to 180 degrees (negative values west of Prime Meridian).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun senlon(): Optional<Double> = senlon.getOptional("senlon")
 
     /**
-     * The quaternion describing the rotation of the sensor in relation to the body-fixed frame used for this system into the local geodetic frame, at observation time (obTime). The array element order convention is scalar component first, followed by the three vector components (qc, q1, q2, q3).
+     * The quaternion describing the rotation of the sensor in relation to the body-fixed frame used
+     * for this system into the local geodetic frame, at observation time (obTime). The array
+     * element order convention is scalar component first, followed by the three vector components
+     * (qc, q1, q2, q3).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun senQuat(): Optional<List<Double>> = senQuat.getOptional("senQuat")
 
     /**
-     * The reference frame of the observing sensor state. If the senReferenceFrame is null it is assumed to be J2000.
+     * The reference frame of the observing sensor state. If the senReferenceFrame is null it is
+     * assumed to be J2000.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun senReferenceFrame(): Optional<SenReferenceFrame> = senReferenceFrame.getOptional("senReferenceFrame")
+    fun senReferenceFrame(): Optional<SenReferenceFrame> =
+        senReferenceFrame.getOptional("senReferenceFrame")
 
     /**
-     * Cartesian X velocity of the observing mobile/onorbit sensor at obTime, in km/sec, in the specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
+     * Cartesian X velocity of the observing mobile/onorbit sensor at obTime, in km/sec, in the
+     * specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun senvelx(): Optional<Double> = senvelx.getOptional("senvelx")
 
     /**
-     * Cartesian Y velocity of the observing mobile/onorbit sensor at obTime, in km/sec, in the specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
+     * Cartesian Y velocity of the observing mobile/onorbit sensor at obTime, in km/sec, in the
+     * specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun senvely(): Optional<Double> = senvely.getOptional("senvely")
 
     /**
-     * Cartesian Z velocity of the observing mobile/onorbit sensor at obTime, in km/sec, in the specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
+     * Cartesian Z velocity of the observing mobile/onorbit sensor at obTime, in km/sec, in the
+     * specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun senvelz(): Optional<Double> = senvelz.getOptional("senvelz")
 
     /**
-     * Cartesian X position of the observing mobile/onorbit sensor at obTime, in km, in the specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
+     * Cartesian X position of the observing mobile/onorbit sensor at obTime, in km, in the
+     * specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun senx(): Optional<Double> = senx.getOptional("senx")
 
     /**
-     * Cartesian Y position of the observing mobile/onorbit sensor at obTime, in km, in the specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
+     * Cartesian Y position of the observing mobile/onorbit sensor at obTime, in km, in the
+     * specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun seny(): Optional<Double> = seny.getOptional("seny")
 
     /**
-     * Cartesian Z position of the observing mobile/onorbit sensor at obTime, in km, in the specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
+     * Cartesian Z position of the observing mobile/onorbit sensor at obTime, in km, in the
+     * specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun senz(): Optional<Double> = senz.getOptional("senz")
 
     /**
      * Shutter delay in seconds.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun shutterDelay(): Optional<Double> = shutterDelay.getOptional("shutterDelay")
 
     /**
-     * Average Sky Background signal, in Magnitudes. Sky Background refers to the incoming light from an apparently empty part of the night sky.
+     * Average Sky Background signal, in Magnitudes. Sky Background refers to the incoming light
+     * from an apparently empty part of the night sky.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun skyBkgrnd(): Optional<Double> = skyBkgrnd.getOptional("skyBkgrnd")
 
     /**
      * Angle from the sun to the equatorial plane.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun solarDecAngle(): Optional<Double> = solarDecAngle.getOptional("solarDecAngle")
 
     /**
-     * The angle, in degrees, between the projections of the target-to-observer vector and the target-to-sun vector onto the equatorial plane. The angle is represented as negative when closing (i.e. before the opposition) and positive when opening (after the opposition).
+     * The angle, in degrees, between the projections of the target-to-observer vector and the
+     * target-to-sun vector onto the equatorial plane. The angle is represented as negative when
+     * closing (i.e. before the opposition) and positive when opening (after the opposition).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun solarEqPhaseAngle(): Optional<Double> = solarEqPhaseAngle.getOptional("solarEqPhaseAngle")
 
     /**
      * The angle, in degrees, between the target-to-observer vector and the target-to-sun vector.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun solarPhaseAngle(): Optional<Double> = solarPhaseAngle.getOptional("solarPhaseAngle")
 
     /**
-     * The source data library from which this record was received. This could be a remote or tactical UDL or another data library. If null, the record should be assumed to have originated from the primary Enterprise UDL.
+     * The source data library from which this record was received. This could be a remote or
+     * tactical UDL or another data library. If null, the record should be assumed to have
+     * originated from the primary Enterprise UDL.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun sourceDl(): Optional<String> = sourceDl.getOptional("sourceDL")
 
     /**
-     * Optional array of provider/source specific tags for this data, where each element is no longer than 32 characters, used for implementing data owner conditional access controls to restrict access to the data. Should be left null by data providers unless conditional access controls are coordinated with the UDL team.
+     * Optional array of provider/source specific tags for this data, where each element is no
+     * longer than 32 characters, used for implementing data owner conditional access controls to
+     * restrict access to the data. Should be left null by data providers unless conditional access
+     * controls are coordinated with the UDL team.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun tags(): Optional<List<String>> = tags.getOptional("tags")
 
     /**
      * Optional identifier to indicate the specific tasking which produced this observation.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun taskId(): Optional<String> = taskId.getOptional("taskId")
 
     /**
      * Sensor timing bias in seconds.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun timingBias(): Optional<Double> = timingBias.getOptional("timingBias")
 
     /**
      * Optional identifier of the track to which this observation belongs.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun trackId(): Optional<String> = trackId.getOptional("trackId")
 
     /**
-     * Optional identifier to track a commercial or marketplace transaction executed to produce this data.
+     * Optional identifier to track a commercial or marketplace transaction executed to produce this
+     * data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun transactionId(): Optional<String> = transactionId.getOptional("transactionId")
 
     /**
-     * Read only field specifying the type of observation (e.g. OPTICAL, OPTICAL_IR, LASER_RANGING, etc).
+     * Read only field specifying the type of observation (e.g. OPTICAL, OPTICAL_IR, LASER_RANGING,
+     * etc).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun type(): Optional<String> = type.getOptional("type")
 
     /**
-     * Boolean indicating this observation is part of an uncorrelated track or was unable to be correlated to a known object. This flag should only be set to true by data providers after an attempt to correlate to an on-orbit object was made and failed. If unable to correlate, the 'origObjectId' field may be populated with an internal data provider specific identifier.
+     * Boolean indicating this observation is part of an uncorrelated track or was unable to be
+     * correlated to a known object. This flag should only be set to true by data providers after an
+     * attempt to correlate to an on-orbit object was made and failed. If unable to correlate, the
+     * 'origObjectId' field may be populated with an internal data provider specific identifier.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun uct(): Optional<Boolean> = uct.getOptional("uct")
 
     /**
-     * Boolean indicating that the target object was in umbral eclipse at the time of this observation.
+     * Boolean indicating that the target object was in umbral eclipse at the time of this
+     * observation.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun umbra(): Optional<Boolean> = umbra.getOptional("umbra")
 
     /**
      * Formula: 2.5 \* log_10 (zero_mag_counts / expDuration).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun zeroptd(): Optional<Double> = zeroptd.getOptional("zeroptd")
 
     /**
-     * This is the uncertainty in the zero point for the filter used for this observation/row in units of mag. For use with differential photometry.
+     * This is the uncertainty in the zero point for the filter used for this observation/row in
+     * units of mag. For use with differential photometry.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun zeroPtdUnc(): Optional<Double> = zeroPtdUnc.getOptional("zeroPtdUnc")
 
     /**
      * Returns the raw JSON value of [classificationMarking].
      *
-     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("classificationMarking")
     @ExcludeMissing
@@ -1067,54 +1357,42 @@ class EoObservationFull private constructor(
      *
      * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("dataMode")
-    @ExcludeMissing
-    fun _dataMode(): JsonField<DataMode> = dataMode
+    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
 
     /**
      * Returns the raw JSON value of [obTime].
      *
      * Unlike [obTime], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("obTime")
-    @ExcludeMissing
-    fun _obTime(): JsonField<OffsetDateTime> = obTime
+    @JsonProperty("obTime") @ExcludeMissing fun _obTime(): JsonField<OffsetDateTime> = obTime
 
     /**
      * Returns the raw JSON value of [source].
      *
      * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("source")
-    @ExcludeMissing
-    fun _source(): JsonField<String> = source
+    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
 
     /**
      * Returns the raw JSON value of [id].
      *
      * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("id")
-    @ExcludeMissing
-    fun _id(): JsonField<String> = id
+    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
 
     /**
      * Returns the raw JSON value of [azimuth].
      *
      * Unlike [azimuth], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("azimuth")
-    @ExcludeMissing
-    fun _azimuth(): JsonField<Double> = azimuth
+    @JsonProperty("azimuth") @ExcludeMissing fun _azimuth(): JsonField<Double> = azimuth
 
     /**
      * Returns the raw JSON value of [azimuthBias].
      *
      * Unlike [azimuthBias], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("azimuthBias")
-    @ExcludeMissing
-    fun _azimuthBias(): JsonField<Double> = azimuthBias
+    @JsonProperty("azimuthBias") @ExcludeMissing fun _azimuthBias(): JsonField<Double> = azimuthBias
 
     /**
      * Returns the raw JSON value of [azimuthMeasured].
@@ -1130,27 +1408,21 @@ class EoObservationFull private constructor(
      *
      * Unlike [azimuthRate], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("azimuthRate")
-    @ExcludeMissing
-    fun _azimuthRate(): JsonField<Double> = azimuthRate
+    @JsonProperty("azimuthRate") @ExcludeMissing fun _azimuthRate(): JsonField<Double> = azimuthRate
 
     /**
      * Returns the raw JSON value of [azimuthUnc].
      *
      * Unlike [azimuthUnc], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("azimuthUnc")
-    @ExcludeMissing
-    fun _azimuthUnc(): JsonField<Double> = azimuthUnc
+    @JsonProperty("azimuthUnc") @ExcludeMissing fun _azimuthUnc(): JsonField<Double> = azimuthUnc
 
     /**
      * Returns the raw JSON value of [bgIntensity].
      *
      * Unlike [bgIntensity], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("bgIntensity")
-    @ExcludeMissing
-    fun _bgIntensity(): JsonField<Double> = bgIntensity
+    @JsonProperty("bgIntensity") @ExcludeMissing fun _bgIntensity(): JsonField<Double> = bgIntensity
 
     /**
      * Returns the raw JSON value of [collectMethod].
@@ -1166,9 +1438,7 @@ class EoObservationFull private constructor(
      *
      * Unlike [corrQuality], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("corrQuality")
-    @ExcludeMissing
-    fun _corrQuality(): JsonField<Double> = corrQuality
+    @JsonProperty("corrQuality") @ExcludeMissing fun _corrQuality(): JsonField<Double> = corrQuality
 
     /**
      * Returns the raw JSON value of [createdAt].
@@ -1184,18 +1454,14 @@ class EoObservationFull private constructor(
      *
      * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("createdBy")
-    @ExcludeMissing
-    fun _createdBy(): JsonField<String> = createdBy
+    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
     /**
      * Returns the raw JSON value of [declination].
      *
      * Unlike [declination], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("declination")
-    @ExcludeMissing
-    fun _declination(): JsonField<Double> = declination
+    @JsonProperty("declination") @ExcludeMissing fun _declination(): JsonField<Double> = declination
 
     /**
      * Returns the raw JSON value of [declinationBias].
@@ -1209,7 +1475,8 @@ class EoObservationFull private constructor(
     /**
      * Returns the raw JSON value of [declinationMeasured].
      *
-     * Unlike [declinationMeasured], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [declinationMeasured], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("declinationMeasured")
     @ExcludeMissing
@@ -1238,18 +1505,14 @@ class EoObservationFull private constructor(
      *
      * Unlike [descriptor], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("descriptor")
-    @ExcludeMissing
-    fun _descriptor(): JsonField<String> = descriptor
+    @JsonProperty("descriptor") @ExcludeMissing fun _descriptor(): JsonField<String> = descriptor
 
     /**
      * Returns the raw JSON value of [elevation].
      *
      * Unlike [elevation], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("elevation")
-    @ExcludeMissing
-    fun _elevation(): JsonField<Double> = elevation
+    @JsonProperty("elevation") @ExcludeMissing fun _elevation(): JsonField<Double> = elevation
 
     /**
      * Returns the raw JSON value of [elevationBias].
@@ -1263,7 +1526,8 @@ class EoObservationFull private constructor(
     /**
      * Returns the raw JSON value of [elevationMeasured].
      *
-     * Unlike [elevationMeasured], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [elevationMeasured], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("elevationMeasured")
     @ExcludeMissing
@@ -1290,7 +1554,8 @@ class EoObservationFull private constructor(
     /**
      * Returns the raw JSON value of [eoobservationDetails].
      *
-     * Unlike [eoobservationDetails], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [eoobservationDetails], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("eoobservationDetails")
     @ExcludeMissing
@@ -1301,81 +1566,63 @@ class EoObservationFull private constructor(
      *
      * Unlike [expDuration], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("expDuration")
-    @ExcludeMissing
-    fun _expDuration(): JsonField<Double> = expDuration
+    @JsonProperty("expDuration") @ExcludeMissing fun _expDuration(): JsonField<Double> = expDuration
 
     /**
      * Returns the raw JSON value of [fovCount].
      *
      * Unlike [fovCount], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("fovCount")
-    @ExcludeMissing
-    fun _fovCount(): JsonField<Int> = fovCount
+    @JsonProperty("fovCount") @ExcludeMissing fun _fovCount(): JsonField<Int> = fovCount
 
     /**
      * Returns the raw JSON value of [fovCountUct].
      *
      * Unlike [fovCountUct], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("fovCountUCT")
-    @ExcludeMissing
-    fun _fovCountUct(): JsonField<Int> = fovCountUct
+    @JsonProperty("fovCountUCT") @ExcludeMissing fun _fovCountUct(): JsonField<Int> = fovCountUct
 
     /**
      * Returns the raw JSON value of [geoalt].
      *
      * Unlike [geoalt], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("geoalt")
-    @ExcludeMissing
-    fun _geoalt(): JsonField<Double> = geoalt
+    @JsonProperty("geoalt") @ExcludeMissing fun _geoalt(): JsonField<Double> = geoalt
 
     /**
      * Returns the raw JSON value of [geolat].
      *
      * Unlike [geolat], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("geolat")
-    @ExcludeMissing
-    fun _geolat(): JsonField<Double> = geolat
+    @JsonProperty("geolat") @ExcludeMissing fun _geolat(): JsonField<Double> = geolat
 
     /**
      * Returns the raw JSON value of [geolon].
      *
      * Unlike [geolon], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("geolon")
-    @ExcludeMissing
-    fun _geolon(): JsonField<Double> = geolon
+    @JsonProperty("geolon") @ExcludeMissing fun _geolon(): JsonField<Double> = geolon
 
     /**
      * Returns the raw JSON value of [georange].
      *
      * Unlike [georange], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("georange")
-    @ExcludeMissing
-    fun _georange(): JsonField<Double> = georange
+    @JsonProperty("georange") @ExcludeMissing fun _georange(): JsonField<Double> = georange
 
     /**
      * Returns the raw JSON value of [idOnOrbit].
      *
      * Unlike [idOnOrbit], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("idOnOrbit")
-    @ExcludeMissing
-    fun _idOnOrbit(): JsonField<String> = idOnOrbit
+    @JsonProperty("idOnOrbit") @ExcludeMissing fun _idOnOrbit(): JsonField<String> = idOnOrbit
 
     /**
      * Returns the raw JSON value of [idSensor].
      *
      * Unlike [idSensor], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("idSensor")
-    @ExcludeMissing
-    fun _idSensor(): JsonField<String> = idSensor
+    @JsonProperty("idSensor") @ExcludeMissing fun _idSensor(): JsonField<String> = idSensor
 
     /**
      * Returns the raw JSON value of [idSkyImagery].
@@ -1391,81 +1638,63 @@ class EoObservationFull private constructor(
      *
      * Unlike [intensity], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("intensity")
-    @ExcludeMissing
-    fun _intensity(): JsonField<Double> = intensity
+    @JsonProperty("intensity") @ExcludeMissing fun _intensity(): JsonField<Double> = intensity
 
     /**
      * Returns the raw JSON value of [losUnc].
      *
      * Unlike [losUnc], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("losUnc")
-    @ExcludeMissing
-    fun _losUnc(): JsonField<Double> = losUnc
+    @JsonProperty("losUnc") @ExcludeMissing fun _losUnc(): JsonField<Double> = losUnc
 
     /**
      * Returns the raw JSON value of [losx].
      *
      * Unlike [losx], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("losx")
-    @ExcludeMissing
-    fun _losx(): JsonField<Double> = losx
+    @JsonProperty("losx") @ExcludeMissing fun _losx(): JsonField<Double> = losx
 
     /**
      * Returns the raw JSON value of [losxvel].
      *
      * Unlike [losxvel], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("losxvel")
-    @ExcludeMissing
-    fun _losxvel(): JsonField<Double> = losxvel
+    @JsonProperty("losxvel") @ExcludeMissing fun _losxvel(): JsonField<Double> = losxvel
 
     /**
      * Returns the raw JSON value of [losy].
      *
      * Unlike [losy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("losy")
-    @ExcludeMissing
-    fun _losy(): JsonField<Double> = losy
+    @JsonProperty("losy") @ExcludeMissing fun _losy(): JsonField<Double> = losy
 
     /**
      * Returns the raw JSON value of [losyvel].
      *
      * Unlike [losyvel], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("losyvel")
-    @ExcludeMissing
-    fun _losyvel(): JsonField<Double> = losyvel
+    @JsonProperty("losyvel") @ExcludeMissing fun _losyvel(): JsonField<Double> = losyvel
 
     /**
      * Returns the raw JSON value of [losz].
      *
      * Unlike [losz], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("losz")
-    @ExcludeMissing
-    fun _losz(): JsonField<Double> = losz
+    @JsonProperty("losz") @ExcludeMissing fun _losz(): JsonField<Double> = losz
 
     /**
      * Returns the raw JSON value of [loszvel].
      *
      * Unlike [loszvel], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("loszvel")
-    @ExcludeMissing
-    fun _loszvel(): JsonField<Double> = loszvel
+    @JsonProperty("loszvel") @ExcludeMissing fun _loszvel(): JsonField<Double> = loszvel
 
     /**
      * Returns the raw JSON value of [mag].
      *
      * Unlike [mag], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("mag")
-    @ExcludeMissing
-    fun _mag(): JsonField<Double> = mag
+    @JsonProperty("mag") @ExcludeMissing fun _mag(): JsonField<Double> = mag
 
     /**
      * Returns the raw JSON value of [magNormRange].
@@ -1481,18 +1710,14 @@ class EoObservationFull private constructor(
      *
      * Unlike [magUnc], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("magUnc")
-    @ExcludeMissing
-    fun _magUnc(): JsonField<Double> = magUnc
+    @JsonProperty("magUnc") @ExcludeMissing fun _magUnc(): JsonField<Double> = magUnc
 
     /**
      * Returns the raw JSON value of [netObjSig].
      *
      * Unlike [netObjSig], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("netObjSig")
-    @ExcludeMissing
-    fun _netObjSig(): JsonField<Double> = netObjSig
+    @JsonProperty("netObjSig") @ExcludeMissing fun _netObjSig(): JsonField<Double> = netObjSig
 
     /**
      * Returns the raw JSON value of [netObjSigUnc].
@@ -1508,36 +1733,28 @@ class EoObservationFull private constructor(
      *
      * Unlike [obPosition], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("obPosition")
-    @ExcludeMissing
-    fun _obPosition(): JsonField<String> = obPosition
+    @JsonProperty("obPosition") @ExcludeMissing fun _obPosition(): JsonField<String> = obPosition
 
     /**
      * Returns the raw JSON value of [onOrbit].
      *
      * Unlike [onOrbit], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("onOrbit")
-    @ExcludeMissing
-    fun _onOrbit(): JsonField<OnorbitFull> = onOrbit
+    @JsonProperty("onOrbit") @ExcludeMissing fun _onOrbit(): JsonField<OnorbitFull> = onOrbit
 
     /**
      * Returns the raw JSON value of [origin].
      *
      * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origin")
-    @ExcludeMissing
-    fun _origin(): JsonField<String> = origin
+    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
 
     /**
      * Returns the raw JSON value of [origNetwork].
      *
      * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origNetwork")
-    @ExcludeMissing
-    fun _origNetwork(): JsonField<String> = origNetwork
+    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
 
     /**
      * Returns the raw JSON value of [origObjectId].
@@ -1562,14 +1779,13 @@ class EoObservationFull private constructor(
      *
      * Unlike [penumbra], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("penumbra")
-    @ExcludeMissing
-    fun _penumbra(): JsonField<Boolean> = penumbra
+    @JsonProperty("penumbra") @ExcludeMissing fun _penumbra(): JsonField<Boolean> = penumbra
 
     /**
      * Returns the raw JSON value of [primaryExtinction].
      *
-     * Unlike [primaryExtinction], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [primaryExtinction], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("primaryExtinction")
     @ExcludeMissing
@@ -1578,7 +1794,8 @@ class EoObservationFull private constructor(
     /**
      * Returns the raw JSON value of [primaryExtinctionUnc].
      *
-     * Unlike [primaryExtinctionUnc], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [primaryExtinctionUnc], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("primaryExtinctionUnc")
     @ExcludeMissing
@@ -1589,45 +1806,35 @@ class EoObservationFull private constructor(
      *
      * Unlike [ra], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("ra")
-    @ExcludeMissing
-    fun _ra(): JsonField<Double> = ra
+    @JsonProperty("ra") @ExcludeMissing fun _ra(): JsonField<Double> = ra
 
     /**
      * Returns the raw JSON value of [raBias].
      *
      * Unlike [raBias], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("raBias")
-    @ExcludeMissing
-    fun _raBias(): JsonField<Double> = raBias
+    @JsonProperty("raBias") @ExcludeMissing fun _raBias(): JsonField<Double> = raBias
 
     /**
      * Returns the raw JSON value of [raMeasured].
      *
      * Unlike [raMeasured], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("raMeasured")
-    @ExcludeMissing
-    fun _raMeasured(): JsonField<Boolean> = raMeasured
+    @JsonProperty("raMeasured") @ExcludeMissing fun _raMeasured(): JsonField<Boolean> = raMeasured
 
     /**
      * Returns the raw JSON value of [range].
      *
      * Unlike [range], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("range")
-    @ExcludeMissing
-    fun _range(): JsonField<Double> = range
+    @JsonProperty("range") @ExcludeMissing fun _range(): JsonField<Double> = range
 
     /**
      * Returns the raw JSON value of [rangeBias].
      *
      * Unlike [rangeBias], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("rangeBias")
-    @ExcludeMissing
-    fun _rangeBias(): JsonField<Double> = rangeBias
+    @JsonProperty("rangeBias") @ExcludeMissing fun _rangeBias(): JsonField<Double> = rangeBias
 
     /**
      * Returns the raw JSON value of [rangeMeasured].
@@ -1643,14 +1850,13 @@ class EoObservationFull private constructor(
      *
      * Unlike [rangeRate], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("rangeRate")
-    @ExcludeMissing
-    fun _rangeRate(): JsonField<Double> = rangeRate
+    @JsonProperty("rangeRate") @ExcludeMissing fun _rangeRate(): JsonField<Double> = rangeRate
 
     /**
      * Returns the raw JSON value of [rangeRateMeasured].
      *
-     * Unlike [rangeRateMeasured], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [rangeRateMeasured], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("rangeRateMeasured")
     @ExcludeMissing
@@ -1670,36 +1876,28 @@ class EoObservationFull private constructor(
      *
      * Unlike [rangeUnc], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("rangeUnc")
-    @ExcludeMissing
-    fun _rangeUnc(): JsonField<Double> = rangeUnc
+    @JsonProperty("rangeUnc") @ExcludeMissing fun _rangeUnc(): JsonField<Double> = rangeUnc
 
     /**
      * Returns the raw JSON value of [raRate].
      *
      * Unlike [raRate], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("raRate")
-    @ExcludeMissing
-    fun _raRate(): JsonField<Double> = raRate
+    @JsonProperty("raRate") @ExcludeMissing fun _raRate(): JsonField<Double> = raRate
 
     /**
      * Returns the raw JSON value of [raUnc].
      *
      * Unlike [raUnc], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("raUnc")
-    @ExcludeMissing
-    fun _raUnc(): JsonField<Double> = raUnc
+    @JsonProperty("raUnc") @ExcludeMissing fun _raUnc(): JsonField<Double> = raUnc
 
     /**
      * Returns the raw JSON value of [rawFileUri].
      *
      * Unlike [rawFileUri], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("rawFileURI")
-    @ExcludeMissing
-    fun _rawFileUri(): JsonField<String> = rawFileUri
+    @JsonProperty("rawFileURI") @ExcludeMissing fun _rawFileUri(): JsonField<String> = rawFileUri
 
     /**
      * Returns the raw JSON value of [referenceFrame].
@@ -1715,50 +1913,41 @@ class EoObservationFull private constructor(
      *
      * Unlike [satNo], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("satNo")
-    @ExcludeMissing
-    fun _satNo(): JsonField<Int> = satNo
+    @JsonProperty("satNo") @ExcludeMissing fun _satNo(): JsonField<Int> = satNo
 
     /**
      * Returns the raw JSON value of [senalt].
      *
      * Unlike [senalt], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("senalt")
-    @ExcludeMissing
-    fun _senalt(): JsonField<Double> = senalt
+    @JsonProperty("senalt") @ExcludeMissing fun _senalt(): JsonField<Double> = senalt
 
     /**
      * Returns the raw JSON value of [senlat].
      *
      * Unlike [senlat], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("senlat")
-    @ExcludeMissing
-    fun _senlat(): JsonField<Double> = senlat
+    @JsonProperty("senlat") @ExcludeMissing fun _senlat(): JsonField<Double> = senlat
 
     /**
      * Returns the raw JSON value of [senlon].
      *
      * Unlike [senlon], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("senlon")
-    @ExcludeMissing
-    fun _senlon(): JsonField<Double> = senlon
+    @JsonProperty("senlon") @ExcludeMissing fun _senlon(): JsonField<Double> = senlon
 
     /**
      * Returns the raw JSON value of [senQuat].
      *
      * Unlike [senQuat], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("senQuat")
-    @ExcludeMissing
-    fun _senQuat(): JsonField<List<Double>> = senQuat
+    @JsonProperty("senQuat") @ExcludeMissing fun _senQuat(): JsonField<List<Double>> = senQuat
 
     /**
      * Returns the raw JSON value of [senReferenceFrame].
      *
-     * Unlike [senReferenceFrame], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [senReferenceFrame], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("senReferenceFrame")
     @ExcludeMissing
@@ -1769,54 +1958,42 @@ class EoObservationFull private constructor(
      *
      * Unlike [senvelx], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("senvelx")
-    @ExcludeMissing
-    fun _senvelx(): JsonField<Double> = senvelx
+    @JsonProperty("senvelx") @ExcludeMissing fun _senvelx(): JsonField<Double> = senvelx
 
     /**
      * Returns the raw JSON value of [senvely].
      *
      * Unlike [senvely], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("senvely")
-    @ExcludeMissing
-    fun _senvely(): JsonField<Double> = senvely
+    @JsonProperty("senvely") @ExcludeMissing fun _senvely(): JsonField<Double> = senvely
 
     /**
      * Returns the raw JSON value of [senvelz].
      *
      * Unlike [senvelz], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("senvelz")
-    @ExcludeMissing
-    fun _senvelz(): JsonField<Double> = senvelz
+    @JsonProperty("senvelz") @ExcludeMissing fun _senvelz(): JsonField<Double> = senvelz
 
     /**
      * Returns the raw JSON value of [senx].
      *
      * Unlike [senx], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("senx")
-    @ExcludeMissing
-    fun _senx(): JsonField<Double> = senx
+    @JsonProperty("senx") @ExcludeMissing fun _senx(): JsonField<Double> = senx
 
     /**
      * Returns the raw JSON value of [seny].
      *
      * Unlike [seny], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("seny")
-    @ExcludeMissing
-    fun _seny(): JsonField<Double> = seny
+    @JsonProperty("seny") @ExcludeMissing fun _seny(): JsonField<Double> = seny
 
     /**
      * Returns the raw JSON value of [senz].
      *
      * Unlike [senz], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("senz")
-    @ExcludeMissing
-    fun _senz(): JsonField<Double> = senz
+    @JsonProperty("senz") @ExcludeMissing fun _senz(): JsonField<Double> = senz
 
     /**
      * Returns the raw JSON value of [shutterDelay].
@@ -1832,9 +2009,7 @@ class EoObservationFull private constructor(
      *
      * Unlike [skyBkgrnd], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("skyBkgrnd")
-    @ExcludeMissing
-    fun _skyBkgrnd(): JsonField<Double> = skyBkgrnd
+    @JsonProperty("skyBkgrnd") @ExcludeMissing fun _skyBkgrnd(): JsonField<Double> = skyBkgrnd
 
     /**
      * Returns the raw JSON value of [solarDecAngle].
@@ -1848,7 +2023,8 @@ class EoObservationFull private constructor(
     /**
      * Returns the raw JSON value of [solarEqPhaseAngle].
      *
-     * Unlike [solarEqPhaseAngle], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [solarEqPhaseAngle], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("solarEqPhaseAngle")
     @ExcludeMissing
@@ -1868,45 +2044,35 @@ class EoObservationFull private constructor(
      *
      * Unlike [sourceDl], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("sourceDL")
-    @ExcludeMissing
-    fun _sourceDl(): JsonField<String> = sourceDl
+    @JsonProperty("sourceDL") @ExcludeMissing fun _sourceDl(): JsonField<String> = sourceDl
 
     /**
      * Returns the raw JSON value of [tags].
      *
      * Unlike [tags], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("tags")
-    @ExcludeMissing
-    fun _tags(): JsonField<List<String>> = tags
+    @JsonProperty("tags") @ExcludeMissing fun _tags(): JsonField<List<String>> = tags
 
     /**
      * Returns the raw JSON value of [taskId].
      *
      * Unlike [taskId], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("taskId")
-    @ExcludeMissing
-    fun _taskId(): JsonField<String> = taskId
+    @JsonProperty("taskId") @ExcludeMissing fun _taskId(): JsonField<String> = taskId
 
     /**
      * Returns the raw JSON value of [timingBias].
      *
      * Unlike [timingBias], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("timingBias")
-    @ExcludeMissing
-    fun _timingBias(): JsonField<Double> = timingBias
+    @JsonProperty("timingBias") @ExcludeMissing fun _timingBias(): JsonField<Double> = timingBias
 
     /**
      * Returns the raw JSON value of [trackId].
      *
      * Unlike [trackId], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("trackId")
-    @ExcludeMissing
-    fun _trackId(): JsonField<String> = trackId
+    @JsonProperty("trackId") @ExcludeMissing fun _trackId(): JsonField<String> = trackId
 
     /**
      * Returns the raw JSON value of [transactionId].
@@ -1922,54 +2088,45 @@ class EoObservationFull private constructor(
      *
      * Unlike [type], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("type")
-    @ExcludeMissing
-    fun _type(): JsonField<String> = type
+    @JsonProperty("type") @ExcludeMissing fun _type(): JsonField<String> = type
 
     /**
      * Returns the raw JSON value of [uct].
      *
      * Unlike [uct], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("uct")
-    @ExcludeMissing
-    fun _uct(): JsonField<Boolean> = uct
+    @JsonProperty("uct") @ExcludeMissing fun _uct(): JsonField<Boolean> = uct
 
     /**
      * Returns the raw JSON value of [umbra].
      *
      * Unlike [umbra], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("umbra")
-    @ExcludeMissing
-    fun _umbra(): JsonField<Boolean> = umbra
+    @JsonProperty("umbra") @ExcludeMissing fun _umbra(): JsonField<Boolean> = umbra
 
     /**
      * Returns the raw JSON value of [zeroptd].
      *
      * Unlike [zeroptd], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("zeroptd")
-    @ExcludeMissing
-    fun _zeroptd(): JsonField<Double> = zeroptd
+    @JsonProperty("zeroptd") @ExcludeMissing fun _zeroptd(): JsonField<Double> = zeroptd
 
     /**
      * Returns the raw JSON value of [zeroPtdUnc].
      *
      * Unlike [zeroPtdUnc], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("zeroPtdUnc")
-    @ExcludeMissing
-    fun _zeroPtdUnc(): JsonField<Double> = zeroPtdUnc
+    @JsonProperty("zeroPtdUnc") @ExcludeMissing fun _zeroPtdUnc(): JsonField<Double> = zeroPtdUnc
 
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
-      additionalProperties.put(key, value)
+        additionalProperties.put(key, value)
     }
 
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -1979,7 +2136,6 @@ class EoObservationFull private constructor(
          * Returns a mutable builder for constructing an instance of [EoObservationFull].
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -1987,8 +2143,7 @@ class EoObservationFull private constructor(
          * .source()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [EoObservationFull]. */
@@ -2098,163 +2253,165 @@ class EoObservationFull private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(eoObservationFull: EoObservationFull) =
-            apply {
-                classificationMarking = eoObservationFull.classificationMarking
-                dataMode = eoObservationFull.dataMode
-                obTime = eoObservationFull.obTime
-                source = eoObservationFull.source
-                id = eoObservationFull.id
-                azimuth = eoObservationFull.azimuth
-                azimuthBias = eoObservationFull.azimuthBias
-                azimuthMeasured = eoObservationFull.azimuthMeasured
-                azimuthRate = eoObservationFull.azimuthRate
-                azimuthUnc = eoObservationFull.azimuthUnc
-                bgIntensity = eoObservationFull.bgIntensity
-                collectMethod = eoObservationFull.collectMethod
-                corrQuality = eoObservationFull.corrQuality
-                createdAt = eoObservationFull.createdAt
-                createdBy = eoObservationFull.createdBy
-                declination = eoObservationFull.declination
-                declinationBias = eoObservationFull.declinationBias
-                declinationMeasured = eoObservationFull.declinationMeasured
-                declinationRate = eoObservationFull.declinationRate
-                declinationUnc = eoObservationFull.declinationUnc
-                descriptor = eoObservationFull.descriptor
-                elevation = eoObservationFull.elevation
-                elevationBias = eoObservationFull.elevationBias
-                elevationMeasured = eoObservationFull.elevationMeasured
-                elevationRate = eoObservationFull.elevationRate
-                elevationUnc = eoObservationFull.elevationUnc
-                eoobservationDetails = eoObservationFull.eoobservationDetails
-                expDuration = eoObservationFull.expDuration
-                fovCount = eoObservationFull.fovCount
-                fovCountUct = eoObservationFull.fovCountUct
-                geoalt = eoObservationFull.geoalt
-                geolat = eoObservationFull.geolat
-                geolon = eoObservationFull.geolon
-                georange = eoObservationFull.georange
-                idOnOrbit = eoObservationFull.idOnOrbit
-                idSensor = eoObservationFull.idSensor
-                idSkyImagery = eoObservationFull.idSkyImagery
-                intensity = eoObservationFull.intensity
-                losUnc = eoObservationFull.losUnc
-                losx = eoObservationFull.losx
-                losxvel = eoObservationFull.losxvel
-                losy = eoObservationFull.losy
-                losyvel = eoObservationFull.losyvel
-                losz = eoObservationFull.losz
-                loszvel = eoObservationFull.loszvel
-                mag = eoObservationFull.mag
-                magNormRange = eoObservationFull.magNormRange
-                magUnc = eoObservationFull.magUnc
-                netObjSig = eoObservationFull.netObjSig
-                netObjSigUnc = eoObservationFull.netObjSigUnc
-                obPosition = eoObservationFull.obPosition
-                onOrbit = eoObservationFull.onOrbit
-                origin = eoObservationFull.origin
-                origNetwork = eoObservationFull.origNetwork
-                origObjectId = eoObservationFull.origObjectId
-                origSensorId = eoObservationFull.origSensorId
-                penumbra = eoObservationFull.penumbra
-                primaryExtinction = eoObservationFull.primaryExtinction
-                primaryExtinctionUnc = eoObservationFull.primaryExtinctionUnc
-                ra = eoObservationFull.ra
-                raBias = eoObservationFull.raBias
-                raMeasured = eoObservationFull.raMeasured
-                range = eoObservationFull.range
-                rangeBias = eoObservationFull.rangeBias
-                rangeMeasured = eoObservationFull.rangeMeasured
-                rangeRate = eoObservationFull.rangeRate
-                rangeRateMeasured = eoObservationFull.rangeRateMeasured
-                rangeRateUnc = eoObservationFull.rangeRateUnc
-                rangeUnc = eoObservationFull.rangeUnc
-                raRate = eoObservationFull.raRate
-                raUnc = eoObservationFull.raUnc
-                rawFileUri = eoObservationFull.rawFileUri
-                referenceFrame = eoObservationFull.referenceFrame
-                satNo = eoObservationFull.satNo
-                senalt = eoObservationFull.senalt
-                senlat = eoObservationFull.senlat
-                senlon = eoObservationFull.senlon
-                senQuat = eoObservationFull.senQuat.map { it.toMutableList() }
-                senReferenceFrame = eoObservationFull.senReferenceFrame
-                senvelx = eoObservationFull.senvelx
-                senvely = eoObservationFull.senvely
-                senvelz = eoObservationFull.senvelz
-                senx = eoObservationFull.senx
-                seny = eoObservationFull.seny
-                senz = eoObservationFull.senz
-                shutterDelay = eoObservationFull.shutterDelay
-                skyBkgrnd = eoObservationFull.skyBkgrnd
-                solarDecAngle = eoObservationFull.solarDecAngle
-                solarEqPhaseAngle = eoObservationFull.solarEqPhaseAngle
-                solarPhaseAngle = eoObservationFull.solarPhaseAngle
-                sourceDl = eoObservationFull.sourceDl
-                tags = eoObservationFull.tags.map { it.toMutableList() }
-                taskId = eoObservationFull.taskId
-                timingBias = eoObservationFull.timingBias
-                trackId = eoObservationFull.trackId
-                transactionId = eoObservationFull.transactionId
-                type = eoObservationFull.type
-                uct = eoObservationFull.uct
-                umbra = eoObservationFull.umbra
-                zeroptd = eoObservationFull.zeroptd
-                zeroPtdUnc = eoObservationFull.zeroPtdUnc
-                additionalProperties = eoObservationFull.additionalProperties.toMutableMap()
-            }
+        internal fun from(eoObservationFull: EoObservationFull) = apply {
+            classificationMarking = eoObservationFull.classificationMarking
+            dataMode = eoObservationFull.dataMode
+            obTime = eoObservationFull.obTime
+            source = eoObservationFull.source
+            id = eoObservationFull.id
+            azimuth = eoObservationFull.azimuth
+            azimuthBias = eoObservationFull.azimuthBias
+            azimuthMeasured = eoObservationFull.azimuthMeasured
+            azimuthRate = eoObservationFull.azimuthRate
+            azimuthUnc = eoObservationFull.azimuthUnc
+            bgIntensity = eoObservationFull.bgIntensity
+            collectMethod = eoObservationFull.collectMethod
+            corrQuality = eoObservationFull.corrQuality
+            createdAt = eoObservationFull.createdAt
+            createdBy = eoObservationFull.createdBy
+            declination = eoObservationFull.declination
+            declinationBias = eoObservationFull.declinationBias
+            declinationMeasured = eoObservationFull.declinationMeasured
+            declinationRate = eoObservationFull.declinationRate
+            declinationUnc = eoObservationFull.declinationUnc
+            descriptor = eoObservationFull.descriptor
+            elevation = eoObservationFull.elevation
+            elevationBias = eoObservationFull.elevationBias
+            elevationMeasured = eoObservationFull.elevationMeasured
+            elevationRate = eoObservationFull.elevationRate
+            elevationUnc = eoObservationFull.elevationUnc
+            eoobservationDetails = eoObservationFull.eoobservationDetails
+            expDuration = eoObservationFull.expDuration
+            fovCount = eoObservationFull.fovCount
+            fovCountUct = eoObservationFull.fovCountUct
+            geoalt = eoObservationFull.geoalt
+            geolat = eoObservationFull.geolat
+            geolon = eoObservationFull.geolon
+            georange = eoObservationFull.georange
+            idOnOrbit = eoObservationFull.idOnOrbit
+            idSensor = eoObservationFull.idSensor
+            idSkyImagery = eoObservationFull.idSkyImagery
+            intensity = eoObservationFull.intensity
+            losUnc = eoObservationFull.losUnc
+            losx = eoObservationFull.losx
+            losxvel = eoObservationFull.losxvel
+            losy = eoObservationFull.losy
+            losyvel = eoObservationFull.losyvel
+            losz = eoObservationFull.losz
+            loszvel = eoObservationFull.loszvel
+            mag = eoObservationFull.mag
+            magNormRange = eoObservationFull.magNormRange
+            magUnc = eoObservationFull.magUnc
+            netObjSig = eoObservationFull.netObjSig
+            netObjSigUnc = eoObservationFull.netObjSigUnc
+            obPosition = eoObservationFull.obPosition
+            onOrbit = eoObservationFull.onOrbit
+            origin = eoObservationFull.origin
+            origNetwork = eoObservationFull.origNetwork
+            origObjectId = eoObservationFull.origObjectId
+            origSensorId = eoObservationFull.origSensorId
+            penumbra = eoObservationFull.penumbra
+            primaryExtinction = eoObservationFull.primaryExtinction
+            primaryExtinctionUnc = eoObservationFull.primaryExtinctionUnc
+            ra = eoObservationFull.ra
+            raBias = eoObservationFull.raBias
+            raMeasured = eoObservationFull.raMeasured
+            range = eoObservationFull.range
+            rangeBias = eoObservationFull.rangeBias
+            rangeMeasured = eoObservationFull.rangeMeasured
+            rangeRate = eoObservationFull.rangeRate
+            rangeRateMeasured = eoObservationFull.rangeRateMeasured
+            rangeRateUnc = eoObservationFull.rangeRateUnc
+            rangeUnc = eoObservationFull.rangeUnc
+            raRate = eoObservationFull.raRate
+            raUnc = eoObservationFull.raUnc
+            rawFileUri = eoObservationFull.rawFileUri
+            referenceFrame = eoObservationFull.referenceFrame
+            satNo = eoObservationFull.satNo
+            senalt = eoObservationFull.senalt
+            senlat = eoObservationFull.senlat
+            senlon = eoObservationFull.senlon
+            senQuat = eoObservationFull.senQuat.map { it.toMutableList() }
+            senReferenceFrame = eoObservationFull.senReferenceFrame
+            senvelx = eoObservationFull.senvelx
+            senvely = eoObservationFull.senvely
+            senvelz = eoObservationFull.senvelz
+            senx = eoObservationFull.senx
+            seny = eoObservationFull.seny
+            senz = eoObservationFull.senz
+            shutterDelay = eoObservationFull.shutterDelay
+            skyBkgrnd = eoObservationFull.skyBkgrnd
+            solarDecAngle = eoObservationFull.solarDecAngle
+            solarEqPhaseAngle = eoObservationFull.solarEqPhaseAngle
+            solarPhaseAngle = eoObservationFull.solarPhaseAngle
+            sourceDl = eoObservationFull.sourceDl
+            tags = eoObservationFull.tags.map { it.toMutableList() }
+            taskId = eoObservationFull.taskId
+            timingBias = eoObservationFull.timingBias
+            trackId = eoObservationFull.trackId
+            transactionId = eoObservationFull.transactionId
+            type = eoObservationFull.type
+            uct = eoObservationFull.uct
+            umbra = eoObservationFull.umbra
+            zeroptd = eoObservationFull.zeroptd
+            zeroPtdUnc = eoObservationFull.zeroPtdUnc
+            additionalProperties = eoObservationFull.additionalProperties.toMutableMap()
+        }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-        fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
+        fun classificationMarking(classificationMarking: String) =
+            classificationMarking(JsonField.of(classificationMarking))
 
         /**
          * Sets [Builder.classificationMarking] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun classificationMarking(classificationMarking: JsonField<String>) =
-            apply {
-                this.classificationMarking = classificationMarking
-            }
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            this.classificationMarking = classificationMarking
+        }
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          */
         fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
         /**
          * Sets [Builder.dataMode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun dataMode(dataMode: JsonField<DataMode>) =
-            apply {
-                this.dataMode = dataMode
-            }
+        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
 
-        /** Ob detection time in ISO 8601 UTC, up to microsecond precision. Consumers should contact the provider for details on their obTime specifications. */
+        /**
+         * Ob detection time in ISO 8601 UTC, up to microsecond precision. Consumers should contact
+         * the provider for details on their obTime specifications.
+         */
         fun obTime(obTime: OffsetDateTime) = obTime(JsonField.of(obTime))
 
         /**
          * Sets [Builder.obTime] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.obTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.obTime] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun obTime(obTime: JsonField<OffsetDateTime>) =
-            apply {
-                this.obTime = obTime
-            }
+        fun obTime(obTime: JsonField<OffsetDateTime>) = apply { this.obTime = obTime }
 
         /** Source of the data. */
         fun source(source: String) = source(JsonField.of(source))
@@ -2262,13 +2419,10 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.source] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun source(source: JsonField<String>) =
-            apply {
-                this.source = source
-            }
+        fun source(source: JsonField<String>) = apply { this.source = source }
 
         /** Unique identifier of the record, auto-generated by the system. */
         fun id(id: String) = id(JsonField.of(id))
@@ -2276,27 +2430,25 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.id] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun id(id: JsonField<String>) =
-            apply {
-                this.id = id
-            }
+        fun id(id: JsonField<String>) = apply { this.id = id }
 
-        /** Line of sight azimuth angle in degrees and topocentric frame. Reported value should include all applicable corrections as specified on the source provider data card. If uncertain, consumers should contact the provider for details on the applied corrections. */
+        /**
+         * Line of sight azimuth angle in degrees and topocentric frame. Reported value should
+         * include all applicable corrections as specified on the source provider data card. If
+         * uncertain, consumers should contact the provider for details on the applied corrections.
+         */
         fun azimuth(azimuth: Double) = azimuth(JsonField.of(azimuth))
 
         /**
          * Sets [Builder.azimuth] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.azimuth] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.azimuth] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun azimuth(azimuth: JsonField<Double>) =
-            apply {
-                this.azimuth = azimuth
-            }
+        fun azimuth(azimuth: JsonField<Double>) = apply { this.azimuth = azimuth }
 
         /** Sensor line of sight azimuth angle bias in degrees. */
         fun azimuthBias(azimuthBias: Double) = azimuthBias(JsonField.of(azimuthBias))
@@ -2304,27 +2456,30 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.azimuthBias] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.azimuthBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.azimuthBias] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun azimuthBias(azimuthBias: JsonField<Double>) =
-            apply {
-                this.azimuthBias = azimuthBias
-            }
+        fun azimuthBias(azimuthBias: JsonField<Double>) = apply { this.azimuthBias = azimuthBias }
 
-        /** Optional flag indicating whether the azimuth value is measured (true) or computed (false). If null, consumers may consult the data provider for information regarding whether the corresponding value is computed or measured. */
-        fun azimuthMeasured(azimuthMeasured: Boolean) = azimuthMeasured(JsonField.of(azimuthMeasured))
+        /**
+         * Optional flag indicating whether the azimuth value is measured (true) or computed
+         * (false). If null, consumers may consult the data provider for information regarding
+         * whether the corresponding value is computed or measured.
+         */
+        fun azimuthMeasured(azimuthMeasured: Boolean) =
+            azimuthMeasured(JsonField.of(azimuthMeasured))
 
         /**
          * Sets [Builder.azimuthMeasured] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.azimuthMeasured] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.azimuthMeasured] with a well-typed [Boolean] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun azimuthMeasured(azimuthMeasured: JsonField<Boolean>) =
-            apply {
-                this.azimuthMeasured = azimuthMeasured
-            }
+        fun azimuthMeasured(azimuthMeasured: JsonField<Boolean>) = apply {
+            this.azimuthMeasured = azimuthMeasured
+        }
 
         /** Rate of change of the line of sight azimuth in degrees per second. */
         fun azimuthRate(azimuthRate: Double) = azimuthRate(JsonField.of(azimuthRate))
@@ -2332,13 +2487,11 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.azimuthRate] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.azimuthRate] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.azimuthRate] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun azimuthRate(azimuthRate: JsonField<Double>) =
-            apply {
-                this.azimuthRate = azimuthRate
-            }
+        fun azimuthRate(azimuthRate: JsonField<Double>) = apply { this.azimuthRate = azimuthRate }
 
         /** One sigma uncertainty in the line of sight azimuth angle, in degrees. */
         fun azimuthUnc(azimuthUnc: Double) = azimuthUnc(JsonField.of(azimuthUnc))
@@ -2346,13 +2499,11 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.azimuthUnc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.azimuthUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.azimuthUnc] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun azimuthUnc(azimuthUnc: JsonField<Double>) =
-            apply {
-                this.azimuthUnc = azimuthUnc
-            }
+        fun azimuthUnc(azimuthUnc: JsonField<Double>) = apply { this.azimuthUnc = azimuthUnc }
 
         /** Background intensity for IR observations, in kw/sr/um. */
         fun bgIntensity(bgIntensity: Double) = bgIntensity(JsonField.of(bgIntensity))
@@ -2360,41 +2511,44 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.bgIntensity] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.bgIntensity] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.bgIntensity] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun bgIntensity(bgIntensity: JsonField<Double>) =
-            apply {
-                this.bgIntensity = bgIntensity
-            }
+        fun bgIntensity(bgIntensity: JsonField<Double>) = apply { this.bgIntensity = bgIntensity }
 
-        /** Method indicating telescope movement during collection (AUTOTRACK, MANUAL AUTOTRACK, MANUAL RATE TRACK, MANUAL SIDEREAL, SIDEREAL, RATE TRACK). */
+        /**
+         * Method indicating telescope movement during collection (AUTOTRACK, MANUAL AUTOTRACK,
+         * MANUAL RATE TRACK, MANUAL SIDEREAL, SIDEREAL, RATE TRACK).
+         */
         fun collectMethod(collectMethod: String) = collectMethod(JsonField.of(collectMethod))
 
         /**
          * Sets [Builder.collectMethod] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.collectMethod] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.collectMethod] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun collectMethod(collectMethod: JsonField<String>) =
-            apply {
-                this.collectMethod = collectMethod
-            }
+        fun collectMethod(collectMethod: JsonField<String>) = apply {
+            this.collectMethod = collectMethod
+        }
 
-        /** Object Correlation Quality score of the observation when compared to a known orbit state, (non-standardized). Users should consult data providers regarding the expected range of values. */
+        /**
+         * Object Correlation Quality score of the observation when compared to a known orbit state,
+         * (non-standardized). Users should consult data providers regarding the expected range of
+         * values.
+         */
         fun corrQuality(corrQuality: Double) = corrQuality(JsonField.of(corrQuality))
 
         /**
          * Sets [Builder.corrQuality] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.corrQuality] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.corrQuality] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun corrQuality(corrQuality: JsonField<Double>) =
-            apply {
-                this.corrQuality = corrQuality
-            }
+        fun corrQuality(corrQuality: JsonField<Double>) = apply { this.corrQuality = corrQuality }
 
         /** Time the row was created in the database, auto-populated by the system. */
         fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -2402,13 +2556,11 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.createdAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun createdAt(createdAt: JsonField<OffsetDateTime>) =
-            apply {
-                this.createdAt = createdAt
-            }
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
 
         /** Application user who created the row in the database, auto-populated by the system. */
         fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
@@ -2416,69 +2568,80 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.createdBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun createdBy(createdBy: JsonField<String>) =
-            apply {
-                this.createdBy = createdBy
-            }
+        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
-        /** Line of sight declination, in degrees, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed. Reported value should include all applicable corrections as specified on the source provider data card. If uncertain, consumers should contact the provider for details on the applied corrections. */
+        /**
+         * Line of sight declination, in degrees, in the specified referenceFrame. If referenceFrame
+         * is null then J2K should be assumed. Reported value should include all applicable
+         * corrections as specified on the source provider data card. If uncertain, consumers should
+         * contact the provider for details on the applied corrections.
+         */
         fun declination(declination: Double) = declination(JsonField.of(declination))
 
         /**
          * Sets [Builder.declination] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.declination] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.declination] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun declination(declination: JsonField<Double>) =
-            apply {
-                this.declination = declination
-            }
+        fun declination(declination: JsonField<Double>) = apply { this.declination = declination }
 
         /** Sensor line of sight declination angle bias in degrees. */
-        fun declinationBias(declinationBias: Double) = declinationBias(JsonField.of(declinationBias))
+        fun declinationBias(declinationBias: Double) =
+            declinationBias(JsonField.of(declinationBias))
 
         /**
          * Sets [Builder.declinationBias] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.declinationBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.declinationBias] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun declinationBias(declinationBias: JsonField<Double>) =
-            apply {
-                this.declinationBias = declinationBias
-            }
+        fun declinationBias(declinationBias: JsonField<Double>) = apply {
+            this.declinationBias = declinationBias
+        }
 
-        /** Optional flag indicating whether the declination value is measured (true) or computed (false). If null, consumers may consult the data provider for information regarding whether the corresponding value is computed or measured. */
-        fun declinationMeasured(declinationMeasured: Boolean) = declinationMeasured(JsonField.of(declinationMeasured))
+        /**
+         * Optional flag indicating whether the declination value is measured (true) or computed
+         * (false). If null, consumers may consult the data provider for information regarding
+         * whether the corresponding value is computed or measured.
+         */
+        fun declinationMeasured(declinationMeasured: Boolean) =
+            declinationMeasured(JsonField.of(declinationMeasured))
 
         /**
          * Sets [Builder.declinationMeasured] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.declinationMeasured] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.declinationMeasured] with a well-typed [Boolean] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun declinationMeasured(declinationMeasured: JsonField<Boolean>) =
-            apply {
-                this.declinationMeasured = declinationMeasured
-            }
+        fun declinationMeasured(declinationMeasured: JsonField<Boolean>) = apply {
+            this.declinationMeasured = declinationMeasured
+        }
 
-        /** Line of sight declination rate of change, in degrees/sec, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed. */
-        fun declinationRate(declinationRate: Double) = declinationRate(JsonField.of(declinationRate))
+        /**
+         * Line of sight declination rate of change, in degrees/sec, in the specified
+         * referenceFrame. If referenceFrame is null then J2K should be assumed.
+         */
+        fun declinationRate(declinationRate: Double) =
+            declinationRate(JsonField.of(declinationRate))
 
         /**
          * Sets [Builder.declinationRate] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.declinationRate] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.declinationRate] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun declinationRate(declinationRate: JsonField<Double>) =
-            apply {
-                this.declinationRate = declinationRate
-            }
+        fun declinationRate(declinationRate: JsonField<Double>) = apply {
+            this.declinationRate = declinationRate
+        }
 
         /** One sigma uncertainty in the line of sight declination angle, in degrees. */
         fun declinationUnc(declinationUnc: Double) = declinationUnc(JsonField.of(declinationUnc))
@@ -2486,13 +2649,13 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.declinationUnc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.declinationUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.declinationUnc] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun declinationUnc(declinationUnc: JsonField<Double>) =
-            apply {
-                this.declinationUnc = declinationUnc
-            }
+        fun declinationUnc(declinationUnc: JsonField<Double>) = apply {
+            this.declinationUnc = declinationUnc
+        }
 
         /** Optional source-provided and searchable metadata or descriptor of the data. */
         fun descriptor(descriptor: String) = descriptor(JsonField.of(descriptor))
@@ -2500,27 +2663,27 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.descriptor] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.descriptor] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.descriptor] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun descriptor(descriptor: JsonField<String>) =
-            apply {
-                this.descriptor = descriptor
-            }
+        fun descriptor(descriptor: JsonField<String>) = apply { this.descriptor = descriptor }
 
-        /** Line of sight elevation in degrees and topocentric frame. Reported value should include all applicable corrections as specified on the source provider data card. If uncertain, consumers should contact the provider for details on the applied corrections. */
+        /**
+         * Line of sight elevation in degrees and topocentric frame. Reported value should include
+         * all applicable corrections as specified on the source provider data card. If uncertain,
+         * consumers should contact the provider for details on the applied corrections.
+         */
         fun elevation(elevation: Double) = elevation(JsonField.of(elevation))
 
         /**
          * Sets [Builder.elevation] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.elevation] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.elevation] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun elevation(elevation: JsonField<Double>) =
-            apply {
-                this.elevation = elevation
-            }
+        fun elevation(elevation: JsonField<Double>) = apply { this.elevation = elevation }
 
         /** Sensor line of sight elevation bias in degrees. */
         fun elevationBias(elevationBias: Double) = elevationBias(JsonField.of(elevationBias))
@@ -2528,27 +2691,32 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.elevationBias] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.elevationBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.elevationBias] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun elevationBias(elevationBias: JsonField<Double>) =
-            apply {
-                this.elevationBias = elevationBias
-            }
+        fun elevationBias(elevationBias: JsonField<Double>) = apply {
+            this.elevationBias = elevationBias
+        }
 
-        /** Optional flag indicating whether the elevation value is measured (true) or computed (false). If null, consumers may consult the data provider for information regarding whether the corresponding value is computed or measured. */
-        fun elevationMeasured(elevationMeasured: Boolean) = elevationMeasured(JsonField.of(elevationMeasured))
+        /**
+         * Optional flag indicating whether the elevation value is measured (true) or computed
+         * (false). If null, consumers may consult the data provider for information regarding
+         * whether the corresponding value is computed or measured.
+         */
+        fun elevationMeasured(elevationMeasured: Boolean) =
+            elevationMeasured(JsonField.of(elevationMeasured))
 
         /**
          * Sets [Builder.elevationMeasured] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.elevationMeasured] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.elevationMeasured] with a well-typed [Boolean] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun elevationMeasured(elevationMeasured: JsonField<Boolean>) =
-            apply {
-                this.elevationMeasured = elevationMeasured
-            }
+        fun elevationMeasured(elevationMeasured: JsonField<Boolean>) = apply {
+            this.elevationMeasured = elevationMeasured
+        }
 
         /** Rate of change of the line of sight elevation in degrees per second. */
         fun elevationRate(elevationRate: Double) = elevationRate(JsonField.of(elevationRate))
@@ -2556,13 +2724,13 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.elevationRate] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.elevationRate] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.elevationRate] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun elevationRate(elevationRate: JsonField<Double>) =
-            apply {
-                this.elevationRate = elevationRate
-            }
+        fun elevationRate(elevationRate: JsonField<Double>) = apply {
+            this.elevationRate = elevationRate
+        }
 
         /** One sigma uncertainty in the line of sight elevation angle, in degrees. */
         fun elevationUnc(elevationUnc: Double) = elevationUnc(JsonField.of(elevationUnc))
@@ -2570,41 +2738,48 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.elevationUnc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.elevationUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.elevationUnc] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun elevationUnc(elevationUnc: JsonField<Double>) =
-            apply {
-                this.elevationUnc = elevationUnc
-            }
+        fun elevationUnc(elevationUnc: JsonField<Double>) = apply {
+            this.elevationUnc = elevationUnc
+        }
 
-        /** Model representation of additional detailed observation data for electro-optical based sensor phenomenologies. */
-        fun eoobservationDetails(eoobservationDetails: EoobservationDetails) = eoobservationDetails(JsonField.of(eoobservationDetails))
+        /**
+         * Model representation of additional detailed observation data for electro-optical based
+         * sensor phenomenologies.
+         */
+        fun eoobservationDetails(eoobservationDetails: EoobservationDetails) =
+            eoobservationDetails(JsonField.of(eoobservationDetails))
 
         /**
          * Sets [Builder.eoobservationDetails] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.eoobservationDetails] with a well-typed [EoobservationDetails] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.eoobservationDetails] with a well-typed
+         * [EoobservationDetails] value instead. This method is primarily for setting the field to
+         * an undocumented or not yet supported value.
          */
-        fun eoobservationDetails(eoobservationDetails: JsonField<EoobservationDetails>) =
-            apply {
-                this.eoobservationDetails = eoobservationDetails
-            }
+        fun eoobservationDetails(eoobservationDetails: JsonField<EoobservationDetails>) = apply {
+            this.eoobservationDetails = eoobservationDetails
+        }
 
-        /** Image exposure duration in seconds. For observations performed using frame stacking or synthetic tracking methods, the exposure duration should be the total integration time. This field is highly recommended / required if the observations are going to be used for photometric processing. */
+        /**
+         * Image exposure duration in seconds. For observations performed using frame stacking or
+         * synthetic tracking methods, the exposure duration should be the total integration time.
+         * This field is highly recommended / required if the observations are going to be used for
+         * photometric processing.
+         */
         fun expDuration(expDuration: Double) = expDuration(JsonField.of(expDuration))
 
         /**
          * Sets [Builder.expDuration] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.expDuration] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.expDuration] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun expDuration(expDuration: JsonField<Double>) =
-            apply {
-                this.expDuration = expDuration
-            }
+        fun expDuration(expDuration: JsonField<Double>) = apply { this.expDuration = expDuration }
 
         /** The number of RSOs detected in the sensor field of view. */
         fun fovCount(fovCount: Int) = fovCount(JsonField.of(fovCount))
@@ -2612,13 +2787,10 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.fovCount] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.fovCount] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.fovCount] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun fovCount(fovCount: JsonField<Int>) =
-            apply {
-                this.fovCount = fovCount
-            }
+        fun fovCount(fovCount: JsonField<Int>) = apply { this.fovCount = fovCount }
 
         /** The number of uncorrelated tracks in the field of view. */
         fun fovCountUct(fovCountUct: Int) = fovCountUct(JsonField.of(fovCountUct))
@@ -2626,13 +2798,10 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.fovCountUct] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.fovCountUct] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.fovCountUct] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun fovCountUct(fovCountUct: JsonField<Int>) =
-            apply {
-                this.fovCountUct = fovCountUct
-            }
+        fun fovCountUct(fovCountUct: JsonField<Int>) = apply { this.fovCountUct = fovCountUct }
 
         /** For GEO detections, the altitude in km. */
         fun geoalt(geoalt: Double) = geoalt(JsonField.of(geoalt))
@@ -2640,13 +2809,10 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.geoalt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.geoalt] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.geoalt] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun geoalt(geoalt: JsonField<Double>) =
-            apply {
-                this.geoalt = geoalt
-            }
+        fun geoalt(geoalt: JsonField<Double>) = apply { this.geoalt = geoalt }
 
         /** For GEO detections, the latitude in degrees north. */
         fun geolat(geolat: Double) = geolat(JsonField.of(geolat))
@@ -2654,13 +2820,10 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.geolat] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.geolat] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.geolat] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun geolat(geolat: JsonField<Double>) =
-            apply {
-                this.geolat = geolat
-            }
+        fun geolat(geolat: JsonField<Double>) = apply { this.geolat = geolat }
 
         /** For GEO detections, the longitude in degrees east. */
         fun geolon(geolon: Double) = geolon(JsonField.of(geolon))
@@ -2668,13 +2831,10 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.geolon] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.geolon] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.geolon] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun geolon(geolon: JsonField<Double>) =
-            apply {
-                this.geolon = geolon
-            }
+        fun geolon(geolon: JsonField<Double>) = apply { this.geolon = geolon }
 
         /** For GEO detections, the range in km. */
         fun georange(georange: Double) = georange(JsonField.of(georange))
@@ -2682,13 +2842,10 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.georange] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.georange] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.georange] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun georange(georange: JsonField<Double>) =
-            apply {
-                this.georange = georange
-            }
+        fun georange(georange: JsonField<Double>) = apply { this.georange = georange }
 
         /** Unique identifier of the target on-orbit object, if correlated. */
         fun idOnOrbit(idOnOrbit: String) = idOnOrbit(JsonField.of(idOnOrbit))
@@ -2696,13 +2853,11 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.idOnOrbit] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idOnOrbit] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.idOnOrbit] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun idOnOrbit(idOnOrbit: JsonField<String>) =
-            apply {
-                this.idOnOrbit = idOnOrbit
-            }
+        fun idOnOrbit(idOnOrbit: JsonField<String>) = apply { this.idOnOrbit = idOnOrbit }
 
         /** Unique identifier of the reporting sensor. */
         fun idSensor(idSensor: String) = idSensor(JsonField.of(idSensor))
@@ -2710,13 +2865,10 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.idSensor] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idSensor] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.idSensor] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun idSensor(idSensor: JsonField<String>) =
-            apply {
-                this.idSensor = idSensor
-            }
+        fun idSensor(idSensor: JsonField<String>) = apply { this.idSensor = idSensor }
 
         /** Unique identifier of the Sky Imagery. */
         fun idSkyImagery(idSkyImagery: String) = idSkyImagery(JsonField.of(idSkyImagery))
@@ -2724,13 +2876,13 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.idSkyImagery] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idSkyImagery] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.idSkyImagery] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun idSkyImagery(idSkyImagery: JsonField<String>) =
-            apply {
-                this.idSkyImagery = idSkyImagery
-            }
+        fun idSkyImagery(idSkyImagery: JsonField<String>) = apply {
+            this.idSkyImagery = idSkyImagery
+        }
 
         /** Intensity of the target for IR observations, in kw/sr/um. */
         fun intensity(intensity: Double) = intensity(JsonField.of(intensity))
@@ -2738,13 +2890,11 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.intensity] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.intensity] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.intensity] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun intensity(intensity: JsonField<Double>) =
-            apply {
-                this.intensity = intensity
-            }
+        fun intensity(intensity: JsonField<Double>) = apply { this.intensity = intensity }
 
         /** One sigma uncertainty in the line of sight pointing in micro-radians. */
         fun losUnc(losUnc: Double) = losUnc(JsonField.of(losUnc))
@@ -2752,111 +2902,107 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.losUnc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.losUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.losUnc] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun losUnc(losUnc: JsonField<Double>) =
-            apply {
-                this.losUnc = losUnc
-            }
+        fun losUnc(losUnc: JsonField<Double>) = apply { this.losUnc = losUnc }
 
-        /** Line-of-sight cartesian X position of the target, in km, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed. */
+        /**
+         * Line-of-sight cartesian X position of the target, in km, in the specified referenceFrame.
+         * If referenceFrame is null then J2K should be assumed.
+         */
         fun losx(losx: Double) = losx(JsonField.of(losx))
 
         /**
          * Sets [Builder.losx] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.losx] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.losx] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun losx(losx: JsonField<Double>) =
-            apply {
-                this.losx = losx
-            }
+        fun losx(losx: JsonField<Double>) = apply { this.losx = losx }
 
-        /** Line-of-sight cartesian X velocity of target, in km/sec, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed. */
+        /**
+         * Line-of-sight cartesian X velocity of target, in km/sec, in the specified referenceFrame.
+         * If referenceFrame is null then J2K should be assumed.
+         */
         fun losxvel(losxvel: Double) = losxvel(JsonField.of(losxvel))
 
         /**
          * Sets [Builder.losxvel] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.losxvel] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.losxvel] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun losxvel(losxvel: JsonField<Double>) =
-            apply {
-                this.losxvel = losxvel
-            }
+        fun losxvel(losxvel: JsonField<Double>) = apply { this.losxvel = losxvel }
 
-        /** Line-of-sight cartesian Y position of the target, in km, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed. */
+        /**
+         * Line-of-sight cartesian Y position of the target, in km, in the specified referenceFrame.
+         * If referenceFrame is null then J2K should be assumed.
+         */
         fun losy(losy: Double) = losy(JsonField.of(losy))
 
         /**
          * Sets [Builder.losy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.losy] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.losy] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun losy(losy: JsonField<Double>) =
-            apply {
-                this.losy = losy
-            }
+        fun losy(losy: JsonField<Double>) = apply { this.losy = losy }
 
-        /** Line-of-sight cartesian Y velocity of target, in km/sec, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed. */
+        /**
+         * Line-of-sight cartesian Y velocity of target, in km/sec, in the specified referenceFrame.
+         * If referenceFrame is null then J2K should be assumed.
+         */
         fun losyvel(losyvel: Double) = losyvel(JsonField.of(losyvel))
 
         /**
          * Sets [Builder.losyvel] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.losyvel] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.losyvel] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun losyvel(losyvel: JsonField<Double>) =
-            apply {
-                this.losyvel = losyvel
-            }
+        fun losyvel(losyvel: JsonField<Double>) = apply { this.losyvel = losyvel }
 
-        /** Line-of-sight cartesian Z position of the target, in km, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed. */
+        /**
+         * Line-of-sight cartesian Z position of the target, in km, in the specified referenceFrame.
+         * If referenceFrame is null then J2K should be assumed.
+         */
         fun losz(losz: Double) = losz(JsonField.of(losz))
 
         /**
          * Sets [Builder.losz] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.losz] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.losz] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun losz(losz: JsonField<Double>) =
-            apply {
-                this.losz = losz
-            }
+        fun losz(losz: JsonField<Double>) = apply { this.losz = losz }
 
-        /** Line-of-sight cartesian Z velocity of target, in km/sec, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed. */
+        /**
+         * Line-of-sight cartesian Z velocity of target, in km/sec, in the specified referenceFrame.
+         * If referenceFrame is null then J2K should be assumed.
+         */
         fun loszvel(loszvel: Double) = loszvel(JsonField.of(loszvel))
 
         /**
          * Sets [Builder.loszvel] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.loszvel] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.loszvel] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun loszvel(loszvel: JsonField<Double>) =
-            apply {
-                this.loszvel = loszvel
-            }
+        fun loszvel(loszvel: JsonField<Double>) = apply { this.loszvel = loszvel }
 
-        /** Measure of observed brightness calibrated against the Gaia G-band in units of magnitudes. */
+        /**
+         * Measure of observed brightness calibrated against the Gaia G-band in units of magnitudes.
+         */
         fun mag(mag: Double) = mag(JsonField.of(mag))
 
         /**
          * Sets [Builder.mag] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.mag] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.mag] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun mag(mag: JsonField<Double>) =
-            apply {
-                this.mag = mag
-            }
+        fun mag(mag: JsonField<Double>) = apply { this.mag = mag }
 
         /** Formula: mag - 5.0 \* log_10(geo_range / 1000000.0). */
         fun magNormRange(magNormRange: Double) = magNormRange(JsonField.of(magNormRange))
@@ -2864,13 +3010,13 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.magNormRange] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.magNormRange] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.magNormRange] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun magNormRange(magNormRange: JsonField<Double>) =
-            apply {
-                this.magNormRange = magNormRange
-            }
+        fun magNormRange(magNormRange: JsonField<Double>) = apply {
+            this.magNormRange = magNormRange
+        }
 
         /** Uncertainty of the observed brightness in units of magnitudes. */
         fun magUnc(magUnc: Double) = magUnc(JsonField.of(magUnc))
@@ -2878,13 +3024,10 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.magUnc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.magUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.magUnc] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun magUnc(magUnc: JsonField<Double>) =
-            apply {
-                this.magUnc = magUnc
-            }
+        fun magUnc(magUnc: JsonField<Double>) = apply { this.magUnc = magUnc }
 
         /** Net object signature = counts / expDuration. */
         fun netObjSig(netObjSig: Double) = netObjSig(JsonField.of(netObjSig))
@@ -2892,13 +3035,11 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.netObjSig] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.netObjSig] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.netObjSig] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun netObjSig(netObjSig: JsonField<Double>) =
-            apply {
-                this.netObjSig = netObjSig
-            }
+        fun netObjSig(netObjSig: JsonField<Double>) = apply { this.netObjSig = netObjSig }
 
         /** Net object signature uncertainty = counts uncertainty / expDuration. */
         fun netObjSigUnc(netObjSigUnc: Double) = netObjSigUnc(JsonField.of(netObjSigUnc))
@@ -2906,27 +3047,29 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.netObjSigUnc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.netObjSigUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.netObjSigUnc] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun netObjSigUnc(netObjSigUnc: JsonField<Double>) =
-            apply {
-                this.netObjSigUnc = netObjSigUnc
-            }
+        fun netObjSigUnc(netObjSigUnc: JsonField<Double>) = apply {
+            this.netObjSigUnc = netObjSigUnc
+        }
 
-        /** The position of this observation within a track (FENCE, FIRST, IN, LAST, SINGLE). This identifier is optional and, if null, no assumption should be made regarding whether other observations may or may not exist to compose a track. */
+        /**
+         * The position of this observation within a track (FENCE, FIRST, IN, LAST, SINGLE). This
+         * identifier is optional and, if null, no assumption should be made regarding whether other
+         * observations may or may not exist to compose a track.
+         */
         fun obPosition(obPosition: String) = obPosition(JsonField.of(obPosition))
 
         /**
          * Sets [Builder.obPosition] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.obPosition] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.obPosition] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun obPosition(obPosition: JsonField<String>) =
-            apply {
-                this.obPosition = obPosition
-            }
+        fun obPosition(obPosition: JsonField<String>) = apply { this.obPosition = obPosition }
 
         /** Model object representing on-orbit objects or satellites in the system. */
         fun onOrbit(onOrbit: OnorbitFull) = onOrbit(JsonField.of(onOrbit))
@@ -2934,125 +3077,146 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.onOrbit] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.onOrbit] with a well-typed [OnorbitFull] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.onOrbit] with a well-typed [OnorbitFull] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun onOrbit(onOrbit: JsonField<OnorbitFull>) =
-            apply {
-                this.onOrbit = onOrbit
-            }
+        fun onOrbit(onOrbit: JsonField<OnorbitFull>) = apply { this.onOrbit = onOrbit }
 
-        /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         */
         fun origin(origin: String) = origin(JsonField.of(origin))
 
         /**
          * Sets [Builder.origin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun origin(origin: JsonField<String>) =
-            apply {
-                this.origin = origin
-            }
+        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
 
-        /** The originating source network on which this record was created, auto-populated by the system. */
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         */
         fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
         /**
          * Sets [Builder.origNetwork] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun origNetwork(origNetwork: JsonField<String>) =
-            apply {
-                this.origNetwork = origNetwork
-            }
+        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
 
-        /** Optional identifier provided by observation source to indicate the target onorbit object of this observation. This may be an internal identifier and not necessarily a valid satellite number. */
+        /**
+         * Optional identifier provided by observation source to indicate the target onorbit object
+         * of this observation. This may be an internal identifier and not necessarily a valid
+         * satellite number.
+         */
         fun origObjectId(origObjectId: String) = origObjectId(JsonField.of(origObjectId))
 
         /**
          * Sets [Builder.origObjectId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origObjectId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origObjectId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun origObjectId(origObjectId: JsonField<String>) =
-            apply {
-                this.origObjectId = origObjectId
-            }
+        fun origObjectId(origObjectId: JsonField<String>) = apply {
+            this.origObjectId = origObjectId
+        }
 
-        /** Optional identifier provided by observation source to indicate the sensor identifier which produced this observation. This may be an internal identifier and not necessarily a valid sensor ID. */
+        /**
+         * Optional identifier provided by observation source to indicate the sensor identifier
+         * which produced this observation. This may be an internal identifier and not necessarily a
+         * valid sensor ID.
+         */
         fun origSensorId(origSensorId: String) = origSensorId(JsonField.of(origSensorId))
 
         /**
          * Sets [Builder.origSensorId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origSensorId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origSensorId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun origSensorId(origSensorId: JsonField<String>) =
-            apply {
-                this.origSensorId = origSensorId
-            }
+        fun origSensorId(origSensorId: JsonField<String>) = apply {
+            this.origSensorId = origSensorId
+        }
 
-        /** Boolean indicating that the target object was in a penumbral eclipse at the time of this observation. */
+        /**
+         * Boolean indicating that the target object was in a penumbral eclipse at the time of this
+         * observation.
+         */
         fun penumbra(penumbra: Boolean) = penumbra(JsonField.of(penumbra))
 
         /**
          * Sets [Builder.penumbra] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.penumbra] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.penumbra] with a well-typed [Boolean] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun penumbra(penumbra: JsonField<Boolean>) =
-            apply {
-                this.penumbra = penumbra
-            }
+        fun penumbra(penumbra: JsonField<Boolean>) = apply { this.penumbra = penumbra }
 
-        /** Primary Extinction Coefficient, in Magnitudes. Primary Extinction is the coefficient applied to the airmass to determine how much the observed visual magnitude has been attenuated by the atmosphere. Extinction, in general, describes the absorption and scattering of electromagnetic radiation by dust and gas between an emitting astronomical object and the observer. See the EOObservationDetails API for specification of extinction coefficients for multiple spectral filters. */
-        fun primaryExtinction(primaryExtinction: Double) = primaryExtinction(JsonField.of(primaryExtinction))
+        /**
+         * Primary Extinction Coefficient, in Magnitudes. Primary Extinction is the coefficient
+         * applied to the airmass to determine how much the observed visual magnitude has been
+         * attenuated by the atmosphere. Extinction, in general, describes the absorption and
+         * scattering of electromagnetic radiation by dust and gas between an emitting astronomical
+         * object and the observer. See the EOObservationDetails API for specification of extinction
+         * coefficients for multiple spectral filters.
+         */
+        fun primaryExtinction(primaryExtinction: Double) =
+            primaryExtinction(JsonField.of(primaryExtinction))
 
         /**
          * Sets [Builder.primaryExtinction] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.primaryExtinction] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.primaryExtinction] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun primaryExtinction(primaryExtinction: JsonField<Double>) =
-            apply {
-                this.primaryExtinction = primaryExtinction
-            }
+        fun primaryExtinction(primaryExtinction: JsonField<Double>) = apply {
+            this.primaryExtinction = primaryExtinction
+        }
 
         /** Primary Extinction Coefficient Uncertainty, in Magnitudes. */
-        fun primaryExtinctionUnc(primaryExtinctionUnc: Double) = primaryExtinctionUnc(JsonField.of(primaryExtinctionUnc))
+        fun primaryExtinctionUnc(primaryExtinctionUnc: Double) =
+            primaryExtinctionUnc(JsonField.of(primaryExtinctionUnc))
 
         /**
          * Sets [Builder.primaryExtinctionUnc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.primaryExtinctionUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.primaryExtinctionUnc] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun primaryExtinctionUnc(primaryExtinctionUnc: JsonField<Double>) =
-            apply {
-                this.primaryExtinctionUnc = primaryExtinctionUnc
-            }
+        fun primaryExtinctionUnc(primaryExtinctionUnc: JsonField<Double>) = apply {
+            this.primaryExtinctionUnc = primaryExtinctionUnc
+        }
 
-        /** Line of sight right ascension, in degrees, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed. Reported value should include all applicable corrections as specified on the source provider data card. If uncertain, consumers should contact the provider for details on the applied corrections. */
+        /**
+         * Line of sight right ascension, in degrees, in the specified referenceFrame. If
+         * referenceFrame is null then J2K should be assumed. Reported value should include all
+         * applicable corrections as specified on the source provider data card. If uncertain,
+         * consumers should contact the provider for details on the applied corrections.
+         */
         fun ra(ra: Double) = ra(JsonField.of(ra))
 
         /**
          * Sets [Builder.ra] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.ra] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.ra] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun ra(ra: JsonField<Double>) =
-            apply {
-                this.ra = ra
-            }
+        fun ra(ra: JsonField<Double>) = apply { this.ra = ra }
 
         /** Sensor line of sight right ascension bias in degrees. */
         fun raBias(raBias: Double) = raBias(JsonField.of(raBias))
@@ -3060,41 +3224,42 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.raBias] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.raBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.raBias] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun raBias(raBias: JsonField<Double>) =
-            apply {
-                this.raBias = raBias
-            }
+        fun raBias(raBias: JsonField<Double>) = apply { this.raBias = raBias }
 
-        /** Optional flag indicating whether the ra value is measured (true) or computed (false). If null, consumers may consult the data provider for information regarding whether the corresponding value is computed or measured. */
+        /**
+         * Optional flag indicating whether the ra value is measured (true) or computed (false). If
+         * null, consumers may consult the data provider for information regarding whether the
+         * corresponding value is computed or measured.
+         */
         fun raMeasured(raMeasured: Boolean) = raMeasured(JsonField.of(raMeasured))
 
         /**
          * Sets [Builder.raMeasured] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.raMeasured] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.raMeasured] with a well-typed [Boolean] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun raMeasured(raMeasured: JsonField<Boolean>) =
-            apply {
-                this.raMeasured = raMeasured
-            }
+        fun raMeasured(raMeasured: JsonField<Boolean>) = apply { this.raMeasured = raMeasured }
 
-        /** Line of sight range in km. If referenceFrame is null then J2K should be assumed. Reported value should include all applicable corrections as specified on the source provider data card. If uncertain, consumers should contact the provider for details on the applied corrections. */
+        /**
+         * Line of sight range in km. If referenceFrame is null then J2K should be assumed. Reported
+         * value should include all applicable corrections as specified on the source provider data
+         * card. If uncertain, consumers should contact the provider for details on the applied
+         * corrections.
+         */
         fun range(range: Double) = range(JsonField.of(range))
 
         /**
          * Sets [Builder.range] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.range] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.range] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun range(range: JsonField<Double>) =
-            apply {
-                this.range = range
-            }
+        fun range(range: JsonField<Double>) = apply { this.range = range }
 
         /** Sensor line of sight range bias in km. */
         fun rangeBias(rangeBias: Double) = rangeBias(JsonField.of(rangeBias))
@@ -3102,55 +3267,65 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.rangeBias] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.rangeBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.rangeBias] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun rangeBias(rangeBias: JsonField<Double>) =
-            apply {
-                this.rangeBias = rangeBias
-            }
+        fun rangeBias(rangeBias: JsonField<Double>) = apply { this.rangeBias = rangeBias }
 
-        /** Optional flag indicating whether the range value is measured (true) or computed (false). If null, consumers may consult the data provider for information regarding whether the corresponding value is computed or measured. */
+        /**
+         * Optional flag indicating whether the range value is measured (true) or computed (false).
+         * If null, consumers may consult the data provider for information regarding whether the
+         * corresponding value is computed or measured.
+         */
         fun rangeMeasured(rangeMeasured: Boolean) = rangeMeasured(JsonField.of(rangeMeasured))
 
         /**
          * Sets [Builder.rangeMeasured] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.rangeMeasured] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.rangeMeasured] with a well-typed [Boolean] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun rangeMeasured(rangeMeasured: JsonField<Boolean>) =
-            apply {
-                this.rangeMeasured = rangeMeasured
-            }
+        fun rangeMeasured(rangeMeasured: JsonField<Boolean>) = apply {
+            this.rangeMeasured = rangeMeasured
+        }
 
-        /** Range rate in km/s. If referenceFrame is null then J2K should be assumed. Reported value should include all applicable corrections as specified on the source provider data card. If uncertain, consumers should contact the provider for details on the applied corrections. */
+        /**
+         * Range rate in km/s. If referenceFrame is null then J2K should be assumed. Reported value
+         * should include all applicable corrections as specified on the source provider data card.
+         * If uncertain, consumers should contact the provider for details on the applied
+         * corrections.
+         */
         fun rangeRate(rangeRate: Double) = rangeRate(JsonField.of(rangeRate))
 
         /**
          * Sets [Builder.rangeRate] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.rangeRate] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.rangeRate] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun rangeRate(rangeRate: JsonField<Double>) =
-            apply {
-                this.rangeRate = rangeRate
-            }
+        fun rangeRate(rangeRate: JsonField<Double>) = apply { this.rangeRate = rangeRate }
 
-        /** Optional flag indicating whether the rangeRate value is measured (true) or computed (false). If null, consumers may consult the data provider for information regarding whether the corresponding value is computed or measured. */
-        fun rangeRateMeasured(rangeRateMeasured: Boolean) = rangeRateMeasured(JsonField.of(rangeRateMeasured))
+        /**
+         * Optional flag indicating whether the rangeRate value is measured (true) or computed
+         * (false). If null, consumers may consult the data provider for information regarding
+         * whether the corresponding value is computed or measured.
+         */
+        fun rangeRateMeasured(rangeRateMeasured: Boolean) =
+            rangeRateMeasured(JsonField.of(rangeRateMeasured))
 
         /**
          * Sets [Builder.rangeRateMeasured] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.rangeRateMeasured] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.rangeRateMeasured] with a well-typed [Boolean] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun rangeRateMeasured(rangeRateMeasured: JsonField<Boolean>) =
-            apply {
-                this.rangeRateMeasured = rangeRateMeasured
-            }
+        fun rangeRateMeasured(rangeRateMeasured: JsonField<Boolean>) = apply {
+            this.rangeRateMeasured = rangeRateMeasured
+        }
 
         /** One sigma uncertainty in the line of sight range rate, in kilometers/second. */
         fun rangeRateUnc(rangeRateUnc: Double) = rangeRateUnc(JsonField.of(rangeRateUnc))
@@ -3158,13 +3333,13 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.rangeRateUnc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.rangeRateUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.rangeRateUnc] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun rangeRateUnc(rangeRateUnc: JsonField<Double>) =
-            apply {
-                this.rangeRateUnc = rangeRateUnc
-            }
+        fun rangeRateUnc(rangeRateUnc: JsonField<Double>) = apply {
+            this.rangeRateUnc = rangeRateUnc
+        }
 
         /** One sigma uncertainty in the line of sight range, in kilometers. */
         fun rangeUnc(rangeUnc: Double) = rangeUnc(JsonField.of(rangeUnc))
@@ -3172,27 +3347,24 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.rangeUnc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.rangeUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.rangeUnc] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun rangeUnc(rangeUnc: JsonField<Double>) =
-            apply {
-                this.rangeUnc = rangeUnc
-            }
+        fun rangeUnc(rangeUnc: JsonField<Double>) = apply { this.rangeUnc = rangeUnc }
 
-        /** Line of sight right ascension rate of change, in degrees/sec, in the specified referenceFrame. If referenceFrame is null then J2K should be assumed. */
+        /**
+         * Line of sight right ascension rate of change, in degrees/sec, in the specified
+         * referenceFrame. If referenceFrame is null then J2K should be assumed.
+         */
         fun raRate(raRate: Double) = raRate(JsonField.of(raRate))
 
         /**
          * Sets [Builder.raRate] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.raRate] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.raRate] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun raRate(raRate: JsonField<Double>) =
-            apply {
-                this.raRate = raRate
-            }
+        fun raRate(raRate: JsonField<Double>) = apply { this.raRate = raRate }
 
         /** One sigma uncertainty in the line of sight right ascension angle, in degrees. */
         fun raUnc(raUnc: Double) = raUnc(JsonField.of(raUnc))
@@ -3200,41 +3372,44 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.raUnc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.raUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.raUnc] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun raUnc(raUnc: JsonField<Double>) =
-            apply {
-                this.raUnc = raUnc
-            }
+        fun raUnc(raUnc: JsonField<Double>) = apply { this.raUnc = raUnc }
 
-        /** Optional URI location in the document repository of the raw file parsed by the system to produce this record. To download the raw file, prepend https://udl-hostname/scs/download?id= to this value. */
+        /**
+         * Optional URI location in the document repository of the raw file parsed by the system to
+         * produce this record. To download the raw file, prepend
+         * https://udl-hostname/scs/download?id= to this value.
+         */
         fun rawFileUri(rawFileUri: String) = rawFileUri(JsonField.of(rawFileUri))
 
         /**
          * Sets [Builder.rawFileUri] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.rawFileUri] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.rawFileUri] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun rawFileUri(rawFileUri: JsonField<String>) =
-            apply {
-                this.rawFileUri = rawFileUri
-            }
+        fun rawFileUri(rawFileUri: JsonField<String>) = apply { this.rawFileUri = rawFileUri }
 
-        /** The reference frame of the EOObservation measurements. If the referenceFrame is null it is assumed to be J2000. */
-        fun referenceFrame(referenceFrame: ReferenceFrame) = referenceFrame(JsonField.of(referenceFrame))
+        /**
+         * The reference frame of the EOObservation measurements. If the referenceFrame is null it
+         * is assumed to be J2000.
+         */
+        fun referenceFrame(referenceFrame: ReferenceFrame) =
+            referenceFrame(JsonField.of(referenceFrame))
 
         /**
          * Sets [Builder.referenceFrame] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.referenceFrame] with a well-typed [ReferenceFrame] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.referenceFrame] with a well-typed [ReferenceFrame] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun referenceFrame(referenceFrame: JsonField<ReferenceFrame>) =
-            apply {
-                this.referenceFrame = referenceFrame
-            }
+        fun referenceFrame(referenceFrame: JsonField<ReferenceFrame>) = apply {
+            this.referenceFrame = referenceFrame
+        }
 
         /** Satellite/Catalog number of the target on-orbit object. */
         fun satNo(satNo: Int) = satNo(JsonField.of(satNo))
@@ -3242,13 +3417,10 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.satNo] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.satNo] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.satNo] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun satNo(satNo: JsonField<Int>) =
-            apply {
-                this.satNo = satNo
-            }
+        fun satNo(satNo: JsonField<Int>) = apply { this.satNo = satNo }
 
         /** Sensor altitude at obTime (if mobile/onorbit) in km. */
         fun senalt(senalt: Double) = senalt(JsonField.of(senalt))
@@ -3256,165 +3428,171 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.senalt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.senalt] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.senalt] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun senalt(senalt: JsonField<Double>) =
-            apply {
-                this.senalt = senalt
-            }
+        fun senalt(senalt: JsonField<Double>) = apply { this.senalt = senalt }
 
-        /** Sensor WGS84 latitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained from sensor info. -90 to 90 degrees (negative values south of equator). */
+        /**
+         * Sensor WGS84 latitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained
+         * from sensor info. -90 to 90 degrees (negative values south of equator).
+         */
         fun senlat(senlat: Double) = senlat(JsonField.of(senlat))
 
         /**
          * Sets [Builder.senlat] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.senlat] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.senlat] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun senlat(senlat: JsonField<Double>) =
-            apply {
-                this.senlat = senlat
-            }
+        fun senlat(senlat: JsonField<Double>) = apply { this.senlat = senlat }
 
-        /** Sensor WGS84 longitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained from sensor info. -180 to 180 degrees (negative values west of Prime Meridian). */
+        /**
+         * Sensor WGS84 longitude at obTime (if mobile/onorbit) in degrees. If null, can be obtained
+         * from sensor info. -180 to 180 degrees (negative values west of Prime Meridian).
+         */
         fun senlon(senlon: Double) = senlon(JsonField.of(senlon))
 
         /**
          * Sets [Builder.senlon] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.senlon] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.senlon] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun senlon(senlon: JsonField<Double>) =
-            apply {
-                this.senlon = senlon
-            }
+        fun senlon(senlon: JsonField<Double>) = apply { this.senlon = senlon }
 
-        /** The quaternion describing the rotation of the sensor in relation to the body-fixed frame used for this system into the local geodetic frame, at observation time (obTime). The array element order convention is scalar component first, followed by the three vector components (qc, q1, q2, q3). */
+        /**
+         * The quaternion describing the rotation of the sensor in relation to the body-fixed frame
+         * used for this system into the local geodetic frame, at observation time (obTime). The
+         * array element order convention is scalar component first, followed by the three vector
+         * components (qc, q1, q2, q3).
+         */
         fun senQuat(senQuat: List<Double>) = senQuat(JsonField.of(senQuat))
 
         /**
          * Sets [Builder.senQuat] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.senQuat] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.senQuat] with a well-typed `List<Double>` value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun senQuat(senQuat: JsonField<List<Double>>) =
-            apply {
-                this.senQuat = senQuat.map { it.toMutableList() }
-            }
+        fun senQuat(senQuat: JsonField<List<Double>>) = apply {
+            this.senQuat = senQuat.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [Double] to [Builder.senQuat].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addSenQuat(senQuat: Double) =
-            apply {
-                this.senQuat = (this.senQuat ?: JsonField.of(mutableListOf())).also {
+        fun addSenQuat(senQuat: Double) = apply {
+            this.senQuat =
+                (this.senQuat ?: JsonField.of(mutableListOf())).also {
                     checkKnown("senQuat", it).add(senQuat)
                 }
-            }
+        }
 
-        /** The reference frame of the observing sensor state. If the senReferenceFrame is null it is assumed to be J2000. */
-        fun senReferenceFrame(senReferenceFrame: SenReferenceFrame) = senReferenceFrame(JsonField.of(senReferenceFrame))
+        /**
+         * The reference frame of the observing sensor state. If the senReferenceFrame is null it is
+         * assumed to be J2000.
+         */
+        fun senReferenceFrame(senReferenceFrame: SenReferenceFrame) =
+            senReferenceFrame(JsonField.of(senReferenceFrame))
 
         /**
          * Sets [Builder.senReferenceFrame] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.senReferenceFrame] with a well-typed [SenReferenceFrame] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.senReferenceFrame] with a well-typed [SenReferenceFrame]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun senReferenceFrame(senReferenceFrame: JsonField<SenReferenceFrame>) =
-            apply {
-                this.senReferenceFrame = senReferenceFrame
-            }
+        fun senReferenceFrame(senReferenceFrame: JsonField<SenReferenceFrame>) = apply {
+            this.senReferenceFrame = senReferenceFrame
+        }
 
-        /** Cartesian X velocity of the observing mobile/onorbit sensor at obTime, in km/sec, in the specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed. */
+        /**
+         * Cartesian X velocity of the observing mobile/onorbit sensor at obTime, in km/sec, in the
+         * specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
+         */
         fun senvelx(senvelx: Double) = senvelx(JsonField.of(senvelx))
 
         /**
          * Sets [Builder.senvelx] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.senvelx] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.senvelx] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun senvelx(senvelx: JsonField<Double>) =
-            apply {
-                this.senvelx = senvelx
-            }
+        fun senvelx(senvelx: JsonField<Double>) = apply { this.senvelx = senvelx }
 
-        /** Cartesian Y velocity of the observing mobile/onorbit sensor at obTime, in km/sec, in the specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed. */
+        /**
+         * Cartesian Y velocity of the observing mobile/onorbit sensor at obTime, in km/sec, in the
+         * specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
+         */
         fun senvely(senvely: Double) = senvely(JsonField.of(senvely))
 
         /**
          * Sets [Builder.senvely] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.senvely] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.senvely] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun senvely(senvely: JsonField<Double>) =
-            apply {
-                this.senvely = senvely
-            }
+        fun senvely(senvely: JsonField<Double>) = apply { this.senvely = senvely }
 
-        /** Cartesian Z velocity of the observing mobile/onorbit sensor at obTime, in km/sec, in the specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed. */
+        /**
+         * Cartesian Z velocity of the observing mobile/onorbit sensor at obTime, in km/sec, in the
+         * specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
+         */
         fun senvelz(senvelz: Double) = senvelz(JsonField.of(senvelz))
 
         /**
          * Sets [Builder.senvelz] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.senvelz] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.senvelz] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun senvelz(senvelz: JsonField<Double>) =
-            apply {
-                this.senvelz = senvelz
-            }
+        fun senvelz(senvelz: JsonField<Double>) = apply { this.senvelz = senvelz }
 
-        /** Cartesian X position of the observing mobile/onorbit sensor at obTime, in km, in the specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed. */
+        /**
+         * Cartesian X position of the observing mobile/onorbit sensor at obTime, in km, in the
+         * specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
+         */
         fun senx(senx: Double) = senx(JsonField.of(senx))
 
         /**
          * Sets [Builder.senx] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.senx] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.senx] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun senx(senx: JsonField<Double>) =
-            apply {
-                this.senx = senx
-            }
+        fun senx(senx: JsonField<Double>) = apply { this.senx = senx }
 
-        /** Cartesian Y position of the observing mobile/onorbit sensor at obTime, in km, in the specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed. */
+        /**
+         * Cartesian Y position of the observing mobile/onorbit sensor at obTime, in km, in the
+         * specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
+         */
         fun seny(seny: Double) = seny(JsonField.of(seny))
 
         /**
          * Sets [Builder.seny] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.seny] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.seny] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun seny(seny: JsonField<Double>) =
-            apply {
-                this.seny = seny
-            }
+        fun seny(seny: JsonField<Double>) = apply { this.seny = seny }
 
-        /** Cartesian Z position of the observing mobile/onorbit sensor at obTime, in km, in the specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed. */
+        /**
+         * Cartesian Z position of the observing mobile/onorbit sensor at obTime, in km, in the
+         * specified senReferenceFrame. If senReferenceFrame is null then J2K should be assumed.
+         */
         fun senz(senz: Double) = senz(JsonField.of(senz))
 
         /**
          * Sets [Builder.senz] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.senz] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.senz] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun senz(senz: JsonField<Double>) =
-            apply {
-                this.senz = senz
-            }
+        fun senz(senz: JsonField<Double>) = apply { this.senz = senz }
 
         /** Shutter delay in seconds. */
         fun shutterDelay(shutterDelay: Double) = shutterDelay(JsonField.of(shutterDelay))
@@ -3422,27 +3600,28 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.shutterDelay] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.shutterDelay] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.shutterDelay] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun shutterDelay(shutterDelay: JsonField<Double>) =
-            apply {
-                this.shutterDelay = shutterDelay
-            }
+        fun shutterDelay(shutterDelay: JsonField<Double>) = apply {
+            this.shutterDelay = shutterDelay
+        }
 
-        /** Average Sky Background signal, in Magnitudes. Sky Background refers to the incoming light from an apparently empty part of the night sky. */
+        /**
+         * Average Sky Background signal, in Magnitudes. Sky Background refers to the incoming light
+         * from an apparently empty part of the night sky.
+         */
         fun skyBkgrnd(skyBkgrnd: Double) = skyBkgrnd(JsonField.of(skyBkgrnd))
 
         /**
          * Sets [Builder.skyBkgrnd] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.skyBkgrnd] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.skyBkgrnd] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun skyBkgrnd(skyBkgrnd: JsonField<Double>) =
-            apply {
-                this.skyBkgrnd = skyBkgrnd
-            }
+        fun skyBkgrnd(skyBkgrnd: JsonField<Double>) = apply { this.skyBkgrnd = skyBkgrnd }
 
         /** Angle from the sun to the equatorial plane. */
         fun solarDecAngle(solarDecAngle: Double) = solarDecAngle(JsonField.of(solarDecAngle))
@@ -3450,81 +3629,93 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.solarDecAngle] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.solarDecAngle] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.solarDecAngle] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun solarDecAngle(solarDecAngle: JsonField<Double>) =
-            apply {
-                this.solarDecAngle = solarDecAngle
-            }
+        fun solarDecAngle(solarDecAngle: JsonField<Double>) = apply {
+            this.solarDecAngle = solarDecAngle
+        }
 
-        /** The angle, in degrees, between the projections of the target-to-observer vector and the target-to-sun vector onto the equatorial plane. The angle is represented as negative when closing (i.e. before the opposition) and positive when opening (after the opposition). */
-        fun solarEqPhaseAngle(solarEqPhaseAngle: Double) = solarEqPhaseAngle(JsonField.of(solarEqPhaseAngle))
+        /**
+         * The angle, in degrees, between the projections of the target-to-observer vector and the
+         * target-to-sun vector onto the equatorial plane. The angle is represented as negative when
+         * closing (i.e. before the opposition) and positive when opening (after the opposition).
+         */
+        fun solarEqPhaseAngle(solarEqPhaseAngle: Double) =
+            solarEqPhaseAngle(JsonField.of(solarEqPhaseAngle))
 
         /**
          * Sets [Builder.solarEqPhaseAngle] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.solarEqPhaseAngle] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.solarEqPhaseAngle] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun solarEqPhaseAngle(solarEqPhaseAngle: JsonField<Double>) =
-            apply {
-                this.solarEqPhaseAngle = solarEqPhaseAngle
-            }
+        fun solarEqPhaseAngle(solarEqPhaseAngle: JsonField<Double>) = apply {
+            this.solarEqPhaseAngle = solarEqPhaseAngle
+        }
 
-        /** The angle, in degrees, between the target-to-observer vector and the target-to-sun vector. */
-        fun solarPhaseAngle(solarPhaseAngle: Double) = solarPhaseAngle(JsonField.of(solarPhaseAngle))
+        /**
+         * The angle, in degrees, between the target-to-observer vector and the target-to-sun
+         * vector.
+         */
+        fun solarPhaseAngle(solarPhaseAngle: Double) =
+            solarPhaseAngle(JsonField.of(solarPhaseAngle))
 
         /**
          * Sets [Builder.solarPhaseAngle] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.solarPhaseAngle] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.solarPhaseAngle] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun solarPhaseAngle(solarPhaseAngle: JsonField<Double>) =
-            apply {
-                this.solarPhaseAngle = solarPhaseAngle
-            }
+        fun solarPhaseAngle(solarPhaseAngle: JsonField<Double>) = apply {
+            this.solarPhaseAngle = solarPhaseAngle
+        }
 
-        /** The source data library from which this record was received. This could be a remote or tactical UDL or another data library. If null, the record should be assumed to have originated from the primary Enterprise UDL. */
+        /**
+         * The source data library from which this record was received. This could be a remote or
+         * tactical UDL or another data library. If null, the record should be assumed to have
+         * originated from the primary Enterprise UDL.
+         */
         fun sourceDl(sourceDl: String) = sourceDl(JsonField.of(sourceDl))
 
         /**
          * Sets [Builder.sourceDl] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.sourceDl] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.sourceDl] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun sourceDl(sourceDl: JsonField<String>) =
-            apply {
-                this.sourceDl = sourceDl
-            }
+        fun sourceDl(sourceDl: JsonField<String>) = apply { this.sourceDl = sourceDl }
 
-        /** Optional array of provider/source specific tags for this data, where each element is no longer than 32 characters, used for implementing data owner conditional access controls to restrict access to the data. Should be left null by data providers unless conditional access controls are coordinated with the UDL team. */
+        /**
+         * Optional array of provider/source specific tags for this data, where each element is no
+         * longer than 32 characters, used for implementing data owner conditional access controls
+         * to restrict access to the data. Should be left null by data providers unless conditional
+         * access controls are coordinated with the UDL team.
+         */
         fun tags(tags: List<String>) = tags(JsonField.of(tags))
 
         /**
          * Sets [Builder.tags] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.tags] with a well-typed `List<String>` value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.tags] with a well-typed `List<String>` value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun tags(tags: JsonField<List<String>>) =
-            apply {
-                this.tags = tags.map { it.toMutableList() }
-            }
+        fun tags(tags: JsonField<List<String>>) = apply {
+            this.tags = tags.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [String] to [tags].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addTag(tag: String) =
-            apply {
-                tags = (tags ?: JsonField.of(mutableListOf())).also {
-                    checkKnown("tags", it).add(tag)
-                }
-            }
+        fun addTag(tag: String) = apply {
+            tags = (tags ?: JsonField.of(mutableListOf())).also { checkKnown("tags", it).add(tag) }
+        }
 
         /** Optional identifier to indicate the specific tasking which produced this observation. */
         fun taskId(taskId: String) = taskId(JsonField.of(taskId))
@@ -3532,13 +3723,10 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.taskId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.taskId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.taskId] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun taskId(taskId: JsonField<String>) =
-            apply {
-                this.taskId = taskId
-            }
+        fun taskId(taskId: JsonField<String>) = apply { this.taskId = taskId }
 
         /** Sensor timing bias in seconds. */
         fun timingBias(timingBias: Double) = timingBias(JsonField.of(timingBias))
@@ -3546,13 +3734,11 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.timingBias] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.timingBias] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.timingBias] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun timingBias(timingBias: JsonField<Double>) =
-            apply {
-                this.timingBias = timingBias
-            }
+        fun timingBias(timingBias: JsonField<Double>) = apply { this.timingBias = timingBias }
 
         /** Optional identifier of the track to which this observation belongs. */
         fun trackId(trackId: String) = trackId(JsonField.of(trackId))
@@ -3560,69 +3746,72 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.trackId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.trackId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.trackId] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun trackId(trackId: JsonField<String>) =
-            apply {
-                this.trackId = trackId
-            }
+        fun trackId(trackId: JsonField<String>) = apply { this.trackId = trackId }
 
-        /** Optional identifier to track a commercial or marketplace transaction executed to produce this data. */
+        /**
+         * Optional identifier to track a commercial or marketplace transaction executed to produce
+         * this data.
+         */
         fun transactionId(transactionId: String) = transactionId(JsonField.of(transactionId))
 
         /**
          * Sets [Builder.transactionId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.transactionId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.transactionId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun transactionId(transactionId: JsonField<String>) =
-            apply {
-                this.transactionId = transactionId
-            }
+        fun transactionId(transactionId: JsonField<String>) = apply {
+            this.transactionId = transactionId
+        }
 
-        /** Read only field specifying the type of observation (e.g. OPTICAL, OPTICAL_IR, LASER_RANGING, etc). */
+        /**
+         * Read only field specifying the type of observation (e.g. OPTICAL, OPTICAL_IR,
+         * LASER_RANGING, etc).
+         */
         fun type(type: String) = type(JsonField.of(type))
 
         /**
          * Sets [Builder.type] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.type] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.type] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun type(type: JsonField<String>) =
-            apply {
-                this.type = type
-            }
+        fun type(type: JsonField<String>) = apply { this.type = type }
 
-        /** Boolean indicating this observation is part of an uncorrelated track or was unable to be correlated to a known object. This flag should only be set to true by data providers after an attempt to correlate to an on-orbit object was made and failed. If unable to correlate, the 'origObjectId' field may be populated with an internal data provider specific identifier. */
+        /**
+         * Boolean indicating this observation is part of an uncorrelated track or was unable to be
+         * correlated to a known object. This flag should only be set to true by data providers
+         * after an attempt to correlate to an on-orbit object was made and failed. If unable to
+         * correlate, the 'origObjectId' field may be populated with an internal data provider
+         * specific identifier.
+         */
         fun uct(uct: Boolean) = uct(JsonField.of(uct))
 
         /**
          * Sets [Builder.uct] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.uct] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.uct] with a well-typed [Boolean] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun uct(uct: JsonField<Boolean>) =
-            apply {
-                this.uct = uct
-            }
+        fun uct(uct: JsonField<Boolean>) = apply { this.uct = uct }
 
-        /** Boolean indicating that the target object was in umbral eclipse at the time of this observation. */
+        /**
+         * Boolean indicating that the target object was in umbral eclipse at the time of this
+         * observation.
+         */
         fun umbra(umbra: Boolean) = umbra(JsonField.of(umbra))
 
         /**
          * Sets [Builder.umbra] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.umbra] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.umbra] with a well-typed [Boolean] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun umbra(umbra: JsonField<Boolean>) =
-            apply {
-                this.umbra = umbra
-            }
+        fun umbra(umbra: JsonField<Boolean>) = apply { this.umbra = umbra }
 
         /** Formula: 2.5 \* log_10 (zero_mag_counts / expDuration). */
         fun zeroptd(zeroptd: Double) = zeroptd(JsonField.of(zeroptd))
@@ -3630,53 +3819,44 @@ class EoObservationFull private constructor(
         /**
          * Sets [Builder.zeroptd] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.zeroptd] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.zeroptd] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun zeroptd(zeroptd: JsonField<Double>) =
-            apply {
-                this.zeroptd = zeroptd
-            }
+        fun zeroptd(zeroptd: JsonField<Double>) = apply { this.zeroptd = zeroptd }
 
-        /** This is the uncertainty in the zero point for the filter used for this observation/row in units of mag. For use with differential photometry. */
+        /**
+         * This is the uncertainty in the zero point for the filter used for this observation/row in
+         * units of mag. For use with differential photometry.
+         */
         fun zeroPtdUnc(zeroPtdUnc: Double) = zeroPtdUnc(JsonField.of(zeroPtdUnc))
 
         /**
          * Sets [Builder.zeroPtdUnc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.zeroPtdUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.zeroPtdUnc] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun zeroPtdUnc(zeroPtdUnc: JsonField<Double>) =
-            apply {
-                this.zeroPtdUnc = zeroPtdUnc
-            }
+        fun zeroPtdUnc(zeroPtdUnc: JsonField<Double>) = apply { this.zeroPtdUnc = zeroPtdUnc }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) =
-            apply {
-                additionalProperties.put(key, value)
-            }
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
 
-        fun removeAdditionalProperty(key: String) =
-            apply {
-                additionalProperties.remove(key)
-            }
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) =
-            apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
 
         /**
          * Returns an immutable instance of [EoObservationFull].
@@ -3684,7 +3864,6 @@ class EoObservationFull private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -3696,230 +3875,221 @@ class EoObservationFull private constructor(
          */
         fun build(): EoObservationFull =
             EoObservationFull(
-              checkRequired(
-                "classificationMarking", classificationMarking
-              ),
-              checkRequired(
-                "dataMode", dataMode
-              ),
-              checkRequired(
-                "obTime", obTime
-              ),
-              checkRequired(
-                "source", source
-              ),
-              id,
-              azimuth,
-              azimuthBias,
-              azimuthMeasured,
-              azimuthRate,
-              azimuthUnc,
-              bgIntensity,
-              collectMethod,
-              corrQuality,
-              createdAt,
-              createdBy,
-              declination,
-              declinationBias,
-              declinationMeasured,
-              declinationRate,
-              declinationUnc,
-              descriptor,
-              elevation,
-              elevationBias,
-              elevationMeasured,
-              elevationRate,
-              elevationUnc,
-              eoobservationDetails,
-              expDuration,
-              fovCount,
-              fovCountUct,
-              geoalt,
-              geolat,
-              geolon,
-              georange,
-              idOnOrbit,
-              idSensor,
-              idSkyImagery,
-              intensity,
-              losUnc,
-              losx,
-              losxvel,
-              losy,
-              losyvel,
-              losz,
-              loszvel,
-              mag,
-              magNormRange,
-              magUnc,
-              netObjSig,
-              netObjSigUnc,
-              obPosition,
-              onOrbit,
-              origin,
-              origNetwork,
-              origObjectId,
-              origSensorId,
-              penumbra,
-              primaryExtinction,
-              primaryExtinctionUnc,
-              ra,
-              raBias,
-              raMeasured,
-              range,
-              rangeBias,
-              rangeMeasured,
-              rangeRate,
-              rangeRateMeasured,
-              rangeRateUnc,
-              rangeUnc,
-              raRate,
-              raUnc,
-              rawFileUri,
-              referenceFrame,
-              satNo,
-              senalt,
-              senlat,
-              senlon,
-              (senQuat ?: JsonMissing.of()).map { it.toImmutable() },
-              senReferenceFrame,
-              senvelx,
-              senvely,
-              senvelz,
-              senx,
-              seny,
-              senz,
-              shutterDelay,
-              skyBkgrnd,
-              solarDecAngle,
-              solarEqPhaseAngle,
-              solarPhaseAngle,
-              sourceDl,
-              (tags ?: JsonMissing.of()).map { it.toImmutable() },
-              taskId,
-              timingBias,
-              trackId,
-              transactionId,
-              type,
-              uct,
-              umbra,
-              zeroptd,
-              zeroPtdUnc,
-              additionalProperties.toMutableMap(),
+                checkRequired("classificationMarking", classificationMarking),
+                checkRequired("dataMode", dataMode),
+                checkRequired("obTime", obTime),
+                checkRequired("source", source),
+                id,
+                azimuth,
+                azimuthBias,
+                azimuthMeasured,
+                azimuthRate,
+                azimuthUnc,
+                bgIntensity,
+                collectMethod,
+                corrQuality,
+                createdAt,
+                createdBy,
+                declination,
+                declinationBias,
+                declinationMeasured,
+                declinationRate,
+                declinationUnc,
+                descriptor,
+                elevation,
+                elevationBias,
+                elevationMeasured,
+                elevationRate,
+                elevationUnc,
+                eoobservationDetails,
+                expDuration,
+                fovCount,
+                fovCountUct,
+                geoalt,
+                geolat,
+                geolon,
+                georange,
+                idOnOrbit,
+                idSensor,
+                idSkyImagery,
+                intensity,
+                losUnc,
+                losx,
+                losxvel,
+                losy,
+                losyvel,
+                losz,
+                loszvel,
+                mag,
+                magNormRange,
+                magUnc,
+                netObjSig,
+                netObjSigUnc,
+                obPosition,
+                onOrbit,
+                origin,
+                origNetwork,
+                origObjectId,
+                origSensorId,
+                penumbra,
+                primaryExtinction,
+                primaryExtinctionUnc,
+                ra,
+                raBias,
+                raMeasured,
+                range,
+                rangeBias,
+                rangeMeasured,
+                rangeRate,
+                rangeRateMeasured,
+                rangeRateUnc,
+                rangeUnc,
+                raRate,
+                raUnc,
+                rawFileUri,
+                referenceFrame,
+                satNo,
+                senalt,
+                senlat,
+                senlon,
+                (senQuat ?: JsonMissing.of()).map { it.toImmutable() },
+                senReferenceFrame,
+                senvelx,
+                senvely,
+                senvelz,
+                senx,
+                seny,
+                senz,
+                shutterDelay,
+                skyBkgrnd,
+                solarDecAngle,
+                solarEqPhaseAngle,
+                solarPhaseAngle,
+                sourceDl,
+                (tags ?: JsonMissing.of()).map { it.toImmutable() },
+                taskId,
+                timingBias,
+                trackId,
+                transactionId,
+                type,
+                uct,
+                umbra,
+                zeroptd,
+                zeroPtdUnc,
+                additionalProperties.toMutableMap(),
             )
     }
 
     private var validated: Boolean = false
 
-    fun validate(): EoObservationFull =
-        apply {
-            if (validated) {
-              return@apply
-            }
-
-            classificationMarking()
-            dataMode().validate()
-            obTime()
-            source()
-            id()
-            azimuth()
-            azimuthBias()
-            azimuthMeasured()
-            azimuthRate()
-            azimuthUnc()
-            bgIntensity()
-            collectMethod()
-            corrQuality()
-            createdAt()
-            createdBy()
-            declination()
-            declinationBias()
-            declinationMeasured()
-            declinationRate()
-            declinationUnc()
-            descriptor()
-            elevation()
-            elevationBias()
-            elevationMeasured()
-            elevationRate()
-            elevationUnc()
-            eoobservationDetails().ifPresent { it.validate() }
-            expDuration()
-            fovCount()
-            fovCountUct()
-            geoalt()
-            geolat()
-            geolon()
-            georange()
-            idOnOrbit()
-            idSensor()
-            idSkyImagery()
-            intensity()
-            losUnc()
-            losx()
-            losxvel()
-            losy()
-            losyvel()
-            losz()
-            loszvel()
-            mag()
-            magNormRange()
-            magUnc()
-            netObjSig()
-            netObjSigUnc()
-            obPosition()
-            onOrbit().ifPresent { it.validate() }
-            origin()
-            origNetwork()
-            origObjectId()
-            origSensorId()
-            penumbra()
-            primaryExtinction()
-            primaryExtinctionUnc()
-            ra()
-            raBias()
-            raMeasured()
-            range()
-            rangeBias()
-            rangeMeasured()
-            rangeRate()
-            rangeRateMeasured()
-            rangeRateUnc()
-            rangeUnc()
-            raRate()
-            raUnc()
-            rawFileUri()
-            referenceFrame().ifPresent { it.validate() }
-            satNo()
-            senalt()
-            senlat()
-            senlon()
-            senQuat()
-            senReferenceFrame().ifPresent { it.validate() }
-            senvelx()
-            senvely()
-            senvelz()
-            senx()
-            seny()
-            senz()
-            shutterDelay()
-            skyBkgrnd()
-            solarDecAngle()
-            solarEqPhaseAngle()
-            solarPhaseAngle()
-            sourceDl()
-            tags()
-            taskId()
-            timingBias()
-            trackId()
-            transactionId()
-            type()
-            uct()
-            umbra()
-            zeroptd()
-            zeroPtdUnc()
-            validated = true
+    fun validate(): EoObservationFull = apply {
+        if (validated) {
+            return@apply
         }
+
+        classificationMarking()
+        dataMode().validate()
+        obTime()
+        source()
+        id()
+        azimuth()
+        azimuthBias()
+        azimuthMeasured()
+        azimuthRate()
+        azimuthUnc()
+        bgIntensity()
+        collectMethod()
+        corrQuality()
+        createdAt()
+        createdBy()
+        declination()
+        declinationBias()
+        declinationMeasured()
+        declinationRate()
+        declinationUnc()
+        descriptor()
+        elevation()
+        elevationBias()
+        elevationMeasured()
+        elevationRate()
+        elevationUnc()
+        eoobservationDetails().ifPresent { it.validate() }
+        expDuration()
+        fovCount()
+        fovCountUct()
+        geoalt()
+        geolat()
+        geolon()
+        georange()
+        idOnOrbit()
+        idSensor()
+        idSkyImagery()
+        intensity()
+        losUnc()
+        losx()
+        losxvel()
+        losy()
+        losyvel()
+        losz()
+        loszvel()
+        mag()
+        magNormRange()
+        magUnc()
+        netObjSig()
+        netObjSigUnc()
+        obPosition()
+        onOrbit().ifPresent { it.validate() }
+        origin()
+        origNetwork()
+        origObjectId()
+        origSensorId()
+        penumbra()
+        primaryExtinction()
+        primaryExtinctionUnc()
+        ra()
+        raBias()
+        raMeasured()
+        range()
+        rangeBias()
+        rangeMeasured()
+        rangeRate()
+        rangeRateMeasured()
+        rangeRateUnc()
+        rangeUnc()
+        raRate()
+        raUnc()
+        rawFileUri()
+        referenceFrame().ifPresent { it.validate() }
+        satNo()
+        senalt()
+        senlat()
+        senlon()
+        senQuat()
+        senReferenceFrame().ifPresent { it.validate() }
+        senvelx()
+        senvely()
+        senvelz()
+        senx()
+        seny()
+        senz()
+        shutterDelay()
+        skyBkgrnd()
+        solarDecAngle()
+        solarEqPhaseAngle()
+        solarPhaseAngle()
+        sourceDl()
+        tags()
+        taskId()
+        timingBias()
+        trackId()
+        transactionId()
+        type()
+        uct()
+        umbra()
+        zeroptd()
+        zeroPtdUnc()
+        validated = true
+    }
 
     fun isValid(): Boolean =
         try {
@@ -3935,33 +4105,134 @@ class EoObservationFull private constructor(
      * Used for best match union deserialization.
      */
     @JvmSynthetic
-    internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (obTime.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (if (azimuth.asKnown().isPresent) 1 else 0) + (if (azimuthBias.asKnown().isPresent) 1 else 0) + (if (azimuthMeasured.asKnown().isPresent) 1 else 0) + (if (azimuthRate.asKnown().isPresent) 1 else 0) + (if (azimuthUnc.asKnown().isPresent) 1 else 0) + (if (bgIntensity.asKnown().isPresent) 1 else 0) + (if (collectMethod.asKnown().isPresent) 1 else 0) + (if (corrQuality.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (declination.asKnown().isPresent) 1 else 0) + (if (declinationBias.asKnown().isPresent) 1 else 0) + (if (declinationMeasured.asKnown().isPresent) 1 else 0) + (if (declinationRate.asKnown().isPresent) 1 else 0) + (if (declinationUnc.asKnown().isPresent) 1 else 0) + (if (descriptor.asKnown().isPresent) 1 else 0) + (if (elevation.asKnown().isPresent) 1 else 0) + (if (elevationBias.asKnown().isPresent) 1 else 0) + (if (elevationMeasured.asKnown().isPresent) 1 else 0) + (if (elevationRate.asKnown().isPresent) 1 else 0) + (if (elevationUnc.asKnown().isPresent) 1 else 0) + (eoobservationDetails.asKnown().getOrNull()?.validity() ?: 0) + (if (expDuration.asKnown().isPresent) 1 else 0) + (if (fovCount.asKnown().isPresent) 1 else 0) + (if (fovCountUct.asKnown().isPresent) 1 else 0) + (if (geoalt.asKnown().isPresent) 1 else 0) + (if (geolat.asKnown().isPresent) 1 else 0) + (if (geolon.asKnown().isPresent) 1 else 0) + (if (georange.asKnown().isPresent) 1 else 0) + (if (idOnOrbit.asKnown().isPresent) 1 else 0) + (if (idSensor.asKnown().isPresent) 1 else 0) + (if (idSkyImagery.asKnown().isPresent) 1 else 0) + (if (intensity.asKnown().isPresent) 1 else 0) + (if (losUnc.asKnown().isPresent) 1 else 0) + (if (losx.asKnown().isPresent) 1 else 0) + (if (losxvel.asKnown().isPresent) 1 else 0) + (if (losy.asKnown().isPresent) 1 else 0) + (if (losyvel.asKnown().isPresent) 1 else 0) + (if (losz.asKnown().isPresent) 1 else 0) + (if (loszvel.asKnown().isPresent) 1 else 0) + (if (mag.asKnown().isPresent) 1 else 0) + (if (magNormRange.asKnown().isPresent) 1 else 0) + (if (magUnc.asKnown().isPresent) 1 else 0) + (if (netObjSig.asKnown().isPresent) 1 else 0) + (if (netObjSigUnc.asKnown().isPresent) 1 else 0) + (if (obPosition.asKnown().isPresent) 1 else 0) + (onOrbit.asKnown().getOrNull()?.validity() ?: 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (origObjectId.asKnown().isPresent) 1 else 0) + (if (origSensorId.asKnown().isPresent) 1 else 0) + (if (penumbra.asKnown().isPresent) 1 else 0) + (if (primaryExtinction.asKnown().isPresent) 1 else 0) + (if (primaryExtinctionUnc.asKnown().isPresent) 1 else 0) + (if (ra.asKnown().isPresent) 1 else 0) + (if (raBias.asKnown().isPresent) 1 else 0) + (if (raMeasured.asKnown().isPresent) 1 else 0) + (if (range.asKnown().isPresent) 1 else 0) + (if (rangeBias.asKnown().isPresent) 1 else 0) + (if (rangeMeasured.asKnown().isPresent) 1 else 0) + (if (rangeRate.asKnown().isPresent) 1 else 0) + (if (rangeRateMeasured.asKnown().isPresent) 1 else 0) + (if (rangeRateUnc.asKnown().isPresent) 1 else 0) + (if (rangeUnc.asKnown().isPresent) 1 else 0) + (if (raRate.asKnown().isPresent) 1 else 0) + (if (raUnc.asKnown().isPresent) 1 else 0) + (if (rawFileUri.asKnown().isPresent) 1 else 0) + (referenceFrame.asKnown().getOrNull()?.validity() ?: 0) + (if (satNo.asKnown().isPresent) 1 else 0) + (if (senalt.asKnown().isPresent) 1 else 0) + (if (senlat.asKnown().isPresent) 1 else 0) + (if (senlon.asKnown().isPresent) 1 else 0) + (senQuat.asKnown().getOrNull()?.size ?: 0) + (senReferenceFrame.asKnown().getOrNull()?.validity() ?: 0) + (if (senvelx.asKnown().isPresent) 1 else 0) + (if (senvely.asKnown().isPresent) 1 else 0) + (if (senvelz.asKnown().isPresent) 1 else 0) + (if (senx.asKnown().isPresent) 1 else 0) + (if (seny.asKnown().isPresent) 1 else 0) + (if (senz.asKnown().isPresent) 1 else 0) + (if (shutterDelay.asKnown().isPresent) 1 else 0) + (if (skyBkgrnd.asKnown().isPresent) 1 else 0) + (if (solarDecAngle.asKnown().isPresent) 1 else 0) + (if (solarEqPhaseAngle.asKnown().isPresent) 1 else 0) + (if (solarPhaseAngle.asKnown().isPresent) 1 else 0) + (if (sourceDl.asKnown().isPresent) 1 else 0) + (tags.asKnown().getOrNull()?.size ?: 0) + (if (taskId.asKnown().isPresent) 1 else 0) + (if (timingBias.asKnown().isPresent) 1 else 0) + (if (trackId.asKnown().isPresent) 1 else 0) + (if (transactionId.asKnown().isPresent) 1 else 0) + (if (type.asKnown().isPresent) 1 else 0) + (if (uct.asKnown().isPresent) 1 else 0) + (if (umbra.asKnown().isPresent) 1 else 0) + (if (zeroptd.asKnown().isPresent) 1 else 0) + (if (zeroPtdUnc.asKnown().isPresent) 1 else 0)
+    internal fun validity(): Int =
+        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (obTime.asKnown().isPresent) 1 else 0) +
+            (if (source.asKnown().isPresent) 1 else 0) +
+            (if (id.asKnown().isPresent) 1 else 0) +
+            (if (azimuth.asKnown().isPresent) 1 else 0) +
+            (if (azimuthBias.asKnown().isPresent) 1 else 0) +
+            (if (azimuthMeasured.asKnown().isPresent) 1 else 0) +
+            (if (azimuthRate.asKnown().isPresent) 1 else 0) +
+            (if (azimuthUnc.asKnown().isPresent) 1 else 0) +
+            (if (bgIntensity.asKnown().isPresent) 1 else 0) +
+            (if (collectMethod.asKnown().isPresent) 1 else 0) +
+            (if (corrQuality.asKnown().isPresent) 1 else 0) +
+            (if (createdAt.asKnown().isPresent) 1 else 0) +
+            (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (declination.asKnown().isPresent) 1 else 0) +
+            (if (declinationBias.asKnown().isPresent) 1 else 0) +
+            (if (declinationMeasured.asKnown().isPresent) 1 else 0) +
+            (if (declinationRate.asKnown().isPresent) 1 else 0) +
+            (if (declinationUnc.asKnown().isPresent) 1 else 0) +
+            (if (descriptor.asKnown().isPresent) 1 else 0) +
+            (if (elevation.asKnown().isPresent) 1 else 0) +
+            (if (elevationBias.asKnown().isPresent) 1 else 0) +
+            (if (elevationMeasured.asKnown().isPresent) 1 else 0) +
+            (if (elevationRate.asKnown().isPresent) 1 else 0) +
+            (if (elevationUnc.asKnown().isPresent) 1 else 0) +
+            (eoobservationDetails.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (expDuration.asKnown().isPresent) 1 else 0) +
+            (if (fovCount.asKnown().isPresent) 1 else 0) +
+            (if (fovCountUct.asKnown().isPresent) 1 else 0) +
+            (if (geoalt.asKnown().isPresent) 1 else 0) +
+            (if (geolat.asKnown().isPresent) 1 else 0) +
+            (if (geolon.asKnown().isPresent) 1 else 0) +
+            (if (georange.asKnown().isPresent) 1 else 0) +
+            (if (idOnOrbit.asKnown().isPresent) 1 else 0) +
+            (if (idSensor.asKnown().isPresent) 1 else 0) +
+            (if (idSkyImagery.asKnown().isPresent) 1 else 0) +
+            (if (intensity.asKnown().isPresent) 1 else 0) +
+            (if (losUnc.asKnown().isPresent) 1 else 0) +
+            (if (losx.asKnown().isPresent) 1 else 0) +
+            (if (losxvel.asKnown().isPresent) 1 else 0) +
+            (if (losy.asKnown().isPresent) 1 else 0) +
+            (if (losyvel.asKnown().isPresent) 1 else 0) +
+            (if (losz.asKnown().isPresent) 1 else 0) +
+            (if (loszvel.asKnown().isPresent) 1 else 0) +
+            (if (mag.asKnown().isPresent) 1 else 0) +
+            (if (magNormRange.asKnown().isPresent) 1 else 0) +
+            (if (magUnc.asKnown().isPresent) 1 else 0) +
+            (if (netObjSig.asKnown().isPresent) 1 else 0) +
+            (if (netObjSigUnc.asKnown().isPresent) 1 else 0) +
+            (if (obPosition.asKnown().isPresent) 1 else 0) +
+            (onOrbit.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (origin.asKnown().isPresent) 1 else 0) +
+            (if (origNetwork.asKnown().isPresent) 1 else 0) +
+            (if (origObjectId.asKnown().isPresent) 1 else 0) +
+            (if (origSensorId.asKnown().isPresent) 1 else 0) +
+            (if (penumbra.asKnown().isPresent) 1 else 0) +
+            (if (primaryExtinction.asKnown().isPresent) 1 else 0) +
+            (if (primaryExtinctionUnc.asKnown().isPresent) 1 else 0) +
+            (if (ra.asKnown().isPresent) 1 else 0) +
+            (if (raBias.asKnown().isPresent) 1 else 0) +
+            (if (raMeasured.asKnown().isPresent) 1 else 0) +
+            (if (range.asKnown().isPresent) 1 else 0) +
+            (if (rangeBias.asKnown().isPresent) 1 else 0) +
+            (if (rangeMeasured.asKnown().isPresent) 1 else 0) +
+            (if (rangeRate.asKnown().isPresent) 1 else 0) +
+            (if (rangeRateMeasured.asKnown().isPresent) 1 else 0) +
+            (if (rangeRateUnc.asKnown().isPresent) 1 else 0) +
+            (if (rangeUnc.asKnown().isPresent) 1 else 0) +
+            (if (raRate.asKnown().isPresent) 1 else 0) +
+            (if (raUnc.asKnown().isPresent) 1 else 0) +
+            (if (rawFileUri.asKnown().isPresent) 1 else 0) +
+            (referenceFrame.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (satNo.asKnown().isPresent) 1 else 0) +
+            (if (senalt.asKnown().isPresent) 1 else 0) +
+            (if (senlat.asKnown().isPresent) 1 else 0) +
+            (if (senlon.asKnown().isPresent) 1 else 0) +
+            (senQuat.asKnown().getOrNull()?.size ?: 0) +
+            (senReferenceFrame.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (senvelx.asKnown().isPresent) 1 else 0) +
+            (if (senvely.asKnown().isPresent) 1 else 0) +
+            (if (senvelz.asKnown().isPresent) 1 else 0) +
+            (if (senx.asKnown().isPresent) 1 else 0) +
+            (if (seny.asKnown().isPresent) 1 else 0) +
+            (if (senz.asKnown().isPresent) 1 else 0) +
+            (if (shutterDelay.asKnown().isPresent) 1 else 0) +
+            (if (skyBkgrnd.asKnown().isPresent) 1 else 0) +
+            (if (solarDecAngle.asKnown().isPresent) 1 else 0) +
+            (if (solarEqPhaseAngle.asKnown().isPresent) 1 else 0) +
+            (if (solarPhaseAngle.asKnown().isPresent) 1 else 0) +
+            (if (sourceDl.asKnown().isPresent) 1 else 0) +
+            (tags.asKnown().getOrNull()?.size ?: 0) +
+            (if (taskId.asKnown().isPresent) 1 else 0) +
+            (if (timingBias.asKnown().isPresent) 1 else 0) +
+            (if (trackId.asKnown().isPresent) 1 else 0) +
+            (if (transactionId.asKnown().isPresent) 1 else 0) +
+            (if (type.asKnown().isPresent) 1 else 0) +
+            (if (uct.asKnown().isPresent) 1 else 0) +
+            (if (umbra.asKnown().isPresent) 1 else 0) +
+            (if (zeroptd.asKnown().isPresent) 1 else 0) +
+            (if (zeroPtdUnc.asKnown().isPresent) 1 else 0)
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      */
-    class DataMode @JsonCreator private constructor(
-        private val value: JsonField<String>,
-
-    ) : Enum {
+    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't match any known
-         * member, and you want to know that value. For example, if the SDK is on an older version than the
-         * API, then the API may respond with new members that the SDK is unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue
-        fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -3988,11 +4259,9 @@ class EoObservationFull private constructor(
          * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [DataMode] can contain an unknown value in a couple of cases:
-         *
-         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-         *   an older version than the API, then the API may respond with new members that the SDK is unaware
-         *   of.
-         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -4005,11 +4274,11 @@ class EoObservationFull private constructor(
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-         * class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want to throw
-         * for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -4023,10 +4292,11 @@ class EoObservationFull private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-         * for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
          */
         fun known(): Known =
             when (this) {
@@ -4040,25 +4310,27 @@ class EoObservationFull private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging and generally
-         * doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-         * primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
          */
-        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
 
         private var validated: Boolean = false
 
-        fun validate(): DataMode =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                known()
-                validated = true
+        fun validate(): DataMode = apply {
+            if (validated) {
+                return@apply
             }
+
+            known()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -4069,19 +4341,19 @@ class EoObservationFull private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic
-        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4089,8 +4361,12 @@ class EoObservationFull private constructor(
         override fun toString() = value.toString()
     }
 
-    /** Model representation of additional detailed observation data for electro-optical based sensor phenomenologies. */
-    class EoobservationDetails private constructor(
+    /**
+     * Model representation of additional detailed observation data for electro-optical based sensor
+     * phenomenologies.
+     */
+    class EoobservationDetails
+    private constructor(
         private val acalCrPixX: JsonField<Double>,
         private val acalCrPixY: JsonField<Double>,
         private val acalCrValX: JsonField<Double>,
@@ -4175,769 +4451,1109 @@ class EoObservationFull private constructor(
         private val zeroPoints: JsonField<List<Double>>,
         private val zeroPointsUnc: JsonField<List<Double>>,
         private val additionalProperties: MutableMap<String, JsonValue>,
-
     ) {
 
         @JsonCreator
         private constructor(
-            @JsonProperty("acalCrPixX") @ExcludeMissing acalCrPixX: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("acalCrPixY") @ExcludeMissing acalCrPixY: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("acalCrValX") @ExcludeMissing acalCrValX: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("acalCrValY") @ExcludeMissing acalCrValY: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("acalNumStars") @ExcludeMissing acalNumStars: JsonField<Long> = JsonMissing.of(),
-            @JsonProperty("backgroundSignal") @ExcludeMissing backgroundSignal: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("backgroundSignalUnc") @ExcludeMissing backgroundSignalUnc: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("binningHoriz") @ExcludeMissing binningHoriz: JsonField<Long> = JsonMissing.of(),
-            @JsonProperty("binningVert") @ExcludeMissing binningVert: JsonField<Long> = JsonMissing.of(),
-            @JsonProperty("ccdObjPosX") @ExcludeMissing ccdObjPosX: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("ccdObjPosY") @ExcludeMissing ccdObjPosY: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("ccdObjWidth") @ExcludeMissing ccdObjWidth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("acalCrPixX")
+            @ExcludeMissing
+            acalCrPixX: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("acalCrPixY")
+            @ExcludeMissing
+            acalCrPixY: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("acalCrValX")
+            @ExcludeMissing
+            acalCrValX: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("acalCrValY")
+            @ExcludeMissing
+            acalCrValY: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("acalNumStars")
+            @ExcludeMissing
+            acalNumStars: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("backgroundSignal")
+            @ExcludeMissing
+            backgroundSignal: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("backgroundSignalUnc")
+            @ExcludeMissing
+            backgroundSignalUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("binningHoriz")
+            @ExcludeMissing
+            binningHoriz: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("binningVert")
+            @ExcludeMissing
+            binningVert: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("ccdObjPosX")
+            @ExcludeMissing
+            ccdObjPosX: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("ccdObjPosY")
+            @ExcludeMissing
+            ccdObjPosY: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("ccdObjWidth")
+            @ExcludeMissing
+            ccdObjWidth: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("ccdTemp") @ExcludeMissing ccdTemp: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("centroidColumn") @ExcludeMissing centroidColumn: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("centroidRow") @ExcludeMissing centroidRow: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("colorCoeffs") @ExcludeMissing colorCoeffs: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("columnVariance") @ExcludeMissing columnVariance: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("currentNeutralDensityFilterNum") @ExcludeMissing currentNeutralDensityFilterNum: JsonField<Long> = JsonMissing.of(),
-            @JsonProperty("currentSpectralFilterNum") @ExcludeMissing currentSpectralFilterNum: JsonField<Long> = JsonMissing.of(),
-            @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
-            @JsonProperty("declinationCov") @ExcludeMissing declinationCov: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("distFromStreakCenter") @ExcludeMissing distFromStreakCenter: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("centroidColumn")
+            @ExcludeMissing
+            centroidColumn: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("centroidRow")
+            @ExcludeMissing
+            centroidRow: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("colorCoeffs")
+            @ExcludeMissing
+            colorCoeffs: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("columnVariance")
+            @ExcludeMissing
+            columnVariance: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("currentNeutralDensityFilterNum")
+            @ExcludeMissing
+            currentNeutralDensityFilterNum: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("currentSpectralFilterNum")
+            @ExcludeMissing
+            currentSpectralFilterNum: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("declinationCov")
+            @ExcludeMissing
+            declinationCov: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("distFromStreakCenter")
+            @ExcludeMissing
+            distFromStreakCenter: JsonField<List<Double>> = JsonMissing.of(),
             @JsonProperty("does") @ExcludeMissing does: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("extinctionCoeffs") @ExcludeMissing extinctionCoeffs: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("extinctionCoeffsUnc") @ExcludeMissing extinctionCoeffsUnc: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("extinctionCoeffs")
+            @ExcludeMissing
+            extinctionCoeffs: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("extinctionCoeffsUnc")
+            @ExcludeMissing
+            extinctionCoeffsUnc: JsonField<List<Double>> = JsonMissing.of(),
             @JsonProperty("gain") @ExcludeMissing gain: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("idEOObservation") @ExcludeMissing idEoObservation: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idEOObservation")
+            @ExcludeMissing
+            idEoObservation: JsonField<String> = JsonMissing.of(),
             @JsonProperty("ifov") @ExcludeMissing ifov: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("magInstrumental") @ExcludeMissing magInstrumental: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("magInstrumentalUnc") @ExcludeMissing magInstrumentalUnc: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("neutralDensityFilterNames") @ExcludeMissing neutralDensityFilterNames: JsonField<List<String>> = JsonMissing.of(),
-            @JsonProperty("neutralDensityFilterTransmissions") @ExcludeMissing neutralDensityFilterTransmissions: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("neutralDensityFilterTransmissionsUnc") @ExcludeMissing neutralDensityFilterTransmissionsUnc: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("numCatalogStars") @ExcludeMissing numCatalogStars: JsonField<Long> = JsonMissing.of(),
-            @JsonProperty("numCorrelatedStars") @ExcludeMissing numCorrelatedStars: JsonField<Long> = JsonMissing.of(),
-            @JsonProperty("numDetectedStars") @ExcludeMissing numDetectedStars: JsonField<Long> = JsonMissing.of(),
-            @JsonProperty("numNeutralDensityFilters") @ExcludeMissing numNeutralDensityFilters: JsonField<Long> = JsonMissing.of(),
-            @JsonProperty("numSpectralFilters") @ExcludeMissing numSpectralFilters: JsonField<Long> = JsonMissing.of(),
-            @JsonProperty("objSunRange") @ExcludeMissing objSunRange: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("obTime") @ExcludeMissing obTime: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("opticalCrossSection") @ExcludeMissing opticalCrossSection: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("opticalCrossSectionUnc") @ExcludeMissing opticalCrossSectionUnc: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("pcalNumStars") @ExcludeMissing pcalNumStars: JsonField<Int> = JsonMissing.of(),
-            @JsonProperty("peakApertureCount") @ExcludeMissing peakApertureCount: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("peakBackgroundCount") @ExcludeMissing peakBackgroundCount: JsonField<Int> = JsonMissing.of(),
-            @JsonProperty("phaseAngBisect") @ExcludeMissing phaseAngBisect: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("pixelArrayHeight") @ExcludeMissing pixelArrayHeight: JsonField<Long> = JsonMissing.of(),
-            @JsonProperty("pixelArrayWidth") @ExcludeMissing pixelArrayWidth: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("magInstrumental")
+            @ExcludeMissing
+            magInstrumental: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("magInstrumentalUnc")
+            @ExcludeMissing
+            magInstrumentalUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("neutralDensityFilterNames")
+            @ExcludeMissing
+            neutralDensityFilterNames: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("neutralDensityFilterTransmissions")
+            @ExcludeMissing
+            neutralDensityFilterTransmissions: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("neutralDensityFilterTransmissionsUnc")
+            @ExcludeMissing
+            neutralDensityFilterTransmissionsUnc: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("numCatalogStars")
+            @ExcludeMissing
+            numCatalogStars: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("numCorrelatedStars")
+            @ExcludeMissing
+            numCorrelatedStars: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("numDetectedStars")
+            @ExcludeMissing
+            numDetectedStars: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("numNeutralDensityFilters")
+            @ExcludeMissing
+            numNeutralDensityFilters: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("numSpectralFilters")
+            @ExcludeMissing
+            numSpectralFilters: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("objSunRange")
+            @ExcludeMissing
+            objSunRange: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("obTime")
+            @ExcludeMissing
+            obTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("opticalCrossSection")
+            @ExcludeMissing
+            opticalCrossSection: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("opticalCrossSectionUnc")
+            @ExcludeMissing
+            opticalCrossSectionUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pcalNumStars")
+            @ExcludeMissing
+            pcalNumStars: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("peakApertureCount")
+            @ExcludeMissing
+            peakApertureCount: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("peakBackgroundCount")
+            @ExcludeMissing
+            peakBackgroundCount: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("phaseAngBisect")
+            @ExcludeMissing
+            phaseAngBisect: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pixelArrayHeight")
+            @ExcludeMissing
+            pixelArrayHeight: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("pixelArrayWidth")
+            @ExcludeMissing
+            pixelArrayWidth: JsonField<Long> = JsonMissing.of(),
             @JsonProperty("pixelMax") @ExcludeMissing pixelMax: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("pixelMin") @ExcludeMissing pixelMin: JsonField<Long> = JsonMissing.of(),
-            @JsonProperty("predictedAzimuth") @ExcludeMissing predictedAzimuth: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("predictedDeclination") @ExcludeMissing predictedDeclination: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("predictedDeclinationUnc") @ExcludeMissing predictedDeclinationUnc: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("predictedElevation") @ExcludeMissing predictedElevation: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("predictedRa") @ExcludeMissing predictedRa: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("predictedRaUnc") @ExcludeMissing predictedRaUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("predictedAzimuth")
+            @ExcludeMissing
+            predictedAzimuth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("predictedDeclination")
+            @ExcludeMissing
+            predictedDeclination: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("predictedDeclinationUnc")
+            @ExcludeMissing
+            predictedDeclinationUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("predictedElevation")
+            @ExcludeMissing
+            predictedElevation: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("predictedRa")
+            @ExcludeMissing
+            predictedRa: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("predictedRaUnc")
+            @ExcludeMissing
+            predictedRaUnc: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("raCov") @ExcludeMissing raCov: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("raDeclinationCov") @ExcludeMissing raDeclinationCov: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("rowColCov") @ExcludeMissing rowColCov: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("rowVariance") @ExcludeMissing rowVariance: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("raDeclinationCov")
+            @ExcludeMissing
+            raDeclinationCov: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rowColCov")
+            @ExcludeMissing
+            rowColCov: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rowVariance")
+            @ExcludeMissing
+            rowVariance: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("snrEst") @ExcludeMissing snrEst: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("solarDiskFrac") @ExcludeMissing solarDiskFrac: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("solarDiskFrac")
+            @ExcludeMissing
+            solarDiskFrac: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("spectralFilters") @ExcludeMissing spectralFilters: JsonField<List<String>> = JsonMissing.of(),
-            @JsonProperty("spectralFilterSolarMag") @ExcludeMissing spectralFilterSolarMag: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("spectralZMFL") @ExcludeMissing spectralZmfl: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("sunAzimuth") @ExcludeMissing sunAzimuth: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("sunElevation") @ExcludeMissing sunElevation: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("sunStatePosX") @ExcludeMissing sunStatePosX: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("sunStatePosY") @ExcludeMissing sunStatePosY: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("sunStatePosZ") @ExcludeMissing sunStatePosZ: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("sunStateVelX") @ExcludeMissing sunStateVelX: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("sunStateVelY") @ExcludeMissing sunStateVelY: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("sunStateVelZ") @ExcludeMissing sunStateVelZ: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("surfBrightness") @ExcludeMissing surfBrightness: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("surfBrightnessUnc") @ExcludeMissing surfBrightnessUnc: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("timesUnc") @ExcludeMissing timesUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("spectralFilters")
+            @ExcludeMissing
+            spectralFilters: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("spectralFilterSolarMag")
+            @ExcludeMissing
+            spectralFilterSolarMag: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("spectralZMFL")
+            @ExcludeMissing
+            spectralZmfl: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("sunAzimuth")
+            @ExcludeMissing
+            sunAzimuth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sunElevation")
+            @ExcludeMissing
+            sunElevation: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sunStatePosX")
+            @ExcludeMissing
+            sunStatePosX: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sunStatePosY")
+            @ExcludeMissing
+            sunStatePosY: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sunStatePosZ")
+            @ExcludeMissing
+            sunStatePosZ: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sunStateVelX")
+            @ExcludeMissing
+            sunStateVelX: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sunStateVelY")
+            @ExcludeMissing
+            sunStateVelY: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sunStateVelZ")
+            @ExcludeMissing
+            sunStateVelZ: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("surfBrightness")
+            @ExcludeMissing
+            surfBrightness: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("surfBrightnessUnc")
+            @ExcludeMissing
+            surfBrightnessUnc: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("timesUnc")
+            @ExcludeMissing
+            timesUnc: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("toes") @ExcludeMissing toes: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("zeroPoints") @ExcludeMissing zeroPoints: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("zeroPointsUnc") @ExcludeMissing zeroPointsUnc: JsonField<List<Double>> = JsonMissing.of()
+            @JsonProperty("zeroPoints")
+            @ExcludeMissing
+            zeroPoints: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("zeroPointsUnc")
+            @ExcludeMissing
+            zeroPointsUnc: JsonField<List<Double>> = JsonMissing.of(),
         ) : this(
-          acalCrPixX,
-          acalCrPixY,
-          acalCrValX,
-          acalCrValY,
-          acalNumStars,
-          backgroundSignal,
-          backgroundSignalUnc,
-          binningHoriz,
-          binningVert,
-          ccdObjPosX,
-          ccdObjPosY,
-          ccdObjWidth,
-          ccdTemp,
-          centroidColumn,
-          centroidRow,
-          classificationMarking,
-          colorCoeffs,
-          columnVariance,
-          createdAt,
-          createdBy,
-          currentNeutralDensityFilterNum,
-          currentSpectralFilterNum,
-          dataMode,
-          declinationCov,
-          distFromStreakCenter,
-          does,
-          extinctionCoeffs,
-          extinctionCoeffsUnc,
-          gain,
-          idEoObservation,
-          ifov,
-          magInstrumental,
-          magInstrumentalUnc,
-          neutralDensityFilterNames,
-          neutralDensityFilterTransmissions,
-          neutralDensityFilterTransmissionsUnc,
-          numCatalogStars,
-          numCorrelatedStars,
-          numDetectedStars,
-          numNeutralDensityFilters,
-          numSpectralFilters,
-          objSunRange,
-          obTime,
-          opticalCrossSection,
-          opticalCrossSectionUnc,
-          pcalNumStars,
-          peakApertureCount,
-          peakBackgroundCount,
-          phaseAngBisect,
-          pixelArrayHeight,
-          pixelArrayWidth,
-          pixelMax,
-          pixelMin,
-          predictedAzimuth,
-          predictedDeclination,
-          predictedDeclinationUnc,
-          predictedElevation,
-          predictedRa,
-          predictedRaUnc,
-          raCov,
-          raDeclinationCov,
-          rowColCov,
-          rowVariance,
-          snrEst,
-          solarDiskFrac,
-          source,
-          spectralFilters,
-          spectralFilterSolarMag,
-          spectralZmfl,
-          sunAzimuth,
-          sunElevation,
-          sunStatePosX,
-          sunStatePosY,
-          sunStatePosZ,
-          sunStateVelX,
-          sunStateVelY,
-          sunStateVelZ,
-          surfBrightness,
-          surfBrightnessUnc,
-          timesUnc,
-          toes,
-          zeroPoints,
-          zeroPointsUnc,
-          mutableMapOf(),
+            acalCrPixX,
+            acalCrPixY,
+            acalCrValX,
+            acalCrValY,
+            acalNumStars,
+            backgroundSignal,
+            backgroundSignalUnc,
+            binningHoriz,
+            binningVert,
+            ccdObjPosX,
+            ccdObjPosY,
+            ccdObjWidth,
+            ccdTemp,
+            centroidColumn,
+            centroidRow,
+            classificationMarking,
+            colorCoeffs,
+            columnVariance,
+            createdAt,
+            createdBy,
+            currentNeutralDensityFilterNum,
+            currentSpectralFilterNum,
+            dataMode,
+            declinationCov,
+            distFromStreakCenter,
+            does,
+            extinctionCoeffs,
+            extinctionCoeffsUnc,
+            gain,
+            idEoObservation,
+            ifov,
+            magInstrumental,
+            magInstrumentalUnc,
+            neutralDensityFilterNames,
+            neutralDensityFilterTransmissions,
+            neutralDensityFilterTransmissionsUnc,
+            numCatalogStars,
+            numCorrelatedStars,
+            numDetectedStars,
+            numNeutralDensityFilters,
+            numSpectralFilters,
+            objSunRange,
+            obTime,
+            opticalCrossSection,
+            opticalCrossSectionUnc,
+            pcalNumStars,
+            peakApertureCount,
+            peakBackgroundCount,
+            phaseAngBisect,
+            pixelArrayHeight,
+            pixelArrayWidth,
+            pixelMax,
+            pixelMin,
+            predictedAzimuth,
+            predictedDeclination,
+            predictedDeclinationUnc,
+            predictedElevation,
+            predictedRa,
+            predictedRaUnc,
+            raCov,
+            raDeclinationCov,
+            rowColCov,
+            rowVariance,
+            snrEst,
+            solarDiskFrac,
+            source,
+            spectralFilters,
+            spectralFilterSolarMag,
+            spectralZmfl,
+            sunAzimuth,
+            sunElevation,
+            sunStatePosX,
+            sunStatePosY,
+            sunStatePosZ,
+            sunStateVelX,
+            sunStateVelY,
+            sunStateVelZ,
+            surfBrightness,
+            surfBrightnessUnc,
+            timesUnc,
+            toes,
+            zeroPoints,
+            zeroPointsUnc,
+            mutableMapOf(),
         )
 
         /**
          * World Coordinate System (WCS) X pixel origin in astrometric fit.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun acalCrPixX(): Optional<Double> = acalCrPixX.getOptional("acalCrPixX")
 
         /**
          * World Coordinate System (WCS) Y pixel origin in astrometric fit.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun acalCrPixY(): Optional<Double> = acalCrPixY.getOptional("acalCrPixY")
 
         /**
-         * World Coordinate System (WCS) equatorial coordinate X origin corresponding to CRPIX in astrometric fit in degrees.
+         * World Coordinate System (WCS) equatorial coordinate X origin corresponding to CRPIX in
+         * astrometric fit in degrees.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun acalCrValX(): Optional<Double> = acalCrValX.getOptional("acalCrValX")
 
         /**
-         * World Coordinate System (WCS) equatorial coordinate Y origin corresponding to CRPIX in astrometric fit in degrees.
+         * World Coordinate System (WCS) equatorial coordinate Y origin corresponding to CRPIX in
+         * astrometric fit in degrees.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun acalCrValY(): Optional<Double> = acalCrValY.getOptional("acalCrValY")
 
         /**
          * Number of stars used in astrometric fit.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun acalNumStars(): Optional<Long> = acalNumStars.getOptional("acalNumStars")
 
         /**
-         * This is the background signal at or in the vicinity of the radiometric source position. Specifically, this is the average background count level (DN/pixel) divided by the exposure time in seconds of the background pixels used in the photometric extraction. DN/pixel/sec.
+         * This is the background signal at or in the vicinity of the radiometric source position.
+         * Specifically, this is the average background count level (DN/pixel) divided by the
+         * exposure time in seconds of the background pixels used in the photometric extraction.
+         * DN/pixel/sec.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun backgroundSignal(): Optional<Double> = backgroundSignal.getOptional("backgroundSignal")
 
         /**
-         * Estimated 1-sigma uncertainty in the background signal at or in the vicinity of the radiometric source position. DN/pixel/sec.
+         * Estimated 1-sigma uncertainty in the background signal at or in the vicinity of the
+         * radiometric source position. DN/pixel/sec.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun backgroundSignalUnc(): Optional<Double> = backgroundSignalUnc.getOptional("backgroundSignalUnc")
+        fun backgroundSignalUnc(): Optional<Double> =
+            backgroundSignalUnc.getOptional("backgroundSignalUnc")
 
         /**
          * The number of pixels binned horizontally.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun binningHoriz(): Optional<Long> = binningHoriz.getOptional("binningHoriz")
 
         /**
          * The number of pixels binned vertically.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun binningVert(): Optional<Long> = binningVert.getOptional("binningVert")
 
         /**
          * The x centroid position on the CCD of the target object in pixels.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun ccdObjPosX(): Optional<Double> = ccdObjPosX.getOptional("ccdObjPosX")
 
         /**
          * The y centroid position on the CCD of the target object in pixels.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun ccdObjPosY(): Optional<Double> = ccdObjPosY.getOptional("ccdObjPosY")
 
         /**
-         * This is the pixel width of the target. This is either a frame-by-frame measurement or a constant point spread function or synthetic aperture used in the extraction.
+         * This is the pixel width of the target. This is either a frame-by-frame measurement or a
+         * constant point spread function or synthetic aperture used in the extraction.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun ccdObjWidth(): Optional<Double> = ccdObjWidth.getOptional("ccdObjWidth")
 
         /**
-         * Operating temperature of CCD recorded during exposure or measured during calibrations in K.
+         * Operating temperature of CCD recorded during exposure or measured during calibrations in
+         * K.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun ccdTemp(): Optional<Double> = ccdTemp.getOptional("ccdTemp")
 
         /**
-         * Observed centroid column number on the focal plane in pixels (0 is left edge, 0.5 is center of pixels along left of image).
+         * Observed centroid column number on the focal plane in pixels (0 is left edge, 0.5 is
+         * center of pixels along left of image).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun centroidColumn(): Optional<Double> = centroidColumn.getOptional("centroidColumn")
 
         /**
-         * Observed centroid row number on the focal plane in pixels (0 is top edge, 0.5 is center of pixels along top of image).
+         * Observed centroid row number on the focal plane in pixels (0 is top edge, 0.5 is center
+         * of pixels along top of image).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun centroidRow(): Optional<Double> = centroidRow.getOptional("centroidRow")
 
         /**
-         * Classification marking of the data in IC/CAPCO Portion-marked format, will be set to EOObservation classificationMarking if blank.
+         * Classification marking of the data in IC/CAPCO Portion-marked format, will be set to
+         * EOObservation classificationMarking if blank.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun classificationMarking(): Optional<String> = classificationMarking.getOptional("classificationMarking")
+        fun classificationMarking(): Optional<String> =
+            classificationMarking.getOptional("classificationMarking")
 
         /**
-         * Color coefficient for filter n for a space-based sensor where there is no atmospheric extinction. Must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n.
+         * Color coefficient for filter n for a space-based sensor where there is no atmospheric
+         * extinction. Must be present for all values n=1 to numSpectralFilters, in incrementing
+         * order of n, and for no other values of n.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun colorCoeffs(): Optional<List<Double>> = colorCoeffs.getOptional("colorCoeffs")
 
         /**
-         * Spatial variance of image distribution in horizontal direction measured in pixels squared.
+         * Spatial variance of image distribution in horizontal direction measured in pixels
+         * squared.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun columnVariance(): Optional<Double> = columnVariance.getOptional("columnVariance")
 
         /**
          * Time the row was created in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
         /**
          * Application user who created the row in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
         /**
-         * The reference number n, in neutralDensityFilters for the currently used neutral density filter.
+         * The reference number n, in neutralDensityFilters for the currently used neutral density
+         * filter.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun currentNeutralDensityFilterNum(): Optional<Long> = currentNeutralDensityFilterNum.getOptional("currentNeutralDensityFilterNum")
+        fun currentNeutralDensityFilterNum(): Optional<Long> =
+            currentNeutralDensityFilterNum.getOptional("currentNeutralDensityFilterNum")
 
         /**
-         * The reference number, x, where x ranges from 1 to n, where n is the number specified in spectralFilters that corresponds to the spectral filter given in the corresponding spectralFilterNames.
+         * The reference number, x, where x ranges from 1 to n, where n is the number specified in
+         * spectralFilters that corresponds to the spectral filter given in the corresponding
+         * spectralFilterNames.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun currentSpectralFilterNum(): Optional<Long> = currentSpectralFilterNum.getOptional("currentSpectralFilterNum")
+        fun currentSpectralFilterNum(): Optional<Long> =
+            currentSpectralFilterNum.getOptional("currentSpectralFilterNum")
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          *
          * , will be set to EOObservation dataMode if blank.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun dataMode(): Optional<DataMode> = dataMode.getOptional("dataMode")
 
         /**
          * Covariance (Y^2) in measured declination (Y) in deg^2.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun declinationCov(): Optional<Double> = declinationCov.getOptional("declinationCov")
 
         /**
-         * An array of measurements that correspond to the distance from the streak center measured from the optical image in pixels that show change over an interval of time. The array length is dependent on the length of the streak. The distFromStreakCenter, surfBrightness, and surfBrightnessUnc arrays will match in size.
+         * An array of measurements that correspond to the distance from the streak center measured
+         * from the optical image in pixels that show change over an interval of time. The array
+         * length is dependent on the length of the streak. The distFromStreakCenter,
+         * surfBrightness, and surfBrightnessUnc arrays will match in size.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun distFromStreakCenter(): Optional<List<Double>> = distFromStreakCenter.getOptional("distFromStreakCenter")
+        fun distFromStreakCenter(): Optional<List<Double>> =
+            distFromStreakCenter.getOptional("distFromStreakCenter")
 
         /**
          * Angle off element set reported in degrees.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun does(): Optional<Double> = does.getOptional("does")
 
         /**
-         * The extinction coefficient computed for the nth filter. Must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n. Units = mag/airmass.
+         * The extinction coefficient computed for the nth filter. Must be present for all values
+         * n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n.
+         * Units = mag/airmass.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun extinctionCoeffs(): Optional<List<Double>> = extinctionCoeffs.getOptional("extinctionCoeffs")
+        fun extinctionCoeffs(): Optional<List<Double>> =
+            extinctionCoeffs.getOptional("extinctionCoeffs")
 
         /**
-         * This is the uncertainty in the extinction coefficient for the nth filter. Must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n. -9999 for space-based sensors. Units = mag/airmass.
+         * This is the uncertainty in the extinction coefficient for the nth filter. Must be present
+         * for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other
+         * values of n. -9999 for space-based sensors. Units = mag/airmass.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun extinctionCoeffsUnc(): Optional<List<Double>> = extinctionCoeffsUnc.getOptional("extinctionCoeffsUnc")
+        fun extinctionCoeffsUnc(): Optional<List<Double>> =
+            extinctionCoeffsUnc.getOptional("extinctionCoeffsUnc")
 
         /**
-         * Some sensors have gain settings. This value is the gain used during the observation in units e-/ADU. If no gain is used, the value = 1.
+         * Some sensors have gain settings. This value is the gain used during the observation in
+         * units e-/ADU. If no gain is used, the value = 1.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun gain(): Optional<Double> = gain.getOptional("gain")
 
         /**
          * Unique identifier of the parent EOObservation.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun idEoObservation(): Optional<String> = idEoObservation.getOptional("idEOObservation")
 
         /**
          * Sensor instantaneous field of view (ratio of pixel pitch to focal length).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun ifov(): Optional<Double> = ifov.getOptional("ifov")
 
         /**
-         * Instrumental magnitude of a sensor before corrections are applied for atmosphere or to transform to standard magnitude scale.
+         * Instrumental magnitude of a sensor before corrections are applied for atmosphere or to
+         * transform to standard magnitude scale.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun magInstrumental(): Optional<Double> = magInstrumental.getOptional("magInstrumental")
 
         /**
          * Uncertainty in the instrumental magnitude.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun magInstrumentalUnc(): Optional<Double> = magInstrumentalUnc.getOptional("magInstrumentalUnc")
+        fun magInstrumentalUnc(): Optional<Double> =
+            magInstrumentalUnc.getOptional("magInstrumentalUnc")
 
         /**
-         * Must be present for all values n=1 to numNeutralDensityFilters, in incrementing order of n, and for no other values of n.
+         * Must be present for all values n=1 to numNeutralDensityFilters, in incrementing order of
+         * n, and for no other values of n.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun neutralDensityFilterNames(): Optional<List<String>> = neutralDensityFilterNames.getOptional("neutralDensityFilterNames")
+        fun neutralDensityFilterNames(): Optional<List<String>> =
+            neutralDensityFilterNames.getOptional("neutralDensityFilterNames")
 
         /**
-         * The transmission of the nth neutral density filter. Must be present for all values n=1 to numNeutralDensityFilters, in incrementing order of n, and for no other values of n.
+         * The transmission of the nth neutral density filter. Must be present for all values n=1 to
+         * numNeutralDensityFilters, in incrementing order of n, and for no other values of n.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun neutralDensityFilterTransmissions(): Optional<List<Double>> = neutralDensityFilterTransmissions.getOptional("neutralDensityFilterTransmissions")
+        fun neutralDensityFilterTransmissions(): Optional<List<Double>> =
+            neutralDensityFilterTransmissions.getOptional("neutralDensityFilterTransmissions")
 
         /**
-         * This is the uncertainty in the transmission for the nth filter. Must be present for all values n=1 to numNeutralDensityFilters, in incrementing order of n, and for no other values of n.
+         * This is the uncertainty in the transmission for the nth filter. Must be present for all
+         * values n=1 to numNeutralDensityFilters, in incrementing order of n, and for no other
+         * values of n.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun neutralDensityFilterTransmissionsUnc(): Optional<List<Double>> = neutralDensityFilterTransmissionsUnc.getOptional("neutralDensityFilterTransmissionsUnc")
+        fun neutralDensityFilterTransmissionsUnc(): Optional<List<Double>> =
+            neutralDensityFilterTransmissionsUnc.getOptional("neutralDensityFilterTransmissionsUnc")
 
         /**
-         * Number of catalog stars in the detector field of view (FOV) with the target object. Can be 0 for narrow FOV sensors.
+         * Number of catalog stars in the detector field of view (FOV) with the target object. Can
+         * be 0 for narrow FOV sensors.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun numCatalogStars(): Optional<Long> = numCatalogStars.getOptional("numCatalogStars")
 
         /**
-         * Number of correlated stars in the FOV with the target object. Can be 0 for narrow FOV sensors.
+         * Number of correlated stars in the FOV with the target object. Can be 0 for narrow FOV
+         * sensors.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun numCorrelatedStars(): Optional<Long> = numCorrelatedStars.getOptional("numCorrelatedStars")
+        fun numCorrelatedStars(): Optional<Long> =
+            numCorrelatedStars.getOptional("numCorrelatedStars")
 
         /**
-         * Number of detected stars in the FOV with the target object. Helps identify frames with clouds.
+         * Number of detected stars in the FOV with the target object. Helps identify frames with
+         * clouds.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun numDetectedStars(): Optional<Long> = numDetectedStars.getOptional("numDetectedStars")
 
         /**
          * The value is the number of neutral density filters used.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun numNeutralDensityFilters(): Optional<Long> = numNeutralDensityFilters.getOptional("numNeutralDensityFilters")
+        fun numNeutralDensityFilters(): Optional<Long> =
+            numNeutralDensityFilters.getOptional("numNeutralDensityFilters")
 
         /**
          * The value is the number of spectral filters used.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun numSpectralFilters(): Optional<Long> = numSpectralFilters.getOptional("numSpectralFilters")
+        fun numSpectralFilters(): Optional<Long> =
+            numSpectralFilters.getOptional("numSpectralFilters")
 
         /**
          * Distance from the target object to the sun during the observation in meters.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun objSunRange(): Optional<Double> = objSunRange.getOptional("objSunRange")
 
         /**
-         * Ob detection time in ISO 8601 UTC with microsecond precision, will be set to EOObservation obTime if blank.
+         * Ob detection time in ISO 8601 UTC with microsecond precision, will be set to
+         * EOObservation obTime if blank.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun obTime(): Optional<OffsetDateTime> = obTime.getOptional("obTime")
 
         /**
          * Optical Cross Section computed in units m(2)/ster.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun opticalCrossSection(): Optional<Double> = opticalCrossSection.getOptional("opticalCrossSection")
+        fun opticalCrossSection(): Optional<Double> =
+            opticalCrossSection.getOptional("opticalCrossSection")
 
         /**
          * Uncertainty in Optical Cross Section computed in units m(2)/ster.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun opticalCrossSectionUnc(): Optional<Double> = opticalCrossSectionUnc.getOptional("opticalCrossSectionUnc")
+        fun opticalCrossSectionUnc(): Optional<Double> =
+            opticalCrossSectionUnc.getOptional("opticalCrossSectionUnc")
 
         /**
          * Number of stars used in photometric fit count.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun pcalNumStars(): Optional<Int> = pcalNumStars.getOptional("pcalNumStars")
 
         /**
-         * Peak Aperture Raw Counts is the value of the peak pixel in the real or synthetic aperture containing the target signal.
+         * Peak Aperture Raw Counts is the value of the peak pixel in the real or synthetic aperture
+         * containing the target signal.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun peakApertureCount(): Optional<Double> = peakApertureCount.getOptional("peakApertureCount")
+        fun peakApertureCount(): Optional<Double> =
+            peakApertureCount.getOptional("peakApertureCount")
 
         /**
          * Peak Background Raw Counts is the largest pixel value used in background signal.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun peakBackgroundCount(): Optional<Int> = peakBackgroundCount.getOptional("peakBackgroundCount")
+        fun peakBackgroundCount(): Optional<Int> =
+            peakBackgroundCount.getOptional("peakBackgroundCount")
 
         /**
-         * Solar phase angle bisector vector. The vector that bisects the solar phase angle. The phase angle bisector is the angle that is << of the value in #48. Then calculate the point on the RA/DEC (ECI J2000.0) sphere that a vector at this angle would intersect.
+         * Solar phase angle bisector vector. The vector that bisects the solar phase angle. The
+         * phase angle bisector is the angle that is << of the value in #48. Then calculate the
+         * point on the RA/DEC (ECI J2000.0) sphere that a vector at this angle would intersect.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun phaseAngBisect(): Optional<Double> = phaseAngBisect.getOptional("phaseAngBisect")
 
         /**
          * Pixel array size (height) in pixels.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun pixelArrayHeight(): Optional<Long> = pixelArrayHeight.getOptional("pixelArrayHeight")
 
         /**
          * Pixel array size (width) in pixels.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun pixelArrayWidth(): Optional<Long> = pixelArrayWidth.getOptional("pixelArrayWidth")
 
         /**
-         * Maximum valid pixel value, this is defined as 2^(number of bits per pixel). For example, a CCD with 8-bitpixels, would have a maximum valid pixel value of 2^8 = 256. This can represent the saturation value of the detector, but some sensors will saturate at a value significantly lower than full well depth. This is the analog-to-digital conversion (ADC) saturation value.
+         * Maximum valid pixel value, this is defined as 2^(number of bits per pixel). For example,
+         * a CCD with 8-bitpixels, would have a maximum valid pixel value of 2^8 = 256. This can
+         * represent the saturation value of the detector, but some sensors will saturate at a value
+         * significantly lower than full well depth. This is the analog-to-digital conversion (ADC)
+         * saturation value.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun pixelMax(): Optional<Int> = pixelMax.getOptional("pixelMax")
 
         /**
          * Minimum valid pixel value, this is typically 0.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun pixelMin(): Optional<Long> = pixelMin.getOptional("pixelMin")
 
         /**
-         * Predicted Azimuth angle of the target object from a ground -based sensor (no atmospheric refraction correction required) in degrees. AZ_EL implies apparent topocentric place in true of date reference frame as seen from the observer with aberration due to the observer velocity and light travel time applied.
+         * Predicted Azimuth angle of the target object from a ground -based sensor (no atmospheric
+         * refraction correction required) in degrees. AZ_EL implies apparent topocentric place in
+         * true of date reference frame as seen from the observer with aberration due to the
+         * observer velocity and light travel time applied.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun predictedAzimuth(): Optional<Double> = predictedAzimuth.getOptional("predictedAzimuth")
 
         /**
-         * Predicted Declination of the Target object from the frame of reference of the sensor (J2000, geocentric velocity aberration). SGP4 and VCMs produce geocentric origin and velocity aberration and subtracting the sensor geocentric position of the sensor places in its reference frame.
+         * Predicted Declination of the Target object from the frame of reference of the sensor
+         * (J2000, geocentric velocity aberration). SGP4 and VCMs produce geocentric origin and
+         * velocity aberration and subtracting the sensor geocentric position of the sensor places
+         * in its reference frame.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun predictedDeclination(): Optional<Double> = predictedDeclination.getOptional("predictedDeclination")
+        fun predictedDeclination(): Optional<Double> =
+            predictedDeclination.getOptional("predictedDeclination")
 
         /**
-         * Uncertainty of Predicted Declination of the Target object from the frame of reference of the sensor (J2000, geocentric velocity aberration). SGP4 and VCMs produce geocentric origin and velocity aberration and subtracting the sensor geocentric position of the sensor places in its reference frame.
+         * Uncertainty of Predicted Declination of the Target object from the frame of reference of
+         * the sensor (J2000, geocentric velocity aberration). SGP4 and VCMs produce geocentric
+         * origin and velocity aberration and subtracting the sensor geocentric position of the
+         * sensor places in its reference frame.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun predictedDeclinationUnc(): Optional<Double> = predictedDeclinationUnc.getOptional("predictedDeclinationUnc")
+        fun predictedDeclinationUnc(): Optional<Double> =
+            predictedDeclinationUnc.getOptional("predictedDeclinationUnc")
 
         /**
-         * Predicted elevation angle of the target object from a ground -based sensor (no atmospheric refraction correction required) in degrees. AZ_EL implies apparent topocentric place in true of date reference frame as seen from the observer with aberration due to the observer velocity and light travel time applied.
+         * Predicted elevation angle of the target object from a ground -based sensor (no
+         * atmospheric refraction correction required) in degrees. AZ_EL implies apparent
+         * topocentric place in true of date reference frame as seen from the observer with
+         * aberration due to the observer velocity and light travel time applied.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun predictedElevation(): Optional<Double> = predictedElevation.getOptional("predictedElevation")
+        fun predictedElevation(): Optional<Double> =
+            predictedElevation.getOptional("predictedElevation")
 
         /**
-         * Predicted Right Ascension of the Target object from the frame of reference of the sensor (J2000, geocentric velocity aberration). SGP4 and VCMs produce geocentric origin and velocity aberration and subtracting the sensor geocentric position of the sensor places in its reference frame.
+         * Predicted Right Ascension of the Target object from the frame of reference of the sensor
+         * (J2000, geocentric velocity aberration). SGP4 and VCMs produce geocentric origin and
+         * velocity aberration and subtracting the sensor geocentric position of the sensor places
+         * in its reference frame.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun predictedRa(): Optional<Double> = predictedRa.getOptional("predictedRa")
 
         /**
-         * Uncertainty of predicted Right Ascension of the Target object from the frame of reference of the sensor (J2000, geocentric velocity aberration). SGP4 and VCMs produce geocentric origin and velocity aberration and subtracting the sensor geocentric position of the sensor places in its reference frame.
+         * Uncertainty of predicted Right Ascension of the Target object from the frame of reference
+         * of the sensor (J2000, geocentric velocity aberration). SGP4 and VCMs produce geocentric
+         * origin and velocity aberration and subtracting the sensor geocentric position of the
+         * sensor places in its reference frame.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun predictedRaUnc(): Optional<Double> = predictedRaUnc.getOptional("predictedRaUnc")
 
         /**
          * Covariance (x^2) in measured Right Ascension (X) in deg^2.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun raCov(): Optional<Double> = raCov.getOptional("raCov")
 
         /**
          * Covariance (XY) in measured ra/declination (XY) in deg^2.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun raDeclinationCov(): Optional<Double> = raDeclinationCov.getOptional("raDeclinationCov")
 
         /**
-         * Spatial covariance of image distribution across horizontal and vertical directions measured in pixels squared.
+         * Spatial covariance of image distribution across horizontal and vertical directions
+         * measured in pixels squared.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun rowColCov(): Optional<Double> = rowColCov.getOptional("rowColCov")
 
         /**
          * Spatial variance of image distribution in vertical direction measured in pixels squared.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun rowVariance(): Optional<Double> = rowVariance.getOptional("rowVariance")
 
         /**
-         * Estimated signal-to-noise ratio (SNR) for the total radiometric signal. Under some algorithms, this can be a constant per target (not per observation). Note: this SNR applies to the total signal of the radiometric source (i.e., Net_Obj_Sig with units DN/sec), not to be confused with the SNR of the signal in the peak pixel (i.e., DN/pixel/sec).
+         * Estimated signal-to-noise ratio (SNR) for the total radiometric signal. Under some
+         * algorithms, this can be a constant per target (not per observation). Note: this SNR
+         * applies to the total signal of the radiometric source (i.e., Net_Obj_Sig with units
+         * DN/sec), not to be confused with the SNR of the signal in the peak pixel (i.e.,
+         * DN/pixel/sec).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun snrEst(): Optional<Double> = snrEst.getOptional("snrEst")
 
         /**
-         * Fraction of the sun that is illuminating the target object. This indicates if the target is in the Earth’s penumbra or umbra. (It is 0 when object is in umbra and 1 when object is fully illuminated.).
+         * Fraction of the sun that is illuminating the target object. This indicates if the target
+         * is in the Earth’s penumbra or umbra. (It is 0 when object is in umbra and 1 when object
+         * is fully illuminated.).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun solarDiskFrac(): Optional<Double> = solarDiskFrac.getOptional("solarDiskFrac")
 
         /**
          * Source of the data, will be set to EOObservation source if blank.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun source(): Optional<String> = source.getOptional("source")
 
         /**
-         * Array of the SpectralFilters keywords, must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n.
+         * Array of the SpectralFilters keywords, must be present for all values n=1 to
+         * numSpectralFilters, in incrementing order of n, and for no other values of n.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun spectralFilters(): Optional<List<String>> = spectralFilters.getOptional("spectralFilters")
+        fun spectralFilters(): Optional<List<String>> =
+            spectralFilters.getOptional("spectralFilters")
 
         /**
-         * This is the in-band solar magnitude at 1 A.U. Must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n. Units = mag.
+         * This is the in-band solar magnitude at 1 A.U. Must be present for all values n=1 to
+         * numSpectralFilters, in incrementing order of n, and for no other values of n. Units =
+         * mag.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun spectralFilterSolarMag(): Optional<List<Double>> = spectralFilterSolarMag.getOptional("spectralFilterSolarMag")
+        fun spectralFilterSolarMag(): Optional<List<Double>> =
+            spectralFilterSolarMag.getOptional("spectralFilterSolarMag")
 
         /**
-         * This is the in-band average irradiance of a 0th mag source. Must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n. Units = W/m2/nm.
+         * This is the in-band average irradiance of a 0th mag source. Must be present for all
+         * values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of
+         * n. Units = W/m2/nm.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun spectralZmfl(): Optional<List<Double>> = spectralZmfl.getOptional("spectralZMFL")
 
         /**
-         * Azimuth angle of the sun from a ground-based telescope (no atmospheric refraction correction required) the observer with aberration due to the observer velocity and light travel time applied in degrees.
+         * Azimuth angle of the sun from a ground-based telescope (no atmospheric refraction
+         * correction required) the observer with aberration due to the observer velocity and light
+         * travel time applied in degrees.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun sunAzimuth(): Optional<Double> = sunAzimuth.getOptional("sunAzimuth")
 
         /**
-         * Elevation angle of the sun from a ground-based telescope (no atmospheric refraction correction required) in degrees.
+         * Elevation angle of the sun from a ground-based telescope (no atmospheric refraction
+         * correction required) in degrees.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun sunElevation(): Optional<Double> = sunElevation.getOptional("sunElevation")
 
         /**
          * Sun state vector in ECI J2000 coordinate frame in km.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun sunStatePosX(): Optional<Double> = sunStatePosX.getOptional("sunStatePosX")
 
         /**
          * Sun state vector in ECI J2000 coordinate frame in km.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun sunStatePosY(): Optional<Double> = sunStatePosY.getOptional("sunStatePosY")
 
         /**
          * Sun state vector in ECI J2000 coordinate frame in km.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun sunStatePosZ(): Optional<Double> = sunStatePosZ.getOptional("sunStatePosZ")
 
         /**
          * Sun state vector in ECI J2000 coordinate frame in km/sec.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun sunStateVelX(): Optional<Double> = sunStateVelX.getOptional("sunStateVelX")
 
         /**
          * Sun state vector in ECI J2000 coordinate frame in km/sec.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun sunStateVelY(): Optional<Double> = sunStateVelY.getOptional("sunStateVelY")
 
         /**
          * Sun state vector in ECI J2000 coordinate frame in km/sec.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun sunStateVelZ(): Optional<Double> = sunStateVelZ.getOptional("sunStateVelZ")
 
         /**
-         * An array of surface brightness measurements in magnitudes per square arcsecond from the optical image that show change over an interval of time. The array length is dependent on the length of the streak. The distFromStreakCenter, surfBrightness, and surfBrightnessUnc arrays will match in size.
+         * An array of surface brightness measurements in magnitudes per square arcsecond from the
+         * optical image that show change over an interval of time. The array length is dependent on
+         * the length of the streak. The distFromStreakCenter, surfBrightness, and surfBrightnessUnc
+         * arrays will match in size.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun surfBrightness(): Optional<List<Double>> = surfBrightness.getOptional("surfBrightness")
 
         /**
-         * An array of surface brightness uncertainty measurements in magnitudes per square arcsecond from the optical image that show change over an interval of time. The array length is dependent on the length of the streak. The distFromStreakCenter, surfBrightness, and surfBrightnessUnc arrays will match in size.
+         * An array of surface brightness uncertainty measurements in magnitudes per square
+         * arcsecond from the optical image that show change over an interval of time. The array
+         * length is dependent on the length of the streak. The distFromStreakCenter,
+         * surfBrightness, and surfBrightnessUnc arrays will match in size.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun surfBrightnessUnc(): Optional<List<Double>> = surfBrightnessUnc.getOptional("surfBrightnessUnc")
+        fun surfBrightnessUnc(): Optional<List<Double>> =
+            surfBrightnessUnc.getOptional("surfBrightnessUnc")
 
         /**
          * Uncertainty in the times reported in UTC in seconds.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun timesUnc(): Optional<Double> = timesUnc.getOptional("timesUnc")
 
         /**
          * Time off element set reported in seconds.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun toes(): Optional<Double> = toes.getOptional("toes")
 
         /**
-         * This is the value for the zero-point calculated for each filter denoted in spectralFilters. It is the difference between the catalog mag and instrumental mag for a set of standard stars. For use with All Sky photometry. Must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n.
+         * This is the value for the zero-point calculated for each filter denoted in
+         * spectralFilters. It is the difference between the catalog mag and instrumental mag for a
+         * set of standard stars. For use with All Sky photometry. Must be present for all values
+         * n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun zeroPoints(): Optional<List<Double>> = zeroPoints.getOptional("zeroPoints")
 
         /**
-         * This is the uncertainty in the zero point for the filter denoted in spectralFilters. For use with All Sky photometry. Must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n.
+         * This is the uncertainty in the zero point for the filter denoted in spectralFilters. For
+         * use with All Sky photometry. Must be present for all values n=1 to numSpectralFilters, in
+         * incrementing order of n, and for no other values of n.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun zeroPointsUnc(): Optional<List<Double>> = zeroPointsUnc.getOptional("zeroPointsUnc")
 
@@ -4980,7 +5596,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [acalNumStars].
          *
-         * Unlike [acalNumStars], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [acalNumStars], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("acalNumStars")
         @ExcludeMissing
@@ -4989,7 +5606,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [backgroundSignal].
          *
-         * Unlike [backgroundSignal], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [backgroundSignal], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("backgroundSignal")
         @ExcludeMissing
@@ -4998,7 +5616,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [backgroundSignalUnc].
          *
-         * Unlike [backgroundSignalUnc], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [backgroundSignalUnc], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("backgroundSignalUnc")
         @ExcludeMissing
@@ -5007,7 +5626,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [binningHoriz].
          *
-         * Unlike [binningHoriz], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [binningHoriz], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("binningHoriz")
         @ExcludeMissing
@@ -5054,14 +5674,13 @@ class EoObservationFull private constructor(
          *
          * Unlike [ccdTemp], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("ccdTemp")
-        @ExcludeMissing
-        fun _ccdTemp(): JsonField<Double> = ccdTemp
+        @JsonProperty("ccdTemp") @ExcludeMissing fun _ccdTemp(): JsonField<Double> = ccdTemp
 
         /**
          * Returns the raw JSON value of [centroidColumn].
          *
-         * Unlike [centroidColumn], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [centroidColumn], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("centroidColumn")
         @ExcludeMissing
@@ -5079,7 +5698,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [classificationMarking].
          *
-         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("classificationMarking")
         @ExcludeMissing
@@ -5097,7 +5717,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [columnVariance].
          *
-         * Unlike [columnVariance], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [columnVariance], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("columnVariance")
         @ExcludeMissing
@@ -5117,14 +5738,13 @@ class EoObservationFull private constructor(
          *
          * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("createdBy")
-        @ExcludeMissing
-        fun _createdBy(): JsonField<String> = createdBy
+        @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
         /**
          * Returns the raw JSON value of [currentNeutralDensityFilterNum].
          *
-         * Unlike [currentNeutralDensityFilterNum], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [currentNeutralDensityFilterNum], this method doesn't throw if the JSON field has
+         * an unexpected type.
          */
         @JsonProperty("currentNeutralDensityFilterNum")
         @ExcludeMissing
@@ -5133,7 +5753,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [currentSpectralFilterNum].
          *
-         * Unlike [currentSpectralFilterNum], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [currentSpectralFilterNum], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("currentSpectralFilterNum")
         @ExcludeMissing
@@ -5144,14 +5765,13 @@ class EoObservationFull private constructor(
          *
          * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("dataMode")
-        @ExcludeMissing
-        fun _dataMode(): JsonField<DataMode> = dataMode
+        @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
 
         /**
          * Returns the raw JSON value of [declinationCov].
          *
-         * Unlike [declinationCov], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [declinationCov], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("declinationCov")
         @ExcludeMissing
@@ -5160,7 +5780,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [distFromStreakCenter].
          *
-         * Unlike [distFromStreakCenter], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [distFromStreakCenter], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("distFromStreakCenter")
         @ExcludeMissing
@@ -5171,14 +5792,13 @@ class EoObservationFull private constructor(
          *
          * Unlike [does], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("does")
-        @ExcludeMissing
-        fun _does(): JsonField<Double> = does
+        @JsonProperty("does") @ExcludeMissing fun _does(): JsonField<Double> = does
 
         /**
          * Returns the raw JSON value of [extinctionCoeffs].
          *
-         * Unlike [extinctionCoeffs], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [extinctionCoeffs], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("extinctionCoeffs")
         @ExcludeMissing
@@ -5187,7 +5807,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [extinctionCoeffsUnc].
          *
-         * Unlike [extinctionCoeffsUnc], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [extinctionCoeffsUnc], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("extinctionCoeffsUnc")
         @ExcludeMissing
@@ -5198,14 +5819,13 @@ class EoObservationFull private constructor(
          *
          * Unlike [gain], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("gain")
-        @ExcludeMissing
-        fun _gain(): JsonField<Double> = gain
+        @JsonProperty("gain") @ExcludeMissing fun _gain(): JsonField<Double> = gain
 
         /**
          * Returns the raw JSON value of [idEoObservation].
          *
-         * Unlike [idEoObservation], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [idEoObservation], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("idEOObservation")
         @ExcludeMissing
@@ -5216,14 +5836,13 @@ class EoObservationFull private constructor(
          *
          * Unlike [ifov], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("ifov")
-        @ExcludeMissing
-        fun _ifov(): JsonField<Double> = ifov
+        @JsonProperty("ifov") @ExcludeMissing fun _ifov(): JsonField<Double> = ifov
 
         /**
          * Returns the raw JSON value of [magInstrumental].
          *
-         * Unlike [magInstrumental], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [magInstrumental], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("magInstrumental")
         @ExcludeMissing
@@ -5232,7 +5851,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [magInstrumentalUnc].
          *
-         * Unlike [magInstrumentalUnc], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [magInstrumentalUnc], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("magInstrumentalUnc")
         @ExcludeMissing
@@ -5241,7 +5861,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [neutralDensityFilterNames].
          *
-         * Unlike [neutralDensityFilterNames], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [neutralDensityFilterNames], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("neutralDensityFilterNames")
         @ExcludeMissing
@@ -5250,25 +5871,30 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [neutralDensityFilterTransmissions].
          *
-         * Unlike [neutralDensityFilterTransmissions], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [neutralDensityFilterTransmissions], this method doesn't throw if the JSON field
+         * has an unexpected type.
          */
         @JsonProperty("neutralDensityFilterTransmissions")
         @ExcludeMissing
-        fun _neutralDensityFilterTransmissions(): JsonField<List<Double>> = neutralDensityFilterTransmissions
+        fun _neutralDensityFilterTransmissions(): JsonField<List<Double>> =
+            neutralDensityFilterTransmissions
 
         /**
          * Returns the raw JSON value of [neutralDensityFilterTransmissionsUnc].
          *
-         * Unlike [neutralDensityFilterTransmissionsUnc], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [neutralDensityFilterTransmissionsUnc], this method doesn't throw if the JSON
+         * field has an unexpected type.
          */
         @JsonProperty("neutralDensityFilterTransmissionsUnc")
         @ExcludeMissing
-        fun _neutralDensityFilterTransmissionsUnc(): JsonField<List<Double>> = neutralDensityFilterTransmissionsUnc
+        fun _neutralDensityFilterTransmissionsUnc(): JsonField<List<Double>> =
+            neutralDensityFilterTransmissionsUnc
 
         /**
          * Returns the raw JSON value of [numCatalogStars].
          *
-         * Unlike [numCatalogStars], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [numCatalogStars], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("numCatalogStars")
         @ExcludeMissing
@@ -5277,7 +5903,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [numCorrelatedStars].
          *
-         * Unlike [numCorrelatedStars], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [numCorrelatedStars], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("numCorrelatedStars")
         @ExcludeMissing
@@ -5286,7 +5913,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [numDetectedStars].
          *
-         * Unlike [numDetectedStars], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [numDetectedStars], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("numDetectedStars")
         @ExcludeMissing
@@ -5295,7 +5923,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [numNeutralDensityFilters].
          *
-         * Unlike [numNeutralDensityFilters], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [numNeutralDensityFilters], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("numNeutralDensityFilters")
         @ExcludeMissing
@@ -5304,7 +5933,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [numSpectralFilters].
          *
-         * Unlike [numSpectralFilters], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [numSpectralFilters], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("numSpectralFilters")
         @ExcludeMissing
@@ -5324,14 +5954,13 @@ class EoObservationFull private constructor(
          *
          * Unlike [obTime], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("obTime")
-        @ExcludeMissing
-        fun _obTime(): JsonField<OffsetDateTime> = obTime
+        @JsonProperty("obTime") @ExcludeMissing fun _obTime(): JsonField<OffsetDateTime> = obTime
 
         /**
          * Returns the raw JSON value of [opticalCrossSection].
          *
-         * Unlike [opticalCrossSection], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [opticalCrossSection], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("opticalCrossSection")
         @ExcludeMissing
@@ -5340,7 +5969,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [opticalCrossSectionUnc].
          *
-         * Unlike [opticalCrossSectionUnc], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [opticalCrossSectionUnc], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("opticalCrossSectionUnc")
         @ExcludeMissing
@@ -5349,7 +5979,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [pcalNumStars].
          *
-         * Unlike [pcalNumStars], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [pcalNumStars], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("pcalNumStars")
         @ExcludeMissing
@@ -5358,7 +5989,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [peakApertureCount].
          *
-         * Unlike [peakApertureCount], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [peakApertureCount], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("peakApertureCount")
         @ExcludeMissing
@@ -5367,7 +5999,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [peakBackgroundCount].
          *
-         * Unlike [peakBackgroundCount], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [peakBackgroundCount], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("peakBackgroundCount")
         @ExcludeMissing
@@ -5376,7 +6009,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [phaseAngBisect].
          *
-         * Unlike [phaseAngBisect], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [phaseAngBisect], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("phaseAngBisect")
         @ExcludeMissing
@@ -5385,7 +6019,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [pixelArrayHeight].
          *
-         * Unlike [pixelArrayHeight], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [pixelArrayHeight], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("pixelArrayHeight")
         @ExcludeMissing
@@ -5394,7 +6029,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [pixelArrayWidth].
          *
-         * Unlike [pixelArrayWidth], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [pixelArrayWidth], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("pixelArrayWidth")
         @ExcludeMissing
@@ -5405,23 +6041,20 @@ class EoObservationFull private constructor(
          *
          * Unlike [pixelMax], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("pixelMax")
-        @ExcludeMissing
-        fun _pixelMax(): JsonField<Int> = pixelMax
+        @JsonProperty("pixelMax") @ExcludeMissing fun _pixelMax(): JsonField<Int> = pixelMax
 
         /**
          * Returns the raw JSON value of [pixelMin].
          *
          * Unlike [pixelMin], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("pixelMin")
-        @ExcludeMissing
-        fun _pixelMin(): JsonField<Long> = pixelMin
+        @JsonProperty("pixelMin") @ExcludeMissing fun _pixelMin(): JsonField<Long> = pixelMin
 
         /**
          * Returns the raw JSON value of [predictedAzimuth].
          *
-         * Unlike [predictedAzimuth], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [predictedAzimuth], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("predictedAzimuth")
         @ExcludeMissing
@@ -5430,7 +6063,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [predictedDeclination].
          *
-         * Unlike [predictedDeclination], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [predictedDeclination], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("predictedDeclination")
         @ExcludeMissing
@@ -5439,7 +6073,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [predictedDeclinationUnc].
          *
-         * Unlike [predictedDeclinationUnc], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [predictedDeclinationUnc], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("predictedDeclinationUnc")
         @ExcludeMissing
@@ -5448,7 +6083,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [predictedElevation].
          *
-         * Unlike [predictedElevation], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [predictedElevation], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("predictedElevation")
         @ExcludeMissing
@@ -5466,7 +6102,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [predictedRaUnc].
          *
-         * Unlike [predictedRaUnc], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [predictedRaUnc], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("predictedRaUnc")
         @ExcludeMissing
@@ -5477,14 +6114,13 @@ class EoObservationFull private constructor(
          *
          * Unlike [raCov], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("raCov")
-        @ExcludeMissing
-        fun _raCov(): JsonField<Double> = raCov
+        @JsonProperty("raCov") @ExcludeMissing fun _raCov(): JsonField<Double> = raCov
 
         /**
          * Returns the raw JSON value of [raDeclinationCov].
          *
-         * Unlike [raDeclinationCov], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [raDeclinationCov], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("raDeclinationCov")
         @ExcludeMissing
@@ -5495,9 +6131,7 @@ class EoObservationFull private constructor(
          *
          * Unlike [rowColCov], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("rowColCov")
-        @ExcludeMissing
-        fun _rowColCov(): JsonField<Double> = rowColCov
+        @JsonProperty("rowColCov") @ExcludeMissing fun _rowColCov(): JsonField<Double> = rowColCov
 
         /**
          * Returns the raw JSON value of [rowVariance].
@@ -5513,14 +6147,13 @@ class EoObservationFull private constructor(
          *
          * Unlike [snrEst], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("snrEst")
-        @ExcludeMissing
-        fun _snrEst(): JsonField<Double> = snrEst
+        @JsonProperty("snrEst") @ExcludeMissing fun _snrEst(): JsonField<Double> = snrEst
 
         /**
          * Returns the raw JSON value of [solarDiskFrac].
          *
-         * Unlike [solarDiskFrac], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [solarDiskFrac], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("solarDiskFrac")
         @ExcludeMissing
@@ -5531,14 +6164,13 @@ class EoObservationFull private constructor(
          *
          * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("source")
-        @ExcludeMissing
-        fun _source(): JsonField<String> = source
+        @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
 
         /**
          * Returns the raw JSON value of [spectralFilters].
          *
-         * Unlike [spectralFilters], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [spectralFilters], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("spectralFilters")
         @ExcludeMissing
@@ -5547,7 +6179,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [spectralFilterSolarMag].
          *
-         * Unlike [spectralFilterSolarMag], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [spectralFilterSolarMag], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("spectralFilterSolarMag")
         @ExcludeMissing
@@ -5556,7 +6189,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [spectralZmfl].
          *
-         * Unlike [spectralZmfl], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [spectralZmfl], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("spectralZMFL")
         @ExcludeMissing
@@ -5574,7 +6208,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [sunElevation].
          *
-         * Unlike [sunElevation], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [sunElevation], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("sunElevation")
         @ExcludeMissing
@@ -5583,7 +6218,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [sunStatePosX].
          *
-         * Unlike [sunStatePosX], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [sunStatePosX], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("sunStatePosX")
         @ExcludeMissing
@@ -5592,7 +6228,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [sunStatePosY].
          *
-         * Unlike [sunStatePosY], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [sunStatePosY], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("sunStatePosY")
         @ExcludeMissing
@@ -5601,7 +6238,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [sunStatePosZ].
          *
-         * Unlike [sunStatePosZ], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [sunStatePosZ], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("sunStatePosZ")
         @ExcludeMissing
@@ -5610,7 +6248,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [sunStateVelX].
          *
-         * Unlike [sunStateVelX], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [sunStateVelX], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("sunStateVelX")
         @ExcludeMissing
@@ -5619,7 +6258,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [sunStateVelY].
          *
-         * Unlike [sunStateVelY], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [sunStateVelY], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("sunStateVelY")
         @ExcludeMissing
@@ -5628,7 +6268,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [sunStateVelZ].
          *
-         * Unlike [sunStateVelZ], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [sunStateVelZ], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("sunStateVelZ")
         @ExcludeMissing
@@ -5637,7 +6278,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [surfBrightness].
          *
-         * Unlike [surfBrightness], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [surfBrightness], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("surfBrightness")
         @ExcludeMissing
@@ -5646,7 +6288,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [surfBrightnessUnc].
          *
-         * Unlike [surfBrightnessUnc], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [surfBrightnessUnc], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("surfBrightnessUnc")
         @ExcludeMissing
@@ -5657,18 +6300,14 @@ class EoObservationFull private constructor(
          *
          * Unlike [timesUnc], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("timesUnc")
-        @ExcludeMissing
-        fun _timesUnc(): JsonField<Double> = timesUnc
+        @JsonProperty("timesUnc") @ExcludeMissing fun _timesUnc(): JsonField<Double> = timesUnc
 
         /**
          * Returns the raw JSON value of [toes].
          *
          * Unlike [toes], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("toes")
-        @ExcludeMissing
-        fun _toes(): JsonField<Double> = toes
+        @JsonProperty("toes") @ExcludeMissing fun _toes(): JsonField<Double> = toes
 
         /**
          * Returns the raw JSON value of [zeroPoints].
@@ -5682,7 +6321,8 @@ class EoObservationFull private constructor(
         /**
          * Returns the raw JSON value of [zeroPointsUnc].
          *
-         * Unlike [zeroPointsUnc], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [zeroPointsUnc], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("zeroPointsUnc")
         @ExcludeMissing
@@ -5690,20 +6330,20 @@ class EoObservationFull private constructor(
 
         @JsonAnySetter
         private fun putAdditionalProperty(key: String, value: JsonValue) {
-          additionalProperties.put(key, value)
+            additionalProperties.put(key, value)
         }
 
         @JsonAnyGetter
         @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
 
         fun toBuilder() = Builder().from(this)
 
         companion object {
 
             /** Returns a mutable builder for constructing an instance of [EoobservationDetails]. */
-            @JvmStatic
-            fun builder() = Builder()
+            @JvmStatic fun builder() = Builder()
         }
 
         /** A builder for [EoobservationDetails]. */
@@ -5795,93 +6435,103 @@ class EoObservationFull private constructor(
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
-            internal fun from(eoobservationDetails: EoobservationDetails) =
-                apply {
-                    acalCrPixX = eoobservationDetails.acalCrPixX
-                    acalCrPixY = eoobservationDetails.acalCrPixY
-                    acalCrValX = eoobservationDetails.acalCrValX
-                    acalCrValY = eoobservationDetails.acalCrValY
-                    acalNumStars = eoobservationDetails.acalNumStars
-                    backgroundSignal = eoobservationDetails.backgroundSignal
-                    backgroundSignalUnc = eoobservationDetails.backgroundSignalUnc
-                    binningHoriz = eoobservationDetails.binningHoriz
-                    binningVert = eoobservationDetails.binningVert
-                    ccdObjPosX = eoobservationDetails.ccdObjPosX
-                    ccdObjPosY = eoobservationDetails.ccdObjPosY
-                    ccdObjWidth = eoobservationDetails.ccdObjWidth
-                    ccdTemp = eoobservationDetails.ccdTemp
-                    centroidColumn = eoobservationDetails.centroidColumn
-                    centroidRow = eoobservationDetails.centroidRow
-                    classificationMarking = eoobservationDetails.classificationMarking
-                    colorCoeffs = eoobservationDetails.colorCoeffs.map { it.toMutableList() }
-                    columnVariance = eoobservationDetails.columnVariance
-                    createdAt = eoobservationDetails.createdAt
-                    createdBy = eoobservationDetails.createdBy
-                    currentNeutralDensityFilterNum = eoobservationDetails.currentNeutralDensityFilterNum
-                    currentSpectralFilterNum = eoobservationDetails.currentSpectralFilterNum
-                    dataMode = eoobservationDetails.dataMode
-                    declinationCov = eoobservationDetails.declinationCov
-                    distFromStreakCenter = eoobservationDetails.distFromStreakCenter.map { it.toMutableList() }
-                    does = eoobservationDetails.does
-                    extinctionCoeffs = eoobservationDetails.extinctionCoeffs.map { it.toMutableList() }
-                    extinctionCoeffsUnc = eoobservationDetails.extinctionCoeffsUnc.map { it.toMutableList() }
-                    gain = eoobservationDetails.gain
-                    idEoObservation = eoobservationDetails.idEoObservation
-                    ifov = eoobservationDetails.ifov
-                    magInstrumental = eoobservationDetails.magInstrumental
-                    magInstrumentalUnc = eoobservationDetails.magInstrumentalUnc
-                    neutralDensityFilterNames = eoobservationDetails.neutralDensityFilterNames.map { it.toMutableList() }
-                    neutralDensityFilterTransmissions = eoobservationDetails.neutralDensityFilterTransmissions.map { it.toMutableList() }
-                    neutralDensityFilterTransmissionsUnc = eoobservationDetails.neutralDensityFilterTransmissionsUnc.map { it.toMutableList() }
-                    numCatalogStars = eoobservationDetails.numCatalogStars
-                    numCorrelatedStars = eoobservationDetails.numCorrelatedStars
-                    numDetectedStars = eoobservationDetails.numDetectedStars
-                    numNeutralDensityFilters = eoobservationDetails.numNeutralDensityFilters
-                    numSpectralFilters = eoobservationDetails.numSpectralFilters
-                    objSunRange = eoobservationDetails.objSunRange
-                    obTime = eoobservationDetails.obTime
-                    opticalCrossSection = eoobservationDetails.opticalCrossSection
-                    opticalCrossSectionUnc = eoobservationDetails.opticalCrossSectionUnc
-                    pcalNumStars = eoobservationDetails.pcalNumStars
-                    peakApertureCount = eoobservationDetails.peakApertureCount
-                    peakBackgroundCount = eoobservationDetails.peakBackgroundCount
-                    phaseAngBisect = eoobservationDetails.phaseAngBisect
-                    pixelArrayHeight = eoobservationDetails.pixelArrayHeight
-                    pixelArrayWidth = eoobservationDetails.pixelArrayWidth
-                    pixelMax = eoobservationDetails.pixelMax
-                    pixelMin = eoobservationDetails.pixelMin
-                    predictedAzimuth = eoobservationDetails.predictedAzimuth
-                    predictedDeclination = eoobservationDetails.predictedDeclination
-                    predictedDeclinationUnc = eoobservationDetails.predictedDeclinationUnc
-                    predictedElevation = eoobservationDetails.predictedElevation
-                    predictedRa = eoobservationDetails.predictedRa
-                    predictedRaUnc = eoobservationDetails.predictedRaUnc
-                    raCov = eoobservationDetails.raCov
-                    raDeclinationCov = eoobservationDetails.raDeclinationCov
-                    rowColCov = eoobservationDetails.rowColCov
-                    rowVariance = eoobservationDetails.rowVariance
-                    snrEst = eoobservationDetails.snrEst
-                    solarDiskFrac = eoobservationDetails.solarDiskFrac
-                    source = eoobservationDetails.source
-                    spectralFilters = eoobservationDetails.spectralFilters.map { it.toMutableList() }
-                    spectralFilterSolarMag = eoobservationDetails.spectralFilterSolarMag.map { it.toMutableList() }
-                    spectralZmfl = eoobservationDetails.spectralZmfl.map { it.toMutableList() }
-                    sunAzimuth = eoobservationDetails.sunAzimuth
-                    sunElevation = eoobservationDetails.sunElevation
-                    sunStatePosX = eoobservationDetails.sunStatePosX
-                    sunStatePosY = eoobservationDetails.sunStatePosY
-                    sunStatePosZ = eoobservationDetails.sunStatePosZ
-                    sunStateVelX = eoobservationDetails.sunStateVelX
-                    sunStateVelY = eoobservationDetails.sunStateVelY
-                    sunStateVelZ = eoobservationDetails.sunStateVelZ
-                    surfBrightness = eoobservationDetails.surfBrightness.map { it.toMutableList() }
-                    surfBrightnessUnc = eoobservationDetails.surfBrightnessUnc.map { it.toMutableList() }
-                    timesUnc = eoobservationDetails.timesUnc
-                    toes = eoobservationDetails.toes
-                    zeroPoints = eoobservationDetails.zeroPoints.map { it.toMutableList() }
-                    zeroPointsUnc = eoobservationDetails.zeroPointsUnc.map { it.toMutableList() }
-                    additionalProperties = eoobservationDetails.additionalProperties.toMutableMap()
-                }
+            internal fun from(eoobservationDetails: EoobservationDetails) = apply {
+                acalCrPixX = eoobservationDetails.acalCrPixX
+                acalCrPixY = eoobservationDetails.acalCrPixY
+                acalCrValX = eoobservationDetails.acalCrValX
+                acalCrValY = eoobservationDetails.acalCrValY
+                acalNumStars = eoobservationDetails.acalNumStars
+                backgroundSignal = eoobservationDetails.backgroundSignal
+                backgroundSignalUnc = eoobservationDetails.backgroundSignalUnc
+                binningHoriz = eoobservationDetails.binningHoriz
+                binningVert = eoobservationDetails.binningVert
+                ccdObjPosX = eoobservationDetails.ccdObjPosX
+                ccdObjPosY = eoobservationDetails.ccdObjPosY
+                ccdObjWidth = eoobservationDetails.ccdObjWidth
+                ccdTemp = eoobservationDetails.ccdTemp
+                centroidColumn = eoobservationDetails.centroidColumn
+                centroidRow = eoobservationDetails.centroidRow
+                classificationMarking = eoobservationDetails.classificationMarking
+                colorCoeffs = eoobservationDetails.colorCoeffs.map { it.toMutableList() }
+                columnVariance = eoobservationDetails.columnVariance
+                createdAt = eoobservationDetails.createdAt
+                createdBy = eoobservationDetails.createdBy
+                currentNeutralDensityFilterNum = eoobservationDetails.currentNeutralDensityFilterNum
+                currentSpectralFilterNum = eoobservationDetails.currentSpectralFilterNum
+                dataMode = eoobservationDetails.dataMode
+                declinationCov = eoobservationDetails.declinationCov
+                distFromStreakCenter =
+                    eoobservationDetails.distFromStreakCenter.map { it.toMutableList() }
+                does = eoobservationDetails.does
+                extinctionCoeffs = eoobservationDetails.extinctionCoeffs.map { it.toMutableList() }
+                extinctionCoeffsUnc =
+                    eoobservationDetails.extinctionCoeffsUnc.map { it.toMutableList() }
+                gain = eoobservationDetails.gain
+                idEoObservation = eoobservationDetails.idEoObservation
+                ifov = eoobservationDetails.ifov
+                magInstrumental = eoobservationDetails.magInstrumental
+                magInstrumentalUnc = eoobservationDetails.magInstrumentalUnc
+                neutralDensityFilterNames =
+                    eoobservationDetails.neutralDensityFilterNames.map { it.toMutableList() }
+                neutralDensityFilterTransmissions =
+                    eoobservationDetails.neutralDensityFilterTransmissions.map {
+                        it.toMutableList()
+                    }
+                neutralDensityFilterTransmissionsUnc =
+                    eoobservationDetails.neutralDensityFilterTransmissionsUnc.map {
+                        it.toMutableList()
+                    }
+                numCatalogStars = eoobservationDetails.numCatalogStars
+                numCorrelatedStars = eoobservationDetails.numCorrelatedStars
+                numDetectedStars = eoobservationDetails.numDetectedStars
+                numNeutralDensityFilters = eoobservationDetails.numNeutralDensityFilters
+                numSpectralFilters = eoobservationDetails.numSpectralFilters
+                objSunRange = eoobservationDetails.objSunRange
+                obTime = eoobservationDetails.obTime
+                opticalCrossSection = eoobservationDetails.opticalCrossSection
+                opticalCrossSectionUnc = eoobservationDetails.opticalCrossSectionUnc
+                pcalNumStars = eoobservationDetails.pcalNumStars
+                peakApertureCount = eoobservationDetails.peakApertureCount
+                peakBackgroundCount = eoobservationDetails.peakBackgroundCount
+                phaseAngBisect = eoobservationDetails.phaseAngBisect
+                pixelArrayHeight = eoobservationDetails.pixelArrayHeight
+                pixelArrayWidth = eoobservationDetails.pixelArrayWidth
+                pixelMax = eoobservationDetails.pixelMax
+                pixelMin = eoobservationDetails.pixelMin
+                predictedAzimuth = eoobservationDetails.predictedAzimuth
+                predictedDeclination = eoobservationDetails.predictedDeclination
+                predictedDeclinationUnc = eoobservationDetails.predictedDeclinationUnc
+                predictedElevation = eoobservationDetails.predictedElevation
+                predictedRa = eoobservationDetails.predictedRa
+                predictedRaUnc = eoobservationDetails.predictedRaUnc
+                raCov = eoobservationDetails.raCov
+                raDeclinationCov = eoobservationDetails.raDeclinationCov
+                rowColCov = eoobservationDetails.rowColCov
+                rowVariance = eoobservationDetails.rowVariance
+                snrEst = eoobservationDetails.snrEst
+                solarDiskFrac = eoobservationDetails.solarDiskFrac
+                source = eoobservationDetails.source
+                spectralFilters = eoobservationDetails.spectralFilters.map { it.toMutableList() }
+                spectralFilterSolarMag =
+                    eoobservationDetails.spectralFilterSolarMag.map { it.toMutableList() }
+                spectralZmfl = eoobservationDetails.spectralZmfl.map { it.toMutableList() }
+                sunAzimuth = eoobservationDetails.sunAzimuth
+                sunElevation = eoobservationDetails.sunElevation
+                sunStatePosX = eoobservationDetails.sunStatePosX
+                sunStatePosY = eoobservationDetails.sunStatePosY
+                sunStatePosZ = eoobservationDetails.sunStatePosZ
+                sunStateVelX = eoobservationDetails.sunStateVelX
+                sunStateVelY = eoobservationDetails.sunStateVelY
+                sunStateVelZ = eoobservationDetails.sunStateVelZ
+                surfBrightness = eoobservationDetails.surfBrightness.map { it.toMutableList() }
+                surfBrightnessUnc =
+                    eoobservationDetails.surfBrightnessUnc.map { it.toMutableList() }
+                timesUnc = eoobservationDetails.timesUnc
+                toes = eoobservationDetails.toes
+                zeroPoints = eoobservationDetails.zeroPoints.map { it.toMutableList() }
+                zeroPointsUnc = eoobservationDetails.zeroPointsUnc.map { it.toMutableList() }
+                additionalProperties = eoobservationDetails.additionalProperties.toMutableMap()
+            }
 
             /** World Coordinate System (WCS) X pixel origin in astrometric fit. */
             fun acalCrPixX(acalCrPixX: Double) = acalCrPixX(JsonField.of(acalCrPixX))
@@ -5889,13 +6539,11 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.acalCrPixX] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.acalCrPixX] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.acalCrPixX] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun acalCrPixX(acalCrPixX: JsonField<Double>) =
-                apply {
-                    this.acalCrPixX = acalCrPixX
-                }
+            fun acalCrPixX(acalCrPixX: JsonField<Double>) = apply { this.acalCrPixX = acalCrPixX }
 
             /** World Coordinate System (WCS) Y pixel origin in astrometric fit. */
             fun acalCrPixY(acalCrPixY: Double) = acalCrPixY(JsonField.of(acalCrPixY))
@@ -5903,41 +6551,41 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.acalCrPixY] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.acalCrPixY] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.acalCrPixY] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun acalCrPixY(acalCrPixY: JsonField<Double>) =
-                apply {
-                    this.acalCrPixY = acalCrPixY
-                }
+            fun acalCrPixY(acalCrPixY: JsonField<Double>) = apply { this.acalCrPixY = acalCrPixY }
 
-            /** World Coordinate System (WCS) equatorial coordinate X origin corresponding to CRPIX in astrometric fit in degrees. */
+            /**
+             * World Coordinate System (WCS) equatorial coordinate X origin corresponding to CRPIX
+             * in astrometric fit in degrees.
+             */
             fun acalCrValX(acalCrValX: Double) = acalCrValX(JsonField.of(acalCrValX))
 
             /**
              * Sets [Builder.acalCrValX] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.acalCrValX] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.acalCrValX] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun acalCrValX(acalCrValX: JsonField<Double>) =
-                apply {
-                    this.acalCrValX = acalCrValX
-                }
+            fun acalCrValX(acalCrValX: JsonField<Double>) = apply { this.acalCrValX = acalCrValX }
 
-            /** World Coordinate System (WCS) equatorial coordinate Y origin corresponding to CRPIX in astrometric fit in degrees. */
+            /**
+             * World Coordinate System (WCS) equatorial coordinate Y origin corresponding to CRPIX
+             * in astrometric fit in degrees.
+             */
             fun acalCrValY(acalCrValY: Double) = acalCrValY(JsonField.of(acalCrValY))
 
             /**
              * Sets [Builder.acalCrValY] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.acalCrValY] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.acalCrValY] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun acalCrValY(acalCrValY: JsonField<Double>) =
-                apply {
-                    this.acalCrValY = acalCrValY
-                }
+            fun acalCrValY(acalCrValY: JsonField<Double>) = apply { this.acalCrValY = acalCrValY }
 
             /** Number of stars used in astrometric fit. */
             fun acalNumStars(acalNumStars: Long) = acalNumStars(JsonField.of(acalNumStars))
@@ -5945,41 +6593,51 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.acalNumStars] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.acalNumStars] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.acalNumStars] with a well-typed [Long] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun acalNumStars(acalNumStars: JsonField<Long>) =
-                apply {
-                    this.acalNumStars = acalNumStars
-                }
+            fun acalNumStars(acalNumStars: JsonField<Long>) = apply {
+                this.acalNumStars = acalNumStars
+            }
 
-            /** This is the background signal at or in the vicinity of the radiometric source position. Specifically, this is the average background count level (DN/pixel) divided by the exposure time in seconds of the background pixels used in the photometric extraction. DN/pixel/sec. */
-            fun backgroundSignal(backgroundSignal: Double) = backgroundSignal(JsonField.of(backgroundSignal))
+            /**
+             * This is the background signal at or in the vicinity of the radiometric source
+             * position. Specifically, this is the average background count level (DN/pixel) divided
+             * by the exposure time in seconds of the background pixels used in the photometric
+             * extraction. DN/pixel/sec.
+             */
+            fun backgroundSignal(backgroundSignal: Double) =
+                backgroundSignal(JsonField.of(backgroundSignal))
 
             /**
              * Sets [Builder.backgroundSignal] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.backgroundSignal] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.backgroundSignal] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun backgroundSignal(backgroundSignal: JsonField<Double>) =
-                apply {
-                    this.backgroundSignal = backgroundSignal
-                }
+            fun backgroundSignal(backgroundSignal: JsonField<Double>) = apply {
+                this.backgroundSignal = backgroundSignal
+            }
 
-            /** Estimated 1-sigma uncertainty in the background signal at or in the vicinity of the radiometric source position. DN/pixel/sec. */
-            fun backgroundSignalUnc(backgroundSignalUnc: Double) = backgroundSignalUnc(JsonField.of(backgroundSignalUnc))
+            /**
+             * Estimated 1-sigma uncertainty in the background signal at or in the vicinity of the
+             * radiometric source position. DN/pixel/sec.
+             */
+            fun backgroundSignalUnc(backgroundSignalUnc: Double) =
+                backgroundSignalUnc(JsonField.of(backgroundSignalUnc))
 
             /**
              * Sets [Builder.backgroundSignalUnc] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.backgroundSignalUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.backgroundSignalUnc] with a well-typed [Double]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun backgroundSignalUnc(backgroundSignalUnc: JsonField<Double>) =
-                apply {
-                    this.backgroundSignalUnc = backgroundSignalUnc
-                }
+            fun backgroundSignalUnc(backgroundSignalUnc: JsonField<Double>) = apply {
+                this.backgroundSignalUnc = backgroundSignalUnc
+            }
 
             /** The number of pixels binned horizontally. */
             fun binningHoriz(binningHoriz: Long) = binningHoriz(JsonField.of(binningHoriz))
@@ -5987,13 +6645,13 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.binningHoriz] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.binningHoriz] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.binningHoriz] with a well-typed [Long] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun binningHoriz(binningHoriz: JsonField<Long>) =
-                apply {
-                    this.binningHoriz = binningHoriz
-                }
+            fun binningHoriz(binningHoriz: JsonField<Long>) = apply {
+                this.binningHoriz = binningHoriz
+            }
 
             /** The number of pixels binned vertically. */
             fun binningVert(binningVert: Long) = binningVert(JsonField.of(binningVert))
@@ -6001,13 +6659,11 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.binningVert] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.binningVert] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.binningVert] with a well-typed [Long] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun binningVert(binningVert: JsonField<Long>) =
-                apply {
-                    this.binningVert = binningVert
-                }
+            fun binningVert(binningVert: JsonField<Long>) = apply { this.binningVert = binningVert }
 
             /** The x centroid position on the CCD of the target object in pixels. */
             fun ccdObjPosX(ccdObjPosX: Double) = ccdObjPosX(JsonField.of(ccdObjPosX))
@@ -6015,13 +6671,11 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.ccdObjPosX] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.ccdObjPosX] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.ccdObjPosX] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun ccdObjPosX(ccdObjPosX: JsonField<Double>) =
-                apply {
-                    this.ccdObjPosX = ccdObjPosX
-                }
+            fun ccdObjPosX(ccdObjPosX: JsonField<Double>) = apply { this.ccdObjPosX = ccdObjPosX }
 
             /** The y centroid position on the CCD of the target object in pixels. */
             fun ccdObjPosY(ccdObjPosY: Double) = ccdObjPosY(JsonField.of(ccdObjPosY))
@@ -6029,123 +6683,144 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.ccdObjPosY] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.ccdObjPosY] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.ccdObjPosY] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun ccdObjPosY(ccdObjPosY: JsonField<Double>) =
-                apply {
-                    this.ccdObjPosY = ccdObjPosY
-                }
+            fun ccdObjPosY(ccdObjPosY: JsonField<Double>) = apply { this.ccdObjPosY = ccdObjPosY }
 
-            /** This is the pixel width of the target. This is either a frame-by-frame measurement or a constant point spread function or synthetic aperture used in the extraction. */
+            /**
+             * This is the pixel width of the target. This is either a frame-by-frame measurement or
+             * a constant point spread function or synthetic aperture used in the extraction.
+             */
             fun ccdObjWidth(ccdObjWidth: Double) = ccdObjWidth(JsonField.of(ccdObjWidth))
 
             /**
              * Sets [Builder.ccdObjWidth] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.ccdObjWidth] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.ccdObjWidth] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun ccdObjWidth(ccdObjWidth: JsonField<Double>) =
-                apply {
-                    this.ccdObjWidth = ccdObjWidth
-                }
+            fun ccdObjWidth(ccdObjWidth: JsonField<Double>) = apply {
+                this.ccdObjWidth = ccdObjWidth
+            }
 
-            /** Operating temperature of CCD recorded during exposure or measured during calibrations in K. */
+            /**
+             * Operating temperature of CCD recorded during exposure or measured during calibrations
+             * in K.
+             */
             fun ccdTemp(ccdTemp: Double) = ccdTemp(JsonField.of(ccdTemp))
 
             /**
              * Sets [Builder.ccdTemp] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.ccdTemp] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.ccdTemp] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun ccdTemp(ccdTemp: JsonField<Double>) =
-                apply {
-                    this.ccdTemp = ccdTemp
-                }
+            fun ccdTemp(ccdTemp: JsonField<Double>) = apply { this.ccdTemp = ccdTemp }
 
-            /** Observed centroid column number on the focal plane in pixels (0 is left edge, 0.5 is center of pixels along left of image). */
-            fun centroidColumn(centroidColumn: Double) = centroidColumn(JsonField.of(centroidColumn))
+            /**
+             * Observed centroid column number on the focal plane in pixels (0 is left edge, 0.5 is
+             * center of pixels along left of image).
+             */
+            fun centroidColumn(centroidColumn: Double) =
+                centroidColumn(JsonField.of(centroidColumn))
 
             /**
              * Sets [Builder.centroidColumn] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.centroidColumn] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.centroidColumn] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun centroidColumn(centroidColumn: JsonField<Double>) =
-                apply {
-                    this.centroidColumn = centroidColumn
-                }
+            fun centroidColumn(centroidColumn: JsonField<Double>) = apply {
+                this.centroidColumn = centroidColumn
+            }
 
-            /** Observed centroid row number on the focal plane in pixels (0 is top edge, 0.5 is center of pixels along top of image). */
+            /**
+             * Observed centroid row number on the focal plane in pixels (0 is top edge, 0.5 is
+             * center of pixels along top of image).
+             */
             fun centroidRow(centroidRow: Double) = centroidRow(JsonField.of(centroidRow))
 
             /**
              * Sets [Builder.centroidRow] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.centroidRow] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.centroidRow] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun centroidRow(centroidRow: JsonField<Double>) =
-                apply {
-                    this.centroidRow = centroidRow
-                }
+            fun centroidRow(centroidRow: JsonField<Double>) = apply {
+                this.centroidRow = centroidRow
+            }
 
-            /** Classification marking of the data in IC/CAPCO Portion-marked format, will be set to EOObservation classificationMarking if blank. */
-            fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
+            /**
+             * Classification marking of the data in IC/CAPCO Portion-marked format, will be set to
+             * EOObservation classificationMarking if blank.
+             */
+            fun classificationMarking(classificationMarking: String) =
+                classificationMarking(JsonField.of(classificationMarking))
 
             /**
              * Sets [Builder.classificationMarking] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.classificationMarking] with a well-typed [String]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun classificationMarking(classificationMarking: JsonField<String>) =
-                apply {
-                    this.classificationMarking = classificationMarking
-                }
+            fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+                this.classificationMarking = classificationMarking
+            }
 
-            /** Color coefficient for filter n for a space-based sensor where there is no atmospheric extinction. Must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n. */
+            /**
+             * Color coefficient for filter n for a space-based sensor where there is no atmospheric
+             * extinction. Must be present for all values n=1 to numSpectralFilters, in incrementing
+             * order of n, and for no other values of n.
+             */
             fun colorCoeffs(colorCoeffs: List<Double>) = colorCoeffs(JsonField.of(colorCoeffs))
 
             /**
              * Sets [Builder.colorCoeffs] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.colorCoeffs] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.colorCoeffs] with a well-typed `List<Double>` value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun colorCoeffs(colorCoeffs: JsonField<List<Double>>) =
-                apply {
-                    this.colorCoeffs = colorCoeffs.map { it.toMutableList() }
-                }
+            fun colorCoeffs(colorCoeffs: JsonField<List<Double>>) = apply {
+                this.colorCoeffs = colorCoeffs.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [colorCoeffs].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addColorCoeff(colorCoeff: Double) =
-                apply {
-                    colorCoeffs = (colorCoeffs ?: JsonField.of(mutableListOf())).also {
+            fun addColorCoeff(colorCoeff: Double) = apply {
+                colorCoeffs =
+                    (colorCoeffs ?: JsonField.of(mutableListOf())).also {
                         checkKnown("colorCoeffs", it).add(colorCoeff)
                     }
-                }
+            }
 
-            /** Spatial variance of image distribution in horizontal direction measured in pixels squared. */
-            fun columnVariance(columnVariance: Double) = columnVariance(JsonField.of(columnVariance))
+            /**
+             * Spatial variance of image distribution in horizontal direction measured in pixels
+             * squared.
+             */
+            fun columnVariance(columnVariance: Double) =
+                columnVariance(JsonField.of(columnVariance))
 
             /**
              * Sets [Builder.columnVariance] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.columnVariance] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.columnVariance] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun columnVariance(columnVariance: JsonField<Double>) =
-                apply {
-                    this.columnVariance = columnVariance
-                }
+            fun columnVariance(columnVariance: JsonField<Double>) = apply {
+                this.columnVariance = columnVariance
+            }
 
             /** Time the row was created in the database, auto-populated by the system. */
             fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -6153,66 +6828,80 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.createdAt] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdAt(createdAt: JsonField<OffsetDateTime>) =
-                apply {
-                    this.createdAt = createdAt
-                }
+            fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply {
+                this.createdAt = createdAt
+            }
 
-            /** Application user who created the row in the database, auto-populated by the system. */
+            /**
+             * Application user who created the row in the database, auto-populated by the system.
+             */
             fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
 
             /**
              * Sets [Builder.createdBy] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdBy(createdBy: JsonField<String>) =
-                apply {
-                    this.createdBy = createdBy
-                }
+            fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
-            /** The reference number n, in neutralDensityFilters for the currently used neutral density filter. */
-            fun currentNeutralDensityFilterNum(currentNeutralDensityFilterNum: Long) = currentNeutralDensityFilterNum(JsonField.of(currentNeutralDensityFilterNum))
+            /**
+             * The reference number n, in neutralDensityFilters for the currently used neutral
+             * density filter.
+             */
+            fun currentNeutralDensityFilterNum(currentNeutralDensityFilterNum: Long) =
+                currentNeutralDensityFilterNum(JsonField.of(currentNeutralDensityFilterNum))
 
             /**
              * Sets [Builder.currentNeutralDensityFilterNum] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.currentNeutralDensityFilterNum] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.currentNeutralDensityFilterNum] with a well-typed
+             * [Long] value instead. This method is primarily for setting the field to an
+             * undocumented or not yet supported value.
              */
             fun currentNeutralDensityFilterNum(currentNeutralDensityFilterNum: JsonField<Long>) =
                 apply {
                     this.currentNeutralDensityFilterNum = currentNeutralDensityFilterNum
                 }
 
-            /** The reference number, x, where x ranges from 1 to n, where n is the number specified in spectralFilters that corresponds to the spectral filter given in the corresponding spectralFilterNames. */
-            fun currentSpectralFilterNum(currentSpectralFilterNum: Long) = currentSpectralFilterNum(JsonField.of(currentSpectralFilterNum))
+            /**
+             * The reference number, x, where x ranges from 1 to n, where n is the number specified
+             * in spectralFilters that corresponds to the spectral filter given in the corresponding
+             * spectralFilterNames.
+             */
+            fun currentSpectralFilterNum(currentSpectralFilterNum: Long) =
+                currentSpectralFilterNum(JsonField.of(currentSpectralFilterNum))
 
             /**
              * Sets [Builder.currentSpectralFilterNum] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.currentSpectralFilterNum] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.currentSpectralFilterNum] with a well-typed [Long]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun currentSpectralFilterNum(currentSpectralFilterNum: JsonField<Long>) =
-                apply {
-                    this.currentSpectralFilterNum = currentSpectralFilterNum
-                }
+            fun currentSpectralFilterNum(currentSpectralFilterNum: JsonField<Long>) = apply {
+                this.currentSpectralFilterNum = currentSpectralFilterNum
+            }
 
             /**
              * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
              *
-             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may
+             * include both real and simulated data.
              *
-             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events,
+             * and analysis.
              *
              * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
              *
-             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+             * requirements, and for validating technical, functional, and performance
+             * characteristics.
              *
              * , will be set to EOObservation dataMode if blank.
              */
@@ -6221,53 +6910,58 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.dataMode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun dataMode(dataMode: JsonField<DataMode>) =
-                apply {
-                    this.dataMode = dataMode
-                }
+            fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
 
             /** Covariance (Y^2) in measured declination (Y) in deg^2. */
-            fun declinationCov(declinationCov: Double) = declinationCov(JsonField.of(declinationCov))
+            fun declinationCov(declinationCov: Double) =
+                declinationCov(JsonField.of(declinationCov))
 
             /**
              * Sets [Builder.declinationCov] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.declinationCov] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.declinationCov] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun declinationCov(declinationCov: JsonField<Double>) =
-                apply {
-                    this.declinationCov = declinationCov
-                }
+            fun declinationCov(declinationCov: JsonField<Double>) = apply {
+                this.declinationCov = declinationCov
+            }
 
-            /** An array of measurements that correspond to the distance from the streak center measured from the optical image in pixels that show change over an interval of time. The array length is dependent on the length of the streak. The distFromStreakCenter, surfBrightness, and surfBrightnessUnc arrays will match in size. */
-            fun distFromStreakCenter(distFromStreakCenter: List<Double>) = distFromStreakCenter(JsonField.of(distFromStreakCenter))
+            /**
+             * An array of measurements that correspond to the distance from the streak center
+             * measured from the optical image in pixels that show change over an interval of time.
+             * The array length is dependent on the length of the streak. The distFromStreakCenter,
+             * surfBrightness, and surfBrightnessUnc arrays will match in size.
+             */
+            fun distFromStreakCenter(distFromStreakCenter: List<Double>) =
+                distFromStreakCenter(JsonField.of(distFromStreakCenter))
 
             /**
              * Sets [Builder.distFromStreakCenter] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.distFromStreakCenter] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.distFromStreakCenter] with a well-typed
+             * `List<Double>` value instead. This method is primarily for setting the field to an
+             * undocumented or not yet supported value.
              */
-            fun distFromStreakCenter(distFromStreakCenter: JsonField<List<Double>>) =
-                apply {
-                    this.distFromStreakCenter = distFromStreakCenter.map { it.toMutableList() }
-                }
+            fun distFromStreakCenter(distFromStreakCenter: JsonField<List<Double>>) = apply {
+                this.distFromStreakCenter = distFromStreakCenter.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [Builder.distFromStreakCenter].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addDistFromStreakCenter(distFromStreakCenter: Double) =
-                apply {
-                    this.distFromStreakCenter = (this.distFromStreakCenter ?: JsonField.of(mutableListOf())).also {
+            fun addDistFromStreakCenter(distFromStreakCenter: Double) = apply {
+                this.distFromStreakCenter =
+                    (this.distFromStreakCenter ?: JsonField.of(mutableListOf())).also {
                         checkKnown("distFromStreakCenter", it).add(distFromStreakCenter)
                     }
-                }
+            }
 
             /** Angle off element set reported in degrees. */
             fun does(does: Double) = does(JsonField.of(does))
@@ -6275,93 +6969,103 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.does] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.does] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.does] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun does(does: JsonField<Double>) =
-                apply {
-                    this.does = does
-                }
+            fun does(does: JsonField<Double>) = apply { this.does = does }
 
-            /** The extinction coefficient computed for the nth filter. Must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n. Units = mag/airmass. */
-            fun extinctionCoeffs(extinctionCoeffs: List<Double>) = extinctionCoeffs(JsonField.of(extinctionCoeffs))
+            /**
+             * The extinction coefficient computed for the nth filter. Must be present for all
+             * values n=1 to numSpectralFilters, in incrementing order of n, and for no other values
+             * of n. Units = mag/airmass.
+             */
+            fun extinctionCoeffs(extinctionCoeffs: List<Double>) =
+                extinctionCoeffs(JsonField.of(extinctionCoeffs))
 
             /**
              * Sets [Builder.extinctionCoeffs] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.extinctionCoeffs] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.extinctionCoeffs] with a well-typed `List<Double>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun extinctionCoeffs(extinctionCoeffs: JsonField<List<Double>>) =
-                apply {
-                    this.extinctionCoeffs = extinctionCoeffs.map { it.toMutableList() }
-                }
+            fun extinctionCoeffs(extinctionCoeffs: JsonField<List<Double>>) = apply {
+                this.extinctionCoeffs = extinctionCoeffs.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [extinctionCoeffs].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addExtinctionCoeff(extinctionCoeff: Double) =
-                apply {
-                    extinctionCoeffs = (extinctionCoeffs ?: JsonField.of(mutableListOf())).also {
+            fun addExtinctionCoeff(extinctionCoeff: Double) = apply {
+                extinctionCoeffs =
+                    (extinctionCoeffs ?: JsonField.of(mutableListOf())).also {
                         checkKnown("extinctionCoeffs", it).add(extinctionCoeff)
                     }
-                }
+            }
 
-            /** This is the uncertainty in the extinction coefficient for the nth filter. Must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n. -9999 for space-based sensors. Units = mag/airmass. */
-            fun extinctionCoeffsUnc(extinctionCoeffsUnc: List<Double>) = extinctionCoeffsUnc(JsonField.of(extinctionCoeffsUnc))
+            /**
+             * This is the uncertainty in the extinction coefficient for the nth filter. Must be
+             * present for all values n=1 to numSpectralFilters, in incrementing order of n, and for
+             * no other values of n. -9999 for space-based sensors. Units = mag/airmass.
+             */
+            fun extinctionCoeffsUnc(extinctionCoeffsUnc: List<Double>) =
+                extinctionCoeffsUnc(JsonField.of(extinctionCoeffsUnc))
 
             /**
              * Sets [Builder.extinctionCoeffsUnc] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.extinctionCoeffsUnc] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.extinctionCoeffsUnc] with a well-typed
+             * `List<Double>` value instead. This method is primarily for setting the field to an
+             * undocumented or not yet supported value.
              */
-            fun extinctionCoeffsUnc(extinctionCoeffsUnc: JsonField<List<Double>>) =
-                apply {
-                    this.extinctionCoeffsUnc = extinctionCoeffsUnc.map { it.toMutableList() }
-                }
+            fun extinctionCoeffsUnc(extinctionCoeffsUnc: JsonField<List<Double>>) = apply {
+                this.extinctionCoeffsUnc = extinctionCoeffsUnc.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [Builder.extinctionCoeffsUnc].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addExtinctionCoeffsUnc(extinctionCoeffsUnc: Double) =
-                apply {
-                    this.extinctionCoeffsUnc = (this.extinctionCoeffsUnc ?: JsonField.of(mutableListOf())).also {
+            fun addExtinctionCoeffsUnc(extinctionCoeffsUnc: Double) = apply {
+                this.extinctionCoeffsUnc =
+                    (this.extinctionCoeffsUnc ?: JsonField.of(mutableListOf())).also {
                         checkKnown("extinctionCoeffsUnc", it).add(extinctionCoeffsUnc)
                     }
-                }
+            }
 
-            /** Some sensors have gain settings. This value is the gain used during the observation in units e-/ADU. If no gain is used, the value = 1. */
+            /**
+             * Some sensors have gain settings. This value is the gain used during the observation
+             * in units e-/ADU. If no gain is used, the value = 1.
+             */
             fun gain(gain: Double) = gain(JsonField.of(gain))
 
             /**
              * Sets [Builder.gain] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.gain] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.gain] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun gain(gain: JsonField<Double>) =
-                apply {
-                    this.gain = gain
-                }
+            fun gain(gain: JsonField<Double>) = apply { this.gain = gain }
 
             /** Unique identifier of the parent EOObservation. */
-            fun idEoObservation(idEoObservation: String) = idEoObservation(JsonField.of(idEoObservation))
+            fun idEoObservation(idEoObservation: String) =
+                idEoObservation(JsonField.of(idEoObservation))
 
             /**
              * Sets [Builder.idEoObservation] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.idEoObservation] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.idEoObservation] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun idEoObservation(idEoObservation: JsonField<String>) =
-                apply {
-                    this.idEoObservation = idEoObservation
-                }
+            fun idEoObservation(idEoObservation: JsonField<String>) = apply {
+                this.idEoObservation = idEoObservation
+            }
 
             /** Sensor instantaneous field of view (ratio of pixel pitch to focal length). */
             fun ifov(ifov: Double) = ifov(JsonField.of(ifov))
@@ -6369,54 +7073,63 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.ifov] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.ifov] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.ifov] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun ifov(ifov: JsonField<Double>) =
-                apply {
-                    this.ifov = ifov
-                }
+            fun ifov(ifov: JsonField<Double>) = apply { this.ifov = ifov }
 
-            /** Instrumental magnitude of a sensor before corrections are applied for atmosphere or to transform to standard magnitude scale. */
-            fun magInstrumental(magInstrumental: Double) = magInstrumental(JsonField.of(magInstrumental))
+            /**
+             * Instrumental magnitude of a sensor before corrections are applied for atmosphere or
+             * to transform to standard magnitude scale.
+             */
+            fun magInstrumental(magInstrumental: Double) =
+                magInstrumental(JsonField.of(magInstrumental))
 
             /**
              * Sets [Builder.magInstrumental] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.magInstrumental] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.magInstrumental] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun magInstrumental(magInstrumental: JsonField<Double>) =
-                apply {
-                    this.magInstrumental = magInstrumental
-                }
+            fun magInstrumental(magInstrumental: JsonField<Double>) = apply {
+                this.magInstrumental = magInstrumental
+            }
 
             /** Uncertainty in the instrumental magnitude. */
-            fun magInstrumentalUnc(magInstrumentalUnc: Double) = magInstrumentalUnc(JsonField.of(magInstrumentalUnc))
+            fun magInstrumentalUnc(magInstrumentalUnc: Double) =
+                magInstrumentalUnc(JsonField.of(magInstrumentalUnc))
 
             /**
              * Sets [Builder.magInstrumentalUnc] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.magInstrumentalUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.magInstrumentalUnc] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun magInstrumentalUnc(magInstrumentalUnc: JsonField<Double>) =
-                apply {
-                    this.magInstrumentalUnc = magInstrumentalUnc
-                }
+            fun magInstrumentalUnc(magInstrumentalUnc: JsonField<Double>) = apply {
+                this.magInstrumentalUnc = magInstrumentalUnc
+            }
 
-            /** Must be present for all values n=1 to numNeutralDensityFilters, in incrementing order of n, and for no other values of n. */
-            fun neutralDensityFilterNames(neutralDensityFilterNames: List<String>) = neutralDensityFilterNames(JsonField.of(neutralDensityFilterNames))
+            /**
+             * Must be present for all values n=1 to numNeutralDensityFilters, in incrementing order
+             * of n, and for no other values of n.
+             */
+            fun neutralDensityFilterNames(neutralDensityFilterNames: List<String>) =
+                neutralDensityFilterNames(JsonField.of(neutralDensityFilterNames))
 
             /**
              * Sets [Builder.neutralDensityFilterNames] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.neutralDensityFilterNames] with a well-typed `List<String>` value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.neutralDensityFilterNames] with a well-typed
+             * `List<String>` value instead. This method is primarily for setting the field to an
+             * undocumented or not yet supported value.
              */
             fun neutralDensityFilterNames(neutralDensityFilterNames: JsonField<List<String>>) =
                 apply {
-                    this.neutralDensityFilterNames = neutralDensityFilterNames.map { it.toMutableList() }
+                    this.neutralDensityFilterNames =
+                        neutralDensityFilterNames.map { it.toMutableList() }
                 }
 
             /**
@@ -6424,26 +7137,34 @@ class EoObservationFull private constructor(
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addNeutralDensityFilterName(neutralDensityFilterName: String) =
-                apply {
-                    neutralDensityFilterNames = (neutralDensityFilterNames ?: JsonField.of(mutableListOf())).also {
+            fun addNeutralDensityFilterName(neutralDensityFilterName: String) = apply {
+                neutralDensityFilterNames =
+                    (neutralDensityFilterNames ?: JsonField.of(mutableListOf())).also {
                         checkKnown("neutralDensityFilterNames", it).add(neutralDensityFilterName)
                     }
-                }
+            }
 
-            /** The transmission of the nth neutral density filter. Must be present for all values n=1 to numNeutralDensityFilters, in incrementing order of n, and for no other values of n. */
-            fun neutralDensityFilterTransmissions(neutralDensityFilterTransmissions: List<Double>) = neutralDensityFilterTransmissions(JsonField.of(neutralDensityFilterTransmissions))
+            /**
+             * The transmission of the nth neutral density filter. Must be present for all values
+             * n=1 to numNeutralDensityFilters, in incrementing order of n, and for no other values
+             * of n.
+             */
+            fun neutralDensityFilterTransmissions(neutralDensityFilterTransmissions: List<Double>) =
+                neutralDensityFilterTransmissions(JsonField.of(neutralDensityFilterTransmissions))
 
             /**
              * Sets [Builder.neutralDensityFilterTransmissions] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.neutralDensityFilterTransmissions] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.neutralDensityFilterTransmissions] with a well-typed
+             * `List<Double>` value instead. This method is primarily for setting the field to an
+             * undocumented or not yet supported value.
              */
-            fun neutralDensityFilterTransmissions(neutralDensityFilterTransmissions: JsonField<List<Double>>) =
-                apply {
-                    this.neutralDensityFilterTransmissions = neutralDensityFilterTransmissions.map { it.toMutableList() }
-                }
+            fun neutralDensityFilterTransmissions(
+                neutralDensityFilterTransmissions: JsonField<List<Double>>
+            ) = apply {
+                this.neutralDensityFilterTransmissions =
+                    neutralDensityFilterTransmissions.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [neutralDensityFilterTransmissions].
@@ -6452,106 +7173,138 @@ class EoObservationFull private constructor(
              */
             fun addNeutralDensityFilterTransmission(neutralDensityFilterTransmission: Double) =
                 apply {
-                    neutralDensityFilterTransmissions = (neutralDensityFilterTransmissions ?: JsonField.of(mutableListOf())).also {
-                        checkKnown("neutralDensityFilterTransmissions", it).add(neutralDensityFilterTransmission)
-                    }
+                    neutralDensityFilterTransmissions =
+                        (neutralDensityFilterTransmissions ?: JsonField.of(mutableListOf())).also {
+                            checkKnown("neutralDensityFilterTransmissions", it)
+                                .add(neutralDensityFilterTransmission)
+                        }
                 }
 
-            /** This is the uncertainty in the transmission for the nth filter. Must be present for all values n=1 to numNeutralDensityFilters, in incrementing order of n, and for no other values of n. */
-            fun neutralDensityFilterTransmissionsUnc(neutralDensityFilterTransmissionsUnc: List<Double>) = neutralDensityFilterTransmissionsUnc(JsonField.of(neutralDensityFilterTransmissionsUnc))
+            /**
+             * This is the uncertainty in the transmission for the nth filter. Must be present for
+             * all values n=1 to numNeutralDensityFilters, in incrementing order of n, and for no
+             * other values of n.
+             */
+            fun neutralDensityFilterTransmissionsUnc(
+                neutralDensityFilterTransmissionsUnc: List<Double>
+            ) =
+                neutralDensityFilterTransmissionsUnc(
+                    JsonField.of(neutralDensityFilterTransmissionsUnc)
+                )
 
             /**
              * Sets [Builder.neutralDensityFilterTransmissionsUnc] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.neutralDensityFilterTransmissionsUnc] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.neutralDensityFilterTransmissionsUnc] with a
+             * well-typed `List<Double>` value instead. This method is primarily for setting the
+             * field to an undocumented or not yet supported value.
              */
-            fun neutralDensityFilterTransmissionsUnc(neutralDensityFilterTransmissionsUnc: JsonField<List<Double>>) =
-                apply {
-                    this.neutralDensityFilterTransmissionsUnc = neutralDensityFilterTransmissionsUnc.map { it.toMutableList() }
-                }
+            fun neutralDensityFilterTransmissionsUnc(
+                neutralDensityFilterTransmissionsUnc: JsonField<List<Double>>
+            ) = apply {
+                this.neutralDensityFilterTransmissionsUnc =
+                    neutralDensityFilterTransmissionsUnc.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [Builder.neutralDensityFilterTransmissionsUnc].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addNeutralDensityFilterTransmissionsUnc(neutralDensityFilterTransmissionsUnc: Double) =
-                apply {
-                    this.neutralDensityFilterTransmissionsUnc = (this.neutralDensityFilterTransmissionsUnc ?: JsonField.of(mutableListOf())).also {
-                        checkKnown("neutralDensityFilterTransmissionsUnc", it).add(neutralDensityFilterTransmissionsUnc)
-                    }
-                }
+            fun addNeutralDensityFilterTransmissionsUnc(
+                neutralDensityFilterTransmissionsUnc: Double
+            ) = apply {
+                this.neutralDensityFilterTransmissionsUnc =
+                    (this.neutralDensityFilterTransmissionsUnc ?: JsonField.of(mutableListOf()))
+                        .also {
+                            checkKnown("neutralDensityFilterTransmissionsUnc", it)
+                                .add(neutralDensityFilterTransmissionsUnc)
+                        }
+            }
 
-            /** Number of catalog stars in the detector field of view (FOV) with the target object. Can be 0 for narrow FOV sensors. */
-            fun numCatalogStars(numCatalogStars: Long) = numCatalogStars(JsonField.of(numCatalogStars))
+            /**
+             * Number of catalog stars in the detector field of view (FOV) with the target object.
+             * Can be 0 for narrow FOV sensors.
+             */
+            fun numCatalogStars(numCatalogStars: Long) =
+                numCatalogStars(JsonField.of(numCatalogStars))
 
             /**
              * Sets [Builder.numCatalogStars] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numCatalogStars] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numCatalogStars] with a well-typed [Long] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numCatalogStars(numCatalogStars: JsonField<Long>) =
-                apply {
-                    this.numCatalogStars = numCatalogStars
-                }
+            fun numCatalogStars(numCatalogStars: JsonField<Long>) = apply {
+                this.numCatalogStars = numCatalogStars
+            }
 
-            /** Number of correlated stars in the FOV with the target object. Can be 0 for narrow FOV sensors. */
-            fun numCorrelatedStars(numCorrelatedStars: Long) = numCorrelatedStars(JsonField.of(numCorrelatedStars))
+            /**
+             * Number of correlated stars in the FOV with the target object. Can be 0 for narrow FOV
+             * sensors.
+             */
+            fun numCorrelatedStars(numCorrelatedStars: Long) =
+                numCorrelatedStars(JsonField.of(numCorrelatedStars))
 
             /**
              * Sets [Builder.numCorrelatedStars] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numCorrelatedStars] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numCorrelatedStars] with a well-typed [Long] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numCorrelatedStars(numCorrelatedStars: JsonField<Long>) =
-                apply {
-                    this.numCorrelatedStars = numCorrelatedStars
-                }
+            fun numCorrelatedStars(numCorrelatedStars: JsonField<Long>) = apply {
+                this.numCorrelatedStars = numCorrelatedStars
+            }
 
-            /** Number of detected stars in the FOV with the target object. Helps identify frames with clouds. */
-            fun numDetectedStars(numDetectedStars: Long) = numDetectedStars(JsonField.of(numDetectedStars))
+            /**
+             * Number of detected stars in the FOV with the target object. Helps identify frames
+             * with clouds.
+             */
+            fun numDetectedStars(numDetectedStars: Long) =
+                numDetectedStars(JsonField.of(numDetectedStars))
 
             /**
              * Sets [Builder.numDetectedStars] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numDetectedStars] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numDetectedStars] with a well-typed [Long] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numDetectedStars(numDetectedStars: JsonField<Long>) =
-                apply {
-                    this.numDetectedStars = numDetectedStars
-                }
+            fun numDetectedStars(numDetectedStars: JsonField<Long>) = apply {
+                this.numDetectedStars = numDetectedStars
+            }
 
             /** The value is the number of neutral density filters used. */
-            fun numNeutralDensityFilters(numNeutralDensityFilters: Long) = numNeutralDensityFilters(JsonField.of(numNeutralDensityFilters))
+            fun numNeutralDensityFilters(numNeutralDensityFilters: Long) =
+                numNeutralDensityFilters(JsonField.of(numNeutralDensityFilters))
 
             /**
              * Sets [Builder.numNeutralDensityFilters] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numNeutralDensityFilters] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.numNeutralDensityFilters] with a well-typed [Long]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun numNeutralDensityFilters(numNeutralDensityFilters: JsonField<Long>) =
-                apply {
-                    this.numNeutralDensityFilters = numNeutralDensityFilters
-                }
+            fun numNeutralDensityFilters(numNeutralDensityFilters: JsonField<Long>) = apply {
+                this.numNeutralDensityFilters = numNeutralDensityFilters
+            }
 
             /** The value is the number of spectral filters used. */
-            fun numSpectralFilters(numSpectralFilters: Long) = numSpectralFilters(JsonField.of(numSpectralFilters))
+            fun numSpectralFilters(numSpectralFilters: Long) =
+                numSpectralFilters(JsonField.of(numSpectralFilters))
 
             /**
              * Sets [Builder.numSpectralFilters] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numSpectralFilters] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numSpectralFilters] with a well-typed [Long] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numSpectralFilters(numSpectralFilters: JsonField<Long>) =
-                apply {
-                    this.numSpectralFilters = numSpectralFilters
-                }
+            fun numSpectralFilters(numSpectralFilters: JsonField<Long>) = apply {
+                this.numSpectralFilters = numSpectralFilters
+            }
 
             /** Distance from the target object to the sun during the observation in meters. */
             fun objSunRange(objSunRange: Double) = objSunRange(JsonField.of(objSunRange))
@@ -6559,55 +7312,58 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.objSunRange] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.objSunRange] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.objSunRange] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun objSunRange(objSunRange: JsonField<Double>) =
-                apply {
-                    this.objSunRange = objSunRange
-                }
+            fun objSunRange(objSunRange: JsonField<Double>) = apply {
+                this.objSunRange = objSunRange
+            }
 
-            /** Ob detection time in ISO 8601 UTC with microsecond precision, will be set to EOObservation obTime if blank. */
+            /**
+             * Ob detection time in ISO 8601 UTC with microsecond precision, will be set to
+             * EOObservation obTime if blank.
+             */
             fun obTime(obTime: OffsetDateTime) = obTime(JsonField.of(obTime))
 
             /**
              * Sets [Builder.obTime] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.obTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.obTime] with a well-typed [OffsetDateTime] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun obTime(obTime: JsonField<OffsetDateTime>) =
-                apply {
-                    this.obTime = obTime
-                }
+            fun obTime(obTime: JsonField<OffsetDateTime>) = apply { this.obTime = obTime }
 
             /** Optical Cross Section computed in units m(2)/ster. */
-            fun opticalCrossSection(opticalCrossSection: Double) = opticalCrossSection(JsonField.of(opticalCrossSection))
+            fun opticalCrossSection(opticalCrossSection: Double) =
+                opticalCrossSection(JsonField.of(opticalCrossSection))
 
             /**
              * Sets [Builder.opticalCrossSection] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.opticalCrossSection] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.opticalCrossSection] with a well-typed [Double]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun opticalCrossSection(opticalCrossSection: JsonField<Double>) =
-                apply {
-                    this.opticalCrossSection = opticalCrossSection
-                }
+            fun opticalCrossSection(opticalCrossSection: JsonField<Double>) = apply {
+                this.opticalCrossSection = opticalCrossSection
+            }
 
             /** Uncertainty in Optical Cross Section computed in units m(2)/ster. */
-            fun opticalCrossSectionUnc(opticalCrossSectionUnc: Double) = opticalCrossSectionUnc(JsonField.of(opticalCrossSectionUnc))
+            fun opticalCrossSectionUnc(opticalCrossSectionUnc: Double) =
+                opticalCrossSectionUnc(JsonField.of(opticalCrossSectionUnc))
 
             /**
              * Sets [Builder.opticalCrossSectionUnc] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.opticalCrossSectionUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.opticalCrossSectionUnc] with a well-typed [Double]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun opticalCrossSectionUnc(opticalCrossSectionUnc: JsonField<Double>) =
-                apply {
-                    this.opticalCrossSectionUnc = opticalCrossSectionUnc
-                }
+            fun opticalCrossSectionUnc(opticalCrossSectionUnc: JsonField<Double>) = apply {
+                this.opticalCrossSectionUnc = opticalCrossSectionUnc
+            }
 
             /** Number of stars used in photometric fit count. */
             fun pcalNumStars(pcalNumStars: Int) = pcalNumStars(JsonField.of(pcalNumStars))
@@ -6615,97 +7371,113 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.pcalNumStars] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.pcalNumStars] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.pcalNumStars] with a well-typed [Int] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun pcalNumStars(pcalNumStars: JsonField<Int>) =
-                apply {
-                    this.pcalNumStars = pcalNumStars
-                }
+            fun pcalNumStars(pcalNumStars: JsonField<Int>) = apply {
+                this.pcalNumStars = pcalNumStars
+            }
 
-            /** Peak Aperture Raw Counts is the value of the peak pixel in the real or synthetic aperture containing the target signal. */
-            fun peakApertureCount(peakApertureCount: Double) = peakApertureCount(JsonField.of(peakApertureCount))
+            /**
+             * Peak Aperture Raw Counts is the value of the peak pixel in the real or synthetic
+             * aperture containing the target signal.
+             */
+            fun peakApertureCount(peakApertureCount: Double) =
+                peakApertureCount(JsonField.of(peakApertureCount))
 
             /**
              * Sets [Builder.peakApertureCount] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.peakApertureCount] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.peakApertureCount] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun peakApertureCount(peakApertureCount: JsonField<Double>) =
-                apply {
-                    this.peakApertureCount = peakApertureCount
-                }
+            fun peakApertureCount(peakApertureCount: JsonField<Double>) = apply {
+                this.peakApertureCount = peakApertureCount
+            }
 
             /** Peak Background Raw Counts is the largest pixel value used in background signal. */
-            fun peakBackgroundCount(peakBackgroundCount: Int) = peakBackgroundCount(JsonField.of(peakBackgroundCount))
+            fun peakBackgroundCount(peakBackgroundCount: Int) =
+                peakBackgroundCount(JsonField.of(peakBackgroundCount))
 
             /**
              * Sets [Builder.peakBackgroundCount] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.peakBackgroundCount] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.peakBackgroundCount] with a well-typed [Int] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun peakBackgroundCount(peakBackgroundCount: JsonField<Int>) =
-                apply {
-                    this.peakBackgroundCount = peakBackgroundCount
-                }
+            fun peakBackgroundCount(peakBackgroundCount: JsonField<Int>) = apply {
+                this.peakBackgroundCount = peakBackgroundCount
+            }
 
-            /** Solar phase angle bisector vector. The vector that bisects the solar phase angle. The phase angle bisector is the angle that is << of the value in #48. Then calculate the point on the RA/DEC (ECI J2000.0) sphere that a vector at this angle would intersect. */
-            fun phaseAngBisect(phaseAngBisect: Double) = phaseAngBisect(JsonField.of(phaseAngBisect))
+            /**
+             * Solar phase angle bisector vector. The vector that bisects the solar phase angle. The
+             * phase angle bisector is the angle that is << of the value in #48. Then calculate the
+             * point on the RA/DEC (ECI J2000.0) sphere that a vector at this angle would intersect.
+             */
+            fun phaseAngBisect(phaseAngBisect: Double) =
+                phaseAngBisect(JsonField.of(phaseAngBisect))
 
             /**
              * Sets [Builder.phaseAngBisect] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.phaseAngBisect] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.phaseAngBisect] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun phaseAngBisect(phaseAngBisect: JsonField<Double>) =
-                apply {
-                    this.phaseAngBisect = phaseAngBisect
-                }
+            fun phaseAngBisect(phaseAngBisect: JsonField<Double>) = apply {
+                this.phaseAngBisect = phaseAngBisect
+            }
 
             /** Pixel array size (height) in pixels. */
-            fun pixelArrayHeight(pixelArrayHeight: Long) = pixelArrayHeight(JsonField.of(pixelArrayHeight))
+            fun pixelArrayHeight(pixelArrayHeight: Long) =
+                pixelArrayHeight(JsonField.of(pixelArrayHeight))
 
             /**
              * Sets [Builder.pixelArrayHeight] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.pixelArrayHeight] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.pixelArrayHeight] with a well-typed [Long] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun pixelArrayHeight(pixelArrayHeight: JsonField<Long>) =
-                apply {
-                    this.pixelArrayHeight = pixelArrayHeight
-                }
+            fun pixelArrayHeight(pixelArrayHeight: JsonField<Long>) = apply {
+                this.pixelArrayHeight = pixelArrayHeight
+            }
 
             /** Pixel array size (width) in pixels. */
-            fun pixelArrayWidth(pixelArrayWidth: Long) = pixelArrayWidth(JsonField.of(pixelArrayWidth))
+            fun pixelArrayWidth(pixelArrayWidth: Long) =
+                pixelArrayWidth(JsonField.of(pixelArrayWidth))
 
             /**
              * Sets [Builder.pixelArrayWidth] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.pixelArrayWidth] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.pixelArrayWidth] with a well-typed [Long] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun pixelArrayWidth(pixelArrayWidth: JsonField<Long>) =
-                apply {
-                    this.pixelArrayWidth = pixelArrayWidth
-                }
+            fun pixelArrayWidth(pixelArrayWidth: JsonField<Long>) = apply {
+                this.pixelArrayWidth = pixelArrayWidth
+            }
 
-            /** Maximum valid pixel value, this is defined as 2^(number of bits per pixel). For example, a CCD with 8-bitpixels, would have a maximum valid pixel value of 2^8 = 256. This can represent the saturation value of the detector, but some sensors will saturate at a value significantly lower than full well depth. This is the analog-to-digital conversion (ADC) saturation value. */
+            /**
+             * Maximum valid pixel value, this is defined as 2^(number of bits per pixel). For
+             * example, a CCD with 8-bitpixels, would have a maximum valid pixel value of 2^8 = 256.
+             * This can represent the saturation value of the detector, but some sensors will
+             * saturate at a value significantly lower than full well depth. This is the
+             * analog-to-digital conversion (ADC) saturation value.
+             */
             fun pixelMax(pixelMax: Int) = pixelMax(JsonField.of(pixelMax))
 
             /**
              * Sets [Builder.pixelMax] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.pixelMax] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.pixelMax] with a well-typed [Int] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun pixelMax(pixelMax: JsonField<Int>) =
-                apply {
-                    this.pixelMax = pixelMax
-                }
+            fun pixelMax(pixelMax: JsonField<Int>) = apply { this.pixelMax = pixelMax }
 
             /** Minimum valid pixel value, this is typically 0. */
             fun pixelMin(pixelMin: Long) = pixelMin(JsonField.of(pixelMin))
@@ -6713,97 +7485,130 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.pixelMin] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.pixelMin] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.pixelMin] with a well-typed [Long] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun pixelMin(pixelMin: JsonField<Long>) =
-                apply {
-                    this.pixelMin = pixelMin
-                }
+            fun pixelMin(pixelMin: JsonField<Long>) = apply { this.pixelMin = pixelMin }
 
-            /** Predicted Azimuth angle of the target object from a ground -based sensor (no atmospheric refraction correction required) in degrees. AZ_EL implies apparent topocentric place in true of date reference frame as seen from the observer with aberration due to the observer velocity and light travel time applied. */
-            fun predictedAzimuth(predictedAzimuth: Double) = predictedAzimuth(JsonField.of(predictedAzimuth))
+            /**
+             * Predicted Azimuth angle of the target object from a ground -based sensor (no
+             * atmospheric refraction correction required) in degrees. AZ_EL implies apparent
+             * topocentric place in true of date reference frame as seen from the observer with
+             * aberration due to the observer velocity and light travel time applied.
+             */
+            fun predictedAzimuth(predictedAzimuth: Double) =
+                predictedAzimuth(JsonField.of(predictedAzimuth))
 
             /**
              * Sets [Builder.predictedAzimuth] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.predictedAzimuth] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.predictedAzimuth] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun predictedAzimuth(predictedAzimuth: JsonField<Double>) =
-                apply {
-                    this.predictedAzimuth = predictedAzimuth
-                }
+            fun predictedAzimuth(predictedAzimuth: JsonField<Double>) = apply {
+                this.predictedAzimuth = predictedAzimuth
+            }
 
-            /** Predicted Declination of the Target object from the frame of reference of the sensor (J2000, geocentric velocity aberration). SGP4 and VCMs produce geocentric origin and velocity aberration and subtracting the sensor geocentric position of the sensor places in its reference frame. */
-            fun predictedDeclination(predictedDeclination: Double) = predictedDeclination(JsonField.of(predictedDeclination))
+            /**
+             * Predicted Declination of the Target object from the frame of reference of the sensor
+             * (J2000, geocentric velocity aberration). SGP4 and VCMs produce geocentric origin and
+             * velocity aberration and subtracting the sensor geocentric position of the sensor
+             * places in its reference frame.
+             */
+            fun predictedDeclination(predictedDeclination: Double) =
+                predictedDeclination(JsonField.of(predictedDeclination))
 
             /**
              * Sets [Builder.predictedDeclination] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.predictedDeclination] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.predictedDeclination] with a well-typed [Double]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun predictedDeclination(predictedDeclination: JsonField<Double>) =
-                apply {
-                    this.predictedDeclination = predictedDeclination
-                }
+            fun predictedDeclination(predictedDeclination: JsonField<Double>) = apply {
+                this.predictedDeclination = predictedDeclination
+            }
 
-            /** Uncertainty of Predicted Declination of the Target object from the frame of reference of the sensor (J2000, geocentric velocity aberration). SGP4 and VCMs produce geocentric origin and velocity aberration and subtracting the sensor geocentric position of the sensor places in its reference frame. */
-            fun predictedDeclinationUnc(predictedDeclinationUnc: Double) = predictedDeclinationUnc(JsonField.of(predictedDeclinationUnc))
+            /**
+             * Uncertainty of Predicted Declination of the Target object from the frame of reference
+             * of the sensor (J2000, geocentric velocity aberration). SGP4 and VCMs produce
+             * geocentric origin and velocity aberration and subtracting the sensor geocentric
+             * position of the sensor places in its reference frame.
+             */
+            fun predictedDeclinationUnc(predictedDeclinationUnc: Double) =
+                predictedDeclinationUnc(JsonField.of(predictedDeclinationUnc))
 
             /**
              * Sets [Builder.predictedDeclinationUnc] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.predictedDeclinationUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.predictedDeclinationUnc] with a well-typed [Double]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun predictedDeclinationUnc(predictedDeclinationUnc: JsonField<Double>) =
-                apply {
-                    this.predictedDeclinationUnc = predictedDeclinationUnc
-                }
+            fun predictedDeclinationUnc(predictedDeclinationUnc: JsonField<Double>) = apply {
+                this.predictedDeclinationUnc = predictedDeclinationUnc
+            }
 
-            /** Predicted elevation angle of the target object from a ground -based sensor (no atmospheric refraction correction required) in degrees. AZ_EL implies apparent topocentric place in true of date reference frame as seen from the observer with aberration due to the observer velocity and light travel time applied. */
-            fun predictedElevation(predictedElevation: Double) = predictedElevation(JsonField.of(predictedElevation))
+            /**
+             * Predicted elevation angle of the target object from a ground -based sensor (no
+             * atmospheric refraction correction required) in degrees. AZ_EL implies apparent
+             * topocentric place in true of date reference frame as seen from the observer with
+             * aberration due to the observer velocity and light travel time applied.
+             */
+            fun predictedElevation(predictedElevation: Double) =
+                predictedElevation(JsonField.of(predictedElevation))
 
             /**
              * Sets [Builder.predictedElevation] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.predictedElevation] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.predictedElevation] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun predictedElevation(predictedElevation: JsonField<Double>) =
-                apply {
-                    this.predictedElevation = predictedElevation
-                }
+            fun predictedElevation(predictedElevation: JsonField<Double>) = apply {
+                this.predictedElevation = predictedElevation
+            }
 
-            /** Predicted Right Ascension of the Target object from the frame of reference of the sensor (J2000, geocentric velocity aberration). SGP4 and VCMs produce geocentric origin and velocity aberration and subtracting the sensor geocentric position of the sensor places in its reference frame. */
+            /**
+             * Predicted Right Ascension of the Target object from the frame of reference of the
+             * sensor (J2000, geocentric velocity aberration). SGP4 and VCMs produce geocentric
+             * origin and velocity aberration and subtracting the sensor geocentric position of the
+             * sensor places in its reference frame.
+             */
             fun predictedRa(predictedRa: Double) = predictedRa(JsonField.of(predictedRa))
 
             /**
              * Sets [Builder.predictedRa] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.predictedRa] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.predictedRa] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun predictedRa(predictedRa: JsonField<Double>) =
-                apply {
-                    this.predictedRa = predictedRa
-                }
+            fun predictedRa(predictedRa: JsonField<Double>) = apply {
+                this.predictedRa = predictedRa
+            }
 
-            /** Uncertainty of predicted Right Ascension of the Target object from the frame of reference of the sensor (J2000, geocentric velocity aberration). SGP4 and VCMs produce geocentric origin and velocity aberration and subtracting the sensor geocentric position of the sensor places in its reference frame. */
-            fun predictedRaUnc(predictedRaUnc: Double) = predictedRaUnc(JsonField.of(predictedRaUnc))
+            /**
+             * Uncertainty of predicted Right Ascension of the Target object from the frame of
+             * reference of the sensor (J2000, geocentric velocity aberration). SGP4 and VCMs
+             * produce geocentric origin and velocity aberration and subtracting the sensor
+             * geocentric position of the sensor places in its reference frame.
+             */
+            fun predictedRaUnc(predictedRaUnc: Double) =
+                predictedRaUnc(JsonField.of(predictedRaUnc))
 
             /**
              * Sets [Builder.predictedRaUnc] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.predictedRaUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.predictedRaUnc] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun predictedRaUnc(predictedRaUnc: JsonField<Double>) =
-                apply {
-                    this.predictedRaUnc = predictedRaUnc
-                }
+            fun predictedRaUnc(predictedRaUnc: JsonField<Double>) = apply {
+                this.predictedRaUnc = predictedRaUnc
+            }
 
             /** Covariance (x^2) in measured Right Ascension (X) in deg^2. */
             fun raCov(raCov: Double) = raCov(JsonField.of(raCov))
@@ -6811,83 +7616,94 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.raCov] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.raCov] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.raCov] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun raCov(raCov: JsonField<Double>) =
-                apply {
-                    this.raCov = raCov
-                }
+            fun raCov(raCov: JsonField<Double>) = apply { this.raCov = raCov }
 
             /** Covariance (XY) in measured ra/declination (XY) in deg^2. */
-            fun raDeclinationCov(raDeclinationCov: Double) = raDeclinationCov(JsonField.of(raDeclinationCov))
+            fun raDeclinationCov(raDeclinationCov: Double) =
+                raDeclinationCov(JsonField.of(raDeclinationCov))
 
             /**
              * Sets [Builder.raDeclinationCov] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.raDeclinationCov] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.raDeclinationCov] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun raDeclinationCov(raDeclinationCov: JsonField<Double>) =
-                apply {
-                    this.raDeclinationCov = raDeclinationCov
-                }
+            fun raDeclinationCov(raDeclinationCov: JsonField<Double>) = apply {
+                this.raDeclinationCov = raDeclinationCov
+            }
 
-            /** Spatial covariance of image distribution across horizontal and vertical directions measured in pixels squared. */
+            /**
+             * Spatial covariance of image distribution across horizontal and vertical directions
+             * measured in pixels squared.
+             */
             fun rowColCov(rowColCov: Double) = rowColCov(JsonField.of(rowColCov))
 
             /**
              * Sets [Builder.rowColCov] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.rowColCov] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.rowColCov] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun rowColCov(rowColCov: JsonField<Double>) =
-                apply {
-                    this.rowColCov = rowColCov
-                }
+            fun rowColCov(rowColCov: JsonField<Double>) = apply { this.rowColCov = rowColCov }
 
-            /** Spatial variance of image distribution in vertical direction measured in pixels squared. */
+            /**
+             * Spatial variance of image distribution in vertical direction measured in pixels
+             * squared.
+             */
             fun rowVariance(rowVariance: Double) = rowVariance(JsonField.of(rowVariance))
 
             /**
              * Sets [Builder.rowVariance] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.rowVariance] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.rowVariance] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun rowVariance(rowVariance: JsonField<Double>) =
-                apply {
-                    this.rowVariance = rowVariance
-                }
+            fun rowVariance(rowVariance: JsonField<Double>) = apply {
+                this.rowVariance = rowVariance
+            }
 
-            /** Estimated signal-to-noise ratio (SNR) for the total radiometric signal. Under some algorithms, this can be a constant per target (not per observation). Note: this SNR applies to the total signal of the radiometric source (i.e., Net_Obj_Sig with units DN/sec), not to be confused with the SNR of the signal in the peak pixel (i.e., DN/pixel/sec). */
+            /**
+             * Estimated signal-to-noise ratio (SNR) for the total radiometric signal. Under some
+             * algorithms, this can be a constant per target (not per observation). Note: this SNR
+             * applies to the total signal of the radiometric source (i.e., Net_Obj_Sig with units
+             * DN/sec), not to be confused with the SNR of the signal in the peak pixel (i.e.,
+             * DN/pixel/sec).
+             */
             fun snrEst(snrEst: Double) = snrEst(JsonField.of(snrEst))
 
             /**
              * Sets [Builder.snrEst] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.snrEst] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.snrEst] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun snrEst(snrEst: JsonField<Double>) =
-                apply {
-                    this.snrEst = snrEst
-                }
+            fun snrEst(snrEst: JsonField<Double>) = apply { this.snrEst = snrEst }
 
-            /** Fraction of the sun that is illuminating the target object. This indicates if the target is in the Earth’s penumbra or umbra. (It is 0 when object is in umbra and 1 when object is fully illuminated.). */
+            /**
+             * Fraction of the sun that is illuminating the target object. This indicates if the
+             * target is in the Earth’s penumbra or umbra. (It is 0 when object is in umbra and 1
+             * when object is fully illuminated.).
+             */
             fun solarDiskFrac(solarDiskFrac: Double) = solarDiskFrac(JsonField.of(solarDiskFrac))
 
             /**
              * Sets [Builder.solarDiskFrac] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.solarDiskFrac] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.solarDiskFrac] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun solarDiskFrac(solarDiskFrac: JsonField<Double>) =
-                apply {
-                    this.solarDiskFrac = solarDiskFrac
-                }
+            fun solarDiskFrac(solarDiskFrac: JsonField<Double>) = apply {
+                this.solarDiskFrac = solarDiskFrac
+            }
 
             /** Source of the data, will be set to EOObservation source if blank. */
             fun source(source: String) = source(JsonField.of(source))
@@ -6895,119 +7711,135 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.source] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.source] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun source(source: JsonField<String>) =
-                apply {
-                    this.source = source
-                }
+            fun source(source: JsonField<String>) = apply { this.source = source }
 
-            /** Array of the SpectralFilters keywords, must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n. */
-            fun spectralFilters(spectralFilters: List<String>) = spectralFilters(JsonField.of(spectralFilters))
+            /**
+             * Array of the SpectralFilters keywords, must be present for all values n=1 to
+             * numSpectralFilters, in incrementing order of n, and for no other values of n.
+             */
+            fun spectralFilters(spectralFilters: List<String>) =
+                spectralFilters(JsonField.of(spectralFilters))
 
             /**
              * Sets [Builder.spectralFilters] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.spectralFilters] with a well-typed `List<String>` value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.spectralFilters] with a well-typed `List<String>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun spectralFilters(spectralFilters: JsonField<List<String>>) =
-                apply {
-                    this.spectralFilters = spectralFilters.map { it.toMutableList() }
-                }
+            fun spectralFilters(spectralFilters: JsonField<List<String>>) = apply {
+                this.spectralFilters = spectralFilters.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [String] to [spectralFilters].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addSpectralFilter(spectralFilter: String) =
-                apply {
-                    spectralFilters = (spectralFilters ?: JsonField.of(mutableListOf())).also {
+            fun addSpectralFilter(spectralFilter: String) = apply {
+                spectralFilters =
+                    (spectralFilters ?: JsonField.of(mutableListOf())).also {
                         checkKnown("spectralFilters", it).add(spectralFilter)
                     }
-                }
+            }
 
-            /** This is the in-band solar magnitude at 1 A.U. Must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n. Units = mag. */
-            fun spectralFilterSolarMag(spectralFilterSolarMag: List<Double>) = spectralFilterSolarMag(JsonField.of(spectralFilterSolarMag))
+            /**
+             * This is the in-band solar magnitude at 1 A.U. Must be present for all values n=1 to
+             * numSpectralFilters, in incrementing order of n, and for no other values of n. Units =
+             * mag.
+             */
+            fun spectralFilterSolarMag(spectralFilterSolarMag: List<Double>) =
+                spectralFilterSolarMag(JsonField.of(spectralFilterSolarMag))
 
             /**
              * Sets [Builder.spectralFilterSolarMag] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.spectralFilterSolarMag] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.spectralFilterSolarMag] with a well-typed
+             * `List<Double>` value instead. This method is primarily for setting the field to an
+             * undocumented or not yet supported value.
              */
-            fun spectralFilterSolarMag(spectralFilterSolarMag: JsonField<List<Double>>) =
-                apply {
-                    this.spectralFilterSolarMag = spectralFilterSolarMag.map { it.toMutableList() }
-                }
+            fun spectralFilterSolarMag(spectralFilterSolarMag: JsonField<List<Double>>) = apply {
+                this.spectralFilterSolarMag = spectralFilterSolarMag.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [Builder.spectralFilterSolarMag].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addSpectralFilterSolarMag(spectralFilterSolarMag: Double) =
-                apply {
-                    this.spectralFilterSolarMag = (this.spectralFilterSolarMag ?: JsonField.of(mutableListOf())).also {
+            fun addSpectralFilterSolarMag(spectralFilterSolarMag: Double) = apply {
+                this.spectralFilterSolarMag =
+                    (this.spectralFilterSolarMag ?: JsonField.of(mutableListOf())).also {
                         checkKnown("spectralFilterSolarMag", it).add(spectralFilterSolarMag)
                     }
-                }
+            }
 
-            /** This is the in-band average irradiance of a 0th mag source. Must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n. Units = W/m2/nm. */
+            /**
+             * This is the in-band average irradiance of a 0th mag source. Must be present for all
+             * values n=1 to numSpectralFilters, in incrementing order of n, and for no other values
+             * of n. Units = W/m2/nm.
+             */
             fun spectralZmfl(spectralZmfl: List<Double>) = spectralZmfl(JsonField.of(spectralZmfl))
 
             /**
              * Sets [Builder.spectralZmfl] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.spectralZmfl] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.spectralZmfl] with a well-typed `List<Double>` value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun spectralZmfl(spectralZmfl: JsonField<List<Double>>) =
-                apply {
-                    this.spectralZmfl = spectralZmfl.map { it.toMutableList() }
-                }
+            fun spectralZmfl(spectralZmfl: JsonField<List<Double>>) = apply {
+                this.spectralZmfl = spectralZmfl.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [Builder.spectralZmfl].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addSpectralZmfl(spectralZmfl: Double) =
-                apply {
-                    this.spectralZmfl = (this.spectralZmfl ?: JsonField.of(mutableListOf())).also {
+            fun addSpectralZmfl(spectralZmfl: Double) = apply {
+                this.spectralZmfl =
+                    (this.spectralZmfl ?: JsonField.of(mutableListOf())).also {
                         checkKnown("spectralZmfl", it).add(spectralZmfl)
                     }
-                }
+            }
 
-            /** Azimuth angle of the sun from a ground-based telescope (no atmospheric refraction correction required) the observer with aberration due to the observer velocity and light travel time applied in degrees. */
+            /**
+             * Azimuth angle of the sun from a ground-based telescope (no atmospheric refraction
+             * correction required) the observer with aberration due to the observer velocity and
+             * light travel time applied in degrees.
+             */
             fun sunAzimuth(sunAzimuth: Double) = sunAzimuth(JsonField.of(sunAzimuth))
 
             /**
              * Sets [Builder.sunAzimuth] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sunAzimuth] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sunAzimuth] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sunAzimuth(sunAzimuth: JsonField<Double>) =
-                apply {
-                    this.sunAzimuth = sunAzimuth
-                }
+            fun sunAzimuth(sunAzimuth: JsonField<Double>) = apply { this.sunAzimuth = sunAzimuth }
 
-            /** Elevation angle of the sun from a ground-based telescope (no atmospheric refraction correction required) in degrees. */
+            /**
+             * Elevation angle of the sun from a ground-based telescope (no atmospheric refraction
+             * correction required) in degrees.
+             */
             fun sunElevation(sunElevation: Double) = sunElevation(JsonField.of(sunElevation))
 
             /**
              * Sets [Builder.sunElevation] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sunElevation] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sunElevation] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sunElevation(sunElevation: JsonField<Double>) =
-                apply {
-                    this.sunElevation = sunElevation
-                }
+            fun sunElevation(sunElevation: JsonField<Double>) = apply {
+                this.sunElevation = sunElevation
+            }
 
             /** Sun state vector in ECI J2000 coordinate frame in km. */
             fun sunStatePosX(sunStatePosX: Double) = sunStatePosX(JsonField.of(sunStatePosX))
@@ -7015,13 +7847,13 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.sunStatePosX] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sunStatePosX] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sunStatePosX] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sunStatePosX(sunStatePosX: JsonField<Double>) =
-                apply {
-                    this.sunStatePosX = sunStatePosX
-                }
+            fun sunStatePosX(sunStatePosX: JsonField<Double>) = apply {
+                this.sunStatePosX = sunStatePosX
+            }
 
             /** Sun state vector in ECI J2000 coordinate frame in km. */
             fun sunStatePosY(sunStatePosY: Double) = sunStatePosY(JsonField.of(sunStatePosY))
@@ -7029,13 +7861,13 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.sunStatePosY] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sunStatePosY] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sunStatePosY] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sunStatePosY(sunStatePosY: JsonField<Double>) =
-                apply {
-                    this.sunStatePosY = sunStatePosY
-                }
+            fun sunStatePosY(sunStatePosY: JsonField<Double>) = apply {
+                this.sunStatePosY = sunStatePosY
+            }
 
             /** Sun state vector in ECI J2000 coordinate frame in km. */
             fun sunStatePosZ(sunStatePosZ: Double) = sunStatePosZ(JsonField.of(sunStatePosZ))
@@ -7043,13 +7875,13 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.sunStatePosZ] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sunStatePosZ] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sunStatePosZ] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sunStatePosZ(sunStatePosZ: JsonField<Double>) =
-                apply {
-                    this.sunStatePosZ = sunStatePosZ
-                }
+            fun sunStatePosZ(sunStatePosZ: JsonField<Double>) = apply {
+                this.sunStatePosZ = sunStatePosZ
+            }
 
             /** Sun state vector in ECI J2000 coordinate frame in km/sec. */
             fun sunStateVelX(sunStateVelX: Double) = sunStateVelX(JsonField.of(sunStateVelX))
@@ -7057,13 +7889,13 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.sunStateVelX] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sunStateVelX] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sunStateVelX] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sunStateVelX(sunStateVelX: JsonField<Double>) =
-                apply {
-                    this.sunStateVelX = sunStateVelX
-                }
+            fun sunStateVelX(sunStateVelX: JsonField<Double>) = apply {
+                this.sunStateVelX = sunStateVelX
+            }
 
             /** Sun state vector in ECI J2000 coordinate frame in km/sec. */
             fun sunStateVelY(sunStateVelY: Double) = sunStateVelY(JsonField.of(sunStateVelY))
@@ -7071,13 +7903,13 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.sunStateVelY] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sunStateVelY] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sunStateVelY] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sunStateVelY(sunStateVelY: JsonField<Double>) =
-                apply {
-                    this.sunStateVelY = sunStateVelY
-                }
+            fun sunStateVelY(sunStateVelY: JsonField<Double>) = apply {
+                this.sunStateVelY = sunStateVelY
+            }
 
             /** Sun state vector in ECI J2000 coordinate frame in km/sec. */
             fun sunStateVelZ(sunStateVelZ: Double) = sunStateVelZ(JsonField.of(sunStateVelZ))
@@ -7085,65 +7917,77 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.sunStateVelZ] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.sunStateVelZ] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.sunStateVelZ] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun sunStateVelZ(sunStateVelZ: JsonField<Double>) =
-                apply {
-                    this.sunStateVelZ = sunStateVelZ
-                }
+            fun sunStateVelZ(sunStateVelZ: JsonField<Double>) = apply {
+                this.sunStateVelZ = sunStateVelZ
+            }
 
-            /** An array of surface brightness measurements in magnitudes per square arcsecond from the optical image that show change over an interval of time. The array length is dependent on the length of the streak. The distFromStreakCenter, surfBrightness, and surfBrightnessUnc arrays will match in size. */
-            fun surfBrightness(surfBrightness: List<Double>) = surfBrightness(JsonField.of(surfBrightness))
+            /**
+             * An array of surface brightness measurements in magnitudes per square arcsecond from
+             * the optical image that show change over an interval of time. The array length is
+             * dependent on the length of the streak. The distFromStreakCenter, surfBrightness, and
+             * surfBrightnessUnc arrays will match in size.
+             */
+            fun surfBrightness(surfBrightness: List<Double>) =
+                surfBrightness(JsonField.of(surfBrightness))
 
             /**
              * Sets [Builder.surfBrightness] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.surfBrightness] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.surfBrightness] with a well-typed `List<Double>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun surfBrightness(surfBrightness: JsonField<List<Double>>) =
-                apply {
-                    this.surfBrightness = surfBrightness.map { it.toMutableList() }
-                }
+            fun surfBrightness(surfBrightness: JsonField<List<Double>>) = apply {
+                this.surfBrightness = surfBrightness.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [Builder.surfBrightness].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addSurfBrightness(surfBrightness: Double) =
-                apply {
-                    this.surfBrightness = (this.surfBrightness ?: JsonField.of(mutableListOf())).also {
+            fun addSurfBrightness(surfBrightness: Double) = apply {
+                this.surfBrightness =
+                    (this.surfBrightness ?: JsonField.of(mutableListOf())).also {
                         checkKnown("surfBrightness", it).add(surfBrightness)
                     }
-                }
+            }
 
-            /** An array of surface brightness uncertainty measurements in magnitudes per square arcsecond from the optical image that show change over an interval of time. The array length is dependent on the length of the streak. The distFromStreakCenter, surfBrightness, and surfBrightnessUnc arrays will match in size. */
-            fun surfBrightnessUnc(surfBrightnessUnc: List<Double>) = surfBrightnessUnc(JsonField.of(surfBrightnessUnc))
+            /**
+             * An array of surface brightness uncertainty measurements in magnitudes per square
+             * arcsecond from the optical image that show change over an interval of time. The array
+             * length is dependent on the length of the streak. The distFromStreakCenter,
+             * surfBrightness, and surfBrightnessUnc arrays will match in size.
+             */
+            fun surfBrightnessUnc(surfBrightnessUnc: List<Double>) =
+                surfBrightnessUnc(JsonField.of(surfBrightnessUnc))
 
             /**
              * Sets [Builder.surfBrightnessUnc] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.surfBrightnessUnc] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.surfBrightnessUnc] with a well-typed `List<Double>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun surfBrightnessUnc(surfBrightnessUnc: JsonField<List<Double>>) =
-                apply {
-                    this.surfBrightnessUnc = surfBrightnessUnc.map { it.toMutableList() }
-                }
+            fun surfBrightnessUnc(surfBrightnessUnc: JsonField<List<Double>>) = apply {
+                this.surfBrightnessUnc = surfBrightnessUnc.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [Builder.surfBrightnessUnc].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addSurfBrightnessUnc(surfBrightnessUnc: Double) =
-                apply {
-                    this.surfBrightnessUnc = (this.surfBrightnessUnc ?: JsonField.of(mutableListOf())).also {
+            fun addSurfBrightnessUnc(surfBrightnessUnc: Double) = apply {
+                this.surfBrightnessUnc =
+                    (this.surfBrightnessUnc ?: JsonField.of(mutableListOf())).also {
                         checkKnown("surfBrightnessUnc", it).add(surfBrightnessUnc)
                     }
-                }
+            }
 
             /** Uncertainty in the times reported in UTC in seconds. */
             fun timesUnc(timesUnc: Double) = timesUnc(JsonField.of(timesUnc))
@@ -7151,13 +7995,11 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.timesUnc] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.timesUnc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.timesUnc] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun timesUnc(timesUnc: JsonField<Double>) =
-                apply {
-                    this.timesUnc = timesUnc
-                }
+            fun timesUnc(timesUnc: JsonField<Double>) = apply { this.timesUnc = timesUnc }
 
             /** Time off element set reported in seconds. */
             fun toes(toes: Double) = toes(JsonField.of(toes))
@@ -7165,91 +8007,93 @@ class EoObservationFull private constructor(
             /**
              * Sets [Builder.toes] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.toes] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.toes] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun toes(toes: JsonField<Double>) =
-                apply {
-                    this.toes = toes
-                }
+            fun toes(toes: JsonField<Double>) = apply { this.toes = toes }
 
-            /** This is the value for the zero-point calculated for each filter denoted in spectralFilters. It is the difference between the catalog mag and instrumental mag for a set of standard stars. For use with All Sky photometry. Must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n. */
+            /**
+             * This is the value for the zero-point calculated for each filter denoted in
+             * spectralFilters. It is the difference between the catalog mag and instrumental mag
+             * for a set of standard stars. For use with All Sky photometry. Must be present for all
+             * values n=1 to numSpectralFilters, in incrementing order of n, and for no other values
+             * of n.
+             */
             fun zeroPoints(zeroPoints: List<Double>) = zeroPoints(JsonField.of(zeroPoints))
 
             /**
              * Sets [Builder.zeroPoints] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.zeroPoints] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.zeroPoints] with a well-typed `List<Double>` value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun zeroPoints(zeroPoints: JsonField<List<Double>>) =
-                apply {
-                    this.zeroPoints = zeroPoints.map { it.toMutableList() }
-                }
+            fun zeroPoints(zeroPoints: JsonField<List<Double>>) = apply {
+                this.zeroPoints = zeroPoints.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [zeroPoints].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addZeroPoint(zeroPoint: Double) =
-                apply {
-                    zeroPoints = (zeroPoints ?: JsonField.of(mutableListOf())).also {
+            fun addZeroPoint(zeroPoint: Double) = apply {
+                zeroPoints =
+                    (zeroPoints ?: JsonField.of(mutableListOf())).also {
                         checkKnown("zeroPoints", it).add(zeroPoint)
                     }
-                }
+            }
 
-            /** This is the uncertainty in the zero point for the filter denoted in spectralFilters. For use with All Sky photometry. Must be present for all values n=1 to numSpectralFilters, in incrementing order of n, and for no other values of n. */
-            fun zeroPointsUnc(zeroPointsUnc: List<Double>) = zeroPointsUnc(JsonField.of(zeroPointsUnc))
+            /**
+             * This is the uncertainty in the zero point for the filter denoted in spectralFilters.
+             * For use with All Sky photometry. Must be present for all values n=1 to
+             * numSpectralFilters, in incrementing order of n, and for no other values of n.
+             */
+            fun zeroPointsUnc(zeroPointsUnc: List<Double>) =
+                zeroPointsUnc(JsonField.of(zeroPointsUnc))
 
             /**
              * Sets [Builder.zeroPointsUnc] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.zeroPointsUnc] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.zeroPointsUnc] with a well-typed `List<Double>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun zeroPointsUnc(zeroPointsUnc: JsonField<List<Double>>) =
-                apply {
-                    this.zeroPointsUnc = zeroPointsUnc.map { it.toMutableList() }
-                }
+            fun zeroPointsUnc(zeroPointsUnc: JsonField<List<Double>>) = apply {
+                this.zeroPointsUnc = zeroPointsUnc.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [Builder.zeroPointsUnc].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addZeroPointsUnc(zeroPointsUnc: Double) =
-                apply {
-                    this.zeroPointsUnc = (this.zeroPointsUnc ?: JsonField.of(mutableListOf())).also {
+            fun addZeroPointsUnc(zeroPointsUnc: Double) = apply {
+                this.zeroPointsUnc =
+                    (this.zeroPointsUnc ?: JsonField.of(mutableListOf())).also {
                         checkKnown("zeroPointsUnc", it).add(zeroPointsUnc)
                     }
-                }
+            }
 
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-                apply {
-                    this.additionalProperties.clear()
-                    putAllAdditionalProperties(additionalProperties)
-                }
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
 
-            fun putAdditionalProperty(key: String, value: JsonValue) =
-                apply {
-                    additionalProperties.put(key, value)
-                }
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
 
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-                apply {
-                    this.additionalProperties.putAll(additionalProperties)
-                }
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
 
-            fun removeAdditionalProperty(key: String) =
-                apply {
-                    additionalProperties.remove(key)
-                }
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-            fun removeAllAdditionalProperties(keys: Set<String>) =
-                apply {
-                    keys.forEach(::removeAdditionalProperty)
-                }
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
 
             /**
              * Returns an immutable instance of [EoobservationDetails].
@@ -7258,186 +8102,189 @@ class EoObservationFull private constructor(
              */
             fun build(): EoobservationDetails =
                 EoobservationDetails(
-                  acalCrPixX,
-                  acalCrPixY,
-                  acalCrValX,
-                  acalCrValY,
-                  acalNumStars,
-                  backgroundSignal,
-                  backgroundSignalUnc,
-                  binningHoriz,
-                  binningVert,
-                  ccdObjPosX,
-                  ccdObjPosY,
-                  ccdObjWidth,
-                  ccdTemp,
-                  centroidColumn,
-                  centroidRow,
-                  classificationMarking,
-                  (colorCoeffs ?: JsonMissing.of()).map { it.toImmutable() },
-                  columnVariance,
-                  createdAt,
-                  createdBy,
-                  currentNeutralDensityFilterNum,
-                  currentSpectralFilterNum,
-                  dataMode,
-                  declinationCov,
-                  (distFromStreakCenter ?: JsonMissing.of()).map { it.toImmutable() },
-                  does,
-                  (extinctionCoeffs ?: JsonMissing.of()).map { it.toImmutable() },
-                  (extinctionCoeffsUnc ?: JsonMissing.of()).map { it.toImmutable() },
-                  gain,
-                  idEoObservation,
-                  ifov,
-                  magInstrumental,
-                  magInstrumentalUnc,
-                  (neutralDensityFilterNames ?: JsonMissing.of()).map { it.toImmutable() },
-                  (neutralDensityFilterTransmissions ?: JsonMissing.of()).map { it.toImmutable() },
-                  (neutralDensityFilterTransmissionsUnc ?: JsonMissing.of()).map { it.toImmutable() },
-                  numCatalogStars,
-                  numCorrelatedStars,
-                  numDetectedStars,
-                  numNeutralDensityFilters,
-                  numSpectralFilters,
-                  objSunRange,
-                  obTime,
-                  opticalCrossSection,
-                  opticalCrossSectionUnc,
-                  pcalNumStars,
-                  peakApertureCount,
-                  peakBackgroundCount,
-                  phaseAngBisect,
-                  pixelArrayHeight,
-                  pixelArrayWidth,
-                  pixelMax,
-                  pixelMin,
-                  predictedAzimuth,
-                  predictedDeclination,
-                  predictedDeclinationUnc,
-                  predictedElevation,
-                  predictedRa,
-                  predictedRaUnc,
-                  raCov,
-                  raDeclinationCov,
-                  rowColCov,
-                  rowVariance,
-                  snrEst,
-                  solarDiskFrac,
-                  source,
-                  (spectralFilters ?: JsonMissing.of()).map { it.toImmutable() },
-                  (spectralFilterSolarMag ?: JsonMissing.of()).map { it.toImmutable() },
-                  (spectralZmfl ?: JsonMissing.of()).map { it.toImmutable() },
-                  sunAzimuth,
-                  sunElevation,
-                  sunStatePosX,
-                  sunStatePosY,
-                  sunStatePosZ,
-                  sunStateVelX,
-                  sunStateVelY,
-                  sunStateVelZ,
-                  (surfBrightness ?: JsonMissing.of()).map { it.toImmutable() },
-                  (surfBrightnessUnc ?: JsonMissing.of()).map { it.toImmutable() },
-                  timesUnc,
-                  toes,
-                  (zeroPoints ?: JsonMissing.of()).map { it.toImmutable() },
-                  (zeroPointsUnc ?: JsonMissing.of()).map { it.toImmutable() },
-                  additionalProperties.toMutableMap(),
+                    acalCrPixX,
+                    acalCrPixY,
+                    acalCrValX,
+                    acalCrValY,
+                    acalNumStars,
+                    backgroundSignal,
+                    backgroundSignalUnc,
+                    binningHoriz,
+                    binningVert,
+                    ccdObjPosX,
+                    ccdObjPosY,
+                    ccdObjWidth,
+                    ccdTemp,
+                    centroidColumn,
+                    centroidRow,
+                    classificationMarking,
+                    (colorCoeffs ?: JsonMissing.of()).map { it.toImmutable() },
+                    columnVariance,
+                    createdAt,
+                    createdBy,
+                    currentNeutralDensityFilterNum,
+                    currentSpectralFilterNum,
+                    dataMode,
+                    declinationCov,
+                    (distFromStreakCenter ?: JsonMissing.of()).map { it.toImmutable() },
+                    does,
+                    (extinctionCoeffs ?: JsonMissing.of()).map { it.toImmutable() },
+                    (extinctionCoeffsUnc ?: JsonMissing.of()).map { it.toImmutable() },
+                    gain,
+                    idEoObservation,
+                    ifov,
+                    magInstrumental,
+                    magInstrumentalUnc,
+                    (neutralDensityFilterNames ?: JsonMissing.of()).map { it.toImmutable() },
+                    (neutralDensityFilterTransmissions ?: JsonMissing.of()).map {
+                        it.toImmutable()
+                    },
+                    (neutralDensityFilterTransmissionsUnc ?: JsonMissing.of()).map {
+                        it.toImmutable()
+                    },
+                    numCatalogStars,
+                    numCorrelatedStars,
+                    numDetectedStars,
+                    numNeutralDensityFilters,
+                    numSpectralFilters,
+                    objSunRange,
+                    obTime,
+                    opticalCrossSection,
+                    opticalCrossSectionUnc,
+                    pcalNumStars,
+                    peakApertureCount,
+                    peakBackgroundCount,
+                    phaseAngBisect,
+                    pixelArrayHeight,
+                    pixelArrayWidth,
+                    pixelMax,
+                    pixelMin,
+                    predictedAzimuth,
+                    predictedDeclination,
+                    predictedDeclinationUnc,
+                    predictedElevation,
+                    predictedRa,
+                    predictedRaUnc,
+                    raCov,
+                    raDeclinationCov,
+                    rowColCov,
+                    rowVariance,
+                    snrEst,
+                    solarDiskFrac,
+                    source,
+                    (spectralFilters ?: JsonMissing.of()).map { it.toImmutable() },
+                    (spectralFilterSolarMag ?: JsonMissing.of()).map { it.toImmutable() },
+                    (spectralZmfl ?: JsonMissing.of()).map { it.toImmutable() },
+                    sunAzimuth,
+                    sunElevation,
+                    sunStatePosX,
+                    sunStatePosY,
+                    sunStatePosZ,
+                    sunStateVelX,
+                    sunStateVelY,
+                    sunStateVelZ,
+                    (surfBrightness ?: JsonMissing.of()).map { it.toImmutable() },
+                    (surfBrightnessUnc ?: JsonMissing.of()).map { it.toImmutable() },
+                    timesUnc,
+                    toes,
+                    (zeroPoints ?: JsonMissing.of()).map { it.toImmutable() },
+                    (zeroPointsUnc ?: JsonMissing.of()).map { it.toImmutable() },
+                    additionalProperties.toMutableMap(),
                 )
         }
 
         private var validated: Boolean = false
 
-        fun validate(): EoobservationDetails =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                acalCrPixX()
-                acalCrPixY()
-                acalCrValX()
-                acalCrValY()
-                acalNumStars()
-                backgroundSignal()
-                backgroundSignalUnc()
-                binningHoriz()
-                binningVert()
-                ccdObjPosX()
-                ccdObjPosY()
-                ccdObjWidth()
-                ccdTemp()
-                centroidColumn()
-                centroidRow()
-                classificationMarking()
-                colorCoeffs()
-                columnVariance()
-                createdAt()
-                createdBy()
-                currentNeutralDensityFilterNum()
-                currentSpectralFilterNum()
-                dataMode().ifPresent { it.validate() }
-                declinationCov()
-                distFromStreakCenter()
-                does()
-                extinctionCoeffs()
-                extinctionCoeffsUnc()
-                gain()
-                idEoObservation()
-                ifov()
-                magInstrumental()
-                magInstrumentalUnc()
-                neutralDensityFilterNames()
-                neutralDensityFilterTransmissions()
-                neutralDensityFilterTransmissionsUnc()
-                numCatalogStars()
-                numCorrelatedStars()
-                numDetectedStars()
-                numNeutralDensityFilters()
-                numSpectralFilters()
-                objSunRange()
-                obTime()
-                opticalCrossSection()
-                opticalCrossSectionUnc()
-                pcalNumStars()
-                peakApertureCount()
-                peakBackgroundCount()
-                phaseAngBisect()
-                pixelArrayHeight()
-                pixelArrayWidth()
-                pixelMax()
-                pixelMin()
-                predictedAzimuth()
-                predictedDeclination()
-                predictedDeclinationUnc()
-                predictedElevation()
-                predictedRa()
-                predictedRaUnc()
-                raCov()
-                raDeclinationCov()
-                rowColCov()
-                rowVariance()
-                snrEst()
-                solarDiskFrac()
-                source()
-                spectralFilters()
-                spectralFilterSolarMag()
-                spectralZmfl()
-                sunAzimuth()
-                sunElevation()
-                sunStatePosX()
-                sunStatePosY()
-                sunStatePosZ()
-                sunStateVelX()
-                sunStateVelY()
-                sunStateVelZ()
-                surfBrightness()
-                surfBrightnessUnc()
-                timesUnc()
-                toes()
-                zeroPoints()
-                zeroPointsUnc()
-                validated = true
+        fun validate(): EoobservationDetails = apply {
+            if (validated) {
+                return@apply
             }
+
+            acalCrPixX()
+            acalCrPixY()
+            acalCrValX()
+            acalCrValY()
+            acalNumStars()
+            backgroundSignal()
+            backgroundSignalUnc()
+            binningHoriz()
+            binningVert()
+            ccdObjPosX()
+            ccdObjPosY()
+            ccdObjWidth()
+            ccdTemp()
+            centroidColumn()
+            centroidRow()
+            classificationMarking()
+            colorCoeffs()
+            columnVariance()
+            createdAt()
+            createdBy()
+            currentNeutralDensityFilterNum()
+            currentSpectralFilterNum()
+            dataMode().ifPresent { it.validate() }
+            declinationCov()
+            distFromStreakCenter()
+            does()
+            extinctionCoeffs()
+            extinctionCoeffsUnc()
+            gain()
+            idEoObservation()
+            ifov()
+            magInstrumental()
+            magInstrumentalUnc()
+            neutralDensityFilterNames()
+            neutralDensityFilterTransmissions()
+            neutralDensityFilterTransmissionsUnc()
+            numCatalogStars()
+            numCorrelatedStars()
+            numDetectedStars()
+            numNeutralDensityFilters()
+            numSpectralFilters()
+            objSunRange()
+            obTime()
+            opticalCrossSection()
+            opticalCrossSectionUnc()
+            pcalNumStars()
+            peakApertureCount()
+            peakBackgroundCount()
+            phaseAngBisect()
+            pixelArrayHeight()
+            pixelArrayWidth()
+            pixelMax()
+            pixelMin()
+            predictedAzimuth()
+            predictedDeclination()
+            predictedDeclinationUnc()
+            predictedElevation()
+            predictedRa()
+            predictedRaUnc()
+            raCov()
+            raDeclinationCov()
+            rowColCov()
+            rowVariance()
+            snrEst()
+            solarDiskFrac()
+            source()
+            spectralFilters()
+            spectralFilterSolarMag()
+            spectralZmfl()
+            sunAzimuth()
+            sunElevation()
+            sunStatePosX()
+            sunStatePosY()
+            sunStatePosZ()
+            sunStateVelX()
+            sunStateVelY()
+            sunStateVelZ()
+            surfBrightness()
+            surfBrightnessUnc()
+            timesUnc()
+            toes()
+            zeroPoints()
+            zeroPointsUnc()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -7448,40 +8295,125 @@ class EoObservationFull private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
         @JvmSynthetic
-        internal fun validity(): Int = (if (acalCrPixX.asKnown().isPresent) 1 else 0) + (if (acalCrPixY.asKnown().isPresent) 1 else 0) + (if (acalCrValX.asKnown().isPresent) 1 else 0) + (if (acalCrValY.asKnown().isPresent) 1 else 0) + (if (acalNumStars.asKnown().isPresent) 1 else 0) + (if (backgroundSignal.asKnown().isPresent) 1 else 0) + (if (backgroundSignalUnc.asKnown().isPresent) 1 else 0) + (if (binningHoriz.asKnown().isPresent) 1 else 0) + (if (binningVert.asKnown().isPresent) 1 else 0) + (if (ccdObjPosX.asKnown().isPresent) 1 else 0) + (if (ccdObjPosY.asKnown().isPresent) 1 else 0) + (if (ccdObjWidth.asKnown().isPresent) 1 else 0) + (if (ccdTemp.asKnown().isPresent) 1 else 0) + (if (centroidColumn.asKnown().isPresent) 1 else 0) + (if (centroidRow.asKnown().isPresent) 1 else 0) + (if (classificationMarking.asKnown().isPresent) 1 else 0) + (colorCoeffs.asKnown().getOrNull()?.size ?: 0) + (if (columnVariance.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (currentNeutralDensityFilterNum.asKnown().isPresent) 1 else 0) + (if (currentSpectralFilterNum.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (declinationCov.asKnown().isPresent) 1 else 0) + (distFromStreakCenter.asKnown().getOrNull()?.size ?: 0) + (if (does.asKnown().isPresent) 1 else 0) + (extinctionCoeffs.asKnown().getOrNull()?.size ?: 0) + (extinctionCoeffsUnc.asKnown().getOrNull()?.size ?: 0) + (if (gain.asKnown().isPresent) 1 else 0) + (if (idEoObservation.asKnown().isPresent) 1 else 0) + (if (ifov.asKnown().isPresent) 1 else 0) + (if (magInstrumental.asKnown().isPresent) 1 else 0) + (if (magInstrumentalUnc.asKnown().isPresent) 1 else 0) + (neutralDensityFilterNames.asKnown().getOrNull()?.size ?: 0) + (neutralDensityFilterTransmissions.asKnown().getOrNull()?.size ?: 0) + (neutralDensityFilterTransmissionsUnc.asKnown().getOrNull()?.size ?: 0) + (if (numCatalogStars.asKnown().isPresent) 1 else 0) + (if (numCorrelatedStars.asKnown().isPresent) 1 else 0) + (if (numDetectedStars.asKnown().isPresent) 1 else 0) + (if (numNeutralDensityFilters.asKnown().isPresent) 1 else 0) + (if (numSpectralFilters.asKnown().isPresent) 1 else 0) + (if (objSunRange.asKnown().isPresent) 1 else 0) + (if (obTime.asKnown().isPresent) 1 else 0) + (if (opticalCrossSection.asKnown().isPresent) 1 else 0) + (if (opticalCrossSectionUnc.asKnown().isPresent) 1 else 0) + (if (pcalNumStars.asKnown().isPresent) 1 else 0) + (if (peakApertureCount.asKnown().isPresent) 1 else 0) + (if (peakBackgroundCount.asKnown().isPresent) 1 else 0) + (if (phaseAngBisect.asKnown().isPresent) 1 else 0) + (if (pixelArrayHeight.asKnown().isPresent) 1 else 0) + (if (pixelArrayWidth.asKnown().isPresent) 1 else 0) + (if (pixelMax.asKnown().isPresent) 1 else 0) + (if (pixelMin.asKnown().isPresent) 1 else 0) + (if (predictedAzimuth.asKnown().isPresent) 1 else 0) + (if (predictedDeclination.asKnown().isPresent) 1 else 0) + (if (predictedDeclinationUnc.asKnown().isPresent) 1 else 0) + (if (predictedElevation.asKnown().isPresent) 1 else 0) + (if (predictedRa.asKnown().isPresent) 1 else 0) + (if (predictedRaUnc.asKnown().isPresent) 1 else 0) + (if (raCov.asKnown().isPresent) 1 else 0) + (if (raDeclinationCov.asKnown().isPresent) 1 else 0) + (if (rowColCov.asKnown().isPresent) 1 else 0) + (if (rowVariance.asKnown().isPresent) 1 else 0) + (if (snrEst.asKnown().isPresent) 1 else 0) + (if (solarDiskFrac.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (spectralFilters.asKnown().getOrNull()?.size ?: 0) + (spectralFilterSolarMag.asKnown().getOrNull()?.size ?: 0) + (spectralZmfl.asKnown().getOrNull()?.size ?: 0) + (if (sunAzimuth.asKnown().isPresent) 1 else 0) + (if (sunElevation.asKnown().isPresent) 1 else 0) + (if (sunStatePosX.asKnown().isPresent) 1 else 0) + (if (sunStatePosY.asKnown().isPresent) 1 else 0) + (if (sunStatePosZ.asKnown().isPresent) 1 else 0) + (if (sunStateVelX.asKnown().isPresent) 1 else 0) + (if (sunStateVelY.asKnown().isPresent) 1 else 0) + (if (sunStateVelZ.asKnown().isPresent) 1 else 0) + (surfBrightness.asKnown().getOrNull()?.size ?: 0) + (surfBrightnessUnc.asKnown().getOrNull()?.size ?: 0) + (if (timesUnc.asKnown().isPresent) 1 else 0) + (if (toes.asKnown().isPresent) 1 else 0) + (zeroPoints.asKnown().getOrNull()?.size ?: 0) + (zeroPointsUnc.asKnown().getOrNull()?.size ?: 0)
+        internal fun validity(): Int =
+            (if (acalCrPixX.asKnown().isPresent) 1 else 0) +
+                (if (acalCrPixY.asKnown().isPresent) 1 else 0) +
+                (if (acalCrValX.asKnown().isPresent) 1 else 0) +
+                (if (acalCrValY.asKnown().isPresent) 1 else 0) +
+                (if (acalNumStars.asKnown().isPresent) 1 else 0) +
+                (if (backgroundSignal.asKnown().isPresent) 1 else 0) +
+                (if (backgroundSignalUnc.asKnown().isPresent) 1 else 0) +
+                (if (binningHoriz.asKnown().isPresent) 1 else 0) +
+                (if (binningVert.asKnown().isPresent) 1 else 0) +
+                (if (ccdObjPosX.asKnown().isPresent) 1 else 0) +
+                (if (ccdObjPosY.asKnown().isPresent) 1 else 0) +
+                (if (ccdObjWidth.asKnown().isPresent) 1 else 0) +
+                (if (ccdTemp.asKnown().isPresent) 1 else 0) +
+                (if (centroidColumn.asKnown().isPresent) 1 else 0) +
+                (if (centroidRow.asKnown().isPresent) 1 else 0) +
+                (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+                (colorCoeffs.asKnown().getOrNull()?.size ?: 0) +
+                (if (columnVariance.asKnown().isPresent) 1 else 0) +
+                (if (createdAt.asKnown().isPresent) 1 else 0) +
+                (if (createdBy.asKnown().isPresent) 1 else 0) +
+                (if (currentNeutralDensityFilterNum.asKnown().isPresent) 1 else 0) +
+                (if (currentSpectralFilterNum.asKnown().isPresent) 1 else 0) +
+                (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+                (if (declinationCov.asKnown().isPresent) 1 else 0) +
+                (distFromStreakCenter.asKnown().getOrNull()?.size ?: 0) +
+                (if (does.asKnown().isPresent) 1 else 0) +
+                (extinctionCoeffs.asKnown().getOrNull()?.size ?: 0) +
+                (extinctionCoeffsUnc.asKnown().getOrNull()?.size ?: 0) +
+                (if (gain.asKnown().isPresent) 1 else 0) +
+                (if (idEoObservation.asKnown().isPresent) 1 else 0) +
+                (if (ifov.asKnown().isPresent) 1 else 0) +
+                (if (magInstrumental.asKnown().isPresent) 1 else 0) +
+                (if (magInstrumentalUnc.asKnown().isPresent) 1 else 0) +
+                (neutralDensityFilterNames.asKnown().getOrNull()?.size ?: 0) +
+                (neutralDensityFilterTransmissions.asKnown().getOrNull()?.size ?: 0) +
+                (neutralDensityFilterTransmissionsUnc.asKnown().getOrNull()?.size ?: 0) +
+                (if (numCatalogStars.asKnown().isPresent) 1 else 0) +
+                (if (numCorrelatedStars.asKnown().isPresent) 1 else 0) +
+                (if (numDetectedStars.asKnown().isPresent) 1 else 0) +
+                (if (numNeutralDensityFilters.asKnown().isPresent) 1 else 0) +
+                (if (numSpectralFilters.asKnown().isPresent) 1 else 0) +
+                (if (objSunRange.asKnown().isPresent) 1 else 0) +
+                (if (obTime.asKnown().isPresent) 1 else 0) +
+                (if (opticalCrossSection.asKnown().isPresent) 1 else 0) +
+                (if (opticalCrossSectionUnc.asKnown().isPresent) 1 else 0) +
+                (if (pcalNumStars.asKnown().isPresent) 1 else 0) +
+                (if (peakApertureCount.asKnown().isPresent) 1 else 0) +
+                (if (peakBackgroundCount.asKnown().isPresent) 1 else 0) +
+                (if (phaseAngBisect.asKnown().isPresent) 1 else 0) +
+                (if (pixelArrayHeight.asKnown().isPresent) 1 else 0) +
+                (if (pixelArrayWidth.asKnown().isPresent) 1 else 0) +
+                (if (pixelMax.asKnown().isPresent) 1 else 0) +
+                (if (pixelMin.asKnown().isPresent) 1 else 0) +
+                (if (predictedAzimuth.asKnown().isPresent) 1 else 0) +
+                (if (predictedDeclination.asKnown().isPresent) 1 else 0) +
+                (if (predictedDeclinationUnc.asKnown().isPresent) 1 else 0) +
+                (if (predictedElevation.asKnown().isPresent) 1 else 0) +
+                (if (predictedRa.asKnown().isPresent) 1 else 0) +
+                (if (predictedRaUnc.asKnown().isPresent) 1 else 0) +
+                (if (raCov.asKnown().isPresent) 1 else 0) +
+                (if (raDeclinationCov.asKnown().isPresent) 1 else 0) +
+                (if (rowColCov.asKnown().isPresent) 1 else 0) +
+                (if (rowVariance.asKnown().isPresent) 1 else 0) +
+                (if (snrEst.asKnown().isPresent) 1 else 0) +
+                (if (solarDiskFrac.asKnown().isPresent) 1 else 0) +
+                (if (source.asKnown().isPresent) 1 else 0) +
+                (spectralFilters.asKnown().getOrNull()?.size ?: 0) +
+                (spectralFilterSolarMag.asKnown().getOrNull()?.size ?: 0) +
+                (spectralZmfl.asKnown().getOrNull()?.size ?: 0) +
+                (if (sunAzimuth.asKnown().isPresent) 1 else 0) +
+                (if (sunElevation.asKnown().isPresent) 1 else 0) +
+                (if (sunStatePosX.asKnown().isPresent) 1 else 0) +
+                (if (sunStatePosY.asKnown().isPresent) 1 else 0) +
+                (if (sunStatePosZ.asKnown().isPresent) 1 else 0) +
+                (if (sunStateVelX.asKnown().isPresent) 1 else 0) +
+                (if (sunStateVelY.asKnown().isPresent) 1 else 0) +
+                (if (sunStateVelZ.asKnown().isPresent) 1 else 0) +
+                (surfBrightness.asKnown().getOrNull()?.size ?: 0) +
+                (surfBrightnessUnc.asKnown().getOrNull()?.size ?: 0) +
+                (if (timesUnc.asKnown().isPresent) 1 else 0) +
+                (if (toes.asKnown().isPresent) 1 else 0) +
+                (zeroPoints.asKnown().getOrNull()?.size ?: 0) +
+                (zeroPointsUnc.asKnown().getOrNull()?.size ?: 0)
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          *
          * , will be set to EOObservation dataMode if blank.
          */
-        class DataMode @JsonCreator private constructor(
-            private val value: JsonField<String>,
-
-        ) : Enum {
+        class DataMode @JsonCreator private constructor(private val value: JsonField<String>) :
+            Enum {
 
             /**
              * Returns this class instance's raw value.
              *
-             * This is usually only useful if this instance was deserialized from data that doesn't match any known
-             * member, and you want to know that value. For example, if the SDK is on an older version than the
-             * API, then the API may respond with new members that the SDK is unaware of.
+             * This is usually only useful if this instance was deserialized from data that doesn't
+             * match any known member, and you want to know that value. For example, if the SDK is
+             * on an older version than the API, then the API may respond with new members that the
+             * SDK is unaware of.
              */
-            @com.fasterxml.jackson.annotation.JsonValue
-            fun _value(): JsonField<String> = value
+            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
             companion object {
 
@@ -7508,11 +8440,9 @@ class EoObservationFull private constructor(
              * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
              *
              * An instance of [DataMode] can contain an unknown value in a couple of cases:
-             *
-             * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-             *   an older version than the API, then the API may respond with new members that the SDK is unaware
-             *   of.
-             *
+             * - It was deserialized from data that doesn't match any known member. For example, if
+             *   the SDK is on an older version than the API, then the API may respond with new
+             *   members that the SDK is unaware of.
              * - It was constructed with an arbitrary value using the [of] method.
              */
             enum class Value {
@@ -7520,16 +8450,18 @@ class EoObservationFull private constructor(
                 TEST,
                 SIMULATED,
                 EXERCISE,
-                /** An enum member indicating that [DataMode] was instantiated with an unknown value. */
+                /**
+                 * An enum member indicating that [DataMode] was instantiated with an unknown value.
+                 */
                 _UNKNOWN,
             }
 
             /**
-             * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-             * class was instantiated with an unknown value.
+             * Returns an enum member corresponding to this class instance's value, or
+             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
              *
-             * Use the [known] method instead if you're certain the value is always known or if you want to throw
-             * for the unknown case.
+             * Use the [known] method instead if you're certain the value is always known or if you
+             * want to throw for the unknown case.
              */
             fun value(): Value =
                 when (this) {
@@ -7543,10 +8475,11 @@ class EoObservationFull private constructor(
             /**
              * Returns an enum member corresponding to this class instance's value.
              *
-             * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-             * for the unknown case.
+             * Use the [value] method instead if you're uncertain the value is always known and
+             * don't want to throw for the unknown case.
              *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
+             *   not a known member.
              */
             fun known(): Known =
                 when (this) {
@@ -7560,25 +8493,27 @@ class EoObservationFull private constructor(
             /**
              * Returns this class instance's primitive wire representation.
              *
-             * This differs from the [toString] method because that method is primarily for debugging and generally
-             * doesn't throw.
+             * This differs from the [toString] method because that method is primarily for
+             * debugging and generally doesn't throw.
              *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-             * primitive type.
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
+             *   not have the expected primitive type.
              */
-            fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+            fun asString(): String =
+                _value().asString().orElseThrow {
+                    UnifieddatalibraryInvalidDataException("Value is not a String")
+                }
 
             private var validated: Boolean = false
 
-            fun validate(): DataMode =
-                apply {
-                    if (validated) {
-                      return@apply
-                    }
-
-                    known()
-                    validated = true
+            fun validate(): DataMode = apply {
+                if (validated) {
+                    return@apply
                 }
+
+                known()
+                validated = true
+            }
 
             fun isValid(): Boolean =
                 try {
@@ -7589,19 +8524,19 @@ class EoObservationFull private constructor(
                 }
 
             /**
-             * Returns a score indicating how many valid values are contained in this object recursively.
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
              *
              * Used for best match union deserialization.
              */
-            @JvmSynthetic
-            internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
             override fun equals(other: Any?): Boolean {
-              if (this === other) {
-                  return true
-              }
+                if (this === other) {
+                    return true
+                }
 
-              return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -7610,37 +8545,209 @@ class EoObservationFull private constructor(
         }
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is EoobservationDetails && acalCrPixX == other.acalCrPixX && acalCrPixY == other.acalCrPixY && acalCrValX == other.acalCrValX && acalCrValY == other.acalCrValY && acalNumStars == other.acalNumStars && backgroundSignal == other.backgroundSignal && backgroundSignalUnc == other.backgroundSignalUnc && binningHoriz == other.binningHoriz && binningVert == other.binningVert && ccdObjPosX == other.ccdObjPosX && ccdObjPosY == other.ccdObjPosY && ccdObjWidth == other.ccdObjWidth && ccdTemp == other.ccdTemp && centroidColumn == other.centroidColumn && centroidRow == other.centroidRow && classificationMarking == other.classificationMarking && colorCoeffs == other.colorCoeffs && columnVariance == other.columnVariance && createdAt == other.createdAt && createdBy == other.createdBy && currentNeutralDensityFilterNum == other.currentNeutralDensityFilterNum && currentSpectralFilterNum == other.currentSpectralFilterNum && dataMode == other.dataMode && declinationCov == other.declinationCov && distFromStreakCenter == other.distFromStreakCenter && does == other.does && extinctionCoeffs == other.extinctionCoeffs && extinctionCoeffsUnc == other.extinctionCoeffsUnc && gain == other.gain && idEoObservation == other.idEoObservation && ifov == other.ifov && magInstrumental == other.magInstrumental && magInstrumentalUnc == other.magInstrumentalUnc && neutralDensityFilterNames == other.neutralDensityFilterNames && neutralDensityFilterTransmissions == other.neutralDensityFilterTransmissions && neutralDensityFilterTransmissionsUnc == other.neutralDensityFilterTransmissionsUnc && numCatalogStars == other.numCatalogStars && numCorrelatedStars == other.numCorrelatedStars && numDetectedStars == other.numDetectedStars && numNeutralDensityFilters == other.numNeutralDensityFilters && numSpectralFilters == other.numSpectralFilters && objSunRange == other.objSunRange && obTime == other.obTime && opticalCrossSection == other.opticalCrossSection && opticalCrossSectionUnc == other.opticalCrossSectionUnc && pcalNumStars == other.pcalNumStars && peakApertureCount == other.peakApertureCount && peakBackgroundCount == other.peakBackgroundCount && phaseAngBisect == other.phaseAngBisect && pixelArrayHeight == other.pixelArrayHeight && pixelArrayWidth == other.pixelArrayWidth && pixelMax == other.pixelMax && pixelMin == other.pixelMin && predictedAzimuth == other.predictedAzimuth && predictedDeclination == other.predictedDeclination && predictedDeclinationUnc == other.predictedDeclinationUnc && predictedElevation == other.predictedElevation && predictedRa == other.predictedRa && predictedRaUnc == other.predictedRaUnc && raCov == other.raCov && raDeclinationCov == other.raDeclinationCov && rowColCov == other.rowColCov && rowVariance == other.rowVariance && snrEst == other.snrEst && solarDiskFrac == other.solarDiskFrac && source == other.source && spectralFilters == other.spectralFilters && spectralFilterSolarMag == other.spectralFilterSolarMag && spectralZmfl == other.spectralZmfl && sunAzimuth == other.sunAzimuth && sunElevation == other.sunElevation && sunStatePosX == other.sunStatePosX && sunStatePosY == other.sunStatePosY && sunStatePosZ == other.sunStatePosZ && sunStateVelX == other.sunStateVelX && sunStateVelY == other.sunStateVelY && sunStateVelZ == other.sunStateVelZ && surfBrightness == other.surfBrightness && surfBrightnessUnc == other.surfBrightnessUnc && timesUnc == other.timesUnc && toes == other.toes && zeroPoints == other.zeroPoints && zeroPointsUnc == other.zeroPointsUnc && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is EoobservationDetails &&
+                acalCrPixX == other.acalCrPixX &&
+                acalCrPixY == other.acalCrPixY &&
+                acalCrValX == other.acalCrValX &&
+                acalCrValY == other.acalCrValY &&
+                acalNumStars == other.acalNumStars &&
+                backgroundSignal == other.backgroundSignal &&
+                backgroundSignalUnc == other.backgroundSignalUnc &&
+                binningHoriz == other.binningHoriz &&
+                binningVert == other.binningVert &&
+                ccdObjPosX == other.ccdObjPosX &&
+                ccdObjPosY == other.ccdObjPosY &&
+                ccdObjWidth == other.ccdObjWidth &&
+                ccdTemp == other.ccdTemp &&
+                centroidColumn == other.centroidColumn &&
+                centroidRow == other.centroidRow &&
+                classificationMarking == other.classificationMarking &&
+                colorCoeffs == other.colorCoeffs &&
+                columnVariance == other.columnVariance &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                currentNeutralDensityFilterNum == other.currentNeutralDensityFilterNum &&
+                currentSpectralFilterNum == other.currentSpectralFilterNum &&
+                dataMode == other.dataMode &&
+                declinationCov == other.declinationCov &&
+                distFromStreakCenter == other.distFromStreakCenter &&
+                does == other.does &&
+                extinctionCoeffs == other.extinctionCoeffs &&
+                extinctionCoeffsUnc == other.extinctionCoeffsUnc &&
+                gain == other.gain &&
+                idEoObservation == other.idEoObservation &&
+                ifov == other.ifov &&
+                magInstrumental == other.magInstrumental &&
+                magInstrumentalUnc == other.magInstrumentalUnc &&
+                neutralDensityFilterNames == other.neutralDensityFilterNames &&
+                neutralDensityFilterTransmissions == other.neutralDensityFilterTransmissions &&
+                neutralDensityFilterTransmissionsUnc ==
+                    other.neutralDensityFilterTransmissionsUnc &&
+                numCatalogStars == other.numCatalogStars &&
+                numCorrelatedStars == other.numCorrelatedStars &&
+                numDetectedStars == other.numDetectedStars &&
+                numNeutralDensityFilters == other.numNeutralDensityFilters &&
+                numSpectralFilters == other.numSpectralFilters &&
+                objSunRange == other.objSunRange &&
+                obTime == other.obTime &&
+                opticalCrossSection == other.opticalCrossSection &&
+                opticalCrossSectionUnc == other.opticalCrossSectionUnc &&
+                pcalNumStars == other.pcalNumStars &&
+                peakApertureCount == other.peakApertureCount &&
+                peakBackgroundCount == other.peakBackgroundCount &&
+                phaseAngBisect == other.phaseAngBisect &&
+                pixelArrayHeight == other.pixelArrayHeight &&
+                pixelArrayWidth == other.pixelArrayWidth &&
+                pixelMax == other.pixelMax &&
+                pixelMin == other.pixelMin &&
+                predictedAzimuth == other.predictedAzimuth &&
+                predictedDeclination == other.predictedDeclination &&
+                predictedDeclinationUnc == other.predictedDeclinationUnc &&
+                predictedElevation == other.predictedElevation &&
+                predictedRa == other.predictedRa &&
+                predictedRaUnc == other.predictedRaUnc &&
+                raCov == other.raCov &&
+                raDeclinationCov == other.raDeclinationCov &&
+                rowColCov == other.rowColCov &&
+                rowVariance == other.rowVariance &&
+                snrEst == other.snrEst &&
+                solarDiskFrac == other.solarDiskFrac &&
+                source == other.source &&
+                spectralFilters == other.spectralFilters &&
+                spectralFilterSolarMag == other.spectralFilterSolarMag &&
+                spectralZmfl == other.spectralZmfl &&
+                sunAzimuth == other.sunAzimuth &&
+                sunElevation == other.sunElevation &&
+                sunStatePosX == other.sunStatePosX &&
+                sunStatePosY == other.sunStatePosY &&
+                sunStatePosZ == other.sunStatePosZ &&
+                sunStateVelX == other.sunStateVelX &&
+                sunStateVelY == other.sunStateVelY &&
+                sunStateVelZ == other.sunStateVelZ &&
+                surfBrightness == other.surfBrightness &&
+                surfBrightnessUnc == other.surfBrightnessUnc &&
+                timesUnc == other.timesUnc &&
+                toes == other.toes &&
+                zeroPoints == other.zeroPoints &&
+                zeroPointsUnc == other.zeroPointsUnc &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(acalCrPixX, acalCrPixY, acalCrValX, acalCrValY, acalNumStars, backgroundSignal, backgroundSignalUnc, binningHoriz, binningVert, ccdObjPosX, ccdObjPosY, ccdObjWidth, ccdTemp, centroidColumn, centroidRow, classificationMarking, colorCoeffs, columnVariance, createdAt, createdBy, currentNeutralDensityFilterNum, currentSpectralFilterNum, dataMode, declinationCov, distFromStreakCenter, does, extinctionCoeffs, extinctionCoeffsUnc, gain, idEoObservation, ifov, magInstrumental, magInstrumentalUnc, neutralDensityFilterNames, neutralDensityFilterTransmissions, neutralDensityFilterTransmissionsUnc, numCatalogStars, numCorrelatedStars, numDetectedStars, numNeutralDensityFilters, numSpectralFilters, objSunRange, obTime, opticalCrossSection, opticalCrossSectionUnc, pcalNumStars, peakApertureCount, peakBackgroundCount, phaseAngBisect, pixelArrayHeight, pixelArrayWidth, pixelMax, pixelMin, predictedAzimuth, predictedDeclination, predictedDeclinationUnc, predictedElevation, predictedRa, predictedRaUnc, raCov, raDeclinationCov, rowColCov, rowVariance, snrEst, solarDiskFrac, source, spectralFilters, spectralFilterSolarMag, spectralZmfl, sunAzimuth, sunElevation, sunStatePosX, sunStatePosY, sunStatePosZ, sunStateVelX, sunStateVelY, sunStateVelZ, surfBrightness, surfBrightnessUnc, timesUnc, toes, zeroPoints, zeroPointsUnc, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                acalCrPixX,
+                acalCrPixY,
+                acalCrValX,
+                acalCrValY,
+                acalNumStars,
+                backgroundSignal,
+                backgroundSignalUnc,
+                binningHoriz,
+                binningVert,
+                ccdObjPosX,
+                ccdObjPosY,
+                ccdObjWidth,
+                ccdTemp,
+                centroidColumn,
+                centroidRow,
+                classificationMarking,
+                colorCoeffs,
+                columnVariance,
+                createdAt,
+                createdBy,
+                currentNeutralDensityFilterNum,
+                currentSpectralFilterNum,
+                dataMode,
+                declinationCov,
+                distFromStreakCenter,
+                does,
+                extinctionCoeffs,
+                extinctionCoeffsUnc,
+                gain,
+                idEoObservation,
+                ifov,
+                magInstrumental,
+                magInstrumentalUnc,
+                neutralDensityFilterNames,
+                neutralDensityFilterTransmissions,
+                neutralDensityFilterTransmissionsUnc,
+                numCatalogStars,
+                numCorrelatedStars,
+                numDetectedStars,
+                numNeutralDensityFilters,
+                numSpectralFilters,
+                objSunRange,
+                obTime,
+                opticalCrossSection,
+                opticalCrossSectionUnc,
+                pcalNumStars,
+                peakApertureCount,
+                peakBackgroundCount,
+                phaseAngBisect,
+                pixelArrayHeight,
+                pixelArrayWidth,
+                pixelMax,
+                pixelMin,
+                predictedAzimuth,
+                predictedDeclination,
+                predictedDeclinationUnc,
+                predictedElevation,
+                predictedRa,
+                predictedRaUnc,
+                raCov,
+                raDeclinationCov,
+                rowColCov,
+                rowVariance,
+                snrEst,
+                solarDiskFrac,
+                source,
+                spectralFilters,
+                spectralFilterSolarMag,
+                spectralZmfl,
+                sunAzimuth,
+                sunElevation,
+                sunStatePosX,
+                sunStatePosY,
+                sunStatePosZ,
+                sunStateVelX,
+                sunStateVelY,
+                sunStateVelZ,
+                surfBrightness,
+                surfBrightnessUnc,
+                timesUnc,
+                toes,
+                zeroPoints,
+                zeroPointsUnc,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() = "EoobservationDetails{acalCrPixX=$acalCrPixX, acalCrPixY=$acalCrPixY, acalCrValX=$acalCrValX, acalCrValY=$acalCrValY, acalNumStars=$acalNumStars, backgroundSignal=$backgroundSignal, backgroundSignalUnc=$backgroundSignalUnc, binningHoriz=$binningHoriz, binningVert=$binningVert, ccdObjPosX=$ccdObjPosX, ccdObjPosY=$ccdObjPosY, ccdObjWidth=$ccdObjWidth, ccdTemp=$ccdTemp, centroidColumn=$centroidColumn, centroidRow=$centroidRow, classificationMarking=$classificationMarking, colorCoeffs=$colorCoeffs, columnVariance=$columnVariance, createdAt=$createdAt, createdBy=$createdBy, currentNeutralDensityFilterNum=$currentNeutralDensityFilterNum, currentSpectralFilterNum=$currentSpectralFilterNum, dataMode=$dataMode, declinationCov=$declinationCov, distFromStreakCenter=$distFromStreakCenter, does=$does, extinctionCoeffs=$extinctionCoeffs, extinctionCoeffsUnc=$extinctionCoeffsUnc, gain=$gain, idEoObservation=$idEoObservation, ifov=$ifov, magInstrumental=$magInstrumental, magInstrumentalUnc=$magInstrumentalUnc, neutralDensityFilterNames=$neutralDensityFilterNames, neutralDensityFilterTransmissions=$neutralDensityFilterTransmissions, neutralDensityFilterTransmissionsUnc=$neutralDensityFilterTransmissionsUnc, numCatalogStars=$numCatalogStars, numCorrelatedStars=$numCorrelatedStars, numDetectedStars=$numDetectedStars, numNeutralDensityFilters=$numNeutralDensityFilters, numSpectralFilters=$numSpectralFilters, objSunRange=$objSunRange, obTime=$obTime, opticalCrossSection=$opticalCrossSection, opticalCrossSectionUnc=$opticalCrossSectionUnc, pcalNumStars=$pcalNumStars, peakApertureCount=$peakApertureCount, peakBackgroundCount=$peakBackgroundCount, phaseAngBisect=$phaseAngBisect, pixelArrayHeight=$pixelArrayHeight, pixelArrayWidth=$pixelArrayWidth, pixelMax=$pixelMax, pixelMin=$pixelMin, predictedAzimuth=$predictedAzimuth, predictedDeclination=$predictedDeclination, predictedDeclinationUnc=$predictedDeclinationUnc, predictedElevation=$predictedElevation, predictedRa=$predictedRa, predictedRaUnc=$predictedRaUnc, raCov=$raCov, raDeclinationCov=$raDeclinationCov, rowColCov=$rowColCov, rowVariance=$rowVariance, snrEst=$snrEst, solarDiskFrac=$solarDiskFrac, source=$source, spectralFilters=$spectralFilters, spectralFilterSolarMag=$spectralFilterSolarMag, spectralZmfl=$spectralZmfl, sunAzimuth=$sunAzimuth, sunElevation=$sunElevation, sunStatePosX=$sunStatePosX, sunStatePosY=$sunStatePosY, sunStatePosZ=$sunStatePosZ, sunStateVelX=$sunStateVelX, sunStateVelY=$sunStateVelY, sunStateVelZ=$sunStateVelZ, surfBrightness=$surfBrightness, surfBrightnessUnc=$surfBrightnessUnc, timesUnc=$timesUnc, toes=$toes, zeroPoints=$zeroPoints, zeroPointsUnc=$zeroPointsUnc, additionalProperties=$additionalProperties}"
+        override fun toString() =
+            "EoobservationDetails{acalCrPixX=$acalCrPixX, acalCrPixY=$acalCrPixY, acalCrValX=$acalCrValX, acalCrValY=$acalCrValY, acalNumStars=$acalNumStars, backgroundSignal=$backgroundSignal, backgroundSignalUnc=$backgroundSignalUnc, binningHoriz=$binningHoriz, binningVert=$binningVert, ccdObjPosX=$ccdObjPosX, ccdObjPosY=$ccdObjPosY, ccdObjWidth=$ccdObjWidth, ccdTemp=$ccdTemp, centroidColumn=$centroidColumn, centroidRow=$centroidRow, classificationMarking=$classificationMarking, colorCoeffs=$colorCoeffs, columnVariance=$columnVariance, createdAt=$createdAt, createdBy=$createdBy, currentNeutralDensityFilterNum=$currentNeutralDensityFilterNum, currentSpectralFilterNum=$currentSpectralFilterNum, dataMode=$dataMode, declinationCov=$declinationCov, distFromStreakCenter=$distFromStreakCenter, does=$does, extinctionCoeffs=$extinctionCoeffs, extinctionCoeffsUnc=$extinctionCoeffsUnc, gain=$gain, idEoObservation=$idEoObservation, ifov=$ifov, magInstrumental=$magInstrumental, magInstrumentalUnc=$magInstrumentalUnc, neutralDensityFilterNames=$neutralDensityFilterNames, neutralDensityFilterTransmissions=$neutralDensityFilterTransmissions, neutralDensityFilterTransmissionsUnc=$neutralDensityFilterTransmissionsUnc, numCatalogStars=$numCatalogStars, numCorrelatedStars=$numCorrelatedStars, numDetectedStars=$numDetectedStars, numNeutralDensityFilters=$numNeutralDensityFilters, numSpectralFilters=$numSpectralFilters, objSunRange=$objSunRange, obTime=$obTime, opticalCrossSection=$opticalCrossSection, opticalCrossSectionUnc=$opticalCrossSectionUnc, pcalNumStars=$pcalNumStars, peakApertureCount=$peakApertureCount, peakBackgroundCount=$peakBackgroundCount, phaseAngBisect=$phaseAngBisect, pixelArrayHeight=$pixelArrayHeight, pixelArrayWidth=$pixelArrayWidth, pixelMax=$pixelMax, pixelMin=$pixelMin, predictedAzimuth=$predictedAzimuth, predictedDeclination=$predictedDeclination, predictedDeclinationUnc=$predictedDeclinationUnc, predictedElevation=$predictedElevation, predictedRa=$predictedRa, predictedRaUnc=$predictedRaUnc, raCov=$raCov, raDeclinationCov=$raDeclinationCov, rowColCov=$rowColCov, rowVariance=$rowVariance, snrEst=$snrEst, solarDiskFrac=$solarDiskFrac, source=$source, spectralFilters=$spectralFilters, spectralFilterSolarMag=$spectralFilterSolarMag, spectralZmfl=$spectralZmfl, sunAzimuth=$sunAzimuth, sunElevation=$sunElevation, sunStatePosX=$sunStatePosX, sunStatePosY=$sunStatePosY, sunStatePosZ=$sunStatePosZ, sunStateVelX=$sunStateVelX, sunStateVelY=$sunStateVelY, sunStateVelZ=$sunStateVelZ, surfBrightness=$surfBrightness, surfBrightnessUnc=$surfBrightnessUnc, timesUnc=$timesUnc, toes=$toes, zeroPoints=$zeroPoints, zeroPointsUnc=$zeroPointsUnc, additionalProperties=$additionalProperties}"
     }
 
-    /** The reference frame of the EOObservation measurements. If the referenceFrame is null it is assumed to be J2000. */
-    class ReferenceFrame @JsonCreator private constructor(
-        private val value: JsonField<String>,
-
-    ) : Enum {
+    /**
+     * The reference frame of the EOObservation measurements. If the referenceFrame is null it is
+     * assumed to be J2000.
+     */
+    class ReferenceFrame @JsonCreator private constructor(private val value: JsonField<String>) :
+        Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't match any known
-         * member, and you want to know that value. For example, if the SDK is on an older version than the
-         * API, then the API may respond with new members that the SDK is unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue
-        fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -7667,11 +8774,9 @@ class EoObservationFull private constructor(
          * An enum containing [ReferenceFrame]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [ReferenceFrame] can contain an unknown value in a couple of cases:
-         *
-         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-         *   an older version than the API, then the API may respond with new members that the SDK is unaware
-         *   of.
-         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -7679,16 +8784,19 @@ class EoObservationFull private constructor(
             GCRF,
             ITRF,
             TEME,
-            /** An enum member indicating that [ReferenceFrame] was instantiated with an unknown value. */
+            /**
+             * An enum member indicating that [ReferenceFrame] was instantiated with an unknown
+             * value.
+             */
             _UNKNOWN,
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-         * class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want to throw
-         * for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -7702,10 +8810,11 @@ class EoObservationFull private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-         * for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
          */
         fun known(): Known =
             when (this) {
@@ -7713,31 +8822,34 @@ class EoObservationFull private constructor(
                 GCRF -> Known.GCRF
                 ITRF -> Known.ITRF
                 TEME -> Known.TEME
-                else -> throw UnifieddatalibraryInvalidDataException("Unknown ReferenceFrame: $value")
+                else ->
+                    throw UnifieddatalibraryInvalidDataException("Unknown ReferenceFrame: $value")
             }
 
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging and generally
-         * doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-         * primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
          */
-        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
 
         private var validated: Boolean = false
 
-        fun validate(): ReferenceFrame =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                known()
-                validated = true
+        fun validate(): ReferenceFrame = apply {
+            if (validated) {
+                return@apply
             }
+
+            known()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -7748,19 +8860,19 @@ class EoObservationFull private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic
-        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is ReferenceFrame && value == other.value /* spotless:on */
+            return other is ReferenceFrame && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -7768,21 +8880,22 @@ class EoObservationFull private constructor(
         override fun toString() = value.toString()
     }
 
-    /** The reference frame of the observing sensor state. If the senReferenceFrame is null it is assumed to be J2000. */
-    class SenReferenceFrame @JsonCreator private constructor(
-        private val value: JsonField<String>,
-
-    ) : Enum {
+    /**
+     * The reference frame of the observing sensor state. If the senReferenceFrame is null it is
+     * assumed to be J2000.
+     */
+    class SenReferenceFrame @JsonCreator private constructor(private val value: JsonField<String>) :
+        Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't match any known
-         * member, and you want to know that value. For example, if the SDK is on an older version than the
-         * API, then the API may respond with new members that the SDK is unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue
-        fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -7815,11 +8928,9 @@ class EoObservationFull private constructor(
          * An enum containing [SenReferenceFrame]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [SenReferenceFrame] can contain an unknown value in a couple of cases:
-         *
-         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-         *   an older version than the API, then the API may respond with new members that the SDK is unaware
-         *   of.
-         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -7829,16 +8940,19 @@ class EoObservationFull private constructor(
             TEME,
             ITRF,
             GCRF,
-            /** An enum member indicating that [SenReferenceFrame] was instantiated with an unknown value. */
+            /**
+             * An enum member indicating that [SenReferenceFrame] was instantiated with an unknown
+             * value.
+             */
             _UNKNOWN,
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-         * class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want to throw
-         * for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -7854,10 +8968,11 @@ class EoObservationFull private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-         * for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
          */
         fun known(): Known =
             when (this) {
@@ -7867,31 +8982,36 @@ class EoObservationFull private constructor(
                 TEME -> Known.TEME
                 ITRF -> Known.ITRF
                 GCRF -> Known.GCRF
-                else -> throw UnifieddatalibraryInvalidDataException("Unknown SenReferenceFrame: $value")
+                else ->
+                    throw UnifieddatalibraryInvalidDataException(
+                        "Unknown SenReferenceFrame: $value"
+                    )
             }
 
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging and generally
-         * doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-         * primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
          */
-        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
 
         private var validated: Boolean = false
 
-        fun validate(): SenReferenceFrame =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                known()
-                validated = true
+        fun validate(): SenReferenceFrame = apply {
+            if (validated) {
+                return@apply
             }
+
+            known()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -7902,19 +9022,19 @@ class EoObservationFull private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic
-        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is SenReferenceFrame && value == other.value /* spotless:on */
+            return other is SenReferenceFrame && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -7923,18 +9043,224 @@ class EoObservationFull private constructor(
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is EoObservationFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && obTime == other.obTime && source == other.source && id == other.id && azimuth == other.azimuth && azimuthBias == other.azimuthBias && azimuthMeasured == other.azimuthMeasured && azimuthRate == other.azimuthRate && azimuthUnc == other.azimuthUnc && bgIntensity == other.bgIntensity && collectMethod == other.collectMethod && corrQuality == other.corrQuality && createdAt == other.createdAt && createdBy == other.createdBy && declination == other.declination && declinationBias == other.declinationBias && declinationMeasured == other.declinationMeasured && declinationRate == other.declinationRate && declinationUnc == other.declinationUnc && descriptor == other.descriptor && elevation == other.elevation && elevationBias == other.elevationBias && elevationMeasured == other.elevationMeasured && elevationRate == other.elevationRate && elevationUnc == other.elevationUnc && eoobservationDetails == other.eoobservationDetails && expDuration == other.expDuration && fovCount == other.fovCount && fovCountUct == other.fovCountUct && geoalt == other.geoalt && geolat == other.geolat && geolon == other.geolon && georange == other.georange && idOnOrbit == other.idOnOrbit && idSensor == other.idSensor && idSkyImagery == other.idSkyImagery && intensity == other.intensity && losUnc == other.losUnc && losx == other.losx && losxvel == other.losxvel && losy == other.losy && losyvel == other.losyvel && losz == other.losz && loszvel == other.loszvel && mag == other.mag && magNormRange == other.magNormRange && magUnc == other.magUnc && netObjSig == other.netObjSig && netObjSigUnc == other.netObjSigUnc && obPosition == other.obPosition && onOrbit == other.onOrbit && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId == other.origSensorId && penumbra == other.penumbra && primaryExtinction == other.primaryExtinction && primaryExtinctionUnc == other.primaryExtinctionUnc && ra == other.ra && raBias == other.raBias && raMeasured == other.raMeasured && range == other.range && rangeBias == other.rangeBias && rangeMeasured == other.rangeMeasured && rangeRate == other.rangeRate && rangeRateMeasured == other.rangeRateMeasured && rangeRateUnc == other.rangeRateUnc && rangeUnc == other.rangeUnc && raRate == other.raRate && raUnc == other.raUnc && rawFileUri == other.rawFileUri && referenceFrame == other.referenceFrame && satNo == other.satNo && senalt == other.senalt && senlat == other.senlat && senlon == other.senlon && senQuat == other.senQuat && senReferenceFrame == other.senReferenceFrame && senvelx == other.senvelx && senvely == other.senvely && senvelz == other.senvelz && senx == other.senx && seny == other.seny && senz == other.senz && shutterDelay == other.shutterDelay && skyBkgrnd == other.skyBkgrnd && solarDecAngle == other.solarDecAngle && solarEqPhaseAngle == other.solarEqPhaseAngle && solarPhaseAngle == other.solarPhaseAngle && sourceDl == other.sourceDl && tags == other.tags && taskId == other.taskId && timingBias == other.timingBias && trackId == other.trackId && transactionId == other.transactionId && type == other.type && uct == other.uct && umbra == other.umbra && zeroptd == other.zeroptd && zeroPtdUnc == other.zeroPtdUnc && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is EoObservationFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            obTime == other.obTime &&
+            source == other.source &&
+            id == other.id &&
+            azimuth == other.azimuth &&
+            azimuthBias == other.azimuthBias &&
+            azimuthMeasured == other.azimuthMeasured &&
+            azimuthRate == other.azimuthRate &&
+            azimuthUnc == other.azimuthUnc &&
+            bgIntensity == other.bgIntensity &&
+            collectMethod == other.collectMethod &&
+            corrQuality == other.corrQuality &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            declination == other.declination &&
+            declinationBias == other.declinationBias &&
+            declinationMeasured == other.declinationMeasured &&
+            declinationRate == other.declinationRate &&
+            declinationUnc == other.declinationUnc &&
+            descriptor == other.descriptor &&
+            elevation == other.elevation &&
+            elevationBias == other.elevationBias &&
+            elevationMeasured == other.elevationMeasured &&
+            elevationRate == other.elevationRate &&
+            elevationUnc == other.elevationUnc &&
+            eoobservationDetails == other.eoobservationDetails &&
+            expDuration == other.expDuration &&
+            fovCount == other.fovCount &&
+            fovCountUct == other.fovCountUct &&
+            geoalt == other.geoalt &&
+            geolat == other.geolat &&
+            geolon == other.geolon &&
+            georange == other.georange &&
+            idOnOrbit == other.idOnOrbit &&
+            idSensor == other.idSensor &&
+            idSkyImagery == other.idSkyImagery &&
+            intensity == other.intensity &&
+            losUnc == other.losUnc &&
+            losx == other.losx &&
+            losxvel == other.losxvel &&
+            losy == other.losy &&
+            losyvel == other.losyvel &&
+            losz == other.losz &&
+            loszvel == other.loszvel &&
+            mag == other.mag &&
+            magNormRange == other.magNormRange &&
+            magUnc == other.magUnc &&
+            netObjSig == other.netObjSig &&
+            netObjSigUnc == other.netObjSigUnc &&
+            obPosition == other.obPosition &&
+            onOrbit == other.onOrbit &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            origSensorId == other.origSensorId &&
+            penumbra == other.penumbra &&
+            primaryExtinction == other.primaryExtinction &&
+            primaryExtinctionUnc == other.primaryExtinctionUnc &&
+            ra == other.ra &&
+            raBias == other.raBias &&
+            raMeasured == other.raMeasured &&
+            range == other.range &&
+            rangeBias == other.rangeBias &&
+            rangeMeasured == other.rangeMeasured &&
+            rangeRate == other.rangeRate &&
+            rangeRateMeasured == other.rangeRateMeasured &&
+            rangeRateUnc == other.rangeRateUnc &&
+            rangeUnc == other.rangeUnc &&
+            raRate == other.raRate &&
+            raUnc == other.raUnc &&
+            rawFileUri == other.rawFileUri &&
+            referenceFrame == other.referenceFrame &&
+            satNo == other.satNo &&
+            senalt == other.senalt &&
+            senlat == other.senlat &&
+            senlon == other.senlon &&
+            senQuat == other.senQuat &&
+            senReferenceFrame == other.senReferenceFrame &&
+            senvelx == other.senvelx &&
+            senvely == other.senvely &&
+            senvelz == other.senvelz &&
+            senx == other.senx &&
+            seny == other.seny &&
+            senz == other.senz &&
+            shutterDelay == other.shutterDelay &&
+            skyBkgrnd == other.skyBkgrnd &&
+            solarDecAngle == other.solarDecAngle &&
+            solarEqPhaseAngle == other.solarEqPhaseAngle &&
+            solarPhaseAngle == other.solarPhaseAngle &&
+            sourceDl == other.sourceDl &&
+            tags == other.tags &&
+            taskId == other.taskId &&
+            timingBias == other.timingBias &&
+            trackId == other.trackId &&
+            transactionId == other.transactionId &&
+            type == other.type &&
+            uct == other.uct &&
+            umbra == other.umbra &&
+            zeroptd == other.zeroptd &&
+            zeroPtdUnc == other.zeroPtdUnc &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, obTime, source, id, azimuth, azimuthBias, azimuthMeasured, azimuthRate, azimuthUnc, bgIntensity, collectMethod, corrQuality, createdAt, createdBy, declination, declinationBias, declinationMeasured, declinationRate, declinationUnc, descriptor, elevation, elevationBias, elevationMeasured, elevationRate, elevationUnc, eoobservationDetails, expDuration, fovCount, fovCountUct, geoalt, geolat, geolon, georange, idOnOrbit, idSensor, idSkyImagery, intensity, losUnc, losx, losxvel, losy, losyvel, losz, loszvel, mag, magNormRange, magUnc, netObjSig, netObjSigUnc, obPosition, onOrbit, origin, origNetwork, origObjectId, origSensorId, penumbra, primaryExtinction, primaryExtinctionUnc, ra, raBias, raMeasured, range, rangeBias, rangeMeasured, rangeRate, rangeRateMeasured, rangeRateUnc, rangeUnc, raRate, raUnc, rawFileUri, referenceFrame, satNo, senalt, senlat, senlon, senQuat, senReferenceFrame, senvelx, senvely, senvelz, senx, seny, senz, shutterDelay, skyBkgrnd, solarDecAngle, solarEqPhaseAngle, solarPhaseAngle, sourceDl, tags, taskId, timingBias, trackId, transactionId, type, uct, umbra, zeroptd, zeroPtdUnc, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            obTime,
+            source,
+            id,
+            azimuth,
+            azimuthBias,
+            azimuthMeasured,
+            azimuthRate,
+            azimuthUnc,
+            bgIntensity,
+            collectMethod,
+            corrQuality,
+            createdAt,
+            createdBy,
+            declination,
+            declinationBias,
+            declinationMeasured,
+            declinationRate,
+            declinationUnc,
+            descriptor,
+            elevation,
+            elevationBias,
+            elevationMeasured,
+            elevationRate,
+            elevationUnc,
+            eoobservationDetails,
+            expDuration,
+            fovCount,
+            fovCountUct,
+            geoalt,
+            geolat,
+            geolon,
+            georange,
+            idOnOrbit,
+            idSensor,
+            idSkyImagery,
+            intensity,
+            losUnc,
+            losx,
+            losxvel,
+            losy,
+            losyvel,
+            losz,
+            loszvel,
+            mag,
+            magNormRange,
+            magUnc,
+            netObjSig,
+            netObjSigUnc,
+            obPosition,
+            onOrbit,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            penumbra,
+            primaryExtinction,
+            primaryExtinctionUnc,
+            ra,
+            raBias,
+            raMeasured,
+            range,
+            rangeBias,
+            rangeMeasured,
+            rangeRate,
+            rangeRateMeasured,
+            rangeRateUnc,
+            rangeUnc,
+            raRate,
+            raUnc,
+            rawFileUri,
+            referenceFrame,
+            satNo,
+            senalt,
+            senlat,
+            senlon,
+            senQuat,
+            senReferenceFrame,
+            senvelx,
+            senvely,
+            senvelz,
+            senx,
+            seny,
+            senz,
+            shutterDelay,
+            skyBkgrnd,
+            solarDecAngle,
+            solarEqPhaseAngle,
+            solarPhaseAngle,
+            sourceDl,
+            tags,
+            taskId,
+            timingBias,
+            trackId,
+            transactionId,
+            type,
+            uct,
+            umbra,
+            zeroptd,
+            zeroPtdUnc,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() = "EoObservationFull{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, id=$id, azimuth=$azimuth, azimuthBias=$azimuthBias, azimuthMeasured=$azimuthMeasured, azimuthRate=$azimuthRate, azimuthUnc=$azimuthUnc, bgIntensity=$bgIntensity, collectMethod=$collectMethod, corrQuality=$corrQuality, createdAt=$createdAt, createdBy=$createdBy, declination=$declination, declinationBias=$declinationBias, declinationMeasured=$declinationMeasured, declinationRate=$declinationRate, declinationUnc=$declinationUnc, descriptor=$descriptor, elevation=$elevation, elevationBias=$elevationBias, elevationMeasured=$elevationMeasured, elevationRate=$elevationRate, elevationUnc=$elevationUnc, eoobservationDetails=$eoobservationDetails, expDuration=$expDuration, fovCount=$fovCount, fovCountUct=$fovCountUct, geoalt=$geoalt, geolat=$geolat, geolon=$geolon, georange=$georange, idOnOrbit=$idOnOrbit, idSensor=$idSensor, idSkyImagery=$idSkyImagery, intensity=$intensity, losUnc=$losUnc, losx=$losx, losxvel=$losxvel, losy=$losy, losyvel=$losyvel, losz=$losz, loszvel=$loszvel, mag=$mag, magNormRange=$magNormRange, magUnc=$magUnc, netObjSig=$netObjSig, netObjSigUnc=$netObjSigUnc, obPosition=$obPosition, onOrbit=$onOrbit, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, penumbra=$penumbra, primaryExtinction=$primaryExtinction, primaryExtinctionUnc=$primaryExtinctionUnc, ra=$ra, raBias=$raBias, raMeasured=$raMeasured, range=$range, rangeBias=$rangeBias, rangeMeasured=$rangeMeasured, rangeRate=$rangeRate, rangeRateMeasured=$rangeRateMeasured, rangeRateUnc=$rangeRateUnc, rangeUnc=$rangeUnc, raRate=$raRate, raUnc=$raUnc, rawFileUri=$rawFileUri, referenceFrame=$referenceFrame, satNo=$satNo, senalt=$senalt, senlat=$senlat, senlon=$senlon, senQuat=$senQuat, senReferenceFrame=$senReferenceFrame, senvelx=$senvelx, senvely=$senvely, senvelz=$senvelz, senx=$senx, seny=$seny, senz=$senz, shutterDelay=$shutterDelay, skyBkgrnd=$skyBkgrnd, solarDecAngle=$solarDecAngle, solarEqPhaseAngle=$solarEqPhaseAngle, solarPhaseAngle=$solarPhaseAngle, sourceDl=$sourceDl, tags=$tags, taskId=$taskId, timingBias=$timingBias, trackId=$trackId, transactionId=$transactionId, type=$type, uct=$uct, umbra=$umbra, zeroptd=$zeroptd, zeroPtdUnc=$zeroPtdUnc, additionalProperties=$additionalProperties}"
+    override fun toString() =
+        "EoObservationFull{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, id=$id, azimuth=$azimuth, azimuthBias=$azimuthBias, azimuthMeasured=$azimuthMeasured, azimuthRate=$azimuthRate, azimuthUnc=$azimuthUnc, bgIntensity=$bgIntensity, collectMethod=$collectMethod, corrQuality=$corrQuality, createdAt=$createdAt, createdBy=$createdBy, declination=$declination, declinationBias=$declinationBias, declinationMeasured=$declinationMeasured, declinationRate=$declinationRate, declinationUnc=$declinationUnc, descriptor=$descriptor, elevation=$elevation, elevationBias=$elevationBias, elevationMeasured=$elevationMeasured, elevationRate=$elevationRate, elevationUnc=$elevationUnc, eoobservationDetails=$eoobservationDetails, expDuration=$expDuration, fovCount=$fovCount, fovCountUct=$fovCountUct, geoalt=$geoalt, geolat=$geolat, geolon=$geolon, georange=$georange, idOnOrbit=$idOnOrbit, idSensor=$idSensor, idSkyImagery=$idSkyImagery, intensity=$intensity, losUnc=$losUnc, losx=$losx, losxvel=$losxvel, losy=$losy, losyvel=$losyvel, losz=$losz, loszvel=$loszvel, mag=$mag, magNormRange=$magNormRange, magUnc=$magUnc, netObjSig=$netObjSig, netObjSigUnc=$netObjSigUnc, obPosition=$obPosition, onOrbit=$onOrbit, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, penumbra=$penumbra, primaryExtinction=$primaryExtinction, primaryExtinctionUnc=$primaryExtinctionUnc, ra=$ra, raBias=$raBias, raMeasured=$raMeasured, range=$range, rangeBias=$rangeBias, rangeMeasured=$rangeMeasured, rangeRate=$rangeRate, rangeRateMeasured=$rangeRateMeasured, rangeRateUnc=$rangeRateUnc, rangeUnc=$rangeUnc, raRate=$raRate, raUnc=$raUnc, rawFileUri=$rawFileUri, referenceFrame=$referenceFrame, satNo=$satNo, senalt=$senalt, senlat=$senlat, senlon=$senlon, senQuat=$senQuat, senReferenceFrame=$senReferenceFrame, senvelx=$senvelx, senvely=$senvely, senvelz=$senvelz, senx=$senx, seny=$seny, senz=$senz, shutterDelay=$shutterDelay, skyBkgrnd=$skyBkgrnd, solarDecAngle=$solarDecAngle, solarEqPhaseAngle=$solarEqPhaseAngle, solarPhaseAngle=$solarPhaseAngle, sourceDl=$sourceDl, tags=$tags, taskId=$taskId, timingBias=$timingBias, trackId=$trackId, transactionId=$transactionId, type=$type, uct=$uct, umbra=$umbra, zeroptd=$zeroptd, zeroPtdUnc=$zeroPtdUnc, additionalProperties=$additionalProperties}"
 }

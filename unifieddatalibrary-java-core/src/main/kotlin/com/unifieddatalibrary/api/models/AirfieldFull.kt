@@ -2024,7 +2024,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2037,12 +2037,103 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AirfieldFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && type == other.type && id == other.id && altAirfieldId == other.altAirfieldId && alternativeNames == other.alternativeNames && city == other.city && countryCode == other.countryCode && countryName == other.countryName && createdAt == other.createdAt && createdBy == other.createdBy && dstInfo == other.dstInfo && elevFt == other.elevFt && elevM == other.elevM && faa == other.faa && geoloc == other.geoloc && gmtOffset == other.gmtOffset && hostNatCode == other.hostNatCode && iata == other.iata && icao == other.icao && idSite == other.idSite && infoUrl == other.infoUrl && lat == other.lat && lon == other.lon && magDec == other.magDec && maxRunwayLength == other.maxRunwayLength && miscCodes == other.miscCodes && origin == other.origin && origNetwork == other.origNetwork && regionalAuthority == other.regionalAuthority && regionName == other.regionName && runways == other.runways && secondaryIcao == other.secondaryIcao && sourceDl == other.sourceDl && state == other.state && stateProvinceCode == other.stateProvinceCode && suitabilityCodeDescs == other.suitabilityCodeDescs && suitabilityCodes == other.suitabilityCodes && updatedAt == other.updatedAt && updatedBy == other.updatedBy && wacInnr == other.wacInnr && zarId == other.zarId && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is AirfieldFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            name == other.name &&
+            source == other.source &&
+            type == other.type &&
+            id == other.id &&
+            altAirfieldId == other.altAirfieldId &&
+            alternativeNames == other.alternativeNames &&
+            city == other.city &&
+            countryCode == other.countryCode &&
+            countryName == other.countryName &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            dstInfo == other.dstInfo &&
+            elevFt == other.elevFt &&
+            elevM == other.elevM &&
+            faa == other.faa &&
+            geoloc == other.geoloc &&
+            gmtOffset == other.gmtOffset &&
+            hostNatCode == other.hostNatCode &&
+            iata == other.iata &&
+            icao == other.icao &&
+            idSite == other.idSite &&
+            infoUrl == other.infoUrl &&
+            lat == other.lat &&
+            lon == other.lon &&
+            magDec == other.magDec &&
+            maxRunwayLength == other.maxRunwayLength &&
+            miscCodes == other.miscCodes &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            regionalAuthority == other.regionalAuthority &&
+            regionName == other.regionName &&
+            runways == other.runways &&
+            secondaryIcao == other.secondaryIcao &&
+            sourceDl == other.sourceDl &&
+            state == other.state &&
+            stateProvinceCode == other.stateProvinceCode &&
+            suitabilityCodeDescs == other.suitabilityCodeDescs &&
+            suitabilityCodes == other.suitabilityCodes &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            wacInnr == other.wacInnr &&
+            zarId == other.zarId &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, type, id, altAirfieldId, alternativeNames, city, countryCode, countryName, createdAt, createdBy, dstInfo, elevFt, elevM, faa, geoloc, gmtOffset, hostNatCode, iata, icao, idSite, infoUrl, lat, lon, magDec, maxRunwayLength, miscCodes, origin, origNetwork, regionalAuthority, regionName, runways, secondaryIcao, sourceDl, state, stateProvinceCode, suitabilityCodeDescs, suitabilityCodes, updatedAt, updatedBy, wacInnr, zarId, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            name,
+            source,
+            type,
+            id,
+            altAirfieldId,
+            alternativeNames,
+            city,
+            countryCode,
+            countryName,
+            createdAt,
+            createdBy,
+            dstInfo,
+            elevFt,
+            elevM,
+            faa,
+            geoloc,
+            gmtOffset,
+            hostNatCode,
+            iata,
+            icao,
+            idSite,
+            infoUrl,
+            lat,
+            lon,
+            magDec,
+            maxRunwayLength,
+            miscCodes,
+            origin,
+            origNetwork,
+            regionalAuthority,
+            regionName,
+            runways,
+            secondaryIcao,
+            sourceDl,
+            state,
+            stateProvinceCode,
+            suitabilityCodeDescs,
+            suitabilityCodes,
+            updatedAt,
+            updatedBy,
+            wacInnr,
+            zarId,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

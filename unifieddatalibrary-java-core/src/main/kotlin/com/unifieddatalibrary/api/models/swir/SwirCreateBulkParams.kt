@@ -1302,7 +1302,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -1315,12 +1315,55 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && ts == other.ts && id == other.id && absFluxes == other.absFluxes && badWave == other.badWave && createdAt == other.createdAt && createdBy == other.createdBy && fluxRatios == other.fluxRatios && idOnOrbit == other.idOnOrbit && lat == other.lat && locationName == other.locationName && lon == other.lon && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && ratioWavelengths == other.ratioWavelengths && satNo == other.satNo && solarPhaseAngle == other.solarPhaseAngle && wavelengths == other.wavelengths /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                ts == other.ts &&
+                id == other.id &&
+                absFluxes == other.absFluxes &&
+                badWave == other.badWave &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                fluxRatios == other.fluxRatios &&
+                idOnOrbit == other.idOnOrbit &&
+                lat == other.lat &&
+                locationName == other.locationName &&
+                lon == other.lon &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                ratioWavelengths == other.ratioWavelengths &&
+                satNo == other.satNo &&
+                solarPhaseAngle == other.solarPhaseAngle &&
+                wavelengths == other.wavelengths
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, ts, id, absFluxes, badWave, createdAt, createdBy, fluxRatios, idOnOrbit, lat, locationName, lon, origin, origNetwork, origObjectId, ratioWavelengths, satNo, solarPhaseAngle, wavelengths) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                ts,
+                id,
+                absFluxes,
+                badWave,
+                createdAt,
+                createdBy,
+                fluxRatios,
+                idOnOrbit,
+                lat,
+                locationName,
+                lon,
+                origin,
+                origNetwork,
+                origObjectId,
+                ratioWavelengths,
+                satNo,
+                solarPhaseAngle,
+                wavelengths,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1333,10 +1376,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SwirCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SwirCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SwirCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

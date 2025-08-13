@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
+import com.unifieddatalibrary.api.models.BatteryIngest
 import com.unifieddatalibrary.api.models.onorbitbattery.OnorbitbatteryCreateParams
 import com.unifieddatalibrary.api.models.onorbitbattery.OnorbitbatteryGetParams
 import com.unifieddatalibrary.api.models.onorbitbattery.OnorbitbatteryUpdateParams
@@ -33,8 +34,8 @@ internal class OnorbitbatteryServiceTest {
                 .source("Bluestaq")
                 .id("ONORBITBATTERY-ID")
                 .battery(
-                    OnorbitbatteryCreateParams.Battery.builder()
-                        .dataMode(OnorbitbatteryCreateParams.Battery.DataMode.TEST)
+                    BatteryIngest.builder()
+                        .dataMode(BatteryIngest.DataMode.TEST)
                         .name("JAK-BATTERY-1479")
                         .source("Bluestaq")
                         .id("BATTERY-ID")
@@ -73,8 +74,8 @@ internal class OnorbitbatteryServiceTest {
                 .source("Bluestaq")
                 .bodyId("ONORBITBATTERY-ID")
                 .battery(
-                    OnorbitbatteryUpdateParams.Battery.builder()
-                        .dataMode(OnorbitbatteryUpdateParams.Battery.DataMode.TEST)
+                    BatteryIngest.builder()
+                        .dataMode(BatteryIngest.DataMode.TEST)
                         .name("JAK-BATTERY-1479")
                         .source("Bluestaq")
                         .id("BATTERY-ID")

@@ -1644,12 +1644,49 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && cells == other.cells && classificationMarking == other.classificationMarking && dataMode == other.dataMode && numCells == other.numCells && source == other.source && startTime == other.startTime && id == other.id && centerFreq == other.centerFreq && createdAt == other.createdAt && createdBy == other.createdBy && endTime == other.endTime && origin == other.origin && origNetwork == other.origNetwork && resolution == other.resolution && sourceDl == other.sourceDl && tags == other.tags && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                cells == other.cells &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                numCells == other.numCells &&
+                source == other.source &&
+                startTime == other.startTime &&
+                id == other.id &&
+                centerFreq == other.centerFreq &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                endTime == other.endTime &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                resolution == other.resolution &&
+                sourceDl == other.sourceDl &&
+                tags == other.tags &&
+                type == other.type &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(cells, classificationMarking, dataMode, numCells, source, startTime, id, centerFreq, createdAt, createdBy, endTime, origin, origNetwork, resolution, sourceDl, tags, type, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                cells,
+                classificationMarking,
+                dataMode,
+                numCells,
+                source,
+                startTime,
+                id,
+                centerFreq,
+                createdAt,
+                createdBy,
+                endTime,
+                origin,
+                origNetwork,
+                resolution,
+                sourceDl,
+                tags,
+                type,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2836,7 +2873,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -2849,12 +2886,59 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Cell && cellId == other.cellId && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && altMean == other.altMean && altSigma == other.altSigma && anomScoreInterference == other.anomScoreInterference && anomScoreSpoofing == other.anomScoreSpoofing && changeScore == other.changeScore && coverage == other.coverage && createdAt == other.createdAt && createdBy == other.createdBy && idH3Geo == other.idH3Geo && origin == other.origin && origNetwork == other.origNetwork && rpmMax == other.rpmMax && rpmMean == other.rpmMean && rpmMedian == other.rpmMedian && rpmMin == other.rpmMin && rpmSigma == other.rpmSigma && sourceDl == other.sourceDl && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Cell &&
+                cellId == other.cellId &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                id == other.id &&
+                altMean == other.altMean &&
+                altSigma == other.altSigma &&
+                anomScoreInterference == other.anomScoreInterference &&
+                anomScoreSpoofing == other.anomScoreSpoofing &&
+                changeScore == other.changeScore &&
+                coverage == other.coverage &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                idH3Geo == other.idH3Geo &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                rpmMax == other.rpmMax &&
+                rpmMean == other.rpmMean &&
+                rpmMedian == other.rpmMedian &&
+                rpmMin == other.rpmMin &&
+                rpmSigma == other.rpmSigma &&
+                sourceDl == other.sourceDl &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(cellId, classificationMarking, dataMode, source, id, altMean, altSigma, anomScoreInterference, anomScoreSpoofing, changeScore, coverage, createdAt, createdBy, idH3Geo, origin, origNetwork, rpmMax, rpmMean, rpmMedian, rpmMin, rpmSigma, sourceDl, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                cellId,
+                classificationMarking,
+                dataMode,
+                source,
+                id,
+                altMean,
+                altSigma,
+                anomScoreInterference,
+                anomScoreSpoofing,
+                changeScore,
+                coverage,
+                createdAt,
+                createdBy,
+                idH3Geo,
+                origin,
+                origNetwork,
+                rpmMax,
+                rpmMean,
+                rpmMedian,
+                rpmMin,
+                rpmSigma,
+                sourceDl,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3007,7 +3091,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3020,10 +3104,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is H3GeoCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is H3GeoCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "H3GeoCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

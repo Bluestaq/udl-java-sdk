@@ -312,10 +312,32 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is PathCreateWithFileParams && id == other.id && classificationMarking == other.classificationMarking && deleteAfter == other.deleteAfter && description == other.description && overwrite == other.overwrite && sendNotification == other.sendNotification && tags == other.tags && fileContent == other.fileContent && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is PathCreateWithFileParams &&
+            id == other.id &&
+            classificationMarking == other.classificationMarking &&
+            deleteAfter == other.deleteAfter &&
+            description == other.description &&
+            overwrite == other.overwrite &&
+            sendNotification == other.sendNotification &&
+            tags == other.tags &&
+            fileContent == other.fileContent &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(id, classificationMarking, deleteAfter, description, overwrite, sendNotification, tags, fileContent, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            id,
+            classificationMarking,
+            deleteAfter,
+            description,
+            overwrite,
+            sendNotification,
+            tags,
+            fileContent,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "PathCreateWithFileParams{id=$id, classificationMarking=$classificationMarking, deleteAfter=$deleteAfter, description=$description, overwrite=$overwrite, sendNotification=$sendNotification, tags=$tags, fileContent=$fileContent, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

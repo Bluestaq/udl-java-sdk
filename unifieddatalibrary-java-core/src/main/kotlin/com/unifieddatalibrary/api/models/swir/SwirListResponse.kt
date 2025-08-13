@@ -947,7 +947,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -960,12 +960,49 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SwirListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && ts == other.ts && id == other.id && badWave == other.badWave && createdAt == other.createdAt && createdBy == other.createdBy && idOnOrbit == other.idOnOrbit && lat == other.lat && locationName == other.locationName && lon == other.lon && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && satNo == other.satNo && solarPhaseAngle == other.solarPhaseAngle && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SwirListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            ts == other.ts &&
+            id == other.id &&
+            badWave == other.badWave &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            idOnOrbit == other.idOnOrbit &&
+            lat == other.lat &&
+            locationName == other.locationName &&
+            lon == other.lon &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            satNo == other.satNo &&
+            solarPhaseAngle == other.solarPhaseAngle &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, ts, id, badWave, createdAt, createdBy, idOnOrbit, lat, locationName, lon, origin, origNetwork, origObjectId, satNo, solarPhaseAngle, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            ts,
+            id,
+            badWave,
+            createdAt,
+            createdBy,
+            idOnOrbit,
+            lat,
+            locationName,
+            lon,
+            origin,
+            origNetwork,
+            origObjectId,
+            satNo,
+            solarPhaseAngle,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

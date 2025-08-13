@@ -12,17 +12,24 @@ import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/** Service operation to dynamically query data by a variety of query parameters not specified in this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
-class AnalyticImageryListParams private constructor(
+/**
+ * Service operation to dynamically query data by a variety of query parameters not specified in
+ * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more
+ * details on valid/required query parameter information.
+ */
+class AnalyticImageryListParams
+private constructor(
     private val msgTime: OffsetDateTime,
     private val firstResult: Long?,
     private val maxResults: Long?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
-
 ) : Params {
 
-    /** The message time of this image record, in ISO8601 UTC format with millisecond precision. (YYYY-MM-DDTHH:MM:SS.sssZ) */
+    /**
+     * The message time of this image record, in ISO8601 UTC format with millisecond precision.
+     * (YYYY-MM-DDTHH:MM:SS.sssZ)
+     */
     fun msgTime(): OffsetDateTime = msgTime
 
     fun firstResult(): Optional<Long> = Optional.ofNullable(firstResult)
@@ -43,13 +50,11 @@ class AnalyticImageryListParams private constructor(
          * Returns a mutable builder for constructing an instance of [AnalyticImageryListParams].
          *
          * The following fields are required:
-         *
          * ```java
          * .msgTime()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [AnalyticImageryListParams]. */
@@ -62,25 +67,21 @@ class AnalyticImageryListParams private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(analyticImageryListParams: AnalyticImageryListParams) =
-            apply {
-                msgTime = analyticImageryListParams.msgTime
-                firstResult = analyticImageryListParams.firstResult
-                maxResults = analyticImageryListParams.maxResults
-                additionalHeaders = analyticImageryListParams.additionalHeaders.toBuilder()
-                additionalQueryParams = analyticImageryListParams.additionalQueryParams.toBuilder()
-            }
+        internal fun from(analyticImageryListParams: AnalyticImageryListParams) = apply {
+            msgTime = analyticImageryListParams.msgTime
+            firstResult = analyticImageryListParams.firstResult
+            maxResults = analyticImageryListParams.maxResults
+            additionalHeaders = analyticImageryListParams.additionalHeaders.toBuilder()
+            additionalQueryParams = analyticImageryListParams.additionalQueryParams.toBuilder()
+        }
 
-        /** The message time of this image record, in ISO8601 UTC format with millisecond precision. (YYYY-MM-DDTHH:MM:SS.sssZ) */
-        fun msgTime(msgTime: OffsetDateTime) =
-            apply {
-                this.msgTime = msgTime
-            }
+        /**
+         * The message time of this image record, in ISO8601 UTC format with millisecond precision.
+         * (YYYY-MM-DDTHH:MM:SS.sssZ)
+         */
+        fun msgTime(msgTime: OffsetDateTime) = apply { this.msgTime = msgTime }
 
-        fun firstResult(firstResult: Long?) =
-            apply {
-                this.firstResult = firstResult
-            }
+        fun firstResult(firstResult: Long?) = apply { this.firstResult = firstResult }
 
         /**
          * Alias for [Builder.firstResult].
@@ -92,10 +93,7 @@ class AnalyticImageryListParams private constructor(
         /** Alias for calling [Builder.firstResult] with `firstResult.orElse(null)`. */
         fun firstResult(firstResult: Optional<Long>) = firstResult(firstResult.getOrNull())
 
-        fun maxResults(maxResults: Long?) =
-            apply {
-                this.maxResults = maxResults
-            }
+        fun maxResults(maxResults: Long?) = apply { this.maxResults = maxResults }
 
         /**
          * Alias for [Builder.maxResults].
@@ -107,129 +105,103 @@ class AnalyticImageryListParams private constructor(
         /** Alias for calling [Builder.maxResults] with `maxResults.orElse(null)`. */
         fun maxResults(maxResults: Optional<Long>) = maxResults(maxResults.getOrNull())
 
-        fun additionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.clear()
-                putAllAdditionalHeaders(additionalHeaders)
-            }
+        fun additionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.clear()
+            putAllAdditionalHeaders(additionalHeaders)
+        }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.clear()
-                putAllAdditionalHeaders(additionalHeaders)
-            }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.clear()
+            putAllAdditionalHeaders(additionalHeaders)
+        }
 
-        fun putAdditionalHeader(name: String, value: String) =
-            apply {
-                additionalHeaders.put(name, value)
-            }
+        fun putAdditionalHeader(name: String, value: String) = apply {
+            additionalHeaders.put(name, value)
+        }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
-            apply {
-                additionalHeaders.put(name, values)
-            }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
+            additionalHeaders.put(name, values)
+        }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.putAll(additionalHeaders)
-            }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.putAll(additionalHeaders)
+        }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.putAll(additionalHeaders)
-            }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.putAll(additionalHeaders)
+        }
 
-        fun replaceAdditionalHeaders(name: String, value: String) =
-            apply {
-                additionalHeaders.replace(name, value)
-            }
+        fun replaceAdditionalHeaders(name: String, value: String) = apply {
+            additionalHeaders.replace(name, value)
+        }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
-            apply {
-                additionalHeaders.replace(name, values)
-            }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
+            additionalHeaders.replace(name, values)
+        }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.replaceAll(additionalHeaders)
-            }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.replaceAll(additionalHeaders)
+        }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.replaceAll(additionalHeaders)
-            }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.replaceAll(additionalHeaders)
+        }
 
-        fun removeAdditionalHeaders(name: String) =
-            apply {
-                additionalHeaders.remove(name)
-            }
+        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) =
-            apply {
-                additionalHeaders.removeAll(names)
-            }
+        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
+            additionalHeaders.removeAll(names)
+        }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.clear()
-                putAllAdditionalQueryParams(additionalQueryParams)
-            }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.clear()
+            putAllAdditionalQueryParams(additionalQueryParams)
+        }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalQueryParams.clear()
-                putAllAdditionalQueryParams(additionalQueryParams)
-            }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
+            this.additionalQueryParams.clear()
+            putAllAdditionalQueryParams(additionalQueryParams)
+        }
 
-        fun putAdditionalQueryParam(key: String, value: String) =
-            apply {
-                additionalQueryParams.put(key, value)
-            }
+        fun putAdditionalQueryParam(key: String, value: String) = apply {
+            additionalQueryParams.put(key, value)
+        }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
-            apply {
-                additionalQueryParams.put(key, values)
-            }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
+            additionalQueryParams.put(key, values)
+        }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.putAll(additionalQueryParams)
-            }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.putAll(additionalQueryParams)
+        }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) =
-            apply {
-                additionalQueryParams.replace(key, value)
-            }
+        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
+            additionalQueryParams.replace(key, value)
+        }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
-            apply {
-                additionalQueryParams.replace(key, values)
-            }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
+            additionalQueryParams.replace(key, values)
+        }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.replaceAll(additionalQueryParams)
-            }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.replaceAll(additionalQueryParams)
+        }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) =
-            apply {
-                additionalQueryParams.remove(key)
-            }
+        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) =
-            apply {
-                additionalQueryParams.removeAll(keys)
-            }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
+            additionalQueryParams.removeAll(keys)
+        }
 
         /**
          * Returns an immutable instance of [AnalyticImageryListParams].
@@ -237,7 +209,6 @@ class AnalyticImageryListParams private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .msgTime()
          * ```
@@ -246,13 +217,11 @@ class AnalyticImageryListParams private constructor(
          */
         fun build(): AnalyticImageryListParams =
             AnalyticImageryListParams(
-              checkRequired(
-                "msgTime", msgTime
-              ),
-              firstResult,
-              maxResults,
-              additionalHeaders.build(),
-              additionalQueryParams.build(),
+                checkRequired("msgTime", msgTime),
+                firstResult,
+                maxResults,
+                additionalHeaders.build(),
+                additionalQueryParams.build(),
             )
     }
 
@@ -269,14 +238,21 @@ class AnalyticImageryListParams private constructor(
             .build()
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is AnalyticImageryListParams && msgTime == other.msgTime && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is AnalyticImageryListParams &&
+            msgTime == other.msgTime &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(msgTime, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(msgTime, firstResult, maxResults, additionalHeaders, additionalQueryParams)
 
-    override fun toString() = "AnalyticImageryListParams{msgTime=$msgTime, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() =
+        "AnalyticImageryListParams{msgTime=$msgTime, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

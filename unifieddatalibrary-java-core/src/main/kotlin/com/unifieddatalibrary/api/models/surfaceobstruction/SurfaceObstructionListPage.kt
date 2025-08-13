@@ -5,28 +5,23 @@ package com.unifieddatalibrary.api.models.surfaceobstruction
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
-import com.unifieddatalibrary.api.models.surfaceobstruction.SurfaceObstructionListParams
-import com.unifieddatalibrary.api.models.surfaceobstruction.SurfaceObstructionListResponse
 import com.unifieddatalibrary.api.services.blocking.SurfaceObstructionService
 import java.util.Objects
-import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see SurfaceObstructionService.list */
-class SurfaceObstructionListPage private constructor(
+class SurfaceObstructionListPage
+private constructor(
     private val service: SurfaceObstructionService,
     private val params: SurfaceObstructionListParams,
     private val items: List<SurfaceObstructionListResponse>,
-
 ) : Page<SurfaceObstructionListResponse> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): SurfaceObstructionListParams {
-      val offset = params.firstResult().getOrDefault(0)
-      return params.toBuilder()
-          .firstResult(offset + items().size)
-          .build()
+        val offset = params.firstResult().getOrDefault(0)
+        return params.toBuilder().firstResult(offset + items().size).build()
     }
 
     override fun nextPage(): SurfaceObstructionListPage = service.list(nextPageParams())
@@ -47,15 +42,13 @@ class SurfaceObstructionListPage private constructor(
          * Returns a mutable builder for constructing an instance of [SurfaceObstructionListPage].
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [SurfaceObstructionListPage]. */
@@ -66,29 +59,19 @@ class SurfaceObstructionListPage private constructor(
         private var items: List<SurfaceObstructionListResponse>? = null
 
         @JvmSynthetic
-        internal fun from(surfaceObstructionListPage: SurfaceObstructionListPage) =
-            apply {
-                service = surfaceObstructionListPage.service
-                params = surfaceObstructionListPage.params
-                items = surfaceObstructionListPage.items
-            }
+        internal fun from(surfaceObstructionListPage: SurfaceObstructionListPage) = apply {
+            service = surfaceObstructionListPage.service
+            params = surfaceObstructionListPage.params
+            items = surfaceObstructionListPage.items
+        }
 
-        fun service(service: SurfaceObstructionService) =
-            apply {
-                this.service = service
-            }
+        fun service(service: SurfaceObstructionService) = apply { this.service = service }
 
         /** The parameters that were used to request this page. */
-        fun params(params: SurfaceObstructionListParams) =
-            apply {
-                this.params = params
-            }
+        fun params(params: SurfaceObstructionListParams) = apply { this.params = params }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<SurfaceObstructionListResponse>) =
-            apply {
-                this.items = items
-            }
+        fun items(items: List<SurfaceObstructionListResponse>) = apply { this.items = items }
 
         /**
          * Returns an immutable instance of [SurfaceObstructionListPage].
@@ -96,7 +79,6 @@ class SurfaceObstructionListPage private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .params()
@@ -107,27 +89,25 @@ class SurfaceObstructionListPage private constructor(
          */
         fun build(): SurfaceObstructionListPage =
             SurfaceObstructionListPage(
-              checkRequired(
-                "service", service
-              ),
-              checkRequired(
-                "params", params
-              ),
-              checkRequired(
-                "items", items
-              ),
+                checkRequired("service", service),
+                checkRequired("params", params),
+                checkRequired("items", items),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is SurfaceObstructionListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+        return other is SurfaceObstructionListPage &&
+            service == other.service &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, params, items)
 
-    override fun toString() = "SurfaceObstructionListPage{service=$service, params=$params, items=$items}"
+    override fun toString() =
+        "SurfaceObstructionListPage{service=$service, params=$params, items=$items}"
 }

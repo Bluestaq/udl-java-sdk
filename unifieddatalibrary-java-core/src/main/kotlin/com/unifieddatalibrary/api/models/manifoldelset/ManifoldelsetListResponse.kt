@@ -13,15 +13,18 @@ import com.unifieddatalibrary.api.core.JsonMissing
 import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
-import com.unifieddatalibrary.api.models.manifoldelset.ManifoldelsetListResponse
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/** Theoretical Keplarian orbital elements belonging to an object of interest's manifold describing a possible/theoretical orbit for an object of interest for tasking purposes. */
-class ManifoldelsetListResponse private constructor(
+/**
+ * Theoretical Keplarian orbital elements belonging to an object of interest's manifold describing a
+ * possible/theoretical orbit for an object of interest for tasking purposes.
+ */
+class ManifoldelsetListResponse
+private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
     private val epoch: JsonField<OffsetDateTime>,
@@ -50,270 +53,346 @@ class ManifoldelsetListResponse private constructor(
     private val revNo: JsonField<Int>,
     private val semiMajorAxis: JsonField<Double>,
     private val additionalProperties: MutableMap<String, JsonValue>,
-
 ) {
 
     @JsonCreator
     private constructor(
-        @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        classificationMarking: JsonField<String> = JsonMissing.of(),
         @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
         @JsonProperty("epoch") @ExcludeMissing epoch: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("idManifold") @ExcludeMissing idManifold: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("idManifold")
+        @ExcludeMissing
+        idManifold: JsonField<String> = JsonMissing.of(),
         @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
         @JsonProperty("tmpSatNo") @ExcludeMissing tmpSatNo: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
         @JsonProperty("apogee") @ExcludeMissing apogee: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("argOfPerigee") @ExcludeMissing argOfPerigee: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("argOfPerigee")
+        @ExcludeMissing
+        argOfPerigee: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("bStar") @ExcludeMissing bStar: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("eccentricity") @ExcludeMissing eccentricity: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("inclination") @ExcludeMissing inclination: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("eccentricity")
+        @ExcludeMissing
+        eccentricity: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("inclination")
+        @ExcludeMissing
+        inclination: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("line1") @ExcludeMissing line1: JsonField<String> = JsonMissing.of(),
         @JsonProperty("line2") @ExcludeMissing line2: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("meanAnomaly") @ExcludeMissing meanAnomaly: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("meanMotion") @ExcludeMissing meanMotion: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("meanMotionDDot") @ExcludeMissing meanMotionDDot: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("meanMotionDot") @ExcludeMissing meanMotionDot: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("meanAnomaly")
+        @ExcludeMissing
+        meanAnomaly: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("meanMotion")
+        @ExcludeMissing
+        meanMotion: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("meanMotionDDot")
+        @ExcludeMissing
+        meanMotionDDot: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("meanMotionDot")
+        @ExcludeMissing
+        meanMotionDot: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origNetwork") @ExcludeMissing origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origNetwork")
+        @ExcludeMissing
+        origNetwork: JsonField<String> = JsonMissing.of(),
         @JsonProperty("perigee") @ExcludeMissing perigee: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("period") @ExcludeMissing period: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("raan") @ExcludeMissing raan: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("revNo") @ExcludeMissing revNo: JsonField<Int> = JsonMissing.of(),
-        @JsonProperty("semiMajorAxis") @ExcludeMissing semiMajorAxis: JsonField<Double> = JsonMissing.of()
+        @JsonProperty("semiMajorAxis")
+        @ExcludeMissing
+        semiMajorAxis: JsonField<Double> = JsonMissing.of(),
     ) : this(
-      classificationMarking,
-      dataMode,
-      epoch,
-      idManifold,
-      source,
-      tmpSatNo,
-      id,
-      apogee,
-      argOfPerigee,
-      bStar,
-      createdAt,
-      createdBy,
-      eccentricity,
-      inclination,
-      line1,
-      line2,
-      meanAnomaly,
-      meanMotion,
-      meanMotionDDot,
-      meanMotionDot,
-      origin,
-      origNetwork,
-      perigee,
-      period,
-      raan,
-      revNo,
-      semiMajorAxis,
-      mutableMapOf(),
+        classificationMarking,
+        dataMode,
+        epoch,
+        idManifold,
+        source,
+        tmpSatNo,
+        id,
+        apogee,
+        argOfPerigee,
+        bStar,
+        createdAt,
+        createdBy,
+        eccentricity,
+        inclination,
+        line1,
+        line2,
+        meanAnomaly,
+        meanMotion,
+        meanMotionDDot,
+        meanMotionDot,
+        origin,
+        origNetwork,
+        perigee,
+        period,
+        raan,
+        revNo,
+        semiMajorAxis,
+        mutableMapOf(),
     )
 
     /**
      * Classification marking of the data in IC/CAPCO Portion-marked format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
     /**
      * Elset epoch time in ISO 8601 UTC format, with microsecond precision.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun epoch(): OffsetDateTime = epoch.getRequired("epoch")
 
     /**
      * Identifier of the parent Manifold record.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun idManifold(): String = idManifold.getRequired("idManifold")
 
     /**
      * Source of the data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun source(): String = source.getRequired("source")
 
     /**
      * A placeholder satellite number and not a true NORAD catalog number.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun tmpSatNo(): Int = tmpSatNo.getRequired("tmpSatNo")
 
     /**
      * Unique identifier of the record, auto-generated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun id(): Optional<String> = id.getOptional("id")
 
     /**
      * The Orbit point furthest from the center of the earth in kilometers.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun apogee(): Optional<Double> = apogee.getOptional("apogee")
 
     /**
-     * The argument of perigee is the angle in degrees formed between the perigee and the ascending node. If the perigee would occur at the ascending node, the argument of perigee would be 0.
+     * The argument of perigee is the angle in degrees formed between the perigee and the ascending
+     * node. If the perigee would occur at the ascending node, the argument of perigee would be 0.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun argOfPerigee(): Optional<Double> = argOfPerigee.getOptional("argOfPerigee")
 
     /**
-     * The drag term for SGP4 orbital model, used for calculating decay constants for altitude, eccentricity etc, measured in inverse earth radii.
+     * The drag term for SGP4 orbital model, used for calculating decay constants for altitude,
+     * eccentricity etc, measured in inverse earth radii.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun bStar(): Optional<Double> = bStar.getOptional("bStar")
 
     /**
      * Time the row was created in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
     /**
      * Application user who created the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
-     * The orbital eccentricity of an astronomical object is a parameter that determines the amount by which its orbit around another body deviates from a perfect circle. A value of 0 is a circular orbit, values between 0 and 1 form an elliptic orbit, 1 is a parabolic escape orbit, and greater than 1 is a hyperbolic escape orbit.
+     * The orbital eccentricity of an astronomical object is a parameter that determines the amount
+     * by which its orbit around another body deviates from a perfect circle. A value of 0 is a
+     * circular orbit, values between 0 and 1 form an elliptic orbit, 1 is a parabolic escape orbit,
+     * and greater than 1 is a hyperbolic escape orbit.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun eccentricity(): Optional<Double> = eccentricity.getOptional("eccentricity")
 
     /**
-     * The angle between the equator and the orbit when looking from the center of the Earth. If the orbit went exactly around the equator from left to right, then the inclination would be 0. The inclination ranges from 0 to 180 degrees.
+     * The angle between the equator and the orbit when looking from the center of the Earth. If the
+     * orbit went exactly around the equator from left to right, then the inclination would be 0.
+     * The inclination ranges from 0 to 180 degrees.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun inclination(): Optional<Double> = inclination.getOptional("inclination")
 
     /**
-     * Read only derived/generated line1 of a legacy TLE (two line element set) format, ignored on create/edit operations.
+     * Read only derived/generated line1 of a legacy TLE (two line element set) format, ignored on
+     * create/edit operations.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun line1(): Optional<String> = line1.getOptional("line1")
 
     /**
-     * Read only derived/generated line2 of a legacy TLE (two line element set) format, ignored on create/edit operations.
+     * Read only derived/generated line2 of a legacy TLE (two line element set) format, ignored on
+     * create/edit operations.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun line2(): Optional<String> = line2.getOptional("line2")
 
     /**
-     * Where the satellite is in its orbital path. The mean anomaly ranges from 0 to 360 degrees. The mean anomaly is referenced to the perigee. If the satellite were at the perigee, the mean anomaly would be 0.
+     * Where the satellite is in its orbital path. The mean anomaly ranges from 0 to 360 degrees.
+     * The mean anomaly is referenced to the perigee. If the satellite were at the perigee, the mean
+     * anomaly would be 0.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun meanAnomaly(): Optional<Double> = meanAnomaly.getOptional("meanAnomaly")
 
     /**
-     * The constant angular speed required for the body to complete one circular orbit in the same amount of time as the actual elliptical orbit with variable speed. Measured in revolutions per day.
+     * The constant angular speed required for the body to complete one circular orbit in the same
+     * amount of time as the actual elliptical orbit with variable speed. Measured in revolutions
+     * per day.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun meanMotion(): Optional<Double> = meanMotion.getOptional("meanMotion")
 
     /**
      * 2nd derivative of the mean motion with respect to time. Units are revolutions per day cubed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun meanMotionDDot(): Optional<Double> = meanMotionDDot.getOptional("meanMotionDDot")
 
     /**
-     * 1st derivative of the mean motion with respect to time. Units are revolutions per day squared.
+     * 1st derivative of the mean motion with respect to time. Units are revolutions per day
+     * squared.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun meanMotionDot(): Optional<Double> = meanMotionDot.getOptional("meanMotionDot")
 
     /**
-     * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     * Originating system or organization which produced the data, if different from the source. The
+     * origin may be different than the source if the source was a mediating system which forwarded
+     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origin(): Optional<String> = origin.getOptional("origin")
 
     /**
-     * The originating source network on which this record was created, auto-populated by the system.
+     * The originating source network on which this record was created, auto-populated by the
+     * system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
     /**
      * The orbit point nearest to the center of the earth in kilometers.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun perigee(): Optional<Double> = perigee.getOptional("perigee")
 
     /**
      * Period of the orbit equal to inverse of mean motion.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun period(): Optional<Double> = period.getOptional("period")
 
     /**
-     * Right ascension of the ascending node, or RAAN is the angle as measured in degrees eastwards (or, as seen from the north, counterclockwise) from the First Point of Aries to the ascending node, which is where the orbit crosses the equator when traveling north.
+     * Right ascension of the ascending node, or RAAN is the angle as measured in degrees eastwards
+     * (or, as seen from the north, counterclockwise) from the First Point of Aries to the ascending
+     * node, which is where the orbit crosses the equator when traveling north.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun raan(): Optional<Double> = raan.getOptional("raan")
 
     /**
-     * The current revolution number. The value is incremented when a satellite crosses the equator on an ascending pass.
+     * The current revolution number. The value is incremented when a satellite crosses the equator
+     * on an ascending pass.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun revNo(): Optional<Int> = revNo.getOptional("revNo")
 
     /**
-     * The sum of the periapsis and apoapsis distances divided by two. For circular orbits, the semimajor axis is the distance between the centers of the bodies, not the distance of the bodies from the center of mass.
+     * The sum of the periapsis and apoapsis distances divided by two. For circular orbits, the
+     * semimajor axis is the distance between the centers of the bodies, not the distance of the
+     * bodies from the center of mass.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun semiMajorAxis(): Optional<Double> = semiMajorAxis.getOptional("semiMajorAxis")
 
     /**
      * Returns the raw JSON value of [classificationMarking].
      *
-     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("classificationMarking")
     @ExcludeMissing
@@ -324,63 +403,49 @@ class ManifoldelsetListResponse private constructor(
      *
      * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("dataMode")
-    @ExcludeMissing
-    fun _dataMode(): JsonField<DataMode> = dataMode
+    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
 
     /**
      * Returns the raw JSON value of [epoch].
      *
      * Unlike [epoch], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("epoch")
-    @ExcludeMissing
-    fun _epoch(): JsonField<OffsetDateTime> = epoch
+    @JsonProperty("epoch") @ExcludeMissing fun _epoch(): JsonField<OffsetDateTime> = epoch
 
     /**
      * Returns the raw JSON value of [idManifold].
      *
      * Unlike [idManifold], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("idManifold")
-    @ExcludeMissing
-    fun _idManifold(): JsonField<String> = idManifold
+    @JsonProperty("idManifold") @ExcludeMissing fun _idManifold(): JsonField<String> = idManifold
 
     /**
      * Returns the raw JSON value of [source].
      *
      * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("source")
-    @ExcludeMissing
-    fun _source(): JsonField<String> = source
+    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
 
     /**
      * Returns the raw JSON value of [tmpSatNo].
      *
      * Unlike [tmpSatNo], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("tmpSatNo")
-    @ExcludeMissing
-    fun _tmpSatNo(): JsonField<Int> = tmpSatNo
+    @JsonProperty("tmpSatNo") @ExcludeMissing fun _tmpSatNo(): JsonField<Int> = tmpSatNo
 
     /**
      * Returns the raw JSON value of [id].
      *
      * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("id")
-    @ExcludeMissing
-    fun _id(): JsonField<String> = id
+    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
 
     /**
      * Returns the raw JSON value of [apogee].
      *
      * Unlike [apogee], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("apogee")
-    @ExcludeMissing
-    fun _apogee(): JsonField<Double> = apogee
+    @JsonProperty("apogee") @ExcludeMissing fun _apogee(): JsonField<Double> = apogee
 
     /**
      * Returns the raw JSON value of [argOfPerigee].
@@ -396,9 +461,7 @@ class ManifoldelsetListResponse private constructor(
      *
      * Unlike [bStar], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("bStar")
-    @ExcludeMissing
-    fun _bStar(): JsonField<Double> = bStar
+    @JsonProperty("bStar") @ExcludeMissing fun _bStar(): JsonField<Double> = bStar
 
     /**
      * Returns the raw JSON value of [createdAt].
@@ -414,9 +477,7 @@ class ManifoldelsetListResponse private constructor(
      *
      * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("createdBy")
-    @ExcludeMissing
-    fun _createdBy(): JsonField<String> = createdBy
+    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
     /**
      * Returns the raw JSON value of [eccentricity].
@@ -432,45 +493,35 @@ class ManifoldelsetListResponse private constructor(
      *
      * Unlike [inclination], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("inclination")
-    @ExcludeMissing
-    fun _inclination(): JsonField<Double> = inclination
+    @JsonProperty("inclination") @ExcludeMissing fun _inclination(): JsonField<Double> = inclination
 
     /**
      * Returns the raw JSON value of [line1].
      *
      * Unlike [line1], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("line1")
-    @ExcludeMissing
-    fun _line1(): JsonField<String> = line1
+    @JsonProperty("line1") @ExcludeMissing fun _line1(): JsonField<String> = line1
 
     /**
      * Returns the raw JSON value of [line2].
      *
      * Unlike [line2], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("line2")
-    @ExcludeMissing
-    fun _line2(): JsonField<String> = line2
+    @JsonProperty("line2") @ExcludeMissing fun _line2(): JsonField<String> = line2
 
     /**
      * Returns the raw JSON value of [meanAnomaly].
      *
      * Unlike [meanAnomaly], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("meanAnomaly")
-    @ExcludeMissing
-    fun _meanAnomaly(): JsonField<Double> = meanAnomaly
+    @JsonProperty("meanAnomaly") @ExcludeMissing fun _meanAnomaly(): JsonField<Double> = meanAnomaly
 
     /**
      * Returns the raw JSON value of [meanMotion].
      *
      * Unlike [meanMotion], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("meanMotion")
-    @ExcludeMissing
-    fun _meanMotion(): JsonField<Double> = meanMotion
+    @JsonProperty("meanMotion") @ExcludeMissing fun _meanMotion(): JsonField<Double> = meanMotion
 
     /**
      * Returns the raw JSON value of [meanMotionDDot].
@@ -495,54 +546,42 @@ class ManifoldelsetListResponse private constructor(
      *
      * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origin")
-    @ExcludeMissing
-    fun _origin(): JsonField<String> = origin
+    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
 
     /**
      * Returns the raw JSON value of [origNetwork].
      *
      * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origNetwork")
-    @ExcludeMissing
-    fun _origNetwork(): JsonField<String> = origNetwork
+    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
 
     /**
      * Returns the raw JSON value of [perigee].
      *
      * Unlike [perigee], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("perigee")
-    @ExcludeMissing
-    fun _perigee(): JsonField<Double> = perigee
+    @JsonProperty("perigee") @ExcludeMissing fun _perigee(): JsonField<Double> = perigee
 
     /**
      * Returns the raw JSON value of [period].
      *
      * Unlike [period], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("period")
-    @ExcludeMissing
-    fun _period(): JsonField<Double> = period
+    @JsonProperty("period") @ExcludeMissing fun _period(): JsonField<Double> = period
 
     /**
      * Returns the raw JSON value of [raan].
      *
      * Unlike [raan], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("raan")
-    @ExcludeMissing
-    fun _raan(): JsonField<Double> = raan
+    @JsonProperty("raan") @ExcludeMissing fun _raan(): JsonField<Double> = raan
 
     /**
      * Returns the raw JSON value of [revNo].
      *
      * Unlike [revNo], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("revNo")
-    @ExcludeMissing
-    fun _revNo(): JsonField<Int> = revNo
+    @JsonProperty("revNo") @ExcludeMissing fun _revNo(): JsonField<Int> = revNo
 
     /**
      * Returns the raw JSON value of [semiMajorAxis].
@@ -555,12 +594,13 @@ class ManifoldelsetListResponse private constructor(
 
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
-      additionalProperties.put(key, value)
+        additionalProperties.put(key, value)
     }
 
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -570,7 +610,6 @@ class ManifoldelsetListResponse private constructor(
          * Returns a mutable builder for constructing an instance of [ManifoldelsetListResponse].
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -580,8 +619,7 @@ class ManifoldelsetListResponse private constructor(
          * .tmpSatNo()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [ManifoldelsetListResponse]. */
@@ -617,75 +655,76 @@ class ManifoldelsetListResponse private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(manifoldelsetListResponse: ManifoldelsetListResponse) =
-            apply {
-                classificationMarking = manifoldelsetListResponse.classificationMarking
-                dataMode = manifoldelsetListResponse.dataMode
-                epoch = manifoldelsetListResponse.epoch
-                idManifold = manifoldelsetListResponse.idManifold
-                source = manifoldelsetListResponse.source
-                tmpSatNo = manifoldelsetListResponse.tmpSatNo
-                id = manifoldelsetListResponse.id
-                apogee = manifoldelsetListResponse.apogee
-                argOfPerigee = manifoldelsetListResponse.argOfPerigee
-                bStar = manifoldelsetListResponse.bStar
-                createdAt = manifoldelsetListResponse.createdAt
-                createdBy = manifoldelsetListResponse.createdBy
-                eccentricity = manifoldelsetListResponse.eccentricity
-                inclination = manifoldelsetListResponse.inclination
-                line1 = manifoldelsetListResponse.line1
-                line2 = manifoldelsetListResponse.line2
-                meanAnomaly = manifoldelsetListResponse.meanAnomaly
-                meanMotion = manifoldelsetListResponse.meanMotion
-                meanMotionDDot = manifoldelsetListResponse.meanMotionDDot
-                meanMotionDot = manifoldelsetListResponse.meanMotionDot
-                origin = manifoldelsetListResponse.origin
-                origNetwork = manifoldelsetListResponse.origNetwork
-                perigee = manifoldelsetListResponse.perigee
-                period = manifoldelsetListResponse.period
-                raan = manifoldelsetListResponse.raan
-                revNo = manifoldelsetListResponse.revNo
-                semiMajorAxis = manifoldelsetListResponse.semiMajorAxis
-                additionalProperties = manifoldelsetListResponse.additionalProperties.toMutableMap()
-            }
+        internal fun from(manifoldelsetListResponse: ManifoldelsetListResponse) = apply {
+            classificationMarking = manifoldelsetListResponse.classificationMarking
+            dataMode = manifoldelsetListResponse.dataMode
+            epoch = manifoldelsetListResponse.epoch
+            idManifold = manifoldelsetListResponse.idManifold
+            source = manifoldelsetListResponse.source
+            tmpSatNo = manifoldelsetListResponse.tmpSatNo
+            id = manifoldelsetListResponse.id
+            apogee = manifoldelsetListResponse.apogee
+            argOfPerigee = manifoldelsetListResponse.argOfPerigee
+            bStar = manifoldelsetListResponse.bStar
+            createdAt = manifoldelsetListResponse.createdAt
+            createdBy = manifoldelsetListResponse.createdBy
+            eccentricity = manifoldelsetListResponse.eccentricity
+            inclination = manifoldelsetListResponse.inclination
+            line1 = manifoldelsetListResponse.line1
+            line2 = manifoldelsetListResponse.line2
+            meanAnomaly = manifoldelsetListResponse.meanAnomaly
+            meanMotion = manifoldelsetListResponse.meanMotion
+            meanMotionDDot = manifoldelsetListResponse.meanMotionDDot
+            meanMotionDot = manifoldelsetListResponse.meanMotionDot
+            origin = manifoldelsetListResponse.origin
+            origNetwork = manifoldelsetListResponse.origNetwork
+            perigee = manifoldelsetListResponse.perigee
+            period = manifoldelsetListResponse.period
+            raan = manifoldelsetListResponse.raan
+            revNo = manifoldelsetListResponse.revNo
+            semiMajorAxis = manifoldelsetListResponse.semiMajorAxis
+            additionalProperties = manifoldelsetListResponse.additionalProperties.toMutableMap()
+        }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-        fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
+        fun classificationMarking(classificationMarking: String) =
+            classificationMarking(JsonField.of(classificationMarking))
 
         /**
          * Sets [Builder.classificationMarking] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun classificationMarking(classificationMarking: JsonField<String>) =
-            apply {
-                this.classificationMarking = classificationMarking
-            }
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            this.classificationMarking = classificationMarking
+        }
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          */
         fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
         /**
          * Sets [Builder.dataMode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun dataMode(dataMode: JsonField<DataMode>) =
-            apply {
-                this.dataMode = dataMode
-            }
+        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
 
         /** Elset epoch time in ISO 8601 UTC format, with microsecond precision. */
         fun epoch(epoch: OffsetDateTime) = epoch(JsonField.of(epoch))
@@ -693,13 +732,11 @@ class ManifoldelsetListResponse private constructor(
         /**
          * Sets [Builder.epoch] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.epoch] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.epoch] with a well-typed [OffsetDateTime] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun epoch(epoch: JsonField<OffsetDateTime>) =
-            apply {
-                this.epoch = epoch
-            }
+        fun epoch(epoch: JsonField<OffsetDateTime>) = apply { this.epoch = epoch }
 
         /** Identifier of the parent Manifold record. */
         fun idManifold(idManifold: String) = idManifold(JsonField.of(idManifold))
@@ -707,13 +744,11 @@ class ManifoldelsetListResponse private constructor(
         /**
          * Sets [Builder.idManifold] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idManifold] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.idManifold] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun idManifold(idManifold: JsonField<String>) =
-            apply {
-                this.idManifold = idManifold
-            }
+        fun idManifold(idManifold: JsonField<String>) = apply { this.idManifold = idManifold }
 
         /** Source of the data. */
         fun source(source: String) = source(JsonField.of(source))
@@ -721,13 +756,10 @@ class ManifoldelsetListResponse private constructor(
         /**
          * Sets [Builder.source] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun source(source: JsonField<String>) =
-            apply {
-                this.source = source
-            }
+        fun source(source: JsonField<String>) = apply { this.source = source }
 
         /** A placeholder satellite number and not a true NORAD catalog number. */
         fun tmpSatNo(tmpSatNo: Int) = tmpSatNo(JsonField.of(tmpSatNo))
@@ -735,13 +767,10 @@ class ManifoldelsetListResponse private constructor(
         /**
          * Sets [Builder.tmpSatNo] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.tmpSatNo] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.tmpSatNo] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun tmpSatNo(tmpSatNo: JsonField<Int>) =
-            apply {
-                this.tmpSatNo = tmpSatNo
-            }
+        fun tmpSatNo(tmpSatNo: JsonField<Int>) = apply { this.tmpSatNo = tmpSatNo }
 
         /** Unique identifier of the record, auto-generated by the system. */
         fun id(id: String) = id(JsonField.of(id))
@@ -749,13 +778,10 @@ class ManifoldelsetListResponse private constructor(
         /**
          * Sets [Builder.id] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun id(id: JsonField<String>) =
-            apply {
-                this.id = id
-            }
+        fun id(id: JsonField<String>) = apply { this.id = id }
 
         /** The Orbit point furthest from the center of the earth in kilometers. */
         fun apogee(apogee: Double) = apogee(JsonField.of(apogee))
@@ -763,41 +789,42 @@ class ManifoldelsetListResponse private constructor(
         /**
          * Sets [Builder.apogee] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.apogee] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.apogee] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun apogee(apogee: JsonField<Double>) =
-            apply {
-                this.apogee = apogee
-            }
+        fun apogee(apogee: JsonField<Double>) = apply { this.apogee = apogee }
 
-        /** The argument of perigee is the angle in degrees formed between the perigee and the ascending node. If the perigee would occur at the ascending node, the argument of perigee would be 0. */
+        /**
+         * The argument of perigee is the angle in degrees formed between the perigee and the
+         * ascending node. If the perigee would occur at the ascending node, the argument of perigee
+         * would be 0.
+         */
         fun argOfPerigee(argOfPerigee: Double) = argOfPerigee(JsonField.of(argOfPerigee))
 
         /**
          * Sets [Builder.argOfPerigee] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.argOfPerigee] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.argOfPerigee] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun argOfPerigee(argOfPerigee: JsonField<Double>) =
-            apply {
-                this.argOfPerigee = argOfPerigee
-            }
+        fun argOfPerigee(argOfPerigee: JsonField<Double>) = apply {
+            this.argOfPerigee = argOfPerigee
+        }
 
-        /** The drag term for SGP4 orbital model, used for calculating decay constants for altitude, eccentricity etc, measured in inverse earth radii. */
+        /**
+         * The drag term for SGP4 orbital model, used for calculating decay constants for altitude,
+         * eccentricity etc, measured in inverse earth radii.
+         */
         fun bStar(bStar: Double) = bStar(JsonField.of(bStar))
 
         /**
          * Sets [Builder.bStar] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.bStar] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.bStar] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun bStar(bStar: JsonField<Double>) =
-            apply {
-                this.bStar = bStar
-            }
+        fun bStar(bStar: JsonField<Double>) = apply { this.bStar = bStar }
 
         /** Time the row was created in the database, auto-populated by the system. */
         fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -805,13 +832,11 @@ class ManifoldelsetListResponse private constructor(
         /**
          * Sets [Builder.createdAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun createdAt(createdAt: JsonField<OffsetDateTime>) =
-            apply {
-                this.createdAt = createdAt
-            }
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
 
         /** Application user who created the row in the database, auto-populated by the system. */
         fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
@@ -819,153 +844,171 @@ class ManifoldelsetListResponse private constructor(
         /**
          * Sets [Builder.createdBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun createdBy(createdBy: JsonField<String>) =
-            apply {
-                this.createdBy = createdBy
-            }
+        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
-        /** The orbital eccentricity of an astronomical object is a parameter that determines the amount by which its orbit around another body deviates from a perfect circle. A value of 0 is a circular orbit, values between 0 and 1 form an elliptic orbit, 1 is a parabolic escape orbit, and greater than 1 is a hyperbolic escape orbit. */
+        /**
+         * The orbital eccentricity of an astronomical object is a parameter that determines the
+         * amount by which its orbit around another body deviates from a perfect circle. A value of
+         * 0 is a circular orbit, values between 0 and 1 form an elliptic orbit, 1 is a parabolic
+         * escape orbit, and greater than 1 is a hyperbolic escape orbit.
+         */
         fun eccentricity(eccentricity: Double) = eccentricity(JsonField.of(eccentricity))
 
         /**
          * Sets [Builder.eccentricity] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.eccentricity] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.eccentricity] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun eccentricity(eccentricity: JsonField<Double>) =
-            apply {
-                this.eccentricity = eccentricity
-            }
+        fun eccentricity(eccentricity: JsonField<Double>) = apply {
+            this.eccentricity = eccentricity
+        }
 
-        /** The angle between the equator and the orbit when looking from the center of the Earth. If the orbit went exactly around the equator from left to right, then the inclination would be 0. The inclination ranges from 0 to 180 degrees. */
+        /**
+         * The angle between the equator and the orbit when looking from the center of the Earth. If
+         * the orbit went exactly around the equator from left to right, then the inclination would
+         * be 0. The inclination ranges from 0 to 180 degrees.
+         */
         fun inclination(inclination: Double) = inclination(JsonField.of(inclination))
 
         /**
          * Sets [Builder.inclination] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.inclination] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.inclination] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun inclination(inclination: JsonField<Double>) =
-            apply {
-                this.inclination = inclination
-            }
+        fun inclination(inclination: JsonField<Double>) = apply { this.inclination = inclination }
 
-        /** Read only derived/generated line1 of a legacy TLE (two line element set) format, ignored on create/edit operations. */
+        /**
+         * Read only derived/generated line1 of a legacy TLE (two line element set) format, ignored
+         * on create/edit operations.
+         */
         fun line1(line1: String) = line1(JsonField.of(line1))
 
         /**
          * Sets [Builder.line1] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.line1] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.line1] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun line1(line1: JsonField<String>) =
-            apply {
-                this.line1 = line1
-            }
+        fun line1(line1: JsonField<String>) = apply { this.line1 = line1 }
 
-        /** Read only derived/generated line2 of a legacy TLE (two line element set) format, ignored on create/edit operations. */
+        /**
+         * Read only derived/generated line2 of a legacy TLE (two line element set) format, ignored
+         * on create/edit operations.
+         */
         fun line2(line2: String) = line2(JsonField.of(line2))
 
         /**
          * Sets [Builder.line2] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.line2] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.line2] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun line2(line2: JsonField<String>) =
-            apply {
-                this.line2 = line2
-            }
+        fun line2(line2: JsonField<String>) = apply { this.line2 = line2 }
 
-        /** Where the satellite is in its orbital path. The mean anomaly ranges from 0 to 360 degrees. The mean anomaly is referenced to the perigee. If the satellite were at the perigee, the mean anomaly would be 0. */
+        /**
+         * Where the satellite is in its orbital path. The mean anomaly ranges from 0 to 360
+         * degrees. The mean anomaly is referenced to the perigee. If the satellite were at the
+         * perigee, the mean anomaly would be 0.
+         */
         fun meanAnomaly(meanAnomaly: Double) = meanAnomaly(JsonField.of(meanAnomaly))
 
         /**
          * Sets [Builder.meanAnomaly] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.meanAnomaly] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.meanAnomaly] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun meanAnomaly(meanAnomaly: JsonField<Double>) =
-            apply {
-                this.meanAnomaly = meanAnomaly
-            }
+        fun meanAnomaly(meanAnomaly: JsonField<Double>) = apply { this.meanAnomaly = meanAnomaly }
 
-        /** The constant angular speed required for the body to complete one circular orbit in the same amount of time as the actual elliptical orbit with variable speed. Measured in revolutions per day. */
+        /**
+         * The constant angular speed required for the body to complete one circular orbit in the
+         * same amount of time as the actual elliptical orbit with variable speed. Measured in
+         * revolutions per day.
+         */
         fun meanMotion(meanMotion: Double) = meanMotion(JsonField.of(meanMotion))
 
         /**
          * Sets [Builder.meanMotion] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.meanMotion] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.meanMotion] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun meanMotion(meanMotion: JsonField<Double>) =
-            apply {
-                this.meanMotion = meanMotion
-            }
+        fun meanMotion(meanMotion: JsonField<Double>) = apply { this.meanMotion = meanMotion }
 
-        /** 2nd derivative of the mean motion with respect to time. Units are revolutions per day cubed. */
+        /**
+         * 2nd derivative of the mean motion with respect to time. Units are revolutions per day
+         * cubed.
+         */
         fun meanMotionDDot(meanMotionDDot: Double) = meanMotionDDot(JsonField.of(meanMotionDDot))
 
         /**
          * Sets [Builder.meanMotionDDot] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.meanMotionDDot] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.meanMotionDDot] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun meanMotionDDot(meanMotionDDot: JsonField<Double>) =
-            apply {
-                this.meanMotionDDot = meanMotionDDot
-            }
+        fun meanMotionDDot(meanMotionDDot: JsonField<Double>) = apply {
+            this.meanMotionDDot = meanMotionDDot
+        }
 
-        /** 1st derivative of the mean motion with respect to time. Units are revolutions per day squared. */
+        /**
+         * 1st derivative of the mean motion with respect to time. Units are revolutions per day
+         * squared.
+         */
         fun meanMotionDot(meanMotionDot: Double) = meanMotionDot(JsonField.of(meanMotionDot))
 
         /**
          * Sets [Builder.meanMotionDot] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.meanMotionDot] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.meanMotionDot] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun meanMotionDot(meanMotionDot: JsonField<Double>) =
-            apply {
-                this.meanMotionDot = meanMotionDot
-            }
+        fun meanMotionDot(meanMotionDot: JsonField<Double>) = apply {
+            this.meanMotionDot = meanMotionDot
+        }
 
-        /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         */
         fun origin(origin: String) = origin(JsonField.of(origin))
 
         /**
          * Sets [Builder.origin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun origin(origin: JsonField<String>) =
-            apply {
-                this.origin = origin
-            }
+        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
 
-        /** The originating source network on which this record was created, auto-populated by the system. */
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         */
         fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
         /**
          * Sets [Builder.origNetwork] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun origNetwork(origNetwork: JsonField<String>) =
-            apply {
-                this.origNetwork = origNetwork
-            }
+        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
 
         /** The orbit point nearest to the center of the earth in kilometers. */
         fun perigee(perigee: Double) = perigee(JsonField.of(perigee))
@@ -973,13 +1016,10 @@ class ManifoldelsetListResponse private constructor(
         /**
          * Sets [Builder.perigee] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.perigee] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.perigee] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun perigee(perigee: JsonField<Double>) =
-            apply {
-                this.perigee = perigee
-            }
+        fun perigee(perigee: JsonField<Double>) = apply { this.perigee = perigee }
 
         /** Period of the orbit equal to inverse of mean motion. */
         fun period(period: Double) = period(JsonField.of(period))
@@ -987,81 +1027,76 @@ class ManifoldelsetListResponse private constructor(
         /**
          * Sets [Builder.period] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.period] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.period] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun period(period: JsonField<Double>) =
-            apply {
-                this.period = period
-            }
+        fun period(period: JsonField<Double>) = apply { this.period = period }
 
-        /** Right ascension of the ascending node, or RAAN is the angle as measured in degrees eastwards (or, as seen from the north, counterclockwise) from the First Point of Aries to the ascending node, which is where the orbit crosses the equator when traveling north. */
+        /**
+         * Right ascension of the ascending node, or RAAN is the angle as measured in degrees
+         * eastwards (or, as seen from the north, counterclockwise) from the First Point of Aries to
+         * the ascending node, which is where the orbit crosses the equator when traveling north.
+         */
         fun raan(raan: Double) = raan(JsonField.of(raan))
 
         /**
          * Sets [Builder.raan] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.raan] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.raan] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun raan(raan: JsonField<Double>) =
-            apply {
-                this.raan = raan
-            }
+        fun raan(raan: JsonField<Double>) = apply { this.raan = raan }
 
-        /** The current revolution number. The value is incremented when a satellite crosses the equator on an ascending pass. */
+        /**
+         * The current revolution number. The value is incremented when a satellite crosses the
+         * equator on an ascending pass.
+         */
         fun revNo(revNo: Int) = revNo(JsonField.of(revNo))
 
         /**
          * Sets [Builder.revNo] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.revNo] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.revNo] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun revNo(revNo: JsonField<Int>) =
-            apply {
-                this.revNo = revNo
-            }
+        fun revNo(revNo: JsonField<Int>) = apply { this.revNo = revNo }
 
-        /** The sum of the periapsis and apoapsis distances divided by two. For circular orbits, the semimajor axis is the distance between the centers of the bodies, not the distance of the bodies from the center of mass. */
+        /**
+         * The sum of the periapsis and apoapsis distances divided by two. For circular orbits, the
+         * semimajor axis is the distance between the centers of the bodies, not the distance of the
+         * bodies from the center of mass.
+         */
         fun semiMajorAxis(semiMajorAxis: Double) = semiMajorAxis(JsonField.of(semiMajorAxis))
 
         /**
          * Sets [Builder.semiMajorAxis] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.semiMajorAxis] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.semiMajorAxis] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun semiMajorAxis(semiMajorAxis: JsonField<Double>) =
-            apply {
-                this.semiMajorAxis = semiMajorAxis
-            }
+        fun semiMajorAxis(semiMajorAxis: JsonField<Double>) = apply {
+            this.semiMajorAxis = semiMajorAxis
+        }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) =
-            apply {
-                additionalProperties.put(key, value)
-            }
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
 
-        fun removeAdditionalProperty(key: String) =
-            apply {
-                additionalProperties.remove(key)
-            }
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) =
-            apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
 
         /**
          * Returns an immutable instance of [ManifoldelsetListResponse].
@@ -1069,7 +1104,6 @@ class ManifoldelsetListResponse private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -1083,86 +1117,73 @@ class ManifoldelsetListResponse private constructor(
          */
         fun build(): ManifoldelsetListResponse =
             ManifoldelsetListResponse(
-              checkRequired(
-                "classificationMarking", classificationMarking
-              ),
-              checkRequired(
-                "dataMode", dataMode
-              ),
-              checkRequired(
-                "epoch", epoch
-              ),
-              checkRequired(
-                "idManifold", idManifold
-              ),
-              checkRequired(
-                "source", source
-              ),
-              checkRequired(
-                "tmpSatNo", tmpSatNo
-              ),
-              id,
-              apogee,
-              argOfPerigee,
-              bStar,
-              createdAt,
-              createdBy,
-              eccentricity,
-              inclination,
-              line1,
-              line2,
-              meanAnomaly,
-              meanMotion,
-              meanMotionDDot,
-              meanMotionDot,
-              origin,
-              origNetwork,
-              perigee,
-              period,
-              raan,
-              revNo,
-              semiMajorAxis,
-              additionalProperties.toMutableMap(),
+                checkRequired("classificationMarking", classificationMarking),
+                checkRequired("dataMode", dataMode),
+                checkRequired("epoch", epoch),
+                checkRequired("idManifold", idManifold),
+                checkRequired("source", source),
+                checkRequired("tmpSatNo", tmpSatNo),
+                id,
+                apogee,
+                argOfPerigee,
+                bStar,
+                createdAt,
+                createdBy,
+                eccentricity,
+                inclination,
+                line1,
+                line2,
+                meanAnomaly,
+                meanMotion,
+                meanMotionDDot,
+                meanMotionDot,
+                origin,
+                origNetwork,
+                perigee,
+                period,
+                raan,
+                revNo,
+                semiMajorAxis,
+                additionalProperties.toMutableMap(),
             )
     }
 
     private var validated: Boolean = false
 
-    fun validate(): ManifoldelsetListResponse =
-        apply {
-            if (validated) {
-              return@apply
-            }
-
-            classificationMarking()
-            dataMode().validate()
-            epoch()
-            idManifold()
-            source()
-            tmpSatNo()
-            id()
-            apogee()
-            argOfPerigee()
-            bStar()
-            createdAt()
-            createdBy()
-            eccentricity()
-            inclination()
-            line1()
-            line2()
-            meanAnomaly()
-            meanMotion()
-            meanMotionDDot()
-            meanMotionDot()
-            origin()
-            origNetwork()
-            perigee()
-            period()
-            raan()
-            revNo()
-            semiMajorAxis()
-            validated = true
+    fun validate(): ManifoldelsetListResponse = apply {
+        if (validated) {
+            return@apply
         }
+
+        classificationMarking()
+        dataMode().validate()
+        epoch()
+        idManifold()
+        source()
+        tmpSatNo()
+        id()
+        apogee()
+        argOfPerigee()
+        bStar()
+        createdAt()
+        createdBy()
+        eccentricity()
+        inclination()
+        line1()
+        line2()
+        meanAnomaly()
+        meanMotion()
+        meanMotionDDot()
+        meanMotionDot()
+        origin()
+        origNetwork()
+        perigee()
+        period()
+        raan()
+        revNo()
+        semiMajorAxis()
+        validated = true
+    }
 
     fun isValid(): Boolean =
         try {
@@ -1178,33 +1199,60 @@ class ManifoldelsetListResponse private constructor(
      * Used for best match union deserialization.
      */
     @JvmSynthetic
-    internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (epoch.asKnown().isPresent) 1 else 0) + (if (idManifold.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (tmpSatNo.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (if (apogee.asKnown().isPresent) 1 else 0) + (if (argOfPerigee.asKnown().isPresent) 1 else 0) + (if (bStar.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (eccentricity.asKnown().isPresent) 1 else 0) + (if (inclination.asKnown().isPresent) 1 else 0) + (if (line1.asKnown().isPresent) 1 else 0) + (if (line2.asKnown().isPresent) 1 else 0) + (if (meanAnomaly.asKnown().isPresent) 1 else 0) + (if (meanMotion.asKnown().isPresent) 1 else 0) + (if (meanMotionDDot.asKnown().isPresent) 1 else 0) + (if (meanMotionDot.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (perigee.asKnown().isPresent) 1 else 0) + (if (period.asKnown().isPresent) 1 else 0) + (if (raan.asKnown().isPresent) 1 else 0) + (if (revNo.asKnown().isPresent) 1 else 0) + (if (semiMajorAxis.asKnown().isPresent) 1 else 0)
+    internal fun validity(): Int =
+        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (epoch.asKnown().isPresent) 1 else 0) +
+            (if (idManifold.asKnown().isPresent) 1 else 0) +
+            (if (source.asKnown().isPresent) 1 else 0) +
+            (if (tmpSatNo.asKnown().isPresent) 1 else 0) +
+            (if (id.asKnown().isPresent) 1 else 0) +
+            (if (apogee.asKnown().isPresent) 1 else 0) +
+            (if (argOfPerigee.asKnown().isPresent) 1 else 0) +
+            (if (bStar.asKnown().isPresent) 1 else 0) +
+            (if (createdAt.asKnown().isPresent) 1 else 0) +
+            (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (eccentricity.asKnown().isPresent) 1 else 0) +
+            (if (inclination.asKnown().isPresent) 1 else 0) +
+            (if (line1.asKnown().isPresent) 1 else 0) +
+            (if (line2.asKnown().isPresent) 1 else 0) +
+            (if (meanAnomaly.asKnown().isPresent) 1 else 0) +
+            (if (meanMotion.asKnown().isPresent) 1 else 0) +
+            (if (meanMotionDDot.asKnown().isPresent) 1 else 0) +
+            (if (meanMotionDot.asKnown().isPresent) 1 else 0) +
+            (if (origin.asKnown().isPresent) 1 else 0) +
+            (if (origNetwork.asKnown().isPresent) 1 else 0) +
+            (if (perigee.asKnown().isPresent) 1 else 0) +
+            (if (period.asKnown().isPresent) 1 else 0) +
+            (if (raan.asKnown().isPresent) 1 else 0) +
+            (if (revNo.asKnown().isPresent) 1 else 0) +
+            (if (semiMajorAxis.asKnown().isPresent) 1 else 0)
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      */
-    class DataMode @JsonCreator private constructor(
-        private val value: JsonField<String>,
-
-    ) : Enum {
+    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't match any known
-         * member, and you want to know that value. For example, if the SDK is on an older version than the
-         * API, then the API may respond with new members that the SDK is unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue
-        fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -1231,11 +1279,9 @@ class ManifoldelsetListResponse private constructor(
          * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [DataMode] can contain an unknown value in a couple of cases:
-         *
-         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-         *   an older version than the API, then the API may respond with new members that the SDK is unaware
-         *   of.
-         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -1248,11 +1294,11 @@ class ManifoldelsetListResponse private constructor(
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-         * class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want to throw
-         * for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -1266,10 +1312,11 @@ class ManifoldelsetListResponse private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-         * for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
          */
         fun known(): Known =
             when (this) {
@@ -1283,25 +1330,27 @@ class ManifoldelsetListResponse private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging and generally
-         * doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-         * primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
          */
-        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
 
         private var validated: Boolean = false
 
-        fun validate(): DataMode =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                known()
-                validated = true
+        fun validate(): DataMode = apply {
+            if (validated) {
+                return@apply
             }
+
+            known()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -1312,19 +1361,19 @@ class ManifoldelsetListResponse private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic
-        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1333,18 +1382,76 @@ class ManifoldelsetListResponse private constructor(
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is ManifoldelsetListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && epoch == other.epoch && idManifold == other.idManifold && source == other.source && tmpSatNo == other.tmpSatNo && id == other.id && apogee == other.apogee && argOfPerigee == other.argOfPerigee && bStar == other.bStar && createdAt == other.createdAt && createdBy == other.createdBy && eccentricity == other.eccentricity && inclination == other.inclination && line1 == other.line1 && line2 == other.line2 && meanAnomaly == other.meanAnomaly && meanMotion == other.meanMotion && meanMotionDDot == other.meanMotionDDot && meanMotionDot == other.meanMotionDot && origin == other.origin && origNetwork == other.origNetwork && perigee == other.perigee && period == other.period && raan == other.raan && revNo == other.revNo && semiMajorAxis == other.semiMajorAxis && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is ManifoldelsetListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            epoch == other.epoch &&
+            idManifold == other.idManifold &&
+            source == other.source &&
+            tmpSatNo == other.tmpSatNo &&
+            id == other.id &&
+            apogee == other.apogee &&
+            argOfPerigee == other.argOfPerigee &&
+            bStar == other.bStar &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            eccentricity == other.eccentricity &&
+            inclination == other.inclination &&
+            line1 == other.line1 &&
+            line2 == other.line2 &&
+            meanAnomaly == other.meanAnomaly &&
+            meanMotion == other.meanMotion &&
+            meanMotionDDot == other.meanMotionDDot &&
+            meanMotionDot == other.meanMotionDot &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            perigee == other.perigee &&
+            period == other.period &&
+            raan == other.raan &&
+            revNo == other.revNo &&
+            semiMajorAxis == other.semiMajorAxis &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, epoch, idManifold, source, tmpSatNo, id, apogee, argOfPerigee, bStar, createdAt, createdBy, eccentricity, inclination, line1, line2, meanAnomaly, meanMotion, meanMotionDDot, meanMotionDot, origin, origNetwork, perigee, period, raan, revNo, semiMajorAxis, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            epoch,
+            idManifold,
+            source,
+            tmpSatNo,
+            id,
+            apogee,
+            argOfPerigee,
+            bStar,
+            createdAt,
+            createdBy,
+            eccentricity,
+            inclination,
+            line1,
+            line2,
+            meanAnomaly,
+            meanMotion,
+            meanMotionDDot,
+            meanMotionDot,
+            origin,
+            origNetwork,
+            perigee,
+            period,
+            raan,
+            revNo,
+            semiMajorAxis,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() = "ManifoldelsetListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, epoch=$epoch, idManifold=$idManifold, source=$source, tmpSatNo=$tmpSatNo, id=$id, apogee=$apogee, argOfPerigee=$argOfPerigee, bStar=$bStar, createdAt=$createdAt, createdBy=$createdBy, eccentricity=$eccentricity, inclination=$inclination, line1=$line1, line2=$line2, meanAnomaly=$meanAnomaly, meanMotion=$meanMotion, meanMotionDDot=$meanMotionDDot, meanMotionDot=$meanMotionDot, origin=$origin, origNetwork=$origNetwork, perigee=$perigee, period=$period, raan=$raan, revNo=$revNo, semiMajorAxis=$semiMajorAxis, additionalProperties=$additionalProperties}"
+    override fun toString() =
+        "ManifoldelsetListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, epoch=$epoch, idManifold=$idManifold, source=$source, tmpSatNo=$tmpSatNo, id=$id, apogee=$apogee, argOfPerigee=$argOfPerigee, bStar=$bStar, createdAt=$createdAt, createdBy=$createdBy, eccentricity=$eccentricity, inclination=$inclination, line1=$line1, line2=$line2, meanAnomaly=$meanAnomaly, meanMotion=$meanMotion, meanMotionDDot=$meanMotionDDot, meanMotionDot=$meanMotionDot, origin=$origin, origNetwork=$origNetwork, perigee=$perigee, period=$period, raan=$raan, revNo=$revNo, semiMajorAxis=$semiMajorAxis, additionalProperties=$additionalProperties}"
 }
