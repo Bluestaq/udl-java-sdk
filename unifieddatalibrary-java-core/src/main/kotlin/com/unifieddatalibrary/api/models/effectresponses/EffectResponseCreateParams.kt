@@ -2277,12 +2277,65 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && type == other.type && id == other.id && actionsList == other.actionsList && actorSrcId == other.actorSrcId && actorSrcType == other.actorSrcType && coaMetrics == other.coaMetrics && collateralDamageEst == other.collateralDamageEst && createdAt == other.createdAt && createdBy == other.createdBy && decisionDeadline == other.decisionDeadline && externalActions == other.externalActions && externalRequestId == other.externalRequestId && idEffectRequest == other.idEffectRequest && munitionId == other.munitionId && munitionType == other.munitionType && origin == other.origin && origNetwork == other.origNetwork && probabilityOfKill == other.probabilityOfKill && redTargetSrcId == other.redTargetSrcId && redTargetSrcType == other.redTargetSrcType && redTimeToOverhead == other.redTimeToOverhead && shotsRequired == other.shotsRequired && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                type == other.type &&
+                id == other.id &&
+                actionsList == other.actionsList &&
+                actorSrcId == other.actorSrcId &&
+                actorSrcType == other.actorSrcType &&
+                coaMetrics == other.coaMetrics &&
+                collateralDamageEst == other.collateralDamageEst &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                decisionDeadline == other.decisionDeadline &&
+                externalActions == other.externalActions &&
+                externalRequestId == other.externalRequestId &&
+                idEffectRequest == other.idEffectRequest &&
+                munitionId == other.munitionId &&
+                munitionType == other.munitionType &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                probabilityOfKill == other.probabilityOfKill &&
+                redTargetSrcId == other.redTargetSrcId &&
+                redTargetSrcType == other.redTargetSrcType &&
+                redTimeToOverhead == other.redTimeToOverhead &&
+                shotsRequired == other.shotsRequired &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, type, id, actionsList, actorSrcId, actorSrcType, coaMetrics, collateralDamageEst, createdAt, createdBy, decisionDeadline, externalActions, externalRequestId, idEffectRequest, munitionId, munitionType, origin, origNetwork, probabilityOfKill, redTargetSrcId, redTargetSrcType, redTimeToOverhead, shotsRequired, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                type,
+                id,
+                actionsList,
+                actorSrcId,
+                actorSrcType,
+                coaMetrics,
+                collateralDamageEst,
+                createdAt,
+                createdBy,
+                decisionDeadline,
+                externalActions,
+                externalRequestId,
+                idEffectRequest,
+                munitionId,
+                munitionType,
+                origin,
+                origNetwork,
+                probabilityOfKill,
+                redTargetSrcId,
+                redTargetSrcType,
+                redTimeToOverhead,
+                shotsRequired,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2435,7 +2488,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3608,12 +3661,23 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is ActionMetric && domainValue == other.domainValue && metricType == other.metricType && provenance == other.provenance && relativeValue == other.relativeValue && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is ActionMetric &&
+                    domainValue == other.domainValue &&
+                    metricType == other.metricType &&
+                    provenance == other.provenance &&
+                    relativeValue == other.relativeValue &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(domainValue, metricType, provenance, relativeValue, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    domainValue,
+                    metricType,
+                    provenance,
+                    relativeValue,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -3626,12 +3690,51 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is ActionsList && actionActorSrcId == other.actionActorSrcId && actionActorSrcType == other.actionActorSrcType && actionEndTime == other.actionEndTime && actionId == other.actionId && actionMetrics == other.actionMetrics && actionStartTime == other.actionStartTime && actorInterceptAlt == other.actorInterceptAlt && actorInterceptLat == other.actorInterceptLat && actorInterceptLon == other.actorInterceptLon && effector == other.effector && summary == other.summary && targetSrcId == other.targetSrcId && targetSrcType == other.targetSrcType && totEndTime == other.totEndTime && totStartTime == other.totStartTime && weaponInterceptAlt == other.weaponInterceptAlt && weaponInterceptLat == other.weaponInterceptLat && weaponInterceptLon == other.weaponInterceptLon && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is ActionsList &&
+                actionActorSrcId == other.actionActorSrcId &&
+                actionActorSrcType == other.actionActorSrcType &&
+                actionEndTime == other.actionEndTime &&
+                actionId == other.actionId &&
+                actionMetrics == other.actionMetrics &&
+                actionStartTime == other.actionStartTime &&
+                actorInterceptAlt == other.actorInterceptAlt &&
+                actorInterceptLat == other.actorInterceptLat &&
+                actorInterceptLon == other.actorInterceptLon &&
+                effector == other.effector &&
+                summary == other.summary &&
+                targetSrcId == other.targetSrcId &&
+                targetSrcType == other.targetSrcType &&
+                totEndTime == other.totEndTime &&
+                totStartTime == other.totStartTime &&
+                weaponInterceptAlt == other.weaponInterceptAlt &&
+                weaponInterceptLat == other.weaponInterceptLat &&
+                weaponInterceptLon == other.weaponInterceptLon &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(actionActorSrcId, actionActorSrcType, actionEndTime, actionId, actionMetrics, actionStartTime, actorInterceptAlt, actorInterceptLat, actorInterceptLon, effector, summary, targetSrcId, targetSrcType, totEndTime, totStartTime, weaponInterceptAlt, weaponInterceptLat, weaponInterceptLon, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                actionActorSrcId,
+                actionActorSrcType,
+                actionEndTime,
+                actionId,
+                actionMetrics,
+                actionStartTime,
+                actorInterceptAlt,
+                actorInterceptLat,
+                actorInterceptLon,
+                effector,
+                summary,
+                targetSrcId,
+                targetSrcType,
+                totEndTime,
+                totStartTime,
+                weaponInterceptAlt,
+                weaponInterceptLat,
+                weaponInterceptLon,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3899,12 +4002,17 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is CoaMetric && domainValue == other.domainValue && metricType == other.metricType && provenance == other.provenance && relativeValue == other.relativeValue && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is CoaMetric &&
+                domainValue == other.domainValue &&
+                metricType == other.metricType &&
+                provenance == other.provenance &&
+                relativeValue == other.relativeValue &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(domainValue, metricType, provenance, relativeValue, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(domainValue, metricType, provenance, relativeValue, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3917,10 +4025,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EffectResponseCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is EffectResponseCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "EffectResponseCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

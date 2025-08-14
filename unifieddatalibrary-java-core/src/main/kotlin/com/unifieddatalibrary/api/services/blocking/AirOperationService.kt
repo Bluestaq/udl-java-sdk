@@ -4,7 +4,6 @@ package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.services.blocking.airoperations.AirTaskingOrderService
-import com.unifieddatalibrary.api.services.blocking.airoperations.AircraftSortieService
 import com.unifieddatalibrary.api.services.blocking.airoperations.AircraftSortyService
 import com.unifieddatalibrary.api.services.blocking.airoperations.AirspaceControlOrderService
 import com.unifieddatalibrary.api.services.blocking.airoperations.CrewpaperService
@@ -26,8 +25,6 @@ interface AirOperationService {
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): AirOperationService
 
     fun airTaskingOrders(): AirTaskingOrderService
-
-    fun aircraftSortie(): AircraftSortieService
 
     fun aircraftSorties(): AircraftSortyService
 
@@ -52,8 +49,6 @@ interface AirOperationService {
         ): AirOperationService.WithRawResponse
 
         fun airTaskingOrders(): AirTaskingOrderService.WithRawResponse
-
-        fun aircraftSortie(): AircraftSortieService.WithRawResponse
 
         fun aircraftSorties(): AircraftSortyService.WithRawResponse
 

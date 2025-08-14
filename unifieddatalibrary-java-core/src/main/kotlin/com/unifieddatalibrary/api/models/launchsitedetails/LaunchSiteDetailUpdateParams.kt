@@ -1454,12 +1454,43 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idLaunchSite == other.idLaunchSite && source == other.source && bodyId == other.bodyId && availableInclinations == other.availableInclinations && createdAt == other.createdAt && createdBy == other.createdBy && description == other.description && idLocation == other.idLocation && launchGroup == other.launchGroup && location == other.location && origin == other.origin && origNetwork == other.origNetwork && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idLaunchSite == other.idLaunchSite &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                availableInclinations == other.availableInclinations &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                description == other.description &&
+                idLocation == other.idLocation &&
+                launchGroup == other.launchGroup &&
+                location == other.location &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idLaunchSite, source, bodyId, availableInclinations, createdAt, createdBy, description, idLocation, launchGroup, location, origin, origNetwork, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idLaunchSite,
+                source,
+                bodyId,
+                availableInclinations,
+                createdAt,
+                createdBy,
+                description,
+                idLocation,
+                launchGroup,
+                location,
+                origin,
+                origNetwork,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1612,7 +1643,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1625,10 +1656,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LaunchSiteDetailUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is LaunchSiteDetailUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "LaunchSiteDetailUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

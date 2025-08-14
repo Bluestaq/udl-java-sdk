@@ -1215,7 +1215,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -1228,12 +1228,53 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && msgCreateDate == other.msgCreateDate && source == other.source && id == other.id && beNumber == other.beNumber && createdAt == other.createdAt && createdBy == other.createdBy && declassificationDate == other.declassificationDate && declassificationString == other.declassificationString && derivedFrom == other.derivedFrom && idOnOrbit == other.idOnOrbit && launchDate == other.launchDate && launchFacilityName == other.launchFacilityName && launchFailureCode == other.launchFailureCode && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && oSuffix == other.oSuffix && satNo == other.satNo /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                msgCreateDate == other.msgCreateDate &&
+                source == other.source &&
+                id == other.id &&
+                beNumber == other.beNumber &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                declassificationDate == other.declassificationDate &&
+                declassificationString == other.declassificationString &&
+                derivedFrom == other.derivedFrom &&
+                idOnOrbit == other.idOnOrbit &&
+                launchDate == other.launchDate &&
+                launchFacilityName == other.launchFacilityName &&
+                launchFailureCode == other.launchFailureCode &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                oSuffix == other.oSuffix &&
+                satNo == other.satNo
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, msgCreateDate, source, id, beNumber, createdAt, createdBy, declassificationDate, declassificationString, derivedFrom, idOnOrbit, launchDate, launchFacilityName, launchFailureCode, origin, origNetwork, origObjectId, oSuffix, satNo) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                msgCreateDate,
+                source,
+                id,
+                beNumber,
+                createdAt,
+                createdBy,
+                declassificationDate,
+                declassificationString,
+                derivedFrom,
+                idOnOrbit,
+                launchDate,
+                launchFacilityName,
+                launchFailureCode,
+                origin,
+                origNetwork,
+                origObjectId,
+                oSuffix,
+                satNo,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1246,10 +1287,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LaunchEventUnvalidatedPublishParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is LaunchEventUnvalidatedPublishParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "LaunchEventUnvalidatedPublishParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

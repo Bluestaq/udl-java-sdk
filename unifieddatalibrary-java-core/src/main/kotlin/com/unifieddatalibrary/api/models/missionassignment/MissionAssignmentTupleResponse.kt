@@ -2736,7 +2736,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2749,12 +2749,151 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is MissionAssignmentTupleResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && mad == other.mad && source == other.source && ts == other.ts && id == other.id && c1associateddmpis == other.c1associateddmpis && c2air == other.c2air && c2alt == other.c2alt && c2crs == other.c2crs && c2exerciseindicator == other.c2exerciseindicator && c2exercisemof == other.c2exercisemof && c2id == other.c2id && c2idamplifyingdescriptor == other.c2idamplifyingdescriptor && c2lnd == other.c2lnd && c2spc == other.c2spc && c2spd == other.c2spd && c2specialinterestindicator == other.c2specialinterestindicator && c2sur == other.c2sur && c3elv == other.c3elv && c3lat == other.c3lat && c3lon == other.c3lon && c3ptl == other.c3ptl && c3ptnum == other.c3ptnum && c4colon == other.c4colon && c4def == other.c4def && c4egress == other.c4egress && c4mod == other.c4mod && c4numberofstores == other.c4numberofstores && c4runin == other.c4runin && c4tgt == other.c4tgt && c4timediscrete == other.c4timediscrete && c4tm == other.c4tm && c4typeofstores == other.c4typeofstores && c5colon == other.c5colon && c5elevationlsbs == other.c5elevationlsbs && c5haeadj == other.c5haeadj && c5latlsb == other.c5latlsb && c5lonlsb == other.c5lonlsb && c5tgtbrng == other.c5tgtbrng && c5tw == other.c5tw && c6dspc == other.c6dspc && c6dspct == other.c6dspct && c6fplpm == other.c6fplpm && c6intel == other.c6intel && c6laser == other.c6laser && c6longpm == other.c6longpm && c6tnr3 == other.c6tnr3 && c7elang2 == other.c7elang2 && c7in3p == other.c7in3p && c7tnor == other.c7tnor && createdAt == other.createdAt && createdBy == other.createdBy && env == other.env && index == other.index && lat == other.lat && lon == other.lon && orginx == other.orginx && origin == other.origin && origNetwork == other.origNetwork && rc == other.rc && rr == other.rr && sz == other.sz && tno == other.tno && trkId == other.trkId && twenv == other.twenv && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is MissionAssignmentTupleResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            mad == other.mad &&
+            source == other.source &&
+            ts == other.ts &&
+            id == other.id &&
+            c1associateddmpis == other.c1associateddmpis &&
+            c2air == other.c2air &&
+            c2alt == other.c2alt &&
+            c2crs == other.c2crs &&
+            c2exerciseindicator == other.c2exerciseindicator &&
+            c2exercisemof == other.c2exercisemof &&
+            c2id == other.c2id &&
+            c2idamplifyingdescriptor == other.c2idamplifyingdescriptor &&
+            c2lnd == other.c2lnd &&
+            c2spc == other.c2spc &&
+            c2spd == other.c2spd &&
+            c2specialinterestindicator == other.c2specialinterestindicator &&
+            c2sur == other.c2sur &&
+            c3elv == other.c3elv &&
+            c3lat == other.c3lat &&
+            c3lon == other.c3lon &&
+            c3ptl == other.c3ptl &&
+            c3ptnum == other.c3ptnum &&
+            c4colon == other.c4colon &&
+            c4def == other.c4def &&
+            c4egress == other.c4egress &&
+            c4mod == other.c4mod &&
+            c4numberofstores == other.c4numberofstores &&
+            c4runin == other.c4runin &&
+            c4tgt == other.c4tgt &&
+            c4timediscrete == other.c4timediscrete &&
+            c4tm == other.c4tm &&
+            c4typeofstores == other.c4typeofstores &&
+            c5colon == other.c5colon &&
+            c5elevationlsbs == other.c5elevationlsbs &&
+            c5haeadj == other.c5haeadj &&
+            c5latlsb == other.c5latlsb &&
+            c5lonlsb == other.c5lonlsb &&
+            c5tgtbrng == other.c5tgtbrng &&
+            c5tw == other.c5tw &&
+            c6dspc == other.c6dspc &&
+            c6dspct == other.c6dspct &&
+            c6fplpm == other.c6fplpm &&
+            c6intel == other.c6intel &&
+            c6laser == other.c6laser &&
+            c6longpm == other.c6longpm &&
+            c6tnr3 == other.c6tnr3 &&
+            c7elang2 == other.c7elang2 &&
+            c7in3p == other.c7in3p &&
+            c7tnor == other.c7tnor &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            env == other.env &&
+            index == other.index &&
+            lat == other.lat &&
+            lon == other.lon &&
+            orginx == other.orginx &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            rc == other.rc &&
+            rr == other.rr &&
+            sz == other.sz &&
+            tno == other.tno &&
+            trkId == other.trkId &&
+            twenv == other.twenv &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, mad, source, ts, id, c1associateddmpis, c2air, c2alt, c2crs, c2exerciseindicator, c2exercisemof, c2id, c2idamplifyingdescriptor, c2lnd, c2spc, c2spd, c2specialinterestindicator, c2sur, c3elv, c3lat, c3lon, c3ptl, c3ptnum, c4colon, c4def, c4egress, c4mod, c4numberofstores, c4runin, c4tgt, c4timediscrete, c4tm, c4typeofstores, c5colon, c5elevationlsbs, c5haeadj, c5latlsb, c5lonlsb, c5tgtbrng, c5tw, c6dspc, c6dspct, c6fplpm, c6intel, c6laser, c6longpm, c6tnr3, c7elang2, c7in3p, c7tnor, createdAt, createdBy, env, index, lat, lon, orginx, origin, origNetwork, rc, rr, sz, tno, trkId, twenv, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            mad,
+            source,
+            ts,
+            id,
+            c1associateddmpis,
+            c2air,
+            c2alt,
+            c2crs,
+            c2exerciseindicator,
+            c2exercisemof,
+            c2id,
+            c2idamplifyingdescriptor,
+            c2lnd,
+            c2spc,
+            c2spd,
+            c2specialinterestindicator,
+            c2sur,
+            c3elv,
+            c3lat,
+            c3lon,
+            c3ptl,
+            c3ptnum,
+            c4colon,
+            c4def,
+            c4egress,
+            c4mod,
+            c4numberofstores,
+            c4runin,
+            c4tgt,
+            c4timediscrete,
+            c4tm,
+            c4typeofstores,
+            c5colon,
+            c5elevationlsbs,
+            c5haeadj,
+            c5latlsb,
+            c5lonlsb,
+            c5tgtbrng,
+            c5tw,
+            c6dspc,
+            c6dspct,
+            c6fplpm,
+            c6intel,
+            c6laser,
+            c6longpm,
+            c6tnr3,
+            c7elang2,
+            c7in3p,
+            c7tnor,
+            createdAt,
+            createdBy,
+            env,
+            index,
+            lat,
+            lon,
+            orginx,
+            origin,
+            origNetwork,
+            rc,
+            rr,
+            sz,
+            tno,
+            trkId,
+            twenv,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

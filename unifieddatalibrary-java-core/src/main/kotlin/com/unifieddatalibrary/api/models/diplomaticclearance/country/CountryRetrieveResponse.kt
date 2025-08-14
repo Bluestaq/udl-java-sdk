@@ -1933,7 +1933,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2515,12 +2515,39 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DiplomaticClearanceCountryContact && ahNum == other.ahNum && ahSpdDialCode == other.ahSpdDialCode && commNum == other.commNum && commSpdDialCode == other.commSpdDialCode && contactId == other.contactId && contactName == other.contactName && contactRemark == other.contactRemark && dsnNum == other.dsnNum && dsnSpdDialCode == other.dsnSpdDialCode && faxNum == other.faxNum && niprNum == other.niprNum && siprNum == other.siprNum && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is DiplomaticClearanceCountryContact &&
+                ahNum == other.ahNum &&
+                ahSpdDialCode == other.ahSpdDialCode &&
+                commNum == other.commNum &&
+                commSpdDialCode == other.commSpdDialCode &&
+                contactId == other.contactId &&
+                contactName == other.contactName &&
+                contactRemark == other.contactRemark &&
+                dsnNum == other.dsnNum &&
+                dsnSpdDialCode == other.dsnSpdDialCode &&
+                faxNum == other.faxNum &&
+                niprNum == other.niprNum &&
+                siprNum == other.siprNum &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(ahNum, ahSpdDialCode, commNum, commSpdDialCode, contactId, contactName, contactRemark, dsnNum, dsnSpdDialCode, faxNum, niprNum, siprNum, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                ahNum,
+                ahSpdDialCode,
+                commNum,
+                commSpdDialCode,
+                contactId,
+                contactName,
+                contactRemark,
+                dsnNum,
+                dsnSpdDialCode,
+                faxNum,
+                niprNum,
+                siprNum,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2738,12 +2765,16 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DiplomaticClearanceCountryEntryExitPoint && isEntry == other.isEntry && isExit == other.isExit && pointName == other.pointName && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is DiplomaticClearanceCountryEntryExitPoint &&
+                isEntry == other.isEntry &&
+                isExit == other.isExit &&
+                pointName == other.pointName &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(isEntry, isExit, pointName, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(isEntry, isExit, pointName, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5268,12 +5299,123 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DiplomaticClearanceCountryProfile && cargoPaxRemark == other.cargoPaxRemark && clearanceId == other.clearanceId && crewInfoRemark == other.crewInfoRemark && defClearanceStatus == other.defClearanceStatus && defEntryRemark == other.defEntryRemark && defEntryTime == other.defEntryTime && defExitRemark == other.defExitRemark && defExitTime == other.defExitTime && fltInfoRemark == other.fltInfoRemark && hazInfoRemark == other.hazInfoRemark && landDefProf == other.landDefProf && landLeadTime == other.landLeadTime && landLeadTimeRemark == other.landLeadTimeRemark && landLeadTimeUnit == other.landLeadTimeUnit && landValidPeriodMinus == other.landValidPeriodMinus && landValidPeriodPlus == other.landValidPeriodPlus && landValidPeriodRemark == other.landValidPeriodRemark && landValidPeriodUnit == other.landValidPeriodUnit && overflyDefProf == other.overflyDefProf && overflyLeadTime == other.overflyLeadTime && overflyLeadTimeRemark == other.overflyLeadTimeRemark && overflyLeadTimeUnit == other.overflyLeadTimeUnit && overflyValidPeriodMinus == other.overflyValidPeriodMinus && overflyValidPeriodPlus == other.overflyValidPeriodPlus && overflyValidPeriodRemark == other.overflyValidPeriodRemark && overflyValidPeriodUnit == other.overflyValidPeriodUnit && profile == other.profile && profileAgency == other.profileAgency && profileId == other.profileId && profileRemark == other.profileRemark && reqAcAltName == other.reqAcAltName && reqAllHazInfo == other.reqAllHazInfo && reqAmcStdInfo == other.reqAmcStdInfo && reqCargoList == other.reqCargoList && reqCargoPax == other.reqCargoPax && reqClass1Info == other.reqClass1Info && reqClass9Info == other.reqClass9Info && reqCrewComp == other.reqCrewComp && reqCrewDetail == other.reqCrewDetail && reqCrewInfo == other.reqCrewInfo && reqDiv1Info == other.reqDiv1Info && reqDv == other.reqDv && reqEntryExitCoord == other.reqEntryExitCoord && reqFltInfo == other.reqFltInfo && reqFltPlanRoute == other.reqFltPlanRoute && reqFundSource == other.reqFundSource && reqHazInfo == other.reqHazInfo && reqIcao == other.reqIcao && reqPassportInfo == other.reqPassportInfo && reqRaven == other.reqRaven && reqRepChange == other.reqRepChange && reqTailNum == other.reqTailNum && reqWeaponsInfo == other.reqWeaponsInfo && undefinedCrewReporting == other.undefinedCrewReporting && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is DiplomaticClearanceCountryProfile &&
+                cargoPaxRemark == other.cargoPaxRemark &&
+                clearanceId == other.clearanceId &&
+                crewInfoRemark == other.crewInfoRemark &&
+                defClearanceStatus == other.defClearanceStatus &&
+                defEntryRemark == other.defEntryRemark &&
+                defEntryTime == other.defEntryTime &&
+                defExitRemark == other.defExitRemark &&
+                defExitTime == other.defExitTime &&
+                fltInfoRemark == other.fltInfoRemark &&
+                hazInfoRemark == other.hazInfoRemark &&
+                landDefProf == other.landDefProf &&
+                landLeadTime == other.landLeadTime &&
+                landLeadTimeRemark == other.landLeadTimeRemark &&
+                landLeadTimeUnit == other.landLeadTimeUnit &&
+                landValidPeriodMinus == other.landValidPeriodMinus &&
+                landValidPeriodPlus == other.landValidPeriodPlus &&
+                landValidPeriodRemark == other.landValidPeriodRemark &&
+                landValidPeriodUnit == other.landValidPeriodUnit &&
+                overflyDefProf == other.overflyDefProf &&
+                overflyLeadTime == other.overflyLeadTime &&
+                overflyLeadTimeRemark == other.overflyLeadTimeRemark &&
+                overflyLeadTimeUnit == other.overflyLeadTimeUnit &&
+                overflyValidPeriodMinus == other.overflyValidPeriodMinus &&
+                overflyValidPeriodPlus == other.overflyValidPeriodPlus &&
+                overflyValidPeriodRemark == other.overflyValidPeriodRemark &&
+                overflyValidPeriodUnit == other.overflyValidPeriodUnit &&
+                profile == other.profile &&
+                profileAgency == other.profileAgency &&
+                profileId == other.profileId &&
+                profileRemark == other.profileRemark &&
+                reqAcAltName == other.reqAcAltName &&
+                reqAllHazInfo == other.reqAllHazInfo &&
+                reqAmcStdInfo == other.reqAmcStdInfo &&
+                reqCargoList == other.reqCargoList &&
+                reqCargoPax == other.reqCargoPax &&
+                reqClass1Info == other.reqClass1Info &&
+                reqClass9Info == other.reqClass9Info &&
+                reqCrewComp == other.reqCrewComp &&
+                reqCrewDetail == other.reqCrewDetail &&
+                reqCrewInfo == other.reqCrewInfo &&
+                reqDiv1Info == other.reqDiv1Info &&
+                reqDv == other.reqDv &&
+                reqEntryExitCoord == other.reqEntryExitCoord &&
+                reqFltInfo == other.reqFltInfo &&
+                reqFltPlanRoute == other.reqFltPlanRoute &&
+                reqFundSource == other.reqFundSource &&
+                reqHazInfo == other.reqHazInfo &&
+                reqIcao == other.reqIcao &&
+                reqPassportInfo == other.reqPassportInfo &&
+                reqRaven == other.reqRaven &&
+                reqRepChange == other.reqRepChange &&
+                reqTailNum == other.reqTailNum &&
+                reqWeaponsInfo == other.reqWeaponsInfo &&
+                undefinedCrewReporting == other.undefinedCrewReporting &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(cargoPaxRemark, clearanceId, crewInfoRemark, defClearanceStatus, defEntryRemark, defEntryTime, defExitRemark, defExitTime, fltInfoRemark, hazInfoRemark, landDefProf, landLeadTime, landLeadTimeRemark, landLeadTimeUnit, landValidPeriodMinus, landValidPeriodPlus, landValidPeriodRemark, landValidPeriodUnit, overflyDefProf, overflyLeadTime, overflyLeadTimeRemark, overflyLeadTimeUnit, overflyValidPeriodMinus, overflyValidPeriodPlus, overflyValidPeriodRemark, overflyValidPeriodUnit, profile, profileAgency, profileId, profileRemark, reqAcAltName, reqAllHazInfo, reqAmcStdInfo, reqCargoList, reqCargoPax, reqClass1Info, reqClass9Info, reqCrewComp, reqCrewDetail, reqCrewInfo, reqDiv1Info, reqDv, reqEntryExitCoord, reqFltInfo, reqFltPlanRoute, reqFundSource, reqHazInfo, reqIcao, reqPassportInfo, reqRaven, reqRepChange, reqTailNum, reqWeaponsInfo, undefinedCrewReporting, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                cargoPaxRemark,
+                clearanceId,
+                crewInfoRemark,
+                defClearanceStatus,
+                defEntryRemark,
+                defEntryTime,
+                defExitRemark,
+                defExitTime,
+                fltInfoRemark,
+                hazInfoRemark,
+                landDefProf,
+                landLeadTime,
+                landLeadTimeRemark,
+                landLeadTimeUnit,
+                landValidPeriodMinus,
+                landValidPeriodPlus,
+                landValidPeriodRemark,
+                landValidPeriodUnit,
+                overflyDefProf,
+                overflyLeadTime,
+                overflyLeadTimeRemark,
+                overflyLeadTimeUnit,
+                overflyValidPeriodMinus,
+                overflyValidPeriodPlus,
+                overflyValidPeriodRemark,
+                overflyValidPeriodUnit,
+                profile,
+                profileAgency,
+                profileId,
+                profileRemark,
+                reqAcAltName,
+                reqAllHazInfo,
+                reqAmcStdInfo,
+                reqCargoList,
+                reqCargoPax,
+                reqClass1Info,
+                reqClass9Info,
+                reqCrewComp,
+                reqCrewDetail,
+                reqCrewInfo,
+                reqDiv1Info,
+                reqDv,
+                reqEntryExitCoord,
+                reqFltInfo,
+                reqFltPlanRoute,
+                reqFundSource,
+                reqHazInfo,
+                reqIcao,
+                reqPassportInfo,
+                reqRaven,
+                reqRepChange,
+                reqTailNum,
+                reqWeaponsInfo,
+                undefinedCrewReporting,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5286,12 +5428,94 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CountryRetrieveResponse && classificationMarking == other.classificationMarking && countryCode == other.countryCode && dataMode == other.dataMode && lastChangedDate == other.lastChangedDate && source == other.source && id == other.id && acceptsDms == other.acceptsDms && acceptsEmail == other.acceptsEmail && acceptsFax == other.acceptsFax && acceptsSiprNet == other.acceptsSiprNet && agency == other.agency && altCountryCode == other.altCountryCode && closeTime == other.closeTime && countryId == other.countryId && countryName == other.countryName && countryRemark == other.countryRemark && createdAt == other.createdAt && createdBy == other.createdBy && diplomaticClearanceCountryContacts == other.diplomaticClearanceCountryContacts && diplomaticClearanceCountryEntryExitPoints == other.diplomaticClearanceCountryEntryExitPoints && diplomaticClearanceCountryProfiles == other.diplomaticClearanceCountryProfiles && existingProfile == other.existingProfile && gmtOffset == other.gmtOffset && officeName == other.officeName && officePoc == other.officePoc && officeRemark == other.officeRemark && openFri == other.openFri && openMon == other.openMon && openSat == other.openSat && openSun == other.openSun && openThu == other.openThu && openTime == other.openTime && openTue == other.openTue && openWed == other.openWed && origin == other.origin && origNetwork == other.origNetwork && sourceDl == other.sourceDl && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is CountryRetrieveResponse &&
+            classificationMarking == other.classificationMarking &&
+            countryCode == other.countryCode &&
+            dataMode == other.dataMode &&
+            lastChangedDate == other.lastChangedDate &&
+            source == other.source &&
+            id == other.id &&
+            acceptsDms == other.acceptsDms &&
+            acceptsEmail == other.acceptsEmail &&
+            acceptsFax == other.acceptsFax &&
+            acceptsSiprNet == other.acceptsSiprNet &&
+            agency == other.agency &&
+            altCountryCode == other.altCountryCode &&
+            closeTime == other.closeTime &&
+            countryId == other.countryId &&
+            countryName == other.countryName &&
+            countryRemark == other.countryRemark &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            diplomaticClearanceCountryContacts == other.diplomaticClearanceCountryContacts &&
+            diplomaticClearanceCountryEntryExitPoints ==
+                other.diplomaticClearanceCountryEntryExitPoints &&
+            diplomaticClearanceCountryProfiles == other.diplomaticClearanceCountryProfiles &&
+            existingProfile == other.existingProfile &&
+            gmtOffset == other.gmtOffset &&
+            officeName == other.officeName &&
+            officePoc == other.officePoc &&
+            officeRemark == other.officeRemark &&
+            openFri == other.openFri &&
+            openMon == other.openMon &&
+            openSat == other.openSat &&
+            openSun == other.openSun &&
+            openThu == other.openThu &&
+            openTime == other.openTime &&
+            openTue == other.openTue &&
+            openWed == other.openWed &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            sourceDl == other.sourceDl &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, countryCode, dataMode, lastChangedDate, source, id, acceptsDms, acceptsEmail, acceptsFax, acceptsSiprNet, agency, altCountryCode, closeTime, countryId, countryName, countryRemark, createdAt, createdBy, diplomaticClearanceCountryContacts, diplomaticClearanceCountryEntryExitPoints, diplomaticClearanceCountryProfiles, existingProfile, gmtOffset, officeName, officePoc, officeRemark, openFri, openMon, openSat, openSun, openThu, openTime, openTue, openWed, origin, origNetwork, sourceDl, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            countryCode,
+            dataMode,
+            lastChangedDate,
+            source,
+            id,
+            acceptsDms,
+            acceptsEmail,
+            acceptsFax,
+            acceptsSiprNet,
+            agency,
+            altCountryCode,
+            closeTime,
+            countryId,
+            countryName,
+            countryRemark,
+            createdAt,
+            createdBy,
+            diplomaticClearanceCountryContacts,
+            diplomaticClearanceCountryEntryExitPoints,
+            diplomaticClearanceCountryProfiles,
+            existingProfile,
+            gmtOffset,
+            officeName,
+            officePoc,
+            officeRemark,
+            openFri,
+            openMon,
+            openSat,
+            openSun,
+            openThu,
+            openTime,
+            openTue,
+            openWed,
+            origin,
+            origNetwork,
+            sourceDl,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

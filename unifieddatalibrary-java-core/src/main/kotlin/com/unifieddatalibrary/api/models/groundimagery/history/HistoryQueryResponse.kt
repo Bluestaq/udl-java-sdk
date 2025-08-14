@@ -1499,7 +1499,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1512,12 +1512,75 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HistoryQueryResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && filename == other.filename && imageTime == other.imageTime && source == other.source && id == other.id && checksumValue == other.checksumValue && createdAt == other.createdAt && createdBy == other.createdBy && filesize == other.filesize && format == other.format && idSensor == other.idSensor && keywords == other.keywords && name == other.name && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && origSensorId == other.origSensorId && region == other.region && regionGeoJson == other.regionGeoJson && regionNDims == other.regionNDims && regionSRid == other.regionSRid && regionText == other.regionText && regionType == other.regionType && sourceDl == other.sourceDl && subjectId == other.subjectId && tags == other.tags && transactionId == other.transactionId && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is HistoryQueryResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            filename == other.filename &&
+            imageTime == other.imageTime &&
+            source == other.source &&
+            id == other.id &&
+            checksumValue == other.checksumValue &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            filesize == other.filesize &&
+            format == other.format &&
+            idSensor == other.idSensor &&
+            keywords == other.keywords &&
+            name == other.name &&
+            notes == other.notes &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origSensorId == other.origSensorId &&
+            region == other.region &&
+            regionGeoJson == other.regionGeoJson &&
+            regionNDims == other.regionNDims &&
+            regionSRid == other.regionSRid &&
+            regionText == other.regionText &&
+            regionType == other.regionType &&
+            sourceDl == other.sourceDl &&
+            subjectId == other.subjectId &&
+            tags == other.tags &&
+            transactionId == other.transactionId &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, filename, imageTime, source, id, checksumValue, createdAt, createdBy, filesize, format, idSensor, keywords, name, notes, origin, origNetwork, origSensorId, region, regionGeoJson, regionNDims, regionSRid, regionText, regionType, sourceDl, subjectId, tags, transactionId, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            filename,
+            imageTime,
+            source,
+            id,
+            checksumValue,
+            createdAt,
+            createdBy,
+            filesize,
+            format,
+            idSensor,
+            keywords,
+            name,
+            notes,
+            origin,
+            origNetwork,
+            origSensorId,
+            region,
+            regionGeoJson,
+            regionNDims,
+            regionSRid,
+            regionText,
+            regionType,
+            sourceDl,
+            subjectId,
+            tags,
+            transactionId,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

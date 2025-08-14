@@ -1271,12 +1271,67 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LogisticsTransportationPlansFull && actDepTime == other.actDepTime && aircraftStatus == other.aircraftStatus && approxArrTime == other.approxArrTime && cancelledDate == other.cancelledDate && closedDate == other.closedDate && coordinator == other.coordinator && coordinatorUnit == other.coordinatorUnit && destinationIcao == other.destinationIcao && duration == other.duration && estArrTime == other.estArrTime && estDepTime == other.estDepTime && lastChangedDate == other.lastChangedDate && logisticMasterRecordId == other.logisticMasterRecordId && logisticsSegments == other.logisticsSegments && logisticsTransportationPlansRemarks == other.logisticsTransportationPlansRemarks && majcom == other.majcom && missionChange == other.missionChange && numEnrouteStops == other.numEnrouteStops && numTransLoads == other.numTransLoads && originIcao == other.originIcao && planDefinition == other.planDefinition && plansNumber == other.plansNumber && serialNumber == other.serialNumber && statusCode == other.statusCode && tpAircraftMds == other.tpAircraftMds && tpTailNumber == other.tpTailNumber && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is LogisticsTransportationPlansFull &&
+            actDepTime == other.actDepTime &&
+            aircraftStatus == other.aircraftStatus &&
+            approxArrTime == other.approxArrTime &&
+            cancelledDate == other.cancelledDate &&
+            closedDate == other.closedDate &&
+            coordinator == other.coordinator &&
+            coordinatorUnit == other.coordinatorUnit &&
+            destinationIcao == other.destinationIcao &&
+            duration == other.duration &&
+            estArrTime == other.estArrTime &&
+            estDepTime == other.estDepTime &&
+            lastChangedDate == other.lastChangedDate &&
+            logisticMasterRecordId == other.logisticMasterRecordId &&
+            logisticsSegments == other.logisticsSegments &&
+            logisticsTransportationPlansRemarks == other.logisticsTransportationPlansRemarks &&
+            majcom == other.majcom &&
+            missionChange == other.missionChange &&
+            numEnrouteStops == other.numEnrouteStops &&
+            numTransLoads == other.numTransLoads &&
+            originIcao == other.originIcao &&
+            planDefinition == other.planDefinition &&
+            plansNumber == other.plansNumber &&
+            serialNumber == other.serialNumber &&
+            statusCode == other.statusCode &&
+            tpAircraftMds == other.tpAircraftMds &&
+            tpTailNumber == other.tpTailNumber &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(actDepTime, aircraftStatus, approxArrTime, cancelledDate, closedDate, coordinator, coordinatorUnit, destinationIcao, duration, estArrTime, estDepTime, lastChangedDate, logisticMasterRecordId, logisticsSegments, logisticsTransportationPlansRemarks, majcom, missionChange, numEnrouteStops, numTransLoads, originIcao, planDefinition, plansNumber, serialNumber, statusCode, tpAircraftMds, tpTailNumber, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            actDepTime,
+            aircraftStatus,
+            approxArrTime,
+            cancelledDate,
+            closedDate,
+            coordinator,
+            coordinatorUnit,
+            destinationIcao,
+            duration,
+            estArrTime,
+            estDepTime,
+            lastChangedDate,
+            logisticMasterRecordId,
+            logisticsSegments,
+            logisticsTransportationPlansRemarks,
+            majcom,
+            missionChange,
+            numEnrouteStops,
+            numTransLoads,
+            originIcao,
+            planDefinition,
+            plansNumber,
+            serialNumber,
+            statusCode,
+            tpAircraftMds,
+            tpTailNumber,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

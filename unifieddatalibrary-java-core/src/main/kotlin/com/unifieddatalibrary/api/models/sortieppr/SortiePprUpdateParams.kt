@@ -1661,12 +1661,51 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSortie == other.idSortie && source == other.source && bodyId == other.bodyId && createdAt == other.createdAt && createdBy == other.createdBy && endTime == other.endTime && externalId == other.externalId && grantor == other.grantor && number == other.number && origin == other.origin && origNetwork == other.origNetwork && remarks == other.remarks && requestor == other.requestor && sourceDl == other.sourceDl && startTime == other.startTime && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idSortie == other.idSortie &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                endTime == other.endTime &&
+                externalId == other.externalId &&
+                grantor == other.grantor &&
+                number == other.number &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                remarks == other.remarks &&
+                requestor == other.requestor &&
+                sourceDl == other.sourceDl &&
+                startTime == other.startTime &&
+                type == other.type &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSortie, source, bodyId, createdAt, createdBy, endTime, externalId, grantor, number, origin, origNetwork, remarks, requestor, sourceDl, startTime, type, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idSortie,
+                source,
+                bodyId,
+                createdAt,
+                createdBy,
+                endTime,
+                externalId,
+                grantor,
+                number,
+                origin,
+                origNetwork,
+                remarks,
+                requestor,
+                sourceDl,
+                startTime,
+                type,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1819,7 +1858,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1950,7 +1989,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+            return other is Type && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1963,10 +2002,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SortiePprUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SortiePprUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SortiePprUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -748,7 +748,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -888,7 +888,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Status && value == other.value /* spotless:on */
+            return other is Status && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1022,7 +1022,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+            return other is Type && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1035,12 +1035,39 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SubstatusListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && notes == other.notes && source == other.source && status == other.status && statusId == other.statusId && type == other.type && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && origin == other.origin && origNetwork == other.origNetwork && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SubstatusListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            notes == other.notes &&
+            source == other.source &&
+            status == other.status &&
+            statusId == other.statusId &&
+            type == other.type &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, notes, source, status, statusId, type, id, createdAt, createdBy, origin, origNetwork, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            notes,
+            source,
+            status,
+            statusId,
+            type,
+            id,
+            createdAt,
+            createdBy,
+            origin,
+            origNetwork,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

@@ -373,12 +373,29 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LogisticsSpecialtiesFull && firstName == other.firstName && last4Ssn == other.last4Ssn && lastName == other.lastName && rankCode == other.rankCode && roleTypeCode == other.roleTypeCode && skillLevel == other.skillLevel && specialty == other.specialty && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is LogisticsSpecialtiesFull &&
+            firstName == other.firstName &&
+            last4Ssn == other.last4Ssn &&
+            lastName == other.lastName &&
+            rankCode == other.rankCode &&
+            roleTypeCode == other.roleTypeCode &&
+            skillLevel == other.skillLevel &&
+            specialty == other.specialty &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(firstName, last4Ssn, lastName, rankCode, roleTypeCode, skillLevel, specialty, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            firstName,
+            last4Ssn,
+            lastName,
+            rankCode,
+            roleTypeCode,
+            skillLevel,
+            specialty,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

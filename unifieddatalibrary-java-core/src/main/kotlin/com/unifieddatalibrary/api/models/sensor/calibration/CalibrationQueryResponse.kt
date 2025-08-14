@@ -2603,7 +2603,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2616,12 +2616,131 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CalibrationQueryResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSensor == other.idSensor && source == other.source && startTime == other.startTime && id == other.id && azRaAccelBias == other.azRaAccelBias && azRaAccelSigma == other.azRaAccelSigma && azRaBias == other.azRaBias && azRaRateBias == other.azRaRateBias && azRaRateSigma == other.azRaRateSigma && azRaRms == other.azRaRms && azRaSigma == other.azRaSigma && calAngleRef == other.calAngleRef && calTrackMode == other.calTrackMode && calType == other.calType && confidenceNoiseBias == other.confidenceNoiseBias && createdAt == other.createdAt && createdBy == other.createdBy && duration == other.duration && ecr == other.ecr && elDecAccelBias == other.elDecAccelBias && elDecAccelSigma == other.elDecAccelSigma && elDecBias == other.elDecBias && elDecRateBias == other.elDecRateBias && elDecRateSigma == other.elDecRateSigma && elDecRms == other.elDecRms && elDecSigma == other.elDecSigma && endTime == other.endTime && numAzRaObs == other.numAzRaObs && numElDecObs == other.numElDecObs && numObs == other.numObs && numPhotoObs == other.numPhotoObs && numRangeObs == other.numRangeObs && numRangeRateObs == other.numRangeRateObs && numRcsObs == other.numRcsObs && numTimeObs == other.numTimeObs && numTracks == other.numTracks && origin == other.origin && origNetwork == other.origNetwork && photoBias == other.photoBias && photoSigma == other.photoSigma && rangeAccelBias == other.rangeAccelBias && rangeAccelSigma == other.rangeAccelSigma && rangeBias == other.rangeBias && rangeRateBias == other.rangeRateBias && rangeRateRms == other.rangeRateRms && rangeRateSigma == other.rangeRateSigma && rangeRms == other.rangeRms && rangeSigma == other.rangeSigma && rcsBias == other.rcsBias && rcsSigma == other.rcsSigma && refTargets == other.refTargets && refType == other.refType && senType == other.senType && sourceDl == other.sourceDl && timeBias == other.timeBias && timeBiasSigma == other.timeBiasSigma && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is CalibrationQueryResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idSensor == other.idSensor &&
+            source == other.source &&
+            startTime == other.startTime &&
+            id == other.id &&
+            azRaAccelBias == other.azRaAccelBias &&
+            azRaAccelSigma == other.azRaAccelSigma &&
+            azRaBias == other.azRaBias &&
+            azRaRateBias == other.azRaRateBias &&
+            azRaRateSigma == other.azRaRateSigma &&
+            azRaRms == other.azRaRms &&
+            azRaSigma == other.azRaSigma &&
+            calAngleRef == other.calAngleRef &&
+            calTrackMode == other.calTrackMode &&
+            calType == other.calType &&
+            confidenceNoiseBias == other.confidenceNoiseBias &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            duration == other.duration &&
+            ecr == other.ecr &&
+            elDecAccelBias == other.elDecAccelBias &&
+            elDecAccelSigma == other.elDecAccelSigma &&
+            elDecBias == other.elDecBias &&
+            elDecRateBias == other.elDecRateBias &&
+            elDecRateSigma == other.elDecRateSigma &&
+            elDecRms == other.elDecRms &&
+            elDecSigma == other.elDecSigma &&
+            endTime == other.endTime &&
+            numAzRaObs == other.numAzRaObs &&
+            numElDecObs == other.numElDecObs &&
+            numObs == other.numObs &&
+            numPhotoObs == other.numPhotoObs &&
+            numRangeObs == other.numRangeObs &&
+            numRangeRateObs == other.numRangeRateObs &&
+            numRcsObs == other.numRcsObs &&
+            numTimeObs == other.numTimeObs &&
+            numTracks == other.numTracks &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            photoBias == other.photoBias &&
+            photoSigma == other.photoSigma &&
+            rangeAccelBias == other.rangeAccelBias &&
+            rangeAccelSigma == other.rangeAccelSigma &&
+            rangeBias == other.rangeBias &&
+            rangeRateBias == other.rangeRateBias &&
+            rangeRateRms == other.rangeRateRms &&
+            rangeRateSigma == other.rangeRateSigma &&
+            rangeRms == other.rangeRms &&
+            rangeSigma == other.rangeSigma &&
+            rcsBias == other.rcsBias &&
+            rcsSigma == other.rcsSigma &&
+            refTargets == other.refTargets &&
+            refType == other.refType &&
+            senType == other.senType &&
+            sourceDl == other.sourceDl &&
+            timeBias == other.timeBias &&
+            timeBiasSigma == other.timeBiasSigma &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSensor, source, startTime, id, azRaAccelBias, azRaAccelSigma, azRaBias, azRaRateBias, azRaRateSigma, azRaRms, azRaSigma, calAngleRef, calTrackMode, calType, confidenceNoiseBias, createdAt, createdBy, duration, ecr, elDecAccelBias, elDecAccelSigma, elDecBias, elDecRateBias, elDecRateSigma, elDecRms, elDecSigma, endTime, numAzRaObs, numElDecObs, numObs, numPhotoObs, numRangeObs, numRangeRateObs, numRcsObs, numTimeObs, numTracks, origin, origNetwork, photoBias, photoSigma, rangeAccelBias, rangeAccelSigma, rangeBias, rangeRateBias, rangeRateRms, rangeRateSigma, rangeRms, rangeSigma, rcsBias, rcsSigma, refTargets, refType, senType, sourceDl, timeBias, timeBiasSigma, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idSensor,
+            source,
+            startTime,
+            id,
+            azRaAccelBias,
+            azRaAccelSigma,
+            azRaBias,
+            azRaRateBias,
+            azRaRateSigma,
+            azRaRms,
+            azRaSigma,
+            calAngleRef,
+            calTrackMode,
+            calType,
+            confidenceNoiseBias,
+            createdAt,
+            createdBy,
+            duration,
+            ecr,
+            elDecAccelBias,
+            elDecAccelSigma,
+            elDecBias,
+            elDecRateBias,
+            elDecRateSigma,
+            elDecRms,
+            elDecSigma,
+            endTime,
+            numAzRaObs,
+            numElDecObs,
+            numObs,
+            numPhotoObs,
+            numRangeObs,
+            numRangeRateObs,
+            numRcsObs,
+            numTimeObs,
+            numTracks,
+            origin,
+            origNetwork,
+            photoBias,
+            photoSigma,
+            rangeAccelBias,
+            rangeAccelSigma,
+            rangeBias,
+            rangeRateBias,
+            rangeRateRms,
+            rangeRateSigma,
+            rangeRms,
+            rangeSigma,
+            rcsBias,
+            rcsSigma,
+            refTargets,
+            refType,
+            senType,
+            sourceDl,
+            timeBias,
+            timeBiasSigma,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

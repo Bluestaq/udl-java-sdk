@@ -1103,7 +1103,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1116,12 +1116,57 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is TransponderTupleResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idComm == other.idComm && source == other.source && id == other.id && channels == other.channels && createdAt == other.createdAt && createdBy == other.createdBy && fec == other.fec && format == other.format && modulation == other.modulation && name == other.name && nid == other.nid && origin == other.origin && origNetwork == other.origNetwork && symbolRate == other.symbolRate && system == other.system && tid == other.tid && ttf == other.ttf && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is TransponderTupleResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idComm == other.idComm &&
+            source == other.source &&
+            id == other.id &&
+            channels == other.channels &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            fec == other.fec &&
+            format == other.format &&
+            modulation == other.modulation &&
+            name == other.name &&
+            nid == other.nid &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            symbolRate == other.symbolRate &&
+            system == other.system &&
+            tid == other.tid &&
+            ttf == other.ttf &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idComm, source, id, channels, createdAt, createdBy, fec, format, modulation, name, nid, origin, origNetwork, symbolRate, system, tid, ttf, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idComm,
+            source,
+            id,
+            channels,
+            createdAt,
+            createdBy,
+            fec,
+            format,
+            modulation,
+            name,
+            nid,
+            origin,
+            origNetwork,
+            symbolRate,
+            system,
+            tid,
+            ttf,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

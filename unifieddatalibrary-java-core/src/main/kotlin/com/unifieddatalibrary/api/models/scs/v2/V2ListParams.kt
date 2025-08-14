@@ -230,10 +230,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is V2ListParams && path == other.path && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is V2ListParams &&
+            path == other.path &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(path, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(path, firstResult, maxResults, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "V2ListParams{path=$path, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

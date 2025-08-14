@@ -258,10 +258,24 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SecureMessagingGetMessagesParams && topic == other.topic && offset == other.offset && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SecureMessagingGetMessagesParams &&
+            topic == other.topic &&
+            offset == other.offset &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(topic, offset, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            topic,
+            offset,
+            firstResult,
+            maxResults,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "SecureMessagingGetMessagesParams{topic=$topic, offset=$offset, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -1175,7 +1175,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1188,12 +1188,63 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ChannelFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idTransponder == other.idTransponder && name == other.name && source == other.source && id == other.id && apid == other.apid && beamName == other.beamName && compression == other.compression && createdAt == other.createdAt && createdBy == other.createdBy && encryption == other.encryption && idBeam == other.idBeam && idRfBand == other.idRfBand && origin == other.origin && origNetwork == other.origNetwork && owner == other.owner && pkg == other.pkg && res == other.res && sid == other.sid && type == other.type && updatedAt == other.updatedAt && updatedBy == other.updatedBy && vpid == other.vpid && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is ChannelFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idTransponder == other.idTransponder &&
+            name == other.name &&
+            source == other.source &&
+            id == other.id &&
+            apid == other.apid &&
+            beamName == other.beamName &&
+            compression == other.compression &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            encryption == other.encryption &&
+            idBeam == other.idBeam &&
+            idRfBand == other.idRfBand &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            owner == other.owner &&
+            pkg == other.pkg &&
+            res == other.res &&
+            sid == other.sid &&
+            type == other.type &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            vpid == other.vpid &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idTransponder, name, source, id, apid, beamName, compression, createdAt, createdBy, encryption, idBeam, idRfBand, origin, origNetwork, owner, pkg, res, sid, type, updatedAt, updatedBy, vpid, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idTransponder,
+            name,
+            source,
+            id,
+            apid,
+            beamName,
+            compression,
+            createdAt,
+            createdBy,
+            encryption,
+            idBeam,
+            idRfBand,
+            origin,
+            origNetwork,
+            owner,
+            pkg,
+            res,
+            sid,
+            type,
+            updatedAt,
+            updatedBy,
+            vpid,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

@@ -399,12 +399,29 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OperationalPlanningFull && opEndDate == other.opEndDate && opLastChangedBy == other.opLastChangedBy && opLastChangedDate == other.opLastChangedDate && opRemark == other.opRemark && opSource == other.opSource && opStartDate == other.opStartDate && opStatus == other.opStatus && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is OperationalPlanningFull &&
+            opEndDate == other.opEndDate &&
+            opLastChangedBy == other.opLastChangedBy &&
+            opLastChangedDate == other.opLastChangedDate &&
+            opRemark == other.opRemark &&
+            opSource == other.opSource &&
+            opStartDate == other.opStartDate &&
+            opStatus == other.opStatus &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(opEndDate, opLastChangedBy, opLastChangedDate, opRemark, opSource, opStartDate, opStatus, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            opEndDate,
+            opLastChangedBy,
+            opLastChangedDate,
+            opRemark,
+            opSource,
+            opStartDate,
+            opStatus,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

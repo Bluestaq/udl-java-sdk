@@ -3,9 +3,9 @@
 package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.core.ClientOptions
-import com.unifieddatalibrary.api.services.blocking.reportandactivity.PoiService
-import com.unifieddatalibrary.api.services.blocking.reportandactivity.UdlH3geoService
-import com.unifieddatalibrary.api.services.blocking.reportandactivity.UdlSigactService
+import com.unifieddatalibrary.api.services.blocking.reportandactivities.PoiService
+import com.unifieddatalibrary.api.services.blocking.reportandactivities.UdlH3geoService
+import com.unifieddatalibrary.api.services.blocking.reportandactivities.UdlSigactService
 import java.util.function.Consumer
 
 interface ReportAndActivityService {

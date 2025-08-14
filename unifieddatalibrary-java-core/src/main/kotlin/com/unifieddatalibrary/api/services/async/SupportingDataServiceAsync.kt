@@ -5,9 +5,6 @@ package com.unifieddatalibrary.api.services.async
 import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.services.async.supportingdata.DataTypeServiceAsync
 import com.unifieddatalibrary.api.services.async.supportingdata.DataownerServiceAsync
-import com.unifieddatalibrary.api.services.async.supportingdata.DataownerTypeServiceAsync
-import com.unifieddatalibrary.api.services.async.supportingdata.ProviderMetadataServiceAsync
-import com.unifieddatalibrary.api.services.async.supportingdata.QueryHelpServiceAsync
 import java.util.function.Consumer
 
 interface SupportingDataServiceAsync {
@@ -28,12 +25,6 @@ interface SupportingDataServiceAsync {
 
     fun dataowner(): DataownerServiceAsync
 
-    fun dataownerTypes(): DataownerTypeServiceAsync
-
-    fun providerMetadata(): ProviderMetadataServiceAsync
-
-    fun queryHelp(): QueryHelpServiceAsync
-
     /**
      * A view of [SupportingDataServiceAsync] that provides access to raw HTTP responses for each
      * method.
@@ -52,11 +43,5 @@ interface SupportingDataServiceAsync {
         fun dataTypes(): DataTypeServiceAsync.WithRawResponse
 
         fun dataowner(): DataownerServiceAsync.WithRawResponse
-
-        fun dataownerTypes(): DataownerTypeServiceAsync.WithRawResponse
-
-        fun providerMetadata(): ProviderMetadataServiceAsync.WithRawResponse
-
-        fun queryHelp(): QueryHelpServiceAsync.WithRawResponse
     }
 }

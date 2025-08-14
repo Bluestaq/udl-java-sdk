@@ -296,10 +296,26 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OrbitdeterminationTupleParams && columns == other.columns && firstResult == other.firstResult && idOnOrbit == other.idOnOrbit && maxResults == other.maxResults && startTime == other.startTime && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OrbitdeterminationTupleParams &&
+            columns == other.columns &&
+            firstResult == other.firstResult &&
+            idOnOrbit == other.idOnOrbit &&
+            maxResults == other.maxResults &&
+            startTime == other.startTime &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, firstResult, idOnOrbit, maxResults, startTime, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            columns,
+            firstResult,
+            idOnOrbit,
+            maxResults,
+            startTime,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "OrbitdeterminationTupleParams{columns=$columns, firstResult=$firstResult, idOnOrbit=$idOnOrbit, maxResults=$maxResults, startTime=$startTime, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -266,10 +266,24 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HistoryCountParams && firstResult == other.firstResult && idOnorbitThruster == other.idOnorbitThruster && maxResults == other.maxResults && statusTime == other.statusTime && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HistoryCountParams &&
+            firstResult == other.firstResult &&
+            idOnorbitThruster == other.idOnorbitThruster &&
+            maxResults == other.maxResults &&
+            statusTime == other.statusTime &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(firstResult, idOnorbitThruster, maxResults, statusTime, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            firstResult,
+            idOnorbitThruster,
+            maxResults,
+            statusTime,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "HistoryCountParams{firstResult=$firstResult, idOnorbitThruster=$idOnorbitThruster, maxResults=$maxResults, statusTime=$statusTime, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

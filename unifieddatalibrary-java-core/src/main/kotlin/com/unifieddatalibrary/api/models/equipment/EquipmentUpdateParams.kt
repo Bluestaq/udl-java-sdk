@@ -4816,12 +4816,121 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && countryCode == other.countryCode && dataMode == other.dataMode && lat == other.lat && lon == other.lon && source == other.source && bodyId == other.bodyId && airDefArea == other.airDefArea && allegiance == other.allegiance && altAllegiance == other.altAllegiance && altCountryCode == other.altCountryCode && altEqpId == other.altEqpId && classRating == other.classRating && condition == other.condition && conditionAvail == other.conditionAvail && coord == other.coord && coordDatum == other.coordDatum && coordDerivAcc == other.coordDerivAcc && createdAt == other.createdAt && createdBy == other.createdBy && elevMsl == other.elevMsl && elevMslConfLvl == other.elevMslConfLvl && elevMslDerivAcc == other.elevMslDerivAcc && eqpCode == other.eqpCode && eqpIdNum == other.eqpIdNum && eval == other.eval && fpa == other.fpa && function == other.function && functPrimary == other.functPrimary && geoidalMslSep == other.geoidalMslSep && ident == other.ident && idOperatingUnit == other.idOperatingUnit && idParentEquipment == other.idParentEquipment && idSite == other.idSite && locReason == other.locReason && milGrid == other.milGrid && milGridSys == other.milGridSys && nomen == other.nomen && operAreaPrimary == other.operAreaPrimary && operStatus == other.operStatus && origin == other.origin && polSubdiv == other.polSubdiv && qtyOh == other.qtyOh && recStatus == other.recStatus && referenceDoc == other.referenceDoc && resProd == other.resProd && reviewDate == other.reviewDate && seqNum == other.seqNum && srcIds == other.srcIds && srcTyps == other.srcTyps && symCode == other.symCode && utm == other.utm && wac == other.wac && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                countryCode == other.countryCode &&
+                dataMode == other.dataMode &&
+                lat == other.lat &&
+                lon == other.lon &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                airDefArea == other.airDefArea &&
+                allegiance == other.allegiance &&
+                altAllegiance == other.altAllegiance &&
+                altCountryCode == other.altCountryCode &&
+                altEqpId == other.altEqpId &&
+                classRating == other.classRating &&
+                condition == other.condition &&
+                conditionAvail == other.conditionAvail &&
+                coord == other.coord &&
+                coordDatum == other.coordDatum &&
+                coordDerivAcc == other.coordDerivAcc &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                elevMsl == other.elevMsl &&
+                elevMslConfLvl == other.elevMslConfLvl &&
+                elevMslDerivAcc == other.elevMslDerivAcc &&
+                eqpCode == other.eqpCode &&
+                eqpIdNum == other.eqpIdNum &&
+                eval == other.eval &&
+                fpa == other.fpa &&
+                function == other.function &&
+                functPrimary == other.functPrimary &&
+                geoidalMslSep == other.geoidalMslSep &&
+                ident == other.ident &&
+                idOperatingUnit == other.idOperatingUnit &&
+                idParentEquipment == other.idParentEquipment &&
+                idSite == other.idSite &&
+                locReason == other.locReason &&
+                milGrid == other.milGrid &&
+                milGridSys == other.milGridSys &&
+                nomen == other.nomen &&
+                operAreaPrimary == other.operAreaPrimary &&
+                operStatus == other.operStatus &&
+                origin == other.origin &&
+                polSubdiv == other.polSubdiv &&
+                qtyOh == other.qtyOh &&
+                recStatus == other.recStatus &&
+                referenceDoc == other.referenceDoc &&
+                resProd == other.resProd &&
+                reviewDate == other.reviewDate &&
+                seqNum == other.seqNum &&
+                srcIds == other.srcIds &&
+                srcTyps == other.srcTyps &&
+                symCode == other.symCode &&
+                utm == other.utm &&
+                wac == other.wac &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, countryCode, dataMode, lat, lon, source, bodyId, airDefArea, allegiance, altAllegiance, altCountryCode, altEqpId, classRating, condition, conditionAvail, coord, coordDatum, coordDerivAcc, createdAt, createdBy, elevMsl, elevMslConfLvl, elevMslDerivAcc, eqpCode, eqpIdNum, eval, fpa, function, functPrimary, geoidalMslSep, ident, idOperatingUnit, idParentEquipment, idSite, locReason, milGrid, milGridSys, nomen, operAreaPrimary, operStatus, origin, polSubdiv, qtyOh, recStatus, referenceDoc, resProd, reviewDate, seqNum, srcIds, srcTyps, symCode, utm, wac, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                countryCode,
+                dataMode,
+                lat,
+                lon,
+                source,
+                bodyId,
+                airDefArea,
+                allegiance,
+                altAllegiance,
+                altCountryCode,
+                altEqpId,
+                classRating,
+                condition,
+                conditionAvail,
+                coord,
+                coordDatum,
+                coordDerivAcc,
+                createdAt,
+                createdBy,
+                elevMsl,
+                elevMslConfLvl,
+                elevMslDerivAcc,
+                eqpCode,
+                eqpIdNum,
+                eval,
+                fpa,
+                function,
+                functPrimary,
+                geoidalMslSep,
+                ident,
+                idOperatingUnit,
+                idParentEquipment,
+                idSite,
+                locReason,
+                milGrid,
+                milGridSys,
+                nomen,
+                operAreaPrimary,
+                operStatus,
+                origin,
+                polSubdiv,
+                qtyOh,
+                recStatus,
+                referenceDoc,
+                resProd,
+                reviewDate,
+                seqNum,
+                srcIds,
+                srcTyps,
+                symCode,
+                utm,
+                wac,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4974,7 +5083,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4987,10 +5096,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EquipmentUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is EquipmentUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "EquipmentUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

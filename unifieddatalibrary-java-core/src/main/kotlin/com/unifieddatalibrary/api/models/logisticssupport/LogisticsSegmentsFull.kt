@@ -740,12 +740,45 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LogisticsSegmentsFull && arrivalIcao == other.arrivalIcao && departureIcao == other.departureIcao && extMissionId == other.extMissionId && idMission == other.idMission && itin == other.itin && missionNumber == other.missionNumber && missionType == other.missionType && modeCode == other.modeCode && segActArrTime == other.segActArrTime && segActDepTime == other.segActDepTime && segAircraftMds == other.segAircraftMds && segEstArrTime == other.segEstArrTime && segEstDepTime == other.segEstDepTime && segmentNumber == other.segmentNumber && segTailNumber == other.segTailNumber && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is LogisticsSegmentsFull &&
+            arrivalIcao == other.arrivalIcao &&
+            departureIcao == other.departureIcao &&
+            extMissionId == other.extMissionId &&
+            idMission == other.idMission &&
+            itin == other.itin &&
+            missionNumber == other.missionNumber &&
+            missionType == other.missionType &&
+            modeCode == other.modeCode &&
+            segActArrTime == other.segActArrTime &&
+            segActDepTime == other.segActDepTime &&
+            segAircraftMds == other.segAircraftMds &&
+            segEstArrTime == other.segEstArrTime &&
+            segEstDepTime == other.segEstDepTime &&
+            segmentNumber == other.segmentNumber &&
+            segTailNumber == other.segTailNumber &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(arrivalIcao, departureIcao, extMissionId, idMission, itin, missionNumber, missionType, modeCode, segActArrTime, segActDepTime, segAircraftMds, segEstArrTime, segEstDepTime, segmentNumber, segTailNumber, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            arrivalIcao,
+            departureIcao,
+            extMissionId,
+            idMission,
+            itin,
+            missionNumber,
+            missionType,
+            modeCode,
+            segActArrTime,
+            segActDepTime,
+            segAircraftMds,
+            segEstArrTime,
+            segEstDepTime,
+            segmentNumber,
+            segTailNumber,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

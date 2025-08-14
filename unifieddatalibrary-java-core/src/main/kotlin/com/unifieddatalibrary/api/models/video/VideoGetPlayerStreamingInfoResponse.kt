@@ -841,7 +841,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -854,12 +854,43 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is VideoGetPlayerStreamingInfoResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && description == other.description && name == other.name && source == other.source && tokenValue == other.tokenValue && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && origin == other.origin && origNetwork == other.origNetwork && startTime == other.startTime && stopTime == other.stopTime && videoUrls == other.videoUrls && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is VideoGetPlayerStreamingInfoResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            description == other.description &&
+            name == other.name &&
+            source == other.source &&
+            tokenValue == other.tokenValue &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            startTime == other.startTime &&
+            stopTime == other.stopTime &&
+            videoUrls == other.videoUrls &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, description, name, source, tokenValue, id, createdAt, createdBy, origin, origNetwork, startTime, stopTime, videoUrls, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            description,
+            name,
+            source,
+            tokenValue,
+            id,
+            createdAt,
+            createdBy,
+            origin,
+            origNetwork,
+            startTime,
+            stopTime,
+            videoUrls,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

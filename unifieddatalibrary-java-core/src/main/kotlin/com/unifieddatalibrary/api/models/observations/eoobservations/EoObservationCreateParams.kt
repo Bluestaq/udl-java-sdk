@@ -7646,12 +7646,215 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && obTime == other.obTime && source == other.source && id == other.id && azimuth == other.azimuth && azimuthBias == other.azimuthBias && azimuthMeasured == other.azimuthMeasured && azimuthRate == other.azimuthRate && azimuthUnc == other.azimuthUnc && bgIntensity == other.bgIntensity && collectMethod == other.collectMethod && corrQuality == other.corrQuality && createdAt == other.createdAt && createdBy == other.createdBy && declination == other.declination && declinationBias == other.declinationBias && declinationMeasured == other.declinationMeasured && declinationRate == other.declinationRate && declinationUnc == other.declinationUnc && descriptor == other.descriptor && elevation == other.elevation && elevationBias == other.elevationBias && elevationMeasured == other.elevationMeasured && elevationRate == other.elevationRate && elevationUnc == other.elevationUnc && eoobservationDetails == other.eoobservationDetails && expDuration == other.expDuration && fovCount == other.fovCount && fovCountUct == other.fovCountUct && geoalt == other.geoalt && geolat == other.geolat && geolon == other.geolon && georange == other.georange && idOnOrbit == other.idOnOrbit && idSensor == other.idSensor && idSkyImagery == other.idSkyImagery && intensity == other.intensity && losUnc == other.losUnc && losx == other.losx && losxvel == other.losxvel && losy == other.losy && losyvel == other.losyvel && losz == other.losz && loszvel == other.loszvel && mag == other.mag && magNormRange == other.magNormRange && magUnc == other.magUnc && netObjSig == other.netObjSig && netObjSigUnc == other.netObjSigUnc && obPosition == other.obPosition && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId == other.origSensorId && penumbra == other.penumbra && primaryExtinction == other.primaryExtinction && primaryExtinctionUnc == other.primaryExtinctionUnc && ra == other.ra && raBias == other.raBias && raMeasured == other.raMeasured && range == other.range && rangeBias == other.rangeBias && rangeMeasured == other.rangeMeasured && rangeRate == other.rangeRate && rangeRateMeasured == other.rangeRateMeasured && rangeRateUnc == other.rangeRateUnc && rangeUnc == other.rangeUnc && raRate == other.raRate && raUnc == other.raUnc && rawFileUri == other.rawFileUri && referenceFrame == other.referenceFrame && satNo == other.satNo && senalt == other.senalt && senlat == other.senlat && senlon == other.senlon && senQuat == other.senQuat && senReferenceFrame == other.senReferenceFrame && senvelx == other.senvelx && senvely == other.senvely && senvelz == other.senvelz && senx == other.senx && seny == other.seny && senz == other.senz && shutterDelay == other.shutterDelay && skyBkgrnd == other.skyBkgrnd && solarDecAngle == other.solarDecAngle && solarEqPhaseAngle == other.solarEqPhaseAngle && solarPhaseAngle == other.solarPhaseAngle && sourceDl == other.sourceDl && tags == other.tags && taskId == other.taskId && timingBias == other.timingBias && trackId == other.trackId && transactionId == other.transactionId && type == other.type && uct == other.uct && umbra == other.umbra && zeroptd == other.zeroptd && zeroPtdUnc == other.zeroPtdUnc && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                obTime == other.obTime &&
+                source == other.source &&
+                id == other.id &&
+                azimuth == other.azimuth &&
+                azimuthBias == other.azimuthBias &&
+                azimuthMeasured == other.azimuthMeasured &&
+                azimuthRate == other.azimuthRate &&
+                azimuthUnc == other.azimuthUnc &&
+                bgIntensity == other.bgIntensity &&
+                collectMethod == other.collectMethod &&
+                corrQuality == other.corrQuality &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                declination == other.declination &&
+                declinationBias == other.declinationBias &&
+                declinationMeasured == other.declinationMeasured &&
+                declinationRate == other.declinationRate &&
+                declinationUnc == other.declinationUnc &&
+                descriptor == other.descriptor &&
+                elevation == other.elevation &&
+                elevationBias == other.elevationBias &&
+                elevationMeasured == other.elevationMeasured &&
+                elevationRate == other.elevationRate &&
+                elevationUnc == other.elevationUnc &&
+                eoobservationDetails == other.eoobservationDetails &&
+                expDuration == other.expDuration &&
+                fovCount == other.fovCount &&
+                fovCountUct == other.fovCountUct &&
+                geoalt == other.geoalt &&
+                geolat == other.geolat &&
+                geolon == other.geolon &&
+                georange == other.georange &&
+                idOnOrbit == other.idOnOrbit &&
+                idSensor == other.idSensor &&
+                idSkyImagery == other.idSkyImagery &&
+                intensity == other.intensity &&
+                losUnc == other.losUnc &&
+                losx == other.losx &&
+                losxvel == other.losxvel &&
+                losy == other.losy &&
+                losyvel == other.losyvel &&
+                losz == other.losz &&
+                loszvel == other.loszvel &&
+                mag == other.mag &&
+                magNormRange == other.magNormRange &&
+                magUnc == other.magUnc &&
+                netObjSig == other.netObjSig &&
+                netObjSigUnc == other.netObjSigUnc &&
+                obPosition == other.obPosition &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                origSensorId == other.origSensorId &&
+                penumbra == other.penumbra &&
+                primaryExtinction == other.primaryExtinction &&
+                primaryExtinctionUnc == other.primaryExtinctionUnc &&
+                ra == other.ra &&
+                raBias == other.raBias &&
+                raMeasured == other.raMeasured &&
+                range == other.range &&
+                rangeBias == other.rangeBias &&
+                rangeMeasured == other.rangeMeasured &&
+                rangeRate == other.rangeRate &&
+                rangeRateMeasured == other.rangeRateMeasured &&
+                rangeRateUnc == other.rangeRateUnc &&
+                rangeUnc == other.rangeUnc &&
+                raRate == other.raRate &&
+                raUnc == other.raUnc &&
+                rawFileUri == other.rawFileUri &&
+                referenceFrame == other.referenceFrame &&
+                satNo == other.satNo &&
+                senalt == other.senalt &&
+                senlat == other.senlat &&
+                senlon == other.senlon &&
+                senQuat == other.senQuat &&
+                senReferenceFrame == other.senReferenceFrame &&
+                senvelx == other.senvelx &&
+                senvely == other.senvely &&
+                senvelz == other.senvelz &&
+                senx == other.senx &&
+                seny == other.seny &&
+                senz == other.senz &&
+                shutterDelay == other.shutterDelay &&
+                skyBkgrnd == other.skyBkgrnd &&
+                solarDecAngle == other.solarDecAngle &&
+                solarEqPhaseAngle == other.solarEqPhaseAngle &&
+                solarPhaseAngle == other.solarPhaseAngle &&
+                sourceDl == other.sourceDl &&
+                tags == other.tags &&
+                taskId == other.taskId &&
+                timingBias == other.timingBias &&
+                trackId == other.trackId &&
+                transactionId == other.transactionId &&
+                type == other.type &&
+                uct == other.uct &&
+                umbra == other.umbra &&
+                zeroptd == other.zeroptd &&
+                zeroPtdUnc == other.zeroPtdUnc &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, obTime, source, id, azimuth, azimuthBias, azimuthMeasured, azimuthRate, azimuthUnc, bgIntensity, collectMethod, corrQuality, createdAt, createdBy, declination, declinationBias, declinationMeasured, declinationRate, declinationUnc, descriptor, elevation, elevationBias, elevationMeasured, elevationRate, elevationUnc, eoobservationDetails, expDuration, fovCount, fovCountUct, geoalt, geolat, geolon, georange, idOnOrbit, idSensor, idSkyImagery, intensity, losUnc, losx, losxvel, losy, losyvel, losz, loszvel, mag, magNormRange, magUnc, netObjSig, netObjSigUnc, obPosition, origin, origNetwork, origObjectId, origSensorId, penumbra, primaryExtinction, primaryExtinctionUnc, ra, raBias, raMeasured, range, rangeBias, rangeMeasured, rangeRate, rangeRateMeasured, rangeRateUnc, rangeUnc, raRate, raUnc, rawFileUri, referenceFrame, satNo, senalt, senlat, senlon, senQuat, senReferenceFrame, senvelx, senvely, senvelz, senx, seny, senz, shutterDelay, skyBkgrnd, solarDecAngle, solarEqPhaseAngle, solarPhaseAngle, sourceDl, tags, taskId, timingBias, trackId, transactionId, type, uct, umbra, zeroptd, zeroPtdUnc, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                obTime,
+                source,
+                id,
+                azimuth,
+                azimuthBias,
+                azimuthMeasured,
+                azimuthRate,
+                azimuthUnc,
+                bgIntensity,
+                collectMethod,
+                corrQuality,
+                createdAt,
+                createdBy,
+                declination,
+                declinationBias,
+                declinationMeasured,
+                declinationRate,
+                declinationUnc,
+                descriptor,
+                elevation,
+                elevationBias,
+                elevationMeasured,
+                elevationRate,
+                elevationUnc,
+                eoobservationDetails,
+                expDuration,
+                fovCount,
+                fovCountUct,
+                geoalt,
+                geolat,
+                geolon,
+                georange,
+                idOnOrbit,
+                idSensor,
+                idSkyImagery,
+                intensity,
+                losUnc,
+                losx,
+                losxvel,
+                losy,
+                losyvel,
+                losz,
+                loszvel,
+                mag,
+                magNormRange,
+                magUnc,
+                netObjSig,
+                netObjSigUnc,
+                obPosition,
+                origin,
+                origNetwork,
+                origObjectId,
+                origSensorId,
+                penumbra,
+                primaryExtinction,
+                primaryExtinctionUnc,
+                ra,
+                raBias,
+                raMeasured,
+                range,
+                rangeBias,
+                rangeMeasured,
+                rangeRate,
+                rangeRateMeasured,
+                rangeRateUnc,
+                rangeUnc,
+                raRate,
+                raUnc,
+                rawFileUri,
+                referenceFrame,
+                satNo,
+                senalt,
+                senlat,
+                senlon,
+                senQuat,
+                senReferenceFrame,
+                senvelx,
+                senvely,
+                senvelz,
+                senx,
+                seny,
+                senz,
+                shutterDelay,
+                skyBkgrnd,
+                solarDecAngle,
+                solarEqPhaseAngle,
+                solarPhaseAngle,
+                sourceDl,
+                tags,
+                taskId,
+                timingBias,
+                trackId,
+                transactionId,
+                type,
+                uct,
+                umbra,
+                zeroptd,
+                zeroPtdUnc,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -7804,7 +8007,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -11987,7 +12190,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -12000,12 +12203,182 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is EoobservationDetails && acalCrPixX == other.acalCrPixX && acalCrPixY == other.acalCrPixY && acalCrValX == other.acalCrValX && acalCrValY == other.acalCrValY && acalNumStars == other.acalNumStars && backgroundSignal == other.backgroundSignal && backgroundSignalUnc == other.backgroundSignalUnc && binningHoriz == other.binningHoriz && binningVert == other.binningVert && ccdObjPosX == other.ccdObjPosX && ccdObjPosY == other.ccdObjPosY && ccdObjWidth == other.ccdObjWidth && ccdTemp == other.ccdTemp && centroidColumn == other.centroidColumn && centroidRow == other.centroidRow && classificationMarking == other.classificationMarking && colorCoeffs == other.colorCoeffs && columnVariance == other.columnVariance && createdAt == other.createdAt && createdBy == other.createdBy && currentNeutralDensityFilterNum == other.currentNeutralDensityFilterNum && currentSpectralFilterNum == other.currentSpectralFilterNum && dataMode == other.dataMode && declinationCov == other.declinationCov && distFromStreakCenter == other.distFromStreakCenter && does == other.does && extinctionCoeffs == other.extinctionCoeffs && extinctionCoeffsUnc == other.extinctionCoeffsUnc && gain == other.gain && idEoObservation == other.idEoObservation && ifov == other.ifov && magInstrumental == other.magInstrumental && magInstrumentalUnc == other.magInstrumentalUnc && neutralDensityFilterNames == other.neutralDensityFilterNames && neutralDensityFilterTransmissions == other.neutralDensityFilterTransmissions && neutralDensityFilterTransmissionsUnc == other.neutralDensityFilterTransmissionsUnc && numCatalogStars == other.numCatalogStars && numCorrelatedStars == other.numCorrelatedStars && numDetectedStars == other.numDetectedStars && numNeutralDensityFilters == other.numNeutralDensityFilters && numSpectralFilters == other.numSpectralFilters && objSunRange == other.objSunRange && obTime == other.obTime && opticalCrossSection == other.opticalCrossSection && opticalCrossSectionUnc == other.opticalCrossSectionUnc && pcalNumStars == other.pcalNumStars && peakApertureCount == other.peakApertureCount && peakBackgroundCount == other.peakBackgroundCount && phaseAngBisect == other.phaseAngBisect && pixelArrayHeight == other.pixelArrayHeight && pixelArrayWidth == other.pixelArrayWidth && pixelMax == other.pixelMax && pixelMin == other.pixelMin && predictedAzimuth == other.predictedAzimuth && predictedDeclination == other.predictedDeclination && predictedDeclinationUnc == other.predictedDeclinationUnc && predictedElevation == other.predictedElevation && predictedRa == other.predictedRa && predictedRaUnc == other.predictedRaUnc && raCov == other.raCov && raDeclinationCov == other.raDeclinationCov && rowColCov == other.rowColCov && rowVariance == other.rowVariance && snrEst == other.snrEst && solarDiskFrac == other.solarDiskFrac && source == other.source && spectralFilters == other.spectralFilters && spectralFilterSolarMag == other.spectralFilterSolarMag && spectralZmfl == other.spectralZmfl && sunAzimuth == other.sunAzimuth && sunElevation == other.sunElevation && sunStatePosX == other.sunStatePosX && sunStatePosY == other.sunStatePosY && sunStatePosZ == other.sunStatePosZ && sunStateVelX == other.sunStateVelX && sunStateVelY == other.sunStateVelY && sunStateVelZ == other.sunStateVelZ && surfBrightness == other.surfBrightness && surfBrightnessUnc == other.surfBrightnessUnc && timesUnc == other.timesUnc && toes == other.toes && zeroPoints == other.zeroPoints && zeroPointsUnc == other.zeroPointsUnc && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is EoobservationDetails &&
+                acalCrPixX == other.acalCrPixX &&
+                acalCrPixY == other.acalCrPixY &&
+                acalCrValX == other.acalCrValX &&
+                acalCrValY == other.acalCrValY &&
+                acalNumStars == other.acalNumStars &&
+                backgroundSignal == other.backgroundSignal &&
+                backgroundSignalUnc == other.backgroundSignalUnc &&
+                binningHoriz == other.binningHoriz &&
+                binningVert == other.binningVert &&
+                ccdObjPosX == other.ccdObjPosX &&
+                ccdObjPosY == other.ccdObjPosY &&
+                ccdObjWidth == other.ccdObjWidth &&
+                ccdTemp == other.ccdTemp &&
+                centroidColumn == other.centroidColumn &&
+                centroidRow == other.centroidRow &&
+                classificationMarking == other.classificationMarking &&
+                colorCoeffs == other.colorCoeffs &&
+                columnVariance == other.columnVariance &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                currentNeutralDensityFilterNum == other.currentNeutralDensityFilterNum &&
+                currentSpectralFilterNum == other.currentSpectralFilterNum &&
+                dataMode == other.dataMode &&
+                declinationCov == other.declinationCov &&
+                distFromStreakCenter == other.distFromStreakCenter &&
+                does == other.does &&
+                extinctionCoeffs == other.extinctionCoeffs &&
+                extinctionCoeffsUnc == other.extinctionCoeffsUnc &&
+                gain == other.gain &&
+                idEoObservation == other.idEoObservation &&
+                ifov == other.ifov &&
+                magInstrumental == other.magInstrumental &&
+                magInstrumentalUnc == other.magInstrumentalUnc &&
+                neutralDensityFilterNames == other.neutralDensityFilterNames &&
+                neutralDensityFilterTransmissions == other.neutralDensityFilterTransmissions &&
+                neutralDensityFilterTransmissionsUnc ==
+                    other.neutralDensityFilterTransmissionsUnc &&
+                numCatalogStars == other.numCatalogStars &&
+                numCorrelatedStars == other.numCorrelatedStars &&
+                numDetectedStars == other.numDetectedStars &&
+                numNeutralDensityFilters == other.numNeutralDensityFilters &&
+                numSpectralFilters == other.numSpectralFilters &&
+                objSunRange == other.objSunRange &&
+                obTime == other.obTime &&
+                opticalCrossSection == other.opticalCrossSection &&
+                opticalCrossSectionUnc == other.opticalCrossSectionUnc &&
+                pcalNumStars == other.pcalNumStars &&
+                peakApertureCount == other.peakApertureCount &&
+                peakBackgroundCount == other.peakBackgroundCount &&
+                phaseAngBisect == other.phaseAngBisect &&
+                pixelArrayHeight == other.pixelArrayHeight &&
+                pixelArrayWidth == other.pixelArrayWidth &&
+                pixelMax == other.pixelMax &&
+                pixelMin == other.pixelMin &&
+                predictedAzimuth == other.predictedAzimuth &&
+                predictedDeclination == other.predictedDeclination &&
+                predictedDeclinationUnc == other.predictedDeclinationUnc &&
+                predictedElevation == other.predictedElevation &&
+                predictedRa == other.predictedRa &&
+                predictedRaUnc == other.predictedRaUnc &&
+                raCov == other.raCov &&
+                raDeclinationCov == other.raDeclinationCov &&
+                rowColCov == other.rowColCov &&
+                rowVariance == other.rowVariance &&
+                snrEst == other.snrEst &&
+                solarDiskFrac == other.solarDiskFrac &&
+                source == other.source &&
+                spectralFilters == other.spectralFilters &&
+                spectralFilterSolarMag == other.spectralFilterSolarMag &&
+                spectralZmfl == other.spectralZmfl &&
+                sunAzimuth == other.sunAzimuth &&
+                sunElevation == other.sunElevation &&
+                sunStatePosX == other.sunStatePosX &&
+                sunStatePosY == other.sunStatePosY &&
+                sunStatePosZ == other.sunStatePosZ &&
+                sunStateVelX == other.sunStateVelX &&
+                sunStateVelY == other.sunStateVelY &&
+                sunStateVelZ == other.sunStateVelZ &&
+                surfBrightness == other.surfBrightness &&
+                surfBrightnessUnc == other.surfBrightnessUnc &&
+                timesUnc == other.timesUnc &&
+                toes == other.toes &&
+                zeroPoints == other.zeroPoints &&
+                zeroPointsUnc == other.zeroPointsUnc &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(acalCrPixX, acalCrPixY, acalCrValX, acalCrValY, acalNumStars, backgroundSignal, backgroundSignalUnc, binningHoriz, binningVert, ccdObjPosX, ccdObjPosY, ccdObjWidth, ccdTemp, centroidColumn, centroidRow, classificationMarking, colorCoeffs, columnVariance, createdAt, createdBy, currentNeutralDensityFilterNum, currentSpectralFilterNum, dataMode, declinationCov, distFromStreakCenter, does, extinctionCoeffs, extinctionCoeffsUnc, gain, idEoObservation, ifov, magInstrumental, magInstrumentalUnc, neutralDensityFilterNames, neutralDensityFilterTransmissions, neutralDensityFilterTransmissionsUnc, numCatalogStars, numCorrelatedStars, numDetectedStars, numNeutralDensityFilters, numSpectralFilters, objSunRange, obTime, opticalCrossSection, opticalCrossSectionUnc, pcalNumStars, peakApertureCount, peakBackgroundCount, phaseAngBisect, pixelArrayHeight, pixelArrayWidth, pixelMax, pixelMin, predictedAzimuth, predictedDeclination, predictedDeclinationUnc, predictedElevation, predictedRa, predictedRaUnc, raCov, raDeclinationCov, rowColCov, rowVariance, snrEst, solarDiskFrac, source, spectralFilters, spectralFilterSolarMag, spectralZmfl, sunAzimuth, sunElevation, sunStatePosX, sunStatePosY, sunStatePosZ, sunStateVelX, sunStateVelY, sunStateVelZ, surfBrightness, surfBrightnessUnc, timesUnc, toes, zeroPoints, zeroPointsUnc, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                acalCrPixX,
+                acalCrPixY,
+                acalCrValX,
+                acalCrValY,
+                acalNumStars,
+                backgroundSignal,
+                backgroundSignalUnc,
+                binningHoriz,
+                binningVert,
+                ccdObjPosX,
+                ccdObjPosY,
+                ccdObjWidth,
+                ccdTemp,
+                centroidColumn,
+                centroidRow,
+                classificationMarking,
+                colorCoeffs,
+                columnVariance,
+                createdAt,
+                createdBy,
+                currentNeutralDensityFilterNum,
+                currentSpectralFilterNum,
+                dataMode,
+                declinationCov,
+                distFromStreakCenter,
+                does,
+                extinctionCoeffs,
+                extinctionCoeffsUnc,
+                gain,
+                idEoObservation,
+                ifov,
+                magInstrumental,
+                magInstrumentalUnc,
+                neutralDensityFilterNames,
+                neutralDensityFilterTransmissions,
+                neutralDensityFilterTransmissionsUnc,
+                numCatalogStars,
+                numCorrelatedStars,
+                numDetectedStars,
+                numNeutralDensityFilters,
+                numSpectralFilters,
+                objSunRange,
+                obTime,
+                opticalCrossSection,
+                opticalCrossSectionUnc,
+                pcalNumStars,
+                peakApertureCount,
+                peakBackgroundCount,
+                phaseAngBisect,
+                pixelArrayHeight,
+                pixelArrayWidth,
+                pixelMax,
+                pixelMin,
+                predictedAzimuth,
+                predictedDeclination,
+                predictedDeclinationUnc,
+                predictedElevation,
+                predictedRa,
+                predictedRaUnc,
+                raCov,
+                raDeclinationCov,
+                rowColCov,
+                rowVariance,
+                snrEst,
+                solarDiskFrac,
+                source,
+                spectralFilters,
+                spectralFilterSolarMag,
+                spectralZmfl,
+                sunAzimuth,
+                sunElevation,
+                sunStatePosX,
+                sunStatePosY,
+                sunStatePosZ,
+                sunStateVelX,
+                sunStateVelY,
+                sunStateVelZ,
+                surfBrightness,
+                surfBrightnessUnc,
+                timesUnc,
+                toes,
+                zeroPoints,
+                zeroPointsUnc,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -12153,7 +12526,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is ReferenceFrame && value == other.value /* spotless:on */
+            return other is ReferenceFrame && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -12315,7 +12688,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SenReferenceFrame && value == other.value /* spotless:on */
+            return other is SenReferenceFrame && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -12328,10 +12701,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EoObservationCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is EoObservationCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "EoObservationCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -353,10 +353,32 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HistoryAodrParams && columns == other.columns && dec == other.dec && firstResult == other.firstResult && maxResults == other.maxResults && notification == other.notification && outputDelimiter == other.outputDelimiter && outputFormat == other.outputFormat && ra == other.ra && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HistoryAodrParams &&
+            columns == other.columns &&
+            dec == other.dec &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            notification == other.notification &&
+            outputDelimiter == other.outputDelimiter &&
+            outputFormat == other.outputFormat &&
+            ra == other.ra &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, dec, firstResult, maxResults, notification, outputDelimiter, outputFormat, ra, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            columns,
+            dec,
+            firstResult,
+            maxResults,
+            notification,
+            outputDelimiter,
+            outputFormat,
+            ra,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "HistoryAodrParams{columns=$columns, dec=$dec, firstResult=$firstResult, maxResults=$maxResults, notification=$notification, outputDelimiter=$outputDelimiter, outputFormat=$outputFormat, ra=$ra, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

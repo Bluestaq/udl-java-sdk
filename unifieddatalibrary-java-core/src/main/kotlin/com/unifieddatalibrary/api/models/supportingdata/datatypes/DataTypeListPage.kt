@@ -8,8 +8,6 @@ import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.services.blocking.supportingdata.DataTypeService
 import java.util.Objects
 import kotlin.jvm.optionals.getOrDefault
-import kotlin.jvm.optionals.getOrNull
-import kotlin.jvm.optionals.toList
 
 /** @see DataTypeService.list */
 class DataTypeListPage
@@ -18,9 +16,6 @@ private constructor(
     private val params: DataTypeListParams,
     private val items: List<String>,
 ) : Page<String> {
-
-    /** Delegates to [List<String>], but gracefully handles missing data. */
-    override fun items(): List<String> = items.flatMap { it.toList() }.getOrNull() ?: emptyList()
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
@@ -105,10 +100,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is DataTypeListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+        return other is DataTypeListPage &&
+            service == other.service &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, params, items)
 
     override fun toString() = "DataTypeListPage{service=$service, params=$params, items=$items}"
 }

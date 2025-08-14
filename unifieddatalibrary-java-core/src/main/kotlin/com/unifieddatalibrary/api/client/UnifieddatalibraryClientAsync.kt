@@ -5,7 +5,6 @@ package com.unifieddatalibrary.api.client
 import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.services.async.AiServiceAsync
 import com.unifieddatalibrary.api.services.async.AirEventServiceAsync
-import com.unifieddatalibrary.api.services.async.AirLoadPlanServiceAsync
 import com.unifieddatalibrary.api.services.async.AirOperationServiceAsync
 import com.unifieddatalibrary.api.services.async.AirTransportMissionServiceAsync
 import com.unifieddatalibrary.api.services.async.AircraftServiceAsync
@@ -23,7 +22,6 @@ import com.unifieddatalibrary.api.services.async.AnalyticImageryServiceAsync
 import com.unifieddatalibrary.api.services.async.AntennaServiceAsync
 import com.unifieddatalibrary.api.services.async.AttitudeDataServiceAsync
 import com.unifieddatalibrary.api.services.async.AttitudeSetServiceAsync
-import com.unifieddatalibrary.api.services.async.AttitudesetServiceAsync
 import com.unifieddatalibrary.api.services.async.AviationRiskManagementServiceAsync
 import com.unifieddatalibrary.api.services.async.BatteryServiceAsync
 import com.unifieddatalibrary.api.services.async.BatterydetailServiceAsync
@@ -64,12 +62,10 @@ import com.unifieddatalibrary.api.services.async.GlobalAtmosphericModelServiceAs
 import com.unifieddatalibrary.api.services.async.GnssObservationServiceAsync
 import com.unifieddatalibrary.api.services.async.GnssObservationsetServiceAsync
 import com.unifieddatalibrary.api.services.async.GnssRawIfServiceAsync
-import com.unifieddatalibrary.api.services.async.GnssRawifServiceAsync
 import com.unifieddatalibrary.api.services.async.GroundImageryServiceAsync
 import com.unifieddatalibrary.api.services.async.H3GeoHexCellServiceAsync
 import com.unifieddatalibrary.api.services.async.H3GeoServiceAsync
 import com.unifieddatalibrary.api.services.async.HazardServiceAsync
-import com.unifieddatalibrary.api.services.async.IonOobservationServiceAsync
 import com.unifieddatalibrary.api.services.async.IonoObservationServiceAsync
 import com.unifieddatalibrary.api.services.async.IrServiceAsync
 import com.unifieddatalibrary.api.services.async.IsrCollectionServiceAsync
@@ -207,8 +203,6 @@ interface UnifieddatalibraryClientAsync {
 
     fun airEvents(): AirEventServiceAsync
 
-    fun airLoadPlans(): AirLoadPlanServiceAsync
-
     fun airOperations(): AirOperationServiceAsync
 
     fun airTransportMissions(): AirTransportMissionServiceAsync
@@ -244,8 +238,6 @@ interface UnifieddatalibraryClientAsync {
     fun attitudeData(): AttitudeDataServiceAsync
 
     fun attitudeSets(): AttitudeSetServiceAsync
-
-    fun attitudesets(): AttitudesetServiceAsync
 
     fun batteries(): BatteryServiceAsync
 
@@ -325,8 +317,6 @@ interface UnifieddatalibraryClientAsync {
 
     fun gnssObservationset(): GnssObservationsetServiceAsync
 
-    fun gnssRawif(): GnssRawifServiceAsync
-
     fun groundImagery(): GroundImageryServiceAsync
 
     fun h3Geo(): H3GeoServiceAsync
@@ -334,8 +324,6 @@ interface UnifieddatalibraryClientAsync {
     fun h3GeoHexCell(): H3GeoHexCellServiceAsync
 
     fun hazard(): HazardServiceAsync
-
-    fun ionOobservation(): IonOobservationServiceAsync
 
     fun ir(): IrServiceAsync
 
@@ -523,9 +511,9 @@ interface UnifieddatalibraryClientAsync {
 
     fun gnssRawIf(): GnssRawIfServiceAsync
 
-    fun ionoObservation(): IonoObservationServiceAsync
+    fun ionoObservations(): IonoObservationServiceAsync
 
-    fun reportAndActivity(): ReportAndActivityServiceAsync
+    fun reportAndActivities(): ReportAndActivityServiceAsync
 
     fun secureMessaging(): SecureMessagingServiceAsync
 
@@ -563,8 +551,6 @@ interface UnifieddatalibraryClientAsync {
 
         fun airEvents(): AirEventServiceAsync.WithRawResponse
 
-        fun airLoadPlans(): AirLoadPlanServiceAsync.WithRawResponse
-
         fun airOperations(): AirOperationServiceAsync.WithRawResponse
 
         fun airTransportMissions(): AirTransportMissionServiceAsync.WithRawResponse
@@ -600,8 +586,6 @@ interface UnifieddatalibraryClientAsync {
         fun attitudeData(): AttitudeDataServiceAsync.WithRawResponse
 
         fun attitudeSets(): AttitudeSetServiceAsync.WithRawResponse
-
-        fun attitudesets(): AttitudesetServiceAsync.WithRawResponse
 
         fun batteries(): BatteryServiceAsync.WithRawResponse
 
@@ -681,8 +665,6 @@ interface UnifieddatalibraryClientAsync {
 
         fun gnssObservationset(): GnssObservationsetServiceAsync.WithRawResponse
 
-        fun gnssRawif(): GnssRawifServiceAsync.WithRawResponse
-
         fun groundImagery(): GroundImageryServiceAsync.WithRawResponse
 
         fun h3Geo(): H3GeoServiceAsync.WithRawResponse
@@ -690,8 +672,6 @@ interface UnifieddatalibraryClientAsync {
         fun h3GeoHexCell(): H3GeoHexCellServiceAsync.WithRawResponse
 
         fun hazard(): HazardServiceAsync.WithRawResponse
-
-        fun ionOobservation(): IonOobservationServiceAsync.WithRawResponse
 
         fun ir(): IrServiceAsync.WithRawResponse
 
@@ -879,9 +859,9 @@ interface UnifieddatalibraryClientAsync {
 
         fun gnssRawIf(): GnssRawIfServiceAsync.WithRawResponse
 
-        fun ionoObservation(): IonoObservationServiceAsync.WithRawResponse
+        fun ionoObservations(): IonoObservationServiceAsync.WithRawResponse
 
-        fun reportAndActivity(): ReportAndActivityServiceAsync.WithRawResponse
+        fun reportAndActivities(): ReportAndActivityServiceAsync.WithRawResponse
 
         fun secureMessaging(): SecureMessagingServiceAsync.WithRawResponse
 

@@ -1229,7 +1229,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1357,7 +1357,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Mode && value == other.value /* spotless:on */
+            return other is Mode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1370,12 +1370,63 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AntennaDetailsAbridged && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idAntenna == other.idAntenna && source == other.source && id == other.id && beamForming == other.beamForming && beamwidth == other.beamwidth && createdAt == other.createdAt && createdBy == other.createdBy && description == other.description && diameter == other.diameter && endFrequency == other.endFrequency && gain == other.gain && gainTolerance == other.gainTolerance && manufacturerOrgId == other.manufacturerOrgId && mode == other.mode && origin == other.origin && origNetwork == other.origNetwork && polarization == other.polarization && position == other.position && size == other.size && startFrequency == other.startFrequency && steerable == other.steerable && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is AntennaDetailsAbridged &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idAntenna == other.idAntenna &&
+            source == other.source &&
+            id == other.id &&
+            beamForming == other.beamForming &&
+            beamwidth == other.beamwidth &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            description == other.description &&
+            diameter == other.diameter &&
+            endFrequency == other.endFrequency &&
+            gain == other.gain &&
+            gainTolerance == other.gainTolerance &&
+            manufacturerOrgId == other.manufacturerOrgId &&
+            mode == other.mode &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            polarization == other.polarization &&
+            position == other.position &&
+            size == other.size &&
+            startFrequency == other.startFrequency &&
+            steerable == other.steerable &&
+            type == other.type &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idAntenna, source, id, beamForming, beamwidth, createdAt, createdBy, description, diameter, endFrequency, gain, gainTolerance, manufacturerOrgId, mode, origin, origNetwork, polarization, position, size, startFrequency, steerable, type, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idAntenna,
+            source,
+            id,
+            beamForming,
+            beamwidth,
+            createdAt,
+            createdBy,
+            description,
+            diameter,
+            endFrequency,
+            gain,
+            gainTolerance,
+            manufacturerOrgId,
+            mode,
+            origin,
+            origNetwork,
+            polarization,
+            position,
+            size,
+            startFrequency,
+            steerable,
+            type,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

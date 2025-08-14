@@ -5989,12 +5989,175 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && plannedDepTime == other.plannedDepTime && source == other.source && bodyId == other.bodyId && actualArrTime == other.actualArrTime && actualBlockInTime == other.actualBlockInTime && actualBlockOutTime == other.actualBlockOutTime && actualDepTime == other.actualDepTime && aircraftAdsb == other.aircraftAdsb && aircraftAltId == other.aircraftAltId && aircraftEvent == other.aircraftEvent && aircraftMds == other.aircraftMds && aircraftRemarks == other.aircraftRemarks && alertStatus == other.alertStatus && alertStatusCode == other.alertStatusCode && amcMsnNum == other.amcMsnNum && amcMsnType == other.amcMsnType && arrFaa == other.arrFaa && arrIata == other.arrIata && arrIcao == other.arrIcao && arrItinerary == other.arrItinerary && arrPurposeCode == other.arrPurposeCode && callSign == other.callSign && cargoConfig == other.cargoConfig && commanderName == other.commanderName && createdAt == other.createdAt && createdBy == other.createdBy && currentState == other.currentState && delayCode == other.delayCode && depFaa == other.depFaa && depIata == other.depIata && depIcao == other.depIcao && depItinerary == other.depItinerary && depPurposeCode == other.depPurposeCode && dhd == other.dhd && dhdReason == other.dhdReason && estArrTime == other.estArrTime && estBlockInTime == other.estBlockInTime && estBlockOutTime == other.estBlockOutTime && estDepTime == other.estDepTime && filename == other.filename && filesize == other.filesize && flightTime == other.flightTime && fmDeskNum == other.fmDeskNum && fmName == other.fmName && fuelReq == other.fuelReq && gndTime == other.gndTime && idAircraft == other.idAircraft && idMission == other.idMission && jcsPriority == other.jcsPriority && legNum == other.legNum && lineNumber == other.lineNumber && missionId == other.missionId && missionUpdate == other.missionUpdate && objectiveRemarks == other.objectiveRemarks && origin == other.origin && origNetwork == other.origNetwork && origSortieId == other.origSortieId && oxyOnCrew == other.oxyOnCrew && oxyOnPax == other.oxyOnPax && oxyReqCrew == other.oxyReqCrew && oxyReqPax == other.oxyReqPax && paperStatus == other.paperStatus && papersVersion == other.papersVersion && parkingLoc == other.parkingLoc && passengers == other.passengers && plannedArrTime == other.plannedArrTime && pprStatus == other.pprStatus && primaryScl == other.primaryScl && rawFileUri == other.rawFileUri && reqConfig == other.reqConfig && resultRemarks == other.resultRemarks && rvnReq == other.rvnReq && scheduleRemarks == other.scheduleRemarks && secondaryScl == other.secondaryScl && soe == other.soe && sortieDate == other.sortieDate && sourceDl == other.sourceDl && tailNumber == other.tailNumber && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                plannedDepTime == other.plannedDepTime &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                actualArrTime == other.actualArrTime &&
+                actualBlockInTime == other.actualBlockInTime &&
+                actualBlockOutTime == other.actualBlockOutTime &&
+                actualDepTime == other.actualDepTime &&
+                aircraftAdsb == other.aircraftAdsb &&
+                aircraftAltId == other.aircraftAltId &&
+                aircraftEvent == other.aircraftEvent &&
+                aircraftMds == other.aircraftMds &&
+                aircraftRemarks == other.aircraftRemarks &&
+                alertStatus == other.alertStatus &&
+                alertStatusCode == other.alertStatusCode &&
+                amcMsnNum == other.amcMsnNum &&
+                amcMsnType == other.amcMsnType &&
+                arrFaa == other.arrFaa &&
+                arrIata == other.arrIata &&
+                arrIcao == other.arrIcao &&
+                arrItinerary == other.arrItinerary &&
+                arrPurposeCode == other.arrPurposeCode &&
+                callSign == other.callSign &&
+                cargoConfig == other.cargoConfig &&
+                commanderName == other.commanderName &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                currentState == other.currentState &&
+                delayCode == other.delayCode &&
+                depFaa == other.depFaa &&
+                depIata == other.depIata &&
+                depIcao == other.depIcao &&
+                depItinerary == other.depItinerary &&
+                depPurposeCode == other.depPurposeCode &&
+                dhd == other.dhd &&
+                dhdReason == other.dhdReason &&
+                estArrTime == other.estArrTime &&
+                estBlockInTime == other.estBlockInTime &&
+                estBlockOutTime == other.estBlockOutTime &&
+                estDepTime == other.estDepTime &&
+                filename == other.filename &&
+                filesize == other.filesize &&
+                flightTime == other.flightTime &&
+                fmDeskNum == other.fmDeskNum &&
+                fmName == other.fmName &&
+                fuelReq == other.fuelReq &&
+                gndTime == other.gndTime &&
+                idAircraft == other.idAircraft &&
+                idMission == other.idMission &&
+                jcsPriority == other.jcsPriority &&
+                legNum == other.legNum &&
+                lineNumber == other.lineNumber &&
+                missionId == other.missionId &&
+                missionUpdate == other.missionUpdate &&
+                objectiveRemarks == other.objectiveRemarks &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origSortieId == other.origSortieId &&
+                oxyOnCrew == other.oxyOnCrew &&
+                oxyOnPax == other.oxyOnPax &&
+                oxyReqCrew == other.oxyReqCrew &&
+                oxyReqPax == other.oxyReqPax &&
+                paperStatus == other.paperStatus &&
+                papersVersion == other.papersVersion &&
+                parkingLoc == other.parkingLoc &&
+                passengers == other.passengers &&
+                plannedArrTime == other.plannedArrTime &&
+                pprStatus == other.pprStatus &&
+                primaryScl == other.primaryScl &&
+                rawFileUri == other.rawFileUri &&
+                reqConfig == other.reqConfig &&
+                resultRemarks == other.resultRemarks &&
+                rvnReq == other.rvnReq &&
+                scheduleRemarks == other.scheduleRemarks &&
+                secondaryScl == other.secondaryScl &&
+                soe == other.soe &&
+                sortieDate == other.sortieDate &&
+                sourceDl == other.sourceDl &&
+                tailNumber == other.tailNumber &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, plannedDepTime, source, bodyId, actualArrTime, actualBlockInTime, actualBlockOutTime, actualDepTime, aircraftAdsb, aircraftAltId, aircraftEvent, aircraftMds, aircraftRemarks, alertStatus, alertStatusCode, amcMsnNum, amcMsnType, arrFaa, arrIata, arrIcao, arrItinerary, arrPurposeCode, callSign, cargoConfig, commanderName, createdAt, createdBy, currentState, delayCode, depFaa, depIata, depIcao, depItinerary, depPurposeCode, dhd, dhdReason, estArrTime, estBlockInTime, estBlockOutTime, estDepTime, filename, filesize, flightTime, fmDeskNum, fmName, fuelReq, gndTime, idAircraft, idMission, jcsPriority, legNum, lineNumber, missionId, missionUpdate, objectiveRemarks, origin, origNetwork, origSortieId, oxyOnCrew, oxyOnPax, oxyReqCrew, oxyReqPax, paperStatus, papersVersion, parkingLoc, passengers, plannedArrTime, pprStatus, primaryScl, rawFileUri, reqConfig, resultRemarks, rvnReq, scheduleRemarks, secondaryScl, soe, sortieDate, sourceDl, tailNumber, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                plannedDepTime,
+                source,
+                bodyId,
+                actualArrTime,
+                actualBlockInTime,
+                actualBlockOutTime,
+                actualDepTime,
+                aircraftAdsb,
+                aircraftAltId,
+                aircraftEvent,
+                aircraftMds,
+                aircraftRemarks,
+                alertStatus,
+                alertStatusCode,
+                amcMsnNum,
+                amcMsnType,
+                arrFaa,
+                arrIata,
+                arrIcao,
+                arrItinerary,
+                arrPurposeCode,
+                callSign,
+                cargoConfig,
+                commanderName,
+                createdAt,
+                createdBy,
+                currentState,
+                delayCode,
+                depFaa,
+                depIata,
+                depIcao,
+                depItinerary,
+                depPurposeCode,
+                dhd,
+                dhdReason,
+                estArrTime,
+                estBlockInTime,
+                estBlockOutTime,
+                estDepTime,
+                filename,
+                filesize,
+                flightTime,
+                fmDeskNum,
+                fmName,
+                fuelReq,
+                gndTime,
+                idAircraft,
+                idMission,
+                jcsPriority,
+                legNum,
+                lineNumber,
+                missionId,
+                missionUpdate,
+                objectiveRemarks,
+                origin,
+                origNetwork,
+                origSortieId,
+                oxyOnCrew,
+                oxyOnPax,
+                oxyReqCrew,
+                oxyReqPax,
+                paperStatus,
+                papersVersion,
+                parkingLoc,
+                passengers,
+                plannedArrTime,
+                pprStatus,
+                primaryScl,
+                rawFileUri,
+                reqConfig,
+                resultRemarks,
+                rvnReq,
+                scheduleRemarks,
+                secondaryScl,
+                soe,
+                sortieDate,
+                sourceDl,
+                tailNumber,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -6147,7 +6310,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -6290,7 +6453,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is PaperStatus && value == other.value /* spotless:on */
+            return other is PaperStatus && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -6432,7 +6595,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is PprStatus && value == other.value /* spotless:on */
+            return other is PprStatus && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -6575,7 +6738,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is RvnReq && value == other.value /* spotless:on */
+            return other is RvnReq && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -6588,10 +6751,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AircraftSortyUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is AircraftSortyUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "AircraftSortyUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

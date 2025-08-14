@@ -261,10 +261,24 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is TupleListParams && columns == other.columns && reqTime == other.reqTime && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is TupleListParams &&
+            columns == other.columns &&
+            reqTime == other.reqTime &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, reqTime, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            columns,
+            reqTime,
+            firstResult,
+            maxResults,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "TupleListParams{columns=$columns, reqTime=$reqTime, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

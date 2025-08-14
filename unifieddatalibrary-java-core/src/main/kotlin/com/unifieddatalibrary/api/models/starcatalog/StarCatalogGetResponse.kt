@@ -2068,7 +2068,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AstrometryOrigin && value == other.value /* spotless:on */
+            return other is AstrometryOrigin && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2221,7 +2221,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2234,12 +2234,111 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is StarCatalogGetResponse && astrometryOrigin == other.astrometryOrigin && classificationMarking == other.classificationMarking && csId == other.csId && dataMode == other.dataMode && dec == other.dec && ra == other.ra && source == other.source && starEpoch == other.starEpoch && id == other.id && bpmag == other.bpmag && bpmagUnc == other.bpmagUnc && catVersion == other.catVersion && createdAt == other.createdAt && createdBy == other.createdBy && decUnc == other.decUnc && gaiadr3CatId == other.gaiadr3CatId && gmag == other.gmag && gmagUnc == other.gmagUnc && gncCatId == other.gncCatId && hipCatId == other.hipCatId && hmag == other.hmag && hmagUnc == other.hmagUnc && jmag == other.jmag && jmagUnc == other.jmagUnc && kmag == other.kmag && kmagUnc == other.kmagUnc && multFlag == other.multFlag && neighborDistance == other.neighborDistance && neighborFlag == other.neighborFlag && neighborId == other.neighborId && origin == other.origin && origNetwork == other.origNetwork && parallax == other.parallax && parallaxUnc == other.parallaxUnc && pmdec == other.pmdec && pmdecUnc == other.pmdecUnc && pmra == other.pmra && pmraUnc == other.pmraUnc && pmUncFlag == other.pmUncFlag && posUncFlag == other.posUncFlag && raUnc == other.raUnc && rpmag == other.rpmag && rpmagUnc == other.rpmagUnc && shift == other.shift && shiftFlag == other.shiftFlag && updatedAt == other.updatedAt && updatedBy == other.updatedBy && varFlag == other.varFlag && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is StarCatalogGetResponse &&
+            astrometryOrigin == other.astrometryOrigin &&
+            classificationMarking == other.classificationMarking &&
+            csId == other.csId &&
+            dataMode == other.dataMode &&
+            dec == other.dec &&
+            ra == other.ra &&
+            source == other.source &&
+            starEpoch == other.starEpoch &&
+            id == other.id &&
+            bpmag == other.bpmag &&
+            bpmagUnc == other.bpmagUnc &&
+            catVersion == other.catVersion &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            decUnc == other.decUnc &&
+            gaiadr3CatId == other.gaiadr3CatId &&
+            gmag == other.gmag &&
+            gmagUnc == other.gmagUnc &&
+            gncCatId == other.gncCatId &&
+            hipCatId == other.hipCatId &&
+            hmag == other.hmag &&
+            hmagUnc == other.hmagUnc &&
+            jmag == other.jmag &&
+            jmagUnc == other.jmagUnc &&
+            kmag == other.kmag &&
+            kmagUnc == other.kmagUnc &&
+            multFlag == other.multFlag &&
+            neighborDistance == other.neighborDistance &&
+            neighborFlag == other.neighborFlag &&
+            neighborId == other.neighborId &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            parallax == other.parallax &&
+            parallaxUnc == other.parallaxUnc &&
+            pmdec == other.pmdec &&
+            pmdecUnc == other.pmdecUnc &&
+            pmra == other.pmra &&
+            pmraUnc == other.pmraUnc &&
+            pmUncFlag == other.pmUncFlag &&
+            posUncFlag == other.posUncFlag &&
+            raUnc == other.raUnc &&
+            rpmag == other.rpmag &&
+            rpmagUnc == other.rpmagUnc &&
+            shift == other.shift &&
+            shiftFlag == other.shiftFlag &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            varFlag == other.varFlag &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(astrometryOrigin, classificationMarking, csId, dataMode, dec, ra, source, starEpoch, id, bpmag, bpmagUnc, catVersion, createdAt, createdBy, decUnc, gaiadr3CatId, gmag, gmagUnc, gncCatId, hipCatId, hmag, hmagUnc, jmag, jmagUnc, kmag, kmagUnc, multFlag, neighborDistance, neighborFlag, neighborId, origin, origNetwork, parallax, parallaxUnc, pmdec, pmdecUnc, pmra, pmraUnc, pmUncFlag, posUncFlag, raUnc, rpmag, rpmagUnc, shift, shiftFlag, updatedAt, updatedBy, varFlag, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            astrometryOrigin,
+            classificationMarking,
+            csId,
+            dataMode,
+            dec,
+            ra,
+            source,
+            starEpoch,
+            id,
+            bpmag,
+            bpmagUnc,
+            catVersion,
+            createdAt,
+            createdBy,
+            decUnc,
+            gaiadr3CatId,
+            gmag,
+            gmagUnc,
+            gncCatId,
+            hipCatId,
+            hmag,
+            hmagUnc,
+            jmag,
+            jmagUnc,
+            kmag,
+            kmagUnc,
+            multFlag,
+            neighborDistance,
+            neighborFlag,
+            neighborId,
+            origin,
+            origNetwork,
+            parallax,
+            parallaxUnc,
+            pmdec,
+            pmdecUnc,
+            pmra,
+            pmraUnc,
+            pmUncFlag,
+            posUncFlag,
+            raUnc,
+            rpmag,
+            rpmagUnc,
+            shift,
+            shiftFlag,
+            updatedAt,
+            updatedBy,
+            varFlag,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

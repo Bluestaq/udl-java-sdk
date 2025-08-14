@@ -4541,7 +4541,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -4691,7 +4691,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is PolarityType && value == other.value /* spotless:on */
+                return other is PolarityType && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -4704,12 +4704,215 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && obTime == other.obTime && source == other.source && type == other.type && id == other.id && antennaName == other.antennaName && azimuth == other.azimuth && azimuthMeasured == other.azimuthMeasured && azimuthRate == other.azimuthRate && azimuthUnc == other.azimuthUnc && bandwidth == other.bandwidth && baudRate == other.baudRate && baudRates == other.baudRates && bitErrorRate == other.bitErrorRate && carrierStandard == other.carrierStandard && channel == other.channel && chipRates == other.chipRates && codeFills == other.codeFills && codeLengths == other.codeLengths && codeTaps == other.codeTaps && collectionMode == other.collectionMode && confidence == other.confidence && confidences == other.confidences && constellationXPoints == other.constellationXPoints && constellationYPoints == other.constellationYPoints && createdAt == other.createdAt && createdBy == other.createdBy && descriptor == other.descriptor && detectionStatus == other.detectionStatus && detectionStatuses == other.detectionStatuses && eirp == other.eirp && elevation == other.elevation && elevationMeasured == other.elevationMeasured && elevationRate == other.elevationRate && elevationUnc == other.elevationUnc && elnot == other.elnot && endFrequency == other.endFrequency && frequencies == other.frequencies && frequency == other.frequency && frequencyShift == other.frequencyShift && idOnOrbit == other.idOnOrbit && idSensor == other.idSensor && incoming == other.incoming && innerCodingRate == other.innerCodingRate && maxPsd == other.maxPsd && minPsd == other.minPsd && modulation == other.modulation && noisePwrDensity == other.noisePwrDensity && nominalBandwidth == other.nominalBandwidth && nominalEirp == other.nominalEirp && nominalFrequency == other.nominalFrequency && nominalPowerOverNoise == other.nominalPowerOverNoise && nominalSnr == other.nominalSnr && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId == other.origSensorId && outerCodingRate == other.outerCodingRate && peak == other.peak && pgri == other.pgri && pnOrders == other.pnOrders && polarity == other.polarity && polarityType == other.polarityType && powerOverNoise == other.powerOverNoise && powers == other.powers && range == other.range && rangeMeasured == other.rangeMeasured && rangeRate == other.rangeRate && rangeRateMeasured == other.rangeRateMeasured && rangeRateUnc == other.rangeRateUnc && rangeUnc == other.rangeUnc && rawFileUri == other.rawFileUri && referenceLevel == other.referenceLevel && relativeCarrierPower == other.relativeCarrierPower && relativeNoiseFloor == other.relativeNoiseFloor && resolutionBandwidth == other.resolutionBandwidth && satNo == other.satNo && senalt == other.senalt && senlat == other.senlat && senlon == other.senlon && signalIds == other.signalIds && snr == other.snr && snrs == other.snrs && sourceDl == other.sourceDl && spectrumAnalyzerPower == other.spectrumAnalyzerPower && startFrequency == other.startFrequency && switchPoint == other.switchPoint && symbolToNoiseRatio == other.symbolToNoiseRatio && tags == other.tags && taskId == other.taskId && telemetryIds == other.telemetryIds && trackId == other.trackId && trackRange == other.trackRange && transactionId == other.transactionId && transmitFilterRollOff == other.transmitFilterRollOff && transmitFilterType == other.transmitFilterType && transponder == other.transponder && uct == other.uct && url == other.url && videoBandwidth == other.videoBandwidth /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                obTime == other.obTime &&
+                source == other.source &&
+                type == other.type &&
+                id == other.id &&
+                antennaName == other.antennaName &&
+                azimuth == other.azimuth &&
+                azimuthMeasured == other.azimuthMeasured &&
+                azimuthRate == other.azimuthRate &&
+                azimuthUnc == other.azimuthUnc &&
+                bandwidth == other.bandwidth &&
+                baudRate == other.baudRate &&
+                baudRates == other.baudRates &&
+                bitErrorRate == other.bitErrorRate &&
+                carrierStandard == other.carrierStandard &&
+                channel == other.channel &&
+                chipRates == other.chipRates &&
+                codeFills == other.codeFills &&
+                codeLengths == other.codeLengths &&
+                codeTaps == other.codeTaps &&
+                collectionMode == other.collectionMode &&
+                confidence == other.confidence &&
+                confidences == other.confidences &&
+                constellationXPoints == other.constellationXPoints &&
+                constellationYPoints == other.constellationYPoints &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                descriptor == other.descriptor &&
+                detectionStatus == other.detectionStatus &&
+                detectionStatuses == other.detectionStatuses &&
+                eirp == other.eirp &&
+                elevation == other.elevation &&
+                elevationMeasured == other.elevationMeasured &&
+                elevationRate == other.elevationRate &&
+                elevationUnc == other.elevationUnc &&
+                elnot == other.elnot &&
+                endFrequency == other.endFrequency &&
+                frequencies == other.frequencies &&
+                frequency == other.frequency &&
+                frequencyShift == other.frequencyShift &&
+                idOnOrbit == other.idOnOrbit &&
+                idSensor == other.idSensor &&
+                incoming == other.incoming &&
+                innerCodingRate == other.innerCodingRate &&
+                maxPsd == other.maxPsd &&
+                minPsd == other.minPsd &&
+                modulation == other.modulation &&
+                noisePwrDensity == other.noisePwrDensity &&
+                nominalBandwidth == other.nominalBandwidth &&
+                nominalEirp == other.nominalEirp &&
+                nominalFrequency == other.nominalFrequency &&
+                nominalPowerOverNoise == other.nominalPowerOverNoise &&
+                nominalSnr == other.nominalSnr &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                origSensorId == other.origSensorId &&
+                outerCodingRate == other.outerCodingRate &&
+                peak == other.peak &&
+                pgri == other.pgri &&
+                pnOrders == other.pnOrders &&
+                polarity == other.polarity &&
+                polarityType == other.polarityType &&
+                powerOverNoise == other.powerOverNoise &&
+                powers == other.powers &&
+                range == other.range &&
+                rangeMeasured == other.rangeMeasured &&
+                rangeRate == other.rangeRate &&
+                rangeRateMeasured == other.rangeRateMeasured &&
+                rangeRateUnc == other.rangeRateUnc &&
+                rangeUnc == other.rangeUnc &&
+                rawFileUri == other.rawFileUri &&
+                referenceLevel == other.referenceLevel &&
+                relativeCarrierPower == other.relativeCarrierPower &&
+                relativeNoiseFloor == other.relativeNoiseFloor &&
+                resolutionBandwidth == other.resolutionBandwidth &&
+                satNo == other.satNo &&
+                senalt == other.senalt &&
+                senlat == other.senlat &&
+                senlon == other.senlon &&
+                signalIds == other.signalIds &&
+                snr == other.snr &&
+                snrs == other.snrs &&
+                sourceDl == other.sourceDl &&
+                spectrumAnalyzerPower == other.spectrumAnalyzerPower &&
+                startFrequency == other.startFrequency &&
+                switchPoint == other.switchPoint &&
+                symbolToNoiseRatio == other.symbolToNoiseRatio &&
+                tags == other.tags &&
+                taskId == other.taskId &&
+                telemetryIds == other.telemetryIds &&
+                trackId == other.trackId &&
+                trackRange == other.trackRange &&
+                transactionId == other.transactionId &&
+                transmitFilterRollOff == other.transmitFilterRollOff &&
+                transmitFilterType == other.transmitFilterType &&
+                transponder == other.transponder &&
+                uct == other.uct &&
+                url == other.url &&
+                videoBandwidth == other.videoBandwidth
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, obTime, source, type, id, antennaName, azimuth, azimuthMeasured, azimuthRate, azimuthUnc, bandwidth, baudRate, baudRates, bitErrorRate, carrierStandard, channel, chipRates, codeFills, codeLengths, codeTaps, collectionMode, confidence, confidences, constellationXPoints, constellationYPoints, createdAt, createdBy, descriptor, detectionStatus, detectionStatuses, eirp, elevation, elevationMeasured, elevationRate, elevationUnc, elnot, endFrequency, frequencies, frequency, frequencyShift, idOnOrbit, idSensor, incoming, innerCodingRate, maxPsd, minPsd, modulation, noisePwrDensity, nominalBandwidth, nominalEirp, nominalFrequency, nominalPowerOverNoise, nominalSnr, origin, origNetwork, origObjectId, origSensorId, outerCodingRate, peak, pgri, pnOrders, polarity, polarityType, powerOverNoise, powers, range, rangeMeasured, rangeRate, rangeRateMeasured, rangeRateUnc, rangeUnc, rawFileUri, referenceLevel, relativeCarrierPower, relativeNoiseFloor, resolutionBandwidth, satNo, senalt, senlat, senlon, signalIds, snr, snrs, sourceDl, spectrumAnalyzerPower, startFrequency, switchPoint, symbolToNoiseRatio, tags, taskId, telemetryIds, trackId, trackRange, transactionId, transmitFilterRollOff, transmitFilterType, transponder, uct, url, videoBandwidth) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                obTime,
+                source,
+                type,
+                id,
+                antennaName,
+                azimuth,
+                azimuthMeasured,
+                azimuthRate,
+                azimuthUnc,
+                bandwidth,
+                baudRate,
+                baudRates,
+                bitErrorRate,
+                carrierStandard,
+                channel,
+                chipRates,
+                codeFills,
+                codeLengths,
+                codeTaps,
+                collectionMode,
+                confidence,
+                confidences,
+                constellationXPoints,
+                constellationYPoints,
+                createdAt,
+                createdBy,
+                descriptor,
+                detectionStatus,
+                detectionStatuses,
+                eirp,
+                elevation,
+                elevationMeasured,
+                elevationRate,
+                elevationUnc,
+                elnot,
+                endFrequency,
+                frequencies,
+                frequency,
+                frequencyShift,
+                idOnOrbit,
+                idSensor,
+                incoming,
+                innerCodingRate,
+                maxPsd,
+                minPsd,
+                modulation,
+                noisePwrDensity,
+                nominalBandwidth,
+                nominalEirp,
+                nominalFrequency,
+                nominalPowerOverNoise,
+                nominalSnr,
+                origin,
+                origNetwork,
+                origObjectId,
+                origSensorId,
+                outerCodingRate,
+                peak,
+                pgri,
+                pnOrders,
+                polarity,
+                polarityType,
+                powerOverNoise,
+                powers,
+                range,
+                rangeMeasured,
+                rangeRate,
+                rangeRateMeasured,
+                rangeRateUnc,
+                rangeUnc,
+                rawFileUri,
+                referenceLevel,
+                relativeCarrierPower,
+                relativeNoiseFloor,
+                resolutionBandwidth,
+                satNo,
+                senalt,
+                senlat,
+                senlon,
+                signalIds,
+                snr,
+                snrs,
+                sourceDl,
+                spectrumAnalyzerPower,
+                startFrequency,
+                switchPoint,
+                symbolToNoiseRatio,
+                tags,
+                taskId,
+                telemetryIds,
+                trackId,
+                trackRange,
+                transactionId,
+                transmitFilterRollOff,
+                transmitFilterType,
+                transponder,
+                uct,
+                url,
+                videoBandwidth,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4722,10 +4925,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is RfObservationCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is RfObservationCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "RfObservationCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

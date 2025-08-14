@@ -2563,7 +2563,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2576,12 +2576,129 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OnorbiteventGetResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && eventTime == other.eventTime && source == other.source && id == other.id && achievedFlightPhase == other.achievedFlightPhase && ageAtEvent == other.ageAtEvent && capabilityLoss == other.capabilityLoss && capabilityLossNotes == other.capabilityLossNotes && capacityLoss == other.capacityLoss && consequentialEquipmentFailure == other.consequentialEquipmentFailure && createdAt == other.createdAt && createdBy == other.createdBy && declassificationDate == other.declassificationDate && declassificationString == other.declassificationString && derivedFrom == other.derivedFrom && description == other.description && equipmentAtFault == other.equipmentAtFault && equipmentCausingLossNotes == other.equipmentCausingLossNotes && equipmentPartAtFault == other.equipmentPartAtFault && equipmentTypeAtFault == other.equipmentTypeAtFault && eventResult == other.eventResult && eventTimeNotes == other.eventTimeNotes && eventType == other.eventType && geoPosition == other.geoPosition && idOnOrbit == other.idOnOrbit && inclined == other.inclined && injured == other.injured && insuranceCarriedNotes == other.insuranceCarriedNotes && insuranceLoss == other.insuranceLoss && insuranceLossNotes == other.insuranceLossNotes && killed == other.killed && lesseeOrgId == other.lesseeOrgId && lifeLost == other.lifeLost && netAmount == other.netAmount && objectStatus == other.objectStatus && occurrenceFlightPhase == other.occurrenceFlightPhase && officialLossDate == other.officialLossDate && onOrbit == other.onOrbit && operatedOnBehalfOfOrgId == other.operatedOnBehalfOfOrgId && operatorOrgId == other.operatorOrgId && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && ownerOrgId == other.ownerOrgId && planeNumber == other.planeNumber && planeSlot == other.planeSlot && positionStatus == other.positionStatus && remarks == other.remarks && satellitePosition == other.satellitePosition && satNo == other.satNo && stageAtFault == other.stageAtFault && thirdPartyInsuranceLoss == other.thirdPartyInsuranceLoss && underlyingCause == other.underlyingCause && untilTime == other.untilTime && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is OnorbiteventGetResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            eventTime == other.eventTime &&
+            source == other.source &&
+            id == other.id &&
+            achievedFlightPhase == other.achievedFlightPhase &&
+            ageAtEvent == other.ageAtEvent &&
+            capabilityLoss == other.capabilityLoss &&
+            capabilityLossNotes == other.capabilityLossNotes &&
+            capacityLoss == other.capacityLoss &&
+            consequentialEquipmentFailure == other.consequentialEquipmentFailure &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            declassificationDate == other.declassificationDate &&
+            declassificationString == other.declassificationString &&
+            derivedFrom == other.derivedFrom &&
+            description == other.description &&
+            equipmentAtFault == other.equipmentAtFault &&
+            equipmentCausingLossNotes == other.equipmentCausingLossNotes &&
+            equipmentPartAtFault == other.equipmentPartAtFault &&
+            equipmentTypeAtFault == other.equipmentTypeAtFault &&
+            eventResult == other.eventResult &&
+            eventTimeNotes == other.eventTimeNotes &&
+            eventType == other.eventType &&
+            geoPosition == other.geoPosition &&
+            idOnOrbit == other.idOnOrbit &&
+            inclined == other.inclined &&
+            injured == other.injured &&
+            insuranceCarriedNotes == other.insuranceCarriedNotes &&
+            insuranceLoss == other.insuranceLoss &&
+            insuranceLossNotes == other.insuranceLossNotes &&
+            killed == other.killed &&
+            lesseeOrgId == other.lesseeOrgId &&
+            lifeLost == other.lifeLost &&
+            netAmount == other.netAmount &&
+            objectStatus == other.objectStatus &&
+            occurrenceFlightPhase == other.occurrenceFlightPhase &&
+            officialLossDate == other.officialLossDate &&
+            onOrbit == other.onOrbit &&
+            operatedOnBehalfOfOrgId == other.operatedOnBehalfOfOrgId &&
+            operatorOrgId == other.operatorOrgId &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            ownerOrgId == other.ownerOrgId &&
+            planeNumber == other.planeNumber &&
+            planeSlot == other.planeSlot &&
+            positionStatus == other.positionStatus &&
+            remarks == other.remarks &&
+            satellitePosition == other.satellitePosition &&
+            satNo == other.satNo &&
+            stageAtFault == other.stageAtFault &&
+            thirdPartyInsuranceLoss == other.thirdPartyInsuranceLoss &&
+            underlyingCause == other.underlyingCause &&
+            untilTime == other.untilTime &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, eventTime, source, id, achievedFlightPhase, ageAtEvent, capabilityLoss, capabilityLossNotes, capacityLoss, consequentialEquipmentFailure, createdAt, createdBy, declassificationDate, declassificationString, derivedFrom, description, equipmentAtFault, equipmentCausingLossNotes, equipmentPartAtFault, equipmentTypeAtFault, eventResult, eventTimeNotes, eventType, geoPosition, idOnOrbit, inclined, injured, insuranceCarriedNotes, insuranceLoss, insuranceLossNotes, killed, lesseeOrgId, lifeLost, netAmount, objectStatus, occurrenceFlightPhase, officialLossDate, onOrbit, operatedOnBehalfOfOrgId, operatorOrgId, origin, origNetwork, origObjectId, ownerOrgId, planeNumber, planeSlot, positionStatus, remarks, satellitePosition, satNo, stageAtFault, thirdPartyInsuranceLoss, underlyingCause, untilTime, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            eventTime,
+            source,
+            id,
+            achievedFlightPhase,
+            ageAtEvent,
+            capabilityLoss,
+            capabilityLossNotes,
+            capacityLoss,
+            consequentialEquipmentFailure,
+            createdAt,
+            createdBy,
+            declassificationDate,
+            declassificationString,
+            derivedFrom,
+            description,
+            equipmentAtFault,
+            equipmentCausingLossNotes,
+            equipmentPartAtFault,
+            equipmentTypeAtFault,
+            eventResult,
+            eventTimeNotes,
+            eventType,
+            geoPosition,
+            idOnOrbit,
+            inclined,
+            injured,
+            insuranceCarriedNotes,
+            insuranceLoss,
+            insuranceLossNotes,
+            killed,
+            lesseeOrgId,
+            lifeLost,
+            netAmount,
+            objectStatus,
+            occurrenceFlightPhase,
+            officialLossDate,
+            onOrbit,
+            operatedOnBehalfOfOrgId,
+            operatorOrgId,
+            origin,
+            origNetwork,
+            origObjectId,
+            ownerOrgId,
+            planeNumber,
+            planeSlot,
+            positionStatus,
+            remarks,
+            satellitePosition,
+            satNo,
+            stageAtFault,
+            thirdPartyInsuranceLoss,
+            underlyingCause,
+            untilTime,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

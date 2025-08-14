@@ -1900,7 +1900,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1913,12 +1913,97 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is DiffofarrivalAbridged && classificationMarking == other.classificationMarking && dataMode == other.dataMode && obTime == other.obTime && source == other.source && id == other.id && bandwidth == other.bandwidth && collectionMode == other.collectionMode && createdAt == other.createdAt && createdBy == other.createdBy && deltaRange == other.deltaRange && deltaRangeRate == other.deltaRangeRate && deltaRangeRateUnc == other.deltaRangeRateUnc && deltaRangeUnc == other.deltaRangeUnc && descriptor == other.descriptor && fdoa == other.fdoa && fdoaUnc == other.fdoaUnc && frequency == other.frequency && idOnOrbit == other.idOnOrbit && idSensor1 == other.idSensor1 && idSensor2 == other.idSensor2 && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId1 == other.origSensorId1 && origSensorId2 == other.origSensorId2 && satNo == other.satNo && sen2alt == other.sen2alt && sen2lat == other.sen2lat && sen2lon == other.sen2lon && senalt == other.senalt && senlat == other.senlat && senlon == other.senlon && sensor1Delay == other.sensor1Delay && sensor2Delay == other.sensor2Delay && snr == other.snr && sourceDl == other.sourceDl && taskId == other.taskId && tdoa == other.tdoa && tdoaUnc == other.tdoaUnc && transactionId == other.transactionId && uct == other.uct && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is DiffofarrivalAbridged &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            obTime == other.obTime &&
+            source == other.source &&
+            id == other.id &&
+            bandwidth == other.bandwidth &&
+            collectionMode == other.collectionMode &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            deltaRange == other.deltaRange &&
+            deltaRangeRate == other.deltaRangeRate &&
+            deltaRangeRateUnc == other.deltaRangeRateUnc &&
+            deltaRangeUnc == other.deltaRangeUnc &&
+            descriptor == other.descriptor &&
+            fdoa == other.fdoa &&
+            fdoaUnc == other.fdoaUnc &&
+            frequency == other.frequency &&
+            idOnOrbit == other.idOnOrbit &&
+            idSensor1 == other.idSensor1 &&
+            idSensor2 == other.idSensor2 &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            origSensorId1 == other.origSensorId1 &&
+            origSensorId2 == other.origSensorId2 &&
+            satNo == other.satNo &&
+            sen2alt == other.sen2alt &&
+            sen2lat == other.sen2lat &&
+            sen2lon == other.sen2lon &&
+            senalt == other.senalt &&
+            senlat == other.senlat &&
+            senlon == other.senlon &&
+            sensor1Delay == other.sensor1Delay &&
+            sensor2Delay == other.sensor2Delay &&
+            snr == other.snr &&
+            sourceDl == other.sourceDl &&
+            taskId == other.taskId &&
+            tdoa == other.tdoa &&
+            tdoaUnc == other.tdoaUnc &&
+            transactionId == other.transactionId &&
+            uct == other.uct &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, obTime, source, id, bandwidth, collectionMode, createdAt, createdBy, deltaRange, deltaRangeRate, deltaRangeRateUnc, deltaRangeUnc, descriptor, fdoa, fdoaUnc, frequency, idOnOrbit, idSensor1, idSensor2, origin, origNetwork, origObjectId, origSensorId1, origSensorId2, satNo, sen2alt, sen2lat, sen2lon, senalt, senlat, senlon, sensor1Delay, sensor2Delay, snr, sourceDl, taskId, tdoa, tdoaUnc, transactionId, uct, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            obTime,
+            source,
+            id,
+            bandwidth,
+            collectionMode,
+            createdAt,
+            createdBy,
+            deltaRange,
+            deltaRangeRate,
+            deltaRangeRateUnc,
+            deltaRangeUnc,
+            descriptor,
+            fdoa,
+            fdoaUnc,
+            frequency,
+            idOnOrbit,
+            idSensor1,
+            idSensor2,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId1,
+            origSensorId2,
+            satNo,
+            sen2alt,
+            sen2lat,
+            sen2lon,
+            senalt,
+            senlat,
+            senlon,
+            sensor1Delay,
+            sensor2Delay,
+            snr,
+            sourceDl,
+            taskId,
+            tdoa,
+            tdoaUnc,
+            transactionId,
+            uct,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

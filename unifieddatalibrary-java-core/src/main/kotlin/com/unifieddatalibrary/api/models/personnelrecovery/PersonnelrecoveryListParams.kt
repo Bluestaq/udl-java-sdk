@@ -242,10 +242,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is PersonnelrecoveryListParams && msgTime == other.msgTime && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is PersonnelrecoveryListParams &&
+            msgTime == other.msgTime &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(msgTime, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(msgTime, firstResult, maxResults, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "PersonnelrecoveryListParams{msgTime=$msgTime, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

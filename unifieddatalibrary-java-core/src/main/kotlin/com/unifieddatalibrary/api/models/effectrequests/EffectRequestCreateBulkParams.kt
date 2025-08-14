@@ -1313,7 +1313,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -1326,12 +1326,55 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && effectList == other.effectList && source == other.source && id == other.id && context == other.context && createdAt == other.createdAt && createdBy == other.createdBy && deadlineType == other.deadlineType && endTime == other.endTime && externalRequestId == other.externalRequestId && metricTypes == other.metricTypes && metricWeights == other.metricWeights && modelClass == other.modelClass && origin == other.origin && origNetwork == other.origNetwork && priority == other.priority && startTime == other.startTime && state == other.state && targetSrcId == other.targetSrcId && targetSrcType == other.targetSrcType /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                effectList == other.effectList &&
+                source == other.source &&
+                id == other.id &&
+                context == other.context &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                deadlineType == other.deadlineType &&
+                endTime == other.endTime &&
+                externalRequestId == other.externalRequestId &&
+                metricTypes == other.metricTypes &&
+                metricWeights == other.metricWeights &&
+                modelClass == other.modelClass &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                priority == other.priority &&
+                startTime == other.startTime &&
+                state == other.state &&
+                targetSrcId == other.targetSrcId &&
+                targetSrcType == other.targetSrcType
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, effectList, source, id, context, createdAt, createdBy, deadlineType, endTime, externalRequestId, metricTypes, metricWeights, modelClass, origin, origNetwork, priority, startTime, state, targetSrcId, targetSrcType) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                effectList,
+                source,
+                id,
+                context,
+                createdAt,
+                createdBy,
+                deadlineType,
+                endTime,
+                externalRequestId,
+                metricTypes,
+                metricWeights,
+                modelClass,
+                origin,
+                origNetwork,
+                priority,
+                startTime,
+                state,
+                targetSrcId,
+                targetSrcType,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1344,10 +1387,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EffectRequestCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is EffectRequestCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "EffectRequestCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

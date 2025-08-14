@@ -2392,12 +2392,69 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && messageType == other.messageType && observationLatitude == other.observationLatitude && observationLongitude == other.observationLongitude && observationTime == other.observationTime && sequenceNumber == other.sequenceNumber && source == other.source && bodyId == other.bodyId && createdAt == other.createdAt && createdBy == other.createdBy && descriptor == other.descriptor && eventId == other.eventId && highZenithAzimuth == other.highZenithAzimuth && inclination == other.inclination && launchAzimuth == other.launchAzimuth && launchLatitude == other.launchLatitude && launchLongitude == other.launchLongitude && launchTime == other.launchTime && observationAltitude == other.observationAltitude && origin == other.origin && origNetwork == other.origNetwork && raan == other.raan && stereoFlag == other.stereoFlag && tags == other.tags && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                messageType == other.messageType &&
+                observationLatitude == other.observationLatitude &&
+                observationLongitude == other.observationLongitude &&
+                observationTime == other.observationTime &&
+                sequenceNumber == other.sequenceNumber &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                descriptor == other.descriptor &&
+                eventId == other.eventId &&
+                highZenithAzimuth == other.highZenithAzimuth &&
+                inclination == other.inclination &&
+                launchAzimuth == other.launchAzimuth &&
+                launchLatitude == other.launchLatitude &&
+                launchLongitude == other.launchLongitude &&
+                launchTime == other.launchTime &&
+                observationAltitude == other.observationAltitude &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                raan == other.raan &&
+                stereoFlag == other.stereoFlag &&
+                tags == other.tags &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, messageType, observationLatitude, observationLongitude, observationTime, sequenceNumber, source, bodyId, createdAt, createdBy, descriptor, eventId, highZenithAzimuth, inclination, launchAzimuth, launchLatitude, launchLongitude, launchTime, observationAltitude, origin, origNetwork, raan, stereoFlag, tags, updatedAt, updatedBy, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                messageType,
+                observationLatitude,
+                observationLongitude,
+                observationTime,
+                sequenceNumber,
+                source,
+                bodyId,
+                createdAt,
+                createdBy,
+                descriptor,
+                eventId,
+                highZenithAzimuth,
+                inclination,
+                launchAzimuth,
+                launchLatitude,
+                launchLongitude,
+                launchTime,
+                observationAltitude,
+                origin,
+                origNetwork,
+                raan,
+                stereoFlag,
+                tags,
+                updatedAt,
+                updatedBy,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2550,7 +2607,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2563,10 +2620,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LaunchDetectionUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is LaunchDetectionUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "LaunchDetectionUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

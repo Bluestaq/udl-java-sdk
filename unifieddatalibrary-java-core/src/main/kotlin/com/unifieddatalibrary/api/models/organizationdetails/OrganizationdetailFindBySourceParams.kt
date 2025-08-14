@@ -251,10 +251,24 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OrganizationdetailFindBySourceParams && name == other.name && source == other.source && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OrganizationdetailFindBySourceParams &&
+            name == other.name &&
+            source == other.source &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(name, source, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            name,
+            source,
+            firstResult,
+            maxResults,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "OrganizationdetailFindBySourceParams{name=$name, source=$source, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

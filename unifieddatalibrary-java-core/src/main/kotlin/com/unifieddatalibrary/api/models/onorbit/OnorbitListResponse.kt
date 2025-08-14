@@ -1125,7 +1125,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1323,7 +1323,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Category && value == other.value /* spotless:on */
+            return other is Category && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1477,7 +1477,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is ObjectType && value == other.value /* spotless:on */
+            return other is ObjectType && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1490,12 +1490,57 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OnorbitListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && satNo == other.satNo && source == other.source && altName == other.altName && category == other.category && commonName == other.commonName && constellation == other.constellation && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && decayDate == other.decayDate && idOnOrbit == other.idOnOrbit && intlDes == other.intlDes && launchDate == other.launchDate && launchSiteId == other.launchSiteId && lifetimeYears == other.lifetimeYears && missionNumber == other.missionNumber && objectType == other.objectType && origin == other.origin && origNetwork == other.origNetwork && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is OnorbitListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            satNo == other.satNo &&
+            source == other.source &&
+            altName == other.altName &&
+            category == other.category &&
+            commonName == other.commonName &&
+            constellation == other.constellation &&
+            countryCode == other.countryCode &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            decayDate == other.decayDate &&
+            idOnOrbit == other.idOnOrbit &&
+            intlDes == other.intlDes &&
+            launchDate == other.launchDate &&
+            launchSiteId == other.launchSiteId &&
+            lifetimeYears == other.lifetimeYears &&
+            missionNumber == other.missionNumber &&
+            objectType == other.objectType &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, satNo, source, altName, category, commonName, constellation, countryCode, createdAt, createdBy, decayDate, idOnOrbit, intlDes, launchDate, launchSiteId, lifetimeYears, missionNumber, objectType, origin, origNetwork, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            satNo,
+            source,
+            altName,
+            category,
+            commonName,
+            constellation,
+            countryCode,
+            createdAt,
+            createdBy,
+            decayDate,
+            idOnOrbit,
+            intlDes,
+            launchDate,
+            launchSiteId,
+            lifetimeYears,
+            missionNumber,
+            objectType,
+            origin,
+            origNetwork,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

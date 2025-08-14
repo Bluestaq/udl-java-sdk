@@ -413,7 +413,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -426,10 +426,28 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ConjunctionUploadConjunctionDataMessageParams && classification == other.classification && dataMode == other.dataMode && filename == other.filename && source == other.source && tags == other.tags && fileContent == other.fileContent && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is ConjunctionUploadConjunctionDataMessageParams &&
+            classification == other.classification &&
+            dataMode == other.dataMode &&
+            filename == other.filename &&
+            source == other.source &&
+            tags == other.tags &&
+            fileContent == other.fileContent &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(classification, dataMode, filename, source, tags, fileContent, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            classification,
+            dataMode,
+            filename,
+            source,
+            tags,
+            fileContent,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "ConjunctionUploadConjunctionDataMessageParams{classification=$classification, dataMode=$dataMode, filename=$filename, source=$source, tags=$tags, fileContent=$fileContent, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

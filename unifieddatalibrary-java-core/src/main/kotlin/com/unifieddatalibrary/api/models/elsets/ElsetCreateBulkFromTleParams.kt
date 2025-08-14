@@ -329,10 +329,32 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ElsetCreateBulkFromTleParams && dataMode == other.dataMode && makeCurrent == other.makeCurrent && source == other.source && autoCreateSats == other.autoCreateSats && control == other.control && origin == other.origin && tags == other.tags && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is ElsetCreateBulkFromTleParams &&
+            dataMode == other.dataMode &&
+            makeCurrent == other.makeCurrent &&
+            source == other.source &&
+            autoCreateSats == other.autoCreateSats &&
+            control == other.control &&
+            origin == other.origin &&
+            tags == other.tags &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(dataMode, makeCurrent, source, autoCreateSats, control, origin, tags, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            dataMode,
+            makeCurrent,
+            source,
+            autoCreateSats,
+            control,
+            origin,
+            tags,
+            body,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "ElsetCreateBulkFromTleParams{dataMode=$dataMode, makeCurrent=$makeCurrent, source=$source, autoCreateSats=$autoCreateSats, control=$control, origin=$origin, tags=$tags, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

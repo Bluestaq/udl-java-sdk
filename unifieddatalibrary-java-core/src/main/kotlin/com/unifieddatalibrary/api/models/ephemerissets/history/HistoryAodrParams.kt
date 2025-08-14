@@ -348,10 +348,32 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HistoryAodrParams && columns == other.columns && firstResult == other.firstResult && maxResults == other.maxResults && notification == other.notification && outputDelimiter == other.outputDelimiter && outputFormat == other.outputFormat && pointEndTime == other.pointEndTime && pointStartTime == other.pointStartTime && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HistoryAodrParams &&
+            columns == other.columns &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            notification == other.notification &&
+            outputDelimiter == other.outputDelimiter &&
+            outputFormat == other.outputFormat &&
+            pointEndTime == other.pointEndTime &&
+            pointStartTime == other.pointStartTime &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, firstResult, maxResults, notification, outputDelimiter, outputFormat, pointEndTime, pointStartTime, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            columns,
+            firstResult,
+            maxResults,
+            notification,
+            outputDelimiter,
+            outputFormat,
+            pointEndTime,
+            pointStartTime,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "HistoryAodrParams{columns=$columns, firstResult=$firstResult, maxResults=$maxResults, notification=$notification, outputDelimiter=$outputDelimiter, outputFormat=$outputFormat, pointEndTime=$pointEndTime, pointStartTime=$pointStartTime, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

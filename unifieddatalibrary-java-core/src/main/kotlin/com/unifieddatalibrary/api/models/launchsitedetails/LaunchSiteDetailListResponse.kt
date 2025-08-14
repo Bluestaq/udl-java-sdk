@@ -878,7 +878,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -891,12 +891,43 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LaunchSiteDetailListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idLaunchSite == other.idLaunchSite && source == other.source && id == other.id && availableInclinations == other.availableInclinations && createdAt == other.createdAt && createdBy == other.createdBy && description == other.description && idLocation == other.idLocation && launchGroup == other.launchGroup && location == other.location && origin == other.origin && origNetwork == other.origNetwork && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is LaunchSiteDetailListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idLaunchSite == other.idLaunchSite &&
+            source == other.source &&
+            id == other.id &&
+            availableInclinations == other.availableInclinations &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            description == other.description &&
+            idLocation == other.idLocation &&
+            launchGroup == other.launchGroup &&
+            location == other.location &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idLaunchSite, source, id, availableInclinations, createdAt, createdBy, description, idLocation, launchGroup, location, origin, origNetwork, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idLaunchSite,
+            source,
+            id,
+            availableInclinations,
+            createdAt,
+            createdBy,
+            description,
+            idLocation,
+            launchGroup,
+            location,
+            origin,
+            origNetwork,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

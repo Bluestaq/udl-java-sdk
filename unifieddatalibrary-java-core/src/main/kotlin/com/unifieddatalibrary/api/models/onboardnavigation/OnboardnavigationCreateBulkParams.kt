@@ -1416,7 +1416,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -1581,7 +1581,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is ReferenceFrame && value == other.value /* spotless:on */
+                return other is ReferenceFrame && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -1594,12 +1594,59 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && startTime == other.startTime && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && deltaPos == other.deltaPos && endTime == other.endTime && esId == other.esId && idOnOrbit == other.idOnOrbit && idStateVector == other.idStateVector && mag == other.mag && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && referenceFrame == other.referenceFrame && satNo == other.satNo && starCatLoadTime == other.starCatLoadTime && starCatName == other.starCatName && starTracker == other.starTracker && sunSensor == other.sunSensor && ts == other.ts /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                startTime == other.startTime &&
+                id == other.id &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                deltaPos == other.deltaPos &&
+                endTime == other.endTime &&
+                esId == other.esId &&
+                idOnOrbit == other.idOnOrbit &&
+                idStateVector == other.idStateVector &&
+                mag == other.mag &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                referenceFrame == other.referenceFrame &&
+                satNo == other.satNo &&
+                starCatLoadTime == other.starCatLoadTime &&
+                starCatName == other.starCatName &&
+                starTracker == other.starTracker &&
+                sunSensor == other.sunSensor &&
+                ts == other.ts
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, startTime, id, createdAt, createdBy, deltaPos, endTime, esId, idOnOrbit, idStateVector, mag, origin, origNetwork, origObjectId, referenceFrame, satNo, starCatLoadTime, starCatName, starTracker, sunSensor, ts) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                startTime,
+                id,
+                createdAt,
+                createdBy,
+                deltaPos,
+                endTime,
+                esId,
+                idOnOrbit,
+                idStateVector,
+                mag,
+                origin,
+                origNetwork,
+                origObjectId,
+                referenceFrame,
+                satNo,
+                starCatLoadTime,
+                starCatName,
+                starTracker,
+                sunSensor,
+                ts,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1612,10 +1659,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OnboardnavigationCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OnboardnavigationCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "OnboardnavigationCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

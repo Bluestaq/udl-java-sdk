@@ -235,10 +235,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HistoryCountParams && asId == other.asId && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HistoryCountParams &&
+            asId == other.asId &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(asId, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(asId, firstResult, maxResults, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "HistoryCountParams{asId=$asId, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

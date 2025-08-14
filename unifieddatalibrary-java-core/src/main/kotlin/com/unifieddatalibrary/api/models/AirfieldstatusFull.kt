@@ -2122,7 +2122,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2135,12 +2135,101 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AirfieldstatusFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idAirfield == other.idAirfield && source == other.source && id == other.id && altAirfieldId == other.altAirfieldId && approvedBy == other.approvedBy && approvedDate == other.approvedDate && arffCat == other.arffCat && cargoMog == other.cargoMog && createdAt == other.createdAt && createdBy == other.createdBy && fleetServiceMog == other.fleetServiceMog && fuelMog == other.fuelMog && fuelQtys == other.fuelQtys && fuelTypes == other.fuelTypes && gseTime == other.gseTime && medCap == other.medCap && message == other.message && mheQtys == other.mheQtys && mheTypes == other.mheTypes && mxMog == other.mxMog && narrowParkingMog == other.narrowParkingMog && narrowWorkingMog == other.narrowWorkingMog && numCog == other.numCog && operatingMog == other.operatingMog && origin == other.origin && origNetwork == other.origNetwork && passengerServiceMog == other.passengerServiceMog && priFreq == other.priFreq && priRwyNum == other.priRwyNum && reviewedBy == other.reviewedBy && reviewedDate == other.reviewedDate && rwyCondReading == other.rwyCondReading && rwyFrictionFactor == other.rwyFrictionFactor && rwyMarkings == other.rwyMarkings && slotTypesReq == other.slotTypesReq && sourceDl == other.sourceDl && surveyDate == other.surveyDate && updatedAt == other.updatedAt && updatedBy == other.updatedBy && wideParkingMog == other.wideParkingMog && wideWorkingMog == other.wideWorkingMog && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is AirfieldstatusFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idAirfield == other.idAirfield &&
+            source == other.source &&
+            id == other.id &&
+            altAirfieldId == other.altAirfieldId &&
+            approvedBy == other.approvedBy &&
+            approvedDate == other.approvedDate &&
+            arffCat == other.arffCat &&
+            cargoMog == other.cargoMog &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            fleetServiceMog == other.fleetServiceMog &&
+            fuelMog == other.fuelMog &&
+            fuelQtys == other.fuelQtys &&
+            fuelTypes == other.fuelTypes &&
+            gseTime == other.gseTime &&
+            medCap == other.medCap &&
+            message == other.message &&
+            mheQtys == other.mheQtys &&
+            mheTypes == other.mheTypes &&
+            mxMog == other.mxMog &&
+            narrowParkingMog == other.narrowParkingMog &&
+            narrowWorkingMog == other.narrowWorkingMog &&
+            numCog == other.numCog &&
+            operatingMog == other.operatingMog &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            passengerServiceMog == other.passengerServiceMog &&
+            priFreq == other.priFreq &&
+            priRwyNum == other.priRwyNum &&
+            reviewedBy == other.reviewedBy &&
+            reviewedDate == other.reviewedDate &&
+            rwyCondReading == other.rwyCondReading &&
+            rwyFrictionFactor == other.rwyFrictionFactor &&
+            rwyMarkings == other.rwyMarkings &&
+            slotTypesReq == other.slotTypesReq &&
+            sourceDl == other.sourceDl &&
+            surveyDate == other.surveyDate &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            wideParkingMog == other.wideParkingMog &&
+            wideWorkingMog == other.wideWorkingMog &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idAirfield, source, id, altAirfieldId, approvedBy, approvedDate, arffCat, cargoMog, createdAt, createdBy, fleetServiceMog, fuelMog, fuelQtys, fuelTypes, gseTime, medCap, message, mheQtys, mheTypes, mxMog, narrowParkingMog, narrowWorkingMog, numCog, operatingMog, origin, origNetwork, passengerServiceMog, priFreq, priRwyNum, reviewedBy, reviewedDate, rwyCondReading, rwyFrictionFactor, rwyMarkings, slotTypesReq, sourceDl, surveyDate, updatedAt, updatedBy, wideParkingMog, wideWorkingMog, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idAirfield,
+            source,
+            id,
+            altAirfieldId,
+            approvedBy,
+            approvedDate,
+            arffCat,
+            cargoMog,
+            createdAt,
+            createdBy,
+            fleetServiceMog,
+            fuelMog,
+            fuelQtys,
+            fuelTypes,
+            gseTime,
+            medCap,
+            message,
+            mheQtys,
+            mheTypes,
+            mxMog,
+            narrowParkingMog,
+            narrowWorkingMog,
+            numCog,
+            operatingMog,
+            origin,
+            origNetwork,
+            passengerServiceMog,
+            priFreq,
+            priRwyNum,
+            reviewedBy,
+            reviewedDate,
+            rwyCondReading,
+            rwyFrictionFactor,
+            rwyMarkings,
+            slotTypesReq,
+            sourceDl,
+            surveyDate,
+            updatedAt,
+            updatedBy,
+            wideParkingMog,
+            wideWorkingMog,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

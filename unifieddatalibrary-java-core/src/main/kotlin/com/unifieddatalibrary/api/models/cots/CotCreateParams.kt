@@ -1386,12 +1386,45 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && lat == other.lat && lon == other.lon && alt == other.alt && callSigns == other.callSigns && ce == other.ce && cotChatData == other.cotChatData && cotPositionData == other.cotPositionData && groups == other.groups && how == other.how && le == other.le && senderUid == other.senderUid && stale == other.stale && start == other.start && type == other.type && uids == other.uids && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                lat == other.lat &&
+                lon == other.lon &&
+                alt == other.alt &&
+                callSigns == other.callSigns &&
+                ce == other.ce &&
+                cotChatData == other.cotChatData &&
+                cotPositionData == other.cotPositionData &&
+                groups == other.groups &&
+                how == other.how &&
+                le == other.le &&
+                senderUid == other.senderUid &&
+                stale == other.stale &&
+                start == other.start &&
+                type == other.type &&
+                uids == other.uids &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(lat, lon, alt, callSigns, ce, cotChatData, cotPositionData, groups, how, le, senderUid, stale, start, type, uids, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                lat,
+                lon,
+                alt,
+                callSigns,
+                ce,
+                cotChatData,
+                cotPositionData,
+                groups,
+                how,
+                le,
+                senderUid,
+                stale,
+                start,
+                type,
+                uids,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1612,12 +1645,16 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is CotChatData && chatMsg == other.chatMsg && chatRoom == other.chatRoom && chatSenderCallSign == other.chatSenderCallSign && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is CotChatData &&
+                chatMsg == other.chatMsg &&
+                chatRoom == other.chatRoom &&
+                chatSenderCallSign == other.chatSenderCallSign &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(chatMsg, chatRoom, chatSenderCallSign, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(chatMsg, chatRoom, chatSenderCallSign, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1853,12 +1890,16 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is CotPositionData && callSign == other.callSign && team == other.team && teamRole == other.teamRole && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is CotPositionData &&
+                callSign == other.callSign &&
+                team == other.team &&
+                teamRole == other.teamRole &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(callSign, team, teamRole, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(callSign, team, teamRole, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1871,10 +1912,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CotCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is CotCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "CotCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

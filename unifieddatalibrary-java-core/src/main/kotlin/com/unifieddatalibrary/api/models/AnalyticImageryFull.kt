@@ -2135,7 +2135,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4252,7 +4252,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -4265,12 +4265,95 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is FeatureAssessment && classificationMarking == other.classificationMarking && dataMode == other.dataMode && featureTs == other.featureTs && featureUoM == other.featureUoM && idAnalyticImagery == other.idAnalyticImagery && source == other.source && id == other.id && agjson == other.agjson && andims == other.andims && annLims == other.annLims && annText == other.annText && area == other.area && asrid == other.asrid && assessment == other.assessment && atext == other.atext && atype == other.atype && confidence == other.confidence && createdAt == other.createdAt && createdBy == other.createdBy && externalId == other.externalId && featureArray == other.featureArray && featureBool == other.featureBool && featureString == other.featureString && featureStringArray == other.featureStringArray && featureValue == other.featureValue && heading == other.heading && height == other.height && length == other.length && name == other.name && origin == other.origin && origNetwork == other.origNetwork && sourceDl == other.sourceDl && speed == other.speed && srcIds == other.srcIds && srcTs == other.srcTs && srcTyps == other.srcTyps && tags == other.tags && transactionId == other.transactionId && type == other.type && width == other.width && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is FeatureAssessment &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                featureTs == other.featureTs &&
+                featureUoM == other.featureUoM &&
+                idAnalyticImagery == other.idAnalyticImagery &&
+                source == other.source &&
+                id == other.id &&
+                agjson == other.agjson &&
+                andims == other.andims &&
+                annLims == other.annLims &&
+                annText == other.annText &&
+                area == other.area &&
+                asrid == other.asrid &&
+                assessment == other.assessment &&
+                atext == other.atext &&
+                atype == other.atype &&
+                confidence == other.confidence &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                externalId == other.externalId &&
+                featureArray == other.featureArray &&
+                featureBool == other.featureBool &&
+                featureString == other.featureString &&
+                featureStringArray == other.featureStringArray &&
+                featureValue == other.featureValue &&
+                heading == other.heading &&
+                height == other.height &&
+                length == other.length &&
+                name == other.name &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                sourceDl == other.sourceDl &&
+                speed == other.speed &&
+                srcIds == other.srcIds &&
+                srcTs == other.srcTs &&
+                srcTyps == other.srcTyps &&
+                tags == other.tags &&
+                transactionId == other.transactionId &&
+                type == other.type &&
+                width == other.width &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, featureTs, featureUoM, idAnalyticImagery, source, id, agjson, andims, annLims, annText, area, asrid, assessment, atext, atype, confidence, createdAt, createdBy, externalId, featureArray, featureBool, featureString, featureStringArray, featureValue, heading, height, length, name, origin, origNetwork, sourceDl, speed, srcIds, srcTs, srcTyps, tags, transactionId, type, width, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                featureTs,
+                featureUoM,
+                idAnalyticImagery,
+                source,
+                id,
+                agjson,
+                andims,
+                annLims,
+                annText,
+                area,
+                asrid,
+                assessment,
+                atext,
+                atype,
+                confidence,
+                createdAt,
+                createdBy,
+                externalId,
+                featureArray,
+                featureBool,
+                featureString,
+                featureStringArray,
+                featureValue,
+                heading,
+                height,
+                length,
+                name,
+                origin,
+                origNetwork,
+                sourceDl,
+                speed,
+                srcIds,
+                srcTs,
+                srcTyps,
+                tags,
+                transactionId,
+                type,
+                width,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4283,12 +4366,103 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AnalyticImageryFull && classificationMarking == other.classificationMarking && content == other.content && dataMode == other.dataMode && description == other.description && filename == other.filename && filesize == other.filesize && imageType == other.imageType && msgTime == other.msgTime && source == other.source && id == other.id && agjson == other.agjson && andims == other.andims && annLims == other.annLims && annText == other.annText && area == other.area && asrid == other.asrid && atext == other.atext && atype == other.atype && checksumValue == other.checksumValue && createdAt == other.createdAt && createdBy == other.createdBy && dataStart == other.dataStart && dataStop == other.dataStop && featureAssessments == other.featureAssessments && idSensor == other.idSensor && imageSetId == other.imageSetId && imageSetLength == other.imageSetLength && imgHeight == other.imgHeight && imgWidth == other.imgWidth && keywords == other.keywords && origin == other.origin && origNetwork == other.origNetwork && origSensorId == other.origSensorId && satId == other.satId && satIdConf == other.satIdConf && sequenceId == other.sequenceId && sourceDl == other.sourceDl && srcIds == other.srcIds && srcTyps == other.srcTyps && tags == other.tags && transactionId == other.transactionId && xUnits == other.xUnits && yUnits == other.yUnits && zUnits == other.zUnits && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is AnalyticImageryFull &&
+            classificationMarking == other.classificationMarking &&
+            content == other.content &&
+            dataMode == other.dataMode &&
+            description == other.description &&
+            filename == other.filename &&
+            filesize == other.filesize &&
+            imageType == other.imageType &&
+            msgTime == other.msgTime &&
+            source == other.source &&
+            id == other.id &&
+            agjson == other.agjson &&
+            andims == other.andims &&
+            annLims == other.annLims &&
+            annText == other.annText &&
+            area == other.area &&
+            asrid == other.asrid &&
+            atext == other.atext &&
+            atype == other.atype &&
+            checksumValue == other.checksumValue &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            dataStart == other.dataStart &&
+            dataStop == other.dataStop &&
+            featureAssessments == other.featureAssessments &&
+            idSensor == other.idSensor &&
+            imageSetId == other.imageSetId &&
+            imageSetLength == other.imageSetLength &&
+            imgHeight == other.imgHeight &&
+            imgWidth == other.imgWidth &&
+            keywords == other.keywords &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origSensorId == other.origSensorId &&
+            satId == other.satId &&
+            satIdConf == other.satIdConf &&
+            sequenceId == other.sequenceId &&
+            sourceDl == other.sourceDl &&
+            srcIds == other.srcIds &&
+            srcTyps == other.srcTyps &&
+            tags == other.tags &&
+            transactionId == other.transactionId &&
+            xUnits == other.xUnits &&
+            yUnits == other.yUnits &&
+            zUnits == other.zUnits &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, content, dataMode, description, filename, filesize, imageType, msgTime, source, id, agjson, andims, annLims, annText, area, asrid, atext, atype, checksumValue, createdAt, createdBy, dataStart, dataStop, featureAssessments, idSensor, imageSetId, imageSetLength, imgHeight, imgWidth, keywords, origin, origNetwork, origSensorId, satId, satIdConf, sequenceId, sourceDl, srcIds, srcTyps, tags, transactionId, xUnits, yUnits, zUnits, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            content,
+            dataMode,
+            description,
+            filename,
+            filesize,
+            imageType,
+            msgTime,
+            source,
+            id,
+            agjson,
+            andims,
+            annLims,
+            annText,
+            area,
+            asrid,
+            atext,
+            atype,
+            checksumValue,
+            createdAt,
+            createdBy,
+            dataStart,
+            dataStop,
+            featureAssessments,
+            idSensor,
+            imageSetId,
+            imageSetLength,
+            imgHeight,
+            imgWidth,
+            keywords,
+            origin,
+            origNetwork,
+            origSensorId,
+            satId,
+            satIdConf,
+            sequenceId,
+            sourceDl,
+            srcIds,
+            srcTyps,
+            tags,
+            transactionId,
+            xUnits,
+            yUnits,
+            zUnits,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

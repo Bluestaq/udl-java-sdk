@@ -48,6 +48,7 @@ import com.unifieddatalibrary.api.services.blocking.scs.RangeParameterServiceImp
 import com.unifieddatalibrary.api.services.blocking.scs.V2Service
 import com.unifieddatalibrary.api.services.blocking.scs.V2ServiceImpl
 import java.util.function.Consumer
+import kotlin.jvm.optionals.getOrNull
 
 class ScServiceImpl internal constructor(private val clientOptions: ClientOptions) : ScService {
 
@@ -364,7 +365,7 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
         ): HttpResponseFor<String> {
             // We check here instead of in the params builder because this can be specified
             // positionally or in the params class.
-            checkRequired("fileContent", !params._fileContent().isMissing())
+            checkRequired("fileContent", params._body().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)

@@ -258,10 +258,24 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HistoryQueryParams && imageTime == other.imageTime && columns == other.columns && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HistoryQueryParams &&
+            imageTime == other.imageTime &&
+            columns == other.columns &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(imageTime, columns, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            imageTime,
+            columns,
+            firstResult,
+            maxResults,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "HistoryQueryParams{imageTime=$imageTime, columns=$columns, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -2040,12 +2040,59 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && sensorName == other.sensorName && source == other.source && active == other.active && afId == other.afId && asrType == other.asrType && createdAt == other.createdAt && createdBy == other.createdBy && dataControl == other.dataControl && entity == other.entity && idEntity == other.idEntity && idSensor == other.idSensor && origin == other.origin && origNetwork == other.origNetwork && sensorcharacteristics == other.sensorcharacteristics && sensorlimitsCollection == other.sensorlimitsCollection && sensorNumber == other.sensorNumber && sensorObservationType == other.sensorObservationType && sensorStats == other.sensorStats && sensorType == other.sensorType && shortName == other.shortName && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                sensorName == other.sensorName &&
+                source == other.source &&
+                active == other.active &&
+                afId == other.afId &&
+                asrType == other.asrType &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                dataControl == other.dataControl &&
+                entity == other.entity &&
+                idEntity == other.idEntity &&
+                idSensor == other.idSensor &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                sensorcharacteristics == other.sensorcharacteristics &&
+                sensorlimitsCollection == other.sensorlimitsCollection &&
+                sensorNumber == other.sensorNumber &&
+                sensorObservationType == other.sensorObservationType &&
+                sensorStats == other.sensorStats &&
+                sensorType == other.sensorType &&
+                shortName == other.shortName &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, sensorName, source, active, afId, asrType, createdAt, createdBy, dataControl, entity, idEntity, idSensor, origin, origNetwork, sensorcharacteristics, sensorlimitsCollection, sensorNumber, sensorObservationType, sensorStats, sensorType, shortName, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                sensorName,
+                source,
+                active,
+                afId,
+                asrType,
+                createdAt,
+                createdBy,
+                dataControl,
+                entity,
+                idEntity,
+                idSensor,
+                origin,
+                origNetwork,
+                sensorcharacteristics,
+                sensorlimitsCollection,
+                sensorNumber,
+                sensorObservationType,
+                sensorStats,
+                sensorType,
+                shortName,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2198,7 +2245,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3325,7 +3372,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -3516,7 +3563,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+                return other is Type && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -4722,7 +4769,7 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                    return other is DataMode && value == other.value
                 }
 
                 override fun hashCode() = value.hashCode()
@@ -4925,7 +4972,7 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is Category && value == other.value /* spotless:on */
+                    return other is Category && value == other.value
                 }
 
                 override fun hashCode() = value.hashCode()
@@ -5085,7 +5132,7 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is ObjectType && value == other.value /* spotless:on */
+                    return other is ObjectType && value == other.value
                 }
 
                 override fun hashCode() = value.hashCode()
@@ -5098,12 +5145,57 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is OnOrbit && classificationMarking == other.classificationMarking && dataMode == other.dataMode && satNo == other.satNo && source == other.source && altName == other.altName && category == other.category && commonName == other.commonName && constellation == other.constellation && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && decayDate == other.decayDate && idOnOrbit == other.idOnOrbit && intlDes == other.intlDes && launchDate == other.launchDate && launchSiteId == other.launchSiteId && lifetimeYears == other.lifetimeYears && missionNumber == other.missionNumber && objectType == other.objectType && origin == other.origin && origNetwork == other.origNetwork && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is OnOrbit &&
+                    classificationMarking == other.classificationMarking &&
+                    dataMode == other.dataMode &&
+                    satNo == other.satNo &&
+                    source == other.source &&
+                    altName == other.altName &&
+                    category == other.category &&
+                    commonName == other.commonName &&
+                    constellation == other.constellation &&
+                    countryCode == other.countryCode &&
+                    createdAt == other.createdAt &&
+                    createdBy == other.createdBy &&
+                    decayDate == other.decayDate &&
+                    idOnOrbit == other.idOnOrbit &&
+                    intlDes == other.intlDes &&
+                    launchDate == other.launchDate &&
+                    launchSiteId == other.launchSiteId &&
+                    lifetimeYears == other.lifetimeYears &&
+                    missionNumber == other.missionNumber &&
+                    objectType == other.objectType &&
+                    origin == other.origin &&
+                    origNetwork == other.origNetwork &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, satNo, source, altName, category, commonName, constellation, countryCode, createdAt, createdBy, decayDate, idOnOrbit, intlDes, launchDate, launchSiteId, lifetimeYears, missionNumber, objectType, origin, origNetwork, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    classificationMarking,
+                    dataMode,
+                    satNo,
+                    source,
+                    altName,
+                    category,
+                    commonName,
+                    constellation,
+                    countryCode,
+                    createdAt,
+                    createdBy,
+                    decayDate,
+                    idOnOrbit,
+                    intlDes,
+                    launchDate,
+                    launchSiteId,
+                    lifetimeYears,
+                    missionNumber,
+                    objectType,
+                    origin,
+                    origNetwork,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -5257,7 +5349,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is OwnerType && value == other.value /* spotless:on */
+                return other is OwnerType && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -5270,12 +5362,55 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Entity && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && type == other.type && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && idEntity == other.idEntity && idLocation == other.idLocation && idOnOrbit == other.idOnOrbit && idOperatingUnit == other.idOperatingUnit && location == other.location && onOrbit == other.onOrbit && origin == other.origin && origNetwork == other.origNetwork && ownerType == other.ownerType && taskable == other.taskable && terrestrialId == other.terrestrialId && urls == other.urls && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Entity &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                name == other.name &&
+                source == other.source &&
+                type == other.type &&
+                countryCode == other.countryCode &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                idEntity == other.idEntity &&
+                idLocation == other.idLocation &&
+                idOnOrbit == other.idOnOrbit &&
+                idOperatingUnit == other.idOperatingUnit &&
+                location == other.location &&
+                onOrbit == other.onOrbit &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                ownerType == other.ownerType &&
+                taskable == other.taskable &&
+                terrestrialId == other.terrestrialId &&
+                urls == other.urls &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, type, countryCode, createdAt, createdBy, idEntity, idLocation, idOnOrbit, idOperatingUnit, location, onOrbit, origin, origNetwork, ownerType, taskable, terrestrialId, urls, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                name,
+                source,
+                type,
+                countryCode,
+                createdAt,
+                createdBy,
+                idEntity,
+                idLocation,
+                idOnOrbit,
+                idOperatingUnit,
+                location,
+                onOrbit,
+                origin,
+                origNetwork,
+                ownerType,
+                taskable,
+                terrestrialId,
+                urls,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -11962,7 +12097,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -11975,12 +12110,291 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Sensorcharacteristic && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSensor == other.idSensor && source == other.source && id == other.id && acceptSampleRanges == other.acceptSampleRanges && analogToDigitalBitSize == other.analogToDigitalBitSize && aperture == other.aperture && asrScanRate == other.asrScanRate && atmosReceiverLoss == other.atmosReceiverLoss && atmosTransmissionLoss == other.atmosTransmissionLoss && avgAtmosSeeingConditions == other.avgAtmosSeeingConditions && azAngs == other.azAngs && azimuthRate == other.azimuthRate && backgroundSkyRadiance == other.backgroundSkyRadiance && backgroundSkyVisMag == other.backgroundSkyVisMag && band == other.band && bandwidth == other.bandwidth && beamOrder == other.beamOrder && beamQty == other.beamQty && boresight == other.boresight && boresightOffAngle == other.boresightOffAngle && centerWavelength == other.centerWavelength && collapsingLoss == other.collapsingLoss && createdAt == other.createdAt && createdBy == other.createdBy && critShear == other.critShear && darkCurrent == other.darkCurrent && delayGates == other.delayGates && description == other.description && detectSnr == other.detectSnr && dutyCycle == other.dutyCycle && earthLimbExclHgt == other.earthLimbExclHgt && elAngs == other.elAngs && elevationRateGeolm == other.elevationRateGeolm && equipmentType == other.equipmentType && fanBeamWidth == other.fanBeamWidth && fft == other.fft && fgpCrit == other.fgpCrit && filterMismatchFactor == other.filterMismatchFactor && fNum == other.fNum && focalPoint == other.focalPoint && hFov == other.hFov && hResPixels == other.hResPixels && k == other.k && leftClockAngle == other.leftClockAngle && leftGeoBeltLimit == other.leftGeoBeltLimit && location == other.location && loopGain == other.loopGain && lunarExclAngle == other.lunarExclAngle && magDec == other.magDec && magnitudeLimit == other.magnitudeLimit && maxDeviationAngle == other.maxDeviationAngle && maxIntegrationTime == other.maxIntegrationTime && maxObservableRange == other.maxObservableRange && maxRangeLimit == other.maxRangeLimit && maxWavelength == other.maxWavelength && minIntegrationTime == other.minIntegrationTime && minRangeLimit == other.minRangeLimit && minSignalNoiseRatio == other.minSignalNoiseRatio && minWavelength == other.minWavelength && negativeRangeRateLimit == other.negativeRangeRateLimit && noiseFigure == other.noiseFigure && nonCoherentIntegratedPulses == other.nonCoherentIntegratedPulses && numIntegratedPulses == other.numIntegratedPulses && numIntegrationFrames == other.numIntegrationFrames && numOpticalIntegrationModes == other.numOpticalIntegrationModes && numWaveforms == other.numWaveforms && opticalIntegrationAngularRates == other.opticalIntegrationAngularRates && opticalIntegrationFrames == other.opticalIntegrationFrames && opticalIntegrationPixelBinnings == other.opticalIntegrationPixelBinnings && opticalIntegrationSnRs == other.opticalIntegrationSnRs && opticalIntegrationTimes == other.opticalIntegrationTimes && opticalTransmission == other.opticalTransmission && origNetwork == other.origNetwork && patternAbsorptionLoss == other.patternAbsorptionLoss && patternScanLoss == other.patternScanLoss && peakPower == other.peakPower && pixelInstantaneousFov == other.pixelInstantaneousFov && pixelWellDepth == other.pixelWellDepth && positiveRangeRateLimit == other.positiveRangeRateLimit && prf == other.prf && probDetectSnr == other.probDetectSnr && probFalseAlarm == other.probFalseAlarm && pulseRepPeriods == other.pulseRepPeriods && quantumEff == other.quantumEff && radarFrequency == other.radarFrequency && radarMessageFormat == other.radarMessageFormat && radarMur == other.radarMur && radarPulseWidths == other.radarPulseWidths && radioFrequency == other.radioFrequency && radomeLoss == other.radomeLoss && rangeGates == other.rangeGates && rangeSpacings == other.rangeSpacings && readNoise == other.readNoise && receiveGain == other.receiveGain && receiveHorizBeamWidth == other.receiveHorizBeamWidth && receiveLoss == other.receiveLoss && receiveVertBeamWidth == other.receiveVertBeamWidth && refTemp == other.refTemp && reqRecords == other.reqRecords && rightClockAngle == other.rightClockAngle && rightGeoBeltLimit == other.rightGeoBeltLimit && runMeanCodes == other.runMeanCodes && signalProcessingLoss == other.signalProcessingLoss && siteCode == other.siteCode && solarExclAngle == other.solarExclAngle && specAvgSpectraNums == other.specAvgSpectraNums && systemNoiseTemperature == other.systemNoiseTemperature && taskableRange == other.taskableRange && tempMedFiltCodes == other.tempMedFiltCodes && testNumber == other.testNumber && totRecNums == other.totRecNums && towerHeight == other.towerHeight && trackAngle == other.trackAngle && trackSnr == other.trackSnr && transmitGain == other.transmitGain && transmitHorizBeamWidth == other.transmitHorizBeamWidth && transmitLoss == other.transmitLoss && transmitPower == other.transmitPower && transmitVertBeamWidth == other.transmitVertBeamWidth && trueNorthCorrector == other.trueNorthCorrector && trueTilt == other.trueTilt && twilightAngle == other.twilightAngle && vertBeamFlag == other.vertBeamFlag && vertGateSpacings == other.vertGateSpacings && vertGateWidths == other.vertGateWidths && vFov == other.vFov && vResPixels == other.vResPixels && waveformBandwidths == other.waveformBandwidths && waveformLoopGains == other.waveformLoopGains && waveformMaxRanges == other.waveformMaxRanges && waveformMinRanges == other.waveformMinRanges && waveformPulseWidths == other.waveformPulseWidths && z1MaxRange == other.z1MaxRange && z1MinRange == other.z1MinRange && z2MaxRange == other.z2MaxRange && z2MinRange == other.z2MinRange && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Sensorcharacteristic &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idSensor == other.idSensor &&
+                source == other.source &&
+                id == other.id &&
+                acceptSampleRanges == other.acceptSampleRanges &&
+                analogToDigitalBitSize == other.analogToDigitalBitSize &&
+                aperture == other.aperture &&
+                asrScanRate == other.asrScanRate &&
+                atmosReceiverLoss == other.atmosReceiverLoss &&
+                atmosTransmissionLoss == other.atmosTransmissionLoss &&
+                avgAtmosSeeingConditions == other.avgAtmosSeeingConditions &&
+                azAngs == other.azAngs &&
+                azimuthRate == other.azimuthRate &&
+                backgroundSkyRadiance == other.backgroundSkyRadiance &&
+                backgroundSkyVisMag == other.backgroundSkyVisMag &&
+                band == other.band &&
+                bandwidth == other.bandwidth &&
+                beamOrder == other.beamOrder &&
+                beamQty == other.beamQty &&
+                boresight == other.boresight &&
+                boresightOffAngle == other.boresightOffAngle &&
+                centerWavelength == other.centerWavelength &&
+                collapsingLoss == other.collapsingLoss &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                critShear == other.critShear &&
+                darkCurrent == other.darkCurrent &&
+                delayGates == other.delayGates &&
+                description == other.description &&
+                detectSnr == other.detectSnr &&
+                dutyCycle == other.dutyCycle &&
+                earthLimbExclHgt == other.earthLimbExclHgt &&
+                elAngs == other.elAngs &&
+                elevationRateGeolm == other.elevationRateGeolm &&
+                equipmentType == other.equipmentType &&
+                fanBeamWidth == other.fanBeamWidth &&
+                fft == other.fft &&
+                fgpCrit == other.fgpCrit &&
+                filterMismatchFactor == other.filterMismatchFactor &&
+                fNum == other.fNum &&
+                focalPoint == other.focalPoint &&
+                hFov == other.hFov &&
+                hResPixels == other.hResPixels &&
+                k == other.k &&
+                leftClockAngle == other.leftClockAngle &&
+                leftGeoBeltLimit == other.leftGeoBeltLimit &&
+                location == other.location &&
+                loopGain == other.loopGain &&
+                lunarExclAngle == other.lunarExclAngle &&
+                magDec == other.magDec &&
+                magnitudeLimit == other.magnitudeLimit &&
+                maxDeviationAngle == other.maxDeviationAngle &&
+                maxIntegrationTime == other.maxIntegrationTime &&
+                maxObservableRange == other.maxObservableRange &&
+                maxRangeLimit == other.maxRangeLimit &&
+                maxWavelength == other.maxWavelength &&
+                minIntegrationTime == other.minIntegrationTime &&
+                minRangeLimit == other.minRangeLimit &&
+                minSignalNoiseRatio == other.minSignalNoiseRatio &&
+                minWavelength == other.minWavelength &&
+                negativeRangeRateLimit == other.negativeRangeRateLimit &&
+                noiseFigure == other.noiseFigure &&
+                nonCoherentIntegratedPulses == other.nonCoherentIntegratedPulses &&
+                numIntegratedPulses == other.numIntegratedPulses &&
+                numIntegrationFrames == other.numIntegrationFrames &&
+                numOpticalIntegrationModes == other.numOpticalIntegrationModes &&
+                numWaveforms == other.numWaveforms &&
+                opticalIntegrationAngularRates == other.opticalIntegrationAngularRates &&
+                opticalIntegrationFrames == other.opticalIntegrationFrames &&
+                opticalIntegrationPixelBinnings == other.opticalIntegrationPixelBinnings &&
+                opticalIntegrationSnRs == other.opticalIntegrationSnRs &&
+                opticalIntegrationTimes == other.opticalIntegrationTimes &&
+                opticalTransmission == other.opticalTransmission &&
+                origNetwork == other.origNetwork &&
+                patternAbsorptionLoss == other.patternAbsorptionLoss &&
+                patternScanLoss == other.patternScanLoss &&
+                peakPower == other.peakPower &&
+                pixelInstantaneousFov == other.pixelInstantaneousFov &&
+                pixelWellDepth == other.pixelWellDepth &&
+                positiveRangeRateLimit == other.positiveRangeRateLimit &&
+                prf == other.prf &&
+                probDetectSnr == other.probDetectSnr &&
+                probFalseAlarm == other.probFalseAlarm &&
+                pulseRepPeriods == other.pulseRepPeriods &&
+                quantumEff == other.quantumEff &&
+                radarFrequency == other.radarFrequency &&
+                radarMessageFormat == other.radarMessageFormat &&
+                radarMur == other.radarMur &&
+                radarPulseWidths == other.radarPulseWidths &&
+                radioFrequency == other.radioFrequency &&
+                radomeLoss == other.radomeLoss &&
+                rangeGates == other.rangeGates &&
+                rangeSpacings == other.rangeSpacings &&
+                readNoise == other.readNoise &&
+                receiveGain == other.receiveGain &&
+                receiveHorizBeamWidth == other.receiveHorizBeamWidth &&
+                receiveLoss == other.receiveLoss &&
+                receiveVertBeamWidth == other.receiveVertBeamWidth &&
+                refTemp == other.refTemp &&
+                reqRecords == other.reqRecords &&
+                rightClockAngle == other.rightClockAngle &&
+                rightGeoBeltLimit == other.rightGeoBeltLimit &&
+                runMeanCodes == other.runMeanCodes &&
+                signalProcessingLoss == other.signalProcessingLoss &&
+                siteCode == other.siteCode &&
+                solarExclAngle == other.solarExclAngle &&
+                specAvgSpectraNums == other.specAvgSpectraNums &&
+                systemNoiseTemperature == other.systemNoiseTemperature &&
+                taskableRange == other.taskableRange &&
+                tempMedFiltCodes == other.tempMedFiltCodes &&
+                testNumber == other.testNumber &&
+                totRecNums == other.totRecNums &&
+                towerHeight == other.towerHeight &&
+                trackAngle == other.trackAngle &&
+                trackSnr == other.trackSnr &&
+                transmitGain == other.transmitGain &&
+                transmitHorizBeamWidth == other.transmitHorizBeamWidth &&
+                transmitLoss == other.transmitLoss &&
+                transmitPower == other.transmitPower &&
+                transmitVertBeamWidth == other.transmitVertBeamWidth &&
+                trueNorthCorrector == other.trueNorthCorrector &&
+                trueTilt == other.trueTilt &&
+                twilightAngle == other.twilightAngle &&
+                vertBeamFlag == other.vertBeamFlag &&
+                vertGateSpacings == other.vertGateSpacings &&
+                vertGateWidths == other.vertGateWidths &&
+                vFov == other.vFov &&
+                vResPixels == other.vResPixels &&
+                waveformBandwidths == other.waveformBandwidths &&
+                waveformLoopGains == other.waveformLoopGains &&
+                waveformMaxRanges == other.waveformMaxRanges &&
+                waveformMinRanges == other.waveformMinRanges &&
+                waveformPulseWidths == other.waveformPulseWidths &&
+                z1MaxRange == other.z1MaxRange &&
+                z1MinRange == other.z1MinRange &&
+                z2MaxRange == other.z2MaxRange &&
+                z2MinRange == other.z2MinRange &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSensor, source, id, acceptSampleRanges, analogToDigitalBitSize, aperture, asrScanRate, atmosReceiverLoss, atmosTransmissionLoss, avgAtmosSeeingConditions, azAngs, azimuthRate, backgroundSkyRadiance, backgroundSkyVisMag, band, bandwidth, beamOrder, beamQty, boresight, boresightOffAngle, centerWavelength, collapsingLoss, createdAt, createdBy, critShear, darkCurrent, delayGates, description, detectSnr, dutyCycle, earthLimbExclHgt, elAngs, elevationRateGeolm, equipmentType, fanBeamWidth, fft, fgpCrit, filterMismatchFactor, fNum, focalPoint, hFov, hResPixels, k, leftClockAngle, leftGeoBeltLimit, location, loopGain, lunarExclAngle, magDec, magnitudeLimit, maxDeviationAngle, maxIntegrationTime, maxObservableRange, maxRangeLimit, maxWavelength, minIntegrationTime, minRangeLimit, minSignalNoiseRatio, minWavelength, negativeRangeRateLimit, noiseFigure, nonCoherentIntegratedPulses, numIntegratedPulses, numIntegrationFrames, numOpticalIntegrationModes, numWaveforms, opticalIntegrationAngularRates, opticalIntegrationFrames, opticalIntegrationPixelBinnings, opticalIntegrationSnRs, opticalIntegrationTimes, opticalTransmission, origNetwork, patternAbsorptionLoss, patternScanLoss, peakPower, pixelInstantaneousFov, pixelWellDepth, positiveRangeRateLimit, prf, probDetectSnr, probFalseAlarm, pulseRepPeriods, quantumEff, radarFrequency, radarMessageFormat, radarMur, radarPulseWidths, radioFrequency, radomeLoss, rangeGates, rangeSpacings, readNoise, receiveGain, receiveHorizBeamWidth, receiveLoss, receiveVertBeamWidth, refTemp, reqRecords, rightClockAngle, rightGeoBeltLimit, runMeanCodes, signalProcessingLoss, siteCode, solarExclAngle, specAvgSpectraNums, systemNoiseTemperature, taskableRange, tempMedFiltCodes, testNumber, totRecNums, towerHeight, trackAngle, trackSnr, transmitGain, transmitHorizBeamWidth, transmitLoss, transmitPower, transmitVertBeamWidth, trueNorthCorrector, trueTilt, twilightAngle, vertBeamFlag, vertGateSpacings, vertGateWidths, vFov, vResPixels, waveformBandwidths, waveformLoopGains, waveformMaxRanges, waveformMinRanges, waveformPulseWidths, z1MaxRange, z1MinRange, z2MaxRange, z2MinRange, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idSensor,
+                source,
+                id,
+                acceptSampleRanges,
+                analogToDigitalBitSize,
+                aperture,
+                asrScanRate,
+                atmosReceiverLoss,
+                atmosTransmissionLoss,
+                avgAtmosSeeingConditions,
+                azAngs,
+                azimuthRate,
+                backgroundSkyRadiance,
+                backgroundSkyVisMag,
+                band,
+                bandwidth,
+                beamOrder,
+                beamQty,
+                boresight,
+                boresightOffAngle,
+                centerWavelength,
+                collapsingLoss,
+                createdAt,
+                createdBy,
+                critShear,
+                darkCurrent,
+                delayGates,
+                description,
+                detectSnr,
+                dutyCycle,
+                earthLimbExclHgt,
+                elAngs,
+                elevationRateGeolm,
+                equipmentType,
+                fanBeamWidth,
+                fft,
+                fgpCrit,
+                filterMismatchFactor,
+                fNum,
+                focalPoint,
+                hFov,
+                hResPixels,
+                k,
+                leftClockAngle,
+                leftGeoBeltLimit,
+                location,
+                loopGain,
+                lunarExclAngle,
+                magDec,
+                magnitudeLimit,
+                maxDeviationAngle,
+                maxIntegrationTime,
+                maxObservableRange,
+                maxRangeLimit,
+                maxWavelength,
+                minIntegrationTime,
+                minRangeLimit,
+                minSignalNoiseRatio,
+                minWavelength,
+                negativeRangeRateLimit,
+                noiseFigure,
+                nonCoherentIntegratedPulses,
+                numIntegratedPulses,
+                numIntegrationFrames,
+                numOpticalIntegrationModes,
+                numWaveforms,
+                opticalIntegrationAngularRates,
+                opticalIntegrationFrames,
+                opticalIntegrationPixelBinnings,
+                opticalIntegrationSnRs,
+                opticalIntegrationTimes,
+                opticalTransmission,
+                origNetwork,
+                patternAbsorptionLoss,
+                patternScanLoss,
+                peakPower,
+                pixelInstantaneousFov,
+                pixelWellDepth,
+                positiveRangeRateLimit,
+                prf,
+                probDetectSnr,
+                probFalseAlarm,
+                pulseRepPeriods,
+                quantumEff,
+                radarFrequency,
+                radarMessageFormat,
+                radarMur,
+                radarPulseWidths,
+                radioFrequency,
+                radomeLoss,
+                rangeGates,
+                rangeSpacings,
+                readNoise,
+                receiveGain,
+                receiveHorizBeamWidth,
+                receiveLoss,
+                receiveVertBeamWidth,
+                refTemp,
+                reqRecords,
+                rightClockAngle,
+                rightGeoBeltLimit,
+                runMeanCodes,
+                signalProcessingLoss,
+                siteCode,
+                solarExclAngle,
+                specAvgSpectraNums,
+                systemNoiseTemperature,
+                taskableRange,
+                tempMedFiltCodes,
+                testNumber,
+                totRecNums,
+                towerHeight,
+                trackAngle,
+                trackSnr,
+                transmitGain,
+                transmitHorizBeamWidth,
+                transmitLoss,
+                transmitPower,
+                transmitVertBeamWidth,
+                trueNorthCorrector,
+                trueTilt,
+                twilightAngle,
+                vertBeamFlag,
+                vertGateSpacings,
+                vertGateWidths,
+                vFov,
+                vResPixels,
+                waveformBandwidths,
+                waveformLoopGains,
+                waveformMaxRanges,
+                waveformMinRanges,
+                waveformPulseWidths,
+                z1MaxRange,
+                z1MinRange,
+                z2MaxRange,
+                z2MinRange,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -13012,7 +13426,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -13025,12 +13439,47 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SensorlimitsCollection && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && createdAt == other.createdAt && createdBy == other.createdBy && idSensor == other.idSensor && idSensorLimits == other.idSensorLimits && lowerLeftAzimuthLimit == other.lowerLeftAzimuthLimit && lowerLeftElevationLimit == other.lowerLeftElevationLimit && lowerRightAzimuthLimit == other.lowerRightAzimuthLimit && lowerRightElevationLimit == other.lowerRightElevationLimit && origNetwork == other.origNetwork && upperLeftAzimuthLimit == other.upperLeftAzimuthLimit && upperLeftElevationLimit == other.upperLeftElevationLimit && upperRightAzimuthLimit == other.upperRightAzimuthLimit && upperRightElevationLimit == other.upperRightElevationLimit && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is SensorlimitsCollection &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                idSensor == other.idSensor &&
+                idSensorLimits == other.idSensorLimits &&
+                lowerLeftAzimuthLimit == other.lowerLeftAzimuthLimit &&
+                lowerLeftElevationLimit == other.lowerLeftElevationLimit &&
+                lowerRightAzimuthLimit == other.lowerRightAzimuthLimit &&
+                lowerRightElevationLimit == other.lowerRightElevationLimit &&
+                origNetwork == other.origNetwork &&
+                upperLeftAzimuthLimit == other.upperLeftAzimuthLimit &&
+                upperLeftElevationLimit == other.upperLeftElevationLimit &&
+                upperRightAzimuthLimit == other.upperRightAzimuthLimit &&
+                upperRightElevationLimit == other.upperRightElevationLimit &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, createdAt, createdBy, idSensor, idSensorLimits, lowerLeftAzimuthLimit, lowerLeftElevationLimit, lowerRightAzimuthLimit, lowerRightElevationLimit, origNetwork, upperLeftAzimuthLimit, upperLeftElevationLimit, upperRightAzimuthLimit, upperRightElevationLimit, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                createdAt,
+                createdBy,
+                idSensor,
+                idSensorLimits,
+                lowerLeftAzimuthLimit,
+                lowerLeftElevationLimit,
+                lowerRightAzimuthLimit,
+                lowerRightElevationLimit,
+                origNetwork,
+                upperLeftAzimuthLimit,
+                upperLeftElevationLimit,
+                upperRightAzimuthLimit,
+                upperRightElevationLimit,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -13329,12 +13778,18 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SensorObservationType && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && origNetwork == other.origNetwork && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is SensorObservationType &&
+                id == other.id &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                origNetwork == other.origNetwork &&
+                type == other.type &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(id, createdAt, createdBy, origNetwork, type, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(id, createdAt, createdBy, origNetwork, type, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -14034,7 +14489,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -14047,12 +14502,35 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SensorStat && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSensor == other.idSensor && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && lastObTime == other.lastObTime && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is SensorStat &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idSensor == other.idSensor &&
+                source == other.source &&
+                id == other.id &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                lastObTime == other.lastObTime &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSensor, source, id, createdAt, createdBy, lastObTime, updatedAt, updatedBy, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idSensor,
+                source,
+                id,
+                createdAt,
+                createdBy,
+                lastObTime,
+                updatedAt,
+                updatedBy,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -14349,12 +14827,18 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SensorType && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && origNetwork == other.origNetwork && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is SensorType &&
+                id == other.id &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                origNetwork == other.origNetwork &&
+                type == other.type &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(id, createdAt, createdBy, origNetwork, type, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(id, createdAt, createdBy, origNetwork, type, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -14367,10 +14851,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SensorUpdateParams && id == other.id && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SensorUpdateParams &&
+            id == other.id &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(id, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(id, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SensorUpdateParams{id=$id, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -261,10 +261,24 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HistoryCountParams && firstResult == other.firstResult && maxResults == other.maxResults && pointEndTime == other.pointEndTime && pointStartTime == other.pointStartTime && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HistoryCountParams &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            pointEndTime == other.pointEndTime &&
+            pointStartTime == other.pointStartTime &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(firstResult, maxResults, pointEndTime, pointStartTime, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            firstResult,
+            maxResults,
+            pointEndTime,
+            pointStartTime,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "HistoryCountParams{firstResult=$firstResult, maxResults=$maxResults, pointEndTime=$pointEndTime, pointStartTime=$pointStartTime, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

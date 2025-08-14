@@ -212,10 +212,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is StateVectorCreateParams && stateVectorIngest == other.stateVectorIngest && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is StateVectorCreateParams &&
+            stateVectorIngest == other.stateVectorIngest &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(stateVectorIngest, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(stateVectorIngest, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "StateVectorCreateParams{stateVectorIngest=$stateVectorIngest, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

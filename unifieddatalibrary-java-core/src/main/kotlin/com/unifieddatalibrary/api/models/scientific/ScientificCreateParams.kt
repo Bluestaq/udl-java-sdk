@@ -1592,12 +1592,49 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && spacecraftId == other.spacecraftId && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && entity == other.entity && frequencyBand == other.frequencyBand && hostedForCompanyOrgId == other.hostedForCompanyOrgId && idEntity == other.idEntity && manufacturerOrgId == other.manufacturerOrgId && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && payloadCategory == other.payloadCategory && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                name == other.name &&
+                source == other.source &&
+                spacecraftId == other.spacecraftId &&
+                id == other.id &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                entity == other.entity &&
+                frequencyBand == other.frequencyBand &&
+                hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+                idEntity == other.idEntity &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                notes == other.notes &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                payloadCategory == other.payloadCategory &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, spacecraftId, id, createdAt, createdBy, entity, frequencyBand, hostedForCompanyOrgId, idEntity, manufacturerOrgId, notes, origin, origNetwork, payloadCategory, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                name,
+                source,
+                spacecraftId,
+                id,
+                createdAt,
+                createdBy,
+                entity,
+                frequencyBand,
+                hostedForCompanyOrgId,
+                idEntity,
+                manufacturerOrgId,
+                notes,
+                origin,
+                origNetwork,
+                payloadCategory,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1750,7 +1787,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1763,10 +1800,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ScientificCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is ScientificCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "ScientificCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

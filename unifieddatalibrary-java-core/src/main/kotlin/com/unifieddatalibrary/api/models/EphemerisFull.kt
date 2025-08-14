@@ -1180,7 +1180,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1193,12 +1193,57 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EphemerisFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && ts == other.ts && xpos == other.xpos && xvel == other.xvel && ypos == other.ypos && yvel == other.yvel && zpos == other.zpos && zvel == other.zvel && id == other.id && cov == other.cov && createdAt == other.createdAt && createdBy == other.createdBy && esId == other.esId && idOnOrbit == other.idOnOrbit && origin == other.origin && origObjectId == other.origObjectId && xaccel == other.xaccel && yaccel == other.yaccel && zaccel == other.zaccel && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is EphemerisFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            ts == other.ts &&
+            xpos == other.xpos &&
+            xvel == other.xvel &&
+            ypos == other.ypos &&
+            yvel == other.yvel &&
+            zpos == other.zpos &&
+            zvel == other.zvel &&
+            id == other.id &&
+            cov == other.cov &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            esId == other.esId &&
+            idOnOrbit == other.idOnOrbit &&
+            origin == other.origin &&
+            origObjectId == other.origObjectId &&
+            xaccel == other.xaccel &&
+            yaccel == other.yaccel &&
+            zaccel == other.zaccel &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, ts, xpos, xvel, ypos, yvel, zpos, zvel, id, cov, createdAt, createdBy, esId, idOnOrbit, origin, origObjectId, xaccel, yaccel, zaccel, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            ts,
+            xpos,
+            xvel,
+            ypos,
+            yvel,
+            zpos,
+            zvel,
+            id,
+            cov,
+            createdAt,
+            createdBy,
+            esId,
+            idOnOrbit,
+            origin,
+            origObjectId,
+            xaccel,
+            yaccel,
+            zaccel,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

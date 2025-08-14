@@ -2483,12 +2483,77 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && endTime == other.endTime && siteCode == other.siteCode && source == other.source && startTime == other.startTime && bodyId == other.bodyId && activity == other.activity && approver == other.approver && changer == other.changer && createdAt == other.createdAt && createdBy == other.createdBy && duration == other.duration && eowId == other.eowId && equipStatus == other.equipStatus && idSensor == other.idSensor && impactedFaces == other.impactedFaces && inactiveDate == other.inactiveDate && lineNumber == other.lineNumber && mdOpsCap == other.mdOpsCap && mwOpsCap == other.mwOpsCap && origin == other.origin && origNetwork == other.origNetwork && priority == other.priority && recall == other.recall && rel == other.rel && remark == other.remark && requestor == other.requestor && resource == other.resource && rev == other.rev && ssOpsCap == other.ssOpsCap && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                endTime == other.endTime &&
+                siteCode == other.siteCode &&
+                source == other.source &&
+                startTime == other.startTime &&
+                bodyId == other.bodyId &&
+                activity == other.activity &&
+                approver == other.approver &&
+                changer == other.changer &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                duration == other.duration &&
+                eowId == other.eowId &&
+                equipStatus == other.equipStatus &&
+                idSensor == other.idSensor &&
+                impactedFaces == other.impactedFaces &&
+                inactiveDate == other.inactiveDate &&
+                lineNumber == other.lineNumber &&
+                mdOpsCap == other.mdOpsCap &&
+                mwOpsCap == other.mwOpsCap &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                priority == other.priority &&
+                recall == other.recall &&
+                rel == other.rel &&
+                remark == other.remark &&
+                requestor == other.requestor &&
+                resource == other.resource &&
+                rev == other.rev &&
+                ssOpsCap == other.ssOpsCap &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, endTime, siteCode, source, startTime, bodyId, activity, approver, changer, createdAt, createdBy, duration, eowId, equipStatus, idSensor, impactedFaces, inactiveDate, lineNumber, mdOpsCap, mwOpsCap, origin, origNetwork, priority, recall, rel, remark, requestor, resource, rev, ssOpsCap, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                endTime,
+                siteCode,
+                source,
+                startTime,
+                bodyId,
+                activity,
+                approver,
+                changer,
+                createdAt,
+                createdBy,
+                duration,
+                eowId,
+                equipStatus,
+                idSensor,
+                impactedFaces,
+                inactiveDate,
+                lineNumber,
+                mdOpsCap,
+                mwOpsCap,
+                origin,
+                origNetwork,
+                priority,
+                recall,
+                rel,
+                remark,
+                requestor,
+                resource,
+                rev,
+                ssOpsCap,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2641,7 +2706,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2654,10 +2719,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SensorMaintenanceUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SensorMaintenanceUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SensorMaintenanceUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

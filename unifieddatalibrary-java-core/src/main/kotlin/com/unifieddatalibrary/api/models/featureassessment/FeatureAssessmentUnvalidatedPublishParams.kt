@@ -2162,7 +2162,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -2175,12 +2175,93 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && featureTs == other.featureTs && featureUoM == other.featureUoM && idAnalyticImagery == other.idAnalyticImagery && source == other.source && id == other.id && agjson == other.agjson && andims == other.andims && annLims == other.annLims && annText == other.annText && area == other.area && asrid == other.asrid && assessment == other.assessment && atext == other.atext && atype == other.atype && confidence == other.confidence && createdAt == other.createdAt && createdBy == other.createdBy && externalId == other.externalId && featureArray == other.featureArray && featureBool == other.featureBool && featureString == other.featureString && featureStringArray == other.featureStringArray && featureValue == other.featureValue && heading == other.heading && height == other.height && length == other.length && name == other.name && origin == other.origin && origNetwork == other.origNetwork && sourceDl == other.sourceDl && speed == other.speed && srcIds == other.srcIds && srcTs == other.srcTs && srcTyps == other.srcTyps && tags == other.tags && transactionId == other.transactionId && type == other.type && width == other.width /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                featureTs == other.featureTs &&
+                featureUoM == other.featureUoM &&
+                idAnalyticImagery == other.idAnalyticImagery &&
+                source == other.source &&
+                id == other.id &&
+                agjson == other.agjson &&
+                andims == other.andims &&
+                annLims == other.annLims &&
+                annText == other.annText &&
+                area == other.area &&
+                asrid == other.asrid &&
+                assessment == other.assessment &&
+                atext == other.atext &&
+                atype == other.atype &&
+                confidence == other.confidence &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                externalId == other.externalId &&
+                featureArray == other.featureArray &&
+                featureBool == other.featureBool &&
+                featureString == other.featureString &&
+                featureStringArray == other.featureStringArray &&
+                featureValue == other.featureValue &&
+                heading == other.heading &&
+                height == other.height &&
+                length == other.length &&
+                name == other.name &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                sourceDl == other.sourceDl &&
+                speed == other.speed &&
+                srcIds == other.srcIds &&
+                srcTs == other.srcTs &&
+                srcTyps == other.srcTyps &&
+                tags == other.tags &&
+                transactionId == other.transactionId &&
+                type == other.type &&
+                width == other.width
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, featureTs, featureUoM, idAnalyticImagery, source, id, agjson, andims, annLims, annText, area, asrid, assessment, atext, atype, confidence, createdAt, createdBy, externalId, featureArray, featureBool, featureString, featureStringArray, featureValue, heading, height, length, name, origin, origNetwork, sourceDl, speed, srcIds, srcTs, srcTyps, tags, transactionId, type, width) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                featureTs,
+                featureUoM,
+                idAnalyticImagery,
+                source,
+                id,
+                agjson,
+                andims,
+                annLims,
+                annText,
+                area,
+                asrid,
+                assessment,
+                atext,
+                atype,
+                confidence,
+                createdAt,
+                createdBy,
+                externalId,
+                featureArray,
+                featureBool,
+                featureString,
+                featureStringArray,
+                featureValue,
+                heading,
+                height,
+                length,
+                name,
+                origin,
+                origNetwork,
+                sourceDl,
+                speed,
+                srcIds,
+                srcTs,
+                srcTyps,
+                tags,
+                transactionId,
+                type,
+                width,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2193,10 +2274,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is FeatureAssessmentUnvalidatedPublishParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is FeatureAssessmentUnvalidatedPublishParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "FeatureAssessmentUnvalidatedPublishParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

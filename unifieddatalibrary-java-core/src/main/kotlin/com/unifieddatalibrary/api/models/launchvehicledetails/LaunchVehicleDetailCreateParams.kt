@@ -4382,12 +4382,125 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idLaunchVehicle == other.idLaunchVehicle && source == other.source && id == other.id && attitudeAccuracy == other.attitudeAccuracy && category == other.category && createdAt == other.createdAt && createdBy == other.createdBy && deploymentRotationRate == other.deploymentRotationRate && diameter == other.diameter && estLaunchPrice == other.estLaunchPrice && estLaunchPriceTypical == other.estLaunchPriceTypical && fairingExternalDiameter == other.fairingExternalDiameter && fairingInternalDiameter == other.fairingInternalDiameter && fairingLength == other.fairingLength && fairingMass == other.fairingMass && fairingMaterial == other.fairingMaterial && fairingName == other.fairingName && fairingNotes == other.fairingNotes && family == other.family && geoPayloadMass == other.geoPayloadMass && gtoInj3SigAccuracyApogeeMargin == other.gtoInj3SigAccuracyApogeeMargin && gtoInj3SigAccuracyApogeeTarget == other.gtoInj3SigAccuracyApogeeTarget && gtoInj3SigAccuracyInclinationMargin == other.gtoInj3SigAccuracyInclinationMargin && gtoInj3SigAccuracyInclinationTarget == other.gtoInj3SigAccuracyInclinationTarget && gtoInj3SigAccuracyPerigeeMargin == other.gtoInj3SigAccuracyPerigeeMargin && gtoInj3SigAccuracyPerigeeTarget == other.gtoInj3SigAccuracyPerigeeTarget && gtoPayloadMass == other.gtoPayloadMass && launchMass == other.launchMass && launchPrefix == other.launchPrefix && length == other.length && leoPayloadMass == other.leoPayloadMass && manufacturerOrgId == other.manufacturerOrgId && maxAccelLoad == other.maxAccelLoad && maxAcousticLevel == other.maxAcousticLevel && maxAcousticLevelRange == other.maxAcousticLevelRange && maxFairingPressureChange == other.maxFairingPressureChange && maxFlightShockForce == other.maxFlightShockForce && maxFlightShockFreq == other.maxFlightShockFreq && maxPayloadFreqLat == other.maxPayloadFreqLat && maxPayloadFreqLon == other.maxPayloadFreqLon && minorVariant == other.minorVariant && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && oxidizer == other.oxidizer && payloadNotes == other.payloadNotes && payloadSeparationRate == other.payloadSeparationRate && propellant == other.propellant && soundPressureLevel == other.soundPressureLevel && sourceUrl == other.sourceUrl && ssoPayloadMass == other.ssoPayloadMass && tags == other.tags && variant == other.variant && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idLaunchVehicle == other.idLaunchVehicle &&
+                source == other.source &&
+                id == other.id &&
+                attitudeAccuracy == other.attitudeAccuracy &&
+                category == other.category &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                deploymentRotationRate == other.deploymentRotationRate &&
+                diameter == other.diameter &&
+                estLaunchPrice == other.estLaunchPrice &&
+                estLaunchPriceTypical == other.estLaunchPriceTypical &&
+                fairingExternalDiameter == other.fairingExternalDiameter &&
+                fairingInternalDiameter == other.fairingInternalDiameter &&
+                fairingLength == other.fairingLength &&
+                fairingMass == other.fairingMass &&
+                fairingMaterial == other.fairingMaterial &&
+                fairingName == other.fairingName &&
+                fairingNotes == other.fairingNotes &&
+                family == other.family &&
+                geoPayloadMass == other.geoPayloadMass &&
+                gtoInj3SigAccuracyApogeeMargin == other.gtoInj3SigAccuracyApogeeMargin &&
+                gtoInj3SigAccuracyApogeeTarget == other.gtoInj3SigAccuracyApogeeTarget &&
+                gtoInj3SigAccuracyInclinationMargin == other.gtoInj3SigAccuracyInclinationMargin &&
+                gtoInj3SigAccuracyInclinationTarget == other.gtoInj3SigAccuracyInclinationTarget &&
+                gtoInj3SigAccuracyPerigeeMargin == other.gtoInj3SigAccuracyPerigeeMargin &&
+                gtoInj3SigAccuracyPerigeeTarget == other.gtoInj3SigAccuracyPerigeeTarget &&
+                gtoPayloadMass == other.gtoPayloadMass &&
+                launchMass == other.launchMass &&
+                launchPrefix == other.launchPrefix &&
+                length == other.length &&
+                leoPayloadMass == other.leoPayloadMass &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                maxAccelLoad == other.maxAccelLoad &&
+                maxAcousticLevel == other.maxAcousticLevel &&
+                maxAcousticLevelRange == other.maxAcousticLevelRange &&
+                maxFairingPressureChange == other.maxFairingPressureChange &&
+                maxFlightShockForce == other.maxFlightShockForce &&
+                maxFlightShockFreq == other.maxFlightShockFreq &&
+                maxPayloadFreqLat == other.maxPayloadFreqLat &&
+                maxPayloadFreqLon == other.maxPayloadFreqLon &&
+                minorVariant == other.minorVariant &&
+                notes == other.notes &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                oxidizer == other.oxidizer &&
+                payloadNotes == other.payloadNotes &&
+                payloadSeparationRate == other.payloadSeparationRate &&
+                propellant == other.propellant &&
+                soundPressureLevel == other.soundPressureLevel &&
+                sourceUrl == other.sourceUrl &&
+                ssoPayloadMass == other.ssoPayloadMass &&
+                tags == other.tags &&
+                variant == other.variant &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idLaunchVehicle, source, id, attitudeAccuracy, category, createdAt, createdBy, deploymentRotationRate, diameter, estLaunchPrice, estLaunchPriceTypical, fairingExternalDiameter, fairingInternalDiameter, fairingLength, fairingMass, fairingMaterial, fairingName, fairingNotes, family, geoPayloadMass, gtoInj3SigAccuracyApogeeMargin, gtoInj3SigAccuracyApogeeTarget, gtoInj3SigAccuracyInclinationMargin, gtoInj3SigAccuracyInclinationTarget, gtoInj3SigAccuracyPerigeeMargin, gtoInj3SigAccuracyPerigeeTarget, gtoPayloadMass, launchMass, launchPrefix, length, leoPayloadMass, manufacturerOrgId, maxAccelLoad, maxAcousticLevel, maxAcousticLevelRange, maxFairingPressureChange, maxFlightShockForce, maxFlightShockFreq, maxPayloadFreqLat, maxPayloadFreqLon, minorVariant, notes, origin, origNetwork, oxidizer, payloadNotes, payloadSeparationRate, propellant, soundPressureLevel, sourceUrl, ssoPayloadMass, tags, variant, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idLaunchVehicle,
+                source,
+                id,
+                attitudeAccuracy,
+                category,
+                createdAt,
+                createdBy,
+                deploymentRotationRate,
+                diameter,
+                estLaunchPrice,
+                estLaunchPriceTypical,
+                fairingExternalDiameter,
+                fairingInternalDiameter,
+                fairingLength,
+                fairingMass,
+                fairingMaterial,
+                fairingName,
+                fairingNotes,
+                family,
+                geoPayloadMass,
+                gtoInj3SigAccuracyApogeeMargin,
+                gtoInj3SigAccuracyApogeeTarget,
+                gtoInj3SigAccuracyInclinationMargin,
+                gtoInj3SigAccuracyInclinationTarget,
+                gtoInj3SigAccuracyPerigeeMargin,
+                gtoInj3SigAccuracyPerigeeTarget,
+                gtoPayloadMass,
+                launchMass,
+                launchPrefix,
+                length,
+                leoPayloadMass,
+                manufacturerOrgId,
+                maxAccelLoad,
+                maxAcousticLevel,
+                maxAcousticLevelRange,
+                maxFairingPressureChange,
+                maxFlightShockForce,
+                maxFlightShockFreq,
+                maxPayloadFreqLat,
+                maxPayloadFreqLon,
+                minorVariant,
+                notes,
+                origin,
+                origNetwork,
+                oxidizer,
+                payloadNotes,
+                payloadSeparationRate,
+                propellant,
+                soundPressureLevel,
+                sourceUrl,
+                ssoPayloadMass,
+                tags,
+                variant,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4540,7 +4653,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4553,10 +4666,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LaunchVehicleDetailCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is LaunchVehicleDetailCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "LaunchVehicleDetailCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

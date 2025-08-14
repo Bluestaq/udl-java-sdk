@@ -385,7 +385,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is PaperStatus && value == other.value /* spotless:on */
+            return other is PaperStatus && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -398,10 +398,26 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CrewpaperUploadPdfParams && aircraftSortieIds == other.aircraftSortieIds && classificationMarking == other.classificationMarking && paperStatus == other.paperStatus && papersVersion == other.papersVersion && fileContent == other.fileContent && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is CrewpaperUploadPdfParams &&
+            aircraftSortieIds == other.aircraftSortieIds &&
+            classificationMarking == other.classificationMarking &&
+            paperStatus == other.paperStatus &&
+            papersVersion == other.papersVersion &&
+            fileContent == other.fileContent &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(aircraftSortieIds, classificationMarking, paperStatus, papersVersion, fileContent, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            aircraftSortieIds,
+            classificationMarking,
+            paperStatus,
+            papersVersion,
+            fileContent,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "CrewpaperUploadPdfParams{aircraftSortieIds=$aircraftSortieIds, classificationMarking=$classificationMarking, paperStatus=$paperStatus, papersVersion=$papersVersion, fileContent=$fileContent, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

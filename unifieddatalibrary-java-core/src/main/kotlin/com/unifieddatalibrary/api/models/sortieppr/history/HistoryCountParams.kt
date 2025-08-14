@@ -241,10 +241,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HistoryCountParams && idSortie == other.idSortie && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HistoryCountParams &&
+            idSortie == other.idSortie &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(idSortie, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(idSortie, firstResult, maxResults, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "HistoryCountParams{idSortie=$idSortie, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

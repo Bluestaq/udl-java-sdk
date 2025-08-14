@@ -4606,7 +4606,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -6120,7 +6120,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -6321,7 +6321,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Category && value == other.value /* spotless:on */
+                return other is Category && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -6478,7 +6478,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is ObjectType && value == other.value /* spotless:on */
+                return other is ObjectType && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -6491,12 +6491,71 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is OnOrbit && classificationMarking == other.classificationMarking && dataMode == other.dataMode && satNo == other.satNo && source == other.source && altName == other.altName && antennas == other.antennas && batteries == other.batteries && category == other.category && commonName == other.commonName && constellation == other.constellation && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && decayDate == other.decayDate && idOnOrbit == other.idOnOrbit && intlDes == other.intlDes && launchDate == other.launchDate && launchSiteId == other.launchSiteId && lifetimeYears == other.lifetimeYears && missionNumber == other.missionNumber && objectType == other.objectType && onorbitDetails == other.onorbitDetails && origin == other.origin && origNetwork == other.origNetwork && solarArrays == other.solarArrays && thrusters == other.thrusters && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is OnOrbit &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                satNo == other.satNo &&
+                source == other.source &&
+                altName == other.altName &&
+                antennas == other.antennas &&
+                batteries == other.batteries &&
+                category == other.category &&
+                commonName == other.commonName &&
+                constellation == other.constellation &&
+                countryCode == other.countryCode &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                decayDate == other.decayDate &&
+                idOnOrbit == other.idOnOrbit &&
+                intlDes == other.intlDes &&
+                launchDate == other.launchDate &&
+                launchSiteId == other.launchSiteId &&
+                lifetimeYears == other.lifetimeYears &&
+                missionNumber == other.missionNumber &&
+                objectType == other.objectType &&
+                onorbitDetails == other.onorbitDetails &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                solarArrays == other.solarArrays &&
+                thrusters == other.thrusters &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, satNo, source, altName, antennas, batteries, category, commonName, constellation, countryCode, createdAt, createdBy, decayDate, idOnOrbit, intlDes, launchDate, launchSiteId, lifetimeYears, missionNumber, objectType, onorbitDetails, origin, origNetwork, solarArrays, thrusters, updatedAt, updatedBy, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                satNo,
+                source,
+                altName,
+                antennas,
+                batteries,
+                category,
+                commonName,
+                constellation,
+                countryCode,
+                createdAt,
+                createdBy,
+                decayDate,
+                idOnOrbit,
+                intlDes,
+                launchDate,
+                launchSiteId,
+                lifetimeYears,
+                missionNumber,
+                objectType,
+                onorbitDetails,
+                origin,
+                origNetwork,
+                solarArrays,
+                thrusters,
+                updatedAt,
+                updatedBy,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -7565,7 +7624,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -7578,12 +7637,53 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Scientific && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && spacecraftId == other.spacecraftId && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && entity == other.entity && frequencyBand == other.frequencyBand && hostedForCompanyOrgId == other.hostedForCompanyOrgId && idEntity == other.idEntity && manufacturerOrgId == other.manufacturerOrgId && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && payloadCategory == other.payloadCategory && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Scientific &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                name == other.name &&
+                source == other.source &&
+                spacecraftId == other.spacecraftId &&
+                id == other.id &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                entity == other.entity &&
+                frequencyBand == other.frequencyBand &&
+                hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+                idEntity == other.idEntity &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                notes == other.notes &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                payloadCategory == other.payloadCategory &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, spacecraftId, id, createdAt, createdBy, entity, frequencyBand, hostedForCompanyOrgId, idEntity, manufacturerOrgId, notes, origin, origNetwork, payloadCategory, updatedAt, updatedBy, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                name,
+                source,
+                spacecraftId,
+                id,
+                createdAt,
+                createdBy,
+                entity,
+                frequencyBand,
+                hostedForCompanyOrgId,
+                idEntity,
+                manufacturerOrgId,
+                notes,
+                origin,
+                origNetwork,
+                payloadCategory,
+                updatedAt,
+                updatedBy,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -9540,7 +9640,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -9553,12 +9653,95 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SeradataCommDetail && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && band == other.band && bandwidth == other.bandwidth && createdAt == other.createdAt && createdBy == other.createdBy && eirp == other.eirp && estHtsTotalCapacity == other.estHtsTotalCapacity && estHtsTotalUserDownlinkBandwidthPerBeam == other.estHtsTotalUserDownlinkBandwidthPerBeam && estHtsTotalUserUplinkBandwidthPerBeam == other.estHtsTotalUserUplinkBandwidthPerBeam && gatewayDownlinkFrom == other.gatewayDownlinkFrom && gatewayDownlinkTo == other.gatewayDownlinkTo && gatewayUplinkFrom == other.gatewayUplinkFrom && gatewayUplinkTo == other.gatewayUplinkTo && hostedForCompanyOrgId == other.hostedForCompanyOrgId && htsNumUserSpotBeams == other.htsNumUserSpotBeams && htsUserDownlinkBandwidthPerBeam == other.htsUserDownlinkBandwidthPerBeam && htsUserUplinkBandwidthPerBeam == other.htsUserUplinkBandwidthPerBeam && idComm == other.idComm && manufacturerOrgId == other.manufacturerOrgId && num36MhzEquivalentTransponders == other.num36MhzEquivalentTransponders && numOperationalTransponders == other.numOperationalTransponders && numSpareTransponders == other.numSpareTransponders && origin == other.origin && origNetwork == other.origNetwork && payloadNotes == other.payloadNotes && polarization == other.polarization && solidStatePowerAmp == other.solidStatePowerAmp && spacecraftId == other.spacecraftId && tradeLeaseOrgId == other.tradeLeaseOrgId && travelingWaveTubeAmplifier == other.travelingWaveTubeAmplifier && updatedAt == other.updatedAt && updatedBy == other.updatedBy && userDownlinkFrom == other.userDownlinkFrom && userDownlinkTo == other.userDownlinkTo && userUplinkFrom == other.userUplinkFrom && userUplinkTo == other.userUplinkTo && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is SeradataCommDetail &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                id == other.id &&
+                band == other.band &&
+                bandwidth == other.bandwidth &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                eirp == other.eirp &&
+                estHtsTotalCapacity == other.estHtsTotalCapacity &&
+                estHtsTotalUserDownlinkBandwidthPerBeam ==
+                    other.estHtsTotalUserDownlinkBandwidthPerBeam &&
+                estHtsTotalUserUplinkBandwidthPerBeam ==
+                    other.estHtsTotalUserUplinkBandwidthPerBeam &&
+                gatewayDownlinkFrom == other.gatewayDownlinkFrom &&
+                gatewayDownlinkTo == other.gatewayDownlinkTo &&
+                gatewayUplinkFrom == other.gatewayUplinkFrom &&
+                gatewayUplinkTo == other.gatewayUplinkTo &&
+                hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+                htsNumUserSpotBeams == other.htsNumUserSpotBeams &&
+                htsUserDownlinkBandwidthPerBeam == other.htsUserDownlinkBandwidthPerBeam &&
+                htsUserUplinkBandwidthPerBeam == other.htsUserUplinkBandwidthPerBeam &&
+                idComm == other.idComm &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                num36MhzEquivalentTransponders == other.num36MhzEquivalentTransponders &&
+                numOperationalTransponders == other.numOperationalTransponders &&
+                numSpareTransponders == other.numSpareTransponders &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                payloadNotes == other.payloadNotes &&
+                polarization == other.polarization &&
+                solidStatePowerAmp == other.solidStatePowerAmp &&
+                spacecraftId == other.spacecraftId &&
+                tradeLeaseOrgId == other.tradeLeaseOrgId &&
+                travelingWaveTubeAmplifier == other.travelingWaveTubeAmplifier &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                userDownlinkFrom == other.userDownlinkFrom &&
+                userDownlinkTo == other.userDownlinkTo &&
+                userUplinkFrom == other.userUplinkFrom &&
+                userUplinkTo == other.userUplinkTo &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, id, band, bandwidth, createdAt, createdBy, eirp, estHtsTotalCapacity, estHtsTotalUserDownlinkBandwidthPerBeam, estHtsTotalUserUplinkBandwidthPerBeam, gatewayDownlinkFrom, gatewayDownlinkTo, gatewayUplinkFrom, gatewayUplinkTo, hostedForCompanyOrgId, htsNumUserSpotBeams, htsUserDownlinkBandwidthPerBeam, htsUserUplinkBandwidthPerBeam, idComm, manufacturerOrgId, num36MhzEquivalentTransponders, numOperationalTransponders, numSpareTransponders, origin, origNetwork, payloadNotes, polarization, solidStatePowerAmp, spacecraftId, tradeLeaseOrgId, travelingWaveTubeAmplifier, updatedAt, updatedBy, userDownlinkFrom, userDownlinkTo, userUplinkFrom, userUplinkTo, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                id,
+                band,
+                bandwidth,
+                createdAt,
+                createdBy,
+                eirp,
+                estHtsTotalCapacity,
+                estHtsTotalUserDownlinkBandwidthPerBeam,
+                estHtsTotalUserUplinkBandwidthPerBeam,
+                gatewayDownlinkFrom,
+                gatewayDownlinkTo,
+                gatewayUplinkFrom,
+                gatewayUplinkTo,
+                hostedForCompanyOrgId,
+                htsNumUserSpotBeams,
+                htsUserDownlinkBandwidthPerBeam,
+                htsUserUplinkBandwidthPerBeam,
+                idComm,
+                manufacturerOrgId,
+                num36MhzEquivalentTransponders,
+                numOperationalTransponders,
+                numSpareTransponders,
+                origin,
+                origNetwork,
+                payloadNotes,
+                polarization,
+                solidStatePowerAmp,
+                spacecraftId,
+                tradeLeaseOrgId,
+                travelingWaveTubeAmplifier,
+                updatedAt,
+                updatedBy,
+                userDownlinkFrom,
+                userDownlinkTo,
+                userUplinkFrom,
+                userUplinkTo,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -10850,7 +11033,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -10863,12 +11046,63 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SeradataEarlyWarning && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && spacecraftId == other.spacecraftId && id == other.id && bestResolution == other.bestResolution && createdAt == other.createdAt && createdBy == other.createdBy && earthPointing == other.earthPointing && frequencyLimits == other.frequencyLimits && groundStationLocations == other.groundStationLocations && groundStations == other.groundStations && hostedForCompanyOrgId == other.hostedForCompanyOrgId && idIr == other.idIr && manufacturerOrgId == other.manufacturerOrgId && missileLaunchPhaseDetectionAbility == other.missileLaunchPhaseDetectionAbility && name == other.name && origin == other.origin && origNetwork == other.origNetwork && partnerSpacecraftId == other.partnerSpacecraftId && payloadNotes == other.payloadNotes && spectralBands == other.spectralBands && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is SeradataEarlyWarning &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                spacecraftId == other.spacecraftId &&
+                id == other.id &&
+                bestResolution == other.bestResolution &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                earthPointing == other.earthPointing &&
+                frequencyLimits == other.frequencyLimits &&
+                groundStationLocations == other.groundStationLocations &&
+                groundStations == other.groundStations &&
+                hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+                idIr == other.idIr &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                missileLaunchPhaseDetectionAbility == other.missileLaunchPhaseDetectionAbility &&
+                name == other.name &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                partnerSpacecraftId == other.partnerSpacecraftId &&
+                payloadNotes == other.payloadNotes &&
+                spectralBands == other.spectralBands &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, spacecraftId, id, bestResolution, createdAt, createdBy, earthPointing, frequencyLimits, groundStationLocations, groundStations, hostedForCompanyOrgId, idIr, manufacturerOrgId, missileLaunchPhaseDetectionAbility, name, origin, origNetwork, partnerSpacecraftId, payloadNotes, spectralBands, updatedAt, updatedBy, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                spacecraftId,
+                id,
+                bestResolution,
+                createdAt,
+                createdBy,
+                earthPointing,
+                frequencyLimits,
+                groundStationLocations,
+                groundStations,
+                hostedForCompanyOrgId,
+                idIr,
+                manufacturerOrgId,
+                missileLaunchPhaseDetectionAbility,
+                name,
+                origin,
+                origNetwork,
+                partnerSpacecraftId,
+                payloadNotes,
+                spectralBands,
+                updatedAt,
+                updatedBy,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -12095,7 +12329,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -12108,12 +12342,61 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SeradataNavigation && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && spacecraftId == other.spacecraftId && id == other.id && areaCoverage == other.areaCoverage && clockType == other.clockType && createdAt == other.createdAt && createdBy == other.createdBy && hostedForCompanyOrgId == other.hostedForCompanyOrgId && idNavigation == other.idNavigation && locationAccuracy == other.locationAccuracy && manufacturerOrgId == other.manufacturerOrgId && modeFrequency == other.modeFrequency && modes == other.modes && name == other.name && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && partnerSpacecraftId == other.partnerSpacecraftId && payloadType == other.payloadType && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is SeradataNavigation &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                spacecraftId == other.spacecraftId &&
+                id == other.id &&
+                areaCoverage == other.areaCoverage &&
+                clockType == other.clockType &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+                idNavigation == other.idNavigation &&
+                locationAccuracy == other.locationAccuracy &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                modeFrequency == other.modeFrequency &&
+                modes == other.modes &&
+                name == other.name &&
+                notes == other.notes &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                partnerSpacecraftId == other.partnerSpacecraftId &&
+                payloadType == other.payloadType &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, spacecraftId, id, areaCoverage, clockType, createdAt, createdBy, hostedForCompanyOrgId, idNavigation, locationAccuracy, manufacturerOrgId, modeFrequency, modes, name, notes, origin, origNetwork, partnerSpacecraftId, payloadType, updatedAt, updatedBy, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                spacecraftId,
+                id,
+                areaCoverage,
+                clockType,
+                createdAt,
+                createdBy,
+                hostedForCompanyOrgId,
+                idNavigation,
+                locationAccuracy,
+                manufacturerOrgId,
+                modeFrequency,
+                modes,
+                name,
+                notes,
+                origin,
+                origNetwork,
+                partnerSpacecraftId,
+                payloadType,
+                updatedAt,
+                updatedBy,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -13566,7 +13849,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -13579,12 +13862,71 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SeradataOpticalPayload && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && spacecraftId == other.spacecraftId && id == other.id && bestResolution == other.bestResolution && createdAt == other.createdAt && createdBy == other.createdBy && fieldOfRegard == other.fieldOfRegard && fieldOfView == other.fieldOfView && groundStationLocations == other.groundStationLocations && groundStations == other.groundStations && hostedForCompanyOrgId == other.hostedForCompanyOrgId && idSensor == other.idSensor && imagingPayloadCategory == other.imagingPayloadCategory && manufacturerOrgId == other.manufacturerOrgId && name == other.name && notes == other.notes && numberOfFilmReturnCanisters == other.numberOfFilmReturnCanisters && origin == other.origin && origNetwork == other.origNetwork && pointingMethod == other.pointingMethod && recorderSize == other.recorderSize && spectralBand == other.spectralBand && spectralFrequencyLimits == other.spectralFrequencyLimits && swathWidth == other.swathWidth && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is SeradataOpticalPayload &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                spacecraftId == other.spacecraftId &&
+                id == other.id &&
+                bestResolution == other.bestResolution &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                fieldOfRegard == other.fieldOfRegard &&
+                fieldOfView == other.fieldOfView &&
+                groundStationLocations == other.groundStationLocations &&
+                groundStations == other.groundStations &&
+                hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+                idSensor == other.idSensor &&
+                imagingPayloadCategory == other.imagingPayloadCategory &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                name == other.name &&
+                notes == other.notes &&
+                numberOfFilmReturnCanisters == other.numberOfFilmReturnCanisters &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                pointingMethod == other.pointingMethod &&
+                recorderSize == other.recorderSize &&
+                spectralBand == other.spectralBand &&
+                spectralFrequencyLimits == other.spectralFrequencyLimits &&
+                swathWidth == other.swathWidth &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, spacecraftId, id, bestResolution, createdAt, createdBy, fieldOfRegard, fieldOfView, groundStationLocations, groundStations, hostedForCompanyOrgId, idSensor, imagingPayloadCategory, manufacturerOrgId, name, notes, numberOfFilmReturnCanisters, origin, origNetwork, pointingMethod, recorderSize, spectralBand, spectralFrequencyLimits, swathWidth, updatedAt, updatedBy, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                spacecraftId,
+                id,
+                bestResolution,
+                createdAt,
+                createdBy,
+                fieldOfRegard,
+                fieldOfView,
+                groundStationLocations,
+                groundStations,
+                hostedForCompanyOrgId,
+                idSensor,
+                imagingPayloadCategory,
+                manufacturerOrgId,
+                name,
+                notes,
+                numberOfFilmReturnCanisters,
+                origin,
+                origNetwork,
+                pointingMethod,
+                recorderSize,
+                spectralBand,
+                spectralFrequencyLimits,
+                swathWidth,
+                updatedAt,
+                updatedBy,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -15283,7 +15625,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -15296,12 +15638,84 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SeradataRadarPayload && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && spacecraftId == other.spacecraftId && id == other.id && bandwidth == other.bandwidth && bestResolution == other.bestResolution && category == other.category && constellationInterferometricCapability == other.constellationInterferometricCapability && createdAt == other.createdAt && createdBy == other.createdBy && dutyCycle == other.dutyCycle && fieldOfRegard == other.fieldOfRegard && fieldOfView == other.fieldOfView && frequency == other.frequency && frequencyBand == other.frequencyBand && groundStationLocations == other.groundStationLocations && groundStations == other.groundStations && hostedForCompanyOrgId == other.hostedForCompanyOrgId && idSensor == other.idSensor && manufacturerOrgId == other.manufacturerOrgId && name == other.name && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && partnerSpacecraft == other.partnerSpacecraft && pointingMethod == other.pointingMethod && receivePolarization == other.receivePolarization && recorderSize == other.recorderSize && swathWidth == other.swathWidth && transmitPolarization == other.transmitPolarization && updatedAt == other.updatedAt && updatedBy == other.updatedBy && waveLength == other.waveLength && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is SeradataRadarPayload &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                spacecraftId == other.spacecraftId &&
+                id == other.id &&
+                bandwidth == other.bandwidth &&
+                bestResolution == other.bestResolution &&
+                category == other.category &&
+                constellationInterferometricCapability ==
+                    other.constellationInterferometricCapability &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                dutyCycle == other.dutyCycle &&
+                fieldOfRegard == other.fieldOfRegard &&
+                fieldOfView == other.fieldOfView &&
+                frequency == other.frequency &&
+                frequencyBand == other.frequencyBand &&
+                groundStationLocations == other.groundStationLocations &&
+                groundStations == other.groundStations &&
+                hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+                idSensor == other.idSensor &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                name == other.name &&
+                notes == other.notes &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                partnerSpacecraft == other.partnerSpacecraft &&
+                pointingMethod == other.pointingMethod &&
+                receivePolarization == other.receivePolarization &&
+                recorderSize == other.recorderSize &&
+                swathWidth == other.swathWidth &&
+                transmitPolarization == other.transmitPolarization &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                waveLength == other.waveLength &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, spacecraftId, id, bandwidth, bestResolution, category, constellationInterferometricCapability, createdAt, createdBy, dutyCycle, fieldOfRegard, fieldOfView, frequency, frequencyBand, groundStationLocations, groundStations, hostedForCompanyOrgId, idSensor, manufacturerOrgId, name, notes, origin, origNetwork, partnerSpacecraft, pointingMethod, receivePolarization, recorderSize, swathWidth, transmitPolarization, updatedAt, updatedBy, waveLength, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                spacecraftId,
+                id,
+                bandwidth,
+                bestResolution,
+                category,
+                constellationInterferometricCapability,
+                createdAt,
+                createdBy,
+                dutyCycle,
+                fieldOfRegard,
+                fieldOfView,
+                frequency,
+                frequencyBand,
+                groundStationLocations,
+                groundStations,
+                hostedForCompanyOrgId,
+                idSensor,
+                manufacturerOrgId,
+                name,
+                notes,
+                origin,
+                origNetwork,
+                partnerSpacecraft,
+                pointingMethod,
+                receivePolarization,
+                recorderSize,
+                swathWidth,
+                transmitPolarization,
+                updatedAt,
+                updatedBy,
+                waveLength,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -16532,7 +16946,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -16545,12 +16959,61 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SeradataSigIntPayload && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && spacecraftId == other.spacecraftId && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && frequencyCoverage == other.frequencyCoverage && groundStationLocations == other.groundStationLocations && groundStations == other.groundStations && hostedForCompanyOrgId == other.hostedForCompanyOrgId && idSensor == other.idSensor && interceptParameters == other.interceptParameters && manufacturerOrgId == other.manufacturerOrgId && name == other.name && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && positionalAccuracy == other.positionalAccuracy && swathWidth == other.swathWidth && type == other.type && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is SeradataSigIntPayload &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                spacecraftId == other.spacecraftId &&
+                id == other.id &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                frequencyCoverage == other.frequencyCoverage &&
+                groundStationLocations == other.groundStationLocations &&
+                groundStations == other.groundStations &&
+                hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+                idSensor == other.idSensor &&
+                interceptParameters == other.interceptParameters &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                name == other.name &&
+                notes == other.notes &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                positionalAccuracy == other.positionalAccuracy &&
+                swathWidth == other.swathWidth &&
+                type == other.type &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, spacecraftId, id, createdAt, createdBy, frequencyCoverage, groundStationLocations, groundStations, hostedForCompanyOrgId, idSensor, interceptParameters, manufacturerOrgId, name, notes, origin, origNetwork, positionalAccuracy, swathWidth, type, updatedAt, updatedBy, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                spacecraftId,
+                id,
+                createdAt,
+                createdBy,
+                frequencyCoverage,
+                groundStationLocations,
+                groundStations,
+                hostedForCompanyOrgId,
+                idSensor,
+                interceptParameters,
+                manufacturerOrgId,
+                name,
+                notes,
+                origin,
+                origNetwork,
+                positionalAccuracy,
+                swathWidth,
+                type,
+                updatedAt,
+                updatedBy,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -16563,12 +17026,226 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SeradataSpacecraftDetailGetResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && id == other.id && additionalMissionsGroups == other.additionalMissionsGroups && altitude == other.altitude && annualInsuredDepreciationFactor == other.annualInsuredDepreciationFactor && annualInsuredDepreciationFactorEstimated == other.annualInsuredDepreciationFactorEstimated && apogee == other.apogee && busId == other.busId && capabilityLost == other.capabilityLost && capacityLost == other.capacityLost && catalogNumber == other.catalogNumber && collisionRiskCm == other.collisionRiskCm && collisionRiskMm == other.collisionRiskMm && combinedCostEstimated == other.combinedCostEstimated && combinedNewCost == other.combinedNewCost && commercialLaunch == other.commercialLaunch && constellation == other.constellation && costEstimated == other.costEstimated && createdAt == other.createdAt && createdBy == other.createdBy && cubesatDispenserType == other.cubesatDispenserType && currentAge == other.currentAge && dateOfObservation == other.dateOfObservation && description == other.description && designLife == other.designLife && dryMass == other.dryMass && expectedLife == other.expectedLife && geoPosition == other.geoPosition && idOnOrbit == other.idOnOrbit && inclination == other.inclination && insuranceLossesTotal == other.insuranceLossesTotal && insuranceNotes == other.insuranceNotes && insurancePremiumAtLaunch == other.insurancePremiumAtLaunch && insurancePremiumAtLaunchEstimated == other.insurancePremiumAtLaunchEstimated && insuredAtLaunch == other.insuredAtLaunch && insuredValueAtLaunch == other.insuredValueAtLaunch && insuredValueLaunchEstimated == other.insuredValueLaunchEstimated && intlNumber == other.intlNumber && lat == other.lat && launchArranger == other.launchArranger && launchArrangerCountry == other.launchArrangerCountry && launchCharacteristic == other.launchCharacteristic && launchCost == other.launchCost && launchCostEstimated == other.launchCostEstimated && launchCountry == other.launchCountry && launchDate == other.launchDate && launchDateRemarks == other.launchDateRemarks && launchId == other.launchId && launchMass == other.launchMass && launchNotes == other.launchNotes && launchNumber == other.launchNumber && launchProvider == other.launchProvider && launchProviderCountry == other.launchProviderCountry && launchProviderFlightNumber == other.launchProviderFlightNumber && launchSiteId == other.launchSiteId && launchSiteName == other.launchSiteName && launchType == other.launchType && launchVehicleId == other.launchVehicleId && leased == other.leased && lifeLost == other.lifeLost && lon == other.lon && massCategory == other.massCategory && nameAtLaunch == other.nameAtLaunch && newCost == other.newCost && notes == other.notes && numHumans == other.numHumans && onOrbit == other.onOrbit && operator == other.operator && operatorCountry == other.operatorCountry && orbitCategory == other.orbitCategory && orbitSubCategory == other.orbitSubCategory && orderDate == other.orderDate && origin == other.origin && origNetwork == other.origNetwork && owner == other.owner && ownerCountry == other.ownerCountry && perigee == other.perigee && period == other.period && primaryMissionGroup == other.primaryMissionGroup && primeManufacturerOrgId == other.primeManufacturerOrgId && programName == other.programName && quantity == other.quantity && reusableFlights == other.reusableFlights && reusedHullName == other.reusedHullName && scientific == other.scientific && sector == other.sector && seradataCommDetails == other.seradataCommDetails && seradataEarlyWarning == other.seradataEarlyWarning && seradataNavigation == other.seradataNavigation && seradataOpticalPayload == other.seradataOpticalPayload && seradataRadarPayload == other.seradataRadarPayload && seradataSigIntPayload == other.seradataSigIntPayload && serialNumber == other.serialNumber && stabilizer == other.stabilizer && status == other.status && totalClaims == other.totalClaims && totalFatalities == other.totalFatalities && totalInjuries == other.totalInjuries && totalPayloadPower == other.totalPayloadPower && updatedAt == other.updatedAt && updatedBy == other.updatedBy && youtubeLaunchLink == other.youtubeLaunchLink && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SeradataSpacecraftDetailGetResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            name == other.name &&
+            source == other.source &&
+            id == other.id &&
+            additionalMissionsGroups == other.additionalMissionsGroups &&
+            altitude == other.altitude &&
+            annualInsuredDepreciationFactor == other.annualInsuredDepreciationFactor &&
+            annualInsuredDepreciationFactorEstimated ==
+                other.annualInsuredDepreciationFactorEstimated &&
+            apogee == other.apogee &&
+            busId == other.busId &&
+            capabilityLost == other.capabilityLost &&
+            capacityLost == other.capacityLost &&
+            catalogNumber == other.catalogNumber &&
+            collisionRiskCm == other.collisionRiskCm &&
+            collisionRiskMm == other.collisionRiskMm &&
+            combinedCostEstimated == other.combinedCostEstimated &&
+            combinedNewCost == other.combinedNewCost &&
+            commercialLaunch == other.commercialLaunch &&
+            constellation == other.constellation &&
+            costEstimated == other.costEstimated &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            cubesatDispenserType == other.cubesatDispenserType &&
+            currentAge == other.currentAge &&
+            dateOfObservation == other.dateOfObservation &&
+            description == other.description &&
+            designLife == other.designLife &&
+            dryMass == other.dryMass &&
+            expectedLife == other.expectedLife &&
+            geoPosition == other.geoPosition &&
+            idOnOrbit == other.idOnOrbit &&
+            inclination == other.inclination &&
+            insuranceLossesTotal == other.insuranceLossesTotal &&
+            insuranceNotes == other.insuranceNotes &&
+            insurancePremiumAtLaunch == other.insurancePremiumAtLaunch &&
+            insurancePremiumAtLaunchEstimated == other.insurancePremiumAtLaunchEstimated &&
+            insuredAtLaunch == other.insuredAtLaunch &&
+            insuredValueAtLaunch == other.insuredValueAtLaunch &&
+            insuredValueLaunchEstimated == other.insuredValueLaunchEstimated &&
+            intlNumber == other.intlNumber &&
+            lat == other.lat &&
+            launchArranger == other.launchArranger &&
+            launchArrangerCountry == other.launchArrangerCountry &&
+            launchCharacteristic == other.launchCharacteristic &&
+            launchCost == other.launchCost &&
+            launchCostEstimated == other.launchCostEstimated &&
+            launchCountry == other.launchCountry &&
+            launchDate == other.launchDate &&
+            launchDateRemarks == other.launchDateRemarks &&
+            launchId == other.launchId &&
+            launchMass == other.launchMass &&
+            launchNotes == other.launchNotes &&
+            launchNumber == other.launchNumber &&
+            launchProvider == other.launchProvider &&
+            launchProviderCountry == other.launchProviderCountry &&
+            launchProviderFlightNumber == other.launchProviderFlightNumber &&
+            launchSiteId == other.launchSiteId &&
+            launchSiteName == other.launchSiteName &&
+            launchType == other.launchType &&
+            launchVehicleId == other.launchVehicleId &&
+            leased == other.leased &&
+            lifeLost == other.lifeLost &&
+            lon == other.lon &&
+            massCategory == other.massCategory &&
+            nameAtLaunch == other.nameAtLaunch &&
+            newCost == other.newCost &&
+            notes == other.notes &&
+            numHumans == other.numHumans &&
+            onOrbit == other.onOrbit &&
+            operator == other.operator &&
+            operatorCountry == other.operatorCountry &&
+            orbitCategory == other.orbitCategory &&
+            orbitSubCategory == other.orbitSubCategory &&
+            orderDate == other.orderDate &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            owner == other.owner &&
+            ownerCountry == other.ownerCountry &&
+            perigee == other.perigee &&
+            period == other.period &&
+            primaryMissionGroup == other.primaryMissionGroup &&
+            primeManufacturerOrgId == other.primeManufacturerOrgId &&
+            programName == other.programName &&
+            quantity == other.quantity &&
+            reusableFlights == other.reusableFlights &&
+            reusedHullName == other.reusedHullName &&
+            scientific == other.scientific &&
+            sector == other.sector &&
+            seradataCommDetails == other.seradataCommDetails &&
+            seradataEarlyWarning == other.seradataEarlyWarning &&
+            seradataNavigation == other.seradataNavigation &&
+            seradataOpticalPayload == other.seradataOpticalPayload &&
+            seradataRadarPayload == other.seradataRadarPayload &&
+            seradataSigIntPayload == other.seradataSigIntPayload &&
+            serialNumber == other.serialNumber &&
+            stabilizer == other.stabilizer &&
+            status == other.status &&
+            totalClaims == other.totalClaims &&
+            totalFatalities == other.totalFatalities &&
+            totalInjuries == other.totalInjuries &&
+            totalPayloadPower == other.totalPayloadPower &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            youtubeLaunchLink == other.youtubeLaunchLink &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, id, additionalMissionsGroups, altitude, annualInsuredDepreciationFactor, annualInsuredDepreciationFactorEstimated, apogee, busId, capabilityLost, capacityLost, catalogNumber, collisionRiskCm, collisionRiskMm, combinedCostEstimated, combinedNewCost, commercialLaunch, constellation, costEstimated, createdAt, createdBy, cubesatDispenserType, currentAge, dateOfObservation, description, designLife, dryMass, expectedLife, geoPosition, idOnOrbit, inclination, insuranceLossesTotal, insuranceNotes, insurancePremiumAtLaunch, insurancePremiumAtLaunchEstimated, insuredAtLaunch, insuredValueAtLaunch, insuredValueLaunchEstimated, intlNumber, lat, launchArranger, launchArrangerCountry, launchCharacteristic, launchCost, launchCostEstimated, launchCountry, launchDate, launchDateRemarks, launchId, launchMass, launchNotes, launchNumber, launchProvider, launchProviderCountry, launchProviderFlightNumber, launchSiteId, launchSiteName, launchType, launchVehicleId, leased, lifeLost, lon, massCategory, nameAtLaunch, newCost, notes, numHumans, onOrbit, operator, operatorCountry, orbitCategory, orbitSubCategory, orderDate, origin, origNetwork, owner, ownerCountry, perigee, period, primaryMissionGroup, primeManufacturerOrgId, programName, quantity, reusableFlights, reusedHullName, scientific, sector, seradataCommDetails, seradataEarlyWarning, seradataNavigation, seradataOpticalPayload, seradataRadarPayload, seradataSigIntPayload, serialNumber, stabilizer, status, totalClaims, totalFatalities, totalInjuries, totalPayloadPower, updatedAt, updatedBy, youtubeLaunchLink, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            name,
+            source,
+            id,
+            additionalMissionsGroups,
+            altitude,
+            annualInsuredDepreciationFactor,
+            annualInsuredDepreciationFactorEstimated,
+            apogee,
+            busId,
+            capabilityLost,
+            capacityLost,
+            catalogNumber,
+            collisionRiskCm,
+            collisionRiskMm,
+            combinedCostEstimated,
+            combinedNewCost,
+            commercialLaunch,
+            constellation,
+            costEstimated,
+            createdAt,
+            createdBy,
+            cubesatDispenserType,
+            currentAge,
+            dateOfObservation,
+            description,
+            designLife,
+            dryMass,
+            expectedLife,
+            geoPosition,
+            idOnOrbit,
+            inclination,
+            insuranceLossesTotal,
+            insuranceNotes,
+            insurancePremiumAtLaunch,
+            insurancePremiumAtLaunchEstimated,
+            insuredAtLaunch,
+            insuredValueAtLaunch,
+            insuredValueLaunchEstimated,
+            intlNumber,
+            lat,
+            launchArranger,
+            launchArrangerCountry,
+            launchCharacteristic,
+            launchCost,
+            launchCostEstimated,
+            launchCountry,
+            launchDate,
+            launchDateRemarks,
+            launchId,
+            launchMass,
+            launchNotes,
+            launchNumber,
+            launchProvider,
+            launchProviderCountry,
+            launchProviderFlightNumber,
+            launchSiteId,
+            launchSiteName,
+            launchType,
+            launchVehicleId,
+            leased,
+            lifeLost,
+            lon,
+            massCategory,
+            nameAtLaunch,
+            newCost,
+            notes,
+            numHumans,
+            onOrbit,
+            operator,
+            operatorCountry,
+            orbitCategory,
+            orbitSubCategory,
+            orderDate,
+            origin,
+            origNetwork,
+            owner,
+            ownerCountry,
+            perigee,
+            period,
+            primaryMissionGroup,
+            primeManufacturerOrgId,
+            programName,
+            quantity,
+            reusableFlights,
+            reusedHullName,
+            scientific,
+            sector,
+            seradataCommDetails,
+            seradataEarlyWarning,
+            seradataNavigation,
+            seradataOpticalPayload,
+            seradataRadarPayload,
+            seradataSigIntPayload,
+            serialNumber,
+            stabilizer,
+            status,
+            totalClaims,
+            totalFatalities,
+            totalInjuries,
+            totalPayloadPower,
+            updatedAt,
+            updatedBy,
+            youtubeLaunchLink,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

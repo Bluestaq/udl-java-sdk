@@ -3376,12 +3376,89 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSite == other.idSite && source == other.source && bodyId == other.bodyId && cat == other.cat && coldInventory == other.coldInventory && commImpairment == other.commImpairment && cpcon == other.cpcon && createdAt == other.createdAt && createdBy == other.createdBy && eoc == other.eoc && fpcon == other.fpcon && hotInventory == other.hotInventory && hpcon == other.hpcon && instStatus == other.instStatus && link == other.link && linkStatus == other.linkStatus && missile == other.missile && missileInventory == other.missileInventory && mobileAltId == other.mobileAltId && opsCapability == other.opsCapability && opsImpairment == other.opsImpairment && origin == other.origin && origNetwork == other.origNetwork && pes == other.pes && poiid == other.poiid && radarStatus == other.radarStatus && radarSystem == other.radarSystem && radiateMode == other.radiateMode && reportTime == other.reportTime && samMode == other.samMode && siteType == other.siteType && timeFunction == other.timeFunction && trackId == other.trackId && trackRefL16 == other.trackRefL16 && weatherMessage == other.weatherMessage && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idSite == other.idSite &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                cat == other.cat &&
+                coldInventory == other.coldInventory &&
+                commImpairment == other.commImpairment &&
+                cpcon == other.cpcon &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                eoc == other.eoc &&
+                fpcon == other.fpcon &&
+                hotInventory == other.hotInventory &&
+                hpcon == other.hpcon &&
+                instStatus == other.instStatus &&
+                link == other.link &&
+                linkStatus == other.linkStatus &&
+                missile == other.missile &&
+                missileInventory == other.missileInventory &&
+                mobileAltId == other.mobileAltId &&
+                opsCapability == other.opsCapability &&
+                opsImpairment == other.opsImpairment &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                pes == other.pes &&
+                poiid == other.poiid &&
+                radarStatus == other.radarStatus &&
+                radarSystem == other.radarSystem &&
+                radiateMode == other.radiateMode &&
+                reportTime == other.reportTime &&
+                samMode == other.samMode &&
+                siteType == other.siteType &&
+                timeFunction == other.timeFunction &&
+                trackId == other.trackId &&
+                trackRefL16 == other.trackRefL16 &&
+                weatherMessage == other.weatherMessage &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSite, source, bodyId, cat, coldInventory, commImpairment, cpcon, createdAt, createdBy, eoc, fpcon, hotInventory, hpcon, instStatus, link, linkStatus, missile, missileInventory, mobileAltId, opsCapability, opsImpairment, origin, origNetwork, pes, poiid, radarStatus, radarSystem, radiateMode, reportTime, samMode, siteType, timeFunction, trackId, trackRefL16, weatherMessage, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idSite,
+                source,
+                bodyId,
+                cat,
+                coldInventory,
+                commImpairment,
+                cpcon,
+                createdAt,
+                createdBy,
+                eoc,
+                fpcon,
+                hotInventory,
+                hpcon,
+                instStatus,
+                link,
+                linkStatus,
+                missile,
+                missileInventory,
+                mobileAltId,
+                opsCapability,
+                opsImpairment,
+                origin,
+                origNetwork,
+                pes,
+                poiid,
+                radarStatus,
+                radarSystem,
+                radiateMode,
+                reportTime,
+                samMode,
+                siteType,
+                timeFunction,
+                trackId,
+                trackRefL16,
+                weatherMessage,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3534,7 +3611,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3676,7 +3753,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Cat && value == other.value /* spotless:on */
+            return other is Cat && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3834,7 +3911,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Cpcon && value == other.value /* spotless:on */
+            return other is Cpcon && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3976,7 +4053,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Eoc && value == other.value /* spotless:on */
+            return other is Eoc && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4138,7 +4215,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Fpcon && value == other.value /* spotless:on */
+            return other is Fpcon && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4296,7 +4373,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Hpcon && value == other.value /* spotless:on */
+            return other is Hpcon && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4448,7 +4525,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is InstStatus && value == other.value /* spotless:on */
+            return other is InstStatus && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4461,10 +4538,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SiteStatusUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SiteStatusUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SiteStatusUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -1502,7 +1502,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1515,12 +1515,71 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CollectResponseFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idRequest == other.idRequest && source == other.source && id == other.id && actualEndTime == other.actualEndTime && actualStartTime == other.actualStartTime && altEndTime == other.altEndTime && altStartTime == other.altStartTime && createdAt == other.createdAt && createdBy == other.createdBy && errCode == other.errCode && externalId == other.externalId && idOnOrbit == other.idOnOrbit && idPlan == other.idPlan && idSensor == other.idSensor && notes == other.notes && onOrbit == other.onOrbit && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId == other.origSensorId && satNo == other.satNo && srcIds == other.srcIds && srcTyps == other.srcTyps && status == other.status && tags == other.tags && taskId == other.taskId && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is CollectResponseFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idRequest == other.idRequest &&
+            source == other.source &&
+            id == other.id &&
+            actualEndTime == other.actualEndTime &&
+            actualStartTime == other.actualStartTime &&
+            altEndTime == other.altEndTime &&
+            altStartTime == other.altStartTime &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            errCode == other.errCode &&
+            externalId == other.externalId &&
+            idOnOrbit == other.idOnOrbit &&
+            idPlan == other.idPlan &&
+            idSensor == other.idSensor &&
+            notes == other.notes &&
+            onOrbit == other.onOrbit &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            origSensorId == other.origSensorId &&
+            satNo == other.satNo &&
+            srcIds == other.srcIds &&
+            srcTyps == other.srcTyps &&
+            status == other.status &&
+            tags == other.tags &&
+            taskId == other.taskId &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idRequest, source, id, actualEndTime, actualStartTime, altEndTime, altStartTime, createdAt, createdBy, errCode, externalId, idOnOrbit, idPlan, idSensor, notes, onOrbit, origin, origNetwork, origObjectId, origSensorId, satNo, srcIds, srcTyps, status, tags, taskId, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idRequest,
+            source,
+            id,
+            actualEndTime,
+            actualStartTime,
+            altEndTime,
+            altStartTime,
+            createdAt,
+            createdBy,
+            errCode,
+            externalId,
+            idOnOrbit,
+            idPlan,
+            idSensor,
+            notes,
+            onOrbit,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            satNo,
+            srcIds,
+            srcTyps,
+            status,
+            tags,
+            taskId,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

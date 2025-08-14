@@ -49,6 +49,7 @@ import com.unifieddatalibrary.api.services.async.scs.V2ServiceAsync
 import com.unifieddatalibrary.api.services.async.scs.V2ServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
+import kotlin.jvm.optionals.getOrNull
 
 class ScServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     ScServiceAsync {
@@ -411,7 +412,7 @@ class ScServiceAsyncImpl internal constructor(private val clientOptions: ClientO
         ): CompletableFuture<HttpResponseFor<String>> {
             // We check here instead of in the params builder because this can be specified
             // positionally or in the params class.
-            checkRequired("fileContent", !params._fileContent().isMissing())
+            checkRequired("fileContent", params._body().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)

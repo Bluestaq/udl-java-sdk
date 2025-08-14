@@ -2367,7 +2367,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2380,12 +2380,125 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is Ecpsdr && classificationMarking == other.classificationMarking && dataMode == other.dataMode && msgTime == other.msgTime && source == other.source && type == other.type && id == other.id && asl5VCurrMon == other.asl5VCurrMon && cdsPlateVMon == other.cdsPlateVMon && cdsRefVMon == other.cdsRefVMon && cdsThreshold == other.cdsThreshold && cdsThrottle == other.cdsThrottle && checksum == other.checksum && createdAt == other.createdAt && createdBy == other.createdBy && dosBias == other.dosBias && dsl5VCurrMon == other.dsl5VCurrMon && esdTrigCountH == other.esdTrigCountH && esdTrigCountL == other.esdTrigCountL && hiLetL == other.hiLetL && hiLetM == other.hiLetM && idOnOrbit == other.idOnOrbit && idSensor == other.idSensor && lowLetL == other.lowLetL && lowLetM == other.lowLetM && medLet1L == other.medLet1L && medLet1M == other.medLet1M && medLet2L == other.medLet2L && medLet2M == other.medLet2M && medLet3L == other.medLet3L && medLet3M == other.medLet3M && medLet4L == other.medLet4L && medLet4M == other.medLet4M && mpTemp == other.mpTemp && obTime == other.obTime && onOrbit == other.onOrbit && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId == other.origSensorId && pd1SigLev == other.pd1SigLev && pd2SigLev == other.pd2SigLev && psTempMon == other.psTempMon && retransmit == other.retransmit && satNo == other.satNo && senMode == other.senMode && surfDosChargeH == other.surfDosChargeH && surfDosChargeL == other.surfDosChargeL && surfDosH == other.surfDosH && surfDosL == other.surfDosL && surfDosM == other.surfDosM && surfDosStat == other.surfDosStat && transientData == other.transientData && updatedAt == other.updatedAt && updatedBy == other.updatedBy && vRef == other.vRef && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is Ecpsdr &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            msgTime == other.msgTime &&
+            source == other.source &&
+            type == other.type &&
+            id == other.id &&
+            asl5VCurrMon == other.asl5VCurrMon &&
+            cdsPlateVMon == other.cdsPlateVMon &&
+            cdsRefVMon == other.cdsRefVMon &&
+            cdsThreshold == other.cdsThreshold &&
+            cdsThrottle == other.cdsThrottle &&
+            checksum == other.checksum &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            dosBias == other.dosBias &&
+            dsl5VCurrMon == other.dsl5VCurrMon &&
+            esdTrigCountH == other.esdTrigCountH &&
+            esdTrigCountL == other.esdTrigCountL &&
+            hiLetL == other.hiLetL &&
+            hiLetM == other.hiLetM &&
+            idOnOrbit == other.idOnOrbit &&
+            idSensor == other.idSensor &&
+            lowLetL == other.lowLetL &&
+            lowLetM == other.lowLetM &&
+            medLet1L == other.medLet1L &&
+            medLet1M == other.medLet1M &&
+            medLet2L == other.medLet2L &&
+            medLet2M == other.medLet2M &&
+            medLet3L == other.medLet3L &&
+            medLet3M == other.medLet3M &&
+            medLet4L == other.medLet4L &&
+            medLet4M == other.medLet4M &&
+            mpTemp == other.mpTemp &&
+            obTime == other.obTime &&
+            onOrbit == other.onOrbit &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            origSensorId == other.origSensorId &&
+            pd1SigLev == other.pd1SigLev &&
+            pd2SigLev == other.pd2SigLev &&
+            psTempMon == other.psTempMon &&
+            retransmit == other.retransmit &&
+            satNo == other.satNo &&
+            senMode == other.senMode &&
+            surfDosChargeH == other.surfDosChargeH &&
+            surfDosChargeL == other.surfDosChargeL &&
+            surfDosH == other.surfDosH &&
+            surfDosL == other.surfDosL &&
+            surfDosM == other.surfDosM &&
+            surfDosStat == other.surfDosStat &&
+            transientData == other.transientData &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            vRef == other.vRef &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, msgTime, source, type, id, asl5VCurrMon, cdsPlateVMon, cdsRefVMon, cdsThreshold, cdsThrottle, checksum, createdAt, createdBy, dosBias, dsl5VCurrMon, esdTrigCountH, esdTrigCountL, hiLetL, hiLetM, idOnOrbit, idSensor, lowLetL, lowLetM, medLet1L, medLet1M, medLet2L, medLet2M, medLet3L, medLet3M, medLet4L, medLet4M, mpTemp, obTime, onOrbit, origin, origNetwork, origObjectId, origSensorId, pd1SigLev, pd2SigLev, psTempMon, retransmit, satNo, senMode, surfDosChargeH, surfDosChargeL, surfDosH, surfDosL, surfDosM, surfDosStat, transientData, updatedAt, updatedBy, vRef, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            msgTime,
+            source,
+            type,
+            id,
+            asl5VCurrMon,
+            cdsPlateVMon,
+            cdsRefVMon,
+            cdsThreshold,
+            cdsThrottle,
+            checksum,
+            createdAt,
+            createdBy,
+            dosBias,
+            dsl5VCurrMon,
+            esdTrigCountH,
+            esdTrigCountL,
+            hiLetL,
+            hiLetM,
+            idOnOrbit,
+            idSensor,
+            lowLetL,
+            lowLetM,
+            medLet1L,
+            medLet1M,
+            medLet2L,
+            medLet2M,
+            medLet3L,
+            medLet3M,
+            medLet4L,
+            medLet4M,
+            mpTemp,
+            obTime,
+            onOrbit,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            pd1SigLev,
+            pd2SigLev,
+            psTempMon,
+            retransmit,
+            satNo,
+            senMode,
+            surfDosChargeH,
+            surfDosChargeL,
+            surfDosH,
+            surfDosL,
+            surfDosM,
+            surfDosStat,
+            transientData,
+            updatedAt,
+            updatedBy,
+            vRef,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

@@ -5,7 +5,6 @@ package com.unifieddatalibrary.api.client
 import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.services.blocking.AiService
 import com.unifieddatalibrary.api.services.blocking.AirEventService
-import com.unifieddatalibrary.api.services.blocking.AirLoadPlanService
 import com.unifieddatalibrary.api.services.blocking.AirOperationService
 import com.unifieddatalibrary.api.services.blocking.AirTransportMissionService
 import com.unifieddatalibrary.api.services.blocking.AircraftService
@@ -23,7 +22,6 @@ import com.unifieddatalibrary.api.services.blocking.AnalyticImageryService
 import com.unifieddatalibrary.api.services.blocking.AntennaService
 import com.unifieddatalibrary.api.services.blocking.AttitudeDataService
 import com.unifieddatalibrary.api.services.blocking.AttitudeSetService
-import com.unifieddatalibrary.api.services.blocking.AttitudesetService
 import com.unifieddatalibrary.api.services.blocking.AviationRiskManagementService
 import com.unifieddatalibrary.api.services.blocking.BatteryService
 import com.unifieddatalibrary.api.services.blocking.BatterydetailService
@@ -64,12 +62,10 @@ import com.unifieddatalibrary.api.services.blocking.GlobalAtmosphericModelServic
 import com.unifieddatalibrary.api.services.blocking.GnssObservationService
 import com.unifieddatalibrary.api.services.blocking.GnssObservationsetService
 import com.unifieddatalibrary.api.services.blocking.GnssRawIfService
-import com.unifieddatalibrary.api.services.blocking.GnssRawifService
 import com.unifieddatalibrary.api.services.blocking.GroundImageryService
 import com.unifieddatalibrary.api.services.blocking.H3GeoHexCellService
 import com.unifieddatalibrary.api.services.blocking.H3GeoService
 import com.unifieddatalibrary.api.services.blocking.HazardService
-import com.unifieddatalibrary.api.services.blocking.IonOobservationService
 import com.unifieddatalibrary.api.services.blocking.IonoObservationService
 import com.unifieddatalibrary.api.services.blocking.IrService
 import com.unifieddatalibrary.api.services.blocking.IsrCollectionService
@@ -207,8 +203,6 @@ interface UnifieddatalibraryClient {
 
     fun airEvents(): AirEventService
 
-    fun airLoadPlans(): AirLoadPlanService
-
     fun airOperations(): AirOperationService
 
     fun airTransportMissions(): AirTransportMissionService
@@ -244,8 +238,6 @@ interface UnifieddatalibraryClient {
     fun attitudeData(): AttitudeDataService
 
     fun attitudeSets(): AttitudeSetService
-
-    fun attitudesets(): AttitudesetService
 
     fun batteries(): BatteryService
 
@@ -325,8 +317,6 @@ interface UnifieddatalibraryClient {
 
     fun gnssObservationset(): GnssObservationsetService
 
-    fun gnssRawif(): GnssRawifService
-
     fun groundImagery(): GroundImageryService
 
     fun h3Geo(): H3GeoService
@@ -334,8 +324,6 @@ interface UnifieddatalibraryClient {
     fun h3GeoHexCell(): H3GeoHexCellService
 
     fun hazard(): HazardService
-
-    fun ionOobservation(): IonOobservationService
 
     fun ir(): IrService
 
@@ -523,9 +511,9 @@ interface UnifieddatalibraryClient {
 
     fun gnssRawIf(): GnssRawIfService
 
-    fun ionoObservation(): IonoObservationService
+    fun ionoObservations(): IonoObservationService
 
-    fun reportAndActivity(): ReportAndActivityService
+    fun reportAndActivities(): ReportAndActivityService
 
     fun secureMessaging(): SecureMessagingService
 
@@ -563,8 +551,6 @@ interface UnifieddatalibraryClient {
 
         fun airEvents(): AirEventService.WithRawResponse
 
-        fun airLoadPlans(): AirLoadPlanService.WithRawResponse
-
         fun airOperations(): AirOperationService.WithRawResponse
 
         fun airTransportMissions(): AirTransportMissionService.WithRawResponse
@@ -600,8 +586,6 @@ interface UnifieddatalibraryClient {
         fun attitudeData(): AttitudeDataService.WithRawResponse
 
         fun attitudeSets(): AttitudeSetService.WithRawResponse
-
-        fun attitudesets(): AttitudesetService.WithRawResponse
 
         fun batteries(): BatteryService.WithRawResponse
 
@@ -681,8 +665,6 @@ interface UnifieddatalibraryClient {
 
         fun gnssObservationset(): GnssObservationsetService.WithRawResponse
 
-        fun gnssRawif(): GnssRawifService.WithRawResponse
-
         fun groundImagery(): GroundImageryService.WithRawResponse
 
         fun h3Geo(): H3GeoService.WithRawResponse
@@ -690,8 +672,6 @@ interface UnifieddatalibraryClient {
         fun h3GeoHexCell(): H3GeoHexCellService.WithRawResponse
 
         fun hazard(): HazardService.WithRawResponse
-
-        fun ionOobservation(): IonOobservationService.WithRawResponse
 
         fun ir(): IrService.WithRawResponse
 
@@ -879,9 +859,9 @@ interface UnifieddatalibraryClient {
 
         fun gnssRawIf(): GnssRawIfService.WithRawResponse
 
-        fun ionoObservation(): IonoObservationService.WithRawResponse
+        fun ionoObservations(): IonoObservationService.WithRawResponse
 
-        fun reportAndActivity(): ReportAndActivityService.WithRawResponse
+        fun reportAndActivities(): ReportAndActivityService.WithRawResponse
 
         fun secureMessaging(): SecureMessagingService.WithRawResponse
 

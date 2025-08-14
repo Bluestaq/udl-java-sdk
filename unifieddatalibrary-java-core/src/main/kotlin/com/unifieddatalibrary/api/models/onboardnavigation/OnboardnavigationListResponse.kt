@@ -1288,7 +1288,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1450,7 +1450,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is ReferenceFrame && value == other.value /* spotless:on */
+            return other is ReferenceFrame && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1463,12 +1463,61 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OnboardnavigationListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && startTime == other.startTime && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && deltaPos == other.deltaPos && endTime == other.endTime && esId == other.esId && idOnOrbit == other.idOnOrbit && idStateVector == other.idStateVector && mag == other.mag && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && referenceFrame == other.referenceFrame && satNo == other.satNo && starCatLoadTime == other.starCatLoadTime && starCatName == other.starCatName && starTracker == other.starTracker && sunSensor == other.sunSensor && ts == other.ts && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is OnboardnavigationListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            startTime == other.startTime &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            deltaPos == other.deltaPos &&
+            endTime == other.endTime &&
+            esId == other.esId &&
+            idOnOrbit == other.idOnOrbit &&
+            idStateVector == other.idStateVector &&
+            mag == other.mag &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            referenceFrame == other.referenceFrame &&
+            satNo == other.satNo &&
+            starCatLoadTime == other.starCatLoadTime &&
+            starCatName == other.starCatName &&
+            starTracker == other.starTracker &&
+            sunSensor == other.sunSensor &&
+            ts == other.ts &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, startTime, id, createdAt, createdBy, deltaPos, endTime, esId, idOnOrbit, idStateVector, mag, origin, origNetwork, origObjectId, referenceFrame, satNo, starCatLoadTime, starCatName, starTracker, sunSensor, ts, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            startTime,
+            id,
+            createdAt,
+            createdBy,
+            deltaPos,
+            endTime,
+            esId,
+            idOnOrbit,
+            idStateVector,
+            mag,
+            origin,
+            origNetwork,
+            origObjectId,
+            referenceFrame,
+            satNo,
+            starCatLoadTime,
+            starCatName,
+            starTracker,
+            sunSensor,
+            ts,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

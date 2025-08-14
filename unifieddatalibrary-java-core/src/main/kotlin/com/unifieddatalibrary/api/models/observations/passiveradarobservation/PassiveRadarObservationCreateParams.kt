@@ -5100,12 +5100,149 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && obTime == other.obTime && source == other.source && id == other.id && accel == other.accel && accelUnc == other.accelUnc && alt == other.alt && azimuth == other.azimuth && azimuthBias == other.azimuthBias && azimuthRate == other.azimuthRate && azimuthUnc == other.azimuthUnc && bistaticRange == other.bistaticRange && bistaticRangeAccel == other.bistaticRangeAccel && bistaticRangeAccelUnc == other.bistaticRangeAccelUnc && bistaticRangeBias == other.bistaticRangeBias && bistaticRangeRate == other.bistaticRangeRate && bistaticRangeRateUnc == other.bistaticRangeRateUnc && bistaticRangeUnc == other.bistaticRangeUnc && coning == other.coning && coningUnc == other.coningUnc && createdAt == other.createdAt && createdBy == other.createdBy && declination == other.declination && delay == other.delay && delayBias == other.delayBias && delayUnc == other.delayUnc && descriptor == other.descriptor && doppler == other.doppler && dopplerUnc == other.dopplerUnc && elevation == other.elevation && elevationBias == other.elevationBias && elevationRate == other.elevationRate && elevationUnc == other.elevationUnc && extObservationId == other.extObservationId && idOnOrbit == other.idOnOrbit && idRfEmitter == other.idRfEmitter && idSensor == other.idSensor && idSensorRefReceiver == other.idSensorRefReceiver && lat == other.lat && lon == other.lon && obPosition == other.obPosition && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId == other.origSensorId && orthogonalRcs == other.orthogonalRcs && orthogonalRcsUnc == other.orthogonalRcsUnc && ra == other.ra && rcs == other.rcs && rcsUnc == other.rcsUnc && satNo == other.satNo && snr == other.snr && sourceDl == other.sourceDl && tags == other.tags && taskId == other.taskId && timingBias == other.timingBias && tof == other.tof && tofBias == other.tofBias && tofUnc == other.tofUnc && trackId == other.trackId && transactionId == other.transactionId && type == other.type && uct == other.uct && xvel == other.xvel && yvel == other.yvel && zvel == other.zvel && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                obTime == other.obTime &&
+                source == other.source &&
+                id == other.id &&
+                accel == other.accel &&
+                accelUnc == other.accelUnc &&
+                alt == other.alt &&
+                azimuth == other.azimuth &&
+                azimuthBias == other.azimuthBias &&
+                azimuthRate == other.azimuthRate &&
+                azimuthUnc == other.azimuthUnc &&
+                bistaticRange == other.bistaticRange &&
+                bistaticRangeAccel == other.bistaticRangeAccel &&
+                bistaticRangeAccelUnc == other.bistaticRangeAccelUnc &&
+                bistaticRangeBias == other.bistaticRangeBias &&
+                bistaticRangeRate == other.bistaticRangeRate &&
+                bistaticRangeRateUnc == other.bistaticRangeRateUnc &&
+                bistaticRangeUnc == other.bistaticRangeUnc &&
+                coning == other.coning &&
+                coningUnc == other.coningUnc &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                declination == other.declination &&
+                delay == other.delay &&
+                delayBias == other.delayBias &&
+                delayUnc == other.delayUnc &&
+                descriptor == other.descriptor &&
+                doppler == other.doppler &&
+                dopplerUnc == other.dopplerUnc &&
+                elevation == other.elevation &&
+                elevationBias == other.elevationBias &&
+                elevationRate == other.elevationRate &&
+                elevationUnc == other.elevationUnc &&
+                extObservationId == other.extObservationId &&
+                idOnOrbit == other.idOnOrbit &&
+                idRfEmitter == other.idRfEmitter &&
+                idSensor == other.idSensor &&
+                idSensorRefReceiver == other.idSensorRefReceiver &&
+                lat == other.lat &&
+                lon == other.lon &&
+                obPosition == other.obPosition &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                origSensorId == other.origSensorId &&
+                orthogonalRcs == other.orthogonalRcs &&
+                orthogonalRcsUnc == other.orthogonalRcsUnc &&
+                ra == other.ra &&
+                rcs == other.rcs &&
+                rcsUnc == other.rcsUnc &&
+                satNo == other.satNo &&
+                snr == other.snr &&
+                sourceDl == other.sourceDl &&
+                tags == other.tags &&
+                taskId == other.taskId &&
+                timingBias == other.timingBias &&
+                tof == other.tof &&
+                tofBias == other.tofBias &&
+                tofUnc == other.tofUnc &&
+                trackId == other.trackId &&
+                transactionId == other.transactionId &&
+                type == other.type &&
+                uct == other.uct &&
+                xvel == other.xvel &&
+                yvel == other.yvel &&
+                zvel == other.zvel &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, obTime, source, id, accel, accelUnc, alt, azimuth, azimuthBias, azimuthRate, azimuthUnc, bistaticRange, bistaticRangeAccel, bistaticRangeAccelUnc, bistaticRangeBias, bistaticRangeRate, bistaticRangeRateUnc, bistaticRangeUnc, coning, coningUnc, createdAt, createdBy, declination, delay, delayBias, delayUnc, descriptor, doppler, dopplerUnc, elevation, elevationBias, elevationRate, elevationUnc, extObservationId, idOnOrbit, idRfEmitter, idSensor, idSensorRefReceiver, lat, lon, obPosition, origin, origNetwork, origObjectId, origSensorId, orthogonalRcs, orthogonalRcsUnc, ra, rcs, rcsUnc, satNo, snr, sourceDl, tags, taskId, timingBias, tof, tofBias, tofUnc, trackId, transactionId, type, uct, xvel, yvel, zvel, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                obTime,
+                source,
+                id,
+                accel,
+                accelUnc,
+                alt,
+                azimuth,
+                azimuthBias,
+                azimuthRate,
+                azimuthUnc,
+                bistaticRange,
+                bistaticRangeAccel,
+                bistaticRangeAccelUnc,
+                bistaticRangeBias,
+                bistaticRangeRate,
+                bistaticRangeRateUnc,
+                bistaticRangeUnc,
+                coning,
+                coningUnc,
+                createdAt,
+                createdBy,
+                declination,
+                delay,
+                delayBias,
+                delayUnc,
+                descriptor,
+                doppler,
+                dopplerUnc,
+                elevation,
+                elevationBias,
+                elevationRate,
+                elevationUnc,
+                extObservationId,
+                idOnOrbit,
+                idRfEmitter,
+                idSensor,
+                idSensorRefReceiver,
+                lat,
+                lon,
+                obPosition,
+                origin,
+                origNetwork,
+                origObjectId,
+                origSensorId,
+                orthogonalRcs,
+                orthogonalRcsUnc,
+                ra,
+                rcs,
+                rcsUnc,
+                satNo,
+                snr,
+                sourceDl,
+                tags,
+                taskId,
+                timingBias,
+                tof,
+                tofBias,
+                tofUnc,
+                trackId,
+                transactionId,
+                type,
+                uct,
+                xvel,
+                yvel,
+                zvel,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5258,7 +5395,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -5271,10 +5408,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is PassiveRadarObservationCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is PassiveRadarObservationCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "PassiveRadarObservationCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

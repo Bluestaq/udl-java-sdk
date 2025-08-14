@@ -3008,7 +3008,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -3021,12 +3021,159 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && msgfmt == other.msgfmt && msgts == other.msgts && msgtyp == other.msgtyp && source == other.source && ts == other.ts && id == other.id && acp == other.acp && addr == other.addr && af == other.af && aims == other.aims && alt3d == other.alt3d && artsqual == other.artsqual && az == other.az && azdelt == other.azdelt && bcnhits == other.bcnhits && cartpos == other.cartpos && cdm == other.cdm && code7500 == other.code7500 && code7600 == other.code7600 && code7700 == other.code7700 && createdAt == other.createdAt && createdBy == other.createdBy && faa == other.faa && grndspd == other.grndspd && hdng == other.hdng && idSensor == other.idSensor && m1 == other.m1 && m1g == other.m1g && m1v == other.m1v && m2 == other.m2 && m2g == other.m2g && m2v == other.m2v && m2xv == other.m2xv && m3a == other.m3a && m3ag == other.m3ag && m3av == other.m3av && m3axv == other.m3axv && m4 == other.m4 && m4d1d2 == other.m4d1d2 && m4v == other.m4v && mah == other.mah && mc == other.mc && mcg == other.mcg && mcv == other.mcv && milemrgcy == other.milemrgcy && mrgrpt == other.mrgrpt && mscommb == other.mscommb && mti == other.mti && origin == other.origin && origNetwork == other.origNetwork && origSensorId == other.origSensorId && psrrl == other.psrrl && rad == other.rad && rng == other.rng && rngdelt == other.rngdelt && sac == other.sac && senalt == other.senalt && senlat == other.senlat && senlon == other.senlon && sic == other.sic && spi == other.spi && ssrl == other.ssrl && tags == other.tags && tgtconf == other.tgtconf && tgtcorr == other.tgtcorr && tgtid == other.tgtid && tis == other.tis && trkelig == other.trkelig && trknum == other.trknum && tti == other.tti && wectc == other.wectc /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                msgfmt == other.msgfmt &&
+                msgts == other.msgts &&
+                msgtyp == other.msgtyp &&
+                source == other.source &&
+                ts == other.ts &&
+                id == other.id &&
+                acp == other.acp &&
+                addr == other.addr &&
+                af == other.af &&
+                aims == other.aims &&
+                alt3d == other.alt3d &&
+                artsqual == other.artsqual &&
+                az == other.az &&
+                azdelt == other.azdelt &&
+                bcnhits == other.bcnhits &&
+                cartpos == other.cartpos &&
+                cdm == other.cdm &&
+                code7500 == other.code7500 &&
+                code7600 == other.code7600 &&
+                code7700 == other.code7700 &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                faa == other.faa &&
+                grndspd == other.grndspd &&
+                hdng == other.hdng &&
+                idSensor == other.idSensor &&
+                m1 == other.m1 &&
+                m1g == other.m1g &&
+                m1v == other.m1v &&
+                m2 == other.m2 &&
+                m2g == other.m2g &&
+                m2v == other.m2v &&
+                m2xv == other.m2xv &&
+                m3a == other.m3a &&
+                m3ag == other.m3ag &&
+                m3av == other.m3av &&
+                m3axv == other.m3axv &&
+                m4 == other.m4 &&
+                m4d1d2 == other.m4d1d2 &&
+                m4v == other.m4v &&
+                mah == other.mah &&
+                mc == other.mc &&
+                mcg == other.mcg &&
+                mcv == other.mcv &&
+                milemrgcy == other.milemrgcy &&
+                mrgrpt == other.mrgrpt &&
+                mscommb == other.mscommb &&
+                mti == other.mti &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origSensorId == other.origSensorId &&
+                psrrl == other.psrrl &&
+                rad == other.rad &&
+                rng == other.rng &&
+                rngdelt == other.rngdelt &&
+                sac == other.sac &&
+                senalt == other.senalt &&
+                senlat == other.senlat &&
+                senlon == other.senlon &&
+                sic == other.sic &&
+                spi == other.spi &&
+                ssrl == other.ssrl &&
+                tags == other.tags &&
+                tgtconf == other.tgtconf &&
+                tgtcorr == other.tgtcorr &&
+                tgtid == other.tgtid &&
+                tis == other.tis &&
+                trkelig == other.trkelig &&
+                trknum == other.trknum &&
+                tti == other.tti &&
+                wectc == other.wectc
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, msgfmt, msgts, msgtyp, source, ts, id, acp, addr, af, aims, alt3d, artsqual, az, azdelt, bcnhits, cartpos, cdm, code7500, code7600, code7700, createdAt, createdBy, faa, grndspd, hdng, idSensor, m1, m1g, m1v, m2, m2g, m2v, m2xv, m3a, m3ag, m3av, m3axv, m4, m4d1d2, m4v, mah, mc, mcg, mcv, milemrgcy, mrgrpt, mscommb, mti, origin, origNetwork, origSensorId, psrrl, rad, rng, rngdelt, sac, senalt, senlat, senlon, sic, spi, ssrl, tags, tgtconf, tgtcorr, tgtid, tis, trkelig, trknum, tti, wectc) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                msgfmt,
+                msgts,
+                msgtyp,
+                source,
+                ts,
+                id,
+                acp,
+                addr,
+                af,
+                aims,
+                alt3d,
+                artsqual,
+                az,
+                azdelt,
+                bcnhits,
+                cartpos,
+                cdm,
+                code7500,
+                code7600,
+                code7700,
+                createdAt,
+                createdBy,
+                faa,
+                grndspd,
+                hdng,
+                idSensor,
+                m1,
+                m1g,
+                m1v,
+                m2,
+                m2g,
+                m2v,
+                m2xv,
+                m3a,
+                m3ag,
+                m3av,
+                m3axv,
+                m4,
+                m4d1d2,
+                m4v,
+                mah,
+                mc,
+                mcg,
+                mcv,
+                milemrgcy,
+                mrgrpt,
+                mscommb,
+                mti,
+                origin,
+                origNetwork,
+                origSensorId,
+                psrrl,
+                rad,
+                rng,
+                rngdelt,
+                sac,
+                senalt,
+                senlat,
+                senlon,
+                sic,
+                spi,
+                ssrl,
+                tags,
+                tgtconf,
+                tgtcorr,
+                tgtid,
+                tis,
+                trkelig,
+                trknum,
+                tti,
+                wectc,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3039,10 +3186,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is MonoradarCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is MonoradarCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "MonoradarCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

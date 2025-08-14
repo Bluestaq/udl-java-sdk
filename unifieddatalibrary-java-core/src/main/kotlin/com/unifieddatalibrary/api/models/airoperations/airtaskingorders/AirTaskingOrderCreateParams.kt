@@ -2027,12 +2027,59 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && beginTs == other.beginTs && classificationMarking == other.classificationMarking && dataMode == other.dataMode && opExerName == other.opExerName && source == other.source && id == other.id && ackReqInd == other.ackReqInd && ackUnitInstructions == other.ackUnitInstructions && acMsnTasking == other.acMsnTasking && createdAt == other.createdAt && createdBy == other.createdBy && endTs == other.endTs && genText == other.genText && msgMonth == other.msgMonth && msgOriginator == other.msgOriginator && msgQualifier == other.msgQualifier && msgSn == other.msgSn && navalFltOps == other.navalFltOps && origin == other.origin && origNetwork == other.origNetwork && rawFileUri == other.rawFileUri && sourceDl == other.sourceDl && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                beginTs == other.beginTs &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                opExerName == other.opExerName &&
+                source == other.source &&
+                id == other.id &&
+                ackReqInd == other.ackReqInd &&
+                ackUnitInstructions == other.ackUnitInstructions &&
+                acMsnTasking == other.acMsnTasking &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                endTs == other.endTs &&
+                genText == other.genText &&
+                msgMonth == other.msgMonth &&
+                msgOriginator == other.msgOriginator &&
+                msgQualifier == other.msgQualifier &&
+                msgSn == other.msgSn &&
+                navalFltOps == other.navalFltOps &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                rawFileUri == other.rawFileUri &&
+                sourceDl == other.sourceDl &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(beginTs, classificationMarking, dataMode, opExerName, source, id, ackReqInd, ackUnitInstructions, acMsnTasking, createdAt, createdBy, endTs, genText, msgMonth, msgOriginator, msgQualifier, msgSn, navalFltOps, origin, origNetwork, rawFileUri, sourceDl, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                beginTs,
+                classificationMarking,
+                dataMode,
+                opExerName,
+                source,
+                id,
+                ackReqInd,
+                ackUnitInstructions,
+                acMsnTasking,
+                createdAt,
+                createdBy,
+                endTs,
+                genText,
+                msgMonth,
+                msgOriginator,
+                msgQualifier,
+                msgSn,
+                navalFltOps,
+                origin,
+                origNetwork,
+                rawFileUri,
+                sourceDl,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2185,7 +2232,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3953,12 +4000,35 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is AcMsnLocSeg && startTime == other.startTime && airMsnPri == other.airMsnPri && alt == other.alt && areaGeoRad == other.areaGeoRad && endTime == other.endTime && msnLocName == other.msnLocName && msnLocPtBarT == other.msnLocPtBarT && msnLocPtLat == other.msnLocPtLat && msnLocPtLon == other.msnLocPtLon && msnLocPtName == other.msnLocPtName && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is AcMsnLocSeg &&
+                    startTime == other.startTime &&
+                    airMsnPri == other.airMsnPri &&
+                    alt == other.alt &&
+                    areaGeoRad == other.areaGeoRad &&
+                    endTime == other.endTime &&
+                    msnLocName == other.msnLocName &&
+                    msnLocPtBarT == other.msnLocPtBarT &&
+                    msnLocPtLat == other.msnLocPtLat &&
+                    msnLocPtLon == other.msnLocPtLon &&
+                    msnLocPtName == other.msnLocPtName &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(startTime, airMsnPri, alt, areaGeoRad, endTime, msnLocName, msnLocPtBarT, msnLocPtLat, msnLocPtLon, msnLocPtName, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    startTime,
+                    airMsnPri,
+                    alt,
+                    areaGeoRad,
+                    endTime,
+                    msnLocName,
+                    msnLocPtBarT,
+                    msnLocPtLat,
+                    msnLocPtLon,
+                    msnLocPtName,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -4571,12 +4641,37 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is IndAcTasking && acftType == other.acftType && callSign == other.callSign && iffSifMode1Code == other.iffSifMode1Code && iffSifMode2Code == other.iffSifMode2Code && iffSifMode3Code == other.iffSifMode3Code && juAddress == other.juAddress && link16CallSign == other.link16CallSign && numAcft == other.numAcft && priConfigCode == other.priConfigCode && secConfigCode == other.secConfigCode && tacanChan == other.tacanChan && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is IndAcTasking &&
+                    acftType == other.acftType &&
+                    callSign == other.callSign &&
+                    iffSifMode1Code == other.iffSifMode1Code &&
+                    iffSifMode2Code == other.iffSifMode2Code &&
+                    iffSifMode3Code == other.iffSifMode3Code &&
+                    juAddress == other.juAddress &&
+                    link16CallSign == other.link16CallSign &&
+                    numAcft == other.numAcft &&
+                    priConfigCode == other.priConfigCode &&
+                    secConfigCode == other.secConfigCode &&
+                    tacanChan == other.tacanChan &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(acftType, callSign, iffSifMode1Code, iffSifMode2Code, iffSifMode3Code, juAddress, link16CallSign, numAcft, priConfigCode, secConfigCode, tacanChan, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    acftType,
+                    callSign,
+                    iffSifMode1Code,
+                    iffSifMode2Code,
+                    iffSifMode3Code,
+                    juAddress,
+                    link16CallSign,
+                    numAcft,
+                    priConfigCode,
+                    secConfigCode,
+                    tacanChan,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -4589,12 +4684,63 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AcMsnTasking && countryCode == other.countryCode && taskedService == other.taskedService && unitDesignator == other.unitDesignator && acMsnLocSeg == other.acMsnLocSeg && alertStatus == other.alertStatus && amcMsnNum == other.amcMsnNum && depLocLat == other.depLocLat && depLocLon == other.depLocLon && depLocName == other.depLocName && depLocUtm == other.depLocUtm && depTime == other.depTime && indAcTasking == other.indAcTasking && msnCommander == other.msnCommander && msnNum == other.msnNum && pkgId == other.pkgId && priMsnType == other.priMsnType && rcvyLocLat == other.rcvyLocLat && rcvyLocLon == other.rcvyLocLon && rcvyLocName == other.rcvyLocName && rcvyLocUtm == other.rcvyLocUtm && rcvyTime == other.rcvyTime && resMsnInd == other.resMsnInd && secMsnType == other.secMsnType && unitLocName == other.unitLocName && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is AcMsnTasking &&
+                countryCode == other.countryCode &&
+                taskedService == other.taskedService &&
+                unitDesignator == other.unitDesignator &&
+                acMsnLocSeg == other.acMsnLocSeg &&
+                alertStatus == other.alertStatus &&
+                amcMsnNum == other.amcMsnNum &&
+                depLocLat == other.depLocLat &&
+                depLocLon == other.depLocLon &&
+                depLocName == other.depLocName &&
+                depLocUtm == other.depLocUtm &&
+                depTime == other.depTime &&
+                indAcTasking == other.indAcTasking &&
+                msnCommander == other.msnCommander &&
+                msnNum == other.msnNum &&
+                pkgId == other.pkgId &&
+                priMsnType == other.priMsnType &&
+                rcvyLocLat == other.rcvyLocLat &&
+                rcvyLocLon == other.rcvyLocLon &&
+                rcvyLocName == other.rcvyLocName &&
+                rcvyLocUtm == other.rcvyLocUtm &&
+                rcvyTime == other.rcvyTime &&
+                resMsnInd == other.resMsnInd &&
+                secMsnType == other.secMsnType &&
+                unitLocName == other.unitLocName &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(countryCode, taskedService, unitDesignator, acMsnLocSeg, alertStatus, amcMsnNum, depLocLat, depLocLon, depLocName, depLocUtm, depTime, indAcTasking, msnCommander, msnNum, pkgId, priMsnType, rcvyLocLat, rcvyLocLon, rcvyLocName, rcvyLocUtm, rcvyTime, resMsnInd, secMsnType, unitLocName, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                countryCode,
+                taskedService,
+                unitDesignator,
+                acMsnLocSeg,
+                alertStatus,
+                amcMsnNum,
+                depLocLat,
+                depLocLon,
+                depLocName,
+                depLocUtm,
+                depTime,
+                indAcTasking,
+                msnCommander,
+                msnNum,
+                pkgId,
+                priMsnType,
+                rcvyLocLat,
+                rcvyLocLon,
+                rcvyLocName,
+                rcvyLocUtm,
+                rcvyTime,
+                resMsnInd,
+                secMsnType,
+                unitLocName,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4771,12 +4917,13 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is GenText && text == other.text && textInd == other.textInd && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is GenText &&
+                text == other.text &&
+                textInd == other.textInd &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
         private val hashCode: Int by lazy { Objects.hash(text, textInd, additionalProperties) }
-        /* spotless:on */
 
         override fun hashCode(): Int = hashCode
 
@@ -5079,12 +5226,17 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is NavalFltOp && shipName == other.shipName && fltOpStart == other.fltOpStart && fltOpStop == other.fltOpStop && schdLaunchRcvyTime == other.schdLaunchRcvyTime && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is NavalFltOp &&
+                shipName == other.shipName &&
+                fltOpStart == other.fltOpStart &&
+                fltOpStop == other.fltOpStop &&
+                schdLaunchRcvyTime == other.schdLaunchRcvyTime &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(shipName, fltOpStart, fltOpStop, schdLaunchRcvyTime, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(shipName, fltOpStart, fltOpStop, schdLaunchRcvyTime, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5097,10 +5249,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AirTaskingOrderCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is AirTaskingOrderCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "AirTaskingOrderCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

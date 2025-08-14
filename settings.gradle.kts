@@ -1,7 +1,14 @@
 rootProject.name = "unifieddatalibrary-java-root"
 
-include("unifieddatalibrary-java")
-include("unifieddatalibrary-java-client-okhttp")
-include("unifieddatalibrary-java-core")
-include("unifieddatalibrary-java-proguard-test")
-include("unifieddatalibrary-java-example")
+val projectNames = rootDir.listFiles()
+    ?.asSequence()
+    .orEmpty()
+    .filter { file ->
+        file.isDirectory &&
+        file.name.startsWith("unifieddatalibrary-java") &&
+        file.listFiles()?.asSequence().orEmpty().any { it.name == "build.gradle.kts" }
+    }
+    .map { it.name }
+    .toList()
+println("projects: $projectNames")
+projectNames.forEach { include(it) }

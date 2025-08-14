@@ -1599,7 +1599,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1612,12 +1612,75 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LogisticsSupportTupleResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && rptCreatedTime == other.rptCreatedTime && source == other.source && id == other.id && aircraftMds == other.aircraftMds && createdAt == other.createdAt && createdBy == other.createdBy && currIcao == other.currIcao && etic == other.etic && etmc == other.etmc && extSystemId == other.extSystemId && logisticAction == other.logisticAction && logisticsDiscrepancyInfos == other.logisticsDiscrepancyInfos && logisticsRecordId == other.logisticsRecordId && logisticsRemarks == other.logisticsRemarks && logisticsSupportItems == other.logisticsSupportItems && logisticsTransportationPlans == other.logisticsTransportationPlans && maintStatusCode == other.maintStatusCode && mcTime == other.mcTime && meTime == other.meTime && origin == other.origin && origNetwork == other.origNetwork && owner == other.owner && reopenFlag == other.reopenFlag && rptClosedTime == other.rptClosedTime && suppIcao == other.suppIcao && tailNumber == other.tailNumber && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is LogisticsSupportTupleResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            rptCreatedTime == other.rptCreatedTime &&
+            source == other.source &&
+            id == other.id &&
+            aircraftMds == other.aircraftMds &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            currIcao == other.currIcao &&
+            etic == other.etic &&
+            etmc == other.etmc &&
+            extSystemId == other.extSystemId &&
+            logisticAction == other.logisticAction &&
+            logisticsDiscrepancyInfos == other.logisticsDiscrepancyInfos &&
+            logisticsRecordId == other.logisticsRecordId &&
+            logisticsRemarks == other.logisticsRemarks &&
+            logisticsSupportItems == other.logisticsSupportItems &&
+            logisticsTransportationPlans == other.logisticsTransportationPlans &&
+            maintStatusCode == other.maintStatusCode &&
+            mcTime == other.mcTime &&
+            meTime == other.meTime &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            owner == other.owner &&
+            reopenFlag == other.reopenFlag &&
+            rptClosedTime == other.rptClosedTime &&
+            suppIcao == other.suppIcao &&
+            tailNumber == other.tailNumber &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, rptCreatedTime, source, id, aircraftMds, createdAt, createdBy, currIcao, etic, etmc, extSystemId, logisticAction, logisticsDiscrepancyInfos, logisticsRecordId, logisticsRemarks, logisticsSupportItems, logisticsTransportationPlans, maintStatusCode, mcTime, meTime, origin, origNetwork, owner, reopenFlag, rptClosedTime, suppIcao, tailNumber, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            rptCreatedTime,
+            source,
+            id,
+            aircraftMds,
+            createdAt,
+            createdBy,
+            currIcao,
+            etic,
+            etmc,
+            extSystemId,
+            logisticAction,
+            logisticsDiscrepancyInfos,
+            logisticsRecordId,
+            logisticsRemarks,
+            logisticsSupportItems,
+            logisticsTransportationPlans,
+            maintStatusCode,
+            mcTime,
+            meTime,
+            origin,
+            origNetwork,
+            owner,
+            reopenFlag,
+            rptClosedTime,
+            suppIcao,
+            tailNumber,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

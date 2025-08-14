@@ -639,7 +639,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -652,12 +652,33 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is DriftHistoryAbridged && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && createdBy == other.createdBy && driftRate == other.driftRate && effectiveUntil == other.effectiveUntil && idOnOrbit == other.idOnOrbit && origin == other.origin && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is DriftHistoryAbridged &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            id == other.id &&
+            createdBy == other.createdBy &&
+            driftRate == other.driftRate &&
+            effectiveUntil == other.effectiveUntil &&
+            idOnOrbit == other.idOnOrbit &&
+            origin == other.origin &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, id, createdBy, driftRate, effectiveUntil, idOnOrbit, origin, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            id,
+            createdBy,
+            driftRate,
+            effectiveUntil,
+            idOnOrbit,
+            origin,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

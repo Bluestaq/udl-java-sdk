@@ -1858,7 +1858,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -3917,12 +3917,23 @@ private constructor(
                             return true
                         }
 
-                        return /* spotless:off */ other is AirspaceControlPoint && ctrlPtAltitude == other.ctrlPtAltitude && ctrlPtLocation == other.ctrlPtLocation && ctrlPtName == other.ctrlPtName && ctrlPtType == other.ctrlPtType && additionalProperties == other.additionalProperties /* spotless:on */
+                        return other is AirspaceControlPoint &&
+                            ctrlPtAltitude == other.ctrlPtAltitude &&
+                            ctrlPtLocation == other.ctrlPtLocation &&
+                            ctrlPtName == other.ctrlPtName &&
+                            ctrlPtType == other.ctrlPtType &&
+                            additionalProperties == other.additionalProperties
                     }
 
-                    /* spotless:off */
-                    private val hashCode: Int by lazy { Objects.hash(ctrlPtAltitude, ctrlPtLocation, ctrlPtName, ctrlPtType, additionalProperties) }
-                    /* spotless:on */
+                    private val hashCode: Int by lazy {
+                        Objects.hash(
+                            ctrlPtAltitude,
+                            ctrlPtLocation,
+                            ctrlPtName,
+                            ctrlPtType,
+                            additionalProperties,
+                        )
+                    }
 
                     override fun hashCode(): Int = hashCode
 
@@ -4290,12 +4301,25 @@ private constructor(
                             return true
                         }
 
-                        return /* spotless:off */ other is AirspaceTimePeriod && intDur == other.intDur && intFreq == other.intFreq && timeEnd == other.timeEnd && timeMode == other.timeMode && timeStart == other.timeStart && additionalProperties == other.additionalProperties /* spotless:on */
+                        return other is AirspaceTimePeriod &&
+                            intDur == other.intDur &&
+                            intFreq == other.intFreq &&
+                            timeEnd == other.timeEnd &&
+                            timeMode == other.timeMode &&
+                            timeStart == other.timeStart &&
+                            additionalProperties == other.additionalProperties
                     }
 
-                    /* spotless:off */
-                    private val hashCode: Int by lazy { Objects.hash(intDur, intFreq, timeEnd, timeMode, timeStart, additionalProperties) }
-                    /* spotless:on */
+                    private val hashCode: Int by lazy {
+                        Objects.hash(
+                            intDur,
+                            intFreq,
+                            timeEnd,
+                            timeMode,
+                            timeStart,
+                            additionalProperties,
+                        )
+                    }
 
                     override fun hashCode(): Int = hashCode
 
@@ -4472,7 +4496,7 @@ private constructor(
                             return true
                         }
 
-                        return /* spotless:off */ other is CmShape && value == other.value /* spotless:on */
+                        return other is CmShape && value == other.value
                     }
 
                     override fun hashCode() = value.hashCode()
@@ -4485,12 +4509,73 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is AirspaceControlMean && airspaceControlPoint == other.airspaceControlPoint && airspaceTimePeriod == other.airspaceTimePeriod && bearing0 == other.bearing0 && bearing1 == other.bearing1 && cmId == other.cmId && cmShape == other.cmShape && cmType == other.cmType && cntrlAuth == other.cntrlAuth && cntrlAuthFreqs == other.cntrlAuthFreqs && coord0 == other.coord0 && coord1 == other.coord1 && corrWayPoints == other.corrWayPoints && effVDim == other.effVDim && freeText == other.freeText && genTextInd == other.genTextInd && geoDatumAlt == other.geoDatumAlt && link16Id == other.link16Id && orbitAlignment == other.orbitAlignment && polyCoord == other.polyCoord && radMag0 == other.radMag0 && radMag1 == other.radMag1 && radMagUnit == other.radMagUnit && trackLeg == other.trackLeg && transAltitude == other.transAltitude && usage == other.usage && width == other.width && widthLeft == other.widthLeft && widthRight == other.widthRight && widthUnit == other.widthUnit && additionalProperties == other.additionalProperties /* spotless:on */
+                    return other is AirspaceControlMean &&
+                        airspaceControlPoint == other.airspaceControlPoint &&
+                        airspaceTimePeriod == other.airspaceTimePeriod &&
+                        bearing0 == other.bearing0 &&
+                        bearing1 == other.bearing1 &&
+                        cmId == other.cmId &&
+                        cmShape == other.cmShape &&
+                        cmType == other.cmType &&
+                        cntrlAuth == other.cntrlAuth &&
+                        cntrlAuthFreqs == other.cntrlAuthFreqs &&
+                        coord0 == other.coord0 &&
+                        coord1 == other.coord1 &&
+                        corrWayPoints == other.corrWayPoints &&
+                        effVDim == other.effVDim &&
+                        freeText == other.freeText &&
+                        genTextInd == other.genTextInd &&
+                        geoDatumAlt == other.geoDatumAlt &&
+                        link16Id == other.link16Id &&
+                        orbitAlignment == other.orbitAlignment &&
+                        polyCoord == other.polyCoord &&
+                        radMag0 == other.radMag0 &&
+                        radMag1 == other.radMag1 &&
+                        radMagUnit == other.radMagUnit &&
+                        trackLeg == other.trackLeg &&
+                        transAltitude == other.transAltitude &&
+                        usage == other.usage &&
+                        width == other.width &&
+                        widthLeft == other.widthLeft &&
+                        widthRight == other.widthRight &&
+                        widthUnit == other.widthUnit &&
+                        additionalProperties == other.additionalProperties
                 }
 
-                /* spotless:off */
-                private val hashCode: Int by lazy { Objects.hash(airspaceControlPoint, airspaceTimePeriod, bearing0, bearing1, cmId, cmShape, cmType, cntrlAuth, cntrlAuthFreqs, coord0, coord1, corrWayPoints, effVDim, freeText, genTextInd, geoDatumAlt, link16Id, orbitAlignment, polyCoord, radMag0, radMag1, radMagUnit, trackLeg, transAltitude, usage, width, widthLeft, widthRight, widthUnit, additionalProperties) }
-                /* spotless:on */
+                private val hashCode: Int by lazy {
+                    Objects.hash(
+                        airspaceControlPoint,
+                        airspaceTimePeriod,
+                        bearing0,
+                        bearing1,
+                        cmId,
+                        cmShape,
+                        cmType,
+                        cntrlAuth,
+                        cntrlAuthFreqs,
+                        coord0,
+                        coord1,
+                        corrWayPoints,
+                        effVDim,
+                        freeText,
+                        genTextInd,
+                        geoDatumAlt,
+                        link16Id,
+                        orbitAlignment,
+                        polyCoord,
+                        radMag0,
+                        radMag1,
+                        radMagUnit,
+                        trackLeg,
+                        transAltitude,
+                        usage,
+                        width,
+                        widthLeft,
+                        widthRight,
+                        widthUnit,
+                        additionalProperties,
+                    )
+                }
 
                 override fun hashCode(): Int = hashCode
 
@@ -4503,12 +4588,16 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is AirspaceControlMeansStatus && airspaceControlMeans == other.airspaceControlMeans && cmStat == other.cmStat && cmStatId == other.cmStatId && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is AirspaceControlMeansStatus &&
+                    airspaceControlMeans == other.airspaceControlMeans &&
+                    cmStat == other.cmStat &&
+                    cmStatId == other.cmStatId &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(airspaceControlMeans, cmStat, cmStatId, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(airspaceControlMeans, cmStat, cmStatId, additionalProperties)
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -4938,12 +5027,29 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is AirspaceControlOrderReference && refOriginator == other.refOriginator && refSerialNum == other.refSerialNum && refSiCs == other.refSiCs && refSId == other.refSId && refSpecialNotation == other.refSpecialNotation && refTs == other.refTs && refType == other.refType && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is AirspaceControlOrderReference &&
+                    refOriginator == other.refOriginator &&
+                    refSerialNum == other.refSerialNum &&
+                    refSiCs == other.refSiCs &&
+                    refSId == other.refSId &&
+                    refSpecialNotation == other.refSpecialNotation &&
+                    refTs == other.refTs &&
+                    refType == other.refType &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(refOriginator, refSerialNum, refSiCs, refSId, refSpecialNotation, refTs, refType, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    refOriginator,
+                    refSerialNum,
+                    refSiCs,
+                    refSId,
+                    refSpecialNotation,
+                    refTs,
+                    refType,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -4956,12 +5062,79 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && opExName == other.opExName && originator == other.originator && source == other.source && startTime == other.startTime && id == other.id && acoComments == other.acoComments && acoSerialNum == other.acoSerialNum && airspaceControlMeansStatus == other.airspaceControlMeansStatus && airspaceControlOrderReferences == other.airspaceControlOrderReferences && areaOfValidity == other.areaOfValidity && classReasons == other.classReasons && classSource == other.classSource && createdAt == other.createdAt && createdBy == other.createdBy && declassExemptionCodes == other.declassExemptionCodes && downgradeInsDates == other.downgradeInsDates && geoDatum == other.geoDatum && month == other.month && opExInfo == other.opExInfo && opExInfoAlt == other.opExInfoAlt && origin == other.origin && origNetwork == other.origNetwork && planOrigNum == other.planOrigNum && qualifier == other.qualifier && qualSn == other.qualSn && rawFileUri == other.rawFileUri && serialNum == other.serialNum && sourceDl == other.sourceDl && stopQualifier == other.stopQualifier && stopTime == other.stopTime && undLnkTrks == other.undLnkTrks /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                opExName == other.opExName &&
+                originator == other.originator &&
+                source == other.source &&
+                startTime == other.startTime &&
+                id == other.id &&
+                acoComments == other.acoComments &&
+                acoSerialNum == other.acoSerialNum &&
+                airspaceControlMeansStatus == other.airspaceControlMeansStatus &&
+                airspaceControlOrderReferences == other.airspaceControlOrderReferences &&
+                areaOfValidity == other.areaOfValidity &&
+                classReasons == other.classReasons &&
+                classSource == other.classSource &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                declassExemptionCodes == other.declassExemptionCodes &&
+                downgradeInsDates == other.downgradeInsDates &&
+                geoDatum == other.geoDatum &&
+                month == other.month &&
+                opExInfo == other.opExInfo &&
+                opExInfoAlt == other.opExInfoAlt &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                planOrigNum == other.planOrigNum &&
+                qualifier == other.qualifier &&
+                qualSn == other.qualSn &&
+                rawFileUri == other.rawFileUri &&
+                serialNum == other.serialNum &&
+                sourceDl == other.sourceDl &&
+                stopQualifier == other.stopQualifier &&
+                stopTime == other.stopTime &&
+                undLnkTrks == other.undLnkTrks
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, opExName, originator, source, startTime, id, acoComments, acoSerialNum, airspaceControlMeansStatus, airspaceControlOrderReferences, areaOfValidity, classReasons, classSource, createdAt, createdBy, declassExemptionCodes, downgradeInsDates, geoDatum, month, opExInfo, opExInfoAlt, origin, origNetwork, planOrigNum, qualifier, qualSn, rawFileUri, serialNum, sourceDl, stopQualifier, stopTime, undLnkTrks) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                opExName,
+                originator,
+                source,
+                startTime,
+                id,
+                acoComments,
+                acoSerialNum,
+                airspaceControlMeansStatus,
+                airspaceControlOrderReferences,
+                areaOfValidity,
+                classReasons,
+                classSource,
+                createdAt,
+                createdBy,
+                declassExemptionCodes,
+                downgradeInsDates,
+                geoDatum,
+                month,
+                opExInfo,
+                opExInfoAlt,
+                origin,
+                origNetwork,
+                planOrigNum,
+                qualifier,
+                qualSn,
+                rawFileUri,
+                serialNum,
+                sourceDl,
+                stopQualifier,
+                stopTime,
+                undLnkTrks,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4974,10 +5147,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AirspaceControlOrderUnvalidatedPublishParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is AirspaceControlOrderUnvalidatedPublishParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "AirspaceControlOrderUnvalidatedPublishParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

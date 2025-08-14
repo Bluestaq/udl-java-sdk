@@ -224,12 +224,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LogisticsRemarksAbridged && lastChanged == other.lastChanged && remark == other.remark && username == other.username && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is LogisticsRemarksAbridged &&
+            lastChanged == other.lastChanged &&
+            remark == other.remark &&
+            username == other.username &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(lastChanged, remark, username, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(lastChanged, remark, username, additionalProperties)
+    }
 
     override fun hashCode(): Int = hashCode
 

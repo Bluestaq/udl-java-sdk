@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
+import com.unifieddatalibrary.api.models.EngineIngest
 import com.unifieddatalibrary.api.models.onorbitthruster.OnorbitthrusterCreateParams
 import com.unifieddatalibrary.api.models.onorbitthruster.OnorbitthrusterGetParams
 import com.unifieddatalibrary.api.models.onorbitthruster.OnorbitthrusterUpdateParams
@@ -35,9 +36,9 @@ internal class OnorbitthrusterServiceTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .engine(
-                    OnorbitthrusterCreateParams.Engine.builder()
+                    EngineIngest.builder()
                         .classificationMarking("U")
-                        .dataMode(OnorbitthrusterCreateParams.Engine.DataMode.TEST)
+                        .dataMode(EngineIngest.DataMode.TEST)
                         .name("ENGINE_VARIANT1")
                         .source("Bluestaq")
                         .id("ENGINE-ID")
@@ -77,9 +78,9 @@ internal class OnorbitthrusterServiceTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .engine(
-                    OnorbitthrusterUpdateParams.Engine.builder()
+                    EngineIngest.builder()
                         .classificationMarking("U")
-                        .dataMode(OnorbitthrusterUpdateParams.Engine.DataMode.TEST)
+                        .dataMode(EngineIngest.DataMode.TEST)
                         .name("ENGINE_VARIANT1")
                         .source("Bluestaq")
                         .id("ENGINE-ID")

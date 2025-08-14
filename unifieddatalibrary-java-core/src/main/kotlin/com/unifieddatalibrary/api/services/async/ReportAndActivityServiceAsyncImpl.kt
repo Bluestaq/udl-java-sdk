@@ -3,12 +3,12 @@
 package com.unifieddatalibrary.api.services.async
 
 import com.unifieddatalibrary.api.core.ClientOptions
-import com.unifieddatalibrary.api.services.async.reportandactivity.PoiServiceAsync
-import com.unifieddatalibrary.api.services.async.reportandactivity.PoiServiceAsyncImpl
-import com.unifieddatalibrary.api.services.async.reportandactivity.UdlH3geoServiceAsync
-import com.unifieddatalibrary.api.services.async.reportandactivity.UdlH3geoServiceAsyncImpl
-import com.unifieddatalibrary.api.services.async.reportandactivity.UdlSigactServiceAsync
-import com.unifieddatalibrary.api.services.async.reportandactivity.UdlSigactServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.reportandactivities.PoiServiceAsync
+import com.unifieddatalibrary.api.services.async.reportandactivities.PoiServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.reportandactivities.UdlH3geoServiceAsync
+import com.unifieddatalibrary.api.services.async.reportandactivities.UdlH3geoServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.reportandactivities.UdlSigactServiceAsync
+import com.unifieddatalibrary.api.services.async.reportandactivities.UdlSigactServiceAsyncImpl
 import java.util.function.Consumer
 
 class ReportAndActivityServiceAsyncImpl

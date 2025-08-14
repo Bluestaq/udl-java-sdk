@@ -1266,7 +1266,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1279,12 +1279,63 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GeoStatusListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && confidenceLevel == other.confidenceLevel && createdAt == other.createdAt && createdBy == other.createdBy && idOnOrbit == other.idOnOrbit && longitudeMax == other.longitudeMax && longitudeMin == other.longitudeMin && longitudeRate == other.longitudeRate && lostFlag == other.lostFlag && objectStatus == other.objectStatus && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && planeChangeStatus == other.planeChangeStatus && rawFileUri == other.rawFileUri && relativeEnergy == other.relativeEnergy && satNo == other.satNo && sc == other.sc && semiAnnualCorrFlag == other.semiAnnualCorrFlag && ss == other.ss && troughType == other.troughType && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is GeoStatusListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            id == other.id &&
+            confidenceLevel == other.confidenceLevel &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            idOnOrbit == other.idOnOrbit &&
+            longitudeMax == other.longitudeMax &&
+            longitudeMin == other.longitudeMin &&
+            longitudeRate == other.longitudeRate &&
+            lostFlag == other.lostFlag &&
+            objectStatus == other.objectStatus &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            planeChangeStatus == other.planeChangeStatus &&
+            rawFileUri == other.rawFileUri &&
+            relativeEnergy == other.relativeEnergy &&
+            satNo == other.satNo &&
+            sc == other.sc &&
+            semiAnnualCorrFlag == other.semiAnnualCorrFlag &&
+            ss == other.ss &&
+            troughType == other.troughType &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, id, confidenceLevel, createdAt, createdBy, idOnOrbit, longitudeMax, longitudeMin, longitudeRate, lostFlag, objectStatus, origin, origNetwork, origObjectId, planeChangeStatus, rawFileUri, relativeEnergy, satNo, sc, semiAnnualCorrFlag, ss, troughType, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            id,
+            confidenceLevel,
+            createdAt,
+            createdBy,
+            idOnOrbit,
+            longitudeMax,
+            longitudeMin,
+            longitudeRate,
+            lostFlag,
+            objectStatus,
+            origin,
+            origNetwork,
+            origObjectId,
+            planeChangeStatus,
+            rawFileUri,
+            relativeEnergy,
+            satNo,
+            sc,
+            semiAnnualCorrFlag,
+            ss,
+            troughType,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

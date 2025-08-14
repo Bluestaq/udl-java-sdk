@@ -1152,7 +1152,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1292,7 +1292,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+            return other is Type && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1305,12 +1305,57 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is BeamcontourFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idBeam == other.idBeam && source == other.source && type == other.type && id == other.id && contourIdx == other.contourIdx && createdAt == other.createdAt && createdBy == other.createdBy && gain == other.gain && geography == other.geography && geographyJson == other.geographyJson && geographyNdims == other.geographyNdims && geographySrid == other.geographySrid && geographyText == other.geographyText && geographyType == other.geographyType && origin == other.origin && origNetwork == other.origNetwork && regionName == other.regionName && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is BeamcontourFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idBeam == other.idBeam &&
+            source == other.source &&
+            type == other.type &&
+            id == other.id &&
+            contourIdx == other.contourIdx &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            gain == other.gain &&
+            geography == other.geography &&
+            geographyJson == other.geographyJson &&
+            geographyNdims == other.geographyNdims &&
+            geographySrid == other.geographySrid &&
+            geographyText == other.geographyText &&
+            geographyType == other.geographyType &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            regionName == other.regionName &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idBeam, source, type, id, contourIdx, createdAt, createdBy, gain, geography, geographyJson, geographyNdims, geographySrid, geographyText, geographyType, origin, origNetwork, regionName, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idBeam,
+            source,
+            type,
+            id,
+            contourIdx,
+            createdAt,
+            createdBy,
+            gain,
+            geography,
+            geographyJson,
+            geographyNdims,
+            geographySrid,
+            geographyText,
+            geographyType,
+            origin,
+            origNetwork,
+            regionName,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

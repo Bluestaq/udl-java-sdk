@@ -2886,7 +2886,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3053,7 +3053,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Env && value == other.value /* spotless:on */
+            return other is Env && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3235,7 +3235,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is ObjIdent && value == other.value /* spotless:on */
+            return other is ObjIdent && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4465,7 +4465,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is CovReferenceFrame && value == other.value /* spotless:on */
+                return other is CovReferenceFrame && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -4478,12 +4478,57 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Vector && epoch == other.epoch && accel == other.accel && confidence == other.confidence && course == other.course && cov == other.cov && covReferenceFrame == other.covReferenceFrame && flightAz == other.flightAz && idSensor == other.idSensor && object_ == other.object_ && origSensorId == other.origSensorId && pos == other.pos && quat == other.quat && referenceFrame == other.referenceFrame && spd == other.spd && status == other.status && timeSource == other.timeSource && type == other.type && vectorAlt == other.vectorAlt && vectorLat == other.vectorLat && vectorLon == other.vectorLon && vel == other.vel && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Vector &&
+                epoch == other.epoch &&
+                accel == other.accel &&
+                confidence == other.confidence &&
+                course == other.course &&
+                cov == other.cov &&
+                covReferenceFrame == other.covReferenceFrame &&
+                flightAz == other.flightAz &&
+                idSensor == other.idSensor &&
+                object_ == other.object_ &&
+                origSensorId == other.origSensorId &&
+                pos == other.pos &&
+                quat == other.quat &&
+                referenceFrame == other.referenceFrame &&
+                spd == other.spd &&
+                status == other.status &&
+                timeSource == other.timeSource &&
+                type == other.type &&
+                vectorAlt == other.vectorAlt &&
+                vectorLat == other.vectorLat &&
+                vectorLon == other.vectorLon &&
+                vel == other.vel &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(epoch, accel, confidence, course, cov, covReferenceFrame, flightAz, idSensor, object_, origSensorId, pos, quat, referenceFrame, spd, status, timeSource, type, vectorAlt, vectorLat, vectorLon, vel, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                epoch,
+                accel,
+                confidence,
+                course,
+                cov,
+                covReferenceFrame,
+                flightAz,
+                idSensor,
+                object_,
+                origSensorId,
+                pos,
+                quat,
+                referenceFrame,
+                spd,
+                status,
+                timeSource,
+                type,
+                vectorAlt,
+                vectorLat,
+                vectorLon,
+                vel,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4496,12 +4541,129 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is MissileTrackListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && ts == other.ts && id == other.id && acftSubType == other.acftSubType && alert == other.alert && angElev == other.angElev && aouRptData == other.aouRptData && aouRptType == other.aouRptType && azCorr == other.azCorr && boosting == other.boosting && burnoutAlt == other.burnoutAlt && callSign == other.callSign && containment == other.containment && createdAt == other.createdAt && createdBy == other.createdBy && dropPtInd == other.dropPtInd && emgInd == other.emgInd && env == other.env && impactAouData == other.impactAouData && impactAouType == other.impactAouType && impactLat == other.impactLat && impactLon == other.impactLon && impactTime == other.impactTime && infoSource == other.infoSource && launchAouData == other.launchAouData && launchAouType == other.launchAouType && launchLat == other.launchLat && launchLon == other.launchLon && launchTime == other.launchTime && lostTrkInd == other.lostTrkInd && msgCreateDate == other.msgCreateDate && msgSubType == other.msgSubType && msgType == other.msgType && mslStatus == other.mslStatus && muidSrc == other.muidSrc && muidSrcTrk == other.muidSrcTrk && name == other.name && objAct == other.objAct && objIdent == other.objIdent && objPlat == other.objPlat && objType == other.objType && objTypeConf == other.objTypeConf && origin == other.origin && origNetwork == other.origNetwork && parentTrackId == other.parentTrackId && polarSingLocLat == other.polarSingLocLat && polarSingLocLon == other.polarSingLocLon && senMode == other.senMode && spaceAmp == other.spaceAmp && spaceAmpConf == other.spaceAmpConf && spaceSpecType == other.spaceSpecType && trackId == other.trackId && trkConf == other.trkConf && trkQual == other.trkQual && vectors == other.vectors && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is MissileTrackListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            ts == other.ts &&
+            id == other.id &&
+            acftSubType == other.acftSubType &&
+            alert == other.alert &&
+            angElev == other.angElev &&
+            aouRptData == other.aouRptData &&
+            aouRptType == other.aouRptType &&
+            azCorr == other.azCorr &&
+            boosting == other.boosting &&
+            burnoutAlt == other.burnoutAlt &&
+            callSign == other.callSign &&
+            containment == other.containment &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            dropPtInd == other.dropPtInd &&
+            emgInd == other.emgInd &&
+            env == other.env &&
+            impactAouData == other.impactAouData &&
+            impactAouType == other.impactAouType &&
+            impactLat == other.impactLat &&
+            impactLon == other.impactLon &&
+            impactTime == other.impactTime &&
+            infoSource == other.infoSource &&
+            launchAouData == other.launchAouData &&
+            launchAouType == other.launchAouType &&
+            launchLat == other.launchLat &&
+            launchLon == other.launchLon &&
+            launchTime == other.launchTime &&
+            lostTrkInd == other.lostTrkInd &&
+            msgCreateDate == other.msgCreateDate &&
+            msgSubType == other.msgSubType &&
+            msgType == other.msgType &&
+            mslStatus == other.mslStatus &&
+            muidSrc == other.muidSrc &&
+            muidSrcTrk == other.muidSrcTrk &&
+            name == other.name &&
+            objAct == other.objAct &&
+            objIdent == other.objIdent &&
+            objPlat == other.objPlat &&
+            objType == other.objType &&
+            objTypeConf == other.objTypeConf &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            parentTrackId == other.parentTrackId &&
+            polarSingLocLat == other.polarSingLocLat &&
+            polarSingLocLon == other.polarSingLocLon &&
+            senMode == other.senMode &&
+            spaceAmp == other.spaceAmp &&
+            spaceAmpConf == other.spaceAmpConf &&
+            spaceSpecType == other.spaceSpecType &&
+            trackId == other.trackId &&
+            trkConf == other.trkConf &&
+            trkQual == other.trkQual &&
+            vectors == other.vectors &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, ts, id, acftSubType, alert, angElev, aouRptData, aouRptType, azCorr, boosting, burnoutAlt, callSign, containment, createdAt, createdBy, dropPtInd, emgInd, env, impactAouData, impactAouType, impactLat, impactLon, impactTime, infoSource, launchAouData, launchAouType, launchLat, launchLon, launchTime, lostTrkInd, msgCreateDate, msgSubType, msgType, mslStatus, muidSrc, muidSrcTrk, name, objAct, objIdent, objPlat, objType, objTypeConf, origin, origNetwork, parentTrackId, polarSingLocLat, polarSingLocLon, senMode, spaceAmp, spaceAmpConf, spaceSpecType, trackId, trkConf, trkQual, vectors, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            ts,
+            id,
+            acftSubType,
+            alert,
+            angElev,
+            aouRptData,
+            aouRptType,
+            azCorr,
+            boosting,
+            burnoutAlt,
+            callSign,
+            containment,
+            createdAt,
+            createdBy,
+            dropPtInd,
+            emgInd,
+            env,
+            impactAouData,
+            impactAouType,
+            impactLat,
+            impactLon,
+            impactTime,
+            infoSource,
+            launchAouData,
+            launchAouType,
+            launchLat,
+            launchLon,
+            launchTime,
+            lostTrkInd,
+            msgCreateDate,
+            msgSubType,
+            msgType,
+            mslStatus,
+            muidSrc,
+            muidSrcTrk,
+            name,
+            objAct,
+            objIdent,
+            objPlat,
+            objType,
+            objTypeConf,
+            origin,
+            origNetwork,
+            parentTrackId,
+            polarSingLocLat,
+            polarSingLocLon,
+            senMode,
+            spaceAmp,
+            spaceAmpConf,
+            spaceSpecType,
+            trackId,
+            trkConf,
+            trkQual,
+            vectors,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

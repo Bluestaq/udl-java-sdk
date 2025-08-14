@@ -286,10 +286,26 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HistoryCountParams && createdAt == other.createdAt && firstResult == other.firstResult && linkStartTime == other.linkStartTime && linkStopTime == other.linkStopTime && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HistoryCountParams &&
+            createdAt == other.createdAt &&
+            firstResult == other.firstResult &&
+            linkStartTime == other.linkStartTime &&
+            linkStopTime == other.linkStopTime &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(createdAt, firstResult, linkStartTime, linkStopTime, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            createdAt,
+            firstResult,
+            linkStartTime,
+            linkStopTime,
+            maxResults,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "HistoryCountParams{createdAt=$createdAt, firstResult=$firstResult, linkStartTime=$linkStartTime, linkStopTime=$linkStopTime, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

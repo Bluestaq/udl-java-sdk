@@ -3574,12 +3574,103 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idOnOrbit == other.idOnOrbit && sensorTaskingStartTime == other.sensorTaskingStartTime && source == other.source && statusDate == other.statusDate && id == other.id && affectedObjects == other.affectedObjects && apogee == other.apogee && argOfPerigee == other.argOfPerigee && bStar == other.bStar && createdAt == other.createdAt && createdBy == other.createdBy && deltaTs == other.deltaTs && deltaVs == other.deltaVs && description == other.description && eccentricity == other.eccentricity && elsetEpoch == other.elsetEpoch && inclination == other.inclination && lastObTime == other.lastObTime && meanAnomaly == other.meanAnomaly && meanMotion == other.meanMotion && meanMotionDDot == other.meanMotionDDot && meanMotionDot == other.meanMotionDot && missedObTime == other.missedObTime && name == other.name && origin == other.origin && origNetwork == other.origNetwork && perigee == other.perigee && period == other.period && priority == other.priority && raan == other.raan && revNo == other.revNo && satNo == other.satNo && semiMajorAxis == other.semiMajorAxis && sensorTaskingStopTime == other.sensorTaskingStopTime && status == other.status && svEpoch == other.svEpoch && x == other.x && xvel == other.xvel && y == other.y && yvel == other.yvel && z == other.z && zvel == other.zvel && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idOnOrbit == other.idOnOrbit &&
+                sensorTaskingStartTime == other.sensorTaskingStartTime &&
+                source == other.source &&
+                statusDate == other.statusDate &&
+                id == other.id &&
+                affectedObjects == other.affectedObjects &&
+                apogee == other.apogee &&
+                argOfPerigee == other.argOfPerigee &&
+                bStar == other.bStar &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                deltaTs == other.deltaTs &&
+                deltaVs == other.deltaVs &&
+                description == other.description &&
+                eccentricity == other.eccentricity &&
+                elsetEpoch == other.elsetEpoch &&
+                inclination == other.inclination &&
+                lastObTime == other.lastObTime &&
+                meanAnomaly == other.meanAnomaly &&
+                meanMotion == other.meanMotion &&
+                meanMotionDDot == other.meanMotionDDot &&
+                meanMotionDot == other.meanMotionDot &&
+                missedObTime == other.missedObTime &&
+                name == other.name &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                perigee == other.perigee &&
+                period == other.period &&
+                priority == other.priority &&
+                raan == other.raan &&
+                revNo == other.revNo &&
+                satNo == other.satNo &&
+                semiMajorAxis == other.semiMajorAxis &&
+                sensorTaskingStopTime == other.sensorTaskingStopTime &&
+                status == other.status &&
+                svEpoch == other.svEpoch &&
+                x == other.x &&
+                xvel == other.xvel &&
+                y == other.y &&
+                yvel == other.yvel &&
+                z == other.z &&
+                zvel == other.zvel &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idOnOrbit, sensorTaskingStartTime, source, statusDate, id, affectedObjects, apogee, argOfPerigee, bStar, createdAt, createdBy, deltaTs, deltaVs, description, eccentricity, elsetEpoch, inclination, lastObTime, meanAnomaly, meanMotion, meanMotionDDot, meanMotionDot, missedObTime, name, origin, origNetwork, perigee, period, priority, raan, revNo, satNo, semiMajorAxis, sensorTaskingStopTime, status, svEpoch, x, xvel, y, yvel, z, zvel, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idOnOrbit,
+                sensorTaskingStartTime,
+                source,
+                statusDate,
+                id,
+                affectedObjects,
+                apogee,
+                argOfPerigee,
+                bStar,
+                createdAt,
+                createdBy,
+                deltaTs,
+                deltaVs,
+                description,
+                eccentricity,
+                elsetEpoch,
+                inclination,
+                lastObTime,
+                meanAnomaly,
+                meanMotion,
+                meanMotionDDot,
+                meanMotionDot,
+                missedObTime,
+                name,
+                origin,
+                origNetwork,
+                perigee,
+                period,
+                priority,
+                raan,
+                revNo,
+                satNo,
+                semiMajorAxis,
+                sensorTaskingStopTime,
+                status,
+                svEpoch,
+                x,
+                xvel,
+                y,
+                yvel,
+                z,
+                zvel,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3732,7 +3823,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3745,10 +3836,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ObjectOfInterestCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is ObjectOfInterestCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "ObjectOfInterestCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

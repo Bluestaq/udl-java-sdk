@@ -3882,12 +3882,113 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idOnOrbit == other.idOnOrbit && source == other.source && bodyId == other.bodyId && additionalMass == other.additionalMass && adeptRadius == other.adeptRadius && bolDeltaV == other.bolDeltaV && bolFuelMass == other.bolFuelMass && busCrossSection == other.busCrossSection && busType == other.busType && colaRadius == other.colaRadius && createdAt == other.createdAt && createdBy == other.createdBy && crossSection == other.crossSection && currentMass == other.currentMass && deltaVUnc == other.deltaVUnc && depEstMasses == other.depEstMasses && depMassUncs == other.depMassUncs && depNames == other.depNames && driftRate == other.driftRate && dryMass == other.dryMass && estDeltaVDuration == other.estDeltaVDuration && fuelRemaining == other.fuelRemaining && geoSlot == other.geoSlot && lastObSource == other.lastObSource && lastObTime == other.lastObTime && launchMass == other.launchMass && launchMassMax == other.launchMassMax && launchMassMin == other.launchMassMin && maneuverable == other.maneuverable && maxDeltaV == other.maxDeltaV && maxRadius == other.maxRadius && missionTypes == other.missionTypes && numDeployable == other.numDeployable && numMission == other.numMission && origin == other.origin && origNetwork == other.origNetwork && rcs == other.rcs && rcsMax == other.rcsMax && rcsMean == other.rcsMean && rcsMin == other.rcsMin && refSource == other.refSource && solarArrayArea == other.solarArrayArea && totalMassUnc == other.totalMassUnc && vismag == other.vismag && vismagMax == other.vismagMax && vismagMean == other.vismagMean && vismagMin == other.vismagMin && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idOnOrbit == other.idOnOrbit &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                additionalMass == other.additionalMass &&
+                adeptRadius == other.adeptRadius &&
+                bolDeltaV == other.bolDeltaV &&
+                bolFuelMass == other.bolFuelMass &&
+                busCrossSection == other.busCrossSection &&
+                busType == other.busType &&
+                colaRadius == other.colaRadius &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                crossSection == other.crossSection &&
+                currentMass == other.currentMass &&
+                deltaVUnc == other.deltaVUnc &&
+                depEstMasses == other.depEstMasses &&
+                depMassUncs == other.depMassUncs &&
+                depNames == other.depNames &&
+                driftRate == other.driftRate &&
+                dryMass == other.dryMass &&
+                estDeltaVDuration == other.estDeltaVDuration &&
+                fuelRemaining == other.fuelRemaining &&
+                geoSlot == other.geoSlot &&
+                lastObSource == other.lastObSource &&
+                lastObTime == other.lastObTime &&
+                launchMass == other.launchMass &&
+                launchMassMax == other.launchMassMax &&
+                launchMassMin == other.launchMassMin &&
+                maneuverable == other.maneuverable &&
+                maxDeltaV == other.maxDeltaV &&
+                maxRadius == other.maxRadius &&
+                missionTypes == other.missionTypes &&
+                numDeployable == other.numDeployable &&
+                numMission == other.numMission &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                rcs == other.rcs &&
+                rcsMax == other.rcsMax &&
+                rcsMean == other.rcsMean &&
+                rcsMin == other.rcsMin &&
+                refSource == other.refSource &&
+                solarArrayArea == other.solarArrayArea &&
+                totalMassUnc == other.totalMassUnc &&
+                vismag == other.vismag &&
+                vismagMax == other.vismagMax &&
+                vismagMean == other.vismagMean &&
+                vismagMin == other.vismagMin &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idOnOrbit, source, bodyId, additionalMass, adeptRadius, bolDeltaV, bolFuelMass, busCrossSection, busType, colaRadius, createdAt, createdBy, crossSection, currentMass, deltaVUnc, depEstMasses, depMassUncs, depNames, driftRate, dryMass, estDeltaVDuration, fuelRemaining, geoSlot, lastObSource, lastObTime, launchMass, launchMassMax, launchMassMin, maneuverable, maxDeltaV, maxRadius, missionTypes, numDeployable, numMission, origin, origNetwork, rcs, rcsMax, rcsMean, rcsMin, refSource, solarArrayArea, totalMassUnc, vismag, vismagMax, vismagMean, vismagMin, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idOnOrbit,
+                source,
+                bodyId,
+                additionalMass,
+                adeptRadius,
+                bolDeltaV,
+                bolFuelMass,
+                busCrossSection,
+                busType,
+                colaRadius,
+                createdAt,
+                createdBy,
+                crossSection,
+                currentMass,
+                deltaVUnc,
+                depEstMasses,
+                depMassUncs,
+                depNames,
+                driftRate,
+                dryMass,
+                estDeltaVDuration,
+                fuelRemaining,
+                geoSlot,
+                lastObSource,
+                lastObTime,
+                launchMass,
+                launchMassMax,
+                launchMassMin,
+                maneuverable,
+                maxDeltaV,
+                maxRadius,
+                missionTypes,
+                numDeployable,
+                numMission,
+                origin,
+                origNetwork,
+                rcs,
+                rcsMax,
+                rcsMean,
+                rcsMin,
+                refSource,
+                solarArrayArea,
+                totalMassUnc,
+                vismag,
+                vismagMax,
+                vismagMean,
+                vismagMin,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4040,7 +4141,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4053,10 +4154,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OnorbitdetailUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OnorbitdetailUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "OnorbitdetailUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

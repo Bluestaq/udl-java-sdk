@@ -2110,7 +2110,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2123,12 +2123,105 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EmitterGeolocationRetrieveResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && signalOfInterestType == other.signalOfInterestType && source == other.source && startTime == other.startTime && id == other.id && agjson == other.agjson && algVersion == other.algVersion && andims == other.andims && area == other.area && asrid == other.asrid && atext == other.atext && atype == other.atype && centerFreq == other.centerFreq && cluster == other.cluster && confArea == other.confArea && constellation == other.constellation && createdAt == other.createdAt && createdBy == other.createdBy && createdTs == other.createdTs && detectAlt == other.detectAlt && detectLat == other.detectLat && detectLon == other.detectLon && endTime == other.endTime && errEllp == other.errEllp && externalId == other.externalId && idOnOrbit == other.idOnOrbit && idRfEmitter == other.idRfEmitter && idSensor == other.idSensor && maxFreq == other.maxFreq && minFreq == other.minFreq && numBursts == other.numBursts && onOrbit == other.onOrbit && orderId == other.orderId && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origRfEmitterId == other.origRfEmitterId && origSensorId == other.origSensorId && passGroupId == other.passGroupId && receivedTs == other.receivedTs && satNo == other.satNo && signalOfInterest == other.signalOfInterest && sourceDl == other.sourceDl && tags == other.tags && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is EmitterGeolocationRetrieveResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            signalOfInterestType == other.signalOfInterestType &&
+            source == other.source &&
+            startTime == other.startTime &&
+            id == other.id &&
+            agjson == other.agjson &&
+            algVersion == other.algVersion &&
+            andims == other.andims &&
+            area == other.area &&
+            asrid == other.asrid &&
+            atext == other.atext &&
+            atype == other.atype &&
+            centerFreq == other.centerFreq &&
+            cluster == other.cluster &&
+            confArea == other.confArea &&
+            constellation == other.constellation &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            createdTs == other.createdTs &&
+            detectAlt == other.detectAlt &&
+            detectLat == other.detectLat &&
+            detectLon == other.detectLon &&
+            endTime == other.endTime &&
+            errEllp == other.errEllp &&
+            externalId == other.externalId &&
+            idOnOrbit == other.idOnOrbit &&
+            idRfEmitter == other.idRfEmitter &&
+            idSensor == other.idSensor &&
+            maxFreq == other.maxFreq &&
+            minFreq == other.minFreq &&
+            numBursts == other.numBursts &&
+            onOrbit == other.onOrbit &&
+            orderId == other.orderId &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            origRfEmitterId == other.origRfEmitterId &&
+            origSensorId == other.origSensorId &&
+            passGroupId == other.passGroupId &&
+            receivedTs == other.receivedTs &&
+            satNo == other.satNo &&
+            signalOfInterest == other.signalOfInterest &&
+            sourceDl == other.sourceDl &&
+            tags == other.tags &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, signalOfInterestType, source, startTime, id, agjson, algVersion, andims, area, asrid, atext, atype, centerFreq, cluster, confArea, constellation, createdAt, createdBy, createdTs, detectAlt, detectLat, detectLon, endTime, errEllp, externalId, idOnOrbit, idRfEmitter, idSensor, maxFreq, minFreq, numBursts, onOrbit, orderId, origin, origNetwork, origObjectId, origRfEmitterId, origSensorId, passGroupId, receivedTs, satNo, signalOfInterest, sourceDl, tags, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            signalOfInterestType,
+            source,
+            startTime,
+            id,
+            agjson,
+            algVersion,
+            andims,
+            area,
+            asrid,
+            atext,
+            atype,
+            centerFreq,
+            cluster,
+            confArea,
+            constellation,
+            createdAt,
+            createdBy,
+            createdTs,
+            detectAlt,
+            detectLat,
+            detectLon,
+            endTime,
+            errEllp,
+            externalId,
+            idOnOrbit,
+            idRfEmitter,
+            idSensor,
+            maxFreq,
+            minFreq,
+            numBursts,
+            onOrbit,
+            orderId,
+            origin,
+            origNetwork,
+            origObjectId,
+            origRfEmitterId,
+            origSensorId,
+            passGroupId,
+            receivedTs,
+            satNo,
+            signalOfInterest,
+            sourceDl,
+            tags,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

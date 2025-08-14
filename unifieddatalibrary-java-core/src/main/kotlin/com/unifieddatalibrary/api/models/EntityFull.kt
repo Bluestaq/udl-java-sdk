@@ -1282,7 +1282,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1473,7 +1473,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+            return other is Type && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2987,7 +2987,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -3188,7 +3188,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Category && value == other.value /* spotless:on */
+                return other is Category && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -3345,7 +3345,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is ObjectType && value == other.value /* spotless:on */
+                return other is ObjectType && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -3358,12 +3358,71 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is OnOrbit && classificationMarking == other.classificationMarking && dataMode == other.dataMode && satNo == other.satNo && source == other.source && altName == other.altName && antennas == other.antennas && batteries == other.batteries && category == other.category && commonName == other.commonName && constellation == other.constellation && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && decayDate == other.decayDate && idOnOrbit == other.idOnOrbit && intlDes == other.intlDes && launchDate == other.launchDate && launchSiteId == other.launchSiteId && lifetimeYears == other.lifetimeYears && missionNumber == other.missionNumber && objectType == other.objectType && onorbitDetails == other.onorbitDetails && origin == other.origin && origNetwork == other.origNetwork && solarArrays == other.solarArrays && thrusters == other.thrusters && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is OnOrbit &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                satNo == other.satNo &&
+                source == other.source &&
+                altName == other.altName &&
+                antennas == other.antennas &&
+                batteries == other.batteries &&
+                category == other.category &&
+                commonName == other.commonName &&
+                constellation == other.constellation &&
+                countryCode == other.countryCode &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                decayDate == other.decayDate &&
+                idOnOrbit == other.idOnOrbit &&
+                intlDes == other.intlDes &&
+                launchDate == other.launchDate &&
+                launchSiteId == other.launchSiteId &&
+                lifetimeYears == other.lifetimeYears &&
+                missionNumber == other.missionNumber &&
+                objectType == other.objectType &&
+                onorbitDetails == other.onorbitDetails &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                solarArrays == other.solarArrays &&
+                thrusters == other.thrusters &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, satNo, source, altName, antennas, batteries, category, commonName, constellation, countryCode, createdAt, createdBy, decayDate, idOnOrbit, intlDes, launchDate, launchSiteId, lifetimeYears, missionNumber, objectType, onorbitDetails, origin, origNetwork, solarArrays, thrusters, updatedAt, updatedBy, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                satNo,
+                source,
+                altName,
+                antennas,
+                batteries,
+                category,
+                commonName,
+                constellation,
+                countryCode,
+                createdAt,
+                createdBy,
+                decayDate,
+                idOnOrbit,
+                intlDes,
+                launchDate,
+                launchSiteId,
+                lifetimeYears,
+                missionNumber,
+                objectType,
+                onorbitDetails,
+                origin,
+                origNetwork,
+                solarArrays,
+                thrusters,
+                updatedAt,
+                updatedBy,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3514,7 +3573,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is OwnerType && value == other.value /* spotless:on */
+            return other is OwnerType && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3527,12 +3586,63 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EntityFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && type == other.type && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && idEntity == other.idEntity && idLocation == other.idLocation && idOnOrbit == other.idOnOrbit && idOperatingUnit == other.idOperatingUnit && location == other.location && onOrbit == other.onOrbit && operatingUnit == other.operatingUnit && origin == other.origin && origNetwork == other.origNetwork && ownerType == other.ownerType && rfBands == other.rfBands && statusCollection == other.statusCollection && taskable == other.taskable && updatedAt == other.updatedAt && updatedBy == other.updatedBy && urls == other.urls && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is EntityFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            name == other.name &&
+            source == other.source &&
+            type == other.type &&
+            countryCode == other.countryCode &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            idEntity == other.idEntity &&
+            idLocation == other.idLocation &&
+            idOnOrbit == other.idOnOrbit &&
+            idOperatingUnit == other.idOperatingUnit &&
+            location == other.location &&
+            onOrbit == other.onOrbit &&
+            operatingUnit == other.operatingUnit &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            ownerType == other.ownerType &&
+            rfBands == other.rfBands &&
+            statusCollection == other.statusCollection &&
+            taskable == other.taskable &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            urls == other.urls &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, type, countryCode, createdAt, createdBy, idEntity, idLocation, idOnOrbit, idOperatingUnit, location, onOrbit, operatingUnit, origin, origNetwork, ownerType, rfBands, statusCollection, taskable, updatedAt, updatedBy, urls, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            name,
+            source,
+            type,
+            countryCode,
+            createdAt,
+            createdBy,
+            idEntity,
+            idLocation,
+            idOnOrbit,
+            idOperatingUnit,
+            location,
+            onOrbit,
+            operatingUnit,
+            origin,
+            origNetwork,
+            ownerType,
+            rfBands,
+            statusCollection,
+            taskable,
+            updatedAt,
+            updatedBy,
+            urls,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
+import com.unifieddatalibrary.api.models.SolarArrayIngest
 import com.unifieddatalibrary.api.models.solararray.SolarArrayCountParams
 import com.unifieddatalibrary.api.models.solararray.SolarArrayCreateParams
 import com.unifieddatalibrary.api.models.solararray.SolarArrayGetParams
@@ -28,14 +29,18 @@ internal class SolarArrayServiceTest {
 
         solarArrayService.create(
             SolarArrayCreateParams.builder()
-                .dataMode(SolarArrayCreateParams.DataMode.TEST)
-                .name("Solar1")
-                .source("Bluestaq")
-                .id("SOLARARRAY-ID")
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .solarArrayIngest(
+                    SolarArrayIngest.builder()
+                        .dataMode(SolarArrayIngest.DataMode.TEST)
+                        .name("Solar1")
+                        .source("Bluestaq")
+                        .id("SOLARARRAY-ID")
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .build()
+                )
                 .build()
         )
     }
@@ -53,14 +58,18 @@ internal class SolarArrayServiceTest {
         solarArrayService.update(
             SolarArrayUpdateParams.builder()
                 .pathId("id")
-                .dataMode(SolarArrayUpdateParams.DataMode.TEST)
-                .name("Solar1")
-                .source("Bluestaq")
-                .bodyId("SOLARARRAY-ID")
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .solarArrayIngest(
+                    SolarArrayIngest.builder()
+                        .dataMode(SolarArrayIngest.DataMode.TEST)
+                        .name("Solar1")
+                        .source("Bluestaq")
+                        .id("SOLARARRAY-ID")
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .build()
+                )
                 .build()
         )
     }

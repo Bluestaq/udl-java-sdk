@@ -1058,7 +1058,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1071,12 +1071,55 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SensorPlanListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && recType == other.recType && source == other.source && startTime == other.startTime && type == other.type && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && customer == other.customer && endTime == other.endTime && idSensor == other.idSensor && name == other.name && origin == other.origin && origNetwork == other.origNetwork && origSensorId == other.origSensorId && purpose == other.purpose && reqTotal == other.reqTotal && senNetwork == other.senNetwork && status == other.status && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SensorPlanListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            recType == other.recType &&
+            source == other.source &&
+            startTime == other.startTime &&
+            type == other.type &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            customer == other.customer &&
+            endTime == other.endTime &&
+            idSensor == other.idSensor &&
+            name == other.name &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origSensorId == other.origSensorId &&
+            purpose == other.purpose &&
+            reqTotal == other.reqTotal &&
+            senNetwork == other.senNetwork &&
+            status == other.status &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, recType, source, startTime, type, id, createdAt, createdBy, customer, endTime, idSensor, name, origin, origNetwork, origSensorId, purpose, reqTotal, senNetwork, status, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            recType,
+            source,
+            startTime,
+            type,
+            id,
+            createdAt,
+            createdBy,
+            customer,
+            endTime,
+            idSensor,
+            name,
+            origin,
+            origNetwork,
+            origSensorId,
+            purpose,
+            reqTotal,
+            senNetwork,
+            status,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

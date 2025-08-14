@@ -16,6 +16,7 @@ import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
 import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import com.unifieddatalibrary.api.models.EngineIngest
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
@@ -118,7 +119,7 @@ private constructor(
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun engine(): Optional<Engine> = body.engine()
+    fun engine(): Optional<EngineIngest> = body.engine()
 
     /**
      * Originating system or organization which produced the data, if different from the source. The
@@ -217,7 +218,7 @@ private constructor(
      *
      * Unlike [engine], this method doesn't throw if the JSON field has an unexpected type.
      */
-    fun _engine(): JsonField<Engine> = body._engine()
+    fun _engine(): JsonField<EngineIngest> = body._engine()
 
     /**
      * Returns the raw JSON value of [origin].
@@ -416,15 +417,16 @@ private constructor(
          * Known launch vehicle engines and their performance characteristics and limits. A launch
          * vehicle has 1 to many engines per stage.
          */
-        fun engine(engine: Engine) = apply { body.engine(engine) }
+        fun engine(engine: EngineIngest) = apply { body.engine(engine) }
 
         /**
          * Sets [Builder.engine] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.engine] with a well-typed [Engine] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.engine] with a well-typed [EngineIngest] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun engine(engine: JsonField<Engine>) = apply { body.engine(engine) }
+        fun engine(engine: JsonField<EngineIngest>) = apply { body.engine(engine) }
 
         /**
          * Originating system or organization which produced the data, if different from the source.
@@ -636,7 +638,7 @@ private constructor(
         private val id: JsonField<String>,
         private val createdAt: JsonField<OffsetDateTime>,
         private val createdBy: JsonField<String>,
-        private val engine: JsonField<Engine>,
+        private val engine: JsonField<EngineIngest>,
         private val origin: JsonField<String>,
         private val origNetwork: JsonField<String>,
         private val quantity: JsonField<Int>,
@@ -666,7 +668,9 @@ private constructor(
             @JsonProperty("createdBy")
             @ExcludeMissing
             createdBy: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("engine") @ExcludeMissing engine: JsonField<Engine> = JsonMissing.of(),
+            @JsonProperty("engine")
+            @ExcludeMissing
+            engine: JsonField<EngineIngest> = JsonMissing.of(),
             @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
             @JsonProperty("origNetwork")
             @ExcludeMissing
@@ -778,7 +782,7 @@ private constructor(
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun engine(): Optional<Engine> = engine.getOptional("engine")
+        fun engine(): Optional<EngineIngest> = engine.getOptional("engine")
 
         /**
          * Originating system or organization which produced the data, if different from the source.
@@ -882,7 +886,7 @@ private constructor(
          *
          * Unlike [engine], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("engine") @ExcludeMissing fun _engine(): JsonField<Engine> = engine
+        @JsonProperty("engine") @ExcludeMissing fun _engine(): JsonField<EngineIngest> = engine
 
         /**
          * Returns the raw JSON value of [origin].
@@ -954,7 +958,7 @@ private constructor(
             private var id: JsonField<String> = JsonMissing.of()
             private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
             private var createdBy: JsonField<String> = JsonMissing.of()
-            private var engine: JsonField<Engine> = JsonMissing.of()
+            private var engine: JsonField<EngineIngest> = JsonMissing.of()
             private var origin: JsonField<String> = JsonMissing.of()
             private var origNetwork: JsonField<String> = JsonMissing.of()
             private var quantity: JsonField<Int> = JsonMissing.of()
@@ -1100,16 +1104,16 @@ private constructor(
              * Known launch vehicle engines and their performance characteristics and limits. A
              * launch vehicle has 1 to many engines per stage.
              */
-            fun engine(engine: Engine) = engine(JsonField.of(engine))
+            fun engine(engine: EngineIngest) = engine(JsonField.of(engine))
 
             /**
              * Sets [Builder.engine] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.engine] with a well-typed [Engine] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.engine] with a well-typed [EngineIngest] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun engine(engine: JsonField<Engine>) = apply { this.engine = engine }
+            fun engine(engine: JsonField<EngineIngest>) = apply { this.engine = engine }
 
             /**
              * Originating system or organization which produced the data, if different from the
@@ -1283,12 +1287,41 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idEngine == other.idEngine && idOnOrbit == other.idOnOrbit && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && engine == other.engine && origin == other.origin && origNetwork == other.origNetwork && quantity == other.quantity && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idEngine == other.idEngine &&
+                idOnOrbit == other.idOnOrbit &&
+                source == other.source &&
+                id == other.id &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                engine == other.engine &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                quantity == other.quantity &&
+                type == other.type &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idEngine, idOnOrbit, source, id, createdAt, createdBy, engine, origin, origNetwork, quantity, type, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idEngine,
+                idOnOrbit,
+                source,
+                id,
+                createdAt,
+                createdBy,
+                engine,
+                origin,
+                origNetwork,
+                quantity,
+                type,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1441,7 +1474,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1449,692 +1482,18 @@ private constructor(
         override fun toString() = value.toString()
     }
 
-    /**
-     * Known launch vehicle engines and their performance characteristics and limits. A launch
-     * vehicle has 1 to many engines per stage.
-     */
-    class Engine
-    private constructor(
-        private val classificationMarking: JsonField<String>,
-        private val dataMode: JsonField<DataMode>,
-        private val name: JsonField<String>,
-        private val source: JsonField<String>,
-        private val id: JsonField<String>,
-        private val createdAt: JsonField<OffsetDateTime>,
-        private val createdBy: JsonField<String>,
-        private val origin: JsonField<String>,
-        private val origNetwork: JsonField<String>,
-        private val additionalProperties: MutableMap<String, JsonValue>,
-    ) {
-
-        @JsonCreator
-        private constructor(
-            @JsonProperty("classificationMarking")
-            @ExcludeMissing
-            classificationMarking: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("dataMode")
-            @ExcludeMissing
-            dataMode: JsonField<DataMode> = JsonMissing.of(),
-            @JsonProperty("name") @ExcludeMissing name: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("createdAt")
-            @ExcludeMissing
-            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("createdBy")
-            @ExcludeMissing
-            createdBy: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("origNetwork")
-            @ExcludeMissing
-            origNetwork: JsonField<String> = JsonMissing.of(),
-        ) : this(
-            classificationMarking,
-            dataMode,
-            name,
-            source,
-            id,
-            createdAt,
-            createdBy,
-            origin,
-            origNetwork,
-            mutableMapOf(),
-        )
-
-        /**
-         * Classification marking of the data in IC/CAPCO Portion-marked format.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
-         */
-        fun classificationMarking(): String =
-            classificationMarking.getRequired("classificationMarking")
-
-        /**
-         * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
-         *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-         * both real and simulated data.
-         *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-         * analysis.
-         *
-         * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
-         *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-         * requirements, and for validating technical, functional, and performance characteristics.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
-         */
-        fun dataMode(): DataMode = dataMode.getRequired("dataMode")
-
-        /**
-         * Engine name/variant.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
-         */
-        fun name(): String = name.getRequired("name")
-
-        /**
-         * Source of the data.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
-         *   value).
-         */
-        fun source(): String = source.getRequired("source")
-
-        /**
-         * Unique identifier of the record, auto-generated by the system.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun id(): Optional<String> = id.getOptional("id")
-
-        /**
-         * Time the row was created in the database, auto-populated by the system.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
-
-        /**
-         * Application user who created the row in the database, auto-populated by the system.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
-
-        /**
-         * Originating system or organization which produced the data, if different from the source.
-         * The origin may be different than the source if the source was a mediating system which
-         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
-         * be the origin.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun origin(): Optional<String> = origin.getOptional("origin")
-
-        /**
-         * The originating source network on which this record was created, auto-populated by the
-         * system.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
-
-        /**
-         * Returns the raw JSON value of [classificationMarking].
-         *
-         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an
-         * unexpected type.
-         */
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
-        fun _classificationMarking(): JsonField<String> = classificationMarking
-
-        /**
-         * Returns the raw JSON value of [dataMode].
-         *
-         * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
-
-        /**
-         * Returns the raw JSON value of [name].
-         *
-         * Unlike [name], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("name") @ExcludeMissing fun _name(): JsonField<String> = name
-
-        /**
-         * Returns the raw JSON value of [source].
-         *
-         * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
-
-        /**
-         * Returns the raw JSON value of [id].
-         *
-         * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
-
-        /**
-         * Returns the raw JSON value of [createdAt].
-         *
-         * Unlike [createdAt], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("createdAt")
-        @ExcludeMissing
-        fun _createdAt(): JsonField<OffsetDateTime> = createdAt
-
-        /**
-         * Returns the raw JSON value of [createdBy].
-         *
-         * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
-
-        /**
-         * Returns the raw JSON value of [origin].
-         *
-         * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
-
-        /**
-         * Returns the raw JSON value of [origNetwork].
-         *
-         * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("origNetwork")
-        @ExcludeMissing
-        fun _origNetwork(): JsonField<String> = origNetwork
-
-        @JsonAnySetter
-        private fun putAdditionalProperty(key: String, value: JsonValue) {
-            additionalProperties.put(key, value)
-        }
-
-        @JsonAnyGetter
-        @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> =
-            Collections.unmodifiableMap(additionalProperties)
-
-        fun toBuilder() = Builder().from(this)
-
-        companion object {
-
-            /**
-             * Returns a mutable builder for constructing an instance of [Engine].
-             *
-             * The following fields are required:
-             * ```java
-             * .classificationMarking()
-             * .dataMode()
-             * .name()
-             * .source()
-             * ```
-             */
-            @JvmStatic fun builder() = Builder()
-        }
-
-        /** A builder for [Engine]. */
-        class Builder internal constructor() {
-
-            private var classificationMarking: JsonField<String>? = null
-            private var dataMode: JsonField<DataMode>? = null
-            private var name: JsonField<String>? = null
-            private var source: JsonField<String>? = null
-            private var id: JsonField<String> = JsonMissing.of()
-            private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
-            private var createdBy: JsonField<String> = JsonMissing.of()
-            private var origin: JsonField<String> = JsonMissing.of()
-            private var origNetwork: JsonField<String> = JsonMissing.of()
-            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
-
-            @JvmSynthetic
-            internal fun from(engine: Engine) = apply {
-                classificationMarking = engine.classificationMarking
-                dataMode = engine.dataMode
-                name = engine.name
-                source = engine.source
-                id = engine.id
-                createdAt = engine.createdAt
-                createdBy = engine.createdBy
-                origin = engine.origin
-                origNetwork = engine.origNetwork
-                additionalProperties = engine.additionalProperties.toMutableMap()
-            }
-
-            /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-            fun classificationMarking(classificationMarking: String) =
-                classificationMarking(JsonField.of(classificationMarking))
-
-            /**
-             * Sets [Builder.classificationMarking] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.classificationMarking] with a well-typed [String]
-             * value instead. This method is primarily for setting the field to an undocumented or
-             * not yet supported value.
-             */
-            fun classificationMarking(classificationMarking: JsonField<String>) = apply {
-                this.classificationMarking = classificationMarking
-            }
-
-            /**
-             * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
-             *
-             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may
-             * include both real and simulated data.
-             *
-             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events,
-             * and analysis.
-             *
-             * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
-             *
-             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-             * requirements, and for validating technical, functional, and performance
-             * characteristics.
-             */
-            fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
-
-            /**
-             * Sets [Builder.dataMode] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
-
-            /** Engine name/variant. */
-            fun name(name: String) = name(JsonField.of(name))
-
-            /**
-             * Sets [Builder.name] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.name] with a well-typed [String] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
-             */
-            fun name(name: JsonField<String>) = apply { this.name = name }
-
-            /** Source of the data. */
-            fun source(source: String) = source(JsonField.of(source))
-
-            /**
-             * Sets [Builder.source] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.source] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun source(source: JsonField<String>) = apply { this.source = source }
-
-            /** Unique identifier of the record, auto-generated by the system. */
-            fun id(id: String) = id(JsonField.of(id))
-
-            /**
-             * Sets [Builder.id] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.id] with a well-typed [String] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
-             */
-            fun id(id: JsonField<String>) = apply { this.id = id }
-
-            /** Time the row was created in the database, auto-populated by the system. */
-            fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
-
-            /**
-             * Sets [Builder.createdAt] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply {
-                this.createdAt = createdAt
-            }
-
-            /**
-             * Application user who created the row in the database, auto-populated by the system.
-             */
-            fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
-
-            /**
-             * Sets [Builder.createdBy] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
-
-            /**
-             * Originating system or organization which produced the data, if different from the
-             * source. The origin may be different than the source if the source was a mediating
-             * system which forwarded the data on behalf of the origin system. If null, the source
-             * may be assumed to be the origin.
-             */
-            fun origin(origin: String) = origin(JsonField.of(origin))
-
-            /**
-             * Sets [Builder.origin] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.origin] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun origin(origin: JsonField<String>) = apply { this.origin = origin }
-
-            /**
-             * The originating source network on which this record was created, auto-populated by
-             * the system.
-             */
-            fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
-
-            /**
-             * Sets [Builder.origNetwork] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.origNetwork] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun origNetwork(origNetwork: JsonField<String>) = apply {
-                this.origNetwork = origNetwork
-            }
-
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
-
-            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-                additionalProperties.put(key, value)
-            }
-
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
-
-            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
-
-            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
-
-            /**
-             * Returns an immutable instance of [Engine].
-             *
-             * Further updates to this [Builder] will not mutate the returned instance.
-             *
-             * The following fields are required:
-             * ```java
-             * .classificationMarking()
-             * .dataMode()
-             * .name()
-             * .source()
-             * ```
-             *
-             * @throws IllegalStateException if any required field is unset.
-             */
-            fun build(): Engine =
-                Engine(
-                    checkRequired("classificationMarking", classificationMarking),
-                    checkRequired("dataMode", dataMode),
-                    checkRequired("name", name),
-                    checkRequired("source", source),
-                    id,
-                    createdAt,
-                    createdBy,
-                    origin,
-                    origNetwork,
-                    additionalProperties.toMutableMap(),
-                )
-        }
-
-        private var validated: Boolean = false
-
-        fun validate(): Engine = apply {
-            if (validated) {
-                return@apply
-            }
-
-            classificationMarking()
-            dataMode().validate()
-            name()
-            source()
-            id()
-            createdAt()
-            createdBy()
-            origin()
-            origNetwork()
-            validated = true
-        }
-
-        fun isValid(): Boolean =
-            try {
-                validate()
-                true
-            } catch (e: UnifieddatalibraryInvalidDataException) {
-                false
-            }
-
-        /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
-         *
-         * Used for best match union deserialization.
-         */
-        @JvmSynthetic
-        internal fun validity(): Int =
-            (if (classificationMarking.asKnown().isPresent) 1 else 0) +
-                (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
-                (if (name.asKnown().isPresent) 1 else 0) +
-                (if (source.asKnown().isPresent) 1 else 0) +
-                (if (id.asKnown().isPresent) 1 else 0) +
-                (if (createdAt.asKnown().isPresent) 1 else 0) +
-                (if (createdBy.asKnown().isPresent) 1 else 0) +
-                (if (origin.asKnown().isPresent) 1 else 0) +
-                (if (origNetwork.asKnown().isPresent) 1 else 0)
-
-        /**
-         * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
-         *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
-         * both real and simulated data.
-         *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
-         * analysis.
-         *
-         * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
-         *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
-         * requirements, and for validating technical, functional, and performance characteristics.
-         */
-        class DataMode @JsonCreator private constructor(private val value: JsonField<String>) :
-            Enum {
-
-            /**
-             * Returns this class instance's raw value.
-             *
-             * This is usually only useful if this instance was deserialized from data that doesn't
-             * match any known member, and you want to know that value. For example, if the SDK is
-             * on an older version than the API, then the API may respond with new members that the
-             * SDK is unaware of.
-             */
-            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
-
-            companion object {
-
-                @JvmField val REAL = of("REAL")
-
-                @JvmField val TEST = of("TEST")
-
-                @JvmField val SIMULATED = of("SIMULATED")
-
-                @JvmField val EXERCISE = of("EXERCISE")
-
-                @JvmStatic fun of(value: String) = DataMode(JsonField.of(value))
-            }
-
-            /** An enum containing [DataMode]'s known values. */
-            enum class Known {
-                REAL,
-                TEST,
-                SIMULATED,
-                EXERCISE,
-            }
-
-            /**
-             * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
-             *
-             * An instance of [DataMode] can contain an unknown value in a couple of cases:
-             * - It was deserialized from data that doesn't match any known member. For example, if
-             *   the SDK is on an older version than the API, then the API may respond with new
-             *   members that the SDK is unaware of.
-             * - It was constructed with an arbitrary value using the [of] method.
-             */
-            enum class Value {
-                REAL,
-                TEST,
-                SIMULATED,
-                EXERCISE,
-                /**
-                 * An enum member indicating that [DataMode] was instantiated with an unknown value.
-                 */
-                _UNKNOWN,
-            }
-
-            /**
-             * Returns an enum member corresponding to this class instance's value, or
-             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
-             *
-             * Use the [known] method instead if you're certain the value is always known or if you
-             * want to throw for the unknown case.
-             */
-            fun value(): Value =
-                when (this) {
-                    REAL -> Value.REAL
-                    TEST -> Value.TEST
-                    SIMULATED -> Value.SIMULATED
-                    EXERCISE -> Value.EXERCISE
-                    else -> Value._UNKNOWN
-                }
-
-            /**
-             * Returns an enum member corresponding to this class instance's value.
-             *
-             * Use the [value] method instead if you're uncertain the value is always known and
-             * don't want to throw for the unknown case.
-             *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
-             *   not a known member.
-             */
-            fun known(): Known =
-                when (this) {
-                    REAL -> Known.REAL
-                    TEST -> Known.TEST
-                    SIMULATED -> Known.SIMULATED
-                    EXERCISE -> Known.EXERCISE
-                    else -> throw UnifieddatalibraryInvalidDataException("Unknown DataMode: $value")
-                }
-
-            /**
-             * Returns this class instance's primitive wire representation.
-             *
-             * This differs from the [toString] method because that method is primarily for
-             * debugging and generally doesn't throw.
-             *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
-             *   not have the expected primitive type.
-             */
-            fun asString(): String =
-                _value().asString().orElseThrow {
-                    UnifieddatalibraryInvalidDataException("Value is not a String")
-                }
-
-            private var validated: Boolean = false
-
-            fun validate(): DataMode = apply {
-                if (validated) {
-                    return@apply
-                }
-
-                known()
-                validated = true
-            }
-
-            fun isValid(): Boolean =
-                try {
-                    validate()
-                    true
-                } catch (e: UnifieddatalibraryInvalidDataException) {
-                    false
-                }
-
-            /**
-             * Returns a score indicating how many valid values are contained in this object
-             * recursively.
-             *
-             * Used for best match union deserialization.
-             */
-            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
-
-            override fun equals(other: Any?): Boolean {
-                if (this === other) {
-                    return true
-                }
-
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
-            }
-
-            override fun hashCode() = value.hashCode()
-
-            override fun toString() = value.toString()
-        }
-
-        override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
-
-            return /* spotless:off */ other is Engine && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && origin == other.origin && origNetwork == other.origNetwork && additionalProperties == other.additionalProperties /* spotless:on */
-        }
-
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, id, createdAt, createdBy, origin, origNetwork, additionalProperties) }
-        /* spotless:on */
-
-        override fun hashCode(): Int = hashCode
-
-        override fun toString() =
-            "Engine{classificationMarking=$classificationMarking, dataMode=$dataMode, name=$name, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, origin=$origin, origNetwork=$origNetwork, additionalProperties=$additionalProperties}"
-    }
-
     override fun equals(other: Any?): Boolean {
         if (this === other) {
             return true
         }
 
-        return /* spotless:off */ other is OnorbitthrusterCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OnorbitthrusterCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "OnorbitthrusterCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

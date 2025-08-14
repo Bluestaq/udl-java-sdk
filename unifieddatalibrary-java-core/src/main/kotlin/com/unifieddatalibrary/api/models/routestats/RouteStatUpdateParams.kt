@@ -2755,12 +2755,81 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && locationEnd == other.locationEnd && locationStart == other.locationStart && source == other.source && bodyId == other.bodyId && avgDuration == other.avgDuration && avgSpeed == other.avgSpeed && createdAt == other.createdAt && createdBy == other.createdBy && dataPtsUsed == other.dataPtsUsed && distance == other.distance && distUnit == other.distUnit && firstPt == other.firstPt && idealDesc == other.idealDesc && idealDuration == other.idealDuration && idSiteEnd == other.idSiteEnd && idSiteStart == other.idSiteStart && lastPt == other.lastPt && locationType == other.locationType && maxDuration == other.maxDuration && maxSpeed == other.maxSpeed && minDuration == other.minDuration && minSpeed == other.minSpeed && origin == other.origin && origNetwork == other.origNetwork && partialDesc == other.partialDesc && partialDuration == other.partialDuration && sourceDl == other.sourceDl && speedUnit == other.speedUnit && timePeriod == other.timePeriod && vehicleCategory == other.vehicleCategory && vehicleType == other.vehicleType && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                locationEnd == other.locationEnd &&
+                locationStart == other.locationStart &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                avgDuration == other.avgDuration &&
+                avgSpeed == other.avgSpeed &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                dataPtsUsed == other.dataPtsUsed &&
+                distance == other.distance &&
+                distUnit == other.distUnit &&
+                firstPt == other.firstPt &&
+                idealDesc == other.idealDesc &&
+                idealDuration == other.idealDuration &&
+                idSiteEnd == other.idSiteEnd &&
+                idSiteStart == other.idSiteStart &&
+                lastPt == other.lastPt &&
+                locationType == other.locationType &&
+                maxDuration == other.maxDuration &&
+                maxSpeed == other.maxSpeed &&
+                minDuration == other.minDuration &&
+                minSpeed == other.minSpeed &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                partialDesc == other.partialDesc &&
+                partialDuration == other.partialDuration &&
+                sourceDl == other.sourceDl &&
+                speedUnit == other.speedUnit &&
+                timePeriod == other.timePeriod &&
+                vehicleCategory == other.vehicleCategory &&
+                vehicleType == other.vehicleType &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, locationEnd, locationStart, source, bodyId, avgDuration, avgSpeed, createdAt, createdBy, dataPtsUsed, distance, distUnit, firstPt, idealDesc, idealDuration, idSiteEnd, idSiteStart, lastPt, locationType, maxDuration, maxSpeed, minDuration, minSpeed, origin, origNetwork, partialDesc, partialDuration, sourceDl, speedUnit, timePeriod, vehicleCategory, vehicleType, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                locationEnd,
+                locationStart,
+                source,
+                bodyId,
+                avgDuration,
+                avgSpeed,
+                createdAt,
+                createdBy,
+                dataPtsUsed,
+                distance,
+                distUnit,
+                firstPt,
+                idealDesc,
+                idealDuration,
+                idSiteEnd,
+                idSiteStart,
+                lastPt,
+                locationType,
+                maxDuration,
+                maxSpeed,
+                minDuration,
+                minSpeed,
+                origin,
+                origNetwork,
+                partialDesc,
+                partialDuration,
+                sourceDl,
+                speedUnit,
+                timePeriod,
+                vehicleCategory,
+                vehicleType,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2913,7 +2982,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2926,10 +2995,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is RouteStatUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is RouteStatUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "RouteStatUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

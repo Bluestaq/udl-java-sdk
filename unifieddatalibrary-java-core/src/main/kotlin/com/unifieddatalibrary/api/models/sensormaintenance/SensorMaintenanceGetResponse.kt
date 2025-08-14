@@ -1511,7 +1511,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1524,12 +1524,81 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SensorMaintenanceGetResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && endTime == other.endTime && siteCode == other.siteCode && source == other.source && startTime == other.startTime && id == other.id && activity == other.activity && approver == other.approver && changer == other.changer && createdAt == other.createdAt && createdBy == other.createdBy && duration == other.duration && eowId == other.eowId && equipStatus == other.equipStatus && idSensor == other.idSensor && impactedFaces == other.impactedFaces && inactiveDate == other.inactiveDate && lineNumber == other.lineNumber && mdOpsCap == other.mdOpsCap && mwOpsCap == other.mwOpsCap && origin == other.origin && origNetwork == other.origNetwork && priority == other.priority && recall == other.recall && rel == other.rel && remark == other.remark && requestor == other.requestor && resource == other.resource && rev == other.rev && ssOpsCap == other.ssOpsCap && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SensorMaintenanceGetResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            endTime == other.endTime &&
+            siteCode == other.siteCode &&
+            source == other.source &&
+            startTime == other.startTime &&
+            id == other.id &&
+            activity == other.activity &&
+            approver == other.approver &&
+            changer == other.changer &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            duration == other.duration &&
+            eowId == other.eowId &&
+            equipStatus == other.equipStatus &&
+            idSensor == other.idSensor &&
+            impactedFaces == other.impactedFaces &&
+            inactiveDate == other.inactiveDate &&
+            lineNumber == other.lineNumber &&
+            mdOpsCap == other.mdOpsCap &&
+            mwOpsCap == other.mwOpsCap &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            priority == other.priority &&
+            recall == other.recall &&
+            rel == other.rel &&
+            remark == other.remark &&
+            requestor == other.requestor &&
+            resource == other.resource &&
+            rev == other.rev &&
+            ssOpsCap == other.ssOpsCap &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, endTime, siteCode, source, startTime, id, activity, approver, changer, createdAt, createdBy, duration, eowId, equipStatus, idSensor, impactedFaces, inactiveDate, lineNumber, mdOpsCap, mwOpsCap, origin, origNetwork, priority, recall, rel, remark, requestor, resource, rev, ssOpsCap, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            endTime,
+            siteCode,
+            source,
+            startTime,
+            id,
+            activity,
+            approver,
+            changer,
+            createdAt,
+            createdBy,
+            duration,
+            eowId,
+            equipStatus,
+            idSensor,
+            impactedFaces,
+            inactiveDate,
+            lineNumber,
+            mdOpsCap,
+            mwOpsCap,
+            origin,
+            origNetwork,
+            priority,
+            recall,
+            rel,
+            remark,
+            requestor,
+            resource,
+            rev,
+            ssOpsCap,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

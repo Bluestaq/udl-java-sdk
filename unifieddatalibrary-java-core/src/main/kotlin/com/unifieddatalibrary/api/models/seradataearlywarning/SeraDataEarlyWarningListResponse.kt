@@ -1186,7 +1186,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1199,12 +1199,59 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SeraDataEarlyWarningListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && spacecraftId == other.spacecraftId && id == other.id && bestResolution == other.bestResolution && createdAt == other.createdAt && createdBy == other.createdBy && earthPointing == other.earthPointing && frequencyLimits == other.frequencyLimits && groundStationLocations == other.groundStationLocations && groundStations == other.groundStations && hostedForCompanyOrgId == other.hostedForCompanyOrgId && idIr == other.idIr && manufacturerOrgId == other.manufacturerOrgId && missileLaunchPhaseDetectionAbility == other.missileLaunchPhaseDetectionAbility && name == other.name && origin == other.origin && origNetwork == other.origNetwork && partnerSpacecraftId == other.partnerSpacecraftId && payloadNotes == other.payloadNotes && spectralBands == other.spectralBands && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SeraDataEarlyWarningListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            spacecraftId == other.spacecraftId &&
+            id == other.id &&
+            bestResolution == other.bestResolution &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            earthPointing == other.earthPointing &&
+            frequencyLimits == other.frequencyLimits &&
+            groundStationLocations == other.groundStationLocations &&
+            groundStations == other.groundStations &&
+            hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+            idIr == other.idIr &&
+            manufacturerOrgId == other.manufacturerOrgId &&
+            missileLaunchPhaseDetectionAbility == other.missileLaunchPhaseDetectionAbility &&
+            name == other.name &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            partnerSpacecraftId == other.partnerSpacecraftId &&
+            payloadNotes == other.payloadNotes &&
+            spectralBands == other.spectralBands &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, spacecraftId, id, bestResolution, createdAt, createdBy, earthPointing, frequencyLimits, groundStationLocations, groundStations, hostedForCompanyOrgId, idIr, manufacturerOrgId, missileLaunchPhaseDetectionAbility, name, origin, origNetwork, partnerSpacecraftId, payloadNotes, spectralBands, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            spacecraftId,
+            id,
+            bestResolution,
+            createdAt,
+            createdBy,
+            earthPointing,
+            frequencyLimits,
+            groundStationLocations,
+            groundStations,
+            hostedForCompanyOrgId,
+            idIr,
+            manufacturerOrgId,
+            missileLaunchPhaseDetectionAbility,
+            name,
+            origin,
+            origNetwork,
+            partnerSpacecraftId,
+            payloadNotes,
+            spectralBands,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

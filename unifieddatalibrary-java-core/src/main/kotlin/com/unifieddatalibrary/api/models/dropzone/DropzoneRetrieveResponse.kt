@@ -1740,7 +1740,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1753,12 +1753,89 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is DropzoneRetrieveResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && lat == other.lat && lon == other.lon && name == other.name && source == other.source && id == other.id && altCountryCode == other.altCountryCode && altCountryName == other.altCountryName && approvalDate == other.approvalDate && code == other.code && countryCode == other.countryCode && countryName == other.countryName && createdAt == other.createdAt && createdBy == other.createdBy && expirationDate == other.expirationDate && extIdentifier == other.extIdentifier && idSite == other.idSite && lastUpdate == other.lastUpdate && length == other.length && majcom == other.majcom && nearestLoc == other.nearestLoc && operationalApprovalDate == other.operationalApprovalDate && origin == other.origin && origNetwork == other.origNetwork && pointName == other.pointName && radius == other.radius && recertDate == other.recertDate && remark == other.remark && sourceDl == other.sourceDl && stateAbbr == other.stateAbbr && stateName == other.stateName && surveyDate == other.surveyDate && updatedAt == other.updatedAt && updatedBy == other.updatedBy && width == other.width && zarId == other.zarId && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is DropzoneRetrieveResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            lat == other.lat &&
+            lon == other.lon &&
+            name == other.name &&
+            source == other.source &&
+            id == other.id &&
+            altCountryCode == other.altCountryCode &&
+            altCountryName == other.altCountryName &&
+            approvalDate == other.approvalDate &&
+            code == other.code &&
+            countryCode == other.countryCode &&
+            countryName == other.countryName &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            expirationDate == other.expirationDate &&
+            extIdentifier == other.extIdentifier &&
+            idSite == other.idSite &&
+            lastUpdate == other.lastUpdate &&
+            length == other.length &&
+            majcom == other.majcom &&
+            nearestLoc == other.nearestLoc &&
+            operationalApprovalDate == other.operationalApprovalDate &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            pointName == other.pointName &&
+            radius == other.radius &&
+            recertDate == other.recertDate &&
+            remark == other.remark &&
+            sourceDl == other.sourceDl &&
+            stateAbbr == other.stateAbbr &&
+            stateName == other.stateName &&
+            surveyDate == other.surveyDate &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            width == other.width &&
+            zarId == other.zarId &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, lat, lon, name, source, id, altCountryCode, altCountryName, approvalDate, code, countryCode, countryName, createdAt, createdBy, expirationDate, extIdentifier, idSite, lastUpdate, length, majcom, nearestLoc, operationalApprovalDate, origin, origNetwork, pointName, radius, recertDate, remark, sourceDl, stateAbbr, stateName, surveyDate, updatedAt, updatedBy, width, zarId, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            lat,
+            lon,
+            name,
+            source,
+            id,
+            altCountryCode,
+            altCountryName,
+            approvalDate,
+            code,
+            countryCode,
+            countryName,
+            createdAt,
+            createdBy,
+            expirationDate,
+            extIdentifier,
+            idSite,
+            lastUpdate,
+            length,
+            majcom,
+            nearestLoc,
+            operationalApprovalDate,
+            origin,
+            origNetwork,
+            pointName,
+            radius,
+            recertDate,
+            remark,
+            sourceDl,
+            stateAbbr,
+            stateName,
+            surveyDate,
+            updatedAt,
+            updatedBy,
+            width,
+            zarId,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

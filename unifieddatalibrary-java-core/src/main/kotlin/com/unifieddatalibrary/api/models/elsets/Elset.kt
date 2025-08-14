@@ -2194,7 +2194,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2350,7 +2350,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SourcedDataType && value == other.value /* spotless:on */
+            return other is SourcedDataType && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2363,12 +2363,103 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is Elset && classificationMarking == other.classificationMarking && dataMode == other.dataMode && epoch == other.epoch && source == other.source && agom == other.agom && algorithm == other.algorithm && apogee == other.apogee && argOfPerigee == other.argOfPerigee && ballisticCoeff == other.ballisticCoeff && bStar == other.bStar && createdAt == other.createdAt && createdBy == other.createdBy && descriptor == other.descriptor && eccentricity == other.eccentricity && effectiveFrom == other.effectiveFrom && effectiveUntil == other.effectiveUntil && ephemType == other.ephemType && idElset == other.idElset && idOnOrbit == other.idOnOrbit && idOrbitDetermination == other.idOrbitDetermination && inclination == other.inclination && line1 == other.line1 && line2 == other.line2 && meanAnomaly == other.meanAnomaly && meanMotion == other.meanMotion && meanMotionDDot == other.meanMotionDDot && meanMotionDot == other.meanMotionDot && onOrbit == other.onOrbit && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && perigee == other.perigee && period == other.period && raan == other.raan && rawFileUri == other.rawFileUri && revNo == other.revNo && satNo == other.satNo && semiMajorAxis == other.semiMajorAxis && sourcedData == other.sourcedData && sourcedDataTypes == other.sourcedDataTypes && sourceDl == other.sourceDl && tags == other.tags && transactionId == other.transactionId && uct == other.uct && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is Elset &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            epoch == other.epoch &&
+            source == other.source &&
+            agom == other.agom &&
+            algorithm == other.algorithm &&
+            apogee == other.apogee &&
+            argOfPerigee == other.argOfPerigee &&
+            ballisticCoeff == other.ballisticCoeff &&
+            bStar == other.bStar &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            descriptor == other.descriptor &&
+            eccentricity == other.eccentricity &&
+            effectiveFrom == other.effectiveFrom &&
+            effectiveUntil == other.effectiveUntil &&
+            ephemType == other.ephemType &&
+            idElset == other.idElset &&
+            idOnOrbit == other.idOnOrbit &&
+            idOrbitDetermination == other.idOrbitDetermination &&
+            inclination == other.inclination &&
+            line1 == other.line1 &&
+            line2 == other.line2 &&
+            meanAnomaly == other.meanAnomaly &&
+            meanMotion == other.meanMotion &&
+            meanMotionDDot == other.meanMotionDDot &&
+            meanMotionDot == other.meanMotionDot &&
+            onOrbit == other.onOrbit &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            perigee == other.perigee &&
+            period == other.period &&
+            raan == other.raan &&
+            rawFileUri == other.rawFileUri &&
+            revNo == other.revNo &&
+            satNo == other.satNo &&
+            semiMajorAxis == other.semiMajorAxis &&
+            sourcedData == other.sourcedData &&
+            sourcedDataTypes == other.sourcedDataTypes &&
+            sourceDl == other.sourceDl &&
+            tags == other.tags &&
+            transactionId == other.transactionId &&
+            uct == other.uct &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, epoch, source, agom, algorithm, apogee, argOfPerigee, ballisticCoeff, bStar, createdAt, createdBy, descriptor, eccentricity, effectiveFrom, effectiveUntil, ephemType, idElset, idOnOrbit, idOrbitDetermination, inclination, line1, line2, meanAnomaly, meanMotion, meanMotionDDot, meanMotionDot, onOrbit, origin, origNetwork, origObjectId, perigee, period, raan, rawFileUri, revNo, satNo, semiMajorAxis, sourcedData, sourcedDataTypes, sourceDl, tags, transactionId, uct, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            epoch,
+            source,
+            agom,
+            algorithm,
+            apogee,
+            argOfPerigee,
+            ballisticCoeff,
+            bStar,
+            createdAt,
+            createdBy,
+            descriptor,
+            eccentricity,
+            effectiveFrom,
+            effectiveUntil,
+            ephemType,
+            idElset,
+            idOnOrbit,
+            idOrbitDetermination,
+            inclination,
+            line1,
+            line2,
+            meanAnomaly,
+            meanMotion,
+            meanMotionDDot,
+            meanMotionDot,
+            onOrbit,
+            origin,
+            origNetwork,
+            origObjectId,
+            perigee,
+            period,
+            raan,
+            rawFileUri,
+            revNo,
+            satNo,
+            semiMajorAxis,
+            sourcedData,
+            sourcedDataTypes,
+            sourceDl,
+            tags,
+            transactionId,
+            uct,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

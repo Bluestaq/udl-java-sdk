@@ -2,6 +2,7 @@
 
 package com.unifieddatalibrary.api.models.onorbitsolararray
 
+import com.unifieddatalibrary.api.models.SolarArrayIngest
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -23,8 +24,8 @@ internal class OnorbitsolararrayCreateParamsTest {
             .origNetwork("OPS1")
             .quantity(10)
             .solarArray(
-                OnorbitsolararrayCreateParams.SolarArray.builder()
-                    .dataMode(OnorbitsolararrayCreateParams.SolarArray.DataMode.TEST)
+                SolarArrayIngest.builder()
+                    .dataMode(SolarArrayIngest.DataMode.TEST)
                     .name("Solar1")
                     .source("Bluestaq")
                     .id("SOLARARRAY-ID")
@@ -53,8 +54,8 @@ internal class OnorbitsolararrayCreateParamsTest {
                 .origNetwork("OPS1")
                 .quantity(10)
                 .solarArray(
-                    OnorbitsolararrayCreateParams.SolarArray.builder()
-                        .dataMode(OnorbitsolararrayCreateParams.SolarArray.DataMode.TEST)
+                    SolarArrayIngest.builder()
+                        .dataMode(SolarArrayIngest.DataMode.TEST)
                         .name("Solar1")
                         .source("Bluestaq")
                         .id("SOLARARRAY-ID")
@@ -81,8 +82,8 @@ internal class OnorbitsolararrayCreateParamsTest {
         assertThat(body.quantity()).contains(10)
         assertThat(body.solarArray())
             .contains(
-                OnorbitsolararrayCreateParams.SolarArray.builder()
-                    .dataMode(OnorbitsolararrayCreateParams.SolarArray.DataMode.TEST)
+                SolarArrayIngest.builder()
+                    .dataMode(SolarArrayIngest.DataMode.TEST)
                     .name("Solar1")
                     .source("Bluestaq")
                     .id("SOLARARRAY-ID")

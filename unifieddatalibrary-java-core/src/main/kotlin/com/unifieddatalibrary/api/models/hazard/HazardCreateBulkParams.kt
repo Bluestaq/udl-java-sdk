@@ -2067,7 +2067,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -2080,12 +2080,93 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && alarms == other.alarms && alarmValues == other.alarmValues && classificationMarking == other.classificationMarking && dataMode == other.dataMode && detectTime == other.detectTime && detectType == other.detectType && source == other.source && id == other.id && a == other.a && activity == other.activity && bottleId == other.bottleId && casRn == other.casRn && channel == other.channel && createdAt == other.createdAt && createdBy == other.createdBy && ctrnTime == other.ctrnTime && density == other.density && dep == other.dep && depCtrn == other.depCtrn && dose == other.dose && doseRate == other.doseRate && duration == other.duration && gBar == other.gBar && harmful == other.harmful && hBar == other.hBar && idPoi == other.idPoi && idTrack == other.idTrack && massFrac == other.massFrac && matCat == other.matCat && matClass == other.matClass && matName == other.matName && matType == other.matType && origin == other.origin && origNetwork == other.origNetwork && ppm == other.ppm && radCtrn == other.radCtrn && readings == other.readings && readingUnits == other.readingUnits && readingValues == other.readingValues && z == other.z /* spotless:on */
+            return other is Body &&
+                alarms == other.alarms &&
+                alarmValues == other.alarmValues &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                detectTime == other.detectTime &&
+                detectType == other.detectType &&
+                source == other.source &&
+                id == other.id &&
+                a == other.a &&
+                activity == other.activity &&
+                bottleId == other.bottleId &&
+                casRn == other.casRn &&
+                channel == other.channel &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                ctrnTime == other.ctrnTime &&
+                density == other.density &&
+                dep == other.dep &&
+                depCtrn == other.depCtrn &&
+                dose == other.dose &&
+                doseRate == other.doseRate &&
+                duration == other.duration &&
+                gBar == other.gBar &&
+                harmful == other.harmful &&
+                hBar == other.hBar &&
+                idPoi == other.idPoi &&
+                idTrack == other.idTrack &&
+                massFrac == other.massFrac &&
+                matCat == other.matCat &&
+                matClass == other.matClass &&
+                matName == other.matName &&
+                matType == other.matType &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                ppm == other.ppm &&
+                radCtrn == other.radCtrn &&
+                readings == other.readings &&
+                readingUnits == other.readingUnits &&
+                readingValues == other.readingValues &&
+                z == other.z
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(alarms, alarmValues, classificationMarking, dataMode, detectTime, detectType, source, id, a, activity, bottleId, casRn, channel, createdAt, createdBy, ctrnTime, density, dep, depCtrn, dose, doseRate, duration, gBar, harmful, hBar, idPoi, idTrack, massFrac, matCat, matClass, matName, matType, origin, origNetwork, ppm, radCtrn, readings, readingUnits, readingValues, z) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                alarms,
+                alarmValues,
+                classificationMarking,
+                dataMode,
+                detectTime,
+                detectType,
+                source,
+                id,
+                a,
+                activity,
+                bottleId,
+                casRn,
+                channel,
+                createdAt,
+                createdBy,
+                ctrnTime,
+                density,
+                dep,
+                depCtrn,
+                dose,
+                doseRate,
+                duration,
+                gBar,
+                harmful,
+                hBar,
+                idPoi,
+                idTrack,
+                massFrac,
+                matCat,
+                matClass,
+                matName,
+                matType,
+                origin,
+                origNetwork,
+                ppm,
+                radCtrn,
+                readings,
+                readingUnits,
+                readingValues,
+                z,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2098,10 +2179,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HazardCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HazardCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "HazardCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

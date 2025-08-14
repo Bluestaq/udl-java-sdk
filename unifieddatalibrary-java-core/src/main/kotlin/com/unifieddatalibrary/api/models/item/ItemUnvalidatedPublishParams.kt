@@ -2438,7 +2438,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -2451,12 +2451,115 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && scanCode == other.scanCode && source == other.source && type == other.type && id == other.id && accSysKeys == other.accSysKeys && accSysNotes == other.accSysNotes && accSystem == other.accSystem && accSysValues == other.accSysValues && airdrop == other.airdrop && altDataFormat == other.altDataFormat && cargoType == other.cargoType && centerlineOffset == other.centerlineOffset && cg == other.cg && commodityCode == other.commodityCode && commoditySys == other.commoditySys && container == other.container && createdAt == other.createdAt && createdBy == other.createdBy && departure == other.departure && destination == other.destination && dvCode == other.dvCode && fs == other.fs && hazCodes == other.hazCodes && height == other.height && idAirLoadPlan == other.idAirLoadPlan && itemContains == other.itemContains && keys == other.keys && lastArrDate == other.lastArrDate && length == other.length && moment == other.moment && name == other.name && netExpWt == other.netExpWt && notes == other.notes && numPalletPos == other.numPalletPos && origin == other.origin && origNetwork == other.origNetwork && productCode == other.productCode && productSys == other.productSys && receivingBranch == other.receivingBranch && receivingUnit == other.receivingUnit && scGenTool == other.scGenTool && sourceDl == other.sourceDl && tcn == other.tcn && uln == other.uln && values == other.values && volume == other.volume && weight == other.weight && weightTs == other.weightTs && width == other.width /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                scanCode == other.scanCode &&
+                source == other.source &&
+                type == other.type &&
+                id == other.id &&
+                accSysKeys == other.accSysKeys &&
+                accSysNotes == other.accSysNotes &&
+                accSystem == other.accSystem &&
+                accSysValues == other.accSysValues &&
+                airdrop == other.airdrop &&
+                altDataFormat == other.altDataFormat &&
+                cargoType == other.cargoType &&
+                centerlineOffset == other.centerlineOffset &&
+                cg == other.cg &&
+                commodityCode == other.commodityCode &&
+                commoditySys == other.commoditySys &&
+                container == other.container &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                departure == other.departure &&
+                destination == other.destination &&
+                dvCode == other.dvCode &&
+                fs == other.fs &&
+                hazCodes == other.hazCodes &&
+                height == other.height &&
+                idAirLoadPlan == other.idAirLoadPlan &&
+                itemContains == other.itemContains &&
+                keys == other.keys &&
+                lastArrDate == other.lastArrDate &&
+                length == other.length &&
+                moment == other.moment &&
+                name == other.name &&
+                netExpWt == other.netExpWt &&
+                notes == other.notes &&
+                numPalletPos == other.numPalletPos &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                productCode == other.productCode &&
+                productSys == other.productSys &&
+                receivingBranch == other.receivingBranch &&
+                receivingUnit == other.receivingUnit &&
+                scGenTool == other.scGenTool &&
+                sourceDl == other.sourceDl &&
+                tcn == other.tcn &&
+                uln == other.uln &&
+                values == other.values &&
+                volume == other.volume &&
+                weight == other.weight &&
+                weightTs == other.weightTs &&
+                width == other.width
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, scanCode, source, type, id, accSysKeys, accSysNotes, accSystem, accSysValues, airdrop, altDataFormat, cargoType, centerlineOffset, cg, commodityCode, commoditySys, container, createdAt, createdBy, departure, destination, dvCode, fs, hazCodes, height, idAirLoadPlan, itemContains, keys, lastArrDate, length, moment, name, netExpWt, notes, numPalletPos, origin, origNetwork, productCode, productSys, receivingBranch, receivingUnit, scGenTool, sourceDl, tcn, uln, values, volume, weight, weightTs, width) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                scanCode,
+                source,
+                type,
+                id,
+                accSysKeys,
+                accSysNotes,
+                accSystem,
+                accSysValues,
+                airdrop,
+                altDataFormat,
+                cargoType,
+                centerlineOffset,
+                cg,
+                commodityCode,
+                commoditySys,
+                container,
+                createdAt,
+                createdBy,
+                departure,
+                destination,
+                dvCode,
+                fs,
+                hazCodes,
+                height,
+                idAirLoadPlan,
+                itemContains,
+                keys,
+                lastArrDate,
+                length,
+                moment,
+                name,
+                netExpWt,
+                notes,
+                numPalletPos,
+                origin,
+                origNetwork,
+                productCode,
+                productSys,
+                receivingBranch,
+                receivingUnit,
+                scGenTool,
+                sourceDl,
+                tcn,
+                uln,
+                values,
+                volume,
+                weight,
+                weightTs,
+                width,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2469,10 +2572,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ItemUnvalidatedPublishParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is ItemUnvalidatedPublishParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "ItemUnvalidatedPublishParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

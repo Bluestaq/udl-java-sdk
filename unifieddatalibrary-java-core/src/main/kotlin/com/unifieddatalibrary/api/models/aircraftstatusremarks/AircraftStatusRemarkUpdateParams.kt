@@ -1694,12 +1694,51 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idAircraftStatus == other.idAircraftStatus && source == other.source && text == other.text && bodyId == other.bodyId && altRmkId == other.altRmkId && createdAt == other.createdAt && createdBy == other.createdBy && lastUpdatedAt == other.lastUpdatedAt && lastUpdatedBy == other.lastUpdatedBy && name == other.name && origin == other.origin && origNetwork == other.origNetwork && sourceDl == other.sourceDl && timestamp == other.timestamp && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idAircraftStatus == other.idAircraftStatus &&
+                source == other.source &&
+                text == other.text &&
+                bodyId == other.bodyId &&
+                altRmkId == other.altRmkId &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                lastUpdatedAt == other.lastUpdatedAt &&
+                lastUpdatedBy == other.lastUpdatedBy &&
+                name == other.name &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                sourceDl == other.sourceDl &&
+                timestamp == other.timestamp &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idAircraftStatus, source, text, bodyId, altRmkId, createdAt, createdBy, lastUpdatedAt, lastUpdatedBy, name, origin, origNetwork, sourceDl, timestamp, updatedAt, updatedBy, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idAircraftStatus,
+                source,
+                text,
+                bodyId,
+                altRmkId,
+                createdAt,
+                createdBy,
+                lastUpdatedAt,
+                lastUpdatedBy,
+                name,
+                origin,
+                origNetwork,
+                sourceDl,
+                timestamp,
+                updatedAt,
+                updatedBy,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1852,7 +1891,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1865,10 +1904,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AircraftStatusRemarkUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is AircraftStatusRemarkUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "AircraftStatusRemarkUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

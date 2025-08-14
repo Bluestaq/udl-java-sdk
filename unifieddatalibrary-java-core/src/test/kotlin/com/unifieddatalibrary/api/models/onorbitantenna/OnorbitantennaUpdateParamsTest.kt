@@ -2,6 +2,7 @@
 
 package com.unifieddatalibrary.api.models.onorbitantenna
 
+import com.unifieddatalibrary.api.models.AntennaIngest
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -19,8 +20,8 @@ internal class OnorbitantennaUpdateParamsTest {
             .source("Bluestaq")
             .bodyId("ONORBITANTENNA-ID")
             .antenna(
-                OnorbitantennaUpdateParams.Antenna.builder()
-                    .dataMode(OnorbitantennaUpdateParams.Antenna.DataMode.TEST)
+                AntennaIngest.builder()
+                    .dataMode(AntennaIngest.DataMode.TEST)
                     .name("IRIDIUM NEXT 121-ANTENNA-10075")
                     .source("Bluestaq")
                     .id("ANTENNA-ID")
@@ -66,8 +67,8 @@ internal class OnorbitantennaUpdateParamsTest {
                 .source("Bluestaq")
                 .bodyId("ONORBITANTENNA-ID")
                 .antenna(
-                    OnorbitantennaUpdateParams.Antenna.builder()
-                        .dataMode(OnorbitantennaUpdateParams.Antenna.DataMode.TEST)
+                    AntennaIngest.builder()
+                        .dataMode(AntennaIngest.DataMode.TEST)
                         .name("IRIDIUM NEXT 121-ANTENNA-10075")
                         .source("Bluestaq")
                         .id("ANTENNA-ID")
@@ -93,8 +94,8 @@ internal class OnorbitantennaUpdateParamsTest {
         assertThat(body.bodyId()).contains("ONORBITANTENNA-ID")
         assertThat(body.antenna())
             .contains(
-                OnorbitantennaUpdateParams.Antenna.builder()
-                    .dataMode(OnorbitantennaUpdateParams.Antenna.DataMode.TEST)
+                AntennaIngest.builder()
+                    .dataMode(AntennaIngest.DataMode.TEST)
                     .name("IRIDIUM NEXT 121-ANTENNA-10075")
                     .source("Bluestaq")
                     .id("ANTENNA-ID")

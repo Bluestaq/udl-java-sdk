@@ -2,6 +2,7 @@
 
 package com.unifieddatalibrary.api.models.onorbitbattery
 
+import com.unifieddatalibrary.api.models.BatteryIngest
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -19,8 +20,8 @@ internal class OnorbitbatteryUpdateParamsTest {
             .source("Bluestaq")
             .bodyId("ONORBITBATTERY-ID")
             .battery(
-                OnorbitbatteryUpdateParams.Battery.builder()
-                    .dataMode(OnorbitbatteryUpdateParams.Battery.DataMode.TEST)
+                BatteryIngest.builder()
+                    .dataMode(BatteryIngest.DataMode.TEST)
                     .name("JAK-BATTERY-1479")
                     .source("Bluestaq")
                     .id("BATTERY-ID")
@@ -67,8 +68,8 @@ internal class OnorbitbatteryUpdateParamsTest {
                 .source("Bluestaq")
                 .bodyId("ONORBITBATTERY-ID")
                 .battery(
-                    OnorbitbatteryUpdateParams.Battery.builder()
-                        .dataMode(OnorbitbatteryUpdateParams.Battery.DataMode.TEST)
+                    BatteryIngest.builder()
+                        .dataMode(BatteryIngest.DataMode.TEST)
                         .name("JAK-BATTERY-1479")
                         .source("Bluestaq")
                         .id("BATTERY-ID")
@@ -95,8 +96,8 @@ internal class OnorbitbatteryUpdateParamsTest {
         assertThat(body.bodyId()).contains("ONORBITBATTERY-ID")
         assertThat(body.battery())
             .contains(
-                OnorbitbatteryUpdateParams.Battery.builder()
-                    .dataMode(OnorbitbatteryUpdateParams.Battery.DataMode.TEST)
+                BatteryIngest.builder()
+                    .dataMode(BatteryIngest.DataMode.TEST)
                     .name("JAK-BATTERY-1479")
                     .source("Bluestaq")
                     .id("BATTERY-ID")

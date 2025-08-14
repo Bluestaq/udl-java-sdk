@@ -3121,7 +3121,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3134,12 +3134,155 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SarObservationListResponse && classificationMarking == other.classificationMarking && collectionEnd == other.collectionEnd && collectionStart == other.collectionStart && dataMode == other.dataMode && sarMode == other.sarMode && source == other.source && id == other.id && agjson == other.agjson && andims == other.andims && asrid == other.asrid && atext == other.atext && atype == other.atype && azimuthAngle == other.azimuthAngle && centerTime == other.centerTime && collectionId == other.collectionId && continuousSpotAngle == other.continuousSpotAngle && coordSys == other.coordSys && createdAt == other.createdAt && createdBy == other.createdBy && detectionEnd == other.detectionEnd && detectionId == other.detectionId && detectionStart == other.detectionStart && dwellTime == other.dwellTime && externalId == other.externalId && farRange == other.farRange && grazeAngle == other.grazeAngle && groundResolutionProjection == other.groundResolutionProjection && idOnOrbit == other.idOnOrbit && idSensor == other.idSensor && incidenceAngle == other.incidenceAngle && looksAzimuth == other.looksAzimuth && looksRange == other.looksRange && multilookNumber == other.multilookNumber && nearRange == other.nearRange && obDirection == other.obDirection && operatingBand == other.operatingBand && operatingFreq == other.operatingFreq && orbitState == other.orbitState && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId == other.origSensorId && pulseBandwidth == other.pulseBandwidth && pulseDuration == other.pulseDuration && resolutionAzimuth == other.resolutionAzimuth && resolutionRange == other.resolutionRange && rxPolarization == other.rxPolarization && satNo == other.satNo && senalt == other.senalt && senlatEnd == other.senlatEnd && senlatStart == other.senlatStart && senlonEnd == other.senlonEnd && senlonStart == other.senlonStart && senvelx == other.senvelx && senvely == other.senvely && senvelz == other.senvelz && slantRange == other.slantRange && snr == other.snr && sourceDl == other.sourceDl && spacingAzimuth == other.spacingAzimuth && spacingRange == other.spacingRange && squintAngle == other.squintAngle && srcIds == other.srcIds && srcTyps == other.srcTyps && swathLength == other.swathLength && targetposx == other.targetposx && targetposy == other.targetposy && targetposz == other.targetposz && transactionId == other.transactionId && txPolarization == other.txPolarization && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SarObservationListResponse &&
+            classificationMarking == other.classificationMarking &&
+            collectionEnd == other.collectionEnd &&
+            collectionStart == other.collectionStart &&
+            dataMode == other.dataMode &&
+            sarMode == other.sarMode &&
+            source == other.source &&
+            id == other.id &&
+            agjson == other.agjson &&
+            andims == other.andims &&
+            asrid == other.asrid &&
+            atext == other.atext &&
+            atype == other.atype &&
+            azimuthAngle == other.azimuthAngle &&
+            centerTime == other.centerTime &&
+            collectionId == other.collectionId &&
+            continuousSpotAngle == other.continuousSpotAngle &&
+            coordSys == other.coordSys &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            detectionEnd == other.detectionEnd &&
+            detectionId == other.detectionId &&
+            detectionStart == other.detectionStart &&
+            dwellTime == other.dwellTime &&
+            externalId == other.externalId &&
+            farRange == other.farRange &&
+            grazeAngle == other.grazeAngle &&
+            groundResolutionProjection == other.groundResolutionProjection &&
+            idOnOrbit == other.idOnOrbit &&
+            idSensor == other.idSensor &&
+            incidenceAngle == other.incidenceAngle &&
+            looksAzimuth == other.looksAzimuth &&
+            looksRange == other.looksRange &&
+            multilookNumber == other.multilookNumber &&
+            nearRange == other.nearRange &&
+            obDirection == other.obDirection &&
+            operatingBand == other.operatingBand &&
+            operatingFreq == other.operatingFreq &&
+            orbitState == other.orbitState &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            origSensorId == other.origSensorId &&
+            pulseBandwidth == other.pulseBandwidth &&
+            pulseDuration == other.pulseDuration &&
+            resolutionAzimuth == other.resolutionAzimuth &&
+            resolutionRange == other.resolutionRange &&
+            rxPolarization == other.rxPolarization &&
+            satNo == other.satNo &&
+            senalt == other.senalt &&
+            senlatEnd == other.senlatEnd &&
+            senlatStart == other.senlatStart &&
+            senlonEnd == other.senlonEnd &&
+            senlonStart == other.senlonStart &&
+            senvelx == other.senvelx &&
+            senvely == other.senvely &&
+            senvelz == other.senvelz &&
+            slantRange == other.slantRange &&
+            snr == other.snr &&
+            sourceDl == other.sourceDl &&
+            spacingAzimuth == other.spacingAzimuth &&
+            spacingRange == other.spacingRange &&
+            squintAngle == other.squintAngle &&
+            srcIds == other.srcIds &&
+            srcTyps == other.srcTyps &&
+            swathLength == other.swathLength &&
+            targetposx == other.targetposx &&
+            targetposy == other.targetposy &&
+            targetposz == other.targetposz &&
+            transactionId == other.transactionId &&
+            txPolarization == other.txPolarization &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, collectionEnd, collectionStart, dataMode, sarMode, source, id, agjson, andims, asrid, atext, atype, azimuthAngle, centerTime, collectionId, continuousSpotAngle, coordSys, createdAt, createdBy, detectionEnd, detectionId, detectionStart, dwellTime, externalId, farRange, grazeAngle, groundResolutionProjection, idOnOrbit, idSensor, incidenceAngle, looksAzimuth, looksRange, multilookNumber, nearRange, obDirection, operatingBand, operatingFreq, orbitState, origin, origNetwork, origObjectId, origSensorId, pulseBandwidth, pulseDuration, resolutionAzimuth, resolutionRange, rxPolarization, satNo, senalt, senlatEnd, senlatStart, senlonEnd, senlonStart, senvelx, senvely, senvelz, slantRange, snr, sourceDl, spacingAzimuth, spacingRange, squintAngle, srcIds, srcTyps, swathLength, targetposx, targetposy, targetposz, transactionId, txPolarization, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            collectionEnd,
+            collectionStart,
+            dataMode,
+            sarMode,
+            source,
+            id,
+            agjson,
+            andims,
+            asrid,
+            atext,
+            atype,
+            azimuthAngle,
+            centerTime,
+            collectionId,
+            continuousSpotAngle,
+            coordSys,
+            createdAt,
+            createdBy,
+            detectionEnd,
+            detectionId,
+            detectionStart,
+            dwellTime,
+            externalId,
+            farRange,
+            grazeAngle,
+            groundResolutionProjection,
+            idOnOrbit,
+            idSensor,
+            incidenceAngle,
+            looksAzimuth,
+            looksRange,
+            multilookNumber,
+            nearRange,
+            obDirection,
+            operatingBand,
+            operatingFreq,
+            orbitState,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            pulseBandwidth,
+            pulseDuration,
+            resolutionAzimuth,
+            resolutionRange,
+            rxPolarization,
+            satNo,
+            senalt,
+            senlatEnd,
+            senlatStart,
+            senlonEnd,
+            senlonStart,
+            senvelx,
+            senvely,
+            senvelz,
+            slantRange,
+            snr,
+            sourceDl,
+            spacingAzimuth,
+            spacingRange,
+            squintAngle,
+            srcIds,
+            srcTyps,
+            swathLength,
+            targetposx,
+            targetposy,
+            targetposz,
+            transactionId,
+            txPolarization,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

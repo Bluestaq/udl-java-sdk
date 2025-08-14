@@ -301,10 +301,26 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is StarCatalogTupleParams && columns == other.columns && dec == other.dec && firstResult == other.firstResult && maxResults == other.maxResults && ra == other.ra && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is StarCatalogTupleParams &&
+            columns == other.columns &&
+            dec == other.dec &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            ra == other.ra &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, dec, firstResult, maxResults, ra, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            columns,
+            dec,
+            firstResult,
+            maxResults,
+            ra,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "StarCatalogTupleParams{columns=$columns, dec=$dec, firstResult=$firstResult, maxResults=$maxResults, ra=$ra, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

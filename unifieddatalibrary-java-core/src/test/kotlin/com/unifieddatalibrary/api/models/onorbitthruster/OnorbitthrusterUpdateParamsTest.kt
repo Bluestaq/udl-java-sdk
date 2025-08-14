@@ -2,6 +2,7 @@
 
 package com.unifieddatalibrary.api.models.onorbitthruster
 
+import com.unifieddatalibrary.api.models.EngineIngest
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -21,9 +22,9 @@ internal class OnorbitthrusterUpdateParamsTest {
             .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
             .createdBy("some.user")
             .engine(
-                OnorbitthrusterUpdateParams.Engine.builder()
+                EngineIngest.builder()
                     .classificationMarking("U")
-                    .dataMode(OnorbitthrusterUpdateParams.Engine.DataMode.TEST)
+                    .dataMode(EngineIngest.DataMode.TEST)
                     .name("ENGINE_VARIANT1")
                     .source("Bluestaq")
                     .id("ENGINE-ID")
@@ -71,9 +72,9 @@ internal class OnorbitthrusterUpdateParamsTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .engine(
-                    OnorbitthrusterUpdateParams.Engine.builder()
+                    EngineIngest.builder()
                         .classificationMarking("U")
-                        .dataMode(OnorbitthrusterUpdateParams.Engine.DataMode.TEST)
+                        .dataMode(EngineIngest.DataMode.TEST)
                         .name("ENGINE_VARIANT1")
                         .source("Bluestaq")
                         .id("ENGINE-ID")
@@ -101,9 +102,9 @@ internal class OnorbitthrusterUpdateParamsTest {
         assertThat(body.createdBy()).contains("some.user")
         assertThat(body.engine())
             .contains(
-                OnorbitthrusterUpdateParams.Engine.builder()
+                EngineIngest.builder()
                     .classificationMarking("U")
-                    .dataMode(OnorbitthrusterUpdateParams.Engine.DataMode.TEST)
+                    .dataMode(EngineIngest.DataMode.TEST)
                     .name("ENGINE_VARIANT1")
                     .source("Bluestaq")
                     .id("ENGINE-ID")

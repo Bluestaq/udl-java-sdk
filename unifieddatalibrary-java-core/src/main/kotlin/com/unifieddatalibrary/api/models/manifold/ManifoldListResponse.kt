@@ -794,7 +794,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -807,12 +807,41 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ManifoldListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idObjectOfInterest == other.idObjectOfInterest && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && deltaT == other.deltaT && deltaV == other.deltaV && origin == other.origin && origNetwork == other.origNetwork && status == other.status && weight == other.weight && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is ManifoldListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idObjectOfInterest == other.idObjectOfInterest &&
+            source == other.source &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            deltaT == other.deltaT &&
+            deltaV == other.deltaV &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            status == other.status &&
+            weight == other.weight &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idObjectOfInterest, source, id, createdAt, createdBy, deltaT, deltaV, origin, origNetwork, status, weight, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idObjectOfInterest,
+            source,
+            id,
+            createdAt,
+            createdBy,
+            deltaT,
+            deltaV,
+            origin,
+            origNetwork,
+            status,
+            weight,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

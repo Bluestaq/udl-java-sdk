@@ -2,6 +2,7 @@
 
 package com.unifieddatalibrary.api.models.engines
 
+import com.unifieddatalibrary.api.models.EngineIngest
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -12,15 +13,19 @@ internal class EngineUpdateParamsTest {
     fun create() {
         EngineUpdateParams.builder()
             .pathId("id")
-            .classificationMarking("U")
-            .dataMode(EngineUpdateParams.DataMode.TEST)
-            .name("ENGINE_VARIANT1")
-            .source("Bluestaq")
-            .bodyId("ENGINE-ID")
-            .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-            .createdBy("some.user")
-            .origin("THIRD_PARTY_DATASOURCE")
-            .origNetwork("ORIG")
+            .engineIngest(
+                EngineIngest.builder()
+                    .classificationMarking("U")
+                    .dataMode(EngineIngest.DataMode.TEST)
+                    .name("ENGINE_VARIANT1")
+                    .source("Bluestaq")
+                    .id("ENGINE-ID")
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("ORIG")
+                    .build()
+            )
             .build()
     }
 
@@ -29,10 +34,14 @@ internal class EngineUpdateParamsTest {
         val params =
             EngineUpdateParams.builder()
                 .pathId("id")
-                .classificationMarking("U")
-                .dataMode(EngineUpdateParams.DataMode.TEST)
-                .name("ENGINE_VARIANT1")
-                .source("Bluestaq")
+                .engineIngest(
+                    EngineIngest.builder()
+                        .classificationMarking("U")
+                        .dataMode(EngineIngest.DataMode.TEST)
+                        .name("ENGINE_VARIANT1")
+                        .source("Bluestaq")
+                        .build()
+                )
                 .build()
 
         assertThat(params._pathParam(0)).isEqualTo("id")
@@ -45,28 +54,37 @@ internal class EngineUpdateParamsTest {
         val params =
             EngineUpdateParams.builder()
                 .pathId("id")
-                .classificationMarking("U")
-                .dataMode(EngineUpdateParams.DataMode.TEST)
-                .name("ENGINE_VARIANT1")
-                .source("Bluestaq")
-                .bodyId("ENGINE-ID")
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .engineIngest(
+                    EngineIngest.builder()
+                        .classificationMarking("U")
+                        .dataMode(EngineIngest.DataMode.TEST)
+                        .name("ENGINE_VARIANT1")
+                        .source("Bluestaq")
+                        .id("ENGINE-ID")
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .build()
+                )
                 .build()
 
         val body = params._body()
 
-        assertThat(body.classificationMarking()).isEqualTo("U")
-        assertThat(body.dataMode()).isEqualTo(EngineUpdateParams.DataMode.TEST)
-        assertThat(body.name()).isEqualTo("ENGINE_VARIANT1")
-        assertThat(body.source()).isEqualTo("Bluestaq")
-        assertThat(body.bodyId()).contains("ENGINE-ID")
-        assertThat(body.createdAt()).contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(body.createdBy()).contains("some.user")
-        assertThat(body.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(body.origNetwork()).contains("ORIG")
+        assertThat(body)
+            .isEqualTo(
+                EngineIngest.builder()
+                    .classificationMarking("U")
+                    .dataMode(EngineIngest.DataMode.TEST)
+                    .name("ENGINE_VARIANT1")
+                    .source("Bluestaq")
+                    .id("ENGINE-ID")
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("ORIG")
+                    .build()
+            )
     }
 
     @Test
@@ -74,17 +92,26 @@ internal class EngineUpdateParamsTest {
         val params =
             EngineUpdateParams.builder()
                 .pathId("id")
-                .classificationMarking("U")
-                .dataMode(EngineUpdateParams.DataMode.TEST)
-                .name("ENGINE_VARIANT1")
-                .source("Bluestaq")
+                .engineIngest(
+                    EngineIngest.builder()
+                        .classificationMarking("U")
+                        .dataMode(EngineIngest.DataMode.TEST)
+                        .name("ENGINE_VARIANT1")
+                        .source("Bluestaq")
+                        .build()
+                )
                 .build()
 
         val body = params._body()
 
-        assertThat(body.classificationMarking()).isEqualTo("U")
-        assertThat(body.dataMode()).isEqualTo(EngineUpdateParams.DataMode.TEST)
-        assertThat(body.name()).isEqualTo("ENGINE_VARIANT1")
-        assertThat(body.source()).isEqualTo("Bluestaq")
+        assertThat(body)
+            .isEqualTo(
+                EngineIngest.builder()
+                    .classificationMarking("U")
+                    .dataMode(EngineIngest.DataMode.TEST)
+                    .name("ENGINE_VARIANT1")
+                    .source("Bluestaq")
+                    .build()
+            )
     }
 }

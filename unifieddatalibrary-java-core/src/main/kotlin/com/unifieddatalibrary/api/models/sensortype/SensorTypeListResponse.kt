@@ -292,12 +292,18 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SensorTypeListResponse && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && origNetwork == other.origNetwork && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SensorTypeListResponse &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            origNetwork == other.origNetwork &&
+            type == other.type &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(id, createdAt, createdBy, origNetwork, type, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(id, createdAt, createdBy, origNetwork, type, additionalProperties)
+    }
 
     override fun hashCode(): Int = hashCode
 

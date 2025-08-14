@@ -1119,7 +1119,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2229,12 +2229,63 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DiplomaticClearanceDetail && action == other.action && altCountryCode == other.altCountryCode && clearanceId == other.clearanceId && clearanceRemark == other.clearanceRemark && clearedCallSign == other.clearedCallSign && countryCode == other.countryCode && countryName == other.countryName && entryNet == other.entryNet && entryPoint == other.entryPoint && exitNlt == other.exitNlt && exitPoint == other.exitPoint && externalClearanceId == other.externalClearanceId && idSortie == other.idSortie && legNum == other.legNum && profile == other.profile && reqIcao == other.reqIcao && reqPoint == other.reqPoint && routeString == other.routeString && sequenceNum == other.sequenceNum && status == other.status && validDesc == other.validDesc && validEndTime == other.validEndTime && validStartTime == other.validStartTime && windowRemark == other.windowRemark && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is DiplomaticClearanceDetail &&
+                action == other.action &&
+                altCountryCode == other.altCountryCode &&
+                clearanceId == other.clearanceId &&
+                clearanceRemark == other.clearanceRemark &&
+                clearedCallSign == other.clearedCallSign &&
+                countryCode == other.countryCode &&
+                countryName == other.countryName &&
+                entryNet == other.entryNet &&
+                entryPoint == other.entryPoint &&
+                exitNlt == other.exitNlt &&
+                exitPoint == other.exitPoint &&
+                externalClearanceId == other.externalClearanceId &&
+                idSortie == other.idSortie &&
+                legNum == other.legNum &&
+                profile == other.profile &&
+                reqIcao == other.reqIcao &&
+                reqPoint == other.reqPoint &&
+                routeString == other.routeString &&
+                sequenceNum == other.sequenceNum &&
+                status == other.status &&
+                validDesc == other.validDesc &&
+                validEndTime == other.validEndTime &&
+                validStartTime == other.validStartTime &&
+                windowRemark == other.windowRemark &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(action, altCountryCode, clearanceId, clearanceRemark, clearedCallSign, countryCode, countryName, entryNet, entryPoint, exitNlt, exitPoint, externalClearanceId, idSortie, legNum, profile, reqIcao, reqPoint, routeString, sequenceNum, status, validDesc, validEndTime, validStartTime, windowRemark, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                action,
+                altCountryCode,
+                clearanceId,
+                clearanceRemark,
+                clearedCallSign,
+                countryCode,
+                countryName,
+                entryNet,
+                entryPoint,
+                exitNlt,
+                exitPoint,
+                externalClearanceId,
+                idSortie,
+                legNum,
+                profile,
+                reqIcao,
+                reqPoint,
+                routeString,
+                sequenceNum,
+                status,
+                validDesc,
+                validEndTime,
+                validStartTime,
+                windowRemark,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2492,12 +2543,17 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DiplomaticClearanceRemark && date == other.date && gdssRemarkId == other.gdssRemarkId && text == other.text && user == other.user && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is DiplomaticClearanceRemark &&
+                date == other.date &&
+                gdssRemarkId == other.gdssRemarkId &&
+                text == other.text &&
+                user == other.user &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(date, gdssRemarkId, text, user, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(date, gdssRemarkId, text, user, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2510,12 +2566,53 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is DiplomaticclearanceAbridged && classificationMarking == other.classificationMarking && dataMode == other.dataMode && firstDepDate == other.firstDepDate && idMission == other.idMission && source == other.source && id == other.id && apacsId == other.apacsId && createdAt == other.createdAt && createdBy == other.createdBy && diplomaticClearanceDetails == other.diplomaticClearanceDetails && diplomaticClearanceRemarks == other.diplomaticClearanceRemarks && dipWorksheetName == other.dipWorksheetName && docDeadline == other.docDeadline && externalWorksheetId == other.externalWorksheetId && origin == other.origin && origNetwork == other.origNetwork && sourceDl == other.sourceDl && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is DiplomaticclearanceAbridged &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            firstDepDate == other.firstDepDate &&
+            idMission == other.idMission &&
+            source == other.source &&
+            id == other.id &&
+            apacsId == other.apacsId &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            diplomaticClearanceDetails == other.diplomaticClearanceDetails &&
+            diplomaticClearanceRemarks == other.diplomaticClearanceRemarks &&
+            dipWorksheetName == other.dipWorksheetName &&
+            docDeadline == other.docDeadline &&
+            externalWorksheetId == other.externalWorksheetId &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            sourceDl == other.sourceDl &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, firstDepDate, idMission, source, id, apacsId, createdAt, createdBy, diplomaticClearanceDetails, diplomaticClearanceRemarks, dipWorksheetName, docDeadline, externalWorksheetId, origin, origNetwork, sourceDl, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            firstDepDate,
+            idMission,
+            source,
+            id,
+            apacsId,
+            createdAt,
+            createdBy,
+            diplomaticClearanceDetails,
+            diplomaticClearanceRemarks,
+            dipWorksheetName,
+            docDeadline,
+            externalWorksheetId,
+            origin,
+            origNetwork,
+            sourceDl,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

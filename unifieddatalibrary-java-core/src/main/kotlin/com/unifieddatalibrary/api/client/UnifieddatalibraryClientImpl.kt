@@ -8,8 +8,6 @@ import com.unifieddatalibrary.api.services.blocking.AiService
 import com.unifieddatalibrary.api.services.blocking.AiServiceImpl
 import com.unifieddatalibrary.api.services.blocking.AirEventService
 import com.unifieddatalibrary.api.services.blocking.AirEventServiceImpl
-import com.unifieddatalibrary.api.services.blocking.AirLoadPlanService
-import com.unifieddatalibrary.api.services.blocking.AirLoadPlanServiceImpl
 import com.unifieddatalibrary.api.services.blocking.AirOperationService
 import com.unifieddatalibrary.api.services.blocking.AirOperationServiceImpl
 import com.unifieddatalibrary.api.services.blocking.AirTransportMissionService
@@ -44,8 +42,6 @@ import com.unifieddatalibrary.api.services.blocking.AttitudeDataService
 import com.unifieddatalibrary.api.services.blocking.AttitudeDataServiceImpl
 import com.unifieddatalibrary.api.services.blocking.AttitudeSetService
 import com.unifieddatalibrary.api.services.blocking.AttitudeSetServiceImpl
-import com.unifieddatalibrary.api.services.blocking.AttitudesetService
-import com.unifieddatalibrary.api.services.blocking.AttitudesetServiceImpl
 import com.unifieddatalibrary.api.services.blocking.AviationRiskManagementService
 import com.unifieddatalibrary.api.services.blocking.AviationRiskManagementServiceImpl
 import com.unifieddatalibrary.api.services.blocking.BatteryService
@@ -126,8 +122,6 @@ import com.unifieddatalibrary.api.services.blocking.GnssObservationsetService
 import com.unifieddatalibrary.api.services.blocking.GnssObservationsetServiceImpl
 import com.unifieddatalibrary.api.services.blocking.GnssRawIfService
 import com.unifieddatalibrary.api.services.blocking.GnssRawIfServiceImpl
-import com.unifieddatalibrary.api.services.blocking.GnssRawifService
-import com.unifieddatalibrary.api.services.blocking.GnssRawifServiceImpl
 import com.unifieddatalibrary.api.services.blocking.GroundImageryService
 import com.unifieddatalibrary.api.services.blocking.GroundImageryServiceImpl
 import com.unifieddatalibrary.api.services.blocking.H3GeoHexCellService
@@ -136,8 +130,6 @@ import com.unifieddatalibrary.api.services.blocking.H3GeoService
 import com.unifieddatalibrary.api.services.blocking.H3GeoServiceImpl
 import com.unifieddatalibrary.api.services.blocking.HazardService
 import com.unifieddatalibrary.api.services.blocking.HazardServiceImpl
-import com.unifieddatalibrary.api.services.blocking.IonOobservationService
-import com.unifieddatalibrary.api.services.blocking.IonOobservationServiceImpl
 import com.unifieddatalibrary.api.services.blocking.IonoObservationService
 import com.unifieddatalibrary.api.services.blocking.IonoObservationServiceImpl
 import com.unifieddatalibrary.api.services.blocking.IrService
@@ -358,10 +350,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
         AirEventServiceImpl(clientOptionsWithUserAgent)
     }
 
-    private val airLoadPlans: AirLoadPlanService by lazy {
-        AirLoadPlanServiceImpl(clientOptionsWithUserAgent)
-    }
-
     private val airOperations: AirOperationService by lazy {
         AirOperationServiceImpl(clientOptionsWithUserAgent)
     }
@@ -428,10 +416,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
 
     private val attitudeSets: AttitudeSetService by lazy {
         AttitudeSetServiceImpl(clientOptionsWithUserAgent)
-    }
-
-    private val attitudesets: AttitudesetService by lazy {
-        AttitudesetServiceImpl(clientOptionsWithUserAgent)
     }
 
     private val batteries: BatteryService by lazy { BatteryServiceImpl(clientOptionsWithUserAgent) }
@@ -562,10 +546,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
         GnssObservationsetServiceImpl(clientOptionsWithUserAgent)
     }
 
-    private val gnssRawif: GnssRawifService by lazy {
-        GnssRawifServiceImpl(clientOptionsWithUserAgent)
-    }
-
     private val groundImagery: GroundImageryService by lazy {
         GroundImageryServiceImpl(clientOptionsWithUserAgent)
     }
@@ -577,10 +557,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
     }
 
     private val hazard: HazardService by lazy { HazardServiceImpl(clientOptionsWithUserAgent) }
-
-    private val ionOobservation: IonOobservationService by lazy {
-        IonOobservationServiceImpl(clientOptionsWithUserAgent)
-    }
 
     private val ir: IrService by lazy { IrServiceImpl(clientOptionsWithUserAgent) }
 
@@ -916,11 +892,11 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
         GnssRawIfServiceImpl(clientOptionsWithUserAgent)
     }
 
-    private val ionoObservation: IonoObservationService by lazy {
+    private val ionoObservations: IonoObservationService by lazy {
         IonoObservationServiceImpl(clientOptionsWithUserAgent)
     }
 
-    private val reportAndActivity: ReportAndActivityService by lazy {
+    private val reportAndActivities: ReportAndActivityService by lazy {
         ReportAndActivityServiceImpl(clientOptionsWithUserAgent)
     }
 
@@ -940,8 +916,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
         UnifieddatalibraryClientImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun airEvents(): AirEventService = airEvents
-
-    override fun airLoadPlans(): AirLoadPlanService = airLoadPlans
 
     override fun airOperations(): AirOperationService = airOperations
 
@@ -979,8 +953,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
     override fun attitudeData(): AttitudeDataService = attitudeData
 
     override fun attitudeSets(): AttitudeSetService = attitudeSets
-
-    override fun attitudesets(): AttitudesetService = attitudesets
 
     override fun batteries(): BatteryService = batteries
 
@@ -1060,8 +1032,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
 
     override fun gnssObservationset(): GnssObservationsetService = gnssObservationset
 
-    override fun gnssRawif(): GnssRawifService = gnssRawif
-
     override fun groundImagery(): GroundImageryService = groundImagery
 
     override fun h3Geo(): H3GeoService = h3Geo
@@ -1069,8 +1039,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
     override fun h3GeoHexCell(): H3GeoHexCellService = h3GeoHexCell
 
     override fun hazard(): HazardService = hazard
-
-    override fun ionOobservation(): IonOobservationService = ionOobservation
 
     override fun ir(): IrService = ir
 
@@ -1259,9 +1227,9 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
 
     override fun gnssRawIf(): GnssRawIfService = gnssRawIf
 
-    override fun ionoObservation(): IonoObservationService = ionoObservation
+    override fun ionoObservations(): IonoObservationService = ionoObservations
 
-    override fun reportAndActivity(): ReportAndActivityService = reportAndActivity
+    override fun reportAndActivities(): ReportAndActivityService = reportAndActivities
 
     override fun secureMessaging(): SecureMessagingService = secureMessaging
 
@@ -1276,10 +1244,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
 
         private val airEvents: AirEventService.WithRawResponse by lazy {
             AirEventServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val airLoadPlans: AirLoadPlanService.WithRawResponse by lazy {
-            AirLoadPlanServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val airOperations: AirOperationService.WithRawResponse by lazy {
@@ -1353,10 +1317,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
 
         private val attitudeSets: AttitudeSetService.WithRawResponse by lazy {
             AttitudeSetServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val attitudesets: AttitudesetService.WithRawResponse by lazy {
-            AttitudesetServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val batteries: BatteryService.WithRawResponse by lazy {
@@ -1515,10 +1475,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
             GnssObservationsetServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val gnssRawif: GnssRawifService.WithRawResponse by lazy {
-            GnssRawifServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
         private val groundImagery: GroundImageryService.WithRawResponse by lazy {
             GroundImageryServiceImpl.WithRawResponseImpl(clientOptions)
         }
@@ -1533,10 +1489,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
 
         private val hazard: HazardService.WithRawResponse by lazy {
             HazardServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val ionOobservation: IonOobservationService.WithRawResponse by lazy {
-            IonOobservationServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val ir: IrService.WithRawResponse by lazy {
@@ -1913,11 +1865,11 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
             GnssRawIfServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val ionoObservation: IonoObservationService.WithRawResponse by lazy {
+        private val ionoObservations: IonoObservationService.WithRawResponse by lazy {
             IonoObservationServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val reportAndActivity: ReportAndActivityService.WithRawResponse by lazy {
+        private val reportAndActivities: ReportAndActivityService.WithRawResponse by lazy {
             ReportAndActivityServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
@@ -1941,8 +1893,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
             )
 
         override fun airEvents(): AirEventService.WithRawResponse = airEvents
-
-        override fun airLoadPlans(): AirLoadPlanService.WithRawResponse = airLoadPlans
 
         override fun airOperations(): AirOperationService.WithRawResponse = airOperations
 
@@ -1983,8 +1933,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
         override fun attitudeData(): AttitudeDataService.WithRawResponse = attitudeData
 
         override fun attitudeSets(): AttitudeSetService.WithRawResponse = attitudeSets
-
-        override fun attitudesets(): AttitudesetService.WithRawResponse = attitudesets
 
         override fun batteries(): BatteryService.WithRawResponse = batteries
 
@@ -2070,8 +2018,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
         override fun gnssObservationset(): GnssObservationsetService.WithRawResponse =
             gnssObservationset
 
-        override fun gnssRawif(): GnssRawifService.WithRawResponse = gnssRawif
-
         override fun groundImagery(): GroundImageryService.WithRawResponse = groundImagery
 
         override fun h3Geo(): H3GeoService.WithRawResponse = h3Geo
@@ -2079,8 +2025,6 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
         override fun h3GeoHexCell(): H3GeoHexCellService.WithRawResponse = h3GeoHexCell
 
         override fun hazard(): HazardService.WithRawResponse = hazard
-
-        override fun ionOobservation(): IonOobservationService.WithRawResponse = ionOobservation
 
         override fun ir(): IrService.WithRawResponse = ir
 
@@ -2292,10 +2236,10 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
 
         override fun gnssRawIf(): GnssRawIfService.WithRawResponse = gnssRawIf
 
-        override fun ionoObservation(): IonoObservationService.WithRawResponse = ionoObservation
+        override fun ionoObservations(): IonoObservationService.WithRawResponse = ionoObservations
 
-        override fun reportAndActivity(): ReportAndActivityService.WithRawResponse =
-            reportAndActivity
+        override fun reportAndActivities(): ReportAndActivityService.WithRawResponse =
+            reportAndActivities
 
         override fun secureMessaging(): SecureMessagingService.WithRawResponse = secureMessaging
 

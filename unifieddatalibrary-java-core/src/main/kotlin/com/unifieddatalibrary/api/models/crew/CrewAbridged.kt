@@ -2991,7 +2991,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -5754,12 +5754,141 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is CrewMember && alerted == other.alerted && allSortie == other.allSortie && approved == other.approved && attached == other.attached && branch == other.branch && civilian == other.civilian && commander == other.commander && crewPosition == other.crewPosition && dodId == other.dodId && dutyPosition == other.dutyPosition && dutyStatus == other.dutyStatus && emailed == other.emailed && extraTime == other.extraTime && firstName == other.firstName && fltCurrencyExp == other.fltCurrencyExp && fltCurrencyExpId == other.fltCurrencyExpId && fltRecDate == other.fltRecDate && fltRecDue == other.fltRecDue && flySquadron == other.flySquadron && funded == other.funded && gender == other.gender && gndCurrencyExp == other.gndCurrencyExp && gndCurrencyExpId == other.gndCurrencyExpId && grounded == other.grounded && guestStart == other.guestStart && guestStop == other.guestStop && last4Ssn == other.last4Ssn && lastFltDate == other.lastFltDate && lastName == other.lastName && loanedTo == other.loanedTo && lodging == other.lodging && memberActualAlertTime == other.memberActualAlertTime && memberAdjReturnTime == other.memberAdjReturnTime && memberAdjReturnTimeApprover == other.memberAdjReturnTimeApprover && memberId == other.memberId && memberInitStartTime == other.memberInitStartTime && memberLastAlertTime == other.memberLastAlertTime && memberLegalAlertTime == other.memberLegalAlertTime && memberPickupTime == other.memberPickupTime && memberPostRestOffset == other.memberPostRestOffset && memberPostRestTime == other.memberPostRestTime && memberPreRestTime == other.memberPreRestTime && memberRemarks == other.memberRemarks && memberReturnTime == other.memberReturnTime && memberSchedAlertTime == other.memberSchedAlertTime && memberSource == other.memberSource && memberStageName == other.memberStageName && memberTransportReq == other.memberTransportReq && memberType == other.memberType && middleInitial == other.middleInitial && notified == other.notified && phoneNumber == other.phoneNumber && physAvCode == other.physAvCode && physAvStatus == other.physAvStatus && physDue == other.physDue && rank == other.rank && remarkCode == other.remarkCode && rmsMds == other.rmsMds && showTime == other.showTime && squadron == other.squadron && trainingDate == other.trainingDate && username == other.username && wing == other.wing && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is CrewMember &&
+                alerted == other.alerted &&
+                allSortie == other.allSortie &&
+                approved == other.approved &&
+                attached == other.attached &&
+                branch == other.branch &&
+                civilian == other.civilian &&
+                commander == other.commander &&
+                crewPosition == other.crewPosition &&
+                dodId == other.dodId &&
+                dutyPosition == other.dutyPosition &&
+                dutyStatus == other.dutyStatus &&
+                emailed == other.emailed &&
+                extraTime == other.extraTime &&
+                firstName == other.firstName &&
+                fltCurrencyExp == other.fltCurrencyExp &&
+                fltCurrencyExpId == other.fltCurrencyExpId &&
+                fltRecDate == other.fltRecDate &&
+                fltRecDue == other.fltRecDue &&
+                flySquadron == other.flySquadron &&
+                funded == other.funded &&
+                gender == other.gender &&
+                gndCurrencyExp == other.gndCurrencyExp &&
+                gndCurrencyExpId == other.gndCurrencyExpId &&
+                grounded == other.grounded &&
+                guestStart == other.guestStart &&
+                guestStop == other.guestStop &&
+                last4Ssn == other.last4Ssn &&
+                lastFltDate == other.lastFltDate &&
+                lastName == other.lastName &&
+                loanedTo == other.loanedTo &&
+                lodging == other.lodging &&
+                memberActualAlertTime == other.memberActualAlertTime &&
+                memberAdjReturnTime == other.memberAdjReturnTime &&
+                memberAdjReturnTimeApprover == other.memberAdjReturnTimeApprover &&
+                memberId == other.memberId &&
+                memberInitStartTime == other.memberInitStartTime &&
+                memberLastAlertTime == other.memberLastAlertTime &&
+                memberLegalAlertTime == other.memberLegalAlertTime &&
+                memberPickupTime == other.memberPickupTime &&
+                memberPostRestOffset == other.memberPostRestOffset &&
+                memberPostRestTime == other.memberPostRestTime &&
+                memberPreRestTime == other.memberPreRestTime &&
+                memberRemarks == other.memberRemarks &&
+                memberReturnTime == other.memberReturnTime &&
+                memberSchedAlertTime == other.memberSchedAlertTime &&
+                memberSource == other.memberSource &&
+                memberStageName == other.memberStageName &&
+                memberTransportReq == other.memberTransportReq &&
+                memberType == other.memberType &&
+                middleInitial == other.middleInitial &&
+                notified == other.notified &&
+                phoneNumber == other.phoneNumber &&
+                physAvCode == other.physAvCode &&
+                physAvStatus == other.physAvStatus &&
+                physDue == other.physDue &&
+                rank == other.rank &&
+                remarkCode == other.remarkCode &&
+                rmsMds == other.rmsMds &&
+                showTime == other.showTime &&
+                squadron == other.squadron &&
+                trainingDate == other.trainingDate &&
+                username == other.username &&
+                wing == other.wing &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(alerted, allSortie, approved, attached, branch, civilian, commander, crewPosition, dodId, dutyPosition, dutyStatus, emailed, extraTime, firstName, fltCurrencyExp, fltCurrencyExpId, fltRecDate, fltRecDue, flySquadron, funded, gender, gndCurrencyExp, gndCurrencyExpId, grounded, guestStart, guestStop, last4Ssn, lastFltDate, lastName, loanedTo, lodging, memberActualAlertTime, memberAdjReturnTime, memberAdjReturnTimeApprover, memberId, memberInitStartTime, memberLastAlertTime, memberLegalAlertTime, memberPickupTime, memberPostRestOffset, memberPostRestTime, memberPreRestTime, memberRemarks, memberReturnTime, memberSchedAlertTime, memberSource, memberStageName, memberTransportReq, memberType, middleInitial, notified, phoneNumber, physAvCode, physAvStatus, physDue, rank, remarkCode, rmsMds, showTime, squadron, trainingDate, username, wing, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                alerted,
+                allSortie,
+                approved,
+                attached,
+                branch,
+                civilian,
+                commander,
+                crewPosition,
+                dodId,
+                dutyPosition,
+                dutyStatus,
+                emailed,
+                extraTime,
+                firstName,
+                fltCurrencyExp,
+                fltCurrencyExpId,
+                fltRecDate,
+                fltRecDue,
+                flySquadron,
+                funded,
+                gender,
+                gndCurrencyExp,
+                gndCurrencyExpId,
+                grounded,
+                guestStart,
+                guestStop,
+                last4Ssn,
+                lastFltDate,
+                lastName,
+                loanedTo,
+                lodging,
+                memberActualAlertTime,
+                memberAdjReturnTime,
+                memberAdjReturnTimeApprover,
+                memberId,
+                memberInitStartTime,
+                memberLastAlertTime,
+                memberLegalAlertTime,
+                memberPickupTime,
+                memberPostRestOffset,
+                memberPostRestTime,
+                memberPreRestTime,
+                memberRemarks,
+                memberReturnTime,
+                memberSchedAlertTime,
+                memberSource,
+                memberStageName,
+                memberTransportReq,
+                memberType,
+                middleInitial,
+                notified,
+                phoneNumber,
+                physAvCode,
+                physAvStatus,
+                physDue,
+                rank,
+                remarkCode,
+                rmsMds,
+                showTime,
+                squadron,
+                trainingDate,
+                username,
+                wing,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5772,12 +5901,147 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CrewAbridged && classificationMarking == other.classificationMarking && dataMode == other.dataMode && origCrewId == other.origCrewId && source == other.source && id == other.id && adjReturnTime == other.adjReturnTime && adjReturnTimeApprover == other.adjReturnTimeApprover && aircraftMds == other.aircraftMds && alertedTime == other.alertedTime && alertType == other.alertType && armsCrewUnit == other.armsCrewUnit && assignedQualCode == other.assignedQualCode && commanderId == other.commanderId && commanderLast4Ssn == other.commanderLast4Ssn && commanderName == other.commanderName && createdAt == other.createdAt && createdBy == other.createdBy && crewHome == other.crewHome && crewMembers == other.crewMembers && crewName == other.crewName && crewRms == other.crewRms && crewRole == other.crewRole && crewSource == other.crewSource && crewSquadron == other.crewSquadron && crewType == other.crewType && crewUnit == other.crewUnit && crewWing == other.crewWing && currentIcao == other.currentIcao && fdpEligType == other.fdpEligType && fdpType == other.fdpType && femaleEnlistedQty == other.femaleEnlistedQty && femaleOfficerQty == other.femaleOfficerQty && fltAuthNum == other.fltAuthNum && idSiteCurrent == other.idSiteCurrent && idSortie == other.idSortie && initStartTime == other.initStartTime && lastAlertTime == other.lastAlertTime && legalAlertTime == other.legalAlertTime && legalBravoTime == other.legalBravoTime && linkedTask == other.linkedTask && maleEnlistedQty == other.maleEnlistedQty && maleOfficerQty == other.maleOfficerQty && missionAlias == other.missionAlias && missionId == other.missionId && origin == other.origin && origNetwork == other.origNetwork && personnelType == other.personnelType && pickupTime == other.pickupTime && postRestApplied == other.postRestApplied && postRestEnd == other.postRestEnd && postRestOffset == other.postRestOffset && preRestApplied == other.preRestApplied && preRestStart == other.preRestStart && reqQualCode == other.reqQualCode && returnTime == other.returnTime && sourceDl == other.sourceDl && stage1Qual == other.stage1Qual && stage2Qual == other.stage2Qual && stage3Qual == other.stage3Qual && stageName == other.stageName && stageTime == other.stageTime && status == other.status && transportReq == other.transportReq && tripKit == other.tripKit && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is CrewAbridged &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            origCrewId == other.origCrewId &&
+            source == other.source &&
+            id == other.id &&
+            adjReturnTime == other.adjReturnTime &&
+            adjReturnTimeApprover == other.adjReturnTimeApprover &&
+            aircraftMds == other.aircraftMds &&
+            alertedTime == other.alertedTime &&
+            alertType == other.alertType &&
+            armsCrewUnit == other.armsCrewUnit &&
+            assignedQualCode == other.assignedQualCode &&
+            commanderId == other.commanderId &&
+            commanderLast4Ssn == other.commanderLast4Ssn &&
+            commanderName == other.commanderName &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            crewHome == other.crewHome &&
+            crewMembers == other.crewMembers &&
+            crewName == other.crewName &&
+            crewRms == other.crewRms &&
+            crewRole == other.crewRole &&
+            crewSource == other.crewSource &&
+            crewSquadron == other.crewSquadron &&
+            crewType == other.crewType &&
+            crewUnit == other.crewUnit &&
+            crewWing == other.crewWing &&
+            currentIcao == other.currentIcao &&
+            fdpEligType == other.fdpEligType &&
+            fdpType == other.fdpType &&
+            femaleEnlistedQty == other.femaleEnlistedQty &&
+            femaleOfficerQty == other.femaleOfficerQty &&
+            fltAuthNum == other.fltAuthNum &&
+            idSiteCurrent == other.idSiteCurrent &&
+            idSortie == other.idSortie &&
+            initStartTime == other.initStartTime &&
+            lastAlertTime == other.lastAlertTime &&
+            legalAlertTime == other.legalAlertTime &&
+            legalBravoTime == other.legalBravoTime &&
+            linkedTask == other.linkedTask &&
+            maleEnlistedQty == other.maleEnlistedQty &&
+            maleOfficerQty == other.maleOfficerQty &&
+            missionAlias == other.missionAlias &&
+            missionId == other.missionId &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            personnelType == other.personnelType &&
+            pickupTime == other.pickupTime &&
+            postRestApplied == other.postRestApplied &&
+            postRestEnd == other.postRestEnd &&
+            postRestOffset == other.postRestOffset &&
+            preRestApplied == other.preRestApplied &&
+            preRestStart == other.preRestStart &&
+            reqQualCode == other.reqQualCode &&
+            returnTime == other.returnTime &&
+            sourceDl == other.sourceDl &&
+            stage1Qual == other.stage1Qual &&
+            stage2Qual == other.stage2Qual &&
+            stage3Qual == other.stage3Qual &&
+            stageName == other.stageName &&
+            stageTime == other.stageTime &&
+            status == other.status &&
+            transportReq == other.transportReq &&
+            tripKit == other.tripKit &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, origCrewId, source, id, adjReturnTime, adjReturnTimeApprover, aircraftMds, alertedTime, alertType, armsCrewUnit, assignedQualCode, commanderId, commanderLast4Ssn, commanderName, createdAt, createdBy, crewHome, crewMembers, crewName, crewRms, crewRole, crewSource, crewSquadron, crewType, crewUnit, crewWing, currentIcao, fdpEligType, fdpType, femaleEnlistedQty, femaleOfficerQty, fltAuthNum, idSiteCurrent, idSortie, initStartTime, lastAlertTime, legalAlertTime, legalBravoTime, linkedTask, maleEnlistedQty, maleOfficerQty, missionAlias, missionId, origin, origNetwork, personnelType, pickupTime, postRestApplied, postRestEnd, postRestOffset, preRestApplied, preRestStart, reqQualCode, returnTime, sourceDl, stage1Qual, stage2Qual, stage3Qual, stageName, stageTime, status, transportReq, tripKit, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            origCrewId,
+            source,
+            id,
+            adjReturnTime,
+            adjReturnTimeApprover,
+            aircraftMds,
+            alertedTime,
+            alertType,
+            armsCrewUnit,
+            assignedQualCode,
+            commanderId,
+            commanderLast4Ssn,
+            commanderName,
+            createdAt,
+            createdBy,
+            crewHome,
+            crewMembers,
+            crewName,
+            crewRms,
+            crewRole,
+            crewSource,
+            crewSquadron,
+            crewType,
+            crewUnit,
+            crewWing,
+            currentIcao,
+            fdpEligType,
+            fdpType,
+            femaleEnlistedQty,
+            femaleOfficerQty,
+            fltAuthNum,
+            idSiteCurrent,
+            idSortie,
+            initStartTime,
+            lastAlertTime,
+            legalAlertTime,
+            legalBravoTime,
+            linkedTask,
+            maleEnlistedQty,
+            maleOfficerQty,
+            missionAlias,
+            missionId,
+            origin,
+            origNetwork,
+            personnelType,
+            pickupTime,
+            postRestApplied,
+            postRestEnd,
+            postRestOffset,
+            preRestApplied,
+            preRestStart,
+            reqQualCode,
+            returnTime,
+            sourceDl,
+            stage1Qual,
+            stage2Qual,
+            stage3Qual,
+            stageName,
+            stageTime,
+            status,
+            transportReq,
+            tripKit,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

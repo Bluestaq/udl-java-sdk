@@ -228,10 +228,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is V2DeleteParams && path == other.path && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams && additionalBodyProperties == other.additionalBodyProperties /* spotless:on */
+        return other is V2DeleteParams &&
+            path == other.path &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams &&
+            additionalBodyProperties == other.additionalBodyProperties
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(path, additionalHeaders, additionalQueryParams, additionalBodyProperties) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(path, additionalHeaders, additionalQueryParams, additionalBodyProperties)
 
     override fun toString() =
         "V2DeleteParams{path=$path, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams, additionalBodyProperties=$additionalBodyProperties}"

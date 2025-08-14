@@ -897,12 +897,51 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EffectResponseActionsListFull && actionActorSrcId == other.actionActorSrcId && actionActorSrcType == other.actionActorSrcType && actionEndTime == other.actionEndTime && actionId == other.actionId && actionMetrics == other.actionMetrics && actionStartTime == other.actionStartTime && actorInterceptAlt == other.actorInterceptAlt && actorInterceptLat == other.actorInterceptLat && actorInterceptLon == other.actorInterceptLon && effector == other.effector && summary == other.summary && targetSrcId == other.targetSrcId && targetSrcType == other.targetSrcType && totEndTime == other.totEndTime && totStartTime == other.totStartTime && weaponInterceptAlt == other.weaponInterceptAlt && weaponInterceptLat == other.weaponInterceptLat && weaponInterceptLon == other.weaponInterceptLon && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is EffectResponseActionsListFull &&
+            actionActorSrcId == other.actionActorSrcId &&
+            actionActorSrcType == other.actionActorSrcType &&
+            actionEndTime == other.actionEndTime &&
+            actionId == other.actionId &&
+            actionMetrics == other.actionMetrics &&
+            actionStartTime == other.actionStartTime &&
+            actorInterceptAlt == other.actorInterceptAlt &&
+            actorInterceptLat == other.actorInterceptLat &&
+            actorInterceptLon == other.actorInterceptLon &&
+            effector == other.effector &&
+            summary == other.summary &&
+            targetSrcId == other.targetSrcId &&
+            targetSrcType == other.targetSrcType &&
+            totEndTime == other.totEndTime &&
+            totStartTime == other.totStartTime &&
+            weaponInterceptAlt == other.weaponInterceptAlt &&
+            weaponInterceptLat == other.weaponInterceptLat &&
+            weaponInterceptLon == other.weaponInterceptLon &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(actionActorSrcId, actionActorSrcType, actionEndTime, actionId, actionMetrics, actionStartTime, actorInterceptAlt, actorInterceptLat, actorInterceptLon, effector, summary, targetSrcId, targetSrcType, totEndTime, totStartTime, weaponInterceptAlt, weaponInterceptLat, weaponInterceptLon, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            actionActorSrcId,
+            actionActorSrcType,
+            actionEndTime,
+            actionId,
+            actionMetrics,
+            actionStartTime,
+            actorInterceptAlt,
+            actorInterceptLat,
+            actorInterceptLon,
+            effector,
+            summary,
+            targetSrcId,
+            targetSrcType,
+            totEndTime,
+            totStartTime,
+            weaponInterceptAlt,
+            weaponInterceptLat,
+            weaponInterceptLon,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

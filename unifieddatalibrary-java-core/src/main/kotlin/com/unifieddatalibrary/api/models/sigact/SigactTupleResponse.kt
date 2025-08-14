@@ -3510,7 +3510,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3523,12 +3523,181 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SigactTupleResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && reportDate == other.reportDate && source == other.source && id == other.id && accuracy == other.accuracy && actors == other.actors && agjson == other.agjson && andims == other.andims && area == other.area && asrid == other.asrid && atext == other.atext && atype == other.atype && avgTone == other.avgTone && cameoBaseCode == other.cameoBaseCode && cameoCode == other.cameoCode && cameoRootCode == other.cameoRootCode && checksumValue == other.checksumValue && city == other.city && civAbd == other.civAbd && civDet == other.civDet && civKia == other.civKia && civWound == other.civWound && clarity == other.clarity && coalAbd == other.coalAbd && coalDet == other.coalDet && coalKia == other.coalKia && coalWound == other.coalWound && complexAttack == other.complexAttack && confidence == other.confidence && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && district == other.district && documentFilename == other.documentFilename && documentSource == other.documentSource && enemyAbd == other.enemyAbd && enemyDet == other.enemyDet && enemyKia == other.enemyKia && eventDescription == other.eventDescription && eventEnd == other.eventEnd && eventStart == other.eventStart && eventType == other.eventType && filesize == other.filesize && friendlyAbd == other.friendlyAbd && friendlyDet == other.friendlyDet && friendlyKia == other.friendlyKia && friendlyWound == other.friendlyWound && goldstein == other.goldstein && hasAttachment == other.hasAttachment && hostNatAbd == other.hostNatAbd && hostNatDet == other.hostNatDet && hostNatKia == other.hostNatKia && hostNatWound == other.hostNatWound && idNumber == other.idNumber && lat == other.lat && lon == other.lon && milgrid == other.milgrid && notes == other.notes && numArticles == other.numArticles && numMentions == other.numMentions && numSources == other.numSources && origin == other.origin && origNetwork == other.origNetwork && province == other.province && relatedDocs == other.relatedDocs && repUnit == other.repUnit && repUnitActivity == other.repUnitActivity && repUnitType == other.repUnitType && sideAAbd == other.sideAAbd && sideADet == other.sideADet && sideAkia == other.sideAkia && sideAWound == other.sideAWound && sideBAbd == other.sideBAbd && sideBDet == other.sideBDet && sideBkia == other.sideBkia && sideBWound == other.sideBWound && sourceLanguage == other.sourceLanguage && sourceUrl == other.sourceUrl && summary == other.summary && target == other.target && theater == other.theater && typeOfAttack == other.typeOfAttack && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SigactTupleResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            reportDate == other.reportDate &&
+            source == other.source &&
+            id == other.id &&
+            accuracy == other.accuracy &&
+            actors == other.actors &&
+            agjson == other.agjson &&
+            andims == other.andims &&
+            area == other.area &&
+            asrid == other.asrid &&
+            atext == other.atext &&
+            atype == other.atype &&
+            avgTone == other.avgTone &&
+            cameoBaseCode == other.cameoBaseCode &&
+            cameoCode == other.cameoCode &&
+            cameoRootCode == other.cameoRootCode &&
+            checksumValue == other.checksumValue &&
+            city == other.city &&
+            civAbd == other.civAbd &&
+            civDet == other.civDet &&
+            civKia == other.civKia &&
+            civWound == other.civWound &&
+            clarity == other.clarity &&
+            coalAbd == other.coalAbd &&
+            coalDet == other.coalDet &&
+            coalKia == other.coalKia &&
+            coalWound == other.coalWound &&
+            complexAttack == other.complexAttack &&
+            confidence == other.confidence &&
+            countryCode == other.countryCode &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            district == other.district &&
+            documentFilename == other.documentFilename &&
+            documentSource == other.documentSource &&
+            enemyAbd == other.enemyAbd &&
+            enemyDet == other.enemyDet &&
+            enemyKia == other.enemyKia &&
+            eventDescription == other.eventDescription &&
+            eventEnd == other.eventEnd &&
+            eventStart == other.eventStart &&
+            eventType == other.eventType &&
+            filesize == other.filesize &&
+            friendlyAbd == other.friendlyAbd &&
+            friendlyDet == other.friendlyDet &&
+            friendlyKia == other.friendlyKia &&
+            friendlyWound == other.friendlyWound &&
+            goldstein == other.goldstein &&
+            hasAttachment == other.hasAttachment &&
+            hostNatAbd == other.hostNatAbd &&
+            hostNatDet == other.hostNatDet &&
+            hostNatKia == other.hostNatKia &&
+            hostNatWound == other.hostNatWound &&
+            idNumber == other.idNumber &&
+            lat == other.lat &&
+            lon == other.lon &&
+            milgrid == other.milgrid &&
+            notes == other.notes &&
+            numArticles == other.numArticles &&
+            numMentions == other.numMentions &&
+            numSources == other.numSources &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            province == other.province &&
+            relatedDocs == other.relatedDocs &&
+            repUnit == other.repUnit &&
+            repUnitActivity == other.repUnitActivity &&
+            repUnitType == other.repUnitType &&
+            sideAAbd == other.sideAAbd &&
+            sideADet == other.sideADet &&
+            sideAkia == other.sideAkia &&
+            sideAWound == other.sideAWound &&
+            sideBAbd == other.sideBAbd &&
+            sideBDet == other.sideBDet &&
+            sideBkia == other.sideBkia &&
+            sideBWound == other.sideBWound &&
+            sourceLanguage == other.sourceLanguage &&
+            sourceUrl == other.sourceUrl &&
+            summary == other.summary &&
+            target == other.target &&
+            theater == other.theater &&
+            typeOfAttack == other.typeOfAttack &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, reportDate, source, id, accuracy, actors, agjson, andims, area, asrid, atext, atype, avgTone, cameoBaseCode, cameoCode, cameoRootCode, checksumValue, city, civAbd, civDet, civKia, civWound, clarity, coalAbd, coalDet, coalKia, coalWound, complexAttack, confidence, countryCode, createdAt, createdBy, district, documentFilename, documentSource, enemyAbd, enemyDet, enemyKia, eventDescription, eventEnd, eventStart, eventType, filesize, friendlyAbd, friendlyDet, friendlyKia, friendlyWound, goldstein, hasAttachment, hostNatAbd, hostNatDet, hostNatKia, hostNatWound, idNumber, lat, lon, milgrid, notes, numArticles, numMentions, numSources, origin, origNetwork, province, relatedDocs, repUnit, repUnitActivity, repUnitType, sideAAbd, sideADet, sideAkia, sideAWound, sideBAbd, sideBDet, sideBkia, sideBWound, sourceLanguage, sourceUrl, summary, target, theater, typeOfAttack, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            reportDate,
+            source,
+            id,
+            accuracy,
+            actors,
+            agjson,
+            andims,
+            area,
+            asrid,
+            atext,
+            atype,
+            avgTone,
+            cameoBaseCode,
+            cameoCode,
+            cameoRootCode,
+            checksumValue,
+            city,
+            civAbd,
+            civDet,
+            civKia,
+            civWound,
+            clarity,
+            coalAbd,
+            coalDet,
+            coalKia,
+            coalWound,
+            complexAttack,
+            confidence,
+            countryCode,
+            createdAt,
+            createdBy,
+            district,
+            documentFilename,
+            documentSource,
+            enemyAbd,
+            enemyDet,
+            enemyKia,
+            eventDescription,
+            eventEnd,
+            eventStart,
+            eventType,
+            filesize,
+            friendlyAbd,
+            friendlyDet,
+            friendlyKia,
+            friendlyWound,
+            goldstein,
+            hasAttachment,
+            hostNatAbd,
+            hostNatDet,
+            hostNatKia,
+            hostNatWound,
+            idNumber,
+            lat,
+            lon,
+            milgrid,
+            notes,
+            numArticles,
+            numMentions,
+            numSources,
+            origin,
+            origNetwork,
+            province,
+            relatedDocs,
+            repUnit,
+            repUnitActivity,
+            repUnitType,
+            sideAAbd,
+            sideADet,
+            sideAkia,
+            sideAWound,
+            sideBAbd,
+            sideBDet,
+            sideBkia,
+            sideBWound,
+            sourceLanguage,
+            sourceUrl,
+            summary,
+            target,
+            theater,
+            typeOfAttack,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

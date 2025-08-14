@@ -585,12 +585,39 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is DataownerAbridged && classificationMarking == other.classificationMarking && description == other.description && doName == other.doName && idContact == other.idContact && source == other.source && comingSoon == other.comingSoon && control == other.control && countryCode == other.countryCode && dataType == other.dataType && enabled == other.enabled && ownerType == other.ownerType && provider == other.provider && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is DataownerAbridged &&
+            classificationMarking == other.classificationMarking &&
+            description == other.description &&
+            doName == other.doName &&
+            idContact == other.idContact &&
+            source == other.source &&
+            comingSoon == other.comingSoon &&
+            control == other.control &&
+            countryCode == other.countryCode &&
+            dataType == other.dataType &&
+            enabled == other.enabled &&
+            ownerType == other.ownerType &&
+            provider == other.provider &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, description, doName, idContact, source, comingSoon, control, countryCode, dataType, enabled, ownerType, provider, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            description,
+            doName,
+            idContact,
+            source,
+            comingSoon,
+            control,
+            countryCode,
+            dataType,
+            enabled,
+            ownerType,
+            provider,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

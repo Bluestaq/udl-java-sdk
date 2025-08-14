@@ -1962,7 +1962,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2118,7 +2118,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is CovReferenceFrame && value == other.value /* spotless:on */
+            return other is CovReferenceFrame && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2278,7 +2278,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is ReferenceFrame && value == other.value /* spotless:on */
+            return other is ReferenceFrame && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2291,12 +2291,99 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EphemerisSetAbridged && category == other.category && classificationMarking == other.classificationMarking && dataMode == other.dataMode && numPoints == other.numPoints && pointEndTime == other.pointEndTime && pointStartTime == other.pointStartTime && source == other.source && type == other.type && id == other.id && bDot == other.bDot && centBody == other.centBody && comments == other.comments && covReferenceFrame == other.covReferenceFrame && createdAt == other.createdAt && createdBy == other.createdBy && description == other.description && descriptor == other.descriptor && dragModel == other.dragModel && edr == other.edr && filename == other.filename && geopotentialModel == other.geopotentialModel && hasAccel == other.hasAccel && hasCov == other.hasCov && hasMnvr == other.hasMnvr && idManeuvers == other.idManeuvers && idOnOrbit == other.idOnOrbit && idStateVector == other.idStateVector && integrator == other.integrator && interpolation == other.interpolation && interpolationDegree == other.interpolationDegree && lunarSolar == other.lunarSolar && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && pedigree == other.pedigree && referenceFrame == other.referenceFrame && satNo == other.satNo && solidEarthTides == other.solidEarthTides && stepSize == other.stepSize && transactionId == other.transactionId && usableEndTime == other.usableEndTime && usableStartTime == other.usableStartTime && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is EphemerisSetAbridged &&
+            category == other.category &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            numPoints == other.numPoints &&
+            pointEndTime == other.pointEndTime &&
+            pointStartTime == other.pointStartTime &&
+            source == other.source &&
+            type == other.type &&
+            id == other.id &&
+            bDot == other.bDot &&
+            centBody == other.centBody &&
+            comments == other.comments &&
+            covReferenceFrame == other.covReferenceFrame &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            description == other.description &&
+            descriptor == other.descriptor &&
+            dragModel == other.dragModel &&
+            edr == other.edr &&
+            filename == other.filename &&
+            geopotentialModel == other.geopotentialModel &&
+            hasAccel == other.hasAccel &&
+            hasCov == other.hasCov &&
+            hasMnvr == other.hasMnvr &&
+            idManeuvers == other.idManeuvers &&
+            idOnOrbit == other.idOnOrbit &&
+            idStateVector == other.idStateVector &&
+            integrator == other.integrator &&
+            interpolation == other.interpolation &&
+            interpolationDegree == other.interpolationDegree &&
+            lunarSolar == other.lunarSolar &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            pedigree == other.pedigree &&
+            referenceFrame == other.referenceFrame &&
+            satNo == other.satNo &&
+            solidEarthTides == other.solidEarthTides &&
+            stepSize == other.stepSize &&
+            transactionId == other.transactionId &&
+            usableEndTime == other.usableEndTime &&
+            usableStartTime == other.usableStartTime &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(category, classificationMarking, dataMode, numPoints, pointEndTime, pointStartTime, source, type, id, bDot, centBody, comments, covReferenceFrame, createdAt, createdBy, description, descriptor, dragModel, edr, filename, geopotentialModel, hasAccel, hasCov, hasMnvr, idManeuvers, idOnOrbit, idStateVector, integrator, interpolation, interpolationDegree, lunarSolar, origin, origNetwork, origObjectId, pedigree, referenceFrame, satNo, solidEarthTides, stepSize, transactionId, usableEndTime, usableStartTime, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            category,
+            classificationMarking,
+            dataMode,
+            numPoints,
+            pointEndTime,
+            pointStartTime,
+            source,
+            type,
+            id,
+            bDot,
+            centBody,
+            comments,
+            covReferenceFrame,
+            createdAt,
+            createdBy,
+            description,
+            descriptor,
+            dragModel,
+            edr,
+            filename,
+            geopotentialModel,
+            hasAccel,
+            hasCov,
+            hasMnvr,
+            idManeuvers,
+            idOnOrbit,
+            idStateVector,
+            integrator,
+            interpolation,
+            interpolationDegree,
+            lunarSolar,
+            origin,
+            origNetwork,
+            origObjectId,
+            pedigree,
+            referenceFrame,
+            satNo,
+            solidEarthTides,
+            stepSize,
+            transactionId,
+            usableEndTime,
+            usableStartTime,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

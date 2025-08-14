@@ -1867,12 +1867,59 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idTransponder == other.idTransponder && name == other.name && source == other.source && bodyId == other.bodyId && apid == other.apid && beamName == other.beamName && compression == other.compression && createdAt == other.createdAt && createdBy == other.createdBy && encryption == other.encryption && idBeam == other.idBeam && idRfBand == other.idRfBand && origin == other.origin && origNetwork == other.origNetwork && owner == other.owner && pkg == other.pkg && res == other.res && sid == other.sid && type == other.type && vpid == other.vpid && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idTransponder == other.idTransponder &&
+                name == other.name &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                apid == other.apid &&
+                beamName == other.beamName &&
+                compression == other.compression &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                encryption == other.encryption &&
+                idBeam == other.idBeam &&
+                idRfBand == other.idRfBand &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                owner == other.owner &&
+                pkg == other.pkg &&
+                res == other.res &&
+                sid == other.sid &&
+                type == other.type &&
+                vpid == other.vpid &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idTransponder, name, source, bodyId, apid, beamName, compression, createdAt, createdBy, encryption, idBeam, idRfBand, origin, origNetwork, owner, pkg, res, sid, type, vpid, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idTransponder,
+                name,
+                source,
+                bodyId,
+                apid,
+                beamName,
+                compression,
+                createdAt,
+                createdBy,
+                encryption,
+                idBeam,
+                idRfBand,
+                origin,
+                origNetwork,
+                owner,
+                pkg,
+                res,
+                sid,
+                type,
+                vpid,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2025,7 +2072,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2038,10 +2085,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ChannelUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is ChannelUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "ChannelUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

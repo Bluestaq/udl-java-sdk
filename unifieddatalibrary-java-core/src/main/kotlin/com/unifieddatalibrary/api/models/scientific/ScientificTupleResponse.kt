@@ -1037,7 +1037,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1050,12 +1050,53 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ScientificTupleResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && spacecraftId == other.spacecraftId && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && entity == other.entity && frequencyBand == other.frequencyBand && hostedForCompanyOrgId == other.hostedForCompanyOrgId && idEntity == other.idEntity && manufacturerOrgId == other.manufacturerOrgId && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && payloadCategory == other.payloadCategory && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is ScientificTupleResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            name == other.name &&
+            source == other.source &&
+            spacecraftId == other.spacecraftId &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            entity == other.entity &&
+            frequencyBand == other.frequencyBand &&
+            hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+            idEntity == other.idEntity &&
+            manufacturerOrgId == other.manufacturerOrgId &&
+            notes == other.notes &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            payloadCategory == other.payloadCategory &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, spacecraftId, id, createdAt, createdBy, entity, frequencyBand, hostedForCompanyOrgId, idEntity, manufacturerOrgId, notes, origin, origNetwork, payloadCategory, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            name,
+            source,
+            spacecraftId,
+            id,
+            createdAt,
+            createdBy,
+            entity,
+            frequencyBand,
+            hostedForCompanyOrgId,
+            idEntity,
+            manufacturerOrgId,
+            notes,
+            origin,
+            origNetwork,
+            payloadCategory,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

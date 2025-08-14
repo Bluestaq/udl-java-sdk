@@ -213,10 +213,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OnorbitUpdateParams && id == other.id && onorbitIngest == other.onorbitIngest && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OnorbitUpdateParams &&
+            id == other.id &&
+            onorbitIngest == other.onorbitIngest &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(id, onorbitIngest, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(id, onorbitIngest, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "OnorbitUpdateParams{id=$id, onorbitIngest=$onorbitIngest, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

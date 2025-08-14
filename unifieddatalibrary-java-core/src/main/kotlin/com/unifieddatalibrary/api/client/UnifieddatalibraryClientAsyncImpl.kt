@@ -8,8 +8,6 @@ import com.unifieddatalibrary.api.services.async.AiServiceAsync
 import com.unifieddatalibrary.api.services.async.AiServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.AirEventServiceAsync
 import com.unifieddatalibrary.api.services.async.AirEventServiceAsyncImpl
-import com.unifieddatalibrary.api.services.async.AirLoadPlanServiceAsync
-import com.unifieddatalibrary.api.services.async.AirLoadPlanServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.AirOperationServiceAsync
 import com.unifieddatalibrary.api.services.async.AirOperationServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.AirTransportMissionServiceAsync
@@ -44,8 +42,6 @@ import com.unifieddatalibrary.api.services.async.AttitudeDataServiceAsync
 import com.unifieddatalibrary.api.services.async.AttitudeDataServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.AttitudeSetServiceAsync
 import com.unifieddatalibrary.api.services.async.AttitudeSetServiceAsyncImpl
-import com.unifieddatalibrary.api.services.async.AttitudesetServiceAsync
-import com.unifieddatalibrary.api.services.async.AttitudesetServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.AviationRiskManagementServiceAsync
 import com.unifieddatalibrary.api.services.async.AviationRiskManagementServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.BatteryServiceAsync
@@ -126,8 +122,6 @@ import com.unifieddatalibrary.api.services.async.GnssObservationsetServiceAsync
 import com.unifieddatalibrary.api.services.async.GnssObservationsetServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.GnssRawIfServiceAsync
 import com.unifieddatalibrary.api.services.async.GnssRawIfServiceAsyncImpl
-import com.unifieddatalibrary.api.services.async.GnssRawifServiceAsync
-import com.unifieddatalibrary.api.services.async.GnssRawifServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.GroundImageryServiceAsync
 import com.unifieddatalibrary.api.services.async.GroundImageryServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.H3GeoHexCellServiceAsync
@@ -136,8 +130,6 @@ import com.unifieddatalibrary.api.services.async.H3GeoServiceAsync
 import com.unifieddatalibrary.api.services.async.H3GeoServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.HazardServiceAsync
 import com.unifieddatalibrary.api.services.async.HazardServiceAsyncImpl
-import com.unifieddatalibrary.api.services.async.IonOobservationServiceAsync
-import com.unifieddatalibrary.api.services.async.IonOobservationServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.IonoObservationServiceAsync
 import com.unifieddatalibrary.api.services.async.IonoObservationServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.IrServiceAsync
@@ -358,10 +350,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         AirEventServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
-    private val airLoadPlans: AirLoadPlanServiceAsync by lazy {
-        AirLoadPlanServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
     private val airOperations: AirOperationServiceAsync by lazy {
         AirOperationServiceAsyncImpl(clientOptionsWithUserAgent)
     }
@@ -430,10 +418,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     private val attitudeSets: AttitudeSetServiceAsync by lazy {
         AttitudeSetServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
-    private val attitudesets: AttitudesetServiceAsync by lazy {
-        AttitudesetServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
     private val batteries: BatteryServiceAsync by lazy {
@@ -578,10 +562,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         GnssObservationsetServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
-    private val gnssRawif: GnssRawifServiceAsync by lazy {
-        GnssRawifServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
     private val groundImagery: GroundImageryServiceAsync by lazy {
         GroundImageryServiceAsyncImpl(clientOptionsWithUserAgent)
     }
@@ -596,10 +576,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     private val hazard: HazardServiceAsync by lazy {
         HazardServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
-    private val ionOobservation: IonOobservationServiceAsync by lazy {
-        IonOobservationServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
     private val ir: IrServiceAsync by lazy { IrServiceAsyncImpl(clientOptionsWithUserAgent) }
@@ -958,11 +934,11 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         GnssRawIfServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
-    private val ionoObservation: IonoObservationServiceAsync by lazy {
+    private val ionoObservations: IonoObservationServiceAsync by lazy {
         IonoObservationServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
-    private val reportAndActivity: ReportAndActivityServiceAsync by lazy {
+    private val reportAndActivities: ReportAndActivityServiceAsync by lazy {
         ReportAndActivityServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
@@ -986,8 +962,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         UnifieddatalibraryClientAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun airEvents(): AirEventServiceAsync = airEvents
-
-    override fun airLoadPlans(): AirLoadPlanServiceAsync = airLoadPlans
 
     override fun airOperations(): AirOperationServiceAsync = airOperations
 
@@ -1025,8 +999,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
     override fun attitudeData(): AttitudeDataServiceAsync = attitudeData
 
     override fun attitudeSets(): AttitudeSetServiceAsync = attitudeSets
-
-    override fun attitudesets(): AttitudesetServiceAsync = attitudesets
 
     override fun batteries(): BatteryServiceAsync = batteries
 
@@ -1108,8 +1080,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     override fun gnssObservationset(): GnssObservationsetServiceAsync = gnssObservationset
 
-    override fun gnssRawif(): GnssRawifServiceAsync = gnssRawif
-
     override fun groundImagery(): GroundImageryServiceAsync = groundImagery
 
     override fun h3Geo(): H3GeoServiceAsync = h3Geo
@@ -1117,8 +1087,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
     override fun h3GeoHexCell(): H3GeoHexCellServiceAsync = h3GeoHexCell
 
     override fun hazard(): HazardServiceAsync = hazard
-
-    override fun ionOobservation(): IonOobservationServiceAsync = ionOobservation
 
     override fun ir(): IrServiceAsync = ir
 
@@ -1309,9 +1277,9 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     override fun gnssRawIf(): GnssRawIfServiceAsync = gnssRawIf
 
-    override fun ionoObservation(): IonoObservationServiceAsync = ionoObservation
+    override fun ionoObservations(): IonoObservationServiceAsync = ionoObservations
 
-    override fun reportAndActivity(): ReportAndActivityServiceAsync = reportAndActivity
+    override fun reportAndActivities(): ReportAndActivityServiceAsync = reportAndActivities
 
     override fun secureMessaging(): SecureMessagingServiceAsync = secureMessaging
 
@@ -1326,10 +1294,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         private val airEvents: AirEventServiceAsync.WithRawResponse by lazy {
             AirEventServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val airLoadPlans: AirLoadPlanServiceAsync.WithRawResponse by lazy {
-            AirLoadPlanServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val airOperations: AirOperationServiceAsync.WithRawResponse by lazy {
@@ -1405,10 +1369,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         private val attitudeSets: AttitudeSetServiceAsync.WithRawResponse by lazy {
             AttitudeSetServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val attitudesets: AttitudesetServiceAsync.WithRawResponse by lazy {
-            AttitudesetServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val batteries: BatteryServiceAsync.WithRawResponse by lazy {
@@ -1569,10 +1529,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             GnssObservationsetServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val gnssRawif: GnssRawifServiceAsync.WithRawResponse by lazy {
-            GnssRawifServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
         private val groundImagery: GroundImageryServiceAsync.WithRawResponse by lazy {
             GroundImageryServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
@@ -1587,10 +1543,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         private val hazard: HazardServiceAsync.WithRawResponse by lazy {
             HazardServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val ionOobservation: IonOobservationServiceAsync.WithRawResponse by lazy {
-            IonOobservationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val ir: IrServiceAsync.WithRawResponse by lazy {
@@ -1971,11 +1923,11 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             GnssRawIfServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val ionoObservation: IonoObservationServiceAsync.WithRawResponse by lazy {
+        private val ionoObservations: IonoObservationServiceAsync.WithRawResponse by lazy {
             IonoObservationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val reportAndActivity: ReportAndActivityServiceAsync.WithRawResponse by lazy {
+        private val reportAndActivities: ReportAndActivityServiceAsync.WithRawResponse by lazy {
             ReportAndActivityServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
@@ -1999,8 +1951,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             )
 
         override fun airEvents(): AirEventServiceAsync.WithRawResponse = airEvents
-
-        override fun airLoadPlans(): AirLoadPlanServiceAsync.WithRawResponse = airLoadPlans
 
         override fun airOperations(): AirOperationServiceAsync.WithRawResponse = airOperations
 
@@ -2043,8 +1993,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         override fun attitudeData(): AttitudeDataServiceAsync.WithRawResponse = attitudeData
 
         override fun attitudeSets(): AttitudeSetServiceAsync.WithRawResponse = attitudeSets
-
-        override fun attitudesets(): AttitudesetServiceAsync.WithRawResponse = attitudesets
 
         override fun batteries(): BatteryServiceAsync.WithRawResponse = batteries
 
@@ -2132,8 +2080,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         override fun gnssObservationset(): GnssObservationsetServiceAsync.WithRawResponse =
             gnssObservationset
 
-        override fun gnssRawif(): GnssRawifServiceAsync.WithRawResponse = gnssRawif
-
         override fun groundImagery(): GroundImageryServiceAsync.WithRawResponse = groundImagery
 
         override fun h3Geo(): H3GeoServiceAsync.WithRawResponse = h3Geo
@@ -2141,9 +2087,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         override fun h3GeoHexCell(): H3GeoHexCellServiceAsync.WithRawResponse = h3GeoHexCell
 
         override fun hazard(): HazardServiceAsync.WithRawResponse = hazard
-
-        override fun ionOobservation(): IonOobservationServiceAsync.WithRawResponse =
-            ionOobservation
 
         override fun ir(): IrServiceAsync.WithRawResponse = ir
 
@@ -2361,11 +2304,11 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         override fun gnssRawIf(): GnssRawIfServiceAsync.WithRawResponse = gnssRawIf
 
-        override fun ionoObservation(): IonoObservationServiceAsync.WithRawResponse =
-            ionoObservation
+        override fun ionoObservations(): IonoObservationServiceAsync.WithRawResponse =
+            ionoObservations
 
-        override fun reportAndActivity(): ReportAndActivityServiceAsync.WithRawResponse =
-            reportAndActivity
+        override fun reportAndActivities(): ReportAndActivityServiceAsync.WithRawResponse =
+            reportAndActivities
 
         override fun secureMessaging(): SecureMessagingServiceAsync.WithRawResponse =
             secureMessaging

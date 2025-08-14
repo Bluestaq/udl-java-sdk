@@ -7677,12 +7677,213 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && arrAirfield == other.arrAirfield && classificationMarking == other.classificationMarking && dataMode == other.dataMode && depAirfield == other.depAirfield && genTs == other.genTs && source == other.source && bodyId == other.bodyId && aircraftMds == other.aircraftMds && airRefuelEvents == other.airRefuelEvents && amcMissionId == other.amcMissionId && appLandingFuel == other.appLandingFuel && arrAlternate1 == other.arrAlternate1 && arrAlternate1Fuel == other.arrAlternate1Fuel && arrAlternate2 == other.arrAlternate2 && arrAlternate2Fuel == other.arrAlternate2Fuel && arrIceFuel == other.arrIceFuel && arrRunway == other.arrRunway && atcAddresses == other.atcAddresses && avgTempDev == other.avgTempDev && burnedFuel == other.burnedFuel && callSign == other.callSign && cargoRemark == other.cargoRemark && climbFuel == other.climbFuel && climbTime == other.climbTime && contingencyFuel == other.contingencyFuel && countryCodes == other.countryCodes && createdAt == other.createdAt && createdBy == other.createdBy && depAlternate == other.depAlternate && depressFuel == other.depressFuel && depRunway == other.depRunway && dragIndex == other.dragIndex && earlyDescentFuel == other.earlyDescentFuel && enduranceTime == other.enduranceTime && enrouteFuel == other.enrouteFuel && enrouteTime == other.enrouteTime && equipment == other.equipment && estDepTime == other.estDepTime && etopsAirfields == other.etopsAirfields && etopsAltAirfields == other.etopsAltAirfields && etopsRating == other.etopsRating && etopsValWindow == other.etopsValWindow && externalId == other.externalId && flightPlanMessages == other.flightPlanMessages && flightPlanPointGroups == other.flightPlanPointGroups && flightPlanWaypoints == other.flightPlanWaypoints && flightRules == other.flightRules && flightType == other.flightType && fuelDegrade == other.fuelDegrade && gpsRaim == other.gpsRaim && holdDownFuel == other.holdDownFuel && holdFuel == other.holdFuel && holdTime == other.holdTime && idAircraft == other.idAircraft && idArrAirfield == other.idArrAirfield && idDepAirfield == other.idDepAirfield && identExtraFuel == other.identExtraFuel && idSortie == other.idSortie && initialCruiseSpeed == other.initialCruiseSpeed && initialFlightLevel == other.initialFlightLevel && landingFuel == other.landingFuel && legNum == other.legNum && minDivertFuel == other.minDivertFuel && msnIndex == other.msnIndex && notes == other.notes && numAircraft == other.numAircraft && opConditionFuel == other.opConditionFuel && opWeight == other.opWeight && origin == other.origin && originator == other.originator && origNetwork == other.origNetwork && plannerRemark == other.plannerRemark && rampFuel == other.rampFuel && remAlternate1Fuel == other.remAlternate1Fuel && remAlternate2Fuel == other.remAlternate2Fuel && reserveFuel == other.reserveFuel && routeString == other.routeString && sid == other.sid && sourceDl == other.sourceDl && star == other.star && status == other.status && tailNumber == other.tailNumber && takeoffFuel == other.takeoffFuel && taxiFuel == other.taxiFuel && thunderAvoidFuel == other.thunderAvoidFuel && tocFuel == other.tocFuel && tocIceFuel == other.tocIceFuel && todFuel == other.todFuel && todIceFuel == other.todIceFuel && unidentExtraFuel == other.unidentExtraFuel && unusableFuel == other.unusableFuel && updatedAt == other.updatedAt && updatedBy == other.updatedBy && wakeTurbCat == other.wakeTurbCat && windFac1 == other.windFac1 && windFac2 == other.windFac2 && windFacAvg == other.windFacAvg && wxValidEnd == other.wxValidEnd && wxValidStart == other.wxValidStart && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                arrAirfield == other.arrAirfield &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                depAirfield == other.depAirfield &&
+                genTs == other.genTs &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                aircraftMds == other.aircraftMds &&
+                airRefuelEvents == other.airRefuelEvents &&
+                amcMissionId == other.amcMissionId &&
+                appLandingFuel == other.appLandingFuel &&
+                arrAlternate1 == other.arrAlternate1 &&
+                arrAlternate1Fuel == other.arrAlternate1Fuel &&
+                arrAlternate2 == other.arrAlternate2 &&
+                arrAlternate2Fuel == other.arrAlternate2Fuel &&
+                arrIceFuel == other.arrIceFuel &&
+                arrRunway == other.arrRunway &&
+                atcAddresses == other.atcAddresses &&
+                avgTempDev == other.avgTempDev &&
+                burnedFuel == other.burnedFuel &&
+                callSign == other.callSign &&
+                cargoRemark == other.cargoRemark &&
+                climbFuel == other.climbFuel &&
+                climbTime == other.climbTime &&
+                contingencyFuel == other.contingencyFuel &&
+                countryCodes == other.countryCodes &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                depAlternate == other.depAlternate &&
+                depressFuel == other.depressFuel &&
+                depRunway == other.depRunway &&
+                dragIndex == other.dragIndex &&
+                earlyDescentFuel == other.earlyDescentFuel &&
+                enduranceTime == other.enduranceTime &&
+                enrouteFuel == other.enrouteFuel &&
+                enrouteTime == other.enrouteTime &&
+                equipment == other.equipment &&
+                estDepTime == other.estDepTime &&
+                etopsAirfields == other.etopsAirfields &&
+                etopsAltAirfields == other.etopsAltAirfields &&
+                etopsRating == other.etopsRating &&
+                etopsValWindow == other.etopsValWindow &&
+                externalId == other.externalId &&
+                flightPlanMessages == other.flightPlanMessages &&
+                flightPlanPointGroups == other.flightPlanPointGroups &&
+                flightPlanWaypoints == other.flightPlanWaypoints &&
+                flightRules == other.flightRules &&
+                flightType == other.flightType &&
+                fuelDegrade == other.fuelDegrade &&
+                gpsRaim == other.gpsRaim &&
+                holdDownFuel == other.holdDownFuel &&
+                holdFuel == other.holdFuel &&
+                holdTime == other.holdTime &&
+                idAircraft == other.idAircraft &&
+                idArrAirfield == other.idArrAirfield &&
+                idDepAirfield == other.idDepAirfield &&
+                identExtraFuel == other.identExtraFuel &&
+                idSortie == other.idSortie &&
+                initialCruiseSpeed == other.initialCruiseSpeed &&
+                initialFlightLevel == other.initialFlightLevel &&
+                landingFuel == other.landingFuel &&
+                legNum == other.legNum &&
+                minDivertFuel == other.minDivertFuel &&
+                msnIndex == other.msnIndex &&
+                notes == other.notes &&
+                numAircraft == other.numAircraft &&
+                opConditionFuel == other.opConditionFuel &&
+                opWeight == other.opWeight &&
+                origin == other.origin &&
+                originator == other.originator &&
+                origNetwork == other.origNetwork &&
+                plannerRemark == other.plannerRemark &&
+                rampFuel == other.rampFuel &&
+                remAlternate1Fuel == other.remAlternate1Fuel &&
+                remAlternate2Fuel == other.remAlternate2Fuel &&
+                reserveFuel == other.reserveFuel &&
+                routeString == other.routeString &&
+                sid == other.sid &&
+                sourceDl == other.sourceDl &&
+                star == other.star &&
+                status == other.status &&
+                tailNumber == other.tailNumber &&
+                takeoffFuel == other.takeoffFuel &&
+                taxiFuel == other.taxiFuel &&
+                thunderAvoidFuel == other.thunderAvoidFuel &&
+                tocFuel == other.tocFuel &&
+                tocIceFuel == other.tocIceFuel &&
+                todFuel == other.todFuel &&
+                todIceFuel == other.todIceFuel &&
+                unidentExtraFuel == other.unidentExtraFuel &&
+                unusableFuel == other.unusableFuel &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                wakeTurbCat == other.wakeTurbCat &&
+                windFac1 == other.windFac1 &&
+                windFac2 == other.windFac2 &&
+                windFacAvg == other.windFacAvg &&
+                wxValidEnd == other.wxValidEnd &&
+                wxValidStart == other.wxValidStart &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(arrAirfield, classificationMarking, dataMode, depAirfield, genTs, source, bodyId, aircraftMds, airRefuelEvents, amcMissionId, appLandingFuel, arrAlternate1, arrAlternate1Fuel, arrAlternate2, arrAlternate2Fuel, arrIceFuel, arrRunway, atcAddresses, avgTempDev, burnedFuel, callSign, cargoRemark, climbFuel, climbTime, contingencyFuel, countryCodes, createdAt, createdBy, depAlternate, depressFuel, depRunway, dragIndex, earlyDescentFuel, enduranceTime, enrouteFuel, enrouteTime, equipment, estDepTime, etopsAirfields, etopsAltAirfields, etopsRating, etopsValWindow, externalId, flightPlanMessages, flightPlanPointGroups, flightPlanWaypoints, flightRules, flightType, fuelDegrade, gpsRaim, holdDownFuel, holdFuel, holdTime, idAircraft, idArrAirfield, idDepAirfield, identExtraFuel, idSortie, initialCruiseSpeed, initialFlightLevel, landingFuel, legNum, minDivertFuel, msnIndex, notes, numAircraft, opConditionFuel, opWeight, origin, originator, origNetwork, plannerRemark, rampFuel, remAlternate1Fuel, remAlternate2Fuel, reserveFuel, routeString, sid, sourceDl, star, status, tailNumber, takeoffFuel, taxiFuel, thunderAvoidFuel, tocFuel, tocIceFuel, todFuel, todIceFuel, unidentExtraFuel, unusableFuel, updatedAt, updatedBy, wakeTurbCat, windFac1, windFac2, windFacAvg, wxValidEnd, wxValidStart, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                arrAirfield,
+                classificationMarking,
+                dataMode,
+                depAirfield,
+                genTs,
+                source,
+                bodyId,
+                aircraftMds,
+                airRefuelEvents,
+                amcMissionId,
+                appLandingFuel,
+                arrAlternate1,
+                arrAlternate1Fuel,
+                arrAlternate2,
+                arrAlternate2Fuel,
+                arrIceFuel,
+                arrRunway,
+                atcAddresses,
+                avgTempDev,
+                burnedFuel,
+                callSign,
+                cargoRemark,
+                climbFuel,
+                climbTime,
+                contingencyFuel,
+                countryCodes,
+                createdAt,
+                createdBy,
+                depAlternate,
+                depressFuel,
+                depRunway,
+                dragIndex,
+                earlyDescentFuel,
+                enduranceTime,
+                enrouteFuel,
+                enrouteTime,
+                equipment,
+                estDepTime,
+                etopsAirfields,
+                etopsAltAirfields,
+                etopsRating,
+                etopsValWindow,
+                externalId,
+                flightPlanMessages,
+                flightPlanPointGroups,
+                flightPlanWaypoints,
+                flightRules,
+                flightType,
+                fuelDegrade,
+                gpsRaim,
+                holdDownFuel,
+                holdFuel,
+                holdTime,
+                idAircraft,
+                idArrAirfield,
+                idDepAirfield,
+                identExtraFuel,
+                idSortie,
+                initialCruiseSpeed,
+                initialFlightLevel,
+                landingFuel,
+                legNum,
+                minDivertFuel,
+                msnIndex,
+                notes,
+                numAircraft,
+                opConditionFuel,
+                opWeight,
+                origin,
+                originator,
+                origNetwork,
+                plannerRemark,
+                rampFuel,
+                remAlternate1Fuel,
+                remAlternate2Fuel,
+                reserveFuel,
+                routeString,
+                sid,
+                sourceDl,
+                star,
+                status,
+                tailNumber,
+                takeoffFuel,
+                taxiFuel,
+                thunderAvoidFuel,
+                tocFuel,
+                tocIceFuel,
+                todFuel,
+                todIceFuel,
+                unidentExtraFuel,
+                unusableFuel,
+                updatedAt,
+                updatedBy,
+                wakeTurbCat,
+                windFac1,
+                windFac2,
+                windFacAvg,
+                wxValidEnd,
+                wxValidStart,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -7835,7 +8036,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -8134,12 +8335,25 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AirRefuelEvent && arDegrade == other.arDegrade && arExchangedFuel == other.arExchangedFuel && arNum == other.arNum && divertFuel == other.divertFuel && exitFuel == other.exitFuel && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is AirRefuelEvent &&
+                arDegrade == other.arDegrade &&
+                arExchangedFuel == other.arExchangedFuel &&
+                arNum == other.arNum &&
+                divertFuel == other.divertFuel &&
+                exitFuel == other.exitFuel &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(arDegrade, arExchangedFuel, arNum, divertFuel, exitFuel, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                arDegrade,
+                arExchangedFuel,
+                arNum,
+                divertFuel,
+                exitFuel,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -8395,12 +8609,17 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is FlightPlanMessage && msgText == other.msgText && routePath == other.routePath && severity == other.severity && wpNum == other.wpNum && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is FlightPlanMessage &&
+                msgText == other.msgText &&
+                routePath == other.routePath &&
+                severity == other.severity &&
+                wpNum == other.wpNum &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(msgText, routePath, severity, wpNum, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(msgText, routePath, severity, wpNum, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -9886,12 +10105,18 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is FlightPlanPoint && fppEta == other.fppEta && fppLat == other.fppLat && fppLon == other.fppLon && fppReqFuel == other.fppReqFuel && pointName == other.pointName && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is FlightPlanPoint &&
+                    fppEta == other.fppEta &&
+                    fppLat == other.fppLat &&
+                    fppLon == other.fppLon &&
+                    fppReqFuel == other.fppReqFuel &&
+                    pointName == other.pointName &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(fppEta, fppLat, fppLon, fppReqFuel, pointName, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(fppEta, fppLat, fppLon, fppReqFuel, pointName, additionalProperties)
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -9904,12 +10129,63 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is FlightPlanPointGroup && avgFuelFlow == other.avgFuelFlow && etopsAvgWindFactor == other.etopsAvgWindFactor && etopsDistance == other.etopsDistance && etopsReqFuel == other.etopsReqFuel && etopsTempDev == other.etopsTempDev && etopsTime == other.etopsTime && flightPlanPoints == other.flightPlanPoints && fromTakeoffTime == other.fromTakeoffTime && fsafAvgWindFactor == other.fsafAvgWindFactor && fsafDistance == other.fsafDistance && fsafReqFuel == other.fsafReqFuel && fsafTempDev == other.fsafTempDev && fsafTime == other.fsafTime && fuelCalcAlt == other.fuelCalcAlt && fuelCalcSpd == other.fuelCalcSpd && lsafAvgWindFactor == other.lsafAvgWindFactor && lsafDistance == other.lsafDistance && lsafName == other.lsafName && lsafReqFuel == other.lsafReqFuel && lsafTempDev == other.lsafTempDev && lsafTime == other.lsafTime && plannedFuel == other.plannedFuel && pointGroupName == other.pointGroupName && worstFuelCase == other.worstFuelCase && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is FlightPlanPointGroup &&
+                avgFuelFlow == other.avgFuelFlow &&
+                etopsAvgWindFactor == other.etopsAvgWindFactor &&
+                etopsDistance == other.etopsDistance &&
+                etopsReqFuel == other.etopsReqFuel &&
+                etopsTempDev == other.etopsTempDev &&
+                etopsTime == other.etopsTime &&
+                flightPlanPoints == other.flightPlanPoints &&
+                fromTakeoffTime == other.fromTakeoffTime &&
+                fsafAvgWindFactor == other.fsafAvgWindFactor &&
+                fsafDistance == other.fsafDistance &&
+                fsafReqFuel == other.fsafReqFuel &&
+                fsafTempDev == other.fsafTempDev &&
+                fsafTime == other.fsafTime &&
+                fuelCalcAlt == other.fuelCalcAlt &&
+                fuelCalcSpd == other.fuelCalcSpd &&
+                lsafAvgWindFactor == other.lsafAvgWindFactor &&
+                lsafDistance == other.lsafDistance &&
+                lsafName == other.lsafName &&
+                lsafReqFuel == other.lsafReqFuel &&
+                lsafTempDev == other.lsafTempDev &&
+                lsafTime == other.lsafTime &&
+                plannedFuel == other.plannedFuel &&
+                pointGroupName == other.pointGroupName &&
+                worstFuelCase == other.worstFuelCase &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(avgFuelFlow, etopsAvgWindFactor, etopsDistance, etopsReqFuel, etopsTempDev, etopsTime, flightPlanPoints, fromTakeoffTime, fsafAvgWindFactor, fsafDistance, fsafReqFuel, fsafTempDev, fsafTime, fuelCalcAlt, fuelCalcSpd, lsafAvgWindFactor, lsafDistance, lsafName, lsafReqFuel, lsafTempDev, lsafTime, plannedFuel, pointGroupName, worstFuelCase, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                avgFuelFlow,
+                etopsAvgWindFactor,
+                etopsDistance,
+                etopsReqFuel,
+                etopsTempDev,
+                etopsTime,
+                flightPlanPoints,
+                fromTakeoffTime,
+                fsafAvgWindFactor,
+                fsafDistance,
+                fsafReqFuel,
+                fsafTempDev,
+                fsafTime,
+                fuelCalcAlt,
+                fuelCalcSpd,
+                lsafAvgWindFactor,
+                lsafDistance,
+                lsafName,
+                lsafReqFuel,
+                lsafTempDev,
+                lsafTime,
+                plannedFuel,
+                pointGroupName,
+                worstFuelCase,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -12298,12 +12574,127 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is FlightPlanWaypoint && type == other.type && waypointName == other.waypointName && aaTacanChannel == other.aaTacanChannel && airDistance == other.airDistance && airway == other.airway && alt == other.alt && arId == other.arId && arpt == other.arpt && ata == other.ata && avgCalAirspeed == other.avgCalAirspeed && avgDriftAng == other.avgDriftAng && avgGroundSpeed == other.avgGroundSpeed && avgTrueAirspeed == other.avgTrueAirspeed && avgWindDir == other.avgWindDir && avgWindSpeed == other.avgWindSpeed && dayLowAlt == other.dayLowAlt && eta == other.eta && exchangedFuel == other.exchangedFuel && fuelFlow == other.fuelFlow && iceCat == other.iceCat && lat == other.lat && legAlternate == other.legAlternate && legDragIndex == other.legDragIndex && legFuelDegrade == other.legFuelDegrade && legMach == other.legMach && legMsnIndex == other.legMsnIndex && legWindFac == other.legWindFac && lon == other.lon && magCourse == other.magCourse && magHeading == other.magHeading && magVar == other.magVar && navaid == other.navaid && nightLowAlt == other.nightLowAlt && nvgLowAlt == other.nvgLowAlt && pointWindDir == other.pointWindDir && pointWindSpeed == other.pointWindSpeed && priFreq == other.priFreq && secFreq == other.secFreq && tacanChannel == other.tacanChannel && tempDev == other.tempDev && thunderCat == other.thunderCat && totalAirDistance == other.totalAirDistance && totalFlownDistance == other.totalFlownDistance && totalRemDistance == other.totalRemDistance && totalRemFuel == other.totalRemFuel && totalTime == other.totalTime && totalTimeRem == other.totalTimeRem && totalUsedFuel == other.totalUsedFuel && totalWeight == other.totalWeight && trueCourse == other.trueCourse && turbCat == other.turbCat && vorFreq == other.vorFreq && waypointNum == other.waypointNum && zoneDistance == other.zoneDistance && zoneFuel == other.zoneFuel && zoneTime == other.zoneTime && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is FlightPlanWaypoint &&
+                type == other.type &&
+                waypointName == other.waypointName &&
+                aaTacanChannel == other.aaTacanChannel &&
+                airDistance == other.airDistance &&
+                airway == other.airway &&
+                alt == other.alt &&
+                arId == other.arId &&
+                arpt == other.arpt &&
+                ata == other.ata &&
+                avgCalAirspeed == other.avgCalAirspeed &&
+                avgDriftAng == other.avgDriftAng &&
+                avgGroundSpeed == other.avgGroundSpeed &&
+                avgTrueAirspeed == other.avgTrueAirspeed &&
+                avgWindDir == other.avgWindDir &&
+                avgWindSpeed == other.avgWindSpeed &&
+                dayLowAlt == other.dayLowAlt &&
+                eta == other.eta &&
+                exchangedFuel == other.exchangedFuel &&
+                fuelFlow == other.fuelFlow &&
+                iceCat == other.iceCat &&
+                lat == other.lat &&
+                legAlternate == other.legAlternate &&
+                legDragIndex == other.legDragIndex &&
+                legFuelDegrade == other.legFuelDegrade &&
+                legMach == other.legMach &&
+                legMsnIndex == other.legMsnIndex &&
+                legWindFac == other.legWindFac &&
+                lon == other.lon &&
+                magCourse == other.magCourse &&
+                magHeading == other.magHeading &&
+                magVar == other.magVar &&
+                navaid == other.navaid &&
+                nightLowAlt == other.nightLowAlt &&
+                nvgLowAlt == other.nvgLowAlt &&
+                pointWindDir == other.pointWindDir &&
+                pointWindSpeed == other.pointWindSpeed &&
+                priFreq == other.priFreq &&
+                secFreq == other.secFreq &&
+                tacanChannel == other.tacanChannel &&
+                tempDev == other.tempDev &&
+                thunderCat == other.thunderCat &&
+                totalAirDistance == other.totalAirDistance &&
+                totalFlownDistance == other.totalFlownDistance &&
+                totalRemDistance == other.totalRemDistance &&
+                totalRemFuel == other.totalRemFuel &&
+                totalTime == other.totalTime &&
+                totalTimeRem == other.totalTimeRem &&
+                totalUsedFuel == other.totalUsedFuel &&
+                totalWeight == other.totalWeight &&
+                trueCourse == other.trueCourse &&
+                turbCat == other.turbCat &&
+                vorFreq == other.vorFreq &&
+                waypointNum == other.waypointNum &&
+                zoneDistance == other.zoneDistance &&
+                zoneFuel == other.zoneFuel &&
+                zoneTime == other.zoneTime &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(type, waypointName, aaTacanChannel, airDistance, airway, alt, arId, arpt, ata, avgCalAirspeed, avgDriftAng, avgGroundSpeed, avgTrueAirspeed, avgWindDir, avgWindSpeed, dayLowAlt, eta, exchangedFuel, fuelFlow, iceCat, lat, legAlternate, legDragIndex, legFuelDegrade, legMach, legMsnIndex, legWindFac, lon, magCourse, magHeading, magVar, navaid, nightLowAlt, nvgLowAlt, pointWindDir, pointWindSpeed, priFreq, secFreq, tacanChannel, tempDev, thunderCat, totalAirDistance, totalFlownDistance, totalRemDistance, totalRemFuel, totalTime, totalTimeRem, totalUsedFuel, totalWeight, trueCourse, turbCat, vorFreq, waypointNum, zoneDistance, zoneFuel, zoneTime, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                type,
+                waypointName,
+                aaTacanChannel,
+                airDistance,
+                airway,
+                alt,
+                arId,
+                arpt,
+                ata,
+                avgCalAirspeed,
+                avgDriftAng,
+                avgGroundSpeed,
+                avgTrueAirspeed,
+                avgWindDir,
+                avgWindSpeed,
+                dayLowAlt,
+                eta,
+                exchangedFuel,
+                fuelFlow,
+                iceCat,
+                lat,
+                legAlternate,
+                legDragIndex,
+                legFuelDegrade,
+                legMach,
+                legMsnIndex,
+                legWindFac,
+                lon,
+                magCourse,
+                magHeading,
+                magVar,
+                navaid,
+                nightLowAlt,
+                nvgLowAlt,
+                pointWindDir,
+                pointWindSpeed,
+                priFreq,
+                secFreq,
+                tacanChannel,
+                tempDev,
+                thunderCat,
+                totalAirDistance,
+                totalFlownDistance,
+                totalRemDistance,
+                totalRemFuel,
+                totalTime,
+                totalTimeRem,
+                totalUsedFuel,
+                totalWeight,
+                trueCourse,
+                turbCat,
+                vorFreq,
+                waypointNum,
+                zoneDistance,
+                zoneFuel,
+                zoneTime,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -12316,10 +12707,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is FlightplanUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is FlightplanUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "FlightplanUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

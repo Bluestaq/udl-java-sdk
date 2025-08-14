@@ -3619,12 +3619,103 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && type == other.type && id == other.id && actualArrTime == other.actualArrTime && actualDepTime == other.actualDepTime && arct == other.arct && arEventType == other.arEventType && arrPurpose == other.arrPurpose && arTrackId == other.arTrackId && arTrackName == other.arTrackName && baseAlt == other.baseAlt && cancelled == other.cancelled && createdAt == other.createdAt && createdBy == other.createdBy && depPurpose == other.depPurpose && estArrTime == other.estArrTime && estDepTime == other.estDepTime && externalAirEventId == other.externalAirEventId && externalArTrackId == other.externalArTrackId && idMission == other.idMission && idSortie == other.idSortie && legNum == other.legNum && location == other.location && numTankers == other.numTankers && origin == other.origin && origNetwork == other.origNetwork && plannedArrTime == other.plannedArrTime && plannedDepTime == other.plannedDepTime && priority == other.priority && receivers == other.receivers && remarks == other.remarks && revTrack == other.revTrack && rzct == other.rzct && rzPoint == other.rzPoint && rzType == other.rzType && shortTrack == other.shortTrack && sourceDl == other.sourceDl && statusCode == other.statusCode && tankers == other.tankers && trackTime == other.trackTime && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                type == other.type &&
+                id == other.id &&
+                actualArrTime == other.actualArrTime &&
+                actualDepTime == other.actualDepTime &&
+                arct == other.arct &&
+                arEventType == other.arEventType &&
+                arrPurpose == other.arrPurpose &&
+                arTrackId == other.arTrackId &&
+                arTrackName == other.arTrackName &&
+                baseAlt == other.baseAlt &&
+                cancelled == other.cancelled &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                depPurpose == other.depPurpose &&
+                estArrTime == other.estArrTime &&
+                estDepTime == other.estDepTime &&
+                externalAirEventId == other.externalAirEventId &&
+                externalArTrackId == other.externalArTrackId &&
+                idMission == other.idMission &&
+                idSortie == other.idSortie &&
+                legNum == other.legNum &&
+                location == other.location &&
+                numTankers == other.numTankers &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                plannedArrTime == other.plannedArrTime &&
+                plannedDepTime == other.plannedDepTime &&
+                priority == other.priority &&
+                receivers == other.receivers &&
+                remarks == other.remarks &&
+                revTrack == other.revTrack &&
+                rzct == other.rzct &&
+                rzPoint == other.rzPoint &&
+                rzType == other.rzType &&
+                shortTrack == other.shortTrack &&
+                sourceDl == other.sourceDl &&
+                statusCode == other.statusCode &&
+                tankers == other.tankers &&
+                trackTime == other.trackTime &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, type, id, actualArrTime, actualDepTime, arct, arEventType, arrPurpose, arTrackId, arTrackName, baseAlt, cancelled, createdAt, createdBy, depPurpose, estArrTime, estDepTime, externalAirEventId, externalArTrackId, idMission, idSortie, legNum, location, numTankers, origin, origNetwork, plannedArrTime, plannedDepTime, priority, receivers, remarks, revTrack, rzct, rzPoint, rzType, shortTrack, sourceDl, statusCode, tankers, trackTime, updatedAt, updatedBy, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                type,
+                id,
+                actualArrTime,
+                actualDepTime,
+                arct,
+                arEventType,
+                arrPurpose,
+                arTrackId,
+                arTrackName,
+                baseAlt,
+                cancelled,
+                createdAt,
+                createdBy,
+                depPurpose,
+                estArrTime,
+                estDepTime,
+                externalAirEventId,
+                externalArTrackId,
+                idMission,
+                idSortie,
+                legNum,
+                location,
+                numTankers,
+                origin,
+                origNetwork,
+                plannedArrTime,
+                plannedDepTime,
+                priority,
+                receivers,
+                remarks,
+                revTrack,
+                rzct,
+                rzPoint,
+                rzType,
+                shortTrack,
+                sourceDl,
+                statusCode,
+                tankers,
+                trackTime,
+                updatedAt,
+                updatedBy,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3777,7 +3868,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4835,12 +4926,59 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Receiver && altReceiverMissionId == other.altReceiverMissionId && amcReceiverMissionId == other.amcReceiverMissionId && externalReceiverId == other.externalReceiverId && fuelOn == other.fuelOn && idReceiverAirfield == other.idReceiverAirfield && idReceiverMission == other.idReceiverMission && idReceiverSortie == other.idReceiverSortie && numRecAircraft == other.numRecAircraft && packageId == other.packageId && receiverCallSign == other.receiverCallSign && receiverCellPosition == other.receiverCellPosition && receiverCoord == other.receiverCoord && receiverDeliveryMethod == other.receiverDeliveryMethod && receiverDeployedIcao == other.receiverDeployedIcao && receiverExercise == other.receiverExercise && receiverFuelType == other.receiverFuelType && receiverLegNum == other.receiverLegNum && receiverMds == other.receiverMds && receiverOwner == other.receiverOwner && receiverPoc == other.receiverPoc && recOrg == other.recOrg && sequenceNum == other.sequenceNum && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Receiver &&
+                altReceiverMissionId == other.altReceiverMissionId &&
+                amcReceiverMissionId == other.amcReceiverMissionId &&
+                externalReceiverId == other.externalReceiverId &&
+                fuelOn == other.fuelOn &&
+                idReceiverAirfield == other.idReceiverAirfield &&
+                idReceiverMission == other.idReceiverMission &&
+                idReceiverSortie == other.idReceiverSortie &&
+                numRecAircraft == other.numRecAircraft &&
+                packageId == other.packageId &&
+                receiverCallSign == other.receiverCallSign &&
+                receiverCellPosition == other.receiverCellPosition &&
+                receiverCoord == other.receiverCoord &&
+                receiverDeliveryMethod == other.receiverDeliveryMethod &&
+                receiverDeployedIcao == other.receiverDeployedIcao &&
+                receiverExercise == other.receiverExercise &&
+                receiverFuelType == other.receiverFuelType &&
+                receiverLegNum == other.receiverLegNum &&
+                receiverMds == other.receiverMds &&
+                receiverOwner == other.receiverOwner &&
+                receiverPoc == other.receiverPoc &&
+                recOrg == other.recOrg &&
+                sequenceNum == other.sequenceNum &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(altReceiverMissionId, amcReceiverMissionId, externalReceiverId, fuelOn, idReceiverAirfield, idReceiverMission, idReceiverSortie, numRecAircraft, packageId, receiverCallSign, receiverCellPosition, receiverCoord, receiverDeliveryMethod, receiverDeployedIcao, receiverExercise, receiverFuelType, receiverLegNum, receiverMds, receiverOwner, receiverPoc, recOrg, sequenceNum, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                altReceiverMissionId,
+                amcReceiverMissionId,
+                externalReceiverId,
+                fuelOn,
+                idReceiverAirfield,
+                idReceiverMission,
+                idReceiverSortie,
+                numRecAircraft,
+                packageId,
+                receiverCallSign,
+                receiverCellPosition,
+                receiverCoord,
+                receiverDeliveryMethod,
+                receiverDeployedIcao,
+                receiverExercise,
+                receiverFuelType,
+                receiverLegNum,
+                receiverMds,
+                receiverOwner,
+                receiverPoc,
+                recOrg,
+                sequenceNum,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5096,12 +5234,17 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Remark && date == other.date && externalRemarkId == other.externalRemarkId && text == other.text && user == other.user && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Remark &&
+                date == other.date &&
+                externalRemarkId == other.externalRemarkId &&
+                text == other.text &&
+                user == other.user &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(date, externalRemarkId, text, user, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(date, externalRemarkId, text, user, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5978,12 +6121,51 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Tanker && altTankerMissionId == other.altTankerMissionId && amcTankerMissionId == other.amcTankerMissionId && dualRole == other.dualRole && externalTankerId == other.externalTankerId && fuelOff == other.fuelOff && idTankerAirfield == other.idTankerAirfield && idTankerMission == other.idTankerMission && idTankerSortie == other.idTankerSortie && tankerCallSign == other.tankerCallSign && tankerCellPosition == other.tankerCellPosition && tankerCoord == other.tankerCoord && tankerDeliveryMethod == other.tankerDeliveryMethod && tankerDeployedIcao == other.tankerDeployedIcao && tankerFuelType == other.tankerFuelType && tankerLegNum == other.tankerLegNum && tankerMds == other.tankerMds && tankerOwner == other.tankerOwner && tankerPoc == other.tankerPoc && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Tanker &&
+                altTankerMissionId == other.altTankerMissionId &&
+                amcTankerMissionId == other.amcTankerMissionId &&
+                dualRole == other.dualRole &&
+                externalTankerId == other.externalTankerId &&
+                fuelOff == other.fuelOff &&
+                idTankerAirfield == other.idTankerAirfield &&
+                idTankerMission == other.idTankerMission &&
+                idTankerSortie == other.idTankerSortie &&
+                tankerCallSign == other.tankerCallSign &&
+                tankerCellPosition == other.tankerCellPosition &&
+                tankerCoord == other.tankerCoord &&
+                tankerDeliveryMethod == other.tankerDeliveryMethod &&
+                tankerDeployedIcao == other.tankerDeployedIcao &&
+                tankerFuelType == other.tankerFuelType &&
+                tankerLegNum == other.tankerLegNum &&
+                tankerMds == other.tankerMds &&
+                tankerOwner == other.tankerOwner &&
+                tankerPoc == other.tankerPoc &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(altTankerMissionId, amcTankerMissionId, dualRole, externalTankerId, fuelOff, idTankerAirfield, idTankerMission, idTankerSortie, tankerCallSign, tankerCellPosition, tankerCoord, tankerDeliveryMethod, tankerDeployedIcao, tankerFuelType, tankerLegNum, tankerMds, tankerOwner, tankerPoc, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                altTankerMissionId,
+                amcTankerMissionId,
+                dualRole,
+                externalTankerId,
+                fuelOff,
+                idTankerAirfield,
+                idTankerMission,
+                idTankerSortie,
+                tankerCallSign,
+                tankerCellPosition,
+                tankerCoord,
+                tankerDeliveryMethod,
+                tankerDeployedIcao,
+                tankerFuelType,
+                tankerLegNum,
+                tankerMds,
+                tankerOwner,
+                tankerPoc,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5996,10 +6178,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AirEventCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is AirEventCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "AirEventCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -241,10 +241,22 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is V2CopyParams && fromPath == other.fromPath && toPath == other.toPath && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams && additionalBodyProperties == other.additionalBodyProperties /* spotless:on */
+        return other is V2CopyParams &&
+            fromPath == other.fromPath &&
+            toPath == other.toPath &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams &&
+            additionalBodyProperties == other.additionalBodyProperties
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(fromPath, toPath, additionalHeaders, additionalQueryParams, additionalBodyProperties) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            fromPath,
+            toPath,
+            additionalHeaders,
+            additionalQueryParams,
+            additionalBodyProperties,
+        )
 
     override fun toString() =
         "V2CopyParams{fromPath=$fromPath, toPath=$toPath, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams, additionalBodyProperties=$additionalBodyProperties}"

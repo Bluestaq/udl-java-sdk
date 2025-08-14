@@ -1551,7 +1551,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -2059,7 +2059,7 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is DayOfWeek && value == other.value /* spotless:on */
+                    return other is DayOfWeek && value == other.value
                 }
 
                 override fun hashCode() = value.hashCode()
@@ -2257,12 +2257,15 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is OperatingHour && opStartTime == other.opStartTime && opStopTime == other.opStopTime && additionalProperties == other.additionalProperties /* spotless:on */
+                    return other is OperatingHour &&
+                        opStartTime == other.opStartTime &&
+                        opStopTime == other.opStopTime &&
+                        additionalProperties == other.additionalProperties
                 }
 
-                /* spotless:off */
-                private val hashCode: Int by lazy { Objects.hash(opStartTime, opStopTime, additionalProperties) }
-                /* spotless:on */
+                private val hashCode: Int by lazy {
+                    Objects.hash(opStartTime, opStopTime, additionalProperties)
+                }
 
                 override fun hashCode(): Int = hashCode
 
@@ -2275,12 +2278,25 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DailyOperation && dayOfWeek == other.dayOfWeek && operatingHours == other.operatingHours && operationName == other.operationName && ophrsLastChangedBy == other.ophrsLastChangedBy && ophrsLastChangedDate == other.ophrsLastChangedDate && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is DailyOperation &&
+                    dayOfWeek == other.dayOfWeek &&
+                    operatingHours == other.operatingHours &&
+                    operationName == other.operationName &&
+                    ophrsLastChangedBy == other.ophrsLastChangedBy &&
+                    ophrsLastChangedDate == other.ophrsLastChangedDate &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(dayOfWeek, operatingHours, operationName, ophrsLastChangedBy, ophrsLastChangedDate, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    dayOfWeek,
+                    operatingHours,
+                    operationName,
+                    ophrsLastChangedBy,
+                    ophrsLastChangedDate,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -2679,12 +2695,27 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is MaximumOnGround && aircraftMds == other.aircraftMds && contingencyMog == other.contingencyMog && mogLastChangedBy == other.mogLastChangedBy && mogLastChangedDate == other.mogLastChangedDate && wideParkingMog == other.wideParkingMog && wideWorkingMog == other.wideWorkingMog && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is MaximumOnGround &&
+                    aircraftMds == other.aircraftMds &&
+                    contingencyMog == other.contingencyMog &&
+                    mogLastChangedBy == other.mogLastChangedBy &&
+                    mogLastChangedDate == other.mogLastChangedDate &&
+                    wideParkingMog == other.wideParkingMog &&
+                    wideWorkingMog == other.wideWorkingMog &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(aircraftMds, contingencyMog, mogLastChangedBy, mogLastChangedDate, wideParkingMog, wideWorkingMog, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    aircraftMds,
+                    contingencyMog,
+                    mogLastChangedBy,
+                    mogLastChangedDate,
+                    wideParkingMog,
+                    wideWorkingMog,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -3115,12 +3146,29 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is OperationalDeviation && affectedAircraftMds == other.affectedAircraftMds && affectedMog == other.affectedMog && aircraftOnGroundTime == other.aircraftOnGroundTime && crewRestTime == other.crewRestTime && odLastChangedBy == other.odLastChangedBy && odLastChangedDate == other.odLastChangedDate && odRemark == other.odRemark && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is OperationalDeviation &&
+                    affectedAircraftMds == other.affectedAircraftMds &&
+                    affectedMog == other.affectedMog &&
+                    aircraftOnGroundTime == other.aircraftOnGroundTime &&
+                    crewRestTime == other.crewRestTime &&
+                    odLastChangedBy == other.odLastChangedBy &&
+                    odLastChangedDate == other.odLastChangedDate &&
+                    odRemark == other.odRemark &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(affectedAircraftMds, affectedMog, aircraftOnGroundTime, crewRestTime, odLastChangedBy, odLastChangedDate, odRemark, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    affectedAircraftMds,
+                    affectedMog,
+                    aircraftOnGroundTime,
+                    crewRestTime,
+                    odLastChangedBy,
+                    odLastChangedDate,
+                    odRemark,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -3537,12 +3585,29 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is OperationalPlanning && opEndDate == other.opEndDate && opLastChangedBy == other.opLastChangedBy && opLastChangedDate == other.opLastChangedDate && opRemark == other.opRemark && opSource == other.opSource && opStartDate == other.opStartDate && opStatus == other.opStatus && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is OperationalPlanning &&
+                    opEndDate == other.opEndDate &&
+                    opLastChangedBy == other.opLastChangedBy &&
+                    opLastChangedDate == other.opLastChangedDate &&
+                    opRemark == other.opRemark &&
+                    opSource == other.opSource &&
+                    opStartDate == other.opStartDate &&
+                    opStatus == other.opStatus &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(opEndDate, opLastChangedBy, opLastChangedDate, opRemark, opSource, opStartDate, opStatus, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    opEndDate,
+                    opLastChangedBy,
+                    opLastChangedDate,
+                    opRemark,
+                    opSource,
+                    opStartDate,
+                    opStatus,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -3865,12 +3930,25 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Pathway && pwDefinition == other.pwDefinition && pwLastChangedBy == other.pwLastChangedBy && pwLastChangedDate == other.pwLastChangedDate && pwType == other.pwType && pwUsage == other.pwUsage && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is Pathway &&
+                    pwDefinition == other.pwDefinition &&
+                    pwLastChangedBy == other.pwLastChangedBy &&
+                    pwLastChangedDate == other.pwLastChangedDate &&
+                    pwType == other.pwType &&
+                    pwUsage == other.pwUsage &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(pwDefinition, pwLastChangedBy, pwLastChangedDate, pwType, pwUsage, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    pwDefinition,
+                    pwLastChangedBy,
+                    pwLastChangedDate,
+                    pwType,
+                    pwUsage,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -4471,12 +4549,37 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Waiver && expirationDate == other.expirationDate && hasExpired == other.hasExpired && issueDate == other.issueDate && issuerName == other.issuerName && requesterName == other.requesterName && requesterPhoneNumber == other.requesterPhoneNumber && requestingUnit == other.requestingUnit && waiverAppliesTo == other.waiverAppliesTo && waiverDescription == other.waiverDescription && waiverLastChangedBy == other.waiverLastChangedBy && waiverLastChangedDate == other.waiverLastChangedDate && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is Waiver &&
+                    expirationDate == other.expirationDate &&
+                    hasExpired == other.hasExpired &&
+                    issueDate == other.issueDate &&
+                    issuerName == other.issuerName &&
+                    requesterName == other.requesterName &&
+                    requesterPhoneNumber == other.requesterPhoneNumber &&
+                    requestingUnit == other.requestingUnit &&
+                    waiverAppliesTo == other.waiverAppliesTo &&
+                    waiverDescription == other.waiverDescription &&
+                    waiverLastChangedBy == other.waiverLastChangedBy &&
+                    waiverLastChangedDate == other.waiverLastChangedDate &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(expirationDate, hasExpired, issueDate, issuerName, requesterName, requesterPhoneNumber, requestingUnit, waiverAppliesTo, waiverDescription, waiverLastChangedBy, waiverLastChangedDate, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    expirationDate,
+                    hasExpired,
+                    issueDate,
+                    issuerName,
+                    requesterName,
+                    requesterPhoneNumber,
+                    requestingUnit,
+                    waiverAppliesTo,
+                    waiverDescription,
+                    waiverLastChangedBy,
+                    waiverLastChangedDate,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -4489,12 +4592,63 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSite == other.idSite && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && dailyOperations == other.dailyOperations && dopsLastChangedBy == other.dopsLastChangedBy && dopsLastChangedDate == other.dopsLastChangedDate && dopsLastChangedReason == other.dopsLastChangedReason && idLaunchSite == other.idLaunchSite && maximumOnGrounds == other.maximumOnGrounds && mogsLastChangedBy == other.mogsLastChangedBy && mogsLastChangedDate == other.mogsLastChangedDate && mogsLastChangedReason == other.mogsLastChangedReason && operationalDeviations == other.operationalDeviations && operationalPlannings == other.operationalPlannings && origin == other.origin && origNetwork == other.origNetwork && pathways == other.pathways && sourceDl == other.sourceDl && updatedAt == other.updatedAt && updatedBy == other.updatedBy && waivers == other.waivers /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idSite == other.idSite &&
+                source == other.source &&
+                id == other.id &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                dailyOperations == other.dailyOperations &&
+                dopsLastChangedBy == other.dopsLastChangedBy &&
+                dopsLastChangedDate == other.dopsLastChangedDate &&
+                dopsLastChangedReason == other.dopsLastChangedReason &&
+                idLaunchSite == other.idLaunchSite &&
+                maximumOnGrounds == other.maximumOnGrounds &&
+                mogsLastChangedBy == other.mogsLastChangedBy &&
+                mogsLastChangedDate == other.mogsLastChangedDate &&
+                mogsLastChangedReason == other.mogsLastChangedReason &&
+                operationalDeviations == other.operationalDeviations &&
+                operationalPlannings == other.operationalPlannings &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                pathways == other.pathways &&
+                sourceDl == other.sourceDl &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                waivers == other.waivers
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSite, source, id, createdAt, createdBy, dailyOperations, dopsLastChangedBy, dopsLastChangedDate, dopsLastChangedReason, idLaunchSite, maximumOnGrounds, mogsLastChangedBy, mogsLastChangedDate, mogsLastChangedReason, operationalDeviations, operationalPlannings, origin, origNetwork, pathways, sourceDl, updatedAt, updatedBy, waivers) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idSite,
+                source,
+                id,
+                createdAt,
+                createdBy,
+                dailyOperations,
+                dopsLastChangedBy,
+                dopsLastChangedDate,
+                dopsLastChangedReason,
+                idLaunchSite,
+                maximumOnGrounds,
+                mogsLastChangedBy,
+                mogsLastChangedDate,
+                mogsLastChangedReason,
+                operationalDeviations,
+                operationalPlannings,
+                origin,
+                origNetwork,
+                pathways,
+                sourceDl,
+                updatedAt,
+                updatedBy,
+                waivers,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4507,10 +4661,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OperationUnvalidatedPublishParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OperationUnvalidatedPublishParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "OperationUnvalidatedPublishParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

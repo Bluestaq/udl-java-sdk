@@ -2,6 +2,7 @@
 
 package com.unifieddatalibrary.api.models.antennas
 
+import com.unifieddatalibrary.api.models.AntennaIngest
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -11,14 +12,18 @@ internal class AntennaCreateParamsTest {
     @Test
     fun create() {
         AntennaCreateParams.builder()
-            .dataMode(AntennaCreateParams.DataMode.TEST)
-            .name("IRIDIUM NEXT 121-ANTENNA-10075")
-            .source("Bluestaq")
-            .id("ANTENNA-ID")
-            .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-            .createdBy("some.user")
-            .origin("THIRD_PARTY_DATASOURCE")
-            .origNetwork("ORIG")
+            .antennaIngest(
+                AntennaIngest.builder()
+                    .dataMode(AntennaIngest.DataMode.TEST)
+                    .name("IRIDIUM NEXT 121-ANTENNA-10075")
+                    .source("Bluestaq")
+                    .id("ANTENNA-ID")
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("ORIG")
+                    .build()
+            )
             .build()
     }
 
@@ -26,41 +31,59 @@ internal class AntennaCreateParamsTest {
     fun body() {
         val params =
             AntennaCreateParams.builder()
-                .dataMode(AntennaCreateParams.DataMode.TEST)
-                .name("IRIDIUM NEXT 121-ANTENNA-10075")
-                .source("Bluestaq")
-                .id("ANTENNA-ID")
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .antennaIngest(
+                    AntennaIngest.builder()
+                        .dataMode(AntennaIngest.DataMode.TEST)
+                        .name("IRIDIUM NEXT 121-ANTENNA-10075")
+                        .source("Bluestaq")
+                        .id("ANTENNA-ID")
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .build()
+                )
                 .build()
 
         val body = params._body()
 
-        assertThat(body.dataMode()).isEqualTo(AntennaCreateParams.DataMode.TEST)
-        assertThat(body.name()).isEqualTo("IRIDIUM NEXT 121-ANTENNA-10075")
-        assertThat(body.source()).isEqualTo("Bluestaq")
-        assertThat(body.id()).contains("ANTENNA-ID")
-        assertThat(body.createdAt()).contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(body.createdBy()).contains("some.user")
-        assertThat(body.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(body.origNetwork()).contains("ORIG")
+        assertThat(body)
+            .isEqualTo(
+                AntennaIngest.builder()
+                    .dataMode(AntennaIngest.DataMode.TEST)
+                    .name("IRIDIUM NEXT 121-ANTENNA-10075")
+                    .source("Bluestaq")
+                    .id("ANTENNA-ID")
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("ORIG")
+                    .build()
+            )
     }
 
     @Test
     fun bodyWithoutOptionalFields() {
         val params =
             AntennaCreateParams.builder()
-                .dataMode(AntennaCreateParams.DataMode.TEST)
-                .name("IRIDIUM NEXT 121-ANTENNA-10075")
-                .source("Bluestaq")
+                .antennaIngest(
+                    AntennaIngest.builder()
+                        .dataMode(AntennaIngest.DataMode.TEST)
+                        .name("IRIDIUM NEXT 121-ANTENNA-10075")
+                        .source("Bluestaq")
+                        .build()
+                )
                 .build()
 
         val body = params._body()
 
-        assertThat(body.dataMode()).isEqualTo(AntennaCreateParams.DataMode.TEST)
-        assertThat(body.name()).isEqualTo("IRIDIUM NEXT 121-ANTENNA-10075")
-        assertThat(body.source()).isEqualTo("Bluestaq")
+        assertThat(body)
+            .isEqualTo(
+                AntennaIngest.builder()
+                    .dataMode(AntennaIngest.DataMode.TEST)
+                    .name("IRIDIUM NEXT 121-ANTENNA-10075")
+                    .source("Bluestaq")
+                    .build()
+            )
     }
 }

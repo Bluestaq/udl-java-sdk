@@ -267,12 +267,17 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EffectResponseMetricsFull && domainValue == other.domainValue && metricType == other.metricType && provenance == other.provenance && relativeValue == other.relativeValue && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is EffectResponseMetricsFull &&
+            domainValue == other.domainValue &&
+            metricType == other.metricType &&
+            provenance == other.provenance &&
+            relativeValue == other.relativeValue &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(domainValue, metricType, provenance, relativeValue, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(domainValue, metricType, provenance, relativeValue, additionalProperties)
+    }
 
     override fun hashCode(): Int = hashCode
 

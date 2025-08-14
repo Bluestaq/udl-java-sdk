@@ -2336,7 +2336,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2349,12 +2349,115 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SkyImageryListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && expStartTime == other.expStartTime && imageType == other.imageType && source == other.source && id == other.id && annotationKey == other.annotationKey && calibrationKey == other.calibrationKey && checksumValue == other.checksumValue && createdAt == other.createdAt && createdBy == other.createdBy && description == other.description && expEndTime == other.expEndTime && filename == other.filename && filesize == other.filesize && frameFovHeight == other.frameFovHeight && frameFovWidth == other.frameFovWidth && frameHeightPixels == other.frameHeightPixels && frameWidthPixels == other.frameWidthPixels && idAttitudeSet == other.idAttitudeSet && idOnOrbit == other.idOnOrbit && idSensor == other.idSensor && idSoiSet == other.idSoiSet && imageSetId == other.imageSetId && imageSetLength == other.imageSetLength && imageSourceInfo == other.imageSourceInfo && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId == other.origSensorId && pixelBitDepth == other.pixelBitDepth && pixelFovHeight == other.pixelFovHeight && pixelFovWidth == other.pixelFovWidth && satNo == other.satNo && senalt == other.senalt && senlat == other.senlat && senlon == other.senlon && senQuat == other.senQuat && senQuatDot == other.senQuatDot && senx == other.senx && seny == other.seny && senz == other.senz && sequenceId == other.sequenceId && sourceDl == other.sourceDl && tags == other.tags && topLeftStartAz == other.topLeftStartAz && topLeftStartEl == other.topLeftStartEl && topLeftStopAz == other.topLeftStopAz && topLeftStopEl == other.topLeftStopEl && transactionId == other.transactionId && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SkyImageryListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            expStartTime == other.expStartTime &&
+            imageType == other.imageType &&
+            source == other.source &&
+            id == other.id &&
+            annotationKey == other.annotationKey &&
+            calibrationKey == other.calibrationKey &&
+            checksumValue == other.checksumValue &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            description == other.description &&
+            expEndTime == other.expEndTime &&
+            filename == other.filename &&
+            filesize == other.filesize &&
+            frameFovHeight == other.frameFovHeight &&
+            frameFovWidth == other.frameFovWidth &&
+            frameHeightPixels == other.frameHeightPixels &&
+            frameWidthPixels == other.frameWidthPixels &&
+            idAttitudeSet == other.idAttitudeSet &&
+            idOnOrbit == other.idOnOrbit &&
+            idSensor == other.idSensor &&
+            idSoiSet == other.idSoiSet &&
+            imageSetId == other.imageSetId &&
+            imageSetLength == other.imageSetLength &&
+            imageSourceInfo == other.imageSourceInfo &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            origSensorId == other.origSensorId &&
+            pixelBitDepth == other.pixelBitDepth &&
+            pixelFovHeight == other.pixelFovHeight &&
+            pixelFovWidth == other.pixelFovWidth &&
+            satNo == other.satNo &&
+            senalt == other.senalt &&
+            senlat == other.senlat &&
+            senlon == other.senlon &&
+            senQuat == other.senQuat &&
+            senQuatDot == other.senQuatDot &&
+            senx == other.senx &&
+            seny == other.seny &&
+            senz == other.senz &&
+            sequenceId == other.sequenceId &&
+            sourceDl == other.sourceDl &&
+            tags == other.tags &&
+            topLeftStartAz == other.topLeftStartAz &&
+            topLeftStartEl == other.topLeftStartEl &&
+            topLeftStopAz == other.topLeftStopAz &&
+            topLeftStopEl == other.topLeftStopEl &&
+            transactionId == other.transactionId &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, expStartTime, imageType, source, id, annotationKey, calibrationKey, checksumValue, createdAt, createdBy, description, expEndTime, filename, filesize, frameFovHeight, frameFovWidth, frameHeightPixels, frameWidthPixels, idAttitudeSet, idOnOrbit, idSensor, idSoiSet, imageSetId, imageSetLength, imageSourceInfo, origin, origNetwork, origObjectId, origSensorId, pixelBitDepth, pixelFovHeight, pixelFovWidth, satNo, senalt, senlat, senlon, senQuat, senQuatDot, senx, seny, senz, sequenceId, sourceDl, tags, topLeftStartAz, topLeftStartEl, topLeftStopAz, topLeftStopEl, transactionId, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            expStartTime,
+            imageType,
+            source,
+            id,
+            annotationKey,
+            calibrationKey,
+            checksumValue,
+            createdAt,
+            createdBy,
+            description,
+            expEndTime,
+            filename,
+            filesize,
+            frameFovHeight,
+            frameFovWidth,
+            frameHeightPixels,
+            frameWidthPixels,
+            idAttitudeSet,
+            idOnOrbit,
+            idSensor,
+            idSoiSet,
+            imageSetId,
+            imageSetLength,
+            imageSourceInfo,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            pixelBitDepth,
+            pixelFovHeight,
+            pixelFovWidth,
+            satNo,
+            senalt,
+            senlat,
+            senlon,
+            senQuat,
+            senQuatDot,
+            senx,
+            seny,
+            senz,
+            sequenceId,
+            sourceDl,
+            tags,
+            topLeftStartAz,
+            topLeftStartEl,
+            topLeftStopAz,
+            topLeftStopEl,
+            transactionId,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

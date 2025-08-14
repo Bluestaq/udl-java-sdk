@@ -266,10 +266,24 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SgiGetDataByEffectiveAsOfDateParams && effectiveDate == other.effectiveDate && firstResult == other.firstResult && maxResults == other.maxResults && sgiDate == other.sgiDate && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SgiGetDataByEffectiveAsOfDateParams &&
+            effectiveDate == other.effectiveDate &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            sgiDate == other.sgiDate &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(effectiveDate, firstResult, maxResults, sgiDate, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            effectiveDate,
+            firstResult,
+            maxResults,
+            sgiDate,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "SgiGetDataByEffectiveAsOfDateParams{effectiveDate=$effectiveDate, firstResult=$firstResult, maxResults=$maxResults, sgiDate=$sgiDate, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

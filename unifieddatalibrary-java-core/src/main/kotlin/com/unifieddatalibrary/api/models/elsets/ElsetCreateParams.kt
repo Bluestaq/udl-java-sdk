@@ -204,10 +204,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ElsetCreateParams && elsetIngest == other.elsetIngest && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is ElsetCreateParams &&
+            elsetIngest == other.elsetIngest &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(elsetIngest, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(elsetIngest, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "ElsetCreateParams{elsetIngest=$elsetIngest, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -2259,12 +2259,67 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && spacecraftId == other.spacecraftId && bodyId == other.bodyId && bestResolution == other.bestResolution && createdAt == other.createdAt && createdBy == other.createdBy && fieldOfRegard == other.fieldOfRegard && fieldOfView == other.fieldOfView && groundStationLocations == other.groundStationLocations && groundStations == other.groundStations && hostedForCompanyOrgId == other.hostedForCompanyOrgId && idSensor == other.idSensor && imagingPayloadCategory == other.imagingPayloadCategory && manufacturerOrgId == other.manufacturerOrgId && name == other.name && notes == other.notes && numberOfFilmReturnCanisters == other.numberOfFilmReturnCanisters && origin == other.origin && origNetwork == other.origNetwork && pointingMethod == other.pointingMethod && recorderSize == other.recorderSize && spectralBand == other.spectralBand && spectralFrequencyLimits == other.spectralFrequencyLimits && swathWidth == other.swathWidth && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                spacecraftId == other.spacecraftId &&
+                bodyId == other.bodyId &&
+                bestResolution == other.bestResolution &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                fieldOfRegard == other.fieldOfRegard &&
+                fieldOfView == other.fieldOfView &&
+                groundStationLocations == other.groundStationLocations &&
+                groundStations == other.groundStations &&
+                hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+                idSensor == other.idSensor &&
+                imagingPayloadCategory == other.imagingPayloadCategory &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                name == other.name &&
+                notes == other.notes &&
+                numberOfFilmReturnCanisters == other.numberOfFilmReturnCanisters &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                pointingMethod == other.pointingMethod &&
+                recorderSize == other.recorderSize &&
+                spectralBand == other.spectralBand &&
+                spectralFrequencyLimits == other.spectralFrequencyLimits &&
+                swathWidth == other.swathWidth &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, spacecraftId, bodyId, bestResolution, createdAt, createdBy, fieldOfRegard, fieldOfView, groundStationLocations, groundStations, hostedForCompanyOrgId, idSensor, imagingPayloadCategory, manufacturerOrgId, name, notes, numberOfFilmReturnCanisters, origin, origNetwork, pointingMethod, recorderSize, spectralBand, spectralFrequencyLimits, swathWidth, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                spacecraftId,
+                bodyId,
+                bestResolution,
+                createdAt,
+                createdBy,
+                fieldOfRegard,
+                fieldOfView,
+                groundStationLocations,
+                groundStations,
+                hostedForCompanyOrgId,
+                idSensor,
+                imagingPayloadCategory,
+                manufacturerOrgId,
+                name,
+                notes,
+                numberOfFilmReturnCanisters,
+                origin,
+                origNetwork,
+                pointingMethod,
+                recorderSize,
+                spectralBand,
+                spectralFrequencyLimits,
+                swathWidth,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2417,7 +2472,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2430,10 +2485,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SeradataOpticalPayloadUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SeradataOpticalPayloadUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SeradataOpticalPayloadUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

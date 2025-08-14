@@ -549,12 +549,37 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OnorbitthrusterstatusQueryhelpResponse && aodrSupported == other.aodrSupported && classificationMarking == other.classificationMarking && description == other.description && historySupported == other.historySupported && name == other.name && parameters == other.parameters && requiredRoles == other.requiredRoles && restSupported == other.restSupported && sortSupported == other.sortSupported && typeName == other.typeName && uri == other.uri && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is OnorbitthrusterstatusQueryhelpResponse &&
+            aodrSupported == other.aodrSupported &&
+            classificationMarking == other.classificationMarking &&
+            description == other.description &&
+            historySupported == other.historySupported &&
+            name == other.name &&
+            parameters == other.parameters &&
+            requiredRoles == other.requiredRoles &&
+            restSupported == other.restSupported &&
+            sortSupported == other.sortSupported &&
+            typeName == other.typeName &&
+            uri == other.uri &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(aodrSupported, classificationMarking, description, historySupported, name, parameters, requiredRoles, restSupported, sortSupported, typeName, uri, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            aodrSupported,
+            classificationMarking,
+            description,
+            historySupported,
+            name,
+            parameters,
+            requiredRoles,
+            restSupported,
+            sortSupported,
+            typeName,
+            uri,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

@@ -266,10 +266,17 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is StarCatalogCountParams && dec == other.dec && firstResult == other.firstResult && maxResults == other.maxResults && ra == other.ra && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is StarCatalogCountParams &&
+            dec == other.dec &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            ra == other.ra &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(dec, firstResult, maxResults, ra, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(dec, firstResult, maxResults, ra, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "StarCatalogCountParams{dec=$dec, firstResult=$firstResult, maxResults=$maxResults, ra=$ra, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

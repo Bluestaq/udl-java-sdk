@@ -311,12 +311,25 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is PathwayFull && pwDefinition == other.pwDefinition && pwLastChangedBy == other.pwLastChangedBy && pwLastChangedDate == other.pwLastChangedDate && pwType == other.pwType && pwUsage == other.pwUsage && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is PathwayFull &&
+            pwDefinition == other.pwDefinition &&
+            pwLastChangedBy == other.pwLastChangedBy &&
+            pwLastChangedDate == other.pwLastChangedDate &&
+            pwType == other.pwType &&
+            pwUsage == other.pwUsage &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(pwDefinition, pwLastChangedBy, pwLastChangedDate, pwType, pwUsage, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            pwDefinition,
+            pwLastChangedBy,
+            pwLastChangedDate,
+            pwType,
+            pwUsage,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

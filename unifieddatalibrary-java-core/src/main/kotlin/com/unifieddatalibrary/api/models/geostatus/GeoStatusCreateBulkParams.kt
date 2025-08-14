@@ -1388,7 +1388,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -1401,12 +1401,61 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && confidenceLevel == other.confidenceLevel && createdAt == other.createdAt && createdBy == other.createdBy && idOnOrbit == other.idOnOrbit && longitudeMax == other.longitudeMax && longitudeMin == other.longitudeMin && longitudeRate == other.longitudeRate && lostFlag == other.lostFlag && objectStatus == other.objectStatus && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && planeChangeStatus == other.planeChangeStatus && rawFileUri == other.rawFileUri && relativeEnergy == other.relativeEnergy && satNo == other.satNo && sc == other.sc && semiAnnualCorrFlag == other.semiAnnualCorrFlag && ss == other.ss && troughType == other.troughType /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                id == other.id &&
+                confidenceLevel == other.confidenceLevel &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                idOnOrbit == other.idOnOrbit &&
+                longitudeMax == other.longitudeMax &&
+                longitudeMin == other.longitudeMin &&
+                longitudeRate == other.longitudeRate &&
+                lostFlag == other.lostFlag &&
+                objectStatus == other.objectStatus &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                planeChangeStatus == other.planeChangeStatus &&
+                rawFileUri == other.rawFileUri &&
+                relativeEnergy == other.relativeEnergy &&
+                satNo == other.satNo &&
+                sc == other.sc &&
+                semiAnnualCorrFlag == other.semiAnnualCorrFlag &&
+                ss == other.ss &&
+                troughType == other.troughType
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, id, confidenceLevel, createdAt, createdBy, idOnOrbit, longitudeMax, longitudeMin, longitudeRate, lostFlag, objectStatus, origin, origNetwork, origObjectId, planeChangeStatus, rawFileUri, relativeEnergy, satNo, sc, semiAnnualCorrFlag, ss, troughType) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                id,
+                confidenceLevel,
+                createdAt,
+                createdBy,
+                idOnOrbit,
+                longitudeMax,
+                longitudeMin,
+                longitudeRate,
+                lostFlag,
+                objectStatus,
+                origin,
+                origNetwork,
+                origObjectId,
+                planeChangeStatus,
+                rawFileUri,
+                relativeEnergy,
+                satNo,
+                sc,
+                semiAnnualCorrFlag,
+                ss,
+                troughType,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1419,10 +1468,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GeoStatusCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is GeoStatusCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "GeoStatusCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -224,10 +224,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SeradataOpticalPayloadDeleteParams && id == other.id && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams && additionalBodyProperties == other.additionalBodyProperties /* spotless:on */
+        return other is SeradataOpticalPayloadDeleteParams &&
+            id == other.id &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams &&
+            additionalBodyProperties == other.additionalBodyProperties
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(id, additionalHeaders, additionalQueryParams, additionalBodyProperties) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(id, additionalHeaders, additionalQueryParams, additionalBodyProperties)
 
     override fun toString() =
         "SeradataOpticalPayloadDeleteParams{id=$id, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams, additionalBodyProperties=$additionalBodyProperties}"

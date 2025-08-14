@@ -230,10 +230,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ElsetCreateBulkParams && dupeCheck == other.dupeCheck && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is ElsetCreateBulkParams &&
+            dupeCheck == other.dupeCheck &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(dupeCheck, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(dupeCheck, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "ElsetCreateBulkParams{dupeCheck=$dupeCheck, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

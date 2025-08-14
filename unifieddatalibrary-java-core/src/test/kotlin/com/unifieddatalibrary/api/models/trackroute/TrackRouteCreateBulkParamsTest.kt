@@ -12,15 +12,15 @@ internal class TrackRouteCreateBulkParamsTest {
     fun create() {
         TrackRouteCreateBulkParams.builder()
             .addBody(
-                TrackRouteCreateBulkParams.Body.builder()
+                TrackRouteIngest.builder()
                     .classificationMarking("U")
-                    .dataMode(TrackRouteCreateBulkParams.Body.DataMode.TEST)
+                    .dataMode(TrackRouteIngest.DataMode.TEST)
                     .lastUpdateDate(OffsetDateTime.parse("2024-09-17T16:00:00.123Z"))
                     .source("Bluestaq")
                     .type("AIR REFUELING")
                     .id("026dd511-8ba5-47d3-9909-836149f87686")
                     .addAltitudeBlock(
-                        TrackRouteCreateBulkParams.Body.AltitudeBlock.builder()
+                        AltitudeBlocksIngest.builder()
                             .altitudeSequenceId("A1")
                             .lowerAltitude(27000.1)
                             .upperAltitude(27200.5)
@@ -40,7 +40,7 @@ internal class TrackRouteCreateBulkParamsTest {
                     .origin("THIRD_PARTY_DATASOURCE")
                     .origNetwork("OPS1")
                     .addPoc(
-                        TrackRouteCreateBulkParams.Body.Poc.builder()
+                        PointOfContactIngest.builder()
                             .office("A34")
                             .phone("8675309")
                             .pocName("Fred Smith")
@@ -58,7 +58,7 @@ internal class TrackRouteCreateBulkParamsTest {
                     .regionName("North America")
                     .reviewDate(OffsetDateTime.parse("2024-09-16T16:00:00.123Z"))
                     .addRoutePoint(
-                        TrackRouteCreateBulkParams.Body.RoutePoint.builder()
+                        RoutePointsIngest.builder()
                             .altCountryCode("IZ")
                             .countryCode("NL")
                             .dafifPt(true)
@@ -95,15 +95,15 @@ internal class TrackRouteCreateBulkParamsTest {
         val params =
             TrackRouteCreateBulkParams.builder()
                 .addBody(
-                    TrackRouteCreateBulkParams.Body.builder()
+                    TrackRouteIngest.builder()
                         .classificationMarking("U")
-                        .dataMode(TrackRouteCreateBulkParams.Body.DataMode.TEST)
+                        .dataMode(TrackRouteIngest.DataMode.TEST)
                         .lastUpdateDate(OffsetDateTime.parse("2024-09-17T16:00:00.123Z"))
                         .source("Bluestaq")
                         .type("AIR REFUELING")
                         .id("026dd511-8ba5-47d3-9909-836149f87686")
                         .addAltitudeBlock(
-                            TrackRouteCreateBulkParams.Body.AltitudeBlock.builder()
+                            AltitudeBlocksIngest.builder()
                                 .altitudeSequenceId("A1")
                                 .lowerAltitude(27000.1)
                                 .upperAltitude(27200.5)
@@ -123,7 +123,7 @@ internal class TrackRouteCreateBulkParamsTest {
                         .origin("THIRD_PARTY_DATASOURCE")
                         .origNetwork("OPS1")
                         .addPoc(
-                            TrackRouteCreateBulkParams.Body.Poc.builder()
+                            PointOfContactIngest.builder()
                                 .office("A34")
                                 .phone("8675309")
                                 .pocName("Fred Smith")
@@ -141,7 +141,7 @@ internal class TrackRouteCreateBulkParamsTest {
                         .regionName("North America")
                         .reviewDate(OffsetDateTime.parse("2024-09-16T16:00:00.123Z"))
                         .addRoutePoint(
-                            TrackRouteCreateBulkParams.Body.RoutePoint.builder()
+                            RoutePointsIngest.builder()
                                 .altCountryCode("IZ")
                                 .countryCode("NL")
                                 .dafifPt(true)
@@ -176,15 +176,15 @@ internal class TrackRouteCreateBulkParamsTest {
 
         assertThat(body)
             .containsExactly(
-                TrackRouteCreateBulkParams.Body.builder()
+                TrackRouteIngest.builder()
                     .classificationMarking("U")
-                    .dataMode(TrackRouteCreateBulkParams.Body.DataMode.TEST)
+                    .dataMode(TrackRouteIngest.DataMode.TEST)
                     .lastUpdateDate(OffsetDateTime.parse("2024-09-17T16:00:00.123Z"))
                     .source("Bluestaq")
                     .type("AIR REFUELING")
                     .id("026dd511-8ba5-47d3-9909-836149f87686")
                     .addAltitudeBlock(
-                        TrackRouteCreateBulkParams.Body.AltitudeBlock.builder()
+                        AltitudeBlocksIngest.builder()
                             .altitudeSequenceId("A1")
                             .lowerAltitude(27000.1)
                             .upperAltitude(27200.5)
@@ -204,7 +204,7 @@ internal class TrackRouteCreateBulkParamsTest {
                     .origin("THIRD_PARTY_DATASOURCE")
                     .origNetwork("OPS1")
                     .addPoc(
-                        TrackRouteCreateBulkParams.Body.Poc.builder()
+                        PointOfContactIngest.builder()
                             .office("A34")
                             .phone("8675309")
                             .pocName("Fred Smith")
@@ -222,7 +222,7 @@ internal class TrackRouteCreateBulkParamsTest {
                     .regionName("North America")
                     .reviewDate(OffsetDateTime.parse("2024-09-16T16:00:00.123Z"))
                     .addRoutePoint(
-                        TrackRouteCreateBulkParams.Body.RoutePoint.builder()
+                        RoutePointsIngest.builder()
                             .altCountryCode("IZ")
                             .countryCode("NL")
                             .dafifPt(true)
@@ -258,9 +258,9 @@ internal class TrackRouteCreateBulkParamsTest {
         val params =
             TrackRouteCreateBulkParams.builder()
                 .addBody(
-                    TrackRouteCreateBulkParams.Body.builder()
+                    TrackRouteIngest.builder()
                         .classificationMarking("U")
-                        .dataMode(TrackRouteCreateBulkParams.Body.DataMode.TEST)
+                        .dataMode(TrackRouteIngest.DataMode.TEST)
                         .lastUpdateDate(OffsetDateTime.parse("2024-09-17T16:00:00.123Z"))
                         .source("Bluestaq")
                         .type("AIR REFUELING")
@@ -272,9 +272,9 @@ internal class TrackRouteCreateBulkParamsTest {
 
         assertThat(body)
             .containsExactly(
-                TrackRouteCreateBulkParams.Body.builder()
+                TrackRouteIngest.builder()
                     .classificationMarking("U")
-                    .dataMode(TrackRouteCreateBulkParams.Body.DataMode.TEST)
+                    .dataMode(TrackRouteIngest.DataMode.TEST)
                     .lastUpdateDate(OffsetDateTime.parse("2024-09-17T16:00:00.123Z"))
                     .source("Bluestaq")
                     .type("AIR REFUELING")

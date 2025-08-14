@@ -3131,12 +3131,91 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && bodyId == other.bodyId && band == other.band && bandwidth == other.bandwidth && createdAt == other.createdAt && createdBy == other.createdBy && eirp == other.eirp && estHtsTotalCapacity == other.estHtsTotalCapacity && estHtsTotalUserDownlinkBandwidthPerBeam == other.estHtsTotalUserDownlinkBandwidthPerBeam && estHtsTotalUserUplinkBandwidthPerBeam == other.estHtsTotalUserUplinkBandwidthPerBeam && gatewayDownlinkFrom == other.gatewayDownlinkFrom && gatewayDownlinkTo == other.gatewayDownlinkTo && gatewayUplinkFrom == other.gatewayUplinkFrom && gatewayUplinkTo == other.gatewayUplinkTo && hostedForCompanyOrgId == other.hostedForCompanyOrgId && htsNumUserSpotBeams == other.htsNumUserSpotBeams && htsUserDownlinkBandwidthPerBeam == other.htsUserDownlinkBandwidthPerBeam && htsUserUplinkBandwidthPerBeam == other.htsUserUplinkBandwidthPerBeam && idComm == other.idComm && manufacturerOrgId == other.manufacturerOrgId && num36MhzEquivalentTransponders == other.num36MhzEquivalentTransponders && numOperationalTransponders == other.numOperationalTransponders && numSpareTransponders == other.numSpareTransponders && origin == other.origin && origNetwork == other.origNetwork && payloadNotes == other.payloadNotes && polarization == other.polarization && solidStatePowerAmp == other.solidStatePowerAmp && spacecraftId == other.spacecraftId && tradeLeaseOrgId == other.tradeLeaseOrgId && travelingWaveTubeAmplifier == other.travelingWaveTubeAmplifier && userDownlinkFrom == other.userDownlinkFrom && userDownlinkTo == other.userDownlinkTo && userUplinkFrom == other.userUplinkFrom && userUplinkTo == other.userUplinkTo && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                band == other.band &&
+                bandwidth == other.bandwidth &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                eirp == other.eirp &&
+                estHtsTotalCapacity == other.estHtsTotalCapacity &&
+                estHtsTotalUserDownlinkBandwidthPerBeam ==
+                    other.estHtsTotalUserDownlinkBandwidthPerBeam &&
+                estHtsTotalUserUplinkBandwidthPerBeam ==
+                    other.estHtsTotalUserUplinkBandwidthPerBeam &&
+                gatewayDownlinkFrom == other.gatewayDownlinkFrom &&
+                gatewayDownlinkTo == other.gatewayDownlinkTo &&
+                gatewayUplinkFrom == other.gatewayUplinkFrom &&
+                gatewayUplinkTo == other.gatewayUplinkTo &&
+                hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+                htsNumUserSpotBeams == other.htsNumUserSpotBeams &&
+                htsUserDownlinkBandwidthPerBeam == other.htsUserDownlinkBandwidthPerBeam &&
+                htsUserUplinkBandwidthPerBeam == other.htsUserUplinkBandwidthPerBeam &&
+                idComm == other.idComm &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                num36MhzEquivalentTransponders == other.num36MhzEquivalentTransponders &&
+                numOperationalTransponders == other.numOperationalTransponders &&
+                numSpareTransponders == other.numSpareTransponders &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                payloadNotes == other.payloadNotes &&
+                polarization == other.polarization &&
+                solidStatePowerAmp == other.solidStatePowerAmp &&
+                spacecraftId == other.spacecraftId &&
+                tradeLeaseOrgId == other.tradeLeaseOrgId &&
+                travelingWaveTubeAmplifier == other.travelingWaveTubeAmplifier &&
+                userDownlinkFrom == other.userDownlinkFrom &&
+                userDownlinkTo == other.userDownlinkTo &&
+                userUplinkFrom == other.userUplinkFrom &&
+                userUplinkTo == other.userUplinkTo &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, bodyId, band, bandwidth, createdAt, createdBy, eirp, estHtsTotalCapacity, estHtsTotalUserDownlinkBandwidthPerBeam, estHtsTotalUserUplinkBandwidthPerBeam, gatewayDownlinkFrom, gatewayDownlinkTo, gatewayUplinkFrom, gatewayUplinkTo, hostedForCompanyOrgId, htsNumUserSpotBeams, htsUserDownlinkBandwidthPerBeam, htsUserUplinkBandwidthPerBeam, idComm, manufacturerOrgId, num36MhzEquivalentTransponders, numOperationalTransponders, numSpareTransponders, origin, origNetwork, payloadNotes, polarization, solidStatePowerAmp, spacecraftId, tradeLeaseOrgId, travelingWaveTubeAmplifier, userDownlinkFrom, userDownlinkTo, userUplinkFrom, userUplinkTo, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                bodyId,
+                band,
+                bandwidth,
+                createdAt,
+                createdBy,
+                eirp,
+                estHtsTotalCapacity,
+                estHtsTotalUserDownlinkBandwidthPerBeam,
+                estHtsTotalUserUplinkBandwidthPerBeam,
+                gatewayDownlinkFrom,
+                gatewayDownlinkTo,
+                gatewayUplinkFrom,
+                gatewayUplinkTo,
+                hostedForCompanyOrgId,
+                htsNumUserSpotBeams,
+                htsUserDownlinkBandwidthPerBeam,
+                htsUserUplinkBandwidthPerBeam,
+                idComm,
+                manufacturerOrgId,
+                num36MhzEquivalentTransponders,
+                numOperationalTransponders,
+                numSpareTransponders,
+                origin,
+                origNetwork,
+                payloadNotes,
+                polarization,
+                solidStatePowerAmp,
+                spacecraftId,
+                tradeLeaseOrgId,
+                travelingWaveTubeAmplifier,
+                userDownlinkFrom,
+                userDownlinkTo,
+                userUplinkFrom,
+                userUplinkTo,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3289,7 +3368,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3302,10 +3381,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SeraDataCommDetailUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SeraDataCommDetailUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SeraDataCommDetailUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

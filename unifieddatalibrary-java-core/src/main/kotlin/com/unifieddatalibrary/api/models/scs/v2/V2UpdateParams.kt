@@ -798,12 +798,27 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && deleteOn == other.deleteOn && description == other.description && readAcl == other.readAcl && tags == other.tags && writeAcl == other.writeAcl && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                deleteOn == other.deleteOn &&
+                description == other.description &&
+                readAcl == other.readAcl &&
+                tags == other.tags &&
+                writeAcl == other.writeAcl &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, deleteOn, description, readAcl, tags, writeAcl, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                deleteOn,
+                description,
+                readAcl,
+                tags,
+                writeAcl,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -816,10 +831,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is V2UpdateParams && path == other.path && sendNotification == other.sendNotification && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is V2UpdateParams &&
+            path == other.path &&
+            sendNotification == other.sendNotification &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(path, sendNotification, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(path, sendNotification, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "V2UpdateParams{path=$path, sendNotification=$sendNotification, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

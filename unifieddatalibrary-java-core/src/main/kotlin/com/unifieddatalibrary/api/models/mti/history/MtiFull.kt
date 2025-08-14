@@ -1207,7 +1207,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3335,12 +3335,51 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is D32 && d32_1 == other.d32_1 && d32_10 == other.d32_10 && d32_11 == other.d32_11 && d32_12 == other.d32_12 && d32_13 == other.d32_13 && d32_14 == other.d32_14 && d32_15 == other.d32_15 && d32_16 == other.d32_16 && d32_17 == other.d32_17 && d32_18 == other.d32_18 && d32_2 == other.d32_2 && d32_3 == other.d32_3 && d32_4 == other.d32_4 && d32_5 == other.d32_5 && d32_6 == other.d32_6 && d32_7 == other.d32_7 && d32_8 == other.d32_8 && d32_9 == other.d32_9 && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is D32 &&
+                    d32_1 == other.d32_1 &&
+                    d32_10 == other.d32_10 &&
+                    d32_11 == other.d32_11 &&
+                    d32_12 == other.d32_12 &&
+                    d32_13 == other.d32_13 &&
+                    d32_14 == other.d32_14 &&
+                    d32_15 == other.d32_15 &&
+                    d32_16 == other.d32_16 &&
+                    d32_17 == other.d32_17 &&
+                    d32_18 == other.d32_18 &&
+                    d32_2 == other.d32_2 &&
+                    d32_3 == other.d32_3 &&
+                    d32_4 == other.d32_4 &&
+                    d32_5 == other.d32_5 &&
+                    d32_6 == other.d32_6 &&
+                    d32_7 == other.d32_7 &&
+                    d32_8 == other.d32_8 &&
+                    d32_9 == other.d32_9 &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(d32_1, d32_10, d32_11, d32_12, d32_13, d32_14, d32_15, d32_16, d32_17, d32_18, d32_2, d32_3, d32_4, d32_5, d32_6, d32_7, d32_8, d32_9, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    d32_1,
+                    d32_10,
+                    d32_11,
+                    d32_12,
+                    d32_13,
+                    d32_14,
+                    d32_15,
+                    d32_16,
+                    d32_17,
+                    d32_18,
+                    d32_2,
+                    d32_3,
+                    d32_4,
+                    d32_5,
+                    d32_6,
+                    d32_7,
+                    d32_8,
+                    d32_9,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -3353,12 +3392,79 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Dwell && d10 == other.d10 && d11 == other.d11 && d12 == other.d12 && d13 == other.d13 && d14 == other.d14 && d15 == other.d15 && d16 == other.d16 && d17 == other.d17 && d18 == other.d18 && d19 == other.d19 && d2 == other.d2 && d20 == other.d20 && d21 == other.d21 && d22 == other.d22 && d23 == other.d23 && d24 == other.d24 && d25 == other.d25 && d26 == other.d26 && d27 == other.d27 && d28 == other.d28 && d29 == other.d29 && d3 == other.d3 && d30 == other.d30 && d31 == other.d31 && d32 == other.d32 && d4 == other.d4 && d5 == other.d5 && d6 == other.d6 && d7 == other.d7 && d8 == other.d8 && d9 == other.d9 && dwellts == other.dwellts && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Dwell &&
+                d10 == other.d10 &&
+                d11 == other.d11 &&
+                d12 == other.d12 &&
+                d13 == other.d13 &&
+                d14 == other.d14 &&
+                d15 == other.d15 &&
+                d16 == other.d16 &&
+                d17 == other.d17 &&
+                d18 == other.d18 &&
+                d19 == other.d19 &&
+                d2 == other.d2 &&
+                d20 == other.d20 &&
+                d21 == other.d21 &&
+                d22 == other.d22 &&
+                d23 == other.d23 &&
+                d24 == other.d24 &&
+                d25 == other.d25 &&
+                d26 == other.d26 &&
+                d27 == other.d27 &&
+                d28 == other.d28 &&
+                d29 == other.d29 &&
+                d3 == other.d3 &&
+                d30 == other.d30 &&
+                d31 == other.d31 &&
+                d32 == other.d32 &&
+                d4 == other.d4 &&
+                d5 == other.d5 &&
+                d6 == other.d6 &&
+                d7 == other.d7 &&
+                d8 == other.d8 &&
+                d9 == other.d9 &&
+                dwellts == other.dwellts &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(d10, d11, d12, d13, d14, d15, d16, d17, d18, d19, d2, d20, d21, d22, d23, d24, d25, d26, d27, d28, d29, d3, d30, d31, d32, d4, d5, d6, d7, d8, d9, dwellts, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                d10,
+                d11,
+                d12,
+                d13,
+                d14,
+                d15,
+                d16,
+                d17,
+                d18,
+                d19,
+                d2,
+                d20,
+                d21,
+                d22,
+                d23,
+                d24,
+                d25,
+                d26,
+                d27,
+                d28,
+                d29,
+                d3,
+                d30,
+                d31,
+                d32,
+                d4,
+                d5,
+                d6,
+                d7,
+                d8,
+                d9,
+                dwellts,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3561,12 +3667,14 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is FreeText && f1 == other.f1 && f2 == other.f2 && f3 == other.f3 && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is FreeText &&
+                f1 == other.f1 &&
+                f2 == other.f2 &&
+                f3 == other.f3 &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
         private val hashCode: Int by lazy { Objects.hash(f1, f2, f3, additionalProperties) }
-        /* spotless:on */
 
         override fun hashCode(): Int = hashCode
 
@@ -4980,12 +5088,17 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is H32 && h32_1 == other.h32_1 && h32_2 == other.h32_2 && h32_3 == other.h32_3 && h32_4 == other.h32_4 && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is H32 &&
+                    h32_1 == other.h32_1 &&
+                    h32_2 == other.h32_2 &&
+                    h32_3 == other.h32_3 &&
+                    h32_4 == other.h32_4 &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(h32_1, h32_2, h32_3, h32_4, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(h32_1, h32_2, h32_3, h32_4, additionalProperties)
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -4998,12 +5111,73 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Hrr && h10 == other.h10 && h11 == other.h11 && h12 == other.h12 && h13 == other.h13 && h14 == other.h14 && h15 == other.h15 && h16 == other.h16 && h17 == other.h17 && h18 == other.h18 && h19 == other.h19 && h2 == other.h2 && h20 == other.h20 && h21 == other.h21 && h22 == other.h22 && h23 == other.h23 && h24 == other.h24 && h27 == other.h27 && h28 == other.h28 && h29 == other.h29 && h3 == other.h3 && h30 == other.h30 && h31 == other.h31 && h32 == other.h32 && h4 == other.h4 && h5 == other.h5 && h6 == other.h6 && h7 == other.h7 && h8 == other.h8 && h9 == other.h9 && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Hrr &&
+                h10 == other.h10 &&
+                h11 == other.h11 &&
+                h12 == other.h12 &&
+                h13 == other.h13 &&
+                h14 == other.h14 &&
+                h15 == other.h15 &&
+                h16 == other.h16 &&
+                h17 == other.h17 &&
+                h18 == other.h18 &&
+                h19 == other.h19 &&
+                h2 == other.h2 &&
+                h20 == other.h20 &&
+                h21 == other.h21 &&
+                h22 == other.h22 &&
+                h23 == other.h23 &&
+                h24 == other.h24 &&
+                h27 == other.h27 &&
+                h28 == other.h28 &&
+                h29 == other.h29 &&
+                h3 == other.h3 &&
+                h30 == other.h30 &&
+                h31 == other.h31 &&
+                h32 == other.h32 &&
+                h4 == other.h4 &&
+                h5 == other.h5 &&
+                h6 == other.h6 &&
+                h7 == other.h7 &&
+                h8 == other.h8 &&
+                h9 == other.h9 &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(h10, h11, h12, h13, h14, h15, h16, h17, h18, h19, h2, h20, h21, h22, h23, h24, h27, h28, h29, h3, h30, h31, h32, h4, h5, h6, h7, h8, h9, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                h10,
+                h11,
+                h12,
+                h13,
+                h14,
+                h15,
+                h16,
+                h17,
+                h18,
+                h19,
+                h2,
+                h20,
+                h21,
+                h22,
+                h23,
+                h24,
+                h27,
+                h28,
+                h29,
+                h3,
+                h30,
+                h31,
+                h32,
+                h4,
+                h5,
+                h6,
+                h7,
+                h8,
+                h9,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -6195,12 +6369,71 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is JobDef && j1 == other.j1 && j10 == other.j10 && j11 == other.j11 && j12 == other.j12 && j13 == other.j13 && j14 == other.j14 && j15 == other.j15 && j16 == other.j16 && j17 == other.j17 && j18 == other.j18 && j19 == other.j19 && j2 == other.j2 && j20 == other.j20 && j21 == other.j21 && j22 == other.j22 && j23 == other.j23 && j24 == other.j24 && j25 == other.j25 && j26 == other.j26 && j27 == other.j27 && j28 == other.j28 && j3 == other.j3 && j4 == other.j4 && j5 == other.j5 && j6 == other.j6 && j7 == other.j7 && j8 == other.j8 && j9 == other.j9 && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is JobDef &&
+                j1 == other.j1 &&
+                j10 == other.j10 &&
+                j11 == other.j11 &&
+                j12 == other.j12 &&
+                j13 == other.j13 &&
+                j14 == other.j14 &&
+                j15 == other.j15 &&
+                j16 == other.j16 &&
+                j17 == other.j17 &&
+                j18 == other.j18 &&
+                j19 == other.j19 &&
+                j2 == other.j2 &&
+                j20 == other.j20 &&
+                j21 == other.j21 &&
+                j22 == other.j22 &&
+                j23 == other.j23 &&
+                j24 == other.j24 &&
+                j25 == other.j25 &&
+                j26 == other.j26 &&
+                j27 == other.j27 &&
+                j28 == other.j28 &&
+                j3 == other.j3 &&
+                j4 == other.j4 &&
+                j5 == other.j5 &&
+                j6 == other.j6 &&
+                j7 == other.j7 &&
+                j8 == other.j8 &&
+                j9 == other.j9 &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(j1, j10, j11, j12, j13, j14, j15, j16, j17, j18, j19, j2, j20, j21, j22, j23, j24, j25, j26, j27, j28, j3, j4, j5, j6, j7, j8, j9, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                j1,
+                j10,
+                j11,
+                j12,
+                j13,
+                j14,
+                j15,
+                j16,
+                j17,
+                j18,
+                j19,
+                j2,
+                j20,
+                j21,
+                j22,
+                j23,
+                j24,
+                j25,
+                j26,
+                j27,
+                j28,
+                j3,
+                j4,
+                j5,
+                j6,
+                j7,
+                j8,
+                j9,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -7118,12 +7351,57 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is JobRequest && jobReqEst == other.jobReqEst && r1 == other.r1 && r10 == other.r10 && r11 == other.r11 && r12 == other.r12 && r13 == other.r13 && r14 == other.r14 && r2 == other.r2 && r21 == other.r21 && r22 == other.r22 && r23 == other.r23 && r24 == other.r24 && r25 == other.r25 && r26 == other.r26 && r3 == other.r3 && r4 == other.r4 && r5 == other.r5 && r6 == other.r6 && r7 == other.r7 && r8 == other.r8 && r9 == other.r9 && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is JobRequest &&
+                jobReqEst == other.jobReqEst &&
+                r1 == other.r1 &&
+                r10 == other.r10 &&
+                r11 == other.r11 &&
+                r12 == other.r12 &&
+                r13 == other.r13 &&
+                r14 == other.r14 &&
+                r2 == other.r2 &&
+                r21 == other.r21 &&
+                r22 == other.r22 &&
+                r23 == other.r23 &&
+                r24 == other.r24 &&
+                r25 == other.r25 &&
+                r26 == other.r26 &&
+                r3 == other.r3 &&
+                r4 == other.r4 &&
+                r5 == other.r5 &&
+                r6 == other.r6 &&
+                r7 == other.r7 &&
+                r8 == other.r8 &&
+                r9 == other.r9 &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(jobReqEst, r1, r10, r11, r12, r13, r14, r2, r21, r22, r23, r24, r25, r26, r3, r4, r5, r6, r7, r8, r9, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                jobReqEst,
+                r1,
+                r10,
+                r11,
+                r12,
+                r13,
+                r14,
+                r2,
+                r21,
+                r22,
+                r23,
+                r24,
+                r25,
+                r26,
+                r3,
+                r4,
+                r5,
+                r6,
+                r7,
+                r8,
+                r9,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -7395,12 +7673,18 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Mission && m1 == other.m1 && m2 == other.m2 && m3 == other.m3 && m4 == other.m4 && msnRefTs == other.msnRefTs && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Mission &&
+                m1 == other.m1 &&
+                m2 == other.m2 &&
+                m3 == other.m3 &&
+                m4 == other.m4 &&
+                msnRefTs == other.msnRefTs &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(m1, m2, m3, m4, msnRefTs, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(m1, m2, m3, m4, msnRefTs, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -7814,12 +8098,21 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is PlatformLoc && l1 == other.l1 && l2 == other.l2 && l3 == other.l3 && l4 == other.l4 && l5 == other.l5 && l6 == other.l6 && l7 == other.l7 && platlocts == other.platlocts && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is PlatformLoc &&
+                l1 == other.l1 &&
+                l2 == other.l2 &&
+                l3 == other.l3 &&
+                l4 == other.l4 &&
+                l5 == other.l5 &&
+                l6 == other.l6 &&
+                l7 == other.l7 &&
+                platlocts == other.platlocts &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(l1, l2, l3, l4, l5, l6, l7, platlocts, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(l1, l2, l3, l4, l5, l6, l7, platlocts, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -7832,12 +8125,57 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is MtiFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && dwells == other.dwells && freeTexts == other.freeTexts && hrrs == other.hrrs && jobDefs == other.jobDefs && jobRequests == other.jobRequests && missions == other.missions && origin == other.origin && origNetwork == other.origNetwork && p10 == other.p10 && p3 == other.p3 && p6 == other.p6 && p7 == other.p7 && p8 == other.p8 && p9 == other.p9 && platformLocs == other.platformLocs && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is MtiFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            dwells == other.dwells &&
+            freeTexts == other.freeTexts &&
+            hrrs == other.hrrs &&
+            jobDefs == other.jobDefs &&
+            jobRequests == other.jobRequests &&
+            missions == other.missions &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            p10 == other.p10 &&
+            p3 == other.p3 &&
+            p6 == other.p6 &&
+            p7 == other.p7 &&
+            p8 == other.p8 &&
+            p9 == other.p9 &&
+            platformLocs == other.platformLocs &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, id, createdAt, createdBy, dwells, freeTexts, hrrs, jobDefs, jobRequests, missions, origin, origNetwork, p10, p3, p6, p7, p8, p9, platformLocs, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            id,
+            createdAt,
+            createdBy,
+            dwells,
+            freeTexts,
+            hrrs,
+            jobDefs,
+            jobRequests,
+            missions,
+            origin,
+            origNetwork,
+            p10,
+            p3,
+            p6,
+            p7,
+            p8,
+            p9,
+            platformLocs,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

@@ -234,10 +234,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is H3GeoHexCellListParams && idH3Geo == other.idH3Geo && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is H3GeoHexCellListParams &&
+            idH3Geo == other.idH3Geo &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(idH3Geo, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(idH3Geo, firstResult, maxResults, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "H3GeoHexCellListParams{idH3Geo=$idH3Geo, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

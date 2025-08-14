@@ -1655,7 +1655,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1668,12 +1668,85 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is RouteStatTupleResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && locationEnd == other.locationEnd && locationStart == other.locationStart && source == other.source && id == other.id && avgDuration == other.avgDuration && avgSpeed == other.avgSpeed && createdAt == other.createdAt && createdBy == other.createdBy && dataPtsUsed == other.dataPtsUsed && distance == other.distance && distUnit == other.distUnit && firstPt == other.firstPt && idealDesc == other.idealDesc && idealDuration == other.idealDuration && idSiteEnd == other.idSiteEnd && idSiteStart == other.idSiteStart && lastPt == other.lastPt && locationType == other.locationType && maxDuration == other.maxDuration && maxSpeed == other.maxSpeed && minDuration == other.minDuration && minSpeed == other.minSpeed && origin == other.origin && origNetwork == other.origNetwork && partialDesc == other.partialDesc && partialDuration == other.partialDuration && sourceDl == other.sourceDl && speedUnit == other.speedUnit && timePeriod == other.timePeriod && updatedAt == other.updatedAt && updatedBy == other.updatedBy && vehicleCategory == other.vehicleCategory && vehicleType == other.vehicleType && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is RouteStatTupleResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            locationEnd == other.locationEnd &&
+            locationStart == other.locationStart &&
+            source == other.source &&
+            id == other.id &&
+            avgDuration == other.avgDuration &&
+            avgSpeed == other.avgSpeed &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            dataPtsUsed == other.dataPtsUsed &&
+            distance == other.distance &&
+            distUnit == other.distUnit &&
+            firstPt == other.firstPt &&
+            idealDesc == other.idealDesc &&
+            idealDuration == other.idealDuration &&
+            idSiteEnd == other.idSiteEnd &&
+            idSiteStart == other.idSiteStart &&
+            lastPt == other.lastPt &&
+            locationType == other.locationType &&
+            maxDuration == other.maxDuration &&
+            maxSpeed == other.maxSpeed &&
+            minDuration == other.minDuration &&
+            minSpeed == other.minSpeed &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            partialDesc == other.partialDesc &&
+            partialDuration == other.partialDuration &&
+            sourceDl == other.sourceDl &&
+            speedUnit == other.speedUnit &&
+            timePeriod == other.timePeriod &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            vehicleCategory == other.vehicleCategory &&
+            vehicleType == other.vehicleType &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, locationEnd, locationStart, source, id, avgDuration, avgSpeed, createdAt, createdBy, dataPtsUsed, distance, distUnit, firstPt, idealDesc, idealDuration, idSiteEnd, idSiteStart, lastPt, locationType, maxDuration, maxSpeed, minDuration, minSpeed, origin, origNetwork, partialDesc, partialDuration, sourceDl, speedUnit, timePeriod, updatedAt, updatedBy, vehicleCategory, vehicleType, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            locationEnd,
+            locationStart,
+            source,
+            id,
+            avgDuration,
+            avgSpeed,
+            createdAt,
+            createdBy,
+            dataPtsUsed,
+            distance,
+            distUnit,
+            firstPt,
+            idealDesc,
+            idealDuration,
+            idSiteEnd,
+            idSiteStart,
+            lastPt,
+            locationType,
+            maxDuration,
+            maxSpeed,
+            minDuration,
+            minSpeed,
+            origin,
+            origNetwork,
+            partialDesc,
+            partialDuration,
+            sourceDl,
+            speedUnit,
+            timePeriod,
+            updatedAt,
+            updatedBy,
+            vehicleCategory,
+            vehicleType,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

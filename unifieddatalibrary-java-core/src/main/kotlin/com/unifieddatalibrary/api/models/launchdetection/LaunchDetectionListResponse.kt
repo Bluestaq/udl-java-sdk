@@ -1347,7 +1347,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1360,12 +1360,67 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LaunchDetectionListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && messageType == other.messageType && observationLatitude == other.observationLatitude && observationLongitude == other.observationLongitude && observationTime == other.observationTime && sequenceNumber == other.sequenceNumber && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && descriptor == other.descriptor && eventId == other.eventId && highZenithAzimuth == other.highZenithAzimuth && inclination == other.inclination && launchAzimuth == other.launchAzimuth && launchLatitude == other.launchLatitude && launchLongitude == other.launchLongitude && launchTime == other.launchTime && observationAltitude == other.observationAltitude && origin == other.origin && origNetwork == other.origNetwork && raan == other.raan && stereoFlag == other.stereoFlag && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is LaunchDetectionListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            messageType == other.messageType &&
+            observationLatitude == other.observationLatitude &&
+            observationLongitude == other.observationLongitude &&
+            observationTime == other.observationTime &&
+            sequenceNumber == other.sequenceNumber &&
+            source == other.source &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            descriptor == other.descriptor &&
+            eventId == other.eventId &&
+            highZenithAzimuth == other.highZenithAzimuth &&
+            inclination == other.inclination &&
+            launchAzimuth == other.launchAzimuth &&
+            launchLatitude == other.launchLatitude &&
+            launchLongitude == other.launchLongitude &&
+            launchTime == other.launchTime &&
+            observationAltitude == other.observationAltitude &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            raan == other.raan &&
+            stereoFlag == other.stereoFlag &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, messageType, observationLatitude, observationLongitude, observationTime, sequenceNumber, source, id, createdAt, createdBy, descriptor, eventId, highZenithAzimuth, inclination, launchAzimuth, launchLatitude, launchLongitude, launchTime, observationAltitude, origin, origNetwork, raan, stereoFlag, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            messageType,
+            observationLatitude,
+            observationLongitude,
+            observationTime,
+            sequenceNumber,
+            source,
+            id,
+            createdAt,
+            createdBy,
+            descriptor,
+            eventId,
+            highZenithAzimuth,
+            inclination,
+            launchAzimuth,
+            launchLatitude,
+            launchLongitude,
+            launchTime,
+            observationAltitude,
+            origin,
+            origNetwork,
+            raan,
+            stereoFlag,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

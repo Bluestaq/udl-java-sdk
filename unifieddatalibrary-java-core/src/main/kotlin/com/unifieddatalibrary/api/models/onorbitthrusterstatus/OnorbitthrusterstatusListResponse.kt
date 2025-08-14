@@ -1217,7 +1217,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1230,12 +1230,63 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OnorbitthrusterstatusListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idOnorbitThruster == other.idOnorbitThruster && source == other.source && statusTime == other.statusTime && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && estDeltaV == other.estDeltaV && fuelMass == other.fuelMass && fuelMassUnc == other.fuelMassUnc && isp == other.isp && maxDeltaV == other.maxDeltaV && minDeltaV == other.minDeltaV && name == other.name && operational == other.operational && origin == other.origin && origNetwork == other.origNetwork && propMassAvg == other.propMassAvg && propMassMax == other.propMassMax && propMassMedian == other.propMassMedian && propMassMin == other.propMassMin && thrustMax == other.thrustMax && totalDeltaV == other.totalDeltaV && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is OnorbitthrusterstatusListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idOnorbitThruster == other.idOnorbitThruster &&
+            source == other.source &&
+            statusTime == other.statusTime &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            estDeltaV == other.estDeltaV &&
+            fuelMass == other.fuelMass &&
+            fuelMassUnc == other.fuelMassUnc &&
+            isp == other.isp &&
+            maxDeltaV == other.maxDeltaV &&
+            minDeltaV == other.minDeltaV &&
+            name == other.name &&
+            operational == other.operational &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            propMassAvg == other.propMassAvg &&
+            propMassMax == other.propMassMax &&
+            propMassMedian == other.propMassMedian &&
+            propMassMin == other.propMassMin &&
+            thrustMax == other.thrustMax &&
+            totalDeltaV == other.totalDeltaV &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idOnorbitThruster, source, statusTime, id, createdAt, createdBy, estDeltaV, fuelMass, fuelMassUnc, isp, maxDeltaV, minDeltaV, name, operational, origin, origNetwork, propMassAvg, propMassMax, propMassMedian, propMassMin, thrustMax, totalDeltaV, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idOnorbitThruster,
+            source,
+            statusTime,
+            id,
+            createdAt,
+            createdBy,
+            estDeltaV,
+            fuelMass,
+            fuelMassUnc,
+            isp,
+            maxDeltaV,
+            minDeltaV,
+            name,
+            operational,
+            origin,
+            origNetwork,
+            propMassAvg,
+            propMassMax,
+            propMassMedian,
+            propMassMin,
+            thrustMax,
+            totalDeltaV,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

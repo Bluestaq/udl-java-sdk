@@ -1703,7 +1703,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -1716,12 +1716,73 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && eventId == other.eventId && source == other.source && startTime == other.startTime && summary == other.summary && id == other.id && agjson == other.agjson && andims == other.andims && area == other.area && asrid == other.asrid && atext == other.atext && atype == other.atype && category == other.category && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && dataDescription == other.dataDescription && endTime == other.endTime && geoAdminLevel1 == other.geoAdminLevel1 && geoAdminLevel2 == other.geoAdminLevel2 && geoAdminLevel3 == other.geoAdminLevel3 && origin == other.origin && origNetwork == other.origNetwork && redact == other.redact && srcIds == other.srcIds && srcTyps == other.srcTyps && status == other.status && tags == other.tags && url == other.url /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                eventId == other.eventId &&
+                source == other.source &&
+                startTime == other.startTime &&
+                summary == other.summary &&
+                id == other.id &&
+                agjson == other.agjson &&
+                andims == other.andims &&
+                area == other.area &&
+                asrid == other.asrid &&
+                atext == other.atext &&
+                atype == other.atype &&
+                category == other.category &&
+                countryCode == other.countryCode &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                dataDescription == other.dataDescription &&
+                endTime == other.endTime &&
+                geoAdminLevel1 == other.geoAdminLevel1 &&
+                geoAdminLevel2 == other.geoAdminLevel2 &&
+                geoAdminLevel3 == other.geoAdminLevel3 &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                redact == other.redact &&
+                srcIds == other.srcIds &&
+                srcTyps == other.srcTyps &&
+                status == other.status &&
+                tags == other.tags &&
+                url == other.url
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, eventId, source, startTime, summary, id, agjson, andims, area, asrid, atext, atype, category, countryCode, createdAt, createdBy, dataDescription, endTime, geoAdminLevel1, geoAdminLevel2, geoAdminLevel3, origin, origNetwork, redact, srcIds, srcTyps, status, tags, url) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                eventId,
+                source,
+                startTime,
+                summary,
+                id,
+                agjson,
+                andims,
+                area,
+                asrid,
+                atext,
+                atype,
+                category,
+                countryCode,
+                createdAt,
+                createdBy,
+                dataDescription,
+                endTime,
+                geoAdminLevel1,
+                geoAdminLevel2,
+                geoAdminLevel3,
+                origin,
+                origNetwork,
+                redact,
+                srcIds,
+                srcTyps,
+                status,
+                tags,
+                url,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1734,10 +1795,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EventEvolutionUnvalidatedPublishParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is EventEvolutionUnvalidatedPublishParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "EventEvolutionUnvalidatedPublishParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

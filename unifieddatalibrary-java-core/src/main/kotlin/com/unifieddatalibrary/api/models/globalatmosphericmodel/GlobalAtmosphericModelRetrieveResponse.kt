@@ -1347,7 +1347,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1360,12 +1360,71 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GlobalAtmosphericModelRetrieveResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && ts == other.ts && type == other.type && id == other.id && cadence == other.cadence && checksumValue == other.checksumValue && createdAt == other.createdAt && createdBy == other.createdBy && endAlt == other.endAlt && endLat == other.endLat && endLon == other.endLon && filename == other.filename && filesize == other.filesize && numAlt == other.numAlt && numLat == other.numLat && numLon == other.numLon && origin == other.origin && origNetwork == other.origNetwork && reportTime == other.reportTime && sourceDl == other.sourceDl && startAlt == other.startAlt && startLat == other.startLat && startLon == other.startLon && state == other.state && stepLat == other.stepLat && stepLon == other.stepLon && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is GlobalAtmosphericModelRetrieveResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            ts == other.ts &&
+            type == other.type &&
+            id == other.id &&
+            cadence == other.cadence &&
+            checksumValue == other.checksumValue &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            endAlt == other.endAlt &&
+            endLat == other.endLat &&
+            endLon == other.endLon &&
+            filename == other.filename &&
+            filesize == other.filesize &&
+            numAlt == other.numAlt &&
+            numLat == other.numLat &&
+            numLon == other.numLon &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            reportTime == other.reportTime &&
+            sourceDl == other.sourceDl &&
+            startAlt == other.startAlt &&
+            startLat == other.startLat &&
+            startLon == other.startLon &&
+            state == other.state &&
+            stepLat == other.stepLat &&
+            stepLon == other.stepLon &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, ts, type, id, cadence, checksumValue, createdAt, createdBy, endAlt, endLat, endLon, filename, filesize, numAlt, numLat, numLon, origin, origNetwork, reportTime, sourceDl, startAlt, startLat, startLon, state, stepLat, stepLon, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            ts,
+            type,
+            id,
+            cadence,
+            checksumValue,
+            createdAt,
+            createdBy,
+            endAlt,
+            endLat,
+            endLon,
+            filename,
+            filesize,
+            numAlt,
+            numLat,
+            numLon,
+            origin,
+            origNetwork,
+            reportTime,
+            sourceDl,
+            startAlt,
+            startLat,
+            startLon,
+            state,
+            stepLat,
+            stepLon,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

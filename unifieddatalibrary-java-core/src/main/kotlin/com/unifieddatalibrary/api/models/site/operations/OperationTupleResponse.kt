@@ -1433,7 +1433,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1446,12 +1446,65 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OperationTupleResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSite == other.idSite && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && dailyOperations == other.dailyOperations && dopsLastChangedBy == other.dopsLastChangedBy && dopsLastChangedDate == other.dopsLastChangedDate && dopsLastChangedReason == other.dopsLastChangedReason && idLaunchSite == other.idLaunchSite && maximumOnGrounds == other.maximumOnGrounds && mogsLastChangedBy == other.mogsLastChangedBy && mogsLastChangedDate == other.mogsLastChangedDate && mogsLastChangedReason == other.mogsLastChangedReason && operationalDeviations == other.operationalDeviations && operationalPlannings == other.operationalPlannings && origin == other.origin && origNetwork == other.origNetwork && pathways == other.pathways && sourceDl == other.sourceDl && updatedAt == other.updatedAt && updatedBy == other.updatedBy && waivers == other.waivers && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is OperationTupleResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idSite == other.idSite &&
+            source == other.source &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            dailyOperations == other.dailyOperations &&
+            dopsLastChangedBy == other.dopsLastChangedBy &&
+            dopsLastChangedDate == other.dopsLastChangedDate &&
+            dopsLastChangedReason == other.dopsLastChangedReason &&
+            idLaunchSite == other.idLaunchSite &&
+            maximumOnGrounds == other.maximumOnGrounds &&
+            mogsLastChangedBy == other.mogsLastChangedBy &&
+            mogsLastChangedDate == other.mogsLastChangedDate &&
+            mogsLastChangedReason == other.mogsLastChangedReason &&
+            operationalDeviations == other.operationalDeviations &&
+            operationalPlannings == other.operationalPlannings &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            pathways == other.pathways &&
+            sourceDl == other.sourceDl &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            waivers == other.waivers &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSite, source, id, createdAt, createdBy, dailyOperations, dopsLastChangedBy, dopsLastChangedDate, dopsLastChangedReason, idLaunchSite, maximumOnGrounds, mogsLastChangedBy, mogsLastChangedDate, mogsLastChangedReason, operationalDeviations, operationalPlannings, origin, origNetwork, pathways, sourceDl, updatedAt, updatedBy, waivers, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idSite,
+            source,
+            id,
+            createdAt,
+            createdBy,
+            dailyOperations,
+            dopsLastChangedBy,
+            dopsLastChangedDate,
+            dopsLastChangedReason,
+            idLaunchSite,
+            maximumOnGrounds,
+            mogsLastChangedBy,
+            mogsLastChangedDate,
+            mogsLastChangedReason,
+            operationalDeviations,
+            operationalPlannings,
+            origin,
+            origNetwork,
+            pathways,
+            sourceDl,
+            updatedAt,
+            updatedBy,
+            waivers,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

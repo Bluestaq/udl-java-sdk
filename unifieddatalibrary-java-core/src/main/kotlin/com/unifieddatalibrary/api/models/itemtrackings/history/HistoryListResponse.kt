@@ -1151,7 +1151,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1164,12 +1164,59 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HistoryListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && scanCode == other.scanCode && scannerId == other.scannerId && source == other.source && ts == other.ts && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && dvCode == other.dvCode && idItem == other.idItem && keys == other.keys && lat == other.lat && lon == other.lon && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && scanType == other.scanType && scGenTool == other.scGenTool && sourceDl == other.sourceDl && type == other.type && values == other.values && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is HistoryListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            scanCode == other.scanCode &&
+            scannerId == other.scannerId &&
+            source == other.source &&
+            ts == other.ts &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            dvCode == other.dvCode &&
+            idItem == other.idItem &&
+            keys == other.keys &&
+            lat == other.lat &&
+            lon == other.lon &&
+            notes == other.notes &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            scanType == other.scanType &&
+            scGenTool == other.scGenTool &&
+            sourceDl == other.sourceDl &&
+            type == other.type &&
+            values == other.values &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, scanCode, scannerId, source, ts, id, createdAt, createdBy, dvCode, idItem, keys, lat, lon, notes, origin, origNetwork, scanType, scGenTool, sourceDl, type, values, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            scanCode,
+            scannerId,
+            source,
+            ts,
+            id,
+            createdAt,
+            createdBy,
+            dvCode,
+            idItem,
+            keys,
+            lat,
+            lon,
+            notes,
+            origin,
+            origNetwork,
+            scanType,
+            scGenTool,
+            sourceDl,
+            type,
+            values,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

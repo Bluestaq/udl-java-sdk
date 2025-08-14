@@ -474,7 +474,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -625,7 +625,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is EphemFormatType && value == other.value /* spotless:on */
+            return other is EphemFormatType && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -638,10 +638,38 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EphemerisFileUploadParams && category == other.category && classification == other.classification && dataMode == other.dataMode && ephemFormatType == other.ephemFormatType && hasMnvr == other.hasMnvr && satNo == other.satNo && source == other.source && type == other.type && origin == other.origin && tags == other.tags && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is EphemerisFileUploadParams &&
+            category == other.category &&
+            classification == other.classification &&
+            dataMode == other.dataMode &&
+            ephemFormatType == other.ephemFormatType &&
+            hasMnvr == other.hasMnvr &&
+            satNo == other.satNo &&
+            source == other.source &&
+            type == other.type &&
+            origin == other.origin &&
+            tags == other.tags &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(category, classification, dataMode, ephemFormatType, hasMnvr, satNo, source, type, origin, tags, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            category,
+            classification,
+            dataMode,
+            ephemFormatType,
+            hasMnvr,
+            satNo,
+            source,
+            type,
+            origin,
+            tags,
+            body,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "EphemerisFileUploadParams{category=$category, classification=$classification, dataMode=$dataMode, ephemFormatType=$ephemFormatType, hasMnvr=$hasMnvr, satNo=$satNo, source=$source, type=$type, origin=$origin, tags=$tags, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

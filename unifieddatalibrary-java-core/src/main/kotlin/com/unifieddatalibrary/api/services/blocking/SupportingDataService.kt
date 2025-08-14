@@ -5,9 +5,6 @@ package com.unifieddatalibrary.api.services.blocking
 import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.services.blocking.supportingdata.DataTypeService
 import com.unifieddatalibrary.api.services.blocking.supportingdata.DataownerService
-import com.unifieddatalibrary.api.services.blocking.supportingdata.DataownerTypeService
-import com.unifieddatalibrary.api.services.blocking.supportingdata.ProviderMetadataService
-import com.unifieddatalibrary.api.services.blocking.supportingdata.QueryHelpService
 import java.util.function.Consumer
 
 interface SupportingDataService {
@@ -28,12 +25,6 @@ interface SupportingDataService {
 
     fun dataowner(): DataownerService
 
-    fun dataownerTypes(): DataownerTypeService
-
-    fun providerMetadata(): ProviderMetadataService
-
-    fun queryHelp(): QueryHelpService
-
     /**
      * A view of [SupportingDataService] that provides access to raw HTTP responses for each method.
      */
@@ -51,11 +42,5 @@ interface SupportingDataService {
         fun dataTypes(): DataTypeService.WithRawResponse
 
         fun dataowner(): DataownerService.WithRawResponse
-
-        fun dataownerTypes(): DataownerTypeService.WithRawResponse
-
-        fun providerMetadata(): ProviderMetadataService.WithRawResponse
-
-        fun queryHelp(): QueryHelpService.WithRawResponse
     }
 }

@@ -163,10 +163,12 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is TransponderQueryhelpParams && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is TransponderQueryhelpParams &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "TransponderQueryhelpParams{additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

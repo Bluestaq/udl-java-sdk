@@ -100,10 +100,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is FlightplanListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+        return other is FlightplanListPage &&
+            service == other.service &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, params, items)
 
     override fun toString() = "FlightplanListPage{service=$service, params=$params, items=$items}"
 }

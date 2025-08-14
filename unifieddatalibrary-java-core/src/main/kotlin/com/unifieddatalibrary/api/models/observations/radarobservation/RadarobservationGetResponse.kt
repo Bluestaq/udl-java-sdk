@@ -2990,7 +2990,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3152,7 +3152,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SenReferenceFrame && value == other.value /* spotless:on */
+            return other is SenReferenceFrame && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3165,12 +3165,151 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is RadarobservationGetResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && obTime == other.obTime && source == other.source && id == other.id && azimuth == other.azimuth && azimuthBias == other.azimuthBias && azimuthMeasured == other.azimuthMeasured && azimuthRate == other.azimuthRate && azimuthUnc == other.azimuthUnc && beam == other.beam && createdAt == other.createdAt && createdBy == other.createdBy && declination == other.declination && declinationMeasured == other.declinationMeasured && descriptor == other.descriptor && doppler == other.doppler && dopplerUnc == other.dopplerUnc && elevation == other.elevation && elevationBias == other.elevationBias && elevationMeasured == other.elevationMeasured && elevationRate == other.elevationRate && elevationUnc == other.elevationUnc && idOnOrbit == other.idOnOrbit && idSensor == other.idSensor && obPosition == other.obPosition && onOrbit == other.onOrbit && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId == other.origSensorId && orthogonalRcs == other.orthogonalRcs && orthogonalRcsUnc == other.orthogonalRcsUnc && ra == other.ra && raMeasured == other.raMeasured && range == other.range && rangeAccel == other.rangeAccel && rangeAccelUnc == other.rangeAccelUnc && rangeBias == other.rangeBias && rangeMeasured == other.rangeMeasured && rangeRate == other.rangeRate && rangeRateMeasured == other.rangeRateMeasured && rangeRateUnc == other.rangeRateUnc && rangeUnc == other.rangeUnc && rawFileUri == other.rawFileUri && rcs == other.rcs && rcsUnc == other.rcsUnc && satNo == other.satNo && senReferenceFrame == other.senReferenceFrame && senx == other.senx && seny == other.seny && senz == other.senz && snr == other.snr && sourceDl == other.sourceDl && tags == other.tags && taskId == other.taskId && timingBias == other.timingBias && trackId == other.trackId && trackingState == other.trackingState && transactionId == other.transactionId && type == other.type && uct == other.uct && x == other.x && xvel == other.xvel && y == other.y && yvel == other.yvel && z == other.z && zvel == other.zvel && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is RadarobservationGetResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            obTime == other.obTime &&
+            source == other.source &&
+            id == other.id &&
+            azimuth == other.azimuth &&
+            azimuthBias == other.azimuthBias &&
+            azimuthMeasured == other.azimuthMeasured &&
+            azimuthRate == other.azimuthRate &&
+            azimuthUnc == other.azimuthUnc &&
+            beam == other.beam &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            declination == other.declination &&
+            declinationMeasured == other.declinationMeasured &&
+            descriptor == other.descriptor &&
+            doppler == other.doppler &&
+            dopplerUnc == other.dopplerUnc &&
+            elevation == other.elevation &&
+            elevationBias == other.elevationBias &&
+            elevationMeasured == other.elevationMeasured &&
+            elevationRate == other.elevationRate &&
+            elevationUnc == other.elevationUnc &&
+            idOnOrbit == other.idOnOrbit &&
+            idSensor == other.idSensor &&
+            obPosition == other.obPosition &&
+            onOrbit == other.onOrbit &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            origSensorId == other.origSensorId &&
+            orthogonalRcs == other.orthogonalRcs &&
+            orthogonalRcsUnc == other.orthogonalRcsUnc &&
+            ra == other.ra &&
+            raMeasured == other.raMeasured &&
+            range == other.range &&
+            rangeAccel == other.rangeAccel &&
+            rangeAccelUnc == other.rangeAccelUnc &&
+            rangeBias == other.rangeBias &&
+            rangeMeasured == other.rangeMeasured &&
+            rangeRate == other.rangeRate &&
+            rangeRateMeasured == other.rangeRateMeasured &&
+            rangeRateUnc == other.rangeRateUnc &&
+            rangeUnc == other.rangeUnc &&
+            rawFileUri == other.rawFileUri &&
+            rcs == other.rcs &&
+            rcsUnc == other.rcsUnc &&
+            satNo == other.satNo &&
+            senReferenceFrame == other.senReferenceFrame &&
+            senx == other.senx &&
+            seny == other.seny &&
+            senz == other.senz &&
+            snr == other.snr &&
+            sourceDl == other.sourceDl &&
+            tags == other.tags &&
+            taskId == other.taskId &&
+            timingBias == other.timingBias &&
+            trackId == other.trackId &&
+            trackingState == other.trackingState &&
+            transactionId == other.transactionId &&
+            type == other.type &&
+            uct == other.uct &&
+            x == other.x &&
+            xvel == other.xvel &&
+            y == other.y &&
+            yvel == other.yvel &&
+            z == other.z &&
+            zvel == other.zvel &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, obTime, source, id, azimuth, azimuthBias, azimuthMeasured, azimuthRate, azimuthUnc, beam, createdAt, createdBy, declination, declinationMeasured, descriptor, doppler, dopplerUnc, elevation, elevationBias, elevationMeasured, elevationRate, elevationUnc, idOnOrbit, idSensor, obPosition, onOrbit, origin, origNetwork, origObjectId, origSensorId, orthogonalRcs, orthogonalRcsUnc, ra, raMeasured, range, rangeAccel, rangeAccelUnc, rangeBias, rangeMeasured, rangeRate, rangeRateMeasured, rangeRateUnc, rangeUnc, rawFileUri, rcs, rcsUnc, satNo, senReferenceFrame, senx, seny, senz, snr, sourceDl, tags, taskId, timingBias, trackId, trackingState, transactionId, type, uct, x, xvel, y, yvel, z, zvel, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            obTime,
+            source,
+            id,
+            azimuth,
+            azimuthBias,
+            azimuthMeasured,
+            azimuthRate,
+            azimuthUnc,
+            beam,
+            createdAt,
+            createdBy,
+            declination,
+            declinationMeasured,
+            descriptor,
+            doppler,
+            dopplerUnc,
+            elevation,
+            elevationBias,
+            elevationMeasured,
+            elevationRate,
+            elevationUnc,
+            idOnOrbit,
+            idSensor,
+            obPosition,
+            onOrbit,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            orthogonalRcs,
+            orthogonalRcsUnc,
+            ra,
+            raMeasured,
+            range,
+            rangeAccel,
+            rangeAccelUnc,
+            rangeBias,
+            rangeMeasured,
+            rangeRate,
+            rangeRateMeasured,
+            rangeRateUnc,
+            rangeUnc,
+            rawFileUri,
+            rcs,
+            rcsUnc,
+            satNo,
+            senReferenceFrame,
+            senx,
+            seny,
+            senz,
+            snr,
+            sourceDl,
+            tags,
+            taskId,
+            timingBias,
+            trackId,
+            trackingState,
+            transactionId,
+            type,
+            uct,
+            x,
+            xvel,
+            y,
+            yvel,
+            z,
+            zvel,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

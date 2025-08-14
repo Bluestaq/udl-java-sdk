@@ -1599,12 +1599,49 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSolarArray == other.idSolarArray && source == other.source && id == other.id && area == other.area && createdAt == other.createdAt && createdBy == other.createdBy && description == other.description && junctionTechnology == other.junctionTechnology && manufacturerOrgId == other.manufacturerOrgId && origin == other.origin && origNetwork == other.origNetwork && span == other.span && tags == other.tags && technology == other.technology && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idSolarArray == other.idSolarArray &&
+                source == other.source &&
+                id == other.id &&
+                area == other.area &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                description == other.description &&
+                junctionTechnology == other.junctionTechnology &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                span == other.span &&
+                tags == other.tags &&
+                technology == other.technology &&
+                type == other.type &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSolarArray, source, id, area, createdAt, createdBy, description, junctionTechnology, manufacturerOrgId, origin, origNetwork, span, tags, technology, type, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idSolarArray,
+                source,
+                id,
+                area,
+                createdAt,
+                createdBy,
+                description,
+                junctionTechnology,
+                manufacturerOrgId,
+                origin,
+                origNetwork,
+                span,
+                tags,
+                technology,
+                type,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1757,7 +1794,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1770,10 +1807,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SolarArrayDetailCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SolarArrayDetailCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SolarArrayDetailCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

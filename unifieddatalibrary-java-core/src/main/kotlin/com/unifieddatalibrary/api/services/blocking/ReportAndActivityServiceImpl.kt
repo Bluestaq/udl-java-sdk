@@ -3,12 +3,12 @@
 package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.core.ClientOptions
-import com.unifieddatalibrary.api.services.blocking.reportandactivity.PoiService
-import com.unifieddatalibrary.api.services.blocking.reportandactivity.PoiServiceImpl
-import com.unifieddatalibrary.api.services.blocking.reportandactivity.UdlH3geoService
-import com.unifieddatalibrary.api.services.blocking.reportandactivity.UdlH3geoServiceImpl
-import com.unifieddatalibrary.api.services.blocking.reportandactivity.UdlSigactService
-import com.unifieddatalibrary.api.services.blocking.reportandactivity.UdlSigactServiceImpl
+import com.unifieddatalibrary.api.services.blocking.reportandactivities.PoiService
+import com.unifieddatalibrary.api.services.blocking.reportandactivities.PoiServiceImpl
+import com.unifieddatalibrary.api.services.blocking.reportandactivities.UdlH3geoService
+import com.unifieddatalibrary.api.services.blocking.reportandactivities.UdlH3geoServiceImpl
+import com.unifieddatalibrary.api.services.blocking.reportandactivities.UdlSigactService
+import com.unifieddatalibrary.api.services.blocking.reportandactivities.UdlSigactServiceImpl
 import java.util.function.Consumer
 
 class ReportAndActivityServiceImpl internal constructor(private val clientOptions: ClientOptions) :

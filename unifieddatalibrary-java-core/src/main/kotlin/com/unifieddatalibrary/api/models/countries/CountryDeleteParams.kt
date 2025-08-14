@@ -218,10 +218,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CountryDeleteParams && code == other.code && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams && additionalBodyProperties == other.additionalBodyProperties /* spotless:on */
+        return other is CountryDeleteParams &&
+            code == other.code &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams &&
+            additionalBodyProperties == other.additionalBodyProperties
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(code, additionalHeaders, additionalQueryParams, additionalBodyProperties) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(code, additionalHeaders, additionalQueryParams, additionalBodyProperties)
 
     override fun toString() =
         "CountryDeleteParams{code=$code, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams, additionalBodyProperties=$additionalBodyProperties}"

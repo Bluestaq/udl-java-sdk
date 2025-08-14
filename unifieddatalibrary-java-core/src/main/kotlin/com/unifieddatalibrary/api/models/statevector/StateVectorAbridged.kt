@@ -4300,7 +4300,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4456,7 +4456,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is CovReferenceFrame && value == other.value /* spotless:on */
+            return other is CovReferenceFrame && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4616,7 +4616,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is ReferenceFrame && value == other.value /* spotless:on */
+            return other is ReferenceFrame && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4629,12 +4629,205 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is StateVectorAbridged && classificationMarking == other.classificationMarking && dataMode == other.dataMode && epoch == other.epoch && source == other.source && actualOdSpan == other.actualOdSpan && algorithm == other.algorithm && alt1ReferenceFrame == other.alt1ReferenceFrame && alt2ReferenceFrame == other.alt2ReferenceFrame && area == other.area && bDot == other.bDot && cmOffset == other.cmOffset && cov == other.cov && covMethod == other.covMethod && covReferenceFrame == other.covReferenceFrame && createdAt == other.createdAt && createdBy == other.createdBy && descriptor == other.descriptor && dragArea == other.dragArea && dragCoeff == other.dragCoeff && dragModel == other.dragModel && edr == other.edr && eqCov == other.eqCov && errorControl == other.errorControl && fixedStep == other.fixedStep && geopotentialModel == other.geopotentialModel && iau1980Terms == other.iau1980Terms && idOnOrbit == other.idOnOrbit && idOrbitDetermination == other.idOrbitDetermination && idStateVector == other.idStateVector && integratorMode == other.integratorMode && inTrackThrust == other.inTrackThrust && lastObEnd == other.lastObEnd && lastObStart == other.lastObStart && leapSecondTime == other.leapSecondTime && lunarSolar == other.lunarSolar && mass == other.mass && obsAvailable == other.obsAvailable && obsUsed == other.obsUsed && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && partials == other.partials && pedigree == other.pedigree && polarMotionX == other.polarMotionX && polarMotionY == other.polarMotionY && posUnc == other.posUnc && recOdSpan == other.recOdSpan && referenceFrame == other.referenceFrame && residualsAcc == other.residualsAcc && revNo == other.revNo && rms == other.rms && satNo == other.satNo && sigmaPosUvw == other.sigmaPosUvw && sigmaVelUvw == other.sigmaVelUvw && solarFluxApAvg == other.solarFluxApAvg && solarFluxF10 == other.solarFluxF10 && solarFluxF10Avg == other.solarFluxF10Avg && solarRadPress == other.solarRadPress && solarRadPressCoeff == other.solarRadPressCoeff && solidEarthTides == other.solidEarthTides && sourceDl == other.sourceDl && srpArea == other.srpArea && stepMode == other.stepMode && stepSize == other.stepSize && stepSizeSelection == other.stepSizeSelection && taiUtc == other.taiUtc && thrustAccel == other.thrustAccel && tracksAvail == other.tracksAvail && tracksUsed == other.tracksUsed && transactionId == other.transactionId && uct == other.uct && ut1Rate == other.ut1Rate && ut1Utc == other.ut1Utc && velUnc == other.velUnc && xaccel == other.xaccel && xpos == other.xpos && xposAlt1 == other.xposAlt1 && xposAlt2 == other.xposAlt2 && xvel == other.xvel && xvelAlt1 == other.xvelAlt1 && xvelAlt2 == other.xvelAlt2 && yaccel == other.yaccel && ypos == other.ypos && yposAlt1 == other.yposAlt1 && yposAlt2 == other.yposAlt2 && yvel == other.yvel && yvelAlt1 == other.yvelAlt1 && yvelAlt2 == other.yvelAlt2 && zaccel == other.zaccel && zpos == other.zpos && zposAlt1 == other.zposAlt1 && zposAlt2 == other.zposAlt2 && zvel == other.zvel && zvelAlt1 == other.zvelAlt1 && zvelAlt2 == other.zvelAlt2 && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is StateVectorAbridged &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            epoch == other.epoch &&
+            source == other.source &&
+            actualOdSpan == other.actualOdSpan &&
+            algorithm == other.algorithm &&
+            alt1ReferenceFrame == other.alt1ReferenceFrame &&
+            alt2ReferenceFrame == other.alt2ReferenceFrame &&
+            area == other.area &&
+            bDot == other.bDot &&
+            cmOffset == other.cmOffset &&
+            cov == other.cov &&
+            covMethod == other.covMethod &&
+            covReferenceFrame == other.covReferenceFrame &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            descriptor == other.descriptor &&
+            dragArea == other.dragArea &&
+            dragCoeff == other.dragCoeff &&
+            dragModel == other.dragModel &&
+            edr == other.edr &&
+            eqCov == other.eqCov &&
+            errorControl == other.errorControl &&
+            fixedStep == other.fixedStep &&
+            geopotentialModel == other.geopotentialModel &&
+            iau1980Terms == other.iau1980Terms &&
+            idOnOrbit == other.idOnOrbit &&
+            idOrbitDetermination == other.idOrbitDetermination &&
+            idStateVector == other.idStateVector &&
+            integratorMode == other.integratorMode &&
+            inTrackThrust == other.inTrackThrust &&
+            lastObEnd == other.lastObEnd &&
+            lastObStart == other.lastObStart &&
+            leapSecondTime == other.leapSecondTime &&
+            lunarSolar == other.lunarSolar &&
+            mass == other.mass &&
+            obsAvailable == other.obsAvailable &&
+            obsUsed == other.obsUsed &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            partials == other.partials &&
+            pedigree == other.pedigree &&
+            polarMotionX == other.polarMotionX &&
+            polarMotionY == other.polarMotionY &&
+            posUnc == other.posUnc &&
+            recOdSpan == other.recOdSpan &&
+            referenceFrame == other.referenceFrame &&
+            residualsAcc == other.residualsAcc &&
+            revNo == other.revNo &&
+            rms == other.rms &&
+            satNo == other.satNo &&
+            sigmaPosUvw == other.sigmaPosUvw &&
+            sigmaVelUvw == other.sigmaVelUvw &&
+            solarFluxApAvg == other.solarFluxApAvg &&
+            solarFluxF10 == other.solarFluxF10 &&
+            solarFluxF10Avg == other.solarFluxF10Avg &&
+            solarRadPress == other.solarRadPress &&
+            solarRadPressCoeff == other.solarRadPressCoeff &&
+            solidEarthTides == other.solidEarthTides &&
+            sourceDl == other.sourceDl &&
+            srpArea == other.srpArea &&
+            stepMode == other.stepMode &&
+            stepSize == other.stepSize &&
+            stepSizeSelection == other.stepSizeSelection &&
+            taiUtc == other.taiUtc &&
+            thrustAccel == other.thrustAccel &&
+            tracksAvail == other.tracksAvail &&
+            tracksUsed == other.tracksUsed &&
+            transactionId == other.transactionId &&
+            uct == other.uct &&
+            ut1Rate == other.ut1Rate &&
+            ut1Utc == other.ut1Utc &&
+            velUnc == other.velUnc &&
+            xaccel == other.xaccel &&
+            xpos == other.xpos &&
+            xposAlt1 == other.xposAlt1 &&
+            xposAlt2 == other.xposAlt2 &&
+            xvel == other.xvel &&
+            xvelAlt1 == other.xvelAlt1 &&
+            xvelAlt2 == other.xvelAlt2 &&
+            yaccel == other.yaccel &&
+            ypos == other.ypos &&
+            yposAlt1 == other.yposAlt1 &&
+            yposAlt2 == other.yposAlt2 &&
+            yvel == other.yvel &&
+            yvelAlt1 == other.yvelAlt1 &&
+            yvelAlt2 == other.yvelAlt2 &&
+            zaccel == other.zaccel &&
+            zpos == other.zpos &&
+            zposAlt1 == other.zposAlt1 &&
+            zposAlt2 == other.zposAlt2 &&
+            zvel == other.zvel &&
+            zvelAlt1 == other.zvelAlt1 &&
+            zvelAlt2 == other.zvelAlt2 &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, epoch, source, actualOdSpan, algorithm, alt1ReferenceFrame, alt2ReferenceFrame, area, bDot, cmOffset, cov, covMethod, covReferenceFrame, createdAt, createdBy, descriptor, dragArea, dragCoeff, dragModel, edr, eqCov, errorControl, fixedStep, geopotentialModel, iau1980Terms, idOnOrbit, idOrbitDetermination, idStateVector, integratorMode, inTrackThrust, lastObEnd, lastObStart, leapSecondTime, lunarSolar, mass, obsAvailable, obsUsed, origin, origNetwork, origObjectId, partials, pedigree, polarMotionX, polarMotionY, posUnc, recOdSpan, referenceFrame, residualsAcc, revNo, rms, satNo, sigmaPosUvw, sigmaVelUvw, solarFluxApAvg, solarFluxF10, solarFluxF10Avg, solarRadPress, solarRadPressCoeff, solidEarthTides, sourceDl, srpArea, stepMode, stepSize, stepSizeSelection, taiUtc, thrustAccel, tracksAvail, tracksUsed, transactionId, uct, ut1Rate, ut1Utc, velUnc, xaccel, xpos, xposAlt1, xposAlt2, xvel, xvelAlt1, xvelAlt2, yaccel, ypos, yposAlt1, yposAlt2, yvel, yvelAlt1, yvelAlt2, zaccel, zpos, zposAlt1, zposAlt2, zvel, zvelAlt1, zvelAlt2, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            epoch,
+            source,
+            actualOdSpan,
+            algorithm,
+            alt1ReferenceFrame,
+            alt2ReferenceFrame,
+            area,
+            bDot,
+            cmOffset,
+            cov,
+            covMethod,
+            covReferenceFrame,
+            createdAt,
+            createdBy,
+            descriptor,
+            dragArea,
+            dragCoeff,
+            dragModel,
+            edr,
+            eqCov,
+            errorControl,
+            fixedStep,
+            geopotentialModel,
+            iau1980Terms,
+            idOnOrbit,
+            idOrbitDetermination,
+            idStateVector,
+            integratorMode,
+            inTrackThrust,
+            lastObEnd,
+            lastObStart,
+            leapSecondTime,
+            lunarSolar,
+            mass,
+            obsAvailable,
+            obsUsed,
+            origin,
+            origNetwork,
+            origObjectId,
+            partials,
+            pedigree,
+            polarMotionX,
+            polarMotionY,
+            posUnc,
+            recOdSpan,
+            referenceFrame,
+            residualsAcc,
+            revNo,
+            rms,
+            satNo,
+            sigmaPosUvw,
+            sigmaVelUvw,
+            solarFluxApAvg,
+            solarFluxF10,
+            solarFluxF10Avg,
+            solarRadPress,
+            solarRadPressCoeff,
+            solidEarthTides,
+            sourceDl,
+            srpArea,
+            stepMode,
+            stepSize,
+            stepSizeSelection,
+            taiUtc,
+            thrustAccel,
+            tracksAvail,
+            tracksUsed,
+            transactionId,
+            uct,
+            ut1Rate,
+            ut1Utc,
+            velUnc,
+            xaccel,
+            xpos,
+            xposAlt1,
+            xposAlt2,
+            xvel,
+            xvelAlt1,
+            xvelAlt2,
+            yaccel,
+            ypos,
+            yposAlt1,
+            yposAlt2,
+            yvel,
+            yvelAlt1,
+            yvelAlt2,
+            zaccel,
+            zpos,
+            zposAlt1,
+            zposAlt2,
+            zvel,
+            zvelAlt1,
+            zvelAlt2,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

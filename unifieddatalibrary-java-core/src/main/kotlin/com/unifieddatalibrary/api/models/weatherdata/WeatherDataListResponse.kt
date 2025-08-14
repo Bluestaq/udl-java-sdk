@@ -2066,7 +2066,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2079,12 +2079,93 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is WeatherDataListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && obTime == other.obTime && source == other.source && id == other.id && angleOrientation == other.angleOrientation && avgRefPwr == other.avgRefPwr && avgTxPwr == other.avgTxPwr && checksum == other.checksum && coIntegs == other.coIntegs && consRecs == other.consRecs && createdAt == other.createdAt && createdBy == other.createdBy && doppVels == other.doppVels && fileCreation == other.fileCreation && firstGuessAvgs == other.firstGuessAvgs && idSensor == other.idSensor && interpulsePeriods == other.interpulsePeriods && lightDetSensors == other.lightDetSensors && lightEventNum == other.lightEventNum && noiseLvls == other.noiseLvls && numElements == other.numElements && origin == other.origin && origNetwork == other.origNetwork && origSensorId == other.origSensorId && posConfidence == other.posConfidence && qcValue == other.qcValue && sectorNum == other.sectorNum && semiMajorAxis == other.semiMajorAxis && semiMinorAxis == other.semiMinorAxis && sigPwrs == other.sigPwrs && sigStrength == other.sigStrength && snrs == other.snrs && specAvgs == other.specAvgs && specWidths == other.specWidths && srcIds == other.srcIds && srcTyps == other.srcTyps && tdAvgSampleNums == other.tdAvgSampleNums && termAlt == other.termAlt && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is WeatherDataListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            obTime == other.obTime &&
+            source == other.source &&
+            id == other.id &&
+            angleOrientation == other.angleOrientation &&
+            avgRefPwr == other.avgRefPwr &&
+            avgTxPwr == other.avgTxPwr &&
+            checksum == other.checksum &&
+            coIntegs == other.coIntegs &&
+            consRecs == other.consRecs &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            doppVels == other.doppVels &&
+            fileCreation == other.fileCreation &&
+            firstGuessAvgs == other.firstGuessAvgs &&
+            idSensor == other.idSensor &&
+            interpulsePeriods == other.interpulsePeriods &&
+            lightDetSensors == other.lightDetSensors &&
+            lightEventNum == other.lightEventNum &&
+            noiseLvls == other.noiseLvls &&
+            numElements == other.numElements &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origSensorId == other.origSensorId &&
+            posConfidence == other.posConfidence &&
+            qcValue == other.qcValue &&
+            sectorNum == other.sectorNum &&
+            semiMajorAxis == other.semiMajorAxis &&
+            semiMinorAxis == other.semiMinorAxis &&
+            sigPwrs == other.sigPwrs &&
+            sigStrength == other.sigStrength &&
+            snrs == other.snrs &&
+            specAvgs == other.specAvgs &&
+            specWidths == other.specWidths &&
+            srcIds == other.srcIds &&
+            srcTyps == other.srcTyps &&
+            tdAvgSampleNums == other.tdAvgSampleNums &&
+            termAlt == other.termAlt &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, obTime, source, id, angleOrientation, avgRefPwr, avgTxPwr, checksum, coIntegs, consRecs, createdAt, createdBy, doppVels, fileCreation, firstGuessAvgs, idSensor, interpulsePeriods, lightDetSensors, lightEventNum, noiseLvls, numElements, origin, origNetwork, origSensorId, posConfidence, qcValue, sectorNum, semiMajorAxis, semiMinorAxis, sigPwrs, sigStrength, snrs, specAvgs, specWidths, srcIds, srcTyps, tdAvgSampleNums, termAlt, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            obTime,
+            source,
+            id,
+            angleOrientation,
+            avgRefPwr,
+            avgTxPwr,
+            checksum,
+            coIntegs,
+            consRecs,
+            createdAt,
+            createdBy,
+            doppVels,
+            fileCreation,
+            firstGuessAvgs,
+            idSensor,
+            interpulsePeriods,
+            lightDetSensors,
+            lightEventNum,
+            noiseLvls,
+            numElements,
+            origin,
+            origNetwork,
+            origSensorId,
+            posConfidence,
+            qcValue,
+            sectorNum,
+            semiMajorAxis,
+            semiMinorAxis,
+            sigPwrs,
+            sigStrength,
+            snrs,
+            specAvgs,
+            specWidths,
+            srcIds,
+            srcTyps,
+            tdAvgSampleNums,
+            termAlt,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

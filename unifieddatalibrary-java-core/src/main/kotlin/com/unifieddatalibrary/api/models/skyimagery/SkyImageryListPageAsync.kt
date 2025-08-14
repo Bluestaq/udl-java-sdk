@@ -114,10 +114,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SkyImageryListPageAsync && service == other.service && streamHandlerExecutor == other.streamHandlerExecutor && params == other.params && items == other.items /* spotless:on */
+        return other is SkyImageryListPageAsync &&
+            service == other.service &&
+            streamHandlerExecutor == other.streamHandlerExecutor &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, streamHandlerExecutor, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, streamHandlerExecutor, params, items)
 
     override fun toString() =
         "SkyImageryListPageAsync{service=$service, streamHandlerExecutor=$streamHandlerExecutor, params=$params, items=$items}"

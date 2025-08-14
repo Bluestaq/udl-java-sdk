@@ -10,8 +10,6 @@ import java.util.Objects
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor
 import kotlin.jvm.optionals.getOrDefault
-import kotlin.jvm.optionals.getOrNull
-import kotlin.jvm.optionals.toList
 
 /** @see DataTypeServiceAsync.list */
 class DataTypeListPageAsync
@@ -21,9 +19,6 @@ private constructor(
     private val params: DataTypeListParams,
     private val items: List<String>,
 ) : PageAsync<String> {
-
-    /** Delegates to [List<String>], but gracefully handles missing data. */
-    override fun items(): List<String> = items.flatMap { it.toList() }.getOrNull() ?: emptyList()
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
@@ -118,10 +113,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is DataTypeListPageAsync && service == other.service && streamHandlerExecutor == other.streamHandlerExecutor && params == other.params && items == other.items /* spotless:on */
+        return other is DataTypeListPageAsync &&
+            service == other.service &&
+            streamHandlerExecutor == other.streamHandlerExecutor &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, streamHandlerExecutor, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, streamHandlerExecutor, params, items)
 
     override fun toString() =
         "DataTypeListPageAsync{service=$service, streamHandlerExecutor=$streamHandlerExecutor, params=$params, items=$items}"

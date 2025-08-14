@@ -3220,12 +3220,95 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && pickupLat == other.pickupLat && pickupLon == other.pickupLon && reqTime == other.reqTime && source == other.source && type == other.type && id == other.id && casualtyInfo == other.casualtyInfo && ce == other.ce && cntctFreq == other.cntctFreq && comments == other.comments && createdAt == other.createdAt && createdBy == other.createdBy && enemyData == other.enemyData && idWeatherReport == other.idWeatherReport && le == other.le && medevacId == other.medevacId && medicReq == other.medicReq && missionType == other.missionType && numAmbulatory == other.numAmbulatory && numCasualties == other.numCasualties && numKia == other.numKia && numLitter == other.numLitter && numWia == other.numWia && obstaclesRemarks == other.obstaclesRemarks && origin == other.origin && origNetwork == other.origNetwork && pickupAlt == other.pickupAlt && pickupTime == other.pickupTime && reqCallSign == other.reqCallSign && reqNum == other.reqNum && terrain == other.terrain && terrainRemarks == other.terrainRemarks && zoneContrCallSign == other.zoneContrCallSign && zoneHot == other.zoneHot && zoneMarking == other.zoneMarking && zoneMarkingColor == other.zoneMarkingColor && zoneName == other.zoneName && zoneSecurity == other.zoneSecurity && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                pickupLat == other.pickupLat &&
+                pickupLon == other.pickupLon &&
+                reqTime == other.reqTime &&
+                source == other.source &&
+                type == other.type &&
+                id == other.id &&
+                casualtyInfo == other.casualtyInfo &&
+                ce == other.ce &&
+                cntctFreq == other.cntctFreq &&
+                comments == other.comments &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                enemyData == other.enemyData &&
+                idWeatherReport == other.idWeatherReport &&
+                le == other.le &&
+                medevacId == other.medevacId &&
+                medicReq == other.medicReq &&
+                missionType == other.missionType &&
+                numAmbulatory == other.numAmbulatory &&
+                numCasualties == other.numCasualties &&
+                numKia == other.numKia &&
+                numLitter == other.numLitter &&
+                numWia == other.numWia &&
+                obstaclesRemarks == other.obstaclesRemarks &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                pickupAlt == other.pickupAlt &&
+                pickupTime == other.pickupTime &&
+                reqCallSign == other.reqCallSign &&
+                reqNum == other.reqNum &&
+                terrain == other.terrain &&
+                terrainRemarks == other.terrainRemarks &&
+                zoneContrCallSign == other.zoneContrCallSign &&
+                zoneHot == other.zoneHot &&
+                zoneMarking == other.zoneMarking &&
+                zoneMarkingColor == other.zoneMarkingColor &&
+                zoneName == other.zoneName &&
+                zoneSecurity == other.zoneSecurity &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, pickupLat, pickupLon, reqTime, source, type, id, casualtyInfo, ce, cntctFreq, comments, createdAt, createdBy, enemyData, idWeatherReport, le, medevacId, medicReq, missionType, numAmbulatory, numCasualties, numKia, numLitter, numWia, obstaclesRemarks, origin, origNetwork, pickupAlt, pickupTime, reqCallSign, reqNum, terrain, terrainRemarks, zoneContrCallSign, zoneHot, zoneMarking, zoneMarkingColor, zoneName, zoneSecurity, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                pickupLat,
+                pickupLon,
+                reqTime,
+                source,
+                type,
+                id,
+                casualtyInfo,
+                ce,
+                cntctFreq,
+                comments,
+                createdAt,
+                createdBy,
+                enemyData,
+                idWeatherReport,
+                le,
+                medevacId,
+                medicReq,
+                missionType,
+                numAmbulatory,
+                numCasualties,
+                numKia,
+                numLitter,
+                numWia,
+                obstaclesRemarks,
+                origin,
+                origNetwork,
+                pickupAlt,
+                pickupTime,
+                reqCallSign,
+                reqNum,
+                terrain,
+                terrainRemarks,
+                zoneContrCallSign,
+                zoneHot,
+                zoneMarking,
+                zoneMarkingColor,
+                zoneName,
+                zoneSecurity,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3378,7 +3461,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3506,7 +3589,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+            return other is Type && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -5375,12 +5458,13 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Allergy && comments == other.comments && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is Allergy &&
+                    comments == other.comments &&
+                    type == other.type &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
             private val hashCode: Int by lazy { Objects.hash(comments, type, additionalProperties) }
-            /* spotless:on */
 
             override fun hashCode(): Int = hashCode
 
@@ -5642,12 +5726,17 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Condition && bodyPart == other.bodyPart && comments == other.comments && time == other.time && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is Condition &&
+                    bodyPart == other.bodyPart &&
+                    comments == other.comments &&
+                    time == other.time &&
+                    type == other.type &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(bodyPart, comments, time, type, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(bodyPart, comments, time, type, additionalProperties)
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -5911,12 +6000,17 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Etiology && bodyPart == other.bodyPart && comments == other.comments && time == other.time && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is Etiology &&
+                    bodyPart == other.bodyPart &&
+                    comments == other.comments &&
+                    time == other.time &&
+                    type == other.type &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(bodyPart, comments, time, type, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(bodyPart, comments, time, type, additionalProperties)
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -6187,12 +6281,17 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is HealthState && healthStateCode == other.healthStateCode && medConfFactor == other.medConfFactor && time == other.time && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is HealthState &&
+                    healthStateCode == other.healthStateCode &&
+                    medConfFactor == other.medConfFactor &&
+                    time == other.time &&
+                    type == other.type &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(healthStateCode, medConfFactor, time, type, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(healthStateCode, medConfFactor, time, type, additionalProperties)
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -6465,12 +6564,17 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Injury && bodyPart == other.bodyPart && comments == other.comments && time == other.time && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is Injury &&
+                    bodyPart == other.bodyPart &&
+                    comments == other.comments &&
+                    time == other.time &&
+                    type == other.type &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(bodyPart, comments, time, type, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(bodyPart, comments, time, type, additionalProperties)
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -6821,12 +6925,19 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Medication && adminRoute == other.adminRoute && bodyPart == other.bodyPart && comments == other.comments && dose == other.dose && time == other.time && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is Medication &&
+                    adminRoute == other.adminRoute &&
+                    bodyPart == other.bodyPart &&
+                    comments == other.comments &&
+                    dose == other.dose &&
+                    time == other.time &&
+                    type == other.type &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(adminRoute, bodyPart, comments, dose, time, type, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(adminRoute, bodyPart, comments, dose, time, type, additionalProperties)
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -7092,12 +7203,17 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Treatment && bodyPart == other.bodyPart && comments == other.comments && time == other.time && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is Treatment &&
+                    bodyPart == other.bodyPart &&
+                    comments == other.comments &&
+                    time == other.time &&
+                    type == other.type &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(bodyPart, comments, time, type, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(bodyPart, comments, time, type, additionalProperties)
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -7417,12 +7533,25 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is VitalSignData && medConfFactor == other.medConfFactor && time == other.time && vitalSign == other.vitalSign && vitalSign1 == other.vitalSign1 && vitalSign2 == other.vitalSign2 && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is VitalSignData &&
+                    medConfFactor == other.medConfFactor &&
+                    time == other.time &&
+                    vitalSign == other.vitalSign &&
+                    vitalSign1 == other.vitalSign1 &&
+                    vitalSign2 == other.vitalSign2 &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(medConfFactor, time, vitalSign, vitalSign1, vitalSign2, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    medConfFactor,
+                    time,
+                    vitalSign,
+                    vitalSign1,
+                    vitalSign2,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -7435,12 +7564,85 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is CasualtyInfo && age == other.age && allergy == other.allergy && bloodType == other.bloodType && bodyPart == other.bodyPart && burialLocation == other.burialLocation && callSign == other.callSign && careProviderUrn == other.careProviderUrn && casualtyKey == other.casualtyKey && casualtyType == other.casualtyType && collectionPoint == other.collectionPoint && comments == other.comments && condition == other.condition && contamType == other.contamType && disposition == other.disposition && dispositionType == other.dispositionType && etiology == other.etiology && evacType == other.evacType && gender == other.gender && healthState == other.healthState && injury == other.injury && last4Ssn == other.last4Ssn && medication == other.medication && name == other.name && nationality == other.nationality && occSpeciality == other.occSpeciality && patientIdentity == other.patientIdentity && patientStatus == other.patientStatus && payGrade == other.payGrade && priority == other.priority && reportGen == other.reportGen && reportTime == other.reportTime && service == other.service && specMedEquip == other.specMedEquip && treatment == other.treatment && vitalSignData == other.vitalSignData && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is CasualtyInfo &&
+                age == other.age &&
+                allergy == other.allergy &&
+                bloodType == other.bloodType &&
+                bodyPart == other.bodyPart &&
+                burialLocation == other.burialLocation &&
+                callSign == other.callSign &&
+                careProviderUrn == other.careProviderUrn &&
+                casualtyKey == other.casualtyKey &&
+                casualtyType == other.casualtyType &&
+                collectionPoint == other.collectionPoint &&
+                comments == other.comments &&
+                condition == other.condition &&
+                contamType == other.contamType &&
+                disposition == other.disposition &&
+                dispositionType == other.dispositionType &&
+                etiology == other.etiology &&
+                evacType == other.evacType &&
+                gender == other.gender &&
+                healthState == other.healthState &&
+                injury == other.injury &&
+                last4Ssn == other.last4Ssn &&
+                medication == other.medication &&
+                name == other.name &&
+                nationality == other.nationality &&
+                occSpeciality == other.occSpeciality &&
+                patientIdentity == other.patientIdentity &&
+                patientStatus == other.patientStatus &&
+                payGrade == other.payGrade &&
+                priority == other.priority &&
+                reportGen == other.reportGen &&
+                reportTime == other.reportTime &&
+                service == other.service &&
+                specMedEquip == other.specMedEquip &&
+                treatment == other.treatment &&
+                vitalSignData == other.vitalSignData &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(age, allergy, bloodType, bodyPart, burialLocation, callSign, careProviderUrn, casualtyKey, casualtyType, collectionPoint, comments, condition, contamType, disposition, dispositionType, etiology, evacType, gender, healthState, injury, last4Ssn, medication, name, nationality, occSpeciality, patientIdentity, patientStatus, payGrade, priority, reportGen, reportTime, service, specMedEquip, treatment, vitalSignData, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                age,
+                allergy,
+                bloodType,
+                bodyPart,
+                burialLocation,
+                callSign,
+                careProviderUrn,
+                casualtyKey,
+                casualtyType,
+                collectionPoint,
+                comments,
+                condition,
+                contamType,
+                disposition,
+                dispositionType,
+                etiology,
+                evacType,
+                gender,
+                healthState,
+                injury,
+                last4Ssn,
+                medication,
+                name,
+                nationality,
+                occSpeciality,
+                patientIdentity,
+                patientStatus,
+                payGrade,
+                priority,
+                reportGen,
+                reportTime,
+                service,
+                specMedEquip,
+                treatment,
+                vitalSignData,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -7712,12 +7914,23 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is EnemyData && dirToEnemy == other.dirToEnemy && friendliesRemarks == other.friendliesRemarks && hlzRemarks == other.hlzRemarks && hostileFireType == other.hostileFireType && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is EnemyData &&
+                dirToEnemy == other.dirToEnemy &&
+                friendliesRemarks == other.friendliesRemarks &&
+                hlzRemarks == other.hlzRemarks &&
+                hostileFireType == other.hostileFireType &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(dirToEnemy, friendliesRemarks, hlzRemarks, hostileFireType, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                dirToEnemy,
+                friendliesRemarks,
+                hlzRemarks,
+                hostileFireType,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -7730,10 +7943,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EvacCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is EvacCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "EvacCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

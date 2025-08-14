@@ -1532,7 +1532,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1545,12 +1545,77 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LinkStatusListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && endPoint1Lat == other.endPoint1Lat && endPoint1Lon == other.endPoint1Lon && endPoint1Name == other.endPoint1Name && endPoint2Lat == other.endPoint2Lat && endPoint2Lon == other.endPoint2Lon && endPoint2Name == other.endPoint2Name && linkName == other.linkName && linkStartTime == other.linkStartTime && linkStopTime == other.linkStopTime && source == other.source && id == other.id && band == other.band && constellation == other.constellation && createdAt == other.createdAt && createdBy == other.createdBy && dataRate1To2 == other.dataRate1To2 && dataRate2To1 == other.dataRate2To1 && idBeam1 == other.idBeam1 && idBeam2 == other.idBeam2 && idOnOrbit1 == other.idOnOrbit1 && idOnOrbit2 == other.idOnOrbit2 && linkState == other.linkState && linkType == other.linkType && opsCap == other.opsCap && origin == other.origin && origNetwork == other.origNetwork && satNo1 == other.satNo1 && satNo2 == other.satNo2 && sysCap == other.sysCap && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is LinkStatusListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            endPoint1Lat == other.endPoint1Lat &&
+            endPoint1Lon == other.endPoint1Lon &&
+            endPoint1Name == other.endPoint1Name &&
+            endPoint2Lat == other.endPoint2Lat &&
+            endPoint2Lon == other.endPoint2Lon &&
+            endPoint2Name == other.endPoint2Name &&
+            linkName == other.linkName &&
+            linkStartTime == other.linkStartTime &&
+            linkStopTime == other.linkStopTime &&
+            source == other.source &&
+            id == other.id &&
+            band == other.band &&
+            constellation == other.constellation &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            dataRate1To2 == other.dataRate1To2 &&
+            dataRate2To1 == other.dataRate2To1 &&
+            idBeam1 == other.idBeam1 &&
+            idBeam2 == other.idBeam2 &&
+            idOnOrbit1 == other.idOnOrbit1 &&
+            idOnOrbit2 == other.idOnOrbit2 &&
+            linkState == other.linkState &&
+            linkType == other.linkType &&
+            opsCap == other.opsCap &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            satNo1 == other.satNo1 &&
+            satNo2 == other.satNo2 &&
+            sysCap == other.sysCap &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, endPoint1Lat, endPoint1Lon, endPoint1Name, endPoint2Lat, endPoint2Lon, endPoint2Name, linkName, linkStartTime, linkStopTime, source, id, band, constellation, createdAt, createdBy, dataRate1To2, dataRate2To1, idBeam1, idBeam2, idOnOrbit1, idOnOrbit2, linkState, linkType, opsCap, origin, origNetwork, satNo1, satNo2, sysCap, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            endPoint1Lat,
+            endPoint1Lon,
+            endPoint1Name,
+            endPoint2Lat,
+            endPoint2Lon,
+            endPoint2Name,
+            linkName,
+            linkStartTime,
+            linkStopTime,
+            source,
+            id,
+            band,
+            constellation,
+            createdAt,
+            createdBy,
+            dataRate1To2,
+            dataRate2To1,
+            idBeam1,
+            idBeam2,
+            idOnOrbit1,
+            idOnOrbit2,
+            linkState,
+            linkType,
+            opsCap,
+            origin,
+            origNetwork,
+            satNo1,
+            satNo2,
+            sysCap,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

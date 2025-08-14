@@ -186,7 +186,7 @@ private constructor(
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun logisticsRemarks(): Optional<List<LogisticsRemark>> = body.logisticsRemarks()
+    fun logisticsRemarks(): Optional<List<LogisticsRemarksIngest>> = body.logisticsRemarks()
 
     /**
      * Support items associated with this LogisticsSupport record.
@@ -425,7 +425,7 @@ private constructor(
      * Unlike [logisticsRemarks], this method doesn't throw if the JSON field has an unexpected
      * type.
      */
-    fun _logisticsRemarks(): JsonField<List<LogisticsRemark>> = body._logisticsRemarks()
+    fun _logisticsRemarks(): JsonField<List<LogisticsRemarksIngest>> = body._logisticsRemarks()
 
     /**
      * Returns the raw JSON value of [logisticsSupportItems].
@@ -833,7 +833,7 @@ private constructor(
         }
 
         /** Remarks associated with this LogisticsSupport record. */
-        fun logisticsRemarks(logisticsRemarks: List<LogisticsRemark>) = apply {
+        fun logisticsRemarks(logisticsRemarks: List<LogisticsRemarksIngest>) = apply {
             body.logisticsRemarks(logisticsRemarks)
         }
 
@@ -841,19 +841,19 @@ private constructor(
          * Sets [Builder.logisticsRemarks] to an arbitrary JSON value.
          *
          * You should usually call [Builder.logisticsRemarks] with a well-typed
-         * `List<LogisticsRemark>` value instead. This method is primarily for setting the field to
-         * an undocumented or not yet supported value.
+         * `List<LogisticsRemarksIngest>` value instead. This method is primarily for setting the
+         * field to an undocumented or not yet supported value.
          */
-        fun logisticsRemarks(logisticsRemarks: JsonField<List<LogisticsRemark>>) = apply {
+        fun logisticsRemarks(logisticsRemarks: JsonField<List<LogisticsRemarksIngest>>) = apply {
             body.logisticsRemarks(logisticsRemarks)
         }
 
         /**
-         * Adds a single [LogisticsRemark] to [logisticsRemarks].
+         * Adds a single [LogisticsRemarksIngest] to [logisticsRemarks].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addLogisticsRemark(logisticsRemark: LogisticsRemark) = apply {
+        fun addLogisticsRemark(logisticsRemark: LogisticsRemarksIngest) = apply {
             body.addLogisticsRemark(logisticsRemark)
         }
 
@@ -1259,7 +1259,7 @@ private constructor(
         private val logisticAction: JsonField<String>,
         private val logisticsDiscrepancyInfos: JsonField<List<LogisticsDiscrepancyInfo>>,
         private val logisticsRecordId: JsonField<String>,
-        private val logisticsRemarks: JsonField<List<LogisticsRemark>>,
+        private val logisticsRemarks: JsonField<List<LogisticsRemarksIngest>>,
         private val logisticsSupportItems: JsonField<List<LogisticsSupportItem>>,
         private val logisticsTransportationPlans: JsonField<List<LogisticsTransportationPlan>>,
         private val maintStatusCode: JsonField<String>,
@@ -1322,7 +1322,7 @@ private constructor(
             logisticsRecordId: JsonField<String> = JsonMissing.of(),
             @JsonProperty("logisticsRemarks")
             @ExcludeMissing
-            logisticsRemarks: JsonField<List<LogisticsRemark>> = JsonMissing.of(),
+            logisticsRemarks: JsonField<List<LogisticsRemarksIngest>> = JsonMissing.of(),
             @JsonProperty("logisticsSupportItems")
             @ExcludeMissing
             logisticsSupportItems: JsonField<List<LogisticsSupportItem>> = JsonMissing.of(),
@@ -1551,7 +1551,7 @@ private constructor(
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun logisticsRemarks(): Optional<List<LogisticsRemark>> =
+        fun logisticsRemarks(): Optional<List<LogisticsRemarksIngest>> =
             logisticsRemarks.getOptional("logisticsRemarks")
 
         /**
@@ -1814,7 +1814,7 @@ private constructor(
          */
         @JsonProperty("logisticsRemarks")
         @ExcludeMissing
-        fun _logisticsRemarks(): JsonField<List<LogisticsRemark>> = logisticsRemarks
+        fun _logisticsRemarks(): JsonField<List<LogisticsRemarksIngest>> = logisticsRemarks
 
         /**
          * Returns the raw JSON value of [logisticsSupportItems].
@@ -1983,7 +1983,7 @@ private constructor(
                 JsonField<MutableList<LogisticsDiscrepancyInfo>>? =
                 null
             private var logisticsRecordId: JsonField<String> = JsonMissing.of()
-            private var logisticsRemarks: JsonField<MutableList<LogisticsRemark>>? = null
+            private var logisticsRemarks: JsonField<MutableList<LogisticsRemarksIngest>>? = null
             private var logisticsSupportItems: JsonField<MutableList<LogisticsSupportItem>>? = null
             private var logisticsTransportationPlans:
                 JsonField<MutableList<LogisticsTransportationPlan>>? =
@@ -2298,26 +2298,27 @@ private constructor(
             }
 
             /** Remarks associated with this LogisticsSupport record. */
-            fun logisticsRemarks(logisticsRemarks: List<LogisticsRemark>) =
+            fun logisticsRemarks(logisticsRemarks: List<LogisticsRemarksIngest>) =
                 logisticsRemarks(JsonField.of(logisticsRemarks))
 
             /**
              * Sets [Builder.logisticsRemarks] to an arbitrary JSON value.
              *
              * You should usually call [Builder.logisticsRemarks] with a well-typed
-             * `List<LogisticsRemark>` value instead. This method is primarily for setting the field
-             * to an undocumented or not yet supported value.
+             * `List<LogisticsRemarksIngest>` value instead. This method is primarily for setting
+             * the field to an undocumented or not yet supported value.
              */
-            fun logisticsRemarks(logisticsRemarks: JsonField<List<LogisticsRemark>>) = apply {
-                this.logisticsRemarks = logisticsRemarks.map { it.toMutableList() }
-            }
+            fun logisticsRemarks(logisticsRemarks: JsonField<List<LogisticsRemarksIngest>>) =
+                apply {
+                    this.logisticsRemarks = logisticsRemarks.map { it.toMutableList() }
+                }
 
             /**
-             * Adds a single [LogisticsRemark] to [logisticsRemarks].
+             * Adds a single [LogisticsRemarksIngest] to [logisticsRemarks].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addLogisticsRemark(logisticsRemark: LogisticsRemark) = apply {
+            fun addLogisticsRemark(logisticsRemark: LogisticsRemarksIngest) = apply {
                 logisticsRemarks =
                     (logisticsRemarks ?: JsonField.of(mutableListOf())).also {
                         checkKnown("logisticsRemarks", it).add(logisticsRemark)
@@ -2737,12 +2738,75 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && rptCreatedTime == other.rptCreatedTime && source == other.source && bodyId == other.bodyId && aircraftMds == other.aircraftMds && createdAt == other.createdAt && createdBy == other.createdBy && currIcao == other.currIcao && etic == other.etic && etmc == other.etmc && extSystemId == other.extSystemId && logisticAction == other.logisticAction && logisticsDiscrepancyInfos == other.logisticsDiscrepancyInfos && logisticsRecordId == other.logisticsRecordId && logisticsRemarks == other.logisticsRemarks && logisticsSupportItems == other.logisticsSupportItems && logisticsTransportationPlans == other.logisticsTransportationPlans && maintStatusCode == other.maintStatusCode && mcTime == other.mcTime && meTime == other.meTime && origin == other.origin && origNetwork == other.origNetwork && owner == other.owner && reopenFlag == other.reopenFlag && rptClosedTime == other.rptClosedTime && suppIcao == other.suppIcao && tailNumber == other.tailNumber && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                rptCreatedTime == other.rptCreatedTime &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                aircraftMds == other.aircraftMds &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                currIcao == other.currIcao &&
+                etic == other.etic &&
+                etmc == other.etmc &&
+                extSystemId == other.extSystemId &&
+                logisticAction == other.logisticAction &&
+                logisticsDiscrepancyInfos == other.logisticsDiscrepancyInfos &&
+                logisticsRecordId == other.logisticsRecordId &&
+                logisticsRemarks == other.logisticsRemarks &&
+                logisticsSupportItems == other.logisticsSupportItems &&
+                logisticsTransportationPlans == other.logisticsTransportationPlans &&
+                maintStatusCode == other.maintStatusCode &&
+                mcTime == other.mcTime &&
+                meTime == other.meTime &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                owner == other.owner &&
+                reopenFlag == other.reopenFlag &&
+                rptClosedTime == other.rptClosedTime &&
+                suppIcao == other.suppIcao &&
+                tailNumber == other.tailNumber &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, rptCreatedTime, source, bodyId, aircraftMds, createdAt, createdBy, currIcao, etic, etmc, extSystemId, logisticAction, logisticsDiscrepancyInfos, logisticsRecordId, logisticsRemarks, logisticsSupportItems, logisticsTransportationPlans, maintStatusCode, mcTime, meTime, origin, origNetwork, owner, reopenFlag, rptClosedTime, suppIcao, tailNumber, updatedAt, updatedBy, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                rptCreatedTime,
+                source,
+                bodyId,
+                aircraftMds,
+                createdAt,
+                createdBy,
+                currIcao,
+                etic,
+                etmc,
+                extSystemId,
+                logisticAction,
+                logisticsDiscrepancyInfos,
+                logisticsRecordId,
+                logisticsRemarks,
+                logisticsSupportItems,
+                logisticsTransportationPlans,
+                maintStatusCode,
+                mcTime,
+                meTime,
+                origin,
+                origNetwork,
+                owner,
+                reopenFlag,
+                rptClosedTime,
+                suppIcao,
+                tailNumber,
+                updatedAt,
+                updatedBy,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2895,7 +2959,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3161,237 +3225,22 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is LogisticsDiscrepancyInfo && closureTime == other.closureTime && discrepancyInfo == other.discrepancyInfo && jcn == other.jcn && jobStTime == other.jobStTime && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is LogisticsDiscrepancyInfo &&
+                closureTime == other.closureTime &&
+                discrepancyInfo == other.discrepancyInfo &&
+                jcn == other.jcn &&
+                jobStTime == other.jobStTime &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(closureTime, discrepancyInfo, jcn, jobStTime, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(closureTime, discrepancyInfo, jcn, jobStTime, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
             "LogisticsDiscrepancyInfo{closureTime=$closureTime, discrepancyInfo=$discrepancyInfo, jcn=$jcn, jobStTime=$jobStTime, additionalProperties=$additionalProperties}"
-    }
-
-    /** Remarks associated with this LogisticsSupport record. */
-    class LogisticsRemark
-    private constructor(
-        private val lastChanged: JsonField<OffsetDateTime>,
-        private val remark: JsonField<String>,
-        private val username: JsonField<String>,
-        private val additionalProperties: MutableMap<String, JsonValue>,
-    ) {
-
-        @JsonCreator
-        private constructor(
-            @JsonProperty("lastChanged")
-            @ExcludeMissing
-            lastChanged: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("remark") @ExcludeMissing remark: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("username") @ExcludeMissing username: JsonField<String> = JsonMissing.of(),
-        ) : this(lastChanged, remark, username, mutableMapOf())
-
-        /**
-         * Date the remark was published or updated, in ISO 8601 UTC format, with millisecond
-         * precision.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun lastChanged(): Optional<OffsetDateTime> = lastChanged.getOptional("lastChanged")
-
-        /**
-         * Text of the remark.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun remark(): Optional<String> = remark.getOptional("remark")
-
-        /**
-         * User who published the remark.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun username(): Optional<String> = username.getOptional("username")
-
-        /**
-         * Returns the raw JSON value of [lastChanged].
-         *
-         * Unlike [lastChanged], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("lastChanged")
-        @ExcludeMissing
-        fun _lastChanged(): JsonField<OffsetDateTime> = lastChanged
-
-        /**
-         * Returns the raw JSON value of [remark].
-         *
-         * Unlike [remark], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("remark") @ExcludeMissing fun _remark(): JsonField<String> = remark
-
-        /**
-         * Returns the raw JSON value of [username].
-         *
-         * Unlike [username], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("username") @ExcludeMissing fun _username(): JsonField<String> = username
-
-        @JsonAnySetter
-        private fun putAdditionalProperty(key: String, value: JsonValue) {
-            additionalProperties.put(key, value)
-        }
-
-        @JsonAnyGetter
-        @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> =
-            Collections.unmodifiableMap(additionalProperties)
-
-        fun toBuilder() = Builder().from(this)
-
-        companion object {
-
-            /** Returns a mutable builder for constructing an instance of [LogisticsRemark]. */
-            @JvmStatic fun builder() = Builder()
-        }
-
-        /** A builder for [LogisticsRemark]. */
-        class Builder internal constructor() {
-
-            private var lastChanged: JsonField<OffsetDateTime> = JsonMissing.of()
-            private var remark: JsonField<String> = JsonMissing.of()
-            private var username: JsonField<String> = JsonMissing.of()
-            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
-
-            @JvmSynthetic
-            internal fun from(logisticsRemark: LogisticsRemark) = apply {
-                lastChanged = logisticsRemark.lastChanged
-                remark = logisticsRemark.remark
-                username = logisticsRemark.username
-                additionalProperties = logisticsRemark.additionalProperties.toMutableMap()
-            }
-
-            /**
-             * Date the remark was published or updated, in ISO 8601 UTC format, with millisecond
-             * precision.
-             */
-            fun lastChanged(lastChanged: OffsetDateTime) = lastChanged(JsonField.of(lastChanged))
-
-            /**
-             * Sets [Builder.lastChanged] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.lastChanged] with a well-typed [OffsetDateTime]
-             * value instead. This method is primarily for setting the field to an undocumented or
-             * not yet supported value.
-             */
-            fun lastChanged(lastChanged: JsonField<OffsetDateTime>) = apply {
-                this.lastChanged = lastChanged
-            }
-
-            /** Text of the remark. */
-            fun remark(remark: String) = remark(JsonField.of(remark))
-
-            /**
-             * Sets [Builder.remark] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.remark] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun remark(remark: JsonField<String>) = apply { this.remark = remark }
-
-            /** User who published the remark. */
-            fun username(username: String) = username(JsonField.of(username))
-
-            /**
-             * Sets [Builder.username] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.username] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun username(username: JsonField<String>) = apply { this.username = username }
-
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
-
-            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-                additionalProperties.put(key, value)
-            }
-
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
-
-            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
-
-            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
-
-            /**
-             * Returns an immutable instance of [LogisticsRemark].
-             *
-             * Further updates to this [Builder] will not mutate the returned instance.
-             */
-            fun build(): LogisticsRemark =
-                LogisticsRemark(lastChanged, remark, username, additionalProperties.toMutableMap())
-        }
-
-        private var validated: Boolean = false
-
-        fun validate(): LogisticsRemark = apply {
-            if (validated) {
-                return@apply
-            }
-
-            lastChanged()
-            remark()
-            username()
-            validated = true
-        }
-
-        fun isValid(): Boolean =
-            try {
-                validate()
-                true
-            } catch (e: UnifieddatalibraryInvalidDataException) {
-                false
-            }
-
-        /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
-         *
-         * Used for best match union deserialization.
-         */
-        @JvmSynthetic
-        internal fun validity(): Int =
-            (if (lastChanged.asKnown().isPresent) 1 else 0) +
-                (if (remark.asKnown().isPresent) 1 else 0) +
-                (if (username.asKnown().isPresent) 1 else 0)
-
-        override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
-
-            return /* spotless:off */ other is LogisticsRemark && lastChanged == other.lastChanged && remark == other.remark && username == other.username && additionalProperties == other.additionalProperties /* spotless:on */
-        }
-
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(lastChanged, remark, username, additionalProperties) }
-        /* spotless:on */
-
-        override fun hashCode(): Int = hashCode
-
-        override fun toString() =
-            "LogisticsRemark{lastChanged=$lastChanged, remark=$remark, username=$username, additionalProperties=$additionalProperties}"
     }
 
     /** Support items associated with this LogisticsSupport record. */
@@ -3403,7 +3252,7 @@ private constructor(
         private val itemLastChangedDate: JsonField<OffsetDateTime>,
         private val jobControlNumber: JsonField<String>,
         private val logisticsParts: JsonField<List<LogisticsPart>>,
-        private val logisticsRemarks: JsonField<List<LogisticsRemark>>,
+        private val logisticsRemarks: JsonField<List<LogisticsRemarksIngest>>,
         private val logisticsSpecialties: JsonField<List<LogisticsSpecialty>>,
         private val quantity: JsonField<Int>,
         private val readyTime: JsonField<OffsetDateTime>,
@@ -3441,7 +3290,7 @@ private constructor(
             logisticsParts: JsonField<List<LogisticsPart>> = JsonMissing.of(),
             @JsonProperty("logisticsRemarks")
             @ExcludeMissing
-            logisticsRemarks: JsonField<List<LogisticsRemark>> = JsonMissing.of(),
+            logisticsRemarks: JsonField<List<LogisticsRemarksIngest>> = JsonMissing.of(),
             @JsonProperty("logisticsSpecialties")
             @ExcludeMissing
             logisticsSpecialties: JsonField<List<LogisticsSpecialty>> = JsonMissing.of(),
@@ -3561,7 +3410,7 @@ private constructor(
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun logisticsRemarks(): Optional<List<LogisticsRemark>> =
+        fun logisticsRemarks(): Optional<List<LogisticsRemarksIngest>> =
             logisticsRemarks.getOptional("logisticsRemarks")
 
         /**
@@ -3739,7 +3588,7 @@ private constructor(
          */
         @JsonProperty("logisticsRemarks")
         @ExcludeMissing
-        fun _logisticsRemarks(): JsonField<List<LogisticsRemark>> = logisticsRemarks
+        fun _logisticsRemarks(): JsonField<List<LogisticsRemarksIngest>> = logisticsRemarks
 
         /**
          * Returns the raw JSON value of [logisticsSpecialties].
@@ -3880,7 +3729,7 @@ private constructor(
             private var itemLastChangedDate: JsonField<OffsetDateTime> = JsonMissing.of()
             private var jobControlNumber: JsonField<String> = JsonMissing.of()
             private var logisticsParts: JsonField<MutableList<LogisticsPart>>? = null
-            private var logisticsRemarks: JsonField<MutableList<LogisticsRemark>>? = null
+            private var logisticsRemarks: JsonField<MutableList<LogisticsRemarksIngest>>? = null
             private var logisticsSpecialties: JsonField<MutableList<LogisticsSpecialty>>? = null
             private var quantity: JsonField<Int> = JsonMissing.of()
             private var readyTime: JsonField<OffsetDateTime> = JsonMissing.of()
@@ -4039,26 +3888,27 @@ private constructor(
             }
 
             /** Remarks associated with this support item. */
-            fun logisticsRemarks(logisticsRemarks: List<LogisticsRemark>) =
+            fun logisticsRemarks(logisticsRemarks: List<LogisticsRemarksIngest>) =
                 logisticsRemarks(JsonField.of(logisticsRemarks))
 
             /**
              * Sets [Builder.logisticsRemarks] to an arbitrary JSON value.
              *
              * You should usually call [Builder.logisticsRemarks] with a well-typed
-             * `List<LogisticsRemark>` value instead. This method is primarily for setting the field
-             * to an undocumented or not yet supported value.
+             * `List<LogisticsRemarksIngest>` value instead. This method is primarily for setting
+             * the field to an undocumented or not yet supported value.
              */
-            fun logisticsRemarks(logisticsRemarks: JsonField<List<LogisticsRemark>>) = apply {
-                this.logisticsRemarks = logisticsRemarks.map { it.toMutableList() }
-            }
+            fun logisticsRemarks(logisticsRemarks: JsonField<List<LogisticsRemarksIngest>>) =
+                apply {
+                    this.logisticsRemarks = logisticsRemarks.map { it.toMutableList() }
+                }
 
             /**
-             * Adds a single [LogisticsRemark] to [logisticsRemarks].
+             * Adds a single [LogisticsRemarksIngest] to [logisticsRemarks].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addLogisticsRemark(logisticsRemark: LogisticsRemark) = apply {
+            fun addLogisticsRemark(logisticsRemark: LogisticsRemarksIngest) = apply {
                 logisticsRemarks =
                     (logisticsRemarks ?: JsonField.of(mutableListOf())).also {
                         checkKnown("logisticsRemarks", it).add(logisticsRemark)
@@ -5246,12 +5096,23 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is LogisticsStock && quantity == other.quantity && sourceIcao == other.sourceIcao && stockCheckTime == other.stockCheckTime && stockPoc == other.stockPoc && additionalProperties == other.additionalProperties /* spotless:on */
+                    return other is LogisticsStock &&
+                        quantity == other.quantity &&
+                        sourceIcao == other.sourceIcao &&
+                        stockCheckTime == other.stockCheckTime &&
+                        stockPoc == other.stockPoc &&
+                        additionalProperties == other.additionalProperties
                 }
 
-                /* spotless:off */
-                private val hashCode: Int by lazy { Objects.hash(quantity, sourceIcao, stockCheckTime, stockPoc, additionalProperties) }
-                /* spotless:on */
+                private val hashCode: Int by lazy {
+                    Objects.hash(
+                        quantity,
+                        sourceIcao,
+                        stockCheckTime,
+                        stockPoc,
+                        additionalProperties,
+                    )
+                }
 
                 override fun hashCode(): Int = hashCode
 
@@ -5264,252 +5125,42 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is LogisticsPart && figureNumber == other.figureNumber && indexNumber == other.indexNumber && locationVerifier == other.locationVerifier && logisticsStocks == other.logisticsStocks && measurementUnitCode == other.measurementUnitCode && nationalStockNumber == other.nationalStockNumber && partNumber == other.partNumber && requestVerifier == other.requestVerifier && supplyDocumentNumber == other.supplyDocumentNumber && technicalOrderText == other.technicalOrderText && workUnitCode == other.workUnitCode && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is LogisticsPart &&
+                    figureNumber == other.figureNumber &&
+                    indexNumber == other.indexNumber &&
+                    locationVerifier == other.locationVerifier &&
+                    logisticsStocks == other.logisticsStocks &&
+                    measurementUnitCode == other.measurementUnitCode &&
+                    nationalStockNumber == other.nationalStockNumber &&
+                    partNumber == other.partNumber &&
+                    requestVerifier == other.requestVerifier &&
+                    supplyDocumentNumber == other.supplyDocumentNumber &&
+                    technicalOrderText == other.technicalOrderText &&
+                    workUnitCode == other.workUnitCode &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(figureNumber, indexNumber, locationVerifier, logisticsStocks, measurementUnitCode, nationalStockNumber, partNumber, requestVerifier, supplyDocumentNumber, technicalOrderText, workUnitCode, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    figureNumber,
+                    indexNumber,
+                    locationVerifier,
+                    logisticsStocks,
+                    measurementUnitCode,
+                    nationalStockNumber,
+                    partNumber,
+                    requestVerifier,
+                    supplyDocumentNumber,
+                    technicalOrderText,
+                    workUnitCode,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
             override fun toString() =
                 "LogisticsPart{figureNumber=$figureNumber, indexNumber=$indexNumber, locationVerifier=$locationVerifier, logisticsStocks=$logisticsStocks, measurementUnitCode=$measurementUnitCode, nationalStockNumber=$nationalStockNumber, partNumber=$partNumber, requestVerifier=$requestVerifier, supplyDocumentNumber=$supplyDocumentNumber, technicalOrderText=$technicalOrderText, workUnitCode=$workUnitCode, additionalProperties=$additionalProperties}"
-        }
-
-        /** Remarks associated with this LogisticsSupport record. */
-        class LogisticsRemark
-        private constructor(
-            private val lastChanged: JsonField<OffsetDateTime>,
-            private val remark: JsonField<String>,
-            private val username: JsonField<String>,
-            private val additionalProperties: MutableMap<String, JsonValue>,
-        ) {
-
-            @JsonCreator
-            private constructor(
-                @JsonProperty("lastChanged")
-                @ExcludeMissing
-                lastChanged: JsonField<OffsetDateTime> = JsonMissing.of(),
-                @JsonProperty("remark")
-                @ExcludeMissing
-                remark: JsonField<String> = JsonMissing.of(),
-                @JsonProperty("username")
-                @ExcludeMissing
-                username: JsonField<String> = JsonMissing.of(),
-            ) : this(lastChanged, remark, username, mutableMapOf())
-
-            /**
-             * Date the remark was published or updated, in ISO 8601 UTC format, with millisecond
-             * precision.
-             *
-             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
-             *   type (e.g. if the server responded with an unexpected value).
-             */
-            fun lastChanged(): Optional<OffsetDateTime> = lastChanged.getOptional("lastChanged")
-
-            /**
-             * Text of the remark.
-             *
-             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
-             *   type (e.g. if the server responded with an unexpected value).
-             */
-            fun remark(): Optional<String> = remark.getOptional("remark")
-
-            /**
-             * User who published the remark.
-             *
-             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
-             *   type (e.g. if the server responded with an unexpected value).
-             */
-            fun username(): Optional<String> = username.getOptional("username")
-
-            /**
-             * Returns the raw JSON value of [lastChanged].
-             *
-             * Unlike [lastChanged], this method doesn't throw if the JSON field has an unexpected
-             * type.
-             */
-            @JsonProperty("lastChanged")
-            @ExcludeMissing
-            fun _lastChanged(): JsonField<OffsetDateTime> = lastChanged
-
-            /**
-             * Returns the raw JSON value of [remark].
-             *
-             * Unlike [remark], this method doesn't throw if the JSON field has an unexpected type.
-             */
-            @JsonProperty("remark") @ExcludeMissing fun _remark(): JsonField<String> = remark
-
-            /**
-             * Returns the raw JSON value of [username].
-             *
-             * Unlike [username], this method doesn't throw if the JSON field has an unexpected
-             * type.
-             */
-            @JsonProperty("username") @ExcludeMissing fun _username(): JsonField<String> = username
-
-            @JsonAnySetter
-            private fun putAdditionalProperty(key: String, value: JsonValue) {
-                additionalProperties.put(key, value)
-            }
-
-            @JsonAnyGetter
-            @ExcludeMissing
-            fun _additionalProperties(): Map<String, JsonValue> =
-                Collections.unmodifiableMap(additionalProperties)
-
-            fun toBuilder() = Builder().from(this)
-
-            companion object {
-
-                /** Returns a mutable builder for constructing an instance of [LogisticsRemark]. */
-                @JvmStatic fun builder() = Builder()
-            }
-
-            /** A builder for [LogisticsRemark]. */
-            class Builder internal constructor() {
-
-                private var lastChanged: JsonField<OffsetDateTime> = JsonMissing.of()
-                private var remark: JsonField<String> = JsonMissing.of()
-                private var username: JsonField<String> = JsonMissing.of()
-                private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
-
-                @JvmSynthetic
-                internal fun from(logisticsRemark: LogisticsRemark) = apply {
-                    lastChanged = logisticsRemark.lastChanged
-                    remark = logisticsRemark.remark
-                    username = logisticsRemark.username
-                    additionalProperties = logisticsRemark.additionalProperties.toMutableMap()
-                }
-
-                /**
-                 * Date the remark was published or updated, in ISO 8601 UTC format, with
-                 * millisecond precision.
-                 */
-                fun lastChanged(lastChanged: OffsetDateTime) =
-                    lastChanged(JsonField.of(lastChanged))
-
-                /**
-                 * Sets [Builder.lastChanged] to an arbitrary JSON value.
-                 *
-                 * You should usually call [Builder.lastChanged] with a well-typed [OffsetDateTime]
-                 * value instead. This method is primarily for setting the field to an undocumented
-                 * or not yet supported value.
-                 */
-                fun lastChanged(lastChanged: JsonField<OffsetDateTime>) = apply {
-                    this.lastChanged = lastChanged
-                }
-
-                /** Text of the remark. */
-                fun remark(remark: String) = remark(JsonField.of(remark))
-
-                /**
-                 * Sets [Builder.remark] to an arbitrary JSON value.
-                 *
-                 * You should usually call [Builder.remark] with a well-typed [String] value
-                 * instead. This method is primarily for setting the field to an undocumented or not
-                 * yet supported value.
-                 */
-                fun remark(remark: JsonField<String>) = apply { this.remark = remark }
-
-                /** User who published the remark. */
-                fun username(username: String) = username(JsonField.of(username))
-
-                /**
-                 * Sets [Builder.username] to an arbitrary JSON value.
-                 *
-                 * You should usually call [Builder.username] with a well-typed [String] value
-                 * instead. This method is primarily for setting the field to an undocumented or not
-                 * yet supported value.
-                 */
-                fun username(username: JsonField<String>) = apply { this.username = username }
-
-                fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                    this.additionalProperties.clear()
-                    putAllAdditionalProperties(additionalProperties)
-                }
-
-                fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-                    additionalProperties.put(key, value)
-                }
-
-                fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-                    apply {
-                        this.additionalProperties.putAll(additionalProperties)
-                    }
-
-                fun removeAdditionalProperty(key: String) = apply {
-                    additionalProperties.remove(key)
-                }
-
-                fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-                    keys.forEach(::removeAdditionalProperty)
-                }
-
-                /**
-                 * Returns an immutable instance of [LogisticsRemark].
-                 *
-                 * Further updates to this [Builder] will not mutate the returned instance.
-                 */
-                fun build(): LogisticsRemark =
-                    LogisticsRemark(
-                        lastChanged,
-                        remark,
-                        username,
-                        additionalProperties.toMutableMap(),
-                    )
-            }
-
-            private var validated: Boolean = false
-
-            fun validate(): LogisticsRemark = apply {
-                if (validated) {
-                    return@apply
-                }
-
-                lastChanged()
-                remark()
-                username()
-                validated = true
-            }
-
-            fun isValid(): Boolean =
-                try {
-                    validate()
-                    true
-                } catch (e: UnifieddatalibraryInvalidDataException) {
-                    false
-                }
-
-            /**
-             * Returns a score indicating how many valid values are contained in this object
-             * recursively.
-             *
-             * Used for best match union deserialization.
-             */
-            @JvmSynthetic
-            internal fun validity(): Int =
-                (if (lastChanged.asKnown().isPresent) 1 else 0) +
-                    (if (remark.asKnown().isPresent) 1 else 0) +
-                    (if (username.asKnown().isPresent) 1 else 0)
-
-            override fun equals(other: Any?): Boolean {
-                if (this === other) {
-                    return true
-                }
-
-                return /* spotless:off */ other is LogisticsRemark && lastChanged == other.lastChanged && remark == other.remark && username == other.username && additionalProperties == other.additionalProperties /* spotless:on */
-            }
-
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(lastChanged, remark, username, additionalProperties) }
-            /* spotless:on */
-
-            override fun hashCode(): Int = hashCode
-
-            override fun toString() =
-                "LogisticsRemark{lastChanged=$lastChanged, remark=$remark, username=$username, additionalProperties=$additionalProperties}"
         }
 
         /** The specialties required to implement this support item. */
@@ -5905,12 +5556,29 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is LogisticsSpecialty && firstName == other.firstName && last4Ssn == other.last4Ssn && lastName == other.lastName && rankCode == other.rankCode && roleTypeCode == other.roleTypeCode && skillLevel == other.skillLevel && specialty == other.specialty && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is LogisticsSpecialty &&
+                    firstName == other.firstName &&
+                    last4Ssn == other.last4Ssn &&
+                    lastName == other.lastName &&
+                    rankCode == other.rankCode &&
+                    roleTypeCode == other.roleTypeCode &&
+                    skillLevel == other.skillLevel &&
+                    specialty == other.specialty &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(firstName, last4Ssn, lastName, rankCode, roleTypeCode, skillLevel, specialty, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    firstName,
+                    last4Ssn,
+                    lastName,
+                    rankCode,
+                    roleTypeCode,
+                    skillLevel,
+                    specialty,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -5923,12 +5591,53 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is LogisticsSupportItem && cannibalized == other.cannibalized && deployPlanNumber == other.deployPlanNumber && description == other.description && itemLastChangedDate == other.itemLastChangedDate && jobControlNumber == other.jobControlNumber && logisticsParts == other.logisticsParts && logisticsRemarks == other.logisticsRemarks && logisticsSpecialties == other.logisticsSpecialties && quantity == other.quantity && readyTime == other.readyTime && receivedTime == other.receivedTime && recoveryRequestTypeCode == other.recoveryRequestTypeCode && redeployPlanNumber == other.redeployPlanNumber && redeployShipmentUnitId == other.redeployShipmentUnitId && requestNumber == other.requestNumber && resupportFlag == other.resupportFlag && shipmentUnitId == other.shipmentUnitId && siPoc == other.siPoc && sourceIcao == other.sourceIcao && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is LogisticsSupportItem &&
+                cannibalized == other.cannibalized &&
+                deployPlanNumber == other.deployPlanNumber &&
+                description == other.description &&
+                itemLastChangedDate == other.itemLastChangedDate &&
+                jobControlNumber == other.jobControlNumber &&
+                logisticsParts == other.logisticsParts &&
+                logisticsRemarks == other.logisticsRemarks &&
+                logisticsSpecialties == other.logisticsSpecialties &&
+                quantity == other.quantity &&
+                readyTime == other.readyTime &&
+                receivedTime == other.receivedTime &&
+                recoveryRequestTypeCode == other.recoveryRequestTypeCode &&
+                redeployPlanNumber == other.redeployPlanNumber &&
+                redeployShipmentUnitId == other.redeployShipmentUnitId &&
+                requestNumber == other.requestNumber &&
+                resupportFlag == other.resupportFlag &&
+                shipmentUnitId == other.shipmentUnitId &&
+                siPoc == other.siPoc &&
+                sourceIcao == other.sourceIcao &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(cannibalized, deployPlanNumber, description, itemLastChangedDate, jobControlNumber, logisticsParts, logisticsRemarks, logisticsSpecialties, quantity, readyTime, receivedTime, recoveryRequestTypeCode, redeployPlanNumber, redeployShipmentUnitId, requestNumber, resupportFlag, shipmentUnitId, siPoc, sourceIcao, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                cannibalized,
+                deployPlanNumber,
+                description,
+                itemLastChangedDate,
+                jobControlNumber,
+                logisticsParts,
+                logisticsRemarks,
+                logisticsSpecialties,
+                quantity,
+                readyTime,
+                receivedTime,
+                recoveryRequestTypeCode,
+                redeployPlanNumber,
+                redeployShipmentUnitId,
+                requestNumber,
+                resupportFlag,
+                shipmentUnitId,
+                siPoc,
+                sourceIcao,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5956,8 +5665,7 @@ private constructor(
         private val lastChangedDate: JsonField<OffsetDateTime>,
         private val logisticMasterRecordId: JsonField<String>,
         private val logisticsSegments: JsonField<List<LogisticsSegment>>,
-        private val logisticsTransportationPlansRemarks:
-            JsonField<List<LogisticsTransportationPlansRemark>>,
+        private val logisticsTransportationPlansRemarks: JsonField<List<LogisticsRemarksIngest>>,
         private val majcom: JsonField<String>,
         private val missionChange: JsonField<Boolean>,
         private val numEnrouteStops: JsonField<Int>,
@@ -6018,8 +5726,7 @@ private constructor(
             logisticsSegments: JsonField<List<LogisticsSegment>> = JsonMissing.of(),
             @JsonProperty("logisticsTransportationPlansRemarks")
             @ExcludeMissing
-            logisticsTransportationPlansRemarks:
-                JsonField<List<LogisticsTransportationPlansRemark>> =
+            logisticsTransportationPlansRemarks: JsonField<List<LogisticsRemarksIngest>> =
                 JsonMissing.of(),
             @JsonProperty("majcom") @ExcludeMissing majcom: JsonField<String> = JsonMissing.of(),
             @JsonProperty("missionChange")
@@ -6211,8 +5918,7 @@ private constructor(
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
-        fun logisticsTransportationPlansRemarks():
-            Optional<List<LogisticsTransportationPlansRemark>> =
+        fun logisticsTransportationPlansRemarks(): Optional<List<LogisticsRemarksIngest>> =
             logisticsTransportationPlansRemarks.getOptional("logisticsTransportationPlansRemarks")
 
         /**
@@ -6449,8 +6155,7 @@ private constructor(
          */
         @JsonProperty("logisticsTransportationPlansRemarks")
         @ExcludeMissing
-        fun _logisticsTransportationPlansRemarks():
-            JsonField<List<LogisticsTransportationPlansRemark>> =
+        fun _logisticsTransportationPlansRemarks(): JsonField<List<LogisticsRemarksIngest>> =
             logisticsTransportationPlansRemarks
 
         /**
@@ -6596,7 +6301,7 @@ private constructor(
             private var logisticMasterRecordId: JsonField<String> = JsonMissing.of()
             private var logisticsSegments: JsonField<MutableList<LogisticsSegment>>? = null
             private var logisticsTransportationPlansRemarks:
-                JsonField<MutableList<LogisticsTransportationPlansRemark>>? =
+                JsonField<MutableList<LogisticsRemarksIngest>>? =
                 null
             private var majcom: JsonField<String> = JsonMissing.of()
             private var missionChange: JsonField<Boolean> = JsonMissing.of()
@@ -6887,7 +6592,7 @@ private constructor(
 
             /** Remarks associated with this transportation plan. */
             fun logisticsTransportationPlansRemarks(
-                logisticsTransportationPlansRemarks: List<LogisticsTransportationPlansRemark>
+                logisticsTransportationPlansRemarks: List<LogisticsRemarksIngest>
             ) =
                 logisticsTransportationPlansRemarks(
                     JsonField.of(logisticsTransportationPlansRemarks)
@@ -6897,25 +6602,23 @@ private constructor(
              * Sets [Builder.logisticsTransportationPlansRemarks] to an arbitrary JSON value.
              *
              * You should usually call [Builder.logisticsTransportationPlansRemarks] with a
-             * well-typed `List<LogisticsTransportationPlansRemark>` value instead. This method is
-             * primarily for setting the field to an undocumented or not yet supported value.
+             * well-typed `List<LogisticsRemarksIngest>` value instead. This method is primarily for
+             * setting the field to an undocumented or not yet supported value.
              */
             fun logisticsTransportationPlansRemarks(
-                logisticsTransportationPlansRemarks:
-                    JsonField<List<LogisticsTransportationPlansRemark>>
+                logisticsTransportationPlansRemarks: JsonField<List<LogisticsRemarksIngest>>
             ) = apply {
                 this.logisticsTransportationPlansRemarks =
                     logisticsTransportationPlansRemarks.map { it.toMutableList() }
             }
 
             /**
-             * Adds a single [LogisticsTransportationPlansRemark] to
-             * [logisticsTransportationPlansRemarks].
+             * Adds a single [LogisticsRemarksIngest] to [logisticsTransportationPlansRemarks].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
             fun addLogisticsTransportationPlansRemark(
-                logisticsTransportationPlansRemark: LogisticsTransportationPlansRemark
+                logisticsTransportationPlansRemark: LogisticsRemarksIngest
             ) = apply {
                 logisticsTransportationPlansRemarks =
                     (logisticsTransportationPlansRemarks ?: JsonField.of(mutableListOf())).also {
@@ -7999,12 +7702,45 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is LogisticsSegment && arrivalIcao == other.arrivalIcao && departureIcao == other.departureIcao && extMissionId == other.extMissionId && idMission == other.idMission && itin == other.itin && missionNumber == other.missionNumber && missionType == other.missionType && modeCode == other.modeCode && segActArrTime == other.segActArrTime && segActDepTime == other.segActDepTime && segAircraftMds == other.segAircraftMds && segEstArrTime == other.segEstArrTime && segEstDepTime == other.segEstDepTime && segmentNumber == other.segmentNumber && segTailNumber == other.segTailNumber && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is LogisticsSegment &&
+                    arrivalIcao == other.arrivalIcao &&
+                    departureIcao == other.departureIcao &&
+                    extMissionId == other.extMissionId &&
+                    idMission == other.idMission &&
+                    itin == other.itin &&
+                    missionNumber == other.missionNumber &&
+                    missionType == other.missionType &&
+                    modeCode == other.modeCode &&
+                    segActArrTime == other.segActArrTime &&
+                    segActDepTime == other.segActDepTime &&
+                    segAircraftMds == other.segAircraftMds &&
+                    segEstArrTime == other.segEstArrTime &&
+                    segEstDepTime == other.segEstDepTime &&
+                    segmentNumber == other.segmentNumber &&
+                    segTailNumber == other.segTailNumber &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(arrivalIcao, departureIcao, extMissionId, idMission, itin, missionNumber, missionType, modeCode, segActArrTime, segActDepTime, segAircraftMds, segEstArrTime, segEstDepTime, segmentNumber, segTailNumber, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    arrivalIcao,
+                    departureIcao,
+                    extMissionId,
+                    idMission,
+                    itin,
+                    missionNumber,
+                    missionType,
+                    modeCode,
+                    segActArrTime,
+                    segActDepTime,
+                    segAircraftMds,
+                    segEstArrTime,
+                    segEstDepTime,
+                    segmentNumber,
+                    segTailNumber,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -8012,258 +7748,72 @@ private constructor(
                 "LogisticsSegment{arrivalIcao=$arrivalIcao, departureIcao=$departureIcao, extMissionId=$extMissionId, idMission=$idMission, itin=$itin, missionNumber=$missionNumber, missionType=$missionType, modeCode=$modeCode, segActArrTime=$segActArrTime, segActDepTime=$segActDepTime, segAircraftMds=$segAircraftMds, segEstArrTime=$segEstArrTime, segEstDepTime=$segEstDepTime, segmentNumber=$segmentNumber, segTailNumber=$segTailNumber, additionalProperties=$additionalProperties}"
         }
 
-        /** Remarks associated with this LogisticsSupport record. */
-        class LogisticsTransportationPlansRemark
-        private constructor(
-            private val lastChanged: JsonField<OffsetDateTime>,
-            private val remark: JsonField<String>,
-            private val username: JsonField<String>,
-            private val additionalProperties: MutableMap<String, JsonValue>,
-        ) {
-
-            @JsonCreator
-            private constructor(
-                @JsonProperty("lastChanged")
-                @ExcludeMissing
-                lastChanged: JsonField<OffsetDateTime> = JsonMissing.of(),
-                @JsonProperty("remark")
-                @ExcludeMissing
-                remark: JsonField<String> = JsonMissing.of(),
-                @JsonProperty("username")
-                @ExcludeMissing
-                username: JsonField<String> = JsonMissing.of(),
-            ) : this(lastChanged, remark, username, mutableMapOf())
-
-            /**
-             * Date the remark was published or updated, in ISO 8601 UTC format, with millisecond
-             * precision.
-             *
-             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
-             *   type (e.g. if the server responded with an unexpected value).
-             */
-            fun lastChanged(): Optional<OffsetDateTime> = lastChanged.getOptional("lastChanged")
-
-            /**
-             * Text of the remark.
-             *
-             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
-             *   type (e.g. if the server responded with an unexpected value).
-             */
-            fun remark(): Optional<String> = remark.getOptional("remark")
-
-            /**
-             * User who published the remark.
-             *
-             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
-             *   type (e.g. if the server responded with an unexpected value).
-             */
-            fun username(): Optional<String> = username.getOptional("username")
-
-            /**
-             * Returns the raw JSON value of [lastChanged].
-             *
-             * Unlike [lastChanged], this method doesn't throw if the JSON field has an unexpected
-             * type.
-             */
-            @JsonProperty("lastChanged")
-            @ExcludeMissing
-            fun _lastChanged(): JsonField<OffsetDateTime> = lastChanged
-
-            /**
-             * Returns the raw JSON value of [remark].
-             *
-             * Unlike [remark], this method doesn't throw if the JSON field has an unexpected type.
-             */
-            @JsonProperty("remark") @ExcludeMissing fun _remark(): JsonField<String> = remark
-
-            /**
-             * Returns the raw JSON value of [username].
-             *
-             * Unlike [username], this method doesn't throw if the JSON field has an unexpected
-             * type.
-             */
-            @JsonProperty("username") @ExcludeMissing fun _username(): JsonField<String> = username
-
-            @JsonAnySetter
-            private fun putAdditionalProperty(key: String, value: JsonValue) {
-                additionalProperties.put(key, value)
-            }
-
-            @JsonAnyGetter
-            @ExcludeMissing
-            fun _additionalProperties(): Map<String, JsonValue> =
-                Collections.unmodifiableMap(additionalProperties)
-
-            fun toBuilder() = Builder().from(this)
-
-            companion object {
-
-                /**
-                 * Returns a mutable builder for constructing an instance of
-                 * [LogisticsTransportationPlansRemark].
-                 */
-                @JvmStatic fun builder() = Builder()
-            }
-
-            /** A builder for [LogisticsTransportationPlansRemark]. */
-            class Builder internal constructor() {
-
-                private var lastChanged: JsonField<OffsetDateTime> = JsonMissing.of()
-                private var remark: JsonField<String> = JsonMissing.of()
-                private var username: JsonField<String> = JsonMissing.of()
-                private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
-
-                @JvmSynthetic
-                internal fun from(
-                    logisticsTransportationPlansRemark: LogisticsTransportationPlansRemark
-                ) = apply {
-                    lastChanged = logisticsTransportationPlansRemark.lastChanged
-                    remark = logisticsTransportationPlansRemark.remark
-                    username = logisticsTransportationPlansRemark.username
-                    additionalProperties =
-                        logisticsTransportationPlansRemark.additionalProperties.toMutableMap()
-                }
-
-                /**
-                 * Date the remark was published or updated, in ISO 8601 UTC format, with
-                 * millisecond precision.
-                 */
-                fun lastChanged(lastChanged: OffsetDateTime) =
-                    lastChanged(JsonField.of(lastChanged))
-
-                /**
-                 * Sets [Builder.lastChanged] to an arbitrary JSON value.
-                 *
-                 * You should usually call [Builder.lastChanged] with a well-typed [OffsetDateTime]
-                 * value instead. This method is primarily for setting the field to an undocumented
-                 * or not yet supported value.
-                 */
-                fun lastChanged(lastChanged: JsonField<OffsetDateTime>) = apply {
-                    this.lastChanged = lastChanged
-                }
-
-                /** Text of the remark. */
-                fun remark(remark: String) = remark(JsonField.of(remark))
-
-                /**
-                 * Sets [Builder.remark] to an arbitrary JSON value.
-                 *
-                 * You should usually call [Builder.remark] with a well-typed [String] value
-                 * instead. This method is primarily for setting the field to an undocumented or not
-                 * yet supported value.
-                 */
-                fun remark(remark: JsonField<String>) = apply { this.remark = remark }
-
-                /** User who published the remark. */
-                fun username(username: String) = username(JsonField.of(username))
-
-                /**
-                 * Sets [Builder.username] to an arbitrary JSON value.
-                 *
-                 * You should usually call [Builder.username] with a well-typed [String] value
-                 * instead. This method is primarily for setting the field to an undocumented or not
-                 * yet supported value.
-                 */
-                fun username(username: JsonField<String>) = apply { this.username = username }
-
-                fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
-                    this.additionalProperties.clear()
-                    putAllAdditionalProperties(additionalProperties)
-                }
-
-                fun putAdditionalProperty(key: String, value: JsonValue) = apply {
-                    additionalProperties.put(key, value)
-                }
-
-                fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-                    apply {
-                        this.additionalProperties.putAll(additionalProperties)
-                    }
-
-                fun removeAdditionalProperty(key: String) = apply {
-                    additionalProperties.remove(key)
-                }
-
-                fun removeAllAdditionalProperties(keys: Set<String>) = apply {
-                    keys.forEach(::removeAdditionalProperty)
-                }
-
-                /**
-                 * Returns an immutable instance of [LogisticsTransportationPlansRemark].
-                 *
-                 * Further updates to this [Builder] will not mutate the returned instance.
-                 */
-                fun build(): LogisticsTransportationPlansRemark =
-                    LogisticsTransportationPlansRemark(
-                        lastChanged,
-                        remark,
-                        username,
-                        additionalProperties.toMutableMap(),
-                    )
-            }
-
-            private var validated: Boolean = false
-
-            fun validate(): LogisticsTransportationPlansRemark = apply {
-                if (validated) {
-                    return@apply
-                }
-
-                lastChanged()
-                remark()
-                username()
-                validated = true
-            }
-
-            fun isValid(): Boolean =
-                try {
-                    validate()
-                    true
-                } catch (e: UnifieddatalibraryInvalidDataException) {
-                    false
-                }
-
-            /**
-             * Returns a score indicating how many valid values are contained in this object
-             * recursively.
-             *
-             * Used for best match union deserialization.
-             */
-            @JvmSynthetic
-            internal fun validity(): Int =
-                (if (lastChanged.asKnown().isPresent) 1 else 0) +
-                    (if (remark.asKnown().isPresent) 1 else 0) +
-                    (if (username.asKnown().isPresent) 1 else 0)
-
-            override fun equals(other: Any?): Boolean {
-                if (this === other) {
-                    return true
-                }
-
-                return /* spotless:off */ other is LogisticsTransportationPlansRemark && lastChanged == other.lastChanged && remark == other.remark && username == other.username && additionalProperties == other.additionalProperties /* spotless:on */
-            }
-
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(lastChanged, remark, username, additionalProperties) }
-            /* spotless:on */
-
-            override fun hashCode(): Int = hashCode
-
-            override fun toString() =
-                "LogisticsTransportationPlansRemark{lastChanged=$lastChanged, remark=$remark, username=$username, additionalProperties=$additionalProperties}"
-        }
-
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is LogisticsTransportationPlan && actDepTime == other.actDepTime && aircraftStatus == other.aircraftStatus && approxArrTime == other.approxArrTime && cancelledDate == other.cancelledDate && closedDate == other.closedDate && coordinator == other.coordinator && coordinatorUnit == other.coordinatorUnit && destinationIcao == other.destinationIcao && duration == other.duration && estArrTime == other.estArrTime && estDepTime == other.estDepTime && lastChangedDate == other.lastChangedDate && logisticMasterRecordId == other.logisticMasterRecordId && logisticsSegments == other.logisticsSegments && logisticsTransportationPlansRemarks == other.logisticsTransportationPlansRemarks && majcom == other.majcom && missionChange == other.missionChange && numEnrouteStops == other.numEnrouteStops && numTransLoads == other.numTransLoads && originIcao == other.originIcao && planDefinition == other.planDefinition && plansNumber == other.plansNumber && serialNumber == other.serialNumber && statusCode == other.statusCode && tpAircraftMds == other.tpAircraftMds && tpTailNumber == other.tpTailNumber && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is LogisticsTransportationPlan &&
+                actDepTime == other.actDepTime &&
+                aircraftStatus == other.aircraftStatus &&
+                approxArrTime == other.approxArrTime &&
+                cancelledDate == other.cancelledDate &&
+                closedDate == other.closedDate &&
+                coordinator == other.coordinator &&
+                coordinatorUnit == other.coordinatorUnit &&
+                destinationIcao == other.destinationIcao &&
+                duration == other.duration &&
+                estArrTime == other.estArrTime &&
+                estDepTime == other.estDepTime &&
+                lastChangedDate == other.lastChangedDate &&
+                logisticMasterRecordId == other.logisticMasterRecordId &&
+                logisticsSegments == other.logisticsSegments &&
+                logisticsTransportationPlansRemarks == other.logisticsTransportationPlansRemarks &&
+                majcom == other.majcom &&
+                missionChange == other.missionChange &&
+                numEnrouteStops == other.numEnrouteStops &&
+                numTransLoads == other.numTransLoads &&
+                originIcao == other.originIcao &&
+                planDefinition == other.planDefinition &&
+                plansNumber == other.plansNumber &&
+                serialNumber == other.serialNumber &&
+                statusCode == other.statusCode &&
+                tpAircraftMds == other.tpAircraftMds &&
+                tpTailNumber == other.tpTailNumber &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(actDepTime, aircraftStatus, approxArrTime, cancelledDate, closedDate, coordinator, coordinatorUnit, destinationIcao, duration, estArrTime, estDepTime, lastChangedDate, logisticMasterRecordId, logisticsSegments, logisticsTransportationPlansRemarks, majcom, missionChange, numEnrouteStops, numTransLoads, originIcao, planDefinition, plansNumber, serialNumber, statusCode, tpAircraftMds, tpTailNumber, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                actDepTime,
+                aircraftStatus,
+                approxArrTime,
+                cancelledDate,
+                closedDate,
+                coordinator,
+                coordinatorUnit,
+                destinationIcao,
+                duration,
+                estArrTime,
+                estDepTime,
+                lastChangedDate,
+                logisticMasterRecordId,
+                logisticsSegments,
+                logisticsTransportationPlansRemarks,
+                majcom,
+                missionChange,
+                numEnrouteStops,
+                numTransLoads,
+                originIcao,
+                planDefinition,
+                plansNumber,
+                serialNumber,
+                statusCode,
+                tpAircraftMds,
+                tpTailNumber,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -8276,10 +7826,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LogisticsSupportUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is LogisticsSupportUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "LogisticsSupportUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -183,12 +183,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OperatingHoursFull && opStartTime == other.opStartTime && opStopTime == other.opStopTime && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is OperatingHoursFull &&
+            opStartTime == other.opStartTime &&
+            opStopTime == other.opStopTime &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(opStartTime, opStopTime, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(opStartTime, opStopTime, additionalProperties)
+    }
 
     override fun hashCode(): Int = hashCode
 

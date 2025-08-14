@@ -1123,7 +1123,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -1254,7 +1254,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+                return other is Type && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -1267,12 +1267,49 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSortie == other.idSortie && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && endTime == other.endTime && externalId == other.externalId && grantor == other.grantor && number == other.number && origin == other.origin && origNetwork == other.origNetwork && remarks == other.remarks && requestor == other.requestor && sourceDl == other.sourceDl && startTime == other.startTime && type == other.type /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idSortie == other.idSortie &&
+                source == other.source &&
+                id == other.id &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                endTime == other.endTime &&
+                externalId == other.externalId &&
+                grantor == other.grantor &&
+                number == other.number &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                remarks == other.remarks &&
+                requestor == other.requestor &&
+                sourceDl == other.sourceDl &&
+                startTime == other.startTime &&
+                type == other.type
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSortie, source, id, createdAt, createdBy, endTime, externalId, grantor, number, origin, origNetwork, remarks, requestor, sourceDl, startTime, type) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idSortie,
+                source,
+                id,
+                createdAt,
+                createdBy,
+                endTime,
+                externalId,
+                grantor,
+                number,
+                origin,
+                origNetwork,
+                remarks,
+                requestor,
+                sourceDl,
+                startTime,
+                type,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1285,10 +1322,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SortiePprUnvalidatedPublishParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SortiePprUnvalidatedPublishParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SortiePprUnvalidatedPublishParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

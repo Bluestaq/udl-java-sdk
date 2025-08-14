@@ -2161,7 +2161,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -2174,12 +2174,91 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && obTime == other.obTime && source == other.source && id == other.id && angleOrientation == other.angleOrientation && avgRefPwr == other.avgRefPwr && avgTxPwr == other.avgTxPwr && checksum == other.checksum && coIntegs == other.coIntegs && consRecs == other.consRecs && createdAt == other.createdAt && createdBy == other.createdBy && doppVels == other.doppVels && fileCreation == other.fileCreation && firstGuessAvgs == other.firstGuessAvgs && idSensor == other.idSensor && interpulsePeriods == other.interpulsePeriods && lightDetSensors == other.lightDetSensors && lightEventNum == other.lightEventNum && noiseLvls == other.noiseLvls && numElements == other.numElements && origin == other.origin && origNetwork == other.origNetwork && origSensorId == other.origSensorId && posConfidence == other.posConfidence && qcValue == other.qcValue && sectorNum == other.sectorNum && semiMajorAxis == other.semiMajorAxis && semiMinorAxis == other.semiMinorAxis && sigPwrs == other.sigPwrs && sigStrength == other.sigStrength && snrs == other.snrs && specAvgs == other.specAvgs && specWidths == other.specWidths && srcIds == other.srcIds && srcTyps == other.srcTyps && tdAvgSampleNums == other.tdAvgSampleNums && termAlt == other.termAlt /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                obTime == other.obTime &&
+                source == other.source &&
+                id == other.id &&
+                angleOrientation == other.angleOrientation &&
+                avgRefPwr == other.avgRefPwr &&
+                avgTxPwr == other.avgTxPwr &&
+                checksum == other.checksum &&
+                coIntegs == other.coIntegs &&
+                consRecs == other.consRecs &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                doppVels == other.doppVels &&
+                fileCreation == other.fileCreation &&
+                firstGuessAvgs == other.firstGuessAvgs &&
+                idSensor == other.idSensor &&
+                interpulsePeriods == other.interpulsePeriods &&
+                lightDetSensors == other.lightDetSensors &&
+                lightEventNum == other.lightEventNum &&
+                noiseLvls == other.noiseLvls &&
+                numElements == other.numElements &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origSensorId == other.origSensorId &&
+                posConfidence == other.posConfidence &&
+                qcValue == other.qcValue &&
+                sectorNum == other.sectorNum &&
+                semiMajorAxis == other.semiMajorAxis &&
+                semiMinorAxis == other.semiMinorAxis &&
+                sigPwrs == other.sigPwrs &&
+                sigStrength == other.sigStrength &&
+                snrs == other.snrs &&
+                specAvgs == other.specAvgs &&
+                specWidths == other.specWidths &&
+                srcIds == other.srcIds &&
+                srcTyps == other.srcTyps &&
+                tdAvgSampleNums == other.tdAvgSampleNums &&
+                termAlt == other.termAlt
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, obTime, source, id, angleOrientation, avgRefPwr, avgTxPwr, checksum, coIntegs, consRecs, createdAt, createdBy, doppVels, fileCreation, firstGuessAvgs, idSensor, interpulsePeriods, lightDetSensors, lightEventNum, noiseLvls, numElements, origin, origNetwork, origSensorId, posConfidence, qcValue, sectorNum, semiMajorAxis, semiMinorAxis, sigPwrs, sigStrength, snrs, specAvgs, specWidths, srcIds, srcTyps, tdAvgSampleNums, termAlt) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                obTime,
+                source,
+                id,
+                angleOrientation,
+                avgRefPwr,
+                avgTxPwr,
+                checksum,
+                coIntegs,
+                consRecs,
+                createdAt,
+                createdBy,
+                doppVels,
+                fileCreation,
+                firstGuessAvgs,
+                idSensor,
+                interpulsePeriods,
+                lightDetSensors,
+                lightEventNum,
+                noiseLvls,
+                numElements,
+                origin,
+                origNetwork,
+                origSensorId,
+                posConfidence,
+                qcValue,
+                sectorNum,
+                semiMajorAxis,
+                semiMinorAxis,
+                sigPwrs,
+                sigStrength,
+                snrs,
+                specAvgs,
+                specWidths,
+                srcIds,
+                srcTyps,
+                tdAvgSampleNums,
+                termAlt,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2192,10 +2271,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is WeatherDataCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is WeatherDataCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "WeatherDataCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

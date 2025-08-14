@@ -261,12 +261,17 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LogisticsStocksFull && quantity == other.quantity && sourceIcao == other.sourceIcao && stockCheckTime == other.stockCheckTime && stockPoc == other.stockPoc && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is LogisticsStocksFull &&
+            quantity == other.quantity &&
+            sourceIcao == other.sourceIcao &&
+            stockCheckTime == other.stockCheckTime &&
+            stockPoc == other.stockPoc &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(quantity, sourceIcao, stockCheckTime, stockPoc, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(quantity, sourceIcao, stockCheckTime, stockPoc, additionalProperties)
+    }
 
     override fun hashCode(): Int = hashCode
 

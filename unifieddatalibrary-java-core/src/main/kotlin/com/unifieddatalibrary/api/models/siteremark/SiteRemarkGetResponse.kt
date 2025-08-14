@@ -820,7 +820,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -833,12 +833,43 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SiteRemarkGetResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSite == other.idSite && source == other.source && text == other.text && id == other.id && code == other.code && createdAt == other.createdAt && createdBy == other.createdBy && name == other.name && origin == other.origin && origNetwork == other.origNetwork && origRmkId == other.origRmkId && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SiteRemarkGetResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idSite == other.idSite &&
+            source == other.source &&
+            text == other.text &&
+            id == other.id &&
+            code == other.code &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            name == other.name &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origRmkId == other.origRmkId &&
+            type == other.type &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSite, source, text, id, code, createdAt, createdBy, name, origin, origNetwork, origRmkId, type, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idSite,
+            source,
+            text,
+            id,
+            code,
+            createdAt,
+            createdBy,
+            name,
+            origin,
+            origNetwork,
+            origRmkId,
+            type,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

@@ -389,12 +389,27 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is MaximumOnGroundFull && aircraftMds == other.aircraftMds && contingencyMog == other.contingencyMog && mogLastChangedBy == other.mogLastChangedBy && mogLastChangedDate == other.mogLastChangedDate && wideParkingMog == other.wideParkingMog && wideWorkingMog == other.wideWorkingMog && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is MaximumOnGroundFull &&
+            aircraftMds == other.aircraftMds &&
+            contingencyMog == other.contingencyMog &&
+            mogLastChangedBy == other.mogLastChangedBy &&
+            mogLastChangedDate == other.mogLastChangedDate &&
+            wideParkingMog == other.wideParkingMog &&
+            wideWorkingMog == other.wideWorkingMog &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(aircraftMds, contingencyMog, mogLastChangedBy, mogLastChangedDate, wideParkingMog, wideWorkingMog, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            aircraftMds,
+            contingencyMog,
+            mogLastChangedBy,
+            mogLastChangedDate,
+            wideParkingMog,
+            wideWorkingMog,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

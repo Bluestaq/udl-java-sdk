@@ -989,12 +989,53 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LogisticsSupportItemsFull && cannibalized == other.cannibalized && deployPlanNumber == other.deployPlanNumber && description == other.description && itemLastChangedDate == other.itemLastChangedDate && jobControlNumber == other.jobControlNumber && logisticsParts == other.logisticsParts && logisticsRemarks == other.logisticsRemarks && logisticsSpecialties == other.logisticsSpecialties && quantity == other.quantity && readyTime == other.readyTime && receivedTime == other.receivedTime && recoveryRequestTypeCode == other.recoveryRequestTypeCode && redeployPlanNumber == other.redeployPlanNumber && redeployShipmentUnitId == other.redeployShipmentUnitId && requestNumber == other.requestNumber && resupportFlag == other.resupportFlag && shipmentUnitId == other.shipmentUnitId && siPoc == other.siPoc && sourceIcao == other.sourceIcao && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is LogisticsSupportItemsFull &&
+            cannibalized == other.cannibalized &&
+            deployPlanNumber == other.deployPlanNumber &&
+            description == other.description &&
+            itemLastChangedDate == other.itemLastChangedDate &&
+            jobControlNumber == other.jobControlNumber &&
+            logisticsParts == other.logisticsParts &&
+            logisticsRemarks == other.logisticsRemarks &&
+            logisticsSpecialties == other.logisticsSpecialties &&
+            quantity == other.quantity &&
+            readyTime == other.readyTime &&
+            receivedTime == other.receivedTime &&
+            recoveryRequestTypeCode == other.recoveryRequestTypeCode &&
+            redeployPlanNumber == other.redeployPlanNumber &&
+            redeployShipmentUnitId == other.redeployShipmentUnitId &&
+            requestNumber == other.requestNumber &&
+            resupportFlag == other.resupportFlag &&
+            shipmentUnitId == other.shipmentUnitId &&
+            siPoc == other.siPoc &&
+            sourceIcao == other.sourceIcao &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(cannibalized, deployPlanNumber, description, itemLastChangedDate, jobControlNumber, logisticsParts, logisticsRemarks, logisticsSpecialties, quantity, readyTime, receivedTime, recoveryRequestTypeCode, redeployPlanNumber, redeployShipmentUnitId, requestNumber, resupportFlag, shipmentUnitId, siPoc, sourceIcao, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            cannibalized,
+            deployPlanNumber,
+            description,
+            itemLastChangedDate,
+            jobControlNumber,
+            logisticsParts,
+            logisticsRemarks,
+            logisticsSpecialties,
+            quantity,
+            readyTime,
+            receivedTime,
+            recoveryRequestTypeCode,
+            redeployPlanNumber,
+            redeployShipmentUnitId,
+            requestNumber,
+            resupportFlag,
+            shipmentUnitId,
+            siPoc,
+            sourceIcao,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

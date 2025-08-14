@@ -1814,12 +1814,53 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idBeam == other.idBeam && source == other.source && type == other.type && bodyId == other.bodyId && contourIdx == other.contourIdx && createdAt == other.createdAt && createdBy == other.createdBy && gain == other.gain && geography == other.geography && geographyJson == other.geographyJson && geographyNdims == other.geographyNdims && geographySrid == other.geographySrid && geographyText == other.geographyText && geographyType == other.geographyType && origin == other.origin && origNetwork == other.origNetwork && regionName == other.regionName && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idBeam == other.idBeam &&
+                source == other.source &&
+                type == other.type &&
+                bodyId == other.bodyId &&
+                contourIdx == other.contourIdx &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                gain == other.gain &&
+                geography == other.geography &&
+                geographyJson == other.geographyJson &&
+                geographyNdims == other.geographyNdims &&
+                geographySrid == other.geographySrid &&
+                geographyText == other.geographyText &&
+                geographyType == other.geographyType &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                regionName == other.regionName &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idBeam, source, type, bodyId, contourIdx, createdAt, createdBy, gain, geography, geographyJson, geographyNdims, geographySrid, geographyText, geographyType, origin, origNetwork, regionName, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idBeam,
+                source,
+                type,
+                bodyId,
+                contourIdx,
+                createdAt,
+                createdBy,
+                gain,
+                geography,
+                geographyJson,
+                geographyNdims,
+                geographySrid,
+                geographyText,
+                geographyType,
+                origin,
+                origNetwork,
+                regionName,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1972,7 +2013,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2112,7 +2153,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+            return other is Type && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2125,10 +2166,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is BeamContourUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is BeamContourUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "BeamContourUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -245,10 +245,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GlobalAtmosphericModelQueryParams && ts == other.ts && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is GlobalAtmosphericModelQueryParams &&
+            ts == other.ts &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(ts, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(ts, firstResult, maxResults, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "GlobalAtmosphericModelQueryParams{ts=$ts, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

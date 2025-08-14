@@ -1180,7 +1180,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1308,7 +1308,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Mode && value == other.value /* spotless:on */
+            return other is Mode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1456,7 +1456,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Polarization && value == other.value /* spotless:on */
+            return other is Polarization && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1599,7 +1599,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Purpose && value == other.value /* spotless:on */
+            return other is Purpose && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1612,12 +1612,61 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is RfBandListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idEntity == other.idEntity && name == other.name && source == other.source && id == other.id && band == other.band && bandwidth == other.bandwidth && beamwidth == other.beamwidth && centerFreq == other.centerFreq && createdAt == other.createdAt && createdBy == other.createdBy && edgeGain == other.edgeGain && eirp == other.eirp && erp == other.erp && freqMax == other.freqMax && freqMin == other.freqMin && mode == other.mode && origin == other.origin && origNetwork == other.origNetwork && peakGain == other.peakGain && polarization == other.polarization && purpose == other.purpose && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is RfBandListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idEntity == other.idEntity &&
+            name == other.name &&
+            source == other.source &&
+            id == other.id &&
+            band == other.band &&
+            bandwidth == other.bandwidth &&
+            beamwidth == other.beamwidth &&
+            centerFreq == other.centerFreq &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            edgeGain == other.edgeGain &&
+            eirp == other.eirp &&
+            erp == other.erp &&
+            freqMax == other.freqMax &&
+            freqMin == other.freqMin &&
+            mode == other.mode &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            peakGain == other.peakGain &&
+            polarization == other.polarization &&
+            purpose == other.purpose &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idEntity, name, source, id, band, bandwidth, beamwidth, centerFreq, createdAt, createdBy, edgeGain, eirp, erp, freqMax, freqMin, mode, origin, origNetwork, peakGain, polarization, purpose, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idEntity,
+            name,
+            source,
+            id,
+            band,
+            bandwidth,
+            beamwidth,
+            centerFreq,
+            createdAt,
+            createdBy,
+            edgeGain,
+            eirp,
+            erp,
+            freqMax,
+            freqMin,
+            mode,
+            origin,
+            origNetwork,
+            peakGain,
+            polarization,
+            purpose,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

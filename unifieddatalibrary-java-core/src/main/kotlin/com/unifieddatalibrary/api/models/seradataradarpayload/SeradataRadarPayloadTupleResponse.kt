@@ -1639,7 +1639,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1652,12 +1652,84 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SeradataRadarPayloadTupleResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && spacecraftId == other.spacecraftId && id == other.id && bandwidth == other.bandwidth && bestResolution == other.bestResolution && category == other.category && constellationInterferometricCapability == other.constellationInterferometricCapability && createdAt == other.createdAt && createdBy == other.createdBy && dutyCycle == other.dutyCycle && fieldOfRegard == other.fieldOfRegard && fieldOfView == other.fieldOfView && frequency == other.frequency && frequencyBand == other.frequencyBand && groundStationLocations == other.groundStationLocations && groundStations == other.groundStations && hostedForCompanyOrgId == other.hostedForCompanyOrgId && idSensor == other.idSensor && manufacturerOrgId == other.manufacturerOrgId && name == other.name && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && partnerSpacecraft == other.partnerSpacecraft && pointingMethod == other.pointingMethod && receivePolarization == other.receivePolarization && recorderSize == other.recorderSize && swathWidth == other.swathWidth && transmitPolarization == other.transmitPolarization && updatedAt == other.updatedAt && updatedBy == other.updatedBy && waveLength == other.waveLength && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SeradataRadarPayloadTupleResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            spacecraftId == other.spacecraftId &&
+            id == other.id &&
+            bandwidth == other.bandwidth &&
+            bestResolution == other.bestResolution &&
+            category == other.category &&
+            constellationInterferometricCapability ==
+                other.constellationInterferometricCapability &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            dutyCycle == other.dutyCycle &&
+            fieldOfRegard == other.fieldOfRegard &&
+            fieldOfView == other.fieldOfView &&
+            frequency == other.frequency &&
+            frequencyBand == other.frequencyBand &&
+            groundStationLocations == other.groundStationLocations &&
+            groundStations == other.groundStations &&
+            hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+            idSensor == other.idSensor &&
+            manufacturerOrgId == other.manufacturerOrgId &&
+            name == other.name &&
+            notes == other.notes &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            partnerSpacecraft == other.partnerSpacecraft &&
+            pointingMethod == other.pointingMethod &&
+            receivePolarization == other.receivePolarization &&
+            recorderSize == other.recorderSize &&
+            swathWidth == other.swathWidth &&
+            transmitPolarization == other.transmitPolarization &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            waveLength == other.waveLength &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, spacecraftId, id, bandwidth, bestResolution, category, constellationInterferometricCapability, createdAt, createdBy, dutyCycle, fieldOfRegard, fieldOfView, frequency, frequencyBand, groundStationLocations, groundStations, hostedForCompanyOrgId, idSensor, manufacturerOrgId, name, notes, origin, origNetwork, partnerSpacecraft, pointingMethod, receivePolarization, recorderSize, swathWidth, transmitPolarization, updatedAt, updatedBy, waveLength, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            spacecraftId,
+            id,
+            bandwidth,
+            bestResolution,
+            category,
+            constellationInterferometricCapability,
+            createdAt,
+            createdBy,
+            dutyCycle,
+            fieldOfRegard,
+            fieldOfView,
+            frequency,
+            frequencyBand,
+            groundStationLocations,
+            groundStations,
+            hostedForCompanyOrgId,
+            idSensor,
+            manufacturerOrgId,
+            name,
+            notes,
+            origin,
+            origNetwork,
+            partnerSpacecraft,
+            pointingMethod,
+            receivePolarization,
+            recorderSize,
+            swathWidth,
+            transmitPolarization,
+            updatedAt,
+            updatedBy,
+            waveLength,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

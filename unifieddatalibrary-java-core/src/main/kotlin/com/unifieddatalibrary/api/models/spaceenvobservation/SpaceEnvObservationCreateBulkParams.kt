@@ -2103,7 +2103,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -2267,7 +2267,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is SenReferenceFrame && value == other.value /* spotless:on */
+                return other is SenReferenceFrame && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -2771,12 +2771,31 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is SeoList && obType == other.obType && obUoM == other.obUoM && obArray == other.obArray && obBool == other.obBool && obDescription == other.obDescription && obQuality == other.obQuality && obString == other.obString && obValue == other.obValue && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is SeoList &&
+                    obType == other.obType &&
+                    obUoM == other.obUoM &&
+                    obArray == other.obArray &&
+                    obBool == other.obBool &&
+                    obDescription == other.obDescription &&
+                    obQuality == other.obQuality &&
+                    obString == other.obString &&
+                    obValue == other.obValue &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(obType, obUoM, obArray, obBool, obDescription, obQuality, obString, obValue, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    obType,
+                    obUoM,
+                    obArray,
+                    obBool,
+                    obDescription,
+                    obQuality,
+                    obString,
+                    obValue,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -2789,12 +2808,95 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && obTime == other.obTime && source == other.source && id == other.id && alt == other.alt && createdAt == other.createdAt && createdBy == other.createdBy && dataType == other.dataType && derived == other.derived && description == other.description && descriptor == other.descriptor && externalId == other.externalId && forecast == other.forecast && genSystem == other.genSystem && genTime == other.genTime && idOnOrbit == other.idOnOrbit && idSensor == other.idSensor && instrumentType == other.instrumentType && lat == other.lat && lon == other.lon && measType == other.measType && msgType == other.msgType && observatoryName == other.observatoryName && observatoryNotes == other.observatoryNotes && observatoryType == other.observatoryType && obSetId == other.obSetId && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId == other.origSensorId && particleType == other.particleType && quality == other.quality && satNo == other.satNo && senEnergyLevel == other.senEnergyLevel && senPos == other.senPos && senReferenceFrame == other.senReferenceFrame && senVel == other.senVel && seoList == other.seoList && srcIds == other.srcIds && srcTyps == other.srcTyps /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                obTime == other.obTime &&
+                source == other.source &&
+                id == other.id &&
+                alt == other.alt &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                dataType == other.dataType &&
+                derived == other.derived &&
+                description == other.description &&
+                descriptor == other.descriptor &&
+                externalId == other.externalId &&
+                forecast == other.forecast &&
+                genSystem == other.genSystem &&
+                genTime == other.genTime &&
+                idOnOrbit == other.idOnOrbit &&
+                idSensor == other.idSensor &&
+                instrumentType == other.instrumentType &&
+                lat == other.lat &&
+                lon == other.lon &&
+                measType == other.measType &&
+                msgType == other.msgType &&
+                observatoryName == other.observatoryName &&
+                observatoryNotes == other.observatoryNotes &&
+                observatoryType == other.observatoryType &&
+                obSetId == other.obSetId &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                origSensorId == other.origSensorId &&
+                particleType == other.particleType &&
+                quality == other.quality &&
+                satNo == other.satNo &&
+                senEnergyLevel == other.senEnergyLevel &&
+                senPos == other.senPos &&
+                senReferenceFrame == other.senReferenceFrame &&
+                senVel == other.senVel &&
+                seoList == other.seoList &&
+                srcIds == other.srcIds &&
+                srcTyps == other.srcTyps
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, obTime, source, id, alt, createdAt, createdBy, dataType, derived, description, descriptor, externalId, forecast, genSystem, genTime, idOnOrbit, idSensor, instrumentType, lat, lon, measType, msgType, observatoryName, observatoryNotes, observatoryType, obSetId, origin, origNetwork, origObjectId, origSensorId, particleType, quality, satNo, senEnergyLevel, senPos, senReferenceFrame, senVel, seoList, srcIds, srcTyps) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                obTime,
+                source,
+                id,
+                alt,
+                createdAt,
+                createdBy,
+                dataType,
+                derived,
+                description,
+                descriptor,
+                externalId,
+                forecast,
+                genSystem,
+                genTime,
+                idOnOrbit,
+                idSensor,
+                instrumentType,
+                lat,
+                lon,
+                measType,
+                msgType,
+                observatoryName,
+                observatoryNotes,
+                observatoryType,
+                obSetId,
+                origin,
+                origNetwork,
+                origObjectId,
+                origSensorId,
+                particleType,
+                quality,
+                satNo,
+                senEnergyLevel,
+                senPos,
+                senReferenceFrame,
+                senVel,
+                seoList,
+                srcIds,
+                srcTyps,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2807,10 +2909,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SpaceEnvObservationCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SpaceEnvObservationCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SpaceEnvObservationCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

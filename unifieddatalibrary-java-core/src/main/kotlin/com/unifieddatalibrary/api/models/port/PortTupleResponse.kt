@@ -1297,7 +1297,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1310,12 +1310,65 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is PortTupleResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && avgDuration == other.avgDuration && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && externalId == other.externalId && harborSize == other.harborSize && harborType == other.harborType && idSite == other.idSite && lat == other.lat && locode == other.locode && lon == other.lon && maxDraught == other.maxDraught && origin == other.origin && origNetwork == other.origNetwork && pilotReqd == other.pilotReqd && portName == other.portName && shelter == other.shelter && sourceDl == other.sourceDl && tideRange == other.tideRange && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is PortTupleResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            id == other.id &&
+            avgDuration == other.avgDuration &&
+            countryCode == other.countryCode &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            externalId == other.externalId &&
+            harborSize == other.harborSize &&
+            harborType == other.harborType &&
+            idSite == other.idSite &&
+            lat == other.lat &&
+            locode == other.locode &&
+            lon == other.lon &&
+            maxDraught == other.maxDraught &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            pilotReqd == other.pilotReqd &&
+            portName == other.portName &&
+            shelter == other.shelter &&
+            sourceDl == other.sourceDl &&
+            tideRange == other.tideRange &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, id, avgDuration, countryCode, createdAt, createdBy, externalId, harborSize, harborType, idSite, lat, locode, lon, maxDraught, origin, origNetwork, pilotReqd, portName, shelter, sourceDl, tideRange, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            id,
+            avgDuration,
+            countryCode,
+            createdAt,
+            createdBy,
+            externalId,
+            harborSize,
+            harborType,
+            idSite,
+            lat,
+            locode,
+            lon,
+            maxDraught,
+            origin,
+            origNetwork,
+            pilotReqd,
+            portName,
+            shelter,
+            sourceDl,
+            tideRange,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

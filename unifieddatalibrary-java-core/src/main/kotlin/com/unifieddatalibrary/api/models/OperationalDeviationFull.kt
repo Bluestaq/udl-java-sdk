@@ -415,12 +415,29 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OperationalDeviationFull && affectedAircraftMds == other.affectedAircraftMds && affectedMog == other.affectedMog && aircraftOnGroundTime == other.aircraftOnGroundTime && crewRestTime == other.crewRestTime && odLastChangedBy == other.odLastChangedBy && odLastChangedDate == other.odLastChangedDate && odRemark == other.odRemark && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is OperationalDeviationFull &&
+            affectedAircraftMds == other.affectedAircraftMds &&
+            affectedMog == other.affectedMog &&
+            aircraftOnGroundTime == other.aircraftOnGroundTime &&
+            crewRestTime == other.crewRestTime &&
+            odLastChangedBy == other.odLastChangedBy &&
+            odLastChangedDate == other.odLastChangedDate &&
+            odRemark == other.odRemark &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(affectedAircraftMds, affectedMog, aircraftOnGroundTime, crewRestTime, odLastChangedBy, odLastChangedDate, odRemark, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            affectedAircraftMds,
+            affectedMog,
+            aircraftOnGroundTime,
+            crewRestTime,
+            odLastChangedBy,
+            odLastChangedDate,
+            odRemark,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

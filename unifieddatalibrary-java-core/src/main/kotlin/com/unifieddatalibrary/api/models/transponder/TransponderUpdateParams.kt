@@ -1631,12 +1631,51 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idComm == other.idComm && source == other.source && bodyId == other.bodyId && createdAt == other.createdAt && createdBy == other.createdBy && fec == other.fec && format == other.format && modulation == other.modulation && name == other.name && nid == other.nid && origin == other.origin && origNetwork == other.origNetwork && symbolRate == other.symbolRate && system == other.system && tid == other.tid && ttf == other.ttf && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idComm == other.idComm &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                fec == other.fec &&
+                format == other.format &&
+                modulation == other.modulation &&
+                name == other.name &&
+                nid == other.nid &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                symbolRate == other.symbolRate &&
+                system == other.system &&
+                tid == other.tid &&
+                ttf == other.ttf &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idComm, source, bodyId, createdAt, createdBy, fec, format, modulation, name, nid, origin, origNetwork, symbolRate, system, tid, ttf, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idComm,
+                source,
+                bodyId,
+                createdAt,
+                createdBy,
+                fec,
+                format,
+                modulation,
+                name,
+                nid,
+                origin,
+                origNetwork,
+                symbolRate,
+                system,
+                tid,
+                ttf,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1789,7 +1828,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1802,10 +1841,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is TransponderUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is TransponderUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "TransponderUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

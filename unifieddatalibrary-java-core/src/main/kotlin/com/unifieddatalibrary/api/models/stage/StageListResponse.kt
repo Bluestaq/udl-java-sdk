@@ -1834,7 +1834,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1847,12 +1847,93 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is StageListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idEngine == other.idEngine && idLaunchVehicle == other.idLaunchVehicle && source == other.source && id == other.id && avionicsNotes == other.avionicsNotes && burnTime == other.burnTime && controlThruster1 == other.controlThruster1 && controlThruster2 == other.controlThruster2 && createdAt == other.createdAt && createdBy == other.createdBy && diameter == other.diameter && length == other.length && mainEngineThrustSeaLevel == other.mainEngineThrustSeaLevel && mainEngineThrustVacuum == other.mainEngineThrustVacuum && manufacturerOrgId == other.manufacturerOrgId && mass == other.mass && notes == other.notes && numBurns == other.numBurns && numControlThruster1 == other.numControlThruster1 && numControlThruster2 == other.numControlThruster2 && numEngines == other.numEngines && numStageElements == other.numStageElements && numVernier == other.numVernier && origin == other.origin && origNetwork == other.origNetwork && photoUrls == other.photoUrls && restartable == other.restartable && reusable == other.reusable && stageNumber == other.stageNumber && thrustSeaLevel == other.thrustSeaLevel && thrustVacuum == other.thrustVacuum && type == other.type && vernier == other.vernier && vernierBurnTime == other.vernierBurnTime && vernierNumBurns == other.vernierNumBurns && vernierThrustSeaLevel == other.vernierThrustSeaLevel && vernierThrustVacuum == other.vernierThrustVacuum && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is StageListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idEngine == other.idEngine &&
+            idLaunchVehicle == other.idLaunchVehicle &&
+            source == other.source &&
+            id == other.id &&
+            avionicsNotes == other.avionicsNotes &&
+            burnTime == other.burnTime &&
+            controlThruster1 == other.controlThruster1 &&
+            controlThruster2 == other.controlThruster2 &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            diameter == other.diameter &&
+            length == other.length &&
+            mainEngineThrustSeaLevel == other.mainEngineThrustSeaLevel &&
+            mainEngineThrustVacuum == other.mainEngineThrustVacuum &&
+            manufacturerOrgId == other.manufacturerOrgId &&
+            mass == other.mass &&
+            notes == other.notes &&
+            numBurns == other.numBurns &&
+            numControlThruster1 == other.numControlThruster1 &&
+            numControlThruster2 == other.numControlThruster2 &&
+            numEngines == other.numEngines &&
+            numStageElements == other.numStageElements &&
+            numVernier == other.numVernier &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            photoUrls == other.photoUrls &&
+            restartable == other.restartable &&
+            reusable == other.reusable &&
+            stageNumber == other.stageNumber &&
+            thrustSeaLevel == other.thrustSeaLevel &&
+            thrustVacuum == other.thrustVacuum &&
+            type == other.type &&
+            vernier == other.vernier &&
+            vernierBurnTime == other.vernierBurnTime &&
+            vernierNumBurns == other.vernierNumBurns &&
+            vernierThrustSeaLevel == other.vernierThrustSeaLevel &&
+            vernierThrustVacuum == other.vernierThrustVacuum &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idEngine, idLaunchVehicle, source, id, avionicsNotes, burnTime, controlThruster1, controlThruster2, createdAt, createdBy, diameter, length, mainEngineThrustSeaLevel, mainEngineThrustVacuum, manufacturerOrgId, mass, notes, numBurns, numControlThruster1, numControlThruster2, numEngines, numStageElements, numVernier, origin, origNetwork, photoUrls, restartable, reusable, stageNumber, thrustSeaLevel, thrustVacuum, type, vernier, vernierBurnTime, vernierNumBurns, vernierThrustSeaLevel, vernierThrustVacuum, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idEngine,
+            idLaunchVehicle,
+            source,
+            id,
+            avionicsNotes,
+            burnTime,
+            controlThruster1,
+            controlThruster2,
+            createdAt,
+            createdBy,
+            diameter,
+            length,
+            mainEngineThrustSeaLevel,
+            mainEngineThrustVacuum,
+            manufacturerOrgId,
+            mass,
+            notes,
+            numBurns,
+            numControlThruster1,
+            numControlThruster2,
+            numEngines,
+            numStageElements,
+            numVernier,
+            origin,
+            origNetwork,
+            photoUrls,
+            restartable,
+            reusable,
+            stageNumber,
+            thrustSeaLevel,
+            thrustVacuum,
+            type,
+            vernier,
+            vernierBurnTime,
+            vernierNumBurns,
+            vernierThrustSeaLevel,
+            vernierThrustVacuum,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

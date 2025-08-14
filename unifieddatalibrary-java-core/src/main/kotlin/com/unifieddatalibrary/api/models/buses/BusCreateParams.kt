@@ -4559,12 +4559,129 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && id == other.id && aocsNotes == other.aocsNotes && avgDryMass == other.avgDryMass && avgPayloadMass == other.avgPayloadMass && avgPayloadPower == other.avgPayloadPower && avgSpacecraftPower == other.avgSpacecraftPower && avgWetMass == other.avgWetMass && bodyDimensionX == other.bodyDimensionX && bodyDimensionY == other.bodyDimensionY && bodyDimensionZ == other.bodyDimensionZ && busKitDesignerOrgId == other.busKitDesignerOrgId && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && description == other.description && entity == other.entity && generic == other.generic && idEntity == other.idEntity && launchEnvelopeDimensionX == other.launchEnvelopeDimensionX && launchEnvelopeDimensionY == other.launchEnvelopeDimensionY && launchEnvelopeDimensionZ == other.launchEnvelopeDimensionZ && mainComputerManufacturerOrgId == other.mainComputerManufacturerOrgId && manufacturerOrgId == other.manufacturerOrgId && massCategory == other.massCategory && maxBolPowerLower == other.maxBolPowerLower && maxBolPowerUpper == other.maxBolPowerUpper && maxBolStationMass == other.maxBolStationMass && maxDryMass == other.maxDryMass && maxEolPowerLower == other.maxEolPowerLower && maxEolPowerUpper == other.maxEolPowerUpper && maxLaunchMassLower == other.maxLaunchMassLower && maxLaunchMassUpper == other.maxLaunchMassUpper && maxPayloadMass == other.maxPayloadMass && maxPayloadPower == other.maxPayloadPower && maxSpacecraftPower == other.maxSpacecraftPower && maxWetMass == other.maxWetMass && medianDryMass == other.medianDryMass && medianWetMass == other.medianWetMass && minDryMass == other.minDryMass && minWetMass == other.minWetMass && numOrbitType == other.numOrbitType && oapPayloadPower == other.oapPayloadPower && oapSpacecraftPower == other.oapSpacecraftPower && orbitTypes == other.orbitTypes && origin == other.origin && origNetwork == other.origNetwork && payloadDimensionX == other.payloadDimensionX && payloadDimensionY == other.payloadDimensionY && payloadDimensionZ == other.payloadDimensionZ && payloadVolume == other.payloadVolume && powerCategory == other.powerCategory && telemetryTrackingManufacturerOrgId == other.telemetryTrackingManufacturerOrgId && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                name == other.name &&
+                source == other.source &&
+                id == other.id &&
+                aocsNotes == other.aocsNotes &&
+                avgDryMass == other.avgDryMass &&
+                avgPayloadMass == other.avgPayloadMass &&
+                avgPayloadPower == other.avgPayloadPower &&
+                avgSpacecraftPower == other.avgSpacecraftPower &&
+                avgWetMass == other.avgWetMass &&
+                bodyDimensionX == other.bodyDimensionX &&
+                bodyDimensionY == other.bodyDimensionY &&
+                bodyDimensionZ == other.bodyDimensionZ &&
+                busKitDesignerOrgId == other.busKitDesignerOrgId &&
+                countryCode == other.countryCode &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                description == other.description &&
+                entity == other.entity &&
+                generic == other.generic &&
+                idEntity == other.idEntity &&
+                launchEnvelopeDimensionX == other.launchEnvelopeDimensionX &&
+                launchEnvelopeDimensionY == other.launchEnvelopeDimensionY &&
+                launchEnvelopeDimensionZ == other.launchEnvelopeDimensionZ &&
+                mainComputerManufacturerOrgId == other.mainComputerManufacturerOrgId &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                massCategory == other.massCategory &&
+                maxBolPowerLower == other.maxBolPowerLower &&
+                maxBolPowerUpper == other.maxBolPowerUpper &&
+                maxBolStationMass == other.maxBolStationMass &&
+                maxDryMass == other.maxDryMass &&
+                maxEolPowerLower == other.maxEolPowerLower &&
+                maxEolPowerUpper == other.maxEolPowerUpper &&
+                maxLaunchMassLower == other.maxLaunchMassLower &&
+                maxLaunchMassUpper == other.maxLaunchMassUpper &&
+                maxPayloadMass == other.maxPayloadMass &&
+                maxPayloadPower == other.maxPayloadPower &&
+                maxSpacecraftPower == other.maxSpacecraftPower &&
+                maxWetMass == other.maxWetMass &&
+                medianDryMass == other.medianDryMass &&
+                medianWetMass == other.medianWetMass &&
+                minDryMass == other.minDryMass &&
+                minWetMass == other.minWetMass &&
+                numOrbitType == other.numOrbitType &&
+                oapPayloadPower == other.oapPayloadPower &&
+                oapSpacecraftPower == other.oapSpacecraftPower &&
+                orbitTypes == other.orbitTypes &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                payloadDimensionX == other.payloadDimensionX &&
+                payloadDimensionY == other.payloadDimensionY &&
+                payloadDimensionZ == other.payloadDimensionZ &&
+                payloadVolume == other.payloadVolume &&
+                powerCategory == other.powerCategory &&
+                telemetryTrackingManufacturerOrgId == other.telemetryTrackingManufacturerOrgId &&
+                type == other.type &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, id, aocsNotes, avgDryMass, avgPayloadMass, avgPayloadPower, avgSpacecraftPower, avgWetMass, bodyDimensionX, bodyDimensionY, bodyDimensionZ, busKitDesignerOrgId, countryCode, createdAt, createdBy, description, entity, generic, idEntity, launchEnvelopeDimensionX, launchEnvelopeDimensionY, launchEnvelopeDimensionZ, mainComputerManufacturerOrgId, manufacturerOrgId, massCategory, maxBolPowerLower, maxBolPowerUpper, maxBolStationMass, maxDryMass, maxEolPowerLower, maxEolPowerUpper, maxLaunchMassLower, maxLaunchMassUpper, maxPayloadMass, maxPayloadPower, maxSpacecraftPower, maxWetMass, medianDryMass, medianWetMass, minDryMass, minWetMass, numOrbitType, oapPayloadPower, oapSpacecraftPower, orbitTypes, origin, origNetwork, payloadDimensionX, payloadDimensionY, payloadDimensionZ, payloadVolume, powerCategory, telemetryTrackingManufacturerOrgId, type, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                name,
+                source,
+                id,
+                aocsNotes,
+                avgDryMass,
+                avgPayloadMass,
+                avgPayloadPower,
+                avgSpacecraftPower,
+                avgWetMass,
+                bodyDimensionX,
+                bodyDimensionY,
+                bodyDimensionZ,
+                busKitDesignerOrgId,
+                countryCode,
+                createdAt,
+                createdBy,
+                description,
+                entity,
+                generic,
+                idEntity,
+                launchEnvelopeDimensionX,
+                launchEnvelopeDimensionY,
+                launchEnvelopeDimensionZ,
+                mainComputerManufacturerOrgId,
+                manufacturerOrgId,
+                massCategory,
+                maxBolPowerLower,
+                maxBolPowerUpper,
+                maxBolStationMass,
+                maxDryMass,
+                maxEolPowerLower,
+                maxEolPowerUpper,
+                maxLaunchMassLower,
+                maxLaunchMassUpper,
+                maxPayloadMass,
+                maxPayloadPower,
+                maxSpacecraftPower,
+                maxWetMass,
+                medianDryMass,
+                medianWetMass,
+                minDryMass,
+                minWetMass,
+                numOrbitType,
+                oapPayloadPower,
+                oapSpacecraftPower,
+                orbitTypes,
+                origin,
+                origNetwork,
+                payloadDimensionX,
+                payloadDimensionY,
+                payloadDimensionZ,
+                payloadVolume,
+                powerCategory,
+                telemetryTrackingManufacturerOrgId,
+                type,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4717,7 +4834,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4730,10 +4847,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is BusCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is BusCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "BusCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

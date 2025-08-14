@@ -6013,12 +6013,169 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && type == other.type && bodyId == other.bodyId && altSiteId == other.altSiteId && condition == other.condition && createdAt == other.createdAt && createdBy == other.createdBy && ddtWtKip == other.ddtWtKip && ddtWtKipMod == other.ddtWtKipMod && ddtWtKipModNote == other.ddtWtKipModNote && ddtWtKn == other.ddtWtKn && ddWtKip == other.ddWtKip && ddWtKipMod == other.ddWtKipMod && ddWtKipModNote == other.ddWtKipModNote && ddWtKn == other.ddWtKn && endLat == other.endLat && endLon == other.endLon && idSite == other.idSite && lcn == other.lcn && ldaFt == other.ldaFt && ldaM == other.ldaM && lengthFt == other.lengthFt && lengthM == other.lengthM && lighting == other.lighting && lightsAprch == other.lightsAprch && lightsCl == other.lightsCl && lightsOls == other.lightsOls && lightsPapi == other.lightsPapi && lightsReil == other.lightsReil && lightsRwy == other.lightsRwy && lightsSeqfl == other.lightsSeqfl && lightsTdzl == other.lightsTdzl && lightsUnkn == other.lightsUnkn && lightsVasi == other.lightsVasi && material == other.material && obstacle == other.obstacle && origin == other.origin && origNetwork == other.origNetwork && pcn == other.pcn && pointReference == other.pointReference && primary == other.primary && rawWbc == other.rawWbc && sbttWtKip == other.sbttWtKip && sbttWtKipMod == other.sbttWtKipMod && sbttWtKipModNote == other.sbttWtKipModNote && sbttWtKn == other.sbttWtKn && startLat == other.startLat && startLon == other.startLon && stWtKip == other.stWtKip && stWtKipMod == other.stWtKipMod && stWtKipModNote == other.stWtKipModNote && stWtKn == other.stWtKn && sWtKip == other.sWtKip && sWtKipMod == other.sWtKipMod && sWtKipModNote == other.sWtKipModNote && sWtKn == other.sWtKn && tdtWtkip == other.tdtWtkip && tdtWtKipMod == other.tdtWtKipMod && tdtWtKipModNote == other.tdtWtKipModNote && tdtWtKn == other.tdtWtKn && trtWtKip == other.trtWtKip && trtWtKipMod == other.trtWtKipMod && trtWtKipModNote == other.trtWtKipModNote && trtWtKn == other.trtWtKn && ttWtKip == other.ttWtKip && ttWtKipMod == other.ttWtKipMod && ttWtKipModNote == other.ttWtKipModNote && ttWtKn == other.ttWtKn && tWtKip == other.tWtKip && tWtKipMod == other.tWtKipMod && tWtKipModNote == other.tWtKipModNote && tWtKn == other.tWtKn && widthFt == other.widthFt && widthM == other.widthM && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                name == other.name &&
+                source == other.source &&
+                type == other.type &&
+                bodyId == other.bodyId &&
+                altSiteId == other.altSiteId &&
+                condition == other.condition &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                ddtWtKip == other.ddtWtKip &&
+                ddtWtKipMod == other.ddtWtKipMod &&
+                ddtWtKipModNote == other.ddtWtKipModNote &&
+                ddtWtKn == other.ddtWtKn &&
+                ddWtKip == other.ddWtKip &&
+                ddWtKipMod == other.ddWtKipMod &&
+                ddWtKipModNote == other.ddWtKipModNote &&
+                ddWtKn == other.ddWtKn &&
+                endLat == other.endLat &&
+                endLon == other.endLon &&
+                idSite == other.idSite &&
+                lcn == other.lcn &&
+                ldaFt == other.ldaFt &&
+                ldaM == other.ldaM &&
+                lengthFt == other.lengthFt &&
+                lengthM == other.lengthM &&
+                lighting == other.lighting &&
+                lightsAprch == other.lightsAprch &&
+                lightsCl == other.lightsCl &&
+                lightsOls == other.lightsOls &&
+                lightsPapi == other.lightsPapi &&
+                lightsReil == other.lightsReil &&
+                lightsRwy == other.lightsRwy &&
+                lightsSeqfl == other.lightsSeqfl &&
+                lightsTdzl == other.lightsTdzl &&
+                lightsUnkn == other.lightsUnkn &&
+                lightsVasi == other.lightsVasi &&
+                material == other.material &&
+                obstacle == other.obstacle &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                pcn == other.pcn &&
+                pointReference == other.pointReference &&
+                primary == other.primary &&
+                rawWbc == other.rawWbc &&
+                sbttWtKip == other.sbttWtKip &&
+                sbttWtKipMod == other.sbttWtKipMod &&
+                sbttWtKipModNote == other.sbttWtKipModNote &&
+                sbttWtKn == other.sbttWtKn &&
+                startLat == other.startLat &&
+                startLon == other.startLon &&
+                stWtKip == other.stWtKip &&
+                stWtKipMod == other.stWtKipMod &&
+                stWtKipModNote == other.stWtKipModNote &&
+                stWtKn == other.stWtKn &&
+                sWtKip == other.sWtKip &&
+                sWtKipMod == other.sWtKipMod &&
+                sWtKipModNote == other.sWtKipModNote &&
+                sWtKn == other.sWtKn &&
+                tdtWtkip == other.tdtWtkip &&
+                tdtWtKipMod == other.tdtWtKipMod &&
+                tdtWtKipModNote == other.tdtWtKipModNote &&
+                tdtWtKn == other.tdtWtKn &&
+                trtWtKip == other.trtWtKip &&
+                trtWtKipMod == other.trtWtKipMod &&
+                trtWtKipModNote == other.trtWtKipModNote &&
+                trtWtKn == other.trtWtKn &&
+                ttWtKip == other.ttWtKip &&
+                ttWtKipMod == other.ttWtKipMod &&
+                ttWtKipModNote == other.ttWtKipModNote &&
+                ttWtKn == other.ttWtKn &&
+                tWtKip == other.tWtKip &&
+                tWtKipMod == other.tWtKipMod &&
+                tWtKipModNote == other.tWtKipModNote &&
+                tWtKn == other.tWtKn &&
+                widthFt == other.widthFt &&
+                widthM == other.widthM &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, type, bodyId, altSiteId, condition, createdAt, createdBy, ddtWtKip, ddtWtKipMod, ddtWtKipModNote, ddtWtKn, ddWtKip, ddWtKipMod, ddWtKipModNote, ddWtKn, endLat, endLon, idSite, lcn, ldaFt, ldaM, lengthFt, lengthM, lighting, lightsAprch, lightsCl, lightsOls, lightsPapi, lightsReil, lightsRwy, lightsSeqfl, lightsTdzl, lightsUnkn, lightsVasi, material, obstacle, origin, origNetwork, pcn, pointReference, primary, rawWbc, sbttWtKip, sbttWtKipMod, sbttWtKipModNote, sbttWtKn, startLat, startLon, stWtKip, stWtKipMod, stWtKipModNote, stWtKn, sWtKip, sWtKipMod, sWtKipModNote, sWtKn, tdtWtkip, tdtWtKipMod, tdtWtKipModNote, tdtWtKn, trtWtKip, trtWtKipMod, trtWtKipModNote, trtWtKn, ttWtKip, ttWtKipMod, ttWtKipModNote, ttWtKn, tWtKip, tWtKipMod, tWtKipModNote, tWtKn, widthFt, widthM, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                name,
+                source,
+                type,
+                bodyId,
+                altSiteId,
+                condition,
+                createdAt,
+                createdBy,
+                ddtWtKip,
+                ddtWtKipMod,
+                ddtWtKipModNote,
+                ddtWtKn,
+                ddWtKip,
+                ddWtKipMod,
+                ddWtKipModNote,
+                ddWtKn,
+                endLat,
+                endLon,
+                idSite,
+                lcn,
+                ldaFt,
+                ldaM,
+                lengthFt,
+                lengthM,
+                lighting,
+                lightsAprch,
+                lightsCl,
+                lightsOls,
+                lightsPapi,
+                lightsReil,
+                lightsRwy,
+                lightsSeqfl,
+                lightsTdzl,
+                lightsUnkn,
+                lightsVasi,
+                material,
+                obstacle,
+                origin,
+                origNetwork,
+                pcn,
+                pointReference,
+                primary,
+                rawWbc,
+                sbttWtKip,
+                sbttWtKipMod,
+                sbttWtKipModNote,
+                sbttWtKn,
+                startLat,
+                startLon,
+                stWtKip,
+                stWtKipMod,
+                stWtKipModNote,
+                stWtKn,
+                sWtKip,
+                sWtKipMod,
+                sWtKipModNote,
+                sWtKn,
+                tdtWtkip,
+                tdtWtKipMod,
+                tdtWtKipModNote,
+                tdtWtKn,
+                trtWtKip,
+                trtWtKipMod,
+                trtWtKipModNote,
+                trtWtKn,
+                ttWtKip,
+                ttWtKipMod,
+                ttWtKipModNote,
+                ttWtKn,
+                tWtKip,
+                tWtKipMod,
+                tWtKipModNote,
+                tWtKn,
+                widthFt,
+                widthM,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -6158,7 +6315,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -6171,10 +6328,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SurfaceUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SurfaceUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SurfaceUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -2111,12 +2111,63 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idEngine == other.idEngine && source == other.source && bodyId == other.bodyId && burnTime == other.burnTime && chamberPressure == other.chamberPressure && characteristicType == other.characteristicType && createdAt == other.createdAt && createdBy == other.createdBy && cycleType == other.cycleType && family == other.family && manufacturerOrgId == other.manufacturerOrgId && maxFirings == other.maxFirings && notes == other.notes && nozzleExpansionRatio == other.nozzleExpansionRatio && origin == other.origin && origNetwork == other.origNetwork && oxidizer == other.oxidizer && propellant == other.propellant && seaLevelThrust == other.seaLevelThrust && specificImpulse == other.specificImpulse && tags == other.tags && vacuumThrust == other.vacuumThrust && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idEngine == other.idEngine &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                burnTime == other.burnTime &&
+                chamberPressure == other.chamberPressure &&
+                characteristicType == other.characteristicType &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                cycleType == other.cycleType &&
+                family == other.family &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                maxFirings == other.maxFirings &&
+                notes == other.notes &&
+                nozzleExpansionRatio == other.nozzleExpansionRatio &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                oxidizer == other.oxidizer &&
+                propellant == other.propellant &&
+                seaLevelThrust == other.seaLevelThrust &&
+                specificImpulse == other.specificImpulse &&
+                tags == other.tags &&
+                vacuumThrust == other.vacuumThrust &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idEngine, source, bodyId, burnTime, chamberPressure, characteristicType, createdAt, createdBy, cycleType, family, manufacturerOrgId, maxFirings, notes, nozzleExpansionRatio, origin, origNetwork, oxidizer, propellant, seaLevelThrust, specificImpulse, tags, vacuumThrust, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idEngine,
+                source,
+                bodyId,
+                burnTime,
+                chamberPressure,
+                characteristicType,
+                createdAt,
+                createdBy,
+                cycleType,
+                family,
+                manufacturerOrgId,
+                maxFirings,
+                notes,
+                nozzleExpansionRatio,
+                origin,
+                origNetwork,
+                oxidizer,
+                propellant,
+                seaLevelThrust,
+                specificImpulse,
+                tags,
+                vacuumThrust,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2269,7 +2320,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2282,10 +2333,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EngineDetailUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is EngineDetailUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "EngineDetailUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

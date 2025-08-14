@@ -169,10 +169,12 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OnboardnavigationQueryhelpParams && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OnboardnavigationQueryhelpParams &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "OnboardnavigationQueryhelpParams{additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

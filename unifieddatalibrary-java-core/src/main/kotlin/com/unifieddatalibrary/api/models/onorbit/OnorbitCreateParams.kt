@@ -195,10 +195,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OnorbitCreateParams && onorbitIngest == other.onorbitIngest && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OnorbitCreateParams &&
+            onorbitIngest == other.onorbitIngest &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(onorbitIngest, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(onorbitIngest, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "OnorbitCreateParams{onorbitIngest=$onorbitIngest, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

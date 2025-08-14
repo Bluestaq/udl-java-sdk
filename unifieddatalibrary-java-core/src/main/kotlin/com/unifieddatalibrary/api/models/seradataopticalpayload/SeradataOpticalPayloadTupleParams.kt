@@ -249,10 +249,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SeradataOpticalPayloadTupleParams && columns == other.columns && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SeradataOpticalPayloadTupleParams &&
+            columns == other.columns &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(columns, firstResult, maxResults, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SeradataOpticalPayloadTupleParams{columns=$columns, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

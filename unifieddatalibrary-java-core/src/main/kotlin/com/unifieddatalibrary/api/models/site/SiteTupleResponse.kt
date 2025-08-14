@@ -3395,7 +3395,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4858,7 +4858,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -4871,12 +4871,65 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SiteOperation && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSite == other.idSite && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && dailyOperations == other.dailyOperations && dopsLastChangedBy == other.dopsLastChangedBy && dopsLastChangedDate == other.dopsLastChangedDate && dopsLastChangedReason == other.dopsLastChangedReason && idLaunchSite == other.idLaunchSite && maximumOnGrounds == other.maximumOnGrounds && mogsLastChangedBy == other.mogsLastChangedBy && mogsLastChangedDate == other.mogsLastChangedDate && mogsLastChangedReason == other.mogsLastChangedReason && operationalDeviations == other.operationalDeviations && operationalPlannings == other.operationalPlannings && origin == other.origin && origNetwork == other.origNetwork && pathways == other.pathways && sourceDl == other.sourceDl && updatedAt == other.updatedAt && updatedBy == other.updatedBy && waivers == other.waivers && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is SiteOperation &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idSite == other.idSite &&
+                source == other.source &&
+                id == other.id &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                dailyOperations == other.dailyOperations &&
+                dopsLastChangedBy == other.dopsLastChangedBy &&
+                dopsLastChangedDate == other.dopsLastChangedDate &&
+                dopsLastChangedReason == other.dopsLastChangedReason &&
+                idLaunchSite == other.idLaunchSite &&
+                maximumOnGrounds == other.maximumOnGrounds &&
+                mogsLastChangedBy == other.mogsLastChangedBy &&
+                mogsLastChangedDate == other.mogsLastChangedDate &&
+                mogsLastChangedReason == other.mogsLastChangedReason &&
+                operationalDeviations == other.operationalDeviations &&
+                operationalPlannings == other.operationalPlannings &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                pathways == other.pathways &&
+                sourceDl == other.sourceDl &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                waivers == other.waivers &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSite, source, id, createdAt, createdBy, dailyOperations, dopsLastChangedBy, dopsLastChangedDate, dopsLastChangedReason, idLaunchSite, maximumOnGrounds, mogsLastChangedBy, mogsLastChangedDate, mogsLastChangedReason, operationalDeviations, operationalPlannings, origin, origNetwork, pathways, sourceDl, updatedAt, updatedBy, waivers, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idSite,
+                source,
+                id,
+                createdAt,
+                createdBy,
+                dailyOperations,
+                dopsLastChangedBy,
+                dopsLastChangedDate,
+                dopsLastChangedReason,
+                idLaunchSite,
+                maximumOnGrounds,
+                mogsLastChangedBy,
+                mogsLastChangedDate,
+                mogsLastChangedReason,
+                operationalDeviations,
+                operationalPlannings,
+                origin,
+                origNetwork,
+                pathways,
+                sourceDl,
+                updatedAt,
+                updatedBy,
+                waivers,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5719,7 +5772,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -5732,12 +5785,43 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SiteRemark && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSite == other.idSite && source == other.source && text == other.text && id == other.id && code == other.code && createdAt == other.createdAt && createdBy == other.createdBy && name == other.name && origin == other.origin && origNetwork == other.origNetwork && origRmkId == other.origRmkId && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is SiteRemark &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idSite == other.idSite &&
+                source == other.source &&
+                text == other.text &&
+                id == other.id &&
+                code == other.code &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                name == other.name &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origRmkId == other.origRmkId &&
+                type == other.type &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSite, source, text, id, code, createdAt, createdBy, name, origin, origNetwork, origRmkId, type, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idSite,
+                source,
+                text,
+                id,
+                code,
+                createdAt,
+                createdBy,
+                name,
+                origin,
+                origNetwork,
+                origRmkId,
+                type,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5750,12 +5834,155 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SiteTupleResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && id == other.id && activity == other.activity && airDefArea == other.airDefArea && allegiance == other.allegiance && altAllegiance == other.altAllegiance && beNumber == other.beNumber && catCode == other.catCode && catText == other.catText && classRating == other.classRating && condition == other.condition && conditionAvail == other.conditionAvail && coord == other.coord && coordDatum == other.coordDatum && coordDerivAcc == other.coordDerivAcc && createdAt == other.createdAt && createdBy == other.createdBy && elevMsl == other.elevMsl && elevMslConfLvl == other.elevMslConfLvl && elevMslDerivAcc == other.elevMslDerivAcc && entity == other.entity && eval == other.eval && faa == other.faa && fpa == other.fpa && functPrimary == other.functPrimary && geoArea == other.geoArea && geoidalMslSep == other.geoidalMslSep && grade == other.grade && iata == other.iata && icao == other.icao && ident == other.ident && idEntity == other.idEntity && idParentSite == other.idParentSite && lzUsage == other.lzUsage && maxRunwayLength == other.maxRunwayLength && milGrid == other.milGrid && milGridSys == other.milGridSys && msnPrimary == other.msnPrimary && msnPrimarySpec == other.msnPrimarySpec && notes == other.notes && nucCap == other.nucCap && operStatus == other.operStatus && origin == other.origin && origLzId == other.origLzId && origNetwork == other.origNetwork && origSiteId == other.origSiteId && osuffix == other.osuffix && pin == other.pin && polSubdiv == other.polSubdiv && popArea == other.popArea && popAreaProx == other.popAreaProx && recStatus == other.recStatus && referenceDoc == other.referenceDoc && resProd == other.resProd && reviewDate == other.reviewDate && runways == other.runways && siteOperations == other.siteOperations && siteRemarks == other.siteRemarks && symCode == other.symCode && type == other.type && updatedAt == other.updatedAt && updatedBy == other.updatedBy && usage == other.usage && utm == other.utm && vegHt == other.vegHt && vegType == other.vegType && wac == other.wac && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SiteTupleResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            name == other.name &&
+            source == other.source &&
+            id == other.id &&
+            activity == other.activity &&
+            airDefArea == other.airDefArea &&
+            allegiance == other.allegiance &&
+            altAllegiance == other.altAllegiance &&
+            beNumber == other.beNumber &&
+            catCode == other.catCode &&
+            catText == other.catText &&
+            classRating == other.classRating &&
+            condition == other.condition &&
+            conditionAvail == other.conditionAvail &&
+            coord == other.coord &&
+            coordDatum == other.coordDatum &&
+            coordDerivAcc == other.coordDerivAcc &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            elevMsl == other.elevMsl &&
+            elevMslConfLvl == other.elevMslConfLvl &&
+            elevMslDerivAcc == other.elevMslDerivAcc &&
+            entity == other.entity &&
+            eval == other.eval &&
+            faa == other.faa &&
+            fpa == other.fpa &&
+            functPrimary == other.functPrimary &&
+            geoArea == other.geoArea &&
+            geoidalMslSep == other.geoidalMslSep &&
+            grade == other.grade &&
+            iata == other.iata &&
+            icao == other.icao &&
+            ident == other.ident &&
+            idEntity == other.idEntity &&
+            idParentSite == other.idParentSite &&
+            lzUsage == other.lzUsage &&
+            maxRunwayLength == other.maxRunwayLength &&
+            milGrid == other.milGrid &&
+            milGridSys == other.milGridSys &&
+            msnPrimary == other.msnPrimary &&
+            msnPrimarySpec == other.msnPrimarySpec &&
+            notes == other.notes &&
+            nucCap == other.nucCap &&
+            operStatus == other.operStatus &&
+            origin == other.origin &&
+            origLzId == other.origLzId &&
+            origNetwork == other.origNetwork &&
+            origSiteId == other.origSiteId &&
+            osuffix == other.osuffix &&
+            pin == other.pin &&
+            polSubdiv == other.polSubdiv &&
+            popArea == other.popArea &&
+            popAreaProx == other.popAreaProx &&
+            recStatus == other.recStatus &&
+            referenceDoc == other.referenceDoc &&
+            resProd == other.resProd &&
+            reviewDate == other.reviewDate &&
+            runways == other.runways &&
+            siteOperations == other.siteOperations &&
+            siteRemarks == other.siteRemarks &&
+            symCode == other.symCode &&
+            type == other.type &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            usage == other.usage &&
+            utm == other.utm &&
+            vegHt == other.vegHt &&
+            vegType == other.vegType &&
+            wac == other.wac &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, id, activity, airDefArea, allegiance, altAllegiance, beNumber, catCode, catText, classRating, condition, conditionAvail, coord, coordDatum, coordDerivAcc, createdAt, createdBy, elevMsl, elevMslConfLvl, elevMslDerivAcc, entity, eval, faa, fpa, functPrimary, geoArea, geoidalMslSep, grade, iata, icao, ident, idEntity, idParentSite, lzUsage, maxRunwayLength, milGrid, milGridSys, msnPrimary, msnPrimarySpec, notes, nucCap, operStatus, origin, origLzId, origNetwork, origSiteId, osuffix, pin, polSubdiv, popArea, popAreaProx, recStatus, referenceDoc, resProd, reviewDate, runways, siteOperations, siteRemarks, symCode, type, updatedAt, updatedBy, usage, utm, vegHt, vegType, wac, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            name,
+            source,
+            id,
+            activity,
+            airDefArea,
+            allegiance,
+            altAllegiance,
+            beNumber,
+            catCode,
+            catText,
+            classRating,
+            condition,
+            conditionAvail,
+            coord,
+            coordDatum,
+            coordDerivAcc,
+            createdAt,
+            createdBy,
+            elevMsl,
+            elevMslConfLvl,
+            elevMslDerivAcc,
+            entity,
+            eval,
+            faa,
+            fpa,
+            functPrimary,
+            geoArea,
+            geoidalMslSep,
+            grade,
+            iata,
+            icao,
+            ident,
+            idEntity,
+            idParentSite,
+            lzUsage,
+            maxRunwayLength,
+            milGrid,
+            milGridSys,
+            msnPrimary,
+            msnPrimarySpec,
+            notes,
+            nucCap,
+            operStatus,
+            origin,
+            origLzId,
+            origNetwork,
+            origSiteId,
+            osuffix,
+            pin,
+            polSubdiv,
+            popArea,
+            popAreaProx,
+            recStatus,
+            referenceDoc,
+            resProd,
+            reviewDate,
+            runways,
+            siteOperations,
+            siteRemarks,
+            symCode,
+            type,
+            updatedAt,
+            updatedBy,
+            usage,
+            utm,
+            vegHt,
+            vegType,
+            wac,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

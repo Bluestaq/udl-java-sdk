@@ -4,7 +4,6 @@ package com.unifieddatalibrary.api.services.async
 
 import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.services.async.airoperations.AirTaskingOrderServiceAsync
-import com.unifieddatalibrary.api.services.async.airoperations.AircraftSortieServiceAsync
 import com.unifieddatalibrary.api.services.async.airoperations.AircraftSortyServiceAsync
 import com.unifieddatalibrary.api.services.async.airoperations.AirspaceControlOrderServiceAsync
 import com.unifieddatalibrary.api.services.async.airoperations.CrewpaperServiceAsync
@@ -26,8 +25,6 @@ interface AirOperationServiceAsync {
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): AirOperationServiceAsync
 
     fun airTaskingOrders(): AirTaskingOrderServiceAsync
-
-    fun aircraftSortie(): AircraftSortieServiceAsync
 
     fun aircraftSorties(): AircraftSortyServiceAsync
 
@@ -53,8 +50,6 @@ interface AirOperationServiceAsync {
         ): AirOperationServiceAsync.WithRawResponse
 
         fun airTaskingOrders(): AirTaskingOrderServiceAsync.WithRawResponse
-
-        fun aircraftSortie(): AircraftSortieServiceAsync.WithRawResponse
 
         fun aircraftSorties(): AircraftSortyServiceAsync.WithRawResponse
 

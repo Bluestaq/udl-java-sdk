@@ -280,10 +280,26 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SolarArrayDetailListParams && classificationMarking == other.classificationMarking && dataMode == other.dataMode && firstResult == other.firstResult && maxResults == other.maxResults && source == other.source && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SolarArrayDetailListParams &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            source == other.source &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(classificationMarking, dataMode, firstResult, maxResults, source, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            firstResult,
+            maxResults,
+            source,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "SolarArrayDetailListParams{classificationMarking=$classificationMarking, dataMode=$dataMode, firstResult=$firstResult, maxResults=$maxResults, source=$source, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

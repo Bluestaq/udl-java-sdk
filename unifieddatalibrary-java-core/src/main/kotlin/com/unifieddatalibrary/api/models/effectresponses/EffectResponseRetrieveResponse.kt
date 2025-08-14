@@ -1365,7 +1365,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1378,12 +1378,65 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EffectResponseRetrieveResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && type == other.type && id == other.id && actionsList == other.actionsList && actorSrcId == other.actorSrcId && actorSrcType == other.actorSrcType && coaMetrics == other.coaMetrics && collateralDamageEst == other.collateralDamageEst && createdAt == other.createdAt && createdBy == other.createdBy && decisionDeadline == other.decisionDeadline && externalActions == other.externalActions && externalRequestId == other.externalRequestId && idEffectRequest == other.idEffectRequest && munitionId == other.munitionId && munitionType == other.munitionType && origin == other.origin && origNetwork == other.origNetwork && probabilityOfKill == other.probabilityOfKill && redTargetSrcId == other.redTargetSrcId && redTargetSrcType == other.redTargetSrcType && redTimeToOverhead == other.redTimeToOverhead && shotsRequired == other.shotsRequired && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is EffectResponseRetrieveResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            type == other.type &&
+            id == other.id &&
+            actionsList == other.actionsList &&
+            actorSrcId == other.actorSrcId &&
+            actorSrcType == other.actorSrcType &&
+            coaMetrics == other.coaMetrics &&
+            collateralDamageEst == other.collateralDamageEst &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            decisionDeadline == other.decisionDeadline &&
+            externalActions == other.externalActions &&
+            externalRequestId == other.externalRequestId &&
+            idEffectRequest == other.idEffectRequest &&
+            munitionId == other.munitionId &&
+            munitionType == other.munitionType &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            probabilityOfKill == other.probabilityOfKill &&
+            redTargetSrcId == other.redTargetSrcId &&
+            redTargetSrcType == other.redTargetSrcType &&
+            redTimeToOverhead == other.redTimeToOverhead &&
+            shotsRequired == other.shotsRequired &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, type, id, actionsList, actorSrcId, actorSrcType, coaMetrics, collateralDamageEst, createdAt, createdBy, decisionDeadline, externalActions, externalRequestId, idEffectRequest, munitionId, munitionType, origin, origNetwork, probabilityOfKill, redTargetSrcId, redTargetSrcType, redTimeToOverhead, shotsRequired, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            type,
+            id,
+            actionsList,
+            actorSrcId,
+            actorSrcType,
+            coaMetrics,
+            collateralDamageEst,
+            createdAt,
+            createdBy,
+            decisionDeadline,
+            externalActions,
+            externalRequestId,
+            idEffectRequest,
+            munitionId,
+            munitionType,
+            origin,
+            origNetwork,
+            probabilityOfKill,
+            redTargetSrcId,
+            redTargetSrcType,
+            redTimeToOverhead,
+            shotsRequired,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

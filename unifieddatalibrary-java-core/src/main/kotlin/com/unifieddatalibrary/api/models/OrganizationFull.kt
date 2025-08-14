@@ -1061,7 +1061,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1074,12 +1074,53 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OrganizationFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && type == other.type && id == other.id && active == other.active && category == other.category && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && description == other.description && externalId == other.externalId && nationality == other.nationality && organizationDetails == other.organizationDetails && origin == other.origin && origNetwork == other.origNetwork && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is OrganizationFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            name == other.name &&
+            source == other.source &&
+            type == other.type &&
+            id == other.id &&
+            active == other.active &&
+            category == other.category &&
+            countryCode == other.countryCode &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            description == other.description &&
+            externalId == other.externalId &&
+            nationality == other.nationality &&
+            organizationDetails == other.organizationDetails &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, type, id, active, category, countryCode, createdAt, createdBy, description, externalId, nationality, organizationDetails, origin, origNetwork, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            name,
+            source,
+            type,
+            id,
+            active,
+            category,
+            countryCode,
+            createdAt,
+            createdBy,
+            description,
+            externalId,
+            nationality,
+            organizationDetails,
+            origin,
+            origNetwork,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

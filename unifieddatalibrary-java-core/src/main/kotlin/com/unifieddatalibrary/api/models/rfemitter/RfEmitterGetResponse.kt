@@ -887,7 +887,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2847,7 +2847,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -2860,12 +2860,93 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is RfEmitterDetail && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idRfEmitter == other.idRfEmitter && source == other.source && id == other.id && alternateFacilityName == other.alternateFacilityName && altName == other.altName && antennaDiameter == other.antennaDiameter && antennaSize == other.antennaSize && barrageNoiseBandwidth == other.barrageNoiseBandwidth && createdAt == other.createdAt && createdBy == other.createdBy && description == other.description && designator == other.designator && dopplerNoise == other.dopplerNoise && drfmInstantaneousBandwidth == other.drfmInstantaneousBandwidth && family == other.family && manufacturerOrg == other.manufacturerOrg && manufacturerOrgId == other.manufacturerOrgId && notes == other.notes && numBits == other.numBits && numChannels == other.numChannels && origin == other.origin && origNetwork == other.origNetwork && productionFacilityLocation == other.productionFacilityLocation && productionFacilityLocationId == other.productionFacilityLocationId && productionFacilityName == other.productionFacilityName && receiverBandwidth == other.receiverBandwidth && receiverSensitivity == other.receiverSensitivity && receiverType == other.receiverType && secondaryNotes == other.secondaryNotes && systemSensitivityEnd == other.systemSensitivityEnd && systemSensitivityStart == other.systemSensitivityStart && transmitPower == other.transmitPower && transmitterBandwidth == other.transmitterBandwidth && transmitterFrequency == other.transmitterFrequency && updatedAt == other.updatedAt && updatedBy == other.updatedBy && urls == other.urls && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is RfEmitterDetail &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idRfEmitter == other.idRfEmitter &&
+                source == other.source &&
+                id == other.id &&
+                alternateFacilityName == other.alternateFacilityName &&
+                altName == other.altName &&
+                antennaDiameter == other.antennaDiameter &&
+                antennaSize == other.antennaSize &&
+                barrageNoiseBandwidth == other.barrageNoiseBandwidth &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                description == other.description &&
+                designator == other.designator &&
+                dopplerNoise == other.dopplerNoise &&
+                drfmInstantaneousBandwidth == other.drfmInstantaneousBandwidth &&
+                family == other.family &&
+                manufacturerOrg == other.manufacturerOrg &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                notes == other.notes &&
+                numBits == other.numBits &&
+                numChannels == other.numChannels &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                productionFacilityLocation == other.productionFacilityLocation &&
+                productionFacilityLocationId == other.productionFacilityLocationId &&
+                productionFacilityName == other.productionFacilityName &&
+                receiverBandwidth == other.receiverBandwidth &&
+                receiverSensitivity == other.receiverSensitivity &&
+                receiverType == other.receiverType &&
+                secondaryNotes == other.secondaryNotes &&
+                systemSensitivityEnd == other.systemSensitivityEnd &&
+                systemSensitivityStart == other.systemSensitivityStart &&
+                transmitPower == other.transmitPower &&
+                transmitterBandwidth == other.transmitterBandwidth &&
+                transmitterFrequency == other.transmitterFrequency &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                urls == other.urls &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idRfEmitter, source, id, alternateFacilityName, altName, antennaDiameter, antennaSize, barrageNoiseBandwidth, createdAt, createdBy, description, designator, dopplerNoise, drfmInstantaneousBandwidth, family, manufacturerOrg, manufacturerOrgId, notes, numBits, numChannels, origin, origNetwork, productionFacilityLocation, productionFacilityLocationId, productionFacilityName, receiverBandwidth, receiverSensitivity, receiverType, secondaryNotes, systemSensitivityEnd, systemSensitivityStart, transmitPower, transmitterBandwidth, transmitterFrequency, updatedAt, updatedBy, urls, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idRfEmitter,
+                source,
+                id,
+                alternateFacilityName,
+                altName,
+                antennaDiameter,
+                antennaSize,
+                barrageNoiseBandwidth,
+                createdAt,
+                createdBy,
+                description,
+                designator,
+                dopplerNoise,
+                drfmInstantaneousBandwidth,
+                family,
+                manufacturerOrg,
+                manufacturerOrgId,
+                notes,
+                numBits,
+                numChannels,
+                origin,
+                origNetwork,
+                productionFacilityLocation,
+                productionFacilityLocationId,
+                productionFacilityName,
+                receiverBandwidth,
+                receiverSensitivity,
+                receiverType,
+                secondaryNotes,
+                systemSensitivityEnd,
+                systemSensitivityStart,
+                transmitPower,
+                transmitterBandwidth,
+                transmitterFrequency,
+                updatedAt,
+                updatedBy,
+                urls,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2878,12 +2959,45 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is RfEmitterGetResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && entity == other.entity && idEntity == other.idEntity && origin == other.origin && origNetwork == other.origNetwork && rfEmitterDetails == other.rfEmitterDetails && type == other.type && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is RfEmitterGetResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            name == other.name &&
+            source == other.source &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            entity == other.entity &&
+            idEntity == other.idEntity &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            rfEmitterDetails == other.rfEmitterDetails &&
+            type == other.type &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, id, createdAt, createdBy, entity, idEntity, origin, origNetwork, rfEmitterDetails, type, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            name,
+            source,
+            id,
+            createdAt,
+            createdBy,
+            entity,
+            idEntity,
+            origin,
+            origNetwork,
+            rfEmitterDetails,
+            type,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

@@ -1077,7 +1077,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1090,12 +1090,53 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SurfaceObstructionListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSurface == other.idSurface && source == other.source && id == other.id && advisoryRequired == other.advisoryRequired && approvalRequired == other.approvalRequired && createdAt == other.createdAt && createdBy == other.createdBy && distanceFromCenterLine == other.distanceFromCenterLine && distanceFromEdge == other.distanceFromEdge && distanceFromThreshold == other.distanceFromThreshold && idNavigationalObstruction == other.idNavigationalObstruction && obstructionDesc == other.obstructionDesc && obstructionHeight == other.obstructionHeight && obstructionSideCode == other.obstructionSideCode && origin == other.origin && origNetwork == other.origNetwork && sourceDl == other.sourceDl && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SurfaceObstructionListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idSurface == other.idSurface &&
+            source == other.source &&
+            id == other.id &&
+            advisoryRequired == other.advisoryRequired &&
+            approvalRequired == other.approvalRequired &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            distanceFromCenterLine == other.distanceFromCenterLine &&
+            distanceFromEdge == other.distanceFromEdge &&
+            distanceFromThreshold == other.distanceFromThreshold &&
+            idNavigationalObstruction == other.idNavigationalObstruction &&
+            obstructionDesc == other.obstructionDesc &&
+            obstructionHeight == other.obstructionHeight &&
+            obstructionSideCode == other.obstructionSideCode &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            sourceDl == other.sourceDl &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSurface, source, id, advisoryRequired, approvalRequired, createdAt, createdBy, distanceFromCenterLine, distanceFromEdge, distanceFromThreshold, idNavigationalObstruction, obstructionDesc, obstructionHeight, obstructionSideCode, origin, origNetwork, sourceDl, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idSurface,
+            source,
+            id,
+            advisoryRequired,
+            approvalRequired,
+            createdAt,
+            createdBy,
+            distanceFromCenterLine,
+            distanceFromEdge,
+            distanceFromThreshold,
+            idNavigationalObstruction,
+            obstructionDesc,
+            obstructionHeight,
+            obstructionSideCode,
+            origin,
+            origNetwork,
+            sourceDl,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

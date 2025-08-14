@@ -269,10 +269,24 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AircraftSortyTupleParams && columns == other.columns && plannedDepTime == other.plannedDepTime && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is AircraftSortyTupleParams &&
+            columns == other.columns &&
+            plannedDepTime == other.plannedDepTime &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, plannedDepTime, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            columns,
+            plannedDepTime,
+            firstResult,
+            maxResults,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "AircraftSortyTupleParams{columns=$columns, plannedDepTime=$plannedDepTime, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -2368,7 +2368,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2381,12 +2381,117 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AisAbridged && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && ts == other.ts && id == other.id && antennaRefDimensions == other.antennaRefDimensions && avgSpeed == other.avgSpeed && callSign == other.callSign && cargoType == other.cargoType && course == other.course && createdAt == other.createdAt && createdBy == other.createdBy && currentPortGuid == other.currentPortGuid && currentPortLocode == other.currentPortLocode && destination == other.destination && destinationEta == other.destinationEta && distanceToGo == other.distanceToGo && distanceTravelled == other.distanceTravelled && draught == other.draught && engagedIn == other.engagedIn && etaCalculated == other.etaCalculated && etaUpdated == other.etaUpdated && idTrack == other.idTrack && idVessel == other.idVessel && imon == other.imon && lastPortGuid == other.lastPortGuid && lastPortLocode == other.lastPortLocode && lat == other.lat && length == other.length && lon == other.lon && maxSpeed == other.maxSpeed && mmsi == other.mmsi && navStatus == other.navStatus && nextPortGuid == other.nextPortGuid && nextPortLocode == other.nextPortLocode && origin == other.origin && origNetwork == other.origNetwork && posDeviceType == other.posDeviceType && posHiAccuracy == other.posHiAccuracy && posHiLatency == other.posHiLatency && rateOfTurn == other.rateOfTurn && shipDescription == other.shipDescription && shipName == other.shipName && shipType == other.shipType && sourceDl == other.sourceDl && specialCraft == other.specialCraft && specialManeuver == other.specialManeuver && speed == other.speed && trueHeading == other.trueHeading && vesselFlag == other.vesselFlag && width == other.width && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is AisAbridged &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            ts == other.ts &&
+            id == other.id &&
+            antennaRefDimensions == other.antennaRefDimensions &&
+            avgSpeed == other.avgSpeed &&
+            callSign == other.callSign &&
+            cargoType == other.cargoType &&
+            course == other.course &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            currentPortGuid == other.currentPortGuid &&
+            currentPortLocode == other.currentPortLocode &&
+            destination == other.destination &&
+            destinationEta == other.destinationEta &&
+            distanceToGo == other.distanceToGo &&
+            distanceTravelled == other.distanceTravelled &&
+            draught == other.draught &&
+            engagedIn == other.engagedIn &&
+            etaCalculated == other.etaCalculated &&
+            etaUpdated == other.etaUpdated &&
+            idTrack == other.idTrack &&
+            idVessel == other.idVessel &&
+            imon == other.imon &&
+            lastPortGuid == other.lastPortGuid &&
+            lastPortLocode == other.lastPortLocode &&
+            lat == other.lat &&
+            length == other.length &&
+            lon == other.lon &&
+            maxSpeed == other.maxSpeed &&
+            mmsi == other.mmsi &&
+            navStatus == other.navStatus &&
+            nextPortGuid == other.nextPortGuid &&
+            nextPortLocode == other.nextPortLocode &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            posDeviceType == other.posDeviceType &&
+            posHiAccuracy == other.posHiAccuracy &&
+            posHiLatency == other.posHiLatency &&
+            rateOfTurn == other.rateOfTurn &&
+            shipDescription == other.shipDescription &&
+            shipName == other.shipName &&
+            shipType == other.shipType &&
+            sourceDl == other.sourceDl &&
+            specialCraft == other.specialCraft &&
+            specialManeuver == other.specialManeuver &&
+            speed == other.speed &&
+            trueHeading == other.trueHeading &&
+            vesselFlag == other.vesselFlag &&
+            width == other.width &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, ts, id, antennaRefDimensions, avgSpeed, callSign, cargoType, course, createdAt, createdBy, currentPortGuid, currentPortLocode, destination, destinationEta, distanceToGo, distanceTravelled, draught, engagedIn, etaCalculated, etaUpdated, idTrack, idVessel, imon, lastPortGuid, lastPortLocode, lat, length, lon, maxSpeed, mmsi, navStatus, nextPortGuid, nextPortLocode, origin, origNetwork, posDeviceType, posHiAccuracy, posHiLatency, rateOfTurn, shipDescription, shipName, shipType, sourceDl, specialCraft, specialManeuver, speed, trueHeading, vesselFlag, width, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            ts,
+            id,
+            antennaRefDimensions,
+            avgSpeed,
+            callSign,
+            cargoType,
+            course,
+            createdAt,
+            createdBy,
+            currentPortGuid,
+            currentPortLocode,
+            destination,
+            destinationEta,
+            distanceToGo,
+            distanceTravelled,
+            draught,
+            engagedIn,
+            etaCalculated,
+            etaUpdated,
+            idTrack,
+            idVessel,
+            imon,
+            lastPortGuid,
+            lastPortLocode,
+            lat,
+            length,
+            lon,
+            maxSpeed,
+            mmsi,
+            navStatus,
+            nextPortGuid,
+            nextPortLocode,
+            origin,
+            origNetwork,
+            posDeviceType,
+            posHiAccuracy,
+            posHiLatency,
+            rateOfTurn,
+            shipDescription,
+            shipName,
+            shipType,
+            sourceDl,
+            specialCraft,
+            specialManeuver,
+            speed,
+            trueHeading,
+            vesselFlag,
+            width,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

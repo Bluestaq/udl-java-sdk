@@ -3610,12 +3610,103 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && category == other.category && classificationMarking == other.classificationMarking && dataMode == other.dataMode && numPoints == other.numPoints && pointEndTime == other.pointEndTime && pointStartTime == other.pointStartTime && source == other.source && type == other.type && id == other.id && bDot == other.bDot && centBody == other.centBody && comments == other.comments && covReferenceFrame == other.covReferenceFrame && createdAt == other.createdAt && createdBy == other.createdBy && description == other.description && descriptor == other.descriptor && dragModel == other.dragModel && edr == other.edr && ephemerisList == other.ephemerisList && filename == other.filename && geopotentialModel == other.geopotentialModel && hasAccel == other.hasAccel && hasCov == other.hasCov && hasMnvr == other.hasMnvr && idManeuvers == other.idManeuvers && idOnOrbit == other.idOnOrbit && idStateVector == other.idStateVector && integrator == other.integrator && interpolation == other.interpolation && interpolationDegree == other.interpolationDegree && lunarSolar == other.lunarSolar && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && pedigree == other.pedigree && referenceFrame == other.referenceFrame && satNo == other.satNo && solidEarthTides == other.solidEarthTides && stepSize == other.stepSize && tags == other.tags && transactionId == other.transactionId && usableEndTime == other.usableEndTime && usableStartTime == other.usableStartTime && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                category == other.category &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                numPoints == other.numPoints &&
+                pointEndTime == other.pointEndTime &&
+                pointStartTime == other.pointStartTime &&
+                source == other.source &&
+                type == other.type &&
+                id == other.id &&
+                bDot == other.bDot &&
+                centBody == other.centBody &&
+                comments == other.comments &&
+                covReferenceFrame == other.covReferenceFrame &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                description == other.description &&
+                descriptor == other.descriptor &&
+                dragModel == other.dragModel &&
+                edr == other.edr &&
+                ephemerisList == other.ephemerisList &&
+                filename == other.filename &&
+                geopotentialModel == other.geopotentialModel &&
+                hasAccel == other.hasAccel &&
+                hasCov == other.hasCov &&
+                hasMnvr == other.hasMnvr &&
+                idManeuvers == other.idManeuvers &&
+                idOnOrbit == other.idOnOrbit &&
+                idStateVector == other.idStateVector &&
+                integrator == other.integrator &&
+                interpolation == other.interpolation &&
+                interpolationDegree == other.interpolationDegree &&
+                lunarSolar == other.lunarSolar &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                pedigree == other.pedigree &&
+                referenceFrame == other.referenceFrame &&
+                satNo == other.satNo &&
+                solidEarthTides == other.solidEarthTides &&
+                stepSize == other.stepSize &&
+                tags == other.tags &&
+                transactionId == other.transactionId &&
+                usableEndTime == other.usableEndTime &&
+                usableStartTime == other.usableStartTime &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(category, classificationMarking, dataMode, numPoints, pointEndTime, pointStartTime, source, type, id, bDot, centBody, comments, covReferenceFrame, createdAt, createdBy, description, descriptor, dragModel, edr, ephemerisList, filename, geopotentialModel, hasAccel, hasCov, hasMnvr, idManeuvers, idOnOrbit, idStateVector, integrator, interpolation, interpolationDegree, lunarSolar, origin, origNetwork, origObjectId, pedigree, referenceFrame, satNo, solidEarthTides, stepSize, tags, transactionId, usableEndTime, usableStartTime, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                category,
+                classificationMarking,
+                dataMode,
+                numPoints,
+                pointEndTime,
+                pointStartTime,
+                source,
+                type,
+                id,
+                bDot,
+                centBody,
+                comments,
+                covReferenceFrame,
+                createdAt,
+                createdBy,
+                description,
+                descriptor,
+                dragModel,
+                edr,
+                ephemerisList,
+                filename,
+                geopotentialModel,
+                hasAccel,
+                hasCov,
+                hasMnvr,
+                idManeuvers,
+                idOnOrbit,
+                idStateVector,
+                integrator,
+                interpolation,
+                interpolationDegree,
+                lunarSolar,
+                origin,
+                origNetwork,
+                origObjectId,
+                pedigree,
+                referenceFrame,
+                satNo,
+                solidEarthTides,
+                stepSize,
+                tags,
+                transactionId,
+                usableEndTime,
+                usableStartTime,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3768,7 +3859,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3924,7 +4015,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is CovReferenceFrame && value == other.value /* spotless:on */
+            return other is CovReferenceFrame && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -5139,7 +5230,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -5152,12 +5243,57 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is EphemerisList && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && ts == other.ts && xpos == other.xpos && xvel == other.xvel && ypos == other.ypos && yvel == other.yvel && zpos == other.zpos && zvel == other.zvel && id == other.id && cov == other.cov && createdAt == other.createdAt && createdBy == other.createdBy && esId == other.esId && idOnOrbit == other.idOnOrbit && origin == other.origin && origObjectId == other.origObjectId && xaccel == other.xaccel && yaccel == other.yaccel && zaccel == other.zaccel && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is EphemerisList &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                ts == other.ts &&
+                xpos == other.xpos &&
+                xvel == other.xvel &&
+                ypos == other.ypos &&
+                yvel == other.yvel &&
+                zpos == other.zpos &&
+                zvel == other.zvel &&
+                id == other.id &&
+                cov == other.cov &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                esId == other.esId &&
+                idOnOrbit == other.idOnOrbit &&
+                origin == other.origin &&
+                origObjectId == other.origObjectId &&
+                xaccel == other.xaccel &&
+                yaccel == other.yaccel &&
+                zaccel == other.zaccel &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, ts, xpos, xvel, ypos, yvel, zpos, zvel, id, cov, createdAt, createdBy, esId, idOnOrbit, origin, origObjectId, xaccel, yaccel, zaccel, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                ts,
+                xpos,
+                xvel,
+                ypos,
+                yvel,
+                zpos,
+                zvel,
+                id,
+                cov,
+                createdAt,
+                createdBy,
+                esId,
+                idOnOrbit,
+                origin,
+                origObjectId,
+                xaccel,
+                yaccel,
+                zaccel,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5317,7 +5453,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is ReferenceFrame && value == other.value /* spotless:on */
+            return other is ReferenceFrame && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -5330,10 +5466,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EphemerisUnvalidatedPublishParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is EphemerisUnvalidatedPublishParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "EphemerisUnvalidatedPublishParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

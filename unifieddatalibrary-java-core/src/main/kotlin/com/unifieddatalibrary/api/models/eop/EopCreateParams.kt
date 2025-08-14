@@ -3133,12 +3133,89 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && eopDate == other.eopDate && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && dEpsilon == other.dEpsilon && dEpsilonB == other.dEpsilonB && dEpsilonUnc == other.dEpsilonUnc && dPsi == other.dPsi && dPsib == other.dPsib && dPsiUnc == other.dPsiUnc && dX == other.dX && dXb == other.dXb && dXUnc == other.dXUnc && dY == other.dY && dYb == other.dYb && dYUnc == other.dYUnc && lod == other.lod && lodUnc == other.lodUnc && nutationState == other.nutationState && origin == other.origin && origNetwork == other.origNetwork && polarMotionState == other.polarMotionState && polarMotionX == other.polarMotionX && polarMotionXb == other.polarMotionXb && polarMotionXUnc == other.polarMotionXUnc && polarMotionY == other.polarMotionY && polarMotionYb == other.polarMotionYb && polarMotionYUnc == other.polarMotionYUnc && precessionNutationStd == other.precessionNutationStd && rawFileUri == other.rawFileUri && ut1Utc == other.ut1Utc && ut1Utcb == other.ut1Utcb && ut1UtcState == other.ut1UtcState && ut1UtcUnc == other.ut1UtcUnc && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                eopDate == other.eopDate &&
+                source == other.source &&
+                id == other.id &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                dEpsilon == other.dEpsilon &&
+                dEpsilonB == other.dEpsilonB &&
+                dEpsilonUnc == other.dEpsilonUnc &&
+                dPsi == other.dPsi &&
+                dPsib == other.dPsib &&
+                dPsiUnc == other.dPsiUnc &&
+                dX == other.dX &&
+                dXb == other.dXb &&
+                dXUnc == other.dXUnc &&
+                dY == other.dY &&
+                dYb == other.dYb &&
+                dYUnc == other.dYUnc &&
+                lod == other.lod &&
+                lodUnc == other.lodUnc &&
+                nutationState == other.nutationState &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                polarMotionState == other.polarMotionState &&
+                polarMotionX == other.polarMotionX &&
+                polarMotionXb == other.polarMotionXb &&
+                polarMotionXUnc == other.polarMotionXUnc &&
+                polarMotionY == other.polarMotionY &&
+                polarMotionYb == other.polarMotionYb &&
+                polarMotionYUnc == other.polarMotionYUnc &&
+                precessionNutationStd == other.precessionNutationStd &&
+                rawFileUri == other.rawFileUri &&
+                ut1Utc == other.ut1Utc &&
+                ut1Utcb == other.ut1Utcb &&
+                ut1UtcState == other.ut1UtcState &&
+                ut1UtcUnc == other.ut1UtcUnc &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, eopDate, source, id, createdAt, createdBy, dEpsilon, dEpsilonB, dEpsilonUnc, dPsi, dPsib, dPsiUnc, dX, dXb, dXUnc, dY, dYb, dYUnc, lod, lodUnc, nutationState, origin, origNetwork, polarMotionState, polarMotionX, polarMotionXb, polarMotionXUnc, polarMotionY, polarMotionYb, polarMotionYUnc, precessionNutationStd, rawFileUri, ut1Utc, ut1Utcb, ut1UtcState, ut1UtcUnc, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                eopDate,
+                source,
+                id,
+                createdAt,
+                createdBy,
+                dEpsilon,
+                dEpsilonB,
+                dEpsilonUnc,
+                dPsi,
+                dPsib,
+                dPsiUnc,
+                dX,
+                dXb,
+                dXUnc,
+                dY,
+                dYb,
+                dYUnc,
+                lod,
+                lodUnc,
+                nutationState,
+                origin,
+                origNetwork,
+                polarMotionState,
+                polarMotionX,
+                polarMotionXb,
+                polarMotionXUnc,
+                polarMotionY,
+                polarMotionYb,
+                polarMotionYUnc,
+                precessionNutationStd,
+                rawFileUri,
+                ut1Utc,
+                ut1Utcb,
+                ut1UtcState,
+                ut1UtcUnc,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3291,7 +3368,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3427,7 +3504,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is NutationState && value == other.value /* spotless:on */
+            return other is NutationState && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3560,7 +3637,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is PolarMotionState && value == other.value /* spotless:on */
+            return other is PolarMotionState && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3693,7 +3770,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Ut1UtcState && value == other.value /* spotless:on */
+            return other is Ut1UtcState && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3706,10 +3783,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EopCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is EopCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "EopCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

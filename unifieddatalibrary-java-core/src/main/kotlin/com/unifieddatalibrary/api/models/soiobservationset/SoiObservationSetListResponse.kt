@@ -3296,7 +3296,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3424,7 +3424,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+            return other is Type && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4026,12 +4026,37 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Calibration && calBgIntensity == other.calBgIntensity && calExtinctionCoeff == other.calExtinctionCoeff && calExtinctionCoeffMaxUnc == other.calExtinctionCoeffMaxUnc && calExtinctionCoeffUnc == other.calExtinctionCoeffUnc && calNumCorrelatedStars == other.calNumCorrelatedStars && calNumDetectedStars == other.calNumDetectedStars && calSkyBg == other.calSkyBg && calSpectralFilterSolarMag == other.calSpectralFilterSolarMag && calTime == other.calTime && calType == other.calType && calZeroPoint == other.calZeroPoint && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Calibration &&
+                calBgIntensity == other.calBgIntensity &&
+                calExtinctionCoeff == other.calExtinctionCoeff &&
+                calExtinctionCoeffMaxUnc == other.calExtinctionCoeffMaxUnc &&
+                calExtinctionCoeffUnc == other.calExtinctionCoeffUnc &&
+                calNumCorrelatedStars == other.calNumCorrelatedStars &&
+                calNumDetectedStars == other.calNumDetectedStars &&
+                calSkyBg == other.calSkyBg &&
+                calSpectralFilterSolarMag == other.calSpectralFilterSolarMag &&
+                calTime == other.calTime &&
+                calType == other.calType &&
+                calZeroPoint == other.calZeroPoint &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(calBgIntensity, calExtinctionCoeff, calExtinctionCoeffMaxUnc, calExtinctionCoeffUnc, calNumCorrelatedStars, calNumDetectedStars, calSkyBg, calSpectralFilterSolarMag, calTime, calType, calZeroPoint, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                calBgIntensity,
+                calExtinctionCoeff,
+                calExtinctionCoeffMaxUnc,
+                calExtinctionCoeffUnc,
+                calNumCorrelatedStars,
+                calNumDetectedStars,
+                calSkyBg,
+                calSpectralFilterSolarMag,
+                calTime,
+                calType,
+                calZeroPoint,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4191,7 +4216,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is ReferenceFrame && value == other.value /* spotless:on */
+            return other is ReferenceFrame && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4353,7 +4378,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SenReferenceFrame && value == other.value /* spotless:on */
+            return other is SenReferenceFrame && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4366,12 +4391,158 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SoiObservationSetListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && numObs == other.numObs && source == other.source && startTime == other.startTime && type == other.type && id == other.id && binningHoriz == other.binningHoriz && binningVert == other.binningVert && brightnessVarianceChangeDetected == other.brightnessVarianceChangeDetected && calibrations == other.calibrations && calibrationType == other.calibrationType && changeConf == other.changeConf && changeDetected == other.changeDetected && collectionDensityConf == other.collectionDensityConf && collectionId == other.collectionId && collectionMode == other.collectionMode && corrQuality == other.corrQuality && createdAt == other.createdAt && createdBy == other.createdBy && endTime == other.endTime && gain == other.gain && idElset == other.idElset && idOnOrbit == other.idOnOrbit && idSensor == other.idSensor && losDeclinationEnd == other.losDeclinationEnd && losDeclinationStart == other.losDeclinationStart && msgCreateDate == other.msgCreateDate && numSpectralFilters == other.numSpectralFilters && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId == other.origSensorId && percentSatThreshold == other.percentSatThreshold && periodicityChangeDetected == other.periodicityChangeDetected && periodicityDetectionConf == other.periodicityDetectionConf && periodicitySamplingConf == other.periodicitySamplingConf && pixelArrayHeight == other.pixelArrayHeight && pixelArrayWidth == other.pixelArrayWidth && pixelMax == other.pixelMax && pixelMin == other.pixelMin && pointingAngleAzEnd == other.pointingAngleAzEnd && pointingAngleAzStart == other.pointingAngleAzStart && pointingAngleElEnd == other.pointingAngleElEnd && pointingAngleElStart == other.pointingAngleElStart && polarAngleEnd == other.polarAngleEnd && polarAngleStart == other.polarAngleStart && referenceFrame == other.referenceFrame && satelliteName == other.satelliteName && satNo == other.satNo && senalt == other.senalt && senlat == other.senlat && senlon == other.senlon && senReferenceFrame == other.senReferenceFrame && sensorAsId == other.sensorAsId && senvelx == other.senvelx && senvely == other.senvely && senvelz == other.senvelz && senx == other.senx && seny == other.seny && senz == other.senz && softwareVersion == other.softwareVersion && solarMag == other.solarMag && solarPhaseAngleBrightnessChangeDetected == other.solarPhaseAngleBrightnessChangeDetected && sourceDl == other.sourceDl && spectralFilters == other.spectralFilters && starCatName == other.starCatName && tags == other.tags && transactionId == other.transactionId && uct == other.uct && validCalibrations == other.validCalibrations && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SoiObservationSetListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            numObs == other.numObs &&
+            source == other.source &&
+            startTime == other.startTime &&
+            type == other.type &&
+            id == other.id &&
+            binningHoriz == other.binningHoriz &&
+            binningVert == other.binningVert &&
+            brightnessVarianceChangeDetected == other.brightnessVarianceChangeDetected &&
+            calibrations == other.calibrations &&
+            calibrationType == other.calibrationType &&
+            changeConf == other.changeConf &&
+            changeDetected == other.changeDetected &&
+            collectionDensityConf == other.collectionDensityConf &&
+            collectionId == other.collectionId &&
+            collectionMode == other.collectionMode &&
+            corrQuality == other.corrQuality &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            endTime == other.endTime &&
+            gain == other.gain &&
+            idElset == other.idElset &&
+            idOnOrbit == other.idOnOrbit &&
+            idSensor == other.idSensor &&
+            losDeclinationEnd == other.losDeclinationEnd &&
+            losDeclinationStart == other.losDeclinationStart &&
+            msgCreateDate == other.msgCreateDate &&
+            numSpectralFilters == other.numSpectralFilters &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId == other.origObjectId &&
+            origSensorId == other.origSensorId &&
+            percentSatThreshold == other.percentSatThreshold &&
+            periodicityChangeDetected == other.periodicityChangeDetected &&
+            periodicityDetectionConf == other.periodicityDetectionConf &&
+            periodicitySamplingConf == other.periodicitySamplingConf &&
+            pixelArrayHeight == other.pixelArrayHeight &&
+            pixelArrayWidth == other.pixelArrayWidth &&
+            pixelMax == other.pixelMax &&
+            pixelMin == other.pixelMin &&
+            pointingAngleAzEnd == other.pointingAngleAzEnd &&
+            pointingAngleAzStart == other.pointingAngleAzStart &&
+            pointingAngleElEnd == other.pointingAngleElEnd &&
+            pointingAngleElStart == other.pointingAngleElStart &&
+            polarAngleEnd == other.polarAngleEnd &&
+            polarAngleStart == other.polarAngleStart &&
+            referenceFrame == other.referenceFrame &&
+            satelliteName == other.satelliteName &&
+            satNo == other.satNo &&
+            senalt == other.senalt &&
+            senlat == other.senlat &&
+            senlon == other.senlon &&
+            senReferenceFrame == other.senReferenceFrame &&
+            sensorAsId == other.sensorAsId &&
+            senvelx == other.senvelx &&
+            senvely == other.senvely &&
+            senvelz == other.senvelz &&
+            senx == other.senx &&
+            seny == other.seny &&
+            senz == other.senz &&
+            softwareVersion == other.softwareVersion &&
+            solarMag == other.solarMag &&
+            solarPhaseAngleBrightnessChangeDetected ==
+                other.solarPhaseAngleBrightnessChangeDetected &&
+            sourceDl == other.sourceDl &&
+            spectralFilters == other.spectralFilters &&
+            starCatName == other.starCatName &&
+            tags == other.tags &&
+            transactionId == other.transactionId &&
+            uct == other.uct &&
+            validCalibrations == other.validCalibrations &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, numObs, source, startTime, type, id, binningHoriz, binningVert, brightnessVarianceChangeDetected, calibrations, calibrationType, changeConf, changeDetected, collectionDensityConf, collectionId, collectionMode, corrQuality, createdAt, createdBy, endTime, gain, idElset, idOnOrbit, idSensor, losDeclinationEnd, losDeclinationStart, msgCreateDate, numSpectralFilters, origin, origNetwork, origObjectId, origSensorId, percentSatThreshold, periodicityChangeDetected, periodicityDetectionConf, periodicitySamplingConf, pixelArrayHeight, pixelArrayWidth, pixelMax, pixelMin, pointingAngleAzEnd, pointingAngleAzStart, pointingAngleElEnd, pointingAngleElStart, polarAngleEnd, polarAngleStart, referenceFrame, satelliteName, satNo, senalt, senlat, senlon, senReferenceFrame, sensorAsId, senvelx, senvely, senvelz, senx, seny, senz, softwareVersion, solarMag, solarPhaseAngleBrightnessChangeDetected, sourceDl, spectralFilters, starCatName, tags, transactionId, uct, validCalibrations, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            numObs,
+            source,
+            startTime,
+            type,
+            id,
+            binningHoriz,
+            binningVert,
+            brightnessVarianceChangeDetected,
+            calibrations,
+            calibrationType,
+            changeConf,
+            changeDetected,
+            collectionDensityConf,
+            collectionId,
+            collectionMode,
+            corrQuality,
+            createdAt,
+            createdBy,
+            endTime,
+            gain,
+            idElset,
+            idOnOrbit,
+            idSensor,
+            losDeclinationEnd,
+            losDeclinationStart,
+            msgCreateDate,
+            numSpectralFilters,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            percentSatThreshold,
+            periodicityChangeDetected,
+            periodicityDetectionConf,
+            periodicitySamplingConf,
+            pixelArrayHeight,
+            pixelArrayWidth,
+            pixelMax,
+            pixelMin,
+            pointingAngleAzEnd,
+            pointingAngleAzStart,
+            pointingAngleElEnd,
+            pointingAngleElStart,
+            polarAngleEnd,
+            polarAngleStart,
+            referenceFrame,
+            satelliteName,
+            satNo,
+            senalt,
+            senlat,
+            senlon,
+            senReferenceFrame,
+            sensorAsId,
+            senvelx,
+            senvely,
+            senvelz,
+            senx,
+            seny,
+            senz,
+            softwareVersion,
+            solarMag,
+            solarPhaseAngleBrightnessChangeDetected,
+            sourceDl,
+            spectralFilters,
+            starCatName,
+            tags,
+            transactionId,
+            uct,
+            validCalibrations,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

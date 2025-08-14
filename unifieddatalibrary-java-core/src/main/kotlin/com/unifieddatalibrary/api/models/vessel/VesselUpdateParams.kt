@@ -2820,12 +2820,85 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && bodyId == other.bodyId && altVesselId == other.altVesselId && callsign == other.callsign && createdAt == other.createdAt && createdBy == other.createdBy && entity == other.entity && firstSeen == other.firstSeen && hullNum == other.hullNum && idEntity == other.idEntity && idOrganization == other.idOrganization && imon == other.imon && length == other.length && maxDraught == other.maxDraught && maxSpeed == other.maxSpeed && mmsi == other.mmsi && numBlades == other.numBlades && numShafts == other.numShafts && origin == other.origin && origNetwork == other.origNetwork && propType == other.propType && sconum == other.sconum && status == other.status && sternType == other.sternType && vesselBuilder == other.vesselBuilder && vesselClass == other.vesselClass && vesselDescription == other.vesselDescription && vesselFlag == other.vesselFlag && vesselName == other.vesselName && vesselType == other.vesselType && vslWt == other.vslWt && width == other.width && yearBuilt == other.yearBuilt && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                bodyId == other.bodyId &&
+                altVesselId == other.altVesselId &&
+                callsign == other.callsign &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                entity == other.entity &&
+                firstSeen == other.firstSeen &&
+                hullNum == other.hullNum &&
+                idEntity == other.idEntity &&
+                idOrganization == other.idOrganization &&
+                imon == other.imon &&
+                length == other.length &&
+                maxDraught == other.maxDraught &&
+                maxSpeed == other.maxSpeed &&
+                mmsi == other.mmsi &&
+                numBlades == other.numBlades &&
+                numShafts == other.numShafts &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                propType == other.propType &&
+                sconum == other.sconum &&
+                status == other.status &&
+                sternType == other.sternType &&
+                vesselBuilder == other.vesselBuilder &&
+                vesselClass == other.vesselClass &&
+                vesselDescription == other.vesselDescription &&
+                vesselFlag == other.vesselFlag &&
+                vesselName == other.vesselName &&
+                vesselType == other.vesselType &&
+                vslWt == other.vslWt &&
+                width == other.width &&
+                yearBuilt == other.yearBuilt &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, bodyId, altVesselId, callsign, createdAt, createdBy, entity, firstSeen, hullNum, idEntity, idOrganization, imon, length, maxDraught, maxSpeed, mmsi, numBlades, numShafts, origin, origNetwork, propType, sconum, status, sternType, vesselBuilder, vesselClass, vesselDescription, vesselFlag, vesselName, vesselType, vslWt, width, yearBuilt, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                bodyId,
+                altVesselId,
+                callsign,
+                createdAt,
+                createdBy,
+                entity,
+                firstSeen,
+                hullNum,
+                idEntity,
+                idOrganization,
+                imon,
+                length,
+                maxDraught,
+                maxSpeed,
+                mmsi,
+                numBlades,
+                numShafts,
+                origin,
+                origNetwork,
+                propType,
+                sconum,
+                status,
+                sternType,
+                vesselBuilder,
+                vesselClass,
+                vesselDescription,
+                vesselFlag,
+                vesselName,
+                vesselType,
+                vslWt,
+                width,
+                yearBuilt,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2978,7 +3051,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2991,10 +3064,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is VesselUpdateParams && pathId == other.pathId && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is VesselUpdateParams &&
+            pathId == other.pathId &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "VesselUpdateParams{pathId=$pathId, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

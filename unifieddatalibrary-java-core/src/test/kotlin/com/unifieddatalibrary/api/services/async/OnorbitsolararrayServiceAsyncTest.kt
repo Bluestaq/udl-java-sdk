@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.services.async
 
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
+import com.unifieddatalibrary.api.models.SolarArrayIngest
 import com.unifieddatalibrary.api.models.onorbitsolararray.OnorbitsolararrayCreateParams
 import com.unifieddatalibrary.api.models.onorbitsolararray.OnorbitsolararrayGetParams
 import com.unifieddatalibrary.api.models.onorbitsolararray.OnorbitsolararrayUpdateParams
@@ -39,8 +40,8 @@ internal class OnorbitsolararrayServiceAsyncTest {
                     .origNetwork("OPS1")
                     .quantity(10)
                     .solarArray(
-                        OnorbitsolararrayCreateParams.SolarArray.builder()
-                            .dataMode(OnorbitsolararrayCreateParams.SolarArray.DataMode.TEST)
+                        SolarArrayIngest.builder()
+                            .dataMode(SolarArrayIngest.DataMode.TEST)
                             .name("Solar1")
                             .source("Bluestaq")
                             .id("SOLARARRAY-ID")
@@ -82,8 +83,8 @@ internal class OnorbitsolararrayServiceAsyncTest {
                     .origNetwork("OPS1")
                     .quantity(10)
                     .solarArray(
-                        OnorbitsolararrayUpdateParams.SolarArray.builder()
-                            .dataMode(OnorbitsolararrayUpdateParams.SolarArray.DataMode.TEST)
+                        SolarArrayIngest.builder()
+                            .dataMode(SolarArrayIngest.DataMode.TEST)
                             .name("Solar1")
                             .source("Bluestaq")
                             .id("SOLARARRAY-ID")

@@ -275,10 +275,26 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is FileListParams && path == other.path && count == other.count && firstResult == other.firstResult && maxResults == other.maxResults && offset == other.offset && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is FileListParams &&
+            path == other.path &&
+            count == other.count &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            offset == other.offset &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(path, count, firstResult, maxResults, offset, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            path,
+            count,
+            firstResult,
+            maxResults,
+            offset,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "FileListParams{path=$path, count=$count, firstResult=$firstResult, maxResults=$maxResults, offset=$offset, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -3188,7 +3188,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3964,12 +3964,49 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AirLoadPlanHazmatActual && ashc == other.ashc && cgc == other.cgc && classDiv == other.classDiv && hazDescription == other.hazDescription && hazmatRemarks == other.hazmatRemarks && hazNum == other.hazNum && hazNumType == other.hazNumType && hazOffIcao == other.hazOffIcao && hazOffItin == other.hazOffItin && hazOnIcao == other.hazOnIcao && hazOnItin == other.hazOnItin && hazPieces == other.hazPieces && hazTcn == other.hazTcn && hazWeight == other.hazWeight && itemName == other.itemName && lotNum == other.lotNum && netExpWt == other.netExpWt && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is AirLoadPlanHazmatActual &&
+                ashc == other.ashc &&
+                cgc == other.cgc &&
+                classDiv == other.classDiv &&
+                hazDescription == other.hazDescription &&
+                hazmatRemarks == other.hazmatRemarks &&
+                hazNum == other.hazNum &&
+                hazNumType == other.hazNumType &&
+                hazOffIcao == other.hazOffIcao &&
+                hazOffItin == other.hazOffItin &&
+                hazOnIcao == other.hazOnIcao &&
+                hazOnItin == other.hazOnItin &&
+                hazPieces == other.hazPieces &&
+                hazTcn == other.hazTcn &&
+                hazWeight == other.hazWeight &&
+                itemName == other.itemName &&
+                lotNum == other.lotNum &&
+                netExpWt == other.netExpWt &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(ashc, cgc, classDiv, hazDescription, hazmatRemarks, hazNum, hazNumType, hazOffIcao, hazOffItin, hazOnIcao, hazOnItin, hazPieces, hazTcn, hazWeight, itemName, lotNum, netExpWt, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                ashc,
+                cgc,
+                classDiv,
+                hazDescription,
+                hazmatRemarks,
+                hazNum,
+                hazNumType,
+                hazOffIcao,
+                hazOffItin,
+                hazOnIcao,
+                hazOnItin,
+                hazPieces,
+                hazTcn,
+                hazWeight,
+                itemName,
+                lotNum,
+                netExpWt,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4569,12 +4606,41 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AirLoadPlanHr && container == other.container && escort == other.escort && hrEstArrTime == other.hrEstArrTime && hrOffIcao == other.hrOffIcao && hrOffItin == other.hrOffItin && hrOnIcao == other.hrOnIcao && hrOnItin == other.hrOnItin && hrRemarks == other.hrRemarks && name == other.name && rank == other.rank && recAgency == other.recAgency && service == other.service && viewable == other.viewable && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is AirLoadPlanHr &&
+                container == other.container &&
+                escort == other.escort &&
+                hrEstArrTime == other.hrEstArrTime &&
+                hrOffIcao == other.hrOffIcao &&
+                hrOffItin == other.hrOffItin &&
+                hrOnIcao == other.hrOnIcao &&
+                hrOnItin == other.hrOnItin &&
+                hrRemarks == other.hrRemarks &&
+                name == other.name &&
+                rank == other.rank &&
+                recAgency == other.recAgency &&
+                service == other.service &&
+                viewable == other.viewable &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(container, escort, hrEstArrTime, hrOffIcao, hrOffItin, hrOnIcao, hrOnItin, hrRemarks, name, rank, recAgency, service, viewable, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                container,
+                escort,
+                hrEstArrTime,
+                hrOffIcao,
+                hrOffItin,
+                hrOnIcao,
+                hrOnItin,
+                hrRemarks,
+                name,
+                rank,
+                recAgency,
+                service,
+                viewable,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5031,12 +5097,33 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AirLoadPlanPalletDetail && category == other.category && pp == other.pp && ppDescription == other.ppDescription && ppOffIcao == other.ppOffIcao && ppPieces == other.ppPieces && ppRemarks == other.ppRemarks && ppTcn == other.ppTcn && ppWeight == other.ppWeight && specialInterest == other.specialInterest && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is AirLoadPlanPalletDetail &&
+                category == other.category &&
+                pp == other.pp &&
+                ppDescription == other.ppDescription &&
+                ppOffIcao == other.ppOffIcao &&
+                ppPieces == other.ppPieces &&
+                ppRemarks == other.ppRemarks &&
+                ppTcn == other.ppTcn &&
+                ppWeight == other.ppWeight &&
+                specialInterest == other.specialInterest &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(category, pp, ppDescription, ppOffIcao, ppPieces, ppRemarks, ppTcn, ppWeight, specialInterest, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                category,
+                pp,
+                ppDescription,
+                ppOffIcao,
+                ppPieces,
+                ppRemarks,
+                ppTcn,
+                ppWeight,
+                specialInterest,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5714,12 +5801,45 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AirLoadPlanPaxCargo && ambPax == other.ambPax && attPax == other.attPax && availablePax == other.availablePax && bagWeight == other.bagWeight && civPax == other.civPax && dvPax == other.dvPax && fnPax == other.fnPax && groupCargoWeight == other.groupCargoWeight && groupType == other.groupType && litPax == other.litPax && mailWeight == other.mailWeight && numPallet == other.numPallet && palletWeight == other.palletWeight && paxWeight == other.paxWeight && requiredPax == other.requiredPax && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is AirLoadPlanPaxCargo &&
+                ambPax == other.ambPax &&
+                attPax == other.attPax &&
+                availablePax == other.availablePax &&
+                bagWeight == other.bagWeight &&
+                civPax == other.civPax &&
+                dvPax == other.dvPax &&
+                fnPax == other.fnPax &&
+                groupCargoWeight == other.groupCargoWeight &&
+                groupType == other.groupType &&
+                litPax == other.litPax &&
+                mailWeight == other.mailWeight &&
+                numPallet == other.numPallet &&
+                palletWeight == other.palletWeight &&
+                paxWeight == other.paxWeight &&
+                requiredPax == other.requiredPax &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(ambPax, attPax, availablePax, bagWeight, civPax, dvPax, fnPax, groupCargoWeight, groupType, litPax, mailWeight, numPallet, palletWeight, paxWeight, requiredPax, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                ambPax,
+                attPax,
+                availablePax,
+                bagWeight,
+                civPax,
+                dvPax,
+                fnPax,
+                groupCargoWeight,
+                groupType,
+                litPax,
+                mailWeight,
+                numPallet,
+                palletWeight,
+                paxWeight,
+                requiredPax,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -6328,12 +6448,41 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AirLoadPlanUlnActual && numAmbulatory == other.numAmbulatory && numAttendant == other.numAttendant && numLitter == other.numLitter && numPax == other.numPax && offloadId == other.offloadId && offloadLoCode == other.offloadLoCode && onloadId == other.onloadId && onloadLoCode == other.onloadLoCode && oplan == other.oplan && projName == other.projName && uln == other.uln && ulnCargoWeight == other.ulnCargoWeight && ulnRemarks == other.ulnRemarks && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is AirLoadPlanUlnActual &&
+                numAmbulatory == other.numAmbulatory &&
+                numAttendant == other.numAttendant &&
+                numLitter == other.numLitter &&
+                numPax == other.numPax &&
+                offloadId == other.offloadId &&
+                offloadLoCode == other.offloadLoCode &&
+                onloadId == other.onloadId &&
+                onloadLoCode == other.onloadLoCode &&
+                oplan == other.oplan &&
+                projName == other.projName &&
+                uln == other.uln &&
+                ulnCargoWeight == other.ulnCargoWeight &&
+                ulnRemarks == other.ulnRemarks &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(numAmbulatory, numAttendant, numLitter, numPax, offloadId, offloadLoCode, onloadId, onloadLoCode, oplan, projName, uln, ulnCargoWeight, ulnRemarks, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                numAmbulatory,
+                numAttendant,
+                numLitter,
+                numPax,
+                offloadId,
+                offloadLoCode,
+                onloadId,
+                onloadLoCode,
+                oplan,
+                projName,
+                uln,
+                ulnCargoWeight,
+                ulnRemarks,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -6346,12 +6495,155 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AirloadplanFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && estDepTime == other.estDepTime && source == other.source && id == other.id && aclOnboard == other.aclOnboard && aclReleased == other.aclReleased && aircraftMds == other.aircraftMds && airLoadPlanHazmatActuals == other.airLoadPlanHazmatActuals && airLoadPlanHr == other.airLoadPlanHr && airLoadPlanPalletDetails == other.airLoadPlanPalletDetails && airLoadPlanPaxCargo == other.airLoadPlanPaxCargo && airLoadPlanUlnActuals == other.airLoadPlanUlnActuals && arrAirfield == other.arrAirfield && arrIcao == other.arrIcao && availableTime == other.availableTime && basicMoment == other.basicMoment && basicWeight == other.basicWeight && briefTime == other.briefTime && callSign == other.callSign && cargoBayFsMax == other.cargoBayFsMax && cargoBayFsMin == other.cargoBayFsMin && cargoBayWidth == other.cargoBayWidth && cargoConfig == other.cargoConfig && cargoMoment == other.cargoMoment && cargoVolume == other.cargoVolume && cargoWeight == other.cargoWeight && createdAt == other.createdAt && createdBy == other.createdBy && crewSize == other.crewSize && depAirfield == other.depAirfield && depIcao == other.depIcao && equipConfig == other.equipConfig && estArrTime == other.estArrTime && estLandingFuelMoment == other.estLandingFuelMoment && estLandingFuelWeight == other.estLandingFuelWeight && externalId == other.externalId && fuelMoment == other.fuelMoment && fuelWeight == other.fuelWeight && grossCg == other.grossCg && grossMoment == other.grossMoment && grossWeight == other.grossWeight && idMission == other.idMission && idSortie == other.idSortie && landingCg == other.landingCg && landingMoment == other.landingMoment && landingWeight == other.landingWeight && legNum == other.legNum && loadmasterName == other.loadmasterName && loadmasterRank == other.loadmasterRank && loadRemarks == other.loadRemarks && missionNumber == other.missionNumber && operatingMoment == other.operatingMoment && operatingWeight == other.operatingWeight && origin == other.origin && origNetwork == other.origNetwork && ppOnboard == other.ppOnboard && ppReleased == other.ppReleased && schedTime == other.schedTime && seatsOnboard == other.seatsOnboard && seatsReleased == other.seatsReleased && sourceDl == other.sourceDl && tailNumber == other.tailNumber && tankConfig == other.tankConfig && updatedAt == other.updatedAt && updatedBy == other.updatedBy && utilCode == other.utilCode && zeroFuelCg == other.zeroFuelCg && zeroFuelMoment == other.zeroFuelMoment && zeroFuelWeight == other.zeroFuelWeight && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is AirloadplanFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            estDepTime == other.estDepTime &&
+            source == other.source &&
+            id == other.id &&
+            aclOnboard == other.aclOnboard &&
+            aclReleased == other.aclReleased &&
+            aircraftMds == other.aircraftMds &&
+            airLoadPlanHazmatActuals == other.airLoadPlanHazmatActuals &&
+            airLoadPlanHr == other.airLoadPlanHr &&
+            airLoadPlanPalletDetails == other.airLoadPlanPalletDetails &&
+            airLoadPlanPaxCargo == other.airLoadPlanPaxCargo &&
+            airLoadPlanUlnActuals == other.airLoadPlanUlnActuals &&
+            arrAirfield == other.arrAirfield &&
+            arrIcao == other.arrIcao &&
+            availableTime == other.availableTime &&
+            basicMoment == other.basicMoment &&
+            basicWeight == other.basicWeight &&
+            briefTime == other.briefTime &&
+            callSign == other.callSign &&
+            cargoBayFsMax == other.cargoBayFsMax &&
+            cargoBayFsMin == other.cargoBayFsMin &&
+            cargoBayWidth == other.cargoBayWidth &&
+            cargoConfig == other.cargoConfig &&
+            cargoMoment == other.cargoMoment &&
+            cargoVolume == other.cargoVolume &&
+            cargoWeight == other.cargoWeight &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            crewSize == other.crewSize &&
+            depAirfield == other.depAirfield &&
+            depIcao == other.depIcao &&
+            equipConfig == other.equipConfig &&
+            estArrTime == other.estArrTime &&
+            estLandingFuelMoment == other.estLandingFuelMoment &&
+            estLandingFuelWeight == other.estLandingFuelWeight &&
+            externalId == other.externalId &&
+            fuelMoment == other.fuelMoment &&
+            fuelWeight == other.fuelWeight &&
+            grossCg == other.grossCg &&
+            grossMoment == other.grossMoment &&
+            grossWeight == other.grossWeight &&
+            idMission == other.idMission &&
+            idSortie == other.idSortie &&
+            landingCg == other.landingCg &&
+            landingMoment == other.landingMoment &&
+            landingWeight == other.landingWeight &&
+            legNum == other.legNum &&
+            loadmasterName == other.loadmasterName &&
+            loadmasterRank == other.loadmasterRank &&
+            loadRemarks == other.loadRemarks &&
+            missionNumber == other.missionNumber &&
+            operatingMoment == other.operatingMoment &&
+            operatingWeight == other.operatingWeight &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            ppOnboard == other.ppOnboard &&
+            ppReleased == other.ppReleased &&
+            schedTime == other.schedTime &&
+            seatsOnboard == other.seatsOnboard &&
+            seatsReleased == other.seatsReleased &&
+            sourceDl == other.sourceDl &&
+            tailNumber == other.tailNumber &&
+            tankConfig == other.tankConfig &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            utilCode == other.utilCode &&
+            zeroFuelCg == other.zeroFuelCg &&
+            zeroFuelMoment == other.zeroFuelMoment &&
+            zeroFuelWeight == other.zeroFuelWeight &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, estDepTime, source, id, aclOnboard, aclReleased, aircraftMds, airLoadPlanHazmatActuals, airLoadPlanHr, airLoadPlanPalletDetails, airLoadPlanPaxCargo, airLoadPlanUlnActuals, arrAirfield, arrIcao, availableTime, basicMoment, basicWeight, briefTime, callSign, cargoBayFsMax, cargoBayFsMin, cargoBayWidth, cargoConfig, cargoMoment, cargoVolume, cargoWeight, createdAt, createdBy, crewSize, depAirfield, depIcao, equipConfig, estArrTime, estLandingFuelMoment, estLandingFuelWeight, externalId, fuelMoment, fuelWeight, grossCg, grossMoment, grossWeight, idMission, idSortie, landingCg, landingMoment, landingWeight, legNum, loadmasterName, loadmasterRank, loadRemarks, missionNumber, operatingMoment, operatingWeight, origin, origNetwork, ppOnboard, ppReleased, schedTime, seatsOnboard, seatsReleased, sourceDl, tailNumber, tankConfig, updatedAt, updatedBy, utilCode, zeroFuelCg, zeroFuelMoment, zeroFuelWeight, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            estDepTime,
+            source,
+            id,
+            aclOnboard,
+            aclReleased,
+            aircraftMds,
+            airLoadPlanHazmatActuals,
+            airLoadPlanHr,
+            airLoadPlanPalletDetails,
+            airLoadPlanPaxCargo,
+            airLoadPlanUlnActuals,
+            arrAirfield,
+            arrIcao,
+            availableTime,
+            basicMoment,
+            basicWeight,
+            briefTime,
+            callSign,
+            cargoBayFsMax,
+            cargoBayFsMin,
+            cargoBayWidth,
+            cargoConfig,
+            cargoMoment,
+            cargoVolume,
+            cargoWeight,
+            createdAt,
+            createdBy,
+            crewSize,
+            depAirfield,
+            depIcao,
+            equipConfig,
+            estArrTime,
+            estLandingFuelMoment,
+            estLandingFuelWeight,
+            externalId,
+            fuelMoment,
+            fuelWeight,
+            grossCg,
+            grossMoment,
+            grossWeight,
+            idMission,
+            idSortie,
+            landingCg,
+            landingMoment,
+            landingWeight,
+            legNum,
+            loadmasterName,
+            loadmasterRank,
+            loadRemarks,
+            missionNumber,
+            operatingMoment,
+            operatingWeight,
+            origin,
+            origNetwork,
+            ppOnboard,
+            ppReleased,
+            schedTime,
+            seatsOnboard,
+            seatsReleased,
+            sourceDl,
+            tailNumber,
+            tankConfig,
+            updatedAt,
+            updatedBy,
+            utilCode,
+            zeroFuelCg,
+            zeroFuelMoment,
+            zeroFuelWeight,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

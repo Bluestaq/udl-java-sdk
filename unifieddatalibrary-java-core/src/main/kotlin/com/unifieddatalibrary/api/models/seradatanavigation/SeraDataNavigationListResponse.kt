@@ -1120,7 +1120,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1133,12 +1133,57 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SeraDataNavigationListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && spacecraftId == other.spacecraftId && id == other.id && areaCoverage == other.areaCoverage && clockType == other.clockType && createdAt == other.createdAt && createdBy == other.createdBy && hostedForCompanyOrgId == other.hostedForCompanyOrgId && idNavigation == other.idNavigation && locationAccuracy == other.locationAccuracy && manufacturerOrgId == other.manufacturerOrgId && modeFrequency == other.modeFrequency && modes == other.modes && name == other.name && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && partnerSpacecraftId == other.partnerSpacecraftId && payloadType == other.payloadType && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SeraDataNavigationListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            spacecraftId == other.spacecraftId &&
+            id == other.id &&
+            areaCoverage == other.areaCoverage &&
+            clockType == other.clockType &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+            idNavigation == other.idNavigation &&
+            locationAccuracy == other.locationAccuracy &&
+            manufacturerOrgId == other.manufacturerOrgId &&
+            modeFrequency == other.modeFrequency &&
+            modes == other.modes &&
+            name == other.name &&
+            notes == other.notes &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            partnerSpacecraftId == other.partnerSpacecraftId &&
+            payloadType == other.payloadType &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, spacecraftId, id, areaCoverage, clockType, createdAt, createdBy, hostedForCompanyOrgId, idNavigation, locationAccuracy, manufacturerOrgId, modeFrequency, modes, name, notes, origin, origNetwork, partnerSpacecraftId, payloadType, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            spacecraftId,
+            id,
+            areaCoverage,
+            clockType,
+            createdAt,
+            createdBy,
+            hostedForCompanyOrgId,
+            idNavigation,
+            locationAccuracy,
+            manufacturerOrgId,
+            modeFrequency,
+            modes,
+            name,
+            notes,
+            origin,
+            origNetwork,
+            partnerSpacecraftId,
+            payloadType,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

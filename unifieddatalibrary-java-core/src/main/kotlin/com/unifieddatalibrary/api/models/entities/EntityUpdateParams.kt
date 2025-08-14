@@ -219,10 +219,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EntityUpdateParams && id == other.id && entityIngest == other.entityIngest && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is EntityUpdateParams &&
+            id == other.id &&
+            entityIngest == other.entityIngest &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(id, entityIngest, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(id, entityIngest, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "EntityUpdateParams{id=$id, entityIngest=$entityIngest, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

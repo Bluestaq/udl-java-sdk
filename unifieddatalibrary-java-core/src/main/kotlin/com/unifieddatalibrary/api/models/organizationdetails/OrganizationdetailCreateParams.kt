@@ -3002,12 +3002,89 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idOrganization == other.idOrganization && name == other.name && source == other.source && id == other.id && address1 == other.address1 && address2 == other.address2 && address3 == other.address3 && broker == other.broker && ceo == other.ceo && cfo == other.cfo && createdAt == other.createdAt && createdBy == other.createdBy && cto == other.cto && description == other.description && ebitda == other.ebitda && email == other.email && financialNotes == other.financialNotes && financialYearEndDate == other.financialYearEndDate && fleetPlanNotes == other.fleetPlanNotes && formerOrgId == other.formerOrgId && ftes == other.ftes && geoAdminLevel1 == other.geoAdminLevel1 && geoAdminLevel2 == other.geoAdminLevel2 && geoAdminLevel3 == other.geoAdminLevel3 && massRanking == other.massRanking && origin == other.origin && origNetwork == other.origNetwork && parentOrgId == other.parentOrgId && postalCode == other.postalCode && profit == other.profit && revenue == other.revenue && revenueRanking == other.revenueRanking && riskManager == other.riskManager && servicesNotes == other.servicesNotes && tags == other.tags && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idOrganization == other.idOrganization &&
+                name == other.name &&
+                source == other.source &&
+                id == other.id &&
+                address1 == other.address1 &&
+                address2 == other.address2 &&
+                address3 == other.address3 &&
+                broker == other.broker &&
+                ceo == other.ceo &&
+                cfo == other.cfo &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                cto == other.cto &&
+                description == other.description &&
+                ebitda == other.ebitda &&
+                email == other.email &&
+                financialNotes == other.financialNotes &&
+                financialYearEndDate == other.financialYearEndDate &&
+                fleetPlanNotes == other.fleetPlanNotes &&
+                formerOrgId == other.formerOrgId &&
+                ftes == other.ftes &&
+                geoAdminLevel1 == other.geoAdminLevel1 &&
+                geoAdminLevel2 == other.geoAdminLevel2 &&
+                geoAdminLevel3 == other.geoAdminLevel3 &&
+                massRanking == other.massRanking &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                parentOrgId == other.parentOrgId &&
+                postalCode == other.postalCode &&
+                profit == other.profit &&
+                revenue == other.revenue &&
+                revenueRanking == other.revenueRanking &&
+                riskManager == other.riskManager &&
+                servicesNotes == other.servicesNotes &&
+                tags == other.tags &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idOrganization, name, source, id, address1, address2, address3, broker, ceo, cfo, createdAt, createdBy, cto, description, ebitda, email, financialNotes, financialYearEndDate, fleetPlanNotes, formerOrgId, ftes, geoAdminLevel1, geoAdminLevel2, geoAdminLevel3, massRanking, origin, origNetwork, parentOrgId, postalCode, profit, revenue, revenueRanking, riskManager, servicesNotes, tags, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idOrganization,
+                name,
+                source,
+                id,
+                address1,
+                address2,
+                address3,
+                broker,
+                ceo,
+                cfo,
+                createdAt,
+                createdBy,
+                cto,
+                description,
+                ebitda,
+                email,
+                financialNotes,
+                financialYearEndDate,
+                fleetPlanNotes,
+                formerOrgId,
+                ftes,
+                geoAdminLevel1,
+                geoAdminLevel2,
+                geoAdminLevel3,
+                massRanking,
+                origin,
+                origNetwork,
+                parentOrgId,
+                postalCode,
+                profit,
+                revenue,
+                revenueRanking,
+                riskManager,
+                servicesNotes,
+                tags,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3160,7 +3237,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3173,10 +3250,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OrganizationdetailCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OrganizationdetailCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "OrganizationdetailCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -286,10 +286,26 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is NavigationalObstructionTupleParams && columns == other.columns && cycleDate == other.cycleDate && firstResult == other.firstResult && maxResults == other.maxResults && obstacleId == other.obstacleId && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is NavigationalObstructionTupleParams &&
+            columns == other.columns &&
+            cycleDate == other.cycleDate &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            obstacleId == other.obstacleId &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, cycleDate, firstResult, maxResults, obstacleId, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            columns,
+            cycleDate,
+            firstResult,
+            maxResults,
+            obstacleId,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "NavigationalObstructionTupleParams{columns=$columns, cycleDate=$cycleDate, firstResult=$firstResult, maxResults=$maxResults, obstacleId=$obstacleId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

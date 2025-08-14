@@ -1104,7 +1104,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1252,7 +1252,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AcSlotCat && value == other.value /* spotless:on */
+            return other is AcSlotCat && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1398,7 +1398,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+            return other is Type && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1411,12 +1411,57 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AirfieldslotAbridged && airfieldName == other.airfieldName && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && id == other.id && acSlotCat == other.acSlotCat && altAirfieldId == other.altAirfieldId && capacity == other.capacity && createdAt == other.createdAt && createdBy == other.createdBy && endTime == other.endTime && icao == other.icao && idAirfield == other.idAirfield && minSeparation == other.minSeparation && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && sourceDl == other.sourceDl && startTime == other.startTime && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is AirfieldslotAbridged &&
+            airfieldName == other.airfieldName &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            name == other.name &&
+            source == other.source &&
+            id == other.id &&
+            acSlotCat == other.acSlotCat &&
+            altAirfieldId == other.altAirfieldId &&
+            capacity == other.capacity &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            endTime == other.endTime &&
+            icao == other.icao &&
+            idAirfield == other.idAirfield &&
+            minSeparation == other.minSeparation &&
+            notes == other.notes &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            sourceDl == other.sourceDl &&
+            startTime == other.startTime &&
+            type == other.type &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(airfieldName, classificationMarking, dataMode, name, source, id, acSlotCat, altAirfieldId, capacity, createdAt, createdBy, endTime, icao, idAirfield, minSeparation, notes, origin, origNetwork, sourceDl, startTime, type, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            airfieldName,
+            classificationMarking,
+            dataMode,
+            name,
+            source,
+            id,
+            acSlotCat,
+            altAirfieldId,
+            capacity,
+            createdAt,
+            createdBy,
+            endTime,
+            icao,
+            idAirfield,
+            minSeparation,
+            notes,
+            origin,
+            origNetwork,
+            sourceDl,
+            startTime,
+            type,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

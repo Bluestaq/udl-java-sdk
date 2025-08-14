@@ -2487,7 +2487,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2626,7 +2626,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AirToAirStatus && value == other.value /* spotless:on */
+            return other is AirToAirStatus && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2769,7 +2769,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AirToGroundStatus && value == other.value /* spotless:on */
+            return other is AirToGroundStatus && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2782,12 +2782,119 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AircraftstatusAbridged && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idAircraft == other.idAircraft && source == other.source && id == other.id && additionalSys == other.additionalSys && airToAirStatus == other.airToAirStatus && airToGroundStatus == other.airToGroundStatus && alphaStatusCode == other.alphaStatusCode && altAircraftId == other.altAircraftId && contaminationStatus == other.contaminationStatus && createdAt == other.createdAt && createdBy == other.createdBy && currentIcao == other.currentIcao && currentState == other.currentState && earliestTaEndTime == other.earliestTaEndTime && etic == other.etic && flightPhase == other.flightPhase && fuel == other.fuel && fuelFunction == other.fuelFunction && fuelStatus == other.fuelStatus && geoLoc == other.geoLoc && groundStatus == other.groundStatus && gunCapable == other.gunCapable && gunRdsMax == other.gunRdsMax && gunRdsMin == other.gunRdsMin && gunRdsType == other.gunRdsType && idAirfield == other.idAirfield && idPoi == other.idPoi && inventory == other.inventory && inventoryMax == other.inventoryMax && inventoryMin == other.inventoryMin && lastInspectionDate == other.lastInspectionDate && lastUpdatedBy == other.lastUpdatedBy && maintPoc == other.maintPoc && maintPriority == other.maintPriority && maintStatus == other.maintStatus && maintStatusDriver == other.maintStatusDriver && maintStatusUpdate == other.maintStatusUpdate && missionReadiness == other.missionReadiness && mxRemark == other.mxRemark && nextIcao == other.nextIcao && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && parkLocation == other.parkLocation && parkLocationSystem == other.parkLocationSystem && previousIcao == other.previousIcao && sourceDl == other.sourceDl && taStartTime == other.taStartTime && troubleshootEtic == other.troubleshootEtic && unavailableSys == other.unavailableSys && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is AircraftstatusAbridged &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idAircraft == other.idAircraft &&
+            source == other.source &&
+            id == other.id &&
+            additionalSys == other.additionalSys &&
+            airToAirStatus == other.airToAirStatus &&
+            airToGroundStatus == other.airToGroundStatus &&
+            alphaStatusCode == other.alphaStatusCode &&
+            altAircraftId == other.altAircraftId &&
+            contaminationStatus == other.contaminationStatus &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            currentIcao == other.currentIcao &&
+            currentState == other.currentState &&
+            earliestTaEndTime == other.earliestTaEndTime &&
+            etic == other.etic &&
+            flightPhase == other.flightPhase &&
+            fuel == other.fuel &&
+            fuelFunction == other.fuelFunction &&
+            fuelStatus == other.fuelStatus &&
+            geoLoc == other.geoLoc &&
+            groundStatus == other.groundStatus &&
+            gunCapable == other.gunCapable &&
+            gunRdsMax == other.gunRdsMax &&
+            gunRdsMin == other.gunRdsMin &&
+            gunRdsType == other.gunRdsType &&
+            idAirfield == other.idAirfield &&
+            idPoi == other.idPoi &&
+            inventory == other.inventory &&
+            inventoryMax == other.inventoryMax &&
+            inventoryMin == other.inventoryMin &&
+            lastInspectionDate == other.lastInspectionDate &&
+            lastUpdatedBy == other.lastUpdatedBy &&
+            maintPoc == other.maintPoc &&
+            maintPriority == other.maintPriority &&
+            maintStatus == other.maintStatus &&
+            maintStatusDriver == other.maintStatusDriver &&
+            maintStatusUpdate == other.maintStatusUpdate &&
+            missionReadiness == other.missionReadiness &&
+            mxRemark == other.mxRemark &&
+            nextIcao == other.nextIcao &&
+            notes == other.notes &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            parkLocation == other.parkLocation &&
+            parkLocationSystem == other.parkLocationSystem &&
+            previousIcao == other.previousIcao &&
+            sourceDl == other.sourceDl &&
+            taStartTime == other.taStartTime &&
+            troubleshootEtic == other.troubleshootEtic &&
+            unavailableSys == other.unavailableSys &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idAircraft, source, id, additionalSys, airToAirStatus, airToGroundStatus, alphaStatusCode, altAircraftId, contaminationStatus, createdAt, createdBy, currentIcao, currentState, earliestTaEndTime, etic, flightPhase, fuel, fuelFunction, fuelStatus, geoLoc, groundStatus, gunCapable, gunRdsMax, gunRdsMin, gunRdsType, idAirfield, idPoi, inventory, inventoryMax, inventoryMin, lastInspectionDate, lastUpdatedBy, maintPoc, maintPriority, maintStatus, maintStatusDriver, maintStatusUpdate, missionReadiness, mxRemark, nextIcao, notes, origin, origNetwork, parkLocation, parkLocationSystem, previousIcao, sourceDl, taStartTime, troubleshootEtic, unavailableSys, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idAircraft,
+            source,
+            id,
+            additionalSys,
+            airToAirStatus,
+            airToGroundStatus,
+            alphaStatusCode,
+            altAircraftId,
+            contaminationStatus,
+            createdAt,
+            createdBy,
+            currentIcao,
+            currentState,
+            earliestTaEndTime,
+            etic,
+            flightPhase,
+            fuel,
+            fuelFunction,
+            fuelStatus,
+            geoLoc,
+            groundStatus,
+            gunCapable,
+            gunRdsMax,
+            gunRdsMin,
+            gunRdsType,
+            idAirfield,
+            idPoi,
+            inventory,
+            inventoryMax,
+            inventoryMin,
+            lastInspectionDate,
+            lastUpdatedBy,
+            maintPoc,
+            maintPriority,
+            maintStatus,
+            maintStatusDriver,
+            maintStatusUpdate,
+            missionReadiness,
+            mxRemark,
+            nextIcao,
+            notes,
+            origin,
+            origNetwork,
+            parkLocation,
+            parkLocationSystem,
+            previousIcao,
+            sourceDl,
+            taStartTime,
+            troubleshootEtic,
+            unavailableSys,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

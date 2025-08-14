@@ -2452,7 +2452,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -2465,12 +2465,117 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && poiid == other.poiid && source == other.source && ts == other.ts && id == other.id && activity == other.activity && agjson == other.agjson && alt == other.alt && andims == other.andims && area == other.area && asrid == other.asrid && asset == other.asset && atext == other.atext && atype == other.atype && az == other.az && beNumber == other.beNumber && ce == other.ce && cntct == other.cntct && conf == other.conf && createdAt == other.createdAt && createdBy == other.createdBy && desc == other.desc && el == other.el && elle == other.elle && env == other.env && groups == other.groups && how == other.how && ident == other.ident && idWeatherReport == other.idWeatherReport && lat == other.lat && le == other.le && lon == other.lon && msnid == other.msnid && orientation == other.orientation && origin == other.origin && origNetwork == other.origNetwork && plat == other.plat && pps == other.pps && pri == other.pri && sourceDl == other.sourceDl && spec == other.spec && srcIds == other.srcIds && srcTyps == other.srcTyps && stale == other.stale && start == other.start && tags == other.tags && transactionId == other.transactionId && trkid == other.trkid && type == other.type && urls == other.urls /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                name == other.name &&
+                poiid == other.poiid &&
+                source == other.source &&
+                ts == other.ts &&
+                id == other.id &&
+                activity == other.activity &&
+                agjson == other.agjson &&
+                alt == other.alt &&
+                andims == other.andims &&
+                area == other.area &&
+                asrid == other.asrid &&
+                asset == other.asset &&
+                atext == other.atext &&
+                atype == other.atype &&
+                az == other.az &&
+                beNumber == other.beNumber &&
+                ce == other.ce &&
+                cntct == other.cntct &&
+                conf == other.conf &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                desc == other.desc &&
+                el == other.el &&
+                elle == other.elle &&
+                env == other.env &&
+                groups == other.groups &&
+                how == other.how &&
+                ident == other.ident &&
+                idWeatherReport == other.idWeatherReport &&
+                lat == other.lat &&
+                le == other.le &&
+                lon == other.lon &&
+                msnid == other.msnid &&
+                orientation == other.orientation &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                plat == other.plat &&
+                pps == other.pps &&
+                pri == other.pri &&
+                sourceDl == other.sourceDl &&
+                spec == other.spec &&
+                srcIds == other.srcIds &&
+                srcTyps == other.srcTyps &&
+                stale == other.stale &&
+                start == other.start &&
+                tags == other.tags &&
+                transactionId == other.transactionId &&
+                trkid == other.trkid &&
+                type == other.type &&
+                urls == other.urls
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, poiid, source, ts, id, activity, agjson, alt, andims, area, asrid, asset, atext, atype, az, beNumber, ce, cntct, conf, createdAt, createdBy, desc, el, elle, env, groups, how, ident, idWeatherReport, lat, le, lon, msnid, orientation, origin, origNetwork, plat, pps, pri, sourceDl, spec, srcIds, srcTyps, stale, start, tags, transactionId, trkid, type, urls) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                name,
+                poiid,
+                source,
+                ts,
+                id,
+                activity,
+                agjson,
+                alt,
+                andims,
+                area,
+                asrid,
+                asset,
+                atext,
+                atype,
+                az,
+                beNumber,
+                ce,
+                cntct,
+                conf,
+                createdAt,
+                createdBy,
+                desc,
+                el,
+                elle,
+                env,
+                groups,
+                how,
+                ident,
+                idWeatherReport,
+                lat,
+                le,
+                lon,
+                msnid,
+                orientation,
+                origin,
+                origNetwork,
+                plat,
+                pps,
+                pri,
+                sourceDl,
+                spec,
+                srcIds,
+                srcTyps,
+                stale,
+                start,
+                tags,
+                transactionId,
+                trkid,
+                type,
+                urls,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2483,10 +2588,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is PoiCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is PoiCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "PoiCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -237,10 +237,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GroundImageryCountParams && imageTime == other.imageTime && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is GroundImageryCountParams &&
+            imageTime == other.imageTime &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(imageTime, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(imageTime, firstResult, maxResults, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "GroundImageryCountParams{imageTime=$imageTime, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

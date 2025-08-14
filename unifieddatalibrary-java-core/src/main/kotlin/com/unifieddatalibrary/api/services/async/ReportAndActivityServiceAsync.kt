@@ -3,9 +3,9 @@
 package com.unifieddatalibrary.api.services.async
 
 import com.unifieddatalibrary.api.core.ClientOptions
-import com.unifieddatalibrary.api.services.async.reportandactivity.PoiServiceAsync
-import com.unifieddatalibrary.api.services.async.reportandactivity.UdlH3geoServiceAsync
-import com.unifieddatalibrary.api.services.async.reportandactivity.UdlSigactServiceAsync
+import com.unifieddatalibrary.api.services.async.reportandactivities.PoiServiceAsync
+import com.unifieddatalibrary.api.services.async.reportandactivities.UdlH3geoServiceAsync
+import com.unifieddatalibrary.api.services.async.reportandactivities.UdlSigactServiceAsync
 import java.util.function.Consumer
 
 interface ReportAndActivityServiceAsync {

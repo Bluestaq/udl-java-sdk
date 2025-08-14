@@ -1516,12 +1516,77 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Attributes && id == other.id && classification == other.classification && classificationMarking == other.classificationMarking && createdBy == other.createdBy && createdDate == other.createdDate && deleteOn == other.deleteOn && description == other.description && docTitle == other.docTitle && docType == other.docType && doi == other.doi && ellipseLat == other.ellipseLat && ellipseLon == other.ellipseLon && fileName == other.fileName && intrinsicTitle == other.intrinsicTitle && keywords == other.keywords && mediaTitle == other.mediaTitle && metaInfo == other.metaInfo && milgrid == other.milgrid && milgridLat == other.milgridLat && milgridLon == other.milgridLon && modifiedBy == other.modifiedBy && modifiedDate == other.modifiedDate && name == other.name && path == other.path && read == other.read && searchable == other.searchable && searchAfter == other.searchAfter && serialNumber == other.serialNumber && size == other.size && tags == other.tags && write == other.write && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Attributes &&
+                id == other.id &&
+                classification == other.classification &&
+                classificationMarking == other.classificationMarking &&
+                createdBy == other.createdBy &&
+                createdDate == other.createdDate &&
+                deleteOn == other.deleteOn &&
+                description == other.description &&
+                docTitle == other.docTitle &&
+                docType == other.docType &&
+                doi == other.doi &&
+                ellipseLat == other.ellipseLat &&
+                ellipseLon == other.ellipseLon &&
+                fileName == other.fileName &&
+                intrinsicTitle == other.intrinsicTitle &&
+                keywords == other.keywords &&
+                mediaTitle == other.mediaTitle &&
+                metaInfo == other.metaInfo &&
+                milgrid == other.milgrid &&
+                milgridLat == other.milgridLat &&
+                milgridLon == other.milgridLon &&
+                modifiedBy == other.modifiedBy &&
+                modifiedDate == other.modifiedDate &&
+                name == other.name &&
+                path == other.path &&
+                read == other.read &&
+                searchable == other.searchable &&
+                searchAfter == other.searchAfter &&
+                serialNumber == other.serialNumber &&
+                size == other.size &&
+                tags == other.tags &&
+                write == other.write &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(id, classification, classificationMarking, createdBy, createdDate, deleteOn, description, docTitle, docType, doi, ellipseLat, ellipseLon, fileName, intrinsicTitle, keywords, mediaTitle, metaInfo, milgrid, milgridLat, milgridLon, modifiedBy, modifiedDate, name, path, read, searchable, searchAfter, serialNumber, size, tags, write, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                id,
+                classification,
+                classificationMarking,
+                createdBy,
+                createdDate,
+                deleteOn,
+                description,
+                docTitle,
+                docType,
+                doi,
+                ellipseLat,
+                ellipseLon,
+                fileName,
+                intrinsicTitle,
+                keywords,
+                mediaTitle,
+                metaInfo,
+                milgrid,
+                milgridLat,
+                milgridLon,
+                modifiedBy,
+                modifiedDate,
+                name,
+                path,
+                read,
+                searchable,
+                searchAfter,
+                serialNumber,
+                size,
+                tags,
+                write,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1659,7 +1724,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is ContentAction && value == other.value /* spotless:on */
+            return other is ContentAction && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1792,7 +1857,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+            return other is Type && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1805,12 +1870,27 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is FileData && id == other.id && attributes == other.attributes && contentAction == other.contentAction && targetName == other.targetName && targetPath == other.targetPath && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is FileData &&
+            id == other.id &&
+            attributes == other.attributes &&
+            contentAction == other.contentAction &&
+            targetName == other.targetName &&
+            targetPath == other.targetPath &&
+            type == other.type &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(id, attributes, contentAction, targetName, targetPath, type, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            id,
+            attributes,
+            contentAction,
+            targetName,
+            targetPath,
+            type,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

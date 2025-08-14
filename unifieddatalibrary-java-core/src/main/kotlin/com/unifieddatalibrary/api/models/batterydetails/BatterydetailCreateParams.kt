@@ -1529,12 +1529,47 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idBattery == other.idBattery && source == other.source && id == other.id && capacity == other.capacity && createdAt == other.createdAt && createdBy == other.createdBy && description == other.description && dischargeDepth == other.dischargeDepth && manufacturerOrgId == other.manufacturerOrgId && model == other.model && origin == other.origin && origNetwork == other.origNetwork && tags == other.tags && technology == other.technology && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idBattery == other.idBattery &&
+                source == other.source &&
+                id == other.id &&
+                capacity == other.capacity &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                description == other.description &&
+                dischargeDepth == other.dischargeDepth &&
+                manufacturerOrgId == other.manufacturerOrgId &&
+                model == other.model &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                tags == other.tags &&
+                technology == other.technology &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idBattery, source, id, capacity, createdAt, createdBy, description, dischargeDepth, manufacturerOrgId, model, origin, origNetwork, tags, technology, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idBattery,
+                source,
+                id,
+                capacity,
+                createdAt,
+                createdBy,
+                description,
+                dischargeDepth,
+                manufacturerOrgId,
+                model,
+                origin,
+                origNetwork,
+                tags,
+                technology,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1687,7 +1722,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1700,10 +1735,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is BatterydetailCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is BatterydetailCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "BatterydetailCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -19,6 +19,7 @@ import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.scs.paths.PathCreateWithFileParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
+import kotlin.jvm.optionals.getOrNull
 
 class PathServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     PathServiceAsync {
@@ -60,7 +61,7 @@ class PathServiceAsyncImpl internal constructor(private val clientOptions: Clien
         ): CompletableFuture<HttpResponseFor<String>> {
             // We check here instead of in the params builder because this can be specified
             // positionally or in the params class.
-            checkRequired("fileContent", !params._fileContent().isMissing())
+            checkRequired("fileContent", params._body().getOrNull())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)

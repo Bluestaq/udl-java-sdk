@@ -218,10 +218,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CommUpdateParams && pathId == other.pathId && commAbridged == other.commAbridged && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is CommUpdateParams &&
+            pathId == other.pathId &&
+            commAbridged == other.commAbridged &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathId, commAbridged, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(pathId, commAbridged, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "CommUpdateParams{pathId=$pathId, commAbridged=$commAbridged, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

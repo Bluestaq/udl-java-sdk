@@ -987,7 +987,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1118,7 +1118,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+            return other is Type && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1131,12 +1131,51 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SortiePprListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idSortie == other.idSortie && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && endTime == other.endTime && externalId == other.externalId && grantor == other.grantor && number == other.number && origin == other.origin && origNetwork == other.origNetwork && remarks == other.remarks && requestor == other.requestor && sourceDl == other.sourceDl && startTime == other.startTime && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SortiePprListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idSortie == other.idSortie &&
+            source == other.source &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            endTime == other.endTime &&
+            externalId == other.externalId &&
+            grantor == other.grantor &&
+            number == other.number &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            remarks == other.remarks &&
+            requestor == other.requestor &&
+            sourceDl == other.sourceDl &&
+            startTime == other.startTime &&
+            type == other.type &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idSortie, source, id, createdAt, createdBy, endTime, externalId, grantor, number, origin, origNetwork, remarks, requestor, sourceDl, startTime, type, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idSortie,
+            source,
+            id,
+            createdAt,
+            createdBy,
+            endTime,
+            externalId,
+            grantor,
+            number,
+            origin,
+            origNetwork,
+            remarks,
+            requestor,
+            sourceDl,
+            startTime,
+            type,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

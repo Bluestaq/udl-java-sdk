@@ -2648,12 +2648,73 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && endTime == other.endTime && frame1 == other.frame1 && frame2 == other.frame2 && numPoints == other.numPoints && source == other.source && startTime == other.startTime && type == other.type && id == other.id && asRef == other.asRef && attitudeList == other.attitudeList && createdAt == other.createdAt && createdBy == other.createdBy && esId == other.esId && eulerRotSeq == other.eulerRotSeq && idOnOrbit == other.idOnOrbit && idSensor == other.idSensor && interpolator == other.interpolator && interpolatorDegree == other.interpolatorDegree && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId == other.origSensorId && precAngleInit == other.precAngleInit && satNo == other.satNo && spinAngleInit == other.spinAngleInit && stepSize == other.stepSize && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                endTime == other.endTime &&
+                frame1 == other.frame1 &&
+                frame2 == other.frame2 &&
+                numPoints == other.numPoints &&
+                source == other.source &&
+                startTime == other.startTime &&
+                type == other.type &&
+                id == other.id &&
+                asRef == other.asRef &&
+                attitudeList == other.attitudeList &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                esId == other.esId &&
+                eulerRotSeq == other.eulerRotSeq &&
+                idOnOrbit == other.idOnOrbit &&
+                idSensor == other.idSensor &&
+                interpolator == other.interpolator &&
+                interpolatorDegree == other.interpolatorDegree &&
+                notes == other.notes &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                origSensorId == other.origSensorId &&
+                precAngleInit == other.precAngleInit &&
+                satNo == other.satNo &&
+                spinAngleInit == other.spinAngleInit &&
+                stepSize == other.stepSize &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, endTime, frame1, frame2, numPoints, source, startTime, type, id, asRef, attitudeList, createdAt, createdBy, esId, eulerRotSeq, idOnOrbit, idSensor, interpolator, interpolatorDegree, notes, origin, origNetwork, origObjectId, origSensorId, precAngleInit, satNo, spinAngleInit, stepSize, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                endTime,
+                frame1,
+                frame2,
+                numPoints,
+                source,
+                startTime,
+                type,
+                id,
+                asRef,
+                attitudeList,
+                createdAt,
+                createdBy,
+                esId,
+                eulerRotSeq,
+                idOnOrbit,
+                idSensor,
+                interpolator,
+                interpolatorDegree,
+                notes,
+                origin,
+                origNetwork,
+                origObjectId,
+                origSensorId,
+                precAngleInit,
+                satNo,
+                spinAngleInit,
+                stepSize,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2806,7 +2867,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4487,7 +4548,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -4500,12 +4561,81 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AttitudeList && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && ts == other.ts && id == other.id && asId == other.asId && coningAngle == other.coningAngle && createdAt == other.createdAt && createdBy == other.createdBy && declination == other.declination && idOnOrbit == other.idOnOrbit && motionType == other.motionType && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && precPeriod == other.precPeriod && q1 == other.q1 && q1Dot == other.q1Dot && q2 == other.q2 && q2Dot == other.q2Dot && q3 == other.q3 && q3Dot == other.q3Dot && qc == other.qc && qcDot == other.qcDot && ra == other.ra && satNo == other.satNo && spinPeriod == other.spinPeriod && xAngle == other.xAngle && xRate == other.xRate && yAngle == other.yAngle && yRate == other.yRate && zAngle == other.zAngle && zRate == other.zRate && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is AttitudeList &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                ts == other.ts &&
+                id == other.id &&
+                asId == other.asId &&
+                coningAngle == other.coningAngle &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                declination == other.declination &&
+                idOnOrbit == other.idOnOrbit &&
+                motionType == other.motionType &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                precPeriod == other.precPeriod &&
+                q1 == other.q1 &&
+                q1Dot == other.q1Dot &&
+                q2 == other.q2 &&
+                q2Dot == other.q2Dot &&
+                q3 == other.q3 &&
+                q3Dot == other.q3Dot &&
+                qc == other.qc &&
+                qcDot == other.qcDot &&
+                ra == other.ra &&
+                satNo == other.satNo &&
+                spinPeriod == other.spinPeriod &&
+                xAngle == other.xAngle &&
+                xRate == other.xRate &&
+                yAngle == other.yAngle &&
+                yRate == other.yRate &&
+                zAngle == other.zAngle &&
+                zRate == other.zRate &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, ts, id, asId, coningAngle, createdAt, createdBy, declination, idOnOrbit, motionType, origin, origNetwork, origObjectId, precPeriod, q1, q1Dot, q2, q2Dot, q3, q3Dot, qc, qcDot, ra, satNo, spinPeriod, xAngle, xRate, yAngle, yRate, zAngle, zRate, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                ts,
+                id,
+                asId,
+                coningAngle,
+                createdAt,
+                createdBy,
+                declination,
+                idOnOrbit,
+                motionType,
+                origin,
+                origNetwork,
+                origObjectId,
+                precPeriod,
+                q1,
+                q1Dot,
+                q2,
+                q2Dot,
+                q3,
+                q3Dot,
+                qc,
+                qcDot,
+                ra,
+                satNo,
+                spinPeriod,
+                xAngle,
+                xRate,
+                yAngle,
+                yRate,
+                zAngle,
+                zRate,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4518,10 +4648,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AttitudeSetUnvalidatedPublishParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is AttitudeSetUnvalidatedPublishParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "AttitudeSetUnvalidatedPublishParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

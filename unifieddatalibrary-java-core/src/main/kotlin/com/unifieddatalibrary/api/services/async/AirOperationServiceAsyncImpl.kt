@@ -5,8 +5,6 @@ package com.unifieddatalibrary.api.services.async
 import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.services.async.airoperations.AirTaskingOrderServiceAsync
 import com.unifieddatalibrary.api.services.async.airoperations.AirTaskingOrderServiceAsyncImpl
-import com.unifieddatalibrary.api.services.async.airoperations.AircraftSortieServiceAsync
-import com.unifieddatalibrary.api.services.async.airoperations.AircraftSortieServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.airoperations.AircraftSortyServiceAsync
 import com.unifieddatalibrary.api.services.async.airoperations.AircraftSortyServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.airoperations.AirspaceControlOrderServiceAsync
@@ -26,10 +24,6 @@ class AirOperationServiceAsyncImpl internal constructor(private val clientOption
 
     private val airTaskingOrders: AirTaskingOrderServiceAsync by lazy {
         AirTaskingOrderServiceAsyncImpl(clientOptions)
-    }
-
-    private val aircraftSortie: AircraftSortieServiceAsync by lazy {
-        AircraftSortieServiceAsyncImpl(clientOptions)
     }
 
     private val aircraftSorties: AircraftSortyServiceAsync by lazy {
@@ -55,8 +49,6 @@ class AirOperationServiceAsyncImpl internal constructor(private val clientOption
 
     override fun airTaskingOrders(): AirTaskingOrderServiceAsync = airTaskingOrders
 
-    override fun aircraftSortie(): AircraftSortieServiceAsync = aircraftSortie
-
     override fun aircraftSorties(): AircraftSortyServiceAsync = aircraftSorties
 
     override fun airspaceControlOrders(): AirspaceControlOrderServiceAsync = airspaceControlOrders
@@ -70,10 +62,6 @@ class AirOperationServiceAsyncImpl internal constructor(private val clientOption
 
         private val airTaskingOrders: AirTaskingOrderServiceAsync.WithRawResponse by lazy {
             AirTaskingOrderServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val aircraftSortie: AircraftSortieServiceAsync.WithRawResponse by lazy {
-            AircraftSortieServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val aircraftSorties: AircraftSortyServiceAsync.WithRawResponse by lazy {
@@ -102,8 +90,6 @@ class AirOperationServiceAsyncImpl internal constructor(private val clientOption
 
         override fun airTaskingOrders(): AirTaskingOrderServiceAsync.WithRawResponse =
             airTaskingOrders
-
-        override fun aircraftSortie(): AircraftSortieServiceAsync.WithRawResponse = aircraftSortie
 
         override fun aircraftSorties(): AircraftSortyServiceAsync.WithRawResponse = aircraftSorties
 

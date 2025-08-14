@@ -673,7 +673,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -686,12 +686,35 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is RfBandTypeListResponse && id == other.id && classificationMarking == other.classificationMarking && dataMode == other.dataMode && description == other.description && source == other.source && createdAt == other.createdAt && createdBy == other.createdBy && endFreq == other.endFreq && origin == other.origin && startFreq == other.startFreq && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is RfBandTypeListResponse &&
+            id == other.id &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            description == other.description &&
+            source == other.source &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            endFreq == other.endFreq &&
+            origin == other.origin &&
+            startFreq == other.startFreq &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(id, classificationMarking, dataMode, description, source, createdAt, createdBy, endFreq, origin, startFreq, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            id,
+            classificationMarking,
+            dataMode,
+            description,
+            source,
+            createdAt,
+            createdBy,
+            endFreq,
+            origin,
+            startFreq,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

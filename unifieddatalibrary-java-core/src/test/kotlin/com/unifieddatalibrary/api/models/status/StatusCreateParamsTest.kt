@@ -2,6 +2,7 @@
 
 package com.unifieddatalibrary.api.models.status
 
+import com.unifieddatalibrary.api.models.SubStatusIngest
 import java.time.OffsetDateTime
 import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
@@ -28,14 +29,14 @@ internal class StatusCreateParamsTest {
             .origNetwork("TST1")
             .state(StatusCreateParams.State.ACTIVE)
             .addSubStatusCollection(
-                StatusCreateParams.SubStatusCollection.builder()
+                SubStatusIngest.builder()
                     .classificationMarking("U")
-                    .dataMode(StatusCreateParams.SubStatusCollection.DataMode.TEST)
+                    .dataMode(SubStatusIngest.DataMode.TEST)
                     .notes("Sample Notes")
                     .source("Bluestaq")
-                    .status(StatusCreateParams.SubStatusCollection.Status.FMC)
+                    .status(SubStatusIngest.Status.FMC)
                     .statusId("REF-STATUS-ID")
-                    .type(StatusCreateParams.SubStatusCollection.Type.MD_CAP)
+                    .type(SubStatusIngest.Type.MD_CAP)
                     .id("SUBSTATUS-ID")
                     .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                     .createdBy("some.user")
@@ -67,14 +68,14 @@ internal class StatusCreateParamsTest {
                 .origNetwork("TST1")
                 .state(StatusCreateParams.State.ACTIVE)
                 .addSubStatusCollection(
-                    StatusCreateParams.SubStatusCollection.builder()
+                    SubStatusIngest.builder()
                         .classificationMarking("U")
-                        .dataMode(StatusCreateParams.SubStatusCollection.DataMode.TEST)
+                        .dataMode(SubStatusIngest.DataMode.TEST)
                         .notes("Sample Notes")
                         .source("Bluestaq")
-                        .status(StatusCreateParams.SubStatusCollection.Status.FMC)
+                        .status(SubStatusIngest.Status.FMC)
                         .statusId("REF-STATUS-ID")
-                        .type(StatusCreateParams.SubStatusCollection.Type.MD_CAP)
+                        .type(SubStatusIngest.Type.MD_CAP)
                         .id("SUBSTATUS-ID")
                         .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                         .createdBy("some.user")
@@ -105,14 +106,14 @@ internal class StatusCreateParamsTest {
         assertThat(body.state()).contains(StatusCreateParams.State.ACTIVE)
         assertThat(body.subStatusCollection().getOrNull())
             .containsExactly(
-                StatusCreateParams.SubStatusCollection.builder()
+                SubStatusIngest.builder()
                     .classificationMarking("U")
-                    .dataMode(StatusCreateParams.SubStatusCollection.DataMode.TEST)
+                    .dataMode(SubStatusIngest.DataMode.TEST)
                     .notes("Sample Notes")
                     .source("Bluestaq")
-                    .status(StatusCreateParams.SubStatusCollection.Status.FMC)
+                    .status(SubStatusIngest.Status.FMC)
                     .statusId("REF-STATUS-ID")
-                    .type(StatusCreateParams.SubStatusCollection.Type.MD_CAP)
+                    .type(SubStatusIngest.Type.MD_CAP)
                     .id("SUBSTATUS-ID")
                     .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                     .createdBy("some.user")

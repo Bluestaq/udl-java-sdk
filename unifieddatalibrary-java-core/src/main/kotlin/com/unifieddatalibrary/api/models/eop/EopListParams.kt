@@ -242,10 +242,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EopListParams && eopDate == other.eopDate && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is EopListParams &&
+            eopDate == other.eopDate &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(eopDate, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(eopDate, firstResult, maxResults, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "EopListParams{eopDate=$eopDate, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

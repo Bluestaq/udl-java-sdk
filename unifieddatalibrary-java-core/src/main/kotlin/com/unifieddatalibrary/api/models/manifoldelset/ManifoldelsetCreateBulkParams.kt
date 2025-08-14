@@ -1500,7 +1500,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -1513,12 +1513,67 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && epoch == other.epoch && idManifold == other.idManifold && source == other.source && tmpSatNo == other.tmpSatNo && id == other.id && apogee == other.apogee && argOfPerigee == other.argOfPerigee && bStar == other.bStar && createdAt == other.createdAt && createdBy == other.createdBy && eccentricity == other.eccentricity && inclination == other.inclination && line1 == other.line1 && line2 == other.line2 && meanAnomaly == other.meanAnomaly && meanMotion == other.meanMotion && meanMotionDDot == other.meanMotionDDot && meanMotionDot == other.meanMotionDot && origin == other.origin && origNetwork == other.origNetwork && perigee == other.perigee && period == other.period && raan == other.raan && revNo == other.revNo && semiMajorAxis == other.semiMajorAxis /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                epoch == other.epoch &&
+                idManifold == other.idManifold &&
+                source == other.source &&
+                tmpSatNo == other.tmpSatNo &&
+                id == other.id &&
+                apogee == other.apogee &&
+                argOfPerigee == other.argOfPerigee &&
+                bStar == other.bStar &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                eccentricity == other.eccentricity &&
+                inclination == other.inclination &&
+                line1 == other.line1 &&
+                line2 == other.line2 &&
+                meanAnomaly == other.meanAnomaly &&
+                meanMotion == other.meanMotion &&
+                meanMotionDDot == other.meanMotionDDot &&
+                meanMotionDot == other.meanMotionDot &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                perigee == other.perigee &&
+                period == other.period &&
+                raan == other.raan &&
+                revNo == other.revNo &&
+                semiMajorAxis == other.semiMajorAxis
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, epoch, idManifold, source, tmpSatNo, id, apogee, argOfPerigee, bStar, createdAt, createdBy, eccentricity, inclination, line1, line2, meanAnomaly, meanMotion, meanMotionDDot, meanMotionDot, origin, origNetwork, perigee, period, raan, revNo, semiMajorAxis) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                epoch,
+                idManifold,
+                source,
+                tmpSatNo,
+                id,
+                apogee,
+                argOfPerigee,
+                bStar,
+                createdAt,
+                createdBy,
+                eccentricity,
+                inclination,
+                line1,
+                line2,
+                meanAnomaly,
+                meanMotion,
+                meanMotionDDot,
+                meanMotionDot,
+                origin,
+                origNetwork,
+                perigee,
+                period,
+                raan,
+                revNo,
+                semiMajorAxis,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1531,10 +1586,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ManifoldelsetCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is ManifoldelsetCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "ManifoldelsetCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

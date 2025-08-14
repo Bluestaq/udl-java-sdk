@@ -225,10 +225,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CountryRetrieveParams && code == other.code && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is CountryRetrieveParams &&
+            code == other.code &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(code, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(code, firstResult, maxResults, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "CountryRetrieveParams{code=$code, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

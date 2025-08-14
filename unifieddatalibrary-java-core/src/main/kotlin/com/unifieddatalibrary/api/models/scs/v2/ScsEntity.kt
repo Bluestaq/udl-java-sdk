@@ -772,12 +772,53 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ScsEntity && id == other.id && attachment == other.attachment && classificationMarking == other.classificationMarking && createdAt == other.createdAt && createdBy == other.createdBy && data == other.data && deleteOn == other.deleteOn && description == other.description && fileName == other.fileName && filePath == other.filePath && keywords == other.keywords && parentPath == other.parentPath && pathType == other.pathType && readAcl == other.readAcl && size == other.size && tags == other.tags && updatedAt == other.updatedAt && updatedBy == other.updatedBy && writeAcl == other.writeAcl && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is ScsEntity &&
+            id == other.id &&
+            attachment == other.attachment &&
+            classificationMarking == other.classificationMarking &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            data == other.data &&
+            deleteOn == other.deleteOn &&
+            description == other.description &&
+            fileName == other.fileName &&
+            filePath == other.filePath &&
+            keywords == other.keywords &&
+            parentPath == other.parentPath &&
+            pathType == other.pathType &&
+            readAcl == other.readAcl &&
+            size == other.size &&
+            tags == other.tags &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            writeAcl == other.writeAcl &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(id, attachment, classificationMarking, createdAt, createdBy, data, deleteOn, description, fileName, filePath, keywords, parentPath, pathType, readAcl, size, tags, updatedAt, updatedBy, writeAcl, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            id,
+            attachment,
+            classificationMarking,
+            createdAt,
+            createdBy,
+            data,
+            deleteOn,
+            description,
+            fileName,
+            filePath,
+            keywords,
+            parentPath,
+            pathType,
+            readAcl,
+            size,
+            tags,
+            updatedAt,
+            updatedBy,
+            writeAcl,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

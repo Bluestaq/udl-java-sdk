@@ -2837,7 +2837,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2850,12 +2850,127 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EquipmentFull && classificationMarking == other.classificationMarking && countryCode == other.countryCode && dataMode == other.dataMode && lat == other.lat && lon == other.lon && source == other.source && id == other.id && airDefArea == other.airDefArea && allegiance == other.allegiance && altAllegiance == other.altAllegiance && altCountryCode == other.altCountryCode && altEqpId == other.altEqpId && classRating == other.classRating && condition == other.condition && conditionAvail == other.conditionAvail && coord == other.coord && coordDatum == other.coordDatum && coordDerivAcc == other.coordDerivAcc && createdAt == other.createdAt && createdBy == other.createdBy && elevMsl == other.elevMsl && elevMslConfLvl == other.elevMslConfLvl && elevMslDerivAcc == other.elevMslDerivAcc && eqpCode == other.eqpCode && eqpIdNum == other.eqpIdNum && equipmentRemarks == other.equipmentRemarks && eval == other.eval && fpa == other.fpa && function == other.function && functPrimary == other.functPrimary && geoidalMslSep == other.geoidalMslSep && ident == other.ident && idOperatingUnit == other.idOperatingUnit && idParentEquipment == other.idParentEquipment && idSite == other.idSite && locReason == other.locReason && milGrid == other.milGrid && milGridSys == other.milGridSys && nomen == other.nomen && operAreaPrimary == other.operAreaPrimary && operStatus == other.operStatus && origin == other.origin && polSubdiv == other.polSubdiv && qtyOh == other.qtyOh && recStatus == other.recStatus && referenceDoc == other.referenceDoc && resProd == other.resProd && reviewDate == other.reviewDate && seqNum == other.seqNum && srcIds == other.srcIds && srcTyps == other.srcTyps && symCode == other.symCode && updatedAt == other.updatedAt && updatedBy == other.updatedBy && utm == other.utm && wac == other.wac && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is EquipmentFull &&
+            classificationMarking == other.classificationMarking &&
+            countryCode == other.countryCode &&
+            dataMode == other.dataMode &&
+            lat == other.lat &&
+            lon == other.lon &&
+            source == other.source &&
+            id == other.id &&
+            airDefArea == other.airDefArea &&
+            allegiance == other.allegiance &&
+            altAllegiance == other.altAllegiance &&
+            altCountryCode == other.altCountryCode &&
+            altEqpId == other.altEqpId &&
+            classRating == other.classRating &&
+            condition == other.condition &&
+            conditionAvail == other.conditionAvail &&
+            coord == other.coord &&
+            coordDatum == other.coordDatum &&
+            coordDerivAcc == other.coordDerivAcc &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            elevMsl == other.elevMsl &&
+            elevMslConfLvl == other.elevMslConfLvl &&
+            elevMslDerivAcc == other.elevMslDerivAcc &&
+            eqpCode == other.eqpCode &&
+            eqpIdNum == other.eqpIdNum &&
+            equipmentRemarks == other.equipmentRemarks &&
+            eval == other.eval &&
+            fpa == other.fpa &&
+            function == other.function &&
+            functPrimary == other.functPrimary &&
+            geoidalMslSep == other.geoidalMslSep &&
+            ident == other.ident &&
+            idOperatingUnit == other.idOperatingUnit &&
+            idParentEquipment == other.idParentEquipment &&
+            idSite == other.idSite &&
+            locReason == other.locReason &&
+            milGrid == other.milGrid &&
+            milGridSys == other.milGridSys &&
+            nomen == other.nomen &&
+            operAreaPrimary == other.operAreaPrimary &&
+            operStatus == other.operStatus &&
+            origin == other.origin &&
+            polSubdiv == other.polSubdiv &&
+            qtyOh == other.qtyOh &&
+            recStatus == other.recStatus &&
+            referenceDoc == other.referenceDoc &&
+            resProd == other.resProd &&
+            reviewDate == other.reviewDate &&
+            seqNum == other.seqNum &&
+            srcIds == other.srcIds &&
+            srcTyps == other.srcTyps &&
+            symCode == other.symCode &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            utm == other.utm &&
+            wac == other.wac &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, countryCode, dataMode, lat, lon, source, id, airDefArea, allegiance, altAllegiance, altCountryCode, altEqpId, classRating, condition, conditionAvail, coord, coordDatum, coordDerivAcc, createdAt, createdBy, elevMsl, elevMslConfLvl, elevMslDerivAcc, eqpCode, eqpIdNum, equipmentRemarks, eval, fpa, function, functPrimary, geoidalMslSep, ident, idOperatingUnit, idParentEquipment, idSite, locReason, milGrid, milGridSys, nomen, operAreaPrimary, operStatus, origin, polSubdiv, qtyOh, recStatus, referenceDoc, resProd, reviewDate, seqNum, srcIds, srcTyps, symCode, updatedAt, updatedBy, utm, wac, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            countryCode,
+            dataMode,
+            lat,
+            lon,
+            source,
+            id,
+            airDefArea,
+            allegiance,
+            altAllegiance,
+            altCountryCode,
+            altEqpId,
+            classRating,
+            condition,
+            conditionAvail,
+            coord,
+            coordDatum,
+            coordDerivAcc,
+            createdAt,
+            createdBy,
+            elevMsl,
+            elevMslConfLvl,
+            elevMslDerivAcc,
+            eqpCode,
+            eqpIdNum,
+            equipmentRemarks,
+            eval,
+            fpa,
+            function,
+            functPrimary,
+            geoidalMslSep,
+            ident,
+            idOperatingUnit,
+            idParentEquipment,
+            idSite,
+            locReason,
+            milGrid,
+            milGridSys,
+            nomen,
+            operAreaPrimary,
+            operStatus,
+            origin,
+            polSubdiv,
+            qtyOh,
+            recStatus,
+            referenceDoc,
+            resProd,
+            reviewDate,
+            seqNum,
+            srcIds,
+            srcTyps,
+            symCode,
+            updatedAt,
+            updatedBy,
+            utm,
+            wac,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

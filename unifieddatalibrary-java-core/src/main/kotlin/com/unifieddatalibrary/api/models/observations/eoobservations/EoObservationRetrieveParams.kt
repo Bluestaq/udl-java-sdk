@@ -225,10 +225,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is EoObservationRetrieveParams && id == other.id && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is EoObservationRetrieveParams &&
+            id == other.id &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(id, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(id, firstResult, maxResults, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "EoObservationRetrieveParams{id=$id, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

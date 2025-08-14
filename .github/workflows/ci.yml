@@ -36,3 +36,25 @@ jobs:
 
       - name: Run lints
         run: ./scripts/lint
+  test:
+    timeout-minutes: 15
+    name: test
+    runs-on: ${{ github.repository == 'stainless-sdks/unifieddatalibrary-java' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: |
+            8
+            21
+          cache: gradle
+
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Run tests
+        run: ./scripts/test

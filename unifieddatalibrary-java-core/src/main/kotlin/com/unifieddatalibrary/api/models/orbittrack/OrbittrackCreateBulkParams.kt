@@ -2281,7 +2281,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -2441,7 +2441,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is ObjectType && value == other.value /* spotless:on */
+                return other is ObjectType && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -2626,7 +2626,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is ObjIdent && value == other.value /* spotless:on */
+                return other is ObjIdent && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -3196,7 +3196,7 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is SensorFovType && value == other.value /* spotless:on */
+                    return other is SensorFovType && value == other.value
                 }
 
                 override fun hashCode() = value.hashCode()
@@ -3209,12 +3209,29 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is TrackSensor && az == other.az && range == other.range && minRangeLimit == other.minRangeLimit && missionNumber == other.missionNumber && sensorFovType == other.sensorFovType && sensorName == other.sensorName && sensorNumber == other.sensorNumber && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is TrackSensor &&
+                    az == other.az &&
+                    range == other.range &&
+                    minRangeLimit == other.minRangeLimit &&
+                    missionNumber == other.missionNumber &&
+                    sensorFovType == other.sensorFovType &&
+                    sensorName == other.sensorName &&
+                    sensorNumber == other.sensorNumber &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(az, range, minRangeLimit, missionNumber, sensorFovType, sensorName, sensorNumber, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    az,
+                    range,
+                    minRangeLimit,
+                    missionNumber,
+                    sensorFovType,
+                    sensorName,
+                    sensorNumber,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -3227,12 +3244,103 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && lat == other.lat && lon == other.lon && source == other.source && ts == other.ts && id == other.id && alt == other.alt && amplification == other.amplification && angElev == other.angElev && aouData == other.aouData && aouType == other.aouType && callSign == other.callSign && charlieLine == other.charlieLine && chXRef == other.chXRef && cntnmnt == other.cntnmnt && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && decay == other.decay && dummy == other.dummy && feint == other.feint && hq == other.hq && idElset == other.idElset && identAmp == other.identAmp && idOnOrbit == other.idOnOrbit && iff == other.iff && installation == other.installation && objectType == other.objectType && objIdent == other.objIdent && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && rdfRf == other.rdfRf && reduced == other.reduced && reinforced == other.reinforced && rptNum == other.rptNum && satNo == other.satNo && satStatus == other.satStatus && spd == other.spd && taskForce == other.taskForce && trackSensors == other.trackSensors && trkId == other.trkId && vehType == other.vehType && xref == other.xref /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                lat == other.lat &&
+                lon == other.lon &&
+                source == other.source &&
+                ts == other.ts &&
+                id == other.id &&
+                alt == other.alt &&
+                amplification == other.amplification &&
+                angElev == other.angElev &&
+                aouData == other.aouData &&
+                aouType == other.aouType &&
+                callSign == other.callSign &&
+                charlieLine == other.charlieLine &&
+                chXRef == other.chXRef &&
+                cntnmnt == other.cntnmnt &&
+                countryCode == other.countryCode &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                decay == other.decay &&
+                dummy == other.dummy &&
+                feint == other.feint &&
+                hq == other.hq &&
+                idElset == other.idElset &&
+                identAmp == other.identAmp &&
+                idOnOrbit == other.idOnOrbit &&
+                iff == other.iff &&
+                installation == other.installation &&
+                objectType == other.objectType &&
+                objIdent == other.objIdent &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                rdfRf == other.rdfRf &&
+                reduced == other.reduced &&
+                reinforced == other.reinforced &&
+                rptNum == other.rptNum &&
+                satNo == other.satNo &&
+                satStatus == other.satStatus &&
+                spd == other.spd &&
+                taskForce == other.taskForce &&
+                trackSensors == other.trackSensors &&
+                trkId == other.trkId &&
+                vehType == other.vehType &&
+                xref == other.xref
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, lat, lon, source, ts, id, alt, amplification, angElev, aouData, aouType, callSign, charlieLine, chXRef, cntnmnt, countryCode, createdAt, createdBy, decay, dummy, feint, hq, idElset, identAmp, idOnOrbit, iff, installation, objectType, objIdent, origin, origNetwork, origObjectId, rdfRf, reduced, reinforced, rptNum, satNo, satStatus, spd, taskForce, trackSensors, trkId, vehType, xref) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                lat,
+                lon,
+                source,
+                ts,
+                id,
+                alt,
+                amplification,
+                angElev,
+                aouData,
+                aouType,
+                callSign,
+                charlieLine,
+                chXRef,
+                cntnmnt,
+                countryCode,
+                createdAt,
+                createdBy,
+                decay,
+                dummy,
+                feint,
+                hq,
+                idElset,
+                identAmp,
+                idOnOrbit,
+                iff,
+                installation,
+                objectType,
+                objIdent,
+                origin,
+                origNetwork,
+                origObjectId,
+                rdfRf,
+                reduced,
+                reinforced,
+                rptNum,
+                satNo,
+                satStatus,
+                spd,
+                taskForce,
+                trackSensors,
+                trkId,
+                vehType,
+                xref,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3245,10 +3353,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OrbittrackCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OrbittrackCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "OrbittrackCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

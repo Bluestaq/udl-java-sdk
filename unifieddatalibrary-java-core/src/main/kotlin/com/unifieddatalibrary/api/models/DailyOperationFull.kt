@@ -497,7 +497,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DayOfWeek && value == other.value /* spotless:on */
+            return other is DayOfWeek && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -510,12 +510,25 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is DailyOperationFull && dayOfWeek == other.dayOfWeek && operatingHours == other.operatingHours && operationName == other.operationName && ophrsLastChangedBy == other.ophrsLastChangedBy && ophrsLastChangedDate == other.ophrsLastChangedDate && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is DailyOperationFull &&
+            dayOfWeek == other.dayOfWeek &&
+            operatingHours == other.operatingHours &&
+            operationName == other.operationName &&
+            ophrsLastChangedBy == other.ophrsLastChangedBy &&
+            ophrsLastChangedDate == other.ophrsLastChangedDate &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(dayOfWeek, operatingHours, operationName, ophrsLastChangedBy, ophrsLastChangedDate, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            dayOfWeek,
+            operatingHours,
+            operationName,
+            ophrsLastChangedBy,
+            ophrsLastChangedDate,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

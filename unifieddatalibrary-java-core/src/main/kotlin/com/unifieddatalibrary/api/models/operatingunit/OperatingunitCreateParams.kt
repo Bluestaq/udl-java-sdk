@@ -5178,12 +5178,135 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && name == other.name && source == other.source && airDefArea == other.airDefArea && allegiance == other.allegiance && altAllegiance == other.altAllegiance && altCountryCode == other.altCountryCode && altOperatingUnitId == other.altOperatingUnitId && classRating == other.classRating && condition == other.condition && conditionAvail == other.conditionAvail && coord == other.coord && coordDatum == other.coordDatum && coordDerivAcc == other.coordDerivAcc && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && deployStatus == other.deployStatus && description == other.description && divCat == other.divCat && echelon == other.echelon && echelonTier == other.echelonTier && elevMsl == other.elevMsl && elevMslConfLvl == other.elevMslConfLvl && elevMslDerivAcc == other.elevMslDerivAcc && eval == other.eval && flagFlown == other.flagFlown && fleetId == other.fleetId && force == other.force && forceName == other.forceName && fpa == other.fpa && functRole == other.functRole && geoidalMslSep == other.geoidalMslSep && idContact == other.idContact && ident == other.ident && idLocation == other.idLocation && idOperatingUnit == other.idOperatingUnit && idOrganization == other.idOrganization && lat == other.lat && locName == other.locName && locReason == other.locReason && lon == other.lon && masterUnit == other.masterUnit && milGrid == other.milGrid && milGridSys == other.milGridSys && msnPrimary == other.msnPrimary && msnPrimarySpecialty == other.msnPrimarySpecialty && operStatus == other.operStatus && origin == other.origin && polSubdiv == other.polSubdiv && recStatus == other.recStatus && referenceDoc == other.referenceDoc && resProd == other.resProd && reviewDate == other.reviewDate && stylizedUnit == other.stylizedUnit && symCode == other.symCode && unitIdentifier == other.unitIdentifier && utm == other.utm && wac == other.wac && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                name == other.name &&
+                source == other.source &&
+                airDefArea == other.airDefArea &&
+                allegiance == other.allegiance &&
+                altAllegiance == other.altAllegiance &&
+                altCountryCode == other.altCountryCode &&
+                altOperatingUnitId == other.altOperatingUnitId &&
+                classRating == other.classRating &&
+                condition == other.condition &&
+                conditionAvail == other.conditionAvail &&
+                coord == other.coord &&
+                coordDatum == other.coordDatum &&
+                coordDerivAcc == other.coordDerivAcc &&
+                countryCode == other.countryCode &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                deployStatus == other.deployStatus &&
+                description == other.description &&
+                divCat == other.divCat &&
+                echelon == other.echelon &&
+                echelonTier == other.echelonTier &&
+                elevMsl == other.elevMsl &&
+                elevMslConfLvl == other.elevMslConfLvl &&
+                elevMslDerivAcc == other.elevMslDerivAcc &&
+                eval == other.eval &&
+                flagFlown == other.flagFlown &&
+                fleetId == other.fleetId &&
+                force == other.force &&
+                forceName == other.forceName &&
+                fpa == other.fpa &&
+                functRole == other.functRole &&
+                geoidalMslSep == other.geoidalMslSep &&
+                idContact == other.idContact &&
+                ident == other.ident &&
+                idLocation == other.idLocation &&
+                idOperatingUnit == other.idOperatingUnit &&
+                idOrganization == other.idOrganization &&
+                lat == other.lat &&
+                locName == other.locName &&
+                locReason == other.locReason &&
+                lon == other.lon &&
+                masterUnit == other.masterUnit &&
+                milGrid == other.milGrid &&
+                milGridSys == other.milGridSys &&
+                msnPrimary == other.msnPrimary &&
+                msnPrimarySpecialty == other.msnPrimarySpecialty &&
+                operStatus == other.operStatus &&
+                origin == other.origin &&
+                polSubdiv == other.polSubdiv &&
+                recStatus == other.recStatus &&
+                referenceDoc == other.referenceDoc &&
+                resProd == other.resProd &&
+                reviewDate == other.reviewDate &&
+                stylizedUnit == other.stylizedUnit &&
+                symCode == other.symCode &&
+                unitIdentifier == other.unitIdentifier &&
+                utm == other.utm &&
+                wac == other.wac &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, name, source, airDefArea, allegiance, altAllegiance, altCountryCode, altOperatingUnitId, classRating, condition, conditionAvail, coord, coordDatum, coordDerivAcc, countryCode, createdAt, createdBy, deployStatus, description, divCat, echelon, echelonTier, elevMsl, elevMslConfLvl, elevMslDerivAcc, eval, flagFlown, fleetId, force, forceName, fpa, functRole, geoidalMslSep, idContact, ident, idLocation, idOperatingUnit, idOrganization, lat, locName, locReason, lon, masterUnit, milGrid, milGridSys, msnPrimary, msnPrimarySpecialty, operStatus, origin, polSubdiv, recStatus, referenceDoc, resProd, reviewDate, stylizedUnit, symCode, unitIdentifier, utm, wac, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                name,
+                source,
+                airDefArea,
+                allegiance,
+                altAllegiance,
+                altCountryCode,
+                altOperatingUnitId,
+                classRating,
+                condition,
+                conditionAvail,
+                coord,
+                coordDatum,
+                coordDerivAcc,
+                countryCode,
+                createdAt,
+                createdBy,
+                deployStatus,
+                description,
+                divCat,
+                echelon,
+                echelonTier,
+                elevMsl,
+                elevMslConfLvl,
+                elevMslDerivAcc,
+                eval,
+                flagFlown,
+                fleetId,
+                force,
+                forceName,
+                fpa,
+                functRole,
+                geoidalMslSep,
+                idContact,
+                ident,
+                idLocation,
+                idOperatingUnit,
+                idOrganization,
+                lat,
+                locName,
+                locReason,
+                lon,
+                masterUnit,
+                milGrid,
+                milGridSys,
+                msnPrimary,
+                msnPrimarySpecialty,
+                operStatus,
+                origin,
+                polSubdiv,
+                recStatus,
+                referenceDoc,
+                resProd,
+                reviewDate,
+                stylizedUnit,
+                symCode,
+                unitIdentifier,
+                utm,
+                wac,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5336,7 +5459,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -5349,10 +5472,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OperatingunitCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OperatingunitCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "OperatingunitCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

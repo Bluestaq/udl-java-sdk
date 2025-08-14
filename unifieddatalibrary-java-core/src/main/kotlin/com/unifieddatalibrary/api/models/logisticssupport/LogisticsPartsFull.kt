@@ -598,12 +598,37 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LogisticsPartsFull && figureNumber == other.figureNumber && indexNumber == other.indexNumber && locationVerifier == other.locationVerifier && logisticsStocks == other.logisticsStocks && measurementUnitCode == other.measurementUnitCode && nationalStockNumber == other.nationalStockNumber && partNumber == other.partNumber && requestVerifier == other.requestVerifier && supplyDocumentNumber == other.supplyDocumentNumber && technicalOrderText == other.technicalOrderText && workUnitCode == other.workUnitCode && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is LogisticsPartsFull &&
+            figureNumber == other.figureNumber &&
+            indexNumber == other.indexNumber &&
+            locationVerifier == other.locationVerifier &&
+            logisticsStocks == other.logisticsStocks &&
+            measurementUnitCode == other.measurementUnitCode &&
+            nationalStockNumber == other.nationalStockNumber &&
+            partNumber == other.partNumber &&
+            requestVerifier == other.requestVerifier &&
+            supplyDocumentNumber == other.supplyDocumentNumber &&
+            technicalOrderText == other.technicalOrderText &&
+            workUnitCode == other.workUnitCode &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(figureNumber, indexNumber, locationVerifier, logisticsStocks, measurementUnitCode, nationalStockNumber, partNumber, requestVerifier, supplyDocumentNumber, technicalOrderText, workUnitCode, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            figureNumber,
+            indexNumber,
+            locationVerifier,
+            logisticsStocks,
+            measurementUnitCode,
+            nationalStockNumber,
+            partNumber,
+            requestVerifier,
+            supplyDocumentNumber,
+            technicalOrderText,
+            workUnitCode,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

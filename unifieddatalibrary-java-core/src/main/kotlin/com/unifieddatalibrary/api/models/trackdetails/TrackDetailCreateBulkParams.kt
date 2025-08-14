@@ -6970,7 +6970,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -7137,7 +7137,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Env && value == other.value /* spotless:on */
+                return other is Env && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -7322,7 +7322,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is ObjIdent && value == other.value /* spotless:on */
+                return other is ObjIdent && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -7335,12 +7335,329 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && lat == other.lat && lon == other.lon && source == other.source && ts == other.ts && id == other.id && acftSubType == other.acftSubType && addInfo == other.addInfo && alert == other.alert && alt == other.alt && angElev == other.angElev && antennaRefDimensions == other.antennaRefDimensions && aouRptData == other.aouRptData && aouRptType == other.aouRptType && appGrp == other.appGrp && arrCargo == other.arrCargo && arrFlag == other.arrFlag && arrPort == other.arrPort && arrTime == other.arrTime && aton == other.aton && avgSpd == other.avgSpd && azCorrArcWidth == other.azCorrArcWidth && azCorrCenterLine == other.azCorrCenterLine && beNumber == other.beNumber && boosting == other.boosting && burnoutAlt == other.burnoutAlt && callSign == other.callSign && cargoType == other.cargoType && cI == other.cI && containment == other.containment && coopLocInd == other.coopLocInd && course == other.course && cpa == other.cpa && createdAt == other.createdAt && createdBy == other.createdBy && depCargo == other.depCargo && depFlag == other.depFlag && depPort == other.depPort && desCargo == other.desCargo && desFlag == other.desFlag && destination == other.destination && disId == other.disId && draught == other.draught && dropPtInd == other.dropPtInd && dummy == other.dummy && ecefPos == other.ecefPos && ecefVel == other.ecefVel && elnot1 == other.elnot1 && elnot2 == other.elnot2 && emgInd == other.emgInd && emitterName == other.emitterName && env == other.env && errAreaOrient == other.errAreaOrient && errGeoAreaSwitch == other.errGeoAreaSwitch && errSemiIntAxis == other.errSemiIntAxis && errSemiMajElev == other.errSemiMajElev && eta == other.eta && etd == other.etd && evalRating == other.evalRating && feint == other.feint && freq == other.freq && ftn == other.ftn && ftnCmd == other.ftnCmd && ftnMsgTs == other.ftnMsgTs && harmonics == other.harmonics && hdng == other.hdng && hq == other.hq && hullNum == other.hullNum && hullProf == other.hullProf && identAmp == other.identAmp && iff == other.iff && imon == other.imon && impactAouData == other.impactAouData && impactAouType == other.impactAouType && impactLat == other.impactLat && impactLon == other.impactLon && impactTime == other.impactTime && infoSource == other.infoSource && installation == other.installation && launchAouData == other.launchAouData && launchAouType == other.launchAouType && launchLat == other.launchLat && launchLon == other.launchLon && launchTime == other.launchTime && length == other.length && lostTrkInd == other.lostTrkInd && maneuverInd == other.maneuverInd && maxFreq == other.maxFreq && midbCat == other.midbCat && mil2525Bstr == other.mil2525Bstr && mmsi == other.mmsi && msgType == other.msgType && mslStatus == other.mslStatus && muidSrc == other.muidSrc && muidSrcTrk == other.muidSrcTrk && name == other.name && navStatus == other.navStatus && ntds == other.ntds && numBlades == other.numBlades && numShafts == other.numShafts && objAct == other.objAct && objIdent == other.objIdent && objNat == other.objNat && objPlat == other.objPlat && objType == other.objType && offPosInd == other.offPosInd && origin == other.origin && origNetwork == other.origNetwork && origXref == other.origXref && oSuffix == other.oSuffix && pif == other.pif && pin == other.pin && polarSingLocLat == other.polarSingLocLat && polarSingLocLon == other.polarSingLocLon && posDeviceType == other.posDeviceType && prf == other.prf && pri == other.pri && propRpm == other.propRpm && propType == other.propType && pw == other.pw && reduced == other.reduced && reinforced == other.reinforced && rptArchived == other.rptArchived && rptChxref == other.rptChxref && rtn == other.rtn && rtnCmd == other.rtnCmd && rtnMsgTs == other.rtnMsgTs && rtnTrkState == other.rtnTrkState && scanRate == other.scanRate && scanType == other.scanType && scn == other.scn && sconum == other.sconum && selfReport == other.selfReport && sen == other.sen && shipClass == other.shipClass && shortName == other.shortName && sourceUid == other.sourceUid && spaceAmp == other.spaceAmp && spaceAmpConf == other.spaceAmpConf && spaceSpecType == other.spaceSpecType && spd == other.spd && staffCmts == other.staffCmts && sternType == other.sternType && taskForce == other.taskForce && tcpa == other.tcpa && tesEventId == other.tesEventId && tol == other.tol && tpk == other.tpk && trkConf == other.trkConf && trkId == other.trkId && trkNum == other.trkNum && trkQual == other.trkQual && trkScope == other.trkScope && trnspdrId == other.trnspdrId && trnspdrType == other.trnspdrType && vslWt == other.vslWt && width == other.width /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                lat == other.lat &&
+                lon == other.lon &&
+                source == other.source &&
+                ts == other.ts &&
+                id == other.id &&
+                acftSubType == other.acftSubType &&
+                addInfo == other.addInfo &&
+                alert == other.alert &&
+                alt == other.alt &&
+                angElev == other.angElev &&
+                antennaRefDimensions == other.antennaRefDimensions &&
+                aouRptData == other.aouRptData &&
+                aouRptType == other.aouRptType &&
+                appGrp == other.appGrp &&
+                arrCargo == other.arrCargo &&
+                arrFlag == other.arrFlag &&
+                arrPort == other.arrPort &&
+                arrTime == other.arrTime &&
+                aton == other.aton &&
+                avgSpd == other.avgSpd &&
+                azCorrArcWidth == other.azCorrArcWidth &&
+                azCorrCenterLine == other.azCorrCenterLine &&
+                beNumber == other.beNumber &&
+                boosting == other.boosting &&
+                burnoutAlt == other.burnoutAlt &&
+                callSign == other.callSign &&
+                cargoType == other.cargoType &&
+                cI == other.cI &&
+                containment == other.containment &&
+                coopLocInd == other.coopLocInd &&
+                course == other.course &&
+                cpa == other.cpa &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                depCargo == other.depCargo &&
+                depFlag == other.depFlag &&
+                depPort == other.depPort &&
+                desCargo == other.desCargo &&
+                desFlag == other.desFlag &&
+                destination == other.destination &&
+                disId == other.disId &&
+                draught == other.draught &&
+                dropPtInd == other.dropPtInd &&
+                dummy == other.dummy &&
+                ecefPos == other.ecefPos &&
+                ecefVel == other.ecefVel &&
+                elnot1 == other.elnot1 &&
+                elnot2 == other.elnot2 &&
+                emgInd == other.emgInd &&
+                emitterName == other.emitterName &&
+                env == other.env &&
+                errAreaOrient == other.errAreaOrient &&
+                errGeoAreaSwitch == other.errGeoAreaSwitch &&
+                errSemiIntAxis == other.errSemiIntAxis &&
+                errSemiMajElev == other.errSemiMajElev &&
+                eta == other.eta &&
+                etd == other.etd &&
+                evalRating == other.evalRating &&
+                feint == other.feint &&
+                freq == other.freq &&
+                ftn == other.ftn &&
+                ftnCmd == other.ftnCmd &&
+                ftnMsgTs == other.ftnMsgTs &&
+                harmonics == other.harmonics &&
+                hdng == other.hdng &&
+                hq == other.hq &&
+                hullNum == other.hullNum &&
+                hullProf == other.hullProf &&
+                identAmp == other.identAmp &&
+                iff == other.iff &&
+                imon == other.imon &&
+                impactAouData == other.impactAouData &&
+                impactAouType == other.impactAouType &&
+                impactLat == other.impactLat &&
+                impactLon == other.impactLon &&
+                impactTime == other.impactTime &&
+                infoSource == other.infoSource &&
+                installation == other.installation &&
+                launchAouData == other.launchAouData &&
+                launchAouType == other.launchAouType &&
+                launchLat == other.launchLat &&
+                launchLon == other.launchLon &&
+                launchTime == other.launchTime &&
+                length == other.length &&
+                lostTrkInd == other.lostTrkInd &&
+                maneuverInd == other.maneuverInd &&
+                maxFreq == other.maxFreq &&
+                midbCat == other.midbCat &&
+                mil2525Bstr == other.mil2525Bstr &&
+                mmsi == other.mmsi &&
+                msgType == other.msgType &&
+                mslStatus == other.mslStatus &&
+                muidSrc == other.muidSrc &&
+                muidSrcTrk == other.muidSrcTrk &&
+                name == other.name &&
+                navStatus == other.navStatus &&
+                ntds == other.ntds &&
+                numBlades == other.numBlades &&
+                numShafts == other.numShafts &&
+                objAct == other.objAct &&
+                objIdent == other.objIdent &&
+                objNat == other.objNat &&
+                objPlat == other.objPlat &&
+                objType == other.objType &&
+                offPosInd == other.offPosInd &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origXref == other.origXref &&
+                oSuffix == other.oSuffix &&
+                pif == other.pif &&
+                pin == other.pin &&
+                polarSingLocLat == other.polarSingLocLat &&
+                polarSingLocLon == other.polarSingLocLon &&
+                posDeviceType == other.posDeviceType &&
+                prf == other.prf &&
+                pri == other.pri &&
+                propRpm == other.propRpm &&
+                propType == other.propType &&
+                pw == other.pw &&
+                reduced == other.reduced &&
+                reinforced == other.reinforced &&
+                rptArchived == other.rptArchived &&
+                rptChxref == other.rptChxref &&
+                rtn == other.rtn &&
+                rtnCmd == other.rtnCmd &&
+                rtnMsgTs == other.rtnMsgTs &&
+                rtnTrkState == other.rtnTrkState &&
+                scanRate == other.scanRate &&
+                scanType == other.scanType &&
+                scn == other.scn &&
+                sconum == other.sconum &&
+                selfReport == other.selfReport &&
+                sen == other.sen &&
+                shipClass == other.shipClass &&
+                shortName == other.shortName &&
+                sourceUid == other.sourceUid &&
+                spaceAmp == other.spaceAmp &&
+                spaceAmpConf == other.spaceAmpConf &&
+                spaceSpecType == other.spaceSpecType &&
+                spd == other.spd &&
+                staffCmts == other.staffCmts &&
+                sternType == other.sternType &&
+                taskForce == other.taskForce &&
+                tcpa == other.tcpa &&
+                tesEventId == other.tesEventId &&
+                tol == other.tol &&
+                tpk == other.tpk &&
+                trkConf == other.trkConf &&
+                trkId == other.trkId &&
+                trkNum == other.trkNum &&
+                trkQual == other.trkQual &&
+                trkScope == other.trkScope &&
+                trnspdrId == other.trnspdrId &&
+                trnspdrType == other.trnspdrType &&
+                vslWt == other.vslWt &&
+                width == other.width
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, lat, lon, source, ts, id, acftSubType, addInfo, alert, alt, angElev, antennaRefDimensions, aouRptData, aouRptType, appGrp, arrCargo, arrFlag, arrPort, arrTime, aton, avgSpd, azCorrArcWidth, azCorrCenterLine, beNumber, boosting, burnoutAlt, callSign, cargoType, cI, containment, coopLocInd, course, cpa, createdAt, createdBy, depCargo, depFlag, depPort, desCargo, desFlag, destination, disId, draught, dropPtInd, dummy, ecefPos, ecefVel, elnot1, elnot2, emgInd, emitterName, env, errAreaOrient, errGeoAreaSwitch, errSemiIntAxis, errSemiMajElev, eta, etd, evalRating, feint, freq, ftn, ftnCmd, ftnMsgTs, harmonics, hdng, hq, hullNum, hullProf, identAmp, iff, imon, impactAouData, impactAouType, impactLat, impactLon, impactTime, infoSource, installation, launchAouData, launchAouType, launchLat, launchLon, launchTime, length, lostTrkInd, maneuverInd, maxFreq, midbCat, mil2525Bstr, mmsi, msgType, mslStatus, muidSrc, muidSrcTrk, name, navStatus, ntds, numBlades, numShafts, objAct, objIdent, objNat, objPlat, objType, offPosInd, origin, origNetwork, origXref, oSuffix, pif, pin, polarSingLocLat, polarSingLocLon, posDeviceType, prf, pri, propRpm, propType, pw, reduced, reinforced, rptArchived, rptChxref, rtn, rtnCmd, rtnMsgTs, rtnTrkState, scanRate, scanType, scn, sconum, selfReport, sen, shipClass, shortName, sourceUid, spaceAmp, spaceAmpConf, spaceSpecType, spd, staffCmts, sternType, taskForce, tcpa, tesEventId, tol, tpk, trkConf, trkId, trkNum, trkQual, trkScope, trnspdrId, trnspdrType, vslWt, width) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                lat,
+                lon,
+                source,
+                ts,
+                id,
+                acftSubType,
+                addInfo,
+                alert,
+                alt,
+                angElev,
+                antennaRefDimensions,
+                aouRptData,
+                aouRptType,
+                appGrp,
+                arrCargo,
+                arrFlag,
+                arrPort,
+                arrTime,
+                aton,
+                avgSpd,
+                azCorrArcWidth,
+                azCorrCenterLine,
+                beNumber,
+                boosting,
+                burnoutAlt,
+                callSign,
+                cargoType,
+                cI,
+                containment,
+                coopLocInd,
+                course,
+                cpa,
+                createdAt,
+                createdBy,
+                depCargo,
+                depFlag,
+                depPort,
+                desCargo,
+                desFlag,
+                destination,
+                disId,
+                draught,
+                dropPtInd,
+                dummy,
+                ecefPos,
+                ecefVel,
+                elnot1,
+                elnot2,
+                emgInd,
+                emitterName,
+                env,
+                errAreaOrient,
+                errGeoAreaSwitch,
+                errSemiIntAxis,
+                errSemiMajElev,
+                eta,
+                etd,
+                evalRating,
+                feint,
+                freq,
+                ftn,
+                ftnCmd,
+                ftnMsgTs,
+                harmonics,
+                hdng,
+                hq,
+                hullNum,
+                hullProf,
+                identAmp,
+                iff,
+                imon,
+                impactAouData,
+                impactAouType,
+                impactLat,
+                impactLon,
+                impactTime,
+                infoSource,
+                installation,
+                launchAouData,
+                launchAouType,
+                launchLat,
+                launchLon,
+                launchTime,
+                length,
+                lostTrkInd,
+                maneuverInd,
+                maxFreq,
+                midbCat,
+                mil2525Bstr,
+                mmsi,
+                msgType,
+                mslStatus,
+                muidSrc,
+                muidSrcTrk,
+                name,
+                navStatus,
+                ntds,
+                numBlades,
+                numShafts,
+                objAct,
+                objIdent,
+                objNat,
+                objPlat,
+                objType,
+                offPosInd,
+                origin,
+                origNetwork,
+                origXref,
+                oSuffix,
+                pif,
+                pin,
+                polarSingLocLat,
+                polarSingLocLon,
+                posDeviceType,
+                prf,
+                pri,
+                propRpm,
+                propType,
+                pw,
+                reduced,
+                reinforced,
+                rptArchived,
+                rptChxref,
+                rtn,
+                rtnCmd,
+                rtnMsgTs,
+                rtnTrkState,
+                scanRate,
+                scanType,
+                scn,
+                sconum,
+                selfReport,
+                sen,
+                shipClass,
+                shortName,
+                sourceUid,
+                spaceAmp,
+                spaceAmpConf,
+                spaceSpecType,
+                spd,
+                staffCmts,
+                sternType,
+                taskForce,
+                tcpa,
+                tesEventId,
+                tol,
+                tpk,
+                trkConf,
+                trkId,
+                trkNum,
+                trkQual,
+                trkScope,
+                trnspdrId,
+                trnspdrType,
+                vslWt,
+                width,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -7353,10 +7670,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is TrackDetailCreateBulkParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is TrackDetailCreateBulkParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "TrackDetailCreateBulkParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
