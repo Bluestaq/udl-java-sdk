@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.services.async
 
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
+import com.unifieddatalibrary.api.models.AntennaIngest
 import com.unifieddatalibrary.api.models.onorbitantenna.OnorbitantennaCreateParams
 import com.unifieddatalibrary.api.models.onorbitantenna.OnorbitantennaGetParams
 import com.unifieddatalibrary.api.models.onorbitantenna.OnorbitantennaUpdateParams
@@ -34,8 +35,8 @@ internal class OnorbitantennaServiceAsyncTest {
                     .source("Bluestaq")
                     .id("ONORBITANTENNA-ID")
                     .antenna(
-                        OnorbitantennaCreateParams.Antenna.builder()
-                            .dataMode(OnorbitantennaCreateParams.Antenna.DataMode.TEST)
+                        AntennaIngest.builder()
+                            .dataMode(AntennaIngest.DataMode.TEST)
                             .name("IRIDIUM NEXT 121-ANTENNA-10075")
                             .source("Bluestaq")
                             .id("ANTENNA-ID")
@@ -76,8 +77,8 @@ internal class OnorbitantennaServiceAsyncTest {
                     .source("Bluestaq")
                     .bodyId("ONORBITANTENNA-ID")
                     .antenna(
-                        OnorbitantennaUpdateParams.Antenna.builder()
-                            .dataMode(OnorbitantennaUpdateParams.Antenna.DataMode.TEST)
+                        AntennaIngest.builder()
+                            .dataMode(AntennaIngest.DataMode.TEST)
                             .name("IRIDIUM NEXT 121-ANTENNA-10075")
                             .source("Bluestaq")
                             .id("ANTENNA-ID")

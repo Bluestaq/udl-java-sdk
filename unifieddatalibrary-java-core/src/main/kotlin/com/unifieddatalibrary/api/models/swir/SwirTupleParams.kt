@@ -261,10 +261,17 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SwirTupleParams && columns == other.columns && ts == other.ts && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SwirTupleParams &&
+            columns == other.columns &&
+            ts == other.ts &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, ts, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(columns, ts, firstResult, maxResults, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SwirTupleParams{columns=$columns, ts=$ts, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

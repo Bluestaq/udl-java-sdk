@@ -856,7 +856,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -869,12 +869,45 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OnorbitThrusterFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idEngine == other.idEngine && idOnOrbit == other.idOnOrbit && source == other.source && id == other.id && createdAt == other.createdAt && createdBy == other.createdBy && engine == other.engine && origin == other.origin && origNetwork == other.origNetwork && quantity == other.quantity && type == other.type && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is OnorbitThrusterFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idEngine == other.idEngine &&
+            idOnOrbit == other.idOnOrbit &&
+            source == other.source &&
+            id == other.id &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            engine == other.engine &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            quantity == other.quantity &&
+            type == other.type &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idEngine, idOnOrbit, source, id, createdAt, createdBy, engine, origin, origNetwork, quantity, type, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idEngine,
+            idOnOrbit,
+            source,
+            id,
+            createdAt,
+            createdBy,
+            engine,
+            origin,
+            origNetwork,
+            quantity,
+            type,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

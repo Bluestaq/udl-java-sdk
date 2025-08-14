@@ -21,116 +21,115 @@ import com.unifieddatalibrary.api.models.trackroute.history.HistoryCountParams
 import com.unifieddatalibrary.api.models.trackroute.history.HistoryListPage
 import com.unifieddatalibrary.api.models.trackroute.history.HistoryListParams
 import com.unifieddatalibrary.api.models.trackroute.history.TrackRouteFull
-import com.unifieddatalibrary.api.services.blocking.trackroute.HistoryService
-import com.unifieddatalibrary.api.services.blocking.trackroute.HistoryServiceImpl
 import java.util.function.Consumer
 
-class HistoryServiceImpl internal constructor(
-    private val clientOptions: ClientOptions,
+class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
+    HistoryService {
 
-) : HistoryService {
-
-    private val withRawResponse: HistoryService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
+    private val withRawResponse: HistoryService.WithRawResponse by lazy {
+        WithRawResponseImpl(clientOptions)
+    }
 
     override fun withRawResponse(): HistoryService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService = HistoryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService =
+        HistoryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun list(params: HistoryListParams, requestOptions: RequestOptions): HistoryListPage =
         // get /udl/trackroute/history
         withRawResponse().list(params, requestOptions).parse()
 
     override fun aodr(params: HistoryAodrParams, requestOptions: RequestOptions) {
-      // get /udl/trackroute/history/aodr
-      withRawResponse().aodr(params, requestOptions)
+        // get /udl/trackroute/history/aodr
+        withRawResponse().aodr(params, requestOptions)
     }
 
     override fun count(params: HistoryCountParams, requestOptions: RequestOptions): String =
         // get /udl/trackroute/history/count
         withRawResponse().count(params, requestOptions).parse()
 
-    class WithRawResponseImpl internal constructor(
-        private val clientOptions: ClientOptions,
+    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
+        HistoryService.WithRawResponse {
 
-    ) : HistoryService.WithRawResponse {
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+        override fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): HistoryService.WithRawResponse =
+            HistoryServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier::accept).build()
+            )
 
-        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService.WithRawResponse = HistoryServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+        private val listHandler: Handler<List<TrackRouteFull>> =
+            jsonHandler<List<TrackRouteFull>>(clientOptions.jsonMapper)
 
-        private val listHandler: Handler<List<TrackRouteFull>> = jsonHandler<List<TrackRouteFull>>(clientOptions.jsonMapper)
-
-        override fun list(params: HistoryListParams, requestOptions: RequestOptions): HttpResponseFor<HistoryListPage> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "trackroute", "history")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  listHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.forEach { it.validate() }
-                  }
-              }
-              .let {
-                  HistoryListPage.builder()
-                      .service(HistoryServiceImpl(clientOptions))
-                      .params(params)
-                      .items(it)
-                      .build()
-              }
-          }
+        override fun list(
+            params: HistoryListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<HistoryListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "trackroute", "history")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        HistoryListPage.builder()
+                            .service(HistoryServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
         }
 
         private val aodrHandler: Handler<Void?> = emptyHandler()
 
         override fun aodr(params: HistoryAodrParams, requestOptions: RequestOptions): HttpResponse {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "trackroute", "history", "aodr")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  aodrHandler.handle(it)
-              }
-          }
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "trackroute", "history", "aodr")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { aodrHandler.handle(it) }
+            }
         }
 
         private val countHandler: Handler<String> = stringHandler()
 
-        override fun count(params: HistoryCountParams, requestOptions: RequestOptions): HttpResponseFor<String> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "trackroute", "history", "count")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  countHandler.handle(it)
-              }
-          }
+        override fun count(
+            params: HistoryCountParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<String> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "trackroute", "history", "count")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { countHandler.handle(it) }
+            }
         }
     }
 }

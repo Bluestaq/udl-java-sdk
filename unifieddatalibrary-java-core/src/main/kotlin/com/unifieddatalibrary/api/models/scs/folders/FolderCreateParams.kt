@@ -325,10 +325,32 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is FolderCreateParams && id == other.id && classificationMarking == other.classificationMarking && description == other.description && read == other.read && sendNotification == other.sendNotification && tags == other.tags && write == other.write && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams && additionalBodyProperties == other.additionalBodyProperties /* spotless:on */
+        return other is FolderCreateParams &&
+            id == other.id &&
+            classificationMarking == other.classificationMarking &&
+            description == other.description &&
+            read == other.read &&
+            sendNotification == other.sendNotification &&
+            tags == other.tags &&
+            write == other.write &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams &&
+            additionalBodyProperties == other.additionalBodyProperties
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(id, classificationMarking, description, read, sendNotification, tags, write, additionalHeaders, additionalQueryParams, additionalBodyProperties) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            id,
+            classificationMarking,
+            description,
+            read,
+            sendNotification,
+            tags,
+            write,
+            additionalHeaders,
+            additionalQueryParams,
+            additionalBodyProperties,
+        )
 
     override fun toString() =
         "FolderCreateParams{id=$id, classificationMarking=$classificationMarking, description=$description, read=$read, sendNotification=$sendNotification, tags=$tags, write=$write, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams, additionalBodyProperties=$additionalBodyProperties}"

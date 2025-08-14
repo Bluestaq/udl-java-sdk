@@ -11,12 +11,13 @@ import com.unifieddatalibrary.api.models.h3geo.history.HistoryAdorParams
 import com.unifieddatalibrary.api.models.h3geo.history.HistoryCountParams
 import com.unifieddatalibrary.api.models.h3geo.history.HistoryQueryParams
 import com.unifieddatalibrary.api.models.h3geo.history.HistoryQueryResponse
-import com.unifieddatalibrary.api.services.blocking.h3geo.HistoryService
 import java.util.function.Consumer
 
 interface HistoryService {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -26,32 +27,46 @@ interface HistoryService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService
 
-    /** Service operation to dynamically query historical data by a variety of query parameters not specified in this API documentation, then write that data to the Secure Content Store. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
-    fun ador(params: HistoryAdorParams) =
-        ador(
-          params, RequestOptions.none()
-        )
+    /**
+     * Service operation to dynamically query historical data by a variety of query parameters not
+     * specified in this API documentation, then write that data to the Secure Content Store. See
+     * the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required
+     * query parameter information.
+     */
+    fun ador(params: HistoryAdorParams) = ador(params, RequestOptions.none())
 
     /** @see ador */
     fun ador(params: HistoryAdorParams, requestOptions: RequestOptions = RequestOptions.none())
 
-    /** Service operation to return the count of records satisfying the specified query parameters. This operation is useful to determine how many records pass a particular query criteria without retrieving large amounts of data. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
-    fun count(params: HistoryCountParams): String =
-        count(
-          params, RequestOptions.none()
-        )
+    /**
+     * Service operation to return the count of records satisfying the specified query parameters.
+     * This operation is useful to determine how many records pass a particular query criteria
+     * without retrieving large amounts of data. See the queryhelp operation
+     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
+     * information.
+     */
+    fun count(params: HistoryCountParams): String = count(params, RequestOptions.none())
 
     /** @see count */
-    fun count(params: HistoryCountParams, requestOptions: RequestOptions = RequestOptions.none()): String
+    fun count(
+        params: HistoryCountParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): String
 
-    /** Service operation to dynamically query historical data by a variety of query parameters not specified in this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
+    /**
+     * Service operation to dynamically query historical data by a variety of query parameters not
+     * specified in this API documentation. See the queryhelp operation
+     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
+     * information.
+     */
     fun query(params: HistoryQueryParams): List<HistoryQueryResponse> =
-        query(
-          params, RequestOptions.none()
-        )
+        query(params, RequestOptions.none())
 
     /** @see query */
-    fun query(params: HistoryQueryParams, requestOptions: RequestOptions = RequestOptions.none()): List<HistoryQueryResponse>
+    fun query(
+        params: HistoryQueryParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): List<HistoryQueryResponse>
 
     /** A view of [HistoryService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -63,37 +78,48 @@ interface HistoryService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService.WithRawResponse
 
-        /** Returns a raw HTTP response for `get /udl/h3geo/history/aodr`, but is otherwise the same as [HistoryService.ador]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/h3geo/history/aodr`, but is otherwise the same
+         * as [HistoryService.ador].
+         */
         @MustBeClosed
-        fun ador(params: HistoryAdorParams): HttpResponse =
-            ador(
-              params, RequestOptions.none()
-            )
+        fun ador(params: HistoryAdorParams): HttpResponse = ador(params, RequestOptions.none())
 
         /** @see ador */
         @MustBeClosed
-        fun ador(params: HistoryAdorParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponse
+        fun ador(
+            params: HistoryAdorParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse
 
-        /** Returns a raw HTTP response for `get /udl/h3geo/history/count`, but is otherwise the same as [HistoryService.count]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/h3geo/history/count`, but is otherwise the same
+         * as [HistoryService.count].
+         */
         @MustBeClosed
         fun count(params: HistoryCountParams): HttpResponseFor<String> =
-            count(
-              params, RequestOptions.none()
-            )
+            count(params, RequestOptions.none())
 
         /** @see count */
         @MustBeClosed
-        fun count(params: HistoryCountParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<String>
+        fun count(
+            params: HistoryCountParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<String>
 
-        /** Returns a raw HTTP response for `get /udl/h3geo/history`, but is otherwise the same as [HistoryService.query]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/h3geo/history`, but is otherwise the same as
+         * [HistoryService.query].
+         */
         @MustBeClosed
         fun query(params: HistoryQueryParams): HttpResponseFor<List<HistoryQueryResponse>> =
-            query(
-              params, RequestOptions.none()
-            )
+            query(params, RequestOptions.none())
 
         /** @see query */
         @MustBeClosed
-        fun query(params: HistoryQueryParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<List<HistoryQueryResponse>>
+        fun query(
+            params: HistoryQueryParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<List<HistoryQueryResponse>>
     }
 }

@@ -5,28 +5,23 @@ package com.unifieddatalibrary.api.models.geostatus
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
-import com.unifieddatalibrary.api.models.geostatus.GeoStatusListParams
-import com.unifieddatalibrary.api.models.geostatus.GeoStatusListResponse
 import com.unifieddatalibrary.api.services.blocking.GeoStatusService
 import java.util.Objects
-import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see GeoStatusService.list */
-class GeoStatusListPage private constructor(
+class GeoStatusListPage
+private constructor(
     private val service: GeoStatusService,
     private val params: GeoStatusListParams,
     private val items: List<GeoStatusListResponse>,
-
 ) : Page<GeoStatusListResponse> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): GeoStatusListParams {
-      val offset = params.firstResult().getOrDefault(0)
-      return params.toBuilder()
-          .firstResult(offset + items().size)
-          .build()
+        val offset = params.firstResult().getOrDefault(0)
+        return params.toBuilder().firstResult(offset + items().size).build()
     }
 
     override fun nextPage(): GeoStatusListPage = service.list(nextPageParams())
@@ -47,15 +42,13 @@ class GeoStatusListPage private constructor(
          * Returns a mutable builder for constructing an instance of [GeoStatusListPage].
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [GeoStatusListPage]. */
@@ -66,29 +59,19 @@ class GeoStatusListPage private constructor(
         private var items: List<GeoStatusListResponse>? = null
 
         @JvmSynthetic
-        internal fun from(geoStatusListPage: GeoStatusListPage) =
-            apply {
-                service = geoStatusListPage.service
-                params = geoStatusListPage.params
-                items = geoStatusListPage.items
-            }
+        internal fun from(geoStatusListPage: GeoStatusListPage) = apply {
+            service = geoStatusListPage.service
+            params = geoStatusListPage.params
+            items = geoStatusListPage.items
+        }
 
-        fun service(service: GeoStatusService) =
-            apply {
-                this.service = service
-            }
+        fun service(service: GeoStatusService) = apply { this.service = service }
 
         /** The parameters that were used to request this page. */
-        fun params(params: GeoStatusListParams) =
-            apply {
-                this.params = params
-            }
+        fun params(params: GeoStatusListParams) = apply { this.params = params }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<GeoStatusListResponse>) =
-            apply {
-                this.items = items
-            }
+        fun items(items: List<GeoStatusListResponse>) = apply { this.items = items }
 
         /**
          * Returns an immutable instance of [GeoStatusListPage].
@@ -96,7 +79,6 @@ class GeoStatusListPage private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .params()
@@ -107,27 +89,24 @@ class GeoStatusListPage private constructor(
          */
         fun build(): GeoStatusListPage =
             GeoStatusListPage(
-              checkRequired(
-                "service", service
-              ),
-              checkRequired(
-                "params", params
-              ),
-              checkRequired(
-                "items", items
-              ),
+                checkRequired("service", service),
+                checkRequired("params", params),
+                checkRequired("items", items),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is GeoStatusListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+        return other is GeoStatusListPage &&
+            service == other.service &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, params, items)
 
     override fun toString() = "GeoStatusListPage{service=$service, params=$params, items=$items}"
 }

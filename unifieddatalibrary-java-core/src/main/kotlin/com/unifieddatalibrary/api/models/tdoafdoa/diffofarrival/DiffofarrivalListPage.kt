@@ -5,28 +5,23 @@ package com.unifieddatalibrary.api.models.tdoafdoa.diffofarrival
 import com.unifieddatalibrary.api.core.AutoPager
 import com.unifieddatalibrary.api.core.Page
 import com.unifieddatalibrary.api.core.checkRequired
-import com.unifieddatalibrary.api.models.tdoafdoa.diffofarrival.DiffofarrivalAbridged
-import com.unifieddatalibrary.api.models.tdoafdoa.diffofarrival.DiffofarrivalListParams
 import com.unifieddatalibrary.api.services.blocking.tdoafdoa.DiffofarrivalService
 import java.util.Objects
-import java.util.Optional
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see DiffofarrivalService.list */
-class DiffofarrivalListPage private constructor(
+class DiffofarrivalListPage
+private constructor(
     private val service: DiffofarrivalService,
     private val params: DiffofarrivalListParams,
     private val items: List<DiffofarrivalAbridged>,
-
 ) : Page<DiffofarrivalAbridged> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): DiffofarrivalListParams {
-      val offset = params.firstResult().getOrDefault(0)
-      return params.toBuilder()
-          .firstResult(offset + items().size)
-          .build()
+        val offset = params.firstResult().getOrDefault(0)
+        return params.toBuilder().firstResult(offset + items().size).build()
     }
 
     override fun nextPage(): DiffofarrivalListPage = service.list(nextPageParams())
@@ -47,15 +42,13 @@ class DiffofarrivalListPage private constructor(
          * Returns a mutable builder for constructing an instance of [DiffofarrivalListPage].
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .params()
          * .items()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [DiffofarrivalListPage]. */
@@ -66,29 +59,19 @@ class DiffofarrivalListPage private constructor(
         private var items: List<DiffofarrivalAbridged>? = null
 
         @JvmSynthetic
-        internal fun from(diffofarrivalListPage: DiffofarrivalListPage) =
-            apply {
-                service = diffofarrivalListPage.service
-                params = diffofarrivalListPage.params
-                items = diffofarrivalListPage.items
-            }
+        internal fun from(diffofarrivalListPage: DiffofarrivalListPage) = apply {
+            service = diffofarrivalListPage.service
+            params = diffofarrivalListPage.params
+            items = diffofarrivalListPage.items
+        }
 
-        fun service(service: DiffofarrivalService) =
-            apply {
-                this.service = service
-            }
+        fun service(service: DiffofarrivalService) = apply { this.service = service }
 
         /** The parameters that were used to request this page. */
-        fun params(params: DiffofarrivalListParams) =
-            apply {
-                this.params = params
-            }
+        fun params(params: DiffofarrivalListParams) = apply { this.params = params }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<DiffofarrivalAbridged>) =
-            apply {
-                this.items = items
-            }
+        fun items(items: List<DiffofarrivalAbridged>) = apply { this.items = items }
 
         /**
          * Returns an immutable instance of [DiffofarrivalListPage].
@@ -96,7 +79,6 @@ class DiffofarrivalListPage private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .params()
@@ -107,27 +89,25 @@ class DiffofarrivalListPage private constructor(
          */
         fun build(): DiffofarrivalListPage =
             DiffofarrivalListPage(
-              checkRequired(
-                "service", service
-              ),
-              checkRequired(
-                "params", params
-              ),
-              checkRequired(
-                "items", items
-              ),
+                checkRequired("service", service),
+                checkRequired("params", params),
+                checkRequired("items", items),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is DiffofarrivalListPage && service == other.service && params == other.params && items == other.items /* spotless:on */
+        return other is DiffofarrivalListPage &&
+            service == other.service &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, params, items)
 
-    override fun toString() = "DiffofarrivalListPage{service=$service, params=$params, items=$items}"
+    override fun toString() =
+        "DiffofarrivalListPage{service=$service, params=$params, items=$items}"
 }

@@ -952,12 +952,59 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is IsrCollectionRequirementsFull && id == other.id && country == other.country && cridNumbers == other.cridNumbers && criticalTimes == other.criticalTimes && emphasized == other.emphasized && exploitationRequirement == other.exploitationRequirement && hash == other.hash && intelDiscipline == other.intelDiscipline && isPrismCr == other.isPrismCr && operation == other.operation && priority == other.priority && reconSurvey == other.reconSurvey && recordId == other.recordId && region == other.region && secondary == other.secondary && specialComGuidance == other.specialComGuidance && start == other.start && stop == other.stop && subregion == other.subregion && supportedUnit == other.supportedUnit && targetList == other.targetList && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is IsrCollectionRequirementsFull &&
+            id == other.id &&
+            country == other.country &&
+            cridNumbers == other.cridNumbers &&
+            criticalTimes == other.criticalTimes &&
+            emphasized == other.emphasized &&
+            exploitationRequirement == other.exploitationRequirement &&
+            hash == other.hash &&
+            intelDiscipline == other.intelDiscipline &&
+            isPrismCr == other.isPrismCr &&
+            operation == other.operation &&
+            priority == other.priority &&
+            reconSurvey == other.reconSurvey &&
+            recordId == other.recordId &&
+            region == other.region &&
+            secondary == other.secondary &&
+            specialComGuidance == other.specialComGuidance &&
+            start == other.start &&
+            stop == other.stop &&
+            subregion == other.subregion &&
+            supportedUnit == other.supportedUnit &&
+            targetList == other.targetList &&
+            type == other.type &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(id, country, cridNumbers, criticalTimes, emphasized, exploitationRequirement, hash, intelDiscipline, isPrismCr, operation, priority, reconSurvey, recordId, region, secondary, specialComGuidance, start, stop, subregion, supportedUnit, targetList, type, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            id,
+            country,
+            cridNumbers,
+            criticalTimes,
+            emphasized,
+            exploitationRequirement,
+            hash,
+            intelDiscipline,
+            isPrismCr,
+            operation,
+            priority,
+            reconSurvey,
+            recordId,
+            region,
+            secondary,
+            specialComGuidance,
+            start,
+            stop,
+            subregion,
+            supportedUnit,
+            targetList,
+            type,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

@@ -15,15 +15,18 @@ import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
-import com.unifieddatalibrary.api.models.rfemitterdetails.RfEmitterDetailListResponse
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/** Details for a particular RF Emitter, collected by a particular source. An RF Emitter may have multiple details records from various sources. */
-class RfEmitterDetailListResponse private constructor(
+/**
+ * Details for a particular RF Emitter, collected by a particular source. An RF Emitter may have
+ * multiple details records from various sources.
+ */
+class RfEmitterDetailListResponse
+private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
     private val idRfEmitter: JsonField<String>,
@@ -60,342 +63,446 @@ class RfEmitterDetailListResponse private constructor(
     private val transmitterFrequency: JsonField<Double>,
     private val urls: JsonField<List<String>>,
     private val additionalProperties: MutableMap<String, JsonValue>,
-
 ) {
 
     @JsonCreator
     private constructor(
-        @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        classificationMarking: JsonField<String> = JsonMissing.of(),
         @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
-        @JsonProperty("idRFEmitter") @ExcludeMissing idRfEmitter: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("idRFEmitter")
+        @ExcludeMissing
+        idRfEmitter: JsonField<String> = JsonMissing.of(),
         @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
         @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("alternateFacilityName") @ExcludeMissing alternateFacilityName: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("alternateFacilityName")
+        @ExcludeMissing
+        alternateFacilityName: JsonField<String> = JsonMissing.of(),
         @JsonProperty("altName") @ExcludeMissing altName: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("antennaDiameter") @ExcludeMissing antennaDiameter: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("antennaSize") @ExcludeMissing antennaSize: JsonField<List<Double>> = JsonMissing.of(),
-        @JsonProperty("barrageNoiseBandwidth") @ExcludeMissing barrageNoiseBandwidth: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("antennaDiameter")
+        @ExcludeMissing
+        antennaDiameter: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("antennaSize")
+        @ExcludeMissing
+        antennaSize: JsonField<List<Double>> = JsonMissing.of(),
+        @JsonProperty("barrageNoiseBandwidth")
+        @ExcludeMissing
+        barrageNoiseBandwidth: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("description") @ExcludeMissing description: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("designator") @ExcludeMissing designator: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("dopplerNoise") @ExcludeMissing dopplerNoise: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("drfmInstantaneousBandwidth") @ExcludeMissing drfmInstantaneousBandwidth: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("description")
+        @ExcludeMissing
+        description: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("designator")
+        @ExcludeMissing
+        designator: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("dopplerNoise")
+        @ExcludeMissing
+        dopplerNoise: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("drfmInstantaneousBandwidth")
+        @ExcludeMissing
+        drfmInstantaneousBandwidth: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("family") @ExcludeMissing family: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("manufacturerOrgId") @ExcludeMissing manufacturerOrgId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("manufacturerOrgId")
+        @ExcludeMissing
+        manufacturerOrgId: JsonField<String> = JsonMissing.of(),
         @JsonProperty("notes") @ExcludeMissing notes: JsonField<String> = JsonMissing.of(),
         @JsonProperty("numBits") @ExcludeMissing numBits: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("numChannels") @ExcludeMissing numChannels: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origNetwork") @ExcludeMissing origNetwork: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("productionFacilityLocationId") @ExcludeMissing productionFacilityLocationId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("productionFacilityName") @ExcludeMissing productionFacilityName: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("receiverBandwidth") @ExcludeMissing receiverBandwidth: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("receiverSensitivity") @ExcludeMissing receiverSensitivity: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("receiverType") @ExcludeMissing receiverType: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("secondaryNotes") @ExcludeMissing secondaryNotes: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("systemSensitivityEnd") @ExcludeMissing systemSensitivityEnd: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("systemSensitivityStart") @ExcludeMissing systemSensitivityStart: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("transmitPower") @ExcludeMissing transmitPower: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("transmitterBandwidth") @ExcludeMissing transmitterBandwidth: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("transmitterFrequency") @ExcludeMissing transmitterFrequency: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("urls") @ExcludeMissing urls: JsonField<List<String>> = JsonMissing.of()
+        @JsonProperty("origNetwork")
+        @ExcludeMissing
+        origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("productionFacilityLocationId")
+        @ExcludeMissing
+        productionFacilityLocationId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("productionFacilityName")
+        @ExcludeMissing
+        productionFacilityName: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("receiverBandwidth")
+        @ExcludeMissing
+        receiverBandwidth: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("receiverSensitivity")
+        @ExcludeMissing
+        receiverSensitivity: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("receiverType")
+        @ExcludeMissing
+        receiverType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("secondaryNotes")
+        @ExcludeMissing
+        secondaryNotes: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("systemSensitivityEnd")
+        @ExcludeMissing
+        systemSensitivityEnd: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("systemSensitivityStart")
+        @ExcludeMissing
+        systemSensitivityStart: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("transmitPower")
+        @ExcludeMissing
+        transmitPower: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("transmitterBandwidth")
+        @ExcludeMissing
+        transmitterBandwidth: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("transmitterFrequency")
+        @ExcludeMissing
+        transmitterFrequency: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("urls") @ExcludeMissing urls: JsonField<List<String>> = JsonMissing.of(),
     ) : this(
-      classificationMarking,
-      dataMode,
-      idRfEmitter,
-      source,
-      id,
-      alternateFacilityName,
-      altName,
-      antennaDiameter,
-      antennaSize,
-      barrageNoiseBandwidth,
-      createdAt,
-      createdBy,
-      description,
-      designator,
-      dopplerNoise,
-      drfmInstantaneousBandwidth,
-      family,
-      manufacturerOrgId,
-      notes,
-      numBits,
-      numChannels,
-      origin,
-      origNetwork,
-      productionFacilityLocationId,
-      productionFacilityName,
-      receiverBandwidth,
-      receiverSensitivity,
-      receiverType,
-      secondaryNotes,
-      systemSensitivityEnd,
-      systemSensitivityStart,
-      transmitPower,
-      transmitterBandwidth,
-      transmitterFrequency,
-      urls,
-      mutableMapOf(),
+        classificationMarking,
+        dataMode,
+        idRfEmitter,
+        source,
+        id,
+        alternateFacilityName,
+        altName,
+        antennaDiameter,
+        antennaSize,
+        barrageNoiseBandwidth,
+        createdAt,
+        createdBy,
+        description,
+        designator,
+        dopplerNoise,
+        drfmInstantaneousBandwidth,
+        family,
+        manufacturerOrgId,
+        notes,
+        numBits,
+        numChannels,
+        origin,
+        origNetwork,
+        productionFacilityLocationId,
+        productionFacilityName,
+        receiverBandwidth,
+        receiverSensitivity,
+        receiverType,
+        secondaryNotes,
+        systemSensitivityEnd,
+        systemSensitivityStart,
+        transmitPower,
+        transmitterBandwidth,
+        transmitterFrequency,
+        urls,
+        mutableMapOf(),
     )
 
     /**
      * Classification marking of the data in IC/CAPCO Portion-marked format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
     /**
      * Unique identifier of the parent RF Emitter.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun idRfEmitter(): String = idRfEmitter.getRequired("idRFEmitter")
 
     /**
      * Source of the data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun source(): String = source.getRequired("source")
 
     /**
      * Unique identifier of the record, auto-generated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun id(): Optional<String> = id.getOptional("id")
 
     /**
      * Alternate facility name for this RF Emitter.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun alternateFacilityName(): Optional<String> = alternateFacilityName.getOptional("alternateFacilityName")
+    fun alternateFacilityName(): Optional<String> =
+        alternateFacilityName.getOptional("alternateFacilityName")
 
     /**
      * Optional alternate name or alias for this RF Emitter.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun altName(): Optional<String> = altName.getOptional("altName")
 
     /**
      * For parabolic/dish antennas, the diameter of the antenna in meters.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun antennaDiameter(): Optional<Double> = antennaDiameter.getOptional("antennaDiameter")
 
     /**
-     * Array with 1-2 values specifying the length and width (for rectangular) and just length for dipole antennas in meters.
+     * Array with 1-2 values specifying the length and width (for rectangular) and just length for
+     * dipole antennas in meters.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun antennaSize(): Optional<List<Double>> = antennaSize.getOptional("antennaSize")
 
     /**
      * Barrage noise bandwidth in Mhz.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun barrageNoiseBandwidth(): Optional<Double> = barrageNoiseBandwidth.getOptional("barrageNoiseBandwidth")
+    fun barrageNoiseBandwidth(): Optional<Double> =
+        barrageNoiseBandwidth.getOptional("barrageNoiseBandwidth")
 
     /**
      * Time the row was created in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
     /**
      * Application user who created the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
      * Detailed description of the RF Emitter.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun description(): Optional<String> = description.getOptional("description")
 
     /**
      * Designator of this RF Emitter.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun designator(): Optional<String> = designator.getOptional("designator")
 
     /**
      * Doppler noise value in Mhz.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun dopplerNoise(): Optional<Double> = dopplerNoise.getOptional("dopplerNoise")
 
     /**
      * Digital Form Radio Memory instantaneous bandwidth in Mhz.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun drfmInstantaneousBandwidth(): Optional<Double> = drfmInstantaneousBandwidth.getOptional("drfmInstantaneousBandwidth")
+    fun drfmInstantaneousBandwidth(): Optional<Double> =
+        drfmInstantaneousBandwidth.getOptional("drfmInstantaneousBandwidth")
 
     /**
      * Family of this RF Emitter type.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun family(): Optional<String> = family.getOptional("family")
 
     /**
      * Unique identifier of the organization which manufactures this RF Emitter.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun manufacturerOrgId(): Optional<String> = manufacturerOrgId.getOptional("manufacturerOrgId")
 
     /**
      * Notes on the RF Emitter.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun notes(): Optional<String> = notes.getOptional("notes")
 
     /**
      * Number of bits.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun numBits(): Optional<Int> = numBits.getOptional("numBits")
 
     /**
      * Number of channels.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun numChannels(): Optional<Int> = numChannels.getOptional("numChannels")
 
     /**
-     * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     * Originating system or organization which produced the data, if different from the source. The
+     * origin may be different than the source if the source was a mediating system which forwarded
+     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origin(): Optional<String> = origin.getOptional("origin")
 
     /**
-     * The originating source network on which this record was created, auto-populated by the system.
+     * The originating source network on which this record was created, auto-populated by the
+     * system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
     /**
      * Unique identifier of the location of the production facility for this RF Emitter.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun productionFacilityLocationId(): Optional<String> = productionFacilityLocationId.getOptional("productionFacilityLocationId")
+    fun productionFacilityLocationId(): Optional<String> =
+        productionFacilityLocationId.getOptional("productionFacilityLocationId")
 
     /**
      * Name of the production facility for this RF Emitter.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun productionFacilityName(): Optional<String> = productionFacilityName.getOptional("productionFacilityName")
+    fun productionFacilityName(): Optional<String> =
+        productionFacilityName.getOptional("productionFacilityName")
 
     /**
      * Receiver bandwidth in Mhz.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun receiverBandwidth(): Optional<Double> = receiverBandwidth.getOptional("receiverBandwidth")
 
     /**
      * Receiver sensitivity in dBm.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun receiverSensitivity(): Optional<Double> = receiverSensitivity.getOptional("receiverSensitivity")
+    fun receiverSensitivity(): Optional<Double> =
+        receiverSensitivity.getOptional("receiverSensitivity")
 
     /**
      * Type or name of receiver.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun receiverType(): Optional<String> = receiverType.getOptional("receiverType")
 
     /**
      * Secondary notes on the RF Emitter.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun secondaryNotes(): Optional<String> = secondaryNotes.getOptional("secondaryNotes")
 
     /**
-     * Receiver sensitivity is the lowest power level at which the receiver can detect an RF signal and demodulate data. Sensitivity is purely a receiver specification and is independent of the transmitter. End sensitivity range, in dBm.
+     * Receiver sensitivity is the lowest power level at which the receiver can detect an RF signal
+     * and demodulate data. Sensitivity is purely a receiver specification and is independent of the
+     * transmitter. End sensitivity range, in dBm.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun systemSensitivityEnd(): Optional<Double> = systemSensitivityEnd.getOptional("systemSensitivityEnd")
+    fun systemSensitivityEnd(): Optional<Double> =
+        systemSensitivityEnd.getOptional("systemSensitivityEnd")
 
     /**
-     * Receiver sensitivity is the lowest power level at which the receiver can detect an RF signal and demodulate data. Sensitivity is purely a receiver specification and is independent of the transmitter. Start sensitivity range, in dBm.
+     * Receiver sensitivity is the lowest power level at which the receiver can detect an RF signal
+     * and demodulate data. Sensitivity is purely a receiver specification and is independent of the
+     * transmitter. Start sensitivity range, in dBm.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun systemSensitivityStart(): Optional<Double> = systemSensitivityStart.getOptional("systemSensitivityStart")
+    fun systemSensitivityStart(): Optional<Double> =
+        systemSensitivityStart.getOptional("systemSensitivityStart")
 
     /**
      * Transmit power in Watts.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun transmitPower(): Optional<Double> = transmitPower.getOptional("transmitPower")
 
     /**
      * Transmitter bandwidth in Mhz.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun transmitterBandwidth(): Optional<Double> = transmitterBandwidth.getOptional("transmitterBandwidth")
+    fun transmitterBandwidth(): Optional<Double> =
+        transmitterBandwidth.getOptional("transmitterBandwidth")
 
     /**
      * Transmitter frequency in Mhz.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun transmitterFrequency(): Optional<Double> = transmitterFrequency.getOptional("transmitterFrequency")
+    fun transmitterFrequency(): Optional<Double> =
+        transmitterFrequency.getOptional("transmitterFrequency")
 
     /**
      * Array of URLs containing additional information on this RF Emitter.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun urls(): Optional<List<String>> = urls.getOptional("urls")
 
     /**
      * Returns the raw JSON value of [classificationMarking].
      *
-     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("classificationMarking")
     @ExcludeMissing
@@ -406,41 +513,34 @@ class RfEmitterDetailListResponse private constructor(
      *
      * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("dataMode")
-    @ExcludeMissing
-    fun _dataMode(): JsonField<DataMode> = dataMode
+    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
 
     /**
      * Returns the raw JSON value of [idRfEmitter].
      *
      * Unlike [idRfEmitter], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("idRFEmitter")
-    @ExcludeMissing
-    fun _idRfEmitter(): JsonField<String> = idRfEmitter
+    @JsonProperty("idRFEmitter") @ExcludeMissing fun _idRfEmitter(): JsonField<String> = idRfEmitter
 
     /**
      * Returns the raw JSON value of [source].
      *
      * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("source")
-    @ExcludeMissing
-    fun _source(): JsonField<String> = source
+    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
 
     /**
      * Returns the raw JSON value of [id].
      *
      * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("id")
-    @ExcludeMissing
-    fun _id(): JsonField<String> = id
+    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
 
     /**
      * Returns the raw JSON value of [alternateFacilityName].
      *
-     * Unlike [alternateFacilityName], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [alternateFacilityName], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("alternateFacilityName")
     @ExcludeMissing
@@ -451,9 +551,7 @@ class RfEmitterDetailListResponse private constructor(
      *
      * Unlike [altName], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("altName")
-    @ExcludeMissing
-    fun _altName(): JsonField<String> = altName
+    @JsonProperty("altName") @ExcludeMissing fun _altName(): JsonField<String> = altName
 
     /**
      * Returns the raw JSON value of [antennaDiameter].
@@ -476,7 +574,8 @@ class RfEmitterDetailListResponse private constructor(
     /**
      * Returns the raw JSON value of [barrageNoiseBandwidth].
      *
-     * Unlike [barrageNoiseBandwidth], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [barrageNoiseBandwidth], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("barrageNoiseBandwidth")
     @ExcludeMissing
@@ -496,27 +595,21 @@ class RfEmitterDetailListResponse private constructor(
      *
      * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("createdBy")
-    @ExcludeMissing
-    fun _createdBy(): JsonField<String> = createdBy
+    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
     /**
      * Returns the raw JSON value of [description].
      *
      * Unlike [description], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("description")
-    @ExcludeMissing
-    fun _description(): JsonField<String> = description
+    @JsonProperty("description") @ExcludeMissing fun _description(): JsonField<String> = description
 
     /**
      * Returns the raw JSON value of [designator].
      *
      * Unlike [designator], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("designator")
-    @ExcludeMissing
-    fun _designator(): JsonField<String> = designator
+    @JsonProperty("designator") @ExcludeMissing fun _designator(): JsonField<String> = designator
 
     /**
      * Returns the raw JSON value of [dopplerNoise].
@@ -530,7 +623,8 @@ class RfEmitterDetailListResponse private constructor(
     /**
      * Returns the raw JSON value of [drfmInstantaneousBandwidth].
      *
-     * Unlike [drfmInstantaneousBandwidth], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [drfmInstantaneousBandwidth], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
     @JsonProperty("drfmInstantaneousBandwidth")
     @ExcludeMissing
@@ -541,14 +635,13 @@ class RfEmitterDetailListResponse private constructor(
      *
      * Unlike [family], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("family")
-    @ExcludeMissing
-    fun _family(): JsonField<String> = family
+    @JsonProperty("family") @ExcludeMissing fun _family(): JsonField<String> = family
 
     /**
      * Returns the raw JSON value of [manufacturerOrgId].
      *
-     * Unlike [manufacturerOrgId], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [manufacturerOrgId], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("manufacturerOrgId")
     @ExcludeMissing
@@ -559,50 +652,41 @@ class RfEmitterDetailListResponse private constructor(
      *
      * Unlike [notes], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("notes")
-    @ExcludeMissing
-    fun _notes(): JsonField<String> = notes
+    @JsonProperty("notes") @ExcludeMissing fun _notes(): JsonField<String> = notes
 
     /**
      * Returns the raw JSON value of [numBits].
      *
      * Unlike [numBits], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("numBits")
-    @ExcludeMissing
-    fun _numBits(): JsonField<Int> = numBits
+    @JsonProperty("numBits") @ExcludeMissing fun _numBits(): JsonField<Int> = numBits
 
     /**
      * Returns the raw JSON value of [numChannels].
      *
      * Unlike [numChannels], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("numChannels")
-    @ExcludeMissing
-    fun _numChannels(): JsonField<Int> = numChannels
+    @JsonProperty("numChannels") @ExcludeMissing fun _numChannels(): JsonField<Int> = numChannels
 
     /**
      * Returns the raw JSON value of [origin].
      *
      * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origin")
-    @ExcludeMissing
-    fun _origin(): JsonField<String> = origin
+    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
 
     /**
      * Returns the raw JSON value of [origNetwork].
      *
      * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origNetwork")
-    @ExcludeMissing
-    fun _origNetwork(): JsonField<String> = origNetwork
+    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
 
     /**
      * Returns the raw JSON value of [productionFacilityLocationId].
      *
-     * Unlike [productionFacilityLocationId], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [productionFacilityLocationId], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
     @JsonProperty("productionFacilityLocationId")
     @ExcludeMissing
@@ -611,7 +695,8 @@ class RfEmitterDetailListResponse private constructor(
     /**
      * Returns the raw JSON value of [productionFacilityName].
      *
-     * Unlike [productionFacilityName], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [productionFacilityName], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
     @JsonProperty("productionFacilityName")
     @ExcludeMissing
@@ -620,7 +705,8 @@ class RfEmitterDetailListResponse private constructor(
     /**
      * Returns the raw JSON value of [receiverBandwidth].
      *
-     * Unlike [receiverBandwidth], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [receiverBandwidth], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("receiverBandwidth")
     @ExcludeMissing
@@ -629,7 +715,8 @@ class RfEmitterDetailListResponse private constructor(
     /**
      * Returns the raw JSON value of [receiverSensitivity].
      *
-     * Unlike [receiverSensitivity], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [receiverSensitivity], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("receiverSensitivity")
     @ExcludeMissing
@@ -656,7 +743,8 @@ class RfEmitterDetailListResponse private constructor(
     /**
      * Returns the raw JSON value of [systemSensitivityEnd].
      *
-     * Unlike [systemSensitivityEnd], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [systemSensitivityEnd], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("systemSensitivityEnd")
     @ExcludeMissing
@@ -665,7 +753,8 @@ class RfEmitterDetailListResponse private constructor(
     /**
      * Returns the raw JSON value of [systemSensitivityStart].
      *
-     * Unlike [systemSensitivityStart], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [systemSensitivityStart], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
     @JsonProperty("systemSensitivityStart")
     @ExcludeMissing
@@ -683,7 +772,8 @@ class RfEmitterDetailListResponse private constructor(
     /**
      * Returns the raw JSON value of [transmitterBandwidth].
      *
-     * Unlike [transmitterBandwidth], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [transmitterBandwidth], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("transmitterBandwidth")
     @ExcludeMissing
@@ -692,7 +782,8 @@ class RfEmitterDetailListResponse private constructor(
     /**
      * Returns the raw JSON value of [transmitterFrequency].
      *
-     * Unlike [transmitterFrequency], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [transmitterFrequency], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("transmitterFrequency")
     @ExcludeMissing
@@ -703,18 +794,17 @@ class RfEmitterDetailListResponse private constructor(
      *
      * Unlike [urls], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("urls")
-    @ExcludeMissing
-    fun _urls(): JsonField<List<String>> = urls
+    @JsonProperty("urls") @ExcludeMissing fun _urls(): JsonField<List<String>> = urls
 
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
-      additionalProperties.put(key, value)
+        additionalProperties.put(key, value)
     }
 
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -724,7 +814,6 @@ class RfEmitterDetailListResponse private constructor(
          * Returns a mutable builder for constructing an instance of [RfEmitterDetailListResponse].
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -732,8 +821,7 @@ class RfEmitterDetailListResponse private constructor(
          * .source()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [RfEmitterDetailListResponse]. */
@@ -777,83 +865,84 @@ class RfEmitterDetailListResponse private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(rfEmitterDetailListResponse: RfEmitterDetailListResponse) =
-            apply {
-                classificationMarking = rfEmitterDetailListResponse.classificationMarking
-                dataMode = rfEmitterDetailListResponse.dataMode
-                idRfEmitter = rfEmitterDetailListResponse.idRfEmitter
-                source = rfEmitterDetailListResponse.source
-                id = rfEmitterDetailListResponse.id
-                alternateFacilityName = rfEmitterDetailListResponse.alternateFacilityName
-                altName = rfEmitterDetailListResponse.altName
-                antennaDiameter = rfEmitterDetailListResponse.antennaDiameter
-                antennaSize = rfEmitterDetailListResponse.antennaSize.map { it.toMutableList() }
-                barrageNoiseBandwidth = rfEmitterDetailListResponse.barrageNoiseBandwidth
-                createdAt = rfEmitterDetailListResponse.createdAt
-                createdBy = rfEmitterDetailListResponse.createdBy
-                description = rfEmitterDetailListResponse.description
-                designator = rfEmitterDetailListResponse.designator
-                dopplerNoise = rfEmitterDetailListResponse.dopplerNoise
-                drfmInstantaneousBandwidth = rfEmitterDetailListResponse.drfmInstantaneousBandwidth
-                family = rfEmitterDetailListResponse.family
-                manufacturerOrgId = rfEmitterDetailListResponse.manufacturerOrgId
-                notes = rfEmitterDetailListResponse.notes
-                numBits = rfEmitterDetailListResponse.numBits
-                numChannels = rfEmitterDetailListResponse.numChannels
-                origin = rfEmitterDetailListResponse.origin
-                origNetwork = rfEmitterDetailListResponse.origNetwork
-                productionFacilityLocationId = rfEmitterDetailListResponse.productionFacilityLocationId
-                productionFacilityName = rfEmitterDetailListResponse.productionFacilityName
-                receiverBandwidth = rfEmitterDetailListResponse.receiverBandwidth
-                receiverSensitivity = rfEmitterDetailListResponse.receiverSensitivity
-                receiverType = rfEmitterDetailListResponse.receiverType
-                secondaryNotes = rfEmitterDetailListResponse.secondaryNotes
-                systemSensitivityEnd = rfEmitterDetailListResponse.systemSensitivityEnd
-                systemSensitivityStart = rfEmitterDetailListResponse.systemSensitivityStart
-                transmitPower = rfEmitterDetailListResponse.transmitPower
-                transmitterBandwidth = rfEmitterDetailListResponse.transmitterBandwidth
-                transmitterFrequency = rfEmitterDetailListResponse.transmitterFrequency
-                urls = rfEmitterDetailListResponse.urls.map { it.toMutableList() }
-                additionalProperties = rfEmitterDetailListResponse.additionalProperties.toMutableMap()
-            }
+        internal fun from(rfEmitterDetailListResponse: RfEmitterDetailListResponse) = apply {
+            classificationMarking = rfEmitterDetailListResponse.classificationMarking
+            dataMode = rfEmitterDetailListResponse.dataMode
+            idRfEmitter = rfEmitterDetailListResponse.idRfEmitter
+            source = rfEmitterDetailListResponse.source
+            id = rfEmitterDetailListResponse.id
+            alternateFacilityName = rfEmitterDetailListResponse.alternateFacilityName
+            altName = rfEmitterDetailListResponse.altName
+            antennaDiameter = rfEmitterDetailListResponse.antennaDiameter
+            antennaSize = rfEmitterDetailListResponse.antennaSize.map { it.toMutableList() }
+            barrageNoiseBandwidth = rfEmitterDetailListResponse.barrageNoiseBandwidth
+            createdAt = rfEmitterDetailListResponse.createdAt
+            createdBy = rfEmitterDetailListResponse.createdBy
+            description = rfEmitterDetailListResponse.description
+            designator = rfEmitterDetailListResponse.designator
+            dopplerNoise = rfEmitterDetailListResponse.dopplerNoise
+            drfmInstantaneousBandwidth = rfEmitterDetailListResponse.drfmInstantaneousBandwidth
+            family = rfEmitterDetailListResponse.family
+            manufacturerOrgId = rfEmitterDetailListResponse.manufacturerOrgId
+            notes = rfEmitterDetailListResponse.notes
+            numBits = rfEmitterDetailListResponse.numBits
+            numChannels = rfEmitterDetailListResponse.numChannels
+            origin = rfEmitterDetailListResponse.origin
+            origNetwork = rfEmitterDetailListResponse.origNetwork
+            productionFacilityLocationId = rfEmitterDetailListResponse.productionFacilityLocationId
+            productionFacilityName = rfEmitterDetailListResponse.productionFacilityName
+            receiverBandwidth = rfEmitterDetailListResponse.receiverBandwidth
+            receiverSensitivity = rfEmitterDetailListResponse.receiverSensitivity
+            receiverType = rfEmitterDetailListResponse.receiverType
+            secondaryNotes = rfEmitterDetailListResponse.secondaryNotes
+            systemSensitivityEnd = rfEmitterDetailListResponse.systemSensitivityEnd
+            systemSensitivityStart = rfEmitterDetailListResponse.systemSensitivityStart
+            transmitPower = rfEmitterDetailListResponse.transmitPower
+            transmitterBandwidth = rfEmitterDetailListResponse.transmitterBandwidth
+            transmitterFrequency = rfEmitterDetailListResponse.transmitterFrequency
+            urls = rfEmitterDetailListResponse.urls.map { it.toMutableList() }
+            additionalProperties = rfEmitterDetailListResponse.additionalProperties.toMutableMap()
+        }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-        fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
+        fun classificationMarking(classificationMarking: String) =
+            classificationMarking(JsonField.of(classificationMarking))
 
         /**
          * Sets [Builder.classificationMarking] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun classificationMarking(classificationMarking: JsonField<String>) =
-            apply {
-                this.classificationMarking = classificationMarking
-            }
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            this.classificationMarking = classificationMarking
+        }
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          */
         fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
         /**
          * Sets [Builder.dataMode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun dataMode(dataMode: JsonField<DataMode>) =
-            apply {
-                this.dataMode = dataMode
-            }
+        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
 
         /** Unique identifier of the parent RF Emitter. */
         fun idRfEmitter(idRfEmitter: String) = idRfEmitter(JsonField.of(idRfEmitter))
@@ -861,13 +950,11 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.idRfEmitter] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idRfEmitter] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.idRfEmitter] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun idRfEmitter(idRfEmitter: JsonField<String>) =
-            apply {
-                this.idRfEmitter = idRfEmitter
-            }
+        fun idRfEmitter(idRfEmitter: JsonField<String>) = apply { this.idRfEmitter = idRfEmitter }
 
         /** Source of the data. */
         fun source(source: String) = source(JsonField.of(source))
@@ -875,13 +962,10 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.source] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun source(source: JsonField<String>) =
-            apply {
-                this.source = source
-            }
+        fun source(source: JsonField<String>) = apply { this.source = source }
 
         /** Unique identifier of the record, auto-generated by the system. */
         fun id(id: String) = id(JsonField.of(id))
@@ -889,27 +973,25 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.id] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun id(id: JsonField<String>) =
-            apply {
-                this.id = id
-            }
+        fun id(id: JsonField<String>) = apply { this.id = id }
 
         /** Alternate facility name for this RF Emitter. */
-        fun alternateFacilityName(alternateFacilityName: String) = alternateFacilityName(JsonField.of(alternateFacilityName))
+        fun alternateFacilityName(alternateFacilityName: String) =
+            alternateFacilityName(JsonField.of(alternateFacilityName))
 
         /**
          * Sets [Builder.alternateFacilityName] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.alternateFacilityName] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.alternateFacilityName] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun alternateFacilityName(alternateFacilityName: JsonField<String>) =
-            apply {
-                this.alternateFacilityName = alternateFacilityName
-            }
+        fun alternateFacilityName(alternateFacilityName: JsonField<String>) = apply {
+            this.alternateFacilityName = alternateFacilityName
+        }
 
         /** Optional alternate name or alias for this RF Emitter. */
         fun altName(altName: String) = altName(JsonField.of(altName))
@@ -917,67 +999,69 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.altName] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.altName] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.altName] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun altName(altName: JsonField<String>) =
-            apply {
-                this.altName = altName
-            }
+        fun altName(altName: JsonField<String>) = apply { this.altName = altName }
 
         /** For parabolic/dish antennas, the diameter of the antenna in meters. */
-        fun antennaDiameter(antennaDiameter: Double) = antennaDiameter(JsonField.of(antennaDiameter))
+        fun antennaDiameter(antennaDiameter: Double) =
+            antennaDiameter(JsonField.of(antennaDiameter))
 
         /**
          * Sets [Builder.antennaDiameter] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.antennaDiameter] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.antennaDiameter] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun antennaDiameter(antennaDiameter: JsonField<Double>) =
-            apply {
-                this.antennaDiameter = antennaDiameter
-            }
+        fun antennaDiameter(antennaDiameter: JsonField<Double>) = apply {
+            this.antennaDiameter = antennaDiameter
+        }
 
-        /** Array with 1-2 values specifying the length and width (for rectangular) and just length for dipole antennas in meters. */
+        /**
+         * Array with 1-2 values specifying the length and width (for rectangular) and just length
+         * for dipole antennas in meters.
+         */
         fun antennaSize(antennaSize: List<Double>) = antennaSize(JsonField.of(antennaSize))
 
         /**
          * Sets [Builder.antennaSize] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.antennaSize] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.antennaSize] with a well-typed `List<Double>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun antennaSize(antennaSize: JsonField<List<Double>>) =
-            apply {
-                this.antennaSize = antennaSize.map { it.toMutableList() }
-            }
+        fun antennaSize(antennaSize: JsonField<List<Double>>) = apply {
+            this.antennaSize = antennaSize.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [Double] to [Builder.antennaSize].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addAntennaSize(antennaSize: Double) =
-            apply {
-                this.antennaSize = (this.antennaSize ?: JsonField.of(mutableListOf())).also {
+        fun addAntennaSize(antennaSize: Double) = apply {
+            this.antennaSize =
+                (this.antennaSize ?: JsonField.of(mutableListOf())).also {
                     checkKnown("antennaSize", it).add(antennaSize)
                 }
-            }
+        }
 
         /** Barrage noise bandwidth in Mhz. */
-        fun barrageNoiseBandwidth(barrageNoiseBandwidth: Double) = barrageNoiseBandwidth(JsonField.of(barrageNoiseBandwidth))
+        fun barrageNoiseBandwidth(barrageNoiseBandwidth: Double) =
+            barrageNoiseBandwidth(JsonField.of(barrageNoiseBandwidth))
 
         /**
          * Sets [Builder.barrageNoiseBandwidth] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.barrageNoiseBandwidth] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.barrageNoiseBandwidth] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun barrageNoiseBandwidth(barrageNoiseBandwidth: JsonField<Double>) =
-            apply {
-                this.barrageNoiseBandwidth = barrageNoiseBandwidth
-            }
+        fun barrageNoiseBandwidth(barrageNoiseBandwidth: JsonField<Double>) = apply {
+            this.barrageNoiseBandwidth = barrageNoiseBandwidth
+        }
 
         /** Time the row was created in the database, auto-populated by the system. */
         fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -985,13 +1069,11 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.createdAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun createdAt(createdAt: JsonField<OffsetDateTime>) =
-            apply {
-                this.createdAt = createdAt
-            }
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
 
         /** Application user who created the row in the database, auto-populated by the system. */
         fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
@@ -999,13 +1081,11 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.createdBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun createdBy(createdBy: JsonField<String>) =
-            apply {
-                this.createdBy = createdBy
-            }
+        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
         /** Detailed description of the RF Emitter. */
         fun description(description: String) = description(JsonField.of(description))
@@ -1013,13 +1093,11 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.description] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.description] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.description] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun description(description: JsonField<String>) =
-            apply {
-                this.description = description
-            }
+        fun description(description: JsonField<String>) = apply { this.description = description }
 
         /** Designator of this RF Emitter. */
         fun designator(designator: String) = designator(JsonField.of(designator))
@@ -1027,13 +1105,11 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.designator] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.designator] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.designator] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun designator(designator: JsonField<String>) =
-            apply {
-                this.designator = designator
-            }
+        fun designator(designator: JsonField<String>) = apply { this.designator = designator }
 
         /** Doppler noise value in Mhz. */
         fun dopplerNoise(dopplerNoise: Double) = dopplerNoise(JsonField.of(dopplerNoise))
@@ -1041,27 +1117,28 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.dopplerNoise] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dopplerNoise] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.dopplerNoise] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun dopplerNoise(dopplerNoise: JsonField<Double>) =
-            apply {
-                this.dopplerNoise = dopplerNoise
-            }
+        fun dopplerNoise(dopplerNoise: JsonField<Double>) = apply {
+            this.dopplerNoise = dopplerNoise
+        }
 
         /** Digital Form Radio Memory instantaneous bandwidth in Mhz. */
-        fun drfmInstantaneousBandwidth(drfmInstantaneousBandwidth: Double) = drfmInstantaneousBandwidth(JsonField.of(drfmInstantaneousBandwidth))
+        fun drfmInstantaneousBandwidth(drfmInstantaneousBandwidth: Double) =
+            drfmInstantaneousBandwidth(JsonField.of(drfmInstantaneousBandwidth))
 
         /**
          * Sets [Builder.drfmInstantaneousBandwidth] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.drfmInstantaneousBandwidth] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.drfmInstantaneousBandwidth] with a well-typed [Double]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun drfmInstantaneousBandwidth(drfmInstantaneousBandwidth: JsonField<Double>) =
-            apply {
-                this.drfmInstantaneousBandwidth = drfmInstantaneousBandwidth
-            }
+        fun drfmInstantaneousBandwidth(drfmInstantaneousBandwidth: JsonField<Double>) = apply {
+            this.drfmInstantaneousBandwidth = drfmInstantaneousBandwidth
+        }
 
         /** Family of this RF Emitter type. */
         fun family(family: String) = family(JsonField.of(family))
@@ -1069,27 +1146,25 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.family] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.family] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.family] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun family(family: JsonField<String>) =
-            apply {
-                this.family = family
-            }
+        fun family(family: JsonField<String>) = apply { this.family = family }
 
         /** Unique identifier of the organization which manufactures this RF Emitter. */
-        fun manufacturerOrgId(manufacturerOrgId: String) = manufacturerOrgId(JsonField.of(manufacturerOrgId))
+        fun manufacturerOrgId(manufacturerOrgId: String) =
+            manufacturerOrgId(JsonField.of(manufacturerOrgId))
 
         /**
          * Sets [Builder.manufacturerOrgId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.manufacturerOrgId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.manufacturerOrgId] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun manufacturerOrgId(manufacturerOrgId: JsonField<String>) =
-            apply {
-                this.manufacturerOrgId = manufacturerOrgId
-            }
+        fun manufacturerOrgId(manufacturerOrgId: JsonField<String>) = apply {
+            this.manufacturerOrgId = manufacturerOrgId
+        }
 
         /** Notes on the RF Emitter. */
         fun notes(notes: String) = notes(JsonField.of(notes))
@@ -1097,13 +1172,10 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.notes] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.notes] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.notes] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun notes(notes: JsonField<String>) =
-            apply {
-                this.notes = notes
-            }
+        fun notes(notes: JsonField<String>) = apply { this.notes = notes }
 
         /** Number of bits. */
         fun numBits(numBits: Int) = numBits(JsonField.of(numBits))
@@ -1111,13 +1183,10 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.numBits] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.numBits] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.numBits] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun numBits(numBits: JsonField<Int>) =
-            apply {
-                this.numBits = numBits
-            }
+        fun numBits(numBits: JsonField<Int>) = apply { this.numBits = numBits }
 
         /** Number of channels. */
         fun numChannels(numChannels: Int) = numChannels(JsonField.of(numChannels))
@@ -1125,97 +1194,101 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.numChannels] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.numChannels] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.numChannels] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun numChannels(numChannels: JsonField<Int>) =
-            apply {
-                this.numChannels = numChannels
-            }
+        fun numChannels(numChannels: JsonField<Int>) = apply { this.numChannels = numChannels }
 
-        /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         */
         fun origin(origin: String) = origin(JsonField.of(origin))
 
         /**
          * Sets [Builder.origin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun origin(origin: JsonField<String>) =
-            apply {
-                this.origin = origin
-            }
+        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
 
-        /** The originating source network on which this record was created, auto-populated by the system. */
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         */
         fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
         /**
          * Sets [Builder.origNetwork] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun origNetwork(origNetwork: JsonField<String>) =
-            apply {
-                this.origNetwork = origNetwork
-            }
+        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
 
         /** Unique identifier of the location of the production facility for this RF Emitter. */
-        fun productionFacilityLocationId(productionFacilityLocationId: String) = productionFacilityLocationId(JsonField.of(productionFacilityLocationId))
+        fun productionFacilityLocationId(productionFacilityLocationId: String) =
+            productionFacilityLocationId(JsonField.of(productionFacilityLocationId))
 
         /**
          * Sets [Builder.productionFacilityLocationId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.productionFacilityLocationId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.productionFacilityLocationId] with a well-typed [String]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun productionFacilityLocationId(productionFacilityLocationId: JsonField<String>) =
-            apply {
-                this.productionFacilityLocationId = productionFacilityLocationId
-            }
+        fun productionFacilityLocationId(productionFacilityLocationId: JsonField<String>) = apply {
+            this.productionFacilityLocationId = productionFacilityLocationId
+        }
 
         /** Name of the production facility for this RF Emitter. */
-        fun productionFacilityName(productionFacilityName: String) = productionFacilityName(JsonField.of(productionFacilityName))
+        fun productionFacilityName(productionFacilityName: String) =
+            productionFacilityName(JsonField.of(productionFacilityName))
 
         /**
          * Sets [Builder.productionFacilityName] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.productionFacilityName] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.productionFacilityName] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun productionFacilityName(productionFacilityName: JsonField<String>) =
-            apply {
-                this.productionFacilityName = productionFacilityName
-            }
+        fun productionFacilityName(productionFacilityName: JsonField<String>) = apply {
+            this.productionFacilityName = productionFacilityName
+        }
 
         /** Receiver bandwidth in Mhz. */
-        fun receiverBandwidth(receiverBandwidth: Double) = receiverBandwidth(JsonField.of(receiverBandwidth))
+        fun receiverBandwidth(receiverBandwidth: Double) =
+            receiverBandwidth(JsonField.of(receiverBandwidth))
 
         /**
          * Sets [Builder.receiverBandwidth] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.receiverBandwidth] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.receiverBandwidth] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun receiverBandwidth(receiverBandwidth: JsonField<Double>) =
-            apply {
-                this.receiverBandwidth = receiverBandwidth
-            }
+        fun receiverBandwidth(receiverBandwidth: JsonField<Double>) = apply {
+            this.receiverBandwidth = receiverBandwidth
+        }
 
         /** Receiver sensitivity in dBm. */
-        fun receiverSensitivity(receiverSensitivity: Double) = receiverSensitivity(JsonField.of(receiverSensitivity))
+        fun receiverSensitivity(receiverSensitivity: Double) =
+            receiverSensitivity(JsonField.of(receiverSensitivity))
 
         /**
          * Sets [Builder.receiverSensitivity] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.receiverSensitivity] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.receiverSensitivity] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun receiverSensitivity(receiverSensitivity: JsonField<Double>) =
-            apply {
-                this.receiverSensitivity = receiverSensitivity
-            }
+        fun receiverSensitivity(receiverSensitivity: JsonField<Double>) = apply {
+            this.receiverSensitivity = receiverSensitivity
+        }
 
         /** Type or name of receiver. */
         fun receiverType(receiverType: String) = receiverType(JsonField.of(receiverType))
@@ -1223,13 +1296,13 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.receiverType] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.receiverType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.receiverType] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun receiverType(receiverType: JsonField<String>) =
-            apply {
-                this.receiverType = receiverType
-            }
+        fun receiverType(receiverType: JsonField<String>) = apply {
+            this.receiverType = receiverType
+        }
 
         /** Secondary notes on the RF Emitter. */
         fun secondaryNotes(secondaryNotes: String) = secondaryNotes(JsonField.of(secondaryNotes))
@@ -1237,41 +1310,51 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.secondaryNotes] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.secondaryNotes] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.secondaryNotes] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun secondaryNotes(secondaryNotes: JsonField<String>) =
-            apply {
-                this.secondaryNotes = secondaryNotes
-            }
+        fun secondaryNotes(secondaryNotes: JsonField<String>) = apply {
+            this.secondaryNotes = secondaryNotes
+        }
 
-        /** Receiver sensitivity is the lowest power level at which the receiver can detect an RF signal and demodulate data. Sensitivity is purely a receiver specification and is independent of the transmitter. End sensitivity range, in dBm. */
-        fun systemSensitivityEnd(systemSensitivityEnd: Double) = systemSensitivityEnd(JsonField.of(systemSensitivityEnd))
+        /**
+         * Receiver sensitivity is the lowest power level at which the receiver can detect an RF
+         * signal and demodulate data. Sensitivity is purely a receiver specification and is
+         * independent of the transmitter. End sensitivity range, in dBm.
+         */
+        fun systemSensitivityEnd(systemSensitivityEnd: Double) =
+            systemSensitivityEnd(JsonField.of(systemSensitivityEnd))
 
         /**
          * Sets [Builder.systemSensitivityEnd] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.systemSensitivityEnd] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.systemSensitivityEnd] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun systemSensitivityEnd(systemSensitivityEnd: JsonField<Double>) =
-            apply {
-                this.systemSensitivityEnd = systemSensitivityEnd
-            }
+        fun systemSensitivityEnd(systemSensitivityEnd: JsonField<Double>) = apply {
+            this.systemSensitivityEnd = systemSensitivityEnd
+        }
 
-        /** Receiver sensitivity is the lowest power level at which the receiver can detect an RF signal and demodulate data. Sensitivity is purely a receiver specification and is independent of the transmitter. Start sensitivity range, in dBm. */
-        fun systemSensitivityStart(systemSensitivityStart: Double) = systemSensitivityStart(JsonField.of(systemSensitivityStart))
+        /**
+         * Receiver sensitivity is the lowest power level at which the receiver can detect an RF
+         * signal and demodulate data. Sensitivity is purely a receiver specification and is
+         * independent of the transmitter. Start sensitivity range, in dBm.
+         */
+        fun systemSensitivityStart(systemSensitivityStart: Double) =
+            systemSensitivityStart(JsonField.of(systemSensitivityStart))
 
         /**
          * Sets [Builder.systemSensitivityStart] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.systemSensitivityStart] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.systemSensitivityStart] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun systemSensitivityStart(systemSensitivityStart: JsonField<Double>) =
-            apply {
-                this.systemSensitivityStart = systemSensitivityStart
-            }
+        fun systemSensitivityStart(systemSensitivityStart: JsonField<Double>) = apply {
+            this.systemSensitivityStart = systemSensitivityStart
+        }
 
         /** Transmit power in Watts. */
         fun transmitPower(transmitPower: Double) = transmitPower(JsonField.of(transmitPower))
@@ -1279,41 +1362,43 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.transmitPower] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.transmitPower] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.transmitPower] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun transmitPower(transmitPower: JsonField<Double>) =
-            apply {
-                this.transmitPower = transmitPower
-            }
+        fun transmitPower(transmitPower: JsonField<Double>) = apply {
+            this.transmitPower = transmitPower
+        }
 
         /** Transmitter bandwidth in Mhz. */
-        fun transmitterBandwidth(transmitterBandwidth: Double) = transmitterBandwidth(JsonField.of(transmitterBandwidth))
+        fun transmitterBandwidth(transmitterBandwidth: Double) =
+            transmitterBandwidth(JsonField.of(transmitterBandwidth))
 
         /**
          * Sets [Builder.transmitterBandwidth] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.transmitterBandwidth] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.transmitterBandwidth] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun transmitterBandwidth(transmitterBandwidth: JsonField<Double>) =
-            apply {
-                this.transmitterBandwidth = transmitterBandwidth
-            }
+        fun transmitterBandwidth(transmitterBandwidth: JsonField<Double>) = apply {
+            this.transmitterBandwidth = transmitterBandwidth
+        }
 
         /** Transmitter frequency in Mhz. */
-        fun transmitterFrequency(transmitterFrequency: Double) = transmitterFrequency(JsonField.of(transmitterFrequency))
+        fun transmitterFrequency(transmitterFrequency: Double) =
+            transmitterFrequency(JsonField.of(transmitterFrequency))
 
         /**
          * Sets [Builder.transmitterFrequency] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.transmitterFrequency] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.transmitterFrequency] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun transmitterFrequency(transmitterFrequency: JsonField<Double>) =
-            apply {
-                this.transmitterFrequency = transmitterFrequency
-            }
+        fun transmitterFrequency(transmitterFrequency: JsonField<Double>) = apply {
+            this.transmitterFrequency = transmitterFrequency
+        }
 
         /** Array of URLs containing additional information on this RF Emitter. */
         fun urls(urls: List<String>) = urls(JsonField.of(urls))
@@ -1321,51 +1406,41 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Sets [Builder.urls] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.urls] with a well-typed `List<String>` value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.urls] with a well-typed `List<String>` value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun urls(urls: JsonField<List<String>>) =
-            apply {
-                this.urls = urls.map { it.toMutableList() }
-            }
+        fun urls(urls: JsonField<List<String>>) = apply {
+            this.urls = urls.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [String] to [urls].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addUrl(url: String) =
-            apply {
-                urls = (urls ?: JsonField.of(mutableListOf())).also {
-                    checkKnown("urls", it).add(url)
-                }
-            }
+        fun addUrl(url: String) = apply {
+            urls = (urls ?: JsonField.of(mutableListOf())).also { checkKnown("urls", it).add(url) }
+        }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) =
-            apply {
-                additionalProperties.put(key, value)
-            }
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
 
-        fun removeAdditionalProperty(key: String) =
-            apply {
-                additionalProperties.remove(key)
-            }
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) =
-            apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
 
         /**
          * Returns an immutable instance of [RfEmitterDetailListResponse].
@@ -1373,7 +1448,6 @@ class RfEmitterDetailListResponse private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -1385,98 +1459,89 @@ class RfEmitterDetailListResponse private constructor(
          */
         fun build(): RfEmitterDetailListResponse =
             RfEmitterDetailListResponse(
-              checkRequired(
-                "classificationMarking", classificationMarking
-              ),
-              checkRequired(
-                "dataMode", dataMode
-              ),
-              checkRequired(
-                "idRfEmitter", idRfEmitter
-              ),
-              checkRequired(
-                "source", source
-              ),
-              id,
-              alternateFacilityName,
-              altName,
-              antennaDiameter,
-              (antennaSize ?: JsonMissing.of()).map { it.toImmutable() },
-              barrageNoiseBandwidth,
-              createdAt,
-              createdBy,
-              description,
-              designator,
-              dopplerNoise,
-              drfmInstantaneousBandwidth,
-              family,
-              manufacturerOrgId,
-              notes,
-              numBits,
-              numChannels,
-              origin,
-              origNetwork,
-              productionFacilityLocationId,
-              productionFacilityName,
-              receiverBandwidth,
-              receiverSensitivity,
-              receiverType,
-              secondaryNotes,
-              systemSensitivityEnd,
-              systemSensitivityStart,
-              transmitPower,
-              transmitterBandwidth,
-              transmitterFrequency,
-              (urls ?: JsonMissing.of()).map { it.toImmutable() },
-              additionalProperties.toMutableMap(),
+                checkRequired("classificationMarking", classificationMarking),
+                checkRequired("dataMode", dataMode),
+                checkRequired("idRfEmitter", idRfEmitter),
+                checkRequired("source", source),
+                id,
+                alternateFacilityName,
+                altName,
+                antennaDiameter,
+                (antennaSize ?: JsonMissing.of()).map { it.toImmutable() },
+                barrageNoiseBandwidth,
+                createdAt,
+                createdBy,
+                description,
+                designator,
+                dopplerNoise,
+                drfmInstantaneousBandwidth,
+                family,
+                manufacturerOrgId,
+                notes,
+                numBits,
+                numChannels,
+                origin,
+                origNetwork,
+                productionFacilityLocationId,
+                productionFacilityName,
+                receiverBandwidth,
+                receiverSensitivity,
+                receiverType,
+                secondaryNotes,
+                systemSensitivityEnd,
+                systemSensitivityStart,
+                transmitPower,
+                transmitterBandwidth,
+                transmitterFrequency,
+                (urls ?: JsonMissing.of()).map { it.toImmutable() },
+                additionalProperties.toMutableMap(),
             )
     }
 
     private var validated: Boolean = false
 
-    fun validate(): RfEmitterDetailListResponse =
-        apply {
-            if (validated) {
-              return@apply
-            }
-
-            classificationMarking()
-            dataMode().validate()
-            idRfEmitter()
-            source()
-            id()
-            alternateFacilityName()
-            altName()
-            antennaDiameter()
-            antennaSize()
-            barrageNoiseBandwidth()
-            createdAt()
-            createdBy()
-            description()
-            designator()
-            dopplerNoise()
-            drfmInstantaneousBandwidth()
-            family()
-            manufacturerOrgId()
-            notes()
-            numBits()
-            numChannels()
-            origin()
-            origNetwork()
-            productionFacilityLocationId()
-            productionFacilityName()
-            receiverBandwidth()
-            receiverSensitivity()
-            receiverType()
-            secondaryNotes()
-            systemSensitivityEnd()
-            systemSensitivityStart()
-            transmitPower()
-            transmitterBandwidth()
-            transmitterFrequency()
-            urls()
-            validated = true
+    fun validate(): RfEmitterDetailListResponse = apply {
+        if (validated) {
+            return@apply
         }
+
+        classificationMarking()
+        dataMode().validate()
+        idRfEmitter()
+        source()
+        id()
+        alternateFacilityName()
+        altName()
+        antennaDiameter()
+        antennaSize()
+        barrageNoiseBandwidth()
+        createdAt()
+        createdBy()
+        description()
+        designator()
+        dopplerNoise()
+        drfmInstantaneousBandwidth()
+        family()
+        manufacturerOrgId()
+        notes()
+        numBits()
+        numChannels()
+        origin()
+        origNetwork()
+        productionFacilityLocationId()
+        productionFacilityName()
+        receiverBandwidth()
+        receiverSensitivity()
+        receiverType()
+        secondaryNotes()
+        systemSensitivityEnd()
+        systemSensitivityStart()
+        transmitPower()
+        transmitterBandwidth()
+        transmitterFrequency()
+        urls()
+        validated = true
+    }
 
     fun isValid(): Boolean =
         try {
@@ -1492,33 +1557,68 @@ class RfEmitterDetailListResponse private constructor(
      * Used for best match union deserialization.
      */
     @JvmSynthetic
-    internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (idRfEmitter.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (if (alternateFacilityName.asKnown().isPresent) 1 else 0) + (if (altName.asKnown().isPresent) 1 else 0) + (if (antennaDiameter.asKnown().isPresent) 1 else 0) + (antennaSize.asKnown().getOrNull()?.size ?: 0) + (if (barrageNoiseBandwidth.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (description.asKnown().isPresent) 1 else 0) + (if (designator.asKnown().isPresent) 1 else 0) + (if (dopplerNoise.asKnown().isPresent) 1 else 0) + (if (drfmInstantaneousBandwidth.asKnown().isPresent) 1 else 0) + (if (family.asKnown().isPresent) 1 else 0) + (if (manufacturerOrgId.asKnown().isPresent) 1 else 0) + (if (notes.asKnown().isPresent) 1 else 0) + (if (numBits.asKnown().isPresent) 1 else 0) + (if (numChannels.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (productionFacilityLocationId.asKnown().isPresent) 1 else 0) + (if (productionFacilityName.asKnown().isPresent) 1 else 0) + (if (receiverBandwidth.asKnown().isPresent) 1 else 0) + (if (receiverSensitivity.asKnown().isPresent) 1 else 0) + (if (receiverType.asKnown().isPresent) 1 else 0) + (if (secondaryNotes.asKnown().isPresent) 1 else 0) + (if (systemSensitivityEnd.asKnown().isPresent) 1 else 0) + (if (systemSensitivityStart.asKnown().isPresent) 1 else 0) + (if (transmitPower.asKnown().isPresent) 1 else 0) + (if (transmitterBandwidth.asKnown().isPresent) 1 else 0) + (if (transmitterFrequency.asKnown().isPresent) 1 else 0) + (urls.asKnown().getOrNull()?.size ?: 0)
+    internal fun validity(): Int =
+        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (idRfEmitter.asKnown().isPresent) 1 else 0) +
+            (if (source.asKnown().isPresent) 1 else 0) +
+            (if (id.asKnown().isPresent) 1 else 0) +
+            (if (alternateFacilityName.asKnown().isPresent) 1 else 0) +
+            (if (altName.asKnown().isPresent) 1 else 0) +
+            (if (antennaDiameter.asKnown().isPresent) 1 else 0) +
+            (antennaSize.asKnown().getOrNull()?.size ?: 0) +
+            (if (barrageNoiseBandwidth.asKnown().isPresent) 1 else 0) +
+            (if (createdAt.asKnown().isPresent) 1 else 0) +
+            (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (description.asKnown().isPresent) 1 else 0) +
+            (if (designator.asKnown().isPresent) 1 else 0) +
+            (if (dopplerNoise.asKnown().isPresent) 1 else 0) +
+            (if (drfmInstantaneousBandwidth.asKnown().isPresent) 1 else 0) +
+            (if (family.asKnown().isPresent) 1 else 0) +
+            (if (manufacturerOrgId.asKnown().isPresent) 1 else 0) +
+            (if (notes.asKnown().isPresent) 1 else 0) +
+            (if (numBits.asKnown().isPresent) 1 else 0) +
+            (if (numChannels.asKnown().isPresent) 1 else 0) +
+            (if (origin.asKnown().isPresent) 1 else 0) +
+            (if (origNetwork.asKnown().isPresent) 1 else 0) +
+            (if (productionFacilityLocationId.asKnown().isPresent) 1 else 0) +
+            (if (productionFacilityName.asKnown().isPresent) 1 else 0) +
+            (if (receiverBandwidth.asKnown().isPresent) 1 else 0) +
+            (if (receiverSensitivity.asKnown().isPresent) 1 else 0) +
+            (if (receiverType.asKnown().isPresent) 1 else 0) +
+            (if (secondaryNotes.asKnown().isPresent) 1 else 0) +
+            (if (systemSensitivityEnd.asKnown().isPresent) 1 else 0) +
+            (if (systemSensitivityStart.asKnown().isPresent) 1 else 0) +
+            (if (transmitPower.asKnown().isPresent) 1 else 0) +
+            (if (transmitterBandwidth.asKnown().isPresent) 1 else 0) +
+            (if (transmitterFrequency.asKnown().isPresent) 1 else 0) +
+            (urls.asKnown().getOrNull()?.size ?: 0)
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      */
-    class DataMode @JsonCreator private constructor(
-        private val value: JsonField<String>,
-
-    ) : Enum {
+    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't match any known
-         * member, and you want to know that value. For example, if the SDK is on an older version than the
-         * API, then the API may respond with new members that the SDK is unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue
-        fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -1545,11 +1645,9 @@ class RfEmitterDetailListResponse private constructor(
          * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [DataMode] can contain an unknown value in a couple of cases:
-         *
-         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-         *   an older version than the API, then the API may respond with new members that the SDK is unaware
-         *   of.
-         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -1562,11 +1660,11 @@ class RfEmitterDetailListResponse private constructor(
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-         * class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want to throw
-         * for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -1580,10 +1678,11 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-         * for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
          */
         fun known(): Known =
             when (this) {
@@ -1597,25 +1696,27 @@ class RfEmitterDetailListResponse private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging and generally
-         * doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-         * primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
          */
-        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
 
         private var validated: Boolean = false
 
-        fun validate(): DataMode =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                known()
-                validated = true
+        fun validate(): DataMode = apply {
+            if (validated) {
+                return@apply
             }
+
+            known()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -1626,19 +1727,19 @@ class RfEmitterDetailListResponse private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic
-        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1647,18 +1748,92 @@ class RfEmitterDetailListResponse private constructor(
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is RfEmitterDetailListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idRfEmitter == other.idRfEmitter && source == other.source && id == other.id && alternateFacilityName == other.alternateFacilityName && altName == other.altName && antennaDiameter == other.antennaDiameter && antennaSize == other.antennaSize && barrageNoiseBandwidth == other.barrageNoiseBandwidth && createdAt == other.createdAt && createdBy == other.createdBy && description == other.description && designator == other.designator && dopplerNoise == other.dopplerNoise && drfmInstantaneousBandwidth == other.drfmInstantaneousBandwidth && family == other.family && manufacturerOrgId == other.manufacturerOrgId && notes == other.notes && numBits == other.numBits && numChannels == other.numChannels && origin == other.origin && origNetwork == other.origNetwork && productionFacilityLocationId == other.productionFacilityLocationId && productionFacilityName == other.productionFacilityName && receiverBandwidth == other.receiverBandwidth && receiverSensitivity == other.receiverSensitivity && receiverType == other.receiverType && secondaryNotes == other.secondaryNotes && systemSensitivityEnd == other.systemSensitivityEnd && systemSensitivityStart == other.systemSensitivityStart && transmitPower == other.transmitPower && transmitterBandwidth == other.transmitterBandwidth && transmitterFrequency == other.transmitterFrequency && urls == other.urls && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is RfEmitterDetailListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idRfEmitter == other.idRfEmitter &&
+            source == other.source &&
+            id == other.id &&
+            alternateFacilityName == other.alternateFacilityName &&
+            altName == other.altName &&
+            antennaDiameter == other.antennaDiameter &&
+            antennaSize == other.antennaSize &&
+            barrageNoiseBandwidth == other.barrageNoiseBandwidth &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            description == other.description &&
+            designator == other.designator &&
+            dopplerNoise == other.dopplerNoise &&
+            drfmInstantaneousBandwidth == other.drfmInstantaneousBandwidth &&
+            family == other.family &&
+            manufacturerOrgId == other.manufacturerOrgId &&
+            notes == other.notes &&
+            numBits == other.numBits &&
+            numChannels == other.numChannels &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            productionFacilityLocationId == other.productionFacilityLocationId &&
+            productionFacilityName == other.productionFacilityName &&
+            receiverBandwidth == other.receiverBandwidth &&
+            receiverSensitivity == other.receiverSensitivity &&
+            receiverType == other.receiverType &&
+            secondaryNotes == other.secondaryNotes &&
+            systemSensitivityEnd == other.systemSensitivityEnd &&
+            systemSensitivityStart == other.systemSensitivityStart &&
+            transmitPower == other.transmitPower &&
+            transmitterBandwidth == other.transmitterBandwidth &&
+            transmitterFrequency == other.transmitterFrequency &&
+            urls == other.urls &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idRfEmitter, source, id, alternateFacilityName, altName, antennaDiameter, antennaSize, barrageNoiseBandwidth, createdAt, createdBy, description, designator, dopplerNoise, drfmInstantaneousBandwidth, family, manufacturerOrgId, notes, numBits, numChannels, origin, origNetwork, productionFacilityLocationId, productionFacilityName, receiverBandwidth, receiverSensitivity, receiverType, secondaryNotes, systemSensitivityEnd, systemSensitivityStart, transmitPower, transmitterBandwidth, transmitterFrequency, urls, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idRfEmitter,
+            source,
+            id,
+            alternateFacilityName,
+            altName,
+            antennaDiameter,
+            antennaSize,
+            barrageNoiseBandwidth,
+            createdAt,
+            createdBy,
+            description,
+            designator,
+            dopplerNoise,
+            drfmInstantaneousBandwidth,
+            family,
+            manufacturerOrgId,
+            notes,
+            numBits,
+            numChannels,
+            origin,
+            origNetwork,
+            productionFacilityLocationId,
+            productionFacilityName,
+            receiverBandwidth,
+            receiverSensitivity,
+            receiverType,
+            secondaryNotes,
+            systemSensitivityEnd,
+            systemSensitivityStart,
+            transmitPower,
+            transmitterBandwidth,
+            transmitterFrequency,
+            urls,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() = "RfEmitterDetailListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, idRfEmitter=$idRfEmitter, source=$source, id=$id, alternateFacilityName=$alternateFacilityName, altName=$altName, antennaDiameter=$antennaDiameter, antennaSize=$antennaSize, barrageNoiseBandwidth=$barrageNoiseBandwidth, createdAt=$createdAt, createdBy=$createdBy, description=$description, designator=$designator, dopplerNoise=$dopplerNoise, drfmInstantaneousBandwidth=$drfmInstantaneousBandwidth, family=$family, manufacturerOrgId=$manufacturerOrgId, notes=$notes, numBits=$numBits, numChannels=$numChannels, origin=$origin, origNetwork=$origNetwork, productionFacilityLocationId=$productionFacilityLocationId, productionFacilityName=$productionFacilityName, receiverBandwidth=$receiverBandwidth, receiverSensitivity=$receiverSensitivity, receiverType=$receiverType, secondaryNotes=$secondaryNotes, systemSensitivityEnd=$systemSensitivityEnd, systemSensitivityStart=$systemSensitivityStart, transmitPower=$transmitPower, transmitterBandwidth=$transmitterBandwidth, transmitterFrequency=$transmitterFrequency, urls=$urls, additionalProperties=$additionalProperties}"
+    override fun toString() =
+        "RfEmitterDetailListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, idRfEmitter=$idRfEmitter, source=$source, id=$id, alternateFacilityName=$alternateFacilityName, altName=$altName, antennaDiameter=$antennaDiameter, antennaSize=$antennaSize, barrageNoiseBandwidth=$barrageNoiseBandwidth, createdAt=$createdAt, createdBy=$createdBy, description=$description, designator=$designator, dopplerNoise=$dopplerNoise, drfmInstantaneousBandwidth=$drfmInstantaneousBandwidth, family=$family, manufacturerOrgId=$manufacturerOrgId, notes=$notes, numBits=$numBits, numChannels=$numChannels, origin=$origin, origNetwork=$origNetwork, productionFacilityLocationId=$productionFacilityLocationId, productionFacilityName=$productionFacilityName, receiverBandwidth=$receiverBandwidth, receiverSensitivity=$receiverSensitivity, receiverType=$receiverType, secondaryNotes=$secondaryNotes, systemSensitivityEnd=$systemSensitivityEnd, systemSensitivityStart=$systemSensitivityStart, transmitPower=$transmitPower, transmitterBandwidth=$transmitterBandwidth, transmitterFrequency=$transmitterFrequency, urls=$urls, additionalProperties=$additionalProperties}"
 }

@@ -17,93 +17,109 @@ import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.EvacFull
 import com.unifieddatalibrary.api.models.evac.history.HistoryCountParams
-import com.unifieddatalibrary.api.models.evac.history.HistoryListPage
 import com.unifieddatalibrary.api.models.evac.history.HistoryListPageAsync
 import com.unifieddatalibrary.api.models.evac.history.HistoryListParams
-import com.unifieddatalibrary.api.services.async.evac.HistoryServiceAsync
-import com.unifieddatalibrary.api.services.async.evac.HistoryServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
-class HistoryServiceAsyncImpl internal constructor(
-    private val clientOptions: ClientOptions,
+class HistoryServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
+    HistoryServiceAsync {
 
-) : HistoryServiceAsync {
-
-    private val withRawResponse: HistoryServiceAsync.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
+    private val withRawResponse: HistoryServiceAsync.WithRawResponse by lazy {
+        WithRawResponseImpl(clientOptions)
+    }
 
     override fun withRawResponse(): HistoryServiceAsync.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryServiceAsync = HistoryServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryServiceAsync =
+        HistoryServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-    override fun list(params: HistoryListParams, requestOptions: RequestOptions): CompletableFuture<HistoryListPageAsync> =
+    override fun list(
+        params: HistoryListParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<HistoryListPageAsync> =
         // get /udl/evac/history
         withRawResponse().list(params, requestOptions).thenApply { it.parse() }
 
-    override fun count(params: HistoryCountParams, requestOptions: RequestOptions): CompletableFuture<String> =
+    override fun count(
+        params: HistoryCountParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<String> =
         // get /udl/evac/history/count
         withRawResponse().count(params, requestOptions).thenApply { it.parse() }
 
-    class WithRawResponseImpl internal constructor(
-        private val clientOptions: ClientOptions,
+    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
+        HistoryServiceAsync.WithRawResponse {
 
-    ) : HistoryServiceAsync.WithRawResponse {
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+        override fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): HistoryServiceAsync.WithRawResponse =
+            HistoryServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier::accept).build()
+            )
 
-        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryServiceAsync.WithRawResponse = HistoryServiceAsyncImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+        private val listHandler: Handler<List<EvacFull>> =
+            jsonHandler<List<EvacFull>>(clientOptions.jsonMapper)
 
-        private val listHandler: Handler<List<EvacFull>> = jsonHandler<List<EvacFull>>(clientOptions.jsonMapper)
-
-        override fun list(params: HistoryListParams, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "evac", "history")
-            .build()
-            .prepareAsync(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
-            it, requestOptions
-          ) }.thenApply { response -> errorHandler.handle(response).parseable {
-              response.use {
-                  listHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.forEach { it.validate() }
-                  }
-              }
-              .let {
-                  HistoryListPageAsync.builder()
-                      .service(HistoryServiceAsyncImpl(clientOptions))
-                      .streamHandlerExecutor(clientOptions.streamHandlerExecutor)
-                      .params(params)
-                      .items(it)
-                      .build()
-              }
-          } }
+        override fun list(
+            params: HistoryListParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "evac", "history")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response
+                            .use { listHandler.handle(it) }
+                            .also {
+                                if (requestOptions.responseValidation!!) {
+                                    it.forEach { it.validate() }
+                                }
+                            }
+                            .let {
+                                HistoryListPageAsync.builder()
+                                    .service(HistoryServiceAsyncImpl(clientOptions))
+                                    .streamHandlerExecutor(clientOptions.streamHandlerExecutor)
+                                    .params(params)
+                                    .items(it)
+                                    .build()
+                            }
+                    }
+                }
         }
 
         private val countHandler: Handler<String> = stringHandler()
 
-        override fun count(params: HistoryCountParams, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<String>> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "evac", "history", "count")
-            .build()
-            .prepareAsync(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
-            it, requestOptions
-          ) }.thenApply { response -> errorHandler.handle(response).parseable {
-              response.use {
-                  countHandler.handle(it)
-              }
-          } }
+        override fun count(
+            params: HistoryCountParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<String>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "evac", "history", "count")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response.use { countHandler.handle(it) }
+                    }
+                }
         }
     }
 }

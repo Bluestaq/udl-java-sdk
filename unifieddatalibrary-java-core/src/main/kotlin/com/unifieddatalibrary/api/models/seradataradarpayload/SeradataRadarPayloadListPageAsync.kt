@@ -5,39 +5,33 @@ package com.unifieddatalibrary.api.models.seradataradarpayload
 import com.unifieddatalibrary.api.core.AutoPagerAsync
 import com.unifieddatalibrary.api.core.PageAsync
 import com.unifieddatalibrary.api.core.checkRequired
-import com.unifieddatalibrary.api.models.seradataradarpayload.SeradataRadarPayloadListParams
-import com.unifieddatalibrary.api.models.seradataradarpayload.SeradataRadarPayloadListResponse
 import com.unifieddatalibrary.api.services.async.SeradataRadarPayloadServiceAsync
 import java.util.Objects
-import java.util.Optional
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see SeradataRadarPayloadServiceAsync.list */
-class SeradataRadarPayloadListPageAsync private constructor(
+class SeradataRadarPayloadListPageAsync
+private constructor(
     private val service: SeradataRadarPayloadServiceAsync,
     private val streamHandlerExecutor: Executor,
     private val params: SeradataRadarPayloadListParams,
     private val items: List<SeradataRadarPayloadListResponse>,
-
 ) : PageAsync<SeradataRadarPayloadListResponse> {
 
     override fun hasNextPage(): Boolean = items().isNotEmpty()
 
     fun nextPageParams(): SeradataRadarPayloadListParams {
-      val offset = params.firstResult().getOrDefault(0)
-      return params.toBuilder()
-          .firstResult(offset + items().size)
-          .build()
+        val offset = params.firstResult().getOrDefault(0)
+        return params.toBuilder().firstResult(offset + items().size).build()
     }
 
-    override fun nextPage(): CompletableFuture<SeradataRadarPayloadListPageAsync> = service.list(nextPageParams())
+    override fun nextPage(): CompletableFuture<SeradataRadarPayloadListPageAsync> =
+        service.list(nextPageParams())
 
     fun autoPager(): AutoPagerAsync<SeradataRadarPayloadListResponse> =
-        AutoPagerAsync.from(
-          this, streamHandlerExecutor
-        )
+        AutoPagerAsync.from(this, streamHandlerExecutor)
 
     /** The parameters that were used to request this page. */
     fun params(): SeradataRadarPayloadListParams = params
@@ -50,10 +44,10 @@ class SeradataRadarPayloadListPageAsync private constructor(
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of [SeradataRadarPayloadListPageAsync].
+         * Returns a mutable builder for constructing an instance of
+         * [SeradataRadarPayloadListPageAsync].
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .streamHandlerExecutor()
@@ -61,8 +55,7 @@ class SeradataRadarPayloadListPageAsync private constructor(
          * .items()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [SeradataRadarPayloadListPageAsync]. */
@@ -82,27 +75,17 @@ class SeradataRadarPayloadListPageAsync private constructor(
                 items = seradataRadarPayloadListPageAsync.items
             }
 
-        fun service(service: SeradataRadarPayloadServiceAsync) =
-            apply {
-                this.service = service
-            }
+        fun service(service: SeradataRadarPayloadServiceAsync) = apply { this.service = service }
 
-        fun streamHandlerExecutor(streamHandlerExecutor: Executor) =
-            apply {
-                this.streamHandlerExecutor = streamHandlerExecutor
-            }
+        fun streamHandlerExecutor(streamHandlerExecutor: Executor) = apply {
+            this.streamHandlerExecutor = streamHandlerExecutor
+        }
 
         /** The parameters that were used to request this page. */
-        fun params(params: SeradataRadarPayloadListParams) =
-            apply {
-                this.params = params
-            }
+        fun params(params: SeradataRadarPayloadListParams) = apply { this.params = params }
 
         /** The response that this page was parsed from. */
-        fun items(items: List<SeradataRadarPayloadListResponse>) =
-            apply {
-                this.items = items
-            }
+        fun items(items: List<SeradataRadarPayloadListResponse>) = apply { this.items = items }
 
         /**
          * Returns an immutable instance of [SeradataRadarPayloadListPageAsync].
@@ -110,7 +93,6 @@ class SeradataRadarPayloadListPageAsync private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .service()
          * .streamHandlerExecutor()
@@ -122,30 +104,27 @@ class SeradataRadarPayloadListPageAsync private constructor(
          */
         fun build(): SeradataRadarPayloadListPageAsync =
             SeradataRadarPayloadListPageAsync(
-              checkRequired(
-                "service", service
-              ),
-              checkRequired(
-                "streamHandlerExecutor", streamHandlerExecutor
-              ),
-              checkRequired(
-                "params", params
-              ),
-              checkRequired(
-                "items", items
-              ),
+                checkRequired("service", service),
+                checkRequired("streamHandlerExecutor", streamHandlerExecutor),
+                checkRequired("params", params),
+                checkRequired("items", items),
             )
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is SeradataRadarPayloadListPageAsync && service == other.service && streamHandlerExecutor == other.streamHandlerExecutor && params == other.params && items == other.items /* spotless:on */
+        return other is SeradataRadarPayloadListPageAsync &&
+            service == other.service &&
+            streamHandlerExecutor == other.streamHandlerExecutor &&
+            params == other.params &&
+            items == other.items
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, streamHandlerExecutor, params, items) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, streamHandlerExecutor, params, items)
 
-    override fun toString() = "SeradataRadarPayloadListPageAsync{service=$service, streamHandlerExecutor=$streamHandlerExecutor, params=$params, items=$items}"
+    override fun toString() =
+        "SeradataRadarPayloadListPageAsync{service=$service, streamHandlerExecutor=$streamHandlerExecutor, params=$params, items=$items}"
 }

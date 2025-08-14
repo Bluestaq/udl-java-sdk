@@ -18,7 +18,6 @@ import com.unifieddatalibrary.api.core.http.Headers
 import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
-import com.unifieddatalibrary.api.models.attitudesets.AttitudeSetCreateParams
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
@@ -26,248 +25,328 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 /**
- * Service operation intended for initial integration only. Takes a single AttitudeSet as a POST body and ingest into the database. This operation does not persist any Onorbit Attitude points that may be present in the body of the request. This operation is not intended to be used for automated feeds into UDL. A specific role is required to perform this service operation. Please contact the UDL team for assistance.
+ * Service operation intended for initial integration only. Takes a single AttitudeSet as a POST
+ * body and ingest into the database. This operation does not persist any Onorbit Attitude points
+ * that may be present in the body of the request. This operation is not intended to be used for
+ * automated feeds into UDL. A specific role is required to perform this service operation. Please
+ * contact the UDL team for assistance.
  *
  * The following rules apply to this operation:
  *
  * <h3>
- *  * Attitude Set numPoints value must correspond exactly to the number of Onorbit Attitude states associated with that Attitude Set.  The numPoints value is checked against the actual posted number of states and mismatch will result in the post being rejected.
- *  * Attitude Set startTime and endTime must correspond to the earliest and latest state times, respectively, of the associated Onorbit Attitude states.
- *  * Either satNo, idOnOrbit, or origObjectId must be provided.  The preferred option is to post with satNo for a cataloged object with (only) origObjectId for an unknown, uncatalogued, or internal/test object.  There are several cases for the logic associated with these fields:
- *    + If satNo is provided and correlates to a known UDL sat number then the idOnOrbit will be populated appropriately in addition to the satNo.
- *    + If satNo is provided and does not correlate to a known UDL sat number then the provided satNo value will be moved to the origObjectId field and satNo left null.
- *    + If origObjectId and a valid satNo or idOnOrbit are provided then both the satNo/idOnOrbit and origObjectId will maintain the provided values.
- *    + If only origObjectId is provided then origObjectId will be populated with the posted value.  In this case, no checks are made against existing UDL sat numbers.
- * </h3>
+ * * Attitude Set numPoints value must correspond exactly to the number of Onorbit Attitude states
+ *   associated with that Attitude Set. The numPoints value is checked against the actual posted
+ *   number of states and mismatch will result in the post being rejected.
+ * * Attitude Set startTime and endTime must correspond to the earliest and latest state times,
+ *   respectively, of the associated Onorbit Attitude states.
+ * * Either satNo, idOnOrbit, or origObjectId must be provided. The preferred option is to post with
+ *   satNo for a cataloged object with (only) origObjectId for an unknown, uncatalogued, or
+ *   internal/test object. There are several cases for the logic associated with these fields:
+ *     + If satNo is provided and correlates to a known UDL sat number then the idOnOrbit will be
+ *       populated appropriately in addition to the satNo.
+ *     + If satNo is provided and does not correlate to a known UDL sat number then the provided
+ *       satNo value will be moved to the origObjectId field and satNo left null.
+ *     + If origObjectId and a valid satNo or idOnOrbit are provided then both the satNo/idOnOrbit
+ *       and origObjectId will maintain the provided values.
+ *     + If only origObjectId is provided then origObjectId will be populated with the posted value.
+ *       In this case, no checks are made against existing UDL sat numbers. </h3>
  */
-class AttitudeSetCreateParams private constructor(
+class AttitudeSetCreateParams
+private constructor(
     private val body: Body,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
-
 ) : Params {
 
     /**
      * Classification marking of the data in IC/CAPCO Portion-marked format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun classificationMarking(): String = body.classificationMarking()
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun dataMode(): DataMode = body.dataMode()
 
     /**
-     * The end time of the attitude ephemeris, in ISO 8601 UTC format, with microsecond precision. If this set is constituted by a single epoch attitude message then endTime should match the startTime.
+     * The end time of the attitude ephemeris, in ISO 8601 UTC format, with microsecond precision.
+     * If this set is constituted by a single epoch attitude message then endTime should match the
+     * startTime.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun endTime(): OffsetDateTime = body.endTime()
 
     /**
-     * Reference frame 1 of the quaternion or Euler angle transformation utilized in this attitude parameter or attitude ephemeris. The UDL convention is that transformations occur FROM frame1 TO frame2. A specific spacecraft frame or instrument name may be provided with the assumption the consumer understands the location of these frames (ex. SC BODY, J2000, LVLH, ICRF, INSTRUMENTx, THRUSTERx, etc.).
+     * Reference frame 1 of the quaternion or Euler angle transformation utilized in this attitude
+     * parameter or attitude ephemeris. The UDL convention is that transformations occur FROM frame1
+     * TO frame2. A specific spacecraft frame or instrument name may be provided with the assumption
+     * the consumer understands the location of these frames (ex. SC BODY, J2000, LVLH, ICRF,
+     * INSTRUMENTx, THRUSTERx, etc.).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun frame1(): String = body.frame1()
 
     /**
-     * Reference frame 2 of the quaternion or Euler angle transformation utilized in this attitude parameter or attitude ephemeris. The UDL convention is that transformations occur FROM frame1 TO frame2. A specific spacecraft frame or instrument name may be provided with the assumption the consumer understands the location of these frames (ex. SC BODY, J2000, LVLH, ICRF, INSTRUMENTx, THRUSTERx, etc.).
+     * Reference frame 2 of the quaternion or Euler angle transformation utilized in this attitude
+     * parameter or attitude ephemeris. The UDL convention is that transformations occur FROM frame1
+     * TO frame2. A specific spacecraft frame or instrument name may be provided with the assumption
+     * the consumer understands the location of these frames (ex. SC BODY, J2000, LVLH, ICRF,
+     * INSTRUMENTx, THRUSTERx, etc.).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun frame2(): String = body.frame2()
 
     /**
      * Number of attitude records contained in this set.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun numPoints(): Int = body.numPoints()
 
     /**
      * Source of the data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun source(): String = body.source()
 
     /**
-     * The epoch or start time of the attitude parameter or attitude ephemeris, in ISO 8601 UTC format, with microsecond precision. If this set is constituted by a single attitude parameter message then startTime is the epoch.
+     * The epoch or start time of the attitude parameter or attitude ephemeris, in ISO 8601 UTC
+     * format, with microsecond precision. If this set is constituted by a single attitude parameter
+     * message then startTime is the epoch.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun startTime(): OffsetDateTime = body.startTime()
 
     /**
      * The type of attitude message or messages associated with this set.
      *
-     * AEM = Attitude Ephemeris Message, specifying the attitude state of a single object at multiple epochs.
+     * AEM = Attitude Ephemeris Message, specifying the attitude state of a single object at
+     * multiple epochs.
      *
-     * APM = Attitude Parameters Message, specifying the attitude state of a single object at a single epoch.
+     * APM = Attitude Parameters Message, specifying the attitude state of a single object at a
+     * single epoch.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun type(): String = body.type()
 
     /**
      * Unique identifier of the record, auto-generated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun id(): Optional<String> = body.id()
 
     /**
-     * Array of UDL UUIDs of one or more AttitudeSet records associated with this set. For example, a spacecraft Attitude Ephemeris Set might include a reference to an Attitude Parameter Message defining the sensor to body frame transformation for a sensor onboard the spacecraft, which allows for calculation of the sensor orientation in frame2 of the attitude ephemeris.
+     * Array of UDL UUIDs of one or more AttitudeSet records associated with this set. For example,
+     * a spacecraft Attitude Ephemeris Set might include a reference to an Attitude Parameter
+     * Message defining the sensor to body frame transformation for a sensor onboard the spacecraft,
+     * which allows for calculation of the sensor orientation in frame2 of the attitude ephemeris.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun asRef(): Optional<List<String>> = body.asRef()
 
     /**
      * Collection of attitude data associated with this Attitude Set.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun attitudeList(): Optional<List<AttitudeList>> = body.attitudeList()
 
     /**
      * Time the row was created in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdAt(): Optional<OffsetDateTime> = body.createdAt()
 
     /**
      * Application user who created the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = body.createdBy()
 
     /**
-     * Unique identifier of the parent (positional) Ephemeris Set, if this data is correlated with an Ephemeris.
+     * Unique identifier of the parent (positional) Ephemeris Set, if this data is correlated with
+     * an Ephemeris.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun esId(): Optional<String> = body.esId()
 
     /**
-     * The rotation sequence of the Euler angles in which attitude reference frame transformation occurs (from left to right). One, two, or three axis rotations are supported and are represented by one, two, or three characters respectively. Repeated axis rotations are also supported, however, these rotations should not be sequential. The numeric sequence values correspond to the body angles/rates as follows: 1 - xAngle/xRate, 2 - yAngle/yRate, and 3 - zAngle/zRate. Valid sequences are: 123, 132, 213, 231, 312, 321, 121, 131, 212, 232, 313, 323, 12, 13, 21, 23, 31, 32, 1, 2, and 3.
+     * The rotation sequence of the Euler angles in which attitude reference frame transformation
+     * occurs (from left to right). One, two, or three axis rotations are supported and are
+     * represented by one, two, or three characters respectively. Repeated axis rotations are also
+     * supported, however, these rotations should not be sequential. The numeric sequence values
+     * correspond to the body angles/rates as follows: 1 - xAngle/xRate, 2 - yAngle/yRate, and 3 -
+     * zAngle/zRate. Valid sequences are: 123, 132, 213, 231, 312, 321, 121, 131, 212, 232, 313,
+     * 323, 12, 13, 21, 23, 31, 32, 1, 2, and 3.
      *
-     * The following represent examples of possible rotation sequences: A single rotation about the Y-axis can be expressed as '2', a double rotation with X-Z sequence can be expressed as '13', and a triple rotation with Z-X-Y sequence can be expressed as '312'.
+     * The following represent examples of possible rotation sequences: A single rotation about the
+     * Y-axis can be expressed as '2', a double rotation with X-Z sequence can be expressed as '13',
+     * and a triple rotation with Z-X-Y sequence can be expressed as '312'.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun eulerRotSeq(): Optional<String> = body.eulerRotSeq()
 
     /**
      * Unique identifier of the on-orbit satellite to which this attitude set applies.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun idOnOrbit(): Optional<String> = body.idOnOrbit()
 
     /**
-     * Unique identifier of the sensor to which this attitude set applies IF this set is reporting a single sensor orientation.
+     * Unique identifier of the sensor to which this attitude set applies IF this set is reporting a
+     * single sensor orientation.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun idSensor(): Optional<String> = body.idSensor()
 
     /**
      * Recommended interpolation method for estimating attitude ephemeris data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun interpolator(): Optional<String> = body.interpolator()
 
     /**
      * Recommended polynomial interpolation degree.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun interpolatorDegree(): Optional<Int> = body.interpolatorDegree()
 
     /**
      * Optional notes/comments for this attitude set.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun notes(): Optional<String> = body.notes()
 
     /**
-     * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     * Originating system or organization which produced the data, if different from the source. The
+     * origin may be different than the source if the source was a mediating system which forwarded
+     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origin(): Optional<String> = body.origin()
 
     /**
-     * The originating source network on which this record was created, auto-populated by the system.
+     * The originating source network on which this record was created, auto-populated by the
+     * system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origNetwork(): Optional<String> = body.origNetwork()
 
     /**
-     * Optional identifier provided by the record source to indicate the target object of this attitude set. This may be an internal identifier and not necessarily map to a valid satellite number.
+     * Optional identifier provided by the record source to indicate the target object of this
+     * attitude set. This may be an internal identifier and not necessarily map to a valid satellite
+     * number.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origObjectId(): Optional<String> = body.origObjectId()
 
     /**
-     * Optional identifier provided by the record source to indicate the sensor identifier to which this attitude set applies IF this set is reporting a single sensor orientation. This may be an internal identifier and not necessarily a valid sensor ID.
+     * Optional identifier provided by the record source to indicate the sensor identifier to which
+     * this attitude set applies IF this set is reporting a single sensor orientation. This may be
+     * an internal identifier and not necessarily a valid sensor ID.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origSensorId(): Optional<String> = body.origSensorId()
 
     /**
      * Initial precession angle (ECI J2000 frame) in degrees.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun precAngleInit(): Optional<Double> = body.precAngleInit()
 
     /**
      * Satellite/catalog number of the on-orbit object to which this attitude set applies.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun satNo(): Optional<Int> = body.satNo()
 
     /**
      * Initial spin angle (ECI J2000 frame) in degrees.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun spinAngleInit(): Optional<Double> = body.spinAngleInit()
 
     /**
-     * Attitude ephemeris step size, in seconds. This applies to Attitude Ephemeris Messages (AEM) that employ a fixed step size.
+     * Attitude ephemeris step size, in seconds. This applies to Attitude Ephemeris Messages (AEM)
+     * that employ a fixed step size.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun stepSize(): Optional<Int> = body.stepSize()
 
     /**
      * Returns the raw JSON value of [classificationMarking].
      *
-     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     fun _classificationMarking(): JsonField<String> = body._classificationMarking()
 
@@ -400,7 +479,8 @@ class AttitudeSetCreateParams private constructor(
     /**
      * Returns the raw JSON value of [interpolatorDegree].
      *
-     * Unlike [interpolatorDegree], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [interpolatorDegree], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     fun _interpolatorDegree(): JsonField<Int> = body._interpolatorDegree()
 
@@ -483,7 +563,6 @@ class AttitudeSetCreateParams private constructor(
          * Returns a mutable builder for constructing an instance of [AttitudeSetCreateParams].
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -496,8 +575,7 @@ class AttitudeSetCreateParams private constructor(
          * .type()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [AttitudeSetCreateParams]. */
@@ -508,19 +586,17 @@ class AttitudeSetCreateParams private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(attitudeSetCreateParams: AttitudeSetCreateParams) =
-            apply {
-                body = attitudeSetCreateParams.body.toBuilder()
-                additionalHeaders = attitudeSetCreateParams.additionalHeaders.toBuilder()
-                additionalQueryParams = attitudeSetCreateParams.additionalQueryParams.toBuilder()
-            }
+        internal fun from(attitudeSetCreateParams: AttitudeSetCreateParams) = apply {
+            body = attitudeSetCreateParams.body.toBuilder()
+            additionalHeaders = attitudeSetCreateParams.additionalHeaders.toBuilder()
+            additionalQueryParams = attitudeSetCreateParams.additionalQueryParams.toBuilder()
+        }
 
         /**
          * Sets the entire request body.
          *
-         * This is generally only useful if you are already constructing the body separately. Otherwise,
-         * it's more convenient to use the top-level setters instead:
-         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
          * - [classificationMarking]
          * - [dataMode]
          * - [endTime]
@@ -528,694 +604,582 @@ class AttitudeSetCreateParams private constructor(
          * - [frame2]
          * - etc.
          */
-        fun body(body: Body) =
-            apply {
-                this.body = body.toBuilder()
-            }
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-        fun classificationMarking(classificationMarking: String) =
-            apply {
-                body.classificationMarking(classificationMarking)
-            }
+        fun classificationMarking(classificationMarking: String) = apply {
+            body.classificationMarking(classificationMarking)
+        }
 
         /**
          * Sets [Builder.classificationMarking] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun classificationMarking(classificationMarking: JsonField<String>) =
-            apply {
-                body.classificationMarking(classificationMarking)
-            }
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            body.classificationMarking(classificationMarking)
+        }
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          */
-        fun dataMode(dataMode: DataMode) =
-            apply {
-                body.dataMode(dataMode)
-            }
+        fun dataMode(dataMode: DataMode) = apply { body.dataMode(dataMode) }
 
         /**
          * Sets [Builder.dataMode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun dataMode(dataMode: JsonField<DataMode>) =
-            apply {
-                body.dataMode(dataMode)
-            }
+        fun dataMode(dataMode: JsonField<DataMode>) = apply { body.dataMode(dataMode) }
 
-        /** The end time of the attitude ephemeris, in ISO 8601 UTC format, with microsecond precision. If this set is constituted by a single epoch attitude message then endTime should match the startTime. */
-        fun endTime(endTime: OffsetDateTime) =
-            apply {
-                body.endTime(endTime)
-            }
+        /**
+         * The end time of the attitude ephemeris, in ISO 8601 UTC format, with microsecond
+         * precision. If this set is constituted by a single epoch attitude message then endTime
+         * should match the startTime.
+         */
+        fun endTime(endTime: OffsetDateTime) = apply { body.endTime(endTime) }
 
         /**
          * Sets [Builder.endTime] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.endTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.endTime] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun endTime(endTime: JsonField<OffsetDateTime>) =
-            apply {
-                body.endTime(endTime)
-            }
+        fun endTime(endTime: JsonField<OffsetDateTime>) = apply { body.endTime(endTime) }
 
-        /** Reference frame 1 of the quaternion or Euler angle transformation utilized in this attitude parameter or attitude ephemeris. The UDL convention is that transformations occur FROM frame1 TO frame2. A specific spacecraft frame or instrument name may be provided with the assumption the consumer understands the location of these frames (ex. SC BODY, J2000, LVLH, ICRF, INSTRUMENTx, THRUSTERx, etc.). */
-        fun frame1(frame1: String) =
-            apply {
-                body.frame1(frame1)
-            }
+        /**
+         * Reference frame 1 of the quaternion or Euler angle transformation utilized in this
+         * attitude parameter or attitude ephemeris. The UDL convention is that transformations
+         * occur FROM frame1 TO frame2. A specific spacecraft frame or instrument name may be
+         * provided with the assumption the consumer understands the location of these frames (ex.
+         * SC BODY, J2000, LVLH, ICRF, INSTRUMENTx, THRUSTERx, etc.).
+         */
+        fun frame1(frame1: String) = apply { body.frame1(frame1) }
 
         /**
          * Sets [Builder.frame1] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.frame1] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.frame1] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun frame1(frame1: JsonField<String>) =
-            apply {
-                body.frame1(frame1)
-            }
+        fun frame1(frame1: JsonField<String>) = apply { body.frame1(frame1) }
 
-        /** Reference frame 2 of the quaternion or Euler angle transformation utilized in this attitude parameter or attitude ephemeris. The UDL convention is that transformations occur FROM frame1 TO frame2. A specific spacecraft frame or instrument name may be provided with the assumption the consumer understands the location of these frames (ex. SC BODY, J2000, LVLH, ICRF, INSTRUMENTx, THRUSTERx, etc.). */
-        fun frame2(frame2: String) =
-            apply {
-                body.frame2(frame2)
-            }
+        /**
+         * Reference frame 2 of the quaternion or Euler angle transformation utilized in this
+         * attitude parameter or attitude ephemeris. The UDL convention is that transformations
+         * occur FROM frame1 TO frame2. A specific spacecraft frame or instrument name may be
+         * provided with the assumption the consumer understands the location of these frames (ex.
+         * SC BODY, J2000, LVLH, ICRF, INSTRUMENTx, THRUSTERx, etc.).
+         */
+        fun frame2(frame2: String) = apply { body.frame2(frame2) }
 
         /**
          * Sets [Builder.frame2] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.frame2] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.frame2] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun frame2(frame2: JsonField<String>) =
-            apply {
-                body.frame2(frame2)
-            }
+        fun frame2(frame2: JsonField<String>) = apply { body.frame2(frame2) }
 
         /** Number of attitude records contained in this set. */
-        fun numPoints(numPoints: Int) =
-            apply {
-                body.numPoints(numPoints)
-            }
+        fun numPoints(numPoints: Int) = apply { body.numPoints(numPoints) }
 
         /**
          * Sets [Builder.numPoints] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.numPoints] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.numPoints] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun numPoints(numPoints: JsonField<Int>) =
-            apply {
-                body.numPoints(numPoints)
-            }
+        fun numPoints(numPoints: JsonField<Int>) = apply { body.numPoints(numPoints) }
 
         /** Source of the data. */
-        fun source(source: String) =
-            apply {
-                body.source(source)
-            }
+        fun source(source: String) = apply { body.source(source) }
 
         /**
          * Sets [Builder.source] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun source(source: JsonField<String>) =
-            apply {
-                body.source(source)
-            }
+        fun source(source: JsonField<String>) = apply { body.source(source) }
 
-        /** The epoch or start time of the attitude parameter or attitude ephemeris, in ISO 8601 UTC format, with microsecond precision. If this set is constituted by a single attitude parameter message then startTime is the epoch. */
-        fun startTime(startTime: OffsetDateTime) =
-            apply {
-                body.startTime(startTime)
-            }
+        /**
+         * The epoch or start time of the attitude parameter or attitude ephemeris, in ISO 8601 UTC
+         * format, with microsecond precision. If this set is constituted by a single attitude
+         * parameter message then startTime is the epoch.
+         */
+        fun startTime(startTime: OffsetDateTime) = apply { body.startTime(startTime) }
 
         /**
          * Sets [Builder.startTime] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.startTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.startTime] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun startTime(startTime: JsonField<OffsetDateTime>) =
-            apply {
-                body.startTime(startTime)
-            }
+        fun startTime(startTime: JsonField<OffsetDateTime>) = apply { body.startTime(startTime) }
 
         /**
          * The type of attitude message or messages associated with this set.
          *
-         * AEM = Attitude Ephemeris Message, specifying the attitude state of a single object at multiple epochs.
+         * AEM = Attitude Ephemeris Message, specifying the attitude state of a single object at
+         * multiple epochs.
          *
-         * APM = Attitude Parameters Message, specifying the attitude state of a single object at a single epoch.
+         * APM = Attitude Parameters Message, specifying the attitude state of a single object at a
+         * single epoch.
          */
-        fun type(type: String) =
-            apply {
-                body.type(type)
-            }
+        fun type(type: String) = apply { body.type(type) }
 
         /**
          * Sets [Builder.type] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.type] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.type] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun type(type: JsonField<String>) =
-            apply {
-                body.type(type)
-            }
+        fun type(type: JsonField<String>) = apply { body.type(type) }
 
         /** Unique identifier of the record, auto-generated by the system. */
-        fun id(id: String) =
-            apply {
-                body.id(id)
-            }
+        fun id(id: String) = apply { body.id(id) }
 
         /**
          * Sets [Builder.id] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun id(id: JsonField<String>) =
-            apply {
-                body.id(id)
-            }
+        fun id(id: JsonField<String>) = apply { body.id(id) }
 
-        /** Array of UDL UUIDs of one or more AttitudeSet records associated with this set. For example, a spacecraft Attitude Ephemeris Set might include a reference to an Attitude Parameter Message defining the sensor to body frame transformation for a sensor onboard the spacecraft, which allows for calculation of the sensor orientation in frame2 of the attitude ephemeris. */
-        fun asRef(asRef: List<String>) =
-            apply {
-                body.asRef(asRef)
-            }
+        /**
+         * Array of UDL UUIDs of one or more AttitudeSet records associated with this set. For
+         * example, a spacecraft Attitude Ephemeris Set might include a reference to an Attitude
+         * Parameter Message defining the sensor to body frame transformation for a sensor onboard
+         * the spacecraft, which allows for calculation of the sensor orientation in frame2 of the
+         * attitude ephemeris.
+         */
+        fun asRef(asRef: List<String>) = apply { body.asRef(asRef) }
 
         /**
          * Sets [Builder.asRef] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.asRef] with a well-typed `List<String>` value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.asRef] with a well-typed `List<String>` value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun asRef(asRef: JsonField<List<String>>) =
-            apply {
-                body.asRef(asRef)
-            }
+        fun asRef(asRef: JsonField<List<String>>) = apply { body.asRef(asRef) }
 
         /**
          * Adds a single [String] to [Builder.asRef].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addAsRef(asRef: String) =
-            apply {
-                body.addAsRef(asRef)
-            }
+        fun addAsRef(asRef: String) = apply { body.addAsRef(asRef) }
 
         /** Collection of attitude data associated with this Attitude Set. */
-        fun attitudeList(attitudeList: List<AttitudeList>) =
-            apply {
-                body.attitudeList(attitudeList)
-            }
+        fun attitudeList(attitudeList: List<AttitudeList>) = apply {
+            body.attitudeList(attitudeList)
+        }
 
         /**
          * Sets [Builder.attitudeList] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.attitudeList] with a well-typed `List<AttitudeList>` value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.attitudeList] with a well-typed `List<AttitudeList>`
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun attitudeList(attitudeList: JsonField<List<AttitudeList>>) =
-            apply {
-                body.attitudeList(attitudeList)
-            }
+        fun attitudeList(attitudeList: JsonField<List<AttitudeList>>) = apply {
+            body.attitudeList(attitudeList)
+        }
 
         /**
          * Adds a single [AttitudeList] to [Builder.attitudeList].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addAttitudeList(attitudeList: AttitudeList) =
-            apply {
-                body.addAttitudeList(attitudeList)
-            }
+        fun addAttitudeList(attitudeList: AttitudeList) = apply {
+            body.addAttitudeList(attitudeList)
+        }
 
         /** Time the row was created in the database, auto-populated by the system. */
-        fun createdAt(createdAt: OffsetDateTime) =
-            apply {
-                body.createdAt(createdAt)
-            }
+        fun createdAt(createdAt: OffsetDateTime) = apply { body.createdAt(createdAt) }
 
         /**
          * Sets [Builder.createdAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun createdAt(createdAt: JsonField<OffsetDateTime>) =
-            apply {
-                body.createdAt(createdAt)
-            }
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { body.createdAt(createdAt) }
 
         /** Application user who created the row in the database, auto-populated by the system. */
-        fun createdBy(createdBy: String) =
-            apply {
-                body.createdBy(createdBy)
-            }
+        fun createdBy(createdBy: String) = apply { body.createdBy(createdBy) }
 
         /**
          * Sets [Builder.createdBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun createdBy(createdBy: JsonField<String>) =
-            apply {
-                body.createdBy(createdBy)
-            }
+        fun createdBy(createdBy: JsonField<String>) = apply { body.createdBy(createdBy) }
 
-        /** Unique identifier of the parent (positional) Ephemeris Set, if this data is correlated with an Ephemeris. */
-        fun esId(esId: String) =
-            apply {
-                body.esId(esId)
-            }
+        /**
+         * Unique identifier of the parent (positional) Ephemeris Set, if this data is correlated
+         * with an Ephemeris.
+         */
+        fun esId(esId: String) = apply { body.esId(esId) }
 
         /**
          * Sets [Builder.esId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.esId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.esId] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun esId(esId: JsonField<String>) =
-            apply {
-                body.esId(esId)
-            }
+        fun esId(esId: JsonField<String>) = apply { body.esId(esId) }
 
         /**
-         * The rotation sequence of the Euler angles in which attitude reference frame transformation occurs (from left to right). One, two, or three axis rotations are supported and are represented by one, two, or three characters respectively. Repeated axis rotations are also supported, however, these rotations should not be sequential. The numeric sequence values correspond to the body angles/rates as follows: 1 - xAngle/xRate, 2 - yAngle/yRate, and 3 - zAngle/zRate. Valid sequences are: 123, 132, 213, 231, 312, 321, 121, 131, 212, 232, 313, 323, 12, 13, 21, 23, 31, 32, 1, 2, and 3.
+         * The rotation sequence of the Euler angles in which attitude reference frame
+         * transformation occurs (from left to right). One, two, or three axis rotations are
+         * supported and are represented by one, two, or three characters respectively. Repeated
+         * axis rotations are also supported, however, these rotations should not be sequential. The
+         * numeric sequence values correspond to the body angles/rates as follows: 1 - xAngle/xRate,
+         * 2 - yAngle/yRate, and 3 - zAngle/zRate. Valid sequences are: 123, 132, 213, 231, 312,
+         * 321, 121, 131, 212, 232, 313, 323, 12, 13, 21, 23, 31, 32, 1, 2, and 3.
          *
-         * The following represent examples of possible rotation sequences: A single rotation about the Y-axis can be expressed as '2', a double rotation with X-Z sequence can be expressed as '13', and a triple rotation with Z-X-Y sequence can be expressed as '312'.
+         * The following represent examples of possible rotation sequences: A single rotation about
+         * the Y-axis can be expressed as '2', a double rotation with X-Z sequence can be expressed
+         * as '13', and a triple rotation with Z-X-Y sequence can be expressed as '312'.
          */
-        fun eulerRotSeq(eulerRotSeq: String) =
-            apply {
-                body.eulerRotSeq(eulerRotSeq)
-            }
+        fun eulerRotSeq(eulerRotSeq: String) = apply { body.eulerRotSeq(eulerRotSeq) }
 
         /**
          * Sets [Builder.eulerRotSeq] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.eulerRotSeq] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.eulerRotSeq] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun eulerRotSeq(eulerRotSeq: JsonField<String>) =
-            apply {
-                body.eulerRotSeq(eulerRotSeq)
-            }
+        fun eulerRotSeq(eulerRotSeq: JsonField<String>) = apply { body.eulerRotSeq(eulerRotSeq) }
 
         /** Unique identifier of the on-orbit satellite to which this attitude set applies. */
-        fun idOnOrbit(idOnOrbit: String) =
-            apply {
-                body.idOnOrbit(idOnOrbit)
-            }
+        fun idOnOrbit(idOnOrbit: String) = apply { body.idOnOrbit(idOnOrbit) }
 
         /**
          * Sets [Builder.idOnOrbit] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idOnOrbit] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.idOnOrbit] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun idOnOrbit(idOnOrbit: JsonField<String>) =
-            apply {
-                body.idOnOrbit(idOnOrbit)
-            }
+        fun idOnOrbit(idOnOrbit: JsonField<String>) = apply { body.idOnOrbit(idOnOrbit) }
 
-        /** Unique identifier of the sensor to which this attitude set applies IF this set is reporting a single sensor orientation. */
-        fun idSensor(idSensor: String) =
-            apply {
-                body.idSensor(idSensor)
-            }
+        /**
+         * Unique identifier of the sensor to which this attitude set applies IF this set is
+         * reporting a single sensor orientation.
+         */
+        fun idSensor(idSensor: String) = apply { body.idSensor(idSensor) }
 
         /**
          * Sets [Builder.idSensor] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idSensor] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.idSensor] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun idSensor(idSensor: JsonField<String>) =
-            apply {
-                body.idSensor(idSensor)
-            }
+        fun idSensor(idSensor: JsonField<String>) = apply { body.idSensor(idSensor) }
 
         /** Recommended interpolation method for estimating attitude ephemeris data. */
-        fun interpolator(interpolator: String) =
-            apply {
-                body.interpolator(interpolator)
-            }
+        fun interpolator(interpolator: String) = apply { body.interpolator(interpolator) }
 
         /**
          * Sets [Builder.interpolator] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.interpolator] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.interpolator] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun interpolator(interpolator: JsonField<String>) =
-            apply {
-                body.interpolator(interpolator)
-            }
+        fun interpolator(interpolator: JsonField<String>) = apply {
+            body.interpolator(interpolator)
+        }
 
         /** Recommended polynomial interpolation degree. */
-        fun interpolatorDegree(interpolatorDegree: Int) =
-            apply {
-                body.interpolatorDegree(interpolatorDegree)
-            }
+        fun interpolatorDegree(interpolatorDegree: Int) = apply {
+            body.interpolatorDegree(interpolatorDegree)
+        }
 
         /**
          * Sets [Builder.interpolatorDegree] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.interpolatorDegree] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.interpolatorDegree] with a well-typed [Int] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun interpolatorDegree(interpolatorDegree: JsonField<Int>) =
-            apply {
-                body.interpolatorDegree(interpolatorDegree)
-            }
+        fun interpolatorDegree(interpolatorDegree: JsonField<Int>) = apply {
+            body.interpolatorDegree(interpolatorDegree)
+        }
 
         /** Optional notes/comments for this attitude set. */
-        fun notes(notes: String) =
-            apply {
-                body.notes(notes)
-            }
+        fun notes(notes: String) = apply { body.notes(notes) }
 
         /**
          * Sets [Builder.notes] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.notes] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.notes] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun notes(notes: JsonField<String>) =
-            apply {
-                body.notes(notes)
-            }
+        fun notes(notes: JsonField<String>) = apply { body.notes(notes) }
 
-        /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
-        fun origin(origin: String) =
-            apply {
-                body.origin(origin)
-            }
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         */
+        fun origin(origin: String) = apply { body.origin(origin) }
 
         /**
          * Sets [Builder.origin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun origin(origin: JsonField<String>) =
-            apply {
-                body.origin(origin)
-            }
+        fun origin(origin: JsonField<String>) = apply { body.origin(origin) }
 
-        /** The originating source network on which this record was created, auto-populated by the system. */
-        fun origNetwork(origNetwork: String) =
-            apply {
-                body.origNetwork(origNetwork)
-            }
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         */
+        fun origNetwork(origNetwork: String) = apply { body.origNetwork(origNetwork) }
 
         /**
          * Sets [Builder.origNetwork] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun origNetwork(origNetwork: JsonField<String>) =
-            apply {
-                body.origNetwork(origNetwork)
-            }
+        fun origNetwork(origNetwork: JsonField<String>) = apply { body.origNetwork(origNetwork) }
 
-        /** Optional identifier provided by the record source to indicate the target object of this attitude set. This may be an internal identifier and not necessarily map to a valid satellite number. */
-        fun origObjectId(origObjectId: String) =
-            apply {
-                body.origObjectId(origObjectId)
-            }
+        /**
+         * Optional identifier provided by the record source to indicate the target object of this
+         * attitude set. This may be an internal identifier and not necessarily map to a valid
+         * satellite number.
+         */
+        fun origObjectId(origObjectId: String) = apply { body.origObjectId(origObjectId) }
 
         /**
          * Sets [Builder.origObjectId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origObjectId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origObjectId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun origObjectId(origObjectId: JsonField<String>) =
-            apply {
-                body.origObjectId(origObjectId)
-            }
+        fun origObjectId(origObjectId: JsonField<String>) = apply {
+            body.origObjectId(origObjectId)
+        }
 
-        /** Optional identifier provided by the record source to indicate the sensor identifier to which this attitude set applies IF this set is reporting a single sensor orientation. This may be an internal identifier and not necessarily a valid sensor ID. */
-        fun origSensorId(origSensorId: String) =
-            apply {
-                body.origSensorId(origSensorId)
-            }
+        /**
+         * Optional identifier provided by the record source to indicate the sensor identifier to
+         * which this attitude set applies IF this set is reporting a single sensor orientation.
+         * This may be an internal identifier and not necessarily a valid sensor ID.
+         */
+        fun origSensorId(origSensorId: String) = apply { body.origSensorId(origSensorId) }
 
         /**
          * Sets [Builder.origSensorId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origSensorId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origSensorId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun origSensorId(origSensorId: JsonField<String>) =
-            apply {
-                body.origSensorId(origSensorId)
-            }
+        fun origSensorId(origSensorId: JsonField<String>) = apply {
+            body.origSensorId(origSensorId)
+        }
 
         /** Initial precession angle (ECI J2000 frame) in degrees. */
-        fun precAngleInit(precAngleInit: Double) =
-            apply {
-                body.precAngleInit(precAngleInit)
-            }
+        fun precAngleInit(precAngleInit: Double) = apply { body.precAngleInit(precAngleInit) }
 
         /**
          * Sets [Builder.precAngleInit] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.precAngleInit] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.precAngleInit] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun precAngleInit(precAngleInit: JsonField<Double>) =
-            apply {
-                body.precAngleInit(precAngleInit)
-            }
+        fun precAngleInit(precAngleInit: JsonField<Double>) = apply {
+            body.precAngleInit(precAngleInit)
+        }
 
         /** Satellite/catalog number of the on-orbit object to which this attitude set applies. */
-        fun satNo(satNo: Int) =
-            apply {
-                body.satNo(satNo)
-            }
+        fun satNo(satNo: Int) = apply { body.satNo(satNo) }
 
         /**
          * Sets [Builder.satNo] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.satNo] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.satNo] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun satNo(satNo: JsonField<Int>) =
-            apply {
-                body.satNo(satNo)
-            }
+        fun satNo(satNo: JsonField<Int>) = apply { body.satNo(satNo) }
 
         /** Initial spin angle (ECI J2000 frame) in degrees. */
-        fun spinAngleInit(spinAngleInit: Double) =
-            apply {
-                body.spinAngleInit(spinAngleInit)
-            }
+        fun spinAngleInit(spinAngleInit: Double) = apply { body.spinAngleInit(spinAngleInit) }
 
         /**
          * Sets [Builder.spinAngleInit] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.spinAngleInit] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.spinAngleInit] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun spinAngleInit(spinAngleInit: JsonField<Double>) =
-            apply {
-                body.spinAngleInit(spinAngleInit)
-            }
+        fun spinAngleInit(spinAngleInit: JsonField<Double>) = apply {
+            body.spinAngleInit(spinAngleInit)
+        }
 
-        /** Attitude ephemeris step size, in seconds. This applies to Attitude Ephemeris Messages (AEM) that employ a fixed step size. */
-        fun stepSize(stepSize: Int) =
-            apply {
-                body.stepSize(stepSize)
-            }
+        /**
+         * Attitude ephemeris step size, in seconds. This applies to Attitude Ephemeris Messages
+         * (AEM) that employ a fixed step size.
+         */
+        fun stepSize(stepSize: Int) = apply { body.stepSize(stepSize) }
 
         /**
          * Sets [Builder.stepSize] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.stepSize] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.stepSize] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun stepSize(stepSize: JsonField<Int>) =
-            apply {
-                body.stepSize(stepSize)
-            }
+        fun stepSize(stepSize: JsonField<Int>) = apply { body.stepSize(stepSize) }
 
-        fun additionalBodyProperties(additionalBodyProperties: Map<String, JsonValue>) =
-            apply {
-                body.additionalProperties(additionalBodyProperties)
-            }
+        fun additionalBodyProperties(additionalBodyProperties: Map<String, JsonValue>) = apply {
+            body.additionalProperties(additionalBodyProperties)
+        }
 
-        fun putAdditionalBodyProperty(key: String, value: JsonValue) =
-            apply {
-                body.putAdditionalProperty(
-                  key, value
-                )
-            }
+        fun putAdditionalBodyProperty(key: String, value: JsonValue) = apply {
+            body.putAdditionalProperty(key, value)
+        }
 
         fun putAllAdditionalBodyProperties(additionalBodyProperties: Map<String, JsonValue>) =
             apply {
                 body.putAllAdditionalProperties(additionalBodyProperties)
             }
 
-        fun removeAdditionalBodyProperty(key: String) =
-            apply {
-                body.removeAdditionalProperty(key)
-            }
+        fun removeAdditionalBodyProperty(key: String) = apply { body.removeAdditionalProperty(key) }
 
-        fun removeAllAdditionalBodyProperties(keys: Set<String>) =
-            apply {
-                body.removeAllAdditionalProperties(keys)
-            }
+        fun removeAllAdditionalBodyProperties(keys: Set<String>) = apply {
+            body.removeAllAdditionalProperties(keys)
+        }
 
-        fun additionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.clear()
-                putAllAdditionalHeaders(additionalHeaders)
-            }
+        fun additionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.clear()
+            putAllAdditionalHeaders(additionalHeaders)
+        }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.clear()
-                putAllAdditionalHeaders(additionalHeaders)
-            }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.clear()
+            putAllAdditionalHeaders(additionalHeaders)
+        }
 
-        fun putAdditionalHeader(name: String, value: String) =
-            apply {
-                additionalHeaders.put(name, value)
-            }
+        fun putAdditionalHeader(name: String, value: String) = apply {
+            additionalHeaders.put(name, value)
+        }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
-            apply {
-                additionalHeaders.put(name, values)
-            }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
+            additionalHeaders.put(name, values)
+        }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.putAll(additionalHeaders)
-            }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.putAll(additionalHeaders)
+        }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.putAll(additionalHeaders)
-            }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.putAll(additionalHeaders)
+        }
 
-        fun replaceAdditionalHeaders(name: String, value: String) =
-            apply {
-                additionalHeaders.replace(name, value)
-            }
+        fun replaceAdditionalHeaders(name: String, value: String) = apply {
+            additionalHeaders.replace(name, value)
+        }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
-            apply {
-                additionalHeaders.replace(name, values)
-            }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
+            additionalHeaders.replace(name, values)
+        }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.replaceAll(additionalHeaders)
-            }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.replaceAll(additionalHeaders)
+        }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.replaceAll(additionalHeaders)
-            }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.replaceAll(additionalHeaders)
+        }
 
-        fun removeAdditionalHeaders(name: String) =
-            apply {
-                additionalHeaders.remove(name)
-            }
+        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) =
-            apply {
-                additionalHeaders.removeAll(names)
-            }
+        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
+            additionalHeaders.removeAll(names)
+        }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.clear()
-                putAllAdditionalQueryParams(additionalQueryParams)
-            }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.clear()
+            putAllAdditionalQueryParams(additionalQueryParams)
+        }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalQueryParams.clear()
-                putAllAdditionalQueryParams(additionalQueryParams)
-            }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
+            this.additionalQueryParams.clear()
+            putAllAdditionalQueryParams(additionalQueryParams)
+        }
 
-        fun putAdditionalQueryParam(key: String, value: String) =
-            apply {
-                additionalQueryParams.put(key, value)
-            }
+        fun putAdditionalQueryParam(key: String, value: String) = apply {
+            additionalQueryParams.put(key, value)
+        }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
-            apply {
-                additionalQueryParams.put(key, values)
-            }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
+            additionalQueryParams.put(key, values)
+        }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.putAll(additionalQueryParams)
-            }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.putAll(additionalQueryParams)
+        }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) =
-            apply {
-                additionalQueryParams.replace(key, value)
-            }
+        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
+            additionalQueryParams.replace(key, value)
+        }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
-            apply {
-                additionalQueryParams.replace(key, values)
-            }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
+            additionalQueryParams.replace(key, values)
+        }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.replaceAll(additionalQueryParams)
-            }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.replaceAll(additionalQueryParams)
+        }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) =
-            apply {
-                additionalQueryParams.remove(key)
-            }
+        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) =
-            apply {
-                additionalQueryParams.removeAll(keys)
-            }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
+            additionalQueryParams.removeAll(keys)
+        }
 
         /**
          * Returns an immutable instance of [AttitudeSetCreateParams].
@@ -1223,7 +1187,6 @@ class AttitudeSetCreateParams private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -1240,9 +1203,9 @@ class AttitudeSetCreateParams private constructor(
          */
         fun build(): AttitudeSetCreateParams =
             AttitudeSetCreateParams(
-              body.build(),
-              additionalHeaders.build(),
-              additionalQueryParams.build(),
+                body.build(),
+                additionalHeaders.build(),
+                additionalQueryParams.build(),
             )
     }
 
@@ -1252,8 +1215,15 @@ class AttitudeSetCreateParams private constructor(
 
     override fun _queryParams(): QueryParams = additionalQueryParams
 
-    /** AttitudeSet represents a wrapper or collection of Onorbit Attitude 'points' and meta data indicating the specifics of the orientation of an on-orbit object. Attitude is typically distributed in a flat file containing details of the attitude generation as well as a large collection of individual points at varying time steps. AttitudeSet is analogous to this flat file. */
-    class Body private constructor(
+    /**
+     * AttitudeSet represents a wrapper or collection of Onorbit Attitude 'points' and meta data
+     * indicating the specifics of the orientation of an on-orbit object. Attitude is typically
+     * distributed in a flat file containing details of the attitude generation as well as a large
+     * collection of individual points at varying time steps. AttitudeSet is analogous to this flat
+     * file.
+     */
+    class Body
+    private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
         private val endTime: JsonField<OffsetDateTime>,
@@ -1284,294 +1254,410 @@ class AttitudeSetCreateParams private constructor(
         private val spinAngleInit: JsonField<Double>,
         private val stepSize: JsonField<Int>,
         private val additionalProperties: MutableMap<String, JsonValue>,
-
     ) {
 
         @JsonCreator
         private constructor(
-            @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
-            @JsonProperty("endTime") @ExcludeMissing endTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("endTime")
+            @ExcludeMissing
+            endTime: JsonField<OffsetDateTime> = JsonMissing.of(),
             @JsonProperty("frame1") @ExcludeMissing frame1: JsonField<String> = JsonMissing.of(),
             @JsonProperty("frame2") @ExcludeMissing frame2: JsonField<String> = JsonMissing.of(),
             @JsonProperty("numPoints") @ExcludeMissing numPoints: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("startTime") @ExcludeMissing startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("startTime")
+            @ExcludeMissing
+            startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
             @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
             @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("asRef") @ExcludeMissing asRef: JsonField<List<String>> = JsonMissing.of(),
-            @JsonProperty("attitudeList") @ExcludeMissing attitudeList: JsonField<List<AttitudeList>> = JsonMissing.of(),
-            @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("asRef")
+            @ExcludeMissing
+            asRef: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("attitudeList")
+            @ExcludeMissing
+            attitudeList: JsonField<List<AttitudeList>> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
             @JsonProperty("esId") @ExcludeMissing esId: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("eulerRotSeq") @ExcludeMissing eulerRotSeq: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("idOnOrbit") @ExcludeMissing idOnOrbit: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("idSensor") @ExcludeMissing idSensor: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("interpolator") @ExcludeMissing interpolator: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("interpolatorDegree") @ExcludeMissing interpolatorDegree: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("eulerRotSeq")
+            @ExcludeMissing
+            eulerRotSeq: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("interpolator")
+            @ExcludeMissing
+            interpolator: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("interpolatorDegree")
+            @ExcludeMissing
+            interpolatorDegree: JsonField<Int> = JsonMissing.of(),
             @JsonProperty("notes") @ExcludeMissing notes: JsonField<String> = JsonMissing.of(),
             @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("origNetwork") @ExcludeMissing origNetwork: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("origObjectId") @ExcludeMissing origObjectId: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("origSensorId") @ExcludeMissing origSensorId: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("precAngleInit") @ExcludeMissing precAngleInit: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("precAngleInit")
+            @ExcludeMissing
+            precAngleInit: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
-            @JsonProperty("spinAngleInit") @ExcludeMissing spinAngleInit: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("stepSize") @ExcludeMissing stepSize: JsonField<Int> = JsonMissing.of()
+            @JsonProperty("spinAngleInit")
+            @ExcludeMissing
+            spinAngleInit: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("stepSize") @ExcludeMissing stepSize: JsonField<Int> = JsonMissing.of(),
         ) : this(
-          classificationMarking,
-          dataMode,
-          endTime,
-          frame1,
-          frame2,
-          numPoints,
-          source,
-          startTime,
-          type,
-          id,
-          asRef,
-          attitudeList,
-          createdAt,
-          createdBy,
-          esId,
-          eulerRotSeq,
-          idOnOrbit,
-          idSensor,
-          interpolator,
-          interpolatorDegree,
-          notes,
-          origin,
-          origNetwork,
-          origObjectId,
-          origSensorId,
-          precAngleInit,
-          satNo,
-          spinAngleInit,
-          stepSize,
-          mutableMapOf(),
+            classificationMarking,
+            dataMode,
+            endTime,
+            frame1,
+            frame2,
+            numPoints,
+            source,
+            startTime,
+            type,
+            id,
+            asRef,
+            attitudeList,
+            createdAt,
+            createdBy,
+            esId,
+            eulerRotSeq,
+            idOnOrbit,
+            idSensor,
+            interpolator,
+            interpolatorDegree,
+            notes,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            precAngleInit,
+            satNo,
+            spinAngleInit,
+            stepSize,
+            mutableMapOf(),
         )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
-        fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
+        fun classificationMarking(): String =
+            classificationMarking.getRequired("classificationMarking")
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
         /**
-         * The end time of the attitude ephemeris, in ISO 8601 UTC format, with microsecond precision. If this set is constituted by a single epoch attitude message then endTime should match the startTime.
+         * The end time of the attitude ephemeris, in ISO 8601 UTC format, with microsecond
+         * precision. If this set is constituted by a single epoch attitude message then endTime
+         * should match the startTime.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun endTime(): OffsetDateTime = endTime.getRequired("endTime")
 
         /**
-         * Reference frame 1 of the quaternion or Euler angle transformation utilized in this attitude parameter or attitude ephemeris. The UDL convention is that transformations occur FROM frame1 TO frame2. A specific spacecraft frame or instrument name may be provided with the assumption the consumer understands the location of these frames (ex. SC BODY, J2000, LVLH, ICRF, INSTRUMENTx, THRUSTERx, etc.).
+         * Reference frame 1 of the quaternion or Euler angle transformation utilized in this
+         * attitude parameter or attitude ephemeris. The UDL convention is that transformations
+         * occur FROM frame1 TO frame2. A specific spacecraft frame or instrument name may be
+         * provided with the assumption the consumer understands the location of these frames (ex.
+         * SC BODY, J2000, LVLH, ICRF, INSTRUMENTx, THRUSTERx, etc.).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun frame1(): String = frame1.getRequired("frame1")
 
         /**
-         * Reference frame 2 of the quaternion or Euler angle transformation utilized in this attitude parameter or attitude ephemeris. The UDL convention is that transformations occur FROM frame1 TO frame2. A specific spacecraft frame or instrument name may be provided with the assumption the consumer understands the location of these frames (ex. SC BODY, J2000, LVLH, ICRF, INSTRUMENTx, THRUSTERx, etc.).
+         * Reference frame 2 of the quaternion or Euler angle transformation utilized in this
+         * attitude parameter or attitude ephemeris. The UDL convention is that transformations
+         * occur FROM frame1 TO frame2. A specific spacecraft frame or instrument name may be
+         * provided with the assumption the consumer understands the location of these frames (ex.
+         * SC BODY, J2000, LVLH, ICRF, INSTRUMENTx, THRUSTERx, etc.).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun frame2(): String = frame2.getRequired("frame2")
 
         /**
          * Number of attitude records contained in this set.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun numPoints(): Int = numPoints.getRequired("numPoints")
 
         /**
          * Source of the data.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun source(): String = source.getRequired("source")
 
         /**
-         * The epoch or start time of the attitude parameter or attitude ephemeris, in ISO 8601 UTC format, with microsecond precision. If this set is constituted by a single attitude parameter message then startTime is the epoch.
+         * The epoch or start time of the attitude parameter or attitude ephemeris, in ISO 8601 UTC
+         * format, with microsecond precision. If this set is constituted by a single attitude
+         * parameter message then startTime is the epoch.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun startTime(): OffsetDateTime = startTime.getRequired("startTime")
 
         /**
          * The type of attitude message or messages associated with this set.
          *
-         * AEM = Attitude Ephemeris Message, specifying the attitude state of a single object at multiple epochs.
+         * AEM = Attitude Ephemeris Message, specifying the attitude state of a single object at
+         * multiple epochs.
          *
-         * APM = Attitude Parameters Message, specifying the attitude state of a single object at a single epoch.
+         * APM = Attitude Parameters Message, specifying the attitude state of a single object at a
+         * single epoch.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun type(): String = type.getRequired("type")
 
         /**
          * Unique identifier of the record, auto-generated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun id(): Optional<String> = id.getOptional("id")
 
         /**
-         * Array of UDL UUIDs of one or more AttitudeSet records associated with this set. For example, a spacecraft Attitude Ephemeris Set might include a reference to an Attitude Parameter Message defining the sensor to body frame transformation for a sensor onboard the spacecraft, which allows for calculation of the sensor orientation in frame2 of the attitude ephemeris.
+         * Array of UDL UUIDs of one or more AttitudeSet records associated with this set. For
+         * example, a spacecraft Attitude Ephemeris Set might include a reference to an Attitude
+         * Parameter Message defining the sensor to body frame transformation for a sensor onboard
+         * the spacecraft, which allows for calculation of the sensor orientation in frame2 of the
+         * attitude ephemeris.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun asRef(): Optional<List<String>> = asRef.getOptional("asRef")
 
         /**
          * Collection of attitude data associated with this Attitude Set.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun attitudeList(): Optional<List<AttitudeList>> = attitudeList.getOptional("attitudeList")
 
         /**
          * Time the row was created in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
         /**
          * Application user who created the row in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
         /**
-         * Unique identifier of the parent (positional) Ephemeris Set, if this data is correlated with an Ephemeris.
+         * Unique identifier of the parent (positional) Ephemeris Set, if this data is correlated
+         * with an Ephemeris.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun esId(): Optional<String> = esId.getOptional("esId")
 
         /**
-         * The rotation sequence of the Euler angles in which attitude reference frame transformation occurs (from left to right). One, two, or three axis rotations are supported and are represented by one, two, or three characters respectively. Repeated axis rotations are also supported, however, these rotations should not be sequential. The numeric sequence values correspond to the body angles/rates as follows: 1 - xAngle/xRate, 2 - yAngle/yRate, and 3 - zAngle/zRate. Valid sequences are: 123, 132, 213, 231, 312, 321, 121, 131, 212, 232, 313, 323, 12, 13, 21, 23, 31, 32, 1, 2, and 3.
+         * The rotation sequence of the Euler angles in which attitude reference frame
+         * transformation occurs (from left to right). One, two, or three axis rotations are
+         * supported and are represented by one, two, or three characters respectively. Repeated
+         * axis rotations are also supported, however, these rotations should not be sequential. The
+         * numeric sequence values correspond to the body angles/rates as follows: 1 - xAngle/xRate,
+         * 2 - yAngle/yRate, and 3 - zAngle/zRate. Valid sequences are: 123, 132, 213, 231, 312,
+         * 321, 121, 131, 212, 232, 313, 323, 12, 13, 21, 23, 31, 32, 1, 2, and 3.
          *
-         * The following represent examples of possible rotation sequences: A single rotation about the Y-axis can be expressed as '2', a double rotation with X-Z sequence can be expressed as '13', and a triple rotation with Z-X-Y sequence can be expressed as '312'.
+         * The following represent examples of possible rotation sequences: A single rotation about
+         * the Y-axis can be expressed as '2', a double rotation with X-Z sequence can be expressed
+         * as '13', and a triple rotation with Z-X-Y sequence can be expressed as '312'.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun eulerRotSeq(): Optional<String> = eulerRotSeq.getOptional("eulerRotSeq")
 
         /**
          * Unique identifier of the on-orbit satellite to which this attitude set applies.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun idOnOrbit(): Optional<String> = idOnOrbit.getOptional("idOnOrbit")
 
         /**
-         * Unique identifier of the sensor to which this attitude set applies IF this set is reporting a single sensor orientation.
+         * Unique identifier of the sensor to which this attitude set applies IF this set is
+         * reporting a single sensor orientation.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun idSensor(): Optional<String> = idSensor.getOptional("idSensor")
 
         /**
          * Recommended interpolation method for estimating attitude ephemeris data.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun interpolator(): Optional<String> = interpolator.getOptional("interpolator")
 
         /**
          * Recommended polynomial interpolation degree.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun interpolatorDegree(): Optional<Int> = interpolatorDegree.getOptional("interpolatorDegree")
+        fun interpolatorDegree(): Optional<Int> =
+            interpolatorDegree.getOptional("interpolatorDegree")
 
         /**
          * Optional notes/comments for this attitude set.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun notes(): Optional<String> = notes.getOptional("notes")
 
         /**
-         * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun origin(): Optional<String> = origin.getOptional("origin")
 
         /**
-         * The originating source network on which this record was created, auto-populated by the system.
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
         /**
-         * Optional identifier provided by the record source to indicate the target object of this attitude set. This may be an internal identifier and not necessarily map to a valid satellite number.
+         * Optional identifier provided by the record source to indicate the target object of this
+         * attitude set. This may be an internal identifier and not necessarily map to a valid
+         * satellite number.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun origObjectId(): Optional<String> = origObjectId.getOptional("origObjectId")
 
         /**
-         * Optional identifier provided by the record source to indicate the sensor identifier to which this attitude set applies IF this set is reporting a single sensor orientation. This may be an internal identifier and not necessarily a valid sensor ID.
+         * Optional identifier provided by the record source to indicate the sensor identifier to
+         * which this attitude set applies IF this set is reporting a single sensor orientation.
+         * This may be an internal identifier and not necessarily a valid sensor ID.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun origSensorId(): Optional<String> = origSensorId.getOptional("origSensorId")
 
         /**
          * Initial precession angle (ECI J2000 frame) in degrees.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun precAngleInit(): Optional<Double> = precAngleInit.getOptional("precAngleInit")
 
         /**
          * Satellite/catalog number of the on-orbit object to which this attitude set applies.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun satNo(): Optional<Int> = satNo.getOptional("satNo")
 
         /**
          * Initial spin angle (ECI J2000 frame) in degrees.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun spinAngleInit(): Optional<Double> = spinAngleInit.getOptional("spinAngleInit")
 
         /**
-         * Attitude ephemeris step size, in seconds. This applies to Attitude Ephemeris Messages (AEM) that employ a fixed step size.
+         * Attitude ephemeris step size, in seconds. This applies to Attitude Ephemeris Messages
+         * (AEM) that employ a fixed step size.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun stepSize(): Optional<Int> = stepSize.getOptional("stepSize")
 
         /**
          * Returns the raw JSON value of [classificationMarking].
          *
-         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("classificationMarking")
         @ExcludeMissing
@@ -1582,54 +1668,42 @@ class AttitudeSetCreateParams private constructor(
          *
          * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("dataMode")
-        @ExcludeMissing
-        fun _dataMode(): JsonField<DataMode> = dataMode
+        @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
 
         /**
          * Returns the raw JSON value of [endTime].
          *
          * Unlike [endTime], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("endTime")
-        @ExcludeMissing
-        fun _endTime(): JsonField<OffsetDateTime> = endTime
+        @JsonProperty("endTime") @ExcludeMissing fun _endTime(): JsonField<OffsetDateTime> = endTime
 
         /**
          * Returns the raw JSON value of [frame1].
          *
          * Unlike [frame1], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("frame1")
-        @ExcludeMissing
-        fun _frame1(): JsonField<String> = frame1
+        @JsonProperty("frame1") @ExcludeMissing fun _frame1(): JsonField<String> = frame1
 
         /**
          * Returns the raw JSON value of [frame2].
          *
          * Unlike [frame2], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("frame2")
-        @ExcludeMissing
-        fun _frame2(): JsonField<String> = frame2
+        @JsonProperty("frame2") @ExcludeMissing fun _frame2(): JsonField<String> = frame2
 
         /**
          * Returns the raw JSON value of [numPoints].
          *
          * Unlike [numPoints], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("numPoints")
-        @ExcludeMissing
-        fun _numPoints(): JsonField<Int> = numPoints
+        @JsonProperty("numPoints") @ExcludeMissing fun _numPoints(): JsonField<Int> = numPoints
 
         /**
          * Returns the raw JSON value of [source].
          *
          * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("source")
-        @ExcludeMissing
-        fun _source(): JsonField<String> = source
+        @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
 
         /**
          * Returns the raw JSON value of [startTime].
@@ -1645,32 +1719,27 @@ class AttitudeSetCreateParams private constructor(
          *
          * Unlike [type], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("type")
-        @ExcludeMissing
-        fun _type(): JsonField<String> = type
+        @JsonProperty("type") @ExcludeMissing fun _type(): JsonField<String> = type
 
         /**
          * Returns the raw JSON value of [id].
          *
          * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("id")
-        @ExcludeMissing
-        fun _id(): JsonField<String> = id
+        @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
 
         /**
          * Returns the raw JSON value of [asRef].
          *
          * Unlike [asRef], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("asRef")
-        @ExcludeMissing
-        fun _asRef(): JsonField<List<String>> = asRef
+        @JsonProperty("asRef") @ExcludeMissing fun _asRef(): JsonField<List<String>> = asRef
 
         /**
          * Returns the raw JSON value of [attitudeList].
          *
-         * Unlike [attitudeList], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [attitudeList], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("attitudeList")
         @ExcludeMissing
@@ -1690,18 +1759,14 @@ class AttitudeSetCreateParams private constructor(
          *
          * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("createdBy")
-        @ExcludeMissing
-        fun _createdBy(): JsonField<String> = createdBy
+        @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
         /**
          * Returns the raw JSON value of [esId].
          *
          * Unlike [esId], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("esId")
-        @ExcludeMissing
-        fun _esId(): JsonField<String> = esId
+        @JsonProperty("esId") @ExcludeMissing fun _esId(): JsonField<String> = esId
 
         /**
          * Returns the raw JSON value of [eulerRotSeq].
@@ -1717,23 +1782,20 @@ class AttitudeSetCreateParams private constructor(
          *
          * Unlike [idOnOrbit], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("idOnOrbit")
-        @ExcludeMissing
-        fun _idOnOrbit(): JsonField<String> = idOnOrbit
+        @JsonProperty("idOnOrbit") @ExcludeMissing fun _idOnOrbit(): JsonField<String> = idOnOrbit
 
         /**
          * Returns the raw JSON value of [idSensor].
          *
          * Unlike [idSensor], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("idSensor")
-        @ExcludeMissing
-        fun _idSensor(): JsonField<String> = idSensor
+        @JsonProperty("idSensor") @ExcludeMissing fun _idSensor(): JsonField<String> = idSensor
 
         /**
          * Returns the raw JSON value of [interpolator].
          *
-         * Unlike [interpolator], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [interpolator], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("interpolator")
         @ExcludeMissing
@@ -1742,7 +1804,8 @@ class AttitudeSetCreateParams private constructor(
         /**
          * Returns the raw JSON value of [interpolatorDegree].
          *
-         * Unlike [interpolatorDegree], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [interpolatorDegree], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("interpolatorDegree")
         @ExcludeMissing
@@ -1753,18 +1816,14 @@ class AttitudeSetCreateParams private constructor(
          *
          * Unlike [notes], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("notes")
-        @ExcludeMissing
-        fun _notes(): JsonField<String> = notes
+        @JsonProperty("notes") @ExcludeMissing fun _notes(): JsonField<String> = notes
 
         /**
          * Returns the raw JSON value of [origin].
          *
          * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("origin")
-        @ExcludeMissing
-        fun _origin(): JsonField<String> = origin
+        @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
 
         /**
          * Returns the raw JSON value of [origNetwork].
@@ -1778,7 +1837,8 @@ class AttitudeSetCreateParams private constructor(
         /**
          * Returns the raw JSON value of [origObjectId].
          *
-         * Unlike [origObjectId], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [origObjectId], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("origObjectId")
         @ExcludeMissing
@@ -1787,7 +1847,8 @@ class AttitudeSetCreateParams private constructor(
         /**
          * Returns the raw JSON value of [origSensorId].
          *
-         * Unlike [origSensorId], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [origSensorId], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("origSensorId")
         @ExcludeMissing
@@ -1796,7 +1857,8 @@ class AttitudeSetCreateParams private constructor(
         /**
          * Returns the raw JSON value of [precAngleInit].
          *
-         * Unlike [precAngleInit], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [precAngleInit], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("precAngleInit")
         @ExcludeMissing
@@ -1807,14 +1869,13 @@ class AttitudeSetCreateParams private constructor(
          *
          * Unlike [satNo], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("satNo")
-        @ExcludeMissing
-        fun _satNo(): JsonField<Int> = satNo
+        @JsonProperty("satNo") @ExcludeMissing fun _satNo(): JsonField<Int> = satNo
 
         /**
          * Returns the raw JSON value of [spinAngleInit].
          *
-         * Unlike [spinAngleInit], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [spinAngleInit], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("spinAngleInit")
         @ExcludeMissing
@@ -1825,18 +1886,17 @@ class AttitudeSetCreateParams private constructor(
          *
          * Unlike [stepSize], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("stepSize")
-        @ExcludeMissing
-        fun _stepSize(): JsonField<Int> = stepSize
+        @JsonProperty("stepSize") @ExcludeMissing fun _stepSize(): JsonField<Int> = stepSize
 
         @JsonAnySetter
         private fun putAdditionalProperty(key: String, value: JsonValue) {
-          additionalProperties.put(key, value)
+            additionalProperties.put(key, value)
         }
 
         @JsonAnyGetter
         @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
 
         fun toBuilder() = Builder().from(this)
 
@@ -1846,7 +1906,6 @@ class AttitudeSetCreateParams private constructor(
              * Returns a mutable builder for constructing an instance of [Body].
              *
              * The following fields are required:
-             *
              * ```java
              * .classificationMarking()
              * .dataMode()
@@ -1859,8 +1918,7 @@ class AttitudeSetCreateParams private constructor(
              * .type()
              * ```
              */
-            @JvmStatic
-            fun builder() = Builder()
+            @JvmStatic fun builder() = Builder()
         }
 
         /** A builder for [Body]. */
@@ -1898,119 +1956,131 @@ class AttitudeSetCreateParams private constructor(
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
-            internal fun from(body: Body) =
-                apply {
-                    classificationMarking = body.classificationMarking
-                    dataMode = body.dataMode
-                    endTime = body.endTime
-                    frame1 = body.frame1
-                    frame2 = body.frame2
-                    numPoints = body.numPoints
-                    source = body.source
-                    startTime = body.startTime
-                    type = body.type
-                    id = body.id
-                    asRef = body.asRef.map { it.toMutableList() }
-                    attitudeList = body.attitudeList.map { it.toMutableList() }
-                    createdAt = body.createdAt
-                    createdBy = body.createdBy
-                    esId = body.esId
-                    eulerRotSeq = body.eulerRotSeq
-                    idOnOrbit = body.idOnOrbit
-                    idSensor = body.idSensor
-                    interpolator = body.interpolator
-                    interpolatorDegree = body.interpolatorDegree
-                    notes = body.notes
-                    origin = body.origin
-                    origNetwork = body.origNetwork
-                    origObjectId = body.origObjectId
-                    origSensorId = body.origSensorId
-                    precAngleInit = body.precAngleInit
-                    satNo = body.satNo
-                    spinAngleInit = body.spinAngleInit
-                    stepSize = body.stepSize
-                    additionalProperties = body.additionalProperties.toMutableMap()
-                }
+            internal fun from(body: Body) = apply {
+                classificationMarking = body.classificationMarking
+                dataMode = body.dataMode
+                endTime = body.endTime
+                frame1 = body.frame1
+                frame2 = body.frame2
+                numPoints = body.numPoints
+                source = body.source
+                startTime = body.startTime
+                type = body.type
+                id = body.id
+                asRef = body.asRef.map { it.toMutableList() }
+                attitudeList = body.attitudeList.map { it.toMutableList() }
+                createdAt = body.createdAt
+                createdBy = body.createdBy
+                esId = body.esId
+                eulerRotSeq = body.eulerRotSeq
+                idOnOrbit = body.idOnOrbit
+                idSensor = body.idSensor
+                interpolator = body.interpolator
+                interpolatorDegree = body.interpolatorDegree
+                notes = body.notes
+                origin = body.origin
+                origNetwork = body.origNetwork
+                origObjectId = body.origObjectId
+                origSensorId = body.origSensorId
+                precAngleInit = body.precAngleInit
+                satNo = body.satNo
+                spinAngleInit = body.spinAngleInit
+                stepSize = body.stepSize
+                additionalProperties = body.additionalProperties.toMutableMap()
+            }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-            fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
+            fun classificationMarking(classificationMarking: String) =
+                classificationMarking(JsonField.of(classificationMarking))
 
             /**
              * Sets [Builder.classificationMarking] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.classificationMarking] with a well-typed [String]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun classificationMarking(classificationMarking: JsonField<String>) =
-                apply {
-                    this.classificationMarking = classificationMarking
-                }
+            fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+                this.classificationMarking = classificationMarking
+            }
 
             /**
              * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
              *
-             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may
+             * include both real and simulated data.
              *
-             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events,
+             * and analysis.
              *
              * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
              *
-             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+             * requirements, and for validating technical, functional, and performance
+             * characteristics.
              */
             fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
             /**
              * Sets [Builder.dataMode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun dataMode(dataMode: JsonField<DataMode>) =
-                apply {
-                    this.dataMode = dataMode
-                }
+            fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
 
-            /** The end time of the attitude ephemeris, in ISO 8601 UTC format, with microsecond precision. If this set is constituted by a single epoch attitude message then endTime should match the startTime. */
+            /**
+             * The end time of the attitude ephemeris, in ISO 8601 UTC format, with microsecond
+             * precision. If this set is constituted by a single epoch attitude message then endTime
+             * should match the startTime.
+             */
             fun endTime(endTime: OffsetDateTime) = endTime(JsonField.of(endTime))
 
             /**
              * Sets [Builder.endTime] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.endTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.endTime] with a well-typed [OffsetDateTime] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun endTime(endTime: JsonField<OffsetDateTime>) =
-                apply {
-                    this.endTime = endTime
-                }
+            fun endTime(endTime: JsonField<OffsetDateTime>) = apply { this.endTime = endTime }
 
-            /** Reference frame 1 of the quaternion or Euler angle transformation utilized in this attitude parameter or attitude ephemeris. The UDL convention is that transformations occur FROM frame1 TO frame2. A specific spacecraft frame or instrument name may be provided with the assumption the consumer understands the location of these frames (ex. SC BODY, J2000, LVLH, ICRF, INSTRUMENTx, THRUSTERx, etc.). */
+            /**
+             * Reference frame 1 of the quaternion or Euler angle transformation utilized in this
+             * attitude parameter or attitude ephemeris. The UDL convention is that transformations
+             * occur FROM frame1 TO frame2. A specific spacecraft frame or instrument name may be
+             * provided with the assumption the consumer understands the location of these frames
+             * (ex. SC BODY, J2000, LVLH, ICRF, INSTRUMENTx, THRUSTERx, etc.).
+             */
             fun frame1(frame1: String) = frame1(JsonField.of(frame1))
 
             /**
              * Sets [Builder.frame1] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.frame1] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.frame1] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun frame1(frame1: JsonField<String>) =
-                apply {
-                    this.frame1 = frame1
-                }
+            fun frame1(frame1: JsonField<String>) = apply { this.frame1 = frame1 }
 
-            /** Reference frame 2 of the quaternion or Euler angle transformation utilized in this attitude parameter or attitude ephemeris. The UDL convention is that transformations occur FROM frame1 TO frame2. A specific spacecraft frame or instrument name may be provided with the assumption the consumer understands the location of these frames (ex. SC BODY, J2000, LVLH, ICRF, INSTRUMENTx, THRUSTERx, etc.). */
+            /**
+             * Reference frame 2 of the quaternion or Euler angle transformation utilized in this
+             * attitude parameter or attitude ephemeris. The UDL convention is that transformations
+             * occur FROM frame1 TO frame2. A specific spacecraft frame or instrument name may be
+             * provided with the assumption the consumer understands the location of these frames
+             * (ex. SC BODY, J2000, LVLH, ICRF, INSTRUMENTx, THRUSTERx, etc.).
+             */
             fun frame2(frame2: String) = frame2(JsonField.of(frame2))
 
             /**
              * Sets [Builder.frame2] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.frame2] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.frame2] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun frame2(frame2: JsonField<String>) =
-                apply {
-                    this.frame2 = frame2
-                }
+            fun frame2(frame2: JsonField<String>) = apply { this.frame2 = frame2 }
 
             /** Number of attitude records contained in this set. */
             fun numPoints(numPoints: Int) = numPoints(JsonField.of(numPoints))
@@ -2018,13 +2088,11 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.numPoints] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.numPoints] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.numPoints] with a well-typed [Int] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun numPoints(numPoints: JsonField<Int>) =
-                apply {
-                    this.numPoints = numPoints
-                }
+            fun numPoints(numPoints: JsonField<Int>) = apply { this.numPoints = numPoints }
 
             /** Source of the data. */
             fun source(source: String) = source(JsonField.of(source))
@@ -2032,47 +2100,49 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.source] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.source] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun source(source: JsonField<String>) =
-                apply {
-                    this.source = source
-                }
+            fun source(source: JsonField<String>) = apply { this.source = source }
 
-            /** The epoch or start time of the attitude parameter or attitude ephemeris, in ISO 8601 UTC format, with microsecond precision. If this set is constituted by a single attitude parameter message then startTime is the epoch. */
+            /**
+             * The epoch or start time of the attitude parameter or attitude ephemeris, in ISO 8601
+             * UTC format, with microsecond precision. If this set is constituted by a single
+             * attitude parameter message then startTime is the epoch.
+             */
             fun startTime(startTime: OffsetDateTime) = startTime(JsonField.of(startTime))
 
             /**
              * Sets [Builder.startTime] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.startTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.startTime] with a well-typed [OffsetDateTime] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun startTime(startTime: JsonField<OffsetDateTime>) =
-                apply {
-                    this.startTime = startTime
-                }
+            fun startTime(startTime: JsonField<OffsetDateTime>) = apply {
+                this.startTime = startTime
+            }
 
             /**
              * The type of attitude message or messages associated with this set.
              *
-             * AEM = Attitude Ephemeris Message, specifying the attitude state of a single object at multiple epochs.
+             * AEM = Attitude Ephemeris Message, specifying the attitude state of a single object at
+             * multiple epochs.
              *
-             * APM = Attitude Parameters Message, specifying the attitude state of a single object at a single epoch.
+             * APM = Attitude Parameters Message, specifying the attitude state of a single object
+             * at a single epoch.
              */
             fun type(type: String) = type(JsonField.of(type))
 
             /**
              * Sets [Builder.type] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.type] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.type] with a well-typed [String] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun type(type: JsonField<String>) =
-                apply {
-                    this.type = type
-                }
+            fun type(type: JsonField<String>) = apply { this.type = type }
 
             /** Unique identifier of the record, auto-generated by the system. */
             fun id(id: String) = id(JsonField.of(id))
@@ -2080,65 +2150,70 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.id] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.id] with a well-typed [String] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun id(id: JsonField<String>) =
-                apply {
-                    this.id = id
-                }
+            fun id(id: JsonField<String>) = apply { this.id = id }
 
-            /** Array of UDL UUIDs of one or more AttitudeSet records associated with this set. For example, a spacecraft Attitude Ephemeris Set might include a reference to an Attitude Parameter Message defining the sensor to body frame transformation for a sensor onboard the spacecraft, which allows for calculation of the sensor orientation in frame2 of the attitude ephemeris. */
+            /**
+             * Array of UDL UUIDs of one or more AttitudeSet records associated with this set. For
+             * example, a spacecraft Attitude Ephemeris Set might include a reference to an Attitude
+             * Parameter Message defining the sensor to body frame transformation for a sensor
+             * onboard the spacecraft, which allows for calculation of the sensor orientation in
+             * frame2 of the attitude ephemeris.
+             */
             fun asRef(asRef: List<String>) = asRef(JsonField.of(asRef))
 
             /**
              * Sets [Builder.asRef] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.asRef] with a well-typed `List<String>` value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.asRef] with a well-typed `List<String>` value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun asRef(asRef: JsonField<List<String>>) =
-                apply {
-                    this.asRef = asRef.map { it.toMutableList() }
-                }
+            fun asRef(asRef: JsonField<List<String>>) = apply {
+                this.asRef = asRef.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [String] to [Builder.asRef].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addAsRef(asRef: String) =
-                apply {
-                    this.asRef = (this.asRef ?: JsonField.of(mutableListOf())).also {
+            fun addAsRef(asRef: String) = apply {
+                this.asRef =
+                    (this.asRef ?: JsonField.of(mutableListOf())).also {
                         checkKnown("asRef", it).add(asRef)
                     }
-                }
+            }
 
             /** Collection of attitude data associated with this Attitude Set. */
-            fun attitudeList(attitudeList: List<AttitudeList>) = attitudeList(JsonField.of(attitudeList))
+            fun attitudeList(attitudeList: List<AttitudeList>) =
+                attitudeList(JsonField.of(attitudeList))
 
             /**
              * Sets [Builder.attitudeList] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.attitudeList] with a well-typed `List<AttitudeList>` value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.attitudeList] with a well-typed `List<AttitudeList>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun attitudeList(attitudeList: JsonField<List<AttitudeList>>) =
-                apply {
-                    this.attitudeList = attitudeList.map { it.toMutableList() }
-                }
+            fun attitudeList(attitudeList: JsonField<List<AttitudeList>>) = apply {
+                this.attitudeList = attitudeList.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [AttitudeList] to [Builder.attitudeList].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addAttitudeList(attitudeList: AttitudeList) =
-                apply {
-                    this.attitudeList = (this.attitudeList ?: JsonField.of(mutableListOf())).also {
+            fun addAttitudeList(attitudeList: AttitudeList) = apply {
+                this.attitudeList =
+                    (this.attitudeList ?: JsonField.of(mutableListOf())).also {
                         checkKnown("attitudeList", it).add(attitudeList)
                     }
-                }
+            }
 
             /** Time the row was created in the database, auto-populated by the system. */
             fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -2146,59 +2221,70 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.createdAt] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdAt(createdAt: JsonField<OffsetDateTime>) =
-                apply {
-                    this.createdAt = createdAt
-                }
+            fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply {
+                this.createdAt = createdAt
+            }
 
-            /** Application user who created the row in the database, auto-populated by the system. */
+            /**
+             * Application user who created the row in the database, auto-populated by the system.
+             */
             fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
 
             /**
              * Sets [Builder.createdBy] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdBy(createdBy: JsonField<String>) =
-                apply {
-                    this.createdBy = createdBy
-                }
+            fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
-            /** Unique identifier of the parent (positional) Ephemeris Set, if this data is correlated with an Ephemeris. */
+            /**
+             * Unique identifier of the parent (positional) Ephemeris Set, if this data is
+             * correlated with an Ephemeris.
+             */
             fun esId(esId: String) = esId(JsonField.of(esId))
 
             /**
              * Sets [Builder.esId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.esId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.esId] with a well-typed [String] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun esId(esId: JsonField<String>) =
-                apply {
-                    this.esId = esId
-                }
+            fun esId(esId: JsonField<String>) = apply { this.esId = esId }
 
             /**
-             * The rotation sequence of the Euler angles in which attitude reference frame transformation occurs (from left to right). One, two, or three axis rotations are supported and are represented by one, two, or three characters respectively. Repeated axis rotations are also supported, however, these rotations should not be sequential. The numeric sequence values correspond to the body angles/rates as follows: 1 - xAngle/xRate, 2 - yAngle/yRate, and 3 - zAngle/zRate. Valid sequences are: 123, 132, 213, 231, 312, 321, 121, 131, 212, 232, 313, 323, 12, 13, 21, 23, 31, 32, 1, 2, and 3.
+             * The rotation sequence of the Euler angles in which attitude reference frame
+             * transformation occurs (from left to right). One, two, or three axis rotations are
+             * supported and are represented by one, two, or three characters respectively. Repeated
+             * axis rotations are also supported, however, these rotations should not be sequential.
+             * The numeric sequence values correspond to the body angles/rates as follows: 1 -
+             * xAngle/xRate, 2 - yAngle/yRate, and 3 - zAngle/zRate. Valid sequences are: 123, 132,
+             * 213, 231, 312, 321, 121, 131, 212, 232, 313, 323, 12, 13, 21, 23, 31, 32, 1, 2,
+             * and 3.
              *
-             * The following represent examples of possible rotation sequences: A single rotation about the Y-axis can be expressed as '2', a double rotation with X-Z sequence can be expressed as '13', and a triple rotation with Z-X-Y sequence can be expressed as '312'.
+             * The following represent examples of possible rotation sequences: A single rotation
+             * about the Y-axis can be expressed as '2', a double rotation with X-Z sequence can be
+             * expressed as '13', and a triple rotation with Z-X-Y sequence can be expressed as
+             * '312'.
              */
             fun eulerRotSeq(eulerRotSeq: String) = eulerRotSeq(JsonField.of(eulerRotSeq))
 
             /**
              * Sets [Builder.eulerRotSeq] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.eulerRotSeq] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.eulerRotSeq] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun eulerRotSeq(eulerRotSeq: JsonField<String>) =
-                apply {
-                    this.eulerRotSeq = eulerRotSeq
-                }
+            fun eulerRotSeq(eulerRotSeq: JsonField<String>) = apply {
+                this.eulerRotSeq = eulerRotSeq
+            }
 
             /** Unique identifier of the on-orbit satellite to which this attitude set applies. */
             fun idOnOrbit(idOnOrbit: String) = idOnOrbit(JsonField.of(idOnOrbit))
@@ -2206,27 +2292,26 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.idOnOrbit] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.idOnOrbit] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.idOnOrbit] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun idOnOrbit(idOnOrbit: JsonField<String>) =
-                apply {
-                    this.idOnOrbit = idOnOrbit
-                }
+            fun idOnOrbit(idOnOrbit: JsonField<String>) = apply { this.idOnOrbit = idOnOrbit }
 
-            /** Unique identifier of the sensor to which this attitude set applies IF this set is reporting a single sensor orientation. */
+            /**
+             * Unique identifier of the sensor to which this attitude set applies IF this set is
+             * reporting a single sensor orientation.
+             */
             fun idSensor(idSensor: String) = idSensor(JsonField.of(idSensor))
 
             /**
              * Sets [Builder.idSensor] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.idSensor] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.idSensor] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun idSensor(idSensor: JsonField<String>) =
-                apply {
-                    this.idSensor = idSensor
-                }
+            fun idSensor(idSensor: JsonField<String>) = apply { this.idSensor = idSensor }
 
             /** Recommended interpolation method for estimating attitude ephemeris data. */
             fun interpolator(interpolator: String) = interpolator(JsonField.of(interpolator))
@@ -2234,27 +2319,28 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.interpolator] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.interpolator] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.interpolator] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun interpolator(interpolator: JsonField<String>) =
-                apply {
-                    this.interpolator = interpolator
-                }
+            fun interpolator(interpolator: JsonField<String>) = apply {
+                this.interpolator = interpolator
+            }
 
             /** Recommended polynomial interpolation degree. */
-            fun interpolatorDegree(interpolatorDegree: Int) = interpolatorDegree(JsonField.of(interpolatorDegree))
+            fun interpolatorDegree(interpolatorDegree: Int) =
+                interpolatorDegree(JsonField.of(interpolatorDegree))
 
             /**
              * Sets [Builder.interpolatorDegree] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.interpolatorDegree] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.interpolatorDegree] with a well-typed [Int] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun interpolatorDegree(interpolatorDegree: JsonField<Int>) =
-                apply {
-                    this.interpolatorDegree = interpolatorDegree
-                }
+            fun interpolatorDegree(interpolatorDegree: JsonField<Int>) = apply {
+                this.interpolatorDegree = interpolatorDegree
+            }
 
             /** Optional notes/comments for this attitude set. */
             fun notes(notes: String) = notes(JsonField.of(notes))
@@ -2262,69 +2348,82 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.notes] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.notes] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.notes] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun notes(notes: JsonField<String>) =
-                apply {
-                    this.notes = notes
-                }
+            fun notes(notes: JsonField<String>) = apply { this.notes = notes }
 
-            /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
+            /**
+             * Originating system or organization which produced the data, if different from the
+             * source. The origin may be different than the source if the source was a mediating
+             * system which forwarded the data on behalf of the origin system. If null, the source
+             * may be assumed to be the origin.
+             */
             fun origin(origin: String) = origin(JsonField.of(origin))
 
             /**
              * Sets [Builder.origin] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origin] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origin(origin: JsonField<String>) =
-                apply {
-                    this.origin = origin
-                }
+            fun origin(origin: JsonField<String>) = apply { this.origin = origin }
 
-            /** The originating source network on which this record was created, auto-populated by the system. */
+            /**
+             * The originating source network on which this record was created, auto-populated by
+             * the system.
+             */
             fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
             /**
              * Sets [Builder.origNetwork] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origNetwork] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origNetwork(origNetwork: JsonField<String>) =
-                apply {
-                    this.origNetwork = origNetwork
-                }
+            fun origNetwork(origNetwork: JsonField<String>) = apply {
+                this.origNetwork = origNetwork
+            }
 
-            /** Optional identifier provided by the record source to indicate the target object of this attitude set. This may be an internal identifier and not necessarily map to a valid satellite number. */
+            /**
+             * Optional identifier provided by the record source to indicate the target object of
+             * this attitude set. This may be an internal identifier and not necessarily map to a
+             * valid satellite number.
+             */
             fun origObjectId(origObjectId: String) = origObjectId(JsonField.of(origObjectId))
 
             /**
              * Sets [Builder.origObjectId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origObjectId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origObjectId] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origObjectId(origObjectId: JsonField<String>) =
-                apply {
-                    this.origObjectId = origObjectId
-                }
+            fun origObjectId(origObjectId: JsonField<String>) = apply {
+                this.origObjectId = origObjectId
+            }
 
-            /** Optional identifier provided by the record source to indicate the sensor identifier to which this attitude set applies IF this set is reporting a single sensor orientation. This may be an internal identifier and not necessarily a valid sensor ID. */
+            /**
+             * Optional identifier provided by the record source to indicate the sensor identifier
+             * to which this attitude set applies IF this set is reporting a single sensor
+             * orientation. This may be an internal identifier and not necessarily a valid sensor
+             * ID.
+             */
             fun origSensorId(origSensorId: String) = origSensorId(JsonField.of(origSensorId))
 
             /**
              * Sets [Builder.origSensorId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origSensorId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origSensorId] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origSensorId(origSensorId: JsonField<String>) =
-                apply {
-                    this.origSensorId = origSensorId
-                }
+            fun origSensorId(origSensorId: JsonField<String>) = apply {
+                this.origSensorId = origSensorId
+            }
 
             /** Initial precession angle (ECI J2000 frame) in degrees. */
             fun precAngleInit(precAngleInit: Double) = precAngleInit(JsonField.of(precAngleInit))
@@ -2332,27 +2431,27 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.precAngleInit] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.precAngleInit] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.precAngleInit] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun precAngleInit(precAngleInit: JsonField<Double>) =
-                apply {
-                    this.precAngleInit = precAngleInit
-                }
+            fun precAngleInit(precAngleInit: JsonField<Double>) = apply {
+                this.precAngleInit = precAngleInit
+            }
 
-            /** Satellite/catalog number of the on-orbit object to which this attitude set applies. */
+            /**
+             * Satellite/catalog number of the on-orbit object to which this attitude set applies.
+             */
             fun satNo(satNo: Int) = satNo(JsonField.of(satNo))
 
             /**
              * Sets [Builder.satNo] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.satNo] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.satNo] with a well-typed [Int] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun satNo(satNo: JsonField<Int>) =
-                apply {
-                    this.satNo = satNo
-                }
+            fun satNo(satNo: JsonField<Int>) = apply { this.satNo = satNo }
 
             /** Initial spin angle (ECI J2000 frame) in degrees. */
             fun spinAngleInit(spinAngleInit: Double) = spinAngleInit(JsonField.of(spinAngleInit))
@@ -2360,53 +2459,47 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.spinAngleInit] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.spinAngleInit] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.spinAngleInit] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun spinAngleInit(spinAngleInit: JsonField<Double>) =
-                apply {
-                    this.spinAngleInit = spinAngleInit
-                }
+            fun spinAngleInit(spinAngleInit: JsonField<Double>) = apply {
+                this.spinAngleInit = spinAngleInit
+            }
 
-            /** Attitude ephemeris step size, in seconds. This applies to Attitude Ephemeris Messages (AEM) that employ a fixed step size. */
+            /**
+             * Attitude ephemeris step size, in seconds. This applies to Attitude Ephemeris Messages
+             * (AEM) that employ a fixed step size.
+             */
             fun stepSize(stepSize: Int) = stepSize(JsonField.of(stepSize))
 
             /**
              * Sets [Builder.stepSize] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.stepSize] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.stepSize] with a well-typed [Int] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun stepSize(stepSize: JsonField<Int>) =
-                apply {
-                    this.stepSize = stepSize
-                }
+            fun stepSize(stepSize: JsonField<Int>) = apply { this.stepSize = stepSize }
 
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-                apply {
-                    this.additionalProperties.clear()
-                    putAllAdditionalProperties(additionalProperties)
-                }
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
 
-            fun putAdditionalProperty(key: String, value: JsonValue) =
-                apply {
-                    additionalProperties.put(key, value)
-                }
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
 
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-                apply {
-                    this.additionalProperties.putAll(additionalProperties)
-                }
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
 
-            fun removeAdditionalProperty(key: String) =
-                apply {
-                    additionalProperties.remove(key)
-                }
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-            fun removeAllAdditionalProperties(keys: Set<String>) =
-                apply {
-                    keys.forEach(::removeAdditionalProperty)
-                }
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
 
             /**
              * Returns an immutable instance of [Body].
@@ -2414,7 +2507,6 @@ class AttitudeSetCreateParams private constructor(
              * Further updates to this [Builder] will not mutate the returned instance.
              *
              * The following fields are required:
-             *
              * ```java
              * .classificationMarking()
              * .dataMode()
@@ -2431,96 +2523,77 @@ class AttitudeSetCreateParams private constructor(
              */
             fun build(): Body =
                 Body(
-                  checkRequired(
-                    "classificationMarking", classificationMarking
-                  ),
-                  checkRequired(
-                    "dataMode", dataMode
-                  ),
-                  checkRequired(
-                    "endTime", endTime
-                  ),
-                  checkRequired(
-                    "frame1", frame1
-                  ),
-                  checkRequired(
-                    "frame2", frame2
-                  ),
-                  checkRequired(
-                    "numPoints", numPoints
-                  ),
-                  checkRequired(
-                    "source", source
-                  ),
-                  checkRequired(
-                    "startTime", startTime
-                  ),
-                  checkRequired(
-                    "type", type
-                  ),
-                  id,
-                  (asRef ?: JsonMissing.of()).map { it.toImmutable() },
-                  (attitudeList ?: JsonMissing.of()).map { it.toImmutable() },
-                  createdAt,
-                  createdBy,
-                  esId,
-                  eulerRotSeq,
-                  idOnOrbit,
-                  idSensor,
-                  interpolator,
-                  interpolatorDegree,
-                  notes,
-                  origin,
-                  origNetwork,
-                  origObjectId,
-                  origSensorId,
-                  precAngleInit,
-                  satNo,
-                  spinAngleInit,
-                  stepSize,
-                  additionalProperties.toMutableMap(),
+                    checkRequired("classificationMarking", classificationMarking),
+                    checkRequired("dataMode", dataMode),
+                    checkRequired("endTime", endTime),
+                    checkRequired("frame1", frame1),
+                    checkRequired("frame2", frame2),
+                    checkRequired("numPoints", numPoints),
+                    checkRequired("source", source),
+                    checkRequired("startTime", startTime),
+                    checkRequired("type", type),
+                    id,
+                    (asRef ?: JsonMissing.of()).map { it.toImmutable() },
+                    (attitudeList ?: JsonMissing.of()).map { it.toImmutable() },
+                    createdAt,
+                    createdBy,
+                    esId,
+                    eulerRotSeq,
+                    idOnOrbit,
+                    idSensor,
+                    interpolator,
+                    interpolatorDegree,
+                    notes,
+                    origin,
+                    origNetwork,
+                    origObjectId,
+                    origSensorId,
+                    precAngleInit,
+                    satNo,
+                    spinAngleInit,
+                    stepSize,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
         private var validated: Boolean = false
 
-        fun validate(): Body =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                classificationMarking()
-                dataMode().validate()
-                endTime()
-                frame1()
-                frame2()
-                numPoints()
-                source()
-                startTime()
-                type()
-                id()
-                asRef()
-                attitudeList().ifPresent { it.forEach { it.validate() } }
-                createdAt()
-                createdBy()
-                esId()
-                eulerRotSeq()
-                idOnOrbit()
-                idSensor()
-                interpolator()
-                interpolatorDegree()
-                notes()
-                origin()
-                origNetwork()
-                origObjectId()
-                origSensorId()
-                precAngleInit()
-                satNo()
-                spinAngleInit()
-                stepSize()
-                validated = true
+        fun validate(): Body = apply {
+            if (validated) {
+                return@apply
             }
+
+            classificationMarking()
+            dataMode().validate()
+            endTime()
+            frame1()
+            frame2()
+            numPoints()
+            source()
+            startTime()
+            type()
+            id()
+            asRef()
+            attitudeList().ifPresent { it.forEach { it.validate() } }
+            createdAt()
+            createdBy()
+            esId()
+            eulerRotSeq()
+            idOnOrbit()
+            idSensor()
+            interpolator()
+            interpolatorDegree()
+            notes()
+            origin()
+            origNetwork()
+            origObjectId()
+            origSensorId()
+            precAngleInit()
+            satNo()
+            spinAngleInit()
+            stepSize()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -2531,55 +2604,147 @@ class AttitudeSetCreateParams private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
         @JvmSynthetic
-        internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (endTime.asKnown().isPresent) 1 else 0) + (if (frame1.asKnown().isPresent) 1 else 0) + (if (frame2.asKnown().isPresent) 1 else 0) + (if (numPoints.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (startTime.asKnown().isPresent) 1 else 0) + (if (type.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (asRef.asKnown().getOrNull()?.size ?: 0) + (attitudeList.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (esId.asKnown().isPresent) 1 else 0) + (if (eulerRotSeq.asKnown().isPresent) 1 else 0) + (if (idOnOrbit.asKnown().isPresent) 1 else 0) + (if (idSensor.asKnown().isPresent) 1 else 0) + (if (interpolator.asKnown().isPresent) 1 else 0) + (if (interpolatorDegree.asKnown().isPresent) 1 else 0) + (if (notes.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (origObjectId.asKnown().isPresent) 1 else 0) + (if (origSensorId.asKnown().isPresent) 1 else 0) + (if (precAngleInit.asKnown().isPresent) 1 else 0) + (if (satNo.asKnown().isPresent) 1 else 0) + (if (spinAngleInit.asKnown().isPresent) 1 else 0) + (if (stepSize.asKnown().isPresent) 1 else 0)
+        internal fun validity(): Int =
+            (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+                (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+                (if (endTime.asKnown().isPresent) 1 else 0) +
+                (if (frame1.asKnown().isPresent) 1 else 0) +
+                (if (frame2.asKnown().isPresent) 1 else 0) +
+                (if (numPoints.asKnown().isPresent) 1 else 0) +
+                (if (source.asKnown().isPresent) 1 else 0) +
+                (if (startTime.asKnown().isPresent) 1 else 0) +
+                (if (type.asKnown().isPresent) 1 else 0) +
+                (if (id.asKnown().isPresent) 1 else 0) +
+                (asRef.asKnown().getOrNull()?.size ?: 0) +
+                (attitudeList.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
+                (if (createdAt.asKnown().isPresent) 1 else 0) +
+                (if (createdBy.asKnown().isPresent) 1 else 0) +
+                (if (esId.asKnown().isPresent) 1 else 0) +
+                (if (eulerRotSeq.asKnown().isPresent) 1 else 0) +
+                (if (idOnOrbit.asKnown().isPresent) 1 else 0) +
+                (if (idSensor.asKnown().isPresent) 1 else 0) +
+                (if (interpolator.asKnown().isPresent) 1 else 0) +
+                (if (interpolatorDegree.asKnown().isPresent) 1 else 0) +
+                (if (notes.asKnown().isPresent) 1 else 0) +
+                (if (origin.asKnown().isPresent) 1 else 0) +
+                (if (origNetwork.asKnown().isPresent) 1 else 0) +
+                (if (origObjectId.asKnown().isPresent) 1 else 0) +
+                (if (origSensorId.asKnown().isPresent) 1 else 0) +
+                (if (precAngleInit.asKnown().isPresent) 1 else 0) +
+                (if (satNo.asKnown().isPresent) 1 else 0) +
+                (if (spinAngleInit.asKnown().isPresent) 1 else 0) +
+                (if (stepSize.asKnown().isPresent) 1 else 0)
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && endTime == other.endTime && frame1 == other.frame1 && frame2 == other.frame2 && numPoints == other.numPoints && source == other.source && startTime == other.startTime && type == other.type && id == other.id && asRef == other.asRef && attitudeList == other.attitudeList && createdAt == other.createdAt && createdBy == other.createdBy && esId == other.esId && eulerRotSeq == other.eulerRotSeq && idOnOrbit == other.idOnOrbit && idSensor == other.idSensor && interpolator == other.interpolator && interpolatorDegree == other.interpolatorDegree && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && origSensorId == other.origSensorId && precAngleInit == other.precAngleInit && satNo == other.satNo && spinAngleInit == other.spinAngleInit && stepSize == other.stepSize && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                endTime == other.endTime &&
+                frame1 == other.frame1 &&
+                frame2 == other.frame2 &&
+                numPoints == other.numPoints &&
+                source == other.source &&
+                startTime == other.startTime &&
+                type == other.type &&
+                id == other.id &&
+                asRef == other.asRef &&
+                attitudeList == other.attitudeList &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                esId == other.esId &&
+                eulerRotSeq == other.eulerRotSeq &&
+                idOnOrbit == other.idOnOrbit &&
+                idSensor == other.idSensor &&
+                interpolator == other.interpolator &&
+                interpolatorDegree == other.interpolatorDegree &&
+                notes == other.notes &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                origSensorId == other.origSensorId &&
+                precAngleInit == other.precAngleInit &&
+                satNo == other.satNo &&
+                spinAngleInit == other.spinAngleInit &&
+                stepSize == other.stepSize &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, endTime, frame1, frame2, numPoints, source, startTime, type, id, asRef, attitudeList, createdAt, createdBy, esId, eulerRotSeq, idOnOrbit, idSensor, interpolator, interpolatorDegree, notes, origin, origNetwork, origObjectId, origSensorId, precAngleInit, satNo, spinAngleInit, stepSize, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                endTime,
+                frame1,
+                frame2,
+                numPoints,
+                source,
+                startTime,
+                type,
+                id,
+                asRef,
+                attitudeList,
+                createdAt,
+                createdBy,
+                esId,
+                eulerRotSeq,
+                idOnOrbit,
+                idSensor,
+                interpolator,
+                interpolatorDegree,
+                notes,
+                origin,
+                origNetwork,
+                origObjectId,
+                origSensorId,
+                precAngleInit,
+                satNo,
+                spinAngleInit,
+                stepSize,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() = "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, endTime=$endTime, frame1=$frame1, frame2=$frame2, numPoints=$numPoints, source=$source, startTime=$startTime, type=$type, id=$id, asRef=$asRef, attitudeList=$attitudeList, createdAt=$createdAt, createdBy=$createdBy, esId=$esId, eulerRotSeq=$eulerRotSeq, idOnOrbit=$idOnOrbit, idSensor=$idSensor, interpolator=$interpolator, interpolatorDegree=$interpolatorDegree, notes=$notes, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, precAngleInit=$precAngleInit, satNo=$satNo, spinAngleInit=$spinAngleInit, stepSize=$stepSize, additionalProperties=$additionalProperties}"
+        override fun toString() =
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, endTime=$endTime, frame1=$frame1, frame2=$frame2, numPoints=$numPoints, source=$source, startTime=$startTime, type=$type, id=$id, asRef=$asRef, attitudeList=$attitudeList, createdAt=$createdAt, createdBy=$createdBy, esId=$esId, eulerRotSeq=$eulerRotSeq, idOnOrbit=$idOnOrbit, idSensor=$idSensor, interpolator=$interpolator, interpolatorDegree=$interpolatorDegree, notes=$notes, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, precAngleInit=$precAngleInit, satNo=$satNo, spinAngleInit=$spinAngleInit, stepSize=$stepSize, additionalProperties=$additionalProperties}"
     }
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      */
-    class DataMode @JsonCreator private constructor(
-        private val value: JsonField<String>,
-
-    ) : Enum {
+    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't match any known
-         * member, and you want to know that value. For example, if the SDK is on an older version than the
-         * API, then the API may respond with new members that the SDK is unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue
-        fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -2606,11 +2771,9 @@ class AttitudeSetCreateParams private constructor(
          * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [DataMode] can contain an unknown value in a couple of cases:
-         *
-         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-         *   an older version than the API, then the API may respond with new members that the SDK is unaware
-         *   of.
-         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -2623,11 +2786,11 @@ class AttitudeSetCreateParams private constructor(
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-         * class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want to throw
-         * for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -2641,10 +2804,11 @@ class AttitudeSetCreateParams private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-         * for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
          */
         fun known(): Known =
             when (this) {
@@ -2658,25 +2822,27 @@ class AttitudeSetCreateParams private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging and generally
-         * doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-         * primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
          */
-        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
 
         private var validated: Boolean = false
 
-        fun validate(): DataMode =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                known()
-                validated = true
+        fun validate(): DataMode = apply {
+            if (validated) {
+                return@apply
             }
+
+            known()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -2687,19 +2853,19 @@ class AttitudeSetCreateParams private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic
-        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2707,8 +2873,16 @@ class AttitudeSetCreateParams private constructor(
         override fun toString() = value.toString()
     }
 
-    /** These services provide operations for posting and querying attitude of on-orbit objects. Attitude describes the orientation of an object, which can be represented by quaternions or euler angles. The AttitudeSet ID (asId) identifies the 'AttitudeSet' record which contains details of the underlying data as well as a collection of attitude points. Points must be retrieved by first identifying a desired AttitudeSet and pulling its points by that AttitudeSet ID 'asId'. */
-    class AttitudeList private constructor(
+    /**
+     * These services provide operations for posting and querying attitude of on-orbit objects.
+     * Attitude describes the orientation of an object, which can be represented by quaternions or
+     * euler angles. The AttitudeSet ID (asId) identifies the 'AttitudeSet' record which contains
+     * details of the underlying data as well as a collection of attitude points. Points must be
+     * retrieved by first identifying a desired AttitudeSet and pulling its points by that
+     * AttitudeSet ID 'asId'.
+     */
+    class AttitudeList
+    private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
         private val source: JsonField<String>,
@@ -2743,27 +2917,48 @@ class AttitudeSetCreateParams private constructor(
         private val zAngle: JsonField<List<Double>>,
         private val zRate: JsonField<List<Double>>,
         private val additionalProperties: MutableMap<String, JsonValue>,
-
     ) {
 
         @JsonCreator
         private constructor(
-            @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
             @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
             @JsonProperty("ts") @ExcludeMissing ts: JsonField<OffsetDateTime> = JsonMissing.of(),
             @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
             @JsonProperty("asId") @ExcludeMissing asId: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("coningAngle") @ExcludeMissing coningAngle: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("declination") @ExcludeMissing declination: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("idOnOrbit") @ExcludeMissing idOnOrbit: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("motionType") @ExcludeMissing motionType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("coningAngle")
+            @ExcludeMissing
+            coningAngle: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("declination")
+            @ExcludeMissing
+            declination: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("motionType")
+            @ExcludeMissing
+            motionType: JsonField<String> = JsonMissing.of(),
             @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("origNetwork") @ExcludeMissing origNetwork: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("origObjectId") @ExcludeMissing origObjectId: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("precPeriod") @ExcludeMissing precPeriod: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("precPeriod")
+            @ExcludeMissing
+            precPeriod: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("q1") @ExcludeMissing q1: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("q1Dot") @ExcludeMissing q1Dot: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("q2") @ExcludeMissing q2: JsonField<Double> = JsonMissing.of(),
@@ -2774,293 +2969,366 @@ class AttitudeSetCreateParams private constructor(
             @JsonProperty("qcDot") @ExcludeMissing qcDot: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("ra") @ExcludeMissing ra: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
-            @JsonProperty("spinPeriod") @ExcludeMissing spinPeriod: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("xAngle") @ExcludeMissing xAngle: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("xRate") @ExcludeMissing xRate: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("yAngle") @ExcludeMissing yAngle: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("yRate") @ExcludeMissing yRate: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("zAngle") @ExcludeMissing zAngle: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("zRate") @ExcludeMissing zRate: JsonField<List<Double>> = JsonMissing.of()
+            @JsonProperty("spinPeriod")
+            @ExcludeMissing
+            spinPeriod: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("xAngle")
+            @ExcludeMissing
+            xAngle: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("xRate")
+            @ExcludeMissing
+            xRate: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("yAngle")
+            @ExcludeMissing
+            yAngle: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("yRate")
+            @ExcludeMissing
+            yRate: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("zAngle")
+            @ExcludeMissing
+            zAngle: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("zRate") @ExcludeMissing zRate: JsonField<List<Double>> = JsonMissing.of(),
         ) : this(
-          classificationMarking,
-          dataMode,
-          source,
-          ts,
-          id,
-          asId,
-          coningAngle,
-          createdAt,
-          createdBy,
-          declination,
-          idOnOrbit,
-          motionType,
-          origin,
-          origNetwork,
-          origObjectId,
-          precPeriod,
-          q1,
-          q1Dot,
-          q2,
-          q2Dot,
-          q3,
-          q3Dot,
-          qc,
-          qcDot,
-          ra,
-          satNo,
-          spinPeriod,
-          xAngle,
-          xRate,
-          yAngle,
-          yRate,
-          zAngle,
-          zRate,
-          mutableMapOf(),
+            classificationMarking,
+            dataMode,
+            source,
+            ts,
+            id,
+            asId,
+            coningAngle,
+            createdAt,
+            createdBy,
+            declination,
+            idOnOrbit,
+            motionType,
+            origin,
+            origNetwork,
+            origObjectId,
+            precPeriod,
+            q1,
+            q1Dot,
+            q2,
+            q2Dot,
+            q3,
+            q3Dot,
+            qc,
+            qcDot,
+            ra,
+            satNo,
+            spinPeriod,
+            xAngle,
+            xRate,
+            yAngle,
+            yRate,
+            zAngle,
+            zRate,
+            mutableMapOf(),
         )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
-        fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
+        fun classificationMarking(): String =
+            classificationMarking.getRequired("classificationMarking")
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
         /**
          * Source of the data.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun source(): String = source.getRequired("source")
 
         /**
-         * Time associated with this attitude record, in ISO 8601 UTC format, with microsecond precision.
+         * Time associated with this attitude record, in ISO 8601 UTC format, with microsecond
+         * precision.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
          */
         fun ts(): OffsetDateTime = ts.getRequired("ts")
 
         /**
          * Unique identifier of the record, auto-generated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun id(): Optional<String> = id.getOptional("id")
 
         /**
          * Unique identifier of the parent AttitudeSet associated with this record.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun asId(): Optional<String> = asId.getOptional("asId")
 
         /**
          * Coning angle in degrees.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun coningAngle(): Optional<Double> = coningAngle.getOptional("coningAngle")
 
         /**
          * Time the row was created in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
         /**
          * Application user who created the row in the database, auto-populated by the system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
         /**
          * Precession axis declination (ECI J2000 frame) in degrees.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun declination(): Optional<Double> = declination.getOptional("declination")
 
         /**
          * Unique identifier of the on-orbit satellite to which this attitude record applies.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun idOnOrbit(): Optional<String> = idOnOrbit.getOptional("idOnOrbit")
 
         /**
          * Label specifying type of rotational motion of target.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun motionType(): Optional<String> = motionType.getOptional("motionType")
 
         /**
-         * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun origin(): Optional<String> = origin.getOptional("origin")
 
         /**
-         * The originating source network on which this record was created, auto-populated by the system.
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
         /**
-         * Optional identifier provided by the record source to indicate the target object of this attitude record. This may be an internal identifier and not necessarily map to a valid satellite number.
+         * Optional identifier provided by the record source to indicate the target object of this
+         * attitude record. This may be an internal identifier and not necessarily map to a valid
+         * satellite number.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun origObjectId(): Optional<String> = origObjectId.getOptional("origObjectId")
 
         /**
          * Precession period in seconds.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun precPeriod(): Optional<Double> = precPeriod.getOptional("precPeriod")
 
         /**
          * Quaternion vector component 1.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun q1(): Optional<Double> = q1.getOptional("q1")
 
         /**
          * Derivative of quaternion vector component 1.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun q1Dot(): Optional<Double> = q1Dot.getOptional("q1Dot")
 
         /**
          * Quaternion vector component 2.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun q2(): Optional<Double> = q2.getOptional("q2")
 
         /**
          * Derivative of quaternion vector component 2.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun q2Dot(): Optional<Double> = q2Dot.getOptional("q2Dot")
 
         /**
          * Quaternion vector component 3.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun q3(): Optional<Double> = q3.getOptional("q3")
 
         /**
          * Derivative of quaternion vector component 3.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun q3Dot(): Optional<Double> = q3Dot.getOptional("q3Dot")
 
         /**
          * Quaternion scalar component.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun qc(): Optional<Double> = qc.getOptional("qc")
 
         /**
          * Derivative of quaternion scalar component.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun qcDot(): Optional<Double> = qcDot.getOptional("qcDot")
 
         /**
          * Precession axis right ascension (ECI J2000 frame) in degrees.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun ra(): Optional<Double> = ra.getOptional("ra")
 
         /**
          * Satellite/catalog number of the on-orbit object to which this attitude record applies.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun satNo(): Optional<Int> = satNo.getOptional("satNo")
 
         /**
          * Spin period in seconds.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun spinPeriod(): Optional<Double> = spinPeriod.getOptional("spinPeriod")
 
         /**
-         * Array of X body rotation Euler angle(s), in degrees (-180 to 180). For repeated axis rotations, the array elements should be placed in the order that the angles apply in the sequence.
+         * Array of X body rotation Euler angle(s), in degrees (-180 to 180). For repeated axis
+         * rotations, the array elements should be placed in the order that the angles apply in the
+         * sequence.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun xAngle(): Optional<List<Double>> = xAngle.getOptional("xAngle")
 
         /**
-         * Array of X body rotation rate(s), in degrees per second. For repeated axis rotations, the array elements should be placed in the order that the rates apply in the sequence. Attitude rates are expressed in frame1 with respect to frame2.
+         * Array of X body rotation rate(s), in degrees per second. For repeated axis rotations, the
+         * array elements should be placed in the order that the rates apply in the sequence.
+         * Attitude rates are expressed in frame1 with respect to frame2.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun xRate(): Optional<List<Double>> = xRate.getOptional("xRate")
 
         /**
-         * Array of Y body rotation Euler angle(s), in degrees (-180 to 180). For repeated axis rotations, the array elements should be placed in the order that the angles apply in the sequence.
+         * Array of Y body rotation Euler angle(s), in degrees (-180 to 180). For repeated axis
+         * rotations, the array elements should be placed in the order that the angles apply in the
+         * sequence.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun yAngle(): Optional<List<Double>> = yAngle.getOptional("yAngle")
 
         /**
-         * Array of Y body rotation rate(s), in degrees per second. For repeated axis rotations, the array elements should be placed in the order that the rates apply in the sequence. Attitude rates are expressed in frame1 with respect to frame2.
+         * Array of Y body rotation rate(s), in degrees per second. For repeated axis rotations, the
+         * array elements should be placed in the order that the rates apply in the sequence.
+         * Attitude rates are expressed in frame1 with respect to frame2.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun yRate(): Optional<List<Double>> = yRate.getOptional("yRate")
 
         /**
-         * Array of Z body rotation Euler angle(s), in degrees (-180 to 180). For repeated axis rotations, the array elements should be placed in the order that the angles apply in the sequence.
+         * Array of Z body rotation Euler angle(s), in degrees (-180 to 180). For repeated axis
+         * rotations, the array elements should be placed in the order that the angles apply in the
+         * sequence.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun zAngle(): Optional<List<Double>> = zAngle.getOptional("zAngle")
 
         /**
-         * Array of Z body rotation rate(s), in degrees per second. For repeated axis rotations, the array elements should be placed in the order that the rates apply in the sequence Attitude rates are expressed in frame1 with respect to frame2.
+         * Array of Z body rotation rate(s), in degrees per second. For repeated axis rotations, the
+         * array elements should be placed in the order that the rates apply in the sequence
+         * Attitude rates are expressed in frame1 with respect to frame2.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun zRate(): Optional<List<Double>> = zRate.getOptional("zRate")
 
         /**
          * Returns the raw JSON value of [classificationMarking].
          *
-         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("classificationMarking")
         @ExcludeMissing
@@ -3071,45 +3339,35 @@ class AttitudeSetCreateParams private constructor(
          *
          * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("dataMode")
-        @ExcludeMissing
-        fun _dataMode(): JsonField<DataMode> = dataMode
+        @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
 
         /**
          * Returns the raw JSON value of [source].
          *
          * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("source")
-        @ExcludeMissing
-        fun _source(): JsonField<String> = source
+        @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
 
         /**
          * Returns the raw JSON value of [ts].
          *
          * Unlike [ts], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("ts")
-        @ExcludeMissing
-        fun _ts(): JsonField<OffsetDateTime> = ts
+        @JsonProperty("ts") @ExcludeMissing fun _ts(): JsonField<OffsetDateTime> = ts
 
         /**
          * Returns the raw JSON value of [id].
          *
          * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("id")
-        @ExcludeMissing
-        fun _id(): JsonField<String> = id
+        @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
 
         /**
          * Returns the raw JSON value of [asId].
          *
          * Unlike [asId], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("asId")
-        @ExcludeMissing
-        fun _asId(): JsonField<String> = asId
+        @JsonProperty("asId") @ExcludeMissing fun _asId(): JsonField<String> = asId
 
         /**
          * Returns the raw JSON value of [coningAngle].
@@ -3134,9 +3392,7 @@ class AttitudeSetCreateParams private constructor(
          *
          * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("createdBy")
-        @ExcludeMissing
-        fun _createdBy(): JsonField<String> = createdBy
+        @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
         /**
          * Returns the raw JSON value of [declination].
@@ -3152,9 +3408,7 @@ class AttitudeSetCreateParams private constructor(
          *
          * Unlike [idOnOrbit], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("idOnOrbit")
-        @ExcludeMissing
-        fun _idOnOrbit(): JsonField<String> = idOnOrbit
+        @JsonProperty("idOnOrbit") @ExcludeMissing fun _idOnOrbit(): JsonField<String> = idOnOrbit
 
         /**
          * Returns the raw JSON value of [motionType].
@@ -3170,9 +3424,7 @@ class AttitudeSetCreateParams private constructor(
          *
          * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("origin")
-        @ExcludeMissing
-        fun _origin(): JsonField<String> = origin
+        @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
 
         /**
          * Returns the raw JSON value of [origNetwork].
@@ -3186,7 +3438,8 @@ class AttitudeSetCreateParams private constructor(
         /**
          * Returns the raw JSON value of [origObjectId].
          *
-         * Unlike [origObjectId], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [origObjectId], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("origObjectId")
         @ExcludeMissing
@@ -3206,90 +3459,70 @@ class AttitudeSetCreateParams private constructor(
          *
          * Unlike [q1], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("q1")
-        @ExcludeMissing
-        fun _q1(): JsonField<Double> = q1
+        @JsonProperty("q1") @ExcludeMissing fun _q1(): JsonField<Double> = q1
 
         /**
          * Returns the raw JSON value of [q1Dot].
          *
          * Unlike [q1Dot], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("q1Dot")
-        @ExcludeMissing
-        fun _q1Dot(): JsonField<Double> = q1Dot
+        @JsonProperty("q1Dot") @ExcludeMissing fun _q1Dot(): JsonField<Double> = q1Dot
 
         /**
          * Returns the raw JSON value of [q2].
          *
          * Unlike [q2], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("q2")
-        @ExcludeMissing
-        fun _q2(): JsonField<Double> = q2
+        @JsonProperty("q2") @ExcludeMissing fun _q2(): JsonField<Double> = q2
 
         /**
          * Returns the raw JSON value of [q2Dot].
          *
          * Unlike [q2Dot], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("q2Dot")
-        @ExcludeMissing
-        fun _q2Dot(): JsonField<Double> = q2Dot
+        @JsonProperty("q2Dot") @ExcludeMissing fun _q2Dot(): JsonField<Double> = q2Dot
 
         /**
          * Returns the raw JSON value of [q3].
          *
          * Unlike [q3], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("q3")
-        @ExcludeMissing
-        fun _q3(): JsonField<Double> = q3
+        @JsonProperty("q3") @ExcludeMissing fun _q3(): JsonField<Double> = q3
 
         /**
          * Returns the raw JSON value of [q3Dot].
          *
          * Unlike [q3Dot], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("q3Dot")
-        @ExcludeMissing
-        fun _q3Dot(): JsonField<Double> = q3Dot
+        @JsonProperty("q3Dot") @ExcludeMissing fun _q3Dot(): JsonField<Double> = q3Dot
 
         /**
          * Returns the raw JSON value of [qc].
          *
          * Unlike [qc], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("qc")
-        @ExcludeMissing
-        fun _qc(): JsonField<Double> = qc
+        @JsonProperty("qc") @ExcludeMissing fun _qc(): JsonField<Double> = qc
 
         /**
          * Returns the raw JSON value of [qcDot].
          *
          * Unlike [qcDot], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("qcDot")
-        @ExcludeMissing
-        fun _qcDot(): JsonField<Double> = qcDot
+        @JsonProperty("qcDot") @ExcludeMissing fun _qcDot(): JsonField<Double> = qcDot
 
         /**
          * Returns the raw JSON value of [ra].
          *
          * Unlike [ra], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("ra")
-        @ExcludeMissing
-        fun _ra(): JsonField<Double> = ra
+        @JsonProperty("ra") @ExcludeMissing fun _ra(): JsonField<Double> = ra
 
         /**
          * Returns the raw JSON value of [satNo].
          *
          * Unlike [satNo], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("satNo")
-        @ExcludeMissing
-        fun _satNo(): JsonField<Int> = satNo
+        @JsonProperty("satNo") @ExcludeMissing fun _satNo(): JsonField<Int> = satNo
 
         /**
          * Returns the raw JSON value of [spinPeriod].
@@ -3305,63 +3538,52 @@ class AttitudeSetCreateParams private constructor(
          *
          * Unlike [xAngle], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("xAngle")
-        @ExcludeMissing
-        fun _xAngle(): JsonField<List<Double>> = xAngle
+        @JsonProperty("xAngle") @ExcludeMissing fun _xAngle(): JsonField<List<Double>> = xAngle
 
         /**
          * Returns the raw JSON value of [xRate].
          *
          * Unlike [xRate], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("xRate")
-        @ExcludeMissing
-        fun _xRate(): JsonField<List<Double>> = xRate
+        @JsonProperty("xRate") @ExcludeMissing fun _xRate(): JsonField<List<Double>> = xRate
 
         /**
          * Returns the raw JSON value of [yAngle].
          *
          * Unlike [yAngle], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("yAngle")
-        @ExcludeMissing
-        fun _yAngle(): JsonField<List<Double>> = yAngle
+        @JsonProperty("yAngle") @ExcludeMissing fun _yAngle(): JsonField<List<Double>> = yAngle
 
         /**
          * Returns the raw JSON value of [yRate].
          *
          * Unlike [yRate], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("yRate")
-        @ExcludeMissing
-        fun _yRate(): JsonField<List<Double>> = yRate
+        @JsonProperty("yRate") @ExcludeMissing fun _yRate(): JsonField<List<Double>> = yRate
 
         /**
          * Returns the raw JSON value of [zAngle].
          *
          * Unlike [zAngle], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("zAngle")
-        @ExcludeMissing
-        fun _zAngle(): JsonField<List<Double>> = zAngle
+        @JsonProperty("zAngle") @ExcludeMissing fun _zAngle(): JsonField<List<Double>> = zAngle
 
         /**
          * Returns the raw JSON value of [zRate].
          *
          * Unlike [zRate], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("zRate")
-        @ExcludeMissing
-        fun _zRate(): JsonField<List<Double>> = zRate
+        @JsonProperty("zRate") @ExcludeMissing fun _zRate(): JsonField<List<Double>> = zRate
 
         @JsonAnySetter
         private fun putAdditionalProperty(key: String, value: JsonValue) {
-          additionalProperties.put(key, value)
+            additionalProperties.put(key, value)
         }
 
         @JsonAnyGetter
         @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
 
         fun toBuilder() = Builder().from(this)
 
@@ -3371,7 +3593,6 @@ class AttitudeSetCreateParams private constructor(
              * Returns a mutable builder for constructing an instance of [AttitudeList].
              *
              * The following fields are required:
-             *
              * ```java
              * .classificationMarking()
              * .dataMode()
@@ -3379,8 +3600,7 @@ class AttitudeSetCreateParams private constructor(
              * .ts()
              * ```
              */
-            @JvmStatic
-            fun builder() = Builder()
+            @JvmStatic fun builder() = Builder()
         }
 
         /** A builder for [AttitudeList]. */
@@ -3422,81 +3642,83 @@ class AttitudeSetCreateParams private constructor(
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
-            internal fun from(attitudeList: AttitudeList) =
-                apply {
-                    classificationMarking = attitudeList.classificationMarking
-                    dataMode = attitudeList.dataMode
-                    source = attitudeList.source
-                    ts = attitudeList.ts
-                    id = attitudeList.id
-                    asId = attitudeList.asId
-                    coningAngle = attitudeList.coningAngle
-                    createdAt = attitudeList.createdAt
-                    createdBy = attitudeList.createdBy
-                    declination = attitudeList.declination
-                    idOnOrbit = attitudeList.idOnOrbit
-                    motionType = attitudeList.motionType
-                    origin = attitudeList.origin
-                    origNetwork = attitudeList.origNetwork
-                    origObjectId = attitudeList.origObjectId
-                    precPeriod = attitudeList.precPeriod
-                    q1 = attitudeList.q1
-                    q1Dot = attitudeList.q1Dot
-                    q2 = attitudeList.q2
-                    q2Dot = attitudeList.q2Dot
-                    q3 = attitudeList.q3
-                    q3Dot = attitudeList.q3Dot
-                    qc = attitudeList.qc
-                    qcDot = attitudeList.qcDot
-                    ra = attitudeList.ra
-                    satNo = attitudeList.satNo
-                    spinPeriod = attitudeList.spinPeriod
-                    xAngle = attitudeList.xAngle.map { it.toMutableList() }
-                    xRate = attitudeList.xRate.map { it.toMutableList() }
-                    yAngle = attitudeList.yAngle.map { it.toMutableList() }
-                    yRate = attitudeList.yRate.map { it.toMutableList() }
-                    zAngle = attitudeList.zAngle.map { it.toMutableList() }
-                    zRate = attitudeList.zRate.map { it.toMutableList() }
-                    additionalProperties = attitudeList.additionalProperties.toMutableMap()
-                }
+            internal fun from(attitudeList: AttitudeList) = apply {
+                classificationMarking = attitudeList.classificationMarking
+                dataMode = attitudeList.dataMode
+                source = attitudeList.source
+                ts = attitudeList.ts
+                id = attitudeList.id
+                asId = attitudeList.asId
+                coningAngle = attitudeList.coningAngle
+                createdAt = attitudeList.createdAt
+                createdBy = attitudeList.createdBy
+                declination = attitudeList.declination
+                idOnOrbit = attitudeList.idOnOrbit
+                motionType = attitudeList.motionType
+                origin = attitudeList.origin
+                origNetwork = attitudeList.origNetwork
+                origObjectId = attitudeList.origObjectId
+                precPeriod = attitudeList.precPeriod
+                q1 = attitudeList.q1
+                q1Dot = attitudeList.q1Dot
+                q2 = attitudeList.q2
+                q2Dot = attitudeList.q2Dot
+                q3 = attitudeList.q3
+                q3Dot = attitudeList.q3Dot
+                qc = attitudeList.qc
+                qcDot = attitudeList.qcDot
+                ra = attitudeList.ra
+                satNo = attitudeList.satNo
+                spinPeriod = attitudeList.spinPeriod
+                xAngle = attitudeList.xAngle.map { it.toMutableList() }
+                xRate = attitudeList.xRate.map { it.toMutableList() }
+                yAngle = attitudeList.yAngle.map { it.toMutableList() }
+                yRate = attitudeList.yRate.map { it.toMutableList() }
+                zAngle = attitudeList.zAngle.map { it.toMutableList() }
+                zRate = attitudeList.zRate.map { it.toMutableList() }
+                additionalProperties = attitudeList.additionalProperties.toMutableMap()
+            }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-            fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
+            fun classificationMarking(classificationMarking: String) =
+                classificationMarking(JsonField.of(classificationMarking))
 
             /**
              * Sets [Builder.classificationMarking] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.classificationMarking] with a well-typed [String]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun classificationMarking(classificationMarking: JsonField<String>) =
-                apply {
-                    this.classificationMarking = classificationMarking
-                }
+            fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+                this.classificationMarking = classificationMarking
+            }
 
             /**
              * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
              *
-             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may
+             * include both real and simulated data.
              *
-             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events,
+             * and analysis.
              *
              * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
              *
-             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+             * requirements, and for validating technical, functional, and performance
+             * characteristics.
              */
             fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
             /**
              * Sets [Builder.dataMode] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun dataMode(dataMode: JsonField<DataMode>) =
-                apply {
-                    this.dataMode = dataMode
-                }
+            fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
 
             /** Source of the data. */
             fun source(source: String) = source(JsonField.of(source))
@@ -3504,27 +3726,26 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.source] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.source] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun source(source: JsonField<String>) =
-                apply {
-                    this.source = source
-                }
+            fun source(source: JsonField<String>) = apply { this.source = source }
 
-            /** Time associated with this attitude record, in ISO 8601 UTC format, with microsecond precision. */
+            /**
+             * Time associated with this attitude record, in ISO 8601 UTC format, with microsecond
+             * precision.
+             */
             fun ts(ts: OffsetDateTime) = ts(JsonField.of(ts))
 
             /**
              * Sets [Builder.ts] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.ts] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.ts] with a well-typed [OffsetDateTime] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun ts(ts: JsonField<OffsetDateTime>) =
-                apply {
-                    this.ts = ts
-                }
+            fun ts(ts: JsonField<OffsetDateTime>) = apply { this.ts = ts }
 
             /** Unique identifier of the record, auto-generated by the system. */
             fun id(id: String) = id(JsonField.of(id))
@@ -3532,13 +3753,11 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.id] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.id] with a well-typed [String] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun id(id: JsonField<String>) =
-                apply {
-                    this.id = id
-                }
+            fun id(id: JsonField<String>) = apply { this.id = id }
 
             /** Unique identifier of the parent AttitudeSet associated with this record. */
             fun asId(asId: String) = asId(JsonField.of(asId))
@@ -3546,13 +3765,11 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.asId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.asId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.asId] with a well-typed [String] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun asId(asId: JsonField<String>) =
-                apply {
-                    this.asId = asId
-                }
+            fun asId(asId: JsonField<String>) = apply { this.asId = asId }
 
             /** Coning angle in degrees. */
             fun coningAngle(coningAngle: Double) = coningAngle(JsonField.of(coningAngle))
@@ -3560,13 +3777,13 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.coningAngle] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.coningAngle] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.coningAngle] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun coningAngle(coningAngle: JsonField<Double>) =
-                apply {
-                    this.coningAngle = coningAngle
-                }
+            fun coningAngle(coningAngle: JsonField<Double>) = apply {
+                this.coningAngle = coningAngle
+            }
 
             /** Time the row was created in the database, auto-populated by the system. */
             fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -3574,27 +3791,27 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.createdAt] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdAt(createdAt: JsonField<OffsetDateTime>) =
-                apply {
-                    this.createdAt = createdAt
-                }
+            fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply {
+                this.createdAt = createdAt
+            }
 
-            /** Application user who created the row in the database, auto-populated by the system. */
+            /**
+             * Application user who created the row in the database, auto-populated by the system.
+             */
             fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
 
             /**
              * Sets [Builder.createdBy] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun createdBy(createdBy: JsonField<String>) =
-                apply {
-                    this.createdBy = createdBy
-                }
+            fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
             /** Precession axis declination (ECI J2000 frame) in degrees. */
             fun declination(declination: Double) = declination(JsonField.of(declination))
@@ -3602,27 +3819,27 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.declination] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.declination] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.declination] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun declination(declination: JsonField<Double>) =
-                apply {
-                    this.declination = declination
-                }
+            fun declination(declination: JsonField<Double>) = apply {
+                this.declination = declination
+            }
 
-            /** Unique identifier of the on-orbit satellite to which this attitude record applies. */
+            /**
+             * Unique identifier of the on-orbit satellite to which this attitude record applies.
+             */
             fun idOnOrbit(idOnOrbit: String) = idOnOrbit(JsonField.of(idOnOrbit))
 
             /**
              * Sets [Builder.idOnOrbit] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.idOnOrbit] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.idOnOrbit] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun idOnOrbit(idOnOrbit: JsonField<String>) =
-                apply {
-                    this.idOnOrbit = idOnOrbit
-                }
+            fun idOnOrbit(idOnOrbit: JsonField<String>) = apply { this.idOnOrbit = idOnOrbit }
 
             /** Label specifying type of rotational motion of target. */
             fun motionType(motionType: String) = motionType(JsonField.of(motionType))
@@ -3630,55 +3847,63 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.motionType] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.motionType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.motionType] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun motionType(motionType: JsonField<String>) =
-                apply {
-                    this.motionType = motionType
-                }
+            fun motionType(motionType: JsonField<String>) = apply { this.motionType = motionType }
 
-            /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
+            /**
+             * Originating system or organization which produced the data, if different from the
+             * source. The origin may be different than the source if the source was a mediating
+             * system which forwarded the data on behalf of the origin system. If null, the source
+             * may be assumed to be the origin.
+             */
             fun origin(origin: String) = origin(JsonField.of(origin))
 
             /**
              * Sets [Builder.origin] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origin] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origin(origin: JsonField<String>) =
-                apply {
-                    this.origin = origin
-                }
+            fun origin(origin: JsonField<String>) = apply { this.origin = origin }
 
-            /** The originating source network on which this record was created, auto-populated by the system. */
+            /**
+             * The originating source network on which this record was created, auto-populated by
+             * the system.
+             */
             fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
             /**
              * Sets [Builder.origNetwork] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origNetwork] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origNetwork(origNetwork: JsonField<String>) =
-                apply {
-                    this.origNetwork = origNetwork
-                }
+            fun origNetwork(origNetwork: JsonField<String>) = apply {
+                this.origNetwork = origNetwork
+            }
 
-            /** Optional identifier provided by the record source to indicate the target object of this attitude record. This may be an internal identifier and not necessarily map to a valid satellite number. */
+            /**
+             * Optional identifier provided by the record source to indicate the target object of
+             * this attitude record. This may be an internal identifier and not necessarily map to a
+             * valid satellite number.
+             */
             fun origObjectId(origObjectId: String) = origObjectId(JsonField.of(origObjectId))
 
             /**
              * Sets [Builder.origObjectId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.origObjectId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.origObjectId] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun origObjectId(origObjectId: JsonField<String>) =
-                apply {
-                    this.origObjectId = origObjectId
-                }
+            fun origObjectId(origObjectId: JsonField<String>) = apply {
+                this.origObjectId = origObjectId
+            }
 
             /** Precession period in seconds. */
             fun precPeriod(precPeriod: Double) = precPeriod(JsonField.of(precPeriod))
@@ -3686,13 +3911,11 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.precPeriod] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.precPeriod] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.precPeriod] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun precPeriod(precPeriod: JsonField<Double>) =
-                apply {
-                    this.precPeriod = precPeriod
-                }
+            fun precPeriod(precPeriod: JsonField<Double>) = apply { this.precPeriod = precPeriod }
 
             /** Quaternion vector component 1. */
             fun q1(q1: Double) = q1(JsonField.of(q1))
@@ -3700,13 +3923,11 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.q1] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.q1] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.q1] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun q1(q1: JsonField<Double>) =
-                apply {
-                    this.q1 = q1
-                }
+            fun q1(q1: JsonField<Double>) = apply { this.q1 = q1 }
 
             /** Derivative of quaternion vector component 1. */
             fun q1Dot(q1Dot: Double) = q1Dot(JsonField.of(q1Dot))
@@ -3714,13 +3935,11 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.q1Dot] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.q1Dot] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.q1Dot] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun q1Dot(q1Dot: JsonField<Double>) =
-                apply {
-                    this.q1Dot = q1Dot
-                }
+            fun q1Dot(q1Dot: JsonField<Double>) = apply { this.q1Dot = q1Dot }
 
             /** Quaternion vector component 2. */
             fun q2(q2: Double) = q2(JsonField.of(q2))
@@ -3728,13 +3947,11 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.q2] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.q2] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.q2] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun q2(q2: JsonField<Double>) =
-                apply {
-                    this.q2 = q2
-                }
+            fun q2(q2: JsonField<Double>) = apply { this.q2 = q2 }
 
             /** Derivative of quaternion vector component 2. */
             fun q2Dot(q2Dot: Double) = q2Dot(JsonField.of(q2Dot))
@@ -3742,13 +3959,11 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.q2Dot] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.q2Dot] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.q2Dot] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun q2Dot(q2Dot: JsonField<Double>) =
-                apply {
-                    this.q2Dot = q2Dot
-                }
+            fun q2Dot(q2Dot: JsonField<Double>) = apply { this.q2Dot = q2Dot }
 
             /** Quaternion vector component 3. */
             fun q3(q3: Double) = q3(JsonField.of(q3))
@@ -3756,13 +3971,11 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.q3] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.q3] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.q3] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun q3(q3: JsonField<Double>) =
-                apply {
-                    this.q3 = q3
-                }
+            fun q3(q3: JsonField<Double>) = apply { this.q3 = q3 }
 
             /** Derivative of quaternion vector component 3. */
             fun q3Dot(q3Dot: Double) = q3Dot(JsonField.of(q3Dot))
@@ -3770,13 +3983,11 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.q3Dot] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.q3Dot] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.q3Dot] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun q3Dot(q3Dot: JsonField<Double>) =
-                apply {
-                    this.q3Dot = q3Dot
-                }
+            fun q3Dot(q3Dot: JsonField<Double>) = apply { this.q3Dot = q3Dot }
 
             /** Quaternion scalar component. */
             fun qc(qc: Double) = qc(JsonField.of(qc))
@@ -3784,13 +3995,11 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.qc] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.qc] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.qc] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun qc(qc: JsonField<Double>) =
-                apply {
-                    this.qc = qc
-                }
+            fun qc(qc: JsonField<Double>) = apply { this.qc = qc }
 
             /** Derivative of quaternion scalar component. */
             fun qcDot(qcDot: Double) = qcDot(JsonField.of(qcDot))
@@ -3798,13 +4007,11 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.qcDot] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.qcDot] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.qcDot] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun qcDot(qcDot: JsonField<Double>) =
-                apply {
-                    this.qcDot = qcDot
-                }
+            fun qcDot(qcDot: JsonField<Double>) = apply { this.qcDot = qcDot }
 
             /** Precession axis right ascension (ECI J2000 frame) in degrees. */
             fun ra(ra: Double) = ra(JsonField.of(ra))
@@ -3812,27 +4019,26 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.ra] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.ra] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.ra] with a well-typed [Double] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun ra(ra: JsonField<Double>) =
-                apply {
-                    this.ra = ra
-                }
+            fun ra(ra: JsonField<Double>) = apply { this.ra = ra }
 
-            /** Satellite/catalog number of the on-orbit object to which this attitude record applies. */
+            /**
+             * Satellite/catalog number of the on-orbit object to which this attitude record
+             * applies.
+             */
             fun satNo(satNo: Int) = satNo(JsonField.of(satNo))
 
             /**
              * Sets [Builder.satNo] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.satNo] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.satNo] with a well-typed [Int] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
              */
-            fun satNo(satNo: JsonField<Int>) =
-                apply {
-                    this.satNo = satNo
-                }
+            fun satNo(satNo: JsonField<Int>) = apply { this.satNo = satNo }
 
             /** Spin period in seconds. */
             fun spinPeriod(spinPeriod: Double) = spinPeriod(JsonField.of(spinPeriod))
@@ -3840,195 +4046,210 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Sets [Builder.spinPeriod] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.spinPeriod] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.spinPeriod] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun spinPeriod(spinPeriod: JsonField<Double>) =
-                apply {
-                    this.spinPeriod = spinPeriod
-                }
+            fun spinPeriod(spinPeriod: JsonField<Double>) = apply { this.spinPeriod = spinPeriod }
 
-            /** Array of X body rotation Euler angle(s), in degrees (-180 to 180). For repeated axis rotations, the array elements should be placed in the order that the angles apply in the sequence. */
+            /**
+             * Array of X body rotation Euler angle(s), in degrees (-180 to 180). For repeated axis
+             * rotations, the array elements should be placed in the order that the angles apply in
+             * the sequence.
+             */
             fun xAngle(xAngle: List<Double>) = xAngle(JsonField.of(xAngle))
 
             /**
              * Sets [Builder.xAngle] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.xAngle] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.xAngle] with a well-typed `List<Double>` value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun xAngle(xAngle: JsonField<List<Double>>) =
-                apply {
-                    this.xAngle = xAngle.map { it.toMutableList() }
-                }
+            fun xAngle(xAngle: JsonField<List<Double>>) = apply {
+                this.xAngle = xAngle.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [Builder.xAngle].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addXAngle(xAngle: Double) =
-                apply {
-                    this.xAngle = (this.xAngle ?: JsonField.of(mutableListOf())).also {
+            fun addXAngle(xAngle: Double) = apply {
+                this.xAngle =
+                    (this.xAngle ?: JsonField.of(mutableListOf())).also {
                         checkKnown("xAngle", it).add(xAngle)
                     }
-                }
+            }
 
-            /** Array of X body rotation rate(s), in degrees per second. For repeated axis rotations, the array elements should be placed in the order that the rates apply in the sequence. Attitude rates are expressed in frame1 with respect to frame2. */
+            /**
+             * Array of X body rotation rate(s), in degrees per second. For repeated axis rotations,
+             * the array elements should be placed in the order that the rates apply in the
+             * sequence. Attitude rates are expressed in frame1 with respect to frame2.
+             */
             fun xRate(xRate: List<Double>) = xRate(JsonField.of(xRate))
 
             /**
              * Sets [Builder.xRate] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.xRate] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.xRate] with a well-typed `List<Double>` value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun xRate(xRate: JsonField<List<Double>>) =
-                apply {
-                    this.xRate = xRate.map { it.toMutableList() }
-                }
+            fun xRate(xRate: JsonField<List<Double>>) = apply {
+                this.xRate = xRate.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [Builder.xRate].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addXRate(xRate: Double) =
-                apply {
-                    this.xRate = (this.xRate ?: JsonField.of(mutableListOf())).also {
+            fun addXRate(xRate: Double) = apply {
+                this.xRate =
+                    (this.xRate ?: JsonField.of(mutableListOf())).also {
                         checkKnown("xRate", it).add(xRate)
                     }
-                }
+            }
 
-            /** Array of Y body rotation Euler angle(s), in degrees (-180 to 180). For repeated axis rotations, the array elements should be placed in the order that the angles apply in the sequence. */
+            /**
+             * Array of Y body rotation Euler angle(s), in degrees (-180 to 180). For repeated axis
+             * rotations, the array elements should be placed in the order that the angles apply in
+             * the sequence.
+             */
             fun yAngle(yAngle: List<Double>) = yAngle(JsonField.of(yAngle))
 
             /**
              * Sets [Builder.yAngle] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.yAngle] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.yAngle] with a well-typed `List<Double>` value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun yAngle(yAngle: JsonField<List<Double>>) =
-                apply {
-                    this.yAngle = yAngle.map { it.toMutableList() }
-                }
+            fun yAngle(yAngle: JsonField<List<Double>>) = apply {
+                this.yAngle = yAngle.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [Builder.yAngle].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addYAngle(yAngle: Double) =
-                apply {
-                    this.yAngle = (this.yAngle ?: JsonField.of(mutableListOf())).also {
+            fun addYAngle(yAngle: Double) = apply {
+                this.yAngle =
+                    (this.yAngle ?: JsonField.of(mutableListOf())).also {
                         checkKnown("yAngle", it).add(yAngle)
                     }
-                }
+            }
 
-            /** Array of Y body rotation rate(s), in degrees per second. For repeated axis rotations, the array elements should be placed in the order that the rates apply in the sequence. Attitude rates are expressed in frame1 with respect to frame2. */
+            /**
+             * Array of Y body rotation rate(s), in degrees per second. For repeated axis rotations,
+             * the array elements should be placed in the order that the rates apply in the
+             * sequence. Attitude rates are expressed in frame1 with respect to frame2.
+             */
             fun yRate(yRate: List<Double>) = yRate(JsonField.of(yRate))
 
             /**
              * Sets [Builder.yRate] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.yRate] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.yRate] with a well-typed `List<Double>` value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun yRate(yRate: JsonField<List<Double>>) =
-                apply {
-                    this.yRate = yRate.map { it.toMutableList() }
-                }
+            fun yRate(yRate: JsonField<List<Double>>) = apply {
+                this.yRate = yRate.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [Builder.yRate].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addYRate(yRate: Double) =
-                apply {
-                    this.yRate = (this.yRate ?: JsonField.of(mutableListOf())).also {
+            fun addYRate(yRate: Double) = apply {
+                this.yRate =
+                    (this.yRate ?: JsonField.of(mutableListOf())).also {
                         checkKnown("yRate", it).add(yRate)
                     }
-                }
+            }
 
-            /** Array of Z body rotation Euler angle(s), in degrees (-180 to 180). For repeated axis rotations, the array elements should be placed in the order that the angles apply in the sequence. */
+            /**
+             * Array of Z body rotation Euler angle(s), in degrees (-180 to 180). For repeated axis
+             * rotations, the array elements should be placed in the order that the angles apply in
+             * the sequence.
+             */
             fun zAngle(zAngle: List<Double>) = zAngle(JsonField.of(zAngle))
 
             /**
              * Sets [Builder.zAngle] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.zAngle] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.zAngle] with a well-typed `List<Double>` value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun zAngle(zAngle: JsonField<List<Double>>) =
-                apply {
-                    this.zAngle = zAngle.map { it.toMutableList() }
-                }
+            fun zAngle(zAngle: JsonField<List<Double>>) = apply {
+                this.zAngle = zAngle.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [Builder.zAngle].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addZAngle(zAngle: Double) =
-                apply {
-                    this.zAngle = (this.zAngle ?: JsonField.of(mutableListOf())).also {
+            fun addZAngle(zAngle: Double) = apply {
+                this.zAngle =
+                    (this.zAngle ?: JsonField.of(mutableListOf())).also {
                         checkKnown("zAngle", it).add(zAngle)
                     }
-                }
+            }
 
-            /** Array of Z body rotation rate(s), in degrees per second. For repeated axis rotations, the array elements should be placed in the order that the rates apply in the sequence Attitude rates are expressed in frame1 with respect to frame2. */
+            /**
+             * Array of Z body rotation rate(s), in degrees per second. For repeated axis rotations,
+             * the array elements should be placed in the order that the rates apply in the sequence
+             * Attitude rates are expressed in frame1 with respect to frame2.
+             */
             fun zRate(zRate: List<Double>) = zRate(JsonField.of(zRate))
 
             /**
              * Sets [Builder.zRate] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.zRate] with a well-typed `List<Double>` value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.zRate] with a well-typed `List<Double>` value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun zRate(zRate: JsonField<List<Double>>) =
-                apply {
-                    this.zRate = zRate.map { it.toMutableList() }
-                }
+            fun zRate(zRate: JsonField<List<Double>>) = apply {
+                this.zRate = zRate.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [Double] to [Builder.zRate].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addZRate(zRate: Double) =
-                apply {
-                    this.zRate = (this.zRate ?: JsonField.of(mutableListOf())).also {
+            fun addZRate(zRate: Double) = apply {
+                this.zRate =
+                    (this.zRate ?: JsonField.of(mutableListOf())).also {
                         checkKnown("zRate", it).add(zRate)
                     }
-                }
+            }
 
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-                apply {
-                    this.additionalProperties.clear()
-                    putAllAdditionalProperties(additionalProperties)
-                }
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
 
-            fun putAdditionalProperty(key: String, value: JsonValue) =
-                apply {
-                    additionalProperties.put(key, value)
-                }
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
 
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-                apply {
-                    this.additionalProperties.putAll(additionalProperties)
-                }
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
 
-            fun removeAdditionalProperty(key: String) =
-                apply {
-                    additionalProperties.remove(key)
-                }
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-            fun removeAllAdditionalProperties(keys: Set<String>) =
-                apply {
-                    keys.forEach(::removeAdditionalProperty)
-                }
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
 
             /**
              * Returns an immutable instance of [AttitudeList].
@@ -4036,7 +4257,6 @@ class AttitudeSetCreateParams private constructor(
              * Further updates to this [Builder] will not mutate the returned instance.
              *
              * The following fields are required:
-             *
              * ```java
              * .classificationMarking()
              * .dataMode()
@@ -4048,94 +4268,85 @@ class AttitudeSetCreateParams private constructor(
              */
             fun build(): AttitudeList =
                 AttitudeList(
-                  checkRequired(
-                    "classificationMarking", classificationMarking
-                  ),
-                  checkRequired(
-                    "dataMode", dataMode
-                  ),
-                  checkRequired(
-                    "source", source
-                  ),
-                  checkRequired(
-                    "ts", ts
-                  ),
-                  id,
-                  asId,
-                  coningAngle,
-                  createdAt,
-                  createdBy,
-                  declination,
-                  idOnOrbit,
-                  motionType,
-                  origin,
-                  origNetwork,
-                  origObjectId,
-                  precPeriod,
-                  q1,
-                  q1Dot,
-                  q2,
-                  q2Dot,
-                  q3,
-                  q3Dot,
-                  qc,
-                  qcDot,
-                  ra,
-                  satNo,
-                  spinPeriod,
-                  (xAngle ?: JsonMissing.of()).map { it.toImmutable() },
-                  (xRate ?: JsonMissing.of()).map { it.toImmutable() },
-                  (yAngle ?: JsonMissing.of()).map { it.toImmutable() },
-                  (yRate ?: JsonMissing.of()).map { it.toImmutable() },
-                  (zAngle ?: JsonMissing.of()).map { it.toImmutable() },
-                  (zRate ?: JsonMissing.of()).map { it.toImmutable() },
-                  additionalProperties.toMutableMap(),
+                    checkRequired("classificationMarking", classificationMarking),
+                    checkRequired("dataMode", dataMode),
+                    checkRequired("source", source),
+                    checkRequired("ts", ts),
+                    id,
+                    asId,
+                    coningAngle,
+                    createdAt,
+                    createdBy,
+                    declination,
+                    idOnOrbit,
+                    motionType,
+                    origin,
+                    origNetwork,
+                    origObjectId,
+                    precPeriod,
+                    q1,
+                    q1Dot,
+                    q2,
+                    q2Dot,
+                    q3,
+                    q3Dot,
+                    qc,
+                    qcDot,
+                    ra,
+                    satNo,
+                    spinPeriod,
+                    (xAngle ?: JsonMissing.of()).map { it.toImmutable() },
+                    (xRate ?: JsonMissing.of()).map { it.toImmutable() },
+                    (yAngle ?: JsonMissing.of()).map { it.toImmutable() },
+                    (yRate ?: JsonMissing.of()).map { it.toImmutable() },
+                    (zAngle ?: JsonMissing.of()).map { it.toImmutable() },
+                    (zRate ?: JsonMissing.of()).map { it.toImmutable() },
+                    additionalProperties.toMutableMap(),
                 )
         }
 
         private var validated: Boolean = false
 
-        fun validate(): AttitudeList =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                classificationMarking()
-                dataMode().validate()
-                source()
-                ts()
-                id()
-                asId()
-                coningAngle()
-                createdAt()
-                createdBy()
-                declination()
-                idOnOrbit()
-                motionType()
-                origin()
-                origNetwork()
-                origObjectId()
-                precPeriod()
-                q1()
-                q1Dot()
-                q2()
-                q2Dot()
-                q3()
-                q3Dot()
-                qc()
-                qcDot()
-                ra()
-                satNo()
-                spinPeriod()
-                xAngle()
-                xRate()
-                yAngle()
-                yRate()
-                zAngle()
-                zRate()
-                validated = true
+        fun validate(): AttitudeList = apply {
+            if (validated) {
+                return@apply
             }
+
+            classificationMarking()
+            dataMode().validate()
+            source()
+            ts()
+            id()
+            asId()
+            coningAngle()
+            createdAt()
+            createdBy()
+            declination()
+            idOnOrbit()
+            motionType()
+            origin()
+            origNetwork()
+            origObjectId()
+            precPeriod()
+            q1()
+            q1Dot()
+            q2()
+            q2Dot()
+            q3()
+            q3Dot()
+            qc()
+            qcDot()
+            ra()
+            satNo()
+            spinPeriod()
+            xAngle()
+            xRate()
+            yAngle()
+            yRate()
+            zAngle()
+            zRate()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -4146,38 +4357,73 @@ class AttitudeSetCreateParams private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
         @JvmSynthetic
-        internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (ts.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (if (asId.asKnown().isPresent) 1 else 0) + (if (coningAngle.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (declination.asKnown().isPresent) 1 else 0) + (if (idOnOrbit.asKnown().isPresent) 1 else 0) + (if (motionType.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (origObjectId.asKnown().isPresent) 1 else 0) + (if (precPeriod.asKnown().isPresent) 1 else 0) + (if (q1.asKnown().isPresent) 1 else 0) + (if (q1Dot.asKnown().isPresent) 1 else 0) + (if (q2.asKnown().isPresent) 1 else 0) + (if (q2Dot.asKnown().isPresent) 1 else 0) + (if (q3.asKnown().isPresent) 1 else 0) + (if (q3Dot.asKnown().isPresent) 1 else 0) + (if (qc.asKnown().isPresent) 1 else 0) + (if (qcDot.asKnown().isPresent) 1 else 0) + (if (ra.asKnown().isPresent) 1 else 0) + (if (satNo.asKnown().isPresent) 1 else 0) + (if (spinPeriod.asKnown().isPresent) 1 else 0) + (xAngle.asKnown().getOrNull()?.size ?: 0) + (xRate.asKnown().getOrNull()?.size ?: 0) + (yAngle.asKnown().getOrNull()?.size ?: 0) + (yRate.asKnown().getOrNull()?.size ?: 0) + (zAngle.asKnown().getOrNull()?.size ?: 0) + (zRate.asKnown().getOrNull()?.size ?: 0)
+        internal fun validity(): Int =
+            (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+                (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+                (if (source.asKnown().isPresent) 1 else 0) +
+                (if (ts.asKnown().isPresent) 1 else 0) +
+                (if (id.asKnown().isPresent) 1 else 0) +
+                (if (asId.asKnown().isPresent) 1 else 0) +
+                (if (coningAngle.asKnown().isPresent) 1 else 0) +
+                (if (createdAt.asKnown().isPresent) 1 else 0) +
+                (if (createdBy.asKnown().isPresent) 1 else 0) +
+                (if (declination.asKnown().isPresent) 1 else 0) +
+                (if (idOnOrbit.asKnown().isPresent) 1 else 0) +
+                (if (motionType.asKnown().isPresent) 1 else 0) +
+                (if (origin.asKnown().isPresent) 1 else 0) +
+                (if (origNetwork.asKnown().isPresent) 1 else 0) +
+                (if (origObjectId.asKnown().isPresent) 1 else 0) +
+                (if (precPeriod.asKnown().isPresent) 1 else 0) +
+                (if (q1.asKnown().isPresent) 1 else 0) +
+                (if (q1Dot.asKnown().isPresent) 1 else 0) +
+                (if (q2.asKnown().isPresent) 1 else 0) +
+                (if (q2Dot.asKnown().isPresent) 1 else 0) +
+                (if (q3.asKnown().isPresent) 1 else 0) +
+                (if (q3Dot.asKnown().isPresent) 1 else 0) +
+                (if (qc.asKnown().isPresent) 1 else 0) +
+                (if (qcDot.asKnown().isPresent) 1 else 0) +
+                (if (ra.asKnown().isPresent) 1 else 0) +
+                (if (satNo.asKnown().isPresent) 1 else 0) +
+                (if (spinPeriod.asKnown().isPresent) 1 else 0) +
+                (xAngle.asKnown().getOrNull()?.size ?: 0) +
+                (xRate.asKnown().getOrNull()?.size ?: 0) +
+                (yAngle.asKnown().getOrNull()?.size ?: 0) +
+                (yRate.asKnown().getOrNull()?.size ?: 0) +
+                (zAngle.asKnown().getOrNull()?.size ?: 0) +
+                (zRate.asKnown().getOrNull()?.size ?: 0)
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          */
-        class DataMode @JsonCreator private constructor(
-            private val value: JsonField<String>,
-
-        ) : Enum {
+        class DataMode @JsonCreator private constructor(private val value: JsonField<String>) :
+            Enum {
 
             /**
              * Returns this class instance's raw value.
              *
-             * This is usually only useful if this instance was deserialized from data that doesn't match any known
-             * member, and you want to know that value. For example, if the SDK is on an older version than the
-             * API, then the API may respond with new members that the SDK is unaware of.
+             * This is usually only useful if this instance was deserialized from data that doesn't
+             * match any known member, and you want to know that value. For example, if the SDK is
+             * on an older version than the API, then the API may respond with new members that the
+             * SDK is unaware of.
              */
-            @com.fasterxml.jackson.annotation.JsonValue
-            fun _value(): JsonField<String> = value
+            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
             companion object {
 
@@ -4204,11 +4450,9 @@ class AttitudeSetCreateParams private constructor(
              * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
              *
              * An instance of [DataMode] can contain an unknown value in a couple of cases:
-             *
-             * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-             *   an older version than the API, then the API may respond with new members that the SDK is unaware
-             *   of.
-             *
+             * - It was deserialized from data that doesn't match any known member. For example, if
+             *   the SDK is on an older version than the API, then the API may respond with new
+             *   members that the SDK is unaware of.
              * - It was constructed with an arbitrary value using the [of] method.
              */
             enum class Value {
@@ -4216,16 +4460,18 @@ class AttitudeSetCreateParams private constructor(
                 TEST,
                 SIMULATED,
                 EXERCISE,
-                /** An enum member indicating that [DataMode] was instantiated with an unknown value. */
+                /**
+                 * An enum member indicating that [DataMode] was instantiated with an unknown value.
+                 */
                 _UNKNOWN,
             }
 
             /**
-             * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-             * class was instantiated with an unknown value.
+             * Returns an enum member corresponding to this class instance's value, or
+             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
              *
-             * Use the [known] method instead if you're certain the value is always known or if you want to throw
-             * for the unknown case.
+             * Use the [known] method instead if you're certain the value is always known or if you
+             * want to throw for the unknown case.
              */
             fun value(): Value =
                 when (this) {
@@ -4239,10 +4485,11 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Returns an enum member corresponding to this class instance's value.
              *
-             * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-             * for the unknown case.
+             * Use the [value] method instead if you're uncertain the value is always known and
+             * don't want to throw for the unknown case.
              *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
+             *   not a known member.
              */
             fun known(): Known =
                 when (this) {
@@ -4256,25 +4503,27 @@ class AttitudeSetCreateParams private constructor(
             /**
              * Returns this class instance's primitive wire representation.
              *
-             * This differs from the [toString] method because that method is primarily for debugging and generally
-             * doesn't throw.
+             * This differs from the [toString] method because that method is primarily for
+             * debugging and generally doesn't throw.
              *
-             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-             * primitive type.
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
+             *   not have the expected primitive type.
              */
-            fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+            fun asString(): String =
+                _value().asString().orElseThrow {
+                    UnifieddatalibraryInvalidDataException("Value is not a String")
+                }
 
             private var validated: Boolean = false
 
-            fun validate(): DataMode =
-                apply {
-                    if (validated) {
-                      return@apply
-                    }
-
-                    known()
-                    validated = true
+            fun validate(): DataMode = apply {
+                if (validated) {
+                    return@apply
                 }
+
+                known()
+                validated = true
+            }
 
             fun isValid(): Boolean =
                 try {
@@ -4285,19 +4534,19 @@ class AttitudeSetCreateParams private constructor(
                 }
 
             /**
-             * Returns a score indicating how many valid values are contained in this object recursively.
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
              *
              * Used for best match union deserialization.
              */
-            @JvmSynthetic
-            internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
             override fun equals(other: Any?): Boolean {
-              if (this === other) {
-                  return true
-              }
+                if (this === other) {
+                    return true
+                }
 
-              return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+                return other is DataMode && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -4306,31 +4555,105 @@ class AttitudeSetCreateParams private constructor(
         }
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is AttitudeList && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && ts == other.ts && id == other.id && asId == other.asId && coningAngle == other.coningAngle && createdAt == other.createdAt && createdBy == other.createdBy && declination == other.declination && idOnOrbit == other.idOnOrbit && motionType == other.motionType && origin == other.origin && origNetwork == other.origNetwork && origObjectId == other.origObjectId && precPeriod == other.precPeriod && q1 == other.q1 && q1Dot == other.q1Dot && q2 == other.q2 && q2Dot == other.q2Dot && q3 == other.q3 && q3Dot == other.q3Dot && qc == other.qc && qcDot == other.qcDot && ra == other.ra && satNo == other.satNo && spinPeriod == other.spinPeriod && xAngle == other.xAngle && xRate == other.xRate && yAngle == other.yAngle && yRate == other.yRate && zAngle == other.zAngle && zRate == other.zRate && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is AttitudeList &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                source == other.source &&
+                ts == other.ts &&
+                id == other.id &&
+                asId == other.asId &&
+                coningAngle == other.coningAngle &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                declination == other.declination &&
+                idOnOrbit == other.idOnOrbit &&
+                motionType == other.motionType &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                origObjectId == other.origObjectId &&
+                precPeriod == other.precPeriod &&
+                q1 == other.q1 &&
+                q1Dot == other.q1Dot &&
+                q2 == other.q2 &&
+                q2Dot == other.q2Dot &&
+                q3 == other.q3 &&
+                q3Dot == other.q3Dot &&
+                qc == other.qc &&
+                qcDot == other.qcDot &&
+                ra == other.ra &&
+                satNo == other.satNo &&
+                spinPeriod == other.spinPeriod &&
+                xAngle == other.xAngle &&
+                xRate == other.xRate &&
+                yAngle == other.yAngle &&
+                yRate == other.yRate &&
+                zAngle == other.zAngle &&
+                zRate == other.zRate &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, ts, id, asId, coningAngle, createdAt, createdBy, declination, idOnOrbit, motionType, origin, origNetwork, origObjectId, precPeriod, q1, q1Dot, q2, q2Dot, q3, q3Dot, qc, qcDot, ra, satNo, spinPeriod, xAngle, xRate, yAngle, yRate, zAngle, zRate, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                source,
+                ts,
+                id,
+                asId,
+                coningAngle,
+                createdAt,
+                createdBy,
+                declination,
+                idOnOrbit,
+                motionType,
+                origin,
+                origNetwork,
+                origObjectId,
+                precPeriod,
+                q1,
+                q1Dot,
+                q2,
+                q2Dot,
+                q3,
+                q3Dot,
+                qc,
+                qcDot,
+                ra,
+                satNo,
+                spinPeriod,
+                xAngle,
+                xRate,
+                yAngle,
+                yRate,
+                zAngle,
+                zRate,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() = "AttitudeList{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, asId=$asId, coningAngle=$coningAngle, createdAt=$createdAt, createdBy=$createdBy, declination=$declination, idOnOrbit=$idOnOrbit, motionType=$motionType, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, precPeriod=$precPeriod, q1=$q1, q1Dot=$q1Dot, q2=$q2, q2Dot=$q2Dot, q3=$q3, q3Dot=$q3Dot, qc=$qc, qcDot=$qcDot, ra=$ra, satNo=$satNo, spinPeriod=$spinPeriod, xAngle=$xAngle, xRate=$xRate, yAngle=$yAngle, yRate=$yRate, zAngle=$zAngle, zRate=$zRate, additionalProperties=$additionalProperties}"
+        override fun toString() =
+            "AttitudeList{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, asId=$asId, coningAngle=$coningAngle, createdAt=$createdAt, createdBy=$createdBy, declination=$declination, idOnOrbit=$idOnOrbit, motionType=$motionType, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, precPeriod=$precPeriod, q1=$q1, q1Dot=$q1Dot, q2=$q2, q2Dot=$q2Dot, q3=$q3, q3Dot=$q3Dot, qc=$qc, qcDot=$qcDot, ra=$ra, satNo=$satNo, spinPeriod=$spinPeriod, xAngle=$xAngle, xRate=$xRate, yAngle=$yAngle, yRate=$yRate, zAngle=$zAngle, zRate=$zRate, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is AttitudeSetCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is AttitudeSetCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
-    override fun toString() = "AttitudeSetCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() =
+        "AttitudeSetCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

@@ -13,7 +13,6 @@ import com.unifieddatalibrary.api.core.JsonMissing
 import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
-import com.unifieddatalibrary.api.models.seradataopticalpayload.SeradataOpticalPayloadGetResponse
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
@@ -21,7 +20,8 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 /** Details for an optical payload from Seradata. */
-class SeradataOpticalPayloadGetResponse private constructor(
+class SeradataOpticalPayloadGetResponse
+private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
     private val source: JsonField<String>,
@@ -51,279 +51,357 @@ class SeradataOpticalPayloadGetResponse private constructor(
     private val updatedAt: JsonField<OffsetDateTime>,
     private val updatedBy: JsonField<String>,
     private val additionalProperties: MutableMap<String, JsonValue>,
-
 ) {
 
     @JsonCreator
     private constructor(
-        @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        classificationMarking: JsonField<String> = JsonMissing.of(),
         @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
         @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("spacecraftId") @ExcludeMissing spacecraftId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("spacecraftId")
+        @ExcludeMissing
+        spacecraftId: JsonField<String> = JsonMissing.of(),
         @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("bestResolution") @ExcludeMissing bestResolution: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("bestResolution")
+        @ExcludeMissing
+        bestResolution: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("fieldOfRegard") @ExcludeMissing fieldOfRegard: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("fieldOfView") @ExcludeMissing fieldOfView: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("groundStationLocations") @ExcludeMissing groundStationLocations: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("groundStations") @ExcludeMissing groundStations: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("hostedForCompanyOrgId") @ExcludeMissing hostedForCompanyOrgId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("fieldOfRegard")
+        @ExcludeMissing
+        fieldOfRegard: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("fieldOfView")
+        @ExcludeMissing
+        fieldOfView: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("groundStationLocations")
+        @ExcludeMissing
+        groundStationLocations: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("groundStations")
+        @ExcludeMissing
+        groundStations: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("hostedForCompanyOrgId")
+        @ExcludeMissing
+        hostedForCompanyOrgId: JsonField<String> = JsonMissing.of(),
         @JsonProperty("idSensor") @ExcludeMissing idSensor: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("imagingPayloadCategory") @ExcludeMissing imagingPayloadCategory: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("manufacturerOrgId") @ExcludeMissing manufacturerOrgId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("imagingPayloadCategory")
+        @ExcludeMissing
+        imagingPayloadCategory: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("manufacturerOrgId")
+        @ExcludeMissing
+        manufacturerOrgId: JsonField<String> = JsonMissing.of(),
         @JsonProperty("name") @ExcludeMissing name: JsonField<String> = JsonMissing.of(),
         @JsonProperty("notes") @ExcludeMissing notes: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("numberOfFilmReturnCanisters") @ExcludeMissing numberOfFilmReturnCanisters: JsonField<Long> = JsonMissing.of(),
+        @JsonProperty("numberOfFilmReturnCanisters")
+        @ExcludeMissing
+        numberOfFilmReturnCanisters: JsonField<Long> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origNetwork") @ExcludeMissing origNetwork: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("pointingMethod") @ExcludeMissing pointingMethod: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("recorderSize") @ExcludeMissing recorderSize: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("spectralBand") @ExcludeMissing spectralBand: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("spectralFrequencyLimits") @ExcludeMissing spectralFrequencyLimits: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("swathWidth") @ExcludeMissing swathWidth: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("updatedAt") @ExcludeMissing updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("updatedBy") @ExcludeMissing updatedBy: JsonField<String> = JsonMissing.of()
+        @JsonProperty("origNetwork")
+        @ExcludeMissing
+        origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("pointingMethod")
+        @ExcludeMissing
+        pointingMethod: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("recorderSize")
+        @ExcludeMissing
+        recorderSize: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("spectralBand")
+        @ExcludeMissing
+        spectralBand: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("spectralFrequencyLimits")
+        @ExcludeMissing
+        spectralFrequencyLimits: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("swathWidth")
+        @ExcludeMissing
+        swathWidth: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("updatedAt")
+        @ExcludeMissing
+        updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("updatedBy") @ExcludeMissing updatedBy: JsonField<String> = JsonMissing.of(),
     ) : this(
-      classificationMarking,
-      dataMode,
-      source,
-      spacecraftId,
-      id,
-      bestResolution,
-      createdAt,
-      createdBy,
-      fieldOfRegard,
-      fieldOfView,
-      groundStationLocations,
-      groundStations,
-      hostedForCompanyOrgId,
-      idSensor,
-      imagingPayloadCategory,
-      manufacturerOrgId,
-      name,
-      notes,
-      numberOfFilmReturnCanisters,
-      origin,
-      origNetwork,
-      pointingMethod,
-      recorderSize,
-      spectralBand,
-      spectralFrequencyLimits,
-      swathWidth,
-      updatedAt,
-      updatedBy,
-      mutableMapOf(),
+        classificationMarking,
+        dataMode,
+        source,
+        spacecraftId,
+        id,
+        bestResolution,
+        createdAt,
+        createdBy,
+        fieldOfRegard,
+        fieldOfView,
+        groundStationLocations,
+        groundStations,
+        hostedForCompanyOrgId,
+        idSensor,
+        imagingPayloadCategory,
+        manufacturerOrgId,
+        name,
+        notes,
+        numberOfFilmReturnCanisters,
+        origin,
+        origNetwork,
+        pointingMethod,
+        recorderSize,
+        spectralBand,
+        spectralFrequencyLimits,
+        swathWidth,
+        updatedAt,
+        updatedBy,
+        mutableMapOf(),
     )
 
     /**
      * Classification marking of the data in IC/CAPCO Portion-marked format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
     /**
      * Source of the data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun source(): String = source.getRequired("source")
 
     /**
      * Seradata ID of the spacecraft (SeradataSpacecraftDetails ID).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun spacecraftId(): String = spacecraftId.getRequired("spacecraftId")
 
     /**
      * Unique identifier of the record, auto-generated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun id(): Optional<String> = id.getOptional("id")
 
     /**
      * Best resolution.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun bestResolution(): Optional<Double> = bestResolution.getOptional("bestResolution")
 
     /**
      * Time the row was created in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
     /**
      * Application user who created the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
      * Field of regard of this radar in degrees.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun fieldOfRegard(): Optional<Double> = fieldOfRegard.getOptional("fieldOfRegard")
 
     /**
      * Field of view of this radar in kilometers.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun fieldOfView(): Optional<Double> = fieldOfView.getOptional("fieldOfView")
 
     /**
      * Ground Station Locations for this payload.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun groundStationLocations(): Optional<String> = groundStationLocations.getOptional("groundStationLocations")
+    fun groundStationLocations(): Optional<String> =
+        groundStationLocations.getOptional("groundStationLocations")
 
     /**
      * Ground Station info for this payload.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun groundStations(): Optional<String> = groundStations.getOptional("groundStations")
 
     /**
      * Hosted for company/Organization Id.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun hostedForCompanyOrgId(): Optional<String> = hostedForCompanyOrgId.getOptional("hostedForCompanyOrgId")
+    fun hostedForCompanyOrgId(): Optional<String> =
+        hostedForCompanyOrgId.getOptional("hostedForCompanyOrgId")
 
     /**
      * UUID of the Sensor record.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun idSensor(): Optional<String> = idSensor.getOptional("idSensor")
 
     /**
      * Imaging category for this payload, e.g. Multispectral, Infrared, Panchromatic.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun imagingPayloadCategory(): Optional<String> = imagingPayloadCategory.getOptional("imagingPayloadCategory")
+    fun imagingPayloadCategory(): Optional<String> =
+        imagingPayloadCategory.getOptional("imagingPayloadCategory")
 
     /**
      * Manufacturer Organization Id.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun manufacturerOrgId(): Optional<String> = manufacturerOrgId.getOptional("manufacturerOrgId")
 
     /**
-     * Sensor name from Seradata, e.g. TOURNESOL, MESSR (Multispectral Self-Scanning Radiometer), AWFI, etc.
+     * Sensor name from Seradata, e.g. TOURNESOL, MESSR (Multispectral Self-Scanning Radiometer),
+     * AWFI, etc.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun name(): Optional<String> = name.getOptional("name")
 
     /**
      * Payload notes.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun notes(): Optional<String> = notes.getOptional("notes")
 
     /**
      * Number of film return canisters.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun numberOfFilmReturnCanisters(): Optional<Long> = numberOfFilmReturnCanisters.getOptional("numberOfFilmReturnCanisters")
+    fun numberOfFilmReturnCanisters(): Optional<Long> =
+        numberOfFilmReturnCanisters.getOptional("numberOfFilmReturnCanisters")
 
     /**
-     * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     * Originating system or organization which produced the data, if different from the source. The
+     * origin may be different than the source if the source was a mediating system which forwarded
+     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origin(): Optional<String> = origin.getOptional("origin")
 
     /**
-     * The originating source network on which this record was created, auto-populated by the system.
+     * The originating source network on which this record was created, auto-populated by the
+     * system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
     /**
      * Point method for this radar, e.g. Spacecraft.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun pointingMethod(): Optional<String> = pointingMethod.getOptional("pointingMethod")
 
     /**
      * Recorder size.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun recorderSize(): Optional<String> = recorderSize.getOptional("recorderSize")
 
     /**
      * Spectral Band supported by this payload, e.g. Green, Red, Mid-wave infrared, etc.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun spectralBand(): Optional<String> = spectralBand.getOptional("spectralBand")
 
     /**
      * Frequency limit for this payload, e.g. 0.51 - 0.59.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun spectralFrequencyLimits(): Optional<String> = spectralFrequencyLimits.getOptional("spectralFrequencyLimits")
+    fun spectralFrequencyLimits(): Optional<String> =
+        spectralFrequencyLimits.getOptional("spectralFrequencyLimits")
 
     /**
      * Swath width in kilometers.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun swathWidth(): Optional<Double> = swathWidth.getOptional("swathWidth")
 
     /**
      * Time the row was last updated in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun updatedAt(): Optional<OffsetDateTime> = updatedAt.getOptional("updatedAt")
 
     /**
      * Application user who updated the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun updatedBy(): Optional<String> = updatedBy.getOptional("updatedBy")
 
     /**
      * Returns the raw JSON value of [classificationMarking].
      *
-     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("classificationMarking")
     @ExcludeMissing
@@ -334,18 +412,14 @@ class SeradataOpticalPayloadGetResponse private constructor(
      *
      * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("dataMode")
-    @ExcludeMissing
-    fun _dataMode(): JsonField<DataMode> = dataMode
+    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
 
     /**
      * Returns the raw JSON value of [source].
      *
      * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("source")
-    @ExcludeMissing
-    fun _source(): JsonField<String> = source
+    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
 
     /**
      * Returns the raw JSON value of [spacecraftId].
@@ -361,9 +435,7 @@ class SeradataOpticalPayloadGetResponse private constructor(
      *
      * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("id")
-    @ExcludeMissing
-    fun _id(): JsonField<String> = id
+    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
 
     /**
      * Returns the raw JSON value of [bestResolution].
@@ -388,9 +460,7 @@ class SeradataOpticalPayloadGetResponse private constructor(
      *
      * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("createdBy")
-    @ExcludeMissing
-    fun _createdBy(): JsonField<String> = createdBy
+    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
     /**
      * Returns the raw JSON value of [fieldOfRegard].
@@ -406,14 +476,13 @@ class SeradataOpticalPayloadGetResponse private constructor(
      *
      * Unlike [fieldOfView], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("fieldOfView")
-    @ExcludeMissing
-    fun _fieldOfView(): JsonField<Double> = fieldOfView
+    @JsonProperty("fieldOfView") @ExcludeMissing fun _fieldOfView(): JsonField<Double> = fieldOfView
 
     /**
      * Returns the raw JSON value of [groundStationLocations].
      *
-     * Unlike [groundStationLocations], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [groundStationLocations], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
     @JsonProperty("groundStationLocations")
     @ExcludeMissing
@@ -431,7 +500,8 @@ class SeradataOpticalPayloadGetResponse private constructor(
     /**
      * Returns the raw JSON value of [hostedForCompanyOrgId].
      *
-     * Unlike [hostedForCompanyOrgId], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [hostedForCompanyOrgId], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("hostedForCompanyOrgId")
     @ExcludeMissing
@@ -442,14 +512,13 @@ class SeradataOpticalPayloadGetResponse private constructor(
      *
      * Unlike [idSensor], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("idSensor")
-    @ExcludeMissing
-    fun _idSensor(): JsonField<String> = idSensor
+    @JsonProperty("idSensor") @ExcludeMissing fun _idSensor(): JsonField<String> = idSensor
 
     /**
      * Returns the raw JSON value of [imagingPayloadCategory].
      *
-     * Unlike [imagingPayloadCategory], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [imagingPayloadCategory], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
     @JsonProperty("imagingPayloadCategory")
     @ExcludeMissing
@@ -458,7 +527,8 @@ class SeradataOpticalPayloadGetResponse private constructor(
     /**
      * Returns the raw JSON value of [manufacturerOrgId].
      *
-     * Unlike [manufacturerOrgId], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [manufacturerOrgId], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("manufacturerOrgId")
     @ExcludeMissing
@@ -469,23 +539,20 @@ class SeradataOpticalPayloadGetResponse private constructor(
      *
      * Unlike [name], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("name")
-    @ExcludeMissing
-    fun _name(): JsonField<String> = name
+    @JsonProperty("name") @ExcludeMissing fun _name(): JsonField<String> = name
 
     /**
      * Returns the raw JSON value of [notes].
      *
      * Unlike [notes], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("notes")
-    @ExcludeMissing
-    fun _notes(): JsonField<String> = notes
+    @JsonProperty("notes") @ExcludeMissing fun _notes(): JsonField<String> = notes
 
     /**
      * Returns the raw JSON value of [numberOfFilmReturnCanisters].
      *
-     * Unlike [numberOfFilmReturnCanisters], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [numberOfFilmReturnCanisters], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
     @JsonProperty("numberOfFilmReturnCanisters")
     @ExcludeMissing
@@ -496,18 +563,14 @@ class SeradataOpticalPayloadGetResponse private constructor(
      *
      * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origin")
-    @ExcludeMissing
-    fun _origin(): JsonField<String> = origin
+    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
 
     /**
      * Returns the raw JSON value of [origNetwork].
      *
      * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origNetwork")
-    @ExcludeMissing
-    fun _origNetwork(): JsonField<String> = origNetwork
+    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
 
     /**
      * Returns the raw JSON value of [pointingMethod].
@@ -539,7 +602,8 @@ class SeradataOpticalPayloadGetResponse private constructor(
     /**
      * Returns the raw JSON value of [spectralFrequencyLimits].
      *
-     * Unlike [spectralFrequencyLimits], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [spectralFrequencyLimits], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
     @JsonProperty("spectralFrequencyLimits")
     @ExcludeMissing
@@ -550,9 +614,7 @@ class SeradataOpticalPayloadGetResponse private constructor(
      *
      * Unlike [swathWidth], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("swathWidth")
-    @ExcludeMissing
-    fun _swathWidth(): JsonField<Double> = swathWidth
+    @JsonProperty("swathWidth") @ExcludeMissing fun _swathWidth(): JsonField<Double> = swathWidth
 
     /**
      * Returns the raw JSON value of [updatedAt].
@@ -568,28 +630,27 @@ class SeradataOpticalPayloadGetResponse private constructor(
      *
      * Unlike [updatedBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("updatedBy")
-    @ExcludeMissing
-    fun _updatedBy(): JsonField<String> = updatedBy
+    @JsonProperty("updatedBy") @ExcludeMissing fun _updatedBy(): JsonField<String> = updatedBy
 
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
-      additionalProperties.put(key, value)
+        additionalProperties.put(key, value)
     }
 
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of [SeradataOpticalPayloadGetResponse].
+         * Returns a mutable builder for constructing an instance of
+         * [SeradataOpticalPayloadGetResponse].
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -597,8 +658,7 @@ class SeradataOpticalPayloadGetResponse private constructor(
          * .spacecraftId()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [SeradataOpticalPayloadGetResponse]. */
@@ -655,7 +715,8 @@ class SeradataOpticalPayloadGetResponse private constructor(
                 manufacturerOrgId = seradataOpticalPayloadGetResponse.manufacturerOrgId
                 name = seradataOpticalPayloadGetResponse.name
                 notes = seradataOpticalPayloadGetResponse.notes
-                numberOfFilmReturnCanisters = seradataOpticalPayloadGetResponse.numberOfFilmReturnCanisters
+                numberOfFilmReturnCanisters =
+                    seradataOpticalPayloadGetResponse.numberOfFilmReturnCanisters
                 origin = seradataOpticalPayloadGetResponse.origin
                 origNetwork = seradataOpticalPayloadGetResponse.origNetwork
                 pointingMethod = seradataOpticalPayloadGetResponse.pointingMethod
@@ -665,46 +726,49 @@ class SeradataOpticalPayloadGetResponse private constructor(
                 swathWidth = seradataOpticalPayloadGetResponse.swathWidth
                 updatedAt = seradataOpticalPayloadGetResponse.updatedAt
                 updatedBy = seradataOpticalPayloadGetResponse.updatedBy
-                additionalProperties = seradataOpticalPayloadGetResponse.additionalProperties.toMutableMap()
+                additionalProperties =
+                    seradataOpticalPayloadGetResponse.additionalProperties.toMutableMap()
             }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-        fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
+        fun classificationMarking(classificationMarking: String) =
+            classificationMarking(JsonField.of(classificationMarking))
 
         /**
          * Sets [Builder.classificationMarking] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun classificationMarking(classificationMarking: JsonField<String>) =
-            apply {
-                this.classificationMarking = classificationMarking
-            }
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            this.classificationMarking = classificationMarking
+        }
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          */
         fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
         /**
          * Sets [Builder.dataMode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun dataMode(dataMode: JsonField<DataMode>) =
-            apply {
-                this.dataMode = dataMode
-            }
+        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
 
         /** Source of the data. */
         fun source(source: String) = source(JsonField.of(source))
@@ -712,13 +776,10 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.source] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun source(source: JsonField<String>) =
-            apply {
-                this.source = source
-            }
+        fun source(source: JsonField<String>) = apply { this.source = source }
 
         /** Seradata ID of the spacecraft (SeradataSpacecraftDetails ID). */
         fun spacecraftId(spacecraftId: String) = spacecraftId(JsonField.of(spacecraftId))
@@ -726,13 +787,13 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.spacecraftId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.spacecraftId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.spacecraftId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun spacecraftId(spacecraftId: JsonField<String>) =
-            apply {
-                this.spacecraftId = spacecraftId
-            }
+        fun spacecraftId(spacecraftId: JsonField<String>) = apply {
+            this.spacecraftId = spacecraftId
+        }
 
         /** Unique identifier of the record, auto-generated by the system. */
         fun id(id: String) = id(JsonField.of(id))
@@ -740,13 +801,10 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.id] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun id(id: JsonField<String>) =
-            apply {
-                this.id = id
-            }
+        fun id(id: JsonField<String>) = apply { this.id = id }
 
         /** Best resolution. */
         fun bestResolution(bestResolution: Double) = bestResolution(JsonField.of(bestResolution))
@@ -754,13 +812,13 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.bestResolution] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.bestResolution] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.bestResolution] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun bestResolution(bestResolution: JsonField<Double>) =
-            apply {
-                this.bestResolution = bestResolution
-            }
+        fun bestResolution(bestResolution: JsonField<Double>) = apply {
+            this.bestResolution = bestResolution
+        }
 
         /** Time the row was created in the database, auto-populated by the system. */
         fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -768,13 +826,11 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.createdAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun createdAt(createdAt: JsonField<OffsetDateTime>) =
-            apply {
-                this.createdAt = createdAt
-            }
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
 
         /** Application user who created the row in the database, auto-populated by the system. */
         fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
@@ -782,13 +838,11 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.createdBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun createdBy(createdBy: JsonField<String>) =
-            apply {
-                this.createdBy = createdBy
-            }
+        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
         /** Field of regard of this radar in degrees. */
         fun fieldOfRegard(fieldOfRegard: Double) = fieldOfRegard(JsonField.of(fieldOfRegard))
@@ -796,13 +850,13 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.fieldOfRegard] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.fieldOfRegard] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.fieldOfRegard] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun fieldOfRegard(fieldOfRegard: JsonField<Double>) =
-            apply {
-                this.fieldOfRegard = fieldOfRegard
-            }
+        fun fieldOfRegard(fieldOfRegard: JsonField<Double>) = apply {
+            this.fieldOfRegard = fieldOfRegard
+        }
 
         /** Field of view of this radar in kilometers. */
         fun fieldOfView(fieldOfView: Double) = fieldOfView(JsonField.of(fieldOfView))
@@ -810,27 +864,26 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.fieldOfView] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.fieldOfView] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.fieldOfView] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun fieldOfView(fieldOfView: JsonField<Double>) =
-            apply {
-                this.fieldOfView = fieldOfView
-            }
+        fun fieldOfView(fieldOfView: JsonField<Double>) = apply { this.fieldOfView = fieldOfView }
 
         /** Ground Station Locations for this payload. */
-        fun groundStationLocations(groundStationLocations: String) = groundStationLocations(JsonField.of(groundStationLocations))
+        fun groundStationLocations(groundStationLocations: String) =
+            groundStationLocations(JsonField.of(groundStationLocations))
 
         /**
          * Sets [Builder.groundStationLocations] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.groundStationLocations] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.groundStationLocations] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun groundStationLocations(groundStationLocations: JsonField<String>) =
-            apply {
-                this.groundStationLocations = groundStationLocations
-            }
+        fun groundStationLocations(groundStationLocations: JsonField<String>) = apply {
+            this.groundStationLocations = groundStationLocations
+        }
 
         /** Ground Station info for this payload. */
         fun groundStations(groundStations: String) = groundStations(JsonField.of(groundStations))
@@ -838,27 +891,28 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.groundStations] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.groundStations] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.groundStations] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun groundStations(groundStations: JsonField<String>) =
-            apply {
-                this.groundStations = groundStations
-            }
+        fun groundStations(groundStations: JsonField<String>) = apply {
+            this.groundStations = groundStations
+        }
 
         /** Hosted for company/Organization Id. */
-        fun hostedForCompanyOrgId(hostedForCompanyOrgId: String) = hostedForCompanyOrgId(JsonField.of(hostedForCompanyOrgId))
+        fun hostedForCompanyOrgId(hostedForCompanyOrgId: String) =
+            hostedForCompanyOrgId(JsonField.of(hostedForCompanyOrgId))
 
         /**
          * Sets [Builder.hostedForCompanyOrgId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.hostedForCompanyOrgId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.hostedForCompanyOrgId] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun hostedForCompanyOrgId(hostedForCompanyOrgId: JsonField<String>) =
-            apply {
-                this.hostedForCompanyOrgId = hostedForCompanyOrgId
-            }
+        fun hostedForCompanyOrgId(hostedForCompanyOrgId: JsonField<String>) = apply {
+            this.hostedForCompanyOrgId = hostedForCompanyOrgId
+        }
 
         /** UUID of the Sensor record. */
         fun idSensor(idSensor: String) = idSensor(JsonField.of(idSensor))
@@ -866,55 +920,54 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.idSensor] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idSensor] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.idSensor] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun idSensor(idSensor: JsonField<String>) =
-            apply {
-                this.idSensor = idSensor
-            }
+        fun idSensor(idSensor: JsonField<String>) = apply { this.idSensor = idSensor }
 
         /** Imaging category for this payload, e.g. Multispectral, Infrared, Panchromatic. */
-        fun imagingPayloadCategory(imagingPayloadCategory: String) = imagingPayloadCategory(JsonField.of(imagingPayloadCategory))
+        fun imagingPayloadCategory(imagingPayloadCategory: String) =
+            imagingPayloadCategory(JsonField.of(imagingPayloadCategory))
 
         /**
          * Sets [Builder.imagingPayloadCategory] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.imagingPayloadCategory] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.imagingPayloadCategory] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun imagingPayloadCategory(imagingPayloadCategory: JsonField<String>) =
-            apply {
-                this.imagingPayloadCategory = imagingPayloadCategory
-            }
+        fun imagingPayloadCategory(imagingPayloadCategory: JsonField<String>) = apply {
+            this.imagingPayloadCategory = imagingPayloadCategory
+        }
 
         /** Manufacturer Organization Id. */
-        fun manufacturerOrgId(manufacturerOrgId: String) = manufacturerOrgId(JsonField.of(manufacturerOrgId))
+        fun manufacturerOrgId(manufacturerOrgId: String) =
+            manufacturerOrgId(JsonField.of(manufacturerOrgId))
 
         /**
          * Sets [Builder.manufacturerOrgId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.manufacturerOrgId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.manufacturerOrgId] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun manufacturerOrgId(manufacturerOrgId: JsonField<String>) =
-            apply {
-                this.manufacturerOrgId = manufacturerOrgId
-            }
+        fun manufacturerOrgId(manufacturerOrgId: JsonField<String>) = apply {
+            this.manufacturerOrgId = manufacturerOrgId
+        }
 
-        /** Sensor name from Seradata, e.g. TOURNESOL, MESSR (Multispectral Self-Scanning Radiometer), AWFI, etc. */
+        /**
+         * Sensor name from Seradata, e.g. TOURNESOL, MESSR (Multispectral Self-Scanning
+         * Radiometer), AWFI, etc.
+         */
         fun name(name: String) = name(JsonField.of(name))
 
         /**
          * Sets [Builder.name] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.name] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.name] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun name(name: JsonField<String>) =
-            apply {
-                this.name = name
-            }
+        fun name(name: JsonField<String>) = apply { this.name = name }
 
         /** Payload notes. */
         fun notes(notes: String) = notes(JsonField.of(notes))
@@ -922,55 +975,56 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.notes] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.notes] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.notes] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun notes(notes: JsonField<String>) =
-            apply {
-                this.notes = notes
-            }
+        fun notes(notes: JsonField<String>) = apply { this.notes = notes }
 
         /** Number of film return canisters. */
-        fun numberOfFilmReturnCanisters(numberOfFilmReturnCanisters: Long) = numberOfFilmReturnCanisters(JsonField.of(numberOfFilmReturnCanisters))
+        fun numberOfFilmReturnCanisters(numberOfFilmReturnCanisters: Long) =
+            numberOfFilmReturnCanisters(JsonField.of(numberOfFilmReturnCanisters))
 
         /**
          * Sets [Builder.numberOfFilmReturnCanisters] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.numberOfFilmReturnCanisters] with a well-typed [Long] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.numberOfFilmReturnCanisters] with a well-typed [Long]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun numberOfFilmReturnCanisters(numberOfFilmReturnCanisters: JsonField<Long>) =
-            apply {
-                this.numberOfFilmReturnCanisters = numberOfFilmReturnCanisters
-            }
+        fun numberOfFilmReturnCanisters(numberOfFilmReturnCanisters: JsonField<Long>) = apply {
+            this.numberOfFilmReturnCanisters = numberOfFilmReturnCanisters
+        }
 
-        /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         */
         fun origin(origin: String) = origin(JsonField.of(origin))
 
         /**
          * Sets [Builder.origin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun origin(origin: JsonField<String>) =
-            apply {
-                this.origin = origin
-            }
+        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
 
-        /** The originating source network on which this record was created, auto-populated by the system. */
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         */
         fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
         /**
          * Sets [Builder.origNetwork] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun origNetwork(origNetwork: JsonField<String>) =
-            apply {
-                this.origNetwork = origNetwork
-            }
+        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
 
         /** Point method for this radar, e.g. Spacecraft. */
         fun pointingMethod(pointingMethod: String) = pointingMethod(JsonField.of(pointingMethod))
@@ -978,13 +1032,13 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.pointingMethod] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.pointingMethod] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.pointingMethod] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun pointingMethod(pointingMethod: JsonField<String>) =
-            apply {
-                this.pointingMethod = pointingMethod
-            }
+        fun pointingMethod(pointingMethod: JsonField<String>) = apply {
+            this.pointingMethod = pointingMethod
+        }
 
         /** Recorder size. */
         fun recorderSize(recorderSize: String) = recorderSize(JsonField.of(recorderSize))
@@ -992,13 +1046,13 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.recorderSize] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.recorderSize] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.recorderSize] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun recorderSize(recorderSize: JsonField<String>) =
-            apply {
-                this.recorderSize = recorderSize
-            }
+        fun recorderSize(recorderSize: JsonField<String>) = apply {
+            this.recorderSize = recorderSize
+        }
 
         /** Spectral Band supported by this payload, e.g. Green, Red, Mid-wave infrared, etc. */
         fun spectralBand(spectralBand: String) = spectralBand(JsonField.of(spectralBand))
@@ -1006,27 +1060,28 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.spectralBand] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.spectralBand] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.spectralBand] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun spectralBand(spectralBand: JsonField<String>) =
-            apply {
-                this.spectralBand = spectralBand
-            }
+        fun spectralBand(spectralBand: JsonField<String>) = apply {
+            this.spectralBand = spectralBand
+        }
 
         /** Frequency limit for this payload, e.g. 0.51 - 0.59. */
-        fun spectralFrequencyLimits(spectralFrequencyLimits: String) = spectralFrequencyLimits(JsonField.of(spectralFrequencyLimits))
+        fun spectralFrequencyLimits(spectralFrequencyLimits: String) =
+            spectralFrequencyLimits(JsonField.of(spectralFrequencyLimits))
 
         /**
          * Sets [Builder.spectralFrequencyLimits] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.spectralFrequencyLimits] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.spectralFrequencyLimits] with a well-typed [String]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun spectralFrequencyLimits(spectralFrequencyLimits: JsonField<String>) =
-            apply {
-                this.spectralFrequencyLimits = spectralFrequencyLimits
-            }
+        fun spectralFrequencyLimits(spectralFrequencyLimits: JsonField<String>) = apply {
+            this.spectralFrequencyLimits = spectralFrequencyLimits
+        }
 
         /** Swath width in kilometers. */
         fun swathWidth(swathWidth: Double) = swathWidth(JsonField.of(swathWidth))
@@ -1034,13 +1089,11 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.swathWidth] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.swathWidth] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.swathWidth] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun swathWidth(swathWidth: JsonField<Double>) =
-            apply {
-                this.swathWidth = swathWidth
-            }
+        fun swathWidth(swathWidth: JsonField<Double>) = apply { this.swathWidth = swathWidth }
 
         /** Time the row was last updated in the database, auto-populated by the system. */
         fun updatedAt(updatedAt: OffsetDateTime) = updatedAt(JsonField.of(updatedAt))
@@ -1048,13 +1101,11 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.updatedAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.updatedAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.updatedAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun updatedAt(updatedAt: JsonField<OffsetDateTime>) =
-            apply {
-                this.updatedAt = updatedAt
-            }
+        fun updatedAt(updatedAt: JsonField<OffsetDateTime>) = apply { this.updatedAt = updatedAt }
 
         /** Application user who updated the row in the database, auto-populated by the system. */
         fun updatedBy(updatedBy: String) = updatedBy(JsonField.of(updatedBy))
@@ -1062,39 +1113,30 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Sets [Builder.updatedBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.updatedBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.updatedBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun updatedBy(updatedBy: JsonField<String>) =
-            apply {
-                this.updatedBy = updatedBy
-            }
+        fun updatedBy(updatedBy: JsonField<String>) = apply { this.updatedBy = updatedBy }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) =
-            apply {
-                additionalProperties.put(key, value)
-            }
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
 
-        fun removeAdditionalProperty(key: String) =
-            apply {
-                additionalProperties.remove(key)
-            }
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) =
-            apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
 
         /**
          * Returns an immutable instance of [SeradataOpticalPayloadGetResponse].
@@ -1102,7 +1144,6 @@ class SeradataOpticalPayloadGetResponse private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -1114,84 +1155,75 @@ class SeradataOpticalPayloadGetResponse private constructor(
          */
         fun build(): SeradataOpticalPayloadGetResponse =
             SeradataOpticalPayloadGetResponse(
-              checkRequired(
-                "classificationMarking", classificationMarking
-              ),
-              checkRequired(
-                "dataMode", dataMode
-              ),
-              checkRequired(
-                "source", source
-              ),
-              checkRequired(
-                "spacecraftId", spacecraftId
-              ),
-              id,
-              bestResolution,
-              createdAt,
-              createdBy,
-              fieldOfRegard,
-              fieldOfView,
-              groundStationLocations,
-              groundStations,
-              hostedForCompanyOrgId,
-              idSensor,
-              imagingPayloadCategory,
-              manufacturerOrgId,
-              name,
-              notes,
-              numberOfFilmReturnCanisters,
-              origin,
-              origNetwork,
-              pointingMethod,
-              recorderSize,
-              spectralBand,
-              spectralFrequencyLimits,
-              swathWidth,
-              updatedAt,
-              updatedBy,
-              additionalProperties.toMutableMap(),
+                checkRequired("classificationMarking", classificationMarking),
+                checkRequired("dataMode", dataMode),
+                checkRequired("source", source),
+                checkRequired("spacecraftId", spacecraftId),
+                id,
+                bestResolution,
+                createdAt,
+                createdBy,
+                fieldOfRegard,
+                fieldOfView,
+                groundStationLocations,
+                groundStations,
+                hostedForCompanyOrgId,
+                idSensor,
+                imagingPayloadCategory,
+                manufacturerOrgId,
+                name,
+                notes,
+                numberOfFilmReturnCanisters,
+                origin,
+                origNetwork,
+                pointingMethod,
+                recorderSize,
+                spectralBand,
+                spectralFrequencyLimits,
+                swathWidth,
+                updatedAt,
+                updatedBy,
+                additionalProperties.toMutableMap(),
             )
     }
 
     private var validated: Boolean = false
 
-    fun validate(): SeradataOpticalPayloadGetResponse =
-        apply {
-            if (validated) {
-              return@apply
-            }
-
-            classificationMarking()
-            dataMode().validate()
-            source()
-            spacecraftId()
-            id()
-            bestResolution()
-            createdAt()
-            createdBy()
-            fieldOfRegard()
-            fieldOfView()
-            groundStationLocations()
-            groundStations()
-            hostedForCompanyOrgId()
-            idSensor()
-            imagingPayloadCategory()
-            manufacturerOrgId()
-            name()
-            notes()
-            numberOfFilmReturnCanisters()
-            origin()
-            origNetwork()
-            pointingMethod()
-            recorderSize()
-            spectralBand()
-            spectralFrequencyLimits()
-            swathWidth()
-            updatedAt()
-            updatedBy()
-            validated = true
+    fun validate(): SeradataOpticalPayloadGetResponse = apply {
+        if (validated) {
+            return@apply
         }
+
+        classificationMarking()
+        dataMode().validate()
+        source()
+        spacecraftId()
+        id()
+        bestResolution()
+        createdAt()
+        createdBy()
+        fieldOfRegard()
+        fieldOfView()
+        groundStationLocations()
+        groundStations()
+        hostedForCompanyOrgId()
+        idSensor()
+        imagingPayloadCategory()
+        manufacturerOrgId()
+        name()
+        notes()
+        numberOfFilmReturnCanisters()
+        origin()
+        origNetwork()
+        pointingMethod()
+        recorderSize()
+        spectralBand()
+        spectralFrequencyLimits()
+        swathWidth()
+        updatedAt()
+        updatedBy()
+        validated = true
+    }
 
     fun isValid(): Boolean =
         try {
@@ -1207,33 +1239,61 @@ class SeradataOpticalPayloadGetResponse private constructor(
      * Used for best match union deserialization.
      */
     @JvmSynthetic
-    internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (spacecraftId.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (if (bestResolution.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (fieldOfRegard.asKnown().isPresent) 1 else 0) + (if (fieldOfView.asKnown().isPresent) 1 else 0) + (if (groundStationLocations.asKnown().isPresent) 1 else 0) + (if (groundStations.asKnown().isPresent) 1 else 0) + (if (hostedForCompanyOrgId.asKnown().isPresent) 1 else 0) + (if (idSensor.asKnown().isPresent) 1 else 0) + (if (imagingPayloadCategory.asKnown().isPresent) 1 else 0) + (if (manufacturerOrgId.asKnown().isPresent) 1 else 0) + (if (name.asKnown().isPresent) 1 else 0) + (if (notes.asKnown().isPresent) 1 else 0) + (if (numberOfFilmReturnCanisters.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (pointingMethod.asKnown().isPresent) 1 else 0) + (if (recorderSize.asKnown().isPresent) 1 else 0) + (if (spectralBand.asKnown().isPresent) 1 else 0) + (if (spectralFrequencyLimits.asKnown().isPresent) 1 else 0) + (if (swathWidth.asKnown().isPresent) 1 else 0) + (if (updatedAt.asKnown().isPresent) 1 else 0) + (if (updatedBy.asKnown().isPresent) 1 else 0)
+    internal fun validity(): Int =
+        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (source.asKnown().isPresent) 1 else 0) +
+            (if (spacecraftId.asKnown().isPresent) 1 else 0) +
+            (if (id.asKnown().isPresent) 1 else 0) +
+            (if (bestResolution.asKnown().isPresent) 1 else 0) +
+            (if (createdAt.asKnown().isPresent) 1 else 0) +
+            (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (fieldOfRegard.asKnown().isPresent) 1 else 0) +
+            (if (fieldOfView.asKnown().isPresent) 1 else 0) +
+            (if (groundStationLocations.asKnown().isPresent) 1 else 0) +
+            (if (groundStations.asKnown().isPresent) 1 else 0) +
+            (if (hostedForCompanyOrgId.asKnown().isPresent) 1 else 0) +
+            (if (idSensor.asKnown().isPresent) 1 else 0) +
+            (if (imagingPayloadCategory.asKnown().isPresent) 1 else 0) +
+            (if (manufacturerOrgId.asKnown().isPresent) 1 else 0) +
+            (if (name.asKnown().isPresent) 1 else 0) +
+            (if (notes.asKnown().isPresent) 1 else 0) +
+            (if (numberOfFilmReturnCanisters.asKnown().isPresent) 1 else 0) +
+            (if (origin.asKnown().isPresent) 1 else 0) +
+            (if (origNetwork.asKnown().isPresent) 1 else 0) +
+            (if (pointingMethod.asKnown().isPresent) 1 else 0) +
+            (if (recorderSize.asKnown().isPresent) 1 else 0) +
+            (if (spectralBand.asKnown().isPresent) 1 else 0) +
+            (if (spectralFrequencyLimits.asKnown().isPresent) 1 else 0) +
+            (if (swathWidth.asKnown().isPresent) 1 else 0) +
+            (if (updatedAt.asKnown().isPresent) 1 else 0) +
+            (if (updatedBy.asKnown().isPresent) 1 else 0)
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      */
-    class DataMode @JsonCreator private constructor(
-        private val value: JsonField<String>,
-
-    ) : Enum {
+    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't match any known
-         * member, and you want to know that value. For example, if the SDK is on an older version than the
-         * API, then the API may respond with new members that the SDK is unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue
-        fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -1260,11 +1320,9 @@ class SeradataOpticalPayloadGetResponse private constructor(
          * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [DataMode] can contain an unknown value in a couple of cases:
-         *
-         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-         *   an older version than the API, then the API may respond with new members that the SDK is unaware
-         *   of.
-         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -1277,11 +1335,11 @@ class SeradataOpticalPayloadGetResponse private constructor(
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-         * class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want to throw
-         * for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -1295,10 +1353,11 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-         * for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
          */
         fun known(): Known =
             when (this) {
@@ -1312,25 +1371,27 @@ class SeradataOpticalPayloadGetResponse private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging and generally
-         * doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-         * primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
          */
-        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
 
         private var validated: Boolean = false
 
-        fun validate(): DataMode =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                known()
-                validated = true
+        fun validate(): DataMode = apply {
+            if (validated) {
+                return@apply
             }
+
+            known()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -1341,19 +1402,19 @@ class SeradataOpticalPayloadGetResponse private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic
-        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1362,18 +1423,78 @@ class SeradataOpticalPayloadGetResponse private constructor(
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is SeradataOpticalPayloadGetResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && spacecraftId == other.spacecraftId && id == other.id && bestResolution == other.bestResolution && createdAt == other.createdAt && createdBy == other.createdBy && fieldOfRegard == other.fieldOfRegard && fieldOfView == other.fieldOfView && groundStationLocations == other.groundStationLocations && groundStations == other.groundStations && hostedForCompanyOrgId == other.hostedForCompanyOrgId && idSensor == other.idSensor && imagingPayloadCategory == other.imagingPayloadCategory && manufacturerOrgId == other.manufacturerOrgId && name == other.name && notes == other.notes && numberOfFilmReturnCanisters == other.numberOfFilmReturnCanisters && origin == other.origin && origNetwork == other.origNetwork && pointingMethod == other.pointingMethod && recorderSize == other.recorderSize && spectralBand == other.spectralBand && spectralFrequencyLimits == other.spectralFrequencyLimits && swathWidth == other.swathWidth && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SeradataOpticalPayloadGetResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            spacecraftId == other.spacecraftId &&
+            id == other.id &&
+            bestResolution == other.bestResolution &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            fieldOfRegard == other.fieldOfRegard &&
+            fieldOfView == other.fieldOfView &&
+            groundStationLocations == other.groundStationLocations &&
+            groundStations == other.groundStations &&
+            hostedForCompanyOrgId == other.hostedForCompanyOrgId &&
+            idSensor == other.idSensor &&
+            imagingPayloadCategory == other.imagingPayloadCategory &&
+            manufacturerOrgId == other.manufacturerOrgId &&
+            name == other.name &&
+            notes == other.notes &&
+            numberOfFilmReturnCanisters == other.numberOfFilmReturnCanisters &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            pointingMethod == other.pointingMethod &&
+            recorderSize == other.recorderSize &&
+            spectralBand == other.spectralBand &&
+            spectralFrequencyLimits == other.spectralFrequencyLimits &&
+            swathWidth == other.swathWidth &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, spacecraftId, id, bestResolution, createdAt, createdBy, fieldOfRegard, fieldOfView, groundStationLocations, groundStations, hostedForCompanyOrgId, idSensor, imagingPayloadCategory, manufacturerOrgId, name, notes, numberOfFilmReturnCanisters, origin, origNetwork, pointingMethod, recorderSize, spectralBand, spectralFrequencyLimits, swathWidth, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            spacecraftId,
+            id,
+            bestResolution,
+            createdAt,
+            createdBy,
+            fieldOfRegard,
+            fieldOfView,
+            groundStationLocations,
+            groundStations,
+            hostedForCompanyOrgId,
+            idSensor,
+            imagingPayloadCategory,
+            manufacturerOrgId,
+            name,
+            notes,
+            numberOfFilmReturnCanisters,
+            origin,
+            origNetwork,
+            pointingMethod,
+            recorderSize,
+            spectralBand,
+            spectralFrequencyLimits,
+            swathWidth,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() = "SeradataOpticalPayloadGetResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, spacecraftId=$spacecraftId, id=$id, bestResolution=$bestResolution, createdAt=$createdAt, createdBy=$createdBy, fieldOfRegard=$fieldOfRegard, fieldOfView=$fieldOfView, groundStationLocations=$groundStationLocations, groundStations=$groundStations, hostedForCompanyOrgId=$hostedForCompanyOrgId, idSensor=$idSensor, imagingPayloadCategory=$imagingPayloadCategory, manufacturerOrgId=$manufacturerOrgId, name=$name, notes=$notes, numberOfFilmReturnCanisters=$numberOfFilmReturnCanisters, origin=$origin, origNetwork=$origNetwork, pointingMethod=$pointingMethod, recorderSize=$recorderSize, spectralBand=$spectralBand, spectralFrequencyLimits=$spectralFrequencyLimits, swathWidth=$swathWidth, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
+    override fun toString() =
+        "SeradataOpticalPayloadGetResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, spacecraftId=$spacecraftId, id=$id, bestResolution=$bestResolution, createdAt=$createdAt, createdBy=$createdBy, fieldOfRegard=$fieldOfRegard, fieldOfView=$fieldOfView, groundStationLocations=$groundStationLocations, groundStations=$groundStations, hostedForCompanyOrgId=$hostedForCompanyOrgId, idSensor=$idSensor, imagingPayloadCategory=$imagingPayloadCategory, manufacturerOrgId=$manufacturerOrgId, name=$name, notes=$notes, numberOfFilmReturnCanisters=$numberOfFilmReturnCanisters, origin=$origin, origNetwork=$origNetwork, pointingMethod=$pointingMethod, recorderSize=$recorderSize, spectralBand=$spectralBand, spectralFrequencyLimits=$spectralFrequencyLimits, swathWidth=$swathWidth, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
 }

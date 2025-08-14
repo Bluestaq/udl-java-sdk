@@ -1049,7 +1049,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1062,12 +1062,53 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is BatterydetailsFull && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idBattery == other.idBattery && source == other.source && id == other.id && capacity == other.capacity && createdAt == other.createdAt && createdBy == other.createdBy && description == other.description && dischargeDepth == other.dischargeDepth && manufacturerOrg == other.manufacturerOrg && manufacturerOrgId == other.manufacturerOrgId && model == other.model && origin == other.origin && origNetwork == other.origNetwork && tags == other.tags && technology == other.technology && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is BatterydetailsFull &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idBattery == other.idBattery &&
+            source == other.source &&
+            id == other.id &&
+            capacity == other.capacity &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            description == other.description &&
+            dischargeDepth == other.dischargeDepth &&
+            manufacturerOrg == other.manufacturerOrg &&
+            manufacturerOrgId == other.manufacturerOrgId &&
+            model == other.model &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            tags == other.tags &&
+            technology == other.technology &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idBattery, source, id, capacity, createdAt, createdBy, description, dischargeDepth, manufacturerOrg, manufacturerOrgId, model, origin, origNetwork, tags, technology, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idBattery,
+            source,
+            id,
+            capacity,
+            createdAt,
+            createdBy,
+            description,
+            dischargeDepth,
+            manufacturerOrg,
+            manufacturerOrgId,
+            model,
+            origin,
+            origNetwork,
+            tags,
+            technology,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

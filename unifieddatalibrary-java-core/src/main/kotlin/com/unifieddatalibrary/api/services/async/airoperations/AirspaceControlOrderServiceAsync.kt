@@ -6,13 +6,14 @@ import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.models.airoperations.airspacecontrolorders.AirspaceControlOrderUnvalidatedPublishParams
-import com.unifieddatalibrary.api.services.async.airoperations.AirspaceControlOrderServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
 interface AirspaceControlOrderServiceAsync {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -22,16 +23,26 @@ interface AirspaceControlOrderServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): AirspaceControlOrderServiceAsync
 
-    /** Service operation to take multiple AirspaceControlOrder records as a POST body and ingest into the database. This operation is intended to be used for automated feeds into UDL. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
-    fun unvalidatedPublish(params: AirspaceControlOrderUnvalidatedPublishParams): CompletableFuture<Void?> =
-        unvalidatedPublish(
-          params, RequestOptions.none()
-        )
+    /**
+     * Service operation to take multiple AirspaceControlOrder records as a POST body and ingest
+     * into the database. This operation is intended to be used for automated feeds into UDL. A
+     * specific role is required to perform this service operation. Please contact the UDL team for
+     * assistance.
+     */
+    fun unvalidatedPublish(
+        params: AirspaceControlOrderUnvalidatedPublishParams
+    ): CompletableFuture<Void?> = unvalidatedPublish(params, RequestOptions.none())
 
     /** @see unvalidatedPublish */
-    fun unvalidatedPublish(params: AirspaceControlOrderUnvalidatedPublishParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?>
+    fun unvalidatedPublish(
+        params: AirspaceControlOrderUnvalidatedPublishParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?>
 
-    /** A view of [AirspaceControlOrderServiceAsync] that provides access to raw HTTP responses for each method. */
+    /**
+     * A view of [AirspaceControlOrderServiceAsync] that provides access to raw HTTP responses for
+     * each method.
+     */
     interface WithRawResponse {
 
         /**
@@ -39,15 +50,22 @@ interface AirspaceControlOrderServiceAsync {
          *
          * The original service is not modified.
          */
-        fun withOptions(modifier: Consumer<ClientOptions.Builder>): AirspaceControlOrderServiceAsync.WithRawResponse
+        fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): AirspaceControlOrderServiceAsync.WithRawResponse
 
-        /** Returns a raw HTTP response for `post /filedrop/udl-airspacecontrolorder`, but is otherwise the same as [AirspaceControlOrderServiceAsync.unvalidatedPublish]. */
-        fun unvalidatedPublish(params: AirspaceControlOrderUnvalidatedPublishParams): CompletableFuture<HttpResponse> =
-            unvalidatedPublish(
-              params, RequestOptions.none()
-            )
+        /**
+         * Returns a raw HTTP response for `post /filedrop/udl-airspacecontrolorder`, but is
+         * otherwise the same as [AirspaceControlOrderServiceAsync.unvalidatedPublish].
+         */
+        fun unvalidatedPublish(
+            params: AirspaceControlOrderUnvalidatedPublishParams
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(params, RequestOptions.none())
 
         /** @see unvalidatedPublish */
-        fun unvalidatedPublish(params: AirspaceControlOrderUnvalidatedPublishParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse>
+        fun unvalidatedPublish(
+            params: AirspaceControlOrderUnvalidatedPublishParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse>
     }
 }

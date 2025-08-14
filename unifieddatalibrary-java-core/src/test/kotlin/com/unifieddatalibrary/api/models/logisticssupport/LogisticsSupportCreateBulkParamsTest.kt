@@ -38,7 +38,7 @@ internal class LogisticsSupportCreateBulkParamsTest {
                     )
                     .logisticsRecordId("L62017")
                     .addLogisticsRemark(
-                        LogisticsSupportCreateBulkParams.Body.LogisticsRemark.builder()
+                        LogisticsRemarksIngest.builder()
                             .lastChanged(OffsetDateTime.parse("2023-07-17T10:30:00.123Z"))
                             .remark("EXAMPLE REMARK")
                             .username("JSMITH")
@@ -81,9 +81,7 @@ internal class LogisticsSupportCreateBulkParamsTest {
                                     .build()
                             )
                             .addLogisticsRemark(
-                                LogisticsSupportCreateBulkParams.Body.LogisticsSupportItem
-                                    .LogisticsRemark
-                                    .builder()
+                                LogisticsRemarksIngest.builder()
                                     .lastChanged(OffsetDateTime.parse("2023-07-17T10:30:00.123Z"))
                                     .remark("EXAMPLE REMARK")
                                     .username("JSMITH")
@@ -152,9 +150,7 @@ internal class LogisticsSupportCreateBulkParamsTest {
                                     .build()
                             )
                             .addLogisticsTransportationPlansRemark(
-                                LogisticsSupportCreateBulkParams.Body.LogisticsTransportationPlan
-                                    .LogisticsTransportationPlansRemark
-                                    .builder()
+                                LogisticsRemarksIngest.builder()
                                     .lastChanged(OffsetDateTime.parse("2023-07-17T10:30:00.123Z"))
                                     .remark("EXAMPLE REMARK")
                                     .username("JSMITH")
@@ -221,7 +217,7 @@ internal class LogisticsSupportCreateBulkParamsTest {
                         )
                         .logisticsRecordId("L62017")
                         .addLogisticsRemark(
-                            LogisticsSupportCreateBulkParams.Body.LogisticsRemark.builder()
+                            LogisticsRemarksIngest.builder()
                                 .lastChanged(OffsetDateTime.parse("2023-07-17T10:30:00.123Z"))
                                 .remark("EXAMPLE REMARK")
                                 .username("JSMITH")
@@ -267,9 +263,7 @@ internal class LogisticsSupportCreateBulkParamsTest {
                                         .build()
                                 )
                                 .addLogisticsRemark(
-                                    LogisticsSupportCreateBulkParams.Body.LogisticsSupportItem
-                                        .LogisticsRemark
-                                        .builder()
+                                    LogisticsRemarksIngest.builder()
                                         .lastChanged(
                                             OffsetDateTime.parse("2023-07-17T10:30:00.123Z")
                                         )
@@ -350,10 +344,7 @@ internal class LogisticsSupportCreateBulkParamsTest {
                                         .build()
                                 )
                                 .addLogisticsTransportationPlansRemark(
-                                    LogisticsSupportCreateBulkParams.Body
-                                        .LogisticsTransportationPlan
-                                        .LogisticsTransportationPlansRemark
-                                        .builder()
+                                    LogisticsRemarksIngest.builder()
                                         .lastChanged(
                                             OffsetDateTime.parse("2023-07-17T10:30:00.123Z")
                                         )
@@ -420,7 +411,7 @@ internal class LogisticsSupportCreateBulkParamsTest {
                     )
                     .logisticsRecordId("L62017")
                     .addLogisticsRemark(
-                        LogisticsSupportCreateBulkParams.Body.LogisticsRemark.builder()
+                        LogisticsRemarksIngest.builder()
                             .lastChanged(OffsetDateTime.parse("2023-07-17T10:30:00.123Z"))
                             .remark("EXAMPLE REMARK")
                             .username("JSMITH")
@@ -463,9 +454,7 @@ internal class LogisticsSupportCreateBulkParamsTest {
                                     .build()
                             )
                             .addLogisticsRemark(
-                                LogisticsSupportCreateBulkParams.Body.LogisticsSupportItem
-                                    .LogisticsRemark
-                                    .builder()
+                                LogisticsRemarksIngest.builder()
                                     .lastChanged(OffsetDateTime.parse("2023-07-17T10:30:00.123Z"))
                                     .remark("EXAMPLE REMARK")
                                     .username("JSMITH")
@@ -534,9 +523,7 @@ internal class LogisticsSupportCreateBulkParamsTest {
                                     .build()
                             )
                             .addLogisticsTransportationPlansRemark(
-                                LogisticsSupportCreateBulkParams.Body.LogisticsTransportationPlan
-                                    .LogisticsTransportationPlansRemark
-                                    .builder()
+                                LogisticsRemarksIngest.builder()
                                     .lastChanged(OffsetDateTime.parse("2023-07-17T10:30:00.123Z"))
                                     .remark("EXAMPLE REMARK")
                                     .username("JSMITH")

@@ -3,7 +3,6 @@
 package com.unifieddatalibrary.api.models.scs.paths
 
 import com.unifieddatalibrary.api.core.http.QueryParams
-import com.unifieddatalibrary.api.models.scs.paths.PathCreateWithFileParams
 import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -12,88 +11,98 @@ internal class PathCreateWithFileParamsTest {
 
     @Test
     fun create() {
-      PathCreateWithFileParams.builder()
-          .id("id")
-          .classificationMarking("classificationMarking")
-          .deleteAfter("deleteAfter")
-          .description("description")
-          .overwrite(true)
-          .sendNotification(true)
-          .tags("tags")
-          .fileContent("some content")
-          .build()
+        PathCreateWithFileParams.builder()
+            .id("id")
+            .classificationMarking("classificationMarking")
+            .deleteAfter("deleteAfter")
+            .description("description")
+            .overwrite(true)
+            .sendNotification(true)
+            .tags("tags")
+            .fileContent("some content")
+            .build()
     }
 
     @Test
     fun queryParams() {
-      val params = PathCreateWithFileParams.builder()
-          .id("id")
-          .classificationMarking("classificationMarking")
-          .deleteAfter("deleteAfter")
-          .description("description")
-          .overwrite(true)
-          .sendNotification(true)
-          .tags("tags")
-          .fileContent("some content")
-          .build()
+        val params =
+            PathCreateWithFileParams.builder()
+                .id("id")
+                .classificationMarking("classificationMarking")
+                .deleteAfter("deleteAfter")
+                .description("description")
+                .overwrite(true)
+                .sendNotification(true)
+                .tags("tags")
+                .fileContent("some content")
+                .build()
 
-      val queryParams = params._queryParams()
+        val queryParams = params._queryParams()
 
-      assertThat(queryParams).isEqualTo(QueryParams.builder()
-          .put("id", "id")
-          .put("classificationMarking", "classificationMarking")
-          .put("deleteAfter", "deleteAfter")
-          .put("description", "description")
-          .put("overwrite", "true")
-          .put("sendNotification", "true")
-          .put("tags", "tags")
-          .build())
+        assertThat(queryParams)
+            .isEqualTo(
+                QueryParams.builder()
+                    .put("id", "id")
+                    .put("classificationMarking", "classificationMarking")
+                    .put("deleteAfter", "deleteAfter")
+                    .put("description", "description")
+                    .put("overwrite", "true")
+                    .put("sendNotification", "true")
+                    .put("tags", "tags")
+                    .build()
+            )
     }
 
     @Test
     fun queryParamsWithoutOptionalFields() {
-      val params = PathCreateWithFileParams.builder()
-          .id("id")
-          .classificationMarking("classificationMarking")
-          .fileContent("some content")
-          .build()
+        val params =
+            PathCreateWithFileParams.builder()
+                .id("id")
+                .classificationMarking("classificationMarking")
+                .fileContent("some content")
+                .build()
 
-      val queryParams = params._queryParams()
+        val queryParams = params._queryParams()
 
-      assertThat(queryParams).isEqualTo(QueryParams.builder()
-          .put("id", "id")
-          .put("classificationMarking", "classificationMarking")
-          .build())
+        assertThat(queryParams)
+            .isEqualTo(
+                QueryParams.builder()
+                    .put("id", "id")
+                    .put("classificationMarking", "classificationMarking")
+                    .build()
+            )
     }
 
     @Test
     fun body() {
-      val params = PathCreateWithFileParams.builder()
-          .id("id")
-          .classificationMarking("classificationMarking")
-          .deleteAfter("deleteAfter")
-          .description("description")
-          .overwrite(true)
-          .sendNotification(true)
-          .tags("tags")
-          .fileContent("some content")
-          .build()
+        val params =
+            PathCreateWithFileParams.builder()
+                .id("id")
+                .classificationMarking("classificationMarking")
+                .deleteAfter("deleteAfter")
+                .description("description")
+                .overwrite(true)
+                .sendNotification(true)
+                .tags("tags")
+                .fileContent("some content")
+                .build()
 
-      val body = params._body().getOrNull()
+        val body = params._body().getOrNull()
 
-      assertThat(body).isEqualTo("some content")
+        assertThat(body).isEqualTo("some content")
     }
 
     @Test
     fun bodyWithoutOptionalFields() {
-      val params = PathCreateWithFileParams.builder()
-          .id("id")
-          .classificationMarking("classificationMarking")
-          .fileContent("some content")
-          .build()
+        val params =
+            PathCreateWithFileParams.builder()
+                .id("id")
+                .classificationMarking("classificationMarking")
+                .fileContent("some content")
+                .build()
 
-      val body = params._body().getOrNull()
+        val body = params._body().getOrNull()
 
-      assertThat(body).isEqualTo("some content")
+        assertThat(body).isEqualTo("some content")
     }
 }

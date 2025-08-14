@@ -2,13 +2,12 @@
 
 package com.unifieddatalibrary.api.models.scs.rangeparameters
 
-import com.unifieddatalibrary.api.models.scs.rangeparameters.RangeParameterListParams
 import org.junit.jupiter.api.Test
 
 internal class RangeParameterListParamsTest {
 
     @Test
     fun create() {
-      RangeParameterListParams.builder().build()
+        RangeParameterListParams.builder().build()
     }
 }

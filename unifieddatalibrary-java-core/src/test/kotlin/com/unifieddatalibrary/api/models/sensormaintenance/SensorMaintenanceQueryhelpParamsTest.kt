@@ -2,13 +2,12 @@
 
 package com.unifieddatalibrary.api.models.sensormaintenance
 
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryhelpParams
 import org.junit.jupiter.api.Test
 
 internal class SensorMaintenanceQueryhelpParamsTest {
 
     @Test
     fun create() {
-      SensorMaintenanceQueryhelpParams.builder().build()
+        SensorMaintenanceQueryhelpParams.builder().build()
     }
 }

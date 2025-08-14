@@ -2,13 +2,12 @@
 
 package com.unifieddatalibrary.api.models.crew
 
-import com.unifieddatalibrary.api.models.crew.CrewQueryhelpParams
 import org.junit.jupiter.api.Test
 
 internal class CrewQueryhelpParamsTest {
 
     @Test
     fun create() {
-      CrewQueryhelpParams.builder().build()
+        CrewQueryhelpParams.builder().build()
     }
 }

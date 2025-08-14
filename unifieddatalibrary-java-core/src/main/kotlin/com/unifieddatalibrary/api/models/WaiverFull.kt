@@ -578,12 +578,37 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is WaiverFull && expirationDate == other.expirationDate && hasExpired == other.hasExpired && issueDate == other.issueDate && issuerName == other.issuerName && requesterName == other.requesterName && requesterPhoneNumber == other.requesterPhoneNumber && requestingUnit == other.requestingUnit && waiverAppliesTo == other.waiverAppliesTo && waiverDescription == other.waiverDescription && waiverLastChangedBy == other.waiverLastChangedBy && waiverLastChangedDate == other.waiverLastChangedDate && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is WaiverFull &&
+            expirationDate == other.expirationDate &&
+            hasExpired == other.hasExpired &&
+            issueDate == other.issueDate &&
+            issuerName == other.issuerName &&
+            requesterName == other.requesterName &&
+            requesterPhoneNumber == other.requesterPhoneNumber &&
+            requestingUnit == other.requestingUnit &&
+            waiverAppliesTo == other.waiverAppliesTo &&
+            waiverDescription == other.waiverDescription &&
+            waiverLastChangedBy == other.waiverLastChangedBy &&
+            waiverLastChangedDate == other.waiverLastChangedDate &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(expirationDate, hasExpired, issueDate, issuerName, requesterName, requesterPhoneNumber, requestingUnit, waiverAppliesTo, waiverDescription, waiverLastChangedBy, waiverLastChangedDate, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            expirationDate,
+            hasExpired,
+            issueDate,
+            issuerName,
+            requesterName,
+            requesterPhoneNumber,
+            requestingUnit,
+            waiverAppliesTo,
+            waiverDescription,
+            waiverLastChangedBy,
+            waiverLastChangedDate,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

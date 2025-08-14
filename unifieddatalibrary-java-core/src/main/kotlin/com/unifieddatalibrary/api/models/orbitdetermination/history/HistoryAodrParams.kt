@@ -11,8 +11,14 @@ import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/** Service operation to dynamically query historical data by a variety of query parameters not specified in this API documentation, then write that data to the Secure Content Store. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
-class HistoryAodrParams private constructor(
+/**
+ * Service operation to dynamically query historical data by a variety of query parameters not
+ * specified in this API documentation, then write that data to the Secure Content Store. See the
+ * queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query
+ * parameter information.
+ */
+class HistoryAodrParams
+private constructor(
     private val columns: String?,
     private val firstResult: Long?,
     private val idOnOrbit: String?,
@@ -23,29 +29,50 @@ class HistoryAodrParams private constructor(
     private val startTime: OffsetDateTime?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
-
 ) : Params {
 
-    /** optional, fields for retrieval. When omitted, ALL fields are assumed. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid query fields that can be selected. */
+    /**
+     * optional, fields for retrieval. When omitted, ALL fields are assumed. See the queryhelp
+     * operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid query fields that can
+     * be selected.
+     */
     fun columns(): Optional<String> = Optional.ofNullable(columns)
 
     fun firstResult(): Optional<Long> = Optional.ofNullable(firstResult)
 
-    /** (One or more of fields 'idOnOrbit, startTime' are required.) Unique identifier of the target satellite on-orbit object. This ID can be used to obtain additional information on an OnOrbit object using the 'get by ID' operation (e.g. /udl/onorbit/{id}). For example, the OnOrbit with idOnOrbit = 25544 would be queried as /udl/onorbit/25544. */
+    /**
+     * (One or more of fields 'idOnOrbit, startTime' are required.) Unique identifier of the target
+     * satellite on-orbit object. This ID can be used to obtain additional information on an OnOrbit
+     * object using the 'get by ID' operation (e.g. /udl/onorbit/{id}). For example, the OnOrbit
+     * with idOnOrbit = 25544 would be queried as /udl/onorbit/25544.
+     */
     fun idOnOrbit(): Optional<String> = Optional.ofNullable(idOnOrbit)
 
     fun maxResults(): Optional<Long> = Optional.ofNullable(maxResults)
 
-    /** optional, notification method for the created file link. When omitted, EMAIL is assumed. Current valid values are: EMAIL, SMS. */
+    /**
+     * optional, notification method for the created file link. When omitted, EMAIL is assumed.
+     * Current valid values are: EMAIL, SMS.
+     */
     fun notification(): Optional<String> = Optional.ofNullable(notification)
 
-    /** optional, field delimiter when the created file is not JSON. Must be a single character chosen from this set: (',', ';', ':', '|'). When omitted, "," is used. It is strongly encouraged that your field delimiter be a character unlikely to occur within the data. */
+    /**
+     * optional, field delimiter when the created file is not JSON. Must be a single character
+     * chosen from this set: (',', ';', ':', '|'). When omitted, "," is used. It is strongly
+     * encouraged that your field delimiter be a character unlikely to occur within the data.
+     */
     fun outputDelimiter(): Optional<String> = Optional.ofNullable(outputDelimiter)
 
-    /** optional, output format for the file. When omitted, JSON is assumed. Current valid values are: JSON and CSV. */
+    /**
+     * optional, output format for the file. When omitted, JSON is assumed. Current valid values
+     * are: JSON and CSV.
+     */
     fun outputFormat(): Optional<String> = Optional.ofNullable(outputFormat)
 
-    /** (One or more of fields 'idOnOrbit, startTime' are required.) Start time for OD solution in ISO 8601 UTC datetime format, with microsecond precision. (YYYY-MM-DDTHH:MM:SS.ssssssZ) */
+    /**
+     * (One or more of fields 'idOnOrbit, startTime' are required.) Start time for OD solution in
+     * ISO 8601 UTC datetime format, with microsecond precision. (YYYY-MM-DDTHH:MM:SS.ssssssZ)
+     */
     fun startTime(): Optional<OffsetDateTime> = Optional.ofNullable(startTime)
 
     /** Additional headers to send with the request. */
@@ -58,12 +85,10 @@ class HistoryAodrParams private constructor(
 
     companion object {
 
-        @JvmStatic
-        fun none(): HistoryAodrParams = builder().build()
+        @JvmStatic fun none(): HistoryAodrParams = builder().build()
 
         /** Returns a mutable builder for constructing an instance of [HistoryAodrParams]. */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [HistoryAodrParams]. */
@@ -81,33 +106,30 @@ class HistoryAodrParams private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(historyAodrParams: HistoryAodrParams) =
-            apply {
-                columns = historyAodrParams.columns
-                firstResult = historyAodrParams.firstResult
-                idOnOrbit = historyAodrParams.idOnOrbit
-                maxResults = historyAodrParams.maxResults
-                notification = historyAodrParams.notification
-                outputDelimiter = historyAodrParams.outputDelimiter
-                outputFormat = historyAodrParams.outputFormat
-                startTime = historyAodrParams.startTime
-                additionalHeaders = historyAodrParams.additionalHeaders.toBuilder()
-                additionalQueryParams = historyAodrParams.additionalQueryParams.toBuilder()
-            }
+        internal fun from(historyAodrParams: HistoryAodrParams) = apply {
+            columns = historyAodrParams.columns
+            firstResult = historyAodrParams.firstResult
+            idOnOrbit = historyAodrParams.idOnOrbit
+            maxResults = historyAodrParams.maxResults
+            notification = historyAodrParams.notification
+            outputDelimiter = historyAodrParams.outputDelimiter
+            outputFormat = historyAodrParams.outputFormat
+            startTime = historyAodrParams.startTime
+            additionalHeaders = historyAodrParams.additionalHeaders.toBuilder()
+            additionalQueryParams = historyAodrParams.additionalQueryParams.toBuilder()
+        }
 
-        /** optional, fields for retrieval. When omitted, ALL fields are assumed. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid query fields that can be selected. */
-        fun columns(columns: String?) =
-            apply {
-                this.columns = columns
-            }
+        /**
+         * optional, fields for retrieval. When omitted, ALL fields are assumed. See the queryhelp
+         * operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid query fields that
+         * can be selected.
+         */
+        fun columns(columns: String?) = apply { this.columns = columns }
 
         /** Alias for calling [Builder.columns] with `columns.orElse(null)`. */
         fun columns(columns: Optional<String>) = columns(columns.getOrNull())
 
-        fun firstResult(firstResult: Long?) =
-            apply {
-                this.firstResult = firstResult
-            }
+        fun firstResult(firstResult: Long?) = apply { this.firstResult = firstResult }
 
         /**
          * Alias for [Builder.firstResult].
@@ -119,19 +141,18 @@ class HistoryAodrParams private constructor(
         /** Alias for calling [Builder.firstResult] with `firstResult.orElse(null)`. */
         fun firstResult(firstResult: Optional<Long>) = firstResult(firstResult.getOrNull())
 
-        /** (One or more of fields 'idOnOrbit, startTime' are required.) Unique identifier of the target satellite on-orbit object. This ID can be used to obtain additional information on an OnOrbit object using the 'get by ID' operation (e.g. /udl/onorbit/{id}). For example, the OnOrbit with idOnOrbit = 25544 would be queried as /udl/onorbit/25544. */
-        fun idOnOrbit(idOnOrbit: String?) =
-            apply {
-                this.idOnOrbit = idOnOrbit
-            }
+        /**
+         * (One or more of fields 'idOnOrbit, startTime' are required.) Unique identifier of the
+         * target satellite on-orbit object. This ID can be used to obtain additional information on
+         * an OnOrbit object using the 'get by ID' operation (e.g. /udl/onorbit/{id}). For example,
+         * the OnOrbit with idOnOrbit = 25544 would be queried as /udl/onorbit/25544.
+         */
+        fun idOnOrbit(idOnOrbit: String?) = apply { this.idOnOrbit = idOnOrbit }
 
         /** Alias for calling [Builder.idOnOrbit] with `idOnOrbit.orElse(null)`. */
         fun idOnOrbit(idOnOrbit: Optional<String>) = idOnOrbit(idOnOrbit.getOrNull())
 
-        fun maxResults(maxResults: Long?) =
-            apply {
-                this.maxResults = maxResults
-            }
+        fun maxResults(maxResults: Long?) = apply { this.maxResults = maxResults }
 
         /**
          * Alias for [Builder.maxResults].
@@ -143,165 +164,144 @@ class HistoryAodrParams private constructor(
         /** Alias for calling [Builder.maxResults] with `maxResults.orElse(null)`. */
         fun maxResults(maxResults: Optional<Long>) = maxResults(maxResults.getOrNull())
 
-        /** optional, notification method for the created file link. When omitted, EMAIL is assumed. Current valid values are: EMAIL, SMS. */
-        fun notification(notification: String?) =
-            apply {
-                this.notification = notification
-            }
+        /**
+         * optional, notification method for the created file link. When omitted, EMAIL is assumed.
+         * Current valid values are: EMAIL, SMS.
+         */
+        fun notification(notification: String?) = apply { this.notification = notification }
 
         /** Alias for calling [Builder.notification] with `notification.orElse(null)`. */
         fun notification(notification: Optional<String>) = notification(notification.getOrNull())
 
-        /** optional, field delimiter when the created file is not JSON. Must be a single character chosen from this set: (',', ';', ':', '|'). When omitted, "," is used. It is strongly encouraged that your field delimiter be a character unlikely to occur within the data. */
-        fun outputDelimiter(outputDelimiter: String?) =
-            apply {
-                this.outputDelimiter = outputDelimiter
-            }
+        /**
+         * optional, field delimiter when the created file is not JSON. Must be a single character
+         * chosen from this set: (',', ';', ':', '|'). When omitted, "," is used. It is strongly
+         * encouraged that your field delimiter be a character unlikely to occur within the data.
+         */
+        fun outputDelimiter(outputDelimiter: String?) = apply {
+            this.outputDelimiter = outputDelimiter
+        }
 
         /** Alias for calling [Builder.outputDelimiter] with `outputDelimiter.orElse(null)`. */
-        fun outputDelimiter(outputDelimiter: Optional<String>) = outputDelimiter(outputDelimiter.getOrNull())
+        fun outputDelimiter(outputDelimiter: Optional<String>) =
+            outputDelimiter(outputDelimiter.getOrNull())
 
-        /** optional, output format for the file. When omitted, JSON is assumed. Current valid values are: JSON and CSV. */
-        fun outputFormat(outputFormat: String?) =
-            apply {
-                this.outputFormat = outputFormat
-            }
+        /**
+         * optional, output format for the file. When omitted, JSON is assumed. Current valid values
+         * are: JSON and CSV.
+         */
+        fun outputFormat(outputFormat: String?) = apply { this.outputFormat = outputFormat }
 
         /** Alias for calling [Builder.outputFormat] with `outputFormat.orElse(null)`. */
         fun outputFormat(outputFormat: Optional<String>) = outputFormat(outputFormat.getOrNull())
 
-        /** (One or more of fields 'idOnOrbit, startTime' are required.) Start time for OD solution in ISO 8601 UTC datetime format, with microsecond precision. (YYYY-MM-DDTHH:MM:SS.ssssssZ) */
-        fun startTime(startTime: OffsetDateTime?) =
-            apply {
-                this.startTime = startTime
-            }
+        /**
+         * (One or more of fields 'idOnOrbit, startTime' are required.) Start time for OD solution
+         * in ISO 8601 UTC datetime format, with microsecond precision.
+         * (YYYY-MM-DDTHH:MM:SS.ssssssZ)
+         */
+        fun startTime(startTime: OffsetDateTime?) = apply { this.startTime = startTime }
 
         /** Alias for calling [Builder.startTime] with `startTime.orElse(null)`. */
         fun startTime(startTime: Optional<OffsetDateTime>) = startTime(startTime.getOrNull())
 
-        fun additionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.clear()
-                putAllAdditionalHeaders(additionalHeaders)
-            }
+        fun additionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.clear()
+            putAllAdditionalHeaders(additionalHeaders)
+        }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.clear()
-                putAllAdditionalHeaders(additionalHeaders)
-            }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.clear()
+            putAllAdditionalHeaders(additionalHeaders)
+        }
 
-        fun putAdditionalHeader(name: String, value: String) =
-            apply {
-                additionalHeaders.put(name, value)
-            }
+        fun putAdditionalHeader(name: String, value: String) = apply {
+            additionalHeaders.put(name, value)
+        }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
-            apply {
-                additionalHeaders.put(name, values)
-            }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
+            additionalHeaders.put(name, values)
+        }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.putAll(additionalHeaders)
-            }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.putAll(additionalHeaders)
+        }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.putAll(additionalHeaders)
-            }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.putAll(additionalHeaders)
+        }
 
-        fun replaceAdditionalHeaders(name: String, value: String) =
-            apply {
-                additionalHeaders.replace(name, value)
-            }
+        fun replaceAdditionalHeaders(name: String, value: String) = apply {
+            additionalHeaders.replace(name, value)
+        }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
-            apply {
-                additionalHeaders.replace(name, values)
-            }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
+            additionalHeaders.replace(name, values)
+        }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.replaceAll(additionalHeaders)
-            }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.replaceAll(additionalHeaders)
+        }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.replaceAll(additionalHeaders)
-            }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.replaceAll(additionalHeaders)
+        }
 
-        fun removeAdditionalHeaders(name: String) =
-            apply {
-                additionalHeaders.remove(name)
-            }
+        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) =
-            apply {
-                additionalHeaders.removeAll(names)
-            }
+        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
+            additionalHeaders.removeAll(names)
+        }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.clear()
-                putAllAdditionalQueryParams(additionalQueryParams)
-            }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.clear()
+            putAllAdditionalQueryParams(additionalQueryParams)
+        }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalQueryParams.clear()
-                putAllAdditionalQueryParams(additionalQueryParams)
-            }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
+            this.additionalQueryParams.clear()
+            putAllAdditionalQueryParams(additionalQueryParams)
+        }
 
-        fun putAdditionalQueryParam(key: String, value: String) =
-            apply {
-                additionalQueryParams.put(key, value)
-            }
+        fun putAdditionalQueryParam(key: String, value: String) = apply {
+            additionalQueryParams.put(key, value)
+        }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
-            apply {
-                additionalQueryParams.put(key, values)
-            }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
+            additionalQueryParams.put(key, values)
+        }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.putAll(additionalQueryParams)
-            }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.putAll(additionalQueryParams)
+        }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) =
-            apply {
-                additionalQueryParams.replace(key, value)
-            }
+        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
+            additionalQueryParams.replace(key, value)
+        }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
-            apply {
-                additionalQueryParams.replace(key, values)
-            }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
+            additionalQueryParams.replace(key, values)
+        }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.replaceAll(additionalQueryParams)
-            }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.replaceAll(additionalQueryParams)
+        }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) =
-            apply {
-                additionalQueryParams.remove(key)
-            }
+        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) =
-            apply {
-                additionalQueryParams.removeAll(keys)
-            }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
+            additionalQueryParams.removeAll(keys)
+        }
 
         /**
          * Returns an immutable instance of [HistoryAodrParams].
@@ -310,16 +310,16 @@ class HistoryAodrParams private constructor(
          */
         fun build(): HistoryAodrParams =
             HistoryAodrParams(
-              columns,
-              firstResult,
-              idOnOrbit,
-              maxResults,
-              notification,
-              outputDelimiter,
-              outputFormat,
-              startTime,
-              additionalHeaders.build(),
-              additionalQueryParams.build(),
+                columns,
+                firstResult,
+                idOnOrbit,
+                maxResults,
+                notification,
+                outputDelimiter,
+                outputFormat,
+                startTime,
+                additionalHeaders.build(),
+                additionalQueryParams.build(),
             )
     }
 
@@ -335,20 +335,45 @@ class HistoryAodrParams private constructor(
                 notification?.let { put("notification", it) }
                 outputDelimiter?.let { put("outputDelimiter", it) }
                 outputFormat?.let { put("outputFormat", it) }
-                startTime?.let { put("startTime", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(it)) }
+                startTime?.let {
+                    put("startTime", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(it))
+                }
                 putAll(additionalQueryParams)
             }
             .build()
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is HistoryAodrParams && columns == other.columns && firstResult == other.firstResult && idOnOrbit == other.idOnOrbit && maxResults == other.maxResults && notification == other.notification && outputDelimiter == other.outputDelimiter && outputFormat == other.outputFormat && startTime == other.startTime && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HistoryAodrParams &&
+            columns == other.columns &&
+            firstResult == other.firstResult &&
+            idOnOrbit == other.idOnOrbit &&
+            maxResults == other.maxResults &&
+            notification == other.notification &&
+            outputDelimiter == other.outputDelimiter &&
+            outputFormat == other.outputFormat &&
+            startTime == other.startTime &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, firstResult, idOnOrbit, maxResults, notification, outputDelimiter, outputFormat, startTime, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            columns,
+            firstResult,
+            idOnOrbit,
+            maxResults,
+            notification,
+            outputDelimiter,
+            outputFormat,
+            startTime,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
-    override fun toString() = "HistoryAodrParams{columns=$columns, firstResult=$firstResult, idOnOrbit=$idOnOrbit, maxResults=$maxResults, notification=$notification, outputDelimiter=$outputDelimiter, outputFormat=$outputFormat, startTime=$startTime, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() =
+        "HistoryAodrParams{columns=$columns, firstResult=$firstResult, idOnOrbit=$idOnOrbit, maxResults=$maxResults, notification=$notification, outputDelimiter=$outputDelimiter, outputFormat=$outputFormat, startTime=$startTime, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

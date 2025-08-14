@@ -15,7 +15,6 @@ import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
-import com.unifieddatalibrary.api.models.effectresponses.EffectResponseListResponse
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
@@ -23,7 +22,8 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 /** A response for various effects on a target. */
-class EffectResponseListResponse private constructor(
+class EffectResponseListResponse
+private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
     private val source: JsonField<String>,
@@ -50,252 +50,326 @@ class EffectResponseListResponse private constructor(
     private val redTimeToOverhead: JsonField<OffsetDateTime>,
     private val shotsRequired: JsonField<Int>,
     private val additionalProperties: MutableMap<String, JsonValue>,
-
 ) {
 
     @JsonCreator
     private constructor(
-        @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        classificationMarking: JsonField<String> = JsonMissing.of(),
         @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
         @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
         @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
         @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("actionsList") @ExcludeMissing actionsList: JsonField<List<ActionsList>> = JsonMissing.of(),
-        @JsonProperty("actorSrcId") @ExcludeMissing actorSrcId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("actorSrcType") @ExcludeMissing actorSrcType: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("coaMetrics") @ExcludeMissing coaMetrics: JsonField<List<CoaMetric>> = JsonMissing.of(),
-        @JsonProperty("collateralDamageEst") @ExcludeMissing collateralDamageEst: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("actionsList")
+        @ExcludeMissing
+        actionsList: JsonField<List<ActionsList>> = JsonMissing.of(),
+        @JsonProperty("actorSrcId")
+        @ExcludeMissing
+        actorSrcId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("actorSrcType")
+        @ExcludeMissing
+        actorSrcType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("coaMetrics")
+        @ExcludeMissing
+        coaMetrics: JsonField<List<CoaMetric>> = JsonMissing.of(),
+        @JsonProperty("collateralDamageEst")
+        @ExcludeMissing
+        collateralDamageEst: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("decisionDeadline") @ExcludeMissing decisionDeadline: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("externalActions") @ExcludeMissing externalActions: JsonField<List<String>> = JsonMissing.of(),
-        @JsonProperty("externalRequestId") @ExcludeMissing externalRequestId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("idEffectRequest") @ExcludeMissing idEffectRequest: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("munitionId") @ExcludeMissing munitionId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("munitionType") @ExcludeMissing munitionType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("decisionDeadline")
+        @ExcludeMissing
+        decisionDeadline: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("externalActions")
+        @ExcludeMissing
+        externalActions: JsonField<List<String>> = JsonMissing.of(),
+        @JsonProperty("externalRequestId")
+        @ExcludeMissing
+        externalRequestId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("idEffectRequest")
+        @ExcludeMissing
+        idEffectRequest: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("munitionId")
+        @ExcludeMissing
+        munitionId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("munitionType")
+        @ExcludeMissing
+        munitionType: JsonField<String> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origNetwork") @ExcludeMissing origNetwork: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("probabilityOfKill") @ExcludeMissing probabilityOfKill: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("redTargetSrcId") @ExcludeMissing redTargetSrcId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("redTargetSrcType") @ExcludeMissing redTargetSrcType: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("redTimeToOverhead") @ExcludeMissing redTimeToOverhead: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("shotsRequired") @ExcludeMissing shotsRequired: JsonField<Int> = JsonMissing.of()
+        @JsonProperty("origNetwork")
+        @ExcludeMissing
+        origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("probabilityOfKill")
+        @ExcludeMissing
+        probabilityOfKill: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("redTargetSrcId")
+        @ExcludeMissing
+        redTargetSrcId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("redTargetSrcType")
+        @ExcludeMissing
+        redTargetSrcType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("redTimeToOverhead")
+        @ExcludeMissing
+        redTimeToOverhead: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("shotsRequired")
+        @ExcludeMissing
+        shotsRequired: JsonField<Int> = JsonMissing.of(),
     ) : this(
-      classificationMarking,
-      dataMode,
-      source,
-      type,
-      id,
-      actionsList,
-      actorSrcId,
-      actorSrcType,
-      coaMetrics,
-      collateralDamageEst,
-      createdAt,
-      createdBy,
-      decisionDeadline,
-      externalActions,
-      externalRequestId,
-      idEffectRequest,
-      munitionId,
-      munitionType,
-      origin,
-      origNetwork,
-      probabilityOfKill,
-      redTargetSrcId,
-      redTargetSrcType,
-      redTimeToOverhead,
-      shotsRequired,
-      mutableMapOf(),
+        classificationMarking,
+        dataMode,
+        source,
+        type,
+        id,
+        actionsList,
+        actorSrcId,
+        actorSrcType,
+        coaMetrics,
+        collateralDamageEst,
+        createdAt,
+        createdBy,
+        decisionDeadline,
+        externalActions,
+        externalRequestId,
+        idEffectRequest,
+        munitionId,
+        munitionType,
+        origin,
+        origNetwork,
+        probabilityOfKill,
+        redTargetSrcId,
+        redTargetSrcType,
+        redTimeToOverhead,
+        shotsRequired,
+        mutableMapOf(),
     )
 
     /**
      * Classification marking of the data in IC/CAPCO Portion-marked format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
     /**
      * Source of the data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun source(): String = source.getRequired("source")
 
     /**
      * The type of response in this record (e.g. COA, SCORECARD, etc.).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun type(): String = type.getRequired("type")
 
     /**
      * Unique identifier of the record, auto-generated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun id(): Optional<String> = id.getOptional("id")
 
     /**
      * List of actions associated with this effect response.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun actionsList(): Optional<List<ActionsList>> = actionsList.getOptional("actionsList")
 
     /**
      * The record ID, depending on the type identified in actorSrcType, of the requested asset.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun actorSrcId(): Optional<String> = actorSrcId.getOptional("actorSrcId")
 
     /**
      * The source type of the asset/actor identifier (AIRCRAFT, LANDCRAFT, SEACRAFT, TRACK).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun actorSrcType(): Optional<String> = actorSrcType.getOptional("actorSrcType")
 
     /**
      * List of COA metrics associated with this effect response.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun coaMetrics(): Optional<List<CoaMetric>> = coaMetrics.getOptional("coaMetrics")
 
     /**
      * The collateral damage estimate (CDE) of the munition being fired.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun collateralDamageEst(): Optional<Double> = collateralDamageEst.getOptional("collateralDamageEst")
+    fun collateralDamageEst(): Optional<Double> =
+        collateralDamageEst.getOptional("collateralDamageEst")
 
     /**
      * Time the row was created in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
     /**
      * Application user who created the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
      * The deadline time to accept this COA before it's no longer valid, in ISO8601 UTC format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun decisionDeadline(): Optional<OffsetDateTime> = decisionDeadline.getOptional("decisionDeadline")
+    fun decisionDeadline(): Optional<OffsetDateTime> =
+        decisionDeadline.getOptional("decisionDeadline")
 
     /**
      * List of external actions to be executed as part of this task.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun externalActions(): Optional<List<String>> = externalActions.getOptional("externalActions")
 
     /**
      * The external system identifier of the associated effect request. A human readable unique id.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun externalRequestId(): Optional<String> = externalRequestId.getOptional("externalRequestId")
 
     /**
      * Unique identifier of the EffectRequest associated with this response.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun idEffectRequest(): Optional<String> = idEffectRequest.getOptional("idEffectRequest")
 
     /**
      * Unique identifier of the munition.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun munitionId(): Optional<String> = munitionId.getOptional("munitionId")
 
     /**
      * The type of munition being fired.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun munitionType(): Optional<String> = munitionType.getOptional("munitionType")
 
     /**
-     * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     * Originating system or organization which produced the data, if different from the source. The
+     * origin may be different than the source if the source was a mediating system which forwarded
+     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origin(): Optional<String> = origin.getOptional("origin")
 
     /**
-     * The originating source network on which this record was created, auto-populated by the system.
+     * The originating source network on which this record was created, auto-populated by the
+     * system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
     /**
      * The probability of kill (0-1) of the target being destroyed.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun probabilityOfKill(): Optional<Double> = probabilityOfKill.getOptional("probabilityOfKill")
 
     /**
-     * The record ID, depending on the type identified in redTargetSrcType, of the red force target. If the redTargetSrcType is POI or TRACK, then this identifier corresponds to either poi.poiid or track.trkId from their respective schemas.
+     * The record ID, depending on the type identified in redTargetSrcType, of the red force target.
+     * If the redTargetSrcType is POI or TRACK, then this identifier corresponds to either poi.poiid
+     * or track.trkId from their respective schemas.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun redTargetSrcId(): Optional<String> = redTargetSrcId.getOptional("redTargetSrcId")
 
     /**
      * The source type of the targetId identifier (POI, SITE, TRACK).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun redTargetSrcType(): Optional<String> = redTargetSrcType.getOptional("redTargetSrcType")
 
     /**
      * The time to overhead for the red force to be over their target, in ISO8601 UTC format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun redTimeToOverhead(): Optional<OffsetDateTime> = redTimeToOverhead.getOptional("redTimeToOverhead")
+    fun redTimeToOverhead(): Optional<OffsetDateTime> =
+        redTimeToOverhead.getOptional("redTimeToOverhead")
 
     /**
      * The number of shots required to destroy target.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun shotsRequired(): Optional<Int> = shotsRequired.getOptional("shotsRequired")
 
     /**
      * Returns the raw JSON value of [classificationMarking].
      *
-     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("classificationMarking")
     @ExcludeMissing
@@ -306,36 +380,28 @@ class EffectResponseListResponse private constructor(
      *
      * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("dataMode")
-    @ExcludeMissing
-    fun _dataMode(): JsonField<DataMode> = dataMode
+    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
 
     /**
      * Returns the raw JSON value of [source].
      *
      * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("source")
-    @ExcludeMissing
-    fun _source(): JsonField<String> = source
+    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
 
     /**
      * Returns the raw JSON value of [type].
      *
      * Unlike [type], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("type")
-    @ExcludeMissing
-    fun _type(): JsonField<String> = type
+    @JsonProperty("type") @ExcludeMissing fun _type(): JsonField<String> = type
 
     /**
      * Returns the raw JSON value of [id].
      *
      * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("id")
-    @ExcludeMissing
-    fun _id(): JsonField<String> = id
+    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
 
     /**
      * Returns the raw JSON value of [actionsList].
@@ -351,9 +417,7 @@ class EffectResponseListResponse private constructor(
      *
      * Unlike [actorSrcId], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("actorSrcId")
-    @ExcludeMissing
-    fun _actorSrcId(): JsonField<String> = actorSrcId
+    @JsonProperty("actorSrcId") @ExcludeMissing fun _actorSrcId(): JsonField<String> = actorSrcId
 
     /**
      * Returns the raw JSON value of [actorSrcType].
@@ -376,7 +440,8 @@ class EffectResponseListResponse private constructor(
     /**
      * Returns the raw JSON value of [collateralDamageEst].
      *
-     * Unlike [collateralDamageEst], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [collateralDamageEst], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("collateralDamageEst")
     @ExcludeMissing
@@ -396,14 +461,13 @@ class EffectResponseListResponse private constructor(
      *
      * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("createdBy")
-    @ExcludeMissing
-    fun _createdBy(): JsonField<String> = createdBy
+    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
     /**
      * Returns the raw JSON value of [decisionDeadline].
      *
-     * Unlike [decisionDeadline], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [decisionDeadline], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("decisionDeadline")
     @ExcludeMissing
@@ -421,7 +485,8 @@ class EffectResponseListResponse private constructor(
     /**
      * Returns the raw JSON value of [externalRequestId].
      *
-     * Unlike [externalRequestId], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [externalRequestId], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("externalRequestId")
     @ExcludeMissing
@@ -441,9 +506,7 @@ class EffectResponseListResponse private constructor(
      *
      * Unlike [munitionId], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("munitionId")
-    @ExcludeMissing
-    fun _munitionId(): JsonField<String> = munitionId
+    @JsonProperty("munitionId") @ExcludeMissing fun _munitionId(): JsonField<String> = munitionId
 
     /**
      * Returns the raw JSON value of [munitionType].
@@ -459,23 +522,20 @@ class EffectResponseListResponse private constructor(
      *
      * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origin")
-    @ExcludeMissing
-    fun _origin(): JsonField<String> = origin
+    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
 
     /**
      * Returns the raw JSON value of [origNetwork].
      *
      * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origNetwork")
-    @ExcludeMissing
-    fun _origNetwork(): JsonField<String> = origNetwork
+    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
 
     /**
      * Returns the raw JSON value of [probabilityOfKill].
      *
-     * Unlike [probabilityOfKill], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [probabilityOfKill], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("probabilityOfKill")
     @ExcludeMissing
@@ -493,7 +553,8 @@ class EffectResponseListResponse private constructor(
     /**
      * Returns the raw JSON value of [redTargetSrcType].
      *
-     * Unlike [redTargetSrcType], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [redTargetSrcType], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("redTargetSrcType")
     @ExcludeMissing
@@ -502,7 +563,8 @@ class EffectResponseListResponse private constructor(
     /**
      * Returns the raw JSON value of [redTimeToOverhead].
      *
-     * Unlike [redTimeToOverhead], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [redTimeToOverhead], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("redTimeToOverhead")
     @ExcludeMissing
@@ -519,12 +581,13 @@ class EffectResponseListResponse private constructor(
 
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
-      additionalProperties.put(key, value)
+        additionalProperties.put(key, value)
     }
 
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -534,7 +597,6 @@ class EffectResponseListResponse private constructor(
          * Returns a mutable builder for constructing an instance of [EffectResponseListResponse].
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -542,8 +604,7 @@ class EffectResponseListResponse private constructor(
          * .type()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [EffectResponseListResponse]. */
@@ -577,73 +638,74 @@ class EffectResponseListResponse private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(effectResponseListResponse: EffectResponseListResponse) =
-            apply {
-                classificationMarking = effectResponseListResponse.classificationMarking
-                dataMode = effectResponseListResponse.dataMode
-                source = effectResponseListResponse.source
-                type = effectResponseListResponse.type
-                id = effectResponseListResponse.id
-                actionsList = effectResponseListResponse.actionsList.map { it.toMutableList() }
-                actorSrcId = effectResponseListResponse.actorSrcId
-                actorSrcType = effectResponseListResponse.actorSrcType
-                coaMetrics = effectResponseListResponse.coaMetrics.map { it.toMutableList() }
-                collateralDamageEst = effectResponseListResponse.collateralDamageEst
-                createdAt = effectResponseListResponse.createdAt
-                createdBy = effectResponseListResponse.createdBy
-                decisionDeadline = effectResponseListResponse.decisionDeadline
-                externalActions = effectResponseListResponse.externalActions.map { it.toMutableList() }
-                externalRequestId = effectResponseListResponse.externalRequestId
-                idEffectRequest = effectResponseListResponse.idEffectRequest
-                munitionId = effectResponseListResponse.munitionId
-                munitionType = effectResponseListResponse.munitionType
-                origin = effectResponseListResponse.origin
-                origNetwork = effectResponseListResponse.origNetwork
-                probabilityOfKill = effectResponseListResponse.probabilityOfKill
-                redTargetSrcId = effectResponseListResponse.redTargetSrcId
-                redTargetSrcType = effectResponseListResponse.redTargetSrcType
-                redTimeToOverhead = effectResponseListResponse.redTimeToOverhead
-                shotsRequired = effectResponseListResponse.shotsRequired
-                additionalProperties = effectResponseListResponse.additionalProperties.toMutableMap()
-            }
+        internal fun from(effectResponseListResponse: EffectResponseListResponse) = apply {
+            classificationMarking = effectResponseListResponse.classificationMarking
+            dataMode = effectResponseListResponse.dataMode
+            source = effectResponseListResponse.source
+            type = effectResponseListResponse.type
+            id = effectResponseListResponse.id
+            actionsList = effectResponseListResponse.actionsList.map { it.toMutableList() }
+            actorSrcId = effectResponseListResponse.actorSrcId
+            actorSrcType = effectResponseListResponse.actorSrcType
+            coaMetrics = effectResponseListResponse.coaMetrics.map { it.toMutableList() }
+            collateralDamageEst = effectResponseListResponse.collateralDamageEst
+            createdAt = effectResponseListResponse.createdAt
+            createdBy = effectResponseListResponse.createdBy
+            decisionDeadline = effectResponseListResponse.decisionDeadline
+            externalActions = effectResponseListResponse.externalActions.map { it.toMutableList() }
+            externalRequestId = effectResponseListResponse.externalRequestId
+            idEffectRequest = effectResponseListResponse.idEffectRequest
+            munitionId = effectResponseListResponse.munitionId
+            munitionType = effectResponseListResponse.munitionType
+            origin = effectResponseListResponse.origin
+            origNetwork = effectResponseListResponse.origNetwork
+            probabilityOfKill = effectResponseListResponse.probabilityOfKill
+            redTargetSrcId = effectResponseListResponse.redTargetSrcId
+            redTargetSrcType = effectResponseListResponse.redTargetSrcType
+            redTimeToOverhead = effectResponseListResponse.redTimeToOverhead
+            shotsRequired = effectResponseListResponse.shotsRequired
+            additionalProperties = effectResponseListResponse.additionalProperties.toMutableMap()
+        }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-        fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
+        fun classificationMarking(classificationMarking: String) =
+            classificationMarking(JsonField.of(classificationMarking))
 
         /**
          * Sets [Builder.classificationMarking] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun classificationMarking(classificationMarking: JsonField<String>) =
-            apply {
-                this.classificationMarking = classificationMarking
-            }
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            this.classificationMarking = classificationMarking
+        }
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          */
         fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
         /**
          * Sets [Builder.dataMode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun dataMode(dataMode: JsonField<DataMode>) =
-            apply {
-                this.dataMode = dataMode
-            }
+        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
 
         /** Source of the data. */
         fun source(source: String) = source(JsonField.of(source))
@@ -651,13 +713,10 @@ class EffectResponseListResponse private constructor(
         /**
          * Sets [Builder.source] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun source(source: JsonField<String>) =
-            apply {
-                this.source = source
-            }
+        fun source(source: JsonField<String>) = apply { this.source = source }
 
         /** The type of response in this record (e.g. COA, SCORECARD, etc.). */
         fun type(type: String) = type(JsonField.of(type))
@@ -665,13 +724,10 @@ class EffectResponseListResponse private constructor(
         /**
          * Sets [Builder.type] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.type] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.type] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun type(type: JsonField<String>) =
-            apply {
-                this.type = type
-            }
+        fun type(type: JsonField<String>) = apply { this.type = type }
 
         /** Unique identifier of the record, auto-generated by the system. */
         fun id(id: String) = id(JsonField.of(id))
@@ -679,13 +735,10 @@ class EffectResponseListResponse private constructor(
         /**
          * Sets [Builder.id] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun id(id: JsonField<String>) =
-            apply {
-                this.id = id
-            }
+        fun id(id: JsonField<String>) = apply { this.id = id }
 
         /** List of actions associated with this effect response. */
         fun actionsList(actionsList: List<ActionsList>) = actionsList(JsonField.of(actionsList))
@@ -693,39 +746,39 @@ class EffectResponseListResponse private constructor(
         /**
          * Sets [Builder.actionsList] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.actionsList] with a well-typed `List<ActionsList>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.actionsList] with a well-typed `List<ActionsList>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun actionsList(actionsList: JsonField<List<ActionsList>>) =
-            apply {
-                this.actionsList = actionsList.map { it.toMutableList() }
-            }
+        fun actionsList(actionsList: JsonField<List<ActionsList>>) = apply {
+            this.actionsList = actionsList.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [ActionsList] to [Builder.actionsList].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addActionsList(actionsList: ActionsList) =
-            apply {
-                this.actionsList = (this.actionsList ?: JsonField.of(mutableListOf())).also {
+        fun addActionsList(actionsList: ActionsList) = apply {
+            this.actionsList =
+                (this.actionsList ?: JsonField.of(mutableListOf())).also {
                     checkKnown("actionsList", it).add(actionsList)
                 }
-            }
+        }
 
-        /** The record ID, depending on the type identified in actorSrcType, of the requested asset. */
+        /**
+         * The record ID, depending on the type identified in actorSrcType, of the requested asset.
+         */
         fun actorSrcId(actorSrcId: String) = actorSrcId(JsonField.of(actorSrcId))
 
         /**
          * Sets [Builder.actorSrcId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.actorSrcId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.actorSrcId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun actorSrcId(actorSrcId: JsonField<String>) =
-            apply {
-                this.actorSrcId = actorSrcId
-            }
+        fun actorSrcId(actorSrcId: JsonField<String>) = apply { this.actorSrcId = actorSrcId }
 
         /** The source type of the asset/actor identifier (AIRCRAFT, LANDCRAFT, SEACRAFT, TRACK). */
         fun actorSrcType(actorSrcType: String) = actorSrcType(JsonField.of(actorSrcType))
@@ -733,13 +786,13 @@ class EffectResponseListResponse private constructor(
         /**
          * Sets [Builder.actorSrcType] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.actorSrcType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.actorSrcType] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun actorSrcType(actorSrcType: JsonField<String>) =
-            apply {
-                this.actorSrcType = actorSrcType
-            }
+        fun actorSrcType(actorSrcType: JsonField<String>) = apply {
+            this.actorSrcType = actorSrcType
+        }
 
         /** List of COA metrics associated with this effect response. */
         fun coaMetrics(coaMetrics: List<CoaMetric>) = coaMetrics(JsonField.of(coaMetrics))
@@ -747,39 +800,40 @@ class EffectResponseListResponse private constructor(
         /**
          * Sets [Builder.coaMetrics] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.coaMetrics] with a well-typed `List<CoaMetric>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.coaMetrics] with a well-typed `List<CoaMetric>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun coaMetrics(coaMetrics: JsonField<List<CoaMetric>>) =
-            apply {
-                this.coaMetrics = coaMetrics.map { it.toMutableList() }
-            }
+        fun coaMetrics(coaMetrics: JsonField<List<CoaMetric>>) = apply {
+            this.coaMetrics = coaMetrics.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [CoaMetric] to [coaMetrics].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addCoaMetric(coaMetric: CoaMetric) =
-            apply {
-                coaMetrics = (coaMetrics ?: JsonField.of(mutableListOf())).also {
+        fun addCoaMetric(coaMetric: CoaMetric) = apply {
+            coaMetrics =
+                (coaMetrics ?: JsonField.of(mutableListOf())).also {
                     checkKnown("coaMetrics", it).add(coaMetric)
                 }
-            }
+        }
 
         /** The collateral damage estimate (CDE) of the munition being fired. */
-        fun collateralDamageEst(collateralDamageEst: Double) = collateralDamageEst(JsonField.of(collateralDamageEst))
+        fun collateralDamageEst(collateralDamageEst: Double) =
+            collateralDamageEst(JsonField.of(collateralDamageEst))
 
         /**
          * Sets [Builder.collateralDamageEst] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.collateralDamageEst] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.collateralDamageEst] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun collateralDamageEst(collateralDamageEst: JsonField<Double>) =
-            apply {
-                this.collateralDamageEst = collateralDamageEst
-            }
+        fun collateralDamageEst(collateralDamageEst: JsonField<Double>) = apply {
+            this.collateralDamageEst = collateralDamageEst
+        }
 
         /** Time the row was created in the database, auto-populated by the system. */
         fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -787,13 +841,11 @@ class EffectResponseListResponse private constructor(
         /**
          * Sets [Builder.createdAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun createdAt(createdAt: JsonField<OffsetDateTime>) =
-            apply {
-                this.createdAt = createdAt
-            }
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
 
         /** Application user who created the row in the database, auto-populated by the system. */
         fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
@@ -801,81 +853,88 @@ class EffectResponseListResponse private constructor(
         /**
          * Sets [Builder.createdBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun createdBy(createdBy: JsonField<String>) =
-            apply {
-                this.createdBy = createdBy
-            }
+        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
-        /** The deadline time to accept this COA before it's no longer valid, in ISO8601 UTC format. */
-        fun decisionDeadline(decisionDeadline: OffsetDateTime) = decisionDeadline(JsonField.of(decisionDeadline))
+        /**
+         * The deadline time to accept this COA before it's no longer valid, in ISO8601 UTC format.
+         */
+        fun decisionDeadline(decisionDeadline: OffsetDateTime) =
+            decisionDeadline(JsonField.of(decisionDeadline))
 
         /**
          * Sets [Builder.decisionDeadline] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.decisionDeadline] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.decisionDeadline] with a well-typed [OffsetDateTime]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun decisionDeadline(decisionDeadline: JsonField<OffsetDateTime>) =
-            apply {
-                this.decisionDeadline = decisionDeadline
-            }
+        fun decisionDeadline(decisionDeadline: JsonField<OffsetDateTime>) = apply {
+            this.decisionDeadline = decisionDeadline
+        }
 
         /** List of external actions to be executed as part of this task. */
-        fun externalActions(externalActions: List<String>) = externalActions(JsonField.of(externalActions))
+        fun externalActions(externalActions: List<String>) =
+            externalActions(JsonField.of(externalActions))
 
         /**
          * Sets [Builder.externalActions] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.externalActions] with a well-typed `List<String>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.externalActions] with a well-typed `List<String>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun externalActions(externalActions: JsonField<List<String>>) =
-            apply {
-                this.externalActions = externalActions.map { it.toMutableList() }
-            }
+        fun externalActions(externalActions: JsonField<List<String>>) = apply {
+            this.externalActions = externalActions.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [String] to [externalActions].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addExternalAction(externalAction: String) =
-            apply {
-                externalActions = (externalActions ?: JsonField.of(mutableListOf())).also {
+        fun addExternalAction(externalAction: String) = apply {
+            externalActions =
+                (externalActions ?: JsonField.of(mutableListOf())).also {
                     checkKnown("externalActions", it).add(externalAction)
                 }
-            }
+        }
 
-        /** The external system identifier of the associated effect request. A human readable unique id. */
-        fun externalRequestId(externalRequestId: String) = externalRequestId(JsonField.of(externalRequestId))
+        /**
+         * The external system identifier of the associated effect request. A human readable unique
+         * id.
+         */
+        fun externalRequestId(externalRequestId: String) =
+            externalRequestId(JsonField.of(externalRequestId))
 
         /**
          * Sets [Builder.externalRequestId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.externalRequestId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.externalRequestId] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun externalRequestId(externalRequestId: JsonField<String>) =
-            apply {
-                this.externalRequestId = externalRequestId
-            }
+        fun externalRequestId(externalRequestId: JsonField<String>) = apply {
+            this.externalRequestId = externalRequestId
+        }
 
         /** Unique identifier of the EffectRequest associated with this response. */
-        fun idEffectRequest(idEffectRequest: String) = idEffectRequest(JsonField.of(idEffectRequest))
+        fun idEffectRequest(idEffectRequest: String) =
+            idEffectRequest(JsonField.of(idEffectRequest))
 
         /**
          * Sets [Builder.idEffectRequest] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idEffectRequest] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.idEffectRequest] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun idEffectRequest(idEffectRequest: JsonField<String>) =
-            apply {
-                this.idEffectRequest = idEffectRequest
-            }
+        fun idEffectRequest(idEffectRequest: JsonField<String>) = apply {
+            this.idEffectRequest = idEffectRequest
+        }
 
         /** Unique identifier of the munition. */
         fun munitionId(munitionId: String) = munitionId(JsonField.of(munitionId))
@@ -883,13 +942,11 @@ class EffectResponseListResponse private constructor(
         /**
          * Sets [Builder.munitionId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.munitionId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.munitionId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun munitionId(munitionId: JsonField<String>) =
-            apply {
-                this.munitionId = munitionId
-            }
+        fun munitionId(munitionId: JsonField<String>) = apply { this.munitionId = munitionId }
 
         /** The type of munition being fired. */
         fun munitionType(munitionType: String) = munitionType(JsonField.of(munitionType))
@@ -897,97 +954,109 @@ class EffectResponseListResponse private constructor(
         /**
          * Sets [Builder.munitionType] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.munitionType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.munitionType] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun munitionType(munitionType: JsonField<String>) =
-            apply {
-                this.munitionType = munitionType
-            }
+        fun munitionType(munitionType: JsonField<String>) = apply {
+            this.munitionType = munitionType
+        }
 
-        /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         */
         fun origin(origin: String) = origin(JsonField.of(origin))
 
         /**
          * Sets [Builder.origin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun origin(origin: JsonField<String>) =
-            apply {
-                this.origin = origin
-            }
+        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
 
-        /** The originating source network on which this record was created, auto-populated by the system. */
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         */
         fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
         /**
          * Sets [Builder.origNetwork] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun origNetwork(origNetwork: JsonField<String>) =
-            apply {
-                this.origNetwork = origNetwork
-            }
+        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
 
         /** The probability of kill (0-1) of the target being destroyed. */
-        fun probabilityOfKill(probabilityOfKill: Double) = probabilityOfKill(JsonField.of(probabilityOfKill))
+        fun probabilityOfKill(probabilityOfKill: Double) =
+            probabilityOfKill(JsonField.of(probabilityOfKill))
 
         /**
          * Sets [Builder.probabilityOfKill] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.probabilityOfKill] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.probabilityOfKill] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun probabilityOfKill(probabilityOfKill: JsonField<Double>) =
-            apply {
-                this.probabilityOfKill = probabilityOfKill
-            }
+        fun probabilityOfKill(probabilityOfKill: JsonField<Double>) = apply {
+            this.probabilityOfKill = probabilityOfKill
+        }
 
-        /** The record ID, depending on the type identified in redTargetSrcType, of the red force target. If the redTargetSrcType is POI or TRACK, then this identifier corresponds to either poi.poiid or track.trkId from their respective schemas. */
+        /**
+         * The record ID, depending on the type identified in redTargetSrcType, of the red force
+         * target. If the redTargetSrcType is POI or TRACK, then this identifier corresponds to
+         * either poi.poiid or track.trkId from their respective schemas.
+         */
         fun redTargetSrcId(redTargetSrcId: String) = redTargetSrcId(JsonField.of(redTargetSrcId))
 
         /**
          * Sets [Builder.redTargetSrcId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.redTargetSrcId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.redTargetSrcId] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun redTargetSrcId(redTargetSrcId: JsonField<String>) =
-            apply {
-                this.redTargetSrcId = redTargetSrcId
-            }
+        fun redTargetSrcId(redTargetSrcId: JsonField<String>) = apply {
+            this.redTargetSrcId = redTargetSrcId
+        }
 
         /** The source type of the targetId identifier (POI, SITE, TRACK). */
-        fun redTargetSrcType(redTargetSrcType: String) = redTargetSrcType(JsonField.of(redTargetSrcType))
+        fun redTargetSrcType(redTargetSrcType: String) =
+            redTargetSrcType(JsonField.of(redTargetSrcType))
 
         /**
          * Sets [Builder.redTargetSrcType] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.redTargetSrcType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.redTargetSrcType] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun redTargetSrcType(redTargetSrcType: JsonField<String>) =
-            apply {
-                this.redTargetSrcType = redTargetSrcType
-            }
+        fun redTargetSrcType(redTargetSrcType: JsonField<String>) = apply {
+            this.redTargetSrcType = redTargetSrcType
+        }
 
-        /** The time to overhead for the red force to be over their target, in ISO8601 UTC format. */
-        fun redTimeToOverhead(redTimeToOverhead: OffsetDateTime) = redTimeToOverhead(JsonField.of(redTimeToOverhead))
+        /**
+         * The time to overhead for the red force to be over their target, in ISO8601 UTC format.
+         */
+        fun redTimeToOverhead(redTimeToOverhead: OffsetDateTime) =
+            redTimeToOverhead(JsonField.of(redTimeToOverhead))
 
         /**
          * Sets [Builder.redTimeToOverhead] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.redTimeToOverhead] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.redTimeToOverhead] with a well-typed [OffsetDateTime]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun redTimeToOverhead(redTimeToOverhead: JsonField<OffsetDateTime>) =
-            apply {
-                this.redTimeToOverhead = redTimeToOverhead
-            }
+        fun redTimeToOverhead(redTimeToOverhead: JsonField<OffsetDateTime>) = apply {
+            this.redTimeToOverhead = redTimeToOverhead
+        }
 
         /** The number of shots required to destroy target. */
         fun shotsRequired(shotsRequired: Int) = shotsRequired(JsonField.of(shotsRequired))
@@ -995,39 +1064,32 @@ class EffectResponseListResponse private constructor(
         /**
          * Sets [Builder.shotsRequired] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.shotsRequired] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.shotsRequired] with a well-typed [Int] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun shotsRequired(shotsRequired: JsonField<Int>) =
-            apply {
-                this.shotsRequired = shotsRequired
-            }
+        fun shotsRequired(shotsRequired: JsonField<Int>) = apply {
+            this.shotsRequired = shotsRequired
+        }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) =
-            apply {
-                additionalProperties.put(key, value)
-            }
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
 
-        fun removeAdditionalProperty(key: String) =
-            apply {
-                additionalProperties.remove(key)
-            }
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) =
-            apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
 
         /**
          * Returns an immutable instance of [EffectResponseListResponse].
@@ -1035,7 +1097,6 @@ class EffectResponseListResponse private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -1047,78 +1108,69 @@ class EffectResponseListResponse private constructor(
          */
         fun build(): EffectResponseListResponse =
             EffectResponseListResponse(
-              checkRequired(
-                "classificationMarking", classificationMarking
-              ),
-              checkRequired(
-                "dataMode", dataMode
-              ),
-              checkRequired(
-                "source", source
-              ),
-              checkRequired(
-                "type", type
-              ),
-              id,
-              (actionsList ?: JsonMissing.of()).map { it.toImmutable() },
-              actorSrcId,
-              actorSrcType,
-              (coaMetrics ?: JsonMissing.of()).map { it.toImmutable() },
-              collateralDamageEst,
-              createdAt,
-              createdBy,
-              decisionDeadline,
-              (externalActions ?: JsonMissing.of()).map { it.toImmutable() },
-              externalRequestId,
-              idEffectRequest,
-              munitionId,
-              munitionType,
-              origin,
-              origNetwork,
-              probabilityOfKill,
-              redTargetSrcId,
-              redTargetSrcType,
-              redTimeToOverhead,
-              shotsRequired,
-              additionalProperties.toMutableMap(),
+                checkRequired("classificationMarking", classificationMarking),
+                checkRequired("dataMode", dataMode),
+                checkRequired("source", source),
+                checkRequired("type", type),
+                id,
+                (actionsList ?: JsonMissing.of()).map { it.toImmutable() },
+                actorSrcId,
+                actorSrcType,
+                (coaMetrics ?: JsonMissing.of()).map { it.toImmutable() },
+                collateralDamageEst,
+                createdAt,
+                createdBy,
+                decisionDeadline,
+                (externalActions ?: JsonMissing.of()).map { it.toImmutable() },
+                externalRequestId,
+                idEffectRequest,
+                munitionId,
+                munitionType,
+                origin,
+                origNetwork,
+                probabilityOfKill,
+                redTargetSrcId,
+                redTargetSrcType,
+                redTimeToOverhead,
+                shotsRequired,
+                additionalProperties.toMutableMap(),
             )
     }
 
     private var validated: Boolean = false
 
-    fun validate(): EffectResponseListResponse =
-        apply {
-            if (validated) {
-              return@apply
-            }
-
-            classificationMarking()
-            dataMode().validate()
-            source()
-            type()
-            id()
-            actionsList().ifPresent { it.forEach { it.validate() } }
-            actorSrcId()
-            actorSrcType()
-            coaMetrics().ifPresent { it.forEach { it.validate() } }
-            collateralDamageEst()
-            createdAt()
-            createdBy()
-            decisionDeadline()
-            externalActions()
-            externalRequestId()
-            idEffectRequest()
-            munitionId()
-            munitionType()
-            origin()
-            origNetwork()
-            probabilityOfKill()
-            redTargetSrcId()
-            redTargetSrcType()
-            redTimeToOverhead()
-            shotsRequired()
-            validated = true
+    fun validate(): EffectResponseListResponse = apply {
+        if (validated) {
+            return@apply
         }
+
+        classificationMarking()
+        dataMode().validate()
+        source()
+        type()
+        id()
+        actionsList().ifPresent { it.forEach { it.validate() } }
+        actorSrcId()
+        actorSrcType()
+        coaMetrics().ifPresent { it.forEach { it.validate() } }
+        collateralDamageEst()
+        createdAt()
+        createdBy()
+        decisionDeadline()
+        externalActions()
+        externalRequestId()
+        idEffectRequest()
+        munitionId()
+        munitionType()
+        origin()
+        origNetwork()
+        probabilityOfKill()
+        redTargetSrcId()
+        redTargetSrcType()
+        redTimeToOverhead()
+        shotsRequired()
+        validated = true
+    }
 
     fun isValid(): Boolean =
         try {
@@ -1134,33 +1186,58 @@ class EffectResponseListResponse private constructor(
      * Used for best match union deserialization.
      */
     @JvmSynthetic
-    internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (type.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (actionsList.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) + (if (actorSrcId.asKnown().isPresent) 1 else 0) + (if (actorSrcType.asKnown().isPresent) 1 else 0) + (coaMetrics.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) + (if (collateralDamageEst.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (decisionDeadline.asKnown().isPresent) 1 else 0) + (externalActions.asKnown().getOrNull()?.size ?: 0) + (if (externalRequestId.asKnown().isPresent) 1 else 0) + (if (idEffectRequest.asKnown().isPresent) 1 else 0) + (if (munitionId.asKnown().isPresent) 1 else 0) + (if (munitionType.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (probabilityOfKill.asKnown().isPresent) 1 else 0) + (if (redTargetSrcId.asKnown().isPresent) 1 else 0) + (if (redTargetSrcType.asKnown().isPresent) 1 else 0) + (if (redTimeToOverhead.asKnown().isPresent) 1 else 0) + (if (shotsRequired.asKnown().isPresent) 1 else 0)
+    internal fun validity(): Int =
+        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (source.asKnown().isPresent) 1 else 0) +
+            (if (type.asKnown().isPresent) 1 else 0) +
+            (if (id.asKnown().isPresent) 1 else 0) +
+            (actionsList.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
+            (if (actorSrcId.asKnown().isPresent) 1 else 0) +
+            (if (actorSrcType.asKnown().isPresent) 1 else 0) +
+            (coaMetrics.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
+            (if (collateralDamageEst.asKnown().isPresent) 1 else 0) +
+            (if (createdAt.asKnown().isPresent) 1 else 0) +
+            (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (decisionDeadline.asKnown().isPresent) 1 else 0) +
+            (externalActions.asKnown().getOrNull()?.size ?: 0) +
+            (if (externalRequestId.asKnown().isPresent) 1 else 0) +
+            (if (idEffectRequest.asKnown().isPresent) 1 else 0) +
+            (if (munitionId.asKnown().isPresent) 1 else 0) +
+            (if (munitionType.asKnown().isPresent) 1 else 0) +
+            (if (origin.asKnown().isPresent) 1 else 0) +
+            (if (origNetwork.asKnown().isPresent) 1 else 0) +
+            (if (probabilityOfKill.asKnown().isPresent) 1 else 0) +
+            (if (redTargetSrcId.asKnown().isPresent) 1 else 0) +
+            (if (redTargetSrcType.asKnown().isPresent) 1 else 0) +
+            (if (redTimeToOverhead.asKnown().isPresent) 1 else 0) +
+            (if (shotsRequired.asKnown().isPresent) 1 else 0)
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      */
-    class DataMode @JsonCreator private constructor(
-        private val value: JsonField<String>,
-
-    ) : Enum {
+    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't match any known
-         * member, and you want to know that value. For example, if the SDK is on an older version than the
-         * API, then the API may respond with new members that the SDK is unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue
-        fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -1187,11 +1264,9 @@ class EffectResponseListResponse private constructor(
          * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [DataMode] can contain an unknown value in a couple of cases:
-         *
-         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-         *   an older version than the API, then the API may respond with new members that the SDK is unaware
-         *   of.
-         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -1204,11 +1279,11 @@ class EffectResponseListResponse private constructor(
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-         * class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want to throw
-         * for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -1222,10 +1297,11 @@ class EffectResponseListResponse private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-         * for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
          */
         fun known(): Known =
             when (this) {
@@ -1239,25 +1315,27 @@ class EffectResponseListResponse private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging and generally
-         * doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-         * primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
          */
-        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
 
         private var validated: Boolean = false
 
-        fun validate(): DataMode =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                known()
-                validated = true
+        fun validate(): DataMode = apply {
+            if (validated) {
+                return@apply
             }
+
+            known()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -1268,19 +1346,19 @@ class EffectResponseListResponse private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic
-        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1288,7 +1366,8 @@ class EffectResponseListResponse private constructor(
         override fun toString() = value.toString()
     }
 
-    class ActionsList private constructor(
+    class ActionsList
+    private constructor(
         private val actionActorSrcId: JsonField<String>,
         private val actionActorSrcType: JsonField<String>,
         private val actionEndTime: JsonField<OffsetDateTime>,
@@ -1308,181 +1387,249 @@ class EffectResponseListResponse private constructor(
         private val weaponInterceptLat: JsonField<Double>,
         private val weaponInterceptLon: JsonField<Double>,
         private val additionalProperties: MutableMap<String, JsonValue>,
-
     ) {
 
         @JsonCreator
         private constructor(
-            @JsonProperty("actionActorSrcId") @ExcludeMissing actionActorSrcId: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("actionActorSrcType") @ExcludeMissing actionActorSrcType: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("actionEndTime") @ExcludeMissing actionEndTime: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("actionId") @ExcludeMissing actionId: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("actionMetrics") @ExcludeMissing actionMetrics: JsonField<List<ActionMetric>> = JsonMissing.of(),
-            @JsonProperty("actionStartTime") @ExcludeMissing actionStartTime: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("actorInterceptAlt") @ExcludeMissing actorInterceptAlt: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("actorInterceptLat") @ExcludeMissing actorInterceptLat: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("actorInterceptLon") @ExcludeMissing actorInterceptLon: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("effector") @ExcludeMissing effector: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("actionActorSrcId")
+            @ExcludeMissing
+            actionActorSrcId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("actionActorSrcType")
+            @ExcludeMissing
+            actionActorSrcType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("actionEndTime")
+            @ExcludeMissing
+            actionEndTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("actionId")
+            @ExcludeMissing
+            actionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("actionMetrics")
+            @ExcludeMissing
+            actionMetrics: JsonField<List<ActionMetric>> = JsonMissing.of(),
+            @JsonProperty("actionStartTime")
+            @ExcludeMissing
+            actionStartTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("actorInterceptAlt")
+            @ExcludeMissing
+            actorInterceptAlt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("actorInterceptLat")
+            @ExcludeMissing
+            actorInterceptLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("actorInterceptLon")
+            @ExcludeMissing
+            actorInterceptLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("effector")
+            @ExcludeMissing
+            effector: JsonField<String> = JsonMissing.of(),
             @JsonProperty("summary") @ExcludeMissing summary: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("targetSrcId") @ExcludeMissing targetSrcId: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("targetSrcType") @ExcludeMissing targetSrcType: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("totEndTime") @ExcludeMissing totEndTime: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("totStartTime") @ExcludeMissing totStartTime: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("weaponInterceptAlt") @ExcludeMissing weaponInterceptAlt: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("weaponInterceptLat") @ExcludeMissing weaponInterceptLat: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("weaponInterceptLon") @ExcludeMissing weaponInterceptLon: JsonField<Double> = JsonMissing.of()
+            @JsonProperty("targetSrcId")
+            @ExcludeMissing
+            targetSrcId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("targetSrcType")
+            @ExcludeMissing
+            targetSrcType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("totEndTime")
+            @ExcludeMissing
+            totEndTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("totStartTime")
+            @ExcludeMissing
+            totStartTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("weaponInterceptAlt")
+            @ExcludeMissing
+            weaponInterceptAlt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("weaponInterceptLat")
+            @ExcludeMissing
+            weaponInterceptLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("weaponInterceptLon")
+            @ExcludeMissing
+            weaponInterceptLon: JsonField<Double> = JsonMissing.of(),
         ) : this(
-          actionActorSrcId,
-          actionActorSrcType,
-          actionEndTime,
-          actionId,
-          actionMetrics,
-          actionStartTime,
-          actorInterceptAlt,
-          actorInterceptLat,
-          actorInterceptLon,
-          effector,
-          summary,
-          targetSrcId,
-          targetSrcType,
-          totEndTime,
-          totStartTime,
-          weaponInterceptAlt,
-          weaponInterceptLat,
-          weaponInterceptLon,
-          mutableMapOf(),
+            actionActorSrcId,
+            actionActorSrcType,
+            actionEndTime,
+            actionId,
+            actionMetrics,
+            actionStartTime,
+            actorInterceptAlt,
+            actorInterceptLat,
+            actorInterceptLon,
+            effector,
+            summary,
+            targetSrcId,
+            targetSrcType,
+            totEndTime,
+            totStartTime,
+            weaponInterceptAlt,
+            weaponInterceptLat,
+            weaponInterceptLon,
+            mutableMapOf(),
         )
 
         /**
-         * The record ID, depending on the type identified in actorSrcType, of the requested asset/actor.
+         * The record ID, depending on the type identified in actorSrcType, of the requested
+         * asset/actor.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun actionActorSrcId(): Optional<String> = actionActorSrcId.getOptional("actionActorSrcId")
 
         /**
          * The source type of the asset/actor identifier (AIRCRAFT, LANDCRAFT, SEACRAFT, TRACK).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun actionActorSrcType(): Optional<String> = actionActorSrcType.getOptional("actionActorSrcType")
+        fun actionActorSrcType(): Optional<String> =
+            actionActorSrcType.getOptional("actionActorSrcType")
 
         /**
          * The desired end time of this task, in ISO8601 UTC format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun actionEndTime(): Optional<OffsetDateTime> = actionEndTime.getOptional("actionEndTime")
 
         /**
          * Identifier of this action.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun actionId(): Optional<String> = actionId.getOptional("actionId")
 
         /**
          * List of metrics associated with this action.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun actionMetrics(): Optional<List<ActionMetric>> = actionMetrics.getOptional("actionMetrics")
+        fun actionMetrics(): Optional<List<ActionMetric>> =
+            actionMetrics.getOptional("actionMetrics")
 
         /**
          * The desired start time of this task, in ISO8601 UTC format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun actionStartTime(): Optional<OffsetDateTime> = actionStartTime.getOptional("actionStartTime")
+        fun actionStartTime(): Optional<OffsetDateTime> =
+            actionStartTime.getOptional("actionStartTime")
 
         /**
          * The WGS-84 altitude of the asset/actor location at weapon launch, in meters.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun actorInterceptAlt(): Optional<Double> = actorInterceptAlt.getOptional("actorInterceptAlt")
+        fun actorInterceptAlt(): Optional<Double> =
+            actorInterceptAlt.getOptional("actorInterceptAlt")
 
         /**
-         * The WGS-84 latitude of the asset/actor location at weapon launch, in degrees. -90 to 90 degrees (negative values south of equator).
+         * The WGS-84 latitude of the asset/actor location at weapon launch, in degrees. -90 to 90
+         * degrees (negative values south of equator).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun actorInterceptLat(): Optional<Double> = actorInterceptLat.getOptional("actorInterceptLat")
+        fun actorInterceptLat(): Optional<Double> =
+            actorInterceptLat.getOptional("actorInterceptLat")
 
         /**
-         * The WGS-84 longitude of the asset/actor location at weapon launch, in degrees. -180 to 180 degrees (negative values west of Prime Meridian).
+         * The WGS-84 longitude of the asset/actor location at weapon launch, in degrees. -180 to
+         * 180 degrees (negative values west of Prime Meridian).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun actorInterceptLon(): Optional<Double> = actorInterceptLon.getOptional("actorInterceptLon")
+        fun actorInterceptLon(): Optional<Double> =
+            actorInterceptLon.getOptional("actorInterceptLon")
 
         /**
          * The type of munition or sensor used by this asset/actor.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun effector(): Optional<String> = effector.getOptional("effector")
 
         /**
          * A summary string describing different aspects of the action.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun summary(): Optional<String> = summary.getOptional("summary")
 
         /**
-         * The POI or TRACK ID, depending on the type identified in targetSrcType, of the requested target. This identifier corresponds to either poi.poiid or track.trkId from their respective schemas.
+         * The POI or TRACK ID, depending on the type identified in targetSrcType, of the requested
+         * target. This identifier corresponds to either poi.poiid or track.trkId from their
+         * respective schemas.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun targetSrcId(): Optional<String> = targetSrcId.getOptional("targetSrcId")
 
         /**
          * The source type of the targetId identifier (POI, TRACK).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun targetSrcType(): Optional<String> = targetSrcType.getOptional("targetSrcType")
 
         /**
          * The end time of the asset TOT (time over target), in ISO8601 UTC format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun totEndTime(): Optional<OffsetDateTime> = totEndTime.getOptional("totEndTime")
 
         /**
          * The start time of the asset TOT (time over target), in ISO8601 UTC format.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun totStartTime(): Optional<OffsetDateTime> = totStartTime.getOptional("totStartTime")
 
         /**
          * The WGS-84 altitude of the weapon destination location, in meters.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun weaponInterceptAlt(): Optional<Double> = weaponInterceptAlt.getOptional("weaponInterceptAlt")
+        fun weaponInterceptAlt(): Optional<Double> =
+            weaponInterceptAlt.getOptional("weaponInterceptAlt")
 
         /**
-         * The WGS-84 latitude of the weapon destination location, in degrees. -90 to 90 degrees (negative values south of equator).
+         * The WGS-84 latitude of the weapon destination location, in degrees. -90 to 90 degrees
+         * (negative values south of equator).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun weaponInterceptLat(): Optional<Double> = weaponInterceptLat.getOptional("weaponInterceptLat")
+        fun weaponInterceptLat(): Optional<Double> =
+            weaponInterceptLat.getOptional("weaponInterceptLat")
 
         /**
-         * The WGS-84 longitude of the weapon destination location, in degrees. -180 to 180 degrees (negative values west of Prime Meridian).
+         * The WGS-84 longitude of the weapon destination location, in degrees. -180 to 180 degrees
+         * (negative values west of Prime Meridian).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
-        fun weaponInterceptLon(): Optional<Double> = weaponInterceptLon.getOptional("weaponInterceptLon")
+        fun weaponInterceptLon(): Optional<Double> =
+            weaponInterceptLon.getOptional("weaponInterceptLon")
 
         /**
          * Returns the raw JSON value of [actionActorSrcId].
          *
-         * Unlike [actionActorSrcId], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [actionActorSrcId], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("actionActorSrcId")
         @ExcludeMissing
@@ -1491,7 +1638,8 @@ class EffectResponseListResponse private constructor(
         /**
          * Returns the raw JSON value of [actionActorSrcType].
          *
-         * Unlike [actionActorSrcType], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [actionActorSrcType], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("actionActorSrcType")
         @ExcludeMissing
@@ -1500,7 +1648,8 @@ class EffectResponseListResponse private constructor(
         /**
          * Returns the raw JSON value of [actionEndTime].
          *
-         * Unlike [actionEndTime], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [actionEndTime], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("actionEndTime")
         @ExcludeMissing
@@ -1511,14 +1660,13 @@ class EffectResponseListResponse private constructor(
          *
          * Unlike [actionId], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("actionId")
-        @ExcludeMissing
-        fun _actionId(): JsonField<String> = actionId
+        @JsonProperty("actionId") @ExcludeMissing fun _actionId(): JsonField<String> = actionId
 
         /**
          * Returns the raw JSON value of [actionMetrics].
          *
-         * Unlike [actionMetrics], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [actionMetrics], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("actionMetrics")
         @ExcludeMissing
@@ -1527,7 +1675,8 @@ class EffectResponseListResponse private constructor(
         /**
          * Returns the raw JSON value of [actionStartTime].
          *
-         * Unlike [actionStartTime], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [actionStartTime], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("actionStartTime")
         @ExcludeMissing
@@ -1536,7 +1685,8 @@ class EffectResponseListResponse private constructor(
         /**
          * Returns the raw JSON value of [actorInterceptAlt].
          *
-         * Unlike [actorInterceptAlt], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [actorInterceptAlt], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("actorInterceptAlt")
         @ExcludeMissing
@@ -1545,7 +1695,8 @@ class EffectResponseListResponse private constructor(
         /**
          * Returns the raw JSON value of [actorInterceptLat].
          *
-         * Unlike [actorInterceptLat], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [actorInterceptLat], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("actorInterceptLat")
         @ExcludeMissing
@@ -1554,7 +1705,8 @@ class EffectResponseListResponse private constructor(
         /**
          * Returns the raw JSON value of [actorInterceptLon].
          *
-         * Unlike [actorInterceptLon], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [actorInterceptLon], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("actorInterceptLon")
         @ExcludeMissing
@@ -1565,18 +1717,14 @@ class EffectResponseListResponse private constructor(
          *
          * Unlike [effector], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("effector")
-        @ExcludeMissing
-        fun _effector(): JsonField<String> = effector
+        @JsonProperty("effector") @ExcludeMissing fun _effector(): JsonField<String> = effector
 
         /**
          * Returns the raw JSON value of [summary].
          *
          * Unlike [summary], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("summary")
-        @ExcludeMissing
-        fun _summary(): JsonField<String> = summary
+        @JsonProperty("summary") @ExcludeMissing fun _summary(): JsonField<String> = summary
 
         /**
          * Returns the raw JSON value of [targetSrcId].
@@ -1590,7 +1738,8 @@ class EffectResponseListResponse private constructor(
         /**
          * Returns the raw JSON value of [targetSrcType].
          *
-         * Unlike [targetSrcType], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [targetSrcType], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("targetSrcType")
         @ExcludeMissing
@@ -1608,7 +1757,8 @@ class EffectResponseListResponse private constructor(
         /**
          * Returns the raw JSON value of [totStartTime].
          *
-         * Unlike [totStartTime], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [totStartTime], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("totStartTime")
         @ExcludeMissing
@@ -1617,7 +1767,8 @@ class EffectResponseListResponse private constructor(
         /**
          * Returns the raw JSON value of [weaponInterceptAlt].
          *
-         * Unlike [weaponInterceptAlt], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [weaponInterceptAlt], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("weaponInterceptAlt")
         @ExcludeMissing
@@ -1626,7 +1777,8 @@ class EffectResponseListResponse private constructor(
         /**
          * Returns the raw JSON value of [weaponInterceptLat].
          *
-         * Unlike [weaponInterceptLat], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [weaponInterceptLat], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("weaponInterceptLat")
         @ExcludeMissing
@@ -1635,7 +1787,8 @@ class EffectResponseListResponse private constructor(
         /**
          * Returns the raw JSON value of [weaponInterceptLon].
          *
-         * Unlike [weaponInterceptLon], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [weaponInterceptLon], this method doesn't throw if the JSON field has an
+         * unexpected type.
          */
         @JsonProperty("weaponInterceptLon")
         @ExcludeMissing
@@ -1643,20 +1796,20 @@ class EffectResponseListResponse private constructor(
 
         @JsonAnySetter
         private fun putAdditionalProperty(key: String, value: JsonValue) {
-          additionalProperties.put(key, value)
+            additionalProperties.put(key, value)
         }
 
         @JsonAnyGetter
         @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
 
         fun toBuilder() = Builder().from(this)
 
         companion object {
 
             /** Returns a mutable builder for constructing an instance of [ActionsList]. */
-            @JvmStatic
-            fun builder() = Builder()
+            @JvmStatic fun builder() = Builder()
         }
 
         /** A builder for [ActionsList]. */
@@ -1683,70 +1836,77 @@ class EffectResponseListResponse private constructor(
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
-            internal fun from(actionsList: ActionsList) =
-                apply {
-                    actionActorSrcId = actionsList.actionActorSrcId
-                    actionActorSrcType = actionsList.actionActorSrcType
-                    actionEndTime = actionsList.actionEndTime
-                    actionId = actionsList.actionId
-                    actionMetrics = actionsList.actionMetrics.map { it.toMutableList() }
-                    actionStartTime = actionsList.actionStartTime
-                    actorInterceptAlt = actionsList.actorInterceptAlt
-                    actorInterceptLat = actionsList.actorInterceptLat
-                    actorInterceptLon = actionsList.actorInterceptLon
-                    effector = actionsList.effector
-                    summary = actionsList.summary
-                    targetSrcId = actionsList.targetSrcId
-                    targetSrcType = actionsList.targetSrcType
-                    totEndTime = actionsList.totEndTime
-                    totStartTime = actionsList.totStartTime
-                    weaponInterceptAlt = actionsList.weaponInterceptAlt
-                    weaponInterceptLat = actionsList.weaponInterceptLat
-                    weaponInterceptLon = actionsList.weaponInterceptLon
-                    additionalProperties = actionsList.additionalProperties.toMutableMap()
-                }
+            internal fun from(actionsList: ActionsList) = apply {
+                actionActorSrcId = actionsList.actionActorSrcId
+                actionActorSrcType = actionsList.actionActorSrcType
+                actionEndTime = actionsList.actionEndTime
+                actionId = actionsList.actionId
+                actionMetrics = actionsList.actionMetrics.map { it.toMutableList() }
+                actionStartTime = actionsList.actionStartTime
+                actorInterceptAlt = actionsList.actorInterceptAlt
+                actorInterceptLat = actionsList.actorInterceptLat
+                actorInterceptLon = actionsList.actorInterceptLon
+                effector = actionsList.effector
+                summary = actionsList.summary
+                targetSrcId = actionsList.targetSrcId
+                targetSrcType = actionsList.targetSrcType
+                totEndTime = actionsList.totEndTime
+                totStartTime = actionsList.totStartTime
+                weaponInterceptAlt = actionsList.weaponInterceptAlt
+                weaponInterceptLat = actionsList.weaponInterceptLat
+                weaponInterceptLon = actionsList.weaponInterceptLon
+                additionalProperties = actionsList.additionalProperties.toMutableMap()
+            }
 
-            /** The record ID, depending on the type identified in actorSrcType, of the requested asset/actor. */
-            fun actionActorSrcId(actionActorSrcId: String) = actionActorSrcId(JsonField.of(actionActorSrcId))
+            /**
+             * The record ID, depending on the type identified in actorSrcType, of the requested
+             * asset/actor.
+             */
+            fun actionActorSrcId(actionActorSrcId: String) =
+                actionActorSrcId(JsonField.of(actionActorSrcId))
 
             /**
              * Sets [Builder.actionActorSrcId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.actionActorSrcId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.actionActorSrcId] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun actionActorSrcId(actionActorSrcId: JsonField<String>) =
-                apply {
-                    this.actionActorSrcId = actionActorSrcId
-                }
+            fun actionActorSrcId(actionActorSrcId: JsonField<String>) = apply {
+                this.actionActorSrcId = actionActorSrcId
+            }
 
-            /** The source type of the asset/actor identifier (AIRCRAFT, LANDCRAFT, SEACRAFT, TRACK). */
-            fun actionActorSrcType(actionActorSrcType: String) = actionActorSrcType(JsonField.of(actionActorSrcType))
+            /**
+             * The source type of the asset/actor identifier (AIRCRAFT, LANDCRAFT, SEACRAFT, TRACK).
+             */
+            fun actionActorSrcType(actionActorSrcType: String) =
+                actionActorSrcType(JsonField.of(actionActorSrcType))
 
             /**
              * Sets [Builder.actionActorSrcType] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.actionActorSrcType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.actionActorSrcType] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun actionActorSrcType(actionActorSrcType: JsonField<String>) =
-                apply {
-                    this.actionActorSrcType = actionActorSrcType
-                }
+            fun actionActorSrcType(actionActorSrcType: JsonField<String>) = apply {
+                this.actionActorSrcType = actionActorSrcType
+            }
 
             /** The desired end time of this task, in ISO8601 UTC format. */
-            fun actionEndTime(actionEndTime: OffsetDateTime) = actionEndTime(JsonField.of(actionEndTime))
+            fun actionEndTime(actionEndTime: OffsetDateTime) =
+                actionEndTime(JsonField.of(actionEndTime))
 
             /**
              * Sets [Builder.actionEndTime] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.actionEndTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.actionEndTime] with a well-typed [OffsetDateTime]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun actionEndTime(actionEndTime: JsonField<OffsetDateTime>) =
-                apply {
-                    this.actionEndTime = actionEndTime
-                }
+            fun actionEndTime(actionEndTime: JsonField<OffsetDateTime>) = apply {
+                this.actionEndTime = actionEndTime
+            }
 
             /** Identifier of this action. */
             fun actionId(actionId: String) = actionId(JsonField.of(actionId))
@@ -1754,95 +1914,104 @@ class EffectResponseListResponse private constructor(
             /**
              * Sets [Builder.actionId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.actionId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.actionId] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun actionId(actionId: JsonField<String>) =
-                apply {
-                    this.actionId = actionId
-                }
+            fun actionId(actionId: JsonField<String>) = apply { this.actionId = actionId }
 
             /** List of metrics associated with this action. */
-            fun actionMetrics(actionMetrics: List<ActionMetric>) = actionMetrics(JsonField.of(actionMetrics))
+            fun actionMetrics(actionMetrics: List<ActionMetric>) =
+                actionMetrics(JsonField.of(actionMetrics))
 
             /**
              * Sets [Builder.actionMetrics] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.actionMetrics] with a well-typed `List<ActionMetric>` value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.actionMetrics] with a well-typed
+             * `List<ActionMetric>` value instead. This method is primarily for setting the field to
+             * an undocumented or not yet supported value.
              */
-            fun actionMetrics(actionMetrics: JsonField<List<ActionMetric>>) =
-                apply {
-                    this.actionMetrics = actionMetrics.map { it.toMutableList() }
-                }
+            fun actionMetrics(actionMetrics: JsonField<List<ActionMetric>>) = apply {
+                this.actionMetrics = actionMetrics.map { it.toMutableList() }
+            }
 
             /**
              * Adds a single [ActionMetric] to [actionMetrics].
              *
              * @throws IllegalStateException if the field was previously set to a non-list.
              */
-            fun addActionMetric(actionMetric: ActionMetric) =
-                apply {
-                    actionMetrics = (actionMetrics ?: JsonField.of(mutableListOf())).also {
+            fun addActionMetric(actionMetric: ActionMetric) = apply {
+                actionMetrics =
+                    (actionMetrics ?: JsonField.of(mutableListOf())).also {
                         checkKnown("actionMetrics", it).add(actionMetric)
                     }
-                }
+            }
 
             /** The desired start time of this task, in ISO8601 UTC format. */
-            fun actionStartTime(actionStartTime: OffsetDateTime) = actionStartTime(JsonField.of(actionStartTime))
+            fun actionStartTime(actionStartTime: OffsetDateTime) =
+                actionStartTime(JsonField.of(actionStartTime))
 
             /**
              * Sets [Builder.actionStartTime] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.actionStartTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.actionStartTime] with a well-typed [OffsetDateTime]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun actionStartTime(actionStartTime: JsonField<OffsetDateTime>) =
-                apply {
-                    this.actionStartTime = actionStartTime
-                }
+            fun actionStartTime(actionStartTime: JsonField<OffsetDateTime>) = apply {
+                this.actionStartTime = actionStartTime
+            }
 
             /** The WGS-84 altitude of the asset/actor location at weapon launch, in meters. */
-            fun actorInterceptAlt(actorInterceptAlt: Double) = actorInterceptAlt(JsonField.of(actorInterceptAlt))
+            fun actorInterceptAlt(actorInterceptAlt: Double) =
+                actorInterceptAlt(JsonField.of(actorInterceptAlt))
 
             /**
              * Sets [Builder.actorInterceptAlt] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.actorInterceptAlt] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.actorInterceptAlt] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun actorInterceptAlt(actorInterceptAlt: JsonField<Double>) =
-                apply {
-                    this.actorInterceptAlt = actorInterceptAlt
-                }
+            fun actorInterceptAlt(actorInterceptAlt: JsonField<Double>) = apply {
+                this.actorInterceptAlt = actorInterceptAlt
+            }
 
-            /** The WGS-84 latitude of the asset/actor location at weapon launch, in degrees. -90 to 90 degrees (negative values south of equator). */
-            fun actorInterceptLat(actorInterceptLat: Double) = actorInterceptLat(JsonField.of(actorInterceptLat))
+            /**
+             * The WGS-84 latitude of the asset/actor location at weapon launch, in degrees. -90 to
+             * 90 degrees (negative values south of equator).
+             */
+            fun actorInterceptLat(actorInterceptLat: Double) =
+                actorInterceptLat(JsonField.of(actorInterceptLat))
 
             /**
              * Sets [Builder.actorInterceptLat] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.actorInterceptLat] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.actorInterceptLat] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun actorInterceptLat(actorInterceptLat: JsonField<Double>) =
-                apply {
-                    this.actorInterceptLat = actorInterceptLat
-                }
+            fun actorInterceptLat(actorInterceptLat: JsonField<Double>) = apply {
+                this.actorInterceptLat = actorInterceptLat
+            }
 
-            /** The WGS-84 longitude of the asset/actor location at weapon launch, in degrees. -180 to 180 degrees (negative values west of Prime Meridian). */
-            fun actorInterceptLon(actorInterceptLon: Double) = actorInterceptLon(JsonField.of(actorInterceptLon))
+            /**
+             * The WGS-84 longitude of the asset/actor location at weapon launch, in degrees. -180
+             * to 180 degrees (negative values west of Prime Meridian).
+             */
+            fun actorInterceptLon(actorInterceptLon: Double) =
+                actorInterceptLon(JsonField.of(actorInterceptLon))
 
             /**
              * Sets [Builder.actorInterceptLon] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.actorInterceptLon] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.actorInterceptLon] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun actorInterceptLon(actorInterceptLon: JsonField<Double>) =
-                apply {
-                    this.actorInterceptLon = actorInterceptLon
-                }
+            fun actorInterceptLon(actorInterceptLon: JsonField<Double>) = apply {
+                this.actorInterceptLon = actorInterceptLon
+            }
 
             /** The type of munition or sensor used by this asset/actor. */
             fun effector(effector: String) = effector(JsonField.of(effector))
@@ -1850,13 +2019,11 @@ class EffectResponseListResponse private constructor(
             /**
              * Sets [Builder.effector] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.effector] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.effector] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun effector(effector: JsonField<String>) =
-                apply {
-                    this.effector = effector
-                }
+            fun effector(effector: JsonField<String>) = apply { this.effector = effector }
 
             /** A summary string describing different aspects of the action. */
             fun summary(summary: String) = summary(JsonField.of(summary))
@@ -1864,27 +2031,29 @@ class EffectResponseListResponse private constructor(
             /**
              * Sets [Builder.summary] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.summary] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.summary] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun summary(summary: JsonField<String>) =
-                apply {
-                    this.summary = summary
-                }
+            fun summary(summary: JsonField<String>) = apply { this.summary = summary }
 
-            /** The POI or TRACK ID, depending on the type identified in targetSrcType, of the requested target. This identifier corresponds to either poi.poiid or track.trkId from their respective schemas. */
+            /**
+             * The POI or TRACK ID, depending on the type identified in targetSrcType, of the
+             * requested target. This identifier corresponds to either poi.poiid or track.trkId from
+             * their respective schemas.
+             */
             fun targetSrcId(targetSrcId: String) = targetSrcId(JsonField.of(targetSrcId))
 
             /**
              * Sets [Builder.targetSrcId] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.targetSrcId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.targetSrcId] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun targetSrcId(targetSrcId: JsonField<String>) =
-                apply {
-                    this.targetSrcId = targetSrcId
-                }
+            fun targetSrcId(targetSrcId: JsonField<String>) = apply {
+                this.targetSrcId = targetSrcId
+            }
 
             /** The source type of the targetId identifier (POI, TRACK). */
             fun targetSrcType(targetSrcType: String) = targetSrcType(JsonField.of(targetSrcType))
@@ -1892,13 +2061,13 @@ class EffectResponseListResponse private constructor(
             /**
              * Sets [Builder.targetSrcType] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.targetSrcType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.targetSrcType] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun targetSrcType(targetSrcType: JsonField<String>) =
-                apply {
-                    this.targetSrcType = targetSrcType
-                }
+            fun targetSrcType(targetSrcType: JsonField<String>) = apply {
+                this.targetSrcType = targetSrcType
+            }
 
             /** The end time of the asset TOT (time over target), in ISO8601 UTC format. */
             fun totEndTime(totEndTime: OffsetDateTime) = totEndTime(JsonField.of(totEndTime))
@@ -1906,95 +2075,98 @@ class EffectResponseListResponse private constructor(
             /**
              * Sets [Builder.totEndTime] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.totEndTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.totEndTime] with a well-typed [OffsetDateTime] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun totEndTime(totEndTime: JsonField<OffsetDateTime>) =
-                apply {
-                    this.totEndTime = totEndTime
-                }
+            fun totEndTime(totEndTime: JsonField<OffsetDateTime>) = apply {
+                this.totEndTime = totEndTime
+            }
 
             /** The start time of the asset TOT (time over target), in ISO8601 UTC format. */
-            fun totStartTime(totStartTime: OffsetDateTime) = totStartTime(JsonField.of(totStartTime))
+            fun totStartTime(totStartTime: OffsetDateTime) =
+                totStartTime(JsonField.of(totStartTime))
 
             /**
              * Sets [Builder.totStartTime] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.totStartTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
+             * You should usually call [Builder.totStartTime] with a well-typed [OffsetDateTime]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
              */
-            fun totStartTime(totStartTime: JsonField<OffsetDateTime>) =
-                apply {
-                    this.totStartTime = totStartTime
-                }
+            fun totStartTime(totStartTime: JsonField<OffsetDateTime>) = apply {
+                this.totStartTime = totStartTime
+            }
 
             /** The WGS-84 altitude of the weapon destination location, in meters. */
-            fun weaponInterceptAlt(weaponInterceptAlt: Double) = weaponInterceptAlt(JsonField.of(weaponInterceptAlt))
+            fun weaponInterceptAlt(weaponInterceptAlt: Double) =
+                weaponInterceptAlt(JsonField.of(weaponInterceptAlt))
 
             /**
              * Sets [Builder.weaponInterceptAlt] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.weaponInterceptAlt] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.weaponInterceptAlt] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun weaponInterceptAlt(weaponInterceptAlt: JsonField<Double>) =
-                apply {
-                    this.weaponInterceptAlt = weaponInterceptAlt
-                }
+            fun weaponInterceptAlt(weaponInterceptAlt: JsonField<Double>) = apply {
+                this.weaponInterceptAlt = weaponInterceptAlt
+            }
 
-            /** The WGS-84 latitude of the weapon destination location, in degrees. -90 to 90 degrees (negative values south of equator). */
-            fun weaponInterceptLat(weaponInterceptLat: Double) = weaponInterceptLat(JsonField.of(weaponInterceptLat))
+            /**
+             * The WGS-84 latitude of the weapon destination location, in degrees. -90 to 90 degrees
+             * (negative values south of equator).
+             */
+            fun weaponInterceptLat(weaponInterceptLat: Double) =
+                weaponInterceptLat(JsonField.of(weaponInterceptLat))
 
             /**
              * Sets [Builder.weaponInterceptLat] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.weaponInterceptLat] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.weaponInterceptLat] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun weaponInterceptLat(weaponInterceptLat: JsonField<Double>) =
-                apply {
-                    this.weaponInterceptLat = weaponInterceptLat
-                }
+            fun weaponInterceptLat(weaponInterceptLat: JsonField<Double>) = apply {
+                this.weaponInterceptLat = weaponInterceptLat
+            }
 
-            /** The WGS-84 longitude of the weapon destination location, in degrees. -180 to 180 degrees (negative values west of Prime Meridian). */
-            fun weaponInterceptLon(weaponInterceptLon: Double) = weaponInterceptLon(JsonField.of(weaponInterceptLon))
+            /**
+             * The WGS-84 longitude of the weapon destination location, in degrees. -180 to 180
+             * degrees (negative values west of Prime Meridian).
+             */
+            fun weaponInterceptLon(weaponInterceptLon: Double) =
+                weaponInterceptLon(JsonField.of(weaponInterceptLon))
 
             /**
              * Sets [Builder.weaponInterceptLon] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.weaponInterceptLon] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.weaponInterceptLon] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun weaponInterceptLon(weaponInterceptLon: JsonField<Double>) =
-                apply {
-                    this.weaponInterceptLon = weaponInterceptLon
-                }
+            fun weaponInterceptLon(weaponInterceptLon: JsonField<Double>) = apply {
+                this.weaponInterceptLon = weaponInterceptLon
+            }
 
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-                apply {
-                    this.additionalProperties.clear()
-                    putAllAdditionalProperties(additionalProperties)
-                }
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
 
-            fun putAdditionalProperty(key: String, value: JsonValue) =
-                apply {
-                    additionalProperties.put(key, value)
-                }
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
 
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-                apply {
-                    this.additionalProperties.putAll(additionalProperties)
-                }
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
 
-            fun removeAdditionalProperty(key: String) =
-                apply {
-                    additionalProperties.remove(key)
-                }
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-            fun removeAllAdditionalProperties(keys: Set<String>) =
-                apply {
-                    keys.forEach(::removeAdditionalProperty)
-                }
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
 
             /**
              * Returns an immutable instance of [ActionsList].
@@ -2003,56 +2175,55 @@ class EffectResponseListResponse private constructor(
              */
             fun build(): ActionsList =
                 ActionsList(
-                  actionActorSrcId,
-                  actionActorSrcType,
-                  actionEndTime,
-                  actionId,
-                  (actionMetrics ?: JsonMissing.of()).map { it.toImmutable() },
-                  actionStartTime,
-                  actorInterceptAlt,
-                  actorInterceptLat,
-                  actorInterceptLon,
-                  effector,
-                  summary,
-                  targetSrcId,
-                  targetSrcType,
-                  totEndTime,
-                  totStartTime,
-                  weaponInterceptAlt,
-                  weaponInterceptLat,
-                  weaponInterceptLon,
-                  additionalProperties.toMutableMap(),
+                    actionActorSrcId,
+                    actionActorSrcType,
+                    actionEndTime,
+                    actionId,
+                    (actionMetrics ?: JsonMissing.of()).map { it.toImmutable() },
+                    actionStartTime,
+                    actorInterceptAlt,
+                    actorInterceptLat,
+                    actorInterceptLon,
+                    effector,
+                    summary,
+                    targetSrcId,
+                    targetSrcType,
+                    totEndTime,
+                    totStartTime,
+                    weaponInterceptAlt,
+                    weaponInterceptLat,
+                    weaponInterceptLon,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
         private var validated: Boolean = false
 
-        fun validate(): ActionsList =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                actionActorSrcId()
-                actionActorSrcType()
-                actionEndTime()
-                actionId()
-                actionMetrics().ifPresent { it.forEach { it.validate() } }
-                actionStartTime()
-                actorInterceptAlt()
-                actorInterceptLat()
-                actorInterceptLon()
-                effector()
-                summary()
-                targetSrcId()
-                targetSrcType()
-                totEndTime()
-                totStartTime()
-                weaponInterceptAlt()
-                weaponInterceptLat()
-                weaponInterceptLon()
-                validated = true
+        fun validate(): ActionsList = apply {
+            if (validated) {
+                return@apply
             }
+
+            actionActorSrcId()
+            actionActorSrcType()
+            actionEndTime()
+            actionId()
+            actionMetrics().ifPresent { it.forEach { it.validate() } }
+            actionStartTime()
+            actorInterceptAlt()
+            actorInterceptLat()
+            actorInterceptLon()
+            effector()
+            summary()
+            targetSrcId()
+            targetSrcType()
+            totEndTime()
+            totStartTime()
+            weaponInterceptAlt()
+            weaponInterceptLat()
+            weaponInterceptLon()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -2063,68 +2234,95 @@ class EffectResponseListResponse private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
         @JvmSynthetic
-        internal fun validity(): Int = (if (actionActorSrcId.asKnown().isPresent) 1 else 0) + (if (actionActorSrcType.asKnown().isPresent) 1 else 0) + (if (actionEndTime.asKnown().isPresent) 1 else 0) + (if (actionId.asKnown().isPresent) 1 else 0) + (actionMetrics.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) + (if (actionStartTime.asKnown().isPresent) 1 else 0) + (if (actorInterceptAlt.asKnown().isPresent) 1 else 0) + (if (actorInterceptLat.asKnown().isPresent) 1 else 0) + (if (actorInterceptLon.asKnown().isPresent) 1 else 0) + (if (effector.asKnown().isPresent) 1 else 0) + (if (summary.asKnown().isPresent) 1 else 0) + (if (targetSrcId.asKnown().isPresent) 1 else 0) + (if (targetSrcType.asKnown().isPresent) 1 else 0) + (if (totEndTime.asKnown().isPresent) 1 else 0) + (if (totStartTime.asKnown().isPresent) 1 else 0) + (if (weaponInterceptAlt.asKnown().isPresent) 1 else 0) + (if (weaponInterceptLat.asKnown().isPresent) 1 else 0) + (if (weaponInterceptLon.asKnown().isPresent) 1 else 0)
+        internal fun validity(): Int =
+            (if (actionActorSrcId.asKnown().isPresent) 1 else 0) +
+                (if (actionActorSrcType.asKnown().isPresent) 1 else 0) +
+                (if (actionEndTime.asKnown().isPresent) 1 else 0) +
+                (if (actionId.asKnown().isPresent) 1 else 0) +
+                (actionMetrics.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
+                (if (actionStartTime.asKnown().isPresent) 1 else 0) +
+                (if (actorInterceptAlt.asKnown().isPresent) 1 else 0) +
+                (if (actorInterceptLat.asKnown().isPresent) 1 else 0) +
+                (if (actorInterceptLon.asKnown().isPresent) 1 else 0) +
+                (if (effector.asKnown().isPresent) 1 else 0) +
+                (if (summary.asKnown().isPresent) 1 else 0) +
+                (if (targetSrcId.asKnown().isPresent) 1 else 0) +
+                (if (targetSrcType.asKnown().isPresent) 1 else 0) +
+                (if (totEndTime.asKnown().isPresent) 1 else 0) +
+                (if (totStartTime.asKnown().isPresent) 1 else 0) +
+                (if (weaponInterceptAlt.asKnown().isPresent) 1 else 0) +
+                (if (weaponInterceptLat.asKnown().isPresent) 1 else 0) +
+                (if (weaponInterceptLon.asKnown().isPresent) 1 else 0)
 
-        class ActionMetric private constructor(
+        class ActionMetric
+        private constructor(
             private val domainValue: JsonField<Double>,
             private val metricType: JsonField<String>,
             private val provenance: JsonField<String>,
             private val relativeValue: JsonField<Double>,
             private val additionalProperties: MutableMap<String, JsonValue>,
-
         ) {
 
             @JsonCreator
             private constructor(
-                @JsonProperty("domainValue") @ExcludeMissing domainValue: JsonField<Double> = JsonMissing.of(),
-                @JsonProperty("metricType") @ExcludeMissing metricType: JsonField<String> = JsonMissing.of(),
-                @JsonProperty("provenance") @ExcludeMissing provenance: JsonField<String> = JsonMissing.of(),
-                @JsonProperty("relativeValue") @ExcludeMissing relativeValue: JsonField<Double> = JsonMissing.of()
-            ) : this(
-              domainValue,
-              metricType,
-              provenance,
-              relativeValue,
-              mutableMapOf(),
-            )
+                @JsonProperty("domainValue")
+                @ExcludeMissing
+                domainValue: JsonField<Double> = JsonMissing.of(),
+                @JsonProperty("metricType")
+                @ExcludeMissing
+                metricType: JsonField<String> = JsonMissing.of(),
+                @JsonProperty("provenance")
+                @ExcludeMissing
+                provenance: JsonField<String> = JsonMissing.of(),
+                @JsonProperty("relativeValue")
+                @ExcludeMissing
+                relativeValue: JsonField<Double> = JsonMissing.of(),
+            ) : this(domainValue, metricType, provenance, relativeValue, mutableMapOf())
 
             /**
              * The metric score specific to its domain.
              *
-             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
+             *   type (e.g. if the server responded with an unexpected value).
              */
             fun domainValue(): Optional<Double> = domainValue.getOptional("domainValue")
 
             /**
-             * The type of the metric (e.g. CollateralDamage, GoalAchievement, OpportunityCost, Timeliness, Unavailable, etc.).
+             * The type of the metric (e.g. CollateralDamage, GoalAchievement, OpportunityCost,
+             * Timeliness, Unavailable, etc.).
              *
-             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
+             *   type (e.g. if the server responded with an unexpected value).
              */
             fun metricType(): Optional<String> = metricType.getOptional("metricType")
 
             /**
              * The metric that was used to score this task.
              *
-             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
+             *   type (e.g. if the server responded with an unexpected value).
              */
             fun provenance(): Optional<String> = provenance.getOptional("provenance")
 
             /**
              * The metric score adjusted to be relative and comparable to other domains.
              *
-             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
+             *   type (e.g. if the server responded with an unexpected value).
              */
             fun relativeValue(): Optional<Double> = relativeValue.getOptional("relativeValue")
 
             /**
              * Returns the raw JSON value of [domainValue].
              *
-             * Unlike [domainValue], this method doesn't throw if the JSON field has an unexpected type.
+             * Unlike [domainValue], this method doesn't throw if the JSON field has an unexpected
+             * type.
              */
             @JsonProperty("domainValue")
             @ExcludeMissing
@@ -2133,7 +2331,8 @@ class EffectResponseListResponse private constructor(
             /**
              * Returns the raw JSON value of [metricType].
              *
-             * Unlike [metricType], this method doesn't throw if the JSON field has an unexpected type.
+             * Unlike [metricType], this method doesn't throw if the JSON field has an unexpected
+             * type.
              */
             @JsonProperty("metricType")
             @ExcludeMissing
@@ -2142,7 +2341,8 @@ class EffectResponseListResponse private constructor(
             /**
              * Returns the raw JSON value of [provenance].
              *
-             * Unlike [provenance], this method doesn't throw if the JSON field has an unexpected type.
+             * Unlike [provenance], this method doesn't throw if the JSON field has an unexpected
+             * type.
              */
             @JsonProperty("provenance")
             @ExcludeMissing
@@ -2151,7 +2351,8 @@ class EffectResponseListResponse private constructor(
             /**
              * Returns the raw JSON value of [relativeValue].
              *
-             * Unlike [relativeValue], this method doesn't throw if the JSON field has an unexpected type.
+             * Unlike [relativeValue], this method doesn't throw if the JSON field has an unexpected
+             * type.
              */
             @JsonProperty("relativeValue")
             @ExcludeMissing
@@ -2159,20 +2360,20 @@ class EffectResponseListResponse private constructor(
 
             @JsonAnySetter
             private fun putAdditionalProperty(key: String, value: JsonValue) {
-              additionalProperties.put(key, value)
+                additionalProperties.put(key, value)
             }
 
             @JsonAnyGetter
             @ExcludeMissing
-            fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+            fun _additionalProperties(): Map<String, JsonValue> =
+                Collections.unmodifiableMap(additionalProperties)
 
             fun toBuilder() = Builder().from(this)
 
             companion object {
 
                 /** Returns a mutable builder for constructing an instance of [ActionMetric]. */
-                @JvmStatic
-                fun builder() = Builder()
+                @JvmStatic fun builder() = Builder()
             }
 
             /** A builder for [ActionMetric]. */
@@ -2185,14 +2386,13 @@ class EffectResponseListResponse private constructor(
                 private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
                 @JvmSynthetic
-                internal fun from(actionMetric: ActionMetric) =
-                    apply {
-                        domainValue = actionMetric.domainValue
-                        metricType = actionMetric.metricType
-                        provenance = actionMetric.provenance
-                        relativeValue = actionMetric.relativeValue
-                        additionalProperties = actionMetric.additionalProperties.toMutableMap()
-                    }
+                internal fun from(actionMetric: ActionMetric) = apply {
+                    domainValue = actionMetric.domainValue
+                    metricType = actionMetric.metricType
+                    provenance = actionMetric.provenance
+                    relativeValue = actionMetric.relativeValue
+                    additionalProperties = actionMetric.additionalProperties.toMutableMap()
+                }
 
                 /** The metric score specific to its domain. */
                 fun domainValue(domainValue: Double) = domainValue(JsonField.of(domainValue))
@@ -2200,27 +2400,30 @@ class EffectResponseListResponse private constructor(
                 /**
                  * Sets [Builder.domainValue] to an arbitrary JSON value.
                  *
-                 * You should usually call [Builder.domainValue] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-                 * supported value.
+                 * You should usually call [Builder.domainValue] with a well-typed [Double] value
+                 * instead. This method is primarily for setting the field to an undocumented or not
+                 * yet supported value.
                  */
-                fun domainValue(domainValue: JsonField<Double>) =
-                    apply {
-                        this.domainValue = domainValue
-                    }
+                fun domainValue(domainValue: JsonField<Double>) = apply {
+                    this.domainValue = domainValue
+                }
 
-                /** The type of the metric (e.g. CollateralDamage, GoalAchievement, OpportunityCost, Timeliness, Unavailable, etc.). */
+                /**
+                 * The type of the metric (e.g. CollateralDamage, GoalAchievement, OpportunityCost,
+                 * Timeliness, Unavailable, etc.).
+                 */
                 fun metricType(metricType: String) = metricType(JsonField.of(metricType))
 
                 /**
                  * Sets [Builder.metricType] to an arbitrary JSON value.
                  *
-                 * You should usually call [Builder.metricType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-                 * supported value.
+                 * You should usually call [Builder.metricType] with a well-typed [String] value
+                 * instead. This method is primarily for setting the field to an undocumented or not
+                 * yet supported value.
                  */
-                fun metricType(metricType: JsonField<String>) =
-                    apply {
-                        this.metricType = metricType
-                    }
+                fun metricType(metricType: JsonField<String>) = apply {
+                    this.metricType = metricType
+                }
 
                 /** The metric that was used to score this task. */
                 fun provenance(provenance: String) = provenance(JsonField.of(provenance))
@@ -2228,53 +2431,50 @@ class EffectResponseListResponse private constructor(
                 /**
                  * Sets [Builder.provenance] to an arbitrary JSON value.
                  *
-                 * You should usually call [Builder.provenance] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-                 * supported value.
+                 * You should usually call [Builder.provenance] with a well-typed [String] value
+                 * instead. This method is primarily for setting the field to an undocumented or not
+                 * yet supported value.
                  */
-                fun provenance(provenance: JsonField<String>) =
-                    apply {
-                        this.provenance = provenance
-                    }
+                fun provenance(provenance: JsonField<String>) = apply {
+                    this.provenance = provenance
+                }
 
                 /** The metric score adjusted to be relative and comparable to other domains. */
-                fun relativeValue(relativeValue: Double) = relativeValue(JsonField.of(relativeValue))
+                fun relativeValue(relativeValue: Double) =
+                    relativeValue(JsonField.of(relativeValue))
 
                 /**
                  * Sets [Builder.relativeValue] to an arbitrary JSON value.
                  *
-                 * You should usually call [Builder.relativeValue] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
-                 * supported value.
+                 * You should usually call [Builder.relativeValue] with a well-typed [Double] value
+                 * instead. This method is primarily for setting the field to an undocumented or not
+                 * yet supported value.
                  */
-                fun relativeValue(relativeValue: JsonField<Double>) =
-                    apply {
-                        this.relativeValue = relativeValue
-                    }
+                fun relativeValue(relativeValue: JsonField<Double>) = apply {
+                    this.relativeValue = relativeValue
+                }
 
-                fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-                    apply {
-                        this.additionalProperties.clear()
-                        putAllAdditionalProperties(additionalProperties)
-                    }
+                fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                    this.additionalProperties.clear()
+                    putAllAdditionalProperties(additionalProperties)
+                }
 
-                fun putAdditionalProperty(key: String, value: JsonValue) =
-                    apply {
-                        additionalProperties.put(key, value)
-                    }
+                fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                    additionalProperties.put(key, value)
+                }
 
                 fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
                     apply {
                         this.additionalProperties.putAll(additionalProperties)
                     }
 
-                fun removeAdditionalProperty(key: String) =
-                    apply {
-                        additionalProperties.remove(key)
-                    }
+                fun removeAdditionalProperty(key: String) = apply {
+                    additionalProperties.remove(key)
+                }
 
-                fun removeAllAdditionalProperties(keys: Set<String>) =
-                    apply {
-                        keys.forEach(::removeAdditionalProperty)
-                    }
+                fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                    keys.forEach(::removeAdditionalProperty)
+                }
 
                 /**
                  * Returns an immutable instance of [ActionMetric].
@@ -2283,28 +2483,27 @@ class EffectResponseListResponse private constructor(
                  */
                 fun build(): ActionMetric =
                     ActionMetric(
-                      domainValue,
-                      metricType,
-                      provenance,
-                      relativeValue,
-                      additionalProperties.toMutableMap(),
+                        domainValue,
+                        metricType,
+                        provenance,
+                        relativeValue,
+                        additionalProperties.toMutableMap(),
                     )
             }
 
             private var validated: Boolean = false
 
-            fun validate(): ActionMetric =
-                apply {
-                    if (validated) {
-                      return@apply
-                    }
-
-                    domainValue()
-                    metricType()
-                    provenance()
-                    relativeValue()
-                    validated = true
+            fun validate(): ActionMetric = apply {
+                if (validated) {
+                    return@apply
                 }
+
+                domainValue()
+                metricType()
+                provenance()
+                relativeValue()
+                validated = true
+            }
 
             fun isValid(): Boolean =
                 try {
@@ -2315,95 +2514,159 @@ class EffectResponseListResponse private constructor(
                 }
 
             /**
-             * Returns a score indicating how many valid values are contained in this object recursively.
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
              *
              * Used for best match union deserialization.
              */
             @JvmSynthetic
-            internal fun validity(): Int = (if (domainValue.asKnown().isPresent) 1 else 0) + (if (metricType.asKnown().isPresent) 1 else 0) + (if (provenance.asKnown().isPresent) 1 else 0) + (if (relativeValue.asKnown().isPresent) 1 else 0)
+            internal fun validity(): Int =
+                (if (domainValue.asKnown().isPresent) 1 else 0) +
+                    (if (metricType.asKnown().isPresent) 1 else 0) +
+                    (if (provenance.asKnown().isPresent) 1 else 0) +
+                    (if (relativeValue.asKnown().isPresent) 1 else 0)
 
             override fun equals(other: Any?): Boolean {
-              if (this === other) {
-                  return true
-              }
+                if (this === other) {
+                    return true
+                }
 
-              return /* spotless:off */ other is ActionMetric && domainValue == other.domainValue && metricType == other.metricType && provenance == other.provenance && relativeValue == other.relativeValue && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is ActionMetric &&
+                    domainValue == other.domainValue &&
+                    metricType == other.metricType &&
+                    provenance == other.provenance &&
+                    relativeValue == other.relativeValue &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(domainValue, metricType, provenance, relativeValue, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    domainValue,
+                    metricType,
+                    provenance,
+                    relativeValue,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
-            override fun toString() = "ActionMetric{domainValue=$domainValue, metricType=$metricType, provenance=$provenance, relativeValue=$relativeValue, additionalProperties=$additionalProperties}"
+            override fun toString() =
+                "ActionMetric{domainValue=$domainValue, metricType=$metricType, provenance=$provenance, relativeValue=$relativeValue, additionalProperties=$additionalProperties}"
         }
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is ActionsList && actionActorSrcId == other.actionActorSrcId && actionActorSrcType == other.actionActorSrcType && actionEndTime == other.actionEndTime && actionId == other.actionId && actionMetrics == other.actionMetrics && actionStartTime == other.actionStartTime && actorInterceptAlt == other.actorInterceptAlt && actorInterceptLat == other.actorInterceptLat && actorInterceptLon == other.actorInterceptLon && effector == other.effector && summary == other.summary && targetSrcId == other.targetSrcId && targetSrcType == other.targetSrcType && totEndTime == other.totEndTime && totStartTime == other.totStartTime && weaponInterceptAlt == other.weaponInterceptAlt && weaponInterceptLat == other.weaponInterceptLat && weaponInterceptLon == other.weaponInterceptLon && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is ActionsList &&
+                actionActorSrcId == other.actionActorSrcId &&
+                actionActorSrcType == other.actionActorSrcType &&
+                actionEndTime == other.actionEndTime &&
+                actionId == other.actionId &&
+                actionMetrics == other.actionMetrics &&
+                actionStartTime == other.actionStartTime &&
+                actorInterceptAlt == other.actorInterceptAlt &&
+                actorInterceptLat == other.actorInterceptLat &&
+                actorInterceptLon == other.actorInterceptLon &&
+                effector == other.effector &&
+                summary == other.summary &&
+                targetSrcId == other.targetSrcId &&
+                targetSrcType == other.targetSrcType &&
+                totEndTime == other.totEndTime &&
+                totStartTime == other.totStartTime &&
+                weaponInterceptAlt == other.weaponInterceptAlt &&
+                weaponInterceptLat == other.weaponInterceptLat &&
+                weaponInterceptLon == other.weaponInterceptLon &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(actionActorSrcId, actionActorSrcType, actionEndTime, actionId, actionMetrics, actionStartTime, actorInterceptAlt, actorInterceptLat, actorInterceptLon, effector, summary, targetSrcId, targetSrcType, totEndTime, totStartTime, weaponInterceptAlt, weaponInterceptLat, weaponInterceptLon, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                actionActorSrcId,
+                actionActorSrcType,
+                actionEndTime,
+                actionId,
+                actionMetrics,
+                actionStartTime,
+                actorInterceptAlt,
+                actorInterceptLat,
+                actorInterceptLon,
+                effector,
+                summary,
+                targetSrcId,
+                targetSrcType,
+                totEndTime,
+                totStartTime,
+                weaponInterceptAlt,
+                weaponInterceptLat,
+                weaponInterceptLon,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() = "ActionsList{actionActorSrcId=$actionActorSrcId, actionActorSrcType=$actionActorSrcType, actionEndTime=$actionEndTime, actionId=$actionId, actionMetrics=$actionMetrics, actionStartTime=$actionStartTime, actorInterceptAlt=$actorInterceptAlt, actorInterceptLat=$actorInterceptLat, actorInterceptLon=$actorInterceptLon, effector=$effector, summary=$summary, targetSrcId=$targetSrcId, targetSrcType=$targetSrcType, totEndTime=$totEndTime, totStartTime=$totStartTime, weaponInterceptAlt=$weaponInterceptAlt, weaponInterceptLat=$weaponInterceptLat, weaponInterceptLon=$weaponInterceptLon, additionalProperties=$additionalProperties}"
+        override fun toString() =
+            "ActionsList{actionActorSrcId=$actionActorSrcId, actionActorSrcType=$actionActorSrcType, actionEndTime=$actionEndTime, actionId=$actionId, actionMetrics=$actionMetrics, actionStartTime=$actionStartTime, actorInterceptAlt=$actorInterceptAlt, actorInterceptLat=$actorInterceptLat, actorInterceptLon=$actorInterceptLon, effector=$effector, summary=$summary, targetSrcId=$targetSrcId, targetSrcType=$targetSrcType, totEndTime=$totEndTime, totStartTime=$totStartTime, weaponInterceptAlt=$weaponInterceptAlt, weaponInterceptLat=$weaponInterceptLat, weaponInterceptLon=$weaponInterceptLon, additionalProperties=$additionalProperties}"
     }
 
-    class CoaMetric private constructor(
+    class CoaMetric
+    private constructor(
         private val domainValue: JsonField<Double>,
         private val metricType: JsonField<String>,
         private val provenance: JsonField<String>,
         private val relativeValue: JsonField<Double>,
         private val additionalProperties: MutableMap<String, JsonValue>,
-
     ) {
 
         @JsonCreator
         private constructor(
-            @JsonProperty("domainValue") @ExcludeMissing domainValue: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("metricType") @ExcludeMissing metricType: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("provenance") @ExcludeMissing provenance: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("relativeValue") @ExcludeMissing relativeValue: JsonField<Double> = JsonMissing.of()
-        ) : this(
-          domainValue,
-          metricType,
-          provenance,
-          relativeValue,
-          mutableMapOf(),
-        )
+            @JsonProperty("domainValue")
+            @ExcludeMissing
+            domainValue: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("metricType")
+            @ExcludeMissing
+            metricType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("provenance")
+            @ExcludeMissing
+            provenance: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("relativeValue")
+            @ExcludeMissing
+            relativeValue: JsonField<Double> = JsonMissing.of(),
+        ) : this(domainValue, metricType, provenance, relativeValue, mutableMapOf())
 
         /**
          * The metric score specific to its domain.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun domainValue(): Optional<Double> = domainValue.getOptional("domainValue")
 
         /**
-         * The type of the metric (e.g. CollateralDamage, GoalAchievement, OpportunityCost, Timeliness, Unavailable, etc.).
+         * The type of the metric (e.g. CollateralDamage, GoalAchievement, OpportunityCost,
+         * Timeliness, Unavailable, etc.).
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun metricType(): Optional<String> = metricType.getOptional("metricType")
 
         /**
          * The metric that was used to score this task.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun provenance(): Optional<String> = provenance.getOptional("provenance")
 
         /**
          * The metric score adjusted to be relative and comparable to other domains.
          *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
          */
         fun relativeValue(): Optional<Double> = relativeValue.getOptional("relativeValue")
 
@@ -2437,7 +2700,8 @@ class EffectResponseListResponse private constructor(
         /**
          * Returns the raw JSON value of [relativeValue].
          *
-         * Unlike [relativeValue], this method doesn't throw if the JSON field has an unexpected type.
+         * Unlike [relativeValue], this method doesn't throw if the JSON field has an unexpected
+         * type.
          */
         @JsonProperty("relativeValue")
         @ExcludeMissing
@@ -2445,20 +2709,20 @@ class EffectResponseListResponse private constructor(
 
         @JsonAnySetter
         private fun putAdditionalProperty(key: String, value: JsonValue) {
-          additionalProperties.put(key, value)
+            additionalProperties.put(key, value)
         }
 
         @JsonAnyGetter
         @ExcludeMissing
-        fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
 
         fun toBuilder() = Builder().from(this)
 
         companion object {
 
             /** Returns a mutable builder for constructing an instance of [CoaMetric]. */
-            @JvmStatic
-            fun builder() = Builder()
+            @JvmStatic fun builder() = Builder()
         }
 
         /** A builder for [CoaMetric]. */
@@ -2471,14 +2735,13 @@ class EffectResponseListResponse private constructor(
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
-            internal fun from(coaMetric: CoaMetric) =
-                apply {
-                    domainValue = coaMetric.domainValue
-                    metricType = coaMetric.metricType
-                    provenance = coaMetric.provenance
-                    relativeValue = coaMetric.relativeValue
-                    additionalProperties = coaMetric.additionalProperties.toMutableMap()
-                }
+            internal fun from(coaMetric: CoaMetric) = apply {
+                domainValue = coaMetric.domainValue
+                metricType = coaMetric.metricType
+                provenance = coaMetric.provenance
+                relativeValue = coaMetric.relativeValue
+                additionalProperties = coaMetric.additionalProperties.toMutableMap()
+            }
 
             /** The metric score specific to its domain. */
             fun domainValue(domainValue: Double) = domainValue(JsonField.of(domainValue))
@@ -2486,27 +2749,28 @@ class EffectResponseListResponse private constructor(
             /**
              * Sets [Builder.domainValue] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.domainValue] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.domainValue] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun domainValue(domainValue: JsonField<Double>) =
-                apply {
-                    this.domainValue = domainValue
-                }
+            fun domainValue(domainValue: JsonField<Double>) = apply {
+                this.domainValue = domainValue
+            }
 
-            /** The type of the metric (e.g. CollateralDamage, GoalAchievement, OpportunityCost, Timeliness, Unavailable, etc.). */
+            /**
+             * The type of the metric (e.g. CollateralDamage, GoalAchievement, OpportunityCost,
+             * Timeliness, Unavailable, etc.).
+             */
             fun metricType(metricType: String) = metricType(JsonField.of(metricType))
 
             /**
              * Sets [Builder.metricType] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.metricType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.metricType] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun metricType(metricType: JsonField<String>) =
-                apply {
-                    this.metricType = metricType
-                }
+            fun metricType(metricType: JsonField<String>) = apply { this.metricType = metricType }
 
             /** The metric that was used to score this task. */
             fun provenance(provenance: String) = provenance(JsonField.of(provenance))
@@ -2514,13 +2778,11 @@ class EffectResponseListResponse private constructor(
             /**
              * Sets [Builder.provenance] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.provenance] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.provenance] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun provenance(provenance: JsonField<String>) =
-                apply {
-                    this.provenance = provenance
-                }
+            fun provenance(provenance: JsonField<String>) = apply { this.provenance = provenance }
 
             /** The metric score adjusted to be relative and comparable to other domains. */
             fun relativeValue(relativeValue: Double) = relativeValue(JsonField.of(relativeValue))
@@ -2528,39 +2790,32 @@ class EffectResponseListResponse private constructor(
             /**
              * Sets [Builder.relativeValue] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.relativeValue] with a well-typed [Double] value instead. This method is primarily for setting the field to an undocumented or not yet
+             * You should usually call [Builder.relativeValue] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
              * supported value.
              */
-            fun relativeValue(relativeValue: JsonField<Double>) =
-                apply {
-                    this.relativeValue = relativeValue
-                }
+            fun relativeValue(relativeValue: JsonField<Double>) = apply {
+                this.relativeValue = relativeValue
+            }
 
-            fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-                apply {
-                    this.additionalProperties.clear()
-                    putAllAdditionalProperties(additionalProperties)
-                }
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
 
-            fun putAdditionalProperty(key: String, value: JsonValue) =
-                apply {
-                    additionalProperties.put(key, value)
-                }
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
 
-            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-                apply {
-                    this.additionalProperties.putAll(additionalProperties)
-                }
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
 
-            fun removeAdditionalProperty(key: String) =
-                apply {
-                    additionalProperties.remove(key)
-                }
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-            fun removeAllAdditionalProperties(keys: Set<String>) =
-                apply {
-                    keys.forEach(::removeAdditionalProperty)
-                }
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
 
             /**
              * Returns an immutable instance of [CoaMetric].
@@ -2569,28 +2824,27 @@ class EffectResponseListResponse private constructor(
              */
             fun build(): CoaMetric =
                 CoaMetric(
-                  domainValue,
-                  metricType,
-                  provenance,
-                  relativeValue,
-                  additionalProperties.toMutableMap(),
+                    domainValue,
+                    metricType,
+                    provenance,
+                    relativeValue,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
         private var validated: Boolean = false
 
-        fun validate(): CoaMetric =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                domainValue()
-                metricType()
-                provenance()
-                relativeValue()
-                validated = true
+        fun validate(): CoaMetric = apply {
+            if (validated) {
+                return@apply
             }
+
+            domainValue()
+            metricType()
+            provenance()
+            relativeValue()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -2601,43 +2855,108 @@ class EffectResponseListResponse private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
         @JvmSynthetic
-        internal fun validity(): Int = (if (domainValue.asKnown().isPresent) 1 else 0) + (if (metricType.asKnown().isPresent) 1 else 0) + (if (provenance.asKnown().isPresent) 1 else 0) + (if (relativeValue.asKnown().isPresent) 1 else 0)
+        internal fun validity(): Int =
+            (if (domainValue.asKnown().isPresent) 1 else 0) +
+                (if (metricType.asKnown().isPresent) 1 else 0) +
+                (if (provenance.asKnown().isPresent) 1 else 0) +
+                (if (relativeValue.asKnown().isPresent) 1 else 0)
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is CoaMetric && domainValue == other.domainValue && metricType == other.metricType && provenance == other.provenance && relativeValue == other.relativeValue && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is CoaMetric &&
+                domainValue == other.domainValue &&
+                metricType == other.metricType &&
+                provenance == other.provenance &&
+                relativeValue == other.relativeValue &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(domainValue, metricType, provenance, relativeValue, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(domainValue, metricType, provenance, relativeValue, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
-        override fun toString() = "CoaMetric{domainValue=$domainValue, metricType=$metricType, provenance=$provenance, relativeValue=$relativeValue, additionalProperties=$additionalProperties}"
+        override fun toString() =
+            "CoaMetric{domainValue=$domainValue, metricType=$metricType, provenance=$provenance, relativeValue=$relativeValue, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is EffectResponseListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && type == other.type && id == other.id && actionsList == other.actionsList && actorSrcId == other.actorSrcId && actorSrcType == other.actorSrcType && coaMetrics == other.coaMetrics && collateralDamageEst == other.collateralDamageEst && createdAt == other.createdAt && createdBy == other.createdBy && decisionDeadline == other.decisionDeadline && externalActions == other.externalActions && externalRequestId == other.externalRequestId && idEffectRequest == other.idEffectRequest && munitionId == other.munitionId && munitionType == other.munitionType && origin == other.origin && origNetwork == other.origNetwork && probabilityOfKill == other.probabilityOfKill && redTargetSrcId == other.redTargetSrcId && redTargetSrcType == other.redTargetSrcType && redTimeToOverhead == other.redTimeToOverhead && shotsRequired == other.shotsRequired && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is EffectResponseListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            type == other.type &&
+            id == other.id &&
+            actionsList == other.actionsList &&
+            actorSrcId == other.actorSrcId &&
+            actorSrcType == other.actorSrcType &&
+            coaMetrics == other.coaMetrics &&
+            collateralDamageEst == other.collateralDamageEst &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            decisionDeadline == other.decisionDeadline &&
+            externalActions == other.externalActions &&
+            externalRequestId == other.externalRequestId &&
+            idEffectRequest == other.idEffectRequest &&
+            munitionId == other.munitionId &&
+            munitionType == other.munitionType &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            probabilityOfKill == other.probabilityOfKill &&
+            redTargetSrcId == other.redTargetSrcId &&
+            redTargetSrcType == other.redTargetSrcType &&
+            redTimeToOverhead == other.redTimeToOverhead &&
+            shotsRequired == other.shotsRequired &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, type, id, actionsList, actorSrcId, actorSrcType, coaMetrics, collateralDamageEst, createdAt, createdBy, decisionDeadline, externalActions, externalRequestId, idEffectRequest, munitionId, munitionType, origin, origNetwork, probabilityOfKill, redTargetSrcId, redTargetSrcType, redTimeToOverhead, shotsRequired, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            type,
+            id,
+            actionsList,
+            actorSrcId,
+            actorSrcType,
+            coaMetrics,
+            collateralDamageEst,
+            createdAt,
+            createdBy,
+            decisionDeadline,
+            externalActions,
+            externalRequestId,
+            idEffectRequest,
+            munitionId,
+            munitionType,
+            origin,
+            origNetwork,
+            probabilityOfKill,
+            redTargetSrcId,
+            redTargetSrcType,
+            redTimeToOverhead,
+            shotsRequired,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() = "EffectResponseListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, type=$type, id=$id, actionsList=$actionsList, actorSrcId=$actorSrcId, actorSrcType=$actorSrcType, coaMetrics=$coaMetrics, collateralDamageEst=$collateralDamageEst, createdAt=$createdAt, createdBy=$createdBy, decisionDeadline=$decisionDeadline, externalActions=$externalActions, externalRequestId=$externalRequestId, idEffectRequest=$idEffectRequest, munitionId=$munitionId, munitionType=$munitionType, origin=$origin, origNetwork=$origNetwork, probabilityOfKill=$probabilityOfKill, redTargetSrcId=$redTargetSrcId, redTargetSrcType=$redTargetSrcType, redTimeToOverhead=$redTimeToOverhead, shotsRequired=$shotsRequired, additionalProperties=$additionalProperties}"
+    override fun toString() =
+        "EffectResponseListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, type=$type, id=$id, actionsList=$actionsList, actorSrcId=$actorSrcId, actorSrcType=$actorSrcType, coaMetrics=$coaMetrics, collateralDamageEst=$collateralDamageEst, createdAt=$createdAt, createdBy=$createdBy, decisionDeadline=$decisionDeadline, externalActions=$externalActions, externalRequestId=$externalRequestId, idEffectRequest=$idEffectRequest, munitionId=$munitionId, munitionType=$munitionType, origin=$origin, origNetwork=$origNetwork, probabilityOfKill=$probabilityOfKill, redTargetSrcId=$redTargetSrcId, redTargetSrcType=$redTargetSrcType, redTimeToOverhead=$redTimeToOverhead, shotsRequired=$shotsRequired, additionalProperties=$additionalProperties}"
 }

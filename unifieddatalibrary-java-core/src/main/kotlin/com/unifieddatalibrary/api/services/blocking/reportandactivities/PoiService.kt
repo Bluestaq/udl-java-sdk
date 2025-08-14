@@ -3,13 +3,14 @@
 package com.unifieddatalibrary.api.services.blocking.reportandactivities
 
 import com.unifieddatalibrary.api.core.ClientOptions
-import com.unifieddatalibrary.api.services.blocking.reportandactivities.PoiService
 import com.unifieddatalibrary.api.services.blocking.reportandactivities.poi.HistoryService
 import java.util.function.Consumer
 
 interface PoiService {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**

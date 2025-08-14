@@ -3,7 +3,6 @@
 package com.unifieddatalibrary.api.models.sgi
 
 import com.unifieddatalibrary.api.core.http.QueryParams
-import com.unifieddatalibrary.api.models.sgi.SgiListParams
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -12,39 +11,43 @@ internal class SgiListParamsTest {
 
     @Test
     fun create() {
-      SgiListParams.builder()
-          .effectiveDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-          .firstResult(0L)
-          .maxResults(0L)
-          .sgiDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-          .build()
+        SgiListParams.builder()
+            .effectiveDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+            .firstResult(0L)
+            .maxResults(0L)
+            .sgiDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+            .build()
     }
 
     @Test
     fun queryParams() {
-      val params = SgiListParams.builder()
-          .effectiveDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-          .firstResult(0L)
-          .maxResults(0L)
-          .sgiDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-          .build()
+        val params =
+            SgiListParams.builder()
+                .effectiveDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .firstResult(0L)
+                .maxResults(0L)
+                .sgiDate(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .build()
 
-      val queryParams = params._queryParams()
+        val queryParams = params._queryParams()
 
-      assertThat(queryParams).isEqualTo(QueryParams.builder()
-          .put("effectiveDate", "2019-12-27T18:11:19.117Z")
-          .put("firstResult", "0")
-          .put("maxResults", "0")
-          .put("sgiDate", "2019-12-27T18:11:19.117Z")
-          .build())
+        assertThat(queryParams)
+            .isEqualTo(
+                QueryParams.builder()
+                    .put("effectiveDate", "2019-12-27T18:11:19.117Z")
+                    .put("firstResult", "0")
+                    .put("maxResults", "0")
+                    .put("sgiDate", "2019-12-27T18:11:19.117Z")
+                    .build()
+            )
     }
 
     @Test
     fun queryParamsWithoutOptionalFields() {
-      val params = SgiListParams.builder().build()
+        val params = SgiListParams.builder().build()
 
-      val queryParams = params._queryParams()
+        val queryParams = params._queryParams()
 
-      assertThat(queryParams).isEqualTo(QueryParams.builder().build())
+        assertThat(queryParams).isEqualTo(QueryParams.builder().build())
     }
 }

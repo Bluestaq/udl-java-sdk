@@ -23,33 +23,35 @@ import com.unifieddatalibrary.api.models.tdoafdoa.diffofarrival.DiffofarrivalCre
 import com.unifieddatalibrary.api.models.tdoafdoa.diffofarrival.DiffofarrivalCreateParams
 import com.unifieddatalibrary.api.models.tdoafdoa.diffofarrival.DiffofarrivalListPage
 import com.unifieddatalibrary.api.models.tdoafdoa.diffofarrival.DiffofarrivalListParams
-import com.unifieddatalibrary.api.services.blocking.tdoafdoa.DiffofarrivalService
-import com.unifieddatalibrary.api.services.blocking.tdoafdoa.DiffofarrivalServiceImpl
 import com.unifieddatalibrary.api.services.blocking.tdoafdoa.diffofarrival.HistoryService
 import com.unifieddatalibrary.api.services.blocking.tdoafdoa.diffofarrival.HistoryServiceImpl
 import java.util.function.Consumer
 
-class DiffofarrivalServiceImpl internal constructor(
-    private val clientOptions: ClientOptions,
+class DiffofarrivalServiceImpl internal constructor(private val clientOptions: ClientOptions) :
+    DiffofarrivalService {
 
-) : DiffofarrivalService {
-
-    private val withRawResponse: DiffofarrivalService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
+    private val withRawResponse: DiffofarrivalService.WithRawResponse by lazy {
+        WithRawResponseImpl(clientOptions)
+    }
 
     private val history: HistoryService by lazy { HistoryServiceImpl(clientOptions) }
 
     override fun withRawResponse(): DiffofarrivalService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): DiffofarrivalService = DiffofarrivalServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): DiffofarrivalService =
+        DiffofarrivalServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun history(): HistoryService = history
 
     override fun create(params: DiffofarrivalCreateParams, requestOptions: RequestOptions) {
-      // post /udl/diffofarrival
-      withRawResponse().create(params, requestOptions)
+        // post /udl/diffofarrival
+        withRawResponse().create(params, requestOptions)
     }
 
-    override fun list(params: DiffofarrivalListParams, requestOptions: RequestOptions): DiffofarrivalListPage =
+    override fun list(
+        params: DiffofarrivalListParams,
+        requestOptions: RequestOptions,
+    ): DiffofarrivalListPage =
         // get /udl/diffofarrival
         withRawResponse().list(params, requestOptions).parse()
 
@@ -58,119 +60,123 @@ class DiffofarrivalServiceImpl internal constructor(
         withRawResponse().count(params, requestOptions).parse()
 
     override fun createBulk(params: DiffofarrivalCreateBulkParams, requestOptions: RequestOptions) {
-      // post /udl/diffofarrival/createBulk
-      withRawResponse().createBulk(params, requestOptions)
+        // post /udl/diffofarrival/createBulk
+        withRawResponse().createBulk(params, requestOptions)
     }
 
-    class WithRawResponseImpl internal constructor(
-        private val clientOptions: ClientOptions,
+    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
+        DiffofarrivalService.WithRawResponse {
 
-    ) : DiffofarrivalService.WithRawResponse {
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+        private val history: HistoryService.WithRawResponse by lazy {
+            HistoryServiceImpl.WithRawResponseImpl(clientOptions)
+        }
 
-        private val history: HistoryService.WithRawResponse by lazy { HistoryServiceImpl.WithRawResponseImpl(clientOptions) }
-
-        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): DiffofarrivalService.WithRawResponse = DiffofarrivalServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+        override fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): DiffofarrivalService.WithRawResponse =
+            DiffofarrivalServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier::accept).build()
+            )
 
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
 
-        override fun create(params: DiffofarrivalCreateParams, requestOptions: RequestOptions): HttpResponse {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.POST)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "diffofarrival")
-            .body(json(clientOptions.jsonMapper, params._body()))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  createHandler.handle(it)
-              }
-          }
+        override fun create(
+            params: DiffofarrivalCreateParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "diffofarrival")
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { createHandler.handle(it) }
+            }
         }
 
-        private val listHandler: Handler<List<DiffofarrivalAbridged>> = jsonHandler<List<DiffofarrivalAbridged>>(clientOptions.jsonMapper)
+        private val listHandler: Handler<List<DiffofarrivalAbridged>> =
+            jsonHandler<List<DiffofarrivalAbridged>>(clientOptions.jsonMapper)
 
-        override fun list(params: DiffofarrivalListParams, requestOptions: RequestOptions): HttpResponseFor<DiffofarrivalListPage> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "diffofarrival")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  listHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.forEach { it.validate() }
-                  }
-              }
-              .let {
-                  DiffofarrivalListPage.builder()
-                      .service(DiffofarrivalServiceImpl(clientOptions))
-                      .params(params)
-                      .items(it)
-                      .build()
-              }
-          }
+        override fun list(
+            params: DiffofarrivalListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<DiffofarrivalListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "diffofarrival")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        DiffofarrivalListPage.builder()
+                            .service(DiffofarrivalServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
         }
 
         private val countHandler: Handler<String> = stringHandler()
 
-        override fun count(params: DiffofarrivalCountParams, requestOptions: RequestOptions): HttpResponseFor<String> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "diffofarrival", "count")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  countHandler.handle(it)
-              }
-          }
+        override fun count(
+            params: DiffofarrivalCountParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<String> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "diffofarrival", "count")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { countHandler.handle(it) }
+            }
         }
 
         private val createBulkHandler: Handler<Void?> = emptyHandler()
 
-        override fun createBulk(params: DiffofarrivalCreateBulkParams, requestOptions: RequestOptions): HttpResponse {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.POST)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "diffofarrival", "createBulk")
-            .body(json(clientOptions.jsonMapper, params._body()))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  createBulkHandler.handle(it)
-              }
-          }
+        override fun createBulk(
+            params: DiffofarrivalCreateBulkParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "diffofarrival", "createBulk")
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { createBulkHandler.handle(it) }
+            }
         }
     }
 }

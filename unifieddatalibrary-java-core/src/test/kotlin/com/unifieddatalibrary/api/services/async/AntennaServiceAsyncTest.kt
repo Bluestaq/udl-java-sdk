@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.services.async
 
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
+import com.unifieddatalibrary.api.models.AntennaIngest
 import com.unifieddatalibrary.api.models.antennas.AntennaCountParams
 import com.unifieddatalibrary.api.models.antennas.AntennaCreateParams
 import com.unifieddatalibrary.api.models.antennas.AntennaRetrieveParams
@@ -29,14 +30,18 @@ internal class AntennaServiceAsyncTest {
         val future =
             antennaServiceAsync.create(
                 AntennaCreateParams.builder()
-                    .dataMode(AntennaCreateParams.DataMode.TEST)
-                    .name("IRIDIUM NEXT 121-ANTENNA-10075")
-                    .source("Bluestaq")
-                    .id("ANTENNA-ID")
-                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                    .createdBy("some.user")
-                    .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .antennaIngest(
+                        AntennaIngest.builder()
+                            .dataMode(AntennaIngest.DataMode.TEST)
+                            .name("IRIDIUM NEXT 121-ANTENNA-10075")
+                            .source("Bluestaq")
+                            .id("ANTENNA-ID")
+                            .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                            .createdBy("some.user")
+                            .origin("THIRD_PARTY_DATASOURCE")
+                            .origNetwork("ORIG")
+                            .build()
+                    )
                     .build()
             )
 
@@ -76,14 +81,18 @@ internal class AntennaServiceAsyncTest {
             antennaServiceAsync.update(
                 AntennaUpdateParams.builder()
                     .pathId("id")
-                    .dataMode(AntennaUpdateParams.DataMode.TEST)
-                    .name("IRIDIUM NEXT 121-ANTENNA-10075")
-                    .source("Bluestaq")
-                    .bodyId("ANTENNA-ID")
-                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                    .createdBy("some.user")
-                    .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .antennaIngest(
+                        AntennaIngest.builder()
+                            .dataMode(AntennaIngest.DataMode.TEST)
+                            .name("IRIDIUM NEXT 121-ANTENNA-10075")
+                            .source("Bluestaq")
+                            .id("ANTENNA-ID")
+                            .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                            .createdBy("some.user")
+                            .origin("THIRD_PARTY_DATASOURCE")
+                            .origNetwork("ORIG")
+                            .build()
+                    )
                     .build()
             )
 

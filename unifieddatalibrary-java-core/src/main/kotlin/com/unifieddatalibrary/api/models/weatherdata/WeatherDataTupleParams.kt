@@ -12,21 +12,35 @@ import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/** Service operation to dynamically query data and only return specified columns/fields. Requested columns are specified by the 'columns' query parameter and should be a comma separated list of valid fields for the specified data type. classificationMarking is always returned. See the queryhelp operation (/udl/<datatype>/queryhelp) for more details on valid/required query parameter information. An example URI: /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours would return the satNo and period of elsets with an epoch greater than 5 hours ago. */
-class WeatherDataTupleParams private constructor(
+/**
+ * Service operation to dynamically query data and only return specified columns/fields. Requested
+ * columns are specified by the 'columns' query parameter and should be a comma separated list of
+ * valid fields for the specified data type. classificationMarking is always returned. See the
+ * queryhelp operation (/udl/<datatype>/queryhelp) for more details on valid/required query
+ * parameter information. An example URI: /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours
+ * would return the satNo and period of elsets with an epoch greater than 5 hours ago.
+ */
+class WeatherDataTupleParams
+private constructor(
     private val columns: String,
     private val obTime: OffsetDateTime,
     private val firstResult: Long?,
     private val maxResults: Long?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
-
 ) : Params {
 
-    /** Comma-separated list of valid field names for this data type to be returned in the response. Only the fields specified will be returned as well as the classification marking of the data, if applicable. See the ‘queryhelp’ operation for a complete list of possible fields. */
+    /**
+     * Comma-separated list of valid field names for this data type to be returned in the response.
+     * Only the fields specified will be returned as well as the classification marking of the data,
+     * if applicable. See the ‘queryhelp’ operation for a complete list of possible fields.
+     */
     fun columns(): String = columns
 
-    /** Datetime of the weather observation in ISO 8601 UTC datetime format with microsecond precision. (YYYY-MM-DDTHH:MM:SS.ssssssZ) */
+    /**
+     * Datetime of the weather observation in ISO 8601 UTC datetime format with microsecond
+     * precision. (YYYY-MM-DDTHH:MM:SS.ssssssZ)
+     */
     fun obTime(): OffsetDateTime = obTime
 
     fun firstResult(): Optional<Long> = Optional.ofNullable(firstResult)
@@ -47,14 +61,12 @@ class WeatherDataTupleParams private constructor(
          * Returns a mutable builder for constructing an instance of [WeatherDataTupleParams].
          *
          * The following fields are required:
-         *
          * ```java
          * .columns()
          * .obTime()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [WeatherDataTupleParams]. */
@@ -68,32 +80,30 @@ class WeatherDataTupleParams private constructor(
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(weatherDataTupleParams: WeatherDataTupleParams) =
-            apply {
-                columns = weatherDataTupleParams.columns
-                obTime = weatherDataTupleParams.obTime
-                firstResult = weatherDataTupleParams.firstResult
-                maxResults = weatherDataTupleParams.maxResults
-                additionalHeaders = weatherDataTupleParams.additionalHeaders.toBuilder()
-                additionalQueryParams = weatherDataTupleParams.additionalQueryParams.toBuilder()
-            }
+        internal fun from(weatherDataTupleParams: WeatherDataTupleParams) = apply {
+            columns = weatherDataTupleParams.columns
+            obTime = weatherDataTupleParams.obTime
+            firstResult = weatherDataTupleParams.firstResult
+            maxResults = weatherDataTupleParams.maxResults
+            additionalHeaders = weatherDataTupleParams.additionalHeaders.toBuilder()
+            additionalQueryParams = weatherDataTupleParams.additionalQueryParams.toBuilder()
+        }
 
-        /** Comma-separated list of valid field names for this data type to be returned in the response. Only the fields specified will be returned as well as the classification marking of the data, if applicable. See the ‘queryhelp’ operation for a complete list of possible fields. */
-        fun columns(columns: String) =
-            apply {
-                this.columns = columns
-            }
+        /**
+         * Comma-separated list of valid field names for this data type to be returned in the
+         * response. Only the fields specified will be returned as well as the classification
+         * marking of the data, if applicable. See the ‘queryhelp’ operation for a complete list of
+         * possible fields.
+         */
+        fun columns(columns: String) = apply { this.columns = columns }
 
-        /** Datetime of the weather observation in ISO 8601 UTC datetime format with microsecond precision. (YYYY-MM-DDTHH:MM:SS.ssssssZ) */
-        fun obTime(obTime: OffsetDateTime) =
-            apply {
-                this.obTime = obTime
-            }
+        /**
+         * Datetime of the weather observation in ISO 8601 UTC datetime format with microsecond
+         * precision. (YYYY-MM-DDTHH:MM:SS.ssssssZ)
+         */
+        fun obTime(obTime: OffsetDateTime) = apply { this.obTime = obTime }
 
-        fun firstResult(firstResult: Long?) =
-            apply {
-                this.firstResult = firstResult
-            }
+        fun firstResult(firstResult: Long?) = apply { this.firstResult = firstResult }
 
         /**
          * Alias for [Builder.firstResult].
@@ -105,10 +115,7 @@ class WeatherDataTupleParams private constructor(
         /** Alias for calling [Builder.firstResult] with `firstResult.orElse(null)`. */
         fun firstResult(firstResult: Optional<Long>) = firstResult(firstResult.getOrNull())
 
-        fun maxResults(maxResults: Long?) =
-            apply {
-                this.maxResults = maxResults
-            }
+        fun maxResults(maxResults: Long?) = apply { this.maxResults = maxResults }
 
         /**
          * Alias for [Builder.maxResults].
@@ -120,129 +127,103 @@ class WeatherDataTupleParams private constructor(
         /** Alias for calling [Builder.maxResults] with `maxResults.orElse(null)`. */
         fun maxResults(maxResults: Optional<Long>) = maxResults(maxResults.getOrNull())
 
-        fun additionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.clear()
-                putAllAdditionalHeaders(additionalHeaders)
-            }
+        fun additionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.clear()
+            putAllAdditionalHeaders(additionalHeaders)
+        }
 
-        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.clear()
-                putAllAdditionalHeaders(additionalHeaders)
-            }
+        fun additionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.clear()
+            putAllAdditionalHeaders(additionalHeaders)
+        }
 
-        fun putAdditionalHeader(name: String, value: String) =
-            apply {
-                additionalHeaders.put(name, value)
-            }
+        fun putAdditionalHeader(name: String, value: String) = apply {
+            additionalHeaders.put(name, value)
+        }
 
-        fun putAdditionalHeaders(name: String, values: Iterable<String>) =
-            apply {
-                additionalHeaders.put(name, values)
-            }
+        fun putAdditionalHeaders(name: String, values: Iterable<String>) = apply {
+            additionalHeaders.put(name, values)
+        }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.putAll(additionalHeaders)
-            }
+        fun putAllAdditionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.putAll(additionalHeaders)
+        }
 
-        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.putAll(additionalHeaders)
-            }
+        fun putAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.putAll(additionalHeaders)
+        }
 
-        fun replaceAdditionalHeaders(name: String, value: String) =
-            apply {
-                additionalHeaders.replace(name, value)
-            }
+        fun replaceAdditionalHeaders(name: String, value: String) = apply {
+            additionalHeaders.replace(name, value)
+        }
 
-        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) =
-            apply {
-                additionalHeaders.replace(name, values)
-            }
+        fun replaceAdditionalHeaders(name: String, values: Iterable<String>) = apply {
+            additionalHeaders.replace(name, values)
+        }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) =
-            apply {
-                this.additionalHeaders.replaceAll(additionalHeaders)
-            }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Headers) = apply {
+            this.additionalHeaders.replaceAll(additionalHeaders)
+        }
 
-        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalHeaders.replaceAll(additionalHeaders)
-            }
+        fun replaceAllAdditionalHeaders(additionalHeaders: Map<String, Iterable<String>>) = apply {
+            this.additionalHeaders.replaceAll(additionalHeaders)
+        }
 
-        fun removeAdditionalHeaders(name: String) =
-            apply {
-                additionalHeaders.remove(name)
-            }
+        fun removeAdditionalHeaders(name: String) = apply { additionalHeaders.remove(name) }
 
-        fun removeAllAdditionalHeaders(names: Set<String>) =
-            apply {
-                additionalHeaders.removeAll(names)
-            }
+        fun removeAllAdditionalHeaders(names: Set<String>) = apply {
+            additionalHeaders.removeAll(names)
+        }
 
-        fun additionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.clear()
-                putAllAdditionalQueryParams(additionalQueryParams)
-            }
+        fun additionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.clear()
+            putAllAdditionalQueryParams(additionalQueryParams)
+        }
 
-        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
-            apply {
-                this.additionalQueryParams.clear()
-                putAllAdditionalQueryParams(additionalQueryParams)
-            }
+        fun additionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) = apply {
+            this.additionalQueryParams.clear()
+            putAllAdditionalQueryParams(additionalQueryParams)
+        }
 
-        fun putAdditionalQueryParam(key: String, value: String) =
-            apply {
-                additionalQueryParams.put(key, value)
-            }
+        fun putAdditionalQueryParam(key: String, value: String) = apply {
+            additionalQueryParams.put(key, value)
+        }
 
-        fun putAdditionalQueryParams(key: String, values: Iterable<String>) =
-            apply {
-                additionalQueryParams.put(key, values)
-            }
+        fun putAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
+            additionalQueryParams.put(key, values)
+        }
 
-        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.putAll(additionalQueryParams)
-            }
+        fun putAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.putAll(additionalQueryParams)
+        }
 
         fun putAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.putAll(additionalQueryParams)
             }
 
-        fun replaceAdditionalQueryParams(key: String, value: String) =
-            apply {
-                additionalQueryParams.replace(key, value)
-            }
+        fun replaceAdditionalQueryParams(key: String, value: String) = apply {
+            additionalQueryParams.replace(key, value)
+        }
 
-        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) =
-            apply {
-                additionalQueryParams.replace(key, values)
-            }
+        fun replaceAdditionalQueryParams(key: String, values: Iterable<String>) = apply {
+            additionalQueryParams.replace(key, values)
+        }
 
-        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) =
-            apply {
-                this.additionalQueryParams.replaceAll(additionalQueryParams)
-            }
+        fun replaceAllAdditionalQueryParams(additionalQueryParams: QueryParams) = apply {
+            this.additionalQueryParams.replaceAll(additionalQueryParams)
+        }
 
         fun replaceAllAdditionalQueryParams(additionalQueryParams: Map<String, Iterable<String>>) =
             apply {
                 this.additionalQueryParams.replaceAll(additionalQueryParams)
             }
 
-        fun removeAdditionalQueryParams(key: String) =
-            apply {
-                additionalQueryParams.remove(key)
-            }
+        fun removeAdditionalQueryParams(key: String) = apply { additionalQueryParams.remove(key) }
 
-        fun removeAllAdditionalQueryParams(keys: Set<String>) =
-            apply {
-                additionalQueryParams.removeAll(keys)
-            }
+        fun removeAllAdditionalQueryParams(keys: Set<String>) = apply {
+            additionalQueryParams.removeAll(keys)
+        }
 
         /**
          * Returns an immutable instance of [WeatherDataTupleParams].
@@ -250,7 +231,6 @@ class WeatherDataTupleParams private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .columns()
          * .obTime()
@@ -260,16 +240,12 @@ class WeatherDataTupleParams private constructor(
          */
         fun build(): WeatherDataTupleParams =
             WeatherDataTupleParams(
-              checkRequired(
-                "columns", columns
-              ),
-              checkRequired(
-                "obTime", obTime
-              ),
-              firstResult,
-              maxResults,
-              additionalHeaders.build(),
-              additionalQueryParams.build(),
+                checkRequired("columns", columns),
+                checkRequired("obTime", obTime),
+                firstResult,
+                maxResults,
+                additionalHeaders.build(),
+                additionalQueryParams.build(),
             )
     }
 
@@ -287,14 +263,29 @@ class WeatherDataTupleParams private constructor(
             .build()
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is WeatherDataTupleParams && columns == other.columns && obTime == other.obTime && firstResult == other.firstResult && maxResults == other.maxResults && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is WeatherDataTupleParams &&
+            columns == other.columns &&
+            obTime == other.obTime &&
+            firstResult == other.firstResult &&
+            maxResults == other.maxResults &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(columns, obTime, firstResult, maxResults, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            columns,
+            obTime,
+            firstResult,
+            maxResults,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
-    override fun toString() = "WeatherDataTupleParams{columns=$columns, obTime=$obTime, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+    override fun toString() =
+        "WeatherDataTupleParams{columns=$columns, obTime=$obTime, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

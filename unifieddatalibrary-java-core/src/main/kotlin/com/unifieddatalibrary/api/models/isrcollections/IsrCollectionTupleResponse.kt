@@ -1727,7 +1727,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3400,12 +3400,16 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is Actual && id == other.id && start == other.start && stop == other.stop && additionalProperties == other.additionalProperties /* spotless:on */
+                    return other is Actual &&
+                        id == other.id &&
+                        start == other.start &&
+                        stop == other.stop &&
+                        additionalProperties == other.additionalProperties
                 }
 
-                /* spotless:off */
-                private val hashCode: Int by lazy { Objects.hash(id, start, stop, additionalProperties) }
-                /* spotless:on */
+                private val hashCode: Int by lazy {
+                    Objects.hash(id, start, stop, additionalProperties)
+                }
 
                 override fun hashCode(): Int = hashCode
 
@@ -3855,12 +3859,16 @@ private constructor(
                             return true
                         }
 
-                        return /* spotless:off */ other is Additional && id == other.id && start == other.start && stop == other.stop && additionalProperties == other.additionalProperties /* spotless:on */
+                        return other is Additional &&
+                            id == other.id &&
+                            start == other.start &&
+                            stop == other.stop &&
+                            additionalProperties == other.additionalProperties
                     }
 
-                    /* spotless:off */
-                    private val hashCode: Int by lazy { Objects.hash(id, start, stop, additionalProperties) }
-                    /* spotless:on */
+                    private val hashCode: Int by lazy {
+                        Objects.hash(id, start, stop, additionalProperties)
+                    }
 
                     override fun hashCode(): Int = hashCode
 
@@ -3873,12 +3881,16 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is Planned && additional == other.additional && start == other.start && stop == other.stop && additionalProperties == other.additionalProperties /* spotless:on */
+                    return other is Planned &&
+                        additional == other.additional &&
+                        start == other.start &&
+                        stop == other.stop &&
+                        additionalProperties == other.additionalProperties
                 }
 
-                /* spotless:off */
-                private val hashCode: Int by lazy { Objects.hash(additional, start, stop, additionalProperties) }
-                /* spotless:on */
+                private val hashCode: Int by lazy {
+                    Objects.hash(additional, start, stop, additionalProperties)
+                }
 
                 override fun hashCode(): Int = hashCode
 
@@ -3891,12 +3903,15 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is CollectionPeriods && actual == other.actual && planned == other.planned && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is CollectionPeriods &&
+                    actual == other.actual &&
+                    planned == other.planned &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(actual, planned, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(actual, planned, additionalProperties)
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -4056,7 +4071,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is CollectionType && value == other.value /* spotless:on */
+                return other is CollectionType && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -4196,7 +4211,7 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Type && value == other.value /* spotless:on */
+                return other is Type && value == other.value
             }
 
             override fun hashCode() = value.hashCode()
@@ -4209,12 +4224,69 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Tasking && id == other.id && collectionPeriods == other.collectionPeriods && collectionType == other.collectionType && eightLine == other.eightLine && specialComGuidance == other.specialComGuidance && sroTrack == other.sroTrack && taskingAor == other.taskingAor && taskingCollectionArea == other.taskingCollectionArea && taskingCollectionRequirements == other.taskingCollectionRequirements && taskingCountry == other.taskingCountry && taskingEmphasis == other.taskingEmphasis && taskingJoa == other.taskingJoa && taskingOperation == other.taskingOperation && taskingPrimaryIntelDiscipline == other.taskingPrimaryIntelDiscipline && taskingPrimarySubCategory == other.taskingPrimarySubCategory && taskingPriority == other.taskingPriority && taskingRegion == other.taskingRegion && taskingRetaskTime == other.taskingRetaskTime && taskingRole == other.taskingRole && taskingSecondaryIntelDiscipline == other.taskingSecondaryIntelDiscipline && taskingSecondarySubCategory == other.taskingSecondarySubCategory && taskingStartPointLat == other.taskingStartPointLat && taskingStartPointLong == other.taskingStartPointLong && taskingSubRegion == other.taskingSubRegion && taskingSupportedUnit == other.taskingSupportedUnit && taskingSyncMatrixBin == other.taskingSyncMatrixBin && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Tasking &&
+                id == other.id &&
+                collectionPeriods == other.collectionPeriods &&
+                collectionType == other.collectionType &&
+                eightLine == other.eightLine &&
+                specialComGuidance == other.specialComGuidance &&
+                sroTrack == other.sroTrack &&
+                taskingAor == other.taskingAor &&
+                taskingCollectionArea == other.taskingCollectionArea &&
+                taskingCollectionRequirements == other.taskingCollectionRequirements &&
+                taskingCountry == other.taskingCountry &&
+                taskingEmphasis == other.taskingEmphasis &&
+                taskingJoa == other.taskingJoa &&
+                taskingOperation == other.taskingOperation &&
+                taskingPrimaryIntelDiscipline == other.taskingPrimaryIntelDiscipline &&
+                taskingPrimarySubCategory == other.taskingPrimarySubCategory &&
+                taskingPriority == other.taskingPriority &&
+                taskingRegion == other.taskingRegion &&
+                taskingRetaskTime == other.taskingRetaskTime &&
+                taskingRole == other.taskingRole &&
+                taskingSecondaryIntelDiscipline == other.taskingSecondaryIntelDiscipline &&
+                taskingSecondarySubCategory == other.taskingSecondarySubCategory &&
+                taskingStartPointLat == other.taskingStartPointLat &&
+                taskingStartPointLong == other.taskingStartPointLong &&
+                taskingSubRegion == other.taskingSubRegion &&
+                taskingSupportedUnit == other.taskingSupportedUnit &&
+                taskingSyncMatrixBin == other.taskingSyncMatrixBin &&
+                type == other.type &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(id, collectionPeriods, collectionType, eightLine, specialComGuidance, sroTrack, taskingAor, taskingCollectionArea, taskingCollectionRequirements, taskingCountry, taskingEmphasis, taskingJoa, taskingOperation, taskingPrimaryIntelDiscipline, taskingPrimarySubCategory, taskingPriority, taskingRegion, taskingRetaskTime, taskingRole, taskingSecondaryIntelDiscipline, taskingSecondarySubCategory, taskingStartPointLat, taskingStartPointLong, taskingSubRegion, taskingSupportedUnit, taskingSyncMatrixBin, type, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                id,
+                collectionPeriods,
+                collectionType,
+                eightLine,
+                specialComGuidance,
+                sroTrack,
+                taskingAor,
+                taskingCollectionArea,
+                taskingCollectionRequirements,
+                taskingCountry,
+                taskingEmphasis,
+                taskingJoa,
+                taskingOperation,
+                taskingPrimaryIntelDiscipline,
+                taskingPrimarySubCategory,
+                taskingPriority,
+                taskingRegion,
+                taskingRetaskTime,
+                taskingRole,
+                taskingSecondaryIntelDiscipline,
+                taskingSecondarySubCategory,
+                taskingStartPointLat,
+                taskingStartPointLong,
+                taskingSubRegion,
+                taskingSupportedUnit,
+                taskingSyncMatrixBin,
+                type,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4417,12 +4489,14 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Transit && id == other.id && base == other.base && duration == other.duration && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Transit &&
+                id == other.id &&
+                base == other.base &&
+                duration == other.duration &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
         private val hashCode: Int by lazy { Objects.hash(id, base, duration, additionalProperties) }
-        /* spotless:on */
 
         override fun hashCode(): Int = hashCode
 
@@ -4435,12 +4509,83 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is IsrCollectionTupleResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && source == other.source && id == other.id && collectionRequirements == other.collectionRequirements && createdAt == other.createdAt && createdBy == other.createdBy && idexVersion == other.idexVersion && missionAor == other.missionAor && missionCollectionArea == other.missionCollectionArea && missionCountry == other.missionCountry && missionEmphasis == other.missionEmphasis && missionId == other.missionId && missionJoa == other.missionJoa && missionOperation == other.missionOperation && missionPrimaryIntelDiscipline == other.missionPrimaryIntelDiscipline && missionPrimarySubCategory == other.missionPrimarySubCategory && missionPriority == other.missionPriority && missionRegion == other.missionRegion && missionRole == other.missionRole && missionSecondaryIntelDiscipline == other.missionSecondaryIntelDiscipline && missionSecondarySubCategory == other.missionSecondarySubCategory && missionStartPointLat == other.missionStartPointLat && missionStartPointLong == other.missionStartPointLong && missionSubRegion == other.missionSubRegion && missionSupportedUnit == other.missionSupportedUnit && missionSyncMatrixBin == other.missionSyncMatrixBin && name == other.name && origin == other.origin && origNetwork == other.origNetwork && taskings == other.taskings && transit == other.transit && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is IsrCollectionTupleResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            source == other.source &&
+            id == other.id &&
+            collectionRequirements == other.collectionRequirements &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            idexVersion == other.idexVersion &&
+            missionAor == other.missionAor &&
+            missionCollectionArea == other.missionCollectionArea &&
+            missionCountry == other.missionCountry &&
+            missionEmphasis == other.missionEmphasis &&
+            missionId == other.missionId &&
+            missionJoa == other.missionJoa &&
+            missionOperation == other.missionOperation &&
+            missionPrimaryIntelDiscipline == other.missionPrimaryIntelDiscipline &&
+            missionPrimarySubCategory == other.missionPrimarySubCategory &&
+            missionPriority == other.missionPriority &&
+            missionRegion == other.missionRegion &&
+            missionRole == other.missionRole &&
+            missionSecondaryIntelDiscipline == other.missionSecondaryIntelDiscipline &&
+            missionSecondarySubCategory == other.missionSecondarySubCategory &&
+            missionStartPointLat == other.missionStartPointLat &&
+            missionStartPointLong == other.missionStartPointLong &&
+            missionSubRegion == other.missionSubRegion &&
+            missionSupportedUnit == other.missionSupportedUnit &&
+            missionSyncMatrixBin == other.missionSyncMatrixBin &&
+            name == other.name &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            taskings == other.taskings &&
+            transit == other.transit &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, source, id, collectionRequirements, createdAt, createdBy, idexVersion, missionAor, missionCollectionArea, missionCountry, missionEmphasis, missionId, missionJoa, missionOperation, missionPrimaryIntelDiscipline, missionPrimarySubCategory, missionPriority, missionRegion, missionRole, missionSecondaryIntelDiscipline, missionSecondarySubCategory, missionStartPointLat, missionStartPointLong, missionSubRegion, missionSupportedUnit, missionSyncMatrixBin, name, origin, origNetwork, taskings, transit, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            source,
+            id,
+            collectionRequirements,
+            createdAt,
+            createdBy,
+            idexVersion,
+            missionAor,
+            missionCollectionArea,
+            missionCountry,
+            missionEmphasis,
+            missionId,
+            missionJoa,
+            missionOperation,
+            missionPrimaryIntelDiscipline,
+            missionPrimarySubCategory,
+            missionPriority,
+            missionRegion,
+            missionRole,
+            missionSecondaryIntelDiscipline,
+            missionSecondarySubCategory,
+            missionStartPointLat,
+            missionStartPointLong,
+            missionSubRegion,
+            missionSupportedUnit,
+            missionSyncMatrixBin,
+            name,
+            origin,
+            origNetwork,
+            taskings,
+            transit,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

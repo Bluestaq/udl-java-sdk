@@ -19,13 +19,14 @@ import com.unifieddatalibrary.api.models.sensor.SensorQueryhelpResponse
 import com.unifieddatalibrary.api.models.sensor.SensorTupleParams
 import com.unifieddatalibrary.api.models.sensor.SensorTupleResponse
 import com.unifieddatalibrary.api.models.sensor.SensorUpdateParams
-import com.unifieddatalibrary.api.services.blocking.SensorService
 import com.unifieddatalibrary.api.services.blocking.sensor.CalibrationService
 import java.util.function.Consumer
 
 interface SensorService {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -37,180 +38,172 @@ interface SensorService {
 
     fun calibration(): CalibrationService
 
-    /** Service operation to take a single sensor as a POST body and ingest into the database. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
-    fun create(params: SensorCreateParams) =
-        create(
-          params, RequestOptions.none()
-        )
+    /**
+     * Service operation to take a single sensor as a POST body and ingest into the database. A
+     * specific role is required to perform this service operation. Please contact the UDL team for
+     * assistance.
+     */
+    fun create(params: SensorCreateParams) = create(params, RequestOptions.none())
 
     /** @see create */
     fun create(params: SensorCreateParams, requestOptions: RequestOptions = RequestOptions.none())
 
-    /** Service operation to update a single Sensor. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
-    fun update(id: String, params: SensorUpdateParams) =
-        update(
-          id,
-          params,
-          RequestOptions.none(),
-        )
+    /**
+     * Service operation to update a single Sensor. A specific role is required to perform this
+     * service operation. Please contact the UDL team for assistance.
+     */
+    fun update(id: String, params: SensorUpdateParams) = update(id, params, RequestOptions.none())
 
     /** @see update */
-    fun update(id: String, params: SensorUpdateParams, requestOptions: RequestOptions = RequestOptions.none()) =
-        update(
-          params.toBuilder()
-              .id(id)
-              .build(), requestOptions
-        )
+    fun update(
+        id: String,
+        params: SensorUpdateParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = update(params.toBuilder().id(id).build(), requestOptions)
 
     /** @see update */
-    fun update(params: SensorUpdateParams) =
-        update(
-          params, RequestOptions.none()
-        )
+    fun update(params: SensorUpdateParams) = update(params, RequestOptions.none())
 
     /** @see update */
     fun update(params: SensorUpdateParams, requestOptions: RequestOptions = RequestOptions.none())
 
-    /** Service operation to dynamically query data by a variety of query parameters not specified in this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
+    /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
     fun list(): SensorListPage = list(SensorListParams.none())
 
     /** @see list */
-    fun list(params: SensorListParams = SensorListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): SensorListPage
+    fun list(
+        params: SensorListParams = SensorListParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): SensorListPage
 
     /** @see list */
     fun list(params: SensorListParams = SensorListParams.none()): SensorListPage =
-        list(
-          params, RequestOptions.none()
-        )
+        list(params, RequestOptions.none())
 
     /** @see list */
     fun list(requestOptions: RequestOptions): SensorListPage =
-        list(
-          SensorListParams.none(), requestOptions
-        )
+        list(SensorListParams.none(), requestOptions)
 
-    /** Service operation to delete a Sensor specified by the passed ID path parameter. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
-    fun delete(id: String) =
-        delete(
-          id, SensorDeleteParams.none()
-        )
+    /**
+     * Service operation to delete a Sensor specified by the passed ID path parameter. A specific
+     * role is required to perform this service operation. Please contact the UDL team for
+     * assistance.
+     */
+    fun delete(id: String) = delete(id, SensorDeleteParams.none())
 
     /** @see delete */
-    fun delete(id: String, params: SensorDeleteParams = SensorDeleteParams.none(), requestOptions: RequestOptions = RequestOptions.none()) =
-        delete(
-          params.toBuilder()
-              .id(id)
-              .build(), requestOptions
-        )
+    fun delete(
+        id: String,
+        params: SensorDeleteParams = SensorDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = delete(params.toBuilder().id(id).build(), requestOptions)
 
     /** @see delete */
     fun delete(id: String, params: SensorDeleteParams = SensorDeleteParams.none()) =
-        delete(
-          id,
-          params,
-          RequestOptions.none(),
-        )
+        delete(id, params, RequestOptions.none())
 
     /** @see delete */
     fun delete(params: SensorDeleteParams, requestOptions: RequestOptions = RequestOptions.none())
 
     /** @see delete */
-    fun delete(params: SensorDeleteParams) =
-        delete(
-          params, RequestOptions.none()
-        )
+    fun delete(params: SensorDeleteParams) = delete(params, RequestOptions.none())
 
     /** @see delete */
     fun delete(id: String, requestOptions: RequestOptions) =
-        delete(
-          id,
-          SensorDeleteParams.none(),
-          requestOptions,
-        )
+        delete(id, SensorDeleteParams.none(), requestOptions)
 
-    /** Service operation to return the count of records satisfying the specified query parameters. This operation is useful to determine how many records pass a particular query criteria without retrieving large amounts of data. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
+    /**
+     * Service operation to return the count of records satisfying the specified query parameters.
+     * This operation is useful to determine how many records pass a particular query criteria
+     * without retrieving large amounts of data. See the queryhelp operation
+     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
+     * information.
+     */
     fun count(): String = count(SensorCountParams.none())
 
     /** @see count */
-    fun count(params: SensorCountParams = SensorCountParams.none(), requestOptions: RequestOptions = RequestOptions.none()): String
+    fun count(
+        params: SensorCountParams = SensorCountParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): String
 
     /** @see count */
     fun count(params: SensorCountParams = SensorCountParams.none()): String =
-        count(
-          params, RequestOptions.none()
-        )
+        count(params, RequestOptions.none())
 
     /** @see count */
     fun count(requestOptions: RequestOptions): String =
-        count(
-          SensorCountParams.none(), requestOptions
-        )
+        count(SensorCountParams.none(), requestOptions)
 
     /** Service operation to get a single Sensor by its unique ID passed as a path parameter. */
-    fun get(id: String): SensorGetResponse =
-        get(
-          id, SensorGetParams.none()
-        )
+    fun get(id: String): SensorGetResponse = get(id, SensorGetParams.none())
 
     /** @see get */
-    fun get(id: String, params: SensorGetParams = SensorGetParams.none(), requestOptions: RequestOptions = RequestOptions.none()): SensorGetResponse =
-        get(
-          params.toBuilder()
-              .id(id)
-              .build(), requestOptions
-        )
+    fun get(
+        id: String,
+        params: SensorGetParams = SensorGetParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): SensorGetResponse = get(params.toBuilder().id(id).build(), requestOptions)
 
     /** @see get */
     fun get(id: String, params: SensorGetParams = SensorGetParams.none()): SensorGetResponse =
-        get(
-          id,
-          params,
-          RequestOptions.none(),
-        )
+        get(id, params, RequestOptions.none())
 
     /** @see get */
-    fun get(params: SensorGetParams, requestOptions: RequestOptions = RequestOptions.none()): SensorGetResponse
+    fun get(
+        params: SensorGetParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): SensorGetResponse
 
     /** @see get */
-    fun get(params: SensorGetParams): SensorGetResponse =
-        get(
-          params, RequestOptions.none()
-        )
+    fun get(params: SensorGetParams): SensorGetResponse = get(params, RequestOptions.none())
 
     /** @see get */
     fun get(id: String, requestOptions: RequestOptions): SensorGetResponse =
-        get(
-          id,
-          SensorGetParams.none(),
-          requestOptions,
-        )
+        get(id, SensorGetParams.none(), requestOptions)
 
-    /** Service operation to provide detailed information on available dynamic query parameters for a particular data type. */
+    /**
+     * Service operation to provide detailed information on available dynamic query parameters for a
+     * particular data type.
+     */
     fun queryhelp(): SensorQueryhelpResponse = queryhelp(SensorQueryhelpParams.none())
 
     /** @see queryhelp */
-    fun queryhelp(params: SensorQueryhelpParams = SensorQueryhelpParams.none(), requestOptions: RequestOptions = RequestOptions.none()): SensorQueryhelpResponse
+    fun queryhelp(
+        params: SensorQueryhelpParams = SensorQueryhelpParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): SensorQueryhelpResponse
 
     /** @see queryhelp */
-    fun queryhelp(params: SensorQueryhelpParams = SensorQueryhelpParams.none()): SensorQueryhelpResponse =
-        queryhelp(
-          params, RequestOptions.none()
-        )
+    fun queryhelp(
+        params: SensorQueryhelpParams = SensorQueryhelpParams.none()
+    ): SensorQueryhelpResponse = queryhelp(params, RequestOptions.none())
 
     /** @see queryhelp */
     fun queryhelp(requestOptions: RequestOptions): SensorQueryhelpResponse =
-        queryhelp(
-          SensorQueryhelpParams.none(), requestOptions
-        )
+        queryhelp(SensorQueryhelpParams.none(), requestOptions)
 
-    /** Service operation to dynamically query data and only return specified columns/fields. Requested columns are specified by the 'columns' query parameter and should be a comma separated list of valid fields for the specified data type. classificationMarking is always returned. See the queryhelp operation (/udl/<datatype>/queryhelp) for more details on valid/required query parameter information. An example URI: /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours would return the satNo and period of elsets with an epoch greater than 5 hours ago. */
+    /**
+     * Service operation to dynamically query data and only return specified columns/fields.
+     * Requested columns are specified by the 'columns' query parameter and should be a comma
+     * separated list of valid fields for the specified data type. classificationMarking is always
+     * returned. See the queryhelp operation (/udl/<datatype>/queryhelp) for more details on
+     * valid/required query parameter information. An example URI:
+     * /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours would return the satNo and period of
+     * elsets with an epoch greater than 5 hours ago.
+     */
     fun tuple(params: SensorTupleParams): List<SensorTupleResponse> =
-        tuple(
-          params, RequestOptions.none()
-        )
+        tuple(params, RequestOptions.none())
 
     /** @see tuple */
-    fun tuple(params: SensorTupleParams, requestOptions: RequestOptions = RequestOptions.none()): List<SensorTupleResponse>
+    fun tuple(
+        params: SensorTupleParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): List<SensorTupleResponse>
 
     /** A view of [SensorService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -224,211 +217,210 @@ interface SensorService {
 
         fun calibration(): CalibrationService.WithRawResponse
 
-        /** Returns a raw HTTP response for `post /udl/sensor`, but is otherwise the same as [SensorService.create]. */
+        /**
+         * Returns a raw HTTP response for `post /udl/sensor`, but is otherwise the same as
+         * [SensorService.create].
+         */
         @MustBeClosed
-        fun create(params: SensorCreateParams): HttpResponse =
-            create(
-              params, RequestOptions.none()
-            )
+        fun create(params: SensorCreateParams): HttpResponse = create(params, RequestOptions.none())
 
         /** @see create */
         @MustBeClosed
-        fun create(params: SensorCreateParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponse
+        fun create(
+            params: SensorCreateParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse
 
-        /** Returns a raw HTTP response for `put /udl/sensor/{id}`, but is otherwise the same as [SensorService.update]. */
+        /**
+         * Returns a raw HTTP response for `put /udl/sensor/{id}`, but is otherwise the same as
+         * [SensorService.update].
+         */
         @MustBeClosed
         fun update(id: String, params: SensorUpdateParams): HttpResponse =
-            update(
-              id,
-              params,
-              RequestOptions.none(),
-            )
+            update(id, params, RequestOptions.none())
 
         /** @see update */
         @MustBeClosed
-        fun update(id: String, params: SensorUpdateParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponse =
-            update(
-              params.toBuilder()
-                  .id(id)
-                  .build(), requestOptions
-            )
+        fun update(
+            id: String,
+            params: SensorUpdateParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse = update(params.toBuilder().id(id).build(), requestOptions)
 
         /** @see update */
         @MustBeClosed
-        fun update(params: SensorUpdateParams): HttpResponse =
-            update(
-              params, RequestOptions.none()
-            )
+        fun update(params: SensorUpdateParams): HttpResponse = update(params, RequestOptions.none())
 
         /** @see update */
         @MustBeClosed
-        fun update(params: SensorUpdateParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponse
+        fun update(
+            params: SensorUpdateParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse
 
-        /** Returns a raw HTTP response for `get /udl/sensor`, but is otherwise the same as [SensorService.list]. */
-        @MustBeClosed
-        fun list(): HttpResponseFor<SensorListPage> = list(SensorListParams.none())
+        /**
+         * Returns a raw HTTP response for `get /udl/sensor`, but is otherwise the same as
+         * [SensorService.list].
+         */
+        @MustBeClosed fun list(): HttpResponseFor<SensorListPage> = list(SensorListParams.none())
 
         /** @see list */
         @MustBeClosed
-        fun list(params: SensorListParams = SensorListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<SensorListPage>
+        fun list(
+            params: SensorListParams = SensorListParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<SensorListPage>
 
         /** @see list */
         @MustBeClosed
-        fun list(params: SensorListParams = SensorListParams.none()): HttpResponseFor<SensorListPage> =
-            list(
-              params, RequestOptions.none()
-            )
+        fun list(
+            params: SensorListParams = SensorListParams.none()
+        ): HttpResponseFor<SensorListPage> = list(params, RequestOptions.none())
 
         /** @see list */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<SensorListPage> =
-            list(
-              SensorListParams.none(), requestOptions
-            )
+            list(SensorListParams.none(), requestOptions)
 
-        /** Returns a raw HTTP response for `delete /udl/sensor/{id}`, but is otherwise the same as [SensorService.delete]. */
-        @MustBeClosed
-        fun delete(id: String): HttpResponse =
-            delete(
-              id, SensorDeleteParams.none()
-            )
+        /**
+         * Returns a raw HTTP response for `delete /udl/sensor/{id}`, but is otherwise the same as
+         * [SensorService.delete].
+         */
+        @MustBeClosed fun delete(id: String): HttpResponse = delete(id, SensorDeleteParams.none())
 
         /** @see delete */
         @MustBeClosed
-        fun delete(id: String, params: SensorDeleteParams = SensorDeleteParams.none(), requestOptions: RequestOptions = RequestOptions.none()): HttpResponse =
-            delete(
-              params.toBuilder()
-                  .id(id)
-                  .build(), requestOptions
-            )
+        fun delete(
+            id: String,
+            params: SensorDeleteParams = SensorDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse = delete(params.toBuilder().id(id).build(), requestOptions)
 
         /** @see delete */
         @MustBeClosed
-        fun delete(id: String, params: SensorDeleteParams = SensorDeleteParams.none()): HttpResponse =
-            delete(
-              id,
-              params,
-              RequestOptions.none(),
-            )
+        fun delete(
+            id: String,
+            params: SensorDeleteParams = SensorDeleteParams.none(),
+        ): HttpResponse = delete(id, params, RequestOptions.none())
 
         /** @see delete */
         @MustBeClosed
-        fun delete(params: SensorDeleteParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponse
+        fun delete(
+            params: SensorDeleteParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse
 
         /** @see delete */
         @MustBeClosed
-        fun delete(params: SensorDeleteParams): HttpResponse =
-            delete(
-              params, RequestOptions.none()
-            )
+        fun delete(params: SensorDeleteParams): HttpResponse = delete(params, RequestOptions.none())
 
         /** @see delete */
         @MustBeClosed
         fun delete(id: String, requestOptions: RequestOptions): HttpResponse =
-            delete(
-              id,
-              SensorDeleteParams.none(),
-              requestOptions,
-            )
+            delete(id, SensorDeleteParams.none(), requestOptions)
 
-        /** Returns a raw HTTP response for `get /udl/sensor/count`, but is otherwise the same as [SensorService.count]. */
-        @MustBeClosed
-        fun count(): HttpResponseFor<String> = count(SensorCountParams.none())
+        /**
+         * Returns a raw HTTP response for `get /udl/sensor/count`, but is otherwise the same as
+         * [SensorService.count].
+         */
+        @MustBeClosed fun count(): HttpResponseFor<String> = count(SensorCountParams.none())
 
         /** @see count */
         @MustBeClosed
-        fun count(params: SensorCountParams = SensorCountParams.none(), requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<String>
+        fun count(
+            params: SensorCountParams = SensorCountParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<String>
 
         /** @see count */
         @MustBeClosed
         fun count(params: SensorCountParams = SensorCountParams.none()): HttpResponseFor<String> =
-            count(
-              params, RequestOptions.none()
-            )
+            count(params, RequestOptions.none())
 
         /** @see count */
         @MustBeClosed
         fun count(requestOptions: RequestOptions): HttpResponseFor<String> =
-            count(
-              SensorCountParams.none(), requestOptions
-            )
+            count(SensorCountParams.none(), requestOptions)
 
-        /** Returns a raw HTTP response for `get /udl/sensor/{id}`, but is otherwise the same as [SensorService.get]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/sensor/{id}`, but is otherwise the same as
+         * [SensorService.get].
+         */
         @MustBeClosed
-        fun get(id: String): HttpResponseFor<SensorGetResponse> =
-            get(
-              id, SensorGetParams.none()
-            )
+        fun get(id: String): HttpResponseFor<SensorGetResponse> = get(id, SensorGetParams.none())
 
         /** @see get */
         @MustBeClosed
-        fun get(id: String, params: SensorGetParams = SensorGetParams.none(), requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<SensorGetResponse> =
-            get(
-              params.toBuilder()
-                  .id(id)
-                  .build(), requestOptions
-            )
+        fun get(
+            id: String,
+            params: SensorGetParams = SensorGetParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<SensorGetResponse> =
+            get(params.toBuilder().id(id).build(), requestOptions)
 
         /** @see get */
         @MustBeClosed
-        fun get(id: String, params: SensorGetParams = SensorGetParams.none()): HttpResponseFor<SensorGetResponse> =
-            get(
-              id,
-              params,
-              RequestOptions.none(),
-            )
+        fun get(
+            id: String,
+            params: SensorGetParams = SensorGetParams.none(),
+        ): HttpResponseFor<SensorGetResponse> = get(id, params, RequestOptions.none())
 
         /** @see get */
         @MustBeClosed
-        fun get(params: SensorGetParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<SensorGetResponse>
+        fun get(
+            params: SensorGetParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<SensorGetResponse>
 
         /** @see get */
         @MustBeClosed
         fun get(params: SensorGetParams): HttpResponseFor<SensorGetResponse> =
-            get(
-              params, RequestOptions.none()
-            )
+            get(params, RequestOptions.none())
 
         /** @see get */
         @MustBeClosed
         fun get(id: String, requestOptions: RequestOptions): HttpResponseFor<SensorGetResponse> =
-            get(
-              id,
-              SensorGetParams.none(),
-              requestOptions,
-            )
+            get(id, SensorGetParams.none(), requestOptions)
 
-        /** Returns a raw HTTP response for `get /udl/sensor/queryhelp`, but is otherwise the same as [SensorService.queryhelp]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/sensor/queryhelp`, but is otherwise the same as
+         * [SensorService.queryhelp].
+         */
         @MustBeClosed
-        fun queryhelp(): HttpResponseFor<SensorQueryhelpResponse> = queryhelp(SensorQueryhelpParams.none())
-
-        /** @see queryhelp */
-        @MustBeClosed
-        fun queryhelp(params: SensorQueryhelpParams = SensorQueryhelpParams.none(), requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<SensorQueryhelpResponse>
+        fun queryhelp(): HttpResponseFor<SensorQueryhelpResponse> =
+            queryhelp(SensorQueryhelpParams.none())
 
         /** @see queryhelp */
         @MustBeClosed
-        fun queryhelp(params: SensorQueryhelpParams = SensorQueryhelpParams.none()): HttpResponseFor<SensorQueryhelpResponse> =
-            queryhelp(
-              params, RequestOptions.none()
-            )
+        fun queryhelp(
+            params: SensorQueryhelpParams = SensorQueryhelpParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<SensorQueryhelpResponse>
+
+        /** @see queryhelp */
+        @MustBeClosed
+        fun queryhelp(
+            params: SensorQueryhelpParams = SensorQueryhelpParams.none()
+        ): HttpResponseFor<SensorQueryhelpResponse> = queryhelp(params, RequestOptions.none())
 
         /** @see queryhelp */
         @MustBeClosed
         fun queryhelp(requestOptions: RequestOptions): HttpResponseFor<SensorQueryhelpResponse> =
-            queryhelp(
-              SensorQueryhelpParams.none(), requestOptions
-            )
+            queryhelp(SensorQueryhelpParams.none(), requestOptions)
 
-        /** Returns a raw HTTP response for `get /udl/sensor/tuple`, but is otherwise the same as [SensorService.tuple]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/sensor/tuple`, but is otherwise the same as
+         * [SensorService.tuple].
+         */
         @MustBeClosed
         fun tuple(params: SensorTupleParams): HttpResponseFor<List<SensorTupleResponse>> =
-            tuple(
-              params, RequestOptions.none()
-            )
+            tuple(params, RequestOptions.none())
 
         /** @see tuple */
         @MustBeClosed
-        fun tuple(params: SensorTupleParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<List<SensorTupleResponse>>
+        fun tuple(
+            params: SensorTupleParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<List<SensorTupleResponse>>
     }
 }

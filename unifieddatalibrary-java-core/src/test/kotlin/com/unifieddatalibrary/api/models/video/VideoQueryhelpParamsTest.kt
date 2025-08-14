@@ -2,13 +2,12 @@
 
 package com.unifieddatalibrary.api.models.video
 
-import com.unifieddatalibrary.api.models.video.VideoQueryhelpParams
 import org.junit.jupiter.api.Test
 
 internal class VideoQueryhelpParamsTest {
 
     @Test
     fun create() {
-      VideoQueryhelpParams.builder().build()
+        VideoQueryhelpParams.builder().build()
     }
 }

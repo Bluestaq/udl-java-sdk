@@ -2,13 +2,12 @@
 
 package com.unifieddatalibrary.api.models.analyticimagery
 
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryQueryhelpParams
 import org.junit.jupiter.api.Test
 
 internal class AnalyticImageryQueryhelpParamsTest {
 
     @Test
     fun create() {
-      AnalyticImageryQueryhelpParams.builder().build()
+        AnalyticImageryQueryhelpParams.builder().build()
     }
 }

@@ -18,14 +18,15 @@ import com.unifieddatalibrary.api.models.itemtrackings.ItemTrackingQueryhelpResp
 import com.unifieddatalibrary.api.models.itemtrackings.ItemTrackingTupleParams
 import com.unifieddatalibrary.api.models.itemtrackings.ItemTrackingTupleResponse
 import com.unifieddatalibrary.api.models.itemtrackings.ItemTrackingUnvalidatedPublishParams
-import com.unifieddatalibrary.api.services.async.ItemTrackingServiceAsync
 import com.unifieddatalibrary.api.services.async.itemtrackings.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
 interface ItemTrackingServiceAsync {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -37,148 +38,182 @@ interface ItemTrackingServiceAsync {
 
     fun history(): HistoryServiceAsync
 
-    /** Service operation to take a single itemtracking record as a POST body and ingest into the database. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
+    /**
+     * Service operation to take a single itemtracking record as a POST body and ingest into the
+     * database. A specific role is required to perform this service operation. Please contact the
+     * UDL team for assistance.
+     */
     fun create(params: ItemTrackingCreateParams): CompletableFuture<Void?> =
-        create(
-          params, RequestOptions.none()
-        )
+        create(params, RequestOptions.none())
 
     /** @see create */
-    fun create(params: ItemTrackingCreateParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?>
+    fun create(
+        params: ItemTrackingCreateParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?>
 
-    /** Service operation to dynamically query data by a variety of query parameters not specified in this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
+    /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
     fun list(params: ItemTrackingListParams): CompletableFuture<ItemTrackingListPageAsync> =
-        list(
-          params, RequestOptions.none()
-        )
+        list(params, RequestOptions.none())
 
     /** @see list */
-    fun list(params: ItemTrackingListParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<ItemTrackingListPageAsync>
+    fun list(
+        params: ItemTrackingListParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<ItemTrackingListPageAsync>
 
-    /** Service operation to delete an item tracking object specified by the passed ID path parameter. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
-    fun delete(id: String): CompletableFuture<Void?> =
-        delete(
-          id, ItemTrackingDeleteParams.none()
-        )
-
-    /** @see delete */
-    fun delete(id: String, params: ItemTrackingDeleteParams = ItemTrackingDeleteParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?> =
-        delete(
-          params.toBuilder()
-              .id(id)
-              .build(), requestOptions
-        )
+    /**
+     * Service operation to delete an item tracking object specified by the passed ID path
+     * parameter. A specific role is required to perform this service operation. Please contact the
+     * UDL team for assistance.
+     */
+    fun delete(id: String): CompletableFuture<Void?> = delete(id, ItemTrackingDeleteParams.none())
 
     /** @see delete */
-    fun delete(id: String, params: ItemTrackingDeleteParams = ItemTrackingDeleteParams.none()): CompletableFuture<Void?> =
-        delete(
-          id,
-          params,
-          RequestOptions.none(),
-        )
+    fun delete(
+        id: String,
+        params: ItemTrackingDeleteParams = ItemTrackingDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> = delete(params.toBuilder().id(id).build(), requestOptions)
 
     /** @see delete */
-    fun delete(params: ItemTrackingDeleteParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?>
+    fun delete(
+        id: String,
+        params: ItemTrackingDeleteParams = ItemTrackingDeleteParams.none(),
+    ): CompletableFuture<Void?> = delete(id, params, RequestOptions.none())
+
+    /** @see delete */
+    fun delete(
+        params: ItemTrackingDeleteParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?>
 
     /** @see delete */
     fun delete(params: ItemTrackingDeleteParams): CompletableFuture<Void?> =
-        delete(
-          params, RequestOptions.none()
-        )
+        delete(params, RequestOptions.none())
 
     /** @see delete */
     fun delete(id: String, requestOptions: RequestOptions): CompletableFuture<Void?> =
-        delete(
-          id,
-          ItemTrackingDeleteParams.none(),
-          requestOptions,
-        )
+        delete(id, ItemTrackingDeleteParams.none(), requestOptions)
 
-    /** Service operation to return the count of records satisfying the specified query parameters. This operation is useful to determine how many records pass a particular query criteria without retrieving large amounts of data. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
+    /**
+     * Service operation to return the count of records satisfying the specified query parameters.
+     * This operation is useful to determine how many records pass a particular query criteria
+     * without retrieving large amounts of data. See the queryhelp operation
+     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
+     * information.
+     */
     fun count(params: ItemTrackingCountParams): CompletableFuture<String> =
-        count(
-          params, RequestOptions.none()
-        )
+        count(params, RequestOptions.none())
 
     /** @see count */
-    fun count(params: ItemTrackingCountParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<String>
+    fun count(
+        params: ItemTrackingCountParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<String>
 
-    /** Service operation to get a single item tracking record by its unique ID passed as a path parameter. */
+    /**
+     * Service operation to get a single item tracking record by its unique ID passed as a path
+     * parameter.
+     */
     fun get(id: String): CompletableFuture<ItemTrackingGetResponse> =
-        get(
-          id, ItemTrackingGetParams.none()
-        )
+        get(id, ItemTrackingGetParams.none())
 
     /** @see get */
-    fun get(id: String, params: ItemTrackingGetParams = ItemTrackingGetParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<ItemTrackingGetResponse> =
-        get(
-          params.toBuilder()
-              .id(id)
-              .build(), requestOptions
-        )
+    fun get(
+        id: String,
+        params: ItemTrackingGetParams = ItemTrackingGetParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<ItemTrackingGetResponse> =
+        get(params.toBuilder().id(id).build(), requestOptions)
 
     /** @see get */
-    fun get(id: String, params: ItemTrackingGetParams = ItemTrackingGetParams.none()): CompletableFuture<ItemTrackingGetResponse> =
-        get(
-          id,
-          params,
-          RequestOptions.none(),
-        )
+    fun get(
+        id: String,
+        params: ItemTrackingGetParams = ItemTrackingGetParams.none(),
+    ): CompletableFuture<ItemTrackingGetResponse> = get(id, params, RequestOptions.none())
 
     /** @see get */
-    fun get(params: ItemTrackingGetParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<ItemTrackingGetResponse>
+    fun get(
+        params: ItemTrackingGetParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<ItemTrackingGetResponse>
 
     /** @see get */
     fun get(params: ItemTrackingGetParams): CompletableFuture<ItemTrackingGetResponse> =
-        get(
-          params, RequestOptions.none()
-        )
+        get(params, RequestOptions.none())
 
     /** @see get */
-    fun get(id: String, requestOptions: RequestOptions): CompletableFuture<ItemTrackingGetResponse> =
-        get(
-          id,
-          ItemTrackingGetParams.none(),
-          requestOptions,
-        )
+    fun get(
+        id: String,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<ItemTrackingGetResponse> =
+        get(id, ItemTrackingGetParams.none(), requestOptions)
 
-    /** Service operation to provide detailed information on available dynamic query parameters for a particular data type. */
-    fun queryhelp(): CompletableFuture<ItemTrackingQueryhelpResponse> = queryhelp(ItemTrackingQueryhelpParams.none())
-
-    /** @see queryhelp */
-    fun queryhelp(params: ItemTrackingQueryhelpParams = ItemTrackingQueryhelpParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<ItemTrackingQueryhelpResponse>
-
-    /** @see queryhelp */
-    fun queryhelp(params: ItemTrackingQueryhelpParams = ItemTrackingQueryhelpParams.none()): CompletableFuture<ItemTrackingQueryhelpResponse> =
-        queryhelp(
-          params, RequestOptions.none()
-        )
+    /**
+     * Service operation to provide detailed information on available dynamic query parameters for a
+     * particular data type.
+     */
+    fun queryhelp(): CompletableFuture<ItemTrackingQueryhelpResponse> =
+        queryhelp(ItemTrackingQueryhelpParams.none())
 
     /** @see queryhelp */
-    fun queryhelp(requestOptions: RequestOptions): CompletableFuture<ItemTrackingQueryhelpResponse> =
-        queryhelp(
-          ItemTrackingQueryhelpParams.none(), requestOptions
-        )
+    fun queryhelp(
+        params: ItemTrackingQueryhelpParams = ItemTrackingQueryhelpParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<ItemTrackingQueryhelpResponse>
 
-    /** Service operation to dynamically query data and only return specified columns/fields. Requested columns are specified by the 'columns' query parameter and should be a comma separated list of valid fields for the specified data type. classificationMarking is always returned. See the queryhelp operation (/udl/<datatype>/queryhelp) for more details on valid/required query parameter information. An example URI: /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours would return the satNo and period of elsets with an epoch greater than 5 hours ago. */
+    /** @see queryhelp */
+    fun queryhelp(
+        params: ItemTrackingQueryhelpParams = ItemTrackingQueryhelpParams.none()
+    ): CompletableFuture<ItemTrackingQueryhelpResponse> = queryhelp(params, RequestOptions.none())
+
+    /** @see queryhelp */
+    fun queryhelp(
+        requestOptions: RequestOptions
+    ): CompletableFuture<ItemTrackingQueryhelpResponse> =
+        queryhelp(ItemTrackingQueryhelpParams.none(), requestOptions)
+
+    /**
+     * Service operation to dynamically query data and only return specified columns/fields.
+     * Requested columns are specified by the 'columns' query parameter and should be a comma
+     * separated list of valid fields for the specified data type. classificationMarking is always
+     * returned. See the queryhelp operation (/udl/<datatype>/queryhelp) for more details on
+     * valid/required query parameter information. An example URI:
+     * /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours would return the satNo and period of
+     * elsets with an epoch greater than 5 hours ago.
+     */
     fun tuple(params: ItemTrackingTupleParams): CompletableFuture<List<ItemTrackingTupleResponse>> =
-        tuple(
-          params, RequestOptions.none()
-        )
+        tuple(params, RequestOptions.none())
 
     /** @see tuple */
-    fun tuple(params: ItemTrackingTupleParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<List<ItemTrackingTupleResponse>>
+    fun tuple(
+        params: ItemTrackingTupleParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<List<ItemTrackingTupleResponse>>
 
-    /** Service operation to take multiple itemtracking records as a POST body and ingest into the database. This operation is intended to be used for automated feeds into UDL. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
+    /**
+     * Service operation to take multiple itemtracking records as a POST body and ingest into the
+     * database. This operation is intended to be used for automated feeds into UDL. A specific role
+     * is required to perform this service operation. Please contact the UDL team for assistance.
+     */
     fun unvalidatedPublish(params: ItemTrackingUnvalidatedPublishParams): CompletableFuture<Void?> =
-        unvalidatedPublish(
-          params, RequestOptions.none()
-        )
+        unvalidatedPublish(params, RequestOptions.none())
 
     /** @see unvalidatedPublish */
-    fun unvalidatedPublish(params: ItemTrackingUnvalidatedPublishParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?>
+    fun unvalidatedPublish(
+        params: ItemTrackingUnvalidatedPublishParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?>
 
-    /** A view of [ItemTrackingServiceAsync] that provides access to raw HTTP responses for each method. */
+    /**
+     * A view of [ItemTrackingServiceAsync] that provides access to raw HTTP responses for each
+     * method.
+     */
     interface WithRawResponse {
 
         /**
@@ -186,149 +221,181 @@ interface ItemTrackingServiceAsync {
          *
          * The original service is not modified.
          */
-        fun withOptions(modifier: Consumer<ClientOptions.Builder>): ItemTrackingServiceAsync.WithRawResponse
+        fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): ItemTrackingServiceAsync.WithRawResponse
 
         fun history(): HistoryServiceAsync.WithRawResponse
 
-        /** Returns a raw HTTP response for `post /udl/itemtracking`, but is otherwise the same as [ItemTrackingServiceAsync.create]. */
+        /**
+         * Returns a raw HTTP response for `post /udl/itemtracking`, but is otherwise the same as
+         * [ItemTrackingServiceAsync.create].
+         */
         fun create(params: ItemTrackingCreateParams): CompletableFuture<HttpResponse> =
-            create(
-              params, RequestOptions.none()
-            )
+            create(params, RequestOptions.none())
 
         /** @see create */
-        fun create(params: ItemTrackingCreateParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse>
+        fun create(
+            params: ItemTrackingCreateParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse>
 
-        /** Returns a raw HTTP response for `get /udl/itemtracking`, but is otherwise the same as [ItemTrackingServiceAsync.list]. */
-        fun list(params: ItemTrackingListParams): CompletableFuture<HttpResponseFor<ItemTrackingListPageAsync>> =
-            list(
-              params, RequestOptions.none()
-            )
+        /**
+         * Returns a raw HTTP response for `get /udl/itemtracking`, but is otherwise the same as
+         * [ItemTrackingServiceAsync.list].
+         */
+        fun list(
+            params: ItemTrackingListParams
+        ): CompletableFuture<HttpResponseFor<ItemTrackingListPageAsync>> =
+            list(params, RequestOptions.none())
 
         /** @see list */
-        fun list(params: ItemTrackingListParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<ItemTrackingListPageAsync>>
+        fun list(
+            params: ItemTrackingListParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<ItemTrackingListPageAsync>>
 
-        /** Returns a raw HTTP response for `delete /udl/itemtracking/{id}`, but is otherwise the same as [ItemTrackingServiceAsync.delete]. */
+        /**
+         * Returns a raw HTTP response for `delete /udl/itemtracking/{id}`, but is otherwise the
+         * same as [ItemTrackingServiceAsync.delete].
+         */
         fun delete(id: String): CompletableFuture<HttpResponse> =
-            delete(
-              id, ItemTrackingDeleteParams.none()
-            )
+            delete(id, ItemTrackingDeleteParams.none())
 
         /** @see delete */
-        fun delete(id: String, params: ItemTrackingDeleteParams = ItemTrackingDeleteParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse> =
-            delete(
-              params.toBuilder()
-                  .id(id)
-                  .build(), requestOptions
-            )
+        fun delete(
+            id: String,
+            params: ItemTrackingDeleteParams = ItemTrackingDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            delete(params.toBuilder().id(id).build(), requestOptions)
 
         /** @see delete */
-        fun delete(id: String, params: ItemTrackingDeleteParams = ItemTrackingDeleteParams.none()): CompletableFuture<HttpResponse> =
-            delete(
-              id,
-              params,
-              RequestOptions.none(),
-            )
+        fun delete(
+            id: String,
+            params: ItemTrackingDeleteParams = ItemTrackingDeleteParams.none(),
+        ): CompletableFuture<HttpResponse> = delete(id, params, RequestOptions.none())
 
         /** @see delete */
-        fun delete(params: ItemTrackingDeleteParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse>
+        fun delete(
+            params: ItemTrackingDeleteParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse>
 
         /** @see delete */
         fun delete(params: ItemTrackingDeleteParams): CompletableFuture<HttpResponse> =
-            delete(
-              params, RequestOptions.none()
-            )
+            delete(params, RequestOptions.none())
 
         /** @see delete */
         fun delete(id: String, requestOptions: RequestOptions): CompletableFuture<HttpResponse> =
-            delete(
-              id,
-              ItemTrackingDeleteParams.none(),
-              requestOptions,
-            )
+            delete(id, ItemTrackingDeleteParams.none(), requestOptions)
 
-        /** Returns a raw HTTP response for `get /udl/itemtracking/count`, but is otherwise the same as [ItemTrackingServiceAsync.count]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/itemtracking/count`, but is otherwise the same
+         * as [ItemTrackingServiceAsync.count].
+         */
         fun count(params: ItemTrackingCountParams): CompletableFuture<HttpResponseFor<String>> =
-            count(
-              params, RequestOptions.none()
-            )
+            count(params, RequestOptions.none())
 
         /** @see count */
-        fun count(params: ItemTrackingCountParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<String>>
+        fun count(
+            params: ItemTrackingCountParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<String>>
 
-        /** Returns a raw HTTP response for `get /udl/itemtracking/{id}`, but is otherwise the same as [ItemTrackingServiceAsync.get]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/itemtracking/{id}`, but is otherwise the same
+         * as [ItemTrackingServiceAsync.get].
+         */
         fun get(id: String): CompletableFuture<HttpResponseFor<ItemTrackingGetResponse>> =
-            get(
-              id, ItemTrackingGetParams.none()
-            )
+            get(id, ItemTrackingGetParams.none())
 
         /** @see get */
-        fun get(id: String, params: ItemTrackingGetParams = ItemTrackingGetParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<ItemTrackingGetResponse>> =
-            get(
-              params.toBuilder()
-                  .id(id)
-                  .build(), requestOptions
-            )
+        fun get(
+            id: String,
+            params: ItemTrackingGetParams = ItemTrackingGetParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<ItemTrackingGetResponse>> =
+            get(params.toBuilder().id(id).build(), requestOptions)
 
         /** @see get */
-        fun get(id: String, params: ItemTrackingGetParams = ItemTrackingGetParams.none()): CompletableFuture<HttpResponseFor<ItemTrackingGetResponse>> =
-            get(
-              id,
-              params,
-              RequestOptions.none(),
-            )
+        fun get(
+            id: String,
+            params: ItemTrackingGetParams = ItemTrackingGetParams.none(),
+        ): CompletableFuture<HttpResponseFor<ItemTrackingGetResponse>> =
+            get(id, params, RequestOptions.none())
 
         /** @see get */
-        fun get(params: ItemTrackingGetParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<ItemTrackingGetResponse>>
+        fun get(
+            params: ItemTrackingGetParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<ItemTrackingGetResponse>>
 
         /** @see get */
-        fun get(params: ItemTrackingGetParams): CompletableFuture<HttpResponseFor<ItemTrackingGetResponse>> =
-            get(
-              params, RequestOptions.none()
-            )
+        fun get(
+            params: ItemTrackingGetParams
+        ): CompletableFuture<HttpResponseFor<ItemTrackingGetResponse>> =
+            get(params, RequestOptions.none())
 
         /** @see get */
-        fun get(id: String, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<ItemTrackingGetResponse>> =
-            get(
-              id,
-              ItemTrackingGetParams.none(),
-              requestOptions,
-            )
+        fun get(
+            id: String,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<ItemTrackingGetResponse>> =
+            get(id, ItemTrackingGetParams.none(), requestOptions)
 
-        /** Returns a raw HTTP response for `get /udl/itemtracking/queryhelp`, but is otherwise the same as [ItemTrackingServiceAsync.queryhelp]. */
-        fun queryhelp(): CompletableFuture<HttpResponseFor<ItemTrackingQueryhelpResponse>> = queryhelp(ItemTrackingQueryhelpParams.none())
+        /**
+         * Returns a raw HTTP response for `get /udl/itemtracking/queryhelp`, but is otherwise the
+         * same as [ItemTrackingServiceAsync.queryhelp].
+         */
+        fun queryhelp(): CompletableFuture<HttpResponseFor<ItemTrackingQueryhelpResponse>> =
+            queryhelp(ItemTrackingQueryhelpParams.none())
 
         /** @see queryhelp */
-        fun queryhelp(params: ItemTrackingQueryhelpParams = ItemTrackingQueryhelpParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<ItemTrackingQueryhelpResponse>>
+        fun queryhelp(
+            params: ItemTrackingQueryhelpParams = ItemTrackingQueryhelpParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<ItemTrackingQueryhelpResponse>>
 
         /** @see queryhelp */
-        fun queryhelp(params: ItemTrackingQueryhelpParams = ItemTrackingQueryhelpParams.none()): CompletableFuture<HttpResponseFor<ItemTrackingQueryhelpResponse>> =
-            queryhelp(
-              params, RequestOptions.none()
-            )
+        fun queryhelp(
+            params: ItemTrackingQueryhelpParams = ItemTrackingQueryhelpParams.none()
+        ): CompletableFuture<HttpResponseFor<ItemTrackingQueryhelpResponse>> =
+            queryhelp(params, RequestOptions.none())
 
         /** @see queryhelp */
-        fun queryhelp(requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<ItemTrackingQueryhelpResponse>> =
-            queryhelp(
-              ItemTrackingQueryhelpParams.none(), requestOptions
-            )
+        fun queryhelp(
+            requestOptions: RequestOptions
+        ): CompletableFuture<HttpResponseFor<ItemTrackingQueryhelpResponse>> =
+            queryhelp(ItemTrackingQueryhelpParams.none(), requestOptions)
 
-        /** Returns a raw HTTP response for `get /udl/itemtracking/tuple`, but is otherwise the same as [ItemTrackingServiceAsync.tuple]. */
-        fun tuple(params: ItemTrackingTupleParams): CompletableFuture<HttpResponseFor<List<ItemTrackingTupleResponse>>> =
-            tuple(
-              params, RequestOptions.none()
-            )
+        /**
+         * Returns a raw HTTP response for `get /udl/itemtracking/tuple`, but is otherwise the same
+         * as [ItemTrackingServiceAsync.tuple].
+         */
+        fun tuple(
+            params: ItemTrackingTupleParams
+        ): CompletableFuture<HttpResponseFor<List<ItemTrackingTupleResponse>>> =
+            tuple(params, RequestOptions.none())
 
         /** @see tuple */
-        fun tuple(params: ItemTrackingTupleParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<List<ItemTrackingTupleResponse>>>
+        fun tuple(
+            params: ItemTrackingTupleParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<List<ItemTrackingTupleResponse>>>
 
-        /** Returns a raw HTTP response for `post /filedrop/udl-itemtracking`, but is otherwise the same as [ItemTrackingServiceAsync.unvalidatedPublish]. */
-        fun unvalidatedPublish(params: ItemTrackingUnvalidatedPublishParams): CompletableFuture<HttpResponse> =
-            unvalidatedPublish(
-              params, RequestOptions.none()
-            )
+        /**
+         * Returns a raw HTTP response for `post /filedrop/udl-itemtracking`, but is otherwise the
+         * same as [ItemTrackingServiceAsync.unvalidatedPublish].
+         */
+        fun unvalidatedPublish(
+            params: ItemTrackingUnvalidatedPublishParams
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(params, RequestOptions.none())
 
         /** @see unvalidatedPublish */
-        fun unvalidatedPublish(params: ItemTrackingUnvalidatedPublishParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse>
+        fun unvalidatedPublish(
+            params: ItemTrackingUnvalidatedPublishParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse>
     }
 }

@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
+import com.unifieddatalibrary.api.models.BatteryIngest
 import com.unifieddatalibrary.api.models.batteries.BatteryCountParams
 import com.unifieddatalibrary.api.models.batteries.BatteryCreateParams
 import com.unifieddatalibrary.api.models.batteries.BatteryRetrieveParams
@@ -28,14 +29,18 @@ internal class BatteryServiceTest {
 
         batteryService.create(
             BatteryCreateParams.builder()
-                .dataMode(BatteryCreateParams.DataMode.TEST)
-                .name("JAK-BATTERY-1479")
-                .source("Bluestaq")
-                .id("BATTERY-ID")
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .batteryIngest(
+                    BatteryIngest.builder()
+                        .dataMode(BatteryIngest.DataMode.TEST)
+                        .name("JAK-BATTERY-1479")
+                        .source("Bluestaq")
+                        .id("BATTERY-ID")
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .build()
+                )
                 .build()
         )
     }
@@ -71,14 +76,18 @@ internal class BatteryServiceTest {
         batteryService.update(
             BatteryUpdateParams.builder()
                 .pathId("id")
-                .dataMode(BatteryUpdateParams.DataMode.TEST)
-                .name("JAK-BATTERY-1479")
-                .source("Bluestaq")
-                .bodyId("BATTERY-ID")
-                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .createdBy("some.user")
-                .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .batteryIngest(
+                    BatteryIngest.builder()
+                        .dataMode(BatteryIngest.DataMode.TEST)
+                        .name("JAK-BATTERY-1479")
+                        .source("Bluestaq")
+                        .id("BATTERY-ID")
+                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                        .createdBy("some.user")
+                        .origin("THIRD_PARTY_DATASOURCE")
+                        .origNetwork("ORIG")
+                        .build()
+                )
                 .build()
         )
     }

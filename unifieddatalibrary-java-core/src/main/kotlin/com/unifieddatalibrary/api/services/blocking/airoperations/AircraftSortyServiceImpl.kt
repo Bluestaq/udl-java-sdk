@@ -28,27 +28,29 @@ import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftS
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyListParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyUnvalidatedPublishParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftsortieAbridged
-import com.unifieddatalibrary.api.services.blocking.airoperations.AircraftSortyService
-import com.unifieddatalibrary.api.services.blocking.airoperations.AircraftSortyServiceImpl
 import java.util.function.Consumer
 
-class AircraftSortyServiceImpl internal constructor(
-    private val clientOptions: ClientOptions,
+class AircraftSortyServiceImpl internal constructor(private val clientOptions: ClientOptions) :
+    AircraftSortyService {
 
-) : AircraftSortyService {
-
-    private val withRawResponse: AircraftSortyService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
+    private val withRawResponse: AircraftSortyService.WithRawResponse by lazy {
+        WithRawResponseImpl(clientOptions)
+    }
 
     override fun withRawResponse(): AircraftSortyService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): AircraftSortyService = AircraftSortyServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): AircraftSortyService =
+        AircraftSortyServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun create(params: AircraftSortyCreateParams, requestOptions: RequestOptions) {
-      // post /udl/aircraftsortie
-      withRawResponse().create(params, requestOptions)
+        // post /udl/aircraftsortie
+        withRawResponse().create(params, requestOptions)
     }
 
-    override fun list(params: AircraftSortyListParams, requestOptions: RequestOptions): AircraftSortyListPage =
+    override fun list(
+        params: AircraftSortyListParams,
+        requestOptions: RequestOptions,
+    ): AircraftSortyListPage =
         // get /udl/aircraftsortie
         withRawResponse().list(params, requestOptions).parse()
 
@@ -57,223 +59,235 @@ class AircraftSortyServiceImpl internal constructor(
         withRawResponse().count(params, requestOptions).parse()
 
     override fun createBulk(params: AircraftSortyCreateBulkParams, requestOptions: RequestOptions) {
-      // post /udl/aircraftsortie/createBulk
-      withRawResponse().createBulk(params, requestOptions)
+        // post /udl/aircraftsortie/createBulk
+        withRawResponse().createBulk(params, requestOptions)
     }
 
-    override fun historyAodr(params: AircraftSortyHistoryAodrParams, requestOptions: RequestOptions) {
-      // get /udl/aircraftsortie/history/aodr
-      withRawResponse().historyAodr(params, requestOptions)
+    override fun historyAodr(
+        params: AircraftSortyHistoryAodrParams,
+        requestOptions: RequestOptions,
+    ) {
+        // get /udl/aircraftsortie/history/aodr
+        withRawResponse().historyAodr(params, requestOptions)
     }
 
-    override fun historyCount(params: AircraftSortyHistoryCountParams, requestOptions: RequestOptions): String =
+    override fun historyCount(
+        params: AircraftSortyHistoryCountParams,
+        requestOptions: RequestOptions,
+    ): String =
         // get /udl/aircraftsortie/history/count
         withRawResponse().historyCount(params, requestOptions).parse()
 
-    override fun historyQuery(params: AircraftSortyHistoryQueryParams, requestOptions: RequestOptions): List<AircraftsortieFull> =
+    override fun historyQuery(
+        params: AircraftSortyHistoryQueryParams,
+        requestOptions: RequestOptions,
+    ): List<AircraftsortieFull> =
         // get /udl/aircraftsortie/history
         withRawResponse().historyQuery(params, requestOptions).parse()
 
-    override fun unvalidatedPublish(params: AircraftSortyUnvalidatedPublishParams, requestOptions: RequestOptions) {
-      // post /filedrop/udl-aircraftsortie
-      withRawResponse().unvalidatedPublish(params, requestOptions)
+    override fun unvalidatedPublish(
+        params: AircraftSortyUnvalidatedPublishParams,
+        requestOptions: RequestOptions,
+    ) {
+        // post /filedrop/udl-aircraftsortie
+        withRawResponse().unvalidatedPublish(params, requestOptions)
     }
 
-    class WithRawResponseImpl internal constructor(
-        private val clientOptions: ClientOptions,
+    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
+        AircraftSortyService.WithRawResponse {
 
-    ) : AircraftSortyService.WithRawResponse {
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
-
-        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): AircraftSortyService.WithRawResponse = AircraftSortyServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+        override fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): AircraftSortyService.WithRawResponse =
+            AircraftSortyServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier::accept).build()
+            )
 
         private val createHandler: Handler<Void?> = emptyHandler()
 
-        override fun create(params: AircraftSortyCreateParams, requestOptions: RequestOptions): HttpResponse {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.POST)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "aircraftsortie")
-            .body(json(clientOptions.jsonMapper, params._body()))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  createHandler.handle(it)
-              }
-          }
+        override fun create(
+            params: AircraftSortyCreateParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "aircraftsortie")
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { createHandler.handle(it) }
+            }
         }
 
-        private val listHandler: Handler<List<AircraftsortieAbridged>> = jsonHandler<List<AircraftsortieAbridged>>(clientOptions.jsonMapper)
+        private val listHandler: Handler<List<AircraftsortieAbridged>> =
+            jsonHandler<List<AircraftsortieAbridged>>(clientOptions.jsonMapper)
 
-        override fun list(params: AircraftSortyListParams, requestOptions: RequestOptions): HttpResponseFor<AircraftSortyListPage> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "aircraftsortie")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  listHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.forEach { it.validate() }
-                  }
-              }
-              .let {
-                  AircraftSortyListPage.builder()
-                      .service(AircraftSortyServiceImpl(clientOptions))
-                      .params(params)
-                      .items(it)
-                      .build()
-              }
-          }
+        override fun list(
+            params: AircraftSortyListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<AircraftSortyListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "aircraftsortie")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        AircraftSortyListPage.builder()
+                            .service(AircraftSortyServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
         }
 
         private val countHandler: Handler<String> = stringHandler()
 
-        override fun count(params: AircraftSortyCountParams, requestOptions: RequestOptions): HttpResponseFor<String> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "aircraftsortie", "count")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  countHandler.handle(it)
-              }
-          }
+        override fun count(
+            params: AircraftSortyCountParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<String> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "aircraftsortie", "count")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { countHandler.handle(it) }
+            }
         }
 
         private val createBulkHandler: Handler<Void?> = emptyHandler()
 
-        override fun createBulk(params: AircraftSortyCreateBulkParams, requestOptions: RequestOptions): HttpResponse {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.POST)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "aircraftsortie", "createBulk")
-            .body(json(clientOptions.jsonMapper, params._body()))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  createBulkHandler.handle(it)
-              }
-          }
+        override fun createBulk(
+            params: AircraftSortyCreateBulkParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "aircraftsortie", "createBulk")
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { createBulkHandler.handle(it) }
+            }
         }
 
         private val historyAodrHandler: Handler<Void?> = emptyHandler()
 
-        override fun historyAodr(params: AircraftSortyHistoryAodrParams, requestOptions: RequestOptions): HttpResponse {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "aircraftsortie", "history", "aodr")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  historyAodrHandler.handle(it)
-              }
-          }
+        override fun historyAodr(
+            params: AircraftSortyHistoryAodrParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "aircraftsortie", "history", "aodr")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { historyAodrHandler.handle(it) }
+            }
         }
 
         private val historyCountHandler: Handler<String> = stringHandler()
 
-        override fun historyCount(params: AircraftSortyHistoryCountParams, requestOptions: RequestOptions): HttpResponseFor<String> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "aircraftsortie", "history", "count")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  historyCountHandler.handle(it)
-              }
-          }
+        override fun historyCount(
+            params: AircraftSortyHistoryCountParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<String> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "aircraftsortie", "history", "count")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { historyCountHandler.handle(it) }
+            }
         }
 
-        private val historyQueryHandler: Handler<List<AircraftsortieFull>> = jsonHandler<List<AircraftsortieFull>>(clientOptions.jsonMapper)
+        private val historyQueryHandler: Handler<List<AircraftsortieFull>> =
+            jsonHandler<List<AircraftsortieFull>>(clientOptions.jsonMapper)
 
-        override fun historyQuery(params: AircraftSortyHistoryQueryParams, requestOptions: RequestOptions): HttpResponseFor<List<AircraftsortieFull>> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "aircraftsortie", "history")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  historyQueryHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.forEach { it.validate() }
-                  }
-              }
-          }
+        override fun historyQuery(
+            params: AircraftSortyHistoryQueryParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<List<AircraftsortieFull>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "aircraftsortie", "history")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { historyQueryHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+            }
         }
 
         private val unvalidatedPublishHandler: Handler<Void?> = emptyHandler()
 
-        override fun unvalidatedPublish(params: AircraftSortyUnvalidatedPublishParams, requestOptions: RequestOptions): HttpResponse {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.POST)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("filedrop", "udl-aircraftsortie")
-            .body(json(clientOptions.jsonMapper, params._body()))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  unvalidatedPublishHandler.handle(it)
-              }
-          }
+        override fun unvalidatedPublish(
+            params: AircraftSortyUnvalidatedPublishParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("filedrop", "udl-aircraftsortie")
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { unvalidatedPublishHandler.handle(it) }
+            }
         }
     }
 }

@@ -13,13 +13,14 @@ import com.unifieddatalibrary.api.models.launchvehicledetails.LaunchVehicleDetai
 import com.unifieddatalibrary.api.models.launchvehicledetails.LaunchVehicleDetailListPageAsync
 import com.unifieddatalibrary.api.models.launchvehicledetails.LaunchVehicleDetailListParams
 import com.unifieddatalibrary.api.models.launchvehicledetails.LaunchVehicleDetailUpdateParams
-import com.unifieddatalibrary.api.services.async.LaunchVehicleDetailServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
 interface LaunchVehicleDetailServiceAsync {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -29,137 +30,153 @@ interface LaunchVehicleDetailServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): LaunchVehicleDetailServiceAsync
 
-    /** Service operation to take a single LaunchVehicleDetails as a POST body and ingest into the database. LaunchVehicleDetails represents launch vehicle details and characteristics, compiled by a particular source. A vehicle may have multiple details records from various sources. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
+    /**
+     * Service operation to take a single LaunchVehicleDetails as a POST body and ingest into the
+     * database. LaunchVehicleDetails represents launch vehicle details and characteristics,
+     * compiled by a particular source. A vehicle may have multiple details records from various
+     * sources. A specific role is required to perform this service operation. Please contact the
+     * UDL team for assistance.
+     */
     fun create(params: LaunchVehicleDetailCreateParams): CompletableFuture<Void?> =
-        create(
-          params, RequestOptions.none()
-        )
+        create(params, RequestOptions.none())
 
     /** @see create */
-    fun create(params: LaunchVehicleDetailCreateParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?>
+    fun create(
+        params: LaunchVehicleDetailCreateParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?>
 
-    /** Service operation to update a single LaunchVehicleDetails. LaunchVehicleDetails represents launch vehicle details and characteristics, compiled by a particular source. A vehicle may have multiple details records from various sources. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
+    /**
+     * Service operation to update a single LaunchVehicleDetails. LaunchVehicleDetails represents
+     * launch vehicle details and characteristics, compiled by a particular source. A vehicle may
+     * have multiple details records from various sources. A specific role is required to perform
+     * this service operation. Please contact the UDL team for assistance.
+     */
     fun update(pathId: String, params: LaunchVehicleDetailUpdateParams): CompletableFuture<Void?> =
-        update(
-          pathId,
-          params,
-          RequestOptions.none(),
-        )
+        update(pathId, params, RequestOptions.none())
 
     /** @see update */
-    fun update(pathId: String, params: LaunchVehicleDetailUpdateParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?> =
-        update(
-          params.toBuilder()
-              .pathId(pathId)
-              .build(), requestOptions
-        )
+    fun update(
+        pathId: String,
+        params: LaunchVehicleDetailUpdateParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> = update(params.toBuilder().pathId(pathId).build(), requestOptions)
 
     /** @see update */
     fun update(params: LaunchVehicleDetailUpdateParams): CompletableFuture<Void?> =
-        update(
-          params, RequestOptions.none()
-        )
+        update(params, RequestOptions.none())
 
     /** @see update */
-    fun update(params: LaunchVehicleDetailUpdateParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?>
+    fun update(
+        params: LaunchVehicleDetailUpdateParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?>
 
-    /** Service operation to dynamically query data by a variety of query parameters not specified in this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
-    fun list(): CompletableFuture<LaunchVehicleDetailListPageAsync> = list(LaunchVehicleDetailListParams.none())
+    /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
+    fun list(): CompletableFuture<LaunchVehicleDetailListPageAsync> =
+        list(LaunchVehicleDetailListParams.none())
 
     /** @see list */
-    fun list(params: LaunchVehicleDetailListParams = LaunchVehicleDetailListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<LaunchVehicleDetailListPageAsync>
+    fun list(
+        params: LaunchVehicleDetailListParams = LaunchVehicleDetailListParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<LaunchVehicleDetailListPageAsync>
 
     /** @see list */
-    fun list(params: LaunchVehicleDetailListParams = LaunchVehicleDetailListParams.none()): CompletableFuture<LaunchVehicleDetailListPageAsync> =
-        list(
-          params, RequestOptions.none()
-        )
+    fun list(
+        params: LaunchVehicleDetailListParams = LaunchVehicleDetailListParams.none()
+    ): CompletableFuture<LaunchVehicleDetailListPageAsync> = list(params, RequestOptions.none())
 
     /** @see list */
     fun list(requestOptions: RequestOptions): CompletableFuture<LaunchVehicleDetailListPageAsync> =
-        list(
-          LaunchVehicleDetailListParams.none(), requestOptions
-        )
+        list(LaunchVehicleDetailListParams.none(), requestOptions)
 
-    /** Service operation to delete a LaunchVehicleDetails object specified by the passed ID path parameter. LaunchVehicleDetails represents launch vehicle details and characteristics, compiled by a particular source. A vehicle may have multiple details records from various sources. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
+    /**
+     * Service operation to delete a LaunchVehicleDetails object specified by the passed ID path
+     * parameter. LaunchVehicleDetails represents launch vehicle details and characteristics,
+     * compiled by a particular source. A vehicle may have multiple details records from various
+     * sources. A specific role is required to perform this service operation. Please contact the
+     * UDL team for assistance.
+     */
     fun delete(id: String): CompletableFuture<Void?> =
-        delete(
-          id, LaunchVehicleDetailDeleteParams.none()
-        )
+        delete(id, LaunchVehicleDetailDeleteParams.none())
 
     /** @see delete */
-    fun delete(id: String, params: LaunchVehicleDetailDeleteParams = LaunchVehicleDetailDeleteParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?> =
-        delete(
-          params.toBuilder()
-              .id(id)
-              .build(), requestOptions
-        )
+    fun delete(
+        id: String,
+        params: LaunchVehicleDetailDeleteParams = LaunchVehicleDetailDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> = delete(params.toBuilder().id(id).build(), requestOptions)
 
     /** @see delete */
-    fun delete(id: String, params: LaunchVehicleDetailDeleteParams = LaunchVehicleDetailDeleteParams.none()): CompletableFuture<Void?> =
-        delete(
-          id,
-          params,
-          RequestOptions.none(),
-        )
+    fun delete(
+        id: String,
+        params: LaunchVehicleDetailDeleteParams = LaunchVehicleDetailDeleteParams.none(),
+    ): CompletableFuture<Void?> = delete(id, params, RequestOptions.none())
 
     /** @see delete */
-    fun delete(params: LaunchVehicleDetailDeleteParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?>
+    fun delete(
+        params: LaunchVehicleDetailDeleteParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?>
 
     /** @see delete */
     fun delete(params: LaunchVehicleDetailDeleteParams): CompletableFuture<Void?> =
-        delete(
-          params, RequestOptions.none()
-        )
+        delete(params, RequestOptions.none())
 
     /** @see delete */
     fun delete(id: String, requestOptions: RequestOptions): CompletableFuture<Void?> =
-        delete(
-          id,
-          LaunchVehicleDetailDeleteParams.none(),
-          requestOptions,
-        )
+        delete(id, LaunchVehicleDetailDeleteParams.none(), requestOptions)
 
-    /** Service operation to get a single LaunchVehicleDetails record by its unique ID passed as a path parameter. LaunchVehicleDetails represents launch vehicle details and characteristics, compiled by a particular source. A vehicle may have multiple details records from various sources. */
+    /**
+     * Service operation to get a single LaunchVehicleDetails record by its unique ID passed as a
+     * path parameter. LaunchVehicleDetails represents launch vehicle details and characteristics,
+     * compiled by a particular source. A vehicle may have multiple details records from various
+     * sources.
+     */
     fun get(id: String): CompletableFuture<LaunchVehicleDetailGetResponse> =
-        get(
-          id, LaunchVehicleDetailGetParams.none()
-        )
+        get(id, LaunchVehicleDetailGetParams.none())
 
     /** @see get */
-    fun get(id: String, params: LaunchVehicleDetailGetParams = LaunchVehicleDetailGetParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<LaunchVehicleDetailGetResponse> =
-        get(
-          params.toBuilder()
-              .id(id)
-              .build(), requestOptions
-        )
+    fun get(
+        id: String,
+        params: LaunchVehicleDetailGetParams = LaunchVehicleDetailGetParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<LaunchVehicleDetailGetResponse> =
+        get(params.toBuilder().id(id).build(), requestOptions)
 
     /** @see get */
-    fun get(id: String, params: LaunchVehicleDetailGetParams = LaunchVehicleDetailGetParams.none()): CompletableFuture<LaunchVehicleDetailGetResponse> =
-        get(
-          id,
-          params,
-          RequestOptions.none(),
-        )
+    fun get(
+        id: String,
+        params: LaunchVehicleDetailGetParams = LaunchVehicleDetailGetParams.none(),
+    ): CompletableFuture<LaunchVehicleDetailGetResponse> = get(id, params, RequestOptions.none())
 
     /** @see get */
-    fun get(params: LaunchVehicleDetailGetParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<LaunchVehicleDetailGetResponse>
+    fun get(
+        params: LaunchVehicleDetailGetParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<LaunchVehicleDetailGetResponse>
 
     /** @see get */
-    fun get(params: LaunchVehicleDetailGetParams): CompletableFuture<LaunchVehicleDetailGetResponse> =
-        get(
-          params, RequestOptions.none()
-        )
+    fun get(
+        params: LaunchVehicleDetailGetParams
+    ): CompletableFuture<LaunchVehicleDetailGetResponse> = get(params, RequestOptions.none())
 
     /** @see get */
-    fun get(id: String, requestOptions: RequestOptions): CompletableFuture<LaunchVehicleDetailGetResponse> =
-        get(
-          id,
-          LaunchVehicleDetailGetParams.none(),
-          requestOptions,
-        )
+    fun get(
+        id: String,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<LaunchVehicleDetailGetResponse> =
+        get(id, LaunchVehicleDetailGetParams.none(), requestOptions)
 
-    /** A view of [LaunchVehicleDetailServiceAsync] that provides access to raw HTTP responses for each method. */
+    /**
+     * A view of [LaunchVehicleDetailServiceAsync] that provides access to raw HTTP responses for
+     * each method.
+     */
     interface WithRawResponse {
 
         /**
@@ -167,136 +184,149 @@ interface LaunchVehicleDetailServiceAsync {
          *
          * The original service is not modified.
          */
-        fun withOptions(modifier: Consumer<ClientOptions.Builder>): LaunchVehicleDetailServiceAsync.WithRawResponse
+        fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): LaunchVehicleDetailServiceAsync.WithRawResponse
 
-        /** Returns a raw HTTP response for `post /udl/launchvehicledetails`, but is otherwise the same as [LaunchVehicleDetailServiceAsync.create]. */
+        /**
+         * Returns a raw HTTP response for `post /udl/launchvehicledetails`, but is otherwise the
+         * same as [LaunchVehicleDetailServiceAsync.create].
+         */
         fun create(params: LaunchVehicleDetailCreateParams): CompletableFuture<HttpResponse> =
-            create(
-              params, RequestOptions.none()
-            )
+            create(params, RequestOptions.none())
 
         /** @see create */
-        fun create(params: LaunchVehicleDetailCreateParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse>
+        fun create(
+            params: LaunchVehicleDetailCreateParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse>
 
-        /** Returns a raw HTTP response for `put /udl/launchvehicledetails/{id}`, but is otherwise the same as [LaunchVehicleDetailServiceAsync.update]. */
-        fun update(pathId: String, params: LaunchVehicleDetailUpdateParams): CompletableFuture<HttpResponse> =
-            update(
-              pathId,
-              params,
-              RequestOptions.none(),
-            )
+        /**
+         * Returns a raw HTTP response for `put /udl/launchvehicledetails/{id}`, but is otherwise
+         * the same as [LaunchVehicleDetailServiceAsync.update].
+         */
+        fun update(
+            pathId: String,
+            params: LaunchVehicleDetailUpdateParams,
+        ): CompletableFuture<HttpResponse> = update(pathId, params, RequestOptions.none())
 
         /** @see update */
-        fun update(pathId: String, params: LaunchVehicleDetailUpdateParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse> =
-            update(
-              params.toBuilder()
-                  .pathId(pathId)
-                  .build(), requestOptions
-            )
+        fun update(
+            pathId: String,
+            params: LaunchVehicleDetailUpdateParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            update(params.toBuilder().pathId(pathId).build(), requestOptions)
 
         /** @see update */
         fun update(params: LaunchVehicleDetailUpdateParams): CompletableFuture<HttpResponse> =
-            update(
-              params, RequestOptions.none()
-            )
+            update(params, RequestOptions.none())
 
         /** @see update */
-        fun update(params: LaunchVehicleDetailUpdateParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse>
+        fun update(
+            params: LaunchVehicleDetailUpdateParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse>
 
-        /** Returns a raw HTTP response for `get /udl/launchvehicledetails`, but is otherwise the same as [LaunchVehicleDetailServiceAsync.list]. */
-        fun list(): CompletableFuture<HttpResponseFor<LaunchVehicleDetailListPageAsync>> = list(LaunchVehicleDetailListParams.none())
-
-        /** @see list */
-        fun list(params: LaunchVehicleDetailListParams = LaunchVehicleDetailListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<LaunchVehicleDetailListPageAsync>>
-
-        /** @see list */
-        fun list(params: LaunchVehicleDetailListParams = LaunchVehicleDetailListParams.none()): CompletableFuture<HttpResponseFor<LaunchVehicleDetailListPageAsync>> =
-            list(
-              params, RequestOptions.none()
-            )
+        /**
+         * Returns a raw HTTP response for `get /udl/launchvehicledetails`, but is otherwise the
+         * same as [LaunchVehicleDetailServiceAsync.list].
+         */
+        fun list(): CompletableFuture<HttpResponseFor<LaunchVehicleDetailListPageAsync>> =
+            list(LaunchVehicleDetailListParams.none())
 
         /** @see list */
-        fun list(requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<LaunchVehicleDetailListPageAsync>> =
-            list(
-              LaunchVehicleDetailListParams.none(), requestOptions
-            )
+        fun list(
+            params: LaunchVehicleDetailListParams = LaunchVehicleDetailListParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<LaunchVehicleDetailListPageAsync>>
 
-        /** Returns a raw HTTP response for `delete /udl/launchvehicledetails/{id}`, but is otherwise the same as [LaunchVehicleDetailServiceAsync.delete]. */
+        /** @see list */
+        fun list(
+            params: LaunchVehicleDetailListParams = LaunchVehicleDetailListParams.none()
+        ): CompletableFuture<HttpResponseFor<LaunchVehicleDetailListPageAsync>> =
+            list(params, RequestOptions.none())
+
+        /** @see list */
+        fun list(
+            requestOptions: RequestOptions
+        ): CompletableFuture<HttpResponseFor<LaunchVehicleDetailListPageAsync>> =
+            list(LaunchVehicleDetailListParams.none(), requestOptions)
+
+        /**
+         * Returns a raw HTTP response for `delete /udl/launchvehicledetails/{id}`, but is otherwise
+         * the same as [LaunchVehicleDetailServiceAsync.delete].
+         */
         fun delete(id: String): CompletableFuture<HttpResponse> =
-            delete(
-              id, LaunchVehicleDetailDeleteParams.none()
-            )
+            delete(id, LaunchVehicleDetailDeleteParams.none())
 
         /** @see delete */
-        fun delete(id: String, params: LaunchVehicleDetailDeleteParams = LaunchVehicleDetailDeleteParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse> =
-            delete(
-              params.toBuilder()
-                  .id(id)
-                  .build(), requestOptions
-            )
+        fun delete(
+            id: String,
+            params: LaunchVehicleDetailDeleteParams = LaunchVehicleDetailDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            delete(params.toBuilder().id(id).build(), requestOptions)
 
         /** @see delete */
-        fun delete(id: String, params: LaunchVehicleDetailDeleteParams = LaunchVehicleDetailDeleteParams.none()): CompletableFuture<HttpResponse> =
-            delete(
-              id,
-              params,
-              RequestOptions.none(),
-            )
+        fun delete(
+            id: String,
+            params: LaunchVehicleDetailDeleteParams = LaunchVehicleDetailDeleteParams.none(),
+        ): CompletableFuture<HttpResponse> = delete(id, params, RequestOptions.none())
 
         /** @see delete */
-        fun delete(params: LaunchVehicleDetailDeleteParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse>
+        fun delete(
+            params: LaunchVehicleDetailDeleteParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse>
 
         /** @see delete */
         fun delete(params: LaunchVehicleDetailDeleteParams): CompletableFuture<HttpResponse> =
-            delete(
-              params, RequestOptions.none()
-            )
+            delete(params, RequestOptions.none())
 
         /** @see delete */
         fun delete(id: String, requestOptions: RequestOptions): CompletableFuture<HttpResponse> =
-            delete(
-              id,
-              LaunchVehicleDetailDeleteParams.none(),
-              requestOptions,
-            )
+            delete(id, LaunchVehicleDetailDeleteParams.none(), requestOptions)
 
-        /** Returns a raw HTTP response for `get /udl/launchvehicledetails/{id}`, but is otherwise the same as [LaunchVehicleDetailServiceAsync.get]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/launchvehicledetails/{id}`, but is otherwise
+         * the same as [LaunchVehicleDetailServiceAsync.get].
+         */
         fun get(id: String): CompletableFuture<HttpResponseFor<LaunchVehicleDetailGetResponse>> =
-            get(
-              id, LaunchVehicleDetailGetParams.none()
-            )
+            get(id, LaunchVehicleDetailGetParams.none())
 
         /** @see get */
-        fun get(id: String, params: LaunchVehicleDetailGetParams = LaunchVehicleDetailGetParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<LaunchVehicleDetailGetResponse>> =
-            get(
-              params.toBuilder()
-                  .id(id)
-                  .build(), requestOptions
-            )
+        fun get(
+            id: String,
+            params: LaunchVehicleDetailGetParams = LaunchVehicleDetailGetParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<LaunchVehicleDetailGetResponse>> =
+            get(params.toBuilder().id(id).build(), requestOptions)
 
         /** @see get */
-        fun get(id: String, params: LaunchVehicleDetailGetParams = LaunchVehicleDetailGetParams.none()): CompletableFuture<HttpResponseFor<LaunchVehicleDetailGetResponse>> =
-            get(
-              id,
-              params,
-              RequestOptions.none(),
-            )
+        fun get(
+            id: String,
+            params: LaunchVehicleDetailGetParams = LaunchVehicleDetailGetParams.none(),
+        ): CompletableFuture<HttpResponseFor<LaunchVehicleDetailGetResponse>> =
+            get(id, params, RequestOptions.none())
 
         /** @see get */
-        fun get(params: LaunchVehicleDetailGetParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<LaunchVehicleDetailGetResponse>>
+        fun get(
+            params: LaunchVehicleDetailGetParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<LaunchVehicleDetailGetResponse>>
 
         /** @see get */
-        fun get(params: LaunchVehicleDetailGetParams): CompletableFuture<HttpResponseFor<LaunchVehicleDetailGetResponse>> =
-            get(
-              params, RequestOptions.none()
-            )
+        fun get(
+            params: LaunchVehicleDetailGetParams
+        ): CompletableFuture<HttpResponseFor<LaunchVehicleDetailGetResponse>> =
+            get(params, RequestOptions.none())
 
         /** @see get */
-        fun get(id: String, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<LaunchVehicleDetailGetResponse>> =
-            get(
-              id,
-              LaunchVehicleDetailGetParams.none(),
-              requestOptions,
-            )
+        fun get(
+            id: String,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<LaunchVehicleDetailGetResponse>> =
+            get(id, LaunchVehicleDetailGetParams.none(), requestOptions)
     }
 }

@@ -7,12 +7,13 @@ import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.gnssobservations.history.HistoryCountParams
-import com.unifieddatalibrary.api.services.blocking.gnssobservations.HistoryService
 import java.util.function.Consumer
 
 interface HistoryService {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -22,14 +23,20 @@ interface HistoryService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService
 
-    /** Service operation to return the count of records satisfying the specified query parameters. This operation is useful to determine how many records pass a particular query criteria without retrieving large amounts of data. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
-    fun count(params: HistoryCountParams): String =
-        count(
-          params, RequestOptions.none()
-        )
+    /**
+     * Service operation to return the count of records satisfying the specified query parameters.
+     * This operation is useful to determine how many records pass a particular query criteria
+     * without retrieving large amounts of data. See the queryhelp operation
+     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
+     * information.
+     */
+    fun count(params: HistoryCountParams): String = count(params, RequestOptions.none())
 
     /** @see count */
-    fun count(params: HistoryCountParams, requestOptions: RequestOptions = RequestOptions.none()): String
+    fun count(
+        params: HistoryCountParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): String
 
     /** A view of [HistoryService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -41,15 +48,19 @@ interface HistoryService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService.WithRawResponse
 
-        /** Returns a raw HTTP response for `get /udl/gnssobservationset/history/count`, but is otherwise the same as [HistoryService.count]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/gnssobservationset/history/count`, but is
+         * otherwise the same as [HistoryService.count].
+         */
         @MustBeClosed
         fun count(params: HistoryCountParams): HttpResponseFor<String> =
-            count(
-              params, RequestOptions.none()
-            )
+            count(params, RequestOptions.none())
 
         /** @see count */
         @MustBeClosed
-        fun count(params: HistoryCountParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<String>
+        fun count(
+            params: HistoryCountParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<String>
     }
 }

@@ -330,10 +330,32 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is NotificationCreateRawParams && classificationMarking == other.classificationMarking && dataMode == other.dataMode && msgType == other.msgType && origin == other.origin && source == other.source && msgId == other.msgId && tags == other.tags && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is NotificationCreateRawParams &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            msgType == other.msgType &&
+            origin == other.origin &&
+            source == other.source &&
+            msgId == other.msgId &&
+            tags == other.tags &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(classificationMarking, dataMode, msgType, origin, source, msgId, tags, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            msgType,
+            origin,
+            source,
+            msgId,
+            tags,
+            body,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "NotificationCreateRawParams{classificationMarking=$classificationMarking, dataMode=$dataMode, msgType=$msgType, origin=$origin, source=$source, msgId=$msgId, tags=$tags, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

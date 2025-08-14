@@ -3,7 +3,6 @@
 package com.unifieddatalibrary.api.services.async
 
 import com.unifieddatalibrary.api.core.ClientOptions
-import com.unifieddatalibrary.api.services.async.ObservationServiceAsync
 import com.unifieddatalibrary.api.services.async.observations.EcpsdrServiceAsync
 import com.unifieddatalibrary.api.services.async.observations.EoObservationServiceAsync
 import com.unifieddatalibrary.api.services.async.observations.MonoradarServiceAsync
@@ -15,7 +14,9 @@ import java.util.function.Consumer
 
 interface ObservationServiceAsync {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -39,7 +40,10 @@ interface ObservationServiceAsync {
 
     fun eoObservations(): EoObservationServiceAsync
 
-    /** A view of [ObservationServiceAsync] that provides access to raw HTTP responses for each method. */
+    /**
+     * A view of [ObservationServiceAsync] that provides access to raw HTTP responses for each
+     * method.
+     */
     interface WithRawResponse {
 
         /**
@@ -47,7 +51,9 @@ interface ObservationServiceAsync {
          *
          * The original service is not modified.
          */
-        fun withOptions(modifier: Consumer<ClientOptions.Builder>): ObservationServiceAsync.WithRawResponse
+        fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): ObservationServiceAsync.WithRawResponse
 
         fun ecpsdr(): EcpsdrServiceAsync.WithRawResponse
 

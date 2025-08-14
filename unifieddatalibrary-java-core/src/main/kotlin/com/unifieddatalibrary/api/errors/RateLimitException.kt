@@ -8,14 +8,9 @@ import com.unifieddatalibrary.api.core.http.Headers
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-class RateLimitException private constructor(
-    private val headers: Headers,
-    private val body: JsonValue,
-    cause: Throwable?,
-
-) : UnifieddatalibraryServiceException(
-  "429: $body", cause
-) {
+class RateLimitException
+private constructor(private val headers: Headers, private val body: JsonValue, cause: Throwable?) :
+    UnifieddatalibraryServiceException("429: $body", cause) {
 
     override fun statusCode(): Int = 429
 
@@ -31,14 +26,12 @@ class RateLimitException private constructor(
          * Returns a mutable builder for constructing an instance of [RateLimitException].
          *
          * The following fields are required:
-         *
          * ```java
          * .headers()
          * .body()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [RateLimitException]. */
@@ -49,27 +42,17 @@ class RateLimitException private constructor(
         private var cause: Throwable? = null
 
         @JvmSynthetic
-        internal fun from(rateLimitException: RateLimitException) =
-            apply {
-                headers = rateLimitException.headers
-                body = rateLimitException.body
-                cause = rateLimitException.cause
-            }
+        internal fun from(rateLimitException: RateLimitException) = apply {
+            headers = rateLimitException.headers
+            body = rateLimitException.body
+            cause = rateLimitException.cause
+        }
 
-        fun headers(headers: Headers) =
-            apply {
-                this.headers = headers
-            }
+        fun headers(headers: Headers) = apply { this.headers = headers }
 
-        fun body(body: JsonValue) =
-            apply {
-                this.body = body
-            }
+        fun body(body: JsonValue) = apply { this.body = body }
 
-        fun cause(cause: Throwable?) =
-            apply {
-                this.cause = cause
-            }
+        fun cause(cause: Throwable?) = apply { this.cause = cause }
 
         /** Alias for calling [Builder.cause] with `cause.orElse(null)`. */
         fun cause(cause: Optional<Throwable>) = cause(cause.getOrNull())
@@ -80,7 +63,6 @@ class RateLimitException private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .headers()
          * .body()
@@ -90,13 +72,9 @@ class RateLimitException private constructor(
          */
         fun build(): RateLimitException =
             RateLimitException(
-              checkRequired(
-                "headers", headers
-              ),
-              checkRequired(
-                "body", body
-              ),
-              cause,
+                checkRequired("headers", headers),
+                checkRequired("body", body),
+                cause,
             )
     }
 }

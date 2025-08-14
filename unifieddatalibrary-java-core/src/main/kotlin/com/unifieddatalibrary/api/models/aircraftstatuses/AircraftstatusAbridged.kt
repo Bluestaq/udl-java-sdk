@@ -15,15 +15,19 @@ import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
-import com.unifieddatalibrary.api.models.aircraftstatuses.AircraftstatusAbridged
 import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/** Aircraft readiness and status data. Contains the dynamic data associated with the specific aircraft status, either in-flight or on-ground, including remaining fuel, mission readiness, and inventory, etc. */
-class AircraftstatusAbridged private constructor(
+/**
+ * Aircraft readiness and status data. Contains the dynamic data associated with the specific
+ * aircraft status, either in-flight or on-ground, including remaining fuel, mission readiness, and
+ * inventory, etc.
+ */
+class AircraftstatusAbridged
+private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
     private val idAircraft: JsonField<String>,
@@ -77,495 +81,655 @@ class AircraftstatusAbridged private constructor(
     private val troubleshootEtic: JsonField<OffsetDateTime>,
     private val unavailableSys: JsonField<List<String>>,
     private val additionalProperties: MutableMap<String, JsonValue>,
-
 ) {
 
     @JsonCreator
     private constructor(
-        @JsonProperty("classificationMarking") @ExcludeMissing classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        classificationMarking: JsonField<String> = JsonMissing.of(),
         @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
-        @JsonProperty("idAircraft") @ExcludeMissing idAircraft: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("idAircraft")
+        @ExcludeMissing
+        idAircraft: JsonField<String> = JsonMissing.of(),
         @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
         @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("additionalSys") @ExcludeMissing additionalSys: JsonField<List<String>> = JsonMissing.of(),
-        @JsonProperty("airToAirStatus") @ExcludeMissing airToAirStatus: JsonField<AirToAirStatus> = JsonMissing.of(),
-        @JsonProperty("airToGroundStatus") @ExcludeMissing airToGroundStatus: JsonField<AirToGroundStatus> = JsonMissing.of(),
-        @JsonProperty("alphaStatusCode") @ExcludeMissing alphaStatusCode: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("altAircraftId") @ExcludeMissing altAircraftId: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("contaminationStatus") @ExcludeMissing contaminationStatus: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("additionalSys")
+        @ExcludeMissing
+        additionalSys: JsonField<List<String>> = JsonMissing.of(),
+        @JsonProperty("airToAirStatus")
+        @ExcludeMissing
+        airToAirStatus: JsonField<AirToAirStatus> = JsonMissing.of(),
+        @JsonProperty("airToGroundStatus")
+        @ExcludeMissing
+        airToGroundStatus: JsonField<AirToGroundStatus> = JsonMissing.of(),
+        @JsonProperty("alphaStatusCode")
+        @ExcludeMissing
+        alphaStatusCode: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("altAircraftId")
+        @ExcludeMissing
+        altAircraftId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("contaminationStatus")
+        @ExcludeMissing
+        contaminationStatus: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("currentICAO") @ExcludeMissing currentIcao: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("currentState") @ExcludeMissing currentState: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("earliestTAEndTime") @ExcludeMissing earliestTaEndTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("currentICAO")
+        @ExcludeMissing
+        currentIcao: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("currentState")
+        @ExcludeMissing
+        currentState: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("earliestTAEndTime")
+        @ExcludeMissing
+        earliestTaEndTime: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("etic") @ExcludeMissing etic: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("flightPhase") @ExcludeMissing flightPhase: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("flightPhase")
+        @ExcludeMissing
+        flightPhase: JsonField<String> = JsonMissing.of(),
         @JsonProperty("fuel") @ExcludeMissing fuel: JsonField<Int> = JsonMissing.of(),
-        @JsonProperty("fuelFunction") @ExcludeMissing fuelFunction: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("fuelStatus") @ExcludeMissing fuelStatus: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("fuelFunction")
+        @ExcludeMissing
+        fuelFunction: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("fuelStatus")
+        @ExcludeMissing
+        fuelStatus: JsonField<String> = JsonMissing.of(),
         @JsonProperty("geoLoc") @ExcludeMissing geoLoc: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("groundStatus") @ExcludeMissing groundStatus: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("gunCapable") @ExcludeMissing gunCapable: JsonField<Boolean> = JsonMissing.of(),
+        @JsonProperty("groundStatus")
+        @ExcludeMissing
+        groundStatus: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("gunCapable")
+        @ExcludeMissing
+        gunCapable: JsonField<Boolean> = JsonMissing.of(),
         @JsonProperty("gunRdsMax") @ExcludeMissing gunRdsMax: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("gunRdsMin") @ExcludeMissing gunRdsMin: JsonField<Int> = JsonMissing.of(),
-        @JsonProperty("gunRdsType") @ExcludeMissing gunRdsType: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("idAirfield") @ExcludeMissing idAirfield: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("gunRdsType")
+        @ExcludeMissing
+        gunRdsType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("idAirfield")
+        @ExcludeMissing
+        idAirfield: JsonField<String> = JsonMissing.of(),
         @JsonProperty("idPOI") @ExcludeMissing idPoi: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("inventory") @ExcludeMissing inventory: JsonField<List<String>> = JsonMissing.of(),
-        @JsonProperty("inventoryMax") @ExcludeMissing inventoryMax: JsonField<List<Int>> = JsonMissing.of(),
-        @JsonProperty("inventoryMin") @ExcludeMissing inventoryMin: JsonField<List<Int>> = JsonMissing.of(),
-        @JsonProperty("lastInspectionDate") @ExcludeMissing lastInspectionDate: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("lastUpdatedBy") @ExcludeMissing lastUpdatedBy: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("inventory")
+        @ExcludeMissing
+        inventory: JsonField<List<String>> = JsonMissing.of(),
+        @JsonProperty("inventoryMax")
+        @ExcludeMissing
+        inventoryMax: JsonField<List<Int>> = JsonMissing.of(),
+        @JsonProperty("inventoryMin")
+        @ExcludeMissing
+        inventoryMin: JsonField<List<Int>> = JsonMissing.of(),
+        @JsonProperty("lastInspectionDate")
+        @ExcludeMissing
+        lastInspectionDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("lastUpdatedBy")
+        @ExcludeMissing
+        lastUpdatedBy: JsonField<String> = JsonMissing.of(),
         @JsonProperty("maintPoc") @ExcludeMissing maintPoc: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("maintPriority") @ExcludeMissing maintPriority: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("maintStatus") @ExcludeMissing maintStatus: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("maintStatusDriver") @ExcludeMissing maintStatusDriver: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("maintStatusUpdate") @ExcludeMissing maintStatusUpdate: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("missionReadiness") @ExcludeMissing missionReadiness: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("maintPriority")
+        @ExcludeMissing
+        maintPriority: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("maintStatus")
+        @ExcludeMissing
+        maintStatus: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("maintStatusDriver")
+        @ExcludeMissing
+        maintStatusDriver: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("maintStatusUpdate")
+        @ExcludeMissing
+        maintStatusUpdate: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("missionReadiness")
+        @ExcludeMissing
+        missionReadiness: JsonField<String> = JsonMissing.of(),
         @JsonProperty("mxRemark") @ExcludeMissing mxRemark: JsonField<String> = JsonMissing.of(),
         @JsonProperty("nextICAO") @ExcludeMissing nextIcao: JsonField<String> = JsonMissing.of(),
         @JsonProperty("notes") @ExcludeMissing notes: JsonField<String> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("origNetwork") @ExcludeMissing origNetwork: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("parkLocation") @ExcludeMissing parkLocation: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("parkLocationSystem") @ExcludeMissing parkLocationSystem: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("previousICAO") @ExcludeMissing previousIcao: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origNetwork")
+        @ExcludeMissing
+        origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("parkLocation")
+        @ExcludeMissing
+        parkLocation: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("parkLocationSystem")
+        @ExcludeMissing
+        parkLocationSystem: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("previousICAO")
+        @ExcludeMissing
+        previousIcao: JsonField<String> = JsonMissing.of(),
         @JsonProperty("sourceDL") @ExcludeMissing sourceDl: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("taStartTime") @ExcludeMissing taStartTime: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("troubleshootEtic") @ExcludeMissing troubleshootEtic: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("unavailableSys") @ExcludeMissing unavailableSys: JsonField<List<String>> = JsonMissing.of()
+        @JsonProperty("taStartTime")
+        @ExcludeMissing
+        taStartTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("troubleshootEtic")
+        @ExcludeMissing
+        troubleshootEtic: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("unavailableSys")
+        @ExcludeMissing
+        unavailableSys: JsonField<List<String>> = JsonMissing.of(),
     ) : this(
-      classificationMarking,
-      dataMode,
-      idAircraft,
-      source,
-      id,
-      additionalSys,
-      airToAirStatus,
-      airToGroundStatus,
-      alphaStatusCode,
-      altAircraftId,
-      contaminationStatus,
-      createdAt,
-      createdBy,
-      currentIcao,
-      currentState,
-      earliestTaEndTime,
-      etic,
-      flightPhase,
-      fuel,
-      fuelFunction,
-      fuelStatus,
-      geoLoc,
-      groundStatus,
-      gunCapable,
-      gunRdsMax,
-      gunRdsMin,
-      gunRdsType,
-      idAirfield,
-      idPoi,
-      inventory,
-      inventoryMax,
-      inventoryMin,
-      lastInspectionDate,
-      lastUpdatedBy,
-      maintPoc,
-      maintPriority,
-      maintStatus,
-      maintStatusDriver,
-      maintStatusUpdate,
-      missionReadiness,
-      mxRemark,
-      nextIcao,
-      notes,
-      origin,
-      origNetwork,
-      parkLocation,
-      parkLocationSystem,
-      previousIcao,
-      sourceDl,
-      taStartTime,
-      troubleshootEtic,
-      unavailableSys,
-      mutableMapOf(),
+        classificationMarking,
+        dataMode,
+        idAircraft,
+        source,
+        id,
+        additionalSys,
+        airToAirStatus,
+        airToGroundStatus,
+        alphaStatusCode,
+        altAircraftId,
+        contaminationStatus,
+        createdAt,
+        createdBy,
+        currentIcao,
+        currentState,
+        earliestTaEndTime,
+        etic,
+        flightPhase,
+        fuel,
+        fuelFunction,
+        fuelStatus,
+        geoLoc,
+        groundStatus,
+        gunCapable,
+        gunRdsMax,
+        gunRdsMin,
+        gunRdsType,
+        idAirfield,
+        idPoi,
+        inventory,
+        inventoryMax,
+        inventoryMin,
+        lastInspectionDate,
+        lastUpdatedBy,
+        maintPoc,
+        maintPriority,
+        maintStatus,
+        maintStatusDriver,
+        maintStatusUpdate,
+        missionReadiness,
+        mxRemark,
+        nextIcao,
+        notes,
+        origin,
+        origNetwork,
+        parkLocation,
+        parkLocationSystem,
+        previousIcao,
+        sourceDl,
+        taStartTime,
+        troubleshootEtic,
+        unavailableSys,
+        mutableMapOf(),
     )
 
     /**
      * Classification marking of the data in IC/CAPCO Portion-marked format.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun dataMode(): DataMode = dataMode.getRequired("dataMode")
 
     /**
      * Unique identifier of the aircraft.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun idAircraft(): String = idAircraft.getRequired("idAircraft")
 
     /**
      * Source of the data.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
      */
     fun source(): String = source.getRequired("source")
 
     /**
      * Unique identifier of the record, auto-generated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun id(): Optional<String> = id.getOptional("id")
 
     /**
      * List of additional operational systems on this aircraft beyond what is normally available.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun additionalSys(): Optional<List<String>> = additionalSys.getOptional("additionalSys")
 
     /**
      * The status of the air-to-air weapon release system (OPERATIONAL, NON-OPERATIONAL, OFF).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun airToAirStatus(): Optional<AirToAirStatus> = airToAirStatus.getOptional("airToAirStatus")
 
     /**
      * The status of the air-to-ground weapon release system (OPERATIONAL, NON-OPERATIONAL, OFF).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun airToGroundStatus(): Optional<AirToGroundStatus> = airToGroundStatus.getOptional("airToGroundStatus")
+    fun airToGroundStatus(): Optional<AirToGroundStatus> =
+        airToGroundStatus.getOptional("airToGroundStatus")
 
     /**
-     * Aircraft alpha status code that indicates the aircraft maintenance status estimated by the pilot.
+     * Aircraft alpha status code that indicates the aircraft maintenance status estimated by the
+     * pilot.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun alphaStatusCode(): Optional<String> = alphaStatusCode.getOptional("alphaStatusCode")
 
     /**
      * Alternate Aircraft Identifier provided by source.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun altAircraftId(): Optional<String> = altAircraftId.getOptional("altAircraftId")
 
     /**
-     * The contamination status of the aircraft (e.g. CLEAR, CONTAMINATED, DECONTAMINATED, UNKNOWN, etc.).
+     * The contamination status of the aircraft (e.g. CLEAR, CONTAMINATED, DECONTAMINATED, UNKNOWN,
+     * etc.).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun contaminationStatus(): Optional<String> = contaminationStatus.getOptional("contaminationStatus")
+    fun contaminationStatus(): Optional<String> =
+        contaminationStatus.getOptional("contaminationStatus")
 
     /**
      * Time the row was created in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
 
     /**
      * Application user who created the row in the database, auto-populated by the system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
-     * The International Civil Aviation Organization (ICAO) code at which this aircraft is currently located or has most recently departed, if airborne.
+     * The International Civil Aviation Organization (ICAO) code at which this aircraft is currently
+     * located or has most recently departed, if airborne.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun currentIcao(): Optional<String> = currentIcao.getOptional("currentICAO")
 
     /**
-     * The current readiness state of the aircraft (e.g. AIRBORNE, ALERTCOCKED, AVAILABLE, BATTLESTATION, RUNWAY ALERT, SUITUP).
+     * The current readiness state of the aircraft (e.g. AIRBORNE, ALERTCOCKED, AVAILABLE,
+     * BATTLESTATION, RUNWAY ALERT, SUITUP).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun currentState(): Optional<String> = currentState.getOptional("currentState")
 
     /**
-     * The earliest time that turnaround of the aircraft may complete, in ISO 8601 UTC format with millisecond precision.
+     * The earliest time that turnaround of the aircraft may complete, in ISO 8601 UTC format with
+     * millisecond precision.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun earliestTaEndTime(): Optional<OffsetDateTime> = earliestTaEndTime.getOptional("earliestTAEndTime")
+    fun earliestTaEndTime(): Optional<OffsetDateTime> =
+        earliestTaEndTime.getOptional("earliestTAEndTime")
 
     /**
-     * The Expected Time in Commission (ETIC) for this aircraft, in ISO 8601 UTC format with millisecond precision. This is the estimated time when the issue will be resolved.
+     * The Expected Time in Commission (ETIC) for this aircraft, in ISO 8601 UTC format with
+     * millisecond precision. This is the estimated time when the issue will be resolved.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun etic(): Optional<OffsetDateTime> = etic.getOptional("etic")
 
     /**
      * Current flight phase (e.g. AIR REFUELING, GROUND, LANDING, etc.) of the aircraft.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun flightPhase(): Optional<String> = flightPhase.getOptional("flightPhase")
 
     /**
      * The mass of fuel remaining on the aircraft, in kilograms.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun fuel(): Optional<Int> = fuel.getOptional("fuel")
 
     /**
      * Used in conjunction with the fuel field to indicate either burnable or offload fuel.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun fuelFunction(): Optional<String> = fuelFunction.getOptional("fuelFunction")
 
     /**
-     * The state of the aircraft fuel status (e.g. DELIVERED, DUMPED, EMPTY, FULL, OTHER, REQUESTED, etc.).
+     * The state of the aircraft fuel status (e.g. DELIVERED, DUMPED, EMPTY, FULL, OTHER, REQUESTED,
+     * etc.).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun fuelStatus(): Optional<String> = fuelStatus.getOptional("fuelStatus")
 
     /**
      * US Air Force geographic location code of the airfield where the aircraft is located.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun geoLoc(): Optional<String> = geoLoc.getOptional("geoLoc")
 
     /**
      * The ground status of the aircraft (e.g. ALERT, CREW READY, ENGINE START, HANGAR, etc.).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun groundStatus(): Optional<String> = groundStatus.getOptional("groundStatus")
 
     /**
      * Flag indicating that the aircraft is capable of making at least one gun pass.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun gunCapable(): Optional<Boolean> = gunCapable.getOptional("gunCapable")
 
     /**
      * The upper bound of the estimated number of gun rounds available.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun gunRdsMax(): Optional<Int> = gunRdsMax.getOptional("gunRdsMax")
 
     /**
      * The lower bound of the estimated number of gun rounds available.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun gunRdsMin(): Optional<Int> = gunRdsMin.getOptional("gunRdsMin")
 
     /**
      * The type of gun rounds available (e.g. 7.62 MM, 20 MM, 25 MM, etc.).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun gunRdsType(): Optional<String> = gunRdsType.getOptional("gunRdsType")
 
     /**
      * If not airborne, the unique identifier of the installation currently hosting the aircraft.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun idAirfield(): Optional<String> = idAirfield.getOptional("idAirfield")
 
     /**
-     * Unique identifier of the Point of Interest (POI) record related to this aircraft status. This will generally represent the location of an aircraft on the ground.
+     * Unique identifier of the Point of Interest (POI) record related to this aircraft status. This
+     * will generally represent the location of an aircraft on the ground.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun idPoi(): Optional<String> = idPoi.getOptional("idPOI")
 
     /**
-     * Array of inventory item(s) for which estimate(s) are available (e.g. AIM-9 SIDEWINDER, AIM-120 AMRAAM, AIM-92 STINGER, CHAFF DECOY, FLARE TP 400, etc.). Intended as, but not constrained to, MIL-STD-6016 environment dependent specific/store type designations. This array must be the same length as inventoryMin and inventoryMax.
+     * Array of inventory item(s) for which estimate(s) are available (e.g. AIM-9 SIDEWINDER,
+     * AIM-120 AMRAAM, AIM-92 STINGER, CHAFF DECOY, FLARE TP 400, etc.). Intended as, but not
+     * constrained to, MIL-STD-6016 environment dependent specific/store type designations. This
+     * array must be the same length as inventoryMin and inventoryMax.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun inventory(): Optional<List<String>> = inventory.getOptional("inventory")
 
     /**
-     * Array of the upper bound quantity for each of the inventory items. The values in this array must correspond to position index in the inventory array. This array must be the same length as inventory and inventoryMin.
+     * Array of the upper bound quantity for each of the inventory items. The values in this array
+     * must correspond to position index in the inventory array. This array must be the same length
+     * as inventory and inventoryMin.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun inventoryMax(): Optional<List<Int>> = inventoryMax.getOptional("inventoryMax")
 
     /**
-     * Array of the lower bound quantity for each of the inventory items. The values in this array must correspond to position index in the inventory array. This array must be the same length as inventory and inventoryMax.
+     * Array of the lower bound quantity for each of the inventory items. The values in this array
+     * must correspond to position index in the inventory array. This array must be the same length
+     * as inventory and inventoryMax.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun inventoryMin(): Optional<List<Int>> = inventoryMin.getOptional("inventoryMin")
 
     /**
-     * Date when the military aircraft inspection was last performed, in ISO 8601 UTC format with millisecond precision.
+     * Date when the military aircraft inspection was last performed, in ISO 8601 UTC format with
+     * millisecond precision.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun lastInspectionDate(): Optional<OffsetDateTime> = lastInspectionDate.getOptional("lastInspectionDate")
+    fun lastInspectionDate(): Optional<OffsetDateTime> =
+        lastInspectionDate.getOptional("lastInspectionDate")
 
     /**
      * The name or ID of the external user that updated this status.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun lastUpdatedBy(): Optional<String> = lastUpdatedBy.getOptional("lastUpdatedBy")
 
     /**
      * Military aircraft maintenance point of contact for this aircraft.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun maintPoc(): Optional<String> = maintPoc.getOptional("maintPoc")
 
     /**
      * Indicates the priority of the maintenance effort.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun maintPriority(): Optional<String> = maintPriority.getOptional("maintPriority")
 
     /**
      * The maintenance status of the aircraft.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun maintStatus(): Optional<String> = maintStatus.getOptional("maintStatus")
 
     /**
      * Indicates the maintenance discrepancy that drives the current maintenance status.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun maintStatusDriver(): Optional<String> = maintStatusDriver.getOptional("maintStatusDriver")
 
     /**
-     * The time of the last maintenance status update, in ISO 8601 UTC format with millisecond precision.
+     * The time of the last maintenance status update, in ISO 8601 UTC format with millisecond
+     * precision.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun maintStatusUpdate(): Optional<OffsetDateTime> = maintStatusUpdate.getOptional("maintStatusUpdate")
+    fun maintStatusUpdate(): Optional<OffsetDateTime> =
+        maintStatusUpdate.getOptional("maintStatusUpdate")
 
     /**
      * The Operational Capability of the reported aircraft (ABLE, LOFUEL, UNABLE).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun missionReadiness(): Optional<String> = missionReadiness.getOptional("missionReadiness")
 
     /**
      * Maintenance pacing remarks assocociated with this aircraft.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun mxRemark(): Optional<String> = mxRemark.getOptional("mxRemark")
 
     /**
-     * The International Civil Aviation Organization (ICAO) code of the next destination of this aircraft.
+     * The International Civil Aviation Organization (ICAO) code of the next destination of this
+     * aircraft.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun nextIcao(): Optional<String> = nextIcao.getOptional("nextICAO")
 
     /**
      * Optional notes/comments concerning this aircraft status.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun notes(): Optional<String> = notes.getOptional("notes")
 
     /**
-     * Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     * Originating system or organization which produced the data, if different from the source. The
+     * origin may be different than the source if the source was a mediating system which forwarded
+     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origin(): Optional<String> = origin.getOptional("origin")
 
     /**
-     * The originating source network on which this record was created, auto-populated by the system.
+     * The originating source network on which this record was created, auto-populated by the
+     * system.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
     /**
      * The parking location of this aircraft.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun parkLocation(): Optional<String> = parkLocation.getOptional("parkLocation")
 
     /**
      * The system that designated the parking location (e.g. EMOC, GDSS, PEX, etc.).
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun parkLocationSystem(): Optional<String> = parkLocationSystem.getOptional("parkLocationSystem")
+    fun parkLocationSystem(): Optional<String> =
+        parkLocationSystem.getOptional("parkLocationSystem")
 
     /**
-     * The International Civil Aviation Organization (ICAO) code at which this aircraft was previously located.
+     * The International Civil Aviation Organization (ICAO) code at which this aircraft was
+     * previously located.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun previousIcao(): Optional<String> = previousIcao.getOptional("previousICAO")
 
     /**
-     * The source data library from which this record was received. This could be a remote or tactical UDL or another data library. If null, the record should be assumed to have originated from the primary Enterprise UDL.
+     * The source data library from which this record was received. This could be a remote or
+     * tactical UDL or another data library. If null, the record should be assumed to have
+     * originated from the primary Enterprise UDL.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun sourceDl(): Optional<String> = sourceDl.getOptional("sourceDL")
 
     /**
      * The turnaround start time, in ISO 8601 UTC format with millisecond precision.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun taStartTime(): Optional<OffsetDateTime> = taStartTime.getOptional("taStartTime")
 
     /**
-     * Estimated Time for Completion (ETIC) of an aircraft issue, in ISO 8601 UTC format with millisecond precision. This is the estimated time when the course of action to resolve the issue will be determined.
+     * Estimated Time for Completion (ETIC) of an aircraft issue, in ISO 8601 UTC format with
+     * millisecond precision. This is the estimated time when the course of action to resolve the
+     * issue will be determined.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
-    fun troubleshootEtic(): Optional<OffsetDateTime> = troubleshootEtic.getOptional("troubleshootEtic")
+    fun troubleshootEtic(): Optional<OffsetDateTime> =
+        troubleshootEtic.getOptional("troubleshootEtic")
 
     /**
      * List of unavailable systems that would normally be on this aircraft.
      *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g. if the server responded with an unexpected value).
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
      */
     fun unavailableSys(): Optional<List<String>> = unavailableSys.getOptional("unavailableSys")
 
     /**
      * Returns the raw JSON value of [classificationMarking].
      *
-     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("classificationMarking")
     @ExcludeMissing
@@ -576,36 +740,28 @@ class AircraftstatusAbridged private constructor(
      *
      * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("dataMode")
-    @ExcludeMissing
-    fun _dataMode(): JsonField<DataMode> = dataMode
+    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
 
     /**
      * Returns the raw JSON value of [idAircraft].
      *
      * Unlike [idAircraft], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("idAircraft")
-    @ExcludeMissing
-    fun _idAircraft(): JsonField<String> = idAircraft
+    @JsonProperty("idAircraft") @ExcludeMissing fun _idAircraft(): JsonField<String> = idAircraft
 
     /**
      * Returns the raw JSON value of [source].
      *
      * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("source")
-    @ExcludeMissing
-    fun _source(): JsonField<String> = source
+    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
 
     /**
      * Returns the raw JSON value of [id].
      *
      * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("id")
-    @ExcludeMissing
-    fun _id(): JsonField<String> = id
+    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
 
     /**
      * Returns the raw JSON value of [additionalSys].
@@ -628,7 +784,8 @@ class AircraftstatusAbridged private constructor(
     /**
      * Returns the raw JSON value of [airToGroundStatus].
      *
-     * Unlike [airToGroundStatus], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [airToGroundStatus], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("airToGroundStatus")
     @ExcludeMissing
@@ -655,7 +812,8 @@ class AircraftstatusAbridged private constructor(
     /**
      * Returns the raw JSON value of [contaminationStatus].
      *
-     * Unlike [contaminationStatus], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [contaminationStatus], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("contaminationStatus")
     @ExcludeMissing
@@ -675,18 +833,14 @@ class AircraftstatusAbridged private constructor(
      *
      * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("createdBy")
-    @ExcludeMissing
-    fun _createdBy(): JsonField<String> = createdBy
+    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
     /**
      * Returns the raw JSON value of [currentIcao].
      *
      * Unlike [currentIcao], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("currentICAO")
-    @ExcludeMissing
-    fun _currentIcao(): JsonField<String> = currentIcao
+    @JsonProperty("currentICAO") @ExcludeMissing fun _currentIcao(): JsonField<String> = currentIcao
 
     /**
      * Returns the raw JSON value of [currentState].
@@ -700,7 +854,8 @@ class AircraftstatusAbridged private constructor(
     /**
      * Returns the raw JSON value of [earliestTaEndTime].
      *
-     * Unlike [earliestTaEndTime], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [earliestTaEndTime], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("earliestTAEndTime")
     @ExcludeMissing
@@ -711,27 +866,21 @@ class AircraftstatusAbridged private constructor(
      *
      * Unlike [etic], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("etic")
-    @ExcludeMissing
-    fun _etic(): JsonField<OffsetDateTime> = etic
+    @JsonProperty("etic") @ExcludeMissing fun _etic(): JsonField<OffsetDateTime> = etic
 
     /**
      * Returns the raw JSON value of [flightPhase].
      *
      * Unlike [flightPhase], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("flightPhase")
-    @ExcludeMissing
-    fun _flightPhase(): JsonField<String> = flightPhase
+    @JsonProperty("flightPhase") @ExcludeMissing fun _flightPhase(): JsonField<String> = flightPhase
 
     /**
      * Returns the raw JSON value of [fuel].
      *
      * Unlike [fuel], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("fuel")
-    @ExcludeMissing
-    fun _fuel(): JsonField<Int> = fuel
+    @JsonProperty("fuel") @ExcludeMissing fun _fuel(): JsonField<Int> = fuel
 
     /**
      * Returns the raw JSON value of [fuelFunction].
@@ -747,18 +896,14 @@ class AircraftstatusAbridged private constructor(
      *
      * Unlike [fuelStatus], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("fuelStatus")
-    @ExcludeMissing
-    fun _fuelStatus(): JsonField<String> = fuelStatus
+    @JsonProperty("fuelStatus") @ExcludeMissing fun _fuelStatus(): JsonField<String> = fuelStatus
 
     /**
      * Returns the raw JSON value of [geoLoc].
      *
      * Unlike [geoLoc], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("geoLoc")
-    @ExcludeMissing
-    fun _geoLoc(): JsonField<String> = geoLoc
+    @JsonProperty("geoLoc") @ExcludeMissing fun _geoLoc(): JsonField<String> = geoLoc
 
     /**
      * Returns the raw JSON value of [groundStatus].
@@ -774,63 +919,49 @@ class AircraftstatusAbridged private constructor(
      *
      * Unlike [gunCapable], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("gunCapable")
-    @ExcludeMissing
-    fun _gunCapable(): JsonField<Boolean> = gunCapable
+    @JsonProperty("gunCapable") @ExcludeMissing fun _gunCapable(): JsonField<Boolean> = gunCapable
 
     /**
      * Returns the raw JSON value of [gunRdsMax].
      *
      * Unlike [gunRdsMax], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("gunRdsMax")
-    @ExcludeMissing
-    fun _gunRdsMax(): JsonField<Int> = gunRdsMax
+    @JsonProperty("gunRdsMax") @ExcludeMissing fun _gunRdsMax(): JsonField<Int> = gunRdsMax
 
     /**
      * Returns the raw JSON value of [gunRdsMin].
      *
      * Unlike [gunRdsMin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("gunRdsMin")
-    @ExcludeMissing
-    fun _gunRdsMin(): JsonField<Int> = gunRdsMin
+    @JsonProperty("gunRdsMin") @ExcludeMissing fun _gunRdsMin(): JsonField<Int> = gunRdsMin
 
     /**
      * Returns the raw JSON value of [gunRdsType].
      *
      * Unlike [gunRdsType], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("gunRdsType")
-    @ExcludeMissing
-    fun _gunRdsType(): JsonField<String> = gunRdsType
+    @JsonProperty("gunRdsType") @ExcludeMissing fun _gunRdsType(): JsonField<String> = gunRdsType
 
     /**
      * Returns the raw JSON value of [idAirfield].
      *
      * Unlike [idAirfield], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("idAirfield")
-    @ExcludeMissing
-    fun _idAirfield(): JsonField<String> = idAirfield
+    @JsonProperty("idAirfield") @ExcludeMissing fun _idAirfield(): JsonField<String> = idAirfield
 
     /**
      * Returns the raw JSON value of [idPoi].
      *
      * Unlike [idPoi], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("idPOI")
-    @ExcludeMissing
-    fun _idPoi(): JsonField<String> = idPoi
+    @JsonProperty("idPOI") @ExcludeMissing fun _idPoi(): JsonField<String> = idPoi
 
     /**
      * Returns the raw JSON value of [inventory].
      *
      * Unlike [inventory], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("inventory")
-    @ExcludeMissing
-    fun _inventory(): JsonField<List<String>> = inventory
+    @JsonProperty("inventory") @ExcludeMissing fun _inventory(): JsonField<List<String>> = inventory
 
     /**
      * Returns the raw JSON value of [inventoryMax].
@@ -853,7 +984,8 @@ class AircraftstatusAbridged private constructor(
     /**
      * Returns the raw JSON value of [lastInspectionDate].
      *
-     * Unlike [lastInspectionDate], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [lastInspectionDate], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("lastInspectionDate")
     @ExcludeMissing
@@ -873,9 +1005,7 @@ class AircraftstatusAbridged private constructor(
      *
      * Unlike [maintPoc], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("maintPoc")
-    @ExcludeMissing
-    fun _maintPoc(): JsonField<String> = maintPoc
+    @JsonProperty("maintPoc") @ExcludeMissing fun _maintPoc(): JsonField<String> = maintPoc
 
     /**
      * Returns the raw JSON value of [maintPriority].
@@ -891,14 +1021,13 @@ class AircraftstatusAbridged private constructor(
      *
      * Unlike [maintStatus], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("maintStatus")
-    @ExcludeMissing
-    fun _maintStatus(): JsonField<String> = maintStatus
+    @JsonProperty("maintStatus") @ExcludeMissing fun _maintStatus(): JsonField<String> = maintStatus
 
     /**
      * Returns the raw JSON value of [maintStatusDriver].
      *
-     * Unlike [maintStatusDriver], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [maintStatusDriver], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("maintStatusDriver")
     @ExcludeMissing
@@ -907,7 +1036,8 @@ class AircraftstatusAbridged private constructor(
     /**
      * Returns the raw JSON value of [maintStatusUpdate].
      *
-     * Unlike [maintStatusUpdate], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [maintStatusUpdate], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("maintStatusUpdate")
     @ExcludeMissing
@@ -916,7 +1046,8 @@ class AircraftstatusAbridged private constructor(
     /**
      * Returns the raw JSON value of [missionReadiness].
      *
-     * Unlike [missionReadiness], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [missionReadiness], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("missionReadiness")
     @ExcludeMissing
@@ -927,45 +1058,35 @@ class AircraftstatusAbridged private constructor(
      *
      * Unlike [mxRemark], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("mxRemark")
-    @ExcludeMissing
-    fun _mxRemark(): JsonField<String> = mxRemark
+    @JsonProperty("mxRemark") @ExcludeMissing fun _mxRemark(): JsonField<String> = mxRemark
 
     /**
      * Returns the raw JSON value of [nextIcao].
      *
      * Unlike [nextIcao], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("nextICAO")
-    @ExcludeMissing
-    fun _nextIcao(): JsonField<String> = nextIcao
+    @JsonProperty("nextICAO") @ExcludeMissing fun _nextIcao(): JsonField<String> = nextIcao
 
     /**
      * Returns the raw JSON value of [notes].
      *
      * Unlike [notes], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("notes")
-    @ExcludeMissing
-    fun _notes(): JsonField<String> = notes
+    @JsonProperty("notes") @ExcludeMissing fun _notes(): JsonField<String> = notes
 
     /**
      * Returns the raw JSON value of [origin].
      *
      * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origin")
-    @ExcludeMissing
-    fun _origin(): JsonField<String> = origin
+    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
 
     /**
      * Returns the raw JSON value of [origNetwork].
      *
      * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("origNetwork")
-    @ExcludeMissing
-    fun _origNetwork(): JsonField<String> = origNetwork
+    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
 
     /**
      * Returns the raw JSON value of [parkLocation].
@@ -979,7 +1100,8 @@ class AircraftstatusAbridged private constructor(
     /**
      * Returns the raw JSON value of [parkLocationSystem].
      *
-     * Unlike [parkLocationSystem], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [parkLocationSystem], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("parkLocationSystem")
     @ExcludeMissing
@@ -999,9 +1121,7 @@ class AircraftstatusAbridged private constructor(
      *
      * Unlike [sourceDl], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("sourceDL")
-    @ExcludeMissing
-    fun _sourceDl(): JsonField<String> = sourceDl
+    @JsonProperty("sourceDL") @ExcludeMissing fun _sourceDl(): JsonField<String> = sourceDl
 
     /**
      * Returns the raw JSON value of [taStartTime].
@@ -1015,7 +1135,8 @@ class AircraftstatusAbridged private constructor(
     /**
      * Returns the raw JSON value of [troubleshootEtic].
      *
-     * Unlike [troubleshootEtic], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [troubleshootEtic], this method doesn't throw if the JSON field has an unexpected
+     * type.
      */
     @JsonProperty("troubleshootEtic")
     @ExcludeMissing
@@ -1032,12 +1153,13 @@ class AircraftstatusAbridged private constructor(
 
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
-      additionalProperties.put(key, value)
+        additionalProperties.put(key, value)
     }
 
     @JsonAnyGetter
     @ExcludeMissing
-    fun _additionalProperties(): Map<String, JsonValue> = Collections.unmodifiableMap(additionalProperties)
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
 
     fun toBuilder() = Builder().from(this)
 
@@ -1047,7 +1169,6 @@ class AircraftstatusAbridged private constructor(
          * Returns a mutable builder for constructing an instance of [AircraftstatusAbridged].
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -1055,8 +1176,7 @@ class AircraftstatusAbridged private constructor(
          * .source()
          * ```
          */
-        @JvmStatic
-        fun builder() = Builder()
+        @JvmStatic fun builder() = Builder()
     }
 
     /** A builder for [AircraftstatusAbridged]. */
@@ -1117,100 +1237,101 @@ class AircraftstatusAbridged private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(aircraftstatusAbridged: AircraftstatusAbridged) =
-            apply {
-                classificationMarking = aircraftstatusAbridged.classificationMarking
-                dataMode = aircraftstatusAbridged.dataMode
-                idAircraft = aircraftstatusAbridged.idAircraft
-                source = aircraftstatusAbridged.source
-                id = aircraftstatusAbridged.id
-                additionalSys = aircraftstatusAbridged.additionalSys.map { it.toMutableList() }
-                airToAirStatus = aircraftstatusAbridged.airToAirStatus
-                airToGroundStatus = aircraftstatusAbridged.airToGroundStatus
-                alphaStatusCode = aircraftstatusAbridged.alphaStatusCode
-                altAircraftId = aircraftstatusAbridged.altAircraftId
-                contaminationStatus = aircraftstatusAbridged.contaminationStatus
-                createdAt = aircraftstatusAbridged.createdAt
-                createdBy = aircraftstatusAbridged.createdBy
-                currentIcao = aircraftstatusAbridged.currentIcao
-                currentState = aircraftstatusAbridged.currentState
-                earliestTaEndTime = aircraftstatusAbridged.earliestTaEndTime
-                etic = aircraftstatusAbridged.etic
-                flightPhase = aircraftstatusAbridged.flightPhase
-                fuel = aircraftstatusAbridged.fuel
-                fuelFunction = aircraftstatusAbridged.fuelFunction
-                fuelStatus = aircraftstatusAbridged.fuelStatus
-                geoLoc = aircraftstatusAbridged.geoLoc
-                groundStatus = aircraftstatusAbridged.groundStatus
-                gunCapable = aircraftstatusAbridged.gunCapable
-                gunRdsMax = aircraftstatusAbridged.gunRdsMax
-                gunRdsMin = aircraftstatusAbridged.gunRdsMin
-                gunRdsType = aircraftstatusAbridged.gunRdsType
-                idAirfield = aircraftstatusAbridged.idAirfield
-                idPoi = aircraftstatusAbridged.idPoi
-                inventory = aircraftstatusAbridged.inventory.map { it.toMutableList() }
-                inventoryMax = aircraftstatusAbridged.inventoryMax.map { it.toMutableList() }
-                inventoryMin = aircraftstatusAbridged.inventoryMin.map { it.toMutableList() }
-                lastInspectionDate = aircraftstatusAbridged.lastInspectionDate
-                lastUpdatedBy = aircraftstatusAbridged.lastUpdatedBy
-                maintPoc = aircraftstatusAbridged.maintPoc
-                maintPriority = aircraftstatusAbridged.maintPriority
-                maintStatus = aircraftstatusAbridged.maintStatus
-                maintStatusDriver = aircraftstatusAbridged.maintStatusDriver
-                maintStatusUpdate = aircraftstatusAbridged.maintStatusUpdate
-                missionReadiness = aircraftstatusAbridged.missionReadiness
-                mxRemark = aircraftstatusAbridged.mxRemark
-                nextIcao = aircraftstatusAbridged.nextIcao
-                notes = aircraftstatusAbridged.notes
-                origin = aircraftstatusAbridged.origin
-                origNetwork = aircraftstatusAbridged.origNetwork
-                parkLocation = aircraftstatusAbridged.parkLocation
-                parkLocationSystem = aircraftstatusAbridged.parkLocationSystem
-                previousIcao = aircraftstatusAbridged.previousIcao
-                sourceDl = aircraftstatusAbridged.sourceDl
-                taStartTime = aircraftstatusAbridged.taStartTime
-                troubleshootEtic = aircraftstatusAbridged.troubleshootEtic
-                unavailableSys = aircraftstatusAbridged.unavailableSys.map { it.toMutableList() }
-                additionalProperties = aircraftstatusAbridged.additionalProperties.toMutableMap()
-            }
+        internal fun from(aircraftstatusAbridged: AircraftstatusAbridged) = apply {
+            classificationMarking = aircraftstatusAbridged.classificationMarking
+            dataMode = aircraftstatusAbridged.dataMode
+            idAircraft = aircraftstatusAbridged.idAircraft
+            source = aircraftstatusAbridged.source
+            id = aircraftstatusAbridged.id
+            additionalSys = aircraftstatusAbridged.additionalSys.map { it.toMutableList() }
+            airToAirStatus = aircraftstatusAbridged.airToAirStatus
+            airToGroundStatus = aircraftstatusAbridged.airToGroundStatus
+            alphaStatusCode = aircraftstatusAbridged.alphaStatusCode
+            altAircraftId = aircraftstatusAbridged.altAircraftId
+            contaminationStatus = aircraftstatusAbridged.contaminationStatus
+            createdAt = aircraftstatusAbridged.createdAt
+            createdBy = aircraftstatusAbridged.createdBy
+            currentIcao = aircraftstatusAbridged.currentIcao
+            currentState = aircraftstatusAbridged.currentState
+            earliestTaEndTime = aircraftstatusAbridged.earliestTaEndTime
+            etic = aircraftstatusAbridged.etic
+            flightPhase = aircraftstatusAbridged.flightPhase
+            fuel = aircraftstatusAbridged.fuel
+            fuelFunction = aircraftstatusAbridged.fuelFunction
+            fuelStatus = aircraftstatusAbridged.fuelStatus
+            geoLoc = aircraftstatusAbridged.geoLoc
+            groundStatus = aircraftstatusAbridged.groundStatus
+            gunCapable = aircraftstatusAbridged.gunCapable
+            gunRdsMax = aircraftstatusAbridged.gunRdsMax
+            gunRdsMin = aircraftstatusAbridged.gunRdsMin
+            gunRdsType = aircraftstatusAbridged.gunRdsType
+            idAirfield = aircraftstatusAbridged.idAirfield
+            idPoi = aircraftstatusAbridged.idPoi
+            inventory = aircraftstatusAbridged.inventory.map { it.toMutableList() }
+            inventoryMax = aircraftstatusAbridged.inventoryMax.map { it.toMutableList() }
+            inventoryMin = aircraftstatusAbridged.inventoryMin.map { it.toMutableList() }
+            lastInspectionDate = aircraftstatusAbridged.lastInspectionDate
+            lastUpdatedBy = aircraftstatusAbridged.lastUpdatedBy
+            maintPoc = aircraftstatusAbridged.maintPoc
+            maintPriority = aircraftstatusAbridged.maintPriority
+            maintStatus = aircraftstatusAbridged.maintStatus
+            maintStatusDriver = aircraftstatusAbridged.maintStatusDriver
+            maintStatusUpdate = aircraftstatusAbridged.maintStatusUpdate
+            missionReadiness = aircraftstatusAbridged.missionReadiness
+            mxRemark = aircraftstatusAbridged.mxRemark
+            nextIcao = aircraftstatusAbridged.nextIcao
+            notes = aircraftstatusAbridged.notes
+            origin = aircraftstatusAbridged.origin
+            origNetwork = aircraftstatusAbridged.origNetwork
+            parkLocation = aircraftstatusAbridged.parkLocation
+            parkLocationSystem = aircraftstatusAbridged.parkLocationSystem
+            previousIcao = aircraftstatusAbridged.previousIcao
+            sourceDl = aircraftstatusAbridged.sourceDl
+            taStartTime = aircraftstatusAbridged.taStartTime
+            troubleshootEtic = aircraftstatusAbridged.troubleshootEtic
+            unavailableSys = aircraftstatusAbridged.unavailableSys.map { it.toMutableList() }
+            additionalProperties = aircraftstatusAbridged.additionalProperties.toMutableMap()
+        }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
-        fun classificationMarking(classificationMarking: String) = classificationMarking(JsonField.of(classificationMarking))
+        fun classificationMarking(classificationMarking: String) =
+            classificationMarking(JsonField.of(classificationMarking))
 
         /**
          * Sets [Builder.classificationMarking] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.classificationMarking] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun classificationMarking(classificationMarking: JsonField<String>) =
-            apply {
-                this.classificationMarking = classificationMarking
-            }
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            this.classificationMarking = classificationMarking
+        }
 
         /**
          * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
          *
-         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
          *
-         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
          *
          * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
          *
-         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
          */
         fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
 
         /**
          * Sets [Builder.dataMode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun dataMode(dataMode: JsonField<DataMode>) =
-            apply {
-                this.dataMode = dataMode
-            }
+        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
 
         /** Unique identifier of the aircraft. */
         fun idAircraft(idAircraft: String) = idAircraft(JsonField.of(idAircraft))
@@ -1218,13 +1339,11 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.idAircraft] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idAircraft] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.idAircraft] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun idAircraft(idAircraft: JsonField<String>) =
-            apply {
-                this.idAircraft = idAircraft
-            }
+        fun idAircraft(idAircraft: JsonField<String>) = apply { this.idAircraft = idAircraft }
 
         /** Source of the data. */
         fun source(source: String) = source(JsonField.of(source))
@@ -1232,13 +1351,10 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.source] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.source] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun source(source: JsonField<String>) =
-            apply {
-                this.source = source
-            }
+        fun source(source: JsonField<String>) = apply { this.source = source }
 
         /** Unique identifier of the record, auto-generated by the system. */
         fun id(id: String) = id(JsonField.of(id))
@@ -1246,81 +1362,92 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.id] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.id] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun id(id: JsonField<String>) =
-            apply {
-                this.id = id
-            }
+        fun id(id: JsonField<String>) = apply { this.id = id }
 
-        /** List of additional operational systems on this aircraft beyond what is normally available. */
+        /**
+         * List of additional operational systems on this aircraft beyond what is normally
+         * available.
+         */
         fun additionalSys(additionalSys: List<String>) = additionalSys(JsonField.of(additionalSys))
 
         /**
          * Sets [Builder.additionalSys] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.additionalSys] with a well-typed `List<String>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.additionalSys] with a well-typed `List<String>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun additionalSys(additionalSys: JsonField<List<String>>) =
-            apply {
-                this.additionalSys = additionalSys.map { it.toMutableList() }
-            }
+        fun additionalSys(additionalSys: JsonField<List<String>>) = apply {
+            this.additionalSys = additionalSys.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [String] to [additionalSys].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addAdditionalSy(additionalSy: String) =
-            apply {
-                additionalSys = (additionalSys ?: JsonField.of(mutableListOf())).also {
+        fun addAdditionalSy(additionalSy: String) = apply {
+            additionalSys =
+                (additionalSys ?: JsonField.of(mutableListOf())).also {
                     checkKnown("additionalSys", it).add(additionalSy)
                 }
-            }
+        }
 
-        /** The status of the air-to-air weapon release system (OPERATIONAL, NON-OPERATIONAL, OFF). */
-        fun airToAirStatus(airToAirStatus: AirToAirStatus) = airToAirStatus(JsonField.of(airToAirStatus))
+        /**
+         * The status of the air-to-air weapon release system (OPERATIONAL, NON-OPERATIONAL, OFF).
+         */
+        fun airToAirStatus(airToAirStatus: AirToAirStatus) =
+            airToAirStatus(JsonField.of(airToAirStatus))
 
         /**
          * Sets [Builder.airToAirStatus] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.airToAirStatus] with a well-typed [AirToAirStatus] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.airToAirStatus] with a well-typed [AirToAirStatus] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun airToAirStatus(airToAirStatus: JsonField<AirToAirStatus>) =
-            apply {
-                this.airToAirStatus = airToAirStatus
-            }
+        fun airToAirStatus(airToAirStatus: JsonField<AirToAirStatus>) = apply {
+            this.airToAirStatus = airToAirStatus
+        }
 
-        /** The status of the air-to-ground weapon release system (OPERATIONAL, NON-OPERATIONAL, OFF). */
-        fun airToGroundStatus(airToGroundStatus: AirToGroundStatus) = airToGroundStatus(JsonField.of(airToGroundStatus))
+        /**
+         * The status of the air-to-ground weapon release system (OPERATIONAL, NON-OPERATIONAL,
+         * OFF).
+         */
+        fun airToGroundStatus(airToGroundStatus: AirToGroundStatus) =
+            airToGroundStatus(JsonField.of(airToGroundStatus))
 
         /**
          * Sets [Builder.airToGroundStatus] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.airToGroundStatus] with a well-typed [AirToGroundStatus] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.airToGroundStatus] with a well-typed [AirToGroundStatus]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun airToGroundStatus(airToGroundStatus: JsonField<AirToGroundStatus>) =
-            apply {
-                this.airToGroundStatus = airToGroundStatus
-            }
+        fun airToGroundStatus(airToGroundStatus: JsonField<AirToGroundStatus>) = apply {
+            this.airToGroundStatus = airToGroundStatus
+        }
 
-        /** Aircraft alpha status code that indicates the aircraft maintenance status estimated by the pilot. */
-        fun alphaStatusCode(alphaStatusCode: String) = alphaStatusCode(JsonField.of(alphaStatusCode))
+        /**
+         * Aircraft alpha status code that indicates the aircraft maintenance status estimated by
+         * the pilot.
+         */
+        fun alphaStatusCode(alphaStatusCode: String) =
+            alphaStatusCode(JsonField.of(alphaStatusCode))
 
         /**
          * Sets [Builder.alphaStatusCode] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.alphaStatusCode] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.alphaStatusCode] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun alphaStatusCode(alphaStatusCode: JsonField<String>) =
-            apply {
-                this.alphaStatusCode = alphaStatusCode
-            }
+        fun alphaStatusCode(alphaStatusCode: JsonField<String>) = apply {
+            this.alphaStatusCode = alphaStatusCode
+        }
 
         /** Alternate Aircraft Identifier provided by source. */
         fun altAircraftId(altAircraftId: String) = altAircraftId(JsonField.of(altAircraftId))
@@ -1328,27 +1455,31 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.altAircraftId] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.altAircraftId] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.altAircraftId] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun altAircraftId(altAircraftId: JsonField<String>) =
-            apply {
-                this.altAircraftId = altAircraftId
-            }
+        fun altAircraftId(altAircraftId: JsonField<String>) = apply {
+            this.altAircraftId = altAircraftId
+        }
 
-        /** The contamination status of the aircraft (e.g. CLEAR, CONTAMINATED, DECONTAMINATED, UNKNOWN, etc.). */
-        fun contaminationStatus(contaminationStatus: String) = contaminationStatus(JsonField.of(contaminationStatus))
+        /**
+         * The contamination status of the aircraft (e.g. CLEAR, CONTAMINATED, DECONTAMINATED,
+         * UNKNOWN, etc.).
+         */
+        fun contaminationStatus(contaminationStatus: String) =
+            contaminationStatus(JsonField.of(contaminationStatus))
 
         /**
          * Sets [Builder.contaminationStatus] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.contaminationStatus] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.contaminationStatus] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun contaminationStatus(contaminationStatus: JsonField<String>) =
-            apply {
-                this.contaminationStatus = contaminationStatus
-            }
+        fun contaminationStatus(contaminationStatus: JsonField<String>) = apply {
+            this.contaminationStatus = contaminationStatus
+        }
 
         /** Time the row was created in the database, auto-populated by the system. */
         fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
@@ -1356,13 +1487,11 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.createdAt] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun createdAt(createdAt: JsonField<OffsetDateTime>) =
-            apply {
-                this.createdAt = createdAt
-            }
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
 
         /** Application user who created the row in the database, auto-populated by the system. */
         fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
@@ -1370,69 +1499,76 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.createdBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.createdBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun createdBy(createdBy: JsonField<String>) =
-            apply {
-                this.createdBy = createdBy
-            }
+        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
-        /** The International Civil Aviation Organization (ICAO) code at which this aircraft is currently located or has most recently departed, if airborne. */
+        /**
+         * The International Civil Aviation Organization (ICAO) code at which this aircraft is
+         * currently located or has most recently departed, if airborne.
+         */
         fun currentIcao(currentIcao: String) = currentIcao(JsonField.of(currentIcao))
 
         /**
          * Sets [Builder.currentIcao] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.currentIcao] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.currentIcao] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun currentIcao(currentIcao: JsonField<String>) =
-            apply {
-                this.currentIcao = currentIcao
-            }
+        fun currentIcao(currentIcao: JsonField<String>) = apply { this.currentIcao = currentIcao }
 
-        /** The current readiness state of the aircraft (e.g. AIRBORNE, ALERTCOCKED, AVAILABLE, BATTLESTATION, RUNWAY ALERT, SUITUP). */
+        /**
+         * The current readiness state of the aircraft (e.g. AIRBORNE, ALERTCOCKED, AVAILABLE,
+         * BATTLESTATION, RUNWAY ALERT, SUITUP).
+         */
         fun currentState(currentState: String) = currentState(JsonField.of(currentState))
 
         /**
          * Sets [Builder.currentState] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.currentState] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.currentState] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun currentState(currentState: JsonField<String>) =
-            apply {
-                this.currentState = currentState
-            }
+        fun currentState(currentState: JsonField<String>) = apply {
+            this.currentState = currentState
+        }
 
-        /** The earliest time that turnaround of the aircraft may complete, in ISO 8601 UTC format with millisecond precision. */
-        fun earliestTaEndTime(earliestTaEndTime: OffsetDateTime) = earliestTaEndTime(JsonField.of(earliestTaEndTime))
+        /**
+         * The earliest time that turnaround of the aircraft may complete, in ISO 8601 UTC format
+         * with millisecond precision.
+         */
+        fun earliestTaEndTime(earliestTaEndTime: OffsetDateTime) =
+            earliestTaEndTime(JsonField.of(earliestTaEndTime))
 
         /**
          * Sets [Builder.earliestTaEndTime] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.earliestTaEndTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.earliestTaEndTime] with a well-typed [OffsetDateTime]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun earliestTaEndTime(earliestTaEndTime: JsonField<OffsetDateTime>) =
-            apply {
-                this.earliestTaEndTime = earliestTaEndTime
-            }
+        fun earliestTaEndTime(earliestTaEndTime: JsonField<OffsetDateTime>) = apply {
+            this.earliestTaEndTime = earliestTaEndTime
+        }
 
-        /** The Expected Time in Commission (ETIC) for this aircraft, in ISO 8601 UTC format with millisecond precision. This is the estimated time when the issue will be resolved. */
+        /**
+         * The Expected Time in Commission (ETIC) for this aircraft, in ISO 8601 UTC format with
+         * millisecond precision. This is the estimated time when the issue will be resolved.
+         */
         fun etic(etic: OffsetDateTime) = etic(JsonField.of(etic))
 
         /**
          * Sets [Builder.etic] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.etic] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.etic] with a well-typed [OffsetDateTime] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun etic(etic: JsonField<OffsetDateTime>) =
-            apply {
-                this.etic = etic
-            }
+        fun etic(etic: JsonField<OffsetDateTime>) = apply { this.etic = etic }
 
         /** Current flight phase (e.g. AIR REFUELING, GROUND, LANDING, etc.) of the aircraft. */
         fun flightPhase(flightPhase: String) = flightPhase(JsonField.of(flightPhase))
@@ -1440,13 +1576,11 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.flightPhase] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.flightPhase] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.flightPhase] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun flightPhase(flightPhase: JsonField<String>) =
-            apply {
-                this.flightPhase = flightPhase
-            }
+        fun flightPhase(flightPhase: JsonField<String>) = apply { this.flightPhase = flightPhase }
 
         /** The mass of fuel remaining on the aircraft, in kilograms. */
         fun fuel(fuel: Int) = fuel(JsonField.of(fuel))
@@ -1454,13 +1588,10 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.fuel] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.fuel] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.fuel] with a well-typed [Int] value instead. This method
+         * is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun fuel(fuel: JsonField<Int>) =
-            apply {
-                this.fuel = fuel
-            }
+        fun fuel(fuel: JsonField<Int>) = apply { this.fuel = fuel }
 
         /** Used in conjunction with the fuel field to indicate either burnable or offload fuel. */
         fun fuelFunction(fuelFunction: String) = fuelFunction(JsonField.of(fuelFunction))
@@ -1468,27 +1599,28 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.fuelFunction] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.fuelFunction] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.fuelFunction] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun fuelFunction(fuelFunction: JsonField<String>) =
-            apply {
-                this.fuelFunction = fuelFunction
-            }
+        fun fuelFunction(fuelFunction: JsonField<String>) = apply {
+            this.fuelFunction = fuelFunction
+        }
 
-        /** The state of the aircraft fuel status (e.g. DELIVERED, DUMPED, EMPTY, FULL, OTHER, REQUESTED, etc.). */
+        /**
+         * The state of the aircraft fuel status (e.g. DELIVERED, DUMPED, EMPTY, FULL, OTHER,
+         * REQUESTED, etc.).
+         */
         fun fuelStatus(fuelStatus: String) = fuelStatus(JsonField.of(fuelStatus))
 
         /**
          * Sets [Builder.fuelStatus] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.fuelStatus] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.fuelStatus] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun fuelStatus(fuelStatus: JsonField<String>) =
-            apply {
-                this.fuelStatus = fuelStatus
-            }
+        fun fuelStatus(fuelStatus: JsonField<String>) = apply { this.fuelStatus = fuelStatus }
 
         /** US Air Force geographic location code of the airfield where the aircraft is located. */
         fun geoLoc(geoLoc: String) = geoLoc(JsonField.of(geoLoc))
@@ -1496,27 +1628,26 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.geoLoc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.geoLoc] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.geoLoc] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun geoLoc(geoLoc: JsonField<String>) =
-            apply {
-                this.geoLoc = geoLoc
-            }
+        fun geoLoc(geoLoc: JsonField<String>) = apply { this.geoLoc = geoLoc }
 
-        /** The ground status of the aircraft (e.g. ALERT, CREW READY, ENGINE START, HANGAR, etc.). */
+        /**
+         * The ground status of the aircraft (e.g. ALERT, CREW READY, ENGINE START, HANGAR, etc.).
+         */
         fun groundStatus(groundStatus: String) = groundStatus(JsonField.of(groundStatus))
 
         /**
          * Sets [Builder.groundStatus] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.groundStatus] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.groundStatus] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun groundStatus(groundStatus: JsonField<String>) =
-            apply {
-                this.groundStatus = groundStatus
-            }
+        fun groundStatus(groundStatus: JsonField<String>) = apply {
+            this.groundStatus = groundStatus
+        }
 
         /** Flag indicating that the aircraft is capable of making at least one gun pass. */
         fun gunCapable(gunCapable: Boolean) = gunCapable(JsonField.of(gunCapable))
@@ -1524,13 +1655,11 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.gunCapable] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.gunCapable] with a well-typed [Boolean] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.gunCapable] with a well-typed [Boolean] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun gunCapable(gunCapable: JsonField<Boolean>) =
-            apply {
-                this.gunCapable = gunCapable
-            }
+        fun gunCapable(gunCapable: JsonField<Boolean>) = apply { this.gunCapable = gunCapable }
 
         /** The upper bound of the estimated number of gun rounds available. */
         fun gunRdsMax(gunRdsMax: Int) = gunRdsMax(JsonField.of(gunRdsMax))
@@ -1538,13 +1667,10 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.gunRdsMax] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.gunRdsMax] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.gunRdsMax] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun gunRdsMax(gunRdsMax: JsonField<Int>) =
-            apply {
-                this.gunRdsMax = gunRdsMax
-            }
+        fun gunRdsMax(gunRdsMax: JsonField<Int>) = apply { this.gunRdsMax = gunRdsMax }
 
         /** The lower bound of the estimated number of gun rounds available. */
         fun gunRdsMin(gunRdsMin: Int) = gunRdsMin(JsonField.of(gunRdsMin))
@@ -1552,13 +1678,10 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.gunRdsMin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.gunRdsMin] with a well-typed [Int] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.gunRdsMin] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun gunRdsMin(gunRdsMin: JsonField<Int>) =
-            apply {
-                this.gunRdsMin = gunRdsMin
-            }
+        fun gunRdsMin(gunRdsMin: JsonField<Int>) = apply { this.gunRdsMin = gunRdsMin }
 
         /** The type of gun rounds available (e.g. 7.62 MM, 20 MM, 25 MM, etc.). */
         fun gunRdsType(gunRdsType: String) = gunRdsType(JsonField.of(gunRdsType))
@@ -1566,133 +1689,149 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.gunRdsType] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.gunRdsType] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.gunRdsType] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun gunRdsType(gunRdsType: JsonField<String>) =
-            apply {
-                this.gunRdsType = gunRdsType
-            }
+        fun gunRdsType(gunRdsType: JsonField<String>) = apply { this.gunRdsType = gunRdsType }
 
-        /** If not airborne, the unique identifier of the installation currently hosting the aircraft. */
+        /**
+         * If not airborne, the unique identifier of the installation currently hosting the
+         * aircraft.
+         */
         fun idAirfield(idAirfield: String) = idAirfield(JsonField.of(idAirfield))
 
         /**
          * Sets [Builder.idAirfield] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idAirfield] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.idAirfield] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun idAirfield(idAirfield: JsonField<String>) =
-            apply {
-                this.idAirfield = idAirfield
-            }
+        fun idAirfield(idAirfield: JsonField<String>) = apply { this.idAirfield = idAirfield }
 
-        /** Unique identifier of the Point of Interest (POI) record related to this aircraft status. This will generally represent the location of an aircraft on the ground. */
+        /**
+         * Unique identifier of the Point of Interest (POI) record related to this aircraft status.
+         * This will generally represent the location of an aircraft on the ground.
+         */
         fun idPoi(idPoi: String) = idPoi(JsonField.of(idPoi))
 
         /**
          * Sets [Builder.idPoi] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.idPoi] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.idPoi] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun idPoi(idPoi: JsonField<String>) =
-            apply {
-                this.idPoi = idPoi
-            }
+        fun idPoi(idPoi: JsonField<String>) = apply { this.idPoi = idPoi }
 
-        /** Array of inventory item(s) for which estimate(s) are available (e.g. AIM-9 SIDEWINDER, AIM-120 AMRAAM, AIM-92 STINGER, CHAFF DECOY, FLARE TP 400, etc.). Intended as, but not constrained to, MIL-STD-6016 environment dependent specific/store type designations. This array must be the same length as inventoryMin and inventoryMax. */
+        /**
+         * Array of inventory item(s) for which estimate(s) are available (e.g. AIM-9 SIDEWINDER,
+         * AIM-120 AMRAAM, AIM-92 STINGER, CHAFF DECOY, FLARE TP 400, etc.). Intended as, but not
+         * constrained to, MIL-STD-6016 environment dependent specific/store type designations. This
+         * array must be the same length as inventoryMin and inventoryMax.
+         */
         fun inventory(inventory: List<String>) = inventory(JsonField.of(inventory))
 
         /**
          * Sets [Builder.inventory] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.inventory] with a well-typed `List<String>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.inventory] with a well-typed `List<String>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun inventory(inventory: JsonField<List<String>>) =
-            apply {
-                this.inventory = inventory.map { it.toMutableList() }
-            }
+        fun inventory(inventory: JsonField<List<String>>) = apply {
+            this.inventory = inventory.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [String] to [Builder.inventory].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addInventory(inventory: String) =
-            apply {
-                this.inventory = (this.inventory ?: JsonField.of(mutableListOf())).also {
+        fun addInventory(inventory: String) = apply {
+            this.inventory =
+                (this.inventory ?: JsonField.of(mutableListOf())).also {
                     checkKnown("inventory", it).add(inventory)
                 }
-            }
+        }
 
-        /** Array of the upper bound quantity for each of the inventory items. The values in this array must correspond to position index in the inventory array. This array must be the same length as inventory and inventoryMin. */
+        /**
+         * Array of the upper bound quantity for each of the inventory items. The values in this
+         * array must correspond to position index in the inventory array. This array must be the
+         * same length as inventory and inventoryMin.
+         */
         fun inventoryMax(inventoryMax: List<Int>) = inventoryMax(JsonField.of(inventoryMax))
 
         /**
          * Sets [Builder.inventoryMax] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.inventoryMax] with a well-typed `List<Int>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.inventoryMax] with a well-typed `List<Int>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun inventoryMax(inventoryMax: JsonField<List<Int>>) =
-            apply {
-                this.inventoryMax = inventoryMax.map { it.toMutableList() }
-            }
+        fun inventoryMax(inventoryMax: JsonField<List<Int>>) = apply {
+            this.inventoryMax = inventoryMax.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [Int] to [Builder.inventoryMax].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addInventoryMax(inventoryMax: Int) =
-            apply {
-                this.inventoryMax = (this.inventoryMax ?: JsonField.of(mutableListOf())).also {
+        fun addInventoryMax(inventoryMax: Int) = apply {
+            this.inventoryMax =
+                (this.inventoryMax ?: JsonField.of(mutableListOf())).also {
                     checkKnown("inventoryMax", it).add(inventoryMax)
                 }
-            }
+        }
 
-        /** Array of the lower bound quantity for each of the inventory items. The values in this array must correspond to position index in the inventory array. This array must be the same length as inventory and inventoryMax. */
+        /**
+         * Array of the lower bound quantity for each of the inventory items. The values in this
+         * array must correspond to position index in the inventory array. This array must be the
+         * same length as inventory and inventoryMax.
+         */
         fun inventoryMin(inventoryMin: List<Int>) = inventoryMin(JsonField.of(inventoryMin))
 
         /**
          * Sets [Builder.inventoryMin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.inventoryMin] with a well-typed `List<Int>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.inventoryMin] with a well-typed `List<Int>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun inventoryMin(inventoryMin: JsonField<List<Int>>) =
-            apply {
-                this.inventoryMin = inventoryMin.map { it.toMutableList() }
-            }
+        fun inventoryMin(inventoryMin: JsonField<List<Int>>) = apply {
+            this.inventoryMin = inventoryMin.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [Int] to [Builder.inventoryMin].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addInventoryMin(inventoryMin: Int) =
-            apply {
-                this.inventoryMin = (this.inventoryMin ?: JsonField.of(mutableListOf())).also {
+        fun addInventoryMin(inventoryMin: Int) = apply {
+            this.inventoryMin =
+                (this.inventoryMin ?: JsonField.of(mutableListOf())).also {
                     checkKnown("inventoryMin", it).add(inventoryMin)
                 }
-            }
+        }
 
-        /** Date when the military aircraft inspection was last performed, in ISO 8601 UTC format with millisecond precision. */
-        fun lastInspectionDate(lastInspectionDate: OffsetDateTime) = lastInspectionDate(JsonField.of(lastInspectionDate))
+        /**
+         * Date when the military aircraft inspection was last performed, in ISO 8601 UTC format
+         * with millisecond precision.
+         */
+        fun lastInspectionDate(lastInspectionDate: OffsetDateTime) =
+            lastInspectionDate(JsonField.of(lastInspectionDate))
 
         /**
          * Sets [Builder.lastInspectionDate] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.lastInspectionDate] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.lastInspectionDate] with a well-typed [OffsetDateTime]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun lastInspectionDate(lastInspectionDate: JsonField<OffsetDateTime>) =
-            apply {
-                this.lastInspectionDate = lastInspectionDate
-            }
+        fun lastInspectionDate(lastInspectionDate: JsonField<OffsetDateTime>) = apply {
+            this.lastInspectionDate = lastInspectionDate
+        }
 
         /** The name or ID of the external user that updated this status. */
         fun lastUpdatedBy(lastUpdatedBy: String) = lastUpdatedBy(JsonField.of(lastUpdatedBy))
@@ -1700,13 +1839,13 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.lastUpdatedBy] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.lastUpdatedBy] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.lastUpdatedBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun lastUpdatedBy(lastUpdatedBy: JsonField<String>) =
-            apply {
-                this.lastUpdatedBy = lastUpdatedBy
-            }
+        fun lastUpdatedBy(lastUpdatedBy: JsonField<String>) = apply {
+            this.lastUpdatedBy = lastUpdatedBy
+        }
 
         /** Military aircraft maintenance point of contact for this aircraft. */
         fun maintPoc(maintPoc: String) = maintPoc(JsonField.of(maintPoc))
@@ -1714,13 +1853,10 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.maintPoc] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.maintPoc] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.maintPoc] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun maintPoc(maintPoc: JsonField<String>) =
-            apply {
-                this.maintPoc = maintPoc
-            }
+        fun maintPoc(maintPoc: JsonField<String>) = apply { this.maintPoc = maintPoc }
 
         /** Indicates the priority of the maintenance effort. */
         fun maintPriority(maintPriority: String) = maintPriority(JsonField.of(maintPriority))
@@ -1728,13 +1864,13 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.maintPriority] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.maintPriority] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.maintPriority] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun maintPriority(maintPriority: JsonField<String>) =
-            apply {
-                this.maintPriority = maintPriority
-            }
+        fun maintPriority(maintPriority: JsonField<String>) = apply {
+            this.maintPriority = maintPriority
+        }
 
         /** The maintenance status of the aircraft. */
         fun maintStatus(maintStatus: String) = maintStatus(JsonField.of(maintStatus))
@@ -1742,55 +1878,59 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.maintStatus] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.maintStatus] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.maintStatus] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun maintStatus(maintStatus: JsonField<String>) =
-            apply {
-                this.maintStatus = maintStatus
-            }
+        fun maintStatus(maintStatus: JsonField<String>) = apply { this.maintStatus = maintStatus }
 
         /** Indicates the maintenance discrepancy that drives the current maintenance status. */
-        fun maintStatusDriver(maintStatusDriver: String) = maintStatusDriver(JsonField.of(maintStatusDriver))
+        fun maintStatusDriver(maintStatusDriver: String) =
+            maintStatusDriver(JsonField.of(maintStatusDriver))
 
         /**
          * Sets [Builder.maintStatusDriver] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.maintStatusDriver] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.maintStatusDriver] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun maintStatusDriver(maintStatusDriver: JsonField<String>) =
-            apply {
-                this.maintStatusDriver = maintStatusDriver
-            }
+        fun maintStatusDriver(maintStatusDriver: JsonField<String>) = apply {
+            this.maintStatusDriver = maintStatusDriver
+        }
 
-        /** The time of the last maintenance status update, in ISO 8601 UTC format with millisecond precision. */
-        fun maintStatusUpdate(maintStatusUpdate: OffsetDateTime) = maintStatusUpdate(JsonField.of(maintStatusUpdate))
+        /**
+         * The time of the last maintenance status update, in ISO 8601 UTC format with millisecond
+         * precision.
+         */
+        fun maintStatusUpdate(maintStatusUpdate: OffsetDateTime) =
+            maintStatusUpdate(JsonField.of(maintStatusUpdate))
 
         /**
          * Sets [Builder.maintStatusUpdate] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.maintStatusUpdate] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.maintStatusUpdate] with a well-typed [OffsetDateTime]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun maintStatusUpdate(maintStatusUpdate: JsonField<OffsetDateTime>) =
-            apply {
-                this.maintStatusUpdate = maintStatusUpdate
-            }
+        fun maintStatusUpdate(maintStatusUpdate: JsonField<OffsetDateTime>) = apply {
+            this.maintStatusUpdate = maintStatusUpdate
+        }
 
         /** The Operational Capability of the reported aircraft (ABLE, LOFUEL, UNABLE). */
-        fun missionReadiness(missionReadiness: String) = missionReadiness(JsonField.of(missionReadiness))
+        fun missionReadiness(missionReadiness: String) =
+            missionReadiness(JsonField.of(missionReadiness))
 
         /**
          * Sets [Builder.missionReadiness] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.missionReadiness] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.missionReadiness] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun missionReadiness(missionReadiness: JsonField<String>) =
-            apply {
-                this.missionReadiness = missionReadiness
-            }
+        fun missionReadiness(missionReadiness: JsonField<String>) = apply {
+            this.missionReadiness = missionReadiness
+        }
 
         /** Maintenance pacing remarks assocociated with this aircraft. */
         fun mxRemark(mxRemark: String) = mxRemark(JsonField.of(mxRemark))
@@ -1798,27 +1938,24 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.mxRemark] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.mxRemark] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.mxRemark] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun mxRemark(mxRemark: JsonField<String>) =
-            apply {
-                this.mxRemark = mxRemark
-            }
+        fun mxRemark(mxRemark: JsonField<String>) = apply { this.mxRemark = mxRemark }
 
-        /** The International Civil Aviation Organization (ICAO) code of the next destination of this aircraft. */
+        /**
+         * The International Civil Aviation Organization (ICAO) code of the next destination of this
+         * aircraft.
+         */
         fun nextIcao(nextIcao: String) = nextIcao(JsonField.of(nextIcao))
 
         /**
          * Sets [Builder.nextIcao] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.nextIcao] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.nextIcao] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun nextIcao(nextIcao: JsonField<String>) =
-            apply {
-                this.nextIcao = nextIcao
-            }
+        fun nextIcao(nextIcao: JsonField<String>) = apply { this.nextIcao = nextIcao }
 
         /** Optional notes/comments concerning this aircraft status. */
         fun notes(notes: String) = notes(JsonField.of(notes))
@@ -1826,41 +1963,41 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.notes] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.notes] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.notes] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun notes(notes: JsonField<String>) =
-            apply {
-                this.notes = notes
-            }
+        fun notes(notes: JsonField<String>) = apply { this.notes = notes }
 
-        /** Originating system or organization which produced the data, if different from the source. The origin may be different than the source if the source was a mediating system which forwarded the data on behalf of the origin system. If null, the source may be assumed to be the origin. */
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         */
         fun origin(origin: String) = origin(JsonField.of(origin))
 
         /**
          * Sets [Builder.origin] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origin] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun origin(origin: JsonField<String>) =
-            apply {
-                this.origin = origin
-            }
+        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
 
-        /** The originating source network on which this record was created, auto-populated by the system. */
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         */
         fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
 
         /**
          * Sets [Builder.origNetwork] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun origNetwork(origNetwork: JsonField<String>) =
-            apply {
-                this.origNetwork = origNetwork
-            }
+        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
 
         /** The parking location of this aircraft. */
         fun parkLocation(parkLocation: String) = parkLocation(JsonField.of(parkLocation))
@@ -1868,55 +2005,60 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.parkLocation] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.parkLocation] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.parkLocation] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun parkLocation(parkLocation: JsonField<String>) =
-            apply {
-                this.parkLocation = parkLocation
-            }
+        fun parkLocation(parkLocation: JsonField<String>) = apply {
+            this.parkLocation = parkLocation
+        }
 
         /** The system that designated the parking location (e.g. EMOC, GDSS, PEX, etc.). */
-        fun parkLocationSystem(parkLocationSystem: String) = parkLocationSystem(JsonField.of(parkLocationSystem))
+        fun parkLocationSystem(parkLocationSystem: String) =
+            parkLocationSystem(JsonField.of(parkLocationSystem))
 
         /**
          * Sets [Builder.parkLocationSystem] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.parkLocationSystem] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.parkLocationSystem] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun parkLocationSystem(parkLocationSystem: JsonField<String>) =
-            apply {
-                this.parkLocationSystem = parkLocationSystem
-            }
+        fun parkLocationSystem(parkLocationSystem: JsonField<String>) = apply {
+            this.parkLocationSystem = parkLocationSystem
+        }
 
-        /** The International Civil Aviation Organization (ICAO) code at which this aircraft was previously located. */
+        /**
+         * The International Civil Aviation Organization (ICAO) code at which this aircraft was
+         * previously located.
+         */
         fun previousIcao(previousIcao: String) = previousIcao(JsonField.of(previousIcao))
 
         /**
          * Sets [Builder.previousIcao] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.previousIcao] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.previousIcao] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun previousIcao(previousIcao: JsonField<String>) =
-            apply {
-                this.previousIcao = previousIcao
-            }
+        fun previousIcao(previousIcao: JsonField<String>) = apply {
+            this.previousIcao = previousIcao
+        }
 
-        /** The source data library from which this record was received. This could be a remote or tactical UDL or another data library. If null, the record should be assumed to have originated from the primary Enterprise UDL. */
+        /**
+         * The source data library from which this record was received. This could be a remote or
+         * tactical UDL or another data library. If null, the record should be assumed to have
+         * originated from the primary Enterprise UDL.
+         */
         fun sourceDl(sourceDl: String) = sourceDl(JsonField.of(sourceDl))
 
         /**
          * Sets [Builder.sourceDl] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.sourceDl] with a well-typed [String] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.sourceDl] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun sourceDl(sourceDl: JsonField<String>) =
-            apply {
-                this.sourceDl = sourceDl
-            }
+        fun sourceDl(sourceDl: JsonField<String>) = apply { this.sourceDl = sourceDl }
 
         /** The turnaround start time, in ISO 8601 UTC format with millisecond precision. */
         fun taStartTime(taStartTime: OffsetDateTime) = taStartTime(JsonField.of(taStartTime))
@@ -1924,79 +2066,78 @@ class AircraftstatusAbridged private constructor(
         /**
          * Sets [Builder.taStartTime] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.taStartTime] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.taStartTime] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun taStartTime(taStartTime: JsonField<OffsetDateTime>) =
-            apply {
-                this.taStartTime = taStartTime
-            }
+        fun taStartTime(taStartTime: JsonField<OffsetDateTime>) = apply {
+            this.taStartTime = taStartTime
+        }
 
-        /** Estimated Time for Completion (ETIC) of an aircraft issue, in ISO 8601 UTC format with millisecond precision. This is the estimated time when the course of action to resolve the issue will be determined. */
-        fun troubleshootEtic(troubleshootEtic: OffsetDateTime) = troubleshootEtic(JsonField.of(troubleshootEtic))
+        /**
+         * Estimated Time for Completion (ETIC) of an aircraft issue, in ISO 8601 UTC format with
+         * millisecond precision. This is the estimated time when the course of action to resolve
+         * the issue will be determined.
+         */
+        fun troubleshootEtic(troubleshootEtic: OffsetDateTime) =
+            troubleshootEtic(JsonField.of(troubleshootEtic))
 
         /**
          * Sets [Builder.troubleshootEtic] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.troubleshootEtic] with a well-typed [OffsetDateTime] value instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
+         * You should usually call [Builder.troubleshootEtic] with a well-typed [OffsetDateTime]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
          */
-        fun troubleshootEtic(troubleshootEtic: JsonField<OffsetDateTime>) =
-            apply {
-                this.troubleshootEtic = troubleshootEtic
-            }
+        fun troubleshootEtic(troubleshootEtic: JsonField<OffsetDateTime>) = apply {
+            this.troubleshootEtic = troubleshootEtic
+        }
 
         /** List of unavailable systems that would normally be on this aircraft. */
-        fun unavailableSys(unavailableSys: List<String>) = unavailableSys(JsonField.of(unavailableSys))
+        fun unavailableSys(unavailableSys: List<String>) =
+            unavailableSys(JsonField.of(unavailableSys))
 
         /**
          * Sets [Builder.unavailableSys] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.unavailableSys] with a well-typed `List<String>` value instead. This method is primarily for setting the field to an undocumented or not yet
+         * You should usually call [Builder.unavailableSys] with a well-typed `List<String>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun unavailableSys(unavailableSys: JsonField<List<String>>) =
-            apply {
-                this.unavailableSys = unavailableSys.map { it.toMutableList() }
-            }
+        fun unavailableSys(unavailableSys: JsonField<List<String>>) = apply {
+            this.unavailableSys = unavailableSys.map { it.toMutableList() }
+        }
 
         /**
          * Adds a single [String] to [unavailableSys].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addUnavailableSy(unavailableSy: String) =
-            apply {
-                unavailableSys = (unavailableSys ?: JsonField.of(mutableListOf())).also {
+        fun addUnavailableSy(unavailableSy: String) = apply {
+            unavailableSys =
+                (unavailableSys ?: JsonField.of(mutableListOf())).also {
                     checkKnown("unavailableSys", it).add(unavailableSy)
                 }
-            }
+        }
 
-        fun additionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.clear()
-                putAllAdditionalProperties(additionalProperties)
-            }
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
 
-        fun putAdditionalProperty(key: String, value: JsonValue) =
-            apply {
-                additionalProperties.put(key, value)
-            }
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
 
-        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) =
-            apply {
-                this.additionalProperties.putAll(additionalProperties)
-            }
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
 
-        fun removeAdditionalProperty(key: String) =
-            apply {
-                additionalProperties.remove(key)
-            }
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
 
-        fun removeAllAdditionalProperties(keys: Set<String>) =
-            apply {
-                keys.forEach(::removeAdditionalProperty)
-            }
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
 
         /**
          * Returns an immutable instance of [AircraftstatusAbridged].
@@ -2004,7 +2145,6 @@ class AircraftstatusAbridged private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          *
          * The following fields are required:
-         *
          * ```java
          * .classificationMarking()
          * .dataMode()
@@ -2016,132 +2156,123 @@ class AircraftstatusAbridged private constructor(
          */
         fun build(): AircraftstatusAbridged =
             AircraftstatusAbridged(
-              checkRequired(
-                "classificationMarking", classificationMarking
-              ),
-              checkRequired(
-                "dataMode", dataMode
-              ),
-              checkRequired(
-                "idAircraft", idAircraft
-              ),
-              checkRequired(
-                "source", source
-              ),
-              id,
-              (additionalSys ?: JsonMissing.of()).map { it.toImmutable() },
-              airToAirStatus,
-              airToGroundStatus,
-              alphaStatusCode,
-              altAircraftId,
-              contaminationStatus,
-              createdAt,
-              createdBy,
-              currentIcao,
-              currentState,
-              earliestTaEndTime,
-              etic,
-              flightPhase,
-              fuel,
-              fuelFunction,
-              fuelStatus,
-              geoLoc,
-              groundStatus,
-              gunCapable,
-              gunRdsMax,
-              gunRdsMin,
-              gunRdsType,
-              idAirfield,
-              idPoi,
-              (inventory ?: JsonMissing.of()).map { it.toImmutable() },
-              (inventoryMax ?: JsonMissing.of()).map { it.toImmutable() },
-              (inventoryMin ?: JsonMissing.of()).map { it.toImmutable() },
-              lastInspectionDate,
-              lastUpdatedBy,
-              maintPoc,
-              maintPriority,
-              maintStatus,
-              maintStatusDriver,
-              maintStatusUpdate,
-              missionReadiness,
-              mxRemark,
-              nextIcao,
-              notes,
-              origin,
-              origNetwork,
-              parkLocation,
-              parkLocationSystem,
-              previousIcao,
-              sourceDl,
-              taStartTime,
-              troubleshootEtic,
-              (unavailableSys ?: JsonMissing.of()).map { it.toImmutable() },
-              additionalProperties.toMutableMap(),
+                checkRequired("classificationMarking", classificationMarking),
+                checkRequired("dataMode", dataMode),
+                checkRequired("idAircraft", idAircraft),
+                checkRequired("source", source),
+                id,
+                (additionalSys ?: JsonMissing.of()).map { it.toImmutable() },
+                airToAirStatus,
+                airToGroundStatus,
+                alphaStatusCode,
+                altAircraftId,
+                contaminationStatus,
+                createdAt,
+                createdBy,
+                currentIcao,
+                currentState,
+                earliestTaEndTime,
+                etic,
+                flightPhase,
+                fuel,
+                fuelFunction,
+                fuelStatus,
+                geoLoc,
+                groundStatus,
+                gunCapable,
+                gunRdsMax,
+                gunRdsMin,
+                gunRdsType,
+                idAirfield,
+                idPoi,
+                (inventory ?: JsonMissing.of()).map { it.toImmutable() },
+                (inventoryMax ?: JsonMissing.of()).map { it.toImmutable() },
+                (inventoryMin ?: JsonMissing.of()).map { it.toImmutable() },
+                lastInspectionDate,
+                lastUpdatedBy,
+                maintPoc,
+                maintPriority,
+                maintStatus,
+                maintStatusDriver,
+                maintStatusUpdate,
+                missionReadiness,
+                mxRemark,
+                nextIcao,
+                notes,
+                origin,
+                origNetwork,
+                parkLocation,
+                parkLocationSystem,
+                previousIcao,
+                sourceDl,
+                taStartTime,
+                troubleshootEtic,
+                (unavailableSys ?: JsonMissing.of()).map { it.toImmutable() },
+                additionalProperties.toMutableMap(),
             )
     }
 
     private var validated: Boolean = false
 
-    fun validate(): AircraftstatusAbridged =
-        apply {
-            if (validated) {
-              return@apply
-            }
-
-            classificationMarking()
-            dataMode().validate()
-            idAircraft()
-            source()
-            id()
-            additionalSys()
-            airToAirStatus().ifPresent { it.validate() }
-            airToGroundStatus().ifPresent { it.validate() }
-            alphaStatusCode()
-            altAircraftId()
-            contaminationStatus()
-            createdAt()
-            createdBy()
-            currentIcao()
-            currentState()
-            earliestTaEndTime()
-            etic()
-            flightPhase()
-            fuel()
-            fuelFunction()
-            fuelStatus()
-            geoLoc()
-            groundStatus()
-            gunCapable()
-            gunRdsMax()
-            gunRdsMin()
-            gunRdsType()
-            idAirfield()
-            idPoi()
-            inventory()
-            inventoryMax()
-            inventoryMin()
-            lastInspectionDate()
-            lastUpdatedBy()
-            maintPoc()
-            maintPriority()
-            maintStatus()
-            maintStatusDriver()
-            maintStatusUpdate()
-            missionReadiness()
-            mxRemark()
-            nextIcao()
-            notes()
-            origin()
-            origNetwork()
-            parkLocation()
-            parkLocationSystem()
-            previousIcao()
-            sourceDl()
-            taStartTime()
-            troubleshootEtic()
-            unavailableSys()
-            validated = true
+    fun validate(): AircraftstatusAbridged = apply {
+        if (validated) {
+            return@apply
         }
+
+        classificationMarking()
+        dataMode().validate()
+        idAircraft()
+        source()
+        id()
+        additionalSys()
+        airToAirStatus().ifPresent { it.validate() }
+        airToGroundStatus().ifPresent { it.validate() }
+        alphaStatusCode()
+        altAircraftId()
+        contaminationStatus()
+        createdAt()
+        createdBy()
+        currentIcao()
+        currentState()
+        earliestTaEndTime()
+        etic()
+        flightPhase()
+        fuel()
+        fuelFunction()
+        fuelStatus()
+        geoLoc()
+        groundStatus()
+        gunCapable()
+        gunRdsMax()
+        gunRdsMin()
+        gunRdsType()
+        idAirfield()
+        idPoi()
+        inventory()
+        inventoryMax()
+        inventoryMin()
+        lastInspectionDate()
+        lastUpdatedBy()
+        maintPoc()
+        maintPriority()
+        maintStatus()
+        maintStatusDriver()
+        maintStatusUpdate()
+        missionReadiness()
+        mxRemark()
+        nextIcao()
+        notes()
+        origin()
+        origNetwork()
+        parkLocation()
+        parkLocationSystem()
+        previousIcao()
+        sourceDl()
+        taStartTime()
+        troubleshootEtic()
+        unavailableSys()
+        validated = true
+    }
 
     fun isValid(): Boolean =
         try {
@@ -2157,33 +2288,85 @@ class AircraftstatusAbridged private constructor(
      * Used for best match union deserialization.
      */
     @JvmSynthetic
-    internal fun validity(): Int = (if (classificationMarking.asKnown().isPresent) 1 else 0) + (dataMode.asKnown().getOrNull()?.validity() ?: 0) + (if (idAircraft.asKnown().isPresent) 1 else 0) + (if (source.asKnown().isPresent) 1 else 0) + (if (id.asKnown().isPresent) 1 else 0) + (additionalSys.asKnown().getOrNull()?.size ?: 0) + (airToAirStatus.asKnown().getOrNull()?.validity() ?: 0) + (airToGroundStatus.asKnown().getOrNull()?.validity() ?: 0) + (if (alphaStatusCode.asKnown().isPresent) 1 else 0) + (if (altAircraftId.asKnown().isPresent) 1 else 0) + (if (contaminationStatus.asKnown().isPresent) 1 else 0) + (if (createdAt.asKnown().isPresent) 1 else 0) + (if (createdBy.asKnown().isPresent) 1 else 0) + (if (currentIcao.asKnown().isPresent) 1 else 0) + (if (currentState.asKnown().isPresent) 1 else 0) + (if (earliestTaEndTime.asKnown().isPresent) 1 else 0) + (if (etic.asKnown().isPresent) 1 else 0) + (if (flightPhase.asKnown().isPresent) 1 else 0) + (if (fuel.asKnown().isPresent) 1 else 0) + (if (fuelFunction.asKnown().isPresent) 1 else 0) + (if (fuelStatus.asKnown().isPresent) 1 else 0) + (if (geoLoc.asKnown().isPresent) 1 else 0) + (if (groundStatus.asKnown().isPresent) 1 else 0) + (if (gunCapable.asKnown().isPresent) 1 else 0) + (if (gunRdsMax.asKnown().isPresent) 1 else 0) + (if (gunRdsMin.asKnown().isPresent) 1 else 0) + (if (gunRdsType.asKnown().isPresent) 1 else 0) + (if (idAirfield.asKnown().isPresent) 1 else 0) + (if (idPoi.asKnown().isPresent) 1 else 0) + (inventory.asKnown().getOrNull()?.size ?: 0) + (inventoryMax.asKnown().getOrNull()?.size ?: 0) + (inventoryMin.asKnown().getOrNull()?.size ?: 0) + (if (lastInspectionDate.asKnown().isPresent) 1 else 0) + (if (lastUpdatedBy.asKnown().isPresent) 1 else 0) + (if (maintPoc.asKnown().isPresent) 1 else 0) + (if (maintPriority.asKnown().isPresent) 1 else 0) + (if (maintStatus.asKnown().isPresent) 1 else 0) + (if (maintStatusDriver.asKnown().isPresent) 1 else 0) + (if (maintStatusUpdate.asKnown().isPresent) 1 else 0) + (if (missionReadiness.asKnown().isPresent) 1 else 0) + (if (mxRemark.asKnown().isPresent) 1 else 0) + (if (nextIcao.asKnown().isPresent) 1 else 0) + (if (notes.asKnown().isPresent) 1 else 0) + (if (origin.asKnown().isPresent) 1 else 0) + (if (origNetwork.asKnown().isPresent) 1 else 0) + (if (parkLocation.asKnown().isPresent) 1 else 0) + (if (parkLocationSystem.asKnown().isPresent) 1 else 0) + (if (previousIcao.asKnown().isPresent) 1 else 0) + (if (sourceDl.asKnown().isPresent) 1 else 0) + (if (taStartTime.asKnown().isPresent) 1 else 0) + (if (troubleshootEtic.asKnown().isPresent) 1 else 0) + (unavailableSys.asKnown().getOrNull()?.size ?: 0)
+    internal fun validity(): Int =
+        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (idAircraft.asKnown().isPresent) 1 else 0) +
+            (if (source.asKnown().isPresent) 1 else 0) +
+            (if (id.asKnown().isPresent) 1 else 0) +
+            (additionalSys.asKnown().getOrNull()?.size ?: 0) +
+            (airToAirStatus.asKnown().getOrNull()?.validity() ?: 0) +
+            (airToGroundStatus.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (alphaStatusCode.asKnown().isPresent) 1 else 0) +
+            (if (altAircraftId.asKnown().isPresent) 1 else 0) +
+            (if (contaminationStatus.asKnown().isPresent) 1 else 0) +
+            (if (createdAt.asKnown().isPresent) 1 else 0) +
+            (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (currentIcao.asKnown().isPresent) 1 else 0) +
+            (if (currentState.asKnown().isPresent) 1 else 0) +
+            (if (earliestTaEndTime.asKnown().isPresent) 1 else 0) +
+            (if (etic.asKnown().isPresent) 1 else 0) +
+            (if (flightPhase.asKnown().isPresent) 1 else 0) +
+            (if (fuel.asKnown().isPresent) 1 else 0) +
+            (if (fuelFunction.asKnown().isPresent) 1 else 0) +
+            (if (fuelStatus.asKnown().isPresent) 1 else 0) +
+            (if (geoLoc.asKnown().isPresent) 1 else 0) +
+            (if (groundStatus.asKnown().isPresent) 1 else 0) +
+            (if (gunCapable.asKnown().isPresent) 1 else 0) +
+            (if (gunRdsMax.asKnown().isPresent) 1 else 0) +
+            (if (gunRdsMin.asKnown().isPresent) 1 else 0) +
+            (if (gunRdsType.asKnown().isPresent) 1 else 0) +
+            (if (idAirfield.asKnown().isPresent) 1 else 0) +
+            (if (idPoi.asKnown().isPresent) 1 else 0) +
+            (inventory.asKnown().getOrNull()?.size ?: 0) +
+            (inventoryMax.asKnown().getOrNull()?.size ?: 0) +
+            (inventoryMin.asKnown().getOrNull()?.size ?: 0) +
+            (if (lastInspectionDate.asKnown().isPresent) 1 else 0) +
+            (if (lastUpdatedBy.asKnown().isPresent) 1 else 0) +
+            (if (maintPoc.asKnown().isPresent) 1 else 0) +
+            (if (maintPriority.asKnown().isPresent) 1 else 0) +
+            (if (maintStatus.asKnown().isPresent) 1 else 0) +
+            (if (maintStatusDriver.asKnown().isPresent) 1 else 0) +
+            (if (maintStatusUpdate.asKnown().isPresent) 1 else 0) +
+            (if (missionReadiness.asKnown().isPresent) 1 else 0) +
+            (if (mxRemark.asKnown().isPresent) 1 else 0) +
+            (if (nextIcao.asKnown().isPresent) 1 else 0) +
+            (if (notes.asKnown().isPresent) 1 else 0) +
+            (if (origin.asKnown().isPresent) 1 else 0) +
+            (if (origNetwork.asKnown().isPresent) 1 else 0) +
+            (if (parkLocation.asKnown().isPresent) 1 else 0) +
+            (if (parkLocationSystem.asKnown().isPresent) 1 else 0) +
+            (if (previousIcao.asKnown().isPresent) 1 else 0) +
+            (if (sourceDl.asKnown().isPresent) 1 else 0) +
+            (if (taStartTime.asKnown().isPresent) 1 else 0) +
+            (if (troubleshootEtic.asKnown().isPresent) 1 else 0) +
+            (unavailableSys.asKnown().getOrNull()?.size ?: 0)
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
      *
-     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include both real and simulated data.
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
      *
-     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and analysis.
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
      *
      * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
      *
-     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and requirements, and for validating technical, functional, and performance characteristics.
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
      */
-    class DataMode @JsonCreator private constructor(
-        private val value: JsonField<String>,
-
-    ) : Enum {
+    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't match any known
-         * member, and you want to know that value. For example, if the SDK is on an older version than the
-         * API, then the API may respond with new members that the SDK is unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue
-        fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -2210,11 +2393,9 @@ class AircraftstatusAbridged private constructor(
          * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [DataMode] can contain an unknown value in a couple of cases:
-         *
-         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-         *   an older version than the API, then the API may respond with new members that the SDK is unaware
-         *   of.
-         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
@@ -2227,11 +2408,11 @@ class AircraftstatusAbridged private constructor(
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-         * class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want to throw
-         * for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -2245,10 +2426,11 @@ class AircraftstatusAbridged private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-         * for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
          */
         fun known(): Known =
             when (this) {
@@ -2262,25 +2444,27 @@ class AircraftstatusAbridged private constructor(
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging and generally
-         * doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-         * primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
          */
-        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
 
         private var validated: Boolean = false
 
-        fun validate(): DataMode =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                known()
-                validated = true
+        fun validate(): DataMode = apply {
+            if (validated) {
+                return@apply
             }
+
+            known()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -2291,19 +2475,19 @@ class AircraftstatusAbridged private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic
-        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2312,20 +2496,18 @@ class AircraftstatusAbridged private constructor(
     }
 
     /** The status of the air-to-air weapon release system (OPERATIONAL, NON-OPERATIONAL, OFF). */
-    class AirToAirStatus @JsonCreator private constructor(
-        private val value: JsonField<String>,
-
-    ) : Enum {
+    class AirToAirStatus @JsonCreator private constructor(private val value: JsonField<String>) :
+        Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't match any known
-         * member, and you want to know that value. For example, if the SDK is on an older version than the
-         * API, then the API may respond with new members that the SDK is unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue
-        fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -2349,27 +2531,28 @@ class AircraftstatusAbridged private constructor(
          * An enum containing [AirToAirStatus]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [AirToAirStatus] can contain an unknown value in a couple of cases:
-         *
-         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-         *   an older version than the API, then the API may respond with new members that the SDK is unaware
-         *   of.
-         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
             OPERATIONAL,
             NON_OPERATIONAL,
             OFF,
-            /** An enum member indicating that [AirToAirStatus] was instantiated with an unknown value. */
+            /**
+             * An enum member indicating that [AirToAirStatus] was instantiated with an unknown
+             * value.
+             */
             _UNKNOWN,
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-         * class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want to throw
-         * for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -2382,41 +2565,45 @@ class AircraftstatusAbridged private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-         * for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
          */
         fun known(): Known =
             when (this) {
                 OPERATIONAL -> Known.OPERATIONAL
                 NON_OPERATIONAL -> Known.NON_OPERATIONAL
                 OFF -> Known.OFF
-                else -> throw UnifieddatalibraryInvalidDataException("Unknown AirToAirStatus: $value")
+                else ->
+                    throw UnifieddatalibraryInvalidDataException("Unknown AirToAirStatus: $value")
             }
 
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging and generally
-         * doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-         * primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
          */
-        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
 
         private var validated: Boolean = false
 
-        fun validate(): AirToAirStatus =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                known()
-                validated = true
+        fun validate(): AirToAirStatus = apply {
+            if (validated) {
+                return@apply
             }
+
+            known()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -2427,19 +2614,19 @@ class AircraftstatusAbridged private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic
-        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is AirToAirStatus && value == other.value /* spotless:on */
+            return other is AirToAirStatus && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2447,21 +2634,21 @@ class AircraftstatusAbridged private constructor(
         override fun toString() = value.toString()
     }
 
-    /** The status of the air-to-ground weapon release system (OPERATIONAL, NON-OPERATIONAL, OFF). */
-    class AirToGroundStatus @JsonCreator private constructor(
-        private val value: JsonField<String>,
-
-    ) : Enum {
+    /**
+     * The status of the air-to-ground weapon release system (OPERATIONAL, NON-OPERATIONAL, OFF).
+     */
+    class AirToGroundStatus @JsonCreator private constructor(private val value: JsonField<String>) :
+        Enum {
 
         /**
          * Returns this class instance's raw value.
          *
-         * This is usually only useful if this instance was deserialized from data that doesn't match any known
-         * member, and you want to know that value. For example, if the SDK is on an older version than the
-         * API, then the API may respond with new members that the SDK is unaware of.
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
          */
-        @com.fasterxml.jackson.annotation.JsonValue
-        fun _value(): JsonField<String> = value
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
 
         companion object {
 
@@ -2485,27 +2672,28 @@ class AircraftstatusAbridged private constructor(
          * An enum containing [AirToGroundStatus]'s known values, as well as an [_UNKNOWN] member.
          *
          * An instance of [AirToGroundStatus] can contain an unknown value in a couple of cases:
-         *
-         * - It was deserialized from data that doesn't match any known member. For example, if the SDK is on
-         *   an older version than the API, then the API may respond with new members that the SDK is unaware
-         *   of.
-         *
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
          * - It was constructed with an arbitrary value using the [of] method.
          */
         enum class Value {
             OPERATIONAL,
             NON_OPERATIONAL,
             OFF,
-            /** An enum member indicating that [AirToGroundStatus] was instantiated with an unknown value. */
+            /**
+             * An enum member indicating that [AirToGroundStatus] was instantiated with an unknown
+             * value.
+             */
             _UNKNOWN,
         }
 
         /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN] if the
-         * class was instantiated with an unknown value.
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
          *
-         * Use the [known] method instead if you're certain the value is always known or if you want to throw
-         * for the unknown case.
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
          */
         fun value(): Value =
             when (this) {
@@ -2518,41 +2706,47 @@ class AircraftstatusAbridged private constructor(
         /**
          * Returns an enum member corresponding to this class instance's value.
          *
-         * Use the [value] method instead if you're uncertain the value is always known and don't want to throw
-         * for the unknown case.
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a known member.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
          */
         fun known(): Known =
             when (this) {
                 OPERATIONAL -> Known.OPERATIONAL
                 NON_OPERATIONAL -> Known.NON_OPERATIONAL
                 OFF -> Known.OFF
-                else -> throw UnifieddatalibraryInvalidDataException("Unknown AirToGroundStatus: $value")
+                else ->
+                    throw UnifieddatalibraryInvalidDataException(
+                        "Unknown AirToGroundStatus: $value"
+                    )
             }
 
         /**
          * Returns this class instance's primitive wire representation.
          *
-         * This differs from the [toString] method because that method is primarily for debugging and generally
-         * doesn't throw.
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
          *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not have the expected
-         * primitive type.
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
          */
-        fun asString(): String = _value().asString().orElseThrow { UnifieddatalibraryInvalidDataException("Value is not a String") }
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
 
         private var validated: Boolean = false
 
-        fun validate(): AirToGroundStatus =
-            apply {
-                if (validated) {
-                  return@apply
-                }
-
-                known()
-                validated = true
+        fun validate(): AirToGroundStatus = apply {
+            if (validated) {
+                return@apply
             }
+
+            known()
+            validated = true
+        }
 
         fun isValid(): Boolean =
             try {
@@ -2563,19 +2757,19 @@ class AircraftstatusAbridged private constructor(
             }
 
         /**
-         * Returns a score indicating how many valid values are contained in this object recursively.
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
          *
          * Used for best match union deserialization.
          */
-        @JvmSynthetic
-        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
-          if (this === other) {
-              return true
-          }
+            if (this === other) {
+                return true
+            }
 
-          return /* spotless:off */ other is AirToGroundStatus && value == other.value /* spotless:on */
+            return other is AirToGroundStatus && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2584,18 +2778,126 @@ class AircraftstatusAbridged private constructor(
     }
 
     override fun equals(other: Any?): Boolean {
-      if (this === other) {
-          return true
-      }
+        if (this === other) {
+            return true
+        }
 
-      return /* spotless:off */ other is AircraftstatusAbridged && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idAircraft == other.idAircraft && source == other.source && id == other.id && additionalSys == other.additionalSys && airToAirStatus == other.airToAirStatus && airToGroundStatus == other.airToGroundStatus && alphaStatusCode == other.alphaStatusCode && altAircraftId == other.altAircraftId && contaminationStatus == other.contaminationStatus && createdAt == other.createdAt && createdBy == other.createdBy && currentIcao == other.currentIcao && currentState == other.currentState && earliestTaEndTime == other.earliestTaEndTime && etic == other.etic && flightPhase == other.flightPhase && fuel == other.fuel && fuelFunction == other.fuelFunction && fuelStatus == other.fuelStatus && geoLoc == other.geoLoc && groundStatus == other.groundStatus && gunCapable == other.gunCapable && gunRdsMax == other.gunRdsMax && gunRdsMin == other.gunRdsMin && gunRdsType == other.gunRdsType && idAirfield == other.idAirfield && idPoi == other.idPoi && inventory == other.inventory && inventoryMax == other.inventoryMax && inventoryMin == other.inventoryMin && lastInspectionDate == other.lastInspectionDate && lastUpdatedBy == other.lastUpdatedBy && maintPoc == other.maintPoc && maintPriority == other.maintPriority && maintStatus == other.maintStatus && maintStatusDriver == other.maintStatusDriver && maintStatusUpdate == other.maintStatusUpdate && missionReadiness == other.missionReadiness && mxRemark == other.mxRemark && nextIcao == other.nextIcao && notes == other.notes && origin == other.origin && origNetwork == other.origNetwork && parkLocation == other.parkLocation && parkLocationSystem == other.parkLocationSystem && previousIcao == other.previousIcao && sourceDl == other.sourceDl && taStartTime == other.taStartTime && troubleshootEtic == other.troubleshootEtic && unavailableSys == other.unavailableSys && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is AircraftstatusAbridged &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            idAircraft == other.idAircraft &&
+            source == other.source &&
+            id == other.id &&
+            additionalSys == other.additionalSys &&
+            airToAirStatus == other.airToAirStatus &&
+            airToGroundStatus == other.airToGroundStatus &&
+            alphaStatusCode == other.alphaStatusCode &&
+            altAircraftId == other.altAircraftId &&
+            contaminationStatus == other.contaminationStatus &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            currentIcao == other.currentIcao &&
+            currentState == other.currentState &&
+            earliestTaEndTime == other.earliestTaEndTime &&
+            etic == other.etic &&
+            flightPhase == other.flightPhase &&
+            fuel == other.fuel &&
+            fuelFunction == other.fuelFunction &&
+            fuelStatus == other.fuelStatus &&
+            geoLoc == other.geoLoc &&
+            groundStatus == other.groundStatus &&
+            gunCapable == other.gunCapable &&
+            gunRdsMax == other.gunRdsMax &&
+            gunRdsMin == other.gunRdsMin &&
+            gunRdsType == other.gunRdsType &&
+            idAirfield == other.idAirfield &&
+            idPoi == other.idPoi &&
+            inventory == other.inventory &&
+            inventoryMax == other.inventoryMax &&
+            inventoryMin == other.inventoryMin &&
+            lastInspectionDate == other.lastInspectionDate &&
+            lastUpdatedBy == other.lastUpdatedBy &&
+            maintPoc == other.maintPoc &&
+            maintPriority == other.maintPriority &&
+            maintStatus == other.maintStatus &&
+            maintStatusDriver == other.maintStatusDriver &&
+            maintStatusUpdate == other.maintStatusUpdate &&
+            missionReadiness == other.missionReadiness &&
+            mxRemark == other.mxRemark &&
+            nextIcao == other.nextIcao &&
+            notes == other.notes &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            parkLocation == other.parkLocation &&
+            parkLocationSystem == other.parkLocationSystem &&
+            previousIcao == other.previousIcao &&
+            sourceDl == other.sourceDl &&
+            taStartTime == other.taStartTime &&
+            troubleshootEtic == other.troubleshootEtic &&
+            unavailableSys == other.unavailableSys &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idAircraft, source, id, additionalSys, airToAirStatus, airToGroundStatus, alphaStatusCode, altAircraftId, contaminationStatus, createdAt, createdBy, currentIcao, currentState, earliestTaEndTime, etic, flightPhase, fuel, fuelFunction, fuelStatus, geoLoc, groundStatus, gunCapable, gunRdsMax, gunRdsMin, gunRdsType, idAirfield, idPoi, inventory, inventoryMax, inventoryMin, lastInspectionDate, lastUpdatedBy, maintPoc, maintPriority, maintStatus, maintStatusDriver, maintStatusUpdate, missionReadiness, mxRemark, nextIcao, notes, origin, origNetwork, parkLocation, parkLocationSystem, previousIcao, sourceDl, taStartTime, troubleshootEtic, unavailableSys, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            idAircraft,
+            source,
+            id,
+            additionalSys,
+            airToAirStatus,
+            airToGroundStatus,
+            alphaStatusCode,
+            altAircraftId,
+            contaminationStatus,
+            createdAt,
+            createdBy,
+            currentIcao,
+            currentState,
+            earliestTaEndTime,
+            etic,
+            flightPhase,
+            fuel,
+            fuelFunction,
+            fuelStatus,
+            geoLoc,
+            groundStatus,
+            gunCapable,
+            gunRdsMax,
+            gunRdsMin,
+            gunRdsType,
+            idAirfield,
+            idPoi,
+            inventory,
+            inventoryMax,
+            inventoryMin,
+            lastInspectionDate,
+            lastUpdatedBy,
+            maintPoc,
+            maintPriority,
+            maintStatus,
+            maintStatusDriver,
+            maintStatusUpdate,
+            missionReadiness,
+            mxRemark,
+            nextIcao,
+            notes,
+            origin,
+            origNetwork,
+            parkLocation,
+            parkLocationSystem,
+            previousIcao,
+            sourceDl,
+            taStartTime,
+            troubleshootEtic,
+            unavailableSys,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 
-    override fun toString() = "AircraftstatusAbridged{classificationMarking=$classificationMarking, dataMode=$dataMode, idAircraft=$idAircraft, source=$source, id=$id, additionalSys=$additionalSys, airToAirStatus=$airToAirStatus, airToGroundStatus=$airToGroundStatus, alphaStatusCode=$alphaStatusCode, altAircraftId=$altAircraftId, contaminationStatus=$contaminationStatus, createdAt=$createdAt, createdBy=$createdBy, currentIcao=$currentIcao, currentState=$currentState, earliestTaEndTime=$earliestTaEndTime, etic=$etic, flightPhase=$flightPhase, fuel=$fuel, fuelFunction=$fuelFunction, fuelStatus=$fuelStatus, geoLoc=$geoLoc, groundStatus=$groundStatus, gunCapable=$gunCapable, gunRdsMax=$gunRdsMax, gunRdsMin=$gunRdsMin, gunRdsType=$gunRdsType, idAirfield=$idAirfield, idPoi=$idPoi, inventory=$inventory, inventoryMax=$inventoryMax, inventoryMin=$inventoryMin, lastInspectionDate=$lastInspectionDate, lastUpdatedBy=$lastUpdatedBy, maintPoc=$maintPoc, maintPriority=$maintPriority, maintStatus=$maintStatus, maintStatusDriver=$maintStatusDriver, maintStatusUpdate=$maintStatusUpdate, missionReadiness=$missionReadiness, mxRemark=$mxRemark, nextIcao=$nextIcao, notes=$notes, origin=$origin, origNetwork=$origNetwork, parkLocation=$parkLocation, parkLocationSystem=$parkLocationSystem, previousIcao=$previousIcao, sourceDl=$sourceDl, taStartTime=$taStartTime, troubleshootEtic=$troubleshootEtic, unavailableSys=$unavailableSys, additionalProperties=$additionalProperties}"
+    override fun toString() =
+        "AircraftstatusAbridged{classificationMarking=$classificationMarking, dataMode=$dataMode, idAircraft=$idAircraft, source=$source, id=$id, additionalSys=$additionalSys, airToAirStatus=$airToAirStatus, airToGroundStatus=$airToGroundStatus, alphaStatusCode=$alphaStatusCode, altAircraftId=$altAircraftId, contaminationStatus=$contaminationStatus, createdAt=$createdAt, createdBy=$createdBy, currentIcao=$currentIcao, currentState=$currentState, earliestTaEndTime=$earliestTaEndTime, etic=$etic, flightPhase=$flightPhase, fuel=$fuel, fuelFunction=$fuelFunction, fuelStatus=$fuelStatus, geoLoc=$geoLoc, groundStatus=$groundStatus, gunCapable=$gunCapable, gunRdsMax=$gunRdsMax, gunRdsMin=$gunRdsMin, gunRdsType=$gunRdsType, idAirfield=$idAirfield, idPoi=$idPoi, inventory=$inventory, inventoryMax=$inventoryMax, inventoryMin=$inventoryMin, lastInspectionDate=$lastInspectionDate, lastUpdatedBy=$lastUpdatedBy, maintPoc=$maintPoc, maintPriority=$maintPriority, maintStatus=$maintStatus, maintStatusDriver=$maintStatusDriver, maintStatusUpdate=$maintStatusUpdate, missionReadiness=$missionReadiness, mxRemark=$mxRemark, nextIcao=$nextIcao, notes=$notes, origin=$origin, origNetwork=$origNetwork, parkLocation=$parkLocation, parkLocationSystem=$parkLocationSystem, previousIcao=$previousIcao, sourceDl=$sourceDl, taStartTime=$taStartTime, troubleshootEtic=$troubleshootEtic, unavailableSys=$unavailableSys, additionalProperties=$additionalProperties}"
 }

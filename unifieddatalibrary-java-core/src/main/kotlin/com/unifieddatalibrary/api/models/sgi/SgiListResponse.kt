@@ -2532,7 +2532,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2683,7 +2683,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Precedence && value == other.value /* spotless:on */
+            return other is Precedence && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2817,7 +2817,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is State && value == other.value /* spotless:on */
+            return other is State && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2830,12 +2830,123 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SgiListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && effectiveDate == other.effectiveDate && sgiDate == other.sgiDate && source == other.source && id == other.id && analyzerAttenuation == other.analyzerAttenuation && ap == other.ap && apDuration == other.apDuration && coeffDegree == other.coeffDegree && coeffOrder == other.coeffOrder && createdAt == other.createdAt && createdBy == other.createdBy && ctce == other.ctce && ctci == other.ctci && dst == other.dst && dtc == other.dtc && e10 == other.e10 && e54 == other.e54 && f10 == other.f10 && f10High == other.f10High && f10Low == other.f10Low && f54 == other.f54 && f81 == other.f81 && gamma == other.gamma && idSensor == other.idSensor && kIndex == other.kIndex && kp == other.kp && kpDuration == other.kpDuration && m10 == other.m10 && m54 == other.m54 && mode == other.mode && normFactor == other.normFactor && origin == other.origin && origNetwork == other.origNetwork && origSensorId == other.origSensorId && precedence == other.precedence && rawFileUri == other.rawFileUri && rbDuration == other.rbDuration && rbIndex == other.rbIndex && rbRegionCode == other.rbRegionCode && s10 == other.s10 && s54 == other.s54 && state == other.state && stationName == other.stationName && stce == other.stce && stci == other.stci && sunspotNum == other.sunspotNum && sunspotNumHigh == other.sunspotNumHigh && sunspotNumLow == other.sunspotNumLow && transactionId == other.transactionId && type == other.type && y10 == other.y10 && y54 == other.y54 && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SgiListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            effectiveDate == other.effectiveDate &&
+            sgiDate == other.sgiDate &&
+            source == other.source &&
+            id == other.id &&
+            analyzerAttenuation == other.analyzerAttenuation &&
+            ap == other.ap &&
+            apDuration == other.apDuration &&
+            coeffDegree == other.coeffDegree &&
+            coeffOrder == other.coeffOrder &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            ctce == other.ctce &&
+            ctci == other.ctci &&
+            dst == other.dst &&
+            dtc == other.dtc &&
+            e10 == other.e10 &&
+            e54 == other.e54 &&
+            f10 == other.f10 &&
+            f10High == other.f10High &&
+            f10Low == other.f10Low &&
+            f54 == other.f54 &&
+            f81 == other.f81 &&
+            gamma == other.gamma &&
+            idSensor == other.idSensor &&
+            kIndex == other.kIndex &&
+            kp == other.kp &&
+            kpDuration == other.kpDuration &&
+            m10 == other.m10 &&
+            m54 == other.m54 &&
+            mode == other.mode &&
+            normFactor == other.normFactor &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origSensorId == other.origSensorId &&
+            precedence == other.precedence &&
+            rawFileUri == other.rawFileUri &&
+            rbDuration == other.rbDuration &&
+            rbIndex == other.rbIndex &&
+            rbRegionCode == other.rbRegionCode &&
+            s10 == other.s10 &&
+            s54 == other.s54 &&
+            state == other.state &&
+            stationName == other.stationName &&
+            stce == other.stce &&
+            stci == other.stci &&
+            sunspotNum == other.sunspotNum &&
+            sunspotNumHigh == other.sunspotNumHigh &&
+            sunspotNumLow == other.sunspotNumLow &&
+            transactionId == other.transactionId &&
+            type == other.type &&
+            y10 == other.y10 &&
+            y54 == other.y54 &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, effectiveDate, sgiDate, source, id, analyzerAttenuation, ap, apDuration, coeffDegree, coeffOrder, createdAt, createdBy, ctce, ctci, dst, dtc, e10, e54, f10, f10High, f10Low, f54, f81, gamma, idSensor, kIndex, kp, kpDuration, m10, m54, mode, normFactor, origin, origNetwork, origSensorId, precedence, rawFileUri, rbDuration, rbIndex, rbRegionCode, s10, s54, state, stationName, stce, stci, sunspotNum, sunspotNumHigh, sunspotNumLow, transactionId, type, y10, y54, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            effectiveDate,
+            sgiDate,
+            source,
+            id,
+            analyzerAttenuation,
+            ap,
+            apDuration,
+            coeffDegree,
+            coeffOrder,
+            createdAt,
+            createdBy,
+            ctce,
+            ctci,
+            dst,
+            dtc,
+            e10,
+            e54,
+            f10,
+            f10High,
+            f10Low,
+            f54,
+            f81,
+            gamma,
+            idSensor,
+            kIndex,
+            kp,
+            kpDuration,
+            m10,
+            m54,
+            mode,
+            normFactor,
+            origin,
+            origNetwork,
+            origSensorId,
+            precedence,
+            rawFileUri,
+            rbDuration,
+            rbIndex,
+            rbRegionCode,
+            s10,
+            s54,
+            state,
+            stationName,
+            stce,
+            stci,
+            sunspotNum,
+            sunspotNumHigh,
+            sunspotNumLow,
+            transactionId,
+            type,
+            y10,
+            y54,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

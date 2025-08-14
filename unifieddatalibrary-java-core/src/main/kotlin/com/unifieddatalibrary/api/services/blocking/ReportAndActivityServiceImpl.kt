@@ -3,8 +3,6 @@
 package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.core.ClientOptions
-import com.unifieddatalibrary.api.services.blocking.ReportAndActivityService
-import com.unifieddatalibrary.api.services.blocking.ReportAndActivityServiceImpl
 import com.unifieddatalibrary.api.services.blocking.reportandactivities.PoiService
 import com.unifieddatalibrary.api.services.blocking.reportandactivities.PoiServiceImpl
 import com.unifieddatalibrary.api.services.blocking.reportandactivities.UdlH3geoService
@@ -13,12 +11,12 @@ import com.unifieddatalibrary.api.services.blocking.reportandactivities.UdlSigac
 import com.unifieddatalibrary.api.services.blocking.reportandactivities.UdlSigactServiceImpl
 import java.util.function.Consumer
 
-class ReportAndActivityServiceImpl internal constructor(
-    private val clientOptions: ClientOptions,
+class ReportAndActivityServiceImpl internal constructor(private val clientOptions: ClientOptions) :
+    ReportAndActivityService {
 
-) : ReportAndActivityService {
-
-    private val withRawResponse: ReportAndActivityService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
+    private val withRawResponse: ReportAndActivityService.WithRawResponse by lazy {
+        WithRawResponseImpl(clientOptions)
+    }
 
     private val poi: PoiService by lazy { PoiServiceImpl(clientOptions) }
 
@@ -28,7 +26,8 @@ class ReportAndActivityServiceImpl internal constructor(
 
     override fun withRawResponse(): ReportAndActivityService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ReportAndActivityService = ReportAndActivityServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ReportAndActivityService =
+        ReportAndActivityServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun poi(): PoiService = poi
 
@@ -36,18 +35,27 @@ class ReportAndActivityServiceImpl internal constructor(
 
     override fun udlSigact(): UdlSigactService = udlSigact
 
-    class WithRawResponseImpl internal constructor(
-        private val clientOptions: ClientOptions,
+    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
+        ReportAndActivityService.WithRawResponse {
 
-    ) : ReportAndActivityService.WithRawResponse {
+        private val poi: PoiService.WithRawResponse by lazy {
+            PoiServiceImpl.WithRawResponseImpl(clientOptions)
+        }
 
-        private val poi: PoiService.WithRawResponse by lazy { PoiServiceImpl.WithRawResponseImpl(clientOptions) }
+        private val udlH3geo: UdlH3geoService.WithRawResponse by lazy {
+            UdlH3geoServiceImpl.WithRawResponseImpl(clientOptions)
+        }
 
-        private val udlH3geo: UdlH3geoService.WithRawResponse by lazy { UdlH3geoServiceImpl.WithRawResponseImpl(clientOptions) }
+        private val udlSigact: UdlSigactService.WithRawResponse by lazy {
+            UdlSigactServiceImpl.WithRawResponseImpl(clientOptions)
+        }
 
-        private val udlSigact: UdlSigactService.WithRawResponse by lazy { UdlSigactServiceImpl.WithRawResponseImpl(clientOptions) }
-
-        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ReportAndActivityService.WithRawResponse = ReportAndActivityServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+        override fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): ReportAndActivityService.WithRawResponse =
+            ReportAndActivityServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier::accept).build()
+            )
 
         override fun poi(): PoiService.WithRawResponse = poi
 

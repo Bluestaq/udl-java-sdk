@@ -25,183 +25,194 @@ import com.unifieddatalibrary.api.models.onorbitthruster.OnorbitthrusterListPage
 import com.unifieddatalibrary.api.models.onorbitthruster.OnorbitthrusterListParams
 import com.unifieddatalibrary.api.models.onorbitthruster.OnorbitthrusterListResponse
 import com.unifieddatalibrary.api.models.onorbitthruster.OnorbitthrusterUpdateParams
-import com.unifieddatalibrary.api.services.blocking.OnorbitthrusterService
-import com.unifieddatalibrary.api.services.blocking.OnorbitthrusterServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
-class OnorbitthrusterServiceImpl internal constructor(
-    private val clientOptions: ClientOptions,
+class OnorbitthrusterServiceImpl internal constructor(private val clientOptions: ClientOptions) :
+    OnorbitthrusterService {
 
-) : OnorbitthrusterService {
-
-    private val withRawResponse: OnorbitthrusterService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
+    private val withRawResponse: OnorbitthrusterService.WithRawResponse by lazy {
+        WithRawResponseImpl(clientOptions)
+    }
 
     override fun withRawResponse(): OnorbitthrusterService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): OnorbitthrusterService = OnorbitthrusterServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): OnorbitthrusterService =
+        OnorbitthrusterServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun create(params: OnorbitthrusterCreateParams, requestOptions: RequestOptions) {
-      // post /udl/onorbitthruster
-      withRawResponse().create(params, requestOptions)
+        // post /udl/onorbitthruster
+        withRawResponse().create(params, requestOptions)
     }
 
     override fun update(params: OnorbitthrusterUpdateParams, requestOptions: RequestOptions) {
-      // put /udl/onorbitthruster/{id}
-      withRawResponse().update(params, requestOptions)
+        // put /udl/onorbitthruster/{id}
+        withRawResponse().update(params, requestOptions)
     }
 
-    override fun list(params: OnorbitthrusterListParams, requestOptions: RequestOptions): OnorbitthrusterListPage =
+    override fun list(
+        params: OnorbitthrusterListParams,
+        requestOptions: RequestOptions,
+    ): OnorbitthrusterListPage =
         // get /udl/onorbitthruster
         withRawResponse().list(params, requestOptions).parse()
 
     override fun delete(params: OnorbitthrusterDeleteParams, requestOptions: RequestOptions) {
-      // delete /udl/onorbitthruster/{id}
-      withRawResponse().delete(params, requestOptions)
+        // delete /udl/onorbitthruster/{id}
+        withRawResponse().delete(params, requestOptions)
     }
 
-    override fun get(params: OnorbitthrusterGetParams, requestOptions: RequestOptions): OnorbitThrusterFull =
+    override fun get(
+        params: OnorbitthrusterGetParams,
+        requestOptions: RequestOptions,
+    ): OnorbitThrusterFull =
         // get /udl/onorbitthruster/{id}
         withRawResponse().get(params, requestOptions).parse()
 
-    class WithRawResponseImpl internal constructor(
-        private val clientOptions: ClientOptions,
+    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
+        OnorbitthrusterService.WithRawResponse {
 
-    ) : OnorbitthrusterService.WithRawResponse {
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
-
-        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): OnorbitthrusterService.WithRawResponse = OnorbitthrusterServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+        override fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): OnorbitthrusterService.WithRawResponse =
+            OnorbitthrusterServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier::accept).build()
+            )
 
         private val createHandler: Handler<Void?> = emptyHandler()
 
-        override fun create(params: OnorbitthrusterCreateParams, requestOptions: RequestOptions): HttpResponse {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.POST)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "onorbitthruster")
-            .body(json(clientOptions.jsonMapper, params._body()))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  createHandler.handle(it)
-              }
-          }
+        override fun create(
+            params: OnorbitthrusterCreateParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "onorbitthruster")
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { createHandler.handle(it) }
+            }
         }
 
         private val updateHandler: Handler<Void?> = emptyHandler()
 
-        override fun update(params: OnorbitthrusterUpdateParams, requestOptions: RequestOptions): HttpResponse {
-          // We check here instead of in the params builder because this can be specified positionally or in the params class.
-          checkRequired("pathId", params.pathId().getOrNull())
-          val request = HttpRequest.builder()
-            .method(HttpMethod.PUT)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "onorbitthruster", params._pathParam(0))
-            .body(json(clientOptions.jsonMapper, params._body()))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  updateHandler.handle(it)
-              }
-          }
+        override fun update(
+            params: OnorbitthrusterUpdateParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("pathId", params.pathId().getOrNull())
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.PUT)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "onorbitthruster", params._pathParam(0))
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { updateHandler.handle(it) }
+            }
         }
 
-        private val listHandler: Handler<List<OnorbitthrusterListResponse>> = jsonHandler<List<OnorbitthrusterListResponse>>(clientOptions.jsonMapper)
+        private val listHandler: Handler<List<OnorbitthrusterListResponse>> =
+            jsonHandler<List<OnorbitthrusterListResponse>>(clientOptions.jsonMapper)
 
-        override fun list(params: OnorbitthrusterListParams, requestOptions: RequestOptions): HttpResponseFor<OnorbitthrusterListPage> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "onorbitthruster")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  listHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.forEach { it.validate() }
-                  }
-              }
-              .let {
-                  OnorbitthrusterListPage.builder()
-                      .service(OnorbitthrusterServiceImpl(clientOptions))
-                      .params(params)
-                      .items(it)
-                      .build()
-              }
-          }
+        override fun list(
+            params: OnorbitthrusterListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<OnorbitthrusterListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "onorbitthruster")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        OnorbitthrusterListPage.builder()
+                            .service(OnorbitthrusterServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
         }
 
         private val deleteHandler: Handler<Void?> = emptyHandler()
 
-        override fun delete(params: OnorbitthrusterDeleteParams, requestOptions: RequestOptions): HttpResponse {
-          // We check here instead of in the params builder because this can be specified positionally or in the params class.
-          checkRequired("id", params.id().getOrNull())
-          val request = HttpRequest.builder()
-            .method(HttpMethod.DELETE)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "onorbitthruster", params._pathParam(0))
-            .apply { params._body().ifPresent{ body(json(clientOptions.jsonMapper, it)) } }
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  deleteHandler.handle(it)
-              }
-          }
+        override fun delete(
+            params: OnorbitthrusterDeleteParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("id", params.id().getOrNull())
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.DELETE)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "onorbitthruster", params._pathParam(0))
+                    .apply { params._body().ifPresent { body(json(clientOptions.jsonMapper, it)) } }
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { deleteHandler.handle(it) }
+            }
         }
 
-        private val getHandler: Handler<OnorbitThrusterFull> = jsonHandler<OnorbitThrusterFull>(clientOptions.jsonMapper)
+        private val getHandler: Handler<OnorbitThrusterFull> =
+            jsonHandler<OnorbitThrusterFull>(clientOptions.jsonMapper)
 
-        override fun get(params: OnorbitthrusterGetParams, requestOptions: RequestOptions): HttpResponseFor<OnorbitThrusterFull> {
-          // We check here instead of in the params builder because this can be specified positionally or in the params class.
-          checkRequired("id", params.id().getOrNull())
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "onorbitthruster", params._pathParam(0))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  getHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.validate()
-                  }
-              }
-          }
+        override fun get(
+            params: OnorbitthrusterGetParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<OnorbitThrusterFull> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("id", params.id().getOrNull())
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "onorbitthruster", params._pathParam(0))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { getHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.validate()
+                        }
+                    }
+            }
         }
     }
 }

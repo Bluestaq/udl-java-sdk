@@ -39,7 +39,7 @@ internal class LogisticsSupportUnvalidatedPublishParamsTest {
                     )
                     .logisticsRecordId("L62017")
                     .addLogisticsRemark(
-                        LogisticsSupportUnvalidatedPublishParams.Body.LogisticsRemark.builder()
+                        LogisticsRemarksIngest.builder()
                             .lastChanged(OffsetDateTime.parse("2023-07-17T10:30:00.123Z"))
                             .remark("EXAMPLE REMARK")
                             .username("JSMITH")
@@ -83,9 +83,7 @@ internal class LogisticsSupportUnvalidatedPublishParamsTest {
                                     .build()
                             )
                             .addLogisticsRemark(
-                                LogisticsSupportUnvalidatedPublishParams.Body.LogisticsSupportItem
-                                    .LogisticsRemark
-                                    .builder()
+                                LogisticsRemarksIngest.builder()
                                     .lastChanged(OffsetDateTime.parse("2023-07-17T10:30:00.123Z"))
                                     .remark("EXAMPLE REMARK")
                                     .username("JSMITH")
@@ -156,10 +154,7 @@ internal class LogisticsSupportUnvalidatedPublishParamsTest {
                                     .build()
                             )
                             .addLogisticsTransportationPlansRemark(
-                                LogisticsSupportUnvalidatedPublishParams.Body
-                                    .LogisticsTransportationPlan
-                                    .LogisticsTransportationPlansRemark
-                                    .builder()
+                                LogisticsRemarksIngest.builder()
                                     .lastChanged(OffsetDateTime.parse("2023-07-17T10:30:00.123Z"))
                                     .remark("EXAMPLE REMARK")
                                     .username("JSMITH")
@@ -227,7 +222,7 @@ internal class LogisticsSupportUnvalidatedPublishParamsTest {
                         )
                         .logisticsRecordId("L62017")
                         .addLogisticsRemark(
-                            LogisticsSupportUnvalidatedPublishParams.Body.LogisticsRemark.builder()
+                            LogisticsRemarksIngest.builder()
                                 .lastChanged(OffsetDateTime.parse("2023-07-17T10:30:00.123Z"))
                                 .remark("EXAMPLE REMARK")
                                 .username("JSMITH")
@@ -275,10 +270,7 @@ internal class LogisticsSupportUnvalidatedPublishParamsTest {
                                         .build()
                                 )
                                 .addLogisticsRemark(
-                                    LogisticsSupportUnvalidatedPublishParams.Body
-                                        .LogisticsSupportItem
-                                        .LogisticsRemark
-                                        .builder()
+                                    LogisticsRemarksIngest.builder()
                                         .lastChanged(
                                             OffsetDateTime.parse("2023-07-17T10:30:00.123Z")
                                         )
@@ -361,10 +353,7 @@ internal class LogisticsSupportUnvalidatedPublishParamsTest {
                                         .build()
                                 )
                                 .addLogisticsTransportationPlansRemark(
-                                    LogisticsSupportUnvalidatedPublishParams.Body
-                                        .LogisticsTransportationPlan
-                                        .LogisticsTransportationPlansRemark
-                                        .builder()
+                                    LogisticsRemarksIngest.builder()
                                         .lastChanged(
                                             OffsetDateTime.parse("2023-07-17T10:30:00.123Z")
                                         )
@@ -432,7 +421,7 @@ internal class LogisticsSupportUnvalidatedPublishParamsTest {
                     )
                     .logisticsRecordId("L62017")
                     .addLogisticsRemark(
-                        LogisticsSupportUnvalidatedPublishParams.Body.LogisticsRemark.builder()
+                        LogisticsRemarksIngest.builder()
                             .lastChanged(OffsetDateTime.parse("2023-07-17T10:30:00.123Z"))
                             .remark("EXAMPLE REMARK")
                             .username("JSMITH")
@@ -476,9 +465,7 @@ internal class LogisticsSupportUnvalidatedPublishParamsTest {
                                     .build()
                             )
                             .addLogisticsRemark(
-                                LogisticsSupportUnvalidatedPublishParams.Body.LogisticsSupportItem
-                                    .LogisticsRemark
-                                    .builder()
+                                LogisticsRemarksIngest.builder()
                                     .lastChanged(OffsetDateTime.parse("2023-07-17T10:30:00.123Z"))
                                     .remark("EXAMPLE REMARK")
                                     .username("JSMITH")
@@ -549,10 +536,7 @@ internal class LogisticsSupportUnvalidatedPublishParamsTest {
                                     .build()
                             )
                             .addLogisticsTransportationPlansRemark(
-                                LogisticsSupportUnvalidatedPublishParams.Body
-                                    .LogisticsTransportationPlan
-                                    .LogisticsTransportationPlansRemark
-                                    .builder()
+                                LogisticsRemarksIngest.builder()
                                     .lastChanged(OffsetDateTime.parse("2023-07-17T10:30:00.123Z"))
                                     .remark("EXAMPLE REMARK")
                                     .username("JSMITH")

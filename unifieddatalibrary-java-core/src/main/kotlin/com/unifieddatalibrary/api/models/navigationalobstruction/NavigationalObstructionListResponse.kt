@@ -3406,7 +3406,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3419,12 +3419,169 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is NavigationalObstructionListResponse && classificationMarking == other.classificationMarking && cycleDate == other.cycleDate && dataMode == other.dataMode && obstacleId == other.obstacleId && obstacleType == other.obstacleType && source == other.source && id == other.id && actDelCode == other.actDelCode && airacCycle == other.airacCycle && baseAiracCycle == other.baseAiracCycle && baselineCutoffDate == other.baselineCutoffDate && boundNeLat == other.boundNeLat && boundNeLon == other.boundNeLon && boundSwLat == other.boundSwLat && boundSwLon == other.boundSwLon && countryCode == other.countryCode && createdAt == other.createdAt && createdBy == other.createdBy && cutoffDate == other.cutoffDate && dataSetRemarks == other.dataSetRemarks && deletingOrg == other.deletingOrg && derivingOrg == other.derivingOrg && directivityCode == other.directivityCode && elevation == other.elevation && elevationAcc == other.elevationAcc && externalId == other.externalId && facc == other.facc && featureCode == other.featureCode && featureDescription == other.featureDescription && featureName == other.featureName && featureType == other.featureType && heightAgl == other.heightAgl && heightAglAcc == other.heightAglAcc && heightMsl == other.heightMsl && heightMslAcc == other.heightMslAcc && horizAcc == other.horizAcc && horizDatumCode == other.horizDatumCode && initRecordDate == other.initRecordDate && keys == other.keys && lightingCode == other.lightingCode && lineNeLat == other.lineNeLat && lineNeLon == other.lineNeLon && linesFilename == other.linesFilename && lineSwLat == other.lineSwLat && lineSwLon == other.lineSwLon && minHeightAgl == other.minHeightAgl && multObs == other.multObs && nextCycleDate == other.nextCycleDate && numLines == other.numLines && numObs == other.numObs && numPoints == other.numPoints && obstacleRemarks == other.obstacleRemarks && origId == other.origId && origin == other.origin && origNetwork == other.origNetwork && ownerCountryCode == other.ownerCountryCode && pointLat == other.pointLat && pointLon == other.pointLon && pointsFilename == other.pointsFilename && processCode == other.processCode && producer == other.producer && provinceCode == other.provinceCode && quality == other.quality && rawFileUri == other.rawFileUri && revDate == other.revDate && segEndPoint == other.segEndPoint && segNum == other.segNum && segStartPoint == other.segStartPoint && sourceDate == other.sourceDate && sourceDl == other.sourceDl && surfaceMatCode == other.surfaceMatCode && transactionCode == other.transactionCode && validationCode == other.validationCode && values == other.values && vectorsFilename == other.vectorsFilename && wac == other.wac && wacInnr == other.wacInnr && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is NavigationalObstructionListResponse &&
+            classificationMarking == other.classificationMarking &&
+            cycleDate == other.cycleDate &&
+            dataMode == other.dataMode &&
+            obstacleId == other.obstacleId &&
+            obstacleType == other.obstacleType &&
+            source == other.source &&
+            id == other.id &&
+            actDelCode == other.actDelCode &&
+            airacCycle == other.airacCycle &&
+            baseAiracCycle == other.baseAiracCycle &&
+            baselineCutoffDate == other.baselineCutoffDate &&
+            boundNeLat == other.boundNeLat &&
+            boundNeLon == other.boundNeLon &&
+            boundSwLat == other.boundSwLat &&
+            boundSwLon == other.boundSwLon &&
+            countryCode == other.countryCode &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            cutoffDate == other.cutoffDate &&
+            dataSetRemarks == other.dataSetRemarks &&
+            deletingOrg == other.deletingOrg &&
+            derivingOrg == other.derivingOrg &&
+            directivityCode == other.directivityCode &&
+            elevation == other.elevation &&
+            elevationAcc == other.elevationAcc &&
+            externalId == other.externalId &&
+            facc == other.facc &&
+            featureCode == other.featureCode &&
+            featureDescription == other.featureDescription &&
+            featureName == other.featureName &&
+            featureType == other.featureType &&
+            heightAgl == other.heightAgl &&
+            heightAglAcc == other.heightAglAcc &&
+            heightMsl == other.heightMsl &&
+            heightMslAcc == other.heightMslAcc &&
+            horizAcc == other.horizAcc &&
+            horizDatumCode == other.horizDatumCode &&
+            initRecordDate == other.initRecordDate &&
+            keys == other.keys &&
+            lightingCode == other.lightingCode &&
+            lineNeLat == other.lineNeLat &&
+            lineNeLon == other.lineNeLon &&
+            linesFilename == other.linesFilename &&
+            lineSwLat == other.lineSwLat &&
+            lineSwLon == other.lineSwLon &&
+            minHeightAgl == other.minHeightAgl &&
+            multObs == other.multObs &&
+            nextCycleDate == other.nextCycleDate &&
+            numLines == other.numLines &&
+            numObs == other.numObs &&
+            numPoints == other.numPoints &&
+            obstacleRemarks == other.obstacleRemarks &&
+            origId == other.origId &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            ownerCountryCode == other.ownerCountryCode &&
+            pointLat == other.pointLat &&
+            pointLon == other.pointLon &&
+            pointsFilename == other.pointsFilename &&
+            processCode == other.processCode &&
+            producer == other.producer &&
+            provinceCode == other.provinceCode &&
+            quality == other.quality &&
+            rawFileUri == other.rawFileUri &&
+            revDate == other.revDate &&
+            segEndPoint == other.segEndPoint &&
+            segNum == other.segNum &&
+            segStartPoint == other.segStartPoint &&
+            sourceDate == other.sourceDate &&
+            sourceDl == other.sourceDl &&
+            surfaceMatCode == other.surfaceMatCode &&
+            transactionCode == other.transactionCode &&
+            validationCode == other.validationCode &&
+            values == other.values &&
+            vectorsFilename == other.vectorsFilename &&
+            wac == other.wac &&
+            wacInnr == other.wacInnr &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, cycleDate, dataMode, obstacleId, obstacleType, source, id, actDelCode, airacCycle, baseAiracCycle, baselineCutoffDate, boundNeLat, boundNeLon, boundSwLat, boundSwLon, countryCode, createdAt, createdBy, cutoffDate, dataSetRemarks, deletingOrg, derivingOrg, directivityCode, elevation, elevationAcc, externalId, facc, featureCode, featureDescription, featureName, featureType, heightAgl, heightAglAcc, heightMsl, heightMslAcc, horizAcc, horizDatumCode, initRecordDate, keys, lightingCode, lineNeLat, lineNeLon, linesFilename, lineSwLat, lineSwLon, minHeightAgl, multObs, nextCycleDate, numLines, numObs, numPoints, obstacleRemarks, origId, origin, origNetwork, ownerCountryCode, pointLat, pointLon, pointsFilename, processCode, producer, provinceCode, quality, rawFileUri, revDate, segEndPoint, segNum, segStartPoint, sourceDate, sourceDl, surfaceMatCode, transactionCode, validationCode, values, vectorsFilename, wac, wacInnr, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            cycleDate,
+            dataMode,
+            obstacleId,
+            obstacleType,
+            source,
+            id,
+            actDelCode,
+            airacCycle,
+            baseAiracCycle,
+            baselineCutoffDate,
+            boundNeLat,
+            boundNeLon,
+            boundSwLat,
+            boundSwLon,
+            countryCode,
+            createdAt,
+            createdBy,
+            cutoffDate,
+            dataSetRemarks,
+            deletingOrg,
+            derivingOrg,
+            directivityCode,
+            elevation,
+            elevationAcc,
+            externalId,
+            facc,
+            featureCode,
+            featureDescription,
+            featureName,
+            featureType,
+            heightAgl,
+            heightAglAcc,
+            heightMsl,
+            heightMslAcc,
+            horizAcc,
+            horizDatumCode,
+            initRecordDate,
+            keys,
+            lightingCode,
+            lineNeLat,
+            lineNeLon,
+            linesFilename,
+            lineSwLat,
+            lineSwLon,
+            minHeightAgl,
+            multObs,
+            nextCycleDate,
+            numLines,
+            numObs,
+            numPoints,
+            obstacleRemarks,
+            origId,
+            origin,
+            origNetwork,
+            ownerCountryCode,
+            pointLat,
+            pointLon,
+            pointsFilename,
+            processCode,
+            producer,
+            provinceCode,
+            quality,
+            rawFileUri,
+            revDate,
+            segEndPoint,
+            segNum,
+            segStartPoint,
+            sourceDate,
+            sourceDl,
+            surfaceMatCode,
+            transactionCode,
+            validationCode,
+            values,
+            vectorsFilename,
+            wac,
+            wacInnr,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

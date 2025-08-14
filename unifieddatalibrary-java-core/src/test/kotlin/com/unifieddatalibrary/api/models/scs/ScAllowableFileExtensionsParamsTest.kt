@@ -2,13 +2,12 @@
 
 package com.unifieddatalibrary.api.models.scs
 
-import com.unifieddatalibrary.api.models.scs.ScAllowableFileExtensionsParams
 import org.junit.jupiter.api.Test
 
 internal class ScAllowableFileExtensionsParamsTest {
 
     @Test
     fun create() {
-      ScAllowableFileExtensionsParams.builder().build()
+        ScAllowableFileExtensionsParams.builder().build()
     }
 }

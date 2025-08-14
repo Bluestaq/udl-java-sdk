@@ -3,7 +3,6 @@
 package com.unifieddatalibrary.api.services.async
 
 import com.unifieddatalibrary.api.core.ClientOptions
-import com.unifieddatalibrary.api.services.async.AirOperationServiceAsync
 import com.unifieddatalibrary.api.services.async.airoperations.AirTaskingOrderServiceAsync
 import com.unifieddatalibrary.api.services.async.airoperations.AircraftSortyServiceAsync
 import com.unifieddatalibrary.api.services.async.airoperations.AirspaceControlOrderServiceAsync
@@ -13,7 +12,9 @@ import java.util.function.Consumer
 
 interface AirOperationServiceAsync {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -33,7 +34,10 @@ interface AirOperationServiceAsync {
 
     fun diplomaticClearance(): DiplomaticClearanceServiceAsync
 
-    /** A view of [AirOperationServiceAsync] that provides access to raw HTTP responses for each method. */
+    /**
+     * A view of [AirOperationServiceAsync] that provides access to raw HTTP responses for each
+     * method.
+     */
     interface WithRawResponse {
 
         /**
@@ -41,7 +45,9 @@ interface AirOperationServiceAsync {
          *
          * The original service is not modified.
          */
-        fun withOptions(modifier: Consumer<ClientOptions.Builder>): AirOperationServiceAsync.WithRawResponse
+        fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): AirOperationServiceAsync.WithRawResponse
 
         fun airTaskingOrders(): AirTaskingOrderServiceAsync.WithRawResponse
 

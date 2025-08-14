@@ -19,20 +19,19 @@ import com.unifieddatalibrary.api.models.elsets.ElsetAbridged
 import com.unifieddatalibrary.api.models.elsets.current.CurrentListPage
 import com.unifieddatalibrary.api.models.elsets.current.CurrentListParams
 import com.unifieddatalibrary.api.models.elsets.current.CurrentTupleParams
-import com.unifieddatalibrary.api.services.blocking.elsets.CurrentService
-import com.unifieddatalibrary.api.services.blocking.elsets.CurrentServiceImpl
 import java.util.function.Consumer
 
-class CurrentServiceImpl internal constructor(
-    private val clientOptions: ClientOptions,
+class CurrentServiceImpl internal constructor(private val clientOptions: ClientOptions) :
+    CurrentService {
 
-) : CurrentService {
-
-    private val withRawResponse: CurrentService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
+    private val withRawResponse: CurrentService.WithRawResponse by lazy {
+        WithRawResponseImpl(clientOptions)
+    }
 
     override fun withRawResponse(): CurrentService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): CurrentService = CurrentServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): CurrentService =
+        CurrentServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun list(params: CurrentListParams, requestOptions: RequestOptions): CurrentListPage =
         // get /udl/elset/current
@@ -42,72 +41,78 @@ class CurrentServiceImpl internal constructor(
         // get /udl/elset/current/tuple
         withRawResponse().tuple(params, requestOptions).parse()
 
-    class WithRawResponseImpl internal constructor(
-        private val clientOptions: ClientOptions,
+    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
+        CurrentService.WithRawResponse {
 
-    ) : CurrentService.WithRawResponse {
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+        override fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): CurrentService.WithRawResponse =
+            CurrentServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier::accept).build()
+            )
 
-        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): CurrentService.WithRawResponse = CurrentServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+        private val listHandler: Handler<List<ElsetAbridged>> =
+            jsonHandler<List<ElsetAbridged>>(clientOptions.jsonMapper)
 
-        private val listHandler: Handler<List<ElsetAbridged>> = jsonHandler<List<ElsetAbridged>>(clientOptions.jsonMapper)
-
-        override fun list(params: CurrentListParams, requestOptions: RequestOptions): HttpResponseFor<CurrentListPage> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "elset", "current")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  listHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.forEach { it.validate() }
-                  }
-              }
-              .let {
-                  CurrentListPage.builder()
-                      .service(CurrentServiceImpl(clientOptions))
-                      .params(params)
-                      .items(it)
-                      .build()
-              }
-          }
+        override fun list(
+            params: CurrentListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<CurrentListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "elset", "current")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        CurrentListPage.builder()
+                            .service(CurrentServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
         }
 
-        private val tupleHandler: Handler<List<Elset>> = jsonHandler<List<Elset>>(clientOptions.jsonMapper)
+        private val tupleHandler: Handler<List<Elset>> =
+            jsonHandler<List<Elset>>(clientOptions.jsonMapper)
 
-        override fun tuple(params: CurrentTupleParams, requestOptions: RequestOptions): HttpResponseFor<List<Elset>> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "elset", "current", "tuple")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  tupleHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.forEach { it.validate() }
-                  }
-              }
-          }
+        override fun tuple(
+            params: CurrentTupleParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<List<Elset>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "elset", "current", "tuple")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { tupleHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+            }
         }
     }
 }

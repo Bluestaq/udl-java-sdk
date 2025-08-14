@@ -3473,7 +3473,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -4151,12 +4151,23 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is MultiDutyVoiceCoord && multiCommPri == other.multiCommPri && multiFreqDes == other.multiFreqDes && multiTeleFreqNums == other.multiTeleFreqNums && multiVoiceNetDes == other.multiVoiceNetDes && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is MultiDutyVoiceCoord &&
+                    multiCommPri == other.multiCommPri &&
+                    multiFreqDes == other.multiFreqDes &&
+                    multiTeleFreqNums == other.multiTeleFreqNums &&
+                    multiVoiceNetDes == other.multiVoiceNetDes &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(multiCommPri, multiFreqDes, multiTeleFreqNums, multiVoiceNetDes, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    multiCommPri,
+                    multiFreqDes,
+                    multiTeleFreqNums,
+                    multiVoiceNetDes,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -4169,12 +4180,27 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is MultiDuty && duty == other.duty && dutyTeleFreqNums == other.dutyTeleFreqNums && multiDutyVoiceCoord == other.multiDutyVoiceCoord && name == other.name && rank == other.rank && unitDes == other.unitDes && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is MultiDuty &&
+                duty == other.duty &&
+                dutyTeleFreqNums == other.dutyTeleFreqNums &&
+                multiDutyVoiceCoord == other.multiDutyVoiceCoord &&
+                name == other.name &&
+                rank == other.rank &&
+                unitDes == other.unitDes &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(duty, dutyTeleFreqNums, multiDutyVoiceCoord, name, rank, unitDes, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                duty,
+                dutyTeleFreqNums,
+                multiDutyVoiceCoord,
+                name,
+                rank,
+                unitDes,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4506,12 +4532,25 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Op && linkDetails == other.linkDetails && linkName == other.linkName && linkStartTime == other.linkStartTime && linkStopTime == other.linkStopTime && linkStopTimeMod == other.linkStopTimeMod && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Op &&
+                linkDetails == other.linkDetails &&
+                linkName == other.linkName &&
+                linkStartTime == other.linkStartTime &&
+                linkStopTime == other.linkStopTime &&
+                linkStopTimeMod == other.linkStopTimeMod &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(linkDetails, linkName, linkStartTime, linkStopTime, linkStopTimeMod, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                linkDetails,
+                linkName,
+                linkStartTime,
+                linkStopTime,
+                linkStopTimeMod,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -4931,12 +4970,29 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Reference && refOriginator == other.refOriginator && refSerialId == other.refSerialId && refSerialNum == other.refSerialNum && refSiCs == other.refSiCs && refSpecialNotation == other.refSpecialNotation && refTs == other.refTs && refType == other.refType && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Reference &&
+                refOriginator == other.refOriginator &&
+                refSerialId == other.refSerialId &&
+                refSerialNum == other.refSerialNum &&
+                refSiCs == other.refSiCs &&
+                refSpecialNotation == other.refSpecialNotation &&
+                refTs == other.refTs &&
+                refType == other.refType &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(refOriginator, refSerialId, refSerialNum, refSiCs, refSpecialNotation, refTs, refType, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                refOriginator,
+                refSerialId,
+                refSerialNum,
+                refSiCs,
+                refSpecialNotation,
+                refTs,
+                refType,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5282,12 +5338,27 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is RefPoint && effEventTime == other.effEventTime && refDes == other.refDes && refLat == other.refLat && refLocName == other.refLocName && refLon == other.refLon && refPointType == other.refPointType && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is RefPoint &&
+                effEventTime == other.effEventTime &&
+                refDes == other.refDes &&
+                refLat == other.refLat &&
+                refLocName == other.refLocName &&
+                refLon == other.refLon &&
+                refPointType == other.refPointType &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(effEventTime, refDes, refLat, refLocName, refLon, refPointType, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                effEventTime,
+                refDes,
+                refLat,
+                refLocName,
+                refLon,
+                refPointType,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5457,12 +5528,13 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Remark && text == other.text && type == other.type && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Remark &&
+                text == other.text &&
+                type == other.type &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
         private val hashCode: Int by lazy { Objects.hash(text, type, additionalProperties) }
-        /* spotless:on */
 
         override fun hashCode(): Int = hashCode
 
@@ -5658,12 +5730,15 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is SpecTrack && specTrackNum == other.specTrackNum && specTrackNumDesc == other.specTrackNumDesc && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is SpecTrack &&
+                specTrackNum == other.specTrackNum &&
+                specTrackNumDesc == other.specTrackNumDesc &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(specTrackNum, specTrackNumDesc, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(specTrackNum, specTrackNumDesc, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5952,12 +6027,17 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is VoiceCoord && commPri == other.commPri && freqDes == other.freqDes && teleFreqNums == other.teleFreqNums && voiceNetDes == other.voiceNetDes && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is VoiceCoord &&
+                commPri == other.commPri &&
+                freqDes == other.freqDes &&
+                teleFreqNums == other.teleFreqNums &&
+                voiceNetDes == other.voiceNetDes &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(commPri, freqDes, teleFreqNums, voiceNetDes, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(commPri, freqDes, teleFreqNums, voiceNetDes, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -5970,12 +6050,163 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is DatalinkListResponse && classificationMarking == other.classificationMarking && dataMode == other.dataMode && opExName == other.opExName && originator == other.originator && source == other.source && startTime == other.startTime && id == other.id && ackInstUnits == other.ackInstUnits && ackReq == other.ackReq && altDiff == other.altDiff && canxId == other.canxId && canxOriginator == other.canxOriginator && canxSerialNum == other.canxSerialNum && canxSiCs == other.canxSiCs && canxSpecialNotation == other.canxSpecialNotation && canxTs == other.canxTs && classReasons == other.classReasons && classSource == other.classSource && consecDecorr == other.consecDecorr && courseDiff == other.courseDiff && createdAt == other.createdAt && createdBy == other.createdBy && decExemptCodes == other.decExemptCodes && decInstDates == other.decInstDates && decorrWinMult == other.decorrWinMult && geoDatum == other.geoDatum && jreCallSign == other.jreCallSign && jreDetails == other.jreDetails && jrePriAdd == other.jrePriAdd && jreSecAdd == other.jreSecAdd && jreUnitDes == other.jreUnitDes && maxGeoPosQual == other.maxGeoPosQual && maxTrackQual == other.maxTrackQual && mgmtCode == other.mgmtCode && mgmtCodeMeaning == other.mgmtCodeMeaning && minGeoPosQual == other.minGeoPosQual && minTrackQual == other.minTrackQual && month == other.month && multiDuty == other.multiDuty && nonLinkUnitDes == other.nonLinkUnitDes && opExInfo == other.opExInfo && opExInfoAlt == other.opExInfoAlt && ops == other.ops && origin == other.origin && origNetwork == other.origNetwork && planOrigNum == other.planOrigNum && pocCallSign == other.pocCallSign && pocLat == other.pocLat && pocLocName == other.pocLocName && pocLon == other.pocLon && pocName == other.pocName && pocNums == other.pocNums && pocRank == other.pocRank && qualifier == other.qualifier && qualSn == other.qualSn && rawFileUri == other.rawFileUri && references == other.references && refPoints == other.refPoints && remarks == other.remarks && resTrackQual == other.resTrackQual && serialNum == other.serialNum && sourceDl == other.sourceDl && specTracks == other.specTracks && speedDiff == other.speedDiff && stopTime == other.stopTime && stopTimeMod == other.stopTimeMod && sysDefaultCode == other.sysDefaultCode && trackNumBlockLLs == other.trackNumBlockLLs && trackNumBlocks == other.trackNumBlocks && updatedAt == other.updatedAt && updatedBy == other.updatedBy && voiceCoord == other.voiceCoord && winSizeMin == other.winSizeMin && winSizeMult == other.winSizeMult && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is DatalinkListResponse &&
+            classificationMarking == other.classificationMarking &&
+            dataMode == other.dataMode &&
+            opExName == other.opExName &&
+            originator == other.originator &&
+            source == other.source &&
+            startTime == other.startTime &&
+            id == other.id &&
+            ackInstUnits == other.ackInstUnits &&
+            ackReq == other.ackReq &&
+            altDiff == other.altDiff &&
+            canxId == other.canxId &&
+            canxOriginator == other.canxOriginator &&
+            canxSerialNum == other.canxSerialNum &&
+            canxSiCs == other.canxSiCs &&
+            canxSpecialNotation == other.canxSpecialNotation &&
+            canxTs == other.canxTs &&
+            classReasons == other.classReasons &&
+            classSource == other.classSource &&
+            consecDecorr == other.consecDecorr &&
+            courseDiff == other.courseDiff &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            decExemptCodes == other.decExemptCodes &&
+            decInstDates == other.decInstDates &&
+            decorrWinMult == other.decorrWinMult &&
+            geoDatum == other.geoDatum &&
+            jreCallSign == other.jreCallSign &&
+            jreDetails == other.jreDetails &&
+            jrePriAdd == other.jrePriAdd &&
+            jreSecAdd == other.jreSecAdd &&
+            jreUnitDes == other.jreUnitDes &&
+            maxGeoPosQual == other.maxGeoPosQual &&
+            maxTrackQual == other.maxTrackQual &&
+            mgmtCode == other.mgmtCode &&
+            mgmtCodeMeaning == other.mgmtCodeMeaning &&
+            minGeoPosQual == other.minGeoPosQual &&
+            minTrackQual == other.minTrackQual &&
+            month == other.month &&
+            multiDuty == other.multiDuty &&
+            nonLinkUnitDes == other.nonLinkUnitDes &&
+            opExInfo == other.opExInfo &&
+            opExInfoAlt == other.opExInfoAlt &&
+            ops == other.ops &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            planOrigNum == other.planOrigNum &&
+            pocCallSign == other.pocCallSign &&
+            pocLat == other.pocLat &&
+            pocLocName == other.pocLocName &&
+            pocLon == other.pocLon &&
+            pocName == other.pocName &&
+            pocNums == other.pocNums &&
+            pocRank == other.pocRank &&
+            qualifier == other.qualifier &&
+            qualSn == other.qualSn &&
+            rawFileUri == other.rawFileUri &&
+            references == other.references &&
+            refPoints == other.refPoints &&
+            remarks == other.remarks &&
+            resTrackQual == other.resTrackQual &&
+            serialNum == other.serialNum &&
+            sourceDl == other.sourceDl &&
+            specTracks == other.specTracks &&
+            speedDiff == other.speedDiff &&
+            stopTime == other.stopTime &&
+            stopTimeMod == other.stopTimeMod &&
+            sysDefaultCode == other.sysDefaultCode &&
+            trackNumBlockLLs == other.trackNumBlockLLs &&
+            trackNumBlocks == other.trackNumBlocks &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            voiceCoord == other.voiceCoord &&
+            winSizeMin == other.winSizeMin &&
+            winSizeMult == other.winSizeMult &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, opExName, originator, source, startTime, id, ackInstUnits, ackReq, altDiff, canxId, canxOriginator, canxSerialNum, canxSiCs, canxSpecialNotation, canxTs, classReasons, classSource, consecDecorr, courseDiff, createdAt, createdBy, decExemptCodes, decInstDates, decorrWinMult, geoDatum, jreCallSign, jreDetails, jrePriAdd, jreSecAdd, jreUnitDes, maxGeoPosQual, maxTrackQual, mgmtCode, mgmtCodeMeaning, minGeoPosQual, minTrackQual, month, multiDuty, nonLinkUnitDes, opExInfo, opExInfoAlt, ops, origin, origNetwork, planOrigNum, pocCallSign, pocLat, pocLocName, pocLon, pocName, pocNums, pocRank, qualifier, qualSn, rawFileUri, references, refPoints, remarks, resTrackQual, serialNum, sourceDl, specTracks, speedDiff, stopTime, stopTimeMod, sysDefaultCode, trackNumBlockLLs, trackNumBlocks, updatedAt, updatedBy, voiceCoord, winSizeMin, winSizeMult, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            dataMode,
+            opExName,
+            originator,
+            source,
+            startTime,
+            id,
+            ackInstUnits,
+            ackReq,
+            altDiff,
+            canxId,
+            canxOriginator,
+            canxSerialNum,
+            canxSiCs,
+            canxSpecialNotation,
+            canxTs,
+            classReasons,
+            classSource,
+            consecDecorr,
+            courseDiff,
+            createdAt,
+            createdBy,
+            decExemptCodes,
+            decInstDates,
+            decorrWinMult,
+            geoDatum,
+            jreCallSign,
+            jreDetails,
+            jrePriAdd,
+            jreSecAdd,
+            jreUnitDes,
+            maxGeoPosQual,
+            maxTrackQual,
+            mgmtCode,
+            mgmtCodeMeaning,
+            minGeoPosQual,
+            minTrackQual,
+            month,
+            multiDuty,
+            nonLinkUnitDes,
+            opExInfo,
+            opExInfoAlt,
+            ops,
+            origin,
+            origNetwork,
+            planOrigNum,
+            pocCallSign,
+            pocLat,
+            pocLocName,
+            pocLon,
+            pocName,
+            pocNums,
+            pocRank,
+            qualifier,
+            qualSn,
+            rawFileUri,
+            references,
+            refPoints,
+            remarks,
+            resTrackQual,
+            serialNum,
+            sourceDl,
+            specTracks,
+            speedDiff,
+            stopTime,
+            stopTimeMod,
+            sysDefaultCode,
+            trackNumBlockLLs,
+            trackNumBlocks,
+            updatedAt,
+            updatedBy,
+            voiceCoord,
+            winSizeMin,
+            winSizeMult,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

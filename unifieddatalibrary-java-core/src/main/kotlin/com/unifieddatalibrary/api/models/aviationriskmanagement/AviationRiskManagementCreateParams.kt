@@ -1665,12 +1665,50 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && classificationMarking == other.classificationMarking && dataMode == other.dataMode && idMission == other.idMission && source == other.source && id == other.id && aviationRiskManagementWorksheetRecord == other.aviationRiskManagementWorksheetRecord && createdAt == other.createdAt && createdBy == other.createdBy && extMissionId == other.extMissionId && missionNumber == other.missionNumber && orgId == other.orgId && origin == other.origin && origNetwork == other.origNetwork && sourceDl == other.sourceDl && unitId == other.unitId && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idMission == other.idMission &&
+                source == other.source &&
+                id == other.id &&
+                aviationRiskManagementWorksheetRecord ==
+                    other.aviationRiskManagementWorksheetRecord &&
+                createdAt == other.createdAt &&
+                createdBy == other.createdBy &&
+                extMissionId == other.extMissionId &&
+                missionNumber == other.missionNumber &&
+                orgId == other.orgId &&
+                origin == other.origin &&
+                origNetwork == other.origNetwork &&
+                sourceDl == other.sourceDl &&
+                unitId == other.unitId &&
+                updatedAt == other.updatedAt &&
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(classificationMarking, dataMode, idMission, source, id, aviationRiskManagementWorksheetRecord, createdAt, createdBy, extMissionId, missionNumber, orgId, origin, origNetwork, sourceDl, unitId, updatedAt, updatedBy, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                classificationMarking,
+                dataMode,
+                idMission,
+                source,
+                id,
+                aviationRiskManagementWorksheetRecord,
+                createdAt,
+                createdBy,
+                extMissionId,
+                missionNumber,
+                orgId,
+                origin,
+                origNetwork,
+                sourceDl,
+                unitId,
+                updatedAt,
+                updatedBy,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1823,7 +1861,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is DataMode && value == other.value /* spotless:on */
+            return other is DataMode && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -3518,12 +3556,17 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is AviationRiskManagementSortie && extSortieId == other.extSortieId && idSortie == other.idSortie && legNum == other.legNum && sortieScore == other.sortieScore && additionalProperties == other.additionalProperties /* spotless:on */
+                    return other is AviationRiskManagementSortie &&
+                        extSortieId == other.extSortieId &&
+                        idSortie == other.idSortie &&
+                        legNum == other.legNum &&
+                        sortieScore == other.sortieScore &&
+                        additionalProperties == other.additionalProperties
                 }
 
-                /* spotless:off */
-                private val hashCode: Int by lazy { Objects.hash(extSortieId, idSortie, legNum, sortieScore, additionalProperties) }
-                /* spotless:on */
+                private val hashCode: Int by lazy {
+                    Objects.hash(extSortieId, idSortie, legNum, sortieScore, additionalProperties)
+                }
 
                 override fun hashCode(): Int = hashCode
 
@@ -3536,12 +3579,37 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is AviationRiskManagementWorksheetScore && approvalDate == other.approvalDate && approvedBy == other.approvedBy && approvedCode == other.approvedCode && aviationRiskManagementSortie == other.aviationRiskManagementSortie && extScoreId == other.extScoreId && riskCategory == other.riskCategory && riskDescription == other.riskDescription && riskKey == other.riskKey && riskName == other.riskName && score == other.score && scoreRemark == other.scoreRemark && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is AviationRiskManagementWorksheetScore &&
+                    approvalDate == other.approvalDate &&
+                    approvedBy == other.approvedBy &&
+                    approvedCode == other.approvedCode &&
+                    aviationRiskManagementSortie == other.aviationRiskManagementSortie &&
+                    extScoreId == other.extScoreId &&
+                    riskCategory == other.riskCategory &&
+                    riskDescription == other.riskDescription &&
+                    riskKey == other.riskKey &&
+                    riskName == other.riskName &&
+                    score == other.score &&
+                    scoreRemark == other.scoreRemark &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(approvalDate, approvedBy, approvedCode, aviationRiskManagementSortie, extScoreId, riskCategory, riskDescription, riskKey, riskName, score, scoreRemark, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    approvalDate,
+                    approvedBy,
+                    approvedCode,
+                    aviationRiskManagementSortie,
+                    extScoreId,
+                    riskCategory,
+                    riskDescription,
+                    riskKey,
+                    riskName,
+                    score,
+                    scoreRemark,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -3554,12 +3622,46 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AviationRiskManagementWorksheetRecord && missionDate == other.missionDate && aircraftMds == other.aircraftMds && approvalPending == other.approvalPending && approved == other.approved && aviationRiskManagementWorksheetScore == other.aviationRiskManagementWorksheetScore && dispositionComments == other.dispositionComments && extRecordId == other.extRecordId && itinerary == other.itinerary && lastUpdatedAt == other.lastUpdatedAt && remarks == other.remarks && severityLevel == other.severityLevel && submissionDate == other.submissionDate && tierNumber == other.tierNumber && totalScore == other.totalScore && userId == other.userId && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is AviationRiskManagementWorksheetRecord &&
+                missionDate == other.missionDate &&
+                aircraftMds == other.aircraftMds &&
+                approvalPending == other.approvalPending &&
+                approved == other.approved &&
+                aviationRiskManagementWorksheetScore ==
+                    other.aviationRiskManagementWorksheetScore &&
+                dispositionComments == other.dispositionComments &&
+                extRecordId == other.extRecordId &&
+                itinerary == other.itinerary &&
+                lastUpdatedAt == other.lastUpdatedAt &&
+                remarks == other.remarks &&
+                severityLevel == other.severityLevel &&
+                submissionDate == other.submissionDate &&
+                tierNumber == other.tierNumber &&
+                totalScore == other.totalScore &&
+                userId == other.userId &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(missionDate, aircraftMds, approvalPending, approved, aviationRiskManagementWorksheetScore, dispositionComments, extRecordId, itinerary, lastUpdatedAt, remarks, severityLevel, submissionDate, tierNumber, totalScore, userId, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                missionDate,
+                aircraftMds,
+                approvalPending,
+                approved,
+                aviationRiskManagementWorksheetScore,
+                dispositionComments,
+                extRecordId,
+                itinerary,
+                lastUpdatedAt,
+                remarks,
+                severityLevel,
+                submissionDate,
+                tierNumber,
+                totalScore,
+                userId,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -3572,10 +3674,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is AviationRiskManagementCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is AviationRiskManagementCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "AviationRiskManagementCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
