@@ -7,12 +7,13 @@ import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.scs.classificationmarkings.ClassificationMarkingListParams
-import com.unifieddatalibrary.api.services.blocking.scs.ClassificationMarkingService
 import java.util.function.Consumer
 
 interface ClassificationMarkingService {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -26,21 +27,24 @@ interface ClassificationMarkingService {
     fun list(): List<String> = list(ClassificationMarkingListParams.none())
 
     /** @see list */
-    fun list(params: ClassificationMarkingListParams = ClassificationMarkingListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): List<String>
+    fun list(
+        params: ClassificationMarkingListParams = ClassificationMarkingListParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): List<String>
 
     /** @see list */
-    fun list(params: ClassificationMarkingListParams = ClassificationMarkingListParams.none()): List<String> =
-        list(
-          params, RequestOptions.none()
-        )
+    fun list(
+        params: ClassificationMarkingListParams = ClassificationMarkingListParams.none()
+    ): List<String> = list(params, RequestOptions.none())
 
     /** @see list */
     fun list(requestOptions: RequestOptions): List<String> =
-        list(
-          ClassificationMarkingListParams.none(), requestOptions
-        )
+        list(ClassificationMarkingListParams.none(), requestOptions)
 
-    /** A view of [ClassificationMarkingService] that provides access to raw HTTP responses for each method. */
+    /**
+     * A view of [ClassificationMarkingService] that provides access to raw HTTP responses for each
+     * method.
+     */
     interface WithRawResponse {
 
         /**
@@ -48,28 +52,33 @@ interface ClassificationMarkingService {
          *
          * The original service is not modified.
          */
-        fun withOptions(modifier: Consumer<ClientOptions.Builder>): ClassificationMarkingService.WithRawResponse
+        fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): ClassificationMarkingService.WithRawResponse
 
-        /** Returns a raw HTTP response for `get /scs/getClassificationMarkings`, but is otherwise the same as [ClassificationMarkingService.list]. */
+        /**
+         * Returns a raw HTTP response for `get /scs/getClassificationMarkings`, but is otherwise
+         * the same as [ClassificationMarkingService.list].
+         */
         @MustBeClosed
         fun list(): HttpResponseFor<List<String>> = list(ClassificationMarkingListParams.none())
 
         /** @see list */
         @MustBeClosed
-        fun list(params: ClassificationMarkingListParams = ClassificationMarkingListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<List<String>>
+        fun list(
+            params: ClassificationMarkingListParams = ClassificationMarkingListParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<List<String>>
 
         /** @see list */
         @MustBeClosed
-        fun list(params: ClassificationMarkingListParams = ClassificationMarkingListParams.none()): HttpResponseFor<List<String>> =
-            list(
-              params, RequestOptions.none()
-            )
+        fun list(
+            params: ClassificationMarkingListParams = ClassificationMarkingListParams.none()
+        ): HttpResponseFor<List<String>> = list(params, RequestOptions.none())
 
         /** @see list */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<List<String>> =
-            list(
-              ClassificationMarkingListParams.none(), requestOptions
-            )
+            list(ClassificationMarkingListParams.none(), requestOptions)
     }
 }

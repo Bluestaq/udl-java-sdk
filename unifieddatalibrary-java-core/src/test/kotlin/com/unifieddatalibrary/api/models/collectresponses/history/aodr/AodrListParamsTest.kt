@@ -3,7 +3,6 @@
 package com.unifieddatalibrary.api.models.collectresponses.history.aodr
 
 import com.unifieddatalibrary.api.core.http.QueryParams
-import com.unifieddatalibrary.api.models.collectresponses.history.aodr.AodrListParams
 import java.time.LocalDate
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -12,52 +11,53 @@ internal class AodrListParamsTest {
 
     @Test
     fun create() {
-      AodrListParams.builder()
-          .createdAt(LocalDate.parse("2019-12-27"))
-          .columns("columns")
-          .firstResult(0L)
-          .maxResults(0L)
-          .notification("notification")
-          .outputDelimiter("outputDelimiter")
-          .outputFormat("outputFormat")
-          .build()
+        AodrListParams.builder()
+            .createdAt(LocalDate.parse("2019-12-27"))
+            .columns("columns")
+            .firstResult(0L)
+            .maxResults(0L)
+            .notification("notification")
+            .outputDelimiter("outputDelimiter")
+            .outputFormat("outputFormat")
+            .build()
     }
 
     @Test
     fun queryParams() {
-      val params = AodrListParams.builder()
-          .createdAt(LocalDate.parse("2019-12-27"))
-          .columns("columns")
-          .firstResult(0L)
-          .maxResults(0L)
-          .notification("notification")
-          .outputDelimiter("outputDelimiter")
-          .outputFormat("outputFormat")
-          .build()
+        val params =
+            AodrListParams.builder()
+                .createdAt(LocalDate.parse("2019-12-27"))
+                .columns("columns")
+                .firstResult(0L)
+                .maxResults(0L)
+                .notification("notification")
+                .outputDelimiter("outputDelimiter")
+                .outputFormat("outputFormat")
+                .build()
 
-      val queryParams = params._queryParams()
+        val queryParams = params._queryParams()
 
-      assertThat(queryParams).isEqualTo(QueryParams.builder()
-          .put("createdAt", "2019-12-27")
-          .put("columns", "columns")
-          .put("firstResult", "0")
-          .put("maxResults", "0")
-          .put("notification", "notification")
-          .put("outputDelimiter", "outputDelimiter")
-          .put("outputFormat", "outputFormat")
-          .build())
+        assertThat(queryParams)
+            .isEqualTo(
+                QueryParams.builder()
+                    .put("createdAt", "2019-12-27")
+                    .put("columns", "columns")
+                    .put("firstResult", "0")
+                    .put("maxResults", "0")
+                    .put("notification", "notification")
+                    .put("outputDelimiter", "outputDelimiter")
+                    .put("outputFormat", "outputFormat")
+                    .build()
+            )
     }
 
     @Test
     fun queryParamsWithoutOptionalFields() {
-      val params = AodrListParams.builder()
-          .createdAt(LocalDate.parse("2019-12-27"))
-          .build()
+        val params = AodrListParams.builder().createdAt(LocalDate.parse("2019-12-27")).build()
 
-      val queryParams = params._queryParams()
+        val queryParams = params._queryParams()
 
-      assertThat(queryParams).isEqualTo(QueryParams.builder()
-          .put("createdAt", "2019-12-27")
-          .build())
+        assertThat(queryParams)
+            .isEqualTo(QueryParams.builder().put("createdAt", "2019-12-27").build())
     }
 }

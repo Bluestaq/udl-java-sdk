@@ -16,60 +16,67 @@ import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.supportingdata.datatypes.DataTypeListPage
 import com.unifieddatalibrary.api.models.supportingdata.datatypes.DataTypeListParams
-import com.unifieddatalibrary.api.services.blocking.supportingdata.DataTypeService
-import com.unifieddatalibrary.api.services.blocking.supportingdata.DataTypeServiceImpl
 import java.util.function.Consumer
 
-class DataTypeServiceImpl internal constructor(
-    private val clientOptions: ClientOptions,
+class DataTypeServiceImpl internal constructor(private val clientOptions: ClientOptions) :
+    DataTypeService {
 
-) : DataTypeService {
-
-    private val withRawResponse: DataTypeService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
+    private val withRawResponse: DataTypeService.WithRawResponse by lazy {
+        WithRawResponseImpl(clientOptions)
+    }
 
     override fun withRawResponse(): DataTypeService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): DataTypeService = DataTypeServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): DataTypeService =
+        DataTypeServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-    override fun list(params: DataTypeListParams, requestOptions: RequestOptions): DataTypeListPage =
+    override fun list(
+        params: DataTypeListParams,
+        requestOptions: RequestOptions,
+    ): DataTypeListPage =
         // get /udl/dataowner/getDataTypes
         withRawResponse().list(params, requestOptions).parse()
 
-    class WithRawResponseImpl internal constructor(
-        private val clientOptions: ClientOptions,
+    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
+        DataTypeService.WithRawResponse {
 
-    ) : DataTypeService.WithRawResponse {
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+        override fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): DataTypeService.WithRawResponse =
+            DataTypeServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier::accept).build()
+            )
 
-        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): DataTypeService.WithRawResponse = DataTypeServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+        private val listHandler: Handler<List<String>> =
+            jsonHandler<List<String>>(clientOptions.jsonMapper)
 
-        private val listHandler: Handler<List<String>> = jsonHandler<List<String>>(clientOptions.jsonMapper)
-
-        override fun list(params: DataTypeListParams, requestOptions: RequestOptions): HttpResponseFor<DataTypeListPage> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "dataowner", "getDataTypes")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  listHandler.handle(it)
-              }
-              .let {
-                  DataTypeListPage.builder()
-                      .service(DataTypeServiceImpl(clientOptions))
-                      .params(params)
-                      .items(it)
-                      .build()
-              }
-          }
+        override fun list(
+            params: DataTypeListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<DataTypeListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "dataowner", "getDataTypes")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .let {
+                        DataTypeListPage.builder()
+                            .service(DataTypeServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
         }
     }
 }

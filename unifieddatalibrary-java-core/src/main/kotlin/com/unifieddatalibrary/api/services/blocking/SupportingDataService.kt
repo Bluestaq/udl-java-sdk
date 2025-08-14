@@ -3,14 +3,15 @@
 package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.core.ClientOptions
-import com.unifieddatalibrary.api.services.blocking.SupportingDataService
 import com.unifieddatalibrary.api.services.blocking.supportingdata.DataTypeService
 import com.unifieddatalibrary.api.services.blocking.supportingdata.DataownerService
 import java.util.function.Consumer
 
 interface SupportingDataService {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -24,7 +25,9 @@ interface SupportingDataService {
 
     fun dataowner(): DataownerService
 
-    /** A view of [SupportingDataService] that provides access to raw HTTP responses for each method. */
+    /**
+     * A view of [SupportingDataService] that provides access to raw HTTP responses for each method.
+     */
     interface WithRawResponse {
 
         /**
@@ -32,7 +35,9 @@ interface SupportingDataService {
          *
          * The original service is not modified.
          */
-        fun withOptions(modifier: Consumer<ClientOptions.Builder>): SupportingDataService.WithRawResponse
+        fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): SupportingDataService.WithRawResponse
 
         fun dataTypes(): DataTypeService.WithRawResponse
 

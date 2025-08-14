@@ -25,183 +25,194 @@ import com.unifieddatalibrary.api.models.batterydetails.BatterydetailListParams
 import com.unifieddatalibrary.api.models.batterydetails.BatterydetailRetrieveParams
 import com.unifieddatalibrary.api.models.batterydetails.BatterydetailUpdateParams
 import com.unifieddatalibrary.api.models.batterydetails.BatterydetailsAbridged
-import com.unifieddatalibrary.api.services.blocking.BatterydetailService
-import com.unifieddatalibrary.api.services.blocking.BatterydetailServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
-class BatterydetailServiceImpl internal constructor(
-    private val clientOptions: ClientOptions,
+class BatterydetailServiceImpl internal constructor(private val clientOptions: ClientOptions) :
+    BatterydetailService {
 
-) : BatterydetailService {
-
-    private val withRawResponse: BatterydetailService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
+    private val withRawResponse: BatterydetailService.WithRawResponse by lazy {
+        WithRawResponseImpl(clientOptions)
+    }
 
     override fun withRawResponse(): BatterydetailService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): BatterydetailService = BatterydetailServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): BatterydetailService =
+        BatterydetailServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun create(params: BatterydetailCreateParams, requestOptions: RequestOptions) {
-      // post /udl/batterydetails
-      withRawResponse().create(params, requestOptions)
+        // post /udl/batterydetails
+        withRawResponse().create(params, requestOptions)
     }
 
-    override fun retrieve(params: BatterydetailRetrieveParams, requestOptions: RequestOptions): BatterydetailsFull =
+    override fun retrieve(
+        params: BatterydetailRetrieveParams,
+        requestOptions: RequestOptions,
+    ): BatterydetailsFull =
         // get /udl/batterydetails/{id}
         withRawResponse().retrieve(params, requestOptions).parse()
 
     override fun update(params: BatterydetailUpdateParams, requestOptions: RequestOptions) {
-      // put /udl/batterydetails/{id}
-      withRawResponse().update(params, requestOptions)
+        // put /udl/batterydetails/{id}
+        withRawResponse().update(params, requestOptions)
     }
 
-    override fun list(params: BatterydetailListParams, requestOptions: RequestOptions): BatterydetailListPage =
+    override fun list(
+        params: BatterydetailListParams,
+        requestOptions: RequestOptions,
+    ): BatterydetailListPage =
         // get /udl/batterydetails
         withRawResponse().list(params, requestOptions).parse()
 
     override fun delete(params: BatterydetailDeleteParams, requestOptions: RequestOptions) {
-      // delete /udl/batterydetails/{id}
-      withRawResponse().delete(params, requestOptions)
+        // delete /udl/batterydetails/{id}
+        withRawResponse().delete(params, requestOptions)
     }
 
-    class WithRawResponseImpl internal constructor(
-        private val clientOptions: ClientOptions,
+    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
+        BatterydetailService.WithRawResponse {
 
-    ) : BatterydetailService.WithRawResponse {
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
-
-        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): BatterydetailService.WithRawResponse = BatterydetailServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+        override fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): BatterydetailService.WithRawResponse =
+            BatterydetailServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier::accept).build()
+            )
 
         private val createHandler: Handler<Void?> = emptyHandler()
 
-        override fun create(params: BatterydetailCreateParams, requestOptions: RequestOptions): HttpResponse {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.POST)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "batterydetails")
-            .body(json(clientOptions.jsonMapper, params._body()))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  createHandler.handle(it)
-              }
-          }
+        override fun create(
+            params: BatterydetailCreateParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "batterydetails")
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { createHandler.handle(it) }
+            }
         }
 
-        private val retrieveHandler: Handler<BatterydetailsFull> = jsonHandler<BatterydetailsFull>(clientOptions.jsonMapper)
+        private val retrieveHandler: Handler<BatterydetailsFull> =
+            jsonHandler<BatterydetailsFull>(clientOptions.jsonMapper)
 
-        override fun retrieve(params: BatterydetailRetrieveParams, requestOptions: RequestOptions): HttpResponseFor<BatterydetailsFull> {
-          // We check here instead of in the params builder because this can be specified positionally or in the params class.
-          checkRequired("id", params.id().getOrNull())
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "batterydetails", params._pathParam(0))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  retrieveHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.validate()
-                  }
-              }
-          }
+        override fun retrieve(
+            params: BatterydetailRetrieveParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<BatterydetailsFull> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("id", params.id().getOrNull())
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "batterydetails", params._pathParam(0))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { retrieveHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.validate()
+                        }
+                    }
+            }
         }
 
         private val updateHandler: Handler<Void?> = emptyHandler()
 
-        override fun update(params: BatterydetailUpdateParams, requestOptions: RequestOptions): HttpResponse {
-          // We check here instead of in the params builder because this can be specified positionally or in the params class.
-          checkRequired("pathId", params.pathId().getOrNull())
-          val request = HttpRequest.builder()
-            .method(HttpMethod.PUT)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "batterydetails", params._pathParam(0))
-            .body(json(clientOptions.jsonMapper, params._body()))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  updateHandler.handle(it)
-              }
-          }
+        override fun update(
+            params: BatterydetailUpdateParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("pathId", params.pathId().getOrNull())
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.PUT)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "batterydetails", params._pathParam(0))
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { updateHandler.handle(it) }
+            }
         }
 
-        private val listHandler: Handler<List<BatterydetailsAbridged>> = jsonHandler<List<BatterydetailsAbridged>>(clientOptions.jsonMapper)
+        private val listHandler: Handler<List<BatterydetailsAbridged>> =
+            jsonHandler<List<BatterydetailsAbridged>>(clientOptions.jsonMapper)
 
-        override fun list(params: BatterydetailListParams, requestOptions: RequestOptions): HttpResponseFor<BatterydetailListPage> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "batterydetails")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  listHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.forEach { it.validate() }
-                  }
-              }
-              .let {
-                  BatterydetailListPage.builder()
-                      .service(BatterydetailServiceImpl(clientOptions))
-                      .params(params)
-                      .items(it)
-                      .build()
-              }
-          }
+        override fun list(
+            params: BatterydetailListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<BatterydetailListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "batterydetails")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        BatterydetailListPage.builder()
+                            .service(BatterydetailServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
         }
 
         private val deleteHandler: Handler<Void?> = emptyHandler()
 
-        override fun delete(params: BatterydetailDeleteParams, requestOptions: RequestOptions): HttpResponse {
-          // We check here instead of in the params builder because this can be specified positionally or in the params class.
-          checkRequired("id", params.id().getOrNull())
-          val request = HttpRequest.builder()
-            .method(HttpMethod.DELETE)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "batterydetails", params._pathParam(0))
-            .apply { params._body().ifPresent{ body(json(clientOptions.jsonMapper, it)) } }
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  deleteHandler.handle(it)
-              }
-          }
+        override fun delete(
+            params: BatterydetailDeleteParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("id", params.id().getOrNull())
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.DELETE)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "batterydetails", params._pathParam(0))
+                    .apply { params._body().ifPresent { body(json(clientOptions.jsonMapper, it)) } }
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { deleteHandler.handle(it) }
+            }
         }
     }
 }

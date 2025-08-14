@@ -16,14 +16,15 @@ import com.unifieddatalibrary.api.models.notification.NotificationListParams
 import com.unifieddatalibrary.api.models.notification.NotificationQueryhelpParams
 import com.unifieddatalibrary.api.models.notification.NotificationQueryhelpResponse
 import com.unifieddatalibrary.api.models.notification.NotificationTupleParams
-import com.unifieddatalibrary.api.services.async.NotificationServiceAsync
 import com.unifieddatalibrary.api.services.async.notification.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
 interface NotificationServiceAsync {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -35,109 +36,152 @@ interface NotificationServiceAsync {
 
     fun history(): HistoryServiceAsync
 
-    /** Service operation to push a generic Notification/Alert JSON message into the UDL. This operation accepts a UDL-formatted Notification JSON notification/alert message. See the Notification schema for required fields such as classificationMarking, msgType, etc. Messages pushed through this service may be pulled via Secure Messaging and historical REST services. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
+    /**
+     * Service operation to push a generic Notification/Alert JSON message into the UDL. This
+     * operation accepts a UDL-formatted Notification JSON notification/alert message. See the
+     * Notification schema for required fields such as classificationMarking, msgType, etc. Messages
+     * pushed through this service may be pulled via Secure Messaging and historical REST services.
+     * A specific role is required to perform this service operation. Please contact the UDL team
+     * for assistance.
+     */
     fun create(params: NotificationCreateParams): CompletableFuture<Void?> =
-        create(
-          params, RequestOptions.none()
-        )
+        create(params, RequestOptions.none())
 
     /** @see create */
-    fun create(params: NotificationCreateParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?>
+    fun create(
+        params: NotificationCreateParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?>
 
-    /** Service operation to dynamically query data by a variety of query parameters not specified in this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
+    /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
     fun list(params: NotificationListParams): CompletableFuture<NotificationListPageAsync> =
-        list(
-          params, RequestOptions.none()
-        )
+        list(params, RequestOptions.none())
 
     /** @see list */
-    fun list(params: NotificationListParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<NotificationListPageAsync>
+    fun list(
+        params: NotificationListParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<NotificationListPageAsync>
 
-    /** Service operation to return the count of records satisfying the specified query parameters. This operation is useful to determine how many records pass a particular query criteria without retrieving large amounts of data. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
+    /**
+     * Service operation to return the count of records satisfying the specified query parameters.
+     * This operation is useful to determine how many records pass a particular query criteria
+     * without retrieving large amounts of data. See the queryhelp operation
+     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
+     * information.
+     */
     fun count(params: NotificationCountParams): CompletableFuture<String> =
-        count(
-          params, RequestOptions.none()
-        )
+        count(params, RequestOptions.none())
 
     /** @see count */
-    fun count(params: NotificationCountParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<String>
+    fun count(
+        params: NotificationCountParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<String>
 
-    /** Service operation to push a Notification/Alert message into the UDL. This operation uses query parameters to pass UDL-required fields such as classificationMarking, msgType, etc and takes a raw string payload which can be XML, JSON, or plain text. The preferred mechanism for posting notifications is to use the standard POST which takes the proper UDL JSON Notification schema as this service may convert the message in an undesirable manner. The service will wrap the passed payload with the appropriate UDL JSON schema, using escape characters as necessary for the payload to produce a valid JSON document. XML payloads (not recommended) are automatically converted to JSON. Messages pushed through this service may be pulled via Secure Messaging and historical REST services. A specific role is required to perform this service operation. Please contact the UDL team for assistance. */
+    /**
+     * Service operation to push a Notification/Alert message into the UDL. This operation uses
+     * query parameters to pass UDL-required fields such as classificationMarking, msgType, etc and
+     * takes a raw string payload which can be XML, JSON, or plain text. The preferred mechanism for
+     * posting notifications is to use the standard POST which takes the proper UDL JSON
+     * Notification schema as this service may convert the message in an undesirable manner. The
+     * service will wrap the passed payload with the appropriate UDL JSON schema, using escape
+     * characters as necessary for the payload to produce a valid JSON document. XML payloads (not
+     * recommended) are automatically converted to JSON. Messages pushed through this service may be
+     * pulled via Secure Messaging and historical REST services. A specific role is required to
+     * perform this service operation. Please contact the UDL team for assistance.
+     */
     fun createRaw(params: NotificationCreateRawParams): CompletableFuture<Void?> =
-        createRaw(
-          params, RequestOptions.none()
-        )
+        createRaw(params, RequestOptions.none())
 
     /** @see createRaw */
-    fun createRaw(params: NotificationCreateRawParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<Void?>
+    fun createRaw(
+        params: NotificationCreateRawParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?>
 
-    /** Service operation to get a single notification by its unique ID passed as a path parameter. */
-    fun get(id: String): CompletableFuture<NotificationFull> =
-        get(
-          id, NotificationGetParams.none()
-        )
-
-    /** @see get */
-    fun get(id: String, params: NotificationGetParams = NotificationGetParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<NotificationFull> =
-        get(
-          params.toBuilder()
-              .id(id)
-              .build(), requestOptions
-        )
+    /**
+     * Service operation to get a single notification by its unique ID passed as a path parameter.
+     */
+    fun get(id: String): CompletableFuture<NotificationFull> = get(id, NotificationGetParams.none())
 
     /** @see get */
-    fun get(id: String, params: NotificationGetParams = NotificationGetParams.none()): CompletableFuture<NotificationFull> =
-        get(
-          id,
-          params,
-          RequestOptions.none(),
-        )
+    fun get(
+        id: String,
+        params: NotificationGetParams = NotificationGetParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<NotificationFull> = get(params.toBuilder().id(id).build(), requestOptions)
 
     /** @see get */
-    fun get(params: NotificationGetParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<NotificationFull>
+    fun get(
+        id: String,
+        params: NotificationGetParams = NotificationGetParams.none(),
+    ): CompletableFuture<NotificationFull> = get(id, params, RequestOptions.none())
+
+    /** @see get */
+    fun get(
+        params: NotificationGetParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<NotificationFull>
 
     /** @see get */
     fun get(params: NotificationGetParams): CompletableFuture<NotificationFull> =
-        get(
-          params, RequestOptions.none()
-        )
+        get(params, RequestOptions.none())
 
     /** @see get */
     fun get(id: String, requestOptions: RequestOptions): CompletableFuture<NotificationFull> =
-        get(
-          id,
-          NotificationGetParams.none(),
-          requestOptions,
-        )
+        get(id, NotificationGetParams.none(), requestOptions)
 
-    /** Service operation to provide detailed information on available dynamic query parameters for a particular data type. */
-    fun queryhelp(): CompletableFuture<NotificationQueryhelpResponse> = queryhelp(NotificationQueryhelpParams.none())
-
-    /** @see queryhelp */
-    fun queryhelp(params: NotificationQueryhelpParams = NotificationQueryhelpParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<NotificationQueryhelpResponse>
+    /**
+     * Service operation to provide detailed information on available dynamic query parameters for a
+     * particular data type.
+     */
+    fun queryhelp(): CompletableFuture<NotificationQueryhelpResponse> =
+        queryhelp(NotificationQueryhelpParams.none())
 
     /** @see queryhelp */
-    fun queryhelp(params: NotificationQueryhelpParams = NotificationQueryhelpParams.none()): CompletableFuture<NotificationQueryhelpResponse> =
-        queryhelp(
-          params, RequestOptions.none()
-        )
+    fun queryhelp(
+        params: NotificationQueryhelpParams = NotificationQueryhelpParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<NotificationQueryhelpResponse>
 
     /** @see queryhelp */
-    fun queryhelp(requestOptions: RequestOptions): CompletableFuture<NotificationQueryhelpResponse> =
-        queryhelp(
-          NotificationQueryhelpParams.none(), requestOptions
-        )
+    fun queryhelp(
+        params: NotificationQueryhelpParams = NotificationQueryhelpParams.none()
+    ): CompletableFuture<NotificationQueryhelpResponse> = queryhelp(params, RequestOptions.none())
 
-    /** Service operation to dynamically query data and only return specified columns/fields. Requested columns are specified by the 'columns' query parameter and should be a comma separated list of valid fields for the specified data type. classificationMarking is always returned. See the queryhelp operation (/udl/<datatype>/queryhelp) for more details on valid/required query parameter information. An example URI: /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours would return the satNo and period of elsets with an epoch greater than 5 hours ago. */
+    /** @see queryhelp */
+    fun queryhelp(
+        requestOptions: RequestOptions
+    ): CompletableFuture<NotificationQueryhelpResponse> =
+        queryhelp(NotificationQueryhelpParams.none(), requestOptions)
+
+    /**
+     * Service operation to dynamically query data and only return specified columns/fields.
+     * Requested columns are specified by the 'columns' query parameter and should be a comma
+     * separated list of valid fields for the specified data type. classificationMarking is always
+     * returned. See the queryhelp operation (/udl/<datatype>/queryhelp) for more details on
+     * valid/required query parameter information. An example URI:
+     * /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours would return the satNo and period of
+     * elsets with an epoch greater than 5 hours ago.
+     */
     fun tuple(params: NotificationTupleParams): CompletableFuture<List<NotificationFull>> =
-        tuple(
-          params, RequestOptions.none()
-        )
+        tuple(params, RequestOptions.none())
 
     /** @see tuple */
-    fun tuple(params: NotificationTupleParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<List<NotificationFull>>
+    fun tuple(
+        params: NotificationTupleParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<List<NotificationFull>>
 
-    /** A view of [NotificationServiceAsync] that provides access to raw HTTP responses for each method. */
+    /**
+     * A view of [NotificationServiceAsync] that provides access to raw HTTP responses for each
+     * method.
+     */
     interface WithRawResponse {
 
         /**
@@ -145,110 +189,144 @@ interface NotificationServiceAsync {
          *
          * The original service is not modified.
          */
-        fun withOptions(modifier: Consumer<ClientOptions.Builder>): NotificationServiceAsync.WithRawResponse
+        fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): NotificationServiceAsync.WithRawResponse
 
         fun history(): HistoryServiceAsync.WithRawResponse
 
-        /** Returns a raw HTTP response for `post /udl/notification`, but is otherwise the same as [NotificationServiceAsync.create]. */
+        /**
+         * Returns a raw HTTP response for `post /udl/notification`, but is otherwise the same as
+         * [NotificationServiceAsync.create].
+         */
         fun create(params: NotificationCreateParams): CompletableFuture<HttpResponse> =
-            create(
-              params, RequestOptions.none()
-            )
+            create(params, RequestOptions.none())
 
         /** @see create */
-        fun create(params: NotificationCreateParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse>
+        fun create(
+            params: NotificationCreateParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse>
 
-        /** Returns a raw HTTP response for `get /udl/notification`, but is otherwise the same as [NotificationServiceAsync.list]. */
-        fun list(params: NotificationListParams): CompletableFuture<HttpResponseFor<NotificationListPageAsync>> =
-            list(
-              params, RequestOptions.none()
-            )
+        /**
+         * Returns a raw HTTP response for `get /udl/notification`, but is otherwise the same as
+         * [NotificationServiceAsync.list].
+         */
+        fun list(
+            params: NotificationListParams
+        ): CompletableFuture<HttpResponseFor<NotificationListPageAsync>> =
+            list(params, RequestOptions.none())
 
         /** @see list */
-        fun list(params: NotificationListParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<NotificationListPageAsync>>
+        fun list(
+            params: NotificationListParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<NotificationListPageAsync>>
 
-        /** Returns a raw HTTP response for `get /udl/notification/count`, but is otherwise the same as [NotificationServiceAsync.count]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/notification/count`, but is otherwise the same
+         * as [NotificationServiceAsync.count].
+         */
         fun count(params: NotificationCountParams): CompletableFuture<HttpResponseFor<String>> =
-            count(
-              params, RequestOptions.none()
-            )
+            count(params, RequestOptions.none())
 
         /** @see count */
-        fun count(params: NotificationCountParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<String>>
+        fun count(
+            params: NotificationCountParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<String>>
 
-        /** Returns a raw HTTP response for `post /udl/notification/createRaw`, but is otherwise the same as [NotificationServiceAsync.createRaw]. */
+        /**
+         * Returns a raw HTTP response for `post /udl/notification/createRaw`, but is otherwise the
+         * same as [NotificationServiceAsync.createRaw].
+         */
         fun createRaw(params: NotificationCreateRawParams): CompletableFuture<HttpResponse> =
-            createRaw(
-              params, RequestOptions.none()
-            )
+            createRaw(params, RequestOptions.none())
 
         /** @see createRaw */
-        fun createRaw(params: NotificationCreateRawParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponse>
+        fun createRaw(
+            params: NotificationCreateRawParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse>
 
-        /** Returns a raw HTTP response for `get /udl/notification/{id}`, but is otherwise the same as [NotificationServiceAsync.get]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/notification/{id}`, but is otherwise the same
+         * as [NotificationServiceAsync.get].
+         */
         fun get(id: String): CompletableFuture<HttpResponseFor<NotificationFull>> =
-            get(
-              id, NotificationGetParams.none()
-            )
+            get(id, NotificationGetParams.none())
 
         /** @see get */
-        fun get(id: String, params: NotificationGetParams = NotificationGetParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<NotificationFull>> =
-            get(
-              params.toBuilder()
-                  .id(id)
-                  .build(), requestOptions
-            )
+        fun get(
+            id: String,
+            params: NotificationGetParams = NotificationGetParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<NotificationFull>> =
+            get(params.toBuilder().id(id).build(), requestOptions)
 
         /** @see get */
-        fun get(id: String, params: NotificationGetParams = NotificationGetParams.none()): CompletableFuture<HttpResponseFor<NotificationFull>> =
-            get(
-              id,
-              params,
-              RequestOptions.none(),
-            )
+        fun get(
+            id: String,
+            params: NotificationGetParams = NotificationGetParams.none(),
+        ): CompletableFuture<HttpResponseFor<NotificationFull>> =
+            get(id, params, RequestOptions.none())
 
         /** @see get */
-        fun get(params: NotificationGetParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<NotificationFull>>
+        fun get(
+            params: NotificationGetParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<NotificationFull>>
 
         /** @see get */
-        fun get(params: NotificationGetParams): CompletableFuture<HttpResponseFor<NotificationFull>> =
-            get(
-              params, RequestOptions.none()
-            )
+        fun get(
+            params: NotificationGetParams
+        ): CompletableFuture<HttpResponseFor<NotificationFull>> = get(params, RequestOptions.none())
 
         /** @see get */
-        fun get(id: String, requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<NotificationFull>> =
-            get(
-              id,
-              NotificationGetParams.none(),
-              requestOptions,
-            )
+        fun get(
+            id: String,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<NotificationFull>> =
+            get(id, NotificationGetParams.none(), requestOptions)
 
-        /** Returns a raw HTTP response for `get /udl/notification/queryhelp`, but is otherwise the same as [NotificationServiceAsync.queryhelp]. */
-        fun queryhelp(): CompletableFuture<HttpResponseFor<NotificationQueryhelpResponse>> = queryhelp(NotificationQueryhelpParams.none())
+        /**
+         * Returns a raw HTTP response for `get /udl/notification/queryhelp`, but is otherwise the
+         * same as [NotificationServiceAsync.queryhelp].
+         */
+        fun queryhelp(): CompletableFuture<HttpResponseFor<NotificationQueryhelpResponse>> =
+            queryhelp(NotificationQueryhelpParams.none())
 
         /** @see queryhelp */
-        fun queryhelp(params: NotificationQueryhelpParams = NotificationQueryhelpParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<NotificationQueryhelpResponse>>
+        fun queryhelp(
+            params: NotificationQueryhelpParams = NotificationQueryhelpParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<NotificationQueryhelpResponse>>
 
         /** @see queryhelp */
-        fun queryhelp(params: NotificationQueryhelpParams = NotificationQueryhelpParams.none()): CompletableFuture<HttpResponseFor<NotificationQueryhelpResponse>> =
-            queryhelp(
-              params, RequestOptions.none()
-            )
+        fun queryhelp(
+            params: NotificationQueryhelpParams = NotificationQueryhelpParams.none()
+        ): CompletableFuture<HttpResponseFor<NotificationQueryhelpResponse>> =
+            queryhelp(params, RequestOptions.none())
 
         /** @see queryhelp */
-        fun queryhelp(requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<NotificationQueryhelpResponse>> =
-            queryhelp(
-              NotificationQueryhelpParams.none(), requestOptions
-            )
+        fun queryhelp(
+            requestOptions: RequestOptions
+        ): CompletableFuture<HttpResponseFor<NotificationQueryhelpResponse>> =
+            queryhelp(NotificationQueryhelpParams.none(), requestOptions)
 
-        /** Returns a raw HTTP response for `get /udl/notification/tuple`, but is otherwise the same as [NotificationServiceAsync.tuple]. */
-        fun tuple(params: NotificationTupleParams): CompletableFuture<HttpResponseFor<List<NotificationFull>>> =
-            tuple(
-              params, RequestOptions.none()
-            )
+        /**
+         * Returns a raw HTTP response for `get /udl/notification/tuple`, but is otherwise the same
+         * as [NotificationServiceAsync.tuple].
+         */
+        fun tuple(
+            params: NotificationTupleParams
+        ): CompletableFuture<HttpResponseFor<List<NotificationFull>>> =
+            tuple(params, RequestOptions.none())
 
         /** @see tuple */
-        fun tuple(params: NotificationTupleParams, requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<List<NotificationFull>>>
+        fun tuple(
+            params: NotificationTupleParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<List<NotificationFull>>>
     }
 }

@@ -7,13 +7,14 @@ import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.supportingdata.datatypes.DataTypeListPageAsync
 import com.unifieddatalibrary.api.models.supportingdata.datatypes.DataTypeListParams
-import com.unifieddatalibrary.api.services.async.supportingdata.DataTypeServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
 interface DataTypeServiceAsync {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -27,21 +28,23 @@ interface DataTypeServiceAsync {
     fun list(): CompletableFuture<DataTypeListPageAsync> = list(DataTypeListParams.none())
 
     /** @see list */
-    fun list(params: DataTypeListParams = DataTypeListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<DataTypeListPageAsync>
+    fun list(
+        params: DataTypeListParams = DataTypeListParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<DataTypeListPageAsync>
 
     /** @see list */
-    fun list(params: DataTypeListParams = DataTypeListParams.none()): CompletableFuture<DataTypeListPageAsync> =
-        list(
-          params, RequestOptions.none()
-        )
+    fun list(
+        params: DataTypeListParams = DataTypeListParams.none()
+    ): CompletableFuture<DataTypeListPageAsync> = list(params, RequestOptions.none())
 
     /** @see list */
     fun list(requestOptions: RequestOptions): CompletableFuture<DataTypeListPageAsync> =
-        list(
-          DataTypeListParams.none(), requestOptions
-        )
+        list(DataTypeListParams.none(), requestOptions)
 
-    /** A view of [DataTypeServiceAsync] that provides access to raw HTTP responses for each method. */
+    /**
+     * A view of [DataTypeServiceAsync] that provides access to raw HTTP responses for each method.
+     */
     interface WithRawResponse {
 
         /**
@@ -49,24 +52,33 @@ interface DataTypeServiceAsync {
          *
          * The original service is not modified.
          */
-        fun withOptions(modifier: Consumer<ClientOptions.Builder>): DataTypeServiceAsync.WithRawResponse
+        fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): DataTypeServiceAsync.WithRawResponse
 
-        /** Returns a raw HTTP response for `get /udl/dataowner/getDataTypes`, but is otherwise the same as [DataTypeServiceAsync.list]. */
-        fun list(): CompletableFuture<HttpResponseFor<DataTypeListPageAsync>> = list(DataTypeListParams.none())
-
-        /** @see list */
-        fun list(params: DataTypeListParams = DataTypeListParams.none(), requestOptions: RequestOptions = RequestOptions.none()): CompletableFuture<HttpResponseFor<DataTypeListPageAsync>>
-
-        /** @see list */
-        fun list(params: DataTypeListParams = DataTypeListParams.none()): CompletableFuture<HttpResponseFor<DataTypeListPageAsync>> =
-            list(
-              params, RequestOptions.none()
-            )
+        /**
+         * Returns a raw HTTP response for `get /udl/dataowner/getDataTypes`, but is otherwise the
+         * same as [DataTypeServiceAsync.list].
+         */
+        fun list(): CompletableFuture<HttpResponseFor<DataTypeListPageAsync>> =
+            list(DataTypeListParams.none())
 
         /** @see list */
-        fun list(requestOptions: RequestOptions): CompletableFuture<HttpResponseFor<DataTypeListPageAsync>> =
-            list(
-              DataTypeListParams.none(), requestOptions
-            )
+        fun list(
+            params: DataTypeListParams = DataTypeListParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<DataTypeListPageAsync>>
+
+        /** @see list */
+        fun list(
+            params: DataTypeListParams = DataTypeListParams.none()
+        ): CompletableFuture<HttpResponseFor<DataTypeListPageAsync>> =
+            list(params, RequestOptions.none())
+
+        /** @see list */
+        fun list(
+            requestOptions: RequestOptions
+        ): CompletableFuture<HttpResponseFor<DataTypeListPageAsync>> =
+            list(DataTypeListParams.none(), requestOptions)
     }
 }

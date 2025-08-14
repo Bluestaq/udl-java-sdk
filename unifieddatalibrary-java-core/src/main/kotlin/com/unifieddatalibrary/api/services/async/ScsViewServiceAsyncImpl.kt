@@ -13,50 +13,60 @@ import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponse.Handler
 import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.scsviews.ScsViewRetrieveParams
-import com.unifieddatalibrary.api.services.async.ScsViewServiceAsync
-import com.unifieddatalibrary.api.services.async.ScsViewServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
-class ScsViewServiceAsyncImpl internal constructor(
-    private val clientOptions: ClientOptions,
+class ScsViewServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
+    ScsViewServiceAsync {
 
-) : ScsViewServiceAsync {
-
-    private val withRawResponse: ScsViewServiceAsync.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
+    private val withRawResponse: ScsViewServiceAsync.WithRawResponse by lazy {
+        WithRawResponseImpl(clientOptions)
+    }
 
     override fun withRawResponse(): ScsViewServiceAsync.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScsViewServiceAsync = ScsViewServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScsViewServiceAsync =
+        ScsViewServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-    override fun retrieve(params: ScsViewRetrieveParams, requestOptions: RequestOptions): CompletableFuture<HttpResponse> =
+    override fun retrieve(
+        params: ScsViewRetrieveParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<HttpResponse> =
         // get /scs/view/{id}
         withRawResponse().retrieve(params, requestOptions)
 
-    class WithRawResponseImpl internal constructor(
-        private val clientOptions: ClientOptions,
+    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
+        ScsViewServiceAsync.WithRawResponse {
 
-    ) : ScsViewServiceAsync.WithRawResponse {
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+        override fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): ScsViewServiceAsync.WithRawResponse =
+            ScsViewServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier::accept).build()
+            )
 
-        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScsViewServiceAsync.WithRawResponse = ScsViewServiceAsyncImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
-
-        override fun retrieve(params: ScsViewRetrieveParams, requestOptions: RequestOptions): CompletableFuture<HttpResponse> {
-          // We check here instead of in the params builder because this can be specified positionally or in the params class.
-          checkRequired("id", params.id().getOrNull())
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("scs", "view", params._pathParam(0))
-            .build()
-            .prepareAsync(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          return request.thenComposeAsync { clientOptions.httpClient.executeAsync(
-            it, requestOptions
-          ) }.thenApply { response -> errorHandler.handle(response) }
+        override fun retrieve(
+            params: ScsViewRetrieveParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("id", params.id().getOrNull())
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("scs", "view", params._pathParam(0))
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response -> errorHandler.handle(response) }
         }
     }
 }

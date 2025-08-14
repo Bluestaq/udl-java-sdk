@@ -3,13 +3,14 @@
 package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.core.ClientOptions
-import com.unifieddatalibrary.api.services.blocking.TdoaFdoaService
 import com.unifieddatalibrary.api.services.blocking.tdoafdoa.DiffofarrivalService
 import java.util.function.Consumer
 
 interface TdoaFdoaService {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**

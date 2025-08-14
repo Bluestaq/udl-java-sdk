@@ -2,13 +2,12 @@
 
 package com.unifieddatalibrary.api.models.aircraftsorties
 
-import com.unifieddatalibrary.api.models.aircraftsorties.AircraftSortyQueryhelpParams
 import org.junit.jupiter.api.Test
 
 internal class AircraftSortyQueryhelpParamsTest {
 
     @Test
     fun create() {
-      AircraftSortyQueryhelpParams.builder().build()
+        AircraftSortyQueryhelpParams.builder().build()
     }
 }

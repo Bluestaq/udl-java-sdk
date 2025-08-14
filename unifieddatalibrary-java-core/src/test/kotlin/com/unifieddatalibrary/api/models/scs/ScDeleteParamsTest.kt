@@ -3,7 +3,6 @@
 package com.unifieddatalibrary.api.models.scs
 
 import com.unifieddatalibrary.api.core.http.QueryParams
-import com.unifieddatalibrary.api.models.scs.ScDeleteParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -11,21 +10,15 @@ internal class ScDeleteParamsTest {
 
     @Test
     fun create() {
-      ScDeleteParams.builder()
-          .id("id")
-          .build()
+        ScDeleteParams.builder().id("id").build()
     }
 
     @Test
     fun queryParams() {
-      val params = ScDeleteParams.builder()
-          .id("id")
-          .build()
+        val params = ScDeleteParams.builder().id("id").build()
 
-      val queryParams = params._queryParams()
+        val queryParams = params._queryParams()
 
-      assertThat(queryParams).isEqualTo(QueryParams.builder()
-          .put("id", "id")
-          .build())
+        assertThat(queryParams).isEqualTo(QueryParams.builder().put("id", "id").build())
     }
 }

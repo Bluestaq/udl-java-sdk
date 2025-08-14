@@ -2,13 +2,12 @@
 
 package com.unifieddatalibrary.api.models.scs.groups
 
-import com.unifieddatalibrary.api.models.scs.groups.GroupListParams
 import org.junit.jupiter.api.Test
 
 internal class GroupListParamsTest {
 
     @Test
     fun create() {
-      GroupListParams.builder().build()
+        GroupListParams.builder().build()
     }
 }

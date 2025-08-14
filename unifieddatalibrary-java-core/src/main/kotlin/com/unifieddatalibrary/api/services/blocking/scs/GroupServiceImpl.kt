@@ -15,53 +15,56 @@ import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.scs.groups.GroupListParams
-import com.unifieddatalibrary.api.services.blocking.scs.GroupService
-import com.unifieddatalibrary.api.services.blocking.scs.GroupServiceImpl
 import java.util.function.Consumer
 
-class GroupServiceImpl internal constructor(
-    private val clientOptions: ClientOptions,
+class GroupServiceImpl internal constructor(private val clientOptions: ClientOptions) :
+    GroupService {
 
-) : GroupService {
-
-    private val withRawResponse: GroupService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
+    private val withRawResponse: GroupService.WithRawResponse by lazy {
+        WithRawResponseImpl(clientOptions)
+    }
 
     override fun withRawResponse(): GroupService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): GroupService = GroupServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): GroupService =
+        GroupServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun list(params: GroupListParams, requestOptions: RequestOptions): List<String> =
         // get /scs/groups
         withRawResponse().list(params, requestOptions).parse()
 
-    class WithRawResponseImpl internal constructor(
-        private val clientOptions: ClientOptions,
+    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
+        GroupService.WithRawResponse {
 
-    ) : GroupService.WithRawResponse {
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+        override fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): GroupService.WithRawResponse =
+            GroupServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier::accept).build()
+            )
 
-        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): GroupService.WithRawResponse = GroupServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+        private val listHandler: Handler<List<String>> =
+            jsonHandler<List<String>>(clientOptions.jsonMapper)
 
-        private val listHandler: Handler<List<String>> = jsonHandler<List<String>>(clientOptions.jsonMapper)
-
-        override fun list(params: GroupListParams, requestOptions: RequestOptions): HttpResponseFor<List<String>> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("scs", "groups")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  listHandler.handle(it)
-              }
-          }
+        override fun list(
+            params: GroupListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<List<String>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("scs", "groups")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { listHandler.handle(it) }
+            }
         }
     }
 }

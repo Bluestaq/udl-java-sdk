@@ -3,7 +3,6 @@
 package com.unifieddatalibrary.api.models.onorbitthrusterstatus
 
 import com.unifieddatalibrary.api.core.http.QueryParams
-import com.unifieddatalibrary.api.models.onorbitthrusterstatus.OnorbitthrusterstatusCountParams
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -12,39 +11,43 @@ internal class OnorbitthrusterstatusCountParamsTest {
 
     @Test
     fun create() {
-      OnorbitthrusterstatusCountParams.builder()
-          .firstResult(0L)
-          .idOnorbitThruster("idOnorbitThruster")
-          .maxResults(0L)
-          .statusTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-          .build()
+        OnorbitthrusterstatusCountParams.builder()
+            .firstResult(0L)
+            .idOnorbitThruster("idOnorbitThruster")
+            .maxResults(0L)
+            .statusTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+            .build()
     }
 
     @Test
     fun queryParams() {
-      val params = OnorbitthrusterstatusCountParams.builder()
-          .firstResult(0L)
-          .idOnorbitThruster("idOnorbitThruster")
-          .maxResults(0L)
-          .statusTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-          .build()
+        val params =
+            OnorbitthrusterstatusCountParams.builder()
+                .firstResult(0L)
+                .idOnorbitThruster("idOnorbitThruster")
+                .maxResults(0L)
+                .statusTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .build()
 
-      val queryParams = params._queryParams()
+        val queryParams = params._queryParams()
 
-      assertThat(queryParams).isEqualTo(QueryParams.builder()
-          .put("firstResult", "0")
-          .put("idOnorbitThruster", "idOnorbitThruster")
-          .put("maxResults", "0")
-          .put("statusTime", "2019-12-27T18:11:19.117Z")
-          .build())
+        assertThat(queryParams)
+            .isEqualTo(
+                QueryParams.builder()
+                    .put("firstResult", "0")
+                    .put("idOnorbitThruster", "idOnorbitThruster")
+                    .put("maxResults", "0")
+                    .put("statusTime", "2019-12-27T18:11:19.117Z")
+                    .build()
+            )
     }
 
     @Test
     fun queryParamsWithoutOptionalFields() {
-      val params = OnorbitthrusterstatusCountParams.builder().build()
+        val params = OnorbitthrusterstatusCountParams.builder().build()
 
-      val queryParams = params._queryParams()
+        val queryParams = params._queryParams()
 
-      assertThat(queryParams).isEqualTo(QueryParams.builder().build())
+        assertThat(queryParams).isEqualTo(QueryParams.builder().build())
     }
 }

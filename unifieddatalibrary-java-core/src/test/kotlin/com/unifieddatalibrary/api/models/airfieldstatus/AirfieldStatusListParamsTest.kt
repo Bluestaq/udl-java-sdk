@@ -3,7 +3,6 @@
 package com.unifieddatalibrary.api.models.airfieldstatus
 
 import com.unifieddatalibrary.api.core.http.QueryParams
-import com.unifieddatalibrary.api.models.airfieldstatus.AirfieldStatusListParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -11,33 +10,25 @@ internal class AirfieldStatusListParamsTest {
 
     @Test
     fun create() {
-      AirfieldStatusListParams.builder()
-          .firstResult(0L)
-          .maxResults(0L)
-          .build()
+        AirfieldStatusListParams.builder().firstResult(0L).maxResults(0L).build()
     }
 
     @Test
     fun queryParams() {
-      val params = AirfieldStatusListParams.builder()
-          .firstResult(0L)
-          .maxResults(0L)
-          .build()
+        val params = AirfieldStatusListParams.builder().firstResult(0L).maxResults(0L).build()
 
-      val queryParams = params._queryParams()
+        val queryParams = params._queryParams()
 
-      assertThat(queryParams).isEqualTo(QueryParams.builder()
-          .put("firstResult", "0")
-          .put("maxResults", "0")
-          .build())
+        assertThat(queryParams)
+            .isEqualTo(QueryParams.builder().put("firstResult", "0").put("maxResults", "0").build())
     }
 
     @Test
     fun queryParamsWithoutOptionalFields() {
-      val params = AirfieldStatusListParams.builder().build()
+        val params = AirfieldStatusListParams.builder().build()
 
-      val queryParams = params._queryParams()
+        val queryParams = params._queryParams()
 
-      assertThat(queryParams).isEqualTo(QueryParams.builder().build())
+        assertThat(queryParams).isEqualTo(QueryParams.builder().build())
     }
 }

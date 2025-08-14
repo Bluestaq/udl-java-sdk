@@ -30,31 +30,30 @@ import com.unifieddatalibrary.api.models.hazard.HazardQueryhelpParams
 import com.unifieddatalibrary.api.models.hazard.HazardQueryhelpResponse
 import com.unifieddatalibrary.api.models.hazard.HazardTupleParams
 import com.unifieddatalibrary.api.models.hazard.HazardTupleResponse
-import com.unifieddatalibrary.api.services.blocking.HazardService
-import com.unifieddatalibrary.api.services.blocking.HazardServiceImpl
 import com.unifieddatalibrary.api.services.blocking.hazard.HistoryService
 import com.unifieddatalibrary.api.services.blocking.hazard.HistoryServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
-class HazardServiceImpl internal constructor(
-    private val clientOptions: ClientOptions,
+class HazardServiceImpl internal constructor(private val clientOptions: ClientOptions) :
+    HazardService {
 
-) : HazardService {
-
-    private val withRawResponse: HazardService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
+    private val withRawResponse: HazardService.WithRawResponse by lazy {
+        WithRawResponseImpl(clientOptions)
+    }
 
     private val history: HistoryService by lazy { HistoryServiceImpl(clientOptions) }
 
     override fun withRawResponse(): HazardService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HazardService = HazardServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HazardService =
+        HazardServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun history(): HistoryService = history
 
     override fun create(params: HazardCreateParams, requestOptions: RequestOptions) {
-      // post /udl/hazard
-      withRawResponse().create(params, requestOptions)
+        // post /udl/hazard
+        withRawResponse().create(params, requestOptions)
     }
 
     override fun list(params: HazardListParams, requestOptions: RequestOptions): HazardListPage =
@@ -66,211 +65,225 @@ class HazardServiceImpl internal constructor(
         withRawResponse().count(params, requestOptions).parse()
 
     override fun createBulk(params: HazardCreateBulkParams, requestOptions: RequestOptions) {
-      // post /udl/hazard/createBulk
-      withRawResponse().createBulk(params, requestOptions)
+        // post /udl/hazard/createBulk
+        withRawResponse().createBulk(params, requestOptions)
     }
 
     override fun get(params: HazardGetParams, requestOptions: RequestOptions): HazardGetResponse =
         // get /udl/hazard/{id}
         withRawResponse().get(params, requestOptions).parse()
 
-    override fun queryhelp(params: HazardQueryhelpParams, requestOptions: RequestOptions): HazardQueryhelpResponse =
+    override fun queryhelp(
+        params: HazardQueryhelpParams,
+        requestOptions: RequestOptions,
+    ): HazardQueryhelpResponse =
         // get /udl/hazard/queryhelp
         withRawResponse().queryhelp(params, requestOptions).parse()
 
-    override fun tuple(params: HazardTupleParams, requestOptions: RequestOptions): List<HazardTupleResponse> =
+    override fun tuple(
+        params: HazardTupleParams,
+        requestOptions: RequestOptions,
+    ): List<HazardTupleResponse> =
         // get /udl/hazard/tuple
         withRawResponse().tuple(params, requestOptions).parse()
 
-    class WithRawResponseImpl internal constructor(
-        private val clientOptions: ClientOptions,
+    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
+        HazardService.WithRawResponse {
 
-    ) : HazardService.WithRawResponse {
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+        private val history: HistoryService.WithRawResponse by lazy {
+            HistoryServiceImpl.WithRawResponseImpl(clientOptions)
+        }
 
-        private val history: HistoryService.WithRawResponse by lazy { HistoryServiceImpl.WithRawResponseImpl(clientOptions) }
-
-        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HazardService.WithRawResponse = HazardServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+        override fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): HazardService.WithRawResponse =
+            HazardServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier::accept).build()
+            )
 
         override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
 
-        override fun create(params: HazardCreateParams, requestOptions: RequestOptions): HttpResponse {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.POST)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "hazard")
-            .body(json(clientOptions.jsonMapper, params._body()))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  createHandler.handle(it)
-              }
-          }
+        override fun create(
+            params: HazardCreateParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "hazard")
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { createHandler.handle(it) }
+            }
         }
 
-        private val listHandler: Handler<List<HazardListResponse>> = jsonHandler<List<HazardListResponse>>(clientOptions.jsonMapper)
+        private val listHandler: Handler<List<HazardListResponse>> =
+            jsonHandler<List<HazardListResponse>>(clientOptions.jsonMapper)
 
-        override fun list(params: HazardListParams, requestOptions: RequestOptions): HttpResponseFor<HazardListPage> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "hazard")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  listHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.forEach { it.validate() }
-                  }
-              }
-              .let {
-                  HazardListPage.builder()
-                      .service(HazardServiceImpl(clientOptions))
-                      .params(params)
-                      .items(it)
-                      .build()
-              }
-          }
+        override fun list(
+            params: HazardListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<HazardListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "hazard")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        HazardListPage.builder()
+                            .service(HazardServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
         }
 
         private val countHandler: Handler<String> = stringHandler()
 
-        override fun count(params: HazardCountParams, requestOptions: RequestOptions): HttpResponseFor<String> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "hazard", "count")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  countHandler.handle(it)
-              }
-          }
+        override fun count(
+            params: HazardCountParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<String> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "hazard", "count")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { countHandler.handle(it) }
+            }
         }
 
         private val createBulkHandler: Handler<Void?> = emptyHandler()
 
-        override fun createBulk(params: HazardCreateBulkParams, requestOptions: RequestOptions): HttpResponse {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.POST)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "hazard", "createBulk")
-            .body(json(clientOptions.jsonMapper, params._body()))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  createBulkHandler.handle(it)
-              }
-          }
+        override fun createBulk(
+            params: HazardCreateBulkParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "hazard", "createBulk")
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { createBulkHandler.handle(it) }
+            }
         }
 
-        private val getHandler: Handler<HazardGetResponse> = jsonHandler<HazardGetResponse>(clientOptions.jsonMapper)
+        private val getHandler: Handler<HazardGetResponse> =
+            jsonHandler<HazardGetResponse>(clientOptions.jsonMapper)
 
-        override fun get(params: HazardGetParams, requestOptions: RequestOptions): HttpResponseFor<HazardGetResponse> {
-          // We check here instead of in the params builder because this can be specified positionally or in the params class.
-          checkRequired("id", params.id().getOrNull())
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "hazard", params._pathParam(0))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  getHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.validate()
-                  }
-              }
-          }
+        override fun get(
+            params: HazardGetParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<HazardGetResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("id", params.id().getOrNull())
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "hazard", params._pathParam(0))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { getHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.validate()
+                        }
+                    }
+            }
         }
 
-        private val queryhelpHandler: Handler<HazardQueryhelpResponse> = jsonHandler<HazardQueryhelpResponse>(clientOptions.jsonMapper)
+        private val queryhelpHandler: Handler<HazardQueryhelpResponse> =
+            jsonHandler<HazardQueryhelpResponse>(clientOptions.jsonMapper)
 
-        override fun queryhelp(params: HazardQueryhelpParams, requestOptions: RequestOptions): HttpResponseFor<HazardQueryhelpResponse> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "hazard", "queryhelp")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  queryhelpHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.validate()
-                  }
-              }
-          }
+        override fun queryhelp(
+            params: HazardQueryhelpParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<HazardQueryhelpResponse> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "hazard", "queryhelp")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { queryhelpHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.validate()
+                        }
+                    }
+            }
         }
 
-        private val tupleHandler: Handler<List<HazardTupleResponse>> = jsonHandler<List<HazardTupleResponse>>(clientOptions.jsonMapper)
+        private val tupleHandler: Handler<List<HazardTupleResponse>> =
+            jsonHandler<List<HazardTupleResponse>>(clientOptions.jsonMapper)
 
-        override fun tuple(params: HazardTupleParams, requestOptions: RequestOptions): HttpResponseFor<List<HazardTupleResponse>> {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.GET)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("udl", "hazard", "tuple")
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  tupleHandler.handle(it)
-              }
-              .also {
-                  if (requestOptions.responseValidation!!) {
-                    it.forEach { it.validate() }
-                  }
-              }
-          }
+        override fun tuple(
+            params: HazardTupleParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<List<HazardTupleResponse>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "hazard", "tuple")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { tupleHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+            }
         }
     }
 }

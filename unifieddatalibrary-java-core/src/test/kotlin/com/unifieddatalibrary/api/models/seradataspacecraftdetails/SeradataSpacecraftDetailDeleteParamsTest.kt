@@ -2,7 +2,6 @@
 
 package com.unifieddatalibrary.api.models.seradataspacecraftdetails
 
-import com.unifieddatalibrary.api.models.seradataspacecraftdetails.SeradataSpacecraftDetailDeleteParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -10,19 +9,15 @@ internal class SeradataSpacecraftDetailDeleteParamsTest {
 
     @Test
     fun create() {
-      SeradataSpacecraftDetailDeleteParams.builder()
-          .id("id")
-          .build()
+        SeradataSpacecraftDetailDeleteParams.builder().id("id").build()
     }
 
     @Test
     fun pathParams() {
-      val params = SeradataSpacecraftDetailDeleteParams.builder()
-          .id("id")
-          .build()
+        val params = SeradataSpacecraftDetailDeleteParams.builder().id("id").build()
 
-      assertThat(params._pathParam(0)).isEqualTo("id")
-      // out-of-bound path param
-      assertThat(params._pathParam(1)).isEqualTo("")
+        assertThat(params._pathParam(0)).isEqualTo("id")
+        // out-of-bound path param
+        assertThat(params._pathParam(1)).isEqualTo("")
     }
 }

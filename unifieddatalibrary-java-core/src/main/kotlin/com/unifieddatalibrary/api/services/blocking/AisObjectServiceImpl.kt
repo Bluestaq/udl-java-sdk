@@ -15,55 +15,60 @@ import com.unifieddatalibrary.api.core.http.json
 import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.aisobjects.AisObjectUnvalidatedPublishParams
-import com.unifieddatalibrary.api.services.blocking.AisObjectService
-import com.unifieddatalibrary.api.services.blocking.AisObjectServiceImpl
 import java.util.function.Consumer
 
-class AisObjectServiceImpl internal constructor(
-    private val clientOptions: ClientOptions,
+class AisObjectServiceImpl internal constructor(private val clientOptions: ClientOptions) :
+    AisObjectService {
 
-) : AisObjectService {
-
-    private val withRawResponse: AisObjectService.WithRawResponse by lazy { WithRawResponseImpl(clientOptions) }
+    private val withRawResponse: AisObjectService.WithRawResponse by lazy {
+        WithRawResponseImpl(clientOptions)
+    }
 
     override fun withRawResponse(): AisObjectService.WithRawResponse = withRawResponse
 
-    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): AisObjectService = AisObjectServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+    override fun withOptions(modifier: Consumer<ClientOptions.Builder>): AisObjectService =
+        AisObjectServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-    override fun unvalidatedPublish(params: AisObjectUnvalidatedPublishParams, requestOptions: RequestOptions) {
-      // post /filedrop/udl-ais
-      withRawResponse().unvalidatedPublish(params, requestOptions)
+    override fun unvalidatedPublish(
+        params: AisObjectUnvalidatedPublishParams,
+        requestOptions: RequestOptions,
+    ) {
+        // post /filedrop/udl-ais
+        withRawResponse().unvalidatedPublish(params, requestOptions)
     }
 
-    class WithRawResponseImpl internal constructor(
-        private val clientOptions: ClientOptions,
+    class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
+        AisObjectService.WithRawResponse {
 
-    ) : AisObjectService.WithRawResponse {
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val errorHandler: Handler<HttpResponse> = errorHandler(errorBodyHandler(clientOptions.jsonMapper))
-
-        override fun withOptions(modifier: Consumer<ClientOptions.Builder>): AisObjectService.WithRawResponse = AisObjectServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+        override fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): AisObjectService.WithRawResponse =
+            AisObjectServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier::accept).build()
+            )
 
         private val unvalidatedPublishHandler: Handler<Void?> = emptyHandler()
 
-        override fun unvalidatedPublish(params: AisObjectUnvalidatedPublishParams, requestOptions: RequestOptions): HttpResponse {
-          val request = HttpRequest.builder()
-            .method(HttpMethod.POST)
-            .baseUrl(clientOptions.baseUrl())
-            .addPathSegments("filedrop", "udl-ais")
-            .body(json(clientOptions.jsonMapper, params._body()))
-            .build()
-            .prepare(clientOptions, params)
-          val requestOptions = requestOptions
-              .applyDefaults(RequestOptions.from(clientOptions))
-          val response = clientOptions.httpClient.execute(
-            request, requestOptions
-          )
-          return errorHandler.handle(response).parseable {
-              response.use {
-                  unvalidatedPublishHandler.handle(it)
-              }
-          }
+        override fun unvalidatedPublish(
+            params: AisObjectUnvalidatedPublishParams,
+            requestOptions: RequestOptions,
+        ): HttpResponse {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("filedrop", "udl-ais")
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { unvalidatedPublishHandler.handle(it) }
+            }
         }
     }
 }

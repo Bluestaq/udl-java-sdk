@@ -3,7 +3,6 @@
 package com.unifieddatalibrary.api.services.blocking
 
 import com.unifieddatalibrary.api.core.ClientOptions
-import com.unifieddatalibrary.api.services.blocking.ObservationService
 import com.unifieddatalibrary.api.services.blocking.observations.EcpsdrService
 import com.unifieddatalibrary.api.services.blocking.observations.EoObservationService
 import com.unifieddatalibrary.api.services.blocking.observations.MonoradarService
@@ -15,7 +14,9 @@ import java.util.function.Consumer
 
 interface ObservationService {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -39,7 +40,9 @@ interface ObservationService {
 
     fun eoObservations(): EoObservationService
 
-    /** A view of [ObservationService] that provides access to raw HTTP responses for each method. */
+    /**
+     * A view of [ObservationService] that provides access to raw HTTP responses for each method.
+     */
     interface WithRawResponse {
 
         /**
@@ -47,7 +50,9 @@ interface ObservationService {
          *
          * The original service is not modified.
          */
-        fun withOptions(modifier: Consumer<ClientOptions.Builder>): ObservationService.WithRawResponse
+        fun withOptions(
+            modifier: Consumer<ClientOptions.Builder>
+        ): ObservationService.WithRawResponse
 
         fun ecpsdr(): EcpsdrService.WithRawResponse
 

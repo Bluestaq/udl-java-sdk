@@ -2,13 +2,12 @@
 
 package com.unifieddatalibrary.api.models.surface
 
-import com.unifieddatalibrary.api.models.surface.SurfaceQueryhelpParams
 import org.junit.jupiter.api.Test
 
 internal class SurfaceQueryhelpParamsTest {
 
     @Test
     fun create() {
-      SurfaceQueryhelpParams.builder().build()
+        SurfaceQueryhelpParams.builder().build()
     }
 }

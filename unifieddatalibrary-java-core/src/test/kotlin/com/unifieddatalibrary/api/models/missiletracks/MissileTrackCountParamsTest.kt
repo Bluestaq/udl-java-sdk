@@ -3,7 +3,6 @@
 package com.unifieddatalibrary.api.models.missiletracks
 
 import com.unifieddatalibrary.api.core.http.QueryParams
-import com.unifieddatalibrary.api.models.missiletracks.MissileTrackCountParams
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -12,40 +11,44 @@ internal class MissileTrackCountParamsTest {
 
     @Test
     fun create() {
-      MissileTrackCountParams.builder()
-          .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-          .firstResult(0L)
-          .maxResults(0L)
-          .build()
+        MissileTrackCountParams.builder()
+            .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+            .firstResult(0L)
+            .maxResults(0L)
+            .build()
     }
 
     @Test
     fun queryParams() {
-      val params = MissileTrackCountParams.builder()
-          .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-          .firstResult(0L)
-          .maxResults(0L)
-          .build()
+        val params =
+            MissileTrackCountParams.builder()
+                .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .firstResult(0L)
+                .maxResults(0L)
+                .build()
 
-      val queryParams = params._queryParams()
+        val queryParams = params._queryParams()
 
-      assertThat(queryParams).isEqualTo(QueryParams.builder()
-          .put("ts", "2019-12-27T18:11:19.117Z")
-          .put("firstResult", "0")
-          .put("maxResults", "0")
-          .build())
+        assertThat(queryParams)
+            .isEqualTo(
+                QueryParams.builder()
+                    .put("ts", "2019-12-27T18:11:19.117Z")
+                    .put("firstResult", "0")
+                    .put("maxResults", "0")
+                    .build()
+            )
     }
 
     @Test
     fun queryParamsWithoutOptionalFields() {
-      val params = MissileTrackCountParams.builder()
-          .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-          .build()
+        val params =
+            MissileTrackCountParams.builder()
+                .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .build()
 
-      val queryParams = params._queryParams()
+        val queryParams = params._queryParams()
 
-      assertThat(queryParams).isEqualTo(QueryParams.builder()
-          .put("ts", "2019-12-27T18:11:19.117Z")
-          .build())
+        assertThat(queryParams)
+            .isEqualTo(QueryParams.builder().put("ts", "2019-12-27T18:11:19.117Z").build())
     }
 }

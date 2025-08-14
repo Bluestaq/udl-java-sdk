@@ -11,12 +11,13 @@ import com.unifieddatalibrary.api.models.sensorplan.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.sensorplan.history.HistoryCountParams
 import com.unifieddatalibrary.api.models.sensorplan.history.HistoryRetrieveParams
 import com.unifieddatalibrary.api.models.sensorplan.history.HistoryRetrieveResponse
-import com.unifieddatalibrary.api.services.blocking.sensorplan.HistoryService
 import java.util.function.Consumer
 
 interface HistoryService {
 
-    /** Returns a view of this service that provides access to raw HTTP responses for each method. */
+    /**
+     * Returns a view of this service that provides access to raw HTTP responses for each method.
+     */
     fun withRawResponse(): WithRawResponse
 
     /**
@@ -26,32 +27,46 @@ interface HistoryService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService
 
-    /** Service operation to dynamically query historical data by a variety of query parameters not specified in this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
+    /**
+     * Service operation to dynamically query historical data by a variety of query parameters not
+     * specified in this API documentation. See the queryhelp operation
+     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
+     * information.
+     */
     fun retrieve(params: HistoryRetrieveParams): List<HistoryRetrieveResponse> =
-        retrieve(
-          params, RequestOptions.none()
-        )
+        retrieve(params, RequestOptions.none())
 
     /** @see retrieve */
-    fun retrieve(params: HistoryRetrieveParams, requestOptions: RequestOptions = RequestOptions.none()): List<HistoryRetrieveResponse>
+    fun retrieve(
+        params: HistoryRetrieveParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): List<HistoryRetrieveResponse>
 
-    /** Service operation to dynamically query historical data by a variety of query parameters not specified in this API documentation, then write that data to the Secure Content Store. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
-    fun aodr(params: HistoryAodrParams) =
-        aodr(
-          params, RequestOptions.none()
-        )
+    /**
+     * Service operation to dynamically query historical data by a variety of query parameters not
+     * specified in this API documentation, then write that data to the Secure Content Store. See
+     * the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required
+     * query parameter information.
+     */
+    fun aodr(params: HistoryAodrParams) = aodr(params, RequestOptions.none())
 
     /** @see aodr */
     fun aodr(params: HistoryAodrParams, requestOptions: RequestOptions = RequestOptions.none())
 
-    /** Service operation to return the count of records satisfying the specified query parameters. This operation is useful to determine how many records pass a particular query criteria without retrieving large amounts of data. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information. */
-    fun count(params: HistoryCountParams): String =
-        count(
-          params, RequestOptions.none()
-        )
+    /**
+     * Service operation to return the count of records satisfying the specified query parameters.
+     * This operation is useful to determine how many records pass a particular query criteria
+     * without retrieving large amounts of data. See the queryhelp operation
+     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
+     * information.
+     */
+    fun count(params: HistoryCountParams): String = count(params, RequestOptions.none())
 
     /** @see count */
-    fun count(params: HistoryCountParams, requestOptions: RequestOptions = RequestOptions.none()): String
+    fun count(
+        params: HistoryCountParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): String
 
     /** A view of [HistoryService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -63,37 +78,49 @@ interface HistoryService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService.WithRawResponse
 
-        /** Returns a raw HTTP response for `get /udl/sensorplan/history`, but is otherwise the same as [HistoryService.retrieve]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/sensorplan/history`, but is otherwise the same
+         * as [HistoryService.retrieve].
+         */
         @MustBeClosed
-        fun retrieve(params: HistoryRetrieveParams): HttpResponseFor<List<HistoryRetrieveResponse>> =
-            retrieve(
-              params, RequestOptions.none()
-            )
+        fun retrieve(
+            params: HistoryRetrieveParams
+        ): HttpResponseFor<List<HistoryRetrieveResponse>> = retrieve(params, RequestOptions.none())
 
         /** @see retrieve */
         @MustBeClosed
-        fun retrieve(params: HistoryRetrieveParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<List<HistoryRetrieveResponse>>
+        fun retrieve(
+            params: HistoryRetrieveParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<List<HistoryRetrieveResponse>>
 
-        /** Returns a raw HTTP response for `get /udl/sensorplan/history/aodr`, but is otherwise the same as [HistoryService.aodr]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/sensorplan/history/aodr`, but is otherwise the
+         * same as [HistoryService.aodr].
+         */
         @MustBeClosed
-        fun aodr(params: HistoryAodrParams): HttpResponse =
-            aodr(
-              params, RequestOptions.none()
-            )
+        fun aodr(params: HistoryAodrParams): HttpResponse = aodr(params, RequestOptions.none())
 
         /** @see aodr */
         @MustBeClosed
-        fun aodr(params: HistoryAodrParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponse
+        fun aodr(
+            params: HistoryAodrParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse
 
-        /** Returns a raw HTTP response for `get /udl/sensorplan/history/count`, but is otherwise the same as [HistoryService.count]. */
+        /**
+         * Returns a raw HTTP response for `get /udl/sensorplan/history/count`, but is otherwise the
+         * same as [HistoryService.count].
+         */
         @MustBeClosed
         fun count(params: HistoryCountParams): HttpResponseFor<String> =
-            count(
-              params, RequestOptions.none()
-            )
+            count(params, RequestOptions.none())
 
         /** @see count */
         @MustBeClosed
-        fun count(params: HistoryCountParams, requestOptions: RequestOptions = RequestOptions.none()): HttpResponseFor<String>
+        fun count(
+            params: HistoryCountParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<String>
     }
 }

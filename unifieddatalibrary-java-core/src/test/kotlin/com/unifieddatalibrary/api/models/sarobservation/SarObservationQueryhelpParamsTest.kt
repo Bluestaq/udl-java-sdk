@@ -2,13 +2,12 @@
 
 package com.unifieddatalibrary.api.models.sarobservation
 
-import com.unifieddatalibrary.api.models.sarobservation.SarObservationQueryhelpParams
 import org.junit.jupiter.api.Test
 
 internal class SarObservationQueryhelpParamsTest {
 
     @Test
     fun create() {
-      SarObservationQueryhelpParams.builder().build()
+        SarObservationQueryhelpParams.builder().build()
     }
 }
