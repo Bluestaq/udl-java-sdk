@@ -38,9 +38,9 @@ jobs:
         run: ./scripts/lint
 
   build:
-    timeout-minutes: 15
+    timeout-minutes: 30
     name: build
-    runs-on: ${{ github.repository == 'stainless-sdks/unifieddatalibrary-java' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    runs-on: ${{ github.repository == 'stainless-sdks/unifieddatalibrary-java' && 'depot-ubuntu-24.04-16' || 'ubuntu-latest' }}
     if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
 
     steps:
