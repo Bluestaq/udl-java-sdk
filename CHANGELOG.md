@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.1 (2025-08-19)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.0...v0.1.1)
+
+### Bug Fixes
+
+* use '2006-01-02T15:04:05.000000Z' format for date-time ([eb7bb98](https://github.com/Bluestaq/udl-java-sdk/commit/eb7bb983e2a00564121024ac184c7867886831fb))
+
+
+### Chores
+
+* **ci:** add build job ([1341a5a](https://github.com/Bluestaq/udl-java-sdk/commit/1341a5a2b845739121ef0437f6cf8dc0bf8941e0))
+* **ci:** increase build timeout ([ddd23cf](https://github.com/Bluestaq/udl-java-sdk/commit/ddd23cfe245bdfe754650c1da1e402f0feddafe0))
+* **ci:** increase timeout ([8e50e36](https://github.com/Bluestaq/udl-java-sdk/commit/8e50e36be62137291900f3277c7f0922e39bd064))
+
 ## 0.1.0 (2025-08-14)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.0.1...v0.1.0)
