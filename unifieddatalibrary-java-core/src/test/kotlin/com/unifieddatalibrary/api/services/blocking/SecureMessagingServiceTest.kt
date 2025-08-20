@@ -64,14 +64,15 @@ internal class SecureMessagingServiceTest {
                 .build()
         val secureMessagingService = client.secureMessaging()
 
-        secureMessagingService.getMessages(
-            SecureMessagingGetMessagesParams.builder()
-                .topic("topic")
-                .offset(0L)
-                .firstResult(0L)
-                .maxResults(0L)
-                .build()
-        )
+        val page =
+            secureMessagingService.getMessages(
+                SecureMessagingGetMessagesParams.builder()
+                    .topic("topic")
+                    .offset(0L)
+                    .firstResult(0L)
+                    .maxResults(0L)
+                    .build()
+            )
     }
 
     @Test

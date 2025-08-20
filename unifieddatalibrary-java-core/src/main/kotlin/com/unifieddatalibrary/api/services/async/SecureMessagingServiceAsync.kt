@@ -8,6 +8,7 @@ import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingDescribeTopicParams
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingGetLatestOffsetParams
+import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingGetMessagesPageAsync
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingGetMessagesParams
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingListTopicsParams
 import com.unifieddatalibrary.api.models.securemessaging.TopicDetails
@@ -102,25 +103,28 @@ interface SecureMessagingServiceAsync {
     fun getMessages(
         offset: Long,
         params: SecureMessagingGetMessagesParams,
-    ): CompletableFuture<Void?> = getMessages(offset, params, RequestOptions.none())
+    ): CompletableFuture<SecureMessagingGetMessagesPageAsync> =
+        getMessages(offset, params, RequestOptions.none())
 
     /** @see getMessages */
     fun getMessages(
         offset: Long,
         params: SecureMessagingGetMessagesParams,
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<Void?> =
+    ): CompletableFuture<SecureMessagingGetMessagesPageAsync> =
         getMessages(params.toBuilder().offset(offset).build(), requestOptions)
 
     /** @see getMessages */
-    fun getMessages(params: SecureMessagingGetMessagesParams): CompletableFuture<Void?> =
+    fun getMessages(
+        params: SecureMessagingGetMessagesParams
+    ): CompletableFuture<SecureMessagingGetMessagesPageAsync> =
         getMessages(params, RequestOptions.none())
 
     /** @see getMessages */
     fun getMessages(
         params: SecureMessagingGetMessagesParams,
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<Void?>
+    ): CompletableFuture<SecureMessagingGetMessagesPageAsync>
 
     /** Retrieve the list of available secure messaging topics or data types available. */
     fun listTopics(): CompletableFuture<List<TopicDetails>> =
@@ -245,25 +249,28 @@ interface SecureMessagingServiceAsync {
         fun getMessages(
             offset: Long,
             params: SecureMessagingGetMessagesParams,
-        ): CompletableFuture<HttpResponse> = getMessages(offset, params, RequestOptions.none())
+        ): CompletableFuture<HttpResponseFor<SecureMessagingGetMessagesPageAsync>> =
+            getMessages(offset, params, RequestOptions.none())
 
         /** @see getMessages */
         fun getMessages(
             offset: Long,
             params: SecureMessagingGetMessagesParams,
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponse> =
+        ): CompletableFuture<HttpResponseFor<SecureMessagingGetMessagesPageAsync>> =
             getMessages(params.toBuilder().offset(offset).build(), requestOptions)
 
         /** @see getMessages */
-        fun getMessages(params: SecureMessagingGetMessagesParams): CompletableFuture<HttpResponse> =
+        fun getMessages(
+            params: SecureMessagingGetMessagesParams
+        ): CompletableFuture<HttpResponseFor<SecureMessagingGetMessagesPageAsync>> =
             getMessages(params, RequestOptions.none())
 
         /** @see getMessages */
         fun getMessages(
             params: SecureMessagingGetMessagesParams,
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponse>
+        ): CompletableFuture<HttpResponseFor<SecureMessagingGetMessagesPageAsync>>
 
         /**
          * Returns a raw HTTP response for `get /sm/listTopics`, but is otherwise the same as

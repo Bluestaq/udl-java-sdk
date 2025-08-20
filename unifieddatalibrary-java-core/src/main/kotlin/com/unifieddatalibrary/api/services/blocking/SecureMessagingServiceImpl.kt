@@ -18,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingDescribeTopicParams
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingGetLatestOffsetParams
+import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingGetMessagesPage
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingGetMessagesParams
 import com.unifieddatalibrary.api.models.securemessaging.SecureMessagingListTopicsParams
 import com.unifieddatalibrary.api.models.securemessaging.TopicDetails
@@ -54,10 +55,9 @@ class SecureMessagingServiceImpl internal constructor(private val clientOptions:
     override fun getMessages(
         params: SecureMessagingGetMessagesParams,
         requestOptions: RequestOptions,
-    ) {
+    ): SecureMessagingGetMessagesPage =
         // get /sm/getMessages/{topic}/{offset}
-        withRawResponse().getMessages(params, requestOptions)
-    }
+        withRawResponse().getMessages(params, requestOptions).parse()
 
     override fun listTopics(
         params: SecureMessagingListTopicsParams,
@@ -132,12 +132,13 @@ class SecureMessagingServiceImpl internal constructor(private val clientOptions:
             }
         }
 
-        private val getMessagesHandler: Handler<Void?> = emptyHandler()
+        private val getMessagesHandler: Handler<List<Any>> =
+            jsonHandler<List<Any>>(clientOptions.jsonMapper)
 
         override fun getMessages(
             params: SecureMessagingGetMessagesParams,
             requestOptions: RequestOptions,
-        ): HttpResponse {
+        ): HttpResponseFor<SecureMessagingGetMessagesPage> {
             // We check here instead of in the params builder because this can be specified
             // positionally or in the params class.
             checkRequired("offset", params.offset().getOrNull())
@@ -156,7 +157,14 @@ class SecureMessagingServiceImpl internal constructor(private val clientOptions:
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
-                response.use { getMessagesHandler.handle(it) }
+                val items = response.use { getMessagesHandler.handle(it) }
+
+                SecureMessagingGetMessagesPage.builder()
+                    .service(SecureMessagingServiceImpl(clientOptions))
+                    .params(params)
+                    .headers(response.headers())
+                    .items(items)
+                    .build()
             }
         }
 

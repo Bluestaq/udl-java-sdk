@@ -78,7 +78,7 @@ internal class SecureMessagingServiceAsyncTest {
                     .build()
             )
 
-        val response = future.get()
+        val page = future.get()
     }
 
     @Test
