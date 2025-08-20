@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.2 (2025-08-20)
+
+Full Changelog: [v0.1.1...v0.1.2](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.1...v0.1.2)
+
+### Bug Fixes
+
+* **client:** ensure correct binary content type ([383b125](https://github.com/Bluestaq/udl-java-sdk/commit/383b1252ccfb610eb806e5d80e7b995083a79915))
+
+
+### Chores
+
+* **client:** refactor closing / shutdown ([8ca0e64](https://github.com/Bluestaq/udl-java-sdk/commit/8ca0e644e090937165a983ddb13fd13269152f15))
+* **client:** rename parameter ([383b125](https://github.com/Bluestaq/udl-java-sdk/commit/383b1252ccfb610eb806e5d80e7b995083a79915))
+* enable publishing to maven ([e19d591](https://github.com/Bluestaq/udl-java-sdk/commit/e19d5913ee67970de433088b54564b94fd4e54da))
+* **internal:** support running formatters directly ([d6bf236](https://github.com/Bluestaq/udl-java-sdk/commit/d6bf23608fb3d645e2bb71e5c4c49bf2fd66bba1))
+
 ## 0.1.1 (2025-08-19)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.0...v0.1.1)
