@@ -1287,7 +1287,7 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     override fun scsViews(): ScsViewServiceAsync = scsViews
 
-    override fun close() = clientOptions.httpClient.close()
+    override fun close() = clientOptions.close()
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         UnifieddatalibraryClientAsync.WithRawResponse {
