@@ -121,7 +121,7 @@ private constructor(
         fun file(file: ByteArray) = apply { body.file(file) }
 
         /** Zip file containing files described in the specification */
-        fun file(file: Path) = apply { body.file(file) }
+        fun file(path: Path) = apply { body.file(path) }
 
         fun additionalBodyProperties(additionalBodyProperties: Map<String, JsonValue>) = apply {
             body.additionalProperties(additionalBodyProperties)
@@ -344,11 +344,11 @@ private constructor(
             fun file(file: ByteArray) = file(file.inputStream())
 
             /** Zip file containing files described in the specification */
-            fun file(file: Path) =
+            fun file(path: Path) =
                 file(
                     MultipartField.builder<InputStream>()
-                        .value(file.inputStream())
-                        .filename(file.name)
+                        .value(path.inputStream())
+                        .filename(path.name)
                         .build()
                 )
 
