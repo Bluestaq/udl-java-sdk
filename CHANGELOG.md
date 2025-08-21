@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.3 (2025-08-21)
+
+Full Changelog: [v0.1.2...v0.1.3](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.2...v0.1.3)
+
+### Chores
+
+* remove memory upper bound from publishing step ([0032115](https://github.com/Bluestaq/udl-java-sdk/commit/00321158671e75fc35827c8d2019762d378c8809))
+
 ## 0.1.2 (2025-08-20)
 
 Full Changelog: [v0.1.1...v0.1.2](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.1...v0.1.2)
