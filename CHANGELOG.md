@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.4 (2025-08-22)
+
+Full Changelog: [v0.1.3...v0.1.4](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.3...v0.1.4)
+
+### Chores
+
+* **ci:** reduce log noise ([2afa961](https://github.com/Bluestaq/udl-java-sdk/commit/2afa9614bd064258f0dc51d0b58769c1f8eb55a8))
+
 ## 0.1.3 (2025-08-21)
 
 Full Changelog: [v0.1.2...v0.1.3](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.2...v0.1.3)
