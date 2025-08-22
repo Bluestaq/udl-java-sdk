@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.5 (2025-08-22)
+
+Full Changelog: [v0.1.4...v0.1.5](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.4...v0.1.5)
+
+### Chores
+
+* set gradle max memory to 14G ([6c98ebe](https://github.com/Bluestaq/udl-java-sdk/commit/6c98ebeb9af33f39ef7c0b156ab342471e24979a))
+
 ## 0.1.4 (2025-08-22)
 
 Full Changelog: [v0.1.3...v0.1.4](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.3...v0.1.4)
