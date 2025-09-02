@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.7 (2025-09-02)
+
+Full Changelog: [v0.1.6...v0.1.7](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.6...v0.1.7)
+
 ## 0.1.6 (2025-09-02)
 
 Full Changelog: [v0.1.5...v0.1.6](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.5...v0.1.6)
