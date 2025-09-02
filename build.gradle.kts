@@ -8,7 +8,7 @@ repositories {
 
 allprojects {
     group = "com.unifieddatalibrary.api"
-    version = "0.1.5" // x-release-please-version
+    version = "0.1.6" // x-release-please-version
 }
 
 subprojects {
