@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.8 (2025-09-03)
+
+Full Changelog: [v0.1.7...v0.1.8](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.7...v0.1.8)
+
+### Bug Fixes
+
+* **ci:** use java-version 21 for publish step ([5e80451](https://github.com/Bluestaq/udl-java-sdk/commit/5e804512c7d363a940d0e05b616ba79e09a17fff))
+
+
+### Chores
+
+* disable java docs ([188f0a9](https://github.com/Bluestaq/udl-java-sdk/commit/188f0a9a5b1491bd2ccc94d54fea1fb5de4fc7a7))
+
 ## 0.1.7 (2025-09-02)
 
 Full Changelog: [v0.1.6...v0.1.7](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.6...v0.1.7)
