@@ -362,7 +362,7 @@ internal class SensorPlanServiceAsyncTest {
                             .source("Bluestaq")
                             .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                             .type("DWELL")
-                            .id("COLLECTREQUEST-ID")
+                            .bodyId("COLLECTREQUEST-ID")
                             .alt(1.1)
                             .argOfPerigee(1.1)
                             .az(1.1)
