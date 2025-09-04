@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.9 (2025-09-03)
+
+Full Changelog: [v0.1.8...v0.1.9](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.8...v0.1.9)
+
+### Bug Fixes
+
+* **client:** name conflict ([d129f24](https://github.com/Bluestaq/udl-java-sdk/commit/d129f243c70395b17bca3f22e56570dcff59bea9))
+
 ## 0.1.8 (2025-09-03)
 
 Full Changelog: [v0.1.7...v0.1.8](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.7...v0.1.8)
