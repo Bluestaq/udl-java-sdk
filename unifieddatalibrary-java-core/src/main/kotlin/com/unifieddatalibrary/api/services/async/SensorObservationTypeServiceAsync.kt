@@ -9,8 +9,6 @@ import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservation
 import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeGetResponse
 import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeListPageAsync
 import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeListParams
-import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeQueryhelpParams
-import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeQueryhelpResponse
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -82,31 +80,6 @@ interface SensorObservationTypeServiceAsync {
         requestOptions: RequestOptions,
     ): CompletableFuture<SensorObservationTypeGetResponse> =
         get(id, SensorObservationTypeGetParams.none(), requestOptions)
-
-    /**
-     * Service operation to provide detailed information on available dynamic query parameters for a
-     * particular data type.
-     */
-    fun queryhelp(): CompletableFuture<SensorObservationTypeQueryhelpResponse> =
-        queryhelp(SensorObservationTypeQueryhelpParams.none())
-
-    /** @see queryhelp */
-    fun queryhelp(
-        params: SensorObservationTypeQueryhelpParams = SensorObservationTypeQueryhelpParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<SensorObservationTypeQueryhelpResponse>
-
-    /** @see queryhelp */
-    fun queryhelp(
-        params: SensorObservationTypeQueryhelpParams = SensorObservationTypeQueryhelpParams.none()
-    ): CompletableFuture<SensorObservationTypeQueryhelpResponse> =
-        queryhelp(params, RequestOptions.none())
-
-    /** @see queryhelp */
-    fun queryhelp(
-        requestOptions: RequestOptions
-    ): CompletableFuture<SensorObservationTypeQueryhelpResponse> =
-        queryhelp(SensorObservationTypeQueryhelpParams.none(), requestOptions)
 
     /**
      * A view of [SensorObservationTypeServiceAsync] that provides access to raw HTTP responses for
@@ -188,33 +161,5 @@ interface SensorObservationTypeServiceAsync {
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponseFor<SensorObservationTypeGetResponse>> =
             get(id, SensorObservationTypeGetParams.none(), requestOptions)
-
-        /**
-         * Returns a raw HTTP response for `get /udl/sensorobservationtype/queryhelp`, but is
-         * otherwise the same as [SensorObservationTypeServiceAsync.queryhelp].
-         */
-        fun queryhelp():
-            CompletableFuture<HttpResponseFor<SensorObservationTypeQueryhelpResponse>> =
-            queryhelp(SensorObservationTypeQueryhelpParams.none())
-
-        /** @see queryhelp */
-        fun queryhelp(
-            params: SensorObservationTypeQueryhelpParams =
-                SensorObservationTypeQueryhelpParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<SensorObservationTypeQueryhelpResponse>>
-
-        /** @see queryhelp */
-        fun queryhelp(
-            params: SensorObservationTypeQueryhelpParams =
-                SensorObservationTypeQueryhelpParams.none()
-        ): CompletableFuture<HttpResponseFor<SensorObservationTypeQueryhelpResponse>> =
-            queryhelp(params, RequestOptions.none())
-
-        /** @see queryhelp */
-        fun queryhelp(
-            requestOptions: RequestOptions
-        ): CompletableFuture<HttpResponseFor<SensorObservationTypeQueryhelpResponse>> =
-            queryhelp(SensorObservationTypeQueryhelpParams.none(), requestOptions)
     }
 }

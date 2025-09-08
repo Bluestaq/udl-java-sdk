@@ -184,22 +184,6 @@ private constructor(
     fun timestamp(): Optional<OffsetDateTime> = body.timestamp()
 
     /**
-     * Time the row was updated in the database, auto-populated by the system.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun updatedAt(): Optional<OffsetDateTime> = body.updatedAt()
-
-    /**
-     * Application user who updated the row in the database, auto-populated by the system.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun updatedBy(): Optional<String> = body.updatedBy()
-
-    /**
      * Returns the raw JSON value of [classificationMarking].
      *
      * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
@@ -312,20 +296,6 @@ private constructor(
      * Unlike [timestamp], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _timestamp(): JsonField<OffsetDateTime> = body._timestamp()
-
-    /**
-     * Returns the raw JSON value of [updatedAt].
-     *
-     * Unlike [updatedAt], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    fun _updatedAt(): JsonField<OffsetDateTime> = body._updatedAt()
-
-    /**
-     * Returns the raw JSON value of [updatedBy].
-     *
-     * Unlike [updatedBy], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    fun _updatedBy(): JsonField<String> = body._updatedBy()
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
@@ -627,30 +597,6 @@ private constructor(
          */
         fun timestamp(timestamp: JsonField<OffsetDateTime>) = apply { body.timestamp(timestamp) }
 
-        /** Time the row was updated in the database, auto-populated by the system. */
-        fun updatedAt(updatedAt: OffsetDateTime) = apply { body.updatedAt(updatedAt) }
-
-        /**
-         * Sets [Builder.updatedAt] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.updatedAt] with a well-typed [OffsetDateTime] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
-         */
-        fun updatedAt(updatedAt: JsonField<OffsetDateTime>) = apply { body.updatedAt(updatedAt) }
-
-        /** Application user who updated the row in the database, auto-populated by the system. */
-        fun updatedBy(updatedBy: String) = apply { body.updatedBy(updatedBy) }
-
-        /**
-         * Sets [Builder.updatedBy] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.updatedBy] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
-         */
-        fun updatedBy(updatedBy: JsonField<String>) = apply { body.updatedBy(updatedBy) }
-
         fun additionalBodyProperties(additionalBodyProperties: Map<String, JsonValue>) = apply {
             body.additionalProperties(additionalBodyProperties)
         }
@@ -824,8 +770,6 @@ private constructor(
         private val origNetwork: JsonField<String>,
         private val sourceDl: JsonField<String>,
         private val timestamp: JsonField<OffsetDateTime>,
-        private val updatedAt: JsonField<OffsetDateTime>,
-        private val updatedBy: JsonField<String>,
         private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
 
@@ -869,12 +813,6 @@ private constructor(
             @JsonProperty("timestamp")
             @ExcludeMissing
             timestamp: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("updatedAt")
-            @ExcludeMissing
-            updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
-            @JsonProperty("updatedBy")
-            @ExcludeMissing
-            updatedBy: JsonField<String> = JsonMissing.of(),
         ) : this(
             classificationMarking,
             dataMode,
@@ -892,8 +830,6 @@ private constructor(
             origNetwork,
             sourceDl,
             timestamp,
-            updatedAt,
-            updatedBy,
             mutableMapOf(),
         )
 
@@ -1052,22 +988,6 @@ private constructor(
         fun timestamp(): Optional<OffsetDateTime> = timestamp.getOptional("timestamp")
 
         /**
-         * Time the row was updated in the database, auto-populated by the system.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun updatedAt(): Optional<OffsetDateTime> = updatedAt.getOptional("updatedAt")
-
-        /**
-         * Application user who updated the row in the database, auto-populated by the system.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun updatedBy(): Optional<String> = updatedBy.getOptional("updatedBy")
-
-        /**
          * Returns the raw JSON value of [classificationMarking].
          *
          * Unlike [classificationMarking], this method doesn't throw if the JSON field has an
@@ -1197,22 +1117,6 @@ private constructor(
         @ExcludeMissing
         fun _timestamp(): JsonField<OffsetDateTime> = timestamp
 
-        /**
-         * Returns the raw JSON value of [updatedAt].
-         *
-         * Unlike [updatedAt], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("updatedAt")
-        @ExcludeMissing
-        fun _updatedAt(): JsonField<OffsetDateTime> = updatedAt
-
-        /**
-         * Returns the raw JSON value of [updatedBy].
-         *
-         * Unlike [updatedBy], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("updatedBy") @ExcludeMissing fun _updatedBy(): JsonField<String> = updatedBy
-
         @JsonAnySetter
         private fun putAdditionalProperty(key: String, value: JsonValue) {
             additionalProperties.put(key, value)
@@ -1261,8 +1165,6 @@ private constructor(
             private var origNetwork: JsonField<String> = JsonMissing.of()
             private var sourceDl: JsonField<String> = JsonMissing.of()
             private var timestamp: JsonField<OffsetDateTime> = JsonMissing.of()
-            private var updatedAt: JsonField<OffsetDateTime> = JsonMissing.of()
-            private var updatedBy: JsonField<String> = JsonMissing.of()
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
@@ -1283,8 +1185,6 @@ private constructor(
                 origNetwork = body.origNetwork
                 sourceDl = body.sourceDl
                 timestamp = body.timestamp
-                updatedAt = body.updatedAt
-                updatedBy = body.updatedBy
                 additionalProperties = body.additionalProperties.toMutableMap()
             }
 
@@ -1539,34 +1439,6 @@ private constructor(
                 this.timestamp = timestamp
             }
 
-            /** Time the row was updated in the database, auto-populated by the system. */
-            fun updatedAt(updatedAt: OffsetDateTime) = updatedAt(JsonField.of(updatedAt))
-
-            /**
-             * Sets [Builder.updatedAt] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.updatedAt] with a well-typed [OffsetDateTime] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun updatedAt(updatedAt: JsonField<OffsetDateTime>) = apply {
-                this.updatedAt = updatedAt
-            }
-
-            /**
-             * Application user who updated the row in the database, auto-populated by the system.
-             */
-            fun updatedBy(updatedBy: String) = updatedBy(JsonField.of(updatedBy))
-
-            /**
-             * Sets [Builder.updatedBy] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.updatedBy] with a well-typed [String] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun updatedBy(updatedBy: JsonField<String>) = apply { this.updatedBy = updatedBy }
-
             fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
                 this.additionalProperties.clear()
                 putAllAdditionalProperties(additionalProperties)
@@ -1620,8 +1492,6 @@ private constructor(
                     origNetwork,
                     sourceDl,
                     timestamp,
-                    updatedAt,
-                    updatedBy,
                     additionalProperties.toMutableMap(),
                 )
         }
@@ -1649,8 +1519,6 @@ private constructor(
             origNetwork()
             sourceDl()
             timestamp()
-            updatedAt()
-            updatedBy()
             validated = true
         }
 
@@ -1685,9 +1553,7 @@ private constructor(
                 (if (origin.asKnown().isPresent) 1 else 0) +
                 (if (origNetwork.asKnown().isPresent) 1 else 0) +
                 (if (sourceDl.asKnown().isPresent) 1 else 0) +
-                (if (timestamp.asKnown().isPresent) 1 else 0) +
-                (if (updatedAt.asKnown().isPresent) 1 else 0) +
-                (if (updatedBy.asKnown().isPresent) 1 else 0)
+                (if (timestamp.asKnown().isPresent) 1 else 0)
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {
@@ -1711,8 +1577,6 @@ private constructor(
                 origNetwork == other.origNetwork &&
                 sourceDl == other.sourceDl &&
                 timestamp == other.timestamp &&
-                updatedAt == other.updatedAt &&
-                updatedBy == other.updatedBy &&
                 additionalProperties == other.additionalProperties
         }
 
@@ -1734,8 +1598,6 @@ private constructor(
                 origNetwork,
                 sourceDl,
                 timestamp,
-                updatedAt,
-                updatedBy,
                 additionalProperties,
             )
         }
@@ -1743,7 +1605,7 @@ private constructor(
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idAircraftStatus=$idAircraftStatus, source=$source, text=$text, bodyId=$bodyId, altRmkId=$altRmkId, createdAt=$createdAt, createdBy=$createdBy, lastUpdatedAt=$lastUpdatedAt, lastUpdatedBy=$lastUpdatedBy, name=$name, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl, timestamp=$timestamp, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idAircraftStatus=$idAircraftStatus, source=$source, text=$text, bodyId=$bodyId, altRmkId=$altRmkId, createdAt=$createdAt, createdBy=$createdBy, lastUpdatedAt=$lastUpdatedAt, lastUpdatedBy=$lastUpdatedBy, name=$name, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl, timestamp=$timestamp, additionalProperties=$additionalProperties}"
     }
 
     /**

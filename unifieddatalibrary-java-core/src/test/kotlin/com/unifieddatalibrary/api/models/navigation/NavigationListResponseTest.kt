@@ -24,7 +24,7 @@ internal class NavigationListResponseTest {
                 .description("DESCRIPTION")
                 .idEntity("0167f577-e06c-358e-85aa-0a07a730bdd0")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         assertThat(navigationListResponse.classificationMarking()).isEqualTo("U")
@@ -40,7 +40,7 @@ internal class NavigationListResponseTest {
         assertThat(navigationListResponse.idEntity())
             .contains("0167f577-e06c-358e-85aa-0a07a730bdd0")
         assertThat(navigationListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(navigationListResponse.origNetwork()).contains("ORIG")
+        assertThat(navigationListResponse.origNetwork()).contains("OPS1")
     }
 
     @Test
@@ -58,7 +58,7 @@ internal class NavigationListResponseTest {
                 .description("DESCRIPTION")
                 .idEntity("0167f577-e06c-358e-85aa-0a07a730bdd0")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         val roundtrippedNavigationListResponse =

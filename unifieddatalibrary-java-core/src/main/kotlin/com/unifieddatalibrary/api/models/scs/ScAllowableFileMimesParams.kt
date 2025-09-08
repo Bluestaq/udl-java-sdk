@@ -7,7 +7,7 @@ import com.unifieddatalibrary.api.core.http.Headers
 import com.unifieddatalibrary.api.core.http.QueryParams
 import java.util.Objects
 
-/** Returns a list of allowable file mime types for upload. */
+/** Returns a list of the allowed file upload mime types. */
 class ScAllowableFileMimesParams
 private constructor(
     private val additionalHeaders: Headers,

@@ -61,7 +61,7 @@ internal class EcpSdrServiceTest {
                         .mpTemp(12)
                         .obTime(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                         .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .origObjectId("ORIGOBJECT-ID")
                         .origSensorId("ORIGSENSOR-ID")
                         .pd1SigLev(12)

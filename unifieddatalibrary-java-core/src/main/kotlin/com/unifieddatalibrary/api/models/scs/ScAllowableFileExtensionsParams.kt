@@ -7,7 +7,7 @@ import com.unifieddatalibrary.api.core.http.Headers
 import com.unifieddatalibrary.api.core.http.QueryParams
 import java.util.Objects
 
-/** Returns a list of allowable file extensions for upload. */
+/** Returns a list of the allowed filename extensions. */
 class ScAllowableFileExtensionsParams
 private constructor(
     private val additionalHeaders: Headers,

@@ -283,7 +283,7 @@ internal class IonoObservationTupleResponseTest {
                 .neProfileName("NH")
                 .neProfileVersion(4.32)
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
                 .phase(
                     IonoObservationTupleResponse.Phase.builder()
@@ -693,7 +693,7 @@ internal class IonoObservationTupleResponseTest {
         assertThat(ionoObservationTupleResponse.neProfileName()).contains("NH")
         assertThat(ionoObservationTupleResponse.neProfileVersion()).contains(4.32)
         assertThat(ionoObservationTupleResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(ionoObservationTupleResponse.origNetwork()).contains("ORIG")
+        assertThat(ionoObservationTupleResponse.origNetwork()).contains("OPS1")
         assertThat(ionoObservationTupleResponse.origSensorId()).contains("ORIGSENSOR-ID")
         assertThat(ionoObservationTupleResponse.phase())
             .contains(
@@ -1114,7 +1114,7 @@ internal class IonoObservationTupleResponseTest {
                 .neProfileName("NH")
                 .neProfileVersion(4.32)
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
                 .phase(
                     IonoObservationTupleResponse.Phase.builder()

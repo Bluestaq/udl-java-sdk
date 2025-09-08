@@ -24,7 +24,7 @@ internal class CommAbridgedTest {
                 .description("Description for comm A")
                 .idEntity("ENTITY-ID")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         assertThat(commAbridged.classificationMarking()).isEqualTo("U")
@@ -38,7 +38,7 @@ internal class CommAbridgedTest {
         assertThat(commAbridged.description()).contains("Description for comm A")
         assertThat(commAbridged.idEntity()).contains("ENTITY-ID")
         assertThat(commAbridged.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(commAbridged.origNetwork()).contains("ORIG")
+        assertThat(commAbridged.origNetwork()).contains("OPS1")
     }
 
     @Test
@@ -56,7 +56,7 @@ internal class CommAbridgedTest {
                 .description("Description for comm A")
                 .idEntity("ENTITY-ID")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         val roundtrippedCommAbridged =

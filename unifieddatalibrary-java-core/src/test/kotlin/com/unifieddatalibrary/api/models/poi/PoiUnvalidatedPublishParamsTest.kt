@@ -26,9 +26,6 @@ internal class PoiUnvalidatedPublishParamsTest {
                     )
                     .alt(5.23)
                     .andims(3)
-                    .area(
-                        "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
-                    )
                     .asrid(3)
                     .asset("PLATFORM_NAME")
                     .atext(
@@ -58,7 +55,7 @@ internal class PoiUnvalidatedPublishParamsTest {
                     .msnid("MSN-ID")
                     .orientation(45.23)
                     .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .plat("COMBAT_VEHICLE")
                     .pps("BDA")
                     .pri(2)
@@ -101,9 +98,6 @@ internal class PoiUnvalidatedPublishParamsTest {
                         )
                         .alt(5.23)
                         .andims(3)
-                        .area(
-                            "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
-                        )
                         .asrid(3)
                         .asset("PLATFORM_NAME")
                         .atext(
@@ -133,7 +127,7 @@ internal class PoiUnvalidatedPublishParamsTest {
                         .msnid("MSN-ID")
                         .orientation(45.23)
                         .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .plat("COMBAT_VEHICLE")
                         .pps("BDA")
                         .pri(2)
@@ -174,9 +168,6 @@ internal class PoiUnvalidatedPublishParamsTest {
                     )
                     .alt(5.23)
                     .andims(3)
-                    .area(
-                        "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
-                    )
                     .asrid(3)
                     .asset("PLATFORM_NAME")
                     .atext(
@@ -206,7 +197,7 @@ internal class PoiUnvalidatedPublishParamsTest {
                     .msnid("MSN-ID")
                     .orientation(45.23)
                     .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .plat("COMBAT_VEHICLE")
                     .pps("BDA")
                     .pri(2)

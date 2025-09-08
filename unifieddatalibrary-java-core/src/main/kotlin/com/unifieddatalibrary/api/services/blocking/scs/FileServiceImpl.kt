@@ -34,15 +34,18 @@ class FileServiceImpl internal constructor(private val clientOptions: ClientOpti
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): FileService =
         FileServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    @Deprecated("deprecated")
     override fun retrieve(params: FileRetrieveParams, requestOptions: RequestOptions): FileData =
         // get /scs/file
         withRawResponse().retrieve(params, requestOptions).parse()
 
+    @Deprecated("deprecated")
     override fun update(params: FileUpdateParams, requestOptions: RequestOptions) {
         // patch /scs/file
         withRawResponse().update(params, requestOptions)
     }
 
+    @Deprecated("deprecated")
     override fun list(params: FileListParams, requestOptions: RequestOptions): FileListPage =
         // get /scs/list
         withRawResponse().list(params, requestOptions).parse()
@@ -63,6 +66,7 @@ class FileServiceImpl internal constructor(private val clientOptions: ClientOpti
         private val retrieveHandler: Handler<FileData> =
             jsonHandler<FileData>(clientOptions.jsonMapper)
 
+        @Deprecated("deprecated")
         override fun retrieve(
             params: FileRetrieveParams,
             requestOptions: RequestOptions,
@@ -89,6 +93,7 @@ class FileServiceImpl internal constructor(private val clientOptions: ClientOpti
 
         private val updateHandler: Handler<Void?> = emptyHandler()
 
+        @Deprecated("deprecated")
         override fun update(
             params: FileUpdateParams,
             requestOptions: RequestOptions,
@@ -111,6 +116,7 @@ class FileServiceImpl internal constructor(private val clientOptions: ClientOpti
         private val listHandler: Handler<List<FileData>> =
             jsonHandler<List<FileData>>(clientOptions.jsonMapper)
 
+        @Deprecated("deprecated")
         override fun list(
             params: FileListParams,
             requestOptions: RequestOptions,

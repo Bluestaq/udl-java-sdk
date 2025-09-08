@@ -32,9 +32,11 @@ private constructor(
     private val id: JsonField<String>,
     private val createdAt: JsonField<OffsetDateTime>,
     private val createdBy: JsonField<String>,
+    private val extSysId: JsonField<String>,
     private val idEntity: JsonField<String>,
     private val origin: JsonField<String>,
     private val origNetwork: JsonField<String>,
+    private val subtype: JsonField<String>,
     private val type: JsonField<String>,
     private val additionalProperties: MutableMap<String, JsonValue>,
 ) {
@@ -52,11 +54,13 @@ private constructor(
         @ExcludeMissing
         createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("extSysId") @ExcludeMissing extSysId: JsonField<String> = JsonMissing.of(),
         @JsonProperty("idEntity") @ExcludeMissing idEntity: JsonField<String> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
         @JsonProperty("origNetwork")
         @ExcludeMissing
         origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("subtype") @ExcludeMissing subtype: JsonField<String> = JsonMissing.of(),
         @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
     ) : this(
         classificationMarking,
@@ -66,9 +70,11 @@ private constructor(
         id,
         createdAt,
         createdBy,
+        extSysId,
         idEntity,
         origin,
         origNetwork,
+        subtype,
         type,
         mutableMapOf(),
     )
@@ -141,7 +147,15 @@ private constructor(
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
-     * ID of the parent entity for this rfemitter.
+     * The originating system ID for the RF Emitter.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun extSysId(): Optional<String> = extSysId.getOptional("extSysId")
+
+    /**
+     * ID by reference of the parent entity for this RFEmitter.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -166,6 +180,15 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
+
+    /**
+     * The RF Emitter subtype, which can distinguish specialized deployments (e.g. BLOCK_0_AVL,
+     * BLOCK_0_DS1, BLOCK_0_TEST, BLOCK_1, BLOCK_1_TEST, NONE).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun subtype(): Optional<String> = subtype.getOptional("subtype")
 
     /**
      * Type of this RF Emitter.
@@ -230,6 +253,13 @@ private constructor(
     @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
     /**
+     * Returns the raw JSON value of [extSysId].
+     *
+     * Unlike [extSysId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("extSysId") @ExcludeMissing fun _extSysId(): JsonField<String> = extSysId
+
+    /**
      * Returns the raw JSON value of [idEntity].
      *
      * Unlike [idEntity], this method doesn't throw if the JSON field has an unexpected type.
@@ -249,6 +279,13 @@ private constructor(
      * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
+
+    /**
+     * Returns the raw JSON value of [subtype].
+     *
+     * Unlike [subtype], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("subtype") @ExcludeMissing fun _subtype(): JsonField<String> = subtype
 
     /**
      * Returns the raw JSON value of [type].
@@ -295,9 +332,11 @@ private constructor(
         private var id: JsonField<String> = JsonMissing.of()
         private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
         private var createdBy: JsonField<String> = JsonMissing.of()
+        private var extSysId: JsonField<String> = JsonMissing.of()
         private var idEntity: JsonField<String> = JsonMissing.of()
         private var origin: JsonField<String> = JsonMissing.of()
         private var origNetwork: JsonField<String> = JsonMissing.of()
+        private var subtype: JsonField<String> = JsonMissing.of()
         private var type: JsonField<String> = JsonMissing.of()
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
@@ -310,9 +349,11 @@ private constructor(
             id = rfEmitterListResponse.id
             createdAt = rfEmitterListResponse.createdAt
             createdBy = rfEmitterListResponse.createdBy
+            extSysId = rfEmitterListResponse.extSysId
             idEntity = rfEmitterListResponse.idEntity
             origin = rfEmitterListResponse.origin
             origNetwork = rfEmitterListResponse.origNetwork
+            subtype = rfEmitterListResponse.subtype
             type = rfEmitterListResponse.type
             additionalProperties = rfEmitterListResponse.additionalProperties.toMutableMap()
         }
@@ -414,7 +455,18 @@ private constructor(
          */
         fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
-        /** ID of the parent entity for this rfemitter. */
+        /** The originating system ID for the RF Emitter. */
+        fun extSysId(extSysId: String) = extSysId(JsonField.of(extSysId))
+
+        /**
+         * Sets [Builder.extSysId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.extSysId] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun extSysId(extSysId: JsonField<String>) = apply { this.extSysId = extSysId }
+
+        /** ID by reference of the parent entity for this RFEmitter. */
         fun idEntity(idEntity: String) = idEntity(JsonField.of(idEntity))
 
         /**
@@ -455,6 +507,20 @@ private constructor(
          * value.
          */
         fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
+
+        /**
+         * The RF Emitter subtype, which can distinguish specialized deployments (e.g. BLOCK_0_AVL,
+         * BLOCK_0_DS1, BLOCK_0_TEST, BLOCK_1, BLOCK_1_TEST, NONE).
+         */
+        fun subtype(subtype: String) = subtype(JsonField.of(subtype))
+
+        /**
+         * Sets [Builder.subtype] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.subtype] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun subtype(subtype: JsonField<String>) = apply { this.subtype = subtype }
 
         /** Type of this RF Emitter. */
         fun type(type: String) = type(JsonField.of(type))
@@ -510,9 +576,11 @@ private constructor(
                 id,
                 createdAt,
                 createdBy,
+                extSysId,
                 idEntity,
                 origin,
                 origNetwork,
+                subtype,
                 type,
                 additionalProperties.toMutableMap(),
             )
@@ -532,9 +600,11 @@ private constructor(
         id()
         createdAt()
         createdBy()
+        extSysId()
         idEntity()
         origin()
         origNetwork()
+        subtype()
         type()
         validated = true
     }
@@ -561,9 +631,11 @@ private constructor(
             (if (id.asKnown().isPresent) 1 else 0) +
             (if (createdAt.asKnown().isPresent) 1 else 0) +
             (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (extSysId.asKnown().isPresent) 1 else 0) +
             (if (idEntity.asKnown().isPresent) 1 else 0) +
             (if (origin.asKnown().isPresent) 1 else 0) +
             (if (origNetwork.asKnown().isPresent) 1 else 0) +
+            (if (subtype.asKnown().isPresent) 1 else 0) +
             (if (type.asKnown().isPresent) 1 else 0)
 
     /**
@@ -732,9 +804,11 @@ private constructor(
             id == other.id &&
             createdAt == other.createdAt &&
             createdBy == other.createdBy &&
+            extSysId == other.extSysId &&
             idEntity == other.idEntity &&
             origin == other.origin &&
             origNetwork == other.origNetwork &&
+            subtype == other.subtype &&
             type == other.type &&
             additionalProperties == other.additionalProperties
     }
@@ -748,9 +822,11 @@ private constructor(
             id,
             createdAt,
             createdBy,
+            extSysId,
             idEntity,
             origin,
             origNetwork,
+            subtype,
             type,
             additionalProperties,
         )
@@ -759,5 +835,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "RfEmitterListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, name=$name, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, idEntity=$idEntity, origin=$origin, origNetwork=$origNetwork, type=$type, additionalProperties=$additionalProperties}"
+        "RfEmitterListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, name=$name, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, extSysId=$extSysId, idEntity=$idEntity, origin=$origin, origNetwork=$origNetwork, subtype=$subtype, type=$type, additionalProperties=$additionalProperties}"
 }

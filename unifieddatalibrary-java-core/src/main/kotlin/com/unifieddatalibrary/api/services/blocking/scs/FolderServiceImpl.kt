@@ -35,14 +35,17 @@ class FolderServiceImpl internal constructor(private val clientOptions: ClientOp
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): FolderService =
         FolderServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    @Deprecated("deprecated")
     override fun create(params: FolderCreateParams, requestOptions: RequestOptions): String =
         // post /scs/folder
         withRawResponse().create(params, requestOptions).parse()
 
+    @Deprecated("deprecated")
     override fun retrieve(params: FolderRetrieveParams, requestOptions: RequestOptions): FileData =
         // get /scs/folder
         withRawResponse().retrieve(params, requestOptions).parse()
 
+    @Deprecated("deprecated")
     override fun update(params: FolderUpdateParams, requestOptions: RequestOptions) {
         // patch /scs/folder
         withRawResponse().update(params, requestOptions)
@@ -63,6 +66,7 @@ class FolderServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val createHandler: Handler<String> = stringHandler()
 
+        @Deprecated("deprecated")
         override fun create(
             params: FolderCreateParams,
             requestOptions: RequestOptions,
@@ -85,6 +89,7 @@ class FolderServiceImpl internal constructor(private val clientOptions: ClientOp
         private val retrieveHandler: Handler<FileData> =
             jsonHandler<FileData>(clientOptions.jsonMapper)
 
+        @Deprecated("deprecated")
         override fun retrieve(
             params: FolderRetrieveParams,
             requestOptions: RequestOptions,
@@ -111,6 +116,7 @@ class FolderServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val updateHandler: Handler<Void?> = emptyHandler()
 
+        @Deprecated("deprecated")
         override fun update(
             params: FolderUpdateParams,
             requestOptions: RequestOptions,

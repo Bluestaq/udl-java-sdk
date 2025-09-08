@@ -194,7 +194,7 @@ internal class FlightplanUnvalidatedPublishParamsTest {
                     .opWeight(251830.5)
                     .origin("THIRD_PARTY_DATASOURCE")
                     .originator("ETARYXYX")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .plannerRemark(
                         "Flight plan is good for 2 days before airspace closes over the UK."
                     )
@@ -419,7 +419,7 @@ internal class FlightplanUnvalidatedPublishParamsTest {
                         .opWeight(251830.5)
                         .origin("THIRD_PARTY_DATASOURCE")
                         .originator("ETARYXYX")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .plannerRemark(
                             "Flight plan is good for 2 days before airspace closes over the UK."
                         )
@@ -642,7 +642,7 @@ internal class FlightplanUnvalidatedPublishParamsTest {
                     .opWeight(251830.5)
                     .origin("THIRD_PARTY_DATASOURCE")
                     .originator("ETARYXYX")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .plannerRemark(
                         "Flight plan is good for 2 days before airspace closes over the UK."
                     )

@@ -11,6 +11,7 @@ import java.util.Objects
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see FileService.list */
+@Deprecated("deprecated")
 class FileListPage
 private constructor(
     private val service: FileService,

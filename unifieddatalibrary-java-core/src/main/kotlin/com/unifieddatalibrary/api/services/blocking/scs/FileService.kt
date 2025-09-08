@@ -32,9 +32,11 @@ interface FileService {
      * Returns a FileData object representing the file with the given ID that is visible to the
      * calling user.
      */
+    @Deprecated("deprecated")
     fun retrieve(params: FileRetrieveParams): FileData = retrieve(params, RequestOptions.none())
 
     /** @see retrieve */
+    @Deprecated("deprecated")
     fun retrieve(
         params: FileRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -44,28 +46,33 @@ interface FileService {
      * operation to update files metadata. A specific role is required to perform this service
      * operation. Please contact the UDL team for assistance.
      */
-    fun update() = update(FileUpdateParams.none())
+    @Deprecated("deprecated") fun update() = update(FileUpdateParams.none())
 
     /** @see update */
+    @Deprecated("deprecated")
     fun update(
         params: FileUpdateParams = FileUpdateParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
     /** @see update */
+    @Deprecated("deprecated")
     fun update(params: FileUpdateParams = FileUpdateParams.none()) =
         update(params, RequestOptions.none())
 
     /** @see update */
+    @Deprecated("deprecated")
     fun update(requestOptions: RequestOptions) = update(FileUpdateParams.none(), requestOptions)
 
     /**
      * Returns a non-recursive list of FileData objects representing the files and subdirectories in
      * the passed-in path directory that are visible to the calling user.
      */
+    @Deprecated("deprecated")
     fun list(params: FileListParams): FileListPage = list(params, RequestOptions.none())
 
     /** @see list */
+    @Deprecated("deprecated")
     fun list(
         params: FileListParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -85,11 +92,13 @@ interface FileService {
          * Returns a raw HTTP response for `get /scs/file`, but is otherwise the same as
          * [FileService.retrieve].
          */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun retrieve(params: FileRetrieveParams): HttpResponseFor<FileData> =
             retrieve(params, RequestOptions.none())
 
         /** @see retrieve */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun retrieve(
             params: FileRetrieveParams,
@@ -100,9 +109,12 @@ interface FileService {
          * Returns a raw HTTP response for `patch /scs/file`, but is otherwise the same as
          * [FileService.update].
          */
-        @MustBeClosed fun update(): HttpResponse = update(FileUpdateParams.none())
+        @Deprecated("deprecated")
+        @MustBeClosed
+        fun update(): HttpResponse = update(FileUpdateParams.none())
 
         /** @see update */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun update(
             params: FileUpdateParams = FileUpdateParams.none(),
@@ -110,11 +122,13 @@ interface FileService {
         ): HttpResponse
 
         /** @see update */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun update(params: FileUpdateParams = FileUpdateParams.none()): HttpResponse =
             update(params, RequestOptions.none())
 
         /** @see update */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun update(requestOptions: RequestOptions): HttpResponse =
             update(FileUpdateParams.none(), requestOptions)
@@ -123,11 +137,13 @@ interface FileService {
          * Returns a raw HTTP response for `get /scs/list`, but is otherwise the same as
          * [FileService.list].
          */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun list(params: FileListParams): HttpResponseFor<FileListPage> =
             list(params, RequestOptions.none())
 
         /** @see list */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun list(
             params: FileListParams,

@@ -88,7 +88,7 @@ internal class CommCreateParamsTest {
             )
             .idEntity("ENTITY-ID")
             .origin("THIRD_PARTY_DATASOURCE")
-            .origNetwork("ORIG")
+            .origNetwork("OPS1")
             .build()
     }
 
@@ -170,7 +170,7 @@ internal class CommCreateParamsTest {
                 )
                 .idEntity("ENTITY-ID")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         val body = params._body()
@@ -250,7 +250,7 @@ internal class CommCreateParamsTest {
             )
         assertThat(body.idEntity()).contains("ENTITY-ID")
         assertThat(body.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(body.origNetwork()).contains("ORIG")
+        assertThat(body.origNetwork()).contains("OPS1")
     }
 
     @Test

@@ -20,8 +20,6 @@ import com.unifieddatalibrary.api.models.sensortype.SensorTypeGetResponse
 import com.unifieddatalibrary.api.models.sensortype.SensorTypeListPage
 import com.unifieddatalibrary.api.models.sensortype.SensorTypeListParams
 import com.unifieddatalibrary.api.models.sensortype.SensorTypeListResponse
-import com.unifieddatalibrary.api.models.sensortype.SensorTypeQueryhelpParams
-import com.unifieddatalibrary.api.models.sensortype.SensorTypeQueryhelpResponse
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
@@ -50,13 +48,6 @@ class SensorTypeServiceImpl internal constructor(private val clientOptions: Clie
     ): SensorTypeGetResponse =
         // get /udl/sensortype/{id}
         withRawResponse().get(params, requestOptions).parse()
-
-    override fun queryhelp(
-        params: SensorTypeQueryhelpParams,
-        requestOptions: RequestOptions,
-    ): SensorTypeQueryhelpResponse =
-        // get /udl/sensortype/queryhelp
-        withRawResponse().queryhelp(params, requestOptions).parse()
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         SensorTypeService.WithRawResponse {
@@ -127,33 +118,6 @@ class SensorTypeServiceImpl internal constructor(private val clientOptions: Clie
             return errorHandler.handle(response).parseable {
                 response
                     .use { getHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
-        }
-
-        private val queryhelpHandler: Handler<SensorTypeQueryhelpResponse> =
-            jsonHandler<SensorTypeQueryhelpResponse>(clientOptions.jsonMapper)
-
-        override fun queryhelp(
-            params: SensorTypeQueryhelpParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<SensorTypeQueryhelpResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "sensortype", "queryhelp")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { queryhelpHandler.handle(it) }
                     .also {
                         if (requestOptions.responseValidation!!) {
                             it.validate()

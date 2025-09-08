@@ -35,7 +35,7 @@ internal class BeamContourUpdateParamsTest {
             )
             .geographyType("ST_Polygon")
             .origin("THIRD_PARTY_DATASOURCE")
-            .origNetwork("ORIG")
+            .origNetwork("OPS1")
             .regionName("Example region name")
             .build()
     }
@@ -85,7 +85,7 @@ internal class BeamContourUpdateParamsTest {
                 )
                 .geographyType("ST_Polygon")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .regionName("Example region name")
                 .build()
 
@@ -117,7 +117,7 @@ internal class BeamContourUpdateParamsTest {
             )
         assertThat(body.geographyType()).contains("ST_Polygon")
         assertThat(body.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(body.origNetwork()).contains("ORIG")
+        assertThat(body.origNetwork()).contains("OPS1")
         assertThat(body.regionName()).contains("Example region name")
     }
 

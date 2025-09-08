@@ -27,7 +27,6 @@ internal class FeatureAssessmentCreateBulkParamsTest {
                     .annLims(listOf(listOf(1, 1), listOf(1, 2), listOf(1, 3), listOf(1, 4)))
                     .addAnnText("rec1")
                     .addAnnText("rec2")
-                    .area("POINT(52.23486096929749 16.191937138595005)")
                     .asrid(4326)
                     .assessment(
                         "Vessel bigger than other small fishing boats commonly found along the coastline"
@@ -89,7 +88,6 @@ internal class FeatureAssessmentCreateBulkParamsTest {
                         .annLims(listOf(listOf(1, 1), listOf(1, 2), listOf(1, 3), listOf(1, 4)))
                         .addAnnText("rec1")
                         .addAnnText("rec2")
-                        .area("POINT(52.23486096929749 16.191937138595005)")
                         .asrid(4326)
                         .assessment(
                             "Vessel bigger than other small fishing boats commonly found along the coastline"
@@ -149,7 +147,6 @@ internal class FeatureAssessmentCreateBulkParamsTest {
                     .annLims(listOf(listOf(1, 1), listOf(1, 2), listOf(1, 3), listOf(1, 4)))
                     .addAnnText("rec1")
                     .addAnnText("rec2")
-                    .area("POINT(52.23486096929749 16.191937138595005)")
                     .asrid(4326)
                     .assessment(
                         "Vessel bigger than other small fishing boats commonly found along the coastline"

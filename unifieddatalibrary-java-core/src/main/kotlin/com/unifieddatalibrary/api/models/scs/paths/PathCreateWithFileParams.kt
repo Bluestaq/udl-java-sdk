@@ -15,6 +15,7 @@ import kotlin.jvm.optionals.getOrNull
  * that are missing. A specific role is required to perform this service operation. Please contact
  * the UDL team for assistance.
  */
+@Deprecated("deprecated")
 class PathCreateWithFileParams
 private constructor(
     private val id: String,
@@ -32,7 +33,7 @@ private constructor(
     /** The full path to create, including path and file name */
     fun id(): String = id
 
-    /** Classification (ex. U//FOUO) */
+    /** Classification marking of the file being uploaded. */
     fun classificationMarking(): String = classificationMarking
 
     /** Length of time after which to automatically delete the file. */
@@ -105,7 +106,7 @@ private constructor(
         /** The full path to create, including path and file name */
         fun id(id: String) = apply { this.id = id }
 
-        /** Classification (ex. U//FOUO) */
+        /** Classification marking of the file being uploaded. */
         fun classificationMarking(classificationMarking: String) = apply {
             this.classificationMarking = classificationMarking
         }

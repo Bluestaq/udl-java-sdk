@@ -10,12 +10,29 @@ internal class V2ListParamsTest {
 
     @Test
     fun create() {
-        V2ListParams.builder().path("path").firstResult(0L).maxResults(0L).build()
+        V2ListParams.builder()
+            .path("path")
+            .firstResult(0L)
+            .maxResults(0L)
+            .order("order")
+            .searchAfter("searchAfter")
+            .size(0)
+            .sort("sort")
+            .build()
     }
 
     @Test
     fun queryParams() {
-        val params = V2ListParams.builder().path("path").firstResult(0L).maxResults(0L).build()
+        val params =
+            V2ListParams.builder()
+                .path("path")
+                .firstResult(0L)
+                .maxResults(0L)
+                .order("order")
+                .searchAfter("searchAfter")
+                .size(0)
+                .sort("sort")
+                .build()
 
         val queryParams = params._queryParams()
 
@@ -25,6 +42,10 @@ internal class V2ListParamsTest {
                     .put("path", "path")
                     .put("firstResult", "0")
                     .put("maxResults", "0")
+                    .put("order", "order")
+                    .put("searchAfter", "searchAfter")
+                    .put("size", "0")
+                    .put("sort", "sort")
                     .build()
             )
     }

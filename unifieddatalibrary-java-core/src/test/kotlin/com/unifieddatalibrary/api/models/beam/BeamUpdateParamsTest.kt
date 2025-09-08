@@ -21,7 +21,7 @@ internal class BeamUpdateParamsTest {
             .createdBy("some.user")
             .notes("Example notes")
             .origin("THIRD_PARTY_DATASOURCE")
-            .origNetwork("ORIG")
+            .origNetwork("OPS1")
             .build()
     }
 
@@ -55,7 +55,7 @@ internal class BeamUpdateParamsTest {
                 .createdBy("some.user")
                 .notes("Example notes")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         val body = params._body()
@@ -69,7 +69,7 @@ internal class BeamUpdateParamsTest {
         assertThat(body.createdBy()).contains("some.user")
         assertThat(body.notes()).contains("Example notes")
         assertThat(body.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(body.origNetwork()).contains("ORIG")
+        assertThat(body.origNetwork()).contains("OPS1")
     }
 
     @Test

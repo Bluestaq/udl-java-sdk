@@ -14,6 +14,7 @@ import kotlin.jvm.optionals.getOrNull
  * Returns a non-recursive list of FileData objects representing the files and subdirectories in the
  * passed-in path directory that are visible to the calling user.
  */
+@Deprecated("deprecated")
 class FileListParams
 private constructor(
     private val path: String,

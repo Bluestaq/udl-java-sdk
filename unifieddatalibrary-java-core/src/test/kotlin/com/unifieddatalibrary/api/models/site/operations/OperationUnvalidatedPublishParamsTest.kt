@@ -78,7 +78,7 @@ internal class OperationUnvalidatedPublishParamsTest {
                             .build()
                     )
                     .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .addPathway(
                         OperationUnvalidatedPublishParams.Body.Pathway.builder()
                             .pwDefinition("AGP: 14L, K6, K, G (ANG APRN TO TWY K), GUARD (MAIN)")
@@ -187,7 +187,7 @@ internal class OperationUnvalidatedPublishParamsTest {
                                 .build()
                         )
                         .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .addPathway(
                             OperationUnvalidatedPublishParams.Body.Pathway.builder()
                                 .pwDefinition(
@@ -293,7 +293,7 @@ internal class OperationUnvalidatedPublishParamsTest {
                             .build()
                     )
                     .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .addPathway(
                         OperationUnvalidatedPublishParams.Body.Pathway.builder()
                             .pwDefinition("AGP: 14L, K6, K, G (ANG APRN TO TWY K), GUARD (MAIN)")

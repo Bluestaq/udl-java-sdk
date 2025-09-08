@@ -81,9 +81,6 @@ internal class SigactServiceTest {
                             "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
                         )
                         .andims(3L)
-                        .area(
-                            "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
-                        )
                         .asrid(3)
                         .atext(
                             "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
@@ -139,7 +136,7 @@ internal class SigactServiceTest {
                         .numMentions(8)
                         .numSources(8)
                         .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .province("Province_Example")
                         .addRelatedDoc(
                             SigactCreateBulkParams.Body.RelatedDoc.builder()

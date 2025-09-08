@@ -92,7 +92,7 @@ internal class ScientificCreateParamsTest {
             .manufacturerOrgId("REF-MANUFACTURERORG-ID")
             .notes("NOTES")
             .origin("THIRD_PARTY_DATASOURCE")
-            .origNetwork("ORIG")
+            .origNetwork("OPS1")
             .payloadCategory("Sensor")
             .build()
     }
@@ -179,7 +179,7 @@ internal class ScientificCreateParamsTest {
                 .manufacturerOrgId("REF-MANUFACTURERORG-ID")
                 .notes("NOTES")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .payloadCategory("Sensor")
                 .build()
 
@@ -264,7 +264,7 @@ internal class ScientificCreateParamsTest {
         assertThat(body.manufacturerOrgId()).contains("REF-MANUFACTURERORG-ID")
         assertThat(body.notes()).contains("NOTES")
         assertThat(body.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(body.origNetwork()).contains("ORIG")
+        assertThat(body.origNetwork()).contains("OPS1")
         assertThat(body.payloadCategory()).contains("Sensor")
     }
 

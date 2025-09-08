@@ -35,9 +35,9 @@ interface RfBandServiceAsync {
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): RfBandServiceAsync
 
     /**
-     * Service operation to take a single RFBand as a POST body and ingest into the database. A
-     * specific role is required to perform this service operation. Please contact the UDL team for
-     * assistance.
+     * Service operation to take a single RFBand record as a POST body and ingest into the database.
+     * A specific role is required to perform this service operation. Please contact the UDL team
+     * for assistance.
      */
     fun create(params: RfBandCreateParams): CompletableFuture<Void?> =
         create(params, RequestOptions.none())
@@ -49,8 +49,8 @@ interface RfBandServiceAsync {
     ): CompletableFuture<Void?>
 
     /**
-     * Service operation to update an RFBand. A specific role is required to perform this service
-     * operation. Please contact the UDL team for assistance.
+     * Service operation to update a single RFBand record. A specific role is required to perform
+     * this service operation. Please contact the UDL team for assistance.
      */
     fun update(pathId: String, params: RfBandUpdateParams): CompletableFuture<Void?> =
         update(pathId, params, RequestOptions.none())
@@ -95,8 +95,8 @@ interface RfBandServiceAsync {
         list(RfBandListParams.none(), requestOptions)
 
     /**
-     * Service operation to delete an RFBand specified by the passed ID path parameter. A specific
-     * role is required to perform this service operation. Please contact the UDL team for
+     * Service operation to delete a RFBand record specified by the passed ID path parameter. A
+     * specific role is required to perform this service operation. Please contact the UDL team for
      * assistance.
      */
     fun delete(id: String): CompletableFuture<Void?> = delete(id, RfBandDeleteParams.none())
@@ -151,7 +151,9 @@ interface RfBandServiceAsync {
     fun count(requestOptions: RequestOptions): CompletableFuture<String> =
         count(RfBandCountParams.none(), requestOptions)
 
-    /** Service operation to get a single RFBand by its unique ID passed as a path parameter. */
+    /**
+     * Service operation to get a single RFBand record by its unique ID passed as a path parameter.
+     */
     fun get(id: String): CompletableFuture<RfBandFull> = get(id, RfBandGetParams.none())
 
     /** @see get */

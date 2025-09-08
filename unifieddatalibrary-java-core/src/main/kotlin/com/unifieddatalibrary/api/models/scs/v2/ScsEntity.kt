@@ -29,7 +29,7 @@ private constructor(
     private val data: JsonField<String>,
     private val deleteOn: JsonField<Long>,
     private val description: JsonField<String>,
-    private val fileName: JsonField<String>,
+    private val filename: JsonField<String>,
     private val filePath: JsonField<String>,
     private val keywords: JsonField<String>,
     private val parentPath: JsonField<String>,
@@ -59,7 +59,7 @@ private constructor(
         @JsonProperty("description")
         @ExcludeMissing
         description: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("fileName") @ExcludeMissing fileName: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("filename") @ExcludeMissing filename: JsonField<String> = JsonMissing.of(),
         @JsonProperty("filePath") @ExcludeMissing filePath: JsonField<String> = JsonMissing.of(),
         @JsonProperty("keywords") @ExcludeMissing keywords: JsonField<String> = JsonMissing.of(),
         @JsonProperty("parentPath")
@@ -81,7 +81,7 @@ private constructor(
         data,
         deleteOn,
         description,
-        fileName,
+        filename,
         filePath,
         keywords,
         parentPath,
@@ -152,7 +152,7 @@ private constructor(
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun fileName(): Optional<String> = fileName.getOptional("fileName")
+    fun filename(): Optional<String> = filename.getOptional("filename")
 
     /**
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
@@ -285,11 +285,11 @@ private constructor(
     @JsonProperty("description") @ExcludeMissing fun _description(): JsonField<String> = description
 
     /**
-     * Returns the raw JSON value of [fileName].
+     * Returns the raw JSON value of [filename].
      *
-     * Unlike [fileName], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [filename], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("fileName") @ExcludeMissing fun _fileName(): JsonField<String> = fileName
+    @JsonProperty("filename") @ExcludeMissing fun _filename(): JsonField<String> = filename
 
     /**
      * Returns the raw JSON value of [filePath].
@@ -390,7 +390,7 @@ private constructor(
         private var data: JsonField<String> = JsonMissing.of()
         private var deleteOn: JsonField<Long> = JsonMissing.of()
         private var description: JsonField<String> = JsonMissing.of()
-        private var fileName: JsonField<String> = JsonMissing.of()
+        private var filename: JsonField<String> = JsonMissing.of()
         private var filePath: JsonField<String> = JsonMissing.of()
         private var keywords: JsonField<String> = JsonMissing.of()
         private var parentPath: JsonField<String> = JsonMissing.of()
@@ -413,7 +413,7 @@ private constructor(
             data = scsEntity.data
             deleteOn = scsEntity.deleteOn
             description = scsEntity.description
-            fileName = scsEntity.fileName
+            filename = scsEntity.filename
             filePath = scsEntity.filePath
             keywords = scsEntity.keywords
             parentPath = scsEntity.parentPath
@@ -517,15 +517,15 @@ private constructor(
          */
         fun description(description: JsonField<String>) = apply { this.description = description }
 
-        fun fileName(fileName: String) = fileName(JsonField.of(fileName))
+        fun filename(filename: String) = filename(JsonField.of(filename))
 
         /**
-         * Sets [Builder.fileName] to an arbitrary JSON value.
+         * Sets [Builder.filename] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.fileName] with a well-typed [String] value instead. This
+         * You should usually call [Builder.filename] with a well-typed [String] value instead. This
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun fileName(fileName: JsonField<String>) = apply { this.fileName = fileName }
+        fun filename(filename: JsonField<String>) = apply { this.filename = filename }
 
         fun filePath(filePath: String) = filePath(JsonField.of(filePath))
 
@@ -688,7 +688,7 @@ private constructor(
                 data,
                 deleteOn,
                 description,
-                fileName,
+                filename,
                 filePath,
                 keywords,
                 parentPath,
@@ -718,7 +718,7 @@ private constructor(
         data()
         deleteOn()
         description()
-        fileName()
+        filename()
         filePath()
         keywords()
         parentPath()
@@ -755,7 +755,7 @@ private constructor(
             (if (data.asKnown().isPresent) 1 else 0) +
             (if (deleteOn.asKnown().isPresent) 1 else 0) +
             (if (description.asKnown().isPresent) 1 else 0) +
-            (if (fileName.asKnown().isPresent) 1 else 0) +
+            (if (filename.asKnown().isPresent) 1 else 0) +
             (if (filePath.asKnown().isPresent) 1 else 0) +
             (if (keywords.asKnown().isPresent) 1 else 0) +
             (if (parentPath.asKnown().isPresent) 1 else 0) +
@@ -781,7 +781,7 @@ private constructor(
             data == other.data &&
             deleteOn == other.deleteOn &&
             description == other.description &&
-            fileName == other.fileName &&
+            filename == other.filename &&
             filePath == other.filePath &&
             keywords == other.keywords &&
             parentPath == other.parentPath &&
@@ -805,7 +805,7 @@ private constructor(
             data,
             deleteOn,
             description,
-            fileName,
+            filename,
             filePath,
             keywords,
             parentPath,
@@ -823,5 +823,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "ScsEntity{id=$id, attachment=$attachment, classificationMarking=$classificationMarking, createdAt=$createdAt, createdBy=$createdBy, data=$data, deleteOn=$deleteOn, description=$description, fileName=$fileName, filePath=$filePath, keywords=$keywords, parentPath=$parentPath, pathType=$pathType, readAcl=$readAcl, size=$size, tags=$tags, updatedAt=$updatedAt, updatedBy=$updatedBy, writeAcl=$writeAcl, additionalProperties=$additionalProperties}"
+        "ScsEntity{id=$id, attachment=$attachment, classificationMarking=$classificationMarking, createdAt=$createdAt, createdBy=$createdBy, data=$data, deleteOn=$deleteOn, description=$description, filename=$filename, filePath=$filePath, keywords=$keywords, parentPath=$parentPath, pathType=$pathType, readAcl=$readAcl, size=$size, tags=$tags, updatedAt=$updatedAt, updatedBy=$updatedBy, writeAcl=$writeAcl, additionalProperties=$additionalProperties}"
 }

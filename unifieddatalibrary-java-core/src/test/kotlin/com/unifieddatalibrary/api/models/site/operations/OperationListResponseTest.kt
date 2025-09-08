@@ -76,7 +76,7 @@ internal class OperationListResponseTest {
                         .build()
                 )
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .addPathway(
                     OperationListResponse.Pathway.builder()
                         .pwDefinition("AGP: 14L, K6, K, G (ANG APRN TO TWY K), GUARD (MAIN)")
@@ -177,7 +177,7 @@ internal class OperationListResponseTest {
                     .build()
             )
         assertThat(operationListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(operationListResponse.origNetwork()).contains("ORIG")
+        assertThat(operationListResponse.origNetwork()).contains("OPS1")
         assertThat(operationListResponse.pathways().getOrNull())
             .containsExactly(
                 OperationListResponse.Pathway.builder()
@@ -276,7 +276,7 @@ internal class OperationListResponseTest {
                         .build()
                 )
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .addPathway(
                     OperationListResponse.Pathway.builder()
                         .pwDefinition("AGP: 14L, K6, K, G (ANG APRN TO TWY K), GUARD (MAIN)")

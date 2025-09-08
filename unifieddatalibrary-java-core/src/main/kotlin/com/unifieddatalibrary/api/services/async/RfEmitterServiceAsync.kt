@@ -50,8 +50,8 @@ interface RfEmitterServiceAsync {
     ): CompletableFuture<Void?>
 
     /**
-     * Service operation to update an RFEmitter. A specific role is required to perform this service
-     * operation. Please contact the UDL team for assistance.
+     * Service operation to update a single RFEmitter record. A specific role is required to perform
+     * this service operation. Please contact the UDL team for assistance.
      */
     fun update(pathId: String, params: RfEmitterUpdateParams): CompletableFuture<Void?> =
         update(pathId, params, RequestOptions.none())
@@ -96,7 +96,7 @@ interface RfEmitterServiceAsync {
         list(RfEmitterListParams.none(), requestOptions)
 
     /**
-     * Service operation to delete an RFEmitter specified by the passed ID path parameter. A
+     * Service operation to delete a RFEmitter record specified by the passed ID path parameter. A
      * specific role is required to perform this service operation. Please contact the UDL team for
      * assistance.
      */
@@ -153,7 +153,10 @@ interface RfEmitterServiceAsync {
     fun count(requestOptions: RequestOptions): CompletableFuture<String> =
         count(RfEmitterCountParams.none(), requestOptions)
 
-    /** Service operation to get a single RFEmitter by its unique ID passed as a path parameter. */
+    /**
+     * Service operation to get a single RFEmitter record by its unique ID passed as a path
+     * parameter.
+     */
     fun get(id: String): CompletableFuture<RfEmitterGetResponse> =
         get(id, RfEmitterGetParams.none())
 

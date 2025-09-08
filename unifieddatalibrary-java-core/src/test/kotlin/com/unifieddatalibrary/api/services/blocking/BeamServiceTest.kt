@@ -37,7 +37,7 @@ internal class BeamServiceTest {
                 .createdBy("some.user")
                 .notes("Example notes")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
         )
     }
@@ -82,7 +82,7 @@ internal class BeamServiceTest {
                 .createdBy("some.user")
                 .notes("Example notes")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
         )
     }

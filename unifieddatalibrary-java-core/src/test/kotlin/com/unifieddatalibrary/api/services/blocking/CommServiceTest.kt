@@ -106,7 +106,7 @@ internal class CommServiceTest {
                 )
                 .idEntity("ENTITY-ID")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
         )
     }
@@ -154,7 +154,7 @@ internal class CommServiceTest {
                         .description("Description for comm A")
                         .idEntity("ENTITY-ID")
                         .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .build()
                 )
                 .build()

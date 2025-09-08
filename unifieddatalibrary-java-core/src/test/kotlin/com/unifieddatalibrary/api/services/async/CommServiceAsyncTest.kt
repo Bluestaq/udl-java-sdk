@@ -107,7 +107,7 @@ internal class CommServiceAsyncTest {
                     )
                     .idEntity("ENTITY-ID")
                     .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .build()
             )
 
@@ -159,7 +159,7 @@ internal class CommServiceAsyncTest {
                             .description("Description for comm A")
                             .idEntity("ENTITY-ID")
                             .origin("THIRD_PARTY_DATASOURCE")
-                            .origNetwork("ORIG")
+                            .origNetwork("OPS1")
                             .build()
                     )
                     .build()

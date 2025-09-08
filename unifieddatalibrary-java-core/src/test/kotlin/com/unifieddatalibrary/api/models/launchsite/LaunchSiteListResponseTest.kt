@@ -25,7 +25,7 @@ internal class LaunchSiteListResponseTest {
                 .createdBy("some.user")
                 .idSite("a150b3ee-884b-b9ac-60a0-6408b4b16088")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .shortCode("SNMLP")
                 .build()
 
@@ -42,7 +42,7 @@ internal class LaunchSiteListResponseTest {
         assertThat(launchSiteListResponse.createdBy()).contains("some.user")
         assertThat(launchSiteListResponse.idSite()).contains("a150b3ee-884b-b9ac-60a0-6408b4b16088")
         assertThat(launchSiteListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(launchSiteListResponse.origNetwork()).contains("ORIG")
+        assertThat(launchSiteListResponse.origNetwork()).contains("OPS1")
         assertThat(launchSiteListResponse.shortCode()).contains("SNMLP")
     }
 
@@ -62,7 +62,7 @@ internal class LaunchSiteListResponseTest {
                 .createdBy("some.user")
                 .idSite("a150b3ee-884b-b9ac-60a0-6408b4b16088")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .shortCode("SNMLP")
                 .build()
 

@@ -43,7 +43,7 @@ internal class SwirServiceTest {
                         .locationName("AeroTel")
                         .lon(81.18191)
                         .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .origObjectId("WildBlue-1")
                         .addRatioWavelength(1.23)
                         .addRatioWavelength(4.56)

@@ -11,6 +11,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 /** Returns a FileData object representing the folder ID that is visible to the calling user. */
+@Deprecated("deprecated")
 class FolderRetrieveParams
 private constructor(
     private val id: String,

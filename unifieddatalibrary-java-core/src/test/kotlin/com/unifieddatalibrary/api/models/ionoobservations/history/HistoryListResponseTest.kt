@@ -281,7 +281,7 @@ internal class HistoryListResponseTest {
                 .neProfileName("NH")
                 .neProfileVersion(4.32)
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
                 .phase(
                     HistoryListResponse.Phase.builder()
@@ -686,7 +686,7 @@ internal class HistoryListResponseTest {
         assertThat(historyListResponse.neProfileName()).contains("NH")
         assertThat(historyListResponse.neProfileVersion()).contains(4.32)
         assertThat(historyListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(historyListResponse.origNetwork()).contains("ORIG")
+        assertThat(historyListResponse.origNetwork()).contains("OPS1")
         assertThat(historyListResponse.origSensorId()).contains("ORIGSENSOR-ID")
         assertThat(historyListResponse.phase())
             .contains(
@@ -1100,7 +1100,7 @@ internal class HistoryListResponseTest {
                 .neProfileName("NH")
                 .neProfileVersion(4.32)
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
                 .phase(
                     HistoryListResponse.Phase.builder()

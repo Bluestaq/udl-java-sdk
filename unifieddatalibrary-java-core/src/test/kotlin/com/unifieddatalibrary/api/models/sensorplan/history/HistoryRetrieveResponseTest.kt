@@ -268,7 +268,7 @@ internal class HistoryRetrieveResponseTest {
                                                                 )
                                                                 .mode(AntennaDetailsFull.Mode.TX)
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .polarization(45.1)
                                                                 .position("Top")
                                                                 .addSize(0.03)
@@ -293,7 +293,7 @@ internal class HistoryRetrieveResponseTest {
                                                         )
                                                         .createdBy("some.user")
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
                                                                 "2018-01-01T16:00:00.123Z"
@@ -491,7 +491,7 @@ internal class HistoryRetrieveResponseTest {
                                                                 )
                                                                 .model("11212")
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .addTag("PROVIDER_TAG1")
                                                                 .addTag("PROVIDER_TAG2")
                                                                 .technology("Ni-Cd")
@@ -510,7 +510,7 @@ internal class HistoryRetrieveResponseTest {
                                                         )
                                                         .createdBy("some.user")
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
                                                                 "2018-01-01T16:00:00.123Z"
@@ -847,23 +847,35 @@ internal class HistoryRetrieveResponseTest {
                                                         .idEntity("ENTITY-ID")
                                                         .name("BAND_NAME")
                                                         .source("Bluestaq")
-                                                        .id("RFBAND-ID")
+                                                        .id("ad88770b-d824-443f-bdce-5f9e3fa500a9")
                                                         .band("Ku")
                                                         .bandwidth(100.23)
+                                                        .addBandwidthSetting(250.1)
+                                                        .addBandwidthSetting(500.1)
                                                         .beamwidth(45.23)
+                                                        .addBeamwidthSetting(5.1)
+                                                        .addBeamwidthSetting(10.1)
                                                         .centerFreq(1000.23)
                                                         .createdAt(
                                                             OffsetDateTime.parse(
-                                                                "2018-01-01T16:00:00.123Z"
+                                                                "2025-03-05T16:00:00.123Z"
                                                             )
                                                         )
                                                         .createdBy("some.user")
+                                                        .addDelaySetting(2.77)
+                                                        .addDelaySetting(5.64)
                                                         .edgeGain(100.23)
                                                         .eirp(2.23)
                                                         .erp(2.23)
                                                         .freqMax(2000.23)
                                                         .freqMin(50.23)
+                                                        .addFrequencySetting(12250.1)
+                                                        .addFrequencySetting(15000.1)
+                                                        .addGainSetting(2.77)
+                                                        .addGainSetting(5.64)
                                                         .mode(RfBandFull.Mode.TX)
+                                                        .addNoiseSetting(0.00033)
+                                                        .addNoiseSetting(0.0033)
                                                         .origin("THIRD_PARTY_DATASOURCE")
                                                         .origNetwork("OPS1")
                                                         .peakGain(120.23)
@@ -871,7 +883,7 @@ internal class HistoryRetrieveResponseTest {
                                                         .purpose(RfBandFull.Purpose.TTC)
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
-                                                                "2018-01-01T16:00:00.123Z"
+                                                                "2025-03-05T16:00:00.123Z"
                                                             )
                                                         )
                                                         .updatedBy("some.user")
@@ -900,7 +912,7 @@ internal class HistoryRetrieveResponseTest {
                                                         .notes("Example Notes")
                                                         .opsCap(StatusFull.OpsCap.FMC)
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("TST1")
+                                                        .origNetwork("OPS1")
                                                         .state(StatusFull.State.ACTIVE)
                                                         .addSubStatusCollection(
                                                             SubStatusFull.builder()
@@ -921,7 +933,7 @@ internal class HistoryRetrieveResponseTest {
                                                                 )
                                                                 .createdBy("some.user")
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("TST1")
+                                                                .origNetwork("OPS1")
                                                                 .updatedAt(
                                                                     OffsetDateTime.parse(
                                                                         "2018-01-01T16:00:00.123Z"
@@ -1053,7 +1065,7 @@ internal class HistoryRetrieveResponseTest {
                                                         )
                                                         .createdBy("some.user")
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .addSolarArrayDetail(
                                                             SolarArrayDetailsFull.builder()
                                                                 .classificationMarking("U")
@@ -1217,7 +1229,7 @@ internal class HistoryRetrieveResponseTest {
                                                                     "MANUFACTURERORG-ID"
                                                                 )
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .span(123.4)
                                                                 .addTag("TAG1")
                                                                 .addTag("TAG2")
@@ -1297,7 +1309,7 @@ internal class HistoryRetrieveResponseTest {
                                                                 .notes("Example notes")
                                                                 .nozzleExpansionRatio(1.1)
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .oxidizer("Liquid Oxygen")
                                                                 .propellant("Liquid")
                                                                 .seaLevelThrust(1.1)
@@ -1314,7 +1326,7 @@ internal class HistoryRetrieveResponseTest {
                                                                 .build()
                                                         )
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
                                                                 "2018-01-01T16:00:00.123Z"
@@ -1338,7 +1350,7 @@ internal class HistoryRetrieveResponseTest {
                                         .build()
                                 )
                                 .origin("THIRD_PARTY_DATASOURCE")
-                                .origNetwork("ORIG")
+                                .origNetwork("OPS1")
                                 .origObjectId("ORIGOBJECT-ID")
                                 .origSensorId("ORIGSENSOR-ID")
                                 .satNo(101)
@@ -1392,7 +1404,7 @@ internal class HistoryRetrieveResponseTest {
                                 .meanMotionDDot(1.1)
                                 .meanMotionDot(1.1)
                                 .origin("THIRD_PARTY_DATASOURCE")
-                                .origNetwork("ORIG")
+                                .origNetwork("OPS1")
                                 .origObjectId("ORIGOBJECT-ID")
                                 .perigee(1.1)
                                 .period(1.1)
@@ -1451,7 +1463,7 @@ internal class HistoryRetrieveResponseTest {
                         .orbitRegime("GEO")
                         .orientAngle(1.1)
                         .origin("Example source")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .origObjectId("ORIGOBJECT-ID")
                         .origSensorId("ORIGSENSOR-ID")
                         .planIndex(8)
@@ -1520,7 +1532,7 @@ internal class HistoryRetrieveResponseTest {
                                 .obsAvailable(376)
                                 .obsUsed(374)
                                 .origin("THIRD_PARTY_DATASOURCE")
-                                .origNetwork("ORIG")
+                                .origNetwork("OPS1")
                                 .origObjectId("ORIGOBJECT-ID")
                                 .partials("ANALYTIC")
                                 .pedigree("CONJUNCTION")
@@ -1623,7 +1635,7 @@ internal class HistoryRetrieveResponseTest {
                 .idSensor("REF-SENSOR-ID")
                 .name("EXAMPLE NAME")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
                 .purpose("Example purpose")
                 .reqTotal(2)
@@ -1852,7 +1864,7 @@ internal class HistoryRetrieveResponseTest {
                                                             .manufacturerOrgId("MANUFACTUREORG-ID")
                                                             .mode(AntennaDetailsFull.Mode.TX)
                                                             .origin("THIRD_PARTY_DATASOURCE")
-                                                            .origNetwork("ORIG")
+                                                            .origNetwork("OPS1")
                                                             .polarization(45.1)
                                                             .position("Top")
                                                             .addSize(0.03)
@@ -1877,7 +1889,7 @@ internal class HistoryRetrieveResponseTest {
                                                     )
                                                     .createdBy("some.user")
                                                     .origin("THIRD_PARTY_DATASOURCE")
-                                                    .origNetwork("ORIG")
+                                                    .origNetwork("OPS1")
                                                     .updatedAt(
                                                         OffsetDateTime.parse(
                                                             "2018-01-01T16:00:00.123Z"
@@ -2064,7 +2076,7 @@ internal class HistoryRetrieveResponseTest {
                                                             .manufacturerOrgId("MANUFACTURERORG-ID")
                                                             .model("11212")
                                                             .origin("THIRD_PARTY_DATASOURCE")
-                                                            .origNetwork("ORIG")
+                                                            .origNetwork("OPS1")
                                                             .addTag("PROVIDER_TAG1")
                                                             .addTag("PROVIDER_TAG2")
                                                             .technology("Ni-Cd")
@@ -2083,7 +2095,7 @@ internal class HistoryRetrieveResponseTest {
                                                     )
                                                     .createdBy("some.user")
                                                     .origin("THIRD_PARTY_DATASOURCE")
-                                                    .origNetwork("ORIG")
+                                                    .origNetwork("OPS1")
                                                     .updatedAt(
                                                         OffsetDateTime.parse(
                                                             "2018-01-01T16:00:00.123Z"
@@ -2406,23 +2418,35 @@ internal class HistoryRetrieveResponseTest {
                                                     .idEntity("ENTITY-ID")
                                                     .name("BAND_NAME")
                                                     .source("Bluestaq")
-                                                    .id("RFBAND-ID")
+                                                    .id("ad88770b-d824-443f-bdce-5f9e3fa500a9")
                                                     .band("Ku")
                                                     .bandwidth(100.23)
+                                                    .addBandwidthSetting(250.1)
+                                                    .addBandwidthSetting(500.1)
                                                     .beamwidth(45.23)
+                                                    .addBeamwidthSetting(5.1)
+                                                    .addBeamwidthSetting(10.1)
                                                     .centerFreq(1000.23)
                                                     .createdAt(
                                                         OffsetDateTime.parse(
-                                                            "2018-01-01T16:00:00.123Z"
+                                                            "2025-03-05T16:00:00.123Z"
                                                         )
                                                     )
                                                     .createdBy("some.user")
+                                                    .addDelaySetting(2.77)
+                                                    .addDelaySetting(5.64)
                                                     .edgeGain(100.23)
                                                     .eirp(2.23)
                                                     .erp(2.23)
                                                     .freqMax(2000.23)
                                                     .freqMin(50.23)
+                                                    .addFrequencySetting(12250.1)
+                                                    .addFrequencySetting(15000.1)
+                                                    .addGainSetting(2.77)
+                                                    .addGainSetting(5.64)
                                                     .mode(RfBandFull.Mode.TX)
+                                                    .addNoiseSetting(0.00033)
+                                                    .addNoiseSetting(0.0033)
                                                     .origin("THIRD_PARTY_DATASOURCE")
                                                     .origNetwork("OPS1")
                                                     .peakGain(120.23)
@@ -2430,7 +2454,7 @@ internal class HistoryRetrieveResponseTest {
                                                     .purpose(RfBandFull.Purpose.TTC)
                                                     .updatedAt(
                                                         OffsetDateTime.parse(
-                                                            "2018-01-01T16:00:00.123Z"
+                                                            "2025-03-05T16:00:00.123Z"
                                                         )
                                                     )
                                                     .updatedBy("some.user")
@@ -2459,7 +2483,7 @@ internal class HistoryRetrieveResponseTest {
                                                     .notes("Example Notes")
                                                     .opsCap(StatusFull.OpsCap.FMC)
                                                     .origin("THIRD_PARTY_DATASOURCE")
-                                                    .origNetwork("TST1")
+                                                    .origNetwork("OPS1")
                                                     .state(StatusFull.State.ACTIVE)
                                                     .addSubStatusCollection(
                                                         SubStatusFull.builder()
@@ -2478,7 +2502,7 @@ internal class HistoryRetrieveResponseTest {
                                                             )
                                                             .createdBy("some.user")
                                                             .origin("THIRD_PARTY_DATASOURCE")
-                                                            .origNetwork("TST1")
+                                                            .origNetwork("OPS1")
                                                             .updatedAt(
                                                                 OffsetDateTime.parse(
                                                                     "2018-01-01T16:00:00.123Z"
@@ -2608,7 +2632,7 @@ internal class HistoryRetrieveResponseTest {
                                                     )
                                                     .createdBy("some.user")
                                                     .origin("THIRD_PARTY_DATASOURCE")
-                                                    .origNetwork("ORIG")
+                                                    .origNetwork("OPS1")
                                                     .addSolarArrayDetail(
                                                         SolarArrayDetailsFull.builder()
                                                             .classificationMarking("U")
@@ -2760,7 +2784,7 @@ internal class HistoryRetrieveResponseTest {
                                                             )
                                                             .manufacturerOrgId("MANUFACTURERORG-ID")
                                                             .origin("THIRD_PARTY_DATASOURCE")
-                                                            .origNetwork("ORIG")
+                                                            .origNetwork("OPS1")
                                                             .span(123.4)
                                                             .addTag("TAG1")
                                                             .addTag("TAG2")
@@ -2838,7 +2862,7 @@ internal class HistoryRetrieveResponseTest {
                                                             .notes("Example notes")
                                                             .nozzleExpansionRatio(1.1)
                                                             .origin("THIRD_PARTY_DATASOURCE")
-                                                            .origNetwork("ORIG")
+                                                            .origNetwork("OPS1")
                                                             .oxidizer("Liquid Oxygen")
                                                             .propellant("Liquid")
                                                             .seaLevelThrust(1.1)
@@ -2855,7 +2879,7 @@ internal class HistoryRetrieveResponseTest {
                                                             .build()
                                                     )
                                                     .origin("THIRD_PARTY_DATASOURCE")
-                                                    .origNetwork("ORIG")
+                                                    .origNetwork("OPS1")
                                                     .updatedAt(
                                                         OffsetDateTime.parse(
                                                             "2018-01-01T16:00:00.123Z"
@@ -2879,7 +2903,7 @@ internal class HistoryRetrieveResponseTest {
                                     .build()
                             )
                             .origin("THIRD_PARTY_DATASOURCE")
-                            .origNetwork("ORIG")
+                            .origNetwork("OPS1")
                             .origObjectId("ORIGOBJECT-ID")
                             .origSensorId("ORIGSENSOR-ID")
                             .satNo(101)
@@ -2931,7 +2955,7 @@ internal class HistoryRetrieveResponseTest {
                             .meanMotionDDot(1.1)
                             .meanMotionDot(1.1)
                             .origin("THIRD_PARTY_DATASOURCE")
-                            .origNetwork("ORIG")
+                            .origNetwork("OPS1")
                             .origObjectId("ORIGOBJECT-ID")
                             .perigee(1.1)
                             .period(1.1)
@@ -2989,7 +3013,7 @@ internal class HistoryRetrieveResponseTest {
                     .orbitRegime("GEO")
                     .orientAngle(1.1)
                     .origin("Example source")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .origObjectId("ORIGOBJECT-ID")
                     .origSensorId("ORIGSENSOR-ID")
                     .planIndex(8)
@@ -3057,7 +3081,7 @@ internal class HistoryRetrieveResponseTest {
                             .obsAvailable(376)
                             .obsUsed(374)
                             .origin("THIRD_PARTY_DATASOURCE")
-                            .origNetwork("ORIG")
+                            .origNetwork("OPS1")
                             .origObjectId("ORIGOBJECT-ID")
                             .partials("ANALYTIC")
                             .pedigree("CONJUNCTION")
@@ -3160,7 +3184,7 @@ internal class HistoryRetrieveResponseTest {
         assertThat(historyRetrieveResponse.idSensor()).contains("REF-SENSOR-ID")
         assertThat(historyRetrieveResponse.name()).contains("EXAMPLE NAME")
         assertThat(historyRetrieveResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(historyRetrieveResponse.origNetwork()).contains("ORIG")
+        assertThat(historyRetrieveResponse.origNetwork()).contains("OPS1")
         assertThat(historyRetrieveResponse.origSensorId()).contains("ORIGSENSOR-ID")
         assertThat(historyRetrieveResponse.purpose()).contains("Example purpose")
         assertThat(historyRetrieveResponse.reqTotal()).contains(2)
@@ -3407,7 +3431,7 @@ internal class HistoryRetrieveResponseTest {
                                                                 )
                                                                 .mode(AntennaDetailsFull.Mode.TX)
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .polarization(45.1)
                                                                 .position("Top")
                                                                 .addSize(0.03)
@@ -3432,7 +3456,7 @@ internal class HistoryRetrieveResponseTest {
                                                         )
                                                         .createdBy("some.user")
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
                                                                 "2018-01-01T16:00:00.123Z"
@@ -3630,7 +3654,7 @@ internal class HistoryRetrieveResponseTest {
                                                                 )
                                                                 .model("11212")
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .addTag("PROVIDER_TAG1")
                                                                 .addTag("PROVIDER_TAG2")
                                                                 .technology("Ni-Cd")
@@ -3649,7 +3673,7 @@ internal class HistoryRetrieveResponseTest {
                                                         )
                                                         .createdBy("some.user")
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
                                                                 "2018-01-01T16:00:00.123Z"
@@ -3986,23 +4010,35 @@ internal class HistoryRetrieveResponseTest {
                                                         .idEntity("ENTITY-ID")
                                                         .name("BAND_NAME")
                                                         .source("Bluestaq")
-                                                        .id("RFBAND-ID")
+                                                        .id("ad88770b-d824-443f-bdce-5f9e3fa500a9")
                                                         .band("Ku")
                                                         .bandwidth(100.23)
+                                                        .addBandwidthSetting(250.1)
+                                                        .addBandwidthSetting(500.1)
                                                         .beamwidth(45.23)
+                                                        .addBeamwidthSetting(5.1)
+                                                        .addBeamwidthSetting(10.1)
                                                         .centerFreq(1000.23)
                                                         .createdAt(
                                                             OffsetDateTime.parse(
-                                                                "2018-01-01T16:00:00.123Z"
+                                                                "2025-03-05T16:00:00.123Z"
                                                             )
                                                         )
                                                         .createdBy("some.user")
+                                                        .addDelaySetting(2.77)
+                                                        .addDelaySetting(5.64)
                                                         .edgeGain(100.23)
                                                         .eirp(2.23)
                                                         .erp(2.23)
                                                         .freqMax(2000.23)
                                                         .freqMin(50.23)
+                                                        .addFrequencySetting(12250.1)
+                                                        .addFrequencySetting(15000.1)
+                                                        .addGainSetting(2.77)
+                                                        .addGainSetting(5.64)
                                                         .mode(RfBandFull.Mode.TX)
+                                                        .addNoiseSetting(0.00033)
+                                                        .addNoiseSetting(0.0033)
                                                         .origin("THIRD_PARTY_DATASOURCE")
                                                         .origNetwork("OPS1")
                                                         .peakGain(120.23)
@@ -4010,7 +4046,7 @@ internal class HistoryRetrieveResponseTest {
                                                         .purpose(RfBandFull.Purpose.TTC)
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
-                                                                "2018-01-01T16:00:00.123Z"
+                                                                "2025-03-05T16:00:00.123Z"
                                                             )
                                                         )
                                                         .updatedBy("some.user")
@@ -4039,7 +4075,7 @@ internal class HistoryRetrieveResponseTest {
                                                         .notes("Example Notes")
                                                         .opsCap(StatusFull.OpsCap.FMC)
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("TST1")
+                                                        .origNetwork("OPS1")
                                                         .state(StatusFull.State.ACTIVE)
                                                         .addSubStatusCollection(
                                                             SubStatusFull.builder()
@@ -4060,7 +4096,7 @@ internal class HistoryRetrieveResponseTest {
                                                                 )
                                                                 .createdBy("some.user")
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("TST1")
+                                                                .origNetwork("OPS1")
                                                                 .updatedAt(
                                                                     OffsetDateTime.parse(
                                                                         "2018-01-01T16:00:00.123Z"
@@ -4192,7 +4228,7 @@ internal class HistoryRetrieveResponseTest {
                                                         )
                                                         .createdBy("some.user")
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .addSolarArrayDetail(
                                                             SolarArrayDetailsFull.builder()
                                                                 .classificationMarking("U")
@@ -4356,7 +4392,7 @@ internal class HistoryRetrieveResponseTest {
                                                                     "MANUFACTURERORG-ID"
                                                                 )
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .span(123.4)
                                                                 .addTag("TAG1")
                                                                 .addTag("TAG2")
@@ -4436,7 +4472,7 @@ internal class HistoryRetrieveResponseTest {
                                                                 .notes("Example notes")
                                                                 .nozzleExpansionRatio(1.1)
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .oxidizer("Liquid Oxygen")
                                                                 .propellant("Liquid")
                                                                 .seaLevelThrust(1.1)
@@ -4453,7 +4489,7 @@ internal class HistoryRetrieveResponseTest {
                                                                 .build()
                                                         )
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
                                                                 "2018-01-01T16:00:00.123Z"
@@ -4477,7 +4513,7 @@ internal class HistoryRetrieveResponseTest {
                                         .build()
                                 )
                                 .origin("THIRD_PARTY_DATASOURCE")
-                                .origNetwork("ORIG")
+                                .origNetwork("OPS1")
                                 .origObjectId("ORIGOBJECT-ID")
                                 .origSensorId("ORIGSENSOR-ID")
                                 .satNo(101)
@@ -4531,7 +4567,7 @@ internal class HistoryRetrieveResponseTest {
                                 .meanMotionDDot(1.1)
                                 .meanMotionDot(1.1)
                                 .origin("THIRD_PARTY_DATASOURCE")
-                                .origNetwork("ORIG")
+                                .origNetwork("OPS1")
                                 .origObjectId("ORIGOBJECT-ID")
                                 .perigee(1.1)
                                 .period(1.1)
@@ -4590,7 +4626,7 @@ internal class HistoryRetrieveResponseTest {
                         .orbitRegime("GEO")
                         .orientAngle(1.1)
                         .origin("Example source")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .origObjectId("ORIGOBJECT-ID")
                         .origSensorId("ORIGSENSOR-ID")
                         .planIndex(8)
@@ -4659,7 +4695,7 @@ internal class HistoryRetrieveResponseTest {
                                 .obsAvailable(376)
                                 .obsUsed(374)
                                 .origin("THIRD_PARTY_DATASOURCE")
-                                .origNetwork("ORIG")
+                                .origNetwork("OPS1")
                                 .origObjectId("ORIGOBJECT-ID")
                                 .partials("ANALYTIC")
                                 .pedigree("CONJUNCTION")
@@ -4762,7 +4798,7 @@ internal class HistoryRetrieveResponseTest {
                 .idSensor("REF-SENSOR-ID")
                 .name("EXAMPLE NAME")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
                 .purpose("Example purpose")
                 .reqTotal(2)

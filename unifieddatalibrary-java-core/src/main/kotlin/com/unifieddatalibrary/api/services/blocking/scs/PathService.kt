@@ -28,10 +28,12 @@ interface PathService {
      * that are missing. A specific role is required to perform this service operation. Please
      * contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun createWithFile(fileContent: String, params: PathCreateWithFileParams): String =
         createWithFile(fileContent, params, RequestOptions.none())
 
     /** @see createWithFile */
+    @Deprecated("deprecated")
     fun createWithFile(
         fileContent: String,
         params: PathCreateWithFileParams,
@@ -39,10 +41,12 @@ interface PathService {
     ): String = createWithFile(params.toBuilder().fileContent(fileContent).build(), requestOptions)
 
     /** @see createWithFile */
+    @Deprecated("deprecated")
     fun createWithFile(params: PathCreateWithFileParams): String =
         createWithFile(params, RequestOptions.none())
 
     /** @see createWithFile */
+    @Deprecated("deprecated")
     fun createWithFile(
         params: PathCreateWithFileParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -62,6 +66,7 @@ interface PathService {
          * Returns a raw HTTP response for `post /scs/path`, but is otherwise the same as
          * [PathService.createWithFile].
          */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun createWithFile(
             fileContent: String,
@@ -69,6 +74,7 @@ interface PathService {
         ): HttpResponseFor<String> = createWithFile(fileContent, params, RequestOptions.none())
 
         /** @see createWithFile */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun createWithFile(
             fileContent: String,
@@ -78,11 +84,13 @@ interface PathService {
             createWithFile(params.toBuilder().fileContent(fileContent).build(), requestOptions)
 
         /** @see createWithFile */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun createWithFile(params: PathCreateWithFileParams): HttpResponseFor<String> =
             createWithFile(params, RequestOptions.none())
 
         /** @see createWithFile */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun createWithFile(
             params: PathCreateWithFileParams,

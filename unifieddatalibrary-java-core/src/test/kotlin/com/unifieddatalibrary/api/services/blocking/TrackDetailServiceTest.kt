@@ -176,7 +176,7 @@ internal class TrackDetailServiceTest {
                         .objType("TRACKED")
                         .offPosInd("ON")
                         .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .origXref("INT")
                         .oSuffix("AA125")
                         .pif("0137")

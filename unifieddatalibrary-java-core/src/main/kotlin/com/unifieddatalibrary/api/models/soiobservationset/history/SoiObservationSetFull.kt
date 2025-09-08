@@ -5705,7 +5705,7 @@ private constructor(
         fun pulseBandwidth(): Optional<Double> = pulseBandwidth.getOptional("pulseBandwidth")
 
         /**
-         * Array of the range acceleratons of target in kilometers per second squared. The 'tovs'
+         * Array of the range accelerations of target in kilometers per second squared. The 'tovs'
          * and 'rangeAccels' arrays must match in size, if 'rangeAccels' is provided. If there is an
          * associated image the range acceleration is assumed to be at image center.
          *
@@ -6870,7 +6870,7 @@ private constructor(
             }
 
             /**
-             * Array of the range acceleratons of target in kilometers per second squared. The
+             * Array of the range accelerations of target in kilometers per second squared. The
              * 'tovs' and 'rangeAccels' arrays must match in size, if 'rangeAccels' is provided. If
              * there is an associated image the range acceleration is assumed to be at image center.
              */

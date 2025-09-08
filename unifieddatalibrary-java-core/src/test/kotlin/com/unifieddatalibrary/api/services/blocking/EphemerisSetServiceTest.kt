@@ -96,7 +96,7 @@ internal class EphemerisSetServiceTest {
                 .interpolationDegree(5)
                 .lunarSolar(false)
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .origObjectId("ORIGOBJECT-ID")
                 .pedigree("PROPAGATED")
                 .referenceFrame(EphemerisSetCreateParams.ReferenceFrame.J2000)

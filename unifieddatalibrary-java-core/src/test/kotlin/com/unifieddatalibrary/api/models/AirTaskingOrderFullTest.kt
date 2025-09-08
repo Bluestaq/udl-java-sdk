@@ -106,8 +106,7 @@ internal class AirTaskingOrderFullTest {
                         .build()
                 )
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
-                .rawFileUri("Example URI")
+                .origNetwork("OPS1")
                 .sourceDl("AXE")
                 .build()
 
@@ -208,8 +207,7 @@ internal class AirTaskingOrderFullTest {
                     .build()
             )
         assertThat(airTaskingOrderFull.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(airTaskingOrderFull.origNetwork()).contains("ORIG")
-        assertThat(airTaskingOrderFull.rawFileUri()).contains("Example URI")
+        assertThat(airTaskingOrderFull.origNetwork()).contains("OPS1")
         assertThat(airTaskingOrderFull.sourceDl()).contains("AXE")
     }
 
@@ -309,8 +307,7 @@ internal class AirTaskingOrderFullTest {
                         .build()
                 )
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
-                .rawFileUri("Example URI")
+                .origNetwork("OPS1")
                 .sourceDl("AXE")
                 .build()
 

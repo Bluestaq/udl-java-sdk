@@ -7,7 +7,6 @@ import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.FileData
-import com.unifieddatalibrary.api.models.scs.ScAggregateDocTypeParams
 import com.unifieddatalibrary.api.models.scs.ScAllowableFileExtensionsParams
 import com.unifieddatalibrary.api.models.scs.ScAllowableFileMimesParams
 import com.unifieddatalibrary.api.models.scs.ScCopyParams
@@ -18,7 +17,6 @@ import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
-import com.unifieddatalibrary.api.models.scs.ScUpdateTagsParams
 import com.unifieddatalibrary.api.services.async.scs.ClassificationMarkingServiceAsync
 import com.unifieddatalibrary.api.services.async.scs.FileMetadataServiceAsync
 import com.unifieddatalibrary.api.services.async.scs.FileServiceAsync
@@ -65,35 +63,18 @@ interface ScServiceAsync {
      * calling user. A specific role is required to perform this service operation. Please contact
      * the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun delete(params: ScDeleteParams): CompletableFuture<Void?> =
         delete(params, RequestOptions.none())
 
     /** @see delete */
+    @Deprecated("deprecated")
     fun delete(
         params: ScDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
-    /** Returns a map of document types and counts in root folder. */
-    fun aggregateDocType(): CompletableFuture<List<String>> =
-        aggregateDocType(ScAggregateDocTypeParams.none())
-
-    /** @see aggregateDocType */
-    fun aggregateDocType(
-        params: ScAggregateDocTypeParams = ScAggregateDocTypeParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<String>>
-
-    /** @see aggregateDocType */
-    fun aggregateDocType(
-        params: ScAggregateDocTypeParams = ScAggregateDocTypeParams.none()
-    ): CompletableFuture<List<String>> = aggregateDocType(params, RequestOptions.none())
-
-    /** @see aggregateDocType */
-    fun aggregateDocType(requestOptions: RequestOptions): CompletableFuture<List<String>> =
-        aggregateDocType(ScAggregateDocTypeParams.none(), requestOptions)
-
-    /** Returns a list of allowable file extensions for upload. */
+    /** Returns a list of the allowed filename extensions. */
     fun allowableFileExtensions(): CompletableFuture<List<String>> =
         allowableFileExtensions(ScAllowableFileExtensionsParams.none())
 
@@ -112,7 +93,7 @@ interface ScServiceAsync {
     fun allowableFileExtensions(requestOptions: RequestOptions): CompletableFuture<List<String>> =
         allowableFileExtensions(ScAllowableFileExtensionsParams.none(), requestOptions)
 
-    /** Returns a list of allowable file mime types for upload. */
+    /** Returns a list of the allowed file upload mime types. */
     fun allowableFileMimes(): CompletableFuture<List<String>> =
         allowableFileMimes(ScAllowableFileMimesParams.none())
 
@@ -135,9 +116,11 @@ interface ScServiceAsync {
      * operation to copy folders or files. A specific role is required to perform this service
      * operation. Please contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun copy(params: ScCopyParams): CompletableFuture<String> = copy(params, RequestOptions.none())
 
     /** @see copy */
+    @Deprecated("deprecated")
     fun copy(
         params: ScCopyParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -167,10 +150,12 @@ interface ScServiceAsync {
      * Operation to upload a file. A specific role is required to perform this service operation.
      * Please contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun fileUpload(fileContent: String, params: ScFileUploadParams): CompletableFuture<String> =
         fileUpload(fileContent, params, RequestOptions.none())
 
     /** @see fileUpload */
+    @Deprecated("deprecated")
     fun fileUpload(
         fileContent: String,
         params: ScFileUploadParams,
@@ -179,10 +164,12 @@ interface ScServiceAsync {
         fileUpload(params.toBuilder().fileContent(fileContent).build(), requestOptions)
 
     /** @see fileUpload */
+    @Deprecated("deprecated")
     fun fileUpload(params: ScFileUploadParams): CompletableFuture<String> =
         fileUpload(params, RequestOptions.none())
 
     /** @see fileUpload */
+    @Deprecated("deprecated")
     fun fileUpload(
         params: ScFileUploadParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -192,9 +179,11 @@ interface ScServiceAsync {
      * operation to move folders or files. A specific role is required to perform this service
      * operation. Please contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun move(params: ScMoveParams): CompletableFuture<String> = move(params, RequestOptions.none())
 
     /** @see move */
+    @Deprecated("deprecated")
     fun move(
         params: ScMoveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -204,34 +193,28 @@ interface ScServiceAsync {
      * Operation to rename folders or files. A specific role is required to perform this service
      * operation. Please contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun rename(params: ScRenameParams): CompletableFuture<Void?> =
         rename(params, RequestOptions.none())
 
     /** @see rename */
+    @Deprecated("deprecated")
     fun rename(
         params: ScRenameParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
     /** Search for files by metadata and/or text in file content. */
+    @Deprecated("deprecated")
     fun search(params: ScSearchParams): CompletableFuture<List<FileData>> =
         search(params, RequestOptions.none())
 
     /** @see search */
+    @Deprecated("deprecated")
     fun search(
         params: ScSearchParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<List<FileData>>
-
-    /** Updates tags for given folder. */
-    fun updateTags(params: ScUpdateTagsParams): CompletableFuture<Void?> =
-        updateTags(params, RequestOptions.none())
-
-    /** @see updateTags */
-    fun updateTags(
-        params: ScUpdateTagsParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<Void?>
 
     /** A view of [ScServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -263,39 +246,16 @@ interface ScServiceAsync {
          * Returns a raw HTTP response for `delete /scs/delete`, but is otherwise the same as
          * [ScServiceAsync.delete].
          */
+        @Deprecated("deprecated")
         fun delete(params: ScDeleteParams): CompletableFuture<HttpResponse> =
             delete(params, RequestOptions.none())
 
         /** @see delete */
+        @Deprecated("deprecated")
         fun delete(
             params: ScDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
-
-        /**
-         * Returns a raw HTTP response for `get /scs/aggregateDocType`, but is otherwise the same as
-         * [ScServiceAsync.aggregateDocType].
-         */
-        fun aggregateDocType(): CompletableFuture<HttpResponseFor<List<String>>> =
-            aggregateDocType(ScAggregateDocTypeParams.none())
-
-        /** @see aggregateDocType */
-        fun aggregateDocType(
-            params: ScAggregateDocTypeParams = ScAggregateDocTypeParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<String>>>
-
-        /** @see aggregateDocType */
-        fun aggregateDocType(
-            params: ScAggregateDocTypeParams = ScAggregateDocTypeParams.none()
-        ): CompletableFuture<HttpResponseFor<List<String>>> =
-            aggregateDocType(params, RequestOptions.none())
-
-        /** @see aggregateDocType */
-        fun aggregateDocType(
-            requestOptions: RequestOptions
-        ): CompletableFuture<HttpResponseFor<List<String>>> =
-            aggregateDocType(ScAggregateDocTypeParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /scs/allowableFileExtensions`, but is otherwise the
@@ -351,10 +311,12 @@ interface ScServiceAsync {
          * Returns a raw HTTP response for `post /scs/copy`, but is otherwise the same as
          * [ScServiceAsync.copy].
          */
+        @Deprecated("deprecated")
         fun copy(params: ScCopyParams): CompletableFuture<HttpResponseFor<String>> =
             copy(params, RequestOptions.none())
 
         /** @see copy */
+        @Deprecated("deprecated")
         fun copy(
             params: ScCopyParams,
             requestOptions: RequestOptions = RequestOptions.none(),
@@ -390,6 +352,7 @@ interface ScServiceAsync {
          * Returns a raw HTTP response for `post /scs/file`, but is otherwise the same as
          * [ScServiceAsync.fileUpload].
          */
+        @Deprecated("deprecated")
         fun fileUpload(
             fileContent: String,
             params: ScFileUploadParams,
@@ -397,6 +360,7 @@ interface ScServiceAsync {
             fileUpload(fileContent, params, RequestOptions.none())
 
         /** @see fileUpload */
+        @Deprecated("deprecated")
         fun fileUpload(
             fileContent: String,
             params: ScFileUploadParams,
@@ -405,10 +369,12 @@ interface ScServiceAsync {
             fileUpload(params.toBuilder().fileContent(fileContent).build(), requestOptions)
 
         /** @see fileUpload */
+        @Deprecated("deprecated")
         fun fileUpload(params: ScFileUploadParams): CompletableFuture<HttpResponseFor<String>> =
             fileUpload(params, RequestOptions.none())
 
         /** @see fileUpload */
+        @Deprecated("deprecated")
         fun fileUpload(
             params: ScFileUploadParams,
             requestOptions: RequestOptions = RequestOptions.none(),
@@ -418,10 +384,12 @@ interface ScServiceAsync {
          * Returns a raw HTTP response for `put /scs/move`, but is otherwise the same as
          * [ScServiceAsync.move].
          */
+        @Deprecated("deprecated")
         fun move(params: ScMoveParams): CompletableFuture<HttpResponseFor<String>> =
             move(params, RequestOptions.none())
 
         /** @see move */
+        @Deprecated("deprecated")
         fun move(
             params: ScMoveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
@@ -431,10 +399,12 @@ interface ScServiceAsync {
          * Returns a raw HTTP response for `put /scs/rename`, but is otherwise the same as
          * [ScServiceAsync.rename].
          */
+        @Deprecated("deprecated")
         fun rename(params: ScRenameParams): CompletableFuture<HttpResponse> =
             rename(params, RequestOptions.none())
 
         /** @see rename */
+        @Deprecated("deprecated")
         fun rename(
             params: ScRenameParams,
             requestOptions: RequestOptions = RequestOptions.none(),
@@ -444,26 +414,15 @@ interface ScServiceAsync {
          * Returns a raw HTTP response for `post /scs/search`, but is otherwise the same as
          * [ScServiceAsync.search].
          */
+        @Deprecated("deprecated")
         fun search(params: ScSearchParams): CompletableFuture<HttpResponseFor<List<FileData>>> =
             search(params, RequestOptions.none())
 
         /** @see search */
+        @Deprecated("deprecated")
         fun search(
             params: ScSearchParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<List<FileData>>>
-
-        /**
-         * Returns a raw HTTP response for `put /scs/updateTagsForFilesInFolder`, but is otherwise
-         * the same as [ScServiceAsync.updateTags].
-         */
-        fun updateTags(params: ScUpdateTagsParams): CompletableFuture<HttpResponse> =
-            updateTags(params, RequestOptions.none())
-
-        /** @see updateTags */
-        fun updateTags(
-            params: ScUpdateTagsParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponse>
     }
 }

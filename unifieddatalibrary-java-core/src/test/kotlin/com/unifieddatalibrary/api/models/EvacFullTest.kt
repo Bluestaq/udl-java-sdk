@@ -145,7 +145,7 @@ internal class EvacFullTest {
                 .numWia(3)
                 .obstaclesRemarks("N/A")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .pickupAlt(30.1234)
                 .pickupTime(OffsetDateTime.parse("2021-10-20T16:00:00.123Z"))
                 .addRelatedDoc(
@@ -306,7 +306,7 @@ internal class EvacFullTest {
         assertThat(evacFull.numWia()).contains(3)
         assertThat(evacFull.obstaclesRemarks()).contains("N/A")
         assertThat(evacFull.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(evacFull.origNetwork()).contains("ORIG")
+        assertThat(evacFull.origNetwork()).contains("OPS1")
         assertThat(evacFull.pickupAlt()).contains(30.1234)
         assertThat(evacFull.pickupTime()).contains(OffsetDateTime.parse("2021-10-20T16:00:00.123Z"))
         assertThat(evacFull.relatedDocs().getOrNull())
@@ -471,7 +471,7 @@ internal class EvacFullTest {
                 .numWia(3)
                 .obstaclesRemarks("N/A")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .pickupAlt(30.1234)
                 .pickupTime(OffsetDateTime.parse("2021-10-20T16:00:00.123Z"))
                 .addRelatedDoc(

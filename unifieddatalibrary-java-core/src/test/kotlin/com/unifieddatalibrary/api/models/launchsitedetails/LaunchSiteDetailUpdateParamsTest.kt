@@ -43,7 +43,7 @@ internal class LaunchSiteDetailUpdateParamsTest {
                     .build()
             )
             .origin("THIRD_PARTY_DATASOURCE")
-            .origNetwork("ORIG")
+            .origNetwork("OPS1")
             .build()
     }
 
@@ -97,7 +97,7 @@ internal class LaunchSiteDetailUpdateParamsTest {
                         .build()
                 )
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         val body = params._body()
@@ -133,7 +133,7 @@ internal class LaunchSiteDetailUpdateParamsTest {
                     .build()
             )
         assertThat(body.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(body.origNetwork()).contains("ORIG")
+        assertThat(body.origNetwork()).contains("OPS1")
     }
 
     @Test

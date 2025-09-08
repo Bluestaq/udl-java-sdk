@@ -63,7 +63,7 @@ internal class AisObjectServiceAsyncTest {
                             .nextPortGuid("0Z8Q")
                             .nextPortLocode("USCLE")
                             .origin("THIRD_PARTY_DATASOURCE")
-                            .origNetwork("ORIG")
+                            .origNetwork("OPS1")
                             .posDeviceType("GPS")
                             .posHiAccuracy(true)
                             .posHiLatency(true)

@@ -16,6 +16,7 @@ import kotlin.jvm.optionals.getOrNull
  * Creates a new folder that is passed as part of the path. A specific role is required to perform
  * this service operation. Please contact the UDL team for assistance.
  */
+@Deprecated("deprecated")
 class FolderCreateParams
 private constructor(
     private val id: String,

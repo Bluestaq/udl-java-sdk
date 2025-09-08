@@ -597,16 +597,6 @@ private constructor(
     fun quality(): Optional<String> = body.quality()
 
     /**
-     * Optional URI location in the document repository of the raw file parsed by the system to
-     * produce this record. To download the raw file, prepend https://udl-hostname/scs/download?id=
-     * to this value.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun rawFileUri(): Optional<String> = body.rawFileUri()
-
-    /**
      * Date this obstacle data was revised, in ISO 8601 date-only format (ex. YYYY-MM-DD).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
@@ -1158,13 +1148,6 @@ private constructor(
      * Unlike [quality], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _quality(): JsonField<String> = body._quality()
-
-    /**
-     * Returns the raw JSON value of [rawFileUri].
-     *
-     * Unlike [rawFileUri], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    fun _rawFileUri(): JsonField<String> = body._rawFileUri()
 
     /**
      * Returns the raw JSON value of [revDate].
@@ -2247,22 +2230,6 @@ private constructor(
          */
         fun quality(quality: JsonField<String>) = apply { body.quality(quality) }
 
-        /**
-         * Optional URI location in the document repository of the raw file parsed by the system to
-         * produce this record. To download the raw file, prepend
-         * https://udl-hostname/scs/download?id= to this value.
-         */
-        fun rawFileUri(rawFileUri: String) = apply { body.rawFileUri(rawFileUri) }
-
-        /**
-         * Sets [Builder.rawFileUri] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.rawFileUri] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
-         */
-        fun rawFileUri(rawFileUri: JsonField<String>) = apply { body.rawFileUri(rawFileUri) }
-
         /** Date this obstacle data was revised, in ISO 8601 date-only format (ex. YYYY-MM-DD). */
         fun revDate(revDate: LocalDate) = apply { body.revDate(revDate) }
 
@@ -2664,7 +2631,6 @@ private constructor(
         private val producer: JsonField<String>,
         private val provinceCode: JsonField<String>,
         private val quality: JsonField<String>,
-        private val rawFileUri: JsonField<String>,
         private val revDate: JsonField<LocalDate>,
         private val segEndPoint: JsonField<Int>,
         private val segNum: JsonField<Int>,
@@ -2850,9 +2816,6 @@ private constructor(
             @ExcludeMissing
             provinceCode: JsonField<String> = JsonMissing.of(),
             @JsonProperty("quality") @ExcludeMissing quality: JsonField<String> = JsonMissing.of(),
-            @JsonProperty("rawFileURI")
-            @ExcludeMissing
-            rawFileUri: JsonField<String> = JsonMissing.of(),
             @JsonProperty("revDate")
             @ExcludeMissing
             revDate: JsonField<LocalDate> = JsonMissing.of(),
@@ -2950,7 +2913,6 @@ private constructor(
             producer,
             provinceCode,
             quality,
-            rawFileUri,
             revDate,
             segEndPoint,
             segNum,
@@ -3539,16 +3501,6 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun quality(): Optional<String> = quality.getOptional("quality")
-
-        /**
-         * Optional URI location in the document repository of the raw file parsed by the system to
-         * produce this record. To download the raw file, prepend
-         * https://udl-hostname/scs/download?id= to this value.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun rawFileUri(): Optional<String> = rawFileUri.getOptional("rawFileURI")
 
         /**
          * Date this obstacle data was revised, in ISO 8601 date-only format (ex. YYYY-MM-DD).
@@ -4198,15 +4150,6 @@ private constructor(
         @JsonProperty("quality") @ExcludeMissing fun _quality(): JsonField<String> = quality
 
         /**
-         * Returns the raw JSON value of [rawFileUri].
-         *
-         * Unlike [rawFileUri], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("rawFileURI")
-        @ExcludeMissing
-        fun _rawFileUri(): JsonField<String> = rawFileUri
-
-        /**
          * Returns the raw JSON value of [revDate].
          *
          * Unlike [revDate], this method doesn't throw if the JSON field has an unexpected type.
@@ -4412,7 +4355,6 @@ private constructor(
             private var producer: JsonField<String> = JsonMissing.of()
             private var provinceCode: JsonField<String> = JsonMissing.of()
             private var quality: JsonField<String> = JsonMissing.of()
-            private var rawFileUri: JsonField<String> = JsonMissing.of()
             private var revDate: JsonField<LocalDate> = JsonMissing.of()
             private var segEndPoint: JsonField<Int> = JsonMissing.of()
             private var segNum: JsonField<Int> = JsonMissing.of()
@@ -4493,7 +4435,6 @@ private constructor(
                 producer = body.producer
                 provinceCode = body.provinceCode
                 quality = body.quality
-                rawFileUri = body.rawFileUri
                 revDate = body.revDate
                 segEndPoint = body.segEndPoint
                 segNum = body.segNum
@@ -5483,22 +5424,6 @@ private constructor(
             fun quality(quality: JsonField<String>) = apply { this.quality = quality }
 
             /**
-             * Optional URI location in the document repository of the raw file parsed by the system
-             * to produce this record. To download the raw file, prepend
-             * https://udl-hostname/scs/download?id= to this value.
-             */
-            fun rawFileUri(rawFileUri: String) = rawFileUri(JsonField.of(rawFileUri))
-
-            /**
-             * Sets [Builder.rawFileUri] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.rawFileUri] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun rawFileUri(rawFileUri: JsonField<String>) = apply { this.rawFileUri = rawFileUri }
-
-            /**
              * Date this obstacle data was revised, in ISO 8601 date-only format (ex. YYYY-MM-DD).
              */
             fun revDate(revDate: LocalDate) = revDate(JsonField.of(revDate))
@@ -5798,7 +5723,6 @@ private constructor(
                     producer,
                     provinceCode,
                     quality,
-                    rawFileUri,
                     revDate,
                     segEndPoint,
                     segNum,
@@ -5886,7 +5810,6 @@ private constructor(
             producer()
             provinceCode()
             quality()
-            rawFileUri()
             revDate()
             segEndPoint()
             segNum()
@@ -5982,7 +5905,6 @@ private constructor(
                 (if (producer.asKnown().isPresent) 1 else 0) +
                 (if (provinceCode.asKnown().isPresent) 1 else 0) +
                 (if (quality.asKnown().isPresent) 1 else 0) +
-                (if (rawFileUri.asKnown().isPresent) 1 else 0) +
                 (if (revDate.asKnown().isPresent) 1 else 0) +
                 (if (segEndPoint.asKnown().isPresent) 1 else 0) +
                 (if (segNum.asKnown().isPresent) 1 else 0) +
@@ -6066,7 +5988,6 @@ private constructor(
                 producer == other.producer &&
                 provinceCode == other.provinceCode &&
                 quality == other.quality &&
-                rawFileUri == other.rawFileUri &&
                 revDate == other.revDate &&
                 segEndPoint == other.segEndPoint &&
                 segNum == other.segNum &&
@@ -6148,7 +6069,6 @@ private constructor(
                 producer,
                 provinceCode,
                 quality,
-                rawFileUri,
                 revDate,
                 segEndPoint,
                 segNum,
@@ -6169,7 +6089,7 @@ private constructor(
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, cycleDate=$cycleDate, dataMode=$dataMode, obstacleId=$obstacleId, obstacleType=$obstacleType, source=$source, id=$id, actDelCode=$actDelCode, airacCycle=$airacCycle, baseAiracCycle=$baseAiracCycle, baselineCutoffDate=$baselineCutoffDate, boundNeLat=$boundNeLat, boundNeLon=$boundNeLon, boundSwLat=$boundSwLat, boundSwLon=$boundSwLon, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, cutoffDate=$cutoffDate, dataSetRemarks=$dataSetRemarks, deletingOrg=$deletingOrg, derivingOrg=$derivingOrg, directivityCode=$directivityCode, elevation=$elevation, elevationAcc=$elevationAcc, externalId=$externalId, facc=$facc, featureCode=$featureCode, featureDescription=$featureDescription, featureName=$featureName, featureType=$featureType, heightAgl=$heightAgl, heightAglAcc=$heightAglAcc, heightMsl=$heightMsl, heightMslAcc=$heightMslAcc, horizAcc=$horizAcc, horizDatumCode=$horizDatumCode, initRecordDate=$initRecordDate, keys=$keys, lightingCode=$lightingCode, lineNeLat=$lineNeLat, lineNeLon=$lineNeLon, linesFilename=$linesFilename, lineSwLat=$lineSwLat, lineSwLon=$lineSwLon, minHeightAgl=$minHeightAgl, multObs=$multObs, nextCycleDate=$nextCycleDate, numLines=$numLines, numObs=$numObs, numPoints=$numPoints, obstacleRemarks=$obstacleRemarks, origId=$origId, origin=$origin, origNetwork=$origNetwork, ownerCountryCode=$ownerCountryCode, pointLat=$pointLat, pointLon=$pointLon, pointsFilename=$pointsFilename, processCode=$processCode, producer=$producer, provinceCode=$provinceCode, quality=$quality, rawFileUri=$rawFileUri, revDate=$revDate, segEndPoint=$segEndPoint, segNum=$segNum, segStartPoint=$segStartPoint, sourceDate=$sourceDate, sourceDl=$sourceDl, surfaceMatCode=$surfaceMatCode, transactionCode=$transactionCode, validationCode=$validationCode, values=$values, vectorsFilename=$vectorsFilename, wac=$wac, wacInnr=$wacInnr, additionalProperties=$additionalProperties}"
+            "Body{classificationMarking=$classificationMarking, cycleDate=$cycleDate, dataMode=$dataMode, obstacleId=$obstacleId, obstacleType=$obstacleType, source=$source, id=$id, actDelCode=$actDelCode, airacCycle=$airacCycle, baseAiracCycle=$baseAiracCycle, baselineCutoffDate=$baselineCutoffDate, boundNeLat=$boundNeLat, boundNeLon=$boundNeLon, boundSwLat=$boundSwLat, boundSwLon=$boundSwLon, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, cutoffDate=$cutoffDate, dataSetRemarks=$dataSetRemarks, deletingOrg=$deletingOrg, derivingOrg=$derivingOrg, directivityCode=$directivityCode, elevation=$elevation, elevationAcc=$elevationAcc, externalId=$externalId, facc=$facc, featureCode=$featureCode, featureDescription=$featureDescription, featureName=$featureName, featureType=$featureType, heightAgl=$heightAgl, heightAglAcc=$heightAglAcc, heightMsl=$heightMsl, heightMslAcc=$heightMslAcc, horizAcc=$horizAcc, horizDatumCode=$horizDatumCode, initRecordDate=$initRecordDate, keys=$keys, lightingCode=$lightingCode, lineNeLat=$lineNeLat, lineNeLon=$lineNeLon, linesFilename=$linesFilename, lineSwLat=$lineSwLat, lineSwLon=$lineSwLon, minHeightAgl=$minHeightAgl, multObs=$multObs, nextCycleDate=$nextCycleDate, numLines=$numLines, numObs=$numObs, numPoints=$numPoints, obstacleRemarks=$obstacleRemarks, origId=$origId, origin=$origin, origNetwork=$origNetwork, ownerCountryCode=$ownerCountryCode, pointLat=$pointLat, pointLon=$pointLon, pointsFilename=$pointsFilename, processCode=$processCode, producer=$producer, provinceCode=$provinceCode, quality=$quality, revDate=$revDate, segEndPoint=$segEndPoint, segNum=$segNum, segStartPoint=$segStartPoint, sourceDate=$sourceDate, sourceDl=$sourceDl, surfaceMatCode=$surfaceMatCode, transactionCode=$transactionCode, validationCode=$validationCode, values=$values, vectorsFilename=$vectorsFilename, wac=$wac, wacInnr=$wacInnr, additionalProperties=$additionalProperties}"
     }
 
     /**

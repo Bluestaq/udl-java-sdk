@@ -36,6 +36,7 @@ class FileServiceAsyncImpl internal constructor(private val clientOptions: Clien
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): FileServiceAsync =
         FileServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    @Deprecated("deprecated")
     override fun retrieve(
         params: FileRetrieveParams,
         requestOptions: RequestOptions,
@@ -43,6 +44,7 @@ class FileServiceAsyncImpl internal constructor(private val clientOptions: Clien
         // get /scs/file
         withRawResponse().retrieve(params, requestOptions).thenApply { it.parse() }
 
+    @Deprecated("deprecated")
     override fun update(
         params: FileUpdateParams,
         requestOptions: RequestOptions,
@@ -50,6 +52,7 @@ class FileServiceAsyncImpl internal constructor(private val clientOptions: Clien
         // patch /scs/file
         withRawResponse().update(params, requestOptions).thenAccept {}
 
+    @Deprecated("deprecated")
     override fun list(
         params: FileListParams,
         requestOptions: RequestOptions,
@@ -73,6 +76,7 @@ class FileServiceAsyncImpl internal constructor(private val clientOptions: Clien
         private val retrieveHandler: Handler<FileData> =
             jsonHandler<FileData>(clientOptions.jsonMapper)
 
+        @Deprecated("deprecated")
         override fun retrieve(
             params: FileRetrieveParams,
             requestOptions: RequestOptions,
@@ -102,6 +106,7 @@ class FileServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
         private val updateHandler: Handler<Void?> = emptyHandler()
 
+        @Deprecated("deprecated")
         override fun update(
             params: FileUpdateParams,
             requestOptions: RequestOptions,
@@ -127,6 +132,7 @@ class FileServiceAsyncImpl internal constructor(private val clientOptions: Clien
         private val listHandler: Handler<List<FileData>> =
             jsonHandler<List<FileData>>(clientOptions.jsonMapper)
 
+        @Deprecated("deprecated")
         override fun list(
             params: FileListParams,
             requestOptions: RequestOptions,
