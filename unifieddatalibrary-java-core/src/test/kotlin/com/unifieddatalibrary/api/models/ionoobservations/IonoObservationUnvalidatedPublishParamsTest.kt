@@ -296,7 +296,7 @@ internal class IonoObservationUnvalidatedPublishParamsTest {
                     .neProfileName("NH")
                     .neProfileVersion(4.32)
                     .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .origSensorId("ORIGSENSOR-ID")
                     .phase(
                         IonoObservationUnvalidatedPublishParams.Body.Phase.builder()
@@ -739,7 +739,7 @@ internal class IonoObservationUnvalidatedPublishParamsTest {
                         .neProfileName("NH")
                         .neProfileVersion(4.32)
                         .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .origSensorId("ORIGSENSOR-ID")
                         .phase(
                             IonoObservationUnvalidatedPublishParams.Body.Phase.builder()
@@ -1177,7 +1177,7 @@ internal class IonoObservationUnvalidatedPublishParamsTest {
                     .neProfileName("NH")
                     .neProfileVersion(4.32)
                     .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .origSensorId("ORIGSENSOR-ID")
                     .phase(
                         IonoObservationUnvalidatedPublishParams.Body.Phase.builder()

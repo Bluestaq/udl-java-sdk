@@ -79,7 +79,6 @@ private constructor(
     private val pocRank: JsonField<String>,
     private val qualifier: JsonField<String>,
     private val qualSn: JsonField<Int>,
-    private val rawFileUri: JsonField<String>,
     private val references: JsonField<List<Reference>>,
     private val refPoints: JsonField<List<RefPoint>>,
     private val remarks: JsonField<List<Remark>>,
@@ -222,9 +221,6 @@ private constructor(
         @JsonProperty("pocRank") @ExcludeMissing pocRank: JsonField<String> = JsonMissing.of(),
         @JsonProperty("qualifier") @ExcludeMissing qualifier: JsonField<String> = JsonMissing.of(),
         @JsonProperty("qualSN") @ExcludeMissing qualSn: JsonField<Int> = JsonMissing.of(),
-        @JsonProperty("rawFileURI")
-        @ExcludeMissing
-        rawFileUri: JsonField<String> = JsonMissing.of(),
         @JsonProperty("references")
         @ExcludeMissing
         references: JsonField<List<Reference>> = JsonMissing.of(),
@@ -327,7 +323,6 @@ private constructor(
         pocRank,
         qualifier,
         qualSn,
-        rawFileUri,
         references,
         refPoints,
         remarks,
@@ -836,16 +831,6 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun qualSn(): Optional<Int> = qualSn.getOptional("qualSN")
-
-    /**
-     * Optional URI location in the document repository of the raw file parsed by the system to
-     * produce this record. To download the raw file, prepend https://udl-hostname/scs/download?id=
-     * to this value.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun rawFileUri(): Optional<String> = rawFileUri.getOptional("rawFileURI")
 
     /**
      * Collection of reference information. There can be 0 to many DataLinkReferences collections
@@ -1427,13 +1412,6 @@ private constructor(
     @JsonProperty("qualSN") @ExcludeMissing fun _qualSn(): JsonField<Int> = qualSn
 
     /**
-     * Returns the raw JSON value of [rawFileUri].
-     *
-     * Unlike [rawFileUri], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    @JsonProperty("rawFileURI") @ExcludeMissing fun _rawFileUri(): JsonField<String> = rawFileUri
-
-    /**
      * Returns the raw JSON value of [references].
      *
      * Unlike [references], this method doesn't throw if the JSON field has an unexpected type.
@@ -1664,7 +1642,6 @@ private constructor(
         private var pocRank: JsonField<String> = JsonMissing.of()
         private var qualifier: JsonField<String> = JsonMissing.of()
         private var qualSn: JsonField<Int> = JsonMissing.of()
-        private var rawFileUri: JsonField<String> = JsonMissing.of()
         private var references: JsonField<MutableList<Reference>>? = null
         private var refPoints: JsonField<MutableList<RefPoint>>? = null
         private var remarks: JsonField<MutableList<Remark>>? = null
@@ -1742,7 +1719,6 @@ private constructor(
             pocRank = datalinkListResponse.pocRank
             qualifier = datalinkListResponse.qualifier
             qualSn = datalinkListResponse.qualSn
-            rawFileUri = datalinkListResponse.rawFileUri
             references = datalinkListResponse.references.map { it.toMutableList() }
             refPoints = datalinkListResponse.refPoints.map { it.toMutableList() }
             remarks = datalinkListResponse.remarks.map { it.toMutableList() }
@@ -2663,22 +2639,6 @@ private constructor(
         fun qualSn(qualSn: JsonField<Int>) = apply { this.qualSn = qualSn }
 
         /**
-         * Optional URI location in the document repository of the raw file parsed by the system to
-         * produce this record. To download the raw file, prepend
-         * https://udl-hostname/scs/download?id= to this value.
-         */
-        fun rawFileUri(rawFileUri: String) = rawFileUri(JsonField.of(rawFileUri))
-
-        /**
-         * Sets [Builder.rawFileUri] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.rawFileUri] with a well-typed [String] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
-         */
-        fun rawFileUri(rawFileUri: JsonField<String>) = apply { this.rawFileUri = rawFileUri }
-
-        /**
          * Collection of reference information. There can be 0 to many DataLinkReferences
          * collections within the datalink service.
          */
@@ -3131,7 +3091,6 @@ private constructor(
                 pocRank,
                 qualifier,
                 qualSn,
-                rawFileUri,
                 (references ?: JsonMissing.of()).map { it.toImmutable() },
                 (refPoints ?: JsonMissing.of()).map { it.toImmutable() },
                 (remarks ?: JsonMissing.of()).map { it.toImmutable() },
@@ -3216,7 +3175,6 @@ private constructor(
         pocRank()
         qualifier()
         qualSn()
-        rawFileUri()
         references().ifPresent { it.forEach { it.validate() } }
         refPoints().ifPresent { it.forEach { it.validate() } }
         remarks().ifPresent { it.forEach { it.validate() } }
@@ -3308,7 +3266,6 @@ private constructor(
             (if (pocRank.asKnown().isPresent) 1 else 0) +
             (if (qualifier.asKnown().isPresent) 1 else 0) +
             (if (qualSn.asKnown().isPresent) 1 else 0) +
-            (if (rawFileUri.asKnown().isPresent) 1 else 0) +
             (references.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
             (refPoints.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
             (remarks.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
@@ -6106,7 +6063,6 @@ private constructor(
             pocRank == other.pocRank &&
             qualifier == other.qualifier &&
             qualSn == other.qualSn &&
-            rawFileUri == other.rawFileUri &&
             references == other.references &&
             refPoints == other.refPoints &&
             remarks == other.remarks &&
@@ -6185,7 +6141,6 @@ private constructor(
             pocRank,
             qualifier,
             qualSn,
-            rawFileUri,
             references,
             refPoints,
             remarks,
@@ -6211,5 +6166,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "DatalinkListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, opExName=$opExName, originator=$originator, source=$source, startTime=$startTime, id=$id, ackInstUnits=$ackInstUnits, ackReq=$ackReq, altDiff=$altDiff, canxId=$canxId, canxOriginator=$canxOriginator, canxSerialNum=$canxSerialNum, canxSiCs=$canxSiCs, canxSpecialNotation=$canxSpecialNotation, canxTs=$canxTs, classReasons=$classReasons, classSource=$classSource, consecDecorr=$consecDecorr, courseDiff=$courseDiff, createdAt=$createdAt, createdBy=$createdBy, decExemptCodes=$decExemptCodes, decInstDates=$decInstDates, decorrWinMult=$decorrWinMult, geoDatum=$geoDatum, jreCallSign=$jreCallSign, jreDetails=$jreDetails, jrePriAdd=$jrePriAdd, jreSecAdd=$jreSecAdd, jreUnitDes=$jreUnitDes, maxGeoPosQual=$maxGeoPosQual, maxTrackQual=$maxTrackQual, mgmtCode=$mgmtCode, mgmtCodeMeaning=$mgmtCodeMeaning, minGeoPosQual=$minGeoPosQual, minTrackQual=$minTrackQual, month=$month, multiDuty=$multiDuty, nonLinkUnitDes=$nonLinkUnitDes, opExInfo=$opExInfo, opExInfoAlt=$opExInfoAlt, ops=$ops, origin=$origin, origNetwork=$origNetwork, planOrigNum=$planOrigNum, pocCallSign=$pocCallSign, pocLat=$pocLat, pocLocName=$pocLocName, pocLon=$pocLon, pocName=$pocName, pocNums=$pocNums, pocRank=$pocRank, qualifier=$qualifier, qualSn=$qualSn, rawFileUri=$rawFileUri, references=$references, refPoints=$refPoints, remarks=$remarks, resTrackQual=$resTrackQual, serialNum=$serialNum, sourceDl=$sourceDl, specTracks=$specTracks, speedDiff=$speedDiff, stopTime=$stopTime, stopTimeMod=$stopTimeMod, sysDefaultCode=$sysDefaultCode, trackNumBlockLLs=$trackNumBlockLLs, trackNumBlocks=$trackNumBlocks, updatedAt=$updatedAt, updatedBy=$updatedBy, voiceCoord=$voiceCoord, winSizeMin=$winSizeMin, winSizeMult=$winSizeMult, additionalProperties=$additionalProperties}"
+        "DatalinkListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, opExName=$opExName, originator=$originator, source=$source, startTime=$startTime, id=$id, ackInstUnits=$ackInstUnits, ackReq=$ackReq, altDiff=$altDiff, canxId=$canxId, canxOriginator=$canxOriginator, canxSerialNum=$canxSerialNum, canxSiCs=$canxSiCs, canxSpecialNotation=$canxSpecialNotation, canxTs=$canxTs, classReasons=$classReasons, classSource=$classSource, consecDecorr=$consecDecorr, courseDiff=$courseDiff, createdAt=$createdAt, createdBy=$createdBy, decExemptCodes=$decExemptCodes, decInstDates=$decInstDates, decorrWinMult=$decorrWinMult, geoDatum=$geoDatum, jreCallSign=$jreCallSign, jreDetails=$jreDetails, jrePriAdd=$jrePriAdd, jreSecAdd=$jreSecAdd, jreUnitDes=$jreUnitDes, maxGeoPosQual=$maxGeoPosQual, maxTrackQual=$maxTrackQual, mgmtCode=$mgmtCode, mgmtCodeMeaning=$mgmtCodeMeaning, minGeoPosQual=$minGeoPosQual, minTrackQual=$minTrackQual, month=$month, multiDuty=$multiDuty, nonLinkUnitDes=$nonLinkUnitDes, opExInfo=$opExInfo, opExInfoAlt=$opExInfoAlt, ops=$ops, origin=$origin, origNetwork=$origNetwork, planOrigNum=$planOrigNum, pocCallSign=$pocCallSign, pocLat=$pocLat, pocLocName=$pocLocName, pocLon=$pocLon, pocName=$pocName, pocNums=$pocNums, pocRank=$pocRank, qualifier=$qualifier, qualSn=$qualSn, references=$references, refPoints=$refPoints, remarks=$remarks, resTrackQual=$resTrackQual, serialNum=$serialNum, sourceDl=$sourceDl, specTracks=$specTracks, speedDiff=$speedDiff, stopTime=$stopTime, stopTimeMod=$stopTimeMod, sysDefaultCode=$sysDefaultCode, trackNumBlockLLs=$trackNumBlockLLs, trackNumBlocks=$trackNumBlocks, updatedAt=$updatedAt, updatedBy=$updatedBy, voiceCoord=$voiceCoord, winSizeMin=$winSizeMin, winSizeMult=$winSizeMult, additionalProperties=$additionalProperties}"
 }

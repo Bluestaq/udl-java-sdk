@@ -83,7 +83,7 @@ internal class OperationTupleResponseTest {
                         .build()
                 )
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .addPathway(
                     PathwayFull.builder()
                         .pwDefinition("AGP: 14L, K6, K, G (ANG APRN TO TWY K), GUARD (MAIN)")
@@ -186,7 +186,7 @@ internal class OperationTupleResponseTest {
                     .build()
             )
         assertThat(operationTupleResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(operationTupleResponse.origNetwork()).contains("ORIG")
+        assertThat(operationTupleResponse.origNetwork()).contains("OPS1")
         assertThat(operationTupleResponse.pathways().getOrNull())
             .containsExactly(
                 PathwayFull.builder()
@@ -285,7 +285,7 @@ internal class OperationTupleResponseTest {
                         .build()
                 )
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .addPathway(
                     PathwayFull.builder()
                         .pwDefinition("AGP: 14L, K6, K, G (ANG APRN TO TWY K), GUARD (MAIN)")

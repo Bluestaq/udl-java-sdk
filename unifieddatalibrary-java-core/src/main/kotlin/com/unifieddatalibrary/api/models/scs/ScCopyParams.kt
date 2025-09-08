@@ -15,6 +15,7 @@ import java.util.Optional
  * operation to copy folders or files. A specific role is required to perform this service
  * operation. Please contact the UDL team for assistance.
  */
+@Deprecated("deprecated")
 class ScCopyParams
 private constructor(
     private val id: String,

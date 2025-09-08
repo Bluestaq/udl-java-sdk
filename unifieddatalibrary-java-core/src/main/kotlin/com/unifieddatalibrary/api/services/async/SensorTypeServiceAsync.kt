@@ -9,8 +9,6 @@ import com.unifieddatalibrary.api.models.sensortype.SensorTypeGetParams
 import com.unifieddatalibrary.api.models.sensortype.SensorTypeGetResponse
 import com.unifieddatalibrary.api.models.sensortype.SensorTypeListPageAsync
 import com.unifieddatalibrary.api.models.sensortype.SensorTypeListParams
-import com.unifieddatalibrary.api.models.sensortype.SensorTypeQueryhelpParams
-import com.unifieddatalibrary.api.models.sensortype.SensorTypeQueryhelpResponse
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -83,28 +81,6 @@ interface SensorTypeServiceAsync {
     /** @see get */
     fun get(id: Int, requestOptions: RequestOptions): CompletableFuture<SensorTypeGetResponse> =
         get(id, SensorTypeGetParams.none(), requestOptions)
-
-    /**
-     * Service operation to provide detailed information on available dynamic query parameters for a
-     * particular data type.
-     */
-    fun queryhelp(): CompletableFuture<SensorTypeQueryhelpResponse> =
-        queryhelp(SensorTypeQueryhelpParams.none())
-
-    /** @see queryhelp */
-    fun queryhelp(
-        params: SensorTypeQueryhelpParams = SensorTypeQueryhelpParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<SensorTypeQueryhelpResponse>
-
-    /** @see queryhelp */
-    fun queryhelp(
-        params: SensorTypeQueryhelpParams = SensorTypeQueryhelpParams.none()
-    ): CompletableFuture<SensorTypeQueryhelpResponse> = queryhelp(params, RequestOptions.none())
-
-    /** @see queryhelp */
-    fun queryhelp(requestOptions: RequestOptions): CompletableFuture<SensorTypeQueryhelpResponse> =
-        queryhelp(SensorTypeQueryhelpParams.none(), requestOptions)
 
     /**
      * A view of [SensorTypeServiceAsync] that provides access to raw HTTP responses for each
@@ -186,30 +162,5 @@ interface SensorTypeServiceAsync {
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponseFor<SensorTypeGetResponse>> =
             get(id, SensorTypeGetParams.none(), requestOptions)
-
-        /**
-         * Returns a raw HTTP response for `get /udl/sensortype/queryhelp`, but is otherwise the
-         * same as [SensorTypeServiceAsync.queryhelp].
-         */
-        fun queryhelp(): CompletableFuture<HttpResponseFor<SensorTypeQueryhelpResponse>> =
-            queryhelp(SensorTypeQueryhelpParams.none())
-
-        /** @see queryhelp */
-        fun queryhelp(
-            params: SensorTypeQueryhelpParams = SensorTypeQueryhelpParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<SensorTypeQueryhelpResponse>>
-
-        /** @see queryhelp */
-        fun queryhelp(
-            params: SensorTypeQueryhelpParams = SensorTypeQueryhelpParams.none()
-        ): CompletableFuture<HttpResponseFor<SensorTypeQueryhelpResponse>> =
-            queryhelp(params, RequestOptions.none())
-
-        /** @see queryhelp */
-        fun queryhelp(
-            requestOptions: RequestOptions
-        ): CompletableFuture<HttpResponseFor<SensorTypeQueryhelpResponse>> =
-            queryhelp(SensorTypeQueryhelpParams.none(), requestOptions)
     }
 }

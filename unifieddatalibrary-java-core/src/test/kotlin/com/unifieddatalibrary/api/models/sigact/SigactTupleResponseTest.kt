@@ -29,9 +29,6 @@ internal class SigactTupleResponseTest {
                     "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
                 )
                 .andims(3L)
-                .area(
-                    "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
-                )
                 .asrid(3)
                 .atext(
                     "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
@@ -87,7 +84,7 @@ internal class SigactTupleResponseTest {
                 .numMentions(8)
                 .numSources(8)
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .province("Province_Example")
                 .addRelatedDoc(
                     RelatedDocumentFull.builder()
@@ -135,10 +132,6 @@ internal class SigactTupleResponseTest {
                 "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
             )
         assertThat(sigactTupleResponse.andims()).contains(3L)
-        assertThat(sigactTupleResponse.area())
-            .contains(
-                "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
-            )
         assertThat(sigactTupleResponse.asrid()).contains(3)
         assertThat(sigactTupleResponse.atext())
             .contains(
@@ -198,7 +191,7 @@ internal class SigactTupleResponseTest {
         assertThat(sigactTupleResponse.numMentions()).contains(8)
         assertThat(sigactTupleResponse.numSources()).contains(8)
         assertThat(sigactTupleResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(sigactTupleResponse.origNetwork()).contains("ORIG")
+        assertThat(sigactTupleResponse.origNetwork()).contains("OPS1")
         assertThat(sigactTupleResponse.province()).contains("Province_Example")
         assertThat(sigactTupleResponse.relatedDocs().getOrNull())
             .containsExactly(
@@ -251,9 +244,6 @@ internal class SigactTupleResponseTest {
                     "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
                 )
                 .andims(3L)
-                .area(
-                    "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
-                )
                 .asrid(3)
                 .atext(
                     "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
@@ -309,7 +299,7 @@ internal class SigactTupleResponseTest {
                 .numMentions(8)
                 .numSources(8)
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .province("Province_Example")
                 .addRelatedDoc(
                     RelatedDocumentFull.builder()

@@ -16,6 +16,10 @@ private constructor(
     private val path: String,
     private val firstResult: Long?,
     private val maxResults: Long?,
+    private val order: String?,
+    private val searchAfter: String?,
+    private val size: Int?,
+    private val sort: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
@@ -26,6 +30,21 @@ private constructor(
     fun firstResult(): Optional<Long> = Optional.ofNullable(firstResult)
 
     fun maxResults(): Optional<Long> = Optional.ofNullable(maxResults)
+
+    /** The order in which entries should be sorted */
+    fun order(): Optional<String> = Optional.ofNullable(order)
+
+    /**
+     * The starting point for pagination results, usually set to the value of the SEARCH_AFTER
+     * header returned in the previous request.
+     */
+    fun searchAfter(): Optional<String> = Optional.ofNullable(searchAfter)
+
+    /** The number of results to retrieve. */
+    fun size(): Optional<Int> = Optional.ofNullable(size)
+
+    /** The field on which to sort entries */
+    fun sort(): Optional<String> = Optional.ofNullable(sort)
 
     /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
@@ -54,6 +73,10 @@ private constructor(
         private var path: String? = null
         private var firstResult: Long? = null
         private var maxResults: Long? = null
+        private var order: String? = null
+        private var searchAfter: String? = null
+        private var size: Int? = null
+        private var sort: String? = null
         private var additionalHeaders: Headers.Builder = Headers.builder()
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
@@ -62,6 +85,10 @@ private constructor(
             path = v2ListParams.path
             firstResult = v2ListParams.firstResult
             maxResults = v2ListParams.maxResults
+            order = v2ListParams.order
+            searchAfter = v2ListParams.searchAfter
+            size = v2ListParams.size
+            sort = v2ListParams.sort
             additionalHeaders = v2ListParams.additionalHeaders.toBuilder()
             additionalQueryParams = v2ListParams.additionalQueryParams.toBuilder()
         }
@@ -92,6 +119,40 @@ private constructor(
 
         /** Alias for calling [Builder.maxResults] with `maxResults.orElse(null)`. */
         fun maxResults(maxResults: Optional<Long>) = maxResults(maxResults.getOrNull())
+
+        /** The order in which entries should be sorted */
+        fun order(order: String?) = apply { this.order = order }
+
+        /** Alias for calling [Builder.order] with `order.orElse(null)`. */
+        fun order(order: Optional<String>) = order(order.getOrNull())
+
+        /**
+         * The starting point for pagination results, usually set to the value of the SEARCH_AFTER
+         * header returned in the previous request.
+         */
+        fun searchAfter(searchAfter: String?) = apply { this.searchAfter = searchAfter }
+
+        /** Alias for calling [Builder.searchAfter] with `searchAfter.orElse(null)`. */
+        fun searchAfter(searchAfter: Optional<String>) = searchAfter(searchAfter.getOrNull())
+
+        /** The number of results to retrieve. */
+        fun size(size: Int?) = apply { this.size = size }
+
+        /**
+         * Alias for [Builder.size].
+         *
+         * This unboxed primitive overload exists for backwards compatibility.
+         */
+        fun size(size: Int) = size(size as Int?)
+
+        /** Alias for calling [Builder.size] with `size.orElse(null)`. */
+        fun size(size: Optional<Int>) = size(size.getOrNull())
+
+        /** The field on which to sort entries */
+        fun sort(sort: String?) = apply { this.sort = sort }
+
+        /** Alias for calling [Builder.sort] with `sort.orElse(null)`. */
+        fun sort(sort: Optional<String>) = sort(sort.getOrNull())
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -208,6 +269,10 @@ private constructor(
                 checkRequired("path", path),
                 firstResult,
                 maxResults,
+                order,
+                searchAfter,
+                size,
+                sort,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
@@ -221,6 +286,10 @@ private constructor(
                 put("path", path)
                 firstResult?.let { put("firstResult", it.toString()) }
                 maxResults?.let { put("maxResults", it.toString()) }
+                order?.let { put("order", it) }
+                searchAfter?.let { put("searchAfter", it) }
+                size?.let { put("size", it.toString()) }
+                sort?.let { put("sort", it) }
                 putAll(additionalQueryParams)
             }
             .build()
@@ -234,13 +303,27 @@ private constructor(
             path == other.path &&
             firstResult == other.firstResult &&
             maxResults == other.maxResults &&
+            order == other.order &&
+            searchAfter == other.searchAfter &&
+            size == other.size &&
+            sort == other.sort &&
             additionalHeaders == other.additionalHeaders &&
             additionalQueryParams == other.additionalQueryParams
     }
 
     override fun hashCode(): Int =
-        Objects.hash(path, firstResult, maxResults, additionalHeaders, additionalQueryParams)
+        Objects.hash(
+            path,
+            firstResult,
+            maxResults,
+            order,
+            searchAfter,
+            size,
+            sort,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
-        "V2ListParams{path=$path, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "V2ListParams{path=$path, firstResult=$firstResult, maxResults=$maxResults, order=$order, searchAfter=$searchAfter, size=$size, sort=$sort, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

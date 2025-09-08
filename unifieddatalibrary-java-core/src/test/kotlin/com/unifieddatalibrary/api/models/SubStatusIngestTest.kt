@@ -25,7 +25,7 @@ internal class SubStatusIngestTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("TST1")
+                .origNetwork("OPS1")
                 .build()
 
         assertThat(subStatusIngest.classificationMarking()).isEqualTo("U")
@@ -40,7 +40,7 @@ internal class SubStatusIngestTest {
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
         assertThat(subStatusIngest.createdBy()).contains("some.user")
         assertThat(subStatusIngest.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(subStatusIngest.origNetwork()).contains("TST1")
+        assertThat(subStatusIngest.origNetwork()).contains("OPS1")
     }
 
     @Test
@@ -59,7 +59,7 @@ internal class SubStatusIngestTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("TST1")
+                .origNetwork("OPS1")
                 .build()
 
         val roundtrippedSubStatusIngest =

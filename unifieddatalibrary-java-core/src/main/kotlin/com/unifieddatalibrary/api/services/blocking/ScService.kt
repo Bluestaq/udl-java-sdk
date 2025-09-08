@@ -8,7 +8,6 @@ import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.FileData
-import com.unifieddatalibrary.api.models.scs.ScAggregateDocTypeParams
 import com.unifieddatalibrary.api.models.scs.ScAllowableFileExtensionsParams
 import com.unifieddatalibrary.api.models.scs.ScAllowableFileMimesParams
 import com.unifieddatalibrary.api.models.scs.ScCopyParams
@@ -19,7 +18,6 @@ import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
-import com.unifieddatalibrary.api.models.scs.ScUpdateTagsParams
 import com.unifieddatalibrary.api.services.blocking.scs.ClassificationMarkingService
 import com.unifieddatalibrary.api.services.blocking.scs.FileMetadataService
 import com.unifieddatalibrary.api.services.blocking.scs.FileService
@@ -65,30 +63,14 @@ interface ScService {
      * calling user. A specific role is required to perform this service operation. Please contact
      * the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun delete(params: ScDeleteParams) = delete(params, RequestOptions.none())
 
     /** @see delete */
+    @Deprecated("deprecated")
     fun delete(params: ScDeleteParams, requestOptions: RequestOptions = RequestOptions.none())
 
-    /** Returns a map of document types and counts in root folder. */
-    fun aggregateDocType(): List<String> = aggregateDocType(ScAggregateDocTypeParams.none())
-
-    /** @see aggregateDocType */
-    fun aggregateDocType(
-        params: ScAggregateDocTypeParams = ScAggregateDocTypeParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): List<String>
-
-    /** @see aggregateDocType */
-    fun aggregateDocType(
-        params: ScAggregateDocTypeParams = ScAggregateDocTypeParams.none()
-    ): List<String> = aggregateDocType(params, RequestOptions.none())
-
-    /** @see aggregateDocType */
-    fun aggregateDocType(requestOptions: RequestOptions): List<String> =
-        aggregateDocType(ScAggregateDocTypeParams.none(), requestOptions)
-
-    /** Returns a list of allowable file extensions for upload. */
+    /** Returns a list of the allowed filename extensions. */
     fun allowableFileExtensions(): List<String> =
         allowableFileExtensions(ScAllowableFileExtensionsParams.none())
 
@@ -107,7 +89,7 @@ interface ScService {
     fun allowableFileExtensions(requestOptions: RequestOptions): List<String> =
         allowableFileExtensions(ScAllowableFileExtensionsParams.none(), requestOptions)
 
-    /** Returns a list of allowable file mime types for upload. */
+    /** Returns a list of the allowed file upload mime types. */
     fun allowableFileMimes(): List<String> = allowableFileMimes(ScAllowableFileMimesParams.none())
 
     /** @see allowableFileMimes */
@@ -129,9 +111,11 @@ interface ScService {
      * operation to copy folders or files. A specific role is required to perform this service
      * operation. Please contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun copy(params: ScCopyParams): String = copy(params, RequestOptions.none())
 
     /** @see copy */
+    @Deprecated("deprecated")
     fun copy(params: ScCopyParams, requestOptions: RequestOptions = RequestOptions.none()): String
 
     /** Downloads a zip of one or more files and/or folders. */
@@ -161,10 +145,12 @@ interface ScService {
      * Operation to upload a file. A specific role is required to perform this service operation.
      * Please contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun fileUpload(fileContent: String, params: ScFileUploadParams): String =
         fileUpload(fileContent, params, RequestOptions.none())
 
     /** @see fileUpload */
+    @Deprecated("deprecated")
     fun fileUpload(
         fileContent: String,
         params: ScFileUploadParams,
@@ -172,9 +158,11 @@ interface ScService {
     ): String = fileUpload(params.toBuilder().fileContent(fileContent).build(), requestOptions)
 
     /** @see fileUpload */
+    @Deprecated("deprecated")
     fun fileUpload(params: ScFileUploadParams): String = fileUpload(params, RequestOptions.none())
 
     /** @see fileUpload */
+    @Deprecated("deprecated")
     fun fileUpload(
         params: ScFileUploadParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -184,37 +172,34 @@ interface ScService {
      * operation to move folders or files. A specific role is required to perform this service
      * operation. Please contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun move(params: ScMoveParams): String = move(params, RequestOptions.none())
 
     /** @see move */
+    @Deprecated("deprecated")
     fun move(params: ScMoveParams, requestOptions: RequestOptions = RequestOptions.none()): String
 
     /**
      * Operation to rename folders or files. A specific role is required to perform this service
      * operation. Please contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun rename(params: ScRenameParams) = rename(params, RequestOptions.none())
 
     /** @see rename */
+    @Deprecated("deprecated")
     fun rename(params: ScRenameParams, requestOptions: RequestOptions = RequestOptions.none())
 
     /** Search for files by metadata and/or text in file content. */
+    @Deprecated("deprecated")
     fun search(params: ScSearchParams): List<FileData> = search(params, RequestOptions.none())
 
     /** @see search */
+    @Deprecated("deprecated")
     fun search(
         params: ScSearchParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<FileData>
-
-    /** Updates tags for given folder. */
-    fun updateTags(params: ScUpdateTagsParams) = updateTags(params, RequestOptions.none())
-
-    /** @see updateTags */
-    fun updateTags(
-        params: ScUpdateTagsParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    )
 
     /** A view of [ScService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -246,41 +231,17 @@ interface ScService {
          * Returns a raw HTTP response for `delete /scs/delete`, but is otherwise the same as
          * [ScService.delete].
          */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun delete(params: ScDeleteParams): HttpResponse = delete(params, RequestOptions.none())
 
         /** @see delete */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun delete(
             params: ScDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
-
-        /**
-         * Returns a raw HTTP response for `get /scs/aggregateDocType`, but is otherwise the same as
-         * [ScService.aggregateDocType].
-         */
-        @MustBeClosed
-        fun aggregateDocType(): HttpResponseFor<List<String>> =
-            aggregateDocType(ScAggregateDocTypeParams.none())
-
-        /** @see aggregateDocType */
-        @MustBeClosed
-        fun aggregateDocType(
-            params: ScAggregateDocTypeParams = ScAggregateDocTypeParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<List<String>>
-
-        /** @see aggregateDocType */
-        @MustBeClosed
-        fun aggregateDocType(
-            params: ScAggregateDocTypeParams = ScAggregateDocTypeParams.none()
-        ): HttpResponseFor<List<String>> = aggregateDocType(params, RequestOptions.none())
-
-        /** @see aggregateDocType */
-        @MustBeClosed
-        fun aggregateDocType(requestOptions: RequestOptions): HttpResponseFor<List<String>> =
-            aggregateDocType(ScAggregateDocTypeParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /scs/allowableFileExtensions`, but is otherwise the
@@ -338,11 +299,13 @@ interface ScService {
          * Returns a raw HTTP response for `post /scs/copy`, but is otherwise the same as
          * [ScService.copy].
          */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun copy(params: ScCopyParams): HttpResponseFor<String> =
             copy(params, RequestOptions.none())
 
         /** @see copy */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun copy(
             params: ScCopyParams,
@@ -383,11 +346,13 @@ interface ScService {
          * Returns a raw HTTP response for `post /scs/file`, but is otherwise the same as
          * [ScService.fileUpload].
          */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun fileUpload(fileContent: String, params: ScFileUploadParams): HttpResponseFor<String> =
             fileUpload(fileContent, params, RequestOptions.none())
 
         /** @see fileUpload */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun fileUpload(
             fileContent: String,
@@ -397,11 +362,13 @@ interface ScService {
             fileUpload(params.toBuilder().fileContent(fileContent).build(), requestOptions)
 
         /** @see fileUpload */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun fileUpload(params: ScFileUploadParams): HttpResponseFor<String> =
             fileUpload(params, RequestOptions.none())
 
         /** @see fileUpload */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun fileUpload(
             params: ScFileUploadParams,
@@ -412,11 +379,13 @@ interface ScService {
          * Returns a raw HTTP response for `put /scs/move`, but is otherwise the same as
          * [ScService.move].
          */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun move(params: ScMoveParams): HttpResponseFor<String> =
             move(params, RequestOptions.none())
 
         /** @see move */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun move(
             params: ScMoveParams,
@@ -427,10 +396,12 @@ interface ScService {
          * Returns a raw HTTP response for `put /scs/rename`, but is otherwise the same as
          * [ScService.rename].
          */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun rename(params: ScRenameParams): HttpResponse = rename(params, RequestOptions.none())
 
         /** @see rename */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun rename(
             params: ScRenameParams,
@@ -441,30 +412,17 @@ interface ScService {
          * Returns a raw HTTP response for `post /scs/search`, but is otherwise the same as
          * [ScService.search].
          */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun search(params: ScSearchParams): HttpResponseFor<List<FileData>> =
             search(params, RequestOptions.none())
 
         /** @see search */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun search(
             params: ScSearchParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<FileData>>
-
-        /**
-         * Returns a raw HTTP response for `put /scs/updateTagsForFilesInFolder`, but is otherwise
-         * the same as [ScService.updateTags].
-         */
-        @MustBeClosed
-        fun updateTags(params: ScUpdateTagsParams): HttpResponse =
-            updateTags(params, RequestOptions.none())
-
-        /** @see updateTags */
-        @MustBeClosed
-        fun updateTags(
-            params: ScUpdateTagsParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponse
     }
 }

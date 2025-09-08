@@ -45,7 +45,7 @@ internal class LaunchSiteDetailListResponseTest {
                         .build()
                 )
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         assertThat(launchSiteDetailListResponse.classificationMarking()).isEqualTo("U")
@@ -81,7 +81,7 @@ internal class LaunchSiteDetailListResponseTest {
                     .build()
             )
         assertThat(launchSiteDetailListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(launchSiteDetailListResponse.origNetwork()).contains("ORIG")
+        assertThat(launchSiteDetailListResponse.origNetwork()).contains("OPS1")
     }
 
     @Test
@@ -118,7 +118,7 @@ internal class LaunchSiteDetailListResponseTest {
                         .build()
                 )
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         val roundtrippedLaunchSiteDetailListResponse =

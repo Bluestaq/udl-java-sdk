@@ -268,7 +268,7 @@ internal class SensorPlanGetResponseTest {
                                                                 )
                                                                 .mode(AntennaDetailsFull.Mode.TX)
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .polarization(45.1)
                                                                 .position("Top")
                                                                 .addSize(0.03)
@@ -293,7 +293,7 @@ internal class SensorPlanGetResponseTest {
                                                         )
                                                         .createdBy("some.user")
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
                                                                 "2018-01-01T16:00:00.123Z"
@@ -491,7 +491,7 @@ internal class SensorPlanGetResponseTest {
                                                                 )
                                                                 .model("11212")
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .addTag("PROVIDER_TAG1")
                                                                 .addTag("PROVIDER_TAG2")
                                                                 .technology("Ni-Cd")
@@ -510,7 +510,7 @@ internal class SensorPlanGetResponseTest {
                                                         )
                                                         .createdBy("some.user")
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
                                                                 "2018-01-01T16:00:00.123Z"
@@ -847,23 +847,35 @@ internal class SensorPlanGetResponseTest {
                                                         .idEntity("ENTITY-ID")
                                                         .name("BAND_NAME")
                                                         .source("Bluestaq")
-                                                        .id("RFBAND-ID")
+                                                        .id("ad88770b-d824-443f-bdce-5f9e3fa500a9")
                                                         .band("Ku")
                                                         .bandwidth(100.23)
+                                                        .addBandwidthSetting(250.1)
+                                                        .addBandwidthSetting(500.1)
                                                         .beamwidth(45.23)
+                                                        .addBeamwidthSetting(5.1)
+                                                        .addBeamwidthSetting(10.1)
                                                         .centerFreq(1000.23)
                                                         .createdAt(
                                                             OffsetDateTime.parse(
-                                                                "2018-01-01T16:00:00.123Z"
+                                                                "2025-03-05T16:00:00.123Z"
                                                             )
                                                         )
                                                         .createdBy("some.user")
+                                                        .addDelaySetting(2.77)
+                                                        .addDelaySetting(5.64)
                                                         .edgeGain(100.23)
                                                         .eirp(2.23)
                                                         .erp(2.23)
                                                         .freqMax(2000.23)
                                                         .freqMin(50.23)
+                                                        .addFrequencySetting(12250.1)
+                                                        .addFrequencySetting(15000.1)
+                                                        .addGainSetting(2.77)
+                                                        .addGainSetting(5.64)
                                                         .mode(RfBandFull.Mode.TX)
+                                                        .addNoiseSetting(0.00033)
+                                                        .addNoiseSetting(0.0033)
                                                         .origin("THIRD_PARTY_DATASOURCE")
                                                         .origNetwork("OPS1")
                                                         .peakGain(120.23)
@@ -871,7 +883,7 @@ internal class SensorPlanGetResponseTest {
                                                         .purpose(RfBandFull.Purpose.TTC)
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
-                                                                "2018-01-01T16:00:00.123Z"
+                                                                "2025-03-05T16:00:00.123Z"
                                                             )
                                                         )
                                                         .updatedBy("some.user")
@@ -900,7 +912,7 @@ internal class SensorPlanGetResponseTest {
                                                         .notes("Example Notes")
                                                         .opsCap(StatusFull.OpsCap.FMC)
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("TST1")
+                                                        .origNetwork("OPS1")
                                                         .state(StatusFull.State.ACTIVE)
                                                         .addSubStatusCollection(
                                                             SubStatusFull.builder()
@@ -921,7 +933,7 @@ internal class SensorPlanGetResponseTest {
                                                                 )
                                                                 .createdBy("some.user")
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("TST1")
+                                                                .origNetwork("OPS1")
                                                                 .updatedAt(
                                                                     OffsetDateTime.parse(
                                                                         "2018-01-01T16:00:00.123Z"
@@ -1053,7 +1065,7 @@ internal class SensorPlanGetResponseTest {
                                                         )
                                                         .createdBy("some.user")
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .addSolarArrayDetail(
                                                             SolarArrayDetailsFull.builder()
                                                                 .classificationMarking("U")
@@ -1217,7 +1229,7 @@ internal class SensorPlanGetResponseTest {
                                                                     "MANUFACTURERORG-ID"
                                                                 )
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .span(123.4)
                                                                 .addTag("TAG1")
                                                                 .addTag("TAG2")
@@ -1297,7 +1309,7 @@ internal class SensorPlanGetResponseTest {
                                                                 .notes("Example notes")
                                                                 .nozzleExpansionRatio(1.1)
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .oxidizer("Liquid Oxygen")
                                                                 .propellant("Liquid")
                                                                 .seaLevelThrust(1.1)
@@ -1314,7 +1326,7 @@ internal class SensorPlanGetResponseTest {
                                                                 .build()
                                                         )
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
                                                                 "2018-01-01T16:00:00.123Z"
@@ -1338,7 +1350,7 @@ internal class SensorPlanGetResponseTest {
                                         .build()
                                 )
                                 .origin("THIRD_PARTY_DATASOURCE")
-                                .origNetwork("ORIG")
+                                .origNetwork("OPS1")
                                 .origObjectId("ORIGOBJECT-ID")
                                 .origSensorId("ORIGSENSOR-ID")
                                 .satNo(101)
@@ -1390,7 +1402,7 @@ internal class SensorPlanGetResponseTest {
                                 .meanMotionDDot(1.1)
                                 .meanMotionDot(1.1)
                                 .origin("THIRD_PARTY_DATASOURCE")
-                                .origNetwork("ORIG")
+                                .origNetwork("OPS1")
                                 .origObjectId("ORIGOBJECT-ID")
                                 .perigee(1.1)
                                 .period(1.1)
@@ -1448,7 +1460,7 @@ internal class SensorPlanGetResponseTest {
                         .orbitRegime("GEO")
                         .orientAngle(1.1)
                         .origin("Example source")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .origObjectId("ORIGOBJECT-ID")
                         .origSensorId("ORIGSENSOR-ID")
                         .planIndex(8)
@@ -1517,7 +1529,7 @@ internal class SensorPlanGetResponseTest {
                                 .obsAvailable(376)
                                 .obsUsed(374)
                                 .origin("THIRD_PARTY_DATASOURCE")
-                                .origNetwork("ORIG")
+                                .origNetwork("OPS1")
                                 .origObjectId("ORIGOBJECT-ID")
                                 .partials("ANALYTIC")
                                 .pedigree("CONJUNCTION")
@@ -1618,7 +1630,7 @@ internal class SensorPlanGetResponseTest {
                 .idSensor("REF-SENSOR-ID")
                 .name("EXAMPLE NAME")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
                 .purpose("Example purpose")
                 .reqTotal(2)
@@ -1846,7 +1858,7 @@ internal class SensorPlanGetResponseTest {
                                                             .manufacturerOrgId("MANUFACTUREORG-ID")
                                                             .mode(AntennaDetailsFull.Mode.TX)
                                                             .origin("THIRD_PARTY_DATASOURCE")
-                                                            .origNetwork("ORIG")
+                                                            .origNetwork("OPS1")
                                                             .polarization(45.1)
                                                             .position("Top")
                                                             .addSize(0.03)
@@ -1871,7 +1883,7 @@ internal class SensorPlanGetResponseTest {
                                                     )
                                                     .createdBy("some.user")
                                                     .origin("THIRD_PARTY_DATASOURCE")
-                                                    .origNetwork("ORIG")
+                                                    .origNetwork("OPS1")
                                                     .updatedAt(
                                                         OffsetDateTime.parse(
                                                             "2018-01-01T16:00:00.123Z"
@@ -2058,7 +2070,7 @@ internal class SensorPlanGetResponseTest {
                                                             .manufacturerOrgId("MANUFACTURERORG-ID")
                                                             .model("11212")
                                                             .origin("THIRD_PARTY_DATASOURCE")
-                                                            .origNetwork("ORIG")
+                                                            .origNetwork("OPS1")
                                                             .addTag("PROVIDER_TAG1")
                                                             .addTag("PROVIDER_TAG2")
                                                             .technology("Ni-Cd")
@@ -2077,7 +2089,7 @@ internal class SensorPlanGetResponseTest {
                                                     )
                                                     .createdBy("some.user")
                                                     .origin("THIRD_PARTY_DATASOURCE")
-                                                    .origNetwork("ORIG")
+                                                    .origNetwork("OPS1")
                                                     .updatedAt(
                                                         OffsetDateTime.parse(
                                                             "2018-01-01T16:00:00.123Z"
@@ -2400,23 +2412,35 @@ internal class SensorPlanGetResponseTest {
                                                     .idEntity("ENTITY-ID")
                                                     .name("BAND_NAME")
                                                     .source("Bluestaq")
-                                                    .id("RFBAND-ID")
+                                                    .id("ad88770b-d824-443f-bdce-5f9e3fa500a9")
                                                     .band("Ku")
                                                     .bandwidth(100.23)
+                                                    .addBandwidthSetting(250.1)
+                                                    .addBandwidthSetting(500.1)
                                                     .beamwidth(45.23)
+                                                    .addBeamwidthSetting(5.1)
+                                                    .addBeamwidthSetting(10.1)
                                                     .centerFreq(1000.23)
                                                     .createdAt(
                                                         OffsetDateTime.parse(
-                                                            "2018-01-01T16:00:00.123Z"
+                                                            "2025-03-05T16:00:00.123Z"
                                                         )
                                                     )
                                                     .createdBy("some.user")
+                                                    .addDelaySetting(2.77)
+                                                    .addDelaySetting(5.64)
                                                     .edgeGain(100.23)
                                                     .eirp(2.23)
                                                     .erp(2.23)
                                                     .freqMax(2000.23)
                                                     .freqMin(50.23)
+                                                    .addFrequencySetting(12250.1)
+                                                    .addFrequencySetting(15000.1)
+                                                    .addGainSetting(2.77)
+                                                    .addGainSetting(5.64)
                                                     .mode(RfBandFull.Mode.TX)
+                                                    .addNoiseSetting(0.00033)
+                                                    .addNoiseSetting(0.0033)
                                                     .origin("THIRD_PARTY_DATASOURCE")
                                                     .origNetwork("OPS1")
                                                     .peakGain(120.23)
@@ -2424,7 +2448,7 @@ internal class SensorPlanGetResponseTest {
                                                     .purpose(RfBandFull.Purpose.TTC)
                                                     .updatedAt(
                                                         OffsetDateTime.parse(
-                                                            "2018-01-01T16:00:00.123Z"
+                                                            "2025-03-05T16:00:00.123Z"
                                                         )
                                                     )
                                                     .updatedBy("some.user")
@@ -2453,7 +2477,7 @@ internal class SensorPlanGetResponseTest {
                                                     .notes("Example Notes")
                                                     .opsCap(StatusFull.OpsCap.FMC)
                                                     .origin("THIRD_PARTY_DATASOURCE")
-                                                    .origNetwork("TST1")
+                                                    .origNetwork("OPS1")
                                                     .state(StatusFull.State.ACTIVE)
                                                     .addSubStatusCollection(
                                                         SubStatusFull.builder()
@@ -2472,7 +2496,7 @@ internal class SensorPlanGetResponseTest {
                                                             )
                                                             .createdBy("some.user")
                                                             .origin("THIRD_PARTY_DATASOURCE")
-                                                            .origNetwork("TST1")
+                                                            .origNetwork("OPS1")
                                                             .updatedAt(
                                                                 OffsetDateTime.parse(
                                                                     "2018-01-01T16:00:00.123Z"
@@ -2602,7 +2626,7 @@ internal class SensorPlanGetResponseTest {
                                                     )
                                                     .createdBy("some.user")
                                                     .origin("THIRD_PARTY_DATASOURCE")
-                                                    .origNetwork("ORIG")
+                                                    .origNetwork("OPS1")
                                                     .addSolarArrayDetail(
                                                         SolarArrayDetailsFull.builder()
                                                             .classificationMarking("U")
@@ -2754,7 +2778,7 @@ internal class SensorPlanGetResponseTest {
                                                             )
                                                             .manufacturerOrgId("MANUFACTURERORG-ID")
                                                             .origin("THIRD_PARTY_DATASOURCE")
-                                                            .origNetwork("ORIG")
+                                                            .origNetwork("OPS1")
                                                             .span(123.4)
                                                             .addTag("TAG1")
                                                             .addTag("TAG2")
@@ -2832,7 +2856,7 @@ internal class SensorPlanGetResponseTest {
                                                             .notes("Example notes")
                                                             .nozzleExpansionRatio(1.1)
                                                             .origin("THIRD_PARTY_DATASOURCE")
-                                                            .origNetwork("ORIG")
+                                                            .origNetwork("OPS1")
                                                             .oxidizer("Liquid Oxygen")
                                                             .propellant("Liquid")
                                                             .seaLevelThrust(1.1)
@@ -2849,7 +2873,7 @@ internal class SensorPlanGetResponseTest {
                                                             .build()
                                                     )
                                                     .origin("THIRD_PARTY_DATASOURCE")
-                                                    .origNetwork("ORIG")
+                                                    .origNetwork("OPS1")
                                                     .updatedAt(
                                                         OffsetDateTime.parse(
                                                             "2018-01-01T16:00:00.123Z"
@@ -2873,7 +2897,7 @@ internal class SensorPlanGetResponseTest {
                                     .build()
                             )
                             .origin("THIRD_PARTY_DATASOURCE")
-                            .origNetwork("ORIG")
+                            .origNetwork("OPS1")
                             .origObjectId("ORIGOBJECT-ID")
                             .origSensorId("ORIGSENSOR-ID")
                             .satNo(101)
@@ -2925,7 +2949,7 @@ internal class SensorPlanGetResponseTest {
                             .meanMotionDDot(1.1)
                             .meanMotionDot(1.1)
                             .origin("THIRD_PARTY_DATASOURCE")
-                            .origNetwork("ORIG")
+                            .origNetwork("OPS1")
                             .origObjectId("ORIGOBJECT-ID")
                             .perigee(1.1)
                             .period(1.1)
@@ -2983,7 +3007,7 @@ internal class SensorPlanGetResponseTest {
                     .orbitRegime("GEO")
                     .orientAngle(1.1)
                     .origin("Example source")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .origObjectId("ORIGOBJECT-ID")
                     .origSensorId("ORIGSENSOR-ID")
                     .planIndex(8)
@@ -3051,7 +3075,7 @@ internal class SensorPlanGetResponseTest {
                             .obsAvailable(376)
                             .obsUsed(374)
                             .origin("THIRD_PARTY_DATASOURCE")
-                            .origNetwork("ORIG")
+                            .origNetwork("OPS1")
                             .origObjectId("ORIGOBJECT-ID")
                             .partials("ANALYTIC")
                             .pedigree("CONJUNCTION")
@@ -3154,7 +3178,7 @@ internal class SensorPlanGetResponseTest {
         assertThat(sensorPlanGetResponse.idSensor()).contains("REF-SENSOR-ID")
         assertThat(sensorPlanGetResponse.name()).contains("EXAMPLE NAME")
         assertThat(sensorPlanGetResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(sensorPlanGetResponse.origNetwork()).contains("ORIG")
+        assertThat(sensorPlanGetResponse.origNetwork()).contains("OPS1")
         assertThat(sensorPlanGetResponse.origSensorId()).contains("ORIGSENSOR-ID")
         assertThat(sensorPlanGetResponse.purpose()).contains("Example purpose")
         assertThat(sensorPlanGetResponse.reqTotal()).contains(2)
@@ -3401,7 +3425,7 @@ internal class SensorPlanGetResponseTest {
                                                                 )
                                                                 .mode(AntennaDetailsFull.Mode.TX)
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .polarization(45.1)
                                                                 .position("Top")
                                                                 .addSize(0.03)
@@ -3426,7 +3450,7 @@ internal class SensorPlanGetResponseTest {
                                                         )
                                                         .createdBy("some.user")
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
                                                                 "2018-01-01T16:00:00.123Z"
@@ -3624,7 +3648,7 @@ internal class SensorPlanGetResponseTest {
                                                                 )
                                                                 .model("11212")
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .addTag("PROVIDER_TAG1")
                                                                 .addTag("PROVIDER_TAG2")
                                                                 .technology("Ni-Cd")
@@ -3643,7 +3667,7 @@ internal class SensorPlanGetResponseTest {
                                                         )
                                                         .createdBy("some.user")
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
                                                                 "2018-01-01T16:00:00.123Z"
@@ -3980,23 +4004,35 @@ internal class SensorPlanGetResponseTest {
                                                         .idEntity("ENTITY-ID")
                                                         .name("BAND_NAME")
                                                         .source("Bluestaq")
-                                                        .id("RFBAND-ID")
+                                                        .id("ad88770b-d824-443f-bdce-5f9e3fa500a9")
                                                         .band("Ku")
                                                         .bandwidth(100.23)
+                                                        .addBandwidthSetting(250.1)
+                                                        .addBandwidthSetting(500.1)
                                                         .beamwidth(45.23)
+                                                        .addBeamwidthSetting(5.1)
+                                                        .addBeamwidthSetting(10.1)
                                                         .centerFreq(1000.23)
                                                         .createdAt(
                                                             OffsetDateTime.parse(
-                                                                "2018-01-01T16:00:00.123Z"
+                                                                "2025-03-05T16:00:00.123Z"
                                                             )
                                                         )
                                                         .createdBy("some.user")
+                                                        .addDelaySetting(2.77)
+                                                        .addDelaySetting(5.64)
                                                         .edgeGain(100.23)
                                                         .eirp(2.23)
                                                         .erp(2.23)
                                                         .freqMax(2000.23)
                                                         .freqMin(50.23)
+                                                        .addFrequencySetting(12250.1)
+                                                        .addFrequencySetting(15000.1)
+                                                        .addGainSetting(2.77)
+                                                        .addGainSetting(5.64)
                                                         .mode(RfBandFull.Mode.TX)
+                                                        .addNoiseSetting(0.00033)
+                                                        .addNoiseSetting(0.0033)
                                                         .origin("THIRD_PARTY_DATASOURCE")
                                                         .origNetwork("OPS1")
                                                         .peakGain(120.23)
@@ -4004,7 +4040,7 @@ internal class SensorPlanGetResponseTest {
                                                         .purpose(RfBandFull.Purpose.TTC)
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
-                                                                "2018-01-01T16:00:00.123Z"
+                                                                "2025-03-05T16:00:00.123Z"
                                                             )
                                                         )
                                                         .updatedBy("some.user")
@@ -4033,7 +4069,7 @@ internal class SensorPlanGetResponseTest {
                                                         .notes("Example Notes")
                                                         .opsCap(StatusFull.OpsCap.FMC)
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("TST1")
+                                                        .origNetwork("OPS1")
                                                         .state(StatusFull.State.ACTIVE)
                                                         .addSubStatusCollection(
                                                             SubStatusFull.builder()
@@ -4054,7 +4090,7 @@ internal class SensorPlanGetResponseTest {
                                                                 )
                                                                 .createdBy("some.user")
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("TST1")
+                                                                .origNetwork("OPS1")
                                                                 .updatedAt(
                                                                     OffsetDateTime.parse(
                                                                         "2018-01-01T16:00:00.123Z"
@@ -4186,7 +4222,7 @@ internal class SensorPlanGetResponseTest {
                                                         )
                                                         .createdBy("some.user")
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .addSolarArrayDetail(
                                                             SolarArrayDetailsFull.builder()
                                                                 .classificationMarking("U")
@@ -4350,7 +4386,7 @@ internal class SensorPlanGetResponseTest {
                                                                     "MANUFACTURERORG-ID"
                                                                 )
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .span(123.4)
                                                                 .addTag("TAG1")
                                                                 .addTag("TAG2")
@@ -4430,7 +4466,7 @@ internal class SensorPlanGetResponseTest {
                                                                 .notes("Example notes")
                                                                 .nozzleExpansionRatio(1.1)
                                                                 .origin("THIRD_PARTY_DATASOURCE")
-                                                                .origNetwork("ORIG")
+                                                                .origNetwork("OPS1")
                                                                 .oxidizer("Liquid Oxygen")
                                                                 .propellant("Liquid")
                                                                 .seaLevelThrust(1.1)
@@ -4447,7 +4483,7 @@ internal class SensorPlanGetResponseTest {
                                                                 .build()
                                                         )
                                                         .origin("THIRD_PARTY_DATASOURCE")
-                                                        .origNetwork("ORIG")
+                                                        .origNetwork("OPS1")
                                                         .updatedAt(
                                                             OffsetDateTime.parse(
                                                                 "2018-01-01T16:00:00.123Z"
@@ -4471,7 +4507,7 @@ internal class SensorPlanGetResponseTest {
                                         .build()
                                 )
                                 .origin("THIRD_PARTY_DATASOURCE")
-                                .origNetwork("ORIG")
+                                .origNetwork("OPS1")
                                 .origObjectId("ORIGOBJECT-ID")
                                 .origSensorId("ORIGSENSOR-ID")
                                 .satNo(101)
@@ -4523,7 +4559,7 @@ internal class SensorPlanGetResponseTest {
                                 .meanMotionDDot(1.1)
                                 .meanMotionDot(1.1)
                                 .origin("THIRD_PARTY_DATASOURCE")
-                                .origNetwork("ORIG")
+                                .origNetwork("OPS1")
                                 .origObjectId("ORIGOBJECT-ID")
                                 .perigee(1.1)
                                 .period(1.1)
@@ -4581,7 +4617,7 @@ internal class SensorPlanGetResponseTest {
                         .orbitRegime("GEO")
                         .orientAngle(1.1)
                         .origin("Example source")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .origObjectId("ORIGOBJECT-ID")
                         .origSensorId("ORIGSENSOR-ID")
                         .planIndex(8)
@@ -4650,7 +4686,7 @@ internal class SensorPlanGetResponseTest {
                                 .obsAvailable(376)
                                 .obsUsed(374)
                                 .origin("THIRD_PARTY_DATASOURCE")
-                                .origNetwork("ORIG")
+                                .origNetwork("OPS1")
                                 .origObjectId("ORIGOBJECT-ID")
                                 .partials("ANALYTIC")
                                 .pedigree("CONJUNCTION")
@@ -4751,7 +4787,7 @@ internal class SensorPlanGetResponseTest {
                 .idSensor("REF-SENSOR-ID")
                 .name("EXAMPLE NAME")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
                 .purpose("Example purpose")
                 .reqTotal(2)

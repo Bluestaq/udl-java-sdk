@@ -20,8 +20,6 @@ import com.unifieddatalibrary.api.models.sensortype.SensorTypeGetResponse
 import com.unifieddatalibrary.api.models.sensortype.SensorTypeListPageAsync
 import com.unifieddatalibrary.api.models.sensortype.SensorTypeListParams
 import com.unifieddatalibrary.api.models.sensortype.SensorTypeListResponse
-import com.unifieddatalibrary.api.models.sensortype.SensorTypeQueryhelpParams
-import com.unifieddatalibrary.api.models.sensortype.SensorTypeQueryhelpResponse
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
@@ -51,13 +49,6 @@ class SensorTypeServiceAsyncImpl internal constructor(private val clientOptions:
     ): CompletableFuture<SensorTypeGetResponse> =
         // get /udl/sensortype/{id}
         withRawResponse().get(params, requestOptions).thenApply { it.parse() }
-
-    override fun queryhelp(
-        params: SensorTypeQueryhelpParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<SensorTypeQueryhelpResponse> =
-        // get /udl/sensortype/queryhelp
-        withRawResponse().queryhelp(params, requestOptions).thenApply { it.parse() }
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         SensorTypeServiceAsync.WithRawResponse {
@@ -134,36 +125,6 @@ class SensorTypeServiceAsyncImpl internal constructor(private val clientOptions:
                     errorHandler.handle(response).parseable {
                         response
                             .use { getHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.validate()
-                                }
-                            }
-                    }
-                }
-        }
-
-        private val queryhelpHandler: Handler<SensorTypeQueryhelpResponse> =
-            jsonHandler<SensorTypeQueryhelpResponse>(clientOptions.jsonMapper)
-
-        override fun queryhelp(
-            params: SensorTypeQueryhelpParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<SensorTypeQueryhelpResponse>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "sensortype", "queryhelp")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response
-                            .use { queryhelpHandler.handle(it) }
                             .also {
                                 if (requestOptions.responseValidation!!) {
                                     it.validate()

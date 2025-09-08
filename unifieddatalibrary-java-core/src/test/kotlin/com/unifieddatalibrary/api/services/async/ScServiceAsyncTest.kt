@@ -20,7 +20,6 @@ import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
-import com.unifieddatalibrary.api.models.scs.ScUpdateTagsParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -44,21 +43,6 @@ internal class ScServiceAsyncTest {
         val future = scServiceAsync.delete(ScDeleteParams.builder().id("id").build())
 
         val response = future.get()
-    }
-
-    @Test
-    fun aggregateDocType() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val scServiceAsync = client.scs()
-
-        val responseFuture = scServiceAsync.aggregateDocType()
-
-        val response = responseFuture.get()
     }
 
     @Test
@@ -120,10 +104,7 @@ internal class ScServiceAsyncTest {
 
         val responseFuture =
             scServiceAsync.download(
-                ScDownloadParams.builder()
-                    .addBody("/processPalantirXml/media/PT_MEDIA6831731772984708680")
-                    .addBody("/processPalantirXml/media/PT_MEDIA7297147303810886654")
-                    .build()
+                ScDownloadParams.builder().addBody(JsonValue.from("/MyFolderToDownload/")).build()
             )
 
         val response = responseFuture.get()
@@ -251,23 +232,5 @@ internal class ScServiceAsyncTest {
 
         val fileData = fileDataFuture.get()
         fileData.forEach { it.validate() }
-    }
-
-    @Test
-    fun updateTags() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val scServiceAsync = client.scs()
-
-        val future =
-            scServiceAsync.updateTags(
-                ScUpdateTagsParams.builder().folder("folder").tags("tags").build()
-            )
-
-        val response = future.get()
     }
 }

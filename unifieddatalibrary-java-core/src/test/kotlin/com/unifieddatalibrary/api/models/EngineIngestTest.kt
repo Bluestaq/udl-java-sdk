@@ -22,7 +22,7 @@ internal class EngineIngestTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         assertThat(engineIngest.classificationMarking()).isEqualTo("U")
@@ -34,7 +34,7 @@ internal class EngineIngestTest {
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
         assertThat(engineIngest.createdBy()).contains("some.user")
         assertThat(engineIngest.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(engineIngest.origNetwork()).contains("ORIG")
+        assertThat(engineIngest.origNetwork()).contains("OPS1")
     }
 
     @Test
@@ -50,7 +50,7 @@ internal class EngineIngestTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         val roundtrippedEngineIngest =

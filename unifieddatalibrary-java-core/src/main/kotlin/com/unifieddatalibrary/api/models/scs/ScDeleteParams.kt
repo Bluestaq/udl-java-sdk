@@ -16,6 +16,7 @@ import java.util.Optional
  * user. A specific role is required to perform this service operation. Please contact the UDL team
  * for assistance.
  */
+@Deprecated("deprecated")
 class ScDeleteParams
 private constructor(
     private val id: String,

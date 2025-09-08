@@ -19,7 +19,6 @@ import com.unifieddatalibrary.api.core.http.json
 import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.FileData
-import com.unifieddatalibrary.api.models.scs.ScAggregateDocTypeParams
 import com.unifieddatalibrary.api.models.scs.ScAllowableFileExtensionsParams
 import com.unifieddatalibrary.api.models.scs.ScAllowableFileMimesParams
 import com.unifieddatalibrary.api.models.scs.ScCopyParams
@@ -30,7 +29,6 @@ import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
-import com.unifieddatalibrary.api.models.scs.ScUpdateTagsParams
 import com.unifieddatalibrary.api.services.blocking.scs.ClassificationMarkingService
 import com.unifieddatalibrary.api.services.blocking.scs.ClassificationMarkingServiceImpl
 import com.unifieddatalibrary.api.services.blocking.scs.FileMetadataService
@@ -97,17 +95,11 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
 
     override fun file(): FileService = file
 
+    @Deprecated("deprecated")
     override fun delete(params: ScDeleteParams, requestOptions: RequestOptions) {
         // delete /scs/delete
         withRawResponse().delete(params, requestOptions)
     }
-
-    override fun aggregateDocType(
-        params: ScAggregateDocTypeParams,
-        requestOptions: RequestOptions,
-    ): List<String> =
-        // get /scs/aggregateDocType
-        withRawResponse().aggregateDocType(params, requestOptions).parse()
 
     override fun allowableFileExtensions(
         params: ScAllowableFileExtensionsParams,
@@ -123,6 +115,7 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
         // get /scs/allowableFileMimes
         withRawResponse().allowableFileMimes(params, requestOptions).parse()
 
+    @Deprecated("deprecated")
     override fun copy(params: ScCopyParams, requestOptions: RequestOptions): String =
         // post /scs/copy
         withRawResponse().copy(params, requestOptions).parse()
@@ -138,27 +131,26 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
         // get /scs/download
         withRawResponse().fileDownload(params, requestOptions)
 
+    @Deprecated("deprecated")
     override fun fileUpload(params: ScFileUploadParams, requestOptions: RequestOptions): String =
         // post /scs/file
         withRawResponse().fileUpload(params, requestOptions).parse()
 
+    @Deprecated("deprecated")
     override fun move(params: ScMoveParams, requestOptions: RequestOptions): String =
         // put /scs/move
         withRawResponse().move(params, requestOptions).parse()
 
+    @Deprecated("deprecated")
     override fun rename(params: ScRenameParams, requestOptions: RequestOptions) {
         // put /scs/rename
         withRawResponse().rename(params, requestOptions)
     }
 
+    @Deprecated("deprecated")
     override fun search(params: ScSearchParams, requestOptions: RequestOptions): List<FileData> =
         // post /scs/search
         withRawResponse().search(params, requestOptions).parse()
-
-    override fun updateTags(params: ScUpdateTagsParams, requestOptions: RequestOptions) {
-        // put /scs/updateTagsForFilesInFolder
-        withRawResponse().updateTags(params, requestOptions)
-    }
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         ScService.WithRawResponse {
@@ -224,6 +216,7 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
 
         private val deleteHandler: Handler<Void?> = emptyHandler()
 
+        @Deprecated("deprecated")
         override fun delete(params: ScDeleteParams, requestOptions: RequestOptions): HttpResponse {
             val request =
                 HttpRequest.builder()
@@ -237,27 +230,6 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response.use { deleteHandler.handle(it) }
-            }
-        }
-
-        private val aggregateDocTypeHandler: Handler<List<String>> =
-            jsonHandler<List<String>>(clientOptions.jsonMapper)
-
-        override fun aggregateDocType(
-            params: ScAggregateDocTypeParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<String>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("scs", "aggregateDocType")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { aggregateDocTypeHandler.handle(it) }
             }
         }
 
@@ -305,6 +277,7 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
 
         private val copyHandler: Handler<String> = stringHandler()
 
+        @Deprecated("deprecated")
         override fun copy(
             params: ScCopyParams,
             requestOptions: RequestOptions,
@@ -359,6 +332,7 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
 
         private val fileUploadHandler: Handler<String> = stringHandler()
 
+        @Deprecated("deprecated")
         override fun fileUpload(
             params: ScFileUploadParams,
             requestOptions: RequestOptions,
@@ -383,6 +357,7 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
 
         private val moveHandler: Handler<String> = stringHandler()
 
+        @Deprecated("deprecated")
         override fun move(
             params: ScMoveParams,
             requestOptions: RequestOptions,
@@ -404,6 +379,7 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
 
         private val renameHandler: Handler<Void?> = emptyHandler()
 
+        @Deprecated("deprecated")
         override fun rename(params: ScRenameParams, requestOptions: RequestOptions): HttpResponse {
             val request =
                 HttpRequest.builder()
@@ -423,6 +399,7 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
         private val searchHandler: Handler<List<FileData>> =
             jsonHandler<List<FileData>>(clientOptions.jsonMapper)
 
+        @Deprecated("deprecated")
         override fun search(
             params: ScSearchParams,
             requestOptions: RequestOptions,
@@ -445,27 +422,6 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
                             it.forEach { it.validate() }
                         }
                     }
-            }
-        }
-
-        private val updateTagsHandler: Handler<Void?> = emptyHandler()
-
-        override fun updateTags(
-            params: ScUpdateTagsParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.PUT)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("scs", "updateTagsForFilesInFolder")
-                    .apply { params._body().ifPresent { body(json(clientOptions.jsonMapper, it)) } }
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { updateTagsHandler.handle(it) }
             }
         }
     }

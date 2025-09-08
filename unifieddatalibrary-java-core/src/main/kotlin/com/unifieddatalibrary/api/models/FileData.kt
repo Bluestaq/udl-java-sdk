@@ -19,11 +19,11 @@ import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
+@Deprecated("deprecated")
 class FileData
 private constructor(
     private val id: JsonField<String>,
     private val attributes: JsonField<Attributes>,
-    private val contentAction: JsonField<ContentAction>,
     private val targetName: JsonField<String>,
     private val targetPath: JsonField<String>,
     private val type: JsonField<Type>,
@@ -36,9 +36,6 @@ private constructor(
         @JsonProperty("attributes")
         @ExcludeMissing
         attributes: JsonField<Attributes> = JsonMissing.of(),
-        @JsonProperty("contentAction")
-        @ExcludeMissing
-        contentAction: JsonField<ContentAction> = JsonMissing.of(),
         @JsonProperty("targetName")
         @ExcludeMissing
         targetName: JsonField<String> = JsonMissing.of(),
@@ -46,7 +43,7 @@ private constructor(
         @ExcludeMissing
         targetPath: JsonField<String> = JsonMissing.of(),
         @JsonProperty("type") @ExcludeMissing type: JsonField<Type> = JsonMissing.of(),
-    ) : this(id, attributes, contentAction, targetName, targetPath, type, mutableMapOf())
+    ) : this(id, attributes, targetName, targetPath, type, mutableMapOf())
 
     /**
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
@@ -58,13 +55,8 @@ private constructor(
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
+    @Deprecated("deprecated")
     fun attributes(): Optional<Attributes> = attributes.getOptional("attributes")
-
-    /**
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun contentAction(): Optional<ContentAction> = contentAction.getOptional("contentAction")
 
     /**
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
@@ -82,7 +74,7 @@ private constructor(
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun type(): Optional<Type> = type.getOptional("type")
+    @Deprecated("deprecated") fun type(): Optional<Type> = type.getOptional("type")
 
     /**
      * Returns the raw JSON value of [id].
@@ -96,18 +88,10 @@ private constructor(
      *
      * Unlike [attributes], this method doesn't throw if the JSON field has an unexpected type.
      */
+    @Deprecated("deprecated")
     @JsonProperty("attributes")
     @ExcludeMissing
     fun _attributes(): JsonField<Attributes> = attributes
-
-    /**
-     * Returns the raw JSON value of [contentAction].
-     *
-     * Unlike [contentAction], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    @JsonProperty("contentAction")
-    @ExcludeMissing
-    fun _contentAction(): JsonField<ContentAction> = contentAction
 
     /**
      * Returns the raw JSON value of [targetName].
@@ -128,7 +112,10 @@ private constructor(
      *
      * Unlike [type], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("type") @ExcludeMissing fun _type(): JsonField<Type> = type
+    @Deprecated("deprecated")
+    @JsonProperty("type")
+    @ExcludeMissing
+    fun _type(): JsonField<Type> = type
 
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
@@ -153,7 +140,6 @@ private constructor(
 
         private var id: JsonField<String> = JsonMissing.of()
         private var attributes: JsonField<Attributes> = JsonMissing.of()
-        private var contentAction: JsonField<ContentAction> = JsonMissing.of()
         private var targetName: JsonField<String> = JsonMissing.of()
         private var targetPath: JsonField<String> = JsonMissing.of()
         private var type: JsonField<Type> = JsonMissing.of()
@@ -163,7 +149,6 @@ private constructor(
         internal fun from(fileData: FileData) = apply {
             id = fileData.id
             attributes = fileData.attributes
-            contentAction = fileData.contentAction
             targetName = fileData.targetName
             targetPath = fileData.targetPath
             type = fileData.type
@@ -180,6 +165,7 @@ private constructor(
          */
         fun id(id: JsonField<String>) = apply { this.id = id }
 
+        @Deprecated("deprecated")
         fun attributes(attributes: Attributes) = attributes(JsonField.of(attributes))
 
         /**
@@ -189,20 +175,8 @@ private constructor(
          * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
+        @Deprecated("deprecated")
         fun attributes(attributes: JsonField<Attributes>) = apply { this.attributes = attributes }
-
-        fun contentAction(contentAction: ContentAction) = contentAction(JsonField.of(contentAction))
-
-        /**
-         * Sets [Builder.contentAction] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.contentAction] with a well-typed [ContentAction] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
-         */
-        fun contentAction(contentAction: JsonField<ContentAction>) = apply {
-            this.contentAction = contentAction
-        }
 
         fun targetName(targetName: String) = targetName(JsonField.of(targetName))
 
@@ -226,7 +200,7 @@ private constructor(
          */
         fun targetPath(targetPath: JsonField<String>) = apply { this.targetPath = targetPath }
 
-        fun type(type: Type) = type(JsonField.of(type))
+        @Deprecated("deprecated") fun type(type: Type) = type(JsonField.of(type))
 
         /**
          * Sets [Builder.type] to an arbitrary JSON value.
@@ -234,7 +208,7 @@ private constructor(
          * You should usually call [Builder.type] with a well-typed [Type] value instead. This
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun type(type: JsonField<Type>) = apply { this.type = type }
+        @Deprecated("deprecated") fun type(type: JsonField<Type>) = apply { this.type = type }
 
         fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
             this.additionalProperties.clear()
@@ -264,7 +238,6 @@ private constructor(
             FileData(
                 id,
                 attributes,
-                contentAction,
                 targetName,
                 targetPath,
                 type,
@@ -281,7 +254,6 @@ private constructor(
 
         id()
         attributes().ifPresent { it.validate() }
-        contentAction().ifPresent { it.validate() }
         targetName()
         targetPath()
         type().ifPresent { it.validate() }
@@ -305,11 +277,11 @@ private constructor(
     internal fun validity(): Int =
         (if (id.asKnown().isPresent) 1 else 0) +
             (attributes.asKnown().getOrNull()?.validity() ?: 0) +
-            (contentAction.asKnown().getOrNull()?.validity() ?: 0) +
             (if (targetName.asKnown().isPresent) 1 else 0) +
             (if (targetPath.asKnown().isPresent) 1 else 0) +
             (type.asKnown().getOrNull()?.validity() ?: 0)
 
+    @Deprecated("deprecated")
     class Attributes
     private constructor(
         private val id: JsonField<String>,
@@ -1594,144 +1566,7 @@ private constructor(
             "Attributes{id=$id, classification=$classification, classificationMarking=$classificationMarking, createdBy=$createdBy, createdDate=$createdDate, deleteOn=$deleteOn, description=$description, docTitle=$docTitle, docType=$docType, doi=$doi, ellipseLat=$ellipseLat, ellipseLon=$ellipseLon, fileName=$fileName, intrinsicTitle=$intrinsicTitle, keywords=$keywords, mediaTitle=$mediaTitle, metaInfo=$metaInfo, milgrid=$milgrid, milgridLat=$milgridLat, milgridLon=$milgridLon, modifiedBy=$modifiedBy, modifiedDate=$modifiedDate, name=$name, path=$path, read=$read, searchable=$searchable, searchAfter=$searchAfter, serialNumber=$serialNumber, size=$size, tags=$tags, write=$write, additionalProperties=$additionalProperties}"
     }
 
-    class ContentAction @JsonCreator private constructor(private val value: JsonField<String>) :
-        Enum {
-
-        /**
-         * Returns this class instance's raw value.
-         *
-         * This is usually only useful if this instance was deserialized from data that doesn't
-         * match any known member, and you want to know that value. For example, if the SDK is on an
-         * older version than the API, then the API may respond with new members that the SDK is
-         * unaware of.
-         */
-        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
-
-        companion object {
-
-            @JvmField val UPDATE = of("UPDATE")
-
-            @JvmField val COPY = of("COPY")
-
-            @JvmField val MOVE = of("MOVE")
-
-            @JvmStatic fun of(value: String) = ContentAction(JsonField.of(value))
-        }
-
-        /** An enum containing [ContentAction]'s known values. */
-        enum class Known {
-            UPDATE,
-            COPY,
-            MOVE,
-        }
-
-        /**
-         * An enum containing [ContentAction]'s known values, as well as an [_UNKNOWN] member.
-         *
-         * An instance of [ContentAction] can contain an unknown value in a couple of cases:
-         * - It was deserialized from data that doesn't match any known member. For example, if the
-         *   SDK is on an older version than the API, then the API may respond with new members that
-         *   the SDK is unaware of.
-         * - It was constructed with an arbitrary value using the [of] method.
-         */
-        enum class Value {
-            UPDATE,
-            COPY,
-            MOVE,
-            /**
-             * An enum member indicating that [ContentAction] was instantiated with an unknown
-             * value.
-             */
-            _UNKNOWN,
-        }
-
-        /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
-         * if the class was instantiated with an unknown value.
-         *
-         * Use the [known] method instead if you're certain the value is always known or if you want
-         * to throw for the unknown case.
-         */
-        fun value(): Value =
-            when (this) {
-                UPDATE -> Value.UPDATE
-                COPY -> Value.COPY
-                MOVE -> Value.MOVE
-                else -> Value._UNKNOWN
-            }
-
-        /**
-         * Returns an enum member corresponding to this class instance's value.
-         *
-         * Use the [value] method instead if you're uncertain the value is always known and don't
-         * want to throw for the unknown case.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
-         *   known member.
-         */
-        fun known(): Known =
-            when (this) {
-                UPDATE -> Known.UPDATE
-                COPY -> Known.COPY
-                MOVE -> Known.MOVE
-                else ->
-                    throw UnifieddatalibraryInvalidDataException("Unknown ContentAction: $value")
-            }
-
-        /**
-         * Returns this class instance's primitive wire representation.
-         *
-         * This differs from the [toString] method because that method is primarily for debugging
-         * and generally doesn't throw.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
-         *   have the expected primitive type.
-         */
-        fun asString(): String =
-            _value().asString().orElseThrow {
-                UnifieddatalibraryInvalidDataException("Value is not a String")
-            }
-
-        private var validated: Boolean = false
-
-        fun validate(): ContentAction = apply {
-            if (validated) {
-                return@apply
-            }
-
-            known()
-            validated = true
-        }
-
-        fun isValid(): Boolean =
-            try {
-                validate()
-                true
-            } catch (e: UnifieddatalibraryInvalidDataException) {
-                false
-            }
-
-        /**
-         * Returns a score indicating how many valid values are contained in this object
-         * recursively.
-         *
-         * Used for best match union deserialization.
-         */
-        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
-
-        override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
-
-            return other is ContentAction && value == other.value
-        }
-
-        override fun hashCode() = value.hashCode()
-
-        override fun toString() = value.toString()
-    }
-
+    @Deprecated("deprecated")
     class Type @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
 
         /**
@@ -1873,7 +1708,6 @@ private constructor(
         return other is FileData &&
             id == other.id &&
             attributes == other.attributes &&
-            contentAction == other.contentAction &&
             targetName == other.targetName &&
             targetPath == other.targetPath &&
             type == other.type &&
@@ -1881,19 +1715,11 @@ private constructor(
     }
 
     private val hashCode: Int by lazy {
-        Objects.hash(
-            id,
-            attributes,
-            contentAction,
-            targetName,
-            targetPath,
-            type,
-            additionalProperties,
-        )
+        Objects.hash(id, attributes, targetName, targetPath, type, additionalProperties)
     }
 
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "FileData{id=$id, attributes=$attributes, contentAction=$contentAction, targetName=$targetName, targetPath=$targetPath, type=$type, additionalProperties=$additionalProperties}"
+        "FileData{id=$id, attributes=$attributes, targetName=$targetName, targetPath=$targetPath, type=$type, additionalProperties=$additionalProperties}"
 }

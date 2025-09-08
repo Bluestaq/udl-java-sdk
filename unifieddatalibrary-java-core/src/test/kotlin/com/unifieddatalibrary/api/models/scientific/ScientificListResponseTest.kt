@@ -28,7 +28,7 @@ internal class ScientificListResponseTest {
                 .manufacturerOrgId("REF-MANUFACTURERORG-ID")
                 .notes("NOTES")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .payloadCategory("Sensor")
                 .build()
 
@@ -50,7 +50,7 @@ internal class ScientificListResponseTest {
         assertThat(scientificListResponse.manufacturerOrgId()).contains("REF-MANUFACTURERORG-ID")
         assertThat(scientificListResponse.notes()).contains("NOTES")
         assertThat(scientificListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(scientificListResponse.origNetwork()).contains("ORIG")
+        assertThat(scientificListResponse.origNetwork()).contains("OPS1")
         assertThat(scientificListResponse.payloadCategory()).contains("Sensor")
     }
 
@@ -73,7 +73,7 @@ internal class ScientificListResponseTest {
                 .manufacturerOrgId("REF-MANUFACTURERORG-ID")
                 .notes("NOTES")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .payloadCategory("Sensor")
                 .build()
 

@@ -21,7 +21,7 @@ internal class BatteryIngestTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         assertThat(batteryIngest.dataMode()).isEqualTo(BatteryIngest.DataMode.TEST)
@@ -32,7 +32,7 @@ internal class BatteryIngestTest {
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
         assertThat(batteryIngest.createdBy()).contains("some.user")
         assertThat(batteryIngest.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(batteryIngest.origNetwork()).contains("ORIG")
+        assertThat(batteryIngest.origNetwork()).contains("OPS1")
     }
 
     @Test
@@ -47,7 +47,7 @@ internal class BatteryIngestTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         val roundtrippedBatteryIngest =

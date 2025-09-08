@@ -56,7 +56,7 @@ internal class LinkStatusServiceAsyncTest {
                     .linkType("Example link")
                     .opsCap("Example status")
                     .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .satNo1(1)
                     .satNo2(2)
                     .sysCap("Example status")

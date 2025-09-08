@@ -27,7 +27,7 @@ internal class BatterydetailsAbridgedTest {
                 .manufacturerOrgId("MANUFACTURERORG-ID")
                 .model("11212")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .technology("Ni-Cd")
                 .build()
 
@@ -46,7 +46,7 @@ internal class BatterydetailsAbridgedTest {
         assertThat(batterydetailsAbridged.manufacturerOrgId()).contains("MANUFACTURERORG-ID")
         assertThat(batterydetailsAbridged.model()).contains("11212")
         assertThat(batterydetailsAbridged.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(batterydetailsAbridged.origNetwork()).contains("ORIG")
+        assertThat(batterydetailsAbridged.origNetwork()).contains("OPS1")
         assertThat(batterydetailsAbridged.technology()).contains("Ni-Cd")
     }
 
@@ -68,7 +68,7 @@ internal class BatterydetailsAbridgedTest {
                 .manufacturerOrgId("MANUFACTURERORG-ID")
                 .model("11212")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .technology("Ni-Cd")
                 .build()
 

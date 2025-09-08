@@ -20,7 +20,6 @@ import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
-import com.unifieddatalibrary.api.models.scs.ScUpdateTagsParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -42,19 +41,6 @@ internal class ScServiceTest {
         val scService = client.scs()
 
         scService.delete(ScDeleteParams.builder().id("id").build())
-    }
-
-    @Test
-    fun aggregateDocType() {
-        val client =
-            UnifieddatalibraryOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val scService = client.scs()
-
-        scService.aggregateDocType()
     }
 
     @Test
@@ -109,10 +95,7 @@ internal class ScServiceTest {
 
         val response =
             scService.download(
-                ScDownloadParams.builder()
-                    .addBody("/processPalantirXml/media/PT_MEDIA6831731772984708680")
-                    .addBody("/processPalantirXml/media/PT_MEDIA7297147303810886654")
-                    .build()
+                ScDownloadParams.builder().addBody(JsonValue.from("/MyFolderToDownload/")).build()
             )
 
         assertThat(response.body()).hasContent("abc")
@@ -228,18 +211,5 @@ internal class ScServiceTest {
             )
 
         fileData.forEach { it.validate() }
-    }
-
-    @Test
-    fun updateTags() {
-        val client =
-            UnifieddatalibraryOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val scService = client.scs()
-
-        scService.updateTags(ScUpdateTagsParams.builder().folder("folder").tags("tags").build())
     }
 }

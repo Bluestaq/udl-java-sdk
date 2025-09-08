@@ -88,7 +88,7 @@ internal class NavigationCreateParamsTest {
             )
             .idEntity("0167f577-e06c-358e-85aa-0a07a730bdd0")
             .origin("THIRD_PARTY_DATASOURCE")
-            .origNetwork("ORIG")
+            .origNetwork("OPS1")
             .build()
     }
 
@@ -170,7 +170,7 @@ internal class NavigationCreateParamsTest {
                 )
                 .idEntity("0167f577-e06c-358e-85aa-0a07a730bdd0")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         val body = params._body()
@@ -250,7 +250,7 @@ internal class NavigationCreateParamsTest {
             )
         assertThat(body.idEntity()).contains("0167f577-e06c-358e-85aa-0a07a730bdd0")
         assertThat(body.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(body.origNetwork()).contains("ORIG")
+        assertThat(body.origNetwork()).contains("OPS1")
     }
 
     @Test

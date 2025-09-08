@@ -77,7 +77,7 @@ internal class OperationCreateBulkParamsTest {
                             .build()
                     )
                     .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .addPathway(
                         OperationCreateBulkParams.Body.Pathway.builder()
                             .pwDefinition("AGP: 14L, K6, K, G (ANG APRN TO TWY K), GUARD (MAIN)")
@@ -184,7 +184,7 @@ internal class OperationCreateBulkParamsTest {
                                 .build()
                         )
                         .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .addPathway(
                             OperationCreateBulkParams.Body.Pathway.builder()
                                 .pwDefinition(
@@ -289,7 +289,7 @@ internal class OperationCreateBulkParamsTest {
                             .build()
                     )
                     .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .addPathway(
                         OperationCreateBulkParams.Body.Pathway.builder()
                             .pwDefinition("AGP: 14L, K6, K, G (ANG APRN TO TWY K), GUARD (MAIN)")

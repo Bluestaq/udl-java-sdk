@@ -39,7 +39,7 @@ internal class NotificationServiceTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .sourceDl("AXE")
                 .addTag("TAG1")
                 .addTag("TAG2")

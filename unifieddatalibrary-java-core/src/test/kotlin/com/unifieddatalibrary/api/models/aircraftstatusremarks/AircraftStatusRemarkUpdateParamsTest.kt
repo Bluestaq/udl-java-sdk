@@ -28,8 +28,6 @@ internal class AircraftStatusRemarkUpdateParamsTest {
             .origNetwork("OPS1")
             .sourceDl("AXE")
             .timestamp(OffsetDateTime.parse("2024-01-01T15:00:00.123Z"))
-            .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-            .updatedBy("some.user")
             .build()
     }
 
@@ -71,8 +69,6 @@ internal class AircraftStatusRemarkUpdateParamsTest {
                 .origNetwork("OPS1")
                 .sourceDl("AXE")
                 .timestamp(OffsetDateTime.parse("2024-01-01T15:00:00.123Z"))
-                .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .updatedBy("some.user")
                 .build()
 
         val body = params._body()
@@ -93,8 +89,6 @@ internal class AircraftStatusRemarkUpdateParamsTest {
         assertThat(body.origNetwork()).contains("OPS1")
         assertThat(body.sourceDl()).contains("AXE")
         assertThat(body.timestamp()).contains(OffsetDateTime.parse("2024-01-01T15:00:00.123Z"))
-        assertThat(body.updatedAt()).contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(body.updatedBy()).contains("some.user")
     }
 
     @Test

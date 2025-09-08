@@ -120,7 +120,6 @@ internal class DatalinkServiceAsyncTest {
                             .pocRank("MAJ")
                             .qualifier("CHG")
                             .qualSn(1)
-                            .rawFileUri("Example URI")
                             .addReference(
                                 DatalinkIngest.Reference.builder()
                                     .refOriginator("CENTCOM")
@@ -373,7 +372,6 @@ internal class DatalinkServiceAsyncTest {
                             .pocRank("MAJ")
                             .qualifier("CHG")
                             .qualSn(1)
-                            .rawFileUri("Example URI")
                             .addReference(
                                 DatalinkIngest.Reference.builder()
                                     .refOriginator("CENTCOM")

@@ -102,7 +102,7 @@ internal class HistoryListResponseTest {
                 .missionSyncMatrixBin("MATRIX")
                 .name("Example mission name")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .addTasking(
                     HistoryListResponse.Tasking.builder()
                         .id("ISRCOLLECTIONTASKINGS-ID")
@@ -313,7 +313,7 @@ internal class HistoryListResponseTest {
         assertThat(historyListResponse.missionSyncMatrixBin()).contains("MATRIX")
         assertThat(historyListResponse.name()).contains("Example mission name")
         assertThat(historyListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(historyListResponse.origNetwork()).contains("ORIG")
+        assertThat(historyListResponse.origNetwork()).contains("OPS1")
         assertThat(historyListResponse.taskings().getOrNull())
             .containsExactly(
                 HistoryListResponse.Tasking.builder()
@@ -528,7 +528,7 @@ internal class HistoryListResponseTest {
                 .missionSyncMatrixBin("MATRIX")
                 .name("Example mission name")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .addTasking(
                     HistoryListResponse.Tasking.builder()
                         .id("ISRCOLLECTIONTASKINGS-ID")

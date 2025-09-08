@@ -29,7 +29,7 @@ internal class GroundImageryListResponseTest {
                 .name("Example name")
                 .notes("Example notes")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
                 .regionGeoJson(
                     "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
@@ -64,7 +64,7 @@ internal class GroundImageryListResponseTest {
         assertThat(groundImageryListResponse.name()).contains("Example name")
         assertThat(groundImageryListResponse.notes()).contains("Example notes")
         assertThat(groundImageryListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(groundImageryListResponse.origNetwork()).contains("ORIG")
+        assertThat(groundImageryListResponse.origNetwork()).contains("OPS1")
         assertThat(groundImageryListResponse.origSensorId()).contains("ORIGSENSOR-ID")
         assertThat(groundImageryListResponse.regionGeoJson())
             .contains(
@@ -103,7 +103,7 @@ internal class GroundImageryListResponseTest {
                 .name("Example name")
                 .notes("Example notes")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
                 .regionGeoJson(
                     "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"

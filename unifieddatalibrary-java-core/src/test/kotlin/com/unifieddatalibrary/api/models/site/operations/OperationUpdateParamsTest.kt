@@ -74,7 +74,7 @@ internal class OperationUpdateParamsTest {
                     .build()
             )
             .origin("THIRD_PARTY_DATASOURCE")
-            .origNetwork("ORIG")
+            .origNetwork("OPS1")
             .addPathway(
                 OperationUpdateParams.Pathway.builder()
                     .pwDefinition("AGP: 14L, K6, K, G (ANG APRN TO TWY K), GUARD (MAIN)")
@@ -187,7 +187,7 @@ internal class OperationUpdateParamsTest {
                         .build()
                 )
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .addPathway(
                     OperationUpdateParams.Pathway.builder()
                         .pwDefinition("AGP: 14L, K6, K, G (ANG APRN TO TWY K), GUARD (MAIN)")
@@ -286,7 +286,7 @@ internal class OperationUpdateParamsTest {
                     .build()
             )
         assertThat(body.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(body.origNetwork()).contains("ORIG")
+        assertThat(body.origNetwork()).contains("OPS1")
         assertThat(body.pathways().getOrNull())
             .containsExactly(
                 OperationUpdateParams.Pathway.builder()

@@ -32,10 +32,12 @@ interface FileServiceAsync {
      * Returns a FileData object representing the file with the given ID that is visible to the
      * calling user.
      */
+    @Deprecated("deprecated")
     fun retrieve(params: FileRetrieveParams): CompletableFuture<FileData> =
         retrieve(params, RequestOptions.none())
 
     /** @see retrieve */
+    @Deprecated("deprecated")
     fun retrieve(
         params: FileRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -45,19 +47,23 @@ interface FileServiceAsync {
      * operation to update files metadata. A specific role is required to perform this service
      * operation. Please contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun update(): CompletableFuture<Void?> = update(FileUpdateParams.none())
 
     /** @see update */
+    @Deprecated("deprecated")
     fun update(
         params: FileUpdateParams = FileUpdateParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
     /** @see update */
+    @Deprecated("deprecated")
     fun update(params: FileUpdateParams = FileUpdateParams.none()): CompletableFuture<Void?> =
         update(params, RequestOptions.none())
 
     /** @see update */
+    @Deprecated("deprecated")
     fun update(requestOptions: RequestOptions): CompletableFuture<Void?> =
         update(FileUpdateParams.none(), requestOptions)
 
@@ -65,10 +71,12 @@ interface FileServiceAsync {
      * Returns a non-recursive list of FileData objects representing the files and subdirectories in
      * the passed-in path directory that are visible to the calling user.
      */
+    @Deprecated("deprecated")
     fun list(params: FileListParams): CompletableFuture<FileListPageAsync> =
         list(params, RequestOptions.none())
 
     /** @see list */
+    @Deprecated("deprecated")
     fun list(
         params: FileListParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -88,10 +96,12 @@ interface FileServiceAsync {
          * Returns a raw HTTP response for `get /scs/file`, but is otherwise the same as
          * [FileServiceAsync.retrieve].
          */
+        @Deprecated("deprecated")
         fun retrieve(params: FileRetrieveParams): CompletableFuture<HttpResponseFor<FileData>> =
             retrieve(params, RequestOptions.none())
 
         /** @see retrieve */
+        @Deprecated("deprecated")
         fun retrieve(
             params: FileRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
@@ -101,20 +111,24 @@ interface FileServiceAsync {
          * Returns a raw HTTP response for `patch /scs/file`, but is otherwise the same as
          * [FileServiceAsync.update].
          */
+        @Deprecated("deprecated")
         fun update(): CompletableFuture<HttpResponse> = update(FileUpdateParams.none())
 
         /** @see update */
+        @Deprecated("deprecated")
         fun update(
             params: FileUpdateParams = FileUpdateParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
 
         /** @see update */
+        @Deprecated("deprecated")
         fun update(
             params: FileUpdateParams = FileUpdateParams.none()
         ): CompletableFuture<HttpResponse> = update(params, RequestOptions.none())
 
         /** @see update */
+        @Deprecated("deprecated")
         fun update(requestOptions: RequestOptions): CompletableFuture<HttpResponse> =
             update(FileUpdateParams.none(), requestOptions)
 
@@ -122,10 +136,12 @@ interface FileServiceAsync {
          * Returns a raw HTTP response for `get /scs/list`, but is otherwise the same as
          * [FileServiceAsync.list].
          */
+        @Deprecated("deprecated")
         fun list(params: FileListParams): CompletableFuture<HttpResponseFor<FileListPageAsync>> =
             list(params, RequestOptions.none())
 
         /** @see list */
+        @Deprecated("deprecated")
         fun list(
             params: FileListParams,
             requestOptions: RequestOptions = RequestOptions.none(),

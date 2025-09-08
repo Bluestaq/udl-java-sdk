@@ -15,6 +15,7 @@ import java.util.Optional
  * operation to move folders or files. A specific role is required to perform this service
  * operation. Please contact the UDL team for assistance.
  */
+@Deprecated("deprecated")
 class ScMoveParams
 private constructor(
     private val id: String,
@@ -24,7 +25,7 @@ private constructor(
     private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
-    /** The path of the item to copy */
+    /** The path of the item to move */
     fun id(): String = id
 
     /** The path to copy to */
@@ -73,7 +74,7 @@ private constructor(
             additionalBodyProperties = scMoveParams.additionalBodyProperties.toMutableMap()
         }
 
-        /** The path of the item to copy */
+        /** The path of the item to move */
         fun id(id: String) = apply { this.id = id }
 
         /** The path to copy to */

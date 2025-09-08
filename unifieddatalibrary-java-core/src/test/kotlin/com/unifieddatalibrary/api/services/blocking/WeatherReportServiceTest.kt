@@ -81,7 +81,7 @@ internal class WeatherReportServiceTest {
                 .idSite("AIRFIELD-ID")
                 .indexRefraction(1.1)
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
                 .precipRate(3.4)
                 .qnh(1234.456)
@@ -257,9 +257,6 @@ internal class WeatherReportServiceTest {
                         )
                         .alt(123.12)
                         .andims(2L)
-                        .area(
-                            "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
-                        )
                         .asrid(4326)
                         .atext(
                             "POLYGON((67.3291113966927 26.156175339112,67.2580009640721 26.091022064271,67.1795862381682 26.6637992964562,67.2501237475598 26.730115808233,67.3291113966927 26.156175339112))"
@@ -295,7 +292,7 @@ internal class WeatherReportServiceTest {
                         .idSite("AIRFIELD-ID")
                         .indexRefraction(1.1)
                         .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .origSensorId("ORIGSENSOR-ID")
                         .precipRate(3.4)
                         .qnh(1234.456)

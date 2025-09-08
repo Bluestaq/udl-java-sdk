@@ -23,7 +23,7 @@ internal class BeamAbridgedTest {
                 .createdBy("some.user")
                 .notes("Example notes")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         assertThat(beamAbridged.beamName()).isEqualTo("BEAMNAME-ID")
@@ -36,7 +36,7 @@ internal class BeamAbridgedTest {
         assertThat(beamAbridged.createdBy()).contains("some.user")
         assertThat(beamAbridged.notes()).contains("Example notes")
         assertThat(beamAbridged.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(beamAbridged.origNetwork()).contains("ORIG")
+        assertThat(beamAbridged.origNetwork()).contains("OPS1")
     }
 
     @Test
@@ -53,7 +53,7 @@ internal class BeamAbridgedTest {
                 .createdBy("some.user")
                 .notes("Example notes")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         val roundtrippedBeamAbridged =

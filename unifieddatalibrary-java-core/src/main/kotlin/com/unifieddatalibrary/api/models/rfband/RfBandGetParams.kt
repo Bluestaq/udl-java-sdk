@@ -9,7 +9,7 @@ import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
-/** Service operation to get a single RFBand by its unique ID passed as a path parameter. */
+/** Service operation to get a single RFBand record by its unique ID passed as a path parameter. */
 class RfBandGetParams
 private constructor(
     private val id: String?,

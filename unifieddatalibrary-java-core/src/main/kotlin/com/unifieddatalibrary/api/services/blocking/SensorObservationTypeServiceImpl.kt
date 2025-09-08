@@ -20,8 +20,6 @@ import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservation
 import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeListPage
 import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeListParams
 import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeListResponse
-import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeQueryhelpParams
-import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeQueryhelpResponse
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
@@ -52,13 +50,6 @@ internal constructor(private val clientOptions: ClientOptions) : SensorObservati
     ): SensorObservationTypeGetResponse =
         // get /udl/sensorobservationtype/{id}
         withRawResponse().get(params, requestOptions).parse()
-
-    override fun queryhelp(
-        params: SensorObservationTypeQueryhelpParams,
-        requestOptions: RequestOptions,
-    ): SensorObservationTypeQueryhelpResponse =
-        // get /udl/sensorobservationtype/queryhelp
-        withRawResponse().queryhelp(params, requestOptions).parse()
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         SensorObservationTypeService.WithRawResponse {
@@ -129,33 +120,6 @@ internal constructor(private val clientOptions: ClientOptions) : SensorObservati
             return errorHandler.handle(response).parseable {
                 response
                     .use { getHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
-        }
-
-        private val queryhelpHandler: Handler<SensorObservationTypeQueryhelpResponse> =
-            jsonHandler<SensorObservationTypeQueryhelpResponse>(clientOptions.jsonMapper)
-
-        override fun queryhelp(
-            params: SensorObservationTypeQueryhelpParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<SensorObservationTypeQueryhelpResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "sensorobservationtype", "queryhelp")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { queryhelpHandler.handle(it) }
                     .also {
                         if (requestOptions.responseValidation!!) {
                             it.validate()

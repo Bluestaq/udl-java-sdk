@@ -14,6 +14,7 @@ import java.util.Objects
  * operation to update folders metadata. A specific role is required to perform this service
  * operation. Please contact the UDL team for assistance.
  */
+@Deprecated("deprecated")
 class FolderUpdateParams
 private constructor(
     private val fileData: FileData,
@@ -21,7 +22,7 @@ private constructor(
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun fileData(): FileData = fileData
+    @Deprecated("deprecated") fun fileData(): FileData = fileData
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = fileData._additionalProperties()
 
@@ -60,6 +61,7 @@ private constructor(
             additionalQueryParams = folderUpdateParams.additionalQueryParams.toBuilder()
         }
 
+        @Deprecated("deprecated")
         fun fileData(fileData: FileData) = apply { this.fileData = fileData }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {

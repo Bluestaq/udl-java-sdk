@@ -83,7 +83,7 @@ internal class OnboardnavigationServiceTest {
                         .idStateVector("STATE-VECTOR-ID")
                         .addMag(listOf(1.1, 2.2, 3.3))
                         .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .origObjectId("ORIGOBJECT-ID")
                         .referenceFrame(OnboardnavigationCreateBulkParams.Body.ReferenceFrame.J2000)
                         .satNo(101)
@@ -164,7 +164,7 @@ internal class OnboardnavigationServiceTest {
                         .idStateVector("STATE-VECTOR-ID")
                         .addMag(listOf(1.1, 2.2, 3.3))
                         .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .origObjectId("ORIGOBJECT-ID")
                         .referenceFrame(
                             OnboardnavigationUnvalidatedPublishParams.Body.ReferenceFrame.J2000

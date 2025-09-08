@@ -99,8 +99,6 @@ internal class AircraftStatusRemarkServiceTest {
                 .origNetwork("OPS1")
                 .sourceDl("AXE")
                 .timestamp(OffsetDateTime.parse("2024-01-01T15:00:00.123Z"))
-                .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                .updatedBy("some.user")
                 .build()
         )
     }

@@ -47,19 +47,4 @@ internal class SensorObservationTypeServiceTest {
 
         sensorObservationType.validate()
     }
-
-    @Test
-    fun queryhelp() {
-        val client =
-            UnifieddatalibraryOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val sensorObservationTypeService = client.sensorObservationType()
-
-        val response = sensorObservationTypeService.queryhelp()
-
-        response.validate()
-    }
 }

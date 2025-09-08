@@ -58,7 +58,7 @@ internal class LaunchSiteDetailServiceAsyncTest {
                             .build()
                     )
                     .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .build()
             )
 
@@ -108,7 +108,7 @@ internal class LaunchSiteDetailServiceAsyncTest {
                             .build()
                     )
                     .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .build()
             )
 
