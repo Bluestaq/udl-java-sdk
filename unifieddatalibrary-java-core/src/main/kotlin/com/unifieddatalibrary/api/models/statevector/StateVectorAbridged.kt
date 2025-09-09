@@ -67,6 +67,7 @@ private constructor(
     private val leapSecondTime: JsonField<OffsetDateTime>,
     private val lunarSolar: JsonField<Boolean>,
     private val mass: JsonField<Double>,
+    private val msgTs: JsonField<OffsetDateTime>,
     private val obsAvailable: JsonField<Int>,
     private val obsUsed: JsonField<Int>,
     private val origin: JsonField<String>,
@@ -203,6 +204,7 @@ private constructor(
         @ExcludeMissing
         lunarSolar: JsonField<Boolean> = JsonMissing.of(),
         @JsonProperty("mass") @ExcludeMissing mass: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("msgTs") @ExcludeMissing msgTs: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("obsAvailable")
         @ExcludeMissing
         obsAvailable: JsonField<Int> = JsonMissing.of(),
@@ -335,6 +337,7 @@ private constructor(
         leapSecondTime,
         lunarSolar,
         mass,
+        msgTs,
         obsAvailable,
         obsUsed,
         origin,
@@ -818,6 +821,14 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun mass(): Optional<Double> = mass.getOptional("mass")
+
+    /**
+     * Time when message was generated in ISO 8601 UTC format with microsecond precision.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun msgTs(): Optional<OffsetDateTime> = msgTs.getOptional("msgTs")
 
     /**
      * The number of observations available for the OD of the object.
@@ -1638,6 +1649,13 @@ private constructor(
     @JsonProperty("mass") @ExcludeMissing fun _mass(): JsonField<Double> = mass
 
     /**
+     * Returns the raw JSON value of [msgTs].
+     *
+     * Unlike [msgTs], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("msgTs") @ExcludeMissing fun _msgTs(): JsonField<OffsetDateTime> = msgTs
+
+    /**
      * Returns the raw JSON value of [obsAvailable].
      *
      * Unlike [obsAvailable], this method doesn't throw if the JSON field has an unexpected type.
@@ -2149,6 +2167,7 @@ private constructor(
         private var leapSecondTime: JsonField<OffsetDateTime> = JsonMissing.of()
         private var lunarSolar: JsonField<Boolean> = JsonMissing.of()
         private var mass: JsonField<Double> = JsonMissing.of()
+        private var msgTs: JsonField<OffsetDateTime> = JsonMissing.of()
         private var obsAvailable: JsonField<Int> = JsonMissing.of()
         private var obsUsed: JsonField<Int> = JsonMissing.of()
         private var origin: JsonField<String> = JsonMissing.of()
@@ -2248,6 +2267,7 @@ private constructor(
             leapSecondTime = stateVectorAbridged.leapSecondTime
             lunarSolar = stateVectorAbridged.lunarSolar
             mass = stateVectorAbridged.mass
+            msgTs = stateVectorAbridged.msgTs
             obsAvailable = stateVectorAbridged.obsAvailable
             obsUsed = stateVectorAbridged.obsUsed
             origin = stateVectorAbridged.origin
@@ -2948,6 +2968,18 @@ private constructor(
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun mass(mass: JsonField<Double>) = apply { this.mass = mass }
+
+        /** Time when message was generated in ISO 8601 UTC format with microsecond precision. */
+        fun msgTs(msgTs: OffsetDateTime) = msgTs(JsonField.of(msgTs))
+
+        /**
+         * Sets [Builder.msgTs] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.msgTs] with a well-typed [OffsetDateTime] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun msgTs(msgTs: JsonField<OffsetDateTime>) = apply { this.msgTs = msgTs }
 
         /** The number of observations available for the OD of the object. */
         fun obsAvailable(obsAvailable: Int) = obsAvailable(JsonField.of(obsAvailable))
@@ -3876,6 +3908,7 @@ private constructor(
                 leapSecondTime,
                 lunarSolar,
                 mass,
+                msgTs,
                 obsAvailable,
                 obsUsed,
                 origin,
@@ -3982,6 +4015,7 @@ private constructor(
         leapSecondTime()
         lunarSolar()
         mass()
+        msgTs()
         obsAvailable()
         obsUsed()
         origin()
@@ -4095,6 +4129,7 @@ private constructor(
             (if (leapSecondTime.asKnown().isPresent) 1 else 0) +
             (if (lunarSolar.asKnown().isPresent) 1 else 0) +
             (if (mass.asKnown().isPresent) 1 else 0) +
+            (if (msgTs.asKnown().isPresent) 1 else 0) +
             (if (obsAvailable.asKnown().isPresent) 1 else 0) +
             (if (obsUsed.asKnown().isPresent) 1 else 0) +
             (if (origin.asKnown().isPresent) 1 else 0) +
@@ -4666,6 +4701,7 @@ private constructor(
             leapSecondTime == other.leapSecondTime &&
             lunarSolar == other.lunarSolar &&
             mass == other.mass &&
+            msgTs == other.msgTs &&
             obsAvailable == other.obsAvailable &&
             obsUsed == other.obsUsed &&
             origin == other.origin &&
@@ -4766,6 +4802,7 @@ private constructor(
             leapSecondTime,
             lunarSolar,
             mass,
+            msgTs,
             obsAvailable,
             obsUsed,
             origin,
@@ -4832,5 +4869,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "StateVectorAbridged{classificationMarking=$classificationMarking, dataMode=$dataMode, epoch=$epoch, source=$source, actualOdSpan=$actualOdSpan, algorithm=$algorithm, alt1ReferenceFrame=$alt1ReferenceFrame, alt2ReferenceFrame=$alt2ReferenceFrame, area=$area, bDot=$bDot, cmOffset=$cmOffset, cov=$cov, covMethod=$covMethod, covReferenceFrame=$covReferenceFrame, createdAt=$createdAt, createdBy=$createdBy, descriptor=$descriptor, dragArea=$dragArea, dragCoeff=$dragCoeff, dragModel=$dragModel, edr=$edr, eqCov=$eqCov, errorControl=$errorControl, fixedStep=$fixedStep, geopotentialModel=$geopotentialModel, iau1980Terms=$iau1980Terms, idOnOrbit=$idOnOrbit, idOrbitDetermination=$idOrbitDetermination, idStateVector=$idStateVector, integratorMode=$integratorMode, inTrackThrust=$inTrackThrust, lastObEnd=$lastObEnd, lastObStart=$lastObStart, leapSecondTime=$leapSecondTime, lunarSolar=$lunarSolar, mass=$mass, obsAvailable=$obsAvailable, obsUsed=$obsUsed, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, partials=$partials, pedigree=$pedigree, polarMotionX=$polarMotionX, polarMotionY=$polarMotionY, posUnc=$posUnc, recOdSpan=$recOdSpan, referenceFrame=$referenceFrame, residualsAcc=$residualsAcc, revNo=$revNo, rms=$rms, satNo=$satNo, sigmaPosUvw=$sigmaPosUvw, sigmaVelUvw=$sigmaVelUvw, solarFluxApAvg=$solarFluxApAvg, solarFluxF10=$solarFluxF10, solarFluxF10Avg=$solarFluxF10Avg, solarRadPress=$solarRadPress, solarRadPressCoeff=$solarRadPressCoeff, solidEarthTides=$solidEarthTides, sourceDl=$sourceDl, srpArea=$srpArea, stepMode=$stepMode, stepSize=$stepSize, stepSizeSelection=$stepSizeSelection, taiUtc=$taiUtc, thrustAccel=$thrustAccel, tracksAvail=$tracksAvail, tracksUsed=$tracksUsed, transactionId=$transactionId, uct=$uct, ut1Rate=$ut1Rate, ut1Utc=$ut1Utc, velUnc=$velUnc, xaccel=$xaccel, xpos=$xpos, xposAlt1=$xposAlt1, xposAlt2=$xposAlt2, xvel=$xvel, xvelAlt1=$xvelAlt1, xvelAlt2=$xvelAlt2, yaccel=$yaccel, ypos=$ypos, yposAlt1=$yposAlt1, yposAlt2=$yposAlt2, yvel=$yvel, yvelAlt1=$yvelAlt1, yvelAlt2=$yvelAlt2, zaccel=$zaccel, zpos=$zpos, zposAlt1=$zposAlt1, zposAlt2=$zposAlt2, zvel=$zvel, zvelAlt1=$zvelAlt1, zvelAlt2=$zvelAlt2, additionalProperties=$additionalProperties}"
+        "StateVectorAbridged{classificationMarking=$classificationMarking, dataMode=$dataMode, epoch=$epoch, source=$source, actualOdSpan=$actualOdSpan, algorithm=$algorithm, alt1ReferenceFrame=$alt1ReferenceFrame, alt2ReferenceFrame=$alt2ReferenceFrame, area=$area, bDot=$bDot, cmOffset=$cmOffset, cov=$cov, covMethod=$covMethod, covReferenceFrame=$covReferenceFrame, createdAt=$createdAt, createdBy=$createdBy, descriptor=$descriptor, dragArea=$dragArea, dragCoeff=$dragCoeff, dragModel=$dragModel, edr=$edr, eqCov=$eqCov, errorControl=$errorControl, fixedStep=$fixedStep, geopotentialModel=$geopotentialModel, iau1980Terms=$iau1980Terms, idOnOrbit=$idOnOrbit, idOrbitDetermination=$idOrbitDetermination, idStateVector=$idStateVector, integratorMode=$integratorMode, inTrackThrust=$inTrackThrust, lastObEnd=$lastObEnd, lastObStart=$lastObStart, leapSecondTime=$leapSecondTime, lunarSolar=$lunarSolar, mass=$mass, msgTs=$msgTs, obsAvailable=$obsAvailable, obsUsed=$obsUsed, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, partials=$partials, pedigree=$pedigree, polarMotionX=$polarMotionX, polarMotionY=$polarMotionY, posUnc=$posUnc, recOdSpan=$recOdSpan, referenceFrame=$referenceFrame, residualsAcc=$residualsAcc, revNo=$revNo, rms=$rms, satNo=$satNo, sigmaPosUvw=$sigmaPosUvw, sigmaVelUvw=$sigmaVelUvw, solarFluxApAvg=$solarFluxApAvg, solarFluxF10=$solarFluxF10, solarFluxF10Avg=$solarFluxF10Avg, solarRadPress=$solarRadPress, solarRadPressCoeff=$solarRadPressCoeff, solidEarthTides=$solidEarthTides, sourceDl=$sourceDl, srpArea=$srpArea, stepMode=$stepMode, stepSize=$stepSize, stepSizeSelection=$stepSizeSelection, taiUtc=$taiUtc, thrustAccel=$thrustAccel, tracksAvail=$tracksAvail, tracksUsed=$tracksUsed, transactionId=$transactionId, uct=$uct, ut1Rate=$ut1Rate, ut1Utc=$ut1Utc, velUnc=$velUnc, xaccel=$xaccel, xpos=$xpos, xposAlt1=$xposAlt1, xposAlt2=$xposAlt2, xvel=$xvel, xvelAlt1=$xvelAlt1, xvelAlt2=$xvelAlt2, yaccel=$yaccel, ypos=$ypos, yposAlt1=$yposAlt1, yposAlt2=$yposAlt2, yvel=$yvel, yvelAlt1=$yvelAlt1, yvelAlt2=$yvelAlt2, zaccel=$zaccel, zpos=$zpos, zposAlt1=$zposAlt1, zposAlt2=$zposAlt2, zvel=$zvel, zvelAlt1=$zvelAlt1, zvelAlt2=$zvelAlt2, additionalProperties=$additionalProperties}"
 }

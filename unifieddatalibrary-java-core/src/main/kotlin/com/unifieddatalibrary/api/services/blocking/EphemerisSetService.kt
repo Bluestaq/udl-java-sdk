@@ -53,8 +53,8 @@ interface EphemerisSetService {
      *   state times, respectively, of the associated Ephemeris states.
      * * Either satNo, idOnOrbit, or origObjectId must be provided. The preferred option is to post
      *   with satNo for a cataloged object, and with (only) origObjectId for an unknown,
-     *   uncatalogued, or internal/test object. There are several cases for the logic associated
-     *   with these fields:
+     *   uncataloged, or internal/test object. There are several cases for the logic associated with
+     *   these fields:
      *     + If satNo is provided and correlates to a known UDL sat number then the idOnOrbit will
      *       be populated appropriately in addition to the satNo.
      *     + If satNo is provided and does not correlate to a known UDL sat number then the provided
