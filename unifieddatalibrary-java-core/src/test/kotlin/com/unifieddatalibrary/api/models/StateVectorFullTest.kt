@@ -55,6 +55,7 @@ internal class StateVectorFullTest {
                 .leapSecondTime(OffsetDateTime.parse("2021-01-01T01:01:01.123Z"))
                 .lunarSolar(true)
                 .mass(164.5)
+                .msgTs(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                 .obsAvailable(376)
                 .obsUsed(374)
                 .onOrbit(
@@ -1115,6 +1116,8 @@ internal class StateVectorFullTest {
             .contains(OffsetDateTime.parse("2021-01-01T01:01:01.123Z"))
         assertThat(stateVectorFull.lunarSolar()).contains(true)
         assertThat(stateVectorFull.mass()).contains(164.5)
+        assertThat(stateVectorFull.msgTs())
+            .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
         assertThat(stateVectorFull.obsAvailable()).contains(376)
         assertThat(stateVectorFull.obsUsed()).contains(374)
         assertThat(stateVectorFull.onOrbit())
@@ -2162,6 +2165,7 @@ internal class StateVectorFullTest {
                 .leapSecondTime(OffsetDateTime.parse("2021-01-01T01:01:01.123Z"))
                 .lunarSolar(true)
                 .mass(164.5)
+                .msgTs(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                 .obsAvailable(376)
                 .obsUsed(374)
                 .onOrbit(

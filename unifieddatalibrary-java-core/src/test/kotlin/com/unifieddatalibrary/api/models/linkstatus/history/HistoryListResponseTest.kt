@@ -44,6 +44,7 @@ internal class HistoryListResponseTest {
                 .origNetwork("OPS1")
                 .satNo1(1)
                 .satNo2(2)
+                .snr(10.1)
                 .sysCap("Example status")
                 .build()
 
@@ -80,6 +81,7 @@ internal class HistoryListResponseTest {
         assertThat(historyListResponse.origNetwork()).contains("OPS1")
         assertThat(historyListResponse.satNo1()).contains(1)
         assertThat(historyListResponse.satNo2()).contains(2)
+        assertThat(historyListResponse.snr()).contains(10.1)
         assertThat(historyListResponse.sysCap()).contains("Example status")
     }
 
@@ -118,6 +120,7 @@ internal class HistoryListResponseTest {
                 .origNetwork("OPS1")
                 .satNo1(1)
                 .satNo2(2)
+                .snr(10.1)
                 .sysCap("Example status")
                 .build()
 
