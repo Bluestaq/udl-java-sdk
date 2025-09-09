@@ -45,33 +45,23 @@ private constructor(
     private val burnoutAlt: JsonField<Double>,
     private val callSign: JsonField<String>,
     private val containment: JsonField<Double>,
-    private val contextKeys: JsonField<List<String>>,
-    private val contextValues: JsonField<List<String>>,
     private val createdAt: JsonField<OffsetDateTime>,
     private val createdBy: JsonField<String>,
     private val dropPtInd: JsonField<Boolean>,
     private val emgInd: JsonField<Boolean>,
     private val env: JsonField<Env>,
-    private val impactAlt: JsonField<Double>,
     private val impactAouData: JsonField<List<Double>>,
     private val impactAouType: JsonField<String>,
-    private val impactConf: JsonField<Double>,
     private val impactLat: JsonField<Double>,
     private val impactLon: JsonField<Double>,
     private val impactTime: JsonField<OffsetDateTime>,
     private val infoSource: JsonField<String>,
-    private val launchAlt: JsonField<Double>,
     private val launchAouData: JsonField<List<Double>>,
     private val launchAouType: JsonField<String>,
-    private val launchAz: JsonField<Double>,
-    private val launchAzUnc: JsonField<Double>,
-    private val launchConf: JsonField<Double>,
     private val launchLat: JsonField<Double>,
     private val launchLon: JsonField<Double>,
     private val launchTime: JsonField<OffsetDateTime>,
     private val lostTrkInd: JsonField<Boolean>,
-    private val maneuverEnd: JsonField<OffsetDateTime>,
-    private val maneuverStart: JsonField<OffsetDateTime>,
     private val msgCreateDate: JsonField<OffsetDateTime>,
     private val msgSubType: JsonField<String>,
     private val msgType: JsonField<String>,
@@ -129,12 +119,6 @@ private constructor(
         @JsonProperty("containment")
         @ExcludeMissing
         containment: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("contextKeys")
-        @ExcludeMissing
-        contextKeys: JsonField<List<String>> = JsonMissing.of(),
-        @JsonProperty("contextValues")
-        @ExcludeMissing
-        contextValues: JsonField<List<String>> = JsonMissing.of(),
         @JsonProperty("createdAt")
         @ExcludeMissing
         createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
@@ -142,16 +126,12 @@ private constructor(
         @JsonProperty("dropPtInd") @ExcludeMissing dropPtInd: JsonField<Boolean> = JsonMissing.of(),
         @JsonProperty("emgInd") @ExcludeMissing emgInd: JsonField<Boolean> = JsonMissing.of(),
         @JsonProperty("env") @ExcludeMissing env: JsonField<Env> = JsonMissing.of(),
-        @JsonProperty("impactAlt") @ExcludeMissing impactAlt: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("impactAouData")
         @ExcludeMissing
         impactAouData: JsonField<List<Double>> = JsonMissing.of(),
         @JsonProperty("impactAouType")
         @ExcludeMissing
         impactAouType: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("impactConf")
-        @ExcludeMissing
-        impactConf: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("impactLat") @ExcludeMissing impactLat: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("impactLon") @ExcludeMissing impactLon: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("impactTime")
@@ -160,20 +140,12 @@ private constructor(
         @JsonProperty("infoSource")
         @ExcludeMissing
         infoSource: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("launchAlt") @ExcludeMissing launchAlt: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("launchAouData")
         @ExcludeMissing
         launchAouData: JsonField<List<Double>> = JsonMissing.of(),
         @JsonProperty("launchAouType")
         @ExcludeMissing
         launchAouType: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("launchAz") @ExcludeMissing launchAz: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("launchAzUnc")
-        @ExcludeMissing
-        launchAzUnc: JsonField<Double> = JsonMissing.of(),
-        @JsonProperty("launchConf")
-        @ExcludeMissing
-        launchConf: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("launchLat") @ExcludeMissing launchLat: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("launchLon") @ExcludeMissing launchLon: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("launchTime")
@@ -182,12 +154,6 @@ private constructor(
         @JsonProperty("lostTrkInd")
         @ExcludeMissing
         lostTrkInd: JsonField<Boolean> = JsonMissing.of(),
-        @JsonProperty("maneuverEnd")
-        @ExcludeMissing
-        maneuverEnd: JsonField<OffsetDateTime> = JsonMissing.of(),
-        @JsonProperty("maneuverStart")
-        @ExcludeMissing
-        maneuverStart: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("msgCreateDate")
         @ExcludeMissing
         msgCreateDate: JsonField<OffsetDateTime> = JsonMissing.of(),
@@ -247,33 +213,23 @@ private constructor(
         burnoutAlt,
         callSign,
         containment,
-        contextKeys,
-        contextValues,
         createdAt,
         createdBy,
         dropPtInd,
         emgInd,
         env,
-        impactAlt,
         impactAouData,
         impactAouType,
-        impactConf,
         impactLat,
         impactLon,
         impactTime,
         infoSource,
-        launchAlt,
         launchAouData,
         launchAouType,
-        launchAz,
-        launchAzUnc,
-        launchConf,
         launchLat,
         launchLon,
         launchTime,
         lostTrkInd,
-        maneuverEnd,
-        maneuverStart,
         msgCreateDate,
         msgSubType,
         msgType,
@@ -490,31 +446,6 @@ private constructor(
     fun containment(): Optional<Double> = containment.getOptional("containment")
 
     /**
-     * An optional string array containing additional data (keys) representing relevant items for
-     * context of fields not specifically defined in this schema. This array is paired with the
-     * contextValues string array and must contain the same number of items. Please note these
-     * fields are intended for contextual use only and do not pertain to core schema information. To
-     * ensure proper integration and avoid misuse, coordination of how these fields are populated
-     * and consumed is required during onboarding.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun contextKeys(): Optional<List<String>> = contextKeys.getOptional("contextKeys")
-
-    /**
-     * An optional string array containing the values associated with the contextKeys array. This
-     * array is paired with the contextKeys string array and must contain the same number of items.
-     * Please note these fields are intended for contextual use only and do not pertain to core
-     * schema information. To ensure proper integration and avoid misuse, coordination of how these
-     * fields are populated and consumed is required during onboarding.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun contextValues(): Optional<List<String>> = contextValues.getOptional("contextValues")
-
-    /**
      * Time the row was created in the database.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
@@ -568,14 +499,6 @@ private constructor(
     fun env(): Optional<Env> = env.getOptional("env")
 
     /**
-     * Estimated impact point altitude relative to WGS-84 ellipsoid, in kilometers.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun impactAlt(): Optional<Double> = impactAlt.getOptional("impactAlt")
-
-    /**
      * Three element array representing an Area of Uncertainty (AoU). The array element definitions
      * and units are type specific depending on the aouType specified in this record:
      *
@@ -619,14 +542,6 @@ private constructor(
     fun impactAouType(): Optional<String> = impactAouType.getOptional("impactAouType")
 
     /**
-     * Confidence level of the impact point estimate. 0 - 100 percent.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun impactConf(): Optional<Double> = impactConf.getOptional("impactConf")
-
-    /**
      * WGS-84 latitude of the missile object impact point, in degrees. -90 to 90 degrees (negative
      * values south of equator).
      *
@@ -659,14 +574,6 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun infoSource(): Optional<String> = infoSource.getOptional("infoSource")
-
-    /**
-     * Estimated launch point altitude relative to WGS-84 ellipsoid, in kilometers.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun launchAlt(): Optional<Double> = launchAlt.getOptional("launchAlt")
 
     /**
      * Three element array representing an Area of Uncertainty (AoU). The array element definitions
@@ -712,31 +619,6 @@ private constructor(
     fun launchAouType(): Optional<String> = launchAouType.getOptional("launchAouType")
 
     /**
-     * Angle between true north and the object's current position, with respect to the launch point,
-     * in degrees. 0 to 360 degrees.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun launchAz(): Optional<Double> = launchAz.getOptional("launchAz")
-
-    /**
-     * Uncertainty of the launch azimuth, in degrees.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun launchAzUnc(): Optional<Double> = launchAzUnc.getOptional("launchAzUnc")
-
-    /**
-     * Confidence level in the accuracy of the launch point estimate. 0 - 100 percent.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun launchConf(): Optional<Double> = launchConf.getOptional("launchConf")
-
-    /**
      * WGS-84 latitude of the missile launch point, in degrees. -90 to 90 degrees (negative values
      * south of equator).
      *
@@ -769,22 +651,6 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun lostTrkInd(): Optional<Boolean> = lostTrkInd.getOptional("lostTrkInd")
-
-    /**
-     * Maneuver end time, in ISO 8601 UTC format with microsecond precision.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun maneuverEnd(): Optional<OffsetDateTime> = maneuverEnd.getOptional("maneuverEnd")
-
-    /**
-     * Maneuver start time, in ISO 8601 UTC format with microsecond precision.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun maneuverStart(): Optional<OffsetDateTime> = maneuverStart.getOptional("maneuverStart")
 
     /**
      * The timestamp of the external message from which this request originated, if applicable, in
@@ -1158,24 +1024,6 @@ private constructor(
     @JsonProperty("containment") @ExcludeMissing fun _containment(): JsonField<Double> = containment
 
     /**
-     * Returns the raw JSON value of [contextKeys].
-     *
-     * Unlike [contextKeys], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    @JsonProperty("contextKeys")
-    @ExcludeMissing
-    fun _contextKeys(): JsonField<List<String>> = contextKeys
-
-    /**
-     * Returns the raw JSON value of [contextValues].
-     *
-     * Unlike [contextValues], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    @JsonProperty("contextValues")
-    @ExcludeMissing
-    fun _contextValues(): JsonField<List<String>> = contextValues
-
-    /**
      * Returns the raw JSON value of [createdAt].
      *
      * Unlike [createdAt], this method doesn't throw if the JSON field has an unexpected type.
@@ -1213,13 +1061,6 @@ private constructor(
     @JsonProperty("env") @ExcludeMissing fun _env(): JsonField<Env> = env
 
     /**
-     * Returns the raw JSON value of [impactAlt].
-     *
-     * Unlike [impactAlt], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    @JsonProperty("impactAlt") @ExcludeMissing fun _impactAlt(): JsonField<Double> = impactAlt
-
-    /**
      * Returns the raw JSON value of [impactAouData].
      *
      * Unlike [impactAouData], this method doesn't throw if the JSON field has an unexpected type.
@@ -1236,13 +1077,6 @@ private constructor(
     @JsonProperty("impactAouType")
     @ExcludeMissing
     fun _impactAouType(): JsonField<String> = impactAouType
-
-    /**
-     * Returns the raw JSON value of [impactConf].
-     *
-     * Unlike [impactConf], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    @JsonProperty("impactConf") @ExcludeMissing fun _impactConf(): JsonField<Double> = impactConf
 
     /**
      * Returns the raw JSON value of [impactLat].
@@ -1275,13 +1109,6 @@ private constructor(
     @JsonProperty("infoSource") @ExcludeMissing fun _infoSource(): JsonField<String> = infoSource
 
     /**
-     * Returns the raw JSON value of [launchAlt].
-     *
-     * Unlike [launchAlt], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    @JsonProperty("launchAlt") @ExcludeMissing fun _launchAlt(): JsonField<Double> = launchAlt
-
-    /**
      * Returns the raw JSON value of [launchAouData].
      *
      * Unlike [launchAouData], this method doesn't throw if the JSON field has an unexpected type.
@@ -1298,27 +1125,6 @@ private constructor(
     @JsonProperty("launchAouType")
     @ExcludeMissing
     fun _launchAouType(): JsonField<String> = launchAouType
-
-    /**
-     * Returns the raw JSON value of [launchAz].
-     *
-     * Unlike [launchAz], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    @JsonProperty("launchAz") @ExcludeMissing fun _launchAz(): JsonField<Double> = launchAz
-
-    /**
-     * Returns the raw JSON value of [launchAzUnc].
-     *
-     * Unlike [launchAzUnc], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    @JsonProperty("launchAzUnc") @ExcludeMissing fun _launchAzUnc(): JsonField<Double> = launchAzUnc
-
-    /**
-     * Returns the raw JSON value of [launchConf].
-     *
-     * Unlike [launchConf], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    @JsonProperty("launchConf") @ExcludeMissing fun _launchConf(): JsonField<Double> = launchConf
 
     /**
      * Returns the raw JSON value of [launchLat].
@@ -1349,24 +1155,6 @@ private constructor(
      * Unlike [lostTrkInd], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("lostTrkInd") @ExcludeMissing fun _lostTrkInd(): JsonField<Boolean> = lostTrkInd
-
-    /**
-     * Returns the raw JSON value of [maneuverEnd].
-     *
-     * Unlike [maneuverEnd], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    @JsonProperty("maneuverEnd")
-    @ExcludeMissing
-    fun _maneuverEnd(): JsonField<OffsetDateTime> = maneuverEnd
-
-    /**
-     * Returns the raw JSON value of [maneuverStart].
-     *
-     * Unlike [maneuverStart], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    @JsonProperty("maneuverStart")
-    @ExcludeMissing
-    fun _maneuverStart(): JsonField<OffsetDateTime> = maneuverStart
 
     /**
      * Returns the raw JSON value of [msgCreateDate].
@@ -1599,33 +1387,23 @@ private constructor(
         private var burnoutAlt: JsonField<Double> = JsonMissing.of()
         private var callSign: JsonField<String> = JsonMissing.of()
         private var containment: JsonField<Double> = JsonMissing.of()
-        private var contextKeys: JsonField<MutableList<String>>? = null
-        private var contextValues: JsonField<MutableList<String>>? = null
         private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
         private var createdBy: JsonField<String> = JsonMissing.of()
         private var dropPtInd: JsonField<Boolean> = JsonMissing.of()
         private var emgInd: JsonField<Boolean> = JsonMissing.of()
         private var env: JsonField<Env> = JsonMissing.of()
-        private var impactAlt: JsonField<Double> = JsonMissing.of()
         private var impactAouData: JsonField<MutableList<Double>>? = null
         private var impactAouType: JsonField<String> = JsonMissing.of()
-        private var impactConf: JsonField<Double> = JsonMissing.of()
         private var impactLat: JsonField<Double> = JsonMissing.of()
         private var impactLon: JsonField<Double> = JsonMissing.of()
         private var impactTime: JsonField<OffsetDateTime> = JsonMissing.of()
         private var infoSource: JsonField<String> = JsonMissing.of()
-        private var launchAlt: JsonField<Double> = JsonMissing.of()
         private var launchAouData: JsonField<MutableList<Double>>? = null
         private var launchAouType: JsonField<String> = JsonMissing.of()
-        private var launchAz: JsonField<Double> = JsonMissing.of()
-        private var launchAzUnc: JsonField<Double> = JsonMissing.of()
-        private var launchConf: JsonField<Double> = JsonMissing.of()
         private var launchLat: JsonField<Double> = JsonMissing.of()
         private var launchLon: JsonField<Double> = JsonMissing.of()
         private var launchTime: JsonField<OffsetDateTime> = JsonMissing.of()
         private var lostTrkInd: JsonField<Boolean> = JsonMissing.of()
-        private var maneuverEnd: JsonField<OffsetDateTime> = JsonMissing.of()
-        private var maneuverStart: JsonField<OffsetDateTime> = JsonMissing.of()
         private var msgCreateDate: JsonField<OffsetDateTime> = JsonMissing.of()
         private var msgSubType: JsonField<String> = JsonMissing.of()
         private var msgType: JsonField<String> = JsonMissing.of()
@@ -1670,33 +1448,23 @@ private constructor(
             burnoutAlt = historyQueryResponse.burnoutAlt
             callSign = historyQueryResponse.callSign
             containment = historyQueryResponse.containment
-            contextKeys = historyQueryResponse.contextKeys.map { it.toMutableList() }
-            contextValues = historyQueryResponse.contextValues.map { it.toMutableList() }
             createdAt = historyQueryResponse.createdAt
             createdBy = historyQueryResponse.createdBy
             dropPtInd = historyQueryResponse.dropPtInd
             emgInd = historyQueryResponse.emgInd
             env = historyQueryResponse.env
-            impactAlt = historyQueryResponse.impactAlt
             impactAouData = historyQueryResponse.impactAouData.map { it.toMutableList() }
             impactAouType = historyQueryResponse.impactAouType
-            impactConf = historyQueryResponse.impactConf
             impactLat = historyQueryResponse.impactLat
             impactLon = historyQueryResponse.impactLon
             impactTime = historyQueryResponse.impactTime
             infoSource = historyQueryResponse.infoSource
-            launchAlt = historyQueryResponse.launchAlt
             launchAouData = historyQueryResponse.launchAouData.map { it.toMutableList() }
             launchAouType = historyQueryResponse.launchAouType
-            launchAz = historyQueryResponse.launchAz
-            launchAzUnc = historyQueryResponse.launchAzUnc
-            launchConf = historyQueryResponse.launchConf
             launchLat = historyQueryResponse.launchLat
             launchLon = historyQueryResponse.launchLon
             launchTime = historyQueryResponse.launchTime
             lostTrkInd = historyQueryResponse.lostTrkInd
-            maneuverEnd = historyQueryResponse.maneuverEnd
-            maneuverStart = historyQueryResponse.maneuverStart
             msgCreateDate = historyQueryResponse.msgCreateDate
             msgSubType = historyQueryResponse.msgSubType
             msgType = historyQueryResponse.msgType
@@ -2001,72 +1769,6 @@ private constructor(
          */
         fun containment(containment: JsonField<Double>) = apply { this.containment = containment }
 
-        /**
-         * An optional string array containing additional data (keys) representing relevant items
-         * for context of fields not specifically defined in this schema. This array is paired with
-         * the contextValues string array and must contain the same number of items. Please note
-         * these fields are intended for contextual use only and do not pertain to core schema
-         * information. To ensure proper integration and avoid misuse, coordination of how these
-         * fields are populated and consumed is required during onboarding.
-         */
-        fun contextKeys(contextKeys: List<String>) = contextKeys(JsonField.of(contextKeys))
-
-        /**
-         * Sets [Builder.contextKeys] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.contextKeys] with a well-typed `List<String>` value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
-         */
-        fun contextKeys(contextKeys: JsonField<List<String>>) = apply {
-            this.contextKeys = contextKeys.map { it.toMutableList() }
-        }
-
-        /**
-         * Adds a single [String] to [contextKeys].
-         *
-         * @throws IllegalStateException if the field was previously set to a non-list.
-         */
-        fun addContextKey(contextKey: String) = apply {
-            contextKeys =
-                (contextKeys ?: JsonField.of(mutableListOf())).also {
-                    checkKnown("contextKeys", it).add(contextKey)
-                }
-        }
-
-        /**
-         * An optional string array containing the values associated with the contextKeys array.
-         * This array is paired with the contextKeys string array and must contain the same number
-         * of items. Please note these fields are intended for contextual use only and do not
-         * pertain to core schema information. To ensure proper integration and avoid misuse,
-         * coordination of how these fields are populated and consumed is required during
-         * onboarding.
-         */
-        fun contextValues(contextValues: List<String>) = contextValues(JsonField.of(contextValues))
-
-        /**
-         * Sets [Builder.contextValues] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.contextValues] with a well-typed `List<String>` value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
-         */
-        fun contextValues(contextValues: JsonField<List<String>>) = apply {
-            this.contextValues = contextValues.map { it.toMutableList() }
-        }
-
-        /**
-         * Adds a single [String] to [contextValues].
-         *
-         * @throws IllegalStateException if the field was previously set to a non-list.
-         */
-        fun addContextValue(contextValue: String) = apply {
-            contextValues =
-                (contextValues ?: JsonField.of(mutableListOf())).also {
-                    checkKnown("contextValues", it).add(contextValue)
-                }
-        }
-
         /** Time the row was created in the database. */
         fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
 
@@ -2140,18 +1842,6 @@ private constructor(
          */
         fun env(env: JsonField<Env>) = apply { this.env = env }
 
-        /** Estimated impact point altitude relative to WGS-84 ellipsoid, in kilometers. */
-        fun impactAlt(impactAlt: Double) = impactAlt(JsonField.of(impactAlt))
-
-        /**
-         * Sets [Builder.impactAlt] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.impactAlt] with a well-typed [Double] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
-         */
-        fun impactAlt(impactAlt: JsonField<Double>) = apply { this.impactAlt = impactAlt }
-
         /**
          * Three element array representing an Area of Uncertainty (AoU). The array element
          * definitions and units are type specific depending on the aouType specified in this
@@ -2224,18 +1914,6 @@ private constructor(
             this.impactAouType = impactAouType
         }
 
-        /** Confidence level of the impact point estimate. 0 - 100 percent. */
-        fun impactConf(impactConf: Double) = impactConf(JsonField.of(impactConf))
-
-        /**
-         * Sets [Builder.impactConf] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.impactConf] with a well-typed [Double] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
-         */
-        fun impactConf(impactConf: JsonField<Double>) = apply { this.impactConf = impactConf }
-
         /**
          * WGS-84 latitude of the missile object impact point, in degrees. -90 to 90 degrees
          * (negative values south of equator).
@@ -2291,18 +1969,6 @@ private constructor(
          * value.
          */
         fun infoSource(infoSource: JsonField<String>) = apply { this.infoSource = infoSource }
-
-        /** Estimated launch point altitude relative to WGS-84 ellipsoid, in kilometers. */
-        fun launchAlt(launchAlt: Double) = launchAlt(JsonField.of(launchAlt))
-
-        /**
-         * Sets [Builder.launchAlt] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.launchAlt] with a well-typed [Double] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
-         */
-        fun launchAlt(launchAlt: JsonField<Double>) = apply { this.launchAlt = launchAlt }
 
         /**
          * Three element array representing an Area of Uncertainty (AoU). The array element
@@ -2377,44 +2043,6 @@ private constructor(
         }
 
         /**
-         * Angle between true north and the object's current position, with respect to the launch
-         * point, in degrees. 0 to 360 degrees.
-         */
-        fun launchAz(launchAz: Double) = launchAz(JsonField.of(launchAz))
-
-        /**
-         * Sets [Builder.launchAz] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.launchAz] with a well-typed [Double] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
-         */
-        fun launchAz(launchAz: JsonField<Double>) = apply { this.launchAz = launchAz }
-
-        /** Uncertainty of the launch azimuth, in degrees. */
-        fun launchAzUnc(launchAzUnc: Double) = launchAzUnc(JsonField.of(launchAzUnc))
-
-        /**
-         * Sets [Builder.launchAzUnc] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.launchAzUnc] with a well-typed [Double] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
-         */
-        fun launchAzUnc(launchAzUnc: JsonField<Double>) = apply { this.launchAzUnc = launchAzUnc }
-
-        /** Confidence level in the accuracy of the launch point estimate. 0 - 100 percent. */
-        fun launchConf(launchConf: Double) = launchConf(JsonField.of(launchConf))
-
-        /**
-         * Sets [Builder.launchConf] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.launchConf] with a well-typed [Double] value instead.
-         * This method is primarily for setting the field to an undocumented or not yet supported
-         * value.
-         */
-        fun launchConf(launchConf: JsonField<Double>) = apply { this.launchConf = launchConf }
-
-        /**
          * WGS-84 latitude of the missile launch point, in degrees. -90 to 90 degrees (negative
          * values south of equator).
          */
@@ -2469,35 +2097,6 @@ private constructor(
          * value.
          */
         fun lostTrkInd(lostTrkInd: JsonField<Boolean>) = apply { this.lostTrkInd = lostTrkInd }
-
-        /** Maneuver end time, in ISO 8601 UTC format with microsecond precision. */
-        fun maneuverEnd(maneuverEnd: OffsetDateTime) = maneuverEnd(JsonField.of(maneuverEnd))
-
-        /**
-         * Sets [Builder.maneuverEnd] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.maneuverEnd] with a well-typed [OffsetDateTime] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
-         */
-        fun maneuverEnd(maneuverEnd: JsonField<OffsetDateTime>) = apply {
-            this.maneuverEnd = maneuverEnd
-        }
-
-        /** Maneuver start time, in ISO 8601 UTC format with microsecond precision. */
-        fun maneuverStart(maneuverStart: OffsetDateTime) =
-            maneuverStart(JsonField.of(maneuverStart))
-
-        /**
-         * Sets [Builder.maneuverStart] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.maneuverStart] with a well-typed [OffsetDateTime] value
-         * instead. This method is primarily for setting the field to an undocumented or not yet
-         * supported value.
-         */
-        fun maneuverStart(maneuverStart: JsonField<OffsetDateTime>) = apply {
-            this.maneuverStart = maneuverStart
-        }
 
         /**
          * The timestamp of the external message from which this request originated, if applicable,
@@ -2956,33 +2555,23 @@ private constructor(
                 burnoutAlt,
                 callSign,
                 containment,
-                (contextKeys ?: JsonMissing.of()).map { it.toImmutable() },
-                (contextValues ?: JsonMissing.of()).map { it.toImmutable() },
                 createdAt,
                 createdBy,
                 dropPtInd,
                 emgInd,
                 env,
-                impactAlt,
                 (impactAouData ?: JsonMissing.of()).map { it.toImmutable() },
                 impactAouType,
-                impactConf,
                 impactLat,
                 impactLon,
                 impactTime,
                 infoSource,
-                launchAlt,
                 (launchAouData ?: JsonMissing.of()).map { it.toImmutable() },
                 launchAouType,
-                launchAz,
-                launchAzUnc,
-                launchConf,
                 launchLat,
                 launchLon,
                 launchTime,
                 lostTrkInd,
-                maneuverEnd,
-                maneuverStart,
                 msgCreateDate,
                 msgSubType,
                 msgType,
@@ -3034,33 +2623,23 @@ private constructor(
         burnoutAlt()
         callSign()
         containment()
-        contextKeys()
-        contextValues()
         createdAt()
         createdBy()
         dropPtInd()
         emgInd()
         env().ifPresent { it.validate() }
-        impactAlt()
         impactAouData()
         impactAouType()
-        impactConf()
         impactLat()
         impactLon()
         impactTime()
         infoSource()
-        launchAlt()
         launchAouData()
         launchAouType()
-        launchAz()
-        launchAzUnc()
-        launchConf()
         launchLat()
         launchLon()
         launchTime()
         lostTrkInd()
-        maneuverEnd()
-        maneuverStart()
         msgCreateDate()
         msgSubType()
         msgType()
@@ -3119,33 +2698,23 @@ private constructor(
             (if (burnoutAlt.asKnown().isPresent) 1 else 0) +
             (if (callSign.asKnown().isPresent) 1 else 0) +
             (if (containment.asKnown().isPresent) 1 else 0) +
-            (contextKeys.asKnown().getOrNull()?.size ?: 0) +
-            (contextValues.asKnown().getOrNull()?.size ?: 0) +
             (if (createdAt.asKnown().isPresent) 1 else 0) +
             (if (createdBy.asKnown().isPresent) 1 else 0) +
             (if (dropPtInd.asKnown().isPresent) 1 else 0) +
             (if (emgInd.asKnown().isPresent) 1 else 0) +
             (env.asKnown().getOrNull()?.validity() ?: 0) +
-            (if (impactAlt.asKnown().isPresent) 1 else 0) +
             (impactAouData.asKnown().getOrNull()?.size ?: 0) +
             (if (impactAouType.asKnown().isPresent) 1 else 0) +
-            (if (impactConf.asKnown().isPresent) 1 else 0) +
             (if (impactLat.asKnown().isPresent) 1 else 0) +
             (if (impactLon.asKnown().isPresent) 1 else 0) +
             (if (impactTime.asKnown().isPresent) 1 else 0) +
             (if (infoSource.asKnown().isPresent) 1 else 0) +
-            (if (launchAlt.asKnown().isPresent) 1 else 0) +
             (launchAouData.asKnown().getOrNull()?.size ?: 0) +
             (if (launchAouType.asKnown().isPresent) 1 else 0) +
-            (if (launchAz.asKnown().isPresent) 1 else 0) +
-            (if (launchAzUnc.asKnown().isPresent) 1 else 0) +
-            (if (launchConf.asKnown().isPresent) 1 else 0) +
             (if (launchLat.asKnown().isPresent) 1 else 0) +
             (if (launchLon.asKnown().isPresent) 1 else 0) +
             (if (launchTime.asKnown().isPresent) 1 else 0) +
             (if (lostTrkInd.asKnown().isPresent) 1 else 0) +
-            (if (maneuverEnd.asKnown().isPresent) 1 else 0) +
-            (if (maneuverStart.asKnown().isPresent) 1 else 0) +
             (if (msgCreateDate.asKnown().isPresent) 1 else 0) +
             (if (msgSubType.asKnown().isPresent) 1 else 0) +
             (if (msgType.asKnown().isPresent) 1 else 0) +
@@ -3680,8 +3249,6 @@ private constructor(
         private val epoch: JsonField<OffsetDateTime>,
         private val accel: JsonField<List<Double>>,
         private val confidence: JsonField<Int>,
-        private val contextKeys: JsonField<List<String>>,
-        private val contextValues: JsonField<List<String>>,
         private val course: JsonField<Double>,
         private val cov: JsonField<List<Double>>,
         private val covReferenceFrame: JsonField<CovReferenceFrame>,
@@ -3690,9 +3257,7 @@ private constructor(
         private val object_: JsonField<String>,
         private val origSensorId: JsonField<String>,
         private val pos: JsonField<List<Double>>,
-        private val propagated: JsonField<Boolean>,
         private val quat: JsonField<List<Double>>,
-        private val range: JsonField<Double>,
         private val referenceFrame: JsonField<String>,
         private val spd: JsonField<Double>,
         private val status: JsonField<String>,
@@ -3701,7 +3266,6 @@ private constructor(
         private val vectorAlt: JsonField<Double>,
         private val vectorLat: JsonField<Double>,
         private val vectorLon: JsonField<Double>,
-        private val vectorTrackId: JsonField<String>,
         private val vel: JsonField<List<Double>>,
         private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
@@ -3717,12 +3281,6 @@ private constructor(
             @JsonProperty("confidence")
             @ExcludeMissing
             confidence: JsonField<Int> = JsonMissing.of(),
-            @JsonProperty("contextKeys")
-            @ExcludeMissing
-            contextKeys: JsonField<List<String>> = JsonMissing.of(),
-            @JsonProperty("contextValues")
-            @ExcludeMissing
-            contextValues: JsonField<List<String>> = JsonMissing.of(),
             @JsonProperty("course") @ExcludeMissing course: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("cov") @ExcludeMissing cov: JsonField<List<Double>> = JsonMissing.of(),
             @JsonProperty("covReferenceFrame")
@@ -3739,11 +3297,7 @@ private constructor(
             @ExcludeMissing
             origSensorId: JsonField<String> = JsonMissing.of(),
             @JsonProperty("pos") @ExcludeMissing pos: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("propagated")
-            @ExcludeMissing
-            propagated: JsonField<Boolean> = JsonMissing.of(),
             @JsonProperty("quat") @ExcludeMissing quat: JsonField<List<Double>> = JsonMissing.of(),
-            @JsonProperty("range") @ExcludeMissing range: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("referenceFrame")
             @ExcludeMissing
             referenceFrame: JsonField<String> = JsonMissing.of(),
@@ -3762,16 +3316,11 @@ private constructor(
             @JsonProperty("vectorLon")
             @ExcludeMissing
             vectorLon: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("vectorTrackId")
-            @ExcludeMissing
-            vectorTrackId: JsonField<String> = JsonMissing.of(),
             @JsonProperty("vel") @ExcludeMissing vel: JsonField<List<Double>> = JsonMissing.of(),
         ) : this(
             epoch,
             accel,
             confidence,
-            contextKeys,
-            contextValues,
             course,
             cov,
             covReferenceFrame,
@@ -3780,9 +3329,7 @@ private constructor(
             object_,
             origSensorId,
             pos,
-            propagated,
             quat,
-            range,
             referenceFrame,
             spd,
             status,
@@ -3791,7 +3338,6 @@ private constructor(
             vectorAlt,
             vectorLat,
             vectorLon,
-            vectorTrackId,
             vel,
             mutableMapOf(),
         )
@@ -3822,32 +3368,6 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun confidence(): Optional<Int> = confidence.getOptional("confidence")
-
-        /**
-         * An optional string array containing additional data (keys) representing relevant items
-         * for context of fields not specifically defined in this schema. This array is paired with
-         * the contextValues string array and must contain the same number of items. Please note
-         * these fields are intended for contextual use only and do not pertain to core schema
-         * information. To ensure proper integration and avoid misuse, coordination of how these
-         * fields are populated and consumed is required during onboarding.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun contextKeys(): Optional<List<String>> = contextKeys.getOptional("contextKeys")
-
-        /**
-         * An optional string array containing the values associated with the contextKeys array.
-         * This array is paired with the contextKeys string array and must contain the same number
-         * of items. Please note these fields are intended for contextual use only and do not
-         * pertain to core schema information. To ensure proper integration and avoid misuse,
-         * coordination of how these fields are populated and consumed is required during
-         * onboarding.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun contextValues(): Optional<List<String>> = contextValues.getOptional("contextValues")
 
         /**
          * Track object course, in degrees clockwise from true north.
@@ -3950,14 +3470,6 @@ private constructor(
         fun pos(): Optional<List<Double>> = pos.getOptional("pos")
 
         /**
-         * Flag indicating whether the vector data was propagated.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun propagated(): Optional<Boolean> = propagated.getOptional("propagated")
-
-        /**
          * The quaternion describing the attitude of the spacecraft with respect to the reference
          * frame listed in the 'referenceFrame' field. The array element order convention is the
          * three vector components, followed by the scalar component.
@@ -3966,14 +3478,6 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun quat(): Optional<List<Double>> = quat.getOptional("quat")
-
-        /**
-         * Range from the originating system or sensor to the object, in kilometers.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun range(): Optional<Double> = range.getOptional("range")
 
         /**
          * The reference frame of the cartesian vector (ECEF, J2000). If the referenceFrame is null
@@ -4001,7 +3505,7 @@ private constructor(
         fun status(): Optional<String> = status.getOptional("status")
 
         /**
-         * Source of the epoch time.
+         * Source of the time value.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -4043,14 +3547,6 @@ private constructor(
         fun vectorLon(): Optional<Double> = vectorLon.getOptional("vectorLon")
 
         /**
-         * Vector track ID within the originating system or sensor.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun vectorTrackId(): Optional<String> = vectorTrackId.getOptional("vectorTrackId")
-
-        /**
          * Three element array, expressing the cartesian velocity vector of the target object, in
          * kilometers/second, in the specified referenceFrame. If referenceFrame is null then ECEF
          * should be assumed. The array element order is [x', y', z'].
@@ -4080,25 +3576,6 @@ private constructor(
          * Unlike [confidence], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("confidence") @ExcludeMissing fun _confidence(): JsonField<Int> = confidence
-
-        /**
-         * Returns the raw JSON value of [contextKeys].
-         *
-         * Unlike [contextKeys], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("contextKeys")
-        @ExcludeMissing
-        fun _contextKeys(): JsonField<List<String>> = contextKeys
-
-        /**
-         * Returns the raw JSON value of [contextValues].
-         *
-         * Unlike [contextValues], this method doesn't throw if the JSON field has an unexpected
-         * type.
-         */
-        @JsonProperty("contextValues")
-        @ExcludeMissing
-        fun _contextValues(): JsonField<List<String>> = contextValues
 
         /**
          * Returns the raw JSON value of [course].
@@ -4163,27 +3640,11 @@ private constructor(
         @JsonProperty("pos") @ExcludeMissing fun _pos(): JsonField<List<Double>> = pos
 
         /**
-         * Returns the raw JSON value of [propagated].
-         *
-         * Unlike [propagated], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("propagated")
-        @ExcludeMissing
-        fun _propagated(): JsonField<Boolean> = propagated
-
-        /**
          * Returns the raw JSON value of [quat].
          *
          * Unlike [quat], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("quat") @ExcludeMissing fun _quat(): JsonField<List<Double>> = quat
-
-        /**
-         * Returns the raw JSON value of [range].
-         *
-         * Unlike [range], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("range") @ExcludeMissing fun _range(): JsonField<Double> = range
 
         /**
          * Returns the raw JSON value of [referenceFrame].
@@ -4247,16 +3708,6 @@ private constructor(
         @JsonProperty("vectorLon") @ExcludeMissing fun _vectorLon(): JsonField<Double> = vectorLon
 
         /**
-         * Returns the raw JSON value of [vectorTrackId].
-         *
-         * Unlike [vectorTrackId], this method doesn't throw if the JSON field has an unexpected
-         * type.
-         */
-        @JsonProperty("vectorTrackId")
-        @ExcludeMissing
-        fun _vectorTrackId(): JsonField<String> = vectorTrackId
-
-        /**
          * Returns the raw JSON value of [vel].
          *
          * Unlike [vel], this method doesn't throw if the JSON field has an unexpected type.
@@ -4294,8 +3745,6 @@ private constructor(
             private var epoch: JsonField<OffsetDateTime>? = null
             private var accel: JsonField<MutableList<Double>>? = null
             private var confidence: JsonField<Int> = JsonMissing.of()
-            private var contextKeys: JsonField<MutableList<String>>? = null
-            private var contextValues: JsonField<MutableList<String>>? = null
             private var course: JsonField<Double> = JsonMissing.of()
             private var cov: JsonField<MutableList<Double>>? = null
             private var covReferenceFrame: JsonField<CovReferenceFrame> = JsonMissing.of()
@@ -4304,9 +3753,7 @@ private constructor(
             private var object_: JsonField<String> = JsonMissing.of()
             private var origSensorId: JsonField<String> = JsonMissing.of()
             private var pos: JsonField<MutableList<Double>>? = null
-            private var propagated: JsonField<Boolean> = JsonMissing.of()
             private var quat: JsonField<MutableList<Double>>? = null
-            private var range: JsonField<Double> = JsonMissing.of()
             private var referenceFrame: JsonField<String> = JsonMissing.of()
             private var spd: JsonField<Double> = JsonMissing.of()
             private var status: JsonField<String> = JsonMissing.of()
@@ -4315,7 +3762,6 @@ private constructor(
             private var vectorAlt: JsonField<Double> = JsonMissing.of()
             private var vectorLat: JsonField<Double> = JsonMissing.of()
             private var vectorLon: JsonField<Double> = JsonMissing.of()
-            private var vectorTrackId: JsonField<String> = JsonMissing.of()
             private var vel: JsonField<MutableList<Double>>? = null
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
@@ -4324,8 +3770,6 @@ private constructor(
                 epoch = vector.epoch
                 accel = vector.accel.map { it.toMutableList() }
                 confidence = vector.confidence
-                contextKeys = vector.contextKeys.map { it.toMutableList() }
-                contextValues = vector.contextValues.map { it.toMutableList() }
                 course = vector.course
                 cov = vector.cov.map { it.toMutableList() }
                 covReferenceFrame = vector.covReferenceFrame
@@ -4334,9 +3778,7 @@ private constructor(
                 object_ = vector.object_
                 origSensorId = vector.origSensorId
                 pos = vector.pos.map { it.toMutableList() }
-                propagated = vector.propagated
                 quat = vector.quat.map { it.toMutableList() }
-                range = vector.range
                 referenceFrame = vector.referenceFrame
                 spd = vector.spd
                 status = vector.status
@@ -4345,7 +3787,6 @@ private constructor(
                 vectorAlt = vector.vectorAlt
                 vectorLat = vector.vectorLat
                 vectorLon = vector.vectorLon
-                vectorTrackId = vector.vectorTrackId
                 vel = vector.vel.map { it.toMutableList() }
                 additionalProperties = vector.additionalProperties.toMutableMap()
             }
@@ -4403,73 +3844,6 @@ private constructor(
              * supported value.
              */
             fun confidence(confidence: JsonField<Int>) = apply { this.confidence = confidence }
-
-            /**
-             * An optional string array containing additional data (keys) representing relevant
-             * items for context of fields not specifically defined in this schema. This array is
-             * paired with the contextValues string array and must contain the same number of items.
-             * Please note these fields are intended for contextual use only and do not pertain to
-             * core schema information. To ensure proper integration and avoid misuse, coordination
-             * of how these fields are populated and consumed is required during onboarding.
-             */
-            fun contextKeys(contextKeys: List<String>) = contextKeys(JsonField.of(contextKeys))
-
-            /**
-             * Sets [Builder.contextKeys] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.contextKeys] with a well-typed `List<String>` value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun contextKeys(contextKeys: JsonField<List<String>>) = apply {
-                this.contextKeys = contextKeys.map { it.toMutableList() }
-            }
-
-            /**
-             * Adds a single [String] to [contextKeys].
-             *
-             * @throws IllegalStateException if the field was previously set to a non-list.
-             */
-            fun addContextKey(contextKey: String) = apply {
-                contextKeys =
-                    (contextKeys ?: JsonField.of(mutableListOf())).also {
-                        checkKnown("contextKeys", it).add(contextKey)
-                    }
-            }
-
-            /**
-             * An optional string array containing the values associated with the contextKeys array.
-             * This array is paired with the contextKeys string array and must contain the same
-             * number of items. Please note these fields are intended for contextual use only and do
-             * not pertain to core schema information. To ensure proper integration and avoid
-             * misuse, coordination of how these fields are populated and consumed is required
-             * during onboarding.
-             */
-            fun contextValues(contextValues: List<String>) =
-                contextValues(JsonField.of(contextValues))
-
-            /**
-             * Sets [Builder.contextValues] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.contextValues] with a well-typed `List<String>`
-             * value instead. This method is primarily for setting the field to an undocumented or
-             * not yet supported value.
-             */
-            fun contextValues(contextValues: JsonField<List<String>>) = apply {
-                this.contextValues = contextValues.map { it.toMutableList() }
-            }
-
-            /**
-             * Adds a single [String] to [contextValues].
-             *
-             * @throws IllegalStateException if the field was previously set to a non-list.
-             */
-            fun addContextValue(contextValue: String) = apply {
-                contextValues =
-                    (contextValues ?: JsonField.of(mutableListOf())).also {
-                        checkKnown("contextValues", it).add(contextValue)
-                    }
-            }
 
             /** Track object course, in degrees clockwise from true north. */
             fun course(course: Double) = course(JsonField.of(course))
@@ -4640,18 +4014,6 @@ private constructor(
                 pos = (pos ?: JsonField.of(mutableListOf())).also { checkKnown("pos", it).add(po) }
             }
 
-            /** Flag indicating whether the vector data was propagated. */
-            fun propagated(propagated: Boolean) = propagated(JsonField.of(propagated))
-
-            /**
-             * Sets [Builder.propagated] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.propagated] with a well-typed [Boolean] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun propagated(propagated: JsonField<Boolean>) = apply { this.propagated = propagated }
-
             /**
              * The quaternion describing the attitude of the spacecraft with respect to the
              * reference frame listed in the 'referenceFrame' field. The array element order
@@ -4681,18 +4043,6 @@ private constructor(
                         checkKnown("quat", it).add(quat)
                     }
             }
-
-            /** Range from the originating system or sensor to the object, in kilometers. */
-            fun range(range: Double) = range(JsonField.of(range))
-
-            /**
-             * Sets [Builder.range] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.range] with a well-typed [Double] value instead.
-             * This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun range(range: JsonField<Double>) = apply { this.range = range }
 
             /**
              * The reference frame of the cartesian vector (ECEF, J2000). If the referenceFrame is
@@ -4736,7 +4086,7 @@ private constructor(
              */
             fun status(status: JsonField<String>) = apply { this.status = status }
 
-            /** Source of the epoch time. */
+            /** Source of the time value. */
             fun timeSource(timeSource: String) = timeSource(JsonField.of(timeSource))
 
             /**
@@ -4801,20 +4151,6 @@ private constructor(
              * supported value.
              */
             fun vectorLon(vectorLon: JsonField<Double>) = apply { this.vectorLon = vectorLon }
-
-            /** Vector track ID within the originating system or sensor. */
-            fun vectorTrackId(vectorTrackId: String) = vectorTrackId(JsonField.of(vectorTrackId))
-
-            /**
-             * Sets [Builder.vectorTrackId] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.vectorTrackId] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun vectorTrackId(vectorTrackId: JsonField<String>) = apply {
-                this.vectorTrackId = vectorTrackId
-            }
 
             /**
              * Three element array, expressing the cartesian velocity vector of the target object,
@@ -4882,8 +4218,6 @@ private constructor(
                     checkRequired("epoch", epoch),
                     (accel ?: JsonMissing.of()).map { it.toImmutable() },
                     confidence,
-                    (contextKeys ?: JsonMissing.of()).map { it.toImmutable() },
-                    (contextValues ?: JsonMissing.of()).map { it.toImmutable() },
                     course,
                     (cov ?: JsonMissing.of()).map { it.toImmutable() },
                     covReferenceFrame,
@@ -4892,9 +4226,7 @@ private constructor(
                     object_,
                     origSensorId,
                     (pos ?: JsonMissing.of()).map { it.toImmutable() },
-                    propagated,
                     (quat ?: JsonMissing.of()).map { it.toImmutable() },
-                    range,
                     referenceFrame,
                     spd,
                     status,
@@ -4903,7 +4235,6 @@ private constructor(
                     vectorAlt,
                     vectorLat,
                     vectorLon,
-                    vectorTrackId,
                     (vel ?: JsonMissing.of()).map { it.toImmutable() },
                     additionalProperties.toMutableMap(),
                 )
@@ -4919,8 +4250,6 @@ private constructor(
             epoch()
             accel()
             confidence()
-            contextKeys()
-            contextValues()
             course()
             cov()
             covReferenceFrame().ifPresent { it.validate() }
@@ -4929,9 +4258,7 @@ private constructor(
             object_()
             origSensorId()
             pos()
-            propagated()
             quat()
-            range()
             referenceFrame()
             spd()
             status()
@@ -4940,7 +4267,6 @@ private constructor(
             vectorAlt()
             vectorLat()
             vectorLon()
-            vectorTrackId()
             vel()
             validated = true
         }
@@ -4964,8 +4290,6 @@ private constructor(
             (if (epoch.asKnown().isPresent) 1 else 0) +
                 (accel.asKnown().getOrNull()?.size ?: 0) +
                 (if (confidence.asKnown().isPresent) 1 else 0) +
-                (contextKeys.asKnown().getOrNull()?.size ?: 0) +
-                (contextValues.asKnown().getOrNull()?.size ?: 0) +
                 (if (course.asKnown().isPresent) 1 else 0) +
                 (cov.asKnown().getOrNull()?.size ?: 0) +
                 (covReferenceFrame.asKnown().getOrNull()?.validity() ?: 0) +
@@ -4974,9 +4298,7 @@ private constructor(
                 (if (object_.asKnown().isPresent) 1 else 0) +
                 (if (origSensorId.asKnown().isPresent) 1 else 0) +
                 (pos.asKnown().getOrNull()?.size ?: 0) +
-                (if (propagated.asKnown().isPresent) 1 else 0) +
                 (quat.asKnown().getOrNull()?.size ?: 0) +
-                (if (range.asKnown().isPresent) 1 else 0) +
                 (if (referenceFrame.asKnown().isPresent) 1 else 0) +
                 (if (spd.asKnown().isPresent) 1 else 0) +
                 (if (status.asKnown().isPresent) 1 else 0) +
@@ -4985,7 +4307,6 @@ private constructor(
                 (if (vectorAlt.asKnown().isPresent) 1 else 0) +
                 (if (vectorLat.asKnown().isPresent) 1 else 0) +
                 (if (vectorLon.asKnown().isPresent) 1 else 0) +
-                (if (vectorTrackId.asKnown().isPresent) 1 else 0) +
                 (vel.asKnown().getOrNull()?.size ?: 0)
 
         /**
@@ -5161,8 +4482,6 @@ private constructor(
                 epoch == other.epoch &&
                 accel == other.accel &&
                 confidence == other.confidence &&
-                contextKeys == other.contextKeys &&
-                contextValues == other.contextValues &&
                 course == other.course &&
                 cov == other.cov &&
                 covReferenceFrame == other.covReferenceFrame &&
@@ -5171,9 +4490,7 @@ private constructor(
                 object_ == other.object_ &&
                 origSensorId == other.origSensorId &&
                 pos == other.pos &&
-                propagated == other.propagated &&
                 quat == other.quat &&
-                range == other.range &&
                 referenceFrame == other.referenceFrame &&
                 spd == other.spd &&
                 status == other.status &&
@@ -5182,7 +4499,6 @@ private constructor(
                 vectorAlt == other.vectorAlt &&
                 vectorLat == other.vectorLat &&
                 vectorLon == other.vectorLon &&
-                vectorTrackId == other.vectorTrackId &&
                 vel == other.vel &&
                 additionalProperties == other.additionalProperties
         }
@@ -5192,8 +4508,6 @@ private constructor(
                 epoch,
                 accel,
                 confidence,
-                contextKeys,
-                contextValues,
                 course,
                 cov,
                 covReferenceFrame,
@@ -5202,9 +4516,7 @@ private constructor(
                 object_,
                 origSensorId,
                 pos,
-                propagated,
                 quat,
-                range,
                 referenceFrame,
                 spd,
                 status,
@@ -5213,7 +4525,6 @@ private constructor(
                 vectorAlt,
                 vectorLat,
                 vectorLon,
-                vectorTrackId,
                 vel,
                 additionalProperties,
             )
@@ -5222,7 +4533,7 @@ private constructor(
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Vector{epoch=$epoch, accel=$accel, confidence=$confidence, contextKeys=$contextKeys, contextValues=$contextValues, course=$course, cov=$cov, covReferenceFrame=$covReferenceFrame, flightAz=$flightAz, idSensor=$idSensor, object_=$object_, origSensorId=$origSensorId, pos=$pos, propagated=$propagated, quat=$quat, range=$range, referenceFrame=$referenceFrame, spd=$spd, status=$status, timeSource=$timeSource, type=$type, vectorAlt=$vectorAlt, vectorLat=$vectorLat, vectorLon=$vectorLon, vectorTrackId=$vectorTrackId, vel=$vel, additionalProperties=$additionalProperties}"
+            "Vector{epoch=$epoch, accel=$accel, confidence=$confidence, course=$course, cov=$cov, covReferenceFrame=$covReferenceFrame, flightAz=$flightAz, idSensor=$idSensor, object_=$object_, origSensorId=$origSensorId, pos=$pos, quat=$quat, referenceFrame=$referenceFrame, spd=$spd, status=$status, timeSource=$timeSource, type=$type, vectorAlt=$vectorAlt, vectorLat=$vectorLat, vectorLon=$vectorLon, vel=$vel, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -5246,33 +4557,23 @@ private constructor(
             burnoutAlt == other.burnoutAlt &&
             callSign == other.callSign &&
             containment == other.containment &&
-            contextKeys == other.contextKeys &&
-            contextValues == other.contextValues &&
             createdAt == other.createdAt &&
             createdBy == other.createdBy &&
             dropPtInd == other.dropPtInd &&
             emgInd == other.emgInd &&
             env == other.env &&
-            impactAlt == other.impactAlt &&
             impactAouData == other.impactAouData &&
             impactAouType == other.impactAouType &&
-            impactConf == other.impactConf &&
             impactLat == other.impactLat &&
             impactLon == other.impactLon &&
             impactTime == other.impactTime &&
             infoSource == other.infoSource &&
-            launchAlt == other.launchAlt &&
             launchAouData == other.launchAouData &&
             launchAouType == other.launchAouType &&
-            launchAz == other.launchAz &&
-            launchAzUnc == other.launchAzUnc &&
-            launchConf == other.launchConf &&
             launchLat == other.launchLat &&
             launchLon == other.launchLon &&
             launchTime == other.launchTime &&
             lostTrkInd == other.lostTrkInd &&
-            maneuverEnd == other.maneuverEnd &&
-            maneuverStart == other.maneuverStart &&
             msgCreateDate == other.msgCreateDate &&
             msgSubType == other.msgSubType &&
             msgType == other.msgType &&
@@ -5318,33 +4619,23 @@ private constructor(
             burnoutAlt,
             callSign,
             containment,
-            contextKeys,
-            contextValues,
             createdAt,
             createdBy,
             dropPtInd,
             emgInd,
             env,
-            impactAlt,
             impactAouData,
             impactAouType,
-            impactConf,
             impactLat,
             impactLon,
             impactTime,
             infoSource,
-            launchAlt,
             launchAouData,
             launchAouType,
-            launchAz,
-            launchAzUnc,
-            launchConf,
             launchLat,
             launchLon,
             launchTime,
             lostTrkInd,
-            maneuverEnd,
-            maneuverStart,
             msgCreateDate,
             msgSubType,
             msgType,
@@ -5377,5 +4668,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "HistoryQueryResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, acftSubType=$acftSubType, alert=$alert, angElev=$angElev, aouRptData=$aouRptData, aouRptType=$aouRptType, azCorr=$azCorr, boosting=$boosting, burnoutAlt=$burnoutAlt, callSign=$callSign, containment=$containment, contextKeys=$contextKeys, contextValues=$contextValues, createdAt=$createdAt, createdBy=$createdBy, dropPtInd=$dropPtInd, emgInd=$emgInd, env=$env, impactAlt=$impactAlt, impactAouData=$impactAouData, impactAouType=$impactAouType, impactConf=$impactConf, impactLat=$impactLat, impactLon=$impactLon, impactTime=$impactTime, infoSource=$infoSource, launchAlt=$launchAlt, launchAouData=$launchAouData, launchAouType=$launchAouType, launchAz=$launchAz, launchAzUnc=$launchAzUnc, launchConf=$launchConf, launchLat=$launchLat, launchLon=$launchLon, launchTime=$launchTime, lostTrkInd=$lostTrkInd, maneuverEnd=$maneuverEnd, maneuverStart=$maneuverStart, msgCreateDate=$msgCreateDate, msgSubType=$msgSubType, msgType=$msgType, mslStatus=$mslStatus, muidSrc=$muidSrc, muidSrcTrk=$muidSrcTrk, name=$name, objAct=$objAct, objIdent=$objIdent, objPlat=$objPlat, objType=$objType, objTypeConf=$objTypeConf, origin=$origin, origNetwork=$origNetwork, parentTrackId=$parentTrackId, polarSingLocLat=$polarSingLocLat, polarSingLocLon=$polarSingLocLon, senMode=$senMode, spaceAmp=$spaceAmp, spaceAmpConf=$spaceAmpConf, spaceSpecType=$spaceSpecType, trackId=$trackId, trkConf=$trkConf, trkQual=$trkQual, vectors=$vectors, additionalProperties=$additionalProperties}"
+        "HistoryQueryResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, acftSubType=$acftSubType, alert=$alert, angElev=$angElev, aouRptData=$aouRptData, aouRptType=$aouRptType, azCorr=$azCorr, boosting=$boosting, burnoutAlt=$burnoutAlt, callSign=$callSign, containment=$containment, createdAt=$createdAt, createdBy=$createdBy, dropPtInd=$dropPtInd, emgInd=$emgInd, env=$env, impactAouData=$impactAouData, impactAouType=$impactAouType, impactLat=$impactLat, impactLon=$impactLon, impactTime=$impactTime, infoSource=$infoSource, launchAouData=$launchAouData, launchAouType=$launchAouType, launchLat=$launchLat, launchLon=$launchLon, launchTime=$launchTime, lostTrkInd=$lostTrkInd, msgCreateDate=$msgCreateDate, msgSubType=$msgSubType, msgType=$msgType, mslStatus=$mslStatus, muidSrc=$muidSrc, muidSrcTrk=$muidSrcTrk, name=$name, objAct=$objAct, objIdent=$objIdent, objPlat=$objPlat, objType=$objType, objTypeConf=$objTypeConf, origin=$origin, origNetwork=$origNetwork, parentTrackId=$parentTrackId, polarSingLocLat=$polarSingLocLat, polarSingLocLon=$polarSingLocLon, senMode=$senMode, spaceAmp=$spaceAmp, spaceAmpConf=$spaceAmpConf, spaceSpecType=$spaceSpecType, trackId=$trackId, trkConf=$trkConf, trkQual=$trkQual, vectors=$vectors, additionalProperties=$additionalProperties}"
 }

@@ -52,7 +52,6 @@ private constructor(
     private val origNetwork: JsonField<String>,
     private val satNo1: JsonField<Int>,
     private val satNo2: JsonField<Int>,
-    private val snr: JsonField<Double>,
     private val sysCap: JsonField<String>,
     private val additionalProperties: MutableMap<String, JsonValue>,
 ) {
@@ -121,7 +120,6 @@ private constructor(
         origNetwork: JsonField<String> = JsonMissing.of(),
         @JsonProperty("satNo1") @ExcludeMissing satNo1: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("satNo2") @ExcludeMissing satNo2: JsonField<Int> = JsonMissing.of(),
-        @JsonProperty("snr") @ExcludeMissing snr: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("sysCap") @ExcludeMissing sysCap: JsonField<String> = JsonMissing.of(),
     ) : this(
         classificationMarking,
@@ -154,7 +152,6 @@ private constructor(
         origNetwork,
         satNo1,
         satNo2,
-        snr,
         sysCap,
         mutableMapOf(),
     )
@@ -423,14 +420,6 @@ private constructor(
     fun satNo2(): Optional<Int> = satNo2.getOptional("satNo2")
 
     /**
-     * Signal to noise ratio, in dB.
-     *
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun snr(): Optional<Double> = snr.getOptional("snr")
-
-    /**
      * The SYSCAP mission status of the system(s) forming the link.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
@@ -676,13 +665,6 @@ private constructor(
     @JsonProperty("satNo2") @ExcludeMissing fun _satNo2(): JsonField<Int> = satNo2
 
     /**
-     * Returns the raw JSON value of [snr].
-     *
-     * Unlike [snr], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    @JsonProperty("snr") @ExcludeMissing fun _snr(): JsonField<Double> = snr
-
-    /**
      * Returns the raw JSON value of [sysCap].
      *
      * Unlike [sysCap], this method doesn't throw if the JSON field has an unexpected type.
@@ -758,7 +740,6 @@ private constructor(
         private var origNetwork: JsonField<String> = JsonMissing.of()
         private var satNo1: JsonField<Int> = JsonMissing.of()
         private var satNo2: JsonField<Int> = JsonMissing.of()
-        private var snr: JsonField<Double> = JsonMissing.of()
         private var sysCap: JsonField<String> = JsonMissing.of()
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
@@ -794,7 +775,6 @@ private constructor(
             origNetwork = historyListResponse.origNetwork
             satNo1 = historyListResponse.satNo1
             satNo2 = historyListResponse.satNo2
-            snr = historyListResponse.snr
             sysCap = historyListResponse.sysCap
             additionalProperties = historyListResponse.additionalProperties.toMutableMap()
         }
@@ -1229,17 +1209,6 @@ private constructor(
          */
         fun satNo2(satNo2: JsonField<Int>) = apply { this.satNo2 = satNo2 }
 
-        /** Signal to noise ratio, in dB. */
-        fun snr(snr: Double) = snr(JsonField.of(snr))
-
-        /**
-         * Sets [Builder.snr] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.snr] with a well-typed [Double] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
-         */
-        fun snr(snr: JsonField<Double>) = apply { this.snr = snr }
-
         /** The SYSCAP mission status of the system(s) forming the link. */
         fun sysCap(sysCap: String) = sysCap(JsonField.of(sysCap))
 
@@ -1325,7 +1294,6 @@ private constructor(
                 origNetwork,
                 satNo1,
                 satNo2,
-                snr,
                 sysCap,
                 additionalProperties.toMutableMap(),
             )
@@ -1368,7 +1336,6 @@ private constructor(
         origNetwork()
         satNo1()
         satNo2()
-        snr()
         sysCap()
         validated = true
     }
@@ -1418,7 +1385,6 @@ private constructor(
             (if (origNetwork.asKnown().isPresent) 1 else 0) +
             (if (satNo1.asKnown().isPresent) 1 else 0) +
             (if (satNo2.asKnown().isPresent) 1 else 0) +
-            (if (snr.asKnown().isPresent) 1 else 0) +
             (if (sysCap.asKnown().isPresent) 1 else 0)
 
     /**
@@ -1610,7 +1576,6 @@ private constructor(
             origNetwork == other.origNetwork &&
             satNo1 == other.satNo1 &&
             satNo2 == other.satNo2 &&
-            snr == other.snr &&
             sysCap == other.sysCap &&
             additionalProperties == other.additionalProperties
     }
@@ -1647,7 +1612,6 @@ private constructor(
             origNetwork,
             satNo1,
             satNo2,
-            snr,
             sysCap,
             additionalProperties,
         )
@@ -1656,5 +1620,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "HistoryListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, endPoint1Lat=$endPoint1Lat, endPoint1Lon=$endPoint1Lon, endPoint1Name=$endPoint1Name, endPoint2Lat=$endPoint2Lat, endPoint2Lon=$endPoint2Lon, endPoint2Name=$endPoint2Name, linkName=$linkName, linkStartTime=$linkStartTime, linkStopTime=$linkStopTime, source=$source, id=$id, band=$band, constellation=$constellation, createdAt=$createdAt, createdBy=$createdBy, dataRate1To2=$dataRate1To2, dataRate2To1=$dataRate2To1, idBeam1=$idBeam1, idBeam2=$idBeam2, idOnOrbit1=$idOnOrbit1, idOnOrbit2=$idOnOrbit2, linkState=$linkState, linkType=$linkType, opsCap=$opsCap, origin=$origin, origNetwork=$origNetwork, satNo1=$satNo1, satNo2=$satNo2, snr=$snr, sysCap=$sysCap, additionalProperties=$additionalProperties}"
+        "HistoryListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, endPoint1Lat=$endPoint1Lat, endPoint1Lon=$endPoint1Lon, endPoint1Name=$endPoint1Name, endPoint2Lat=$endPoint2Lat, endPoint2Lon=$endPoint2Lon, endPoint2Name=$endPoint2Name, linkName=$linkName, linkStartTime=$linkStartTime, linkStopTime=$linkStopTime, source=$source, id=$id, band=$band, constellation=$constellation, createdAt=$createdAt, createdBy=$createdBy, dataRate1To2=$dataRate1To2, dataRate2To1=$dataRate2To1, idBeam1=$idBeam1, idBeam2=$idBeam2, idOnOrbit1=$idOnOrbit1, idOnOrbit2=$idOnOrbit2, linkState=$linkState, linkType=$linkType, opsCap=$opsCap, origin=$origin, origNetwork=$origNetwork, satNo1=$satNo1, satNo2=$satNo2, sysCap=$sysCap, additionalProperties=$additionalProperties}"
 }

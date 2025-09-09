@@ -41,7 +41,6 @@ internal class LinkStatusCreateParamsTest {
             .origNetwork("OPS1")
             .satNo1(1)
             .satNo2(2)
-            .snr(10.1)
             .sysCap("Example status")
             .build()
     }
@@ -80,7 +79,6 @@ internal class LinkStatusCreateParamsTest {
                 .origNetwork("OPS1")
                 .satNo1(1)
                 .satNo2(2)
-                .snr(10.1)
                 .sysCap("Example status")
                 .build()
 
@@ -118,7 +116,6 @@ internal class LinkStatusCreateParamsTest {
         assertThat(body.origNetwork()).contains("OPS1")
         assertThat(body.satNo1()).contains(1)
         assertThat(body.satNo2()).contains(2)
-        assertThat(body.snr()).contains(10.1)
         assertThat(body.sysCap()).contains("Example status")
     }
 

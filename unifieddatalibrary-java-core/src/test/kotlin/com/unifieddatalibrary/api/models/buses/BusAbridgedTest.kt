@@ -5,7 +5,6 @@ package com.unifieddatalibrary.api.models.buses
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import com.unifieddatalibrary.api.core.jsonMapper
 import java.time.OffsetDateTime
-import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -61,7 +60,6 @@ internal class BusAbridgedTest {
                 .numOrbitType(3)
                 .oapPayloadPower(10.1)
                 .oapSpacecraftPower(10.1)
-                .orbitTypes(listOf("LEO", "HEO", "GEO"))
                 .origin("THIRD_PARTY_DATASOURCE")
                 .origNetwork("OPS1")
                 .payloadDimensionX(1.1)
@@ -121,7 +119,6 @@ internal class BusAbridgedTest {
         assertThat(busAbridged.numOrbitType()).contains(3)
         assertThat(busAbridged.oapPayloadPower()).contains(10.1)
         assertThat(busAbridged.oapSpacecraftPower()).contains(10.1)
-        assertThat(busAbridged.orbitTypes().getOrNull()).containsExactly("LEO", "HEO", "GEO")
         assertThat(busAbridged.origin()).contains("THIRD_PARTY_DATASOURCE")
         assertThat(busAbridged.origNetwork()).contains("OPS1")
         assertThat(busAbridged.payloadDimensionX()).contains(1.1)
@@ -185,7 +182,6 @@ internal class BusAbridgedTest {
                 .numOrbitType(3)
                 .oapPayloadPower(10.1)
                 .oapSpacecraftPower(10.1)
-                .orbitTypes(listOf("LEO", "HEO", "GEO"))
                 .origin("THIRD_PARTY_DATASOURCE")
                 .origNetwork("OPS1")
                 .payloadDimensionX(1.1)
