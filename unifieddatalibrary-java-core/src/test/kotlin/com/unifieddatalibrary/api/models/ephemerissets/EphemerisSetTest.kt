@@ -1089,7 +1089,6 @@ internal class EphemerisSetTest {
                         .leapSecondTime(OffsetDateTime.parse("2021-01-01T01:01:01.123Z"))
                         .lunarSolar(true)
                         .mass(164.5)
-                        .msgTs(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                         .obsAvailable(376)
                         .obsUsed(374)
                         .onOrbit(
@@ -3295,7 +3294,6 @@ internal class EphemerisSetTest {
                     .leapSecondTime(OffsetDateTime.parse("2021-01-01T01:01:01.123Z"))
                     .lunarSolar(true)
                     .mass(164.5)
-                    .msgTs(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                     .obsAvailable(376)
                     .obsUsed(374)
                     .onOrbit(
@@ -5473,7 +5471,6 @@ internal class EphemerisSetTest {
                         .leapSecondTime(OffsetDateTime.parse("2021-01-01T01:01:01.123Z"))
                         .lunarSolar(true)
                         .mass(164.5)
-                        .msgTs(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                         .obsAvailable(376)
                         .obsUsed(374)
                         .onOrbit(

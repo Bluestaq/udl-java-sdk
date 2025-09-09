@@ -94,7 +94,9 @@ internal class ScServiceTest {
         stubFor(post(anyUrl()).willReturn(ok().withBody("abc")))
 
         val response =
-            scService.download(ScDownloadParams.builder().addBody("/MyFolderToDownload/").build())
+            scService.download(
+                ScDownloadParams.builder().addBody(JsonValue.from("/MyFolderToDownload/")).build()
+            )
 
         assertThat(response.body()).hasContent("abc")
     }

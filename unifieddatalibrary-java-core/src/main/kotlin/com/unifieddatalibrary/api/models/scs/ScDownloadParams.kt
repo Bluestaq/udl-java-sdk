@@ -2,6 +2,7 @@
 
 package com.unifieddatalibrary.api.models.scs
 
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -12,12 +13,12 @@ import java.util.Objects
 /** Downloads a zip of one or more files and/or folders. */
 class ScDownloadParams
 private constructor(
-    private val body: List<String>,
+    private val body: List<JsonValue>,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun body(): List<String> = body
+    fun body(): List<JsonValue> = body
 
     /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
@@ -43,7 +44,7 @@ private constructor(
     /** A builder for [ScDownloadParams]. */
     class Builder internal constructor() {
 
-        private var body: MutableList<String>? = null
+        private var body: MutableList<JsonValue>? = null
         private var additionalHeaders: Headers.Builder = Headers.builder()
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
@@ -54,14 +55,14 @@ private constructor(
             additionalQueryParams = scDownloadParams.additionalQueryParams.toBuilder()
         }
 
-        fun body(body: List<String>) = apply { this.body = body.toMutableList() }
+        fun body(body: List<JsonValue>) = apply { this.body = body.toMutableList() }
 
         /**
-         * Adds a single [String] to [Builder.body].
+         * Adds a single [JsonValue] to [Builder.body].
          *
          * @throws IllegalStateException if the field was previously set to a non-list.
          */
-        fun addBody(body: String) = apply {
+        fun addBody(body: JsonValue) = apply {
             this.body = (this.body ?: mutableListOf()).apply { add(body) }
         }
 
@@ -183,7 +184,7 @@ private constructor(
             )
     }
 
-    fun _body(): List<String> = body
+    fun _body(): List<JsonValue> = body
 
     override fun _headers(): Headers = additionalHeaders
 

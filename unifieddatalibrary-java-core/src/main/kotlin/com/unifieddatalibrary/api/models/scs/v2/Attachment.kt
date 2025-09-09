@@ -18,6 +18,7 @@ import java.util.Optional
 class Attachment
 private constructor(
     private val author: JsonField<String>,
+    private val content: JsonField<String>,
     private val contentLength: JsonField<Int>,
     private val contentType: JsonField<String>,
     private val date: JsonField<String>,
@@ -30,6 +31,7 @@ private constructor(
     @JsonCreator
     private constructor(
         @JsonProperty("author") @ExcludeMissing author: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("content") @ExcludeMissing content: JsonField<String> = JsonMissing.of(),
         @JsonProperty("content_length")
         @ExcludeMissing
         contentLength: JsonField<Int> = JsonMissing.of(),
@@ -40,60 +42,61 @@ private constructor(
         @JsonProperty("keywords") @ExcludeMissing keywords: JsonField<String> = JsonMissing.of(),
         @JsonProperty("language") @ExcludeMissing language: JsonField<String> = JsonMissing.of(),
         @JsonProperty("title") @ExcludeMissing title: JsonField<String> = JsonMissing.of(),
-    ) : this(author, contentLength, contentType, date, keywords, language, title, mutableMapOf())
+    ) : this(
+        author,
+        content,
+        contentLength,
+        contentType,
+        date,
+        keywords,
+        language,
+        title,
+        mutableMapOf(),
+    )
 
     /**
-     * The creator of this document. Can be a person or a software entity.
-     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun author(): Optional<String> = author.getOptional("author")
 
     /**
-     * The length of the document, in bytes.
-     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun content(): Optional<String> = content.getOptional("content")
+
+    /**
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun contentLength(): Optional<Int> = contentLength.getOptional("content_length")
 
     /**
-     * The document's MIME-type (if applicable).
-     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun contentType(): Optional<String> = contentType.getOptional("content_type")
 
     /**
-     * The time at which this attachment was created, represented in UTC ISO format.
-     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun date(): Optional<String> = date.getOptional("date")
 
     /**
-     * Any keywords associated with this document. Only applicable to files whose contents are
-     * indexed (e.g. text files, PDFs).
-     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun keywords(): Optional<String> = keywords.getOptional("keywords")
 
     /**
-     * The human language of the document, if discernible.
-     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun language(): Optional<String> = language.getOptional("language")
 
     /**
-     * The title of the document.
-     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
@@ -105,6 +108,13 @@ private constructor(
      * Unlike [author], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("author") @ExcludeMissing fun _author(): JsonField<String> = author
+
+    /**
+     * Returns the raw JSON value of [content].
+     *
+     * Unlike [content], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("content") @ExcludeMissing fun _content(): JsonField<String> = content
 
     /**
      * Returns the raw JSON value of [contentLength].
@@ -174,6 +184,7 @@ private constructor(
     class Builder internal constructor() {
 
         private var author: JsonField<String> = JsonMissing.of()
+        private var content: JsonField<String> = JsonMissing.of()
         private var contentLength: JsonField<Int> = JsonMissing.of()
         private var contentType: JsonField<String> = JsonMissing.of()
         private var date: JsonField<String> = JsonMissing.of()
@@ -185,6 +196,7 @@ private constructor(
         @JvmSynthetic
         internal fun from(attachment: Attachment) = apply {
             author = attachment.author
+            content = attachment.content
             contentLength = attachment.contentLength
             contentType = attachment.contentType
             date = attachment.date
@@ -194,7 +206,6 @@ private constructor(
             additionalProperties = attachment.additionalProperties.toMutableMap()
         }
 
-        /** The creator of this document. Can be a person or a software entity. */
         fun author(author: String) = author(JsonField.of(author))
 
         /**
@@ -205,7 +216,16 @@ private constructor(
          */
         fun author(author: JsonField<String>) = apply { this.author = author }
 
-        /** The length of the document, in bytes. */
+        fun content(content: String) = content(JsonField.of(content))
+
+        /**
+         * Sets [Builder.content] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.content] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun content(content: JsonField<String>) = apply { this.content = content }
+
         fun contentLength(contentLength: Int) = contentLength(JsonField.of(contentLength))
 
         /**
@@ -219,7 +239,6 @@ private constructor(
             this.contentLength = contentLength
         }
 
-        /** The document's MIME-type (if applicable). */
         fun contentType(contentType: String) = contentType(JsonField.of(contentType))
 
         /**
@@ -231,7 +250,6 @@ private constructor(
          */
         fun contentType(contentType: JsonField<String>) = apply { this.contentType = contentType }
 
-        /** The time at which this attachment was created, represented in UTC ISO format. */
         fun date(date: String) = date(JsonField.of(date))
 
         /**
@@ -242,10 +260,6 @@ private constructor(
          */
         fun date(date: JsonField<String>) = apply { this.date = date }
 
-        /**
-         * Any keywords associated with this document. Only applicable to files whose contents are
-         * indexed (e.g. text files, PDFs).
-         */
         fun keywords(keywords: String) = keywords(JsonField.of(keywords))
 
         /**
@@ -256,7 +270,6 @@ private constructor(
          */
         fun keywords(keywords: JsonField<String>) = apply { this.keywords = keywords }
 
-        /** The human language of the document, if discernible. */
         fun language(language: String) = language(JsonField.of(language))
 
         /**
@@ -267,7 +280,6 @@ private constructor(
          */
         fun language(language: JsonField<String>) = apply { this.language = language }
 
-        /** The title of the document. */
         fun title(title: String) = title(JsonField.of(title))
 
         /**
@@ -305,6 +317,7 @@ private constructor(
         fun build(): Attachment =
             Attachment(
                 author,
+                content,
                 contentLength,
                 contentType,
                 date,
@@ -323,6 +336,7 @@ private constructor(
         }
 
         author()
+        content()
         contentLength()
         contentType()
         date()
@@ -348,6 +362,7 @@ private constructor(
     @JvmSynthetic
     internal fun validity(): Int =
         (if (author.asKnown().isPresent) 1 else 0) +
+            (if (content.asKnown().isPresent) 1 else 0) +
             (if (contentLength.asKnown().isPresent) 1 else 0) +
             (if (contentType.asKnown().isPresent) 1 else 0) +
             (if (date.asKnown().isPresent) 1 else 0) +
@@ -362,6 +377,7 @@ private constructor(
 
         return other is Attachment &&
             author == other.author &&
+            content == other.content &&
             contentLength == other.contentLength &&
             contentType == other.contentType &&
             date == other.date &&
@@ -374,6 +390,7 @@ private constructor(
     private val hashCode: Int by lazy {
         Objects.hash(
             author,
+            content,
             contentLength,
             contentType,
             date,
@@ -387,5 +404,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "Attachment{author=$author, contentLength=$contentLength, contentType=$contentType, date=$date, keywords=$keywords, language=$language, title=$title, additionalProperties=$additionalProperties}"
+        "Attachment{author=$author, content=$content, contentLength=$contentLength, contentType=$contentType, date=$date, keywords=$keywords, language=$language, title=$title, additionalProperties=$additionalProperties}"
 }

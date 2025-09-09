@@ -104,7 +104,7 @@ internal class ScServiceAsyncTest {
 
         val responseFuture =
             scServiceAsync.download(
-                ScDownloadParams.builder().addBody("/MyFolderToDownload/").build()
+                ScDownloadParams.builder().addBody(JsonValue.from("/MyFolderToDownload/")).build()
             )
 
         val response = responseFuture.get()

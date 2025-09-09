@@ -44,7 +44,6 @@ internal class LinkStatusListResponseTest {
                 .origNetwork("OPS1")
                 .satNo1(1)
                 .satNo2(2)
-                .snr(10.1)
                 .sysCap("Example status")
                 .build()
 
@@ -82,7 +81,6 @@ internal class LinkStatusListResponseTest {
         assertThat(linkStatusListResponse.origNetwork()).contains("OPS1")
         assertThat(linkStatusListResponse.satNo1()).contains(1)
         assertThat(linkStatusListResponse.satNo2()).contains(2)
-        assertThat(linkStatusListResponse.snr()).contains(10.1)
         assertThat(linkStatusListResponse.sysCap()).contains("Example status")
     }
 
@@ -121,7 +119,6 @@ internal class LinkStatusListResponseTest {
                 .origNetwork("OPS1")
                 .satNo1(1)
                 .satNo2(2)
-                .snr(10.1)
                 .sysCap("Example status")
                 .build()
 
