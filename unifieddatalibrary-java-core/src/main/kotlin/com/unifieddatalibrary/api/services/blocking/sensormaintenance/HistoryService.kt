@@ -9,8 +9,8 @@ import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryCountParams
-import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryRetrieveParams
-import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryRetrieveResponse
+import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryListPage
+import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryListParams
 import java.util.function.Consumer
 
 interface HistoryService {
@@ -33,22 +33,21 @@ interface HistoryService {
      * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
      * information.
      */
-    fun retrieve(): List<HistoryRetrieveResponse> = retrieve(HistoryRetrieveParams.none())
+    fun list(): HistoryListPage = list(HistoryListParams.none())
 
-    /** @see retrieve */
-    fun retrieve(
-        params: HistoryRetrieveParams = HistoryRetrieveParams.none(),
+    /** @see list */
+    fun list(
+        params: HistoryListParams = HistoryListParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): List<HistoryRetrieveResponse>
+    ): HistoryListPage
 
-    /** @see retrieve */
-    fun retrieve(
-        params: HistoryRetrieveParams = HistoryRetrieveParams.none()
-    ): List<HistoryRetrieveResponse> = retrieve(params, RequestOptions.none())
+    /** @see list */
+    fun list(params: HistoryListParams = HistoryListParams.none()): HistoryListPage =
+        list(params, RequestOptions.none())
 
-    /** @see retrieve */
-    fun retrieve(requestOptions: RequestOptions): List<HistoryRetrieveResponse> =
-        retrieve(HistoryRetrieveParams.none(), requestOptions)
+    /** @see list */
+    fun list(requestOptions: RequestOptions): HistoryListPage =
+        list(HistoryListParams.none(), requestOptions)
 
     /**
      * Service operation to dynamically query historical data by a variety of query parameters not
@@ -106,31 +105,27 @@ interface HistoryService {
 
         /**
          * Returns a raw HTTP response for `get /udl/sensormaintenance/history`, but is otherwise
-         * the same as [HistoryService.retrieve].
+         * the same as [HistoryService.list].
          */
-        @MustBeClosed
-        fun retrieve(): HttpResponseFor<List<HistoryRetrieveResponse>> =
-            retrieve(HistoryRetrieveParams.none())
+        @MustBeClosed fun list(): HttpResponseFor<HistoryListPage> = list(HistoryListParams.none())
 
-        /** @see retrieve */
+        /** @see list */
         @MustBeClosed
-        fun retrieve(
-            params: HistoryRetrieveParams = HistoryRetrieveParams.none(),
+        fun list(
+            params: HistoryListParams = HistoryListParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<List<HistoryRetrieveResponse>>
+        ): HttpResponseFor<HistoryListPage>
 
-        /** @see retrieve */
+        /** @see list */
         @MustBeClosed
-        fun retrieve(
-            params: HistoryRetrieveParams = HistoryRetrieveParams.none()
-        ): HttpResponseFor<List<HistoryRetrieveResponse>> = retrieve(params, RequestOptions.none())
+        fun list(
+            params: HistoryListParams = HistoryListParams.none()
+        ): HttpResponseFor<HistoryListPage> = list(params, RequestOptions.none())
 
-        /** @see retrieve */
+        /** @see list */
         @MustBeClosed
-        fun retrieve(
-            requestOptions: RequestOptions
-        ): HttpResponseFor<List<HistoryRetrieveResponse>> =
-            retrieve(HistoryRetrieveParams.none(), requestOptions)
+        fun list(requestOptions: RequestOptions): HttpResponseFor<HistoryListPage> =
+            list(HistoryListParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /udl/sensormaintenance/history/aodr`, but is

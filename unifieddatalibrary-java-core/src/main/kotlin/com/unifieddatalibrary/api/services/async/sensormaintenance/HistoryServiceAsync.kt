@@ -8,8 +8,8 @@ import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryCountParams
-import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryRetrieveParams
-import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryRetrieveResponse
+import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryListPageAsync
+import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryListParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -33,23 +33,22 @@ interface HistoryServiceAsync {
      * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
      * information.
      */
-    fun retrieve(): CompletableFuture<List<HistoryRetrieveResponse>> =
-        retrieve(HistoryRetrieveParams.none())
+    fun list(): CompletableFuture<HistoryListPageAsync> = list(HistoryListParams.none())
 
-    /** @see retrieve */
-    fun retrieve(
-        params: HistoryRetrieveParams = HistoryRetrieveParams.none(),
+    /** @see list */
+    fun list(
+        params: HistoryListParams = HistoryListParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<HistoryRetrieveResponse>>
+    ): CompletableFuture<HistoryListPageAsync>
 
-    /** @see retrieve */
-    fun retrieve(
-        params: HistoryRetrieveParams = HistoryRetrieveParams.none()
-    ): CompletableFuture<List<HistoryRetrieveResponse>> = retrieve(params, RequestOptions.none())
+    /** @see list */
+    fun list(
+        params: HistoryListParams = HistoryListParams.none()
+    ): CompletableFuture<HistoryListPageAsync> = list(params, RequestOptions.none())
 
-    /** @see retrieve */
-    fun retrieve(requestOptions: RequestOptions): CompletableFuture<List<HistoryRetrieveResponse>> =
-        retrieve(HistoryRetrieveParams.none(), requestOptions)
+    /** @see list */
+    fun list(requestOptions: RequestOptions): CompletableFuture<HistoryListPageAsync> =
+        list(HistoryListParams.none(), requestOptions)
 
     /**
      * Service operation to dynamically query historical data by a variety of query parameters not
@@ -112,28 +111,28 @@ interface HistoryServiceAsync {
 
         /**
          * Returns a raw HTTP response for `get /udl/sensormaintenance/history`, but is otherwise
-         * the same as [HistoryServiceAsync.retrieve].
+         * the same as [HistoryServiceAsync.list].
          */
-        fun retrieve(): CompletableFuture<HttpResponseFor<List<HistoryRetrieveResponse>>> =
-            retrieve(HistoryRetrieveParams.none())
+        fun list(): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> =
+            list(HistoryListParams.none())
 
-        /** @see retrieve */
-        fun retrieve(
-            params: HistoryRetrieveParams = HistoryRetrieveParams.none(),
+        /** @see list */
+        fun list(
+            params: HistoryListParams = HistoryListParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<HistoryRetrieveResponse>>>
+        ): CompletableFuture<HttpResponseFor<HistoryListPageAsync>>
 
-        /** @see retrieve */
-        fun retrieve(
-            params: HistoryRetrieveParams = HistoryRetrieveParams.none()
-        ): CompletableFuture<HttpResponseFor<List<HistoryRetrieveResponse>>> =
-            retrieve(params, RequestOptions.none())
+        /** @see list */
+        fun list(
+            params: HistoryListParams = HistoryListParams.none()
+        ): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> =
+            list(params, RequestOptions.none())
 
-        /** @see retrieve */
-        fun retrieve(
+        /** @see list */
+        fun list(
             requestOptions: RequestOptions
-        ): CompletableFuture<HttpResponseFor<List<HistoryRetrieveResponse>>> =
-            retrieve(HistoryRetrieveParams.none(), requestOptions)
+        ): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> =
+            list(HistoryListParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /udl/sensormaintenance/history/aodr`, but is

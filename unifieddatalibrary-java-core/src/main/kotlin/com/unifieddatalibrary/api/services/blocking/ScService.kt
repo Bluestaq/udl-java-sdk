@@ -18,13 +18,9 @@ import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
-import com.unifieddatalibrary.api.services.blocking.scs.ClassificationMarkingService
-import com.unifieddatalibrary.api.services.blocking.scs.FileMetadataService
 import com.unifieddatalibrary.api.services.blocking.scs.FileService
 import com.unifieddatalibrary.api.services.blocking.scs.FolderService
-import com.unifieddatalibrary.api.services.blocking.scs.GroupService
 import com.unifieddatalibrary.api.services.blocking.scs.PathService
-import com.unifieddatalibrary.api.services.blocking.scs.RangeParameterService
 import com.unifieddatalibrary.api.services.blocking.scs.V2Service
 import java.util.function.Consumer
 
@@ -43,14 +39,6 @@ interface ScService {
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScService
 
     fun folders(): FolderService
-
-    fun classificationMarkings(): ClassificationMarkingService
-
-    fun groups(): GroupService
-
-    fun fileMetadata(): FileMetadataService
-
-    fun rangeParameters(): RangeParameterService
 
     fun paths(): PathService
 
@@ -212,14 +200,6 @@ interface ScService {
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScService.WithRawResponse
 
         fun folders(): FolderService.WithRawResponse
-
-        fun classificationMarkings(): ClassificationMarkingService.WithRawResponse
-
-        fun groups(): GroupService.WithRawResponse
-
-        fun fileMetadata(): FileMetadataService.WithRawResponse
-
-        fun rangeParameters(): RangeParameterService.WithRawResponse
 
         fun paths(): PathService.WithRawResponse
 

@@ -18,8 +18,9 @@ import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.sensorplan.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.sensorplan.history.HistoryCountParams
-import com.unifieddatalibrary.api.models.sensorplan.history.HistoryRetrieveParams
-import com.unifieddatalibrary.api.models.sensorplan.history.HistoryRetrieveResponse
+import com.unifieddatalibrary.api.models.sensorplan.history.HistoryListPage
+import com.unifieddatalibrary.api.models.sensorplan.history.HistoryListParams
+import com.unifieddatalibrary.api.models.sensorplan.history.HistoryListResponse
 import java.util.function.Consumer
 
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -34,12 +35,9 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService =
         HistoryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-    override fun retrieve(
-        params: HistoryRetrieveParams,
-        requestOptions: RequestOptions,
-    ): List<HistoryRetrieveResponse> =
+    override fun list(params: HistoryListParams, requestOptions: RequestOptions): HistoryListPage =
         // get /udl/sensorplan/history
-        withRawResponse().retrieve(params, requestOptions).parse()
+        withRawResponse().list(params, requestOptions).parse()
 
     override fun aodr(params: HistoryAodrParams, requestOptions: RequestOptions) {
         // get /udl/sensorplan/history/aodr
@@ -63,13 +61,13 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
-        private val retrieveHandler: Handler<List<HistoryRetrieveResponse>> =
-            jsonHandler<List<HistoryRetrieveResponse>>(clientOptions.jsonMapper)
+        private val listHandler: Handler<List<HistoryListResponse>> =
+            jsonHandler<List<HistoryListResponse>>(clientOptions.jsonMapper)
 
-        override fun retrieve(
-            params: HistoryRetrieveParams,
+        override fun list(
+            params: HistoryListParams,
             requestOptions: RequestOptions,
-        ): HttpResponseFor<List<HistoryRetrieveResponse>> {
+        ): HttpResponseFor<HistoryListPage> {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -81,11 +79,18 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response
-                    .use { retrieveHandler.handle(it) }
+                    .use { listHandler.handle(it) }
                     .also {
                         if (requestOptions.responseValidation!!) {
                             it.forEach { it.validate() }
                         }
+                    }
+                    .let {
+                        HistoryListPage.builder()
+                            .service(HistoryServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
                     }
             }
         }

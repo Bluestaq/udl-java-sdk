@@ -9,8 +9,8 @@ import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.sensorplan.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.sensorplan.history.HistoryCountParams
-import com.unifieddatalibrary.api.models.sensorplan.history.HistoryRetrieveParams
-import com.unifieddatalibrary.api.models.sensorplan.history.HistoryRetrieveResponse
+import com.unifieddatalibrary.api.models.sensorplan.history.HistoryListPage
+import com.unifieddatalibrary.api.models.sensorplan.history.HistoryListParams
 import java.util.function.Consumer
 
 interface HistoryService {
@@ -33,14 +33,13 @@ interface HistoryService {
      * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
      * information.
      */
-    fun retrieve(params: HistoryRetrieveParams): List<HistoryRetrieveResponse> =
-        retrieve(params, RequestOptions.none())
+    fun list(params: HistoryListParams): HistoryListPage = list(params, RequestOptions.none())
 
-    /** @see retrieve */
-    fun retrieve(
-        params: HistoryRetrieveParams,
+    /** @see list */
+    fun list(
+        params: HistoryListParams,
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): List<HistoryRetrieveResponse>
+    ): HistoryListPage
 
     /**
      * Service operation to dynamically query historical data by a variety of query parameters not
@@ -80,19 +79,18 @@ interface HistoryService {
 
         /**
          * Returns a raw HTTP response for `get /udl/sensorplan/history`, but is otherwise the same
-         * as [HistoryService.retrieve].
+         * as [HistoryService.list].
          */
         @MustBeClosed
-        fun retrieve(
-            params: HistoryRetrieveParams
-        ): HttpResponseFor<List<HistoryRetrieveResponse>> = retrieve(params, RequestOptions.none())
+        fun list(params: HistoryListParams): HttpResponseFor<HistoryListPage> =
+            list(params, RequestOptions.none())
 
-        /** @see retrieve */
+        /** @see list */
         @MustBeClosed
-        fun retrieve(
-            params: HistoryRetrieveParams,
+        fun list(
+            params: HistoryListParams,
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<List<HistoryRetrieveResponse>>
+        ): HttpResponseFor<HistoryListPage>
 
         /**
          * Returns a raw HTTP response for `get /udl/sensorplan/history/aodr`, but is otherwise the

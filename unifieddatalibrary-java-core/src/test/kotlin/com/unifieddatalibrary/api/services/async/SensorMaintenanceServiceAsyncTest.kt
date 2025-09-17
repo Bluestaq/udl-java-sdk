@@ -7,7 +7,6 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAs
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCountParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCreateBulkParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCreateParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCurrentParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceGetParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceTupleParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceUpdateParams
@@ -230,25 +229,6 @@ internal class SensorMaintenanceServiceAsyncTest {
     }
 
     @Test
-    fun current() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val sensorMaintenanceServiceAsync = client.sensorMaintenance()
-
-        val responseFuture =
-            sensorMaintenanceServiceAsync.current(
-                SensorMaintenanceCurrentParams.builder().firstResult(0L).maxResults(0L).build()
-            )
-
-        val response = responseFuture.get()
-        response.forEach { it.validate() }
-    }
-
-    @Test
     fun get() {
         val client =
             UnifieddatalibraryOkHttpClientAsync.builder()
@@ -265,6 +245,22 @@ internal class SensorMaintenanceServiceAsyncTest {
 
         val sensorMaintenance = sensorMaintenanceFuture.get()
         sensorMaintenance.validate()
+    }
+
+    @Test
+    fun listCurrent() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val sensorMaintenanceServiceAsync = client.sensorMaintenance()
+
+        val pageFuture = sensorMaintenanceServiceAsync.listCurrent()
+
+        val page = pageFuture.get()
+        page.items().forEach { it.validate() }
     }
 
     @Test

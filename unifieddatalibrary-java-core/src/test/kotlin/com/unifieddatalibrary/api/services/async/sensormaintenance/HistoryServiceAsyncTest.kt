@@ -6,7 +6,6 @@ import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
 import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryCountParams
-import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryRetrieveParams
 import java.time.OffsetDateTime
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -15,7 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 internal class HistoryServiceAsyncTest {
 
     @Test
-    fun retrieve() {
+    fun list() {
         val client =
             UnifieddatalibraryOkHttpClientAsync.builder()
                 .baseUrl(TestServerExtension.BASE_URL)
@@ -24,19 +23,10 @@ internal class HistoryServiceAsyncTest {
                 .build()
         val historyServiceAsync = client.sensorMaintenance().history()
 
-        val historiesFuture =
-            historyServiceAsync.retrieve(
-                HistoryRetrieveParams.builder()
-                    .columns("columns")
-                    .endTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .startTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .build()
-            )
+        val pageFuture = historyServiceAsync.list()
 
-        val histories = historiesFuture.get()
-        histories.forEach { it.validate() }
+        val page = pageFuture.get()
+        page.items().forEach { it.validate() }
     }
 
     @Test
