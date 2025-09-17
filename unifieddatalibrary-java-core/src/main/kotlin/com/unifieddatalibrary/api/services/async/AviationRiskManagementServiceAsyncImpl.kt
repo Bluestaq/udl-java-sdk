@@ -22,10 +22,11 @@ import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskMana
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementCreateBulkParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementCreateParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementDeleteParams
+import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementListPageAsync
+import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementListParams
+import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementListResponse
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementQueryHelpParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementQueryHelpResponse
-import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementQueryParams
-import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementQueryResponse
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementRetrieveParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementRetrieveResponse
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementTupleParams
@@ -75,6 +76,13 @@ internal constructor(private val clientOptions: ClientOptions) :
         // put /udl/aviationriskmanagement/{id}
         withRawResponse().update(params, requestOptions).thenAccept {}
 
+    override fun list(
+        params: AviationRiskManagementListParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<AviationRiskManagementListPageAsync> =
+        // get /udl/aviationriskmanagement
+        withRawResponse().list(params, requestOptions).thenApply { it.parse() }
+
     override fun delete(
         params: AviationRiskManagementDeleteParams,
         requestOptions: RequestOptions,
@@ -95,13 +103,6 @@ internal constructor(private val clientOptions: ClientOptions) :
     ): CompletableFuture<Void?> =
         // post /udl/aviationriskmanagement/createBulk
         withRawResponse().createBulk(params, requestOptions).thenAccept {}
-
-    override fun query(
-        params: AviationRiskManagementQueryParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<List<AviationRiskManagementQueryResponse>> =
-        // get /udl/aviationriskmanagement
-        withRawResponse().query(params, requestOptions).thenApply { it.parse() }
 
     override fun queryHelp(
         params: AviationRiskManagementQueryHelpParams,
@@ -221,6 +222,44 @@ internal constructor(private val clientOptions: ClientOptions) :
                 }
         }
 
+        private val listHandler: Handler<List<AviationRiskManagementListResponse>> =
+            jsonHandler<List<AviationRiskManagementListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: AviationRiskManagementListParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<AviationRiskManagementListPageAsync>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "aviationriskmanagement")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response
+                            .use { listHandler.handle(it) }
+                            .also {
+                                if (requestOptions.responseValidation!!) {
+                                    it.forEach { it.validate() }
+                                }
+                            }
+                            .let {
+                                AviationRiskManagementListPageAsync.builder()
+                                    .service(AviationRiskManagementServiceAsyncImpl(clientOptions))
+                                    .streamHandlerExecutor(clientOptions.streamHandlerExecutor)
+                                    .params(params)
+                                    .items(it)
+                                    .build()
+                            }
+                    }
+                }
+        }
+
         private val deleteHandler: Handler<Void?> = emptyHandler()
 
         override fun delete(
@@ -291,36 +330,6 @@ internal constructor(private val clientOptions: ClientOptions) :
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response.use { createBulkHandler.handle(it) }
-                    }
-                }
-        }
-
-        private val queryHandler: Handler<List<AviationRiskManagementQueryResponse>> =
-            jsonHandler<List<AviationRiskManagementQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: AviationRiskManagementQueryParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<List<AviationRiskManagementQueryResponse>>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "aviationriskmanagement")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response
-                            .use { queryHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.forEach { it.validate() }
-                                }
-                            }
                     }
                 }
         }

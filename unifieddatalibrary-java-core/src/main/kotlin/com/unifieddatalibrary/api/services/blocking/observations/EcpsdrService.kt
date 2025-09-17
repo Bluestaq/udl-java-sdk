@@ -17,6 +17,7 @@ import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrQueryHelpPara
 import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrQueryHelpResponse
 import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrRetrieveParams
 import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrTupleParams
+import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrUnvalidatedPublishParams
 import java.util.function.Consumer
 
 interface EcpsdrService {
@@ -149,6 +150,20 @@ interface EcpsdrService {
         params: EcpsdrTupleParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<Ecpsdr>
+
+    /**
+     * Service operation to take multiple ECPSDR as a POST body and ingest into the database. This
+     * operation is intended to be used for automated feeds into UDL. A specific role is required to
+     * perform this service operation. Please contact the UDL team for assistance.
+     */
+    fun unvalidatedPublish(params: EcpsdrUnvalidatedPublishParams) =
+        unvalidatedPublish(params, RequestOptions.none())
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        params: EcpsdrUnvalidatedPublishParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    )
 
     /** A view of [EcpsdrService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -299,5 +314,20 @@ interface EcpsdrService {
             params: EcpsdrTupleParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<Ecpsdr>>
+
+        /**
+         * Returns a raw HTTP response for `post /filedrop/udl-ecpsdr`, but is otherwise the same as
+         * [EcpsdrService.unvalidatedPublish].
+         */
+        @MustBeClosed
+        fun unvalidatedPublish(params: EcpsdrUnvalidatedPublishParams): HttpResponse =
+            unvalidatedPublish(params, RequestOptions.none())
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            params: EcpsdrUnvalidatedPublishParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse
     }
 }

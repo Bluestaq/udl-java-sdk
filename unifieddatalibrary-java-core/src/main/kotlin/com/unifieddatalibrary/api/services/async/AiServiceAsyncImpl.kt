@@ -20,7 +20,6 @@ import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.AisFull
 import com.unifieddatalibrary.api.models.ais.AiCountParams
 import com.unifieddatalibrary.api.models.ais.AiCreateBulkParams
-import com.unifieddatalibrary.api.models.ais.AiHistoryCountParams
 import com.unifieddatalibrary.api.models.ais.AiListPageAsync
 import com.unifieddatalibrary.api.models.ais.AiListParams
 import com.unifieddatalibrary.api.models.ais.AiQueryhelpParams
@@ -68,13 +67,6 @@ class AiServiceAsyncImpl internal constructor(private val clientOptions: ClientO
     ): CompletableFuture<Void?> =
         // post /udl/ais/createBulk
         withRawResponse().createBulk(params, requestOptions).thenAccept {}
-
-    override fun historyCount(
-        params: AiHistoryCountParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<String> =
-        // get /udl/ais/history/count
-        withRawResponse().historyCount(params, requestOptions).thenApply { it.parse() }
 
     override fun queryhelp(
         params: AiQueryhelpParams,
@@ -190,29 +182,6 @@ class AiServiceAsyncImpl internal constructor(private val clientOptions: ClientO
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response.use { createBulkHandler.handle(it) }
-                    }
-                }
-        }
-
-        private val historyCountHandler: Handler<String> = stringHandler()
-
-        override fun historyCount(
-            params: AiHistoryCountParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<String>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "ais", "history", "count")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response.use { historyCountHandler.handle(it) }
                     }
                 }
         }

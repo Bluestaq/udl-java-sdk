@@ -8,10 +8,10 @@ import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelCountParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelGetFileParams
+import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelListPageAsync
+import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelListParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelQueryHelpParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelQueryHelpResponse
-import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelQueryParams
-import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelQueryResponse
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelRetrieveParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelRetrieveResponse
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelTupleParams
@@ -79,6 +79,21 @@ interface GlobalAtmosphericModelServiceAsync {
         retrieve(id, GlobalAtmosphericModelRetrieveParams.none(), requestOptions)
 
     /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
+    fun list(
+        params: GlobalAtmosphericModelListParams
+    ): CompletableFuture<GlobalAtmosphericModelListPageAsync> = list(params, RequestOptions.none())
+
+    /** @see list */
+    fun list(
+        params: GlobalAtmosphericModelListParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<GlobalAtmosphericModelListPageAsync>
+
+    /**
      * Service operation to return the count of records satisfying the specified query parameters.
      * This operation is useful to determine how many records pass a particular query criteria
      * without retrieving large amounts of data. See the queryhelp operation
@@ -128,22 +143,6 @@ interface GlobalAtmosphericModelServiceAsync {
     /** @see getFile */
     fun getFile(id: String, requestOptions: RequestOptions): CompletableFuture<HttpResponse> =
         getFile(id, GlobalAtmosphericModelGetFileParams.none(), requestOptions)
-
-    /**
-     * Service operation to dynamically query data by a variety of query parameters not specified in
-     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
-     * more details on valid/required query parameter information.
-     */
-    fun query(
-        params: GlobalAtmosphericModelQueryParams
-    ): CompletableFuture<List<GlobalAtmosphericModelQueryResponse>> =
-        query(params, RequestOptions.none())
-
-    /** @see query */
-    fun query(
-        params: GlobalAtmosphericModelQueryParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<GlobalAtmosphericModelQueryResponse>>
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -282,6 +281,21 @@ interface GlobalAtmosphericModelServiceAsync {
             retrieve(id, GlobalAtmosphericModelRetrieveParams.none(), requestOptions)
 
         /**
+         * Returns a raw HTTP response for `get /udl/globalatmosphericmodel`, but is otherwise the
+         * same as [GlobalAtmosphericModelServiceAsync.list].
+         */
+        fun list(
+            params: GlobalAtmosphericModelListParams
+        ): CompletableFuture<HttpResponseFor<GlobalAtmosphericModelListPageAsync>> =
+            list(params, RequestOptions.none())
+
+        /** @see list */
+        fun list(
+            params: GlobalAtmosphericModelListParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<GlobalAtmosphericModelListPageAsync>>
+
+        /**
          * Returns a raw HTTP response for `get /udl/globalatmosphericmodel/count`, but is otherwise
          * the same as [GlobalAtmosphericModelServiceAsync.count].
          */
@@ -330,21 +344,6 @@ interface GlobalAtmosphericModelServiceAsync {
         /** @see getFile */
         fun getFile(id: String, requestOptions: RequestOptions): CompletableFuture<HttpResponse> =
             getFile(id, GlobalAtmosphericModelGetFileParams.none(), requestOptions)
-
-        /**
-         * Returns a raw HTTP response for `get /udl/globalatmosphericmodel`, but is otherwise the
-         * same as [GlobalAtmosphericModelServiceAsync.query].
-         */
-        fun query(
-            params: GlobalAtmosphericModelQueryParams
-        ): CompletableFuture<HttpResponseFor<List<GlobalAtmosphericModelQueryResponse>>> =
-            query(params, RequestOptions.none())
-
-        /** @see query */
-        fun query(
-            params: GlobalAtmosphericModelQueryParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<GlobalAtmosphericModelQueryResponse>>>
 
         /**
          * Returns a raw HTTP response for `get /udl/globalatmosphericmodel/queryhelp`, but is

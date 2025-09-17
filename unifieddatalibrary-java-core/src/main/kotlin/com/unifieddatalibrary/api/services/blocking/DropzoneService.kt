@@ -11,10 +11,10 @@ import com.unifieddatalibrary.api.models.dropzone.DropzoneCountParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneCreateBulkParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneCreateParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneDeleteParams
+import com.unifieddatalibrary.api.models.dropzone.DropzoneListPage
+import com.unifieddatalibrary.api.models.dropzone.DropzoneListParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneQueryHelpParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneQueryHelpResponse
-import com.unifieddatalibrary.api.models.dropzone.DropzoneQueryParams
-import com.unifieddatalibrary.api.models.dropzone.DropzoneQueryResponse
 import com.unifieddatalibrary.api.models.dropzone.DropzoneRetrieveParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneRetrieveResponse
 import com.unifieddatalibrary.api.models.dropzone.DropzoneTupleParams
@@ -101,6 +101,27 @@ interface DropzoneService {
     fun update(params: DropzoneUpdateParams, requestOptions: RequestOptions = RequestOptions.none())
 
     /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
+    fun list(): DropzoneListPage = list(DropzoneListParams.none())
+
+    /** @see list */
+    fun list(
+        params: DropzoneListParams = DropzoneListParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): DropzoneListPage
+
+    /** @see list */
+    fun list(params: DropzoneListParams = DropzoneListParams.none()): DropzoneListPage =
+        list(params, RequestOptions.none())
+
+    /** @see list */
+    fun list(requestOptions: RequestOptions): DropzoneListPage =
+        list(DropzoneListParams.none(), requestOptions)
+
+    /**
      * Service operation to delete a dropzone record specified by the passed ID path parameter. A
      * specific role is required to perform this service operation. Please contact the UDL team for
      * assistance.
@@ -165,28 +186,6 @@ interface DropzoneService {
         params: DropzoneCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
-
-    /**
-     * Service operation to dynamically query data by a variety of query parameters not specified in
-     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
-     * more details on valid/required query parameter information.
-     */
-    fun query(): List<DropzoneQueryResponse> = query(DropzoneQueryParams.none())
-
-    /** @see query */
-    fun query(
-        params: DropzoneQueryParams = DropzoneQueryParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): List<DropzoneQueryResponse>
-
-    /** @see query */
-    fun query(
-        params: DropzoneQueryParams = DropzoneQueryParams.none()
-    ): List<DropzoneQueryResponse> = query(params, RequestOptions.none())
-
-    /** @see query */
-    fun query(requestOptions: RequestOptions): List<DropzoneQueryResponse> =
-        query(DropzoneQueryParams.none(), requestOptions)
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -339,6 +338,31 @@ interface DropzoneService {
         ): HttpResponse
 
         /**
+         * Returns a raw HTTP response for `get /udl/dropzone`, but is otherwise the same as
+         * [DropzoneService.list].
+         */
+        @MustBeClosed
+        fun list(): HttpResponseFor<DropzoneListPage> = list(DropzoneListParams.none())
+
+        /** @see list */
+        @MustBeClosed
+        fun list(
+            params: DropzoneListParams = DropzoneListParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<DropzoneListPage>
+
+        /** @see list */
+        @MustBeClosed
+        fun list(
+            params: DropzoneListParams = DropzoneListParams.none()
+        ): HttpResponseFor<DropzoneListPage> = list(params, RequestOptions.none())
+
+        /** @see list */
+        @MustBeClosed
+        fun list(requestOptions: RequestOptions): HttpResponseFor<DropzoneListPage> =
+            list(DropzoneListParams.none(), requestOptions)
+
+        /**
          * Returns a raw HTTP response for `delete /udl/dropzone/{id}`, but is otherwise the same as
          * [DropzoneService.delete].
          */
@@ -414,32 +438,6 @@ interface DropzoneService {
             params: DropzoneCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
-
-        /**
-         * Returns a raw HTTP response for `get /udl/dropzone`, but is otherwise the same as
-         * [DropzoneService.query].
-         */
-        @MustBeClosed
-        fun query(): HttpResponseFor<List<DropzoneQueryResponse>> =
-            query(DropzoneQueryParams.none())
-
-        /** @see query */
-        @MustBeClosed
-        fun query(
-            params: DropzoneQueryParams = DropzoneQueryParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<List<DropzoneQueryResponse>>
-
-        /** @see query */
-        @MustBeClosed
-        fun query(
-            params: DropzoneQueryParams = DropzoneQueryParams.none()
-        ): HttpResponseFor<List<DropzoneQueryResponse>> = query(params, RequestOptions.none())
-
-        /** @see query */
-        @MustBeClosed
-        fun query(requestOptions: RequestOptions): HttpResponseFor<List<DropzoneQueryResponse>> =
-            query(DropzoneQueryParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /udl/dropzone/queryhelp`, but is otherwise the same

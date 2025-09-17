@@ -21,10 +21,11 @@ import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCountParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCreateBulkParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCreateParams
+import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationListPage
+import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationListParams
+import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationListResponse
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryHelpParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryHelpResponse
-import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryParams
-import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryResponse
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationRetrieveParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationRetrieveResponse
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationTupleParams
@@ -63,6 +64,13 @@ class CalibrationServiceImpl internal constructor(private val clientOptions: Cli
         // get /udl/sensorcalibration/{id}
         withRawResponse().retrieve(params, requestOptions).parse()
 
+    override fun list(
+        params: CalibrationListParams,
+        requestOptions: RequestOptions,
+    ): CalibrationListPage =
+        // get /udl/sensorcalibration
+        withRawResponse().list(params, requestOptions).parse()
+
     override fun count(params: CalibrationCountParams, requestOptions: RequestOptions): String =
         // get /udl/sensorcalibration/count
         withRawResponse().count(params, requestOptions).parse()
@@ -71,13 +79,6 @@ class CalibrationServiceImpl internal constructor(private val clientOptions: Cli
         // post /udl/sensorcalibration/createBulk
         withRawResponse().createBulk(params, requestOptions)
     }
-
-    override fun query(
-        params: CalibrationQueryParams,
-        requestOptions: RequestOptions,
-    ): List<CalibrationQueryResponse> =
-        // get /udl/sensorcalibration
-        withRawResponse().query(params, requestOptions).parse()
 
     override fun queryHelp(
         params: CalibrationQueryHelpParams,
@@ -171,6 +172,40 @@ class CalibrationServiceImpl internal constructor(private val clientOptions: Cli
             }
         }
 
+        private val listHandler: Handler<List<CalibrationListResponse>> =
+            jsonHandler<List<CalibrationListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: CalibrationListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<CalibrationListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "sensorcalibration")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        CalibrationListPage.builder()
+                            .service(CalibrationServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
+        }
+
         private val countHandler: Handler<String> = stringHandler()
 
         override fun count(
@@ -209,33 +244,6 @@ class CalibrationServiceImpl internal constructor(private val clientOptions: Cli
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response.use { createBulkHandler.handle(it) }
-            }
-        }
-
-        private val queryHandler: Handler<List<CalibrationQueryResponse>> =
-            jsonHandler<List<CalibrationQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: CalibrationQueryParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<CalibrationQueryResponse>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "sensorcalibration")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { queryHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
             }
         }
 

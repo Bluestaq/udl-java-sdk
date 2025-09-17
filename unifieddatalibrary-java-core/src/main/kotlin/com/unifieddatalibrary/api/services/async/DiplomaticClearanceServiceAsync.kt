@@ -37,9 +37,9 @@ interface DiplomaticClearanceServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): DiplomaticClearanceServiceAsync
 
-    fun history(): HistoryServiceAsync
-
     fun country(): CountryServiceAsync
+
+    fun history(): HistoryServiceAsync
 
     /**
      * Service operation to take a single diplomatic clearance record as a POST body and ingest into
@@ -259,9 +259,9 @@ interface DiplomaticClearanceServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): DiplomaticClearanceServiceAsync.WithRawResponse
 
-        fun history(): HistoryServiceAsync.WithRawResponse
-
         fun country(): CountryServiceAsync.WithRawResponse
+
+        fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /udl/diplomaticclearance`, but is otherwise the

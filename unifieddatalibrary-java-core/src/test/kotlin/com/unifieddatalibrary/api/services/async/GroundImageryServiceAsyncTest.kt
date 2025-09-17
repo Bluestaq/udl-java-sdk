@@ -10,11 +10,11 @@ import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo
 import com.github.tomakehurst.wiremock.junit5.WireMockTest
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
+import com.unifieddatalibrary.api.models.groundimagery.GroundImageryAodrParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryCountParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryCreateParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryGetFileParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryGetParams
-import com.unifieddatalibrary.api.models.groundimagery.GroundImageryHistoryAodrParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryListParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryTupleParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryUploadZipParams
@@ -106,6 +106,32 @@ internal class GroundImageryServiceAsyncTest {
     }
 
     @Test
+    fun aodr() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val groundImageryServiceAsync = client.groundImagery()
+
+        val future =
+            groundImageryServiceAsync.aodr(
+                GroundImageryAodrParams.builder()
+                    .imageTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .columns("columns")
+                    .firstResult(0L)
+                    .maxResults(0L)
+                    .notification("notification")
+                    .outputDelimiter("outputDelimiter")
+                    .outputFormat("outputFormat")
+                    .build()
+            )
+
+        val response = future.get()
+    }
+
+    @Test
     fun count() {
         val client =
             UnifieddatalibraryOkHttpClientAsync.builder()
@@ -164,32 +190,6 @@ internal class GroundImageryServiceAsyncTest {
 
         val response = responseFuture.get()
         assertThat(response.body()).hasContent("abc")
-    }
-
-    @Test
-    fun historyAodr() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val groundImageryServiceAsync = client.groundImagery()
-
-        val future =
-            groundImageryServiceAsync.historyAodr(
-                GroundImageryHistoryAodrParams.builder()
-                    .imageTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .columns("columns")
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .notification("notification")
-                    .outputDelimiter("outputDelimiter")
-                    .outputFormat("outputFormat")
-                    .build()
-            )
-
-        val response = future.get()
     }
 
     @Test

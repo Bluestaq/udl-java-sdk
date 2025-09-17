@@ -7,7 +7,7 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAs
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementCountParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementCreateBulkParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementCreateParams
-import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementQueryParams
+import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementListParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementRetrieveParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementTupleParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementUnvalidatedPublishParams
@@ -211,6 +211,25 @@ internal class AviationRiskManagementServiceAsyncTest {
     }
 
     @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val aviationRiskManagementServiceAsync = client.aviationRiskManagement()
+
+        val pageFuture =
+            aviationRiskManagementServiceAsync.list(
+                AviationRiskManagementListParams.builder().idMission("idMission").build()
+            )
+
+        val page = pageFuture.get()
+        page.items().forEach { it.validate() }
+    }
+
+    @Test
     fun delete() {
         val client =
             UnifieddatalibraryOkHttpClientAsync.builder()
@@ -339,29 +358,6 @@ internal class AviationRiskManagementServiceAsyncTest {
             )
 
         val response = future.get()
-    }
-
-    @Test
-    fun query() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val aviationRiskManagementServiceAsync = client.aviationRiskManagement()
-
-        val responseFuture =
-            aviationRiskManagementServiceAsync.query(
-                AviationRiskManagementQueryParams.builder()
-                    .idMission("idMission")
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .build()
-            )
-
-        val response = responseFuture.get()
-        response.forEach { it.validate() }
     }
 
     @Test

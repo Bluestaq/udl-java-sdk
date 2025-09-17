@@ -7,6 +7,7 @@ import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
+import com.unifieddatalibrary.api.models.scs.v2.ScsEntity
 import com.unifieddatalibrary.api.models.scs.v2.V2CopyParams
 import com.unifieddatalibrary.api.models.scs.v2.V2DeleteParams
 import com.unifieddatalibrary.api.models.scs.v2.V2FileUploadParams
@@ -14,6 +15,7 @@ import com.unifieddatalibrary.api.models.scs.v2.V2FolderCreateParams
 import com.unifieddatalibrary.api.models.scs.v2.V2ListPage
 import com.unifieddatalibrary.api.models.scs.v2.V2ListParams
 import com.unifieddatalibrary.api.models.scs.v2.V2MoveParams
+import com.unifieddatalibrary.api.models.scs.v2.V2SearchParams
 import com.unifieddatalibrary.api.models.scs.v2.V2UpdateParams
 import java.util.function.Consumer
 
@@ -116,6 +118,23 @@ interface V2Service {
 
     /** @see move */
     fun move(params: V2MoveParams, requestOptions: RequestOptions = RequestOptions.none())
+
+    /** Operation to search for files in the Secure Content Store. */
+    fun search(): List<ScsEntity> = search(V2SearchParams.none())
+
+    /** @see search */
+    fun search(
+        params: V2SearchParams = V2SearchParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): List<ScsEntity>
+
+    /** @see search */
+    fun search(params: V2SearchParams = V2SearchParams.none()): List<ScsEntity> =
+        search(params, RequestOptions.none())
+
+    /** @see search */
+    fun search(requestOptions: RequestOptions): List<ScsEntity> =
+        search(V2SearchParams.none(), requestOptions)
 
     /** A view of [V2Service] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -241,5 +260,29 @@ interface V2Service {
             params: V2MoveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /**
+         * Returns a raw HTTP response for `post /scs/v2/search`, but is otherwise the same as
+         * [V2Service.search].
+         */
+        @MustBeClosed fun search(): HttpResponseFor<List<ScsEntity>> = search(V2SearchParams.none())
+
+        /** @see search */
+        @MustBeClosed
+        fun search(
+            params: V2SearchParams = V2SearchParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<List<ScsEntity>>
+
+        /** @see search */
+        @MustBeClosed
+        fun search(
+            params: V2SearchParams = V2SearchParams.none()
+        ): HttpResponseFor<List<ScsEntity>> = search(params, RequestOptions.none())
+
+        /** @see search */
+        @MustBeClosed
+        fun search(requestOptions: RequestOptions): HttpResponseFor<List<ScsEntity>> =
+            search(V2SearchParams.none(), requestOptions)
     }
 }

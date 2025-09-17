@@ -33,10 +33,14 @@ import com.unifieddatalibrary.api.services.blocking.scs.FileService
 import com.unifieddatalibrary.api.services.blocking.scs.FileServiceImpl
 import com.unifieddatalibrary.api.services.blocking.scs.FolderService
 import com.unifieddatalibrary.api.services.blocking.scs.FolderServiceImpl
+import com.unifieddatalibrary.api.services.blocking.scs.NotificationService
+import com.unifieddatalibrary.api.services.blocking.scs.NotificationServiceImpl
 import com.unifieddatalibrary.api.services.blocking.scs.PathService
 import com.unifieddatalibrary.api.services.blocking.scs.PathServiceImpl
 import com.unifieddatalibrary.api.services.blocking.scs.V2Service
 import com.unifieddatalibrary.api.services.blocking.scs.V2ServiceImpl
+import com.unifieddatalibrary.api.services.blocking.scs.ViewService
+import com.unifieddatalibrary.api.services.blocking.scs.ViewServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
@@ -46,26 +50,36 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
         WithRawResponseImpl(clientOptions)
     }
 
+    private val notifications: NotificationService by lazy {
+        NotificationServiceImpl(clientOptions)
+    }
+
+    private val file: FileService by lazy { FileServiceImpl(clientOptions) }
+
     private val folders: FolderService by lazy { FolderServiceImpl(clientOptions) }
 
     private val paths: PathService by lazy { PathServiceImpl(clientOptions) }
 
-    private val v2: V2Service by lazy { V2ServiceImpl(clientOptions) }
+    private val view: ViewService by lazy { ViewServiceImpl(clientOptions) }
 
-    private val file: FileService by lazy { FileServiceImpl(clientOptions) }
+    private val v2: V2Service by lazy { V2ServiceImpl(clientOptions) }
 
     override fun withRawResponse(): ScService.WithRawResponse = withRawResponse
 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScService =
         ScServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    override fun notifications(): NotificationService = notifications
+
+    override fun file(): FileService = file
+
     override fun folders(): FolderService = folders
 
     override fun paths(): PathService = paths
 
-    override fun v2(): V2Service = v2
+    override fun view(): ViewService = view
 
-    override fun file(): FileService = file
+    override fun v2(): V2Service = v2
 
     @Deprecated("deprecated")
     override fun delete(params: ScDeleteParams, requestOptions: RequestOptions) {
@@ -130,6 +144,14 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
+        private val notifications: NotificationService.WithRawResponse by lazy {
+            NotificationServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val file: FileService.WithRawResponse by lazy {
+            FileServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
         private val folders: FolderService.WithRawResponse by lazy {
             FolderServiceImpl.WithRawResponseImpl(clientOptions)
         }
@@ -138,12 +160,12 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
             PathServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val v2: V2Service.WithRawResponse by lazy {
-            V2ServiceImpl.WithRawResponseImpl(clientOptions)
+        private val view: ViewService.WithRawResponse by lazy {
+            ViewServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val file: FileService.WithRawResponse by lazy {
-            FileServiceImpl.WithRawResponseImpl(clientOptions)
+        private val v2: V2Service.WithRawResponse by lazy {
+            V2ServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
         override fun withOptions(
@@ -153,13 +175,17 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        override fun notifications(): NotificationService.WithRawResponse = notifications
+
+        override fun file(): FileService.WithRawResponse = file
+
         override fun folders(): FolderService.WithRawResponse = folders
 
         override fun paths(): PathService.WithRawResponse = paths
 
-        override fun v2(): V2Service.WithRawResponse = v2
+        override fun view(): ViewService.WithRawResponse = view
 
-        override fun file(): FileService.WithRawResponse = file
+        override fun v2(): V2Service.WithRawResponse = v2
 
         private val deleteHandler: Handler<Void?> = emptyHandler()
 

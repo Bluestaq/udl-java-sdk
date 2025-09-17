@@ -12,7 +12,7 @@ import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelCountParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelGetFileParams
-import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelQueryParams
+import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelListParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelRetrieveParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelTupleParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelUnvalidatedPublishParams
@@ -48,6 +48,27 @@ internal class GlobalAtmosphericModelServiceAsyncTest {
 
         val globalAtmosphericModel = globalAtmosphericModelFuture.get()
         globalAtmosphericModel.validate()
+    }
+
+    @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val globalAtmosphericModelServiceAsync = client.globalAtmosphericModel()
+
+        val pageFuture =
+            globalAtmosphericModelServiceAsync.list(
+                GlobalAtmosphericModelListParams.builder()
+                    .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .build()
+            )
+
+        val page = pageFuture.get()
+        page.items().forEach { it.validate() }
     }
 
     @Test
@@ -94,29 +115,6 @@ internal class GlobalAtmosphericModelServiceAsyncTest {
 
         val response = responseFuture.get()
         assertThat(response.body()).hasContent("abc")
-    }
-
-    @Test
-    fun query() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val globalAtmosphericModelServiceAsync = client.globalAtmosphericModel()
-
-        val responseFuture =
-            globalAtmosphericModelServiceAsync.query(
-                GlobalAtmosphericModelQueryParams.builder()
-                    .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .build()
-            )
-
-        val response = responseFuture.get()
-        response.forEach { it.validate() }
     }
 
     @Test

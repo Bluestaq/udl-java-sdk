@@ -36,14 +36,16 @@ import com.unifieddatalibrary.api.services.blocking.ConjunctionService
 import com.unifieddatalibrary.api.services.blocking.CotService
 import com.unifieddatalibrary.api.services.blocking.CountryService
 import com.unifieddatalibrary.api.services.blocking.CrewService
+import com.unifieddatalibrary.api.services.blocking.DeconflictsetService
 import com.unifieddatalibrary.api.services.blocking.DiffOfArrivalService
 import com.unifieddatalibrary.api.services.blocking.DiplomaticClearanceService
 import com.unifieddatalibrary.api.services.blocking.DriftHistoryService
 import com.unifieddatalibrary.api.services.blocking.DropzoneService
-import com.unifieddatalibrary.api.services.blocking.EcpSdrService
+import com.unifieddatalibrary.api.services.blocking.EcpedrService
 import com.unifieddatalibrary.api.services.blocking.EffectRequestService
 import com.unifieddatalibrary.api.services.blocking.EffectResponseService
 import com.unifieddatalibrary.api.services.blocking.ElsetService
+import com.unifieddatalibrary.api.services.blocking.EmireportService
 import com.unifieddatalibrary.api.services.blocking.EmitterGeolocationService
 import com.unifieddatalibrary.api.services.blocking.EngineDetailService
 import com.unifieddatalibrary.api.services.blocking.EngineService
@@ -71,6 +73,8 @@ import com.unifieddatalibrary.api.services.blocking.IrService
 import com.unifieddatalibrary.api.services.blocking.IsrCollectionService
 import com.unifieddatalibrary.api.services.blocking.ItemService
 import com.unifieddatalibrary.api.services.blocking.ItemTrackingService
+import com.unifieddatalibrary.api.services.blocking.LaserdeconflictrequestService
+import com.unifieddatalibrary.api.services.blocking.LaseremitterService
 import com.unifieddatalibrary.api.services.blocking.LaunchDetectionService
 import com.unifieddatalibrary.api.services.blocking.LaunchEventService
 import com.unifieddatalibrary.api.services.blocking.LaunchSiteDetailService
@@ -78,6 +82,7 @@ import com.unifieddatalibrary.api.services.blocking.LaunchSiteService
 import com.unifieddatalibrary.api.services.blocking.LaunchVehicleDetailService
 import com.unifieddatalibrary.api.services.blocking.LaunchVehicleService
 import com.unifieddatalibrary.api.services.blocking.LinkStatusService
+import com.unifieddatalibrary.api.services.blocking.LinkstatusService
 import com.unifieddatalibrary.api.services.blocking.LocationService
 import com.unifieddatalibrary.api.services.blocking.LogisticsSupportService
 import com.unifieddatalibrary.api.services.blocking.ManeuverService
@@ -119,7 +124,6 @@ import com.unifieddatalibrary.api.services.blocking.RouteStatService
 import com.unifieddatalibrary.api.services.blocking.SarObservationService
 import com.unifieddatalibrary.api.services.blocking.ScService
 import com.unifieddatalibrary.api.services.blocking.ScientificService
-import com.unifieddatalibrary.api.services.blocking.ScsViewService
 import com.unifieddatalibrary.api.services.blocking.SecureMessagingService
 import com.unifieddatalibrary.api.services.blocking.SensorMaintenanceService
 import com.unifieddatalibrary.api.services.blocking.SensorObservationTypeService
@@ -215,13 +219,13 @@ interface UnifieddatalibraryClient {
 
     fun aircraftStatuses(): AircraftStatusService
 
+    fun airfieldSlotConsumptions(): AirfieldSlotConsumptionService
+
     fun airfieldSlots(): AirfieldSlotService
 
     fun airfieldStatus(): AirfieldStatusService
 
     fun airfields(): AirfieldService
-
-    fun airfieldSlotConsumptions(): AirfieldSlotConsumptionService
 
     fun airloadPlans(): AirloadPlanService
 
@@ -238,6 +242,8 @@ interface UnifieddatalibraryClient {
     fun attitudeData(): AttitudeDataService
 
     fun attitudeSets(): AttitudeSetService
+
+    fun aviationRiskManagement(): AviationRiskManagementService
 
     fun batteries(): BatteryService
 
@@ -261,21 +267,11 @@ interface UnifieddatalibraryClient {
 
     fun cots(): CotService
 
-    fun aviationRiskManagement(): AviationRiskManagementService
-
-    fun dropzone(): DropzoneService
-
-    fun emitterGeolocation(): EmitterGeolocationService
-
-    fun featureAssessment(): FeatureAssessmentService
-
-    fun globalAtmosphericModel(): GlobalAtmosphericModelService
-
-    fun routeStats(): RouteStatService
-
     fun countries(): CountryService
 
     fun crew(): CrewService
+
+    fun deconflictset(): DeconflictsetService
 
     fun diffOfArrival(): DiffOfArrivalService
 
@@ -283,13 +279,19 @@ interface UnifieddatalibraryClient {
 
     fun driftHistory(): DriftHistoryService
 
-    fun ecpSdr(): EcpSdrService
+    fun dropzone(): DropzoneService
+
+    fun ecpedr(): EcpedrService
 
     fun effectRequests(): EffectRequestService
 
     fun effectResponses(): EffectResponseService
 
     fun elsets(): ElsetService
+
+    fun emireport(): EmireportService
+
+    fun emitterGeolocation(): EmitterGeolocationService
 
     fun engineDetails(): EngineDetailService
 
@@ -311,11 +313,19 @@ interface UnifieddatalibraryClient {
 
     fun eventEvolution(): EventEvolutionService
 
+    fun featureAssessment(): FeatureAssessmentService
+
     fun flightplan(): FlightplanService
 
     fun geoStatus(): GeoStatusService
 
+    fun globalAtmosphericModel(): GlobalAtmosphericModelService
+
+    fun gnssObservations(): GnssObservationService
+
     fun gnssObservationset(): GnssObservationsetService
+
+    fun gnssRawIf(): GnssRawIfService
 
     fun groundImagery(): GroundImageryService
 
@@ -325,6 +335,8 @@ interface UnifieddatalibraryClient {
 
     fun hazard(): HazardService
 
+    fun ionoObservations(): IonoObservationService
+
     fun ir(): IrService
 
     fun isrCollections(): IsrCollectionService
@@ -332,6 +344,10 @@ interface UnifieddatalibraryClient {
     fun item(): ItemService
 
     fun itemTrackings(): ItemTrackingService
+
+    fun laserdeconflictrequest(): LaserdeconflictrequestService
+
+    fun laseremitter(): LaseremitterService
 
     fun launchDetection(): LaunchDetectionService
 
@@ -346,6 +362,8 @@ interface UnifieddatalibraryClient {
     fun launchVehicleDetails(): LaunchVehicleDetailService
 
     fun linkStatus(): LinkStatusService
+
+    fun linkstatus(): LinkstatusService
 
     fun location(): LocationService
 
@@ -411,6 +429,8 @@ interface UnifieddatalibraryClient {
 
     fun port(): PortService
 
+    fun reportAndActivities(): ReportAndActivityService
+
     fun rfBand(): RfBandService
 
     fun rfBandType(): RfBandTypeService
@@ -419,9 +439,15 @@ interface UnifieddatalibraryClient {
 
     fun rfEmitterDetails(): RfEmitterDetailService
 
+    fun routeStats(): RouteStatService
+
     fun sarObservation(): SarObservationService
 
     fun scientific(): ScientificService
+
+    fun scs(): ScService
+
+    fun secureMessaging(): SecureMessagingService
 
     fun sensor(): SensorService
 
@@ -507,20 +533,6 @@ interface UnifieddatalibraryClient {
 
     fun weatherReport(): WeatherReportService
 
-    fun gnssObservations(): GnssObservationService
-
-    fun gnssRawIf(): GnssRawIfService
-
-    fun ionoObservations(): IonoObservationService
-
-    fun reportAndActivities(): ReportAndActivityService
-
-    fun secureMessaging(): SecureMessagingService
-
-    fun scs(): ScService
-
-    fun scsViews(): ScsViewService
-
     /**
      * Closes this client, relinquishing any underlying resources.
      *
@@ -563,13 +575,13 @@ interface UnifieddatalibraryClient {
 
         fun aircraftStatuses(): AircraftStatusService.WithRawResponse
 
+        fun airfieldSlotConsumptions(): AirfieldSlotConsumptionService.WithRawResponse
+
         fun airfieldSlots(): AirfieldSlotService.WithRawResponse
 
         fun airfieldStatus(): AirfieldStatusService.WithRawResponse
 
         fun airfields(): AirfieldService.WithRawResponse
-
-        fun airfieldSlotConsumptions(): AirfieldSlotConsumptionService.WithRawResponse
 
         fun airloadPlans(): AirloadPlanService.WithRawResponse
 
@@ -586,6 +598,8 @@ interface UnifieddatalibraryClient {
         fun attitudeData(): AttitudeDataService.WithRawResponse
 
         fun attitudeSets(): AttitudeSetService.WithRawResponse
+
+        fun aviationRiskManagement(): AviationRiskManagementService.WithRawResponse
 
         fun batteries(): BatteryService.WithRawResponse
 
@@ -609,21 +623,11 @@ interface UnifieddatalibraryClient {
 
         fun cots(): CotService.WithRawResponse
 
-        fun aviationRiskManagement(): AviationRiskManagementService.WithRawResponse
-
-        fun dropzone(): DropzoneService.WithRawResponse
-
-        fun emitterGeolocation(): EmitterGeolocationService.WithRawResponse
-
-        fun featureAssessment(): FeatureAssessmentService.WithRawResponse
-
-        fun globalAtmosphericModel(): GlobalAtmosphericModelService.WithRawResponse
-
-        fun routeStats(): RouteStatService.WithRawResponse
-
         fun countries(): CountryService.WithRawResponse
 
         fun crew(): CrewService.WithRawResponse
+
+        fun deconflictset(): DeconflictsetService.WithRawResponse
 
         fun diffOfArrival(): DiffOfArrivalService.WithRawResponse
 
@@ -631,13 +635,19 @@ interface UnifieddatalibraryClient {
 
         fun driftHistory(): DriftHistoryService.WithRawResponse
 
-        fun ecpSdr(): EcpSdrService.WithRawResponse
+        fun dropzone(): DropzoneService.WithRawResponse
+
+        fun ecpedr(): EcpedrService.WithRawResponse
 
         fun effectRequests(): EffectRequestService.WithRawResponse
 
         fun effectResponses(): EffectResponseService.WithRawResponse
 
         fun elsets(): ElsetService.WithRawResponse
+
+        fun emireport(): EmireportService.WithRawResponse
+
+        fun emitterGeolocation(): EmitterGeolocationService.WithRawResponse
 
         fun engineDetails(): EngineDetailService.WithRawResponse
 
@@ -659,11 +669,19 @@ interface UnifieddatalibraryClient {
 
         fun eventEvolution(): EventEvolutionService.WithRawResponse
 
+        fun featureAssessment(): FeatureAssessmentService.WithRawResponse
+
         fun flightplan(): FlightplanService.WithRawResponse
 
         fun geoStatus(): GeoStatusService.WithRawResponse
 
+        fun globalAtmosphericModel(): GlobalAtmosphericModelService.WithRawResponse
+
+        fun gnssObservations(): GnssObservationService.WithRawResponse
+
         fun gnssObservationset(): GnssObservationsetService.WithRawResponse
+
+        fun gnssRawIf(): GnssRawIfService.WithRawResponse
 
         fun groundImagery(): GroundImageryService.WithRawResponse
 
@@ -673,6 +691,8 @@ interface UnifieddatalibraryClient {
 
         fun hazard(): HazardService.WithRawResponse
 
+        fun ionoObservations(): IonoObservationService.WithRawResponse
+
         fun ir(): IrService.WithRawResponse
 
         fun isrCollections(): IsrCollectionService.WithRawResponse
@@ -680,6 +700,10 @@ interface UnifieddatalibraryClient {
         fun item(): ItemService.WithRawResponse
 
         fun itemTrackings(): ItemTrackingService.WithRawResponse
+
+        fun laserdeconflictrequest(): LaserdeconflictrequestService.WithRawResponse
+
+        fun laseremitter(): LaseremitterService.WithRawResponse
 
         fun launchDetection(): LaunchDetectionService.WithRawResponse
 
@@ -694,6 +718,8 @@ interface UnifieddatalibraryClient {
         fun launchVehicleDetails(): LaunchVehicleDetailService.WithRawResponse
 
         fun linkStatus(): LinkStatusService.WithRawResponse
+
+        fun linkstatus(): LinkstatusService.WithRawResponse
 
         fun location(): LocationService.WithRawResponse
 
@@ -759,6 +785,8 @@ interface UnifieddatalibraryClient {
 
         fun port(): PortService.WithRawResponse
 
+        fun reportAndActivities(): ReportAndActivityService.WithRawResponse
+
         fun rfBand(): RfBandService.WithRawResponse
 
         fun rfBandType(): RfBandTypeService.WithRawResponse
@@ -767,9 +795,15 @@ interface UnifieddatalibraryClient {
 
         fun rfEmitterDetails(): RfEmitterDetailService.WithRawResponse
 
+        fun routeStats(): RouteStatService.WithRawResponse
+
         fun sarObservation(): SarObservationService.WithRawResponse
 
         fun scientific(): ScientificService.WithRawResponse
+
+        fun scs(): ScService.WithRawResponse
+
+        fun secureMessaging(): SecureMessagingService.WithRawResponse
 
         fun sensor(): SensorService.WithRawResponse
 
@@ -854,19 +888,5 @@ interface UnifieddatalibraryClient {
         fun weatherData(): WeatherDataService.WithRawResponse
 
         fun weatherReport(): WeatherReportService.WithRawResponse
-
-        fun gnssObservations(): GnssObservationService.WithRawResponse
-
-        fun gnssRawIf(): GnssRawIfService.WithRawResponse
-
-        fun ionoObservations(): IonoObservationService.WithRawResponse
-
-        fun reportAndActivities(): ReportAndActivityService.WithRawResponse
-
-        fun secureMessaging(): SecureMessagingService.WithRawResponse
-
-        fun scs(): ScService.WithRawResponse
-
-        fun scsViews(): ScsViewService.WithRawResponse
     }
 }

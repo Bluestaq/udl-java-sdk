@@ -9,10 +9,10 @@ import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCountParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCreateBulkParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCreateParams
+import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationListPageAsync
+import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationListParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryHelpParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryHelpResponse
-import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryParams
-import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryResponse
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationRetrieveParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationRetrieveResponse
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationTupleParams
@@ -93,6 +93,20 @@ interface CalibrationServiceAsync {
         retrieve(id, CalibrationRetrieveParams.none(), requestOptions)
 
     /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
+    fun list(params: CalibrationListParams): CompletableFuture<CalibrationListPageAsync> =
+        list(params, RequestOptions.none())
+
+    /** @see list */
+    fun list(
+        params: CalibrationListParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<CalibrationListPageAsync>
+
+    /**
      * Service operation to return the count of records satisfying the specified query parameters.
      * This operation is useful to determine how many records pass a particular query criteria
      * without retrieving large amounts of data. See the queryhelp operation
@@ -123,20 +137,6 @@ interface CalibrationServiceAsync {
         params: CalibrationCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
-
-    /**
-     * Service operation to dynamically query data by a variety of query parameters not specified in
-     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
-     * more details on valid/required query parameter information.
-     */
-    fun query(params: CalibrationQueryParams): CompletableFuture<List<CalibrationQueryResponse>> =
-        query(params, RequestOptions.none())
-
-    /** @see query */
-    fun query(
-        params: CalibrationQueryParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<CalibrationQueryResponse>>
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -265,6 +265,21 @@ interface CalibrationServiceAsync {
             retrieve(id, CalibrationRetrieveParams.none(), requestOptions)
 
         /**
+         * Returns a raw HTTP response for `get /udl/sensorcalibration`, but is otherwise the same
+         * as [CalibrationServiceAsync.list].
+         */
+        fun list(
+            params: CalibrationListParams
+        ): CompletableFuture<HttpResponseFor<CalibrationListPageAsync>> =
+            list(params, RequestOptions.none())
+
+        /** @see list */
+        fun list(
+            params: CalibrationListParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<CalibrationListPageAsync>>
+
+        /**
          * Returns a raw HTTP response for `get /udl/sensorcalibration/count`, but is otherwise the
          * same as [CalibrationServiceAsync.count].
          */
@@ -289,21 +304,6 @@ interface CalibrationServiceAsync {
             params: CalibrationCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
-
-        /**
-         * Returns a raw HTTP response for `get /udl/sensorcalibration`, but is otherwise the same
-         * as [CalibrationServiceAsync.query].
-         */
-        fun query(
-            params: CalibrationQueryParams
-        ): CompletableFuture<HttpResponseFor<List<CalibrationQueryResponse>>> =
-            query(params, RequestOptions.none())
-
-        /** @see query */
-        fun query(
-            params: CalibrationQueryParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<CalibrationQueryResponse>>>
 
         /**
          * Returns a raw HTTP response for `get /udl/sensorcalibration/queryhelp`, but is otherwise

@@ -7,9 +7,6 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAs
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyCountParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyCreateBulkParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyCreateParams
-import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyHistoryAodrParams
-import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyHistoryCountParams
-import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyHistoryQueryParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyListParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyUnvalidatedPublishParams
 import java.time.LocalDate
@@ -263,78 +260,6 @@ internal class AircraftSortyServiceAsyncTest {
             )
 
         val response = future.get()
-    }
-
-    @Test
-    fun historyAodr() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val aircraftSortyServiceAsync = client.airOperations().aircraftSorties()
-
-        val future =
-            aircraftSortyServiceAsync.historyAodr(
-                AircraftSortyHistoryAodrParams.builder()
-                    .plannedDepTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .columns("columns")
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .notification("notification")
-                    .outputDelimiter("outputDelimiter")
-                    .outputFormat("outputFormat")
-                    .build()
-            )
-
-        val response = future.get()
-    }
-
-    @Test
-    fun historyCount() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val aircraftSortyServiceAsync = client.airOperations().aircraftSorties()
-
-        val responseFuture =
-            aircraftSortyServiceAsync.historyCount(
-                AircraftSortyHistoryCountParams.builder()
-                    .plannedDepTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .build()
-            )
-
-        val response = responseFuture.get()
-    }
-
-    @Test
-    fun historyQuery() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val aircraftSortyServiceAsync = client.airOperations().aircraftSorties()
-
-        val aircraftsortieFullsFuture =
-            aircraftSortyServiceAsync.historyQuery(
-                AircraftSortyHistoryQueryParams.builder()
-                    .plannedDepTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .columns("columns")
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .build()
-            )
-
-        val aircraftsortieFulls = aircraftsortieFullsFuture.get()
-        aircraftsortieFulls.forEach { it.validate() }
     }
 
     @Test

@@ -14,7 +14,7 @@ import com.unifieddatalibrary.api.models.aircraft.AircraftListParams
 import com.unifieddatalibrary.api.models.aircraft.AircraftQueryhelpParams
 import com.unifieddatalibrary.api.models.aircraft.AircraftQueryhelpResponse
 import com.unifieddatalibrary.api.models.aircraft.AircraftRetrieveParams
-import com.unifieddatalibrary.api.models.aircraft.AircraftTupleQueryParams
+import com.unifieddatalibrary.api.models.aircraft.AircraftTupleParams
 import com.unifieddatalibrary.api.models.aircraft.AircraftUpdateParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
@@ -181,12 +181,12 @@ interface AircraftServiceAsync {
      * /udl/elset/tuple?columns=satNo,period&epoch=>now-5 hours would return the satNo and period of
      * elsets with an epoch greater than 5 hours ago.
      */
-    fun tupleQuery(params: AircraftTupleQueryParams): CompletableFuture<List<AircraftFull>> =
-        tupleQuery(params, RequestOptions.none())
+    fun tuple(params: AircraftTupleParams): CompletableFuture<List<AircraftFull>> =
+        tuple(params, RequestOptions.none())
 
-    /** @see tupleQuery */
-    fun tupleQuery(
-        params: AircraftTupleQueryParams,
+    /** @see tuple */
+    fun tuple(
+        params: AircraftTupleParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<List<AircraftFull>>
 
@@ -356,16 +356,16 @@ interface AircraftServiceAsync {
 
         /**
          * Returns a raw HTTP response for `get /udl/aircraft/tuple`, but is otherwise the same as
-         * [AircraftServiceAsync.tupleQuery].
+         * [AircraftServiceAsync.tuple].
          */
-        fun tupleQuery(
-            params: AircraftTupleQueryParams
+        fun tuple(
+            params: AircraftTupleParams
         ): CompletableFuture<HttpResponseFor<List<AircraftFull>>> =
-            tupleQuery(params, RequestOptions.none())
+            tuple(params, RequestOptions.none())
 
-        /** @see tupleQuery */
-        fun tupleQuery(
-            params: AircraftTupleQueryParams,
+        /** @see tuple */
+        fun tuple(
+            params: AircraftTupleParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<List<AircraftFull>>>
     }

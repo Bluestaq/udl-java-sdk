@@ -45,9 +45,9 @@ internal constructor(private val clientOptions: ClientOptions) : DiplomaticClear
         WithRawResponseImpl(clientOptions)
     }
 
-    private val history: HistoryService by lazy { HistoryServiceImpl(clientOptions) }
-
     private val country: CountryService by lazy { CountryServiceImpl(clientOptions) }
+
+    private val history: HistoryService by lazy { HistoryServiceImpl(clientOptions) }
 
     override fun withRawResponse(): DiplomaticClearanceService.WithRawResponse = withRawResponse
 
@@ -56,9 +56,9 @@ internal constructor(private val clientOptions: ClientOptions) : DiplomaticClear
     ): DiplomaticClearanceService =
         DiplomaticClearanceServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-    override fun history(): HistoryService = history
-
     override fun country(): CountryService = country
+
+    override fun history(): HistoryService = history
 
     override fun create(params: DiplomaticClearanceCreateParams, requestOptions: RequestOptions) {
         // post /udl/diplomaticclearance
@@ -124,12 +124,12 @@ internal constructor(private val clientOptions: ClientOptions) : DiplomaticClear
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val history: HistoryService.WithRawResponse by lazy {
-            HistoryServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
         private val country: CountryService.WithRawResponse by lazy {
             CountryServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val history: HistoryService.WithRawResponse by lazy {
+            HistoryServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
         override fun withOptions(
@@ -139,9 +139,9 @@ internal constructor(private val clientOptions: ClientOptions) : DiplomaticClear
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
-        override fun history(): HistoryService.WithRawResponse = history
-
         override fun country(): CountryService.WithRawResponse = country
+
+        override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
 

@@ -28,17 +28,17 @@ interface ObservationService {
 
     fun ecpsdr(): EcpsdrService
 
+    fun eoObservations(): EoObservationService
+
     fun monoradar(): MonoradarService
 
-    fun swir(): SwirService
+    fun passiveRadarObservation(): PassiveRadarObservationService
 
     fun radarobservation(): RadarobservationService
 
     fun rfObservation(): RfObservationService
 
-    fun passiveRadarObservation(): PassiveRadarObservationService
-
-    fun eoObservations(): EoObservationService
+    fun swir(): SwirService
 
     /**
      * A view of [ObservationService] that provides access to raw HTTP responses for each method.
@@ -56,16 +56,16 @@ interface ObservationService {
 
         fun ecpsdr(): EcpsdrService.WithRawResponse
 
+        fun eoObservations(): EoObservationService.WithRawResponse
+
         fun monoradar(): MonoradarService.WithRawResponse
 
-        fun swir(): SwirService.WithRawResponse
+        fun passiveRadarObservation(): PassiveRadarObservationService.WithRawResponse
 
         fun radarobservation(): RadarobservationService.WithRawResponse
 
         fun rfObservation(): RfObservationService.WithRawResponse
 
-        fun passiveRadarObservation(): PassiveRadarObservationService.WithRawResponse
-
-        fun eoObservations(): EoObservationService.WithRawResponse
+        fun swir(): SwirService.WithRawResponse
     }
 }

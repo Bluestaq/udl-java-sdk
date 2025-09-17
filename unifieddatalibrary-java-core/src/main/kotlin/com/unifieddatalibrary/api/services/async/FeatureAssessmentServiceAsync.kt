@@ -9,10 +9,10 @@ import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCountParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCreateBulkParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCreateParams
+import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentListPageAsync
+import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentListParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryHelpParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryHelpResponse
-import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryParams
-import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryResponse
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentRetrieveParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentRetrieveResponse
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentTupleParams
@@ -94,6 +94,21 @@ interface FeatureAssessmentServiceAsync {
         retrieve(id, FeatureAssessmentRetrieveParams.none(), requestOptions)
 
     /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
+    fun list(
+        params: FeatureAssessmentListParams
+    ): CompletableFuture<FeatureAssessmentListPageAsync> = list(params, RequestOptions.none())
+
+    /** @see list */
+    fun list(
+        params: FeatureAssessmentListParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<FeatureAssessmentListPageAsync>
+
+    /**
      * Service operation to return the count of records satisfying the specified query parameters.
      * This operation is useful to determine how many records pass a particular query criteria
      * without retrieving large amounts of data. See the queryhelp operation
@@ -124,22 +139,6 @@ interface FeatureAssessmentServiceAsync {
         params: FeatureAssessmentCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
-
-    /**
-     * Service operation to dynamically query data by a variety of query parameters not specified in
-     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
-     * more details on valid/required query parameter information.
-     */
-    fun query(
-        params: FeatureAssessmentQueryParams
-    ): CompletableFuture<List<FeatureAssessmentQueryResponse>> =
-        query(params, RequestOptions.none())
-
-    /** @see query */
-    fun query(
-        params: FeatureAssessmentQueryParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<FeatureAssessmentQueryResponse>>
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -276,6 +275,21 @@ interface FeatureAssessmentServiceAsync {
             retrieve(id, FeatureAssessmentRetrieveParams.none(), requestOptions)
 
         /**
+         * Returns a raw HTTP response for `get /udl/featureassessment`, but is otherwise the same
+         * as [FeatureAssessmentServiceAsync.list].
+         */
+        fun list(
+            params: FeatureAssessmentListParams
+        ): CompletableFuture<HttpResponseFor<FeatureAssessmentListPageAsync>> =
+            list(params, RequestOptions.none())
+
+        /** @see list */
+        fun list(
+            params: FeatureAssessmentListParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<FeatureAssessmentListPageAsync>>
+
+        /**
          * Returns a raw HTTP response for `get /udl/featureassessment/count`, but is otherwise the
          * same as [FeatureAssessmentServiceAsync.count].
          */
@@ -301,21 +315,6 @@ interface FeatureAssessmentServiceAsync {
             params: FeatureAssessmentCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
-
-        /**
-         * Returns a raw HTTP response for `get /udl/featureassessment`, but is otherwise the same
-         * as [FeatureAssessmentServiceAsync.query].
-         */
-        fun query(
-            params: FeatureAssessmentQueryParams
-        ): CompletableFuture<HttpResponseFor<List<FeatureAssessmentQueryResponse>>> =
-            query(params, RequestOptions.none())
-
-        /** @see query */
-        fun query(
-            params: FeatureAssessmentQueryParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<FeatureAssessmentQueryResponse>>>
 
         /**
          * Returns a raw HTTP response for `get /udl/featureassessment/queryhelp`, but is otherwise

@@ -20,8 +20,10 @@ import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
 import com.unifieddatalibrary.api.services.blocking.scs.FileService
 import com.unifieddatalibrary.api.services.blocking.scs.FolderService
+import com.unifieddatalibrary.api.services.blocking.scs.NotificationService
 import com.unifieddatalibrary.api.services.blocking.scs.PathService
 import com.unifieddatalibrary.api.services.blocking.scs.V2Service
+import com.unifieddatalibrary.api.services.blocking.scs.ViewService
 import java.util.function.Consumer
 
 interface ScService {
@@ -38,13 +40,17 @@ interface ScService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScService
 
+    fun notifications(): NotificationService
+
+    fun file(): FileService
+
     fun folders(): FolderService
 
     fun paths(): PathService
 
-    fun v2(): V2Service
+    fun view(): ViewService
 
-    fun file(): FileService
+    fun v2(): V2Service
 
     /**
      * Deletes the requested file or folder in the passed path directory that is visible to the
@@ -199,13 +205,17 @@ interface ScService {
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScService.WithRawResponse
 
+        fun notifications(): NotificationService.WithRawResponse
+
+        fun file(): FileService.WithRawResponse
+
         fun folders(): FolderService.WithRawResponse
 
         fun paths(): PathService.WithRawResponse
 
-        fun v2(): V2Service.WithRawResponse
+        fun view(): ViewService.WithRawResponse
 
-        fun file(): FileService.WithRawResponse
+        fun v2(): V2Service.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `delete /scs/delete`, but is otherwise the same as

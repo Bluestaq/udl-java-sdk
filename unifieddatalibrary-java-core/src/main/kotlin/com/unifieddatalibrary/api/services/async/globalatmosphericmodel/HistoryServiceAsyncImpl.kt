@@ -16,10 +16,11 @@ import com.unifieddatalibrary.api.core.http.HttpResponse.Handler
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepareAsync
+import com.unifieddatalibrary.api.models.globalatmosphericmodel.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.history.HistoryCountParams
-import com.unifieddatalibrary.api.models.globalatmosphericmodel.history.HistoryQueryParams
-import com.unifieddatalibrary.api.models.globalatmosphericmodel.history.HistoryQueryResponse
-import com.unifieddatalibrary.api.models.globalatmosphericmodel.history.HistoryWriteAodrParams
+import com.unifieddatalibrary.api.models.globalatmosphericmodel.history.HistoryListPageAsync
+import com.unifieddatalibrary.api.models.globalatmosphericmodel.history.HistoryListParams
+import com.unifieddatalibrary.api.models.globalatmosphericmodel.history.HistoryListResponse
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -35,26 +36,26 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryServiceAsync =
         HistoryServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    override fun list(
+        params: HistoryListParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<HistoryListPageAsync> =
+        // get /udl/globalatmosphericmodel/history
+        withRawResponse().list(params, requestOptions).thenApply { it.parse() }
+
+    override fun aodr(
+        params: HistoryAodrParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<Void?> =
+        // get /udl/globalatmosphericmodel/history/aodr
+        withRawResponse().aodr(params, requestOptions).thenAccept {}
+
     override fun count(
         params: HistoryCountParams,
         requestOptions: RequestOptions,
     ): CompletableFuture<String> =
         // get /udl/globalatmosphericmodel/history/count
         withRawResponse().count(params, requestOptions).thenApply { it.parse() }
-
-    override fun query(
-        params: HistoryQueryParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<List<HistoryQueryResponse>> =
-        // get /udl/globalatmosphericmodel/history
-        withRawResponse().query(params, requestOptions).thenApply { it.parse() }
-
-    override fun writeAodr(
-        params: HistoryWriteAodrParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<Void?> =
-        // get /udl/globalatmosphericmodel/history/aodr
-        withRawResponse().writeAodr(params, requestOptions).thenAccept {}
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         HistoryServiceAsync.WithRawResponse {
@@ -68,6 +69,67 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
             HistoryServiceAsyncImpl.WithRawResponseImpl(
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
+
+        private val listHandler: Handler<List<HistoryListResponse>> =
+            jsonHandler<List<HistoryListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: HistoryListParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "globalatmosphericmodel", "history")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response
+                            .use { listHandler.handle(it) }
+                            .also {
+                                if (requestOptions.responseValidation!!) {
+                                    it.forEach { it.validate() }
+                                }
+                            }
+                            .let {
+                                HistoryListPageAsync.builder()
+                                    .service(HistoryServiceAsyncImpl(clientOptions))
+                                    .streamHandlerExecutor(clientOptions.streamHandlerExecutor)
+                                    .params(params)
+                                    .items(it)
+                                    .build()
+                            }
+                    }
+                }
+        }
+
+        private val aodrHandler: Handler<Void?> = emptyHandler()
+
+        override fun aodr(
+            params: HistoryAodrParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponse> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "globalatmosphericmodel", "history", "aodr")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response.use { aodrHandler.handle(it) }
+                    }
+                }
+        }
 
         private val countHandler: Handler<String> = stringHandler()
 
@@ -88,59 +150,6 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response.use { countHandler.handle(it) }
-                    }
-                }
-        }
-
-        private val queryHandler: Handler<List<HistoryQueryResponse>> =
-            jsonHandler<List<HistoryQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: HistoryQueryParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<List<HistoryQueryResponse>>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "globalatmosphericmodel", "history")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response
-                            .use { queryHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.forEach { it.validate() }
-                                }
-                            }
-                    }
-                }
-        }
-
-        private val writeAodrHandler: Handler<Void?> = emptyHandler()
-
-        override fun writeAodr(
-            params: HistoryWriteAodrParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "globalatmosphericmodel", "history", "aodr")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response.use { writeAodrHandler.handle(it) }
                     }
                 }
         }

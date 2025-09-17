@@ -30,8 +30,8 @@ import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceList
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListPageAsync
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListResponse
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryhelpParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryhelpResponse
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryHelpParams
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryHelpResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceTupleParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceTupleResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceUpdateParams
@@ -115,12 +115,12 @@ internal constructor(private val clientOptions: ClientOptions) : SensorMaintenan
         // get /udl/sensormaintenance/current
         withRawResponse().listCurrent(params, requestOptions).thenApply { it.parse() }
 
-    override fun queryhelp(
-        params: SensorMaintenanceQueryhelpParams,
+    override fun queryHelp(
+        params: SensorMaintenanceQueryHelpParams,
         requestOptions: RequestOptions,
-    ): CompletableFuture<SensorMaintenanceQueryhelpResponse> =
+    ): CompletableFuture<SensorMaintenanceQueryHelpResponse> =
         // get /udl/sensormaintenance/queryhelp
-        withRawResponse().queryhelp(params, requestOptions).thenApply { it.parse() }
+        withRawResponse().queryHelp(params, requestOptions).thenApply { it.parse() }
 
     override fun tuple(
         params: SensorMaintenanceTupleParams,
@@ -382,13 +382,13 @@ internal constructor(private val clientOptions: ClientOptions) : SensorMaintenan
                 }
         }
 
-        private val queryhelpHandler: Handler<SensorMaintenanceQueryhelpResponse> =
-            jsonHandler<SensorMaintenanceQueryhelpResponse>(clientOptions.jsonMapper)
+        private val queryHelpHandler: Handler<SensorMaintenanceQueryHelpResponse> =
+            jsonHandler<SensorMaintenanceQueryHelpResponse>(clientOptions.jsonMapper)
 
-        override fun queryhelp(
-            params: SensorMaintenanceQueryhelpParams,
+        override fun queryHelp(
+            params: SensorMaintenanceQueryHelpParams,
             requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<SensorMaintenanceQueryhelpResponse>> {
+        ): CompletableFuture<HttpResponseFor<SensorMaintenanceQueryHelpResponse>> {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -402,7 +402,7 @@ internal constructor(private val clientOptions: ClientOptions) : SensorMaintenan
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response
-                            .use { queryhelpHandler.handle(it) }
+                            .use { queryHelpHandler.handle(it) }
                             .also {
                                 if (requestOptions.responseValidation!!) {
                                     it.validate()

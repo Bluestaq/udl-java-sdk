@@ -36,9 +36,9 @@ interface StateVectorServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): StateVectorServiceAsync
 
-    fun history(): HistoryServiceAsync
-
     fun current(): CurrentServiceAsync
+
+    fun history(): HistoryServiceAsync
 
     /**
      * Service operation to take a single state vector as a POST body and ingest into the database.
@@ -202,9 +202,9 @@ interface StateVectorServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): StateVectorServiceAsync.WithRawResponse
 
-        fun history(): HistoryServiceAsync.WithRawResponse
-
         fun current(): CurrentServiceAsync.WithRawResponse
+
+        fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /udl/statevector`, but is otherwise the same as

@@ -196,6 +196,12 @@ class UnifieddatalibraryOkHttpClient private constructor() {
          */
         fun maxRetries(maxRetries: Int) = apply { clientOptions.maxRetries(maxRetries) }
 
+        /** Access token for Bearer Authentication */
+        fun accessToken(accessToken: String?) = apply { clientOptions.accessToken(accessToken) }
+
+        /** Alias for calling [Builder.accessToken] with `accessToken.orElse(null)`. */
+        fun accessToken(accessToken: Optional<String>) = accessToken(accessToken.getOrNull())
+
         /** Password for HTTP Basic Authentication */
         fun password(password: String?) = apply { clientOptions.password(password) }
 
@@ -207,12 +213,6 @@ class UnifieddatalibraryOkHttpClient private constructor() {
 
         /** Alias for calling [Builder.username] with `username.orElse(null)`. */
         fun username(username: Optional<String>) = username(username.getOrNull())
-
-        /** Access token for Bearer Authentication */
-        fun accessToken(accessToken: String?) = apply { clientOptions.accessToken(accessToken) }
-
-        /** Alias for calling [Builder.accessToken] with `accessToken.orElse(null)`. */
-        fun accessToken(accessToken: Optional<String>) = accessToken(accessToken.getOrNull())
 
         fun headers(headers: Headers) = apply { clientOptions.headers(headers) }
 

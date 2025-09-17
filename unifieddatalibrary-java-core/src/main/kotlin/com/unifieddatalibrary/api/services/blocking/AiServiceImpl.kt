@@ -20,7 +20,6 @@ import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.AisFull
 import com.unifieddatalibrary.api.models.ais.AiCountParams
 import com.unifieddatalibrary.api.models.ais.AiCreateBulkParams
-import com.unifieddatalibrary.api.models.ais.AiHistoryCountParams
 import com.unifieddatalibrary.api.models.ais.AiListPage
 import com.unifieddatalibrary.api.models.ais.AiListParams
 import com.unifieddatalibrary.api.models.ais.AiQueryhelpParams
@@ -58,13 +57,6 @@ class AiServiceImpl internal constructor(private val clientOptions: ClientOption
         // post /udl/ais/createBulk
         withRawResponse().createBulk(params, requestOptions)
     }
-
-    override fun historyCount(
-        params: AiHistoryCountParams,
-        requestOptions: RequestOptions,
-    ): String =
-        // get /udl/ais/history/count
-        withRawResponse().historyCount(params, requestOptions).parse()
 
     override fun queryhelp(
         params: AiQueryhelpParams,
@@ -168,26 +160,6 @@ class AiServiceImpl internal constructor(private val clientOptions: ClientOption
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response.use { createBulkHandler.handle(it) }
-            }
-        }
-
-        private val historyCountHandler: Handler<String> = stringHandler()
-
-        override fun historyCount(
-            params: AiHistoryCountParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<String> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "ais", "history", "count")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { historyCountHandler.handle(it) }
             }
         }
 

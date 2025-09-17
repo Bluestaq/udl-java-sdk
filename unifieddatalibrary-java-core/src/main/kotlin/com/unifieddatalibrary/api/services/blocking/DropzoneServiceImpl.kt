@@ -22,10 +22,11 @@ import com.unifieddatalibrary.api.models.dropzone.DropzoneCountParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneCreateBulkParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneCreateParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneDeleteParams
+import com.unifieddatalibrary.api.models.dropzone.DropzoneListPage
+import com.unifieddatalibrary.api.models.dropzone.DropzoneListParams
+import com.unifieddatalibrary.api.models.dropzone.DropzoneListResponse
 import com.unifieddatalibrary.api.models.dropzone.DropzoneQueryHelpParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneQueryHelpResponse
-import com.unifieddatalibrary.api.models.dropzone.DropzoneQueryParams
-import com.unifieddatalibrary.api.models.dropzone.DropzoneQueryResponse
 import com.unifieddatalibrary.api.models.dropzone.DropzoneRetrieveParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneRetrieveResponse
 import com.unifieddatalibrary.api.models.dropzone.DropzoneTupleParams
@@ -64,6 +65,13 @@ class DropzoneServiceImpl internal constructor(private val clientOptions: Client
         withRawResponse().update(params, requestOptions)
     }
 
+    override fun list(
+        params: DropzoneListParams,
+        requestOptions: RequestOptions,
+    ): DropzoneListPage =
+        // get /udl/dropzone
+        withRawResponse().list(params, requestOptions).parse()
+
     override fun delete(params: DropzoneDeleteParams, requestOptions: RequestOptions) {
         // delete /udl/dropzone/{id}
         withRawResponse().delete(params, requestOptions)
@@ -77,13 +85,6 @@ class DropzoneServiceImpl internal constructor(private val clientOptions: Client
         // post /udl/dropzone/createBulk
         withRawResponse().createBulk(params, requestOptions)
     }
-
-    override fun query(
-        params: DropzoneQueryParams,
-        requestOptions: RequestOptions,
-    ): List<DropzoneQueryResponse> =
-        // get /udl/dropzone
-        withRawResponse().query(params, requestOptions).parse()
 
     override fun queryHelp(
         params: DropzoneQueryHelpParams,
@@ -195,6 +196,40 @@ class DropzoneServiceImpl internal constructor(private val clientOptions: Client
             }
         }
 
+        private val listHandler: Handler<List<DropzoneListResponse>> =
+            jsonHandler<List<DropzoneListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: DropzoneListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<DropzoneListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "dropzone")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        DropzoneListPage.builder()
+                            .service(DropzoneServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
+        }
+
         private val deleteHandler: Handler<Void?> = emptyHandler()
 
         override fun delete(
@@ -257,33 +292,6 @@ class DropzoneServiceImpl internal constructor(private val clientOptions: Client
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response.use { createBulkHandler.handle(it) }
-            }
-        }
-
-        private val queryHandler: Handler<List<DropzoneQueryResponse>> =
-            jsonHandler<List<DropzoneQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: DropzoneQueryParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<DropzoneQueryResponse>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "dropzone")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { queryHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
             }
         }
 
