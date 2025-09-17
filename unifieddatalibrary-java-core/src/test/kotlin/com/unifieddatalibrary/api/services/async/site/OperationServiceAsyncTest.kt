@@ -93,7 +93,7 @@ internal class OperationServiceAsyncTest {
                             .build()
                     )
                     .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .addPathway(
                         OperationCreateParams.Pathway.builder()
                             .pwDefinition("AGP: 14L, K6, K, G (ANG APRN TO TWY K), GUARD (MAIN)")
@@ -221,7 +221,7 @@ internal class OperationServiceAsyncTest {
                             .build()
                     )
                     .origin("THIRD_PARTY_DATASOURCE")
-                    .origNetwork("ORIG")
+                    .origNetwork("OPS1")
                     .addPathway(
                         OperationUpdateParams.Pathway.builder()
                             .pwDefinition("AGP: 14L, K6, K, G (ANG APRN TO TWY K), GUARD (MAIN)")
@@ -397,7 +397,7 @@ internal class OperationServiceAsyncTest {
                                     .build()
                             )
                             .origin("THIRD_PARTY_DATASOURCE")
-                            .origNetwork("ORIG")
+                            .origNetwork("OPS1")
                             .addPathway(
                                 OperationCreateBulkParams.Body.Pathway.builder()
                                     .pwDefinition(
@@ -572,7 +572,7 @@ internal class OperationServiceAsyncTest {
                                     .build()
                             )
                             .origin("THIRD_PARTY_DATASOURCE")
-                            .origNetwork("ORIG")
+                            .origNetwork("OPS1")
                             .addPathway(
                                 OperationUnvalidatedPublishParams.Body.Pathway.builder()
                                     .pwDefinition(

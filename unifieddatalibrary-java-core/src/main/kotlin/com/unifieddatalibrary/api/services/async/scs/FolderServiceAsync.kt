@@ -31,20 +31,24 @@ interface FolderServiceAsync {
      * Creates a new folder that is passed as part of the path. A specific role is required to
      * perform this service operation. Please contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun create(params: FolderCreateParams): CompletableFuture<String> =
         create(params, RequestOptions.none())
 
     /** @see create */
+    @Deprecated("deprecated")
     fun create(
         params: FolderCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<String>
 
     /** Returns a FileData object representing the folder ID that is visible to the calling user. */
+    @Deprecated("deprecated")
     fun retrieve(params: FolderRetrieveParams): CompletableFuture<FileData> =
         retrieve(params, RequestOptions.none())
 
     /** @see retrieve */
+    @Deprecated("deprecated")
     fun retrieve(
         params: FolderRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -54,10 +58,12 @@ interface FolderServiceAsync {
      * operation to update folders metadata. A specific role is required to perform this service
      * operation. Please contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun update(params: FolderUpdateParams): CompletableFuture<Void?> =
         update(params, RequestOptions.none())
 
     /** @see update */
+    @Deprecated("deprecated")
     fun update(
         params: FolderUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -81,10 +87,12 @@ interface FolderServiceAsync {
          * Returns a raw HTTP response for `post /scs/folder`, but is otherwise the same as
          * [FolderServiceAsync.create].
          */
+        @Deprecated("deprecated")
         fun create(params: FolderCreateParams): CompletableFuture<HttpResponseFor<String>> =
             create(params, RequestOptions.none())
 
         /** @see create */
+        @Deprecated("deprecated")
         fun create(
             params: FolderCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
@@ -94,10 +102,12 @@ interface FolderServiceAsync {
          * Returns a raw HTTP response for `get /scs/folder`, but is otherwise the same as
          * [FolderServiceAsync.retrieve].
          */
+        @Deprecated("deprecated")
         fun retrieve(params: FolderRetrieveParams): CompletableFuture<HttpResponseFor<FileData>> =
             retrieve(params, RequestOptions.none())
 
         /** @see retrieve */
+        @Deprecated("deprecated")
         fun retrieve(
             params: FolderRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
@@ -107,10 +117,12 @@ interface FolderServiceAsync {
          * Returns a raw HTTP response for `patch /scs/folder`, but is otherwise the same as
          * [FolderServiceAsync.update].
          */
+        @Deprecated("deprecated")
         fun update(params: FolderUpdateParams): CompletableFuture<HttpResponse> =
             update(params, RequestOptions.none())
 
         /** @see update */
+        @Deprecated("deprecated")
         fun update(
             params: FolderUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),

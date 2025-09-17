@@ -262,7 +262,6 @@ private constructor(
         @JsonProperty("planOrigNum") @ExcludeMissing private val planOrigNum: JsonField<String>,
         @JsonProperty("qualifier") @ExcludeMissing private val qualifier: JsonField<String>,
         @JsonProperty("qualSN") @ExcludeMissing private val qualSn: JsonField<Int>,
-        @JsonProperty("rawFileURI") @ExcludeMissing private val rawFileUri: JsonField<String>,
         @JsonProperty("serialNum") @ExcludeMissing private val serialNum: JsonField<String>,
         @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
         @JsonProperty("stopQualifier") @ExcludeMissing private val stopQualifier: JsonField<String>,
@@ -523,16 +522,6 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun qualSn(): Optional<Int> = qualSn.getOptional("qualSN")
-
-        /**
-         * Optional URI location in the document repository of the raw file parsed by the system to
-         * produce this record. To download the raw file, prepend
-         * https://udl-hostname/scs/download?id= to this value.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun rawFileUri(): Optional<String> = rawFileUri.getOptional("rawFileURI")
 
         /**
          * The unique message identifier sequentially assigned by the originator.
@@ -811,15 +800,6 @@ private constructor(
         @JsonProperty("qualSN") @ExcludeMissing fun _qualSn(): JsonField<Int> = qualSn
 
         /**
-         * Returns the raw JSON value of [rawFileUri].
-         *
-         * Unlike [rawFileUri], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("rawFileURI")
-        @ExcludeMissing
-        fun _rawFileUri(): JsonField<String> = rawFileUri
-
-        /**
          * Returns the raw JSON value of [serialNum].
          *
          * Unlike [serialNum], this method doesn't throw if the JSON field has an unexpected type.
@@ -915,7 +895,6 @@ private constructor(
             private var planOrigNum: JsonField<String> = JsonMissing.of()
             private var qualifier: JsonField<String> = JsonMissing.of()
             private var qualSn: JsonField<Int> = JsonMissing.of()
-            private var rawFileUri: JsonField<String> = JsonMissing.of()
             private var serialNum: JsonField<String> = JsonMissing.of()
             private var sourceDl: JsonField<String> = JsonMissing.of()
             private var stopQualifier: JsonField<String> = JsonMissing.of()
@@ -953,7 +932,6 @@ private constructor(
                 planOrigNum = body.planOrigNum
                 qualifier = body.qualifier
                 qualSn = body.qualSn
-                rawFileUri = body.rawFileUri
                 serialNum = body.serialNum
                 sourceDl = body.sourceDl
                 stopQualifier = body.stopQualifier
@@ -1454,22 +1432,6 @@ private constructor(
              */
             fun qualSn(qualSn: JsonField<Int>) = apply { this.qualSn = qualSn }
 
-            /**
-             * Optional URI location in the document repository of the raw file parsed by the system
-             * to produce this record. To download the raw file, prepend
-             * https://udl-hostname/scs/download?id= to this value.
-             */
-            fun rawFileUri(rawFileUri: String) = rawFileUri(JsonField.of(rawFileUri))
-
-            /**
-             * Sets [Builder.rawFileUri] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.rawFileUri] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun rawFileUri(rawFileUri: JsonField<String>) = apply { this.rawFileUri = rawFileUri }
-
             /** The unique message identifier sequentially assigned by the originator. */
             fun serialNum(serialNum: String) = serialNum(JsonField.of(serialNum))
 
@@ -1605,7 +1567,6 @@ private constructor(
                     planOrigNum,
                     qualifier,
                     qualSn,
-                    rawFileUri,
                     serialNum,
                     sourceDl,
                     stopQualifier,
@@ -1648,7 +1609,6 @@ private constructor(
             planOrigNum()
             qualifier()
             qualSn()
-            rawFileUri()
             serialNum()
             sourceDl()
             stopQualifier()
@@ -1703,7 +1663,6 @@ private constructor(
                 (if (planOrigNum.asKnown().isPresent) 1 else 0) +
                 (if (qualifier.asKnown().isPresent) 1 else 0) +
                 (if (qualSn.asKnown().isPresent) 1 else 0) +
-                (if (rawFileUri.asKnown().isPresent) 1 else 0) +
                 (if (serialNum.asKnown().isPresent) 1 else 0) +
                 (if (sourceDl.asKnown().isPresent) 1 else 0) +
                 (if (stopQualifier.asKnown().isPresent) 1 else 0) +
@@ -5090,7 +5049,6 @@ private constructor(
                 planOrigNum == other.planOrigNum &&
                 qualifier == other.qualifier &&
                 qualSn == other.qualSn &&
-                rawFileUri == other.rawFileUri &&
                 serialNum == other.serialNum &&
                 sourceDl == other.sourceDl &&
                 stopQualifier == other.stopQualifier &&
@@ -5127,7 +5085,6 @@ private constructor(
                 planOrigNum,
                 qualifier,
                 qualSn,
-                rawFileUri,
                 serialNum,
                 sourceDl,
                 stopQualifier,
@@ -5139,7 +5096,7 @@ private constructor(
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, opExName=$opExName, originator=$originator, source=$source, startTime=$startTime, id=$id, acoComments=$acoComments, acoSerialNum=$acoSerialNum, airspaceControlMeansStatus=$airspaceControlMeansStatus, airspaceControlOrderReferences=$airspaceControlOrderReferences, areaOfValidity=$areaOfValidity, classReasons=$classReasons, classSource=$classSource, createdAt=$createdAt, createdBy=$createdBy, declassExemptionCodes=$declassExemptionCodes, downgradeInsDates=$downgradeInsDates, geoDatum=$geoDatum, month=$month, opExInfo=$opExInfo, opExInfoAlt=$opExInfoAlt, origin=$origin, origNetwork=$origNetwork, planOrigNum=$planOrigNum, qualifier=$qualifier, qualSn=$qualSn, rawFileUri=$rawFileUri, serialNum=$serialNum, sourceDl=$sourceDl, stopQualifier=$stopQualifier, stopTime=$stopTime, undLnkTrks=$undLnkTrks}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, opExName=$opExName, originator=$originator, source=$source, startTime=$startTime, id=$id, acoComments=$acoComments, acoSerialNum=$acoSerialNum, airspaceControlMeansStatus=$airspaceControlMeansStatus, airspaceControlOrderReferences=$airspaceControlOrderReferences, areaOfValidity=$areaOfValidity, classReasons=$classReasons, classSource=$classSource, createdAt=$createdAt, createdBy=$createdBy, declassExemptionCodes=$declassExemptionCodes, downgradeInsDates=$downgradeInsDates, geoDatum=$geoDatum, month=$month, opExInfo=$opExInfo, opExInfoAlt=$opExInfoAlt, origin=$origin, origNetwork=$origNetwork, planOrigNum=$planOrigNum, qualifier=$qualifier, qualSn=$qualSn, serialNum=$serialNum, sourceDl=$sourceDl, stopQualifier=$stopQualifier, stopTime=$stopTime, undLnkTrks=$undLnkTrks}"
     }
 
     override fun equals(other: Any?): Boolean {

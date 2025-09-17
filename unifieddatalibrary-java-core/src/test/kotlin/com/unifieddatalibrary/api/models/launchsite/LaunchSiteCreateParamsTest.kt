@@ -22,7 +22,7 @@ internal class LaunchSiteCreateParamsTest {
             .createdBy("some.user")
             .idSite("a150b3ee-884b-b9ac-60a0-6408b4b16088")
             .origin("THIRD_PARTY_DATASOURCE")
-            .origNetwork("ORIG")
+            .origNetwork("OPS1")
             .shortCode("SNMLP")
             .build()
     }
@@ -42,7 +42,7 @@ internal class LaunchSiteCreateParamsTest {
                 .createdBy("some.user")
                 .idSite("a150b3ee-884b-b9ac-60a0-6408b4b16088")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .shortCode("SNMLP")
                 .build()
 
@@ -59,7 +59,7 @@ internal class LaunchSiteCreateParamsTest {
         assertThat(body.createdBy()).contains("some.user")
         assertThat(body.idSite()).contains("a150b3ee-884b-b9ac-60a0-6408b4b16088")
         assertThat(body.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(body.origNetwork()).contains("ORIG")
+        assertThat(body.origNetwork()).contains("OPS1")
         assertThat(body.shortCode()).contains("SNMLP")
     }
 

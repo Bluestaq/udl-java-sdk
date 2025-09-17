@@ -13,6 +13,7 @@ import java.util.concurrent.Executor
 import kotlin.jvm.optionals.getOrDefault
 
 /** @see FileServiceAsync.list */
+@Deprecated("deprecated")
 class FileListPageAsync
 private constructor(
     private val service: FileServiceAsync,

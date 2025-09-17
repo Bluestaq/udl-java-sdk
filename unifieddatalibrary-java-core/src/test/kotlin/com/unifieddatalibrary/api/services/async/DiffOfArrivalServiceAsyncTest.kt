@@ -113,7 +113,7 @@ internal class DiffOfArrivalServiceAsyncTest {
                             .idSensor1("SENSOR1-ID")
                             .idSensor2("SENSOR2-ID")
                             .origin("THIRD_PARTY_DATASOURCE")
-                            .origNetwork("ORIG")
+                            .origNetwork("OPS1")
                             .origObjectId("ORIGOBJECT-ID")
                             .origSensorId1("ORIGSENSOR1-ID")
                             .origSensorId2("ORIGSENSOR2-ID")

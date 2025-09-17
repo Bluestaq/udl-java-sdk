@@ -12,9 +12,11 @@ import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
 import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
+import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
 import com.unifieddatalibrary.api.core.http.QueryParams
+import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
 import java.util.Collections
@@ -23,8 +25,8 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 /**
- * Service operation to update an RFBand. A specific role is required to perform this service
- * operation. Please contact the UDL team for assistance.
+ * Service operation to update a single RFBand record. A specific role is required to perform this
+ * service operation. Please contact the UDL team for assistance.
  */
 class RfBandUpdateParams
 private constructor(
@@ -105,12 +107,23 @@ private constructor(
     fun band(): Optional<String> = body.band()
 
     /**
-     * RF Band frequency range bandwidth in Mhz.
+     * RF Band frequency range bandwidth in megahertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun bandwidth(): Optional<Double> = body.bandwidth()
+
+    /**
+     * Array of frequency range bandwidth settings, in megahertz for this RFBand. If this array is
+     * specified then it must be the same size as the frequencySettings array. A null value may be
+     * used for one or more of the frequencies in the frequencySettings array if there is no
+     * corresponding value for a given frequency.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun bandwidthSettings(): Optional<List<Double>> = body.bandwidthSettings()
 
     /**
      * Angle between the half-power (-3 dB) points of the main lobe of the antenna, in degrees.
@@ -121,7 +134,18 @@ private constructor(
     fun beamwidth(): Optional<Double> = body.beamwidth()
 
     /**
-     * Center frequency of RF frequency range, if applicable, in Mhz.
+     * Array of beamwidth settings, in degrees for this RFBand. If this array is specified then it
+     * must be the same size as the frequencySettings array. A null value may be used for one or
+     * more of the frequencies in the frequencySettings array if there is no corresponding value for
+     * a given frequency.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun beamwidthSettings(): Optional<List<Double>> = body.beamwidthSettings()
+
+    /**
+     * Center frequency of RF frequency range, if applicable, in megahertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -145,7 +169,18 @@ private constructor(
     fun createdBy(): Optional<String> = body.createdBy()
 
     /**
-     * RF Range edge gain, in dBi.
+     * Array of delay settings, in seconds for this RFBand. If this array is specified then it must
+     * be the same size as the frequencySettings array. A null value may be used for one or more of
+     * the frequencies in the frequencySettings array if there is no corresponding value for a given
+     * frequency.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun delaySettings(): Optional<List<Double>> = body.delaySettings()
+
+    /**
+     * RF Range edge gain, in decibel relative to isotrope.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -159,7 +194,7 @@ private constructor(
      * antenna gain relative to a half-wave dipole. Effective radiated power and effective isotropic
      * radiated power both measure the amount of power a radio transmitter and antenna (or other
      * source of electromagnetic waves) radiates in a specific direction: in the direction of
-     * maximum signal strength (the "main lobe") of its radiation pattern.
+     * maximum signal strength (the main lobe) of its radiation pattern.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -173,7 +208,7 @@ private constructor(
      * (dB)+2.15 dB or EIRP (W) = 1.64\*ERP(W). Effective radiated power and effective isotropic
      * radiated power both measure the amount of power a radio transmitter and antenna (or other
      * source of electromagnetic waves) radiates in a specific direction: in the direction of
-     * maximum signal strength (the "main lobe") of its radiation pattern.
+     * maximum signal strength (the main lobe) of its radiation pattern.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -181,7 +216,7 @@ private constructor(
     fun erp(): Optional<Double> = body.erp()
 
     /**
-     * End/maximum of transmit RF frequency range, if applicable, in Mhz.
+     * End/maximum of transmit RF frequency range, if applicable, in megahertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -189,12 +224,32 @@ private constructor(
     fun freqMax(): Optional<Double> = body.freqMax()
 
     /**
-     * Start/minimum of transmit RF frequency range, if applicable, in Mhz.
+     * Start/minimum of transmit RF frequency range, if applicable, in megahertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun freqMin(): Optional<Double> = body.freqMin()
+
+    /**
+     * Array of frequency settings, in megahertz for this RFBand. This array and the settings arrays
+     * must match in size.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun frequencySettings(): Optional<List<Double>> = body.frequencySettings()
+
+    /**
+     * Array of gain settings, in decibels for this RFBand. If this array is specified then it must
+     * be the same size as the frequencySettings array. A null value may be used for one or more of
+     * the frequencies in the frequencySettings array if there is no corresponding value for a given
+     * frequency.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun gainSettings(): Optional<List<Double>> = body.gainSettings()
 
     /**
      * RF Band mode (e.g. TX, RX).
@@ -203,6 +258,17 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun mode(): Optional<Mode> = body.mode()
+
+    /**
+     * Array of signal noise settings, in decibels for this RFBand. If this array is specified then
+     * it must be the same size as the frequencySettings array. A null value may be used for one or
+     * more of the frequencies in the frequencySettings array if there is no corresponding value for
+     * a given frequency.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun noiseSettings(): Optional<List<Double>> = body.noiseSettings()
 
     /**
      * Originating system or organization which produced the data, if different from the source. The
@@ -224,7 +290,7 @@ private constructor(
     fun origNetwork(): Optional<String> = body.origNetwork()
 
     /**
-     * RF Range maximum gain, in dBi.
+     * RF Range maximum gain, in decibel relative to isotrope.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -244,7 +310,7 @@ private constructor(
 
     /**
      * Purpose or use of the RF Band -- COMM = communications, TTC = Telemetry/Tracking/Control, OPS
-     * = Operations, OTHER = Other).
+     * = Operations, OTHER = Other.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -309,11 +375,27 @@ private constructor(
     fun _bandwidth(): JsonField<Double> = body._bandwidth()
 
     /**
+     * Returns the raw JSON value of [bandwidthSettings].
+     *
+     * Unlike [bandwidthSettings], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    fun _bandwidthSettings(): JsonField<List<Double>> = body._bandwidthSettings()
+
+    /**
      * Returns the raw JSON value of [beamwidth].
      *
      * Unlike [beamwidth], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _beamwidth(): JsonField<Double> = body._beamwidth()
+
+    /**
+     * Returns the raw JSON value of [beamwidthSettings].
+     *
+     * Unlike [beamwidthSettings], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    fun _beamwidthSettings(): JsonField<List<Double>> = body._beamwidthSettings()
 
     /**
      * Returns the raw JSON value of [centerFreq].
@@ -335,6 +417,13 @@ private constructor(
      * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _createdBy(): JsonField<String> = body._createdBy()
+
+    /**
+     * Returns the raw JSON value of [delaySettings].
+     *
+     * Unlike [delaySettings], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _delaySettings(): JsonField<List<Double>> = body._delaySettings()
 
     /**
      * Returns the raw JSON value of [edgeGain].
@@ -372,11 +461,33 @@ private constructor(
     fun _freqMin(): JsonField<Double> = body._freqMin()
 
     /**
+     * Returns the raw JSON value of [frequencySettings].
+     *
+     * Unlike [frequencySettings], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    fun _frequencySettings(): JsonField<List<Double>> = body._frequencySettings()
+
+    /**
+     * Returns the raw JSON value of [gainSettings].
+     *
+     * Unlike [gainSettings], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _gainSettings(): JsonField<List<Double>> = body._gainSettings()
+
+    /**
      * Returns the raw JSON value of [mode].
      *
      * Unlike [mode], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _mode(): JsonField<Mode> = body._mode()
+
+    /**
+     * Returns the raw JSON value of [noiseSettings].
+     *
+     * Unlike [noiseSettings], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _noiseSettings(): JsonField<List<Double>> = body._noiseSettings()
 
     /**
      * Returns the raw JSON value of [origin].
@@ -575,7 +686,7 @@ private constructor(
          */
         fun band(band: JsonField<String>) = apply { body.band(band) }
 
-        /** RF Band frequency range bandwidth in Mhz. */
+        /** RF Band frequency range bandwidth in megahertz. */
         fun bandwidth(bandwidth: Double) = apply { body.bandwidth(bandwidth) }
 
         /**
@@ -586,6 +697,36 @@ private constructor(
          * value.
          */
         fun bandwidth(bandwidth: JsonField<Double>) = apply { body.bandwidth(bandwidth) }
+
+        /**
+         * Array of frequency range bandwidth settings, in megahertz for this RFBand. If this array
+         * is specified then it must be the same size as the frequencySettings array. A null value
+         * may be used for one or more of the frequencies in the frequencySettings array if there is
+         * no corresponding value for a given frequency.
+         */
+        fun bandwidthSettings(bandwidthSettings: List<Double>) = apply {
+            body.bandwidthSettings(bandwidthSettings)
+        }
+
+        /**
+         * Sets [Builder.bandwidthSettings] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.bandwidthSettings] with a well-typed `List<Double>`
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
+         */
+        fun bandwidthSettings(bandwidthSettings: JsonField<List<Double>>) = apply {
+            body.bandwidthSettings(bandwidthSettings)
+        }
+
+        /**
+         * Adds a single [Double] to [bandwidthSettings].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addBandwidthSetting(bandwidthSetting: Double) = apply {
+            body.addBandwidthSetting(bandwidthSetting)
+        }
 
         /**
          * Angle between the half-power (-3 dB) points of the main lobe of the antenna, in degrees.
@@ -601,7 +742,37 @@ private constructor(
          */
         fun beamwidth(beamwidth: JsonField<Double>) = apply { body.beamwidth(beamwidth) }
 
-        /** Center frequency of RF frequency range, if applicable, in Mhz. */
+        /**
+         * Array of beamwidth settings, in degrees for this RFBand. If this array is specified then
+         * it must be the same size as the frequencySettings array. A null value may be used for one
+         * or more of the frequencies in the frequencySettings array if there is no corresponding
+         * value for a given frequency.
+         */
+        fun beamwidthSettings(beamwidthSettings: List<Double>) = apply {
+            body.beamwidthSettings(beamwidthSettings)
+        }
+
+        /**
+         * Sets [Builder.beamwidthSettings] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.beamwidthSettings] with a well-typed `List<Double>`
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
+         */
+        fun beamwidthSettings(beamwidthSettings: JsonField<List<Double>>) = apply {
+            body.beamwidthSettings(beamwidthSettings)
+        }
+
+        /**
+         * Adds a single [Double] to [beamwidthSettings].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addBeamwidthSetting(beamwidthSetting: Double) = apply {
+            body.addBeamwidthSetting(beamwidthSetting)
+        }
+
+        /** Center frequency of RF frequency range, if applicable, in megahertz. */
         fun centerFreq(centerFreq: Double) = apply { body.centerFreq(centerFreq) }
 
         /**
@@ -637,7 +808,33 @@ private constructor(
          */
         fun createdBy(createdBy: JsonField<String>) = apply { body.createdBy(createdBy) }
 
-        /** RF Range edge gain, in dBi. */
+        /**
+         * Array of delay settings, in seconds for this RFBand. If this array is specified then it
+         * must be the same size as the frequencySettings array. A null value may be used for one or
+         * more of the frequencies in the frequencySettings array if there is no corresponding value
+         * for a given frequency.
+         */
+        fun delaySettings(delaySettings: List<Double>) = apply { body.delaySettings(delaySettings) }
+
+        /**
+         * Sets [Builder.delaySettings] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.delaySettings] with a well-typed `List<Double>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun delaySettings(delaySettings: JsonField<List<Double>>) = apply {
+            body.delaySettings(delaySettings)
+        }
+
+        /**
+         * Adds a single [Double] to [delaySettings].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addDelaySetting(delaySetting: Double) = apply { body.addDelaySetting(delaySetting) }
+
+        /** RF Range edge gain, in decibel relative to isotrope. */
         fun edgeGain(edgeGain: Double) = apply { body.edgeGain(edgeGain) }
 
         /**
@@ -655,7 +852,7 @@ private constructor(
          * the antenna gain relative to a half-wave dipole. Effective radiated power and effective
          * isotropic radiated power both measure the amount of power a radio transmitter and antenna
          * (or other source of electromagnetic waves) radiates in a specific direction: in the
-         * direction of maximum signal strength (the "main lobe") of its radiation pattern.
+         * direction of maximum signal strength (the main lobe) of its radiation pattern.
          */
         fun eirp(eirp: Double) = apply { body.eirp(eirp) }
 
@@ -674,7 +871,7 @@ private constructor(
          * (dB)+2.15 dB or EIRP (W) = 1.64\*ERP(W). Effective radiated power and effective isotropic
          * radiated power both measure the amount of power a radio transmitter and antenna (or other
          * source of electromagnetic waves) radiates in a specific direction: in the direction of
-         * maximum signal strength (the "main lobe") of its radiation pattern.
+         * maximum signal strength (the main lobe) of its radiation pattern.
          */
         fun erp(erp: Double) = apply { body.erp(erp) }
 
@@ -686,7 +883,7 @@ private constructor(
          */
         fun erp(erp: JsonField<Double>) = apply { body.erp(erp) }
 
-        /** End/maximum of transmit RF frequency range, if applicable, in Mhz. */
+        /** End/maximum of transmit RF frequency range, if applicable, in megahertz. */
         fun freqMax(freqMax: Double) = apply { body.freqMax(freqMax) }
 
         /**
@@ -697,7 +894,7 @@ private constructor(
          */
         fun freqMax(freqMax: JsonField<Double>) = apply { body.freqMax(freqMax) }
 
-        /** Start/minimum of transmit RF frequency range, if applicable, in Mhz. */
+        /** Start/minimum of transmit RF frequency range, if applicable, in megahertz. */
         fun freqMin(freqMin: Double) = apply { body.freqMin(freqMin) }
 
         /**
@@ -707,6 +904,60 @@ private constructor(
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun freqMin(freqMin: JsonField<Double>) = apply { body.freqMin(freqMin) }
+
+        /**
+         * Array of frequency settings, in megahertz for this RFBand. This array and the settings
+         * arrays must match in size.
+         */
+        fun frequencySettings(frequencySettings: List<Double>) = apply {
+            body.frequencySettings(frequencySettings)
+        }
+
+        /**
+         * Sets [Builder.frequencySettings] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.frequencySettings] with a well-typed `List<Double>`
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
+         */
+        fun frequencySettings(frequencySettings: JsonField<List<Double>>) = apply {
+            body.frequencySettings(frequencySettings)
+        }
+
+        /**
+         * Adds a single [Double] to [frequencySettings].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addFrequencySetting(frequencySetting: Double) = apply {
+            body.addFrequencySetting(frequencySetting)
+        }
+
+        /**
+         * Array of gain settings, in decibels for this RFBand. If this array is specified then it
+         * must be the same size as the frequencySettings array. A null value may be used for one or
+         * more of the frequencies in the frequencySettings array if there is no corresponding value
+         * for a given frequency.
+         */
+        fun gainSettings(gainSettings: List<Double>) = apply { body.gainSettings(gainSettings) }
+
+        /**
+         * Sets [Builder.gainSettings] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.gainSettings] with a well-typed `List<Double>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun gainSettings(gainSettings: JsonField<List<Double>>) = apply {
+            body.gainSettings(gainSettings)
+        }
+
+        /**
+         * Adds a single [Double] to [gainSettings].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addGainSetting(gainSetting: Double) = apply { body.addGainSetting(gainSetting) }
 
         /** RF Band mode (e.g. TX, RX). */
         fun mode(mode: Mode) = apply { body.mode(mode) }
@@ -718,6 +969,32 @@ private constructor(
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun mode(mode: JsonField<Mode>) = apply { body.mode(mode) }
+
+        /**
+         * Array of signal noise settings, in decibels for this RFBand. If this array is specified
+         * then it must be the same size as the frequencySettings array. A null value may be used
+         * for one or more of the frequencies in the frequencySettings array if there is no
+         * corresponding value for a given frequency.
+         */
+        fun noiseSettings(noiseSettings: List<Double>) = apply { body.noiseSettings(noiseSettings) }
+
+        /**
+         * Sets [Builder.noiseSettings] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.noiseSettings] with a well-typed `List<Double>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun noiseSettings(noiseSettings: JsonField<List<Double>>) = apply {
+            body.noiseSettings(noiseSettings)
+        }
+
+        /**
+         * Adds a single [Double] to [noiseSettings].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addNoiseSetting(noiseSetting: Double) = apply { body.addNoiseSetting(noiseSetting) }
 
         /**
          * Originating system or organization which produced the data, if different from the source.
@@ -750,7 +1027,7 @@ private constructor(
          */
         fun origNetwork(origNetwork: JsonField<String>) = apply { body.origNetwork(origNetwork) }
 
-        /** RF Range maximum gain, in dBi. */
+        /** RF Range maximum gain, in decibel relative to isotrope. */
         fun peakGain(peakGain: Double) = apply { body.peakGain(peakGain) }
 
         /**
@@ -782,7 +1059,7 @@ private constructor(
 
         /**
          * Purpose or use of the RF Band -- COMM = communications, TTC = Telemetry/Tracking/Control,
-         * OPS = Operations, OTHER = Other).
+         * OPS = Operations, OTHER = Other.
          */
         fun purpose(purpose: Purpose) = apply { body.purpose(purpose) }
 
@@ -962,16 +1239,22 @@ private constructor(
         private val bodyId: JsonField<String>,
         private val band: JsonField<String>,
         private val bandwidth: JsonField<Double>,
+        private val bandwidthSettings: JsonField<List<Double>>,
         private val beamwidth: JsonField<Double>,
+        private val beamwidthSettings: JsonField<List<Double>>,
         private val centerFreq: JsonField<Double>,
         private val createdAt: JsonField<OffsetDateTime>,
         private val createdBy: JsonField<String>,
+        private val delaySettings: JsonField<List<Double>>,
         private val edgeGain: JsonField<Double>,
         private val eirp: JsonField<Double>,
         private val erp: JsonField<Double>,
         private val freqMax: JsonField<Double>,
         private val freqMin: JsonField<Double>,
+        private val frequencySettings: JsonField<List<Double>>,
+        private val gainSettings: JsonField<List<Double>>,
         private val mode: JsonField<Mode>,
+        private val noiseSettings: JsonField<List<Double>>,
         private val origin: JsonField<String>,
         private val origNetwork: JsonField<String>,
         private val peakGain: JsonField<Double>,
@@ -998,9 +1281,15 @@ private constructor(
             @JsonProperty("bandwidth")
             @ExcludeMissing
             bandwidth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("bandwidthSettings")
+            @ExcludeMissing
+            bandwidthSettings: JsonField<List<Double>> = JsonMissing.of(),
             @JsonProperty("beamwidth")
             @ExcludeMissing
             beamwidth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("beamwidthSettings")
+            @ExcludeMissing
+            beamwidthSettings: JsonField<List<Double>> = JsonMissing.of(),
             @JsonProperty("centerFreq")
             @ExcludeMissing
             centerFreq: JsonField<Double> = JsonMissing.of(),
@@ -1010,6 +1299,9 @@ private constructor(
             @JsonProperty("createdBy")
             @ExcludeMissing
             createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("delaySettings")
+            @ExcludeMissing
+            delaySettings: JsonField<List<Double>> = JsonMissing.of(),
             @JsonProperty("edgeGain")
             @ExcludeMissing
             edgeGain: JsonField<Double> = JsonMissing.of(),
@@ -1017,7 +1309,16 @@ private constructor(
             @JsonProperty("erp") @ExcludeMissing erp: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("freqMax") @ExcludeMissing freqMax: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("freqMin") @ExcludeMissing freqMin: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("frequencySettings")
+            @ExcludeMissing
+            frequencySettings: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("gainSettings")
+            @ExcludeMissing
+            gainSettings: JsonField<List<Double>> = JsonMissing.of(),
             @JsonProperty("mode") @ExcludeMissing mode: JsonField<Mode> = JsonMissing.of(),
+            @JsonProperty("noiseSettings")
+            @ExcludeMissing
+            noiseSettings: JsonField<List<Double>> = JsonMissing.of(),
             @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
             @JsonProperty("origNetwork")
             @ExcludeMissing
@@ -1038,16 +1339,22 @@ private constructor(
             bodyId,
             band,
             bandwidth,
+            bandwidthSettings,
             beamwidth,
+            beamwidthSettings,
             centerFreq,
             createdAt,
             createdBy,
+            delaySettings,
             edgeGain,
             eirp,
             erp,
             freqMax,
             freqMin,
+            frequencySettings,
+            gainSettings,
             mode,
+            noiseSettings,
             origin,
             origNetwork,
             peakGain,
@@ -1132,12 +1439,24 @@ private constructor(
         fun band(): Optional<String> = band.getOptional("band")
 
         /**
-         * RF Band frequency range bandwidth in Mhz.
+         * RF Band frequency range bandwidth in megahertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
         fun bandwidth(): Optional<Double> = bandwidth.getOptional("bandwidth")
+
+        /**
+         * Array of frequency range bandwidth settings, in megahertz for this RFBand. If this array
+         * is specified then it must be the same size as the frequencySettings array. A null value
+         * may be used for one or more of the frequencies in the frequencySettings array if there is
+         * no corresponding value for a given frequency.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun bandwidthSettings(): Optional<List<Double>> =
+            bandwidthSettings.getOptional("bandwidthSettings")
 
         /**
          * Angle between the half-power (-3 dB) points of the main lobe of the antenna, in degrees.
@@ -1148,7 +1467,19 @@ private constructor(
         fun beamwidth(): Optional<Double> = beamwidth.getOptional("beamwidth")
 
         /**
-         * Center frequency of RF frequency range, if applicable, in Mhz.
+         * Array of beamwidth settings, in degrees for this RFBand. If this array is specified then
+         * it must be the same size as the frequencySettings array. A null value may be used for one
+         * or more of the frequencies in the frequencySettings array if there is no corresponding
+         * value for a given frequency.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun beamwidthSettings(): Optional<List<Double>> =
+            beamwidthSettings.getOptional("beamwidthSettings")
+
+        /**
+         * Center frequency of RF frequency range, if applicable, in megahertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1172,7 +1503,18 @@ private constructor(
         fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
         /**
-         * RF Range edge gain, in dBi.
+         * Array of delay settings, in seconds for this RFBand. If this array is specified then it
+         * must be the same size as the frequencySettings array. A null value may be used for one or
+         * more of the frequencies in the frequencySettings array if there is no corresponding value
+         * for a given frequency.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun delaySettings(): Optional<List<Double>> = delaySettings.getOptional("delaySettings")
+
+        /**
+         * RF Range edge gain, in decibel relative to isotrope.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1186,7 +1528,7 @@ private constructor(
          * the antenna gain relative to a half-wave dipole. Effective radiated power and effective
          * isotropic radiated power both measure the amount of power a radio transmitter and antenna
          * (or other source of electromagnetic waves) radiates in a specific direction: in the
-         * direction of maximum signal strength (the "main lobe") of its radiation pattern.
+         * direction of maximum signal strength (the main lobe) of its radiation pattern.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1200,7 +1542,7 @@ private constructor(
          * (dB)+2.15 dB or EIRP (W) = 1.64\*ERP(W). Effective radiated power and effective isotropic
          * radiated power both measure the amount of power a radio transmitter and antenna (or other
          * source of electromagnetic waves) radiates in a specific direction: in the direction of
-         * maximum signal strength (the "main lobe") of its radiation pattern.
+         * maximum signal strength (the main lobe) of its radiation pattern.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1208,7 +1550,7 @@ private constructor(
         fun erp(): Optional<Double> = erp.getOptional("erp")
 
         /**
-         * End/maximum of transmit RF frequency range, if applicable, in Mhz.
+         * End/maximum of transmit RF frequency range, if applicable, in megahertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1216,12 +1558,33 @@ private constructor(
         fun freqMax(): Optional<Double> = freqMax.getOptional("freqMax")
 
         /**
-         * Start/minimum of transmit RF frequency range, if applicable, in Mhz.
+         * Start/minimum of transmit RF frequency range, if applicable, in megahertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
         fun freqMin(): Optional<Double> = freqMin.getOptional("freqMin")
+
+        /**
+         * Array of frequency settings, in megahertz for this RFBand. This array and the settings
+         * arrays must match in size.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun frequencySettings(): Optional<List<Double>> =
+            frequencySettings.getOptional("frequencySettings")
+
+        /**
+         * Array of gain settings, in decibels for this RFBand. If this array is specified then it
+         * must be the same size as the frequencySettings array. A null value may be used for one or
+         * more of the frequencies in the frequencySettings array if there is no corresponding value
+         * for a given frequency.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun gainSettings(): Optional<List<Double>> = gainSettings.getOptional("gainSettings")
 
         /**
          * RF Band mode (e.g. TX, RX).
@@ -1230,6 +1593,17 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun mode(): Optional<Mode> = mode.getOptional("mode")
+
+        /**
+         * Array of signal noise settings, in decibels for this RFBand. If this array is specified
+         * then it must be the same size as the frequencySettings array. A null value may be used
+         * for one or more of the frequencies in the frequencySettings array if there is no
+         * corresponding value for a given frequency.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun noiseSettings(): Optional<List<Double>> = noiseSettings.getOptional("noiseSettings")
 
         /**
          * Originating system or organization which produced the data, if different from the source.
@@ -1252,7 +1626,7 @@ private constructor(
         fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
         /**
-         * RF Range maximum gain, in dBi.
+         * RF Range maximum gain, in decibel relative to isotrope.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1272,7 +1646,7 @@ private constructor(
 
         /**
          * Purpose or use of the RF Band -- COMM = communications, TTC = Telemetry/Tracking/Control,
-         * OPS = Operations, OTHER = Other).
+         * OPS = Operations, OTHER = Other.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1339,11 +1713,31 @@ private constructor(
         @JsonProperty("bandwidth") @ExcludeMissing fun _bandwidth(): JsonField<Double> = bandwidth
 
         /**
+         * Returns the raw JSON value of [bandwidthSettings].
+         *
+         * Unlike [bandwidthSettings], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("bandwidthSettings")
+        @ExcludeMissing
+        fun _bandwidthSettings(): JsonField<List<Double>> = bandwidthSettings
+
+        /**
          * Returns the raw JSON value of [beamwidth].
          *
          * Unlike [beamwidth], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("beamwidth") @ExcludeMissing fun _beamwidth(): JsonField<Double> = beamwidth
+
+        /**
+         * Returns the raw JSON value of [beamwidthSettings].
+         *
+         * Unlike [beamwidthSettings], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("beamwidthSettings")
+        @ExcludeMissing
+        fun _beamwidthSettings(): JsonField<List<Double>> = beamwidthSettings
 
         /**
          * Returns the raw JSON value of [centerFreq].
@@ -1369,6 +1763,16 @@ private constructor(
          * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+
+        /**
+         * Returns the raw JSON value of [delaySettings].
+         *
+         * Unlike [delaySettings], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("delaySettings")
+        @ExcludeMissing
+        fun _delaySettings(): JsonField<List<Double>> = delaySettings
 
         /**
          * Returns the raw JSON value of [edgeGain].
@@ -1406,11 +1810,41 @@ private constructor(
         @JsonProperty("freqMin") @ExcludeMissing fun _freqMin(): JsonField<Double> = freqMin
 
         /**
+         * Returns the raw JSON value of [frequencySettings].
+         *
+         * Unlike [frequencySettings], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("frequencySettings")
+        @ExcludeMissing
+        fun _frequencySettings(): JsonField<List<Double>> = frequencySettings
+
+        /**
+         * Returns the raw JSON value of [gainSettings].
+         *
+         * Unlike [gainSettings], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("gainSettings")
+        @ExcludeMissing
+        fun _gainSettings(): JsonField<List<Double>> = gainSettings
+
+        /**
          * Returns the raw JSON value of [mode].
          *
          * Unlike [mode], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("mode") @ExcludeMissing fun _mode(): JsonField<Mode> = mode
+
+        /**
+         * Returns the raw JSON value of [noiseSettings].
+         *
+         * Unlike [noiseSettings], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("noiseSettings")
+        @ExcludeMissing
+        fun _noiseSettings(): JsonField<List<Double>> = noiseSettings
 
         /**
          * Returns the raw JSON value of [origin].
@@ -1492,16 +1926,22 @@ private constructor(
             private var bodyId: JsonField<String> = JsonMissing.of()
             private var band: JsonField<String> = JsonMissing.of()
             private var bandwidth: JsonField<Double> = JsonMissing.of()
+            private var bandwidthSettings: JsonField<MutableList<Double>>? = null
             private var beamwidth: JsonField<Double> = JsonMissing.of()
+            private var beamwidthSettings: JsonField<MutableList<Double>>? = null
             private var centerFreq: JsonField<Double> = JsonMissing.of()
             private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
             private var createdBy: JsonField<String> = JsonMissing.of()
+            private var delaySettings: JsonField<MutableList<Double>>? = null
             private var edgeGain: JsonField<Double> = JsonMissing.of()
             private var eirp: JsonField<Double> = JsonMissing.of()
             private var erp: JsonField<Double> = JsonMissing.of()
             private var freqMax: JsonField<Double> = JsonMissing.of()
             private var freqMin: JsonField<Double> = JsonMissing.of()
+            private var frequencySettings: JsonField<MutableList<Double>>? = null
+            private var gainSettings: JsonField<MutableList<Double>>? = null
             private var mode: JsonField<Mode> = JsonMissing.of()
+            private var noiseSettings: JsonField<MutableList<Double>>? = null
             private var origin: JsonField<String> = JsonMissing.of()
             private var origNetwork: JsonField<String> = JsonMissing.of()
             private var peakGain: JsonField<Double> = JsonMissing.of()
@@ -1519,16 +1959,22 @@ private constructor(
                 bodyId = body.bodyId
                 band = body.band
                 bandwidth = body.bandwidth
+                bandwidthSettings = body.bandwidthSettings.map { it.toMutableList() }
                 beamwidth = body.beamwidth
+                beamwidthSettings = body.beamwidthSettings.map { it.toMutableList() }
                 centerFreq = body.centerFreq
                 createdAt = body.createdAt
                 createdBy = body.createdBy
+                delaySettings = body.delaySettings.map { it.toMutableList() }
                 edgeGain = body.edgeGain
                 eirp = body.eirp
                 erp = body.erp
                 freqMax = body.freqMax
                 freqMin = body.freqMin
+                frequencySettings = body.frequencySettings.map { it.toMutableList() }
+                gainSettings = body.gainSettings.map { it.toMutableList() }
                 mode = body.mode
+                noiseSettings = body.noiseSettings.map { it.toMutableList() }
                 origin = body.origin
                 origNetwork = body.origNetwork
                 peakGain = body.peakGain
@@ -1642,7 +2088,7 @@ private constructor(
              */
             fun band(band: JsonField<String>) = apply { this.band = band }
 
-            /** RF Band frequency range bandwidth in Mhz. */
+            /** RF Band frequency range bandwidth in megahertz. */
             fun bandwidth(bandwidth: Double) = bandwidth(JsonField.of(bandwidth))
 
             /**
@@ -1653,6 +2099,38 @@ private constructor(
              * supported value.
              */
             fun bandwidth(bandwidth: JsonField<Double>) = apply { this.bandwidth = bandwidth }
+
+            /**
+             * Array of frequency range bandwidth settings, in megahertz for this RFBand. If this
+             * array is specified then it must be the same size as the frequencySettings array. A
+             * null value may be used for one or more of the frequencies in the frequencySettings
+             * array if there is no corresponding value for a given frequency.
+             */
+            fun bandwidthSettings(bandwidthSettings: List<Double>) =
+                bandwidthSettings(JsonField.of(bandwidthSettings))
+
+            /**
+             * Sets [Builder.bandwidthSettings] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.bandwidthSettings] with a well-typed `List<Double>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun bandwidthSettings(bandwidthSettings: JsonField<List<Double>>) = apply {
+                this.bandwidthSettings = bandwidthSettings.map { it.toMutableList() }
+            }
+
+            /**
+             * Adds a single [Double] to [bandwidthSettings].
+             *
+             * @throws IllegalStateException if the field was previously set to a non-list.
+             */
+            fun addBandwidthSetting(bandwidthSetting: Double) = apply {
+                bandwidthSettings =
+                    (bandwidthSettings ?: JsonField.of(mutableListOf())).also {
+                        checkKnown("bandwidthSettings", it).add(bandwidthSetting)
+                    }
+            }
 
             /**
              * Angle between the half-power (-3 dB) points of the main lobe of the antenna, in
@@ -1669,7 +2147,39 @@ private constructor(
              */
             fun beamwidth(beamwidth: JsonField<Double>) = apply { this.beamwidth = beamwidth }
 
-            /** Center frequency of RF frequency range, if applicable, in Mhz. */
+            /**
+             * Array of beamwidth settings, in degrees for this RFBand. If this array is specified
+             * then it must be the same size as the frequencySettings array. A null value may be
+             * used for one or more of the frequencies in the frequencySettings array if there is no
+             * corresponding value for a given frequency.
+             */
+            fun beamwidthSettings(beamwidthSettings: List<Double>) =
+                beamwidthSettings(JsonField.of(beamwidthSettings))
+
+            /**
+             * Sets [Builder.beamwidthSettings] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.beamwidthSettings] with a well-typed `List<Double>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun beamwidthSettings(beamwidthSettings: JsonField<List<Double>>) = apply {
+                this.beamwidthSettings = beamwidthSettings.map { it.toMutableList() }
+            }
+
+            /**
+             * Adds a single [Double] to [beamwidthSettings].
+             *
+             * @throws IllegalStateException if the field was previously set to a non-list.
+             */
+            fun addBeamwidthSetting(beamwidthSetting: Double) = apply {
+                beamwidthSettings =
+                    (beamwidthSettings ?: JsonField.of(mutableListOf())).also {
+                        checkKnown("beamwidthSettings", it).add(beamwidthSetting)
+                    }
+            }
+
+            /** Center frequency of RF frequency range, if applicable, in megahertz. */
             fun centerFreq(centerFreq: Double) = centerFreq(JsonField.of(centerFreq))
 
             /**
@@ -1709,7 +2219,39 @@ private constructor(
              */
             fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
-            /** RF Range edge gain, in dBi. */
+            /**
+             * Array of delay settings, in seconds for this RFBand. If this array is specified then
+             * it must be the same size as the frequencySettings array. A null value may be used for
+             * one or more of the frequencies in the frequencySettings array if there is no
+             * corresponding value for a given frequency.
+             */
+            fun delaySettings(delaySettings: List<Double>) =
+                delaySettings(JsonField.of(delaySettings))
+
+            /**
+             * Sets [Builder.delaySettings] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.delaySettings] with a well-typed `List<Double>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun delaySettings(delaySettings: JsonField<List<Double>>) = apply {
+                this.delaySettings = delaySettings.map { it.toMutableList() }
+            }
+
+            /**
+             * Adds a single [Double] to [delaySettings].
+             *
+             * @throws IllegalStateException if the field was previously set to a non-list.
+             */
+            fun addDelaySetting(delaySetting: Double) = apply {
+                delaySettings =
+                    (delaySettings ?: JsonField.of(mutableListOf())).also {
+                        checkKnown("delaySettings", it).add(delaySetting)
+                    }
+            }
+
+            /** RF Range edge gain, in decibel relative to isotrope. */
             fun edgeGain(edgeGain: Double) = edgeGain(JsonField.of(edgeGain))
 
             /**
@@ -1729,7 +2271,7 @@ private constructor(
              * radiated power and effective isotropic radiated power both measure the amount of
              * power a radio transmitter and antenna (or other source of electromagnetic waves)
              * radiates in a specific direction: in the direction of maximum signal strength (the
-             * "main lobe") of its radiation pattern.
+             * main lobe) of its radiation pattern.
              */
             fun eirp(eirp: Double) = eirp(JsonField.of(eirp))
 
@@ -1749,7 +2291,7 @@ private constructor(
              * EIRP(dB) = ERP (dB)+2.15 dB or EIRP (W) = 1.64\*ERP(W). Effective radiated power and
              * effective isotropic radiated power both measure the amount of power a radio
              * transmitter and antenna (or other source of electromagnetic waves) radiates in a
-             * specific direction: in the direction of maximum signal strength (the "main lobe") of
+             * specific direction: in the direction of maximum signal strength (the main lobe) of
              * its radiation pattern.
              */
             fun erp(erp: Double) = erp(JsonField.of(erp))
@@ -1763,7 +2305,7 @@ private constructor(
              */
             fun erp(erp: JsonField<Double>) = apply { this.erp = erp }
 
-            /** End/maximum of transmit RF frequency range, if applicable, in Mhz. */
+            /** End/maximum of transmit RF frequency range, if applicable, in megahertz. */
             fun freqMax(freqMax: Double) = freqMax(JsonField.of(freqMax))
 
             /**
@@ -1775,7 +2317,7 @@ private constructor(
              */
             fun freqMax(freqMax: JsonField<Double>) = apply { this.freqMax = freqMax }
 
-            /** Start/minimum of transmit RF frequency range, if applicable, in Mhz. */
+            /** Start/minimum of transmit RF frequency range, if applicable, in megahertz. */
             fun freqMin(freqMin: Double) = freqMin(JsonField.of(freqMin))
 
             /**
@@ -1786,6 +2328,67 @@ private constructor(
              * supported value.
              */
             fun freqMin(freqMin: JsonField<Double>) = apply { this.freqMin = freqMin }
+
+            /**
+             * Array of frequency settings, in megahertz for this RFBand. This array and the
+             * settings arrays must match in size.
+             */
+            fun frequencySettings(frequencySettings: List<Double>) =
+                frequencySettings(JsonField.of(frequencySettings))
+
+            /**
+             * Sets [Builder.frequencySettings] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.frequencySettings] with a well-typed `List<Double>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun frequencySettings(frequencySettings: JsonField<List<Double>>) = apply {
+                this.frequencySettings = frequencySettings.map { it.toMutableList() }
+            }
+
+            /**
+             * Adds a single [Double] to [frequencySettings].
+             *
+             * @throws IllegalStateException if the field was previously set to a non-list.
+             */
+            fun addFrequencySetting(frequencySetting: Double) = apply {
+                frequencySettings =
+                    (frequencySettings ?: JsonField.of(mutableListOf())).also {
+                        checkKnown("frequencySettings", it).add(frequencySetting)
+                    }
+            }
+
+            /**
+             * Array of gain settings, in decibels for this RFBand. If this array is specified then
+             * it must be the same size as the frequencySettings array. A null value may be used for
+             * one or more of the frequencies in the frequencySettings array if there is no
+             * corresponding value for a given frequency.
+             */
+            fun gainSettings(gainSettings: List<Double>) = gainSettings(JsonField.of(gainSettings))
+
+            /**
+             * Sets [Builder.gainSettings] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.gainSettings] with a well-typed `List<Double>` value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun gainSettings(gainSettings: JsonField<List<Double>>) = apply {
+                this.gainSettings = gainSettings.map { it.toMutableList() }
+            }
+
+            /**
+             * Adds a single [Double] to [gainSettings].
+             *
+             * @throws IllegalStateException if the field was previously set to a non-list.
+             */
+            fun addGainSetting(gainSetting: Double) = apply {
+                gainSettings =
+                    (gainSettings ?: JsonField.of(mutableListOf())).also {
+                        checkKnown("gainSettings", it).add(gainSetting)
+                    }
+            }
 
             /** RF Band mode (e.g. TX, RX). */
             fun mode(mode: Mode) = mode(JsonField.of(mode))
@@ -1798,6 +2401,38 @@ private constructor(
              * value.
              */
             fun mode(mode: JsonField<Mode>) = apply { this.mode = mode }
+
+            /**
+             * Array of signal noise settings, in decibels for this RFBand. If this array is
+             * specified then it must be the same size as the frequencySettings array. A null value
+             * may be used for one or more of the frequencies in the frequencySettings array if
+             * there is no corresponding value for a given frequency.
+             */
+            fun noiseSettings(noiseSettings: List<Double>) =
+                noiseSettings(JsonField.of(noiseSettings))
+
+            /**
+             * Sets [Builder.noiseSettings] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.noiseSettings] with a well-typed `List<Double>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun noiseSettings(noiseSettings: JsonField<List<Double>>) = apply {
+                this.noiseSettings = noiseSettings.map { it.toMutableList() }
+            }
+
+            /**
+             * Adds a single [Double] to [noiseSettings].
+             *
+             * @throws IllegalStateException if the field was previously set to a non-list.
+             */
+            fun addNoiseSetting(noiseSetting: Double) = apply {
+                noiseSettings =
+                    (noiseSettings ?: JsonField.of(mutableListOf())).also {
+                        checkKnown("noiseSettings", it).add(noiseSetting)
+                    }
+            }
 
             /**
              * Originating system or organization which produced the data, if different from the
@@ -1833,7 +2468,7 @@ private constructor(
                 this.origNetwork = origNetwork
             }
 
-            /** RF Range maximum gain, in dBi. */
+            /** RF Range maximum gain, in decibel relative to isotrope. */
             fun peakGain(peakGain: Double) = peakGain(JsonField.of(peakGain))
 
             /**
@@ -1866,7 +2501,7 @@ private constructor(
 
             /**
              * Purpose or use of the RF Band -- COMM = communications, TTC =
-             * Telemetry/Tracking/Control, OPS = Operations, OTHER = Other).
+             * Telemetry/Tracking/Control, OPS = Operations, OTHER = Other.
              */
             fun purpose(purpose: Purpose) = purpose(JsonField.of(purpose))
 
@@ -1924,16 +2559,22 @@ private constructor(
                     bodyId,
                     band,
                     bandwidth,
+                    (bandwidthSettings ?: JsonMissing.of()).map { it.toImmutable() },
                     beamwidth,
+                    (beamwidthSettings ?: JsonMissing.of()).map { it.toImmutable() },
                     centerFreq,
                     createdAt,
                     createdBy,
+                    (delaySettings ?: JsonMissing.of()).map { it.toImmutable() },
                     edgeGain,
                     eirp,
                     erp,
                     freqMax,
                     freqMin,
+                    (frequencySettings ?: JsonMissing.of()).map { it.toImmutable() },
+                    (gainSettings ?: JsonMissing.of()).map { it.toImmutable() },
                     mode,
+                    (noiseSettings ?: JsonMissing.of()).map { it.toImmutable() },
                     origin,
                     origNetwork,
                     peakGain,
@@ -1958,16 +2599,22 @@ private constructor(
             bodyId()
             band()
             bandwidth()
+            bandwidthSettings()
             beamwidth()
+            beamwidthSettings()
             centerFreq()
             createdAt()
             createdBy()
+            delaySettings()
             edgeGain()
             eirp()
             erp()
             freqMax()
             freqMin()
+            frequencySettings()
+            gainSettings()
             mode().ifPresent { it.validate() }
+            noiseSettings()
             origin()
             origNetwork()
             peakGain()
@@ -2000,16 +2647,22 @@ private constructor(
                 (if (bodyId.asKnown().isPresent) 1 else 0) +
                 (if (band.asKnown().isPresent) 1 else 0) +
                 (if (bandwidth.asKnown().isPresent) 1 else 0) +
+                (bandwidthSettings.asKnown().getOrNull()?.size ?: 0) +
                 (if (beamwidth.asKnown().isPresent) 1 else 0) +
+                (beamwidthSettings.asKnown().getOrNull()?.size ?: 0) +
                 (if (centerFreq.asKnown().isPresent) 1 else 0) +
                 (if (createdAt.asKnown().isPresent) 1 else 0) +
                 (if (createdBy.asKnown().isPresent) 1 else 0) +
+                (delaySettings.asKnown().getOrNull()?.size ?: 0) +
                 (if (edgeGain.asKnown().isPresent) 1 else 0) +
                 (if (eirp.asKnown().isPresent) 1 else 0) +
                 (if (erp.asKnown().isPresent) 1 else 0) +
                 (if (freqMax.asKnown().isPresent) 1 else 0) +
                 (if (freqMin.asKnown().isPresent) 1 else 0) +
+                (frequencySettings.asKnown().getOrNull()?.size ?: 0) +
+                (gainSettings.asKnown().getOrNull()?.size ?: 0) +
                 (mode.asKnown().getOrNull()?.validity() ?: 0) +
+                (noiseSettings.asKnown().getOrNull()?.size ?: 0) +
                 (if (origin.asKnown().isPresent) 1 else 0) +
                 (if (origNetwork.asKnown().isPresent) 1 else 0) +
                 (if (peakGain.asKnown().isPresent) 1 else 0) +
@@ -2030,16 +2683,22 @@ private constructor(
                 bodyId == other.bodyId &&
                 band == other.band &&
                 bandwidth == other.bandwidth &&
+                bandwidthSettings == other.bandwidthSettings &&
                 beamwidth == other.beamwidth &&
+                beamwidthSettings == other.beamwidthSettings &&
                 centerFreq == other.centerFreq &&
                 createdAt == other.createdAt &&
                 createdBy == other.createdBy &&
+                delaySettings == other.delaySettings &&
                 edgeGain == other.edgeGain &&
                 eirp == other.eirp &&
                 erp == other.erp &&
                 freqMax == other.freqMax &&
                 freqMin == other.freqMin &&
+                frequencySettings == other.frequencySettings &&
+                gainSettings == other.gainSettings &&
                 mode == other.mode &&
+                noiseSettings == other.noiseSettings &&
                 origin == other.origin &&
                 origNetwork == other.origNetwork &&
                 peakGain == other.peakGain &&
@@ -2058,16 +2717,22 @@ private constructor(
                 bodyId,
                 band,
                 bandwidth,
+                bandwidthSettings,
                 beamwidth,
+                beamwidthSettings,
                 centerFreq,
                 createdAt,
                 createdBy,
+                delaySettings,
                 edgeGain,
                 eirp,
                 erp,
                 freqMax,
                 freqMin,
+                frequencySettings,
+                gainSettings,
                 mode,
+                noiseSettings,
                 origin,
                 origNetwork,
                 peakGain,
@@ -2080,7 +2745,7 @@ private constructor(
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idEntity=$idEntity, name=$name, source=$source, bodyId=$bodyId, band=$band, bandwidth=$bandwidth, beamwidth=$beamwidth, centerFreq=$centerFreq, createdAt=$createdAt, createdBy=$createdBy, edgeGain=$edgeGain, eirp=$eirp, erp=$erp, freqMax=$freqMax, freqMin=$freqMin, mode=$mode, origin=$origin, origNetwork=$origNetwork, peakGain=$peakGain, polarization=$polarization, purpose=$purpose, additionalProperties=$additionalProperties}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idEntity=$idEntity, name=$name, source=$source, bodyId=$bodyId, band=$band, bandwidth=$bandwidth, bandwidthSettings=$bandwidthSettings, beamwidth=$beamwidth, beamwidthSettings=$beamwidthSettings, centerFreq=$centerFreq, createdAt=$createdAt, createdBy=$createdBy, delaySettings=$delaySettings, edgeGain=$edgeGain, eirp=$eirp, erp=$erp, freqMax=$freqMax, freqMin=$freqMin, frequencySettings=$frequencySettings, gainSettings=$gainSettings, mode=$mode, noiseSettings=$noiseSettings, origin=$origin, origNetwork=$origNetwork, peakGain=$peakGain, polarization=$polarization, purpose=$purpose, additionalProperties=$additionalProperties}"
     }
 
     /**
@@ -2514,7 +3179,7 @@ private constructor(
 
     /**
      * Purpose or use of the RF Band -- COMM = communications, TTC = Telemetry/Tracking/Control, OPS
-     * = Operations, OTHER = Other).
+     * = Operations, OTHER = Other.
      */
     class Purpose @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
 

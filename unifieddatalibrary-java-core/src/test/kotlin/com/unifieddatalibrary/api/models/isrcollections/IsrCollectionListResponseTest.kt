@@ -102,7 +102,7 @@ internal class IsrCollectionListResponseTest {
                 .missionSyncMatrixBin("MATRIX")
                 .name("Example mission name")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .addTasking(
                     IsrCollectionListResponse.Tasking.builder()
                         .id("ISRCOLLECTIONTASKINGS-ID")
@@ -334,7 +334,7 @@ internal class IsrCollectionListResponseTest {
         assertThat(isrCollectionListResponse.missionSyncMatrixBin()).contains("MATRIX")
         assertThat(isrCollectionListResponse.name()).contains("Example mission name")
         assertThat(isrCollectionListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(isrCollectionListResponse.origNetwork()).contains("ORIG")
+        assertThat(isrCollectionListResponse.origNetwork()).contains("OPS1")
         assertThat(isrCollectionListResponse.taskings().getOrNull())
             .containsExactly(
                 IsrCollectionListResponse.Tasking.builder()
@@ -562,7 +562,7 @@ internal class IsrCollectionListResponseTest {
                 .missionSyncMatrixBin("MATRIX")
                 .name("Example mission name")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .addTasking(
                     IsrCollectionListResponse.Tasking.builder()
                         .id("ISRCOLLECTIONTASKINGS-ID")

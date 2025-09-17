@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.2.0 (2025-09-15)
+
+Full Changelog: [v0.1.9...v0.2.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.9...v0.2.0)
+
+### Features
+
+* **api:** api update ([846eacc](https://github.com/Bluestaq/udl-java-sdk/commit/846eacc084a18bbe1ab8d2e589150ef63ab8ece0))
+* **api:** api update ([ec7377c](https://github.com/Bluestaq/udl-java-sdk/commit/ec7377c2e18551c081cf07cb8a1d310f6b898dbf))
+* **api:** manual updates ([6fe8047](https://github.com/Bluestaq/udl-java-sdk/commit/6fe8047288fbbbc5af279355592e33ba82db1ad6))
+
+
+### Bug Fixes
+
+* **client:** incorrect `getPackageVersion` impl ([400e7c6](https://github.com/Bluestaq/udl-java-sdk/commit/400e7c64ee90fb025a0a443e332bb6c480711f9c))
+
+
+### Chores
+
+* improve formatter performance ([1c97019](https://github.com/Bluestaq/udl-java-sdk/commit/1c97019340a43475cc0d7ae92bdbe71d42c41ea9))
+* **internal:** codegen related update ([30c36bc](https://github.com/Bluestaq/udl-java-sdk/commit/30c36bc85b05549711604ae30eb97fef5903cb9c))
+* **internal:** codegen related update ([7c024c3](https://github.com/Bluestaq/udl-java-sdk/commit/7c024c3933dcba360f0c7828cecfe227b4164532))
+
 ## 0.1.9 (2025-09-03)
 
 Full Changelog: [v0.1.8...v0.1.9](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.8...v0.1.9)

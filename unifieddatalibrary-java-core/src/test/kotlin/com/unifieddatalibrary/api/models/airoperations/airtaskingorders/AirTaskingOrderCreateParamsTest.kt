@@ -103,8 +103,7 @@ internal class AirTaskingOrderCreateParamsTest {
                     .build()
             )
             .origin("THIRD_PARTY_DATASOURCE")
-            .origNetwork("ORIG")
-            .rawFileUri("Example URI")
+            .origNetwork("OPS1")
             .sourceDl("AXE")
             .build()
     }
@@ -204,8 +203,7 @@ internal class AirTaskingOrderCreateParamsTest {
                         .build()
                 )
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
-                .rawFileUri("Example URI")
+                .origNetwork("OPS1")
                 .sourceDl("AXE")
                 .build()
 
@@ -305,8 +303,7 @@ internal class AirTaskingOrderCreateParamsTest {
                     .build()
             )
         assertThat(body.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(body.origNetwork()).contains("ORIG")
-        assertThat(body.rawFileUri()).contains("Example URI")
+        assertThat(body.origNetwork()).contains("OPS1")
         assertThat(body.sourceDl()).contains("AXE")
     }
 

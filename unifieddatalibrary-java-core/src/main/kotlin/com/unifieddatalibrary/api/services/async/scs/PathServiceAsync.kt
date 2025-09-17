@@ -28,12 +28,14 @@ interface PathServiceAsync {
      * that are missing. A specific role is required to perform this service operation. Please
      * contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun createWithFile(
         fileContent: String,
         params: PathCreateWithFileParams,
     ): CompletableFuture<String> = createWithFile(fileContent, params, RequestOptions.none())
 
     /** @see createWithFile */
+    @Deprecated("deprecated")
     fun createWithFile(
         fileContent: String,
         params: PathCreateWithFileParams,
@@ -42,10 +44,12 @@ interface PathServiceAsync {
         createWithFile(params.toBuilder().fileContent(fileContent).build(), requestOptions)
 
     /** @see createWithFile */
+    @Deprecated("deprecated")
     fun createWithFile(params: PathCreateWithFileParams): CompletableFuture<String> =
         createWithFile(params, RequestOptions.none())
 
     /** @see createWithFile */
+    @Deprecated("deprecated")
     fun createWithFile(
         params: PathCreateWithFileParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -65,6 +69,7 @@ interface PathServiceAsync {
          * Returns a raw HTTP response for `post /scs/path`, but is otherwise the same as
          * [PathServiceAsync.createWithFile].
          */
+        @Deprecated("deprecated")
         fun createWithFile(
             fileContent: String,
             params: PathCreateWithFileParams,
@@ -72,6 +77,7 @@ interface PathServiceAsync {
             createWithFile(fileContent, params, RequestOptions.none())
 
         /** @see createWithFile */
+        @Deprecated("deprecated")
         fun createWithFile(
             fileContent: String,
             params: PathCreateWithFileParams,
@@ -80,12 +86,14 @@ interface PathServiceAsync {
             createWithFile(params.toBuilder().fileContent(fileContent).build(), requestOptions)
 
         /** @see createWithFile */
+        @Deprecated("deprecated")
         fun createWithFile(
             params: PathCreateWithFileParams
         ): CompletableFuture<HttpResponseFor<String>> =
             createWithFile(params, RequestOptions.none())
 
         /** @see createWithFile */
+        @Deprecated("deprecated")
         fun createWithFile(
             params: PathCreateWithFileParams,
             requestOptions: RequestOptions = RequestOptions.none(),

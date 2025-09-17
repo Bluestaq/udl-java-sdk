@@ -22,6 +22,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 /** Search for files by metadata and/or text in file content. */
+@Deprecated("deprecated")
 class ScSearchParams
 private constructor(
     private val path: String,
@@ -419,6 +420,7 @@ private constructor(
             }
             .build()
 
+    @Deprecated("deprecated")
     class Body
     private constructor(
         private val contentCriteria: JsonField<String>,

@@ -103,7 +103,6 @@ internal class DatalinkIngestTest {
                 .pocRank("MAJ")
                 .qualifier("CHG")
                 .qualSn(1)
-                .rawFileUri("Example URI")
                 .addReference(
                     DatalinkIngest.Reference.builder()
                         .refOriginator("CENTCOM")
@@ -254,7 +253,6 @@ internal class DatalinkIngestTest {
         assertThat(datalinkIngest.pocRank()).contains("MAJ")
         assertThat(datalinkIngest.qualifier()).contains("CHG")
         assertThat(datalinkIngest.qualSn()).contains(1)
-        assertThat(datalinkIngest.rawFileUri()).contains("Example URI")
         assertThat(datalinkIngest.references().getOrNull())
             .containsExactly(
                 DatalinkIngest.Reference.builder()
@@ -414,7 +412,6 @@ internal class DatalinkIngestTest {
                 .pocRank("MAJ")
                 .qualifier("CHG")
                 .qualSn(1)
-                .rawFileUri("Example URI")
                 .addReference(
                     DatalinkIngest.Reference.builder()
                         .refOriginator("CENTCOM")

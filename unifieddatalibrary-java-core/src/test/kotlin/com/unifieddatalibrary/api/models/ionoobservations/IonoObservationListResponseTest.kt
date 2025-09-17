@@ -283,7 +283,7 @@ internal class IonoObservationListResponseTest {
                 .neProfileName("NH")
                 .neProfileVersion(4.32)
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
                 .phase(
                     IonoObservationListResponse.Phase.builder()
@@ -693,7 +693,7 @@ internal class IonoObservationListResponseTest {
         assertThat(ionoObservationListResponse.neProfileName()).contains("NH")
         assertThat(ionoObservationListResponse.neProfileVersion()).contains(4.32)
         assertThat(ionoObservationListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(ionoObservationListResponse.origNetwork()).contains("ORIG")
+        assertThat(ionoObservationListResponse.origNetwork()).contains("OPS1")
         assertThat(ionoObservationListResponse.origSensorId()).contains("ORIGSENSOR-ID")
         assertThat(ionoObservationListResponse.phase())
             .contains(
@@ -1113,7 +1113,7 @@ internal class IonoObservationListResponseTest {
                 .neProfileName("NH")
                 .neProfileVersion(4.32)
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .origSensorId("ORIGSENSOR-ID")
                 .phase(
                     IonoObservationListResponse.Phase.builder()

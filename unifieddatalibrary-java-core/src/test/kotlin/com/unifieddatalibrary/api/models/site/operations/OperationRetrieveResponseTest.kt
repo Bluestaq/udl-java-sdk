@@ -83,7 +83,7 @@ internal class OperationRetrieveResponseTest {
                         .build()
                 )
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .addPathway(
                     PathwayFull.builder()
                         .pwDefinition("AGP: 14L, K6, K, G (ANG APRN TO TWY K), GUARD (MAIN)")
@@ -186,7 +186,7 @@ internal class OperationRetrieveResponseTest {
                     .build()
             )
         assertThat(operationRetrieveResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(operationRetrieveResponse.origNetwork()).contains("ORIG")
+        assertThat(operationRetrieveResponse.origNetwork()).contains("OPS1")
         assertThat(operationRetrieveResponse.pathways().getOrNull())
             .containsExactly(
                 PathwayFull.builder()
@@ -285,7 +285,7 @@ internal class OperationRetrieveResponseTest {
                         .build()
                 )
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .addPathway(
                     PathwayFull.builder()
                         .pwDefinition("AGP: 14L, K6, K, G (ANG APRN TO TWY K), GUARD (MAIN)")

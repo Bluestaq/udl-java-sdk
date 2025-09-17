@@ -24,9 +24,6 @@ internal class BeamcontourFullTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .gain(17.1)
-                .geography(
-                    "POLYGON((26.156175339112 67.3291113966927,26.0910220642717 67.2580009640721,26.6637992964562 67.1795862381682,26.730115808233 67.2501237475598,26.156175339112 67.3291113966927))"
-                )
                 .geographyJson(
                     "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
                 )
@@ -37,7 +34,7 @@ internal class BeamcontourFullTest {
                 )
                 .geographyType("ST_Polygon")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .regionName("Example region name")
                 .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .updatedBy("some.user")
@@ -54,10 +51,6 @@ internal class BeamcontourFullTest {
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
         assertThat(beamcontourFull.createdBy()).contains("some.user")
         assertThat(beamcontourFull.gain()).contains(17.1)
-        assertThat(beamcontourFull.geography())
-            .contains(
-                "POLYGON((26.156175339112 67.3291113966927,26.0910220642717 67.2580009640721,26.6637992964562 67.1795862381682,26.730115808233 67.2501237475598,26.156175339112 67.3291113966927))"
-            )
         assertThat(beamcontourFull.geographyJson())
             .contains(
                 "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
@@ -70,7 +63,7 @@ internal class BeamcontourFullTest {
             )
         assertThat(beamcontourFull.geographyType()).contains("ST_Polygon")
         assertThat(beamcontourFull.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(beamcontourFull.origNetwork()).contains("ORIG")
+        assertThat(beamcontourFull.origNetwork()).contains("OPS1")
         assertThat(beamcontourFull.regionName()).contains("Example region name")
         assertThat(beamcontourFull.updatedAt())
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
@@ -92,9 +85,6 @@ internal class BeamcontourFullTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .gain(17.1)
-                .geography(
-                    "POLYGON((26.156175339112 67.3291113966927,26.0910220642717 67.2580009640721,26.6637992964562 67.1795862381682,26.730115808233 67.2501237475598,26.156175339112 67.3291113966927))"
-                )
                 .geographyJson(
                     "{\"type\":\"Polygon\",\"coordinates\":[ [ [ 67.3291113966927, 26.156175339112 ], [ 67.2580009640721, 26.091022064271 ], [ 67.1795862381682, 26.6637992964562 ], [ 67.2501237475598, 26.730115808233 ], [ 67.3291113966927, 26.156175339112 ] ] ] }"
                 )
@@ -105,7 +95,7 @@ internal class BeamcontourFullTest {
                 )
                 .geographyType("ST_Polygon")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .regionName("Example region name")
                 .updatedAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .updatedBy("some.user")

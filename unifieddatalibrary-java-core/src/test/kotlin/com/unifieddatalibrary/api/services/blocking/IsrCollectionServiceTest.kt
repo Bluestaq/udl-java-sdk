@@ -160,7 +160,7 @@ internal class IsrCollectionServiceTest {
                         .missionSyncMatrixBin("MATRIX")
                         .name("Example mission name")
                         .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .addTasking(
                             IsrCollectionCreateBulkParams.Body.Tasking.builder()
                                 .id("ISRCOLLECTIONTASKINGS-ID")
@@ -474,7 +474,7 @@ internal class IsrCollectionServiceTest {
                         .missionSyncMatrixBin("MATRIX")
                         .name("Example mission name")
                         .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("ORIG")
+                        .origNetwork("OPS1")
                         .addTasking(
                             IsrCollectionUnvalidatedPublishParams.Body.Tasking.builder()
                                 .id("ISRCOLLECTIONTASKINGS-ID")

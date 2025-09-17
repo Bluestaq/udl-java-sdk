@@ -1,6 +1,6 @@
 allprojects {
     group = "com.unifieddatalibrary.api"
-    version = "0.1.9" // x-release-please-version
+    version = "0.2.0" // x-release-please-version
 }
 
 subprojects {

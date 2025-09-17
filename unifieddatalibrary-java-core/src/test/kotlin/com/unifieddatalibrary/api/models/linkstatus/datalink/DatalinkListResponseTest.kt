@@ -103,7 +103,6 @@ internal class DatalinkListResponseTest {
                 .pocRank("MAJ")
                 .qualifier("CHG")
                 .qualSn(1)
-                .rawFileUri("Example URI")
                 .addReference(
                     DatalinkListResponse.Reference.builder()
                         .refOriginator("CENTCOM")
@@ -254,7 +253,6 @@ internal class DatalinkListResponseTest {
         assertThat(datalinkListResponse.pocRank()).contains("MAJ")
         assertThat(datalinkListResponse.qualifier()).contains("CHG")
         assertThat(datalinkListResponse.qualSn()).contains(1)
-        assertThat(datalinkListResponse.rawFileUri()).contains("Example URI")
         assertThat(datalinkListResponse.references().getOrNull())
             .containsExactly(
                 DatalinkListResponse.Reference.builder()
@@ -414,7 +412,6 @@ internal class DatalinkListResponseTest {
                 .pocRank("MAJ")
                 .qualifier("CHG")
                 .qualSn(1)
-                .rawFileUri("Example URI")
                 .addReference(
                     DatalinkListResponse.Reference.builder()
                         .refOriginator("CENTCOM")

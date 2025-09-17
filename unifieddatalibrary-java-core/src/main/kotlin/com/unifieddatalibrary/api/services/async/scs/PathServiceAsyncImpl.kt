@@ -33,6 +33,7 @@ class PathServiceAsyncImpl internal constructor(private val clientOptions: Clien
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): PathServiceAsync =
         PathServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    @Deprecated("deprecated")
     override fun createWithFile(
         params: PathCreateWithFileParams,
         requestOptions: RequestOptions,
@@ -55,6 +56,7 @@ class PathServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
         private val createWithFileHandler: Handler<String> = stringHandler()
 
+        @Deprecated("deprecated")
         override fun createWithFile(
             params: PathCreateWithFileParams,
             requestOptions: RequestOptions,

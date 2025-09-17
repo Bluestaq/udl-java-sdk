@@ -3,18 +3,6 @@
 package com.unifieddatalibrary.api.services.blocking.scs
 
 import com.unifieddatalibrary.api.core.ClientOptions
-import com.unifieddatalibrary.api.core.RequestOptions
-import com.unifieddatalibrary.api.core.handlers.errorBodyHandler
-import com.unifieddatalibrary.api.core.handlers.errorHandler
-import com.unifieddatalibrary.api.core.handlers.jsonHandler
-import com.unifieddatalibrary.api.core.http.HttpMethod
-import com.unifieddatalibrary.api.core.http.HttpRequest
-import com.unifieddatalibrary.api.core.http.HttpResponse
-import com.unifieddatalibrary.api.core.http.HttpResponse.Handler
-import com.unifieddatalibrary.api.core.http.HttpResponseFor
-import com.unifieddatalibrary.api.core.http.parseable
-import com.unifieddatalibrary.api.core.prepare
-import com.unifieddatalibrary.api.models.scs.rangeparameters.RangeParameterListParams
 import java.util.function.Consumer
 
 class RangeParameterServiceImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -29,18 +17,8 @@ class RangeParameterServiceImpl internal constructor(private val clientOptions: 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): RangeParameterService =
         RangeParameterServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-    override fun list(
-        params: RangeParameterListParams,
-        requestOptions: RequestOptions,
-    ): List<String> =
-        // get /scs/listRangeParameters
-        withRawResponse().list(params, requestOptions).parse()
-
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         RangeParameterService.WithRawResponse {
-
-        private val errorHandler: Handler<HttpResponse> =
-            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
         override fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
@@ -48,26 +26,5 @@ class RangeParameterServiceImpl internal constructor(private val clientOptions: 
             RangeParameterServiceImpl.WithRawResponseImpl(
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
-
-        private val listHandler: Handler<List<String>> =
-            jsonHandler<List<String>>(clientOptions.jsonMapper)
-
-        override fun list(
-            params: RangeParameterListParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<String>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("scs", "listRangeParameters")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { listHandler.handle(it) }
-            }
-        }
     }
 }

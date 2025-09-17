@@ -22,7 +22,7 @@ internal class EngineAbridgedTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         assertThat(engineAbridged.classificationMarking()).isEqualTo("U")
@@ -34,7 +34,7 @@ internal class EngineAbridgedTest {
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
         assertThat(engineAbridged.createdBy()).contains("some.user")
         assertThat(engineAbridged.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(engineAbridged.origNetwork()).contains("ORIG")
+        assertThat(engineAbridged.origNetwork()).contains("OPS1")
     }
 
     @Test
@@ -50,7 +50,7 @@ internal class EngineAbridgedTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         val roundtrippedEngineAbridged =

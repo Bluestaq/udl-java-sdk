@@ -34,7 +34,7 @@ internal class BeamcontourAbridgedTest {
                 )
                 .geographyType("ST_Polygon")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .regionName("Example region name")
                 .build()
 
@@ -61,7 +61,7 @@ internal class BeamcontourAbridgedTest {
             )
         assertThat(beamcontourAbridged.geographyType()).contains("ST_Polygon")
         assertThat(beamcontourAbridged.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(beamcontourAbridged.origNetwork()).contains("ORIG")
+        assertThat(beamcontourAbridged.origNetwork()).contains("OPS1")
         assertThat(beamcontourAbridged.regionName()).contains("Example region name")
     }
 
@@ -90,7 +90,7 @@ internal class BeamcontourAbridgedTest {
                 )
                 .geographyType("ST_Polygon")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .regionName("Example region name")
                 .build()
 

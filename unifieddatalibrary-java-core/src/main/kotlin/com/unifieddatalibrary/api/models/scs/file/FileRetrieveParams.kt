@@ -14,6 +14,7 @@ import kotlin.jvm.optionals.getOrNull
  * Returns a FileData object representing the file with the given ID that is visible to the calling
  * user.
  */
+@Deprecated("deprecated")
 class FileRetrieveParams
 private constructor(
     private val id: String,

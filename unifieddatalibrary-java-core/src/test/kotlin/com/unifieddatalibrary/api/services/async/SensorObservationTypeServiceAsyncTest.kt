@@ -49,20 +49,4 @@ internal class SensorObservationTypeServiceAsyncTest {
         val sensorObservationType = sensorObservationTypeFuture.get()
         sensorObservationType.validate()
     }
-
-    @Test
-    fun queryhelp() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val sensorObservationTypeServiceAsync = client.sensorObservationType()
-
-        val responseFuture = sensorObservationTypeServiceAsync.queryhelp()
-
-        val response = responseFuture.get()
-        response.validate()
-    }
 }

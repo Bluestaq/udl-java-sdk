@@ -21,7 +21,7 @@ internal class AntennaAbridgedTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         assertThat(antennaAbridged.dataMode()).isEqualTo(AntennaAbridged.DataMode.TEST)
@@ -32,7 +32,7 @@ internal class AntennaAbridgedTest {
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
         assertThat(antennaAbridged.createdBy()).contains("some.user")
         assertThat(antennaAbridged.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(antennaAbridged.origNetwork()).contains("ORIG")
+        assertThat(antennaAbridged.origNetwork()).contains("OPS1")
     }
 
     @Test
@@ -47,7 +47,7 @@ internal class AntennaAbridgedTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         val roundtrippedAntennaAbridged =

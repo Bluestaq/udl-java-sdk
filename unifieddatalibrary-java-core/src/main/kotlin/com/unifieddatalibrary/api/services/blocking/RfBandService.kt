@@ -35,9 +35,9 @@ interface RfBandService {
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): RfBandService
 
     /**
-     * Service operation to take a single RFBand as a POST body and ingest into the database. A
-     * specific role is required to perform this service operation. Please contact the UDL team for
-     * assistance.
+     * Service operation to take a single RFBand record as a POST body and ingest into the database.
+     * A specific role is required to perform this service operation. Please contact the UDL team
+     * for assistance.
      */
     fun create(params: RfBandCreateParams) = create(params, RequestOptions.none())
 
@@ -45,8 +45,8 @@ interface RfBandService {
     fun create(params: RfBandCreateParams, requestOptions: RequestOptions = RequestOptions.none())
 
     /**
-     * Service operation to update an RFBand. A specific role is required to perform this service
-     * operation. Please contact the UDL team for assistance.
+     * Service operation to update a single RFBand record. A specific role is required to perform
+     * this service operation. Please contact the UDL team for assistance.
      */
     fun update(pathId: String, params: RfBandUpdateParams) =
         update(pathId, params, RequestOptions.none())
@@ -86,8 +86,8 @@ interface RfBandService {
         list(RfBandListParams.none(), requestOptions)
 
     /**
-     * Service operation to delete an RFBand specified by the passed ID path parameter. A specific
-     * role is required to perform this service operation. Please contact the UDL team for
+     * Service operation to delete a RFBand record specified by the passed ID path parameter. A
+     * specific role is required to perform this service operation. Please contact the UDL team for
      * assistance.
      */
     fun delete(id: String) = delete(id, RfBandDeleteParams.none())
@@ -136,7 +136,9 @@ interface RfBandService {
     fun count(requestOptions: RequestOptions): String =
         count(RfBandCountParams.none(), requestOptions)
 
-    /** Service operation to get a single RFBand by its unique ID passed as a path parameter. */
+    /**
+     * Service operation to get a single RFBand record by its unique ID passed as a path parameter.
+     */
     fun get(id: String): RfBandFull = get(id, RfBandGetParams.none())
 
     /** @see get */

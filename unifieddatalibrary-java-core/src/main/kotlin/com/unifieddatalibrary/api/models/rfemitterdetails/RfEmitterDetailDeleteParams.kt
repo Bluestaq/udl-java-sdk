@@ -12,9 +12,9 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 /**
- * Service operation to delete an RFEmitterDetails specified by the passed ID path parameter. A
- * specific role is required to perform this service operation. Please contact the UDL team for
- * assistance.
+ * Service operation to delete a single RFEmitterDetails record specified by the passed ID path
+ * parameter. A specific role is required to perform this service operation. Please contact the UDL
+ * team for assistance.
  */
 class RfEmitterDetailDeleteParams
 private constructor(

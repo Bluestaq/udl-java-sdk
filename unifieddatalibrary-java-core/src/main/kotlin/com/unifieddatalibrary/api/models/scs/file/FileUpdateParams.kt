@@ -26,6 +26,7 @@ import kotlin.jvm.optionals.getOrNull
  * operation to update files metadata. A specific role is required to perform this service
  * operation. Please contact the UDL team for assistance.
  */
+@Deprecated("deprecated")
 class FileUpdateParams
 private constructor(
     private val body: Body,
@@ -239,6 +240,7 @@ private constructor(
 
     override fun _queryParams(): QueryParams = additionalQueryParams
 
+    @Deprecated("deprecated")
     class Body
     private constructor(
         private val fileDataList: JsonField<List<FileData>>,

@@ -21,7 +21,7 @@ internal class SolarArrayIngestTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         assertThat(solarArrayIngest.dataMode()).isEqualTo(SolarArrayIngest.DataMode.TEST)
@@ -32,7 +32,7 @@ internal class SolarArrayIngestTest {
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
         assertThat(solarArrayIngest.createdBy()).contains("some.user")
         assertThat(solarArrayIngest.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(solarArrayIngest.origNetwork()).contains("ORIG")
+        assertThat(solarArrayIngest.origNetwork()).contains("OPS1")
     }
 
     @Test
@@ -47,7 +47,7 @@ internal class SolarArrayIngestTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         val roundtrippedSolarArrayIngest =

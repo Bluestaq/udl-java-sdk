@@ -10,8 +10,6 @@ import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservation
 import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeGetResponse
 import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeListPage
 import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeListParams
-import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeQueryhelpParams
-import com.unifieddatalibrary.api.models.sensorobservationtype.SensorObservationTypeQueryhelpResponse
 import java.util.function.Consumer
 
 interface SensorObservationTypeService {
@@ -74,28 +72,6 @@ interface SensorObservationTypeService {
     /** @see get */
     fun get(id: String, requestOptions: RequestOptions): SensorObservationTypeGetResponse =
         get(id, SensorObservationTypeGetParams.none(), requestOptions)
-
-    /**
-     * Service operation to provide detailed information on available dynamic query parameters for a
-     * particular data type.
-     */
-    fun queryhelp(): SensorObservationTypeQueryhelpResponse =
-        queryhelp(SensorObservationTypeQueryhelpParams.none())
-
-    /** @see queryhelp */
-    fun queryhelp(
-        params: SensorObservationTypeQueryhelpParams = SensorObservationTypeQueryhelpParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): SensorObservationTypeQueryhelpResponse
-
-    /** @see queryhelp */
-    fun queryhelp(
-        params: SensorObservationTypeQueryhelpParams = SensorObservationTypeQueryhelpParams.none()
-    ): SensorObservationTypeQueryhelpResponse = queryhelp(params, RequestOptions.none())
-
-    /** @see queryhelp */
-    fun queryhelp(requestOptions: RequestOptions): SensorObservationTypeQueryhelpResponse =
-        queryhelp(SensorObservationTypeQueryhelpParams.none(), requestOptions)
 
     /**
      * A view of [SensorObservationTypeService] that provides access to raw HTTP responses for each
@@ -183,36 +159,5 @@ interface SensorObservationTypeService {
             requestOptions: RequestOptions,
         ): HttpResponseFor<SensorObservationTypeGetResponse> =
             get(id, SensorObservationTypeGetParams.none(), requestOptions)
-
-        /**
-         * Returns a raw HTTP response for `get /udl/sensorobservationtype/queryhelp`, but is
-         * otherwise the same as [SensorObservationTypeService.queryhelp].
-         */
-        @MustBeClosed
-        fun queryhelp(): HttpResponseFor<SensorObservationTypeQueryhelpResponse> =
-            queryhelp(SensorObservationTypeQueryhelpParams.none())
-
-        /** @see queryhelp */
-        @MustBeClosed
-        fun queryhelp(
-            params: SensorObservationTypeQueryhelpParams =
-                SensorObservationTypeQueryhelpParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<SensorObservationTypeQueryhelpResponse>
-
-        /** @see queryhelp */
-        @MustBeClosed
-        fun queryhelp(
-            params: SensorObservationTypeQueryhelpParams =
-                SensorObservationTypeQueryhelpParams.none()
-        ): HttpResponseFor<SensorObservationTypeQueryhelpResponse> =
-            queryhelp(params, RequestOptions.none())
-
-        /** @see queryhelp */
-        @MustBeClosed
-        fun queryhelp(
-            requestOptions: RequestOptions
-        ): HttpResponseFor<SensorObservationTypeQueryhelpResponse> =
-            queryhelp(SensorObservationTypeQueryhelpParams.none(), requestOptions)
     }
 }

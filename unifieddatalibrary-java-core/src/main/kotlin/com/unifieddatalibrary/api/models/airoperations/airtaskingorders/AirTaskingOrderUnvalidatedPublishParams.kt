@@ -248,7 +248,6 @@ private constructor(
         private val navalFltOps: JsonField<List<NavalFltOp>>,
         @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
         @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("rawFileURI") @ExcludeMissing private val rawFileUri: JsonField<String>,
         @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
     ) {
 
@@ -439,16 +438,6 @@ private constructor(
         fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
 
         /**
-         * Optional URI location in the document repository of the raw file parsed by the system to
-         * produce this record. To download the raw file, prepend
-         * https://udl-hostname/scs/download?id= to this value.
-         *
-         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
-         *   (e.g. if the server responded with an unexpected value).
-         */
-        fun rawFileUri(): Optional<String> = rawFileUri.getOptional("rawFileURI")
-
-        /**
          * The source data library from which this record was received. This could be a remote or
          * tactical UDL or another data library. If null, the record should be assumed to have
          * originated from the primary Enterprise UDL.
@@ -622,15 +611,6 @@ private constructor(
         fun _origNetwork(): JsonField<String> = origNetwork
 
         /**
-         * Returns the raw JSON value of [rawFileUri].
-         *
-         * Unlike [rawFileUri], this method doesn't throw if the JSON field has an unexpected type.
-         */
-        @JsonProperty("rawFileURI")
-        @ExcludeMissing
-        fun _rawFileUri(): JsonField<String> = rawFileUri
-
-        /**
          * Returns the raw JSON value of [sourceDl].
          *
          * Unlike [sourceDl], this method doesn't throw if the JSON field has an unexpected type.
@@ -679,7 +659,6 @@ private constructor(
             private var navalFltOps: JsonField<MutableList<NavalFltOp>>? = null
             private var origin: JsonField<String> = JsonMissing.of()
             private var origNetwork: JsonField<String> = JsonMissing.of()
-            private var rawFileUri: JsonField<String> = JsonMissing.of()
             private var sourceDl: JsonField<String> = JsonMissing.of()
 
             @JvmSynthetic
@@ -704,7 +683,6 @@ private constructor(
                 navalFltOps = body.navalFltOps.map { it.toMutableList() }
                 origin = body.origin
                 origNetwork = body.origNetwork
-                rawFileUri = body.rawFileUri
                 sourceDl = body.sourceDl
             }
 
@@ -1046,22 +1024,6 @@ private constructor(
             }
 
             /**
-             * Optional URI location in the document repository of the raw file parsed by the system
-             * to produce this record. To download the raw file, prepend
-             * https://udl-hostname/scs/download?id= to this value.
-             */
-            fun rawFileUri(rawFileUri: String) = rawFileUri(JsonField.of(rawFileUri))
-
-            /**
-             * Sets [Builder.rawFileUri] to an arbitrary JSON value.
-             *
-             * You should usually call [Builder.rawFileUri] with a well-typed [String] value
-             * instead. This method is primarily for setting the field to an undocumented or not yet
-             * supported value.
-             */
-            fun rawFileUri(rawFileUri: JsonField<String>) = apply { this.rawFileUri = rawFileUri }
-
-            /**
              * The source data library from which this record was received. This could be a remote
              * or tactical UDL or another data library. If null, the record should be assumed to
              * have originated from the primary Enterprise UDL.
@@ -1115,7 +1077,6 @@ private constructor(
                     (navalFltOps ?: JsonMissing.of()).map { it.toImmutable() },
                     origin,
                     origNetwork,
-                    rawFileUri,
                     sourceDl,
                 )
         }
@@ -1147,7 +1108,6 @@ private constructor(
             navalFltOps().ifPresent { it.forEach { it.validate() } }
             origin()
             origNetwork()
-            rawFileUri()
             sourceDl()
             validated = true
         }
@@ -1188,7 +1148,6 @@ private constructor(
                 (navalFltOps.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
                 (if (origin.asKnown().isPresent) 1 else 0) +
                 (if (origNetwork.asKnown().isPresent) 1 else 0) +
-                (if (rawFileUri.asKnown().isPresent) 1 else 0) +
                 (if (sourceDl.asKnown().isPresent) 1 else 0)
 
         /**
@@ -4477,7 +4436,6 @@ private constructor(
                 navalFltOps == other.navalFltOps &&
                 origin == other.origin &&
                 origNetwork == other.origNetwork &&
-                rawFileUri == other.rawFileUri &&
                 sourceDl == other.sourceDl
         }
 
@@ -4503,7 +4461,6 @@ private constructor(
                 navalFltOps,
                 origin,
                 origNetwork,
-                rawFileUri,
                 sourceDl,
             )
         }
@@ -4511,7 +4468,7 @@ private constructor(
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{beginTs=$beginTs, classificationMarking=$classificationMarking, dataMode=$dataMode, opExerName=$opExerName, source=$source, id=$id, ackReqInd=$ackReqInd, ackUnitInstructions=$ackUnitInstructions, acMsnTasking=$acMsnTasking, createdAt=$createdAt, createdBy=$createdBy, endTs=$endTs, genText=$genText, msgMonth=$msgMonth, msgOriginator=$msgOriginator, msgQualifier=$msgQualifier, msgSn=$msgSn, navalFltOps=$navalFltOps, origin=$origin, origNetwork=$origNetwork, rawFileUri=$rawFileUri, sourceDl=$sourceDl}"
+            "Body{beginTs=$beginTs, classificationMarking=$classificationMarking, dataMode=$dataMode, opExerName=$opExerName, source=$source, id=$id, ackReqInd=$ackReqInd, ackUnitInstructions=$ackUnitInstructions, acMsnTasking=$acMsnTasking, createdAt=$createdAt, createdBy=$createdBy, endTs=$endTs, genText=$genText, msgMonth=$msgMonth, msgOriginator=$msgOriginator, msgQualifier=$msgQualifier, msgSn=$msgSn, navalFltOps=$navalFltOps, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl}"
     }
 
     override fun equals(other: Any?): Boolean {

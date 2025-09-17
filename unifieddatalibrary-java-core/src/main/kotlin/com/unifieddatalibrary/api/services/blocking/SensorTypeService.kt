@@ -10,8 +10,6 @@ import com.unifieddatalibrary.api.models.sensortype.SensorTypeGetParams
 import com.unifieddatalibrary.api.models.sensortype.SensorTypeGetResponse
 import com.unifieddatalibrary.api.models.sensortype.SensorTypeListPage
 import com.unifieddatalibrary.api.models.sensortype.SensorTypeListParams
-import com.unifieddatalibrary.api.models.sensortype.SensorTypeQueryhelpParams
-import com.unifieddatalibrary.api.models.sensortype.SensorTypeQueryhelpResponse
 import java.util.function.Consumer
 
 interface SensorTypeService {
@@ -80,27 +78,6 @@ interface SensorTypeService {
     /** @see get */
     fun get(id: Int, requestOptions: RequestOptions): SensorTypeGetResponse =
         get(id, SensorTypeGetParams.none(), requestOptions)
-
-    /**
-     * Service operation to provide detailed information on available dynamic query parameters for a
-     * particular data type.
-     */
-    fun queryhelp(): SensorTypeQueryhelpResponse = queryhelp(SensorTypeQueryhelpParams.none())
-
-    /** @see queryhelp */
-    fun queryhelp(
-        params: SensorTypeQueryhelpParams = SensorTypeQueryhelpParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): SensorTypeQueryhelpResponse
-
-    /** @see queryhelp */
-    fun queryhelp(
-        params: SensorTypeQueryhelpParams = SensorTypeQueryhelpParams.none()
-    ): SensorTypeQueryhelpResponse = queryhelp(params, RequestOptions.none())
-
-    /** @see queryhelp */
-    fun queryhelp(requestOptions: RequestOptions): SensorTypeQueryhelpResponse =
-        queryhelp(SensorTypeQueryhelpParams.none(), requestOptions)
 
     /** A view of [SensorTypeService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -179,33 +156,5 @@ interface SensorTypeService {
         @MustBeClosed
         fun get(id: Int, requestOptions: RequestOptions): HttpResponseFor<SensorTypeGetResponse> =
             get(id, SensorTypeGetParams.none(), requestOptions)
-
-        /**
-         * Returns a raw HTTP response for `get /udl/sensortype/queryhelp`, but is otherwise the
-         * same as [SensorTypeService.queryhelp].
-         */
-        @MustBeClosed
-        fun queryhelp(): HttpResponseFor<SensorTypeQueryhelpResponse> =
-            queryhelp(SensorTypeQueryhelpParams.none())
-
-        /** @see queryhelp */
-        @MustBeClosed
-        fun queryhelp(
-            params: SensorTypeQueryhelpParams = SensorTypeQueryhelpParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<SensorTypeQueryhelpResponse>
-
-        /** @see queryhelp */
-        @MustBeClosed
-        fun queryhelp(
-            params: SensorTypeQueryhelpParams = SensorTypeQueryhelpParams.none()
-        ): HttpResponseFor<SensorTypeQueryhelpResponse> = queryhelp(params, RequestOptions.none())
-
-        /** @see queryhelp */
-        @MustBeClosed
-        fun queryhelp(
-            requestOptions: RequestOptions
-        ): HttpResponseFor<SensorTypeQueryhelpResponse> =
-            queryhelp(SensorTypeQueryhelpParams.none(), requestOptions)
     }
 }

@@ -10,7 +10,8 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 /**
- * Service operation to get a single RFEmitterDetails by its unique ID passed as a path parameter.
+ * Service operation to get a single RFEmitterDetails record by its unique ID passed as a path
+ * parameter.
  */
 class RfEmitterDetailGetParams
 private constructor(

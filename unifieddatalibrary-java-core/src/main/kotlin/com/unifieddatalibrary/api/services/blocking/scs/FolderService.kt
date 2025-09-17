@@ -31,18 +31,22 @@ interface FolderService {
      * Creates a new folder that is passed as part of the path. A specific role is required to
      * perform this service operation. Please contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun create(params: FolderCreateParams): String = create(params, RequestOptions.none())
 
     /** @see create */
+    @Deprecated("deprecated")
     fun create(
         params: FolderCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): String
 
     /** Returns a FileData object representing the folder ID that is visible to the calling user. */
+    @Deprecated("deprecated")
     fun retrieve(params: FolderRetrieveParams): FileData = retrieve(params, RequestOptions.none())
 
     /** @see retrieve */
+    @Deprecated("deprecated")
     fun retrieve(
         params: FolderRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -52,9 +56,11 @@ interface FolderService {
      * operation to update folders metadata. A specific role is required to perform this service
      * operation. Please contact the UDL team for assistance.
      */
+    @Deprecated("deprecated")
     fun update(params: FolderUpdateParams) = update(params, RequestOptions.none())
 
     /** @see update */
+    @Deprecated("deprecated")
     fun update(params: FolderUpdateParams, requestOptions: RequestOptions = RequestOptions.none())
 
     /** A view of [FolderService] that provides access to raw HTTP responses for each method. */
@@ -71,11 +77,13 @@ interface FolderService {
          * Returns a raw HTTP response for `post /scs/folder`, but is otherwise the same as
          * [FolderService.create].
          */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun create(params: FolderCreateParams): HttpResponseFor<String> =
             create(params, RequestOptions.none())
 
         /** @see create */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun create(
             params: FolderCreateParams,
@@ -86,11 +94,13 @@ interface FolderService {
          * Returns a raw HTTP response for `get /scs/folder`, but is otherwise the same as
          * [FolderService.retrieve].
          */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun retrieve(params: FolderRetrieveParams): HttpResponseFor<FileData> =
             retrieve(params, RequestOptions.none())
 
         /** @see retrieve */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun retrieve(
             params: FolderRetrieveParams,
@@ -101,10 +111,12 @@ interface FolderService {
          * Returns a raw HTTP response for `patch /scs/folder`, but is otherwise the same as
          * [FolderService.update].
          */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun update(params: FolderUpdateParams): HttpResponse = update(params, RequestOptions.none())
 
         /** @see update */
+        @Deprecated("deprecated")
         @MustBeClosed
         fun update(
             params: FolderUpdateParams,

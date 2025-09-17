@@ -14,6 +14,7 @@ import kotlin.jvm.optionals.getOrNull
  * Operation to upload a file. A specific role is required to perform this service operation. Please
  * contact the UDL team for assistance.
  */
+@Deprecated("deprecated")
 class ScFileUploadParams
 private constructor(
     private val classificationMarking: String,
@@ -29,13 +30,13 @@ private constructor(
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    /** Classification (ex. U//FOUO) */
+    /** Classification marking of the file being uploaded. */
     fun classificationMarking(): String = classificationMarking
 
-    /** FileName (ex. dog.jpg) */
+    /** Name of the file to upload. */
     fun fileName(): String = fileName
 
-    /** The base path to upload file (ex. images) */
+    /** The base path to upload file */
     fun path(): String = path
 
     /** Length of time after which to automatically delete the file. */
@@ -108,15 +109,15 @@ private constructor(
             additionalQueryParams = scFileUploadParams.additionalQueryParams.toBuilder()
         }
 
-        /** Classification (ex. U//FOUO) */
+        /** Classification marking of the file being uploaded. */
         fun classificationMarking(classificationMarking: String) = apply {
             this.classificationMarking = classificationMarking
         }
 
-        /** FileName (ex. dog.jpg) */
+        /** Name of the file to upload. */
         fun fileName(fileName: String) = apply { this.fileName = fileName }
 
-        /** The base path to upload file (ex. images) */
+        /** The base path to upload file */
         fun path(path: String) = apply { this.path = path }
 
         /** Length of time after which to automatically delete the file. */

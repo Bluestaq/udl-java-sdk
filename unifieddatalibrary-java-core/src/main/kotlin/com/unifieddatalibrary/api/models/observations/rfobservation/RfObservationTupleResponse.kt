@@ -79,7 +79,9 @@ private constructor(
     private val nominalPowerOverNoise: JsonField<Double>,
     private val nominalSnr: JsonField<Double>,
     private val onOrbit: JsonField<OnorbitFull>,
+    private val origCountry: JsonField<String>,
     private val origin: JsonField<String>,
+    private val origMarking: JsonField<String>,
     private val origNetwork: JsonField<String>,
     private val origObjectId: JsonField<String>,
     private val origSensorId: JsonField<String>,
@@ -223,7 +225,13 @@ private constructor(
         @ExcludeMissing
         nominalSnr: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("onOrbit") @ExcludeMissing onOrbit: JsonField<OnorbitFull> = JsonMissing.of(),
+        @JsonProperty("origCountry")
+        @ExcludeMissing
+        origCountry: JsonField<String> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origMarking")
+        @ExcludeMissing
+        origMarking: JsonField<String> = JsonMissing.of(),
         @JsonProperty("origNetwork")
         @ExcludeMissing
         origNetwork: JsonField<String> = JsonMissing.of(),
@@ -357,7 +365,9 @@ private constructor(
         nominalPowerOverNoise,
         nominalSnr,
         onOrbit,
+        origCountry,
         origin,
+        origMarking,
         origNetwork,
         origObjectId,
         origSensorId,
@@ -781,6 +791,14 @@ private constructor(
     fun onOrbit(): Optional<OnorbitFull> = onOrbit.getOptional("onOrbit")
 
     /**
+     * Country of origin in which the data was originally posted.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origCountry(): Optional<String> = origCountry.getOptional("origCountry")
+
+    /**
      * Originating system or organization which produced the data, if different from the source. The
      * origin may be different than the source if the source was a mediating system which forwarded
      * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
@@ -789,6 +807,14 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun origin(): Optional<String> = origin.getOptional("origin")
+
+    /**
+     * Original security marking that the data was marked with.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origMarking(): Optional<String> = origMarking.getOptional("origMarking")
 
     /**
      * The originating source network on which this record was created, auto-populated by the
@@ -1510,11 +1536,25 @@ private constructor(
     @JsonProperty("onOrbit") @ExcludeMissing fun _onOrbit(): JsonField<OnorbitFull> = onOrbit
 
     /**
+     * Returns the raw JSON value of [origCountry].
+     *
+     * Unlike [origCountry], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origCountry") @ExcludeMissing fun _origCountry(): JsonField<String> = origCountry
+
+    /**
      * Returns the raw JSON value of [origin].
      *
      * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+
+    /**
+     * Returns the raw JSON value of [origMarking].
+     *
+     * Unlike [origMarking], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origMarking") @ExcludeMissing fun _origMarking(): JsonField<String> = origMarking
 
     /**
      * Returns the raw JSON value of [origNetwork].
@@ -1926,7 +1966,9 @@ private constructor(
         private var nominalPowerOverNoise: JsonField<Double> = JsonMissing.of()
         private var nominalSnr: JsonField<Double> = JsonMissing.of()
         private var onOrbit: JsonField<OnorbitFull> = JsonMissing.of()
+        private var origCountry: JsonField<String> = JsonMissing.of()
         private var origin: JsonField<String> = JsonMissing.of()
+        private var origMarking: JsonField<String> = JsonMissing.of()
         private var origNetwork: JsonField<String> = JsonMissing.of()
         private var origObjectId: JsonField<String> = JsonMissing.of()
         private var origSensorId: JsonField<String> = JsonMissing.of()
@@ -2017,7 +2059,9 @@ private constructor(
             nominalPowerOverNoise = rfObservationTupleResponse.nominalPowerOverNoise
             nominalSnr = rfObservationTupleResponse.nominalSnr
             onOrbit = rfObservationTupleResponse.onOrbit
+            origCountry = rfObservationTupleResponse.origCountry
             origin = rfObservationTupleResponse.origin
+            origMarking = rfObservationTupleResponse.origMarking
             origNetwork = rfObservationTupleResponse.origNetwork
             origObjectId = rfObservationTupleResponse.origObjectId
             origSensorId = rfObservationTupleResponse.origSensorId
@@ -2664,6 +2708,18 @@ private constructor(
          */
         fun onOrbit(onOrbit: JsonField<OnorbitFull>) = apply { this.onOrbit = onOrbit }
 
+        /** Country of origin in which the data was originally posted. */
+        fun origCountry(origCountry: String) = origCountry(JsonField.of(origCountry))
+
+        /**
+         * Sets [Builder.origCountry] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origCountry] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun origCountry(origCountry: JsonField<String>) = apply { this.origCountry = origCountry }
+
         /**
          * Originating system or organization which produced the data, if different from the source.
          * The origin may be different than the source if the source was a mediating system which
@@ -2679,6 +2735,18 @@ private constructor(
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+
+        /** Original security marking that the data was marked with. */
+        fun origMarking(origMarking: String) = origMarking(JsonField.of(origMarking))
+
+        /**
+         * Sets [Builder.origMarking] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origMarking] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun origMarking(origMarking: JsonField<String>) = apply { this.origMarking = origMarking }
 
         /**
          * The originating source network on which this record was created, auto-populated by the
@@ -3362,7 +3430,9 @@ private constructor(
                 nominalPowerOverNoise,
                 nominalSnr,
                 onOrbit,
+                origCountry,
                 origin,
+                origMarking,
                 origNetwork,
                 origObjectId,
                 origSensorId,
@@ -3460,7 +3530,9 @@ private constructor(
         nominalPowerOverNoise()
         nominalSnr()
         onOrbit().ifPresent { it.validate() }
+        origCountry()
         origin()
+        origMarking()
         origNetwork()
         origObjectId()
         origSensorId()
@@ -3565,7 +3637,9 @@ private constructor(
             (if (nominalPowerOverNoise.asKnown().isPresent) 1 else 0) +
             (if (nominalSnr.asKnown().isPresent) 1 else 0) +
             (onOrbit.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (origCountry.asKnown().isPresent) 1 else 0) +
             (if (origin.asKnown().isPresent) 1 else 0) +
+            (if (origMarking.asKnown().isPresent) 1 else 0) +
             (if (origNetwork.asKnown().isPresent) 1 else 0) +
             (if (origObjectId.asKnown().isPresent) 1 else 0) +
             (if (origSensorId.asKnown().isPresent) 1 else 0) +
@@ -3960,7 +4034,9 @@ private constructor(
             nominalPowerOverNoise == other.nominalPowerOverNoise &&
             nominalSnr == other.nominalSnr &&
             onOrbit == other.onOrbit &&
+            origCountry == other.origCountry &&
             origin == other.origin &&
+            origMarking == other.origMarking &&
             origNetwork == other.origNetwork &&
             origObjectId == other.origObjectId &&
             origSensorId == other.origSensorId &&
@@ -4052,7 +4128,9 @@ private constructor(
             nominalPowerOverNoise,
             nominalSnr,
             onOrbit,
+            origCountry,
             origin,
+            origMarking,
             origNetwork,
             origObjectId,
             origSensorId,
@@ -4101,5 +4179,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "RfObservationTupleResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, type=$type, id=$id, antennaName=$antennaName, azimuth=$azimuth, azimuthMeasured=$azimuthMeasured, azimuthRate=$azimuthRate, azimuthUnc=$azimuthUnc, bandwidth=$bandwidth, baudRate=$baudRate, bitErrorRate=$bitErrorRate, carrierStandard=$carrierStandard, channel=$channel, collectionMode=$collectionMode, confidence=$confidence, createdAt=$createdAt, createdBy=$createdBy, descriptor=$descriptor, detectionStatus=$detectionStatus, eirp=$eirp, elevation=$elevation, elevationMeasured=$elevationMeasured, elevationRate=$elevationRate, elevationUnc=$elevationUnc, elnot=$elnot, endFrequency=$endFrequency, frequency=$frequency, frequencyShift=$frequencyShift, idOnOrbit=$idOnOrbit, idSensor=$idSensor, incoming=$incoming, innerCodingRate=$innerCodingRate, maxPsd=$maxPsd, minPsd=$minPsd, modulation=$modulation, noisePwrDensity=$noisePwrDensity, nominalBandwidth=$nominalBandwidth, nominalEirp=$nominalEirp, nominalFrequency=$nominalFrequency, nominalPowerOverNoise=$nominalPowerOverNoise, nominalSnr=$nominalSnr, onOrbit=$onOrbit, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, outerCodingRate=$outerCodingRate, peak=$peak, pgri=$pgri, polarity=$polarity, polarityType=$polarityType, powerOverNoise=$powerOverNoise, range=$range, rangeMeasured=$rangeMeasured, rangeRate=$rangeRate, rangeRateMeasured=$rangeRateMeasured, rangeRateUnc=$rangeRateUnc, rangeUnc=$rangeUnc, rawFileUri=$rawFileUri, referenceLevel=$referenceLevel, relativeCarrierPower=$relativeCarrierPower, relativeNoiseFloor=$relativeNoiseFloor, resolutionBandwidth=$resolutionBandwidth, satNo=$satNo, senalt=$senalt, senlat=$senlat, senlon=$senlon, snr=$snr, sourceDl=$sourceDl, spectrumAnalyzerPower=$spectrumAnalyzerPower, startFrequency=$startFrequency, switchPoint=$switchPoint, symbolToNoiseRatio=$symbolToNoiseRatio, tags=$tags, taskId=$taskId, trackId=$trackId, trackRange=$trackRange, transactionId=$transactionId, transmitFilterRollOff=$transmitFilterRollOff, transmitFilterType=$transmitFilterType, transponder=$transponder, uct=$uct, url=$url, videoBandwidth=$videoBandwidth, additionalProperties=$additionalProperties}"
+        "RfObservationTupleResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, type=$type, id=$id, antennaName=$antennaName, azimuth=$azimuth, azimuthMeasured=$azimuthMeasured, azimuthRate=$azimuthRate, azimuthUnc=$azimuthUnc, bandwidth=$bandwidth, baudRate=$baudRate, bitErrorRate=$bitErrorRate, carrierStandard=$carrierStandard, channel=$channel, collectionMode=$collectionMode, confidence=$confidence, createdAt=$createdAt, createdBy=$createdBy, descriptor=$descriptor, detectionStatus=$detectionStatus, eirp=$eirp, elevation=$elevation, elevationMeasured=$elevationMeasured, elevationRate=$elevationRate, elevationUnc=$elevationUnc, elnot=$elnot, endFrequency=$endFrequency, frequency=$frequency, frequencyShift=$frequencyShift, idOnOrbit=$idOnOrbit, idSensor=$idSensor, incoming=$incoming, innerCodingRate=$innerCodingRate, maxPsd=$maxPsd, minPsd=$minPsd, modulation=$modulation, noisePwrDensity=$noisePwrDensity, nominalBandwidth=$nominalBandwidth, nominalEirp=$nominalEirp, nominalFrequency=$nominalFrequency, nominalPowerOverNoise=$nominalPowerOverNoise, nominalSnr=$nominalSnr, onOrbit=$onOrbit, origCountry=$origCountry, origin=$origin, origMarking=$origMarking, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, outerCodingRate=$outerCodingRate, peak=$peak, pgri=$pgri, polarity=$polarity, polarityType=$polarityType, powerOverNoise=$powerOverNoise, range=$range, rangeMeasured=$rangeMeasured, rangeRate=$rangeRate, rangeRateMeasured=$rangeRateMeasured, rangeRateUnc=$rangeRateUnc, rangeUnc=$rangeUnc, rawFileUri=$rawFileUri, referenceLevel=$referenceLevel, relativeCarrierPower=$relativeCarrierPower, relativeNoiseFloor=$relativeNoiseFloor, resolutionBandwidth=$resolutionBandwidth, satNo=$satNo, senalt=$senalt, senlat=$senlat, senlon=$senlon, snr=$snr, sourceDl=$sourceDl, spectrumAnalyzerPower=$spectrumAnalyzerPower, startFrequency=$startFrequency, switchPoint=$switchPoint, symbolToNoiseRatio=$symbolToNoiseRatio, tags=$tags, taskId=$taskId, trackId=$trackId, trackRange=$trackRange, transactionId=$transactionId, transmitFilterRollOff=$transmitFilterRollOff, transmitFilterType=$transmitFilterType, transponder=$transponder, uct=$uct, url=$url, videoBandwidth=$videoBandwidth, additionalProperties=$additionalProperties}"
 }

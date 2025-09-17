@@ -82,7 +82,7 @@ internal class SigactListResponseTest {
                 .numMentions(8)
                 .numSources(8)
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .province("Province_Example")
                 .addRelatedDoc(
                     SigactListResponse.RelatedDoc.builder()
@@ -189,7 +189,7 @@ internal class SigactListResponseTest {
         assertThat(sigactListResponse.numMentions()).contains(8)
         assertThat(sigactListResponse.numSources()).contains(8)
         assertThat(sigactListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(sigactListResponse.origNetwork()).contains("ORIG")
+        assertThat(sigactListResponse.origNetwork()).contains("OPS1")
         assertThat(sigactListResponse.province()).contains("Province_Example")
         assertThat(sigactListResponse.relatedDocs().getOrNull())
             .containsExactly(
@@ -297,7 +297,7 @@ internal class SigactListResponseTest {
                 .numMentions(8)
                 .numSources(8)
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .province("Province_Example")
                 .addRelatedDoc(
                     SigactListResponse.RelatedDoc.builder()

@@ -24,7 +24,7 @@ internal class IrListResponseTest {
                 .description("Example description")
                 .idEntity("0167f577-e06c-358e-85aa-0a07a730bdd0")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         assertThat(irListResponse.classificationMarking()).isEqualTo("U")
@@ -38,7 +38,7 @@ internal class IrListResponseTest {
         assertThat(irListResponse.description()).contains("Example description")
         assertThat(irListResponse.idEntity()).contains("0167f577-e06c-358e-85aa-0a07a730bdd0")
         assertThat(irListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(irListResponse.origNetwork()).contains("ORIG")
+        assertThat(irListResponse.origNetwork()).contains("OPS1")
     }
 
     @Test
@@ -56,7 +56,7 @@ internal class IrListResponseTest {
                 .description("Example description")
                 .idEntity("0167f577-e06c-358e-85aa-0a07a730bdd0")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
 
         val roundtrippedIrListResponse =

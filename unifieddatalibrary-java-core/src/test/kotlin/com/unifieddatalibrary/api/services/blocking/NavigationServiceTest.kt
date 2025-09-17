@@ -105,7 +105,7 @@ internal class NavigationServiceTest {
                 )
                 .idEntity("0167f577-e06c-358e-85aa-0a07a730bdd0")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
         )
     }
@@ -197,7 +197,7 @@ internal class NavigationServiceTest {
                 )
                 .idEntity("0167f577-e06c-358e-85aa-0a07a730bdd0")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .build()
         )
     }

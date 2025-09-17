@@ -22,7 +22,7 @@ internal class LaunchVehicleListResponseTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .type("Example-vehicle-type")
                 .build()
 
@@ -36,7 +36,7 @@ internal class LaunchVehicleListResponseTest {
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
         assertThat(launchVehicleListResponse.createdBy()).contains("some.user")
         assertThat(launchVehicleListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(launchVehicleListResponse.origNetwork()).contains("ORIG")
+        assertThat(launchVehicleListResponse.origNetwork()).contains("OPS1")
         assertThat(launchVehicleListResponse.type()).contains("Example-vehicle-type")
     }
 
@@ -53,7 +53,7 @@ internal class LaunchVehicleListResponseTest {
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
                 .origin("THIRD_PARTY_DATASOURCE")
-                .origNetwork("ORIG")
+                .origNetwork("OPS1")
                 .type("Example-vehicle-type")
                 .build()
 
