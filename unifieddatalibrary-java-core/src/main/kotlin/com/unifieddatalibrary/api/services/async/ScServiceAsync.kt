@@ -17,13 +17,9 @@ import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
-import com.unifieddatalibrary.api.services.async.scs.ClassificationMarkingServiceAsync
-import com.unifieddatalibrary.api.services.async.scs.FileMetadataServiceAsync
 import com.unifieddatalibrary.api.services.async.scs.FileServiceAsync
 import com.unifieddatalibrary.api.services.async.scs.FolderServiceAsync
-import com.unifieddatalibrary.api.services.async.scs.GroupServiceAsync
 import com.unifieddatalibrary.api.services.async.scs.PathServiceAsync
-import com.unifieddatalibrary.api.services.async.scs.RangeParameterServiceAsync
 import com.unifieddatalibrary.api.services.async.scs.V2ServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
@@ -43,14 +39,6 @@ interface ScServiceAsync {
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScServiceAsync
 
     fun folders(): FolderServiceAsync
-
-    fun classificationMarkings(): ClassificationMarkingServiceAsync
-
-    fun groups(): GroupServiceAsync
-
-    fun fileMetadata(): FileMetadataServiceAsync
-
-    fun rangeParameters(): RangeParameterServiceAsync
 
     fun paths(): PathServiceAsync
 
@@ -227,14 +215,6 @@ interface ScServiceAsync {
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScServiceAsync.WithRawResponse
 
         fun folders(): FolderServiceAsync.WithRawResponse
-
-        fun classificationMarkings(): ClassificationMarkingServiceAsync.WithRawResponse
-
-        fun groups(): GroupServiceAsync.WithRawResponse
-
-        fun fileMetadata(): FileMetadataServiceAsync.WithRawResponse
-
-        fun rangeParameters(): RangeParameterServiceAsync.WithRawResponse
 
         fun paths(): PathServiceAsync.WithRawResponse
 

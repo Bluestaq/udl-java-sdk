@@ -8,14 +8,14 @@ import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class SensorMaintenanceCurrentResponseTest {
+internal class SensorMaintenanceListCurrentResponseTest {
 
     @Test
     fun create() {
-        val sensorMaintenanceCurrentResponse =
-            SensorMaintenanceCurrentResponse.builder()
+        val sensorMaintenanceListCurrentResponse =
+            SensorMaintenanceListCurrentResponse.builder()
                 .classificationMarking("U")
-                .dataMode(SensorMaintenanceCurrentResponse.DataMode.TEST)
+                .dataMode(SensorMaintenanceListCurrentResponse.DataMode.TEST)
                 .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                 .siteCode("site01")
                 .source("Bluestaq")
@@ -49,54 +49,54 @@ internal class SensorMaintenanceCurrentResponseTest {
                 .updatedBy("some.user")
                 .build()
 
-        assertThat(sensorMaintenanceCurrentResponse.classificationMarking()).isEqualTo("U")
-        assertThat(sensorMaintenanceCurrentResponse.dataMode())
-            .isEqualTo(SensorMaintenanceCurrentResponse.DataMode.TEST)
-        assertThat(sensorMaintenanceCurrentResponse.endTime())
+        assertThat(sensorMaintenanceListCurrentResponse.classificationMarking()).isEqualTo("U")
+        assertThat(sensorMaintenanceListCurrentResponse.dataMode())
+            .isEqualTo(SensorMaintenanceListCurrentResponse.DataMode.TEST)
+        assertThat(sensorMaintenanceListCurrentResponse.endTime())
             .isEqualTo(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
-        assertThat(sensorMaintenanceCurrentResponse.siteCode()).isEqualTo("site01")
-        assertThat(sensorMaintenanceCurrentResponse.source()).isEqualTo("Bluestaq")
-        assertThat(sensorMaintenanceCurrentResponse.startTime())
+        assertThat(sensorMaintenanceListCurrentResponse.siteCode()).isEqualTo("site01")
+        assertThat(sensorMaintenanceListCurrentResponse.source()).isEqualTo("Bluestaq")
+        assertThat(sensorMaintenanceListCurrentResponse.startTime())
             .isEqualTo(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
-        assertThat(sensorMaintenanceCurrentResponse.id()).contains("SENSORMAINTENANCE-ID")
-        assertThat(sensorMaintenanceCurrentResponse.activity()).contains("Activity Description")
-        assertThat(sensorMaintenanceCurrentResponse.approver()).contains("approver")
-        assertThat(sensorMaintenanceCurrentResponse.changer()).contains("changer")
-        assertThat(sensorMaintenanceCurrentResponse.createdAt())
+        assertThat(sensorMaintenanceListCurrentResponse.id()).contains("SENSORMAINTENANCE-ID")
+        assertThat(sensorMaintenanceListCurrentResponse.activity()).contains("Activity Description")
+        assertThat(sensorMaintenanceListCurrentResponse.approver()).contains("approver")
+        assertThat(sensorMaintenanceListCurrentResponse.changer()).contains("changer")
+        assertThat(sensorMaintenanceListCurrentResponse.createdAt())
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(sensorMaintenanceCurrentResponse.createdBy()).contains("some.user")
-        assertThat(sensorMaintenanceCurrentResponse.duration()).contains("128:16:52")
-        assertThat(sensorMaintenanceCurrentResponse.eowId()).contains("eowId")
-        assertThat(sensorMaintenanceCurrentResponse.equipStatus()).contains("FMC")
-        assertThat(sensorMaintenanceCurrentResponse.idSensor()).contains("idSensor")
-        assertThat(sensorMaintenanceCurrentResponse.impactedFaces()).contains("impactedFaces")
-        assertThat(sensorMaintenanceCurrentResponse.inactiveDate())
+        assertThat(sensorMaintenanceListCurrentResponse.createdBy()).contains("some.user")
+        assertThat(sensorMaintenanceListCurrentResponse.duration()).contains("128:16:52")
+        assertThat(sensorMaintenanceListCurrentResponse.eowId()).contains("eowId")
+        assertThat(sensorMaintenanceListCurrentResponse.equipStatus()).contains("FMC")
+        assertThat(sensorMaintenanceListCurrentResponse.idSensor()).contains("idSensor")
+        assertThat(sensorMaintenanceListCurrentResponse.impactedFaces()).contains("impactedFaces")
+        assertThat(sensorMaintenanceListCurrentResponse.inactiveDate())
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(sensorMaintenanceCurrentResponse.lineNumber()).contains("lineNumber")
-        assertThat(sensorMaintenanceCurrentResponse.mdOpsCap()).contains("R")
-        assertThat(sensorMaintenanceCurrentResponse.mwOpsCap()).contains("G")
-        assertThat(sensorMaintenanceCurrentResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(sensorMaintenanceCurrentResponse.origNetwork()).contains("OPS1")
-        assertThat(sensorMaintenanceCurrentResponse.priority()).contains("low")
-        assertThat(sensorMaintenanceCurrentResponse.recall()).contains("128:16:52")
-        assertThat(sensorMaintenanceCurrentResponse.rel()).contains("rel")
-        assertThat(sensorMaintenanceCurrentResponse.remark()).contains("Remarks")
-        assertThat(sensorMaintenanceCurrentResponse.requestor()).contains("requestor")
-        assertThat(sensorMaintenanceCurrentResponse.resource()).contains("resource")
-        assertThat(sensorMaintenanceCurrentResponse.rev()).contains("rev")
-        assertThat(sensorMaintenanceCurrentResponse.ssOpsCap()).contains("Y")
-        assertThat(sensorMaintenanceCurrentResponse.updatedAt())
+        assertThat(sensorMaintenanceListCurrentResponse.lineNumber()).contains("lineNumber")
+        assertThat(sensorMaintenanceListCurrentResponse.mdOpsCap()).contains("R")
+        assertThat(sensorMaintenanceListCurrentResponse.mwOpsCap()).contains("G")
+        assertThat(sensorMaintenanceListCurrentResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
+        assertThat(sensorMaintenanceListCurrentResponse.origNetwork()).contains("OPS1")
+        assertThat(sensorMaintenanceListCurrentResponse.priority()).contains("low")
+        assertThat(sensorMaintenanceListCurrentResponse.recall()).contains("128:16:52")
+        assertThat(sensorMaintenanceListCurrentResponse.rel()).contains("rel")
+        assertThat(sensorMaintenanceListCurrentResponse.remark()).contains("Remarks")
+        assertThat(sensorMaintenanceListCurrentResponse.requestor()).contains("requestor")
+        assertThat(sensorMaintenanceListCurrentResponse.resource()).contains("resource")
+        assertThat(sensorMaintenanceListCurrentResponse.rev()).contains("rev")
+        assertThat(sensorMaintenanceListCurrentResponse.ssOpsCap()).contains("Y")
+        assertThat(sensorMaintenanceListCurrentResponse.updatedAt())
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(sensorMaintenanceCurrentResponse.updatedBy()).contains("some.user")
+        assertThat(sensorMaintenanceListCurrentResponse.updatedBy()).contains("some.user")
     }
 
     @Test
     fun roundtrip() {
         val jsonMapper = jsonMapper()
-        val sensorMaintenanceCurrentResponse =
-            SensorMaintenanceCurrentResponse.builder()
+        val sensorMaintenanceListCurrentResponse =
+            SensorMaintenanceListCurrentResponse.builder()
                 .classificationMarking("U")
-                .dataMode(SensorMaintenanceCurrentResponse.DataMode.TEST)
+                .dataMode(SensorMaintenanceListCurrentResponse.DataMode.TEST)
                 .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                 .siteCode("site01")
                 .source("Bluestaq")
@@ -130,13 +130,13 @@ internal class SensorMaintenanceCurrentResponseTest {
                 .updatedBy("some.user")
                 .build()
 
-        val roundtrippedSensorMaintenanceCurrentResponse =
+        val roundtrippedSensorMaintenanceListCurrentResponse =
             jsonMapper.readValue(
-                jsonMapper.writeValueAsString(sensorMaintenanceCurrentResponse),
-                jacksonTypeRef<SensorMaintenanceCurrentResponse>(),
+                jsonMapper.writeValueAsString(sensorMaintenanceListCurrentResponse),
+                jacksonTypeRef<SensorMaintenanceListCurrentResponse>(),
             )
 
-        assertThat(roundtrippedSensorMaintenanceCurrentResponse)
-            .isEqualTo(sensorMaintenanceCurrentResponse)
+        assertThat(roundtrippedSensorMaintenanceListCurrentResponse)
+            .isEqualTo(sensorMaintenanceListCurrentResponse)
     }
 }

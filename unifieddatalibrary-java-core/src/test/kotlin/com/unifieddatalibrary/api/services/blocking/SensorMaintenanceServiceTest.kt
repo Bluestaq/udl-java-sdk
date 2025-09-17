@@ -7,7 +7,6 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCountParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCreateBulkParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCreateParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCurrentParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceGetParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceTupleParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceUpdateParams
@@ -215,24 +214,6 @@ internal class SensorMaintenanceServiceTest {
     }
 
     @Test
-    fun current() {
-        val client =
-            UnifieddatalibraryOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val sensorMaintenanceService = client.sensorMaintenance()
-
-        val response =
-            sensorMaintenanceService.current(
-                SensorMaintenanceCurrentParams.builder().firstResult(0L).maxResults(0L).build()
-            )
-
-        response.forEach { it.validate() }
-    }
-
-    @Test
     fun get() {
         val client =
             UnifieddatalibraryOkHttpClient.builder()
@@ -248,6 +229,21 @@ internal class SensorMaintenanceServiceTest {
             )
 
         sensorMaintenance.validate()
+    }
+
+    @Test
+    fun listCurrent() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val sensorMaintenanceService = client.sensorMaintenance()
+
+        val page = sensorMaintenanceService.listCurrent()
+
+        page.items().forEach { it.validate() }
     }
 
     @Test

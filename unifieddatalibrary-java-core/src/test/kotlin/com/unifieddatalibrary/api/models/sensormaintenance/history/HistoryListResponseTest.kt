@@ -8,14 +8,14 @@ import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class HistoryRetrieveResponseTest {
+internal class HistoryListResponseTest {
 
     @Test
     fun create() {
-        val historyRetrieveResponse =
-            HistoryRetrieveResponse.builder()
+        val historyListResponse =
+            HistoryListResponse.builder()
                 .classificationMarking("U")
-                .dataMode(HistoryRetrieveResponse.DataMode.TEST)
+                .dataMode(HistoryListResponse.DataMode.TEST)
                 .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                 .siteCode("site01")
                 .source("Bluestaq")
@@ -49,54 +49,53 @@ internal class HistoryRetrieveResponseTest {
                 .updatedBy("some.user")
                 .build()
 
-        assertThat(historyRetrieveResponse.classificationMarking()).isEqualTo("U")
-        assertThat(historyRetrieveResponse.dataMode())
-            .isEqualTo(HistoryRetrieveResponse.DataMode.TEST)
-        assertThat(historyRetrieveResponse.endTime())
+        assertThat(historyListResponse.classificationMarking()).isEqualTo("U")
+        assertThat(historyListResponse.dataMode()).isEqualTo(HistoryListResponse.DataMode.TEST)
+        assertThat(historyListResponse.endTime())
             .isEqualTo(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
-        assertThat(historyRetrieveResponse.siteCode()).isEqualTo("site01")
-        assertThat(historyRetrieveResponse.source()).isEqualTo("Bluestaq")
-        assertThat(historyRetrieveResponse.startTime())
+        assertThat(historyListResponse.siteCode()).isEqualTo("site01")
+        assertThat(historyListResponse.source()).isEqualTo("Bluestaq")
+        assertThat(historyListResponse.startTime())
             .isEqualTo(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
-        assertThat(historyRetrieveResponse.id()).contains("SENSORMAINTENANCE-ID")
-        assertThat(historyRetrieveResponse.activity()).contains("Activity Description")
-        assertThat(historyRetrieveResponse.approver()).contains("approver")
-        assertThat(historyRetrieveResponse.changer()).contains("changer")
-        assertThat(historyRetrieveResponse.createdAt())
+        assertThat(historyListResponse.id()).contains("SENSORMAINTENANCE-ID")
+        assertThat(historyListResponse.activity()).contains("Activity Description")
+        assertThat(historyListResponse.approver()).contains("approver")
+        assertThat(historyListResponse.changer()).contains("changer")
+        assertThat(historyListResponse.createdAt())
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(historyRetrieveResponse.createdBy()).contains("some.user")
-        assertThat(historyRetrieveResponse.duration()).contains("128:16:52")
-        assertThat(historyRetrieveResponse.eowId()).contains("eowId")
-        assertThat(historyRetrieveResponse.equipStatus()).contains("FMC")
-        assertThat(historyRetrieveResponse.idSensor()).contains("idSensor")
-        assertThat(historyRetrieveResponse.impactedFaces()).contains("impactedFaces")
-        assertThat(historyRetrieveResponse.inactiveDate())
+        assertThat(historyListResponse.createdBy()).contains("some.user")
+        assertThat(historyListResponse.duration()).contains("128:16:52")
+        assertThat(historyListResponse.eowId()).contains("eowId")
+        assertThat(historyListResponse.equipStatus()).contains("FMC")
+        assertThat(historyListResponse.idSensor()).contains("idSensor")
+        assertThat(historyListResponse.impactedFaces()).contains("impactedFaces")
+        assertThat(historyListResponse.inactiveDate())
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(historyRetrieveResponse.lineNumber()).contains("lineNumber")
-        assertThat(historyRetrieveResponse.mdOpsCap()).contains("R")
-        assertThat(historyRetrieveResponse.mwOpsCap()).contains("G")
-        assertThat(historyRetrieveResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(historyRetrieveResponse.origNetwork()).contains("OPS1")
-        assertThat(historyRetrieveResponse.priority()).contains("low")
-        assertThat(historyRetrieveResponse.recall()).contains("128:16:52")
-        assertThat(historyRetrieveResponse.rel()).contains("rel")
-        assertThat(historyRetrieveResponse.remark()).contains("Remarks")
-        assertThat(historyRetrieveResponse.requestor()).contains("requestor")
-        assertThat(historyRetrieveResponse.resource()).contains("resource")
-        assertThat(historyRetrieveResponse.rev()).contains("rev")
-        assertThat(historyRetrieveResponse.ssOpsCap()).contains("Y")
-        assertThat(historyRetrieveResponse.updatedAt())
+        assertThat(historyListResponse.lineNumber()).contains("lineNumber")
+        assertThat(historyListResponse.mdOpsCap()).contains("R")
+        assertThat(historyListResponse.mwOpsCap()).contains("G")
+        assertThat(historyListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
+        assertThat(historyListResponse.origNetwork()).contains("OPS1")
+        assertThat(historyListResponse.priority()).contains("low")
+        assertThat(historyListResponse.recall()).contains("128:16:52")
+        assertThat(historyListResponse.rel()).contains("rel")
+        assertThat(historyListResponse.remark()).contains("Remarks")
+        assertThat(historyListResponse.requestor()).contains("requestor")
+        assertThat(historyListResponse.resource()).contains("resource")
+        assertThat(historyListResponse.rev()).contains("rev")
+        assertThat(historyListResponse.ssOpsCap()).contains("Y")
+        assertThat(historyListResponse.updatedAt())
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(historyRetrieveResponse.updatedBy()).contains("some.user")
+        assertThat(historyListResponse.updatedBy()).contains("some.user")
     }
 
     @Test
     fun roundtrip() {
         val jsonMapper = jsonMapper()
-        val historyRetrieveResponse =
-            HistoryRetrieveResponse.builder()
+        val historyListResponse =
+            HistoryListResponse.builder()
                 .classificationMarking("U")
-                .dataMode(HistoryRetrieveResponse.DataMode.TEST)
+                .dataMode(HistoryListResponse.DataMode.TEST)
                 .endTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                 .siteCode("site01")
                 .source("Bluestaq")
@@ -130,12 +129,12 @@ internal class HistoryRetrieveResponseTest {
                 .updatedBy("some.user")
                 .build()
 
-        val roundtrippedHistoryRetrieveResponse =
+        val roundtrippedHistoryListResponse =
             jsonMapper.readValue(
-                jsonMapper.writeValueAsString(historyRetrieveResponse),
-                jacksonTypeRef<HistoryRetrieveResponse>(),
+                jsonMapper.writeValueAsString(historyListResponse),
+                jacksonTypeRef<HistoryListResponse>(),
             )
 
-        assertThat(roundtrippedHistoryRetrieveResponse).isEqualTo(historyRetrieveResponse)
+        assertThat(roundtrippedHistoryListResponse).isEqualTo(historyListResponse)
     }
 }

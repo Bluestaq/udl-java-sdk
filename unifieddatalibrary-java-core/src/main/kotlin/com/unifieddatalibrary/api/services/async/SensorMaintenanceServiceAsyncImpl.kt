@@ -21,11 +21,12 @@ import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCountParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCreateBulkParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCreateParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCurrentParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCurrentResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceDeleteParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceGetParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceGetResponse
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListCurrentPageAsync
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListCurrentParams
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListCurrentResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListPageAsync
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListResponse
@@ -100,19 +101,19 @@ internal constructor(private val clientOptions: ClientOptions) : SensorMaintenan
         // post /udl/sensormaintenance/createBulk
         withRawResponse().createBulk(params, requestOptions).thenAccept {}
 
-    override fun current(
-        params: SensorMaintenanceCurrentParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<List<SensorMaintenanceCurrentResponse>> =
-        // get /udl/sensormaintenance/current
-        withRawResponse().current(params, requestOptions).thenApply { it.parse() }
-
     override fun get(
         params: SensorMaintenanceGetParams,
         requestOptions: RequestOptions,
     ): CompletableFuture<SensorMaintenanceGetResponse> =
         // get /udl/sensormaintenance/{id}
         withRawResponse().get(params, requestOptions).thenApply { it.parse() }
+
+    override fun listCurrent(
+        params: SensorMaintenanceListCurrentParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<SensorMaintenanceListCurrentPageAsync> =
+        // get /udl/sensormaintenance/current
+        withRawResponse().listCurrent(params, requestOptions).thenApply { it.parse() }
 
     override fun queryhelp(
         params: SensorMaintenanceQueryhelpParams,
@@ -310,36 +311,6 @@ internal constructor(private val clientOptions: ClientOptions) : SensorMaintenan
                 }
         }
 
-        private val currentHandler: Handler<List<SensorMaintenanceCurrentResponse>> =
-            jsonHandler<List<SensorMaintenanceCurrentResponse>>(clientOptions.jsonMapper)
-
-        override fun current(
-            params: SensorMaintenanceCurrentParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<List<SensorMaintenanceCurrentResponse>>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "sensormaintenance", "current")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response
-                            .use { currentHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.forEach { it.validate() }
-                                }
-                            }
-                    }
-                }
-        }
-
         private val getHandler: Handler<SensorMaintenanceGetResponse> =
             jsonHandler<SensorMaintenanceGetResponse>(clientOptions.jsonMapper)
 
@@ -368,6 +339,44 @@ internal constructor(private val clientOptions: ClientOptions) : SensorMaintenan
                                 if (requestOptions.responseValidation!!) {
                                     it.validate()
                                 }
+                            }
+                    }
+                }
+        }
+
+        private val listCurrentHandler: Handler<List<SensorMaintenanceListCurrentResponse>> =
+            jsonHandler<List<SensorMaintenanceListCurrentResponse>>(clientOptions.jsonMapper)
+
+        override fun listCurrent(
+            params: SensorMaintenanceListCurrentParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<SensorMaintenanceListCurrentPageAsync>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "sensormaintenance", "current")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response
+                            .use { listCurrentHandler.handle(it) }
+                            .also {
+                                if (requestOptions.responseValidation!!) {
+                                    it.forEach { it.validate() }
+                                }
+                            }
+                            .let {
+                                SensorMaintenanceListCurrentPageAsync.builder()
+                                    .service(SensorMaintenanceServiceAsyncImpl(clientOptions))
+                                    .streamHandlerExecutor(clientOptions.streamHandlerExecutor)
+                                    .params(params)
+                                    .items(it)
+                                    .build()
                             }
                     }
                 }

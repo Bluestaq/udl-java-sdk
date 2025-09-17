@@ -6,16 +6,17 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class SensorMaintenanceCurrentParamsTest {
+internal class SensorMaintenanceListCurrentParamsTest {
 
     @Test
     fun create() {
-        SensorMaintenanceCurrentParams.builder().firstResult(0L).maxResults(0L).build()
+        SensorMaintenanceListCurrentParams.builder().firstResult(0L).maxResults(0L).build()
     }
 
     @Test
     fun queryParams() {
-        val params = SensorMaintenanceCurrentParams.builder().firstResult(0L).maxResults(0L).build()
+        val params =
+            SensorMaintenanceListCurrentParams.builder().firstResult(0L).maxResults(0L).build()
 
         val queryParams = params._queryParams()
 
@@ -25,7 +26,7 @@ internal class SensorMaintenanceCurrentParamsTest {
 
     @Test
     fun queryParamsWithoutOptionalFields() {
-        val params = SensorMaintenanceCurrentParams.builder().build()
+        val params = SensorMaintenanceListCurrentParams.builder().build()
 
         val queryParams = params._queryParams()
 

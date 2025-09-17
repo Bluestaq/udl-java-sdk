@@ -27,7 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * planId (UUID) being included in all of the subordinate records, enabling resolution back to the
  * parent.
  */
-class HistoryRetrieveResponse
+class HistoryListResponse
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -541,7 +541,7 @@ private constructor(
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of [HistoryRetrieveResponse].
+         * Returns a mutable builder for constructing an instance of [HistoryListResponse].
          *
          * The following fields are required:
          * ```java
@@ -556,7 +556,7 @@ private constructor(
         @JvmStatic fun builder() = Builder()
     }
 
-    /** A builder for [HistoryRetrieveResponse]. */
+    /** A builder for [HistoryListResponse]. */
     class Builder internal constructor() {
 
         private var classificationMarking: JsonField<String>? = null
@@ -586,32 +586,32 @@ private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(historyRetrieveResponse: HistoryRetrieveResponse) = apply {
-            classificationMarking = historyRetrieveResponse.classificationMarking
-            dataMode = historyRetrieveResponse.dataMode
-            recType = historyRetrieveResponse.recType
-            source = historyRetrieveResponse.source
-            startTime = historyRetrieveResponse.startTime
-            type = historyRetrieveResponse.type
-            id = historyRetrieveResponse.id
-            collectRequests = historyRetrieveResponse.collectRequests.map { it.toMutableList() }
-            createdAt = historyRetrieveResponse.createdAt
-            createdBy = historyRetrieveResponse.createdBy
-            customer = historyRetrieveResponse.customer
-            endTime = historyRetrieveResponse.endTime
-            idSensor = historyRetrieveResponse.idSensor
-            name = historyRetrieveResponse.name
-            origin = historyRetrieveResponse.origin
-            origNetwork = historyRetrieveResponse.origNetwork
-            origSensorId = historyRetrieveResponse.origSensorId
-            purpose = historyRetrieveResponse.purpose
-            reqTotal = historyRetrieveResponse.reqTotal
-            senNetwork = historyRetrieveResponse.senNetwork
-            status = historyRetrieveResponse.status
-            tags = historyRetrieveResponse.tags.map { it.toMutableList() }
-            updatedAt = historyRetrieveResponse.updatedAt
-            updatedBy = historyRetrieveResponse.updatedBy
-            additionalProperties = historyRetrieveResponse.additionalProperties.toMutableMap()
+        internal fun from(historyListResponse: HistoryListResponse) = apply {
+            classificationMarking = historyListResponse.classificationMarking
+            dataMode = historyListResponse.dataMode
+            recType = historyListResponse.recType
+            source = historyListResponse.source
+            startTime = historyListResponse.startTime
+            type = historyListResponse.type
+            id = historyListResponse.id
+            collectRequests = historyListResponse.collectRequests.map { it.toMutableList() }
+            createdAt = historyListResponse.createdAt
+            createdBy = historyListResponse.createdBy
+            customer = historyListResponse.customer
+            endTime = historyListResponse.endTime
+            idSensor = historyListResponse.idSensor
+            name = historyListResponse.name
+            origin = historyListResponse.origin
+            origNetwork = historyListResponse.origNetwork
+            origSensorId = historyListResponse.origSensorId
+            purpose = historyListResponse.purpose
+            reqTotal = historyListResponse.reqTotal
+            senNetwork = historyListResponse.senNetwork
+            status = historyListResponse.status
+            tags = historyListResponse.tags.map { it.toMutableList() }
+            updatedAt = historyListResponse.updatedAt
+            updatedBy = historyListResponse.updatedBy
+            additionalProperties = historyListResponse.additionalProperties.toMutableMap()
         }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -985,7 +985,7 @@ private constructor(
         }
 
         /**
-         * Returns an immutable instance of [HistoryRetrieveResponse].
+         * Returns an immutable instance of [HistoryListResponse].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
          *
@@ -1001,8 +1001,8 @@ private constructor(
          *
          * @throws IllegalStateException if any required field is unset.
          */
-        fun build(): HistoryRetrieveResponse =
-            HistoryRetrieveResponse(
+        fun build(): HistoryListResponse =
+            HistoryListResponse(
                 checkRequired("classificationMarking", classificationMarking),
                 checkRequired("dataMode", dataMode),
                 checkRequired("recType", recType),
@@ -1033,7 +1033,7 @@ private constructor(
 
     private var validated: Boolean = false
 
-    fun validate(): HistoryRetrieveResponse = apply {
+    fun validate(): HistoryListResponse = apply {
         if (validated) {
             return@apply
         }
@@ -13751,7 +13751,7 @@ private constructor(
             return true
         }
 
-        return other is HistoryRetrieveResponse &&
+        return other is HistoryListResponse &&
             classificationMarking == other.classificationMarking &&
             dataMode == other.dataMode &&
             recType == other.recType &&
@@ -13812,5 +13812,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "HistoryRetrieveResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, recType=$recType, source=$source, startTime=$startTime, type=$type, id=$id, collectRequests=$collectRequests, createdAt=$createdAt, createdBy=$createdBy, customer=$customer, endTime=$endTime, idSensor=$idSensor, name=$name, origin=$origin, origNetwork=$origNetwork, origSensorId=$origSensorId, purpose=$purpose, reqTotal=$reqTotal, senNetwork=$senNetwork, status=$status, tags=$tags, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
+        "HistoryListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, recType=$recType, source=$source, startTime=$startTime, type=$type, id=$id, collectRequests=$collectRequests, createdAt=$createdAt, createdBy=$createdBy, customer=$customer, endTime=$endTime, idSensor=$idSensor, name=$name, origin=$origin, origNetwork=$origNetwork, origSensorId=$origSensorId, purpose=$purpose, reqTotal=$reqTotal, senNetwork=$senNetwork, status=$status, tags=$tags, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
 }

@@ -1,25 +1,43 @@
 // File generated from our OpenAPI spec by Stainless.
 
-package com.unifieddatalibrary.api.models.sensormaintenance
+package com.unifieddatalibrary.api.models.sensorplan.history
 
 import com.unifieddatalibrary.api.core.Params
+import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
 import com.unifieddatalibrary.api.core.http.QueryParams
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 /**
- * Service operation to get current Sensor Maintenance records using any number of additional
- * parameters.
+ * Service operation to dynamically query historical data by a variety of query parameters not
+ * specified in this API documentation. See the queryhelp operation
+ * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information.
  */
-class SensorMaintenanceCurrentParams
+class HistoryListParams
 private constructor(
+    private val startTime: OffsetDateTime,
+    private val columns: String?,
     private val firstResult: Long?,
     private val maxResults: Long?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
+
+    /**
+     * The start time of the plan or schedule, in ISO 8601 UTC format. (YYYY-MM-DDTHH:MM:SS.ssssssZ)
+     */
+    fun startTime(): OffsetDateTime = startTime
+
+    /**
+     * optional, fields for retrieval. When omitted, ALL fields are assumed. See the queryhelp
+     * operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid query fields that can
+     * be selected.
+     */
+    fun columns(): Optional<String> = Optional.ofNullable(columns)
 
     fun firstResult(): Optional<Long> = Optional.ofNullable(firstResult)
 
@@ -35,30 +53,52 @@ private constructor(
 
     companion object {
 
-        @JvmStatic fun none(): SensorMaintenanceCurrentParams = builder().build()
-
         /**
-         * Returns a mutable builder for constructing an instance of
-         * [SensorMaintenanceCurrentParams].
+         * Returns a mutable builder for constructing an instance of [HistoryListParams].
+         *
+         * The following fields are required:
+         * ```java
+         * .startTime()
+         * ```
          */
         @JvmStatic fun builder() = Builder()
     }
 
-    /** A builder for [SensorMaintenanceCurrentParams]. */
+    /** A builder for [HistoryListParams]. */
     class Builder internal constructor() {
 
+        private var startTime: OffsetDateTime? = null
+        private var columns: String? = null
         private var firstResult: Long? = null
         private var maxResults: Long? = null
         private var additionalHeaders: Headers.Builder = Headers.builder()
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(sensorMaintenanceCurrentParams: SensorMaintenanceCurrentParams) = apply {
-            firstResult = sensorMaintenanceCurrentParams.firstResult
-            maxResults = sensorMaintenanceCurrentParams.maxResults
-            additionalHeaders = sensorMaintenanceCurrentParams.additionalHeaders.toBuilder()
-            additionalQueryParams = sensorMaintenanceCurrentParams.additionalQueryParams.toBuilder()
+        internal fun from(historyListParams: HistoryListParams) = apply {
+            startTime = historyListParams.startTime
+            columns = historyListParams.columns
+            firstResult = historyListParams.firstResult
+            maxResults = historyListParams.maxResults
+            additionalHeaders = historyListParams.additionalHeaders.toBuilder()
+            additionalQueryParams = historyListParams.additionalQueryParams.toBuilder()
         }
+
+        /**
+         * The start time of the plan or schedule, in ISO 8601 UTC format.
+         * (YYYY-MM-DDTHH:MM:SS.ssssssZ)
+         */
+        fun startTime(startTime: OffsetDateTime) = apply { this.startTime = startTime }
+
+        /**
+         * optional, fields for retrieval. When omitted, ALL fields are assumed. See the queryhelp
+         * operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid query fields that
+         * can be selected.
+         */
+        fun columns(columns: String?) = apply { this.columns = columns }
+
+        /** Alias for calling [Builder.columns] with `columns.orElse(null)`. */
+        fun columns(columns: Optional<String>) = columns(columns.getOrNull())
 
         fun firstResult(firstResult: Long?) = apply { this.firstResult = firstResult }
 
@@ -183,12 +223,21 @@ private constructor(
         }
 
         /**
-         * Returns an immutable instance of [SensorMaintenanceCurrentParams].
+         * Returns an immutable instance of [HistoryListParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
+         *
+         * The following fields are required:
+         * ```java
+         * .startTime()
+         * ```
+         *
+         * @throws IllegalStateException if any required field is unset.
          */
-        fun build(): SensorMaintenanceCurrentParams =
-            SensorMaintenanceCurrentParams(
+        fun build(): HistoryListParams =
+            HistoryListParams(
+                checkRequired("startTime", startTime),
+                columns,
                 firstResult,
                 maxResults,
                 additionalHeaders.build(),
@@ -201,6 +250,8 @@ private constructor(
     override fun _queryParams(): QueryParams =
         QueryParams.builder()
             .apply {
+                put("startTime", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(startTime))
+                columns?.let { put("columns", it) }
                 firstResult?.let { put("firstResult", it.toString()) }
                 maxResults?.let { put("maxResults", it.toString()) }
                 putAll(additionalQueryParams)
@@ -212,7 +263,9 @@ private constructor(
             return true
         }
 
-        return other is SensorMaintenanceCurrentParams &&
+        return other is HistoryListParams &&
+            startTime == other.startTime &&
+            columns == other.columns &&
             firstResult == other.firstResult &&
             maxResults == other.maxResults &&
             additionalHeaders == other.additionalHeaders &&
@@ -220,8 +273,15 @@ private constructor(
     }
 
     override fun hashCode(): Int =
-        Objects.hash(firstResult, maxResults, additionalHeaders, additionalQueryParams)
+        Objects.hash(
+            startTime,
+            columns,
+            firstResult,
+            maxResults,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
-        "SensorMaintenanceCurrentParams{firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "HistoryListParams{startTime=$startTime, columns=$columns, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

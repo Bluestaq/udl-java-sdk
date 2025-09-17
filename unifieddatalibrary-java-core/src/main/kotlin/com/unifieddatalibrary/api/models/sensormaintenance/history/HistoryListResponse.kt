@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless.
 
-package com.unifieddatalibrary.api.models.sensormaintenance
+package com.unifieddatalibrary.api.models.sensormaintenance.history
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter
 import com.fasterxml.jackson.annotation.JsonAnySetter
@@ -20,7 +20,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 /** Maintenance schedule and operational status of Sensor. */
-class SensorMaintenanceCurrentResponse
+class HistoryListResponse
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -691,8 +691,7 @@ private constructor(
     companion object {
 
         /**
-         * Returns a mutable builder for constructing an instance of
-         * [SensorMaintenanceCurrentResponse].
+         * Returns a mutable builder for constructing an instance of [HistoryListResponse].
          *
          * The following fields are required:
          * ```java
@@ -707,7 +706,7 @@ private constructor(
         @JvmStatic fun builder() = Builder()
     }
 
-    /** A builder for [SensorMaintenanceCurrentResponse]. */
+    /** A builder for [HistoryListResponse]. */
     class Builder internal constructor() {
 
         private var classificationMarking: JsonField<String>? = null
@@ -746,44 +745,42 @@ private constructor(
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
-        internal fun from(sensorMaintenanceCurrentResponse: SensorMaintenanceCurrentResponse) =
-            apply {
-                classificationMarking = sensorMaintenanceCurrentResponse.classificationMarking
-                dataMode = sensorMaintenanceCurrentResponse.dataMode
-                endTime = sensorMaintenanceCurrentResponse.endTime
-                siteCode = sensorMaintenanceCurrentResponse.siteCode
-                source = sensorMaintenanceCurrentResponse.source
-                startTime = sensorMaintenanceCurrentResponse.startTime
-                id = sensorMaintenanceCurrentResponse.id
-                activity = sensorMaintenanceCurrentResponse.activity
-                approver = sensorMaintenanceCurrentResponse.approver
-                changer = sensorMaintenanceCurrentResponse.changer
-                createdAt = sensorMaintenanceCurrentResponse.createdAt
-                createdBy = sensorMaintenanceCurrentResponse.createdBy
-                duration = sensorMaintenanceCurrentResponse.duration
-                eowId = sensorMaintenanceCurrentResponse.eowId
-                equipStatus = sensorMaintenanceCurrentResponse.equipStatus
-                idSensor = sensorMaintenanceCurrentResponse.idSensor
-                impactedFaces = sensorMaintenanceCurrentResponse.impactedFaces
-                inactiveDate = sensorMaintenanceCurrentResponse.inactiveDate
-                lineNumber = sensorMaintenanceCurrentResponse.lineNumber
-                mdOpsCap = sensorMaintenanceCurrentResponse.mdOpsCap
-                mwOpsCap = sensorMaintenanceCurrentResponse.mwOpsCap
-                origin = sensorMaintenanceCurrentResponse.origin
-                origNetwork = sensorMaintenanceCurrentResponse.origNetwork
-                priority = sensorMaintenanceCurrentResponse.priority
-                recall = sensorMaintenanceCurrentResponse.recall
-                rel = sensorMaintenanceCurrentResponse.rel
-                remark = sensorMaintenanceCurrentResponse.remark
-                requestor = sensorMaintenanceCurrentResponse.requestor
-                resource = sensorMaintenanceCurrentResponse.resource
-                rev = sensorMaintenanceCurrentResponse.rev
-                ssOpsCap = sensorMaintenanceCurrentResponse.ssOpsCap
-                updatedAt = sensorMaintenanceCurrentResponse.updatedAt
-                updatedBy = sensorMaintenanceCurrentResponse.updatedBy
-                additionalProperties =
-                    sensorMaintenanceCurrentResponse.additionalProperties.toMutableMap()
-            }
+        internal fun from(historyListResponse: HistoryListResponse) = apply {
+            classificationMarking = historyListResponse.classificationMarking
+            dataMode = historyListResponse.dataMode
+            endTime = historyListResponse.endTime
+            siteCode = historyListResponse.siteCode
+            source = historyListResponse.source
+            startTime = historyListResponse.startTime
+            id = historyListResponse.id
+            activity = historyListResponse.activity
+            approver = historyListResponse.approver
+            changer = historyListResponse.changer
+            createdAt = historyListResponse.createdAt
+            createdBy = historyListResponse.createdBy
+            duration = historyListResponse.duration
+            eowId = historyListResponse.eowId
+            equipStatus = historyListResponse.equipStatus
+            idSensor = historyListResponse.idSensor
+            impactedFaces = historyListResponse.impactedFaces
+            inactiveDate = historyListResponse.inactiveDate
+            lineNumber = historyListResponse.lineNumber
+            mdOpsCap = historyListResponse.mdOpsCap
+            mwOpsCap = historyListResponse.mwOpsCap
+            origin = historyListResponse.origin
+            origNetwork = historyListResponse.origNetwork
+            priority = historyListResponse.priority
+            recall = historyListResponse.recall
+            rel = historyListResponse.rel
+            remark = historyListResponse.remark
+            requestor = historyListResponse.requestor
+            resource = historyListResponse.resource
+            rev = historyListResponse.rev
+            ssOpsCap = historyListResponse.ssOpsCap
+            updatedAt = historyListResponse.updatedAt
+            updatedBy = historyListResponse.updatedBy
+            additionalProperties = historyListResponse.additionalProperties.toMutableMap()
+        }
 
         /** Classification marking of the data in IC/CAPCO Portion-marked format. */
         fun classificationMarking(classificationMarking: String) =
@@ -1222,7 +1219,7 @@ private constructor(
         }
 
         /**
-         * Returns an immutable instance of [SensorMaintenanceCurrentResponse].
+         * Returns an immutable instance of [HistoryListResponse].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
          *
@@ -1238,8 +1235,8 @@ private constructor(
          *
          * @throws IllegalStateException if any required field is unset.
          */
-        fun build(): SensorMaintenanceCurrentResponse =
-            SensorMaintenanceCurrentResponse(
+        fun build(): HistoryListResponse =
+            HistoryListResponse(
                 checkRequired("classificationMarking", classificationMarking),
                 checkRequired("dataMode", dataMode),
                 checkRequired("endTime", endTime),
@@ -1279,7 +1276,7 @@ private constructor(
 
     private var validated: Boolean = false
 
-    fun validate(): SensorMaintenanceCurrentResponse = apply {
+    fun validate(): HistoryListResponse = apply {
         if (validated) {
             return@apply
         }
@@ -1527,7 +1524,7 @@ private constructor(
             return true
         }
 
-        return other is SensorMaintenanceCurrentResponse &&
+        return other is HistoryListResponse &&
             classificationMarking == other.classificationMarking &&
             dataMode == other.dataMode &&
             endTime == other.endTime &&
@@ -1606,5 +1603,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "SensorMaintenanceCurrentResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, endTime=$endTime, siteCode=$siteCode, source=$source, startTime=$startTime, id=$id, activity=$activity, approver=$approver, changer=$changer, createdAt=$createdAt, createdBy=$createdBy, duration=$duration, eowId=$eowId, equipStatus=$equipStatus, idSensor=$idSensor, impactedFaces=$impactedFaces, inactiveDate=$inactiveDate, lineNumber=$lineNumber, mdOpsCap=$mdOpsCap, mwOpsCap=$mwOpsCap, origin=$origin, origNetwork=$origNetwork, priority=$priority, recall=$recall, rel=$rel, remark=$remark, requestor=$requestor, resource=$resource, rev=$rev, ssOpsCap=$ssOpsCap, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
+        "HistoryListResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, endTime=$endTime, siteCode=$siteCode, source=$source, startTime=$startTime, id=$id, activity=$activity, approver=$approver, changer=$changer, createdAt=$createdAt, createdBy=$createdBy, duration=$duration, eowId=$eowId, equipStatus=$equipStatus, idSensor=$idSensor, impactedFaces=$impactedFaces, inactiveDate=$inactiveDate, lineNumber=$lineNumber, mdOpsCap=$mdOpsCap, mwOpsCap=$mwOpsCap, origin=$origin, origNetwork=$origNetwork, priority=$priority, recall=$recall, rel=$rel, remark=$remark, requestor=$requestor, resource=$resource, rev=$rev, ssOpsCap=$ssOpsCap, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
 }

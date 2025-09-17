@@ -33,23 +33,23 @@ import kotlin.jvm.optionals.getOrNull
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class HistoryRetrieveResponseTest {
+internal class HistoryListResponseTest {
 
     @Test
     fun create() {
-        val historyRetrieveResponse =
-            HistoryRetrieveResponse.builder()
+        val historyListResponse =
+            HistoryListResponse.builder()
                 .classificationMarking("U")
-                .dataMode(HistoryRetrieveResponse.DataMode.TEST)
+                .dataMode(HistoryListResponse.DataMode.TEST)
                 .recType("COLLECT")
                 .source("Bluestaq")
                 .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                 .type("PLAN")
                 .id("SENSORPLAN-ID")
                 .addCollectRequest(
-                    HistoryRetrieveResponse.CollectRequest.builder()
+                    HistoryListResponse.CollectRequest.builder()
                         .classificationMarking("U")
-                        .dataMode(HistoryRetrieveResponse.CollectRequest.DataMode.TEST)
+                        .dataMode(HistoryListResponse.CollectRequest.DataMode.TEST)
                         .source("Bluestaq")
                         .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                         .type("DWELL")
@@ -1373,11 +1373,9 @@ internal class HistoryRetrieveResponseTest {
                         .eccentricity(1.1)
                         .el(1.1)
                         .elset(
-                            HistoryRetrieveResponse.CollectRequest.Elset.builder()
+                            HistoryListResponse.CollectRequest.Elset.builder()
                                 .classificationMarking("U")
-                                .dataMode(
-                                    HistoryRetrieveResponse.CollectRequest.Elset.DataMode.TEST
-                                )
+                                .dataMode(HistoryListResponse.CollectRequest.Elset.DataMode.TEST)
                                 .epoch(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                                 .source("Bluestaq")
                                 .agom(0.0126)
@@ -1416,11 +1414,10 @@ internal class HistoryRetrieveResponseTest {
                                 .addSourcedData("OBSERVATION_UUID1")
                                 .addSourcedData("OBSERVATION_UUID2")
                                 .addSourcedDataType(
-                                    HistoryRetrieveResponse.CollectRequest.Elset.SourcedDataType
-                                        .RADAR
+                                    HistoryListResponse.CollectRequest.Elset.SourcedDataType.RADAR
                                 )
                                 .addSourcedDataType(
-                                    HistoryRetrieveResponse.CollectRequest.Elset.SourcedDataType.RF
+                                    HistoryListResponse.CollectRequest.Elset.SourcedDataType.RF
                                 )
                                 .sourceDl("AXE")
                                 .addTag("PROVIDER_TAG1")
@@ -1483,10 +1480,10 @@ internal class HistoryRetrieveResponseTest {
                         .srchInc(1.1)
                         .srchPattern("SCAN")
                         .stateVector(
-                            HistoryRetrieveResponse.CollectRequest.StateVector.builder()
+                            HistoryListResponse.CollectRequest.StateVector.builder()
                                 .classificationMarking("U")
                                 .dataMode(
-                                    HistoryRetrieveResponse.CollectRequest.StateVector.DataMode.TEST
+                                    HistoryListResponse.CollectRequest.StateVector.DataMode.TEST
                                 )
                                 .epoch(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                                 .source("Bluestaq")
@@ -1500,8 +1497,7 @@ internal class HistoryRetrieveResponseTest {
                                 .cov(listOf(1.1, 2.4, 3.8, 4.2, 5.5, 6.0))
                                 .covMethod("CALCULATED")
                                 .covReferenceFrame(
-                                    HistoryRetrieveResponse.CollectRequest.StateVector
-                                        .CovReferenceFrame
+                                    HistoryListResponse.CollectRequest.StateVector.CovReferenceFrame
                                         .J2000
                                 )
                                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
@@ -1542,8 +1538,7 @@ internal class HistoryRetrieveResponseTest {
                                 .rawFileUri("rawFileURI")
                                 .recOdSpan(3.5)
                                 .referenceFrame(
-                                    HistoryRetrieveResponse.CollectRequest.StateVector
-                                        .ReferenceFrame
+                                    HistoryListResponse.CollectRequest.StateVector.ReferenceFrame
                                         .J2000
                                 )
                                 .residualsAcc(99.5)
@@ -1563,8 +1558,7 @@ internal class HistoryRetrieveResponseTest {
                                 .addSourcedData("DATA1")
                                 .addSourcedData("DATA2")
                                 .addSourcedDataType(
-                                    HistoryRetrieveResponse.CollectRequest.StateVector
-                                        .SourcedDataType
+                                    HistoryListResponse.CollectRequest.StateVector.SourcedDataType
                                         .RADAR
                                 )
                                 .sourceDl("AXE")
@@ -1647,20 +1641,19 @@ internal class HistoryRetrieveResponseTest {
                 .updatedBy("some.user")
                 .build()
 
-        assertThat(historyRetrieveResponse.classificationMarking()).isEqualTo("U")
-        assertThat(historyRetrieveResponse.dataMode())
-            .isEqualTo(HistoryRetrieveResponse.DataMode.TEST)
-        assertThat(historyRetrieveResponse.recType()).isEqualTo("COLLECT")
-        assertThat(historyRetrieveResponse.source()).isEqualTo("Bluestaq")
-        assertThat(historyRetrieveResponse.startTime())
+        assertThat(historyListResponse.classificationMarking()).isEqualTo("U")
+        assertThat(historyListResponse.dataMode()).isEqualTo(HistoryListResponse.DataMode.TEST)
+        assertThat(historyListResponse.recType()).isEqualTo("COLLECT")
+        assertThat(historyListResponse.source()).isEqualTo("Bluestaq")
+        assertThat(historyListResponse.startTime())
             .isEqualTo(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
-        assertThat(historyRetrieveResponse.type()).isEqualTo("PLAN")
-        assertThat(historyRetrieveResponse.id()).contains("SENSORPLAN-ID")
-        assertThat(historyRetrieveResponse.collectRequests().getOrNull())
+        assertThat(historyListResponse.type()).isEqualTo("PLAN")
+        assertThat(historyListResponse.id()).contains("SENSORPLAN-ID")
+        assertThat(historyListResponse.collectRequests().getOrNull())
             .containsExactly(
-                HistoryRetrieveResponse.CollectRequest.builder()
+                HistoryListResponse.CollectRequest.builder()
                     .classificationMarking("U")
-                    .dataMode(HistoryRetrieveResponse.CollectRequest.DataMode.TEST)
+                    .dataMode(HistoryListResponse.CollectRequest.DataMode.TEST)
                     .source("Bluestaq")
                     .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                     .type("DWELL")
@@ -2926,9 +2919,9 @@ internal class HistoryRetrieveResponseTest {
                     .eccentricity(1.1)
                     .el(1.1)
                     .elset(
-                        HistoryRetrieveResponse.CollectRequest.Elset.builder()
+                        HistoryListResponse.CollectRequest.Elset.builder()
                             .classificationMarking("U")
-                            .dataMode(HistoryRetrieveResponse.CollectRequest.Elset.DataMode.TEST)
+                            .dataMode(HistoryListResponse.CollectRequest.Elset.DataMode.TEST)
                             .epoch(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                             .source("Bluestaq")
                             .agom(0.0126)
@@ -2967,10 +2960,10 @@ internal class HistoryRetrieveResponseTest {
                             .addSourcedData("OBSERVATION_UUID1")
                             .addSourcedData("OBSERVATION_UUID2")
                             .addSourcedDataType(
-                                HistoryRetrieveResponse.CollectRequest.Elset.SourcedDataType.RADAR
+                                HistoryListResponse.CollectRequest.Elset.SourcedDataType.RADAR
                             )
                             .addSourcedDataType(
-                                HistoryRetrieveResponse.CollectRequest.Elset.SourcedDataType.RF
+                                HistoryListResponse.CollectRequest.Elset.SourcedDataType.RF
                             )
                             .sourceDl("AXE")
                             .addTag("PROVIDER_TAG1")
@@ -3033,11 +3026,9 @@ internal class HistoryRetrieveResponseTest {
                     .srchInc(1.1)
                     .srchPattern("SCAN")
                     .stateVector(
-                        HistoryRetrieveResponse.CollectRequest.StateVector.builder()
+                        HistoryListResponse.CollectRequest.StateVector.builder()
                             .classificationMarking("U")
-                            .dataMode(
-                                HistoryRetrieveResponse.CollectRequest.StateVector.DataMode.TEST
-                            )
+                            .dataMode(HistoryListResponse.CollectRequest.StateVector.DataMode.TEST)
                             .epoch(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                             .source("Bluestaq")
                             .actualOdSpan(3.5)
@@ -3050,7 +3041,7 @@ internal class HistoryRetrieveResponseTest {
                             .cov(listOf(1.1, 2.4, 3.8, 4.2, 5.5, 6.0))
                             .covMethod("CALCULATED")
                             .covReferenceFrame(
-                                HistoryRetrieveResponse.CollectRequest.StateVector.CovReferenceFrame
+                                HistoryListResponse.CollectRequest.StateVector.CovReferenceFrame
                                     .J2000
                             )
                             .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
@@ -3091,8 +3082,7 @@ internal class HistoryRetrieveResponseTest {
                             .rawFileUri("rawFileURI")
                             .recOdSpan(3.5)
                             .referenceFrame(
-                                HistoryRetrieveResponse.CollectRequest.StateVector.ReferenceFrame
-                                    .J2000
+                                HistoryListResponse.CollectRequest.StateVector.ReferenceFrame.J2000
                             )
                             .residualsAcc(99.5)
                             .revNo(7205)
@@ -3111,8 +3101,7 @@ internal class HistoryRetrieveResponseTest {
                             .addSourcedData("DATA1")
                             .addSourcedData("DATA2")
                             .addSourcedDataType(
-                                HistoryRetrieveResponse.CollectRequest.StateVector.SourcedDataType
-                                    .RADAR
+                                HistoryListResponse.CollectRequest.StateVector.SourcedDataType.RADAR
                             )
                             .sourceDl("AXE")
                             .srpArea(4.311)
@@ -3175,44 +3164,44 @@ internal class HistoryRetrieveResponseTest {
                     .yAngle(1.1)
                     .build()
             )
-        assertThat(historyRetrieveResponse.createdAt())
+        assertThat(historyListResponse.createdAt())
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(historyRetrieveResponse.createdBy()).contains("some.user")
-        assertThat(historyRetrieveResponse.customer()).contains("CUSTOMER")
-        assertThat(historyRetrieveResponse.endTime())
+        assertThat(historyListResponse.createdBy()).contains("some.user")
+        assertThat(historyListResponse.customer()).contains("CUSTOMER")
+        assertThat(historyListResponse.endTime())
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
-        assertThat(historyRetrieveResponse.idSensor()).contains("REF-SENSOR-ID")
-        assertThat(historyRetrieveResponse.name()).contains("EXAMPLE NAME")
-        assertThat(historyRetrieveResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
-        assertThat(historyRetrieveResponse.origNetwork()).contains("OPS1")
-        assertThat(historyRetrieveResponse.origSensorId()).contains("ORIGSENSOR-ID")
-        assertThat(historyRetrieveResponse.purpose()).contains("Example purpose")
-        assertThat(historyRetrieveResponse.reqTotal()).contains(2)
-        assertThat(historyRetrieveResponse.senNetwork()).contains("NETWORK")
-        assertThat(historyRetrieveResponse.status()).contains("ACCEPTED")
-        assertThat(historyRetrieveResponse.tags().getOrNull())
+        assertThat(historyListResponse.idSensor()).contains("REF-SENSOR-ID")
+        assertThat(historyListResponse.name()).contains("EXAMPLE NAME")
+        assertThat(historyListResponse.origin()).contains("THIRD_PARTY_DATASOURCE")
+        assertThat(historyListResponse.origNetwork()).contains("OPS1")
+        assertThat(historyListResponse.origSensorId()).contains("ORIGSENSOR-ID")
+        assertThat(historyListResponse.purpose()).contains("Example purpose")
+        assertThat(historyListResponse.reqTotal()).contains(2)
+        assertThat(historyListResponse.senNetwork()).contains("NETWORK")
+        assertThat(historyListResponse.status()).contains("ACCEPTED")
+        assertThat(historyListResponse.tags().getOrNull())
             .containsExactly("PROVIDER_TAG1", "PROVIDER_TAG2")
-        assertThat(historyRetrieveResponse.updatedAt())
+        assertThat(historyListResponse.updatedAt())
             .contains(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-        assertThat(historyRetrieveResponse.updatedBy()).contains("some.user")
+        assertThat(historyListResponse.updatedBy()).contains("some.user")
     }
 
     @Test
     fun roundtrip() {
         val jsonMapper = jsonMapper()
-        val historyRetrieveResponse =
-            HistoryRetrieveResponse.builder()
+        val historyListResponse =
+            HistoryListResponse.builder()
                 .classificationMarking("U")
-                .dataMode(HistoryRetrieveResponse.DataMode.TEST)
+                .dataMode(HistoryListResponse.DataMode.TEST)
                 .recType("COLLECT")
                 .source("Bluestaq")
                 .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                 .type("PLAN")
                 .id("SENSORPLAN-ID")
                 .addCollectRequest(
-                    HistoryRetrieveResponse.CollectRequest.builder()
+                    HistoryListResponse.CollectRequest.builder()
                         .classificationMarking("U")
-                        .dataMode(HistoryRetrieveResponse.CollectRequest.DataMode.TEST)
+                        .dataMode(HistoryListResponse.CollectRequest.DataMode.TEST)
                         .source("Bluestaq")
                         .startTime(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                         .type("DWELL")
@@ -4536,11 +4525,9 @@ internal class HistoryRetrieveResponseTest {
                         .eccentricity(1.1)
                         .el(1.1)
                         .elset(
-                            HistoryRetrieveResponse.CollectRequest.Elset.builder()
+                            HistoryListResponse.CollectRequest.Elset.builder()
                                 .classificationMarking("U")
-                                .dataMode(
-                                    HistoryRetrieveResponse.CollectRequest.Elset.DataMode.TEST
-                                )
+                                .dataMode(HistoryListResponse.CollectRequest.Elset.DataMode.TEST)
                                 .epoch(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                                 .source("Bluestaq")
                                 .agom(0.0126)
@@ -4579,11 +4566,10 @@ internal class HistoryRetrieveResponseTest {
                                 .addSourcedData("OBSERVATION_UUID1")
                                 .addSourcedData("OBSERVATION_UUID2")
                                 .addSourcedDataType(
-                                    HistoryRetrieveResponse.CollectRequest.Elset.SourcedDataType
-                                        .RADAR
+                                    HistoryListResponse.CollectRequest.Elset.SourcedDataType.RADAR
                                 )
                                 .addSourcedDataType(
-                                    HistoryRetrieveResponse.CollectRequest.Elset.SourcedDataType.RF
+                                    HistoryListResponse.CollectRequest.Elset.SourcedDataType.RF
                                 )
                                 .sourceDl("AXE")
                                 .addTag("PROVIDER_TAG1")
@@ -4646,10 +4632,10 @@ internal class HistoryRetrieveResponseTest {
                         .srchInc(1.1)
                         .srchPattern("SCAN")
                         .stateVector(
-                            HistoryRetrieveResponse.CollectRequest.StateVector.builder()
+                            HistoryListResponse.CollectRequest.StateVector.builder()
                                 .classificationMarking("U")
                                 .dataMode(
-                                    HistoryRetrieveResponse.CollectRequest.StateVector.DataMode.TEST
+                                    HistoryListResponse.CollectRequest.StateVector.DataMode.TEST
                                 )
                                 .epoch(OffsetDateTime.parse("2018-01-01T16:00:00.123456Z"))
                                 .source("Bluestaq")
@@ -4663,8 +4649,7 @@ internal class HistoryRetrieveResponseTest {
                                 .cov(listOf(1.1, 2.4, 3.8, 4.2, 5.5, 6.0))
                                 .covMethod("CALCULATED")
                                 .covReferenceFrame(
-                                    HistoryRetrieveResponse.CollectRequest.StateVector
-                                        .CovReferenceFrame
+                                    HistoryListResponse.CollectRequest.StateVector.CovReferenceFrame
                                         .J2000
                                 )
                                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
@@ -4705,8 +4690,7 @@ internal class HistoryRetrieveResponseTest {
                                 .rawFileUri("rawFileURI")
                                 .recOdSpan(3.5)
                                 .referenceFrame(
-                                    HistoryRetrieveResponse.CollectRequest.StateVector
-                                        .ReferenceFrame
+                                    HistoryListResponse.CollectRequest.StateVector.ReferenceFrame
                                         .J2000
                                 )
                                 .residualsAcc(99.5)
@@ -4726,8 +4710,7 @@ internal class HistoryRetrieveResponseTest {
                                 .addSourcedData("DATA1")
                                 .addSourcedData("DATA2")
                                 .addSourcedDataType(
-                                    HistoryRetrieveResponse.CollectRequest.StateVector
-                                        .SourcedDataType
+                                    HistoryListResponse.CollectRequest.StateVector.SourcedDataType
                                         .RADAR
                                 )
                                 .sourceDl("AXE")
@@ -4810,12 +4793,12 @@ internal class HistoryRetrieveResponseTest {
                 .updatedBy("some.user")
                 .build()
 
-        val roundtrippedHistoryRetrieveResponse =
+        val roundtrippedHistoryListResponse =
             jsonMapper.readValue(
-                jsonMapper.writeValueAsString(historyRetrieveResponse),
-                jacksonTypeRef<HistoryRetrieveResponse>(),
+                jsonMapper.writeValueAsString(historyListResponse),
+                jacksonTypeRef<HistoryListResponse>(),
             )
 
-        assertThat(roundtrippedHistoryRetrieveResponse).isEqualTo(historyRetrieveResponse)
+        assertThat(roundtrippedHistoryListResponse).isEqualTo(historyListResponse)
     }
 }

@@ -29,20 +29,12 @@ import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
-import com.unifieddatalibrary.api.services.blocking.scs.ClassificationMarkingService
-import com.unifieddatalibrary.api.services.blocking.scs.ClassificationMarkingServiceImpl
-import com.unifieddatalibrary.api.services.blocking.scs.FileMetadataService
-import com.unifieddatalibrary.api.services.blocking.scs.FileMetadataServiceImpl
 import com.unifieddatalibrary.api.services.blocking.scs.FileService
 import com.unifieddatalibrary.api.services.blocking.scs.FileServiceImpl
 import com.unifieddatalibrary.api.services.blocking.scs.FolderService
 import com.unifieddatalibrary.api.services.blocking.scs.FolderServiceImpl
-import com.unifieddatalibrary.api.services.blocking.scs.GroupService
-import com.unifieddatalibrary.api.services.blocking.scs.GroupServiceImpl
 import com.unifieddatalibrary.api.services.blocking.scs.PathService
 import com.unifieddatalibrary.api.services.blocking.scs.PathServiceImpl
-import com.unifieddatalibrary.api.services.blocking.scs.RangeParameterService
-import com.unifieddatalibrary.api.services.blocking.scs.RangeParameterServiceImpl
 import com.unifieddatalibrary.api.services.blocking.scs.V2Service
 import com.unifieddatalibrary.api.services.blocking.scs.V2ServiceImpl
 import java.util.function.Consumer
@@ -56,18 +48,6 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
 
     private val folders: FolderService by lazy { FolderServiceImpl(clientOptions) }
 
-    private val classificationMarkings: ClassificationMarkingService by lazy {
-        ClassificationMarkingServiceImpl(clientOptions)
-    }
-
-    private val groups: GroupService by lazy { GroupServiceImpl(clientOptions) }
-
-    private val fileMetadata: FileMetadataService by lazy { FileMetadataServiceImpl(clientOptions) }
-
-    private val rangeParameters: RangeParameterService by lazy {
-        RangeParameterServiceImpl(clientOptions)
-    }
-
     private val paths: PathService by lazy { PathServiceImpl(clientOptions) }
 
     private val v2: V2Service by lazy { V2ServiceImpl(clientOptions) }
@@ -80,14 +60,6 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
         ScServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
     override fun folders(): FolderService = folders
-
-    override fun classificationMarkings(): ClassificationMarkingService = classificationMarkings
-
-    override fun groups(): GroupService = groups
-
-    override fun fileMetadata(): FileMetadataService = fileMetadata
-
-    override fun rangeParameters(): RangeParameterService = rangeParameters
 
     override fun paths(): PathService = paths
 
@@ -162,22 +134,6 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
             FolderServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val classificationMarkings: ClassificationMarkingService.WithRawResponse by lazy {
-            ClassificationMarkingServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val groups: GroupService.WithRawResponse by lazy {
-            GroupServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val fileMetadata: FileMetadataService.WithRawResponse by lazy {
-            FileMetadataServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val rangeParameters: RangeParameterService.WithRawResponse by lazy {
-            RangeParameterServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
         private val paths: PathService.WithRawResponse by lazy {
             PathServiceImpl.WithRawResponseImpl(clientOptions)
         }
@@ -198,15 +154,6 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
             )
 
         override fun folders(): FolderService.WithRawResponse = folders
-
-        override fun classificationMarkings(): ClassificationMarkingService.WithRawResponse =
-            classificationMarkings
-
-        override fun groups(): GroupService.WithRawResponse = groups
-
-        override fun fileMetadata(): FileMetadataService.WithRawResponse = fileMetadata
-
-        override fun rangeParameters(): RangeParameterService.WithRawResponse = rangeParameters
 
         override fun paths(): PathService.WithRawResponse = paths
 

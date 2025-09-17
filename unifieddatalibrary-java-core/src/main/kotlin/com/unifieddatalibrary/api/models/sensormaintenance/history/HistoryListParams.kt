@@ -1,9 +1,8 @@
 // File generated from our OpenAPI spec by Stainless.
 
-package com.unifieddatalibrary.api.models.sensorplan.history
+package com.unifieddatalibrary.api.models.sensormaintenance.history
 
 import com.unifieddatalibrary.api.core.Params
-import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
 import com.unifieddatalibrary.api.core.http.QueryParams
 import java.time.OffsetDateTime
@@ -17,20 +16,16 @@ import kotlin.jvm.optionals.getOrNull
  * specified in this API documentation. See the queryhelp operation
  * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter information.
  */
-class HistoryRetrieveParams
+class HistoryListParams
 private constructor(
-    private val startTime: OffsetDateTime,
     private val columns: String?,
+    private val endTime: OffsetDateTime?,
     private val firstResult: Long?,
     private val maxResults: Long?,
+    private val startTime: OffsetDateTime?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
-
-    /**
-     * The start time of the plan or schedule, in ISO 8601 UTC format. (YYYY-MM-DDTHH:MM:SS.ssssssZ)
-     */
-    fun startTime(): OffsetDateTime = startTime
 
     /**
      * optional, fields for retrieval. When omitted, ALL fields are assumed. See the queryhelp
@@ -39,9 +34,21 @@ private constructor(
      */
     fun columns(): Optional<String> = Optional.ofNullable(columns)
 
+    /**
+     * (One or more of fields 'endTime, startTime' are required.) The planned outage end time in
+     * ISO8601 UTC format. (YYYY-MM-DDTHH:MM:SS.ssssssZ)
+     */
+    fun endTime(): Optional<OffsetDateTime> = Optional.ofNullable(endTime)
+
     fun firstResult(): Optional<Long> = Optional.ofNullable(firstResult)
 
     fun maxResults(): Optional<Long> = Optional.ofNullable(maxResults)
+
+    /**
+     * (One or more of fields 'endTime, startTime' are required.) The planned outage start time in
+     * ISO8601 UTC format. (YYYY-MM-DDTHH:MM:SS.ssssssZ)
+     */
+    fun startTime(): Optional<OffsetDateTime> = Optional.ofNullable(startTime)
 
     /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
@@ -53,42 +60,33 @@ private constructor(
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [HistoryRetrieveParams].
-         *
-         * The following fields are required:
-         * ```java
-         * .startTime()
-         * ```
-         */
+        @JvmStatic fun none(): HistoryListParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [HistoryListParams]. */
         @JvmStatic fun builder() = Builder()
     }
 
-    /** A builder for [HistoryRetrieveParams]. */
+    /** A builder for [HistoryListParams]. */
     class Builder internal constructor() {
 
-        private var startTime: OffsetDateTime? = null
         private var columns: String? = null
+        private var endTime: OffsetDateTime? = null
         private var firstResult: Long? = null
         private var maxResults: Long? = null
+        private var startTime: OffsetDateTime? = null
         private var additionalHeaders: Headers.Builder = Headers.builder()
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         @JvmSynthetic
-        internal fun from(historyRetrieveParams: HistoryRetrieveParams) = apply {
-            startTime = historyRetrieveParams.startTime
-            columns = historyRetrieveParams.columns
-            firstResult = historyRetrieveParams.firstResult
-            maxResults = historyRetrieveParams.maxResults
-            additionalHeaders = historyRetrieveParams.additionalHeaders.toBuilder()
-            additionalQueryParams = historyRetrieveParams.additionalQueryParams.toBuilder()
+        internal fun from(historyListParams: HistoryListParams) = apply {
+            columns = historyListParams.columns
+            endTime = historyListParams.endTime
+            firstResult = historyListParams.firstResult
+            maxResults = historyListParams.maxResults
+            startTime = historyListParams.startTime
+            additionalHeaders = historyListParams.additionalHeaders.toBuilder()
+            additionalQueryParams = historyListParams.additionalQueryParams.toBuilder()
         }
-
-        /**
-         * The start time of the plan or schedule, in ISO 8601 UTC format.
-         * (YYYY-MM-DDTHH:MM:SS.ssssssZ)
-         */
-        fun startTime(startTime: OffsetDateTime) = apply { this.startTime = startTime }
 
         /**
          * optional, fields for retrieval. When omitted, ALL fields are assumed. See the queryhelp
@@ -99,6 +97,15 @@ private constructor(
 
         /** Alias for calling [Builder.columns] with `columns.orElse(null)`. */
         fun columns(columns: Optional<String>) = columns(columns.getOrNull())
+
+        /**
+         * (One or more of fields 'endTime, startTime' are required.) The planned outage end time in
+         * ISO8601 UTC format. (YYYY-MM-DDTHH:MM:SS.ssssssZ)
+         */
+        fun endTime(endTime: OffsetDateTime?) = apply { this.endTime = endTime }
+
+        /** Alias for calling [Builder.endTime] with `endTime.orElse(null)`. */
+        fun endTime(endTime: Optional<OffsetDateTime>) = endTime(endTime.getOrNull())
 
         fun firstResult(firstResult: Long?) = apply { this.firstResult = firstResult }
 
@@ -123,6 +130,15 @@ private constructor(
 
         /** Alias for calling [Builder.maxResults] with `maxResults.orElse(null)`. */
         fun maxResults(maxResults: Optional<Long>) = maxResults(maxResults.getOrNull())
+
+        /**
+         * (One or more of fields 'endTime, startTime' are required.) The planned outage start time
+         * in ISO8601 UTC format. (YYYY-MM-DDTHH:MM:SS.ssssssZ)
+         */
+        fun startTime(startTime: OffsetDateTime?) = apply { this.startTime = startTime }
+
+        /** Alias for calling [Builder.startTime] with `startTime.orElse(null)`. */
+        fun startTime(startTime: Optional<OffsetDateTime>) = startTime(startTime.getOrNull())
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -223,23 +239,17 @@ private constructor(
         }
 
         /**
-         * Returns an immutable instance of [HistoryRetrieveParams].
+         * Returns an immutable instance of [HistoryListParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```java
-         * .startTime()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
-        fun build(): HistoryRetrieveParams =
-            HistoryRetrieveParams(
-                checkRequired("startTime", startTime),
+        fun build(): HistoryListParams =
+            HistoryListParams(
                 columns,
+                endTime,
                 firstResult,
                 maxResults,
+                startTime,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
@@ -250,10 +260,13 @@ private constructor(
     override fun _queryParams(): QueryParams =
         QueryParams.builder()
             .apply {
-                put("startTime", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(startTime))
                 columns?.let { put("columns", it) }
+                endTime?.let { put("endTime", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(it)) }
                 firstResult?.let { put("firstResult", it.toString()) }
                 maxResults?.let { put("maxResults", it.toString()) }
+                startTime?.let {
+                    put("startTime", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(it))
+                }
                 putAll(additionalQueryParams)
             }
             .build()
@@ -263,25 +276,27 @@ private constructor(
             return true
         }
 
-        return other is HistoryRetrieveParams &&
-            startTime == other.startTime &&
+        return other is HistoryListParams &&
             columns == other.columns &&
+            endTime == other.endTime &&
             firstResult == other.firstResult &&
             maxResults == other.maxResults &&
+            startTime == other.startTime &&
             additionalHeaders == other.additionalHeaders &&
             additionalQueryParams == other.additionalQueryParams
     }
 
     override fun hashCode(): Int =
         Objects.hash(
-            startTime,
             columns,
+            endTime,
             firstResult,
             maxResults,
+            startTime,
             additionalHeaders,
             additionalQueryParams,
         )
 
     override fun toString() =
-        "HistoryRetrieveParams{startTime=$startTime, columns=$columns, firstResult=$firstResult, maxResults=$maxResults, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "HistoryListParams{columns=$columns, endTime=$endTime, firstResult=$firstResult, maxResults=$maxResults, startTime=$startTime, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

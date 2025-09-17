@@ -21,11 +21,12 @@ import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCountParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCreateBulkParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCreateParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCurrentParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCurrentResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceDeleteParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceGetParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceGetResponse
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListCurrentPage
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListCurrentParams
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListCurrentResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListPage
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListResponse
@@ -92,19 +93,19 @@ class SensorMaintenanceServiceImpl internal constructor(private val clientOption
         withRawResponse().createBulk(params, requestOptions)
     }
 
-    override fun current(
-        params: SensorMaintenanceCurrentParams,
-        requestOptions: RequestOptions,
-    ): List<SensorMaintenanceCurrentResponse> =
-        // get /udl/sensormaintenance/current
-        withRawResponse().current(params, requestOptions).parse()
-
     override fun get(
         params: SensorMaintenanceGetParams,
         requestOptions: RequestOptions,
     ): SensorMaintenanceGetResponse =
         // get /udl/sensormaintenance/{id}
         withRawResponse().get(params, requestOptions).parse()
+
+    override fun listCurrent(
+        params: SensorMaintenanceListCurrentParams,
+        requestOptions: RequestOptions,
+    ): SensorMaintenanceListCurrentPage =
+        // get /udl/sensormaintenance/current
+        withRawResponse().listCurrent(params, requestOptions).parse()
 
     override fun queryhelp(
         params: SensorMaintenanceQueryhelpParams,
@@ -283,33 +284,6 @@ class SensorMaintenanceServiceImpl internal constructor(private val clientOption
             }
         }
 
-        private val currentHandler: Handler<List<SensorMaintenanceCurrentResponse>> =
-            jsonHandler<List<SensorMaintenanceCurrentResponse>>(clientOptions.jsonMapper)
-
-        override fun current(
-            params: SensorMaintenanceCurrentParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<SensorMaintenanceCurrentResponse>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "sensormaintenance", "current")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { currentHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-            }
-        }
-
         private val getHandler: Handler<SensorMaintenanceGetResponse> =
             jsonHandler<SensorMaintenanceGetResponse>(clientOptions.jsonMapper)
 
@@ -336,6 +310,40 @@ class SensorMaintenanceServiceImpl internal constructor(private val clientOption
                         if (requestOptions.responseValidation!!) {
                             it.validate()
                         }
+                    }
+            }
+        }
+
+        private val listCurrentHandler: Handler<List<SensorMaintenanceListCurrentResponse>> =
+            jsonHandler<List<SensorMaintenanceListCurrentResponse>>(clientOptions.jsonMapper)
+
+        override fun listCurrent(
+            params: SensorMaintenanceListCurrentParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<SensorMaintenanceListCurrentPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "sensormaintenance", "current")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listCurrentHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        SensorMaintenanceListCurrentPage.builder()
+                            .service(SensorMaintenanceServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
                     }
             }
         }
