@@ -16,6 +16,7 @@ import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrQueryHelpPara
 import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrQueryHelpResponse
 import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrRetrieveParams
 import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrTupleParams
+import com.unifieddatalibrary.api.models.observations.ecpsdr.EcpsdrUnvalidatedPublishParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -163,6 +164,20 @@ interface EcpsdrServiceAsync {
     ): CompletableFuture<List<Ecpsdr>>
 
     /**
+     * Service operation to take multiple ECPSDR as a POST body and ingest into the database. This
+     * operation is intended to be used for automated feeds into UDL. A specific role is required to
+     * perform this service operation. Please contact the UDL team for assistance.
+     */
+    fun unvalidatedPublish(params: EcpsdrUnvalidatedPublishParams): CompletableFuture<Void?> =
+        unvalidatedPublish(params, RequestOptions.none())
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        params: EcpsdrUnvalidatedPublishParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?>
+
+    /**
      * A view of [EcpsdrServiceAsync] that provides access to raw HTTP responses for each method.
      */
     interface WithRawResponse {
@@ -305,5 +320,19 @@ interface EcpsdrServiceAsync {
             params: EcpsdrTupleParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<List<Ecpsdr>>>
+
+        /**
+         * Returns a raw HTTP response for `post /filedrop/udl-ecpsdr`, but is otherwise the same as
+         * [EcpsdrServiceAsync.unvalidatedPublish].
+         */
+        fun unvalidatedPublish(
+            params: EcpsdrUnvalidatedPublishParams
+        ): CompletableFuture<HttpResponse> = unvalidatedPublish(params, RequestOptions.none())
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            params: EcpsdrUnvalidatedPublishParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse>
     }
 }

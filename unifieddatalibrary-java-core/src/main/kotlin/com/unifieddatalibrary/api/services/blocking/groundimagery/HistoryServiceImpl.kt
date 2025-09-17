@@ -16,8 +16,9 @@ import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.groundimagery.history.HistoryCountParams
-import com.unifieddatalibrary.api.models.groundimagery.history.HistoryQueryParams
-import com.unifieddatalibrary.api.models.groundimagery.history.HistoryQueryResponse
+import com.unifieddatalibrary.api.models.groundimagery.history.HistoryListPage
+import com.unifieddatalibrary.api.models.groundimagery.history.HistoryListParams
+import com.unifieddatalibrary.api.models.groundimagery.history.HistoryListResponse
 import java.util.function.Consumer
 
 class HistoryServiceImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -32,16 +33,13 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryService =
         HistoryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    override fun list(params: HistoryListParams, requestOptions: RequestOptions): HistoryListPage =
+        // get /udl/groundimagery/history
+        withRawResponse().list(params, requestOptions).parse()
+
     override fun count(params: HistoryCountParams, requestOptions: RequestOptions): String =
         // get /udl/groundimagery/history/count
         withRawResponse().count(params, requestOptions).parse()
-
-    override fun query(
-        params: HistoryQueryParams,
-        requestOptions: RequestOptions,
-    ): List<HistoryQueryResponse> =
-        // get /udl/groundimagery/history
-        withRawResponse().query(params, requestOptions).parse()
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         HistoryService.WithRawResponse {
@@ -55,6 +53,40 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
             HistoryServiceImpl.WithRawResponseImpl(
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
+
+        private val listHandler: Handler<List<HistoryListResponse>> =
+            jsonHandler<List<HistoryListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: HistoryListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<HistoryListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "groundimagery", "history")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        HistoryListPage.builder()
+                            .service(HistoryServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
+        }
 
         private val countHandler: Handler<String> = stringHandler()
 
@@ -73,33 +105,6 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response.use { countHandler.handle(it) }
-            }
-        }
-
-        private val queryHandler: Handler<List<HistoryQueryResponse>> =
-            jsonHandler<List<HistoryQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: HistoryQueryParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<HistoryQueryResponse>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "groundimagery", "history")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { queryHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
             }
         }
     }

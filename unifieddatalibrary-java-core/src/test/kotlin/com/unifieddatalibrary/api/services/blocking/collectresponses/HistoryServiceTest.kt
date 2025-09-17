@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.services.blocking.collectresponses
 
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
+import com.unifieddatalibrary.api.models.collectresponses.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.collectresponses.history.HistoryCountParams
 import com.unifieddatalibrary.api.models.collectresponses.history.HistoryListParams
 import java.time.LocalDate
@@ -29,6 +30,29 @@ internal class HistoryServiceTest {
             )
 
         page.items().forEach { it.validate() }
+    }
+
+    @Test
+    fun aodr() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val historyService = client.collectResponses().history()
+
+        historyService.aodr(
+            HistoryAodrParams.builder()
+                .createdAt(LocalDate.parse("2019-12-27"))
+                .columns("columns")
+                .firstResult(0L)
+                .maxResults(0L)
+                .notification("notification")
+                .outputDelimiter("outputDelimiter")
+                .outputFormat("outputFormat")
+                .build()
+        )
     }
 
     @Test

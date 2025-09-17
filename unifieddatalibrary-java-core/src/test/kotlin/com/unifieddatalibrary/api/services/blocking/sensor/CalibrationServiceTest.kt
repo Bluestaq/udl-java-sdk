@@ -7,7 +7,7 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCountParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCreateBulkParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCreateParams
-import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryParams
+import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationListParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationRetrieveParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationTupleParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationUnvalidatedPublishParams
@@ -111,6 +111,26 @@ internal class CalibrationServiceTest {
     }
 
     @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val calibrationService = client.sensor().calibration()
+
+        val page =
+            calibrationService.list(
+                CalibrationListParams.builder()
+                    .startTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .build()
+            )
+
+        page.items().forEach { it.validate() }
+    }
+
+    @Test
     fun count() {
         val client =
             UnifieddatalibraryOkHttpClient.builder()
@@ -205,28 +225,6 @@ internal class CalibrationServiceTest {
                 )
                 .build()
         )
-    }
-
-    @Test
-    fun query() {
-        val client =
-            UnifieddatalibraryOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val calibrationService = client.sensor().calibration()
-
-        val response =
-            calibrationService.query(
-                CalibrationQueryParams.builder()
-                    .startTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .build()
-            )
-
-        response.forEach { it.validate() }
     }
 
     @Test

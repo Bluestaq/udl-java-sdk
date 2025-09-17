@@ -8,6 +8,7 @@ import com.unifieddatalibrary.api.core.handlers.emptyHandler
 import com.unifieddatalibrary.api.core.handlers.errorBodyHandler
 import com.unifieddatalibrary.api.core.handlers.errorHandler
 import com.unifieddatalibrary.api.core.handlers.jsonHandler
+import com.unifieddatalibrary.api.core.handlers.stringHandler
 import com.unifieddatalibrary.api.core.http.HttpMethod
 import com.unifieddatalibrary.api.core.http.HttpRequest
 import com.unifieddatalibrary.api.core.http.HttpResponse
@@ -17,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.AisFull
 import com.unifieddatalibrary.api.models.ais.history.HistoryAodrParams
+import com.unifieddatalibrary.api.models.ais.history.HistoryCountParams
 import com.unifieddatalibrary.api.models.ais.history.HistoryListPageAsync
 import com.unifieddatalibrary.api.models.ais.history.HistoryListParams
 import java.util.concurrent.CompletableFuture
@@ -47,6 +49,13 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
     ): CompletableFuture<Void?> =
         // get /udl/ais/history/aodr
         withRawResponse().aodr(params, requestOptions).thenAccept {}
+
+    override fun count(
+        params: HistoryCountParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<String> =
+        // get /udl/ais/history/count
+        withRawResponse().count(params, requestOptions).thenApply { it.parse() }
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         HistoryServiceAsync.WithRawResponse {
@@ -118,6 +127,29 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response.use { aodrHandler.handle(it) }
+                    }
+                }
+        }
+
+        private val countHandler: Handler<String> = stringHandler()
+
+        override fun count(
+            params: HistoryCountParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<String>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "ais", "history", "count")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response.use { countHandler.handle(it) }
                     }
                 }
         }

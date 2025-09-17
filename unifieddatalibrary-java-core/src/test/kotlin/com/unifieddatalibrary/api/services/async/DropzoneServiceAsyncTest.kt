@@ -7,7 +7,6 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAs
 import com.unifieddatalibrary.api.models.dropzone.DropzoneCountParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneCreateBulkParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneCreateParams
-import com.unifieddatalibrary.api.models.dropzone.DropzoneQueryParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneRetrieveParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneTupleParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneUnvalidatedPublishParams
@@ -148,6 +147,22 @@ internal class DropzoneServiceAsyncTest {
     }
 
     @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val dropzoneServiceAsync = client.dropzone()
+
+        val pageFuture = dropzoneServiceAsync.list()
+
+        val page = pageFuture.get()
+        page.items().forEach { it.validate() }
+    }
+
+    @Test
     fun delete() {
         val client =
             UnifieddatalibraryOkHttpClientAsync.builder()
@@ -238,25 +253,6 @@ internal class DropzoneServiceAsyncTest {
             )
 
         val response = future.get()
-    }
-
-    @Test
-    fun query() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val dropzoneServiceAsync = client.dropzone()
-
-        val responseFuture =
-            dropzoneServiceAsync.query(
-                DropzoneQueryParams.builder().firstResult(0L).maxResults(0L).build()
-            )
-
-        val response = responseFuture.get()
-        response.forEach { it.validate() }
     }
 
     @Test

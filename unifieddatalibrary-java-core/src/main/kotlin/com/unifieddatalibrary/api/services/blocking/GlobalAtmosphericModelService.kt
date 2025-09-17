@@ -9,10 +9,10 @@ import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelCountParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelGetFileParams
+import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelListPage
+import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelListParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelQueryHelpParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelQueryHelpResponse
-import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelQueryParams
-import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelQueryResponse
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelRetrieveParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelRetrieveResponse
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelTupleParams
@@ -77,6 +77,20 @@ interface GlobalAtmosphericModelService {
         retrieve(id, GlobalAtmosphericModelRetrieveParams.none(), requestOptions)
 
     /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
+    fun list(params: GlobalAtmosphericModelListParams): GlobalAtmosphericModelListPage =
+        list(params, RequestOptions.none())
+
+    /** @see list */
+    fun list(
+        params: GlobalAtmosphericModelListParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): GlobalAtmosphericModelListPage
+
+    /**
      * Service operation to return the count of records satisfying the specified query parameters.
      * This operation is useful to determine how many records pass a particular query criteria
      * without retrieving large amounts of data. See the queryhelp operation
@@ -131,21 +145,6 @@ interface GlobalAtmosphericModelService {
     @MustBeClosed
     fun getFile(id: String, requestOptions: RequestOptions): HttpResponse =
         getFile(id, GlobalAtmosphericModelGetFileParams.none(), requestOptions)
-
-    /**
-     * Service operation to dynamically query data by a variety of query parameters not specified in
-     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
-     * more details on valid/required query parameter information.
-     */
-    fun query(
-        params: GlobalAtmosphericModelQueryParams
-    ): List<GlobalAtmosphericModelQueryResponse> = query(params, RequestOptions.none())
-
-    /** @see query */
-    fun query(
-        params: GlobalAtmosphericModelQueryParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): List<GlobalAtmosphericModelQueryResponse>
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -283,6 +282,22 @@ interface GlobalAtmosphericModelService {
             retrieve(id, GlobalAtmosphericModelRetrieveParams.none(), requestOptions)
 
         /**
+         * Returns a raw HTTP response for `get /udl/globalatmosphericmodel`, but is otherwise the
+         * same as [GlobalAtmosphericModelService.list].
+         */
+        @MustBeClosed
+        fun list(
+            params: GlobalAtmosphericModelListParams
+        ): HttpResponseFor<GlobalAtmosphericModelListPage> = list(params, RequestOptions.none())
+
+        /** @see list */
+        @MustBeClosed
+        fun list(
+            params: GlobalAtmosphericModelListParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<GlobalAtmosphericModelListPage>
+
+        /**
          * Returns a raw HTTP response for `get /udl/globalatmosphericmodel/count`, but is otherwise
          * the same as [GlobalAtmosphericModelService.count].
          */
@@ -337,23 +352,6 @@ interface GlobalAtmosphericModelService {
         @MustBeClosed
         fun getFile(id: String, requestOptions: RequestOptions): HttpResponse =
             getFile(id, GlobalAtmosphericModelGetFileParams.none(), requestOptions)
-
-        /**
-         * Returns a raw HTTP response for `get /udl/globalatmosphericmodel`, but is otherwise the
-         * same as [GlobalAtmosphericModelService.query].
-         */
-        @MustBeClosed
-        fun query(
-            params: GlobalAtmosphericModelQueryParams
-        ): HttpResponseFor<List<GlobalAtmosphericModelQueryResponse>> =
-            query(params, RequestOptions.none())
-
-        /** @see query */
-        @MustBeClosed
-        fun query(
-            params: GlobalAtmosphericModelQueryParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<List<GlobalAtmosphericModelQueryResponse>>
 
         /**
          * Returns a raw HTTP response for `get /udl/globalatmosphericmodel/queryhelp`, but is

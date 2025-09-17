@@ -10,10 +10,10 @@ import com.unifieddatalibrary.api.models.dropzone.DropzoneCountParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneCreateBulkParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneCreateParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneDeleteParams
+import com.unifieddatalibrary.api.models.dropzone.DropzoneListPageAsync
+import com.unifieddatalibrary.api.models.dropzone.DropzoneListParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneQueryHelpParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneQueryHelpResponse
-import com.unifieddatalibrary.api.models.dropzone.DropzoneQueryParams
-import com.unifieddatalibrary.api.models.dropzone.DropzoneQueryResponse
 import com.unifieddatalibrary.api.models.dropzone.DropzoneRetrieveParams
 import com.unifieddatalibrary.api.models.dropzone.DropzoneRetrieveResponse
 import com.unifieddatalibrary.api.models.dropzone.DropzoneTupleParams
@@ -114,6 +114,28 @@ interface DropzoneServiceAsync {
     ): CompletableFuture<Void?>
 
     /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
+    fun list(): CompletableFuture<DropzoneListPageAsync> = list(DropzoneListParams.none())
+
+    /** @see list */
+    fun list(
+        params: DropzoneListParams = DropzoneListParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<DropzoneListPageAsync>
+
+    /** @see list */
+    fun list(
+        params: DropzoneListParams = DropzoneListParams.none()
+    ): CompletableFuture<DropzoneListPageAsync> = list(params, RequestOptions.none())
+
+    /** @see list */
+    fun list(requestOptions: RequestOptions): CompletableFuture<DropzoneListPageAsync> =
+        list(DropzoneListParams.none(), requestOptions)
+
+    /**
      * Service operation to delete a dropzone record specified by the passed ID path parameter. A
      * specific role is required to perform this service operation. Please contact the UDL team for
      * assistance.
@@ -185,28 +207,6 @@ interface DropzoneServiceAsync {
         params: DropzoneCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
-
-    /**
-     * Service operation to dynamically query data by a variety of query parameters not specified in
-     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
-     * more details on valid/required query parameter information.
-     */
-    fun query(): CompletableFuture<List<DropzoneQueryResponse>> = query(DropzoneQueryParams.none())
-
-    /** @see query */
-    fun query(
-        params: DropzoneQueryParams = DropzoneQueryParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<DropzoneQueryResponse>>
-
-    /** @see query */
-    fun query(
-        params: DropzoneQueryParams = DropzoneQueryParams.none()
-    ): CompletableFuture<List<DropzoneQueryResponse>> = query(params, RequestOptions.none())
-
-    /** @see query */
-    fun query(requestOptions: RequestOptions): CompletableFuture<List<DropzoneQueryResponse>> =
-        query(DropzoneQueryParams.none(), requestOptions)
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -356,6 +356,31 @@ interface DropzoneServiceAsync {
         ): CompletableFuture<HttpResponse>
 
         /**
+         * Returns a raw HTTP response for `get /udl/dropzone`, but is otherwise the same as
+         * [DropzoneServiceAsync.list].
+         */
+        fun list(): CompletableFuture<HttpResponseFor<DropzoneListPageAsync>> =
+            list(DropzoneListParams.none())
+
+        /** @see list */
+        fun list(
+            params: DropzoneListParams = DropzoneListParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<DropzoneListPageAsync>>
+
+        /** @see list */
+        fun list(
+            params: DropzoneListParams = DropzoneListParams.none()
+        ): CompletableFuture<HttpResponseFor<DropzoneListPageAsync>> =
+            list(params, RequestOptions.none())
+
+        /** @see list */
+        fun list(
+            requestOptions: RequestOptions
+        ): CompletableFuture<HttpResponseFor<DropzoneListPageAsync>> =
+            list(DropzoneListParams.none(), requestOptions)
+
+        /**
          * Returns a raw HTTP response for `delete /udl/dropzone/{id}`, but is otherwise the same as
          * [DropzoneServiceAsync.delete].
          */
@@ -423,31 +448,6 @@ interface DropzoneServiceAsync {
             params: DropzoneCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
-
-        /**
-         * Returns a raw HTTP response for `get /udl/dropzone`, but is otherwise the same as
-         * [DropzoneServiceAsync.query].
-         */
-        fun query(): CompletableFuture<HttpResponseFor<List<DropzoneQueryResponse>>> =
-            query(DropzoneQueryParams.none())
-
-        /** @see query */
-        fun query(
-            params: DropzoneQueryParams = DropzoneQueryParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<DropzoneQueryResponse>>>
-
-        /** @see query */
-        fun query(
-            params: DropzoneQueryParams = DropzoneQueryParams.none()
-        ): CompletableFuture<HttpResponseFor<List<DropzoneQueryResponse>>> =
-            query(params, RequestOptions.none())
-
-        /** @see query */
-        fun query(
-            requestOptions: RequestOptions
-        ): CompletableFuture<HttpResponseFor<List<DropzoneQueryResponse>>> =
-            query(DropzoneQueryParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /udl/dropzone/queryhelp`, but is otherwise the same

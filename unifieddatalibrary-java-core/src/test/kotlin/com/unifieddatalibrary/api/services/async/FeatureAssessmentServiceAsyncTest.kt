@@ -7,7 +7,7 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAs
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCountParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCreateBulkParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCreateParams
-import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryParams
+import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentListParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentRetrieveParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentTupleParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentUnvalidatedPublishParams
@@ -112,6 +112,25 @@ internal class FeatureAssessmentServiceAsyncTest {
     }
 
     @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val featureAssessmentServiceAsync = client.featureAssessment()
+
+        val pageFuture =
+            featureAssessmentServiceAsync.list(
+                FeatureAssessmentListParams.builder().idAnalyticImagery("idAnalyticImagery").build()
+            )
+
+        val page = pageFuture.get()
+        page.items().forEach { it.validate() }
+    }
+
+    @Test
     fun count() {
         val client =
             UnifieddatalibraryOkHttpClientAsync.builder()
@@ -204,29 +223,6 @@ internal class FeatureAssessmentServiceAsyncTest {
             )
 
         val response = future.get()
-    }
-
-    @Test
-    fun query() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val featureAssessmentServiceAsync = client.featureAssessment()
-
-        val responseFuture =
-            featureAssessmentServiceAsync.query(
-                FeatureAssessmentQueryParams.builder()
-                    .idAnalyticImagery("idAnalyticImagery")
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .build()
-            )
-
-        val response = responseFuture.get()
-        response.forEach { it.validate() }
     }
 
     @Test

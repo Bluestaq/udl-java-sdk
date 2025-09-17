@@ -12,9 +12,6 @@ import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryCountParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryFileGetParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryAodrParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryCountParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryListParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryRetrieveParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryTupleParams
@@ -118,78 +115,6 @@ internal class AnalyticImageryServiceAsyncTest {
 
         val response = responseFuture.get()
         assertThat(response.body()).hasContent("abc")
-    }
-
-    @Test
-    fun history() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val analyticImageryServiceAsync = client.analyticImagery()
-
-        val analyticImageryAbridgedsFuture =
-            analyticImageryServiceAsync.history(
-                AnalyticImageryHistoryParams.builder()
-                    .msgTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .columns("columns")
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .build()
-            )
-
-        val analyticImageryAbridgeds = analyticImageryAbridgedsFuture.get()
-        analyticImageryAbridgeds.forEach { it.validate() }
-    }
-
-    @Test
-    fun historyAodr() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val analyticImageryServiceAsync = client.analyticImagery()
-
-        val future =
-            analyticImageryServiceAsync.historyAodr(
-                AnalyticImageryHistoryAodrParams.builder()
-                    .msgTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .columns("columns")
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .notification("notification")
-                    .outputDelimiter("outputDelimiter")
-                    .outputFormat("outputFormat")
-                    .build()
-            )
-
-        val response = future.get()
-    }
-
-    @Test
-    fun historyCount() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val analyticImageryServiceAsync = client.analyticImagery()
-
-        val responseFuture =
-            analyticImageryServiceAsync.historyCount(
-                AnalyticImageryHistoryCountParams.builder()
-                    .msgTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .build()
-            )
-
-        val response = responseFuture.get()
     }
 
     @Test

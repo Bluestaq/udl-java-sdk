@@ -6,13 +6,34 @@ import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
 import com.unifieddatalibrary.api.models.hazard.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.hazard.history.HistoryCountParams
-import com.unifieddatalibrary.api.models.hazard.history.HistoryQueryParams
+import com.unifieddatalibrary.api.models.hazard.history.HistoryListParams
 import java.time.OffsetDateTime
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(TestServerExtension::class)
 internal class HistoryServiceAsyncTest {
+
+    @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val historyServiceAsync = client.hazard().history()
+
+        val pageFuture =
+            historyServiceAsync.list(
+                HistoryListParams.builder()
+                    .detectTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .build()
+            )
+
+        val page = pageFuture.get()
+        page.items().forEach { it.validate() }
+    }
 
     @Test
     fun aodr() {
@@ -60,29 +81,5 @@ internal class HistoryServiceAsyncTest {
             )
 
         val response = responseFuture.get()
-    }
-
-    @Test
-    fun query() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val historyServiceAsync = client.hazard().history()
-
-        val responseFuture =
-            historyServiceAsync.query(
-                HistoryQueryParams.builder()
-                    .detectTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .columns("columns")
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .build()
-            )
-
-        val response = responseFuture.get()
-        response.forEach { it.validate() }
     }
 }

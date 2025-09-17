@@ -10,10 +10,10 @@ import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCountParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCreateBulkParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCreateParams
+import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationListPage
+import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationListParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryHelpParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryHelpResponse
-import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryParams
-import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryResponse
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationRetrieveParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationRetrieveResponse
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationTupleParams
@@ -87,6 +87,20 @@ interface CalibrationService {
         retrieve(id, CalibrationRetrieveParams.none(), requestOptions)
 
     /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
+    fun list(params: CalibrationListParams): CalibrationListPage =
+        list(params, RequestOptions.none())
+
+    /** @see list */
+    fun list(
+        params: CalibrationListParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CalibrationListPage
+
+    /**
      * Service operation to return the count of records satisfying the specified query parameters.
      * This operation is useful to determine how many records pass a particular query criteria
      * without retrieving large amounts of data. See the queryhelp operation
@@ -115,20 +129,6 @@ interface CalibrationService {
         params: CalibrationCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
-
-    /**
-     * Service operation to dynamically query data by a variety of query parameters not specified in
-     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
-     * more details on valid/required query parameter information.
-     */
-    fun query(params: CalibrationQueryParams): List<CalibrationQueryResponse> =
-        query(params, RequestOptions.none())
-
-    /** @see query */
-    fun query(
-        params: CalibrationQueryParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): List<CalibrationQueryResponse>
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -262,6 +262,21 @@ interface CalibrationService {
             retrieve(id, CalibrationRetrieveParams.none(), requestOptions)
 
         /**
+         * Returns a raw HTTP response for `get /udl/sensorcalibration`, but is otherwise the same
+         * as [CalibrationService.list].
+         */
+        @MustBeClosed
+        fun list(params: CalibrationListParams): HttpResponseFor<CalibrationListPage> =
+            list(params, RequestOptions.none())
+
+        /** @see list */
+        @MustBeClosed
+        fun list(
+            params: CalibrationListParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<CalibrationListPage>
+
+        /**
          * Returns a raw HTTP response for `get /udl/sensorcalibration/count`, but is otherwise the
          * same as [CalibrationService.count].
          */
@@ -290,21 +305,6 @@ interface CalibrationService {
             params: CalibrationCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
-
-        /**
-         * Returns a raw HTTP response for `get /udl/sensorcalibration`, but is otherwise the same
-         * as [CalibrationService.query].
-         */
-        @MustBeClosed
-        fun query(params: CalibrationQueryParams): HttpResponseFor<List<CalibrationQueryResponse>> =
-            query(params, RequestOptions.none())
-
-        /** @see query */
-        @MustBeClosed
-        fun query(
-            params: CalibrationQueryParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<List<CalibrationQueryResponse>>
 
         /**
          * Returns a raw HTTP response for `get /udl/sensorcalibration/queryhelp`, but is otherwise

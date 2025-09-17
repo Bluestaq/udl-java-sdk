@@ -11,10 +11,10 @@ import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationCo
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationCreateBulkParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationCreateParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationDeleteParams
+import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationListPage
+import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationListParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationQueryHelpParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationQueryHelpResponse
-import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationQueryParams
-import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationQueryResponse
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationRetrieveParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationRetrieveResponse
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationTupleParams
@@ -85,6 +85,20 @@ interface EmitterGeolocationService {
         retrieve(id, EmitterGeolocationRetrieveParams.none(), requestOptions)
 
     /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
+    fun list(params: EmitterGeolocationListParams): EmitterGeolocationListPage =
+        list(params, RequestOptions.none())
+
+    /** @see list */
+    fun list(
+        params: EmitterGeolocationListParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): EmitterGeolocationListPage
+
+    /**
      * Service operation to delete a RF geolocation specified by the passed ID path parameter. A
      * specific role is required to perform this service operation. Please contact the UDL team for
      * assistance. Note, delete operations do not remove data from historical or publish/subscribe
@@ -148,20 +162,6 @@ interface EmitterGeolocationService {
         params: EmitterGeolocationCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
-
-    /**
-     * Service operation to dynamically query data by a variety of query parameters not specified in
-     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
-     * more details on valid/required query parameter information.
-     */
-    fun query(params: EmitterGeolocationQueryParams): List<EmitterGeolocationQueryResponse> =
-        query(params, RequestOptions.none())
-
-    /** @see query */
-    fun query(
-        params: EmitterGeolocationQueryParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): List<EmitterGeolocationQueryResponse>
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -296,6 +296,22 @@ interface EmitterGeolocationService {
             retrieve(id, EmitterGeolocationRetrieveParams.none(), requestOptions)
 
         /**
+         * Returns a raw HTTP response for `get /udl/emittergeolocation`, but is otherwise the same
+         * as [EmitterGeolocationService.list].
+         */
+        @MustBeClosed
+        fun list(
+            params: EmitterGeolocationListParams
+        ): HttpResponseFor<EmitterGeolocationListPage> = list(params, RequestOptions.none())
+
+        /** @see list */
+        @MustBeClosed
+        fun list(
+            params: EmitterGeolocationListParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<EmitterGeolocationListPage>
+
+        /**
          * Returns a raw HTTP response for `delete /udl/emittergeolocation/{id}`, but is otherwise
          * the same as [EmitterGeolocationService.delete].
          */
@@ -363,23 +379,6 @@ interface EmitterGeolocationService {
             params: EmitterGeolocationCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
-
-        /**
-         * Returns a raw HTTP response for `get /udl/emittergeolocation`, but is otherwise the same
-         * as [EmitterGeolocationService.query].
-         */
-        @MustBeClosed
-        fun query(
-            params: EmitterGeolocationQueryParams
-        ): HttpResponseFor<List<EmitterGeolocationQueryResponse>> =
-            query(params, RequestOptions.none())
-
-        /** @see query */
-        @MustBeClosed
-        fun query(
-            params: EmitterGeolocationQueryParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<List<EmitterGeolocationQueryResponse>>
 
         /**
          * Returns a raw HTTP response for `get /udl/emittergeolocation/queryhelp`, but is otherwise

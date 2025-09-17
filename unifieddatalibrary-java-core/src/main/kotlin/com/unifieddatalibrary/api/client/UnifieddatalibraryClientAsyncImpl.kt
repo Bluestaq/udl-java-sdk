@@ -70,6 +70,8 @@ import com.unifieddatalibrary.api.services.async.CountryServiceAsync
 import com.unifieddatalibrary.api.services.async.CountryServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.CrewServiceAsync
 import com.unifieddatalibrary.api.services.async.CrewServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.DeconflictsetServiceAsync
+import com.unifieddatalibrary.api.services.async.DeconflictsetServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.DiffOfArrivalServiceAsync
 import com.unifieddatalibrary.api.services.async.DiffOfArrivalServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.DiplomaticClearanceServiceAsync
@@ -78,14 +80,16 @@ import com.unifieddatalibrary.api.services.async.DriftHistoryServiceAsync
 import com.unifieddatalibrary.api.services.async.DriftHistoryServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.DropzoneServiceAsync
 import com.unifieddatalibrary.api.services.async.DropzoneServiceAsyncImpl
-import com.unifieddatalibrary.api.services.async.EcpSdrServiceAsync
-import com.unifieddatalibrary.api.services.async.EcpSdrServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.EcpedrServiceAsync
+import com.unifieddatalibrary.api.services.async.EcpedrServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.EffectRequestServiceAsync
 import com.unifieddatalibrary.api.services.async.EffectRequestServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.EffectResponseServiceAsync
 import com.unifieddatalibrary.api.services.async.EffectResponseServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.ElsetServiceAsync
 import com.unifieddatalibrary.api.services.async.ElsetServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.EmireportServiceAsync
+import com.unifieddatalibrary.api.services.async.EmireportServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.EmitterGeolocationServiceAsync
 import com.unifieddatalibrary.api.services.async.EmitterGeolocationServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.EngineDetailServiceAsync
@@ -140,6 +144,10 @@ import com.unifieddatalibrary.api.services.async.ItemServiceAsync
 import com.unifieddatalibrary.api.services.async.ItemServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.ItemTrackingServiceAsync
 import com.unifieddatalibrary.api.services.async.ItemTrackingServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.LaserdeconflictrequestServiceAsync
+import com.unifieddatalibrary.api.services.async.LaserdeconflictrequestServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.LaseremitterServiceAsync
+import com.unifieddatalibrary.api.services.async.LaseremitterServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.LaunchDetectionServiceAsync
 import com.unifieddatalibrary.api.services.async.LaunchDetectionServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.LaunchEventServiceAsync
@@ -154,6 +162,8 @@ import com.unifieddatalibrary.api.services.async.LaunchVehicleServiceAsync
 import com.unifieddatalibrary.api.services.async.LaunchVehicleServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.LinkStatusServiceAsync
 import com.unifieddatalibrary.api.services.async.LinkStatusServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.LinkstatusServiceAsync
+import com.unifieddatalibrary.api.services.async.LinkstatusServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.LocationServiceAsync
 import com.unifieddatalibrary.api.services.async.LocationServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.LogisticsSupportServiceAsync
@@ -236,8 +246,6 @@ import com.unifieddatalibrary.api.services.async.ScServiceAsync
 import com.unifieddatalibrary.api.services.async.ScServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.ScientificServiceAsync
 import com.unifieddatalibrary.api.services.async.ScientificServiceAsyncImpl
-import com.unifieddatalibrary.api.services.async.ScsViewServiceAsync
-import com.unifieddatalibrary.api.services.async.ScsViewServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.SecureMessagingServiceAsync
 import com.unifieddatalibrary.api.services.async.SecureMessagingServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.SensorMaintenanceServiceAsync
@@ -374,6 +382,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         AircraftStatusServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
+    private val airfieldSlotConsumptions: AirfieldSlotConsumptionServiceAsync by lazy {
+        AirfieldSlotConsumptionServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
     private val airfieldSlots: AirfieldSlotServiceAsync by lazy {
         AirfieldSlotServiceAsyncImpl(clientOptionsWithUserAgent)
     }
@@ -384,10 +396,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     private val airfields: AirfieldServiceAsync by lazy {
         AirfieldServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
-    private val airfieldSlotConsumptions: AirfieldSlotConsumptionServiceAsync by lazy {
-        AirfieldSlotConsumptionServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
     private val airloadPlans: AirloadPlanServiceAsync by lazy {
@@ -418,6 +426,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     private val attitudeSets: AttitudeSetServiceAsync by lazy {
         AttitudeSetServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
+    private val aviationRiskManagement: AviationRiskManagementServiceAsync by lazy {
+        AviationRiskManagementServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
     private val batteries: BatteryServiceAsync by lazy {
@@ -456,35 +468,15 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     private val cots: CotServiceAsync by lazy { CotServiceAsyncImpl(clientOptionsWithUserAgent) }
 
-    private val aviationRiskManagement: AviationRiskManagementServiceAsync by lazy {
-        AviationRiskManagementServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
-    private val dropzone: DropzoneServiceAsync by lazy {
-        DropzoneServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
-    private val emitterGeolocation: EmitterGeolocationServiceAsync by lazy {
-        EmitterGeolocationServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
-    private val featureAssessment: FeatureAssessmentServiceAsync by lazy {
-        FeatureAssessmentServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
-    private val globalAtmosphericModel: GlobalAtmosphericModelServiceAsync by lazy {
-        GlobalAtmosphericModelServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
-    private val routeStats: RouteStatServiceAsync by lazy {
-        RouteStatServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
     private val countries: CountryServiceAsync by lazy {
         CountryServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
     private val crew: CrewServiceAsync by lazy { CrewServiceAsyncImpl(clientOptionsWithUserAgent) }
+
+    private val deconflictset: DeconflictsetServiceAsync by lazy {
+        DeconflictsetServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
 
     private val diffOfArrival: DiffOfArrivalServiceAsync by lazy {
         DiffOfArrivalServiceAsyncImpl(clientOptionsWithUserAgent)
@@ -498,8 +490,12 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         DriftHistoryServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
-    private val ecpSdr: EcpSdrServiceAsync by lazy {
-        EcpSdrServiceAsyncImpl(clientOptionsWithUserAgent)
+    private val dropzone: DropzoneServiceAsync by lazy {
+        DropzoneServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
+    private val ecpedr: EcpedrServiceAsync by lazy {
+        EcpedrServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
     private val effectRequests: EffectRequestServiceAsync by lazy {
@@ -512,6 +508,14 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     private val elsets: ElsetServiceAsync by lazy {
         ElsetServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
+    private val emireport: EmireportServiceAsync by lazy {
+        EmireportServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
+    private val emitterGeolocation: EmitterGeolocationServiceAsync by lazy {
+        EmitterGeolocationServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
     private val engineDetails: EngineDetailServiceAsync by lazy {
@@ -550,6 +554,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         EventEvolutionServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
+    private val featureAssessment: FeatureAssessmentServiceAsync by lazy {
+        FeatureAssessmentServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
     private val flightplan: FlightplanServiceAsync by lazy {
         FlightplanServiceAsyncImpl(clientOptionsWithUserAgent)
     }
@@ -558,8 +566,20 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         GeoStatusServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
+    private val globalAtmosphericModel: GlobalAtmosphericModelServiceAsync by lazy {
+        GlobalAtmosphericModelServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
+    private val gnssObservations: GnssObservationServiceAsync by lazy {
+        GnssObservationServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
     private val gnssObservationset: GnssObservationsetServiceAsync by lazy {
         GnssObservationsetServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
+    private val gnssRawIf: GnssRawIfServiceAsync by lazy {
+        GnssRawIfServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
     private val groundImagery: GroundImageryServiceAsync by lazy {
@@ -578,6 +598,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         HazardServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
+    private val ionoObservations: IonoObservationServiceAsync by lazy {
+        IonoObservationServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
     private val ir: IrServiceAsync by lazy { IrServiceAsyncImpl(clientOptionsWithUserAgent) }
 
     private val isrCollections: IsrCollectionServiceAsync by lazy {
@@ -588,6 +612,14 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     private val itemTrackings: ItemTrackingServiceAsync by lazy {
         ItemTrackingServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
+    private val laserdeconflictrequest: LaserdeconflictrequestServiceAsync by lazy {
+        LaserdeconflictrequestServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
+    private val laseremitter: LaseremitterServiceAsync by lazy {
+        LaseremitterServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
     private val launchDetection: LaunchDetectionServiceAsync by lazy {
@@ -616,6 +648,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     private val linkStatus: LinkStatusServiceAsync by lazy {
         LinkStatusServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
+    private val linkstatus: LinkstatusServiceAsync by lazy {
+        LinkstatusServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
     private val location: LocationServiceAsync by lazy {
@@ -740,6 +776,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     private val port: PortServiceAsync by lazy { PortServiceAsyncImpl(clientOptionsWithUserAgent) }
 
+    private val reportAndActivities: ReportAndActivityServiceAsync by lazy {
+        ReportAndActivityServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
     private val rfBand: RfBandServiceAsync by lazy {
         RfBandServiceAsyncImpl(clientOptionsWithUserAgent)
     }
@@ -756,12 +796,22 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         RfEmitterDetailServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
+    private val routeStats: RouteStatServiceAsync by lazy {
+        RouteStatServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
     private val sarObservation: SarObservationServiceAsync by lazy {
         SarObservationServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
     private val scientific: ScientificServiceAsync by lazy {
         ScientificServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
+    private val scs: ScServiceAsync by lazy { ScServiceAsyncImpl(clientOptionsWithUserAgent) }
+
+    private val secureMessaging: SecureMessagingServiceAsync by lazy {
+        SecureMessagingServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
     private val sensor: SensorServiceAsync by lazy {
@@ -926,32 +976,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         WeatherReportServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
-    private val gnssObservations: GnssObservationServiceAsync by lazy {
-        GnssObservationServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
-    private val gnssRawIf: GnssRawIfServiceAsync by lazy {
-        GnssRawIfServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
-    private val ionoObservations: IonoObservationServiceAsync by lazy {
-        IonoObservationServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
-    private val reportAndActivities: ReportAndActivityServiceAsync by lazy {
-        ReportAndActivityServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
-    private val secureMessaging: SecureMessagingServiceAsync by lazy {
-        SecureMessagingServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
-    private val scs: ScServiceAsync by lazy { ScServiceAsyncImpl(clientOptionsWithUserAgent) }
-
-    private val scsViews: ScsViewServiceAsync by lazy {
-        ScsViewServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
     override fun sync(): UnifieddatalibraryClient = sync
 
     override fun withRawResponse(): UnifieddatalibraryClientAsync.WithRawResponse = withRawResponse
@@ -975,14 +999,14 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     override fun aircraftStatuses(): AircraftStatusServiceAsync = aircraftStatuses
 
+    override fun airfieldSlotConsumptions(): AirfieldSlotConsumptionServiceAsync =
+        airfieldSlotConsumptions
+
     override fun airfieldSlots(): AirfieldSlotServiceAsync = airfieldSlots
 
     override fun airfieldStatus(): AirfieldStatusServiceAsync = airfieldStatus
 
     override fun airfields(): AirfieldServiceAsync = airfields
-
-    override fun airfieldSlotConsumptions(): AirfieldSlotConsumptionServiceAsync =
-        airfieldSlotConsumptions
 
     override fun airloadPlans(): AirloadPlanServiceAsync = airloadPlans
 
@@ -999,6 +1023,9 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
     override fun attitudeData(): AttitudeDataServiceAsync = attitudeData
 
     override fun attitudeSets(): AttitudeSetServiceAsync = attitudeSets
+
+    override fun aviationRiskManagement(): AviationRiskManagementServiceAsync =
+        aviationRiskManagement
 
     override fun batteries(): BatteryServiceAsync = batteries
 
@@ -1022,23 +1049,11 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     override fun cots(): CotServiceAsync = cots
 
-    override fun aviationRiskManagement(): AviationRiskManagementServiceAsync =
-        aviationRiskManagement
-
-    override fun dropzone(): DropzoneServiceAsync = dropzone
-
-    override fun emitterGeolocation(): EmitterGeolocationServiceAsync = emitterGeolocation
-
-    override fun featureAssessment(): FeatureAssessmentServiceAsync = featureAssessment
-
-    override fun globalAtmosphericModel(): GlobalAtmosphericModelServiceAsync =
-        globalAtmosphericModel
-
-    override fun routeStats(): RouteStatServiceAsync = routeStats
-
     override fun countries(): CountryServiceAsync = countries
 
     override fun crew(): CrewServiceAsync = crew
+
+    override fun deconflictset(): DeconflictsetServiceAsync = deconflictset
 
     override fun diffOfArrival(): DiffOfArrivalServiceAsync = diffOfArrival
 
@@ -1046,13 +1061,19 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     override fun driftHistory(): DriftHistoryServiceAsync = driftHistory
 
-    override fun ecpSdr(): EcpSdrServiceAsync = ecpSdr
+    override fun dropzone(): DropzoneServiceAsync = dropzone
+
+    override fun ecpedr(): EcpedrServiceAsync = ecpedr
 
     override fun effectRequests(): EffectRequestServiceAsync = effectRequests
 
     override fun effectResponses(): EffectResponseServiceAsync = effectResponses
 
     override fun elsets(): ElsetServiceAsync = elsets
+
+    override fun emireport(): EmireportServiceAsync = emireport
+
+    override fun emitterGeolocation(): EmitterGeolocationServiceAsync = emitterGeolocation
 
     override fun engineDetails(): EngineDetailServiceAsync = engineDetails
 
@@ -1074,11 +1095,20 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     override fun eventEvolution(): EventEvolutionServiceAsync = eventEvolution
 
+    override fun featureAssessment(): FeatureAssessmentServiceAsync = featureAssessment
+
     override fun flightplan(): FlightplanServiceAsync = flightplan
 
     override fun geoStatus(): GeoStatusServiceAsync = geoStatus
 
+    override fun globalAtmosphericModel(): GlobalAtmosphericModelServiceAsync =
+        globalAtmosphericModel
+
+    override fun gnssObservations(): GnssObservationServiceAsync = gnssObservations
+
     override fun gnssObservationset(): GnssObservationsetServiceAsync = gnssObservationset
+
+    override fun gnssRawIf(): GnssRawIfServiceAsync = gnssRawIf
 
     override fun groundImagery(): GroundImageryServiceAsync = groundImagery
 
@@ -1088,6 +1118,8 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     override fun hazard(): HazardServiceAsync = hazard
 
+    override fun ionoObservations(): IonoObservationServiceAsync = ionoObservations
+
     override fun ir(): IrServiceAsync = ir
 
     override fun isrCollections(): IsrCollectionServiceAsync = isrCollections
@@ -1095,6 +1127,11 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
     override fun item(): ItemServiceAsync = item
 
     override fun itemTrackings(): ItemTrackingServiceAsync = itemTrackings
+
+    override fun laserdeconflictrequest(): LaserdeconflictrequestServiceAsync =
+        laserdeconflictrequest
+
+    override fun laseremitter(): LaseremitterServiceAsync = laseremitter
 
     override fun launchDetection(): LaunchDetectionServiceAsync = launchDetection
 
@@ -1109,6 +1146,8 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
     override fun launchVehicleDetails(): LaunchVehicleDetailServiceAsync = launchVehicleDetails
 
     override fun linkStatus(): LinkStatusServiceAsync = linkStatus
+
+    override fun linkstatus(): LinkstatusServiceAsync = linkstatus
 
     override fun location(): LocationServiceAsync = location
 
@@ -1175,6 +1214,8 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     override fun port(): PortServiceAsync = port
 
+    override fun reportAndActivities(): ReportAndActivityServiceAsync = reportAndActivities
+
     override fun rfBand(): RfBandServiceAsync = rfBand
 
     override fun rfBandType(): RfBandTypeServiceAsync = rfBandType
@@ -1183,9 +1224,15 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     override fun rfEmitterDetails(): RfEmitterDetailServiceAsync = rfEmitterDetails
 
+    override fun routeStats(): RouteStatServiceAsync = routeStats
+
     override fun sarObservation(): SarObservationServiceAsync = sarObservation
 
     override fun scientific(): ScientificServiceAsync = scientific
+
+    override fun scs(): ScServiceAsync = scs
+
+    override fun secureMessaging(): SecureMessagingServiceAsync = secureMessaging
 
     override fun sensor(): SensorServiceAsync = sensor
 
@@ -1273,20 +1320,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     override fun weatherReport(): WeatherReportServiceAsync = weatherReport
 
-    override fun gnssObservations(): GnssObservationServiceAsync = gnssObservations
-
-    override fun gnssRawIf(): GnssRawIfServiceAsync = gnssRawIf
-
-    override fun ionoObservations(): IonoObservationServiceAsync = ionoObservations
-
-    override fun reportAndActivities(): ReportAndActivityServiceAsync = reportAndActivities
-
-    override fun secureMessaging(): SecureMessagingServiceAsync = secureMessaging
-
-    override fun scs(): ScServiceAsync = scs
-
-    override fun scsViews(): ScsViewServiceAsync = scsViews
-
     override fun close() = clientOptions.close()
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -1321,6 +1354,11 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             AircraftStatusServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        private val airfieldSlotConsumptions:
+            AirfieldSlotConsumptionServiceAsync.WithRawResponse by lazy {
+            AirfieldSlotConsumptionServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
         private val airfieldSlots: AirfieldSlotServiceAsync.WithRawResponse by lazy {
             AirfieldSlotServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
@@ -1331,11 +1369,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         private val airfields: AirfieldServiceAsync.WithRawResponse by lazy {
             AirfieldServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val airfieldSlotConsumptions:
-            AirfieldSlotConsumptionServiceAsync.WithRawResponse by lazy {
-            AirfieldSlotConsumptionServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val airloadPlans: AirloadPlanServiceAsync.WithRawResponse by lazy {
@@ -1369,6 +1402,11 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         private val attitudeSets: AttitudeSetServiceAsync.WithRawResponse by lazy {
             AttitudeSetServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val aviationRiskManagement:
+            AviationRiskManagementServiceAsync.WithRawResponse by lazy {
+            AviationRiskManagementServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val batteries: BatteryServiceAsync.WithRawResponse by lazy {
@@ -1415,38 +1453,16 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             CotServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val aviationRiskManagement:
-            AviationRiskManagementServiceAsync.WithRawResponse by lazy {
-            AviationRiskManagementServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val dropzone: DropzoneServiceAsync.WithRawResponse by lazy {
-            DropzoneServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val emitterGeolocation: EmitterGeolocationServiceAsync.WithRawResponse by lazy {
-            EmitterGeolocationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val featureAssessment: FeatureAssessmentServiceAsync.WithRawResponse by lazy {
-            FeatureAssessmentServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val globalAtmosphericModel:
-            GlobalAtmosphericModelServiceAsync.WithRawResponse by lazy {
-            GlobalAtmosphericModelServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val routeStats: RouteStatServiceAsync.WithRawResponse by lazy {
-            RouteStatServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
         private val countries: CountryServiceAsync.WithRawResponse by lazy {
             CountryServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val crew: CrewServiceAsync.WithRawResponse by lazy {
             CrewServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val deconflictset: DeconflictsetServiceAsync.WithRawResponse by lazy {
+            DeconflictsetServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val diffOfArrival: DiffOfArrivalServiceAsync.WithRawResponse by lazy {
@@ -1461,8 +1477,12 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             DriftHistoryServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val ecpSdr: EcpSdrServiceAsync.WithRawResponse by lazy {
-            EcpSdrServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        private val dropzone: DropzoneServiceAsync.WithRawResponse by lazy {
+            DropzoneServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val ecpedr: EcpedrServiceAsync.WithRawResponse by lazy {
+            EcpedrServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val effectRequests: EffectRequestServiceAsync.WithRawResponse by lazy {
@@ -1475,6 +1495,14 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         private val elsets: ElsetServiceAsync.WithRawResponse by lazy {
             ElsetServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val emireport: EmireportServiceAsync.WithRawResponse by lazy {
+            EmireportServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val emitterGeolocation: EmitterGeolocationServiceAsync.WithRawResponse by lazy {
+            EmitterGeolocationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val engineDetails: EngineDetailServiceAsync.WithRawResponse by lazy {
@@ -1517,6 +1545,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             EventEvolutionServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        private val featureAssessment: FeatureAssessmentServiceAsync.WithRawResponse by lazy {
+            FeatureAssessmentServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
         private val flightplan: FlightplanServiceAsync.WithRawResponse by lazy {
             FlightplanServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
@@ -1525,8 +1557,21 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             GeoStatusServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        private val globalAtmosphericModel:
+            GlobalAtmosphericModelServiceAsync.WithRawResponse by lazy {
+            GlobalAtmosphericModelServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val gnssObservations: GnssObservationServiceAsync.WithRawResponse by lazy {
+            GnssObservationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
         private val gnssObservationset: GnssObservationsetServiceAsync.WithRawResponse by lazy {
             GnssObservationsetServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val gnssRawIf: GnssRawIfServiceAsync.WithRawResponse by lazy {
+            GnssRawIfServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val groundImagery: GroundImageryServiceAsync.WithRawResponse by lazy {
@@ -1545,6 +1590,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             HazardServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        private val ionoObservations: IonoObservationServiceAsync.WithRawResponse by lazy {
+            IonoObservationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
         private val ir: IrServiceAsync.WithRawResponse by lazy {
             IrServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
@@ -1559,6 +1608,15 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         private val itemTrackings: ItemTrackingServiceAsync.WithRawResponse by lazy {
             ItemTrackingServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val laserdeconflictrequest:
+            LaserdeconflictrequestServiceAsync.WithRawResponse by lazy {
+            LaserdeconflictrequestServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val laseremitter: LaseremitterServiceAsync.WithRawResponse by lazy {
+            LaseremitterServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val launchDetection: LaunchDetectionServiceAsync.WithRawResponse by lazy {
@@ -1587,6 +1645,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         private val linkStatus: LinkStatusServiceAsync.WithRawResponse by lazy {
             LinkStatusServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val linkstatus: LinkstatusServiceAsync.WithRawResponse by lazy {
+            LinkstatusServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val location: LocationServiceAsync.WithRawResponse by lazy {
@@ -1719,6 +1781,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             PortServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        private val reportAndActivities: ReportAndActivityServiceAsync.WithRawResponse by lazy {
+            ReportAndActivityServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
         private val rfBand: RfBandServiceAsync.WithRawResponse by lazy {
             RfBandServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
@@ -1735,12 +1801,24 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             RfEmitterDetailServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        private val routeStats: RouteStatServiceAsync.WithRawResponse by lazy {
+            RouteStatServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
         private val sarObservation: SarObservationServiceAsync.WithRawResponse by lazy {
             SarObservationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val scientific: ScientificServiceAsync.WithRawResponse by lazy {
             ScientificServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val scs: ScServiceAsync.WithRawResponse by lazy {
+            ScServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val secureMessaging: SecureMessagingServiceAsync.WithRawResponse by lazy {
+            SecureMessagingServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val sensor: SensorServiceAsync.WithRawResponse by lazy {
@@ -1915,34 +1993,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             WeatherReportServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val gnssObservations: GnssObservationServiceAsync.WithRawResponse by lazy {
-            GnssObservationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val gnssRawIf: GnssRawIfServiceAsync.WithRawResponse by lazy {
-            GnssRawIfServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val ionoObservations: IonoObservationServiceAsync.WithRawResponse by lazy {
-            IonoObservationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val reportAndActivities: ReportAndActivityServiceAsync.WithRawResponse by lazy {
-            ReportAndActivityServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val secureMessaging: SecureMessagingServiceAsync.WithRawResponse by lazy {
-            SecureMessagingServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val scs: ScServiceAsync.WithRawResponse by lazy {
-            ScServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val scsViews: ScsViewServiceAsync.WithRawResponse by lazy {
-            ScsViewServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
         override fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): UnifieddatalibraryClientAsync.WithRawResponse =
@@ -1967,14 +2017,14 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         override fun aircraftStatuses(): AircraftStatusServiceAsync.WithRawResponse =
             aircraftStatuses
 
+        override fun airfieldSlotConsumptions():
+            AirfieldSlotConsumptionServiceAsync.WithRawResponse = airfieldSlotConsumptions
+
         override fun airfieldSlots(): AirfieldSlotServiceAsync.WithRawResponse = airfieldSlots
 
         override fun airfieldStatus(): AirfieldStatusServiceAsync.WithRawResponse = airfieldStatus
 
         override fun airfields(): AirfieldServiceAsync.WithRawResponse = airfields
-
-        override fun airfieldSlotConsumptions():
-            AirfieldSlotConsumptionServiceAsync.WithRawResponse = airfieldSlotConsumptions
 
         override fun airloadPlans(): AirloadPlanServiceAsync.WithRawResponse = airloadPlans
 
@@ -1993,6 +2043,9 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         override fun attitudeData(): AttitudeDataServiceAsync.WithRawResponse = attitudeData
 
         override fun attitudeSets(): AttitudeSetServiceAsync.WithRawResponse = attitudeSets
+
+        override fun aviationRiskManagement(): AviationRiskManagementServiceAsync.WithRawResponse =
+            aviationRiskManagement
 
         override fun batteries(): BatteryServiceAsync.WithRawResponse = batteries
 
@@ -2017,25 +2070,11 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         override fun cots(): CotServiceAsync.WithRawResponse = cots
 
-        override fun aviationRiskManagement(): AviationRiskManagementServiceAsync.WithRawResponse =
-            aviationRiskManagement
-
-        override fun dropzone(): DropzoneServiceAsync.WithRawResponse = dropzone
-
-        override fun emitterGeolocation(): EmitterGeolocationServiceAsync.WithRawResponse =
-            emitterGeolocation
-
-        override fun featureAssessment(): FeatureAssessmentServiceAsync.WithRawResponse =
-            featureAssessment
-
-        override fun globalAtmosphericModel(): GlobalAtmosphericModelServiceAsync.WithRawResponse =
-            globalAtmosphericModel
-
-        override fun routeStats(): RouteStatServiceAsync.WithRawResponse = routeStats
-
         override fun countries(): CountryServiceAsync.WithRawResponse = countries
 
         override fun crew(): CrewServiceAsync.WithRawResponse = crew
+
+        override fun deconflictset(): DeconflictsetServiceAsync.WithRawResponse = deconflictset
 
         override fun diffOfArrival(): DiffOfArrivalServiceAsync.WithRawResponse = diffOfArrival
 
@@ -2044,13 +2083,20 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         override fun driftHistory(): DriftHistoryServiceAsync.WithRawResponse = driftHistory
 
-        override fun ecpSdr(): EcpSdrServiceAsync.WithRawResponse = ecpSdr
+        override fun dropzone(): DropzoneServiceAsync.WithRawResponse = dropzone
+
+        override fun ecpedr(): EcpedrServiceAsync.WithRawResponse = ecpedr
 
         override fun effectRequests(): EffectRequestServiceAsync.WithRawResponse = effectRequests
 
         override fun effectResponses(): EffectResponseServiceAsync.WithRawResponse = effectResponses
 
         override fun elsets(): ElsetServiceAsync.WithRawResponse = elsets
+
+        override fun emireport(): EmireportServiceAsync.WithRawResponse = emireport
+
+        override fun emitterGeolocation(): EmitterGeolocationServiceAsync.WithRawResponse =
+            emitterGeolocation
 
         override fun engineDetails(): EngineDetailServiceAsync.WithRawResponse = engineDetails
 
@@ -2073,12 +2119,23 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         override fun eventEvolution(): EventEvolutionServiceAsync.WithRawResponse = eventEvolution
 
+        override fun featureAssessment(): FeatureAssessmentServiceAsync.WithRawResponse =
+            featureAssessment
+
         override fun flightplan(): FlightplanServiceAsync.WithRawResponse = flightplan
 
         override fun geoStatus(): GeoStatusServiceAsync.WithRawResponse = geoStatus
 
+        override fun globalAtmosphericModel(): GlobalAtmosphericModelServiceAsync.WithRawResponse =
+            globalAtmosphericModel
+
+        override fun gnssObservations(): GnssObservationServiceAsync.WithRawResponse =
+            gnssObservations
+
         override fun gnssObservationset(): GnssObservationsetServiceAsync.WithRawResponse =
             gnssObservationset
+
+        override fun gnssRawIf(): GnssRawIfServiceAsync.WithRawResponse = gnssRawIf
 
         override fun groundImagery(): GroundImageryServiceAsync.WithRawResponse = groundImagery
 
@@ -2088,6 +2145,9 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         override fun hazard(): HazardServiceAsync.WithRawResponse = hazard
 
+        override fun ionoObservations(): IonoObservationServiceAsync.WithRawResponse =
+            ionoObservations
+
         override fun ir(): IrServiceAsync.WithRawResponse = ir
 
         override fun isrCollections(): IsrCollectionServiceAsync.WithRawResponse = isrCollections
@@ -2095,6 +2155,11 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         override fun item(): ItemServiceAsync.WithRawResponse = item
 
         override fun itemTrackings(): ItemTrackingServiceAsync.WithRawResponse = itemTrackings
+
+        override fun laserdeconflictrequest(): LaserdeconflictrequestServiceAsync.WithRawResponse =
+            laserdeconflictrequest
+
+        override fun laseremitter(): LaseremitterServiceAsync.WithRawResponse = laseremitter
 
         override fun launchDetection(): LaunchDetectionServiceAsync.WithRawResponse =
             launchDetection
@@ -2112,6 +2177,8 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             launchVehicleDetails
 
         override fun linkStatus(): LinkStatusServiceAsync.WithRawResponse = linkStatus
+
+        override fun linkstatus(): LinkstatusServiceAsync.WithRawResponse = linkstatus
 
         override fun location(): LocationServiceAsync.WithRawResponse = location
 
@@ -2189,6 +2256,9 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         override fun port(): PortServiceAsync.WithRawResponse = port
 
+        override fun reportAndActivities(): ReportAndActivityServiceAsync.WithRawResponse =
+            reportAndActivities
+
         override fun rfBand(): RfBandServiceAsync.WithRawResponse = rfBand
 
         override fun rfBandType(): RfBandTypeServiceAsync.WithRawResponse = rfBandType
@@ -2198,9 +2268,16 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         override fun rfEmitterDetails(): RfEmitterDetailServiceAsync.WithRawResponse =
             rfEmitterDetails
 
+        override fun routeStats(): RouteStatServiceAsync.WithRawResponse = routeStats
+
         override fun sarObservation(): SarObservationServiceAsync.WithRawResponse = sarObservation
 
         override fun scientific(): ScientificServiceAsync.WithRawResponse = scientific
+
+        override fun scs(): ScServiceAsync.WithRawResponse = scs
+
+        override fun secureMessaging(): SecureMessagingServiceAsync.WithRawResponse =
+            secureMessaging
 
         override fun sensor(): SensorServiceAsync.WithRawResponse = sensor
 
@@ -2298,23 +2375,5 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         override fun weatherData(): WeatherDataServiceAsync.WithRawResponse = weatherData
 
         override fun weatherReport(): WeatherReportServiceAsync.WithRawResponse = weatherReport
-
-        override fun gnssObservations(): GnssObservationServiceAsync.WithRawResponse =
-            gnssObservations
-
-        override fun gnssRawIf(): GnssRawIfServiceAsync.WithRawResponse = gnssRawIf
-
-        override fun ionoObservations(): IonoObservationServiceAsync.WithRawResponse =
-            ionoObservations
-
-        override fun reportAndActivities(): ReportAndActivityServiceAsync.WithRawResponse =
-            reportAndActivities
-
-        override fun secureMessaging(): SecureMessagingServiceAsync.WithRawResponse =
-            secureMessaging
-
-        override fun scs(): ScServiceAsync.WithRawResponse = scs
-
-        override fun scsViews(): ScsViewServiceAsync.WithRawResponse = scsViews
     }
 }

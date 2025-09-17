@@ -10,9 +10,6 @@ import com.unifieddatalibrary.api.models.AnalyticImageryFull
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryAbridged
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryCountParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryFileGetParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryAodrParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryCountParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryListPageAsync
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryListParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryQueryhelpParams
@@ -20,6 +17,7 @@ import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryQueryhel
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryRetrieveParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryTupleParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryUnvalidatedPublishParams
+import com.unifieddatalibrary.api.services.async.analyticimagery.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -36,6 +34,8 @@ interface AnalyticImageryServiceAsync {
      * The original service is not modified.
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): AnalyticImageryServiceAsync
+
+    fun history(): HistoryServiceAsync
 
     /**
      * Service operation to get a single AnalyticImagery record by its unique ID passed as a path
@@ -141,53 +141,6 @@ interface AnalyticImageryServiceAsync {
         fileGet(id, AnalyticImageryFileGetParams.none(), requestOptions)
 
     /**
-     * Service operation to dynamically query historical data by a variety of query parameters not
-     * specified in this API documentation. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
-     */
-    fun history(
-        params: AnalyticImageryHistoryParams
-    ): CompletableFuture<List<AnalyticImageryAbridged>> = history(params, RequestOptions.none())
-
-    /** @see history */
-    fun history(
-        params: AnalyticImageryHistoryParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<AnalyticImageryAbridged>>
-
-    /**
-     * Service operation to dynamically query historical data by a variety of query parameters not
-     * specified in this API documentation, then write that data to the Secure Content Store. See
-     * the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required
-     * query parameter information.
-     */
-    fun historyAodr(params: AnalyticImageryHistoryAodrParams): CompletableFuture<Void?> =
-        historyAodr(params, RequestOptions.none())
-
-    /** @see historyAodr */
-    fun historyAodr(
-        params: AnalyticImageryHistoryAodrParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<Void?>
-
-    /**
-     * Service operation to return the count of records satisfying the specified query parameters.
-     * This operation is useful to determine how many records pass a particular query criteria
-     * without retrieving large amounts of data. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
-     */
-    fun historyCount(params: AnalyticImageryHistoryCountParams): CompletableFuture<String> =
-        historyCount(params, RequestOptions.none())
-
-    /** @see historyCount */
-    fun historyCount(
-        params: AnalyticImageryHistoryCountParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<String>
-
-    /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
      */
@@ -272,6 +225,8 @@ interface AnalyticImageryServiceAsync {
         fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): AnalyticImageryServiceAsync.WithRawResponse
+
+        fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `get /udl/analyticimagery/{id}`, but is otherwise the
@@ -376,48 +331,6 @@ interface AnalyticImageryServiceAsync {
         /** @see fileGet */
         fun fileGet(id: String, requestOptions: RequestOptions): CompletableFuture<HttpResponse> =
             fileGet(id, AnalyticImageryFileGetParams.none(), requestOptions)
-
-        /**
-         * Returns a raw HTTP response for `get /udl/analyticimagery/history`, but is otherwise the
-         * same as [AnalyticImageryServiceAsync.history].
-         */
-        fun history(
-            params: AnalyticImageryHistoryParams
-        ): CompletableFuture<HttpResponseFor<List<AnalyticImageryAbridged>>> =
-            history(params, RequestOptions.none())
-
-        /** @see history */
-        fun history(
-            params: AnalyticImageryHistoryParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<AnalyticImageryAbridged>>>
-
-        /**
-         * Returns a raw HTTP response for `get /udl/analyticimagery/history/aodr`, but is otherwise
-         * the same as [AnalyticImageryServiceAsync.historyAodr].
-         */
-        fun historyAodr(params: AnalyticImageryHistoryAodrParams): CompletableFuture<HttpResponse> =
-            historyAodr(params, RequestOptions.none())
-
-        /** @see historyAodr */
-        fun historyAodr(
-            params: AnalyticImageryHistoryAodrParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponse>
-
-        /**
-         * Returns a raw HTTP response for `get /udl/analyticimagery/history/count`, but is
-         * otherwise the same as [AnalyticImageryServiceAsync.historyCount].
-         */
-        fun historyCount(
-            params: AnalyticImageryHistoryCountParams
-        ): CompletableFuture<HttpResponseFor<String>> = historyCount(params, RequestOptions.none())
-
-        /** @see historyCount */
-        fun historyCount(
-            params: AnalyticImageryHistoryCountParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<String>>
 
         /**
          * Returns a raw HTTP response for `get /udl/analyticimagery/queryhelp`, but is otherwise

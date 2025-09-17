@@ -7,7 +7,7 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAs
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCountParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCreateBulkParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCreateParams
-import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryParams
+import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationListParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationRetrieveParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationTupleParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationUnvalidatedPublishParams
@@ -115,6 +115,27 @@ internal class CalibrationServiceAsyncTest {
     }
 
     @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val calibrationServiceAsync = client.sensor().calibration()
+
+        val pageFuture =
+            calibrationServiceAsync.list(
+                CalibrationListParams.builder()
+                    .startTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .build()
+            )
+
+        val page = pageFuture.get()
+        page.items().forEach { it.validate() }
+    }
+
+    @Test
     fun count() {
         val client =
             UnifieddatalibraryOkHttpClientAsync.builder()
@@ -215,29 +236,6 @@ internal class CalibrationServiceAsyncTest {
             )
 
         val response = future.get()
-    }
-
-    @Test
-    fun query() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val calibrationServiceAsync = client.sensor().calibration()
-
-        val responseFuture =
-            calibrationServiceAsync.query(
-                CalibrationQueryParams.builder()
-                    .startTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .build()
-            )
-
-        val response = responseFuture.get()
-        response.forEach { it.validate() }
     }
 
     @Test

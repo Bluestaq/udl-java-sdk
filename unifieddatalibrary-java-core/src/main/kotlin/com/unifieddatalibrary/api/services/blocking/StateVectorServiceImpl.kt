@@ -44,18 +44,18 @@ class StateVectorServiceImpl internal constructor(private val clientOptions: Cli
         WithRawResponseImpl(clientOptions)
     }
 
-    private val history: HistoryService by lazy { HistoryServiceImpl(clientOptions) }
-
     private val current: CurrentService by lazy { CurrentServiceImpl(clientOptions) }
+
+    private val history: HistoryService by lazy { HistoryServiceImpl(clientOptions) }
 
     override fun withRawResponse(): StateVectorService.WithRawResponse = withRawResponse
 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): StateVectorService =
         StateVectorServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-    override fun history(): HistoryService = history
-
     override fun current(): CurrentService = current
+
+    override fun history(): HistoryService = history
 
     override fun create(params: StateVectorCreateParams, requestOptions: RequestOptions) {
         // post /udl/statevector
@@ -113,12 +113,12 @@ class StateVectorServiceImpl internal constructor(private val clientOptions: Cli
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val history: HistoryService.WithRawResponse by lazy {
-            HistoryServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
         private val current: CurrentService.WithRawResponse by lazy {
             CurrentServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val history: HistoryService.WithRawResponse by lazy {
+            HistoryServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
         override fun withOptions(
@@ -128,9 +128,9 @@ class StateVectorServiceImpl internal constructor(private val clientOptions: Cli
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
-        override fun history(): HistoryService.WithRawResponse = history
-
         override fun current(): CurrentService.WithRawResponse = current
+
+        override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
 

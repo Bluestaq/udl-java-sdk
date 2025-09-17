@@ -7,7 +7,7 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAs
 import com.unifieddatalibrary.api.models.aircraft.AircraftCountParams
 import com.unifieddatalibrary.api.models.aircraft.AircraftCreateParams
 import com.unifieddatalibrary.api.models.aircraft.AircraftRetrieveParams
-import com.unifieddatalibrary.api.models.aircraft.AircraftTupleQueryParams
+import com.unifieddatalibrary.api.models.aircraft.AircraftTupleParams
 import com.unifieddatalibrary.api.models.aircraft.AircraftUpdateParams
 import com.unifieddatalibrary.api.models.entities.EntityIngest
 import com.unifieddatalibrary.api.models.location.LocationIngest
@@ -302,7 +302,7 @@ internal class AircraftServiceAsyncTest {
     }
 
     @Test
-    fun tupleQuery() {
+    fun tuple() {
         val client =
             UnifieddatalibraryOkHttpClientAsync.builder()
                 .baseUrl(TestServerExtension.BASE_URL)
@@ -312,8 +312,8 @@ internal class AircraftServiceAsyncTest {
         val aircraftServiceAsync = client.aircraft()
 
         val aircraftFullsFuture =
-            aircraftServiceAsync.tupleQuery(
-                AircraftTupleQueryParams.builder()
+            aircraftServiceAsync.tuple(
+                AircraftTupleParams.builder()
                     .columns("columns")
                     .firstResult(0L)
                     .maxResults(0L)

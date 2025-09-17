@@ -17,17 +17,15 @@ import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.core.http.json
 import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepareAsync
-import com.unifieddatalibrary.api.models.AircraftsortieFull
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyCountParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyCreateBulkParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyCreateParams
-import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyHistoryAodrParams
-import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyHistoryCountParams
-import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyHistoryQueryParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyListPageAsync
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyListParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyUnvalidatedPublishParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftsortieAbridged
+import com.unifieddatalibrary.api.services.async.airoperations.aircraftsorties.HistoryServiceAsync
+import com.unifieddatalibrary.api.services.async.airoperations.aircraftsorties.HistoryServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -38,10 +36,14 @@ class AircraftSortyServiceAsyncImpl internal constructor(private val clientOptio
         WithRawResponseImpl(clientOptions)
     }
 
+    private val history: HistoryServiceAsync by lazy { HistoryServiceAsyncImpl(clientOptions) }
+
     override fun withRawResponse(): AircraftSortyServiceAsync.WithRawResponse = withRawResponse
 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): AircraftSortyServiceAsync =
         AircraftSortyServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+
+    override fun history(): HistoryServiceAsync = history
 
     override fun create(
         params: AircraftSortyCreateParams,
@@ -71,27 +73,6 @@ class AircraftSortyServiceAsyncImpl internal constructor(private val clientOptio
         // post /udl/aircraftsortie/createBulk
         withRawResponse().createBulk(params, requestOptions).thenAccept {}
 
-    override fun historyAodr(
-        params: AircraftSortyHistoryAodrParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<Void?> =
-        // get /udl/aircraftsortie/history/aodr
-        withRawResponse().historyAodr(params, requestOptions).thenAccept {}
-
-    override fun historyCount(
-        params: AircraftSortyHistoryCountParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<String> =
-        // get /udl/aircraftsortie/history/count
-        withRawResponse().historyCount(params, requestOptions).thenApply { it.parse() }
-
-    override fun historyQuery(
-        params: AircraftSortyHistoryQueryParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<List<AircraftsortieFull>> =
-        // get /udl/aircraftsortie/history
-        withRawResponse().historyQuery(params, requestOptions).thenApply { it.parse() }
-
     override fun unvalidatedPublish(
         params: AircraftSortyUnvalidatedPublishParams,
         requestOptions: RequestOptions,
@@ -105,12 +86,18 @@ class AircraftSortyServiceAsyncImpl internal constructor(private val clientOptio
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
+        private val history: HistoryServiceAsync.WithRawResponse by lazy {
+            HistoryServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
         override fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): AircraftSortyServiceAsync.WithRawResponse =
             AircraftSortyServiceAsyncImpl.WithRawResponseImpl(
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
+
+        override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
 
@@ -217,82 +204,6 @@ class AircraftSortyServiceAsyncImpl internal constructor(private val clientOptio
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response.use { createBulkHandler.handle(it) }
-                    }
-                }
-        }
-
-        private val historyAodrHandler: Handler<Void?> = emptyHandler()
-
-        override fun historyAodr(
-            params: AircraftSortyHistoryAodrParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "aircraftsortie", "history", "aodr")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response.use { historyAodrHandler.handle(it) }
-                    }
-                }
-        }
-
-        private val historyCountHandler: Handler<String> = stringHandler()
-
-        override fun historyCount(
-            params: AircraftSortyHistoryCountParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<String>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "aircraftsortie", "history", "count")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response.use { historyCountHandler.handle(it) }
-                    }
-                }
-        }
-
-        private val historyQueryHandler: Handler<List<AircraftsortieFull>> =
-            jsonHandler<List<AircraftsortieFull>>(clientOptions.jsonMapper)
-
-        override fun historyQuery(
-            params: AircraftSortyHistoryQueryParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<List<AircraftsortieFull>>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "aircraftsortie", "history")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response
-                            .use { historyQueryHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.forEach { it.validate() }
-                                }
-                            }
                     }
                 }
         }

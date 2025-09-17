@@ -4,12 +4,14 @@ package com.unifieddatalibrary.api.services.async.scs
 
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
+import com.unifieddatalibrary.api.models.scs.SearchCriterion
 import com.unifieddatalibrary.api.models.scs.v2.V2CopyParams
 import com.unifieddatalibrary.api.models.scs.v2.V2DeleteParams
 import com.unifieddatalibrary.api.models.scs.v2.V2FileUploadParams
 import com.unifieddatalibrary.api.models.scs.v2.V2FolderCreateParams
 import com.unifieddatalibrary.api.models.scs.v2.V2ListParams
 import com.unifieddatalibrary.api.models.scs.v2.V2MoveParams
+import com.unifieddatalibrary.api.models.scs.v2.V2SearchParams
 import com.unifieddatalibrary.api.models.scs.v2.V2UpdateParams
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -165,5 +167,36 @@ internal class V2ServiceAsyncTest {
             )
 
         val response = future.get()
+    }
+
+    @Test
+    fun search() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val v2ServiceAsync = client.scs().v2()
+
+        val scsEntitiesFuture =
+            v2ServiceAsync.search(
+                V2SearchParams.builder()
+                    .order("order")
+                    .searchAfter("searchAfter")
+                    .size(0)
+                    .sort("sort")
+                    .query(
+                        SearchCriterion.ScsSearchFieldCriterion.builder()
+                            .field("attachment.content")
+                            .operator(SearchCriterion.ScsSearchFieldCriterion.Operator.EXACT_MATCH)
+                            .value("This is a very cool file.")
+                            .build()
+                    )
+                    .build()
+            )
+
+        val scsEntities = scsEntitiesFuture.get()
+        scsEntities.forEach { it.validate() }
     }
 }

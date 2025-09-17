@@ -9,7 +9,6 @@ import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.AisFull
 import com.unifieddatalibrary.api.models.ais.AiCountParams
 import com.unifieddatalibrary.api.models.ais.AiCreateBulkParams
-import com.unifieddatalibrary.api.models.ais.AiHistoryCountParams
 import com.unifieddatalibrary.api.models.ais.AiListPageAsync
 import com.unifieddatalibrary.api.models.ais.AiListParams
 import com.unifieddatalibrary.api.models.ais.AiQueryhelpParams
@@ -80,22 +79,6 @@ interface AiServiceAsync {
         params: AiCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
-
-    /**
-     * Service operation to return the count of records satisfying the specified query parameters.
-     * This operation is useful to determine how many records pass a particular query criteria
-     * without retrieving large amounts of data. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
-     */
-    fun historyCount(params: AiHistoryCountParams): CompletableFuture<String> =
-        historyCount(params, RequestOptions.none())
-
-    /** @see historyCount */
-    fun historyCount(
-        params: AiHistoryCountParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<String>
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -186,19 +169,6 @@ interface AiServiceAsync {
             params: AiCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
-
-        /**
-         * Returns a raw HTTP response for `get /udl/ais/history/count`, but is otherwise the same
-         * as [AiServiceAsync.historyCount].
-         */
-        fun historyCount(params: AiHistoryCountParams): CompletableFuture<HttpResponseFor<String>> =
-            historyCount(params, RequestOptions.none())
-
-        /** @see historyCount */
-        fun historyCount(
-            params: AiHistoryCountParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<String>>
 
         /**
          * Returns a raw HTTP response for `get /udl/ais/queryhelp`, but is otherwise the same as

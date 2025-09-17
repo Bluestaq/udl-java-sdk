@@ -22,10 +22,11 @@ import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationCo
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationCreateBulkParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationCreateParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationDeleteParams
+import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationListPageAsync
+import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationListParams
+import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationListResponse
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationQueryHelpParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationQueryHelpResponse
-import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationQueryParams
-import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationQueryResponse
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationRetrieveParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationRetrieveResponse
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationTupleParams
@@ -65,6 +66,13 @@ internal constructor(private val clientOptions: ClientOptions) : EmitterGeolocat
         // get /udl/emittergeolocation/{id}
         withRawResponse().retrieve(params, requestOptions).thenApply { it.parse() }
 
+    override fun list(
+        params: EmitterGeolocationListParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<EmitterGeolocationListPageAsync> =
+        // get /udl/emittergeolocation
+        withRawResponse().list(params, requestOptions).thenApply { it.parse() }
+
     override fun delete(
         params: EmitterGeolocationDeleteParams,
         requestOptions: RequestOptions,
@@ -85,13 +93,6 @@ internal constructor(private val clientOptions: ClientOptions) : EmitterGeolocat
     ): CompletableFuture<Void?> =
         // post /udl/emittergeolocation/createBulk
         withRawResponse().createBulk(params, requestOptions).thenAccept {}
-
-    override fun query(
-        params: EmitterGeolocationQueryParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<List<EmitterGeolocationQueryResponse>> =
-        // get /udl/emittergeolocation
-        withRawResponse().query(params, requestOptions).thenApply { it.parse() }
 
     override fun queryHelp(
         params: EmitterGeolocationQueryHelpParams,
@@ -184,6 +185,44 @@ internal constructor(private val clientOptions: ClientOptions) : EmitterGeolocat
                 }
         }
 
+        private val listHandler: Handler<List<EmitterGeolocationListResponse>> =
+            jsonHandler<List<EmitterGeolocationListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: EmitterGeolocationListParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<EmitterGeolocationListPageAsync>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "emittergeolocation")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response
+                            .use { listHandler.handle(it) }
+                            .also {
+                                if (requestOptions.responseValidation!!) {
+                                    it.forEach { it.validate() }
+                                }
+                            }
+                            .let {
+                                EmitterGeolocationListPageAsync.builder()
+                                    .service(EmitterGeolocationServiceAsyncImpl(clientOptions))
+                                    .streamHandlerExecutor(clientOptions.streamHandlerExecutor)
+                                    .params(params)
+                                    .items(it)
+                                    .build()
+                            }
+                    }
+                }
+        }
+
         private val deleteHandler: Handler<Void?> = emptyHandler()
 
         override fun delete(
@@ -254,36 +293,6 @@ internal constructor(private val clientOptions: ClientOptions) : EmitterGeolocat
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response.use { createBulkHandler.handle(it) }
-                    }
-                }
-        }
-
-        private val queryHandler: Handler<List<EmitterGeolocationQueryResponse>> =
-            jsonHandler<List<EmitterGeolocationQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: EmitterGeolocationQueryParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<List<EmitterGeolocationQueryResponse>>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "emittergeolocation")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response
-                            .use { queryHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.forEach { it.validate() }
-                                }
-                            }
                     }
                 }
         }

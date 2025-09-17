@@ -20,10 +20,11 @@ import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelCountParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelGetFileParams
+import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelListPage
+import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelListParams
+import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelListResponse
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelQueryHelpParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelQueryHelpResponse
-import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelQueryParams
-import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelQueryResponse
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelRetrieveParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelRetrieveResponse
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelTupleParams
@@ -59,6 +60,13 @@ internal constructor(private val clientOptions: ClientOptions) : GlobalAtmospher
         // get /udl/globalatmosphericmodel/{id}
         withRawResponse().retrieve(params, requestOptions).parse()
 
+    override fun list(
+        params: GlobalAtmosphericModelListParams,
+        requestOptions: RequestOptions,
+    ): GlobalAtmosphericModelListPage =
+        // get /udl/globalatmosphericmodel
+        withRawResponse().list(params, requestOptions).parse()
+
     override fun count(
         params: GlobalAtmosphericModelCountParams,
         requestOptions: RequestOptions,
@@ -72,13 +80,6 @@ internal constructor(private val clientOptions: ClientOptions) : GlobalAtmospher
     ): HttpResponse =
         // get /udl/globalatmosphericmodel/getFile/{id}
         withRawResponse().getFile(params, requestOptions)
-
-    override fun query(
-        params: GlobalAtmosphericModelQueryParams,
-        requestOptions: RequestOptions,
-    ): List<GlobalAtmosphericModelQueryResponse> =
-        // get /udl/globalatmosphericmodel
-        withRawResponse().query(params, requestOptions).parse()
 
     override fun queryHelp(
         params: GlobalAtmosphericModelQueryHelpParams,
@@ -151,6 +152,40 @@ internal constructor(private val clientOptions: ClientOptions) : GlobalAtmospher
             }
         }
 
+        private val listHandler: Handler<List<GlobalAtmosphericModelListResponse>> =
+            jsonHandler<List<GlobalAtmosphericModelListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: GlobalAtmosphericModelListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<GlobalAtmosphericModelListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "globalatmosphericmodel")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        GlobalAtmosphericModelListPage.builder()
+                            .service(GlobalAtmosphericModelServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
+        }
+
         private val countHandler: Handler<String> = stringHandler()
 
         override fun count(
@@ -193,33 +228,6 @@ internal constructor(private val clientOptions: ClientOptions) : GlobalAtmospher
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response)
-        }
-
-        private val queryHandler: Handler<List<GlobalAtmosphericModelQueryResponse>> =
-            jsonHandler<List<GlobalAtmosphericModelQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: GlobalAtmosphericModelQueryParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<GlobalAtmosphericModelQueryResponse>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "globalatmosphericmodel")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { queryHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-            }
         }
 
         private val queryHelpHandler: Handler<GlobalAtmosphericModelQueryHelpResponse> =

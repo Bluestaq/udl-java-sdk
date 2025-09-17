@@ -6,6 +6,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
 import com.unifieddatalibrary.api.core.jsonMapper
 import com.unifieddatalibrary.api.models.AirTaskingOrderFull
+import com.unifieddatalibrary.api.models.scs.SearchCriterion
 import java.time.OffsetDateTime
 import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.jvm.javaMethod
@@ -61,10 +62,10 @@ internal class ProGuardCompatibilityTest {
         assertThat(client.aircraftSorties()).isNotNull()
         assertThat(client.aircraftStatusRemarks()).isNotNull()
         assertThat(client.aircraftStatuses()).isNotNull()
+        assertThat(client.airfieldSlotConsumptions()).isNotNull()
         assertThat(client.airfieldSlots()).isNotNull()
         assertThat(client.airfieldStatus()).isNotNull()
         assertThat(client.airfields()).isNotNull()
-        assertThat(client.airfieldSlotConsumptions()).isNotNull()
         assertThat(client.airloadPlans()).isNotNull()
         assertThat(client.airspaceControlOrders()).isNotNull()
         assertThat(client.ais()).isNotNull()
@@ -73,6 +74,7 @@ internal class ProGuardCompatibilityTest {
         assertThat(client.antennas()).isNotNull()
         assertThat(client.attitudeData()).isNotNull()
         assertThat(client.attitudeSets()).isNotNull()
+        assertThat(client.aviationRiskManagement()).isNotNull()
         assertThat(client.batteries()).isNotNull()
         assertThat(client.batterydetails()).isNotNull()
         assertThat(client.beam()).isNotNull()
@@ -84,21 +86,19 @@ internal class ProGuardCompatibilityTest {
         assertThat(client.comm()).isNotNull()
         assertThat(client.conjunctions()).isNotNull()
         assertThat(client.cots()).isNotNull()
-        assertThat(client.aviationRiskManagement()).isNotNull()
-        assertThat(client.dropzone()).isNotNull()
-        assertThat(client.emitterGeolocation()).isNotNull()
-        assertThat(client.featureAssessment()).isNotNull()
-        assertThat(client.globalAtmosphericModel()).isNotNull()
-        assertThat(client.routeStats()).isNotNull()
         assertThat(client.countries()).isNotNull()
         assertThat(client.crew()).isNotNull()
+        assertThat(client.deconflictset()).isNotNull()
         assertThat(client.diffOfArrival()).isNotNull()
         assertThat(client.diplomaticClearance()).isNotNull()
         assertThat(client.driftHistory()).isNotNull()
-        assertThat(client.ecpSdr()).isNotNull()
+        assertThat(client.dropzone()).isNotNull()
+        assertThat(client.ecpedr()).isNotNull()
         assertThat(client.effectRequests()).isNotNull()
         assertThat(client.effectResponses()).isNotNull()
         assertThat(client.elsets()).isNotNull()
+        assertThat(client.emireport()).isNotNull()
+        assertThat(client.emitterGeolocation()).isNotNull()
         assertThat(client.engineDetails()).isNotNull()
         assertThat(client.engines()).isNotNull()
         assertThat(client.entities()).isNotNull()
@@ -109,17 +109,24 @@ internal class ProGuardCompatibilityTest {
         assertThat(client.equipmentRemarks()).isNotNull()
         assertThat(client.evac()).isNotNull()
         assertThat(client.eventEvolution()).isNotNull()
+        assertThat(client.featureAssessment()).isNotNull()
         assertThat(client.flightplan()).isNotNull()
         assertThat(client.geoStatus()).isNotNull()
+        assertThat(client.globalAtmosphericModel()).isNotNull()
+        assertThat(client.gnssObservations()).isNotNull()
         assertThat(client.gnssObservationset()).isNotNull()
+        assertThat(client.gnssRawIf()).isNotNull()
         assertThat(client.groundImagery()).isNotNull()
         assertThat(client.h3Geo()).isNotNull()
         assertThat(client.h3GeoHexCell()).isNotNull()
         assertThat(client.hazard()).isNotNull()
+        assertThat(client.ionoObservations()).isNotNull()
         assertThat(client.ir()).isNotNull()
         assertThat(client.isrCollections()).isNotNull()
         assertThat(client.item()).isNotNull()
         assertThat(client.itemTrackings()).isNotNull()
+        assertThat(client.laserdeconflictrequest()).isNotNull()
+        assertThat(client.laseremitter()).isNotNull()
         assertThat(client.launchDetection()).isNotNull()
         assertThat(client.launchEvent()).isNotNull()
         assertThat(client.launchSite()).isNotNull()
@@ -127,6 +134,7 @@ internal class ProGuardCompatibilityTest {
         assertThat(client.launchVehicle()).isNotNull()
         assertThat(client.launchVehicleDetails()).isNotNull()
         assertThat(client.linkStatus()).isNotNull()
+        assertThat(client.linkstatus()).isNotNull()
         assertThat(client.location()).isNotNull()
         assertThat(client.logisticsSupport()).isNotNull()
         assertThat(client.maneuvers()).isNotNull()
@@ -159,12 +167,16 @@ internal class ProGuardCompatibilityTest {
         assertThat(client.personnelrecovery()).isNotNull()
         assertThat(client.poi()).isNotNull()
         assertThat(client.port()).isNotNull()
+        assertThat(client.reportAndActivities()).isNotNull()
         assertThat(client.rfBand()).isNotNull()
         assertThat(client.rfBandType()).isNotNull()
         assertThat(client.rfEmitter()).isNotNull()
         assertThat(client.rfEmitterDetails()).isNotNull()
+        assertThat(client.routeStats()).isNotNull()
         assertThat(client.sarObservation()).isNotNull()
         assertThat(client.scientific()).isNotNull()
+        assertThat(client.scs()).isNotNull()
+        assertThat(client.secureMessaging()).isNotNull()
         assertThat(client.sensor()).isNotNull()
         assertThat(client.sensorMaintenance()).isNotNull()
         assertThat(client.sensorObservationType()).isNotNull()
@@ -207,13 +219,6 @@ internal class ProGuardCompatibilityTest {
         assertThat(client.video()).isNotNull()
         assertThat(client.weatherData()).isNotNull()
         assertThat(client.weatherReport()).isNotNull()
-        assertThat(client.gnssObservations()).isNotNull()
-        assertThat(client.gnssRawIf()).isNotNull()
-        assertThat(client.ionoObservations()).isNotNull()
-        assertThat(client.reportAndActivities()).isNotNull()
-        assertThat(client.secureMessaging()).isNotNull()
-        assertThat(client.scs()).isNotNull()
-        assertThat(client.scsViews()).isNotNull()
     }
 
     @Test
@@ -319,5 +324,26 @@ internal class ProGuardCompatibilityTest {
             )
 
         assertThat(roundtrippedAirTaskingOrderFull).isEqualTo(airTaskingOrderFull)
+    }
+
+    @Test
+    fun searchCriterionRoundtrip() {
+        val jsonMapper = jsonMapper()
+        val searchCriterion =
+            SearchCriterion.ofScsSearchField(
+                SearchCriterion.ScsSearchFieldCriterion.builder()
+                    .field("field")
+                    .operator(SearchCriterion.ScsSearchFieldCriterion.Operator.EXACT_MATCH)
+                    .value("value")
+                    .build()
+            )
+
+        val roundtrippedSearchCriterion =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(searchCriterion),
+                jacksonTypeRef<SearchCriterion>(),
+            )
+
+        assertThat(roundtrippedSearchCriterion).isEqualTo(searchCriterion)
     }
 }

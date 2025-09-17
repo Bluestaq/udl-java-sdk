@@ -21,10 +21,11 @@ import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCountParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCreateBulkParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationCreateParams
+import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationListPageAsync
+import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationListParams
+import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationListResponse
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryHelpParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryHelpResponse
-import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryParams
-import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationQueryResponse
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationRetrieveParams
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationRetrieveResponse
 import com.unifieddatalibrary.api.models.sensor.calibration.CalibrationTupleParams
@@ -66,6 +67,13 @@ class CalibrationServiceAsyncImpl internal constructor(private val clientOptions
         // get /udl/sensorcalibration/{id}
         withRawResponse().retrieve(params, requestOptions).thenApply { it.parse() }
 
+    override fun list(
+        params: CalibrationListParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<CalibrationListPageAsync> =
+        // get /udl/sensorcalibration
+        withRawResponse().list(params, requestOptions).thenApply { it.parse() }
+
     override fun count(
         params: CalibrationCountParams,
         requestOptions: RequestOptions,
@@ -79,13 +87,6 @@ class CalibrationServiceAsyncImpl internal constructor(private val clientOptions
     ): CompletableFuture<Void?> =
         // post /udl/sensorcalibration/createBulk
         withRawResponse().createBulk(params, requestOptions).thenAccept {}
-
-    override fun query(
-        params: CalibrationQueryParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<List<CalibrationQueryResponse>> =
-        // get /udl/sensorcalibration
-        withRawResponse().query(params, requestOptions).thenApply { it.parse() }
 
     override fun queryHelp(
         params: CalibrationQueryHelpParams,
@@ -184,6 +185,44 @@ class CalibrationServiceAsyncImpl internal constructor(private val clientOptions
                 }
         }
 
+        private val listHandler: Handler<List<CalibrationListResponse>> =
+            jsonHandler<List<CalibrationListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: CalibrationListParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<CalibrationListPageAsync>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "sensorcalibration")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response
+                            .use { listHandler.handle(it) }
+                            .also {
+                                if (requestOptions.responseValidation!!) {
+                                    it.forEach { it.validate() }
+                                }
+                            }
+                            .let {
+                                CalibrationListPageAsync.builder()
+                                    .service(CalibrationServiceAsyncImpl(clientOptions))
+                                    .streamHandlerExecutor(clientOptions.streamHandlerExecutor)
+                                    .params(params)
+                                    .items(it)
+                                    .build()
+                            }
+                    }
+                }
+        }
+
         private val countHandler: Handler<String> = stringHandler()
 
         override fun count(
@@ -227,36 +266,6 @@ class CalibrationServiceAsyncImpl internal constructor(private val clientOptions
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response.use { createBulkHandler.handle(it) }
-                    }
-                }
-        }
-
-        private val queryHandler: Handler<List<CalibrationQueryResponse>> =
-            jsonHandler<List<CalibrationQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: CalibrationQueryParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<List<CalibrationQueryResponse>>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "sensorcalibration")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response
-                            .use { queryHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.forEach { it.validate() }
-                                }
-                            }
                     }
                 }
         }

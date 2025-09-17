@@ -27,7 +27,7 @@ import com.unifieddatalibrary.api.models.aircraft.AircraftListParams
 import com.unifieddatalibrary.api.models.aircraft.AircraftQueryhelpParams
 import com.unifieddatalibrary.api.models.aircraft.AircraftQueryhelpResponse
 import com.unifieddatalibrary.api.models.aircraft.AircraftRetrieveParams
-import com.unifieddatalibrary.api.models.aircraft.AircraftTupleQueryParams
+import com.unifieddatalibrary.api.models.aircraft.AircraftTupleParams
 import com.unifieddatalibrary.api.models.aircraft.AircraftUpdateParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
@@ -87,12 +87,12 @@ class AircraftServiceAsyncImpl internal constructor(private val clientOptions: C
         // get /udl/aircraft/queryhelp
         withRawResponse().queryhelp(params, requestOptions).thenApply { it.parse() }
 
-    override fun tupleQuery(
-        params: AircraftTupleQueryParams,
+    override fun tuple(
+        params: AircraftTupleParams,
         requestOptions: RequestOptions,
     ): CompletableFuture<List<AircraftFull>> =
         // get /udl/aircraft/tuple
-        withRawResponse().tupleQuery(params, requestOptions).thenApply { it.parse() }
+        withRawResponse().tuple(params, requestOptions).thenApply { it.parse() }
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         AircraftServiceAsync.WithRawResponse {
@@ -282,11 +282,11 @@ class AircraftServiceAsyncImpl internal constructor(private val clientOptions: C
                 }
         }
 
-        private val tupleQueryHandler: Handler<List<AircraftFull>> =
+        private val tupleHandler: Handler<List<AircraftFull>> =
             jsonHandler<List<AircraftFull>>(clientOptions.jsonMapper)
 
-        override fun tupleQuery(
-            params: AircraftTupleQueryParams,
+        override fun tuple(
+            params: AircraftTupleParams,
             requestOptions: RequestOptions,
         ): CompletableFuture<HttpResponseFor<List<AircraftFull>>> {
             val request =
@@ -302,7 +302,7 @@ class AircraftServiceAsyncImpl internal constructor(private val clientOptions: C
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response
-                            .use { tupleQueryHandler.handle(it) }
+                            .use { tupleHandler.handle(it) }
                             .also {
                                 if (requestOptions.responseValidation!!) {
                                     it.forEach { it.validate() }

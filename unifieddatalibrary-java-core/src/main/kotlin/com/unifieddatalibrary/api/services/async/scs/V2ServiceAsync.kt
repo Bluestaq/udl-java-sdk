@@ -6,6 +6,7 @@ import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
+import com.unifieddatalibrary.api.models.scs.v2.ScsEntity
 import com.unifieddatalibrary.api.models.scs.v2.V2CopyParams
 import com.unifieddatalibrary.api.models.scs.v2.V2DeleteParams
 import com.unifieddatalibrary.api.models.scs.v2.V2FileUploadParams
@@ -13,6 +14,7 @@ import com.unifieddatalibrary.api.models.scs.v2.V2FolderCreateParams
 import com.unifieddatalibrary.api.models.scs.v2.V2ListPageAsync
 import com.unifieddatalibrary.api.models.scs.v2.V2ListParams
 import com.unifieddatalibrary.api.models.scs.v2.V2MoveParams
+import com.unifieddatalibrary.api.models.scs.v2.V2SearchParams
 import com.unifieddatalibrary.api.models.scs.v2.V2UpdateParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
@@ -135,6 +137,23 @@ interface V2ServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** Operation to search for files in the Secure Content Store. */
+    fun search(): CompletableFuture<List<ScsEntity>> = search(V2SearchParams.none())
+
+    /** @see search */
+    fun search(
+        params: V2SearchParams = V2SearchParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<List<ScsEntity>>
+
+    /** @see search */
+    fun search(params: V2SearchParams = V2SearchParams.none()): CompletableFuture<List<ScsEntity>> =
+        search(params, RequestOptions.none())
+
+    /** @see search */
+    fun search(requestOptions: RequestOptions): CompletableFuture<List<ScsEntity>> =
+        search(V2SearchParams.none(), requestOptions)
+
     /** A view of [V2ServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -249,5 +268,30 @@ interface V2ServiceAsync {
             params: V2MoveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /**
+         * Returns a raw HTTP response for `post /scs/v2/search`, but is otherwise the same as
+         * [V2ServiceAsync.search].
+         */
+        fun search(): CompletableFuture<HttpResponseFor<List<ScsEntity>>> =
+            search(V2SearchParams.none())
+
+        /** @see search */
+        fun search(
+            params: V2SearchParams = V2SearchParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<List<ScsEntity>>>
+
+        /** @see search */
+        fun search(
+            params: V2SearchParams = V2SearchParams.none()
+        ): CompletableFuture<HttpResponseFor<List<ScsEntity>>> =
+            search(params, RequestOptions.none())
+
+        /** @see search */
+        fun search(
+            requestOptions: RequestOptions
+        ): CompletableFuture<HttpResponseFor<List<ScsEntity>>> =
+            search(V2SearchParams.none(), requestOptions)
     }
 }

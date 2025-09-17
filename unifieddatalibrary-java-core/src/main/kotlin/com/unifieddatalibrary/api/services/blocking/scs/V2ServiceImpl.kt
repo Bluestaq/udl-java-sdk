@@ -25,6 +25,7 @@ import com.unifieddatalibrary.api.models.scs.v2.V2FolderCreateParams
 import com.unifieddatalibrary.api.models.scs.v2.V2ListPage
 import com.unifieddatalibrary.api.models.scs.v2.V2ListParams
 import com.unifieddatalibrary.api.models.scs.v2.V2MoveParams
+import com.unifieddatalibrary.api.models.scs.v2.V2SearchParams
 import com.unifieddatalibrary.api.models.scs.v2.V2UpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
@@ -73,6 +74,10 @@ class V2ServiceImpl internal constructor(private val clientOptions: ClientOption
         // put /scs/v2/move
         withRawResponse().move(params, requestOptions)
     }
+
+    override fun search(params: V2SearchParams, requestOptions: RequestOptions): List<ScsEntity> =
+        // post /scs/v2/search
+        withRawResponse().search(params, requestOptions).parse()
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         V2Service.WithRawResponse {
@@ -235,6 +240,34 @@ class V2ServiceImpl internal constructor(private val clientOptions: ClientOption
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response.use { moveHandler.handle(it) }
+            }
+        }
+
+        private val searchHandler: Handler<List<ScsEntity>> =
+            jsonHandler<List<ScsEntity>>(clientOptions.jsonMapper)
+
+        override fun search(
+            params: V2SearchParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<List<ScsEntity>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("scs", "v2", "search")
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { searchHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
             }
         }
     }

@@ -30,8 +30,8 @@ import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceList
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListPage
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListResponse
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryhelpParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryhelpResponse
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryHelpParams
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryHelpResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceTupleParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceTupleResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceUpdateParams
@@ -107,12 +107,12 @@ class SensorMaintenanceServiceImpl internal constructor(private val clientOption
         // get /udl/sensormaintenance/current
         withRawResponse().listCurrent(params, requestOptions).parse()
 
-    override fun queryhelp(
-        params: SensorMaintenanceQueryhelpParams,
+    override fun queryHelp(
+        params: SensorMaintenanceQueryHelpParams,
         requestOptions: RequestOptions,
-    ): SensorMaintenanceQueryhelpResponse =
+    ): SensorMaintenanceQueryHelpResponse =
         // get /udl/sensormaintenance/queryhelp
-        withRawResponse().queryhelp(params, requestOptions).parse()
+        withRawResponse().queryHelp(params, requestOptions).parse()
 
     override fun tuple(
         params: SensorMaintenanceTupleParams,
@@ -348,13 +348,13 @@ class SensorMaintenanceServiceImpl internal constructor(private val clientOption
             }
         }
 
-        private val queryhelpHandler: Handler<SensorMaintenanceQueryhelpResponse> =
-            jsonHandler<SensorMaintenanceQueryhelpResponse>(clientOptions.jsonMapper)
+        private val queryHelpHandler: Handler<SensorMaintenanceQueryHelpResponse> =
+            jsonHandler<SensorMaintenanceQueryHelpResponse>(clientOptions.jsonMapper)
 
-        override fun queryhelp(
-            params: SensorMaintenanceQueryhelpParams,
+        override fun queryHelp(
+            params: SensorMaintenanceQueryHelpParams,
             requestOptions: RequestOptions,
-        ): HttpResponseFor<SensorMaintenanceQueryhelpResponse> {
+        ): HttpResponseFor<SensorMaintenanceQueryHelpResponse> {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -366,7 +366,7 @@ class SensorMaintenanceServiceImpl internal constructor(private val clientOption
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response
-                    .use { queryhelpHandler.handle(it) }
+                    .use { queryHelpHandler.handle(it) }
                     .also {
                         if (requestOptions.responseValidation!!) {
                             it.validate()

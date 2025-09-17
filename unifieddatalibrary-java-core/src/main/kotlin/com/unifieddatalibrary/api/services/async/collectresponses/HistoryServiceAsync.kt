@@ -4,11 +4,12 @@ package com.unifieddatalibrary.api.services.async.collectresponses
 
 import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.core.RequestOptions
+import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
+import com.unifieddatalibrary.api.models.collectresponses.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.collectresponses.history.HistoryCountParams
 import com.unifieddatalibrary.api.models.collectresponses.history.HistoryListPageAsync
 import com.unifieddatalibrary.api.models.collectresponses.history.HistoryListParams
-import com.unifieddatalibrary.api.services.async.collectresponses.history.AodrServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -26,8 +27,6 @@ interface HistoryServiceAsync {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryServiceAsync
 
-    fun aodr(): AodrServiceAsync
-
     /**
      * Service operation to dynamically query historical data by a variety of query parameters not
      * specified in this API documentation. See the queryhelp operation
@@ -42,6 +41,21 @@ interface HistoryServiceAsync {
         params: HistoryListParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<HistoryListPageAsync>
+
+    /**
+     * Service operation to dynamically query historical data by a variety of query parameters not
+     * specified in this API documentation, then write that data to the Secure Content Store. See
+     * the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required
+     * query parameter information.
+     */
+    fun aodr(params: HistoryAodrParams): CompletableFuture<Void?> =
+        aodr(params, RequestOptions.none())
+
+    /** @see aodr */
+    fun aodr(
+        params: HistoryAodrParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?>
 
     /**
      * Service operation to return the count of records satisfying the specified query parameters.
@@ -73,8 +87,6 @@ interface HistoryServiceAsync {
             modifier: Consumer<ClientOptions.Builder>
         ): HistoryServiceAsync.WithRawResponse
 
-        fun aodr(): AodrServiceAsync.WithRawResponse
-
         /**
          * Returns a raw HTTP response for `get /udl/collectresponse/history`, but is otherwise the
          * same as [HistoryServiceAsync.list].
@@ -89,6 +101,19 @@ interface HistoryServiceAsync {
             params: HistoryListParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<HistoryListPageAsync>>
+
+        /**
+         * Returns a raw HTTP response for `get /udl/collectresponse/history/aodr`, but is otherwise
+         * the same as [HistoryServiceAsync.aodr].
+         */
+        fun aodr(params: HistoryAodrParams): CompletableFuture<HttpResponse> =
+            aodr(params, RequestOptions.none())
+
+        /** @see aodr */
+        fun aodr(
+            params: HistoryAodrParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse>
 
         /**
          * Returns a raw HTTP response for `get /udl/collectresponse/history/count`, but is

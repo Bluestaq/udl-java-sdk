@@ -19,12 +19,12 @@ import com.unifieddatalibrary.api.core.http.json
 import com.unifieddatalibrary.api.core.http.multipartFormData
 import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepareAsync
+import com.unifieddatalibrary.api.models.groundimagery.GroundImageryAodrParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryCountParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryCreateParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryGetFileParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryGetParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryGetResponse
-import com.unifieddatalibrary.api.models.groundimagery.GroundImageryHistoryAodrParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryListPageAsync
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryListParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryListResponse
@@ -69,6 +69,13 @@ class GroundImageryServiceAsyncImpl internal constructor(private val clientOptio
         // get /udl/groundimagery
         withRawResponse().list(params, requestOptions).thenApply { it.parse() }
 
+    override fun aodr(
+        params: GroundImageryAodrParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<Void?> =
+        // get /udl/groundimagery/history/aodr
+        withRawResponse().aodr(params, requestOptions).thenAccept {}
+
     override fun count(
         params: GroundImageryCountParams,
         requestOptions: RequestOptions,
@@ -89,13 +96,6 @@ class GroundImageryServiceAsyncImpl internal constructor(private val clientOptio
     ): CompletableFuture<HttpResponse> =
         // get /udl/groundimagery/getFile/{id}
         withRawResponse().getFile(params, requestOptions)
-
-    override fun historyAodr(
-        params: GroundImageryHistoryAodrParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<Void?> =
-        // get /udl/groundimagery/history/aodr
-        withRawResponse().historyAodr(params, requestOptions).thenAccept {}
 
     override fun queryhelp(
         params: GroundImageryQueryhelpParams,
@@ -199,6 +199,29 @@ class GroundImageryServiceAsyncImpl internal constructor(private val clientOptio
                 }
         }
 
+        private val aodrHandler: Handler<Void?> = emptyHandler()
+
+        override fun aodr(
+            params: GroundImageryAodrParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponse> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "groundimagery", "history", "aodr")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response.use { aodrHandler.handle(it) }
+                    }
+                }
+        }
+
         private val countHandler: Handler<String> = stringHandler()
 
         override fun count(
@@ -273,29 +296,6 @@ class GroundImageryServiceAsyncImpl internal constructor(private val clientOptio
             return request
                 .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
                 .thenApply { response -> errorHandler.handle(response) }
-        }
-
-        private val historyAodrHandler: Handler<Void?> = emptyHandler()
-
-        override fun historyAodr(
-            params: GroundImageryHistoryAodrParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "groundimagery", "history", "aodr")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response.use { historyAodrHandler.handle(it) }
-                    }
-                }
         }
 
         private val queryhelpHandler: Handler<GroundImageryQueryhelpResponse> =

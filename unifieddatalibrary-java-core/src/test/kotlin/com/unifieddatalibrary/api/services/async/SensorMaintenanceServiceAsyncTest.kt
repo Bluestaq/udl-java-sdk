@@ -264,7 +264,7 @@ internal class SensorMaintenanceServiceAsyncTest {
     }
 
     @Test
-    fun queryhelp() {
+    fun queryHelp() {
         val client =
             UnifieddatalibraryOkHttpClientAsync.builder()
                 .baseUrl(TestServerExtension.BASE_URL)
@@ -273,7 +273,7 @@ internal class SensorMaintenanceServiceAsyncTest {
                 .build()
         val sensorMaintenanceServiceAsync = client.sensorMaintenance()
 
-        val responseFuture = sensorMaintenanceServiceAsync.queryhelp()
+        val responseFuture = sensorMaintenanceServiceAsync.queryHelp()
 
         val response = responseFuture.get()
         response.validate()

@@ -7,7 +7,6 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
 import com.unifieddatalibrary.api.models.routestats.RouteStatCountParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatCreateBulkParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatCreateParams
-import com.unifieddatalibrary.api.models.routestats.RouteStatQueryParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatRetrieveParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatTupleParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatUnvalidatedPublishParams
@@ -137,6 +136,21 @@ internal class RouteStatServiceTest {
     }
 
     @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val routeStatService = client.routeStats()
+
+        val page = routeStatService.list()
+
+        page.items().forEach { it.validate() }
+    }
+
+    @Test
     fun delete() {
         val client =
             UnifieddatalibraryOkHttpClient.builder()
@@ -215,24 +229,6 @@ internal class RouteStatServiceTest {
                 )
                 .build()
         )
-    }
-
-    @Test
-    fun query() {
-        val client =
-            UnifieddatalibraryOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val routeStatService = client.routeStats()
-
-        val response =
-            routeStatService.query(
-                RouteStatQueryParams.builder().firstResult(0L).maxResults(0L).build()
-            )
-
-        response.forEach { it.validate() }
     }
 
     @Test

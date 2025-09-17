@@ -98,9 +98,9 @@ private constructor(
      * Defaults to 2.
      */
     @get:JvmName("maxRetries") val maxRetries: Int,
+    private val accessToken: String?,
     private val password: String?,
     private val username: String?,
-    private val accessToken: String?,
 ) {
 
     init {
@@ -118,14 +118,14 @@ private constructor(
 
     fun baseUrlOverridden(): Boolean = baseUrl != null
 
+    /** Access token for Bearer Authentication */
+    fun accessToken(): Optional<String> = Optional.ofNullable(accessToken)
+
     /** Password for HTTP Basic Authentication */
     fun password(): Optional<String> = Optional.ofNullable(password)
 
     /** Username for HTTP Basic Authentication */
     fun username(): Optional<String> = Optional.ofNullable(username)
-
-    /** Access token for Bearer Authentication */
-    fun accessToken(): Optional<String> = Optional.ofNullable(accessToken)
 
     fun toBuilder() = Builder().from(this)
 
@@ -165,9 +165,9 @@ private constructor(
         private var responseValidation: Boolean = false
         private var timeout: Timeout = Timeout.default()
         private var maxRetries: Int = 2
+        private var accessToken: String? = null
         private var password: String? = null
         private var username: String? = null
-        private var accessToken: String? = null
 
         @JvmSynthetic
         internal fun from(clientOptions: ClientOptions) = apply {
@@ -182,9 +182,9 @@ private constructor(
             responseValidation = clientOptions.responseValidation
             timeout = clientOptions.timeout
             maxRetries = clientOptions.maxRetries
+            accessToken = clientOptions.accessToken
             password = clientOptions.password
             username = clientOptions.username
-            accessToken = clientOptions.accessToken
         }
 
         /**
@@ -294,6 +294,12 @@ private constructor(
          */
         fun maxRetries(maxRetries: Int) = apply { this.maxRetries = maxRetries }
 
+        /** Access token for Bearer Authentication */
+        fun accessToken(accessToken: String?) = apply { this.accessToken = accessToken }
+
+        /** Alias for calling [Builder.accessToken] with `accessToken.orElse(null)`. */
+        fun accessToken(accessToken: Optional<String>) = accessToken(accessToken.getOrNull())
+
         /** Password for HTTP Basic Authentication */
         fun password(password: String?) = apply { this.password = password }
 
@@ -305,12 +311,6 @@ private constructor(
 
         /** Alias for calling [Builder.username] with `username.orElse(null)`. */
         fun username(username: Optional<String>) = username(username.getOrNull())
-
-        /** Access token for Bearer Authentication */
-        fun accessToken(accessToken: String?) = apply { this.accessToken = accessToken }
-
-        /** Alias for calling [Builder.accessToken] with `accessToken.orElse(null)`. */
-        fun accessToken(accessToken: Optional<String>) = accessToken(accessToken.getOrNull())
 
         fun headers(headers: Headers) = apply {
             this.headers.clear()
@@ -401,9 +401,9 @@ private constructor(
          *
          * |Setter       |System property                     |Environment variable         |Required|Default value                     |
          * |-------------|------------------------------------|-----------------------------|--------|----------------------------------|
+         * |`accessToken`|`unifieddatalibrary.udlAccessToken` |`UDL_ACCESS_TOKEN`           |false   |-                                 |
          * |`password`   |`unifieddatalibrary.udlAuthPassword`|`UDL_AUTH_PASSWORD`          |false   |-                                 |
          * |`username`   |`unifieddatalibrary.udlAuthUsername`|`UDL_AUTH_USERNAME`          |false   |-                                 |
-         * |`accessToken`|`unifieddatalibrary.udlAccessToken` |`UDL_ACCESS_TOKEN`           |false   |-                                 |
          * |`baseUrl`    |`unifieddatalibrary.baseUrl`        |`UNIFIEDDATALIBRARY_BASE_URL`|true    |`"https://unifieddatalibrary.com"`|
          *
          * System properties take precedence over environment variables.
@@ -412,15 +412,15 @@ private constructor(
             (System.getProperty("unifieddatalibrary.baseUrl")
                     ?: System.getenv("UNIFIEDDATALIBRARY_BASE_URL"))
                 ?.let { baseUrl(it) }
+            (System.getProperty("unifieddatalibrary.udlAccessToken")
+                    ?: System.getenv("UDL_ACCESS_TOKEN"))
+                ?.let { accessToken(it) }
             (System.getProperty("unifieddatalibrary.udlAuthPassword")
                     ?: System.getenv("UDL_AUTH_PASSWORD"))
                 ?.let { password(it) }
             (System.getProperty("unifieddatalibrary.udlAuthUsername")
                     ?: System.getenv("UDL_AUTH_USERNAME"))
                 ?.let { username(it) }
-            (System.getProperty("unifieddatalibrary.udlAccessToken")
-                    ?: System.getenv("UDL_ACCESS_TOKEN"))
-                ?.let { accessToken(it) }
         }
 
         /**
@@ -496,9 +496,9 @@ private constructor(
                 responseValidation,
                 timeout,
                 maxRetries,
+                accessToken,
                 password,
                 username,
-                accessToken,
             )
         }
     }

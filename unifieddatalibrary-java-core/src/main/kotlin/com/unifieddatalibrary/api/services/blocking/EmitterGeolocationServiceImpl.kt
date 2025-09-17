@@ -22,10 +22,11 @@ import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationCo
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationCreateBulkParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationCreateParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationDeleteParams
+import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationListPage
+import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationListParams
+import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationListResponse
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationQueryHelpParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationQueryHelpResponse
-import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationQueryParams
-import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationQueryResponse
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationRetrieveParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationRetrieveResponse
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationTupleParams
@@ -58,6 +59,13 @@ class EmitterGeolocationServiceImpl internal constructor(private val clientOptio
         // get /udl/emittergeolocation/{id}
         withRawResponse().retrieve(params, requestOptions).parse()
 
+    override fun list(
+        params: EmitterGeolocationListParams,
+        requestOptions: RequestOptions,
+    ): EmitterGeolocationListPage =
+        // get /udl/emittergeolocation
+        withRawResponse().list(params, requestOptions).parse()
+
     override fun delete(params: EmitterGeolocationDeleteParams, requestOptions: RequestOptions) {
         // delete /udl/emittergeolocation/{id}
         withRawResponse().delete(params, requestOptions)
@@ -77,13 +85,6 @@ class EmitterGeolocationServiceImpl internal constructor(private val clientOptio
         // post /udl/emittergeolocation/createBulk
         withRawResponse().createBulk(params, requestOptions)
     }
-
-    override fun query(
-        params: EmitterGeolocationQueryParams,
-        requestOptions: RequestOptions,
-    ): List<EmitterGeolocationQueryResponse> =
-        // get /udl/emittergeolocation
-        withRawResponse().query(params, requestOptions).parse()
 
     override fun queryHelp(
         params: EmitterGeolocationQueryHelpParams,
@@ -171,6 +172,40 @@ class EmitterGeolocationServiceImpl internal constructor(private val clientOptio
             }
         }
 
+        private val listHandler: Handler<List<EmitterGeolocationListResponse>> =
+            jsonHandler<List<EmitterGeolocationListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: EmitterGeolocationListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<EmitterGeolocationListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "emittergeolocation")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        EmitterGeolocationListPage.builder()
+                            .service(EmitterGeolocationServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
+        }
+
         private val deleteHandler: Handler<Void?> = emptyHandler()
 
         override fun delete(
@@ -233,33 +268,6 @@ class EmitterGeolocationServiceImpl internal constructor(private val clientOptio
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response.use { createBulkHandler.handle(it) }
-            }
-        }
-
-        private val queryHandler: Handler<List<EmitterGeolocationQueryResponse>> =
-            jsonHandler<List<EmitterGeolocationQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: EmitterGeolocationQueryParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<EmitterGeolocationQueryResponse>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "emittergeolocation")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { queryHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
             }
         }
 

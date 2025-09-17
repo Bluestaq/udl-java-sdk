@@ -27,7 +27,7 @@ import com.unifieddatalibrary.api.models.aircraft.AircraftListParams
 import com.unifieddatalibrary.api.models.aircraft.AircraftQueryhelpParams
 import com.unifieddatalibrary.api.models.aircraft.AircraftQueryhelpResponse
 import com.unifieddatalibrary.api.models.aircraft.AircraftRetrieveParams
-import com.unifieddatalibrary.api.models.aircraft.AircraftTupleQueryParams
+import com.unifieddatalibrary.api.models.aircraft.AircraftTupleParams
 import com.unifieddatalibrary.api.models.aircraft.AircraftUpdateParams
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
@@ -79,12 +79,12 @@ class AircraftServiceImpl internal constructor(private val clientOptions: Client
         // get /udl/aircraft/queryhelp
         withRawResponse().queryhelp(params, requestOptions).parse()
 
-    override fun tupleQuery(
-        params: AircraftTupleQueryParams,
+    override fun tuple(
+        params: AircraftTupleParams,
         requestOptions: RequestOptions,
     ): List<AircraftFull> =
         // get /udl/aircraft/tuple
-        withRawResponse().tupleQuery(params, requestOptions).parse()
+        withRawResponse().tuple(params, requestOptions).parse()
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         AircraftService.WithRawResponse {
@@ -255,11 +255,11 @@ class AircraftServiceImpl internal constructor(private val clientOptions: Client
             }
         }
 
-        private val tupleQueryHandler: Handler<List<AircraftFull>> =
+        private val tupleHandler: Handler<List<AircraftFull>> =
             jsonHandler<List<AircraftFull>>(clientOptions.jsonMapper)
 
-        override fun tupleQuery(
-            params: AircraftTupleQueryParams,
+        override fun tuple(
+            params: AircraftTupleParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<List<AircraftFull>> {
             val request =
@@ -273,7 +273,7 @@ class AircraftServiceImpl internal constructor(private val clientOptions: Client
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response
-                    .use { tupleQueryHandler.handle(it) }
+                    .use { tupleHandler.handle(it) }
                     .also {
                         if (requestOptions.responseValidation!!) {
                             it.forEach { it.validate() }

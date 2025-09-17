@@ -11,10 +11,10 @@ import com.unifieddatalibrary.api.models.routestats.RouteStatCountParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatCreateBulkParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatCreateParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatDeleteParams
+import com.unifieddatalibrary.api.models.routestats.RouteStatListPage
+import com.unifieddatalibrary.api.models.routestats.RouteStatListParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatQueryHelpParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatQueryHelpResponse
-import com.unifieddatalibrary.api.models.routestats.RouteStatQueryParams
-import com.unifieddatalibrary.api.models.routestats.RouteStatQueryResponse
 import com.unifieddatalibrary.api.models.routestats.RouteStatRetrieveParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatRetrieveResponse
 import com.unifieddatalibrary.api.models.routestats.RouteStatTupleParams
@@ -108,6 +108,27 @@ interface RouteStatService {
     )
 
     /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
+    fun list(): RouteStatListPage = list(RouteStatListParams.none())
+
+    /** @see list */
+    fun list(
+        params: RouteStatListParams = RouteStatListParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): RouteStatListPage
+
+    /** @see list */
+    fun list(params: RouteStatListParams = RouteStatListParams.none()): RouteStatListPage =
+        list(params, RequestOptions.none())
+
+    /** @see list */
+    fun list(requestOptions: RequestOptions): RouteStatListPage =
+        list(RouteStatListParams.none(), requestOptions)
+
+    /**
      * Service operation to delete a routeStats record specified by the passed ID path parameter. A
      * specific role is required to perform this service operation. Please contact the UDL team for
      * assistance.
@@ -175,28 +196,6 @@ interface RouteStatService {
         params: RouteStatCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
-
-    /**
-     * Service operation to dynamically query data by a variety of query parameters not specified in
-     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
-     * more details on valid/required query parameter information.
-     */
-    fun query(): List<RouteStatQueryResponse> = query(RouteStatQueryParams.none())
-
-    /** @see query */
-    fun query(
-        params: RouteStatQueryParams = RouteStatQueryParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): List<RouteStatQueryResponse>
-
-    /** @see query */
-    fun query(
-        params: RouteStatQueryParams = RouteStatQueryParams.none()
-    ): List<RouteStatQueryResponse> = query(params, RequestOptions.none())
-
-    /** @see query */
-    fun query(requestOptions: RequestOptions): List<RouteStatQueryResponse> =
-        query(RouteStatQueryParams.none(), requestOptions)
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -349,6 +348,31 @@ interface RouteStatService {
         ): HttpResponse
 
         /**
+         * Returns a raw HTTP response for `get /udl/routestats`, but is otherwise the same as
+         * [RouteStatService.list].
+         */
+        @MustBeClosed
+        fun list(): HttpResponseFor<RouteStatListPage> = list(RouteStatListParams.none())
+
+        /** @see list */
+        @MustBeClosed
+        fun list(
+            params: RouteStatListParams = RouteStatListParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<RouteStatListPage>
+
+        /** @see list */
+        @MustBeClosed
+        fun list(
+            params: RouteStatListParams = RouteStatListParams.none()
+        ): HttpResponseFor<RouteStatListPage> = list(params, RequestOptions.none())
+
+        /** @see list */
+        @MustBeClosed
+        fun list(requestOptions: RequestOptions): HttpResponseFor<RouteStatListPage> =
+            list(RouteStatListParams.none(), requestOptions)
+
+        /**
          * Returns a raw HTTP response for `delete /udl/routestats/{id}`, but is otherwise the same
          * as [RouteStatService.delete].
          */
@@ -425,32 +449,6 @@ interface RouteStatService {
             params: RouteStatCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
-
-        /**
-         * Returns a raw HTTP response for `get /udl/routestats`, but is otherwise the same as
-         * [RouteStatService.query].
-         */
-        @MustBeClosed
-        fun query(): HttpResponseFor<List<RouteStatQueryResponse>> =
-            query(RouteStatQueryParams.none())
-
-        /** @see query */
-        @MustBeClosed
-        fun query(
-            params: RouteStatQueryParams = RouteStatQueryParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<List<RouteStatQueryResponse>>
-
-        /** @see query */
-        @MustBeClosed
-        fun query(
-            params: RouteStatQueryParams = RouteStatQueryParams.none()
-        ): HttpResponseFor<List<RouteStatQueryResponse>> = query(params, RequestOptions.none())
-
-        /** @see query */
-        @MustBeClosed
-        fun query(requestOptions: RequestOptions): HttpResponseFor<List<RouteStatQueryResponse>> =
-            query(RouteStatQueryParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /udl/routestats/queryhelp`, but is otherwise the

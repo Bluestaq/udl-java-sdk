@@ -4,6 +4,7 @@ package com.unifieddatalibrary.api.services.async.collectresponses
 
 import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.core.RequestOptions
+import com.unifieddatalibrary.api.core.handlers.emptyHandler
 import com.unifieddatalibrary.api.core.handlers.errorBodyHandler
 import com.unifieddatalibrary.api.core.handlers.errorHandler
 import com.unifieddatalibrary.api.core.handlers.jsonHandler
@@ -16,11 +17,10 @@ import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.CollectResponseFull
+import com.unifieddatalibrary.api.models.collectresponses.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.collectresponses.history.HistoryCountParams
 import com.unifieddatalibrary.api.models.collectresponses.history.HistoryListPageAsync
 import com.unifieddatalibrary.api.models.collectresponses.history.HistoryListParams
-import com.unifieddatalibrary.api.services.async.collectresponses.history.AodrServiceAsync
-import com.unifieddatalibrary.api.services.async.collectresponses.history.AodrServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -31,14 +31,10 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
         WithRawResponseImpl(clientOptions)
     }
 
-    private val aodr: AodrServiceAsync by lazy { AodrServiceAsyncImpl(clientOptions) }
-
     override fun withRawResponse(): HistoryServiceAsync.WithRawResponse = withRawResponse
 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryServiceAsync =
         HistoryServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
-
-    override fun aodr(): AodrServiceAsync = aodr
 
     override fun list(
         params: HistoryListParams,
@@ -46,6 +42,13 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
     ): CompletableFuture<HistoryListPageAsync> =
         // get /udl/collectresponse/history
         withRawResponse().list(params, requestOptions).thenApply { it.parse() }
+
+    override fun aodr(
+        params: HistoryAodrParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<Void?> =
+        // get /udl/collectresponse/history/aodr
+        withRawResponse().aodr(params, requestOptions).thenAccept {}
 
     override fun count(
         params: HistoryCountParams,
@@ -60,18 +63,12 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val aodr: AodrServiceAsync.WithRawResponse by lazy {
-            AodrServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
         override fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): HistoryServiceAsync.WithRawResponse =
             HistoryServiceAsyncImpl.WithRawResponseImpl(
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
-
-        override fun aodr(): AodrServiceAsync.WithRawResponse = aodr
 
         private val listHandler: Handler<List<CollectResponseFull>> =
             jsonHandler<List<CollectResponseFull>>(clientOptions.jsonMapper)
@@ -107,6 +104,29 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                                     .items(it)
                                     .build()
                             }
+                    }
+                }
+        }
+
+        private val aodrHandler: Handler<Void?> = emptyHandler()
+
+        override fun aodr(
+            params: HistoryAodrParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponse> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "collectresponse", "history", "aodr")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response.use { aodrHandler.handle(it) }
                     }
                 }
         }

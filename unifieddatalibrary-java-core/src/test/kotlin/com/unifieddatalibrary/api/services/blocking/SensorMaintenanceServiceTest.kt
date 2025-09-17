@@ -247,7 +247,7 @@ internal class SensorMaintenanceServiceTest {
     }
 
     @Test
-    fun queryhelp() {
+    fun queryHelp() {
         val client =
             UnifieddatalibraryOkHttpClient.builder()
                 .baseUrl(TestServerExtension.BASE_URL)
@@ -256,7 +256,7 @@ internal class SensorMaintenanceServiceTest {
                 .build()
         val sensorMaintenanceService = client.sensorMaintenance()
 
-        val response = sensorMaintenanceService.queryhelp()
+        val response = sensorMaintenanceService.queryHelp()
 
         response.validate()
     }

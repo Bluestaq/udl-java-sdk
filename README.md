@@ -46,8 +46,8 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient;
 import com.unifieddatalibrary.api.models.elsets.current.CurrentListPage;
 import com.unifieddatalibrary.api.models.elsets.current.CurrentListParams;
 
-// Configures using the `unifieddatalibrary.udlAuthPassword`, `unifieddatalibrary.udlAuthUsername`, `unifieddatalibrary.udlAccessToken` and `unifieddatalibrary.baseUrl` system properties
-// Or configures using the `UDL_AUTH_PASSWORD`, `UDL_AUTH_USERNAME`, `UDL_ACCESS_TOKEN` and `UNIFIEDDATALIBRARY_BASE_URL` environment variables
+// Configures using the `unifieddatalibrary.udlAccessToken`, `unifieddatalibrary.udlAuthPassword`, `unifieddatalibrary.udlAuthUsername` and `unifieddatalibrary.baseUrl` system properties
+// Or configures using the `UDL_ACCESS_TOKEN`, `UDL_AUTH_PASSWORD`, `UDL_AUTH_USERNAME` and `UNIFIEDDATALIBRARY_BASE_URL` environment variables
 UnifieddatalibraryClient client = UnifieddatalibraryOkHttpClient.fromEnv();
 
 CurrentListPage page = client.elsets().current().list();
@@ -61,8 +61,8 @@ Configure the client using system properties or environment variables:
 import com.unifieddatalibrary.api.client.UnifieddatalibraryClient;
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient;
 
-// Configures using the `unifieddatalibrary.udlAuthPassword`, `unifieddatalibrary.udlAuthUsername`, `unifieddatalibrary.udlAccessToken` and `unifieddatalibrary.baseUrl` system properties
-// Or configures using the `UDL_AUTH_PASSWORD`, `UDL_AUTH_USERNAME`, `UDL_ACCESS_TOKEN` and `UNIFIEDDATALIBRARY_BASE_URL` environment variables
+// Configures using the `unifieddatalibrary.udlAccessToken`, `unifieddatalibrary.udlAuthPassword`, `unifieddatalibrary.udlAuthUsername` and `unifieddatalibrary.baseUrl` system properties
+// Or configures using the `UDL_ACCESS_TOKEN`, `UDL_AUTH_PASSWORD`, `UDL_AUTH_USERNAME` and `UNIFIEDDATALIBRARY_BASE_URL` environment variables
 UnifieddatalibraryClient client = UnifieddatalibraryOkHttpClient.fromEnv();
 ```
 
@@ -85,10 +85,10 @@ import com.unifieddatalibrary.api.client.UnifieddatalibraryClient;
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient;
 
 UnifieddatalibraryClient client = UnifieddatalibraryOkHttpClient.builder()
-    // Configures using the `unifieddatalibrary.udlAuthPassword`, `unifieddatalibrary.udlAuthUsername`, `unifieddatalibrary.udlAccessToken` and `unifieddatalibrary.baseUrl` system properties
-    // Or configures using the `UDL_AUTH_PASSWORD`, `UDL_AUTH_USERNAME`, `UDL_ACCESS_TOKEN` and `UNIFIEDDATALIBRARY_BASE_URL` environment variables
+    // Configures using the `unifieddatalibrary.udlAccessToken`, `unifieddatalibrary.udlAuthPassword`, `unifieddatalibrary.udlAuthUsername` and `unifieddatalibrary.baseUrl` system properties
+    // Or configures using the `UDL_ACCESS_TOKEN`, `UDL_AUTH_PASSWORD`, `UDL_AUTH_USERNAME` and `UNIFIEDDATALIBRARY_BASE_URL` environment variables
     .fromEnv()
-    .password("My Password")
+    .accessToken("My Access Token")
     .build();
 ```
 
@@ -96,9 +96,9 @@ See this table for the available options:
 
 | Setter        | System property                      | Environment variable          | Required | Default value                      |
 | ------------- | ------------------------------------ | ----------------------------- | -------- | ---------------------------------- |
+| `accessToken` | `unifieddatalibrary.udlAccessToken`  | `UDL_ACCESS_TOKEN`            | false    | -                                  |
 | `password`    | `unifieddatalibrary.udlAuthPassword` | `UDL_AUTH_PASSWORD`           | false    | -                                  |
 | `username`    | `unifieddatalibrary.udlAuthUsername` | `UDL_AUTH_USERNAME`           | false    | -                                  |
-| `accessToken` | `unifieddatalibrary.udlAccessToken`  | `UDL_ACCESS_TOKEN`            | false    | -                                  |
 | `baseUrl`     | `unifieddatalibrary.baseUrl`         | `UNIFIEDDATALIBRARY_BASE_URL` | true     | `"https://unifieddatalibrary.com"` |
 
 System properties take precedence over environment variables.
@@ -147,8 +147,8 @@ import com.unifieddatalibrary.api.models.elsets.current.CurrentListPageAsync;
 import com.unifieddatalibrary.api.models.elsets.current.CurrentListParams;
 import java.util.concurrent.CompletableFuture;
 
-// Configures using the `unifieddatalibrary.udlAuthPassword`, `unifieddatalibrary.udlAuthUsername`, `unifieddatalibrary.udlAccessToken` and `unifieddatalibrary.baseUrl` system properties
-// Or configures using the `UDL_AUTH_PASSWORD`, `UDL_AUTH_USERNAME`, `UDL_ACCESS_TOKEN` and `UNIFIEDDATALIBRARY_BASE_URL` environment variables
+// Configures using the `unifieddatalibrary.udlAccessToken`, `unifieddatalibrary.udlAuthPassword`, `unifieddatalibrary.udlAuthUsername` and `unifieddatalibrary.baseUrl` system properties
+// Or configures using the `UDL_ACCESS_TOKEN`, `UDL_AUTH_PASSWORD`, `UDL_AUTH_USERNAME` and `UNIFIEDDATALIBRARY_BASE_URL` environment variables
 UnifieddatalibraryClient client = UnifieddatalibraryOkHttpClient.fromEnv();
 
 CompletableFuture<CurrentListPageAsync> page = client.async().elsets().current().list();
@@ -163,8 +163,8 @@ import com.unifieddatalibrary.api.models.elsets.current.CurrentListPageAsync;
 import com.unifieddatalibrary.api.models.elsets.current.CurrentListParams;
 import java.util.concurrent.CompletableFuture;
 
-// Configures using the `unifieddatalibrary.udlAuthPassword`, `unifieddatalibrary.udlAuthUsername`, `unifieddatalibrary.udlAccessToken` and `unifieddatalibrary.baseUrl` system properties
-// Or configures using the `UDL_AUTH_PASSWORD`, `UDL_AUTH_USERNAME`, `UDL_ACCESS_TOKEN` and `UNIFIEDDATALIBRARY_BASE_URL` environment variables
+// Configures using the `unifieddatalibrary.udlAccessToken`, `unifieddatalibrary.udlAuthPassword`, `unifieddatalibrary.udlAuthUsername` and `unifieddatalibrary.baseUrl` system properties
+// Or configures using the `UDL_ACCESS_TOKEN`, `UDL_AUTH_PASSWORD`, `UDL_AUTH_USERNAME` and `UNIFIEDDATALIBRARY_BASE_URL` environment variables
 UnifieddatalibraryClientAsync client = UnifieddatalibraryOkHttpClientAsync.fromEnv();
 
 CompletableFuture<CurrentListPageAsync> page = client.elsets().current().list();
