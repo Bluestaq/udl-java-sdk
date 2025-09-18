@@ -9,6 +9,7 @@ import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.linkstatus.datalink.DatalinkCountParams
 import com.unifieddatalibrary.api.models.linkstatus.datalink.DatalinkCreateParams
+import com.unifieddatalibrary.api.models.linkstatus.datalink.DatalinkIngest
 import com.unifieddatalibrary.api.models.linkstatus.datalink.DatalinkListPage
 import com.unifieddatalibrary.api.models.linkstatus.datalink.DatalinkListParams
 import com.unifieddatalibrary.api.models.linkstatus.datalink.DatalinkQueryhelpParams
@@ -41,6 +42,19 @@ interface DatalinkService {
 
     /** @see create */
     fun create(params: DatalinkCreateParams, requestOptions: RequestOptions = RequestOptions.none())
+
+    /** @see create */
+    fun create(
+        datalinkIngest: DatalinkIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        create(
+            DatalinkCreateParams.builder().datalinkIngest(datalinkIngest).build(),
+            requestOptions,
+        )
+
+    /** @see create */
+    fun create(datalinkIngest: DatalinkIngest) = create(datalinkIngest, RequestOptions.none())
 
     /**
      * Service operation to dynamically query data by a variety of query parameters not specified in
@@ -147,6 +161,22 @@ interface DatalinkService {
             params: DatalinkCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see create */
+        @MustBeClosed
+        fun create(
+            datalinkIngest: DatalinkIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            create(
+                DatalinkCreateParams.builder().datalinkIngest(datalinkIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        @MustBeClosed
+        fun create(datalinkIngest: DatalinkIngest): HttpResponse =
+            create(datalinkIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/datalink`, but is otherwise the same as

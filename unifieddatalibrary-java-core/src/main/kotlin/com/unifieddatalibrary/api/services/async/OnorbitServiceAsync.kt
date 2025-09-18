@@ -13,6 +13,7 @@ import com.unifieddatalibrary.api.models.onorbit.OnorbitDeleteParams
 import com.unifieddatalibrary.api.models.onorbit.OnorbitGetParams
 import com.unifieddatalibrary.api.models.onorbit.OnorbitGetSignatureParams
 import com.unifieddatalibrary.api.models.onorbit.OnorbitGetSignatureResponse
+import com.unifieddatalibrary.api.models.onorbit.OnorbitIngest
 import com.unifieddatalibrary.api.models.onorbit.OnorbitListPageAsync
 import com.unifieddatalibrary.api.models.onorbit.OnorbitListParams
 import com.unifieddatalibrary.api.models.onorbit.OnorbitQueryhelpParams
@@ -52,6 +53,17 @@ interface OnorbitServiceAsync {
         params: OnorbitCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see create */
+    fun create(
+        onorbitIngest: OnorbitIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        create(OnorbitCreateParams.builder().onorbitIngest(onorbitIngest).build(), requestOptions)
+
+    /** @see create */
+    fun create(onorbitIngest: OnorbitIngest): CompletableFuture<Void?> =
+        create(onorbitIngest, RequestOptions.none())
 
     /**
      * Service operation to update a single OnOrbit object. A specific role is required to perform
@@ -267,6 +279,20 @@ interface OnorbitServiceAsync {
             params: OnorbitCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see create */
+        fun create(
+            onorbitIngest: OnorbitIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            create(
+                OnorbitCreateParams.builder().onorbitIngest(onorbitIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        fun create(onorbitIngest: OnorbitIngest): CompletableFuture<HttpResponse> =
+            create(onorbitIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `put /udl/onorbit/{id}`, but is otherwise the same as

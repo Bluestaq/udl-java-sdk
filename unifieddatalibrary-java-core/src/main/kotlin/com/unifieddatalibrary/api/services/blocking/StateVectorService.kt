@@ -12,6 +12,7 @@ import com.unifieddatalibrary.api.models.statevector.StateVectorCountParams
 import com.unifieddatalibrary.api.models.statevector.StateVectorCreateBulkParams
 import com.unifieddatalibrary.api.models.statevector.StateVectorCreateParams
 import com.unifieddatalibrary.api.models.statevector.StateVectorGetParams
+import com.unifieddatalibrary.api.models.statevector.StateVectorIngest
 import com.unifieddatalibrary.api.models.statevector.StateVectorListPage
 import com.unifieddatalibrary.api.models.statevector.StateVectorListParams
 import com.unifieddatalibrary.api.models.statevector.StateVectorQueryhelpParams
@@ -53,6 +54,20 @@ interface StateVectorService {
         params: StateVectorCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see create */
+    fun create(
+        stateVectorIngest: StateVectorIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        create(
+            StateVectorCreateParams.builder().stateVectorIngest(stateVectorIngest).build(),
+            requestOptions,
+        )
+
+    /** @see create */
+    fun create(stateVectorIngest: StateVectorIngest) =
+        create(stateVectorIngest, RequestOptions.none())
 
     /**
      * Service operation to dynamically query data by a variety of query parameters not specified in
@@ -214,6 +229,22 @@ interface StateVectorService {
             params: StateVectorCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see create */
+        @MustBeClosed
+        fun create(
+            stateVectorIngest: StateVectorIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            create(
+                StateVectorCreateParams.builder().stateVectorIngest(stateVectorIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        @MustBeClosed
+        fun create(stateVectorIngest: StateVectorIngest): HttpResponse =
+            create(stateVectorIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/statevector`, but is otherwise the same as

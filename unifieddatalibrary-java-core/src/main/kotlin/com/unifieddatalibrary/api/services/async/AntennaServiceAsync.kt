@@ -7,6 +7,7 @@ import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.AntennaFull
+import com.unifieddatalibrary.api.models.AntennaIngest
 import com.unifieddatalibrary.api.models.antennas.AntennaCountParams
 import com.unifieddatalibrary.api.models.antennas.AntennaCreateParams
 import com.unifieddatalibrary.api.models.antennas.AntennaDeleteParams
@@ -47,6 +48,17 @@ interface AntennaServiceAsync {
         params: AntennaCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see create */
+    fun create(
+        antennaIngest: AntennaIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        create(AntennaCreateParams.builder().antennaIngest(antennaIngest).build(), requestOptions)
+
+    /** @see create */
+    fun create(antennaIngest: AntennaIngest): CompletableFuture<Void?> =
+        create(antennaIngest, RequestOptions.none())
 
     /**
      * Service operation to get a single Antenna record by its unique ID passed as a path parameter.
@@ -250,6 +262,20 @@ interface AntennaServiceAsync {
             params: AntennaCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see create */
+        fun create(
+            antennaIngest: AntennaIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            create(
+                AntennaCreateParams.builder().antennaIngest(antennaIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        fun create(antennaIngest: AntennaIngest): CompletableFuture<HttpResponse> =
+            create(antennaIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/antenna/{id}`, but is otherwise the same as

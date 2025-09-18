@@ -12,6 +12,7 @@ import com.unifieddatalibrary.api.models.elsets.ElsetCountParams
 import com.unifieddatalibrary.api.models.elsets.ElsetCreateBulkFromTleParams
 import com.unifieddatalibrary.api.models.elsets.ElsetCreateBulkParams
 import com.unifieddatalibrary.api.models.elsets.ElsetCreateParams
+import com.unifieddatalibrary.api.models.elsets.ElsetIngest
 import com.unifieddatalibrary.api.models.elsets.ElsetListPage
 import com.unifieddatalibrary.api.models.elsets.ElsetListParams
 import com.unifieddatalibrary.api.models.elsets.ElsetQueryCurrentElsetHelpParams
@@ -53,6 +54,13 @@ interface ElsetService {
 
     /** @see create */
     fun create(params: ElsetCreateParams, requestOptions: RequestOptions = RequestOptions.none())
+
+    /** @see create */
+    fun create(elsetIngest: ElsetIngest, requestOptions: RequestOptions = RequestOptions.none()) =
+        create(ElsetCreateParams.builder().elsetIngest(elsetIngest).build(), requestOptions)
+
+    /** @see create */
+    fun create(elsetIngest: ElsetIngest) = create(elsetIngest, RequestOptions.none())
 
     /** Service operation to get a single elset by its unique ID passed as a path parameter. */
     fun retrieve(id: String): Elset = retrieve(id, ElsetRetrieveParams.none())
@@ -240,6 +248,19 @@ interface ElsetService {
             params: ElsetCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see create */
+        @MustBeClosed
+        fun create(
+            elsetIngest: ElsetIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            create(ElsetCreateParams.builder().elsetIngest(elsetIngest).build(), requestOptions)
+
+        /** @see create */
+        @MustBeClosed
+        fun create(elsetIngest: ElsetIngest): HttpResponse =
+            create(elsetIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/elset/{id}`, but is otherwise the same as

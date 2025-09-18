@@ -11,6 +11,7 @@ import com.unifieddatalibrary.api.models.entities.EntityCountParams
 import com.unifieddatalibrary.api.models.entities.EntityCreateParams
 import com.unifieddatalibrary.api.models.entities.EntityDeleteParams
 import com.unifieddatalibrary.api.models.entities.EntityGetAllTypesParams
+import com.unifieddatalibrary.api.models.entities.EntityIngest
 import com.unifieddatalibrary.api.models.entities.EntityListPageAsync
 import com.unifieddatalibrary.api.models.entities.EntityListParams
 import com.unifieddatalibrary.api.models.entities.EntityQueryHelpParams
@@ -48,6 +49,17 @@ interface EntityServiceAsync {
         params: EntityCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see create */
+    fun create(
+        entityIngest: EntityIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        create(EntityCreateParams.builder().entityIngest(entityIngest).build(), requestOptions)
+
+    /** @see create */
+    fun create(entityIngest: EntityIngest): CompletableFuture<Void?> =
+        create(entityIngest, RequestOptions.none())
 
     /**
      * Service operation to get a single Entity record by its unique ID passed as a path parameter.
@@ -269,6 +281,17 @@ interface EntityServiceAsync {
             params: EntityCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see create */
+        fun create(
+            entityIngest: EntityIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            create(EntityCreateParams.builder().entityIngest(entityIngest).build(), requestOptions)
+
+        /** @see create */
+        fun create(entityIngest: EntityIngest): CompletableFuture<HttpResponse> =
+            create(entityIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/entity/{id}`, but is otherwise the same as
