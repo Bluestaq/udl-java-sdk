@@ -25,6 +25,7 @@ import com.unifieddatalibrary.api.models.scs.v2.V2FolderCreateParams
 import com.unifieddatalibrary.api.models.scs.v2.V2ListPageAsync
 import com.unifieddatalibrary.api.models.scs.v2.V2ListParams
 import com.unifieddatalibrary.api.models.scs.v2.V2MoveParams
+import com.unifieddatalibrary.api.models.scs.v2.V2SearchParams
 import com.unifieddatalibrary.api.models.scs.v2.V2UpdateParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
@@ -90,6 +91,13 @@ class V2ServiceAsyncImpl internal constructor(private val clientOptions: ClientO
     ): CompletableFuture<Void?> =
         // put /scs/v2/move
         withRawResponse().move(params, requestOptions).thenAccept {}
+
+    override fun search(
+        params: V2SearchParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<List<ScsEntity>> =
+        // post /scs/v2/search
+        withRawResponse().search(params, requestOptions).thenApply { it.parse() }
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         V2ServiceAsync.WithRawResponse {
@@ -285,6 +293,37 @@ class V2ServiceAsyncImpl internal constructor(private val clientOptions: ClientO
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response.use { moveHandler.handle(it) }
+                    }
+                }
+        }
+
+        private val searchHandler: Handler<List<ScsEntity>> =
+            jsonHandler<List<ScsEntity>>(clientOptions.jsonMapper)
+
+        override fun search(
+            params: V2SearchParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<List<ScsEntity>>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("scs", "v2", "search")
+                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response
+                            .use { searchHandler.handle(it) }
+                            .also {
+                                if (requestOptions.responseValidation!!) {
+                                    it.forEach { it.validate() }
+                                }
+                            }
                     }
                 }
         }

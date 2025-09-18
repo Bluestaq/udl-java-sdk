@@ -28,9 +28,15 @@ class ObservationServiceImpl internal constructor(private val clientOptions: Cli
 
     private val ecpsdr: EcpsdrService by lazy { EcpsdrServiceImpl(clientOptions) }
 
+    private val eoObservations: EoObservationService by lazy {
+        EoObservationServiceImpl(clientOptions)
+    }
+
     private val monoradar: MonoradarService by lazy { MonoradarServiceImpl(clientOptions) }
 
-    private val swir: SwirService by lazy { SwirServiceImpl(clientOptions) }
+    private val passiveRadarObservation: PassiveRadarObservationService by lazy {
+        PassiveRadarObservationServiceImpl(clientOptions)
+    }
 
     private val radarobservation: RadarobservationService by lazy {
         RadarobservationServiceImpl(clientOptions)
@@ -40,13 +46,7 @@ class ObservationServiceImpl internal constructor(private val clientOptions: Cli
         RfObservationServiceImpl(clientOptions)
     }
 
-    private val passiveRadarObservation: PassiveRadarObservationService by lazy {
-        PassiveRadarObservationServiceImpl(clientOptions)
-    }
-
-    private val eoObservations: EoObservationService by lazy {
-        EoObservationServiceImpl(clientOptions)
-    }
+    private val swir: SwirService by lazy { SwirServiceImpl(clientOptions) }
 
     override fun withRawResponse(): ObservationService.WithRawResponse = withRawResponse
 
@@ -55,17 +55,17 @@ class ObservationServiceImpl internal constructor(private val clientOptions: Cli
 
     override fun ecpsdr(): EcpsdrService = ecpsdr
 
+    override fun eoObservations(): EoObservationService = eoObservations
+
     override fun monoradar(): MonoradarService = monoradar
 
-    override fun swir(): SwirService = swir
+    override fun passiveRadarObservation(): PassiveRadarObservationService = passiveRadarObservation
 
     override fun radarobservation(): RadarobservationService = radarobservation
 
     override fun rfObservation(): RfObservationService = rfObservation
 
-    override fun passiveRadarObservation(): PassiveRadarObservationService = passiveRadarObservation
-
-    override fun eoObservations(): EoObservationService = eoObservations
+    override fun swir(): SwirService = swir
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         ObservationService.WithRawResponse {
@@ -74,12 +74,17 @@ class ObservationServiceImpl internal constructor(private val clientOptions: Cli
             EcpsdrServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
+        private val eoObservations: EoObservationService.WithRawResponse by lazy {
+            EoObservationServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
         private val monoradar: MonoradarService.WithRawResponse by lazy {
             MonoradarServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val swir: SwirService.WithRawResponse by lazy {
-            SwirServiceImpl.WithRawResponseImpl(clientOptions)
+        private val passiveRadarObservation:
+            PassiveRadarObservationService.WithRawResponse by lazy {
+            PassiveRadarObservationServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val radarobservation: RadarobservationService.WithRawResponse by lazy {
@@ -90,13 +95,8 @@ class ObservationServiceImpl internal constructor(private val clientOptions: Cli
             RfObservationServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val passiveRadarObservation:
-            PassiveRadarObservationService.WithRawResponse by lazy {
-            PassiveRadarObservationServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val eoObservations: EoObservationService.WithRawResponse by lazy {
-            EoObservationServiceImpl.WithRawResponseImpl(clientOptions)
+        private val swir: SwirService.WithRawResponse by lazy {
+            SwirServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
         override fun withOptions(
@@ -108,17 +108,17 @@ class ObservationServiceImpl internal constructor(private val clientOptions: Cli
 
         override fun ecpsdr(): EcpsdrService.WithRawResponse = ecpsdr
 
+        override fun eoObservations(): EoObservationService.WithRawResponse = eoObservations
+
         override fun monoradar(): MonoradarService.WithRawResponse = monoradar
 
-        override fun swir(): SwirService.WithRawResponse = swir
+        override fun passiveRadarObservation(): PassiveRadarObservationService.WithRawResponse =
+            passiveRadarObservation
 
         override fun radarobservation(): RadarobservationService.WithRawResponse = radarobservation
 
         override fun rfObservation(): RfObservationService.WithRawResponse = rfObservation
 
-        override fun passiveRadarObservation(): PassiveRadarObservationService.WithRawResponse =
-            passiveRadarObservation
-
-        override fun eoObservations(): EoObservationService.WithRawResponse = eoObservations
+        override fun swir(): SwirService.WithRawResponse = swir
     }
 }

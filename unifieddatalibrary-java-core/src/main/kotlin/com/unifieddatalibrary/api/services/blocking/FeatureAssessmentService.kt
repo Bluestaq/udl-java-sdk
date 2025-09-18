@@ -10,10 +10,10 @@ import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCountParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCreateBulkParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCreateParams
+import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentListPage
+import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentListParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryHelpParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryHelpResponse
-import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryParams
-import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryResponse
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentRetrieveParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentRetrieveResponse
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentTupleParams
@@ -87,6 +87,20 @@ interface FeatureAssessmentService {
         retrieve(id, FeatureAssessmentRetrieveParams.none(), requestOptions)
 
     /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
+    fun list(params: FeatureAssessmentListParams): FeatureAssessmentListPage =
+        list(params, RequestOptions.none())
+
+    /** @see list */
+    fun list(
+        params: FeatureAssessmentListParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): FeatureAssessmentListPage
+
+    /**
      * Service operation to return the count of records satisfying the specified query parameters.
      * This operation is useful to determine how many records pass a particular query criteria
      * without retrieving large amounts of data. See the queryhelp operation
@@ -116,20 +130,6 @@ interface FeatureAssessmentService {
         params: FeatureAssessmentCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
-
-    /**
-     * Service operation to dynamically query data by a variety of query parameters not specified in
-     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
-     * more details on valid/required query parameter information.
-     */
-    fun query(params: FeatureAssessmentQueryParams): List<FeatureAssessmentQueryResponse> =
-        query(params, RequestOptions.none())
-
-    /** @see query */
-    fun query(
-        params: FeatureAssessmentQueryParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): List<FeatureAssessmentQueryResponse>
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -266,6 +266,21 @@ interface FeatureAssessmentService {
             retrieve(id, FeatureAssessmentRetrieveParams.none(), requestOptions)
 
         /**
+         * Returns a raw HTTP response for `get /udl/featureassessment`, but is otherwise the same
+         * as [FeatureAssessmentService.list].
+         */
+        @MustBeClosed
+        fun list(params: FeatureAssessmentListParams): HttpResponseFor<FeatureAssessmentListPage> =
+            list(params, RequestOptions.none())
+
+        /** @see list */
+        @MustBeClosed
+        fun list(
+            params: FeatureAssessmentListParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<FeatureAssessmentListPage>
+
+        /**
          * Returns a raw HTTP response for `get /udl/featureassessment/count`, but is otherwise the
          * same as [FeatureAssessmentService.count].
          */
@@ -294,23 +309,6 @@ interface FeatureAssessmentService {
             params: FeatureAssessmentCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
-
-        /**
-         * Returns a raw HTTP response for `get /udl/featureassessment`, but is otherwise the same
-         * as [FeatureAssessmentService.query].
-         */
-        @MustBeClosed
-        fun query(
-            params: FeatureAssessmentQueryParams
-        ): HttpResponseFor<List<FeatureAssessmentQueryResponse>> =
-            query(params, RequestOptions.none())
-
-        /** @see query */
-        @MustBeClosed
-        fun query(
-            params: FeatureAssessmentQueryParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<List<FeatureAssessmentQueryResponse>>
 
         /**
          * Returns a raw HTTP response for `get /udl/featureassessment/queryhelp`, but is otherwise

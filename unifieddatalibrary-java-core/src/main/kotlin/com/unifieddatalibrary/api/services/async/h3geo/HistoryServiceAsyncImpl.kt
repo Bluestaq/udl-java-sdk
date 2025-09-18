@@ -18,8 +18,9 @@ import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.h3geo.history.HistoryAdorParams
 import com.unifieddatalibrary.api.models.h3geo.history.HistoryCountParams
-import com.unifieddatalibrary.api.models.h3geo.history.HistoryQueryParams
-import com.unifieddatalibrary.api.models.h3geo.history.HistoryQueryResponse
+import com.unifieddatalibrary.api.models.h3geo.history.HistoryListPageAsync
+import com.unifieddatalibrary.api.models.h3geo.history.HistoryListParams
+import com.unifieddatalibrary.api.models.h3geo.history.HistoryListResponse
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -35,6 +36,13 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryServiceAsync =
         HistoryServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    override fun list(
+        params: HistoryListParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<HistoryListPageAsync> =
+        // get /udl/h3geo/history
+        withRawResponse().list(params, requestOptions).thenApply { it.parse() }
+
     override fun ador(
         params: HistoryAdorParams,
         requestOptions: RequestOptions,
@@ -49,13 +57,6 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
         // get /udl/h3geo/history/count
         withRawResponse().count(params, requestOptions).thenApply { it.parse() }
 
-    override fun query(
-        params: HistoryQueryParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<List<HistoryQueryResponse>> =
-        // get /udl/h3geo/history
-        withRawResponse().query(params, requestOptions).thenApply { it.parse() }
-
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         HistoryServiceAsync.WithRawResponse {
 
@@ -68,6 +69,44 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
             HistoryServiceAsyncImpl.WithRawResponseImpl(
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
+
+        private val listHandler: Handler<List<HistoryListResponse>> =
+            jsonHandler<List<HistoryListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: HistoryListParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "h3geo", "history")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response
+                            .use { listHandler.handle(it) }
+                            .also {
+                                if (requestOptions.responseValidation!!) {
+                                    it.forEach { it.validate() }
+                                }
+                            }
+                            .let {
+                                HistoryListPageAsync.builder()
+                                    .service(HistoryServiceAsyncImpl(clientOptions))
+                                    .streamHandlerExecutor(clientOptions.streamHandlerExecutor)
+                                    .params(params)
+                                    .items(it)
+                                    .build()
+                            }
+                    }
+                }
+        }
 
         private val adorHandler: Handler<Void?> = emptyHandler()
 
@@ -111,36 +150,6 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response.use { countHandler.handle(it) }
-                    }
-                }
-        }
-
-        private val queryHandler: Handler<List<HistoryQueryResponse>> =
-            jsonHandler<List<HistoryQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: HistoryQueryParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<List<HistoryQueryResponse>>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "h3geo", "history")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response
-                            .use { queryHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.forEach { it.validate() }
-                                }
-                            }
                     }
                 }
         }

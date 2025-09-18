@@ -18,8 +18,9 @@ import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryCountParams
-import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryRetrieveParams
-import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryRetrieveResponse
+import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryListPageAsync
+import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryListParams
+import com.unifieddatalibrary.api.models.sensormaintenance.history.HistoryListResponse
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -35,12 +36,12 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryServiceAsync =
         HistoryServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-    override fun retrieve(
-        params: HistoryRetrieveParams,
+    override fun list(
+        params: HistoryListParams,
         requestOptions: RequestOptions,
-    ): CompletableFuture<List<HistoryRetrieveResponse>> =
+    ): CompletableFuture<HistoryListPageAsync> =
         // get /udl/sensormaintenance/history
-        withRawResponse().retrieve(params, requestOptions).thenApply { it.parse() }
+        withRawResponse().list(params, requestOptions).thenApply { it.parse() }
 
     override fun aodr(
         params: HistoryAodrParams,
@@ -69,13 +70,13 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
-        private val retrieveHandler: Handler<List<HistoryRetrieveResponse>> =
-            jsonHandler<List<HistoryRetrieveResponse>>(clientOptions.jsonMapper)
+        private val listHandler: Handler<List<HistoryListResponse>> =
+            jsonHandler<List<HistoryListResponse>>(clientOptions.jsonMapper)
 
-        override fun retrieve(
-            params: HistoryRetrieveParams,
+        override fun list(
+            params: HistoryListParams,
             requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<List<HistoryRetrieveResponse>>> {
+        ): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -89,11 +90,19 @@ class HistoryServiceAsyncImpl internal constructor(private val clientOptions: Cl
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response
-                            .use { retrieveHandler.handle(it) }
+                            .use { listHandler.handle(it) }
                             .also {
                                 if (requestOptions.responseValidation!!) {
                                     it.forEach { it.validate() }
                                 }
+                            }
+                            .let {
+                                HistoryListPageAsync.builder()
+                                    .service(HistoryServiceAsyncImpl(clientOptions))
+                                    .streamHandlerExecutor(clientOptions.streamHandlerExecutor)
+                                    .params(params)
+                                    .items(it)
+                                    .build()
                             }
                     }
                 }

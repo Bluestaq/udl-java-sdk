@@ -7,7 +7,6 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAs
 import com.unifieddatalibrary.api.models.routestats.RouteStatCountParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatCreateBulkParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatCreateParams
-import com.unifieddatalibrary.api.models.routestats.RouteStatQueryParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatRetrieveParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatTupleParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatUnvalidatedPublishParams
@@ -144,6 +143,22 @@ internal class RouteStatServiceAsyncTest {
     }
 
     @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val routeStatServiceAsync = client.routeStats()
+
+        val pageFuture = routeStatServiceAsync.list()
+
+        val page = pageFuture.get()
+        page.items().forEach { it.validate() }
+    }
+
+    @Test
     fun delete() {
         val client =
             UnifieddatalibraryOkHttpClientAsync.builder()
@@ -230,25 +245,6 @@ internal class RouteStatServiceAsyncTest {
             )
 
         val response = future.get()
-    }
-
-    @Test
-    fun query() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val routeStatServiceAsync = client.routeStats()
-
-        val responseFuture =
-            routeStatServiceAsync.query(
-                RouteStatQueryParams.builder().firstResult(0L).maxResults(0L).build()
-            )
-
-        val response = responseFuture.get()
-        response.forEach { it.validate() }
     }
 
     @Test

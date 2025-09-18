@@ -6,7 +6,6 @@ import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
 import com.unifieddatalibrary.api.models.ais.AiCountParams
 import com.unifieddatalibrary.api.models.ais.AiCreateBulkParams
-import com.unifieddatalibrary.api.models.ais.AiHistoryCountParams
 import com.unifieddatalibrary.api.models.ais.AiListParams
 import com.unifieddatalibrary.api.models.ais.AiTupleParams
 import java.time.OffsetDateTime
@@ -129,28 +128,6 @@ internal class AiServiceAsyncTest {
             )
 
         val response = future.get()
-    }
-
-    @Test
-    fun historyCount() {
-        val client =
-            UnifieddatalibraryOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val aiServiceAsync = client.ais()
-
-        val responseFuture =
-            aiServiceAsync.historyCount(
-                AiHistoryCountParams.builder()
-                    .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .build()
-            )
-
-        val response = responseFuture.get()
     }
 
     @Test

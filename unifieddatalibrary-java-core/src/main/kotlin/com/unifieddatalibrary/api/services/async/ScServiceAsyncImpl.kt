@@ -29,22 +29,18 @@ import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
-import com.unifieddatalibrary.api.services.async.scs.ClassificationMarkingServiceAsync
-import com.unifieddatalibrary.api.services.async.scs.ClassificationMarkingServiceAsyncImpl
-import com.unifieddatalibrary.api.services.async.scs.FileMetadataServiceAsync
-import com.unifieddatalibrary.api.services.async.scs.FileMetadataServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.scs.FileServiceAsync
 import com.unifieddatalibrary.api.services.async.scs.FileServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.scs.FolderServiceAsync
 import com.unifieddatalibrary.api.services.async.scs.FolderServiceAsyncImpl
-import com.unifieddatalibrary.api.services.async.scs.GroupServiceAsync
-import com.unifieddatalibrary.api.services.async.scs.GroupServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.scs.NotificationServiceAsync
+import com.unifieddatalibrary.api.services.async.scs.NotificationServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.scs.PathServiceAsync
 import com.unifieddatalibrary.api.services.async.scs.PathServiceAsyncImpl
-import com.unifieddatalibrary.api.services.async.scs.RangeParameterServiceAsync
-import com.unifieddatalibrary.api.services.async.scs.RangeParameterServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.scs.V2ServiceAsync
 import com.unifieddatalibrary.api.services.async.scs.V2ServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.scs.ViewServiceAsync
+import com.unifieddatalibrary.api.services.async.scs.ViewServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
@@ -56,49 +52,36 @@ class ScServiceAsyncImpl internal constructor(private val clientOptions: ClientO
         WithRawResponseImpl(clientOptions)
     }
 
+    private val notifications: NotificationServiceAsync by lazy {
+        NotificationServiceAsyncImpl(clientOptions)
+    }
+
+    private val file: FileServiceAsync by lazy { FileServiceAsyncImpl(clientOptions) }
+
     private val folders: FolderServiceAsync by lazy { FolderServiceAsyncImpl(clientOptions) }
-
-    private val classificationMarkings: ClassificationMarkingServiceAsync by lazy {
-        ClassificationMarkingServiceAsyncImpl(clientOptions)
-    }
-
-    private val groups: GroupServiceAsync by lazy { GroupServiceAsyncImpl(clientOptions) }
-
-    private val fileMetadata: FileMetadataServiceAsync by lazy {
-        FileMetadataServiceAsyncImpl(clientOptions)
-    }
-
-    private val rangeParameters: RangeParameterServiceAsync by lazy {
-        RangeParameterServiceAsyncImpl(clientOptions)
-    }
 
     private val paths: PathServiceAsync by lazy { PathServiceAsyncImpl(clientOptions) }
 
-    private val v2: V2ServiceAsync by lazy { V2ServiceAsyncImpl(clientOptions) }
+    private val view: ViewServiceAsync by lazy { ViewServiceAsyncImpl(clientOptions) }
 
-    private val file: FileServiceAsync by lazy { FileServiceAsyncImpl(clientOptions) }
+    private val v2: V2ServiceAsync by lazy { V2ServiceAsyncImpl(clientOptions) }
 
     override fun withRawResponse(): ScServiceAsync.WithRawResponse = withRawResponse
 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScServiceAsync =
         ScServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    override fun notifications(): NotificationServiceAsync = notifications
+
+    override fun file(): FileServiceAsync = file
+
     override fun folders(): FolderServiceAsync = folders
-
-    override fun classificationMarkings(): ClassificationMarkingServiceAsync =
-        classificationMarkings
-
-    override fun groups(): GroupServiceAsync = groups
-
-    override fun fileMetadata(): FileMetadataServiceAsync = fileMetadata
-
-    override fun rangeParameters(): RangeParameterServiceAsync = rangeParameters
 
     override fun paths(): PathServiceAsync = paths
 
-    override fun v2(): V2ServiceAsync = v2
+    override fun view(): ViewServiceAsync = view
 
-    override fun file(): FileServiceAsync = file
+    override fun v2(): V2ServiceAsync = v2
 
     @Deprecated("deprecated")
     override fun delete(
@@ -182,37 +165,28 @@ class ScServiceAsyncImpl internal constructor(private val clientOptions: ClientO
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
+        private val notifications: NotificationServiceAsync.WithRawResponse by lazy {
+            NotificationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val file: FileServiceAsync.WithRawResponse by lazy {
+            FileServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
         private val folders: FolderServiceAsync.WithRawResponse by lazy {
             FolderServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val classificationMarkings:
-            ClassificationMarkingServiceAsync.WithRawResponse by lazy {
-            ClassificationMarkingServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val groups: GroupServiceAsync.WithRawResponse by lazy {
-            GroupServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val fileMetadata: FileMetadataServiceAsync.WithRawResponse by lazy {
-            FileMetadataServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val rangeParameters: RangeParameterServiceAsync.WithRawResponse by lazy {
-            RangeParameterServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val paths: PathServiceAsync.WithRawResponse by lazy {
             PathServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val v2: V2ServiceAsync.WithRawResponse by lazy {
-            V2ServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        private val view: ViewServiceAsync.WithRawResponse by lazy {
+            ViewServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val file: FileServiceAsync.WithRawResponse by lazy {
-            FileServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        private val v2: V2ServiceAsync.WithRawResponse by lazy {
+            V2ServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         override fun withOptions(
@@ -222,22 +196,17 @@ class ScServiceAsyncImpl internal constructor(private val clientOptions: ClientO
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        override fun notifications(): NotificationServiceAsync.WithRawResponse = notifications
+
+        override fun file(): FileServiceAsync.WithRawResponse = file
+
         override fun folders(): FolderServiceAsync.WithRawResponse = folders
-
-        override fun classificationMarkings(): ClassificationMarkingServiceAsync.WithRawResponse =
-            classificationMarkings
-
-        override fun groups(): GroupServiceAsync.WithRawResponse = groups
-
-        override fun fileMetadata(): FileMetadataServiceAsync.WithRawResponse = fileMetadata
-
-        override fun rangeParameters(): RangeParameterServiceAsync.WithRawResponse = rangeParameters
 
         override fun paths(): PathServiceAsync.WithRawResponse = paths
 
-        override fun v2(): V2ServiceAsync.WithRawResponse = v2
+        override fun view(): ViewServiceAsync.WithRawResponse = view
 
-        override fun file(): FileServiceAsync.WithRawResponse = file
+        override fun v2(): V2ServiceAsync.WithRawResponse = v2
 
         private val deleteHandler: Handler<Void?> = emptyHandler()
 

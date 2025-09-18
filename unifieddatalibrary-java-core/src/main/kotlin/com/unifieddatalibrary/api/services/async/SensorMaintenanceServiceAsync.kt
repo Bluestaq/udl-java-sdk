@@ -9,15 +9,15 @@ import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCountParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCreateBulkParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCreateParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCurrentParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCurrentResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceDeleteParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceGetParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceGetResponse
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListCurrentPageAsync
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListCurrentParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListPageAsync
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryhelpParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryhelpResponse
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryHelpParams
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryHelpResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceTupleParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceTupleResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceUpdateParams
@@ -176,31 +176,6 @@ interface SensorMaintenanceServiceAsync {
     ): CompletableFuture<Void?>
 
     /**
-     * Service operation to get current Sensor Maintenance records using any number of additional
-     * parameters.
-     */
-    fun current(): CompletableFuture<List<SensorMaintenanceCurrentResponse>> =
-        current(SensorMaintenanceCurrentParams.none())
-
-    /** @see current */
-    fun current(
-        params: SensorMaintenanceCurrentParams = SensorMaintenanceCurrentParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<SensorMaintenanceCurrentResponse>>
-
-    /** @see current */
-    fun current(
-        params: SensorMaintenanceCurrentParams = SensorMaintenanceCurrentParams.none()
-    ): CompletableFuture<List<SensorMaintenanceCurrentResponse>> =
-        current(params, RequestOptions.none())
-
-    /** @see current */
-    fun current(
-        requestOptions: RequestOptions
-    ): CompletableFuture<List<SensorMaintenanceCurrentResponse>> =
-        current(SensorMaintenanceCurrentParams.none(), requestOptions)
-
-    /**
      * Service operation to get a single SensorMaintenance record by its unique ID passed as a path
      * parameter.
      */
@@ -239,29 +214,54 @@ interface SensorMaintenanceServiceAsync {
         get(id, SensorMaintenanceGetParams.none(), requestOptions)
 
     /**
+     * Service operation to get current Sensor Maintenance records using any number of additional
+     * parameters.
+     */
+    fun listCurrent(): CompletableFuture<SensorMaintenanceListCurrentPageAsync> =
+        listCurrent(SensorMaintenanceListCurrentParams.none())
+
+    /** @see listCurrent */
+    fun listCurrent(
+        params: SensorMaintenanceListCurrentParams = SensorMaintenanceListCurrentParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<SensorMaintenanceListCurrentPageAsync>
+
+    /** @see listCurrent */
+    fun listCurrent(
+        params: SensorMaintenanceListCurrentParams = SensorMaintenanceListCurrentParams.none()
+    ): CompletableFuture<SensorMaintenanceListCurrentPageAsync> =
+        listCurrent(params, RequestOptions.none())
+
+    /** @see listCurrent */
+    fun listCurrent(
+        requestOptions: RequestOptions
+    ): CompletableFuture<SensorMaintenanceListCurrentPageAsync> =
+        listCurrent(SensorMaintenanceListCurrentParams.none(), requestOptions)
+
+    /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
      */
-    fun queryhelp(): CompletableFuture<SensorMaintenanceQueryhelpResponse> =
-        queryhelp(SensorMaintenanceQueryhelpParams.none())
+    fun queryHelp(): CompletableFuture<SensorMaintenanceQueryHelpResponse> =
+        queryHelp(SensorMaintenanceQueryHelpParams.none())
 
-    /** @see queryhelp */
-    fun queryhelp(
-        params: SensorMaintenanceQueryhelpParams = SensorMaintenanceQueryhelpParams.none(),
+    /** @see queryHelp */
+    fun queryHelp(
+        params: SensorMaintenanceQueryHelpParams = SensorMaintenanceQueryHelpParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<SensorMaintenanceQueryhelpResponse>
+    ): CompletableFuture<SensorMaintenanceQueryHelpResponse>
 
-    /** @see queryhelp */
-    fun queryhelp(
-        params: SensorMaintenanceQueryhelpParams = SensorMaintenanceQueryhelpParams.none()
-    ): CompletableFuture<SensorMaintenanceQueryhelpResponse> =
-        queryhelp(params, RequestOptions.none())
+    /** @see queryHelp */
+    fun queryHelp(
+        params: SensorMaintenanceQueryHelpParams = SensorMaintenanceQueryHelpParams.none()
+    ): CompletableFuture<SensorMaintenanceQueryHelpResponse> =
+        queryHelp(params, RequestOptions.none())
 
-    /** @see queryhelp */
-    fun queryhelp(
+    /** @see queryHelp */
+    fun queryHelp(
         requestOptions: RequestOptions
-    ): CompletableFuture<SensorMaintenanceQueryhelpResponse> =
-        queryhelp(SensorMaintenanceQueryhelpParams.none(), requestOptions)
+    ): CompletableFuture<SensorMaintenanceQueryHelpResponse> =
+        queryHelp(SensorMaintenanceQueryHelpParams.none(), requestOptions)
 
     /**
      * Service operation to dynamically query data and only return specified columns/fields.
@@ -436,31 +436,6 @@ interface SensorMaintenanceServiceAsync {
         ): CompletableFuture<HttpResponse>
 
         /**
-         * Returns a raw HTTP response for `get /udl/sensormaintenance/current`, but is otherwise
-         * the same as [SensorMaintenanceServiceAsync.current].
-         */
-        fun current(): CompletableFuture<HttpResponseFor<List<SensorMaintenanceCurrentResponse>>> =
-            current(SensorMaintenanceCurrentParams.none())
-
-        /** @see current */
-        fun current(
-            params: SensorMaintenanceCurrentParams = SensorMaintenanceCurrentParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<SensorMaintenanceCurrentResponse>>>
-
-        /** @see current */
-        fun current(
-            params: SensorMaintenanceCurrentParams = SensorMaintenanceCurrentParams.none()
-        ): CompletableFuture<HttpResponseFor<List<SensorMaintenanceCurrentResponse>>> =
-            current(params, RequestOptions.none())
-
-        /** @see current */
-        fun current(
-            requestOptions: RequestOptions
-        ): CompletableFuture<HttpResponseFor<List<SensorMaintenanceCurrentResponse>>> =
-            current(SensorMaintenanceCurrentParams.none(), requestOptions)
-
-        /**
          * Returns a raw HTTP response for `get /udl/sensormaintenance/{id}`, but is otherwise the
          * same as [SensorMaintenanceServiceAsync.get].
          */
@@ -502,29 +477,55 @@ interface SensorMaintenanceServiceAsync {
             get(id, SensorMaintenanceGetParams.none(), requestOptions)
 
         /**
-         * Returns a raw HTTP response for `get /udl/sensormaintenance/queryhelp`, but is otherwise
-         * the same as [SensorMaintenanceServiceAsync.queryhelp].
+         * Returns a raw HTTP response for `get /udl/sensormaintenance/current`, but is otherwise
+         * the same as [SensorMaintenanceServiceAsync.listCurrent].
          */
-        fun queryhelp(): CompletableFuture<HttpResponseFor<SensorMaintenanceQueryhelpResponse>> =
-            queryhelp(SensorMaintenanceQueryhelpParams.none())
+        fun listCurrent():
+            CompletableFuture<HttpResponseFor<SensorMaintenanceListCurrentPageAsync>> =
+            listCurrent(SensorMaintenanceListCurrentParams.none())
 
-        /** @see queryhelp */
-        fun queryhelp(
-            params: SensorMaintenanceQueryhelpParams = SensorMaintenanceQueryhelpParams.none(),
+        /** @see listCurrent */
+        fun listCurrent(
+            params: SensorMaintenanceListCurrentParams = SensorMaintenanceListCurrentParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<SensorMaintenanceQueryhelpResponse>>
+        ): CompletableFuture<HttpResponseFor<SensorMaintenanceListCurrentPageAsync>>
 
-        /** @see queryhelp */
-        fun queryhelp(
-            params: SensorMaintenanceQueryhelpParams = SensorMaintenanceQueryhelpParams.none()
-        ): CompletableFuture<HttpResponseFor<SensorMaintenanceQueryhelpResponse>> =
-            queryhelp(params, RequestOptions.none())
+        /** @see listCurrent */
+        fun listCurrent(
+            params: SensorMaintenanceListCurrentParams = SensorMaintenanceListCurrentParams.none()
+        ): CompletableFuture<HttpResponseFor<SensorMaintenanceListCurrentPageAsync>> =
+            listCurrent(params, RequestOptions.none())
 
-        /** @see queryhelp */
-        fun queryhelp(
+        /** @see listCurrent */
+        fun listCurrent(
             requestOptions: RequestOptions
-        ): CompletableFuture<HttpResponseFor<SensorMaintenanceQueryhelpResponse>> =
-            queryhelp(SensorMaintenanceQueryhelpParams.none(), requestOptions)
+        ): CompletableFuture<HttpResponseFor<SensorMaintenanceListCurrentPageAsync>> =
+            listCurrent(SensorMaintenanceListCurrentParams.none(), requestOptions)
+
+        /**
+         * Returns a raw HTTP response for `get /udl/sensormaintenance/queryhelp`, but is otherwise
+         * the same as [SensorMaintenanceServiceAsync.queryHelp].
+         */
+        fun queryHelp(): CompletableFuture<HttpResponseFor<SensorMaintenanceQueryHelpResponse>> =
+            queryHelp(SensorMaintenanceQueryHelpParams.none())
+
+        /** @see queryHelp */
+        fun queryHelp(
+            params: SensorMaintenanceQueryHelpParams = SensorMaintenanceQueryHelpParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<SensorMaintenanceQueryHelpResponse>>
+
+        /** @see queryHelp */
+        fun queryHelp(
+            params: SensorMaintenanceQueryHelpParams = SensorMaintenanceQueryHelpParams.none()
+        ): CompletableFuture<HttpResponseFor<SensorMaintenanceQueryHelpResponse>> =
+            queryHelp(params, RequestOptions.none())
+
+        /** @see queryHelp */
+        fun queryHelp(
+            requestOptions: RequestOptions
+        ): CompletableFuture<HttpResponseFor<SensorMaintenanceQueryHelpResponse>> =
+            queryHelp(SensorMaintenanceQueryHelpParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /udl/sensormaintenance/tuple`, but is otherwise the

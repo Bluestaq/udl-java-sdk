@@ -29,22 +29,18 @@ import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
-import com.unifieddatalibrary.api.services.blocking.scs.ClassificationMarkingService
-import com.unifieddatalibrary.api.services.blocking.scs.ClassificationMarkingServiceImpl
-import com.unifieddatalibrary.api.services.blocking.scs.FileMetadataService
-import com.unifieddatalibrary.api.services.blocking.scs.FileMetadataServiceImpl
 import com.unifieddatalibrary.api.services.blocking.scs.FileService
 import com.unifieddatalibrary.api.services.blocking.scs.FileServiceImpl
 import com.unifieddatalibrary.api.services.blocking.scs.FolderService
 import com.unifieddatalibrary.api.services.blocking.scs.FolderServiceImpl
-import com.unifieddatalibrary.api.services.blocking.scs.GroupService
-import com.unifieddatalibrary.api.services.blocking.scs.GroupServiceImpl
+import com.unifieddatalibrary.api.services.blocking.scs.NotificationService
+import com.unifieddatalibrary.api.services.blocking.scs.NotificationServiceImpl
 import com.unifieddatalibrary.api.services.blocking.scs.PathService
 import com.unifieddatalibrary.api.services.blocking.scs.PathServiceImpl
-import com.unifieddatalibrary.api.services.blocking.scs.RangeParameterService
-import com.unifieddatalibrary.api.services.blocking.scs.RangeParameterServiceImpl
 import com.unifieddatalibrary.api.services.blocking.scs.V2Service
 import com.unifieddatalibrary.api.services.blocking.scs.V2ServiceImpl
+import com.unifieddatalibrary.api.services.blocking.scs.ViewService
+import com.unifieddatalibrary.api.services.blocking.scs.ViewServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
@@ -54,46 +50,36 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
         WithRawResponseImpl(clientOptions)
     }
 
+    private val notifications: NotificationService by lazy {
+        NotificationServiceImpl(clientOptions)
+    }
+
+    private val file: FileService by lazy { FileServiceImpl(clientOptions) }
+
     private val folders: FolderService by lazy { FolderServiceImpl(clientOptions) }
-
-    private val classificationMarkings: ClassificationMarkingService by lazy {
-        ClassificationMarkingServiceImpl(clientOptions)
-    }
-
-    private val groups: GroupService by lazy { GroupServiceImpl(clientOptions) }
-
-    private val fileMetadata: FileMetadataService by lazy { FileMetadataServiceImpl(clientOptions) }
-
-    private val rangeParameters: RangeParameterService by lazy {
-        RangeParameterServiceImpl(clientOptions)
-    }
 
     private val paths: PathService by lazy { PathServiceImpl(clientOptions) }
 
-    private val v2: V2Service by lazy { V2ServiceImpl(clientOptions) }
+    private val view: ViewService by lazy { ViewServiceImpl(clientOptions) }
 
-    private val file: FileService by lazy { FileServiceImpl(clientOptions) }
+    private val v2: V2Service by lazy { V2ServiceImpl(clientOptions) }
 
     override fun withRawResponse(): ScService.WithRawResponse = withRawResponse
 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): ScService =
         ScServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
+    override fun notifications(): NotificationService = notifications
+
+    override fun file(): FileService = file
+
     override fun folders(): FolderService = folders
-
-    override fun classificationMarkings(): ClassificationMarkingService = classificationMarkings
-
-    override fun groups(): GroupService = groups
-
-    override fun fileMetadata(): FileMetadataService = fileMetadata
-
-    override fun rangeParameters(): RangeParameterService = rangeParameters
 
     override fun paths(): PathService = paths
 
-    override fun v2(): V2Service = v2
+    override fun view(): ViewService = view
 
-    override fun file(): FileService = file
+    override fun v2(): V2Service = v2
 
     @Deprecated("deprecated")
     override fun delete(params: ScDeleteParams, requestOptions: RequestOptions) {
@@ -158,36 +144,28 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
+        private val notifications: NotificationService.WithRawResponse by lazy {
+            NotificationServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val file: FileService.WithRawResponse by lazy {
+            FileServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
         private val folders: FolderService.WithRawResponse by lazy {
             FolderServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val classificationMarkings: ClassificationMarkingService.WithRawResponse by lazy {
-            ClassificationMarkingServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val groups: GroupService.WithRawResponse by lazy {
-            GroupServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val fileMetadata: FileMetadataService.WithRawResponse by lazy {
-            FileMetadataServiceImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val rangeParameters: RangeParameterService.WithRawResponse by lazy {
-            RangeParameterServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val paths: PathService.WithRawResponse by lazy {
             PathServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val v2: V2Service.WithRawResponse by lazy {
-            V2ServiceImpl.WithRawResponseImpl(clientOptions)
+        private val view: ViewService.WithRawResponse by lazy {
+            ViewServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val file: FileService.WithRawResponse by lazy {
-            FileServiceImpl.WithRawResponseImpl(clientOptions)
+        private val v2: V2Service.WithRawResponse by lazy {
+            V2ServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
         override fun withOptions(
@@ -197,22 +175,17 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
+        override fun notifications(): NotificationService.WithRawResponse = notifications
+
+        override fun file(): FileService.WithRawResponse = file
+
         override fun folders(): FolderService.WithRawResponse = folders
-
-        override fun classificationMarkings(): ClassificationMarkingService.WithRawResponse =
-            classificationMarkings
-
-        override fun groups(): GroupService.WithRawResponse = groups
-
-        override fun fileMetadata(): FileMetadataService.WithRawResponse = fileMetadata
-
-        override fun rangeParameters(): RangeParameterService.WithRawResponse = rangeParameters
 
         override fun paths(): PathService.WithRawResponse = paths
 
-        override fun v2(): V2Service.WithRawResponse = v2
+        override fun view(): ViewService.WithRawResponse = view
 
-        override fun file(): FileService.WithRawResponse = file
+        override fun v2(): V2Service.WithRawResponse = v2
 
         private val deleteHandler: Handler<Void?> = emptyHandler()
 

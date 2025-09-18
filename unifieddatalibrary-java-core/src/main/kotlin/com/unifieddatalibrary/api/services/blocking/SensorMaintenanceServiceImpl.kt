@@ -21,16 +21,17 @@ import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCountParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCreateBulkParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCreateParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCurrentParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCurrentResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceDeleteParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceGetParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceGetResponse
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListCurrentPage
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListCurrentParams
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListCurrentResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListPage
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListResponse
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryhelpParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryhelpResponse
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryHelpParams
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryHelpResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceTupleParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceTupleResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceUpdateParams
@@ -92,13 +93,6 @@ class SensorMaintenanceServiceImpl internal constructor(private val clientOption
         withRawResponse().createBulk(params, requestOptions)
     }
 
-    override fun current(
-        params: SensorMaintenanceCurrentParams,
-        requestOptions: RequestOptions,
-    ): List<SensorMaintenanceCurrentResponse> =
-        // get /udl/sensormaintenance/current
-        withRawResponse().current(params, requestOptions).parse()
-
     override fun get(
         params: SensorMaintenanceGetParams,
         requestOptions: RequestOptions,
@@ -106,12 +100,19 @@ class SensorMaintenanceServiceImpl internal constructor(private val clientOption
         // get /udl/sensormaintenance/{id}
         withRawResponse().get(params, requestOptions).parse()
 
-    override fun queryhelp(
-        params: SensorMaintenanceQueryhelpParams,
+    override fun listCurrent(
+        params: SensorMaintenanceListCurrentParams,
         requestOptions: RequestOptions,
-    ): SensorMaintenanceQueryhelpResponse =
+    ): SensorMaintenanceListCurrentPage =
+        // get /udl/sensormaintenance/current
+        withRawResponse().listCurrent(params, requestOptions).parse()
+
+    override fun queryHelp(
+        params: SensorMaintenanceQueryHelpParams,
+        requestOptions: RequestOptions,
+    ): SensorMaintenanceQueryHelpResponse =
         // get /udl/sensormaintenance/queryhelp
-        withRawResponse().queryhelp(params, requestOptions).parse()
+        withRawResponse().queryHelp(params, requestOptions).parse()
 
     override fun tuple(
         params: SensorMaintenanceTupleParams,
@@ -283,33 +284,6 @@ class SensorMaintenanceServiceImpl internal constructor(private val clientOption
             }
         }
 
-        private val currentHandler: Handler<List<SensorMaintenanceCurrentResponse>> =
-            jsonHandler<List<SensorMaintenanceCurrentResponse>>(clientOptions.jsonMapper)
-
-        override fun current(
-            params: SensorMaintenanceCurrentParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<SensorMaintenanceCurrentResponse>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "sensormaintenance", "current")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { currentHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-            }
-        }
-
         private val getHandler: Handler<SensorMaintenanceGetResponse> =
             jsonHandler<SensorMaintenanceGetResponse>(clientOptions.jsonMapper)
 
@@ -340,13 +314,47 @@ class SensorMaintenanceServiceImpl internal constructor(private val clientOption
             }
         }
 
-        private val queryhelpHandler: Handler<SensorMaintenanceQueryhelpResponse> =
-            jsonHandler<SensorMaintenanceQueryhelpResponse>(clientOptions.jsonMapper)
+        private val listCurrentHandler: Handler<List<SensorMaintenanceListCurrentResponse>> =
+            jsonHandler<List<SensorMaintenanceListCurrentResponse>>(clientOptions.jsonMapper)
 
-        override fun queryhelp(
-            params: SensorMaintenanceQueryhelpParams,
+        override fun listCurrent(
+            params: SensorMaintenanceListCurrentParams,
             requestOptions: RequestOptions,
-        ): HttpResponseFor<SensorMaintenanceQueryhelpResponse> {
+        ): HttpResponseFor<SensorMaintenanceListCurrentPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "sensormaintenance", "current")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listCurrentHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        SensorMaintenanceListCurrentPage.builder()
+                            .service(SensorMaintenanceServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
+        }
+
+        private val queryHelpHandler: Handler<SensorMaintenanceQueryHelpResponse> =
+            jsonHandler<SensorMaintenanceQueryHelpResponse>(clientOptions.jsonMapper)
+
+        override fun queryHelp(
+            params: SensorMaintenanceQueryHelpParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<SensorMaintenanceQueryHelpResponse> {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -358,7 +366,7 @@ class SensorMaintenanceServiceImpl internal constructor(private val clientOption
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response
-                    .use { queryhelpHandler.handle(it) }
+                    .use { queryHelpHandler.handle(it) }
                     .also {
                         if (requestOptions.responseValidation!!) {
                             it.validate()

@@ -22,10 +22,11 @@ import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskMana
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementCreateBulkParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementCreateParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementDeleteParams
+import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementListPage
+import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementListParams
+import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementListResponse
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementQueryHelpParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementQueryHelpResponse
-import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementQueryParams
-import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementQueryResponse
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementRetrieveParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementRetrieveResponse
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementTupleParams
@@ -72,6 +73,13 @@ internal constructor(private val clientOptions: ClientOptions) : AviationRiskMan
         withRawResponse().update(params, requestOptions)
     }
 
+    override fun list(
+        params: AviationRiskManagementListParams,
+        requestOptions: RequestOptions,
+    ): AviationRiskManagementListPage =
+        // get /udl/aviationriskmanagement
+        withRawResponse().list(params, requestOptions).parse()
+
     override fun delete(
         params: AviationRiskManagementDeleteParams,
         requestOptions: RequestOptions,
@@ -94,13 +102,6 @@ internal constructor(private val clientOptions: ClientOptions) : AviationRiskMan
         // post /udl/aviationriskmanagement/createBulk
         withRawResponse().createBulk(params, requestOptions)
     }
-
-    override fun query(
-        params: AviationRiskManagementQueryParams,
-        requestOptions: RequestOptions,
-    ): List<AviationRiskManagementQueryResponse> =
-        // get /udl/aviationriskmanagement
-        withRawResponse().query(params, requestOptions).parse()
 
     override fun queryHelp(
         params: AviationRiskManagementQueryHelpParams,
@@ -212,6 +213,40 @@ internal constructor(private val clientOptions: ClientOptions) : AviationRiskMan
             }
         }
 
+        private val listHandler: Handler<List<AviationRiskManagementListResponse>> =
+            jsonHandler<List<AviationRiskManagementListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: AviationRiskManagementListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<AviationRiskManagementListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "aviationriskmanagement")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        AviationRiskManagementListPage.builder()
+                            .service(AviationRiskManagementServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
+        }
+
         private val deleteHandler: Handler<Void?> = emptyHandler()
 
         override fun delete(
@@ -274,33 +309,6 @@ internal constructor(private val clientOptions: ClientOptions) : AviationRiskMan
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response.use { createBulkHandler.handle(it) }
-            }
-        }
-
-        private val queryHandler: Handler<List<AviationRiskManagementQueryResponse>> =
-            jsonHandler<List<AviationRiskManagementQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: AviationRiskManagementQueryParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<AviationRiskManagementQueryResponse>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "aviationriskmanagement")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { queryHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
             }
         }
 

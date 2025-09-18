@@ -22,9 +22,6 @@ import com.unifieddatalibrary.api.models.AnalyticImageryFull
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryAbridged
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryCountParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryFileGetParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryAodrParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryCountParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryListPageAsync
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryListParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryQueryhelpParams
@@ -32,6 +29,8 @@ import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryQueryhel
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryRetrieveParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryTupleParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryUnvalidatedPublishParams
+import com.unifieddatalibrary.api.services.async.analyticimagery.HistoryServiceAsync
+import com.unifieddatalibrary.api.services.async.analyticimagery.HistoryServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
@@ -43,12 +42,16 @@ internal constructor(private val clientOptions: ClientOptions) : AnalyticImagery
         WithRawResponseImpl(clientOptions)
     }
 
+    private val history: HistoryServiceAsync by lazy { HistoryServiceAsyncImpl(clientOptions) }
+
     override fun withRawResponse(): AnalyticImageryServiceAsync.WithRawResponse = withRawResponse
 
     override fun withOptions(
         modifier: Consumer<ClientOptions.Builder>
     ): AnalyticImageryServiceAsync =
         AnalyticImageryServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+
+    override fun history(): HistoryServiceAsync = history
 
     override fun retrieve(
         params: AnalyticImageryRetrieveParams,
@@ -78,27 +81,6 @@ internal constructor(private val clientOptions: ClientOptions) : AnalyticImagery
         // get /udl/analyticimagery/getFile/{id}
         withRawResponse().fileGet(params, requestOptions)
 
-    override fun history(
-        params: AnalyticImageryHistoryParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<List<AnalyticImageryAbridged>> =
-        // get /udl/analyticimagery/history
-        withRawResponse().history(params, requestOptions).thenApply { it.parse() }
-
-    override fun historyAodr(
-        params: AnalyticImageryHistoryAodrParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<Void?> =
-        // get /udl/analyticimagery/history/aodr
-        withRawResponse().historyAodr(params, requestOptions).thenAccept {}
-
-    override fun historyCount(
-        params: AnalyticImageryHistoryCountParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<String> =
-        // get /udl/analyticimagery/history/count
-        withRawResponse().historyCount(params, requestOptions).thenApply { it.parse() }
-
     override fun queryhelp(
         params: AnalyticImageryQueryhelpParams,
         requestOptions: RequestOptions,
@@ -126,12 +108,18 @@ internal constructor(private val clientOptions: ClientOptions) : AnalyticImagery
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
+        private val history: HistoryServiceAsync.WithRawResponse by lazy {
+            HistoryServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
         override fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): AnalyticImageryServiceAsync.WithRawResponse =
             AnalyticImageryServiceAsyncImpl.WithRawResponseImpl(
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
+
+        override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val retrieveHandler: Handler<AnalyticImageryFull> =
             jsonHandler<AnalyticImageryFull>(clientOptions.jsonMapper)
@@ -245,82 +233,6 @@ internal constructor(private val clientOptions: ClientOptions) : AnalyticImagery
             return request
                 .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
                 .thenApply { response -> errorHandler.handle(response) }
-        }
-
-        private val historyHandler: Handler<List<AnalyticImageryAbridged>> =
-            jsonHandler<List<AnalyticImageryAbridged>>(clientOptions.jsonMapper)
-
-        override fun history(
-            params: AnalyticImageryHistoryParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<List<AnalyticImageryAbridged>>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "analyticimagery", "history")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response
-                            .use { historyHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.forEach { it.validate() }
-                                }
-                            }
-                    }
-                }
-        }
-
-        private val historyAodrHandler: Handler<Void?> = emptyHandler()
-
-        override fun historyAodr(
-            params: AnalyticImageryHistoryAodrParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "analyticimagery", "history", "aodr")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response.use { historyAodrHandler.handle(it) }
-                    }
-                }
-        }
-
-        private val historyCountHandler: Handler<String> = stringHandler()
-
-        override fun historyCount(
-            params: AnalyticImageryHistoryCountParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<String>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "analyticimagery", "history", "count")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response.use { historyCountHandler.handle(it) }
-                    }
-                }
         }
 
         private val queryhelpHandler: Handler<AnalyticImageryQueryhelpResponse> =

@@ -8,6 +8,7 @@ import com.unifieddatalibrary.api.core.handlers.emptyHandler
 import com.unifieddatalibrary.api.core.handlers.errorBodyHandler
 import com.unifieddatalibrary.api.core.handlers.errorHandler
 import com.unifieddatalibrary.api.core.handlers.jsonHandler
+import com.unifieddatalibrary.api.core.handlers.stringHandler
 import com.unifieddatalibrary.api.core.http.HttpMethod
 import com.unifieddatalibrary.api.core.http.HttpRequest
 import com.unifieddatalibrary.api.core.http.HttpResponse
@@ -17,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.AisFull
 import com.unifieddatalibrary.api.models.ais.history.HistoryAodrParams
+import com.unifieddatalibrary.api.models.ais.history.HistoryCountParams
 import com.unifieddatalibrary.api.models.ais.history.HistoryListPage
 import com.unifieddatalibrary.api.models.ais.history.HistoryListParams
 import java.util.function.Consumer
@@ -41,6 +43,10 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
         // get /udl/ais/history/aodr
         withRawResponse().aodr(params, requestOptions)
     }
+
+    override fun count(params: HistoryCountParams, requestOptions: RequestOptions): String =
+        // get /udl/ais/history/count
+        withRawResponse().count(params, requestOptions).parse()
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         HistoryService.WithRawResponse {
@@ -103,6 +109,26 @@ class HistoryServiceImpl internal constructor(private val clientOptions: ClientO
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response.use { aodrHandler.handle(it) }
+            }
+        }
+
+        private val countHandler: Handler<String> = stringHandler()
+
+        override fun count(
+            params: HistoryCountParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<String> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "ais", "history", "count")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { countHandler.handle(it) }
             }
         }
     }

@@ -28,17 +28,17 @@ interface ObservationServiceAsync {
 
     fun ecpsdr(): EcpsdrServiceAsync
 
+    fun eoObservations(): EoObservationServiceAsync
+
     fun monoradar(): MonoradarServiceAsync
 
-    fun swir(): SwirServiceAsync
+    fun passiveRadarObservation(): PassiveRadarObservationServiceAsync
 
     fun radarobservation(): RadarobservationServiceAsync
 
     fun rfObservation(): RfObservationServiceAsync
 
-    fun passiveRadarObservation(): PassiveRadarObservationServiceAsync
-
-    fun eoObservations(): EoObservationServiceAsync
+    fun swir(): SwirServiceAsync
 
     /**
      * A view of [ObservationServiceAsync] that provides access to raw HTTP responses for each
@@ -57,16 +57,16 @@ interface ObservationServiceAsync {
 
         fun ecpsdr(): EcpsdrServiceAsync.WithRawResponse
 
+        fun eoObservations(): EoObservationServiceAsync.WithRawResponse
+
         fun monoradar(): MonoradarServiceAsync.WithRawResponse
 
-        fun swir(): SwirServiceAsync.WithRawResponse
+        fun passiveRadarObservation(): PassiveRadarObservationServiceAsync.WithRawResponse
 
         fun radarobservation(): RadarobservationServiceAsync.WithRawResponse
 
         fun rfObservation(): RfObservationServiceAsync.WithRawResponse
 
-        fun passiveRadarObservation(): PassiveRadarObservationServiceAsync.WithRawResponse
-
-        fun eoObservations(): EoObservationServiceAsync.WithRawResponse
+        fun swir(): SwirServiceAsync.WithRawResponse
     }
 }

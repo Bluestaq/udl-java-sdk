@@ -6,16 +6,13 @@ import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
-import com.unifieddatalibrary.api.models.AircraftsortieFull
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyCountParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyCreateBulkParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyCreateParams
-import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyHistoryAodrParams
-import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyHistoryCountParams
-import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyHistoryQueryParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyListPageAsync
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyListParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyUnvalidatedPublishParams
+import com.unifieddatalibrary.api.services.async.airoperations.aircraftsorties.HistoryServiceAsync
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -32,6 +29,8 @@ interface AircraftSortyServiceAsync {
      * The original service is not modified.
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): AircraftSortyServiceAsync
+
+    fun history(): HistoryServiceAsync
 
     /**
      * Service operation to take a single AircraftSortie as a POST body and ingest into the
@@ -94,53 +93,6 @@ interface AircraftSortyServiceAsync {
     ): CompletableFuture<Void?>
 
     /**
-     * Service operation to dynamically query historical data by a variety of query parameters not
-     * specified in this API documentation, then write that data to the Secure Content Store. See
-     * the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required
-     * query parameter information.
-     */
-    fun historyAodr(params: AircraftSortyHistoryAodrParams): CompletableFuture<Void?> =
-        historyAodr(params, RequestOptions.none())
-
-    /** @see historyAodr */
-    fun historyAodr(
-        params: AircraftSortyHistoryAodrParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<Void?>
-
-    /**
-     * Service operation to return the count of records satisfying the specified query parameters.
-     * This operation is useful to determine how many records pass a particular query criteria
-     * without retrieving large amounts of data. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
-     */
-    fun historyCount(params: AircraftSortyHistoryCountParams): CompletableFuture<String> =
-        historyCount(params, RequestOptions.none())
-
-    /** @see historyCount */
-    fun historyCount(
-        params: AircraftSortyHistoryCountParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<String>
-
-    /**
-     * Service operation to dynamically query historical data by a variety of query parameters not
-     * specified in this API documentation. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
-     */
-    fun historyQuery(
-        params: AircraftSortyHistoryQueryParams
-    ): CompletableFuture<List<AircraftsortieFull>> = historyQuery(params, RequestOptions.none())
-
-    /** @see historyQuery */
-    fun historyQuery(
-        params: AircraftSortyHistoryQueryParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<AircraftsortieFull>>
-
-    /**
      * Service operation to take one or many aircraft sortie records as a POST body and ingest into
      * the database. This operation is intended to be used for automated feeds into UDL. A specific
      * role is required to perform this service operation. Please contact the UDL team for
@@ -170,6 +122,8 @@ interface AircraftSortyServiceAsync {
         fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): AircraftSortyServiceAsync.WithRawResponse
+
+        fun history(): HistoryServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /udl/aircraftsortie`, but is otherwise the same as
@@ -224,48 +178,6 @@ interface AircraftSortyServiceAsync {
             params: AircraftSortyCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
-
-        /**
-         * Returns a raw HTTP response for `get /udl/aircraftsortie/history/aodr`, but is otherwise
-         * the same as [AircraftSortyServiceAsync.historyAodr].
-         */
-        fun historyAodr(params: AircraftSortyHistoryAodrParams): CompletableFuture<HttpResponse> =
-            historyAodr(params, RequestOptions.none())
-
-        /** @see historyAodr */
-        fun historyAodr(
-            params: AircraftSortyHistoryAodrParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponse>
-
-        /**
-         * Returns a raw HTTP response for `get /udl/aircraftsortie/history/count`, but is otherwise
-         * the same as [AircraftSortyServiceAsync.historyCount].
-         */
-        fun historyCount(
-            params: AircraftSortyHistoryCountParams
-        ): CompletableFuture<HttpResponseFor<String>> = historyCount(params, RequestOptions.none())
-
-        /** @see historyCount */
-        fun historyCount(
-            params: AircraftSortyHistoryCountParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<String>>
-
-        /**
-         * Returns a raw HTTP response for `get /udl/aircraftsortie/history`, but is otherwise the
-         * same as [AircraftSortyServiceAsync.historyQuery].
-         */
-        fun historyQuery(
-            params: AircraftSortyHistoryQueryParams
-        ): CompletableFuture<HttpResponseFor<List<AircraftsortieFull>>> =
-            historyQuery(params, RequestOptions.none())
-
-        /** @see historyQuery */
-        fun historyQuery(
-            params: AircraftSortyHistoryQueryParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<AircraftsortieFull>>>
 
         /**
          * Returns a raw HTTP response for `post /filedrop/udl-aircraftsortie`, but is otherwise the

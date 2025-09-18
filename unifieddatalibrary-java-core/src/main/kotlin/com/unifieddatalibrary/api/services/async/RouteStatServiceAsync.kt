@@ -10,10 +10,10 @@ import com.unifieddatalibrary.api.models.routestats.RouteStatCountParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatCreateBulkParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatCreateParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatDeleteParams
+import com.unifieddatalibrary.api.models.routestats.RouteStatListPageAsync
+import com.unifieddatalibrary.api.models.routestats.RouteStatListParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatQueryHelpParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatQueryHelpResponse
-import com.unifieddatalibrary.api.models.routestats.RouteStatQueryParams
-import com.unifieddatalibrary.api.models.routestats.RouteStatQueryResponse
 import com.unifieddatalibrary.api.models.routestats.RouteStatRetrieveParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatRetrieveResponse
 import com.unifieddatalibrary.api.models.routestats.RouteStatTupleParams
@@ -114,6 +114,28 @@ interface RouteStatServiceAsync {
     ): CompletableFuture<Void?>
 
     /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
+    fun list(): CompletableFuture<RouteStatListPageAsync> = list(RouteStatListParams.none())
+
+    /** @see list */
+    fun list(
+        params: RouteStatListParams = RouteStatListParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<RouteStatListPageAsync>
+
+    /** @see list */
+    fun list(
+        params: RouteStatListParams = RouteStatListParams.none()
+    ): CompletableFuture<RouteStatListPageAsync> = list(params, RequestOptions.none())
+
+    /** @see list */
+    fun list(requestOptions: RequestOptions): CompletableFuture<RouteStatListPageAsync> =
+        list(RouteStatListParams.none(), requestOptions)
+
+    /**
      * Service operation to delete a routeStats record specified by the passed ID path parameter. A
      * specific role is required to perform this service operation. Please contact the UDL team for
      * assistance.
@@ -186,29 +208,6 @@ interface RouteStatServiceAsync {
         params: RouteStatCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
-
-    /**
-     * Service operation to dynamically query data by a variety of query parameters not specified in
-     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
-     * more details on valid/required query parameter information.
-     */
-    fun query(): CompletableFuture<List<RouteStatQueryResponse>> =
-        query(RouteStatQueryParams.none())
-
-    /** @see query */
-    fun query(
-        params: RouteStatQueryParams = RouteStatQueryParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<RouteStatQueryResponse>>
-
-    /** @see query */
-    fun query(
-        params: RouteStatQueryParams = RouteStatQueryParams.none()
-    ): CompletableFuture<List<RouteStatQueryResponse>> = query(params, RequestOptions.none())
-
-    /** @see query */
-    fun query(requestOptions: RequestOptions): CompletableFuture<List<RouteStatQueryResponse>> =
-        query(RouteStatQueryParams.none(), requestOptions)
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -358,6 +357,31 @@ interface RouteStatServiceAsync {
         ): CompletableFuture<HttpResponse>
 
         /**
+         * Returns a raw HTTP response for `get /udl/routestats`, but is otherwise the same as
+         * [RouteStatServiceAsync.list].
+         */
+        fun list(): CompletableFuture<HttpResponseFor<RouteStatListPageAsync>> =
+            list(RouteStatListParams.none())
+
+        /** @see list */
+        fun list(
+            params: RouteStatListParams = RouteStatListParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<RouteStatListPageAsync>>
+
+        /** @see list */
+        fun list(
+            params: RouteStatListParams = RouteStatListParams.none()
+        ): CompletableFuture<HttpResponseFor<RouteStatListPageAsync>> =
+            list(params, RequestOptions.none())
+
+        /** @see list */
+        fun list(
+            requestOptions: RequestOptions
+        ): CompletableFuture<HttpResponseFor<RouteStatListPageAsync>> =
+            list(RouteStatListParams.none(), requestOptions)
+
+        /**
          * Returns a raw HTTP response for `delete /udl/routestats/{id}`, but is otherwise the same
          * as [RouteStatServiceAsync.delete].
          */
@@ -425,31 +449,6 @@ interface RouteStatServiceAsync {
             params: RouteStatCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
-
-        /**
-         * Returns a raw HTTP response for `get /udl/routestats`, but is otherwise the same as
-         * [RouteStatServiceAsync.query].
-         */
-        fun query(): CompletableFuture<HttpResponseFor<List<RouteStatQueryResponse>>> =
-            query(RouteStatQueryParams.none())
-
-        /** @see query */
-        fun query(
-            params: RouteStatQueryParams = RouteStatQueryParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<RouteStatQueryResponse>>>
-
-        /** @see query */
-        fun query(
-            params: RouteStatQueryParams = RouteStatQueryParams.none()
-        ): CompletableFuture<HttpResponseFor<List<RouteStatQueryResponse>>> =
-            query(params, RequestOptions.none())
-
-        /** @see query */
-        fun query(
-            requestOptions: RequestOptions
-        ): CompletableFuture<HttpResponseFor<List<RouteStatQueryResponse>>> =
-            query(RouteStatQueryParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /udl/routestats/queryhelp`, but is otherwise the

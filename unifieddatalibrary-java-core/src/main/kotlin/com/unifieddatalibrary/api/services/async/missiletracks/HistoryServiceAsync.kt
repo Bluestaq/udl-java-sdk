@@ -8,8 +8,8 @@ import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.missiletracks.history.HistoryAodrParams
 import com.unifieddatalibrary.api.models.missiletracks.history.HistoryCountParams
-import com.unifieddatalibrary.api.models.missiletracks.history.HistoryQueryParams
-import com.unifieddatalibrary.api.models.missiletracks.history.HistoryQueryResponse
+import com.unifieddatalibrary.api.models.missiletracks.history.HistoryListPageAsync
+import com.unifieddatalibrary.api.models.missiletracks.history.HistoryListParams
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
@@ -26,6 +26,21 @@ interface HistoryServiceAsync {
      * The original service is not modified.
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): HistoryServiceAsync
+
+    /**
+     * Service operation to dynamically query historical data by a variety of query parameters not
+     * specified in this API documentation. See the queryhelp operation
+     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
+     * information.
+     */
+    fun list(params: HistoryListParams): CompletableFuture<HistoryListPageAsync> =
+        list(params, RequestOptions.none())
+
+    /** @see list */
+    fun list(
+        params: HistoryListParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<HistoryListPageAsync>
 
     /**
      * Service operation to dynamically query historical data by a variety of query parameters not
@@ -59,21 +74,6 @@ interface HistoryServiceAsync {
     ): CompletableFuture<String>
 
     /**
-     * Service operation to dynamically query historical data by a variety of query parameters not
-     * specified in this API documentation. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
-     */
-    fun query(params: HistoryQueryParams): CompletableFuture<List<HistoryQueryResponse>> =
-        query(params, RequestOptions.none())
-
-    /** @see query */
-    fun query(
-        params: HistoryQueryParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<HistoryQueryResponse>>
-
-    /**
      * A view of [HistoryServiceAsync] that provides access to raw HTTP responses for each method.
      */
     interface WithRawResponse {
@@ -86,6 +86,21 @@ interface HistoryServiceAsync {
         fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): HistoryServiceAsync.WithRawResponse
+
+        /**
+         * Returns a raw HTTP response for `get /udl/missiletrack/history`, but is otherwise the
+         * same as [HistoryServiceAsync.list].
+         */
+        fun list(
+            params: HistoryListParams
+        ): CompletableFuture<HttpResponseFor<HistoryListPageAsync>> =
+            list(params, RequestOptions.none())
+
+        /** @see list */
+        fun list(
+            params: HistoryListParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<HistoryListPageAsync>>
 
         /**
          * Returns a raw HTTP response for `get /udl/missiletrack/history/aodr`, but is otherwise
@@ -112,20 +127,5 @@ interface HistoryServiceAsync {
             params: HistoryCountParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<String>>
-
-        /**
-         * Returns a raw HTTP response for `get /udl/missiletrack/history`, but is otherwise the
-         * same as [HistoryServiceAsync.query].
-         */
-        fun query(
-            params: HistoryQueryParams
-        ): CompletableFuture<HttpResponseFor<List<HistoryQueryResponse>>> =
-            query(params, RequestOptions.none())
-
-        /** @see query */
-        fun query(
-            params: HistoryQueryParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<HistoryQueryResponse>>>
     }
 }

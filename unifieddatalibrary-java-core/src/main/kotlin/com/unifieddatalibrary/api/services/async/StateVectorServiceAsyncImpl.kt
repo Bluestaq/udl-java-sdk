@@ -45,18 +45,18 @@ class StateVectorServiceAsyncImpl internal constructor(private val clientOptions
         WithRawResponseImpl(clientOptions)
     }
 
-    private val history: HistoryServiceAsync by lazy { HistoryServiceAsyncImpl(clientOptions) }
-
     private val current: CurrentServiceAsync by lazy { CurrentServiceAsyncImpl(clientOptions) }
+
+    private val history: HistoryServiceAsync by lazy { HistoryServiceAsyncImpl(clientOptions) }
 
     override fun withRawResponse(): StateVectorServiceAsync.WithRawResponse = withRawResponse
 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): StateVectorServiceAsync =
         StateVectorServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
 
-    override fun history(): HistoryServiceAsync = history
-
     override fun current(): CurrentServiceAsync = current
+
+    override fun history(): HistoryServiceAsync = history
 
     override fun create(
         params: StateVectorCreateParams,
@@ -120,12 +120,12 @@ class StateVectorServiceAsyncImpl internal constructor(private val clientOptions
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
-        private val history: HistoryServiceAsync.WithRawResponse by lazy {
-            HistoryServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
         private val current: CurrentServiceAsync.WithRawResponse by lazy {
             CurrentServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val history: HistoryServiceAsync.WithRawResponse by lazy {
+            HistoryServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         override fun withOptions(
@@ -135,9 +135,9 @@ class StateVectorServiceAsyncImpl internal constructor(private val clientOptions
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
 
-        override fun history(): HistoryServiceAsync.WithRawResponse = history
-
         override fun current(): CurrentServiceAsync.WithRawResponse = current
+
+        override fun history(): HistoryServiceAsync.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
 

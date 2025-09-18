@@ -10,10 +10,10 @@ import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskMana
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementCreateBulkParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementCreateParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementDeleteParams
+import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementListPageAsync
+import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementListParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementQueryHelpParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementQueryHelpResponse
-import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementQueryParams
-import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementQueryResponse
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementRetrieveParams
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementRetrieveResponse
 import com.unifieddatalibrary.api.models.aviationriskmanagement.AviationRiskManagementTupleParams
@@ -119,6 +119,21 @@ interface AviationRiskManagementServiceAsync {
     ): CompletableFuture<Void?>
 
     /**
+     * Service operation to dynamically query data by a variety of query parameters not specified in
+     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
+     * more details on valid/required query parameter information.
+     */
+    fun list(
+        params: AviationRiskManagementListParams
+    ): CompletableFuture<AviationRiskManagementListPageAsync> = list(params, RequestOptions.none())
+
+    /** @see list */
+    fun list(
+        params: AviationRiskManagementListParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<AviationRiskManagementListPageAsync>
+
+    /**
      * Service operation to delete an Aviation Risk Management record specified by the passed ID
      * path parameter. A specific role is required to perform this service operation. Please contact
      * the UDL team for assistance.
@@ -184,22 +199,6 @@ interface AviationRiskManagementServiceAsync {
         params: AviationRiskManagementCreateBulkParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
-
-    /**
-     * Service operation to dynamically query data by a variety of query parameters not specified in
-     * this API documentation. See the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for
-     * more details on valid/required query parameter information.
-     */
-    fun query(
-        params: AviationRiskManagementQueryParams
-    ): CompletableFuture<List<AviationRiskManagementQueryResponse>> =
-        query(params, RequestOptions.none())
-
-    /** @see query */
-    fun query(
-        params: AviationRiskManagementQueryParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<List<AviationRiskManagementQueryResponse>>
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -364,6 +363,21 @@ interface AviationRiskManagementServiceAsync {
         ): CompletableFuture<HttpResponse>
 
         /**
+         * Returns a raw HTTP response for `get /udl/aviationriskmanagement`, but is otherwise the
+         * same as [AviationRiskManagementServiceAsync.list].
+         */
+        fun list(
+            params: AviationRiskManagementListParams
+        ): CompletableFuture<HttpResponseFor<AviationRiskManagementListPageAsync>> =
+            list(params, RequestOptions.none())
+
+        /** @see list */
+        fun list(
+            params: AviationRiskManagementListParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<AviationRiskManagementListPageAsync>>
+
+        /**
          * Returns a raw HTTP response for `delete /udl/aviationriskmanagement/{id}`, but is
          * otherwise the same as [AviationRiskManagementServiceAsync.delete].
          */
@@ -425,21 +439,6 @@ interface AviationRiskManagementServiceAsync {
             params: AviationRiskManagementCreateBulkParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
-
-        /**
-         * Returns a raw HTTP response for `get /udl/aviationriskmanagement`, but is otherwise the
-         * same as [AviationRiskManagementServiceAsync.query].
-         */
-        fun query(
-            params: AviationRiskManagementQueryParams
-        ): CompletableFuture<HttpResponseFor<List<AviationRiskManagementQueryResponse>>> =
-            query(params, RequestOptions.none())
-
-        /** @see query */
-        fun query(
-            params: AviationRiskManagementQueryParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponseFor<List<AviationRiskManagementQueryResponse>>>
 
         /**
          * Returns a raw HTTP response for `get /udl/aviationriskmanagement/queryhelp`, but is

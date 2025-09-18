@@ -21,10 +21,11 @@ import com.unifieddatalibrary.api.core.prepare
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCountParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCreateBulkParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCreateParams
+import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentListPage
+import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentListParams
+import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentListResponse
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryHelpParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryHelpResponse
-import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryParams
-import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryResponse
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentRetrieveParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentRetrieveResponse
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentTupleParams
@@ -63,6 +64,13 @@ class FeatureAssessmentServiceImpl internal constructor(private val clientOption
         // get /udl/featureassessment/{id}
         withRawResponse().retrieve(params, requestOptions).parse()
 
+    override fun list(
+        params: FeatureAssessmentListParams,
+        requestOptions: RequestOptions,
+    ): FeatureAssessmentListPage =
+        // get /udl/featureassessment
+        withRawResponse().list(params, requestOptions).parse()
+
     override fun count(
         params: FeatureAssessmentCountParams,
         requestOptions: RequestOptions,
@@ -77,13 +85,6 @@ class FeatureAssessmentServiceImpl internal constructor(private val clientOption
         // post /udl/featureassessment/createBulk
         withRawResponse().createBulk(params, requestOptions)
     }
-
-    override fun query(
-        params: FeatureAssessmentQueryParams,
-        requestOptions: RequestOptions,
-    ): List<FeatureAssessmentQueryResponse> =
-        // get /udl/featureassessment
-        withRawResponse().query(params, requestOptions).parse()
 
     override fun queryHelp(
         params: FeatureAssessmentQueryHelpParams,
@@ -177,6 +178,40 @@ class FeatureAssessmentServiceImpl internal constructor(private val clientOption
             }
         }
 
+        private val listHandler: Handler<List<FeatureAssessmentListResponse>> =
+            jsonHandler<List<FeatureAssessmentListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: FeatureAssessmentListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<FeatureAssessmentListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "featureassessment")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        FeatureAssessmentListPage.builder()
+                            .service(FeatureAssessmentServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
+        }
+
         private val countHandler: Handler<String> = stringHandler()
 
         override fun count(
@@ -215,33 +250,6 @@ class FeatureAssessmentServiceImpl internal constructor(private val clientOption
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response.use { createBulkHandler.handle(it) }
-            }
-        }
-
-        private val queryHandler: Handler<List<FeatureAssessmentQueryResponse>> =
-            jsonHandler<List<FeatureAssessmentQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: FeatureAssessmentQueryParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<FeatureAssessmentQueryResponse>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "featureassessment")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { queryHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
             }
         }
 

@@ -22,9 +22,6 @@ import com.unifieddatalibrary.api.models.AnalyticImageryFull
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryAbridged
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryCountParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryFileGetParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryAodrParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryCountParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryListPage
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryListParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryQueryhelpParams
@@ -32,6 +29,8 @@ import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryQueryhel
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryRetrieveParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryTupleParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryUnvalidatedPublishParams
+import com.unifieddatalibrary.api.services.blocking.analyticimagery.HistoryService
+import com.unifieddatalibrary.api.services.blocking.analyticimagery.HistoryServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
@@ -42,10 +41,14 @@ class AnalyticImageryServiceImpl internal constructor(private val clientOptions:
         WithRawResponseImpl(clientOptions)
     }
 
+    private val history: HistoryService by lazy { HistoryServiceImpl(clientOptions) }
+
     override fun withRawResponse(): AnalyticImageryService.WithRawResponse = withRawResponse
 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): AnalyticImageryService =
         AnalyticImageryServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+
+    override fun history(): HistoryService = history
 
     override fun retrieve(
         params: AnalyticImageryRetrieveParams,
@@ -71,28 +74,6 @@ class AnalyticImageryServiceImpl internal constructor(private val clientOptions:
     ): HttpResponse =
         // get /udl/analyticimagery/getFile/{id}
         withRawResponse().fileGet(params, requestOptions)
-
-    override fun history(
-        params: AnalyticImageryHistoryParams,
-        requestOptions: RequestOptions,
-    ): List<AnalyticImageryAbridged> =
-        // get /udl/analyticimagery/history
-        withRawResponse().history(params, requestOptions).parse()
-
-    override fun historyAodr(
-        params: AnalyticImageryHistoryAodrParams,
-        requestOptions: RequestOptions,
-    ) {
-        // get /udl/analyticimagery/history/aodr
-        withRawResponse().historyAodr(params, requestOptions)
-    }
-
-    override fun historyCount(
-        params: AnalyticImageryHistoryCountParams,
-        requestOptions: RequestOptions,
-    ): String =
-        // get /udl/analyticimagery/history/count
-        withRawResponse().historyCount(params, requestOptions).parse()
 
     override fun queryhelp(
         params: AnalyticImageryQueryhelpParams,
@@ -122,12 +103,18 @@ class AnalyticImageryServiceImpl internal constructor(private val clientOptions:
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
+        private val history: HistoryService.WithRawResponse by lazy {
+            HistoryServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
         override fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): AnalyticImageryService.WithRawResponse =
             AnalyticImageryServiceImpl.WithRawResponseImpl(
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
+
+        override fun history(): HistoryService.WithRawResponse = history
 
         private val retrieveHandler: Handler<AnalyticImageryFull> =
             jsonHandler<AnalyticImageryFull>(clientOptions.jsonMapper)
@@ -230,73 +217,6 @@ class AnalyticImageryServiceImpl internal constructor(private val clientOptions:
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response)
-        }
-
-        private val historyHandler: Handler<List<AnalyticImageryAbridged>> =
-            jsonHandler<List<AnalyticImageryAbridged>>(clientOptions.jsonMapper)
-
-        override fun history(
-            params: AnalyticImageryHistoryParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<AnalyticImageryAbridged>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "analyticimagery", "history")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { historyHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
-            }
-        }
-
-        private val historyAodrHandler: Handler<Void?> = emptyHandler()
-
-        override fun historyAodr(
-            params: AnalyticImageryHistoryAodrParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "analyticimagery", "history", "aodr")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { historyAodrHandler.handle(it) }
-            }
-        }
-
-        private val historyCountHandler: Handler<String> = stringHandler()
-
-        override fun historyCount(
-            params: AnalyticImageryHistoryCountParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<String> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "analyticimagery", "history", "count")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { historyCountHandler.handle(it) }
-            }
         }
 
         private val queryhelpHandler: Handler<AnalyticImageryQueryhelpResponse> =

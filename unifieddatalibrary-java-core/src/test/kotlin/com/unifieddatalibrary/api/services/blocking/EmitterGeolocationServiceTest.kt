@@ -7,7 +7,7 @@ import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationCountParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationCreateBulkParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationCreateParams
-import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationQueryParams
+import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationListParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationRetrieveParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationTupleParams
 import com.unifieddatalibrary.api.models.emittergeolocation.EmitterGeolocationUnvalidatedPublishParams
@@ -108,6 +108,26 @@ internal class EmitterGeolocationServiceTest {
     }
 
     @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val emitterGeolocationService = client.emitterGeolocation()
+
+        val page =
+            emitterGeolocationService.list(
+                EmitterGeolocationListParams.builder()
+                    .startTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .build()
+            )
+
+        page.items().forEach { it.validate() }
+    }
+
+    @Test
     fun delete() {
         val client =
             UnifieddatalibraryOkHttpClient.builder()
@@ -205,28 +225,6 @@ internal class EmitterGeolocationServiceTest {
                 )
                 .build()
         )
-    }
-
-    @Test
-    fun query() {
-        val client =
-            UnifieddatalibraryOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val emitterGeolocationService = client.emitterGeolocation()
-
-        val response =
-            emitterGeolocationService.query(
-                EmitterGeolocationQueryParams.builder()
-                    .startTime(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .build()
-            )
-
-        response.forEach { it.validate() }
     }
 
     @Test

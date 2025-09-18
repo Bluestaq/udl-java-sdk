@@ -21,10 +21,11 @@ import com.unifieddatalibrary.api.core.prepareAsync
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCountParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCreateBulkParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentCreateParams
+import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentListPageAsync
+import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentListParams
+import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentListResponse
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryHelpParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryHelpResponse
-import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryParams
-import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentQueryResponse
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentRetrieveParams
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentRetrieveResponse
 import com.unifieddatalibrary.api.models.featureassessment.FeatureAssessmentTupleParams
@@ -68,6 +69,13 @@ internal constructor(private val clientOptions: ClientOptions) : FeatureAssessme
         // get /udl/featureassessment/{id}
         withRawResponse().retrieve(params, requestOptions).thenApply { it.parse() }
 
+    override fun list(
+        params: FeatureAssessmentListParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<FeatureAssessmentListPageAsync> =
+        // get /udl/featureassessment
+        withRawResponse().list(params, requestOptions).thenApply { it.parse() }
+
     override fun count(
         params: FeatureAssessmentCountParams,
         requestOptions: RequestOptions,
@@ -81,13 +89,6 @@ internal constructor(private val clientOptions: ClientOptions) : FeatureAssessme
     ): CompletableFuture<Void?> =
         // post /udl/featureassessment/createBulk
         withRawResponse().createBulk(params, requestOptions).thenAccept {}
-
-    override fun query(
-        params: FeatureAssessmentQueryParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<List<FeatureAssessmentQueryResponse>> =
-        // get /udl/featureassessment
-        withRawResponse().query(params, requestOptions).thenApply { it.parse() }
 
     override fun queryHelp(
         params: FeatureAssessmentQueryHelpParams,
@@ -186,6 +187,44 @@ internal constructor(private val clientOptions: ClientOptions) : FeatureAssessme
                 }
         }
 
+        private val listHandler: Handler<List<FeatureAssessmentListResponse>> =
+            jsonHandler<List<FeatureAssessmentListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: FeatureAssessmentListParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<FeatureAssessmentListPageAsync>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "featureassessment")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response
+                            .use { listHandler.handle(it) }
+                            .also {
+                                if (requestOptions.responseValidation!!) {
+                                    it.forEach { it.validate() }
+                                }
+                            }
+                            .let {
+                                FeatureAssessmentListPageAsync.builder()
+                                    .service(FeatureAssessmentServiceAsyncImpl(clientOptions))
+                                    .streamHandlerExecutor(clientOptions.streamHandlerExecutor)
+                                    .params(params)
+                                    .items(it)
+                                    .build()
+                            }
+                    }
+                }
+        }
+
         private val countHandler: Handler<String> = stringHandler()
 
         override fun count(
@@ -229,36 +268,6 @@ internal constructor(private val clientOptions: ClientOptions) : FeatureAssessme
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response.use { createBulkHandler.handle(it) }
-                    }
-                }
-        }
-
-        private val queryHandler: Handler<List<FeatureAssessmentQueryResponse>> =
-            jsonHandler<List<FeatureAssessmentQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: FeatureAssessmentQueryParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<List<FeatureAssessmentQueryResponse>>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "featureassessment")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response
-                            .use { queryHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.forEach { it.validate() }
-                                }
-                            }
                     }
                 }
         }

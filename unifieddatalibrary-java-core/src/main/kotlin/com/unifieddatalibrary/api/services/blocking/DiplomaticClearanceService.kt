@@ -37,9 +37,9 @@ interface DiplomaticClearanceService {
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): DiplomaticClearanceService
 
-    fun history(): HistoryService
-
     fun country(): CountryService
+
+    fun history(): HistoryService
 
     /**
      * Service operation to take a single diplomatic clearance record as a POST body and ingest into
@@ -244,9 +244,9 @@ interface DiplomaticClearanceService {
             modifier: Consumer<ClientOptions.Builder>
         ): DiplomaticClearanceService.WithRawResponse
 
-        fun history(): HistoryService.WithRawResponse
-
         fun country(): CountryService.WithRawResponse
+
+        fun history(): HistoryService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /udl/diplomaticclearance`, but is otherwise the

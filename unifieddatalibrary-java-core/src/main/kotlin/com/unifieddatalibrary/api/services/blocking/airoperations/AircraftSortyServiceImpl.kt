@@ -17,17 +17,15 @@ import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.core.http.json
 import com.unifieddatalibrary.api.core.http.parseable
 import com.unifieddatalibrary.api.core.prepare
-import com.unifieddatalibrary.api.models.AircraftsortieFull
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyCountParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyCreateBulkParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyCreateParams
-import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyHistoryAodrParams
-import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyHistoryCountParams
-import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyHistoryQueryParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyListPage
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyListParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftSortyUnvalidatedPublishParams
 import com.unifieddatalibrary.api.models.airoperations.aircraftsorties.AircraftsortieAbridged
+import com.unifieddatalibrary.api.services.blocking.airoperations.aircraftsorties.HistoryService
+import com.unifieddatalibrary.api.services.blocking.airoperations.aircraftsorties.HistoryServiceImpl
 import java.util.function.Consumer
 
 class AircraftSortyServiceImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -37,10 +35,14 @@ class AircraftSortyServiceImpl internal constructor(private val clientOptions: C
         WithRawResponseImpl(clientOptions)
     }
 
+    private val history: HistoryService by lazy { HistoryServiceImpl(clientOptions) }
+
     override fun withRawResponse(): AircraftSortyService.WithRawResponse = withRawResponse
 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): AircraftSortyService =
         AircraftSortyServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+
+    override fun history(): HistoryService = history
 
     override fun create(params: AircraftSortyCreateParams, requestOptions: RequestOptions) {
         // post /udl/aircraftsortie
@@ -63,28 +65,6 @@ class AircraftSortyServiceImpl internal constructor(private val clientOptions: C
         withRawResponse().createBulk(params, requestOptions)
     }
 
-    override fun historyAodr(
-        params: AircraftSortyHistoryAodrParams,
-        requestOptions: RequestOptions,
-    ) {
-        // get /udl/aircraftsortie/history/aodr
-        withRawResponse().historyAodr(params, requestOptions)
-    }
-
-    override fun historyCount(
-        params: AircraftSortyHistoryCountParams,
-        requestOptions: RequestOptions,
-    ): String =
-        // get /udl/aircraftsortie/history/count
-        withRawResponse().historyCount(params, requestOptions).parse()
-
-    override fun historyQuery(
-        params: AircraftSortyHistoryQueryParams,
-        requestOptions: RequestOptions,
-    ): List<AircraftsortieFull> =
-        // get /udl/aircraftsortie/history
-        withRawResponse().historyQuery(params, requestOptions).parse()
-
     override fun unvalidatedPublish(
         params: AircraftSortyUnvalidatedPublishParams,
         requestOptions: RequestOptions,
@@ -99,12 +79,18 @@ class AircraftSortyServiceImpl internal constructor(private val clientOptions: C
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
+        private val history: HistoryService.WithRawResponse by lazy {
+            HistoryServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
         override fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): AircraftSortyService.WithRawResponse =
             AircraftSortyServiceImpl.WithRawResponseImpl(
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
+
+        override fun history(): HistoryService.WithRawResponse = history
 
         private val createHandler: Handler<Void?> = emptyHandler()
 
@@ -199,73 +185,6 @@ class AircraftSortyServiceImpl internal constructor(private val clientOptions: C
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response.use { createBulkHandler.handle(it) }
-            }
-        }
-
-        private val historyAodrHandler: Handler<Void?> = emptyHandler()
-
-        override fun historyAodr(
-            params: AircraftSortyHistoryAodrParams,
-            requestOptions: RequestOptions,
-        ): HttpResponse {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "aircraftsortie", "history", "aodr")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { historyAodrHandler.handle(it) }
-            }
-        }
-
-        private val historyCountHandler: Handler<String> = stringHandler()
-
-        override fun historyCount(
-            params: AircraftSortyHistoryCountParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<String> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "aircraftsortie", "history", "count")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response.use { historyCountHandler.handle(it) }
-            }
-        }
-
-        private val historyQueryHandler: Handler<List<AircraftsortieFull>> =
-            jsonHandler<List<AircraftsortieFull>>(clientOptions.jsonMapper)
-
-        override fun historyQuery(
-            params: AircraftSortyHistoryQueryParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<AircraftsortieFull>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "aircraftsortie", "history")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { historyQueryHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
             }
         }
 

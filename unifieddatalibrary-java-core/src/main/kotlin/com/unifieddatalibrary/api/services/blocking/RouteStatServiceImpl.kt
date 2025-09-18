@@ -22,10 +22,11 @@ import com.unifieddatalibrary.api.models.routestats.RouteStatCountParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatCreateBulkParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatCreateParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatDeleteParams
+import com.unifieddatalibrary.api.models.routestats.RouteStatListPage
+import com.unifieddatalibrary.api.models.routestats.RouteStatListParams
+import com.unifieddatalibrary.api.models.routestats.RouteStatListResponse
 import com.unifieddatalibrary.api.models.routestats.RouteStatQueryHelpParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatQueryHelpResponse
-import com.unifieddatalibrary.api.models.routestats.RouteStatQueryParams
-import com.unifieddatalibrary.api.models.routestats.RouteStatQueryResponse
 import com.unifieddatalibrary.api.models.routestats.RouteStatRetrieveParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatRetrieveResponse
 import com.unifieddatalibrary.api.models.routestats.RouteStatTupleParams
@@ -64,6 +65,13 @@ class RouteStatServiceImpl internal constructor(private val clientOptions: Clien
         withRawResponse().update(params, requestOptions)
     }
 
+    override fun list(
+        params: RouteStatListParams,
+        requestOptions: RequestOptions,
+    ): RouteStatListPage =
+        // get /udl/routestats
+        withRawResponse().list(params, requestOptions).parse()
+
     override fun delete(params: RouteStatDeleteParams, requestOptions: RequestOptions) {
         // delete /udl/routestats/{id}
         withRawResponse().delete(params, requestOptions)
@@ -77,13 +85,6 @@ class RouteStatServiceImpl internal constructor(private val clientOptions: Clien
         // post /udl/routestats/createBulk
         withRawResponse().createBulk(params, requestOptions)
     }
-
-    override fun query(
-        params: RouteStatQueryParams,
-        requestOptions: RequestOptions,
-    ): List<RouteStatQueryResponse> =
-        // get /udl/routestats
-        withRawResponse().query(params, requestOptions).parse()
 
     override fun queryHelp(
         params: RouteStatQueryHelpParams,
@@ -195,6 +196,40 @@ class RouteStatServiceImpl internal constructor(private val clientOptions: Clien
             }
         }
 
+        private val listHandler: Handler<List<RouteStatListResponse>> =
+            jsonHandler<List<RouteStatListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: RouteStatListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<RouteStatListPage> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "routestats")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.forEach { it.validate() }
+                        }
+                    }
+                    .let {
+                        RouteStatListPage.builder()
+                            .service(RouteStatServiceImpl(clientOptions))
+                            .params(params)
+                            .items(it)
+                            .build()
+                    }
+            }
+        }
+
         private val deleteHandler: Handler<Void?> = emptyHandler()
 
         override fun delete(
@@ -257,33 +292,6 @@ class RouteStatServiceImpl internal constructor(private val clientOptions: Clien
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response.use { createBulkHandler.handle(it) }
-            }
-        }
-
-        private val queryHandler: Handler<List<RouteStatQueryResponse>> =
-            jsonHandler<List<RouteStatQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: RouteStatQueryParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<List<RouteStatQueryResponse>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "routestats")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return errorHandler.handle(response).parseable {
-                response
-                    .use { queryHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.forEach { it.validate() }
-                        }
-                    }
             }
         }
 

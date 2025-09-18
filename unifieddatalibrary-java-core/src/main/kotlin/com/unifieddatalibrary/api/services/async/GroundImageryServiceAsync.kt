@@ -6,12 +6,12 @@ import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
+import com.unifieddatalibrary.api.models.groundimagery.GroundImageryAodrParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryCountParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryCreateParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryGetFileParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryGetParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryGetResponse
-import com.unifieddatalibrary.api.models.groundimagery.GroundImageryHistoryAodrParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryListPageAsync
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryListParams
 import com.unifieddatalibrary.api.models.groundimagery.GroundImageryQueryhelpParams
@@ -66,6 +66,21 @@ interface GroundImageryServiceAsync {
         params: GroundImageryListParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<GroundImageryListPageAsync>
+
+    /**
+     * Service operation to dynamically query historical data by a variety of query parameters not
+     * specified in this API documentation, then write that data to the Secure Content Store. See
+     * the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required
+     * query parameter information.
+     */
+    fun aodr(params: GroundImageryAodrParams): CompletableFuture<Void?> =
+        aodr(params, RequestOptions.none())
+
+    /** @see aodr */
+    fun aodr(
+        params: GroundImageryAodrParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?>
 
     /**
      * Service operation to return the count of records satisfying the specified query parameters.
@@ -155,21 +170,6 @@ interface GroundImageryServiceAsync {
     /** @see getFile */
     fun getFile(id: String, requestOptions: RequestOptions): CompletableFuture<HttpResponse> =
         getFile(id, GroundImageryGetFileParams.none(), requestOptions)
-
-    /**
-     * Service operation to dynamically query historical data by a variety of query parameters not
-     * specified in this API documentation, then write that data to the Secure Content Store. See
-     * the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required
-     * query parameter information.
-     */
-    fun historyAodr(params: GroundImageryHistoryAodrParams): CompletableFuture<Void?> =
-        historyAodr(params, RequestOptions.none())
-
-    /** @see historyAodr */
-    fun historyAodr(
-        params: GroundImageryHistoryAodrParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): CompletableFuture<Void?>
 
     /**
      * Service operation to provide detailed information on available dynamic query parameters for a
@@ -286,6 +286,19 @@ interface GroundImageryServiceAsync {
         ): CompletableFuture<HttpResponseFor<GroundImageryListPageAsync>>
 
         /**
+         * Returns a raw HTTP response for `get /udl/groundimagery/history/aodr`, but is otherwise
+         * the same as [GroundImageryServiceAsync.aodr].
+         */
+        fun aodr(params: GroundImageryAodrParams): CompletableFuture<HttpResponse> =
+            aodr(params, RequestOptions.none())
+
+        /** @see aodr */
+        fun aodr(
+            params: GroundImageryAodrParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse>
+
+        /**
          * Returns a raw HTTP response for `get /udl/groundimagery/count`, but is otherwise the same
          * as [GroundImageryServiceAsync.count].
          */
@@ -373,19 +386,6 @@ interface GroundImageryServiceAsync {
         /** @see getFile */
         fun getFile(id: String, requestOptions: RequestOptions): CompletableFuture<HttpResponse> =
             getFile(id, GroundImageryGetFileParams.none(), requestOptions)
-
-        /**
-         * Returns a raw HTTP response for `get /udl/groundimagery/history/aodr`, but is otherwise
-         * the same as [GroundImageryServiceAsync.historyAodr].
-         */
-        fun historyAodr(params: GroundImageryHistoryAodrParams): CompletableFuture<HttpResponse> =
-            historyAodr(params, RequestOptions.none())
-
-        /** @see historyAodr */
-        fun historyAodr(
-            params: GroundImageryHistoryAodrParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): CompletableFuture<HttpResponse>
 
         /**
          * Returns a raw HTTP response for `get /udl/groundimagery/queryhelp`, but is otherwise the

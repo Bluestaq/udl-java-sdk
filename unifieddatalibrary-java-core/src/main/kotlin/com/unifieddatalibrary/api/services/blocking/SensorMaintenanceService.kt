@@ -10,15 +10,15 @@ import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCountParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCreateBulkParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCreateParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCurrentParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceCurrentResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceDeleteParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceGetParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceGetResponse
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListCurrentPage
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListCurrentParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListPage
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceListParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryhelpParams
-import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryhelpResponse
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryHelpParams
+import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceQueryHelpResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceTupleParams
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceTupleResponse
 import com.unifieddatalibrary.api.models.sensormaintenance.SensorMaintenanceUpdateParams
@@ -170,28 +170,6 @@ interface SensorMaintenanceService {
     )
 
     /**
-     * Service operation to get current Sensor Maintenance records using any number of additional
-     * parameters.
-     */
-    fun current(): List<SensorMaintenanceCurrentResponse> =
-        current(SensorMaintenanceCurrentParams.none())
-
-    /** @see current */
-    fun current(
-        params: SensorMaintenanceCurrentParams = SensorMaintenanceCurrentParams.none(),
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): List<SensorMaintenanceCurrentResponse>
-
-    /** @see current */
-    fun current(
-        params: SensorMaintenanceCurrentParams = SensorMaintenanceCurrentParams.none()
-    ): List<SensorMaintenanceCurrentResponse> = current(params, RequestOptions.none())
-
-    /** @see current */
-    fun current(requestOptions: RequestOptions): List<SensorMaintenanceCurrentResponse> =
-        current(SensorMaintenanceCurrentParams.none(), requestOptions)
-
-    /**
      * Service operation to get a single SensorMaintenance record by its unique ID passed as a path
      * parameter.
      */
@@ -225,26 +203,48 @@ interface SensorMaintenanceService {
         get(id, SensorMaintenanceGetParams.none(), requestOptions)
 
     /**
+     * Service operation to get current Sensor Maintenance records using any number of additional
+     * parameters.
+     */
+    fun listCurrent(): SensorMaintenanceListCurrentPage =
+        listCurrent(SensorMaintenanceListCurrentParams.none())
+
+    /** @see listCurrent */
+    fun listCurrent(
+        params: SensorMaintenanceListCurrentParams = SensorMaintenanceListCurrentParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): SensorMaintenanceListCurrentPage
+
+    /** @see listCurrent */
+    fun listCurrent(
+        params: SensorMaintenanceListCurrentParams = SensorMaintenanceListCurrentParams.none()
+    ): SensorMaintenanceListCurrentPage = listCurrent(params, RequestOptions.none())
+
+    /** @see listCurrent */
+    fun listCurrent(requestOptions: RequestOptions): SensorMaintenanceListCurrentPage =
+        listCurrent(SensorMaintenanceListCurrentParams.none(), requestOptions)
+
+    /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
      */
-    fun queryhelp(): SensorMaintenanceQueryhelpResponse =
-        queryhelp(SensorMaintenanceQueryhelpParams.none())
+    fun queryHelp(): SensorMaintenanceQueryHelpResponse =
+        queryHelp(SensorMaintenanceQueryHelpParams.none())
 
-    /** @see queryhelp */
-    fun queryhelp(
-        params: SensorMaintenanceQueryhelpParams = SensorMaintenanceQueryhelpParams.none(),
+    /** @see queryHelp */
+    fun queryHelp(
+        params: SensorMaintenanceQueryHelpParams = SensorMaintenanceQueryHelpParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): SensorMaintenanceQueryhelpResponse
+    ): SensorMaintenanceQueryHelpResponse
 
-    /** @see queryhelp */
-    fun queryhelp(
-        params: SensorMaintenanceQueryhelpParams = SensorMaintenanceQueryhelpParams.none()
-    ): SensorMaintenanceQueryhelpResponse = queryhelp(params, RequestOptions.none())
+    /** @see queryHelp */
+    fun queryHelp(
+        params: SensorMaintenanceQueryHelpParams = SensorMaintenanceQueryHelpParams.none()
+    ): SensorMaintenanceQueryHelpResponse = queryHelp(params, RequestOptions.none())
 
-    /** @see queryhelp */
-    fun queryhelp(requestOptions: RequestOptions): SensorMaintenanceQueryhelpResponse =
-        queryhelp(SensorMaintenanceQueryhelpParams.none(), requestOptions)
+    /** @see queryHelp */
+    fun queryHelp(requestOptions: RequestOptions): SensorMaintenanceQueryHelpResponse =
+        queryHelp(SensorMaintenanceQueryHelpParams.none(), requestOptions)
 
     /**
      * Service operation to dynamically query data and only return specified columns/fields.
@@ -430,35 +430,6 @@ interface SensorMaintenanceService {
         ): HttpResponse
 
         /**
-         * Returns a raw HTTP response for `get /udl/sensormaintenance/current`, but is otherwise
-         * the same as [SensorMaintenanceService.current].
-         */
-        @MustBeClosed
-        fun current(): HttpResponseFor<List<SensorMaintenanceCurrentResponse>> =
-            current(SensorMaintenanceCurrentParams.none())
-
-        /** @see current */
-        @MustBeClosed
-        fun current(
-            params: SensorMaintenanceCurrentParams = SensorMaintenanceCurrentParams.none(),
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<List<SensorMaintenanceCurrentResponse>>
-
-        /** @see current */
-        @MustBeClosed
-        fun current(
-            params: SensorMaintenanceCurrentParams = SensorMaintenanceCurrentParams.none()
-        ): HttpResponseFor<List<SensorMaintenanceCurrentResponse>> =
-            current(params, RequestOptions.none())
-
-        /** @see current */
-        @MustBeClosed
-        fun current(
-            requestOptions: RequestOptions
-        ): HttpResponseFor<List<SensorMaintenanceCurrentResponse>> =
-            current(SensorMaintenanceCurrentParams.none(), requestOptions)
-
-        /**
          * Returns a raw HTTP response for `get /udl/sensormaintenance/{id}`, but is otherwise the
          * same as [SensorMaintenanceService.get].
          */
@@ -503,33 +474,62 @@ interface SensorMaintenanceService {
             get(id, SensorMaintenanceGetParams.none(), requestOptions)
 
         /**
-         * Returns a raw HTTP response for `get /udl/sensormaintenance/queryhelp`, but is otherwise
-         * the same as [SensorMaintenanceService.queryhelp].
+         * Returns a raw HTTP response for `get /udl/sensormaintenance/current`, but is otherwise
+         * the same as [SensorMaintenanceService.listCurrent].
          */
         @MustBeClosed
-        fun queryhelp(): HttpResponseFor<SensorMaintenanceQueryhelpResponse> =
-            queryhelp(SensorMaintenanceQueryhelpParams.none())
+        fun listCurrent(): HttpResponseFor<SensorMaintenanceListCurrentPage> =
+            listCurrent(SensorMaintenanceListCurrentParams.none())
 
-        /** @see queryhelp */
+        /** @see listCurrent */
         @MustBeClosed
-        fun queryhelp(
-            params: SensorMaintenanceQueryhelpParams = SensorMaintenanceQueryhelpParams.none(),
+        fun listCurrent(
+            params: SensorMaintenanceListCurrentParams = SensorMaintenanceListCurrentParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<SensorMaintenanceQueryhelpResponse>
+        ): HttpResponseFor<SensorMaintenanceListCurrentPage>
 
-        /** @see queryhelp */
+        /** @see listCurrent */
         @MustBeClosed
-        fun queryhelp(
-            params: SensorMaintenanceQueryhelpParams = SensorMaintenanceQueryhelpParams.none()
-        ): HttpResponseFor<SensorMaintenanceQueryhelpResponse> =
-            queryhelp(params, RequestOptions.none())
+        fun listCurrent(
+            params: SensorMaintenanceListCurrentParams = SensorMaintenanceListCurrentParams.none()
+        ): HttpResponseFor<SensorMaintenanceListCurrentPage> =
+            listCurrent(params, RequestOptions.none())
 
-        /** @see queryhelp */
+        /** @see listCurrent */
         @MustBeClosed
-        fun queryhelp(
+        fun listCurrent(
             requestOptions: RequestOptions
-        ): HttpResponseFor<SensorMaintenanceQueryhelpResponse> =
-            queryhelp(SensorMaintenanceQueryhelpParams.none(), requestOptions)
+        ): HttpResponseFor<SensorMaintenanceListCurrentPage> =
+            listCurrent(SensorMaintenanceListCurrentParams.none(), requestOptions)
+
+        /**
+         * Returns a raw HTTP response for `get /udl/sensormaintenance/queryhelp`, but is otherwise
+         * the same as [SensorMaintenanceService.queryHelp].
+         */
+        @MustBeClosed
+        fun queryHelp(): HttpResponseFor<SensorMaintenanceQueryHelpResponse> =
+            queryHelp(SensorMaintenanceQueryHelpParams.none())
+
+        /** @see queryHelp */
+        @MustBeClosed
+        fun queryHelp(
+            params: SensorMaintenanceQueryHelpParams = SensorMaintenanceQueryHelpParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<SensorMaintenanceQueryHelpResponse>
+
+        /** @see queryHelp */
+        @MustBeClosed
+        fun queryHelp(
+            params: SensorMaintenanceQueryHelpParams = SensorMaintenanceQueryHelpParams.none()
+        ): HttpResponseFor<SensorMaintenanceQueryHelpResponse> =
+            queryHelp(params, RequestOptions.none())
+
+        /** @see queryHelp */
+        @MustBeClosed
+        fun queryHelp(
+            requestOptions: RequestOptions
+        ): HttpResponseFor<SensorMaintenanceQueryHelpResponse> =
+            queryHelp(SensorMaintenanceQueryHelpParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /udl/sensormaintenance/tuple`, but is otherwise the

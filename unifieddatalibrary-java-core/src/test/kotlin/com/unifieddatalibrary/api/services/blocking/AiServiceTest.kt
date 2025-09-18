@@ -6,7 +6,6 @@ import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
 import com.unifieddatalibrary.api.models.ais.AiCountParams
 import com.unifieddatalibrary.api.models.ais.AiCreateBulkParams
-import com.unifieddatalibrary.api.models.ais.AiHistoryCountParams
 import com.unifieddatalibrary.api.models.ais.AiListParams
 import com.unifieddatalibrary.api.models.ais.AiTupleParams
 import java.time.OffsetDateTime
@@ -120,25 +119,6 @@ internal class AiServiceTest {
                         .width(24.1)
                         .build()
                 )
-                .build()
-        )
-    }
-
-    @Test
-    fun historyCount() {
-        val client =
-            UnifieddatalibraryOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val aiService = client.ais()
-
-        aiService.historyCount(
-            AiHistoryCountParams.builder()
-                .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                .firstResult(0L)
-                .maxResults(0L)
                 .build()
         )
     }

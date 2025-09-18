@@ -4,12 +4,14 @@ package com.unifieddatalibrary.api.services.blocking.scs
 
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
+import com.unifieddatalibrary.api.models.scs.SearchCriterion
 import com.unifieddatalibrary.api.models.scs.v2.V2CopyParams
 import com.unifieddatalibrary.api.models.scs.v2.V2DeleteParams
 import com.unifieddatalibrary.api.models.scs.v2.V2FileUploadParams
 import com.unifieddatalibrary.api.models.scs.v2.V2FolderCreateParams
 import com.unifieddatalibrary.api.models.scs.v2.V2ListParams
 import com.unifieddatalibrary.api.models.scs.v2.V2MoveParams
+import com.unifieddatalibrary.api.models.scs.v2.V2SearchParams
 import com.unifieddatalibrary.api.models.scs.v2.V2UpdateParams
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -143,5 +145,35 @@ internal class V2ServiceTest {
         val v2Service = client.scs().v2()
 
         v2Service.move(V2MoveParams.builder().fromPath("fromPath").toPath("toPath").build())
+    }
+
+    @Test
+    fun search() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val v2Service = client.scs().v2()
+
+        val scsEntities =
+            v2Service.search(
+                V2SearchParams.builder()
+                    .order("order")
+                    .searchAfter("searchAfter")
+                    .size(0)
+                    .sort("sort")
+                    .query(
+                        SearchCriterion.ScsSearchFieldCriterion.builder()
+                            .field("attachment.content")
+                            .operator(SearchCriterion.ScsSearchFieldCriterion.Operator.EXACT_MATCH)
+                            .value("This is a very cool file.")
+                            .build()
+                    )
+                    .build()
+            )
+
+        scsEntities.forEach { it.validate() }
     }
 }

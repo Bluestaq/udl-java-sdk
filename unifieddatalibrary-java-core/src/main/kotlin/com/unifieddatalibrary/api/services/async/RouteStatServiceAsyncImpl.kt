@@ -22,10 +22,11 @@ import com.unifieddatalibrary.api.models.routestats.RouteStatCountParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatCreateBulkParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatCreateParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatDeleteParams
+import com.unifieddatalibrary.api.models.routestats.RouteStatListPageAsync
+import com.unifieddatalibrary.api.models.routestats.RouteStatListParams
+import com.unifieddatalibrary.api.models.routestats.RouteStatListResponse
 import com.unifieddatalibrary.api.models.routestats.RouteStatQueryHelpParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatQueryHelpResponse
-import com.unifieddatalibrary.api.models.routestats.RouteStatQueryParams
-import com.unifieddatalibrary.api.models.routestats.RouteStatQueryResponse
 import com.unifieddatalibrary.api.models.routestats.RouteStatRetrieveParams
 import com.unifieddatalibrary.api.models.routestats.RouteStatRetrieveResponse
 import com.unifieddatalibrary.api.models.routestats.RouteStatTupleParams
@@ -69,6 +70,13 @@ class RouteStatServiceAsyncImpl internal constructor(private val clientOptions: 
         // put /udl/routestats/{id}
         withRawResponse().update(params, requestOptions).thenAccept {}
 
+    override fun list(
+        params: RouteStatListParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<RouteStatListPageAsync> =
+        // get /udl/routestats
+        withRawResponse().list(params, requestOptions).thenApply { it.parse() }
+
     override fun delete(
         params: RouteStatDeleteParams,
         requestOptions: RequestOptions,
@@ -89,13 +97,6 @@ class RouteStatServiceAsyncImpl internal constructor(private val clientOptions: 
     ): CompletableFuture<Void?> =
         // post /udl/routestats/createBulk
         withRawResponse().createBulk(params, requestOptions).thenAccept {}
-
-    override fun query(
-        params: RouteStatQueryParams,
-        requestOptions: RequestOptions,
-    ): CompletableFuture<List<RouteStatQueryResponse>> =
-        // get /udl/routestats
-        withRawResponse().query(params, requestOptions).thenApply { it.parse() }
 
     override fun queryHelp(
         params: RouteStatQueryHelpParams,
@@ -215,6 +216,44 @@ class RouteStatServiceAsyncImpl internal constructor(private val clientOptions: 
                 }
         }
 
+        private val listHandler: Handler<List<RouteStatListResponse>> =
+            jsonHandler<List<RouteStatListResponse>>(clientOptions.jsonMapper)
+
+        override fun list(
+            params: RouteStatListParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<RouteStatListPageAsync>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("udl", "routestats")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response
+                            .use { listHandler.handle(it) }
+                            .also {
+                                if (requestOptions.responseValidation!!) {
+                                    it.forEach { it.validate() }
+                                }
+                            }
+                            .let {
+                                RouteStatListPageAsync.builder()
+                                    .service(RouteStatServiceAsyncImpl(clientOptions))
+                                    .streamHandlerExecutor(clientOptions.streamHandlerExecutor)
+                                    .params(params)
+                                    .items(it)
+                                    .build()
+                            }
+                    }
+                }
+        }
+
         private val deleteHandler: Handler<Void?> = emptyHandler()
 
         override fun delete(
@@ -285,36 +324,6 @@ class RouteStatServiceAsyncImpl internal constructor(private val clientOptions: 
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response.use { createBulkHandler.handle(it) }
-                    }
-                }
-        }
-
-        private val queryHandler: Handler<List<RouteStatQueryResponse>> =
-            jsonHandler<List<RouteStatQueryResponse>>(clientOptions.jsonMapper)
-
-        override fun query(
-            params: RouteStatQueryParams,
-            requestOptions: RequestOptions,
-        ): CompletableFuture<HttpResponseFor<List<RouteStatQueryResponse>>> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .baseUrl(clientOptions.baseUrl())
-                    .addPathSegments("udl", "routestats")
-                    .build()
-                    .prepareAsync(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            return request
-                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
-                .thenApply { response ->
-                    errorHandler.handle(response).parseable {
-                        response
-                            .use { queryHandler.handle(it) }
-                            .also {
-                                if (requestOptions.responseValidation!!) {
-                                    it.forEach { it.validate() }
-                                }
-                            }
                     }
                 }
         }

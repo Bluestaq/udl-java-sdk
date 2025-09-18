@@ -12,7 +12,7 @@ import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelCountParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelGetFileParams
-import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelQueryParams
+import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelListParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelRetrieveParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelTupleParams
 import com.unifieddatalibrary.api.models.globalatmosphericmodel.GlobalAtmosphericModelUnvalidatedPublishParams
@@ -47,6 +47,26 @@ internal class GlobalAtmosphericModelServiceTest {
             )
 
         globalAtmosphericModel.validate()
+    }
+
+    @Test
+    fun list() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val globalAtmosphericModelService = client.globalAtmosphericModel()
+
+        val page =
+            globalAtmosphericModelService.list(
+                GlobalAtmosphericModelListParams.builder()
+                    .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .build()
+            )
+
+        page.items().forEach { it.validate() }
     }
 
     @Test
@@ -89,28 +109,6 @@ internal class GlobalAtmosphericModelServiceTest {
             )
 
         assertThat(response.body()).hasContent("abc")
-    }
-
-    @Test
-    fun query() {
-        val client =
-            UnifieddatalibraryOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .password("My Password")
-                .username("My Username")
-                .build()
-        val globalAtmosphericModelService = client.globalAtmosphericModel()
-
-        val response =
-            globalAtmosphericModelService.query(
-                GlobalAtmosphericModelQueryParams.builder()
-                    .ts(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .firstResult(0L)
-                    .maxResults(0L)
-                    .build()
-            )
-
-        response.forEach { it.validate() }
     }
 
     @Test

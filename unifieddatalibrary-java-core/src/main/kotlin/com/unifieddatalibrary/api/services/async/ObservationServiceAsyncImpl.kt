@@ -28,11 +28,17 @@ class ObservationServiceAsyncImpl internal constructor(private val clientOptions
 
     private val ecpsdr: EcpsdrServiceAsync by lazy { EcpsdrServiceAsyncImpl(clientOptions) }
 
+    private val eoObservations: EoObservationServiceAsync by lazy {
+        EoObservationServiceAsyncImpl(clientOptions)
+    }
+
     private val monoradar: MonoradarServiceAsync by lazy {
         MonoradarServiceAsyncImpl(clientOptions)
     }
 
-    private val swir: SwirServiceAsync by lazy { SwirServiceAsyncImpl(clientOptions) }
+    private val passiveRadarObservation: PassiveRadarObservationServiceAsync by lazy {
+        PassiveRadarObservationServiceAsyncImpl(clientOptions)
+    }
 
     private val radarobservation: RadarobservationServiceAsync by lazy {
         RadarobservationServiceAsyncImpl(clientOptions)
@@ -42,13 +48,7 @@ class ObservationServiceAsyncImpl internal constructor(private val clientOptions
         RfObservationServiceAsyncImpl(clientOptions)
     }
 
-    private val passiveRadarObservation: PassiveRadarObservationServiceAsync by lazy {
-        PassiveRadarObservationServiceAsyncImpl(clientOptions)
-    }
-
-    private val eoObservations: EoObservationServiceAsync by lazy {
-        EoObservationServiceAsyncImpl(clientOptions)
-    }
+    private val swir: SwirServiceAsync by lazy { SwirServiceAsyncImpl(clientOptions) }
 
     override fun withRawResponse(): ObservationServiceAsync.WithRawResponse = withRawResponse
 
@@ -57,18 +57,18 @@ class ObservationServiceAsyncImpl internal constructor(private val clientOptions
 
     override fun ecpsdr(): EcpsdrServiceAsync = ecpsdr
 
+    override fun eoObservations(): EoObservationServiceAsync = eoObservations
+
     override fun monoradar(): MonoradarServiceAsync = monoradar
 
-    override fun swir(): SwirServiceAsync = swir
+    override fun passiveRadarObservation(): PassiveRadarObservationServiceAsync =
+        passiveRadarObservation
 
     override fun radarobservation(): RadarobservationServiceAsync = radarobservation
 
     override fun rfObservation(): RfObservationServiceAsync = rfObservation
 
-    override fun passiveRadarObservation(): PassiveRadarObservationServiceAsync =
-        passiveRadarObservation
-
-    override fun eoObservations(): EoObservationServiceAsync = eoObservations
+    override fun swir(): SwirServiceAsync = swir
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         ObservationServiceAsync.WithRawResponse {
@@ -77,12 +77,17 @@ class ObservationServiceAsyncImpl internal constructor(private val clientOptions
             EcpsdrServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        private val eoObservations: EoObservationServiceAsync.WithRawResponse by lazy {
+            EoObservationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
         private val monoradar: MonoradarServiceAsync.WithRawResponse by lazy {
             MonoradarServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val swir: SwirServiceAsync.WithRawResponse by lazy {
-            SwirServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        private val passiveRadarObservation:
+            PassiveRadarObservationServiceAsync.WithRawResponse by lazy {
+            PassiveRadarObservationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val radarobservation: RadarobservationServiceAsync.WithRawResponse by lazy {
@@ -93,13 +98,8 @@ class ObservationServiceAsyncImpl internal constructor(private val clientOptions
             RfObservationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val passiveRadarObservation:
-            PassiveRadarObservationServiceAsync.WithRawResponse by lazy {
-            PassiveRadarObservationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
-        private val eoObservations: EoObservationServiceAsync.WithRawResponse by lazy {
-            EoObservationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        private val swir: SwirServiceAsync.WithRawResponse by lazy {
+            SwirServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         override fun withOptions(
@@ -111,18 +111,18 @@ class ObservationServiceAsyncImpl internal constructor(private val clientOptions
 
         override fun ecpsdr(): EcpsdrServiceAsync.WithRawResponse = ecpsdr
 
+        override fun eoObservations(): EoObservationServiceAsync.WithRawResponse = eoObservations
+
         override fun monoradar(): MonoradarServiceAsync.WithRawResponse = monoradar
 
-        override fun swir(): SwirServiceAsync.WithRawResponse = swir
+        override fun passiveRadarObservation():
+            PassiveRadarObservationServiceAsync.WithRawResponse = passiveRadarObservation
 
         override fun radarobservation(): RadarobservationServiceAsync.WithRawResponse =
             radarobservation
 
         override fun rfObservation(): RfObservationServiceAsync.WithRawResponse = rfObservation
 
-        override fun passiveRadarObservation():
-            PassiveRadarObservationServiceAsync.WithRawResponse = passiveRadarObservation
-
-        override fun eoObservations(): EoObservationServiceAsync.WithRawResponse = eoObservations
+        override fun swir(): SwirServiceAsync.WithRawResponse = swir
     }
 }

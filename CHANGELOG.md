@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 (2025-09-17)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** removing old routes ([cbc6781](https://github.com/Bluestaq/udl-java-sdk/commit/cbc6781ee6706a5e7c271e4ead6f4e417b62e9e9))
+* **api:** Support for latest UDL release ([84f8bdb](https://github.com/Bluestaq/udl-java-sdk/commit/84f8bdbb41f86639f229a773909bfd5a1bd9d3e7))
+
 ## 0.2.0 (2025-09-15)
 
 Full Changelog: [v0.1.9...v0.2.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.1.9...v0.2.0)

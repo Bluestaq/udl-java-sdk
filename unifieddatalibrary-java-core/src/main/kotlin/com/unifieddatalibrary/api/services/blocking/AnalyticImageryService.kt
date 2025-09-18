@@ -11,9 +11,6 @@ import com.unifieddatalibrary.api.models.AnalyticImageryFull
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryAbridged
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryCountParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryFileGetParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryAodrParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryCountParams
-import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryHistoryParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryListPage
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryListParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryQueryhelpParams
@@ -21,6 +18,7 @@ import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryQueryhel
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryRetrieveParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryTupleParams
 import com.unifieddatalibrary.api.models.analyticimagery.AnalyticImageryUnvalidatedPublishParams
+import com.unifieddatalibrary.api.services.blocking.analyticimagery.HistoryService
 import java.util.function.Consumer
 
 interface AnalyticImageryService {
@@ -36,6 +34,8 @@ interface AnalyticImageryService {
      * The original service is not modified.
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): AnalyticImageryService
+
+    fun history(): HistoryService
 
     /**
      * Service operation to get a single AnalyticImagery record by its unique ID passed as a path
@@ -141,52 +141,6 @@ interface AnalyticImageryService {
         fileGet(id, AnalyticImageryFileGetParams.none(), requestOptions)
 
     /**
-     * Service operation to dynamically query historical data by a variety of query parameters not
-     * specified in this API documentation. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
-     */
-    fun history(params: AnalyticImageryHistoryParams): List<AnalyticImageryAbridged> =
-        history(params, RequestOptions.none())
-
-    /** @see history */
-    fun history(
-        params: AnalyticImageryHistoryParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): List<AnalyticImageryAbridged>
-
-    /**
-     * Service operation to dynamically query historical data by a variety of query parameters not
-     * specified in this API documentation, then write that data to the Secure Content Store. See
-     * the queryhelp operation (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required
-     * query parameter information.
-     */
-    fun historyAodr(params: AnalyticImageryHistoryAodrParams) =
-        historyAodr(params, RequestOptions.none())
-
-    /** @see historyAodr */
-    fun historyAodr(
-        params: AnalyticImageryHistoryAodrParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    )
-
-    /**
-     * Service operation to return the count of records satisfying the specified query parameters.
-     * This operation is useful to determine how many records pass a particular query criteria
-     * without retrieving large amounts of data. See the queryhelp operation
-     * (/udl/&lt;datatype&gt;/queryhelp) for more details on valid/required query parameter
-     * information.
-     */
-    fun historyCount(params: AnalyticImageryHistoryCountParams): String =
-        historyCount(params, RequestOptions.none())
-
-    /** @see historyCount */
-    fun historyCount(
-        params: AnalyticImageryHistoryCountParams,
-        requestOptions: RequestOptions = RequestOptions.none(),
-    ): String
-
-    /**
      * Service operation to provide detailed information on available dynamic query parameters for a
      * particular data type.
      */
@@ -266,6 +220,8 @@ interface AnalyticImageryService {
         fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): AnalyticImageryService.WithRawResponse
+
+        fun history(): HistoryService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `get /udl/analyticimagery/{id}`, but is otherwise the
@@ -379,52 +335,6 @@ interface AnalyticImageryService {
         @MustBeClosed
         fun fileGet(id: String, requestOptions: RequestOptions): HttpResponse =
             fileGet(id, AnalyticImageryFileGetParams.none(), requestOptions)
-
-        /**
-         * Returns a raw HTTP response for `get /udl/analyticimagery/history`, but is otherwise the
-         * same as [AnalyticImageryService.history].
-         */
-        @MustBeClosed
-        fun history(
-            params: AnalyticImageryHistoryParams
-        ): HttpResponseFor<List<AnalyticImageryAbridged>> = history(params, RequestOptions.none())
-
-        /** @see history */
-        @MustBeClosed
-        fun history(
-            params: AnalyticImageryHistoryParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<List<AnalyticImageryAbridged>>
-
-        /**
-         * Returns a raw HTTP response for `get /udl/analyticimagery/history/aodr`, but is otherwise
-         * the same as [AnalyticImageryService.historyAodr].
-         */
-        @MustBeClosed
-        fun historyAodr(params: AnalyticImageryHistoryAodrParams): HttpResponse =
-            historyAodr(params, RequestOptions.none())
-
-        /** @see historyAodr */
-        @MustBeClosed
-        fun historyAodr(
-            params: AnalyticImageryHistoryAodrParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponse
-
-        /**
-         * Returns a raw HTTP response for `get /udl/analyticimagery/history/count`, but is
-         * otherwise the same as [AnalyticImageryService.historyCount].
-         */
-        @MustBeClosed
-        fun historyCount(params: AnalyticImageryHistoryCountParams): HttpResponseFor<String> =
-            historyCount(params, RequestOptions.none())
-
-        /** @see historyCount */
-        @MustBeClosed
-        fun historyCount(
-            params: AnalyticImageryHistoryCountParams,
-            requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<String>
 
         /**
          * Returns a raw HTTP response for `get /udl/analyticimagery/queryhelp`, but is otherwise
