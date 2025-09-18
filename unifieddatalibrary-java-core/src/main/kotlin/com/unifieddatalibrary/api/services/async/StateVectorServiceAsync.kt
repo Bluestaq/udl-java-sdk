@@ -11,6 +11,7 @@ import com.unifieddatalibrary.api.models.statevector.StateVectorCountParams
 import com.unifieddatalibrary.api.models.statevector.StateVectorCreateBulkParams
 import com.unifieddatalibrary.api.models.statevector.StateVectorCreateParams
 import com.unifieddatalibrary.api.models.statevector.StateVectorGetParams
+import com.unifieddatalibrary.api.models.statevector.StateVectorIngest
 import com.unifieddatalibrary.api.models.statevector.StateVectorListPageAsync
 import com.unifieddatalibrary.api.models.statevector.StateVectorListParams
 import com.unifieddatalibrary.api.models.statevector.StateVectorQueryhelpParams
@@ -54,6 +55,20 @@ interface StateVectorServiceAsync {
         params: StateVectorCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see create */
+    fun create(
+        stateVectorIngest: StateVectorIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        create(
+            StateVectorCreateParams.builder().stateVectorIngest(stateVectorIngest).build(),
+            requestOptions,
+        )
+
+    /** @see create */
+    fun create(stateVectorIngest: StateVectorIngest): CompletableFuture<Void?> =
+        create(stateVectorIngest, RequestOptions.none())
 
     /**
      * Service operation to dynamically query data by a variety of query parameters not specified in
@@ -218,6 +233,20 @@ interface StateVectorServiceAsync {
             params: StateVectorCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see create */
+        fun create(
+            stateVectorIngest: StateVectorIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            create(
+                StateVectorCreateParams.builder().stateVectorIngest(stateVectorIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        fun create(stateVectorIngest: StateVectorIngest): CompletableFuture<HttpResponse> =
+            create(stateVectorIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/statevector`, but is otherwise the same as

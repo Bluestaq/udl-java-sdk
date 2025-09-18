@@ -12,6 +12,7 @@ import com.unifieddatalibrary.api.models.location.LocationCountParams
 import com.unifieddatalibrary.api.models.location.LocationCreateParams
 import com.unifieddatalibrary.api.models.location.LocationDeleteParams
 import com.unifieddatalibrary.api.models.location.LocationGetParams
+import com.unifieddatalibrary.api.models.location.LocationIngest
 import com.unifieddatalibrary.api.models.location.LocationListPage
 import com.unifieddatalibrary.api.models.location.LocationListParams
 import com.unifieddatalibrary.api.models.location.LocationQueryhelpParams
@@ -44,6 +45,19 @@ interface LocationService {
 
     /** @see create */
     fun create(params: LocationCreateParams, requestOptions: RequestOptions = RequestOptions.none())
+
+    /** @see create */
+    fun create(
+        locationIngest: LocationIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        create(
+            LocationCreateParams.builder().locationIngest(locationIngest).build(),
+            requestOptions,
+        )
+
+    /** @see create */
+    fun create(locationIngest: LocationIngest) = create(locationIngest, RequestOptions.none())
 
     /**
      * Service operation to update a single location. Locations are specific fixed points on the
@@ -233,6 +247,22 @@ interface LocationService {
             params: LocationCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see create */
+        @MustBeClosed
+        fun create(
+            locationIngest: LocationIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            create(
+                LocationCreateParams.builder().locationIngest(locationIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        @MustBeClosed
+        fun create(locationIngest: LocationIngest): HttpResponse =
+            create(locationIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `put /udl/location/{id}`, but is otherwise the same as

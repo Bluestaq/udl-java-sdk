@@ -7,6 +7,7 @@ import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.SubStatusFull
+import com.unifieddatalibrary.api.models.SubStatusIngest
 import com.unifieddatalibrary.api.models.substatus.SubstatusCountParams
 import com.unifieddatalibrary.api.models.substatus.SubstatusCreateParams
 import com.unifieddatalibrary.api.models.substatus.SubstatusDeleteParams
@@ -47,6 +48,20 @@ interface SubstatusServiceAsync {
         params: SubstatusCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see create */
+    fun create(
+        subStatusIngest: SubStatusIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        create(
+            SubstatusCreateParams.builder().subStatusIngest(subStatusIngest).build(),
+            requestOptions,
+        )
+
+    /** @see create */
+    fun create(subStatusIngest: SubStatusIngest): CompletableFuture<Void?> =
+        create(subStatusIngest, RequestOptions.none())
 
     /**
      * Service operation to update a single Sub Status record. A specific role is required to
@@ -251,6 +266,20 @@ interface SubstatusServiceAsync {
             params: SubstatusCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see create */
+        fun create(
+            subStatusIngest: SubStatusIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            create(
+                SubstatusCreateParams.builder().subStatusIngest(subStatusIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        fun create(subStatusIngest: SubStatusIngest): CompletableFuture<HttpResponse> =
+            create(subStatusIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `put /udl/substatus/{id}`, but is otherwise the same as
