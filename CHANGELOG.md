@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.4.0 (2025-09-19)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **client:** add convenience overloads for some methods ([0c10c79](https://github.com/Bluestaq/udl-java-sdk/commit/0c10c793cbac1fa1b48277e83efc52c888282c35))
+* **client:** expose sleeper option ([d300281](https://github.com/Bluestaq/udl-java-sdk/commit/d3002814fb6f0039fbc8e167424f79200be9ef02))
+
+
+### Bug Fixes
+
+* **client:** ensure single timer is created per client ([d300281](https://github.com/Bluestaq/udl-java-sdk/commit/d3002814fb6f0039fbc8e167424f79200be9ef02))
+
+
+### Chores
+
+* improve formatter performance ([e5e7e94](https://github.com/Bluestaq/udl-java-sdk/commit/e5e7e946c0cc692d779fb8f1fb400d6b6fac837a))
+
 ## 0.3.0 (2025-09-17)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.2.0...v0.3.0)
