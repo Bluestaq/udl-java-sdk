@@ -8,6 +8,7 @@ import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.linkstatus.datalink.DatalinkCountParams
 import com.unifieddatalibrary.api.models.linkstatus.datalink.DatalinkCreateParams
+import com.unifieddatalibrary.api.models.linkstatus.datalink.DatalinkIngest
 import com.unifieddatalibrary.api.models.linkstatus.datalink.DatalinkListPageAsync
 import com.unifieddatalibrary.api.models.linkstatus.datalink.DatalinkListParams
 import com.unifieddatalibrary.api.models.linkstatus.datalink.DatalinkQueryhelpParams
@@ -45,6 +46,20 @@ interface DatalinkServiceAsync {
         params: DatalinkCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see create */
+    fun create(
+        datalinkIngest: DatalinkIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        create(
+            DatalinkCreateParams.builder().datalinkIngest(datalinkIngest).build(),
+            requestOptions,
+        )
+
+    /** @see create */
+    fun create(datalinkIngest: DatalinkIngest): CompletableFuture<Void?> =
+        create(datalinkIngest, RequestOptions.none())
 
     /**
      * Service operation to dynamically query data by a variety of query parameters not specified in
@@ -156,6 +171,20 @@ interface DatalinkServiceAsync {
             params: DatalinkCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see create */
+        fun create(
+            datalinkIngest: DatalinkIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            create(
+                DatalinkCreateParams.builder().datalinkIngest(datalinkIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        fun create(datalinkIngest: DatalinkIngest): CompletableFuture<HttpResponse> =
+            create(datalinkIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/datalink`, but is otherwise the same as

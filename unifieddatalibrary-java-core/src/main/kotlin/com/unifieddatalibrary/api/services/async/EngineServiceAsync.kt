@@ -7,6 +7,7 @@ import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.Engine
+import com.unifieddatalibrary.api.models.EngineIngest
 import com.unifieddatalibrary.api.models.engines.EngineCountParams
 import com.unifieddatalibrary.api.models.engines.EngineCreateParams
 import com.unifieddatalibrary.api.models.engines.EngineDeleteParams
@@ -48,6 +49,17 @@ interface EngineServiceAsync {
         params: EngineCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see create */
+    fun create(
+        engineIngest: EngineIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        create(EngineCreateParams.builder().engineIngest(engineIngest).build(), requestOptions)
+
+    /** @see create */
+    fun create(engineIngest: EngineIngest): CompletableFuture<Void?> =
+        create(engineIngest, RequestOptions.none())
 
     /**
      * Service operation to get a single Engine record by its unique ID passed as a path parameter.
@@ -255,6 +267,17 @@ interface EngineServiceAsync {
             params: EngineCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see create */
+        fun create(
+            engineIngest: EngineIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            create(EngineCreateParams.builder().engineIngest(engineIngest).build(), requestOptions)
+
+        /** @see create */
+        fun create(engineIngest: EngineIngest): CompletableFuture<HttpResponse> =
+            create(engineIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/engine/{id}`, but is otherwise the same as

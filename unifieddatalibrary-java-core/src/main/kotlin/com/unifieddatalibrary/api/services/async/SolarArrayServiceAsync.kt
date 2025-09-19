@@ -7,6 +7,7 @@ import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.SolarArrayFull
+import com.unifieddatalibrary.api.models.SolarArrayIngest
 import com.unifieddatalibrary.api.models.solararray.SolarArrayCountParams
 import com.unifieddatalibrary.api.models.solararray.SolarArrayCreateParams
 import com.unifieddatalibrary.api.models.solararray.SolarArrayDeleteParams
@@ -47,6 +48,20 @@ interface SolarArrayServiceAsync {
         params: SolarArrayCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see create */
+    fun create(
+        solarArrayIngest: SolarArrayIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        create(
+            SolarArrayCreateParams.builder().solarArrayIngest(solarArrayIngest).build(),
+            requestOptions,
+        )
+
+    /** @see create */
+    fun create(solarArrayIngest: SolarArrayIngest): CompletableFuture<Void?> =
+        create(solarArrayIngest, RequestOptions.none())
 
     /**
      * Service operation to update a single SolarArray. A specific role is required to perform this
@@ -252,6 +267,20 @@ interface SolarArrayServiceAsync {
             params: SolarArrayCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see create */
+        fun create(
+            solarArrayIngest: SolarArrayIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            create(
+                SolarArrayCreateParams.builder().solarArrayIngest(solarArrayIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        fun create(solarArrayIngest: SolarArrayIngest): CompletableFuture<HttpResponse> =
+            create(solarArrayIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `put /udl/solararray/{id}`, but is otherwise the same as

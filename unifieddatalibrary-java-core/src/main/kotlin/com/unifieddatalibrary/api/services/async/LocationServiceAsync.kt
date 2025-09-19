@@ -11,6 +11,7 @@ import com.unifieddatalibrary.api.models.location.LocationCountParams
 import com.unifieddatalibrary.api.models.location.LocationCreateParams
 import com.unifieddatalibrary.api.models.location.LocationDeleteParams
 import com.unifieddatalibrary.api.models.location.LocationGetParams
+import com.unifieddatalibrary.api.models.location.LocationIngest
 import com.unifieddatalibrary.api.models.location.LocationListPageAsync
 import com.unifieddatalibrary.api.models.location.LocationListParams
 import com.unifieddatalibrary.api.models.location.LocationQueryhelpParams
@@ -48,6 +49,20 @@ interface LocationServiceAsync {
         params: LocationCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see create */
+    fun create(
+        locationIngest: LocationIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        create(
+            LocationCreateParams.builder().locationIngest(locationIngest).build(),
+            requestOptions,
+        )
+
+    /** @see create */
+    fun create(locationIngest: LocationIngest): CompletableFuture<Void?> =
+        create(locationIngest, RequestOptions.none())
 
     /**
      * Service operation to update a single location. Locations are specific fixed points on the
@@ -255,6 +270,20 @@ interface LocationServiceAsync {
             params: LocationCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see create */
+        fun create(
+            locationIngest: LocationIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            create(
+                LocationCreateParams.builder().locationIngest(locationIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        fun create(locationIngest: LocationIngest): CompletableFuture<HttpResponse> =
+            create(locationIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `put /udl/location/{id}`, but is otherwise the same as

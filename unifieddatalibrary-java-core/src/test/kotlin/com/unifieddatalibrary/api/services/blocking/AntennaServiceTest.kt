@@ -6,7 +6,6 @@ import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
 import com.unifieddatalibrary.api.models.AntennaIngest
 import com.unifieddatalibrary.api.models.antennas.AntennaCountParams
-import com.unifieddatalibrary.api.models.antennas.AntennaCreateParams
 import com.unifieddatalibrary.api.models.antennas.AntennaRetrieveParams
 import com.unifieddatalibrary.api.models.antennas.AntennaTupleParams
 import com.unifieddatalibrary.api.models.antennas.AntennaUpdateParams
@@ -28,19 +27,15 @@ internal class AntennaServiceTest {
         val antennaService = client.antennas()
 
         antennaService.create(
-            AntennaCreateParams.builder()
-                .antennaIngest(
-                    AntennaIngest.builder()
-                        .dataMode(AntennaIngest.DataMode.TEST)
-                        .name("IRIDIUM NEXT 121-ANTENNA-10075")
-                        .source("Bluestaq")
-                        .id("ANTENNA-ID")
-                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                        .createdBy("some.user")
-                        .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("OPS1")
-                        .build()
-                )
+            AntennaIngest.builder()
+                .dataMode(AntennaIngest.DataMode.TEST)
+                .name("IRIDIUM NEXT 121-ANTENNA-10075")
+                .source("Bluestaq")
+                .id("ANTENNA-ID")
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("OPS1")
                 .build()
         )
     }

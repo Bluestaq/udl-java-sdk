@@ -14,6 +14,7 @@ import com.unifieddatalibrary.api.models.onorbit.OnorbitDeleteParams
 import com.unifieddatalibrary.api.models.onorbit.OnorbitGetParams
 import com.unifieddatalibrary.api.models.onorbit.OnorbitGetSignatureParams
 import com.unifieddatalibrary.api.models.onorbit.OnorbitGetSignatureResponse
+import com.unifieddatalibrary.api.models.onorbit.OnorbitIngest
 import com.unifieddatalibrary.api.models.onorbit.OnorbitListPage
 import com.unifieddatalibrary.api.models.onorbit.OnorbitListParams
 import com.unifieddatalibrary.api.models.onorbit.OnorbitQueryhelpParams
@@ -48,6 +49,15 @@ interface OnorbitService {
 
     /** @see create */
     fun create(params: OnorbitCreateParams, requestOptions: RequestOptions = RequestOptions.none())
+
+    /** @see create */
+    fun create(
+        onorbitIngest: OnorbitIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = create(OnorbitCreateParams.builder().onorbitIngest(onorbitIngest).build(), requestOptions)
+
+    /** @see create */
+    fun create(onorbitIngest: OnorbitIngest) = create(onorbitIngest, RequestOptions.none())
 
     /**
      * Service operation to update a single OnOrbit object. A specific role is required to perform
@@ -243,6 +253,22 @@ interface OnorbitService {
             params: OnorbitCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see create */
+        @MustBeClosed
+        fun create(
+            onorbitIngest: OnorbitIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            create(
+                OnorbitCreateParams.builder().onorbitIngest(onorbitIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        @MustBeClosed
+        fun create(onorbitIngest: OnorbitIngest): HttpResponse =
+            create(onorbitIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `put /udl/onorbit/{id}`, but is otherwise the same as

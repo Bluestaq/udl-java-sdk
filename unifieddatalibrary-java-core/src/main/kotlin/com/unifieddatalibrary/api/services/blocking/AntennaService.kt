@@ -8,6 +8,7 @@ import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.AntennaFull
+import com.unifieddatalibrary.api.models.AntennaIngest
 import com.unifieddatalibrary.api.models.antennas.AntennaCountParams
 import com.unifieddatalibrary.api.models.antennas.AntennaCreateParams
 import com.unifieddatalibrary.api.models.antennas.AntennaDeleteParams
@@ -43,6 +44,15 @@ interface AntennaService {
 
     /** @see create */
     fun create(params: AntennaCreateParams, requestOptions: RequestOptions = RequestOptions.none())
+
+    /** @see create */
+    fun create(
+        antennaIngest: AntennaIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) = create(AntennaCreateParams.builder().antennaIngest(antennaIngest).build(), requestOptions)
+
+    /** @see create */
+    fun create(antennaIngest: AntennaIngest) = create(antennaIngest, RequestOptions.none())
 
     /**
      * Service operation to get a single Antenna record by its unique ID passed as a path parameter.
@@ -230,6 +240,22 @@ interface AntennaService {
             params: AntennaCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see create */
+        @MustBeClosed
+        fun create(
+            antennaIngest: AntennaIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            create(
+                AntennaCreateParams.builder().antennaIngest(antennaIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        @MustBeClosed
+        fun create(antennaIngest: AntennaIngest): HttpResponse =
+            create(antennaIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/antenna/{id}`, but is otherwise the same as

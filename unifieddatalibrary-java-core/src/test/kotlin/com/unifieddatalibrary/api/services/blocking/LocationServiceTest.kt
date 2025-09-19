@@ -5,7 +5,6 @@ package com.unifieddatalibrary.api.services.blocking
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
 import com.unifieddatalibrary.api.models.location.LocationCountParams
-import com.unifieddatalibrary.api.models.location.LocationCreateParams
 import com.unifieddatalibrary.api.models.location.LocationGetParams
 import com.unifieddatalibrary.api.models.location.LocationIngest
 import com.unifieddatalibrary.api.models.location.LocationTupleParams
@@ -28,24 +27,20 @@ internal class LocationServiceTest {
         val locationService = client.location()
 
         locationService.create(
-            LocationCreateParams.builder()
-                .locationIngest(
-                    LocationIngest.builder()
-                        .classificationMarking("U")
-                        .dataMode(LocationIngest.DataMode.TEST)
-                        .name("Example location")
-                        .source("Bluestaq")
-                        .altitude(10.23)
-                        .countryCode("US")
-                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                        .createdBy("some.user")
-                        .idLocation("LOCATION-ID")
-                        .lat(45.23)
-                        .lon(179.1)
-                        .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("OPS1")
-                        .build()
-                )
+            LocationIngest.builder()
+                .classificationMarking("U")
+                .dataMode(LocationIngest.DataMode.TEST)
+                .name("Example location")
+                .source("Bluestaq")
+                .altitude(10.23)
+                .countryCode("US")
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .idLocation("LOCATION-ID")
+                .lat(45.23)
+                .lon(179.1)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("OPS1")
                 .build()
         )
     }

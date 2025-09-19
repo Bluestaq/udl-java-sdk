@@ -5,7 +5,6 @@ package com.unifieddatalibrary.api.services.blocking
 import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClient
 import com.unifieddatalibrary.api.models.onorbit.OnorbitCountParams
-import com.unifieddatalibrary.api.models.onorbit.OnorbitCreateParams
 import com.unifieddatalibrary.api.models.onorbit.OnorbitGetParams
 import com.unifieddatalibrary.api.models.onorbit.OnorbitGetSignatureParams
 import com.unifieddatalibrary.api.models.onorbit.OnorbitIngest
@@ -30,32 +29,28 @@ internal class OnorbitServiceTest {
         val onorbitService = client.onorbit()
 
         onorbitService.create(
-            OnorbitCreateParams.builder()
-                .onorbitIngest(
-                    OnorbitIngest.builder()
-                        .classificationMarking("U")
-                        .dataMode(OnorbitIngest.DataMode.TEST)
-                        .satNo(1)
-                        .source("Bluestaq")
-                        .altName("Alternate Name")
-                        .category(OnorbitIngest.Category.LUNAR)
-                        .commonName("Example common name")
-                        .constellation("Big Dipper")
-                        .countryCode("US")
-                        .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                        .createdBy("some.user")
-                        .decayDate(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                        .idOnOrbit("ONORBIT-ID")
-                        .intlDes("2021123ABC")
-                        .launchDate(LocalDate.parse("2018-01-01"))
-                        .launchSiteId("LAUNCHSITE-ID")
-                        .lifetimeYears(10)
-                        .missionNumber("Expedition 1")
-                        .objectType(OnorbitIngest.ObjectType.PAYLOAD)
-                        .origin("THIRD_PARTY_DATASOURCE")
-                        .origNetwork("OPS1")
-                        .build()
-                )
+            OnorbitIngest.builder()
+                .classificationMarking("U")
+                .dataMode(OnorbitIngest.DataMode.TEST)
+                .satNo(1)
+                .source("Bluestaq")
+                .altName("Alternate Name")
+                .category(OnorbitIngest.Category.LUNAR)
+                .commonName("Example common name")
+                .constellation("Big Dipper")
+                .countryCode("US")
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
+                .decayDate(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .idOnOrbit("ONORBIT-ID")
+                .intlDes("2021123ABC")
+                .launchDate(LocalDate.parse("2018-01-01"))
+                .launchSiteId("LAUNCHSITE-ID")
+                .lifetimeYears(10)
+                .missionNumber("Expedition 1")
+                .objectType(OnorbitIngest.ObjectType.PAYLOAD)
+                .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("OPS1")
                 .build()
         )
     }

@@ -11,6 +11,7 @@ import com.unifieddatalibrary.api.models.elsets.ElsetCountParams
 import com.unifieddatalibrary.api.models.elsets.ElsetCreateBulkFromTleParams
 import com.unifieddatalibrary.api.models.elsets.ElsetCreateBulkParams
 import com.unifieddatalibrary.api.models.elsets.ElsetCreateParams
+import com.unifieddatalibrary.api.models.elsets.ElsetIngest
 import com.unifieddatalibrary.api.models.elsets.ElsetListPageAsync
 import com.unifieddatalibrary.api.models.elsets.ElsetListParams
 import com.unifieddatalibrary.api.models.elsets.ElsetQueryCurrentElsetHelpParams
@@ -57,6 +58,17 @@ interface ElsetServiceAsync {
         params: ElsetCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see create */
+    fun create(
+        elsetIngest: ElsetIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        create(ElsetCreateParams.builder().elsetIngest(elsetIngest).build(), requestOptions)
+
+    /** @see create */
+    fun create(elsetIngest: ElsetIngest): CompletableFuture<Void?> =
+        create(elsetIngest, RequestOptions.none())
 
     /** Service operation to get a single elset by its unique ID passed as a path parameter. */
     fun retrieve(id: String): CompletableFuture<Elset> = retrieve(id, ElsetRetrieveParams.none())
@@ -256,6 +268,17 @@ interface ElsetServiceAsync {
             params: ElsetCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see create */
+        fun create(
+            elsetIngest: ElsetIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            create(ElsetCreateParams.builder().elsetIngest(elsetIngest).build(), requestOptions)
+
+        /** @see create */
+        fun create(elsetIngest: ElsetIngest): CompletableFuture<HttpResponse> =
+            create(elsetIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/elset/{id}`, but is otherwise the same as

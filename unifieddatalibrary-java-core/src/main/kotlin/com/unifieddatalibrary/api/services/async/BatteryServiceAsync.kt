@@ -7,6 +7,7 @@ import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.BatteryFull
+import com.unifieddatalibrary.api.models.BatteryIngest
 import com.unifieddatalibrary.api.models.batteries.BatteryCountParams
 import com.unifieddatalibrary.api.models.batteries.BatteryCreateParams
 import com.unifieddatalibrary.api.models.batteries.BatteryDeleteParams
@@ -47,6 +48,17 @@ interface BatteryServiceAsync {
         params: BatteryCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see create */
+    fun create(
+        batteryIngest: BatteryIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        create(BatteryCreateParams.builder().batteryIngest(batteryIngest).build(), requestOptions)
+
+    /** @see create */
+    fun create(batteryIngest: BatteryIngest): CompletableFuture<Void?> =
+        create(batteryIngest, RequestOptions.none())
 
     /**
      * Service operation to get a single Battery record by its unique ID passed as a path parameter.
@@ -250,6 +262,20 @@ interface BatteryServiceAsync {
             params: BatteryCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see create */
+        fun create(
+            batteryIngest: BatteryIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            create(
+                BatteryCreateParams.builder().batteryIngest(batteryIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        fun create(batteryIngest: BatteryIngest): CompletableFuture<HttpResponse> =
+            create(batteryIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/battery/{id}`, but is otherwise the same as

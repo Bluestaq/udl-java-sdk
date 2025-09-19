@@ -12,6 +12,7 @@ import com.unifieddatalibrary.api.models.entities.EntityCountParams
 import com.unifieddatalibrary.api.models.entities.EntityCreateParams
 import com.unifieddatalibrary.api.models.entities.EntityDeleteParams
 import com.unifieddatalibrary.api.models.entities.EntityGetAllTypesParams
+import com.unifieddatalibrary.api.models.entities.EntityIngest
 import com.unifieddatalibrary.api.models.entities.EntityListPage
 import com.unifieddatalibrary.api.models.entities.EntityListParams
 import com.unifieddatalibrary.api.models.entities.EntityQueryHelpParams
@@ -44,6 +45,13 @@ interface EntityService {
 
     /** @see create */
     fun create(params: EntityCreateParams, requestOptions: RequestOptions = RequestOptions.none())
+
+    /** @see create */
+    fun create(entityIngest: EntityIngest, requestOptions: RequestOptions = RequestOptions.none()) =
+        create(EntityCreateParams.builder().entityIngest(entityIngest).build(), requestOptions)
+
+    /** @see create */
+    fun create(entityIngest: EntityIngest) = create(entityIngest, RequestOptions.none())
 
     /**
      * Service operation to get a single Entity record by its unique ID passed as a path parameter.
@@ -246,6 +254,19 @@ interface EntityService {
             params: EntityCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see create */
+        @MustBeClosed
+        fun create(
+            entityIngest: EntityIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            create(EntityCreateParams.builder().entityIngest(entityIngest).build(), requestOptions)
+
+        /** @see create */
+        @MustBeClosed
+        fun create(entityIngest: EntityIngest): HttpResponse =
+            create(entityIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `get /udl/entity/{id}`, but is otherwise the same as

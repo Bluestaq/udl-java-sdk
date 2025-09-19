@@ -6,7 +6,6 @@ import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
 import com.unifieddatalibrary.api.models.SubStatusIngest
 import com.unifieddatalibrary.api.models.substatus.SubstatusCountParams
-import com.unifieddatalibrary.api.models.substatus.SubstatusCreateParams
 import com.unifieddatalibrary.api.models.substatus.SubstatusGetParams
 import com.unifieddatalibrary.api.models.substatus.SubstatusTupleParams
 import com.unifieddatalibrary.api.models.substatus.SubstatusUpdateParams
@@ -29,23 +28,19 @@ internal class SubstatusServiceAsyncTest {
 
         val future =
             substatusServiceAsync.create(
-                SubstatusCreateParams.builder()
-                    .subStatusIngest(
-                        SubStatusIngest.builder()
-                            .classificationMarking("U")
-                            .dataMode(SubStatusIngest.DataMode.TEST)
-                            .notes("Sample Notes")
-                            .source("Bluestaq")
-                            .status(SubStatusIngest.Status.FMC)
-                            .statusId("REF-STATUS-ID")
-                            .type(SubStatusIngest.Type.MD_CAP)
-                            .id("SUBSTATUS-ID")
-                            .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                            .createdBy("some.user")
-                            .origin("THIRD_PARTY_DATASOURCE")
-                            .origNetwork("OPS1")
-                            .build()
-                    )
+                SubStatusIngest.builder()
+                    .classificationMarking("U")
+                    .dataMode(SubStatusIngest.DataMode.TEST)
+                    .notes("Sample Notes")
+                    .source("Bluestaq")
+                    .status(SubStatusIngest.Status.FMC)
+                    .statusId("REF-STATUS-ID")
+                    .type(SubStatusIngest.Type.MD_CAP)
+                    .id("SUBSTATUS-ID")
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("OPS1")
                     .build()
             )
 

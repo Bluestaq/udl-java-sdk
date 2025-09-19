@@ -11,6 +11,7 @@ import com.unifieddatalibrary.api.models.trackroute.TrackRouteCreateBulkParams
 import com.unifieddatalibrary.api.models.trackroute.TrackRouteCreateParams
 import com.unifieddatalibrary.api.models.trackroute.TrackRouteDeleteParams
 import com.unifieddatalibrary.api.models.trackroute.TrackRouteGetParams
+import com.unifieddatalibrary.api.models.trackroute.TrackRouteIngest
 import com.unifieddatalibrary.api.models.trackroute.TrackRouteListPageAsync
 import com.unifieddatalibrary.api.models.trackroute.TrackRouteListParams
 import com.unifieddatalibrary.api.models.trackroute.TrackRouteQueryhelpParams
@@ -52,6 +53,20 @@ interface TrackRouteServiceAsync {
         params: TrackRouteCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
+
+    /** @see create */
+    fun create(
+        trackRouteIngest: TrackRouteIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        create(
+            TrackRouteCreateParams.builder().trackRouteIngest(trackRouteIngest).build(),
+            requestOptions,
+        )
+
+    /** @see create */
+    fun create(trackRouteIngest: TrackRouteIngest): CompletableFuture<Void?> =
+        create(trackRouteIngest, RequestOptions.none())
 
     /**
      * Service operation to update a single trackroute record. A specific role is required to
@@ -244,6 +259,20 @@ interface TrackRouteServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        trackRouteIngest: TrackRouteIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        unvalidatedPublish(
+            TrackRouteUnvalidatedPublishParams.builder().trackRouteIngest(trackRouteIngest).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(trackRouteIngest: TrackRouteIngest): CompletableFuture<Void?> =
+        unvalidatedPublish(trackRouteIngest, RequestOptions.none())
+
     /**
      * A view of [TrackRouteServiceAsync] that provides access to raw HTTP responses for each
      * method.
@@ -273,6 +302,20 @@ interface TrackRouteServiceAsync {
             params: TrackRouteCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see create */
+        fun create(
+            trackRouteIngest: TrackRouteIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            create(
+                TrackRouteCreateParams.builder().trackRouteIngest(trackRouteIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        fun create(trackRouteIngest: TrackRouteIngest): CompletableFuture<HttpResponse> =
+            create(trackRouteIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `put /udl/trackroute/{id}`, but is otherwise the same as
@@ -469,5 +512,23 @@ interface TrackRouteServiceAsync {
             params: TrackRouteUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            trackRouteIngest: TrackRouteIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(
+                TrackRouteUnvalidatedPublishParams.builder()
+                    .trackRouteIngest(trackRouteIngest)
+                    .build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        fun unvalidatedPublish(
+            trackRouteIngest: TrackRouteIngest
+        ): CompletableFuture<HttpResponse> =
+            unvalidatedPublish(trackRouteIngest, RequestOptions.none())
     }
 }

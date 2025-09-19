@@ -63,6 +63,15 @@ interface FolderService {
     @Deprecated("deprecated")
     fun update(params: FolderUpdateParams, requestOptions: RequestOptions = RequestOptions.none())
 
+    /** @see update */
+    @Deprecated("deprecated")
+    fun update(fileData: FileData, requestOptions: RequestOptions = RequestOptions.none()) =
+        update(FolderUpdateParams.builder().fileData(fileData).build(), requestOptions)
+
+    /** @see update */
+    @Deprecated("deprecated")
+    fun update(fileData: FileData) = update(fileData, RequestOptions.none())
+
     /** A view of [FolderService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -122,5 +131,19 @@ interface FolderService {
             params: FolderUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see update */
+        @Deprecated("deprecated")
+        @MustBeClosed
+        fun update(
+            fileData: FileData,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            update(FolderUpdateParams.builder().fileData(fileData).build(), requestOptions)
+
+        /** @see update */
+        @Deprecated("deprecated")
+        @MustBeClosed
+        fun update(fileData: FileData): HttpResponse = update(fileData, RequestOptions.none())
     }
 }
