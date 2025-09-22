@@ -54,7 +54,13 @@ internal class SearchCriterionTest {
     fun ofLogical() {
         val logical =
             SearchLogicalCriterion.builder()
-                .criteria(listOf())
+                .addCriterion(
+                    SearchCriterion.ScsSearchFieldCriterion.builder()
+                        .field("field")
+                        .operator(SearchCriterion.ScsSearchFieldCriterion.Operator.EXACT_MATCH)
+                        .value("value")
+                        .build()
+                )
                 .operator(SearchLogicalCriterion.Operator.AND)
                 .build()
 
@@ -70,7 +76,13 @@ internal class SearchCriterionTest {
         val searchCriterion =
             SearchCriterion.ofLogical(
                 SearchLogicalCriterion.builder()
-                    .criteria(listOf())
+                    .addCriterion(
+                        SearchCriterion.ScsSearchFieldCriterion.builder()
+                            .field("field")
+                            .operator(SearchCriterion.ScsSearchFieldCriterion.Operator.EXACT_MATCH)
+                            .value("value")
+                            .build()
+                    )
                     .operator(SearchLogicalCriterion.Operator.AND)
                     .build()
             )
