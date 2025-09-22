@@ -8,6 +8,7 @@ import com.unifieddatalibrary.api.core.RequestOptions
 import com.unifieddatalibrary.api.core.http.HttpResponse
 import com.unifieddatalibrary.api.core.http.HttpResponseFor
 import com.unifieddatalibrary.api.models.SolarArrayFull
+import com.unifieddatalibrary.api.models.SolarArrayIngest
 import com.unifieddatalibrary.api.models.solararray.SolarArrayCountParams
 import com.unifieddatalibrary.api.models.solararray.SolarArrayCreateParams
 import com.unifieddatalibrary.api.models.solararray.SolarArrayDeleteParams
@@ -46,6 +47,19 @@ interface SolarArrayService {
         params: SolarArrayCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see create */
+    fun create(
+        solarArrayIngest: SolarArrayIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        create(
+            SolarArrayCreateParams.builder().solarArrayIngest(solarArrayIngest).build(),
+            requestOptions,
+        )
+
+    /** @see create */
+    fun create(solarArrayIngest: SolarArrayIngest) = create(solarArrayIngest, RequestOptions.none())
 
     /**
      * Service operation to update a single SolarArray. A specific role is required to perform this
@@ -240,6 +254,22 @@ interface SolarArrayService {
             params: SolarArrayCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see create */
+        @MustBeClosed
+        fun create(
+            solarArrayIngest: SolarArrayIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            create(
+                SolarArrayCreateParams.builder().solarArrayIngest(solarArrayIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        @MustBeClosed
+        fun create(solarArrayIngest: SolarArrayIngest): HttpResponse =
+            create(solarArrayIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `put /udl/solararray/{id}`, but is otherwise the same as

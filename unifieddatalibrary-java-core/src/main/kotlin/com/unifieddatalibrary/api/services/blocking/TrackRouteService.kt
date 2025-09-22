@@ -12,6 +12,7 @@ import com.unifieddatalibrary.api.models.trackroute.TrackRouteCreateBulkParams
 import com.unifieddatalibrary.api.models.trackroute.TrackRouteCreateParams
 import com.unifieddatalibrary.api.models.trackroute.TrackRouteDeleteParams
 import com.unifieddatalibrary.api.models.trackroute.TrackRouteGetParams
+import com.unifieddatalibrary.api.models.trackroute.TrackRouteIngest
 import com.unifieddatalibrary.api.models.trackroute.TrackRouteListPage
 import com.unifieddatalibrary.api.models.trackroute.TrackRouteListParams
 import com.unifieddatalibrary.api.models.trackroute.TrackRouteQueryhelpParams
@@ -51,6 +52,19 @@ interface TrackRouteService {
         params: TrackRouteCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     )
+
+    /** @see create */
+    fun create(
+        trackRouteIngest: TrackRouteIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        create(
+            TrackRouteCreateParams.builder().trackRouteIngest(trackRouteIngest).build(),
+            requestOptions,
+        )
+
+    /** @see create */
+    fun create(trackRouteIngest: TrackRouteIngest) = create(trackRouteIngest, RequestOptions.none())
 
     /**
      * Service operation to update a single trackroute record. A specific role is required to
@@ -232,6 +246,20 @@ interface TrackRouteService {
         requestOptions: RequestOptions = RequestOptions.none(),
     )
 
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(
+        trackRouteIngest: TrackRouteIngest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ) =
+        unvalidatedPublish(
+            TrackRouteUnvalidatedPublishParams.builder().trackRouteIngest(trackRouteIngest).build(),
+            requestOptions,
+        )
+
+    /** @see unvalidatedPublish */
+    fun unvalidatedPublish(trackRouteIngest: TrackRouteIngest) =
+        unvalidatedPublish(trackRouteIngest, RequestOptions.none())
+
     /** A view of [TrackRouteService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -260,6 +288,22 @@ interface TrackRouteService {
             params: TrackRouteCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see create */
+        @MustBeClosed
+        fun create(
+            trackRouteIngest: TrackRouteIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            create(
+                TrackRouteCreateParams.builder().trackRouteIngest(trackRouteIngest).build(),
+                requestOptions,
+            )
+
+        /** @see create */
+        @MustBeClosed
+        fun create(trackRouteIngest: TrackRouteIngest): HttpResponse =
+            create(trackRouteIngest, RequestOptions.none())
 
         /**
          * Returns a raw HTTP response for `put /udl/trackroute/{id}`, but is otherwise the same as
@@ -469,5 +513,23 @@ interface TrackRouteService {
             params: TrackRouteUnvalidatedPublishParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponse
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(
+            trackRouteIngest: TrackRouteIngest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponse =
+            unvalidatedPublish(
+                TrackRouteUnvalidatedPublishParams.builder()
+                    .trackRouteIngest(trackRouteIngest)
+                    .build(),
+                requestOptions,
+            )
+
+        /** @see unvalidatedPublish */
+        @MustBeClosed
+        fun unvalidatedPublish(trackRouteIngest: TrackRouteIngest): HttpResponse =
+            unvalidatedPublish(trackRouteIngest, RequestOptions.none())
     }
 }

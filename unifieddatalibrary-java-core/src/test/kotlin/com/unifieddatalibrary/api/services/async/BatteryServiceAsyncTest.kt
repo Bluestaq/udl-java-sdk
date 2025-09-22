@@ -6,7 +6,6 @@ import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
 import com.unifieddatalibrary.api.models.BatteryIngest
 import com.unifieddatalibrary.api.models.batteries.BatteryCountParams
-import com.unifieddatalibrary.api.models.batteries.BatteryCreateParams
 import com.unifieddatalibrary.api.models.batteries.BatteryRetrieveParams
 import com.unifieddatalibrary.api.models.batteries.BatteryTupleParams
 import com.unifieddatalibrary.api.models.batteries.BatteryUpdateParams
@@ -29,19 +28,15 @@ internal class BatteryServiceAsyncTest {
 
         val future =
             batteryServiceAsync.create(
-                BatteryCreateParams.builder()
-                    .batteryIngest(
-                        BatteryIngest.builder()
-                            .dataMode(BatteryIngest.DataMode.TEST)
-                            .name("JAK-BATTERY-1479")
-                            .source("Bluestaq")
-                            .id("BATTERY-ID")
-                            .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                            .createdBy("some.user")
-                            .origin("THIRD_PARTY_DATASOURCE")
-                            .origNetwork("OPS1")
-                            .build()
-                    )
+                BatteryIngest.builder()
+                    .dataMode(BatteryIngest.DataMode.TEST)
+                    .name("JAK-BATTERY-1479")
+                    .source("Bluestaq")
+                    .id("BATTERY-ID")
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("OPS1")
                     .build()
             )
 

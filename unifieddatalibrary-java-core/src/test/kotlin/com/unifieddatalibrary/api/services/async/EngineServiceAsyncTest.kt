@@ -6,7 +6,6 @@ import com.unifieddatalibrary.api.TestServerExtension
 import com.unifieddatalibrary.api.client.okhttp.UnifieddatalibraryOkHttpClientAsync
 import com.unifieddatalibrary.api.models.EngineIngest
 import com.unifieddatalibrary.api.models.engines.EngineCountParams
-import com.unifieddatalibrary.api.models.engines.EngineCreateParams
 import com.unifieddatalibrary.api.models.engines.EngineRetrieveParams
 import com.unifieddatalibrary.api.models.engines.EngineTupleParams
 import com.unifieddatalibrary.api.models.engines.EngineUpdateParams
@@ -29,20 +28,16 @@ internal class EngineServiceAsyncTest {
 
         val future =
             engineServiceAsync.create(
-                EngineCreateParams.builder()
-                    .engineIngest(
-                        EngineIngest.builder()
-                            .classificationMarking("U")
-                            .dataMode(EngineIngest.DataMode.TEST)
-                            .name("ENGINE_VARIANT1")
-                            .source("Bluestaq")
-                            .id("ENGINE-ID")
-                            .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
-                            .createdBy("some.user")
-                            .origin("THIRD_PARTY_DATASOURCE")
-                            .origNetwork("OPS1")
-                            .build()
-                    )
+                EngineIngest.builder()
+                    .classificationMarking("U")
+                    .dataMode(EngineIngest.DataMode.TEST)
+                    .name("ENGINE_VARIANT1")
+                    .source("Bluestaq")
+                    .id("ENGINE-ID")
+                    .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                    .createdBy("some.user")
+                    .origin("THIRD_PARTY_DATASOURCE")
+                    .origNetwork("OPS1")
                     .build()
             )
 

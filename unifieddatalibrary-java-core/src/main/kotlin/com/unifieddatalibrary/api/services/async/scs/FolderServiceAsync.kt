@@ -69,6 +69,19 @@ interface FolderServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<Void?>
 
+    /** @see update */
+    @Deprecated("deprecated")
+    fun update(
+        fileData: FileData,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Void?> =
+        update(FolderUpdateParams.builder().fileData(fileData).build(), requestOptions)
+
+    /** @see update */
+    @Deprecated("deprecated")
+    fun update(fileData: FileData): CompletableFuture<Void?> =
+        update(fileData, RequestOptions.none())
+
     /**
      * A view of [FolderServiceAsync] that provides access to raw HTTP responses for each method.
      */
@@ -127,5 +140,18 @@ interface FolderServiceAsync {
             params: FolderUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponse>
+
+        /** @see update */
+        @Deprecated("deprecated")
+        fun update(
+            fileData: FileData,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponse> =
+            update(FolderUpdateParams.builder().fileData(fileData).build(), requestOptions)
+
+        /** @see update */
+        @Deprecated("deprecated")
+        fun update(fileData: FileData): CompletableFuture<HttpResponse> =
+            update(fileData, RequestOptions.none())
     }
 }
