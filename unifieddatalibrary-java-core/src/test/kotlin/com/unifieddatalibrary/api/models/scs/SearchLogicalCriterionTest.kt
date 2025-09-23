@@ -14,11 +14,26 @@ internal class SearchLogicalCriterionTest {
     fun create() {
         val searchLogicalCriterion =
             SearchLogicalCriterion.builder()
-                .criteria(listOf())
+                .addCriterion(
+                    SearchCriterion.ScsSearchFieldCriterion.builder()
+                        .field("field")
+                        .operator(SearchCriterion.ScsSearchFieldCriterion.Operator.EXACT_MATCH)
+                        .value("value")
+                        .build()
+                )
                 .operator(SearchLogicalCriterion.Operator.AND)
                 .build()
 
-        assertThat(searchLogicalCriterion.criteria().getOrNull()).containsExactly()
+        assertThat(searchLogicalCriterion.criteria().getOrNull())
+            .containsExactly(
+                SearchCriterion.ofScsSearchField(
+                    SearchCriterion.ScsSearchFieldCriterion.builder()
+                        .field("field")
+                        .operator(SearchCriterion.ScsSearchFieldCriterion.Operator.EXACT_MATCH)
+                        .value("value")
+                        .build()
+                )
+            )
         assertThat(searchLogicalCriterion.operator()).contains(SearchLogicalCriterion.Operator.AND)
     }
 
@@ -27,7 +42,13 @@ internal class SearchLogicalCriterionTest {
         val jsonMapper = jsonMapper()
         val searchLogicalCriterion =
             SearchLogicalCriterion.builder()
-                .criteria(listOf())
+                .addCriterion(
+                    SearchCriterion.ScsSearchFieldCriterion.builder()
+                        .field("field")
+                        .operator(SearchCriterion.ScsSearchFieldCriterion.Operator.EXACT_MATCH)
+                        .value("value")
+                        .build()
+                )
                 .operator(SearchLogicalCriterion.Operator.AND)
                 .build()
 

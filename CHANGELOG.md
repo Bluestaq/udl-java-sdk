@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1 (2025-09-22)
+
+Full Changelog: [v0.4.0...v0.4.1](https://github.com/Bluestaq/udl-java-sdk/compare/v0.4.0...v0.4.1)
+
+### Chores
+
+* **internal:** improve examples ([2b164df](https://github.com/Bluestaq/udl-java-sdk/commit/2b164df227d6bf0e93ccbf392b14e425ce4c5b54))
+
 ## 0.4.0 (2025-09-19)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.3.0...v0.4.0)
