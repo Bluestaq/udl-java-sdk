@@ -27,9 +27,7 @@ import kotlin.jvm.optionals.getOrNull
 /**
  * Service operation to take a single EphemerisSet and many associated Ephemeris records as a POST
  * body for ingest into the database. A specific role is required to perform this service operation.
- * Please contact the UDL team for assistance.
- *
- * The following rules apply to this operation:
+ * Please contact the UDL team for assistance. </br> The following rules apply to this operation:
  *
  * <h3>
  * * Ephemeris Set numPoints value must correspond exactly to the number of Ephemeris states

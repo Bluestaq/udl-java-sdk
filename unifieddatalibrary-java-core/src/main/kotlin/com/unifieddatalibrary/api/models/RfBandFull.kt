@@ -322,7 +322,7 @@ private constructor(
      * Effective Radiated Power (ERP) is the total power in decibel watts radiated by an actual
      * antenna relative to a half-wave dipole rather than a theoretical isotropic antenna. A
      * half-wave dipole has a gain of 2.15 dB compared to an isotropic antenna. EIRP(dB) = ERP
-     * (dB)+2.15 dB or EIRP (W) = 1.64\*ERP(W). Effective radiated power and effective isotropic
+     * (dB)+2.15 dB or EIRP (W) = 1.64*ERP(W). Effective radiated power and effective isotropic
      * radiated power both measure the amount of power a radio transmitter and antenna (or other
      * source of electromagnetic waves) radiates in a specific direction: in the direction of
      * maximum signal strength (the main lobe) of its radiation pattern.
@@ -1083,7 +1083,7 @@ private constructor(
          * Effective Radiated Power (ERP) is the total power in decibel watts radiated by an actual
          * antenna relative to a half-wave dipole rather than a theoretical isotropic antenna. A
          * half-wave dipole has a gain of 2.15 dB compared to an isotropic antenna. EIRP(dB) = ERP
-         * (dB)+2.15 dB or EIRP (W) = 1.64\*ERP(W). Effective radiated power and effective isotropic
+         * (dB)+2.15 dB or EIRP (W) = 1.64*ERP(W). Effective radiated power and effective isotropic
          * radiated power both measure the amount of power a radio transmitter and antenna (or other
          * source of electromagnetic waves) radiates in a specific direction: in the direction of
          * maximum signal strength (the main lobe) of its radiation pattern.
