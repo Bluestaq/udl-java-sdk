@@ -1197,8 +1197,8 @@ private constructor(
     fun systemNotes(): Optional<String> = systemNotes.getOptional("systemNotes")
 
     /**
-     * Total Ionospheric Electron Content \*10^16e/m^2. 1 TEC Unit (TECU) = 10^16 electrons/m^2.
-     * URSI ID: 72.
+     * Total Ionospheric Electron Content *10^16e/m^2. 1 TEC Unit (TECU) = 10^16 electrons/m^2. URSI
+     * ID: 72.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -3718,7 +3718,7 @@ private constructor(
         fun systemNotes(systemNotes: JsonField<String>) = apply { this.systemNotes = systemNotes }
 
         /**
-         * Total Ionospheric Electron Content \*10^16e/m^2. 1 TEC Unit (TECU) = 10^16 electrons/m^2.
+         * Total Ionospheric Electron Content *10^16e/m^2. 1 TEC Unit (TECU) = 10^16 electrons/m^2.
          * URSI ID: 72.
          */
         fun tec(tec: Double) = tec(JsonField.of(tec))

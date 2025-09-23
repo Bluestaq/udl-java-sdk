@@ -72,7 +72,7 @@ interface EphemerisService {
      * Safety Handbook" published by 18th Space Command. A specific role is required to perform this
      * service operation. Please contact the UDL team for assistance.
      *
-     * **Example:**
+     * </br> **Example:**
      * /filedrop/ephem?classification=U&dataMode=TEST&source=Bluestaq&satNo=25544&ephemFormatType=NASA&hasMnvr=false&type=ROUTINE&category=EXTERNAL&origin=NASA&tags=tag1,tag2
      */
     fun fileUpload(params: EphemerisFileUploadParams) = fileUpload(params, RequestOptions.none())
@@ -125,9 +125,8 @@ interface EphemerisService {
     /**
      * Service operation to take a single EphemerisSet and many associated Ephemeris records as a
      * POST body for ingest into the database. A specific role is required to perform this service
-     * operation. Please contact the UDL team for assistance.
-     *
-     * The following rules apply to this operation:
+     * operation. Please contact the UDL team for assistance. </br> The following rules apply to
+     * this operation:
      *
      * <h3>
      * * Ephemeris Set numPoints value must correspond exactly to the number of Ephemeris states

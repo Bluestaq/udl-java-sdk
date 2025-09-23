@@ -594,7 +594,7 @@ private constructor(
      * local geodetic frame, at exposure start epoch (expStartTime). The array element order
      * convention is scalar component first, followed by the three vector components. For a vector u
      * in the body-fixed frame, the corresponding vector u' in the geodetic frame should satisfy u'
-     * = quq\*, where q is this quaternion.
+     * = quq*, where q is this quaternion.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -606,7 +606,7 @@ private constructor(
      * this system into the local geodetic frame, exposure start epoch (expStartTime). The array
      * element order convention is scalar component first, followed by the three vector components.
      * For a vector u in the body-fixed frame, the corresponding vector u' in the geodetic frame
-     * should satisfy u' = quq\*, where q is this quaternion.
+     * should satisfy u' = quq*, where q is this quaternion.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -1832,7 +1832,7 @@ private constructor(
          * the local geodetic frame, at exposure start epoch (expStartTime). The array element order
          * convention is scalar component first, followed by the three vector components. For a
          * vector u in the body-fixed frame, the corresponding vector u' in the geodetic frame
-         * should satisfy u' = quq\*, where q is this quaternion.
+         * should satisfy u' = quq*, where q is this quaternion.
          */
         fun senQuat(senQuat: List<Double>) = senQuat(JsonField.of(senQuat))
 
@@ -1864,7 +1864,7 @@ private constructor(
          * this system into the local geodetic frame, exposure start epoch (expStartTime). The array
          * element order convention is scalar component first, followed by the three vector
          * components. For a vector u in the body-fixed frame, the corresponding vector u' in the
-         * geodetic frame should satisfy u' = quq\*, where q is this quaternion.
+         * geodetic frame should satisfy u' = quq*, where q is this quaternion.
          */
         fun senQuatDot(senQuatDot: List<Double>) = senQuatDot(JsonField.of(senQuatDot))
 

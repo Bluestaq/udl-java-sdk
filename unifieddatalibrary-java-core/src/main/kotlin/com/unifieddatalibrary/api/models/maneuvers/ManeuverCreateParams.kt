@@ -8355,7 +8355,7 @@ private constructor(
         /**
          * The orbit point furthest from the center of the earth in kilometers. If not provided,
          * apogee will be computed from the TLE according to the following. Using mu, the standard
-         * gravitational parameter for the earth (398600.4418), semi-major axis A = (mu/(n _ 2 _
+         * gravitational parameter for the earth (398600.4418), semi-major axis A = (mu/(n * 2 *
          * pi/(24*3600))^2)(1/3). Using semi-major axis A, eccentricity E, apogee = (A * (1 + E)) in
          * km. Note that the calculations are for computing the apogee radius from the center of the
          * earth, to compute apogee altitude the radius of the earth should be subtracted (6378.135
@@ -8579,7 +8579,7 @@ private constructor(
         /**
          * The orbit point nearest to the center of the earth in kilometers. If not provided,
          * perigee will be computed from the TLE according to the following. Using mu, the standard
-         * gravitational parameter for the earth (398600.4418), semi-major axis A = (mu/(n _ 2 _
+         * gravitational parameter for the earth (398600.4418), semi-major axis A = (mu/(n * 2 *
          * pi/(24*3600))^2)(1/3). Using semi-major axis A, eccentricity E, perigee = (A * (1 - E))
          * in km. Note that the calculations are for computing the perigee radius from the center of
          * the earth, to compute perigee altitude the radius of the earth should be subtracted
@@ -9261,7 +9261,7 @@ private constructor(
              * The orbit point furthest from the center of the earth in kilometers. If not provided,
              * apogee will be computed from the TLE according to the following. Using mu, the
              * standard gravitational parameter for the earth (398600.4418), semi-major axis A =
-             * (mu/(n _ 2 _ pi/(24*3600))^2)(1/3). Using semi-major axis A, eccentricity E, apogee =
+             * (mu/(n * 2 * pi/(24*3600))^2)(1/3). Using semi-major axis A, eccentricity E, apogee =
              * (A * (1 + E)) in km. Note that the calculations are for computing the apogee radius
              * from the center of the earth, to compute apogee altitude the radius of the earth
              * should be subtracted (6378.135 km).
@@ -9634,7 +9634,7 @@ private constructor(
              * The orbit point nearest to the center of the earth in kilometers. If not provided,
              * perigee will be computed from the TLE according to the following. Using mu, the
              * standard gravitational parameter for the earth (398600.4418), semi-major axis A =
-             * (mu/(n _ 2 _ pi/(24*3600))^2)(1/3). Using semi-major axis A, eccentricity E, perigee
+             * (mu/(n * 2 * pi/(24*3600))^2)(1/3). Using semi-major axis A, eccentricity E, perigee
              * = (A * (1 - E)) in km. Note that the calculations are for computing the perigee
              * radius from the center of the earth, to compute perigee altitude the radius of the
              * earth should be subtracted (6378.135 km).
@@ -16152,7 +16152,7 @@ private constructor(
         /**
          * The orbit point furthest from the center of the earth in kilometers. If not provided,
          * apogee will be computed from the TLE according to the following. Using mu, the standard
-         * gravitational parameter for the earth (398600.4418), semi-major axis A = (mu/(n _ 2 _
+         * gravitational parameter for the earth (398600.4418), semi-major axis A = (mu/(n * 2 *
          * pi/(24*3600))^2)(1/3). Using semi-major axis A, eccentricity E, apogee = (A * (1 + E)) in
          * km. Note that the calculations are for computing the apogee radius from the center of the
          * earth, to compute apogee altitude the radius of the earth should be subtracted (6378.135
@@ -16376,7 +16376,7 @@ private constructor(
         /**
          * The orbit point nearest to the center of the earth in kilometers. If not provided,
          * perigee will be computed from the TLE according to the following. Using mu, the standard
-         * gravitational parameter for the earth (398600.4418), semi-major axis A = (mu/(n _ 2 _
+         * gravitational parameter for the earth (398600.4418), semi-major axis A = (mu/(n * 2 *
          * pi/(24*3600))^2)(1/3). Using semi-major axis A, eccentricity E, perigee = (A * (1 - E))
          * in km. Note that the calculations are for computing the perigee radius from the center of
          * the earth, to compute perigee altitude the radius of the earth should be subtracted
@@ -17058,7 +17058,7 @@ private constructor(
              * The orbit point furthest from the center of the earth in kilometers. If not provided,
              * apogee will be computed from the TLE according to the following. Using mu, the
              * standard gravitational parameter for the earth (398600.4418), semi-major axis A =
-             * (mu/(n _ 2 _ pi/(24*3600))^2)(1/3). Using semi-major axis A, eccentricity E, apogee =
+             * (mu/(n * 2 * pi/(24*3600))^2)(1/3). Using semi-major axis A, eccentricity E, apogee =
              * (A * (1 + E)) in km. Note that the calculations are for computing the apogee radius
              * from the center of the earth, to compute apogee altitude the radius of the earth
              * should be subtracted (6378.135 km).
@@ -17431,7 +17431,7 @@ private constructor(
              * The orbit point nearest to the center of the earth in kilometers. If not provided,
              * perigee will be computed from the TLE according to the following. Using mu, the
              * standard gravitational parameter for the earth (398600.4418), semi-major axis A =
-             * (mu/(n _ 2 _ pi/(24*3600))^2)(1/3). Using semi-major axis A, eccentricity E, perigee
+             * (mu/(n * 2 * pi/(24*3600))^2)(1/3). Using semi-major axis A, eccentricity E, perigee
              * = (A * (1 - E)) in km. Note that the calculations are for computing the perigee
              * radius from the center of the earth, to compute perigee altitude the radius of the
              * earth should be subtracted (6378.135 km).

@@ -29,9 +29,7 @@ import kotlin.jvm.optionals.getOrNull
  * body and ingest into the database. This operation does not persist any Ephemeris Points that may
  * be present in the body of the request. This operation is not intended to be used for automated
  * feeds into UDL.A specific role is required to perform this service operation. Please contact the
- * UDL team for assistance.
- *
- * The following rules apply to this operation:
+ * UDL team for assistance. </br> The following rules apply to this operation:
  *
  * <h3>
  * * Ephemeris Set numPoints value must correspond exactly to the number of Ephemeris states
