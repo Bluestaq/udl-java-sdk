@@ -7074,6 +7074,7 @@ private constructor(
     private constructor(
         private val obStartTime: JsonField<OffsetDateTime>,
         private val currentSpectralFilterNum: JsonField<Long>,
+        private val declinationRates: JsonField<List<Double>>,
         private val declinations: JsonField<List<Double>>,
         private val expDuration: JsonField<Double>,
         private val extinctionCoeffs: JsonField<List<Double>>,
@@ -7100,6 +7101,9 @@ private constructor(
             @JsonProperty("currentSpectralFilterNum")
             @ExcludeMissing
             currentSpectralFilterNum: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("declinationRates")
+            @ExcludeMissing
+            declinationRates: JsonField<List<Double>> = JsonMissing.of(),
             @JsonProperty("declinations")
             @ExcludeMissing
             declinations: JsonField<List<Double>> = JsonMissing.of(),
@@ -7146,6 +7150,7 @@ private constructor(
         ) : this(
             obStartTime,
             currentSpectralFilterNum,
+            declinationRates,
             declinations,
             expDuration,
             extinctionCoeffs,
@@ -7182,6 +7187,17 @@ private constructor(
          */
         fun currentSpectralFilterNum(): Optional<Long> =
             currentSpectralFilterNum.getOptional("currentSpectralFilterNum")
+
+        /**
+         * Array of declination rate values, in degrees per second, measuring the rate speed at
+         * which an object's declination changes over time, for each element in the intensities
+         * field, at the middle of the frame's exposure time.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun declinationRates(): Optional<List<Double>> =
+            declinationRates.getOptional("declinationRates")
 
         /**
          * Array of declination values, in degrees, of the Target object from the frame of reference
@@ -7347,6 +7363,16 @@ private constructor(
         @JsonProperty("currentSpectralFilterNum")
         @ExcludeMissing
         fun _currentSpectralFilterNum(): JsonField<Long> = currentSpectralFilterNum
+
+        /**
+         * Returns the raw JSON value of [declinationRates].
+         *
+         * Unlike [declinationRates], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("declinationRates")
+        @ExcludeMissing
+        fun _declinationRates(): JsonField<List<Double>> = declinationRates
 
         /**
          * Returns the raw JSON value of [declinations].
@@ -7515,6 +7541,7 @@ private constructor(
 
             private var obStartTime: JsonField<OffsetDateTime>? = null
             private var currentSpectralFilterNum: JsonField<Long> = JsonMissing.of()
+            private var declinationRates: JsonField<MutableList<Double>>? = null
             private var declinations: JsonField<MutableList<Double>>? = null
             private var expDuration: JsonField<Double> = JsonMissing.of()
             private var extinctionCoeffs: JsonField<MutableList<Double>>? = null
@@ -7536,6 +7563,8 @@ private constructor(
             internal fun from(opticalSoiObservationList: OpticalSoiObservationList) = apply {
                 obStartTime = opticalSoiObservationList.obStartTime
                 currentSpectralFilterNum = opticalSoiObservationList.currentSpectralFilterNum
+                declinationRates =
+                    opticalSoiObservationList.declinationRates.map { it.toMutableList() }
                 declinations = opticalSoiObservationList.declinations.map { it.toMutableList() }
                 expDuration = opticalSoiObservationList.expDuration
                 extinctionCoeffs =
@@ -7588,6 +7617,37 @@ private constructor(
              */
             fun currentSpectralFilterNum(currentSpectralFilterNum: JsonField<Long>) = apply {
                 this.currentSpectralFilterNum = currentSpectralFilterNum
+            }
+
+            /**
+             * Array of declination rate values, in degrees per second, measuring the rate speed at
+             * which an object's declination changes over time, for each element in the intensities
+             * field, at the middle of the frame's exposure time.
+             */
+            fun declinationRates(declinationRates: List<Double>) =
+                declinationRates(JsonField.of(declinationRates))
+
+            /**
+             * Sets [Builder.declinationRates] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.declinationRates] with a well-typed `List<Double>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun declinationRates(declinationRates: JsonField<List<Double>>) = apply {
+                this.declinationRates = declinationRates.map { it.toMutableList() }
+            }
+
+            /**
+             * Adds a single [Double] to [declinationRates].
+             *
+             * @throws IllegalStateException if the field was previously set to a non-list.
+             */
+            fun addDeclinationRate(declinationRate: Double) = apply {
+                declinationRates =
+                    (declinationRates ?: JsonField.of(mutableListOf())).also {
+                        checkKnown("declinationRates", it).add(declinationRate)
+                    }
             }
 
             /**
@@ -8058,6 +8118,7 @@ private constructor(
                 OpticalSoiObservationList(
                     checkRequired("obStartTime", obStartTime),
                     currentSpectralFilterNum,
+                    (declinationRates ?: JsonMissing.of()).map { it.toImmutable() },
                     (declinations ?: JsonMissing.of()).map { it.toImmutable() },
                     expDuration,
                     (extinctionCoeffs ?: JsonMissing.of()).map { it.toImmutable() },
@@ -8086,6 +8147,7 @@ private constructor(
 
             obStartTime()
             currentSpectralFilterNum()
+            declinationRates()
             declinations()
             expDuration()
             extinctionCoeffs()
@@ -8122,6 +8184,7 @@ private constructor(
         internal fun validity(): Int =
             (if (obStartTime.asKnown().isPresent) 1 else 0) +
                 (if (currentSpectralFilterNum.asKnown().isPresent) 1 else 0) +
+                (declinationRates.asKnown().getOrNull()?.size ?: 0) +
                 (declinations.asKnown().getOrNull()?.size ?: 0) +
                 (if (expDuration.asKnown().isPresent) 1 else 0) +
                 (extinctionCoeffs.asKnown().getOrNull()?.size ?: 0) +
@@ -8146,6 +8209,7 @@ private constructor(
             return other is OpticalSoiObservationList &&
                 obStartTime == other.obStartTime &&
                 currentSpectralFilterNum == other.currentSpectralFilterNum &&
+                declinationRates == other.declinationRates &&
                 declinations == other.declinations &&
                 expDuration == other.expDuration &&
                 extinctionCoeffs == other.extinctionCoeffs &&
@@ -8168,6 +8232,7 @@ private constructor(
             Objects.hash(
                 obStartTime,
                 currentSpectralFilterNum,
+                declinationRates,
                 declinations,
                 expDuration,
                 extinctionCoeffs,
@@ -8190,7 +8255,7 @@ private constructor(
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "OpticalSoiObservationList{obStartTime=$obStartTime, currentSpectralFilterNum=$currentSpectralFilterNum, declinations=$declinations, expDuration=$expDuration, extinctionCoeffs=$extinctionCoeffs, extinctionCoeffsUnc=$extinctionCoeffsUnc, intensities=$intensities, intensityTimes=$intensityTimes, localSkyBgs=$localSkyBgs, localSkyBgsUnc=$localSkyBgsUnc, numCorrelatedStars=$numCorrelatedStars, numDetectedStars=$numDetectedStars, percentSats=$percentSats, raRates=$raRates, ras=$ras, skyBgs=$skyBgs, zeroPoints=$zeroPoints, additionalProperties=$additionalProperties}"
+            "OpticalSoiObservationList{obStartTime=$obStartTime, currentSpectralFilterNum=$currentSpectralFilterNum, declinationRates=$declinationRates, declinations=$declinations, expDuration=$expDuration, extinctionCoeffs=$extinctionCoeffs, extinctionCoeffsUnc=$extinctionCoeffsUnc, intensities=$intensities, intensityTimes=$intensityTimes, localSkyBgs=$localSkyBgs, localSkyBgsUnc=$localSkyBgsUnc, numCorrelatedStars=$numCorrelatedStars, numDetectedStars=$numDetectedStars, percentSats=$percentSats, raRates=$raRates, ras=$ras, skyBgs=$skyBgs, zeroPoints=$zeroPoints, additionalProperties=$additionalProperties}"
     }
 
     /**

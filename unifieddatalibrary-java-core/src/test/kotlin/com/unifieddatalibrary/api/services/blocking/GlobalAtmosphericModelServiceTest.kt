@@ -171,6 +171,7 @@ internal class GlobalAtmosphericModelServiceTest {
                 .checksumValue("938c2cc0dcc05f2b68c4287040cfcf71")
                 .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
                 .createdBy("some.user")
+                .dataSourceIdentifier("Dragster globally assimilated atmospheric density v2.0")
                 .endAlt(90.125)
                 .endLat(-88.75)
                 .endLon(-177.5)
