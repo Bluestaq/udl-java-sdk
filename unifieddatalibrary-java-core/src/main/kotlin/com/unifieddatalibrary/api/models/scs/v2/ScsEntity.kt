@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter
 import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
@@ -26,14 +27,13 @@ private constructor(
     private val classificationMarking: JsonField<String>,
     private val createdAt: JsonField<String>,
     private val createdBy: JsonField<String>,
-    private val data: JsonField<String>,
     private val deleteOn: JsonField<Long>,
     private val description: JsonField<String>,
     private val filename: JsonField<String>,
     private val filePath: JsonField<String>,
     private val keywords: JsonField<String>,
     private val parentPath: JsonField<String>,
-    private val pathType: JsonField<String>,
+    private val pathType: JsonField<PathType>,
     private val readAcl: JsonField<String>,
     private val size: JsonField<Int>,
     private val tags: JsonField<List<String>>,
@@ -54,7 +54,6 @@ private constructor(
         classificationMarking: JsonField<String> = JsonMissing.of(),
         @JsonProperty("createdAt") @ExcludeMissing createdAt: JsonField<String> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("data") @ExcludeMissing data: JsonField<String> = JsonMissing.of(),
         @JsonProperty("deleteOn") @ExcludeMissing deleteOn: JsonField<Long> = JsonMissing.of(),
         @JsonProperty("description")
         @ExcludeMissing
@@ -65,7 +64,7 @@ private constructor(
         @JsonProperty("parentPath")
         @ExcludeMissing
         parentPath: JsonField<String> = JsonMissing.of(),
-        @JsonProperty("pathType") @ExcludeMissing pathType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("pathType") @ExcludeMissing pathType: JsonField<PathType> = JsonMissing.of(),
         @JsonProperty("readAcl") @ExcludeMissing readAcl: JsonField<String> = JsonMissing.of(),
         @JsonProperty("size") @ExcludeMissing size: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
@@ -78,7 +77,6 @@ private constructor(
         classificationMarking,
         createdAt,
         createdBy,
-        data,
         deleteOn,
         description,
         filename,
@@ -96,12 +94,16 @@ private constructor(
     )
 
     /**
+     * Unique identifier for document.
+     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun id(): Optional<String> = id.getOptional("id")
 
     /**
+     * Additional metadata associated with this document.
+     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
@@ -117,24 +119,25 @@ private constructor(
         classificationMarking.getOptional("classificationMarking")
 
     /**
+     * The time at which this document was created, represented in UTC ISO format.
+     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun createdAt(): Optional<String> = createdAt.getOptional("createdAt")
 
     /**
+     * The creator of this document. Can be a person or a software entity.
+     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
-     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
-     *   if the server responded with an unexpected value).
-     */
-    fun data(): Optional<String> = data.getOptional("data")
-
-    /**
+     * Time at which this document should be automatically deleted. Represented in milliseconds
+     * since Unix epoch.
+     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
@@ -149,34 +152,46 @@ private constructor(
     fun description(): Optional<String> = description.getOptional("description")
 
     /**
+     * The name of this document. Applicable to files and folders.
+     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun filename(): Optional<String> = filename.getOptional("filename")
 
     /**
+     * The absolute path to this document.
+     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun filePath(): Optional<String> = filePath.getOptional("filePath")
 
     /**
+     * Optional. Any keywords associated with this document. Only applicable to files whose contents
+     * are indexed (e.g. text files, PDFs).
+     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun keywords(): Optional<String> = keywords.getOptional("keywords")
 
     /**
+     * The parent folder of this document. If this document is a root-level folder then the parent
+     * path is "/".
+     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun parentPath(): Optional<String> = parentPath.getOptional("parentPath")
 
     /**
+     * The type of this document.
+     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
-    fun pathType(): Optional<String> = pathType.getOptional("pathType")
+    fun pathType(): Optional<PathType> = pathType.getOptional("pathType")
 
     /**
      * For folders only. Comma separated list of user and group ids that should have read access on
@@ -188,6 +203,8 @@ private constructor(
     fun readAcl(): Optional<String> = readAcl.getOptional("readAcl")
 
     /**
+     * Size of this document in bytes.
+     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
@@ -203,12 +220,16 @@ private constructor(
     fun tags(): Optional<List<String>> = tags.getOptional("tags")
 
     /**
+     * The time at which this document was most recently updated, represented in UTC ISO format.
+     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun updatedAt(): Optional<String> = updatedAt.getOptional("updatedAt")
 
     /**
+     * The person or software entity who updated this document most recently.
+     *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
@@ -264,13 +285,6 @@ private constructor(
     @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
     /**
-     * Returns the raw JSON value of [data].
-     *
-     * Unlike [data], this method doesn't throw if the JSON field has an unexpected type.
-     */
-    @JsonProperty("data") @ExcludeMissing fun _data(): JsonField<String> = data
-
-    /**
      * Returns the raw JSON value of [deleteOn].
      *
      * Unlike [deleteOn], this method doesn't throw if the JSON field has an unexpected type.
@@ -317,7 +331,7 @@ private constructor(
      *
      * Unlike [pathType], this method doesn't throw if the JSON field has an unexpected type.
      */
-    @JsonProperty("pathType") @ExcludeMissing fun _pathType(): JsonField<String> = pathType
+    @JsonProperty("pathType") @ExcludeMissing fun _pathType(): JsonField<PathType> = pathType
 
     /**
      * Returns the raw JSON value of [readAcl].
@@ -387,14 +401,13 @@ private constructor(
         private var classificationMarking: JsonField<String> = JsonMissing.of()
         private var createdAt: JsonField<String> = JsonMissing.of()
         private var createdBy: JsonField<String> = JsonMissing.of()
-        private var data: JsonField<String> = JsonMissing.of()
         private var deleteOn: JsonField<Long> = JsonMissing.of()
         private var description: JsonField<String> = JsonMissing.of()
         private var filename: JsonField<String> = JsonMissing.of()
         private var filePath: JsonField<String> = JsonMissing.of()
         private var keywords: JsonField<String> = JsonMissing.of()
         private var parentPath: JsonField<String> = JsonMissing.of()
-        private var pathType: JsonField<String> = JsonMissing.of()
+        private var pathType: JsonField<PathType> = JsonMissing.of()
         private var readAcl: JsonField<String> = JsonMissing.of()
         private var size: JsonField<Int> = JsonMissing.of()
         private var tags: JsonField<MutableList<String>>? = null
@@ -410,7 +423,6 @@ private constructor(
             classificationMarking = scsEntity.classificationMarking
             createdAt = scsEntity.createdAt
             createdBy = scsEntity.createdBy
-            data = scsEntity.data
             deleteOn = scsEntity.deleteOn
             description = scsEntity.description
             filename = scsEntity.filename
@@ -427,6 +439,7 @@ private constructor(
             additionalProperties = scsEntity.additionalProperties.toMutableMap()
         }
 
+        /** Unique identifier for document. */
         fun id(id: String) = id(JsonField.of(id))
 
         /**
@@ -437,6 +450,7 @@ private constructor(
          */
         fun id(id: JsonField<String>) = apply { this.id = id }
 
+        /** Additional metadata associated with this document. */
         fun attachment(attachment: Attachment) = attachment(JsonField.of(attachment))
 
         /**
@@ -463,6 +477,7 @@ private constructor(
             this.classificationMarking = classificationMarking
         }
 
+        /** The time at which this document was created, represented in UTC ISO format. */
         fun createdAt(createdAt: String) = createdAt(JsonField.of(createdAt))
 
         /**
@@ -474,6 +489,7 @@ private constructor(
          */
         fun createdAt(createdAt: JsonField<String>) = apply { this.createdAt = createdAt }
 
+        /** The creator of this document. Can be a person or a software entity. */
         fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
 
         /**
@@ -485,16 +501,10 @@ private constructor(
          */
         fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
-        fun data(data: String) = data(JsonField.of(data))
-
         /**
-         * Sets [Builder.data] to an arbitrary JSON value.
-         *
-         * You should usually call [Builder.data] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * Time at which this document should be automatically deleted. Represented in milliseconds
+         * since Unix epoch.
          */
-        fun data(data: JsonField<String>) = apply { this.data = data }
-
         fun deleteOn(deleteOn: Long) = deleteOn(JsonField.of(deleteOn))
 
         /**
@@ -517,6 +527,7 @@ private constructor(
          */
         fun description(description: JsonField<String>) = apply { this.description = description }
 
+        /** The name of this document. Applicable to files and folders. */
         fun filename(filename: String) = filename(JsonField.of(filename))
 
         /**
@@ -527,6 +538,7 @@ private constructor(
          */
         fun filename(filename: JsonField<String>) = apply { this.filename = filename }
 
+        /** The absolute path to this document. */
         fun filePath(filePath: String) = filePath(JsonField.of(filePath))
 
         /**
@@ -537,6 +549,10 @@ private constructor(
          */
         fun filePath(filePath: JsonField<String>) = apply { this.filePath = filePath }
 
+        /**
+         * Optional. Any keywords associated with this document. Only applicable to files whose
+         * contents are indexed (e.g. text files, PDFs).
+         */
         fun keywords(keywords: String) = keywords(JsonField.of(keywords))
 
         /**
@@ -547,6 +563,10 @@ private constructor(
          */
         fun keywords(keywords: JsonField<String>) = apply { this.keywords = keywords }
 
+        /**
+         * The parent folder of this document. If this document is a root-level folder then the
+         * parent path is "/".
+         */
         fun parentPath(parentPath: String) = parentPath(JsonField.of(parentPath))
 
         /**
@@ -558,15 +578,17 @@ private constructor(
          */
         fun parentPath(parentPath: JsonField<String>) = apply { this.parentPath = parentPath }
 
-        fun pathType(pathType: String) = pathType(JsonField.of(pathType))
+        /** The type of this document. */
+        fun pathType(pathType: PathType) = pathType(JsonField.of(pathType))
 
         /**
          * Sets [Builder.pathType] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.pathType] with a well-typed [String] value instead. This
-         * method is primarily for setting the field to an undocumented or not yet supported value.
+         * You should usually call [Builder.pathType] with a well-typed [PathType] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
          */
-        fun pathType(pathType: JsonField<String>) = apply { this.pathType = pathType }
+        fun pathType(pathType: JsonField<PathType>) = apply { this.pathType = pathType }
 
         /**
          * For folders only. Comma separated list of user and group ids that should have read access
@@ -582,6 +604,7 @@ private constructor(
          */
         fun readAcl(readAcl: JsonField<String>) = apply { this.readAcl = readAcl }
 
+        /** Size of this document in bytes. */
         fun size(size: Int) = size(JsonField.of(size))
 
         /**
@@ -618,6 +641,9 @@ private constructor(
             tags = (tags ?: JsonField.of(mutableListOf())).also { checkKnown("tags", it).add(tag) }
         }
 
+        /**
+         * The time at which this document was most recently updated, represented in UTC ISO format.
+         */
         fun updatedAt(updatedAt: String) = updatedAt(JsonField.of(updatedAt))
 
         /**
@@ -629,6 +655,7 @@ private constructor(
          */
         fun updatedAt(updatedAt: JsonField<String>) = apply { this.updatedAt = updatedAt }
 
+        /** The person or software entity who updated this document most recently. */
         fun updatedBy(updatedBy: String) = updatedBy(JsonField.of(updatedBy))
 
         /**
@@ -685,7 +712,6 @@ private constructor(
                 classificationMarking,
                 createdAt,
                 createdBy,
-                data,
                 deleteOn,
                 description,
                 filename,
@@ -715,14 +741,13 @@ private constructor(
         classificationMarking()
         createdAt()
         createdBy()
-        data()
         deleteOn()
         description()
         filename()
         filePath()
         keywords()
         parentPath()
-        pathType()
+        pathType().ifPresent { it.validate() }
         readAcl()
         size()
         tags()
@@ -752,20 +777,147 @@ private constructor(
             (if (classificationMarking.asKnown().isPresent) 1 else 0) +
             (if (createdAt.asKnown().isPresent) 1 else 0) +
             (if (createdBy.asKnown().isPresent) 1 else 0) +
-            (if (data.asKnown().isPresent) 1 else 0) +
             (if (deleteOn.asKnown().isPresent) 1 else 0) +
             (if (description.asKnown().isPresent) 1 else 0) +
             (if (filename.asKnown().isPresent) 1 else 0) +
             (if (filePath.asKnown().isPresent) 1 else 0) +
             (if (keywords.asKnown().isPresent) 1 else 0) +
             (if (parentPath.asKnown().isPresent) 1 else 0) +
-            (if (pathType.asKnown().isPresent) 1 else 0) +
+            (pathType.asKnown().getOrNull()?.validity() ?: 0) +
             (if (readAcl.asKnown().isPresent) 1 else 0) +
             (if (size.asKnown().isPresent) 1 else 0) +
             (tags.asKnown().getOrNull()?.size ?: 0) +
             (if (updatedAt.asKnown().isPresent) 1 else 0) +
             (if (updatedBy.asKnown().isPresent) 1 else 0) +
             (if (writeAcl.asKnown().isPresent) 1 else 0)
+
+    /** The type of this document. */
+    class PathType @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+
+        /**
+         * Returns this class instance's raw value.
+         *
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
+         */
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+        companion object {
+
+            @JvmField val FILE = of("file")
+
+            @JvmField val FOLDER = of("folder")
+
+            @JvmStatic fun of(value: String) = PathType(JsonField.of(value))
+        }
+
+        /** An enum containing [PathType]'s known values. */
+        enum class Known {
+            FILE,
+            FOLDER,
+        }
+
+        /**
+         * An enum containing [PathType]'s known values, as well as an [_UNKNOWN] member.
+         *
+         * An instance of [PathType] can contain an unknown value in a couple of cases:
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
+         * - It was constructed with an arbitrary value using the [of] method.
+         */
+        enum class Value {
+            FILE,
+            FOLDER,
+            /** An enum member indicating that [PathType] was instantiated with an unknown value. */
+            _UNKNOWN,
+        }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
+         *
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
+         */
+        fun value(): Value =
+            when (this) {
+                FILE -> Value.FILE
+                FOLDER -> Value.FOLDER
+                else -> Value._UNKNOWN
+            }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value.
+         *
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
+         */
+        fun known(): Known =
+            when (this) {
+                FILE -> Known.FILE
+                FOLDER -> Known.FOLDER
+                else -> throw UnifieddatalibraryInvalidDataException("Unknown PathType: $value")
+            }
+
+        /**
+         * Returns this class instance's primitive wire representation.
+         *
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
+         */
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
+
+        private var validated: Boolean = false
+
+        fun validate(): PathType = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: UnifieddatalibraryInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return other is PathType && value == other.value
+        }
+
+        override fun hashCode() = value.hashCode()
+
+        override fun toString() = value.toString()
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) {
@@ -778,7 +930,6 @@ private constructor(
             classificationMarking == other.classificationMarking &&
             createdAt == other.createdAt &&
             createdBy == other.createdBy &&
-            data == other.data &&
             deleteOn == other.deleteOn &&
             description == other.description &&
             filename == other.filename &&
@@ -802,7 +953,6 @@ private constructor(
             classificationMarking,
             createdAt,
             createdBy,
-            data,
             deleteOn,
             description,
             filename,
@@ -823,5 +973,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "ScsEntity{id=$id, attachment=$attachment, classificationMarking=$classificationMarking, createdAt=$createdAt, createdBy=$createdBy, data=$data, deleteOn=$deleteOn, description=$description, filename=$filename, filePath=$filePath, keywords=$keywords, parentPath=$parentPath, pathType=$pathType, readAcl=$readAcl, size=$size, tags=$tags, updatedAt=$updatedAt, updatedBy=$updatedBy, writeAcl=$writeAcl, additionalProperties=$additionalProperties}"
+        "ScsEntity{id=$id, attachment=$attachment, classificationMarking=$classificationMarking, createdAt=$createdAt, createdBy=$createdBy, deleteOn=$deleteOn, description=$description, filename=$filename, filePath=$filePath, keywords=$keywords, parentPath=$parentPath, pathType=$pathType, readAcl=$readAcl, size=$size, tags=$tags, updatedAt=$updatedAt, updatedBy=$updatedBy, writeAcl=$writeAcl, additionalProperties=$additionalProperties}"
 }

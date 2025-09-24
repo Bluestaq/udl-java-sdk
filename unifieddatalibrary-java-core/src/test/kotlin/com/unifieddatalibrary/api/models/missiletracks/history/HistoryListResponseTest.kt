@@ -30,23 +30,41 @@ internal class HistoryListResponseTest {
                 .burnoutAlt(30567.452)
                 .callSign("Charlie")
                 .containment(90.64)
+                .contextKeys(listOf("MsnID_DescLabel", "msnVer", "serVer", "velTs", "accelTs"))
+                .contextValues(
+                    listOf(
+                        "MissionID Descriptive Label text",
+                        "1",
+                        "001.9b",
+                        "2024-06-07T14:17:39.234Z",
+                        "2024-06-07T14:17:39.123Z",
+                    )
+                )
                 .createdAt(OffsetDateTime.parse("2021-02-25T12:00:00.123Z"))
                 .createdBy("some.user")
                 .dropPtInd(true)
                 .emgInd(true)
                 .env(HistoryListResponse.Env.AIR)
+                .impactAlt(0.02)
                 .impactAouData(listOf(34.3, 26.5, 1.2))
                 .impactAouType("ELLIPSE")
+                .impactConf(99.9)
                 .impactLat(19.88550102)
                 .impactLon(46.74596844)
                 .impactTime(OffsetDateTime.parse("2021-02-25T12:00:00.123456Z"))
                 .infoSource("S1")
+                .launchAlt(0.01)
                 .launchAouData(listOf(1.23, 2.34, 3.45))
                 .launchAouType("ELLIPSE")
+                .launchAz(99.1)
+                .launchAzUnc(2.4)
+                .launchConf(90.7)
                 .launchLat(19.88550102)
                 .launchLon(46.74596844)
                 .launchTime(OffsetDateTime.parse("2021-02-25T12:00:00.123456Z"))
                 .lostTrkInd(false)
+                .maneuverEnd(OffsetDateTime.parse("2021-01-01T01:01:15.456789Z"))
+                .maneuverStart(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
                 .msgCreateDate(OffsetDateTime.parse("2024-04-25T08:17:01.346Z"))
                 .msgSubType("Update")
                 .msgType("MSG-TYPE")
@@ -76,6 +94,18 @@ internal class HistoryListResponseTest {
                         .epoch(OffsetDateTime.parse("2024-03-30T15:02:39.346768Z"))
                         .accel(listOf(0.59236, -0.03537, 0.35675))
                         .confidence(100)
+                        .contextKeys(
+                            listOf("MsnID_DescLabel", "msnVer", "serVer", "velTs", "accelTs")
+                        )
+                        .contextValues(
+                            listOf(
+                                "MissionID Descriptive Label text",
+                                "1",
+                                "001.9b",
+                                "2024-06-07T14:17:39.234Z",
+                                "2024-06-07T14:17:39.123Z",
+                            )
+                        )
                         .course(7.3580153)
                         .cov(listOf(1.1, 2.2, 3.3))
                         .covReferenceFrame(HistoryListResponse.Vector.CovReferenceFrame.ECEF)
@@ -84,7 +114,9 @@ internal class HistoryListResponseTest {
                         .object_("TARGET")
                         .origSensorId("ORIGSENSOR-ID")
                         .pos(listOf(-1456.91592, -2883.54041, 6165.55186))
+                        .propagated(false)
                         .quat(listOf(0.03, 0.02, 0.01, 0.012))
+                        .range(12.3)
                         .referenceFrame("ECEF")
                         .spd(15.03443)
                         .status("INITIAL")
@@ -93,6 +125,7 @@ internal class HistoryListResponseTest {
                         .vectorAlt(25.0)
                         .vectorLat(45.0)
                         .vectorLon(150.0)
+                        .vectorTrackId("102288")
                         .vel(listOf(-1.21981, -6.60208, -3.36515))
                         .build()
                 )
@@ -114,27 +147,47 @@ internal class HistoryListResponseTest {
         assertThat(historyListResponse.burnoutAlt()).contains(30567.452)
         assertThat(historyListResponse.callSign()).contains("Charlie")
         assertThat(historyListResponse.containment()).contains(90.64)
+        assertThat(historyListResponse.contextKeys().getOrNull())
+            .containsExactly("MsnID_DescLabel", "msnVer", "serVer", "velTs", "accelTs")
+        assertThat(historyListResponse.contextValues().getOrNull())
+            .containsExactly(
+                "MissionID Descriptive Label text",
+                "1",
+                "001.9b",
+                "2024-06-07T14:17:39.234Z",
+                "2024-06-07T14:17:39.123Z",
+            )
         assertThat(historyListResponse.createdAt())
             .contains(OffsetDateTime.parse("2021-02-25T12:00:00.123Z"))
         assertThat(historyListResponse.createdBy()).contains("some.user")
         assertThat(historyListResponse.dropPtInd()).contains(true)
         assertThat(historyListResponse.emgInd()).contains(true)
         assertThat(historyListResponse.env()).contains(HistoryListResponse.Env.AIR)
+        assertThat(historyListResponse.impactAlt()).contains(0.02)
         assertThat(historyListResponse.impactAouData().getOrNull()).containsExactly(34.3, 26.5, 1.2)
         assertThat(historyListResponse.impactAouType()).contains("ELLIPSE")
+        assertThat(historyListResponse.impactConf()).contains(99.9)
         assertThat(historyListResponse.impactLat()).contains(19.88550102)
         assertThat(historyListResponse.impactLon()).contains(46.74596844)
         assertThat(historyListResponse.impactTime())
             .contains(OffsetDateTime.parse("2021-02-25T12:00:00.123456Z"))
         assertThat(historyListResponse.infoSource()).contains("S1")
+        assertThat(historyListResponse.launchAlt()).contains(0.01)
         assertThat(historyListResponse.launchAouData().getOrNull())
             .containsExactly(1.23, 2.34, 3.45)
         assertThat(historyListResponse.launchAouType()).contains("ELLIPSE")
+        assertThat(historyListResponse.launchAz()).contains(99.1)
+        assertThat(historyListResponse.launchAzUnc()).contains(2.4)
+        assertThat(historyListResponse.launchConf()).contains(90.7)
         assertThat(historyListResponse.launchLat()).contains(19.88550102)
         assertThat(historyListResponse.launchLon()).contains(46.74596844)
         assertThat(historyListResponse.launchTime())
             .contains(OffsetDateTime.parse("2021-02-25T12:00:00.123456Z"))
         assertThat(historyListResponse.lostTrkInd()).contains(false)
+        assertThat(historyListResponse.maneuverEnd())
+            .contains(OffsetDateTime.parse("2021-01-01T01:01:15.456789Z"))
+        assertThat(historyListResponse.maneuverStart())
+            .contains(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
         assertThat(historyListResponse.msgCreateDate())
             .contains(OffsetDateTime.parse("2024-04-25T08:17:01.346Z"))
         assertThat(historyListResponse.msgSubType()).contains("Update")
@@ -166,6 +219,16 @@ internal class HistoryListResponseTest {
                     .epoch(OffsetDateTime.parse("2024-03-30T15:02:39.346768Z"))
                     .accel(listOf(0.59236, -0.03537, 0.35675))
                     .confidence(100)
+                    .contextKeys(listOf("MsnID_DescLabel", "msnVer", "serVer", "velTs", "accelTs"))
+                    .contextValues(
+                        listOf(
+                            "MissionID Descriptive Label text",
+                            "1",
+                            "001.9b",
+                            "2024-06-07T14:17:39.234Z",
+                            "2024-06-07T14:17:39.123Z",
+                        )
+                    )
                     .course(7.3580153)
                     .cov(listOf(1.1, 2.2, 3.3))
                     .covReferenceFrame(HistoryListResponse.Vector.CovReferenceFrame.ECEF)
@@ -174,7 +237,9 @@ internal class HistoryListResponseTest {
                     .object_("TARGET")
                     .origSensorId("ORIGSENSOR-ID")
                     .pos(listOf(-1456.91592, -2883.54041, 6165.55186))
+                    .propagated(false)
                     .quat(listOf(0.03, 0.02, 0.01, 0.012))
+                    .range(12.3)
                     .referenceFrame("ECEF")
                     .spd(15.03443)
                     .status("INITIAL")
@@ -183,6 +248,7 @@ internal class HistoryListResponseTest {
                     .vectorAlt(25.0)
                     .vectorLat(45.0)
                     .vectorLon(150.0)
+                    .vectorTrackId("102288")
                     .vel(listOf(-1.21981, -6.60208, -3.36515))
                     .build()
             )
@@ -208,23 +274,41 @@ internal class HistoryListResponseTest {
                 .burnoutAlt(30567.452)
                 .callSign("Charlie")
                 .containment(90.64)
+                .contextKeys(listOf("MsnID_DescLabel", "msnVer", "serVer", "velTs", "accelTs"))
+                .contextValues(
+                    listOf(
+                        "MissionID Descriptive Label text",
+                        "1",
+                        "001.9b",
+                        "2024-06-07T14:17:39.234Z",
+                        "2024-06-07T14:17:39.123Z",
+                    )
+                )
                 .createdAt(OffsetDateTime.parse("2021-02-25T12:00:00.123Z"))
                 .createdBy("some.user")
                 .dropPtInd(true)
                 .emgInd(true)
                 .env(HistoryListResponse.Env.AIR)
+                .impactAlt(0.02)
                 .impactAouData(listOf(34.3, 26.5, 1.2))
                 .impactAouType("ELLIPSE")
+                .impactConf(99.9)
                 .impactLat(19.88550102)
                 .impactLon(46.74596844)
                 .impactTime(OffsetDateTime.parse("2021-02-25T12:00:00.123456Z"))
                 .infoSource("S1")
+                .launchAlt(0.01)
                 .launchAouData(listOf(1.23, 2.34, 3.45))
                 .launchAouType("ELLIPSE")
+                .launchAz(99.1)
+                .launchAzUnc(2.4)
+                .launchConf(90.7)
                 .launchLat(19.88550102)
                 .launchLon(46.74596844)
                 .launchTime(OffsetDateTime.parse("2021-02-25T12:00:00.123456Z"))
                 .lostTrkInd(false)
+                .maneuverEnd(OffsetDateTime.parse("2021-01-01T01:01:15.456789Z"))
+                .maneuverStart(OffsetDateTime.parse("2021-01-01T01:01:01.123456Z"))
                 .msgCreateDate(OffsetDateTime.parse("2024-04-25T08:17:01.346Z"))
                 .msgSubType("Update")
                 .msgType("MSG-TYPE")
@@ -254,6 +338,18 @@ internal class HistoryListResponseTest {
                         .epoch(OffsetDateTime.parse("2024-03-30T15:02:39.346768Z"))
                         .accel(listOf(0.59236, -0.03537, 0.35675))
                         .confidence(100)
+                        .contextKeys(
+                            listOf("MsnID_DescLabel", "msnVer", "serVer", "velTs", "accelTs")
+                        )
+                        .contextValues(
+                            listOf(
+                                "MissionID Descriptive Label text",
+                                "1",
+                                "001.9b",
+                                "2024-06-07T14:17:39.234Z",
+                                "2024-06-07T14:17:39.123Z",
+                            )
+                        )
                         .course(7.3580153)
                         .cov(listOf(1.1, 2.2, 3.3))
                         .covReferenceFrame(HistoryListResponse.Vector.CovReferenceFrame.ECEF)
@@ -262,7 +358,9 @@ internal class HistoryListResponseTest {
                         .object_("TARGET")
                         .origSensorId("ORIGSENSOR-ID")
                         .pos(listOf(-1456.91592, -2883.54041, 6165.55186))
+                        .propagated(false)
                         .quat(listOf(0.03, 0.02, 0.01, 0.012))
+                        .range(12.3)
                         .referenceFrame("ECEF")
                         .spd(15.03443)
                         .status("INITIAL")
@@ -271,6 +369,7 @@ internal class HistoryListResponseTest {
                         .vectorAlt(25.0)
                         .vectorLat(45.0)
                         .vectorLon(150.0)
+                        .vectorTrackId("102288")
                         .vel(listOf(-1.21981, -6.60208, -3.36515))
                         .build()
                 )
