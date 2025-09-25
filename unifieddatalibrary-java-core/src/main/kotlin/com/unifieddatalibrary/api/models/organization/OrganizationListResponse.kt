@@ -25,6 +25,7 @@ import kotlin.jvm.optionals.getOrNull
  * previously existed as another organization.
  */
 class OrganizationListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

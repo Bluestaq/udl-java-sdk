@@ -1290,6 +1290,7 @@ private constructor(
      * instructions that have been issued by an airspace control authority.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -3126,6 +3127,7 @@ private constructor(
      * Mandatory nested segment to report multiple airspace control means statuses within an ACOID.
      */
     class AirspaceControlMeansStatus
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val airspaceControlMeans: JsonField<List<AirspaceControlMean>>,
         private val cmStat: JsonField<String>,
@@ -3379,6 +3381,7 @@ private constructor(
          * particular airspace control means status.
          */
         class AirspaceControlMean
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val airspaceControlPoint: JsonField<List<AirspaceControlPoint>>,
             private val airspaceTimePeriod: JsonField<List<AirspaceTimePeriod>>,
@@ -4838,6 +4841,7 @@ private constructor(
              * airspace control means.
              */
             class AirspaceControlPoint
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val ctrlPtAltitude: JsonField<String>,
                 private val ctrlPtLocation: JsonField<String>,
@@ -5144,6 +5148,7 @@ private constructor(
              * means.
              */
             class AirspaceTimePeriod
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val intDur: JsonField<List<String>>,
                 private val intFreq: JsonField<List<String>>,
@@ -5796,6 +5801,7 @@ private constructor(
      * airspace control order.
      */
     class AirspaceControlOrderReference
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val refOriginator: JsonField<String>,
         private val refSerialNum: JsonField<String>,

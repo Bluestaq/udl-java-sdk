@@ -29,6 +29,7 @@ import kotlin.jvm.optionals.getOrNull
  * object data, if known.
  */
 class MissileTrackListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -3676,6 +3677,7 @@ private constructor(
 
     /** Schema for Missile Track Vector data. */
     class Vector
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val epoch: JsonField<OffsetDateTime>,
         private val accel: JsonField<List<Double>>,

@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * sources of a past event, or of an ongoing activity that evolves over a period of time.
  */
 class EventEvolutionListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

@@ -28,6 +28,7 @@ import kotlin.jvm.optionals.getOrNull
  * 'Discover' tab in the storefront to confirm the coordinate frames used by the data provider.
  */
 class EoObservationAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

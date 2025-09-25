@@ -2353,6 +2353,7 @@ private constructor(
          * identification data, the classical elements and drag parameters.
          */
         class AprioriElset
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val classificationMarking: JsonField<String>,
             private val dataMode: JsonField<DataMode>,
@@ -4813,6 +4814,7 @@ private constructor(
          * coordinate frames by data provider.
          */
         class AprioriStateVector
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val classificationMarking: JsonField<String>,
             private val dataMode: JsonField<DataMode>,

@@ -1627,6 +1627,7 @@ private constructor(
      * aircraft.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -3894,6 +3895,7 @@ private constructor(
 
     /** Collection of receiver aircraft associated with this Air Event. */
     class Receiver
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val altReceiverMissionId: JsonField<String>,
         private val amcReceiverMissionId: JsonField<String>,
@@ -5004,6 +5006,7 @@ private constructor(
 
     /** Collection of remarks associated with this Air Event. */
     class Remark
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val date: JsonField<OffsetDateTime>,
         private val externalRemarkId: JsonField<String>,
@@ -5270,6 +5273,7 @@ private constructor(
 
     /** Collection of tanker aircraft associated with this Air Event. */
     class Tanker
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val altTankerMissionId: JsonField<String>,
         private val amcTankerMissionId: JsonField<String>,

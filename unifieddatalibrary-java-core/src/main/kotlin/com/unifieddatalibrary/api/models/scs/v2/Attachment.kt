@@ -16,6 +16,7 @@ import java.util.Objects
 import java.util.Optional
 
 class Attachment
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val author: JsonField<String>,
     private val contentLength: JsonField<Int>,

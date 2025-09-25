@@ -26,6 +26,7 @@ import kotlin.jvm.optionals.getOrNull
  * coordinate frames by data provider.
  */
 class RadarobservationListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

@@ -242,6 +242,7 @@ private constructor(
 
     @Deprecated("deprecated")
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val fileDataList: JsonField<List<FileData>>,
         private val additionalProperties: MutableMap<String, JsonValue>,

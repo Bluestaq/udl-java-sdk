@@ -17,6 +17,7 @@ import java.util.Optional
 
 /** The specialties required to implement this support item. */
 class LogisticsSpecialtiesFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val firstName: JsonField<String>,
     private val last4Ssn: JsonField<String>,

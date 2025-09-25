@@ -18,6 +18,7 @@ import java.util.Optional
 
 /** The supply stocks for this support item. */
 class LogisticsStocksFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val quantity: JsonField<Int>,
     private val sourceIcao: JsonField<String>,

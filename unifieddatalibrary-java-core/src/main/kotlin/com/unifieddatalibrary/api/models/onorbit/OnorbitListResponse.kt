@@ -22,6 +22,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Model object representing on-orbit objects or satellites in the system. */
 class OnorbitListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

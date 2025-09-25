@@ -24,6 +24,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Model representation of known launch sites. */
 class LaunchSiteGetResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val code: JsonField<String>,
@@ -931,6 +932,7 @@ private constructor(
      * launch site may have several details records.
      */
     class LaunchSiteDetail
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

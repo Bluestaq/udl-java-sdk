@@ -22,6 +22,7 @@ import java.util.Optional
  * stage laser emitter entities.
  */
 class StagingListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val laserName: JsonField<String>,

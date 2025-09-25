@@ -36,6 +36,7 @@ import kotlin.jvm.optionals.getOrNull
  * table.
  */
 class TaiutcFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val adjustmentDate: JsonField<OffsetDateTime>,
     private val classificationMarking: JsonField<String>,

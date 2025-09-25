@@ -17,6 +17,7 @@ import java.util.Optional
 
 /** Point of contacts for scheduling or modifying the route. */
 class PointOfContactIngest
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val office: JsonField<String>,
     private val phone: JsonField<String>,

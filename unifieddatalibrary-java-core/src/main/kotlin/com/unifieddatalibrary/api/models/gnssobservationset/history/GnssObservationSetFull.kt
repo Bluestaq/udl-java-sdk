@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Set of GNSSObservation data. */
 class GnssObservationSetFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -1954,6 +1955,7 @@ private constructor(
      * and conventions for GNSS observations.
      */
     class GnssObservationList
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val agcState: JsonField<Int>,
         private val gnssSatId: JsonField<String>,

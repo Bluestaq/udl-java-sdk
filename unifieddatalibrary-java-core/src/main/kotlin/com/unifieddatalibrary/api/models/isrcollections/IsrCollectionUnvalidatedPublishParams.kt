@@ -1847,6 +1847,7 @@ private constructor(
         }
 
         class CollectionRequirement
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val id: JsonField<String>,
             private val country: JsonField<String>,
@@ -2843,6 +2844,7 @@ private constructor(
                     (if (type.asKnown().isPresent) 1 else 0)
 
             class CriticalTimes
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val earliestImagingTime: JsonField<OffsetDateTime>,
                 private val latestImagingTime: JsonField<OffsetDateTime>,
@@ -3066,6 +3068,7 @@ private constructor(
             }
 
             class ExploitationRequirement
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val id: JsonField<String>,
                 private val amplification: JsonField<String>,
@@ -3401,6 +3404,7 @@ private constructor(
                         (if (reportingCriteria.asKnown().isPresent) 1 else 0)
 
                 class Poc
+                @JsonCreator(mode = JsonCreator.Mode.DISABLED)
                 private constructor(
                     private val id: JsonField<String>,
                     private val callsign: JsonField<String>,
@@ -4038,6 +4042,7 @@ private constructor(
         }
 
         class Tasking
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val id: JsonField<String>,
             private val collectionPeriods: JsonField<CollectionPeriods>,
@@ -5336,6 +5341,7 @@ private constructor(
                     (type.asKnown().getOrNull()?.validity() ?: 0)
 
             class CollectionPeriods
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val actual: JsonField<List<Actual>>,
                 private val planned: JsonField<Planned>,
@@ -5525,6 +5531,7 @@ private constructor(
                         (planned.asKnown().getOrNull()?.validity() ?: 0)
 
                 class Actual
+                @JsonCreator(mode = JsonCreator.Mode.DISABLED)
                 private constructor(
                     private val id: JsonField<String>,
                     private val start: JsonField<OffsetDateTime>,
@@ -5755,6 +5762,7 @@ private constructor(
                 }
 
                 class Planned
+                @JsonCreator(mode = JsonCreator.Mode.DISABLED)
                 private constructor(
                     private val additional: JsonField<List<Additional>>,
                     private val start: JsonField<OffsetDateTime>,
@@ -5987,6 +5995,7 @@ private constructor(
                             (if (stop.asKnown().isPresent) 1 else 0)
 
                     class Additional
+                    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
                     private constructor(
                         private val id: JsonField<String>,
                         private val start: JsonField<OffsetDateTime>,
@@ -6432,6 +6441,7 @@ private constructor(
             }
 
             class TaskingCollectionRequirement
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val id: JsonField<String>,
                 private val country: JsonField<String>,
@@ -7460,6 +7470,7 @@ private constructor(
                         (if (type.asKnown().isPresent) 1 else 0)
 
                 class CriticalTimes
+                @JsonCreator(mode = JsonCreator.Mode.DISABLED)
                 private constructor(
                     private val earliestImagingTime: JsonField<OffsetDateTime>,
                     private val latestImagingTime: JsonField<OffsetDateTime>,
@@ -7686,6 +7697,7 @@ private constructor(
                 }
 
                 class ExploitationRequirement
+                @JsonCreator(mode = JsonCreator.Mode.DISABLED)
                 private constructor(
                     private val id: JsonField<String>,
                     private val amplification: JsonField<String>,
@@ -8032,6 +8044,7 @@ private constructor(
                             (if (reportingCriteria.asKnown().isPresent) 1 else 0)
 
                     class Poc
+                    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
                     private constructor(
                         private val id: JsonField<String>,
                         private val callsign: JsonField<String>,
@@ -8905,6 +8918,7 @@ private constructor(
         }
 
         class Transit
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val id: JsonField<String>,
             private val base: JsonField<String>,

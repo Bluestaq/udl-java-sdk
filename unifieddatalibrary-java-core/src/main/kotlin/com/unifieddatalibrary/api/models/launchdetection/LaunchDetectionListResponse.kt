@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Data to analyze launch detections. */
 class LaunchDetectionListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

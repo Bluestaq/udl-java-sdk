@@ -956,6 +956,7 @@ private constructor(
      * required runway length, etc.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val aircraftMds: JsonField<String>,
         private val classificationMarking: JsonField<String>,

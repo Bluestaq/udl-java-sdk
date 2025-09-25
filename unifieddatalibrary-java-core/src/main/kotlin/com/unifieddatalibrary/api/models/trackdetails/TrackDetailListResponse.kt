@@ -28,6 +28,7 @@ import kotlin.jvm.optionals.getOrNull
  * regarding the identity/type of the target object and other amplifying object data, if known.
  */
 class TrackDetailListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

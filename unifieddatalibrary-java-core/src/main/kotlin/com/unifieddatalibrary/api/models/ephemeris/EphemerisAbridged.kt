@@ -31,6 +31,7 @@ import kotlin.jvm.optionals.getOrNull
  * (esId).
  */
 class EphemerisAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

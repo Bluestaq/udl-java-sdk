@@ -2925,6 +2925,7 @@ private constructor(
      * sensor plan if desired.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -7063,6 +7064,7 @@ private constructor(
      * the classical elements and drag parameters.
      */
     class Elset
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -9460,6 +9462,7 @@ private constructor(
      * see the 'Discover' tab in the storefront to confirm coordinate frames by data provider.
      */
     class StateVector
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

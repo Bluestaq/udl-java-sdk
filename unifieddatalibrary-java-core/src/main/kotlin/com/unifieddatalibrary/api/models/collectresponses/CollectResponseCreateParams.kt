@@ -1154,6 +1154,7 @@ private constructor(
      * collectors or to relay status changes prior to completion and delivery.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

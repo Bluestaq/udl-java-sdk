@@ -26,6 +26,7 @@ import kotlin.jvm.optionals.getOrNull
  * body field to store notification information.
  */
 class NotificationFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

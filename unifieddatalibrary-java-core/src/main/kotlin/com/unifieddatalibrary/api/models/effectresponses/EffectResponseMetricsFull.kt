@@ -16,6 +16,7 @@ import java.util.Objects
 import java.util.Optional
 
 class EffectResponseMetricsFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val domainValue: JsonField<Double>,
     private val metricType: JsonField<String>,

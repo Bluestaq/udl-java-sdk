@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * Special Perturbations orbital updates.
  */
 class HistoryListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -2282,6 +2283,7 @@ private constructor(
      * the classical elements and drag parameters.
      */
     class AprioriElset
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -4781,6 +4783,7 @@ private constructor(
      * see the 'Discover' tab in the storefront to confirm coordinate frames by data provider.
      */
     class AprioriStateVector
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

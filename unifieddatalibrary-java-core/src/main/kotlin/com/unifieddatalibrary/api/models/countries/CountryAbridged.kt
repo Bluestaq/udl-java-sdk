@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
  * A Country may represent countries, multi-national consortiums, and international organizations.
  */
 class CountryAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val code: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

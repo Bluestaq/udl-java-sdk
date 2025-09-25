@@ -21,6 +21,7 @@ import java.util.Optional
  * associated with this SiteOperations record.
  */
 class MaximumOnGroundFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val aircraftMds: JsonField<String>,
     private val contingencyMog: JsonField<Int>,

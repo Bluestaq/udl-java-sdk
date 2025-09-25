@@ -1362,6 +1362,7 @@ private constructor(
 
         /** Collection of measurements associated with this ECP EDR record. */
         class EcpedrMeasurement
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val obType: JsonField<String>,
             private val obUoM: JsonField<String>,

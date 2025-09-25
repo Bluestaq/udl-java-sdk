@@ -4423,6 +4423,7 @@ private constructor(
          * identification data, the classical elements and drag parameters.
          */
         class PostEventElset
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val classificationMarking: JsonField<String>,
             private val dataMode: JsonField<DataMode>,
@@ -6883,6 +6884,7 @@ private constructor(
          * coordinate frames by data provider.
          */
         class PostEventStateVector
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val classificationMarking: JsonField<String>,
             private val dataMode: JsonField<DataMode>,
@@ -12462,6 +12464,7 @@ private constructor(
          * identification data, the classical elements and drag parameters.
          */
         class PreEventElset
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val classificationMarking: JsonField<String>,
             private val dataMode: JsonField<DataMode>,
@@ -14922,6 +14925,7 @@ private constructor(
          * coordinate frames by data provider.
          */
         class PreEventStateVector
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val classificationMarking: JsonField<String>,
             private val dataMode: JsonField<DataMode>,

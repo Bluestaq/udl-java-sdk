@@ -3180,6 +3180,7 @@ private constructor(
          * coordinate frames by data provider.
          */
         class StateVector1
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val classificationMarking: JsonField<String>,
             private val dataMode: JsonField<DataMode>,
@@ -8761,6 +8762,7 @@ private constructor(
          * coordinate frames by data provider.
          */
         class StateVector2
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val classificationMarking: JsonField<String>,
             private val dataMode: JsonField<DataMode>,

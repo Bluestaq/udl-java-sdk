@@ -25,6 +25,7 @@ import kotlin.jvm.optionals.getOrNull
  * different sources.
  */
 class AntennaIngest
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val dataMode: JsonField<DataMode>,
     private val name: JsonField<String>,

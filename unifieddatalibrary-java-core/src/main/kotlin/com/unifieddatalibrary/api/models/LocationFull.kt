@@ -24,6 +24,7 @@ import kotlin.jvm.optionals.getOrNull
  * denote the locations of fixed sensors, operating units, etc.
  */
 class LocationFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

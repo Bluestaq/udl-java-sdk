@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Support items associated with this LogisticsSupport record. */
 class LogisticsSupportItemsFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val cannibalized: JsonField<Boolean>,
     private val deployPlanNumber: JsonField<String>,

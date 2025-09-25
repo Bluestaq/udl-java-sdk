@@ -17,6 +17,7 @@ import java.util.Optional
 
 /** Minimum and maximum altitude bounds for the track. */
 class AltitudeBlocksIngest
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val altitudeSequenceId: JsonField<String>,
     private val lowerAltitude: JsonField<Double>,

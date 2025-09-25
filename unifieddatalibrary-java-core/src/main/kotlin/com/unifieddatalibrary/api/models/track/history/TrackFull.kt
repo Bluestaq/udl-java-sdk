@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * target object, if known.
  */
 class TrackFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

@@ -20,6 +20,7 @@ import java.util.Optional
  * Collection detailing operational pathways at the Site associated with this SiteOperations record.
  */
 class PathwayFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val pwDefinition: JsonField<String>,
     private val pwLastChangedBy: JsonField<String>,

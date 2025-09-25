@@ -1278,6 +1278,7 @@ private constructor(
 
         /** Collection of diplomatic clearance details. */
         class DiplomaticClearanceDetail
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val action: JsonField<String>,
             private val altCountryCode: JsonField<String>,
@@ -2484,6 +2485,7 @@ private constructor(
 
         /** Collection of diplomatic clearance remarks. */
         class DiplomaticClearanceRemark
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val date: JsonField<OffsetDateTime>,
             private val gdssRemarkId: JsonField<String>,

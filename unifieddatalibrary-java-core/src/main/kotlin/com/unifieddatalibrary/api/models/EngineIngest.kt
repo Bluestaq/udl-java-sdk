@@ -24,6 +24,7 @@ import kotlin.jvm.optionals.getOrNull
  * has 1 to many engines per stage.
  */
 class EngineIngest
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

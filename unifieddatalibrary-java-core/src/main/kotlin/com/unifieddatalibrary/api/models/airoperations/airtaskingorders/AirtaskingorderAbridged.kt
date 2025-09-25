@@ -26,6 +26,7 @@ import kotlin.jvm.optionals.getOrNull
  * as well as intraservice tasking.
  */
 class AirtaskingorderAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val beginTs: JsonField<OffsetDateTime>,
     private val classificationMarking: JsonField<String>,
@@ -1182,6 +1183,7 @@ private constructor(
      * for this ATO.
      */
     class AcMsnTasking
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val countryCode: JsonField<String>,
         private val taskedService: JsonField<String>,
@@ -2393,6 +2395,7 @@ private constructor(
          * Collection of aircraft mission location information for this aircraft mission tasking.
          */
         class AcMsnLocSeg
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val startTime: JsonField<OffsetDateTime>,
             private val airMsnPri: JsonField<String>,
@@ -2975,6 +2978,7 @@ private constructor(
 
         /** Collection that specifies the naval flight operations for this ATO. */
         class IndAcTasking
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val acftType: JsonField<String>,
             private val callSign: JsonField<String>,
@@ -3690,6 +3694,7 @@ private constructor(
      * information regarding this ATO.
      */
     class GenText
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val text: JsonField<String>,
         private val textInd: JsonField<String>,
@@ -3870,6 +3875,7 @@ private constructor(
 
     /** Collection that specifies the naval flight operations for this ATO. */
     class NavalFltOp
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val shipName: JsonField<String>,
         private val fltOpStart: JsonField<OffsetDateTime>,

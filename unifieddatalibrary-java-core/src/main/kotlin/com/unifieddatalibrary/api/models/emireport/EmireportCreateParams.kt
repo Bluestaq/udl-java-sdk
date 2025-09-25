@@ -2588,6 +2588,7 @@ private constructor(
      * space-based and terrestrial systems.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

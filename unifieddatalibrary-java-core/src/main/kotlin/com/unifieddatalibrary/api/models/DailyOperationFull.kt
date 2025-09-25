@@ -22,6 +22,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Collection providing hours of operation and other information specific to a day of the week. */
 class DailyOperationFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val dayOfWeek: JsonField<DayOfWeek>,
     private val operatingHours: JsonField<List<OperatingHoursFull>>,

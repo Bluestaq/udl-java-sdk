@@ -18,6 +18,7 @@ import java.util.Optional
 
 /** Remarks associated with this LogisticsSupport record. */
 class LogisticsSegmentsFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val arrivalIcao: JsonField<String>,
     private val departureIcao: JsonField<String>,

@@ -20,6 +20,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 class EffectResponseActionsListFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val actionActorSrcId: JsonField<String>,
     private val actionActorSrcType: JsonField<String>,

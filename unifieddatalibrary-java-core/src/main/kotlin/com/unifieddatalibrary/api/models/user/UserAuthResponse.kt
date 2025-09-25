@@ -19,6 +19,7 @@ import java.util.Objects
 import kotlin.jvm.optionals.getOrNull
 
 class UserAuthResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val auth: JsonField<Boolean>,
     private val roles: JsonField<List<String>>,

@@ -2113,6 +2113,7 @@ private constructor(
      * at various bandpasses of a star.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val astrometryOrigin: JsonField<AstrometryOrigin>,
         private val classificationMarking: JsonField<String>,

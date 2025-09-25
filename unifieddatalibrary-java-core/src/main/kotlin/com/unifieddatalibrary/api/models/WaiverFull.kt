@@ -21,6 +21,7 @@ import java.util.Optional
  * this record.
  */
 class WaiverFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val expirationDate: JsonField<OffsetDateTime>,
     private val hasExpired: JsonField<Boolean>,

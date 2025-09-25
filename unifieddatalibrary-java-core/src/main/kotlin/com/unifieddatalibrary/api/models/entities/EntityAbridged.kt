@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * location (if terrestrial), and statuses.
  */
 class EntityAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -1207,6 +1208,7 @@ private constructor(
 
     /** Model object representing on-orbit objects or satellites in the system. */
     class OnOrbit
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

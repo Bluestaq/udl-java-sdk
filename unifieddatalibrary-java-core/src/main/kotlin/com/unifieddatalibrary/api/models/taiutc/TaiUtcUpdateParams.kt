@@ -642,6 +642,7 @@ private constructor(
      * list of leap seconds can be found in this table.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val adjustmentDate: JsonField<OffsetDateTime>,
         private val classificationMarking: JsonField<String>,

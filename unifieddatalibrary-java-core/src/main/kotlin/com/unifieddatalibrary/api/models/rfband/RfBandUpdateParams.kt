@@ -1230,6 +1230,7 @@ private constructor(
      * use by any type of Entity for communications or operations.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

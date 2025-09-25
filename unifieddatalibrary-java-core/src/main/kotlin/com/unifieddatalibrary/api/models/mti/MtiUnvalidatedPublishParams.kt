@@ -1357,6 +1357,7 @@ private constructor(
         }
 
         class Dwell
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val d10: JsonField<Double>,
             private val d11: JsonField<Double>,
@@ -2701,6 +2702,7 @@ private constructor(
              * observed area at the reported time, and other pertinent data.
              */
             class D32
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val d32_1: JsonField<Int>,
                 private val d32_10: JsonField<String>,
@@ -3680,6 +3682,7 @@ private constructor(
         }
 
         class FreeText
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val f1: JsonField<String>,
             private val f2: JsonField<String>,
@@ -3893,6 +3896,7 @@ private constructor(
         }
 
         class Hrr
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val h10: JsonField<Long>,
             private val h11: JsonField<Double>,
@@ -5069,6 +5073,7 @@ private constructor(
              * HRR Scatterer record for a target pixel that exceeds the target detection threshold.
              */
             class H32
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val h32_1: JsonField<Int>,
                 private val h32_2: JsonField<Int>,
@@ -5415,6 +5420,7 @@ private constructor(
          * model) used in the measurement.
          */
         class JobDef
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val j1: JsonField<Long>,
             private val j10: JsonField<Double>,
@@ -6675,6 +6681,7 @@ private constructor(
         }
 
         class JobRequest
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val jobReqEst: JsonField<OffsetDateTime>,
             private val r1: JsonField<String>,
@@ -7651,6 +7658,7 @@ private constructor(
         }
 
         class Mission
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val m1: JsonField<String>,
             private val m2: JsonField<String>,
@@ -7940,6 +7948,7 @@ private constructor(
         }
 
         class PlatformLoc
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val l1: JsonField<Long>,
             private val l2: JsonField<Double>,

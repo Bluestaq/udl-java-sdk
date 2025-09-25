@@ -25,6 +25,7 @@ import kotlin.jvm.optionals.getOrNull
  * OnOrbit objects of interest, which include information about the last known state of the object.
  */
 class ObjectOfInterestListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

@@ -22,6 +22,7 @@ import java.util.Optional
  * stage RF emitter entities.
  */
 class StagingListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val name: JsonField<String>,

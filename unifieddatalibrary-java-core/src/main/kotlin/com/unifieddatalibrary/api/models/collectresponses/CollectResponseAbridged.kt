@@ -29,6 +29,7 @@ import kotlin.jvm.optionals.getOrNull
  * changes prior to completion and delivery.
  */
 class CollectResponseAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

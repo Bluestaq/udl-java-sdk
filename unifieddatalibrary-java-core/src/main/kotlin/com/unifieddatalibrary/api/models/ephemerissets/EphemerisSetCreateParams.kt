@@ -1617,6 +1617,7 @@ private constructor(
      * file.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val category: JsonField<String>,
         private val classificationMarking: JsonField<String>,
@@ -4030,6 +4031,7 @@ private constructor(
      * EphemerisSet ID (esId).
      */
     class EphemerisList
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

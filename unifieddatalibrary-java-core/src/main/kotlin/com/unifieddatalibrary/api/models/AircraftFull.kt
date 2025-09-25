@@ -25,6 +25,7 @@ import kotlin.jvm.optionals.getOrNull
  * required runway length, etc.
  */
 class AircraftFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val aircraftMds: JsonField<String>,
     private val classificationMarking: JsonField<String>,

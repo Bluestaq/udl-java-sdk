@@ -219,6 +219,7 @@ private constructor(
 
     /** A search on a specific field with a given value and operator. */
     class ScsSearchFieldCriterion
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val field: JsonField<String>,
         private val operator: JsonField<Operator>,

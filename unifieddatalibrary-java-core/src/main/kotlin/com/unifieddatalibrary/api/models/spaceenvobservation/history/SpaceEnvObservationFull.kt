@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** SpaceEnvObservation data. */
 class SpaceEnvObservationFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -2171,6 +2172,7 @@ private constructor(
 
     /** A single space environment observation. */
     class SeoList
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val obType: JsonField<String>,
         private val obUoM: JsonField<String>,

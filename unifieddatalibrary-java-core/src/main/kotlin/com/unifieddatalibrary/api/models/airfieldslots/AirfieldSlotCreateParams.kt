@@ -867,6 +867,7 @@ private constructor(
      * can be accommodated.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val airfieldName: JsonField<String>,
         private val classificationMarking: JsonField<String>,

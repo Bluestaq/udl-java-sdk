@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** An SCS file or folder. */
 class ScsEntity
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val id: JsonField<String>,
     private val attachment: JsonField<Attachment>,

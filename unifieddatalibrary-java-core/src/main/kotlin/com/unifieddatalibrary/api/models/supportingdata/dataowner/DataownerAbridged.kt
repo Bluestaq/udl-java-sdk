@@ -18,6 +18,7 @@ import java.util.Optional
 
 /** Information pertaining to UDL data owners. */
 class DataownerAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val description: JsonField<String>,

@@ -540,6 +540,7 @@ private constructor(
 
     /** This table contains descriptions for common satellite RF bands. */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val id: JsonField<String>,
         private val classificationMarking: JsonField<String>,

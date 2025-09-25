@@ -28,6 +28,7 @@ import kotlin.jvm.optionals.getOrNull
  * sensor for a specific reading.
  */
 class CalibrationListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

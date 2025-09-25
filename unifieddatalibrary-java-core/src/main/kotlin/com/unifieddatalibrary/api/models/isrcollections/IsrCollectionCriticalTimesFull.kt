@@ -17,6 +17,7 @@ import java.util.Collections
 import java.util.Objects
 
 class IsrCollectionCriticalTimesFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val earliestImagingTime: JsonField<OffsetDateTime>,
     private val latestImagingTime: JsonField<OffsetDateTime>,
