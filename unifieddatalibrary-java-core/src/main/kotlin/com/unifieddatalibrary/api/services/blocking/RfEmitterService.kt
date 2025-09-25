@@ -19,6 +19,8 @@ import com.unifieddatalibrary.api.models.rfemitter.RfEmitterQueryhelpResponse
 import com.unifieddatalibrary.api.models.rfemitter.RfEmitterTupleParams
 import com.unifieddatalibrary.api.models.rfemitter.RfEmitterTupleResponse
 import com.unifieddatalibrary.api.models.rfemitter.RfEmitterUpdateParams
+import com.unifieddatalibrary.api.services.blocking.rfemitter.DetailService
+import com.unifieddatalibrary.api.services.blocking.rfemitter.StagingService
 import java.util.function.Consumer
 
 interface RfEmitterService {
@@ -34,6 +36,10 @@ interface RfEmitterService {
      * The original service is not modified.
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): RfEmitterService
+
+    fun staging(): StagingService
+
+    fun details(): DetailService
 
     /**
      * Service operation to take a single RFEmitter as a POST body and ingest into the database. A
@@ -226,6 +232,10 @@ interface RfEmitterService {
          * The original service is not modified.
          */
         fun withOptions(modifier: Consumer<ClientOptions.Builder>): RfEmitterService.WithRawResponse
+
+        fun staging(): StagingService.WithRawResponse
+
+        fun details(): DetailService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /udl/rfemitter`, but is otherwise the same as

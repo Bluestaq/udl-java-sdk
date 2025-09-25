@@ -15,6 +15,7 @@ import com.unifieddatalibrary.api.models.scs.ScDeleteParams
 import com.unifieddatalibrary.api.models.scs.ScDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
+import com.unifieddatalibrary.api.models.scs.ScHasWriteAccessParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
@@ -161,6 +162,16 @@ interface ScService {
         params: ScFileUploadParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): String
+
+    /** Returns true if a user has write access to the specified folder. */
+    fun hasWriteAccess(params: ScHasWriteAccessParams): Boolean =
+        hasWriteAccess(params, RequestOptions.none())
+
+    /** @see hasWriteAccess */
+    fun hasWriteAccess(
+        params: ScHasWriteAccessParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): Boolean
 
     /**
      * operation to move folders or files. A specific role is required to perform this service
@@ -364,6 +375,21 @@ interface ScService {
             params: ScFileUploadParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<String>
+
+        /**
+         * Returns a raw HTTP response for `get /scs/userHasWriteAccess`, but is otherwise the same
+         * as [ScService.hasWriteAccess].
+         */
+        @MustBeClosed
+        fun hasWriteAccess(params: ScHasWriteAccessParams): HttpResponseFor<Boolean> =
+            hasWriteAccess(params, RequestOptions.none())
+
+        /** @see hasWriteAccess */
+        @MustBeClosed
+        fun hasWriteAccess(
+            params: ScHasWriteAccessParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<Boolean>
 
         /**
          * Returns a raw HTTP response for `put /scs/move`, but is otherwise the same as

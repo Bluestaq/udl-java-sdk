@@ -31,6 +31,8 @@ import com.unifieddatalibrary.api.models.laseremitter.LaseremitterQueryhelpRespo
 import com.unifieddatalibrary.api.models.laseremitter.LaseremitterTupleParams
 import com.unifieddatalibrary.api.models.laseremitter.LaseremitterTupleResponse
 import com.unifieddatalibrary.api.models.laseremitter.LaseremitterUpdateParams
+import com.unifieddatalibrary.api.services.async.laseremitter.StagingServiceAsync
+import com.unifieddatalibrary.api.services.async.laseremitter.StagingServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
@@ -42,10 +44,14 @@ class LaseremitterServiceAsyncImpl internal constructor(private val clientOption
         WithRawResponseImpl(clientOptions)
     }
 
+    private val staging: StagingServiceAsync by lazy { StagingServiceAsyncImpl(clientOptions) }
+
     override fun withRawResponse(): LaseremitterServiceAsync.WithRawResponse = withRawResponse
 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): LaseremitterServiceAsync =
         LaseremitterServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+
+    override fun staging(): StagingServiceAsync = staging
 
     override fun create(
         params: LaseremitterCreateParams,
@@ -109,12 +115,18 @@ class LaseremitterServiceAsyncImpl internal constructor(private val clientOption
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
+        private val staging: StagingServiceAsync.WithRawResponse by lazy {
+            StagingServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
         override fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): LaseremitterServiceAsync.WithRawResponse =
             LaseremitterServiceAsyncImpl.WithRawResponseImpl(
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
+
+        override fun staging(): StagingServiceAsync.WithRawResponse = staging
 
         private val createHandler: Handler<Void?> = emptyHandler()
 

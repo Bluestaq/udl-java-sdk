@@ -31,6 +31,10 @@ import com.unifieddatalibrary.api.models.rfemitter.RfEmitterQueryhelpResponse
 import com.unifieddatalibrary.api.models.rfemitter.RfEmitterTupleParams
 import com.unifieddatalibrary.api.models.rfemitter.RfEmitterTupleResponse
 import com.unifieddatalibrary.api.models.rfemitter.RfEmitterUpdateParams
+import com.unifieddatalibrary.api.services.async.rfemitter.DetailServiceAsync
+import com.unifieddatalibrary.api.services.async.rfemitter.DetailServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.rfemitter.StagingServiceAsync
+import com.unifieddatalibrary.api.services.async.rfemitter.StagingServiceAsyncImpl
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
@@ -42,10 +46,18 @@ class RfEmitterServiceAsyncImpl internal constructor(private val clientOptions: 
         WithRawResponseImpl(clientOptions)
     }
 
+    private val staging: StagingServiceAsync by lazy { StagingServiceAsyncImpl(clientOptions) }
+
+    private val details: DetailServiceAsync by lazy { DetailServiceAsyncImpl(clientOptions) }
+
     override fun withRawResponse(): RfEmitterServiceAsync.WithRawResponse = withRawResponse
 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): RfEmitterServiceAsync =
         RfEmitterServiceAsyncImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+
+    override fun staging(): StagingServiceAsync = staging
+
+    override fun details(): DetailServiceAsync = details
 
     override fun create(
         params: RfEmitterCreateParams,
@@ -109,12 +121,24 @@ class RfEmitterServiceAsyncImpl internal constructor(private val clientOptions: 
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
+        private val staging: StagingServiceAsync.WithRawResponse by lazy {
+            StagingServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val details: DetailServiceAsync.WithRawResponse by lazy {
+            DetailServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
         override fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): RfEmitterServiceAsync.WithRawResponse =
             RfEmitterServiceAsyncImpl.WithRawResponseImpl(
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
+
+        override fun staging(): StagingServiceAsync.WithRawResponse = staging
+
+        override fun details(): DetailServiceAsync.WithRawResponse = details
 
         private val createHandler: Handler<Void?> = emptyHandler()
 

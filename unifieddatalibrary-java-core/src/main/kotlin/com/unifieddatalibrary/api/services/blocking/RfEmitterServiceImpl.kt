@@ -31,6 +31,10 @@ import com.unifieddatalibrary.api.models.rfemitter.RfEmitterQueryhelpResponse
 import com.unifieddatalibrary.api.models.rfemitter.RfEmitterTupleParams
 import com.unifieddatalibrary.api.models.rfemitter.RfEmitterTupleResponse
 import com.unifieddatalibrary.api.models.rfemitter.RfEmitterUpdateParams
+import com.unifieddatalibrary.api.services.blocking.rfemitter.DetailService
+import com.unifieddatalibrary.api.services.blocking.rfemitter.DetailServiceImpl
+import com.unifieddatalibrary.api.services.blocking.rfemitter.StagingService
+import com.unifieddatalibrary.api.services.blocking.rfemitter.StagingServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
@@ -41,10 +45,18 @@ class RfEmitterServiceImpl internal constructor(private val clientOptions: Clien
         WithRawResponseImpl(clientOptions)
     }
 
+    private val staging: StagingService by lazy { StagingServiceImpl(clientOptions) }
+
+    private val details: DetailService by lazy { DetailServiceImpl(clientOptions) }
+
     override fun withRawResponse(): RfEmitterService.WithRawResponse = withRawResponse
 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): RfEmitterService =
         RfEmitterServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+
+    override fun staging(): StagingService = staging
+
+    override fun details(): DetailService = details
 
     override fun create(params: RfEmitterCreateParams, requestOptions: RequestOptions) {
         // post /udl/rfemitter
@@ -99,12 +111,24 @@ class RfEmitterServiceImpl internal constructor(private val clientOptions: Clien
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
+        private val staging: StagingService.WithRawResponse by lazy {
+            StagingServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val details: DetailService.WithRawResponse by lazy {
+            DetailServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
         override fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): RfEmitterService.WithRawResponse =
             RfEmitterServiceImpl.WithRawResponseImpl(
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
+
+        override fun staging(): StagingService.WithRawResponse = staging
+
+        override fun details(): DetailService.WithRawResponse = details
 
         private val createHandler: Handler<Void?> = emptyHandler()
 
