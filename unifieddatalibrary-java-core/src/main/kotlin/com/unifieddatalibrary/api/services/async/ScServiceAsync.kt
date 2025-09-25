@@ -14,6 +14,7 @@ import com.unifieddatalibrary.api.models.scs.ScDeleteParams
 import com.unifieddatalibrary.api.models.scs.ScDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
+import com.unifieddatalibrary.api.models.scs.ScHasWriteAccessParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
@@ -168,6 +169,16 @@ interface ScServiceAsync {
         params: ScFileUploadParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletableFuture<String>
+
+    /** Returns true if a user has write access to the specified folder. */
+    fun hasWriteAccess(params: ScHasWriteAccessParams): CompletableFuture<Boolean> =
+        hasWriteAccess(params, RequestOptions.none())
+
+    /** @see hasWriteAccess */
+    fun hasWriteAccess(
+        params: ScHasWriteAccessParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CompletableFuture<Boolean>
 
     /**
      * operation to move folders or files. A specific role is required to perform this service
@@ -369,6 +380,21 @@ interface ScServiceAsync {
             params: ScFileUploadParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): CompletableFuture<HttpResponseFor<String>>
+
+        /**
+         * Returns a raw HTTP response for `get /scs/userHasWriteAccess`, but is otherwise the same
+         * as [ScServiceAsync.hasWriteAccess].
+         */
+        fun hasWriteAccess(
+            params: ScHasWriteAccessParams
+        ): CompletableFuture<HttpResponseFor<Boolean>> =
+            hasWriteAccess(params, RequestOptions.none())
+
+        /** @see hasWriteAccess */
+        fun hasWriteAccess(
+            params: ScHasWriteAccessParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): CompletableFuture<HttpResponseFor<Boolean>>
 
         /**
          * Returns a raw HTTP response for `put /scs/move`, but is otherwise the same as

@@ -26,6 +26,7 @@ import com.unifieddatalibrary.api.models.scs.ScDeleteParams
 import com.unifieddatalibrary.api.models.scs.ScDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
+import com.unifieddatalibrary.api.models.scs.ScHasWriteAccessParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
@@ -121,6 +122,13 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
     override fun fileUpload(params: ScFileUploadParams, requestOptions: RequestOptions): String =
         // post /scs/file
         withRawResponse().fileUpload(params, requestOptions).parse()
+
+    override fun hasWriteAccess(
+        params: ScHasWriteAccessParams,
+        requestOptions: RequestOptions,
+    ): Boolean =
+        // get /scs/userHasWriteAccess
+        withRawResponse().hasWriteAccess(params, requestOptions).parse()
 
     @Deprecated("deprecated")
     override fun move(params: ScMoveParams, requestOptions: RequestOptions): String =
@@ -325,6 +333,27 @@ class ScServiceImpl internal constructor(private val clientOptions: ClientOption
             val response = clientOptions.httpClient.execute(request, requestOptions)
             return errorHandler.handle(response).parseable {
                 response.use { fileUploadHandler.handle(it) }
+            }
+        }
+
+        private val hasWriteAccessHandler: Handler<Boolean> =
+            jsonHandler<Boolean>(clientOptions.jsonMapper)
+
+        override fun hasWriteAccess(
+            params: ScHasWriteAccessParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<Boolean> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("scs", "userHasWriteAccess")
+                    .build()
+                    .prepare(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.execute(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response.use { hasWriteAccessHandler.handle(it) }
             }
         }
 

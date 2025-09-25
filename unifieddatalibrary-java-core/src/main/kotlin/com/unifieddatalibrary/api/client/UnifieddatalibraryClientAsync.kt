@@ -118,7 +118,6 @@ import com.unifieddatalibrary.api.services.async.PortServiceAsync
 import com.unifieddatalibrary.api.services.async.ReportAndActivityServiceAsync
 import com.unifieddatalibrary.api.services.async.RfBandServiceAsync
 import com.unifieddatalibrary.api.services.async.RfBandTypeServiceAsync
-import com.unifieddatalibrary.api.services.async.RfEmitterDetailServiceAsync
 import com.unifieddatalibrary.api.services.async.RfEmitterServiceAsync
 import com.unifieddatalibrary.api.services.async.RouteStatServiceAsync
 import com.unifieddatalibrary.api.services.async.SarObservationServiceAsync
@@ -163,6 +162,7 @@ import com.unifieddatalibrary.api.services.async.TrackDetailServiceAsync
 import com.unifieddatalibrary.api.services.async.TrackRouteServiceAsync
 import com.unifieddatalibrary.api.services.async.TrackServiceAsync
 import com.unifieddatalibrary.api.services.async.TransponderServiceAsync
+import com.unifieddatalibrary.api.services.async.UserServiceAsync
 import com.unifieddatalibrary.api.services.async.VesselServiceAsync
 import com.unifieddatalibrary.api.services.async.VideoServiceAsync
 import com.unifieddatalibrary.api.services.async.WeatherDataServiceAsync
@@ -437,8 +437,6 @@ interface UnifieddatalibraryClientAsync {
 
     fun rfEmitter(): RfEmitterServiceAsync
 
-    fun rfEmitterDetails(): RfEmitterDetailServiceAsync
-
     fun routeStats(): RouteStatServiceAsync
 
     fun sarObservation(): SarObservationServiceAsync
@@ -524,6 +522,8 @@ interface UnifieddatalibraryClientAsync {
     fun trackRoute(): TrackRouteServiceAsync
 
     fun transponder(): TransponderServiceAsync
+
+    fun user(): UserServiceAsync
 
     fun vessel(): VesselServiceAsync
 
@@ -793,8 +793,6 @@ interface UnifieddatalibraryClientAsync {
 
         fun rfEmitter(): RfEmitterServiceAsync.WithRawResponse
 
-        fun rfEmitterDetails(): RfEmitterDetailServiceAsync.WithRawResponse
-
         fun routeStats(): RouteStatServiceAsync.WithRawResponse
 
         fun sarObservation(): SarObservationServiceAsync.WithRawResponse
@@ -880,6 +878,8 @@ interface UnifieddatalibraryClientAsync {
         fun trackRoute(): TrackRouteServiceAsync.WithRawResponse
 
         fun transponder(): TransponderServiceAsync.WithRawResponse
+
+        fun user(): UserServiceAsync.WithRawResponse
 
         fun vessel(): VesselServiceAsync.WithRawResponse
 

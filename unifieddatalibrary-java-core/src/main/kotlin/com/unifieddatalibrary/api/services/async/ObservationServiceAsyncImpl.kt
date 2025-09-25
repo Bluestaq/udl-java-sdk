@@ -9,6 +9,8 @@ import com.unifieddatalibrary.api.services.async.observations.EoObservationServi
 import com.unifieddatalibrary.api.services.async.observations.EoObservationServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.observations.MonoradarServiceAsync
 import com.unifieddatalibrary.api.services.async.observations.MonoradarServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.observations.ObscorrelationServiceAsync
+import com.unifieddatalibrary.api.services.async.observations.ObscorrelationServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.observations.PassiveRadarObservationServiceAsync
 import com.unifieddatalibrary.api.services.async.observations.PassiveRadarObservationServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.observations.RadarobservationServiceAsync
@@ -36,6 +38,10 @@ class ObservationServiceAsyncImpl internal constructor(private val clientOptions
         MonoradarServiceAsyncImpl(clientOptions)
     }
 
+    private val obscorrelation: ObscorrelationServiceAsync by lazy {
+        ObscorrelationServiceAsyncImpl(clientOptions)
+    }
+
     private val passiveRadarObservation: PassiveRadarObservationServiceAsync by lazy {
         PassiveRadarObservationServiceAsyncImpl(clientOptions)
     }
@@ -61,6 +67,8 @@ class ObservationServiceAsyncImpl internal constructor(private val clientOptions
 
     override fun monoradar(): MonoradarServiceAsync = monoradar
 
+    override fun obscorrelation(): ObscorrelationServiceAsync = obscorrelation
+
     override fun passiveRadarObservation(): PassiveRadarObservationServiceAsync =
         passiveRadarObservation
 
@@ -83,6 +91,10 @@ class ObservationServiceAsyncImpl internal constructor(private val clientOptions
 
         private val monoradar: MonoradarServiceAsync.WithRawResponse by lazy {
             MonoradarServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val obscorrelation: ObscorrelationServiceAsync.WithRawResponse by lazy {
+            ObscorrelationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val passiveRadarObservation:
@@ -114,6 +126,8 @@ class ObservationServiceAsyncImpl internal constructor(private val clientOptions
         override fun eoObservations(): EoObservationServiceAsync.WithRawResponse = eoObservations
 
         override fun monoradar(): MonoradarServiceAsync.WithRawResponse = monoradar
+
+        override fun obscorrelation(): ObscorrelationServiceAsync.WithRawResponse = obscorrelation
 
         override fun passiveRadarObservation():
             PassiveRadarObservationServiceAsync.WithRawResponse = passiveRadarObservation

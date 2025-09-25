@@ -26,6 +26,7 @@ import com.unifieddatalibrary.api.models.scs.ScDeleteParams
 import com.unifieddatalibrary.api.models.scs.ScDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
+import com.unifieddatalibrary.api.models.scs.ScHasWriteAccessParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
@@ -134,6 +135,13 @@ class ScServiceAsyncImpl internal constructor(private val clientOptions: ClientO
     ): CompletableFuture<String> =
         // post /scs/file
         withRawResponse().fileUpload(params, requestOptions).thenApply { it.parse() }
+
+    override fun hasWriteAccess(
+        params: ScHasWriteAccessParams,
+        requestOptions: RequestOptions,
+    ): CompletableFuture<Boolean> =
+        // get /scs/userHasWriteAccess
+        withRawResponse().hasWriteAccess(params, requestOptions).thenApply { it.parse() }
 
     @Deprecated("deprecated")
     override fun move(
@@ -365,6 +373,30 @@ class ScServiceAsyncImpl internal constructor(private val clientOptions: ClientO
                 .thenApply { response ->
                     errorHandler.handle(response).parseable {
                         response.use { fileUploadHandler.handle(it) }
+                    }
+                }
+        }
+
+        private val hasWriteAccessHandler: Handler<Boolean> =
+            jsonHandler<Boolean>(clientOptions.jsonMapper)
+
+        override fun hasWriteAccess(
+            params: ScHasWriteAccessParams,
+            requestOptions: RequestOptions,
+        ): CompletableFuture<HttpResponseFor<Boolean>> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("scs", "userHasWriteAccess")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            return request
+                .thenComposeAsync { clientOptions.httpClient.executeAsync(it, requestOptions) }
+                .thenApply { response ->
+                    errorHandler.handle(response).parseable {
+                        response.use { hasWriteAccessHandler.handle(it) }
                     }
                 }
         }

@@ -6,6 +6,7 @@ import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.services.async.observations.EcpsdrServiceAsync
 import com.unifieddatalibrary.api.services.async.observations.EoObservationServiceAsync
 import com.unifieddatalibrary.api.services.async.observations.MonoradarServiceAsync
+import com.unifieddatalibrary.api.services.async.observations.ObscorrelationServiceAsync
 import com.unifieddatalibrary.api.services.async.observations.PassiveRadarObservationServiceAsync
 import com.unifieddatalibrary.api.services.async.observations.RadarobservationServiceAsync
 import com.unifieddatalibrary.api.services.async.observations.RfObservationServiceAsync
@@ -31,6 +32,8 @@ interface ObservationServiceAsync {
     fun eoObservations(): EoObservationServiceAsync
 
     fun monoradar(): MonoradarServiceAsync
+
+    fun obscorrelation(): ObscorrelationServiceAsync
 
     fun passiveRadarObservation(): PassiveRadarObservationServiceAsync
 
@@ -60,6 +63,8 @@ interface ObservationServiceAsync {
         fun eoObservations(): EoObservationServiceAsync.WithRawResponse
 
         fun monoradar(): MonoradarServiceAsync.WithRawResponse
+
+        fun obscorrelation(): ObscorrelationServiceAsync.WithRawResponse
 
         fun passiveRadarObservation(): PassiveRadarObservationServiceAsync.WithRawResponse
 
