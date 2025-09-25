@@ -34,6 +34,7 @@ import kotlin.jvm.optionals.getOrNull
  * etc.
  */
 class SiteGetResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -3408,6 +3409,7 @@ private constructor(
      * navigation, and waivers associated with the Site.
      */
     class SiteOperation
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -4942,6 +4944,7 @@ private constructor(
      * context and interpretations for consumer use.
      */
     class SiteRemark
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

@@ -17,6 +17,7 @@ import java.util.Optional
 
 /** Points identified within the route. */
 class RoutePointsIngest
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val altCountryCode: JsonField<String>,
     private val countryCode: JsonField<String>,

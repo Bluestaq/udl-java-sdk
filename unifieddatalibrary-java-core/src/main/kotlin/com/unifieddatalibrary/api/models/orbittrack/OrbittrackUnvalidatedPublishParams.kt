@@ -2638,6 +2638,7 @@ private constructor(
 
         /** Schema for Track Sensor data. */
         class TrackSensor
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val az: JsonField<Double>,
             private val range: JsonField<Double>,

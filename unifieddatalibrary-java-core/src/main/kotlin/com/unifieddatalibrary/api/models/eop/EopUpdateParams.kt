@@ -1448,6 +1448,7 @@ private constructor(
      * changes. This publication is prepared by the IERS Rapid Service/Prediction Center.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

@@ -26,6 +26,7 @@ import kotlin.jvm.optionals.getOrNull
  * Properties and characteristics of equipment that can be associated with a site or other entity.
  */
 class EquipmentAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val countryCode: JsonField<String>,

@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Captures link status. */
 class LinkStatusListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * sensor data aiding in the orbit prediction.
  */
 class OrbittrackTupleResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -2560,6 +2561,7 @@ private constructor(
 
     /** Schema for Track Sensor data. */
     class TrackSensor
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val az: JsonField<Double>,
         private val range: JsonField<Double>,

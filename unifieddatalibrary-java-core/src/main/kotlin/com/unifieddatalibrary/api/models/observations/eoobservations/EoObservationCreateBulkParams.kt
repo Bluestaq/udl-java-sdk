@@ -4393,6 +4393,7 @@ private constructor(
          * sensor phenomenologies.
          */
         class EoobservationDetails
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val acalCrPixX: JsonField<Double>,
             private val acalCrPixY: JsonField<Double>,

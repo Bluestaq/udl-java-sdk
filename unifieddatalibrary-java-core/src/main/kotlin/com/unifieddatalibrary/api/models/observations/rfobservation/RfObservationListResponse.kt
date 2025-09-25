@@ -30,6 +30,7 @@ import kotlin.jvm.optionals.getOrNull
  * powers[0] is the measured power at frequencies[0]).
  */
 class RfObservationListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * obtained by using passive RF based sensor phenomenologies and sensor triangulation.
  */
 class DiffofarrivalFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

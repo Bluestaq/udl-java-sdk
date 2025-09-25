@@ -1196,6 +1196,7 @@ private constructor(
      * mis-tagged electro-optical (EO), radar, RF, and DOA track/observations.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val corrType: JsonField<CorrType>,

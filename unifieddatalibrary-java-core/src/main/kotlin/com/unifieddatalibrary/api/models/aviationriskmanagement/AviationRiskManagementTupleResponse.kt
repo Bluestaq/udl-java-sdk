@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * accounting for factors such as crew fatigue and mission complexity.
  */
 class AviationRiskManagementTupleResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -1020,6 +1021,7 @@ private constructor(
 
     /** Collection of Aviation Risk Management Worksheet Records. */
     class AviationRiskManagementWorksheetRecord
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val missionDate: JsonField<LocalDate>,
         private val aircraftMds: JsonField<String>,
@@ -1816,6 +1818,7 @@ private constructor(
 
         /** Collection of Aviation Risk Management worksheet record scores. */
         class AviationRiskManagementWorksheetScore
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val approvalDate: JsonField<OffsetDateTime>,
             private val approvedBy: JsonField<String>,
@@ -2425,6 +2428,7 @@ private constructor(
 
             /** Collection of aviation risk management worksheet record score aircraft sorties. */
             class AviationRiskManagementSortie
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val extSortieId: JsonField<String>,
                 private val idSortie: JsonField<String>,

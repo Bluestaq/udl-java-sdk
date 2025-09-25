@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Table for maintaining generic lists of OnOrbit objects (e.g. Favorites, HIO, SHIO, HVA, etc). */
 class OnorbitlistTupleResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

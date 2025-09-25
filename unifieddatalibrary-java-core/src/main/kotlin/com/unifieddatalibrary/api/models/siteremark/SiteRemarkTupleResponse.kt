@@ -24,6 +24,7 @@ import kotlin.jvm.optionals.getOrNull
  * context and interpretations for consumer use.
  */
 class SiteRemarkTupleResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

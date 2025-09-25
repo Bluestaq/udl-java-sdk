@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Details for an sigint payload from Seradata. */
 class SeradataSigintPayloadGetResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

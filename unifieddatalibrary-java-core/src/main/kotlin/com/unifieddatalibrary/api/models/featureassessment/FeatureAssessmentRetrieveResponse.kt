@@ -28,6 +28,7 @@ import kotlin.jvm.optionals.getOrNull
  * queries are supported through either the regionText (WKT) or regionGeoJSON fields.
  */
 class FeatureAssessmentRetrieveResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

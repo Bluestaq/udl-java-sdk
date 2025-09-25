@@ -24,6 +24,7 @@ import kotlin.jvm.optionals.getOrNull
  * various bandpasses of a star.
  */
 class StarCatalogGetResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val astrometryOrigin: JsonField<AstrometryOrigin>,
     private val classificationMarking: JsonField<String>,

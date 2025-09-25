@@ -19,6 +19,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 class RelatedDocumentFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val dataSourceRefs: JsonField<List<SofDataSourceRefFull>>,
     private val documentId: JsonField<String>,

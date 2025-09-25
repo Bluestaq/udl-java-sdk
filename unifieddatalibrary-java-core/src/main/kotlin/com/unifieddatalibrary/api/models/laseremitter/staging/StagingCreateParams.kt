@@ -607,6 +607,7 @@ private constructor(
      * used to stage laser emitter entities.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val laserName: JsonField<String>,

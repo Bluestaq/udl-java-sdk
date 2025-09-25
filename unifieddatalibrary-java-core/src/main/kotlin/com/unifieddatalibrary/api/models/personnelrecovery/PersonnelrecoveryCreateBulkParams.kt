@@ -1960,6 +1960,7 @@ private constructor(
         }
 
         class ExecutionInfo
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val egress: JsonField<Double>,
             private val egressPoint: JsonField<List<Double>>,
@@ -2386,6 +2387,7 @@ private constructor(
                     (recoveryVehicle.asKnown().getOrNull()?.validity() ?: 0)
 
             class EscortVehicle
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val callSign: JsonField<String>,
                 private val primaryFreq: JsonField<Double>,
@@ -2672,6 +2674,7 @@ private constructor(
             }
 
             class RecoveryVehicle
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val callSign: JsonField<String>,
                 private val primaryFreq: JsonField<Double>,
@@ -2993,6 +2996,7 @@ private constructor(
         }
 
         class ObjectiveAreaInfo
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val enemyData: JsonField<List<EnemyData>>,
             private val oscCallSign: JsonField<String>,
@@ -3321,6 +3325,7 @@ private constructor(
                     (pzLocation.asKnown().getOrNull()?.size ?: 0)
 
             class EnemyData
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val dirToEnemy: JsonField<String>,
                 private val friendliesRemarks: JsonField<String>,

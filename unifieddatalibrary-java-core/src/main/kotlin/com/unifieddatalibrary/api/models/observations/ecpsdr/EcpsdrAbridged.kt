@@ -26,6 +26,7 @@ import kotlin.jvm.optionals.getOrNull
  * contains sensor status telemetry and raw dosimeter measurements of the space environment.
  */
 class EcpsdrAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

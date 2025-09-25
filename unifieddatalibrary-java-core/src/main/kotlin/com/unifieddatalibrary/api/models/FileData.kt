@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 @Deprecated("deprecated")
 class FileData
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val id: JsonField<String>,
     private val attributes: JsonField<Attributes>,
@@ -283,6 +284,7 @@ private constructor(
 
     @Deprecated("deprecated")
     class Attributes
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val id: JsonField<String>,
         private val classification: JsonField<String>,

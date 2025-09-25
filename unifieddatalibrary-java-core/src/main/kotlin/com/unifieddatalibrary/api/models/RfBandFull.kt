@@ -26,6 +26,7 @@ import kotlin.jvm.optionals.getOrNull
  * by any type of Entity for communications or operations.
  */
 class RfBandFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

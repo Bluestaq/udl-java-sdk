@@ -2067,6 +2067,7 @@ private constructor(
 
         /** Collection of contact information for this country. */
         class DiplomaticClearanceCountryContact
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val ahNum: JsonField<String>,
             private val ahSpdDialCode: JsonField<String>,
@@ -2700,6 +2701,7 @@ private constructor(
 
         /** Collection of entry and exit points for this country. */
         class DiplomaticClearanceCountryEntryExitPoint
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val isEntry: JsonField<Boolean>,
             private val isExit: JsonField<Boolean>,
@@ -2938,6 +2940,7 @@ private constructor(
 
         /** Collection of diplomatic clearance profile information for this country. */
         class DiplomaticClearanceCountryProfile
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val cargoPaxRemark: JsonField<String>,
             private val clearanceId: JsonField<String>,

@@ -2318,6 +2318,7 @@ private constructor(
      * Entity such as an on-orbit payload, a sensor, etc. A contact may belong to an organization.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

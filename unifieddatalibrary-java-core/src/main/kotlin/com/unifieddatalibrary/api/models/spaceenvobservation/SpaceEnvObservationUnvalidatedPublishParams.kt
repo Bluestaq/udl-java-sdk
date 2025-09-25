@@ -2277,6 +2277,7 @@ private constructor(
 
         /** A single space environment observation. */
         class SeoList
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val obType: JsonField<String>,
             private val obUoM: JsonField<String>,

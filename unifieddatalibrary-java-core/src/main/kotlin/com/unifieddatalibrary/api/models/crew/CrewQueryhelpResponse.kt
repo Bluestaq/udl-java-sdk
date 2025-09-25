@@ -20,6 +20,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 class CrewQueryhelpResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val aodrSupported: JsonField<Boolean>,
     private val classificationMarking: JsonField<String>,

@@ -31,6 +31,7 @@ import kotlin.jvm.optionals.getOrNull
  * individual points at varying time steps. EphemerisSet is analogous to this flat file.
  */
 class EphemerisSet
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val category: JsonField<String>,
     private val classificationMarking: JsonField<String>,

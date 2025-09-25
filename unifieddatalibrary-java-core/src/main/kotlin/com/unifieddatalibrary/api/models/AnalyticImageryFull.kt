@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * graphics, and supports keyword searching.
  */
 class AnalyticImageryFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val content: JsonField<String>,
@@ -2151,6 +2152,7 @@ private constructor(
      * regionGeoJSON fields.
      */
     class FeatureAssessment
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

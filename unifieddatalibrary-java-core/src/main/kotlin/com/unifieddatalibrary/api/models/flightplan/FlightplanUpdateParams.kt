@@ -3288,6 +3288,7 @@ private constructor(
      * expected route.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val arrAirfield: JsonField<String>,
         private val classificationMarking: JsonField<String>,
@@ -8046,6 +8047,7 @@ private constructor(
 
     /** Collection of air refueling events occurring on this flight. */
     class AirRefuelEvent
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val arDegrade: JsonField<Double>,
         private val arExchangedFuel: JsonField<Double>,
@@ -8367,6 +8369,7 @@ private constructor(
      * message.
      */
     class FlightPlanMessage
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val msgText: JsonField<String>,
         private val routePath: JsonField<String>,
@@ -8632,6 +8635,7 @@ private constructor(
      * Extended Operations (ETOPS), Critical Fuel Point, and Equal Time Point (ETP).
      */
     class FlightPlanPointGroup
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val avgFuelFlow: JsonField<Double>,
         private val etopsAvgWindFactor: JsonField<Double>,
@@ -9798,6 +9802,7 @@ private constructor(
 
         /** Array of point data for this Point Group. */
         class FlightPlanPoint
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val fppEta: JsonField<OffsetDateTime>,
             private val fppLat: JsonField<Double>,
@@ -10195,6 +10200,7 @@ private constructor(
 
     /** Collection of waypoints associated with this flight plan. */
     class FlightPlanWaypoint
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val type: JsonField<String>,
         private val waypointName: JsonField<String>,

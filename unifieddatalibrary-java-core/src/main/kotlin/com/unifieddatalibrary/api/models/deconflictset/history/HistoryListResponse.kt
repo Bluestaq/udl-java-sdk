@@ -30,6 +30,7 @@ import kotlin.jvm.optionals.getOrNull
  * (CLOSED).
  */
 class HistoryListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -1330,6 +1331,7 @@ private constructor(
      * should occur (CLOSED).
      */
     class DeconflictWindow
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

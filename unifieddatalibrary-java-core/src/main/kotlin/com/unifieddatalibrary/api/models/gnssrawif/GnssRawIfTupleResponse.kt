@@ -29,6 +29,7 @@ import kotlin.jvm.optionals.getOrNull
  * environment.
  */
 class GnssRawIfTupleResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val centerFreq: JsonField<List<Double>>,
     private val classificationMarking: JsonField<String>,

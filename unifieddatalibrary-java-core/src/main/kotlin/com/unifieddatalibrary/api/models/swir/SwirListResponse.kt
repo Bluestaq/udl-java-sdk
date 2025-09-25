@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Data representing observed short wave infrared (SWIR) measurements. */
 class SwirListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

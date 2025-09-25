@@ -1482,6 +1482,7 @@ private constructor(
      * multiple details records from various sources.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -3597,6 +3598,7 @@ private constructor(
 
     /** An RF Amplifier associated with an RF Emitter Details. */
     class Amplifier
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val deviceIdentifier: JsonField<String>,
         private val manufacturer: JsonField<String>,
@@ -3868,6 +3870,7 @@ private constructor(
 
     /** An RF Antenna associated with an RF Emitter Details. */
     class Antenna
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val antennaDiameter: JsonField<Double>,
         private val antennaSize: JsonField<List<Double>>,
@@ -4573,6 +4576,7 @@ private constructor(
 
         /** An RF Antenna Feed associated with an RF Antenna. */
         class Feed
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val freqMax: JsonField<Double>,
             private val freqMin: JsonField<Double>,
@@ -4839,6 +4843,7 @@ private constructor(
 
         /** An RF Antenna Receiver Channel associated with an RF Antenna. */
         class ReceiverChannel
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val bandwidth: JsonField<Double>,
             private val channelNum: JsonField<String>,
@@ -5314,6 +5319,7 @@ private constructor(
 
         /** An RF Antenna Transmit Channel associated with an RF Antenna. */
         class TransmitChannel
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val power: JsonField<Double>,
             private val bandwidth: JsonField<Double>,
@@ -6075,6 +6081,7 @@ private constructor(
 
     /** An RF Emitter Power Offset associated with an RF Emitter Details. */
     class PowerOffset
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val frequencyBand: JsonField<String>,
         private val powerOffset: JsonField<Double>,
@@ -6268,6 +6275,7 @@ private constructor(
 
     /** An RF Emitter SW Service associated with an RF Emitter Details. */
     class Service
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val name: JsonField<String>,
         private val version: JsonField<String>,
@@ -6444,6 +6452,7 @@ private constructor(
 
     /** An RF Emitter TTP associated with an RF Emitter Details. */
     class Ttp
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val outputSignalName: JsonField<String>,
         private val techniqueDefinitions: JsonField<List<TechniqueDefinition>>,
@@ -6637,6 +6646,7 @@ private constructor(
 
         /** An RF Emitter Technique Definition associated with an RF Emitter TTP. */
         class TechniqueDefinition
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val name: JsonField<String>,
             private val paramDefinitions: JsonField<List<ParamDefinition>>,
@@ -6830,6 +6840,7 @@ private constructor(
              * Definition.
              */
             class ParamDefinition
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val defaultValue: JsonField<String>,
                 private val max: JsonField<Double>,

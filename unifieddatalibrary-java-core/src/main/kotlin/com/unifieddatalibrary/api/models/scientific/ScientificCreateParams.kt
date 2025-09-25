@@ -756,6 +756,7 @@ private constructor(
 
     /** Scientific or other data from Seradata. */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

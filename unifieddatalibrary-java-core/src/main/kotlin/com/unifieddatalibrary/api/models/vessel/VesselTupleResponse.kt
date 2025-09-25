@@ -25,6 +25,7 @@ import kotlin.jvm.optionals.getOrNull
  * contains the static data of the specific vessel: mmsi, cruise speed, max speed, etc.
  */
 class VesselTupleResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

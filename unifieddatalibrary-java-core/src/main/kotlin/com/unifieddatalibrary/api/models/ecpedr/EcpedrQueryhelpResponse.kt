@@ -20,6 +20,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 class EcpedrQueryhelpResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val aodrSupported: JsonField<Boolean>,
     private val classificationMarking: JsonField<String>,

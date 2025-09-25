@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Status information for OnorbitThruster objects. */
 class OnorbitthrusterstatusFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

@@ -1990,6 +1990,7 @@ private constructor(
      * payloads are attached for power, control, and other support functions.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Contains details of the OnOrbit object. */
 class OnorbitDetailsFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

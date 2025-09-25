@@ -1736,6 +1736,7 @@ private constructor(
 
         /** Discrepancy information associated with this LogisticsSupport record. */
         class LogisticsDiscrepancyInfo
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val closureTime: JsonField<OffsetDateTime>,
             private val discrepancyInfo: JsonField<String>,
@@ -2022,6 +2023,7 @@ private constructor(
 
         /** Support items associated with this LogisticsSupport record. */
         class LogisticsSupportItem
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val cannibalized: JsonField<Boolean>,
             private val deployPlanNumber: JsonField<String>,
@@ -3038,6 +3040,7 @@ private constructor(
 
             /** The parts associated with this support item. */
             class LogisticsPart
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val figureNumber: JsonField<String>,
                 private val indexNumber: JsonField<String>,
@@ -3641,6 +3644,7 @@ private constructor(
 
                 /** The supply stocks for this support item. */
                 class LogisticsStock
+                @JsonCreator(mode = JsonCreator.Mode.DISABLED)
                 private constructor(
                     private val quantity: JsonField<Int>,
                     private val sourceIcao: JsonField<String>,
@@ -3984,6 +3988,7 @@ private constructor(
 
             /** The specialties required to implement this support item. */
             class LogisticsSpecialty
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val firstName: JsonField<String>,
                 private val last4Ssn: JsonField<String>,
@@ -4484,6 +4489,7 @@ private constructor(
          * maintenance efforts.
          */
         class LogisticsTransportationPlan
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val actDepTime: JsonField<OffsetDateTime>,
             private val aircraftStatus: JsonField<String>,
@@ -5797,6 +5803,7 @@ private constructor(
 
             /** Remarks associated with this LogisticsSupport record. */
             class LogisticsSegment
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val arrivalIcao: JsonField<String>,
                 private val departureIcao: JsonField<String>,

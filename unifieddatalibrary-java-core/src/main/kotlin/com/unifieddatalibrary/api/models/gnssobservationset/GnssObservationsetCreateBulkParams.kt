@@ -2065,6 +2065,7 @@ private constructor(
          * information concerning many of the standards and conventions for GNSS observations.
          */
         class GnssObservationList
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val agcState: JsonField<Int>,
             private val gnssSatId: JsonField<String>,

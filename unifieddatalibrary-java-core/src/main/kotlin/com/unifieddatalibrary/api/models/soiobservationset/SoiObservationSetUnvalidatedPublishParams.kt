@@ -3645,6 +3645,7 @@ private constructor(
 
         /** Schema for SOI Calibration data. */
         class Calibration
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val calBgIntensity: JsonField<Double>,
             private val calExtinctionCoeff: JsonField<Double>,
@@ -4290,6 +4291,7 @@ private constructor(
          * Object.
          */
         class OpticalSoiObservationList
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val obStartTime: JsonField<OffsetDateTime>,
             private val currentSpectralFilterNum: JsonField<Long>,
@@ -5508,6 +5510,7 @@ private constructor(
          * Object.
          */
         class RadarSoiObservationList
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val obStartTime: JsonField<OffsetDateTime>,
             private val aspectAngles: JsonField<List<Double>>,

@@ -24,6 +24,7 @@ import kotlin.jvm.optionals.getOrNull
  * limits, and drift rates.
  */
 class GeoStatusListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

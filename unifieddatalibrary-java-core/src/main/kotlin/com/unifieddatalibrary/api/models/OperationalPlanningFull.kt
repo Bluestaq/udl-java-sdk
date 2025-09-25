@@ -18,6 +18,7 @@ import java.util.Optional
 
 /** Collection of planning information associated with this SiteOperations record. */
 class OperationalPlanningFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val opEndDate: JsonField<OffsetDateTime>,
     private val opLastChangedBy: JsonField<String>,

@@ -29,6 +29,7 @@ import kotlin.jvm.optionals.getOrNull
  * source.
  */
 class LaunchVehicleGetResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -882,6 +883,7 @@ private constructor(
      * source. A vehicle may have multiple details records from various sources.
      */
     class LaunchVehicleDetail
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -3767,6 +3769,7 @@ private constructor(
      * stages, each with 1 to many engines.
      */
     class Stage
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

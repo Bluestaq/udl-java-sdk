@@ -2374,6 +2374,7 @@ private constructor(
 
     /** Stores the results of a particular Conjunction Assessment (CA) run. */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -5720,6 +5721,7 @@ private constructor(
      * see the 'Discover' tab in the storefront to confirm coordinate frames by data provider.
      */
     class StateVector1
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -11163,6 +11165,7 @@ private constructor(
      * see the 'Discover' tab in the storefront to confirm coordinate frames by data provider.
      */
     class StateVector2
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

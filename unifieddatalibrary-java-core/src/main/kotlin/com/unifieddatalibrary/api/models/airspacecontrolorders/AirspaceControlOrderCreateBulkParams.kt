@@ -1829,6 +1829,7 @@ private constructor(
          * ACOID.
          */
         class AirspaceControlMeansStatus
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val airspaceControlMeans: JsonField<List<AirspaceControlMean>>,
             private val cmStat: JsonField<String>,
@@ -2090,6 +2091,7 @@ private constructor(
              * particular airspace control means status.
              */
             class AirspaceControlMean
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val airspaceControlPoint: JsonField<List<AirspaceControlPoint>>,
                 private val airspaceTimePeriod: JsonField<List<AirspaceTimePeriod>>,
@@ -3597,6 +3599,7 @@ private constructor(
                  * given airspace control means.
                  */
                 class AirspaceControlPoint
+                @JsonCreator(mode = JsonCreator.Mode.DISABLED)
                 private constructor(
                     private val ctrlPtAltitude: JsonField<String>,
                     private val ctrlPtLocation: JsonField<String>,
@@ -3904,6 +3907,7 @@ private constructor(
                  * means.
                  */
                 class AirspaceTimePeriod
+                @JsonCreator(mode = JsonCreator.Mode.DISABLED)
                 private constructor(
                     private val intDur: JsonField<List<String>>,
                     private val intFreq: JsonField<List<String>>,
@@ -4568,6 +4572,7 @@ private constructor(
          * airspace control order.
          */
         class AirspaceControlOrderReference
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val refOriginator: JsonField<String>,
             private val refSerialNum: JsonField<String>,

@@ -1499,6 +1499,7 @@ private constructor(
         }
 
         class ActionsList
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val actionActorSrcId: JsonField<String>,
             private val actionActorSrcType: JsonField<String>,
@@ -2406,6 +2407,7 @@ private constructor(
                     (if (weaponInterceptLon.asKnown().isPresent) 1 else 0)
 
             class ActionMetric
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val domainValue: JsonField<Double>,
                 private val metricType: JsonField<String>,
@@ -2758,6 +2760,7 @@ private constructor(
         }
 
         class CoaMetric
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val domainValue: JsonField<Double>,
             private val metricType: JsonField<String>,

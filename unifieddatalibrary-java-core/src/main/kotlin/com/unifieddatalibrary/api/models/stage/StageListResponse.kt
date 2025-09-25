@@ -26,6 +26,7 @@ import kotlin.jvm.optionals.getOrNull
  * stages, each with 1 to many engines.
  */
 class StageListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

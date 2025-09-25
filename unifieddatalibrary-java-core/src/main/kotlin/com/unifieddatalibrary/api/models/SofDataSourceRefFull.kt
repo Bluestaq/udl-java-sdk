@@ -16,6 +16,7 @@ import java.util.Objects
 import java.util.Optional
 
 class SofDataSourceRefFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val dataSourceId: JsonField<String>,
     private val endPosition: JsonField<String>,

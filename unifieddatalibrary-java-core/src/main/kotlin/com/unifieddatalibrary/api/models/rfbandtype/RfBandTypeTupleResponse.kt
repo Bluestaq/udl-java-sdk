@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** This table contains descriptions for common satellite RF bands. */
 class RfBandTypeTupleResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val id: JsonField<String>,
     private val classificationMarking: JsonField<String>,

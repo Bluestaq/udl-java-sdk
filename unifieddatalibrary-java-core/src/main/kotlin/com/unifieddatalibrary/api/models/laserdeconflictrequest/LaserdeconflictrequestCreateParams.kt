@@ -1787,6 +1787,7 @@ private constructor(
      * hazards, ensuring compliance with safety protocols and regulations.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -4283,6 +4284,7 @@ private constructor(
     }
 
     class FixedPoint
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val latitude: JsonField<Double>,
         private val longitude: JsonField<Double>,
@@ -4536,6 +4538,7 @@ private constructor(
      * space-to-ground, and ground-to-space laser operations are supported by this model.
      */
     class LaserDeconflictTarget
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -6315,6 +6318,7 @@ private constructor(
         }
 
         class FixedPoint
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val latitude: JsonField<Double>,
             private val longitude: JsonField<Double>,

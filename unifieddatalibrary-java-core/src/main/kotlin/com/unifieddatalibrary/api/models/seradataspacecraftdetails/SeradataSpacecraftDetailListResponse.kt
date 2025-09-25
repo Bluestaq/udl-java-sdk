@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** On-orbit spacecraft details compiled by Seradata for a particular satellite. */
 class SeradataSpacecraftDetailListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

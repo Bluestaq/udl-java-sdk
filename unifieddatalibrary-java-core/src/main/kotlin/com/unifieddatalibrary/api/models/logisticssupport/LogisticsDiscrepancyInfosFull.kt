@@ -18,6 +18,7 @@ import java.util.Optional
 
 /** Discrepancy information associated with this LogisticsSupport record. */
 class LogisticsDiscrepancyInfosFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val closureTime: JsonField<OffsetDateTime>,
     private val discrepancyInfo: JsonField<String>,

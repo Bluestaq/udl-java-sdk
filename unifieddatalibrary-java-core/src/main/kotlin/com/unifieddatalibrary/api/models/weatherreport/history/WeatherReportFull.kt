@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * navigational considerations such as altimeter settings, visibility, cloud heights etc.
  */
 class WeatherReportFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

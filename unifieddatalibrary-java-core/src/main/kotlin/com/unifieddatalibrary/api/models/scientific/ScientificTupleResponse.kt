@@ -22,6 +22,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Scientific or other data from Seradata. */
 class ScientificTupleResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

@@ -789,6 +789,7 @@ private constructor(
 
     /** An SCS file or folder. */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val id: JsonField<String>,
         private val attachment: JsonField<Attachment>,
@@ -1653,6 +1654,7 @@ private constructor(
 
     /** Additional metadata associated with this document. */
     class Attachment
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val author: JsonField<String>,
         private val contentLength: JsonField<Int>,

@@ -24,6 +24,7 @@ import kotlin.jvm.optionals.getOrNull
  * multiple details records compiled by various sources.
  */
 class SolarArrayDetailListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

@@ -2567,6 +2567,7 @@ private constructor(
      * as applicable boundaries, locations, heights, data ownership, and currency.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val cycleDate: JsonField<LocalDate>,

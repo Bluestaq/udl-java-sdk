@@ -422,6 +422,7 @@ private constructor(
 
     @Deprecated("deprecated")
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val contentCriteria: JsonField<String>,
         private val metaDataCriteria: JsonField<MetaDataCriteria>,

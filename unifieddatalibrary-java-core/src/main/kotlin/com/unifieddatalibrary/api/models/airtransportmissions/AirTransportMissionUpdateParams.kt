@@ -1633,6 +1633,7 @@ private constructor(
      * cargo locations, priority, and other mission characteristics.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -3919,6 +3920,7 @@ private constructor(
      * Mission.
      */
     class HazMat
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val applicableNotes: JsonField<String>,
         private val cgc: JsonField<String>,
@@ -4652,6 +4654,7 @@ private constructor(
 
     /** Collection of Remarks associated with this Air Transport Mission. */
     class Remark
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val date: JsonField<OffsetDateTime>,
         private val gdssRemarkId: JsonField<String>,
@@ -4994,6 +4997,7 @@ private constructor(
 
     /** Collection of Requirements planned to be associated with this Air Transport Mission. */
     class Requirement
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val bulkWeight: JsonField<Double>,
         private val ead: JsonField<OffsetDateTime>,

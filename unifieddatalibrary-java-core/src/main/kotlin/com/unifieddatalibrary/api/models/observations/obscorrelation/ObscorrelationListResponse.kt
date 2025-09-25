@@ -24,6 +24,7 @@ import kotlin.jvm.optionals.getOrNull
  * electro-optical (EO), radar, RF, and DOA track/observations.
  */
 class ObscorrelationListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val corrType: JsonField<CorrType>,

@@ -16,6 +16,7 @@ import java.util.Objects
 import java.util.Optional
 
 class OffsetGetResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val maxOffset: JsonField<Long>,
     private val minOffset: JsonField<Long>,

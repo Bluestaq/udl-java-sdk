@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Describes a satellite antenna beam. */
 class BeamFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val beamName: JsonField<String>,
     private val classificationMarking: JsonField<String>,

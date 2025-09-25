@@ -29,6 +29,7 @@ import kotlin.jvm.optionals.getOrNull
  * specification.
  */
 class HistoryListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -4516,6 +4517,7 @@ private constructor(
     }
 
     class Amplitude
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val data: JsonField<List<List<List<List<List<List<List<Double>>>>>>>>,
         private val dimensionName: JsonField<List<String>>,
@@ -4839,6 +4841,7 @@ private constructor(
     }
 
     class AntennaElementPosition
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val data: JsonField<List<List<Double>>>,
         private val dimensionName: JsonField<List<String>>,
@@ -5279,6 +5282,7 @@ private constructor(
     }
 
     class Azimuth
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val data: JsonField<List<List<List<List<List<List<List<Double>>>>>>>>,
         private val dimensionName: JsonField<List<String>>,
@@ -5603,6 +5607,7 @@ private constructor(
 
     /** Characteristic attributes of a IonoObservation. */
     class CharAtt
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val charName: JsonField<String>,
         private val climateModelInputParams: JsonField<List<String>>,
@@ -6191,6 +6196,7 @@ private constructor(
     }
 
     class Datum
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val data: JsonField<List<Double>>,
         private val notes: JsonField<String>,
@@ -6386,6 +6392,7 @@ private constructor(
 
     /** Profile of electron densities in the ionosphere associated with an IonoObservation. */
     class DensityProfile
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val iri: JsonField<Iri>,
         private val parabolic: JsonField<Parabolic>,
@@ -6843,6 +6850,7 @@ private constructor(
 
         /** Full set of the IRI formalism coefficients. */
         class Iri
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val b0: JsonField<Double>,
             private val b1: JsonField<Double>,
@@ -7790,6 +7798,7 @@ private constructor(
 
         /** Coefficients to describe the E, F1, and F2 layers as parabolic-shape segments. */
         class Parabolic
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val description: JsonField<String>,
             private val parabolicItems: JsonField<List<ParabolicItem>>,
@@ -7984,6 +7993,7 @@ private constructor(
 
             /** Describes the E, F1, and F2 layers as parabolic-shape segments. */
             class ParabolicItem
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val f: JsonField<Double>,
                 private val layer: JsonField<String>,
@@ -8261,6 +8271,7 @@ private constructor(
 
         /** Coefficients to describe profile shape as quasi-parabolic segments. */
         class QuasiParabolic
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val description: JsonField<String>,
             private val earthRadius: JsonField<Double>,
@@ -8513,6 +8524,7 @@ private constructor(
              * additional segments may be used to improve accuracy.
              */
             class QuasiParabolicSegment
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val a: JsonField<Double>,
                 private val b: JsonField<Double>,
@@ -8908,6 +8920,7 @@ private constructor(
          * uncertainty boundaries.
          */
         class ShiftedChebyshev
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val description: JsonField<String>,
             private val shiftedChebyshevs: JsonField<List<InnerShiftedChebyshev>>,
@@ -9113,6 +9126,7 @@ private constructor(
              * F2 profile shapes, or height uncertainty boundaries (upper and lower).
              */
             class InnerShiftedChebyshev
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val coeffs: JsonField<List<Double>>,
                 private val error: JsonField<Double>,
@@ -9596,6 +9610,7 @@ private constructor(
 
         /** Parameters of the constant-scale-height Chapman layer. */
         class TopsideExtensionChapmanConst
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val chi: JsonField<Double>,
             private val description: JsonField<String>,
@@ -9905,6 +9920,7 @@ private constructor(
 
         /** Varying scale height Chapman topside layer. */
         class TopsideExtensionVaryChap
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val alpha: JsonField<Double>,
             private val beta: JsonField<Double>,
@@ -10364,6 +10380,7 @@ private constructor(
     }
 
     class Doppler
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val data: JsonField<List<List<List<List<List<List<List<Double>>>>>>>>,
         private val dimensionName: JsonField<List<String>>,
@@ -10687,6 +10704,7 @@ private constructor(
     }
 
     class Elevation
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val data: JsonField<List<List<List<List<List<List<List<Double>>>>>>>>,
         private val dimensionName: JsonField<List<String>>,
@@ -11010,6 +11028,7 @@ private constructor(
     }
 
     class Frequency
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val data: JsonField<List<List<List<List<List<List<List<Double>>>>>>>>,
         private val dimensionName: JsonField<List<String>>,
@@ -11333,6 +11352,7 @@ private constructor(
     }
 
     class Phase
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val data: JsonField<List<List<List<List<List<List<List<Double>>>>>>>>,
         private val dimensionName: JsonField<List<String>>,
@@ -11660,6 +11680,7 @@ private constructor(
     }
 
     class Polarization
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val data:
             JsonField<List<List<List<List<List<List<List<UnnamedSchemaWithArrayParent2>>>>>>>>,
@@ -12153,6 +12174,7 @@ private constructor(
     }
 
     class Power
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val data: JsonField<List<List<List<List<List<List<List<Double>>>>>>>>,
         private val dimensionName: JsonField<List<String>>,
@@ -12476,6 +12498,7 @@ private constructor(
     }
 
     class Range
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val data: JsonField<List<List<List<List<List<List<List<Double>>>>>>>>,
         private val dimensionName: JsonField<List<String>>,
@@ -12938,6 +12961,7 @@ private constructor(
      * IonoObservation.
      */
     class ScalerInfo
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val confidenceLevel: JsonField<Int>,
         private val confidenceScore: JsonField<Int>,
@@ -13300,6 +13324,7 @@ private constructor(
     }
 
     class Stokes
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val data: JsonField<List<List<List<List<List<List<List<Double>>>>>>>>,
         private val dimensionName: JsonField<List<String>>,
@@ -13668,6 +13693,7 @@ private constructor(
     }
 
     class Time
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val data: JsonField<List<List<List<List<List<List<List<Double>>>>>>>>,
         private val dimensionName: JsonField<List<String>>,
@@ -13995,6 +14021,7 @@ private constructor(
     }
 
     class TraceGeneric
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val data: JsonField<List<List<List<Double>>>>,
         private val dimensionName: JsonField<List<String>>,

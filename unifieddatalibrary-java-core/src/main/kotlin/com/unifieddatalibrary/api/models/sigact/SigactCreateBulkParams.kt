@@ -3596,6 +3596,7 @@ private constructor(
         }
 
         class RelatedDoc
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val dataSourceRefs: JsonField<List<DataSourceRef>>,
             private val documentId: JsonField<String>,
@@ -3789,6 +3790,7 @@ private constructor(
                     (if (documentId.asKnown().isPresent) 1 else 0)
 
             class DataSourceRef
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val dataSourceId: JsonField<String>,
                 private val endPosition: JsonField<String>,
