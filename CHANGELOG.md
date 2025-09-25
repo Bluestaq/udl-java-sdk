@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.5.0 (2025-09-25)
+
+Full Changelog: [v0.4.1...v0.5.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.4.1...v0.5.0)
+
+### Features
+
+* **api:** adding obs correlation, staging data for emitters, and user auth endpoint ([f3cbe40](https://github.com/Bluestaq/udl-java-sdk/commit/f3cbe4041ffeae22c00f93f51dd16a01e57002f1))
+* **api:** api update ([5e5e4da](https://github.com/Bluestaq/udl-java-sdk/commit/5e5e4da6114b19f0c977f1dbc8962b473b64847c))
+
+
+### Bug Fixes
+
+* **client:** deserialization of empty objects ([fe31095](https://github.com/Bluestaq/udl-java-sdk/commit/fe310958a37793dc8838b2444b7091737fa566ed))
+
+
+### Chores
+
+* **internal:** change some comment formatting ([40f1e03](https://github.com/Bluestaq/udl-java-sdk/commit/40f1e0310622ccc1584acd19c3d21e584a04cee7))
+
 ## 0.4.1 (2025-09-22)
 
 Full Changelog: [v0.4.0...v0.4.1](https://github.com/Bluestaq/udl-java-sdk/compare/v0.4.0...v0.4.1)
