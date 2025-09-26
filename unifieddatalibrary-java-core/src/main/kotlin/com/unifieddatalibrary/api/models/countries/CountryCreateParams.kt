@@ -547,6 +547,7 @@ private constructor(
      * organizations.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val code: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

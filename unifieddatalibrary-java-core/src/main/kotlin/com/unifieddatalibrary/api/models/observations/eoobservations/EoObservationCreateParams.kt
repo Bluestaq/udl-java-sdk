@@ -445,7 +445,7 @@ private constructor(
     fun mag(): Optional<Double> = body.mag()
 
     /**
-     * Formula: mag - 5.0 \* log_10(geo_range / 1000000.0).
+     * Formula: mag - 5.0 * log_10(geo_range / 1000000.0).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -920,7 +920,7 @@ private constructor(
     fun umbra(): Optional<Boolean> = body.umbra()
 
     /**
-     * Formula: 2.5 \* log_10 (zero_mag_counts / expDuration).
+     * Formula: 2.5 * log_10 (zero_mag_counts / expDuration).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -2352,7 +2352,7 @@ private constructor(
          */
         fun mag(mag: JsonField<Double>) = apply { body.mag(mag) }
 
-        /** Formula: mag - 5.0 \* log_10(geo_range / 1000000.0). */
+        /** Formula: mag - 5.0 * log_10(geo_range / 1000000.0). */
         fun magNormRange(magNormRange: Double) = apply { body.magNormRange(magNormRange) }
 
         /**
@@ -3145,7 +3145,7 @@ private constructor(
          */
         fun umbra(umbra: JsonField<Boolean>) = apply { body.umbra(umbra) }
 
-        /** Formula: 2.5 \* log_10 (zero_mag_counts / expDuration). */
+        /** Formula: 2.5 * log_10 (zero_mag_counts / expDuration). */
         fun zeroptd(zeroptd: Double) = apply { body.zeroptd(zeroptd) }
 
         /**
@@ -3324,6 +3324,7 @@ private constructor(
      * 'Discover' tab in the storefront to confirm the coordinate frames used by the data provider.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -4172,7 +4173,7 @@ private constructor(
         fun mag(): Optional<Double> = mag.getOptional("mag")
 
         /**
-         * Formula: mag - 5.0 \* log_10(geo_range / 1000000.0).
+         * Formula: mag - 5.0 * log_10(geo_range / 1000000.0).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -4657,7 +4658,7 @@ private constructor(
         fun umbra(): Optional<Boolean> = umbra.getOptional("umbra")
 
         /**
-         * Formula: 2.5 \* log_10 (zero_mag_counts / expDuration).
+         * Formula: 2.5 * log_10 (zero_mag_counts / expDuration).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -6416,7 +6417,7 @@ private constructor(
              */
             fun mag(mag: JsonField<Double>) = apply { this.mag = mag }
 
-            /** Formula: mag - 5.0 \* log_10(geo_range / 1000000.0). */
+            /** Formula: mag - 5.0 * log_10(geo_range / 1000000.0). */
             fun magNormRange(magNormRange: Double) = magNormRange(JsonField.of(magNormRange))
 
             /**
@@ -7247,7 +7248,7 @@ private constructor(
              */
             fun umbra(umbra: JsonField<Boolean>) = apply { this.umbra = umbra }
 
-            /** Formula: 2.5 \* log_10 (zero_mag_counts / expDuration). */
+            /** Formula: 2.5 * log_10 (zero_mag_counts / expDuration). */
             fun zeroptd(zeroptd: Double) = zeroptd(JsonField.of(zeroptd))
 
             /**
@@ -8020,6 +8021,7 @@ private constructor(
      * phenomenologies.
      */
     class EoobservationDetails
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val acalCrPixX: JsonField<Double>,
         private val acalCrPixY: JsonField<Double>,

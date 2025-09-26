@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * applicable boundaries, locations, heights, data ownership, and currency.
  */
 class NavigationalObstructionListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val cycleDate: JsonField<LocalDate>,

@@ -1096,6 +1096,7 @@ private constructor(
      * navigation, and waivers associated with the Site.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -2619,6 +2620,7 @@ private constructor(
      * Collection providing hours of operation and other information specific to a day of the week.
      */
     class DailyOperation
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val dayOfWeek: JsonField<DayOfWeek>,
         private val operatingHours: JsonField<List<OperatingHour>>,
@@ -3117,6 +3119,7 @@ private constructor(
          * week specified.
          */
         class OperatingHour
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val opStartTime: JsonField<String>,
             private val opStopTime: JsonField<String>,
@@ -3348,6 +3351,7 @@ private constructor(
      * associated with this SiteOperations record.
      */
     class MaximumOnGround
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val aircraftMds: JsonField<String>,
         private val contingencyMog: JsonField<Int>,
@@ -3758,6 +3762,7 @@ private constructor(
      * operations.
      */
     class OperationalDeviation
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val affectedAircraftMds: JsonField<String>,
         private val affectedMog: JsonField<Int>,
@@ -4195,6 +4200,7 @@ private constructor(
 
     /** Collection of planning information associated with this SiteOperations record. */
     class OperationalPlanning
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val opEndDate: JsonField<OffsetDateTime>,
         private val opLastChangedBy: JsonField<String>,
@@ -4624,6 +4630,7 @@ private constructor(
      * record.
      */
     class Pathway
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val pwDefinition: JsonField<String>,
         private val pwLastChangedBy: JsonField<String>,
@@ -4951,6 +4958,7 @@ private constructor(
      * this record.
      */
     class Waiver
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val expirationDate: JsonField<OffsetDateTime>,
         private val hasExpired: JsonField<Boolean>,

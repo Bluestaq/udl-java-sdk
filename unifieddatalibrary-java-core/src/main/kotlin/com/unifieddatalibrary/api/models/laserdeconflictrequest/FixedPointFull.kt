@@ -17,6 +17,7 @@ import java.util.Objects
 import java.util.Optional
 
 class FixedPointFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val latitude: JsonField<Double>,
     private val longitude: JsonField<Double>,

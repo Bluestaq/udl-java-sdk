@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * target object, if known.
  */
 class TrackFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -40,6 +41,8 @@ private constructor(
     private val attitudeRate: JsonField<List<Double>>,
     private val callSign: JsonField<String>,
     private val cntct: JsonField<String>,
+    private val contextKeys: JsonField<List<String>>,
+    private val contextValues: JsonField<List<String>>,
     private val course: JsonField<Double>,
     private val cov: JsonField<List<Double>>,
     private val createdAt: JsonField<OffsetDateTime>,
@@ -48,6 +51,7 @@ private constructor(
     private val ecefPos: JsonField<List<Double>>,
     private val ecefVel: JsonField<List<Double>>,
     private val eNuAcc: JsonField<List<Double>>,
+    private val eNuGroundVel: JsonField<List<Double>>,
     private val eNuPos: JsonField<List<Double>>,
     private val eNuVel: JsonField<List<Double>>,
     private val env: JsonField<String>,
@@ -76,6 +80,7 @@ private constructor(
     private val msnId: JsonField<String>,
     private val multiSource: JsonField<Boolean>,
     private val objAct: JsonField<String>,
+    private val objDescription: JsonField<String>,
     private val objId: JsonField<String>,
     private val objIdent: JsonField<String>,
     private val objNat: JsonField<String>,
@@ -99,6 +104,8 @@ private constructor(
     private val trkPtType: JsonField<String>,
     private val trkQual: JsonField<Int>,
     private val trkStat: JsonField<String>,
+    private val vertUnc: JsonField<Double>,
+    private val wanderAng: JsonField<Double>,
     private val additionalProperties: MutableMap<String, JsonValue>,
 ) {
 
@@ -122,6 +129,12 @@ private constructor(
         attitudeRate: JsonField<List<Double>> = JsonMissing.of(),
         @JsonProperty("callSign") @ExcludeMissing callSign: JsonField<String> = JsonMissing.of(),
         @JsonProperty("cntct") @ExcludeMissing cntct: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("contextKeys")
+        @ExcludeMissing
+        contextKeys: JsonField<List<String>> = JsonMissing.of(),
+        @JsonProperty("contextValues")
+        @ExcludeMissing
+        contextValues: JsonField<List<String>> = JsonMissing.of(),
         @JsonProperty("course") @ExcludeMissing course: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("cov") @ExcludeMissing cov: JsonField<List<Double>> = JsonMissing.of(),
         @JsonProperty("createdAt")
@@ -138,6 +151,9 @@ private constructor(
         @ExcludeMissing
         ecefVel: JsonField<List<Double>> = JsonMissing.of(),
         @JsonProperty("eNUAcc") @ExcludeMissing eNuAcc: JsonField<List<Double>> = JsonMissing.of(),
+        @JsonProperty("eNUGroundVel")
+        @ExcludeMissing
+        eNuGroundVel: JsonField<List<Double>> = JsonMissing.of(),
         @JsonProperty("eNUPos") @ExcludeMissing eNuPos: JsonField<List<Double>> = JsonMissing.of(),
         @JsonProperty("eNUVel") @ExcludeMissing eNuVel: JsonField<List<Double>> = JsonMissing.of(),
         @JsonProperty("env") @ExcludeMissing env: JsonField<String> = JsonMissing.of(),
@@ -170,6 +186,9 @@ private constructor(
         @ExcludeMissing
         multiSource: JsonField<Boolean> = JsonMissing.of(),
         @JsonProperty("objAct") @ExcludeMissing objAct: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("objDescription")
+        @ExcludeMissing
+        objDescription: JsonField<String> = JsonMissing.of(),
         @JsonProperty("objId") @ExcludeMissing objId: JsonField<String> = JsonMissing.of(),
         @JsonProperty("objIdent") @ExcludeMissing objIdent: JsonField<String> = JsonMissing.of(),
         @JsonProperty("objNat") @ExcludeMissing objNat: JsonField<String> = JsonMissing.of(),
@@ -197,6 +216,8 @@ private constructor(
         @JsonProperty("trkPtType") @ExcludeMissing trkPtType: JsonField<String> = JsonMissing.of(),
         @JsonProperty("trkQual") @ExcludeMissing trkQual: JsonField<Int> = JsonMissing.of(),
         @JsonProperty("trkStat") @ExcludeMissing trkStat: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("vertUnc") @ExcludeMissing vertUnc: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("wanderAng") @ExcludeMissing wanderAng: JsonField<Double> = JsonMissing.of(),
     ) : this(
         classificationMarking,
         dataMode,
@@ -210,6 +231,8 @@ private constructor(
         attitudeRate,
         callSign,
         cntct,
+        contextKeys,
+        contextValues,
         course,
         cov,
         createdAt,
@@ -218,6 +241,7 @@ private constructor(
         ecefPos,
         ecefVel,
         eNuAcc,
+        eNuGroundVel,
         eNuPos,
         eNuVel,
         env,
@@ -246,6 +270,7 @@ private constructor(
         msnId,
         multiSource,
         objAct,
+        objDescription,
         objId,
         objIdent,
         objNat,
@@ -269,6 +294,8 @@ private constructor(
         trkPtType,
         trkQual,
         trkStat,
+        vertUnc,
+        wanderAng,
         mutableMapOf(),
     )
 
@@ -308,7 +335,7 @@ private constructor(
     fun source(): String = source.getRequired("source")
 
     /**
-     * Track timestamp in ISO8601 UTC format.
+     * Track timestamp in ISO8601 UTC format with microsecond precision.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
      *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
@@ -353,11 +380,13 @@ private constructor(
 
     /**
      * The attitude (Yaw, Pitch, and Roll), in degrees, of the track object. When provided, the
-     * array must always contain 3 values. These values represent the vehicle's rotation about the
-     * vertical, lateral, and longitudinal axes, respectively, in a locally level, East, North, Up
-     * "right handed" coordinate system centered on the vehicle. Yaw is measured in degrees and
-     * ranges from -180 to 180. Pitch is measured in degrees and ranges from -90 to 90. Roll is
-     * measured in degrees and ranges from -180 to 180.
+     * array must always contain 3 values defining the attitude and may specify an optional
+     * timestamp indicating when the data was measured, last known to be correct and/or predicted to
+     * occur. These values represent the vehicle's rotation about the vertical, lateral, and
+     * longitudinal axes, respectively, in a locally level, East, North, Up "right handed"
+     * coordinate system centered on the vehicle. Yaw is measured in degrees and ranges from -180
+     * to 180. Pitch is measured in degrees and ranges from -90 to 90. Roll is measured in degrees
+     * and ranges from -180 to 180.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -366,10 +395,11 @@ private constructor(
 
     /**
      * The attitude rate (Yaw Rate, Pitch Rate, and Roll Rate), in degrees per second, of the track
-     * object. When provided, the array must always contain 3 values. These values represent the
-     * rate of change of the vehicle's rotation about the vertical, lateral, and longitudinal axes,
-     * respectively, in a locally level, East, North, Up "right handed" coordinate system centered
-     * on the vehicle.
+     * object. When provided, the array must always contain 3 values defining the attitude rate and
+     * may specify an optional timestamp indicating when the data was measured, last known to be
+     * correct and/or predicted to occur. These values represent the rate of change of the vehicle's
+     * rotation about the vertical, lateral, and longitudinal axes, respectively, in a locally
+     * level, East, North, Up "right handed" coordinate system centered on the vehicle.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -393,6 +423,31 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun cntct(): Optional<String> = cntct.getOptional("cntct")
+
+    /**
+     * An optional string array containing additional data (keys) representing relevant items for
+     * context of fields not specifically defined in this schema. This array is paired with the
+     * contextValues string array and must contain the same number of items. Please note these
+     * fields are intended for contextual use only and do not pertain to core schema information. To
+     * ensure proper integration and avoid misuse, coordination of how these fields are populated
+     * and consumed is required during onboarding.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun contextKeys(): Optional<List<String>> = contextKeys.getOptional("contextKeys")
+
+    /**
+     * An optional string array containing the values associated with the contextKeys array. This
+     * array is paired with the contextKeys string array and must contain the same number of items.
+     * Please note these fields are intended for contextual use only and do not pertain to core
+     * schema information. To ensure proper integration and avoid misuse, coordination of how these
+     * fields are populated and consumed is required during onboarding.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun contextValues(): Optional<List<String>> = contextValues.getOptional("contextValues")
 
     /**
      * The track object course-over-ground, in degrees clockwise from true North at the object
@@ -456,8 +511,9 @@ private constructor(
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
 
     /**
-     * Track object acceleration in ECEF [x'', y'', z''], meters/sec^2. When provided, array must
-     * always contain 3 values.
+     * Array of the track object acceleration, [x'', y'', z''], in meters per second squared, in the
+     * Earth Centered - Earth Fixed (ECEF) reference frame. When provided, array must always contain
+     * 3 values.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -465,8 +521,8 @@ private constructor(
     fun ecefAcc(): Optional<List<Double>> = ecefAcc.getOptional("ecefAcc")
 
     /**
-     * Track object location in ECEF [x, y, z], meters. When provided, array must always contain 3
-     * values.
+     * Array of the track object position, [x, y, z], in meters, in the Earth Centered - Earth Fixed
+     * (ECEF) reference frame. When provided, array must always contain 3 values.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -474,8 +530,9 @@ private constructor(
     fun ecefPos(): Optional<List<Double>> = ecefPos.getOptional("ecefPos")
 
     /**
-     * Track object velocity in ECEF [x', y', z'], meters/sec. When provided, array must always
-     * contain 3 values.
+     * Array of the track object velocity, [x', y', z'], in meters per second, in the Earth
+     * Centered - Earth Fixed (ECEF) reference frame. When provided, array must always contain 3
+     * values.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -484,12 +541,21 @@ private constructor(
 
     /**
      * East, North, Up acceleration components, in meters per second squared. When provided, array
-     * must always contain 3 values.
+     * must always contain 3 values defining the acceleration.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
      */
     fun eNuAcc(): Optional<List<Double>> = eNuAcc.getOptional("eNUAcc")
+
+    /**
+     * East, North, Up ground velocity components, in meters per second. When provided, array must
+     * always contain 3 values.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun eNuGroundVel(): Optional<List<Double>> = eNuGroundVel.getOptional("eNUGroundVel")
 
     /**
      * East, North, Up position components, in meters. When provided, array must always contain 3
@@ -501,8 +567,8 @@ private constructor(
     fun eNuPos(): Optional<List<Double>> = eNuPos.getOptional("eNUPos")
 
     /**
-     * East, North, Up velocity components, in meters/sec. When provided, array must always contain
-     * 3 values.
+     * East, North, Up velocity components, in meters per second. When provided, array must always
+     * contain 3 values.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -539,7 +605,9 @@ private constructor(
     fun envConf(): Optional<Double> = envConf.getOptional("envConf")
 
     /**
-     * Uncertainty ellipsoid [semi-major axis (m), semi-minor axis (m), orientation (deg)].
+     * Uncertainty ellipsoid
+     * [semi-major axis (meters), semi-minor axis (meters), orientation (degrees)]. When provided,
+     * array must always contain 3 values.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -547,7 +615,8 @@ private constructor(
     fun errEllp(): Optional<List<Double>> = errEllp.getOptional("errEllp")
 
     /**
-     * The track object heading, in degrees clockwise from true North at the object location.
+     * The track object heading, in degrees clockwise from true North at the object location (0-360
+     * degrees).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -608,7 +677,7 @@ private constructor(
 
     /**
      * Estimate of the acceleration, [x'', y'', z''], of the track object in the defined cartesian
-     * system, in meters/sec^2. When provided, array must always contain 3 values.
+     * system, in meters per second squared. When provided, array must always contain 3 values.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -634,8 +703,8 @@ private constructor(
     fun lcPos(): Optional<List<Double>> = lcPos.getOptional("lcPos")
 
     /**
-     * x, y, and z-axis rotations about ECEF that define a local cartesian system. When provided,
-     * array must always contain 3 values.
+     * x, y, and z-axis rotations (degrees) about ECEF that define a local cartesian system. When
+     * provided, array must always contain 3 values.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -644,7 +713,7 @@ private constructor(
 
     /**
      * Estimate of the velocity, [x', y', z'], of the track object in the defined cartesian system,
-     * in meters/sec. When provided, array must always contain 3 values.
+     * in meters per second. When provided, array must always contain 3 values.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -661,7 +730,8 @@ private constructor(
     fun lon(): Optional<Double> = lon.getOptional("lon")
 
     /**
-     * Mode-1 interrogation response (mission code), indicating mission or aircraft type.
+     * Mode-1 interrogation response (mission code), indicating mission or aircraft type. Assume
+     * leading 0's for any inputs that are less than 2 digits.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -677,7 +747,8 @@ private constructor(
     fun m1v(): Optional<Int> = m1v.getOptional("m1v")
 
     /**
-     * Mode-2 interrogation response (military identification code).
+     * Mode-2 interrogation response (military identification code). Assume leading 0's for any
+     * inputs that are less than 4 digits.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -695,7 +766,7 @@ private constructor(
     /**
      * Mode-3/A interrogation response (aircraft identification), provides a 4-digit octal
      * identification code for the aircraft, assigned by the air traffic controller. Mode-3/A is
-     * shared military/civilian use.
+     * shared military/civilian use. Assume leading 0's for any inputs that are less than 4 digits.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -747,7 +818,7 @@ private constructor(
     fun modType(): Optional<String> = modType.getOptional("modType")
 
     /**
-     * Message Timestamp.
+     * Timestamp when the message was created, in ISO8601 UTC format with microsecond precision.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -780,6 +851,15 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun objAct(): Optional<String> = objAct.getOptional("objAct")
+
+    /**
+     * This is the free-text, generally human-readable, name of the System or Resource corresponding
+     * to this track record.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun objDescription(): Optional<String> = objDescription.getOptional("objDescription")
 
     /**
      * The UID or designation of the tracked object.
@@ -905,7 +985,7 @@ private constructor(
     fun sourceDl(): Optional<String> = sourceDl.getOptional("sourceDL")
 
     /**
-     * Track object spd, in meters/sec.
+     * Track object speed, in meters per second.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -978,7 +1058,9 @@ private constructor(
     fun trkId(): Optional<String> = trkId.getOptional("trkId")
 
     /**
-     * UUID of the track item object, applies to STANAG-4676 messages.
+     * UUID of the track item object. Intended for, but not restricted to, STANAG-4676 messages.
+     * This ID is used to distinguish an individual track within a message or external system
+     * containing multiple tracks on single or multiple targets.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -1018,6 +1100,25 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun trkStat(): Optional<String> = trkStat.getOptional("trkStat")
+
+    /**
+     * The vertical uncertainty represents the 1-sigma position uncertainty perpendicular to the
+     * error Ellipse surface in the up (+) / down (-) direction measured in meters.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun vertUnc(): Optional<Double> = vertUnc.getOptional("vertUnc")
+
+    /**
+     * The angle by which the Inertial Navigation System (INS) rotates the geodetic frame about the
+     * axis to avoid the introduction of a singularity at the North pole when it is calculating
+     * vehicle location.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun wanderAng(): Optional<Double> = wanderAng.getOptional("wanderAng")
 
     /**
      * Returns the raw JSON value of [classificationMarking].
@@ -1109,6 +1210,24 @@ private constructor(
     @JsonProperty("cntct") @ExcludeMissing fun _cntct(): JsonField<String> = cntct
 
     /**
+     * Returns the raw JSON value of [contextKeys].
+     *
+     * Unlike [contextKeys], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("contextKeys")
+    @ExcludeMissing
+    fun _contextKeys(): JsonField<List<String>> = contextKeys
+
+    /**
+     * Returns the raw JSON value of [contextValues].
+     *
+     * Unlike [contextValues], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("contextValues")
+    @ExcludeMissing
+    fun _contextValues(): JsonField<List<String>> = contextValues
+
+    /**
      * Returns the raw JSON value of [course].
      *
      * Unlike [course], this method doesn't throw if the JSON field has an unexpected type.
@@ -1165,6 +1284,15 @@ private constructor(
      * Unlike [eNuAcc], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("eNUAcc") @ExcludeMissing fun _eNuAcc(): JsonField<List<Double>> = eNuAcc
+
+    /**
+     * Returns the raw JSON value of [eNuGroundVel].
+     *
+     * Unlike [eNuGroundVel], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("eNUGroundVel")
+    @ExcludeMissing
+    fun _eNuGroundVel(): JsonField<List<Double>> = eNuGroundVel
 
     /**
      * Returns the raw JSON value of [eNuPos].
@@ -1365,6 +1493,15 @@ private constructor(
     @JsonProperty("objAct") @ExcludeMissing fun _objAct(): JsonField<String> = objAct
 
     /**
+     * Returns the raw JSON value of [objDescription].
+     *
+     * Unlike [objDescription], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("objDescription")
+    @ExcludeMissing
+    fun _objDescription(): JsonField<String> = objDescription
+
+    /**
      * Returns the raw JSON value of [objId].
      *
      * Unlike [objId], this method doesn't throw if the JSON field has an unexpected type.
@@ -1525,6 +1662,20 @@ private constructor(
      */
     @JsonProperty("trkStat") @ExcludeMissing fun _trkStat(): JsonField<String> = trkStat
 
+    /**
+     * Returns the raw JSON value of [vertUnc].
+     *
+     * Unlike [vertUnc], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("vertUnc") @ExcludeMissing fun _vertUnc(): JsonField<Double> = vertUnc
+
+    /**
+     * Returns the raw JSON value of [wanderAng].
+     *
+     * Unlike [wanderAng], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("wanderAng") @ExcludeMissing fun _wanderAng(): JsonField<Double> = wanderAng
+
     @JsonAnySetter
     private fun putAdditionalProperty(key: String, value: JsonValue) {
         additionalProperties.put(key, value)
@@ -1568,6 +1719,8 @@ private constructor(
         private var attitudeRate: JsonField<MutableList<Double>>? = null
         private var callSign: JsonField<String> = JsonMissing.of()
         private var cntct: JsonField<String> = JsonMissing.of()
+        private var contextKeys: JsonField<MutableList<String>>? = null
+        private var contextValues: JsonField<MutableList<String>>? = null
         private var course: JsonField<Double> = JsonMissing.of()
         private var cov: JsonField<MutableList<Double>>? = null
         private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
@@ -1576,6 +1729,7 @@ private constructor(
         private var ecefPos: JsonField<MutableList<Double>>? = null
         private var ecefVel: JsonField<MutableList<Double>>? = null
         private var eNuAcc: JsonField<MutableList<Double>>? = null
+        private var eNuGroundVel: JsonField<MutableList<Double>>? = null
         private var eNuPos: JsonField<MutableList<Double>>? = null
         private var eNuVel: JsonField<MutableList<Double>>? = null
         private var env: JsonField<String> = JsonMissing.of()
@@ -1604,6 +1758,7 @@ private constructor(
         private var msnId: JsonField<String> = JsonMissing.of()
         private var multiSource: JsonField<Boolean> = JsonMissing.of()
         private var objAct: JsonField<String> = JsonMissing.of()
+        private var objDescription: JsonField<String> = JsonMissing.of()
         private var objId: JsonField<String> = JsonMissing.of()
         private var objIdent: JsonField<String> = JsonMissing.of()
         private var objNat: JsonField<String> = JsonMissing.of()
@@ -1627,6 +1782,8 @@ private constructor(
         private var trkPtType: JsonField<String> = JsonMissing.of()
         private var trkQual: JsonField<Int> = JsonMissing.of()
         private var trkStat: JsonField<String> = JsonMissing.of()
+        private var vertUnc: JsonField<Double> = JsonMissing.of()
+        private var wanderAng: JsonField<Double> = JsonMissing.of()
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         @JvmSynthetic
@@ -1643,6 +1800,8 @@ private constructor(
             attitudeRate = trackFull.attitudeRate.map { it.toMutableList() }
             callSign = trackFull.callSign
             cntct = trackFull.cntct
+            contextKeys = trackFull.contextKeys.map { it.toMutableList() }
+            contextValues = trackFull.contextValues.map { it.toMutableList() }
             course = trackFull.course
             cov = trackFull.cov.map { it.toMutableList() }
             createdAt = trackFull.createdAt
@@ -1651,6 +1810,7 @@ private constructor(
             ecefPos = trackFull.ecefPos.map { it.toMutableList() }
             ecefVel = trackFull.ecefVel.map { it.toMutableList() }
             eNuAcc = trackFull.eNuAcc.map { it.toMutableList() }
+            eNuGroundVel = trackFull.eNuGroundVel.map { it.toMutableList() }
             eNuPos = trackFull.eNuPos.map { it.toMutableList() }
             eNuVel = trackFull.eNuVel.map { it.toMutableList() }
             env = trackFull.env
@@ -1679,6 +1839,7 @@ private constructor(
             msnId = trackFull.msnId
             multiSource = trackFull.multiSource
             objAct = trackFull.objAct
+            objDescription = trackFull.objDescription
             objId = trackFull.objId
             objIdent = trackFull.objIdent
             objNat = trackFull.objNat
@@ -1702,6 +1863,8 @@ private constructor(
             trkPtType = trackFull.trkPtType
             trkQual = trackFull.trkQual
             trkStat = trackFull.trkStat
+            vertUnc = trackFull.vertUnc
+            wanderAng = trackFull.wanderAng
             additionalProperties = trackFull.additionalProperties.toMutableMap()
         }
 
@@ -1756,7 +1919,7 @@ private constructor(
          */
         fun source(source: JsonField<String>) = apply { this.source = source }
 
-        /** Track timestamp in ISO8601 UTC format. */
+        /** Track timestamp in ISO8601 UTC format with microsecond precision. */
         fun ts(ts: OffsetDateTime) = ts(JsonField.of(ts))
 
         /**
@@ -1824,11 +1987,13 @@ private constructor(
 
         /**
          * The attitude (Yaw, Pitch, and Roll), in degrees, of the track object. When provided, the
-         * array must always contain 3 values. These values represent the vehicle's rotation about
-         * the vertical, lateral, and longitudinal axes, respectively, in a locally level, East,
-         * North, Up "right handed" coordinate system centered on the vehicle. Yaw is measured in
-         * degrees and ranges from -180 to 180. Pitch is measured in degrees and ranges from -90
-         * to 90. Roll is measured in degrees and ranges from -180 to 180.
+         * array must always contain 3 values defining the attitude and may specify an optional
+         * timestamp indicating when the data was measured, last known to be correct and/or
+         * predicted to occur. These values represent the vehicle's rotation about the vertical,
+         * lateral, and longitudinal axes, respectively, in a locally level, East, North, Up "right
+         * handed" coordinate system centered on the vehicle. Yaw is measured in degrees and ranges
+         * from -180 to 180. Pitch is measured in degrees and ranges from -90 to 90. Roll is
+         * measured in degrees and ranges from -180 to 180.
          */
         fun attitude(attitude: List<Double>) = attitude(JsonField.of(attitude))
 
@@ -1857,10 +2022,12 @@ private constructor(
 
         /**
          * The attitude rate (Yaw Rate, Pitch Rate, and Roll Rate), in degrees per second, of the
-         * track object. When provided, the array must always contain 3 values. These values
-         * represent the rate of change of the vehicle's rotation about the vertical, lateral, and
-         * longitudinal axes, respectively, in a locally level, East, North, Up "right handed"
-         * coordinate system centered on the vehicle.
+         * track object. When provided, the array must always contain 3 values defining the attitude
+         * rate and may specify an optional timestamp indicating when the data was measured, last
+         * known to be correct and/or predicted to occur. These values represent the rate of change
+         * of the vehicle's rotation about the vertical, lateral, and longitudinal axes,
+         * respectively, in a locally level, East, North, Up "right handed" coordinate system
+         * centered on the vehicle.
          */
         fun attitudeRate(attitudeRate: List<Double>) = attitudeRate(JsonField.of(attitudeRate))
 
@@ -1912,6 +2079,72 @@ private constructor(
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun cntct(cntct: JsonField<String>) = apply { this.cntct = cntct }
+
+        /**
+         * An optional string array containing additional data (keys) representing relevant items
+         * for context of fields not specifically defined in this schema. This array is paired with
+         * the contextValues string array and must contain the same number of items. Please note
+         * these fields are intended for contextual use only and do not pertain to core schema
+         * information. To ensure proper integration and avoid misuse, coordination of how these
+         * fields are populated and consumed is required during onboarding.
+         */
+        fun contextKeys(contextKeys: List<String>) = contextKeys(JsonField.of(contextKeys))
+
+        /**
+         * Sets [Builder.contextKeys] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.contextKeys] with a well-typed `List<String>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun contextKeys(contextKeys: JsonField<List<String>>) = apply {
+            this.contextKeys = contextKeys.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [String] to [contextKeys].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addContextKey(contextKey: String) = apply {
+            contextKeys =
+                (contextKeys ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("contextKeys", it).add(contextKey)
+                }
+        }
+
+        /**
+         * An optional string array containing the values associated with the contextKeys array.
+         * This array is paired with the contextKeys string array and must contain the same number
+         * of items. Please note these fields are intended for contextual use only and do not
+         * pertain to core schema information. To ensure proper integration and avoid misuse,
+         * coordination of how these fields are populated and consumed is required during
+         * onboarding.
+         */
+        fun contextValues(contextValues: List<String>) = contextValues(JsonField.of(contextValues))
+
+        /**
+         * Sets [Builder.contextValues] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.contextValues] with a well-typed `List<String>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun contextValues(contextValues: JsonField<List<String>>) = apply {
+            this.contextValues = contextValues.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [String] to [contextValues].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addContextValue(contextValue: String) = apply {
+            contextValues =
+                (contextValues ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("contextValues", it).add(contextValue)
+                }
+        }
 
         /**
          * The track object course-over-ground, in degrees clockwise from true North at the object
@@ -2004,8 +2237,9 @@ private constructor(
         fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
 
         /**
-         * Track object acceleration in ECEF [x'', y'', z''], meters/sec^2. When provided, array
-         * must always contain 3 values.
+         * Array of the track object acceleration, [x'', y'', z''], in meters per second squared, in
+         * the Earth Centered - Earth Fixed (ECEF) reference frame. When provided, array must always
+         * contain 3 values.
          */
         fun ecefAcc(ecefAcc: List<Double>) = ecefAcc(JsonField.of(ecefAcc))
 
@@ -2033,8 +2267,8 @@ private constructor(
         }
 
         /**
-         * Track object location in ECEF [x, y, z], meters. When provided, array must always contain
-         * 3 values.
+         * Array of the track object position, [x, y, z], in meters, in the Earth Centered - Earth
+         * Fixed (ECEF) reference frame. When provided, array must always contain 3 values.
          */
         fun ecefPos(ecefPos: List<Double>) = ecefPos(JsonField.of(ecefPos))
 
@@ -2062,8 +2296,9 @@ private constructor(
         }
 
         /**
-         * Track object velocity in ECEF [x', y', z'], meters/sec. When provided, array must always
-         * contain 3 values.
+         * Array of the track object velocity, [x', y', z'], in meters per second, in the Earth
+         * Centered - Earth Fixed (ECEF) reference frame. When provided, array must always contain 3
+         * values.
          */
         fun ecefVel(ecefVel: List<Double>) = ecefVel(JsonField.of(ecefVel))
 
@@ -2092,7 +2327,7 @@ private constructor(
 
         /**
          * East, North, Up acceleration components, in meters per second squared. When provided,
-         * array must always contain 3 values.
+         * array must always contain 3 values defining the acceleration.
          */
         fun eNuAcc(eNuAcc: List<Double>) = eNuAcc(JsonField.of(eNuAcc))
 
@@ -2116,6 +2351,35 @@ private constructor(
             this.eNuAcc =
                 (this.eNuAcc ?: JsonField.of(mutableListOf())).also {
                     checkKnown("eNuAcc", it).add(eNuAcc)
+                }
+        }
+
+        /**
+         * East, North, Up ground velocity components, in meters per second. When provided, array
+         * must always contain 3 values.
+         */
+        fun eNuGroundVel(eNuGroundVel: List<Double>) = eNuGroundVel(JsonField.of(eNuGroundVel))
+
+        /**
+         * Sets [Builder.eNuGroundVel] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.eNuGroundVel] with a well-typed `List<Double>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun eNuGroundVel(eNuGroundVel: JsonField<List<Double>>) = apply {
+            this.eNuGroundVel = eNuGroundVel.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [Double] to [Builder.eNuGroundVel].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addENuGroundVel(eNuGroundVel: Double) = apply {
+            this.eNuGroundVel =
+                (this.eNuGroundVel ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("eNuGroundVel", it).add(eNuGroundVel)
                 }
         }
 
@@ -2149,8 +2413,8 @@ private constructor(
         }
 
         /**
-         * East, North, Up velocity components, in meters/sec. When provided, array must always
-         * contain 3 values.
+         * East, North, Up velocity components, in meters per second. When provided, array must
+         * always contain 3 values.
          */
         fun eNuVel(eNuVel: List<Double>) = eNuVel(JsonField.of(eNuVel))
 
@@ -2214,7 +2478,11 @@ private constructor(
          */
         fun envConf(envConf: JsonField<Double>) = apply { this.envConf = envConf }
 
-        /** Uncertainty ellipsoid [semi-major axis (m), semi-minor axis (m), orientation (deg)]. */
+        /**
+         * Uncertainty ellipsoid
+         * [semi-major axis (meters), semi-minor axis (meters), orientation (degrees)]. When
+         * provided, array must always contain 3 values.
+         */
         fun errEllp(errEllp: List<Double>) = errEllp(JsonField.of(errEllp))
 
         /**
@@ -2241,7 +2509,8 @@ private constructor(
         }
 
         /**
-         * The track object heading, in degrees clockwise from true North at the object location.
+         * The track object heading, in degrees clockwise from true North at the object location
+         * (0-360 degrees).
          */
         fun hdng(hdng: Double) = hdng(JsonField.of(hdng))
 
@@ -2326,7 +2595,8 @@ private constructor(
 
         /**
          * Estimate of the acceleration, [x'', y'', z''], of the track object in the defined
-         * cartesian system, in meters/sec^2. When provided, array must always contain 3 values.
+         * cartesian system, in meters per second squared. When provided, array must always contain
+         * 3 values.
          */
         fun lcAcc(lcAcc: List<Double>) = lcAcc(JsonField.of(lcAcc))
 
@@ -2406,8 +2676,8 @@ private constructor(
         }
 
         /**
-         * x, y, and z-axis rotations about ECEF that define a local cartesian system. When
-         * provided, array must always contain 3 values.
+         * x, y, and z-axis rotations (degrees) about ECEF that define a local cartesian system.
+         * When provided, array must always contain 3 values.
          */
         fun lcs(lcs: List<Double>) = lcs(JsonField.of(lcs))
 
@@ -2431,7 +2701,7 @@ private constructor(
 
         /**
          * Estimate of the velocity, [x', y', z'], of the track object in the defined cartesian
-         * system, in meters/sec. When provided, array must always contain 3 values.
+         * system, in meters per second. When provided, array must always contain 3 values.
          */
         fun lcVel(lcVel: List<Double>) = lcVel(JsonField.of(lcVel))
 
@@ -2472,7 +2742,10 @@ private constructor(
          */
         fun lon(lon: JsonField<Double>) = apply { this.lon = lon }
 
-        /** Mode-1 interrogation response (mission code), indicating mission or aircraft type. */
+        /**
+         * Mode-1 interrogation response (mission code), indicating mission or aircraft type. Assume
+         * leading 0's for any inputs that are less than 2 digits.
+         */
         fun m1(m1: Int) = m1(JsonField.of(m1))
 
         /**
@@ -2494,7 +2767,10 @@ private constructor(
          */
         fun m1v(m1v: JsonField<Int>) = apply { this.m1v = m1v }
 
-        /** Mode-2 interrogation response (military identification code). */
+        /**
+         * Mode-2 interrogation response (military identification code). Assume leading 0's for any
+         * inputs that are less than 4 digits.
+         */
         fun m2(m2: Int) = m2(JsonField.of(m2))
 
         /**
@@ -2519,7 +2795,8 @@ private constructor(
         /**
          * Mode-3/A interrogation response (aircraft identification), provides a 4-digit octal
          * identification code for the aircraft, assigned by the air traffic controller. Mode-3/A is
-         * shared military/civilian use.
+         * shared military/civilian use. Assume leading 0's for any inputs that are less than 4
+         * digits.
          */
         fun m3a(m3a: Int) = m3a(JsonField.of(m3a))
 
@@ -2583,7 +2860,9 @@ private constructor(
          */
         fun modType(modType: JsonField<String>) = apply { this.modType = modType }
 
-        /** Message Timestamp. */
+        /**
+         * Timestamp when the message was created, in ISO8601 UTC format with microsecond precision.
+         */
         fun msgTs(msgTs: OffsetDateTime) = msgTs(JsonField.of(msgTs))
 
         /**
@@ -2633,6 +2912,23 @@ private constructor(
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun objAct(objAct: JsonField<String>) = apply { this.objAct = objAct }
+
+        /**
+         * This is the free-text, generally human-readable, name of the System or Resource
+         * corresponding to this track record.
+         */
+        fun objDescription(objDescription: String) = objDescription(JsonField.of(objDescription))
+
+        /**
+         * Sets [Builder.objDescription] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.objDescription] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun objDescription(objDescription: JsonField<String>) = apply {
+            this.objDescription = objDescription
+        }
 
         /** The UID or designation of the tracked object. */
         fun objId(objId: String) = objId(JsonField.of(objId))
@@ -2806,7 +3102,7 @@ private constructor(
          */
         fun sourceDl(sourceDl: JsonField<String>) = apply { this.sourceDl = sourceDl }
 
-        /** Track object spd, in meters/sec. */
+        /** Track object speed, in meters per second. */
         fun spd(spd: Double) = spd(JsonField.of(spd))
 
         /**
@@ -2954,7 +3250,11 @@ private constructor(
          */
         fun trkId(trkId: JsonField<String>) = apply { this.trkId = trkId }
 
-        /** UUID of the track item object, applies to STANAG-4676 messages. */
+        /**
+         * UUID of the track item object. Intended for, but not restricted to, STANAG-4676 messages.
+         * This ID is used to distinguish an individual track within a message or external system
+         * containing multiple tracks on single or multiple targets.
+         */
         fun trkItmId(trkItmId: String) = trkItmId(JsonField.of(trkItmId))
 
         /**
@@ -3016,6 +3316,36 @@ private constructor(
          */
         fun trkStat(trkStat: JsonField<String>) = apply { this.trkStat = trkStat }
 
+        /**
+         * The vertical uncertainty represents the 1-sigma position uncertainty perpendicular to the
+         * error Ellipse surface in the up (+) / down (-) direction measured in meters.
+         */
+        fun vertUnc(vertUnc: Double) = vertUnc(JsonField.of(vertUnc))
+
+        /**
+         * Sets [Builder.vertUnc] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.vertUnc] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun vertUnc(vertUnc: JsonField<Double>) = apply { this.vertUnc = vertUnc }
+
+        /**
+         * The angle by which the Inertial Navigation System (INS) rotates the geodetic frame about
+         * the axis to avoid the introduction of a singularity at the North pole when it is
+         * calculating vehicle location.
+         */
+        fun wanderAng(wanderAng: Double) = wanderAng(JsonField.of(wanderAng))
+
+        /**
+         * Sets [Builder.wanderAng] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.wanderAng] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun wanderAng(wanderAng: JsonField<Double>) = apply { this.wanderAng = wanderAng }
+
         fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
             this.additionalProperties.clear()
             putAllAdditionalProperties(additionalProperties)
@@ -3064,6 +3394,8 @@ private constructor(
                 (attitudeRate ?: JsonMissing.of()).map { it.toImmutable() },
                 callSign,
                 cntct,
+                (contextKeys ?: JsonMissing.of()).map { it.toImmutable() },
+                (contextValues ?: JsonMissing.of()).map { it.toImmutable() },
                 course,
                 (cov ?: JsonMissing.of()).map { it.toImmutable() },
                 createdAt,
@@ -3072,6 +3404,7 @@ private constructor(
                 (ecefPos ?: JsonMissing.of()).map { it.toImmutable() },
                 (ecefVel ?: JsonMissing.of()).map { it.toImmutable() },
                 (eNuAcc ?: JsonMissing.of()).map { it.toImmutable() },
+                (eNuGroundVel ?: JsonMissing.of()).map { it.toImmutable() },
                 (eNuPos ?: JsonMissing.of()).map { it.toImmutable() },
                 (eNuVel ?: JsonMissing.of()).map { it.toImmutable() },
                 env,
@@ -3100,6 +3433,7 @@ private constructor(
                 msnId,
                 multiSource,
                 objAct,
+                objDescription,
                 objId,
                 objIdent,
                 objNat,
@@ -3123,6 +3457,8 @@ private constructor(
                 trkPtType,
                 trkQual,
                 trkStat,
+                vertUnc,
+                wanderAng,
                 additionalProperties.toMutableMap(),
             )
     }
@@ -3146,6 +3482,8 @@ private constructor(
         attitudeRate()
         callSign()
         cntct()
+        contextKeys()
+        contextValues()
         course()
         cov()
         createdAt()
@@ -3154,6 +3492,7 @@ private constructor(
         ecefPos()
         ecefVel()
         eNuAcc()
+        eNuGroundVel()
         eNuPos()
         eNuVel()
         env()
@@ -3182,6 +3521,7 @@ private constructor(
         msnId()
         multiSource()
         objAct()
+        objDescription()
         objId()
         objIdent()
         objNat()
@@ -3205,6 +3545,8 @@ private constructor(
         trkPtType()
         trkQual()
         trkStat()
+        vertUnc()
+        wanderAng()
         validated = true
     }
 
@@ -3235,6 +3577,8 @@ private constructor(
             (attitudeRate.asKnown().getOrNull()?.size ?: 0) +
             (if (callSign.asKnown().isPresent) 1 else 0) +
             (if (cntct.asKnown().isPresent) 1 else 0) +
+            (contextKeys.asKnown().getOrNull()?.size ?: 0) +
+            (contextValues.asKnown().getOrNull()?.size ?: 0) +
             (if (course.asKnown().isPresent) 1 else 0) +
             (cov.asKnown().getOrNull()?.size ?: 0) +
             (if (createdAt.asKnown().isPresent) 1 else 0) +
@@ -3243,6 +3587,7 @@ private constructor(
             (ecefPos.asKnown().getOrNull()?.size ?: 0) +
             (ecefVel.asKnown().getOrNull()?.size ?: 0) +
             (eNuAcc.asKnown().getOrNull()?.size ?: 0) +
+            (eNuGroundVel.asKnown().getOrNull()?.size ?: 0) +
             (eNuPos.asKnown().getOrNull()?.size ?: 0) +
             (eNuVel.asKnown().getOrNull()?.size ?: 0) +
             (if (env.asKnown().isPresent) 1 else 0) +
@@ -3271,6 +3616,7 @@ private constructor(
             (if (msnId.asKnown().isPresent) 1 else 0) +
             (if (multiSource.asKnown().isPresent) 1 else 0) +
             (if (objAct.asKnown().isPresent) 1 else 0) +
+            (if (objDescription.asKnown().isPresent) 1 else 0) +
             (if (objId.asKnown().isPresent) 1 else 0) +
             (if (objIdent.asKnown().isPresent) 1 else 0) +
             (if (objNat.asKnown().isPresent) 1 else 0) +
@@ -3293,7 +3639,9 @@ private constructor(
             (if (trkNum.asKnown().isPresent) 1 else 0) +
             (if (trkPtType.asKnown().isPresent) 1 else 0) +
             (if (trkQual.asKnown().isPresent) 1 else 0) +
-            (if (trkStat.asKnown().isPresent) 1 else 0)
+            (if (trkStat.asKnown().isPresent) 1 else 0) +
+            (if (vertUnc.asKnown().isPresent) 1 else 0) +
+            (if (wanderAng.asKnown().isPresent) 1 else 0)
 
     /**
      * Indicator of whether the data is EXERCISE, REAL, SIMULATED, or TEST data:
@@ -3466,6 +3814,8 @@ private constructor(
             attitudeRate == other.attitudeRate &&
             callSign == other.callSign &&
             cntct == other.cntct &&
+            contextKeys == other.contextKeys &&
+            contextValues == other.contextValues &&
             course == other.course &&
             cov == other.cov &&
             createdAt == other.createdAt &&
@@ -3474,6 +3824,7 @@ private constructor(
             ecefPos == other.ecefPos &&
             ecefVel == other.ecefVel &&
             eNuAcc == other.eNuAcc &&
+            eNuGroundVel == other.eNuGroundVel &&
             eNuPos == other.eNuPos &&
             eNuVel == other.eNuVel &&
             env == other.env &&
@@ -3502,6 +3853,7 @@ private constructor(
             msnId == other.msnId &&
             multiSource == other.multiSource &&
             objAct == other.objAct &&
+            objDescription == other.objDescription &&
             objId == other.objId &&
             objIdent == other.objIdent &&
             objNat == other.objNat &&
@@ -3525,6 +3877,8 @@ private constructor(
             trkPtType == other.trkPtType &&
             trkQual == other.trkQual &&
             trkStat == other.trkStat &&
+            vertUnc == other.vertUnc &&
+            wanderAng == other.wanderAng &&
             additionalProperties == other.additionalProperties
     }
 
@@ -3542,6 +3896,8 @@ private constructor(
             attitudeRate,
             callSign,
             cntct,
+            contextKeys,
+            contextValues,
             course,
             cov,
             createdAt,
@@ -3550,6 +3906,7 @@ private constructor(
             ecefPos,
             ecefVel,
             eNuAcc,
+            eNuGroundVel,
             eNuPos,
             eNuVel,
             env,
@@ -3578,6 +3935,7 @@ private constructor(
             msnId,
             multiSource,
             objAct,
+            objDescription,
             objId,
             objIdent,
             objNat,
@@ -3601,6 +3959,8 @@ private constructor(
             trkPtType,
             trkQual,
             trkStat,
+            vertUnc,
+            wanderAng,
             additionalProperties,
         )
     }
@@ -3608,5 +3968,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "TrackFull{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, alt=$alt, asset=$asset, assetNat=$assetNat, attitude=$attitude, attitudeRate=$attitudeRate, callSign=$callSign, cntct=$cntct, course=$course, cov=$cov, createdAt=$createdAt, createdBy=$createdBy, ecefAcc=$ecefAcc, ecefPos=$ecefPos, ecefVel=$ecefVel, eNuAcc=$eNuAcc, eNuPos=$eNuPos, eNuVel=$eNuVel, env=$env, envConf=$envConf, errEllp=$errEllp, hdng=$hdng, identAmp=$identAmp, identCred=$identCred, identRel=$identRel, jSeries=$jSeries, lat=$lat, lcAcc=$lcAcc, lco=$lco, lcPos=$lcPos, lcs=$lcs, lcVel=$lcVel, lon=$lon, m1=$m1, m1v=$m1v, m2=$m2, m2v=$m2v, m3a=$m3a, m3av=$m3av, modType=$modType, msgTs=$msgTs, msnId=$msnId, multiSource=$multiSource, objAct=$objAct, objId=$objId, objIdent=$objIdent, objNat=$objNat, objPlat=$objPlat, objSpec=$objSpec, objType=$objType, origin=$origin, origNetwork=$origNetwork, sen=$sen, senQual=$senQual, sourceDl=$sourceDl, spd=$spd, srcIds=$srcIds, srcTyps=$srcTyps, strength=$strength, tags=$tags, trkConf=$trkConf, trkId=$trkId, trkItmId=$trkItmId, trkNum=$trkNum, trkPtType=$trkPtType, trkQual=$trkQual, trkStat=$trkStat, additionalProperties=$additionalProperties}"
+        "TrackFull{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, alt=$alt, asset=$asset, assetNat=$assetNat, attitude=$attitude, attitudeRate=$attitudeRate, callSign=$callSign, cntct=$cntct, contextKeys=$contextKeys, contextValues=$contextValues, course=$course, cov=$cov, createdAt=$createdAt, createdBy=$createdBy, ecefAcc=$ecefAcc, ecefPos=$ecefPos, ecefVel=$ecefVel, eNuAcc=$eNuAcc, eNuGroundVel=$eNuGroundVel, eNuPos=$eNuPos, eNuVel=$eNuVel, env=$env, envConf=$envConf, errEllp=$errEllp, hdng=$hdng, identAmp=$identAmp, identCred=$identCred, identRel=$identRel, jSeries=$jSeries, lat=$lat, lcAcc=$lcAcc, lco=$lco, lcPos=$lcPos, lcs=$lcs, lcVel=$lcVel, lon=$lon, m1=$m1, m1v=$m1v, m2=$m2, m2v=$m2v, m3a=$m3a, m3av=$m3av, modType=$modType, msgTs=$msgTs, msnId=$msnId, multiSource=$multiSource, objAct=$objAct, objDescription=$objDescription, objId=$objId, objIdent=$objIdent, objNat=$objNat, objPlat=$objPlat, objSpec=$objSpec, objType=$objType, origin=$origin, origNetwork=$origNetwork, sen=$sen, senQual=$senQual, sourceDl=$sourceDl, spd=$spd, srcIds=$srcIds, srcTyps=$srcTyps, strength=$strength, tags=$tags, trkConf=$trkConf, trkId=$trkId, trkItmId=$trkItmId, trkNum=$trkNum, trkPtType=$trkPtType, trkQual=$trkQual, trkStat=$trkStat, vertUnc=$vertUnc, wanderAng=$wanderAng, additionalProperties=$additionalProperties}"
 }

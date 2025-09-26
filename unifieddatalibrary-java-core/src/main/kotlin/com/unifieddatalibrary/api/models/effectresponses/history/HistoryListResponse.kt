@@ -25,6 +25,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** A response for various effects on a target. */
 class HistoryListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

@@ -2447,6 +2447,7 @@ private constructor(
      * confirm coordinate frames by data provider.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val collectionEnd: JsonField<OffsetDateTime>,

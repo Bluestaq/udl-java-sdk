@@ -28,6 +28,7 @@ import kotlin.jvm.optionals.getOrNull
  * properties, the extent of contamination, and identification of affected regions.
  */
 class HistoryListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val alarms: JsonField<List<String>>,
     private val alarmValues: JsonField<List<Double>>,

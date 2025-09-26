@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Details for an radar payload from Seradata. */
 class SeradataRadarPayloadGetResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

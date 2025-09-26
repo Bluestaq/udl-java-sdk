@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * graphics, and supports keyword searching.
  */
 class AnalyticImageryAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val content: JsonField<String>,

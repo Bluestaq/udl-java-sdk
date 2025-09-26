@@ -26,6 +26,7 @@ import kotlin.jvm.optionals.getOrNull
  * the SSA environment.
  */
 class CommFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -899,6 +900,7 @@ private constructor(
      * in satellite communication to transfer the received signals.
      */
     class Transponder
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

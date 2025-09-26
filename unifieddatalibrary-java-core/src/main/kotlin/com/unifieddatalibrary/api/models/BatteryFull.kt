@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Model representation of specific spacecraft battery types. */
 class BatteryFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val dataMode: JsonField<DataMode>,
     private val name: JsonField<String>,

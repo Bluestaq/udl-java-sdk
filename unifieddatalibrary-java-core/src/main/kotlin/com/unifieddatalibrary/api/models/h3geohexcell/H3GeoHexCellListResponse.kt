@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Model representation of a hex cell array containing data for a set of observations. */
 class H3GeoHexCellListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val cellId: JsonField<String>,
     private val classificationMarking: JsonField<String>,

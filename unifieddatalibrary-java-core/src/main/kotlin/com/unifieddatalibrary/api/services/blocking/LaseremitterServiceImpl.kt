@@ -31,6 +31,8 @@ import com.unifieddatalibrary.api.models.laseremitter.LaseremitterQueryhelpRespo
 import com.unifieddatalibrary.api.models.laseremitter.LaseremitterTupleParams
 import com.unifieddatalibrary.api.models.laseremitter.LaseremitterTupleResponse
 import com.unifieddatalibrary.api.models.laseremitter.LaseremitterUpdateParams
+import com.unifieddatalibrary.api.services.blocking.laseremitter.StagingService
+import com.unifieddatalibrary.api.services.blocking.laseremitter.StagingServiceImpl
 import java.util.function.Consumer
 import kotlin.jvm.optionals.getOrNull
 
@@ -41,10 +43,14 @@ class LaseremitterServiceImpl internal constructor(private val clientOptions: Cl
         WithRawResponseImpl(clientOptions)
     }
 
+    private val staging: StagingService by lazy { StagingServiceImpl(clientOptions) }
+
     override fun withRawResponse(): LaseremitterService.WithRawResponse = withRawResponse
 
     override fun withOptions(modifier: Consumer<ClientOptions.Builder>): LaseremitterService =
         LaseremitterServiceImpl(clientOptions.toBuilder().apply(modifier::accept).build())
+
+    override fun staging(): StagingService = staging
 
     override fun create(params: LaseremitterCreateParams, requestOptions: RequestOptions) {
         // post /udl/laseremitter
@@ -99,12 +105,18 @@ class LaseremitterServiceImpl internal constructor(private val clientOptions: Cl
         private val errorHandler: Handler<HttpResponse> =
             errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
+        private val staging: StagingService.WithRawResponse by lazy {
+            StagingServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
         override fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): LaseremitterService.WithRawResponse =
             LaseremitterServiceImpl.WithRawResponseImpl(
                 clientOptions.toBuilder().apply(modifier::accept).build()
             )
+
+        override fun staging(): StagingService.WithRawResponse = staging
 
         private val createHandler: Handler<Void?> = emptyHandler()
 

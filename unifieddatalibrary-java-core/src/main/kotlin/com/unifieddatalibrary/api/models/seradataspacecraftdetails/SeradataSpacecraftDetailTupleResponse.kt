@@ -30,6 +30,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** On-orbit spacecraft details compiled by Seradata for a particular satellite. */
 class SeradataSpacecraftDetailTupleResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -4624,6 +4625,7 @@ private constructor(
 
     /** Model object representing on-orbit objects or satellites in the system. */
     class OnOrbit
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -6573,6 +6575,7 @@ private constructor(
 
     /** Scientific or other data from Seradata. */
     class Scientific
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -7701,6 +7704,7 @@ private constructor(
 
     /** Seradata-compiled information on communications payloads. */
     class SeradataCommDetail
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -9759,6 +9763,7 @@ private constructor(
 
     /** Details for an early warning payload from Seradata. */
     class SeradataEarlyWarning
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -11120,6 +11125,7 @@ private constructor(
 
     /** Details for a navigation payload from Seradata. */
     class SeradataNavigation
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -12414,6 +12420,7 @@ private constructor(
 
     /** Details for an optical payload from Seradata. */
     class SeradataOpticalPayload
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -13944,6 +13951,7 @@ private constructor(
 
     /** Details for an radar payload from Seradata. */
     class SeradataRadarPayload
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -15733,6 +15741,7 @@ private constructor(
 
     /** Details for an sigint payload from Seradata. */
     class SeradataSigIntPayload
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

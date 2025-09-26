@@ -1436,6 +1436,7 @@ private constructor(
      * friendly and enemy casualties.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -3598,6 +3599,7 @@ private constructor(
     }
 
     class CasualtyInfo
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val age: JsonField<Int>,
         private val allergy: JsonField<List<Allergy>>,
@@ -5291,6 +5293,7 @@ private constructor(
                 (vitalSignData.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0)
 
         class Allergy
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val comments: JsonField<String>,
             private val type: JsonField<String>,
@@ -5473,6 +5476,7 @@ private constructor(
         }
 
         class Condition
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val bodyPart: JsonField<String>,
             private val comments: JsonField<String>,
@@ -5745,6 +5749,7 @@ private constructor(
         }
 
         class Etiology
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val bodyPart: JsonField<String>,
             private val comments: JsonField<String>,
@@ -6019,6 +6024,7 @@ private constructor(
         }
 
         class HealthState
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val healthStateCode: JsonField<String>,
             private val medConfFactor: JsonField<Int>,
@@ -6300,6 +6306,7 @@ private constructor(
         }
 
         class Injury
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val bodyPart: JsonField<String>,
             private val comments: JsonField<String>,
@@ -6583,6 +6590,7 @@ private constructor(
         }
 
         class Medication
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val adminRoute: JsonField<String>,
             private val bodyPart: JsonField<String>,
@@ -6946,6 +6954,7 @@ private constructor(
         }
 
         class Treatment
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val bodyPart: JsonField<String>,
             private val comments: JsonField<String>,
@@ -7222,6 +7231,7 @@ private constructor(
         }
 
         class VitalSignData
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val medConfFactor: JsonField<Int>,
             private val time: JsonField<OffsetDateTime>,
@@ -7651,6 +7661,7 @@ private constructor(
     }
 
     class EnemyData
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val dirToEnemy: JsonField<String>,
         private val friendliesRemarks: JsonField<String>,

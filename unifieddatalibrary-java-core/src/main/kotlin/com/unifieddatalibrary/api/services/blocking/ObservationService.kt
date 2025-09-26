@@ -6,6 +6,7 @@ import com.unifieddatalibrary.api.core.ClientOptions
 import com.unifieddatalibrary.api.services.blocking.observations.EcpsdrService
 import com.unifieddatalibrary.api.services.blocking.observations.EoObservationService
 import com.unifieddatalibrary.api.services.blocking.observations.MonoradarService
+import com.unifieddatalibrary.api.services.blocking.observations.ObscorrelationService
 import com.unifieddatalibrary.api.services.blocking.observations.PassiveRadarObservationService
 import com.unifieddatalibrary.api.services.blocking.observations.RadarobservationService
 import com.unifieddatalibrary.api.services.blocking.observations.RfObservationService
@@ -31,6 +32,8 @@ interface ObservationService {
     fun eoObservations(): EoObservationService
 
     fun monoradar(): MonoradarService
+
+    fun obscorrelation(): ObscorrelationService
 
     fun passiveRadarObservation(): PassiveRadarObservationService
 
@@ -59,6 +62,8 @@ interface ObservationService {
         fun eoObservations(): EoObservationService.WithRawResponse
 
         fun monoradar(): MonoradarService.WithRawResponse
+
+        fun obscorrelation(): ObscorrelationService.WithRawResponse
 
         fun passiveRadarObservation(): PassiveRadarObservationService.WithRawResponse
 

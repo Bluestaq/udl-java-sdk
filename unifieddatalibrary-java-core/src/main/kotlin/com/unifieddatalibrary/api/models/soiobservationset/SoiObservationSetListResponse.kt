@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** These services provide operations for posting space object idenfification observation sets. */
 class SoiObservationSetListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -3434,6 +3435,7 @@ private constructor(
 
     /** Schema for SOI Calibration data. */
     class Calibration
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val calBgIntensity: JsonField<Double>,
         private val calExtinctionCoeff: JsonField<Double>,

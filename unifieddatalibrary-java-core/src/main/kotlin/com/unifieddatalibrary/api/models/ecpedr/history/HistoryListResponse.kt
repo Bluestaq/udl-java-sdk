@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Energetic Charged Particles (ECP) Environmental Data Records (EDRs). */
 class HistoryListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -1234,6 +1235,7 @@ private constructor(
 
     /** Collection of measurements associated with this ECP EDR record. */
     class EcpedrMeasurement
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val obType: JsonField<String>,
         private val obUoM: JsonField<String>,

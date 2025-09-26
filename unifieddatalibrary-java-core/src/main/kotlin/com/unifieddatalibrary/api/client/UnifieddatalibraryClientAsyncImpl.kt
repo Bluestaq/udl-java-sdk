@@ -234,8 +234,6 @@ import com.unifieddatalibrary.api.services.async.RfBandServiceAsync
 import com.unifieddatalibrary.api.services.async.RfBandServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.RfBandTypeServiceAsync
 import com.unifieddatalibrary.api.services.async.RfBandTypeServiceAsyncImpl
-import com.unifieddatalibrary.api.services.async.RfEmitterDetailServiceAsync
-import com.unifieddatalibrary.api.services.async.RfEmitterDetailServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.RfEmitterServiceAsync
 import com.unifieddatalibrary.api.services.async.RfEmitterServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.RouteStatServiceAsync
@@ -324,6 +322,8 @@ import com.unifieddatalibrary.api.services.async.TrackServiceAsync
 import com.unifieddatalibrary.api.services.async.TrackServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.TransponderServiceAsync
 import com.unifieddatalibrary.api.services.async.TransponderServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.UserServiceAsync
+import com.unifieddatalibrary.api.services.async.UserServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.VesselServiceAsync
 import com.unifieddatalibrary.api.services.async.VesselServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.VideoServiceAsync
@@ -792,10 +792,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         RfEmitterServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
-    private val rfEmitterDetails: RfEmitterDetailServiceAsync by lazy {
-        RfEmitterDetailServiceAsyncImpl(clientOptionsWithUserAgent)
-    }
-
     private val routeStats: RouteStatServiceAsync by lazy {
         RouteStatServiceAsyncImpl(clientOptionsWithUserAgent)
     }
@@ -959,6 +955,8 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
     private val transponder: TransponderServiceAsync by lazy {
         TransponderServiceAsyncImpl(clientOptionsWithUserAgent)
     }
+
+    private val user: UserServiceAsync by lazy { UserServiceAsyncImpl(clientOptionsWithUserAgent) }
 
     private val vessel: VesselServiceAsync by lazy {
         VesselServiceAsyncImpl(clientOptionsWithUserAgent)
@@ -1222,8 +1220,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     override fun rfEmitter(): RfEmitterServiceAsync = rfEmitter
 
-    override fun rfEmitterDetails(): RfEmitterDetailServiceAsync = rfEmitterDetails
-
     override fun routeStats(): RouteStatServiceAsync = routeStats
 
     override fun sarObservation(): SarObservationServiceAsync = sarObservation
@@ -1311,6 +1307,8 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
     override fun trackRoute(): TrackRouteServiceAsync = trackRoute
 
     override fun transponder(): TransponderServiceAsync = transponder
+
+    override fun user(): UserServiceAsync = user
 
     override fun vessel(): VesselServiceAsync = vessel
 
@@ -1797,10 +1795,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             RfEmitterServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
-        private val rfEmitterDetails: RfEmitterDetailServiceAsync.WithRawResponse by lazy {
-            RfEmitterDetailServiceAsyncImpl.WithRawResponseImpl(clientOptions)
-        }
-
         private val routeStats: RouteStatServiceAsync.WithRawResponse by lazy {
             RouteStatServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
@@ -1975,6 +1969,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         private val transponder: TransponderServiceAsync.WithRawResponse by lazy {
             TransponderServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val user: UserServiceAsync.WithRawResponse by lazy {
+            UserServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val vessel: VesselServiceAsync.WithRawResponse by lazy {
@@ -2265,9 +2263,6 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         override fun rfEmitter(): RfEmitterServiceAsync.WithRawResponse = rfEmitter
 
-        override fun rfEmitterDetails(): RfEmitterDetailServiceAsync.WithRawResponse =
-            rfEmitterDetails
-
         override fun routeStats(): RouteStatServiceAsync.WithRawResponse = routeStats
 
         override fun sarObservation(): SarObservationServiceAsync.WithRawResponse = sarObservation
@@ -2367,6 +2362,8 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         override fun trackRoute(): TrackRouteServiceAsync.WithRawResponse = trackRoute
 
         override fun transponder(): TransponderServiceAsync.WithRawResponse = transponder
+
+        override fun user(): UserServiceAsync.WithRawResponse = user
 
         override fun vessel(): VesselServiceAsync.WithRawResponse = vessel
 

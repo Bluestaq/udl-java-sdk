@@ -653,6 +653,7 @@ private constructor(
 
     /** The table captures metadata associated with the published videos in UDL. */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

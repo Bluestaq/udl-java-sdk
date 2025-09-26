@@ -140,8 +140,8 @@ private constructor(
     fun busType(): Optional<String> = body.busType()
 
     /**
-     * Maximum dimension of the box circumscribing the spacecraft (d = sqrt(a*a + b*b + c\*c) where
-     * a is the tip-to-tip dimension, b and c are perpendicular to that.) in meters.
+     * Maximum dimension of the box circumscribing the spacecraft (d = sqrt(a*a + b*b + c*c) where a
+     * is the tip-to-tip dimension, b and c are perpendicular to that.) in meters.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -1017,7 +1017,7 @@ private constructor(
         fun busType(busType: JsonField<String>) = apply { body.busType(busType) }
 
         /**
-         * Maximum dimension of the box circumscribing the spacecraft (d = sqrt(a*a + b*b + c\*c)
+         * Maximum dimension of the box circumscribing the spacecraft (d = sqrt(a*a + b*b + c*c)
          * where a is the tip-to-tip dimension, b and c are perpendicular to that.) in meters.
          */
         fun colaRadius(colaRadius: Double) = apply { body.colaRadius(colaRadius) }
@@ -1714,6 +1714,7 @@ private constructor(
 
     /** Contains details of the OnOrbit object. */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -2053,7 +2054,7 @@ private constructor(
         fun busType(): Optional<String> = busType.getOptional("busType")
 
         /**
-         * Maximum dimension of the box circumscribing the spacecraft (d = sqrt(a*a + b*b + c\*c)
+         * Maximum dimension of the box circumscribing the spacecraft (d = sqrt(a*a + b*b + c*c)
          * where a is the tip-to-tip dimension, b and c are perpendicular to that.) in meters.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
@@ -3080,9 +3081,8 @@ private constructor(
             fun busType(busType: JsonField<String>) = apply { this.busType = busType }
 
             /**
-             * Maximum dimension of the box circumscribing the spacecraft (d = sqrt(a*a + b*b +
-             * c\*c) where a is the tip-to-tip dimension, b and c are perpendicular to that.) in
-             * meters.
+             * Maximum dimension of the box circumscribing the spacecraft (d = sqrt(a*a + b*b + c*c)
+             * where a is the tip-to-tip dimension, b and c are perpendicular to that.) in meters.
              */
             fun colaRadius(colaRadius: Double) = colaRadius(JsonField.of(colaRadius))
 

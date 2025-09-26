@@ -26,6 +26,7 @@ import kotlin.jvm.optionals.getOrNull
  * sources.
  */
 class StatusListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -1260,6 +1261,7 @@ private constructor(
 
     /** Additional sub-system or capability status for the parent entity. */
     class SubStatusCollection
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

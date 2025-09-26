@@ -20,6 +20,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 class OnorbitsolararrayListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -777,6 +778,7 @@ private constructor(
      * by different sources.
      */
     class SolarArray
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val dataMode: JsonField<DataMode>,
         private val name: JsonField<String>,

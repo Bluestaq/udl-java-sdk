@@ -17,6 +17,7 @@ import com.unifieddatalibrary.api.models.scs.ScDeleteParams
 import com.unifieddatalibrary.api.models.scs.ScDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
+import com.unifieddatalibrary.api.models.scs.ScHasWriteAccessParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
@@ -94,9 +95,7 @@ internal class ScServiceTest {
         stubFor(post(anyUrl()).willReturn(ok().withBody("abc")))
 
         val response =
-            scService.download(
-                ScDownloadParams.builder().addBody(JsonValue.from("/MyFolderToDownload/")).build()
-            )
+            scService.download(ScDownloadParams.builder().addBody("/MyFolderToDownload/").build())
 
         assertThat(response.body()).hasContent("abc")
     }
@@ -142,6 +141,21 @@ internal class ScServiceTest {
                 .tags("tags")
                 .fileContent("some content")
                 .build()
+        )
+    }
+
+    @Test
+    fun hasWriteAccess() {
+        val client =
+            UnifieddatalibraryOkHttpClient.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val scService = client.scs()
+
+        scService.hasWriteAccess(
+            ScHasWriteAccessParams.builder().path("path").firstResult(0L).maxResults(0L).build()
         )
     }
 

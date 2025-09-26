@@ -27,18 +27,17 @@ import kotlin.jvm.optionals.getOrNull
 /**
  * Service operation to take a single Attitude Set and many associated Onorbit Attitude records as a
  * POST body for ingest into the database. A specific role is required to perform this service
- * operation. Please contact the UDL team for assistance.
- *
- * The following rules apply to this operation:
+ * operation. Please contact the UDL team for assistance. </br> The following rules apply to this
+ * operation:
  *
  * <h3>
  * * Attitude Set numPoints value must correspond exactly to the number of Onorbit Attitude states
  *   associated with that Attitude Set. The numPoints value is checked against the actual posted
- *   number of states and mismatch will result in the post being rejected.
+ *   number of states, and a mismatch will result in the post being rejected.
  * * Attitude Set startTime and endTime must correspond to the earliest and latest state times,
  *   respectively, of the associated Onorbit Attitude states.
  * * Either satNo, idOnOrbit, or origObjectId must be provided. The preferred option is to post with
- *   satNo for a cataloged object, and with (only) origObjectId for an unknown, uncatalogued, or
+ *   satNo for a cataloged object, and with (only) origObjectId for an unknown, uncataloged, or
  *   internal/test object. There are several cases for the logic associated with these fields:
  *     + If satNo is provided and correlates to a known UDL sat number then the idOnOrbit will be
  *       populated appropriately in addition to the satNo.
@@ -1225,6 +1224,7 @@ private constructor(
      * file.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -2884,6 +2884,7 @@ private constructor(
      * AttitudeSet ID 'asId'.
      */
     class AttitudeList
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

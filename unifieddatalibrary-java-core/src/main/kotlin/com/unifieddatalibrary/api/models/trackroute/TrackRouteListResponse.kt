@@ -26,6 +26,7 @@ import kotlin.jvm.optionals.getOrNull
  * refueling.
  */
 class TrackRouteListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -1836,6 +1837,7 @@ private constructor(
 
     /** Minimum and maximum altitude bounds for the track. */
     class AltitudeBlock
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val altitudeSequenceId: JsonField<String>,
         private val lowerAltitude: JsonField<Double>,
@@ -2078,6 +2080,7 @@ private constructor(
 
     /** Point of contacts for scheduling or modifying the route. */
     class Poc
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val office: JsonField<String>,
         private val phone: JsonField<String>,
@@ -2546,6 +2549,7 @@ private constructor(
 
     /** Points identified within the route. */
     class RoutePoint
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val altCountryCode: JsonField<String>,
         private val countryCode: JsonField<String>,

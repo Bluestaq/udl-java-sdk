@@ -29,6 +29,7 @@ import kotlin.jvm.optionals.getOrNull
  * identifying a desired AttitudeSet and pulling its points by that AttitudeSet ID 'asId'.
  */
 class AttitudedataFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

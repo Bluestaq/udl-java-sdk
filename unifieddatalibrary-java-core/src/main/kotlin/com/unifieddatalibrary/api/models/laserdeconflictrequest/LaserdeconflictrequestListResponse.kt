@@ -29,6 +29,7 @@ import kotlin.jvm.optionals.getOrNull
  * compliance with safety protocols and regulations.
  */
 class LaserdeconflictrequestListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -2276,6 +2277,7 @@ private constructor(
     }
 
     class FixedPoint
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val latitude: JsonField<Double>,
         private val longitude: JsonField<Double>,

@@ -17,6 +17,7 @@ import com.unifieddatalibrary.api.models.scs.ScDeleteParams
 import com.unifieddatalibrary.api.models.scs.ScDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileDownloadParams
 import com.unifieddatalibrary.api.models.scs.ScFileUploadParams
+import com.unifieddatalibrary.api.models.scs.ScHasWriteAccessParams
 import com.unifieddatalibrary.api.models.scs.ScMoveParams
 import com.unifieddatalibrary.api.models.scs.ScRenameParams
 import com.unifieddatalibrary.api.models.scs.ScSearchParams
@@ -104,7 +105,7 @@ internal class ScServiceAsyncTest {
 
         val responseFuture =
             scServiceAsync.download(
-                ScDownloadParams.builder().addBody(JsonValue.from("/MyFolderToDownload/")).build()
+                ScDownloadParams.builder().addBody("/MyFolderToDownload/").build()
             )
 
         val response = responseFuture.get()
@@ -154,6 +155,24 @@ internal class ScServiceAsyncTest {
                     .tags("tags")
                     .fileContent("some content")
                     .build()
+            )
+
+        val response = responseFuture.get()
+    }
+
+    @Test
+    fun hasWriteAccess() {
+        val client =
+            UnifieddatalibraryOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .password("My Password")
+                .username("My Username")
+                .build()
+        val scServiceAsync = client.scs()
+
+        val responseFuture =
+            scServiceAsync.hasWriteAccess(
+                ScHasWriteAccessParams.builder().path("path").firstResult(0L).maxResults(0L).build()
             )
 
         val response = responseFuture.get()

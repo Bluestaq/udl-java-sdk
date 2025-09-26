@@ -20,6 +20,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** The parts associated with this support item. */
 class LogisticsPartsFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val figureNumber: JsonField<String>,
     private val indexNumber: JsonField<String>,

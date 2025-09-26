@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Combines multiple search criteria with a logical operator (AND, OR, NOT). */
 class SearchLogicalCriterion
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val criteria: JsonField<List<SearchCriterion>>,
     private val operator: JsonField<Operator>,

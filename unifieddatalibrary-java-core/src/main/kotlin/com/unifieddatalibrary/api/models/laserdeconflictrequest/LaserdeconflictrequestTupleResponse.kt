@@ -29,6 +29,7 @@ import kotlin.jvm.optionals.getOrNull
  * compliance with safety protocols and regulations.
  */
 class LaserdeconflictrequestTupleResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -2344,6 +2345,7 @@ private constructor(
      * space-to-ground, and ground-to-space laser operations are supported by this model.
      */
     class LaserDeconflictTarget
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

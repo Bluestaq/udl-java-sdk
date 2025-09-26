@@ -118,7 +118,6 @@ import com.unifieddatalibrary.api.services.blocking.PortService
 import com.unifieddatalibrary.api.services.blocking.ReportAndActivityService
 import com.unifieddatalibrary.api.services.blocking.RfBandService
 import com.unifieddatalibrary.api.services.blocking.RfBandTypeService
-import com.unifieddatalibrary.api.services.blocking.RfEmitterDetailService
 import com.unifieddatalibrary.api.services.blocking.RfEmitterService
 import com.unifieddatalibrary.api.services.blocking.RouteStatService
 import com.unifieddatalibrary.api.services.blocking.SarObservationService
@@ -163,6 +162,7 @@ import com.unifieddatalibrary.api.services.blocking.TrackDetailService
 import com.unifieddatalibrary.api.services.blocking.TrackRouteService
 import com.unifieddatalibrary.api.services.blocking.TrackService
 import com.unifieddatalibrary.api.services.blocking.TransponderService
+import com.unifieddatalibrary.api.services.blocking.UserService
 import com.unifieddatalibrary.api.services.blocking.VesselService
 import com.unifieddatalibrary.api.services.blocking.VideoService
 import com.unifieddatalibrary.api.services.blocking.WeatherDataService
@@ -437,8 +437,6 @@ interface UnifieddatalibraryClient {
 
     fun rfEmitter(): RfEmitterService
 
-    fun rfEmitterDetails(): RfEmitterDetailService
-
     fun routeStats(): RouteStatService
 
     fun sarObservation(): SarObservationService
@@ -524,6 +522,8 @@ interface UnifieddatalibraryClient {
     fun trackRoute(): TrackRouteService
 
     fun transponder(): TransponderService
+
+    fun user(): UserService
 
     fun vessel(): VesselService
 
@@ -793,8 +793,6 @@ interface UnifieddatalibraryClient {
 
         fun rfEmitter(): RfEmitterService.WithRawResponse
 
-        fun rfEmitterDetails(): RfEmitterDetailService.WithRawResponse
-
         fun routeStats(): RouteStatService.WithRawResponse
 
         fun sarObservation(): SarObservationService.WithRawResponse
@@ -880,6 +878,8 @@ interface UnifieddatalibraryClient {
         fun trackRoute(): TrackRouteService.WithRawResponse
 
         fun transponder(): TransponderService.WithRawResponse
+
+        fun user(): UserService.WithRawResponse
 
         fun vessel(): VesselService.WithRawResponse
 

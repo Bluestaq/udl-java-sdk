@@ -21,6 +21,7 @@ import java.util.Optional
  * operations.
  */
 class OperationalDeviationFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val affectedAircraftMds: JsonField<String>,
     private val affectedMog: JsonField<Int>,

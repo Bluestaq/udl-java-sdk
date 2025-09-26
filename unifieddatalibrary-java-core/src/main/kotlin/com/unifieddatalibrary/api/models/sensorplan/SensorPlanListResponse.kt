@@ -25,6 +25,7 @@ import kotlin.jvm.optionals.getOrNull
  * parent.
  */
 class SensorPlanListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

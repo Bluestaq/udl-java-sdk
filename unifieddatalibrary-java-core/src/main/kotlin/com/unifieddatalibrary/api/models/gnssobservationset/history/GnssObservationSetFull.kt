@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Set of GNSSObservation data. */
 class GnssObservationSetFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -420,8 +421,8 @@ private constructor(
      * The quaternion describing the rotation of the body-fixed frame used for this system into the
      * local geodetic frame, at observation time (ts). The array element order convention is scalar
      * component first, followed by the three vector components. For a vector u in the body-fixed
-     * frame, the corresponding vector u' in the geodetic frame should satisfy u' = quq\*, where q
-     * is this quaternion.
+     * frame, the corresponding vector u' in the geodetic frame should satisfy u' = quq*, where q is
+     * this quaternion.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -1354,7 +1355,7 @@ private constructor(
          * the local geodetic frame, at observation time (ts). The array element order convention is
          * scalar component first, followed by the three vector components. For a vector u in the
          * body-fixed frame, the corresponding vector u' in the geodetic frame should satisfy u' =
-         * quq\*, where q is this quaternion.
+         * quq*, where q is this quaternion.
          */
         fun quat(quat: List<Double>) = quat(JsonField.of(quat))
 
@@ -1954,6 +1955,7 @@ private constructor(
      * and conventions for GNSS observations.
      */
     class GnssObservationList
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val agcState: JsonField<Int>,
         private val gnssSatId: JsonField<String>,

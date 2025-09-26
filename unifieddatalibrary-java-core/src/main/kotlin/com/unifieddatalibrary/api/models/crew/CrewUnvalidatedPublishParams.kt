@@ -3075,6 +3075,7 @@ private constructor(
 
         /** Schema for Crew Member data. */
         class CrewMember
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val alerted: JsonField<Boolean>,
             private val allSortie: JsonField<Boolean>,

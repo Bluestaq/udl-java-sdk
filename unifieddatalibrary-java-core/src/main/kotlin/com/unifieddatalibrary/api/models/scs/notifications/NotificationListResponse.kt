@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** SCS Event Notification */
 class NotificationListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val actions: JsonField<List<Action>>,
     private val classificationMarking: JsonField<String>,

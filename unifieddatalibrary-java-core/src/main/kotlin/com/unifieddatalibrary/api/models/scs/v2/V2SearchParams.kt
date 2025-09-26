@@ -321,6 +321,7 @@ private constructor(
 
     /** Top-level query object containing search criteria. */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val query: JsonField<SearchCriterion>,
         private val additionalProperties: MutableMap<String, JsonValue>,

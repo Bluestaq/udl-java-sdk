@@ -753,6 +753,7 @@ private constructor(
 
     /** Properties and characteristics of a remark that is associated with an aircraft status. */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

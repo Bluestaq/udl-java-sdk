@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Details for a navigation payload from Seradata. */
 class SeraDataNavigationGetResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

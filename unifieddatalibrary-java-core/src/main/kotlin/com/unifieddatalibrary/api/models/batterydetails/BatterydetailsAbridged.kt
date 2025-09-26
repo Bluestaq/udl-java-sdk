@@ -24,6 +24,7 @@ import kotlin.jvm.optionals.getOrNull
  * record may have multiple details records from several sources.
  */
 class BatterydetailsAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

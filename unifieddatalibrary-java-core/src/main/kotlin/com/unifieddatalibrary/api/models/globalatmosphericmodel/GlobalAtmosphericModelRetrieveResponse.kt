@@ -25,6 +25,7 @@ import kotlin.jvm.optionals.getOrNull
  * Density (3D) data, etc.
  */
 class GlobalAtmosphericModelRetrieveResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -36,6 +37,7 @@ private constructor(
     private val checksumValue: JsonField<String>,
     private val createdAt: JsonField<OffsetDateTime>,
     private val createdBy: JsonField<String>,
+    private val dataSourceIdentifier: JsonField<String>,
     private val endAlt: JsonField<Double>,
     private val endLat: JsonField<Double>,
     private val endLon: JsonField<Double>,
@@ -75,6 +77,9 @@ private constructor(
         @ExcludeMissing
         createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("dataSourceIdentifier")
+        @ExcludeMissing
+        dataSourceIdentifier: JsonField<String> = JsonMissing.of(),
         @JsonProperty("endAlt") @ExcludeMissing endAlt: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("endLat") @ExcludeMissing endLat: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("endLon") @ExcludeMissing endLon: JsonField<Double> = JsonMissing.of(),
@@ -108,6 +113,7 @@ private constructor(
         checksumValue,
         createdAt,
         createdBy,
+        dataSourceIdentifier,
         endAlt,
         endLat,
         endLon,
@@ -221,6 +227,16 @@ private constructor(
      *   if the server responded with an unexpected value).
      */
     fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
+
+    /**
+     * A unique identification code or label assigned to a particular source from which atmospheric
+     * data originates.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun dataSourceIdentifier(): Optional<String> =
+        dataSourceIdentifier.getOptional("dataSourceIdentifier")
 
     /**
      * Ending altitude of model outputs, in kilometers.
@@ -454,6 +470,16 @@ private constructor(
     @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
 
     /**
+     * Returns the raw JSON value of [dataSourceIdentifier].
+     *
+     * Unlike [dataSourceIdentifier], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("dataSourceIdentifier")
+    @ExcludeMissing
+    fun _dataSourceIdentifier(): JsonField<String> = dataSourceIdentifier
+
+    /**
      * Returns the raw JSON value of [endAlt].
      *
      * Unlike [endAlt], this method doesn't throw if the JSON field has an unexpected type.
@@ -624,6 +650,7 @@ private constructor(
         private var checksumValue: JsonField<String> = JsonMissing.of()
         private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
         private var createdBy: JsonField<String> = JsonMissing.of()
+        private var dataSourceIdentifier: JsonField<String> = JsonMissing.of()
         private var endAlt: JsonField<Double> = JsonMissing.of()
         private var endLat: JsonField<Double> = JsonMissing.of()
         private var endLon: JsonField<Double> = JsonMissing.of()
@@ -658,6 +685,7 @@ private constructor(
             checksumValue = globalAtmosphericModelRetrieveResponse.checksumValue
             createdAt = globalAtmosphericModelRetrieveResponse.createdAt
             createdBy = globalAtmosphericModelRetrieveResponse.createdBy
+            dataSourceIdentifier = globalAtmosphericModelRetrieveResponse.dataSourceIdentifier
             endAlt = globalAtmosphericModelRetrieveResponse.endAlt
             endLat = globalAtmosphericModelRetrieveResponse.endLat
             endLon = globalAtmosphericModelRetrieveResponse.endLon
@@ -819,6 +847,24 @@ private constructor(
          * value.
          */
         fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+
+        /**
+         * A unique identification code or label assigned to a particular source from which
+         * atmospheric data originates.
+         */
+        fun dataSourceIdentifier(dataSourceIdentifier: String) =
+            dataSourceIdentifier(JsonField.of(dataSourceIdentifier))
+
+        /**
+         * Sets [Builder.dataSourceIdentifier] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dataSourceIdentifier] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun dataSourceIdentifier(dataSourceIdentifier: JsonField<String>) = apply {
+            this.dataSourceIdentifier = dataSourceIdentifier
+        }
 
         /** Ending altitude of model outputs, in kilometers. */
         fun endAlt(endAlt: Double) = endAlt(JsonField.of(endAlt))
@@ -1098,6 +1144,7 @@ private constructor(
                 checksumValue,
                 createdAt,
                 createdBy,
+                dataSourceIdentifier,
                 endAlt,
                 endLat,
                 endLon,
@@ -1137,6 +1184,7 @@ private constructor(
         checksumValue()
         createdAt()
         createdBy()
+        dataSourceIdentifier()
         endAlt()
         endLat()
         endLon()
@@ -1183,6 +1231,7 @@ private constructor(
             (if (checksumValue.asKnown().isPresent) 1 else 0) +
             (if (createdAt.asKnown().isPresent) 1 else 0) +
             (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (dataSourceIdentifier.asKnown().isPresent) 1 else 0) +
             (if (endAlt.asKnown().isPresent) 1 else 0) +
             (if (endLat.asKnown().isPresent) 1 else 0) +
             (if (endLon.asKnown().isPresent) 1 else 0) +
@@ -1371,6 +1420,7 @@ private constructor(
             checksumValue == other.checksumValue &&
             createdAt == other.createdAt &&
             createdBy == other.createdBy &&
+            dataSourceIdentifier == other.dataSourceIdentifier &&
             endAlt == other.endAlt &&
             endLat == other.endLat &&
             endLon == other.endLon &&
@@ -1404,6 +1454,7 @@ private constructor(
             checksumValue,
             createdAt,
             createdBy,
+            dataSourceIdentifier,
             endAlt,
             endLat,
             endLon,
@@ -1429,5 +1480,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "GlobalAtmosphericModelRetrieveResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, type=$type, id=$id, cadence=$cadence, checksumValue=$checksumValue, createdAt=$createdAt, createdBy=$createdBy, endAlt=$endAlt, endLat=$endLat, endLon=$endLon, filename=$filename, filesize=$filesize, numAlt=$numAlt, numLat=$numLat, numLon=$numLon, origin=$origin, origNetwork=$origNetwork, reportTime=$reportTime, sourceDl=$sourceDl, startAlt=$startAlt, startLat=$startLat, startLon=$startLon, state=$state, stepLat=$stepLat, stepLon=$stepLon, additionalProperties=$additionalProperties}"
+        "GlobalAtmosphericModelRetrieveResponse{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, type=$type, id=$id, cadence=$cadence, checksumValue=$checksumValue, createdAt=$createdAt, createdBy=$createdBy, dataSourceIdentifier=$dataSourceIdentifier, endAlt=$endAlt, endLat=$endLat, endLon=$endLon, filename=$filename, filesize=$filesize, numAlt=$numAlt, numLat=$numLat, numLon=$numLon, origin=$origin, origNetwork=$origNetwork, reportTime=$reportTime, sourceDl=$sourceDl, startAlt=$startAlt, startLat=$startLat, startLon=$startLon, state=$state, stepLat=$stepLat, stepLon=$stepLon, additionalProperties=$additionalProperties}"
 }

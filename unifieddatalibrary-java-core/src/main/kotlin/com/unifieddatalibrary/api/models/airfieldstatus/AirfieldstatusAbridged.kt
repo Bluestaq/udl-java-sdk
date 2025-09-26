@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** The airfield status contains dynamic data of an airfield's capabilities. */
 class AirfieldstatusAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

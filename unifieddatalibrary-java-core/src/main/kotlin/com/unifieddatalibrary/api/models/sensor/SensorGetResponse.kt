@@ -33,6 +33,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Model representation of observation data for electro-optical based sensor phenomenologies. */
 class SensorGetResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -1297,6 +1298,7 @@ private constructor(
      * operating unit, a location (if terrestrial), and statuses.
      */
     class Entity
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -2854,6 +2856,7 @@ private constructor(
 
         /** Model object representing on-orbit objects or satellites in the system. */
         class OnOrbit
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val classificationMarking: JsonField<String>,
             private val dataMode: JsonField<DataMode>,
@@ -5087,6 +5090,7 @@ private constructor(
 
     /** Model representation of characteristics and capabilities of a sensor. */
     class Sensorcharacteristic
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -12158,6 +12162,7 @@ private constructor(
      * of on-orbit objects.
      */
     class SensorlimitsCollection
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -13323,6 +13328,7 @@ private constructor(
     }
 
     class SensorObservationType
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val dataMode: JsonField<DataMode>,
         private val source: JsonField<String>,
@@ -14008,6 +14014,7 @@ private constructor(
      * reported observation time.
      */
     class SensorStat
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -14745,6 +14752,7 @@ private constructor(
     }
 
     class SensorType
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val dataMode: JsonField<DataMode>,
         private val source: JsonField<String>,

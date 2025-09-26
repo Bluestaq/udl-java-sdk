@@ -663,6 +663,7 @@ private constructor(
 
     /** Schema for the CotData to post. */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val lat: JsonField<Double>,
         private val lon: JsonField<Double>,
@@ -1434,6 +1435,7 @@ private constructor(
 
     /** Schema for the CotChatData to post. */
     class CotChatData
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val chatMsg: JsonField<String>,
         private val chatRoom: JsonField<String>,
@@ -1664,6 +1666,7 @@ private constructor(
 
     /** Schema for the CotPositionData to post. */
     class CotPositionData
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val callSign: JsonField<String>,
         private val team: JsonField<String>,

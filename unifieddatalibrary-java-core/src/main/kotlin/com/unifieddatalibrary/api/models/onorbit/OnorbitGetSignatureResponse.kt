@@ -22,6 +22,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Contains a list of common information across both Radar and EO observations. */
 class OnorbitGetSignatureResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val eoObservation: JsonField<EoObservationAbridged>,
     private val radarObservation: JsonField<RadarObservation>,
@@ -283,6 +284,7 @@ private constructor(
      * confirm coordinate frames by data provider.
      */
     class RadarObservation
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,
@@ -3608,6 +3610,7 @@ private constructor(
      * frequencies[0]).
      */
     class RfObservation
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

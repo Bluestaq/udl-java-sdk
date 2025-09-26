@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Information related to how an aircraft is loaded with cargo, equipment, and passengers. */
 class AirloadplanAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -3199,6 +3200,7 @@ private constructor(
 
     /** Collection of hazmat actuals associated with this load plan. */
     class AirLoadPlanHazmatActual
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val ashc: JsonField<String>,
         private val cgc: JsonField<String>,
@@ -4017,6 +4019,7 @@ private constructor(
 
     /** Collection of human remains transport information associated with this load plan. */
     class AirLoadPlanHr
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val container: JsonField<String>,
         private val escort: JsonField<String>,
@@ -4654,6 +4657,7 @@ private constructor(
      * plan.
      */
     class AirLoadPlanPalletDetail
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val category: JsonField<String>,
         private val pp: JsonField<String>,
@@ -5137,6 +5141,7 @@ private constructor(
      * mission.
      */
     class AirLoadPlanPaxCargo
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val ambPax: JsonField<Int>,
         private val attPax: JsonField<Int>,
@@ -5850,6 +5855,7 @@ private constructor(
 
     /** Collection of unit line number actuals associated with this load plan. */
     class AirLoadPlanUlnActual
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val numAmbulatory: JsonField<Int>,
         private val numAttendant: JsonField<Int>,

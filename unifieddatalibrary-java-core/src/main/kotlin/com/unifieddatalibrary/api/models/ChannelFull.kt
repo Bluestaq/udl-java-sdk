@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Channel information on a particular transponder. */
 class ChannelFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

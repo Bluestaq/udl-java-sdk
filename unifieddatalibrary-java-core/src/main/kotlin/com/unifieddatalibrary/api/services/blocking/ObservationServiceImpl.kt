@@ -9,6 +9,8 @@ import com.unifieddatalibrary.api.services.blocking.observations.EoObservationSe
 import com.unifieddatalibrary.api.services.blocking.observations.EoObservationServiceImpl
 import com.unifieddatalibrary.api.services.blocking.observations.MonoradarService
 import com.unifieddatalibrary.api.services.blocking.observations.MonoradarServiceImpl
+import com.unifieddatalibrary.api.services.blocking.observations.ObscorrelationService
+import com.unifieddatalibrary.api.services.blocking.observations.ObscorrelationServiceImpl
 import com.unifieddatalibrary.api.services.blocking.observations.PassiveRadarObservationService
 import com.unifieddatalibrary.api.services.blocking.observations.PassiveRadarObservationServiceImpl
 import com.unifieddatalibrary.api.services.blocking.observations.RadarobservationService
@@ -33,6 +35,10 @@ class ObservationServiceImpl internal constructor(private val clientOptions: Cli
     }
 
     private val monoradar: MonoradarService by lazy { MonoradarServiceImpl(clientOptions) }
+
+    private val obscorrelation: ObscorrelationService by lazy {
+        ObscorrelationServiceImpl(clientOptions)
+    }
 
     private val passiveRadarObservation: PassiveRadarObservationService by lazy {
         PassiveRadarObservationServiceImpl(clientOptions)
@@ -59,6 +65,8 @@ class ObservationServiceImpl internal constructor(private val clientOptions: Cli
 
     override fun monoradar(): MonoradarService = monoradar
 
+    override fun obscorrelation(): ObscorrelationService = obscorrelation
+
     override fun passiveRadarObservation(): PassiveRadarObservationService = passiveRadarObservation
 
     override fun radarobservation(): RadarobservationService = radarobservation
@@ -80,6 +88,10 @@ class ObservationServiceImpl internal constructor(private val clientOptions: Cli
 
         private val monoradar: MonoradarService.WithRawResponse by lazy {
             MonoradarServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val obscorrelation: ObscorrelationService.WithRawResponse by lazy {
+            ObscorrelationServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val passiveRadarObservation:
@@ -111,6 +123,8 @@ class ObservationServiceImpl internal constructor(private val clientOptions: Cli
         override fun eoObservations(): EoObservationService.WithRawResponse = eoObservations
 
         override fun monoradar(): MonoradarService.WithRawResponse = monoradar
+
+        override fun obscorrelation(): ObscorrelationService.WithRawResponse = obscorrelation
 
         override fun passiveRadarObservation(): PassiveRadarObservationService.WithRawResponse =
             passiveRadarObservation

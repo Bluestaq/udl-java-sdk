@@ -18,6 +18,7 @@ import java.util.Optional
 
 /** Remarks associated with this LogisticsSupport record. */
 class LogisticsRemarksAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val lastChanged: JsonField<OffsetDateTime>,
     private val remark: JsonField<String>,

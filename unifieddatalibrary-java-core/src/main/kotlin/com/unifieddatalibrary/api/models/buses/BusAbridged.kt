@@ -11,7 +11,9 @@ import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
 import com.unifieddatalibrary.api.core.JsonValue
+import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
 import java.util.Collections
@@ -24,6 +26,7 @@ import kotlin.jvm.optionals.getOrNull
  * are attached for power, control, and other support functions.
  */
 class BusAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -71,6 +74,7 @@ private constructor(
     private val numOrbitType: JsonField<Int>,
     private val oapPayloadPower: JsonField<Double>,
     private val oapSpacecraftPower: JsonField<Double>,
+    private val orbitTypes: JsonField<List<String>>,
     private val origin: JsonField<String>,
     private val origNetwork: JsonField<String>,
     private val payloadDimensionX: JsonField<Double>,
@@ -207,6 +211,9 @@ private constructor(
         @JsonProperty("oapSpacecraftPower")
         @ExcludeMissing
         oapSpacecraftPower: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("orbitTypes")
+        @ExcludeMissing
+        orbitTypes: JsonField<List<String>> = JsonMissing.of(),
         @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
         @JsonProperty("origNetwork")
         @ExcludeMissing
@@ -277,6 +284,7 @@ private constructor(
         numOrbitType,
         oapPayloadPower,
         oapSpacecraftPower,
+        orbitTypes,
         origin,
         origNetwork,
         payloadDimensionX,
@@ -684,6 +692,15 @@ private constructor(
      */
     fun oapSpacecraftPower(): Optional<Double> =
         oapSpacecraftPower.getOptional("oapSpacecraftPower")
+
+    /**
+     * Array of orbit types this bus can support (e.g. GEO, LEO, etc.). Must contain the same number
+     * of elements as the value of numOrbitType.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun orbitTypes(): Optional<List<String>> = orbitTypes.getOptional("orbitTypes")
 
     /**
      * Originating system or organization which produced the data, if different from the source. The
@@ -1160,6 +1177,15 @@ private constructor(
     fun _oapSpacecraftPower(): JsonField<Double> = oapSpacecraftPower
 
     /**
+     * Returns the raw JSON value of [orbitTypes].
+     *
+     * Unlike [orbitTypes], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("orbitTypes")
+    @ExcludeMissing
+    fun _orbitTypes(): JsonField<List<String>> = orbitTypes
+
+    /**
      * Returns the raw JSON value of [origin].
      *
      * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
@@ -1316,6 +1342,7 @@ private constructor(
         private var numOrbitType: JsonField<Int> = JsonMissing.of()
         private var oapPayloadPower: JsonField<Double> = JsonMissing.of()
         private var oapSpacecraftPower: JsonField<Double> = JsonMissing.of()
+        private var orbitTypes: JsonField<MutableList<String>>? = null
         private var origin: JsonField<String> = JsonMissing.of()
         private var origNetwork: JsonField<String> = JsonMissing.of()
         private var payloadDimensionX: JsonField<Double> = JsonMissing.of()
@@ -1375,6 +1402,7 @@ private constructor(
             numOrbitType = busAbridged.numOrbitType
             oapPayloadPower = busAbridged.oapPayloadPower
             oapSpacecraftPower = busAbridged.oapSpacecraftPower
+            orbitTypes = busAbridged.orbitTypes.map { it.toMutableList() }
             origin = busAbridged.origin
             origNetwork = busAbridged.origNetwork
             payloadDimensionX = busAbridged.payloadDimensionX
@@ -2043,6 +2071,35 @@ private constructor(
         }
 
         /**
+         * Array of orbit types this bus can support (e.g. GEO, LEO, etc.). Must contain the same
+         * number of elements as the value of numOrbitType.
+         */
+        fun orbitTypes(orbitTypes: List<String>) = orbitTypes(JsonField.of(orbitTypes))
+
+        /**
+         * Sets [Builder.orbitTypes] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.orbitTypes] with a well-typed `List<String>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun orbitTypes(orbitTypes: JsonField<List<String>>) = apply {
+            this.orbitTypes = orbitTypes.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [String] to [orbitTypes].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addOrbitType(orbitType: String) = apply {
+            orbitTypes =
+                (orbitTypes ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("orbitTypes", it).add(orbitType)
+                }
+        }
+
+        /**
          * Originating system or organization which produced the data, if different from the source.
          * The origin may be different than the source if the source was a mediating system which
          * forwarded the data on behalf of the origin system. If null, the source may be assumed to
@@ -2257,6 +2314,7 @@ private constructor(
                 numOrbitType,
                 oapPayloadPower,
                 oapSpacecraftPower,
+                (orbitTypes ?: JsonMissing.of()).map { it.toImmutable() },
                 origin,
                 origNetwork,
                 payloadDimensionX,
@@ -2323,6 +2381,7 @@ private constructor(
         numOrbitType()
         oapPayloadPower()
         oapSpacecraftPower()
+        orbitTypes()
         origin()
         origNetwork()
         payloadDimensionX()
@@ -2396,6 +2455,7 @@ private constructor(
             (if (numOrbitType.asKnown().isPresent) 1 else 0) +
             (if (oapPayloadPower.asKnown().isPresent) 1 else 0) +
             (if (oapSpacecraftPower.asKnown().isPresent) 1 else 0) +
+            (orbitTypes.asKnown().getOrNull()?.size ?: 0) +
             (if (origin.asKnown().isPresent) 1 else 0) +
             (if (origNetwork.asKnown().isPresent) 1 else 0) +
             (if (payloadDimensionX.asKnown().isPresent) 1 else 0) +
@@ -2611,6 +2671,7 @@ private constructor(
             numOrbitType == other.numOrbitType &&
             oapPayloadPower == other.oapPayloadPower &&
             oapSpacecraftPower == other.oapSpacecraftPower &&
+            orbitTypes == other.orbitTypes &&
             origin == other.origin &&
             origNetwork == other.origNetwork &&
             payloadDimensionX == other.payloadDimensionX &&
@@ -2671,6 +2732,7 @@ private constructor(
             numOrbitType,
             oapPayloadPower,
             oapSpacecraftPower,
+            orbitTypes,
             origin,
             origNetwork,
             payloadDimensionX,
@@ -2687,5 +2749,5 @@ private constructor(
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "BusAbridged{classificationMarking=$classificationMarking, dataMode=$dataMode, name=$name, source=$source, id=$id, aocsNotes=$aocsNotes, avgDryMass=$avgDryMass, avgPayloadMass=$avgPayloadMass, avgPayloadPower=$avgPayloadPower, avgSpacecraftPower=$avgSpacecraftPower, avgWetMass=$avgWetMass, bodyDimensionX=$bodyDimensionX, bodyDimensionY=$bodyDimensionY, bodyDimensionZ=$bodyDimensionZ, busKitDesignerOrgId=$busKitDesignerOrgId, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, description=$description, generic=$generic, idEntity=$idEntity, launchEnvelopeDimensionX=$launchEnvelopeDimensionX, launchEnvelopeDimensionY=$launchEnvelopeDimensionY, launchEnvelopeDimensionZ=$launchEnvelopeDimensionZ, mainComputerManufacturerOrgId=$mainComputerManufacturerOrgId, manufacturerOrgId=$manufacturerOrgId, massCategory=$massCategory, maxBolPowerLower=$maxBolPowerLower, maxBolPowerUpper=$maxBolPowerUpper, maxBolStationMass=$maxBolStationMass, maxDryMass=$maxDryMass, maxEolPowerLower=$maxEolPowerLower, maxEolPowerUpper=$maxEolPowerUpper, maxLaunchMassLower=$maxLaunchMassLower, maxLaunchMassUpper=$maxLaunchMassUpper, maxPayloadMass=$maxPayloadMass, maxPayloadPower=$maxPayloadPower, maxSpacecraftPower=$maxSpacecraftPower, maxWetMass=$maxWetMass, medianDryMass=$medianDryMass, medianWetMass=$medianWetMass, minDryMass=$minDryMass, minWetMass=$minWetMass, numOrbitType=$numOrbitType, oapPayloadPower=$oapPayloadPower, oapSpacecraftPower=$oapSpacecraftPower, origin=$origin, origNetwork=$origNetwork, payloadDimensionX=$payloadDimensionX, payloadDimensionY=$payloadDimensionY, payloadDimensionZ=$payloadDimensionZ, payloadVolume=$payloadVolume, powerCategory=$powerCategory, telemetryTrackingManufacturerOrgId=$telemetryTrackingManufacturerOrgId, type=$type, additionalProperties=$additionalProperties}"
+        "BusAbridged{classificationMarking=$classificationMarking, dataMode=$dataMode, name=$name, source=$source, id=$id, aocsNotes=$aocsNotes, avgDryMass=$avgDryMass, avgPayloadMass=$avgPayloadMass, avgPayloadPower=$avgPayloadPower, avgSpacecraftPower=$avgSpacecraftPower, avgWetMass=$avgWetMass, bodyDimensionX=$bodyDimensionX, bodyDimensionY=$bodyDimensionY, bodyDimensionZ=$bodyDimensionZ, busKitDesignerOrgId=$busKitDesignerOrgId, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, description=$description, generic=$generic, idEntity=$idEntity, launchEnvelopeDimensionX=$launchEnvelopeDimensionX, launchEnvelopeDimensionY=$launchEnvelopeDimensionY, launchEnvelopeDimensionZ=$launchEnvelopeDimensionZ, mainComputerManufacturerOrgId=$mainComputerManufacturerOrgId, manufacturerOrgId=$manufacturerOrgId, massCategory=$massCategory, maxBolPowerLower=$maxBolPowerLower, maxBolPowerUpper=$maxBolPowerUpper, maxBolStationMass=$maxBolStationMass, maxDryMass=$maxDryMass, maxEolPowerLower=$maxEolPowerLower, maxEolPowerUpper=$maxEolPowerUpper, maxLaunchMassLower=$maxLaunchMassLower, maxLaunchMassUpper=$maxLaunchMassUpper, maxPayloadMass=$maxPayloadMass, maxPayloadPower=$maxPayloadPower, maxSpacecraftPower=$maxSpacecraftPower, maxWetMass=$maxWetMass, medianDryMass=$medianDryMass, medianWetMass=$medianWetMass, minDryMass=$minDryMass, minWetMass=$minWetMass, numOrbitType=$numOrbitType, oapPayloadPower=$oapPayloadPower, oapSpacecraftPower=$oapSpacecraftPower, orbitTypes=$orbitTypes, origin=$origin, origNetwork=$origNetwork, payloadDimensionX=$payloadDimensionX, payloadDimensionY=$payloadDimensionY, payloadDimensionZ=$payloadDimensionZ, payloadVolume=$payloadVolume, powerCategory=$powerCategory, telemetryTrackingManufacturerOrgId=$telemetryTrackingManufacturerOrgId, type=$type, additionalProperties=$additionalProperties}"
 }

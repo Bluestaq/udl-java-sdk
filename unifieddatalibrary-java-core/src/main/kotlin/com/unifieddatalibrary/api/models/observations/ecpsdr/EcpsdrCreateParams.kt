@@ -1740,6 +1740,7 @@ private constructor(
      * SDR contains sensor status telemetry and raw dosimeter measurements of the space environment.
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

@@ -29,6 +29,7 @@ import kotlin.jvm.optionals.getOrNull
  * environment.
  */
 class GnssRawIfTupleResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val centerFreq: JsonField<List<Double>>,
     private val classificationMarking: JsonField<String>,
@@ -437,7 +438,7 @@ private constructor(
      * local geodetic frame, at the sample start time (startTime). The array element order
      * convention is scalar component first, followed by the three vector components. For a vector u
      * in the body-fixed frame, the corresponding vector u' in the geodetic frame should satisfy u'
-     * = quq\*, where q is this quaternion. The quaternion should be normalized to 1.
+     * = quq*, where q is this quaternion. The quaternion should be normalized to 1.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -1461,8 +1462,8 @@ private constructor(
          * the local geodetic frame, at the sample start time (startTime). The array element order
          * convention is scalar component first, followed by the three vector components. For a
          * vector u in the body-fixed frame, the corresponding vector u' in the geodetic frame
-         * should satisfy u' = quq\*, where q is this quaternion. The quaternion should be
-         * normalized to 1.
+         * should satisfy u' = quq*, where q is this quaternion. The quaternion should be normalized
+         * to 1.
          */
         fun quat(quat: List<Double>) = quat(JsonField.of(quat))
 

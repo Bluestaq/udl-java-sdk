@@ -24,6 +24,7 @@ import kotlin.jvm.optionals.getOrNull
  * efforts.
  */
 class LogisticsTransportationPlansFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val actDepTime: JsonField<OffsetDateTime>,
     private val aircraftStatus: JsonField<String>,

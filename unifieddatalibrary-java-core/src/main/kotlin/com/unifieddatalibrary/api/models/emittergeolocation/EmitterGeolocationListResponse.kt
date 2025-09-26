@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Model representation of Emitter geolocation data for a signal of interest. */
 class EmitterGeolocationListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

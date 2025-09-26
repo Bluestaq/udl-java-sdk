@@ -19,6 +19,7 @@ import com.unifieddatalibrary.api.models.laseremitter.LaseremitterQueryhelpRespo
 import com.unifieddatalibrary.api.models.laseremitter.LaseremitterTupleParams
 import com.unifieddatalibrary.api.models.laseremitter.LaseremitterTupleResponse
 import com.unifieddatalibrary.api.models.laseremitter.LaseremitterUpdateParams
+import com.unifieddatalibrary.api.services.blocking.laseremitter.StagingService
 import java.util.function.Consumer
 
 interface LaseremitterService {
@@ -34,6 +35,8 @@ interface LaseremitterService {
      * The original service is not modified.
      */
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): LaseremitterService
+
+    fun staging(): StagingService
 
     /**
      * Service operation to take a single LaserEmitter record as a POST body and ingest into the
@@ -231,6 +234,8 @@ interface LaseremitterService {
         fun withOptions(
             modifier: Consumer<ClientOptions.Builder>
         ): LaseremitterService.WithRawResponse
+
+        fun staging(): StagingService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /udl/laseremitter`, but is otherwise the same as

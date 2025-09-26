@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Details for an early warning payload from Seradata. */
 class SeraDataEarlyWarningGetResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

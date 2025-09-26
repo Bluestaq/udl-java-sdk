@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Beta Version DataLink: Detailed instructions regarding the operations of data links. */
 class DatalinkTupleResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -3444,6 +3445,7 @@ private constructor(
      * service.
      */
     class MultiDuty
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val duty: JsonField<String>,
         private val dutyTeleFreqNums: JsonField<List<String>>,
@@ -3802,6 +3804,7 @@ private constructor(
          * DataLinkMultiVoiceCoord collections within a DataLinkMultiDuty collection.
          */
         class MultiDutyVoiceCoord
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val multiCommPri: JsonField<String>,
             private val multiFreqDes: JsonField<String>,
@@ -4170,6 +4173,7 @@ private constructor(
      * data links. There can be 0 to many DataLinkOps collections within the datalink service.
      */
     class Op
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val linkDetails: JsonField<String>,
         private val linkName: JsonField<String>,
@@ -4520,6 +4524,7 @@ private constructor(
      * within the datalink service.
      */
     class Reference
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val refOriginator: JsonField<String>,
         private val refSerialId: JsonField<String>,
@@ -4962,6 +4967,7 @@ private constructor(
      * There can be 1 to many DataLinkRefPoints collections within the datalink service.
      */
     class RefPoint
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val effEventTime: JsonField<OffsetDateTime>,
         private val refDes: JsonField<String>,
@@ -5325,6 +5331,7 @@ private constructor(
 
     /** Collection of remarks associated with this data link message. */
     class Remark
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val text: JsonField<String>,
         private val type: JsonField<String>,
@@ -5504,6 +5511,7 @@ private constructor(
      * DataLinkSpecTracks collections within the datalink service.
      */
     class SpecTrack
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val specTrackNum: JsonField<String>,
         private val specTrackNumDesc: JsonField<String>,
@@ -5709,6 +5717,7 @@ private constructor(
      * DataLinkVoiceCoord collections within the datalink service.
      */
     class VoiceCoord
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val commPri: JsonField<String>,
         private val freqDes: JsonField<String>,

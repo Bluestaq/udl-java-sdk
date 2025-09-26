@@ -23,6 +23,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** ISR Collection data. */
 class IsrCollectionTupleResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -1736,6 +1737,7 @@ private constructor(
     }
 
     class Tasking
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val id: JsonField<String>,
         private val collectionPeriods: JsonField<CollectionPeriods>,
@@ -3012,6 +3014,7 @@ private constructor(
                 (type.asKnown().getOrNull()?.validity() ?: 0)
 
         class CollectionPeriods
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val actual: JsonField<List<Actual>>,
             private val planned: JsonField<Planned>,
@@ -3194,6 +3197,7 @@ private constructor(
                     (planned.asKnown().getOrNull()?.validity() ?: 0)
 
             class Actual
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val id: JsonField<String>,
                 private val start: JsonField<OffsetDateTime>,
@@ -3418,6 +3422,7 @@ private constructor(
             }
 
             class Planned
+            @JsonCreator(mode = JsonCreator.Mode.DISABLED)
             private constructor(
                 private val additional: JsonField<List<Additional>>,
                 private val start: JsonField<OffsetDateTime>,
@@ -3645,6 +3650,7 @@ private constructor(
                         (if (stop.asKnown().isPresent) 1 else 0)
 
                 class Additional
+                @JsonCreator(mode = JsonCreator.Mode.DISABLED)
                 private constructor(
                     private val id: JsonField<String>,
                     private val start: JsonField<OffsetDateTime>,
@@ -4295,6 +4301,7 @@ private constructor(
     }
 
     class Transit
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val id: JsonField<String>,
         private val base: JsonField<String>,

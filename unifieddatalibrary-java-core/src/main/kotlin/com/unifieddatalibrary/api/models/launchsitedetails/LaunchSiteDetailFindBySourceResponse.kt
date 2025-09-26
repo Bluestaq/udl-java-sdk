@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * launch site may have several details records.
  */
 class LaunchSiteDetailFindBySourceResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

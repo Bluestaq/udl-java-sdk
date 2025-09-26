@@ -25,6 +25,7 @@ import kotlin.jvm.optionals.getOrNull
  * accommodated.
  */
 class AirfieldslotFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val airfieldName: JsonField<String>,
     private val classificationMarking: JsonField<String>,

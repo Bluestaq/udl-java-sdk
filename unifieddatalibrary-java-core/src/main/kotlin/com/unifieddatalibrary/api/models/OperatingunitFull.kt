@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * such as an on-orbit payload, a sensor, etc. A contact may belong to an organization.
  */
 class OperatingunitFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

@@ -21,6 +21,7 @@ import kotlin.jvm.optionals.getOrNull
 
 /** Properties and characteristics of a remark that is associated with an aircraft status. */
 class AircraftstatusremarkFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

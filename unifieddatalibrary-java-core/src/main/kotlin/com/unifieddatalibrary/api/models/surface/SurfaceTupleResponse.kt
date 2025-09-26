@@ -27,6 +27,7 @@ import kotlin.jvm.optionals.getOrNull
  * aircraft.
  */
 class SurfaceTupleResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,
@@ -3511,6 +3512,7 @@ private constructor(
     }
 
     class SurfaceObstruction
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val classificationMarking: JsonField<String>,
         private val dataMode: JsonField<DataMode>,

@@ -24,6 +24,7 @@ import kotlin.jvm.optionals.getOrNull
  * interfere with other RF receivers.
  */
 class RfEmitterListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val classificationMarking: JsonField<String>,
     private val dataMode: JsonField<DataMode>,

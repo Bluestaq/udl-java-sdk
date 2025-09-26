@@ -20,6 +20,7 @@ import java.util.Optional
  * specified.
  */
 class OperatingHoursFull
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val opStartTime: JsonField<String>,
     private val opStopTime: JsonField<String>,

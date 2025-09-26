@@ -20,7 +20,7 @@ import kotlin.jvm.optionals.getOrNull
  * Handbook" published by 18th Space Command. A specific role is required to perform this service
  * operation. Please contact the UDL team for assistance.
  *
- * **Example:**
+ * </br> **Example:**
  * /filedrop/ephem?classification=U&dataMode=TEST&source=Bluestaq&satNo=25544&ephemFormatType=NASA&hasMnvr=false&type=ROUTINE&category=EXTERNAL&origin=NASA&tags=tag1,tag2
  */
 class EphemerisFileUploadParams
