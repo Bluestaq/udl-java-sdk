@@ -108,7 +108,7 @@ internal class MissileTrackUnvalidatedPublishParamsTest {
                             .cov(listOf(1.1, 2.2, 3.3))
                             .covReferenceFrame(
                                 MissileTrackUnvalidatedPublishParams.Body.Vector.CovReferenceFrame
-                                    .ECEF
+                                    .ECR_ECEF
                             )
                             .flightAz(45.23)
                             .idSensor("a7e99418-b6d6-29ab-e767-440a989cce26")
@@ -121,7 +121,7 @@ internal class MissileTrackUnvalidatedPublishParamsTest {
                             .referenceFrame("ECEF")
                             .spd(15.03443)
                             .status("INITIAL")
-                            .timeSource("Sensor 1")
+                            .timeSource("Sensor1")
                             .type("STATE")
                             .vectorAlt(25.0)
                             .vectorLat(45.0)
@@ -245,7 +245,7 @@ internal class MissileTrackUnvalidatedPublishParamsTest {
                                 .covReferenceFrame(
                                     MissileTrackUnvalidatedPublishParams.Body.Vector
                                         .CovReferenceFrame
-                                        .ECEF
+                                        .ECR_ECEF
                                 )
                                 .flightAz(45.23)
                                 .idSensor("a7e99418-b6d6-29ab-e767-440a989cce26")
@@ -258,7 +258,7 @@ internal class MissileTrackUnvalidatedPublishParamsTest {
                                 .referenceFrame("ECEF")
                                 .spd(15.03443)
                                 .status("INITIAL")
-                                .timeSource("Sensor 1")
+                                .timeSource("Sensor1")
                                 .type("STATE")
                                 .vectorAlt(25.0)
                                 .vectorLat(45.0)
@@ -371,7 +371,7 @@ internal class MissileTrackUnvalidatedPublishParamsTest {
                             .cov(listOf(1.1, 2.2, 3.3))
                             .covReferenceFrame(
                                 MissileTrackUnvalidatedPublishParams.Body.Vector.CovReferenceFrame
-                                    .ECEF
+                                    .ECR_ECEF
                             )
                             .flightAz(45.23)
                             .idSensor("a7e99418-b6d6-29ab-e767-440a989cce26")
@@ -384,7 +384,7 @@ internal class MissileTrackUnvalidatedPublishParamsTest {
                             .referenceFrame("ECEF")
                             .spd(15.03443)
                             .status("INITIAL")
-                            .timeSource("Sensor 1")
+                            .timeSource("Sensor1")
                             .type("STATE")
                             .vectorAlt(25.0)
                             .vectorLat(45.0)

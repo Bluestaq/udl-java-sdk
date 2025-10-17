@@ -5542,6 +5542,7 @@ private constructor(
             private val rspaces: JsonField<List<Double>>,
             private val spectralWidths: JsonField<List<Double>>,
             private val tovs: JsonField<List<OffsetDateTime>>,
+            private val waveformNumber: JsonField<Int>,
             private val xaccel: JsonField<List<Double>>,
             private val xpos: JsonField<List<Double>>,
             private val xspaces: JsonField<List<Double>>,
@@ -5643,6 +5644,9 @@ private constructor(
                 @JsonProperty("tovs")
                 @ExcludeMissing
                 tovs: JsonField<List<OffsetDateTime>> = JsonMissing.of(),
+                @JsonProperty("waveformNumber")
+                @ExcludeMissing
+                waveformNumber: JsonField<Int> = JsonMissing.of(),
                 @JsonProperty("xaccel")
                 @ExcludeMissing
                 xaccel: JsonField<List<Double>> = JsonMissing.of(),
@@ -5704,6 +5708,7 @@ private constructor(
                 rspaces,
                 spectralWidths,
                 tovs,
+                waveformNumber,
                 xaccel,
                 xpos,
                 xspaces,
@@ -5998,6 +6003,16 @@ private constructor(
              *   type (e.g. if the server responded with an unexpected value).
              */
             fun tovs(): Optional<List<OffsetDateTime>> = tovs.getOptional("tovs")
+
+            /**
+             * A unique numeric or hash identifier assigned to each distinct waveform, enabling
+             * traceability between the waveform used and the images or data products generated from
+             * it.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
+             *   type (e.g. if the server responded with an unexpected value).
+             */
+            fun waveformNumber(): Optional<Int> = waveformNumber.getOptional("waveformNumber")
 
             /**
              * Array of the cartesian X accelerations, in kilometers per second squared, in the
@@ -6388,6 +6403,16 @@ private constructor(
             fun _tovs(): JsonField<List<OffsetDateTime>> = tovs
 
             /**
+             * Returns the raw JSON value of [waveformNumber].
+             *
+             * Unlike [waveformNumber], this method doesn't throw if the JSON field has an
+             * unexpected type.
+             */
+            @JsonProperty("waveformNumber")
+            @ExcludeMissing
+            fun _waveformNumber(): JsonField<Int> = waveformNumber
+
+            /**
              * Returns the raw JSON value of [xaccel].
              *
              * Unlike [xaccel], this method doesn't throw if the JSON field has an unexpected type.
@@ -6518,6 +6543,7 @@ private constructor(
                 private var rspaces: JsonField<MutableList<Double>>? = null
                 private var spectralWidths: JsonField<MutableList<Double>>? = null
                 private var tovs: JsonField<MutableList<OffsetDateTime>>? = null
+                private var waveformNumber: JsonField<Int> = JsonMissing.of()
                 private var xaccel: JsonField<MutableList<Double>>? = null
                 private var xpos: JsonField<MutableList<Double>>? = null
                 private var xspaces: JsonField<MutableList<Double>>? = null
@@ -6567,6 +6593,7 @@ private constructor(
                     spectralWidths =
                         radarSoiObservationList.spectralWidths.map { it.toMutableList() }
                     tovs = radarSoiObservationList.tovs.map { it.toMutableList() }
+                    waveformNumber = radarSoiObservationList.waveformNumber
                     xaccel = radarSoiObservationList.xaccel.map { it.toMutableList() }
                     xpos = radarSoiObservationList.xpos.map { it.toMutableList() }
                     xspaces = radarSoiObservationList.xspaces.map { it.toMutableList() }
@@ -7375,6 +7402,25 @@ private constructor(
                 }
 
                 /**
+                 * A unique numeric or hash identifier assigned to each distinct waveform, enabling
+                 * traceability between the waveform used and the images or data products generated
+                 * from it.
+                 */
+                fun waveformNumber(waveformNumber: Int) =
+                    waveformNumber(JsonField.of(waveformNumber))
+
+                /**
+                 * Sets [Builder.waveformNumber] to an arbitrary JSON value.
+                 *
+                 * You should usually call [Builder.waveformNumber] with a well-typed [Int] value
+                 * instead. This method is primarily for setting the field to an undocumented or not
+                 * yet supported value.
+                 */
+                fun waveformNumber(waveformNumber: JsonField<Int>) = apply {
+                    this.waveformNumber = waveformNumber
+                }
+
+                /**
                  * Array of the cartesian X accelerations, in kilometers per second squared, in the
                  * specified referenceFrame. If referenceFrame is null then J2K should be assumed.
                  * The 'tovs' and 'xaccel' arrays must match in size, if 'xaccel' is provided.
@@ -7739,6 +7785,7 @@ private constructor(
                         (rspaces ?: JsonMissing.of()).map { it.toImmutable() },
                         (spectralWidths ?: JsonMissing.of()).map { it.toImmutable() },
                         (tovs ?: JsonMissing.of()).map { it.toImmutable() },
+                        waveformNumber,
                         (xaccel ?: JsonMissing.of()).map { it.toImmutable() },
                         (xpos ?: JsonMissing.of()).map { it.toImmutable() },
                         (xspaces ?: JsonMissing.of()).map { it.toImmutable() },
@@ -7790,6 +7837,7 @@ private constructor(
                 rspaces()
                 spectralWidths()
                 tovs()
+                waveformNumber()
                 xaccel()
                 xpos()
                 xspaces()
@@ -7849,6 +7897,7 @@ private constructor(
                     (rspaces.asKnown().getOrNull()?.size ?: 0) +
                     (spectralWidths.asKnown().getOrNull()?.size ?: 0) +
                     (tovs.asKnown().getOrNull()?.size ?: 0) +
+                    (if (waveformNumber.asKnown().isPresent) 1 else 0) +
                     (xaccel.asKnown().getOrNull()?.size ?: 0) +
                     (xpos.asKnown().getOrNull()?.size ?: 0) +
                     (xspaces.asKnown().getOrNull()?.size ?: 0) +
@@ -7896,6 +7945,7 @@ private constructor(
                     rspaces == other.rspaces &&
                     spectralWidths == other.spectralWidths &&
                     tovs == other.tovs &&
+                    waveformNumber == other.waveformNumber &&
                     xaccel == other.xaccel &&
                     xpos == other.xpos &&
                     xspaces == other.xspaces &&
@@ -7941,6 +7991,7 @@ private constructor(
                     rspaces,
                     spectralWidths,
                     tovs,
+                    waveformNumber,
                     xaccel,
                     xpos,
                     xspaces,
@@ -7958,7 +8009,7 @@ private constructor(
             override fun hashCode(): Int = hashCode
 
             override fun toString() =
-                "RadarSoiObservationList{obStartTime=$obStartTime, aspectAngles=$aspectAngles, azimuthBiases=$azimuthBiases, azimuthRates=$azimuthRates, azimuths=$azimuths, beta=$beta, centerFrequency=$centerFrequency, crossRangeRes=$crossRangeRes, deltaTimes=$deltaTimes, doppler2XRs=$doppler2XRs, elevationBiases=$elevationBiases, elevationRates=$elevationRates, elevations=$elevations, idAttitudeSet=$idAttitudeSet, idStateVector=$idStateVector, integrationAngles=$integrationAngles, kappa=$kappa, peakAmplitudes=$peakAmplitudes, polarizations=$polarizations, projAngVels=$projAngVels, pulseBandwidth=$pulseBandwidth, rangeAccels=$rangeAccels, rangeBiases=$rangeBiases, rangeRates=$rangeRates, ranges=$ranges, rcsErrorEsts=$rcsErrorEsts, rcsValues=$rcsValues, rspaces=$rspaces, spectralWidths=$spectralWidths, tovs=$tovs, xaccel=$xaccel, xpos=$xpos, xspaces=$xspaces, xvel=$xvel, yaccel=$yaccel, ypos=$ypos, yvel=$yvel, zaccel=$zaccel, zpos=$zpos, zvel=$zvel, additionalProperties=$additionalProperties}"
+                "RadarSoiObservationList{obStartTime=$obStartTime, aspectAngles=$aspectAngles, azimuthBiases=$azimuthBiases, azimuthRates=$azimuthRates, azimuths=$azimuths, beta=$beta, centerFrequency=$centerFrequency, crossRangeRes=$crossRangeRes, deltaTimes=$deltaTimes, doppler2XRs=$doppler2XRs, elevationBiases=$elevationBiases, elevationRates=$elevationRates, elevations=$elevations, idAttitudeSet=$idAttitudeSet, idStateVector=$idStateVector, integrationAngles=$integrationAngles, kappa=$kappa, peakAmplitudes=$peakAmplitudes, polarizations=$polarizations, projAngVels=$projAngVels, pulseBandwidth=$pulseBandwidth, rangeAccels=$rangeAccels, rangeBiases=$rangeBiases, rangeRates=$rangeRates, ranges=$ranges, rcsErrorEsts=$rcsErrorEsts, rcsValues=$rcsValues, rspaces=$rspaces, spectralWidths=$spectralWidths, tovs=$tovs, waveformNumber=$waveformNumber, xaccel=$xaccel, xpos=$xpos, xspaces=$xspaces, xvel=$xvel, yaccel=$yaccel, ypos=$ypos, yvel=$yvel, zaccel=$zaccel, zpos=$zpos, zvel=$zvel, additionalProperties=$additionalProperties}"
         }
 
         /**

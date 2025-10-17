@@ -8072,6 +8072,8 @@ private constructor(
 
                     @JvmField val EFG_TDR = of("EFG/TDR")
 
+                    @JvmField val ECR_ECEF = of("ECR/ECEF")
+
                     @JvmField val TEME = of("TEME")
 
                     @JvmField val GCRF = of("GCRF")
@@ -8084,6 +8086,7 @@ private constructor(
                     J2000,
                     UVW,
                     EFG_TDR,
+                    ECR_ECEF,
                     TEME,
                     GCRF,
                 }
@@ -8103,6 +8106,7 @@ private constructor(
                     J2000,
                     UVW,
                     EFG_TDR,
+                    ECR_ECEF,
                     TEME,
                     GCRF,
                     /**
@@ -8124,6 +8128,7 @@ private constructor(
                         J2000 -> Value.J2000
                         UVW -> Value.UVW
                         EFG_TDR -> Value.EFG_TDR
+                        ECR_ECEF -> Value.ECR_ECEF
                         TEME -> Value.TEME
                         GCRF -> Value.GCRF
                         else -> Value._UNKNOWN
@@ -8143,6 +8148,7 @@ private constructor(
                         J2000 -> Known.J2000
                         UVW -> Known.UVW
                         EFG_TDR -> Known.EFG_TDR
+                        ECR_ECEF -> Known.ECR_ECEF
                         TEME -> Known.TEME
                         GCRF -> Known.GCRF
                         else ->
@@ -13654,6 +13660,8 @@ private constructor(
 
                     @JvmField val EFG_TDR = of("EFG/TDR")
 
+                    @JvmField val ECR_ECEF = of("ECR/ECEF")
+
                     @JvmField val TEME = of("TEME")
 
                     @JvmField val GCRF = of("GCRF")
@@ -13666,6 +13674,7 @@ private constructor(
                     J2000,
                     UVW,
                     EFG_TDR,
+                    ECR_ECEF,
                     TEME,
                     GCRF,
                 }
@@ -13685,6 +13694,7 @@ private constructor(
                     J2000,
                     UVW,
                     EFG_TDR,
+                    ECR_ECEF,
                     TEME,
                     GCRF,
                     /**
@@ -13706,6 +13716,7 @@ private constructor(
                         J2000 -> Value.J2000
                         UVW -> Value.UVW
                         EFG_TDR -> Value.EFG_TDR
+                        ECR_ECEF -> Value.ECR_ECEF
                         TEME -> Value.TEME
                         GCRF -> Value.GCRF
                         else -> Value._UNKNOWN
@@ -13725,6 +13736,7 @@ private constructor(
                         J2000 -> Known.J2000
                         UVW -> Known.UVW
                         EFG_TDR -> Known.EFG_TDR
+                        ECR_ECEF -> Known.ECR_ECEF
                         TEME -> Known.TEME
                         GCRF -> Known.GCRF
                         else ->

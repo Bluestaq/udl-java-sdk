@@ -33,7 +33,7 @@ private constructor(
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    /** The order in which entries should be sorted */
+    /** The order in which entries should be sorted. */
     fun order(): Optional<String> = Optional.ofNullable(order)
 
     /**
@@ -45,7 +45,7 @@ private constructor(
     /** The number of results to retrieve. */
     fun size(): Optional<Int> = Optional.ofNullable(size)
 
-    /** The field on which to sort entries */
+    /** The field on which to sort entries. */
     fun sort(): Optional<String> = Optional.ofNullable(sort)
 
     /**
@@ -104,7 +104,7 @@ private constructor(
             additionalQueryParams = v2SearchParams.additionalQueryParams.toBuilder()
         }
 
-        /** The order in which entries should be sorted */
+        /** The order in which entries should be sorted. */
         fun order(order: String?) = apply { this.order = order }
 
         /** Alias for calling [Builder.order] with `order.orElse(null)`. */
@@ -132,7 +132,7 @@ private constructor(
         /** Alias for calling [Builder.size] with `size.orElse(null)`. */
         fun size(size: Optional<Int>) = size(size.getOrNull())
 
-        /** The field on which to sort entries */
+        /** The field on which to sort entries. */
         fun sort(sort: String?) = apply { this.sort = sort }
 
         /** Alias for calling [Builder.sort] with `sort.orElse(null)`. */

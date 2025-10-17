@@ -280,6 +280,12 @@ private constructor(
         @JsonProperty("elevationUnc") @ExcludeMissing private val elevationUnc: JsonField<Double>,
         @JsonProperty("elnot") @ExcludeMissing private val elnot: JsonField<String>,
         @JsonProperty("endFrequency") @ExcludeMissing private val endFrequency: JsonField<Double>,
+        @JsonProperty("fftImagCoeffs")
+        @ExcludeMissing
+        private val fftImagCoeffs: JsonField<List<Double>>,
+        @JsonProperty("fftRealCoeffs")
+        @ExcludeMissing
+        private val fftRealCoeffs: JsonField<List<Double>>,
         @JsonProperty("frequencies")
         @ExcludeMissing
         private val frequencies: JsonField<List<Double>>,
@@ -467,7 +473,7 @@ private constructor(
         fun antennaName(): Optional<String> = antennaName.getOptional("antennaName")
 
         /**
-         * azimuth angle in degrees and J2000 coordinate frame.
+         * Azimuth angle in degrees and topocentric coordinate frame.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -501,7 +507,7 @@ private constructor(
         fun azimuthUnc(): Optional<Double> = azimuthUnc.getOptional("azimuthUnc")
 
         /**
-         * Measured bandwidth in Hz.
+         * Measured bandwidth in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -582,8 +588,8 @@ private constructor(
         fun codeTaps(): Optional<List<String>> = codeTaps.getOptional("codeTaps")
 
         /**
-         * Collection mode (e.g. SURVEY, SPOT_SEARCH, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH, MANUAL,
-         * etc).
+         * Collection mode (e.g. CONTINUOUS, MANUAL, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH,
+         * SPOT_SEARCH, SURVEY, etc).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -659,7 +665,7 @@ private constructor(
         fun detectionStatus(): Optional<String> = detectionStatus.getOptional("detectionStatus")
 
         /**
-         * Array of detection statuses (e.g. DETECTED, CARRIER_DETECTED, NOT_DETECTED) for each
+         * Array of detection statuses (e.g. CARRIER_DETECTED, DETECTED, NOT_DETECTED) for each
          * measured signal.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
@@ -669,7 +675,7 @@ private constructor(
             detectionStatuses.getOptional("detectionStatuses")
 
         /**
-         * Measured Equivalent Isotopically Radiated Power in dBW.
+         * Measured Equivalent Isotopically Radiated Power in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -677,7 +683,7 @@ private constructor(
         fun eirp(): Optional<Double> = eirp.getOptional("eirp")
 
         /**
-         * elevation in degrees and J2000 coordinate frame.
+         * Elevation in degrees and topocentric coordinate frame.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -720,7 +726,7 @@ private constructor(
         fun elnot(): Optional<String> = elnot.getOptional("elnot")
 
         /**
-         * End carrier frequency in Hz.
+         * End carrier frequency in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -728,7 +734,29 @@ private constructor(
         fun endFrequency(): Optional<Double> = endFrequency.getOptional("endFrequency")
 
         /**
-         * Array of individual PSD frequencies of the signal in Hz. This array should correspond
+         * Array of imaginary components of the complex Fast Fourier Transform (FFT) coefficients
+         * from the signal. Used together with the same-sized fftRealCoeffs array to preserve both
+         * amplitude and phase information. This array should correspond with the same-sized array
+         * of frequencies.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun fftImagCoeffs(): Optional<List<Double>> = fftImagCoeffs.getOptional("fftImagCoeffs")
+
+        /**
+         * Array of real components of the complex Fast Fourier Transform (FFT) coefficients from
+         * the signal. Used together with the same-sized fftImagCoeffs array to preserve both
+         * amplitude and phase information. This array should correspond with the same-sized array
+         * of frequencies.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun fftRealCoeffs(): Optional<List<Double>> = fftRealCoeffs.getOptional("fftRealCoeffs")
+
+        /**
+         * Array of individual PSD frequencies of the signal in hertz. This array should correspond
          * with the same-sized array of powers.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
@@ -737,7 +765,7 @@ private constructor(
         fun frequencies(): Optional<List<Double>> = frequencies.getOptional("frequencies")
 
         /**
-         * Center carrier frequency in Hz.
+         * Center carrier frequency in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -786,7 +814,7 @@ private constructor(
         fun innerCodingRate(): Optional<Int> = innerCodingRate.getOptional("innerCodingRate")
 
         /**
-         * Maximum measured PSD value of the trace in dBW.
+         * Maximum measured PSD value of the trace in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -794,7 +822,7 @@ private constructor(
         fun maxPsd(): Optional<Double> = maxPsd.getOptional("maxPSD")
 
         /**
-         * Minimum measured PSD value of the trace in dBW.
+         * Minimum measured PSD value of the trace in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -810,7 +838,7 @@ private constructor(
         fun modulation(): Optional<String> = modulation.getOptional("modulation")
 
         /**
-         * Noise power density, in dBW-Hz.
+         * Noise power density, in decibel watts per hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -818,7 +846,7 @@ private constructor(
         fun noisePwrDensity(): Optional<Double> = noisePwrDensity.getOptional("noisePwrDensity")
 
         /**
-         * Expected bandwidth in Hz.
+         * Expected bandwidth in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -826,7 +854,7 @@ private constructor(
         fun nominalBandwidth(): Optional<Double> = nominalBandwidth.getOptional("nominalBandwidth")
 
         /**
-         * Expected Equivalent Isotopically Radiated Power in dBW.
+         * Expected Equivalent Isotopically Radiated Power in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -834,7 +862,7 @@ private constructor(
         fun nominalEirp(): Optional<Double> = nominalEirp.getOptional("nominalEirp")
 
         /**
-         * Nominal or expected center carrier frequency in Hz.
+         * Nominal or expected center carrier frequency in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -842,7 +870,7 @@ private constructor(
         fun nominalFrequency(): Optional<Double> = nominalFrequency.getOptional("nominalFrequency")
 
         /**
-         * Expected carrier power over noise (dBW/Hz).
+         * Expected carrier power over noise (decibel watts per hertz).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -851,7 +879,7 @@ private constructor(
             nominalPowerOverNoise.getOptional("nominalPowerOverNoise")
 
         /**
-         * Nominal or expected signal to noise ratio, in dB.
+         * Nominal or expected signal to noise ratio, in decibels.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -933,7 +961,8 @@ private constructor(
 
         /**
          * A pulse group repetition interval (PGRI) is a pulse train in which there are groups of
-         * closely spaced pulses separated by much longer times between these pulse groups.
+         * closely spaced pulses separated by much longer times between these pulse groups. The PGRI
+         * is measured in seconds.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -968,7 +997,7 @@ private constructor(
         fun polarityType(): Optional<PolarityType> = polarityType.getOptional("polarityType")
 
         /**
-         * Measured carrier power over noise (dBW/Hz).
+         * Measured carrier power over noise (decibel watts per hertz).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -976,7 +1005,7 @@ private constructor(
         fun powerOverNoise(): Optional<Double> = powerOverNoise.getOptional("powerOverNoise")
 
         /**
-         * Array of individual measured PSD powers of the signal in dBW. This array should
+         * Array of individual measured PSD powers of the signal in decibel watts. This array should
          * correspond with the same-sized array of frequencies.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
@@ -985,7 +1014,7 @@ private constructor(
         fun powers(): Optional<List<Double>> = powers.getOptional("powers")
 
         /**
-         * Target range in km.
+         * Target range in kilometers.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1003,7 +1032,7 @@ private constructor(
         fun rangeMeasured(): Optional<Boolean> = rangeMeasured.getOptional("rangeMeasured")
 
         /**
-         * Rate of change of the range in km/sec.
+         * Rate of change of the range in kilometers per second.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1048,7 +1077,7 @@ private constructor(
         fun rawFileUri(): Optional<String> = rawFileUri.getOptional("rawFileURI")
 
         /**
-         * Reference signal level, in dBW.
+         * Reference signal level, in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1056,7 +1085,7 @@ private constructor(
         fun referenceLevel(): Optional<Double> = referenceLevel.getOptional("referenceLevel")
 
         /**
-         * Measured power of the center carrier frequency in dBW.
+         * Measured power of the center carrier frequency in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1066,7 +1095,7 @@ private constructor(
 
         /**
          * The measure of the signal created from the sum of all the noise sources and unwanted
-         * signals within the measurement system, in dBW.
+         * signals within the measurement system, in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1075,7 +1104,7 @@ private constructor(
             relativeNoiseFloor.getOptional("relativeNoiseFloor")
 
         /**
-         * Resolution bandwidth in Hz.
+         * Resolution bandwidth in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1127,7 +1156,7 @@ private constructor(
         fun signalIds(): Optional<List<String>> = signalIds.getOptional("signalIds")
 
         /**
-         * Signal to noise ratio, in dB.
+         * Signal to noise ratio, in decibels.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1135,7 +1164,7 @@ private constructor(
         fun snr(): Optional<Double> = snr.getOptional("snr")
 
         /**
-         * Array of signal to noise ratios of the signals, in dB.
+         * Array of signal to noise ratios of the signals, in decibels.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1153,7 +1182,7 @@ private constructor(
         fun sourceDl(): Optional<String> = sourceDl.getOptional("sourceDL")
 
         /**
-         * Measured spectrum analyzer power of the center carrier frequency in dBW.
+         * Measured spectrum analyzer power of the center carrier frequency in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1162,7 +1191,7 @@ private constructor(
             spectrumAnalyzerPower.getOptional("spectrumAnalyzerPower")
 
         /**
-         * Start carrier frequency in Hz.
+         * Start carrier frequency in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1178,7 +1207,7 @@ private constructor(
         fun switchPoint(): Optional<Int> = switchPoint.getOptional("switchPoint")
 
         /**
-         * Symbol to noise ratio, in dB.
+         * Symbol to noise ratio, in decibels.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1222,7 +1251,7 @@ private constructor(
         fun trackId(): Optional<String> = trackId.getOptional("trackId")
 
         /**
-         * Target track or apparent range in km.
+         * Target track or apparent range in kilometers.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1248,7 +1277,7 @@ private constructor(
             transmitFilterRollOff.getOptional("transmitFilterRollOff")
 
         /**
-         * Transmit pulse shaping filter typ (e.g. RRC).
+         * Transmit pulse shaping filter type (e.g. RRC).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1286,7 +1315,7 @@ private constructor(
         fun url(): Optional<String> = url.getOptional("url")
 
         /**
-         * Video bandwidth in Hz.
+         * Video bandwidth in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1621,6 +1650,26 @@ private constructor(
         @JsonProperty("endFrequency")
         @ExcludeMissing
         fun _endFrequency(): JsonField<Double> = endFrequency
+
+        /**
+         * Returns the raw JSON value of [fftImagCoeffs].
+         *
+         * Unlike [fftImagCoeffs], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("fftImagCoeffs")
+        @ExcludeMissing
+        fun _fftImagCoeffs(): JsonField<List<Double>> = fftImagCoeffs
+
+        /**
+         * Returns the raw JSON value of [fftRealCoeffs].
+         *
+         * Unlike [fftRealCoeffs], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("fftRealCoeffs")
+        @ExcludeMissing
+        fun _fftRealCoeffs(): JsonField<List<Double>> = fftRealCoeffs
 
         /**
          * Returns the raw JSON value of [frequencies].
@@ -2239,6 +2288,8 @@ private constructor(
             private var elevationUnc: JsonField<Double> = JsonMissing.of()
             private var elnot: JsonField<String> = JsonMissing.of()
             private var endFrequency: JsonField<Double> = JsonMissing.of()
+            private var fftImagCoeffs: JsonField<MutableList<Double>>? = null
+            private var fftRealCoeffs: JsonField<MutableList<Double>>? = null
             private var frequencies: JsonField<MutableList<Double>>? = null
             private var frequency: JsonField<Double> = JsonMissing.of()
             private var frequencyShift: JsonField<Double> = JsonMissing.of()
@@ -2345,6 +2396,8 @@ private constructor(
                 elevationUnc = body.elevationUnc
                 elnot = body.elnot
                 endFrequency = body.endFrequency
+                fftImagCoeffs = body.fftImagCoeffs.map { it.toMutableList() }
+                fftRealCoeffs = body.fftRealCoeffs.map { it.toMutableList() }
                 frequencies = body.frequencies.map { it.toMutableList() }
                 frequency = body.frequency
                 frequencyShift = body.frequencyShift
@@ -2515,7 +2568,7 @@ private constructor(
                 this.antennaName = antennaName
             }
 
-            /** azimuth angle in degrees and J2000 coordinate frame. */
+            /** Azimuth angle in degrees and topocentric coordinate frame. */
             fun azimuth(azimuth: Double) = azimuth(JsonField.of(azimuth))
 
             /**
@@ -2572,7 +2625,7 @@ private constructor(
              */
             fun azimuthUnc(azimuthUnc: JsonField<Double>) = apply { this.azimuthUnc = azimuthUnc }
 
-            /** Measured bandwidth in Hz. */
+            /** Measured bandwidth in hertz. */
             fun bandwidth(bandwidth: Double) = bandwidth(JsonField.of(bandwidth))
 
             /**
@@ -2771,8 +2824,8 @@ private constructor(
             }
 
             /**
-             * Collection mode (e.g. SURVEY, SPOT_SEARCH, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH,
-             * MANUAL, etc).
+             * Collection mode (e.g. CONTINUOUS, MANUAL, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH,
+             * SPOT_SEARCH, SURVEY, etc).
              */
             fun collectionMode(collectionMode: String) =
                 collectionMode(JsonField.of(collectionMode))
@@ -2945,7 +2998,7 @@ private constructor(
             }
 
             /**
-             * Array of detection statuses (e.g. DETECTED, CARRIER_DETECTED, NOT_DETECTED) for each
+             * Array of detection statuses (e.g. CARRIER_DETECTED, DETECTED, NOT_DETECTED) for each
              * measured signal.
              */
             fun detectionStatuses(detectionStatuses: List<String>) =
@@ -2974,7 +3027,7 @@ private constructor(
                     }
             }
 
-            /** Measured Equivalent Isotopically Radiated Power in dBW. */
+            /** Measured Equivalent Isotopically Radiated Power in decibel watts. */
             fun eirp(eirp: Double) = eirp(JsonField.of(eirp))
 
             /**
@@ -2986,7 +3039,7 @@ private constructor(
              */
             fun eirp(eirp: JsonField<Double>) = apply { this.eirp = eirp }
 
-            /** elevation in degrees and J2000 coordinate frame. */
+            /** Elevation in degrees and topocentric coordinate frame. */
             fun elevation(elevation: Double) = elevation(JsonField.of(elevation))
 
             /**
@@ -3057,7 +3110,7 @@ private constructor(
              */
             fun elnot(elnot: JsonField<String>) = apply { this.elnot = elnot }
 
-            /** End carrier frequency in Hz. */
+            /** End carrier frequency in hertz. */
             fun endFrequency(endFrequency: Double) = endFrequency(JsonField.of(endFrequency))
 
             /**
@@ -3072,8 +3125,72 @@ private constructor(
             }
 
             /**
-             * Array of individual PSD frequencies of the signal in Hz. This array should correspond
-             * with the same-sized array of powers.
+             * Array of imaginary components of the complex Fast Fourier Transform (FFT)
+             * coefficients from the signal. Used together with the same-sized fftRealCoeffs array
+             * to preserve both amplitude and phase information. This array should correspond with
+             * the same-sized array of frequencies.
+             */
+            fun fftImagCoeffs(fftImagCoeffs: List<Double>) =
+                fftImagCoeffs(JsonField.of(fftImagCoeffs))
+
+            /**
+             * Sets [Builder.fftImagCoeffs] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.fftImagCoeffs] with a well-typed `List<Double>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun fftImagCoeffs(fftImagCoeffs: JsonField<List<Double>>) = apply {
+                this.fftImagCoeffs = fftImagCoeffs.map { it.toMutableList() }
+            }
+
+            /**
+             * Adds a single [Double] to [fftImagCoeffs].
+             *
+             * @throws IllegalStateException if the field was previously set to a non-list.
+             */
+            fun addFftImagCoeff(fftImagCoeff: Double) = apply {
+                fftImagCoeffs =
+                    (fftImagCoeffs ?: JsonField.of(mutableListOf())).also {
+                        checkKnown("fftImagCoeffs", it).add(fftImagCoeff)
+                    }
+            }
+
+            /**
+             * Array of real components of the complex Fast Fourier Transform (FFT) coefficients
+             * from the signal. Used together with the same-sized fftImagCoeffs array to preserve
+             * both amplitude and phase information. This array should correspond with the
+             * same-sized array of frequencies.
+             */
+            fun fftRealCoeffs(fftRealCoeffs: List<Double>) =
+                fftRealCoeffs(JsonField.of(fftRealCoeffs))
+
+            /**
+             * Sets [Builder.fftRealCoeffs] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.fftRealCoeffs] with a well-typed `List<Double>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun fftRealCoeffs(fftRealCoeffs: JsonField<List<Double>>) = apply {
+                this.fftRealCoeffs = fftRealCoeffs.map { it.toMutableList() }
+            }
+
+            /**
+             * Adds a single [Double] to [fftRealCoeffs].
+             *
+             * @throws IllegalStateException if the field was previously set to a non-list.
+             */
+            fun addFftRealCoeff(fftRealCoeff: Double) = apply {
+                fftRealCoeffs =
+                    (fftRealCoeffs ?: JsonField.of(mutableListOf())).also {
+                        checkKnown("fftRealCoeffs", it).add(fftRealCoeff)
+                    }
+            }
+
+            /**
+             * Array of individual PSD frequencies of the signal in hertz. This array should
+             * correspond with the same-sized array of powers.
              */
             fun frequencies(frequencies: List<Double>) = frequencies(JsonField.of(frequencies))
 
@@ -3100,7 +3217,7 @@ private constructor(
                     }
             }
 
-            /** Center carrier frequency in Hz. */
+            /** Center carrier frequency in hertz. */
             fun frequency(frequency: Double) = frequency(JsonField.of(frequency))
 
             /**
@@ -3181,7 +3298,7 @@ private constructor(
                 this.innerCodingRate = innerCodingRate
             }
 
-            /** Maximum measured PSD value of the trace in dBW. */
+            /** Maximum measured PSD value of the trace in decibel watts. */
             fun maxPsd(maxPsd: Double) = maxPsd(JsonField.of(maxPsd))
 
             /**
@@ -3193,7 +3310,7 @@ private constructor(
              */
             fun maxPsd(maxPsd: JsonField<Double>) = apply { this.maxPsd = maxPsd }
 
-            /** Minimum measured PSD value of the trace in dBW. */
+            /** Minimum measured PSD value of the trace in decibel watts. */
             fun minPsd(minPsd: Double) = minPsd(JsonField.of(minPsd))
 
             /**
@@ -3217,7 +3334,7 @@ private constructor(
              */
             fun modulation(modulation: JsonField<String>) = apply { this.modulation = modulation }
 
-            /** Noise power density, in dBW-Hz. */
+            /** Noise power density, in decibel watts per hertz. */
             fun noisePwrDensity(noisePwrDensity: Double) =
                 noisePwrDensity(JsonField.of(noisePwrDensity))
 
@@ -3232,7 +3349,7 @@ private constructor(
                 this.noisePwrDensity = noisePwrDensity
             }
 
-            /** Expected bandwidth in Hz. */
+            /** Expected bandwidth in hertz. */
             fun nominalBandwidth(nominalBandwidth: Double) =
                 nominalBandwidth(JsonField.of(nominalBandwidth))
 
@@ -3247,7 +3364,7 @@ private constructor(
                 this.nominalBandwidth = nominalBandwidth
             }
 
-            /** Expected Equivalent Isotopically Radiated Power in dBW. */
+            /** Expected Equivalent Isotopically Radiated Power in decibel watts. */
             fun nominalEirp(nominalEirp: Double) = nominalEirp(JsonField.of(nominalEirp))
 
             /**
@@ -3261,7 +3378,7 @@ private constructor(
                 this.nominalEirp = nominalEirp
             }
 
-            /** Nominal or expected center carrier frequency in Hz. */
+            /** Nominal or expected center carrier frequency in hertz. */
             fun nominalFrequency(nominalFrequency: Double) =
                 nominalFrequency(JsonField.of(nominalFrequency))
 
@@ -3276,7 +3393,7 @@ private constructor(
                 this.nominalFrequency = nominalFrequency
             }
 
-            /** Expected carrier power over noise (dBW/Hz). */
+            /** Expected carrier power over noise (decibel watts per hertz). */
             fun nominalPowerOverNoise(nominalPowerOverNoise: Double) =
                 nominalPowerOverNoise(JsonField.of(nominalPowerOverNoise))
 
@@ -3291,7 +3408,7 @@ private constructor(
                 this.nominalPowerOverNoise = nominalPowerOverNoise
             }
 
-            /** Nominal or expected signal to noise ratio, in dB. */
+            /** Nominal or expected signal to noise ratio, in decibels. */
             fun nominalSnr(nominalSnr: Double) = nominalSnr(JsonField.of(nominalSnr))
 
             /**
@@ -3434,6 +3551,7 @@ private constructor(
             /**
              * A pulse group repetition interval (PGRI) is a pulse train in which there are groups
              * of closely spaced pulses separated by much longer times between these pulse groups.
+             * The PGRI is measured in seconds.
              */
             fun pgri(pgri: Double) = pgri(JsonField.of(pgri))
 
@@ -3503,7 +3621,7 @@ private constructor(
                 this.polarityType = polarityType
             }
 
-            /** Measured carrier power over noise (dBW/Hz). */
+            /** Measured carrier power over noise (decibel watts per hertz). */
             fun powerOverNoise(powerOverNoise: Double) =
                 powerOverNoise(JsonField.of(powerOverNoise))
 
@@ -3519,8 +3637,8 @@ private constructor(
             }
 
             /**
-             * Array of individual measured PSD powers of the signal in dBW. This array should
-             * correspond with the same-sized array of frequencies.
+             * Array of individual measured PSD powers of the signal in decibel watts. This array
+             * should correspond with the same-sized array of frequencies.
              */
             fun powers(powers: List<Double>) = powers(JsonField.of(powers))
 
@@ -3547,7 +3665,7 @@ private constructor(
                     }
             }
 
-            /** Target range in km. */
+            /** Target range in kilometers. */
             fun range(range: Double) = range(JsonField.of(range))
 
             /**
@@ -3577,7 +3695,7 @@ private constructor(
                 this.rangeMeasured = rangeMeasured
             }
 
-            /** Rate of change of the range in km/sec. */
+            /** Rate of change of the range in kilometers per second. */
             fun rangeRate(rangeRate: Double) = rangeRate(JsonField.of(rangeRate))
 
             /**
@@ -3650,7 +3768,7 @@ private constructor(
              */
             fun rawFileUri(rawFileUri: JsonField<String>) = apply { this.rawFileUri = rawFileUri }
 
-            /** Reference signal level, in dBW. */
+            /** Reference signal level, in decibel watts. */
             fun referenceLevel(referenceLevel: Double) =
                 referenceLevel(JsonField.of(referenceLevel))
 
@@ -3665,7 +3783,7 @@ private constructor(
                 this.referenceLevel = referenceLevel
             }
 
-            /** Measured power of the center carrier frequency in dBW. */
+            /** Measured power of the center carrier frequency in decibel watts. */
             fun relativeCarrierPower(relativeCarrierPower: Double) =
                 relativeCarrierPower(JsonField.of(relativeCarrierPower))
 
@@ -3682,7 +3800,7 @@ private constructor(
 
             /**
              * The measure of the signal created from the sum of all the noise sources and unwanted
-             * signals within the measurement system, in dBW.
+             * signals within the measurement system, in decibel watts.
              */
             fun relativeNoiseFloor(relativeNoiseFloor: Double) =
                 relativeNoiseFloor(JsonField.of(relativeNoiseFloor))
@@ -3698,7 +3816,7 @@ private constructor(
                 this.relativeNoiseFloor = relativeNoiseFloor
             }
 
-            /** Resolution bandwidth in Hz. */
+            /** Resolution bandwidth in hertz. */
             fun resolutionBandwidth(resolutionBandwidth: Double) =
                 resolutionBandwidth(JsonField.of(resolutionBandwidth))
 
@@ -3797,7 +3915,7 @@ private constructor(
                     }
             }
 
-            /** Signal to noise ratio, in dB. */
+            /** Signal to noise ratio, in decibels. */
             fun snr(snr: Double) = snr(JsonField.of(snr))
 
             /**
@@ -3809,7 +3927,7 @@ private constructor(
              */
             fun snr(snr: JsonField<Double>) = apply { this.snr = snr }
 
-            /** Array of signal to noise ratios of the signals, in dB. */
+            /** Array of signal to noise ratios of the signals, in decibels. */
             fun snrs(snrs: List<Double>) = snrs(JsonField.of(snrs))
 
             /**
@@ -3849,7 +3967,9 @@ private constructor(
              */
             fun sourceDl(sourceDl: JsonField<String>) = apply { this.sourceDl = sourceDl }
 
-            /** Measured spectrum analyzer power of the center carrier frequency in dBW. */
+            /**
+             * Measured spectrum analyzer power of the center carrier frequency in decibel watts.
+             */
             fun spectrumAnalyzerPower(spectrumAnalyzerPower: Double) =
                 spectrumAnalyzerPower(JsonField.of(spectrumAnalyzerPower))
 
@@ -3864,7 +3984,7 @@ private constructor(
                 this.spectrumAnalyzerPower = spectrumAnalyzerPower
             }
 
-            /** Start carrier frequency in Hz. */
+            /** Start carrier frequency in hertz. */
             fun startFrequency(startFrequency: Double) =
                 startFrequency(JsonField.of(startFrequency))
 
@@ -3891,7 +4011,7 @@ private constructor(
              */
             fun switchPoint(switchPoint: JsonField<Int>) = apply { this.switchPoint = switchPoint }
 
-            /** Symbol to noise ratio, in dB. */
+            /** Symbol to noise ratio, in decibels. */
             fun symbolToNoiseRatio(symbolToNoiseRatio: Double) =
                 symbolToNoiseRatio(JsonField.of(symbolToNoiseRatio))
 
@@ -3989,7 +4109,7 @@ private constructor(
              */
             fun trackId(trackId: JsonField<String>) = apply { this.trackId = trackId }
 
-            /** Target track or apparent range in km. */
+            /** Target track or apparent range in kilometers. */
             fun trackRange(trackRange: Double) = trackRange(JsonField.of(trackRange))
 
             /**
@@ -4033,7 +4153,7 @@ private constructor(
                 this.transmitFilterRollOff = transmitFilterRollOff
             }
 
-            /** Transmit pulse shaping filter typ (e.g. RRC). */
+            /** Transmit pulse shaping filter type (e.g. RRC). */
             fun transmitFilterType(transmitFilterType: String) =
                 transmitFilterType(JsonField.of(transmitFilterType))
 
@@ -4095,7 +4215,7 @@ private constructor(
              */
             fun url(url: JsonField<String>) = apply { this.url = url }
 
-            /** Video bandwidth in Hz. */
+            /** Video bandwidth in hertz. */
             fun videoBandwidth(videoBandwidth: Double) =
                 videoBandwidth(JsonField.of(videoBandwidth))
 
@@ -4166,6 +4286,8 @@ private constructor(
                     elevationUnc,
                     elnot,
                     endFrequency,
+                    (fftImagCoeffs ?: JsonMissing.of()).map { it.toImmutable() },
+                    (fftRealCoeffs ?: JsonMissing.of()).map { it.toImmutable() },
                     (frequencies ?: JsonMissing.of()).map { it.toImmutable() },
                     frequency,
                     frequencyShift,
@@ -4279,6 +4401,8 @@ private constructor(
             elevationUnc()
             elnot()
             endFrequency()
+            fftImagCoeffs()
+            fftRealCoeffs()
             frequencies()
             frequency()
             frequencyShift()
@@ -4401,6 +4525,8 @@ private constructor(
                 (if (elevationUnc.asKnown().isPresent) 1 else 0) +
                 (if (elnot.asKnown().isPresent) 1 else 0) +
                 (if (endFrequency.asKnown().isPresent) 1 else 0) +
+                (fftImagCoeffs.asKnown().getOrNull()?.size ?: 0) +
+                (fftRealCoeffs.asKnown().getOrNull()?.size ?: 0) +
                 (frequencies.asKnown().getOrNull()?.size ?: 0) +
                 (if (frequency.asKnown().isPresent) 1 else 0) +
                 (if (frequencyShift.asKnown().isPresent) 1 else 0) +
@@ -4817,6 +4943,8 @@ private constructor(
                 elevationUnc == other.elevationUnc &&
                 elnot == other.elnot &&
                 endFrequency == other.endFrequency &&
+                fftImagCoeffs == other.fftImagCoeffs &&
+                fftRealCoeffs == other.fftRealCoeffs &&
                 frequencies == other.frequencies &&
                 frequency == other.frequency &&
                 frequencyShift == other.frequencyShift &&
@@ -4924,6 +5052,8 @@ private constructor(
                 elevationUnc,
                 elnot,
                 endFrequency,
+                fftImagCoeffs,
+                fftRealCoeffs,
                 frequencies,
                 frequency,
                 frequencyShift,
@@ -4995,7 +5125,7 @@ private constructor(
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, type=$type, id=$id, antennaName=$antennaName, azimuth=$azimuth, azimuthMeasured=$azimuthMeasured, azimuthRate=$azimuthRate, azimuthUnc=$azimuthUnc, bandwidth=$bandwidth, baudRate=$baudRate, baudRates=$baudRates, bitErrorRate=$bitErrorRate, carrierStandard=$carrierStandard, channel=$channel, chipRates=$chipRates, codeFills=$codeFills, codeLengths=$codeLengths, codeTaps=$codeTaps, collectionMode=$collectionMode, confidence=$confidence, confidences=$confidences, constellationXPoints=$constellationXPoints, constellationYPoints=$constellationYPoints, createdAt=$createdAt, createdBy=$createdBy, descriptor=$descriptor, detectionStatus=$detectionStatus, detectionStatuses=$detectionStatuses, eirp=$eirp, elevation=$elevation, elevationMeasured=$elevationMeasured, elevationRate=$elevationRate, elevationUnc=$elevationUnc, elnot=$elnot, endFrequency=$endFrequency, frequencies=$frequencies, frequency=$frequency, frequencyShift=$frequencyShift, idOnOrbit=$idOnOrbit, idSensor=$idSensor, incoming=$incoming, innerCodingRate=$innerCodingRate, maxPsd=$maxPsd, minPsd=$minPsd, modulation=$modulation, noisePwrDensity=$noisePwrDensity, nominalBandwidth=$nominalBandwidth, nominalEirp=$nominalEirp, nominalFrequency=$nominalFrequency, nominalPowerOverNoise=$nominalPowerOverNoise, nominalSnr=$nominalSnr, origCountry=$origCountry, origin=$origin, origMarking=$origMarking, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, outerCodingRate=$outerCodingRate, peak=$peak, pgri=$pgri, pnOrders=$pnOrders, polarity=$polarity, polarityType=$polarityType, powerOverNoise=$powerOverNoise, powers=$powers, range=$range, rangeMeasured=$rangeMeasured, rangeRate=$rangeRate, rangeRateMeasured=$rangeRateMeasured, rangeRateUnc=$rangeRateUnc, rangeUnc=$rangeUnc, rawFileUri=$rawFileUri, referenceLevel=$referenceLevel, relativeCarrierPower=$relativeCarrierPower, relativeNoiseFloor=$relativeNoiseFloor, resolutionBandwidth=$resolutionBandwidth, satNo=$satNo, senalt=$senalt, senlat=$senlat, senlon=$senlon, signalIds=$signalIds, snr=$snr, snrs=$snrs, sourceDl=$sourceDl, spectrumAnalyzerPower=$spectrumAnalyzerPower, startFrequency=$startFrequency, switchPoint=$switchPoint, symbolToNoiseRatio=$symbolToNoiseRatio, tags=$tags, taskId=$taskId, telemetryIds=$telemetryIds, trackId=$trackId, trackRange=$trackRange, transactionId=$transactionId, transmitFilterRollOff=$transmitFilterRollOff, transmitFilterType=$transmitFilterType, transponder=$transponder, uct=$uct, url=$url, videoBandwidth=$videoBandwidth}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, type=$type, id=$id, antennaName=$antennaName, azimuth=$azimuth, azimuthMeasured=$azimuthMeasured, azimuthRate=$azimuthRate, azimuthUnc=$azimuthUnc, bandwidth=$bandwidth, baudRate=$baudRate, baudRates=$baudRates, bitErrorRate=$bitErrorRate, carrierStandard=$carrierStandard, channel=$channel, chipRates=$chipRates, codeFills=$codeFills, codeLengths=$codeLengths, codeTaps=$codeTaps, collectionMode=$collectionMode, confidence=$confidence, confidences=$confidences, constellationXPoints=$constellationXPoints, constellationYPoints=$constellationYPoints, createdAt=$createdAt, createdBy=$createdBy, descriptor=$descriptor, detectionStatus=$detectionStatus, detectionStatuses=$detectionStatuses, eirp=$eirp, elevation=$elevation, elevationMeasured=$elevationMeasured, elevationRate=$elevationRate, elevationUnc=$elevationUnc, elnot=$elnot, endFrequency=$endFrequency, fftImagCoeffs=$fftImagCoeffs, fftRealCoeffs=$fftRealCoeffs, frequencies=$frequencies, frequency=$frequency, frequencyShift=$frequencyShift, idOnOrbit=$idOnOrbit, idSensor=$idSensor, incoming=$incoming, innerCodingRate=$innerCodingRate, maxPsd=$maxPsd, minPsd=$minPsd, modulation=$modulation, noisePwrDensity=$noisePwrDensity, nominalBandwidth=$nominalBandwidth, nominalEirp=$nominalEirp, nominalFrequency=$nominalFrequency, nominalPowerOverNoise=$nominalPowerOverNoise, nominalSnr=$nominalSnr, origCountry=$origCountry, origin=$origin, origMarking=$origMarking, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, outerCodingRate=$outerCodingRate, peak=$peak, pgri=$pgri, pnOrders=$pnOrders, polarity=$polarity, polarityType=$polarityType, powerOverNoise=$powerOverNoise, powers=$powers, range=$range, rangeMeasured=$rangeMeasured, rangeRate=$rangeRate, rangeRateMeasured=$rangeRateMeasured, rangeRateUnc=$rangeRateUnc, rangeUnc=$rangeUnc, rawFileUri=$rawFileUri, referenceLevel=$referenceLevel, relativeCarrierPower=$relativeCarrierPower, relativeNoiseFloor=$relativeNoiseFloor, resolutionBandwidth=$resolutionBandwidth, satNo=$satNo, senalt=$senalt, senlat=$senlat, senlon=$senlon, signalIds=$signalIds, snr=$snr, snrs=$snrs, sourceDl=$sourceDl, spectrumAnalyzerPower=$spectrumAnalyzerPower, startFrequency=$startFrequency, switchPoint=$switchPoint, symbolToNoiseRatio=$symbolToNoiseRatio, tags=$tags, taskId=$taskId, telemetryIds=$telemetryIds, trackId=$trackId, trackRange=$trackRange, transactionId=$transactionId, transmitFilterRollOff=$transmitFilterRollOff, transmitFilterType=$transmitFilterType, transponder=$transponder, uct=$uct, url=$url, videoBandwidth=$videoBandwidth}"
     }
 
     override fun equals(other: Any?): Boolean {

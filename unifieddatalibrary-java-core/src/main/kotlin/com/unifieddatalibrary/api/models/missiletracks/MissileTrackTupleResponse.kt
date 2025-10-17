@@ -3899,8 +3899,8 @@ private constructor(
         fun cov(): Optional<List<Double>> = cov.getOptional("cov")
 
         /**
-         * The reference frame of the covariance elements (ECEF, J2000, UVW, EFG/TDR, TEME, GCRF).
-         * If the referenceFrame is null it is assumed to be UVW.
+         * The reference frame of the covariance elements (J2000, UVW, EFG/TDR, ECR/ECEF, TEME,
+         * GCRF). If the referenceFrame is null it is assumed to be UVW.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -4545,7 +4545,7 @@ private constructor(
             }
 
             /**
-             * The reference frame of the covariance elements (ECEF, J2000, UVW, EFG/TDR, TEME,
+             * The reference frame of the covariance elements (J2000, UVW, EFG/TDR, ECR/ECEF, TEME,
              * GCRF). If the referenceFrame is null it is assumed to be UVW.
              */
             fun covReferenceFrame(covReferenceFrame: CovReferenceFrame) =
@@ -4991,8 +4991,8 @@ private constructor(
                 (vel.asKnown().getOrNull()?.size ?: 0)
 
         /**
-         * The reference frame of the covariance elements (ECEF, J2000, UVW, EFG/TDR, TEME, GCRF).
-         * If the referenceFrame is null it is assumed to be UVW.
+         * The reference frame of the covariance elements (J2000, UVW, EFG/TDR, ECR/ECEF, TEME,
+         * GCRF). If the referenceFrame is null it is assumed to be UVW.
          */
         class CovReferenceFrame
         @JsonCreator
@@ -5010,13 +5010,13 @@ private constructor(
 
             companion object {
 
-                @JvmField val ECEF = of("ECEF")
-
                 @JvmField val J2000 = of("J2000")
 
                 @JvmField val UVW = of("UVW")
 
                 @JvmField val EFG_TDR = of("EFG/TDR")
+
+                @JvmField val ECR_ECEF = of("ECR/ECEF")
 
                 @JvmField val TEME = of("TEME")
 
@@ -5027,10 +5027,10 @@ private constructor(
 
             /** An enum containing [CovReferenceFrame]'s known values. */
             enum class Known {
-                ECEF,
                 J2000,
                 UVW,
                 EFG_TDR,
+                ECR_ECEF,
                 TEME,
                 GCRF,
             }
@@ -5046,10 +5046,10 @@ private constructor(
              * - It was constructed with an arbitrary value using the [of] method.
              */
             enum class Value {
-                ECEF,
                 J2000,
                 UVW,
                 EFG_TDR,
+                ECR_ECEF,
                 TEME,
                 GCRF,
                 /**
@@ -5068,10 +5068,10 @@ private constructor(
              */
             fun value(): Value =
                 when (this) {
-                    ECEF -> Value.ECEF
                     J2000 -> Value.J2000
                     UVW -> Value.UVW
                     EFG_TDR -> Value.EFG_TDR
+                    ECR_ECEF -> Value.ECR_ECEF
                     TEME -> Value.TEME
                     GCRF -> Value.GCRF
                     else -> Value._UNKNOWN
@@ -5088,10 +5088,10 @@ private constructor(
              */
             fun known(): Known =
                 when (this) {
-                    ECEF -> Known.ECEF
                     J2000 -> Known.J2000
                     UVW -> Known.UVW
                     EFG_TDR -> Known.EFG_TDR
+                    ECR_ECEF -> Known.ECR_ECEF
                     TEME -> Known.TEME
                     GCRF -> Known.GCRF
                     else ->
