@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.beamcontours
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -15,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -210,30 +214,99 @@ private constructor(
      * points.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("idBeam") @ExcludeMissing private val idBeam: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<Type>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("contourIdx") @ExcludeMissing private val contourIdx: JsonField<Long>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("gain") @ExcludeMissing private val gain: JsonField<Double>,
-        @JsonProperty("geography") @ExcludeMissing private val geography: JsonField<String>,
-        @JsonProperty("geographyJson") @ExcludeMissing private val geographyJson: JsonField<String>,
-        @JsonProperty("geographyNdims") @ExcludeMissing private val geographyNdims: JsonField<Int>,
-        @JsonProperty("geographySrid") @ExcludeMissing private val geographySrid: JsonField<Int>,
-        @JsonProperty("geographyText") @ExcludeMissing private val geographyText: JsonField<String>,
-        @JsonProperty("geographyType") @ExcludeMissing private val geographyType: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("regionName") @ExcludeMissing private val regionName: JsonField<String>,
+        private val dataMode: JsonField<DataMode>,
+        private val idBeam: JsonField<String>,
+        private val source: JsonField<String>,
+        private val type: JsonField<Type>,
+        private val id: JsonField<String>,
+        private val contourIdx: JsonField<Long>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val gain: JsonField<Double>,
+        private val geography: JsonField<String>,
+        private val geographyJson: JsonField<String>,
+        private val geographyNdims: JsonField<Int>,
+        private val geographySrid: JsonField<Int>,
+        private val geographyText: JsonField<String>,
+        private val geographyType: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val regionName: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("idBeam") @ExcludeMissing idBeam: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<Type> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("contourIdx")
+            @ExcludeMissing
+            contourIdx: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("gain") @ExcludeMissing gain: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("geography")
+            @ExcludeMissing
+            geography: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("geographyJson")
+            @ExcludeMissing
+            geographyJson: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("geographyNdims")
+            @ExcludeMissing
+            geographyNdims: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("geographySrid")
+            @ExcludeMissing
+            geographySrid: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("geographyText")
+            @ExcludeMissing
+            geographyText: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("geographyType")
+            @ExcludeMissing
+            geographyType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("regionName")
+            @ExcludeMissing
+            regionName: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            idBeam,
+            source,
+            type,
+            id,
+            contourIdx,
+            createdAt,
+            createdBy,
+            gain,
+            geography,
+            geographyJson,
+            geographyNdims,
+            geographySrid,
+            geographyText,
+            geographyType,
+            origin,
+            origNetwork,
+            regionName,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -584,6 +657,16 @@ private constructor(
         @ExcludeMissing
         fun _regionName(): JsonField<String> = regionName
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -625,6 +708,7 @@ private constructor(
             private var origin: JsonField<String> = JsonMissing.of()
             private var origNetwork: JsonField<String> = JsonMissing.of()
             private var regionName: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -647,6 +731,7 @@ private constructor(
                 origin = body.origin
                 origNetwork = body.origNetwork
                 regionName = body.regionName
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -951,6 +1036,25 @@ private constructor(
              */
             fun regionName(regionName: JsonField<String>) = apply { this.regionName = regionName }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -988,6 +1092,7 @@ private constructor(
                     origin,
                     origNetwork,
                     regionName,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1376,7 +1481,8 @@ private constructor(
                 geographyType == other.geographyType &&
                 origin == other.origin &&
                 origNetwork == other.origNetwork &&
-                regionName == other.regionName
+                regionName == other.regionName &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1400,13 +1506,14 @@ private constructor(
                 origin,
                 origNetwork,
                 regionName,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idBeam=$idBeam, source=$source, type=$type, id=$id, contourIdx=$contourIdx, createdAt=$createdAt, createdBy=$createdBy, gain=$gain, geography=$geography, geographyJson=$geographyJson, geographyNdims=$geographyNdims, geographySrid=$geographySrid, geographyText=$geographyText, geographyType=$geographyType, origin=$origin, origNetwork=$origNetwork, regionName=$regionName}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idBeam=$idBeam, source=$source, type=$type, id=$id, contourIdx=$contourIdx, createdAt=$createdAt, createdBy=$createdBy, gain=$gain, geography=$geography, geographyJson=$geographyJson, geographyNdims=$geographyNdims, geographySrid=$geographySrid, geographyText=$geographyText, geographyType=$geographyType, origin=$origin, origNetwork=$origNetwork, regionName=$regionName, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

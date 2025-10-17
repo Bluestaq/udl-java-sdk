@@ -211,37 +211,116 @@ private constructor(
 
     /** Energetic Charged Particles (ECP) Environmental Data Records (EDRs). */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("ecpedrMeasurements")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
         private val ecpedrMeasurements: JsonField<List<EcpedrMeasurement>>,
-        @JsonProperty("obTime") @ExcludeMissing private val obTime: JsonField<OffsetDateTime>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("genSystem") @ExcludeMissing private val genSystem: JsonField<String>,
-        @JsonProperty("genTime") @ExcludeMissing private val genTime: JsonField<OffsetDateTime>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("senPos") @ExcludeMissing private val senPos: JsonField<List<Double>>,
-        @JsonProperty("senReferenceFrame")
-        @ExcludeMissing
+        private val obTime: JsonField<OffsetDateTime>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val genSystem: JsonField<String>,
+        private val genTime: JsonField<OffsetDateTime>,
+        private val idOnOrbit: JsonField<String>,
+        private val idSensor: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val origSensorId: JsonField<String>,
+        private val satNo: JsonField<Int>,
+        private val senPos: JsonField<List<Double>>,
         private val senReferenceFrame: JsonField<SenReferenceFrame>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("transactionId") @ExcludeMissing private val transactionId: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val tags: JsonField<List<String>>,
+        private val transactionId: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("ecpedrMeasurements")
+            @ExcludeMissing
+            ecpedrMeasurements: JsonField<List<EcpedrMeasurement>> = JsonMissing.of(),
+            @JsonProperty("obTime")
+            @ExcludeMissing
+            obTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("genSystem")
+            @ExcludeMissing
+            genSystem: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("genTime")
+            @ExcludeMissing
+            genTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("senPos")
+            @ExcludeMissing
+            senPos: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("senReferenceFrame")
+            @ExcludeMissing
+            senReferenceFrame: JsonField<SenReferenceFrame> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("transactionId")
+            @ExcludeMissing
+            transactionId: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            ecpedrMeasurements,
+            obTime,
+            source,
+            id,
+            createdAt,
+            createdBy,
+            genSystem,
+            genTime,
+            idOnOrbit,
+            idSensor,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            satNo,
+            senPos,
+            senReferenceFrame,
+            sourceDl,
+            tags,
+            transactionId,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -635,6 +714,16 @@ private constructor(
         @ExcludeMissing
         fun _transactionId(): JsonField<String> = transactionId
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -679,6 +768,7 @@ private constructor(
             private var sourceDl: JsonField<String> = JsonMissing.of()
             private var tags: JsonField<MutableList<String>>? = null
             private var transactionId: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -704,6 +794,7 @@ private constructor(
                 sourceDl = body.sourceDl
                 tags = body.tags.map { it.toMutableList() }
                 transactionId = body.transactionId
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1088,6 +1179,25 @@ private constructor(
                 this.transactionId = transactionId
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1130,6 +1240,7 @@ private constructor(
                     sourceDl,
                     (tags ?: JsonMissing.of()).map { it.toImmutable() },
                     transactionId,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -2112,7 +2223,8 @@ private constructor(
                 senReferenceFrame == other.senReferenceFrame &&
                 sourceDl == other.sourceDl &&
                 tags == other.tags &&
-                transactionId == other.transactionId
+                transactionId == other.transactionId &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -2139,13 +2251,14 @@ private constructor(
                 sourceDl,
                 tags,
                 transactionId,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, ecpedrMeasurements=$ecpedrMeasurements, obTime=$obTime, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, genSystem=$genSystem, genTime=$genTime, idOnOrbit=$idOnOrbit, idSensor=$idSensor, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, satNo=$satNo, senPos=$senPos, senReferenceFrame=$senReferenceFrame, sourceDl=$sourceDl, tags=$tags, transactionId=$transactionId}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, ecpedrMeasurements=$ecpedrMeasurements, obTime=$obTime, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, genSystem=$genSystem, genTime=$genTime, idOnOrbit=$idOnOrbit, idSensor=$idSensor, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, satNo=$satNo, senPos=$senPos, senReferenceFrame=$senReferenceFrame, sourceDl=$sourceDl, tags=$tags, transactionId=$transactionId, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

@@ -213,67 +213,192 @@ private constructor(
      * friendly and enemy casualties.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("pickupLat") @ExcludeMissing private val pickupLat: JsonField<Double>,
-        @JsonProperty("pickupLon") @ExcludeMissing private val pickupLon: JsonField<Double>,
-        @JsonProperty("reqTime") @ExcludeMissing private val reqTime: JsonField<OffsetDateTime>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<Type>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("casualtyInfo")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val pickupLat: JsonField<Double>,
+        private val pickupLon: JsonField<Double>,
+        private val reqTime: JsonField<OffsetDateTime>,
+        private val source: JsonField<String>,
+        private val type: JsonField<Type>,
+        private val id: JsonField<String>,
         private val casualtyInfo: JsonField<List<CasualtyInfo>>,
-        @JsonProperty("ce") @ExcludeMissing private val ce: JsonField<Double>,
-        @JsonProperty("cntctFreq") @ExcludeMissing private val cntctFreq: JsonField<Double>,
-        @JsonProperty("comments") @ExcludeMissing private val comments: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("enemyData")
-        @ExcludeMissing
+        private val ce: JsonField<Double>,
+        private val cntctFreq: JsonField<Double>,
+        private val comments: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
         private val enemyData: JsonField<List<EnemyData>>,
-        @JsonProperty("idWeatherReport")
-        @ExcludeMissing
         private val idWeatherReport: JsonField<String>,
-        @JsonProperty("le") @ExcludeMissing private val le: JsonField<Double>,
-        @JsonProperty("medevacId") @ExcludeMissing private val medevacId: JsonField<String>,
-        @JsonProperty("medicReq") @ExcludeMissing private val medicReq: JsonField<Boolean>,
-        @JsonProperty("missionType") @ExcludeMissing private val missionType: JsonField<String>,
-        @JsonProperty("numAmbulatory") @ExcludeMissing private val numAmbulatory: JsonField<Int>,
-        @JsonProperty("numCasualties") @ExcludeMissing private val numCasualties: JsonField<Int>,
-        @JsonProperty("numKIA") @ExcludeMissing private val numKia: JsonField<Int>,
-        @JsonProperty("numLitter") @ExcludeMissing private val numLitter: JsonField<Int>,
-        @JsonProperty("numWIA") @ExcludeMissing private val numWia: JsonField<Int>,
-        @JsonProperty("obstaclesRemarks")
-        @ExcludeMissing
+        private val le: JsonField<Double>,
+        private val medevacId: JsonField<String>,
+        private val medicReq: JsonField<Boolean>,
+        private val missionType: JsonField<String>,
+        private val numAmbulatory: JsonField<Int>,
+        private val numCasualties: JsonField<Int>,
+        private val numKia: JsonField<Int>,
+        private val numLitter: JsonField<Int>,
+        private val numWia: JsonField<Int>,
         private val obstaclesRemarks: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("pickupAlt") @ExcludeMissing private val pickupAlt: JsonField<Double>,
-        @JsonProperty("pickupTime")
-        @ExcludeMissing
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val pickupAlt: JsonField<Double>,
         private val pickupTime: JsonField<OffsetDateTime>,
-        @JsonProperty("reqCallSign") @ExcludeMissing private val reqCallSign: JsonField<String>,
-        @JsonProperty("reqNum") @ExcludeMissing private val reqNum: JsonField<String>,
-        @JsonProperty("terrain") @ExcludeMissing private val terrain: JsonField<String>,
-        @JsonProperty("terrainRemarks")
-        @ExcludeMissing
+        private val reqCallSign: JsonField<String>,
+        private val reqNum: JsonField<String>,
+        private val terrain: JsonField<String>,
         private val terrainRemarks: JsonField<String>,
-        @JsonProperty("zoneContrCallSign")
-        @ExcludeMissing
         private val zoneContrCallSign: JsonField<String>,
-        @JsonProperty("zoneHot") @ExcludeMissing private val zoneHot: JsonField<Boolean>,
-        @JsonProperty("zoneMarking") @ExcludeMissing private val zoneMarking: JsonField<String>,
-        @JsonProperty("zoneMarkingColor")
-        @ExcludeMissing
+        private val zoneHot: JsonField<Boolean>,
+        private val zoneMarking: JsonField<String>,
         private val zoneMarkingColor: JsonField<String>,
-        @JsonProperty("zoneName") @ExcludeMissing private val zoneName: JsonField<String>,
-        @JsonProperty("zoneSecurity") @ExcludeMissing private val zoneSecurity: JsonField<String>,
+        private val zoneName: JsonField<String>,
+        private val zoneSecurity: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("pickupLat")
+            @ExcludeMissing
+            pickupLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pickupLon")
+            @ExcludeMissing
+            pickupLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("reqTime")
+            @ExcludeMissing
+            reqTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<Type> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("casualtyInfo")
+            @ExcludeMissing
+            casualtyInfo: JsonField<List<CasualtyInfo>> = JsonMissing.of(),
+            @JsonProperty("ce") @ExcludeMissing ce: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("cntctFreq")
+            @ExcludeMissing
+            cntctFreq: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("comments")
+            @ExcludeMissing
+            comments: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("enemyData")
+            @ExcludeMissing
+            enemyData: JsonField<List<EnemyData>> = JsonMissing.of(),
+            @JsonProperty("idWeatherReport")
+            @ExcludeMissing
+            idWeatherReport: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("le") @ExcludeMissing le: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("medevacId")
+            @ExcludeMissing
+            medevacId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("medicReq")
+            @ExcludeMissing
+            medicReq: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("missionType")
+            @ExcludeMissing
+            missionType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("numAmbulatory")
+            @ExcludeMissing
+            numAmbulatory: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numCasualties")
+            @ExcludeMissing
+            numCasualties: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numKIA") @ExcludeMissing numKia: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numLitter") @ExcludeMissing numLitter: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numWIA") @ExcludeMissing numWia: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("obstaclesRemarks")
+            @ExcludeMissing
+            obstaclesRemarks: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("pickupAlt")
+            @ExcludeMissing
+            pickupAlt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pickupTime")
+            @ExcludeMissing
+            pickupTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("reqCallSign")
+            @ExcludeMissing
+            reqCallSign: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("reqNum") @ExcludeMissing reqNum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("terrain") @ExcludeMissing terrain: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("terrainRemarks")
+            @ExcludeMissing
+            terrainRemarks: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("zoneContrCallSign")
+            @ExcludeMissing
+            zoneContrCallSign: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("zoneHot") @ExcludeMissing zoneHot: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("zoneMarking")
+            @ExcludeMissing
+            zoneMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("zoneMarkingColor")
+            @ExcludeMissing
+            zoneMarkingColor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("zoneName")
+            @ExcludeMissing
+            zoneName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("zoneSecurity")
+            @ExcludeMissing
+            zoneSecurity: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            pickupLat,
+            pickupLon,
+            reqTime,
+            source,
+            type,
+            id,
+            casualtyInfo,
+            ce,
+            cntctFreq,
+            comments,
+            createdAt,
+            createdBy,
+            enemyData,
+            idWeatherReport,
+            le,
+            medevacId,
+            medicReq,
+            missionType,
+            numAmbulatory,
+            numCasualties,
+            numKia,
+            numLitter,
+            numWia,
+            obstaclesRemarks,
+            origin,
+            origNetwork,
+            pickupAlt,
+            pickupTime,
+            reqCallSign,
+            reqNum,
+            terrain,
+            terrainRemarks,
+            zoneContrCallSign,
+            zoneHot,
+            zoneMarking,
+            zoneMarkingColor,
+            zoneName,
+            zoneSecurity,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -954,6 +1079,16 @@ private constructor(
         @ExcludeMissing
         fun _zoneSecurity(): JsonField<String> = zoneSecurity
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1018,6 +1153,7 @@ private constructor(
             private var zoneMarkingColor: JsonField<String> = JsonMissing.of()
             private var zoneName: JsonField<String> = JsonMissing.of()
             private var zoneSecurity: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1061,6 +1197,7 @@ private constructor(
                 zoneMarkingColor = body.zoneMarkingColor
                 zoneName = body.zoneName
                 zoneSecurity = body.zoneSecurity
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1666,6 +1803,25 @@ private constructor(
                 this.zoneSecurity = zoneSecurity
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1726,6 +1882,7 @@ private constructor(
                     zoneMarkingColor,
                     zoneName,
                     zoneSecurity,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -6651,7 +6808,8 @@ private constructor(
                 zoneMarking == other.zoneMarking &&
                 zoneMarkingColor == other.zoneMarkingColor &&
                 zoneName == other.zoneName &&
-                zoneSecurity == other.zoneSecurity
+                zoneSecurity == other.zoneSecurity &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -6696,13 +6854,14 @@ private constructor(
                 zoneMarkingColor,
                 zoneName,
                 zoneSecurity,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, pickupLat=$pickupLat, pickupLon=$pickupLon, reqTime=$reqTime, source=$source, type=$type, id=$id, casualtyInfo=$casualtyInfo, ce=$ce, cntctFreq=$cntctFreq, comments=$comments, createdAt=$createdAt, createdBy=$createdBy, enemyData=$enemyData, idWeatherReport=$idWeatherReport, le=$le, medevacId=$medevacId, medicReq=$medicReq, missionType=$missionType, numAmbulatory=$numAmbulatory, numCasualties=$numCasualties, numKia=$numKia, numLitter=$numLitter, numWia=$numWia, obstaclesRemarks=$obstaclesRemarks, origin=$origin, origNetwork=$origNetwork, pickupAlt=$pickupAlt, pickupTime=$pickupTime, reqCallSign=$reqCallSign, reqNum=$reqNum, terrain=$terrain, terrainRemarks=$terrainRemarks, zoneContrCallSign=$zoneContrCallSign, zoneHot=$zoneHot, zoneMarking=$zoneMarking, zoneMarkingColor=$zoneMarkingColor, zoneName=$zoneName, zoneSecurity=$zoneSecurity}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, pickupLat=$pickupLat, pickupLon=$pickupLon, reqTime=$reqTime, source=$source, type=$type, id=$id, casualtyInfo=$casualtyInfo, ce=$ce, cntctFreq=$cntctFreq, comments=$comments, createdAt=$createdAt, createdBy=$createdBy, enemyData=$enemyData, idWeatherReport=$idWeatherReport, le=$le, medevacId=$medevacId, medicReq=$medicReq, missionType=$missionType, numAmbulatory=$numAmbulatory, numCasualties=$numCasualties, numKia=$numKia, numLitter=$numLitter, numWia=$numWia, obstaclesRemarks=$obstaclesRemarks, origin=$origin, origNetwork=$origNetwork, pickupAlt=$pickupAlt, pickupTime=$pickupTime, reqCallSign=$reqCallSign, reqNum=$reqNum, terrain=$terrain, terrainRemarks=$terrainRemarks, zoneContrCallSign=$zoneContrCallSign, zoneHot=$zoneHot, zoneMarking=$zoneMarking, zoneMarkingColor=$zoneMarkingColor, zoneName=$zoneName, zoneSecurity=$zoneSecurity, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

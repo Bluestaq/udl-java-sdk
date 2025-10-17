@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.effectrequests
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -208,38 +212,111 @@ private constructor(
 
     /** A request for various effects on a target. */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("effectList") @ExcludeMissing private val effectList: JsonField<List<String>>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("context") @ExcludeMissing private val context: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("deadlineType") @ExcludeMissing private val deadlineType: JsonField<String>,
-        @JsonProperty("endTime") @ExcludeMissing private val endTime: JsonField<OffsetDateTime>,
-        @JsonProperty("externalRequestId")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val effectList: JsonField<List<String>>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val context: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val deadlineType: JsonField<String>,
+        private val endTime: JsonField<OffsetDateTime>,
         private val externalRequestId: JsonField<String>,
-        @JsonProperty("metricTypes")
-        @ExcludeMissing
         private val metricTypes: JsonField<List<String>>,
-        @JsonProperty("metricWeights")
-        @ExcludeMissing
         private val metricWeights: JsonField<List<Double>>,
-        @JsonProperty("modelClass") @ExcludeMissing private val modelClass: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("priority") @ExcludeMissing private val priority: JsonField<String>,
-        @JsonProperty("startTime") @ExcludeMissing private val startTime: JsonField<OffsetDateTime>,
-        @JsonProperty("state") @ExcludeMissing private val state: JsonField<String>,
-        @JsonProperty("targetSrcId") @ExcludeMissing private val targetSrcId: JsonField<String>,
-        @JsonProperty("targetSrcType") @ExcludeMissing private val targetSrcType: JsonField<String>,
+        private val modelClass: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val priority: JsonField<String>,
+        private val startTime: JsonField<OffsetDateTime>,
+        private val state: JsonField<String>,
+        private val targetSrcId: JsonField<String>,
+        private val targetSrcType: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("effectList")
+            @ExcludeMissing
+            effectList: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("context") @ExcludeMissing context: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("deadlineType")
+            @ExcludeMissing
+            deadlineType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("endTime")
+            @ExcludeMissing
+            endTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("externalRequestId")
+            @ExcludeMissing
+            externalRequestId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("metricTypes")
+            @ExcludeMissing
+            metricTypes: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("metricWeights")
+            @ExcludeMissing
+            metricWeights: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("modelClass")
+            @ExcludeMissing
+            modelClass: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("priority")
+            @ExcludeMissing
+            priority: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("startTime")
+            @ExcludeMissing
+            startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("state") @ExcludeMissing state: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("targetSrcId")
+            @ExcludeMissing
+            targetSrcId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("targetSrcType")
+            @ExcludeMissing
+            targetSrcType: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            effectList,
+            source,
+            id,
+            context,
+            createdAt,
+            createdBy,
+            deadlineType,
+            endTime,
+            externalRequestId,
+            metricTypes,
+            metricWeights,
+            modelClass,
+            origin,
+            origNetwork,
+            priority,
+            startTime,
+            state,
+            targetSrcId,
+            targetSrcType,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -622,6 +699,16 @@ private constructor(
         @ExcludeMissing
         fun _targetSrcType(): JsonField<String> = targetSrcType
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -664,6 +751,7 @@ private constructor(
             private var state: JsonField<String> = JsonMissing.of()
             private var targetSrcId: JsonField<String> = JsonMissing.of()
             private var targetSrcType: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -688,6 +776,7 @@ private constructor(
                 state = body.state
                 targetSrcId = body.targetSrcId
                 targetSrcType = body.targetSrcType
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1055,6 +1144,25 @@ private constructor(
                 this.targetSrcType = targetSrcType
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1093,6 +1201,7 @@ private constructor(
                     state,
                     targetSrcId,
                     targetSrcType,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1347,7 +1456,8 @@ private constructor(
                 startTime == other.startTime &&
                 state == other.state &&
                 targetSrcId == other.targetSrcId &&
-                targetSrcType == other.targetSrcType
+                targetSrcType == other.targetSrcType &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1373,13 +1483,14 @@ private constructor(
                 state,
                 targetSrcId,
                 targetSrcType,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, effectList=$effectList, source=$source, id=$id, context=$context, createdAt=$createdAt, createdBy=$createdBy, deadlineType=$deadlineType, endTime=$endTime, externalRequestId=$externalRequestId, metricTypes=$metricTypes, metricWeights=$metricWeights, modelClass=$modelClass, origin=$origin, origNetwork=$origNetwork, priority=$priority, startTime=$startTime, state=$state, targetSrcId=$targetSrcId, targetSrcType=$targetSrcType}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, effectList=$effectList, source=$source, id=$id, context=$context, createdAt=$createdAt, createdBy=$createdBy, deadlineType=$deadlineType, endTime=$endTime, externalRequestId=$externalRequestId, metricTypes=$metricTypes, metricWeights=$metricWeights, modelClass=$modelClass, origin=$origin, origNetwork=$origNetwork, priority=$priority, startTime=$startTime, state=$state, targetSrcId=$targetSrcId, targetSrcType=$targetSrcType, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

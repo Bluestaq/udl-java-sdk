@@ -243,141 +243,438 @@ private constructor(
      * 'Discover' tab in the storefront to confirm the coordinate frames used by the data provider.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("obTime") @ExcludeMissing private val obTime: JsonField<OffsetDateTime>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("azimuth") @ExcludeMissing private val azimuth: JsonField<Double>,
-        @JsonProperty("azimuthBias") @ExcludeMissing private val azimuthBias: JsonField<Double>,
-        @JsonProperty("azimuthMeasured")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val obTime: JsonField<OffsetDateTime>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val azimuth: JsonField<Double>,
+        private val azimuthBias: JsonField<Double>,
         private val azimuthMeasured: JsonField<Boolean>,
-        @JsonProperty("azimuthRate") @ExcludeMissing private val azimuthRate: JsonField<Double>,
-        @JsonProperty("azimuthUnc") @ExcludeMissing private val azimuthUnc: JsonField<Double>,
-        @JsonProperty("bgIntensity") @ExcludeMissing private val bgIntensity: JsonField<Double>,
-        @JsonProperty("collectMethod") @ExcludeMissing private val collectMethod: JsonField<String>,
-        @JsonProperty("corrQuality") @ExcludeMissing private val corrQuality: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("declination") @ExcludeMissing private val declination: JsonField<Double>,
-        @JsonProperty("declinationBias")
-        @ExcludeMissing
+        private val azimuthRate: JsonField<Double>,
+        private val azimuthUnc: JsonField<Double>,
+        private val bgIntensity: JsonField<Double>,
+        private val collectMethod: JsonField<String>,
+        private val corrQuality: JsonField<Double>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val declination: JsonField<Double>,
         private val declinationBias: JsonField<Double>,
-        @JsonProperty("declinationMeasured")
-        @ExcludeMissing
         private val declinationMeasured: JsonField<Boolean>,
-        @JsonProperty("declinationRate")
-        @ExcludeMissing
         private val declinationRate: JsonField<Double>,
-        @JsonProperty("declinationUnc")
-        @ExcludeMissing
         private val declinationUnc: JsonField<Double>,
-        @JsonProperty("descriptor") @ExcludeMissing private val descriptor: JsonField<String>,
-        @JsonProperty("elevation") @ExcludeMissing private val elevation: JsonField<Double>,
-        @JsonProperty("elevationBias") @ExcludeMissing private val elevationBias: JsonField<Double>,
-        @JsonProperty("elevationMeasured")
-        @ExcludeMissing
+        private val descriptor: JsonField<String>,
+        private val elevation: JsonField<Double>,
+        private val elevationBias: JsonField<Double>,
         private val elevationMeasured: JsonField<Boolean>,
-        @JsonProperty("elevationRate") @ExcludeMissing private val elevationRate: JsonField<Double>,
-        @JsonProperty("elevationUnc") @ExcludeMissing private val elevationUnc: JsonField<Double>,
-        @JsonProperty("eoobservationDetails")
-        @ExcludeMissing
+        private val elevationRate: JsonField<Double>,
+        private val elevationUnc: JsonField<Double>,
         private val eoobservationDetails: JsonField<EoobservationDetails>,
-        @JsonProperty("expDuration") @ExcludeMissing private val expDuration: JsonField<Double>,
-        @JsonProperty("fovCount") @ExcludeMissing private val fovCount: JsonField<Int>,
-        @JsonProperty("fovCountUCT") @ExcludeMissing private val fovCountUct: JsonField<Int>,
-        @JsonProperty("geoalt") @ExcludeMissing private val geoalt: JsonField<Double>,
-        @JsonProperty("geolat") @ExcludeMissing private val geolat: JsonField<Double>,
-        @JsonProperty("geolon") @ExcludeMissing private val geolon: JsonField<Double>,
-        @JsonProperty("georange") @ExcludeMissing private val georange: JsonField<Double>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("idSkyImagery") @ExcludeMissing private val idSkyImagery: JsonField<String>,
-        @JsonProperty("intensity") @ExcludeMissing private val intensity: JsonField<Double>,
-        @JsonProperty("losUnc") @ExcludeMissing private val losUnc: JsonField<Double>,
-        @JsonProperty("losx") @ExcludeMissing private val losx: JsonField<Double>,
-        @JsonProperty("losxvel") @ExcludeMissing private val losxvel: JsonField<Double>,
-        @JsonProperty("losy") @ExcludeMissing private val losy: JsonField<Double>,
-        @JsonProperty("losyvel") @ExcludeMissing private val losyvel: JsonField<Double>,
-        @JsonProperty("losz") @ExcludeMissing private val losz: JsonField<Double>,
-        @JsonProperty("loszvel") @ExcludeMissing private val loszvel: JsonField<Double>,
-        @JsonProperty("mag") @ExcludeMissing private val mag: JsonField<Double>,
-        @JsonProperty("magNormRange") @ExcludeMissing private val magNormRange: JsonField<Double>,
-        @JsonProperty("magUnc") @ExcludeMissing private val magUnc: JsonField<Double>,
-        @JsonProperty("netObjSig") @ExcludeMissing private val netObjSig: JsonField<Double>,
-        @JsonProperty("netObjSigUnc") @ExcludeMissing private val netObjSigUnc: JsonField<Double>,
-        @JsonProperty("obPosition") @ExcludeMissing private val obPosition: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("penumbra") @ExcludeMissing private val penumbra: JsonField<Boolean>,
-        @JsonProperty("primaryExtinction")
-        @ExcludeMissing
+        private val expDuration: JsonField<Double>,
+        private val fovCount: JsonField<Int>,
+        private val fovCountUct: JsonField<Int>,
+        private val geoalt: JsonField<Double>,
+        private val geolat: JsonField<Double>,
+        private val geolon: JsonField<Double>,
+        private val georange: JsonField<Double>,
+        private val idOnOrbit: JsonField<String>,
+        private val idSensor: JsonField<String>,
+        private val idSkyImagery: JsonField<String>,
+        private val intensity: JsonField<Double>,
+        private val losUnc: JsonField<Double>,
+        private val losx: JsonField<Double>,
+        private val losxvel: JsonField<Double>,
+        private val losy: JsonField<Double>,
+        private val losyvel: JsonField<Double>,
+        private val losz: JsonField<Double>,
+        private val loszvel: JsonField<Double>,
+        private val mag: JsonField<Double>,
+        private val magNormRange: JsonField<Double>,
+        private val magUnc: JsonField<Double>,
+        private val netObjSig: JsonField<Double>,
+        private val netObjSigUnc: JsonField<Double>,
+        private val obPosition: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val origSensorId: JsonField<String>,
+        private val penumbra: JsonField<Boolean>,
         private val primaryExtinction: JsonField<Double>,
-        @JsonProperty("primaryExtinctionUnc")
-        @ExcludeMissing
         private val primaryExtinctionUnc: JsonField<Double>,
-        @JsonProperty("ra") @ExcludeMissing private val ra: JsonField<Double>,
-        @JsonProperty("raBias") @ExcludeMissing private val raBias: JsonField<Double>,
-        @JsonProperty("raMeasured") @ExcludeMissing private val raMeasured: JsonField<Boolean>,
-        @JsonProperty("range") @ExcludeMissing private val range: JsonField<Double>,
-        @JsonProperty("rangeBias") @ExcludeMissing private val rangeBias: JsonField<Double>,
-        @JsonProperty("rangeMeasured")
-        @ExcludeMissing
+        private val ra: JsonField<Double>,
+        private val raBias: JsonField<Double>,
+        private val raMeasured: JsonField<Boolean>,
+        private val range: JsonField<Double>,
+        private val rangeBias: JsonField<Double>,
         private val rangeMeasured: JsonField<Boolean>,
-        @JsonProperty("rangeRate") @ExcludeMissing private val rangeRate: JsonField<Double>,
-        @JsonProperty("rangeRateMeasured")
-        @ExcludeMissing
+        private val rangeRate: JsonField<Double>,
         private val rangeRateMeasured: JsonField<Boolean>,
-        @JsonProperty("rangeRateUnc") @ExcludeMissing private val rangeRateUnc: JsonField<Double>,
-        @JsonProperty("rangeUnc") @ExcludeMissing private val rangeUnc: JsonField<Double>,
-        @JsonProperty("raRate") @ExcludeMissing private val raRate: JsonField<Double>,
-        @JsonProperty("raUnc") @ExcludeMissing private val raUnc: JsonField<Double>,
-        @JsonProperty("rawFileURI") @ExcludeMissing private val rawFileUri: JsonField<String>,
-        @JsonProperty("referenceFrame")
-        @ExcludeMissing
+        private val rangeRateUnc: JsonField<Double>,
+        private val rangeUnc: JsonField<Double>,
+        private val raRate: JsonField<Double>,
+        private val raUnc: JsonField<Double>,
+        private val rawFileUri: JsonField<String>,
         private val referenceFrame: JsonField<ReferenceFrame>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("senalt") @ExcludeMissing private val senalt: JsonField<Double>,
-        @JsonProperty("senlat") @ExcludeMissing private val senlat: JsonField<Double>,
-        @JsonProperty("senlon") @ExcludeMissing private val senlon: JsonField<Double>,
-        @JsonProperty("senQuat") @ExcludeMissing private val senQuat: JsonField<List<Double>>,
-        @JsonProperty("senReferenceFrame")
-        @ExcludeMissing
+        private val satNo: JsonField<Int>,
+        private val senalt: JsonField<Double>,
+        private val senlat: JsonField<Double>,
+        private val senlon: JsonField<Double>,
+        private val senQuat: JsonField<List<Double>>,
         private val senReferenceFrame: JsonField<SenReferenceFrame>,
-        @JsonProperty("senvelx") @ExcludeMissing private val senvelx: JsonField<Double>,
-        @JsonProperty("senvely") @ExcludeMissing private val senvely: JsonField<Double>,
-        @JsonProperty("senvelz") @ExcludeMissing private val senvelz: JsonField<Double>,
-        @JsonProperty("senx") @ExcludeMissing private val senx: JsonField<Double>,
-        @JsonProperty("seny") @ExcludeMissing private val seny: JsonField<Double>,
-        @JsonProperty("senz") @ExcludeMissing private val senz: JsonField<Double>,
-        @JsonProperty("shutterDelay") @ExcludeMissing private val shutterDelay: JsonField<Double>,
-        @JsonProperty("skyBkgrnd") @ExcludeMissing private val skyBkgrnd: JsonField<Double>,
-        @JsonProperty("solarDecAngle") @ExcludeMissing private val solarDecAngle: JsonField<Double>,
-        @JsonProperty("solarEqPhaseAngle")
-        @ExcludeMissing
+        private val senvelx: JsonField<Double>,
+        private val senvely: JsonField<Double>,
+        private val senvelz: JsonField<Double>,
+        private val senx: JsonField<Double>,
+        private val seny: JsonField<Double>,
+        private val senz: JsonField<Double>,
+        private val shutterDelay: JsonField<Double>,
+        private val skyBkgrnd: JsonField<Double>,
+        private val solarDecAngle: JsonField<Double>,
         private val solarEqPhaseAngle: JsonField<Double>,
-        @JsonProperty("solarPhaseAngle")
-        @ExcludeMissing
         private val solarPhaseAngle: JsonField<Double>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("taskId") @ExcludeMissing private val taskId: JsonField<String>,
-        @JsonProperty("timingBias") @ExcludeMissing private val timingBias: JsonField<Double>,
-        @JsonProperty("trackId") @ExcludeMissing private val trackId: JsonField<String>,
-        @JsonProperty("transactionId") @ExcludeMissing private val transactionId: JsonField<String>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<String>,
-        @JsonProperty("uct") @ExcludeMissing private val uct: JsonField<Boolean>,
-        @JsonProperty("umbra") @ExcludeMissing private val umbra: JsonField<Boolean>,
-        @JsonProperty("zeroptd") @ExcludeMissing private val zeroptd: JsonField<Double>,
-        @JsonProperty("zeroPtdUnc") @ExcludeMissing private val zeroPtdUnc: JsonField<Double>,
+        private val sourceDl: JsonField<String>,
+        private val tags: JsonField<List<String>>,
+        private val taskId: JsonField<String>,
+        private val timingBias: JsonField<Double>,
+        private val trackId: JsonField<String>,
+        private val transactionId: JsonField<String>,
+        private val type: JsonField<String>,
+        private val uct: JsonField<Boolean>,
+        private val umbra: JsonField<Boolean>,
+        private val zeroptd: JsonField<Double>,
+        private val zeroPtdUnc: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("obTime")
+            @ExcludeMissing
+            obTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("azimuth") @ExcludeMissing azimuth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azimuthBias")
+            @ExcludeMissing
+            azimuthBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azimuthMeasured")
+            @ExcludeMissing
+            azimuthMeasured: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("azimuthRate")
+            @ExcludeMissing
+            azimuthRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azimuthUnc")
+            @ExcludeMissing
+            azimuthUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("bgIntensity")
+            @ExcludeMissing
+            bgIntensity: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("collectMethod")
+            @ExcludeMissing
+            collectMethod: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("corrQuality")
+            @ExcludeMissing
+            corrQuality: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("declination")
+            @ExcludeMissing
+            declination: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("declinationBias")
+            @ExcludeMissing
+            declinationBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("declinationMeasured")
+            @ExcludeMissing
+            declinationMeasured: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("declinationRate")
+            @ExcludeMissing
+            declinationRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("declinationUnc")
+            @ExcludeMissing
+            declinationUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("descriptor")
+            @ExcludeMissing
+            descriptor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("elevation")
+            @ExcludeMissing
+            elevation: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elevationBias")
+            @ExcludeMissing
+            elevationBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elevationMeasured")
+            @ExcludeMissing
+            elevationMeasured: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("elevationRate")
+            @ExcludeMissing
+            elevationRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elevationUnc")
+            @ExcludeMissing
+            elevationUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("eoobservationDetails")
+            @ExcludeMissing
+            eoobservationDetails: JsonField<EoobservationDetails> = JsonMissing.of(),
+            @JsonProperty("expDuration")
+            @ExcludeMissing
+            expDuration: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fovCount") @ExcludeMissing fovCount: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("fovCountUCT")
+            @ExcludeMissing
+            fovCountUct: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("geoalt") @ExcludeMissing geoalt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("geolat") @ExcludeMissing geolat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("geolon") @ExcludeMissing geolon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("georange")
+            @ExcludeMissing
+            georange: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSkyImagery")
+            @ExcludeMissing
+            idSkyImagery: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("intensity")
+            @ExcludeMissing
+            intensity: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("losUnc") @ExcludeMissing losUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("losx") @ExcludeMissing losx: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("losxvel") @ExcludeMissing losxvel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("losy") @ExcludeMissing losy: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("losyvel") @ExcludeMissing losyvel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("losz") @ExcludeMissing losz: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("loszvel") @ExcludeMissing loszvel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("mag") @ExcludeMissing mag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("magNormRange")
+            @ExcludeMissing
+            magNormRange: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("magUnc") @ExcludeMissing magUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("netObjSig")
+            @ExcludeMissing
+            netObjSig: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("netObjSigUnc")
+            @ExcludeMissing
+            netObjSigUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("obPosition")
+            @ExcludeMissing
+            obPosition: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("penumbra")
+            @ExcludeMissing
+            penumbra: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("primaryExtinction")
+            @ExcludeMissing
+            primaryExtinction: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("primaryExtinctionUnc")
+            @ExcludeMissing
+            primaryExtinctionUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("ra") @ExcludeMissing ra: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("raBias") @ExcludeMissing raBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("raMeasured")
+            @ExcludeMissing
+            raMeasured: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("range") @ExcludeMissing range: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeBias")
+            @ExcludeMissing
+            rangeBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeMeasured")
+            @ExcludeMissing
+            rangeMeasured: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("rangeRate")
+            @ExcludeMissing
+            rangeRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeRateMeasured")
+            @ExcludeMissing
+            rangeRateMeasured: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("rangeRateUnc")
+            @ExcludeMissing
+            rangeRateUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeUnc")
+            @ExcludeMissing
+            rangeUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("raRate") @ExcludeMissing raRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("raUnc") @ExcludeMissing raUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rawFileURI")
+            @ExcludeMissing
+            rawFileUri: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("referenceFrame")
+            @ExcludeMissing
+            referenceFrame: JsonField<ReferenceFrame> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("senalt") @ExcludeMissing senalt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlat") @ExcludeMissing senlat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlon") @ExcludeMissing senlon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senQuat")
+            @ExcludeMissing
+            senQuat: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("senReferenceFrame")
+            @ExcludeMissing
+            senReferenceFrame: JsonField<SenReferenceFrame> = JsonMissing.of(),
+            @JsonProperty("senvelx") @ExcludeMissing senvelx: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senvely") @ExcludeMissing senvely: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senvelz") @ExcludeMissing senvelz: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senx") @ExcludeMissing senx: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("seny") @ExcludeMissing seny: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senz") @ExcludeMissing senz: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("shutterDelay")
+            @ExcludeMissing
+            shutterDelay: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("skyBkgrnd")
+            @ExcludeMissing
+            skyBkgrnd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("solarDecAngle")
+            @ExcludeMissing
+            solarDecAngle: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("solarEqPhaseAngle")
+            @ExcludeMissing
+            solarEqPhaseAngle: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("solarPhaseAngle")
+            @ExcludeMissing
+            solarPhaseAngle: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("taskId") @ExcludeMissing taskId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("timingBias")
+            @ExcludeMissing
+            timingBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("trackId") @ExcludeMissing trackId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("transactionId")
+            @ExcludeMissing
+            transactionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("uct") @ExcludeMissing uct: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("umbra") @ExcludeMissing umbra: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("zeroptd") @ExcludeMissing zeroptd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("zeroPtdUnc")
+            @ExcludeMissing
+            zeroPtdUnc: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            obTime,
+            source,
+            id,
+            azimuth,
+            azimuthBias,
+            azimuthMeasured,
+            azimuthRate,
+            azimuthUnc,
+            bgIntensity,
+            collectMethod,
+            corrQuality,
+            createdAt,
+            createdBy,
+            declination,
+            declinationBias,
+            declinationMeasured,
+            declinationRate,
+            declinationUnc,
+            descriptor,
+            elevation,
+            elevationBias,
+            elevationMeasured,
+            elevationRate,
+            elevationUnc,
+            eoobservationDetails,
+            expDuration,
+            fovCount,
+            fovCountUct,
+            geoalt,
+            geolat,
+            geolon,
+            georange,
+            idOnOrbit,
+            idSensor,
+            idSkyImagery,
+            intensity,
+            losUnc,
+            losx,
+            losxvel,
+            losy,
+            losyvel,
+            losz,
+            loszvel,
+            mag,
+            magNormRange,
+            magUnc,
+            netObjSig,
+            netObjSigUnc,
+            obPosition,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            penumbra,
+            primaryExtinction,
+            primaryExtinctionUnc,
+            ra,
+            raBias,
+            raMeasured,
+            range,
+            rangeBias,
+            rangeMeasured,
+            rangeRate,
+            rangeRateMeasured,
+            rangeRateUnc,
+            rangeUnc,
+            raRate,
+            raUnc,
+            rawFileUri,
+            referenceFrame,
+            satNo,
+            senalt,
+            senlat,
+            senlon,
+            senQuat,
+            senReferenceFrame,
+            senvelx,
+            senvely,
+            senvelz,
+            senx,
+            seny,
+            senz,
+            shutterDelay,
+            skyBkgrnd,
+            solarDecAngle,
+            solarEqPhaseAngle,
+            solarPhaseAngle,
+            sourceDl,
+            tags,
+            taskId,
+            timingBias,
+            trackId,
+            transactionId,
+            type,
+            uct,
+            umbra,
+            zeroptd,
+            zeroPtdUnc,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -2115,6 +2412,16 @@ private constructor(
         @ExcludeMissing
         fun _zeroPtdUnc(): JsonField<Double> = zeroPtdUnc
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -2236,6 +2543,7 @@ private constructor(
             private var umbra: JsonField<Boolean> = JsonMissing.of()
             private var zeroptd: JsonField<Double> = JsonMissing.of()
             private var zeroPtdUnc: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -2339,6 +2647,7 @@ private constructor(
                 umbra = body.umbra
                 zeroptd = body.zeroptd
                 zeroPtdUnc = body.zeroPtdUnc
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -3885,6 +4194,25 @@ private constructor(
              */
             fun zeroPtdUnc(zeroPtdUnc: JsonField<Double>) = apply { this.zeroPtdUnc = zeroPtdUnc }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -4002,6 +4330,7 @@ private constructor(
                     umbra,
                     zeroptd,
                     zeroPtdUnc,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -9277,7 +9606,8 @@ private constructor(
                 uct == other.uct &&
                 umbra == other.umbra &&
                 zeroptd == other.zeroptd &&
-                zeroPtdUnc == other.zeroPtdUnc
+                zeroPtdUnc == other.zeroPtdUnc &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -9382,13 +9712,14 @@ private constructor(
                 umbra,
                 zeroptd,
                 zeroPtdUnc,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, id=$id, azimuth=$azimuth, azimuthBias=$azimuthBias, azimuthMeasured=$azimuthMeasured, azimuthRate=$azimuthRate, azimuthUnc=$azimuthUnc, bgIntensity=$bgIntensity, collectMethod=$collectMethod, corrQuality=$corrQuality, createdAt=$createdAt, createdBy=$createdBy, declination=$declination, declinationBias=$declinationBias, declinationMeasured=$declinationMeasured, declinationRate=$declinationRate, declinationUnc=$declinationUnc, descriptor=$descriptor, elevation=$elevation, elevationBias=$elevationBias, elevationMeasured=$elevationMeasured, elevationRate=$elevationRate, elevationUnc=$elevationUnc, eoobservationDetails=$eoobservationDetails, expDuration=$expDuration, fovCount=$fovCount, fovCountUct=$fovCountUct, geoalt=$geoalt, geolat=$geolat, geolon=$geolon, georange=$georange, idOnOrbit=$idOnOrbit, idSensor=$idSensor, idSkyImagery=$idSkyImagery, intensity=$intensity, losUnc=$losUnc, losx=$losx, losxvel=$losxvel, losy=$losy, losyvel=$losyvel, losz=$losz, loszvel=$loszvel, mag=$mag, magNormRange=$magNormRange, magUnc=$magUnc, netObjSig=$netObjSig, netObjSigUnc=$netObjSigUnc, obPosition=$obPosition, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, penumbra=$penumbra, primaryExtinction=$primaryExtinction, primaryExtinctionUnc=$primaryExtinctionUnc, ra=$ra, raBias=$raBias, raMeasured=$raMeasured, range=$range, rangeBias=$rangeBias, rangeMeasured=$rangeMeasured, rangeRate=$rangeRate, rangeRateMeasured=$rangeRateMeasured, rangeRateUnc=$rangeRateUnc, rangeUnc=$rangeUnc, raRate=$raRate, raUnc=$raUnc, rawFileUri=$rawFileUri, referenceFrame=$referenceFrame, satNo=$satNo, senalt=$senalt, senlat=$senlat, senlon=$senlon, senQuat=$senQuat, senReferenceFrame=$senReferenceFrame, senvelx=$senvelx, senvely=$senvely, senvelz=$senvelz, senx=$senx, seny=$seny, senz=$senz, shutterDelay=$shutterDelay, skyBkgrnd=$skyBkgrnd, solarDecAngle=$solarDecAngle, solarEqPhaseAngle=$solarEqPhaseAngle, solarPhaseAngle=$solarPhaseAngle, sourceDl=$sourceDl, tags=$tags, taskId=$taskId, timingBias=$timingBias, trackId=$trackId, transactionId=$transactionId, type=$type, uct=$uct, umbra=$umbra, zeroptd=$zeroptd, zeroPtdUnc=$zeroPtdUnc}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, id=$id, azimuth=$azimuth, azimuthBias=$azimuthBias, azimuthMeasured=$azimuthMeasured, azimuthRate=$azimuthRate, azimuthUnc=$azimuthUnc, bgIntensity=$bgIntensity, collectMethod=$collectMethod, corrQuality=$corrQuality, createdAt=$createdAt, createdBy=$createdBy, declination=$declination, declinationBias=$declinationBias, declinationMeasured=$declinationMeasured, declinationRate=$declinationRate, declinationUnc=$declinationUnc, descriptor=$descriptor, elevation=$elevation, elevationBias=$elevationBias, elevationMeasured=$elevationMeasured, elevationRate=$elevationRate, elevationUnc=$elevationUnc, eoobservationDetails=$eoobservationDetails, expDuration=$expDuration, fovCount=$fovCount, fovCountUct=$fovCountUct, geoalt=$geoalt, geolat=$geolat, geolon=$geolon, georange=$georange, idOnOrbit=$idOnOrbit, idSensor=$idSensor, idSkyImagery=$idSkyImagery, intensity=$intensity, losUnc=$losUnc, losx=$losx, losxvel=$losxvel, losy=$losy, losyvel=$losyvel, losz=$losz, loszvel=$loszvel, mag=$mag, magNormRange=$magNormRange, magUnc=$magUnc, netObjSig=$netObjSig, netObjSigUnc=$netObjSigUnc, obPosition=$obPosition, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, penumbra=$penumbra, primaryExtinction=$primaryExtinction, primaryExtinctionUnc=$primaryExtinctionUnc, ra=$ra, raBias=$raBias, raMeasured=$raMeasured, range=$range, rangeBias=$rangeBias, rangeMeasured=$rangeMeasured, rangeRate=$rangeRate, rangeRateMeasured=$rangeRateMeasured, rangeRateUnc=$rangeRateUnc, rangeUnc=$rangeUnc, raRate=$raRate, raUnc=$raUnc, rawFileUri=$rawFileUri, referenceFrame=$referenceFrame, satNo=$satNo, senalt=$senalt, senlat=$senlat, senlon=$senlon, senQuat=$senQuat, senReferenceFrame=$senReferenceFrame, senvelx=$senvelx, senvely=$senvely, senvelz=$senvelz, senx=$senx, seny=$seny, senz=$senz, shutterDelay=$shutterDelay, skyBkgrnd=$skyBkgrnd, solarDecAngle=$solarDecAngle, solarEqPhaseAngle=$solarEqPhaseAngle, solarPhaseAngle=$solarPhaseAngle, sourceDl=$sourceDl, tags=$tags, taskId=$taskId, timingBias=$timingBias, trackId=$trackId, transactionId=$transactionId, type=$type, uct=$uct, umbra=$umbra, zeroptd=$zeroptd, zeroPtdUnc=$zeroPtdUnc, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

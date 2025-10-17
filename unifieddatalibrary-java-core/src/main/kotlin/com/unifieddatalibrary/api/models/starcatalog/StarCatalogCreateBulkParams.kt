@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.starcatalog
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -15,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -209,86 +213,281 @@ private constructor(
      * at various bandpasses of a star.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("astrometryOrigin")
-        @ExcludeMissing
         private val astrometryOrigin: JsonField<AstrometryOrigin>,
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("csId") @ExcludeMissing private val csId: JsonField<Long>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("dec") @ExcludeMissing private val dec: JsonField<Double>,
-        @JsonProperty("ra") @ExcludeMissing private val ra: JsonField<Double>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("starEpoch") @ExcludeMissing private val starEpoch: JsonField<Double>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("allWISEId") @ExcludeMissing private val allWiseId: JsonField<String>,
-        @JsonProperty("allWISEW1Mag") @ExcludeMissing private val allWisew1Mag: JsonField<Double>,
-        @JsonProperty("allWISEW1MagUnc")
-        @ExcludeMissing
+        private val csId: JsonField<Long>,
+        private val dataMode: JsonField<DataMode>,
+        private val dec: JsonField<Double>,
+        private val ra: JsonField<Double>,
+        private val source: JsonField<String>,
+        private val starEpoch: JsonField<Double>,
+        private val id: JsonField<String>,
+        private val allWiseId: JsonField<String>,
+        private val allWisew1Mag: JsonField<Double>,
         private val allWisew1MagUnc: JsonField<Double>,
-        @JsonProperty("allWISEW2Mag") @ExcludeMissing private val allWisew2Mag: JsonField<Double>,
-        @JsonProperty("allWISEW2MagUnc")
-        @ExcludeMissing
+        private val allWisew2Mag: JsonField<Double>,
         private val allWisew2MagUnc: JsonField<Double>,
-        @JsonProperty("allWISEW3Mag") @ExcludeMissing private val allWisew3Mag: JsonField<Double>,
-        @JsonProperty("allWISEW3MagUnc")
-        @ExcludeMissing
+        private val allWisew3Mag: JsonField<Double>,
         private val allWisew3MagUnc: JsonField<Double>,
-        @JsonProperty("allWISEW4Mag") @ExcludeMissing private val allWisew4Mag: JsonField<Double>,
-        @JsonProperty("allWISEW4MagUnc")
-        @ExcludeMissing
+        private val allWisew4Mag: JsonField<Double>,
         private val allWisew4MagUnc: JsonField<Double>,
-        @JsonProperty("bpmag") @ExcludeMissing private val bpmag: JsonField<Double>,
-        @JsonProperty("bpmagUnc") @ExcludeMissing private val bpmagUnc: JsonField<Double>,
-        @JsonProperty("catVersion") @ExcludeMissing private val catVersion: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("decUnc") @ExcludeMissing private val decUnc: JsonField<Double>,
-        @JsonProperty("gaiadr3CatId") @ExcludeMissing private val gaiadr3CatId: JsonField<Long>,
-        @JsonProperty("gmag") @ExcludeMissing private val gmag: JsonField<Double>,
-        @JsonProperty("gmagUnc") @ExcludeMissing private val gmagUnc: JsonField<Double>,
-        @JsonProperty("gncCatId") @ExcludeMissing private val gncCatId: JsonField<Int>,
-        @JsonProperty("hipCatId") @ExcludeMissing private val hipCatId: JsonField<Int>,
-        @JsonProperty("hmag") @ExcludeMissing private val hmag: JsonField<Double>,
-        @JsonProperty("hmagUnc") @ExcludeMissing private val hmagUnc: JsonField<Double>,
-        @JsonProperty("jmag") @ExcludeMissing private val jmag: JsonField<Double>,
-        @JsonProperty("jmagUnc") @ExcludeMissing private val jmagUnc: JsonField<Double>,
-        @JsonProperty("kmag") @ExcludeMissing private val kmag: JsonField<Double>,
-        @JsonProperty("kmagUnc") @ExcludeMissing private val kmagUnc: JsonField<Double>,
-        @JsonProperty("multFlag") @ExcludeMissing private val multFlag: JsonField<Boolean>,
-        @JsonProperty("multiplicity") @ExcludeMissing private val multiplicity: JsonField<String>,
-        @JsonProperty("neighborDistance")
-        @ExcludeMissing
+        private val bpmag: JsonField<Double>,
+        private val bpmagUnc: JsonField<Double>,
+        private val catVersion: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val decUnc: JsonField<Double>,
+        private val gaiadr3CatId: JsonField<Long>,
+        private val gmag: JsonField<Double>,
+        private val gmagUnc: JsonField<Double>,
+        private val gncCatId: JsonField<Int>,
+        private val hipCatId: JsonField<Int>,
+        private val hmag: JsonField<Double>,
+        private val hmagUnc: JsonField<Double>,
+        private val jmag: JsonField<Double>,
+        private val jmagUnc: JsonField<Double>,
+        private val kmag: JsonField<Double>,
+        private val kmagUnc: JsonField<Double>,
+        private val multFlag: JsonField<Boolean>,
+        private val multiplicity: JsonField<String>,
         private val neighborDistance: JsonField<Double>,
-        @JsonProperty("neighborFlag") @ExcludeMissing private val neighborFlag: JsonField<Boolean>,
-        @JsonProperty("neighborId") @ExcludeMissing private val neighborId: JsonField<Int>,
-        @JsonProperty("nonSingleStar") @ExcludeMissing private val nonSingleStar: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("parallax") @ExcludeMissing private val parallax: JsonField<Double>,
-        @JsonProperty("parallaxUnc") @ExcludeMissing private val parallaxUnc: JsonField<Double>,
-        @JsonProperty("pmdec") @ExcludeMissing private val pmdec: JsonField<Double>,
-        @JsonProperty("pmdecUnc") @ExcludeMissing private val pmdecUnc: JsonField<Double>,
-        @JsonProperty("pmra") @ExcludeMissing private val pmra: JsonField<Double>,
-        @JsonProperty("pmraUnc") @ExcludeMissing private val pmraUnc: JsonField<Double>,
-        @JsonProperty("pmUncFlag") @ExcludeMissing private val pmUncFlag: JsonField<Boolean>,
-        @JsonProperty("posUncFlag") @ExcludeMissing private val posUncFlag: JsonField<Boolean>,
-        @JsonProperty("raUnc") @ExcludeMissing private val raUnc: JsonField<Double>,
-        @JsonProperty("rpmag") @ExcludeMissing private val rpmag: JsonField<Double>,
-        @JsonProperty("rpmagUnc") @ExcludeMissing private val rpmagUnc: JsonField<Double>,
-        @JsonProperty("shift") @ExcludeMissing private val shift: JsonField<Double>,
-        @JsonProperty("shiftFlag") @ExcludeMissing private val shiftFlag: JsonField<Boolean>,
-        @JsonProperty("shiftFWHM1") @ExcludeMissing private val shiftFwhm1: JsonField<Double>,
-        @JsonProperty("shiftFWHM6") @ExcludeMissing private val shiftFwhm6: JsonField<Double>,
-        @JsonProperty("twoMASSId") @ExcludeMissing private val twoMassId: JsonField<String>,
-        @JsonProperty("updatedAt") @ExcludeMissing private val updatedAt: JsonField<OffsetDateTime>,
-        @JsonProperty("updatedBy") @ExcludeMissing private val updatedBy: JsonField<String>,
-        @JsonProperty("varFlag") @ExcludeMissing private val varFlag: JsonField<Boolean>,
-        @JsonProperty("variability") @ExcludeMissing private val variability: JsonField<String>,
+        private val neighborFlag: JsonField<Boolean>,
+        private val neighborId: JsonField<Int>,
+        private val nonSingleStar: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val parallax: JsonField<Double>,
+        private val parallaxUnc: JsonField<Double>,
+        private val pmdec: JsonField<Double>,
+        private val pmdecUnc: JsonField<Double>,
+        private val pmra: JsonField<Double>,
+        private val pmraUnc: JsonField<Double>,
+        private val pmUncFlag: JsonField<Boolean>,
+        private val posUncFlag: JsonField<Boolean>,
+        private val raUnc: JsonField<Double>,
+        private val rpmag: JsonField<Double>,
+        private val rpmagUnc: JsonField<Double>,
+        private val shift: JsonField<Double>,
+        private val shiftFlag: JsonField<Boolean>,
+        private val shiftFwhm1: JsonField<Double>,
+        private val shiftFwhm6: JsonField<Double>,
+        private val twoMassId: JsonField<String>,
+        private val updatedAt: JsonField<OffsetDateTime>,
+        private val updatedBy: JsonField<String>,
+        private val varFlag: JsonField<Boolean>,
+        private val variability: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("astrometryOrigin")
+            @ExcludeMissing
+            astrometryOrigin: JsonField<AstrometryOrigin> = JsonMissing.of(),
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("csId") @ExcludeMissing csId: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("dec") @ExcludeMissing dec: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("ra") @ExcludeMissing ra: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("starEpoch")
+            @ExcludeMissing
+            starEpoch: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("allWISEId")
+            @ExcludeMissing
+            allWiseId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("allWISEW1Mag")
+            @ExcludeMissing
+            allWisew1Mag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("allWISEW1MagUnc")
+            @ExcludeMissing
+            allWisew1MagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("allWISEW2Mag")
+            @ExcludeMissing
+            allWisew2Mag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("allWISEW2MagUnc")
+            @ExcludeMissing
+            allWisew2MagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("allWISEW3Mag")
+            @ExcludeMissing
+            allWisew3Mag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("allWISEW3MagUnc")
+            @ExcludeMissing
+            allWisew3MagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("allWISEW4Mag")
+            @ExcludeMissing
+            allWisew4Mag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("allWISEW4MagUnc")
+            @ExcludeMissing
+            allWisew4MagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("bpmag") @ExcludeMissing bpmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("bpmagUnc")
+            @ExcludeMissing
+            bpmagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("catVersion")
+            @ExcludeMissing
+            catVersion: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("decUnc") @ExcludeMissing decUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("gaiadr3CatId")
+            @ExcludeMissing
+            gaiadr3CatId: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("gmag") @ExcludeMissing gmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("gmagUnc") @ExcludeMissing gmagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("gncCatId") @ExcludeMissing gncCatId: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("hipCatId") @ExcludeMissing hipCatId: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("hmag") @ExcludeMissing hmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hmagUnc") @ExcludeMissing hmagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("jmag") @ExcludeMissing jmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("jmagUnc") @ExcludeMissing jmagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("kmag") @ExcludeMissing kmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("kmagUnc") @ExcludeMissing kmagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("multFlag")
+            @ExcludeMissing
+            multFlag: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("multiplicity")
+            @ExcludeMissing
+            multiplicity: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("neighborDistance")
+            @ExcludeMissing
+            neighborDistance: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("neighborFlag")
+            @ExcludeMissing
+            neighborFlag: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("neighborId")
+            @ExcludeMissing
+            neighborId: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("nonSingleStar")
+            @ExcludeMissing
+            nonSingleStar: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("parallax")
+            @ExcludeMissing
+            parallax: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("parallaxUnc")
+            @ExcludeMissing
+            parallaxUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pmdec") @ExcludeMissing pmdec: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pmdecUnc")
+            @ExcludeMissing
+            pmdecUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pmra") @ExcludeMissing pmra: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pmraUnc") @ExcludeMissing pmraUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pmUncFlag")
+            @ExcludeMissing
+            pmUncFlag: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("posUncFlag")
+            @ExcludeMissing
+            posUncFlag: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("raUnc") @ExcludeMissing raUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rpmag") @ExcludeMissing rpmag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rpmagUnc")
+            @ExcludeMissing
+            rpmagUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("shift") @ExcludeMissing shift: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("shiftFlag")
+            @ExcludeMissing
+            shiftFlag: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("shiftFWHM1")
+            @ExcludeMissing
+            shiftFwhm1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("shiftFWHM6")
+            @ExcludeMissing
+            shiftFwhm6: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("twoMASSId")
+            @ExcludeMissing
+            twoMassId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("updatedAt")
+            @ExcludeMissing
+            updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("updatedBy")
+            @ExcludeMissing
+            updatedBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("varFlag") @ExcludeMissing varFlag: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("variability")
+            @ExcludeMissing
+            variability: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            astrometryOrigin,
+            classificationMarking,
+            csId,
+            dataMode,
+            dec,
+            ra,
+            source,
+            starEpoch,
+            id,
+            allWiseId,
+            allWisew1Mag,
+            allWisew1MagUnc,
+            allWisew2Mag,
+            allWisew2MagUnc,
+            allWisew3Mag,
+            allWisew3MagUnc,
+            allWisew4Mag,
+            allWisew4MagUnc,
+            bpmag,
+            bpmagUnc,
+            catVersion,
+            createdAt,
+            createdBy,
+            decUnc,
+            gaiadr3CatId,
+            gmag,
+            gmagUnc,
+            gncCatId,
+            hipCatId,
+            hmag,
+            hmagUnc,
+            jmag,
+            jmagUnc,
+            kmag,
+            kmagUnc,
+            multFlag,
+            multiplicity,
+            neighborDistance,
+            neighborFlag,
+            neighborId,
+            nonSingleStar,
+            origin,
+            origNetwork,
+            parallax,
+            parallaxUnc,
+            pmdec,
+            pmdecUnc,
+            pmra,
+            pmraUnc,
+            pmUncFlag,
+            posUncFlag,
+            raUnc,
+            rpmag,
+            rpmagUnc,
+            shift,
+            shiftFlag,
+            shiftFwhm1,
+            shiftFwhm6,
+            twoMassId,
+            updatedAt,
+            updatedBy,
+            varFlag,
+            variability,
+            mutableMapOf(),
+        )
 
         /**
          * Originating astrometric catalog for this object. Enum: [GAIADR3, HIPPARCOS, USNOBSC].
@@ -1351,6 +1550,16 @@ private constructor(
         @ExcludeMissing
         fun _variability(): JsonField<String> = variability
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1439,6 +1648,7 @@ private constructor(
             private var updatedBy: JsonField<String> = JsonMissing.of()
             private var varFlag: JsonField<Boolean> = JsonMissing.of()
             private var variability: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1505,6 +1715,7 @@ private constructor(
                 updatedBy = body.updatedBy
                 varFlag = body.varFlag
                 variability = body.variability
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /**
@@ -2427,6 +2638,25 @@ private constructor(
                 this.variability = variability
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -2511,6 +2741,7 @@ private constructor(
                     updatedBy,
                     varFlag,
                     variability,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -3034,7 +3265,8 @@ private constructor(
                 updatedAt == other.updatedAt &&
                 updatedBy == other.updatedBy &&
                 varFlag == other.varFlag &&
-                variability == other.variability
+                variability == other.variability &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -3102,13 +3334,14 @@ private constructor(
                 updatedBy,
                 varFlag,
                 variability,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{astrometryOrigin=$astrometryOrigin, classificationMarking=$classificationMarking, csId=$csId, dataMode=$dataMode, dec=$dec, ra=$ra, source=$source, starEpoch=$starEpoch, id=$id, allWiseId=$allWiseId, allWisew1Mag=$allWisew1Mag, allWisew1MagUnc=$allWisew1MagUnc, allWisew2Mag=$allWisew2Mag, allWisew2MagUnc=$allWisew2MagUnc, allWisew3Mag=$allWisew3Mag, allWisew3MagUnc=$allWisew3MagUnc, allWisew4Mag=$allWisew4Mag, allWisew4MagUnc=$allWisew4MagUnc, bpmag=$bpmag, bpmagUnc=$bpmagUnc, catVersion=$catVersion, createdAt=$createdAt, createdBy=$createdBy, decUnc=$decUnc, gaiadr3CatId=$gaiadr3CatId, gmag=$gmag, gmagUnc=$gmagUnc, gncCatId=$gncCatId, hipCatId=$hipCatId, hmag=$hmag, hmagUnc=$hmagUnc, jmag=$jmag, jmagUnc=$jmagUnc, kmag=$kmag, kmagUnc=$kmagUnc, multFlag=$multFlag, multiplicity=$multiplicity, neighborDistance=$neighborDistance, neighborFlag=$neighborFlag, neighborId=$neighborId, nonSingleStar=$nonSingleStar, origin=$origin, origNetwork=$origNetwork, parallax=$parallax, parallaxUnc=$parallaxUnc, pmdec=$pmdec, pmdecUnc=$pmdecUnc, pmra=$pmra, pmraUnc=$pmraUnc, pmUncFlag=$pmUncFlag, posUncFlag=$posUncFlag, raUnc=$raUnc, rpmag=$rpmag, rpmagUnc=$rpmagUnc, shift=$shift, shiftFlag=$shiftFlag, shiftFwhm1=$shiftFwhm1, shiftFwhm6=$shiftFwhm6, twoMassId=$twoMassId, updatedAt=$updatedAt, updatedBy=$updatedBy, varFlag=$varFlag, variability=$variability}"
+            "Body{astrometryOrigin=$astrometryOrigin, classificationMarking=$classificationMarking, csId=$csId, dataMode=$dataMode, dec=$dec, ra=$ra, source=$source, starEpoch=$starEpoch, id=$id, allWiseId=$allWiseId, allWisew1Mag=$allWisew1Mag, allWisew1MagUnc=$allWisew1MagUnc, allWisew2Mag=$allWisew2Mag, allWisew2MagUnc=$allWisew2MagUnc, allWisew3Mag=$allWisew3Mag, allWisew3MagUnc=$allWisew3MagUnc, allWisew4Mag=$allWisew4Mag, allWisew4MagUnc=$allWisew4MagUnc, bpmag=$bpmag, bpmagUnc=$bpmagUnc, catVersion=$catVersion, createdAt=$createdAt, createdBy=$createdBy, decUnc=$decUnc, gaiadr3CatId=$gaiadr3CatId, gmag=$gmag, gmagUnc=$gmagUnc, gncCatId=$gncCatId, hipCatId=$hipCatId, hmag=$hmag, hmagUnc=$hmagUnc, jmag=$jmag, jmagUnc=$jmagUnc, kmag=$kmag, kmagUnc=$kmagUnc, multFlag=$multFlag, multiplicity=$multiplicity, neighborDistance=$neighborDistance, neighborFlag=$neighborFlag, neighborId=$neighborId, nonSingleStar=$nonSingleStar, origin=$origin, origNetwork=$origNetwork, parallax=$parallax, parallaxUnc=$parallaxUnc, pmdec=$pmdec, pmdecUnc=$pmdecUnc, pmra=$pmra, pmraUnc=$pmraUnc, pmUncFlag=$pmUncFlag, posUncFlag=$posUncFlag, raUnc=$raUnc, rpmag=$rpmag, rpmagUnc=$rpmagUnc, shift=$shift, shiftFlag=$shiftFlag, shiftFwhm1=$shiftFwhm1, shiftFwhm6=$shiftFwhm6, twoMassId=$twoMassId, updatedAt=$updatedAt, updatedBy=$updatedBy, varFlag=$varFlag, variability=$variability, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

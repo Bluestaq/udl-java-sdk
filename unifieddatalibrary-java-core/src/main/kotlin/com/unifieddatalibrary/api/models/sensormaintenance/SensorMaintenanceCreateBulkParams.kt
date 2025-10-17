@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.sensormaintenance
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -15,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -241,44 +245,151 @@ private constructor(
 
     /** Maintenance schedule and operational status of Sensor. */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("endTime") @ExcludeMissing private val endTime: JsonField<OffsetDateTime>,
-        @JsonProperty("siteCode") @ExcludeMissing private val siteCode: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("startTime") @ExcludeMissing private val startTime: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("activity") @ExcludeMissing private val activity: JsonField<String>,
-        @JsonProperty("approver") @ExcludeMissing private val approver: JsonField<String>,
-        @JsonProperty("changer") @ExcludeMissing private val changer: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("duration") @ExcludeMissing private val duration: JsonField<String>,
-        @JsonProperty("eowId") @ExcludeMissing private val eowId: JsonField<String>,
-        @JsonProperty("equipStatus") @ExcludeMissing private val equipStatus: JsonField<String>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("impactedFaces") @ExcludeMissing private val impactedFaces: JsonField<String>,
-        @JsonProperty("inactiveDate")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val endTime: JsonField<OffsetDateTime>,
+        private val siteCode: JsonField<String>,
+        private val source: JsonField<String>,
+        private val startTime: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
+        private val activity: JsonField<String>,
+        private val approver: JsonField<String>,
+        private val changer: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val duration: JsonField<String>,
+        private val eowId: JsonField<String>,
+        private val equipStatus: JsonField<String>,
+        private val idSensor: JsonField<String>,
+        private val impactedFaces: JsonField<String>,
         private val inactiveDate: JsonField<OffsetDateTime>,
-        @JsonProperty("lineNumber") @ExcludeMissing private val lineNumber: JsonField<String>,
-        @JsonProperty("mdOpsCap") @ExcludeMissing private val mdOpsCap: JsonField<String>,
-        @JsonProperty("mwOpsCap") @ExcludeMissing private val mwOpsCap: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("priority") @ExcludeMissing private val priority: JsonField<String>,
-        @JsonProperty("recall") @ExcludeMissing private val recall: JsonField<String>,
-        @JsonProperty("rel") @ExcludeMissing private val rel: JsonField<String>,
-        @JsonProperty("remark") @ExcludeMissing private val remark: JsonField<String>,
-        @JsonProperty("requestor") @ExcludeMissing private val requestor: JsonField<String>,
-        @JsonProperty("resource") @ExcludeMissing private val resource: JsonField<String>,
-        @JsonProperty("rev") @ExcludeMissing private val rev: JsonField<String>,
-        @JsonProperty("ssOpsCap") @ExcludeMissing private val ssOpsCap: JsonField<String>,
+        private val lineNumber: JsonField<String>,
+        private val mdOpsCap: JsonField<String>,
+        private val mwOpsCap: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val priority: JsonField<String>,
+        private val recall: JsonField<String>,
+        private val rel: JsonField<String>,
+        private val remark: JsonField<String>,
+        private val requestor: JsonField<String>,
+        private val resource: JsonField<String>,
+        private val rev: JsonField<String>,
+        private val ssOpsCap: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("endTime")
+            @ExcludeMissing
+            endTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("siteCode")
+            @ExcludeMissing
+            siteCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("startTime")
+            @ExcludeMissing
+            startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("activity")
+            @ExcludeMissing
+            activity: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("approver")
+            @ExcludeMissing
+            approver: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("changer") @ExcludeMissing changer: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("duration")
+            @ExcludeMissing
+            duration: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("eowId") @ExcludeMissing eowId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("equipStatus")
+            @ExcludeMissing
+            equipStatus: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("impactedFaces")
+            @ExcludeMissing
+            impactedFaces: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("inactiveDate")
+            @ExcludeMissing
+            inactiveDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("lineNumber")
+            @ExcludeMissing
+            lineNumber: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("mdOpsCap")
+            @ExcludeMissing
+            mdOpsCap: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("mwOpsCap")
+            @ExcludeMissing
+            mwOpsCap: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("priority")
+            @ExcludeMissing
+            priority: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("recall") @ExcludeMissing recall: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rel") @ExcludeMissing rel: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("remark") @ExcludeMissing remark: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("requestor")
+            @ExcludeMissing
+            requestor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("resource")
+            @ExcludeMissing
+            resource: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rev") @ExcludeMissing rev: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ssOpsCap") @ExcludeMissing ssOpsCap: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            endTime,
+            siteCode,
+            source,
+            startTime,
+            id,
+            activity,
+            approver,
+            changer,
+            createdAt,
+            createdBy,
+            duration,
+            eowId,
+            equipStatus,
+            idSensor,
+            impactedFaces,
+            inactiveDate,
+            lineNumber,
+            mdOpsCap,
+            mwOpsCap,
+            origin,
+            origNetwork,
+            priority,
+            recall,
+            rel,
+            remark,
+            requestor,
+            resource,
+            rev,
+            ssOpsCap,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -790,6 +901,16 @@ private constructor(
          */
         @JsonProperty("ssOpsCap") @ExcludeMissing fun _ssOpsCap(): JsonField<String> = ssOpsCap
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -844,6 +965,7 @@ private constructor(
             private var resource: JsonField<String> = JsonMissing.of()
             private var rev: JsonField<String> = JsonMissing.of()
             private var ssOpsCap: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -878,6 +1000,7 @@ private constructor(
                 resource = body.resource
                 rev = body.rev
                 ssOpsCap = body.ssOpsCap
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1304,6 +1427,25 @@ private constructor(
              */
             fun ssOpsCap(ssOpsCap: JsonField<String>) = apply { this.ssOpsCap = ssOpsCap }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1354,6 +1496,7 @@ private constructor(
                     resource,
                     rev,
                     ssOpsCap,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1638,7 +1781,8 @@ private constructor(
                 requestor == other.requestor &&
                 resource == other.resource &&
                 rev == other.rev &&
-                ssOpsCap == other.ssOpsCap
+                ssOpsCap == other.ssOpsCap &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1674,13 +1818,14 @@ private constructor(
                 resource,
                 rev,
                 ssOpsCap,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, endTime=$endTime, siteCode=$siteCode, source=$source, startTime=$startTime, id=$id, activity=$activity, approver=$approver, changer=$changer, createdAt=$createdAt, createdBy=$createdBy, duration=$duration, eowId=$eowId, equipStatus=$equipStatus, idSensor=$idSensor, impactedFaces=$impactedFaces, inactiveDate=$inactiveDate, lineNumber=$lineNumber, mdOpsCap=$mdOpsCap, mwOpsCap=$mwOpsCap, origin=$origin, origNetwork=$origNetwork, priority=$priority, recall=$recall, rel=$rel, remark=$remark, requestor=$requestor, resource=$resource, rev=$rev, ssOpsCap=$ssOpsCap}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, endTime=$endTime, siteCode=$siteCode, source=$source, startTime=$startTime, id=$id, activity=$activity, approver=$approver, changer=$changer, createdAt=$createdAt, createdBy=$createdBy, duration=$duration, eowId=$eowId, equipStatus=$equipStatus, idSensor=$idSensor, impactedFaces=$impactedFaces, inactiveDate=$inactiveDate, lineNumber=$lineNumber, mdOpsCap=$mdOpsCap, mwOpsCap=$mwOpsCap, origin=$origin, origNetwork=$origNetwork, priority=$priority, recall=$recall, rel=$rel, remark=$remark, requestor=$requestor, resource=$resource, rev=$rev, ssOpsCap=$ssOpsCap, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

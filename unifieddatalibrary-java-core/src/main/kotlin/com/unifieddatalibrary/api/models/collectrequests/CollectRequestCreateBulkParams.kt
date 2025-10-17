@@ -218,106 +218,373 @@ private constructor(
      * sensor plan if desired.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("startTime") @ExcludeMissing private val startTime: JsonField<OffsetDateTime>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("alt") @ExcludeMissing private val alt: JsonField<Double>,
-        @JsonProperty("argOfPerigee") @ExcludeMissing private val argOfPerigee: JsonField<Double>,
-        @JsonProperty("az") @ExcludeMissing private val az: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("customer") @ExcludeMissing private val customer: JsonField<String>,
-        @JsonProperty("dec") @ExcludeMissing private val dec: JsonField<Double>,
-        @JsonProperty("duration") @ExcludeMissing private val duration: JsonField<Int>,
-        @JsonProperty("dwellId") @ExcludeMissing private val dwellId: JsonField<String>,
-        @JsonProperty("eccentricity") @ExcludeMissing private val eccentricity: JsonField<Double>,
-        @JsonProperty("el") @ExcludeMissing private val el: JsonField<Double>,
-        @JsonProperty("elset") @ExcludeMissing private val elset: JsonField<Elset>,
-        @JsonProperty("endTime") @ExcludeMissing private val endTime: JsonField<OffsetDateTime>,
-        @JsonProperty("epoch") @ExcludeMissing private val epoch: JsonField<OffsetDateTime>,
-        @JsonProperty("esId") @ExcludeMissing private val esId: JsonField<String>,
-        @JsonProperty("extentAz") @ExcludeMissing private val extentAz: JsonField<Double>,
-        @JsonProperty("extentEl") @ExcludeMissing private val extentEl: JsonField<Double>,
-        @JsonProperty("extentRange") @ExcludeMissing private val extentRange: JsonField<Double>,
-        @JsonProperty("externalId") @ExcludeMissing private val externalId: JsonField<String>,
-        @JsonProperty("frameRate") @ExcludeMissing private val frameRate: JsonField<Double>,
-        @JsonProperty("freq") @ExcludeMissing private val freq: JsonField<Double>,
-        @JsonProperty("freqMax") @ExcludeMissing private val freqMax: JsonField<Double>,
-        @JsonProperty("freqMin") @ExcludeMissing private val freqMin: JsonField<Double>,
-        @JsonProperty("idElset") @ExcludeMissing private val idElset: JsonField<String>,
-        @JsonProperty("idManifold") @ExcludeMissing private val idManifold: JsonField<String>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("idParentReq") @ExcludeMissing private val idParentReq: JsonField<String>,
-        @JsonProperty("idPlan") @ExcludeMissing private val idPlan: JsonField<String>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("idStateVector") @ExcludeMissing private val idStateVector: JsonField<String>,
-        @JsonProperty("inclination") @ExcludeMissing private val inclination: JsonField<Double>,
-        @JsonProperty("integrationTime")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
+        private val startTime: JsonField<OffsetDateTime>,
+        private val type: JsonField<String>,
+        private val id: JsonField<String>,
+        private val alt: JsonField<Double>,
+        private val argOfPerigee: JsonField<Double>,
+        private val az: JsonField<Double>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val customer: JsonField<String>,
+        private val dec: JsonField<Double>,
+        private val duration: JsonField<Int>,
+        private val dwellId: JsonField<String>,
+        private val eccentricity: JsonField<Double>,
+        private val el: JsonField<Double>,
+        private val elset: JsonField<Elset>,
+        private val endTime: JsonField<OffsetDateTime>,
+        private val epoch: JsonField<OffsetDateTime>,
+        private val esId: JsonField<String>,
+        private val extentAz: JsonField<Double>,
+        private val extentEl: JsonField<Double>,
+        private val extentRange: JsonField<Double>,
+        private val externalId: JsonField<String>,
+        private val frameRate: JsonField<Double>,
+        private val freq: JsonField<Double>,
+        private val freqMax: JsonField<Double>,
+        private val freqMin: JsonField<Double>,
+        private val idElset: JsonField<String>,
+        private val idManifold: JsonField<String>,
+        private val idOnOrbit: JsonField<String>,
+        private val idParentReq: JsonField<String>,
+        private val idPlan: JsonField<String>,
+        private val idSensor: JsonField<String>,
+        private val idStateVector: JsonField<String>,
+        private val inclination: JsonField<Double>,
         private val integrationTime: JsonField<Double>,
-        @JsonProperty("iron") @ExcludeMissing private val iron: JsonField<Int>,
-        @JsonProperty("irradiance") @ExcludeMissing private val irradiance: JsonField<Double>,
-        @JsonProperty("lat") @ExcludeMissing private val lat: JsonField<Double>,
-        @JsonProperty("lon") @ExcludeMissing private val lon: JsonField<Double>,
-        @JsonProperty("msgCreateDate")
-        @ExcludeMissing
+        private val iron: JsonField<Int>,
+        private val irradiance: JsonField<Double>,
+        private val lat: JsonField<Double>,
+        private val lon: JsonField<Double>,
         private val msgCreateDate: JsonField<OffsetDateTime>,
-        @JsonProperty("msgType") @ExcludeMissing private val msgType: JsonField<String>,
-        @JsonProperty("notes") @ExcludeMissing private val notes: JsonField<String>,
-        @JsonProperty("numFrames") @ExcludeMissing private val numFrames: JsonField<Int>,
-        @JsonProperty("numObs") @ExcludeMissing private val numObs: JsonField<Int>,
-        @JsonProperty("numTracks") @ExcludeMissing private val numTracks: JsonField<Int>,
-        @JsonProperty("obType") @ExcludeMissing private val obType: JsonField<String>,
-        @JsonProperty("orbitRegime") @ExcludeMissing private val orbitRegime: JsonField<String>,
-        @JsonProperty("orientAngle") @ExcludeMissing private val orientAngle: JsonField<Double>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("planIndex") @ExcludeMissing private val planIndex: JsonField<Int>,
-        @JsonProperty("polarization") @ExcludeMissing private val polarization: JsonField<String>,
-        @JsonProperty("priority") @ExcludeMissing private val priority: JsonField<String>,
-        @JsonProperty("ra") @ExcludeMissing private val ra: JsonField<Double>,
-        @JsonProperty("raan") @ExcludeMissing private val raan: JsonField<Double>,
-        @JsonProperty("range") @ExcludeMissing private val range: JsonField<Double>,
-        @JsonProperty("rcs") @ExcludeMissing private val rcs: JsonField<Double>,
-        @JsonProperty("rcsMax") @ExcludeMissing private val rcsMax: JsonField<Double>,
-        @JsonProperty("rcsMin") @ExcludeMissing private val rcsMin: JsonField<Double>,
-        @JsonProperty("reflectance") @ExcludeMissing private val reflectance: JsonField<Double>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("scenario") @ExcludeMissing private val scenario: JsonField<String>,
-        @JsonProperty("semiMajorAxis") @ExcludeMissing private val semiMajorAxis: JsonField<Double>,
-        @JsonProperty("spectralModel") @ExcludeMissing private val spectralModel: JsonField<String>,
-        @JsonProperty("srchInc") @ExcludeMissing private val srchInc: JsonField<Double>,
-        @JsonProperty("srchPattern") @ExcludeMissing private val srchPattern: JsonField<String>,
-        @JsonProperty("stateVector")
-        @ExcludeMissing
+        private val msgType: JsonField<String>,
+        private val notes: JsonField<String>,
+        private val numFrames: JsonField<Int>,
+        private val numObs: JsonField<Int>,
+        private val numTracks: JsonField<Int>,
+        private val obType: JsonField<String>,
+        private val orbitRegime: JsonField<String>,
+        private val orientAngle: JsonField<Double>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val origSensorId: JsonField<String>,
+        private val planIndex: JsonField<Int>,
+        private val polarization: JsonField<String>,
+        private val priority: JsonField<String>,
+        private val ra: JsonField<Double>,
+        private val raan: JsonField<Double>,
+        private val range: JsonField<Double>,
+        private val rcs: JsonField<Double>,
+        private val rcsMax: JsonField<Double>,
+        private val rcsMin: JsonField<Double>,
+        private val reflectance: JsonField<Double>,
+        private val satNo: JsonField<Int>,
+        private val scenario: JsonField<String>,
+        private val semiMajorAxis: JsonField<Double>,
+        private val spectralModel: JsonField<String>,
+        private val srchInc: JsonField<Double>,
+        private val srchPattern: JsonField<String>,
         private val stateVector: JsonField<StateVector>,
-        @JsonProperty("stopAlt") @ExcludeMissing private val stopAlt: JsonField<Double>,
-        @JsonProperty("stopLat") @ExcludeMissing private val stopLat: JsonField<Double>,
-        @JsonProperty("stopLon") @ExcludeMissing private val stopLon: JsonField<Double>,
-        @JsonProperty("suffix") @ExcludeMissing private val suffix: JsonField<String>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("targetSize") @ExcludeMissing private val targetSize: JsonField<Double>,
-        @JsonProperty("taskCategory") @ExcludeMissing private val taskCategory: JsonField<Int>,
-        @JsonProperty("taskGroup") @ExcludeMissing private val taskGroup: JsonField<String>,
-        @JsonProperty("taskId") @ExcludeMissing private val taskId: JsonField<String>,
-        @JsonProperty("transactionId") @ExcludeMissing private val transactionId: JsonField<String>,
-        @JsonProperty("trueAnomoly") @ExcludeMissing private val trueAnomoly: JsonField<Double>,
-        @JsonProperty("uctFollowUp") @ExcludeMissing private val uctFollowUp: JsonField<Boolean>,
-        @JsonProperty("visMag") @ExcludeMissing private val visMag: JsonField<Double>,
-        @JsonProperty("visMagMax") @ExcludeMissing private val visMagMax: JsonField<Double>,
-        @JsonProperty("visMagMin") @ExcludeMissing private val visMagMin: JsonField<Double>,
-        @JsonProperty("xAngle") @ExcludeMissing private val xAngle: JsonField<Double>,
-        @JsonProperty("yAngle") @ExcludeMissing private val yAngle: JsonField<Double>,
+        private val stopAlt: JsonField<Double>,
+        private val stopLat: JsonField<Double>,
+        private val stopLon: JsonField<Double>,
+        private val suffix: JsonField<String>,
+        private val tags: JsonField<List<String>>,
+        private val targetSize: JsonField<Double>,
+        private val taskCategory: JsonField<Int>,
+        private val taskGroup: JsonField<String>,
+        private val taskId: JsonField<String>,
+        private val transactionId: JsonField<String>,
+        private val trueAnomoly: JsonField<Double>,
+        private val uctFollowUp: JsonField<Boolean>,
+        private val visMag: JsonField<Double>,
+        private val visMagMax: JsonField<Double>,
+        private val visMagMin: JsonField<Double>,
+        private val xAngle: JsonField<Double>,
+        private val yAngle: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("startTime")
+            @ExcludeMissing
+            startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("alt") @ExcludeMissing alt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("argOfPerigee")
+            @ExcludeMissing
+            argOfPerigee: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("az") @ExcludeMissing az: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("customer")
+            @ExcludeMissing
+            customer: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dec") @ExcludeMissing dec: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("duration") @ExcludeMissing duration: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("dwellId") @ExcludeMissing dwellId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("eccentricity")
+            @ExcludeMissing
+            eccentricity: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("el") @ExcludeMissing el: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elset") @ExcludeMissing elset: JsonField<Elset> = JsonMissing.of(),
+            @JsonProperty("endTime")
+            @ExcludeMissing
+            endTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("epoch")
+            @ExcludeMissing
+            epoch: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("esId") @ExcludeMissing esId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("extentAz")
+            @ExcludeMissing
+            extentAz: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("extentEl")
+            @ExcludeMissing
+            extentEl: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("extentRange")
+            @ExcludeMissing
+            extentRange: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("externalId")
+            @ExcludeMissing
+            externalId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("frameRate")
+            @ExcludeMissing
+            frameRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("freq") @ExcludeMissing freq: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("freqMax") @ExcludeMissing freqMax: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("freqMin") @ExcludeMissing freqMin: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idElset") @ExcludeMissing idElset: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idManifold")
+            @ExcludeMissing
+            idManifold: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idParentReq")
+            @ExcludeMissing
+            idParentReq: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idPlan") @ExcludeMissing idPlan: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idStateVector")
+            @ExcludeMissing
+            idStateVector: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("inclination")
+            @ExcludeMissing
+            inclination: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("integrationTime")
+            @ExcludeMissing
+            integrationTime: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("iron") @ExcludeMissing iron: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("irradiance")
+            @ExcludeMissing
+            irradiance: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("msgCreateDate")
+            @ExcludeMissing
+            msgCreateDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("msgType") @ExcludeMissing msgType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("notes") @ExcludeMissing notes: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("numFrames") @ExcludeMissing numFrames: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numObs") @ExcludeMissing numObs: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numTracks") @ExcludeMissing numTracks: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("obType") @ExcludeMissing obType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("orbitRegime")
+            @ExcludeMissing
+            orbitRegime: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("orientAngle")
+            @ExcludeMissing
+            orientAngle: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("planIndex") @ExcludeMissing planIndex: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("polarization")
+            @ExcludeMissing
+            polarization: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("priority")
+            @ExcludeMissing
+            priority: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ra") @ExcludeMissing ra: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("raan") @ExcludeMissing raan: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("range") @ExcludeMissing range: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rcs") @ExcludeMissing rcs: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rcsMax") @ExcludeMissing rcsMax: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rcsMin") @ExcludeMissing rcsMin: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("reflectance")
+            @ExcludeMissing
+            reflectance: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("scenario")
+            @ExcludeMissing
+            scenario: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("semiMajorAxis")
+            @ExcludeMissing
+            semiMajorAxis: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("spectralModel")
+            @ExcludeMissing
+            spectralModel: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("srchInc") @ExcludeMissing srchInc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("srchPattern")
+            @ExcludeMissing
+            srchPattern: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("stateVector")
+            @ExcludeMissing
+            stateVector: JsonField<StateVector> = JsonMissing.of(),
+            @JsonProperty("stopAlt") @ExcludeMissing stopAlt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("stopLat") @ExcludeMissing stopLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("stopLon") @ExcludeMissing stopLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("suffix") @ExcludeMissing suffix: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("targetSize")
+            @ExcludeMissing
+            targetSize: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("taskCategory")
+            @ExcludeMissing
+            taskCategory: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("taskGroup")
+            @ExcludeMissing
+            taskGroup: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskId") @ExcludeMissing taskId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("transactionId")
+            @ExcludeMissing
+            transactionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("trueAnomoly")
+            @ExcludeMissing
+            trueAnomoly: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("uctFollowUp")
+            @ExcludeMissing
+            uctFollowUp: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("visMag") @ExcludeMissing visMag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("visMagMax")
+            @ExcludeMissing
+            visMagMax: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("visMagMin")
+            @ExcludeMissing
+            visMagMin: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("xAngle") @ExcludeMissing xAngle: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("yAngle") @ExcludeMissing yAngle: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            startTime,
+            type,
+            id,
+            alt,
+            argOfPerigee,
+            az,
+            createdAt,
+            createdBy,
+            customer,
+            dec,
+            duration,
+            dwellId,
+            eccentricity,
+            el,
+            elset,
+            endTime,
+            epoch,
+            esId,
+            extentAz,
+            extentEl,
+            extentRange,
+            externalId,
+            frameRate,
+            freq,
+            freqMax,
+            freqMin,
+            idElset,
+            idManifold,
+            idOnOrbit,
+            idParentReq,
+            idPlan,
+            idSensor,
+            idStateVector,
+            inclination,
+            integrationTime,
+            iron,
+            irradiance,
+            lat,
+            lon,
+            msgCreateDate,
+            msgType,
+            notes,
+            numFrames,
+            numObs,
+            numTracks,
+            obType,
+            orbitRegime,
+            orientAngle,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            planIndex,
+            polarization,
+            priority,
+            ra,
+            raan,
+            range,
+            rcs,
+            rcsMax,
+            rcsMin,
+            reflectance,
+            satNo,
+            scenario,
+            semiMajorAxis,
+            spectralModel,
+            srchInc,
+            srchPattern,
+            stateVector,
+            stopAlt,
+            stopLat,
+            stopLon,
+            suffix,
+            tags,
+            targetSize,
+            taskCategory,
+            taskGroup,
+            taskId,
+            transactionId,
+            trueAnomoly,
+            uctFollowUp,
+            visMag,
+            visMagMax,
+            visMagMin,
+            xAngle,
+            yAngle,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1828,6 +2095,16 @@ private constructor(
          */
         @JsonProperty("yAngle") @ExcludeMissing fun _yAngle(): JsonField<Double> = yAngle
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1939,6 +2216,7 @@ private constructor(
             private var visMagMin: JsonField<Double> = JsonMissing.of()
             private var xAngle: JsonField<Double> = JsonMissing.of()
             private var yAngle: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -2031,6 +2309,7 @@ private constructor(
                 visMagMin = body.visMagMin
                 xAngle = body.xAngle
                 yAngle = body.yAngle
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -3384,6 +3663,25 @@ private constructor(
              */
             fun yAngle(yAngle: JsonField<Double>) = apply { this.yAngle = yAngle }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -3491,6 +3789,7 @@ private constructor(
                     visMagMin,
                     xAngle,
                     yAngle,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -11995,7 +12294,8 @@ private constructor(
                 visMagMax == other.visMagMax &&
                 visMagMin == other.visMagMin &&
                 xAngle == other.xAngle &&
-                yAngle == other.yAngle
+                yAngle == other.yAngle &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -12089,13 +12389,14 @@ private constructor(
                 visMagMin,
                 xAngle,
                 yAngle,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, startTime=$startTime, type=$type, id=$id, alt=$alt, argOfPerigee=$argOfPerigee, az=$az, createdAt=$createdAt, createdBy=$createdBy, customer=$customer, dec=$dec, duration=$duration, dwellId=$dwellId, eccentricity=$eccentricity, el=$el, elset=$elset, endTime=$endTime, epoch=$epoch, esId=$esId, extentAz=$extentAz, extentEl=$extentEl, extentRange=$extentRange, externalId=$externalId, frameRate=$frameRate, freq=$freq, freqMax=$freqMax, freqMin=$freqMin, idElset=$idElset, idManifold=$idManifold, idOnOrbit=$idOnOrbit, idParentReq=$idParentReq, idPlan=$idPlan, idSensor=$idSensor, idStateVector=$idStateVector, inclination=$inclination, integrationTime=$integrationTime, iron=$iron, irradiance=$irradiance, lat=$lat, lon=$lon, msgCreateDate=$msgCreateDate, msgType=$msgType, notes=$notes, numFrames=$numFrames, numObs=$numObs, numTracks=$numTracks, obType=$obType, orbitRegime=$orbitRegime, orientAngle=$orientAngle, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, planIndex=$planIndex, polarization=$polarization, priority=$priority, ra=$ra, raan=$raan, range=$range, rcs=$rcs, rcsMax=$rcsMax, rcsMin=$rcsMin, reflectance=$reflectance, satNo=$satNo, scenario=$scenario, semiMajorAxis=$semiMajorAxis, spectralModel=$spectralModel, srchInc=$srchInc, srchPattern=$srchPattern, stateVector=$stateVector, stopAlt=$stopAlt, stopLat=$stopLat, stopLon=$stopLon, suffix=$suffix, tags=$tags, targetSize=$targetSize, taskCategory=$taskCategory, taskGroup=$taskGroup, taskId=$taskId, transactionId=$transactionId, trueAnomoly=$trueAnomoly, uctFollowUp=$uctFollowUp, visMag=$visMag, visMagMax=$visMagMax, visMagMin=$visMagMin, xAngle=$xAngle, yAngle=$yAngle}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, startTime=$startTime, type=$type, id=$id, alt=$alt, argOfPerigee=$argOfPerigee, az=$az, createdAt=$createdAt, createdBy=$createdBy, customer=$customer, dec=$dec, duration=$duration, dwellId=$dwellId, eccentricity=$eccentricity, el=$el, elset=$elset, endTime=$endTime, epoch=$epoch, esId=$esId, extentAz=$extentAz, extentEl=$extentEl, extentRange=$extentRange, externalId=$externalId, frameRate=$frameRate, freq=$freq, freqMax=$freqMax, freqMin=$freqMin, idElset=$idElset, idManifold=$idManifold, idOnOrbit=$idOnOrbit, idParentReq=$idParentReq, idPlan=$idPlan, idSensor=$idSensor, idStateVector=$idStateVector, inclination=$inclination, integrationTime=$integrationTime, iron=$iron, irradiance=$irradiance, lat=$lat, lon=$lon, msgCreateDate=$msgCreateDate, msgType=$msgType, notes=$notes, numFrames=$numFrames, numObs=$numObs, numTracks=$numTracks, obType=$obType, orbitRegime=$orbitRegime, orientAngle=$orientAngle, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, planIndex=$planIndex, polarization=$polarization, priority=$priority, ra=$ra, raan=$raan, range=$range, rcs=$rcs, rcsMax=$rcsMax, rcsMin=$rcsMin, reflectance=$reflectance, satNo=$satNo, scenario=$scenario, semiMajorAxis=$semiMajorAxis, spectralModel=$spectralModel, srchInc=$srchInc, srchPattern=$srchPattern, stateVector=$stateVector, stopAlt=$stopAlt, stopLat=$stopLat, stopLon=$stopLon, suffix=$suffix, tags=$tags, targetSize=$targetSize, taskCategory=$taskCategory, taskGroup=$taskGroup, taskId=$taskId, transactionId=$transactionId, trueAnomoly=$trueAnomoly, uctFollowUp=$uctFollowUp, visMag=$visMag, visMagMax=$visMagMax, visMagMin=$visMagMin, xAngle=$xAngle, yAngle=$yAngle, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

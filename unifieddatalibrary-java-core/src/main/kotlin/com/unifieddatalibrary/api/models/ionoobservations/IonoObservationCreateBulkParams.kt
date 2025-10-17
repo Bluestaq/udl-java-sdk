@@ -220,158 +220,443 @@ private constructor(
      * specification.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("startTimeUTC")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
         private val startTimeUtc: JsonField<OffsetDateTime>,
-        @JsonProperty("stationId") @ExcludeMissing private val stationId: JsonField<String>,
-        @JsonProperty("system") @ExcludeMissing private val system: JsonField<String>,
-        @JsonProperty("systemInfo") @ExcludeMissing private val systemInfo: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("amplitude") @ExcludeMissing private val amplitude: JsonField<Amplitude>,
-        @JsonProperty("antennaElementPosition")
-        @ExcludeMissing
+        private val stationId: JsonField<String>,
+        private val system: JsonField<String>,
+        private val systemInfo: JsonField<String>,
+        private val id: JsonField<String>,
+        private val amplitude: JsonField<Amplitude>,
         private val antennaElementPosition: JsonField<AntennaElementPosition>,
-        @JsonProperty("antennaElementPositionCoordinateSystem")
-        @ExcludeMissing
         private val antennaElementPositionCoordinateSystem:
             JsonField<AntennaElementPositionCoordinateSystem>,
-        @JsonProperty("artistFlags") @ExcludeMissing private val artistFlags: JsonField<List<Int>>,
-        @JsonProperty("azimuth") @ExcludeMissing private val azimuth: JsonField<Azimuth>,
-        @JsonProperty("b0") @ExcludeMissing private val b0: JsonField<Double>,
-        @JsonProperty("b1") @ExcludeMissing private val b1: JsonField<Double>,
-        @JsonProperty("charAtts") @ExcludeMissing private val charAtts: JsonField<List<CharAtt>>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("d") @ExcludeMissing private val d: JsonField<Double>,
-        @JsonProperty("d1") @ExcludeMissing private val d1: JsonField<Double>,
-        @JsonProperty("datum") @ExcludeMissing private val datum: JsonField<Datum>,
-        @JsonProperty("deltafoF2") @ExcludeMissing private val deltafoF2: JsonField<Double>,
-        @JsonProperty("densityProfile")
-        @ExcludeMissing
+        private val artistFlags: JsonField<List<Int>>,
+        private val azimuth: JsonField<Azimuth>,
+        private val b0: JsonField<Double>,
+        private val b1: JsonField<Double>,
+        private val charAtts: JsonField<List<CharAtt>>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val d: JsonField<Double>,
+        private val d1: JsonField<Double>,
+        private val datum: JsonField<Datum>,
+        private val deltafoF2: JsonField<Double>,
         private val densityProfile: JsonField<DensityProfile>,
-        @JsonProperty("doppler") @ExcludeMissing private val doppler: JsonField<Doppler>,
-        @JsonProperty("downE") @ExcludeMissing private val downE: JsonField<Double>,
-        @JsonProperty("downEs") @ExcludeMissing private val downEs: JsonField<Double>,
-        @JsonProperty("downF") @ExcludeMissing private val downF: JsonField<Double>,
-        @JsonProperty("electronDensity")
-        @ExcludeMissing
+        private val doppler: JsonField<Doppler>,
+        private val downE: JsonField<Double>,
+        private val downEs: JsonField<Double>,
+        private val downF: JsonField<Double>,
         private val electronDensity: JsonField<List<Double>>,
-        @JsonProperty("electronDensityUncertainty")
-        @ExcludeMissing
         private val electronDensityUncertainty: JsonField<List<Double>>,
-        @JsonProperty("elevation") @ExcludeMissing private val elevation: JsonField<Elevation>,
-        @JsonProperty("fbEs") @ExcludeMissing private val fbEs: JsonField<Double>,
-        @JsonProperty("fe") @ExcludeMissing private val fe: JsonField<Double>,
-        @JsonProperty("ff") @ExcludeMissing private val ff: JsonField<Double>,
-        @JsonProperty("fhprimeF") @ExcludeMissing private val fhprimeF: JsonField<Double>,
-        @JsonProperty("fhprimeF2") @ExcludeMissing private val fhprimeF2: JsonField<Double>,
-        @JsonProperty("fmin") @ExcludeMissing private val fmin: JsonField<Double>,
-        @JsonProperty("fminE") @ExcludeMissing private val fminE: JsonField<Double>,
-        @JsonProperty("fminEs") @ExcludeMissing private val fminEs: JsonField<Double>,
-        @JsonProperty("fminF") @ExcludeMissing private val fminF: JsonField<Double>,
-        @JsonProperty("fmuf") @ExcludeMissing private val fmuf: JsonField<Double>,
-        @JsonProperty("foE") @ExcludeMissing private val foE: JsonField<Double>,
-        @JsonProperty("foEa") @ExcludeMissing private val foEa: JsonField<Double>,
-        @JsonProperty("foEp") @ExcludeMissing private val foEp: JsonField<Double>,
-        @JsonProperty("foEs") @ExcludeMissing private val foEs: JsonField<Double>,
-        @JsonProperty("foF1") @ExcludeMissing private val foF1: JsonField<Double>,
-        @JsonProperty("foF1p") @ExcludeMissing private val foF1p: JsonField<Double>,
-        @JsonProperty("foF2") @ExcludeMissing private val foF2: JsonField<Double>,
-        @JsonProperty("foF2p") @ExcludeMissing private val foF2p: JsonField<Double>,
-        @JsonProperty("foP") @ExcludeMissing private val foP: JsonField<Double>,
-        @JsonProperty("frequency") @ExcludeMissing private val frequency: JsonField<Frequency>,
-        @JsonProperty("fxE") @ExcludeMissing private val fxE: JsonField<Double>,
-        @JsonProperty("fxF1") @ExcludeMissing private val fxF1: JsonField<Double>,
-        @JsonProperty("fxF2") @ExcludeMissing private val fxF2: JsonField<Double>,
-        @JsonProperty("fxI") @ExcludeMissing private val fxI: JsonField<Double>,
-        @JsonProperty("height") @ExcludeMissing private val height: JsonField<List<Double>>,
-        @JsonProperty("hmE") @ExcludeMissing private val hmE: JsonField<Double>,
-        @JsonProperty("hmF1") @ExcludeMissing private val hmF1: JsonField<Double>,
-        @JsonProperty("hmF2") @ExcludeMissing private val hmF2: JsonField<Double>,
-        @JsonProperty("hprimeE") @ExcludeMissing private val hprimeE: JsonField<Double>,
-        @JsonProperty("hprimeEa") @ExcludeMissing private val hprimeEa: JsonField<Double>,
-        @JsonProperty("hprimeEs") @ExcludeMissing private val hprimeEs: JsonField<Double>,
-        @JsonProperty("hprimeF") @ExcludeMissing private val hprimeF: JsonField<Double>,
-        @JsonProperty("hprimeF1") @ExcludeMissing private val hprimeF1: JsonField<Double>,
-        @JsonProperty("hprimeF2") @ExcludeMissing private val hprimeF2: JsonField<Double>,
-        @JsonProperty("hprimefMUF") @ExcludeMissing private val hprimefMuf: JsonField<Double>,
-        @JsonProperty("hprimeP") @ExcludeMissing private val hprimeP: JsonField<Double>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("luf") @ExcludeMissing private val luf: JsonField<Double>,
-        @JsonProperty("md") @ExcludeMissing private val md: JsonField<Double>,
-        @JsonProperty("mufd") @ExcludeMissing private val mufd: JsonField<Double>,
-        @JsonProperty("neProfileName") @ExcludeMissing private val neProfileName: JsonField<String>,
-        @JsonProperty("neProfileVersion")
-        @ExcludeMissing
+        private val elevation: JsonField<Elevation>,
+        private val fbEs: JsonField<Double>,
+        private val fe: JsonField<Double>,
+        private val ff: JsonField<Double>,
+        private val fhprimeF: JsonField<Double>,
+        private val fhprimeF2: JsonField<Double>,
+        private val fmin: JsonField<Double>,
+        private val fminE: JsonField<Double>,
+        private val fminEs: JsonField<Double>,
+        private val fminF: JsonField<Double>,
+        private val fmuf: JsonField<Double>,
+        private val foE: JsonField<Double>,
+        private val foEa: JsonField<Double>,
+        private val foEp: JsonField<Double>,
+        private val foEs: JsonField<Double>,
+        private val foF1: JsonField<Double>,
+        private val foF1p: JsonField<Double>,
+        private val foF2: JsonField<Double>,
+        private val foF2p: JsonField<Double>,
+        private val foP: JsonField<Double>,
+        private val frequency: JsonField<Frequency>,
+        private val fxE: JsonField<Double>,
+        private val fxF1: JsonField<Double>,
+        private val fxF2: JsonField<Double>,
+        private val fxI: JsonField<Double>,
+        private val height: JsonField<List<Double>>,
+        private val hmE: JsonField<Double>,
+        private val hmF1: JsonField<Double>,
+        private val hmF2: JsonField<Double>,
+        private val hprimeE: JsonField<Double>,
+        private val hprimeEa: JsonField<Double>,
+        private val hprimeEs: JsonField<Double>,
+        private val hprimeF: JsonField<Double>,
+        private val hprimeF1: JsonField<Double>,
+        private val hprimeF2: JsonField<Double>,
+        private val hprimefMuf: JsonField<Double>,
+        private val hprimeP: JsonField<Double>,
+        private val idSensor: JsonField<String>,
+        private val luf: JsonField<Double>,
+        private val md: JsonField<Double>,
+        private val mufd: JsonField<Double>,
+        private val neProfileName: JsonField<String>,
         private val neProfileVersion: JsonField<Double>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("phase") @ExcludeMissing private val phase: JsonField<Phase>,
-        @JsonProperty("plasmaFrequency")
-        @ExcludeMissing
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origSensorId: JsonField<String>,
+        private val phase: JsonField<Phase>,
         private val plasmaFrequency: JsonField<List<Double>>,
-        @JsonProperty("plasmaFrequencyUncertainty")
-        @ExcludeMissing
         private val plasmaFrequencyUncertainty: JsonField<List<Double>>,
-        @JsonProperty("platformName") @ExcludeMissing private val platformName: JsonField<String>,
-        @JsonProperty("polarization")
-        @ExcludeMissing
+        private val platformName: JsonField<String>,
         private val polarization: JsonField<Polarization>,
-        @JsonProperty("power") @ExcludeMissing private val power: JsonField<Power>,
-        @JsonProperty("qe") @ExcludeMissing private val qe: JsonField<Double>,
-        @JsonProperty("qf") @ExcludeMissing private val qf: JsonField<Double>,
-        @JsonProperty("range") @ExcludeMissing private val range: JsonField<Range>,
-        @JsonProperty("receiveCoordinates")
-        @ExcludeMissing
+        private val power: JsonField<Power>,
+        private val qe: JsonField<Double>,
+        private val qf: JsonField<Double>,
+        private val range: JsonField<Range>,
         private val receiveCoordinates: JsonField<List<List<Double>>>,
-        @JsonProperty("receiveSensorType")
-        @ExcludeMissing
         private val receiveSensorType: JsonField<ReceiveSensorType>,
-        @JsonProperty("restrictedFrequency")
-        @ExcludeMissing
         private val restrictedFrequency: JsonField<List<Double>>,
-        @JsonProperty("restrictedFrequencyNotes")
-        @ExcludeMissing
         private val restrictedFrequencyNotes: JsonField<String>,
-        @JsonProperty("scaleHeightF2Peak")
-        @ExcludeMissing
         private val scaleHeightF2Peak: JsonField<Double>,
-        @JsonProperty("scalerInfo") @ExcludeMissing private val scalerInfo: JsonField<ScalerInfo>,
-        @JsonProperty("stokes") @ExcludeMissing private val stokes: JsonField<Stokes>,
-        @JsonProperty("systemNotes") @ExcludeMissing private val systemNotes: JsonField<String>,
-        @JsonProperty("tec") @ExcludeMissing private val tec: JsonField<Double>,
-        @JsonProperty("tidAzimuth") @ExcludeMissing private val tidAzimuth: JsonField<List<Double>>,
-        @JsonProperty("tidPeriods") @ExcludeMissing private val tidPeriods: JsonField<List<Double>>,
-        @JsonProperty("tidPhaseSpeeds")
-        @ExcludeMissing
+        private val scalerInfo: JsonField<ScalerInfo>,
+        private val stokes: JsonField<Stokes>,
+        private val systemNotes: JsonField<String>,
+        private val tec: JsonField<Double>,
+        private val tidAzimuth: JsonField<List<Double>>,
+        private val tidPeriods: JsonField<List<Double>>,
         private val tidPhaseSpeeds: JsonField<List<Double>>,
-        @JsonProperty("time") @ExcludeMissing private val time: JsonField<Time>,
-        @JsonProperty("traceGeneric")
-        @ExcludeMissing
+        private val time: JsonField<Time>,
         private val traceGeneric: JsonField<TraceGeneric>,
-        @JsonProperty("transmitCoordinates")
-        @ExcludeMissing
         private val transmitCoordinates: JsonField<List<List<Double>>>,
-        @JsonProperty("transmitSensorType")
-        @ExcludeMissing
         private val transmitSensorType: JsonField<TransmitSensorType>,
-        @JsonProperty("typeEs") @ExcludeMissing private val typeEs: JsonField<String>,
-        @JsonProperty("updatedAt") @ExcludeMissing private val updatedAt: JsonField<OffsetDateTime>,
-        @JsonProperty("updatedBy") @ExcludeMissing private val updatedBy: JsonField<String>,
-        @JsonProperty("yE") @ExcludeMissing private val yE: JsonField<Double>,
-        @JsonProperty("yF1") @ExcludeMissing private val yF1: JsonField<Double>,
-        @JsonProperty("yF2") @ExcludeMissing private val yF2: JsonField<Double>,
-        @JsonProperty("zhalfNm") @ExcludeMissing private val zhalfNm: JsonField<Double>,
-        @JsonProperty("zmE") @ExcludeMissing private val zmE: JsonField<Double>,
+        private val typeEs: JsonField<String>,
+        private val updatedAt: JsonField<OffsetDateTime>,
+        private val updatedBy: JsonField<String>,
+        private val yE: JsonField<Double>,
+        private val yF1: JsonField<Double>,
+        private val yF2: JsonField<Double>,
+        private val zhalfNm: JsonField<Double>,
+        private val zmE: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("startTimeUTC")
+            @ExcludeMissing
+            startTimeUtc: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("stationId")
+            @ExcludeMissing
+            stationId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("system") @ExcludeMissing system: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("systemInfo")
+            @ExcludeMissing
+            systemInfo: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("amplitude")
+            @ExcludeMissing
+            amplitude: JsonField<Amplitude> = JsonMissing.of(),
+            @JsonProperty("antennaElementPosition")
+            @ExcludeMissing
+            antennaElementPosition: JsonField<AntennaElementPosition> = JsonMissing.of(),
+            @JsonProperty("antennaElementPositionCoordinateSystem")
+            @ExcludeMissing
+            antennaElementPositionCoordinateSystem:
+                JsonField<AntennaElementPositionCoordinateSystem> =
+                JsonMissing.of(),
+            @JsonProperty("artistFlags")
+            @ExcludeMissing
+            artistFlags: JsonField<List<Int>> = JsonMissing.of(),
+            @JsonProperty("azimuth") @ExcludeMissing azimuth: JsonField<Azimuth> = JsonMissing.of(),
+            @JsonProperty("b0") @ExcludeMissing b0: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("b1") @ExcludeMissing b1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("charAtts")
+            @ExcludeMissing
+            charAtts: JsonField<List<CharAtt>> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("d") @ExcludeMissing d: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("d1") @ExcludeMissing d1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("datum") @ExcludeMissing datum: JsonField<Datum> = JsonMissing.of(),
+            @JsonProperty("deltafoF2")
+            @ExcludeMissing
+            deltafoF2: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("densityProfile")
+            @ExcludeMissing
+            densityProfile: JsonField<DensityProfile> = JsonMissing.of(),
+            @JsonProperty("doppler") @ExcludeMissing doppler: JsonField<Doppler> = JsonMissing.of(),
+            @JsonProperty("downE") @ExcludeMissing downE: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("downEs") @ExcludeMissing downEs: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("downF") @ExcludeMissing downF: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("electronDensity")
+            @ExcludeMissing
+            electronDensity: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("electronDensityUncertainty")
+            @ExcludeMissing
+            electronDensityUncertainty: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("elevation")
+            @ExcludeMissing
+            elevation: JsonField<Elevation> = JsonMissing.of(),
+            @JsonProperty("fbEs") @ExcludeMissing fbEs: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fe") @ExcludeMissing fe: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("ff") @ExcludeMissing ff: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fhprimeF")
+            @ExcludeMissing
+            fhprimeF: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fhprimeF2")
+            @ExcludeMissing
+            fhprimeF2: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fmin") @ExcludeMissing fmin: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fminE") @ExcludeMissing fminE: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fminEs") @ExcludeMissing fminEs: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fminF") @ExcludeMissing fminF: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fmuf") @ExcludeMissing fmuf: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("foE") @ExcludeMissing foE: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("foEa") @ExcludeMissing foEa: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("foEp") @ExcludeMissing foEp: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("foEs") @ExcludeMissing foEs: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("foF1") @ExcludeMissing foF1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("foF1p") @ExcludeMissing foF1p: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("foF2") @ExcludeMissing foF2: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("foF2p") @ExcludeMissing foF2p: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("foP") @ExcludeMissing foP: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("frequency")
+            @ExcludeMissing
+            frequency: JsonField<Frequency> = JsonMissing.of(),
+            @JsonProperty("fxE") @ExcludeMissing fxE: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fxF1") @ExcludeMissing fxF1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fxF2") @ExcludeMissing fxF2: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fxI") @ExcludeMissing fxI: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("height")
+            @ExcludeMissing
+            height: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("hmE") @ExcludeMissing hmE: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hmF1") @ExcludeMissing hmF1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hmF2") @ExcludeMissing hmF2: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hprimeE") @ExcludeMissing hprimeE: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hprimeEa")
+            @ExcludeMissing
+            hprimeEa: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hprimeEs")
+            @ExcludeMissing
+            hprimeEs: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hprimeF") @ExcludeMissing hprimeF: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hprimeF1")
+            @ExcludeMissing
+            hprimeF1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hprimeF2")
+            @ExcludeMissing
+            hprimeF2: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hprimefMUF")
+            @ExcludeMissing
+            hprimefMuf: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hprimeP") @ExcludeMissing hprimeP: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("luf") @ExcludeMissing luf: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("md") @ExcludeMissing md: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("mufd") @ExcludeMissing mufd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("neProfileName")
+            @ExcludeMissing
+            neProfileName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("neProfileVersion")
+            @ExcludeMissing
+            neProfileVersion: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("phase") @ExcludeMissing phase: JsonField<Phase> = JsonMissing.of(),
+            @JsonProperty("plasmaFrequency")
+            @ExcludeMissing
+            plasmaFrequency: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("plasmaFrequencyUncertainty")
+            @ExcludeMissing
+            plasmaFrequencyUncertainty: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("platformName")
+            @ExcludeMissing
+            platformName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("polarization")
+            @ExcludeMissing
+            polarization: JsonField<Polarization> = JsonMissing.of(),
+            @JsonProperty("power") @ExcludeMissing power: JsonField<Power> = JsonMissing.of(),
+            @JsonProperty("qe") @ExcludeMissing qe: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("qf") @ExcludeMissing qf: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("range") @ExcludeMissing range: JsonField<Range> = JsonMissing.of(),
+            @JsonProperty("receiveCoordinates")
+            @ExcludeMissing
+            receiveCoordinates: JsonField<List<List<Double>>> = JsonMissing.of(),
+            @JsonProperty("receiveSensorType")
+            @ExcludeMissing
+            receiveSensorType: JsonField<ReceiveSensorType> = JsonMissing.of(),
+            @JsonProperty("restrictedFrequency")
+            @ExcludeMissing
+            restrictedFrequency: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("restrictedFrequencyNotes")
+            @ExcludeMissing
+            restrictedFrequencyNotes: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("scaleHeightF2Peak")
+            @ExcludeMissing
+            scaleHeightF2Peak: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("scalerInfo")
+            @ExcludeMissing
+            scalerInfo: JsonField<ScalerInfo> = JsonMissing.of(),
+            @JsonProperty("stokes") @ExcludeMissing stokes: JsonField<Stokes> = JsonMissing.of(),
+            @JsonProperty("systemNotes")
+            @ExcludeMissing
+            systemNotes: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tec") @ExcludeMissing tec: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("tidAzimuth")
+            @ExcludeMissing
+            tidAzimuth: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("tidPeriods")
+            @ExcludeMissing
+            tidPeriods: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("tidPhaseSpeeds")
+            @ExcludeMissing
+            tidPhaseSpeeds: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("time") @ExcludeMissing time: JsonField<Time> = JsonMissing.of(),
+            @JsonProperty("traceGeneric")
+            @ExcludeMissing
+            traceGeneric: JsonField<TraceGeneric> = JsonMissing.of(),
+            @JsonProperty("transmitCoordinates")
+            @ExcludeMissing
+            transmitCoordinates: JsonField<List<List<Double>>> = JsonMissing.of(),
+            @JsonProperty("transmitSensorType")
+            @ExcludeMissing
+            transmitSensorType: JsonField<TransmitSensorType> = JsonMissing.of(),
+            @JsonProperty("typeEs") @ExcludeMissing typeEs: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("updatedAt")
+            @ExcludeMissing
+            updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("updatedBy")
+            @ExcludeMissing
+            updatedBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("yE") @ExcludeMissing yE: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("yF1") @ExcludeMissing yF1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("yF2") @ExcludeMissing yF2: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("zhalfNm") @ExcludeMissing zhalfNm: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("zmE") @ExcludeMissing zmE: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            startTimeUtc,
+            stationId,
+            system,
+            systemInfo,
+            id,
+            amplitude,
+            antennaElementPosition,
+            antennaElementPositionCoordinateSystem,
+            artistFlags,
+            azimuth,
+            b0,
+            b1,
+            charAtts,
+            createdAt,
+            createdBy,
+            d,
+            d1,
+            datum,
+            deltafoF2,
+            densityProfile,
+            doppler,
+            downE,
+            downEs,
+            downF,
+            electronDensity,
+            electronDensityUncertainty,
+            elevation,
+            fbEs,
+            fe,
+            ff,
+            fhprimeF,
+            fhprimeF2,
+            fmin,
+            fminE,
+            fminEs,
+            fminF,
+            fmuf,
+            foE,
+            foEa,
+            foEp,
+            foEs,
+            foF1,
+            foF1p,
+            foF2,
+            foF2p,
+            foP,
+            frequency,
+            fxE,
+            fxF1,
+            fxF2,
+            fxI,
+            height,
+            hmE,
+            hmF1,
+            hmF2,
+            hprimeE,
+            hprimeEa,
+            hprimeEs,
+            hprimeF,
+            hprimeF1,
+            hprimeF2,
+            hprimefMuf,
+            hprimeP,
+            idSensor,
+            luf,
+            md,
+            mufd,
+            neProfileName,
+            neProfileVersion,
+            origin,
+            origNetwork,
+            origSensorId,
+            phase,
+            plasmaFrequency,
+            plasmaFrequencyUncertainty,
+            platformName,
+            polarization,
+            power,
+            qe,
+            qf,
+            range,
+            receiveCoordinates,
+            receiveSensorType,
+            restrictedFrequency,
+            restrictedFrequencyNotes,
+            scaleHeightF2Peak,
+            scalerInfo,
+            stokes,
+            systemNotes,
+            tec,
+            tidAzimuth,
+            tidPeriods,
+            tidPhaseSpeeds,
+            time,
+            traceGeneric,
+            transmitCoordinates,
+            transmitSensorType,
+            typeEs,
+            updatedAt,
+            updatedBy,
+            yE,
+            yF1,
+            yF2,
+            zhalfNm,
+            zmE,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -2133,6 +2418,16 @@ private constructor(
          */
         @JsonProperty("zmE") @ExcludeMissing fun _zmE(): JsonField<Double> = zmE
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -2267,6 +2562,7 @@ private constructor(
             private var yF2: JsonField<Double> = JsonMissing.of()
             private var zhalfNm: JsonField<Double> = JsonMissing.of()
             private var zmE: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -2380,6 +2676,7 @@ private constructor(
                 yF2 = body.yF2
                 zhalfNm = body.zhalfNm
                 zmE = body.zmE
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -4024,6 +4321,25 @@ private constructor(
              */
             fun zmE(zmE: JsonField<Double>) = apply { this.zmE = zmE }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -4152,6 +4468,7 @@ private constructor(
                     yF2,
                     zhalfNm,
                     zmE,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -14793,7 +15110,8 @@ private constructor(
                 yF1 == other.yF1 &&
                 yF2 == other.yF2 &&
                 zhalfNm == other.zhalfNm &&
-                zmE == other.zmE
+                zmE == other.zmE &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -14906,13 +15224,14 @@ private constructor(
                 yF2,
                 zhalfNm,
                 zmE,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, startTimeUtc=$startTimeUtc, stationId=$stationId, system=$system, systemInfo=$systemInfo, id=$id, amplitude=$amplitude, antennaElementPosition=$antennaElementPosition, antennaElementPositionCoordinateSystem=$antennaElementPositionCoordinateSystem, artistFlags=$artistFlags, azimuth=$azimuth, b0=$b0, b1=$b1, charAtts=$charAtts, createdAt=$createdAt, createdBy=$createdBy, d=$d, d1=$d1, datum=$datum, deltafoF2=$deltafoF2, densityProfile=$densityProfile, doppler=$doppler, downE=$downE, downEs=$downEs, downF=$downF, electronDensity=$electronDensity, electronDensityUncertainty=$electronDensityUncertainty, elevation=$elevation, fbEs=$fbEs, fe=$fe, ff=$ff, fhprimeF=$fhprimeF, fhprimeF2=$fhprimeF2, fmin=$fmin, fminE=$fminE, fminEs=$fminEs, fminF=$fminF, fmuf=$fmuf, foE=$foE, foEa=$foEa, foEp=$foEp, foEs=$foEs, foF1=$foF1, foF1p=$foF1p, foF2=$foF2, foF2p=$foF2p, foP=$foP, frequency=$frequency, fxE=$fxE, fxF1=$fxF1, fxF2=$fxF2, fxI=$fxI, height=$height, hmE=$hmE, hmF1=$hmF1, hmF2=$hmF2, hprimeE=$hprimeE, hprimeEa=$hprimeEa, hprimeEs=$hprimeEs, hprimeF=$hprimeF, hprimeF1=$hprimeF1, hprimeF2=$hprimeF2, hprimefMuf=$hprimefMuf, hprimeP=$hprimeP, idSensor=$idSensor, luf=$luf, md=$md, mufd=$mufd, neProfileName=$neProfileName, neProfileVersion=$neProfileVersion, origin=$origin, origNetwork=$origNetwork, origSensorId=$origSensorId, phase=$phase, plasmaFrequency=$plasmaFrequency, plasmaFrequencyUncertainty=$plasmaFrequencyUncertainty, platformName=$platformName, polarization=$polarization, power=$power, qe=$qe, qf=$qf, range=$range, receiveCoordinates=$receiveCoordinates, receiveSensorType=$receiveSensorType, restrictedFrequency=$restrictedFrequency, restrictedFrequencyNotes=$restrictedFrequencyNotes, scaleHeightF2Peak=$scaleHeightF2Peak, scalerInfo=$scalerInfo, stokes=$stokes, systemNotes=$systemNotes, tec=$tec, tidAzimuth=$tidAzimuth, tidPeriods=$tidPeriods, tidPhaseSpeeds=$tidPhaseSpeeds, time=$time, traceGeneric=$traceGeneric, transmitCoordinates=$transmitCoordinates, transmitSensorType=$transmitSensorType, typeEs=$typeEs, updatedAt=$updatedAt, updatedBy=$updatedBy, yE=$yE, yF1=$yF1, yF2=$yF2, zhalfNm=$zhalfNm, zmE=$zmE}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, startTimeUtc=$startTimeUtc, stationId=$stationId, system=$system, systemInfo=$systemInfo, id=$id, amplitude=$amplitude, antennaElementPosition=$antennaElementPosition, antennaElementPositionCoordinateSystem=$antennaElementPositionCoordinateSystem, artistFlags=$artistFlags, azimuth=$azimuth, b0=$b0, b1=$b1, charAtts=$charAtts, createdAt=$createdAt, createdBy=$createdBy, d=$d, d1=$d1, datum=$datum, deltafoF2=$deltafoF2, densityProfile=$densityProfile, doppler=$doppler, downE=$downE, downEs=$downEs, downF=$downF, electronDensity=$electronDensity, electronDensityUncertainty=$electronDensityUncertainty, elevation=$elevation, fbEs=$fbEs, fe=$fe, ff=$ff, fhprimeF=$fhprimeF, fhprimeF2=$fhprimeF2, fmin=$fmin, fminE=$fminE, fminEs=$fminEs, fminF=$fminF, fmuf=$fmuf, foE=$foE, foEa=$foEa, foEp=$foEp, foEs=$foEs, foF1=$foF1, foF1p=$foF1p, foF2=$foF2, foF2p=$foF2p, foP=$foP, frequency=$frequency, fxE=$fxE, fxF1=$fxF1, fxF2=$fxF2, fxI=$fxI, height=$height, hmE=$hmE, hmF1=$hmF1, hmF2=$hmF2, hprimeE=$hprimeE, hprimeEa=$hprimeEa, hprimeEs=$hprimeEs, hprimeF=$hprimeF, hprimeF1=$hprimeF1, hprimeF2=$hprimeF2, hprimefMuf=$hprimefMuf, hprimeP=$hprimeP, idSensor=$idSensor, luf=$luf, md=$md, mufd=$mufd, neProfileName=$neProfileName, neProfileVersion=$neProfileVersion, origin=$origin, origNetwork=$origNetwork, origSensorId=$origSensorId, phase=$phase, plasmaFrequency=$plasmaFrequency, plasmaFrequencyUncertainty=$plasmaFrequencyUncertainty, platformName=$platformName, polarization=$polarization, power=$power, qe=$qe, qf=$qf, range=$range, receiveCoordinates=$receiveCoordinates, receiveSensorType=$receiveSensorType, restrictedFrequency=$restrictedFrequency, restrictedFrequencyNotes=$restrictedFrequencyNotes, scaleHeightF2Peak=$scaleHeightF2Peak, scalerInfo=$scalerInfo, stokes=$stokes, systemNotes=$systemNotes, tec=$tec, tidAzimuth=$tidAzimuth, tidPeriods=$tidPeriods, tidPhaseSpeeds=$tidPhaseSpeeds, time=$time, traceGeneric=$traceGeneric, transmitCoordinates=$transmitCoordinates, transmitSensorType=$transmitSensorType, typeEs=$typeEs, updatedAt=$updatedAt, updatedBy=$updatedBy, yE=$yE, yF1=$yF1, yF2=$yF2, zhalfNm=$zhalfNm, zmE=$zmE, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

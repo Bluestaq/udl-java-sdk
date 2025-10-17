@@ -219,59 +219,159 @@ private constructor(
      * service personnel.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("rptCreatedTime")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
         private val rptCreatedTime: JsonField<OffsetDateTime>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("aircraftMDS") @ExcludeMissing private val aircraftMds: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("currICAO") @ExcludeMissing private val currIcao: JsonField<String>,
-        @JsonProperty("etic") @ExcludeMissing private val etic: JsonField<OffsetDateTime>,
-        @JsonProperty("etmc") @ExcludeMissing private val etmc: JsonField<OffsetDateTime>,
-        @JsonProperty("extSystemId") @ExcludeMissing private val extSystemId: JsonField<String>,
-        @JsonProperty("logisticAction")
-        @ExcludeMissing
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val aircraftMds: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val currIcao: JsonField<String>,
+        private val etic: JsonField<OffsetDateTime>,
+        private val etmc: JsonField<OffsetDateTime>,
+        private val extSystemId: JsonField<String>,
         private val logisticAction: JsonField<String>,
-        @JsonProperty("logisticsDiscrepancyInfos")
-        @ExcludeMissing
         private val logisticsDiscrepancyInfos: JsonField<List<LogisticsDiscrepancyInfo>>,
-        @JsonProperty("logisticsRecordId")
-        @ExcludeMissing
         private val logisticsRecordId: JsonField<String>,
-        @JsonProperty("logisticsRemarks")
-        @ExcludeMissing
         private val logisticsRemarks: JsonField<List<LogisticsRemarksIngest>>,
-        @JsonProperty("logisticsSupportItems")
-        @ExcludeMissing
         private val logisticsSupportItems: JsonField<List<LogisticsSupportItem>>,
-        @JsonProperty("logisticsTransportationPlans")
-        @ExcludeMissing
         private val logisticsTransportationPlans: JsonField<List<LogisticsTransportationPlan>>,
-        @JsonProperty("maintStatusCode")
-        @ExcludeMissing
         private val maintStatusCode: JsonField<String>,
-        @JsonProperty("mcTime") @ExcludeMissing private val mcTime: JsonField<OffsetDateTime>,
-        @JsonProperty("meTime") @ExcludeMissing private val meTime: JsonField<OffsetDateTime>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("owner") @ExcludeMissing private val owner: JsonField<String>,
-        @JsonProperty("reopenFlag") @ExcludeMissing private val reopenFlag: JsonField<Boolean>,
-        @JsonProperty("rptClosedTime")
-        @ExcludeMissing
+        private val mcTime: JsonField<OffsetDateTime>,
+        private val meTime: JsonField<OffsetDateTime>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val owner: JsonField<String>,
+        private val reopenFlag: JsonField<Boolean>,
         private val rptClosedTime: JsonField<OffsetDateTime>,
-        @JsonProperty("suppICAO") @ExcludeMissing private val suppIcao: JsonField<String>,
-        @JsonProperty("tailNumber") @ExcludeMissing private val tailNumber: JsonField<String>,
-        @JsonProperty("updatedAt") @ExcludeMissing private val updatedAt: JsonField<OffsetDateTime>,
-        @JsonProperty("updatedBy") @ExcludeMissing private val updatedBy: JsonField<String>,
+        private val suppIcao: JsonField<String>,
+        private val tailNumber: JsonField<String>,
+        private val updatedAt: JsonField<OffsetDateTime>,
+        private val updatedBy: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("rptCreatedTime")
+            @ExcludeMissing
+            rptCreatedTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("aircraftMDS")
+            @ExcludeMissing
+            aircraftMds: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("currICAO")
+            @ExcludeMissing
+            currIcao: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("etic")
+            @ExcludeMissing
+            etic: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("etmc")
+            @ExcludeMissing
+            etmc: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("extSystemId")
+            @ExcludeMissing
+            extSystemId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("logisticAction")
+            @ExcludeMissing
+            logisticAction: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("logisticsDiscrepancyInfos")
+            @ExcludeMissing
+            logisticsDiscrepancyInfos: JsonField<List<LogisticsDiscrepancyInfo>> = JsonMissing.of(),
+            @JsonProperty("logisticsRecordId")
+            @ExcludeMissing
+            logisticsRecordId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("logisticsRemarks")
+            @ExcludeMissing
+            logisticsRemarks: JsonField<List<LogisticsRemarksIngest>> = JsonMissing.of(),
+            @JsonProperty("logisticsSupportItems")
+            @ExcludeMissing
+            logisticsSupportItems: JsonField<List<LogisticsSupportItem>> = JsonMissing.of(),
+            @JsonProperty("logisticsTransportationPlans")
+            @ExcludeMissing
+            logisticsTransportationPlans: JsonField<List<LogisticsTransportationPlan>> =
+                JsonMissing.of(),
+            @JsonProperty("maintStatusCode")
+            @ExcludeMissing
+            maintStatusCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("mcTime")
+            @ExcludeMissing
+            mcTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("meTime")
+            @ExcludeMissing
+            meTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("owner") @ExcludeMissing owner: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("reopenFlag")
+            @ExcludeMissing
+            reopenFlag: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("rptClosedTime")
+            @ExcludeMissing
+            rptClosedTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("suppICAO")
+            @ExcludeMissing
+            suppIcao: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tailNumber")
+            @ExcludeMissing
+            tailNumber: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("updatedAt")
+            @ExcludeMissing
+            updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("updatedBy")
+            @ExcludeMissing
+            updatedBy: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            rptCreatedTime,
+            source,
+            id,
+            aircraftMds,
+            createdAt,
+            createdBy,
+            currIcao,
+            etic,
+            etmc,
+            extSystemId,
+            logisticAction,
+            logisticsDiscrepancyInfos,
+            logisticsRecordId,
+            logisticsRemarks,
+            logisticsSupportItems,
+            logisticsTransportationPlans,
+            maintStatusCode,
+            mcTime,
+            meTime,
+            origin,
+            origNetwork,
+            owner,
+            reopenFlag,
+            rptClosedTime,
+            suppIcao,
+            tailNumber,
+            updatedAt,
+            updatedBy,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -812,6 +912,16 @@ private constructor(
          */
         @JsonProperty("updatedBy") @ExcludeMissing fun _updatedBy(): JsonField<String> = updatedBy
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -867,6 +977,7 @@ private constructor(
             private var tailNumber: JsonField<String> = JsonMissing.of()
             private var updatedAt: JsonField<OffsetDateTime> = JsonMissing.of()
             private var updatedBy: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -902,6 +1013,7 @@ private constructor(
                 tailNumber = body.tailNumber
                 updatedAt = body.updatedAt
                 updatedBy = body.updatedBy
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1438,6 +1550,25 @@ private constructor(
              */
             fun updatedBy(updatedBy: JsonField<String>) = apply { this.updatedBy = updatedBy }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1485,6 +1616,7 @@ private constructor(
                     tailNumber,
                     updatedAt,
                     updatedBy,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -6741,7 +6873,8 @@ private constructor(
                 suppIcao == other.suppIcao &&
                 tailNumber == other.tailNumber &&
                 updatedAt == other.updatedAt &&
-                updatedBy == other.updatedBy
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -6776,13 +6909,14 @@ private constructor(
                 tailNumber,
                 updatedAt,
                 updatedBy,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, rptCreatedTime=$rptCreatedTime, source=$source, id=$id, aircraftMds=$aircraftMds, createdAt=$createdAt, createdBy=$createdBy, currIcao=$currIcao, etic=$etic, etmc=$etmc, extSystemId=$extSystemId, logisticAction=$logisticAction, logisticsDiscrepancyInfos=$logisticsDiscrepancyInfos, logisticsRecordId=$logisticsRecordId, logisticsRemarks=$logisticsRemarks, logisticsSupportItems=$logisticsSupportItems, logisticsTransportationPlans=$logisticsTransportationPlans, maintStatusCode=$maintStatusCode, mcTime=$mcTime, meTime=$meTime, origin=$origin, origNetwork=$origNetwork, owner=$owner, reopenFlag=$reopenFlag, rptClosedTime=$rptClosedTime, suppIcao=$suppIcao, tailNumber=$tailNumber, updatedAt=$updatedAt, updatedBy=$updatedBy}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, rptCreatedTime=$rptCreatedTime, source=$source, id=$id, aircraftMds=$aircraftMds, createdAt=$createdAt, createdBy=$createdBy, currIcao=$currIcao, etic=$etic, etmc=$etmc, extSystemId=$extSystemId, logisticAction=$logisticAction, logisticsDiscrepancyInfos=$logisticsDiscrepancyInfos, logisticsRecordId=$logisticsRecordId, logisticsRemarks=$logisticsRemarks, logisticsSupportItems=$logisticsSupportItems, logisticsTransportationPlans=$logisticsTransportationPlans, maintStatusCode=$maintStatusCode, mcTime=$mcTime, meTime=$meTime, origin=$origin, origNetwork=$origNetwork, owner=$owner, reopenFlag=$reopenFlag, rptClosedTime=$rptClosedTime, suppIcao=$suppIcao, tailNumber=$tailNumber, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

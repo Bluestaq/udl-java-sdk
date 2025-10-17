@@ -220,31 +220,94 @@ private constructor(
      * by accounting for factors such as crew fatigue and mission complexity.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("idMission") @ExcludeMissing private val idMission: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("aviationRiskManagementWorksheetRecord")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val idMission: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
         private val aviationRiskManagementWorksheetRecord:
             JsonField<List<AviationRiskManagementWorksheetRecord>>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("extMissionId") @ExcludeMissing private val extMissionId: JsonField<String>,
-        @JsonProperty("missionNumber") @ExcludeMissing private val missionNumber: JsonField<String>,
-        @JsonProperty("orgId") @ExcludeMissing private val orgId: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("unitId") @ExcludeMissing private val unitId: JsonField<String>,
-        @JsonProperty("updatedAt") @ExcludeMissing private val updatedAt: JsonField<OffsetDateTime>,
-        @JsonProperty("updatedBy") @ExcludeMissing private val updatedBy: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val extMissionId: JsonField<String>,
+        private val missionNumber: JsonField<String>,
+        private val orgId: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val unitId: JsonField<String>,
+        private val updatedAt: JsonField<OffsetDateTime>,
+        private val updatedBy: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("idMission")
+            @ExcludeMissing
+            idMission: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("aviationRiskManagementWorksheetRecord")
+            @ExcludeMissing
+            aviationRiskManagementWorksheetRecord:
+                JsonField<List<AviationRiskManagementWorksheetRecord>> =
+                JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("extMissionId")
+            @ExcludeMissing
+            extMissionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionNumber")
+            @ExcludeMissing
+            missionNumber: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("orgId") @ExcludeMissing orgId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("unitId") @ExcludeMissing unitId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("updatedAt")
+            @ExcludeMissing
+            updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("updatedBy")
+            @ExcludeMissing
+            updatedBy: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            idMission,
+            source,
+            id,
+            aviationRiskManagementWorksheetRecord,
+            createdAt,
+            createdBy,
+            extMissionId,
+            missionNumber,
+            orgId,
+            origin,
+            origNetwork,
+            sourceDl,
+            unitId,
+            updatedAt,
+            updatedBy,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -550,6 +613,16 @@ private constructor(
          */
         @JsonProperty("updatedBy") @ExcludeMissing fun _updatedBy(): JsonField<String> = updatedBy
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -590,6 +663,7 @@ private constructor(
             private var unitId: JsonField<String> = JsonMissing.of()
             private var updatedAt: JsonField<OffsetDateTime> = JsonMissing.of()
             private var updatedBy: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -611,6 +685,7 @@ private constructor(
                 unitId = body.unitId
                 updatedAt = body.updatedAt
                 updatedBy = body.updatedBy
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -898,6 +973,25 @@ private constructor(
              */
             fun updatedBy(updatedBy: JsonField<String>) = apply { this.updatedBy = updatedBy }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -934,6 +1028,7 @@ private constructor(
                     unitId,
                     updatedAt,
                     updatedBy,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -3035,7 +3130,8 @@ private constructor(
                 sourceDl == other.sourceDl &&
                 unitId == other.unitId &&
                 updatedAt == other.updatedAt &&
-                updatedBy == other.updatedBy
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -3057,13 +3153,14 @@ private constructor(
                 unitId,
                 updatedAt,
                 updatedBy,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idMission=$idMission, source=$source, id=$id, aviationRiskManagementWorksheetRecord=$aviationRiskManagementWorksheetRecord, createdAt=$createdAt, createdBy=$createdBy, extMissionId=$extMissionId, missionNumber=$missionNumber, orgId=$orgId, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl, unitId=$unitId, updatedAt=$updatedAt, updatedBy=$updatedBy}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idMission=$idMission, source=$source, id=$id, aviationRiskManagementWorksheetRecord=$aviationRiskManagementWorksheetRecord, createdAt=$createdAt, createdBy=$createdBy, extMissionId=$extMissionId, missionNumber=$missionNumber, orgId=$orgId, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl, unitId=$unitId, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

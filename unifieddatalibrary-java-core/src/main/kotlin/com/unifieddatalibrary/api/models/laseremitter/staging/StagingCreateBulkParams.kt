@@ -2,11 +2,14 @@
 
 package com.unifieddatalibrary.api.models.laseremitter.staging
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -14,6 +17,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 
@@ -209,25 +213,68 @@ private constructor(
      * used to stage laser emitter entities.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("laserName") @ExcludeMissing private val laserName: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("altitude") @ExcludeMissing private val altitude: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("laserType") @ExcludeMissing private val laserType: JsonField<String>,
-        @JsonProperty("lat") @ExcludeMissing private val lat: JsonField<Double>,
-        @JsonProperty("locationCountry")
-        @ExcludeMissing
+        private val laserName: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val altitude: JsonField<Double>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val laserType: JsonField<String>,
+        private val lat: JsonField<Double>,
         private val locationCountry: JsonField<String>,
-        @JsonProperty("lon") @ExcludeMissing private val lon: JsonField<Double>,
-        @JsonProperty("ownerCountry") @ExcludeMissing private val ownerCountry: JsonField<String>,
+        private val lon: JsonField<Double>,
+        private val ownerCountry: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("laserName")
+            @ExcludeMissing
+            laserName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("altitude")
+            @ExcludeMissing
+            altitude: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("laserType")
+            @ExcludeMissing
+            laserType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("locationCountry")
+            @ExcludeMissing
+            locationCountry: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("ownerCountry")
+            @ExcludeMissing
+            ownerCountry: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            laserName,
+            source,
+            id,
+            altitude,
+            createdAt,
+            createdBy,
+            laserType,
+            lat,
+            locationCountry,
+            lon,
+            ownerCountry,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -439,6 +486,16 @@ private constructor(
         @ExcludeMissing
         fun _ownerCountry(): JsonField<String> = ownerCountry
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -471,6 +528,7 @@ private constructor(
             private var locationCountry: JsonField<String> = JsonMissing.of()
             private var lon: JsonField<Double> = JsonMissing.of()
             private var ownerCountry: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -486,6 +544,7 @@ private constructor(
                 locationCountry = body.locationCountry
                 lon = body.lon
                 ownerCountry = body.ownerCountry
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -669,6 +728,25 @@ private constructor(
                 this.ownerCountry = ownerCountry
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -697,6 +775,7 @@ private constructor(
                     locationCountry,
                     lon,
                     ownerCountry,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -768,7 +847,8 @@ private constructor(
                 lat == other.lat &&
                 locationCountry == other.locationCountry &&
                 lon == other.lon &&
-                ownerCountry == other.ownerCountry
+                ownerCountry == other.ownerCountry &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -785,13 +865,14 @@ private constructor(
                 locationCountry,
                 lon,
                 ownerCountry,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, laserName=$laserName, source=$source, id=$id, altitude=$altitude, createdAt=$createdAt, createdBy=$createdBy, laserType=$laserType, lat=$lat, locationCountry=$locationCountry, lon=$lon, ownerCountry=$ownerCountry}"
+            "Body{classificationMarking=$classificationMarking, laserName=$laserName, source=$source, id=$id, altitude=$altitude, createdAt=$createdAt, createdBy=$createdBy, laserType=$laserType, lat=$lat, locationCountry=$locationCountry, lon=$lon, ownerCountry=$ownerCountry, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

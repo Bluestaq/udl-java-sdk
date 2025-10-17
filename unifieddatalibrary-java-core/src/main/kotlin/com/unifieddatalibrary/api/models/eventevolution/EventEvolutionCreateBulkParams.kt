@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.eventevolution
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -213,49 +217,136 @@ private constructor(
      * sources of a past event, or of an ongoing activity that evolves over a period of time.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("eventId") @ExcludeMissing private val eventId: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("startTime") @ExcludeMissing private val startTime: JsonField<OffsetDateTime>,
-        @JsonProperty("summary") @ExcludeMissing private val summary: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("agjson") @ExcludeMissing private val agjson: JsonField<String>,
-        @JsonProperty("andims") @ExcludeMissing private val andims: JsonField<Int>,
-        @JsonProperty("area") @ExcludeMissing private val area: JsonField<String>,
-        @JsonProperty("asrid") @ExcludeMissing private val asrid: JsonField<Int>,
-        @JsonProperty("atext") @ExcludeMissing private val atext: JsonField<String>,
-        @JsonProperty("atype") @ExcludeMissing private val atype: JsonField<String>,
-        @JsonProperty("category") @ExcludeMissing private val category: JsonField<String>,
-        @JsonProperty("countryCode") @ExcludeMissing private val countryCode: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("dataDescription")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val eventId: JsonField<String>,
+        private val source: JsonField<String>,
+        private val startTime: JsonField<OffsetDateTime>,
+        private val summary: JsonField<String>,
+        private val id: JsonField<String>,
+        private val agjson: JsonField<String>,
+        private val andims: JsonField<Int>,
+        private val area: JsonField<String>,
+        private val asrid: JsonField<Int>,
+        private val atext: JsonField<String>,
+        private val atype: JsonField<String>,
+        private val category: JsonField<String>,
+        private val countryCode: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
         private val dataDescription: JsonField<String>,
-        @JsonProperty("endTime") @ExcludeMissing private val endTime: JsonField<OffsetDateTime>,
-        @JsonProperty("geoAdminLevel1")
-        @ExcludeMissing
+        private val endTime: JsonField<OffsetDateTime>,
         private val geoAdminLevel1: JsonField<String>,
-        @JsonProperty("geoAdminLevel2")
-        @ExcludeMissing
         private val geoAdminLevel2: JsonField<String>,
-        @JsonProperty("geoAdminLevel3")
-        @ExcludeMissing
         private val geoAdminLevel3: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("redact") @ExcludeMissing private val redact: JsonField<Boolean>,
-        @JsonProperty("srcIds") @ExcludeMissing private val srcIds: JsonField<List<String>>,
-        @JsonProperty("srcTyps") @ExcludeMissing private val srcTyps: JsonField<List<String>>,
-        @JsonProperty("status") @ExcludeMissing private val status: JsonField<String>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("url") @ExcludeMissing private val url: JsonField<List<String>>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val redact: JsonField<Boolean>,
+        private val srcIds: JsonField<List<String>>,
+        private val srcTyps: JsonField<List<String>>,
+        private val status: JsonField<String>,
+        private val tags: JsonField<List<String>>,
+        private val url: JsonField<List<String>>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("eventId") @ExcludeMissing eventId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("startTime")
+            @ExcludeMissing
+            startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("summary") @ExcludeMissing summary: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("agjson") @ExcludeMissing agjson: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("andims") @ExcludeMissing andims: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("area") @ExcludeMissing area: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("asrid") @ExcludeMissing asrid: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("atext") @ExcludeMissing atext: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("atype") @ExcludeMissing atype: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("category")
+            @ExcludeMissing
+            category: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("countryCode")
+            @ExcludeMissing
+            countryCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataDescription")
+            @ExcludeMissing
+            dataDescription: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("endTime")
+            @ExcludeMissing
+            endTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("geoAdminLevel1")
+            @ExcludeMissing
+            geoAdminLevel1: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("geoAdminLevel2")
+            @ExcludeMissing
+            geoAdminLevel2: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("geoAdminLevel3")
+            @ExcludeMissing
+            geoAdminLevel3: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("redact") @ExcludeMissing redact: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("srcIds")
+            @ExcludeMissing
+            srcIds: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("srcTyps")
+            @ExcludeMissing
+            srcTyps: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("status") @ExcludeMissing status: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("url") @ExcludeMissing url: JsonField<List<String>> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            eventId,
+            source,
+            startTime,
+            summary,
+            id,
+            agjson,
+            andims,
+            area,
+            asrid,
+            atext,
+            atype,
+            category,
+            countryCode,
+            createdAt,
+            createdBy,
+            dataDescription,
+            endTime,
+            geoAdminLevel1,
+            geoAdminLevel2,
+            geoAdminLevel3,
+            origin,
+            origNetwork,
+            redact,
+            srcIds,
+            srcTyps,
+            status,
+            tags,
+            url,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -792,6 +883,16 @@ private constructor(
          */
         @JsonProperty("url") @ExcludeMissing fun _url(): JsonField<List<String>> = url
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -845,6 +946,7 @@ private constructor(
             private var status: JsonField<String> = JsonMissing.of()
             private var tags: JsonField<MutableList<String>>? = null
             private var url: JsonField<MutableList<String>>? = null
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -878,6 +980,7 @@ private constructor(
                 status = body.status
                 tags = body.tags.map { it.toMutableList() }
                 url = body.url.map { it.toMutableList() }
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1415,6 +1518,25 @@ private constructor(
                     }
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1464,6 +1586,7 @@ private constructor(
                     status,
                     (tags ?: JsonMissing.of()).map { it.toImmutable() },
                     (url ?: JsonMissing.of()).map { it.toImmutable() },
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1745,7 +1868,8 @@ private constructor(
                 srcTyps == other.srcTyps &&
                 status == other.status &&
                 tags == other.tags &&
-                url == other.url
+                url == other.url &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1780,13 +1904,14 @@ private constructor(
                 status,
                 tags,
                 url,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, eventId=$eventId, source=$source, startTime=$startTime, summary=$summary, id=$id, agjson=$agjson, andims=$andims, area=$area, asrid=$asrid, atext=$atext, atype=$atype, category=$category, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, dataDescription=$dataDescription, endTime=$endTime, geoAdminLevel1=$geoAdminLevel1, geoAdminLevel2=$geoAdminLevel2, geoAdminLevel3=$geoAdminLevel3, origin=$origin, origNetwork=$origNetwork, redact=$redact, srcIds=$srcIds, srcTyps=$srcTyps, status=$status, tags=$tags, url=$url}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, eventId=$eventId, source=$source, startTime=$startTime, summary=$summary, id=$id, agjson=$agjson, andims=$andims, area=$area, asrid=$asrid, atext=$atext, atype=$atype, category=$category, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, dataDescription=$dataDescription, endTime=$endTime, geoAdminLevel1=$geoAdminLevel1, geoAdminLevel2=$geoAdminLevel2, geoAdminLevel3=$geoAdminLevel3, origin=$origin, origNetwork=$origNetwork, redact=$redact, srcIds=$srcIds, srcTyps=$srcTyps, status=$status, tags=$tags, url=$url, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

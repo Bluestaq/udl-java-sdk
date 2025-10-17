@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.airoperations.aircraftsorties
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.LocalDate
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -213,127 +217,382 @@ private constructor(
      * to carry out a mission.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("plannedDepTime")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
         private val plannedDepTime: JsonField<OffsetDateTime>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("actualArrTime")
-        @ExcludeMissing
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
         private val actualArrTime: JsonField<OffsetDateTime>,
-        @JsonProperty("actualBlockInTime")
-        @ExcludeMissing
         private val actualBlockInTime: JsonField<OffsetDateTime>,
-        @JsonProperty("actualBlockOutTime")
-        @ExcludeMissing
         private val actualBlockOutTime: JsonField<OffsetDateTime>,
-        @JsonProperty("actualDepTime")
-        @ExcludeMissing
         private val actualDepTime: JsonField<OffsetDateTime>,
-        @JsonProperty("aircraftADSB") @ExcludeMissing private val aircraftAdsb: JsonField<String>,
-        @JsonProperty("aircraftAltId") @ExcludeMissing private val aircraftAltId: JsonField<String>,
-        @JsonProperty("aircraftEvent") @ExcludeMissing private val aircraftEvent: JsonField<String>,
-        @JsonProperty("aircraftMDS") @ExcludeMissing private val aircraftMds: JsonField<String>,
-        @JsonProperty("aircraftRemarks")
-        @ExcludeMissing
+        private val aircraftAdsb: JsonField<String>,
+        private val aircraftAltId: JsonField<String>,
+        private val aircraftEvent: JsonField<String>,
+        private val aircraftMds: JsonField<String>,
         private val aircraftRemarks: JsonField<String>,
-        @JsonProperty("alertStatus") @ExcludeMissing private val alertStatus: JsonField<Int>,
-        @JsonProperty("alertStatusCode")
-        @ExcludeMissing
+        private val alertStatus: JsonField<Int>,
         private val alertStatusCode: JsonField<String>,
-        @JsonProperty("amcMsnNum") @ExcludeMissing private val amcMsnNum: JsonField<String>,
-        @JsonProperty("amcMsnType") @ExcludeMissing private val amcMsnType: JsonField<String>,
-        @JsonProperty("arrFAA") @ExcludeMissing private val arrFaa: JsonField<String>,
-        @JsonProperty("arrIATA") @ExcludeMissing private val arrIata: JsonField<String>,
-        @JsonProperty("arrICAO") @ExcludeMissing private val arrIcao: JsonField<String>,
-        @JsonProperty("arrItinerary") @ExcludeMissing private val arrItinerary: JsonField<Int>,
-        @JsonProperty("arrPurposeCode")
-        @ExcludeMissing
+        private val amcMsnNum: JsonField<String>,
+        private val amcMsnType: JsonField<String>,
+        private val arrFaa: JsonField<String>,
+        private val arrIata: JsonField<String>,
+        private val arrIcao: JsonField<String>,
+        private val arrItinerary: JsonField<Int>,
         private val arrPurposeCode: JsonField<String>,
-        @JsonProperty("callSign") @ExcludeMissing private val callSign: JsonField<String>,
-        @JsonProperty("cargoConfig") @ExcludeMissing private val cargoConfig: JsonField<String>,
-        @JsonProperty("commanderName") @ExcludeMissing private val commanderName: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("currentState") @ExcludeMissing private val currentState: JsonField<String>,
-        @JsonProperty("delayCode") @ExcludeMissing private val delayCode: JsonField<String>,
-        @JsonProperty("depFAA") @ExcludeMissing private val depFaa: JsonField<String>,
-        @JsonProperty("depIATA") @ExcludeMissing private val depIata: JsonField<String>,
-        @JsonProperty("depICAO") @ExcludeMissing private val depIcao: JsonField<String>,
-        @JsonProperty("depItinerary") @ExcludeMissing private val depItinerary: JsonField<Int>,
-        @JsonProperty("depPurposeCode")
-        @ExcludeMissing
+        private val callSign: JsonField<String>,
+        private val cargoConfig: JsonField<String>,
+        private val commanderName: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val currentState: JsonField<String>,
+        private val delayCode: JsonField<String>,
+        private val depFaa: JsonField<String>,
+        private val depIata: JsonField<String>,
+        private val depIcao: JsonField<String>,
+        private val depItinerary: JsonField<Int>,
         private val depPurposeCode: JsonField<String>,
-        @JsonProperty("dhd") @ExcludeMissing private val dhd: JsonField<OffsetDateTime>,
-        @JsonProperty("dhdReason") @ExcludeMissing private val dhdReason: JsonField<String>,
-        @JsonProperty("estArrTime")
-        @ExcludeMissing
+        private val dhd: JsonField<OffsetDateTime>,
+        private val dhdReason: JsonField<String>,
         private val estArrTime: JsonField<OffsetDateTime>,
-        @JsonProperty("estBlockInTime")
-        @ExcludeMissing
         private val estBlockInTime: JsonField<OffsetDateTime>,
-        @JsonProperty("estBlockOutTime")
-        @ExcludeMissing
         private val estBlockOutTime: JsonField<OffsetDateTime>,
-        @JsonProperty("estDepTime")
-        @ExcludeMissing
         private val estDepTime: JsonField<OffsetDateTime>,
-        @JsonProperty("filename") @ExcludeMissing private val filename: JsonField<String>,
-        @JsonProperty("filesize") @ExcludeMissing private val filesize: JsonField<Int>,
-        @JsonProperty("flightTime") @ExcludeMissing private val flightTime: JsonField<Double>,
-        @JsonProperty("fmDeskNum") @ExcludeMissing private val fmDeskNum: JsonField<String>,
-        @JsonProperty("fmName") @ExcludeMissing private val fmName: JsonField<String>,
-        @JsonProperty("fuelReq") @ExcludeMissing private val fuelReq: JsonField<Double>,
-        @JsonProperty("gndTime") @ExcludeMissing private val gndTime: JsonField<Double>,
-        @JsonProperty("idAircraft") @ExcludeMissing private val idAircraft: JsonField<String>,
-        @JsonProperty("idMission") @ExcludeMissing private val idMission: JsonField<String>,
-        @JsonProperty("jcsPriority") @ExcludeMissing private val jcsPriority: JsonField<String>,
-        @JsonProperty("legNum") @ExcludeMissing private val legNum: JsonField<Int>,
-        @JsonProperty("lineNumber") @ExcludeMissing private val lineNumber: JsonField<Int>,
-        @JsonProperty("missionId") @ExcludeMissing private val missionId: JsonField<String>,
-        @JsonProperty("missionUpdate")
-        @ExcludeMissing
+        private val filename: JsonField<String>,
+        private val filesize: JsonField<Int>,
+        private val flightTime: JsonField<Double>,
+        private val fmDeskNum: JsonField<String>,
+        private val fmName: JsonField<String>,
+        private val fuelReq: JsonField<Double>,
+        private val gndTime: JsonField<Double>,
+        private val idAircraft: JsonField<String>,
+        private val idMission: JsonField<String>,
+        private val jcsPriority: JsonField<String>,
+        private val legNum: JsonField<Int>,
+        private val lineNumber: JsonField<Int>,
+        private val missionId: JsonField<String>,
         private val missionUpdate: JsonField<OffsetDateTime>,
-        @JsonProperty("objectiveRemarks")
-        @ExcludeMissing
         private val objectiveRemarks: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origSortieId") @ExcludeMissing private val origSortieId: JsonField<String>,
-        @JsonProperty("oxyOnCrew") @ExcludeMissing private val oxyOnCrew: JsonField<Double>,
-        @JsonProperty("oxyOnPax") @ExcludeMissing private val oxyOnPax: JsonField<Double>,
-        @JsonProperty("oxyReqCrew") @ExcludeMissing private val oxyReqCrew: JsonField<Double>,
-        @JsonProperty("oxyReqPax") @ExcludeMissing private val oxyReqPax: JsonField<Double>,
-        @JsonProperty("paperStatus")
-        @ExcludeMissing
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origSortieId: JsonField<String>,
+        private val oxyOnCrew: JsonField<Double>,
+        private val oxyOnPax: JsonField<Double>,
+        private val oxyReqCrew: JsonField<Double>,
+        private val oxyReqPax: JsonField<Double>,
         private val paperStatus: JsonField<PaperStatus>,
-        @JsonProperty("papersVersion") @ExcludeMissing private val papersVersion: JsonField<String>,
-        @JsonProperty("parkingLoc") @ExcludeMissing private val parkingLoc: JsonField<String>,
-        @JsonProperty("passengers") @ExcludeMissing private val passengers: JsonField<Int>,
-        @JsonProperty("plannedArrTime")
-        @ExcludeMissing
+        private val papersVersion: JsonField<String>,
+        private val parkingLoc: JsonField<String>,
+        private val passengers: JsonField<Int>,
         private val plannedArrTime: JsonField<OffsetDateTime>,
-        @JsonProperty("pprStatus") @ExcludeMissing private val pprStatus: JsonField<PprStatus>,
-        @JsonProperty("primarySCL") @ExcludeMissing private val primaryScl: JsonField<String>,
-        @JsonProperty("rawFileURI") @ExcludeMissing private val rawFileUri: JsonField<String>,
-        @JsonProperty("reqConfig") @ExcludeMissing private val reqConfig: JsonField<String>,
-        @JsonProperty("resultRemarks") @ExcludeMissing private val resultRemarks: JsonField<String>,
-        @JsonProperty("rvnReq") @ExcludeMissing private val rvnReq: JsonField<RvnReq>,
-        @JsonProperty("scheduleRemarks")
-        @ExcludeMissing
+        private val pprStatus: JsonField<PprStatus>,
+        private val primaryScl: JsonField<String>,
+        private val rawFileUri: JsonField<String>,
+        private val reqConfig: JsonField<String>,
+        private val resultRemarks: JsonField<String>,
+        private val rvnReq: JsonField<RvnReq>,
         private val scheduleRemarks: JsonField<String>,
-        @JsonProperty("secondarySCL") @ExcludeMissing private val secondaryScl: JsonField<String>,
-        @JsonProperty("soe") @ExcludeMissing private val soe: JsonField<String>,
-        @JsonProperty("sortieDate") @ExcludeMissing private val sortieDate: JsonField<LocalDate>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("tailNumber") @ExcludeMissing private val tailNumber: JsonField<String>,
+        private val secondaryScl: JsonField<String>,
+        private val soe: JsonField<String>,
+        private val sortieDate: JsonField<LocalDate>,
+        private val sourceDl: JsonField<String>,
+        private val tailNumber: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("plannedDepTime")
+            @ExcludeMissing
+            plannedDepTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("actualArrTime")
+            @ExcludeMissing
+            actualArrTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("actualBlockInTime")
+            @ExcludeMissing
+            actualBlockInTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("actualBlockOutTime")
+            @ExcludeMissing
+            actualBlockOutTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("actualDepTime")
+            @ExcludeMissing
+            actualDepTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("aircraftADSB")
+            @ExcludeMissing
+            aircraftAdsb: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("aircraftAltId")
+            @ExcludeMissing
+            aircraftAltId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("aircraftEvent")
+            @ExcludeMissing
+            aircraftEvent: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("aircraftMDS")
+            @ExcludeMissing
+            aircraftMds: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("aircraftRemarks")
+            @ExcludeMissing
+            aircraftRemarks: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("alertStatus")
+            @ExcludeMissing
+            alertStatus: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("alertStatusCode")
+            @ExcludeMissing
+            alertStatusCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("amcMsnNum")
+            @ExcludeMissing
+            amcMsnNum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("amcMsnType")
+            @ExcludeMissing
+            amcMsnType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("arrFAA") @ExcludeMissing arrFaa: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("arrIATA") @ExcludeMissing arrIata: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("arrICAO") @ExcludeMissing arrIcao: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("arrItinerary")
+            @ExcludeMissing
+            arrItinerary: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("arrPurposeCode")
+            @ExcludeMissing
+            arrPurposeCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("callSign")
+            @ExcludeMissing
+            callSign: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("cargoConfig")
+            @ExcludeMissing
+            cargoConfig: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("commanderName")
+            @ExcludeMissing
+            commanderName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("currentState")
+            @ExcludeMissing
+            currentState: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("delayCode")
+            @ExcludeMissing
+            delayCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("depFAA") @ExcludeMissing depFaa: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("depIATA") @ExcludeMissing depIata: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("depICAO") @ExcludeMissing depIcao: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("depItinerary")
+            @ExcludeMissing
+            depItinerary: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("depPurposeCode")
+            @ExcludeMissing
+            depPurposeCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dhd") @ExcludeMissing dhd: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("dhdReason")
+            @ExcludeMissing
+            dhdReason: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("estArrTime")
+            @ExcludeMissing
+            estArrTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("estBlockInTime")
+            @ExcludeMissing
+            estBlockInTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("estBlockOutTime")
+            @ExcludeMissing
+            estBlockOutTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("estDepTime")
+            @ExcludeMissing
+            estDepTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("filename")
+            @ExcludeMissing
+            filename: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("filesize") @ExcludeMissing filesize: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("flightTime")
+            @ExcludeMissing
+            flightTime: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fmDeskNum")
+            @ExcludeMissing
+            fmDeskNum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("fmName") @ExcludeMissing fmName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("fuelReq") @ExcludeMissing fuelReq: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("gndTime") @ExcludeMissing gndTime: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idAircraft")
+            @ExcludeMissing
+            idAircraft: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idMission")
+            @ExcludeMissing
+            idMission: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("jcsPriority")
+            @ExcludeMissing
+            jcsPriority: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("legNum") @ExcludeMissing legNum: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("lineNumber")
+            @ExcludeMissing
+            lineNumber: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("missionId")
+            @ExcludeMissing
+            missionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionUpdate")
+            @ExcludeMissing
+            missionUpdate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("objectiveRemarks")
+            @ExcludeMissing
+            objectiveRemarks: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSortieId")
+            @ExcludeMissing
+            origSortieId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("oxyOnCrew")
+            @ExcludeMissing
+            oxyOnCrew: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("oxyOnPax")
+            @ExcludeMissing
+            oxyOnPax: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("oxyReqCrew")
+            @ExcludeMissing
+            oxyReqCrew: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("oxyReqPax")
+            @ExcludeMissing
+            oxyReqPax: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("paperStatus")
+            @ExcludeMissing
+            paperStatus: JsonField<PaperStatus> = JsonMissing.of(),
+            @JsonProperty("papersVersion")
+            @ExcludeMissing
+            papersVersion: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("parkingLoc")
+            @ExcludeMissing
+            parkingLoc: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("passengers")
+            @ExcludeMissing
+            passengers: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("plannedArrTime")
+            @ExcludeMissing
+            plannedArrTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("pprStatus")
+            @ExcludeMissing
+            pprStatus: JsonField<PprStatus> = JsonMissing.of(),
+            @JsonProperty("primarySCL")
+            @ExcludeMissing
+            primaryScl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rawFileURI")
+            @ExcludeMissing
+            rawFileUri: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("reqConfig")
+            @ExcludeMissing
+            reqConfig: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("resultRemarks")
+            @ExcludeMissing
+            resultRemarks: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rvnReq") @ExcludeMissing rvnReq: JsonField<RvnReq> = JsonMissing.of(),
+            @JsonProperty("scheduleRemarks")
+            @ExcludeMissing
+            scheduleRemarks: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("secondarySCL")
+            @ExcludeMissing
+            secondaryScl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("soe") @ExcludeMissing soe: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sortieDate")
+            @ExcludeMissing
+            sortieDate: JsonField<LocalDate> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tailNumber")
+            @ExcludeMissing
+            tailNumber: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            plannedDepTime,
+            source,
+            id,
+            actualArrTime,
+            actualBlockInTime,
+            actualBlockOutTime,
+            actualDepTime,
+            aircraftAdsb,
+            aircraftAltId,
+            aircraftEvent,
+            aircraftMds,
+            aircraftRemarks,
+            alertStatus,
+            alertStatusCode,
+            amcMsnNum,
+            amcMsnType,
+            arrFaa,
+            arrIata,
+            arrIcao,
+            arrItinerary,
+            arrPurposeCode,
+            callSign,
+            cargoConfig,
+            commanderName,
+            createdAt,
+            createdBy,
+            currentState,
+            delayCode,
+            depFaa,
+            depIata,
+            depIcao,
+            depItinerary,
+            depPurposeCode,
+            dhd,
+            dhdReason,
+            estArrTime,
+            estBlockInTime,
+            estBlockOutTime,
+            estDepTime,
+            filename,
+            filesize,
+            flightTime,
+            fmDeskNum,
+            fmName,
+            fuelReq,
+            gndTime,
+            idAircraft,
+            idMission,
+            jcsPriority,
+            legNum,
+            lineNumber,
+            missionId,
+            missionUpdate,
+            objectiveRemarks,
+            origin,
+            origNetwork,
+            origSortieId,
+            oxyOnCrew,
+            oxyOnPax,
+            oxyReqCrew,
+            oxyReqPax,
+            paperStatus,
+            papersVersion,
+            parkingLoc,
+            passengers,
+            plannedArrTime,
+            pprStatus,
+            primaryScl,
+            rawFileUri,
+            reqConfig,
+            resultRemarks,
+            rvnReq,
+            scheduleRemarks,
+            secondaryScl,
+            soe,
+            sortieDate,
+            sourceDl,
+            tailNumber,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1702,6 +1961,16 @@ private constructor(
         @ExcludeMissing
         fun _tailNumber(): JsonField<String> = tailNumber
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1803,6 +2072,7 @@ private constructor(
             private var sortieDate: JsonField<LocalDate> = JsonMissing.of()
             private var sourceDl: JsonField<String> = JsonMissing.of()
             private var tailNumber: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1886,6 +2156,7 @@ private constructor(
                 sortieDate = body.sortieDate
                 sourceDl = body.sourceDl
                 tailNumber = body.tailNumber
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -3026,6 +3297,25 @@ private constructor(
              */
             fun tailNumber(tailNumber: JsonField<String>) = apply { this.tailNumber = tailNumber }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -3123,6 +3413,7 @@ private constructor(
                     sortieDate,
                     sourceDl,
                     tailNumber,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -3990,7 +4281,8 @@ private constructor(
                 soe == other.soe &&
                 sortieDate == other.sortieDate &&
                 sourceDl == other.sourceDl &&
-                tailNumber == other.tailNumber
+                tailNumber == other.tailNumber &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -4075,13 +4367,14 @@ private constructor(
                 sortieDate,
                 sourceDl,
                 tailNumber,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, plannedDepTime=$plannedDepTime, source=$source, id=$id, actualArrTime=$actualArrTime, actualBlockInTime=$actualBlockInTime, actualBlockOutTime=$actualBlockOutTime, actualDepTime=$actualDepTime, aircraftAdsb=$aircraftAdsb, aircraftAltId=$aircraftAltId, aircraftEvent=$aircraftEvent, aircraftMds=$aircraftMds, aircraftRemarks=$aircraftRemarks, alertStatus=$alertStatus, alertStatusCode=$alertStatusCode, amcMsnNum=$amcMsnNum, amcMsnType=$amcMsnType, arrFaa=$arrFaa, arrIata=$arrIata, arrIcao=$arrIcao, arrItinerary=$arrItinerary, arrPurposeCode=$arrPurposeCode, callSign=$callSign, cargoConfig=$cargoConfig, commanderName=$commanderName, createdAt=$createdAt, createdBy=$createdBy, currentState=$currentState, delayCode=$delayCode, depFaa=$depFaa, depIata=$depIata, depIcao=$depIcao, depItinerary=$depItinerary, depPurposeCode=$depPurposeCode, dhd=$dhd, dhdReason=$dhdReason, estArrTime=$estArrTime, estBlockInTime=$estBlockInTime, estBlockOutTime=$estBlockOutTime, estDepTime=$estDepTime, filename=$filename, filesize=$filesize, flightTime=$flightTime, fmDeskNum=$fmDeskNum, fmName=$fmName, fuelReq=$fuelReq, gndTime=$gndTime, idAircraft=$idAircraft, idMission=$idMission, jcsPriority=$jcsPriority, legNum=$legNum, lineNumber=$lineNumber, missionId=$missionId, missionUpdate=$missionUpdate, objectiveRemarks=$objectiveRemarks, origin=$origin, origNetwork=$origNetwork, origSortieId=$origSortieId, oxyOnCrew=$oxyOnCrew, oxyOnPax=$oxyOnPax, oxyReqCrew=$oxyReqCrew, oxyReqPax=$oxyReqPax, paperStatus=$paperStatus, papersVersion=$papersVersion, parkingLoc=$parkingLoc, passengers=$passengers, plannedArrTime=$plannedArrTime, pprStatus=$pprStatus, primaryScl=$primaryScl, rawFileUri=$rawFileUri, reqConfig=$reqConfig, resultRemarks=$resultRemarks, rvnReq=$rvnReq, scheduleRemarks=$scheduleRemarks, secondaryScl=$secondaryScl, soe=$soe, sortieDate=$sortieDate, sourceDl=$sourceDl, tailNumber=$tailNumber}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, plannedDepTime=$plannedDepTime, source=$source, id=$id, actualArrTime=$actualArrTime, actualBlockInTime=$actualBlockInTime, actualBlockOutTime=$actualBlockOutTime, actualDepTime=$actualDepTime, aircraftAdsb=$aircraftAdsb, aircraftAltId=$aircraftAltId, aircraftEvent=$aircraftEvent, aircraftMds=$aircraftMds, aircraftRemarks=$aircraftRemarks, alertStatus=$alertStatus, alertStatusCode=$alertStatusCode, amcMsnNum=$amcMsnNum, amcMsnType=$amcMsnType, arrFaa=$arrFaa, arrIata=$arrIata, arrIcao=$arrIcao, arrItinerary=$arrItinerary, arrPurposeCode=$arrPurposeCode, callSign=$callSign, cargoConfig=$cargoConfig, commanderName=$commanderName, createdAt=$createdAt, createdBy=$createdBy, currentState=$currentState, delayCode=$delayCode, depFaa=$depFaa, depIata=$depIata, depIcao=$depIcao, depItinerary=$depItinerary, depPurposeCode=$depPurposeCode, dhd=$dhd, dhdReason=$dhdReason, estArrTime=$estArrTime, estBlockInTime=$estBlockInTime, estBlockOutTime=$estBlockOutTime, estDepTime=$estDepTime, filename=$filename, filesize=$filesize, flightTime=$flightTime, fmDeskNum=$fmDeskNum, fmName=$fmName, fuelReq=$fuelReq, gndTime=$gndTime, idAircraft=$idAircraft, idMission=$idMission, jcsPriority=$jcsPriority, legNum=$legNum, lineNumber=$lineNumber, missionId=$missionId, missionUpdate=$missionUpdate, objectiveRemarks=$objectiveRemarks, origin=$origin, origNetwork=$origNetwork, origSortieId=$origSortieId, oxyOnCrew=$oxyOnCrew, oxyOnPax=$oxyOnPax, oxyReqCrew=$oxyReqCrew, oxyReqPax=$oxyReqPax, paperStatus=$paperStatus, papersVersion=$papersVersion, parkingLoc=$parkingLoc, passengers=$passengers, plannedArrTime=$plannedArrTime, pprStatus=$pprStatus, primaryScl=$primaryScl, rawFileUri=$rawFileUri, reqConfig=$reqConfig, resultRemarks=$resultRemarks, rvnReq=$rvnReq, scheduleRemarks=$scheduleRemarks, secondaryScl=$secondaryScl, soe=$soe, sortieDate=$sortieDate, sourceDl=$sourceDl, tailNumber=$tailNumber, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

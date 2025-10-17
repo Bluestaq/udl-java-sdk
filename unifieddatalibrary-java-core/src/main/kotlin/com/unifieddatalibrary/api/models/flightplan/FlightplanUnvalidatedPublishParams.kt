@@ -216,160 +216,489 @@ private constructor(
      * expected route.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("arrAirfield") @ExcludeMissing private val arrAirfield: JsonField<String>,
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
+        private val arrAirfield: JsonField<String>,
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("depAirfield") @ExcludeMissing private val depAirfield: JsonField<String>,
-        @JsonProperty("genTS") @ExcludeMissing private val genTs: JsonField<OffsetDateTime>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("aircraftMDS") @ExcludeMissing private val aircraftMds: JsonField<String>,
-        @JsonProperty("airRefuelEvents")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val depAirfield: JsonField<String>,
+        private val genTs: JsonField<OffsetDateTime>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val aircraftMds: JsonField<String>,
         private val airRefuelEvents: JsonField<List<AirRefuelEvent>>,
-        @JsonProperty("amcMissionId") @ExcludeMissing private val amcMissionId: JsonField<String>,
-        @JsonProperty("appLandingFuel")
-        @ExcludeMissing
+        private val amcMissionId: JsonField<String>,
         private val appLandingFuel: JsonField<Double>,
-        @JsonProperty("arrAlternate1") @ExcludeMissing private val arrAlternate1: JsonField<String>,
-        @JsonProperty("arrAlternate1Fuel")
-        @ExcludeMissing
+        private val arrAlternate1: JsonField<String>,
         private val arrAlternate1Fuel: JsonField<Double>,
-        @JsonProperty("arrAlternate2") @ExcludeMissing private val arrAlternate2: JsonField<String>,
-        @JsonProperty("arrAlternate2Fuel")
-        @ExcludeMissing
+        private val arrAlternate2: JsonField<String>,
         private val arrAlternate2Fuel: JsonField<Double>,
-        @JsonProperty("arrIceFuel") @ExcludeMissing private val arrIceFuel: JsonField<Double>,
-        @JsonProperty("arrRunway") @ExcludeMissing private val arrRunway: JsonField<String>,
-        @JsonProperty("atcAddresses")
-        @ExcludeMissing
+        private val arrIceFuel: JsonField<Double>,
+        private val arrRunway: JsonField<String>,
         private val atcAddresses: JsonField<List<String>>,
-        @JsonProperty("avgTempDev") @ExcludeMissing private val avgTempDev: JsonField<Double>,
-        @JsonProperty("burnedFuel") @ExcludeMissing private val burnedFuel: JsonField<Double>,
-        @JsonProperty("callSign") @ExcludeMissing private val callSign: JsonField<String>,
-        @JsonProperty("cargoRemark") @ExcludeMissing private val cargoRemark: JsonField<String>,
-        @JsonProperty("climbFuel") @ExcludeMissing private val climbFuel: JsonField<Double>,
-        @JsonProperty("climbTime") @ExcludeMissing private val climbTime: JsonField<String>,
-        @JsonProperty("contingencyFuel")
-        @ExcludeMissing
+        private val avgTempDev: JsonField<Double>,
+        private val burnedFuel: JsonField<Double>,
+        private val callSign: JsonField<String>,
+        private val cargoRemark: JsonField<String>,
+        private val climbFuel: JsonField<Double>,
+        private val climbTime: JsonField<String>,
         private val contingencyFuel: JsonField<Double>,
-        @JsonProperty("countryCodes")
-        @ExcludeMissing
         private val countryCodes: JsonField<List<String>>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("depAlternate") @ExcludeMissing private val depAlternate: JsonField<String>,
-        @JsonProperty("depressFuel") @ExcludeMissing private val depressFuel: JsonField<Double>,
-        @JsonProperty("depRunway") @ExcludeMissing private val depRunway: JsonField<String>,
-        @JsonProperty("dragIndex") @ExcludeMissing private val dragIndex: JsonField<Double>,
-        @JsonProperty("earlyDescentFuel")
-        @ExcludeMissing
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val depAlternate: JsonField<String>,
+        private val depressFuel: JsonField<Double>,
+        private val depRunway: JsonField<String>,
+        private val dragIndex: JsonField<Double>,
         private val earlyDescentFuel: JsonField<Double>,
-        @JsonProperty("enduranceTime") @ExcludeMissing private val enduranceTime: JsonField<String>,
-        @JsonProperty("enrouteFuel") @ExcludeMissing private val enrouteFuel: JsonField<Double>,
-        @JsonProperty("enrouteTime") @ExcludeMissing private val enrouteTime: JsonField<String>,
-        @JsonProperty("equipment") @ExcludeMissing private val equipment: JsonField<String>,
-        @JsonProperty("estDepTime")
-        @ExcludeMissing
+        private val enduranceTime: JsonField<String>,
+        private val enrouteFuel: JsonField<Double>,
+        private val enrouteTime: JsonField<String>,
+        private val equipment: JsonField<String>,
         private val estDepTime: JsonField<OffsetDateTime>,
-        @JsonProperty("etopsAirfields")
-        @ExcludeMissing
         private val etopsAirfields: JsonField<List<String>>,
-        @JsonProperty("etopsAltAirfields")
-        @ExcludeMissing
         private val etopsAltAirfields: JsonField<List<String>>,
-        @JsonProperty("etopsRating") @ExcludeMissing private val etopsRating: JsonField<String>,
-        @JsonProperty("etopsValWindow")
-        @ExcludeMissing
+        private val etopsRating: JsonField<String>,
         private val etopsValWindow: JsonField<String>,
-        @JsonProperty("externalId") @ExcludeMissing private val externalId: JsonField<String>,
-        @JsonProperty("flightPlanMessages")
-        @ExcludeMissing
+        private val externalId: JsonField<String>,
         private val flightPlanMessages: JsonField<List<FlightPlanMessage>>,
-        @JsonProperty("flightPlanPointGroups")
-        @ExcludeMissing
         private val flightPlanPointGroups: JsonField<List<FlightPlanPointGroup>>,
-        @JsonProperty("flightPlanWaypoints")
-        @ExcludeMissing
         private val flightPlanWaypoints: JsonField<List<FlightPlanWaypoint>>,
-        @JsonProperty("flightRules") @ExcludeMissing private val flightRules: JsonField<String>,
-        @JsonProperty("flightType") @ExcludeMissing private val flightType: JsonField<String>,
-        @JsonProperty("fuelDegrade") @ExcludeMissing private val fuelDegrade: JsonField<Double>,
-        @JsonProperty("gpsRAIM") @ExcludeMissing private val gpsRaim: JsonField<String>,
-        @JsonProperty("holdDownFuel") @ExcludeMissing private val holdDownFuel: JsonField<Double>,
-        @JsonProperty("holdFuel") @ExcludeMissing private val holdFuel: JsonField<Double>,
-        @JsonProperty("holdTime") @ExcludeMissing private val holdTime: JsonField<String>,
-        @JsonProperty("idAircraft") @ExcludeMissing private val idAircraft: JsonField<String>,
-        @JsonProperty("idArrAirfield") @ExcludeMissing private val idArrAirfield: JsonField<String>,
-        @JsonProperty("idDepAirfield") @ExcludeMissing private val idDepAirfield: JsonField<String>,
-        @JsonProperty("identExtraFuel")
-        @ExcludeMissing
+        private val flightRules: JsonField<String>,
+        private val flightType: JsonField<String>,
+        private val fuelDegrade: JsonField<Double>,
+        private val gpsRaim: JsonField<String>,
+        private val holdDownFuel: JsonField<Double>,
+        private val holdFuel: JsonField<Double>,
+        private val holdTime: JsonField<String>,
+        private val idAircraft: JsonField<String>,
+        private val idArrAirfield: JsonField<String>,
+        private val idDepAirfield: JsonField<String>,
         private val identExtraFuel: JsonField<Double>,
-        @JsonProperty("idSortie") @ExcludeMissing private val idSortie: JsonField<String>,
-        @JsonProperty("initialCruiseSpeed")
-        @ExcludeMissing
+        private val idSortie: JsonField<String>,
         private val initialCruiseSpeed: JsonField<String>,
-        @JsonProperty("initialFlightLevel")
-        @ExcludeMissing
         private val initialFlightLevel: JsonField<String>,
-        @JsonProperty("landingFuel") @ExcludeMissing private val landingFuel: JsonField<Double>,
-        @JsonProperty("legNum") @ExcludeMissing private val legNum: JsonField<Int>,
-        @JsonProperty("minDivertFuel") @ExcludeMissing private val minDivertFuel: JsonField<Double>,
-        @JsonProperty("msnIndex") @ExcludeMissing private val msnIndex: JsonField<Double>,
-        @JsonProperty("notes") @ExcludeMissing private val notes: JsonField<String>,
-        @JsonProperty("numAircraft") @ExcludeMissing private val numAircraft: JsonField<Int>,
-        @JsonProperty("opConditionFuel")
-        @ExcludeMissing
+        private val landingFuel: JsonField<Double>,
+        private val legNum: JsonField<Int>,
+        private val minDivertFuel: JsonField<Double>,
+        private val msnIndex: JsonField<Double>,
+        private val notes: JsonField<String>,
+        private val numAircraft: JsonField<Int>,
         private val opConditionFuel: JsonField<Double>,
-        @JsonProperty("opWeight") @ExcludeMissing private val opWeight: JsonField<Double>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("originator") @ExcludeMissing private val originator: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("plannerRemark") @ExcludeMissing private val plannerRemark: JsonField<String>,
-        @JsonProperty("rampFuel") @ExcludeMissing private val rampFuel: JsonField<Double>,
-        @JsonProperty("remAlternate1Fuel")
-        @ExcludeMissing
+        private val opWeight: JsonField<Double>,
+        private val origin: JsonField<String>,
+        private val originator: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val plannerRemark: JsonField<String>,
+        private val rampFuel: JsonField<Double>,
         private val remAlternate1Fuel: JsonField<Double>,
-        @JsonProperty("remAlternate2Fuel")
-        @ExcludeMissing
         private val remAlternate2Fuel: JsonField<Double>,
-        @JsonProperty("reserveFuel") @ExcludeMissing private val reserveFuel: JsonField<Double>,
-        @JsonProperty("routeString") @ExcludeMissing private val routeString: JsonField<String>,
-        @JsonProperty("sid") @ExcludeMissing private val sid: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("star") @ExcludeMissing private val star: JsonField<String>,
-        @JsonProperty("status") @ExcludeMissing private val status: JsonField<String>,
-        @JsonProperty("tailNumber") @ExcludeMissing private val tailNumber: JsonField<String>,
-        @JsonProperty("takeoffFuel") @ExcludeMissing private val takeoffFuel: JsonField<Double>,
-        @JsonProperty("taxiFuel") @ExcludeMissing private val taxiFuel: JsonField<Double>,
-        @JsonProperty("thunderAvoidFuel")
-        @ExcludeMissing
+        private val reserveFuel: JsonField<Double>,
+        private val routeString: JsonField<String>,
+        private val sid: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val star: JsonField<String>,
+        private val status: JsonField<String>,
+        private val tailNumber: JsonField<String>,
+        private val takeoffFuel: JsonField<Double>,
+        private val taxiFuel: JsonField<Double>,
         private val thunderAvoidFuel: JsonField<Double>,
-        @JsonProperty("tocFuel") @ExcludeMissing private val tocFuel: JsonField<Double>,
-        @JsonProperty("tocIceFuel") @ExcludeMissing private val tocIceFuel: JsonField<Double>,
-        @JsonProperty("todFuel") @ExcludeMissing private val todFuel: JsonField<Double>,
-        @JsonProperty("todIceFuel") @ExcludeMissing private val todIceFuel: JsonField<Double>,
-        @JsonProperty("unidentExtraFuel")
-        @ExcludeMissing
+        private val tocFuel: JsonField<Double>,
+        private val tocIceFuel: JsonField<Double>,
+        private val todFuel: JsonField<Double>,
+        private val todIceFuel: JsonField<Double>,
         private val unidentExtraFuel: JsonField<Double>,
-        @JsonProperty("unusableFuel") @ExcludeMissing private val unusableFuel: JsonField<Double>,
-        @JsonProperty("updatedAt") @ExcludeMissing private val updatedAt: JsonField<OffsetDateTime>,
-        @JsonProperty("updatedBy") @ExcludeMissing private val updatedBy: JsonField<String>,
-        @JsonProperty("wakeTurbCat") @ExcludeMissing private val wakeTurbCat: JsonField<String>,
-        @JsonProperty("windFac1") @ExcludeMissing private val windFac1: JsonField<Double>,
-        @JsonProperty("windFac2") @ExcludeMissing private val windFac2: JsonField<Double>,
-        @JsonProperty("windFacAvg") @ExcludeMissing private val windFacAvg: JsonField<Double>,
-        @JsonProperty("wxValidEnd")
-        @ExcludeMissing
+        private val unusableFuel: JsonField<Double>,
+        private val updatedAt: JsonField<OffsetDateTime>,
+        private val updatedBy: JsonField<String>,
+        private val wakeTurbCat: JsonField<String>,
+        private val windFac1: JsonField<Double>,
+        private val windFac2: JsonField<Double>,
+        private val windFacAvg: JsonField<Double>,
         private val wxValidEnd: JsonField<OffsetDateTime>,
-        @JsonProperty("wxValidStart")
-        @ExcludeMissing
         private val wxValidStart: JsonField<OffsetDateTime>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("arrAirfield")
+            @ExcludeMissing
+            arrAirfield: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("depAirfield")
+            @ExcludeMissing
+            depAirfield: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("genTS")
+            @ExcludeMissing
+            genTs: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("aircraftMDS")
+            @ExcludeMissing
+            aircraftMds: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("airRefuelEvents")
+            @ExcludeMissing
+            airRefuelEvents: JsonField<List<AirRefuelEvent>> = JsonMissing.of(),
+            @JsonProperty("amcMissionId")
+            @ExcludeMissing
+            amcMissionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("appLandingFuel")
+            @ExcludeMissing
+            appLandingFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("arrAlternate1")
+            @ExcludeMissing
+            arrAlternate1: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("arrAlternate1Fuel")
+            @ExcludeMissing
+            arrAlternate1Fuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("arrAlternate2")
+            @ExcludeMissing
+            arrAlternate2: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("arrAlternate2Fuel")
+            @ExcludeMissing
+            arrAlternate2Fuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("arrIceFuel")
+            @ExcludeMissing
+            arrIceFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("arrRunway")
+            @ExcludeMissing
+            arrRunway: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("atcAddresses")
+            @ExcludeMissing
+            atcAddresses: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("avgTempDev")
+            @ExcludeMissing
+            avgTempDev: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("burnedFuel")
+            @ExcludeMissing
+            burnedFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("callSign")
+            @ExcludeMissing
+            callSign: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("cargoRemark")
+            @ExcludeMissing
+            cargoRemark: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("climbFuel")
+            @ExcludeMissing
+            climbFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("climbTime")
+            @ExcludeMissing
+            climbTime: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("contingencyFuel")
+            @ExcludeMissing
+            contingencyFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("countryCodes")
+            @ExcludeMissing
+            countryCodes: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("depAlternate")
+            @ExcludeMissing
+            depAlternate: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("depressFuel")
+            @ExcludeMissing
+            depressFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("depRunway")
+            @ExcludeMissing
+            depRunway: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dragIndex")
+            @ExcludeMissing
+            dragIndex: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("earlyDescentFuel")
+            @ExcludeMissing
+            earlyDescentFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("enduranceTime")
+            @ExcludeMissing
+            enduranceTime: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("enrouteFuel")
+            @ExcludeMissing
+            enrouteFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("enrouteTime")
+            @ExcludeMissing
+            enrouteTime: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("equipment")
+            @ExcludeMissing
+            equipment: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("estDepTime")
+            @ExcludeMissing
+            estDepTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("etopsAirfields")
+            @ExcludeMissing
+            etopsAirfields: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("etopsAltAirfields")
+            @ExcludeMissing
+            etopsAltAirfields: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("etopsRating")
+            @ExcludeMissing
+            etopsRating: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("etopsValWindow")
+            @ExcludeMissing
+            etopsValWindow: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("externalId")
+            @ExcludeMissing
+            externalId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("flightPlanMessages")
+            @ExcludeMissing
+            flightPlanMessages: JsonField<List<FlightPlanMessage>> = JsonMissing.of(),
+            @JsonProperty("flightPlanPointGroups")
+            @ExcludeMissing
+            flightPlanPointGroups: JsonField<List<FlightPlanPointGroup>> = JsonMissing.of(),
+            @JsonProperty("flightPlanWaypoints")
+            @ExcludeMissing
+            flightPlanWaypoints: JsonField<List<FlightPlanWaypoint>> = JsonMissing.of(),
+            @JsonProperty("flightRules")
+            @ExcludeMissing
+            flightRules: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("flightType")
+            @ExcludeMissing
+            flightType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("fuelDegrade")
+            @ExcludeMissing
+            fuelDegrade: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("gpsRAIM") @ExcludeMissing gpsRaim: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("holdDownFuel")
+            @ExcludeMissing
+            holdDownFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("holdFuel")
+            @ExcludeMissing
+            holdFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("holdTime")
+            @ExcludeMissing
+            holdTime: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idAircraft")
+            @ExcludeMissing
+            idAircraft: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idArrAirfield")
+            @ExcludeMissing
+            idArrAirfield: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idDepAirfield")
+            @ExcludeMissing
+            idDepAirfield: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("identExtraFuel")
+            @ExcludeMissing
+            identExtraFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idSortie")
+            @ExcludeMissing
+            idSortie: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("initialCruiseSpeed")
+            @ExcludeMissing
+            initialCruiseSpeed: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("initialFlightLevel")
+            @ExcludeMissing
+            initialFlightLevel: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("landingFuel")
+            @ExcludeMissing
+            landingFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("legNum") @ExcludeMissing legNum: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("minDivertFuel")
+            @ExcludeMissing
+            minDivertFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("msnIndex")
+            @ExcludeMissing
+            msnIndex: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("notes") @ExcludeMissing notes: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("numAircraft")
+            @ExcludeMissing
+            numAircraft: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("opConditionFuel")
+            @ExcludeMissing
+            opConditionFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("opWeight")
+            @ExcludeMissing
+            opWeight: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("originator")
+            @ExcludeMissing
+            originator: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("plannerRemark")
+            @ExcludeMissing
+            plannerRemark: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rampFuel")
+            @ExcludeMissing
+            rampFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("remAlternate1Fuel")
+            @ExcludeMissing
+            remAlternate1Fuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("remAlternate2Fuel")
+            @ExcludeMissing
+            remAlternate2Fuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("reserveFuel")
+            @ExcludeMissing
+            reserveFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("routeString")
+            @ExcludeMissing
+            routeString: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sid") @ExcludeMissing sid: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("star") @ExcludeMissing star: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("status") @ExcludeMissing status: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tailNumber")
+            @ExcludeMissing
+            tailNumber: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("takeoffFuel")
+            @ExcludeMissing
+            takeoffFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("taxiFuel")
+            @ExcludeMissing
+            taxiFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("thunderAvoidFuel")
+            @ExcludeMissing
+            thunderAvoidFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("tocFuel") @ExcludeMissing tocFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("tocIceFuel")
+            @ExcludeMissing
+            tocIceFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("todFuel") @ExcludeMissing todFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("todIceFuel")
+            @ExcludeMissing
+            todIceFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("unidentExtraFuel")
+            @ExcludeMissing
+            unidentExtraFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("unusableFuel")
+            @ExcludeMissing
+            unusableFuel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("updatedAt")
+            @ExcludeMissing
+            updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("updatedBy")
+            @ExcludeMissing
+            updatedBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("wakeTurbCat")
+            @ExcludeMissing
+            wakeTurbCat: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("windFac1")
+            @ExcludeMissing
+            windFac1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("windFac2")
+            @ExcludeMissing
+            windFac2: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("windFacAvg")
+            @ExcludeMissing
+            windFacAvg: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("wxValidEnd")
+            @ExcludeMissing
+            wxValidEnd: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("wxValidStart")
+            @ExcludeMissing
+            wxValidStart: JsonField<OffsetDateTime> = JsonMissing.of(),
+        ) : this(
+            arrAirfield,
+            classificationMarking,
+            dataMode,
+            depAirfield,
+            genTs,
+            source,
+            id,
+            aircraftMds,
+            airRefuelEvents,
+            amcMissionId,
+            appLandingFuel,
+            arrAlternate1,
+            arrAlternate1Fuel,
+            arrAlternate2,
+            arrAlternate2Fuel,
+            arrIceFuel,
+            arrRunway,
+            atcAddresses,
+            avgTempDev,
+            burnedFuel,
+            callSign,
+            cargoRemark,
+            climbFuel,
+            climbTime,
+            contingencyFuel,
+            countryCodes,
+            createdAt,
+            createdBy,
+            depAlternate,
+            depressFuel,
+            depRunway,
+            dragIndex,
+            earlyDescentFuel,
+            enduranceTime,
+            enrouteFuel,
+            enrouteTime,
+            equipment,
+            estDepTime,
+            etopsAirfields,
+            etopsAltAirfields,
+            etopsRating,
+            etopsValWindow,
+            externalId,
+            flightPlanMessages,
+            flightPlanPointGroups,
+            flightPlanWaypoints,
+            flightRules,
+            flightType,
+            fuelDegrade,
+            gpsRaim,
+            holdDownFuel,
+            holdFuel,
+            holdTime,
+            idAircraft,
+            idArrAirfield,
+            idDepAirfield,
+            identExtraFuel,
+            idSortie,
+            initialCruiseSpeed,
+            initialFlightLevel,
+            landingFuel,
+            legNum,
+            minDivertFuel,
+            msnIndex,
+            notes,
+            numAircraft,
+            opConditionFuel,
+            opWeight,
+            origin,
+            originator,
+            origNetwork,
+            plannerRemark,
+            rampFuel,
+            remAlternate1Fuel,
+            remAlternate2Fuel,
+            reserveFuel,
+            routeString,
+            sid,
+            sourceDl,
+            star,
+            status,
+            tailNumber,
+            takeoffFuel,
+            taxiFuel,
+            thunderAvoidFuel,
+            tocFuel,
+            tocIceFuel,
+            todFuel,
+            todIceFuel,
+            unidentExtraFuel,
+            unusableFuel,
+            updatedAt,
+            updatedBy,
+            wakeTurbCat,
+            windFac1,
+            windFac2,
+            windFacAvg,
+            wxValidEnd,
+            wxValidStart,
+            mutableMapOf(),
+        )
 
         /**
          * The airfield identifier of the arrival location, International Civil Aviation
@@ -2102,6 +2431,16 @@ private constructor(
         @ExcludeMissing
         fun _wxValidStart(): JsonField<OffsetDateTime> = wxValidStart
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -2224,6 +2563,7 @@ private constructor(
             private var windFacAvg: JsonField<Double> = JsonMissing.of()
             private var wxValidEnd: JsonField<OffsetDateTime> = JsonMissing.of()
             private var wxValidStart: JsonField<OffsetDateTime> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -2326,6 +2666,7 @@ private constructor(
                 windFacAvg = body.windFacAvg
                 wxValidEnd = body.wxValidEnd
                 wxValidStart = body.wxValidStart
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /**
@@ -3893,6 +4234,25 @@ private constructor(
                 this.wxValidStart = wxValidStart
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -4011,6 +4371,7 @@ private constructor(
                     windFacAvg,
                     wxValidEnd,
                     wxValidStart,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -9308,7 +9669,8 @@ private constructor(
                 windFac2 == other.windFac2 &&
                 windFacAvg == other.windFacAvg &&
                 wxValidEnd == other.wxValidEnd &&
-                wxValidStart == other.wxValidStart
+                wxValidStart == other.wxValidStart &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -9412,13 +9774,14 @@ private constructor(
                 windFacAvg,
                 wxValidEnd,
                 wxValidStart,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{arrAirfield=$arrAirfield, classificationMarking=$classificationMarking, dataMode=$dataMode, depAirfield=$depAirfield, genTs=$genTs, source=$source, id=$id, aircraftMds=$aircraftMds, airRefuelEvents=$airRefuelEvents, amcMissionId=$amcMissionId, appLandingFuel=$appLandingFuel, arrAlternate1=$arrAlternate1, arrAlternate1Fuel=$arrAlternate1Fuel, arrAlternate2=$arrAlternate2, arrAlternate2Fuel=$arrAlternate2Fuel, arrIceFuel=$arrIceFuel, arrRunway=$arrRunway, atcAddresses=$atcAddresses, avgTempDev=$avgTempDev, burnedFuel=$burnedFuel, callSign=$callSign, cargoRemark=$cargoRemark, climbFuel=$climbFuel, climbTime=$climbTime, contingencyFuel=$contingencyFuel, countryCodes=$countryCodes, createdAt=$createdAt, createdBy=$createdBy, depAlternate=$depAlternate, depressFuel=$depressFuel, depRunway=$depRunway, dragIndex=$dragIndex, earlyDescentFuel=$earlyDescentFuel, enduranceTime=$enduranceTime, enrouteFuel=$enrouteFuel, enrouteTime=$enrouteTime, equipment=$equipment, estDepTime=$estDepTime, etopsAirfields=$etopsAirfields, etopsAltAirfields=$etopsAltAirfields, etopsRating=$etopsRating, etopsValWindow=$etopsValWindow, externalId=$externalId, flightPlanMessages=$flightPlanMessages, flightPlanPointGroups=$flightPlanPointGroups, flightPlanWaypoints=$flightPlanWaypoints, flightRules=$flightRules, flightType=$flightType, fuelDegrade=$fuelDegrade, gpsRaim=$gpsRaim, holdDownFuel=$holdDownFuel, holdFuel=$holdFuel, holdTime=$holdTime, idAircraft=$idAircraft, idArrAirfield=$idArrAirfield, idDepAirfield=$idDepAirfield, identExtraFuel=$identExtraFuel, idSortie=$idSortie, initialCruiseSpeed=$initialCruiseSpeed, initialFlightLevel=$initialFlightLevel, landingFuel=$landingFuel, legNum=$legNum, minDivertFuel=$minDivertFuel, msnIndex=$msnIndex, notes=$notes, numAircraft=$numAircraft, opConditionFuel=$opConditionFuel, opWeight=$opWeight, origin=$origin, originator=$originator, origNetwork=$origNetwork, plannerRemark=$plannerRemark, rampFuel=$rampFuel, remAlternate1Fuel=$remAlternate1Fuel, remAlternate2Fuel=$remAlternate2Fuel, reserveFuel=$reserveFuel, routeString=$routeString, sid=$sid, sourceDl=$sourceDl, star=$star, status=$status, tailNumber=$tailNumber, takeoffFuel=$takeoffFuel, taxiFuel=$taxiFuel, thunderAvoidFuel=$thunderAvoidFuel, tocFuel=$tocFuel, tocIceFuel=$tocIceFuel, todFuel=$todFuel, todIceFuel=$todIceFuel, unidentExtraFuel=$unidentExtraFuel, unusableFuel=$unusableFuel, updatedAt=$updatedAt, updatedBy=$updatedBy, wakeTurbCat=$wakeTurbCat, windFac1=$windFac1, windFac2=$windFac2, windFacAvg=$windFacAvg, wxValidEnd=$wxValidEnd, wxValidStart=$wxValidStart}"
+            "Body{arrAirfield=$arrAirfield, classificationMarking=$classificationMarking, dataMode=$dataMode, depAirfield=$depAirfield, genTs=$genTs, source=$source, id=$id, aircraftMds=$aircraftMds, airRefuelEvents=$airRefuelEvents, amcMissionId=$amcMissionId, appLandingFuel=$appLandingFuel, arrAlternate1=$arrAlternate1, arrAlternate1Fuel=$arrAlternate1Fuel, arrAlternate2=$arrAlternate2, arrAlternate2Fuel=$arrAlternate2Fuel, arrIceFuel=$arrIceFuel, arrRunway=$arrRunway, atcAddresses=$atcAddresses, avgTempDev=$avgTempDev, burnedFuel=$burnedFuel, callSign=$callSign, cargoRemark=$cargoRemark, climbFuel=$climbFuel, climbTime=$climbTime, contingencyFuel=$contingencyFuel, countryCodes=$countryCodes, createdAt=$createdAt, createdBy=$createdBy, depAlternate=$depAlternate, depressFuel=$depressFuel, depRunway=$depRunway, dragIndex=$dragIndex, earlyDescentFuel=$earlyDescentFuel, enduranceTime=$enduranceTime, enrouteFuel=$enrouteFuel, enrouteTime=$enrouteTime, equipment=$equipment, estDepTime=$estDepTime, etopsAirfields=$etopsAirfields, etopsAltAirfields=$etopsAltAirfields, etopsRating=$etopsRating, etopsValWindow=$etopsValWindow, externalId=$externalId, flightPlanMessages=$flightPlanMessages, flightPlanPointGroups=$flightPlanPointGroups, flightPlanWaypoints=$flightPlanWaypoints, flightRules=$flightRules, flightType=$flightType, fuelDegrade=$fuelDegrade, gpsRaim=$gpsRaim, holdDownFuel=$holdDownFuel, holdFuel=$holdFuel, holdTime=$holdTime, idAircraft=$idAircraft, idArrAirfield=$idArrAirfield, idDepAirfield=$idDepAirfield, identExtraFuel=$identExtraFuel, idSortie=$idSortie, initialCruiseSpeed=$initialCruiseSpeed, initialFlightLevel=$initialFlightLevel, landingFuel=$landingFuel, legNum=$legNum, minDivertFuel=$minDivertFuel, msnIndex=$msnIndex, notes=$notes, numAircraft=$numAircraft, opConditionFuel=$opConditionFuel, opWeight=$opWeight, origin=$origin, originator=$originator, origNetwork=$origNetwork, plannerRemark=$plannerRemark, rampFuel=$rampFuel, remAlternate1Fuel=$remAlternate1Fuel, remAlternate2Fuel=$remAlternate2Fuel, reserveFuel=$reserveFuel, routeString=$routeString, sid=$sid, sourceDl=$sourceDl, star=$star, status=$status, tailNumber=$tailNumber, takeoffFuel=$takeoffFuel, taxiFuel=$taxiFuel, thunderAvoidFuel=$thunderAvoidFuel, tocFuel=$tocFuel, tocIceFuel=$tocIceFuel, todFuel=$todFuel, todIceFuel=$todIceFuel, unidentExtraFuel=$unidentExtraFuel, unusableFuel=$unusableFuel, updatedAt=$updatedAt, updatedBy=$updatedBy, wakeTurbCat=$wakeTurbCat, windFac1=$windFac1, windFac2=$windFac2, windFacAvg=$windFacAvg, wxValidEnd=$wxValidEnd, wxValidStart=$wxValidStart, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

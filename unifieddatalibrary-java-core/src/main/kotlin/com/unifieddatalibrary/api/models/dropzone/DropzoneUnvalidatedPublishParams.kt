@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.dropzone
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -15,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -211,62 +215,163 @@ private constructor(
      * survey date, and remarks.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("lat") @ExcludeMissing private val lat: JsonField<Double>,
-        @JsonProperty("lon") @ExcludeMissing private val lon: JsonField<Double>,
-        @JsonProperty("name") @ExcludeMissing private val name: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("altCountryCode")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val lat: JsonField<Double>,
+        private val lon: JsonField<Double>,
+        private val name: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
         private val altCountryCode: JsonField<String>,
-        @JsonProperty("altCountryName")
-        @ExcludeMissing
         private val altCountryName: JsonField<String>,
-        @JsonProperty("approvalDate")
-        @ExcludeMissing
         private val approvalDate: JsonField<OffsetDateTime>,
-        @JsonProperty("code") @ExcludeMissing private val code: JsonField<String>,
-        @JsonProperty("countryCode") @ExcludeMissing private val countryCode: JsonField<String>,
-        @JsonProperty("countryName") @ExcludeMissing private val countryName: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("expirationDate")
-        @ExcludeMissing
+        private val code: JsonField<String>,
+        private val countryCode: JsonField<String>,
+        private val countryName: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
         private val expirationDate: JsonField<OffsetDateTime>,
-        @JsonProperty("extIdentifier") @ExcludeMissing private val extIdentifier: JsonField<String>,
-        @JsonProperty("idSite") @ExcludeMissing private val idSite: JsonField<String>,
-        @JsonProperty("lastUpdate")
-        @ExcludeMissing
+        private val extIdentifier: JsonField<String>,
+        private val idSite: JsonField<String>,
         private val lastUpdate: JsonField<OffsetDateTime>,
-        @JsonProperty("length") @ExcludeMissing private val length: JsonField<Double>,
-        @JsonProperty("majcom") @ExcludeMissing private val majcom: JsonField<String>,
-        @JsonProperty("nearestLoc") @ExcludeMissing private val nearestLoc: JsonField<String>,
-        @JsonProperty("operationalApprovalDate")
-        @ExcludeMissing
+        private val length: JsonField<Double>,
+        private val majcom: JsonField<String>,
+        private val nearestLoc: JsonField<String>,
         private val operationalApprovalDate: JsonField<OffsetDateTime>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("pointName") @ExcludeMissing private val pointName: JsonField<String>,
-        @JsonProperty("radius") @ExcludeMissing private val radius: JsonField<Double>,
-        @JsonProperty("recertDate")
-        @ExcludeMissing
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val pointName: JsonField<String>,
+        private val radius: JsonField<Double>,
         private val recertDate: JsonField<OffsetDateTime>,
-        @JsonProperty("remark") @ExcludeMissing private val remark: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("stateAbbr") @ExcludeMissing private val stateAbbr: JsonField<String>,
-        @JsonProperty("stateName") @ExcludeMissing private val stateName: JsonField<String>,
-        @JsonProperty("surveyDate")
-        @ExcludeMissing
+        private val remark: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val stateAbbr: JsonField<String>,
+        private val stateName: JsonField<String>,
         private val surveyDate: JsonField<OffsetDateTime>,
-        @JsonProperty("width") @ExcludeMissing private val width: JsonField<Double>,
-        @JsonProperty("zarId") @ExcludeMissing private val zarId: JsonField<String>,
+        private val width: JsonField<Double>,
+        private val zarId: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("name") @ExcludeMissing name: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("altCountryCode")
+            @ExcludeMissing
+            altCountryCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("altCountryName")
+            @ExcludeMissing
+            altCountryName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("approvalDate")
+            @ExcludeMissing
+            approvalDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("code") @ExcludeMissing code: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("countryCode")
+            @ExcludeMissing
+            countryCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("countryName")
+            @ExcludeMissing
+            countryName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("expirationDate")
+            @ExcludeMissing
+            expirationDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("extIdentifier")
+            @ExcludeMissing
+            extIdentifier: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSite") @ExcludeMissing idSite: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lastUpdate")
+            @ExcludeMissing
+            lastUpdate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("length") @ExcludeMissing length: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("majcom") @ExcludeMissing majcom: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("nearestLoc")
+            @ExcludeMissing
+            nearestLoc: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("operationalApprovalDate")
+            @ExcludeMissing
+            operationalApprovalDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("pointName")
+            @ExcludeMissing
+            pointName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("radius") @ExcludeMissing radius: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("recertDate")
+            @ExcludeMissing
+            recertDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("remark") @ExcludeMissing remark: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("stateAbbr")
+            @ExcludeMissing
+            stateAbbr: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("stateName")
+            @ExcludeMissing
+            stateName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("surveyDate")
+            @ExcludeMissing
+            surveyDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("width") @ExcludeMissing width: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("zarId") @ExcludeMissing zarId: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            lat,
+            lon,
+            name,
+            source,
+            id,
+            altCountryCode,
+            altCountryName,
+            approvalDate,
+            code,
+            countryCode,
+            countryName,
+            createdAt,
+            createdBy,
+            expirationDate,
+            extIdentifier,
+            idSite,
+            lastUpdate,
+            length,
+            majcom,
+            nearestLoc,
+            operationalApprovalDate,
+            origin,
+            origNetwork,
+            pointName,
+            radius,
+            recertDate,
+            remark,
+            sourceDl,
+            stateAbbr,
+            stateName,
+            surveyDate,
+            width,
+            zarId,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -871,6 +976,16 @@ private constructor(
          */
         @JsonProperty("zarId") @ExcludeMissing fun _zarId(): JsonField<String> = zarId
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -929,6 +1044,7 @@ private constructor(
             private var surveyDate: JsonField<OffsetDateTime> = JsonMissing.of()
             private var width: JsonField<Double> = JsonMissing.of()
             private var zarId: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -967,6 +1083,7 @@ private constructor(
                 surveyDate = body.surveyDate
                 width = body.width
                 zarId = body.zarId
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1491,6 +1608,25 @@ private constructor(
              */
             fun zarId(zarId: JsonField<String>) = apply { this.zarId = zarId }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1545,6 +1681,7 @@ private constructor(
                     surveyDate,
                     width,
                     zarId,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1841,7 +1978,8 @@ private constructor(
                 stateName == other.stateName &&
                 surveyDate == other.surveyDate &&
                 width == other.width &&
-                zarId == other.zarId
+                zarId == other.zarId &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1881,13 +2019,14 @@ private constructor(
                 surveyDate,
                 width,
                 zarId,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, lat=$lat, lon=$lon, name=$name, source=$source, id=$id, altCountryCode=$altCountryCode, altCountryName=$altCountryName, approvalDate=$approvalDate, code=$code, countryCode=$countryCode, countryName=$countryName, createdAt=$createdAt, createdBy=$createdBy, expirationDate=$expirationDate, extIdentifier=$extIdentifier, idSite=$idSite, lastUpdate=$lastUpdate, length=$length, majcom=$majcom, nearestLoc=$nearestLoc, operationalApprovalDate=$operationalApprovalDate, origin=$origin, origNetwork=$origNetwork, pointName=$pointName, radius=$radius, recertDate=$recertDate, remark=$remark, sourceDl=$sourceDl, stateAbbr=$stateAbbr, stateName=$stateName, surveyDate=$surveyDate, width=$width, zarId=$zarId}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, lat=$lat, lon=$lon, name=$name, source=$source, id=$id, altCountryCode=$altCountryCode, altCountryName=$altCountryName, approvalDate=$approvalDate, code=$code, countryCode=$countryCode, countryName=$countryName, createdAt=$createdAt, createdBy=$createdBy, expirationDate=$expirationDate, extIdentifier=$extIdentifier, idSite=$idSite, lastUpdate=$lastUpdate, length=$length, majcom=$majcom, nearestLoc=$nearestLoc, operationalApprovalDate=$operationalApprovalDate, origin=$origin, origNetwork=$origNetwork, pointName=$pointName, radius=$radius, recertDate=$recertDate, remark=$remark, sourceDl=$sourceDl, stateAbbr=$stateAbbr, stateName=$stateName, surveyDate=$surveyDate, width=$width, zarId=$zarId, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

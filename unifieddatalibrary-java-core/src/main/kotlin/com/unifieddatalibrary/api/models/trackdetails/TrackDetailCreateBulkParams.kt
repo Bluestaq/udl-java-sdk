@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.trackdetails
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -212,195 +216,656 @@ private constructor(
      * regarding the identity/type of the target object and other amplifying object data, if known.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("lat") @ExcludeMissing private val lat: JsonField<Double>,
-        @JsonProperty("lon") @ExcludeMissing private val lon: JsonField<Double>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("ts") @ExcludeMissing private val ts: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("acftSubType") @ExcludeMissing private val acftSubType: JsonField<String>,
-        @JsonProperty("addInfo") @ExcludeMissing private val addInfo: JsonField<String>,
-        @JsonProperty("alert") @ExcludeMissing private val alert: JsonField<String>,
-        @JsonProperty("alt") @ExcludeMissing private val alt: JsonField<Double>,
-        @JsonProperty("angElev") @ExcludeMissing private val angElev: JsonField<Double>,
-        @JsonProperty("antennaRefDimensions")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val lat: JsonField<Double>,
+        private val lon: JsonField<Double>,
+        private val source: JsonField<String>,
+        private val ts: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
+        private val acftSubType: JsonField<String>,
+        private val addInfo: JsonField<String>,
+        private val alert: JsonField<String>,
+        private val alt: JsonField<Double>,
+        private val angElev: JsonField<Double>,
         private val antennaRefDimensions: JsonField<List<Double>>,
-        @JsonProperty("aouRptData") @ExcludeMissing private val aouRptData: JsonField<List<Double>>,
-        @JsonProperty("aouRptType") @ExcludeMissing private val aouRptType: JsonField<String>,
-        @JsonProperty("appGrp") @ExcludeMissing private val appGrp: JsonField<String>,
-        @JsonProperty("arrCargo") @ExcludeMissing private val arrCargo: JsonField<String>,
-        @JsonProperty("arrFlag") @ExcludeMissing private val arrFlag: JsonField<String>,
-        @JsonProperty("arrPort") @ExcludeMissing private val arrPort: JsonField<String>,
-        @JsonProperty("arrTime") @ExcludeMissing private val arrTime: JsonField<OffsetDateTime>,
-        @JsonProperty("aton") @ExcludeMissing private val aton: JsonField<String>,
-        @JsonProperty("avgSpd") @ExcludeMissing private val avgSpd: JsonField<Double>,
-        @JsonProperty("azCorrArcWidth")
-        @ExcludeMissing
+        private val aouRptData: JsonField<List<Double>>,
+        private val aouRptType: JsonField<String>,
+        private val appGrp: JsonField<String>,
+        private val arrCargo: JsonField<String>,
+        private val arrFlag: JsonField<String>,
+        private val arrPort: JsonField<String>,
+        private val arrTime: JsonField<OffsetDateTime>,
+        private val aton: JsonField<String>,
+        private val avgSpd: JsonField<Double>,
         private val azCorrArcWidth: JsonField<Double>,
-        @JsonProperty("azCorrCenterLine")
-        @ExcludeMissing
         private val azCorrCenterLine: JsonField<Double>,
-        @JsonProperty("beNumber") @ExcludeMissing private val beNumber: JsonField<String>,
-        @JsonProperty("boosting") @ExcludeMissing private val boosting: JsonField<Boolean>,
-        @JsonProperty("burnoutAlt") @ExcludeMissing private val burnoutAlt: JsonField<Double>,
-        @JsonProperty("callSign") @ExcludeMissing private val callSign: JsonField<String>,
-        @JsonProperty("cargoType") @ExcludeMissing private val cargoType: JsonField<String>,
-        @JsonProperty("cI") @ExcludeMissing private val cI: JsonField<String>,
-        @JsonProperty("containment") @ExcludeMissing private val containment: JsonField<Double>,
-        @JsonProperty("coopLocInd") @ExcludeMissing private val coopLocInd: JsonField<String>,
-        @JsonProperty("course") @ExcludeMissing private val course: JsonField<Double>,
-        @JsonProperty("cpa") @ExcludeMissing private val cpa: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("depCargo") @ExcludeMissing private val depCargo: JsonField<String>,
-        @JsonProperty("depFlag") @ExcludeMissing private val depFlag: JsonField<String>,
-        @JsonProperty("depPort") @ExcludeMissing private val depPort: JsonField<String>,
-        @JsonProperty("desCargo") @ExcludeMissing private val desCargo: JsonField<String>,
-        @JsonProperty("desFlag") @ExcludeMissing private val desFlag: JsonField<String>,
-        @JsonProperty("destination") @ExcludeMissing private val destination: JsonField<String>,
-        @JsonProperty("disId") @ExcludeMissing private val disId: JsonField<String>,
-        @JsonProperty("draught") @ExcludeMissing private val draught: JsonField<Double>,
-        @JsonProperty("dropPtInd") @ExcludeMissing private val dropPtInd: JsonField<Boolean>,
-        @JsonProperty("dummy") @ExcludeMissing private val dummy: JsonField<Boolean>,
-        @JsonProperty("ecefPos") @ExcludeMissing private val ecefPos: JsonField<List<Double>>,
-        @JsonProperty("ecefVel") @ExcludeMissing private val ecefVel: JsonField<List<Double>>,
-        @JsonProperty("elnot1") @ExcludeMissing private val elnot1: JsonField<String>,
-        @JsonProperty("elnot2") @ExcludeMissing private val elnot2: JsonField<String>,
-        @JsonProperty("emgInd") @ExcludeMissing private val emgInd: JsonField<Boolean>,
-        @JsonProperty("emitterName") @ExcludeMissing private val emitterName: JsonField<String>,
-        @JsonProperty("env") @ExcludeMissing private val env: JsonField<Env>,
-        @JsonProperty("errAreaOrient") @ExcludeMissing private val errAreaOrient: JsonField<Double>,
-        @JsonProperty("errGeoAreaSwitch")
-        @ExcludeMissing
+        private val beNumber: JsonField<String>,
+        private val boosting: JsonField<Boolean>,
+        private val burnoutAlt: JsonField<Double>,
+        private val callSign: JsonField<String>,
+        private val cargoType: JsonField<String>,
+        private val cI: JsonField<String>,
+        private val containment: JsonField<Double>,
+        private val coopLocInd: JsonField<String>,
+        private val course: JsonField<Double>,
+        private val cpa: JsonField<Double>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val depCargo: JsonField<String>,
+        private val depFlag: JsonField<String>,
+        private val depPort: JsonField<String>,
+        private val desCargo: JsonField<String>,
+        private val desFlag: JsonField<String>,
+        private val destination: JsonField<String>,
+        private val disId: JsonField<String>,
+        private val draught: JsonField<Double>,
+        private val dropPtInd: JsonField<Boolean>,
+        private val dummy: JsonField<Boolean>,
+        private val ecefPos: JsonField<List<Double>>,
+        private val ecefVel: JsonField<List<Double>>,
+        private val elnot1: JsonField<String>,
+        private val elnot2: JsonField<String>,
+        private val emgInd: JsonField<Boolean>,
+        private val emitterName: JsonField<String>,
+        private val env: JsonField<Env>,
+        private val errAreaOrient: JsonField<Double>,
         private val errGeoAreaSwitch: JsonField<String>,
-        @JsonProperty("errSemiIntAxis")
-        @ExcludeMissing
         private val errSemiIntAxis: JsonField<Double>,
-        @JsonProperty("errSemiMajElev")
-        @ExcludeMissing
         private val errSemiMajElev: JsonField<Double>,
-        @JsonProperty("eta") @ExcludeMissing private val eta: JsonField<OffsetDateTime>,
-        @JsonProperty("etd") @ExcludeMissing private val etd: JsonField<OffsetDateTime>,
-        @JsonProperty("evalRating") @ExcludeMissing private val evalRating: JsonField<String>,
-        @JsonProperty("feint") @ExcludeMissing private val feint: JsonField<Boolean>,
-        @JsonProperty("freq") @ExcludeMissing private val freq: JsonField<Double>,
-        @JsonProperty("ftn") @ExcludeMissing private val ftn: JsonField<String>,
-        @JsonProperty("ftnCmd") @ExcludeMissing private val ftnCmd: JsonField<String>,
-        @JsonProperty("ftnMsgTs") @ExcludeMissing private val ftnMsgTs: JsonField<OffsetDateTime>,
-        @JsonProperty("harmonics") @ExcludeMissing private val harmonics: JsonField<String>,
-        @JsonProperty("hdng") @ExcludeMissing private val hdng: JsonField<Double>,
-        @JsonProperty("hq") @ExcludeMissing private val hq: JsonField<Boolean>,
-        @JsonProperty("hullNum") @ExcludeMissing private val hullNum: JsonField<String>,
-        @JsonProperty("hullProf") @ExcludeMissing private val hullProf: JsonField<String>,
-        @JsonProperty("identAmp") @ExcludeMissing private val identAmp: JsonField<String>,
-        @JsonProperty("iff") @ExcludeMissing private val iff: JsonField<String>,
-        @JsonProperty("imon") @ExcludeMissing private val imon: JsonField<Int>,
-        @JsonProperty("impactAouData")
-        @ExcludeMissing
+        private val eta: JsonField<OffsetDateTime>,
+        private val etd: JsonField<OffsetDateTime>,
+        private val evalRating: JsonField<String>,
+        private val feint: JsonField<Boolean>,
+        private val freq: JsonField<Double>,
+        private val ftn: JsonField<String>,
+        private val ftnCmd: JsonField<String>,
+        private val ftnMsgTs: JsonField<OffsetDateTime>,
+        private val harmonics: JsonField<String>,
+        private val hdng: JsonField<Double>,
+        private val hq: JsonField<Boolean>,
+        private val hullNum: JsonField<String>,
+        private val hullProf: JsonField<String>,
+        private val identAmp: JsonField<String>,
+        private val iff: JsonField<String>,
+        private val imon: JsonField<Int>,
         private val impactAouData: JsonField<List<Double>>,
-        @JsonProperty("impactAouType") @ExcludeMissing private val impactAouType: JsonField<String>,
-        @JsonProperty("impactLat") @ExcludeMissing private val impactLat: JsonField<Double>,
-        @JsonProperty("impactLon") @ExcludeMissing private val impactLon: JsonField<Double>,
-        @JsonProperty("impactTime")
-        @ExcludeMissing
+        private val impactAouType: JsonField<String>,
+        private val impactLat: JsonField<Double>,
+        private val impactLon: JsonField<Double>,
         private val impactTime: JsonField<OffsetDateTime>,
-        @JsonProperty("infoSource") @ExcludeMissing private val infoSource: JsonField<String>,
-        @JsonProperty("installation") @ExcludeMissing private val installation: JsonField<Boolean>,
-        @JsonProperty("launchAouData")
-        @ExcludeMissing
+        private val infoSource: JsonField<String>,
+        private val installation: JsonField<Boolean>,
         private val launchAouData: JsonField<List<Double>>,
-        @JsonProperty("launchAouType") @ExcludeMissing private val launchAouType: JsonField<String>,
-        @JsonProperty("launchLat") @ExcludeMissing private val launchLat: JsonField<Double>,
-        @JsonProperty("launchLon") @ExcludeMissing private val launchLon: JsonField<Double>,
-        @JsonProperty("launchTime")
-        @ExcludeMissing
+        private val launchAouType: JsonField<String>,
+        private val launchLat: JsonField<Double>,
+        private val launchLon: JsonField<Double>,
         private val launchTime: JsonField<OffsetDateTime>,
-        @JsonProperty("length") @ExcludeMissing private val length: JsonField<Double>,
-        @JsonProperty("lostTrkInd") @ExcludeMissing private val lostTrkInd: JsonField<Boolean>,
-        @JsonProperty("maneuverInd") @ExcludeMissing private val maneuverInd: JsonField<String>,
-        @JsonProperty("maxFreq") @ExcludeMissing private val maxFreq: JsonField<Double>,
-        @JsonProperty("midbCat") @ExcludeMissing private val midbCat: JsonField<String>,
-        @JsonProperty("mil2525Bstr") @ExcludeMissing private val mil2525Bstr: JsonField<String>,
-        @JsonProperty("mmsi") @ExcludeMissing private val mmsi: JsonField<Int>,
-        @JsonProperty("msgType") @ExcludeMissing private val msgType: JsonField<String>,
-        @JsonProperty("mslStatus") @ExcludeMissing private val mslStatus: JsonField<String>,
-        @JsonProperty("muidSrc") @ExcludeMissing private val muidSrc: JsonField<String>,
-        @JsonProperty("muidSrcTrk") @ExcludeMissing private val muidSrcTrk: JsonField<String>,
-        @JsonProperty("name") @ExcludeMissing private val name: JsonField<String>,
-        @JsonProperty("navStatus") @ExcludeMissing private val navStatus: JsonField<String>,
-        @JsonProperty("ntds") @ExcludeMissing private val ntds: JsonField<String>,
-        @JsonProperty("numBlades") @ExcludeMissing private val numBlades: JsonField<Int>,
-        @JsonProperty("numShafts") @ExcludeMissing private val numShafts: JsonField<Int>,
-        @JsonProperty("objAct") @ExcludeMissing private val objAct: JsonField<String>,
-        @JsonProperty("objIdent") @ExcludeMissing private val objIdent: JsonField<ObjIdent>,
-        @JsonProperty("objNat") @ExcludeMissing private val objNat: JsonField<String>,
-        @JsonProperty("objPlat") @ExcludeMissing private val objPlat: JsonField<String>,
-        @JsonProperty("objType") @ExcludeMissing private val objType: JsonField<String>,
-        @JsonProperty("offPosInd") @ExcludeMissing private val offPosInd: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origXref") @ExcludeMissing private val origXref: JsonField<String>,
-        @JsonProperty("oSuffix") @ExcludeMissing private val oSuffix: JsonField<String>,
-        @JsonProperty("pif") @ExcludeMissing private val pif: JsonField<String>,
-        @JsonProperty("pin") @ExcludeMissing private val pin: JsonField<String>,
-        @JsonProperty("polarSingLocLat")
-        @ExcludeMissing
+        private val length: JsonField<Double>,
+        private val lostTrkInd: JsonField<Boolean>,
+        private val maneuverInd: JsonField<String>,
+        private val maxFreq: JsonField<Double>,
+        private val midbCat: JsonField<String>,
+        private val mil2525Bstr: JsonField<String>,
+        private val mmsi: JsonField<Int>,
+        private val msgType: JsonField<String>,
+        private val mslStatus: JsonField<String>,
+        private val muidSrc: JsonField<String>,
+        private val muidSrcTrk: JsonField<String>,
+        private val name: JsonField<String>,
+        private val navStatus: JsonField<String>,
+        private val ntds: JsonField<String>,
+        private val numBlades: JsonField<Int>,
+        private val numShafts: JsonField<Int>,
+        private val objAct: JsonField<String>,
+        private val objIdent: JsonField<ObjIdent>,
+        private val objNat: JsonField<String>,
+        private val objPlat: JsonField<String>,
+        private val objType: JsonField<String>,
+        private val offPosInd: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origXref: JsonField<String>,
+        private val oSuffix: JsonField<String>,
+        private val pif: JsonField<String>,
+        private val pin: JsonField<String>,
         private val polarSingLocLat: JsonField<Double>,
-        @JsonProperty("polarSingLocLon")
-        @ExcludeMissing
         private val polarSingLocLon: JsonField<Double>,
-        @JsonProperty("posDeviceType") @ExcludeMissing private val posDeviceType: JsonField<String>,
-        @JsonProperty("prf") @ExcludeMissing private val prf: JsonField<Double>,
-        @JsonProperty("pri") @ExcludeMissing private val pri: JsonField<Double>,
-        @JsonProperty("propRPM") @ExcludeMissing private val propRpm: JsonField<Double>,
-        @JsonProperty("propType") @ExcludeMissing private val propType: JsonField<String>,
-        @JsonProperty("pw") @ExcludeMissing private val pw: JsonField<Double>,
-        @JsonProperty("reduced") @ExcludeMissing private val reduced: JsonField<Boolean>,
-        @JsonProperty("reinforced") @ExcludeMissing private val reinforced: JsonField<Boolean>,
-        @JsonProperty("rptArchived") @ExcludeMissing private val rptArchived: JsonField<Boolean>,
-        @JsonProperty("rptChxref") @ExcludeMissing private val rptChxref: JsonField<String>,
-        @JsonProperty("rtn") @ExcludeMissing private val rtn: JsonField<List<String>>,
-        @JsonProperty("rtnCmd") @ExcludeMissing private val rtnCmd: JsonField<String>,
-        @JsonProperty("rtnMsgTs")
-        @ExcludeMissing
+        private val posDeviceType: JsonField<String>,
+        private val prf: JsonField<Double>,
+        private val pri: JsonField<Double>,
+        private val propRpm: JsonField<Double>,
+        private val propType: JsonField<String>,
+        private val pw: JsonField<Double>,
+        private val reduced: JsonField<Boolean>,
+        private val reinforced: JsonField<Boolean>,
+        private val rptArchived: JsonField<Boolean>,
+        private val rptChxref: JsonField<String>,
+        private val rtn: JsonField<List<String>>,
+        private val rtnCmd: JsonField<String>,
         private val rtnMsgTs: JsonField<List<OffsetDateTime>>,
-        @JsonProperty("rtnTrkState") @ExcludeMissing private val rtnTrkState: JsonField<String>,
-        @JsonProperty("scanRate") @ExcludeMissing private val scanRate: JsonField<Double>,
-        @JsonProperty("scanType") @ExcludeMissing private val scanType: JsonField<String>,
-        @JsonProperty("scn") @ExcludeMissing private val scn: JsonField<Int>,
-        @JsonProperty("sconum") @ExcludeMissing private val sconum: JsonField<String>,
-        @JsonProperty("selfReport") @ExcludeMissing private val selfReport: JsonField<Boolean>,
-        @JsonProperty("sen") @ExcludeMissing private val sen: JsonField<String>,
-        @JsonProperty("shipClass") @ExcludeMissing private val shipClass: JsonField<String>,
-        @JsonProperty("shortName") @ExcludeMissing private val shortName: JsonField<String>,
-        @JsonProperty("sourceUid") @ExcludeMissing private val sourceUid: JsonField<String>,
-        @JsonProperty("spaceAmp") @ExcludeMissing private val spaceAmp: JsonField<String>,
-        @JsonProperty("spaceAmpConf") @ExcludeMissing private val spaceAmpConf: JsonField<Int>,
-        @JsonProperty("spaceSpecType") @ExcludeMissing private val spaceSpecType: JsonField<String>,
-        @JsonProperty("spd") @ExcludeMissing private val spd: JsonField<Double>,
-        @JsonProperty("staffCmts") @ExcludeMissing private val staffCmts: JsonField<String>,
-        @JsonProperty("sternType") @ExcludeMissing private val sternType: JsonField<String>,
-        @JsonProperty("taskForce") @ExcludeMissing private val taskForce: JsonField<Boolean>,
-        @JsonProperty("tcpa") @ExcludeMissing private val tcpa: JsonField<OffsetDateTime>,
-        @JsonProperty("tesEventId") @ExcludeMissing private val tesEventId: JsonField<String>,
-        @JsonProperty("tol") @ExcludeMissing private val tol: JsonField<Double>,
-        @JsonProperty("tpk") @ExcludeMissing private val tpk: JsonField<Double>,
-        @JsonProperty("trkConf") @ExcludeMissing private val trkConf: JsonField<Double>,
-        @JsonProperty("trkId") @ExcludeMissing private val trkId: JsonField<String>,
-        @JsonProperty("trkNum") @ExcludeMissing private val trkNum: JsonField<String>,
-        @JsonProperty("trkQual") @ExcludeMissing private val trkQual: JsonField<Int>,
-        @JsonProperty("trkScope") @ExcludeMissing private val trkScope: JsonField<String>,
-        @JsonProperty("trnspdrId") @ExcludeMissing private val trnspdrId: JsonField<String>,
-        @JsonProperty("trnspdrType") @ExcludeMissing private val trnspdrType: JsonField<String>,
-        @JsonProperty("vslWt") @ExcludeMissing private val vslWt: JsonField<Double>,
-        @JsonProperty("width") @ExcludeMissing private val width: JsonField<Double>,
+        private val rtnTrkState: JsonField<String>,
+        private val scanRate: JsonField<Double>,
+        private val scanType: JsonField<String>,
+        private val scn: JsonField<Int>,
+        private val sconum: JsonField<String>,
+        private val selfReport: JsonField<Boolean>,
+        private val sen: JsonField<String>,
+        private val shipClass: JsonField<String>,
+        private val shortName: JsonField<String>,
+        private val sourceUid: JsonField<String>,
+        private val spaceAmp: JsonField<String>,
+        private val spaceAmpConf: JsonField<Int>,
+        private val spaceSpecType: JsonField<String>,
+        private val spd: JsonField<Double>,
+        private val staffCmts: JsonField<String>,
+        private val sternType: JsonField<String>,
+        private val taskForce: JsonField<Boolean>,
+        private val tcpa: JsonField<OffsetDateTime>,
+        private val tesEventId: JsonField<String>,
+        private val tol: JsonField<Double>,
+        private val tpk: JsonField<Double>,
+        private val trkConf: JsonField<Double>,
+        private val trkId: JsonField<String>,
+        private val trkNum: JsonField<String>,
+        private val trkQual: JsonField<Int>,
+        private val trkScope: JsonField<String>,
+        private val trnspdrId: JsonField<String>,
+        private val trnspdrType: JsonField<String>,
+        private val vslWt: JsonField<Double>,
+        private val width: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ts") @ExcludeMissing ts: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("acftSubType")
+            @ExcludeMissing
+            acftSubType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("addInfo") @ExcludeMissing addInfo: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("alert") @ExcludeMissing alert: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("alt") @ExcludeMissing alt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("angElev") @ExcludeMissing angElev: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("antennaRefDimensions")
+            @ExcludeMissing
+            antennaRefDimensions: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("aouRptData")
+            @ExcludeMissing
+            aouRptData: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("aouRptType")
+            @ExcludeMissing
+            aouRptType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("appGrp") @ExcludeMissing appGrp: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("arrCargo")
+            @ExcludeMissing
+            arrCargo: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("arrFlag") @ExcludeMissing arrFlag: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("arrPort") @ExcludeMissing arrPort: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("arrTime")
+            @ExcludeMissing
+            arrTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("aton") @ExcludeMissing aton: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("avgSpd") @ExcludeMissing avgSpd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azCorrArcWidth")
+            @ExcludeMissing
+            azCorrArcWidth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azCorrCenterLine")
+            @ExcludeMissing
+            azCorrCenterLine: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("beNumber")
+            @ExcludeMissing
+            beNumber: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("boosting")
+            @ExcludeMissing
+            boosting: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("burnoutAlt")
+            @ExcludeMissing
+            burnoutAlt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("callSign")
+            @ExcludeMissing
+            callSign: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("cargoType")
+            @ExcludeMissing
+            cargoType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("cI") @ExcludeMissing cI: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("containment")
+            @ExcludeMissing
+            containment: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("coopLocInd")
+            @ExcludeMissing
+            coopLocInd: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("course") @ExcludeMissing course: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("cpa") @ExcludeMissing cpa: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("depCargo")
+            @ExcludeMissing
+            depCargo: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("depFlag") @ExcludeMissing depFlag: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("depPort") @ExcludeMissing depPort: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("desCargo")
+            @ExcludeMissing
+            desCargo: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("desFlag") @ExcludeMissing desFlag: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("destination")
+            @ExcludeMissing
+            destination: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("disId") @ExcludeMissing disId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("draught") @ExcludeMissing draught: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("dropPtInd")
+            @ExcludeMissing
+            dropPtInd: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("dummy") @ExcludeMissing dummy: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("ecefPos")
+            @ExcludeMissing
+            ecefPos: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("ecefVel")
+            @ExcludeMissing
+            ecefVel: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("elnot1") @ExcludeMissing elnot1: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("elnot2") @ExcludeMissing elnot2: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("emgInd") @ExcludeMissing emgInd: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("emitterName")
+            @ExcludeMissing
+            emitterName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("env") @ExcludeMissing env: JsonField<Env> = JsonMissing.of(),
+            @JsonProperty("errAreaOrient")
+            @ExcludeMissing
+            errAreaOrient: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("errGeoAreaSwitch")
+            @ExcludeMissing
+            errGeoAreaSwitch: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("errSemiIntAxis")
+            @ExcludeMissing
+            errSemiIntAxis: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("errSemiMajElev")
+            @ExcludeMissing
+            errSemiMajElev: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("eta") @ExcludeMissing eta: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("etd") @ExcludeMissing etd: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("evalRating")
+            @ExcludeMissing
+            evalRating: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("feint") @ExcludeMissing feint: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("freq") @ExcludeMissing freq: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("ftn") @ExcludeMissing ftn: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ftnCmd") @ExcludeMissing ftnCmd: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ftnMsgTs")
+            @ExcludeMissing
+            ftnMsgTs: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("harmonics")
+            @ExcludeMissing
+            harmonics: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("hdng") @ExcludeMissing hdng: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hq") @ExcludeMissing hq: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("hullNum") @ExcludeMissing hullNum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("hullProf")
+            @ExcludeMissing
+            hullProf: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("identAmp")
+            @ExcludeMissing
+            identAmp: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("iff") @ExcludeMissing iff: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("imon") @ExcludeMissing imon: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("impactAouData")
+            @ExcludeMissing
+            impactAouData: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("impactAouType")
+            @ExcludeMissing
+            impactAouType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("impactLat")
+            @ExcludeMissing
+            impactLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("impactLon")
+            @ExcludeMissing
+            impactLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("impactTime")
+            @ExcludeMissing
+            impactTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("infoSource")
+            @ExcludeMissing
+            infoSource: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("installation")
+            @ExcludeMissing
+            installation: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("launchAouData")
+            @ExcludeMissing
+            launchAouData: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("launchAouType")
+            @ExcludeMissing
+            launchAouType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("launchLat")
+            @ExcludeMissing
+            launchLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("launchLon")
+            @ExcludeMissing
+            launchLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("launchTime")
+            @ExcludeMissing
+            launchTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("length") @ExcludeMissing length: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("lostTrkInd")
+            @ExcludeMissing
+            lostTrkInd: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("maneuverInd")
+            @ExcludeMissing
+            maneuverInd: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("maxFreq") @ExcludeMissing maxFreq: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("midbCat") @ExcludeMissing midbCat: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("mil2525Bstr")
+            @ExcludeMissing
+            mil2525Bstr: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("mmsi") @ExcludeMissing mmsi: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("msgType") @ExcludeMissing msgType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("mslStatus")
+            @ExcludeMissing
+            mslStatus: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("muidSrc") @ExcludeMissing muidSrc: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("muidSrcTrk")
+            @ExcludeMissing
+            muidSrcTrk: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("name") @ExcludeMissing name: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("navStatus")
+            @ExcludeMissing
+            navStatus: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ntds") @ExcludeMissing ntds: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("numBlades") @ExcludeMissing numBlades: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numShafts") @ExcludeMissing numShafts: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("objAct") @ExcludeMissing objAct: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("objIdent")
+            @ExcludeMissing
+            objIdent: JsonField<ObjIdent> = JsonMissing.of(),
+            @JsonProperty("objNat") @ExcludeMissing objNat: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("objPlat") @ExcludeMissing objPlat: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("objType") @ExcludeMissing objType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("offPosInd")
+            @ExcludeMissing
+            offPosInd: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origXref")
+            @ExcludeMissing
+            origXref: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("oSuffix") @ExcludeMissing oSuffix: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("pif") @ExcludeMissing pif: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("pin") @ExcludeMissing pin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("polarSingLocLat")
+            @ExcludeMissing
+            polarSingLocLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("polarSingLocLon")
+            @ExcludeMissing
+            polarSingLocLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("posDeviceType")
+            @ExcludeMissing
+            posDeviceType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("prf") @ExcludeMissing prf: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pri") @ExcludeMissing pri: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("propRPM") @ExcludeMissing propRpm: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("propType")
+            @ExcludeMissing
+            propType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("pw") @ExcludeMissing pw: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("reduced") @ExcludeMissing reduced: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("reinforced")
+            @ExcludeMissing
+            reinforced: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("rptArchived")
+            @ExcludeMissing
+            rptArchived: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("rptChxref")
+            @ExcludeMissing
+            rptChxref: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rtn") @ExcludeMissing rtn: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("rtnCmd") @ExcludeMissing rtnCmd: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rtnMsgTs")
+            @ExcludeMissing
+            rtnMsgTs: JsonField<List<OffsetDateTime>> = JsonMissing.of(),
+            @JsonProperty("rtnTrkState")
+            @ExcludeMissing
+            rtnTrkState: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("scanRate")
+            @ExcludeMissing
+            scanRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("scanType")
+            @ExcludeMissing
+            scanType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("scn") @ExcludeMissing scn: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sconum") @ExcludeMissing sconum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("selfReport")
+            @ExcludeMissing
+            selfReport: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("sen") @ExcludeMissing sen: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("shipClass")
+            @ExcludeMissing
+            shipClass: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("shortName")
+            @ExcludeMissing
+            shortName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceUid")
+            @ExcludeMissing
+            sourceUid: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("spaceAmp")
+            @ExcludeMissing
+            spaceAmp: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("spaceAmpConf")
+            @ExcludeMissing
+            spaceAmpConf: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("spaceSpecType")
+            @ExcludeMissing
+            spaceSpecType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("spd") @ExcludeMissing spd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("staffCmts")
+            @ExcludeMissing
+            staffCmts: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sternType")
+            @ExcludeMissing
+            sternType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskForce")
+            @ExcludeMissing
+            taskForce: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("tcpa")
+            @ExcludeMissing
+            tcpa: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("tesEventId")
+            @ExcludeMissing
+            tesEventId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tol") @ExcludeMissing tol: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("tpk") @ExcludeMissing tpk: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("trkConf") @ExcludeMissing trkConf: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("trkId") @ExcludeMissing trkId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("trkNum") @ExcludeMissing trkNum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("trkQual") @ExcludeMissing trkQual: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("trkScope")
+            @ExcludeMissing
+            trkScope: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("trnspdrId")
+            @ExcludeMissing
+            trnspdrId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("trnspdrType")
+            @ExcludeMissing
+            trnspdrType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("vslWt") @ExcludeMissing vslWt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("width") @ExcludeMissing width: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            lat,
+            lon,
+            source,
+            ts,
+            id,
+            acftSubType,
+            addInfo,
+            alert,
+            alt,
+            angElev,
+            antennaRefDimensions,
+            aouRptData,
+            aouRptType,
+            appGrp,
+            arrCargo,
+            arrFlag,
+            arrPort,
+            arrTime,
+            aton,
+            avgSpd,
+            azCorrArcWidth,
+            azCorrCenterLine,
+            beNumber,
+            boosting,
+            burnoutAlt,
+            callSign,
+            cargoType,
+            cI,
+            containment,
+            coopLocInd,
+            course,
+            cpa,
+            createdAt,
+            createdBy,
+            depCargo,
+            depFlag,
+            depPort,
+            desCargo,
+            desFlag,
+            destination,
+            disId,
+            draught,
+            dropPtInd,
+            dummy,
+            ecefPos,
+            ecefVel,
+            elnot1,
+            elnot2,
+            emgInd,
+            emitterName,
+            env,
+            errAreaOrient,
+            errGeoAreaSwitch,
+            errSemiIntAxis,
+            errSemiMajElev,
+            eta,
+            etd,
+            evalRating,
+            feint,
+            freq,
+            ftn,
+            ftnCmd,
+            ftnMsgTs,
+            harmonics,
+            hdng,
+            hq,
+            hullNum,
+            hullProf,
+            identAmp,
+            iff,
+            imon,
+            impactAouData,
+            impactAouType,
+            impactLat,
+            impactLon,
+            impactTime,
+            infoSource,
+            installation,
+            launchAouData,
+            launchAouType,
+            launchLat,
+            launchLon,
+            launchTime,
+            length,
+            lostTrkInd,
+            maneuverInd,
+            maxFreq,
+            midbCat,
+            mil2525Bstr,
+            mmsi,
+            msgType,
+            mslStatus,
+            muidSrc,
+            muidSrcTrk,
+            name,
+            navStatus,
+            ntds,
+            numBlades,
+            numShafts,
+            objAct,
+            objIdent,
+            objNat,
+            objPlat,
+            objType,
+            offPosInd,
+            origin,
+            origNetwork,
+            origXref,
+            oSuffix,
+            pif,
+            pin,
+            polarSingLocLat,
+            polarSingLocLon,
+            posDeviceType,
+            prf,
+            pri,
+            propRpm,
+            propType,
+            pw,
+            reduced,
+            reinforced,
+            rptArchived,
+            rptChxref,
+            rtn,
+            rtnCmd,
+            rtnMsgTs,
+            rtnTrkState,
+            scanRate,
+            scanType,
+            scn,
+            sconum,
+            selfReport,
+            sen,
+            shipClass,
+            shortName,
+            sourceUid,
+            spaceAmp,
+            spaceAmpConf,
+            spaceSpecType,
+            spd,
+            staffCmts,
+            sternType,
+            taskForce,
+            tcpa,
+            tesEventId,
+            tol,
+            tpk,
+            trkConf,
+            trkId,
+            trkNum,
+            trkQual,
+            trkScope,
+            trnspdrId,
+            trnspdrType,
+            vslWt,
+            width,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -3275,6 +3740,16 @@ private constructor(
          */
         @JsonProperty("width") @ExcludeMissing fun _width(): JsonField<Double> = width
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -3456,6 +3931,7 @@ private constructor(
             private var trnspdrType: JsonField<String> = JsonMissing.of()
             private var vslWt: JsonField<Double> = JsonMissing.of()
             private var width: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -3617,6 +4093,7 @@ private constructor(
                 trnspdrType = body.trnspdrType
                 vslWt = body.vslWt
                 width = body.width
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -6299,6 +6776,25 @@ private constructor(
              */
             fun width(width: JsonField<Double>) = apply { this.width = width }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -6476,6 +6972,7 @@ private constructor(
                     trnspdrType,
                     vslWt,
                     width,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -7493,7 +7990,8 @@ private constructor(
                 trnspdrId == other.trnspdrId &&
                 trnspdrType == other.trnspdrType &&
                 vslWt == other.vslWt &&
-                width == other.width
+                width == other.width &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -7656,13 +8154,14 @@ private constructor(
                 trnspdrType,
                 vslWt,
                 width,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, lat=$lat, lon=$lon, source=$source, ts=$ts, id=$id, acftSubType=$acftSubType, addInfo=$addInfo, alert=$alert, alt=$alt, angElev=$angElev, antennaRefDimensions=$antennaRefDimensions, aouRptData=$aouRptData, aouRptType=$aouRptType, appGrp=$appGrp, arrCargo=$arrCargo, arrFlag=$arrFlag, arrPort=$arrPort, arrTime=$arrTime, aton=$aton, avgSpd=$avgSpd, azCorrArcWidth=$azCorrArcWidth, azCorrCenterLine=$azCorrCenterLine, beNumber=$beNumber, boosting=$boosting, burnoutAlt=$burnoutAlt, callSign=$callSign, cargoType=$cargoType, cI=$cI, containment=$containment, coopLocInd=$coopLocInd, course=$course, cpa=$cpa, createdAt=$createdAt, createdBy=$createdBy, depCargo=$depCargo, depFlag=$depFlag, depPort=$depPort, desCargo=$desCargo, desFlag=$desFlag, destination=$destination, disId=$disId, draught=$draught, dropPtInd=$dropPtInd, dummy=$dummy, ecefPos=$ecefPos, ecefVel=$ecefVel, elnot1=$elnot1, elnot2=$elnot2, emgInd=$emgInd, emitterName=$emitterName, env=$env, errAreaOrient=$errAreaOrient, errGeoAreaSwitch=$errGeoAreaSwitch, errSemiIntAxis=$errSemiIntAxis, errSemiMajElev=$errSemiMajElev, eta=$eta, etd=$etd, evalRating=$evalRating, feint=$feint, freq=$freq, ftn=$ftn, ftnCmd=$ftnCmd, ftnMsgTs=$ftnMsgTs, harmonics=$harmonics, hdng=$hdng, hq=$hq, hullNum=$hullNum, hullProf=$hullProf, identAmp=$identAmp, iff=$iff, imon=$imon, impactAouData=$impactAouData, impactAouType=$impactAouType, impactLat=$impactLat, impactLon=$impactLon, impactTime=$impactTime, infoSource=$infoSource, installation=$installation, launchAouData=$launchAouData, launchAouType=$launchAouType, launchLat=$launchLat, launchLon=$launchLon, launchTime=$launchTime, length=$length, lostTrkInd=$lostTrkInd, maneuverInd=$maneuverInd, maxFreq=$maxFreq, midbCat=$midbCat, mil2525Bstr=$mil2525Bstr, mmsi=$mmsi, msgType=$msgType, mslStatus=$mslStatus, muidSrc=$muidSrc, muidSrcTrk=$muidSrcTrk, name=$name, navStatus=$navStatus, ntds=$ntds, numBlades=$numBlades, numShafts=$numShafts, objAct=$objAct, objIdent=$objIdent, objNat=$objNat, objPlat=$objPlat, objType=$objType, offPosInd=$offPosInd, origin=$origin, origNetwork=$origNetwork, origXref=$origXref, oSuffix=$oSuffix, pif=$pif, pin=$pin, polarSingLocLat=$polarSingLocLat, polarSingLocLon=$polarSingLocLon, posDeviceType=$posDeviceType, prf=$prf, pri=$pri, propRpm=$propRpm, propType=$propType, pw=$pw, reduced=$reduced, reinforced=$reinforced, rptArchived=$rptArchived, rptChxref=$rptChxref, rtn=$rtn, rtnCmd=$rtnCmd, rtnMsgTs=$rtnMsgTs, rtnTrkState=$rtnTrkState, scanRate=$scanRate, scanType=$scanType, scn=$scn, sconum=$sconum, selfReport=$selfReport, sen=$sen, shipClass=$shipClass, shortName=$shortName, sourceUid=$sourceUid, spaceAmp=$spaceAmp, spaceAmpConf=$spaceAmpConf, spaceSpecType=$spaceSpecType, spd=$spd, staffCmts=$staffCmts, sternType=$sternType, taskForce=$taskForce, tcpa=$tcpa, tesEventId=$tesEventId, tol=$tol, tpk=$tpk, trkConf=$trkConf, trkId=$trkId, trkNum=$trkNum, trkQual=$trkQual, trkScope=$trkScope, trnspdrId=$trnspdrId, trnspdrType=$trnspdrType, vslWt=$vslWt, width=$width}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, lat=$lat, lon=$lon, source=$source, ts=$ts, id=$id, acftSubType=$acftSubType, addInfo=$addInfo, alert=$alert, alt=$alt, angElev=$angElev, antennaRefDimensions=$antennaRefDimensions, aouRptData=$aouRptData, aouRptType=$aouRptType, appGrp=$appGrp, arrCargo=$arrCargo, arrFlag=$arrFlag, arrPort=$arrPort, arrTime=$arrTime, aton=$aton, avgSpd=$avgSpd, azCorrArcWidth=$azCorrArcWidth, azCorrCenterLine=$azCorrCenterLine, beNumber=$beNumber, boosting=$boosting, burnoutAlt=$burnoutAlt, callSign=$callSign, cargoType=$cargoType, cI=$cI, containment=$containment, coopLocInd=$coopLocInd, course=$course, cpa=$cpa, createdAt=$createdAt, createdBy=$createdBy, depCargo=$depCargo, depFlag=$depFlag, depPort=$depPort, desCargo=$desCargo, desFlag=$desFlag, destination=$destination, disId=$disId, draught=$draught, dropPtInd=$dropPtInd, dummy=$dummy, ecefPos=$ecefPos, ecefVel=$ecefVel, elnot1=$elnot1, elnot2=$elnot2, emgInd=$emgInd, emitterName=$emitterName, env=$env, errAreaOrient=$errAreaOrient, errGeoAreaSwitch=$errGeoAreaSwitch, errSemiIntAxis=$errSemiIntAxis, errSemiMajElev=$errSemiMajElev, eta=$eta, etd=$etd, evalRating=$evalRating, feint=$feint, freq=$freq, ftn=$ftn, ftnCmd=$ftnCmd, ftnMsgTs=$ftnMsgTs, harmonics=$harmonics, hdng=$hdng, hq=$hq, hullNum=$hullNum, hullProf=$hullProf, identAmp=$identAmp, iff=$iff, imon=$imon, impactAouData=$impactAouData, impactAouType=$impactAouType, impactLat=$impactLat, impactLon=$impactLon, impactTime=$impactTime, infoSource=$infoSource, installation=$installation, launchAouData=$launchAouData, launchAouType=$launchAouType, launchLat=$launchLat, launchLon=$launchLon, launchTime=$launchTime, length=$length, lostTrkInd=$lostTrkInd, maneuverInd=$maneuverInd, maxFreq=$maxFreq, midbCat=$midbCat, mil2525Bstr=$mil2525Bstr, mmsi=$mmsi, msgType=$msgType, mslStatus=$mslStatus, muidSrc=$muidSrc, muidSrcTrk=$muidSrcTrk, name=$name, navStatus=$navStatus, ntds=$ntds, numBlades=$numBlades, numShafts=$numShafts, objAct=$objAct, objIdent=$objIdent, objNat=$objNat, objPlat=$objPlat, objType=$objType, offPosInd=$offPosInd, origin=$origin, origNetwork=$origNetwork, origXref=$origXref, oSuffix=$oSuffix, pif=$pif, pin=$pin, polarSingLocLat=$polarSingLocLat, polarSingLocLon=$polarSingLocLon, posDeviceType=$posDeviceType, prf=$prf, pri=$pri, propRpm=$propRpm, propType=$propType, pw=$pw, reduced=$reduced, reinforced=$reinforced, rptArchived=$rptArchived, rptChxref=$rptChxref, rtn=$rtn, rtnCmd=$rtnCmd, rtnMsgTs=$rtnMsgTs, rtnTrkState=$rtnTrkState, scanRate=$scanRate, scanType=$scanType, scn=$scn, sconum=$sconum, selfReport=$selfReport, sen=$sen, shipClass=$shipClass, shortName=$shortName, sourceUid=$sourceUid, spaceAmp=$spaceAmp, spaceAmpConf=$spaceAmpConf, spaceSpecType=$spaceSpecType, spd=$spd, staffCmts=$staffCmts, sternType=$sternType, taskForce=$taskForce, tcpa=$tcpa, tesEventId=$tesEventId, tol=$tol, tpk=$tpk, trkConf=$trkConf, trkId=$trkId, trkNum=$trkNum, trkQual=$trkQual, trkScope=$trkScope, trnspdrId=$trnspdrId, trnspdrType=$trnspdrType, vslWt=$vslWt, width=$width, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.sarobservation
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -213,113 +217,342 @@ private constructor(
      * confirm coordinate frames by data provider.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("collectionEnd")
-        @ExcludeMissing
         private val collectionEnd: JsonField<OffsetDateTime>,
-        @JsonProperty("collectionStart")
-        @ExcludeMissing
         private val collectionStart: JsonField<OffsetDateTime>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("sarMode") @ExcludeMissing private val sarMode: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("agjson") @ExcludeMissing private val agjson: JsonField<String>,
-        @JsonProperty("andims") @ExcludeMissing private val andims: JsonField<Int>,
-        @JsonProperty("area") @ExcludeMissing private val area: JsonField<String>,
-        @JsonProperty("asrid") @ExcludeMissing private val asrid: JsonField<Int>,
-        @JsonProperty("atext") @ExcludeMissing private val atext: JsonField<String>,
-        @JsonProperty("atype") @ExcludeMissing private val atype: JsonField<String>,
-        @JsonProperty("azimuthAngle") @ExcludeMissing private val azimuthAngle: JsonField<Double>,
-        @JsonProperty("centerTime")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val sarMode: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val agjson: JsonField<String>,
+        private val andims: JsonField<Int>,
+        private val area: JsonField<String>,
+        private val asrid: JsonField<Int>,
+        private val atext: JsonField<String>,
+        private val atype: JsonField<String>,
+        private val azimuthAngle: JsonField<Double>,
         private val centerTime: JsonField<OffsetDateTime>,
-        @JsonProperty("collectionId") @ExcludeMissing private val collectionId: JsonField<String>,
-        @JsonProperty("continuousSpotAngle")
-        @ExcludeMissing
+        private val collectionId: JsonField<String>,
         private val continuousSpotAngle: JsonField<Double>,
-        @JsonProperty("coordSys") @ExcludeMissing private val coordSys: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("detectionEnd")
-        @ExcludeMissing
+        private val coordSys: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
         private val detectionEnd: JsonField<OffsetDateTime>,
-        @JsonProperty("detectionId") @ExcludeMissing private val detectionId: JsonField<String>,
-        @JsonProperty("detectionStart")
-        @ExcludeMissing
+        private val detectionId: JsonField<String>,
         private val detectionStart: JsonField<OffsetDateTime>,
-        @JsonProperty("dwellTime") @ExcludeMissing private val dwellTime: JsonField<Double>,
-        @JsonProperty("externalId") @ExcludeMissing private val externalId: JsonField<String>,
-        @JsonProperty("farRange") @ExcludeMissing private val farRange: JsonField<Double>,
-        @JsonProperty("grazeAngle") @ExcludeMissing private val grazeAngle: JsonField<Double>,
-        @JsonProperty("groundResolutionProjection")
-        @ExcludeMissing
+        private val dwellTime: JsonField<Double>,
+        private val externalId: JsonField<String>,
+        private val farRange: JsonField<Double>,
+        private val grazeAngle: JsonField<Double>,
         private val groundResolutionProjection: JsonField<Double>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("incidenceAngle")
-        @ExcludeMissing
+        private val idOnOrbit: JsonField<String>,
+        private val idSensor: JsonField<String>,
         private val incidenceAngle: JsonField<Double>,
-        @JsonProperty("looksAzimuth") @ExcludeMissing private val looksAzimuth: JsonField<Int>,
-        @JsonProperty("looksRange") @ExcludeMissing private val looksRange: JsonField<Int>,
-        @JsonProperty("multilookNumber")
-        @ExcludeMissing
+        private val looksAzimuth: JsonField<Int>,
+        private val looksRange: JsonField<Int>,
         private val multilookNumber: JsonField<Double>,
-        @JsonProperty("nearRange") @ExcludeMissing private val nearRange: JsonField<Double>,
-        @JsonProperty("obDirection") @ExcludeMissing private val obDirection: JsonField<String>,
-        @JsonProperty("operatingBand") @ExcludeMissing private val operatingBand: JsonField<String>,
-        @JsonProperty("operatingFreq") @ExcludeMissing private val operatingFreq: JsonField<Double>,
-        @JsonProperty("orbitState") @ExcludeMissing private val orbitState: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("pulseBandwidth")
-        @ExcludeMissing
+        private val nearRange: JsonField<Double>,
+        private val obDirection: JsonField<String>,
+        private val operatingBand: JsonField<String>,
+        private val operatingFreq: JsonField<Double>,
+        private val orbitState: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val origSensorId: JsonField<String>,
         private val pulseBandwidth: JsonField<Double>,
-        @JsonProperty("pulseDuration") @ExcludeMissing private val pulseDuration: JsonField<Double>,
-        @JsonProperty("resolutionAzimuth")
-        @ExcludeMissing
+        private val pulseDuration: JsonField<Double>,
         private val resolutionAzimuth: JsonField<Double>,
-        @JsonProperty("resolutionRange")
-        @ExcludeMissing
         private val resolutionRange: JsonField<Double>,
-        @JsonProperty("rxPolarization")
-        @ExcludeMissing
         private val rxPolarization: JsonField<String>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("senalt") @ExcludeMissing private val senalt: JsonField<Double>,
-        @JsonProperty("senlatEnd") @ExcludeMissing private val senlatEnd: JsonField<Double>,
-        @JsonProperty("senlatStart") @ExcludeMissing private val senlatStart: JsonField<Double>,
-        @JsonProperty("senlonEnd") @ExcludeMissing private val senlonEnd: JsonField<Double>,
-        @JsonProperty("senlonStart") @ExcludeMissing private val senlonStart: JsonField<Double>,
-        @JsonProperty("senvelx") @ExcludeMissing private val senvelx: JsonField<Double>,
-        @JsonProperty("senvely") @ExcludeMissing private val senvely: JsonField<Double>,
-        @JsonProperty("senvelz") @ExcludeMissing private val senvelz: JsonField<Double>,
-        @JsonProperty("slantRange") @ExcludeMissing private val slantRange: JsonField<Double>,
-        @JsonProperty("snr") @ExcludeMissing private val snr: JsonField<Double>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("spacingAzimuth")
-        @ExcludeMissing
+        private val satNo: JsonField<Int>,
+        private val senalt: JsonField<Double>,
+        private val senlatEnd: JsonField<Double>,
+        private val senlatStart: JsonField<Double>,
+        private val senlonEnd: JsonField<Double>,
+        private val senlonStart: JsonField<Double>,
+        private val senvelx: JsonField<Double>,
+        private val senvely: JsonField<Double>,
+        private val senvelz: JsonField<Double>,
+        private val slantRange: JsonField<Double>,
+        private val snr: JsonField<Double>,
+        private val sourceDl: JsonField<String>,
         private val spacingAzimuth: JsonField<Double>,
-        @JsonProperty("spacingRange") @ExcludeMissing private val spacingRange: JsonField<Double>,
-        @JsonProperty("squintAngle") @ExcludeMissing private val squintAngle: JsonField<Double>,
-        @JsonProperty("srcIds") @ExcludeMissing private val srcIds: JsonField<List<String>>,
-        @JsonProperty("srcTyps") @ExcludeMissing private val srcTyps: JsonField<List<String>>,
-        @JsonProperty("swathLength") @ExcludeMissing private val swathLength: JsonField<Double>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("targetposx") @ExcludeMissing private val targetposx: JsonField<Double>,
-        @JsonProperty("targetposy") @ExcludeMissing private val targetposy: JsonField<Double>,
-        @JsonProperty("targetposz") @ExcludeMissing private val targetposz: JsonField<Double>,
-        @JsonProperty("transactionId") @ExcludeMissing private val transactionId: JsonField<String>,
-        @JsonProperty("txPolarization")
-        @ExcludeMissing
+        private val spacingRange: JsonField<Double>,
+        private val squintAngle: JsonField<Double>,
+        private val srcIds: JsonField<List<String>>,
+        private val srcTyps: JsonField<List<String>>,
+        private val swathLength: JsonField<Double>,
+        private val tags: JsonField<List<String>>,
+        private val targetposx: JsonField<Double>,
+        private val targetposy: JsonField<Double>,
+        private val targetposz: JsonField<Double>,
+        private val transactionId: JsonField<String>,
         private val txPolarization: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("collectionEnd")
+            @ExcludeMissing
+            collectionEnd: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("collectionStart")
+            @ExcludeMissing
+            collectionStart: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("sarMode") @ExcludeMissing sarMode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("agjson") @ExcludeMissing agjson: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("andims") @ExcludeMissing andims: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("area") @ExcludeMissing area: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("asrid") @ExcludeMissing asrid: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("atext") @ExcludeMissing atext: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("atype") @ExcludeMissing atype: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("azimuthAngle")
+            @ExcludeMissing
+            azimuthAngle: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("centerTime")
+            @ExcludeMissing
+            centerTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("collectionId")
+            @ExcludeMissing
+            collectionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("continuousSpotAngle")
+            @ExcludeMissing
+            continuousSpotAngle: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("coordSys")
+            @ExcludeMissing
+            coordSys: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("detectionEnd")
+            @ExcludeMissing
+            detectionEnd: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("detectionId")
+            @ExcludeMissing
+            detectionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("detectionStart")
+            @ExcludeMissing
+            detectionStart: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("dwellTime")
+            @ExcludeMissing
+            dwellTime: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("externalId")
+            @ExcludeMissing
+            externalId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("farRange")
+            @ExcludeMissing
+            farRange: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("grazeAngle")
+            @ExcludeMissing
+            grazeAngle: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("groundResolutionProjection")
+            @ExcludeMissing
+            groundResolutionProjection: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("incidenceAngle")
+            @ExcludeMissing
+            incidenceAngle: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("looksAzimuth")
+            @ExcludeMissing
+            looksAzimuth: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("looksRange")
+            @ExcludeMissing
+            looksRange: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("multilookNumber")
+            @ExcludeMissing
+            multilookNumber: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("nearRange")
+            @ExcludeMissing
+            nearRange: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("obDirection")
+            @ExcludeMissing
+            obDirection: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("operatingBand")
+            @ExcludeMissing
+            operatingBand: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("operatingFreq")
+            @ExcludeMissing
+            operatingFreq: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("orbitState")
+            @ExcludeMissing
+            orbitState: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("pulseBandwidth")
+            @ExcludeMissing
+            pulseBandwidth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pulseDuration")
+            @ExcludeMissing
+            pulseDuration: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("resolutionAzimuth")
+            @ExcludeMissing
+            resolutionAzimuth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("resolutionRange")
+            @ExcludeMissing
+            resolutionRange: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rxPolarization")
+            @ExcludeMissing
+            rxPolarization: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("senalt") @ExcludeMissing senalt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlatEnd")
+            @ExcludeMissing
+            senlatEnd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlatStart")
+            @ExcludeMissing
+            senlatStart: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlonEnd")
+            @ExcludeMissing
+            senlonEnd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlonStart")
+            @ExcludeMissing
+            senlonStart: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senvelx") @ExcludeMissing senvelx: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senvely") @ExcludeMissing senvely: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senvelz") @ExcludeMissing senvelz: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("slantRange")
+            @ExcludeMissing
+            slantRange: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("snr") @ExcludeMissing snr: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("spacingAzimuth")
+            @ExcludeMissing
+            spacingAzimuth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("spacingRange")
+            @ExcludeMissing
+            spacingRange: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("squintAngle")
+            @ExcludeMissing
+            squintAngle: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("srcIds")
+            @ExcludeMissing
+            srcIds: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("srcTyps")
+            @ExcludeMissing
+            srcTyps: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("swathLength")
+            @ExcludeMissing
+            swathLength: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("targetposx")
+            @ExcludeMissing
+            targetposx: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("targetposy")
+            @ExcludeMissing
+            targetposy: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("targetposz")
+            @ExcludeMissing
+            targetposz: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("transactionId")
+            @ExcludeMissing
+            transactionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("txPolarization")
+            @ExcludeMissing
+            txPolarization: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            collectionEnd,
+            collectionStart,
+            dataMode,
+            sarMode,
+            source,
+            id,
+            agjson,
+            andims,
+            area,
+            asrid,
+            atext,
+            atype,
+            azimuthAngle,
+            centerTime,
+            collectionId,
+            continuousSpotAngle,
+            coordSys,
+            createdAt,
+            createdBy,
+            detectionEnd,
+            detectionId,
+            detectionStart,
+            dwellTime,
+            externalId,
+            farRange,
+            grazeAngle,
+            groundResolutionProjection,
+            idOnOrbit,
+            idSensor,
+            incidenceAngle,
+            looksAzimuth,
+            looksRange,
+            multilookNumber,
+            nearRange,
+            obDirection,
+            operatingBand,
+            operatingFreq,
+            orbitState,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            pulseBandwidth,
+            pulseDuration,
+            resolutionAzimuth,
+            resolutionRange,
+            rxPolarization,
+            satNo,
+            senalt,
+            senlatEnd,
+            senlatStart,
+            senlonEnd,
+            senlonStart,
+            senvelx,
+            senvely,
+            senvelz,
+            slantRange,
+            snr,
+            sourceDl,
+            spacingAzimuth,
+            spacingRange,
+            squintAngle,
+            srcIds,
+            srcTyps,
+            swathLength,
+            tags,
+            targetposx,
+            targetposy,
+            targetposz,
+            transactionId,
+            txPolarization,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1579,6 +1812,16 @@ private constructor(
         @ExcludeMissing
         fun _txPolarization(): JsonField<String> = txPolarization
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1674,6 +1917,7 @@ private constructor(
             private var targetposz: JsonField<Double> = JsonMissing.of()
             private var transactionId: JsonField<String> = JsonMissing.of()
             private var txPolarization: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1749,6 +1993,7 @@ private constructor(
                 targetposz = body.targetposz
                 transactionId = body.transactionId
                 txPolarization = body.txPolarization
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -2872,6 +3117,25 @@ private constructor(
                 this.txPolarization = txPolarization
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -2963,6 +3227,7 @@ private constructor(
                     targetposz,
                     transactionId,
                     txPolarization,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -3370,7 +3635,8 @@ private constructor(
                 targetposy == other.targetposy &&
                 targetposz == other.targetposz &&
                 transactionId == other.transactionId &&
-                txPolarization == other.txPolarization
+                txPolarization == other.txPolarization &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -3447,13 +3713,14 @@ private constructor(
                 targetposz,
                 transactionId,
                 txPolarization,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, collectionEnd=$collectionEnd, collectionStart=$collectionStart, dataMode=$dataMode, sarMode=$sarMode, source=$source, id=$id, agjson=$agjson, andims=$andims, area=$area, asrid=$asrid, atext=$atext, atype=$atype, azimuthAngle=$azimuthAngle, centerTime=$centerTime, collectionId=$collectionId, continuousSpotAngle=$continuousSpotAngle, coordSys=$coordSys, createdAt=$createdAt, createdBy=$createdBy, detectionEnd=$detectionEnd, detectionId=$detectionId, detectionStart=$detectionStart, dwellTime=$dwellTime, externalId=$externalId, farRange=$farRange, grazeAngle=$grazeAngle, groundResolutionProjection=$groundResolutionProjection, idOnOrbit=$idOnOrbit, idSensor=$idSensor, incidenceAngle=$incidenceAngle, looksAzimuth=$looksAzimuth, looksRange=$looksRange, multilookNumber=$multilookNumber, nearRange=$nearRange, obDirection=$obDirection, operatingBand=$operatingBand, operatingFreq=$operatingFreq, orbitState=$orbitState, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, pulseBandwidth=$pulseBandwidth, pulseDuration=$pulseDuration, resolutionAzimuth=$resolutionAzimuth, resolutionRange=$resolutionRange, rxPolarization=$rxPolarization, satNo=$satNo, senalt=$senalt, senlatEnd=$senlatEnd, senlatStart=$senlatStart, senlonEnd=$senlonEnd, senlonStart=$senlonStart, senvelx=$senvelx, senvely=$senvely, senvelz=$senvelz, slantRange=$slantRange, snr=$snr, sourceDl=$sourceDl, spacingAzimuth=$spacingAzimuth, spacingRange=$spacingRange, squintAngle=$squintAngle, srcIds=$srcIds, srcTyps=$srcTyps, swathLength=$swathLength, tags=$tags, targetposx=$targetposx, targetposy=$targetposy, targetposz=$targetposz, transactionId=$transactionId, txPolarization=$txPolarization}"
+            "Body{classificationMarking=$classificationMarking, collectionEnd=$collectionEnd, collectionStart=$collectionStart, dataMode=$dataMode, sarMode=$sarMode, source=$source, id=$id, agjson=$agjson, andims=$andims, area=$area, asrid=$asrid, atext=$atext, atype=$atype, azimuthAngle=$azimuthAngle, centerTime=$centerTime, collectionId=$collectionId, continuousSpotAngle=$continuousSpotAngle, coordSys=$coordSys, createdAt=$createdAt, createdBy=$createdBy, detectionEnd=$detectionEnd, detectionId=$detectionId, detectionStart=$detectionStart, dwellTime=$dwellTime, externalId=$externalId, farRange=$farRange, grazeAngle=$grazeAngle, groundResolutionProjection=$groundResolutionProjection, idOnOrbit=$idOnOrbit, idSensor=$idSensor, incidenceAngle=$incidenceAngle, looksAzimuth=$looksAzimuth, looksRange=$looksRange, multilookNumber=$multilookNumber, nearRange=$nearRange, obDirection=$obDirection, operatingBand=$operatingBand, operatingFreq=$operatingFreq, orbitState=$orbitState, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, pulseBandwidth=$pulseBandwidth, pulseDuration=$pulseDuration, resolutionAzimuth=$resolutionAzimuth, resolutionRange=$resolutionRange, rxPolarization=$rxPolarization, satNo=$satNo, senalt=$senalt, senlatEnd=$senlatEnd, senlatStart=$senlatStart, senlonEnd=$senlonEnd, senlonStart=$senlonStart, senvelx=$senvelx, senvely=$senvely, senvelz=$senvelz, slantRange=$slantRange, snr=$snr, sourceDl=$sourceDl, spacingAzimuth=$spacingAzimuth, spacingRange=$spacingRange, squintAngle=$squintAngle, srcIds=$srcIds, srcTyps=$srcTyps, swathLength=$swathLength, tags=$tags, targetposx=$targetposx, targetposy=$targetposy, targetposz=$targetposz, transactionId=$transactionId, txPolarization=$txPolarization, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

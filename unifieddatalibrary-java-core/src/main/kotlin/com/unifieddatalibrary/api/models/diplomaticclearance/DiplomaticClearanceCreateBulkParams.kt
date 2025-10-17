@@ -218,42 +218,105 @@ private constructor(
      * specified country.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("firstDepDate")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
         private val firstDepDate: JsonField<OffsetDateTime>,
-        @JsonProperty("idMission") @ExcludeMissing private val idMission: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("apacsId") @ExcludeMissing private val apacsId: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("diplomaticClearanceDetails")
-        @ExcludeMissing
+        private val idMission: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val apacsId: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
         private val diplomaticClearanceDetails: JsonField<List<DiplomaticClearanceDetail>>,
-        @JsonProperty("diplomaticClearanceRemarks")
-        @ExcludeMissing
         private val diplomaticClearanceRemarks: JsonField<List<DiplomaticClearanceRemark>>,
-        @JsonProperty("dipWorksheetName")
-        @ExcludeMissing
         private val dipWorksheetName: JsonField<String>,
-        @JsonProperty("docDeadline")
-        @ExcludeMissing
         private val docDeadline: JsonField<OffsetDateTime>,
-        @JsonProperty("externalWorksheetId")
-        @ExcludeMissing
         private val externalWorksheetId: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("updatedAt") @ExcludeMissing private val updatedAt: JsonField<OffsetDateTime>,
-        @JsonProperty("updatedBy") @ExcludeMissing private val updatedBy: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val updatedAt: JsonField<OffsetDateTime>,
+        private val updatedBy: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("firstDepDate")
+            @ExcludeMissing
+            firstDepDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("idMission")
+            @ExcludeMissing
+            idMission: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("apacsId") @ExcludeMissing apacsId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("diplomaticClearanceDetails")
+            @ExcludeMissing
+            diplomaticClearanceDetails: JsonField<List<DiplomaticClearanceDetail>> =
+                JsonMissing.of(),
+            @JsonProperty("diplomaticClearanceRemarks")
+            @ExcludeMissing
+            diplomaticClearanceRemarks: JsonField<List<DiplomaticClearanceRemark>> =
+                JsonMissing.of(),
+            @JsonProperty("dipWorksheetName")
+            @ExcludeMissing
+            dipWorksheetName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("docDeadline")
+            @ExcludeMissing
+            docDeadline: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("externalWorksheetId")
+            @ExcludeMissing
+            externalWorksheetId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("updatedAt")
+            @ExcludeMissing
+            updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("updatedBy")
+            @ExcludeMissing
+            updatedBy: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            firstDepDate,
+            idMission,
+            source,
+            id,
+            apacsId,
+            createdAt,
+            createdBy,
+            diplomaticClearanceDetails,
+            diplomaticClearanceRemarks,
+            dipWorksheetName,
+            docDeadline,
+            externalWorksheetId,
+            origin,
+            origNetwork,
+            sourceDl,
+            updatedAt,
+            updatedBy,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -601,6 +664,16 @@ private constructor(
          */
         @JsonProperty("updatedBy") @ExcludeMissing fun _updatedBy(): JsonField<String> = updatedBy
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -646,6 +719,7 @@ private constructor(
             private var sourceDl: JsonField<String> = JsonMissing.of()
             private var updatedAt: JsonField<OffsetDateTime> = JsonMissing.of()
             private var updatedBy: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -670,6 +744,7 @@ private constructor(
                 sourceDl = body.sourceDl
                 updatedAt = body.updatedAt
                 updatedBy = body.updatedBy
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1013,6 +1088,25 @@ private constructor(
              */
             fun updatedBy(updatedBy: JsonField<String>) = apply { this.updatedBy = updatedBy }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1050,6 +1144,7 @@ private constructor(
                     sourceDl,
                     updatedAt,
                     updatedBy,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -2781,7 +2876,8 @@ private constructor(
                 origNetwork == other.origNetwork &&
                 sourceDl == other.sourceDl &&
                 updatedAt == other.updatedAt &&
-                updatedBy == other.updatedBy
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -2805,13 +2901,14 @@ private constructor(
                 sourceDl,
                 updatedAt,
                 updatedBy,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, firstDepDate=$firstDepDate, idMission=$idMission, source=$source, id=$id, apacsId=$apacsId, createdAt=$createdAt, createdBy=$createdBy, diplomaticClearanceDetails=$diplomaticClearanceDetails, diplomaticClearanceRemarks=$diplomaticClearanceRemarks, dipWorksheetName=$dipWorksheetName, docDeadline=$docDeadline, externalWorksheetId=$externalWorksheetId, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl, updatedAt=$updatedAt, updatedBy=$updatedBy}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, firstDepDate=$firstDepDate, idMission=$idMission, source=$source, id=$id, apacsId=$apacsId, createdAt=$createdAt, createdBy=$createdBy, diplomaticClearanceDetails=$diplomaticClearanceDetails, diplomaticClearanceRemarks=$diplomaticClearanceRemarks, dipWorksheetName=$dipWorksheetName, docDeadline=$docDeadline, externalWorksheetId=$externalWorksheetId, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

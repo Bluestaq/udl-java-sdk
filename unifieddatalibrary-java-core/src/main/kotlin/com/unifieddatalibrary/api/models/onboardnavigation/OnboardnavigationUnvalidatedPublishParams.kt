@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.onboardnavigation
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -215,44 +219,121 @@ private constructor(
      * ECI J2K being preferred.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("startTime") @ExcludeMissing private val startTime: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("deltaPos")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
+        private val startTime: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
         private val deltaPos: JsonField<List<List<Double>>>,
-        @JsonProperty("endTime") @ExcludeMissing private val endTime: JsonField<OffsetDateTime>,
-        @JsonProperty("esId") @ExcludeMissing private val esId: JsonField<String>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("idStateVector") @ExcludeMissing private val idStateVector: JsonField<String>,
-        @JsonProperty("mag") @ExcludeMissing private val mag: JsonField<List<List<Double>>>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("referenceFrame")
-        @ExcludeMissing
+        private val endTime: JsonField<OffsetDateTime>,
+        private val esId: JsonField<String>,
+        private val idOnOrbit: JsonField<String>,
+        private val idStateVector: JsonField<String>,
+        private val mag: JsonField<List<List<Double>>>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
         private val referenceFrame: JsonField<ReferenceFrame>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("starCatLoadTime")
-        @ExcludeMissing
+        private val satNo: JsonField<Int>,
         private val starCatLoadTime: JsonField<OffsetDateTime>,
-        @JsonProperty("starCatName") @ExcludeMissing private val starCatName: JsonField<String>,
-        @JsonProperty("starTracker")
-        @ExcludeMissing
+        private val starCatName: JsonField<String>,
         private val starTracker: JsonField<List<List<Double>>>,
-        @JsonProperty("sunSensor")
-        @ExcludeMissing
         private val sunSensor: JsonField<List<List<Double>>>,
-        @JsonProperty("ts") @ExcludeMissing private val ts: JsonField<List<OffsetDateTime>>,
+        private val ts: JsonField<List<OffsetDateTime>>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("startTime")
+            @ExcludeMissing
+            startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("deltaPos")
+            @ExcludeMissing
+            deltaPos: JsonField<List<List<Double>>> = JsonMissing.of(),
+            @JsonProperty("endTime")
+            @ExcludeMissing
+            endTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("esId") @ExcludeMissing esId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idStateVector")
+            @ExcludeMissing
+            idStateVector: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("mag")
+            @ExcludeMissing
+            mag: JsonField<List<List<Double>>> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("referenceFrame")
+            @ExcludeMissing
+            referenceFrame: JsonField<ReferenceFrame> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("starCatLoadTime")
+            @ExcludeMissing
+            starCatLoadTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("starCatName")
+            @ExcludeMissing
+            starCatName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("starTracker")
+            @ExcludeMissing
+            starTracker: JsonField<List<List<Double>>> = JsonMissing.of(),
+            @JsonProperty("sunSensor")
+            @ExcludeMissing
+            sunSensor: JsonField<List<List<Double>>> = JsonMissing.of(),
+            @JsonProperty("ts")
+            @ExcludeMissing
+            ts: JsonField<List<OffsetDateTime>> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            startTime,
+            id,
+            createdAt,
+            createdBy,
+            deltaPos,
+            endTime,
+            esId,
+            idOnOrbit,
+            idStateVector,
+            mag,
+            origin,
+            origNetwork,
+            origObjectId,
+            referenceFrame,
+            satNo,
+            starCatLoadTime,
+            starCatName,
+            starTracker,
+            sunSensor,
+            ts,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -663,6 +744,16 @@ private constructor(
          */
         @JsonProperty("ts") @ExcludeMissing fun _ts(): JsonField<List<OffsetDateTime>> = ts
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -707,6 +798,7 @@ private constructor(
             private var starTracker: JsonField<MutableList<List<Double>>>? = null
             private var sunSensor: JsonField<MutableList<List<Double>>>? = null
             private var ts: JsonField<MutableList<OffsetDateTime>>? = null
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -733,6 +825,7 @@ private constructor(
                 starTracker = body.starTracker.map { it.toMutableList() }
                 sunSensor = body.sunSensor.map { it.toMutableList() }
                 ts = body.ts.map { it.toMutableList() }
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1153,6 +1246,25 @@ private constructor(
                 ts = (ts ?: JsonField.of(mutableListOf())).also { checkKnown("ts", it).add(t) }
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1193,6 +1305,7 @@ private constructor(
                     (starTracker ?: JsonMissing.of()).map { it.toImmutable() },
                     (sunSensor ?: JsonMissing.of()).map { it.toImmutable() },
                     (ts ?: JsonMissing.of()).map { it.toImmutable() },
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1618,7 +1731,8 @@ private constructor(
                 starCatName == other.starCatName &&
                 starTracker == other.starTracker &&
                 sunSensor == other.sunSensor &&
-                ts == other.ts
+                ts == other.ts &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1646,13 +1760,14 @@ private constructor(
                 starTracker,
                 sunSensor,
                 ts,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, startTime=$startTime, id=$id, createdAt=$createdAt, createdBy=$createdBy, deltaPos=$deltaPos, endTime=$endTime, esId=$esId, idOnOrbit=$idOnOrbit, idStateVector=$idStateVector, mag=$mag, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, referenceFrame=$referenceFrame, satNo=$satNo, starCatLoadTime=$starCatLoadTime, starCatName=$starCatName, starTracker=$starTracker, sunSensor=$sunSensor, ts=$ts}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, startTime=$startTime, id=$id, createdAt=$createdAt, createdBy=$createdBy, deltaPos=$deltaPos, endTime=$endTime, esId=$esId, idOnOrbit=$idOnOrbit, idStateVector=$idStateVector, mag=$mag, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, referenceFrame=$referenceFrame, satNo=$satNo, starCatLoadTime=$starCatLoadTime, starCatName=$starCatName, starTracker=$starTracker, sunSensor=$sunSensor, ts=$ts, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

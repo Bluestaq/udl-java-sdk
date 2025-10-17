@@ -213,120 +213,313 @@ private constructor(
 
     /** Stores the results of a particular Conjunction Assessment (CA) run. */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("tca") @ExcludeMissing private val tca: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("ccir") @ExcludeMissing private val ccir: JsonField<String>,
-        @JsonProperty("cdAoM1") @ExcludeMissing private val cdAoM1: JsonField<Double>,
-        @JsonProperty("cdAoM2") @ExcludeMissing private val cdAoM2: JsonField<Double>,
-        @JsonProperty("collisionProb") @ExcludeMissing private val collisionProb: JsonField<Double>,
-        @JsonProperty("collisionProbMethod")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
+        private val tca: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
+        private val ccir: JsonField<String>,
+        private val cdAoM1: JsonField<Double>,
+        private val cdAoM2: JsonField<Double>,
+        private val collisionProb: JsonField<Double>,
         private val collisionProbMethod: JsonField<String>,
-        @JsonProperty("comments") @ExcludeMissing private val comments: JsonField<String>,
-        @JsonProperty("concernNotes") @ExcludeMissing private val concernNotes: JsonField<String>,
-        @JsonProperty("crAoM1") @ExcludeMissing private val crAoM1: JsonField<Double>,
-        @JsonProperty("crAoM2") @ExcludeMissing private val crAoM2: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("descriptor") @ExcludeMissing private val descriptor: JsonField<String>,
-        @JsonProperty("ephemName1") @ExcludeMissing private val ephemName1: JsonField<String>,
-        @JsonProperty("ephemName2") @ExcludeMissing private val ephemName2: JsonField<String>,
-        @JsonProperty("esId1") @ExcludeMissing private val esId1: JsonField<String>,
-        @JsonProperty("esId2") @ExcludeMissing private val esId2: JsonField<String>,
-        @JsonProperty("eventId") @ExcludeMissing private val eventId: JsonField<String>,
-        @JsonProperty("idOnOrbit1") @ExcludeMissing private val idOnOrbit1: JsonField<String>,
-        @JsonProperty("idOnOrbit2") @ExcludeMissing private val idOnOrbit2: JsonField<String>,
-        @JsonProperty("idStateVector1")
-        @ExcludeMissing
+        private val comments: JsonField<String>,
+        private val concernNotes: JsonField<String>,
+        private val crAoM1: JsonField<Double>,
+        private val crAoM2: JsonField<Double>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val descriptor: JsonField<String>,
+        private val ephemName1: JsonField<String>,
+        private val ephemName2: JsonField<String>,
+        private val esId1: JsonField<String>,
+        private val esId2: JsonField<String>,
+        private val eventId: JsonField<String>,
+        private val idOnOrbit1: JsonField<String>,
+        private val idOnOrbit2: JsonField<String>,
         private val idStateVector1: JsonField<String>,
-        @JsonProperty("idStateVector2")
-        @ExcludeMissing
         private val idStateVector2: JsonField<String>,
-        @JsonProperty("largeCovWarning")
-        @ExcludeMissing
         private val largeCovWarning: JsonField<Boolean>,
-        @JsonProperty("largeRelPosWarning")
-        @ExcludeMissing
         private val largeRelPosWarning: JsonField<Boolean>,
-        @JsonProperty("lastObTime1")
-        @ExcludeMissing
         private val lastObTime1: JsonField<OffsetDateTime>,
-        @JsonProperty("lastObTime2")
-        @ExcludeMissing
         private val lastObTime2: JsonField<OffsetDateTime>,
-        @JsonProperty("messageFor") @ExcludeMissing private val messageFor: JsonField<String>,
-        @JsonProperty("messageId") @ExcludeMissing private val messageId: JsonField<String>,
-        @JsonProperty("missDistance") @ExcludeMissing private val missDistance: JsonField<Double>,
-        @JsonProperty("origIdOnOrbit1")
-        @ExcludeMissing
+        private val messageFor: JsonField<String>,
+        private val messageId: JsonField<String>,
+        private val missDistance: JsonField<Double>,
         private val origIdOnOrbit1: JsonField<String>,
-        @JsonProperty("origIdOnOrbit2")
-        @ExcludeMissing
         private val origIdOnOrbit2: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("originator") @ExcludeMissing private val originator: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("ownerContacted")
-        @ExcludeMissing
+        private val origin: JsonField<String>,
+        private val originator: JsonField<String>,
+        private val origNetwork: JsonField<String>,
         private val ownerContacted: JsonField<Boolean>,
-        @JsonProperty("penetrationLevelSigma")
-        @ExcludeMissing
         private val penetrationLevelSigma: JsonField<Double>,
-        @JsonProperty("rawFileURI") @ExcludeMissing private val rawFileUri: JsonField<String>,
-        @JsonProperty("relPosN") @ExcludeMissing private val relPosN: JsonField<Double>,
-        @JsonProperty("relPosR") @ExcludeMissing private val relPosR: JsonField<Double>,
-        @JsonProperty("relPosT") @ExcludeMissing private val relPosT: JsonField<Double>,
-        @JsonProperty("relVelMag") @ExcludeMissing private val relVelMag: JsonField<Double>,
-        @JsonProperty("relVelN") @ExcludeMissing private val relVelN: JsonField<Double>,
-        @JsonProperty("relVelR") @ExcludeMissing private val relVelR: JsonField<Double>,
-        @JsonProperty("relVelT") @ExcludeMissing private val relVelT: JsonField<Double>,
-        @JsonProperty("satNo1") @ExcludeMissing private val satNo1: JsonField<Int>,
-        @JsonProperty("satNo2") @ExcludeMissing private val satNo2: JsonField<Int>,
-        @JsonProperty("screenEntryTime")
-        @ExcludeMissing
+        private val rawFileUri: JsonField<String>,
+        private val relPosN: JsonField<Double>,
+        private val relPosR: JsonField<Double>,
+        private val relPosT: JsonField<Double>,
+        private val relVelMag: JsonField<Double>,
+        private val relVelN: JsonField<Double>,
+        private val relVelR: JsonField<Double>,
+        private val relVelT: JsonField<Double>,
+        private val satNo1: JsonField<Int>,
+        private val satNo2: JsonField<Int>,
         private val screenEntryTime: JsonField<OffsetDateTime>,
-        @JsonProperty("screenExitTime")
-        @ExcludeMissing
         private val screenExitTime: JsonField<OffsetDateTime>,
-        @JsonProperty("screenVolumeX") @ExcludeMissing private val screenVolumeX: JsonField<Double>,
-        @JsonProperty("screenVolumeY") @ExcludeMissing private val screenVolumeY: JsonField<Double>,
-        @JsonProperty("screenVolumeZ") @ExcludeMissing private val screenVolumeZ: JsonField<Double>,
-        @JsonProperty("smallCovWarning")
-        @ExcludeMissing
+        private val screenVolumeX: JsonField<Double>,
+        private val screenVolumeY: JsonField<Double>,
+        private val screenVolumeZ: JsonField<Double>,
         private val smallCovWarning: JsonField<Boolean>,
-        @JsonProperty("smallRelVelWarning")
-        @ExcludeMissing
         private val smallRelVelWarning: JsonField<Boolean>,
-        @JsonProperty("stateDeptNotified")
-        @ExcludeMissing
         private val stateDeptNotified: JsonField<Boolean>,
-        @JsonProperty("stateVector1")
-        @ExcludeMissing
         private val stateVector1: JsonField<StateVector1>,
-        @JsonProperty("stateVector2")
-        @ExcludeMissing
         private val stateVector2: JsonField<StateVector2>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("thrustAccel1") @ExcludeMissing private val thrustAccel1: JsonField<Double>,
-        @JsonProperty("thrustAccel2") @ExcludeMissing private val thrustAccel2: JsonField<Double>,
-        @JsonProperty("transactionId") @ExcludeMissing private val transactionId: JsonField<String>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<String>,
-        @JsonProperty("uvwWarn") @ExcludeMissing private val uvwWarn: JsonField<Boolean>,
-        @JsonProperty("volEntryTime")
-        @ExcludeMissing
+        private val tags: JsonField<List<String>>,
+        private val thrustAccel1: JsonField<Double>,
+        private val thrustAccel2: JsonField<Double>,
+        private val transactionId: JsonField<String>,
+        private val type: JsonField<String>,
+        private val uvwWarn: JsonField<Boolean>,
         private val volEntryTime: JsonField<OffsetDateTime>,
-        @JsonProperty("volExitTime")
-        @ExcludeMissing
         private val volExitTime: JsonField<OffsetDateTime>,
-        @JsonProperty("volShape") @ExcludeMissing private val volShape: JsonField<String>,
+        private val volShape: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tca") @ExcludeMissing tca: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ccir") @ExcludeMissing ccir: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("cdAoM1") @ExcludeMissing cdAoM1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("cdAoM2") @ExcludeMissing cdAoM2: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("collisionProb")
+            @ExcludeMissing
+            collisionProb: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("collisionProbMethod")
+            @ExcludeMissing
+            collisionProbMethod: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("comments")
+            @ExcludeMissing
+            comments: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("concernNotes")
+            @ExcludeMissing
+            concernNotes: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("crAoM1") @ExcludeMissing crAoM1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("crAoM2") @ExcludeMissing crAoM2: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("descriptor")
+            @ExcludeMissing
+            descriptor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ephemName1")
+            @ExcludeMissing
+            ephemName1: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ephemName2")
+            @ExcludeMissing
+            ephemName2: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("esId1") @ExcludeMissing esId1: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("esId2") @ExcludeMissing esId2: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("eventId") @ExcludeMissing eventId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit1")
+            @ExcludeMissing
+            idOnOrbit1: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit2")
+            @ExcludeMissing
+            idOnOrbit2: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idStateVector1")
+            @ExcludeMissing
+            idStateVector1: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idStateVector2")
+            @ExcludeMissing
+            idStateVector2: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("largeCovWarning")
+            @ExcludeMissing
+            largeCovWarning: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("largeRelPosWarning")
+            @ExcludeMissing
+            largeRelPosWarning: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("lastObTime1")
+            @ExcludeMissing
+            lastObTime1: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("lastObTime2")
+            @ExcludeMissing
+            lastObTime2: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("messageFor")
+            @ExcludeMissing
+            messageFor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("messageId")
+            @ExcludeMissing
+            messageId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missDistance")
+            @ExcludeMissing
+            missDistance: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("origIdOnOrbit1")
+            @ExcludeMissing
+            origIdOnOrbit1: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origIdOnOrbit2")
+            @ExcludeMissing
+            origIdOnOrbit2: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("originator")
+            @ExcludeMissing
+            originator: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ownerContacted")
+            @ExcludeMissing
+            ownerContacted: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("penetrationLevelSigma")
+            @ExcludeMissing
+            penetrationLevelSigma: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rawFileURI")
+            @ExcludeMissing
+            rawFileUri: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("relPosN") @ExcludeMissing relPosN: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("relPosR") @ExcludeMissing relPosR: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("relPosT") @ExcludeMissing relPosT: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("relVelMag")
+            @ExcludeMissing
+            relVelMag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("relVelN") @ExcludeMissing relVelN: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("relVelR") @ExcludeMissing relVelR: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("relVelT") @ExcludeMissing relVelT: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("satNo1") @ExcludeMissing satNo1: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("satNo2") @ExcludeMissing satNo2: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("screenEntryTime")
+            @ExcludeMissing
+            screenEntryTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("screenExitTime")
+            @ExcludeMissing
+            screenExitTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("screenVolumeX")
+            @ExcludeMissing
+            screenVolumeX: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("screenVolumeY")
+            @ExcludeMissing
+            screenVolumeY: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("screenVolumeZ")
+            @ExcludeMissing
+            screenVolumeZ: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("smallCovWarning")
+            @ExcludeMissing
+            smallCovWarning: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("smallRelVelWarning")
+            @ExcludeMissing
+            smallRelVelWarning: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("stateDeptNotified")
+            @ExcludeMissing
+            stateDeptNotified: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("stateVector1")
+            @ExcludeMissing
+            stateVector1: JsonField<StateVector1> = JsonMissing.of(),
+            @JsonProperty("stateVector2")
+            @ExcludeMissing
+            stateVector2: JsonField<StateVector2> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("thrustAccel1")
+            @ExcludeMissing
+            thrustAccel1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("thrustAccel2")
+            @ExcludeMissing
+            thrustAccel2: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("transactionId")
+            @ExcludeMissing
+            transactionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("uvwWarn") @ExcludeMissing uvwWarn: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("volEntryTime")
+            @ExcludeMissing
+            volEntryTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("volExitTime")
+            @ExcludeMissing
+            volExitTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("volShape") @ExcludeMissing volShape: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            tca,
+            id,
+            ccir,
+            cdAoM1,
+            cdAoM2,
+            collisionProb,
+            collisionProbMethod,
+            comments,
+            concernNotes,
+            crAoM1,
+            crAoM2,
+            createdAt,
+            createdBy,
+            descriptor,
+            ephemName1,
+            ephemName2,
+            esId1,
+            esId2,
+            eventId,
+            idOnOrbit1,
+            idOnOrbit2,
+            idStateVector1,
+            idStateVector2,
+            largeCovWarning,
+            largeRelPosWarning,
+            lastObTime1,
+            lastObTime2,
+            messageFor,
+            messageId,
+            missDistance,
+            origIdOnOrbit1,
+            origIdOnOrbit2,
+            origin,
+            originator,
+            origNetwork,
+            ownerContacted,
+            penetrationLevelSigma,
+            rawFileUri,
+            relPosN,
+            relPosR,
+            relPosT,
+            relVelMag,
+            relVelN,
+            relVelR,
+            relVelT,
+            satNo1,
+            satNo2,
+            screenEntryTime,
+            screenExitTime,
+            screenVolumeX,
+            screenVolumeY,
+            screenVolumeZ,
+            smallCovWarning,
+            smallRelVelWarning,
+            stateDeptNotified,
+            stateVector1,
+            stateVector2,
+            tags,
+            thrustAccel1,
+            thrustAccel2,
+            transactionId,
+            type,
+            uvwWarn,
+            volEntryTime,
+            volExitTime,
+            volShape,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1538,6 +1731,16 @@ private constructor(
          */
         @JsonProperty("volShape") @ExcludeMissing fun _volShape(): JsonField<String> = volShape
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1628,6 +1831,7 @@ private constructor(
             private var volEntryTime: JsonField<OffsetDateTime> = JsonMissing.of()
             private var volExitTime: JsonField<OffsetDateTime> = JsonMissing.of()
             private var volShape: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1700,6 +1904,7 @@ private constructor(
                 volEntryTime = body.volEntryTime
                 volExitTime = body.volExitTime
                 volShape = body.volShape
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -2760,6 +2965,25 @@ private constructor(
              */
             fun volShape(volShape: JsonField<String>) = apply { this.volShape = volShape }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -2846,6 +3070,7 @@ private constructor(
                     volEntryTime,
                     volExitTime,
                     volShape,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -14420,7 +14645,8 @@ private constructor(
                 uvwWarn == other.uvwWarn &&
                 volEntryTime == other.volEntryTime &&
                 volExitTime == other.volExitTime &&
-                volShape == other.volShape
+                volShape == other.volShape &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -14494,13 +14720,14 @@ private constructor(
                 volEntryTime,
                 volExitTime,
                 volShape,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, tca=$tca, id=$id, ccir=$ccir, cdAoM1=$cdAoM1, cdAoM2=$cdAoM2, collisionProb=$collisionProb, collisionProbMethod=$collisionProbMethod, comments=$comments, concernNotes=$concernNotes, crAoM1=$crAoM1, crAoM2=$crAoM2, createdAt=$createdAt, createdBy=$createdBy, descriptor=$descriptor, ephemName1=$ephemName1, ephemName2=$ephemName2, esId1=$esId1, esId2=$esId2, eventId=$eventId, idOnOrbit1=$idOnOrbit1, idOnOrbit2=$idOnOrbit2, idStateVector1=$idStateVector1, idStateVector2=$idStateVector2, largeCovWarning=$largeCovWarning, largeRelPosWarning=$largeRelPosWarning, lastObTime1=$lastObTime1, lastObTime2=$lastObTime2, messageFor=$messageFor, messageId=$messageId, missDistance=$missDistance, origIdOnOrbit1=$origIdOnOrbit1, origIdOnOrbit2=$origIdOnOrbit2, origin=$origin, originator=$originator, origNetwork=$origNetwork, ownerContacted=$ownerContacted, penetrationLevelSigma=$penetrationLevelSigma, rawFileUri=$rawFileUri, relPosN=$relPosN, relPosR=$relPosR, relPosT=$relPosT, relVelMag=$relVelMag, relVelN=$relVelN, relVelR=$relVelR, relVelT=$relVelT, satNo1=$satNo1, satNo2=$satNo2, screenEntryTime=$screenEntryTime, screenExitTime=$screenExitTime, screenVolumeX=$screenVolumeX, screenVolumeY=$screenVolumeY, screenVolumeZ=$screenVolumeZ, smallCovWarning=$smallCovWarning, smallRelVelWarning=$smallRelVelWarning, stateDeptNotified=$stateDeptNotified, stateVector1=$stateVector1, stateVector2=$stateVector2, tags=$tags, thrustAccel1=$thrustAccel1, thrustAccel2=$thrustAccel2, transactionId=$transactionId, type=$type, uvwWarn=$uvwWarn, volEntryTime=$volEntryTime, volExitTime=$volExitTime, volShape=$volShape}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, tca=$tca, id=$id, ccir=$ccir, cdAoM1=$cdAoM1, cdAoM2=$cdAoM2, collisionProb=$collisionProb, collisionProbMethod=$collisionProbMethod, comments=$comments, concernNotes=$concernNotes, crAoM1=$crAoM1, crAoM2=$crAoM2, createdAt=$createdAt, createdBy=$createdBy, descriptor=$descriptor, ephemName1=$ephemName1, ephemName2=$ephemName2, esId1=$esId1, esId2=$esId2, eventId=$eventId, idOnOrbit1=$idOnOrbit1, idOnOrbit2=$idOnOrbit2, idStateVector1=$idStateVector1, idStateVector2=$idStateVector2, largeCovWarning=$largeCovWarning, largeRelPosWarning=$largeRelPosWarning, lastObTime1=$lastObTime1, lastObTime2=$lastObTime2, messageFor=$messageFor, messageId=$messageId, missDistance=$missDistance, origIdOnOrbit1=$origIdOnOrbit1, origIdOnOrbit2=$origIdOnOrbit2, origin=$origin, originator=$originator, origNetwork=$origNetwork, ownerContacted=$ownerContacted, penetrationLevelSigma=$penetrationLevelSigma, rawFileUri=$rawFileUri, relPosN=$relPosN, relPosR=$relPosR, relPosT=$relPosT, relVelMag=$relVelMag, relVelN=$relVelN, relVelR=$relVelR, relVelT=$relVelT, satNo1=$satNo1, satNo2=$satNo2, screenEntryTime=$screenEntryTime, screenExitTime=$screenExitTime, screenVolumeX=$screenVolumeX, screenVolumeY=$screenVolumeY, screenVolumeZ=$screenVolumeZ, smallCovWarning=$smallCovWarning, smallRelVelWarning=$smallRelVelWarning, stateDeptNotified=$stateDeptNotified, stateVector1=$stateVector1, stateVector2=$stateVector2, tags=$tags, thrustAccel1=$thrustAccel1, thrustAccel2=$thrustAccel2, transactionId=$transactionId, type=$type, uvwWarn=$uvwWarn, volEntryTime=$volEntryTime, volExitTime=$volExitTime, volShape=$volShape, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

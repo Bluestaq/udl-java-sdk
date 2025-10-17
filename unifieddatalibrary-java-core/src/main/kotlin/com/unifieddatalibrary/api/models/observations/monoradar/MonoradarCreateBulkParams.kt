@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.observations.monoradar
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -214,84 +218,263 @@ private constructor(
      * used to generate the record.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("msgfmt") @ExcludeMissing private val msgfmt: JsonField<String>,
-        @JsonProperty("msgts") @ExcludeMissing private val msgts: JsonField<OffsetDateTime>,
-        @JsonProperty("msgtyp") @ExcludeMissing private val msgtyp: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("ts") @ExcludeMissing private val ts: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("acp") @ExcludeMissing private val acp: JsonField<Int>,
-        @JsonProperty("addr") @ExcludeMissing private val addr: JsonField<String>,
-        @JsonProperty("af") @ExcludeMissing private val af: JsonField<Boolean>,
-        @JsonProperty("aims") @ExcludeMissing private val aims: JsonField<Boolean>,
-        @JsonProperty("alt3d") @ExcludeMissing private val alt3d: JsonField<Double>,
-        @JsonProperty("artsqual") @ExcludeMissing private val artsqual: JsonField<String>,
-        @JsonProperty("az") @ExcludeMissing private val az: JsonField<Double>,
-        @JsonProperty("azdelt") @ExcludeMissing private val azdelt: JsonField<Double>,
-        @JsonProperty("bcnhits") @ExcludeMissing private val bcnhits: JsonField<Int>,
-        @JsonProperty("cartpos") @ExcludeMissing private val cartpos: JsonField<List<Double>>,
-        @JsonProperty("cdm") @ExcludeMissing private val cdm: JsonField<String>,
-        @JsonProperty("code7500") @ExcludeMissing private val code7500: JsonField<Boolean>,
-        @JsonProperty("code7600") @ExcludeMissing private val code7600: JsonField<Boolean>,
-        @JsonProperty("code7700") @ExcludeMissing private val code7700: JsonField<Boolean>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("faa") @ExcludeMissing private val faa: JsonField<Boolean>,
-        @JsonProperty("grndspd") @ExcludeMissing private val grndspd: JsonField<Double>,
-        @JsonProperty("hdng") @ExcludeMissing private val hdng: JsonField<Double>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("m1") @ExcludeMissing private val m1: JsonField<String>,
-        @JsonProperty("m1g") @ExcludeMissing private val m1g: JsonField<Boolean>,
-        @JsonProperty("m1v") @ExcludeMissing private val m1v: JsonField<String>,
-        @JsonProperty("m2") @ExcludeMissing private val m2: JsonField<String>,
-        @JsonProperty("m2g") @ExcludeMissing private val m2g: JsonField<Boolean>,
-        @JsonProperty("m2v") @ExcludeMissing private val m2v: JsonField<String>,
-        @JsonProperty("m2xv") @ExcludeMissing private val m2xv: JsonField<String>,
-        @JsonProperty("m3a") @ExcludeMissing private val m3a: JsonField<String>,
-        @JsonProperty("m3ag") @ExcludeMissing private val m3ag: JsonField<Boolean>,
-        @JsonProperty("m3av") @ExcludeMissing private val m3av: JsonField<String>,
-        @JsonProperty("m3axv") @ExcludeMissing private val m3axv: JsonField<String>,
-        @JsonProperty("m4") @ExcludeMissing private val m4: JsonField<String>,
-        @JsonProperty("m4d1d2") @ExcludeMissing private val m4d1d2: JsonField<String>,
-        @JsonProperty("m4v") @ExcludeMissing private val m4v: JsonField<String>,
-        @JsonProperty("mah") @ExcludeMissing private val mah: JsonField<String>,
-        @JsonProperty("mc") @ExcludeMissing private val mc: JsonField<Double>,
-        @JsonProperty("mcg") @ExcludeMissing private val mcg: JsonField<Boolean>,
-        @JsonProperty("mcv") @ExcludeMissing private val mcv: JsonField<String>,
-        @JsonProperty("milemrgcy") @ExcludeMissing private val milemrgcy: JsonField<Boolean>,
-        @JsonProperty("mrgrpt") @ExcludeMissing private val mrgrpt: JsonField<Boolean>,
-        @JsonProperty("mscommb") @ExcludeMissing private val mscommb: JsonField<String>,
-        @JsonProperty("mti") @ExcludeMissing private val mti: JsonField<Boolean>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("psrrl") @ExcludeMissing private val psrrl: JsonField<Double>,
-        @JsonProperty("rad") @ExcludeMissing private val rad: JsonField<String>,
-        @JsonProperty("rng") @ExcludeMissing private val rng: JsonField<Double>,
-        @JsonProperty("rngdelt") @ExcludeMissing private val rngdelt: JsonField<Double>,
-        @JsonProperty("sac") @ExcludeMissing private val sac: JsonField<Int>,
-        @JsonProperty("senalt") @ExcludeMissing private val senalt: JsonField<Double>,
-        @JsonProperty("senlat") @ExcludeMissing private val senlat: JsonField<Double>,
-        @JsonProperty("senlon") @ExcludeMissing private val senlon: JsonField<Double>,
-        @JsonProperty("sic") @ExcludeMissing private val sic: JsonField<Int>,
-        @JsonProperty("spi") @ExcludeMissing private val spi: JsonField<Boolean>,
-        @JsonProperty("ssrl") @ExcludeMissing private val ssrl: JsonField<Double>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("tgtconf") @ExcludeMissing private val tgtconf: JsonField<String>,
-        @JsonProperty("tgtcorr") @ExcludeMissing private val tgtcorr: JsonField<String>,
-        @JsonProperty("tgtid") @ExcludeMissing private val tgtid: JsonField<String>,
-        @JsonProperty("tis") @ExcludeMissing private val tis: JsonField<Double>,
-        @JsonProperty("trkelig") @ExcludeMissing private val trkelig: JsonField<String>,
-        @JsonProperty("trknum") @ExcludeMissing private val trknum: JsonField<Int>,
-        @JsonProperty("tti") @ExcludeMissing private val tti: JsonField<String>,
-        @JsonProperty("wectc") @ExcludeMissing private val wectc: JsonField<List<String>>,
+        private val dataMode: JsonField<DataMode>,
+        private val msgfmt: JsonField<String>,
+        private val msgts: JsonField<OffsetDateTime>,
+        private val msgtyp: JsonField<String>,
+        private val source: JsonField<String>,
+        private val ts: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
+        private val acp: JsonField<Int>,
+        private val addr: JsonField<String>,
+        private val af: JsonField<Boolean>,
+        private val aims: JsonField<Boolean>,
+        private val alt3d: JsonField<Double>,
+        private val artsqual: JsonField<String>,
+        private val az: JsonField<Double>,
+        private val azdelt: JsonField<Double>,
+        private val bcnhits: JsonField<Int>,
+        private val cartpos: JsonField<List<Double>>,
+        private val cdm: JsonField<String>,
+        private val code7500: JsonField<Boolean>,
+        private val code7600: JsonField<Boolean>,
+        private val code7700: JsonField<Boolean>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val faa: JsonField<Boolean>,
+        private val grndspd: JsonField<Double>,
+        private val hdng: JsonField<Double>,
+        private val idSensor: JsonField<String>,
+        private val m1: JsonField<String>,
+        private val m1g: JsonField<Boolean>,
+        private val m1v: JsonField<String>,
+        private val m2: JsonField<String>,
+        private val m2g: JsonField<Boolean>,
+        private val m2v: JsonField<String>,
+        private val m2xv: JsonField<String>,
+        private val m3a: JsonField<String>,
+        private val m3ag: JsonField<Boolean>,
+        private val m3av: JsonField<String>,
+        private val m3axv: JsonField<String>,
+        private val m4: JsonField<String>,
+        private val m4d1d2: JsonField<String>,
+        private val m4v: JsonField<String>,
+        private val mah: JsonField<String>,
+        private val mc: JsonField<Double>,
+        private val mcg: JsonField<Boolean>,
+        private val mcv: JsonField<String>,
+        private val milemrgcy: JsonField<Boolean>,
+        private val mrgrpt: JsonField<Boolean>,
+        private val mscommb: JsonField<String>,
+        private val mti: JsonField<Boolean>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origSensorId: JsonField<String>,
+        private val psrrl: JsonField<Double>,
+        private val rad: JsonField<String>,
+        private val rng: JsonField<Double>,
+        private val rngdelt: JsonField<Double>,
+        private val sac: JsonField<Int>,
+        private val senalt: JsonField<Double>,
+        private val senlat: JsonField<Double>,
+        private val senlon: JsonField<Double>,
+        private val sic: JsonField<Int>,
+        private val spi: JsonField<Boolean>,
+        private val ssrl: JsonField<Double>,
+        private val tags: JsonField<List<String>>,
+        private val tgtconf: JsonField<String>,
+        private val tgtcorr: JsonField<String>,
+        private val tgtid: JsonField<String>,
+        private val tis: JsonField<Double>,
+        private val trkelig: JsonField<String>,
+        private val trknum: JsonField<Int>,
+        private val tti: JsonField<String>,
+        private val wectc: JsonField<List<String>>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("msgfmt") @ExcludeMissing msgfmt: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("msgts")
+            @ExcludeMissing
+            msgts: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("msgtyp") @ExcludeMissing msgtyp: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ts") @ExcludeMissing ts: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("acp") @ExcludeMissing acp: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("addr") @ExcludeMissing addr: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("af") @ExcludeMissing af: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("aims") @ExcludeMissing aims: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("alt3d") @ExcludeMissing alt3d: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("artsqual")
+            @ExcludeMissing
+            artsqual: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("az") @ExcludeMissing az: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azdelt") @ExcludeMissing azdelt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("bcnhits") @ExcludeMissing bcnhits: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("cartpos")
+            @ExcludeMissing
+            cartpos: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("cdm") @ExcludeMissing cdm: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("code7500")
+            @ExcludeMissing
+            code7500: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("code7600")
+            @ExcludeMissing
+            code7600: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("code7700")
+            @ExcludeMissing
+            code7700: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("faa") @ExcludeMissing faa: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("grndspd") @ExcludeMissing grndspd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hdng") @ExcludeMissing hdng: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("m1") @ExcludeMissing m1: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("m1g") @ExcludeMissing m1g: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("m1v") @ExcludeMissing m1v: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("m2") @ExcludeMissing m2: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("m2g") @ExcludeMissing m2g: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("m2v") @ExcludeMissing m2v: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("m2xv") @ExcludeMissing m2xv: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("m3a") @ExcludeMissing m3a: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("m3ag") @ExcludeMissing m3ag: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("m3av") @ExcludeMissing m3av: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("m3axv") @ExcludeMissing m3axv: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("m4") @ExcludeMissing m4: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("m4d1d2") @ExcludeMissing m4d1d2: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("m4v") @ExcludeMissing m4v: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("mah") @ExcludeMissing mah: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("mc") @ExcludeMissing mc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("mcg") @ExcludeMissing mcg: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("mcv") @ExcludeMissing mcv: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("milemrgcy")
+            @ExcludeMissing
+            milemrgcy: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("mrgrpt") @ExcludeMissing mrgrpt: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("mscommb") @ExcludeMissing mscommb: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("mti") @ExcludeMissing mti: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("psrrl") @ExcludeMissing psrrl: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rad") @ExcludeMissing rad: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rng") @ExcludeMissing rng: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rngdelt") @ExcludeMissing rngdelt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sac") @ExcludeMissing sac: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("senalt") @ExcludeMissing senalt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlat") @ExcludeMissing senlat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlon") @ExcludeMissing senlon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sic") @ExcludeMissing sic: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("spi") @ExcludeMissing spi: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("ssrl") @ExcludeMissing ssrl: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("tgtconf") @ExcludeMissing tgtconf: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tgtcorr") @ExcludeMissing tgtcorr: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tgtid") @ExcludeMissing tgtid: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tis") @ExcludeMissing tis: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("trkelig") @ExcludeMissing trkelig: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("trknum") @ExcludeMissing trknum: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("tti") @ExcludeMissing tti: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("wectc") @ExcludeMissing wectc: JsonField<List<String>> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            msgfmt,
+            msgts,
+            msgtyp,
+            source,
+            ts,
+            id,
+            acp,
+            addr,
+            af,
+            aims,
+            alt3d,
+            artsqual,
+            az,
+            azdelt,
+            bcnhits,
+            cartpos,
+            cdm,
+            code7500,
+            code7600,
+            code7700,
+            createdAt,
+            createdBy,
+            faa,
+            grndspd,
+            hdng,
+            idSensor,
+            m1,
+            m1g,
+            m1v,
+            m2,
+            m2g,
+            m2v,
+            m2xv,
+            m3a,
+            m3ag,
+            m3av,
+            m3axv,
+            m4,
+            m4d1d2,
+            m4v,
+            mah,
+            mc,
+            mcg,
+            mcv,
+            milemrgcy,
+            mrgrpt,
+            mscommb,
+            mti,
+            origin,
+            origNetwork,
+            origSensorId,
+            psrrl,
+            rad,
+            rng,
+            rngdelt,
+            sac,
+            senalt,
+            senlat,
+            senlon,
+            sic,
+            spi,
+            ssrl,
+            tags,
+            tgtconf,
+            tgtcorr,
+            tgtid,
+            tis,
+            trkelig,
+            trknum,
+            tti,
+            wectc,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1434,6 +1617,16 @@ private constructor(
          */
         @JsonProperty("wectc") @ExcludeMissing fun _wectc(): JsonField<List<String>> = wectc
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1531,6 +1724,7 @@ private constructor(
             private var trknum: JsonField<Int> = JsonMissing.of()
             private var tti: JsonField<String> = JsonMissing.of()
             private var wectc: JsonField<MutableList<String>>? = null
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1607,6 +1801,7 @@ private constructor(
                 trknum = body.trknum
                 tti = body.tti
                 wectc = body.wectc.map { it.toMutableList() }
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -2591,6 +2786,25 @@ private constructor(
                     }
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -2684,6 +2898,7 @@ private constructor(
                     trknum,
                     tti,
                     (wectc ?: JsonMissing.of()).map { it.toImmutable() },
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -3094,7 +3309,8 @@ private constructor(
                 trkelig == other.trkelig &&
                 trknum == other.trknum &&
                 tti == other.tti &&
-                wectc == other.wectc
+                wectc == other.wectc &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -3172,13 +3388,14 @@ private constructor(
                 trknum,
                 tti,
                 wectc,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, msgfmt=$msgfmt, msgts=$msgts, msgtyp=$msgtyp, source=$source, ts=$ts, id=$id, acp=$acp, addr=$addr, af=$af, aims=$aims, alt3d=$alt3d, artsqual=$artsqual, az=$az, azdelt=$azdelt, bcnhits=$bcnhits, cartpos=$cartpos, cdm=$cdm, code7500=$code7500, code7600=$code7600, code7700=$code7700, createdAt=$createdAt, createdBy=$createdBy, faa=$faa, grndspd=$grndspd, hdng=$hdng, idSensor=$idSensor, m1=$m1, m1g=$m1g, m1v=$m1v, m2=$m2, m2g=$m2g, m2v=$m2v, m2xv=$m2xv, m3a=$m3a, m3ag=$m3ag, m3av=$m3av, m3axv=$m3axv, m4=$m4, m4d1d2=$m4d1d2, m4v=$m4v, mah=$mah, mc=$mc, mcg=$mcg, mcv=$mcv, milemrgcy=$milemrgcy, mrgrpt=$mrgrpt, mscommb=$mscommb, mti=$mti, origin=$origin, origNetwork=$origNetwork, origSensorId=$origSensorId, psrrl=$psrrl, rad=$rad, rng=$rng, rngdelt=$rngdelt, sac=$sac, senalt=$senalt, senlat=$senlat, senlon=$senlon, sic=$sic, spi=$spi, ssrl=$ssrl, tags=$tags, tgtconf=$tgtconf, tgtcorr=$tgtcorr, tgtid=$tgtid, tis=$tis, trkelig=$trkelig, trknum=$trknum, tti=$tti, wectc=$wectc}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, msgfmt=$msgfmt, msgts=$msgts, msgtyp=$msgtyp, source=$source, ts=$ts, id=$id, acp=$acp, addr=$addr, af=$af, aims=$aims, alt3d=$alt3d, artsqual=$artsqual, az=$az, azdelt=$azdelt, bcnhits=$bcnhits, cartpos=$cartpos, cdm=$cdm, code7500=$code7500, code7600=$code7600, code7700=$code7700, createdAt=$createdAt, createdBy=$createdBy, faa=$faa, grndspd=$grndspd, hdng=$hdng, idSensor=$idSensor, m1=$m1, m1g=$m1g, m1v=$m1v, m2=$m2, m2g=$m2g, m2v=$m2v, m2xv=$m2xv, m3a=$m3a, m3ag=$m3ag, m3av=$m3av, m3axv=$m3axv, m4=$m4, m4d1d2=$m4d1d2, m4v=$m4v, mah=$mah, mc=$mc, mcg=$mcg, mcv=$mcv, milemrgcy=$milemrgcy, mrgrpt=$mrgrpt, mscommb=$mscommb, mti=$mti, origin=$origin, origNetwork=$origNetwork, origSensorId=$origSensorId, psrrl=$psrrl, rad=$rad, rng=$rng, rngdelt=$rngdelt, sac=$sac, senalt=$senalt, senlat=$senlat, senlon=$senlon, sic=$sic, spi=$spi, ssrl=$ssrl, tags=$tags, tgtconf=$tgtconf, tgtcorr=$tgtcorr, tgtid=$tgtid, tis=$tis, trkelig=$trkelig, trknum=$trknum, tti=$tti, wectc=$wectc, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

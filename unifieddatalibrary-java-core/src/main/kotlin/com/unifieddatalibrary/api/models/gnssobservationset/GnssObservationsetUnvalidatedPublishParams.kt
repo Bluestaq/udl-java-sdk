@@ -216,57 +216,168 @@ private constructor(
 
     /** Set of GNSSObservation data. */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("ts") @ExcludeMissing private val ts: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("agcState") @ExcludeMissing private val agcState: JsonField<Int>,
-        @JsonProperty("alt") @ExcludeMissing private val alt: JsonField<Double>,
-        @JsonProperty("boresight") @ExcludeMissing private val boresight: JsonField<List<Double>>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("esId") @ExcludeMissing private val esId: JsonField<String>,
-        @JsonProperty("eventId") @ExcludeMissing private val eventId: JsonField<String>,
-        @JsonProperty("gDop") @ExcludeMissing private val gDop: JsonField<Double>,
-        @JsonProperty("gnssObservationList")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
+        private val ts: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
+        private val agcState: JsonField<Int>,
+        private val alt: JsonField<Double>,
+        private val boresight: JsonField<List<Double>>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val esId: JsonField<String>,
+        private val eventId: JsonField<String>,
+        private val gDop: JsonField<Double>,
         private val gnssObservationList: JsonField<List<GnssObservationList>>,
-        @JsonProperty("hDop") @ExcludeMissing private val hDop: JsonField<Double>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("lat") @ExcludeMissing private val lat: JsonField<Double>,
-        @JsonProperty("lon") @ExcludeMissing private val lon: JsonField<Double>,
-        @JsonProperty("markerType") @ExcludeMissing private val markerType: JsonField<String>,
-        @JsonProperty("navigationStatus")
-        @ExcludeMissing
+        private val hDop: JsonField<Double>,
+        private val idOnOrbit: JsonField<String>,
+        private val lat: JsonField<Double>,
+        private val lon: JsonField<Double>,
+        private val markerType: JsonField<String>,
         private val navigationStatus: JsonField<String>,
-        @JsonProperty("obsCodes") @ExcludeMissing private val obsCodes: JsonField<List<String>>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("outage") @ExcludeMissing private val outage: JsonField<Int>,
-        @JsonProperty("pDop") @ExcludeMissing private val pDop: JsonField<Double>,
-        @JsonProperty("quat") @ExcludeMissing private val quat: JsonField<List<Double>>,
-        @JsonProperty("receiver") @ExcludeMissing private val receiver: JsonField<String>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("satPosition")
-        @ExcludeMissing
+        private val obsCodes: JsonField<List<String>>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val outage: JsonField<Int>,
+        private val pDop: JsonField<Double>,
+        private val quat: JsonField<List<Double>>,
+        private val receiver: JsonField<String>,
+        private val satNo: JsonField<Int>,
         private val satPosition: JsonField<List<Double>>,
-        @JsonProperty("satVelocity")
-        @ExcludeMissing
         private val satVelocity: JsonField<List<Double>>,
-        @JsonProperty("srcIds") @ExcludeMissing private val srcIds: JsonField<List<String>>,
-        @JsonProperty("srcTyps") @ExcludeMissing private val srcTyps: JsonField<List<String>>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("tDop") @ExcludeMissing private val tDop: JsonField<Double>,
-        @JsonProperty("trackingStatus") @ExcludeMissing private val trackingStatus: JsonField<Int>,
-        @JsonProperty("transactionId") @ExcludeMissing private val transactionId: JsonField<String>,
-        @JsonProperty("vDop") @ExcludeMissing private val vDop: JsonField<Double>,
+        private val srcIds: JsonField<List<String>>,
+        private val srcTyps: JsonField<List<String>>,
+        private val tags: JsonField<List<String>>,
+        private val tDop: JsonField<Double>,
+        private val trackingStatus: JsonField<Int>,
+        private val transactionId: JsonField<String>,
+        private val vDop: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ts") @ExcludeMissing ts: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("agcState") @ExcludeMissing agcState: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("alt") @ExcludeMissing alt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("boresight")
+            @ExcludeMissing
+            boresight: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("esId") @ExcludeMissing esId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("eventId") @ExcludeMissing eventId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("gDop") @ExcludeMissing gDop: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("gnssObservationList")
+            @ExcludeMissing
+            gnssObservationList: JsonField<List<GnssObservationList>> = JsonMissing.of(),
+            @JsonProperty("hDop") @ExcludeMissing hDop: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("markerType")
+            @ExcludeMissing
+            markerType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("navigationStatus")
+            @ExcludeMissing
+            navigationStatus: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("obsCodes")
+            @ExcludeMissing
+            obsCodes: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("outage") @ExcludeMissing outage: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("pDop") @ExcludeMissing pDop: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("quat") @ExcludeMissing quat: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("receiver")
+            @ExcludeMissing
+            receiver: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("satPosition")
+            @ExcludeMissing
+            satPosition: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("satVelocity")
+            @ExcludeMissing
+            satVelocity: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("srcIds")
+            @ExcludeMissing
+            srcIds: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("srcTyps")
+            @ExcludeMissing
+            srcTyps: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("tDop") @ExcludeMissing tDop: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("trackingStatus")
+            @ExcludeMissing
+            trackingStatus: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("transactionId")
+            @ExcludeMissing
+            transactionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("vDop") @ExcludeMissing vDop: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            ts,
+            id,
+            agcState,
+            alt,
+            boresight,
+            createdAt,
+            createdBy,
+            esId,
+            eventId,
+            gDop,
+            gnssObservationList,
+            hDop,
+            idOnOrbit,
+            lat,
+            lon,
+            markerType,
+            navigationStatus,
+            obsCodes,
+            origin,
+            origNetwork,
+            origObjectId,
+            outage,
+            pDop,
+            quat,
+            receiver,
+            satNo,
+            satPosition,
+            satVelocity,
+            srcIds,
+            srcTyps,
+            tags,
+            tDop,
+            trackingStatus,
+            transactionId,
+            vDop,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -933,6 +1044,16 @@ private constructor(
          */
         @JsonProperty("vDop") @ExcludeMissing fun _vDop(): JsonField<Double> = vDop
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -992,6 +1113,7 @@ private constructor(
             private var trackingStatus: JsonField<Int> = JsonMissing.of()
             private var transactionId: JsonField<String> = JsonMissing.of()
             private var vDop: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1033,6 +1155,7 @@ private constructor(
                 trackingStatus = body.trackingStatus
                 transactionId = body.transactionId
                 vDop = body.vDop
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1740,6 +1863,25 @@ private constructor(
              */
             fun vDop(vDop: JsonField<Double>) = apply { this.vDop = vDop }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1795,6 +1937,7 @@ private constructor(
                     trackingStatus,
                     transactionId,
                     vDop,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -2507,7 +2650,8 @@ private constructor(
                 tDop == other.tDop &&
                 trackingStatus == other.trackingStatus &&
                 transactionId == other.transactionId &&
-                vDop == other.vDop
+                vDop == other.vDop &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -2550,13 +2694,14 @@ private constructor(
                 trackingStatus,
                 transactionId,
                 vDop,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, agcState=$agcState, alt=$alt, boresight=$boresight, createdAt=$createdAt, createdBy=$createdBy, esId=$esId, eventId=$eventId, gDop=$gDop, gnssObservationList=$gnssObservationList, hDop=$hDop, idOnOrbit=$idOnOrbit, lat=$lat, lon=$lon, markerType=$markerType, navigationStatus=$navigationStatus, obsCodes=$obsCodes, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, outage=$outage, pDop=$pDop, quat=$quat, receiver=$receiver, satNo=$satNo, satPosition=$satPosition, satVelocity=$satVelocity, srcIds=$srcIds, srcTyps=$srcTyps, tags=$tags, tDop=$tDop, trackingStatus=$trackingStatus, transactionId=$transactionId, vDop=$vDop}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, agcState=$agcState, alt=$alt, boresight=$boresight, createdAt=$createdAt, createdBy=$createdBy, esId=$esId, eventId=$eventId, gDop=$gDop, gnssObservationList=$gnssObservationList, hDop=$hDop, idOnOrbit=$idOnOrbit, lat=$lat, lon=$lon, markerType=$markerType, navigationStatus=$navigationStatus, obsCodes=$obsCodes, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, outage=$outage, pDop=$pDop, quat=$quat, receiver=$receiver, satNo=$satNo, satPosition=$satPosition, satVelocity=$satVelocity, srcIds=$srcIds, srcTyps=$srcTyps, tags=$tags, tDop=$tDop, trackingStatus=$trackingStatus, transactionId=$transactionId, vDop=$vDop, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

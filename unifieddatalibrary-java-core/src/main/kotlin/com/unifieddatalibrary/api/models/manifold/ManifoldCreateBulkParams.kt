@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.manifold
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -15,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -208,26 +212,67 @@ private constructor(
      * a delta V and delta T.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("idObjectOfInterest")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
         private val idObjectOfInterest: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("deltaT") @ExcludeMissing private val deltaT: JsonField<Double>,
-        @JsonProperty("deltaV") @ExcludeMissing private val deltaV: JsonField<Double>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("status") @ExcludeMissing private val status: JsonField<String>,
-        @JsonProperty("weight") @ExcludeMissing private val weight: JsonField<Double>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val deltaT: JsonField<Double>,
+        private val deltaV: JsonField<Double>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val status: JsonField<String>,
+        private val weight: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("idObjectOfInterest")
+            @ExcludeMissing
+            idObjectOfInterest: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("deltaT") @ExcludeMissing deltaT: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("deltaV") @ExcludeMissing deltaV: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("status") @ExcludeMissing status: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("weight") @ExcludeMissing weight: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            idObjectOfInterest,
+            source,
+            id,
+            createdAt,
+            createdBy,
+            deltaT,
+            deltaV,
+            origin,
+            origNetwork,
+            status,
+            weight,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -456,6 +501,16 @@ private constructor(
          */
         @JsonProperty("weight") @ExcludeMissing fun _weight(): JsonField<Double> = weight
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -490,6 +545,7 @@ private constructor(
             private var origNetwork: JsonField<String> = JsonMissing.of()
             private var status: JsonField<String> = JsonMissing.of()
             private var weight: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -506,6 +562,7 @@ private constructor(
                 origNetwork = body.origNetwork
                 status = body.status
                 weight = body.weight
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -704,6 +761,25 @@ private constructor(
              */
             fun weight(weight: JsonField<Double>) = apply { this.weight = weight }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -734,6 +810,7 @@ private constructor(
                     origNetwork,
                     status,
                     weight,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -964,7 +1041,8 @@ private constructor(
                 origin == other.origin &&
                 origNetwork == other.origNetwork &&
                 status == other.status &&
-                weight == other.weight
+                weight == other.weight &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -982,13 +1060,14 @@ private constructor(
                 origNetwork,
                 status,
                 weight,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idObjectOfInterest=$idObjectOfInterest, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, deltaT=$deltaT, deltaV=$deltaV, origin=$origin, origNetwork=$origNetwork, status=$status, weight=$weight}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idObjectOfInterest=$idObjectOfInterest, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, deltaT=$deltaT, deltaV=$deltaV, origin=$origin, origNetwork=$origNetwork, status=$status, weight=$weight, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {
