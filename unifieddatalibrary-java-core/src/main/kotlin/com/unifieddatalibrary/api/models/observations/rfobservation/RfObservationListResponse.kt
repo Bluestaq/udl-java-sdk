@@ -472,7 +472,7 @@ private constructor(
     fun antennaName(): Optional<String> = antennaName.getOptional("antennaName")
 
     /**
-     * azimuth angle in degrees and J2000 coordinate frame.
+     * Azimuth angle in degrees and topocentric coordinate frame.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -506,7 +506,7 @@ private constructor(
     fun azimuthUnc(): Optional<Double> = azimuthUnc.getOptional("azimuthUnc")
 
     /**
-     * Measured bandwidth in Hz.
+     * Measured bandwidth in hertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -547,7 +547,8 @@ private constructor(
     fun channel(): Optional<Int> = channel.getOptional("channel")
 
     /**
-     * Collection mode (e.g. SURVEY, SPOT_SEARCH, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH, MANUAL, etc).
+     * Collection mode (e.g. CONTINUOUS, MANUAL, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH, SPOT_SEARCH,
+     * SURVEY, etc).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -595,7 +596,7 @@ private constructor(
     fun detectionStatus(): Optional<String> = detectionStatus.getOptional("detectionStatus")
 
     /**
-     * Measured Equivalent Isotopically Radiated Power in dBW.
+     * Measured Equivalent Isotopically Radiated Power in decibel watts.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -603,7 +604,7 @@ private constructor(
     fun eirp(): Optional<Double> = eirp.getOptional("eirp")
 
     /**
-     * elevation in degrees and J2000 coordinate frame.
+     * Elevation in degrees and topocentric coordinate frame.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -645,7 +646,7 @@ private constructor(
     fun elnot(): Optional<String> = elnot.getOptional("elnot")
 
     /**
-     * End carrier frequency in Hz.
+     * End carrier frequency in hertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -653,7 +654,7 @@ private constructor(
     fun endFrequency(): Optional<Double> = endFrequency.getOptional("endFrequency")
 
     /**
-     * Center carrier frequency in Hz.
+     * Center carrier frequency in hertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -702,7 +703,7 @@ private constructor(
     fun innerCodingRate(): Optional<Int> = innerCodingRate.getOptional("innerCodingRate")
 
     /**
-     * Maximum measured PSD value of the trace in dBW.
+     * Maximum measured PSD value of the trace in decibel watts.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -710,7 +711,7 @@ private constructor(
     fun maxPsd(): Optional<Double> = maxPsd.getOptional("maxPSD")
 
     /**
-     * Minimum measured PSD value of the trace in dBW.
+     * Minimum measured PSD value of the trace in decibel watts.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -726,7 +727,7 @@ private constructor(
     fun modulation(): Optional<String> = modulation.getOptional("modulation")
 
     /**
-     * Noise power density, in dBW-Hz.
+     * Noise power density, in decibel watts per hertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -734,7 +735,7 @@ private constructor(
     fun noisePwrDensity(): Optional<Double> = noisePwrDensity.getOptional("noisePwrDensity")
 
     /**
-     * Expected bandwidth in Hz.
+     * Expected bandwidth in hertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -742,7 +743,7 @@ private constructor(
     fun nominalBandwidth(): Optional<Double> = nominalBandwidth.getOptional("nominalBandwidth")
 
     /**
-     * Expected Equivalent Isotopically Radiated Power in dBW.
+     * Expected Equivalent Isotopically Radiated Power in decibel watts.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -750,7 +751,7 @@ private constructor(
     fun nominalEirp(): Optional<Double> = nominalEirp.getOptional("nominalEirp")
 
     /**
-     * Nominal or expected center carrier frequency in Hz.
+     * Nominal or expected center carrier frequency in hertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -758,7 +759,7 @@ private constructor(
     fun nominalFrequency(): Optional<Double> = nominalFrequency.getOptional("nominalFrequency")
 
     /**
-     * Expected carrier power over noise (dBW/Hz).
+     * Expected carrier power over noise (decibel watts per hertz).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -767,7 +768,7 @@ private constructor(
         nominalPowerOverNoise.getOptional("nominalPowerOverNoise")
 
     /**
-     * Nominal or expected signal to noise ratio, in dB.
+     * Nominal or expected signal to noise ratio, in decibels.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -848,7 +849,8 @@ private constructor(
 
     /**
      * A pulse group repetition interval (PGRI) is a pulse train in which there are groups of
-     * closely spaced pulses separated by much longer times between these pulse groups.
+     * closely spaced pulses separated by much longer times between these pulse groups. The PGRI is
+     * measured in seconds.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -875,7 +877,7 @@ private constructor(
     fun polarityType(): Optional<PolarityType> = polarityType.getOptional("polarityType")
 
     /**
-     * Measured carrier power over noise (dBW/Hz).
+     * Measured carrier power over noise (decibel watts per hertz).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -883,7 +885,7 @@ private constructor(
     fun powerOverNoise(): Optional<Double> = powerOverNoise.getOptional("powerOverNoise")
 
     /**
-     * Target range in km.
+     * Target range in kilometers.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -901,7 +903,7 @@ private constructor(
     fun rangeMeasured(): Optional<Boolean> = rangeMeasured.getOptional("rangeMeasured")
 
     /**
-     * Rate of change of the range in km/sec.
+     * Rate of change of the range in kilometers per second.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -945,7 +947,7 @@ private constructor(
     fun rawFileUri(): Optional<String> = rawFileUri.getOptional("rawFileURI")
 
     /**
-     * Reference signal level, in dBW.
+     * Reference signal level, in decibel watts.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -953,7 +955,7 @@ private constructor(
     fun referenceLevel(): Optional<Double> = referenceLevel.getOptional("referenceLevel")
 
     /**
-     * Measured power of the center carrier frequency in dBW.
+     * Measured power of the center carrier frequency in decibel watts.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -963,7 +965,7 @@ private constructor(
 
     /**
      * The measure of the signal created from the sum of all the noise sources and unwanted signals
-     * within the measurement system, in dBW.
+     * within the measurement system, in decibel watts.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -972,7 +974,7 @@ private constructor(
         relativeNoiseFloor.getOptional("relativeNoiseFloor")
 
     /**
-     * Resolution bandwidth in Hz.
+     * Resolution bandwidth in hertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -1016,7 +1018,7 @@ private constructor(
     fun senlon(): Optional<Double> = senlon.getOptional("senlon")
 
     /**
-     * Signal to noise ratio, in dB.
+     * Signal to noise ratio, in decibels.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -1034,7 +1036,7 @@ private constructor(
     fun sourceDl(): Optional<String> = sourceDl.getOptional("sourceDL")
 
     /**
-     * Measured spectrum analyzer power of the center carrier frequency in dBW.
+     * Measured spectrum analyzer power of the center carrier frequency in decibel watts.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -1043,7 +1045,7 @@ private constructor(
         spectrumAnalyzerPower.getOptional("spectrumAnalyzerPower")
 
     /**
-     * Start carrier frequency in Hz.
+     * Start carrier frequency in hertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -1059,7 +1061,7 @@ private constructor(
     fun switchPoint(): Optional<Int> = switchPoint.getOptional("switchPoint")
 
     /**
-     * Symbol to noise ratio, in dB.
+     * Symbol to noise ratio, in decibels.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -1084,7 +1086,7 @@ private constructor(
     fun trackId(): Optional<String> = trackId.getOptional("trackId")
 
     /**
-     * Target track or apparent range in km.
+     * Target track or apparent range in kilometers.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -1110,7 +1112,7 @@ private constructor(
         transmitFilterRollOff.getOptional("transmitFilterRollOff")
 
     /**
-     * Transmit pulse shaping filter typ (e.g. RRC).
+     * Transmit pulse shaping filter type (e.g. RRC).
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -1147,7 +1149,7 @@ private constructor(
     fun url(): Optional<String> = url.getOptional("url")
 
     /**
-     * Video bandwidth in Hz.
+     * Video bandwidth in hertz.
      *
      * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
      *   if the server responded with an unexpected value).
@@ -2158,7 +2160,7 @@ private constructor(
          */
         fun antennaName(antennaName: JsonField<String>) = apply { this.antennaName = antennaName }
 
-        /** azimuth angle in degrees and J2000 coordinate frame. */
+        /** Azimuth angle in degrees and topocentric coordinate frame. */
         fun azimuth(azimuth: Double) = azimuth(JsonField.of(azimuth))
 
         /**
@@ -2212,7 +2214,7 @@ private constructor(
          */
         fun azimuthUnc(azimuthUnc: JsonField<Double>) = apply { this.azimuthUnc = azimuthUnc }
 
-        /** Measured bandwidth in Hz. */
+        /** Measured bandwidth in hertz. */
         fun bandwidth(bandwidth: Double) = bandwidth(JsonField.of(bandwidth))
 
         /**
@@ -2279,8 +2281,8 @@ private constructor(
         fun channel(channel: JsonField<Int>) = apply { this.channel = channel }
 
         /**
-         * Collection mode (e.g. SURVEY, SPOT_SEARCH, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH, MANUAL,
-         * etc).
+         * Collection mode (e.g. CONTINUOUS, MANUAL, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH,
+         * SPOT_SEARCH, SURVEY, etc).
          */
         fun collectionMode(collectionMode: String) = collectionMode(JsonField.of(collectionMode))
 
@@ -2360,7 +2362,7 @@ private constructor(
             this.detectionStatus = detectionStatus
         }
 
-        /** Measured Equivalent Isotopically Radiated Power in dBW. */
+        /** Measured Equivalent Isotopically Radiated Power in decibel watts. */
         fun eirp(eirp: Double) = eirp(JsonField.of(eirp))
 
         /**
@@ -2371,7 +2373,7 @@ private constructor(
          */
         fun eirp(eirp: JsonField<Double>) = apply { this.eirp = eirp }
 
-        /** elevation in degrees and J2000 coordinate frame. */
+        /** Elevation in degrees and topocentric coordinate frame. */
         fun elevation(elevation: Double) = elevation(JsonField.of(elevation))
 
         /**
@@ -2441,7 +2443,7 @@ private constructor(
          */
         fun elnot(elnot: JsonField<String>) = apply { this.elnot = elnot }
 
-        /** End carrier frequency in Hz. */
+        /** End carrier frequency in hertz. */
         fun endFrequency(endFrequency: Double) = endFrequency(JsonField.of(endFrequency))
 
         /**
@@ -2455,7 +2457,7 @@ private constructor(
             this.endFrequency = endFrequency
         }
 
-        /** Center carrier frequency in Hz. */
+        /** Center carrier frequency in hertz. */
         fun frequency(frequency: Double) = frequency(JsonField.of(frequency))
 
         /**
@@ -2533,7 +2535,7 @@ private constructor(
             this.innerCodingRate = innerCodingRate
         }
 
-        /** Maximum measured PSD value of the trace in dBW. */
+        /** Maximum measured PSD value of the trace in decibel watts. */
         fun maxPsd(maxPsd: Double) = maxPsd(JsonField.of(maxPsd))
 
         /**
@@ -2544,7 +2546,7 @@ private constructor(
          */
         fun maxPsd(maxPsd: JsonField<Double>) = apply { this.maxPsd = maxPsd }
 
-        /** Minimum measured PSD value of the trace in dBW. */
+        /** Minimum measured PSD value of the trace in decibel watts. */
         fun minPsd(minPsd: Double) = minPsd(JsonField.of(minPsd))
 
         /**
@@ -2567,7 +2569,7 @@ private constructor(
          */
         fun modulation(modulation: JsonField<String>) = apply { this.modulation = modulation }
 
-        /** Noise power density, in dBW-Hz. */
+        /** Noise power density, in decibel watts per hertz. */
         fun noisePwrDensity(noisePwrDensity: Double) =
             noisePwrDensity(JsonField.of(noisePwrDensity))
 
@@ -2582,7 +2584,7 @@ private constructor(
             this.noisePwrDensity = noisePwrDensity
         }
 
-        /** Expected bandwidth in Hz. */
+        /** Expected bandwidth in hertz. */
         fun nominalBandwidth(nominalBandwidth: Double) =
             nominalBandwidth(JsonField.of(nominalBandwidth))
 
@@ -2597,7 +2599,7 @@ private constructor(
             this.nominalBandwidth = nominalBandwidth
         }
 
-        /** Expected Equivalent Isotopically Radiated Power in dBW. */
+        /** Expected Equivalent Isotopically Radiated Power in decibel watts. */
         fun nominalEirp(nominalEirp: Double) = nominalEirp(JsonField.of(nominalEirp))
 
         /**
@@ -2609,7 +2611,7 @@ private constructor(
          */
         fun nominalEirp(nominalEirp: JsonField<Double>) = apply { this.nominalEirp = nominalEirp }
 
-        /** Nominal or expected center carrier frequency in Hz. */
+        /** Nominal or expected center carrier frequency in hertz. */
         fun nominalFrequency(nominalFrequency: Double) =
             nominalFrequency(JsonField.of(nominalFrequency))
 
@@ -2624,7 +2626,7 @@ private constructor(
             this.nominalFrequency = nominalFrequency
         }
 
-        /** Expected carrier power over noise (dBW/Hz). */
+        /** Expected carrier power over noise (decibel watts per hertz). */
         fun nominalPowerOverNoise(nominalPowerOverNoise: Double) =
             nominalPowerOverNoise(JsonField.of(nominalPowerOverNoise))
 
@@ -2639,7 +2641,7 @@ private constructor(
             this.nominalPowerOverNoise = nominalPowerOverNoise
         }
 
-        /** Nominal or expected signal to noise ratio, in dB. */
+        /** Nominal or expected signal to noise ratio, in decibels. */
         fun nominalSnr(nominalSnr: Double) = nominalSnr(JsonField.of(nominalSnr))
 
         /**
@@ -2772,7 +2774,8 @@ private constructor(
 
         /**
          * A pulse group repetition interval (PGRI) is a pulse train in which there are groups of
-         * closely spaced pulses separated by much longer times between these pulse groups.
+         * closely spaced pulses separated by much longer times between these pulse groups. The PGRI
+         * is measured in seconds.
          */
         fun pgri(pgri: Double) = pgri(JsonField.of(pgri))
 
@@ -2814,7 +2817,7 @@ private constructor(
             this.polarityType = polarityType
         }
 
-        /** Measured carrier power over noise (dBW/Hz). */
+        /** Measured carrier power over noise (decibel watts per hertz). */
         fun powerOverNoise(powerOverNoise: Double) = powerOverNoise(JsonField.of(powerOverNoise))
 
         /**
@@ -2828,7 +2831,7 @@ private constructor(
             this.powerOverNoise = powerOverNoise
         }
 
-        /** Target range in km. */
+        /** Target range in kilometers. */
         fun range(range: Double) = range(JsonField.of(range))
 
         /**
@@ -2857,7 +2860,7 @@ private constructor(
             this.rangeMeasured = rangeMeasured
         }
 
-        /** Rate of change of the range in km/sec. */
+        /** Rate of change of the range in kilometers per second. */
         fun rangeRate(rangeRate: Double) = rangeRate(JsonField.of(rangeRate))
 
         /**
@@ -2929,7 +2932,7 @@ private constructor(
          */
         fun rawFileUri(rawFileUri: JsonField<String>) = apply { this.rawFileUri = rawFileUri }
 
-        /** Reference signal level, in dBW. */
+        /** Reference signal level, in decibel watts. */
         fun referenceLevel(referenceLevel: Double) = referenceLevel(JsonField.of(referenceLevel))
 
         /**
@@ -2943,7 +2946,7 @@ private constructor(
             this.referenceLevel = referenceLevel
         }
 
-        /** Measured power of the center carrier frequency in dBW. */
+        /** Measured power of the center carrier frequency in decibel watts. */
         fun relativeCarrierPower(relativeCarrierPower: Double) =
             relativeCarrierPower(JsonField.of(relativeCarrierPower))
 
@@ -2960,7 +2963,7 @@ private constructor(
 
         /**
          * The measure of the signal created from the sum of all the noise sources and unwanted
-         * signals within the measurement system, in dBW.
+         * signals within the measurement system, in decibel watts.
          */
         fun relativeNoiseFloor(relativeNoiseFloor: Double) =
             relativeNoiseFloor(JsonField.of(relativeNoiseFloor))
@@ -2976,7 +2979,7 @@ private constructor(
             this.relativeNoiseFloor = relativeNoiseFloor
         }
 
-        /** Resolution bandwidth in Hz. */
+        /** Resolution bandwidth in hertz. */
         fun resolutionBandwidth(resolutionBandwidth: Double) =
             resolutionBandwidth(JsonField.of(resolutionBandwidth))
 
@@ -3044,7 +3047,7 @@ private constructor(
          */
         fun senlon(senlon: JsonField<Double>) = apply { this.senlon = senlon }
 
-        /** Signal to noise ratio, in dB. */
+        /** Signal to noise ratio, in decibels. */
         fun snr(snr: Double) = snr(JsonField.of(snr))
 
         /**
@@ -3070,7 +3073,7 @@ private constructor(
          */
         fun sourceDl(sourceDl: JsonField<String>) = apply { this.sourceDl = sourceDl }
 
-        /** Measured spectrum analyzer power of the center carrier frequency in dBW. */
+        /** Measured spectrum analyzer power of the center carrier frequency in decibel watts. */
         fun spectrumAnalyzerPower(spectrumAnalyzerPower: Double) =
             spectrumAnalyzerPower(JsonField.of(spectrumAnalyzerPower))
 
@@ -3085,7 +3088,7 @@ private constructor(
             this.spectrumAnalyzerPower = spectrumAnalyzerPower
         }
 
-        /** Start carrier frequency in Hz. */
+        /** Start carrier frequency in hertz. */
         fun startFrequency(startFrequency: Double) = startFrequency(JsonField.of(startFrequency))
 
         /**
@@ -3110,7 +3113,7 @@ private constructor(
          */
         fun switchPoint(switchPoint: JsonField<Int>) = apply { this.switchPoint = switchPoint }
 
-        /** Symbol to noise ratio, in dB. */
+        /** Symbol to noise ratio, in decibels. */
         fun symbolToNoiseRatio(symbolToNoiseRatio: Double) =
             symbolToNoiseRatio(JsonField.of(symbolToNoiseRatio))
 
@@ -3147,7 +3150,7 @@ private constructor(
          */
         fun trackId(trackId: JsonField<String>) = apply { this.trackId = trackId }
 
-        /** Target track or apparent range in km. */
+        /** Target track or apparent range in kilometers. */
         fun trackRange(trackRange: Double) = trackRange(JsonField.of(trackRange))
 
         /**
@@ -3191,7 +3194,7 @@ private constructor(
             this.transmitFilterRollOff = transmitFilterRollOff
         }
 
-        /** Transmit pulse shaping filter typ (e.g. RRC). */
+        /** Transmit pulse shaping filter type (e.g. RRC). */
         fun transmitFilterType(transmitFilterType: String) =
             transmitFilterType(JsonField.of(transmitFilterType))
 
@@ -3249,7 +3252,7 @@ private constructor(
          */
         fun url(url: JsonField<String>) = apply { this.url = url }
 
-        /** Video bandwidth in Hz. */
+        /** Video bandwidth in hertz. */
         fun videoBandwidth(videoBandwidth: Double) = videoBandwidth(JsonField.of(videoBandwidth))
 
         /**

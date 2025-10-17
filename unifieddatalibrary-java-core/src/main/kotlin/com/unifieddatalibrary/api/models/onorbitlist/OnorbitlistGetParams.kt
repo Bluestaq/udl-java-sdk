@@ -10,8 +10,7 @@ import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
 
 /**
- * Service operation to get a single OnorbitList record by its unique ID passed as a path parameter.
- * An OnorbitList is just a generic named list of on-orbit IDs.
+ * Service operation to get a single OnOrbitList record by its unique ID passed as a path parameter.
  */
 class OnorbitlistGetParams
 private constructor(
