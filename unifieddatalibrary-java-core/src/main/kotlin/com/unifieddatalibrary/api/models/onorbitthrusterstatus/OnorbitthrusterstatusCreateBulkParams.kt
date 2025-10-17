@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.onorbitthrusterstatus
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -15,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -210,41 +214,126 @@ private constructor(
 
     /** Status information for OnorbitThruster objects. */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("idOnorbitThruster")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
         private val idOnorbitThruster: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("statusTime")
-        @ExcludeMissing
+        private val source: JsonField<String>,
         private val statusTime: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("estDeltaV") @ExcludeMissing private val estDeltaV: JsonField<Double>,
-        @JsonProperty("fuelMass") @ExcludeMissing private val fuelMass: JsonField<Double>,
-        @JsonProperty("fuelMassUnc") @ExcludeMissing private val fuelMassUnc: JsonField<Double>,
-        @JsonProperty("isp") @ExcludeMissing private val isp: JsonField<Double>,
-        @JsonProperty("maxDeltaV") @ExcludeMissing private val maxDeltaV: JsonField<Double>,
-        @JsonProperty("minDeltaV") @ExcludeMissing private val minDeltaV: JsonField<Double>,
-        @JsonProperty("name") @ExcludeMissing private val name: JsonField<String>,
-        @JsonProperty("operational") @ExcludeMissing private val operational: JsonField<Boolean>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("propMassAvg") @ExcludeMissing private val propMassAvg: JsonField<Double>,
-        @JsonProperty("propMassMax") @ExcludeMissing private val propMassMax: JsonField<Double>,
-        @JsonProperty("propMassMedian")
-        @ExcludeMissing
+        private val id: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val estDeltaV: JsonField<Double>,
+        private val fuelMass: JsonField<Double>,
+        private val fuelMassUnc: JsonField<Double>,
+        private val isp: JsonField<Double>,
+        private val maxDeltaV: JsonField<Double>,
+        private val minDeltaV: JsonField<Double>,
+        private val name: JsonField<String>,
+        private val operational: JsonField<Boolean>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val propMassAvg: JsonField<Double>,
+        private val propMassMax: JsonField<Double>,
         private val propMassMedian: JsonField<Double>,
-        @JsonProperty("propMassMin") @ExcludeMissing private val propMassMin: JsonField<Double>,
-        @JsonProperty("thrustMax") @ExcludeMissing private val thrustMax: JsonField<Double>,
-        @JsonProperty("totalDeltaV") @ExcludeMissing private val totalDeltaV: JsonField<Double>,
+        private val propMassMin: JsonField<Double>,
+        private val thrustMax: JsonField<Double>,
+        private val totalDeltaV: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("idOnorbitThruster")
+            @ExcludeMissing
+            idOnorbitThruster: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("statusTime")
+            @ExcludeMissing
+            statusTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("estDeltaV")
+            @ExcludeMissing
+            estDeltaV: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fuelMass")
+            @ExcludeMissing
+            fuelMass: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fuelMassUnc")
+            @ExcludeMissing
+            fuelMassUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("isp") @ExcludeMissing isp: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("maxDeltaV")
+            @ExcludeMissing
+            maxDeltaV: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("minDeltaV")
+            @ExcludeMissing
+            minDeltaV: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("name") @ExcludeMissing name: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("operational")
+            @ExcludeMissing
+            operational: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("propMassAvg")
+            @ExcludeMissing
+            propMassAvg: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("propMassMax")
+            @ExcludeMissing
+            propMassMax: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("propMassMedian")
+            @ExcludeMissing
+            propMassMedian: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("propMassMin")
+            @ExcludeMissing
+            propMassMin: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("thrustMax")
+            @ExcludeMissing
+            thrustMax: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("totalDeltaV")
+            @ExcludeMissing
+            totalDeltaV: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            idOnorbitThruster,
+            source,
+            statusTime,
+            id,
+            createdAt,
+            createdBy,
+            estDeltaV,
+            fuelMass,
+            fuelMassUnc,
+            isp,
+            maxDeltaV,
+            minDeltaV,
+            name,
+            operational,
+            origin,
+            origNetwork,
+            propMassAvg,
+            propMassMax,
+            propMassMedian,
+            propMassMin,
+            thrustMax,
+            totalDeltaV,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -659,6 +748,16 @@ private constructor(
         @ExcludeMissing
         fun _totalDeltaV(): JsonField<Double> = totalDeltaV
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -705,6 +804,7 @@ private constructor(
             private var propMassMin: JsonField<Double> = JsonMissing.of()
             private var thrustMax: JsonField<Double> = JsonMissing.of()
             private var totalDeltaV: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -732,6 +832,7 @@ private constructor(
                 propMassMin = body.propMassMin
                 thrustMax = body.thrustMax
                 totalDeltaV = body.totalDeltaV
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1084,6 +1185,25 @@ private constructor(
                 this.totalDeltaV = totalDeltaV
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1126,6 +1246,7 @@ private constructor(
                     propMassMin,
                     thrustMax,
                     totalDeltaV,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1389,7 +1510,8 @@ private constructor(
                 propMassMedian == other.propMassMedian &&
                 propMassMin == other.propMassMin &&
                 thrustMax == other.thrustMax &&
-                totalDeltaV == other.totalDeltaV
+                totalDeltaV == other.totalDeltaV &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1418,13 +1540,14 @@ private constructor(
                 propMassMin,
                 thrustMax,
                 totalDeltaV,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idOnorbitThruster=$idOnorbitThruster, source=$source, statusTime=$statusTime, id=$id, createdAt=$createdAt, createdBy=$createdBy, estDeltaV=$estDeltaV, fuelMass=$fuelMass, fuelMassUnc=$fuelMassUnc, isp=$isp, maxDeltaV=$maxDeltaV, minDeltaV=$minDeltaV, name=$name, operational=$operational, origin=$origin, origNetwork=$origNetwork, propMassAvg=$propMassAvg, propMassMax=$propMassMax, propMassMedian=$propMassMedian, propMassMin=$propMassMin, thrustMax=$thrustMax, totalDeltaV=$totalDeltaV}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idOnorbitThruster=$idOnorbitThruster, source=$source, statusTime=$statusTime, id=$id, createdAt=$createdAt, createdBy=$createdBy, estDeltaV=$estDeltaV, fuelMass=$fuelMass, fuelMassUnc=$fuelMassUnc, isp=$isp, maxDeltaV=$maxDeltaV, minDeltaV=$minDeltaV, name=$name, operational=$operational, origin=$origin, origNetwork=$origNetwork, propMassAvg=$propMassAvg, propMassMax=$propMassMax, propMassMedian=$propMassMedian, propMassMin=$propMassMin, thrustMax=$thrustMax, totalDeltaV=$totalDeltaV, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

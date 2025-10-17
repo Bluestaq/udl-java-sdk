@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.itemtrackings
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -209,33 +213,104 @@ private constructor(
     override fun _queryParams(): QueryParams = additionalQueryParams
 
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("scanCode") @ExcludeMissing private val scanCode: JsonField<String>,
-        @JsonProperty("scannerId") @ExcludeMissing private val scannerId: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("ts") @ExcludeMissing private val ts: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("dvCode") @ExcludeMissing private val dvCode: JsonField<String>,
-        @JsonProperty("idItem") @ExcludeMissing private val idItem: JsonField<String>,
-        @JsonProperty("keys") @ExcludeMissing private val keys: JsonField<List<String>>,
-        @JsonProperty("lat") @ExcludeMissing private val lat: JsonField<Double>,
-        @JsonProperty("lon") @ExcludeMissing private val lon: JsonField<Double>,
-        @JsonProperty("notes") @ExcludeMissing private val notes: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("scanType") @ExcludeMissing private val scanType: JsonField<String>,
-        @JsonProperty("scGenTool") @ExcludeMissing private val scGenTool: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<String>,
-        @JsonProperty("values") @ExcludeMissing private val values: JsonField<List<String>>,
+        private val dataMode: JsonField<DataMode>,
+        private val scanCode: JsonField<String>,
+        private val scannerId: JsonField<String>,
+        private val source: JsonField<String>,
+        private val ts: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val dvCode: JsonField<String>,
+        private val idItem: JsonField<String>,
+        private val keys: JsonField<List<String>>,
+        private val lat: JsonField<Double>,
+        private val lon: JsonField<Double>,
+        private val notes: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val scanType: JsonField<String>,
+        private val scGenTool: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val type: JsonField<String>,
+        private val values: JsonField<List<String>>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("scanCode")
+            @ExcludeMissing
+            scanCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("scannerId")
+            @ExcludeMissing
+            scannerId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ts") @ExcludeMissing ts: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dvCode") @ExcludeMissing dvCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idItem") @ExcludeMissing idItem: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("keys") @ExcludeMissing keys: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("notes") @ExcludeMissing notes: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("scanType")
+            @ExcludeMissing
+            scanType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("scGenTool")
+            @ExcludeMissing
+            scGenTool: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("values")
+            @ExcludeMissing
+            values: JsonField<List<String>> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            scanCode,
+            scannerId,
+            source,
+            ts,
+            id,
+            createdAt,
+            createdBy,
+            dvCode,
+            idItem,
+            keys,
+            lat,
+            lon,
+            notes,
+            origin,
+            origNetwork,
+            scanType,
+            scGenTool,
+            sourceDl,
+            type,
+            values,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -607,6 +682,16 @@ private constructor(
          */
         @JsonProperty("values") @ExcludeMissing fun _values(): JsonField<List<String>> = values
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -652,6 +737,7 @@ private constructor(
             private var sourceDl: JsonField<String> = JsonMissing.of()
             private var type: JsonField<String> = JsonMissing.of()
             private var values: JsonField<MutableList<String>>? = null
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -677,6 +763,7 @@ private constructor(
                 sourceDl = body.sourceDl
                 type = body.type
                 values = body.values.map { it.toMutableList() }
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1023,6 +1110,25 @@ private constructor(
                     }
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1064,6 +1170,7 @@ private constructor(
                     sourceDl,
                     type,
                     (values ?: JsonMissing.of()).map { it.toImmutable() },
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1321,7 +1428,8 @@ private constructor(
                 scGenTool == other.scGenTool &&
                 sourceDl == other.sourceDl &&
                 type == other.type &&
-                values == other.values
+                values == other.values &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1348,13 +1456,14 @@ private constructor(
                 sourceDl,
                 type,
                 values,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, scanCode=$scanCode, scannerId=$scannerId, source=$source, ts=$ts, id=$id, createdAt=$createdAt, createdBy=$createdBy, dvCode=$dvCode, idItem=$idItem, keys=$keys, lat=$lat, lon=$lon, notes=$notes, origin=$origin, origNetwork=$origNetwork, scanType=$scanType, scGenTool=$scGenTool, sourceDl=$sourceDl, type=$type, values=$values}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, scanCode=$scanCode, scannerId=$scannerId, source=$source, ts=$ts, id=$id, createdAt=$createdAt, createdBy=$createdBy, dvCode=$dvCode, idItem=$idItem, keys=$keys, lat=$lat, lon=$lon, notes=$notes, origin=$origin, origNetwork=$origNetwork, scanType=$scanType, scGenTool=$scGenTool, sourceDl=$sourceDl, type=$type, values=$values, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

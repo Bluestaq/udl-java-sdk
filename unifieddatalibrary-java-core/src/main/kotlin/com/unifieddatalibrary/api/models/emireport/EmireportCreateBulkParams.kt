@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.emireport
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -212,131 +216,356 @@ private constructor(
      * space-based and terrestrial systems.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("isr") @ExcludeMissing private val isr: JsonField<Boolean>,
-        @JsonProperty("reportId") @ExcludeMissing private val reportId: JsonField<String>,
-        @JsonProperty("reportTime")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val isr: JsonField<Boolean>,
+        private val reportId: JsonField<String>,
         private val reportTime: JsonField<OffsetDateTime>,
-        @JsonProperty("reportType") @ExcludeMissing private val reportType: JsonField<String>,
-        @JsonProperty("requestAssist")
-        @ExcludeMissing
+        private val reportType: JsonField<String>,
         private val requestAssist: JsonField<Boolean>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("startTime") @ExcludeMissing private val startTime: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("actionsTaken") @ExcludeMissing private val actionsTaken: JsonField<String>,
-        @JsonProperty("affActivity") @ExcludeMissing private val affActivity: JsonField<String>,
-        @JsonProperty("alt") @ExcludeMissing private val alt: JsonField<Double>,
-        @JsonProperty("aor") @ExcludeMissing private val aor: JsonField<String>,
-        @JsonProperty("band") @ExcludeMissing private val band: JsonField<String>,
-        @JsonProperty("beamPattern") @ExcludeMissing private val beamPattern: JsonField<String>,
-        @JsonProperty("channel") @ExcludeMissing private val channel: JsonField<String>,
-        @JsonProperty("chanPirate") @ExcludeMissing private val chanPirate: JsonField<Boolean>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("description") @ExcludeMissing private val description: JsonField<String>,
-        @JsonProperty("dneImpact") @ExcludeMissing private val dneImpact: JsonField<String>,
-        @JsonProperty("emiType") @ExcludeMissing private val emiType: JsonField<String>,
-        @JsonProperty("endTime") @ExcludeMissing private val endTime: JsonField<OffsetDateTime>,
-        @JsonProperty("frequency") @ExcludeMissing private val frequency: JsonField<Double>,
-        @JsonProperty("geoLocErrEllp")
-        @ExcludeMissing
+        private val source: JsonField<String>,
+        private val startTime: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
+        private val actionsTaken: JsonField<String>,
+        private val affActivity: JsonField<String>,
+        private val alt: JsonField<Double>,
+        private val aor: JsonField<String>,
+        private val band: JsonField<String>,
+        private val beamPattern: JsonField<String>,
+        private val channel: JsonField<String>,
+        private val chanPirate: JsonField<Boolean>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val description: JsonField<String>,
+        private val dneImpact: JsonField<String>,
+        private val emiType: JsonField<String>,
+        private val endTime: JsonField<OffsetDateTime>,
+        private val frequency: JsonField<Double>,
         private val geoLocErrEllp: JsonField<List<Double>>,
-        @JsonProperty("gpsEncrypted") @ExcludeMissing private val gpsEncrypted: JsonField<Boolean>,
-        @JsonProperty("gpsFreq") @ExcludeMissing private val gpsFreq: JsonField<String>,
-        @JsonProperty("highAffectedFrequency")
-        @ExcludeMissing
+        private val gpsEncrypted: JsonField<Boolean>,
+        private val gpsFreq: JsonField<String>,
         private val highAffectedFrequency: JsonField<Double>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("intercept") @ExcludeMissing private val intercept: JsonField<Boolean>,
-        @JsonProperty("interceptLang") @ExcludeMissing private val interceptLang: JsonField<String>,
-        @JsonProperty("interceptType") @ExcludeMissing private val interceptType: JsonField<String>,
-        @JsonProperty("intSrcAmplitude")
-        @ExcludeMissing
+        private val idOnOrbit: JsonField<String>,
+        private val intercept: JsonField<Boolean>,
+        private val interceptLang: JsonField<String>,
+        private val interceptType: JsonField<String>,
         private val intSrcAmplitude: JsonField<Double>,
-        @JsonProperty("intSrcBandwidth")
-        @ExcludeMissing
         private val intSrcBandwidth: JsonField<Double>,
-        @JsonProperty("intSrcCentFreq")
-        @ExcludeMissing
         private val intSrcCentFreq: JsonField<Double>,
-        @JsonProperty("intSrcEncrypted")
-        @ExcludeMissing
         private val intSrcEncrypted: JsonField<Boolean>,
-        @JsonProperty("intSrcModulation")
-        @ExcludeMissing
         private val intSrcModulation: JsonField<String>,
-        @JsonProperty("isrCollectionImpact")
-        @ExcludeMissing
         private val isrCollectionImpact: JsonField<Boolean>,
-        @JsonProperty("killBox") @ExcludeMissing private val killBox: JsonField<String>,
-        @JsonProperty("lat") @ExcludeMissing private val lat: JsonField<Double>,
-        @JsonProperty("link") @ExcludeMissing private val link: JsonField<String>,
-        @JsonProperty("lon") @ExcludeMissing private val lon: JsonField<Double>,
-        @JsonProperty("milGrid") @ExcludeMissing private val milGrid: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("persistence") @ExcludeMissing private val persistence: JsonField<String>,
-        @JsonProperty("platform") @ExcludeMissing private val platform: JsonField<String>,
-        @JsonProperty("rcvrDemod") @ExcludeMissing private val rcvrDemod: JsonField<String>,
-        @JsonProperty("rcvrGain") @ExcludeMissing private val rcvrGain: JsonField<Double>,
-        @JsonProperty("rcvrLocation") @ExcludeMissing private val rcvrLocation: JsonField<String>,
-        @JsonProperty("rcvrType") @ExcludeMissing private val rcvrType: JsonField<String>,
-        @JsonProperty("respService") @ExcludeMissing private val respService: JsonField<String>,
-        @JsonProperty("satcomPriority")
-        @ExcludeMissing
+        private val killBox: JsonField<String>,
+        private val lat: JsonField<Double>,
+        private val link: JsonField<String>,
+        private val lon: JsonField<Double>,
+        private val milGrid: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val persistence: JsonField<String>,
+        private val platform: JsonField<String>,
+        private val rcvrDemod: JsonField<String>,
+        private val rcvrGain: JsonField<Double>,
+        private val rcvrLocation: JsonField<String>,
+        private val rcvrType: JsonField<String>,
+        private val respService: JsonField<String>,
         private val satcomPriority: JsonField<String>,
-        @JsonProperty("satDownlinkFrequency")
-        @ExcludeMissing
         private val satDownlinkFrequency: JsonField<Double>,
-        @JsonProperty("satDownlinkPolarization")
-        @ExcludeMissing
         private val satDownlinkPolarization: JsonField<String>,
-        @JsonProperty("satName") @ExcludeMissing private val satName: JsonField<String>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("satTransponderId")
-        @ExcludeMissing
+        private val satName: JsonField<String>,
+        private val satNo: JsonField<Int>,
         private val satTransponderId: JsonField<String>,
-        @JsonProperty("satUplinkFrequency")
-        @ExcludeMissing
         private val satUplinkFrequency: JsonField<Double>,
-        @JsonProperty("satUplinkPolarization")
-        @ExcludeMissing
         private val satUplinkPolarization: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("status") @ExcludeMissing private val status: JsonField<String>,
-        @JsonProperty("supportedISRRole")
-        @ExcludeMissing
+        private val sourceDl: JsonField<String>,
+        private val status: JsonField<String>,
         private val supportedIsrRole: JsonField<String>,
-        @JsonProperty("system") @ExcludeMissing private val system: JsonField<String>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("transactionId") @ExcludeMissing private val transactionId: JsonField<String>,
-        @JsonProperty("victimAltCountry")
-        @ExcludeMissing
+        private val system: JsonField<String>,
+        private val tags: JsonField<List<String>>,
+        private val transactionId: JsonField<String>,
         private val victimAltCountry: JsonField<String>,
-        @JsonProperty("victimCountryCode")
-        @ExcludeMissing
         private val victimCountryCode: JsonField<String>,
-        @JsonProperty("victimFuncImpacts")
-        @ExcludeMissing
         private val victimFuncImpacts: JsonField<String>,
-        @JsonProperty("victimPOCMail") @ExcludeMissing private val victimPocMail: JsonField<String>,
-        @JsonProperty("victimPOCName") @ExcludeMissing private val victimPocName: JsonField<String>,
-        @JsonProperty("victimPOCPhone")
-        @ExcludeMissing
+        private val victimPocMail: JsonField<String>,
+        private val victimPocName: JsonField<String>,
         private val victimPocPhone: JsonField<String>,
-        @JsonProperty("victimPOCUnit") @ExcludeMissing private val victimPocUnit: JsonField<String>,
-        @JsonProperty("victimReaction")
-        @ExcludeMissing
+        private val victimPocUnit: JsonField<String>,
         private val victimReaction: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("isr") @ExcludeMissing isr: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("reportId")
+            @ExcludeMissing
+            reportId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("reportTime")
+            @ExcludeMissing
+            reportTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("reportType")
+            @ExcludeMissing
+            reportType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("requestAssist")
+            @ExcludeMissing
+            requestAssist: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("startTime")
+            @ExcludeMissing
+            startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("actionsTaken")
+            @ExcludeMissing
+            actionsTaken: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("affActivity")
+            @ExcludeMissing
+            affActivity: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("alt") @ExcludeMissing alt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("aor") @ExcludeMissing aor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("band") @ExcludeMissing band: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("beamPattern")
+            @ExcludeMissing
+            beamPattern: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("channel") @ExcludeMissing channel: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("chanPirate")
+            @ExcludeMissing
+            chanPirate: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("description")
+            @ExcludeMissing
+            description: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dneImpact")
+            @ExcludeMissing
+            dneImpact: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("emiType") @ExcludeMissing emiType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("endTime")
+            @ExcludeMissing
+            endTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("frequency")
+            @ExcludeMissing
+            frequency: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("geoLocErrEllp")
+            @ExcludeMissing
+            geoLocErrEllp: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("gpsEncrypted")
+            @ExcludeMissing
+            gpsEncrypted: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("gpsFreq") @ExcludeMissing gpsFreq: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("highAffectedFrequency")
+            @ExcludeMissing
+            highAffectedFrequency: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("intercept")
+            @ExcludeMissing
+            intercept: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("interceptLang")
+            @ExcludeMissing
+            interceptLang: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("interceptType")
+            @ExcludeMissing
+            interceptType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("intSrcAmplitude")
+            @ExcludeMissing
+            intSrcAmplitude: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("intSrcBandwidth")
+            @ExcludeMissing
+            intSrcBandwidth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("intSrcCentFreq")
+            @ExcludeMissing
+            intSrcCentFreq: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("intSrcEncrypted")
+            @ExcludeMissing
+            intSrcEncrypted: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("intSrcModulation")
+            @ExcludeMissing
+            intSrcModulation: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("isrCollectionImpact")
+            @ExcludeMissing
+            isrCollectionImpact: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("killBox") @ExcludeMissing killBox: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("link") @ExcludeMissing link: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("milGrid") @ExcludeMissing milGrid: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("persistence")
+            @ExcludeMissing
+            persistence: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("platform")
+            @ExcludeMissing
+            platform: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rcvrDemod")
+            @ExcludeMissing
+            rcvrDemod: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rcvrGain")
+            @ExcludeMissing
+            rcvrGain: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rcvrLocation")
+            @ExcludeMissing
+            rcvrLocation: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rcvrType")
+            @ExcludeMissing
+            rcvrType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("respService")
+            @ExcludeMissing
+            respService: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("satcomPriority")
+            @ExcludeMissing
+            satcomPriority: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("satDownlinkFrequency")
+            @ExcludeMissing
+            satDownlinkFrequency: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("satDownlinkPolarization")
+            @ExcludeMissing
+            satDownlinkPolarization: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("satName") @ExcludeMissing satName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("satTransponderId")
+            @ExcludeMissing
+            satTransponderId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("satUplinkFrequency")
+            @ExcludeMissing
+            satUplinkFrequency: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("satUplinkPolarization")
+            @ExcludeMissing
+            satUplinkPolarization: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("status") @ExcludeMissing status: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("supportedISRRole")
+            @ExcludeMissing
+            supportedIsrRole: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("system") @ExcludeMissing system: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("transactionId")
+            @ExcludeMissing
+            transactionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("victimAltCountry")
+            @ExcludeMissing
+            victimAltCountry: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("victimCountryCode")
+            @ExcludeMissing
+            victimCountryCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("victimFuncImpacts")
+            @ExcludeMissing
+            victimFuncImpacts: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("victimPOCMail")
+            @ExcludeMissing
+            victimPocMail: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("victimPOCName")
+            @ExcludeMissing
+            victimPocName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("victimPOCPhone")
+            @ExcludeMissing
+            victimPocPhone: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("victimPOCUnit")
+            @ExcludeMissing
+            victimPocUnit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("victimReaction")
+            @ExcludeMissing
+            victimReaction: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            isr,
+            reportId,
+            reportTime,
+            reportType,
+            requestAssist,
+            source,
+            startTime,
+            id,
+            actionsTaken,
+            affActivity,
+            alt,
+            aor,
+            band,
+            beamPattern,
+            channel,
+            chanPirate,
+            createdAt,
+            createdBy,
+            description,
+            dneImpact,
+            emiType,
+            endTime,
+            frequency,
+            geoLocErrEllp,
+            gpsEncrypted,
+            gpsFreq,
+            highAffectedFrequency,
+            idOnOrbit,
+            intercept,
+            interceptLang,
+            interceptType,
+            intSrcAmplitude,
+            intSrcBandwidth,
+            intSrcCentFreq,
+            intSrcEncrypted,
+            intSrcModulation,
+            isrCollectionImpact,
+            killBox,
+            lat,
+            link,
+            lon,
+            milGrid,
+            origin,
+            origNetwork,
+            origObjectId,
+            persistence,
+            platform,
+            rcvrDemod,
+            rcvrGain,
+            rcvrLocation,
+            rcvrType,
+            respService,
+            satcomPriority,
+            satDownlinkFrequency,
+            satDownlinkPolarization,
+            satName,
+            satNo,
+            satTransponderId,
+            satUplinkFrequency,
+            satUplinkPolarization,
+            sourceDl,
+            status,
+            supportedIsrRole,
+            system,
+            tags,
+            transactionId,
+            victimAltCountry,
+            victimCountryCode,
+            victimFuncImpacts,
+            victimPocMail,
+            victimPocName,
+            victimPocPhone,
+            victimPocUnit,
+            victimReaction,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1674,6 +1903,16 @@ private constructor(
         @ExcludeMissing
         fun _victimReaction(): JsonField<String> = victimReaction
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1776,6 +2015,7 @@ private constructor(
             private var victimPocPhone: JsonField<String> = JsonMissing.of()
             private var victimPocUnit: JsonField<String> = JsonMissing.of()
             private var victimReaction: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1855,6 +2095,7 @@ private constructor(
                 victimPocPhone = body.victimPocPhone
                 victimPocUnit = body.victimPocUnit
                 victimReaction = body.victimReaction
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -3035,6 +3276,25 @@ private constructor(
                 this.victimReaction = victimReaction
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -3133,6 +3393,7 @@ private constructor(
                     victimPocPhone,
                     victimPocUnit,
                     victimReaction,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -3552,7 +3813,8 @@ private constructor(
                 victimPocName == other.victimPocName &&
                 victimPocPhone == other.victimPocPhone &&
                 victimPocUnit == other.victimPocUnit &&
-                victimReaction == other.victimReaction
+                victimReaction == other.victimReaction &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -3633,13 +3895,14 @@ private constructor(
                 victimPocPhone,
                 victimPocUnit,
                 victimReaction,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, isr=$isr, reportId=$reportId, reportTime=$reportTime, reportType=$reportType, requestAssist=$requestAssist, source=$source, startTime=$startTime, id=$id, actionsTaken=$actionsTaken, affActivity=$affActivity, alt=$alt, aor=$aor, band=$band, beamPattern=$beamPattern, channel=$channel, chanPirate=$chanPirate, createdAt=$createdAt, createdBy=$createdBy, description=$description, dneImpact=$dneImpact, emiType=$emiType, endTime=$endTime, frequency=$frequency, geoLocErrEllp=$geoLocErrEllp, gpsEncrypted=$gpsEncrypted, gpsFreq=$gpsFreq, highAffectedFrequency=$highAffectedFrequency, idOnOrbit=$idOnOrbit, intercept=$intercept, interceptLang=$interceptLang, interceptType=$interceptType, intSrcAmplitude=$intSrcAmplitude, intSrcBandwidth=$intSrcBandwidth, intSrcCentFreq=$intSrcCentFreq, intSrcEncrypted=$intSrcEncrypted, intSrcModulation=$intSrcModulation, isrCollectionImpact=$isrCollectionImpact, killBox=$killBox, lat=$lat, link=$link, lon=$lon, milGrid=$milGrid, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, persistence=$persistence, platform=$platform, rcvrDemod=$rcvrDemod, rcvrGain=$rcvrGain, rcvrLocation=$rcvrLocation, rcvrType=$rcvrType, respService=$respService, satcomPriority=$satcomPriority, satDownlinkFrequency=$satDownlinkFrequency, satDownlinkPolarization=$satDownlinkPolarization, satName=$satName, satNo=$satNo, satTransponderId=$satTransponderId, satUplinkFrequency=$satUplinkFrequency, satUplinkPolarization=$satUplinkPolarization, sourceDl=$sourceDl, status=$status, supportedIsrRole=$supportedIsrRole, system=$system, tags=$tags, transactionId=$transactionId, victimAltCountry=$victimAltCountry, victimCountryCode=$victimCountryCode, victimFuncImpacts=$victimFuncImpacts, victimPocMail=$victimPocMail, victimPocName=$victimPocName, victimPocPhone=$victimPocPhone, victimPocUnit=$victimPocUnit, victimReaction=$victimReaction}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, isr=$isr, reportId=$reportId, reportTime=$reportTime, reportType=$reportType, requestAssist=$requestAssist, source=$source, startTime=$startTime, id=$id, actionsTaken=$actionsTaken, affActivity=$affActivity, alt=$alt, aor=$aor, band=$band, beamPattern=$beamPattern, channel=$channel, chanPirate=$chanPirate, createdAt=$createdAt, createdBy=$createdBy, description=$description, dneImpact=$dneImpact, emiType=$emiType, endTime=$endTime, frequency=$frequency, geoLocErrEllp=$geoLocErrEllp, gpsEncrypted=$gpsEncrypted, gpsFreq=$gpsFreq, highAffectedFrequency=$highAffectedFrequency, idOnOrbit=$idOnOrbit, intercept=$intercept, interceptLang=$interceptLang, interceptType=$interceptType, intSrcAmplitude=$intSrcAmplitude, intSrcBandwidth=$intSrcBandwidth, intSrcCentFreq=$intSrcCentFreq, intSrcEncrypted=$intSrcEncrypted, intSrcModulation=$intSrcModulation, isrCollectionImpact=$isrCollectionImpact, killBox=$killBox, lat=$lat, link=$link, lon=$lon, milGrid=$milGrid, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, persistence=$persistence, platform=$platform, rcvrDemod=$rcvrDemod, rcvrGain=$rcvrGain, rcvrLocation=$rcvrLocation, rcvrType=$rcvrType, respService=$respService, satcomPriority=$satcomPriority, satDownlinkFrequency=$satDownlinkFrequency, satDownlinkPolarization=$satDownlinkPolarization, satName=$satName, satNo=$satNo, satTransponderId=$satTransponderId, satUplinkFrequency=$satUplinkFrequency, satUplinkPolarization=$satUplinkPolarization, sourceDl=$sourceDl, status=$status, supportedIsrRole=$supportedIsrRole, system=$system, tags=$tags, transactionId=$transactionId, victimAltCountry=$victimAltCountry, victimCountryCode=$victimCountryCode, victimFuncImpacts=$victimFuncImpacts, victimPocMail=$victimPocMail, victimPocName=$victimPocName, victimPocPhone=$victimPocPhone, victimPocUnit=$victimPocUnit, victimReaction=$victimReaction, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

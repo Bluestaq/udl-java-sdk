@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.vessel
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import com.unifieddatalibrary.api.models.entities.EntityIngest
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -210,50 +214,165 @@ private constructor(
      * Vessel contains the static data of the specific vessel: mmsi, cruise speed, max speed, etc.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("altVesselId") @ExcludeMissing private val altVesselId: JsonField<String>,
-        @JsonProperty("callsign") @ExcludeMissing private val callsign: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("entity") @ExcludeMissing private val entity: JsonField<EntityIngest>,
-        @JsonProperty("firstSeen") @ExcludeMissing private val firstSeen: JsonField<OffsetDateTime>,
-        @JsonProperty("hullNum") @ExcludeMissing private val hullNum: JsonField<String>,
-        @JsonProperty("idEntity") @ExcludeMissing private val idEntity: JsonField<String>,
-        @JsonProperty("idOrganization")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val altVesselId: JsonField<String>,
+        private val callsign: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val entity: JsonField<EntityIngest>,
+        private val firstSeen: JsonField<OffsetDateTime>,
+        private val hullNum: JsonField<String>,
+        private val idEntity: JsonField<String>,
         private val idOrganization: JsonField<String>,
-        @JsonProperty("imon") @ExcludeMissing private val imon: JsonField<Int>,
-        @JsonProperty("length") @ExcludeMissing private val length: JsonField<Double>,
-        @JsonProperty("maxDraught") @ExcludeMissing private val maxDraught: JsonField<Double>,
-        @JsonProperty("maxSpeed") @ExcludeMissing private val maxSpeed: JsonField<Double>,
-        @JsonProperty("mmsi") @ExcludeMissing private val mmsi: JsonField<String>,
-        @JsonProperty("numBlades") @ExcludeMissing private val numBlades: JsonField<Int>,
-        @JsonProperty("numShafts") @ExcludeMissing private val numShafts: JsonField<Int>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("propType") @ExcludeMissing private val propType: JsonField<String>,
-        @JsonProperty("sconum") @ExcludeMissing private val sconum: JsonField<String>,
-        @JsonProperty("status") @ExcludeMissing private val status: JsonField<String>,
-        @JsonProperty("sternType") @ExcludeMissing private val sternType: JsonField<String>,
-        @JsonProperty("vesselBuilder") @ExcludeMissing private val vesselBuilder: JsonField<String>,
-        @JsonProperty("vesselClass") @ExcludeMissing private val vesselClass: JsonField<String>,
-        @JsonProperty("vesselDescription")
-        @ExcludeMissing
+        private val imon: JsonField<Int>,
+        private val length: JsonField<Double>,
+        private val maxDraught: JsonField<Double>,
+        private val maxSpeed: JsonField<Double>,
+        private val mmsi: JsonField<String>,
+        private val numBlades: JsonField<Int>,
+        private val numShafts: JsonField<Int>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val propType: JsonField<String>,
+        private val sconum: JsonField<String>,
+        private val status: JsonField<String>,
+        private val sternType: JsonField<String>,
+        private val vesselBuilder: JsonField<String>,
+        private val vesselClass: JsonField<String>,
         private val vesselDescription: JsonField<String>,
-        @JsonProperty("vesselFlag") @ExcludeMissing private val vesselFlag: JsonField<String>,
-        @JsonProperty("vesselName") @ExcludeMissing private val vesselName: JsonField<String>,
-        @JsonProperty("vesselType") @ExcludeMissing private val vesselType: JsonField<String>,
-        @JsonProperty("vslWt") @ExcludeMissing private val vslWt: JsonField<Double>,
-        @JsonProperty("width") @ExcludeMissing private val width: JsonField<Double>,
-        @JsonProperty("yearBuilt") @ExcludeMissing private val yearBuilt: JsonField<String>,
+        private val vesselFlag: JsonField<String>,
+        private val vesselName: JsonField<String>,
+        private val vesselType: JsonField<String>,
+        private val vslWt: JsonField<Double>,
+        private val width: JsonField<Double>,
+        private val yearBuilt: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("altVesselId")
+            @ExcludeMissing
+            altVesselId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("callsign")
+            @ExcludeMissing
+            callsign: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("entity")
+            @ExcludeMissing
+            entity: JsonField<EntityIngest> = JsonMissing.of(),
+            @JsonProperty("firstSeen")
+            @ExcludeMissing
+            firstSeen: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("hullNum") @ExcludeMissing hullNum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idEntity")
+            @ExcludeMissing
+            idEntity: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idOrganization")
+            @ExcludeMissing
+            idOrganization: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("imon") @ExcludeMissing imon: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("length") @ExcludeMissing length: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("maxDraught")
+            @ExcludeMissing
+            maxDraught: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("maxSpeed")
+            @ExcludeMissing
+            maxSpeed: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("mmsi") @ExcludeMissing mmsi: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("numBlades") @ExcludeMissing numBlades: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numShafts") @ExcludeMissing numShafts: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("propType")
+            @ExcludeMissing
+            propType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sconum") @ExcludeMissing sconum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("status") @ExcludeMissing status: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sternType")
+            @ExcludeMissing
+            sternType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("vesselBuilder")
+            @ExcludeMissing
+            vesselBuilder: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("vesselClass")
+            @ExcludeMissing
+            vesselClass: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("vesselDescription")
+            @ExcludeMissing
+            vesselDescription: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("vesselFlag")
+            @ExcludeMissing
+            vesselFlag: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("vesselName")
+            @ExcludeMissing
+            vesselName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("vesselType")
+            @ExcludeMissing
+            vesselType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("vslWt") @ExcludeMissing vslWt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("width") @ExcludeMissing width: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("yearBuilt")
+            @ExcludeMissing
+            yearBuilt: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            id,
+            altVesselId,
+            callsign,
+            createdAt,
+            createdBy,
+            entity,
+            firstSeen,
+            hullNum,
+            idEntity,
+            idOrganization,
+            imon,
+            length,
+            maxDraught,
+            maxSpeed,
+            mmsi,
+            numBlades,
+            numShafts,
+            origin,
+            origNetwork,
+            propType,
+            sconum,
+            status,
+            sternType,
+            vesselBuilder,
+            vesselClass,
+            vesselDescription,
+            vesselFlag,
+            vesselName,
+            vesselType,
+            vslWt,
+            width,
+            yearBuilt,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -846,6 +965,16 @@ private constructor(
          */
         @JsonProperty("yearBuilt") @ExcludeMissing fun _yearBuilt(): JsonField<String> = yearBuilt
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -901,6 +1030,7 @@ private constructor(
             private var vslWt: JsonField<Double> = JsonMissing.of()
             private var width: JsonField<Double> = JsonMissing.of()
             private var yearBuilt: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -939,6 +1069,7 @@ private constructor(
                 vslWt = body.vslWt
                 width = body.width
                 yearBuilt = body.yearBuilt
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1444,6 +1575,25 @@ private constructor(
              */
             fun yearBuilt(yearBuilt: JsonField<String>) = apply { this.yearBuilt = yearBuilt }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1495,6 +1645,7 @@ private constructor(
                     vslWt,
                     width,
                     yearBuilt,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1791,7 +1942,8 @@ private constructor(
                 vesselType == other.vesselType &&
                 vslWt == other.vslWt &&
                 width == other.width &&
-                yearBuilt == other.yearBuilt
+                yearBuilt == other.yearBuilt &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1831,13 +1983,14 @@ private constructor(
                 vslWt,
                 width,
                 yearBuilt,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, altVesselId=$altVesselId, callsign=$callsign, createdAt=$createdAt, createdBy=$createdBy, entity=$entity, firstSeen=$firstSeen, hullNum=$hullNum, idEntity=$idEntity, idOrganization=$idOrganization, imon=$imon, length=$length, maxDraught=$maxDraught, maxSpeed=$maxSpeed, mmsi=$mmsi, numBlades=$numBlades, numShafts=$numShafts, origin=$origin, origNetwork=$origNetwork, propType=$propType, sconum=$sconum, status=$status, sternType=$sternType, vesselBuilder=$vesselBuilder, vesselClass=$vesselClass, vesselDescription=$vesselDescription, vesselFlag=$vesselFlag, vesselName=$vesselName, vesselType=$vesselType, vslWt=$vslWt, width=$width, yearBuilt=$yearBuilt}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, altVesselId=$altVesselId, callsign=$callsign, createdAt=$createdAt, createdBy=$createdBy, entity=$entity, firstSeen=$firstSeen, hullNum=$hullNum, idEntity=$idEntity, idOrganization=$idOrganization, imon=$imon, length=$length, maxDraught=$maxDraught, maxSpeed=$maxSpeed, mmsi=$mmsi, numBlades=$numBlades, numShafts=$numShafts, origin=$origin, origNetwork=$origNetwork, propType=$propType, sconum=$sconum, status=$status, sternType=$sternType, vesselBuilder=$vesselBuilder, vesselClass=$vesselClass, vesselDescription=$vesselDescription, vesselFlag=$vesselFlag, vesselName=$vesselName, vesselType=$vesselType, vslWt=$vslWt, width=$width, yearBuilt=$yearBuilt, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

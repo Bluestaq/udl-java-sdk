@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.item
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -17,6 +20,7 @@ import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.LocalDate
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -206,70 +210,233 @@ private constructor(
     override fun _queryParams(): QueryParams = additionalQueryParams
 
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("scanCode") @ExcludeMissing private val scanCode: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("accSysKeys") @ExcludeMissing private val accSysKeys: JsonField<List<String>>,
-        @JsonProperty("accSysNotes") @ExcludeMissing private val accSysNotes: JsonField<String>,
-        @JsonProperty("accSystem") @ExcludeMissing private val accSystem: JsonField<String>,
-        @JsonProperty("accSysValues")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val scanCode: JsonField<String>,
+        private val source: JsonField<String>,
+        private val type: JsonField<String>,
+        private val id: JsonField<String>,
+        private val accSysKeys: JsonField<List<String>>,
+        private val accSysNotes: JsonField<String>,
+        private val accSystem: JsonField<String>,
         private val accSysValues: JsonField<List<String>>,
-        @JsonProperty("airdrop") @ExcludeMissing private val airdrop: JsonField<Boolean>,
-        @JsonProperty("altDataFormat") @ExcludeMissing private val altDataFormat: JsonField<String>,
-        @JsonProperty("cargoType") @ExcludeMissing private val cargoType: JsonField<String>,
-        @JsonProperty("centerlineOffset")
-        @ExcludeMissing
+        private val airdrop: JsonField<Boolean>,
+        private val altDataFormat: JsonField<String>,
+        private val cargoType: JsonField<String>,
         private val centerlineOffset: JsonField<Double>,
-        @JsonProperty("cg") @ExcludeMissing private val cg: JsonField<Double>,
-        @JsonProperty("commodityCode") @ExcludeMissing private val commodityCode: JsonField<String>,
-        @JsonProperty("commoditySys") @ExcludeMissing private val commoditySys: JsonField<String>,
-        @JsonProperty("container") @ExcludeMissing private val container: JsonField<Boolean>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("departure") @ExcludeMissing private val departure: JsonField<String>,
-        @JsonProperty("destination") @ExcludeMissing private val destination: JsonField<String>,
-        @JsonProperty("dvCode") @ExcludeMissing private val dvCode: JsonField<String>,
-        @JsonProperty("fs") @ExcludeMissing private val fs: JsonField<Double>,
-        @JsonProperty("hazCodes") @ExcludeMissing private val hazCodes: JsonField<List<Double>>,
-        @JsonProperty("height") @ExcludeMissing private val height: JsonField<Double>,
-        @JsonProperty("idAirLoadPlan") @ExcludeMissing private val idAirLoadPlan: JsonField<String>,
-        @JsonProperty("itemContains")
-        @ExcludeMissing
+        private val cg: JsonField<Double>,
+        private val commodityCode: JsonField<String>,
+        private val commoditySys: JsonField<String>,
+        private val container: JsonField<Boolean>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val departure: JsonField<String>,
+        private val destination: JsonField<String>,
+        private val dvCode: JsonField<String>,
+        private val fs: JsonField<Double>,
+        private val hazCodes: JsonField<List<Double>>,
+        private val height: JsonField<Double>,
+        private val idAirLoadPlan: JsonField<String>,
         private val itemContains: JsonField<List<String>>,
-        @JsonProperty("keys") @ExcludeMissing private val keys: JsonField<List<String>>,
-        @JsonProperty("lastArrDate") @ExcludeMissing private val lastArrDate: JsonField<LocalDate>,
-        @JsonProperty("length") @ExcludeMissing private val length: JsonField<Double>,
-        @JsonProperty("moment") @ExcludeMissing private val moment: JsonField<Double>,
-        @JsonProperty("name") @ExcludeMissing private val name: JsonField<String>,
-        @JsonProperty("netExpWt") @ExcludeMissing private val netExpWt: JsonField<Double>,
-        @JsonProperty("notes") @ExcludeMissing private val notes: JsonField<String>,
-        @JsonProperty("numPalletPos") @ExcludeMissing private val numPalletPos: JsonField<Int>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("productCode") @ExcludeMissing private val productCode: JsonField<String>,
-        @JsonProperty("productSys") @ExcludeMissing private val productSys: JsonField<String>,
-        @JsonProperty("receivingBranch")
-        @ExcludeMissing
+        private val keys: JsonField<List<String>>,
+        private val lastArrDate: JsonField<LocalDate>,
+        private val length: JsonField<Double>,
+        private val moment: JsonField<Double>,
+        private val name: JsonField<String>,
+        private val netExpWt: JsonField<Double>,
+        private val notes: JsonField<String>,
+        private val numPalletPos: JsonField<Int>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val productCode: JsonField<String>,
+        private val productSys: JsonField<String>,
         private val receivingBranch: JsonField<String>,
-        @JsonProperty("receivingUnit") @ExcludeMissing private val receivingUnit: JsonField<String>,
-        @JsonProperty("scGenTool") @ExcludeMissing private val scGenTool: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("tcn") @ExcludeMissing private val tcn: JsonField<String>,
-        @JsonProperty("uln") @ExcludeMissing private val uln: JsonField<String>,
-        @JsonProperty("values") @ExcludeMissing private val values: JsonField<List<String>>,
-        @JsonProperty("volume") @ExcludeMissing private val volume: JsonField<Double>,
-        @JsonProperty("weight") @ExcludeMissing private val weight: JsonField<Double>,
-        @JsonProperty("weightTS") @ExcludeMissing private val weightTs: JsonField<OffsetDateTime>,
-        @JsonProperty("width") @ExcludeMissing private val width: JsonField<Double>,
+        private val receivingUnit: JsonField<String>,
+        private val scGenTool: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val tcn: JsonField<String>,
+        private val uln: JsonField<String>,
+        private val values: JsonField<List<String>>,
+        private val volume: JsonField<Double>,
+        private val weight: JsonField<Double>,
+        private val weightTs: JsonField<OffsetDateTime>,
+        private val width: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("scanCode")
+            @ExcludeMissing
+            scanCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("accSysKeys")
+            @ExcludeMissing
+            accSysKeys: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("accSysNotes")
+            @ExcludeMissing
+            accSysNotes: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("accSystem")
+            @ExcludeMissing
+            accSystem: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("accSysValues")
+            @ExcludeMissing
+            accSysValues: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("airdrop") @ExcludeMissing airdrop: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("altDataFormat")
+            @ExcludeMissing
+            altDataFormat: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("cargoType")
+            @ExcludeMissing
+            cargoType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("centerlineOffset")
+            @ExcludeMissing
+            centerlineOffset: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("cg") @ExcludeMissing cg: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("commodityCode")
+            @ExcludeMissing
+            commodityCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("commoditySys")
+            @ExcludeMissing
+            commoditySys: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("container")
+            @ExcludeMissing
+            container: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("departure")
+            @ExcludeMissing
+            departure: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("destination")
+            @ExcludeMissing
+            destination: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dvCode") @ExcludeMissing dvCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("fs") @ExcludeMissing fs: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hazCodes")
+            @ExcludeMissing
+            hazCodes: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("height") @ExcludeMissing height: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idAirLoadPlan")
+            @ExcludeMissing
+            idAirLoadPlan: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("itemContains")
+            @ExcludeMissing
+            itemContains: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("keys") @ExcludeMissing keys: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("lastArrDate")
+            @ExcludeMissing
+            lastArrDate: JsonField<LocalDate> = JsonMissing.of(),
+            @JsonProperty("length") @ExcludeMissing length: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("moment") @ExcludeMissing moment: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("name") @ExcludeMissing name: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("netExpWt")
+            @ExcludeMissing
+            netExpWt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("notes") @ExcludeMissing notes: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("numPalletPos")
+            @ExcludeMissing
+            numPalletPos: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("productCode")
+            @ExcludeMissing
+            productCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("productSys")
+            @ExcludeMissing
+            productSys: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("receivingBranch")
+            @ExcludeMissing
+            receivingBranch: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("receivingUnit")
+            @ExcludeMissing
+            receivingUnit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("scGenTool")
+            @ExcludeMissing
+            scGenTool: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tcn") @ExcludeMissing tcn: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("uln") @ExcludeMissing uln: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("values")
+            @ExcludeMissing
+            values: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("volume") @ExcludeMissing volume: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("weight") @ExcludeMissing weight: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("weightTS")
+            @ExcludeMissing
+            weightTs: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("width") @ExcludeMissing width: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            scanCode,
+            source,
+            type,
+            id,
+            accSysKeys,
+            accSysNotes,
+            accSystem,
+            accSysValues,
+            airdrop,
+            altDataFormat,
+            cargoType,
+            centerlineOffset,
+            cg,
+            commodityCode,
+            commoditySys,
+            container,
+            createdAt,
+            createdBy,
+            departure,
+            destination,
+            dvCode,
+            fs,
+            hazCodes,
+            height,
+            idAirLoadPlan,
+            itemContains,
+            keys,
+            lastArrDate,
+            length,
+            moment,
+            name,
+            netExpWt,
+            notes,
+            numPalletPos,
+            origin,
+            origNetwork,
+            productCode,
+            productSys,
+            receivingBranch,
+            receivingUnit,
+            scGenTool,
+            sourceDl,
+            tcn,
+            uln,
+            values,
+            volume,
+            weight,
+            weightTs,
+            width,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1136,6 +1303,16 @@ private constructor(
          */
         @JsonProperty("width") @ExcludeMissing fun _width(): JsonField<Double> = width
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1209,6 +1386,7 @@ private constructor(
             private var weight: JsonField<Double> = JsonMissing.of()
             private var weightTs: JsonField<OffsetDateTime> = JsonMissing.of()
             private var width: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1263,6 +1441,7 @@ private constructor(
                 weight = body.weight
                 weightTs = body.weightTs
                 width = body.width
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -2089,6 +2268,25 @@ private constructor(
              */
             fun width(width: JsonField<Double>) = apply { this.width = width }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -2158,6 +2356,7 @@ private constructor(
                     weight,
                     weightTs,
                     width,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -2502,7 +2701,8 @@ private constructor(
                 volume == other.volume &&
                 weight == other.weight &&
                 weightTs == other.weightTs &&
-                width == other.width
+                width == other.width &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -2558,13 +2758,14 @@ private constructor(
                 weight,
                 weightTs,
                 width,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, scanCode=$scanCode, source=$source, type=$type, id=$id, accSysKeys=$accSysKeys, accSysNotes=$accSysNotes, accSystem=$accSystem, accSysValues=$accSysValues, airdrop=$airdrop, altDataFormat=$altDataFormat, cargoType=$cargoType, centerlineOffset=$centerlineOffset, cg=$cg, commodityCode=$commodityCode, commoditySys=$commoditySys, container=$container, createdAt=$createdAt, createdBy=$createdBy, departure=$departure, destination=$destination, dvCode=$dvCode, fs=$fs, hazCodes=$hazCodes, height=$height, idAirLoadPlan=$idAirLoadPlan, itemContains=$itemContains, keys=$keys, lastArrDate=$lastArrDate, length=$length, moment=$moment, name=$name, netExpWt=$netExpWt, notes=$notes, numPalletPos=$numPalletPos, origin=$origin, origNetwork=$origNetwork, productCode=$productCode, productSys=$productSys, receivingBranch=$receivingBranch, receivingUnit=$receivingUnit, scGenTool=$scGenTool, sourceDl=$sourceDl, tcn=$tcn, uln=$uln, values=$values, volume=$volume, weight=$weight, weightTs=$weightTs, width=$width}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, scanCode=$scanCode, source=$source, type=$type, id=$id, accSysKeys=$accSysKeys, accSysNotes=$accSysNotes, accSystem=$accSystem, accSysValues=$accSysValues, airdrop=$airdrop, altDataFormat=$altDataFormat, cargoType=$cargoType, centerlineOffset=$centerlineOffset, cg=$cg, commodityCode=$commodityCode, commoditySys=$commoditySys, container=$container, createdAt=$createdAt, createdBy=$createdBy, departure=$departure, destination=$destination, dvCode=$dvCode, fs=$fs, hazCodes=$hazCodes, height=$height, idAirLoadPlan=$idAirLoadPlan, itemContains=$itemContains, keys=$keys, lastArrDate=$lastArrDate, length=$length, moment=$moment, name=$name, netExpWt=$netExpWt, notes=$notes, numPalletPos=$numPalletPos, origin=$origin, origNetwork=$origNetwork, productCode=$productCode, productSys=$productSys, receivingBranch=$receivingBranch, receivingUnit=$receivingUnit, scGenTool=$scGenTool, sourceDl=$sourceDl, tcn=$tcn, uln=$uln, values=$values, volume=$volume, weight=$weight, weightTs=$weightTs, width=$width, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

@@ -215,114 +215,353 @@ private constructor(
      * political violence and protest events across the world.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("reportDate")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
         private val reportDate: JsonField<OffsetDateTime>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("accuracy") @ExcludeMissing private val accuracy: JsonField<Int>,
-        @JsonProperty("actors") @ExcludeMissing private val actors: JsonField<List<String>>,
-        @JsonProperty("agjson") @ExcludeMissing private val agjson: JsonField<String>,
-        @JsonProperty("andims") @ExcludeMissing private val andims: JsonField<Long>,
-        @JsonProperty("area") @ExcludeMissing private val area: JsonField<String>,
-        @JsonProperty("asrid") @ExcludeMissing private val asrid: JsonField<Int>,
-        @JsonProperty("atext") @ExcludeMissing private val atext: JsonField<String>,
-        @JsonProperty("atype") @ExcludeMissing private val atype: JsonField<String>,
-        @JsonProperty("avgTone") @ExcludeMissing private val avgTone: JsonField<Double>,
-        @JsonProperty("cameoBaseCode") @ExcludeMissing private val cameoBaseCode: JsonField<String>,
-        @JsonProperty("cameoCode") @ExcludeMissing private val cameoCode: JsonField<String>,
-        @JsonProperty("cameoRootCode") @ExcludeMissing private val cameoRootCode: JsonField<String>,
-        @JsonProperty("checksumValue") @ExcludeMissing private val checksumValue: JsonField<String>,
-        @JsonProperty("city") @ExcludeMissing private val city: JsonField<String>,
-        @JsonProperty("civAbd") @ExcludeMissing private val civAbd: JsonField<Int>,
-        @JsonProperty("civDet") @ExcludeMissing private val civDet: JsonField<Int>,
-        @JsonProperty("civKIA") @ExcludeMissing private val civKia: JsonField<Int>,
-        @JsonProperty("civWound") @ExcludeMissing private val civWound: JsonField<Int>,
-        @JsonProperty("clarity") @ExcludeMissing private val clarity: JsonField<Int>,
-        @JsonProperty("coalAbd") @ExcludeMissing private val coalAbd: JsonField<Int>,
-        @JsonProperty("coalDet") @ExcludeMissing private val coalDet: JsonField<Int>,
-        @JsonProperty("coalKIA") @ExcludeMissing private val coalKia: JsonField<Int>,
-        @JsonProperty("coalWound") @ExcludeMissing private val coalWound: JsonField<Int>,
-        @JsonProperty("complexAttack")
-        @ExcludeMissing
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val accuracy: JsonField<Int>,
+        private val actors: JsonField<List<String>>,
+        private val agjson: JsonField<String>,
+        private val andims: JsonField<Long>,
+        private val area: JsonField<String>,
+        private val asrid: JsonField<Int>,
+        private val atext: JsonField<String>,
+        private val atype: JsonField<String>,
+        private val avgTone: JsonField<Double>,
+        private val cameoBaseCode: JsonField<String>,
+        private val cameoCode: JsonField<String>,
+        private val cameoRootCode: JsonField<String>,
+        private val checksumValue: JsonField<String>,
+        private val city: JsonField<String>,
+        private val civAbd: JsonField<Int>,
+        private val civDet: JsonField<Int>,
+        private val civKia: JsonField<Int>,
+        private val civWound: JsonField<Int>,
+        private val clarity: JsonField<Int>,
+        private val coalAbd: JsonField<Int>,
+        private val coalDet: JsonField<Int>,
+        private val coalKia: JsonField<Int>,
+        private val coalWound: JsonField<Int>,
         private val complexAttack: JsonField<Boolean>,
-        @JsonProperty("confidence") @ExcludeMissing private val confidence: JsonField<Int>,
-        @JsonProperty("countryCode") @ExcludeMissing private val countryCode: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("district") @ExcludeMissing private val district: JsonField<String>,
-        @JsonProperty("documentFilename")
-        @ExcludeMissing
+        private val confidence: JsonField<Int>,
+        private val countryCode: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val district: JsonField<String>,
         private val documentFilename: JsonField<String>,
-        @JsonProperty("documentSource")
-        @ExcludeMissing
         private val documentSource: JsonField<String>,
-        @JsonProperty("enemyAbd") @ExcludeMissing private val enemyAbd: JsonField<Int>,
-        @JsonProperty("enemyDet") @ExcludeMissing private val enemyDet: JsonField<Int>,
-        @JsonProperty("enemyKIA") @ExcludeMissing private val enemyKia: JsonField<Int>,
-        @JsonProperty("eventDescription")
-        @ExcludeMissing
+        private val enemyAbd: JsonField<Int>,
+        private val enemyDet: JsonField<Int>,
+        private val enemyKia: JsonField<Int>,
         private val eventDescription: JsonField<String>,
-        @JsonProperty("eventEnd") @ExcludeMissing private val eventEnd: JsonField<OffsetDateTime>,
-        @JsonProperty("eventStart")
-        @ExcludeMissing
+        private val eventEnd: JsonField<OffsetDateTime>,
         private val eventStart: JsonField<OffsetDateTime>,
-        @JsonProperty("eventType") @ExcludeMissing private val eventType: JsonField<String>,
-        @JsonProperty("filesize") @ExcludeMissing private val filesize: JsonField<Long>,
-        @JsonProperty("friendlyAbd") @ExcludeMissing private val friendlyAbd: JsonField<Int>,
-        @JsonProperty("friendlyDet") @ExcludeMissing private val friendlyDet: JsonField<Int>,
-        @JsonProperty("friendlyKIA") @ExcludeMissing private val friendlyKia: JsonField<Int>,
-        @JsonProperty("friendlyWound") @ExcludeMissing private val friendlyWound: JsonField<Int>,
-        @JsonProperty("goldstein") @ExcludeMissing private val goldstein: JsonField<Double>,
-        @JsonProperty("hasAttachment")
-        @ExcludeMissing
+        private val eventType: JsonField<String>,
+        private val filesize: JsonField<Long>,
+        private val friendlyAbd: JsonField<Int>,
+        private val friendlyDet: JsonField<Int>,
+        private val friendlyKia: JsonField<Int>,
+        private val friendlyWound: JsonField<Int>,
+        private val goldstein: JsonField<Double>,
         private val hasAttachment: JsonField<Boolean>,
-        @JsonProperty("hostNatAbd") @ExcludeMissing private val hostNatAbd: JsonField<Int>,
-        @JsonProperty("hostNatDet") @ExcludeMissing private val hostNatDet: JsonField<Int>,
-        @JsonProperty("hostNatKIA") @ExcludeMissing private val hostNatKia: JsonField<Int>,
-        @JsonProperty("hostNatWound") @ExcludeMissing private val hostNatWound: JsonField<Int>,
-        @JsonProperty("idNumber") @ExcludeMissing private val idNumber: JsonField<String>,
-        @JsonProperty("lat") @ExcludeMissing private val lat: JsonField<Double>,
-        @JsonProperty("lon") @ExcludeMissing private val lon: JsonField<Double>,
-        @JsonProperty("milgrid") @ExcludeMissing private val milgrid: JsonField<String>,
-        @JsonProperty("notes") @ExcludeMissing private val notes: JsonField<String>,
-        @JsonProperty("numArticles") @ExcludeMissing private val numArticles: JsonField<Int>,
-        @JsonProperty("numMentions") @ExcludeMissing private val numMentions: JsonField<Int>,
-        @JsonProperty("numSources") @ExcludeMissing private val numSources: JsonField<Int>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("province") @ExcludeMissing private val province: JsonField<String>,
-        @JsonProperty("relatedDocs")
-        @ExcludeMissing
+        private val hostNatAbd: JsonField<Int>,
+        private val hostNatDet: JsonField<Int>,
+        private val hostNatKia: JsonField<Int>,
+        private val hostNatWound: JsonField<Int>,
+        private val idNumber: JsonField<String>,
+        private val lat: JsonField<Double>,
+        private val lon: JsonField<Double>,
+        private val milgrid: JsonField<String>,
+        private val notes: JsonField<String>,
+        private val numArticles: JsonField<Int>,
+        private val numMentions: JsonField<Int>,
+        private val numSources: JsonField<Int>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val province: JsonField<String>,
         private val relatedDocs: JsonField<List<RelatedDoc>>,
-        @JsonProperty("repUnit") @ExcludeMissing private val repUnit: JsonField<String>,
-        @JsonProperty("repUnitActivity")
-        @ExcludeMissing
+        private val repUnit: JsonField<String>,
         private val repUnitActivity: JsonField<String>,
-        @JsonProperty("repUnitType") @ExcludeMissing private val repUnitType: JsonField<String>,
-        @JsonProperty("sideAAbd") @ExcludeMissing private val sideAAbd: JsonField<Int>,
-        @JsonProperty("sideADet") @ExcludeMissing private val sideADet: JsonField<Int>,
-        @JsonProperty("sideAKIA") @ExcludeMissing private val sideAkia: JsonField<Int>,
-        @JsonProperty("sideAWound") @ExcludeMissing private val sideAWound: JsonField<Int>,
-        @JsonProperty("sideBAbd") @ExcludeMissing private val sideBAbd: JsonField<Int>,
-        @JsonProperty("sideBDet") @ExcludeMissing private val sideBDet: JsonField<Int>,
-        @JsonProperty("sideBKIA") @ExcludeMissing private val sideBkia: JsonField<Int>,
-        @JsonProperty("sideBWound") @ExcludeMissing private val sideBWound: JsonField<Int>,
-        @JsonProperty("sourceLanguage")
-        @ExcludeMissing
+        private val repUnitType: JsonField<String>,
+        private val sideAAbd: JsonField<Int>,
+        private val sideADet: JsonField<Int>,
+        private val sideAkia: JsonField<Int>,
+        private val sideAWound: JsonField<Int>,
+        private val sideBAbd: JsonField<Int>,
+        private val sideBDet: JsonField<Int>,
+        private val sideBkia: JsonField<Int>,
+        private val sideBWound: JsonField<Int>,
         private val sourceLanguage: JsonField<String>,
-        @JsonProperty("sourceUrl") @ExcludeMissing private val sourceUrl: JsonField<String>,
-        @JsonProperty("summary") @ExcludeMissing private val summary: JsonField<String>,
-        @JsonProperty("target") @ExcludeMissing private val target: JsonField<String>,
-        @JsonProperty("theater") @ExcludeMissing private val theater: JsonField<String>,
-        @JsonProperty("typeOfAttack") @ExcludeMissing private val typeOfAttack: JsonField<String>,
+        private val sourceUrl: JsonField<String>,
+        private val summary: JsonField<String>,
+        private val target: JsonField<String>,
+        private val theater: JsonField<String>,
+        private val typeOfAttack: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("reportDate")
+            @ExcludeMissing
+            reportDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("accuracy") @ExcludeMissing accuracy: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("actors")
+            @ExcludeMissing
+            actors: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("agjson") @ExcludeMissing agjson: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("andims") @ExcludeMissing andims: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("area") @ExcludeMissing area: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("asrid") @ExcludeMissing asrid: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("atext") @ExcludeMissing atext: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("atype") @ExcludeMissing atype: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("avgTone") @ExcludeMissing avgTone: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("cameoBaseCode")
+            @ExcludeMissing
+            cameoBaseCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("cameoCode")
+            @ExcludeMissing
+            cameoCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("cameoRootCode")
+            @ExcludeMissing
+            cameoRootCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("checksumValue")
+            @ExcludeMissing
+            checksumValue: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("city") @ExcludeMissing city: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("civAbd") @ExcludeMissing civAbd: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("civDet") @ExcludeMissing civDet: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("civKIA") @ExcludeMissing civKia: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("civWound") @ExcludeMissing civWound: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("clarity") @ExcludeMissing clarity: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("coalAbd") @ExcludeMissing coalAbd: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("coalDet") @ExcludeMissing coalDet: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("coalKIA") @ExcludeMissing coalKia: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("coalWound") @ExcludeMissing coalWound: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("complexAttack")
+            @ExcludeMissing
+            complexAttack: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("confidence")
+            @ExcludeMissing
+            confidence: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("countryCode")
+            @ExcludeMissing
+            countryCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("district")
+            @ExcludeMissing
+            district: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("documentFilename")
+            @ExcludeMissing
+            documentFilename: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("documentSource")
+            @ExcludeMissing
+            documentSource: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("enemyAbd") @ExcludeMissing enemyAbd: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("enemyDet") @ExcludeMissing enemyDet: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("enemyKIA") @ExcludeMissing enemyKia: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("eventDescription")
+            @ExcludeMissing
+            eventDescription: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("eventEnd")
+            @ExcludeMissing
+            eventEnd: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("eventStart")
+            @ExcludeMissing
+            eventStart: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("eventType")
+            @ExcludeMissing
+            eventType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("filesize") @ExcludeMissing filesize: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("friendlyAbd")
+            @ExcludeMissing
+            friendlyAbd: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("friendlyDet")
+            @ExcludeMissing
+            friendlyDet: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("friendlyKIA")
+            @ExcludeMissing
+            friendlyKia: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("friendlyWound")
+            @ExcludeMissing
+            friendlyWound: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("goldstein")
+            @ExcludeMissing
+            goldstein: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hasAttachment")
+            @ExcludeMissing
+            hasAttachment: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("hostNatAbd")
+            @ExcludeMissing
+            hostNatAbd: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("hostNatDet")
+            @ExcludeMissing
+            hostNatDet: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("hostNatKIA")
+            @ExcludeMissing
+            hostNatKia: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("hostNatWound")
+            @ExcludeMissing
+            hostNatWound: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("idNumber")
+            @ExcludeMissing
+            idNumber: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("milgrid") @ExcludeMissing milgrid: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("notes") @ExcludeMissing notes: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("numArticles")
+            @ExcludeMissing
+            numArticles: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numMentions")
+            @ExcludeMissing
+            numMentions: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numSources")
+            @ExcludeMissing
+            numSources: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("province")
+            @ExcludeMissing
+            province: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("relatedDocs")
+            @ExcludeMissing
+            relatedDocs: JsonField<List<RelatedDoc>> = JsonMissing.of(),
+            @JsonProperty("repUnit") @ExcludeMissing repUnit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("repUnitActivity")
+            @ExcludeMissing
+            repUnitActivity: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("repUnitType")
+            @ExcludeMissing
+            repUnitType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sideAAbd") @ExcludeMissing sideAAbd: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sideADet") @ExcludeMissing sideADet: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sideAKIA") @ExcludeMissing sideAkia: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sideAWound")
+            @ExcludeMissing
+            sideAWound: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sideBAbd") @ExcludeMissing sideBAbd: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sideBDet") @ExcludeMissing sideBDet: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sideBKIA") @ExcludeMissing sideBkia: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sideBWound")
+            @ExcludeMissing
+            sideBWound: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sourceLanguage")
+            @ExcludeMissing
+            sourceLanguage: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceUrl")
+            @ExcludeMissing
+            sourceUrl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("summary") @ExcludeMissing summary: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("target") @ExcludeMissing target: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("theater") @ExcludeMissing theater: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("typeOfAttack")
+            @ExcludeMissing
+            typeOfAttack: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            reportDate,
+            source,
+            id,
+            accuracy,
+            actors,
+            agjson,
+            andims,
+            area,
+            asrid,
+            atext,
+            atype,
+            avgTone,
+            cameoBaseCode,
+            cameoCode,
+            cameoRootCode,
+            checksumValue,
+            city,
+            civAbd,
+            civDet,
+            civKia,
+            civWound,
+            clarity,
+            coalAbd,
+            coalDet,
+            coalKia,
+            coalWound,
+            complexAttack,
+            confidence,
+            countryCode,
+            createdAt,
+            createdBy,
+            district,
+            documentFilename,
+            documentSource,
+            enemyAbd,
+            enemyDet,
+            enemyKia,
+            eventDescription,
+            eventEnd,
+            eventStart,
+            eventType,
+            filesize,
+            friendlyAbd,
+            friendlyDet,
+            friendlyKia,
+            friendlyWound,
+            goldstein,
+            hasAttachment,
+            hostNatAbd,
+            hostNatDet,
+            hostNatKia,
+            hostNatWound,
+            idNumber,
+            lat,
+            lon,
+            milgrid,
+            notes,
+            numArticles,
+            numMentions,
+            numSources,
+            origin,
+            origNetwork,
+            province,
+            relatedDocs,
+            repUnit,
+            repUnitActivity,
+            repUnitType,
+            sideAAbd,
+            sideADet,
+            sideAkia,
+            sideAWound,
+            sideBAbd,
+            sideBDet,
+            sideBkia,
+            sideBWound,
+            sourceLanguage,
+            sourceUrl,
+            summary,
+            target,
+            theater,
+            typeOfAttack,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1730,6 +1969,16 @@ private constructor(
         @ExcludeMissing
         fun _typeOfAttack(): JsonField<String> = typeOfAttack
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1834,6 +2083,7 @@ private constructor(
             private var target: JsonField<String> = JsonMissing.of()
             private var theater: JsonField<String> = JsonMissing.of()
             private var typeOfAttack: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1920,6 +2170,7 @@ private constructor(
                 target = body.target
                 theater = body.theater
                 typeOfAttack = body.typeOfAttack
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -3143,6 +3394,25 @@ private constructor(
                 this.typeOfAttack = typeOfAttack
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -3243,6 +3513,7 @@ private constructor(
                     target,
                     theater,
                     typeOfAttack,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -4247,7 +4518,8 @@ private constructor(
                 summary == other.summary &&
                 target == other.target &&
                 theater == other.theater &&
-                typeOfAttack == other.typeOfAttack
+                typeOfAttack == other.typeOfAttack &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -4335,13 +4607,14 @@ private constructor(
                 target,
                 theater,
                 typeOfAttack,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, reportDate=$reportDate, source=$source, id=$id, accuracy=$accuracy, actors=$actors, agjson=$agjson, andims=$andims, area=$area, asrid=$asrid, atext=$atext, atype=$atype, avgTone=$avgTone, cameoBaseCode=$cameoBaseCode, cameoCode=$cameoCode, cameoRootCode=$cameoRootCode, checksumValue=$checksumValue, city=$city, civAbd=$civAbd, civDet=$civDet, civKia=$civKia, civWound=$civWound, clarity=$clarity, coalAbd=$coalAbd, coalDet=$coalDet, coalKia=$coalKia, coalWound=$coalWound, complexAttack=$complexAttack, confidence=$confidence, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, district=$district, documentFilename=$documentFilename, documentSource=$documentSource, enemyAbd=$enemyAbd, enemyDet=$enemyDet, enemyKia=$enemyKia, eventDescription=$eventDescription, eventEnd=$eventEnd, eventStart=$eventStart, eventType=$eventType, filesize=$filesize, friendlyAbd=$friendlyAbd, friendlyDet=$friendlyDet, friendlyKia=$friendlyKia, friendlyWound=$friendlyWound, goldstein=$goldstein, hasAttachment=$hasAttachment, hostNatAbd=$hostNatAbd, hostNatDet=$hostNatDet, hostNatKia=$hostNatKia, hostNatWound=$hostNatWound, idNumber=$idNumber, lat=$lat, lon=$lon, milgrid=$milgrid, notes=$notes, numArticles=$numArticles, numMentions=$numMentions, numSources=$numSources, origin=$origin, origNetwork=$origNetwork, province=$province, relatedDocs=$relatedDocs, repUnit=$repUnit, repUnitActivity=$repUnitActivity, repUnitType=$repUnitType, sideAAbd=$sideAAbd, sideADet=$sideADet, sideAkia=$sideAkia, sideAWound=$sideAWound, sideBAbd=$sideBAbd, sideBDet=$sideBDet, sideBkia=$sideBkia, sideBWound=$sideBWound, sourceLanguage=$sourceLanguage, sourceUrl=$sourceUrl, summary=$summary, target=$target, theater=$theater, typeOfAttack=$typeOfAttack}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, reportDate=$reportDate, source=$source, id=$id, accuracy=$accuracy, actors=$actors, agjson=$agjson, andims=$andims, area=$area, asrid=$asrid, atext=$atext, atype=$atype, avgTone=$avgTone, cameoBaseCode=$cameoBaseCode, cameoCode=$cameoCode, cameoRootCode=$cameoRootCode, checksumValue=$checksumValue, city=$city, civAbd=$civAbd, civDet=$civDet, civKia=$civKia, civWound=$civWound, clarity=$clarity, coalAbd=$coalAbd, coalDet=$coalDet, coalKia=$coalKia, coalWound=$coalWound, complexAttack=$complexAttack, confidence=$confidence, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, district=$district, documentFilename=$documentFilename, documentSource=$documentSource, enemyAbd=$enemyAbd, enemyDet=$enemyDet, enemyKia=$enemyKia, eventDescription=$eventDescription, eventEnd=$eventEnd, eventStart=$eventStart, eventType=$eventType, filesize=$filesize, friendlyAbd=$friendlyAbd, friendlyDet=$friendlyDet, friendlyKia=$friendlyKia, friendlyWound=$friendlyWound, goldstein=$goldstein, hasAttachment=$hasAttachment, hostNatAbd=$hostNatAbd, hostNatDet=$hostNatDet, hostNatKia=$hostNatKia, hostNatWound=$hostNatWound, idNumber=$idNumber, lat=$lat, lon=$lon, milgrid=$milgrid, notes=$notes, numArticles=$numArticles, numMentions=$numMentions, numSources=$numSources, origin=$origin, origNetwork=$origNetwork, province=$province, relatedDocs=$relatedDocs, repUnit=$repUnit, repUnitActivity=$repUnitActivity, repUnitType=$repUnitType, sideAAbd=$sideAAbd, sideADet=$sideADet, sideAkia=$sideAkia, sideAWound=$sideAWound, sideBAbd=$sideBAbd, sideBDet=$sideBDet, sideBkia=$sideBkia, sideBWound=$sideBWound, sourceLanguage=$sourceLanguage, sourceUrl=$sourceUrl, summary=$summary, target=$target, theater=$theater, typeOfAttack=$typeOfAttack, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

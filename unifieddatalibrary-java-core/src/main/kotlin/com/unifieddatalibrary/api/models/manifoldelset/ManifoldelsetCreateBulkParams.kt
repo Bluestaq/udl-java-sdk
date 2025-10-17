@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.manifoldelset
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -15,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -209,40 +213,127 @@ private constructor(
      * describing a possible/theoretical orbit for an object of interest for tasking purposes.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("epoch") @ExcludeMissing private val epoch: JsonField<OffsetDateTime>,
-        @JsonProperty("idManifold") @ExcludeMissing private val idManifold: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("tmpSatNo") @ExcludeMissing private val tmpSatNo: JsonField<Int>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("apogee") @ExcludeMissing private val apogee: JsonField<Double>,
-        @JsonProperty("argOfPerigee") @ExcludeMissing private val argOfPerigee: JsonField<Double>,
-        @JsonProperty("bStar") @ExcludeMissing private val bStar: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("eccentricity") @ExcludeMissing private val eccentricity: JsonField<Double>,
-        @JsonProperty("inclination") @ExcludeMissing private val inclination: JsonField<Double>,
-        @JsonProperty("line1") @ExcludeMissing private val line1: JsonField<String>,
-        @JsonProperty("line2") @ExcludeMissing private val line2: JsonField<String>,
-        @JsonProperty("meanAnomaly") @ExcludeMissing private val meanAnomaly: JsonField<Double>,
-        @JsonProperty("meanMotion") @ExcludeMissing private val meanMotion: JsonField<Double>,
-        @JsonProperty("meanMotionDDot")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val epoch: JsonField<OffsetDateTime>,
+        private val idManifold: JsonField<String>,
+        private val source: JsonField<String>,
+        private val tmpSatNo: JsonField<Int>,
+        private val id: JsonField<String>,
+        private val apogee: JsonField<Double>,
+        private val argOfPerigee: JsonField<Double>,
+        private val bStar: JsonField<Double>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val eccentricity: JsonField<Double>,
+        private val inclination: JsonField<Double>,
+        private val line1: JsonField<String>,
+        private val line2: JsonField<String>,
+        private val meanAnomaly: JsonField<Double>,
+        private val meanMotion: JsonField<Double>,
         private val meanMotionDDot: JsonField<Double>,
-        @JsonProperty("meanMotionDot") @ExcludeMissing private val meanMotionDot: JsonField<Double>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("perigee") @ExcludeMissing private val perigee: JsonField<Double>,
-        @JsonProperty("period") @ExcludeMissing private val period: JsonField<Double>,
-        @JsonProperty("raan") @ExcludeMissing private val raan: JsonField<Double>,
-        @JsonProperty("revNo") @ExcludeMissing private val revNo: JsonField<Int>,
-        @JsonProperty("semiMajorAxis") @ExcludeMissing private val semiMajorAxis: JsonField<Double>,
+        private val meanMotionDot: JsonField<Double>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val perigee: JsonField<Double>,
+        private val period: JsonField<Double>,
+        private val raan: JsonField<Double>,
+        private val revNo: JsonField<Int>,
+        private val semiMajorAxis: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("epoch")
+            @ExcludeMissing
+            epoch: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("idManifold")
+            @ExcludeMissing
+            idManifold: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tmpSatNo") @ExcludeMissing tmpSatNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("apogee") @ExcludeMissing apogee: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("argOfPerigee")
+            @ExcludeMissing
+            argOfPerigee: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("bStar") @ExcludeMissing bStar: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("eccentricity")
+            @ExcludeMissing
+            eccentricity: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("inclination")
+            @ExcludeMissing
+            inclination: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("line1") @ExcludeMissing line1: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("line2") @ExcludeMissing line2: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("meanAnomaly")
+            @ExcludeMissing
+            meanAnomaly: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("meanMotion")
+            @ExcludeMissing
+            meanMotion: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("meanMotionDDot")
+            @ExcludeMissing
+            meanMotionDDot: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("meanMotionDot")
+            @ExcludeMissing
+            meanMotionDot: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("perigee") @ExcludeMissing perigee: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("period") @ExcludeMissing period: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("raan") @ExcludeMissing raan: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("revNo") @ExcludeMissing revNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("semiMajorAxis")
+            @ExcludeMissing
+            semiMajorAxis: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            epoch,
+            idManifold,
+            source,
+            tmpSatNo,
+            id,
+            apogee,
+            argOfPerigee,
+            bStar,
+            createdAt,
+            createdBy,
+            eccentricity,
+            inclination,
+            line1,
+            line2,
+            meanAnomaly,
+            meanMotion,
+            meanMotionDDot,
+            meanMotionDot,
+            origin,
+            origNetwork,
+            perigee,
+            period,
+            raan,
+            revNo,
+            semiMajorAxis,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -722,6 +813,16 @@ private constructor(
         @ExcludeMissing
         fun _semiMajorAxis(): JsonField<Double> = semiMajorAxis
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -772,6 +873,7 @@ private constructor(
             private var raan: JsonField<Double> = JsonMissing.of()
             private var revNo: JsonField<Int> = JsonMissing.of()
             private var semiMajorAxis: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -802,6 +904,7 @@ private constructor(
                 raan = body.raan
                 revNo = body.revNo
                 semiMajorAxis = body.semiMajorAxis
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1222,6 +1325,25 @@ private constructor(
                 this.semiMajorAxis = semiMajorAxis
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1268,6 +1390,7 @@ private constructor(
                     raan,
                     revNo,
                     semiMajorAxis,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1540,7 +1663,8 @@ private constructor(
                 period == other.period &&
                 raan == other.raan &&
                 revNo == other.revNo &&
-                semiMajorAxis == other.semiMajorAxis
+                semiMajorAxis == other.semiMajorAxis &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1572,13 +1696,14 @@ private constructor(
                 raan,
                 revNo,
                 semiMajorAxis,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, epoch=$epoch, idManifold=$idManifold, source=$source, tmpSatNo=$tmpSatNo, id=$id, apogee=$apogee, argOfPerigee=$argOfPerigee, bStar=$bStar, createdAt=$createdAt, createdBy=$createdBy, eccentricity=$eccentricity, inclination=$inclination, line1=$line1, line2=$line2, meanAnomaly=$meanAnomaly, meanMotion=$meanMotion, meanMotionDDot=$meanMotionDDot, meanMotionDot=$meanMotionDot, origin=$origin, origNetwork=$origNetwork, perigee=$perigee, period=$period, raan=$raan, revNo=$revNo, semiMajorAxis=$semiMajorAxis}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, epoch=$epoch, idManifold=$idManifold, source=$source, tmpSatNo=$tmpSatNo, id=$id, apogee=$apogee, argOfPerigee=$argOfPerigee, bStar=$bStar, createdAt=$createdAt, createdBy=$createdBy, eccentricity=$eccentricity, inclination=$inclination, line1=$line1, line2=$line2, meanAnomaly=$meanAnomaly, meanMotion=$meanMotion, meanMotionDDot=$meanMotionDDot, meanMotionDot=$meanMotionDot, origin=$origin, origNetwork=$origNetwork, perigee=$perigee, period=$period, raan=$raan, revNo=$revNo, semiMajorAxis=$semiMajorAxis, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

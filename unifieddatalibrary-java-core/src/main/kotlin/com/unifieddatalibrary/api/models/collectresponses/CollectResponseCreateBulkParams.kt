@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.collectresponses
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -216,46 +220,131 @@ private constructor(
      * collectors or to relay status changes prior to completion and delivery.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("idRequest") @ExcludeMissing private val idRequest: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("actualEndTime")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val idRequest: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
         private val actualEndTime: JsonField<OffsetDateTime>,
-        @JsonProperty("actualStartTime")
-        @ExcludeMissing
         private val actualStartTime: JsonField<OffsetDateTime>,
-        @JsonProperty("altEndTime")
-        @ExcludeMissing
         private val altEndTime: JsonField<OffsetDateTime>,
-        @JsonProperty("altStartTime")
-        @ExcludeMissing
         private val altStartTime: JsonField<OffsetDateTime>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("errCode") @ExcludeMissing private val errCode: JsonField<String>,
-        @JsonProperty("externalId") @ExcludeMissing private val externalId: JsonField<String>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("idPlan") @ExcludeMissing private val idPlan: JsonField<String>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("notes") @ExcludeMissing private val notes: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("srcIds") @ExcludeMissing private val srcIds: JsonField<List<String>>,
-        @JsonProperty("srcTyps") @ExcludeMissing private val srcTyps: JsonField<List<String>>,
-        @JsonProperty("status") @ExcludeMissing private val status: JsonField<String>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("taskId") @ExcludeMissing private val taskId: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val errCode: JsonField<String>,
+        private val externalId: JsonField<String>,
+        private val idOnOrbit: JsonField<String>,
+        private val idPlan: JsonField<String>,
+        private val idSensor: JsonField<String>,
+        private val notes: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val origSensorId: JsonField<String>,
+        private val satNo: JsonField<Int>,
+        private val srcIds: JsonField<List<String>>,
+        private val srcTyps: JsonField<List<String>>,
+        private val status: JsonField<String>,
+        private val tags: JsonField<List<String>>,
+        private val taskId: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("idRequest")
+            @ExcludeMissing
+            idRequest: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("actualEndTime")
+            @ExcludeMissing
+            actualEndTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("actualStartTime")
+            @ExcludeMissing
+            actualStartTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("altEndTime")
+            @ExcludeMissing
+            altEndTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("altStartTime")
+            @ExcludeMissing
+            altStartTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("errCode") @ExcludeMissing errCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("externalId")
+            @ExcludeMissing
+            externalId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idPlan") @ExcludeMissing idPlan: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("notes") @ExcludeMissing notes: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("srcIds")
+            @ExcludeMissing
+            srcIds: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("srcTyps")
+            @ExcludeMissing
+            srcTyps: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("status") @ExcludeMissing status: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("taskId") @ExcludeMissing taskId: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            idRequest,
+            source,
+            id,
+            actualEndTime,
+            actualStartTime,
+            altEndTime,
+            altStartTime,
+            createdAt,
+            createdBy,
+            errCode,
+            externalId,
+            idOnOrbit,
+            idPlan,
+            idSensor,
+            notes,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            satNo,
+            srcIds,
+            srcTyps,
+            status,
+            tags,
+            taskId,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -759,6 +848,16 @@ private constructor(
          */
         @JsonProperty("taskId") @ExcludeMissing fun _taskId(): JsonField<String> = taskId
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -807,6 +906,7 @@ private constructor(
             private var status: JsonField<String> = JsonMissing.of()
             private var tags: JsonField<MutableList<String>>? = null
             private var taskId: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -837,6 +937,7 @@ private constructor(
                 status = body.status
                 tags = body.tags.map { it.toMutableList() }
                 taskId = body.taskId
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1317,6 +1418,25 @@ private constructor(
              */
             fun taskId(taskId: JsonField<String>) = apply { this.taskId = taskId }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1361,6 +1481,7 @@ private constructor(
                     status,
                     (tags ?: JsonMissing.of()).map { it.toImmutable() },
                     taskId,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1633,7 +1754,8 @@ private constructor(
                 srcTyps == other.srcTyps &&
                 status == other.status &&
                 tags == other.tags &&
-                taskId == other.taskId
+                taskId == other.taskId &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1665,13 +1787,14 @@ private constructor(
                 status,
                 tags,
                 taskId,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idRequest=$idRequest, source=$source, id=$id, actualEndTime=$actualEndTime, actualStartTime=$actualStartTime, altEndTime=$altEndTime, altStartTime=$altStartTime, createdAt=$createdAt, createdBy=$createdBy, errCode=$errCode, externalId=$externalId, idOnOrbit=$idOnOrbit, idPlan=$idPlan, idSensor=$idSensor, notes=$notes, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, satNo=$satNo, srcIds=$srcIds, srcTyps=$srcTyps, status=$status, tags=$tags, taskId=$taskId}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idRequest=$idRequest, source=$source, id=$id, actualEndTime=$actualEndTime, actualStartTime=$actualStartTime, altEndTime=$altEndTime, altStartTime=$altStartTime, createdAt=$createdAt, createdBy=$createdBy, errCode=$errCode, externalId=$externalId, idOnOrbit=$idOnOrbit, idPlan=$idPlan, idSensor=$idSensor, notes=$notes, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, satNo=$satNo, srcIds=$srcIds, srcTyps=$srcTyps, status=$status, tags=$tags, taskId=$taskId, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

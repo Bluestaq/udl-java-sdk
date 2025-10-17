@@ -214,75 +214,178 @@ private constructor(
 
     /** ISR Collection data. */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("collectionRequirements")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
         private val collectionRequirements: JsonField<List<CollectionRequirement>>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("idexVersion") @ExcludeMissing private val idexVersion: JsonField<Int>,
-        @JsonProperty("missionAOR") @ExcludeMissing private val missionAor: JsonField<String>,
-        @JsonProperty("missionCollectionArea")
-        @ExcludeMissing
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val idexVersion: JsonField<Int>,
+        private val missionAor: JsonField<String>,
         private val missionCollectionArea: JsonField<String>,
-        @JsonProperty("missionCountry")
-        @ExcludeMissing
         private val missionCountry: JsonField<String>,
-        @JsonProperty("missionEmphasis")
-        @ExcludeMissing
         private val missionEmphasis: JsonField<String>,
-        @JsonProperty("missionId") @ExcludeMissing private val missionId: JsonField<String>,
-        @JsonProperty("missionJoa") @ExcludeMissing private val missionJoa: JsonField<String>,
-        @JsonProperty("missionOperation")
-        @ExcludeMissing
+        private val missionId: JsonField<String>,
+        private val missionJoa: JsonField<String>,
         private val missionOperation: JsonField<String>,
-        @JsonProperty("missionPrimaryIntelDiscipline")
-        @ExcludeMissing
         private val missionPrimaryIntelDiscipline: JsonField<String>,
-        @JsonProperty("missionPrimarySubCategory")
-        @ExcludeMissing
         private val missionPrimarySubCategory: JsonField<String>,
-        @JsonProperty("missionPriority")
-        @ExcludeMissing
         private val missionPriority: JsonField<Int>,
-        @JsonProperty("missionRegion") @ExcludeMissing private val missionRegion: JsonField<String>,
-        @JsonProperty("missionRole") @ExcludeMissing private val missionRole: JsonField<String>,
-        @JsonProperty("missionSecondaryIntelDiscipline")
-        @ExcludeMissing
+        private val missionRegion: JsonField<String>,
+        private val missionRole: JsonField<String>,
         private val missionSecondaryIntelDiscipline: JsonField<String>,
-        @JsonProperty("missionSecondarySubCategory")
-        @ExcludeMissing
         private val missionSecondarySubCategory: JsonField<String>,
-        @JsonProperty("missionStartPointLat")
-        @ExcludeMissing
         private val missionStartPointLat: JsonField<Double>,
-        @JsonProperty("missionStartPointLong")
-        @ExcludeMissing
         private val missionStartPointLong: JsonField<Double>,
-        @JsonProperty("missionSubRegion")
-        @ExcludeMissing
         private val missionSubRegion: JsonField<String>,
-        @JsonProperty("missionSupportedUnit")
-        @ExcludeMissing
         private val missionSupportedUnit: JsonField<String>,
-        @JsonProperty("missionSyncMatrixBin")
-        @ExcludeMissing
         private val missionSyncMatrixBin: JsonField<String>,
-        @JsonProperty("name") @ExcludeMissing private val name: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("taskings") @ExcludeMissing private val taskings: JsonField<List<Tasking>>,
-        @JsonProperty("transit") @ExcludeMissing private val transit: JsonField<List<Transit>>,
-        @JsonProperty("updatedAt") @ExcludeMissing private val updatedAt: JsonField<OffsetDateTime>,
-        @JsonProperty("updatedBy") @ExcludeMissing private val updatedBy: JsonField<String>,
+        private val name: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val taskings: JsonField<List<Tasking>>,
+        private val transit: JsonField<List<Transit>>,
+        private val updatedAt: JsonField<OffsetDateTime>,
+        private val updatedBy: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("collectionRequirements")
+            @ExcludeMissing
+            collectionRequirements: JsonField<List<CollectionRequirement>> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idexVersion")
+            @ExcludeMissing
+            idexVersion: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("missionAOR")
+            @ExcludeMissing
+            missionAor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionCollectionArea")
+            @ExcludeMissing
+            missionCollectionArea: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionCountry")
+            @ExcludeMissing
+            missionCountry: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionEmphasis")
+            @ExcludeMissing
+            missionEmphasis: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionId")
+            @ExcludeMissing
+            missionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionJoa")
+            @ExcludeMissing
+            missionJoa: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionOperation")
+            @ExcludeMissing
+            missionOperation: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionPrimaryIntelDiscipline")
+            @ExcludeMissing
+            missionPrimaryIntelDiscipline: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionPrimarySubCategory")
+            @ExcludeMissing
+            missionPrimarySubCategory: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionPriority")
+            @ExcludeMissing
+            missionPriority: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("missionRegion")
+            @ExcludeMissing
+            missionRegion: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionRole")
+            @ExcludeMissing
+            missionRole: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionSecondaryIntelDiscipline")
+            @ExcludeMissing
+            missionSecondaryIntelDiscipline: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionSecondarySubCategory")
+            @ExcludeMissing
+            missionSecondarySubCategory: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionStartPointLat")
+            @ExcludeMissing
+            missionStartPointLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("missionStartPointLong")
+            @ExcludeMissing
+            missionStartPointLong: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("missionSubRegion")
+            @ExcludeMissing
+            missionSubRegion: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionSupportedUnit")
+            @ExcludeMissing
+            missionSupportedUnit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionSyncMatrixBin")
+            @ExcludeMissing
+            missionSyncMatrixBin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("name") @ExcludeMissing name: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("taskings")
+            @ExcludeMissing
+            taskings: JsonField<List<Tasking>> = JsonMissing.of(),
+            @JsonProperty("transit")
+            @ExcludeMissing
+            transit: JsonField<List<Transit>> = JsonMissing.of(),
+            @JsonProperty("updatedAt")
+            @ExcludeMissing
+            updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("updatedBy")
+            @ExcludeMissing
+            updatedBy: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            id,
+            collectionRequirements,
+            createdAt,
+            createdBy,
+            idexVersion,
+            missionAor,
+            missionCollectionArea,
+            missionCountry,
+            missionEmphasis,
+            missionId,
+            missionJoa,
+            missionOperation,
+            missionPrimaryIntelDiscipline,
+            missionPrimarySubCategory,
+            missionPriority,
+            missionRegion,
+            missionRole,
+            missionSecondaryIntelDiscipline,
+            missionSecondarySubCategory,
+            missionStartPointLat,
+            missionStartPointLong,
+            missionSubRegion,
+            missionSupportedUnit,
+            missionSyncMatrixBin,
+            name,
+            origin,
+            origNetwork,
+            taskings,
+            transit,
+            updatedAt,
+            updatedBy,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -896,6 +999,16 @@ private constructor(
          */
         @JsonProperty("updatedBy") @ExcludeMissing fun _updatedBy(): JsonField<String> = updatedBy
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -951,6 +1064,7 @@ private constructor(
             private var transit: JsonField<MutableList<Transit>>? = null
             private var updatedAt: JsonField<OffsetDateTime> = JsonMissing.of()
             private var updatedBy: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -988,6 +1102,7 @@ private constructor(
                 transit = body.transit.map { it.toMutableList() }
                 updatedAt = body.updatedAt
                 updatedBy = body.updatedBy
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1541,6 +1656,25 @@ private constructor(
              */
             fun updatedBy(updatedBy: JsonField<String>) = apply { this.updatedBy = updatedBy }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1591,6 +1725,7 @@ private constructor(
                     (transit ?: JsonMissing.of()).map { it.toImmutable() },
                     updatedAt,
                     updatedBy,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -9176,7 +9311,8 @@ private constructor(
                 taskings == other.taskings &&
                 transit == other.transit &&
                 updatedAt == other.updatedAt &&
-                updatedBy == other.updatedBy
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -9215,13 +9351,14 @@ private constructor(
                 transit,
                 updatedAt,
                 updatedBy,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, collectionRequirements=$collectionRequirements, createdAt=$createdAt, createdBy=$createdBy, idexVersion=$idexVersion, missionAor=$missionAor, missionCollectionArea=$missionCollectionArea, missionCountry=$missionCountry, missionEmphasis=$missionEmphasis, missionId=$missionId, missionJoa=$missionJoa, missionOperation=$missionOperation, missionPrimaryIntelDiscipline=$missionPrimaryIntelDiscipline, missionPrimarySubCategory=$missionPrimarySubCategory, missionPriority=$missionPriority, missionRegion=$missionRegion, missionRole=$missionRole, missionSecondaryIntelDiscipline=$missionSecondaryIntelDiscipline, missionSecondarySubCategory=$missionSecondarySubCategory, missionStartPointLat=$missionStartPointLat, missionStartPointLong=$missionStartPointLong, missionSubRegion=$missionSubRegion, missionSupportedUnit=$missionSupportedUnit, missionSyncMatrixBin=$missionSyncMatrixBin, name=$name, origin=$origin, origNetwork=$origNetwork, taskings=$taskings, transit=$transit, updatedAt=$updatedAt, updatedBy=$updatedBy}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, collectionRequirements=$collectionRequirements, createdAt=$createdAt, createdBy=$createdBy, idexVersion=$idexVersion, missionAor=$missionAor, missionCollectionArea=$missionCollectionArea, missionCountry=$missionCountry, missionEmphasis=$missionEmphasis, missionId=$missionId, missionJoa=$missionJoa, missionOperation=$missionOperation, missionPrimaryIntelDiscipline=$missionPrimaryIntelDiscipline, missionPrimarySubCategory=$missionPrimarySubCategory, missionPriority=$missionPriority, missionRegion=$missionRegion, missionRole=$missionRole, missionSecondaryIntelDiscipline=$missionSecondaryIntelDiscipline, missionSecondarySubCategory=$missionSecondarySubCategory, missionStartPointLat=$missionStartPointLat, missionStartPointLong=$missionStartPointLong, missionSubRegion=$missionSubRegion, missionSupportedUnit=$missionSupportedUnit, missionSyncMatrixBin=$missionSyncMatrixBin, name=$name, origin=$origin, origNetwork=$origNetwork, taskings=$taskings, transit=$transit, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.navigationalobstruction
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -17,6 +20,7 @@ import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.LocalDate
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -217,113 +221,368 @@ private constructor(
      * as applicable boundaries, locations, heights, data ownership, and currency.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("cycleDate") @ExcludeMissing private val cycleDate: JsonField<LocalDate>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("obstacleId") @ExcludeMissing private val obstacleId: JsonField<String>,
-        @JsonProperty("obstacleType") @ExcludeMissing private val obstacleType: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("actDelCode") @ExcludeMissing private val actDelCode: JsonField<String>,
-        @JsonProperty("airacCycle") @ExcludeMissing private val airacCycle: JsonField<Int>,
-        @JsonProperty("baseAiracCycle") @ExcludeMissing private val baseAiracCycle: JsonField<Int>,
-        @JsonProperty("baselineCutoffDate")
-        @ExcludeMissing
+        private val cycleDate: JsonField<LocalDate>,
+        private val dataMode: JsonField<DataMode>,
+        private val obstacleId: JsonField<String>,
+        private val obstacleType: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val actDelCode: JsonField<String>,
+        private val airacCycle: JsonField<Int>,
+        private val baseAiracCycle: JsonField<Int>,
         private val baselineCutoffDate: JsonField<LocalDate>,
-        @JsonProperty("boundNELat") @ExcludeMissing private val boundNeLat: JsonField<Double>,
-        @JsonProperty("boundNELon") @ExcludeMissing private val boundNeLon: JsonField<Double>,
-        @JsonProperty("boundSWLat") @ExcludeMissing private val boundSwLat: JsonField<Double>,
-        @JsonProperty("boundSWLon") @ExcludeMissing private val boundSwLon: JsonField<Double>,
-        @JsonProperty("countryCode") @ExcludeMissing private val countryCode: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("cutoffDate") @ExcludeMissing private val cutoffDate: JsonField<LocalDate>,
-        @JsonProperty("dataSetRemarks")
-        @ExcludeMissing
+        private val boundNeLat: JsonField<Double>,
+        private val boundNeLon: JsonField<Double>,
+        private val boundSwLat: JsonField<Double>,
+        private val boundSwLon: JsonField<Double>,
+        private val countryCode: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val cutoffDate: JsonField<LocalDate>,
         private val dataSetRemarks: JsonField<String>,
-        @JsonProperty("deletingOrg") @ExcludeMissing private val deletingOrg: JsonField<String>,
-        @JsonProperty("derivingOrg") @ExcludeMissing private val derivingOrg: JsonField<String>,
-        @JsonProperty("directivityCode")
-        @ExcludeMissing
+        private val deletingOrg: JsonField<String>,
+        private val derivingOrg: JsonField<String>,
         private val directivityCode: JsonField<Int>,
-        @JsonProperty("elevation") @ExcludeMissing private val elevation: JsonField<Double>,
-        @JsonProperty("elevationAcc") @ExcludeMissing private val elevationAcc: JsonField<Double>,
-        @JsonProperty("externalId") @ExcludeMissing private val externalId: JsonField<String>,
-        @JsonProperty("facc") @ExcludeMissing private val facc: JsonField<String>,
-        @JsonProperty("featureCode") @ExcludeMissing private val featureCode: JsonField<String>,
-        @JsonProperty("featureDescription")
-        @ExcludeMissing
+        private val elevation: JsonField<Double>,
+        private val elevationAcc: JsonField<Double>,
+        private val externalId: JsonField<String>,
+        private val facc: JsonField<String>,
+        private val featureCode: JsonField<String>,
         private val featureDescription: JsonField<String>,
-        @JsonProperty("featureName") @ExcludeMissing private val featureName: JsonField<String>,
-        @JsonProperty("featureType") @ExcludeMissing private val featureType: JsonField<String>,
-        @JsonProperty("heightAGL") @ExcludeMissing private val heightAgl: JsonField<Double>,
-        @JsonProperty("heightAGLAcc") @ExcludeMissing private val heightAglAcc: JsonField<Double>,
-        @JsonProperty("heightMSL") @ExcludeMissing private val heightMsl: JsonField<Double>,
-        @JsonProperty("heightMSLAcc") @ExcludeMissing private val heightMslAcc: JsonField<Double>,
-        @JsonProperty("horizAcc") @ExcludeMissing private val horizAcc: JsonField<Double>,
-        @JsonProperty("horizDatumCode")
-        @ExcludeMissing
+        private val featureName: JsonField<String>,
+        private val featureType: JsonField<String>,
+        private val heightAgl: JsonField<Double>,
+        private val heightAglAcc: JsonField<Double>,
+        private val heightMsl: JsonField<Double>,
+        private val heightMslAcc: JsonField<Double>,
+        private val horizAcc: JsonField<Double>,
         private val horizDatumCode: JsonField<String>,
-        @JsonProperty("initRecordDate")
-        @ExcludeMissing
         private val initRecordDate: JsonField<LocalDate>,
-        @JsonProperty("keys") @ExcludeMissing private val keys: JsonField<List<String>>,
-        @JsonProperty("lightingCode") @ExcludeMissing private val lightingCode: JsonField<String>,
-        @JsonProperty("lineNELat") @ExcludeMissing private val lineNeLat: JsonField<Double>,
-        @JsonProperty("lineNELon") @ExcludeMissing private val lineNeLon: JsonField<Double>,
-        @JsonProperty("linesFilename") @ExcludeMissing private val linesFilename: JsonField<String>,
-        @JsonProperty("lineSWLat") @ExcludeMissing private val lineSwLat: JsonField<Double>,
-        @JsonProperty("lineSWLon") @ExcludeMissing private val lineSwLon: JsonField<Double>,
-        @JsonProperty("minHeightAGL") @ExcludeMissing private val minHeightAgl: JsonField<Double>,
-        @JsonProperty("multObs") @ExcludeMissing private val multObs: JsonField<String>,
-        @JsonProperty("nextCycleDate")
-        @ExcludeMissing
+        private val keys: JsonField<List<String>>,
+        private val lightingCode: JsonField<String>,
+        private val lineNeLat: JsonField<Double>,
+        private val lineNeLon: JsonField<Double>,
+        private val linesFilename: JsonField<String>,
+        private val lineSwLat: JsonField<Double>,
+        private val lineSwLon: JsonField<Double>,
+        private val minHeightAgl: JsonField<Double>,
+        private val multObs: JsonField<String>,
         private val nextCycleDate: JsonField<LocalDate>,
-        @JsonProperty("numLines") @ExcludeMissing private val numLines: JsonField<Int>,
-        @JsonProperty("numObs") @ExcludeMissing private val numObs: JsonField<Int>,
-        @JsonProperty("numPoints") @ExcludeMissing private val numPoints: JsonField<Int>,
-        @JsonProperty("obstacleRemarks")
-        @ExcludeMissing
+        private val numLines: JsonField<Int>,
+        private val numObs: JsonField<Int>,
+        private val numPoints: JsonField<Int>,
         private val obstacleRemarks: JsonField<String>,
-        @JsonProperty("origId") @ExcludeMissing private val origId: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("ownerCountryCode")
-        @ExcludeMissing
+        private val origId: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
         private val ownerCountryCode: JsonField<String>,
-        @JsonProperty("pointLat") @ExcludeMissing private val pointLat: JsonField<Double>,
-        @JsonProperty("pointLon") @ExcludeMissing private val pointLon: JsonField<Double>,
-        @JsonProperty("pointsFilename")
-        @ExcludeMissing
+        private val pointLat: JsonField<Double>,
+        private val pointLon: JsonField<Double>,
         private val pointsFilename: JsonField<String>,
-        @JsonProperty("processCode") @ExcludeMissing private val processCode: JsonField<String>,
-        @JsonProperty("producer") @ExcludeMissing private val producer: JsonField<String>,
-        @JsonProperty("provinceCode") @ExcludeMissing private val provinceCode: JsonField<String>,
-        @JsonProperty("quality") @ExcludeMissing private val quality: JsonField<String>,
-        @JsonProperty("revDate") @ExcludeMissing private val revDate: JsonField<LocalDate>,
-        @JsonProperty("segEndPoint") @ExcludeMissing private val segEndPoint: JsonField<Int>,
-        @JsonProperty("segNum") @ExcludeMissing private val segNum: JsonField<Int>,
-        @JsonProperty("segStartPoint") @ExcludeMissing private val segStartPoint: JsonField<Int>,
-        @JsonProperty("sourceDate") @ExcludeMissing private val sourceDate: JsonField<LocalDate>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("surfaceMatCode")
-        @ExcludeMissing
+        private val processCode: JsonField<String>,
+        private val producer: JsonField<String>,
+        private val provinceCode: JsonField<String>,
+        private val quality: JsonField<String>,
+        private val revDate: JsonField<LocalDate>,
+        private val segEndPoint: JsonField<Int>,
+        private val segNum: JsonField<Int>,
+        private val segStartPoint: JsonField<Int>,
+        private val sourceDate: JsonField<LocalDate>,
+        private val sourceDl: JsonField<String>,
         private val surfaceMatCode: JsonField<String>,
-        @JsonProperty("transactionCode")
-        @ExcludeMissing
         private val transactionCode: JsonField<String>,
-        @JsonProperty("validationCode") @ExcludeMissing private val validationCode: JsonField<Int>,
-        @JsonProperty("values") @ExcludeMissing private val values: JsonField<List<String>>,
-        @JsonProperty("vectorsFilename")
-        @ExcludeMissing
+        private val validationCode: JsonField<Int>,
+        private val values: JsonField<List<String>>,
         private val vectorsFilename: JsonField<String>,
-        @JsonProperty("wac") @ExcludeMissing private val wac: JsonField<String>,
-        @JsonProperty("wacINNR") @ExcludeMissing private val wacInnr: JsonField<String>,
+        private val wac: JsonField<String>,
+        private val wacInnr: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("cycleDate")
+            @ExcludeMissing
+            cycleDate: JsonField<LocalDate> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("obstacleId")
+            @ExcludeMissing
+            obstacleId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("obstacleType")
+            @ExcludeMissing
+            obstacleType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("actDelCode")
+            @ExcludeMissing
+            actDelCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("airacCycle")
+            @ExcludeMissing
+            airacCycle: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("baseAiracCycle")
+            @ExcludeMissing
+            baseAiracCycle: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("baselineCutoffDate")
+            @ExcludeMissing
+            baselineCutoffDate: JsonField<LocalDate> = JsonMissing.of(),
+            @JsonProperty("boundNELat")
+            @ExcludeMissing
+            boundNeLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("boundNELon")
+            @ExcludeMissing
+            boundNeLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("boundSWLat")
+            @ExcludeMissing
+            boundSwLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("boundSWLon")
+            @ExcludeMissing
+            boundSwLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("countryCode")
+            @ExcludeMissing
+            countryCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("cutoffDate")
+            @ExcludeMissing
+            cutoffDate: JsonField<LocalDate> = JsonMissing.of(),
+            @JsonProperty("dataSetRemarks")
+            @ExcludeMissing
+            dataSetRemarks: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("deletingOrg")
+            @ExcludeMissing
+            deletingOrg: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("derivingOrg")
+            @ExcludeMissing
+            derivingOrg: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("directivityCode")
+            @ExcludeMissing
+            directivityCode: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("elevation")
+            @ExcludeMissing
+            elevation: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elevationAcc")
+            @ExcludeMissing
+            elevationAcc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("externalId")
+            @ExcludeMissing
+            externalId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("facc") @ExcludeMissing facc: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("featureCode")
+            @ExcludeMissing
+            featureCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("featureDescription")
+            @ExcludeMissing
+            featureDescription: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("featureName")
+            @ExcludeMissing
+            featureName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("featureType")
+            @ExcludeMissing
+            featureType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("heightAGL")
+            @ExcludeMissing
+            heightAgl: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("heightAGLAcc")
+            @ExcludeMissing
+            heightAglAcc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("heightMSL")
+            @ExcludeMissing
+            heightMsl: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("heightMSLAcc")
+            @ExcludeMissing
+            heightMslAcc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("horizAcc")
+            @ExcludeMissing
+            horizAcc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("horizDatumCode")
+            @ExcludeMissing
+            horizDatumCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("initRecordDate")
+            @ExcludeMissing
+            initRecordDate: JsonField<LocalDate> = JsonMissing.of(),
+            @JsonProperty("keys") @ExcludeMissing keys: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("lightingCode")
+            @ExcludeMissing
+            lightingCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lineNELat")
+            @ExcludeMissing
+            lineNeLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("lineNELon")
+            @ExcludeMissing
+            lineNeLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("linesFilename")
+            @ExcludeMissing
+            linesFilename: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lineSWLat")
+            @ExcludeMissing
+            lineSwLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("lineSWLon")
+            @ExcludeMissing
+            lineSwLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("minHeightAGL")
+            @ExcludeMissing
+            minHeightAgl: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("multObs") @ExcludeMissing multObs: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("nextCycleDate")
+            @ExcludeMissing
+            nextCycleDate: JsonField<LocalDate> = JsonMissing.of(),
+            @JsonProperty("numLines") @ExcludeMissing numLines: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numObs") @ExcludeMissing numObs: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numPoints") @ExcludeMissing numPoints: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("obstacleRemarks")
+            @ExcludeMissing
+            obstacleRemarks: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origId") @ExcludeMissing origId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ownerCountryCode")
+            @ExcludeMissing
+            ownerCountryCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("pointLat")
+            @ExcludeMissing
+            pointLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pointLon")
+            @ExcludeMissing
+            pointLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pointsFilename")
+            @ExcludeMissing
+            pointsFilename: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("processCode")
+            @ExcludeMissing
+            processCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("producer")
+            @ExcludeMissing
+            producer: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("provinceCode")
+            @ExcludeMissing
+            provinceCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("quality") @ExcludeMissing quality: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("revDate")
+            @ExcludeMissing
+            revDate: JsonField<LocalDate> = JsonMissing.of(),
+            @JsonProperty("segEndPoint")
+            @ExcludeMissing
+            segEndPoint: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("segNum") @ExcludeMissing segNum: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("segStartPoint")
+            @ExcludeMissing
+            segStartPoint: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sourceDate")
+            @ExcludeMissing
+            sourceDate: JsonField<LocalDate> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("surfaceMatCode")
+            @ExcludeMissing
+            surfaceMatCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("transactionCode")
+            @ExcludeMissing
+            transactionCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("validationCode")
+            @ExcludeMissing
+            validationCode: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("values")
+            @ExcludeMissing
+            values: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("vectorsFilename")
+            @ExcludeMissing
+            vectorsFilename: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("wac") @ExcludeMissing wac: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("wacINNR") @ExcludeMissing wacInnr: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            cycleDate,
+            dataMode,
+            obstacleId,
+            obstacleType,
+            source,
+            id,
+            actDelCode,
+            airacCycle,
+            baseAiracCycle,
+            baselineCutoffDate,
+            boundNeLat,
+            boundNeLon,
+            boundSwLat,
+            boundSwLon,
+            countryCode,
+            createdAt,
+            createdBy,
+            cutoffDate,
+            dataSetRemarks,
+            deletingOrg,
+            derivingOrg,
+            directivityCode,
+            elevation,
+            elevationAcc,
+            externalId,
+            facc,
+            featureCode,
+            featureDescription,
+            featureName,
+            featureType,
+            heightAgl,
+            heightAglAcc,
+            heightMsl,
+            heightMslAcc,
+            horizAcc,
+            horizDatumCode,
+            initRecordDate,
+            keys,
+            lightingCode,
+            lineNeLat,
+            lineNeLon,
+            linesFilename,
+            lineSwLat,
+            lineSwLon,
+            minHeightAgl,
+            multObs,
+            nextCycleDate,
+            numLines,
+            numObs,
+            numPoints,
+            obstacleRemarks,
+            origId,
+            origin,
+            origNetwork,
+            ownerCountryCode,
+            pointLat,
+            pointLon,
+            pointsFilename,
+            processCode,
+            producer,
+            provinceCode,
+            quality,
+            revDate,
+            segEndPoint,
+            segNum,
+            segStartPoint,
+            sourceDate,
+            sourceDl,
+            surfaceMatCode,
+            transactionCode,
+            validationCode,
+            values,
+            vectorsFilename,
+            wac,
+            wacInnr,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1655,6 +1914,16 @@ private constructor(
          */
         @JsonProperty("wacINNR") @ExcludeMissing fun _wacInnr(): JsonField<String> = wacInnr
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1754,6 +2023,7 @@ private constructor(
             private var vectorsFilename: JsonField<String> = JsonMissing.of()
             private var wac: JsonField<String> = JsonMissing.of()
             private var wacInnr: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1833,6 +2103,7 @@ private constructor(
                 vectorsFilename = body.vectorsFilename
                 wac = body.wac
                 wacInnr = body.wacInnr
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -3006,6 +3277,25 @@ private constructor(
              */
             fun wacInnr(wacInnr: JsonField<String>) = apply { this.wacInnr = wacInnr }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -3101,6 +3391,7 @@ private constructor(
                     vectorsFilename,
                     wac,
                     wacInnr,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -3520,7 +3811,8 @@ private constructor(
                 values == other.values &&
                 vectorsFilename == other.vectorsFilename &&
                 wac == other.wac &&
-                wacInnr == other.wacInnr
+                wacInnr == other.wacInnr &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -3601,13 +3893,14 @@ private constructor(
                 vectorsFilename,
                 wac,
                 wacInnr,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, cycleDate=$cycleDate, dataMode=$dataMode, obstacleId=$obstacleId, obstacleType=$obstacleType, source=$source, id=$id, actDelCode=$actDelCode, airacCycle=$airacCycle, baseAiracCycle=$baseAiracCycle, baselineCutoffDate=$baselineCutoffDate, boundNeLat=$boundNeLat, boundNeLon=$boundNeLon, boundSwLat=$boundSwLat, boundSwLon=$boundSwLon, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, cutoffDate=$cutoffDate, dataSetRemarks=$dataSetRemarks, deletingOrg=$deletingOrg, derivingOrg=$derivingOrg, directivityCode=$directivityCode, elevation=$elevation, elevationAcc=$elevationAcc, externalId=$externalId, facc=$facc, featureCode=$featureCode, featureDescription=$featureDescription, featureName=$featureName, featureType=$featureType, heightAgl=$heightAgl, heightAglAcc=$heightAglAcc, heightMsl=$heightMsl, heightMslAcc=$heightMslAcc, horizAcc=$horizAcc, horizDatumCode=$horizDatumCode, initRecordDate=$initRecordDate, keys=$keys, lightingCode=$lightingCode, lineNeLat=$lineNeLat, lineNeLon=$lineNeLon, linesFilename=$linesFilename, lineSwLat=$lineSwLat, lineSwLon=$lineSwLon, minHeightAgl=$minHeightAgl, multObs=$multObs, nextCycleDate=$nextCycleDate, numLines=$numLines, numObs=$numObs, numPoints=$numPoints, obstacleRemarks=$obstacleRemarks, origId=$origId, origin=$origin, origNetwork=$origNetwork, ownerCountryCode=$ownerCountryCode, pointLat=$pointLat, pointLon=$pointLon, pointsFilename=$pointsFilename, processCode=$processCode, producer=$producer, provinceCode=$provinceCode, quality=$quality, revDate=$revDate, segEndPoint=$segEndPoint, segNum=$segNum, segStartPoint=$segStartPoint, sourceDate=$sourceDate, sourceDl=$sourceDl, surfaceMatCode=$surfaceMatCode, transactionCode=$transactionCode, validationCode=$validationCode, values=$values, vectorsFilename=$vectorsFilename, wac=$wac, wacInnr=$wacInnr}"
+            "Body{classificationMarking=$classificationMarking, cycleDate=$cycleDate, dataMode=$dataMode, obstacleId=$obstacleId, obstacleType=$obstacleType, source=$source, id=$id, actDelCode=$actDelCode, airacCycle=$airacCycle, baseAiracCycle=$baseAiracCycle, baselineCutoffDate=$baselineCutoffDate, boundNeLat=$boundNeLat, boundNeLon=$boundNeLon, boundSwLat=$boundSwLat, boundSwLon=$boundSwLon, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, cutoffDate=$cutoffDate, dataSetRemarks=$dataSetRemarks, deletingOrg=$deletingOrg, derivingOrg=$derivingOrg, directivityCode=$directivityCode, elevation=$elevation, elevationAcc=$elevationAcc, externalId=$externalId, facc=$facc, featureCode=$featureCode, featureDescription=$featureDescription, featureName=$featureName, featureType=$featureType, heightAgl=$heightAgl, heightAglAcc=$heightAglAcc, heightMsl=$heightMsl, heightMslAcc=$heightMslAcc, horizAcc=$horizAcc, horizDatumCode=$horizDatumCode, initRecordDate=$initRecordDate, keys=$keys, lightingCode=$lightingCode, lineNeLat=$lineNeLat, lineNeLon=$lineNeLon, linesFilename=$linesFilename, lineSwLat=$lineSwLat, lineSwLon=$lineSwLon, minHeightAgl=$minHeightAgl, multObs=$multObs, nextCycleDate=$nextCycleDate, numLines=$numLines, numObs=$numObs, numPoints=$numPoints, obstacleRemarks=$obstacleRemarks, origId=$origId, origin=$origin, origNetwork=$origNetwork, ownerCountryCode=$ownerCountryCode, pointLat=$pointLat, pointLon=$pointLon, pointsFilename=$pointsFilename, processCode=$processCode, producer=$producer, provinceCode=$provinceCode, quality=$quality, revDate=$revDate, segEndPoint=$segEndPoint, segNum=$segNum, segStartPoint=$segStartPoint, sourceDate=$sourceDate, sourceDl=$sourceDl, surfaceMatCode=$surfaceMatCode, transactionCode=$transactionCode, validationCode=$validationCode, values=$values, vectorsFilename=$vectorsFilename, wac=$wac, wacInnr=$wacInnr, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

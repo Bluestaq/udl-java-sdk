@@ -210,119 +210,332 @@ private constructor(
 
     /** Crew Services. */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("origCrewId") @ExcludeMissing private val origCrewId: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("adjReturnTime")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val origCrewId: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
         private val adjReturnTime: JsonField<OffsetDateTime>,
-        @JsonProperty("adjReturnTimeApprover")
-        @ExcludeMissing
         private val adjReturnTimeApprover: JsonField<String>,
-        @JsonProperty("aircraftMDS") @ExcludeMissing private val aircraftMds: JsonField<String>,
-        @JsonProperty("alertedTime")
-        @ExcludeMissing
+        private val aircraftMds: JsonField<String>,
         private val alertedTime: JsonField<OffsetDateTime>,
-        @JsonProperty("alertType") @ExcludeMissing private val alertType: JsonField<String>,
-        @JsonProperty("armsCrewUnit") @ExcludeMissing private val armsCrewUnit: JsonField<String>,
-        @JsonProperty("assignedQualCode")
-        @ExcludeMissing
+        private val alertType: JsonField<String>,
+        private val armsCrewUnit: JsonField<String>,
         private val assignedQualCode: JsonField<List<String>>,
-        @JsonProperty("commanderId") @ExcludeMissing private val commanderId: JsonField<String>,
-        @JsonProperty("commanderLast4SSN")
-        @ExcludeMissing
+        private val commanderId: JsonField<String>,
         private val commanderLast4Ssn: JsonField<String>,
-        @JsonProperty("commanderName") @ExcludeMissing private val commanderName: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("crewHome") @ExcludeMissing private val crewHome: JsonField<Boolean>,
-        @JsonProperty("crewMembers")
-        @ExcludeMissing
+        private val commanderName: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val crewHome: JsonField<Boolean>,
         private val crewMembers: JsonField<List<CrewMember>>,
-        @JsonProperty("crewName") @ExcludeMissing private val crewName: JsonField<String>,
-        @JsonProperty("crewRMS") @ExcludeMissing private val crewRms: JsonField<String>,
-        @JsonProperty("crewRole") @ExcludeMissing private val crewRole: JsonField<String>,
-        @JsonProperty("crewSource") @ExcludeMissing private val crewSource: JsonField<String>,
-        @JsonProperty("crewSquadron") @ExcludeMissing private val crewSquadron: JsonField<String>,
-        @JsonProperty("crewType") @ExcludeMissing private val crewType: JsonField<String>,
-        @JsonProperty("crewUnit") @ExcludeMissing private val crewUnit: JsonField<String>,
-        @JsonProperty("crewWing") @ExcludeMissing private val crewWing: JsonField<String>,
-        @JsonProperty("currentICAO") @ExcludeMissing private val currentIcao: JsonField<String>,
-        @JsonProperty("fdpEligType") @ExcludeMissing private val fdpEligType: JsonField<String>,
-        @JsonProperty("fdpType") @ExcludeMissing private val fdpType: JsonField<String>,
-        @JsonProperty("femaleEnlistedQty")
-        @ExcludeMissing
+        private val crewName: JsonField<String>,
+        private val crewRms: JsonField<String>,
+        private val crewRole: JsonField<String>,
+        private val crewSource: JsonField<String>,
+        private val crewSquadron: JsonField<String>,
+        private val crewType: JsonField<String>,
+        private val crewUnit: JsonField<String>,
+        private val crewWing: JsonField<String>,
+        private val currentIcao: JsonField<String>,
+        private val fdpEligType: JsonField<String>,
+        private val fdpType: JsonField<String>,
         private val femaleEnlistedQty: JsonField<Int>,
-        @JsonProperty("femaleOfficerQty")
-        @ExcludeMissing
         private val femaleOfficerQty: JsonField<Int>,
-        @JsonProperty("fltAuthNum") @ExcludeMissing private val fltAuthNum: JsonField<String>,
-        @JsonProperty("idSiteCurrent") @ExcludeMissing private val idSiteCurrent: JsonField<String>,
-        @JsonProperty("idSortie") @ExcludeMissing private val idSortie: JsonField<String>,
-        @JsonProperty("initStartTime")
-        @ExcludeMissing
+        private val fltAuthNum: JsonField<String>,
+        private val idSiteCurrent: JsonField<String>,
+        private val idSortie: JsonField<String>,
         private val initStartTime: JsonField<OffsetDateTime>,
-        @JsonProperty("lastAlertTime")
-        @ExcludeMissing
         private val lastAlertTime: JsonField<OffsetDateTime>,
-        @JsonProperty("legalAlertTime")
-        @ExcludeMissing
         private val legalAlertTime: JsonField<OffsetDateTime>,
-        @JsonProperty("legalBravoTime")
-        @ExcludeMissing
         private val legalBravoTime: JsonField<OffsetDateTime>,
-        @JsonProperty("linkedTask") @ExcludeMissing private val linkedTask: JsonField<Boolean>,
-        @JsonProperty("maleEnlistedQty")
-        @ExcludeMissing
+        private val linkedTask: JsonField<Boolean>,
         private val maleEnlistedQty: JsonField<Int>,
-        @JsonProperty("maleOfficerQty") @ExcludeMissing private val maleOfficerQty: JsonField<Int>,
-        @JsonProperty("missionAlias") @ExcludeMissing private val missionAlias: JsonField<String>,
-        @JsonProperty("missionId") @ExcludeMissing private val missionId: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("personnelType") @ExcludeMissing private val personnelType: JsonField<String>,
-        @JsonProperty("pickupTime")
-        @ExcludeMissing
+        private val maleOfficerQty: JsonField<Int>,
+        private val missionAlias: JsonField<String>,
+        private val missionId: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val personnelType: JsonField<String>,
         private val pickupTime: JsonField<OffsetDateTime>,
-        @JsonProperty("postRestApplied")
-        @ExcludeMissing
         private val postRestApplied: JsonField<Boolean>,
-        @JsonProperty("postRestEnd")
-        @ExcludeMissing
         private val postRestEnd: JsonField<OffsetDateTime>,
-        @JsonProperty("postRestOffset")
-        @ExcludeMissing
         private val postRestOffset: JsonField<String>,
-        @JsonProperty("preRestApplied")
-        @ExcludeMissing
         private val preRestApplied: JsonField<Boolean>,
-        @JsonProperty("preRestStart")
-        @ExcludeMissing
         private val preRestStart: JsonField<OffsetDateTime>,
-        @JsonProperty("reqQualCode")
-        @ExcludeMissing
         private val reqQualCode: JsonField<List<String>>,
-        @JsonProperty("returnTime")
-        @ExcludeMissing
         private val returnTime: JsonField<OffsetDateTime>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("stage1Qual") @ExcludeMissing private val stage1Qual: JsonField<String>,
-        @JsonProperty("stage2Qual") @ExcludeMissing private val stage2Qual: JsonField<String>,
-        @JsonProperty("stage3Qual") @ExcludeMissing private val stage3Qual: JsonField<String>,
-        @JsonProperty("stageName") @ExcludeMissing private val stageName: JsonField<String>,
-        @JsonProperty("stageTime") @ExcludeMissing private val stageTime: JsonField<OffsetDateTime>,
-        @JsonProperty("status") @ExcludeMissing private val status: JsonField<String>,
-        @JsonProperty("transportReq") @ExcludeMissing private val transportReq: JsonField<Boolean>,
-        @JsonProperty("tripKit") @ExcludeMissing private val tripKit: JsonField<String>,
-        @JsonProperty("updatedAt") @ExcludeMissing private val updatedAt: JsonField<OffsetDateTime>,
-        @JsonProperty("updatedBy") @ExcludeMissing private val updatedBy: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val stage1Qual: JsonField<String>,
+        private val stage2Qual: JsonField<String>,
+        private val stage3Qual: JsonField<String>,
+        private val stageName: JsonField<String>,
+        private val stageTime: JsonField<OffsetDateTime>,
+        private val status: JsonField<String>,
+        private val transportReq: JsonField<Boolean>,
+        private val tripKit: JsonField<String>,
+        private val updatedAt: JsonField<OffsetDateTime>,
+        private val updatedBy: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("origCrewId")
+            @ExcludeMissing
+            origCrewId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("adjReturnTime")
+            @ExcludeMissing
+            adjReturnTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("adjReturnTimeApprover")
+            @ExcludeMissing
+            adjReturnTimeApprover: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("aircraftMDS")
+            @ExcludeMissing
+            aircraftMds: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("alertedTime")
+            @ExcludeMissing
+            alertedTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("alertType")
+            @ExcludeMissing
+            alertType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("armsCrewUnit")
+            @ExcludeMissing
+            armsCrewUnit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("assignedQualCode")
+            @ExcludeMissing
+            assignedQualCode: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("commanderId")
+            @ExcludeMissing
+            commanderId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("commanderLast4SSN")
+            @ExcludeMissing
+            commanderLast4Ssn: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("commanderName")
+            @ExcludeMissing
+            commanderName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("crewHome")
+            @ExcludeMissing
+            crewHome: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("crewMembers")
+            @ExcludeMissing
+            crewMembers: JsonField<List<CrewMember>> = JsonMissing.of(),
+            @JsonProperty("crewName")
+            @ExcludeMissing
+            crewName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("crewRMS") @ExcludeMissing crewRms: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("crewRole")
+            @ExcludeMissing
+            crewRole: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("crewSource")
+            @ExcludeMissing
+            crewSource: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("crewSquadron")
+            @ExcludeMissing
+            crewSquadron: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("crewType")
+            @ExcludeMissing
+            crewType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("crewUnit")
+            @ExcludeMissing
+            crewUnit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("crewWing")
+            @ExcludeMissing
+            crewWing: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("currentICAO")
+            @ExcludeMissing
+            currentIcao: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("fdpEligType")
+            @ExcludeMissing
+            fdpEligType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("fdpType") @ExcludeMissing fdpType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("femaleEnlistedQty")
+            @ExcludeMissing
+            femaleEnlistedQty: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("femaleOfficerQty")
+            @ExcludeMissing
+            femaleOfficerQty: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("fltAuthNum")
+            @ExcludeMissing
+            fltAuthNum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSiteCurrent")
+            @ExcludeMissing
+            idSiteCurrent: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSortie")
+            @ExcludeMissing
+            idSortie: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("initStartTime")
+            @ExcludeMissing
+            initStartTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("lastAlertTime")
+            @ExcludeMissing
+            lastAlertTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("legalAlertTime")
+            @ExcludeMissing
+            legalAlertTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("legalBravoTime")
+            @ExcludeMissing
+            legalBravoTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("linkedTask")
+            @ExcludeMissing
+            linkedTask: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("maleEnlistedQty")
+            @ExcludeMissing
+            maleEnlistedQty: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("maleOfficerQty")
+            @ExcludeMissing
+            maleOfficerQty: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("missionAlias")
+            @ExcludeMissing
+            missionAlias: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("missionId")
+            @ExcludeMissing
+            missionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("personnelType")
+            @ExcludeMissing
+            personnelType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("pickupTime")
+            @ExcludeMissing
+            pickupTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("postRestApplied")
+            @ExcludeMissing
+            postRestApplied: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("postRestEnd")
+            @ExcludeMissing
+            postRestEnd: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("postRestOffset")
+            @ExcludeMissing
+            postRestOffset: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("preRestApplied")
+            @ExcludeMissing
+            preRestApplied: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("preRestStart")
+            @ExcludeMissing
+            preRestStart: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("reqQualCode")
+            @ExcludeMissing
+            reqQualCode: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("returnTime")
+            @ExcludeMissing
+            returnTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("stage1Qual")
+            @ExcludeMissing
+            stage1Qual: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("stage2Qual")
+            @ExcludeMissing
+            stage2Qual: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("stage3Qual")
+            @ExcludeMissing
+            stage3Qual: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("stageName")
+            @ExcludeMissing
+            stageName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("stageTime")
+            @ExcludeMissing
+            stageTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("status") @ExcludeMissing status: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("transportReq")
+            @ExcludeMissing
+            transportReq: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("tripKit") @ExcludeMissing tripKit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("updatedAt")
+            @ExcludeMissing
+            updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("updatedBy")
+            @ExcludeMissing
+            updatedBy: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            origCrewId,
+            source,
+            id,
+            adjReturnTime,
+            adjReturnTimeApprover,
+            aircraftMds,
+            alertedTime,
+            alertType,
+            armsCrewUnit,
+            assignedQualCode,
+            commanderId,
+            commanderLast4Ssn,
+            commanderName,
+            createdAt,
+            createdBy,
+            crewHome,
+            crewMembers,
+            crewName,
+            crewRms,
+            crewRole,
+            crewSource,
+            crewSquadron,
+            crewType,
+            crewUnit,
+            crewWing,
+            currentIcao,
+            fdpEligType,
+            fdpType,
+            femaleEnlistedQty,
+            femaleOfficerQty,
+            fltAuthNum,
+            idSiteCurrent,
+            idSortie,
+            initStartTime,
+            lastAlertTime,
+            legalAlertTime,
+            legalBravoTime,
+            linkedTask,
+            maleEnlistedQty,
+            maleOfficerQty,
+            missionAlias,
+            missionId,
+            origin,
+            origNetwork,
+            personnelType,
+            pickupTime,
+            postRestApplied,
+            postRestEnd,
+            postRestOffset,
+            preRestApplied,
+            preRestStart,
+            reqQualCode,
+            returnTime,
+            sourceDl,
+            stage1Qual,
+            stage2Qual,
+            stage3Qual,
+            stageName,
+            stageTime,
+            status,
+            transportReq,
+            tripKit,
+            updatedAt,
+            updatedBy,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1480,6 +1693,16 @@ private constructor(
          */
         @JsonProperty("updatedBy") @ExcludeMissing fun _updatedBy(): JsonField<String> = updatedBy
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1567,6 +1790,7 @@ private constructor(
             private var tripKit: JsonField<String> = JsonMissing.of()
             private var updatedAt: JsonField<OffsetDateTime> = JsonMissing.of()
             private var updatedBy: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1636,6 +1860,7 @@ private constructor(
                 tripKit = body.tripKit
                 updatedAt = body.updatedAt
                 updatedBy = body.updatedBy
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -2672,6 +2897,25 @@ private constructor(
              */
             fun updatedBy(updatedBy: JsonField<String>) = apply { this.updatedBy = updatedBy }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -2755,6 +2999,7 @@ private constructor(
                     tripKit,
                     updatedAt,
                     updatedBy,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -6120,7 +6365,8 @@ private constructor(
                 transportReq == other.transportReq &&
                 tripKit == other.tripKit &&
                 updatedAt == other.updatedAt &&
-                updatedBy == other.updatedBy
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -6191,13 +6437,14 @@ private constructor(
                 tripKit,
                 updatedAt,
                 updatedBy,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, origCrewId=$origCrewId, source=$source, id=$id, adjReturnTime=$adjReturnTime, adjReturnTimeApprover=$adjReturnTimeApprover, aircraftMds=$aircraftMds, alertedTime=$alertedTime, alertType=$alertType, armsCrewUnit=$armsCrewUnit, assignedQualCode=$assignedQualCode, commanderId=$commanderId, commanderLast4Ssn=$commanderLast4Ssn, commanderName=$commanderName, createdAt=$createdAt, createdBy=$createdBy, crewHome=$crewHome, crewMembers=$crewMembers, crewName=$crewName, crewRms=$crewRms, crewRole=$crewRole, crewSource=$crewSource, crewSquadron=$crewSquadron, crewType=$crewType, crewUnit=$crewUnit, crewWing=$crewWing, currentIcao=$currentIcao, fdpEligType=$fdpEligType, fdpType=$fdpType, femaleEnlistedQty=$femaleEnlistedQty, femaleOfficerQty=$femaleOfficerQty, fltAuthNum=$fltAuthNum, idSiteCurrent=$idSiteCurrent, idSortie=$idSortie, initStartTime=$initStartTime, lastAlertTime=$lastAlertTime, legalAlertTime=$legalAlertTime, legalBravoTime=$legalBravoTime, linkedTask=$linkedTask, maleEnlistedQty=$maleEnlistedQty, maleOfficerQty=$maleOfficerQty, missionAlias=$missionAlias, missionId=$missionId, origin=$origin, origNetwork=$origNetwork, personnelType=$personnelType, pickupTime=$pickupTime, postRestApplied=$postRestApplied, postRestEnd=$postRestEnd, postRestOffset=$postRestOffset, preRestApplied=$preRestApplied, preRestStart=$preRestStart, reqQualCode=$reqQualCode, returnTime=$returnTime, sourceDl=$sourceDl, stage1Qual=$stage1Qual, stage2Qual=$stage2Qual, stage3Qual=$stage3Qual, stageName=$stageName, stageTime=$stageTime, status=$status, transportReq=$transportReq, tripKit=$tripKit, updatedAt=$updatedAt, updatedBy=$updatedBy}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, origCrewId=$origCrewId, source=$source, id=$id, adjReturnTime=$adjReturnTime, adjReturnTimeApprover=$adjReturnTimeApprover, aircraftMds=$aircraftMds, alertedTime=$alertedTime, alertType=$alertType, armsCrewUnit=$armsCrewUnit, assignedQualCode=$assignedQualCode, commanderId=$commanderId, commanderLast4Ssn=$commanderLast4Ssn, commanderName=$commanderName, createdAt=$createdAt, createdBy=$createdBy, crewHome=$crewHome, crewMembers=$crewMembers, crewName=$crewName, crewRms=$crewRms, crewRole=$crewRole, crewSource=$crewSource, crewSquadron=$crewSquadron, crewType=$crewType, crewUnit=$crewUnit, crewWing=$crewWing, currentIcao=$currentIcao, fdpEligType=$fdpEligType, fdpType=$fdpType, femaleEnlistedQty=$femaleEnlistedQty, femaleOfficerQty=$femaleOfficerQty, fltAuthNum=$fltAuthNum, idSiteCurrent=$idSiteCurrent, idSortie=$idSortie, initStartTime=$initStartTime, lastAlertTime=$lastAlertTime, legalAlertTime=$legalAlertTime, legalBravoTime=$legalBravoTime, linkedTask=$linkedTask, maleEnlistedQty=$maleEnlistedQty, maleOfficerQty=$maleOfficerQty, missionAlias=$missionAlias, missionId=$missionId, origin=$origin, origNetwork=$origNetwork, personnelType=$personnelType, pickupTime=$pickupTime, postRestApplied=$postRestApplied, postRestEnd=$postRestEnd, postRestOffset=$postRestOffset, preRestApplied=$preRestApplied, preRestStart=$preRestStart, reqQualCode=$reqQualCode, returnTime=$returnTime, sourceDl=$sourceDl, stage1Qual=$stage1Qual, stage2Qual=$stage2Qual, stage3Qual=$stage3Qual, stageName=$stageName, stageTime=$stageTime, status=$status, transportReq=$transportReq, tripKit=$tripKit, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

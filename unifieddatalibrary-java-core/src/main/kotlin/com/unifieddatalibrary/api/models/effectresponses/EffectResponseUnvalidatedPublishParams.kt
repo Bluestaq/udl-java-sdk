@@ -214,58 +214,133 @@ private constructor(
 
     /** A response for various effects on a target. */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("actionsList")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
+        private val type: JsonField<String>,
+        private val id: JsonField<String>,
         private val actionsList: JsonField<List<ActionsList>>,
-        @JsonProperty("actorSrcId") @ExcludeMissing private val actorSrcId: JsonField<String>,
-        @JsonProperty("actorSrcType") @ExcludeMissing private val actorSrcType: JsonField<String>,
-        @JsonProperty("coaMetrics")
-        @ExcludeMissing
+        private val actorSrcId: JsonField<String>,
+        private val actorSrcType: JsonField<String>,
         private val coaMetrics: JsonField<List<CoaMetric>>,
-        @JsonProperty("collateralDamageEst")
-        @ExcludeMissing
         private val collateralDamageEst: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("decisionDeadline")
-        @ExcludeMissing
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
         private val decisionDeadline: JsonField<OffsetDateTime>,
-        @JsonProperty("externalActions")
-        @ExcludeMissing
         private val externalActions: JsonField<List<String>>,
-        @JsonProperty("externalRequestId")
-        @ExcludeMissing
         private val externalRequestId: JsonField<String>,
-        @JsonProperty("idEffectRequest")
-        @ExcludeMissing
         private val idEffectRequest: JsonField<String>,
-        @JsonProperty("munitionId") @ExcludeMissing private val munitionId: JsonField<String>,
-        @JsonProperty("munitionType") @ExcludeMissing private val munitionType: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("probabilityOfKill")
-        @ExcludeMissing
+        private val munitionId: JsonField<String>,
+        private val munitionType: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
         private val probabilityOfKill: JsonField<Double>,
-        @JsonProperty("redTargetSrcId")
-        @ExcludeMissing
         private val redTargetSrcId: JsonField<String>,
-        @JsonProperty("redTargetSrcType")
-        @ExcludeMissing
         private val redTargetSrcType: JsonField<String>,
-        @JsonProperty("redTimeToOverhead")
-        @ExcludeMissing
         private val redTimeToOverhead: JsonField<OffsetDateTime>,
-        @JsonProperty("shotsRequired") @ExcludeMissing private val shotsRequired: JsonField<Int>,
+        private val shotsRequired: JsonField<Int>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("actionsList")
+            @ExcludeMissing
+            actionsList: JsonField<List<ActionsList>> = JsonMissing.of(),
+            @JsonProperty("actorSrcId")
+            @ExcludeMissing
+            actorSrcId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("actorSrcType")
+            @ExcludeMissing
+            actorSrcType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("coaMetrics")
+            @ExcludeMissing
+            coaMetrics: JsonField<List<CoaMetric>> = JsonMissing.of(),
+            @JsonProperty("collateralDamageEst")
+            @ExcludeMissing
+            collateralDamageEst: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("decisionDeadline")
+            @ExcludeMissing
+            decisionDeadline: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("externalActions")
+            @ExcludeMissing
+            externalActions: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("externalRequestId")
+            @ExcludeMissing
+            externalRequestId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idEffectRequest")
+            @ExcludeMissing
+            idEffectRequest: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("munitionId")
+            @ExcludeMissing
+            munitionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("munitionType")
+            @ExcludeMissing
+            munitionType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("probabilityOfKill")
+            @ExcludeMissing
+            probabilityOfKill: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("redTargetSrcId")
+            @ExcludeMissing
+            redTargetSrcId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("redTargetSrcType")
+            @ExcludeMissing
+            redTargetSrcType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("redTimeToOverhead")
+            @ExcludeMissing
+            redTimeToOverhead: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("shotsRequired")
+            @ExcludeMissing
+            shotsRequired: JsonField<Int> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            type,
+            id,
+            actionsList,
+            actorSrcId,
+            actorSrcType,
+            coaMetrics,
+            collateralDamageEst,
+            createdAt,
+            createdBy,
+            decisionDeadline,
+            externalActions,
+            externalRequestId,
+            idEffectRequest,
+            munitionId,
+            munitionType,
+            origin,
+            origNetwork,
+            probabilityOfKill,
+            redTargetSrcId,
+            redTargetSrcType,
+            redTimeToOverhead,
+            shotsRequired,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -722,6 +797,16 @@ private constructor(
         @ExcludeMissing
         fun _shotsRequired(): JsonField<Int> = shotsRequired
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -768,6 +853,7 @@ private constructor(
             private var redTargetSrcType: JsonField<String> = JsonMissing.of()
             private var redTimeToOverhead: JsonField<OffsetDateTime> = JsonMissing.of()
             private var shotsRequired: JsonField<Int> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -796,6 +882,7 @@ private constructor(
                 redTargetSrcType = body.redTargetSrcType
                 redTimeToOverhead = body.redTimeToOverhead
                 shotsRequired = body.shotsRequired
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1220,6 +1307,25 @@ private constructor(
                 this.shotsRequired = shotsRequired
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1262,6 +1368,7 @@ private constructor(
                     redTargetSrcType,
                     redTimeToOverhead,
                     shotsRequired,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -3085,7 +3192,8 @@ private constructor(
                 redTargetSrcId == other.redTargetSrcId &&
                 redTargetSrcType == other.redTargetSrcType &&
                 redTimeToOverhead == other.redTimeToOverhead &&
-                shotsRequired == other.shotsRequired
+                shotsRequired == other.shotsRequired &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -3115,13 +3223,14 @@ private constructor(
                 redTargetSrcType,
                 redTimeToOverhead,
                 shotsRequired,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, type=$type, id=$id, actionsList=$actionsList, actorSrcId=$actorSrcId, actorSrcType=$actorSrcType, coaMetrics=$coaMetrics, collateralDamageEst=$collateralDamageEst, createdAt=$createdAt, createdBy=$createdBy, decisionDeadline=$decisionDeadline, externalActions=$externalActions, externalRequestId=$externalRequestId, idEffectRequest=$idEffectRequest, munitionId=$munitionId, munitionType=$munitionType, origin=$origin, origNetwork=$origNetwork, probabilityOfKill=$probabilityOfKill, redTargetSrcId=$redTargetSrcId, redTargetSrcType=$redTargetSrcType, redTimeToOverhead=$redTimeToOverhead, shotsRequired=$shotsRequired}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, type=$type, id=$id, actionsList=$actionsList, actorSrcId=$actorSrcId, actorSrcType=$actorSrcType, coaMetrics=$coaMetrics, collateralDamageEst=$collateralDamageEst, createdAt=$createdAt, createdBy=$createdBy, decisionDeadline=$decisionDeadline, externalActions=$externalActions, externalRequestId=$externalRequestId, idEffectRequest=$idEffectRequest, munitionId=$munitionId, munitionType=$munitionType, origin=$origin, origNetwork=$origNetwork, probabilityOfKill=$probabilityOfKill, redTargetSrcId=$redTargetSrcId, redTargetSrcType=$redTargetSrcType, redTimeToOverhead=$redTimeToOverhead, shotsRequired=$shotsRequired, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

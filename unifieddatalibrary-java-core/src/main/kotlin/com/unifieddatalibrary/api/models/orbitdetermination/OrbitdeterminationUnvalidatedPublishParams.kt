@@ -218,85 +218,218 @@ private constructor(
      * Perturbations or Special Perturbations orbital updates.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("endTime") @ExcludeMissing private val endTime: JsonField<OffsetDateTime>,
-        @JsonProperty("initialOD") @ExcludeMissing private val initialOd: JsonField<Boolean>,
-        @JsonProperty("method") @ExcludeMissing private val method: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("startTime") @ExcludeMissing private val startTime: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("acceptedObIds")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val endTime: JsonField<OffsetDateTime>,
+        private val initialOd: JsonField<Boolean>,
+        private val method: JsonField<String>,
+        private val source: JsonField<String>,
+        private val startTime: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
         private val acceptedObIds: JsonField<List<String>>,
-        @JsonProperty("acceptedObTyps")
-        @ExcludeMissing
         private val acceptedObTyps: JsonField<List<String>>,
-        @JsonProperty("agomEst") @ExcludeMissing private val agomEst: JsonField<Boolean>,
-        @JsonProperty("agomModel") @ExcludeMissing private val agomModel: JsonField<String>,
-        @JsonProperty("aprioriElset")
-        @ExcludeMissing
+        private val agomEst: JsonField<Boolean>,
+        private val agomModel: JsonField<String>,
         private val aprioriElset: JsonField<AprioriElset>,
-        @JsonProperty("aprioriIdElset")
-        @ExcludeMissing
         private val aprioriIdElset: JsonField<String>,
-        @JsonProperty("aprioriIdStateVector")
-        @ExcludeMissing
         private val aprioriIdStateVector: JsonField<String>,
-        @JsonProperty("aprioriStateVector")
-        @ExcludeMissing
         private val aprioriStateVector: JsonField<AprioriStateVector>,
-        @JsonProperty("ballisticCoeffEst")
-        @ExcludeMissing
         private val ballisticCoeffEst: JsonField<Boolean>,
-        @JsonProperty("ballisticCoeffModel")
-        @ExcludeMissing
         private val ballisticCoeffModel: JsonField<String>,
-        @JsonProperty("bestPassWrms") @ExcludeMissing private val bestPassWrms: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("edr") @ExcludeMissing private val edr: JsonField<Double>,
-        @JsonProperty("effectiveFrom")
-        @ExcludeMissing
+        private val bestPassWrms: JsonField<Double>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val edr: JsonField<Double>,
         private val effectiveFrom: JsonField<OffsetDateTime>,
-        @JsonProperty("effectiveUntil")
-        @ExcludeMissing
         private val effectiveUntil: JsonField<OffsetDateTime>,
-        @JsonProperty("errorGrowthRate")
-        @ExcludeMissing
         private val errorGrowthRate: JsonField<Double>,
-        @JsonProperty("firstPassWrms") @ExcludeMissing private val firstPassWrms: JsonField<Double>,
-        @JsonProperty("fitSpan") @ExcludeMissing private val fitSpan: JsonField<Double>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("lastObEnd") @ExcludeMissing private val lastObEnd: JsonField<OffsetDateTime>,
-        @JsonProperty("lastObStart")
-        @ExcludeMissing
+        private val firstPassWrms: JsonField<Double>,
+        private val fitSpan: JsonField<Double>,
+        private val idOnOrbit: JsonField<String>,
+        private val lastObEnd: JsonField<OffsetDateTime>,
         private val lastObStart: JsonField<OffsetDateTime>,
-        @JsonProperty("methodSource") @ExcludeMissing private val methodSource: JsonField<String>,
-        @JsonProperty("numIterations") @ExcludeMissing private val numIterations: JsonField<Int>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("previousWrms") @ExcludeMissing private val previousWrms: JsonField<Double>,
-        @JsonProperty("rejectedObIds")
-        @ExcludeMissing
+        private val methodSource: JsonField<String>,
+        private val numIterations: JsonField<Int>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val previousWrms: JsonField<Double>,
         private val rejectedObIds: JsonField<List<String>>,
-        @JsonProperty("rejectedObTyps")
-        @ExcludeMissing
         private val rejectedObTyps: JsonField<List<String>>,
-        @JsonProperty("rmsConvergenceCriteria")
-        @ExcludeMissing
         private val rmsConvergenceCriteria: JsonField<Double>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("sensorIds") @ExcludeMissing private val sensorIds: JsonField<List<String>>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("timeSpan") @ExcludeMissing private val timeSpan: JsonField<Double>,
-        @JsonProperty("wrms") @ExcludeMissing private val wrms: JsonField<Double>,
+        private val satNo: JsonField<Int>,
+        private val sensorIds: JsonField<List<String>>,
+        private val sourceDl: JsonField<String>,
+        private val timeSpan: JsonField<Double>,
+        private val wrms: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("endTime")
+            @ExcludeMissing
+            endTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("initialOD")
+            @ExcludeMissing
+            initialOd: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("method") @ExcludeMissing method: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("startTime")
+            @ExcludeMissing
+            startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("acceptedObIds")
+            @ExcludeMissing
+            acceptedObIds: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("acceptedObTyps")
+            @ExcludeMissing
+            acceptedObTyps: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("agomEst") @ExcludeMissing agomEst: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("agomModel")
+            @ExcludeMissing
+            agomModel: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("aprioriElset")
+            @ExcludeMissing
+            aprioriElset: JsonField<AprioriElset> = JsonMissing.of(),
+            @JsonProperty("aprioriIdElset")
+            @ExcludeMissing
+            aprioriIdElset: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("aprioriIdStateVector")
+            @ExcludeMissing
+            aprioriIdStateVector: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("aprioriStateVector")
+            @ExcludeMissing
+            aprioriStateVector: JsonField<AprioriStateVector> = JsonMissing.of(),
+            @JsonProperty("ballisticCoeffEst")
+            @ExcludeMissing
+            ballisticCoeffEst: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("ballisticCoeffModel")
+            @ExcludeMissing
+            ballisticCoeffModel: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("bestPassWrms")
+            @ExcludeMissing
+            bestPassWrms: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("edr") @ExcludeMissing edr: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("effectiveFrom")
+            @ExcludeMissing
+            effectiveFrom: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("effectiveUntil")
+            @ExcludeMissing
+            effectiveUntil: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("errorGrowthRate")
+            @ExcludeMissing
+            errorGrowthRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("firstPassWrms")
+            @ExcludeMissing
+            firstPassWrms: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fitSpan") @ExcludeMissing fitSpan: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lastObEnd")
+            @ExcludeMissing
+            lastObEnd: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("lastObStart")
+            @ExcludeMissing
+            lastObStart: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("methodSource")
+            @ExcludeMissing
+            methodSource: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("numIterations")
+            @ExcludeMissing
+            numIterations: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("previousWrms")
+            @ExcludeMissing
+            previousWrms: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rejectedObIds")
+            @ExcludeMissing
+            rejectedObIds: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("rejectedObTyps")
+            @ExcludeMissing
+            rejectedObTyps: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("rmsConvergenceCriteria")
+            @ExcludeMissing
+            rmsConvergenceCriteria: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sensorIds")
+            @ExcludeMissing
+            sensorIds: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("timeSpan")
+            @ExcludeMissing
+            timeSpan: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("wrms") @ExcludeMissing wrms: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            endTime,
+            initialOd,
+            method,
+            source,
+            startTime,
+            id,
+            acceptedObIds,
+            acceptedObTyps,
+            agomEst,
+            agomModel,
+            aprioriElset,
+            aprioriIdElset,
+            aprioriIdStateVector,
+            aprioriStateVector,
+            ballisticCoeffEst,
+            ballisticCoeffModel,
+            bestPassWrms,
+            createdAt,
+            createdBy,
+            edr,
+            effectiveFrom,
+            effectiveUntil,
+            errorGrowthRate,
+            firstPassWrms,
+            fitSpan,
+            idOnOrbit,
+            lastObEnd,
+            lastObStart,
+            methodSource,
+            numIterations,
+            origin,
+            origNetwork,
+            origObjectId,
+            previousWrms,
+            rejectedObIds,
+            rejectedObTyps,
+            rmsConvergenceCriteria,
+            satNo,
+            sensorIds,
+            sourceDl,
+            timeSpan,
+            wrms,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1110,6 +1243,16 @@ private constructor(
          */
         @JsonProperty("wrms") @ExcludeMissing fun _wrms(): JsonField<Double> = wrms
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1178,6 +1321,7 @@ private constructor(
             private var sourceDl: JsonField<String> = JsonMissing.of()
             private var timeSpan: JsonField<Double> = JsonMissing.of()
             private var wrms: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1225,6 +1369,7 @@ private constructor(
                 sourceDl = body.sourceDl
                 timeSpan = body.timeSpan
                 wrms = body.wrms
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -2009,6 +2154,25 @@ private constructor(
              */
             fun wrms(wrms: JsonField<Double>) = apply { this.wrms = wrms }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -2073,6 +2237,7 @@ private constructor(
                     sourceDl,
                     timeSpan,
                     wrms,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -10443,7 +10608,8 @@ private constructor(
                 sensorIds == other.sensorIds &&
                 sourceDl == other.sourceDl &&
                 timeSpan == other.timeSpan &&
-                wrms == other.wrms
+                wrms == other.wrms &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -10492,13 +10658,14 @@ private constructor(
                 sourceDl,
                 timeSpan,
                 wrms,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, endTime=$endTime, initialOd=$initialOd, method=$method, source=$source, startTime=$startTime, id=$id, acceptedObIds=$acceptedObIds, acceptedObTyps=$acceptedObTyps, agomEst=$agomEst, agomModel=$agomModel, aprioriElset=$aprioriElset, aprioriIdElset=$aprioriIdElset, aprioriIdStateVector=$aprioriIdStateVector, aprioriStateVector=$aprioriStateVector, ballisticCoeffEst=$ballisticCoeffEst, ballisticCoeffModel=$ballisticCoeffModel, bestPassWrms=$bestPassWrms, createdAt=$createdAt, createdBy=$createdBy, edr=$edr, effectiveFrom=$effectiveFrom, effectiveUntil=$effectiveUntil, errorGrowthRate=$errorGrowthRate, firstPassWrms=$firstPassWrms, fitSpan=$fitSpan, idOnOrbit=$idOnOrbit, lastObEnd=$lastObEnd, lastObStart=$lastObStart, methodSource=$methodSource, numIterations=$numIterations, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, previousWrms=$previousWrms, rejectedObIds=$rejectedObIds, rejectedObTyps=$rejectedObTyps, rmsConvergenceCriteria=$rmsConvergenceCriteria, satNo=$satNo, sensorIds=$sensorIds, sourceDl=$sourceDl, timeSpan=$timeSpan, wrms=$wrms}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, endTime=$endTime, initialOd=$initialOd, method=$method, source=$source, startTime=$startTime, id=$id, acceptedObIds=$acceptedObIds, acceptedObTyps=$acceptedObTyps, agomEst=$agomEst, agomModel=$agomModel, aprioriElset=$aprioriElset, aprioriIdElset=$aprioriIdElset, aprioriIdStateVector=$aprioriIdStateVector, aprioriStateVector=$aprioriStateVector, ballisticCoeffEst=$ballisticCoeffEst, ballisticCoeffModel=$ballisticCoeffModel, bestPassWrms=$bestPassWrms, createdAt=$createdAt, createdBy=$createdBy, edr=$edr, effectiveFrom=$effectiveFrom, effectiveUntil=$effectiveUntil, errorGrowthRate=$errorGrowthRate, firstPassWrms=$firstPassWrms, fitSpan=$fitSpan, idOnOrbit=$idOnOrbit, lastObEnd=$lastObEnd, lastObStart=$lastObStart, methodSource=$methodSource, numIterations=$numIterations, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, previousWrms=$previousWrms, rejectedObIds=$rejectedObIds, rejectedObTyps=$rejectedObTyps, rmsConvergenceCriteria=$rmsConvergenceCriteria, satNo=$satNo, sensorIds=$sensorIds, sourceDl=$sourceDl, timeSpan=$timeSpan, wrms=$wrms, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.sortieppr
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -15,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -211,29 +215,92 @@ private constructor(
      * operational access to a runway, taxiway, or airport service.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("idSortie") @ExcludeMissing private val idSortie: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("endTime") @ExcludeMissing private val endTime: JsonField<OffsetDateTime>,
-        @JsonProperty("externalId") @ExcludeMissing private val externalId: JsonField<String>,
-        @JsonProperty("grantor") @ExcludeMissing private val grantor: JsonField<String>,
-        @JsonProperty("number") @ExcludeMissing private val number: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("remarks") @ExcludeMissing private val remarks: JsonField<String>,
-        @JsonProperty("requestor") @ExcludeMissing private val requestor: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("startTime") @ExcludeMissing private val startTime: JsonField<OffsetDateTime>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<Type>,
+        private val dataMode: JsonField<DataMode>,
+        private val idSortie: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val endTime: JsonField<OffsetDateTime>,
+        private val externalId: JsonField<String>,
+        private val grantor: JsonField<String>,
+        private val number: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val remarks: JsonField<String>,
+        private val requestor: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val startTime: JsonField<OffsetDateTime>,
+        private val type: JsonField<Type>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("idSortie")
+            @ExcludeMissing
+            idSortie: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("endTime")
+            @ExcludeMissing
+            endTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("externalId")
+            @ExcludeMissing
+            externalId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("grantor") @ExcludeMissing grantor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("number") @ExcludeMissing number: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("remarks") @ExcludeMissing remarks: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("requestor")
+            @ExcludeMissing
+            requestor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("startTime")
+            @ExcludeMissing
+            startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<Type> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            idSortie,
+            source,
+            id,
+            createdAt,
+            createdBy,
+            endTime,
+            externalId,
+            grantor,
+            number,
+            origin,
+            origNetwork,
+            remarks,
+            requestor,
+            sourceDl,
+            startTime,
+            type,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -543,6 +610,16 @@ private constructor(
          */
         @JsonProperty("type") @ExcludeMissing fun _type(): JsonField<Type> = type
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -582,6 +659,7 @@ private constructor(
             private var sourceDl: JsonField<String> = JsonMissing.of()
             private var startTime: JsonField<OffsetDateTime> = JsonMissing.of()
             private var type: JsonField<Type> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -603,6 +681,7 @@ private constructor(
                 sourceDl = body.sourceDl
                 startTime = body.startTime
                 type = body.type
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -874,6 +953,25 @@ private constructor(
              */
             fun type(type: JsonField<Type>) = apply { this.type = type }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -909,6 +1007,7 @@ private constructor(
                     sourceDl,
                     startTime,
                     type,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1285,7 +1384,8 @@ private constructor(
                 requestor == other.requestor &&
                 sourceDl == other.sourceDl &&
                 startTime == other.startTime &&
-                type == other.type
+                type == other.type &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1308,13 +1408,14 @@ private constructor(
                 sourceDl,
                 startTime,
                 type,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idSortie=$idSortie, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, endTime=$endTime, externalId=$externalId, grantor=$grantor, number=$number, origin=$origin, origNetwork=$origNetwork, remarks=$remarks, requestor=$requestor, sourceDl=$sourceDl, startTime=$startTime, type=$type}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idSortie=$idSortie, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, endTime=$endTime, externalId=$externalId, grantor=$grantor, number=$number, origin=$origin, origNetwork=$origNetwork, remarks=$remarks, requestor=$requestor, sourceDl=$sourceDl, startTime=$startTime, type=$type, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

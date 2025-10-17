@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.surfaceobstruction
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -210,48 +214,103 @@ private constructor(
     override fun _queryParams(): QueryParams = additionalQueryParams
 
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("idSurface") @ExcludeMissing private val idSurface: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("advisoryRequired")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val idSurface: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
         private val advisoryRequired: JsonField<List<String>>,
-        @JsonProperty("approvalRequired")
-        @ExcludeMissing
         private val approvalRequired: JsonField<List<String>>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("distanceFromCenterLine")
-        @ExcludeMissing
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
         private val distanceFromCenterLine: JsonField<Double>,
-        @JsonProperty("distanceFromEdge")
-        @ExcludeMissing
         private val distanceFromEdge: JsonField<Double>,
-        @JsonProperty("distanceFromThreshold")
-        @ExcludeMissing
         private val distanceFromThreshold: JsonField<Double>,
-        @JsonProperty("idNavigationalObstruction")
-        @ExcludeMissing
         private val idNavigationalObstruction: JsonField<String>,
-        @JsonProperty("obstructionDesc")
-        @ExcludeMissing
         private val obstructionDesc: JsonField<String>,
-        @JsonProperty("obstructionHeight")
-        @ExcludeMissing
         private val obstructionHeight: JsonField<Double>,
-        @JsonProperty("obstructionSideCode")
-        @ExcludeMissing
         private val obstructionSideCode: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("idSurface")
+            @ExcludeMissing
+            idSurface: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("advisoryRequired")
+            @ExcludeMissing
+            advisoryRequired: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("approvalRequired")
+            @ExcludeMissing
+            approvalRequired: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("distanceFromCenterLine")
+            @ExcludeMissing
+            distanceFromCenterLine: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("distanceFromEdge")
+            @ExcludeMissing
+            distanceFromEdge: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("distanceFromThreshold")
+            @ExcludeMissing
+            distanceFromThreshold: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idNavigationalObstruction")
+            @ExcludeMissing
+            idNavigationalObstruction: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("obstructionDesc")
+            @ExcludeMissing
+            obstructionDesc: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("obstructionHeight")
+            @ExcludeMissing
+            obstructionHeight: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("obstructionSideCode")
+            @ExcludeMissing
+            obstructionSideCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL") @ExcludeMissing sourceDl: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            idSurface,
+            source,
+            id,
+            advisoryRequired,
+            approvalRequired,
+            createdAt,
+            createdBy,
+            distanceFromCenterLine,
+            distanceFromEdge,
+            distanceFromThreshold,
+            idNavigationalObstruction,
+            obstructionDesc,
+            obstructionHeight,
+            obstructionSideCode,
+            origin,
+            origNetwork,
+            sourceDl,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -593,6 +652,16 @@ private constructor(
          */
         @JsonProperty("sourceDL") @ExcludeMissing fun _sourceDl(): JsonField<String> = sourceDl
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -633,6 +702,7 @@ private constructor(
             private var origin: JsonField<String> = JsonMissing.of()
             private var origNetwork: JsonField<String> = JsonMissing.of()
             private var sourceDl: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -655,6 +725,7 @@ private constructor(
                 origin = body.origin
                 origNetwork = body.origNetwork
                 sourceDl = body.sourceDl
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -968,6 +1039,25 @@ private constructor(
              */
             fun sourceDl(sourceDl: JsonField<String>) = apply { this.sourceDl = sourceDl }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1004,6 +1094,7 @@ private constructor(
                     origin,
                     origNetwork,
                     sourceDl,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1239,7 +1330,8 @@ private constructor(
                 obstructionSideCode == other.obstructionSideCode &&
                 origin == other.origin &&
                 origNetwork == other.origNetwork &&
-                sourceDl == other.sourceDl
+                sourceDl == other.sourceDl &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1263,13 +1355,14 @@ private constructor(
                 origin,
                 origNetwork,
                 sourceDl,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idSurface=$idSurface, source=$source, id=$id, advisoryRequired=$advisoryRequired, approvalRequired=$approvalRequired, createdAt=$createdAt, createdBy=$createdBy, distanceFromCenterLine=$distanceFromCenterLine, distanceFromEdge=$distanceFromEdge, distanceFromThreshold=$distanceFromThreshold, idNavigationalObstruction=$idNavigationalObstruction, obstructionDesc=$obstructionDesc, obstructionHeight=$obstructionHeight, obstructionSideCode=$obstructionSideCode, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idSurface=$idSurface, source=$source, id=$id, advisoryRequired=$advisoryRequired, approvalRequired=$approvalRequired, createdAt=$createdAt, createdBy=$createdBy, distanceFromCenterLine=$distanceFromCenterLine, distanceFromEdge=$distanceFromEdge, distanceFromThreshold=$distanceFromThreshold, idNavigationalObstruction=$idNavigationalObstruction, obstructionDesc=$obstructionDesc, obstructionHeight=$obstructionHeight, obstructionSideCode=$obstructionSideCode, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

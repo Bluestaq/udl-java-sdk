@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.launchevent
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -15,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -209,43 +213,106 @@ private constructor(
 
     /** Information on known launch events. */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("msgCreateDate")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
         private val msgCreateDate: JsonField<OffsetDateTime>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("beNumber") @ExcludeMissing private val beNumber: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("declassificationDate")
-        @ExcludeMissing
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val beNumber: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
         private val declassificationDate: JsonField<OffsetDateTime>,
-        @JsonProperty("declassificationString")
-        @ExcludeMissing
         private val declassificationString: JsonField<String>,
-        @JsonProperty("derivedFrom") @ExcludeMissing private val derivedFrom: JsonField<String>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("launchDate")
-        @ExcludeMissing
+        private val derivedFrom: JsonField<String>,
+        private val idOnOrbit: JsonField<String>,
         private val launchDate: JsonField<OffsetDateTime>,
-        @JsonProperty("launchFacilityName")
-        @ExcludeMissing
         private val launchFacilityName: JsonField<String>,
-        @JsonProperty("launchFailureCode")
-        @ExcludeMissing
         private val launchFailureCode: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("oSuffix") @ExcludeMissing private val oSuffix: JsonField<String>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val oSuffix: JsonField<String>,
+        private val satNo: JsonField<Int>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("msgCreateDate")
+            @ExcludeMissing
+            msgCreateDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("beNumber")
+            @ExcludeMissing
+            beNumber: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("declassificationDate")
+            @ExcludeMissing
+            declassificationDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("declassificationString")
+            @ExcludeMissing
+            declassificationString: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("derivedFrom")
+            @ExcludeMissing
+            derivedFrom: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("launchDate")
+            @ExcludeMissing
+            launchDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("launchFacilityName")
+            @ExcludeMissing
+            launchFacilityName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("launchFailureCode")
+            @ExcludeMissing
+            launchFailureCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("oSuffix") @ExcludeMissing oSuffix: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            msgCreateDate,
+            source,
+            id,
+            beNumber,
+            createdAt,
+            createdBy,
+            declassificationDate,
+            declassificationString,
+            derivedFrom,
+            idOnOrbit,
+            launchDate,
+            launchFacilityName,
+            launchFailureCode,
+            origin,
+            origNetwork,
+            origObjectId,
+            oSuffix,
+            satNo,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -600,6 +667,16 @@ private constructor(
          */
         @JsonProperty("satNo") @ExcludeMissing fun _satNo(): JsonField<Int> = satNo
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -641,6 +718,7 @@ private constructor(
             private var origObjectId: JsonField<String> = JsonMissing.of()
             private var oSuffix: JsonField<String> = JsonMissing.of()
             private var satNo: JsonField<Int> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -664,6 +742,7 @@ private constructor(
                 origObjectId = body.origObjectId
                 oSuffix = body.oSuffix
                 satNo = body.satNo
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -960,6 +1039,25 @@ private constructor(
              */
             fun satNo(satNo: JsonField<Int>) = apply { this.satNo = satNo }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -997,6 +1095,7 @@ private constructor(
                     origObjectId,
                     oSuffix,
                     satNo,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1248,7 +1347,8 @@ private constructor(
                 origNetwork == other.origNetwork &&
                 origObjectId == other.origObjectId &&
                 oSuffix == other.oSuffix &&
-                satNo == other.satNo
+                satNo == other.satNo &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1273,13 +1373,14 @@ private constructor(
                 origObjectId,
                 oSuffix,
                 satNo,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, msgCreateDate=$msgCreateDate, source=$source, id=$id, beNumber=$beNumber, createdAt=$createdAt, createdBy=$createdBy, declassificationDate=$declassificationDate, declassificationString=$declassificationString, derivedFrom=$derivedFrom, idOnOrbit=$idOnOrbit, launchDate=$launchDate, launchFacilityName=$launchFacilityName, launchFailureCode=$launchFailureCode, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, oSuffix=$oSuffix, satNo=$satNo}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, msgCreateDate=$msgCreateDate, source=$source, id=$id, beNumber=$beNumber, createdAt=$createdAt, createdBy=$createdBy, declassificationDate=$declassificationDate, declassificationString=$declassificationString, derivedFrom=$derivedFrom, idOnOrbit=$idOnOrbit, launchDate=$launchDate, launchFacilityName=$launchFacilityName, launchFailureCode=$launchFailureCode, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, oSuffix=$oSuffix, satNo=$satNo, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {
