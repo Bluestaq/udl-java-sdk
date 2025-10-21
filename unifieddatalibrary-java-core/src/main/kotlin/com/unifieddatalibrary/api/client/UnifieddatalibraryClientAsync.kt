@@ -99,6 +99,7 @@ import com.unifieddatalibrary.api.services.async.ObservationServiceAsync
 import com.unifieddatalibrary.api.services.async.OnboardnavigationServiceAsync
 import com.unifieddatalibrary.api.services.async.OnorbitServiceAsync
 import com.unifieddatalibrary.api.services.async.OnorbitantennaServiceAsync
+import com.unifieddatalibrary.api.services.async.OnorbitassessmentServiceAsync
 import com.unifieddatalibrary.api.services.async.OnorbitbatteryServiceAsync
 import com.unifieddatalibrary.api.services.async.OnorbitdetailServiceAsync
 import com.unifieddatalibrary.api.services.async.OnorbiteventServiceAsync
@@ -128,6 +129,7 @@ import com.unifieddatalibrary.api.services.async.SensorMaintenanceServiceAsync
 import com.unifieddatalibrary.api.services.async.SensorObservationTypeServiceAsync
 import com.unifieddatalibrary.api.services.async.SensorPlanServiceAsync
 import com.unifieddatalibrary.api.services.async.SensorServiceAsync
+import com.unifieddatalibrary.api.services.async.SensorStatingServiceAsync
 import com.unifieddatalibrary.api.services.async.SensorTypeServiceAsync
 import com.unifieddatalibrary.api.services.async.SeraDataCommDetailServiceAsync
 import com.unifieddatalibrary.api.services.async.SeraDataEarlyWarningServiceAsync
@@ -411,6 +413,8 @@ interface UnifieddatalibraryClientAsync {
 
     fun onorbitthrusterstatus(): OnorbitthrusterstatusServiceAsync
 
+    fun onorbitassessment(): OnorbitassessmentServiceAsync
+
     fun operatingunit(): OperatingunitServiceAsync
 
     fun operatingunitremark(): OperatingunitremarkServiceAsync
@@ -448,6 +452,8 @@ interface UnifieddatalibraryClientAsync {
     fun secureMessaging(): SecureMessagingServiceAsync
 
     fun sensor(): SensorServiceAsync
+
+    fun sensorStating(): SensorStatingServiceAsync
 
     fun sensorMaintenance(): SensorMaintenanceServiceAsync
 
@@ -767,6 +773,8 @@ interface UnifieddatalibraryClientAsync {
 
         fun onorbitthrusterstatus(): OnorbitthrusterstatusServiceAsync.WithRawResponse
 
+        fun onorbitassessment(): OnorbitassessmentServiceAsync.WithRawResponse
+
         fun operatingunit(): OperatingunitServiceAsync.WithRawResponse
 
         fun operatingunitremark(): OperatingunitremarkServiceAsync.WithRawResponse
@@ -804,6 +812,8 @@ interface UnifieddatalibraryClientAsync {
         fun secureMessaging(): SecureMessagingServiceAsync.WithRawResponse
 
         fun sensor(): SensorServiceAsync.WithRawResponse
+
+        fun sensorStating(): SensorStatingServiceAsync.WithRawResponse
 
         fun sensorMaintenance(): SensorMaintenanceServiceAsync.WithRawResponse
 

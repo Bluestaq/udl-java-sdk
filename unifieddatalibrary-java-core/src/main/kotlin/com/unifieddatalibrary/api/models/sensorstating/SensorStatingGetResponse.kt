@@ -1,0 +1,790 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.sensorstating
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.unifieddatalibrary.api.core.ExcludeMissing
+import com.unifieddatalibrary.api.core.JsonField
+import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
+import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import java.time.OffsetDateTime
+import java.util.Collections
+import java.util.Objects
+import java.util.Optional
+
+/**
+ * Model representation of a nominal sensor. This entity contains minimal information used to stage
+ * sensor entities.
+ */
+class SensorStatingGetResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
+private constructor(
+    private val classificationMarking: JsonField<String>,
+    private val sensorName: JsonField<String>,
+    private val source: JsonField<String>,
+    private val id: JsonField<String>,
+    private val altitude: JsonField<Double>,
+    private val createdAt: JsonField<OffsetDateTime>,
+    private val createdBy: JsonField<String>,
+    private val lat: JsonField<Double>,
+    private val locationCountry: JsonField<String>,
+    private val lon: JsonField<Double>,
+    private val ownerCountry: JsonField<String>,
+    private val sensorNumber: JsonField<Int>,
+    private val sensorObservationType: JsonField<String>,
+    private val sensorType: JsonField<String>,
+    private val shortName: JsonField<String>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
+) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("sensorName")
+        @ExcludeMissing
+        sensorName: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("altitude") @ExcludeMissing altitude: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("locationCountry")
+        @ExcludeMissing
+        locationCountry: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("ownerCountry")
+        @ExcludeMissing
+        ownerCountry: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("sensorNumber")
+        @ExcludeMissing
+        sensorNumber: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("sensorObservationType")
+        @ExcludeMissing
+        sensorObservationType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("sensorType")
+        @ExcludeMissing
+        sensorType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("shortName") @ExcludeMissing shortName: JsonField<String> = JsonMissing.of(),
+    ) : this(
+        classificationMarking,
+        sensorName,
+        source,
+        id,
+        altitude,
+        createdAt,
+        createdBy,
+        lat,
+        locationCountry,
+        lon,
+        ownerCountry,
+        sensorNumber,
+        sensorObservationType,
+        sensorType,
+        shortName,
+        mutableMapOf(),
+    )
+
+    /**
+     * Classification marking of the data in IC/CAPCO Portion-marked format.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
+
+    /**
+     * Unique name of this sensor.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun sensorName(): String = sensorName.getRequired("sensorName")
+
+    /**
+     * Source of the data.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun source(): String = source.getRequired("source")
+
+    /**
+     * Unique identifier of the record, auto-generated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun id(): Optional<String> = id.getOptional("id")
+
+    /**
+     * Sensor altitude relative to WGS-84 ellipsoid, in meters. Positive values indicate a sensor
+     * height above ellipsoid, and negative values indicate a sensor height below ellipsoid.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun altitude(): Optional<Double> = altitude.getOptional("altitude")
+
+    /**
+     * Time the row was created in the database, auto-populated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
+
+    /**
+     * Application user who created the row in the database, auto-populated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
+
+    /**
+     * WGS-84 latitude of the sensor, in degrees. -90 to 90 degrees (negative values south of
+     * equator).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun lat(): Optional<Double> = lat.getOptional("lat")
+
+    /**
+     * The DoD Standard Country Code designator for the country or political entity to which the
+     * sensor equipment geographic coordinates reside. This value is typically the ISO 3166 Alpha-2
+     * two-character country code, however it can also represent various consortiums that do not
+     * appear in the ISO document. The code must correspond to an existing country in the UDL’s
+     * country API. Call udl/country/{code} to get any associated FIPS code, ISO Alpha-3 code, or
+     * alternate code values that exist for the specified country code.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun locationCountry(): Optional<String> = locationCountry.getOptional("locationCountry")
+
+    /**
+     * WGS-84 longitude of the sensor, in degrees. -180 to 180 degrees (negative values west of
+     * Prime Meridian).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun lon(): Optional<Double> = lon.getOptional("lon")
+
+    /**
+     * The DoD Standard Country Code designator for the country or political entity owning the
+     * sensor. This value is typically the ISO 3166 Alpha-2 two-character country code, however it
+     * can also represent various consortiums that do not appear in the ISO document. The code must
+     * correspond to an existing country in the UDL’s country API. Call udl/country/{code} to get
+     * any associated FIPS code, ISO Alpha-3 code, or alternate code values that exist for the
+     * specified country code.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun ownerCountry(): Optional<String> = ownerCountry.getOptional("ownerCountry")
+
+    /**
+     * Number assigned to this sensor. Since there is no authoritative numbering scheme, these
+     * numbers sometimes collide across sensors (especially commercial sensors). It is therefore not
+     * a unique identifier.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun sensorNumber(): Optional<Int> = sensorNumber.getOptional("sensorNumber")
+
+    /**
+     * The observation measurement type produced by this sensor.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun sensorObservationType(): Optional<String> =
+        sensorObservationType.getOptional("sensorObservationType")
+
+    /**
+     * The specific sensor type and/or surveillance capability of this sensor.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun sensorType(): Optional<String> = sensorType.getOptional("sensorType")
+
+    /**
+     * Optional short or abbreviated name of this sensor.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun shortName(): Optional<String> = shortName.getOptional("shortName")
+
+    /**
+     * Returns the raw JSON value of [classificationMarking].
+     *
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("classificationMarking")
+    @ExcludeMissing
+    fun _classificationMarking(): JsonField<String> = classificationMarking
+
+    /**
+     * Returns the raw JSON value of [sensorName].
+     *
+     * Unlike [sensorName], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("sensorName") @ExcludeMissing fun _sensorName(): JsonField<String> = sensorName
+
+    /**
+     * Returns the raw JSON value of [source].
+     *
+     * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+
+    /**
+     * Returns the raw JSON value of [id].
+     *
+     * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+
+    /**
+     * Returns the raw JSON value of [altitude].
+     *
+     * Unlike [altitude], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("altitude") @ExcludeMissing fun _altitude(): JsonField<Double> = altitude
+
+    /**
+     * Returns the raw JSON value of [createdAt].
+     *
+     * Unlike [createdAt], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("createdAt")
+    @ExcludeMissing
+    fun _createdAt(): JsonField<OffsetDateTime> = createdAt
+
+    /**
+     * Returns the raw JSON value of [createdBy].
+     *
+     * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+
+    /**
+     * Returns the raw JSON value of [lat].
+     *
+     * Unlike [lat], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("lat") @ExcludeMissing fun _lat(): JsonField<Double> = lat
+
+    /**
+     * Returns the raw JSON value of [locationCountry].
+     *
+     * Unlike [locationCountry], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("locationCountry")
+    @ExcludeMissing
+    fun _locationCountry(): JsonField<String> = locationCountry
+
+    /**
+     * Returns the raw JSON value of [lon].
+     *
+     * Unlike [lon], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("lon") @ExcludeMissing fun _lon(): JsonField<Double> = lon
+
+    /**
+     * Returns the raw JSON value of [ownerCountry].
+     *
+     * Unlike [ownerCountry], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("ownerCountry")
+    @ExcludeMissing
+    fun _ownerCountry(): JsonField<String> = ownerCountry
+
+    /**
+     * Returns the raw JSON value of [sensorNumber].
+     *
+     * Unlike [sensorNumber], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("sensorNumber") @ExcludeMissing fun _sensorNumber(): JsonField<Int> = sensorNumber
+
+    /**
+     * Returns the raw JSON value of [sensorObservationType].
+     *
+     * Unlike [sensorObservationType], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("sensorObservationType")
+    @ExcludeMissing
+    fun _sensorObservationType(): JsonField<String> = sensorObservationType
+
+    /**
+     * Returns the raw JSON value of [sensorType].
+     *
+     * Unlike [sensorType], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("sensorType") @ExcludeMissing fun _sensorType(): JsonField<String> = sensorType
+
+    /**
+     * Returns the raw JSON value of [shortName].
+     *
+     * Unlike [shortName], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("shortName") @ExcludeMissing fun _shortName(): JsonField<String> = shortName
+
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
+    @JsonAnyGetter
+    @ExcludeMissing
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
+
+    fun toBuilder() = Builder().from(this)
+
+    companion object {
+
+        /**
+         * Returns a mutable builder for constructing an instance of [SensorStatingGetResponse].
+         *
+         * The following fields are required:
+         * ```java
+         * .classificationMarking()
+         * .sensorName()
+         * .source()
+         * ```
+         */
+        @JvmStatic fun builder() = Builder()
+    }
+
+    /** A builder for [SensorStatingGetResponse]. */
+    class Builder internal constructor() {
+
+        private var classificationMarking: JsonField<String>? = null
+        private var sensorName: JsonField<String>? = null
+        private var source: JsonField<String>? = null
+        private var id: JsonField<String> = JsonMissing.of()
+        private var altitude: JsonField<Double> = JsonMissing.of()
+        private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var createdBy: JsonField<String> = JsonMissing.of()
+        private var lat: JsonField<Double> = JsonMissing.of()
+        private var locationCountry: JsonField<String> = JsonMissing.of()
+        private var lon: JsonField<Double> = JsonMissing.of()
+        private var ownerCountry: JsonField<String> = JsonMissing.of()
+        private var sensorNumber: JsonField<Int> = JsonMissing.of()
+        private var sensorObservationType: JsonField<String> = JsonMissing.of()
+        private var sensorType: JsonField<String> = JsonMissing.of()
+        private var shortName: JsonField<String> = JsonMissing.of()
+        private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+        @JvmSynthetic
+        internal fun from(sensorStatingGetResponse: SensorStatingGetResponse) = apply {
+            classificationMarking = sensorStatingGetResponse.classificationMarking
+            sensorName = sensorStatingGetResponse.sensorName
+            source = sensorStatingGetResponse.source
+            id = sensorStatingGetResponse.id
+            altitude = sensorStatingGetResponse.altitude
+            createdAt = sensorStatingGetResponse.createdAt
+            createdBy = sensorStatingGetResponse.createdBy
+            lat = sensorStatingGetResponse.lat
+            locationCountry = sensorStatingGetResponse.locationCountry
+            lon = sensorStatingGetResponse.lon
+            ownerCountry = sensorStatingGetResponse.ownerCountry
+            sensorNumber = sensorStatingGetResponse.sensorNumber
+            sensorObservationType = sensorStatingGetResponse.sensorObservationType
+            sensorType = sensorStatingGetResponse.sensorType
+            shortName = sensorStatingGetResponse.shortName
+            additionalProperties = sensorStatingGetResponse.additionalProperties.toMutableMap()
+        }
+
+        /** Classification marking of the data in IC/CAPCO Portion-marked format. */
+        fun classificationMarking(classificationMarking: String) =
+            classificationMarking(JsonField.of(classificationMarking))
+
+        /**
+         * Sets [Builder.classificationMarking] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            this.classificationMarking = classificationMarking
+        }
+
+        /** Unique name of this sensor. */
+        fun sensorName(sensorName: String) = sensorName(JsonField.of(sensorName))
+
+        /**
+         * Sets [Builder.sensorName] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.sensorName] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun sensorName(sensorName: JsonField<String>) = apply { this.sensorName = sensorName }
+
+        /** Source of the data. */
+        fun source(source: String) = source(JsonField.of(source))
+
+        /**
+         * Sets [Builder.source] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun source(source: JsonField<String>) = apply { this.source = source }
+
+        /** Unique identifier of the record, auto-generated by the system. */
+        fun id(id: String) = id(JsonField.of(id))
+
+        /**
+         * Sets [Builder.id] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun id(id: JsonField<String>) = apply { this.id = id }
+
+        /**
+         * Sensor altitude relative to WGS-84 ellipsoid, in meters. Positive values indicate a
+         * sensor height above ellipsoid, and negative values indicate a sensor height below
+         * ellipsoid.
+         */
+        fun altitude(altitude: Double) = altitude(JsonField.of(altitude))
+
+        /**
+         * Sets [Builder.altitude] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.altitude] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun altitude(altitude: JsonField<Double>) = apply { this.altitude = altitude }
+
+        /** Time the row was created in the database, auto-populated by the system. */
+        fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
+
+        /**
+         * Sets [Builder.createdAt] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
+
+        /** Application user who created the row in the database, auto-populated by the system. */
+        fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
+
+        /**
+         * Sets [Builder.createdBy] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+
+        /**
+         * WGS-84 latitude of the sensor, in degrees. -90 to 90 degrees (negative values south of
+         * equator).
+         */
+        fun lat(lat: Double) = lat(JsonField.of(lat))
+
+        /**
+         * Sets [Builder.lat] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.lat] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun lat(lat: JsonField<Double>) = apply { this.lat = lat }
+
+        /**
+         * The DoD Standard Country Code designator for the country or political entity to which the
+         * sensor equipment geographic coordinates reside. This value is typically the ISO 3166
+         * Alpha-2 two-character country code, however it can also represent various consortiums
+         * that do not appear in the ISO document. The code must correspond to an existing country
+         * in the UDL’s country API. Call udl/country/{code} to get any associated FIPS code, ISO
+         * Alpha-3 code, or alternate code values that exist for the specified country code.
+         */
+        fun locationCountry(locationCountry: String) =
+            locationCountry(JsonField.of(locationCountry))
+
+        /**
+         * Sets [Builder.locationCountry] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.locationCountry] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun locationCountry(locationCountry: JsonField<String>) = apply {
+            this.locationCountry = locationCountry
+        }
+
+        /**
+         * WGS-84 longitude of the sensor, in degrees. -180 to 180 degrees (negative values west of
+         * Prime Meridian).
+         */
+        fun lon(lon: Double) = lon(JsonField.of(lon))
+
+        /**
+         * Sets [Builder.lon] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.lon] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun lon(lon: JsonField<Double>) = apply { this.lon = lon }
+
+        /**
+         * The DoD Standard Country Code designator for the country or political entity owning the
+         * sensor. This value is typically the ISO 3166 Alpha-2 two-character country code, however
+         * it can also represent various consortiums that do not appear in the ISO document. The
+         * code must correspond to an existing country in the UDL’s country API. Call
+         * udl/country/{code} to get any associated FIPS code, ISO Alpha-3 code, or alternate code
+         * values that exist for the specified country code.
+         */
+        fun ownerCountry(ownerCountry: String) = ownerCountry(JsonField.of(ownerCountry))
+
+        /**
+         * Sets [Builder.ownerCountry] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.ownerCountry] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun ownerCountry(ownerCountry: JsonField<String>) = apply {
+            this.ownerCountry = ownerCountry
+        }
+
+        /**
+         * Number assigned to this sensor. Since there is no authoritative numbering scheme, these
+         * numbers sometimes collide across sensors (especially commercial sensors). It is therefore
+         * not a unique identifier.
+         */
+        fun sensorNumber(sensorNumber: Int) = sensorNumber(JsonField.of(sensorNumber))
+
+        /**
+         * Sets [Builder.sensorNumber] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.sensorNumber] with a well-typed [Int] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun sensorNumber(sensorNumber: JsonField<Int>) = apply { this.sensorNumber = sensorNumber }
+
+        /** The observation measurement type produced by this sensor. */
+        fun sensorObservationType(sensorObservationType: String) =
+            sensorObservationType(JsonField.of(sensorObservationType))
+
+        /**
+         * Sets [Builder.sensorObservationType] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.sensorObservationType] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun sensorObservationType(sensorObservationType: JsonField<String>) = apply {
+            this.sensorObservationType = sensorObservationType
+        }
+
+        /** The specific sensor type and/or surveillance capability of this sensor. */
+        fun sensorType(sensorType: String) = sensorType(JsonField.of(sensorType))
+
+        /**
+         * Sets [Builder.sensorType] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.sensorType] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun sensorType(sensorType: JsonField<String>) = apply { this.sensorType = sensorType }
+
+        /** Optional short or abbreviated name of this sensor. */
+        fun shortName(shortName: String) = shortName(JsonField.of(shortName))
+
+        /**
+         * Sets [Builder.shortName] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.shortName] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun shortName(shortName: JsonField<String>) = apply { this.shortName = shortName }
+
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
+
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
+
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
+
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
+
+        /**
+         * Returns an immutable instance of [SensorStatingGetResponse].
+         *
+         * Further updates to this [Builder] will not mutate the returned instance.
+         *
+         * The following fields are required:
+         * ```java
+         * .classificationMarking()
+         * .sensorName()
+         * .source()
+         * ```
+         *
+         * @throws IllegalStateException if any required field is unset.
+         */
+        fun build(): SensorStatingGetResponse =
+            SensorStatingGetResponse(
+                checkRequired("classificationMarking", classificationMarking),
+                checkRequired("sensorName", sensorName),
+                checkRequired("source", source),
+                id,
+                altitude,
+                createdAt,
+                createdBy,
+                lat,
+                locationCountry,
+                lon,
+                ownerCountry,
+                sensorNumber,
+                sensorObservationType,
+                sensorType,
+                shortName,
+                additionalProperties.toMutableMap(),
+            )
+    }
+
+    private var validated: Boolean = false
+
+    fun validate(): SensorStatingGetResponse = apply {
+        if (validated) {
+            return@apply
+        }
+
+        classificationMarking()
+        sensorName()
+        source()
+        id()
+        altitude()
+        createdAt()
+        createdBy()
+        lat()
+        locationCountry()
+        lon()
+        ownerCountry()
+        sensorNumber()
+        sensorObservationType()
+        sensorType()
+        shortName()
+        validated = true
+    }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: UnifieddatalibraryInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    @JvmSynthetic
+    internal fun validity(): Int =
+        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+            (if (sensorName.asKnown().isPresent) 1 else 0) +
+            (if (source.asKnown().isPresent) 1 else 0) +
+            (if (id.asKnown().isPresent) 1 else 0) +
+            (if (altitude.asKnown().isPresent) 1 else 0) +
+            (if (createdAt.asKnown().isPresent) 1 else 0) +
+            (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (if (lat.asKnown().isPresent) 1 else 0) +
+            (if (locationCountry.asKnown().isPresent) 1 else 0) +
+            (if (lon.asKnown().isPresent) 1 else 0) +
+            (if (ownerCountry.asKnown().isPresent) 1 else 0) +
+            (if (sensorNumber.asKnown().isPresent) 1 else 0) +
+            (if (sensorObservationType.asKnown().isPresent) 1 else 0) +
+            (if (sensorType.asKnown().isPresent) 1 else 0) +
+            (if (shortName.asKnown().isPresent) 1 else 0)
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        return other is SensorStatingGetResponse &&
+            classificationMarking == other.classificationMarking &&
+            sensorName == other.sensorName &&
+            source == other.source &&
+            id == other.id &&
+            altitude == other.altitude &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            lat == other.lat &&
+            locationCountry == other.locationCountry &&
+            lon == other.lon &&
+            ownerCountry == other.ownerCountry &&
+            sensorNumber == other.sensorNumber &&
+            sensorObservationType == other.sensorObservationType &&
+            sensorType == other.sensorType &&
+            shortName == other.shortName &&
+            additionalProperties == other.additionalProperties
+    }
+
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            sensorName,
+            source,
+            id,
+            altitude,
+            createdAt,
+            createdBy,
+            lat,
+            locationCountry,
+            lon,
+            ownerCountry,
+            sensorNumber,
+            sensorObservationType,
+            sensorType,
+            shortName,
+            additionalProperties,
+        )
+    }
+
+    override fun hashCode(): Int = hashCode
+
+    override fun toString() =
+        "SensorStatingGetResponse{classificationMarking=$classificationMarking, sensorName=$sensorName, source=$source, id=$id, altitude=$altitude, createdAt=$createdAt, createdBy=$createdBy, lat=$lat, locationCountry=$locationCountry, lon=$lon, ownerCountry=$ownerCountry, sensorNumber=$sensorNumber, sensorObservationType=$sensorObservationType, sensorType=$sensorType, shortName=$shortName, additionalProperties=$additionalProperties}"
+}

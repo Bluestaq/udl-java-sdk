@@ -99,6 +99,7 @@ import com.unifieddatalibrary.api.services.blocking.ObservationService
 import com.unifieddatalibrary.api.services.blocking.OnboardnavigationService
 import com.unifieddatalibrary.api.services.blocking.OnorbitService
 import com.unifieddatalibrary.api.services.blocking.OnorbitantennaService
+import com.unifieddatalibrary.api.services.blocking.OnorbitassessmentService
 import com.unifieddatalibrary.api.services.blocking.OnorbitbatteryService
 import com.unifieddatalibrary.api.services.blocking.OnorbitdetailService
 import com.unifieddatalibrary.api.services.blocking.OnorbiteventService
@@ -128,6 +129,7 @@ import com.unifieddatalibrary.api.services.blocking.SensorMaintenanceService
 import com.unifieddatalibrary.api.services.blocking.SensorObservationTypeService
 import com.unifieddatalibrary.api.services.blocking.SensorPlanService
 import com.unifieddatalibrary.api.services.blocking.SensorService
+import com.unifieddatalibrary.api.services.blocking.SensorStatingService
 import com.unifieddatalibrary.api.services.blocking.SensorTypeService
 import com.unifieddatalibrary.api.services.blocking.SeraDataCommDetailService
 import com.unifieddatalibrary.api.services.blocking.SeraDataEarlyWarningService
@@ -411,6 +413,8 @@ interface UnifieddatalibraryClient {
 
     fun onorbitthrusterstatus(): OnorbitthrusterstatusService
 
+    fun onorbitassessment(): OnorbitassessmentService
+
     fun operatingunit(): OperatingunitService
 
     fun operatingunitremark(): OperatingunitremarkService
@@ -448,6 +452,8 @@ interface UnifieddatalibraryClient {
     fun secureMessaging(): SecureMessagingService
 
     fun sensor(): SensorService
+
+    fun sensorStating(): SensorStatingService
 
     fun sensorMaintenance(): SensorMaintenanceService
 
@@ -767,6 +773,8 @@ interface UnifieddatalibraryClient {
 
         fun onorbitthrusterstatus(): OnorbitthrusterstatusService.WithRawResponse
 
+        fun onorbitassessment(): OnorbitassessmentService.WithRawResponse
+
         fun operatingunit(): OperatingunitService.WithRawResponse
 
         fun operatingunitremark(): OperatingunitremarkService.WithRawResponse
@@ -804,6 +812,8 @@ interface UnifieddatalibraryClient {
         fun secureMessaging(): SecureMessagingService.WithRawResponse
 
         fun sensor(): SensorService.WithRawResponse
+
+        fun sensorStating(): SensorStatingService.WithRawResponse
 
         fun sensorMaintenance(): SensorMaintenanceService.WithRawResponse
 
