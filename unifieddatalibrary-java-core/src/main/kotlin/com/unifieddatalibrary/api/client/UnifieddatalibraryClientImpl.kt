@@ -196,6 +196,8 @@ import com.unifieddatalibrary.api.services.blocking.OnorbitService
 import com.unifieddatalibrary.api.services.blocking.OnorbitServiceImpl
 import com.unifieddatalibrary.api.services.blocking.OnorbitantennaService
 import com.unifieddatalibrary.api.services.blocking.OnorbitantennaServiceImpl
+import com.unifieddatalibrary.api.services.blocking.OnorbitassessmentService
+import com.unifieddatalibrary.api.services.blocking.OnorbitassessmentServiceImpl
 import com.unifieddatalibrary.api.services.blocking.OnorbitbatteryService
 import com.unifieddatalibrary.api.services.blocking.OnorbitbatteryServiceImpl
 import com.unifieddatalibrary.api.services.blocking.OnorbitdetailService
@@ -254,6 +256,8 @@ import com.unifieddatalibrary.api.services.blocking.SensorPlanService
 import com.unifieddatalibrary.api.services.blocking.SensorPlanServiceImpl
 import com.unifieddatalibrary.api.services.blocking.SensorService
 import com.unifieddatalibrary.api.services.blocking.SensorServiceImpl
+import com.unifieddatalibrary.api.services.blocking.SensorStatingService
+import com.unifieddatalibrary.api.services.blocking.SensorStatingServiceImpl
 import com.unifieddatalibrary.api.services.blocking.SensorTypeService
 import com.unifieddatalibrary.api.services.blocking.SensorTypeServiceImpl
 import com.unifieddatalibrary.api.services.blocking.SeraDataCommDetailService
@@ -722,6 +726,10 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
         OnorbitthrusterstatusServiceImpl(clientOptionsWithUserAgent)
     }
 
+    private val onorbitassessment: OnorbitassessmentService by lazy {
+        OnorbitassessmentServiceImpl(clientOptionsWithUserAgent)
+    }
+
     private val operatingunit: OperatingunitService by lazy {
         OperatingunitServiceImpl(clientOptionsWithUserAgent)
     }
@@ -787,6 +795,10 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
     }
 
     private val sensor: SensorService by lazy { SensorServiceImpl(clientOptionsWithUserAgent) }
+
+    private val sensorStating: SensorStatingService by lazy {
+        SensorStatingServiceImpl(clientOptionsWithUserAgent)
+    }
 
     private val sensorMaintenance: SensorMaintenanceService by lazy {
         SensorMaintenanceServiceImpl(clientOptionsWithUserAgent)
@@ -1146,6 +1158,8 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
 
     override fun onorbitthrusterstatus(): OnorbitthrusterstatusService = onorbitthrusterstatus
 
+    override fun onorbitassessment(): OnorbitassessmentService = onorbitassessment
+
     override fun operatingunit(): OperatingunitService = operatingunit
 
     override fun operatingunitremark(): OperatingunitremarkService = operatingunitremark
@@ -1183,6 +1197,8 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
     override fun secureMessaging(): SecureMessagingService = secureMessaging
 
     override fun sensor(): SensorService = sensor
+
+    override fun sensorStating(): SensorStatingService = sensorStating
 
     override fun sensorMaintenance(): SensorMaintenanceService = sensorMaintenance
 
@@ -1688,6 +1704,10 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
             OnorbitthrusterstatusServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
+        private val onorbitassessment: OnorbitassessmentService.WithRawResponse by lazy {
+            OnorbitassessmentServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
         private val operatingunit: OperatingunitService.WithRawResponse by lazy {
             OperatingunitServiceImpl.WithRawResponseImpl(clientOptions)
         }
@@ -1762,6 +1782,10 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
 
         private val sensor: SensorService.WithRawResponse by lazy {
             SensorServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val sensorStating: SensorStatingService.WithRawResponse by lazy {
+            SensorStatingServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val sensorMaintenance: SensorMaintenanceService.WithRawResponse by lazy {
@@ -2164,6 +2188,9 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
         override fun onorbitthrusterstatus(): OnorbitthrusterstatusService.WithRawResponse =
             onorbitthrusterstatus
 
+        override fun onorbitassessment(): OnorbitassessmentService.WithRawResponse =
+            onorbitassessment
+
         override fun operatingunit(): OperatingunitService.WithRawResponse = operatingunit
 
         override fun operatingunitremark(): OperatingunitremarkService.WithRawResponse =
@@ -2206,6 +2233,8 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
         override fun secureMessaging(): SecureMessagingService.WithRawResponse = secureMessaging
 
         override fun sensor(): SensorService.WithRawResponse = sensor
+
+        override fun sensorStating(): SensorStatingService.WithRawResponse = sensorStating
 
         override fun sensorMaintenance(): SensorMaintenanceService.WithRawResponse =
             sensorMaintenance

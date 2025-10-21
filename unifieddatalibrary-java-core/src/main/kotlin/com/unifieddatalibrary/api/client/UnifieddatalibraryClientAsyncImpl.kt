@@ -196,6 +196,8 @@ import com.unifieddatalibrary.api.services.async.OnorbitServiceAsync
 import com.unifieddatalibrary.api.services.async.OnorbitServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.OnorbitantennaServiceAsync
 import com.unifieddatalibrary.api.services.async.OnorbitantennaServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.OnorbitassessmentServiceAsync
+import com.unifieddatalibrary.api.services.async.OnorbitassessmentServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.OnorbitbatteryServiceAsync
 import com.unifieddatalibrary.api.services.async.OnorbitbatteryServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.OnorbitdetailServiceAsync
@@ -254,6 +256,8 @@ import com.unifieddatalibrary.api.services.async.SensorPlanServiceAsync
 import com.unifieddatalibrary.api.services.async.SensorPlanServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.SensorServiceAsync
 import com.unifieddatalibrary.api.services.async.SensorServiceAsyncImpl
+import com.unifieddatalibrary.api.services.async.SensorStatingServiceAsync
+import com.unifieddatalibrary.api.services.async.SensorStatingServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.SensorTypeServiceAsync
 import com.unifieddatalibrary.api.services.async.SensorTypeServiceAsyncImpl
 import com.unifieddatalibrary.api.services.async.SeraDataCommDetailServiceAsync
@@ -744,6 +748,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         OnorbitthrusterstatusServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
+    private val onorbitassessment: OnorbitassessmentServiceAsync by lazy {
+        OnorbitassessmentServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
     private val operatingunit: OperatingunitServiceAsync by lazy {
         OperatingunitServiceAsyncImpl(clientOptionsWithUserAgent)
     }
@@ -812,6 +820,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     private val sensor: SensorServiceAsync by lazy {
         SensorServiceAsyncImpl(clientOptionsWithUserAgent)
+    }
+
+    private val sensorStating: SensorStatingServiceAsync by lazy {
+        SensorStatingServiceAsyncImpl(clientOptionsWithUserAgent)
     }
 
     private val sensorMaintenance: SensorMaintenanceServiceAsync by lazy {
@@ -1194,6 +1206,8 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
     override fun onorbitthrusterstatus(): OnorbitthrusterstatusServiceAsync = onorbitthrusterstatus
 
+    override fun onorbitassessment(): OnorbitassessmentServiceAsync = onorbitassessment
+
     override fun operatingunit(): OperatingunitServiceAsync = operatingunit
 
     override fun operatingunitremark(): OperatingunitremarkServiceAsync = operatingunitremark
@@ -1231,6 +1245,8 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
     override fun secureMessaging(): SecureMessagingServiceAsync = secureMessaging
 
     override fun sensor(): SensorServiceAsync = sensor
+
+    override fun sensorStating(): SensorStatingServiceAsync = sensorStating
 
     override fun sensorMaintenance(): SensorMaintenanceServiceAsync = sensorMaintenance
 
@@ -1743,6 +1759,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             OnorbitthrusterstatusServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        private val onorbitassessment: OnorbitassessmentServiceAsync.WithRawResponse by lazy {
+            OnorbitassessmentServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
         private val operatingunit: OperatingunitServiceAsync.WithRawResponse by lazy {
             OperatingunitServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
@@ -1817,6 +1837,10 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
 
         private val sensor: SensorServiceAsync.WithRawResponse by lazy {
             SensorServiceAsyncImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val sensorStating: SensorStatingServiceAsync.WithRawResponse by lazy {
+            SensorStatingServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val sensorMaintenance: SensorMaintenanceServiceAsync.WithRawResponse by lazy {
@@ -2232,6 +2256,9 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
         override fun onorbitthrusterstatus(): OnorbitthrusterstatusServiceAsync.WithRawResponse =
             onorbitthrusterstatus
 
+        override fun onorbitassessment(): OnorbitassessmentServiceAsync.WithRawResponse =
+            onorbitassessment
+
         override fun operatingunit(): OperatingunitServiceAsync.WithRawResponse = operatingunit
 
         override fun operatingunitremark(): OperatingunitremarkServiceAsync.WithRawResponse =
@@ -2275,6 +2302,8 @@ class UnifieddatalibraryClientAsyncImpl(private val clientOptions: ClientOptions
             secureMessaging
 
         override fun sensor(): SensorServiceAsync.WithRawResponse = sensor
+
+        override fun sensorStating(): SensorStatingServiceAsync.WithRawResponse = sensorStating
 
         override fun sensorMaintenance(): SensorMaintenanceServiceAsync.WithRawResponse =
             sensorMaintenance
