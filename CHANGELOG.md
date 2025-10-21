@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.6.0 (2025-10-21)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** api update ([51bfdd0](https://github.com/Bluestaq/udl-java-sdk/commit/51bfdd0b01d1ac70a81b0c3f0dbf22b8b923b89e))
+* **api:** manual updates ([37c2ec8](https://github.com/Bluestaq/udl-java-sdk/commit/37c2ec83fc953751bd7540ecb4ffb9bc8cbfc456))
+
+
+### Bug Fixes
+
+* **client:** add missing additional properties fields ([cbb6011](https://github.com/Bluestaq/udl-java-sdk/commit/cbb60112d172b800d6330bd6ab155791095307f4))
+
 ## 0.5.0 (2025-09-25)
 
 Full Changelog: [v0.4.1...v0.5.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.4.1...v0.5.0)
