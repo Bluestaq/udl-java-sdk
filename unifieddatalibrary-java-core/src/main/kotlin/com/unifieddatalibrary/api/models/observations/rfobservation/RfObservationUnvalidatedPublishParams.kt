@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.observations.rfobservation
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -220,180 +224,493 @@ private constructor(
      * frequencies[0]).
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("obTime") @ExcludeMissing private val obTime: JsonField<OffsetDateTime>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("antennaName") @ExcludeMissing private val antennaName: JsonField<String>,
-        @JsonProperty("azimuth") @ExcludeMissing private val azimuth: JsonField<Double>,
-        @JsonProperty("azimuthMeasured")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val obTime: JsonField<OffsetDateTime>,
+        private val source: JsonField<String>,
+        private val type: JsonField<String>,
+        private val id: JsonField<String>,
+        private val antennaName: JsonField<String>,
+        private val azimuth: JsonField<Double>,
         private val azimuthMeasured: JsonField<Boolean>,
-        @JsonProperty("azimuthRate") @ExcludeMissing private val azimuthRate: JsonField<Double>,
-        @JsonProperty("azimuthUnc") @ExcludeMissing private val azimuthUnc: JsonField<Double>,
-        @JsonProperty("bandwidth") @ExcludeMissing private val bandwidth: JsonField<Double>,
-        @JsonProperty("baudRate") @ExcludeMissing private val baudRate: JsonField<Double>,
-        @JsonProperty("baudRates") @ExcludeMissing private val baudRates: JsonField<List<Double>>,
-        @JsonProperty("bitErrorRate") @ExcludeMissing private val bitErrorRate: JsonField<Double>,
-        @JsonProperty("carrierStandard")
-        @ExcludeMissing
+        private val azimuthRate: JsonField<Double>,
+        private val azimuthUnc: JsonField<Double>,
+        private val bandwidth: JsonField<Double>,
+        private val baudRate: JsonField<Double>,
+        private val baudRates: JsonField<List<Double>>,
+        private val bitErrorRate: JsonField<Double>,
         private val carrierStandard: JsonField<String>,
-        @JsonProperty("channel") @ExcludeMissing private val channel: JsonField<Int>,
-        @JsonProperty("chipRates") @ExcludeMissing private val chipRates: JsonField<List<Double>>,
-        @JsonProperty("codeFills") @ExcludeMissing private val codeFills: JsonField<List<String>>,
-        @JsonProperty("codeLengths")
-        @ExcludeMissing
+        private val channel: JsonField<Int>,
+        private val chipRates: JsonField<List<Double>>,
+        private val codeFills: JsonField<List<String>>,
         private val codeLengths: JsonField<List<Double>>,
-        @JsonProperty("codeTaps") @ExcludeMissing private val codeTaps: JsonField<List<String>>,
-        @JsonProperty("collectionMode")
-        @ExcludeMissing
+        private val codeTaps: JsonField<List<String>>,
         private val collectionMode: JsonField<String>,
-        @JsonProperty("confidence") @ExcludeMissing private val confidence: JsonField<Double>,
-        @JsonProperty("confidences")
-        @ExcludeMissing
+        private val confidence: JsonField<Double>,
         private val confidences: JsonField<List<Double>>,
-        @JsonProperty("constellationXPoints")
-        @ExcludeMissing
         private val constellationXPoints: JsonField<List<Double>>,
-        @JsonProperty("constellationYPoints")
-        @ExcludeMissing
         private val constellationYPoints: JsonField<List<Double>>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("descriptor") @ExcludeMissing private val descriptor: JsonField<String>,
-        @JsonProperty("detectionStatus")
-        @ExcludeMissing
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val descriptor: JsonField<String>,
         private val detectionStatus: JsonField<String>,
-        @JsonProperty("detectionStatuses")
-        @ExcludeMissing
         private val detectionStatuses: JsonField<List<String>>,
-        @JsonProperty("eirp") @ExcludeMissing private val eirp: JsonField<Double>,
-        @JsonProperty("elevation") @ExcludeMissing private val elevation: JsonField<Double>,
-        @JsonProperty("elevationMeasured")
-        @ExcludeMissing
+        private val eirp: JsonField<Double>,
+        private val elevation: JsonField<Double>,
         private val elevationMeasured: JsonField<Boolean>,
-        @JsonProperty("elevationRate") @ExcludeMissing private val elevationRate: JsonField<Double>,
-        @JsonProperty("elevationUnc") @ExcludeMissing private val elevationUnc: JsonField<Double>,
-        @JsonProperty("elnot") @ExcludeMissing private val elnot: JsonField<String>,
-        @JsonProperty("endFrequency") @ExcludeMissing private val endFrequency: JsonField<Double>,
-        @JsonProperty("frequencies")
-        @ExcludeMissing
+        private val elevationRate: JsonField<Double>,
+        private val elevationUnc: JsonField<Double>,
+        private val elnot: JsonField<String>,
+        private val endFrequency: JsonField<Double>,
+        private val fftImagCoeffs: JsonField<List<Double>>,
+        private val fftRealCoeffs: JsonField<List<Double>>,
         private val frequencies: JsonField<List<Double>>,
-        @JsonProperty("frequency") @ExcludeMissing private val frequency: JsonField<Double>,
-        @JsonProperty("frequencyShift")
-        @ExcludeMissing
+        private val frequency: JsonField<Double>,
         private val frequencyShift: JsonField<Double>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("incoming") @ExcludeMissing private val incoming: JsonField<Boolean>,
-        @JsonProperty("innerCodingRate")
-        @ExcludeMissing
+        private val idOnOrbit: JsonField<String>,
+        private val idSensor: JsonField<String>,
+        private val incoming: JsonField<Boolean>,
         private val innerCodingRate: JsonField<Int>,
-        @JsonProperty("maxPSD") @ExcludeMissing private val maxPsd: JsonField<Double>,
-        @JsonProperty("minPSD") @ExcludeMissing private val minPsd: JsonField<Double>,
-        @JsonProperty("modulation") @ExcludeMissing private val modulation: JsonField<String>,
-        @JsonProperty("noisePwrDensity")
-        @ExcludeMissing
+        private val maxPsd: JsonField<Double>,
+        private val minPsd: JsonField<Double>,
+        private val modulation: JsonField<String>,
         private val noisePwrDensity: JsonField<Double>,
-        @JsonProperty("nominalBandwidth")
-        @ExcludeMissing
         private val nominalBandwidth: JsonField<Double>,
-        @JsonProperty("nominalEirp") @ExcludeMissing private val nominalEirp: JsonField<Double>,
-        @JsonProperty("nominalFrequency")
-        @ExcludeMissing
+        private val nominalEirp: JsonField<Double>,
         private val nominalFrequency: JsonField<Double>,
-        @JsonProperty("nominalPowerOverNoise")
-        @ExcludeMissing
         private val nominalPowerOverNoise: JsonField<Double>,
-        @JsonProperty("nominalSnr") @ExcludeMissing private val nominalSnr: JsonField<Double>,
-        @JsonProperty("origCountry") @ExcludeMissing private val origCountry: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origMarking") @ExcludeMissing private val origMarking: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("outerCodingRate")
-        @ExcludeMissing
+        private val nominalSnr: JsonField<Double>,
+        private val origCountry: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origMarking: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val origSensorId: JsonField<String>,
         private val outerCodingRate: JsonField<Int>,
-        @JsonProperty("peak") @ExcludeMissing private val peak: JsonField<Boolean>,
-        @JsonProperty("pgri") @ExcludeMissing private val pgri: JsonField<Double>,
-        @JsonProperty("pnOrders") @ExcludeMissing private val pnOrders: JsonField<List<Int>>,
-        @JsonProperty("polarity") @ExcludeMissing private val polarity: JsonField<Double>,
-        @JsonProperty("polarityType")
-        @ExcludeMissing
+        private val peak: JsonField<Boolean>,
+        private val pgri: JsonField<Double>,
+        private val pnOrders: JsonField<List<Int>>,
+        private val polarity: JsonField<Double>,
         private val polarityType: JsonField<PolarityType>,
-        @JsonProperty("powerOverNoise")
-        @ExcludeMissing
         private val powerOverNoise: JsonField<Double>,
-        @JsonProperty("powers") @ExcludeMissing private val powers: JsonField<List<Double>>,
-        @JsonProperty("range") @ExcludeMissing private val range: JsonField<Double>,
-        @JsonProperty("rangeMeasured")
-        @ExcludeMissing
+        private val powers: JsonField<List<Double>>,
+        private val range: JsonField<Double>,
         private val rangeMeasured: JsonField<Boolean>,
-        @JsonProperty("rangeRate") @ExcludeMissing private val rangeRate: JsonField<Double>,
-        @JsonProperty("rangeRateMeasured")
-        @ExcludeMissing
+        private val rangeRate: JsonField<Double>,
         private val rangeRateMeasured: JsonField<Boolean>,
-        @JsonProperty("rangeRateUnc") @ExcludeMissing private val rangeRateUnc: JsonField<Double>,
-        @JsonProperty("rangeUnc") @ExcludeMissing private val rangeUnc: JsonField<Double>,
-        @JsonProperty("rawFileURI") @ExcludeMissing private val rawFileUri: JsonField<String>,
-        @JsonProperty("referenceLevel")
-        @ExcludeMissing
+        private val rangeRateUnc: JsonField<Double>,
+        private val rangeUnc: JsonField<Double>,
+        private val rawFileUri: JsonField<String>,
         private val referenceLevel: JsonField<Double>,
-        @JsonProperty("relativeCarrierPower")
-        @ExcludeMissing
         private val relativeCarrierPower: JsonField<Double>,
-        @JsonProperty("relativeNoiseFloor")
-        @ExcludeMissing
         private val relativeNoiseFloor: JsonField<Double>,
-        @JsonProperty("resolutionBandwidth")
-        @ExcludeMissing
         private val resolutionBandwidth: JsonField<Double>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("senalt") @ExcludeMissing private val senalt: JsonField<Double>,
-        @JsonProperty("senlat") @ExcludeMissing private val senlat: JsonField<Double>,
-        @JsonProperty("senlon") @ExcludeMissing private val senlon: JsonField<Double>,
-        @JsonProperty("signalIds") @ExcludeMissing private val signalIds: JsonField<List<String>>,
-        @JsonProperty("snr") @ExcludeMissing private val snr: JsonField<Double>,
-        @JsonProperty("snrs") @ExcludeMissing private val snrs: JsonField<List<Double>>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("spectrumAnalyzerPower")
-        @ExcludeMissing
+        private val satNo: JsonField<Int>,
+        private val senalt: JsonField<Double>,
+        private val senlat: JsonField<Double>,
+        private val senlon: JsonField<Double>,
+        private val signalIds: JsonField<List<String>>,
+        private val snr: JsonField<Double>,
+        private val snrs: JsonField<List<Double>>,
+        private val sourceDl: JsonField<String>,
         private val spectrumAnalyzerPower: JsonField<Double>,
-        @JsonProperty("startFrequency")
-        @ExcludeMissing
         private val startFrequency: JsonField<Double>,
-        @JsonProperty("switchPoint") @ExcludeMissing private val switchPoint: JsonField<Int>,
-        @JsonProperty("symbolToNoiseRatio")
-        @ExcludeMissing
+        private val switchPoint: JsonField<Int>,
         private val symbolToNoiseRatio: JsonField<Double>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("taskId") @ExcludeMissing private val taskId: JsonField<String>,
-        @JsonProperty("telemetryIds")
-        @ExcludeMissing
+        private val tags: JsonField<List<String>>,
+        private val taskId: JsonField<String>,
         private val telemetryIds: JsonField<List<String>>,
-        @JsonProperty("trackId") @ExcludeMissing private val trackId: JsonField<String>,
-        @JsonProperty("trackRange") @ExcludeMissing private val trackRange: JsonField<Double>,
-        @JsonProperty("transactionId") @ExcludeMissing private val transactionId: JsonField<String>,
-        @JsonProperty("transmitFilterRollOff")
-        @ExcludeMissing
+        private val trackId: JsonField<String>,
+        private val trackRange: JsonField<Double>,
+        private val transactionId: JsonField<String>,
         private val transmitFilterRollOff: JsonField<Double>,
-        @JsonProperty("transmitFilterType")
-        @ExcludeMissing
         private val transmitFilterType: JsonField<String>,
-        @JsonProperty("transponder") @ExcludeMissing private val transponder: JsonField<String>,
-        @JsonProperty("uct") @ExcludeMissing private val uct: JsonField<Boolean>,
-        @JsonProperty("url") @ExcludeMissing private val url: JsonField<String>,
-        @JsonProperty("videoBandwidth")
-        @ExcludeMissing
+        private val transponder: JsonField<String>,
+        private val uct: JsonField<Boolean>,
+        private val url: JsonField<String>,
         private val videoBandwidth: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("obTime")
+            @ExcludeMissing
+            obTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("antennaName")
+            @ExcludeMissing
+            antennaName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("azimuth") @ExcludeMissing azimuth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azimuthMeasured")
+            @ExcludeMissing
+            azimuthMeasured: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("azimuthRate")
+            @ExcludeMissing
+            azimuthRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azimuthUnc")
+            @ExcludeMissing
+            azimuthUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("bandwidth")
+            @ExcludeMissing
+            bandwidth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("baudRate")
+            @ExcludeMissing
+            baudRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("baudRates")
+            @ExcludeMissing
+            baudRates: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("bitErrorRate")
+            @ExcludeMissing
+            bitErrorRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("carrierStandard")
+            @ExcludeMissing
+            carrierStandard: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("channel") @ExcludeMissing channel: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("chipRates")
+            @ExcludeMissing
+            chipRates: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("codeFills")
+            @ExcludeMissing
+            codeFills: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("codeLengths")
+            @ExcludeMissing
+            codeLengths: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("codeTaps")
+            @ExcludeMissing
+            codeTaps: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("collectionMode")
+            @ExcludeMissing
+            collectionMode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("confidence")
+            @ExcludeMissing
+            confidence: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("confidences")
+            @ExcludeMissing
+            confidences: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("constellationXPoints")
+            @ExcludeMissing
+            constellationXPoints: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("constellationYPoints")
+            @ExcludeMissing
+            constellationYPoints: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("descriptor")
+            @ExcludeMissing
+            descriptor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("detectionStatus")
+            @ExcludeMissing
+            detectionStatus: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("detectionStatuses")
+            @ExcludeMissing
+            detectionStatuses: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("eirp") @ExcludeMissing eirp: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elevation")
+            @ExcludeMissing
+            elevation: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elevationMeasured")
+            @ExcludeMissing
+            elevationMeasured: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("elevationRate")
+            @ExcludeMissing
+            elevationRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elevationUnc")
+            @ExcludeMissing
+            elevationUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elnot") @ExcludeMissing elnot: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("endFrequency")
+            @ExcludeMissing
+            endFrequency: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fftImagCoeffs")
+            @ExcludeMissing
+            fftImagCoeffs: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("fftRealCoeffs")
+            @ExcludeMissing
+            fftRealCoeffs: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("frequencies")
+            @ExcludeMissing
+            frequencies: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("frequency")
+            @ExcludeMissing
+            frequency: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("frequencyShift")
+            @ExcludeMissing
+            frequencyShift: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("incoming")
+            @ExcludeMissing
+            incoming: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("innerCodingRate")
+            @ExcludeMissing
+            innerCodingRate: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("maxPSD") @ExcludeMissing maxPsd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("minPSD") @ExcludeMissing minPsd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("modulation")
+            @ExcludeMissing
+            modulation: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("noisePwrDensity")
+            @ExcludeMissing
+            noisePwrDensity: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("nominalBandwidth")
+            @ExcludeMissing
+            nominalBandwidth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("nominalEirp")
+            @ExcludeMissing
+            nominalEirp: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("nominalFrequency")
+            @ExcludeMissing
+            nominalFrequency: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("nominalPowerOverNoise")
+            @ExcludeMissing
+            nominalPowerOverNoise: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("nominalSnr")
+            @ExcludeMissing
+            nominalSnr: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("origCountry")
+            @ExcludeMissing
+            origCountry: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origMarking")
+            @ExcludeMissing
+            origMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("outerCodingRate")
+            @ExcludeMissing
+            outerCodingRate: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("peak") @ExcludeMissing peak: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("pgri") @ExcludeMissing pgri: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pnOrders")
+            @ExcludeMissing
+            pnOrders: JsonField<List<Int>> = JsonMissing.of(),
+            @JsonProperty("polarity")
+            @ExcludeMissing
+            polarity: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("polarityType")
+            @ExcludeMissing
+            polarityType: JsonField<PolarityType> = JsonMissing.of(),
+            @JsonProperty("powerOverNoise")
+            @ExcludeMissing
+            powerOverNoise: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("powers")
+            @ExcludeMissing
+            powers: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("range") @ExcludeMissing range: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeMeasured")
+            @ExcludeMissing
+            rangeMeasured: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("rangeRate")
+            @ExcludeMissing
+            rangeRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeRateMeasured")
+            @ExcludeMissing
+            rangeRateMeasured: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("rangeRateUnc")
+            @ExcludeMissing
+            rangeRateUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeUnc")
+            @ExcludeMissing
+            rangeUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rawFileURI")
+            @ExcludeMissing
+            rawFileUri: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("referenceLevel")
+            @ExcludeMissing
+            referenceLevel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("relativeCarrierPower")
+            @ExcludeMissing
+            relativeCarrierPower: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("relativeNoiseFloor")
+            @ExcludeMissing
+            relativeNoiseFloor: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("resolutionBandwidth")
+            @ExcludeMissing
+            resolutionBandwidth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("senalt") @ExcludeMissing senalt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlat") @ExcludeMissing senlat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlon") @ExcludeMissing senlon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("signalIds")
+            @ExcludeMissing
+            signalIds: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("snr") @ExcludeMissing snr: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("snrs") @ExcludeMissing snrs: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("spectrumAnalyzerPower")
+            @ExcludeMissing
+            spectrumAnalyzerPower: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("startFrequency")
+            @ExcludeMissing
+            startFrequency: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("switchPoint")
+            @ExcludeMissing
+            switchPoint: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("symbolToNoiseRatio")
+            @ExcludeMissing
+            symbolToNoiseRatio: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("taskId") @ExcludeMissing taskId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("telemetryIds")
+            @ExcludeMissing
+            telemetryIds: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("trackId") @ExcludeMissing trackId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("trackRange")
+            @ExcludeMissing
+            trackRange: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("transactionId")
+            @ExcludeMissing
+            transactionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("transmitFilterRollOff")
+            @ExcludeMissing
+            transmitFilterRollOff: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("transmitFilterType")
+            @ExcludeMissing
+            transmitFilterType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("transponder")
+            @ExcludeMissing
+            transponder: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("uct") @ExcludeMissing uct: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("url") @ExcludeMissing url: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("videoBandwidth")
+            @ExcludeMissing
+            videoBandwidth: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            obTime,
+            source,
+            type,
+            id,
+            antennaName,
+            azimuth,
+            azimuthMeasured,
+            azimuthRate,
+            azimuthUnc,
+            bandwidth,
+            baudRate,
+            baudRates,
+            bitErrorRate,
+            carrierStandard,
+            channel,
+            chipRates,
+            codeFills,
+            codeLengths,
+            codeTaps,
+            collectionMode,
+            confidence,
+            confidences,
+            constellationXPoints,
+            constellationYPoints,
+            createdAt,
+            createdBy,
+            descriptor,
+            detectionStatus,
+            detectionStatuses,
+            eirp,
+            elevation,
+            elevationMeasured,
+            elevationRate,
+            elevationUnc,
+            elnot,
+            endFrequency,
+            fftImagCoeffs,
+            fftRealCoeffs,
+            frequencies,
+            frequency,
+            frequencyShift,
+            idOnOrbit,
+            idSensor,
+            incoming,
+            innerCodingRate,
+            maxPsd,
+            minPsd,
+            modulation,
+            noisePwrDensity,
+            nominalBandwidth,
+            nominalEirp,
+            nominalFrequency,
+            nominalPowerOverNoise,
+            nominalSnr,
+            origCountry,
+            origin,
+            origMarking,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            outerCodingRate,
+            peak,
+            pgri,
+            pnOrders,
+            polarity,
+            polarityType,
+            powerOverNoise,
+            powers,
+            range,
+            rangeMeasured,
+            rangeRate,
+            rangeRateMeasured,
+            rangeRateUnc,
+            rangeUnc,
+            rawFileUri,
+            referenceLevel,
+            relativeCarrierPower,
+            relativeNoiseFloor,
+            resolutionBandwidth,
+            satNo,
+            senalt,
+            senlat,
+            senlon,
+            signalIds,
+            snr,
+            snrs,
+            sourceDl,
+            spectrumAnalyzerPower,
+            startFrequency,
+            switchPoint,
+            symbolToNoiseRatio,
+            tags,
+            taskId,
+            telemetryIds,
+            trackId,
+            trackRange,
+            transactionId,
+            transmitFilterRollOff,
+            transmitFilterType,
+            transponder,
+            uct,
+            url,
+            videoBandwidth,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -469,7 +786,7 @@ private constructor(
         fun antennaName(): Optional<String> = antennaName.getOptional("antennaName")
 
         /**
-         * azimuth angle in degrees and J2000 coordinate frame.
+         * Azimuth angle in degrees and topocentric coordinate frame.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -503,7 +820,7 @@ private constructor(
         fun azimuthUnc(): Optional<Double> = azimuthUnc.getOptional("azimuthUnc")
 
         /**
-         * Measured bandwidth in Hz.
+         * Measured bandwidth in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -584,8 +901,8 @@ private constructor(
         fun codeTaps(): Optional<List<String>> = codeTaps.getOptional("codeTaps")
 
         /**
-         * Collection mode (e.g. SURVEY, SPOT_SEARCH, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH, MANUAL,
-         * etc).
+         * Collection mode (e.g. CONTINUOUS, MANUAL, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH,
+         * SPOT_SEARCH, SURVEY, etc).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -661,7 +978,7 @@ private constructor(
         fun detectionStatus(): Optional<String> = detectionStatus.getOptional("detectionStatus")
 
         /**
-         * Array of detection statuses (e.g. DETECTED, CARRIER_DETECTED, NOT_DETECTED) for each
+         * Array of detection statuses (e.g. CARRIER_DETECTED, DETECTED, NOT_DETECTED) for each
          * measured signal.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
@@ -671,7 +988,7 @@ private constructor(
             detectionStatuses.getOptional("detectionStatuses")
 
         /**
-         * Measured Equivalent Isotopically Radiated Power in dBW.
+         * Measured Equivalent Isotopically Radiated Power in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -679,7 +996,7 @@ private constructor(
         fun eirp(): Optional<Double> = eirp.getOptional("eirp")
 
         /**
-         * elevation in degrees and J2000 coordinate frame.
+         * Elevation in degrees and topocentric coordinate frame.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -722,7 +1039,7 @@ private constructor(
         fun elnot(): Optional<String> = elnot.getOptional("elnot")
 
         /**
-         * End carrier frequency in Hz.
+         * End carrier frequency in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -730,7 +1047,29 @@ private constructor(
         fun endFrequency(): Optional<Double> = endFrequency.getOptional("endFrequency")
 
         /**
-         * Array of individual PSD frequencies of the signal in Hz. This array should correspond
+         * Array of imaginary components of the complex Fast Fourier Transform (FFT) coefficients
+         * from the signal. Used together with the same-sized fftRealCoeffs array to preserve both
+         * amplitude and phase information. This array should correspond with the same-sized array
+         * of frequencies.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun fftImagCoeffs(): Optional<List<Double>> = fftImagCoeffs.getOptional("fftImagCoeffs")
+
+        /**
+         * Array of real components of the complex Fast Fourier Transform (FFT) coefficients from
+         * the signal. Used together with the same-sized fftImagCoeffs array to preserve both
+         * amplitude and phase information. This array should correspond with the same-sized array
+         * of frequencies.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun fftRealCoeffs(): Optional<List<Double>> = fftRealCoeffs.getOptional("fftRealCoeffs")
+
+        /**
+         * Array of individual PSD frequencies of the signal in hertz. This array should correspond
          * with the same-sized array of powers.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
@@ -739,7 +1078,7 @@ private constructor(
         fun frequencies(): Optional<List<Double>> = frequencies.getOptional("frequencies")
 
         /**
-         * Center carrier frequency in Hz.
+         * Center carrier frequency in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -788,7 +1127,7 @@ private constructor(
         fun innerCodingRate(): Optional<Int> = innerCodingRate.getOptional("innerCodingRate")
 
         /**
-         * Maximum measured PSD value of the trace in dBW.
+         * Maximum measured PSD value of the trace in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -796,7 +1135,7 @@ private constructor(
         fun maxPsd(): Optional<Double> = maxPsd.getOptional("maxPSD")
 
         /**
-         * Minimum measured PSD value of the trace in dBW.
+         * Minimum measured PSD value of the trace in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -812,7 +1151,7 @@ private constructor(
         fun modulation(): Optional<String> = modulation.getOptional("modulation")
 
         /**
-         * Noise power density, in dBW-Hz.
+         * Noise power density, in decibel watts per hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -820,7 +1159,7 @@ private constructor(
         fun noisePwrDensity(): Optional<Double> = noisePwrDensity.getOptional("noisePwrDensity")
 
         /**
-         * Expected bandwidth in Hz.
+         * Expected bandwidth in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -828,7 +1167,7 @@ private constructor(
         fun nominalBandwidth(): Optional<Double> = nominalBandwidth.getOptional("nominalBandwidth")
 
         /**
-         * Expected Equivalent Isotopically Radiated Power in dBW.
+         * Expected Equivalent Isotopically Radiated Power in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -836,7 +1175,7 @@ private constructor(
         fun nominalEirp(): Optional<Double> = nominalEirp.getOptional("nominalEirp")
 
         /**
-         * Nominal or expected center carrier frequency in Hz.
+         * Nominal or expected center carrier frequency in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -844,7 +1183,7 @@ private constructor(
         fun nominalFrequency(): Optional<Double> = nominalFrequency.getOptional("nominalFrequency")
 
         /**
-         * Expected carrier power over noise (dBW/Hz).
+         * Expected carrier power over noise (decibel watts per hertz).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -853,7 +1192,7 @@ private constructor(
             nominalPowerOverNoise.getOptional("nominalPowerOverNoise")
 
         /**
-         * Nominal or expected signal to noise ratio, in dB.
+         * Nominal or expected signal to noise ratio, in decibels.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -935,7 +1274,8 @@ private constructor(
 
         /**
          * A pulse group repetition interval (PGRI) is a pulse train in which there are groups of
-         * closely spaced pulses separated by much longer times between these pulse groups.
+         * closely spaced pulses separated by much longer times between these pulse groups. The PGRI
+         * is measured in seconds.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -970,7 +1310,7 @@ private constructor(
         fun polarityType(): Optional<PolarityType> = polarityType.getOptional("polarityType")
 
         /**
-         * Measured carrier power over noise (dBW/Hz).
+         * Measured carrier power over noise (decibel watts per hertz).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -978,7 +1318,7 @@ private constructor(
         fun powerOverNoise(): Optional<Double> = powerOverNoise.getOptional("powerOverNoise")
 
         /**
-         * Array of individual measured PSD powers of the signal in dBW. This array should
+         * Array of individual measured PSD powers of the signal in decibel watts. This array should
          * correspond with the same-sized array of frequencies.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
@@ -987,7 +1327,7 @@ private constructor(
         fun powers(): Optional<List<Double>> = powers.getOptional("powers")
 
         /**
-         * Target range in km.
+         * Target range in kilometers.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1005,7 +1345,7 @@ private constructor(
         fun rangeMeasured(): Optional<Boolean> = rangeMeasured.getOptional("rangeMeasured")
 
         /**
-         * Rate of change of the range in km/sec.
+         * Rate of change of the range in kilometers per second.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1050,7 +1390,7 @@ private constructor(
         fun rawFileUri(): Optional<String> = rawFileUri.getOptional("rawFileURI")
 
         /**
-         * Reference signal level, in dBW.
+         * Reference signal level, in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1058,7 +1398,7 @@ private constructor(
         fun referenceLevel(): Optional<Double> = referenceLevel.getOptional("referenceLevel")
 
         /**
-         * Measured power of the center carrier frequency in dBW.
+         * Measured power of the center carrier frequency in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1068,7 +1408,7 @@ private constructor(
 
         /**
          * The measure of the signal created from the sum of all the noise sources and unwanted
-         * signals within the measurement system, in dBW.
+         * signals within the measurement system, in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1077,7 +1417,7 @@ private constructor(
             relativeNoiseFloor.getOptional("relativeNoiseFloor")
 
         /**
-         * Resolution bandwidth in Hz.
+         * Resolution bandwidth in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1129,7 +1469,7 @@ private constructor(
         fun signalIds(): Optional<List<String>> = signalIds.getOptional("signalIds")
 
         /**
-         * Signal to noise ratio, in dB.
+         * Signal to noise ratio, in decibels.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1137,7 +1477,7 @@ private constructor(
         fun snr(): Optional<Double> = snr.getOptional("snr")
 
         /**
-         * Array of signal to noise ratios of the signals, in dB.
+         * Array of signal to noise ratios of the signals, in decibels.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1155,7 +1495,7 @@ private constructor(
         fun sourceDl(): Optional<String> = sourceDl.getOptional("sourceDL")
 
         /**
-         * Measured spectrum analyzer power of the center carrier frequency in dBW.
+         * Measured spectrum analyzer power of the center carrier frequency in decibel watts.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1164,7 +1504,7 @@ private constructor(
             spectrumAnalyzerPower.getOptional("spectrumAnalyzerPower")
 
         /**
-         * Start carrier frequency in Hz.
+         * Start carrier frequency in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1180,7 +1520,7 @@ private constructor(
         fun switchPoint(): Optional<Int> = switchPoint.getOptional("switchPoint")
 
         /**
-         * Symbol to noise ratio, in dB.
+         * Symbol to noise ratio, in decibels.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1224,7 +1564,7 @@ private constructor(
         fun trackId(): Optional<String> = trackId.getOptional("trackId")
 
         /**
-         * Target track or apparent range in km.
+         * Target track or apparent range in kilometers.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1250,7 +1590,7 @@ private constructor(
             transmitFilterRollOff.getOptional("transmitFilterRollOff")
 
         /**
-         * Transmit pulse shaping filter typ (e.g. RRC).
+         * Transmit pulse shaping filter type (e.g. RRC).
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1288,7 +1628,7 @@ private constructor(
         fun url(): Optional<String> = url.getOptional("url")
 
         /**
-         * Video bandwidth in Hz.
+         * Video bandwidth in hertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -1623,6 +1963,26 @@ private constructor(
         @JsonProperty("endFrequency")
         @ExcludeMissing
         fun _endFrequency(): JsonField<Double> = endFrequency
+
+        /**
+         * Returns the raw JSON value of [fftImagCoeffs].
+         *
+         * Unlike [fftImagCoeffs], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("fftImagCoeffs")
+        @ExcludeMissing
+        fun _fftImagCoeffs(): JsonField<List<Double>> = fftImagCoeffs
+
+        /**
+         * Returns the raw JSON value of [fftRealCoeffs].
+         *
+         * Unlike [fftRealCoeffs], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("fftRealCoeffs")
+        @ExcludeMissing
+        fun _fftRealCoeffs(): JsonField<List<Double>> = fftRealCoeffs
 
         /**
          * Returns the raw JSON value of [frequencies].
@@ -2181,6 +2541,16 @@ private constructor(
         @ExcludeMissing
         fun _videoBandwidth(): JsonField<Double> = videoBandwidth
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -2241,6 +2611,8 @@ private constructor(
             private var elevationUnc: JsonField<Double> = JsonMissing.of()
             private var elnot: JsonField<String> = JsonMissing.of()
             private var endFrequency: JsonField<Double> = JsonMissing.of()
+            private var fftImagCoeffs: JsonField<MutableList<Double>>? = null
+            private var fftRealCoeffs: JsonField<MutableList<Double>>? = null
             private var frequencies: JsonField<MutableList<Double>>? = null
             private var frequency: JsonField<Double> = JsonMissing.of()
             private var frequencyShift: JsonField<Double> = JsonMissing.of()
@@ -2306,6 +2678,7 @@ private constructor(
             private var uct: JsonField<Boolean> = JsonMissing.of()
             private var url: JsonField<String> = JsonMissing.of()
             private var videoBandwidth: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -2347,6 +2720,8 @@ private constructor(
                 elevationUnc = body.elevationUnc
                 elnot = body.elnot
                 endFrequency = body.endFrequency
+                fftImagCoeffs = body.fftImagCoeffs.map { it.toMutableList() }
+                fftRealCoeffs = body.fftRealCoeffs.map { it.toMutableList() }
                 frequencies = body.frequencies.map { it.toMutableList() }
                 frequency = body.frequency
                 frequencyShift = body.frequencyShift
@@ -2412,6 +2787,7 @@ private constructor(
                 uct = body.uct
                 url = body.url
                 videoBandwidth = body.videoBandwidth
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -2517,7 +2893,7 @@ private constructor(
                 this.antennaName = antennaName
             }
 
-            /** azimuth angle in degrees and J2000 coordinate frame. */
+            /** Azimuth angle in degrees and topocentric coordinate frame. */
             fun azimuth(azimuth: Double) = azimuth(JsonField.of(azimuth))
 
             /**
@@ -2574,7 +2950,7 @@ private constructor(
              */
             fun azimuthUnc(azimuthUnc: JsonField<Double>) = apply { this.azimuthUnc = azimuthUnc }
 
-            /** Measured bandwidth in Hz. */
+            /** Measured bandwidth in hertz. */
             fun bandwidth(bandwidth: Double) = bandwidth(JsonField.of(bandwidth))
 
             /**
@@ -2773,8 +3149,8 @@ private constructor(
             }
 
             /**
-             * Collection mode (e.g. SURVEY, SPOT_SEARCH, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH,
-             * MANUAL, etc).
+             * Collection mode (e.g. CONTINUOUS, MANUAL, NEIGHBORHOOD_WATCH, DIRECTED_SEARCH,
+             * SPOT_SEARCH, SURVEY, etc).
              */
             fun collectionMode(collectionMode: String) =
                 collectionMode(JsonField.of(collectionMode))
@@ -2947,7 +3323,7 @@ private constructor(
             }
 
             /**
-             * Array of detection statuses (e.g. DETECTED, CARRIER_DETECTED, NOT_DETECTED) for each
+             * Array of detection statuses (e.g. CARRIER_DETECTED, DETECTED, NOT_DETECTED) for each
              * measured signal.
              */
             fun detectionStatuses(detectionStatuses: List<String>) =
@@ -2976,7 +3352,7 @@ private constructor(
                     }
             }
 
-            /** Measured Equivalent Isotopically Radiated Power in dBW. */
+            /** Measured Equivalent Isotopically Radiated Power in decibel watts. */
             fun eirp(eirp: Double) = eirp(JsonField.of(eirp))
 
             /**
@@ -2988,7 +3364,7 @@ private constructor(
              */
             fun eirp(eirp: JsonField<Double>) = apply { this.eirp = eirp }
 
-            /** elevation in degrees and J2000 coordinate frame. */
+            /** Elevation in degrees and topocentric coordinate frame. */
             fun elevation(elevation: Double) = elevation(JsonField.of(elevation))
 
             /**
@@ -3059,7 +3435,7 @@ private constructor(
              */
             fun elnot(elnot: JsonField<String>) = apply { this.elnot = elnot }
 
-            /** End carrier frequency in Hz. */
+            /** End carrier frequency in hertz. */
             fun endFrequency(endFrequency: Double) = endFrequency(JsonField.of(endFrequency))
 
             /**
@@ -3074,8 +3450,72 @@ private constructor(
             }
 
             /**
-             * Array of individual PSD frequencies of the signal in Hz. This array should correspond
-             * with the same-sized array of powers.
+             * Array of imaginary components of the complex Fast Fourier Transform (FFT)
+             * coefficients from the signal. Used together with the same-sized fftRealCoeffs array
+             * to preserve both amplitude and phase information. This array should correspond with
+             * the same-sized array of frequencies.
+             */
+            fun fftImagCoeffs(fftImagCoeffs: List<Double>) =
+                fftImagCoeffs(JsonField.of(fftImagCoeffs))
+
+            /**
+             * Sets [Builder.fftImagCoeffs] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.fftImagCoeffs] with a well-typed `List<Double>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun fftImagCoeffs(fftImagCoeffs: JsonField<List<Double>>) = apply {
+                this.fftImagCoeffs = fftImagCoeffs.map { it.toMutableList() }
+            }
+
+            /**
+             * Adds a single [Double] to [fftImagCoeffs].
+             *
+             * @throws IllegalStateException if the field was previously set to a non-list.
+             */
+            fun addFftImagCoeff(fftImagCoeff: Double) = apply {
+                fftImagCoeffs =
+                    (fftImagCoeffs ?: JsonField.of(mutableListOf())).also {
+                        checkKnown("fftImagCoeffs", it).add(fftImagCoeff)
+                    }
+            }
+
+            /**
+             * Array of real components of the complex Fast Fourier Transform (FFT) coefficients
+             * from the signal. Used together with the same-sized fftImagCoeffs array to preserve
+             * both amplitude and phase information. This array should correspond with the
+             * same-sized array of frequencies.
+             */
+            fun fftRealCoeffs(fftRealCoeffs: List<Double>) =
+                fftRealCoeffs(JsonField.of(fftRealCoeffs))
+
+            /**
+             * Sets [Builder.fftRealCoeffs] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.fftRealCoeffs] with a well-typed `List<Double>`
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun fftRealCoeffs(fftRealCoeffs: JsonField<List<Double>>) = apply {
+                this.fftRealCoeffs = fftRealCoeffs.map { it.toMutableList() }
+            }
+
+            /**
+             * Adds a single [Double] to [fftRealCoeffs].
+             *
+             * @throws IllegalStateException if the field was previously set to a non-list.
+             */
+            fun addFftRealCoeff(fftRealCoeff: Double) = apply {
+                fftRealCoeffs =
+                    (fftRealCoeffs ?: JsonField.of(mutableListOf())).also {
+                        checkKnown("fftRealCoeffs", it).add(fftRealCoeff)
+                    }
+            }
+
+            /**
+             * Array of individual PSD frequencies of the signal in hertz. This array should
+             * correspond with the same-sized array of powers.
              */
             fun frequencies(frequencies: List<Double>) = frequencies(JsonField.of(frequencies))
 
@@ -3102,7 +3542,7 @@ private constructor(
                     }
             }
 
-            /** Center carrier frequency in Hz. */
+            /** Center carrier frequency in hertz. */
             fun frequency(frequency: Double) = frequency(JsonField.of(frequency))
 
             /**
@@ -3183,7 +3623,7 @@ private constructor(
                 this.innerCodingRate = innerCodingRate
             }
 
-            /** Maximum measured PSD value of the trace in dBW. */
+            /** Maximum measured PSD value of the trace in decibel watts. */
             fun maxPsd(maxPsd: Double) = maxPsd(JsonField.of(maxPsd))
 
             /**
@@ -3195,7 +3635,7 @@ private constructor(
              */
             fun maxPsd(maxPsd: JsonField<Double>) = apply { this.maxPsd = maxPsd }
 
-            /** Minimum measured PSD value of the trace in dBW. */
+            /** Minimum measured PSD value of the trace in decibel watts. */
             fun minPsd(minPsd: Double) = minPsd(JsonField.of(minPsd))
 
             /**
@@ -3219,7 +3659,7 @@ private constructor(
              */
             fun modulation(modulation: JsonField<String>) = apply { this.modulation = modulation }
 
-            /** Noise power density, in dBW-Hz. */
+            /** Noise power density, in decibel watts per hertz. */
             fun noisePwrDensity(noisePwrDensity: Double) =
                 noisePwrDensity(JsonField.of(noisePwrDensity))
 
@@ -3234,7 +3674,7 @@ private constructor(
                 this.noisePwrDensity = noisePwrDensity
             }
 
-            /** Expected bandwidth in Hz. */
+            /** Expected bandwidth in hertz. */
             fun nominalBandwidth(nominalBandwidth: Double) =
                 nominalBandwidth(JsonField.of(nominalBandwidth))
 
@@ -3249,7 +3689,7 @@ private constructor(
                 this.nominalBandwidth = nominalBandwidth
             }
 
-            /** Expected Equivalent Isotopically Radiated Power in dBW. */
+            /** Expected Equivalent Isotopically Radiated Power in decibel watts. */
             fun nominalEirp(nominalEirp: Double) = nominalEirp(JsonField.of(nominalEirp))
 
             /**
@@ -3263,7 +3703,7 @@ private constructor(
                 this.nominalEirp = nominalEirp
             }
 
-            /** Nominal or expected center carrier frequency in Hz. */
+            /** Nominal or expected center carrier frequency in hertz. */
             fun nominalFrequency(nominalFrequency: Double) =
                 nominalFrequency(JsonField.of(nominalFrequency))
 
@@ -3278,7 +3718,7 @@ private constructor(
                 this.nominalFrequency = nominalFrequency
             }
 
-            /** Expected carrier power over noise (dBW/Hz). */
+            /** Expected carrier power over noise (decibel watts per hertz). */
             fun nominalPowerOverNoise(nominalPowerOverNoise: Double) =
                 nominalPowerOverNoise(JsonField.of(nominalPowerOverNoise))
 
@@ -3293,7 +3733,7 @@ private constructor(
                 this.nominalPowerOverNoise = nominalPowerOverNoise
             }
 
-            /** Nominal or expected signal to noise ratio, in dB. */
+            /** Nominal or expected signal to noise ratio, in decibels. */
             fun nominalSnr(nominalSnr: Double) = nominalSnr(JsonField.of(nominalSnr))
 
             /**
@@ -3436,6 +3876,7 @@ private constructor(
             /**
              * A pulse group repetition interval (PGRI) is a pulse train in which there are groups
              * of closely spaced pulses separated by much longer times between these pulse groups.
+             * The PGRI is measured in seconds.
              */
             fun pgri(pgri: Double) = pgri(JsonField.of(pgri))
 
@@ -3505,7 +3946,7 @@ private constructor(
                 this.polarityType = polarityType
             }
 
-            /** Measured carrier power over noise (dBW/Hz). */
+            /** Measured carrier power over noise (decibel watts per hertz). */
             fun powerOverNoise(powerOverNoise: Double) =
                 powerOverNoise(JsonField.of(powerOverNoise))
 
@@ -3521,8 +3962,8 @@ private constructor(
             }
 
             /**
-             * Array of individual measured PSD powers of the signal in dBW. This array should
-             * correspond with the same-sized array of frequencies.
+             * Array of individual measured PSD powers of the signal in decibel watts. This array
+             * should correspond with the same-sized array of frequencies.
              */
             fun powers(powers: List<Double>) = powers(JsonField.of(powers))
 
@@ -3549,7 +3990,7 @@ private constructor(
                     }
             }
 
-            /** Target range in km. */
+            /** Target range in kilometers. */
             fun range(range: Double) = range(JsonField.of(range))
 
             /**
@@ -3579,7 +4020,7 @@ private constructor(
                 this.rangeMeasured = rangeMeasured
             }
 
-            /** Rate of change of the range in km/sec. */
+            /** Rate of change of the range in kilometers per second. */
             fun rangeRate(rangeRate: Double) = rangeRate(JsonField.of(rangeRate))
 
             /**
@@ -3652,7 +4093,7 @@ private constructor(
              */
             fun rawFileUri(rawFileUri: JsonField<String>) = apply { this.rawFileUri = rawFileUri }
 
-            /** Reference signal level, in dBW. */
+            /** Reference signal level, in decibel watts. */
             fun referenceLevel(referenceLevel: Double) =
                 referenceLevel(JsonField.of(referenceLevel))
 
@@ -3667,7 +4108,7 @@ private constructor(
                 this.referenceLevel = referenceLevel
             }
 
-            /** Measured power of the center carrier frequency in dBW. */
+            /** Measured power of the center carrier frequency in decibel watts. */
             fun relativeCarrierPower(relativeCarrierPower: Double) =
                 relativeCarrierPower(JsonField.of(relativeCarrierPower))
 
@@ -3684,7 +4125,7 @@ private constructor(
 
             /**
              * The measure of the signal created from the sum of all the noise sources and unwanted
-             * signals within the measurement system, in dBW.
+             * signals within the measurement system, in decibel watts.
              */
             fun relativeNoiseFloor(relativeNoiseFloor: Double) =
                 relativeNoiseFloor(JsonField.of(relativeNoiseFloor))
@@ -3700,7 +4141,7 @@ private constructor(
                 this.relativeNoiseFloor = relativeNoiseFloor
             }
 
-            /** Resolution bandwidth in Hz. */
+            /** Resolution bandwidth in hertz. */
             fun resolutionBandwidth(resolutionBandwidth: Double) =
                 resolutionBandwidth(JsonField.of(resolutionBandwidth))
 
@@ -3799,7 +4240,7 @@ private constructor(
                     }
             }
 
-            /** Signal to noise ratio, in dB. */
+            /** Signal to noise ratio, in decibels. */
             fun snr(snr: Double) = snr(JsonField.of(snr))
 
             /**
@@ -3811,7 +4252,7 @@ private constructor(
              */
             fun snr(snr: JsonField<Double>) = apply { this.snr = snr }
 
-            /** Array of signal to noise ratios of the signals, in dB. */
+            /** Array of signal to noise ratios of the signals, in decibels. */
             fun snrs(snrs: List<Double>) = snrs(JsonField.of(snrs))
 
             /**
@@ -3851,7 +4292,9 @@ private constructor(
              */
             fun sourceDl(sourceDl: JsonField<String>) = apply { this.sourceDl = sourceDl }
 
-            /** Measured spectrum analyzer power of the center carrier frequency in dBW. */
+            /**
+             * Measured spectrum analyzer power of the center carrier frequency in decibel watts.
+             */
             fun spectrumAnalyzerPower(spectrumAnalyzerPower: Double) =
                 spectrumAnalyzerPower(JsonField.of(spectrumAnalyzerPower))
 
@@ -3866,7 +4309,7 @@ private constructor(
                 this.spectrumAnalyzerPower = spectrumAnalyzerPower
             }
 
-            /** Start carrier frequency in Hz. */
+            /** Start carrier frequency in hertz. */
             fun startFrequency(startFrequency: Double) =
                 startFrequency(JsonField.of(startFrequency))
 
@@ -3893,7 +4336,7 @@ private constructor(
              */
             fun switchPoint(switchPoint: JsonField<Int>) = apply { this.switchPoint = switchPoint }
 
-            /** Symbol to noise ratio, in dB. */
+            /** Symbol to noise ratio, in decibels. */
             fun symbolToNoiseRatio(symbolToNoiseRatio: Double) =
                 symbolToNoiseRatio(JsonField.of(symbolToNoiseRatio))
 
@@ -3991,7 +4434,7 @@ private constructor(
              */
             fun trackId(trackId: JsonField<String>) = apply { this.trackId = trackId }
 
-            /** Target track or apparent range in km. */
+            /** Target track or apparent range in kilometers. */
             fun trackRange(trackRange: Double) = trackRange(JsonField.of(trackRange))
 
             /**
@@ -4035,7 +4478,7 @@ private constructor(
                 this.transmitFilterRollOff = transmitFilterRollOff
             }
 
-            /** Transmit pulse shaping filter typ (e.g. RRC). */
+            /** Transmit pulse shaping filter type (e.g. RRC). */
             fun transmitFilterType(transmitFilterType: String) =
                 transmitFilterType(JsonField.of(transmitFilterType))
 
@@ -4097,7 +4540,7 @@ private constructor(
              */
             fun url(url: JsonField<String>) = apply { this.url = url }
 
-            /** Video bandwidth in Hz. */
+            /** Video bandwidth in hertz. */
             fun videoBandwidth(videoBandwidth: Double) =
                 videoBandwidth(JsonField.of(videoBandwidth))
 
@@ -4110,6 +4553,25 @@ private constructor(
              */
             fun videoBandwidth(videoBandwidth: JsonField<Double>) = apply {
                 this.videoBandwidth = videoBandwidth
+            }
+
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
             }
 
             /**
@@ -4168,6 +4630,8 @@ private constructor(
                     elevationUnc,
                     elnot,
                     endFrequency,
+                    (fftImagCoeffs ?: JsonMissing.of()).map { it.toImmutable() },
+                    (fftRealCoeffs ?: JsonMissing.of()).map { it.toImmutable() },
                     (frequencies ?: JsonMissing.of()).map { it.toImmutable() },
                     frequency,
                     frequencyShift,
@@ -4233,6 +4697,7 @@ private constructor(
                     uct,
                     url,
                     videoBandwidth,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -4281,6 +4746,8 @@ private constructor(
             elevationUnc()
             elnot()
             endFrequency()
+            fftImagCoeffs()
+            fftRealCoeffs()
             frequencies()
             frequency()
             frequencyShift()
@@ -4403,6 +4870,8 @@ private constructor(
                 (if (elevationUnc.asKnown().isPresent) 1 else 0) +
                 (if (elnot.asKnown().isPresent) 1 else 0) +
                 (if (endFrequency.asKnown().isPresent) 1 else 0) +
+                (fftImagCoeffs.asKnown().getOrNull()?.size ?: 0) +
+                (fftRealCoeffs.asKnown().getOrNull()?.size ?: 0) +
                 (frequencies.asKnown().getOrNull()?.size ?: 0) +
                 (if (frequency.asKnown().isPresent) 1 else 0) +
                 (if (frequencyShift.asKnown().isPresent) 1 else 0) +
@@ -4819,6 +5288,8 @@ private constructor(
                 elevationUnc == other.elevationUnc &&
                 elnot == other.elnot &&
                 endFrequency == other.endFrequency &&
+                fftImagCoeffs == other.fftImagCoeffs &&
+                fftRealCoeffs == other.fftRealCoeffs &&
                 frequencies == other.frequencies &&
                 frequency == other.frequency &&
                 frequencyShift == other.frequencyShift &&
@@ -4883,7 +5354,8 @@ private constructor(
                 transponder == other.transponder &&
                 uct == other.uct &&
                 url == other.url &&
-                videoBandwidth == other.videoBandwidth
+                videoBandwidth == other.videoBandwidth &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -4926,6 +5398,8 @@ private constructor(
                 elevationUnc,
                 elnot,
                 endFrequency,
+                fftImagCoeffs,
+                fftRealCoeffs,
                 frequencies,
                 frequency,
                 frequencyShift,
@@ -4991,13 +5465,14 @@ private constructor(
                 uct,
                 url,
                 videoBandwidth,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, type=$type, id=$id, antennaName=$antennaName, azimuth=$azimuth, azimuthMeasured=$azimuthMeasured, azimuthRate=$azimuthRate, azimuthUnc=$azimuthUnc, bandwidth=$bandwidth, baudRate=$baudRate, baudRates=$baudRates, bitErrorRate=$bitErrorRate, carrierStandard=$carrierStandard, channel=$channel, chipRates=$chipRates, codeFills=$codeFills, codeLengths=$codeLengths, codeTaps=$codeTaps, collectionMode=$collectionMode, confidence=$confidence, confidences=$confidences, constellationXPoints=$constellationXPoints, constellationYPoints=$constellationYPoints, createdAt=$createdAt, createdBy=$createdBy, descriptor=$descriptor, detectionStatus=$detectionStatus, detectionStatuses=$detectionStatuses, eirp=$eirp, elevation=$elevation, elevationMeasured=$elevationMeasured, elevationRate=$elevationRate, elevationUnc=$elevationUnc, elnot=$elnot, endFrequency=$endFrequency, frequencies=$frequencies, frequency=$frequency, frequencyShift=$frequencyShift, idOnOrbit=$idOnOrbit, idSensor=$idSensor, incoming=$incoming, innerCodingRate=$innerCodingRate, maxPsd=$maxPsd, minPsd=$minPsd, modulation=$modulation, noisePwrDensity=$noisePwrDensity, nominalBandwidth=$nominalBandwidth, nominalEirp=$nominalEirp, nominalFrequency=$nominalFrequency, nominalPowerOverNoise=$nominalPowerOverNoise, nominalSnr=$nominalSnr, origCountry=$origCountry, origin=$origin, origMarking=$origMarking, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, outerCodingRate=$outerCodingRate, peak=$peak, pgri=$pgri, pnOrders=$pnOrders, polarity=$polarity, polarityType=$polarityType, powerOverNoise=$powerOverNoise, powers=$powers, range=$range, rangeMeasured=$rangeMeasured, rangeRate=$rangeRate, rangeRateMeasured=$rangeRateMeasured, rangeRateUnc=$rangeRateUnc, rangeUnc=$rangeUnc, rawFileUri=$rawFileUri, referenceLevel=$referenceLevel, relativeCarrierPower=$relativeCarrierPower, relativeNoiseFloor=$relativeNoiseFloor, resolutionBandwidth=$resolutionBandwidth, satNo=$satNo, senalt=$senalt, senlat=$senlat, senlon=$senlon, signalIds=$signalIds, snr=$snr, snrs=$snrs, sourceDl=$sourceDl, spectrumAnalyzerPower=$spectrumAnalyzerPower, startFrequency=$startFrequency, switchPoint=$switchPoint, symbolToNoiseRatio=$symbolToNoiseRatio, tags=$tags, taskId=$taskId, telemetryIds=$telemetryIds, trackId=$trackId, trackRange=$trackRange, transactionId=$transactionId, transmitFilterRollOff=$transmitFilterRollOff, transmitFilterType=$transmitFilterType, transponder=$transponder, uct=$uct, url=$url, videoBandwidth=$videoBandwidth}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, type=$type, id=$id, antennaName=$antennaName, azimuth=$azimuth, azimuthMeasured=$azimuthMeasured, azimuthRate=$azimuthRate, azimuthUnc=$azimuthUnc, bandwidth=$bandwidth, baudRate=$baudRate, baudRates=$baudRates, bitErrorRate=$bitErrorRate, carrierStandard=$carrierStandard, channel=$channel, chipRates=$chipRates, codeFills=$codeFills, codeLengths=$codeLengths, codeTaps=$codeTaps, collectionMode=$collectionMode, confidence=$confidence, confidences=$confidences, constellationXPoints=$constellationXPoints, constellationYPoints=$constellationYPoints, createdAt=$createdAt, createdBy=$createdBy, descriptor=$descriptor, detectionStatus=$detectionStatus, detectionStatuses=$detectionStatuses, eirp=$eirp, elevation=$elevation, elevationMeasured=$elevationMeasured, elevationRate=$elevationRate, elevationUnc=$elevationUnc, elnot=$elnot, endFrequency=$endFrequency, fftImagCoeffs=$fftImagCoeffs, fftRealCoeffs=$fftRealCoeffs, frequencies=$frequencies, frequency=$frequency, frequencyShift=$frequencyShift, idOnOrbit=$idOnOrbit, idSensor=$idSensor, incoming=$incoming, innerCodingRate=$innerCodingRate, maxPsd=$maxPsd, minPsd=$minPsd, modulation=$modulation, noisePwrDensity=$noisePwrDensity, nominalBandwidth=$nominalBandwidth, nominalEirp=$nominalEirp, nominalFrequency=$nominalFrequency, nominalPowerOverNoise=$nominalPowerOverNoise, nominalSnr=$nominalSnr, origCountry=$origCountry, origin=$origin, origMarking=$origMarking, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, outerCodingRate=$outerCodingRate, peak=$peak, pgri=$pgri, pnOrders=$pnOrders, polarity=$polarity, polarityType=$polarityType, powerOverNoise=$powerOverNoise, powers=$powers, range=$range, rangeMeasured=$rangeMeasured, rangeRate=$rangeRate, rangeRateMeasured=$rangeRateMeasured, rangeRateUnc=$rangeRateUnc, rangeUnc=$rangeUnc, rawFileUri=$rawFileUri, referenceLevel=$referenceLevel, relativeCarrierPower=$relativeCarrierPower, relativeNoiseFloor=$relativeNoiseFloor, resolutionBandwidth=$resolutionBandwidth, satNo=$satNo, senalt=$senalt, senlat=$senlat, senlon=$senlon, signalIds=$signalIds, snr=$snr, snrs=$snrs, sourceDl=$sourceDl, spectrumAnalyzerPower=$spectrumAnalyzerPower, startFrequency=$startFrequency, switchPoint=$switchPoint, symbolToNoiseRatio=$symbolToNoiseRatio, tags=$tags, taskId=$taskId, telemetryIds=$telemetryIds, trackId=$trackId, trackRange=$trackRange, transactionId=$transactionId, transmitFilterRollOff=$transmitFilterRollOff, transmitFilterType=$transmitFilterType, transponder=$transponder, uct=$uct, url=$url, videoBandwidth=$videoBandwidth, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.hazard
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -212,59 +216,172 @@ private constructor(
      * material properties, the extent of contamination, and identification of affected regions.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("alarms") @ExcludeMissing private val alarms: JsonField<List<String>>,
-        @JsonProperty("alarmValues")
-        @ExcludeMissing
+        private val alarms: JsonField<List<String>>,
         private val alarmValues: JsonField<List<Double>>,
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("detectTime")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
         private val detectTime: JsonField<OffsetDateTime>,
-        @JsonProperty("detectType") @ExcludeMissing private val detectType: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("a") @ExcludeMissing private val a: JsonField<Int>,
-        @JsonProperty("activity") @ExcludeMissing private val activity: JsonField<Double>,
-        @JsonProperty("bottleId") @ExcludeMissing private val bottleId: JsonField<String>,
-        @JsonProperty("casRN") @ExcludeMissing private val casRn: JsonField<String>,
-        @JsonProperty("channel") @ExcludeMissing private val channel: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("ctrnTime") @ExcludeMissing private val ctrnTime: JsonField<Double>,
-        @JsonProperty("density") @ExcludeMissing private val density: JsonField<Double>,
-        @JsonProperty("dep") @ExcludeMissing private val dep: JsonField<Double>,
-        @JsonProperty("depCtrn") @ExcludeMissing private val depCtrn: JsonField<Double>,
-        @JsonProperty("dose") @ExcludeMissing private val dose: JsonField<Double>,
-        @JsonProperty("doseRate") @ExcludeMissing private val doseRate: JsonField<Double>,
-        @JsonProperty("duration") @ExcludeMissing private val duration: JsonField<Int>,
-        @JsonProperty("gBar") @ExcludeMissing private val gBar: JsonField<Double>,
-        @JsonProperty("harmful") @ExcludeMissing private val harmful: JsonField<Boolean>,
-        @JsonProperty("hBar") @ExcludeMissing private val hBar: JsonField<Double>,
-        @JsonProperty("idPOI") @ExcludeMissing private val idPoi: JsonField<String>,
-        @JsonProperty("idTrack") @ExcludeMissing private val idTrack: JsonField<String>,
-        @JsonProperty("massFrac") @ExcludeMissing private val massFrac: JsonField<Double>,
-        @JsonProperty("matCat") @ExcludeMissing private val matCat: JsonField<Int>,
-        @JsonProperty("matClass") @ExcludeMissing private val matClass: JsonField<String>,
-        @JsonProperty("matName") @ExcludeMissing private val matName: JsonField<String>,
-        @JsonProperty("matType") @ExcludeMissing private val matType: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("ppm") @ExcludeMissing private val ppm: JsonField<Int>,
-        @JsonProperty("radCtrn") @ExcludeMissing private val radCtrn: JsonField<Double>,
-        @JsonProperty("readings") @ExcludeMissing private val readings: JsonField<List<String>>,
-        @JsonProperty("readingUnits")
-        @ExcludeMissing
+        private val detectType: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val a: JsonField<Int>,
+        private val activity: JsonField<Double>,
+        private val bottleId: JsonField<String>,
+        private val casRn: JsonField<String>,
+        private val channel: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val ctrnTime: JsonField<Double>,
+        private val density: JsonField<Double>,
+        private val dep: JsonField<Double>,
+        private val depCtrn: JsonField<Double>,
+        private val dose: JsonField<Double>,
+        private val doseRate: JsonField<Double>,
+        private val duration: JsonField<Int>,
+        private val gBar: JsonField<Double>,
+        private val harmful: JsonField<Boolean>,
+        private val hBar: JsonField<Double>,
+        private val idPoi: JsonField<String>,
+        private val idTrack: JsonField<String>,
+        private val massFrac: JsonField<Double>,
+        private val matCat: JsonField<Int>,
+        private val matClass: JsonField<String>,
+        private val matName: JsonField<String>,
+        private val matType: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val ppm: JsonField<Int>,
+        private val radCtrn: JsonField<Double>,
+        private val readings: JsonField<List<String>>,
         private val readingUnits: JsonField<List<String>>,
-        @JsonProperty("readingValues")
-        @ExcludeMissing
         private val readingValues: JsonField<List<Double>>,
-        @JsonProperty("z") @ExcludeMissing private val z: JsonField<Int>,
+        private val z: JsonField<Int>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("alarms")
+            @ExcludeMissing
+            alarms: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("alarmValues")
+            @ExcludeMissing
+            alarmValues: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("detectTime")
+            @ExcludeMissing
+            detectTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("detectType")
+            @ExcludeMissing
+            detectType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("a") @ExcludeMissing a: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("activity")
+            @ExcludeMissing
+            activity: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("bottleId")
+            @ExcludeMissing
+            bottleId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("casRN") @ExcludeMissing casRn: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("channel") @ExcludeMissing channel: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ctrnTime")
+            @ExcludeMissing
+            ctrnTime: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("density") @ExcludeMissing density: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("dep") @ExcludeMissing dep: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("depCtrn") @ExcludeMissing depCtrn: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("dose") @ExcludeMissing dose: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("doseRate")
+            @ExcludeMissing
+            doseRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("duration") @ExcludeMissing duration: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("gBar") @ExcludeMissing gBar: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("harmful") @ExcludeMissing harmful: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("hBar") @ExcludeMissing hBar: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idPOI") @ExcludeMissing idPoi: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idTrack") @ExcludeMissing idTrack: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("massFrac")
+            @ExcludeMissing
+            massFrac: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("matCat") @ExcludeMissing matCat: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("matClass")
+            @ExcludeMissing
+            matClass: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("matName") @ExcludeMissing matName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("matType") @ExcludeMissing matType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ppm") @ExcludeMissing ppm: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("radCtrn") @ExcludeMissing radCtrn: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("readings")
+            @ExcludeMissing
+            readings: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("readingUnits")
+            @ExcludeMissing
+            readingUnits: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("readingValues")
+            @ExcludeMissing
+            readingValues: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("z") @ExcludeMissing z: JsonField<Int> = JsonMissing.of(),
+        ) : this(
+            alarms,
+            alarmValues,
+            classificationMarking,
+            dataMode,
+            detectTime,
+            detectType,
+            source,
+            id,
+            a,
+            activity,
+            bottleId,
+            casRn,
+            channel,
+            createdAt,
+            createdBy,
+            ctrnTime,
+            density,
+            dep,
+            depCtrn,
+            dose,
+            doseRate,
+            duration,
+            gBar,
+            harmful,
+            hBar,
+            idPoi,
+            idTrack,
+            massFrac,
+            matCat,
+            matClass,
+            matName,
+            matType,
+            origin,
+            origNetwork,
+            ppm,
+            radCtrn,
+            readings,
+            readingUnits,
+            readingValues,
+            z,
+            mutableMapOf(),
+        )
 
         /**
          * Array of the specific alarms associated with this detection. The alarms and alarmValues
@@ -962,6 +1079,16 @@ private constructor(
          */
         @JsonProperty("z") @ExcludeMissing fun _z(): JsonField<Int> = z
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1026,6 +1153,7 @@ private constructor(
             private var readingUnits: JsonField<MutableList<String>>? = null
             private var readingValues: JsonField<MutableList<Double>>? = null
             private var z: JsonField<Int> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1069,6 +1197,7 @@ private constructor(
                 readingUnits = body.readingUnits.map { it.toMutableList() }
                 readingValues = body.readingValues.map { it.toMutableList() }
                 z = body.z
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /**
@@ -1749,6 +1878,25 @@ private constructor(
              */
             fun z(z: JsonField<Int>) = apply { this.z = z }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1809,6 +1957,7 @@ private constructor(
                     (readingUnits ?: JsonMissing.of()).map { it.toImmutable() },
                     (readingValues ?: JsonMissing.of()).map { it.toImmutable() },
                     z,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -2120,7 +2269,8 @@ private constructor(
                 readings == other.readings &&
                 readingUnits == other.readingUnits &&
                 readingValues == other.readingValues &&
-                z == other.z
+                z == other.z &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -2165,13 +2315,14 @@ private constructor(
                 readingUnits,
                 readingValues,
                 z,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{alarms=$alarms, alarmValues=$alarmValues, classificationMarking=$classificationMarking, dataMode=$dataMode, detectTime=$detectTime, detectType=$detectType, source=$source, id=$id, a=$a, activity=$activity, bottleId=$bottleId, casRn=$casRn, channel=$channel, createdAt=$createdAt, createdBy=$createdBy, ctrnTime=$ctrnTime, density=$density, dep=$dep, depCtrn=$depCtrn, dose=$dose, doseRate=$doseRate, duration=$duration, gBar=$gBar, harmful=$harmful, hBar=$hBar, idPoi=$idPoi, idTrack=$idTrack, massFrac=$massFrac, matCat=$matCat, matClass=$matClass, matName=$matName, matType=$matType, origin=$origin, origNetwork=$origNetwork, ppm=$ppm, radCtrn=$radCtrn, readings=$readings, readingUnits=$readingUnits, readingValues=$readingValues, z=$z}"
+            "Body{alarms=$alarms, alarmValues=$alarmValues, classificationMarking=$classificationMarking, dataMode=$dataMode, detectTime=$detectTime, detectType=$detectType, source=$source, id=$id, a=$a, activity=$activity, bottleId=$bottleId, casRn=$casRn, channel=$channel, createdAt=$createdAt, createdBy=$createdBy, ctrnTime=$ctrnTime, density=$density, dep=$dep, depCtrn=$depCtrn, dose=$dose, doseRate=$doseRate, duration=$duration, gBar=$gBar, harmful=$harmful, hBar=$hBar, idPoi=$idPoi, idTrack=$idTrack, massFrac=$massFrac, matCat=$matCat, matClass=$matClass, matName=$matName, matType=$matType, origin=$origin, origNetwork=$origNetwork, ppm=$ppm, radCtrn=$radCtrn, readings=$readings, readingUnits=$readingUnits, readingValues=$readingValues, z=$z, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

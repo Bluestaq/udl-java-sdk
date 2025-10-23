@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.observations.obscorrelation
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -211,48 +215,141 @@ private constructor(
      * mis-tagged electro-optical (EO), radar, RF, and DOA track/observations.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("corrType") @ExcludeMissing private val corrType: JsonField<CorrType>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("msgTs") @ExcludeMissing private val msgTs: JsonField<OffsetDateTime>,
-        @JsonProperty("obId") @ExcludeMissing private val obId: JsonField<String>,
-        @JsonProperty("obType") @ExcludeMissing private val obType: JsonField<ObType>,
-        @JsonProperty("referenceOrbitId")
-        @ExcludeMissing
+        private val corrType: JsonField<CorrType>,
+        private val dataMode: JsonField<DataMode>,
+        private val msgTs: JsonField<OffsetDateTime>,
+        private val obId: JsonField<String>,
+        private val obType: JsonField<ObType>,
         private val referenceOrbitId: JsonField<String>,
-        @JsonProperty("referenceOrbitType")
-        @ExcludeMissing
         private val referenceOrbitType: JsonField<ReferenceOrbitType>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("algorithmCorrType")
-        @ExcludeMissing
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
         private val algorithmCorrType: JsonField<String>,
-        @JsonProperty("altCatalog") @ExcludeMissing private val altCatalog: JsonField<String>,
-        @JsonProperty("altNamespace") @ExcludeMissing private val altNamespace: JsonField<String>,
-        @JsonProperty("altObjectId") @ExcludeMissing private val altObjectId: JsonField<String>,
-        @JsonProperty("altUct") @ExcludeMissing private val altUct: JsonField<Boolean>,
-        @JsonProperty("astat") @ExcludeMissing private val astat: JsonField<Long>,
-        @JsonProperty("corrQuality") @ExcludeMissing private val corrQuality: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("idParentCorrelation")
-        @ExcludeMissing
+        private val altCatalog: JsonField<String>,
+        private val altNamespace: JsonField<String>,
+        private val altObjectId: JsonField<String>,
+        private val altUct: JsonField<Boolean>,
+        private val astat: JsonField<Long>,
+        private val corrQuality: JsonField<Double>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val idOnOrbit: JsonField<String>,
         private val idParentCorrelation: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("trackId") @ExcludeMissing private val trackId: JsonField<String>,
-        @JsonProperty("transactionId") @ExcludeMissing private val transactionId: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val satNo: JsonField<Int>,
+        private val sourceDl: JsonField<String>,
+        private val tags: JsonField<List<String>>,
+        private val trackId: JsonField<String>,
+        private val transactionId: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("corrType")
+            @ExcludeMissing
+            corrType: JsonField<CorrType> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("msgTs")
+            @ExcludeMissing
+            msgTs: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("obId") @ExcludeMissing obId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("obType") @ExcludeMissing obType: JsonField<ObType> = JsonMissing.of(),
+            @JsonProperty("referenceOrbitId")
+            @ExcludeMissing
+            referenceOrbitId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("referenceOrbitType")
+            @ExcludeMissing
+            referenceOrbitType: JsonField<ReferenceOrbitType> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("algorithmCorrType")
+            @ExcludeMissing
+            algorithmCorrType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("altCatalog")
+            @ExcludeMissing
+            altCatalog: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("altNamespace")
+            @ExcludeMissing
+            altNamespace: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("altObjectId")
+            @ExcludeMissing
+            altObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("altUct") @ExcludeMissing altUct: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("astat") @ExcludeMissing astat: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("corrQuality")
+            @ExcludeMissing
+            corrQuality: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idParentCorrelation")
+            @ExcludeMissing
+            idParentCorrelation: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("trackId") @ExcludeMissing trackId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("transactionId")
+            @ExcludeMissing
+            transactionId: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            corrType,
+            dataMode,
+            msgTs,
+            obId,
+            obType,
+            referenceOrbitId,
+            referenceOrbitType,
+            source,
+            id,
+            algorithmCorrType,
+            altCatalog,
+            altNamespace,
+            altObjectId,
+            altUct,
+            astat,
+            corrQuality,
+            createdAt,
+            createdBy,
+            idOnOrbit,
+            idParentCorrelation,
+            origin,
+            origNetwork,
+            origObjectId,
+            satNo,
+            sourceDl,
+            tags,
+            trackId,
+            transactionId,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -785,6 +882,16 @@ private constructor(
         @ExcludeMissing
         fun _transactionId(): JsonField<String> = transactionId
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -840,6 +947,7 @@ private constructor(
             private var tags: JsonField<MutableList<String>>? = null
             private var trackId: JsonField<String> = JsonMissing.of()
             private var transactionId: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -872,6 +980,7 @@ private constructor(
                 tags = body.tags.map { it.toMutableList() }
                 trackId = body.trackId
                 transactionId = body.transactionId
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1359,6 +1468,25 @@ private constructor(
                 this.transactionId = transactionId
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1410,6 +1538,7 @@ private constructor(
                     (tags ?: JsonMissing.of()).map { it.toImmutable() },
                     trackId,
                     transactionId,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -2140,7 +2269,8 @@ private constructor(
                 sourceDl == other.sourceDl &&
                 tags == other.tags &&
                 trackId == other.trackId &&
-                transactionId == other.transactionId
+                transactionId == other.transactionId &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -2174,13 +2304,14 @@ private constructor(
                 tags,
                 trackId,
                 transactionId,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, corrType=$corrType, dataMode=$dataMode, msgTs=$msgTs, obId=$obId, obType=$obType, referenceOrbitId=$referenceOrbitId, referenceOrbitType=$referenceOrbitType, source=$source, id=$id, algorithmCorrType=$algorithmCorrType, altCatalog=$altCatalog, altNamespace=$altNamespace, altObjectId=$altObjectId, altUct=$altUct, astat=$astat, corrQuality=$corrQuality, createdAt=$createdAt, createdBy=$createdBy, idOnOrbit=$idOnOrbit, idParentCorrelation=$idParentCorrelation, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, satNo=$satNo, sourceDl=$sourceDl, tags=$tags, trackId=$trackId, transactionId=$transactionId}"
+            "Body{classificationMarking=$classificationMarking, corrType=$corrType, dataMode=$dataMode, msgTs=$msgTs, obId=$obId, obType=$obType, referenceOrbitId=$referenceOrbitId, referenceOrbitType=$referenceOrbitType, source=$source, id=$id, algorithmCorrType=$algorithmCorrType, altCatalog=$altCatalog, altNamespace=$altNamespace, altObjectId=$altObjectId, altUct=$altUct, astat=$astat, corrQuality=$corrQuality, createdAt=$createdAt, createdBy=$createdBy, idOnOrbit=$idOnOrbit, idParentCorrelation=$idParentCorrelation, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, satNo=$satNo, sourceDl=$sourceDl, tags=$tags, trackId=$trackId, transactionId=$transactionId, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

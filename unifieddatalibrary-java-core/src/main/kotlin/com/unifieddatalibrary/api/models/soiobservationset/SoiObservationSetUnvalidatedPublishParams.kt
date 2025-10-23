@@ -217,142 +217,340 @@ private constructor(
      * These services provide operations for posting space object idenfification observation sets.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("numObs") @ExcludeMissing private val numObs: JsonField<Int>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("startTime") @ExcludeMissing private val startTime: JsonField<OffsetDateTime>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<Type>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("binningHoriz") @ExcludeMissing private val binningHoriz: JsonField<Int>,
-        @JsonProperty("binningVert") @ExcludeMissing private val binningVert: JsonField<Int>,
-        @JsonProperty("brightnessVarianceChangeDetected")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val numObs: JsonField<Int>,
+        private val source: JsonField<String>,
+        private val startTime: JsonField<OffsetDateTime>,
+        private val type: JsonField<Type>,
+        private val id: JsonField<String>,
+        private val binningHoriz: JsonField<Int>,
+        private val binningVert: JsonField<Int>,
         private val brightnessVarianceChangeDetected: JsonField<Boolean>,
-        @JsonProperty("calibrations")
-        @ExcludeMissing
         private val calibrations: JsonField<List<Calibration>>,
-        @JsonProperty("calibrationType")
-        @ExcludeMissing
         private val calibrationType: JsonField<String>,
-        @JsonProperty("changeConf") @ExcludeMissing private val changeConf: JsonField<String>,
-        @JsonProperty("changeDetected")
-        @ExcludeMissing
+        private val changeConf: JsonField<String>,
         private val changeDetected: JsonField<Boolean>,
-        @JsonProperty("collectionDensityConf")
-        @ExcludeMissing
         private val collectionDensityConf: JsonField<String>,
-        @JsonProperty("collectionId") @ExcludeMissing private val collectionId: JsonField<String>,
-        @JsonProperty("collectionMode")
-        @ExcludeMissing
+        private val collectionId: JsonField<String>,
         private val collectionMode: JsonField<String>,
-        @JsonProperty("corrQuality") @ExcludeMissing private val corrQuality: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("endTime") @ExcludeMissing private val endTime: JsonField<OffsetDateTime>,
-        @JsonProperty("gain") @ExcludeMissing private val gain: JsonField<Double>,
-        @JsonProperty("idElset") @ExcludeMissing private val idElset: JsonField<String>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("losDeclinationEnd")
-        @ExcludeMissing
+        private val corrQuality: JsonField<Double>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val endTime: JsonField<OffsetDateTime>,
+        private val gain: JsonField<Double>,
+        private val idElset: JsonField<String>,
+        private val idOnOrbit: JsonField<String>,
+        private val idSensor: JsonField<String>,
         private val losDeclinationEnd: JsonField<Double>,
-        @JsonProperty("losDeclinationStart")
-        @ExcludeMissing
         private val losDeclinationStart: JsonField<Double>,
-        @JsonProperty("msgCreateDate")
-        @ExcludeMissing
         private val msgCreateDate: JsonField<OffsetDateTime>,
-        @JsonProperty("numSpectralFilters")
-        @ExcludeMissing
         private val numSpectralFilters: JsonField<Int>,
-        @JsonProperty("opticalSOIObservationList")
-        @ExcludeMissing
         private val opticalSoiObservationList: JsonField<List<OpticalSoiObservationList>>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("percentSatThreshold")
-        @ExcludeMissing
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val origSensorId: JsonField<String>,
         private val percentSatThreshold: JsonField<Double>,
-        @JsonProperty("periodicityChangeDetected")
-        @ExcludeMissing
         private val periodicityChangeDetected: JsonField<Boolean>,
-        @JsonProperty("periodicityDetectionConf")
-        @ExcludeMissing
         private val periodicityDetectionConf: JsonField<String>,
-        @JsonProperty("periodicitySamplingConf")
-        @ExcludeMissing
         private val periodicitySamplingConf: JsonField<String>,
-        @JsonProperty("pixelArrayHeight")
-        @ExcludeMissing
         private val pixelArrayHeight: JsonField<Int>,
-        @JsonProperty("pixelArrayWidth")
-        @ExcludeMissing
         private val pixelArrayWidth: JsonField<Int>,
-        @JsonProperty("pixelMax") @ExcludeMissing private val pixelMax: JsonField<Int>,
-        @JsonProperty("pixelMin") @ExcludeMissing private val pixelMin: JsonField<Int>,
-        @JsonProperty("pointingAngleAzEnd")
-        @ExcludeMissing
+        private val pixelMax: JsonField<Int>,
+        private val pixelMin: JsonField<Int>,
         private val pointingAngleAzEnd: JsonField<Double>,
-        @JsonProperty("pointingAngleAzStart")
-        @ExcludeMissing
         private val pointingAngleAzStart: JsonField<Double>,
-        @JsonProperty("pointingAngleElEnd")
-        @ExcludeMissing
         private val pointingAngleElEnd: JsonField<Double>,
-        @JsonProperty("pointingAngleElStart")
-        @ExcludeMissing
         private val pointingAngleElStart: JsonField<Double>,
-        @JsonProperty("polarAngleEnd") @ExcludeMissing private val polarAngleEnd: JsonField<Double>,
-        @JsonProperty("polarAngleStart")
-        @ExcludeMissing
+        private val polarAngleEnd: JsonField<Double>,
         private val polarAngleStart: JsonField<Double>,
-        @JsonProperty("radarSOIObservationList")
-        @ExcludeMissing
         private val radarSoiObservationList: JsonField<List<RadarSoiObservationList>>,
-        @JsonProperty("referenceFrame")
-        @ExcludeMissing
         private val referenceFrame: JsonField<ReferenceFrame>,
-        @JsonProperty("satelliteName") @ExcludeMissing private val satelliteName: JsonField<String>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("senalt") @ExcludeMissing private val senalt: JsonField<Double>,
-        @JsonProperty("senlat") @ExcludeMissing private val senlat: JsonField<Double>,
-        @JsonProperty("senlon") @ExcludeMissing private val senlon: JsonField<Double>,
-        @JsonProperty("senReferenceFrame")
-        @ExcludeMissing
+        private val satelliteName: JsonField<String>,
+        private val satNo: JsonField<Int>,
+        private val senalt: JsonField<Double>,
+        private val senlat: JsonField<Double>,
+        private val senlon: JsonField<Double>,
         private val senReferenceFrame: JsonField<SenReferenceFrame>,
-        @JsonProperty("sensorAsId") @ExcludeMissing private val sensorAsId: JsonField<String>,
-        @JsonProperty("senvelx") @ExcludeMissing private val senvelx: JsonField<Double>,
-        @JsonProperty("senvely") @ExcludeMissing private val senvely: JsonField<Double>,
-        @JsonProperty("senvelz") @ExcludeMissing private val senvelz: JsonField<Double>,
-        @JsonProperty("senx") @ExcludeMissing private val senx: JsonField<Double>,
-        @JsonProperty("seny") @ExcludeMissing private val seny: JsonField<Double>,
-        @JsonProperty("senz") @ExcludeMissing private val senz: JsonField<Double>,
-        @JsonProperty("softwareVersion")
-        @ExcludeMissing
+        private val sensorAsId: JsonField<String>,
+        private val senvelx: JsonField<Double>,
+        private val senvely: JsonField<Double>,
+        private val senvelz: JsonField<Double>,
+        private val senx: JsonField<Double>,
+        private val seny: JsonField<Double>,
+        private val senz: JsonField<Double>,
         private val softwareVersion: JsonField<String>,
-        @JsonProperty("solarMag") @ExcludeMissing private val solarMag: JsonField<Double>,
-        @JsonProperty("solarPhaseAngleBrightnessChangeDetected")
-        @ExcludeMissing
+        private val solarMag: JsonField<Double>,
         private val solarPhaseAngleBrightnessChangeDetected: JsonField<Boolean>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("spectralFilters")
-        @ExcludeMissing
+        private val sourceDl: JsonField<String>,
         private val spectralFilters: JsonField<List<String>>,
-        @JsonProperty("starCatName") @ExcludeMissing private val starCatName: JsonField<String>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("transactionId") @ExcludeMissing private val transactionId: JsonField<String>,
-        @JsonProperty("uct") @ExcludeMissing private val uct: JsonField<Boolean>,
-        @JsonProperty("validCalibrations")
-        @ExcludeMissing
+        private val starCatName: JsonField<String>,
+        private val tags: JsonField<List<String>>,
+        private val transactionId: JsonField<String>,
+        private val uct: JsonField<Boolean>,
         private val validCalibrations: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("numObs") @ExcludeMissing numObs: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("startTime")
+            @ExcludeMissing
+            startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<Type> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("binningHoriz")
+            @ExcludeMissing
+            binningHoriz: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("binningVert")
+            @ExcludeMissing
+            binningVert: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("brightnessVarianceChangeDetected")
+            @ExcludeMissing
+            brightnessVarianceChangeDetected: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("calibrations")
+            @ExcludeMissing
+            calibrations: JsonField<List<Calibration>> = JsonMissing.of(),
+            @JsonProperty("calibrationType")
+            @ExcludeMissing
+            calibrationType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("changeConf")
+            @ExcludeMissing
+            changeConf: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("changeDetected")
+            @ExcludeMissing
+            changeDetected: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("collectionDensityConf")
+            @ExcludeMissing
+            collectionDensityConf: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("collectionId")
+            @ExcludeMissing
+            collectionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("collectionMode")
+            @ExcludeMissing
+            collectionMode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("corrQuality")
+            @ExcludeMissing
+            corrQuality: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("endTime")
+            @ExcludeMissing
+            endTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("gain") @ExcludeMissing gain: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idElset") @ExcludeMissing idElset: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("losDeclinationEnd")
+            @ExcludeMissing
+            losDeclinationEnd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("losDeclinationStart")
+            @ExcludeMissing
+            losDeclinationStart: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("msgCreateDate")
+            @ExcludeMissing
+            msgCreateDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("numSpectralFilters")
+            @ExcludeMissing
+            numSpectralFilters: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("opticalSOIObservationList")
+            @ExcludeMissing
+            opticalSoiObservationList: JsonField<List<OpticalSoiObservationList>> =
+                JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("percentSatThreshold")
+            @ExcludeMissing
+            percentSatThreshold: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("periodicityChangeDetected")
+            @ExcludeMissing
+            periodicityChangeDetected: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("periodicityDetectionConf")
+            @ExcludeMissing
+            periodicityDetectionConf: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("periodicitySamplingConf")
+            @ExcludeMissing
+            periodicitySamplingConf: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("pixelArrayHeight")
+            @ExcludeMissing
+            pixelArrayHeight: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("pixelArrayWidth")
+            @ExcludeMissing
+            pixelArrayWidth: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("pixelMax") @ExcludeMissing pixelMax: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("pixelMin") @ExcludeMissing pixelMin: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("pointingAngleAzEnd")
+            @ExcludeMissing
+            pointingAngleAzEnd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pointingAngleAzStart")
+            @ExcludeMissing
+            pointingAngleAzStart: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pointingAngleElEnd")
+            @ExcludeMissing
+            pointingAngleElEnd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("pointingAngleElStart")
+            @ExcludeMissing
+            pointingAngleElStart: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("polarAngleEnd")
+            @ExcludeMissing
+            polarAngleEnd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("polarAngleStart")
+            @ExcludeMissing
+            polarAngleStart: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("radarSOIObservationList")
+            @ExcludeMissing
+            radarSoiObservationList: JsonField<List<RadarSoiObservationList>> = JsonMissing.of(),
+            @JsonProperty("referenceFrame")
+            @ExcludeMissing
+            referenceFrame: JsonField<ReferenceFrame> = JsonMissing.of(),
+            @JsonProperty("satelliteName")
+            @ExcludeMissing
+            satelliteName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("senalt") @ExcludeMissing senalt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlat") @ExcludeMissing senlat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlon") @ExcludeMissing senlon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senReferenceFrame")
+            @ExcludeMissing
+            senReferenceFrame: JsonField<SenReferenceFrame> = JsonMissing.of(),
+            @JsonProperty("sensorAsId")
+            @ExcludeMissing
+            sensorAsId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("senvelx") @ExcludeMissing senvelx: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senvely") @ExcludeMissing senvely: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senvelz") @ExcludeMissing senvelz: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senx") @ExcludeMissing senx: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("seny") @ExcludeMissing seny: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senz") @ExcludeMissing senz: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("softwareVersion")
+            @ExcludeMissing
+            softwareVersion: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("solarMag")
+            @ExcludeMissing
+            solarMag: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("solarPhaseAngleBrightnessChangeDetected")
+            @ExcludeMissing
+            solarPhaseAngleBrightnessChangeDetected: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("spectralFilters")
+            @ExcludeMissing
+            spectralFilters: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("starCatName")
+            @ExcludeMissing
+            starCatName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("transactionId")
+            @ExcludeMissing
+            transactionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("uct") @ExcludeMissing uct: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("validCalibrations")
+            @ExcludeMissing
+            validCalibrations: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            numObs,
+            source,
+            startTime,
+            type,
+            id,
+            binningHoriz,
+            binningVert,
+            brightnessVarianceChangeDetected,
+            calibrations,
+            calibrationType,
+            changeConf,
+            changeDetected,
+            collectionDensityConf,
+            collectionId,
+            collectionMode,
+            corrQuality,
+            createdAt,
+            createdBy,
+            endTime,
+            gain,
+            idElset,
+            idOnOrbit,
+            idSensor,
+            losDeclinationEnd,
+            losDeclinationStart,
+            msgCreateDate,
+            numSpectralFilters,
+            opticalSoiObservationList,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            percentSatThreshold,
+            periodicityChangeDetected,
+            periodicityDetectionConf,
+            periodicitySamplingConf,
+            pixelArrayHeight,
+            pixelArrayWidth,
+            pixelMax,
+            pixelMin,
+            pointingAngleAzEnd,
+            pointingAngleAzStart,
+            pointingAngleElEnd,
+            pointingAngleElStart,
+            polarAngleEnd,
+            polarAngleStart,
+            radarSoiObservationList,
+            referenceFrame,
+            satelliteName,
+            satNo,
+            senalt,
+            senlat,
+            senlon,
+            senReferenceFrame,
+            sensorAsId,
+            senvelx,
+            senvely,
+            senvelz,
+            senx,
+            seny,
+            senz,
+            softwareVersion,
+            solarMag,
+            solarPhaseAngleBrightnessChangeDetected,
+            sourceDl,
+            spectralFilters,
+            starCatName,
+            tags,
+            transactionId,
+            uct,
+            validCalibrations,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1681,6 +1879,16 @@ private constructor(
         @ExcludeMissing
         fun _validCalibrations(): JsonField<String> = validCalibrations
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1781,6 +1989,7 @@ private constructor(
             private var transactionId: JsonField<String> = JsonMissing.of()
             private var uct: JsonField<Boolean> = JsonMissing.of()
             private var validCalibrations: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1859,6 +2068,7 @@ private constructor(
                 transactionId = body.transactionId
                 uct = body.uct
                 validCalibrations = body.validCalibrations
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -3089,6 +3299,25 @@ private constructor(
                 this.validCalibrations = validCalibrations
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -3181,6 +3410,7 @@ private constructor(
                     transactionId,
                     uct,
                     validCalibrations,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -5542,6 +5772,7 @@ private constructor(
             private val rspaces: JsonField<List<Double>>,
             private val spectralWidths: JsonField<List<Double>>,
             private val tovs: JsonField<List<OffsetDateTime>>,
+            private val waveformNumber: JsonField<Int>,
             private val xaccel: JsonField<List<Double>>,
             private val xpos: JsonField<List<Double>>,
             private val xspaces: JsonField<List<Double>>,
@@ -5643,6 +5874,9 @@ private constructor(
                 @JsonProperty("tovs")
                 @ExcludeMissing
                 tovs: JsonField<List<OffsetDateTime>> = JsonMissing.of(),
+                @JsonProperty("waveformNumber")
+                @ExcludeMissing
+                waveformNumber: JsonField<Int> = JsonMissing.of(),
                 @JsonProperty("xaccel")
                 @ExcludeMissing
                 xaccel: JsonField<List<Double>> = JsonMissing.of(),
@@ -5704,6 +5938,7 @@ private constructor(
                 rspaces,
                 spectralWidths,
                 tovs,
+                waveformNumber,
                 xaccel,
                 xpos,
                 xspaces,
@@ -5998,6 +6233,16 @@ private constructor(
              *   type (e.g. if the server responded with an unexpected value).
              */
             fun tovs(): Optional<List<OffsetDateTime>> = tovs.getOptional("tovs")
+
+            /**
+             * A unique numeric or hash identifier assigned to each distinct waveform, enabling
+             * traceability between the waveform used and the images or data products generated from
+             * it.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
+             *   type (e.g. if the server responded with an unexpected value).
+             */
+            fun waveformNumber(): Optional<Int> = waveformNumber.getOptional("waveformNumber")
 
             /**
              * Array of the cartesian X accelerations, in kilometers per second squared, in the
@@ -6388,6 +6633,16 @@ private constructor(
             fun _tovs(): JsonField<List<OffsetDateTime>> = tovs
 
             /**
+             * Returns the raw JSON value of [waveformNumber].
+             *
+             * Unlike [waveformNumber], this method doesn't throw if the JSON field has an
+             * unexpected type.
+             */
+            @JsonProperty("waveformNumber")
+            @ExcludeMissing
+            fun _waveformNumber(): JsonField<Int> = waveformNumber
+
+            /**
              * Returns the raw JSON value of [xaccel].
              *
              * Unlike [xaccel], this method doesn't throw if the JSON field has an unexpected type.
@@ -6518,6 +6773,7 @@ private constructor(
                 private var rspaces: JsonField<MutableList<Double>>? = null
                 private var spectralWidths: JsonField<MutableList<Double>>? = null
                 private var tovs: JsonField<MutableList<OffsetDateTime>>? = null
+                private var waveformNumber: JsonField<Int> = JsonMissing.of()
                 private var xaccel: JsonField<MutableList<Double>>? = null
                 private var xpos: JsonField<MutableList<Double>>? = null
                 private var xspaces: JsonField<MutableList<Double>>? = null
@@ -6567,6 +6823,7 @@ private constructor(
                     spectralWidths =
                         radarSoiObservationList.spectralWidths.map { it.toMutableList() }
                     tovs = radarSoiObservationList.tovs.map { it.toMutableList() }
+                    waveformNumber = radarSoiObservationList.waveformNumber
                     xaccel = radarSoiObservationList.xaccel.map { it.toMutableList() }
                     xpos = radarSoiObservationList.xpos.map { it.toMutableList() }
                     xspaces = radarSoiObservationList.xspaces.map { it.toMutableList() }
@@ -7375,6 +7632,25 @@ private constructor(
                 }
 
                 /**
+                 * A unique numeric or hash identifier assigned to each distinct waveform, enabling
+                 * traceability between the waveform used and the images or data products generated
+                 * from it.
+                 */
+                fun waveformNumber(waveformNumber: Int) =
+                    waveformNumber(JsonField.of(waveformNumber))
+
+                /**
+                 * Sets [Builder.waveformNumber] to an arbitrary JSON value.
+                 *
+                 * You should usually call [Builder.waveformNumber] with a well-typed [Int] value
+                 * instead. This method is primarily for setting the field to an undocumented or not
+                 * yet supported value.
+                 */
+                fun waveformNumber(waveformNumber: JsonField<Int>) = apply {
+                    this.waveformNumber = waveformNumber
+                }
+
+                /**
                  * Array of the cartesian X accelerations, in kilometers per second squared, in the
                  * specified referenceFrame. If referenceFrame is null then J2K should be assumed.
                  * The 'tovs' and 'xaccel' arrays must match in size, if 'xaccel' is provided.
@@ -7739,6 +8015,7 @@ private constructor(
                         (rspaces ?: JsonMissing.of()).map { it.toImmutable() },
                         (spectralWidths ?: JsonMissing.of()).map { it.toImmutable() },
                         (tovs ?: JsonMissing.of()).map { it.toImmutable() },
+                        waveformNumber,
                         (xaccel ?: JsonMissing.of()).map { it.toImmutable() },
                         (xpos ?: JsonMissing.of()).map { it.toImmutable() },
                         (xspaces ?: JsonMissing.of()).map { it.toImmutable() },
@@ -7790,6 +8067,7 @@ private constructor(
                 rspaces()
                 spectralWidths()
                 tovs()
+                waveformNumber()
                 xaccel()
                 xpos()
                 xspaces()
@@ -7849,6 +8127,7 @@ private constructor(
                     (rspaces.asKnown().getOrNull()?.size ?: 0) +
                     (spectralWidths.asKnown().getOrNull()?.size ?: 0) +
                     (tovs.asKnown().getOrNull()?.size ?: 0) +
+                    (if (waveformNumber.asKnown().isPresent) 1 else 0) +
                     (xaccel.asKnown().getOrNull()?.size ?: 0) +
                     (xpos.asKnown().getOrNull()?.size ?: 0) +
                     (xspaces.asKnown().getOrNull()?.size ?: 0) +
@@ -7896,6 +8175,7 @@ private constructor(
                     rspaces == other.rspaces &&
                     spectralWidths == other.spectralWidths &&
                     tovs == other.tovs &&
+                    waveformNumber == other.waveformNumber &&
                     xaccel == other.xaccel &&
                     xpos == other.xpos &&
                     xspaces == other.xspaces &&
@@ -7941,6 +8221,7 @@ private constructor(
                     rspaces,
                     spectralWidths,
                     tovs,
+                    waveformNumber,
                     xaccel,
                     xpos,
                     xspaces,
@@ -7958,7 +8239,7 @@ private constructor(
             override fun hashCode(): Int = hashCode
 
             override fun toString() =
-                "RadarSoiObservationList{obStartTime=$obStartTime, aspectAngles=$aspectAngles, azimuthBiases=$azimuthBiases, azimuthRates=$azimuthRates, azimuths=$azimuths, beta=$beta, centerFrequency=$centerFrequency, crossRangeRes=$crossRangeRes, deltaTimes=$deltaTimes, doppler2XRs=$doppler2XRs, elevationBiases=$elevationBiases, elevationRates=$elevationRates, elevations=$elevations, idAttitudeSet=$idAttitudeSet, idStateVector=$idStateVector, integrationAngles=$integrationAngles, kappa=$kappa, peakAmplitudes=$peakAmplitudes, polarizations=$polarizations, projAngVels=$projAngVels, pulseBandwidth=$pulseBandwidth, rangeAccels=$rangeAccels, rangeBiases=$rangeBiases, rangeRates=$rangeRates, ranges=$ranges, rcsErrorEsts=$rcsErrorEsts, rcsValues=$rcsValues, rspaces=$rspaces, spectralWidths=$spectralWidths, tovs=$tovs, xaccel=$xaccel, xpos=$xpos, xspaces=$xspaces, xvel=$xvel, yaccel=$yaccel, ypos=$ypos, yvel=$yvel, zaccel=$zaccel, zpos=$zpos, zvel=$zvel, additionalProperties=$additionalProperties}"
+                "RadarSoiObservationList{obStartTime=$obStartTime, aspectAngles=$aspectAngles, azimuthBiases=$azimuthBiases, azimuthRates=$azimuthRates, azimuths=$azimuths, beta=$beta, centerFrequency=$centerFrequency, crossRangeRes=$crossRangeRes, deltaTimes=$deltaTimes, doppler2XRs=$doppler2XRs, elevationBiases=$elevationBiases, elevationRates=$elevationRates, elevations=$elevations, idAttitudeSet=$idAttitudeSet, idStateVector=$idStateVector, integrationAngles=$integrationAngles, kappa=$kappa, peakAmplitudes=$peakAmplitudes, polarizations=$polarizations, projAngVels=$projAngVels, pulseBandwidth=$pulseBandwidth, rangeAccels=$rangeAccels, rangeBiases=$rangeBiases, rangeRates=$rangeRates, ranges=$ranges, rcsErrorEsts=$rcsErrorEsts, rcsValues=$rcsValues, rspaces=$rspaces, spectralWidths=$spectralWidths, tovs=$tovs, waveformNumber=$waveformNumber, xaccel=$xaccel, xpos=$xpos, xspaces=$xspaces, xvel=$xvel, yaccel=$yaccel, ypos=$ypos, yvel=$yvel, zaccel=$zaccel, zpos=$zpos, zvel=$zvel, additionalProperties=$additionalProperties}"
         }
 
         /**
@@ -8367,7 +8648,8 @@ private constructor(
                 tags == other.tags &&
                 transactionId == other.transactionId &&
                 uct == other.uct &&
-                validCalibrations == other.validCalibrations
+                validCalibrations == other.validCalibrations &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -8445,13 +8727,14 @@ private constructor(
                 transactionId,
                 uct,
                 validCalibrations,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, numObs=$numObs, source=$source, startTime=$startTime, type=$type, id=$id, binningHoriz=$binningHoriz, binningVert=$binningVert, brightnessVarianceChangeDetected=$brightnessVarianceChangeDetected, calibrations=$calibrations, calibrationType=$calibrationType, changeConf=$changeConf, changeDetected=$changeDetected, collectionDensityConf=$collectionDensityConf, collectionId=$collectionId, collectionMode=$collectionMode, corrQuality=$corrQuality, createdAt=$createdAt, createdBy=$createdBy, endTime=$endTime, gain=$gain, idElset=$idElset, idOnOrbit=$idOnOrbit, idSensor=$idSensor, losDeclinationEnd=$losDeclinationEnd, losDeclinationStart=$losDeclinationStart, msgCreateDate=$msgCreateDate, numSpectralFilters=$numSpectralFilters, opticalSoiObservationList=$opticalSoiObservationList, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, percentSatThreshold=$percentSatThreshold, periodicityChangeDetected=$periodicityChangeDetected, periodicityDetectionConf=$periodicityDetectionConf, periodicitySamplingConf=$periodicitySamplingConf, pixelArrayHeight=$pixelArrayHeight, pixelArrayWidth=$pixelArrayWidth, pixelMax=$pixelMax, pixelMin=$pixelMin, pointingAngleAzEnd=$pointingAngleAzEnd, pointingAngleAzStart=$pointingAngleAzStart, pointingAngleElEnd=$pointingAngleElEnd, pointingAngleElStart=$pointingAngleElStart, polarAngleEnd=$polarAngleEnd, polarAngleStart=$polarAngleStart, radarSoiObservationList=$radarSoiObservationList, referenceFrame=$referenceFrame, satelliteName=$satelliteName, satNo=$satNo, senalt=$senalt, senlat=$senlat, senlon=$senlon, senReferenceFrame=$senReferenceFrame, sensorAsId=$sensorAsId, senvelx=$senvelx, senvely=$senvely, senvelz=$senvelz, senx=$senx, seny=$seny, senz=$senz, softwareVersion=$softwareVersion, solarMag=$solarMag, solarPhaseAngleBrightnessChangeDetected=$solarPhaseAngleBrightnessChangeDetected, sourceDl=$sourceDl, spectralFilters=$spectralFilters, starCatName=$starCatName, tags=$tags, transactionId=$transactionId, uct=$uct, validCalibrations=$validCalibrations}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, numObs=$numObs, source=$source, startTime=$startTime, type=$type, id=$id, binningHoriz=$binningHoriz, binningVert=$binningVert, brightnessVarianceChangeDetected=$brightnessVarianceChangeDetected, calibrations=$calibrations, calibrationType=$calibrationType, changeConf=$changeConf, changeDetected=$changeDetected, collectionDensityConf=$collectionDensityConf, collectionId=$collectionId, collectionMode=$collectionMode, corrQuality=$corrQuality, createdAt=$createdAt, createdBy=$createdBy, endTime=$endTime, gain=$gain, idElset=$idElset, idOnOrbit=$idOnOrbit, idSensor=$idSensor, losDeclinationEnd=$losDeclinationEnd, losDeclinationStart=$losDeclinationStart, msgCreateDate=$msgCreateDate, numSpectralFilters=$numSpectralFilters, opticalSoiObservationList=$opticalSoiObservationList, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, percentSatThreshold=$percentSatThreshold, periodicityChangeDetected=$periodicityChangeDetected, periodicityDetectionConf=$periodicityDetectionConf, periodicitySamplingConf=$periodicitySamplingConf, pixelArrayHeight=$pixelArrayHeight, pixelArrayWidth=$pixelArrayWidth, pixelMax=$pixelMax, pixelMin=$pixelMin, pointingAngleAzEnd=$pointingAngleAzEnd, pointingAngleAzStart=$pointingAngleAzStart, pointingAngleElEnd=$pointingAngleElEnd, pointingAngleElStart=$pointingAngleElStart, polarAngleEnd=$polarAngleEnd, polarAngleStart=$polarAngleStart, radarSoiObservationList=$radarSoiObservationList, referenceFrame=$referenceFrame, satelliteName=$satelliteName, satNo=$satNo, senalt=$senalt, senlat=$senlat, senlon=$senlon, senReferenceFrame=$senReferenceFrame, sensorAsId=$sensorAsId, senvelx=$senvelx, senvely=$senvely, senvelz=$senvelz, senx=$senx, seny=$seny, senz=$senz, softwareVersion=$softwareVersion, solarMag=$solarMag, solarPhaseAngleBrightnessChangeDetected=$solarPhaseAngleBrightnessChangeDetected, sourceDl=$sourceDl, spectralFilters=$spectralFilters, starCatName=$starCatName, tags=$tags, transactionId=$transactionId, uct=$uct, validCalibrations=$validCalibrations, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

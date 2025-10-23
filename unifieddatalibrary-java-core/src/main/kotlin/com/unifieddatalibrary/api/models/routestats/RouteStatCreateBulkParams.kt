@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.routestats
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -15,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -209,48 +213,175 @@ private constructor(
      * vehicles, etc.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("locationEnd") @ExcludeMissing private val locationEnd: JsonField<String>,
-        @JsonProperty("locationStart") @ExcludeMissing private val locationStart: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("avgDuration") @ExcludeMissing private val avgDuration: JsonField<Double>,
-        @JsonProperty("avgSpeed") @ExcludeMissing private val avgSpeed: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("dataPtsUsed") @ExcludeMissing private val dataPtsUsed: JsonField<Int>,
-        @JsonProperty("distance") @ExcludeMissing private val distance: JsonField<Double>,
-        @JsonProperty("distUnit") @ExcludeMissing private val distUnit: JsonField<String>,
-        @JsonProperty("firstPt") @ExcludeMissing private val firstPt: JsonField<OffsetDateTime>,
-        @JsonProperty("idealDesc") @ExcludeMissing private val idealDesc: JsonField<String>,
-        @JsonProperty("idealDuration") @ExcludeMissing private val idealDuration: JsonField<Double>,
-        @JsonProperty("idSiteEnd") @ExcludeMissing private val idSiteEnd: JsonField<String>,
-        @JsonProperty("idSiteStart") @ExcludeMissing private val idSiteStart: JsonField<String>,
-        @JsonProperty("lastPt") @ExcludeMissing private val lastPt: JsonField<OffsetDateTime>,
-        @JsonProperty("locationType") @ExcludeMissing private val locationType: JsonField<String>,
-        @JsonProperty("maxDuration") @ExcludeMissing private val maxDuration: JsonField<Double>,
-        @JsonProperty("maxSpeed") @ExcludeMissing private val maxSpeed: JsonField<Double>,
-        @JsonProperty("minDuration") @ExcludeMissing private val minDuration: JsonField<Double>,
-        @JsonProperty("minSpeed") @ExcludeMissing private val minSpeed: JsonField<Double>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("partialDesc") @ExcludeMissing private val partialDesc: JsonField<String>,
-        @JsonProperty("partialDuration")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val locationEnd: JsonField<String>,
+        private val locationStart: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val avgDuration: JsonField<Double>,
+        private val avgSpeed: JsonField<Double>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val dataPtsUsed: JsonField<Int>,
+        private val distance: JsonField<Double>,
+        private val distUnit: JsonField<String>,
+        private val firstPt: JsonField<OffsetDateTime>,
+        private val idealDesc: JsonField<String>,
+        private val idealDuration: JsonField<Double>,
+        private val idSiteEnd: JsonField<String>,
+        private val idSiteStart: JsonField<String>,
+        private val lastPt: JsonField<OffsetDateTime>,
+        private val locationType: JsonField<String>,
+        private val maxDuration: JsonField<Double>,
+        private val maxSpeed: JsonField<Double>,
+        private val minDuration: JsonField<Double>,
+        private val minSpeed: JsonField<Double>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val partialDesc: JsonField<String>,
         private val partialDuration: JsonField<Double>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("speedUnit") @ExcludeMissing private val speedUnit: JsonField<String>,
-        @JsonProperty("timePeriod") @ExcludeMissing private val timePeriod: JsonField<String>,
-        @JsonProperty("vehicleCategory")
-        @ExcludeMissing
+        private val sourceDl: JsonField<String>,
+        private val speedUnit: JsonField<String>,
+        private val timePeriod: JsonField<String>,
         private val vehicleCategory: JsonField<String>,
-        @JsonProperty("vehicleType") @ExcludeMissing private val vehicleType: JsonField<String>,
+        private val vehicleType: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("locationEnd")
+            @ExcludeMissing
+            locationEnd: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("locationStart")
+            @ExcludeMissing
+            locationStart: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("avgDuration")
+            @ExcludeMissing
+            avgDuration: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("avgSpeed")
+            @ExcludeMissing
+            avgSpeed: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataPtsUsed")
+            @ExcludeMissing
+            dataPtsUsed: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("distance")
+            @ExcludeMissing
+            distance: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("distUnit")
+            @ExcludeMissing
+            distUnit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("firstPt")
+            @ExcludeMissing
+            firstPt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("idealDesc")
+            @ExcludeMissing
+            idealDesc: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idealDuration")
+            @ExcludeMissing
+            idealDuration: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idSiteEnd")
+            @ExcludeMissing
+            idSiteEnd: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSiteStart")
+            @ExcludeMissing
+            idSiteStart: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lastPt")
+            @ExcludeMissing
+            lastPt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("locationType")
+            @ExcludeMissing
+            locationType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("maxDuration")
+            @ExcludeMissing
+            maxDuration: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("maxSpeed")
+            @ExcludeMissing
+            maxSpeed: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("minDuration")
+            @ExcludeMissing
+            minDuration: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("minSpeed")
+            @ExcludeMissing
+            minSpeed: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("partialDesc")
+            @ExcludeMissing
+            partialDesc: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("partialDuration")
+            @ExcludeMissing
+            partialDuration: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("speedUnit")
+            @ExcludeMissing
+            speedUnit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("timePeriod")
+            @ExcludeMissing
+            timePeriod: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("vehicleCategory")
+            @ExcludeMissing
+            vehicleCategory: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("vehicleType")
+            @ExcludeMissing
+            vehicleType: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            locationEnd,
+            locationStart,
+            source,
+            id,
+            avgDuration,
+            avgSpeed,
+            createdAt,
+            createdBy,
+            dataPtsUsed,
+            distance,
+            distUnit,
+            firstPt,
+            idealDesc,
+            idealDuration,
+            idSiteEnd,
+            idSiteStart,
+            lastPt,
+            locationType,
+            maxDuration,
+            maxSpeed,
+            minDuration,
+            minSpeed,
+            origin,
+            origNetwork,
+            partialDesc,
+            partialDuration,
+            sourceDl,
+            speedUnit,
+            timePeriod,
+            vehicleCategory,
+            vehicleType,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -824,6 +955,16 @@ private constructor(
         @ExcludeMissing
         fun _vehicleType(): JsonField<String> = vehicleType
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -879,6 +1020,7 @@ private constructor(
             private var timePeriod: JsonField<String> = JsonMissing.of()
             private var vehicleCategory: JsonField<String> = JsonMissing.of()
             private var vehicleType: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -915,6 +1057,7 @@ private constructor(
                 timePeriod = body.timePeriod
                 vehicleCategory = body.vehicleCategory
                 vehicleType = body.vehicleType
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1412,6 +1555,25 @@ private constructor(
                 this.vehicleType = vehicleType
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1463,6 +1625,7 @@ private constructor(
                     timePeriod,
                     vehicleCategory,
                     vehicleType,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1753,7 +1916,8 @@ private constructor(
                 speedUnit == other.speedUnit &&
                 timePeriod == other.timePeriod &&
                 vehicleCategory == other.vehicleCategory &&
-                vehicleType == other.vehicleType
+                vehicleType == other.vehicleType &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1791,13 +1955,14 @@ private constructor(
                 timePeriod,
                 vehicleCategory,
                 vehicleType,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, locationEnd=$locationEnd, locationStart=$locationStart, source=$source, id=$id, avgDuration=$avgDuration, avgSpeed=$avgSpeed, createdAt=$createdAt, createdBy=$createdBy, dataPtsUsed=$dataPtsUsed, distance=$distance, distUnit=$distUnit, firstPt=$firstPt, idealDesc=$idealDesc, idealDuration=$idealDuration, idSiteEnd=$idSiteEnd, idSiteStart=$idSiteStart, lastPt=$lastPt, locationType=$locationType, maxDuration=$maxDuration, maxSpeed=$maxSpeed, minDuration=$minDuration, minSpeed=$minSpeed, origin=$origin, origNetwork=$origNetwork, partialDesc=$partialDesc, partialDuration=$partialDuration, sourceDl=$sourceDl, speedUnit=$speedUnit, timePeriod=$timePeriod, vehicleCategory=$vehicleCategory, vehicleType=$vehicleType}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, locationEnd=$locationEnd, locationStart=$locationStart, source=$source, id=$id, avgDuration=$avgDuration, avgSpeed=$avgSpeed, createdAt=$createdAt, createdBy=$createdBy, dataPtsUsed=$dataPtsUsed, distance=$distance, distUnit=$distUnit, firstPt=$firstPt, idealDesc=$idealDesc, idealDuration=$idealDuration, idSiteEnd=$idSiteEnd, idSiteStart=$idSiteStart, lastPt=$lastPt, locationType=$locationType, maxDuration=$maxDuration, maxSpeed=$maxSpeed, minDuration=$minDuration, minSpeed=$minSpeed, origin=$origin, origNetwork=$origNetwork, partialDesc=$partialDesc, partialDuration=$partialDuration, sourceDl=$sourceDl, speedUnit=$speedUnit, timePeriod=$timePeriod, vehicleCategory=$vehicleCategory, vehicleType=$vehicleType, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

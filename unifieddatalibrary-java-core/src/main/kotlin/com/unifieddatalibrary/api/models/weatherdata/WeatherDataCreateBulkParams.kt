@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.weatherdata
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -210,62 +214,195 @@ private constructor(
      * information.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("obTime") @ExcludeMissing private val obTime: JsonField<OffsetDateTime>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("angleOrientation")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val obTime: JsonField<OffsetDateTime>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
         private val angleOrientation: JsonField<Double>,
-        @JsonProperty("avgRefPwr") @ExcludeMissing private val avgRefPwr: JsonField<Double>,
-        @JsonProperty("avgTxPwr") @ExcludeMissing private val avgTxPwr: JsonField<Double>,
-        @JsonProperty("checksum") @ExcludeMissing private val checksum: JsonField<Int>,
-        @JsonProperty("coIntegs") @ExcludeMissing private val coIntegs: JsonField<List<Int>>,
-        @JsonProperty("consRecs") @ExcludeMissing private val consRecs: JsonField<List<Int>>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("doppVels") @ExcludeMissing private val doppVels: JsonField<List<Double>>,
-        @JsonProperty("fileCreation")
-        @ExcludeMissing
+        private val avgRefPwr: JsonField<Double>,
+        private val avgTxPwr: JsonField<Double>,
+        private val checksum: JsonField<Int>,
+        private val coIntegs: JsonField<List<Int>>,
+        private val consRecs: JsonField<List<Int>>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val doppVels: JsonField<List<Double>>,
         private val fileCreation: JsonField<OffsetDateTime>,
-        @JsonProperty("firstGuessAvgs")
-        @ExcludeMissing
         private val firstGuessAvgs: JsonField<List<Int>>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("interpulsePeriods")
-        @ExcludeMissing
+        private val idSensor: JsonField<String>,
         private val interpulsePeriods: JsonField<List<Double>>,
-        @JsonProperty("lightDetSensors")
-        @ExcludeMissing
         private val lightDetSensors: JsonField<List<Int>>,
-        @JsonProperty("lightEventNum") @ExcludeMissing private val lightEventNum: JsonField<Int>,
-        @JsonProperty("noiseLvls") @ExcludeMissing private val noiseLvls: JsonField<List<Double>>,
-        @JsonProperty("numElements") @ExcludeMissing private val numElements: JsonField<Int>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("posConfidence") @ExcludeMissing private val posConfidence: JsonField<Double>,
-        @JsonProperty("qcValue") @ExcludeMissing private val qcValue: JsonField<Int>,
-        @JsonProperty("sectorNum") @ExcludeMissing private val sectorNum: JsonField<Int>,
-        @JsonProperty("semiMajorAxis") @ExcludeMissing private val semiMajorAxis: JsonField<Double>,
-        @JsonProperty("semiMinorAxis") @ExcludeMissing private val semiMinorAxis: JsonField<Double>,
-        @JsonProperty("sigPwrs") @ExcludeMissing private val sigPwrs: JsonField<List<Double>>,
-        @JsonProperty("sigStrength") @ExcludeMissing private val sigStrength: JsonField<Double>,
-        @JsonProperty("snrs") @ExcludeMissing private val snrs: JsonField<List<Double>>,
-        @JsonProperty("specAvgs") @ExcludeMissing private val specAvgs: JsonField<List<Int>>,
-        @JsonProperty("specWidths") @ExcludeMissing private val specWidths: JsonField<List<Double>>,
-        @JsonProperty("srcIds") @ExcludeMissing private val srcIds: JsonField<List<String>>,
-        @JsonProperty("srcTyps") @ExcludeMissing private val srcTyps: JsonField<List<String>>,
-        @JsonProperty("tdAvgSampleNums")
-        @ExcludeMissing
+        private val lightEventNum: JsonField<Int>,
+        private val noiseLvls: JsonField<List<Double>>,
+        private val numElements: JsonField<Int>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origSensorId: JsonField<String>,
+        private val posConfidence: JsonField<Double>,
+        private val qcValue: JsonField<Int>,
+        private val sectorNum: JsonField<Int>,
+        private val semiMajorAxis: JsonField<Double>,
+        private val semiMinorAxis: JsonField<Double>,
+        private val sigPwrs: JsonField<List<Double>>,
+        private val sigStrength: JsonField<Double>,
+        private val snrs: JsonField<List<Double>>,
+        private val specAvgs: JsonField<List<Int>>,
+        private val specWidths: JsonField<List<Double>>,
+        private val srcIds: JsonField<List<String>>,
+        private val srcTyps: JsonField<List<String>>,
         private val tdAvgSampleNums: JsonField<List<Int>>,
-        @JsonProperty("termAlt") @ExcludeMissing private val termAlt: JsonField<Double>,
+        private val termAlt: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("obTime")
+            @ExcludeMissing
+            obTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("angleOrientation")
+            @ExcludeMissing
+            angleOrientation: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("avgRefPwr")
+            @ExcludeMissing
+            avgRefPwr: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("avgTxPwr")
+            @ExcludeMissing
+            avgTxPwr: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("checksum") @ExcludeMissing checksum: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("coIntegs")
+            @ExcludeMissing
+            coIntegs: JsonField<List<Int>> = JsonMissing.of(),
+            @JsonProperty("consRecs")
+            @ExcludeMissing
+            consRecs: JsonField<List<Int>> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("doppVels")
+            @ExcludeMissing
+            doppVels: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("fileCreation")
+            @ExcludeMissing
+            fileCreation: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("firstGuessAvgs")
+            @ExcludeMissing
+            firstGuessAvgs: JsonField<List<Int>> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("interpulsePeriods")
+            @ExcludeMissing
+            interpulsePeriods: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("lightDetSensors")
+            @ExcludeMissing
+            lightDetSensors: JsonField<List<Int>> = JsonMissing.of(),
+            @JsonProperty("lightEventNum")
+            @ExcludeMissing
+            lightEventNum: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("noiseLvls")
+            @ExcludeMissing
+            noiseLvls: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("numElements")
+            @ExcludeMissing
+            numElements: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("posConfidence")
+            @ExcludeMissing
+            posConfidence: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("qcValue") @ExcludeMissing qcValue: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sectorNum") @ExcludeMissing sectorNum: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("semiMajorAxis")
+            @ExcludeMissing
+            semiMajorAxis: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("semiMinorAxis")
+            @ExcludeMissing
+            semiMinorAxis: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sigPwrs")
+            @ExcludeMissing
+            sigPwrs: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("sigStrength")
+            @ExcludeMissing
+            sigStrength: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("snrs") @ExcludeMissing snrs: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("specAvgs")
+            @ExcludeMissing
+            specAvgs: JsonField<List<Int>> = JsonMissing.of(),
+            @JsonProperty("specWidths")
+            @ExcludeMissing
+            specWidths: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("srcIds")
+            @ExcludeMissing
+            srcIds: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("srcTyps")
+            @ExcludeMissing
+            srcTyps: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("tdAvgSampleNums")
+            @ExcludeMissing
+            tdAvgSampleNums: JsonField<List<Int>> = JsonMissing.of(),
+            @JsonProperty("termAlt") @ExcludeMissing termAlt: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            obTime,
+            source,
+            id,
+            angleOrientation,
+            avgRefPwr,
+            avgTxPwr,
+            checksum,
+            coIntegs,
+            consRecs,
+            createdAt,
+            createdBy,
+            doppVels,
+            fileCreation,
+            firstGuessAvgs,
+            idSensor,
+            interpulsePeriods,
+            lightDetSensors,
+            lightEventNum,
+            noiseLvls,
+            numElements,
+            origin,
+            origNetwork,
+            origSensorId,
+            posConfidence,
+            qcValue,
+            sectorNum,
+            semiMajorAxis,
+            semiMinorAxis,
+            sigPwrs,
+            sigStrength,
+            snrs,
+            specAvgs,
+            specWidths,
+            srcIds,
+            srcTyps,
+            tdAvgSampleNums,
+            termAlt,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -956,6 +1093,16 @@ private constructor(
          */
         @JsonProperty("termAlt") @ExcludeMissing fun _termAlt(): JsonField<Double> = termAlt
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1016,6 +1163,7 @@ private constructor(
             private var srcTyps: JsonField<MutableList<String>>? = null
             private var tdAvgSampleNums: JsonField<MutableList<Int>>? = null
             private var termAlt: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1058,6 +1206,7 @@ private constructor(
                 srcTyps = body.srcTyps.map { it.toMutableList() }
                 tdAvgSampleNums = body.tdAvgSampleNums.map { it.toMutableList() }
                 termAlt = body.termAlt
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1849,6 +1998,25 @@ private constructor(
              */
             fun termAlt(termAlt: JsonField<Double>) = apply { this.termAlt = termAlt }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1905,6 +2073,7 @@ private constructor(
                     (srcTyps ?: JsonMissing.of()).map { it.toImmutable() },
                     (tdAvgSampleNums ?: JsonMissing.of()).map { it.toImmutable() },
                     termAlt,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -2213,7 +2382,8 @@ private constructor(
                 srcIds == other.srcIds &&
                 srcTyps == other.srcTyps &&
                 tdAvgSampleNums == other.tdAvgSampleNums &&
-                termAlt == other.termAlt
+                termAlt == other.termAlt &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -2257,13 +2427,14 @@ private constructor(
                 srcTyps,
                 tdAvgSampleNums,
                 termAlt,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, id=$id, angleOrientation=$angleOrientation, avgRefPwr=$avgRefPwr, avgTxPwr=$avgTxPwr, checksum=$checksum, coIntegs=$coIntegs, consRecs=$consRecs, createdAt=$createdAt, createdBy=$createdBy, doppVels=$doppVels, fileCreation=$fileCreation, firstGuessAvgs=$firstGuessAvgs, idSensor=$idSensor, interpulsePeriods=$interpulsePeriods, lightDetSensors=$lightDetSensors, lightEventNum=$lightEventNum, noiseLvls=$noiseLvls, numElements=$numElements, origin=$origin, origNetwork=$origNetwork, origSensorId=$origSensorId, posConfidence=$posConfidence, qcValue=$qcValue, sectorNum=$sectorNum, semiMajorAxis=$semiMajorAxis, semiMinorAxis=$semiMinorAxis, sigPwrs=$sigPwrs, sigStrength=$sigStrength, snrs=$snrs, specAvgs=$specAvgs, specWidths=$specWidths, srcIds=$srcIds, srcTyps=$srcTyps, tdAvgSampleNums=$tdAvgSampleNums, termAlt=$termAlt}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, id=$id, angleOrientation=$angleOrientation, avgRefPwr=$avgRefPwr, avgTxPwr=$avgTxPwr, checksum=$checksum, coIntegs=$coIntegs, consRecs=$consRecs, createdAt=$createdAt, createdBy=$createdBy, doppVels=$doppVels, fileCreation=$fileCreation, firstGuessAvgs=$firstGuessAvgs, idSensor=$idSensor, interpulsePeriods=$interpulsePeriods, lightDetSensors=$lightDetSensors, lightEventNum=$lightEventNum, noiseLvls=$noiseLvls, numElements=$numElements, origin=$origin, origNetwork=$origNetwork, origSensorId=$origSensorId, posConfidence=$posConfidence, qcValue=$qcValue, sectorNum=$sectorNum, semiMajorAxis=$semiMajorAxis, semiMinorAxis=$semiMinorAxis, sigPwrs=$sigPwrs, sigStrength=$sigStrength, snrs=$snrs, specAvgs=$specAvgs, specWidths=$specWidths, srcIds=$srcIds, srcTyps=$srcTyps, tdAvgSampleNums=$tdAvgSampleNums, termAlt=$termAlt, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.emittergeolocation
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -210,63 +214,236 @@ private constructor(
 
     /** Model representation of Emitter geolocation data for a signal of interest. */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("signalOfInterestType")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
         private val signalOfInterestType: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("startTime") @ExcludeMissing private val startTime: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("agjson") @ExcludeMissing private val agjson: JsonField<String>,
-        @JsonProperty("algVersion") @ExcludeMissing private val algVersion: JsonField<String>,
-        @JsonProperty("andims") @ExcludeMissing private val andims: JsonField<Int>,
-        @JsonProperty("area") @ExcludeMissing private val area: JsonField<String>,
-        @JsonProperty("asrid") @ExcludeMissing private val asrid: JsonField<Int>,
-        @JsonProperty("atext") @ExcludeMissing private val atext: JsonField<String>,
-        @JsonProperty("atype") @ExcludeMissing private val atype: JsonField<String>,
-        @JsonProperty("centerFreq") @ExcludeMissing private val centerFreq: JsonField<Double>,
-        @JsonProperty("cluster") @ExcludeMissing private val cluster: JsonField<String>,
-        @JsonProperty("confArea") @ExcludeMissing private val confArea: JsonField<Double>,
-        @JsonProperty("constellation") @ExcludeMissing private val constellation: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("createdTs") @ExcludeMissing private val createdTs: JsonField<OffsetDateTime>,
-        @JsonProperty("detectAlt") @ExcludeMissing private val detectAlt: JsonField<Double>,
-        @JsonProperty("detectLat") @ExcludeMissing private val detectLat: JsonField<Double>,
-        @JsonProperty("detectLon") @ExcludeMissing private val detectLon: JsonField<Double>,
-        @JsonProperty("endTime") @ExcludeMissing private val endTime: JsonField<OffsetDateTime>,
-        @JsonProperty("errEllp") @ExcludeMissing private val errEllp: JsonField<List<Double>>,
-        @JsonProperty("externalId") @ExcludeMissing private val externalId: JsonField<String>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("idRFEmitter") @ExcludeMissing private val idRfEmitter: JsonField<String>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("maxFreq") @ExcludeMissing private val maxFreq: JsonField<Double>,
-        @JsonProperty("minFreq") @ExcludeMissing private val minFreq: JsonField<Double>,
-        @JsonProperty("numBursts") @ExcludeMissing private val numBursts: JsonField<Int>,
-        @JsonProperty("orderId") @ExcludeMissing private val orderId: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("origRFEmitterId")
-        @ExcludeMissing
+        private val source: JsonField<String>,
+        private val startTime: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
+        private val agjson: JsonField<String>,
+        private val algVersion: JsonField<String>,
+        private val andims: JsonField<Int>,
+        private val area: JsonField<String>,
+        private val asrid: JsonField<Int>,
+        private val atext: JsonField<String>,
+        private val atype: JsonField<String>,
+        private val avgPrf: JsonField<Double>,
+        private val avgPri: JsonField<Double>,
+        private val avgPw: JsonField<Double>,
+        private val centerFreq: JsonField<Double>,
+        private val cluster: JsonField<String>,
+        private val confArea: JsonField<Double>,
+        private val constellation: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val createdTs: JsonField<OffsetDateTime>,
+        private val detectAlt: JsonField<Double>,
+        private val detectLat: JsonField<Double>,
+        private val detectLon: JsonField<Double>,
+        private val endTime: JsonField<OffsetDateTime>,
+        private val errEllp: JsonField<List<Double>>,
+        private val externalId: JsonField<String>,
+        private val idOnOrbit: JsonField<String>,
+        private val idRfEmitter: JsonField<String>,
+        private val idSensor: JsonField<String>,
+        private val maxFreq: JsonField<Double>,
+        private val maxPrf: JsonField<Double>,
+        private val maxPri: JsonField<Double>,
+        private val maxPw: JsonField<Double>,
+        private val minFreq: JsonField<Double>,
+        private val minPrf: JsonField<Double>,
+        private val minPri: JsonField<Double>,
+        private val minPw: JsonField<Double>,
+        private val numBursts: JsonField<Int>,
+        private val orderId: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
         private val origRfEmitterId: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("passGroupId") @ExcludeMissing private val passGroupId: JsonField<String>,
-        @JsonProperty("receivedTs")
-        @ExcludeMissing
+        private val origSensorId: JsonField<String>,
+        private val passGroupId: JsonField<String>,
+        private val pulseShape: JsonField<String>,
         private val receivedTs: JsonField<OffsetDateTime>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("signalOfInterest")
-        @ExcludeMissing
+        private val satNo: JsonField<Int>,
         private val signalOfInterest: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
+        private val sourceDl: JsonField<String>,
+        private val tags: JsonField<List<String>>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("signalOfInterestType")
+            @ExcludeMissing
+            signalOfInterestType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("startTime")
+            @ExcludeMissing
+            startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("agjson") @ExcludeMissing agjson: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("algVersion")
+            @ExcludeMissing
+            algVersion: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("andims") @ExcludeMissing andims: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("area") @ExcludeMissing area: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("asrid") @ExcludeMissing asrid: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("atext") @ExcludeMissing atext: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("atype") @ExcludeMissing atype: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("avgPRF") @ExcludeMissing avgPrf: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("avgPRI") @ExcludeMissing avgPri: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("avgPW") @ExcludeMissing avgPw: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("centerFreq")
+            @ExcludeMissing
+            centerFreq: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("cluster") @ExcludeMissing cluster: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("confArea")
+            @ExcludeMissing
+            confArea: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("constellation")
+            @ExcludeMissing
+            constellation: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdTs")
+            @ExcludeMissing
+            createdTs: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("detectAlt")
+            @ExcludeMissing
+            detectAlt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("detectLat")
+            @ExcludeMissing
+            detectLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("detectLon")
+            @ExcludeMissing
+            detectLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("endTime")
+            @ExcludeMissing
+            endTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("errEllp")
+            @ExcludeMissing
+            errEllp: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("externalId")
+            @ExcludeMissing
+            externalId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idRFEmitter")
+            @ExcludeMissing
+            idRfEmitter: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("maxFreq") @ExcludeMissing maxFreq: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("maxPRF") @ExcludeMissing maxPrf: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("maxPRI") @ExcludeMissing maxPri: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("maxPW") @ExcludeMissing maxPw: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("minFreq") @ExcludeMissing minFreq: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("minPRF") @ExcludeMissing minPrf: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("minPRI") @ExcludeMissing minPri: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("minPW") @ExcludeMissing minPw: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("numBursts") @ExcludeMissing numBursts: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("orderId") @ExcludeMissing orderId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origRFEmitterId")
+            @ExcludeMissing
+            origRfEmitterId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("passGroupId")
+            @ExcludeMissing
+            passGroupId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("pulseShape")
+            @ExcludeMissing
+            pulseShape: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("receivedTs")
+            @ExcludeMissing
+            receivedTs: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("signalOfInterest")
+            @ExcludeMissing
+            signalOfInterest: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            signalOfInterestType,
+            source,
+            startTime,
+            id,
+            agjson,
+            algVersion,
+            andims,
+            area,
+            asrid,
+            atext,
+            atype,
+            avgPrf,
+            avgPri,
+            avgPw,
+            centerFreq,
+            cluster,
+            confArea,
+            constellation,
+            createdAt,
+            createdBy,
+            createdTs,
+            detectAlt,
+            detectLat,
+            detectLon,
+            endTime,
+            errEllp,
+            externalId,
+            idOnOrbit,
+            idRfEmitter,
+            idSensor,
+            maxFreq,
+            maxPrf,
+            maxPri,
+            maxPw,
+            minFreq,
+            minPrf,
+            minPri,
+            minPw,
+            numBursts,
+            orderId,
+            origin,
+            origNetwork,
+            origObjectId,
+            origRfEmitterId,
+            origSensorId,
+            passGroupId,
+            pulseShape,
+            receivedTs,
+            satNo,
+            signalOfInterest,
+            sourceDl,
+            tags,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -399,6 +576,34 @@ private constructor(
         fun atype(): Optional<String> = atype.getOptional("atype")
 
         /**
+         * Average pulse repetition frequency of the emitter, measured in hertz. PRF is the number
+         * of pulses transmitted per second. This is the reciprocal of the avgPRI (Pulse Repetition
+         * Interval) value.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun avgPrf(): Optional<Double> = avgPrf.getOptional("avgPRF")
+
+        /**
+         * Average pulse repetition interval of the emitter, measured in microseconds. The interval
+         * between the start of one pulse and the start of another.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun avgPri(): Optional<Double> = avgPri.getOptional("avgPRI")
+
+        /**
+         * Average pulse width of the emitter, measured in nanoseconds. This is the average duration
+         * of the pulse.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun avgPw(): Optional<Double> = avgPw.getOptional("avgPW")
+
+        /**
          * The detected signal frequency in megahertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
@@ -493,7 +698,7 @@ private constructor(
 
         /**
          * Confidence ellipsoid about the detection location
-         * [semi-major axis (m), semi-minor axis (m), orientation (deg)].
+         * [semi-major axis (meters), semi-minor axis (meters), orientation (degrees) measured clockwise (0-360 from true north)].
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
@@ -552,12 +757,68 @@ private constructor(
         fun maxFreq(): Optional<Double> = maxFreq.getOptional("maxFreq")
 
         /**
+         * Maximum pulse repetition frequency of the emitter, measured in hertz. PRF is the number
+         * of pulses transmitted per second. This is the reciprocal of the minPRI (Pulse Repetition
+         * Interval) value.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun maxPrf(): Optional<Double> = maxPrf.getOptional("maxPRF")
+
+        /**
+         * Maximum pulse repetition interval of the emitter, measured in microseconds. The interval
+         * between the start of one pulse and the start of another.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun maxPri(): Optional<Double> = maxPri.getOptional("maxPRI")
+
+        /**
+         * Maximum pulse width of the emitter, measured in nanoseconds. This is the maximum duration
+         * of the pulse.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun maxPw(): Optional<Double> = maxPw.getOptional("maxPW")
+
+        /**
          * The minimum detected frequency in megahertz.
          *
          * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
          *   (e.g. if the server responded with an unexpected value).
          */
         fun minFreq(): Optional<Double> = minFreq.getOptional("minFreq")
+
+        /**
+         * Minimum pulse repetition frequency of the emitter, measured in hertz. PRF is the number
+         * of pulses transmitted per second. This is the reciprocal of the maxPRI (Pulse Repetition
+         * Interval) value.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun minPrf(): Optional<Double> = minPrf.getOptional("minPRF")
+
+        /**
+         * Minimum pulse repetition interval of the emitter, measured in microseconds. The interval
+         * between the start of one pulse and the start of another.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun minPri(): Optional<Double> = minPri.getOptional("minPRI")
+
+        /**
+         * Minimum pulse width of the emitter, measured in nanoseconds. This is the minimum duration
+         * of the pulse.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun minPw(): Optional<Double> = minPw.getOptional("minPW")
 
         /**
          * The count of single-burst observations used for this geolocation observation.
@@ -632,6 +893,15 @@ private constructor(
          *   (e.g. if the server responded with an unexpected value).
          */
         fun passGroupId(): Optional<String> = passGroupId.getOptional("passGroupId")
+
+        /**
+         * Describes the form of the emitted pulse and how its signal varies within the pulse
+         * duration (e.g. GAUSSIAN, RECTANGULAR, TRAPEZOIDAL, etc.).
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun pulseShape(): Optional<String> = pulseShape.getOptional("pulseShape")
 
         /**
          * The time representing the mean of the constituent single-burst observations in ISO 8601
@@ -783,6 +1053,27 @@ private constructor(
         @JsonProperty("atype") @ExcludeMissing fun _atype(): JsonField<String> = atype
 
         /**
+         * Returns the raw JSON value of [avgPrf].
+         *
+         * Unlike [avgPrf], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("avgPRF") @ExcludeMissing fun _avgPrf(): JsonField<Double> = avgPrf
+
+        /**
+         * Returns the raw JSON value of [avgPri].
+         *
+         * Unlike [avgPri], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("avgPRI") @ExcludeMissing fun _avgPri(): JsonField<Double> = avgPri
+
+        /**
+         * Returns the raw JSON value of [avgPw].
+         *
+         * Unlike [avgPw], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("avgPW") @ExcludeMissing fun _avgPw(): JsonField<Double> = avgPw
+
+        /**
          * Returns the raw JSON value of [centerFreq].
          *
          * Unlike [centerFreq], this method doesn't throw if the JSON field has an unexpected type.
@@ -915,11 +1206,53 @@ private constructor(
         @JsonProperty("maxFreq") @ExcludeMissing fun _maxFreq(): JsonField<Double> = maxFreq
 
         /**
+         * Returns the raw JSON value of [maxPrf].
+         *
+         * Unlike [maxPrf], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("maxPRF") @ExcludeMissing fun _maxPrf(): JsonField<Double> = maxPrf
+
+        /**
+         * Returns the raw JSON value of [maxPri].
+         *
+         * Unlike [maxPri], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("maxPRI") @ExcludeMissing fun _maxPri(): JsonField<Double> = maxPri
+
+        /**
+         * Returns the raw JSON value of [maxPw].
+         *
+         * Unlike [maxPw], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("maxPW") @ExcludeMissing fun _maxPw(): JsonField<Double> = maxPw
+
+        /**
          * Returns the raw JSON value of [minFreq].
          *
          * Unlike [minFreq], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("minFreq") @ExcludeMissing fun _minFreq(): JsonField<Double> = minFreq
+
+        /**
+         * Returns the raw JSON value of [minPrf].
+         *
+         * Unlike [minPrf], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("minPRF") @ExcludeMissing fun _minPrf(): JsonField<Double> = minPrf
+
+        /**
+         * Returns the raw JSON value of [minPri].
+         *
+         * Unlike [minPri], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("minPRI") @ExcludeMissing fun _minPri(): JsonField<Double> = minPri
+
+        /**
+         * Returns the raw JSON value of [minPw].
+         *
+         * Unlike [minPw], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("minPW") @ExcludeMissing fun _minPw(): JsonField<Double> = minPw
 
         /**
          * Returns the raw JSON value of [numBursts].
@@ -991,6 +1324,15 @@ private constructor(
         fun _passGroupId(): JsonField<String> = passGroupId
 
         /**
+         * Returns the raw JSON value of [pulseShape].
+         *
+         * Unlike [pulseShape], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("pulseShape")
+        @ExcludeMissing
+        fun _pulseShape(): JsonField<String> = pulseShape
+
+        /**
          * Returns the raw JSON value of [receivedTs].
          *
          * Unlike [receivedTs], this method doesn't throw if the JSON field has an unexpected type.
@@ -1030,6 +1372,16 @@ private constructor(
          */
         @JsonProperty("tags") @ExcludeMissing fun _tags(): JsonField<List<String>> = tags
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1065,6 +1417,9 @@ private constructor(
             private var asrid: JsonField<Int> = JsonMissing.of()
             private var atext: JsonField<String> = JsonMissing.of()
             private var atype: JsonField<String> = JsonMissing.of()
+            private var avgPrf: JsonField<Double> = JsonMissing.of()
+            private var avgPri: JsonField<Double> = JsonMissing.of()
+            private var avgPw: JsonField<Double> = JsonMissing.of()
             private var centerFreq: JsonField<Double> = JsonMissing.of()
             private var cluster: JsonField<String> = JsonMissing.of()
             private var confArea: JsonField<Double> = JsonMissing.of()
@@ -1082,7 +1437,13 @@ private constructor(
             private var idRfEmitter: JsonField<String> = JsonMissing.of()
             private var idSensor: JsonField<String> = JsonMissing.of()
             private var maxFreq: JsonField<Double> = JsonMissing.of()
+            private var maxPrf: JsonField<Double> = JsonMissing.of()
+            private var maxPri: JsonField<Double> = JsonMissing.of()
+            private var maxPw: JsonField<Double> = JsonMissing.of()
             private var minFreq: JsonField<Double> = JsonMissing.of()
+            private var minPrf: JsonField<Double> = JsonMissing.of()
+            private var minPri: JsonField<Double> = JsonMissing.of()
+            private var minPw: JsonField<Double> = JsonMissing.of()
             private var numBursts: JsonField<Int> = JsonMissing.of()
             private var orderId: JsonField<String> = JsonMissing.of()
             private var origin: JsonField<String> = JsonMissing.of()
@@ -1091,11 +1452,13 @@ private constructor(
             private var origRfEmitterId: JsonField<String> = JsonMissing.of()
             private var origSensorId: JsonField<String> = JsonMissing.of()
             private var passGroupId: JsonField<String> = JsonMissing.of()
+            private var pulseShape: JsonField<String> = JsonMissing.of()
             private var receivedTs: JsonField<OffsetDateTime> = JsonMissing.of()
             private var satNo: JsonField<Int> = JsonMissing.of()
             private var signalOfInterest: JsonField<String> = JsonMissing.of()
             private var sourceDl: JsonField<String> = JsonMissing.of()
             private var tags: JsonField<MutableList<String>>? = null
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1112,6 +1475,9 @@ private constructor(
                 asrid = body.asrid
                 atext = body.atext
                 atype = body.atype
+                avgPrf = body.avgPrf
+                avgPri = body.avgPri
+                avgPw = body.avgPw
                 centerFreq = body.centerFreq
                 cluster = body.cluster
                 confArea = body.confArea
@@ -1129,7 +1495,13 @@ private constructor(
                 idRfEmitter = body.idRfEmitter
                 idSensor = body.idSensor
                 maxFreq = body.maxFreq
+                maxPrf = body.maxPrf
+                maxPri = body.maxPri
+                maxPw = body.maxPw
                 minFreq = body.minFreq
+                minPrf = body.minPrf
+                minPri = body.minPri
+                minPw = body.minPw
                 numBursts = body.numBursts
                 orderId = body.orderId
                 origin = body.origin
@@ -1138,11 +1510,13 @@ private constructor(
                 origRfEmitterId = body.origRfEmitterId
                 origSensorId = body.origSensorId
                 passGroupId = body.passGroupId
+                pulseShape = body.pulseShape
                 receivedTs = body.receivedTs
                 satNo = body.satNo
                 signalOfInterest = body.signalOfInterest
                 sourceDl = body.sourceDl
                 tags = body.tags.map { it.toMutableList() }
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1341,6 +1715,52 @@ private constructor(
              */
             fun atype(atype: JsonField<String>) = apply { this.atype = atype }
 
+            /**
+             * Average pulse repetition frequency of the emitter, measured in hertz. PRF is the
+             * number of pulses transmitted per second. This is the reciprocal of the avgPRI (Pulse
+             * Repetition Interval) value.
+             */
+            fun avgPrf(avgPrf: Double) = avgPrf(JsonField.of(avgPrf))
+
+            /**
+             * Sets [Builder.avgPrf] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.avgPrf] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun avgPrf(avgPrf: JsonField<Double>) = apply { this.avgPrf = avgPrf }
+
+            /**
+             * Average pulse repetition interval of the emitter, measured in microseconds. The
+             * interval between the start of one pulse and the start of another.
+             */
+            fun avgPri(avgPri: Double) = avgPri(JsonField.of(avgPri))
+
+            /**
+             * Sets [Builder.avgPri] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.avgPri] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun avgPri(avgPri: JsonField<Double>) = apply { this.avgPri = avgPri }
+
+            /**
+             * Average pulse width of the emitter, measured in nanoseconds. This is the average
+             * duration of the pulse.
+             */
+            fun avgPw(avgPw: Double) = avgPw(JsonField.of(avgPw))
+
+            /**
+             * Sets [Builder.avgPw] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.avgPw] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun avgPw(avgPw: JsonField<Double>) = apply { this.avgPw = avgPw }
+
             /** The detected signal frequency in megahertz. */
             fun centerFreq(centerFreq: Double) = centerFreq(JsonField.of(centerFreq))
 
@@ -1498,7 +1918,7 @@ private constructor(
 
             /**
              * Confidence ellipsoid about the detection location
-             * [semi-major axis (m), semi-minor axis (m), orientation (deg)].
+             * [semi-major axis (meters), semi-minor axis (meters), orientation (degrees) measured clockwise (0-360 from true north)].
              */
             fun errEllp(errEllp: List<Double>) = errEllp(JsonField.of(errEllp))
 
@@ -1607,6 +2027,52 @@ private constructor(
              */
             fun maxFreq(maxFreq: JsonField<Double>) = apply { this.maxFreq = maxFreq }
 
+            /**
+             * Maximum pulse repetition frequency of the emitter, measured in hertz. PRF is the
+             * number of pulses transmitted per second. This is the reciprocal of the minPRI (Pulse
+             * Repetition Interval) value.
+             */
+            fun maxPrf(maxPrf: Double) = maxPrf(JsonField.of(maxPrf))
+
+            /**
+             * Sets [Builder.maxPrf] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.maxPrf] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun maxPrf(maxPrf: JsonField<Double>) = apply { this.maxPrf = maxPrf }
+
+            /**
+             * Maximum pulse repetition interval of the emitter, measured in microseconds. The
+             * interval between the start of one pulse and the start of another.
+             */
+            fun maxPri(maxPri: Double) = maxPri(JsonField.of(maxPri))
+
+            /**
+             * Sets [Builder.maxPri] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.maxPri] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun maxPri(maxPri: JsonField<Double>) = apply { this.maxPri = maxPri }
+
+            /**
+             * Maximum pulse width of the emitter, measured in nanoseconds. This is the maximum
+             * duration of the pulse.
+             */
+            fun maxPw(maxPw: Double) = maxPw(JsonField.of(maxPw))
+
+            /**
+             * Sets [Builder.maxPw] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.maxPw] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun maxPw(maxPw: JsonField<Double>) = apply { this.maxPw = maxPw }
+
             /** The minimum detected frequency in megahertz. */
             fun minFreq(minFreq: Double) = minFreq(JsonField.of(minFreq))
 
@@ -1618,6 +2084,52 @@ private constructor(
              * supported value.
              */
             fun minFreq(minFreq: JsonField<Double>) = apply { this.minFreq = minFreq }
+
+            /**
+             * Minimum pulse repetition frequency of the emitter, measured in hertz. PRF is the
+             * number of pulses transmitted per second. This is the reciprocal of the maxPRI (Pulse
+             * Repetition Interval) value.
+             */
+            fun minPrf(minPrf: Double) = minPrf(JsonField.of(minPrf))
+
+            /**
+             * Sets [Builder.minPrf] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.minPrf] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun minPrf(minPrf: JsonField<Double>) = apply { this.minPrf = minPrf }
+
+            /**
+             * Minimum pulse repetition interval of the emitter, measured in microseconds. The
+             * interval between the start of one pulse and the start of another.
+             */
+            fun minPri(minPri: Double) = minPri(JsonField.of(minPri))
+
+            /**
+             * Sets [Builder.minPri] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.minPri] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun minPri(minPri: JsonField<Double>) = apply { this.minPri = minPri }
+
+            /**
+             * Minimum pulse width of the emitter, measured in nanoseconds. This is the minimum
+             * duration of the pulse.
+             */
+            fun minPw(minPw: Double) = minPw(JsonField.of(minPw))
+
+            /**
+             * Sets [Builder.minPw] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.minPw] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun minPw(minPw: JsonField<Double>) = apply { this.minPw = minPw }
 
             /** The count of single-burst observations used for this geolocation observation. */
             fun numBursts(numBursts: Int) = numBursts(JsonField.of(numBursts))
@@ -1751,6 +2263,21 @@ private constructor(
             }
 
             /**
+             * Describes the form of the emitted pulse and how its signal varies within the pulse
+             * duration (e.g. GAUSSIAN, RECTANGULAR, TRAPEZOIDAL, etc.).
+             */
+            fun pulseShape(pulseShape: String) = pulseShape(JsonField.of(pulseShape))
+
+            /**
+             * Sets [Builder.pulseShape] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.pulseShape] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun pulseShape(pulseShape: JsonField<String>) = apply { this.pulseShape = pulseShape }
+
+            /**
              * The time representing the mean of the constituent single-burst observations in ISO
              * 8601 UTC with microsecond precision.
              */
@@ -1843,6 +2370,25 @@ private constructor(
                     (tags ?: JsonField.of(mutableListOf())).also { checkKnown("tags", it).add(tag) }
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1874,6 +2420,9 @@ private constructor(
                     asrid,
                     atext,
                     atype,
+                    avgPrf,
+                    avgPri,
+                    avgPw,
                     centerFreq,
                     cluster,
                     confArea,
@@ -1891,7 +2440,13 @@ private constructor(
                     idRfEmitter,
                     idSensor,
                     maxFreq,
+                    maxPrf,
+                    maxPri,
+                    maxPw,
                     minFreq,
+                    minPrf,
+                    minPri,
+                    minPw,
                     numBursts,
                     orderId,
                     origin,
@@ -1900,11 +2455,13 @@ private constructor(
                     origRfEmitterId,
                     origSensorId,
                     passGroupId,
+                    pulseShape,
                     receivedTs,
                     satNo,
                     signalOfInterest,
                     sourceDl,
                     (tags ?: JsonMissing.of()).map { it.toImmutable() },
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1928,6 +2485,9 @@ private constructor(
             asrid()
             atext()
             atype()
+            avgPrf()
+            avgPri()
+            avgPw()
             centerFreq()
             cluster()
             confArea()
@@ -1945,7 +2505,13 @@ private constructor(
             idRfEmitter()
             idSensor()
             maxFreq()
+            maxPrf()
+            maxPri()
+            maxPw()
             minFreq()
+            minPrf()
+            minPri()
+            minPw()
             numBursts()
             orderId()
             origin()
@@ -1954,6 +2520,7 @@ private constructor(
             origRfEmitterId()
             origSensorId()
             passGroupId()
+            pulseShape()
             receivedTs()
             satNo()
             signalOfInterest()
@@ -1991,6 +2558,9 @@ private constructor(
                 (if (asrid.asKnown().isPresent) 1 else 0) +
                 (if (atext.asKnown().isPresent) 1 else 0) +
                 (if (atype.asKnown().isPresent) 1 else 0) +
+                (if (avgPrf.asKnown().isPresent) 1 else 0) +
+                (if (avgPri.asKnown().isPresent) 1 else 0) +
+                (if (avgPw.asKnown().isPresent) 1 else 0) +
                 (if (centerFreq.asKnown().isPresent) 1 else 0) +
                 (if (cluster.asKnown().isPresent) 1 else 0) +
                 (if (confArea.asKnown().isPresent) 1 else 0) +
@@ -2008,7 +2578,13 @@ private constructor(
                 (if (idRfEmitter.asKnown().isPresent) 1 else 0) +
                 (if (idSensor.asKnown().isPresent) 1 else 0) +
                 (if (maxFreq.asKnown().isPresent) 1 else 0) +
+                (if (maxPrf.asKnown().isPresent) 1 else 0) +
+                (if (maxPri.asKnown().isPresent) 1 else 0) +
+                (if (maxPw.asKnown().isPresent) 1 else 0) +
                 (if (minFreq.asKnown().isPresent) 1 else 0) +
+                (if (minPrf.asKnown().isPresent) 1 else 0) +
+                (if (minPri.asKnown().isPresent) 1 else 0) +
+                (if (minPw.asKnown().isPresent) 1 else 0) +
                 (if (numBursts.asKnown().isPresent) 1 else 0) +
                 (if (orderId.asKnown().isPresent) 1 else 0) +
                 (if (origin.asKnown().isPresent) 1 else 0) +
@@ -2017,6 +2593,7 @@ private constructor(
                 (if (origRfEmitterId.asKnown().isPresent) 1 else 0) +
                 (if (origSensorId.asKnown().isPresent) 1 else 0) +
                 (if (passGroupId.asKnown().isPresent) 1 else 0) +
+                (if (pulseShape.asKnown().isPresent) 1 else 0) +
                 (if (receivedTs.asKnown().isPresent) 1 else 0) +
                 (if (satNo.asKnown().isPresent) 1 else 0) +
                 (if (signalOfInterest.asKnown().isPresent) 1 else 0) +
@@ -2198,6 +2775,9 @@ private constructor(
                 asrid == other.asrid &&
                 atext == other.atext &&
                 atype == other.atype &&
+                avgPrf == other.avgPrf &&
+                avgPri == other.avgPri &&
+                avgPw == other.avgPw &&
                 centerFreq == other.centerFreq &&
                 cluster == other.cluster &&
                 confArea == other.confArea &&
@@ -2215,7 +2795,13 @@ private constructor(
                 idRfEmitter == other.idRfEmitter &&
                 idSensor == other.idSensor &&
                 maxFreq == other.maxFreq &&
+                maxPrf == other.maxPrf &&
+                maxPri == other.maxPri &&
+                maxPw == other.maxPw &&
                 minFreq == other.minFreq &&
+                minPrf == other.minPrf &&
+                minPri == other.minPri &&
+                minPw == other.minPw &&
                 numBursts == other.numBursts &&
                 orderId == other.orderId &&
                 origin == other.origin &&
@@ -2224,11 +2810,13 @@ private constructor(
                 origRfEmitterId == other.origRfEmitterId &&
                 origSensorId == other.origSensorId &&
                 passGroupId == other.passGroupId &&
+                pulseShape == other.pulseShape &&
                 receivedTs == other.receivedTs &&
                 satNo == other.satNo &&
                 signalOfInterest == other.signalOfInterest &&
                 sourceDl == other.sourceDl &&
-                tags == other.tags
+                tags == other.tags &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -2246,6 +2834,9 @@ private constructor(
                 asrid,
                 atext,
                 atype,
+                avgPrf,
+                avgPri,
+                avgPw,
                 centerFreq,
                 cluster,
                 confArea,
@@ -2263,7 +2854,13 @@ private constructor(
                 idRfEmitter,
                 idSensor,
                 maxFreq,
+                maxPrf,
+                maxPri,
+                maxPw,
                 minFreq,
+                minPrf,
+                minPri,
+                minPw,
                 numBursts,
                 orderId,
                 origin,
@@ -2272,18 +2869,20 @@ private constructor(
                 origRfEmitterId,
                 origSensorId,
                 passGroupId,
+                pulseShape,
                 receivedTs,
                 satNo,
                 signalOfInterest,
                 sourceDl,
                 tags,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, signalOfInterestType=$signalOfInterestType, source=$source, startTime=$startTime, id=$id, agjson=$agjson, algVersion=$algVersion, andims=$andims, area=$area, asrid=$asrid, atext=$atext, atype=$atype, centerFreq=$centerFreq, cluster=$cluster, confArea=$confArea, constellation=$constellation, createdAt=$createdAt, createdBy=$createdBy, createdTs=$createdTs, detectAlt=$detectAlt, detectLat=$detectLat, detectLon=$detectLon, endTime=$endTime, errEllp=$errEllp, externalId=$externalId, idOnOrbit=$idOnOrbit, idRfEmitter=$idRfEmitter, idSensor=$idSensor, maxFreq=$maxFreq, minFreq=$minFreq, numBursts=$numBursts, orderId=$orderId, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origRfEmitterId=$origRfEmitterId, origSensorId=$origSensorId, passGroupId=$passGroupId, receivedTs=$receivedTs, satNo=$satNo, signalOfInterest=$signalOfInterest, sourceDl=$sourceDl, tags=$tags}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, signalOfInterestType=$signalOfInterestType, source=$source, startTime=$startTime, id=$id, agjson=$agjson, algVersion=$algVersion, andims=$andims, area=$area, asrid=$asrid, atext=$atext, atype=$atype, avgPrf=$avgPrf, avgPri=$avgPri, avgPw=$avgPw, centerFreq=$centerFreq, cluster=$cluster, confArea=$confArea, constellation=$constellation, createdAt=$createdAt, createdBy=$createdBy, createdTs=$createdTs, detectAlt=$detectAlt, detectLat=$detectLat, detectLon=$detectLon, endTime=$endTime, errEllp=$errEllp, externalId=$externalId, idOnOrbit=$idOnOrbit, idRfEmitter=$idRfEmitter, idSensor=$idSensor, maxFreq=$maxFreq, maxPrf=$maxPrf, maxPri=$maxPri, maxPw=$maxPw, minFreq=$minFreq, minPrf=$minPrf, minPri=$minPri, minPw=$minPw, numBursts=$numBursts, orderId=$orderId, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origRfEmitterId=$origRfEmitterId, origSensorId=$origSensorId, passGroupId=$passGroupId, pulseShape=$pulseShape, receivedTs=$receivedTs, satNo=$satNo, signalOfInterest=$signalOfInterest, sourceDl=$sourceDl, tags=$tags, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

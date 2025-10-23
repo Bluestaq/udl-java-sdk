@@ -216,58 +216,191 @@ private constructor(
      * applicable sensor data aiding in the orbit prediction.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("lat") @ExcludeMissing private val lat: JsonField<Double>,
-        @JsonProperty("lon") @ExcludeMissing private val lon: JsonField<Double>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("ts") @ExcludeMissing private val ts: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("alt") @ExcludeMissing private val alt: JsonField<Double>,
-        @JsonProperty("amplification") @ExcludeMissing private val amplification: JsonField<String>,
-        @JsonProperty("angElev") @ExcludeMissing private val angElev: JsonField<Double>,
-        @JsonProperty("aouData") @ExcludeMissing private val aouData: JsonField<List<Double>>,
-        @JsonProperty("aouType") @ExcludeMissing private val aouType: JsonField<String>,
-        @JsonProperty("callSign") @ExcludeMissing private val callSign: JsonField<String>,
-        @JsonProperty("charlieLine") @ExcludeMissing private val charlieLine: JsonField<String>,
-        @JsonProperty("chXRef") @ExcludeMissing private val chXRef: JsonField<String>,
-        @JsonProperty("cntnmnt") @ExcludeMissing private val cntnmnt: JsonField<Double>,
-        @JsonProperty("countryCode") @ExcludeMissing private val countryCode: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("decay") @ExcludeMissing private val decay: JsonField<Double>,
-        @JsonProperty("dummy") @ExcludeMissing private val dummy: JsonField<Boolean>,
-        @JsonProperty("feint") @ExcludeMissing private val feint: JsonField<Boolean>,
-        @JsonProperty("hq") @ExcludeMissing private val hq: JsonField<Boolean>,
-        @JsonProperty("idElset") @ExcludeMissing private val idElset: JsonField<String>,
-        @JsonProperty("identAmp") @ExcludeMissing private val identAmp: JsonField<String>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("iff") @ExcludeMissing private val iff: JsonField<String>,
-        @JsonProperty("installation") @ExcludeMissing private val installation: JsonField<Boolean>,
-        @JsonProperty("objectType") @ExcludeMissing private val objectType: JsonField<ObjectType>,
-        @JsonProperty("objIdent") @ExcludeMissing private val objIdent: JsonField<ObjIdent>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("rdfRF") @ExcludeMissing private val rdfRf: JsonField<Double>,
-        @JsonProperty("reduced") @ExcludeMissing private val reduced: JsonField<Boolean>,
-        @JsonProperty("reinforced") @ExcludeMissing private val reinforced: JsonField<Boolean>,
-        @JsonProperty("rptNum") @ExcludeMissing private val rptNum: JsonField<String>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("satStatus") @ExcludeMissing private val satStatus: JsonField<String>,
-        @JsonProperty("spd") @ExcludeMissing private val spd: JsonField<Double>,
-        @JsonProperty("taskForce") @ExcludeMissing private val taskForce: JsonField<Boolean>,
-        @JsonProperty("trackSensors")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val lat: JsonField<Double>,
+        private val lon: JsonField<Double>,
+        private val source: JsonField<String>,
+        private val ts: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
+        private val alt: JsonField<Double>,
+        private val amplification: JsonField<String>,
+        private val angElev: JsonField<Double>,
+        private val aouData: JsonField<List<Double>>,
+        private val aouType: JsonField<String>,
+        private val callSign: JsonField<String>,
+        private val charlieLine: JsonField<String>,
+        private val chXRef: JsonField<String>,
+        private val cntnmnt: JsonField<Double>,
+        private val countryCode: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val decay: JsonField<Double>,
+        private val dummy: JsonField<Boolean>,
+        private val feint: JsonField<Boolean>,
+        private val hq: JsonField<Boolean>,
+        private val idElset: JsonField<String>,
+        private val identAmp: JsonField<String>,
+        private val idOnOrbit: JsonField<String>,
+        private val iff: JsonField<String>,
+        private val installation: JsonField<Boolean>,
+        private val objectType: JsonField<ObjectType>,
+        private val objIdent: JsonField<ObjIdent>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val rdfRf: JsonField<Double>,
+        private val reduced: JsonField<Boolean>,
+        private val reinforced: JsonField<Boolean>,
+        private val rptNum: JsonField<String>,
+        private val satNo: JsonField<Int>,
+        private val satStatus: JsonField<String>,
+        private val spd: JsonField<Double>,
+        private val taskForce: JsonField<Boolean>,
         private val trackSensors: JsonField<List<TrackSensor>>,
-        @JsonProperty("trkId") @ExcludeMissing private val trkId: JsonField<String>,
-        @JsonProperty("vehType") @ExcludeMissing private val vehType: JsonField<String>,
-        @JsonProperty("xref") @ExcludeMissing private val xref: JsonField<String>,
+        private val trkId: JsonField<String>,
+        private val vehType: JsonField<String>,
+        private val xref: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ts") @ExcludeMissing ts: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("alt") @ExcludeMissing alt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("amplification")
+            @ExcludeMissing
+            amplification: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("angElev") @ExcludeMissing angElev: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("aouData")
+            @ExcludeMissing
+            aouData: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("aouType") @ExcludeMissing aouType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("callSign")
+            @ExcludeMissing
+            callSign: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("charlieLine")
+            @ExcludeMissing
+            charlieLine: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("chXRef") @ExcludeMissing chXRef: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("cntnmnt") @ExcludeMissing cntnmnt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("countryCode")
+            @ExcludeMissing
+            countryCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("decay") @ExcludeMissing decay: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("dummy") @ExcludeMissing dummy: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("feint") @ExcludeMissing feint: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("hq") @ExcludeMissing hq: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("idElset") @ExcludeMissing idElset: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("identAmp")
+            @ExcludeMissing
+            identAmp: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("iff") @ExcludeMissing iff: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("installation")
+            @ExcludeMissing
+            installation: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("objectType")
+            @ExcludeMissing
+            objectType: JsonField<ObjectType> = JsonMissing.of(),
+            @JsonProperty("objIdent")
+            @ExcludeMissing
+            objIdent: JsonField<ObjIdent> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rdfRF") @ExcludeMissing rdfRf: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("reduced") @ExcludeMissing reduced: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("reinforced")
+            @ExcludeMissing
+            reinforced: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("rptNum") @ExcludeMissing rptNum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("satStatus")
+            @ExcludeMissing
+            satStatus: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("spd") @ExcludeMissing spd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("taskForce")
+            @ExcludeMissing
+            taskForce: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("trackSensors")
+            @ExcludeMissing
+            trackSensors: JsonField<List<TrackSensor>> = JsonMissing.of(),
+            @JsonProperty("trkId") @ExcludeMissing trkId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("vehType") @ExcludeMissing vehType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("xref") @ExcludeMissing xref: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            lat,
+            lon,
+            source,
+            ts,
+            id,
+            alt,
+            amplification,
+            angElev,
+            aouData,
+            aouType,
+            callSign,
+            charlieLine,
+            chXRef,
+            cntnmnt,
+            countryCode,
+            createdAt,
+            createdBy,
+            decay,
+            dummy,
+            feint,
+            hq,
+            idElset,
+            identAmp,
+            idOnOrbit,
+            iff,
+            installation,
+            objectType,
+            objIdent,
+            origin,
+            origNetwork,
+            origObjectId,
+            rdfRf,
+            reduced,
+            reinforced,
+            rptNum,
+            satNo,
+            satStatus,
+            spd,
+            taskForce,
+            trackSensors,
+            trkId,
+            vehType,
+            xref,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1083,6 +1216,16 @@ private constructor(
          */
         @JsonProperty("xref") @ExcludeMissing fun _xref(): JsonField<String> = xref
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1151,6 +1294,7 @@ private constructor(
             private var trkId: JsonField<String> = JsonMissing.of()
             private var vehType: JsonField<String> = JsonMissing.of()
             private var xref: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1199,6 +1343,7 @@ private constructor(
                 trkId = body.trkId
                 vehType = body.vehType
                 xref = body.xref
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1951,6 +2096,25 @@ private constructor(
              */
             fun xref(xref: JsonField<String>) = apply { this.xref = xref }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -2015,6 +2179,7 @@ private constructor(
                     trkId,
                     vehType,
                     xref,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -3292,7 +3457,8 @@ private constructor(
                 trackSensors == other.trackSensors &&
                 trkId == other.trkId &&
                 vehType == other.vehType &&
-                xref == other.xref
+                xref == other.xref &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -3342,13 +3508,14 @@ private constructor(
                 trkId,
                 vehType,
                 xref,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, lat=$lat, lon=$lon, source=$source, ts=$ts, id=$id, alt=$alt, amplification=$amplification, angElev=$angElev, aouData=$aouData, aouType=$aouType, callSign=$callSign, charlieLine=$charlieLine, chXRef=$chXRef, cntnmnt=$cntnmnt, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, decay=$decay, dummy=$dummy, feint=$feint, hq=$hq, idElset=$idElset, identAmp=$identAmp, idOnOrbit=$idOnOrbit, iff=$iff, installation=$installation, objectType=$objectType, objIdent=$objIdent, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, rdfRf=$rdfRf, reduced=$reduced, reinforced=$reinforced, rptNum=$rptNum, satNo=$satNo, satStatus=$satStatus, spd=$spd, taskForce=$taskForce, trackSensors=$trackSensors, trkId=$trkId, vehType=$vehType, xref=$xref}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, lat=$lat, lon=$lon, source=$source, ts=$ts, id=$id, alt=$alt, amplification=$amplification, angElev=$angElev, aouData=$aouData, aouType=$aouType, callSign=$callSign, charlieLine=$charlieLine, chXRef=$chXRef, cntnmnt=$cntnmnt, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, decay=$decay, dummy=$dummy, feint=$feint, hq=$hq, idElset=$idElset, identAmp=$identAmp, idOnOrbit=$idOnOrbit, iff=$iff, installation=$installation, objectType=$objectType, objIdent=$objIdent, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, rdfRf=$rdfRf, reduced=$reduced, reinforced=$reinforced, rptNum=$rptNum, satNo=$satNo, satStatus=$satStatus, spd=$spd, taskForce=$taskForce, trackSensors=$trackSensors, trkId=$trkId, vehType=$vehType, xref=$xref, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

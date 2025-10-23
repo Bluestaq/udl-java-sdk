@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.sensor.calibration
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -212,87 +216,282 @@ private constructor(
      * adjust a sensor for a specific reading.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("startTime") @ExcludeMissing private val startTime: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("azRaAccelBias") @ExcludeMissing private val azRaAccelBias: JsonField<Double>,
-        @JsonProperty("azRaAccelSigma")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val idSensor: JsonField<String>,
+        private val source: JsonField<String>,
+        private val startTime: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
+        private val azRaAccelBias: JsonField<Double>,
         private val azRaAccelSigma: JsonField<Double>,
-        @JsonProperty("azRaBias") @ExcludeMissing private val azRaBias: JsonField<Double>,
-        @JsonProperty("azRaRateBias") @ExcludeMissing private val azRaRateBias: JsonField<Double>,
-        @JsonProperty("azRaRateSigma") @ExcludeMissing private val azRaRateSigma: JsonField<Double>,
-        @JsonProperty("azRaRms") @ExcludeMissing private val azRaRms: JsonField<Double>,
-        @JsonProperty("azRaSigma") @ExcludeMissing private val azRaSigma: JsonField<Double>,
-        @JsonProperty("calAngleRef") @ExcludeMissing private val calAngleRef: JsonField<String>,
-        @JsonProperty("calTrackMode") @ExcludeMissing private val calTrackMode: JsonField<String>,
-        @JsonProperty("calType") @ExcludeMissing private val calType: JsonField<String>,
-        @JsonProperty("confidenceNoiseBias")
-        @ExcludeMissing
+        private val azRaBias: JsonField<Double>,
+        private val azRaRateBias: JsonField<Double>,
+        private val azRaRateSigma: JsonField<Double>,
+        private val azRaRms: JsonField<Double>,
+        private val azRaSigma: JsonField<Double>,
+        private val calAngleRef: JsonField<String>,
+        private val calTrackMode: JsonField<String>,
+        private val calType: JsonField<String>,
         private val confidenceNoiseBias: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("duration") @ExcludeMissing private val duration: JsonField<Double>,
-        @JsonProperty("ecr") @ExcludeMissing private val ecr: JsonField<List<Double>>,
-        @JsonProperty("elDecAccelBias")
-        @ExcludeMissing
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val duration: JsonField<Double>,
+        private val ecr: JsonField<List<Double>>,
         private val elDecAccelBias: JsonField<Double>,
-        @JsonProperty("elDecAccelSigma")
-        @ExcludeMissing
         private val elDecAccelSigma: JsonField<Double>,
-        @JsonProperty("elDecBias") @ExcludeMissing private val elDecBias: JsonField<Double>,
-        @JsonProperty("elDecRateBias") @ExcludeMissing private val elDecRateBias: JsonField<Double>,
-        @JsonProperty("elDecRateSigma")
-        @ExcludeMissing
+        private val elDecBias: JsonField<Double>,
+        private val elDecRateBias: JsonField<Double>,
         private val elDecRateSigma: JsonField<Double>,
-        @JsonProperty("elDecRms") @ExcludeMissing private val elDecRms: JsonField<Double>,
-        @JsonProperty("elDecSigma") @ExcludeMissing private val elDecSigma: JsonField<Double>,
-        @JsonProperty("endTime") @ExcludeMissing private val endTime: JsonField<OffsetDateTime>,
-        @JsonProperty("numAzRaObs") @ExcludeMissing private val numAzRaObs: JsonField<Int>,
-        @JsonProperty("numElDecObs") @ExcludeMissing private val numElDecObs: JsonField<Int>,
-        @JsonProperty("numObs") @ExcludeMissing private val numObs: JsonField<Int>,
-        @JsonProperty("numPhotoObs") @ExcludeMissing private val numPhotoObs: JsonField<Int>,
-        @JsonProperty("numRangeObs") @ExcludeMissing private val numRangeObs: JsonField<Int>,
-        @JsonProperty("numRangeRateObs")
-        @ExcludeMissing
+        private val elDecRms: JsonField<Double>,
+        private val elDecSigma: JsonField<Double>,
+        private val endTime: JsonField<OffsetDateTime>,
+        private val numAzRaObs: JsonField<Int>,
+        private val numElDecObs: JsonField<Int>,
+        private val numObs: JsonField<Int>,
+        private val numPhotoObs: JsonField<Int>,
+        private val numRangeObs: JsonField<Int>,
         private val numRangeRateObs: JsonField<Int>,
-        @JsonProperty("numRcsObs") @ExcludeMissing private val numRcsObs: JsonField<Int>,
-        @JsonProperty("numTimeObs") @ExcludeMissing private val numTimeObs: JsonField<Int>,
-        @JsonProperty("numTracks") @ExcludeMissing private val numTracks: JsonField<Int>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("photoBias") @ExcludeMissing private val photoBias: JsonField<Double>,
-        @JsonProperty("photoSigma") @ExcludeMissing private val photoSigma: JsonField<Double>,
-        @JsonProperty("rangeAccelBias")
-        @ExcludeMissing
+        private val numRcsObs: JsonField<Int>,
+        private val numTimeObs: JsonField<Int>,
+        private val numTracks: JsonField<Int>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val photoBias: JsonField<Double>,
+        private val photoSigma: JsonField<Double>,
         private val rangeAccelBias: JsonField<Double>,
-        @JsonProperty("rangeAccelSigma")
-        @ExcludeMissing
         private val rangeAccelSigma: JsonField<Double>,
-        @JsonProperty("rangeBias") @ExcludeMissing private val rangeBias: JsonField<Double>,
-        @JsonProperty("rangeRateBias") @ExcludeMissing private val rangeRateBias: JsonField<Double>,
-        @JsonProperty("rangeRateRms") @ExcludeMissing private val rangeRateRms: JsonField<Double>,
-        @JsonProperty("rangeRateSigma")
-        @ExcludeMissing
+        private val rangeBias: JsonField<Double>,
+        private val rangeRateBias: JsonField<Double>,
+        private val rangeRateRms: JsonField<Double>,
         private val rangeRateSigma: JsonField<Double>,
-        @JsonProperty("rangeRms") @ExcludeMissing private val rangeRms: JsonField<Double>,
-        @JsonProperty("rangeSigma") @ExcludeMissing private val rangeSigma: JsonField<Double>,
-        @JsonProperty("rcsBias") @ExcludeMissing private val rcsBias: JsonField<Double>,
-        @JsonProperty("rcsSigma") @ExcludeMissing private val rcsSigma: JsonField<Double>,
-        @JsonProperty("refTargets") @ExcludeMissing private val refTargets: JsonField<List<String>>,
-        @JsonProperty("refType") @ExcludeMissing private val refType: JsonField<String>,
-        @JsonProperty("senType") @ExcludeMissing private val senType: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("timeBias") @ExcludeMissing private val timeBias: JsonField<Double>,
-        @JsonProperty("timeBiasSigma") @ExcludeMissing private val timeBiasSigma: JsonField<Double>,
+        private val rangeRms: JsonField<Double>,
+        private val rangeSigma: JsonField<Double>,
+        private val rcsBias: JsonField<Double>,
+        private val rcsSigma: JsonField<Double>,
+        private val refTargets: JsonField<List<String>>,
+        private val refType: JsonField<String>,
+        private val senType: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val timeBias: JsonField<Double>,
+        private val timeBiasSigma: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("startTime")
+            @ExcludeMissing
+            startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("azRaAccelBias")
+            @ExcludeMissing
+            azRaAccelBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azRaAccelSigma")
+            @ExcludeMissing
+            azRaAccelSigma: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azRaBias")
+            @ExcludeMissing
+            azRaBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azRaRateBias")
+            @ExcludeMissing
+            azRaRateBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azRaRateSigma")
+            @ExcludeMissing
+            azRaRateSigma: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azRaRms") @ExcludeMissing azRaRms: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("azRaSigma")
+            @ExcludeMissing
+            azRaSigma: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("calAngleRef")
+            @ExcludeMissing
+            calAngleRef: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("calTrackMode")
+            @ExcludeMissing
+            calTrackMode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("calType") @ExcludeMissing calType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("confidenceNoiseBias")
+            @ExcludeMissing
+            confidenceNoiseBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("duration")
+            @ExcludeMissing
+            duration: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("ecr") @ExcludeMissing ecr: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("elDecAccelBias")
+            @ExcludeMissing
+            elDecAccelBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elDecAccelSigma")
+            @ExcludeMissing
+            elDecAccelSigma: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elDecBias")
+            @ExcludeMissing
+            elDecBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elDecRateBias")
+            @ExcludeMissing
+            elDecRateBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elDecRateSigma")
+            @ExcludeMissing
+            elDecRateSigma: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elDecRms")
+            @ExcludeMissing
+            elDecRms: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("elDecSigma")
+            @ExcludeMissing
+            elDecSigma: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("endTime")
+            @ExcludeMissing
+            endTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("numAzRaObs")
+            @ExcludeMissing
+            numAzRaObs: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numElDecObs")
+            @ExcludeMissing
+            numElDecObs: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numObs") @ExcludeMissing numObs: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numPhotoObs")
+            @ExcludeMissing
+            numPhotoObs: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numRangeObs")
+            @ExcludeMissing
+            numRangeObs: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numRangeRateObs")
+            @ExcludeMissing
+            numRangeRateObs: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numRcsObs") @ExcludeMissing numRcsObs: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numTimeObs")
+            @ExcludeMissing
+            numTimeObs: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numTracks") @ExcludeMissing numTracks: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("photoBias")
+            @ExcludeMissing
+            photoBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("photoSigma")
+            @ExcludeMissing
+            photoSigma: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeAccelBias")
+            @ExcludeMissing
+            rangeAccelBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeAccelSigma")
+            @ExcludeMissing
+            rangeAccelSigma: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeBias")
+            @ExcludeMissing
+            rangeBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeRateBias")
+            @ExcludeMissing
+            rangeRateBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeRateRms")
+            @ExcludeMissing
+            rangeRateRms: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeRateSigma")
+            @ExcludeMissing
+            rangeRateSigma: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeRms")
+            @ExcludeMissing
+            rangeRms: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rangeSigma")
+            @ExcludeMissing
+            rangeSigma: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rcsBias") @ExcludeMissing rcsBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rcsSigma")
+            @ExcludeMissing
+            rcsSigma: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("refTargets")
+            @ExcludeMissing
+            refTargets: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("refType") @ExcludeMissing refType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("senType") @ExcludeMissing senType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("timeBias")
+            @ExcludeMissing
+            timeBias: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("timeBiasSigma")
+            @ExcludeMissing
+            timeBiasSigma: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            idSensor,
+            source,
+            startTime,
+            id,
+            azRaAccelBias,
+            azRaAccelSigma,
+            azRaBias,
+            azRaRateBias,
+            azRaRateSigma,
+            azRaRms,
+            azRaSigma,
+            calAngleRef,
+            calTrackMode,
+            calType,
+            confidenceNoiseBias,
+            createdAt,
+            createdBy,
+            duration,
+            ecr,
+            elDecAccelBias,
+            elDecAccelSigma,
+            elDecBias,
+            elDecRateBias,
+            elDecRateSigma,
+            elDecRms,
+            elDecSigma,
+            endTime,
+            numAzRaObs,
+            numElDecObs,
+            numObs,
+            numPhotoObs,
+            numRangeObs,
+            numRangeRateObs,
+            numRcsObs,
+            numTimeObs,
+            numTracks,
+            origin,
+            origNetwork,
+            photoBias,
+            photoSigma,
+            rangeAccelBias,
+            rangeAccelSigma,
+            rangeBias,
+            rangeRateBias,
+            rangeRateRms,
+            rangeRateSigma,
+            rangeRms,
+            rangeSigma,
+            rcsBias,
+            rcsSigma,
+            refTargets,
+            refType,
+            senType,
+            sourceDl,
+            timeBias,
+            timeBiasSigma,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1291,6 +1490,16 @@ private constructor(
         @ExcludeMissing
         fun _timeBiasSigma(): JsonField<Double> = timeBiasSigma
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1371,6 +1580,7 @@ private constructor(
             private var sourceDl: JsonField<String> = JsonMissing.of()
             private var timeBias: JsonField<Double> = JsonMissing.of()
             private var timeBiasSigma: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1432,6 +1642,7 @@ private constructor(
                 sourceDl = body.sourceDl
                 timeBias = body.timeBias
                 timeBiasSigma = body.timeBiasSigma
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -2322,6 +2533,25 @@ private constructor(
                 this.timeBiasSigma = timeBiasSigma
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -2398,6 +2628,7 @@ private constructor(
                     sourceDl,
                     timeBias,
                     timeBiasSigma,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -2763,7 +2994,8 @@ private constructor(
                 senType == other.senType &&
                 sourceDl == other.sourceDl &&
                 timeBias == other.timeBias &&
-                timeBiasSigma == other.timeBiasSigma
+                timeBiasSigma == other.timeBiasSigma &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -2826,13 +3058,14 @@ private constructor(
                 sourceDl,
                 timeBias,
                 timeBiasSigma,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idSensor=$idSensor, source=$source, startTime=$startTime, id=$id, azRaAccelBias=$azRaAccelBias, azRaAccelSigma=$azRaAccelSigma, azRaBias=$azRaBias, azRaRateBias=$azRaRateBias, azRaRateSigma=$azRaRateSigma, azRaRms=$azRaRms, azRaSigma=$azRaSigma, calAngleRef=$calAngleRef, calTrackMode=$calTrackMode, calType=$calType, confidenceNoiseBias=$confidenceNoiseBias, createdAt=$createdAt, createdBy=$createdBy, duration=$duration, ecr=$ecr, elDecAccelBias=$elDecAccelBias, elDecAccelSigma=$elDecAccelSigma, elDecBias=$elDecBias, elDecRateBias=$elDecRateBias, elDecRateSigma=$elDecRateSigma, elDecRms=$elDecRms, elDecSigma=$elDecSigma, endTime=$endTime, numAzRaObs=$numAzRaObs, numElDecObs=$numElDecObs, numObs=$numObs, numPhotoObs=$numPhotoObs, numRangeObs=$numRangeObs, numRangeRateObs=$numRangeRateObs, numRcsObs=$numRcsObs, numTimeObs=$numTimeObs, numTracks=$numTracks, origin=$origin, origNetwork=$origNetwork, photoBias=$photoBias, photoSigma=$photoSigma, rangeAccelBias=$rangeAccelBias, rangeAccelSigma=$rangeAccelSigma, rangeBias=$rangeBias, rangeRateBias=$rangeRateBias, rangeRateRms=$rangeRateRms, rangeRateSigma=$rangeRateSigma, rangeRms=$rangeRms, rangeSigma=$rangeSigma, rcsBias=$rcsBias, rcsSigma=$rcsSigma, refTargets=$refTargets, refType=$refType, senType=$senType, sourceDl=$sourceDl, timeBias=$timeBias, timeBiasSigma=$timeBiasSigma}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idSensor=$idSensor, source=$source, startTime=$startTime, id=$id, azRaAccelBias=$azRaAccelBias, azRaAccelSigma=$azRaAccelSigma, azRaBias=$azRaBias, azRaRateBias=$azRaRateBias, azRaRateSigma=$azRaRateSigma, azRaRms=$azRaRms, azRaSigma=$azRaSigma, calAngleRef=$calAngleRef, calTrackMode=$calTrackMode, calType=$calType, confidenceNoiseBias=$confidenceNoiseBias, createdAt=$createdAt, createdBy=$createdBy, duration=$duration, ecr=$ecr, elDecAccelBias=$elDecAccelBias, elDecAccelSigma=$elDecAccelSigma, elDecBias=$elDecBias, elDecRateBias=$elDecRateBias, elDecRateSigma=$elDecRateSigma, elDecRms=$elDecRms, elDecSigma=$elDecSigma, endTime=$endTime, numAzRaObs=$numAzRaObs, numElDecObs=$numElDecObs, numObs=$numObs, numPhotoObs=$numPhotoObs, numRangeObs=$numRangeObs, numRangeRateObs=$numRangeRateObs, numRcsObs=$numRcsObs, numTimeObs=$numTimeObs, numTracks=$numTracks, origin=$origin, origNetwork=$origNetwork, photoBias=$photoBias, photoSigma=$photoSigma, rangeAccelBias=$rangeAccelBias, rangeAccelSigma=$rangeAccelSigma, rangeBias=$rangeBias, rangeRateBias=$rangeRateBias, rangeRateRms=$rangeRateRms, rangeRateSigma=$rangeRateSigma, rangeRms=$rangeRms, rangeSigma=$rangeSigma, rcsBias=$rcsBias, rcsSigma=$rcsSigma, refTargets=$refTargets, refType=$refType, senType=$senType, sourceDl=$sourceDl, timeBias=$timeBias, timeBiasSigma=$timeBiasSigma, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

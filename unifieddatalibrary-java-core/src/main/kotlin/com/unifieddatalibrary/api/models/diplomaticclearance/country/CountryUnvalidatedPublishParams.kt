@@ -216,67 +216,196 @@ private constructor(
      * and points of contact for countries diplomatic clearances are being created for.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("countryCode") @ExcludeMissing private val countryCode: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("lastChangedDate")
-        @ExcludeMissing
+        private val countryCode: JsonField<String>,
+        private val dataMode: JsonField<DataMode>,
         private val lastChangedDate: JsonField<OffsetDateTime>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("acceptsDMS") @ExcludeMissing private val acceptsDms: JsonField<Boolean>,
-        @JsonProperty("acceptsEmail") @ExcludeMissing private val acceptsEmail: JsonField<Boolean>,
-        @JsonProperty("acceptsFax") @ExcludeMissing private val acceptsFax: JsonField<Boolean>,
-        @JsonProperty("acceptsSIPRNet")
-        @ExcludeMissing
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val acceptsDms: JsonField<Boolean>,
+        private val acceptsEmail: JsonField<Boolean>,
+        private val acceptsFax: JsonField<Boolean>,
         private val acceptsSiprNet: JsonField<Boolean>,
-        @JsonProperty("agency") @ExcludeMissing private val agency: JsonField<String>,
-        @JsonProperty("altCountryCode")
-        @ExcludeMissing
+        private val agency: JsonField<String>,
         private val altCountryCode: JsonField<String>,
-        @JsonProperty("closeTime") @ExcludeMissing private val closeTime: JsonField<String>,
-        @JsonProperty("countryId") @ExcludeMissing private val countryId: JsonField<String>,
-        @JsonProperty("countryName") @ExcludeMissing private val countryName: JsonField<String>,
-        @JsonProperty("countryRemark") @ExcludeMissing private val countryRemark: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("diplomaticClearanceCountryContacts")
-        @ExcludeMissing
+        private val closeTime: JsonField<String>,
+        private val countryId: JsonField<String>,
+        private val countryName: JsonField<String>,
+        private val countryRemark: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
         private val diplomaticClearanceCountryContacts:
             JsonField<List<DiplomaticClearanceCountryContact>>,
-        @JsonProperty("diplomaticClearanceCountryEntryExitPoints")
-        @ExcludeMissing
         private val diplomaticClearanceCountryEntryExitPoints:
             JsonField<List<DiplomaticClearanceCountryEntryExitPoint>>,
-        @JsonProperty("diplomaticClearanceCountryProfiles")
-        @ExcludeMissing
         private val diplomaticClearanceCountryProfiles:
             JsonField<List<DiplomaticClearanceCountryProfile>>,
-        @JsonProperty("existingProfile")
-        @ExcludeMissing
         private val existingProfile: JsonField<Boolean>,
-        @JsonProperty("gmtOffset") @ExcludeMissing private val gmtOffset: JsonField<String>,
-        @JsonProperty("officeName") @ExcludeMissing private val officeName: JsonField<String>,
-        @JsonProperty("officePOC") @ExcludeMissing private val officePoc: JsonField<String>,
-        @JsonProperty("officeRemark") @ExcludeMissing private val officeRemark: JsonField<String>,
-        @JsonProperty("openFri") @ExcludeMissing private val openFri: JsonField<Boolean>,
-        @JsonProperty("openMon") @ExcludeMissing private val openMon: JsonField<Boolean>,
-        @JsonProperty("openSat") @ExcludeMissing private val openSat: JsonField<Boolean>,
-        @JsonProperty("openSun") @ExcludeMissing private val openSun: JsonField<Boolean>,
-        @JsonProperty("openThu") @ExcludeMissing private val openThu: JsonField<Boolean>,
-        @JsonProperty("openTime") @ExcludeMissing private val openTime: JsonField<String>,
-        @JsonProperty("openTue") @ExcludeMissing private val openTue: JsonField<Boolean>,
-        @JsonProperty("openWed") @ExcludeMissing private val openWed: JsonField<Boolean>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("updatedAt") @ExcludeMissing private val updatedAt: JsonField<OffsetDateTime>,
-        @JsonProperty("updatedBy") @ExcludeMissing private val updatedBy: JsonField<String>,
+        private val gmtOffset: JsonField<String>,
+        private val officeName: JsonField<String>,
+        private val officePoc: JsonField<String>,
+        private val officeRemark: JsonField<String>,
+        private val openFri: JsonField<Boolean>,
+        private val openMon: JsonField<Boolean>,
+        private val openSat: JsonField<Boolean>,
+        private val openSun: JsonField<Boolean>,
+        private val openThu: JsonField<Boolean>,
+        private val openTime: JsonField<String>,
+        private val openTue: JsonField<Boolean>,
+        private val openWed: JsonField<Boolean>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val updatedAt: JsonField<OffsetDateTime>,
+        private val updatedBy: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("countryCode")
+            @ExcludeMissing
+            countryCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("lastChangedDate")
+            @ExcludeMissing
+            lastChangedDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("acceptsDMS")
+            @ExcludeMissing
+            acceptsDms: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("acceptsEmail")
+            @ExcludeMissing
+            acceptsEmail: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("acceptsFax")
+            @ExcludeMissing
+            acceptsFax: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("acceptsSIPRNet")
+            @ExcludeMissing
+            acceptsSiprNet: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("agency") @ExcludeMissing agency: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("altCountryCode")
+            @ExcludeMissing
+            altCountryCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("closeTime")
+            @ExcludeMissing
+            closeTime: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("countryId")
+            @ExcludeMissing
+            countryId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("countryName")
+            @ExcludeMissing
+            countryName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("countryRemark")
+            @ExcludeMissing
+            countryRemark: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("diplomaticClearanceCountryContacts")
+            @ExcludeMissing
+            diplomaticClearanceCountryContacts: JsonField<List<DiplomaticClearanceCountryContact>> =
+                JsonMissing.of(),
+            @JsonProperty("diplomaticClearanceCountryEntryExitPoints")
+            @ExcludeMissing
+            diplomaticClearanceCountryEntryExitPoints:
+                JsonField<List<DiplomaticClearanceCountryEntryExitPoint>> =
+                JsonMissing.of(),
+            @JsonProperty("diplomaticClearanceCountryProfiles")
+            @ExcludeMissing
+            diplomaticClearanceCountryProfiles: JsonField<List<DiplomaticClearanceCountryProfile>> =
+                JsonMissing.of(),
+            @JsonProperty("existingProfile")
+            @ExcludeMissing
+            existingProfile: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("gmtOffset")
+            @ExcludeMissing
+            gmtOffset: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("officeName")
+            @ExcludeMissing
+            officeName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("officePOC")
+            @ExcludeMissing
+            officePoc: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("officeRemark")
+            @ExcludeMissing
+            officeRemark: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("openFri") @ExcludeMissing openFri: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("openMon") @ExcludeMissing openMon: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("openSat") @ExcludeMissing openSat: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("openSun") @ExcludeMissing openSun: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("openThu") @ExcludeMissing openThu: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("openTime")
+            @ExcludeMissing
+            openTime: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("openTue") @ExcludeMissing openTue: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("openWed") @ExcludeMissing openWed: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("updatedAt")
+            @ExcludeMissing
+            updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("updatedBy")
+            @ExcludeMissing
+            updatedBy: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            countryCode,
+            dataMode,
+            lastChangedDate,
+            source,
+            id,
+            acceptsDms,
+            acceptsEmail,
+            acceptsFax,
+            acceptsSiprNet,
+            agency,
+            altCountryCode,
+            closeTime,
+            countryId,
+            countryName,
+            countryRemark,
+            createdAt,
+            createdBy,
+            diplomaticClearanceCountryContacts,
+            diplomaticClearanceCountryEntryExitPoints,
+            diplomaticClearanceCountryProfiles,
+            existingProfile,
+            gmtOffset,
+            officeName,
+            officePoc,
+            officeRemark,
+            openFri,
+            openMon,
+            openSat,
+            openSun,
+            openThu,
+            openTime,
+            openTue,
+            openWed,
+            origin,
+            origNetwork,
+            sourceDl,
+            updatedAt,
+            updatedBy,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -960,6 +1089,16 @@ private constructor(
          */
         @JsonProperty("updatedBy") @ExcludeMissing fun _updatedBy(): JsonField<String> = updatedBy
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1027,6 +1166,7 @@ private constructor(
             private var sourceDl: JsonField<String> = JsonMissing.of()
             private var updatedAt: JsonField<OffsetDateTime> = JsonMissing.of()
             private var updatedBy: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1072,6 +1212,7 @@ private constructor(
                 sourceDl = body.sourceDl
                 updatedAt = body.updatedAt
                 updatedBy = body.updatedBy
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1733,6 +1874,25 @@ private constructor(
              */
             fun updatedBy(updatedBy: JsonField<String>) = apply { this.updatedBy = updatedBy }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1796,6 +1956,7 @@ private constructor(
                     sourceDl,
                     updatedAt,
                     updatedBy,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -5674,7 +5835,8 @@ private constructor(
                 origNetwork == other.origNetwork &&
                 sourceDl == other.sourceDl &&
                 updatedAt == other.updatedAt &&
-                updatedBy == other.updatedBy
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -5718,13 +5880,14 @@ private constructor(
                 sourceDl,
                 updatedAt,
                 updatedBy,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, countryCode=$countryCode, dataMode=$dataMode, lastChangedDate=$lastChangedDate, source=$source, id=$id, acceptsDms=$acceptsDms, acceptsEmail=$acceptsEmail, acceptsFax=$acceptsFax, acceptsSiprNet=$acceptsSiprNet, agency=$agency, altCountryCode=$altCountryCode, closeTime=$closeTime, countryId=$countryId, countryName=$countryName, countryRemark=$countryRemark, createdAt=$createdAt, createdBy=$createdBy, diplomaticClearanceCountryContacts=$diplomaticClearanceCountryContacts, diplomaticClearanceCountryEntryExitPoints=$diplomaticClearanceCountryEntryExitPoints, diplomaticClearanceCountryProfiles=$diplomaticClearanceCountryProfiles, existingProfile=$existingProfile, gmtOffset=$gmtOffset, officeName=$officeName, officePoc=$officePoc, officeRemark=$officeRemark, openFri=$openFri, openMon=$openMon, openSat=$openSat, openSun=$openSun, openThu=$openThu, openTime=$openTime, openTue=$openTue, openWed=$openWed, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl, updatedAt=$updatedAt, updatedBy=$updatedBy}"
+            "Body{classificationMarking=$classificationMarking, countryCode=$countryCode, dataMode=$dataMode, lastChangedDate=$lastChangedDate, source=$source, id=$id, acceptsDms=$acceptsDms, acceptsEmail=$acceptsEmail, acceptsFax=$acceptsFax, acceptsSiprNet=$acceptsSiprNet, agency=$agency, altCountryCode=$altCountryCode, closeTime=$closeTime, countryId=$countryId, countryName=$countryName, countryRemark=$countryRemark, createdAt=$createdAt, createdBy=$createdBy, diplomaticClearanceCountryContacts=$diplomaticClearanceCountryContacts, diplomaticClearanceCountryEntryExitPoints=$diplomaticClearanceCountryEntryExitPoints, diplomaticClearanceCountryProfiles=$diplomaticClearanceCountryProfiles, existingProfile=$existingProfile, gmtOffset=$gmtOffset, officeName=$officeName, officePoc=$officePoc, officeRemark=$officeRemark, openFri=$openFri, openMon=$openMon, openSat=$openSat, openSun=$openSun, openThu=$openThu, openTime=$openTime, openTue=$openTue, openWed=$openWed, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

@@ -36,9 +36,9 @@ interface OnorbitlistService {
     fun withOptions(modifier: Consumer<ClientOptions.Builder>): OnorbitlistService
 
     /**
-     * Service operation to take a single OnorbitList as a POST body and ingest into the database.
-     * An OnorbitList is just a generic named list of on-orbit IDs. A specific role is required to
-     * perform this service operation. Please contact the UDL team for assistance.
+     * Service operation to take a single OnOrbitList as a POST body and ingest into the database. A
+     * specific role is required to perform this service operation. Please contact the UDL team for
+     * assistance.
      */
     fun create(params: OnorbitlistCreateParams) = create(params, RequestOptions.none())
 
@@ -49,9 +49,8 @@ interface OnorbitlistService {
     )
 
     /**
-     * Service operation to update a single OnorbitList. An OnorbitList is just a generic named list
-     * of on-orbit IDs. A specific role is required to perform this service operation. Please
-     * contact the UDL team for assistance.
+     * Service operation to update a single OnOrbitList record. A specific role is required to
+     * perform this service operation. Please contact the UDL team for assistance.
      */
     fun update(pathId: String, params: OnorbitlistUpdateParams) =
         update(pathId, params, RequestOptions.none())
@@ -94,9 +93,9 @@ interface OnorbitlistService {
         list(OnorbitlistListParams.none(), requestOptions)
 
     /**
-     * Service operation to delete a OnorbitList object specified by the passed ID path parameter.
-     * An OnorbitList is just a generic named list of on-orbit IDs. A specific role is required to
-     * perform this service operation. Please contact the UDL team for assistance.
+     * Service operation to delete a single OnOrbitList record specified by the passed ID path
+     * parameter. A specific role is required to perform this service operation. Please contact the
+     * UDL team for assistance.
      */
     fun delete(id: String) = delete(id, OnorbitlistDeleteParams.none())
 
@@ -148,8 +147,8 @@ interface OnorbitlistService {
         count(OnorbitlistCountParams.none(), requestOptions)
 
     /**
-     * Service operation to get a single OnorbitList record by its unique ID passed as a path
-     * parameter. An OnorbitList is just a generic named list of on-orbit IDs.
+     * Service operation to get a single OnOrbitList record by its unique ID passed as a path
+     * parameter.
      */
     fun get(id: String): OnorbitlistGetResponse = get(id, OnorbitlistGetParams.none())
 

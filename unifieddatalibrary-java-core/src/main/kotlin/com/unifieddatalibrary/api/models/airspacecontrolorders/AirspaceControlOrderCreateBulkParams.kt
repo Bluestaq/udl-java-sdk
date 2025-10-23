@@ -218,55 +218,168 @@ private constructor(
      * instructions that have been issued by an airspace control authority.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("opExName") @ExcludeMissing private val opExName: JsonField<String>,
-        @JsonProperty("originator") @ExcludeMissing private val originator: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("startTime") @ExcludeMissing private val startTime: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("acoComments") @ExcludeMissing private val acoComments: JsonField<String>,
-        @JsonProperty("acoSerialNum") @ExcludeMissing private val acoSerialNum: JsonField<String>,
-        @JsonProperty("airspaceControlMeansStatus")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val opExName: JsonField<String>,
+        private val originator: JsonField<String>,
+        private val source: JsonField<String>,
+        private val startTime: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
+        private val acoComments: JsonField<String>,
+        private val acoSerialNum: JsonField<String>,
         private val airspaceControlMeansStatus: JsonField<List<AirspaceControlMeansStatus>>,
-        @JsonProperty("airspaceControlOrderReferences")
-        @ExcludeMissing
         private val airspaceControlOrderReferences: JsonField<List<AirspaceControlOrderReference>>,
-        @JsonProperty("areaOfValidity")
-        @ExcludeMissing
         private val areaOfValidity: JsonField<String>,
-        @JsonProperty("classReasons")
-        @ExcludeMissing
         private val classReasons: JsonField<List<String>>,
-        @JsonProperty("classSource") @ExcludeMissing private val classSource: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("declassExemptionCodes")
-        @ExcludeMissing
+        private val classSource: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
         private val declassExemptionCodes: JsonField<List<String>>,
-        @JsonProperty("downgradeInsDates")
-        @ExcludeMissing
         private val downgradeInsDates: JsonField<List<String>>,
-        @JsonProperty("geoDatum") @ExcludeMissing private val geoDatum: JsonField<String>,
-        @JsonProperty("month") @ExcludeMissing private val month: JsonField<String>,
-        @JsonProperty("opExInfo") @ExcludeMissing private val opExInfo: JsonField<String>,
-        @JsonProperty("opExInfoAlt") @ExcludeMissing private val opExInfoAlt: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("planOrigNum") @ExcludeMissing private val planOrigNum: JsonField<String>,
-        @JsonProperty("qualifier") @ExcludeMissing private val qualifier: JsonField<String>,
-        @JsonProperty("qualSN") @ExcludeMissing private val qualSn: JsonField<Int>,
-        @JsonProperty("serialNum") @ExcludeMissing private val serialNum: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("stopQualifier") @ExcludeMissing private val stopQualifier: JsonField<String>,
-        @JsonProperty("stopTime") @ExcludeMissing private val stopTime: JsonField<OffsetDateTime>,
-        @JsonProperty("undLnkTrks") @ExcludeMissing private val undLnkTrks: JsonField<List<String>>,
+        private val geoDatum: JsonField<String>,
+        private val month: JsonField<String>,
+        private val opExInfo: JsonField<String>,
+        private val opExInfoAlt: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val planOrigNum: JsonField<String>,
+        private val qualifier: JsonField<String>,
+        private val qualSn: JsonField<Int>,
+        private val serialNum: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val stopQualifier: JsonField<String>,
+        private val stopTime: JsonField<OffsetDateTime>,
+        private val undLnkTrks: JsonField<List<String>>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("opExName")
+            @ExcludeMissing
+            opExName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("originator")
+            @ExcludeMissing
+            originator: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("startTime")
+            @ExcludeMissing
+            startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("acoComments")
+            @ExcludeMissing
+            acoComments: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("acoSerialNum")
+            @ExcludeMissing
+            acoSerialNum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("airspaceControlMeansStatus")
+            @ExcludeMissing
+            airspaceControlMeansStatus: JsonField<List<AirspaceControlMeansStatus>> =
+                JsonMissing.of(),
+            @JsonProperty("airspaceControlOrderReferences")
+            @ExcludeMissing
+            airspaceControlOrderReferences: JsonField<List<AirspaceControlOrderReference>> =
+                JsonMissing.of(),
+            @JsonProperty("areaOfValidity")
+            @ExcludeMissing
+            areaOfValidity: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("classReasons")
+            @ExcludeMissing
+            classReasons: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("classSource")
+            @ExcludeMissing
+            classSource: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("declassExemptionCodes")
+            @ExcludeMissing
+            declassExemptionCodes: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("downgradeInsDates")
+            @ExcludeMissing
+            downgradeInsDates: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("geoDatum")
+            @ExcludeMissing
+            geoDatum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("month") @ExcludeMissing month: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("opExInfo")
+            @ExcludeMissing
+            opExInfo: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("opExInfoAlt")
+            @ExcludeMissing
+            opExInfoAlt: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("planOrigNum")
+            @ExcludeMissing
+            planOrigNum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("qualifier")
+            @ExcludeMissing
+            qualifier: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("qualSN") @ExcludeMissing qualSn: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("serialNum")
+            @ExcludeMissing
+            serialNum: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("stopQualifier")
+            @ExcludeMissing
+            stopQualifier: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("stopTime")
+            @ExcludeMissing
+            stopTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("undLnkTrks")
+            @ExcludeMissing
+            undLnkTrks: JsonField<List<String>> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            opExName,
+            originator,
+            source,
+            startTime,
+            id,
+            acoComments,
+            acoSerialNum,
+            airspaceControlMeansStatus,
+            airspaceControlOrderReferences,
+            areaOfValidity,
+            classReasons,
+            classSource,
+            createdAt,
+            createdBy,
+            declassExemptionCodes,
+            downgradeInsDates,
+            geoDatum,
+            month,
+            opExInfo,
+            opExInfoAlt,
+            origin,
+            origNetwork,
+            planOrigNum,
+            qualifier,
+            qualSn,
+            serialNum,
+            sourceDl,
+            stopQualifier,
+            stopTime,
+            undLnkTrks,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -840,6 +953,16 @@ private constructor(
         @ExcludeMissing
         fun _undLnkTrks(): JsonField<List<String>> = undLnkTrks
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -899,6 +1022,7 @@ private constructor(
             private var stopQualifier: JsonField<String> = JsonMissing.of()
             private var stopTime: JsonField<OffsetDateTime> = JsonMissing.of()
             private var undLnkTrks: JsonField<MutableList<String>>? = null
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -936,6 +1060,7 @@ private constructor(
                 stopQualifier = body.stopQualifier
                 stopTime = body.stopTime
                 undLnkTrks = body.undLnkTrks.map { it.toMutableList() }
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1520,6 +1645,25 @@ private constructor(
                     }
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1571,6 +1715,7 @@ private constructor(
                     stopQualifier,
                     stopTime,
                     (undLnkTrks ?: JsonMissing.of()).map { it.toImmutable() },
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -5057,7 +5202,8 @@ private constructor(
                 sourceDl == other.sourceDl &&
                 stopQualifier == other.stopQualifier &&
                 stopTime == other.stopTime &&
-                undLnkTrks == other.undLnkTrks
+                undLnkTrks == other.undLnkTrks &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -5094,13 +5240,14 @@ private constructor(
                 stopQualifier,
                 stopTime,
                 undLnkTrks,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, opExName=$opExName, originator=$originator, source=$source, startTime=$startTime, id=$id, acoComments=$acoComments, acoSerialNum=$acoSerialNum, airspaceControlMeansStatus=$airspaceControlMeansStatus, airspaceControlOrderReferences=$airspaceControlOrderReferences, areaOfValidity=$areaOfValidity, classReasons=$classReasons, classSource=$classSource, createdAt=$createdAt, createdBy=$createdBy, declassExemptionCodes=$declassExemptionCodes, downgradeInsDates=$downgradeInsDates, geoDatum=$geoDatum, month=$month, opExInfo=$opExInfo, opExInfoAlt=$opExInfoAlt, origin=$origin, origNetwork=$origNetwork, planOrigNum=$planOrigNum, qualifier=$qualifier, qualSn=$qualSn, serialNum=$serialNum, sourceDl=$sourceDl, stopQualifier=$stopQualifier, stopTime=$stopTime, undLnkTrks=$undLnkTrks}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, opExName=$opExName, originator=$originator, source=$source, startTime=$startTime, id=$id, acoComments=$acoComments, acoSerialNum=$acoSerialNum, airspaceControlMeansStatus=$airspaceControlMeansStatus, airspaceControlOrderReferences=$airspaceControlOrderReferences, areaOfValidity=$areaOfValidity, classReasons=$classReasons, classSource=$classSource, createdAt=$createdAt, createdBy=$createdBy, declassExemptionCodes=$declassExemptionCodes, downgradeInsDates=$downgradeInsDates, geoDatum=$geoDatum, month=$month, opExInfo=$opExInfo, opExInfoAlt=$opExInfoAlt, origin=$origin, origNetwork=$origNetwork, planOrigNum=$planOrigNum, qualifier=$qualifier, qualSn=$qualSn, serialNum=$serialNum, sourceDl=$sourceDl, stopQualifier=$stopQualifier, stopTime=$stopTime, undLnkTrks=$undLnkTrks, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

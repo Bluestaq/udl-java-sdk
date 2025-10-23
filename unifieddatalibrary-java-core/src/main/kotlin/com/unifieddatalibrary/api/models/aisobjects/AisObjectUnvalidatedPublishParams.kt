@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.aisobjects
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -222,86 +226,243 @@ private constructor(
      * capable of deconflicting a large number of signatures.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("ts") @ExcludeMissing private val ts: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("antennaRefDimensions")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
+        private val ts: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
         private val antennaRefDimensions: JsonField<List<Double>>,
-        @JsonProperty("avgSpeed") @ExcludeMissing private val avgSpeed: JsonField<Double>,
-        @JsonProperty("callSign") @ExcludeMissing private val callSign: JsonField<String>,
-        @JsonProperty("cargoType") @ExcludeMissing private val cargoType: JsonField<String>,
-        @JsonProperty("course") @ExcludeMissing private val course: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("currentPortGUID")
-        @ExcludeMissing
+        private val avgSpeed: JsonField<Double>,
+        private val callSign: JsonField<String>,
+        private val cargoType: JsonField<String>,
+        private val course: JsonField<Double>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
         private val currentPortGuid: JsonField<String>,
-        @JsonProperty("currentPortLOCODE")
-        @ExcludeMissing
         private val currentPortLocode: JsonField<String>,
-        @JsonProperty("destination") @ExcludeMissing private val destination: JsonField<String>,
-        @JsonProperty("destinationETA")
-        @ExcludeMissing
+        private val destination: JsonField<String>,
         private val destinationEta: JsonField<OffsetDateTime>,
-        @JsonProperty("distanceToGo") @ExcludeMissing private val distanceToGo: JsonField<Double>,
-        @JsonProperty("distanceTravelled")
-        @ExcludeMissing
+        private val distanceToGo: JsonField<Double>,
         private val distanceTravelled: JsonField<Double>,
-        @JsonProperty("draught") @ExcludeMissing private val draught: JsonField<Double>,
-        @JsonProperty("engagedIn") @ExcludeMissing private val engagedIn: JsonField<String>,
-        @JsonProperty("etaCalculated")
-        @ExcludeMissing
+        private val draught: JsonField<Double>,
+        private val engagedIn: JsonField<String>,
         private val etaCalculated: JsonField<OffsetDateTime>,
-        @JsonProperty("etaUpdated")
-        @ExcludeMissing
         private val etaUpdated: JsonField<OffsetDateTime>,
-        @JsonProperty("idTrack") @ExcludeMissing private val idTrack: JsonField<String>,
-        @JsonProperty("idVessel") @ExcludeMissing private val idVessel: JsonField<String>,
-        @JsonProperty("imon") @ExcludeMissing private val imon: JsonField<Long>,
-        @JsonProperty("lastPortGUID") @ExcludeMissing private val lastPortGuid: JsonField<String>,
-        @JsonProperty("lastPortLOCODE")
-        @ExcludeMissing
+        private val idTrack: JsonField<String>,
+        private val idVessel: JsonField<String>,
+        private val imon: JsonField<Long>,
+        private val lastPortGuid: JsonField<String>,
         private val lastPortLocode: JsonField<String>,
-        @JsonProperty("lat") @ExcludeMissing private val lat: JsonField<Double>,
-        @JsonProperty("length") @ExcludeMissing private val length: JsonField<Double>,
-        @JsonProperty("lon") @ExcludeMissing private val lon: JsonField<Double>,
-        @JsonProperty("maxSpeed") @ExcludeMissing private val maxSpeed: JsonField<Double>,
-        @JsonProperty("mmsi") @ExcludeMissing private val mmsi: JsonField<Long>,
-        @JsonProperty("navStatus") @ExcludeMissing private val navStatus: JsonField<String>,
-        @JsonProperty("nextPortGUID") @ExcludeMissing private val nextPortGuid: JsonField<String>,
-        @JsonProperty("nextPortLOCODE")
-        @ExcludeMissing
+        private val lat: JsonField<Double>,
+        private val length: JsonField<Double>,
+        private val lon: JsonField<Double>,
+        private val maxSpeed: JsonField<Double>,
+        private val mmsi: JsonField<Long>,
+        private val navStatus: JsonField<String>,
+        private val nextPortGuid: JsonField<String>,
         private val nextPortLocode: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("posDeviceType") @ExcludeMissing private val posDeviceType: JsonField<String>,
-        @JsonProperty("posHiAccuracy")
-        @ExcludeMissing
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val posDeviceType: JsonField<String>,
         private val posHiAccuracy: JsonField<Boolean>,
-        @JsonProperty("posHiLatency") @ExcludeMissing private val posHiLatency: JsonField<Boolean>,
-        @JsonProperty("rateOfTurn") @ExcludeMissing private val rateOfTurn: JsonField<Double>,
-        @JsonProperty("shipDescription")
-        @ExcludeMissing
+        private val posHiLatency: JsonField<Boolean>,
+        private val rateOfTurn: JsonField<Double>,
         private val shipDescription: JsonField<String>,
-        @JsonProperty("shipName") @ExcludeMissing private val shipName: JsonField<String>,
-        @JsonProperty("shipType") @ExcludeMissing private val shipType: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("specialCraft") @ExcludeMissing private val specialCraft: JsonField<String>,
-        @JsonProperty("specialManeuver")
-        @ExcludeMissing
+        private val shipName: JsonField<String>,
+        private val shipType: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val specialCraft: JsonField<String>,
         private val specialManeuver: JsonField<Boolean>,
-        @JsonProperty("speed") @ExcludeMissing private val speed: JsonField<Double>,
-        @JsonProperty("trueHeading") @ExcludeMissing private val trueHeading: JsonField<Double>,
-        @JsonProperty("vesselFlag") @ExcludeMissing private val vesselFlag: JsonField<String>,
-        @JsonProperty("width") @ExcludeMissing private val width: JsonField<Double>,
+        private val speed: JsonField<Double>,
+        private val trueHeading: JsonField<Double>,
+        private val vesselFlag: JsonField<String>,
+        private val width: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ts") @ExcludeMissing ts: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("antennaRefDimensions")
+            @ExcludeMissing
+            antennaRefDimensions: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("avgSpeed")
+            @ExcludeMissing
+            avgSpeed: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("callSign")
+            @ExcludeMissing
+            callSign: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("cargoType")
+            @ExcludeMissing
+            cargoType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("course") @ExcludeMissing course: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("currentPortGUID")
+            @ExcludeMissing
+            currentPortGuid: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("currentPortLOCODE")
+            @ExcludeMissing
+            currentPortLocode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("destination")
+            @ExcludeMissing
+            destination: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("destinationETA")
+            @ExcludeMissing
+            destinationEta: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("distanceToGo")
+            @ExcludeMissing
+            distanceToGo: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("distanceTravelled")
+            @ExcludeMissing
+            distanceTravelled: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("draught") @ExcludeMissing draught: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("engagedIn")
+            @ExcludeMissing
+            engagedIn: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("etaCalculated")
+            @ExcludeMissing
+            etaCalculated: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("etaUpdated")
+            @ExcludeMissing
+            etaUpdated: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("idTrack") @ExcludeMissing idTrack: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idVessel")
+            @ExcludeMissing
+            idVessel: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("imon") @ExcludeMissing imon: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("lastPortGUID")
+            @ExcludeMissing
+            lastPortGuid: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lastPortLOCODE")
+            @ExcludeMissing
+            lastPortLocode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("length") @ExcludeMissing length: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("maxSpeed")
+            @ExcludeMissing
+            maxSpeed: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("mmsi") @ExcludeMissing mmsi: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("navStatus")
+            @ExcludeMissing
+            navStatus: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("nextPortGUID")
+            @ExcludeMissing
+            nextPortGuid: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("nextPortLOCODE")
+            @ExcludeMissing
+            nextPortLocode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("posDeviceType")
+            @ExcludeMissing
+            posDeviceType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("posHiAccuracy")
+            @ExcludeMissing
+            posHiAccuracy: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("posHiLatency")
+            @ExcludeMissing
+            posHiLatency: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("rateOfTurn")
+            @ExcludeMissing
+            rateOfTurn: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("shipDescription")
+            @ExcludeMissing
+            shipDescription: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("shipName")
+            @ExcludeMissing
+            shipName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("shipType")
+            @ExcludeMissing
+            shipType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("specialCraft")
+            @ExcludeMissing
+            specialCraft: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("specialManeuver")
+            @ExcludeMissing
+            specialManeuver: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("speed") @ExcludeMissing speed: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("trueHeading")
+            @ExcludeMissing
+            trueHeading: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("vesselFlag")
+            @ExcludeMissing
+            vesselFlag: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("width") @ExcludeMissing width: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            ts,
+            id,
+            antennaRefDimensions,
+            avgSpeed,
+            callSign,
+            cargoType,
+            course,
+            createdAt,
+            createdBy,
+            currentPortGuid,
+            currentPortLocode,
+            destination,
+            destinationEta,
+            distanceToGo,
+            distanceTravelled,
+            draught,
+            engagedIn,
+            etaCalculated,
+            etaUpdated,
+            idTrack,
+            idVessel,
+            imon,
+            lastPortGuid,
+            lastPortLocode,
+            lat,
+            length,
+            lon,
+            maxSpeed,
+            mmsi,
+            navStatus,
+            nextPortGuid,
+            nextPortLocode,
+            origin,
+            origNetwork,
+            posDeviceType,
+            posHiAccuracy,
+            posHiLatency,
+            rateOfTurn,
+            shipDescription,
+            shipName,
+            shipType,
+            sourceDl,
+            specialCraft,
+            specialManeuver,
+            speed,
+            trueHeading,
+            vesselFlag,
+            width,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1193,6 +1354,16 @@ private constructor(
          */
         @JsonProperty("width") @ExcludeMissing fun _width(): JsonField<Double> = width
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1265,6 +1436,7 @@ private constructor(
             private var trueHeading: JsonField<Double> = JsonMissing.of()
             private var vesselFlag: JsonField<String> = JsonMissing.of()
             private var width: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1319,6 +1491,7 @@ private constructor(
                 trueHeading = body.trueHeading
                 vesselFlag = body.vesselFlag
                 width = body.width
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -2121,6 +2294,25 @@ private constructor(
              */
             fun width(width: JsonField<Double>) = apply { this.width = width }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -2189,6 +2381,7 @@ private constructor(
                     trueHeading,
                     vesselFlag,
                     width,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -2533,7 +2726,8 @@ private constructor(
                 speed == other.speed &&
                 trueHeading == other.trueHeading &&
                 vesselFlag == other.vesselFlag &&
-                width == other.width
+                width == other.width &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -2589,13 +2783,14 @@ private constructor(
                 trueHeading,
                 vesselFlag,
                 width,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, antennaRefDimensions=$antennaRefDimensions, avgSpeed=$avgSpeed, callSign=$callSign, cargoType=$cargoType, course=$course, createdAt=$createdAt, createdBy=$createdBy, currentPortGuid=$currentPortGuid, currentPortLocode=$currentPortLocode, destination=$destination, destinationEta=$destinationEta, distanceToGo=$distanceToGo, distanceTravelled=$distanceTravelled, draught=$draught, engagedIn=$engagedIn, etaCalculated=$etaCalculated, etaUpdated=$etaUpdated, idTrack=$idTrack, idVessel=$idVessel, imon=$imon, lastPortGuid=$lastPortGuid, lastPortLocode=$lastPortLocode, lat=$lat, length=$length, lon=$lon, maxSpeed=$maxSpeed, mmsi=$mmsi, navStatus=$navStatus, nextPortGuid=$nextPortGuid, nextPortLocode=$nextPortLocode, origin=$origin, origNetwork=$origNetwork, posDeviceType=$posDeviceType, posHiAccuracy=$posHiAccuracy, posHiLatency=$posHiLatency, rateOfTurn=$rateOfTurn, shipDescription=$shipDescription, shipName=$shipName, shipType=$shipType, sourceDl=$sourceDl, specialCraft=$specialCraft, specialManeuver=$specialManeuver, speed=$speed, trueHeading=$trueHeading, vesselFlag=$vesselFlag, width=$width}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, antennaRefDimensions=$antennaRefDimensions, avgSpeed=$avgSpeed, callSign=$callSign, cargoType=$cargoType, course=$course, createdAt=$createdAt, createdBy=$createdBy, currentPortGuid=$currentPortGuid, currentPortLocode=$currentPortLocode, destination=$destination, destinationEta=$destinationEta, distanceToGo=$distanceToGo, distanceTravelled=$distanceTravelled, draught=$draught, engagedIn=$engagedIn, etaCalculated=$etaCalculated, etaUpdated=$etaUpdated, idTrack=$idTrack, idVessel=$idVessel, imon=$imon, lastPortGuid=$lastPortGuid, lastPortLocode=$lastPortLocode, lat=$lat, length=$length, lon=$lon, maxSpeed=$maxSpeed, mmsi=$mmsi, navStatus=$navStatus, nextPortGuid=$nextPortGuid, nextPortLocode=$nextPortLocode, origin=$origin, origNetwork=$origNetwork, posDeviceType=$posDeviceType, posHiAccuracy=$posHiAccuracy, posHiLatency=$posHiLatency, rateOfTurn=$rateOfTurn, shipDescription=$shipDescription, shipName=$shipName, shipType=$shipType, sourceDl=$sourceDl, specialCraft=$specialCraft, specialManeuver=$specialManeuver, speed=$speed, trueHeading=$trueHeading, vesselFlag=$vesselFlag, width=$width, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

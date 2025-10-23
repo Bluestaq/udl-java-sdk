@@ -215,71 +215,220 @@ private constructor(
      * aircraft.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("actualArrTime")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
+        private val type: JsonField<String>,
+        private val id: JsonField<String>,
         private val actualArrTime: JsonField<OffsetDateTime>,
-        @JsonProperty("actualDepTime")
-        @ExcludeMissing
         private val actualDepTime: JsonField<OffsetDateTime>,
-        @JsonProperty("arct") @ExcludeMissing private val arct: JsonField<OffsetDateTime>,
-        @JsonProperty("arEventType") @ExcludeMissing private val arEventType: JsonField<String>,
-        @JsonProperty("arrPurpose") @ExcludeMissing private val arrPurpose: JsonField<String>,
-        @JsonProperty("arTrackId") @ExcludeMissing private val arTrackId: JsonField<String>,
-        @JsonProperty("arTrackName") @ExcludeMissing private val arTrackName: JsonField<String>,
-        @JsonProperty("baseAlt") @ExcludeMissing private val baseAlt: JsonField<Double>,
-        @JsonProperty("cancelled") @ExcludeMissing private val cancelled: JsonField<Boolean>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("depPurpose") @ExcludeMissing private val depPurpose: JsonField<String>,
-        @JsonProperty("estArrTime")
-        @ExcludeMissing
+        private val arct: JsonField<OffsetDateTime>,
+        private val arEventType: JsonField<String>,
+        private val arrPurpose: JsonField<String>,
+        private val arTrackId: JsonField<String>,
+        private val arTrackName: JsonField<String>,
+        private val baseAlt: JsonField<Double>,
+        private val cancelled: JsonField<Boolean>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val depPurpose: JsonField<String>,
         private val estArrTime: JsonField<OffsetDateTime>,
-        @JsonProperty("estDepTime")
-        @ExcludeMissing
         private val estDepTime: JsonField<OffsetDateTime>,
-        @JsonProperty("externalAirEventId")
-        @ExcludeMissing
         private val externalAirEventId: JsonField<String>,
-        @JsonProperty("externalARTrackId")
-        @ExcludeMissing
         private val externalArTrackId: JsonField<String>,
-        @JsonProperty("idMission") @ExcludeMissing private val idMission: JsonField<String>,
-        @JsonProperty("idSortie") @ExcludeMissing private val idSortie: JsonField<String>,
-        @JsonProperty("legNum") @ExcludeMissing private val legNum: JsonField<Int>,
-        @JsonProperty("location") @ExcludeMissing private val location: JsonField<String>,
-        @JsonProperty("numTankers") @ExcludeMissing private val numTankers: JsonField<Int>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("plannedArrTime")
-        @ExcludeMissing
+        private val idMission: JsonField<String>,
+        private val idSortie: JsonField<String>,
+        private val legNum: JsonField<Int>,
+        private val location: JsonField<String>,
+        private val numTankers: JsonField<Int>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
         private val plannedArrTime: JsonField<OffsetDateTime>,
-        @JsonProperty("plannedDepTime")
-        @ExcludeMissing
         private val plannedDepTime: JsonField<OffsetDateTime>,
-        @JsonProperty("priority") @ExcludeMissing private val priority: JsonField<String>,
-        @JsonProperty("receivers") @ExcludeMissing private val receivers: JsonField<List<Receiver>>,
-        @JsonProperty("remarks") @ExcludeMissing private val remarks: JsonField<List<Remark>>,
-        @JsonProperty("revTrack") @ExcludeMissing private val revTrack: JsonField<Boolean>,
-        @JsonProperty("rzct") @ExcludeMissing private val rzct: JsonField<OffsetDateTime>,
-        @JsonProperty("rzPoint") @ExcludeMissing private val rzPoint: JsonField<String>,
-        @JsonProperty("rzType") @ExcludeMissing private val rzType: JsonField<String>,
-        @JsonProperty("shortTrack") @ExcludeMissing private val shortTrack: JsonField<Boolean>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("statusCode") @ExcludeMissing private val statusCode: JsonField<String>,
-        @JsonProperty("tankers") @ExcludeMissing private val tankers: JsonField<List<Tanker>>,
-        @JsonProperty("trackTime") @ExcludeMissing private val trackTime: JsonField<Double>,
-        @JsonProperty("updatedAt") @ExcludeMissing private val updatedAt: JsonField<OffsetDateTime>,
-        @JsonProperty("updatedBy") @ExcludeMissing private val updatedBy: JsonField<String>,
+        private val priority: JsonField<String>,
+        private val receivers: JsonField<List<Receiver>>,
+        private val remarks: JsonField<List<Remark>>,
+        private val revTrack: JsonField<Boolean>,
+        private val rzct: JsonField<OffsetDateTime>,
+        private val rzPoint: JsonField<String>,
+        private val rzType: JsonField<String>,
+        private val shortTrack: JsonField<Boolean>,
+        private val sourceDl: JsonField<String>,
+        private val statusCode: JsonField<String>,
+        private val tankers: JsonField<List<Tanker>>,
+        private val trackTime: JsonField<Double>,
+        private val updatedAt: JsonField<OffsetDateTime>,
+        private val updatedBy: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("actualArrTime")
+            @ExcludeMissing
+            actualArrTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("actualDepTime")
+            @ExcludeMissing
+            actualDepTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("arct")
+            @ExcludeMissing
+            arct: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("arEventType")
+            @ExcludeMissing
+            arEventType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("arrPurpose")
+            @ExcludeMissing
+            arrPurpose: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("arTrackId")
+            @ExcludeMissing
+            arTrackId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("arTrackName")
+            @ExcludeMissing
+            arTrackName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("baseAlt") @ExcludeMissing baseAlt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("cancelled")
+            @ExcludeMissing
+            cancelled: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("depPurpose")
+            @ExcludeMissing
+            depPurpose: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("estArrTime")
+            @ExcludeMissing
+            estArrTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("estDepTime")
+            @ExcludeMissing
+            estDepTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("externalAirEventId")
+            @ExcludeMissing
+            externalAirEventId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("externalARTrackId")
+            @ExcludeMissing
+            externalArTrackId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idMission")
+            @ExcludeMissing
+            idMission: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSortie")
+            @ExcludeMissing
+            idSortie: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("legNum") @ExcludeMissing legNum: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("location")
+            @ExcludeMissing
+            location: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("numTankers")
+            @ExcludeMissing
+            numTankers: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("plannedArrTime")
+            @ExcludeMissing
+            plannedArrTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("plannedDepTime")
+            @ExcludeMissing
+            plannedDepTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("priority")
+            @ExcludeMissing
+            priority: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("receivers")
+            @ExcludeMissing
+            receivers: JsonField<List<Receiver>> = JsonMissing.of(),
+            @JsonProperty("remarks")
+            @ExcludeMissing
+            remarks: JsonField<List<Remark>> = JsonMissing.of(),
+            @JsonProperty("revTrack")
+            @ExcludeMissing
+            revTrack: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("rzct")
+            @ExcludeMissing
+            rzct: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("rzPoint") @ExcludeMissing rzPoint: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rzType") @ExcludeMissing rzType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("shortTrack")
+            @ExcludeMissing
+            shortTrack: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("statusCode")
+            @ExcludeMissing
+            statusCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tankers")
+            @ExcludeMissing
+            tankers: JsonField<List<Tanker>> = JsonMissing.of(),
+            @JsonProperty("trackTime")
+            @ExcludeMissing
+            trackTime: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("updatedAt")
+            @ExcludeMissing
+            updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("updatedBy")
+            @ExcludeMissing
+            updatedBy: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            type,
+            id,
+            actualArrTime,
+            actualDepTime,
+            arct,
+            arEventType,
+            arrPurpose,
+            arTrackId,
+            arTrackName,
+            baseAlt,
+            cancelled,
+            createdAt,
+            createdBy,
+            depPurpose,
+            estArrTime,
+            estDepTime,
+            externalAirEventId,
+            externalArTrackId,
+            idMission,
+            idSortie,
+            legNum,
+            location,
+            numTankers,
+            origin,
+            origNetwork,
+            plannedArrTime,
+            plannedDepTime,
+            priority,
+            receivers,
+            remarks,
+            revTrack,
+            rzct,
+            rzPoint,
+            rzType,
+            shortTrack,
+            sourceDl,
+            statusCode,
+            tankers,
+            trackTime,
+            updatedAt,
+            updatedBy,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1041,6 +1190,16 @@ private constructor(
          */
         @JsonProperty("updatedBy") @ExcludeMissing fun _updatedBy(): JsonField<String> = updatedBy
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1106,6 +1265,7 @@ private constructor(
             private var trackTime: JsonField<Double> = JsonMissing.of()
             private var updatedAt: JsonField<OffsetDateTime> = JsonMissing.of()
             private var updatedBy: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1153,6 +1313,7 @@ private constructor(
                 trackTime = body.trackTime
                 updatedAt = body.updatedAt
                 updatedBy = body.updatedBy
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1859,6 +2020,25 @@ private constructor(
              */
             fun updatedBy(updatedBy: JsonField<String>) = apply { this.updatedBy = updatedBy }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1920,6 +2100,7 @@ private constructor(
                     trackTime,
                     updatedAt,
                     updatedBy,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -4594,7 +4775,8 @@ private constructor(
                 tankers == other.tankers &&
                 trackTime == other.trackTime &&
                 updatedAt == other.updatedAt &&
-                updatedBy == other.updatedBy
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -4643,13 +4825,14 @@ private constructor(
                 trackTime,
                 updatedAt,
                 updatedBy,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, type=$type, id=$id, actualArrTime=$actualArrTime, actualDepTime=$actualDepTime, arct=$arct, arEventType=$arEventType, arrPurpose=$arrPurpose, arTrackId=$arTrackId, arTrackName=$arTrackName, baseAlt=$baseAlt, cancelled=$cancelled, createdAt=$createdAt, createdBy=$createdBy, depPurpose=$depPurpose, estArrTime=$estArrTime, estDepTime=$estDepTime, externalAirEventId=$externalAirEventId, externalArTrackId=$externalArTrackId, idMission=$idMission, idSortie=$idSortie, legNum=$legNum, location=$location, numTankers=$numTankers, origin=$origin, origNetwork=$origNetwork, plannedArrTime=$plannedArrTime, plannedDepTime=$plannedDepTime, priority=$priority, receivers=$receivers, remarks=$remarks, revTrack=$revTrack, rzct=$rzct, rzPoint=$rzPoint, rzType=$rzType, shortTrack=$shortTrack, sourceDl=$sourceDl, statusCode=$statusCode, tankers=$tankers, trackTime=$trackTime, updatedAt=$updatedAt, updatedBy=$updatedBy}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, type=$type, id=$id, actualArrTime=$actualArrTime, actualDepTime=$actualDepTime, arct=$arct, arEventType=$arEventType, arrPurpose=$arrPurpose, arTrackId=$arTrackId, arTrackName=$arTrackName, baseAlt=$baseAlt, cancelled=$cancelled, createdAt=$createdAt, createdBy=$createdBy, depPurpose=$depPurpose, estArrTime=$estArrTime, estDepTime=$estDepTime, externalAirEventId=$externalAirEventId, externalArTrackId=$externalArTrackId, idMission=$idMission, idSortie=$idSortie, legNum=$legNum, location=$location, numTankers=$numTankers, origin=$origin, origNetwork=$origNetwork, plannedArrTime=$plannedArrTime, plannedDepTime=$plannedDepTime, priority=$priority, receivers=$receivers, remarks=$remarks, revTrack=$revTrack, rzct=$rzct, rzPoint=$rzPoint, rzType=$rzType, shortTrack=$shortTrack, sourceDl=$sourceDl, statusCode=$statusCode, tankers=$tankers, trackTime=$trackTime, updatedAt=$updatedAt, updatedBy=$updatedBy, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.featureassessment
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -216,57 +220,182 @@ private constructor(
      * regionGeoJSON fields.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("featureTs") @ExcludeMissing private val featureTs: JsonField<OffsetDateTime>,
-        @JsonProperty("featureUoM") @ExcludeMissing private val featureUoM: JsonField<String>,
-        @JsonProperty("idAnalyticImagery")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val featureTs: JsonField<OffsetDateTime>,
+        private val featureUoM: JsonField<String>,
         private val idAnalyticImagery: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("agjson") @ExcludeMissing private val agjson: JsonField<String>,
-        @JsonProperty("andims") @ExcludeMissing private val andims: JsonField<Int>,
-        @JsonProperty("annLims") @ExcludeMissing private val annLims: JsonField<List<List<Int>>>,
-        @JsonProperty("annText") @ExcludeMissing private val annText: JsonField<List<String>>,
-        @JsonProperty("area") @ExcludeMissing private val area: JsonField<String>,
-        @JsonProperty("asrid") @ExcludeMissing private val asrid: JsonField<Int>,
-        @JsonProperty("assessment") @ExcludeMissing private val assessment: JsonField<String>,
-        @JsonProperty("atext") @ExcludeMissing private val atext: JsonField<String>,
-        @JsonProperty("atype") @ExcludeMissing private val atype: JsonField<String>,
-        @JsonProperty("confidence") @ExcludeMissing private val confidence: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("externalId") @ExcludeMissing private val externalId: JsonField<String>,
-        @JsonProperty("featureArray")
-        @ExcludeMissing
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val agjson: JsonField<String>,
+        private val andims: JsonField<Int>,
+        private val annLims: JsonField<List<List<Int>>>,
+        private val annText: JsonField<List<String>>,
+        private val area: JsonField<String>,
+        private val asrid: JsonField<Int>,
+        private val assessment: JsonField<String>,
+        private val atext: JsonField<String>,
+        private val atype: JsonField<String>,
+        private val confidence: JsonField<Double>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val externalId: JsonField<String>,
         private val featureArray: JsonField<List<Double>>,
-        @JsonProperty("featureBool") @ExcludeMissing private val featureBool: JsonField<Boolean>,
-        @JsonProperty("featureString") @ExcludeMissing private val featureString: JsonField<String>,
-        @JsonProperty("featureStringArray")
-        @ExcludeMissing
+        private val featureBool: JsonField<Boolean>,
+        private val featureString: JsonField<String>,
         private val featureStringArray: JsonField<List<String>>,
-        @JsonProperty("featureValue") @ExcludeMissing private val featureValue: JsonField<Double>,
-        @JsonProperty("heading") @ExcludeMissing private val heading: JsonField<Double>,
-        @JsonProperty("height") @ExcludeMissing private val height: JsonField<Double>,
-        @JsonProperty("length") @ExcludeMissing private val length: JsonField<Double>,
-        @JsonProperty("name") @ExcludeMissing private val name: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("speed") @ExcludeMissing private val speed: JsonField<Double>,
-        @JsonProperty("srcIds") @ExcludeMissing private val srcIds: JsonField<List<String>>,
-        @JsonProperty("srcTs") @ExcludeMissing private val srcTs: JsonField<List<OffsetDateTime>>,
-        @JsonProperty("srcTyps") @ExcludeMissing private val srcTyps: JsonField<List<String>>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("transactionId") @ExcludeMissing private val transactionId: JsonField<String>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<String>,
-        @JsonProperty("width") @ExcludeMissing private val width: JsonField<Double>,
+        private val featureValue: JsonField<Double>,
+        private val heading: JsonField<Double>,
+        private val height: JsonField<Double>,
+        private val length: JsonField<Double>,
+        private val name: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val speed: JsonField<Double>,
+        private val srcIds: JsonField<List<String>>,
+        private val srcTs: JsonField<List<OffsetDateTime>>,
+        private val srcTyps: JsonField<List<String>>,
+        private val tags: JsonField<List<String>>,
+        private val transactionId: JsonField<String>,
+        private val type: JsonField<String>,
+        private val width: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("featureTs")
+            @ExcludeMissing
+            featureTs: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("featureUoM")
+            @ExcludeMissing
+            featureUoM: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idAnalyticImagery")
+            @ExcludeMissing
+            idAnalyticImagery: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("agjson") @ExcludeMissing agjson: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("andims") @ExcludeMissing andims: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("annLims")
+            @ExcludeMissing
+            annLims: JsonField<List<List<Int>>> = JsonMissing.of(),
+            @JsonProperty("annText")
+            @ExcludeMissing
+            annText: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("area") @ExcludeMissing area: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("asrid") @ExcludeMissing asrid: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("assessment")
+            @ExcludeMissing
+            assessment: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("atext") @ExcludeMissing atext: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("atype") @ExcludeMissing atype: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("confidence")
+            @ExcludeMissing
+            confidence: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("externalId")
+            @ExcludeMissing
+            externalId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("featureArray")
+            @ExcludeMissing
+            featureArray: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("featureBool")
+            @ExcludeMissing
+            featureBool: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("featureString")
+            @ExcludeMissing
+            featureString: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("featureStringArray")
+            @ExcludeMissing
+            featureStringArray: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("featureValue")
+            @ExcludeMissing
+            featureValue: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("heading") @ExcludeMissing heading: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("height") @ExcludeMissing height: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("length") @ExcludeMissing length: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("name") @ExcludeMissing name: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("speed") @ExcludeMissing speed: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("srcIds")
+            @ExcludeMissing
+            srcIds: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("srcTs")
+            @ExcludeMissing
+            srcTs: JsonField<List<OffsetDateTime>> = JsonMissing.of(),
+            @JsonProperty("srcTyps")
+            @ExcludeMissing
+            srcTyps: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("transactionId")
+            @ExcludeMissing
+            transactionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("width") @ExcludeMissing width: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            featureTs,
+            featureUoM,
+            idAnalyticImagery,
+            source,
+            id,
+            agjson,
+            andims,
+            annLims,
+            annText,
+            area,
+            asrid,
+            assessment,
+            atext,
+            atype,
+            confidence,
+            createdAt,
+            createdBy,
+            externalId,
+            featureArray,
+            featureBool,
+            featureString,
+            featureStringArray,
+            featureValue,
+            heading,
+            height,
+            length,
+            name,
+            origin,
+            origNetwork,
+            sourceDl,
+            speed,
+            srcIds,
+            srcTs,
+            srcTyps,
+            tags,
+            transactionId,
+            type,
+            width,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -991,6 +1120,16 @@ private constructor(
          */
         @JsonProperty("width") @ExcludeMissing fun _width(): JsonField<Double> = width
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1054,6 +1193,7 @@ private constructor(
             private var transactionId: JsonField<String> = JsonMissing.of()
             private var type: JsonField<String> = JsonMissing.of()
             private var width: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1097,6 +1237,7 @@ private constructor(
                 transactionId = body.transactionId
                 type = body.type
                 width = body.width
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1844,6 +1985,25 @@ private constructor(
              */
             fun width(width: JsonField<Double>) = apply { this.width = width }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1903,6 +2063,7 @@ private constructor(
                     transactionId,
                     type,
                     width,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -2214,7 +2375,8 @@ private constructor(
                 tags == other.tags &&
                 transactionId == other.transactionId &&
                 type == other.type &&
-                width == other.width
+                width == other.width &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -2259,13 +2421,14 @@ private constructor(
                 transactionId,
                 type,
                 width,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, featureTs=$featureTs, featureUoM=$featureUoM, idAnalyticImagery=$idAnalyticImagery, source=$source, id=$id, agjson=$agjson, andims=$andims, annLims=$annLims, annText=$annText, area=$area, asrid=$asrid, assessment=$assessment, atext=$atext, atype=$atype, confidence=$confidence, createdAt=$createdAt, createdBy=$createdBy, externalId=$externalId, featureArray=$featureArray, featureBool=$featureBool, featureString=$featureString, featureStringArray=$featureStringArray, featureValue=$featureValue, heading=$heading, height=$height, length=$length, name=$name, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl, speed=$speed, srcIds=$srcIds, srcTs=$srcTs, srcTyps=$srcTyps, tags=$tags, transactionId=$transactionId, type=$type, width=$width}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, featureTs=$featureTs, featureUoM=$featureUoM, idAnalyticImagery=$idAnalyticImagery, source=$source, id=$id, agjson=$agjson, andims=$andims, annLims=$annLims, annText=$annText, area=$area, asrid=$asrid, assessment=$assessment, atext=$atext, atype=$atype, confidence=$confidence, createdAt=$createdAt, createdBy=$createdBy, externalId=$externalId, featureArray=$featureArray, featureBool=$featureBool, featureString=$featureString, featureStringArray=$featureStringArray, featureValue=$featureValue, heading=$heading, height=$height, length=$length, name=$name, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl, speed=$speed, srcIds=$srcIds, srcTs=$srcTs, srcTyps=$srcTyps, tags=$tags, transactionId=$transactionId, type=$type, width=$width, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

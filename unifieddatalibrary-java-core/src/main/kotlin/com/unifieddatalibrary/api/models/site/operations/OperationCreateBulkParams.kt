@@ -214,56 +214,133 @@ private constructor(
      * navigation, and waivers associated with the Site.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("idSite") @ExcludeMissing private val idSite: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("dailyOperations")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val idSite: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
         private val dailyOperations: JsonField<List<DailyOperation>>,
-        @JsonProperty("dopsLastChangedBy")
-        @ExcludeMissing
         private val dopsLastChangedBy: JsonField<String>,
-        @JsonProperty("dopsLastChangedDate")
-        @ExcludeMissing
         private val dopsLastChangedDate: JsonField<OffsetDateTime>,
-        @JsonProperty("dopsLastChangedReason")
-        @ExcludeMissing
         private val dopsLastChangedReason: JsonField<String>,
-        @JsonProperty("idLaunchSite") @ExcludeMissing private val idLaunchSite: JsonField<String>,
-        @JsonProperty("maximumOnGrounds")
-        @ExcludeMissing
+        private val idLaunchSite: JsonField<String>,
         private val maximumOnGrounds: JsonField<List<MaximumOnGround>>,
-        @JsonProperty("mogsLastChangedBy")
-        @ExcludeMissing
         private val mogsLastChangedBy: JsonField<String>,
-        @JsonProperty("mogsLastChangedDate")
-        @ExcludeMissing
         private val mogsLastChangedDate: JsonField<OffsetDateTime>,
-        @JsonProperty("mogsLastChangedReason")
-        @ExcludeMissing
         private val mogsLastChangedReason: JsonField<String>,
-        @JsonProperty("operationalDeviations")
-        @ExcludeMissing
         private val operationalDeviations: JsonField<List<OperationalDeviation>>,
-        @JsonProperty("operationalPlannings")
-        @ExcludeMissing
         private val operationalPlannings: JsonField<List<OperationalPlanning>>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("pathways") @ExcludeMissing private val pathways: JsonField<List<Pathway>>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("updatedAt") @ExcludeMissing private val updatedAt: JsonField<OffsetDateTime>,
-        @JsonProperty("updatedBy") @ExcludeMissing private val updatedBy: JsonField<String>,
-        @JsonProperty("waivers") @ExcludeMissing private val waivers: JsonField<List<Waiver>>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val pathways: JsonField<List<Pathway>>,
+        private val sourceDl: JsonField<String>,
+        private val updatedAt: JsonField<OffsetDateTime>,
+        private val updatedBy: JsonField<String>,
+        private val waivers: JsonField<List<Waiver>>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("idSite") @ExcludeMissing idSite: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dailyOperations")
+            @ExcludeMissing
+            dailyOperations: JsonField<List<DailyOperation>> = JsonMissing.of(),
+            @JsonProperty("dopsLastChangedBy")
+            @ExcludeMissing
+            dopsLastChangedBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dopsLastChangedDate")
+            @ExcludeMissing
+            dopsLastChangedDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("dopsLastChangedReason")
+            @ExcludeMissing
+            dopsLastChangedReason: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idLaunchSite")
+            @ExcludeMissing
+            idLaunchSite: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("maximumOnGrounds")
+            @ExcludeMissing
+            maximumOnGrounds: JsonField<List<MaximumOnGround>> = JsonMissing.of(),
+            @JsonProperty("mogsLastChangedBy")
+            @ExcludeMissing
+            mogsLastChangedBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("mogsLastChangedDate")
+            @ExcludeMissing
+            mogsLastChangedDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("mogsLastChangedReason")
+            @ExcludeMissing
+            mogsLastChangedReason: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("operationalDeviations")
+            @ExcludeMissing
+            operationalDeviations: JsonField<List<OperationalDeviation>> = JsonMissing.of(),
+            @JsonProperty("operationalPlannings")
+            @ExcludeMissing
+            operationalPlannings: JsonField<List<OperationalPlanning>> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("pathways")
+            @ExcludeMissing
+            pathways: JsonField<List<Pathway>> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("updatedAt")
+            @ExcludeMissing
+            updatedAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("updatedBy")
+            @ExcludeMissing
+            updatedBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("waivers")
+            @ExcludeMissing
+            waivers: JsonField<List<Waiver>> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            idSite,
+            source,
+            id,
+            createdAt,
+            createdBy,
+            dailyOperations,
+            dopsLastChangedBy,
+            dopsLastChangedDate,
+            dopsLastChangedReason,
+            idLaunchSite,
+            maximumOnGrounds,
+            mogsLastChangedBy,
+            mogsLastChangedDate,
+            mogsLastChangedReason,
+            operationalDeviations,
+            operationalPlannings,
+            origin,
+            origNetwork,
+            pathways,
+            sourceDl,
+            updatedAt,
+            updatedBy,
+            waivers,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -725,6 +802,16 @@ private constructor(
          */
         @JsonProperty("waivers") @ExcludeMissing fun _waivers(): JsonField<List<Waiver>> = waivers
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -771,6 +858,7 @@ private constructor(
             private var updatedAt: JsonField<OffsetDateTime> = JsonMissing.of()
             private var updatedBy: JsonField<String> = JsonMissing.of()
             private var waivers: JsonField<MutableList<Waiver>>? = null
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -799,6 +887,7 @@ private constructor(
                 updatedAt = body.updatedAt
                 updatedBy = body.updatedBy
                 waivers = body.waivers.map { it.toMutableList() }
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1278,6 +1367,25 @@ private constructor(
                     }
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1320,6 +1428,7 @@ private constructor(
                     updatedAt,
                     updatedBy,
                     (waivers ?: JsonMissing.of()).map { it.toImmutable() },
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -4622,7 +4731,8 @@ private constructor(
                 sourceDl == other.sourceDl &&
                 updatedAt == other.updatedAt &&
                 updatedBy == other.updatedBy &&
-                waivers == other.waivers
+                waivers == other.waivers &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -4652,13 +4762,14 @@ private constructor(
                 updatedAt,
                 updatedBy,
                 waivers,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idSite=$idSite, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, dailyOperations=$dailyOperations, dopsLastChangedBy=$dopsLastChangedBy, dopsLastChangedDate=$dopsLastChangedDate, dopsLastChangedReason=$dopsLastChangedReason, idLaunchSite=$idLaunchSite, maximumOnGrounds=$maximumOnGrounds, mogsLastChangedBy=$mogsLastChangedBy, mogsLastChangedDate=$mogsLastChangedDate, mogsLastChangedReason=$mogsLastChangedReason, operationalDeviations=$operationalDeviations, operationalPlannings=$operationalPlannings, origin=$origin, origNetwork=$origNetwork, pathways=$pathways, sourceDl=$sourceDl, updatedAt=$updatedAt, updatedBy=$updatedBy, waivers=$waivers}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, idSite=$idSite, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, dailyOperations=$dailyOperations, dopsLastChangedBy=$dopsLastChangedBy, dopsLastChangedDate=$dopsLastChangedDate, dopsLastChangedReason=$dopsLastChangedReason, idLaunchSite=$idLaunchSite, maximumOnGrounds=$maximumOnGrounds, mogsLastChangedBy=$mogsLastChangedBy, mogsLastChangedDate=$mogsLastChangedDate, mogsLastChangedReason=$mogsLastChangedReason, operationalDeviations=$operationalDeviations, operationalPlannings=$operationalPlannings, origin=$origin, origNetwork=$origNetwork, pathways=$pathways, sourceDl=$sourceDl, updatedAt=$updatedAt, updatedBy=$updatedBy, waivers=$waivers, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

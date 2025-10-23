@@ -218,38 +218,111 @@ private constructor(
      * tasking as well as intraservice tasking.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("beginTs") @ExcludeMissing private val beginTs: JsonField<OffsetDateTime>,
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
+        private val beginTs: JsonField<OffsetDateTime>,
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("opExerName") @ExcludeMissing private val opExerName: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("ackReqInd") @ExcludeMissing private val ackReqInd: JsonField<String>,
-        @JsonProperty("ackUnitInstructions")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val opExerName: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val ackReqInd: JsonField<String>,
         private val ackUnitInstructions: JsonField<String>,
-        @JsonProperty("acMsnTasking")
-        @ExcludeMissing
         private val acMsnTasking: JsonField<List<AcMsnTasking>>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("endTs") @ExcludeMissing private val endTs: JsonField<OffsetDateTime>,
-        @JsonProperty("genText") @ExcludeMissing private val genText: JsonField<List<GenText>>,
-        @JsonProperty("msgMonth") @ExcludeMissing private val msgMonth: JsonField<String>,
-        @JsonProperty("msgOriginator") @ExcludeMissing private val msgOriginator: JsonField<String>,
-        @JsonProperty("msgQualifier") @ExcludeMissing private val msgQualifier: JsonField<String>,
-        @JsonProperty("msgSN") @ExcludeMissing private val msgSn: JsonField<String>,
-        @JsonProperty("navalFltOps")
-        @ExcludeMissing
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val endTs: JsonField<OffsetDateTime>,
+        private val genText: JsonField<List<GenText>>,
+        private val msgMonth: JsonField<String>,
+        private val msgOriginator: JsonField<String>,
+        private val msgQualifier: JsonField<String>,
+        private val msgSn: JsonField<String>,
         private val navalFltOps: JsonField<List<NavalFltOp>>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val sourceDl: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("beginTs")
+            @ExcludeMissing
+            beginTs: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("opExerName")
+            @ExcludeMissing
+            opExerName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ackReqInd")
+            @ExcludeMissing
+            ackReqInd: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ackUnitInstructions")
+            @ExcludeMissing
+            ackUnitInstructions: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("acMsnTasking")
+            @ExcludeMissing
+            acMsnTasking: JsonField<List<AcMsnTasking>> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("endTs")
+            @ExcludeMissing
+            endTs: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("genText")
+            @ExcludeMissing
+            genText: JsonField<List<GenText>> = JsonMissing.of(),
+            @JsonProperty("msgMonth")
+            @ExcludeMissing
+            msgMonth: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("msgOriginator")
+            @ExcludeMissing
+            msgOriginator: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("msgQualifier")
+            @ExcludeMissing
+            msgQualifier: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("msgSN") @ExcludeMissing msgSn: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("navalFltOps")
+            @ExcludeMissing
+            navalFltOps: JsonField<List<NavalFltOp>> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("sourceDL") @ExcludeMissing sourceDl: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            beginTs,
+            classificationMarking,
+            dataMode,
+            opExerName,
+            source,
+            id,
+            ackReqInd,
+            ackUnitInstructions,
+            acMsnTasking,
+            createdAt,
+            createdBy,
+            endTs,
+            genText,
+            msgMonth,
+            msgOriginator,
+            msgQualifier,
+            msgSn,
+            navalFltOps,
+            origin,
+            origNetwork,
+            sourceDl,
+            mutableMapOf(),
+        )
 
         /**
          * The effective begin time for this ATO in ISO 8601 UTC format with millisecond precision.
@@ -617,6 +690,16 @@ private constructor(
          */
         @JsonProperty("sourceDL") @ExcludeMissing fun _sourceDl(): JsonField<String> = sourceDl
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -660,6 +743,7 @@ private constructor(
             private var origin: JsonField<String> = JsonMissing.of()
             private var origNetwork: JsonField<String> = JsonMissing.of()
             private var sourceDl: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -684,6 +768,7 @@ private constructor(
                 origin = body.origin
                 origNetwork = body.origNetwork
                 sourceDl = body.sourceDl
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /**
@@ -1039,6 +1124,25 @@ private constructor(
              */
             fun sourceDl(sourceDl: JsonField<String>) = apply { this.sourceDl = sourceDl }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1078,6 +1182,7 @@ private constructor(
                     origin,
                     origNetwork,
                     sourceDl,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -4441,7 +4546,8 @@ private constructor(
                 navalFltOps == other.navalFltOps &&
                 origin == other.origin &&
                 origNetwork == other.origNetwork &&
-                sourceDl == other.sourceDl
+                sourceDl == other.sourceDl &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -4467,13 +4573,14 @@ private constructor(
                 origin,
                 origNetwork,
                 sourceDl,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{beginTs=$beginTs, classificationMarking=$classificationMarking, dataMode=$dataMode, opExerName=$opExerName, source=$source, id=$id, ackReqInd=$ackReqInd, ackUnitInstructions=$ackUnitInstructions, acMsnTasking=$acMsnTasking, createdAt=$createdAt, createdBy=$createdBy, endTs=$endTs, genText=$genText, msgMonth=$msgMonth, msgOriginator=$msgOriginator, msgQualifier=$msgQualifier, msgSn=$msgSn, navalFltOps=$navalFltOps, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl}"
+            "Body{beginTs=$beginTs, classificationMarking=$classificationMarking, dataMode=$dataMode, opExerName=$opExerName, source=$source, id=$id, ackReqInd=$ackReqInd, ackUnitInstructions=$ackUnitInstructions, acMsnTasking=$acMsnTasking, createdAt=$createdAt, createdBy=$createdBy, endTs=$endTs, genText=$genText, msgMonth=$msgMonth, msgOriginator=$msgOriginator, msgQualifier=$msgQualifier, msgSn=$msgSn, navalFltOps=$navalFltOps, origin=$origin, origNetwork=$origNetwork, sourceDl=$sourceDl, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

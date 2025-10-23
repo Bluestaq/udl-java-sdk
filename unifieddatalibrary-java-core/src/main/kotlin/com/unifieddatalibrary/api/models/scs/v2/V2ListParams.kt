@@ -24,14 +24,14 @@ private constructor(
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    /** The base path to list */
+    /** The base path to list. */
     fun path(): String = path
 
     fun firstResult(): Optional<Long> = Optional.ofNullable(firstResult)
 
     fun maxResults(): Optional<Long> = Optional.ofNullable(maxResults)
 
-    /** The order in which entries should be sorted */
+    /** The order in which entries should be sorted. */
     fun order(): Optional<String> = Optional.ofNullable(order)
 
     /**
@@ -43,7 +43,7 @@ private constructor(
     /** The number of results to retrieve. */
     fun size(): Optional<Int> = Optional.ofNullable(size)
 
-    /** The field on which to sort entries */
+    /** The field on which to sort entries. */
     fun sort(): Optional<String> = Optional.ofNullable(sort)
 
     /** Additional headers to send with the request. */
@@ -93,7 +93,7 @@ private constructor(
             additionalQueryParams = v2ListParams.additionalQueryParams.toBuilder()
         }
 
-        /** The base path to list */
+        /** The base path to list. */
         fun path(path: String) = apply { this.path = path }
 
         fun firstResult(firstResult: Long?) = apply { this.firstResult = firstResult }
@@ -120,7 +120,7 @@ private constructor(
         /** Alias for calling [Builder.maxResults] with `maxResults.orElse(null)`. */
         fun maxResults(maxResults: Optional<Long>) = maxResults(maxResults.getOrNull())
 
-        /** The order in which entries should be sorted */
+        /** The order in which entries should be sorted. */
         fun order(order: String?) = apply { this.order = order }
 
         /** Alias for calling [Builder.order] with `order.orElse(null)`. */
@@ -148,7 +148,7 @@ private constructor(
         /** Alias for calling [Builder.size] with `size.orElse(null)`. */
         fun size(size: Optional<Int>) = size(size.getOrNull())
 
-        /** The field on which to sort entries */
+        /** The field on which to sort entries. */
         fun sort(sort: String?) = apply { this.sort = sort }
 
         /** Alias for calling [Builder.sort] with `sort.orElse(null)`. */

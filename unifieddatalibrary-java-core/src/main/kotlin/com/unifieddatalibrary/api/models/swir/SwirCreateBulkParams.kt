@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.swir
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -207,38 +211,105 @@ private constructor(
 
     /** Data representing observed short wave infrared (SWIR) measurements. */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("ts") @ExcludeMissing private val ts: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("absFluxes") @ExcludeMissing private val absFluxes: JsonField<List<Double>>,
-        @JsonProperty("badWave") @ExcludeMissing private val badWave: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("fluxRatios") @ExcludeMissing private val fluxRatios: JsonField<List<Double>>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("lat") @ExcludeMissing private val lat: JsonField<Double>,
-        @JsonProperty("locationName") @ExcludeMissing private val locationName: JsonField<String>,
-        @JsonProperty("lon") @ExcludeMissing private val lon: JsonField<Double>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("ratioWavelengths")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
+        private val ts: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
+        private val absFluxes: JsonField<List<Double>>,
+        private val badWave: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val fluxRatios: JsonField<List<Double>>,
+        private val idOnOrbit: JsonField<String>,
+        private val lat: JsonField<Double>,
+        private val locationName: JsonField<String>,
+        private val lon: JsonField<Double>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
         private val ratioWavelengths: JsonField<List<Double>>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("solarPhaseAngle")
-        @ExcludeMissing
+        private val satNo: JsonField<Int>,
         private val solarPhaseAngle: JsonField<Double>,
-        @JsonProperty("wavelengths")
-        @ExcludeMissing
         private val wavelengths: JsonField<List<Double>>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ts") @ExcludeMissing ts: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("absFluxes")
+            @ExcludeMissing
+            absFluxes: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("badWave") @ExcludeMissing badWave: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("fluxRatios")
+            @ExcludeMissing
+            fluxRatios: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("locationName")
+            @ExcludeMissing
+            locationName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ratioWavelengths")
+            @ExcludeMissing
+            ratioWavelengths: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("solarPhaseAngle")
+            @ExcludeMissing
+            solarPhaseAngle: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("wavelengths")
+            @ExcludeMissing
+            wavelengths: JsonField<List<Double>> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            ts,
+            id,
+            absFluxes,
+            badWave,
+            createdAt,
+            createdBy,
+            fluxRatios,
+            idOnOrbit,
+            lat,
+            locationName,
+            lon,
+            origin,
+            origNetwork,
+            origObjectId,
+            ratioWavelengths,
+            satNo,
+            solarPhaseAngle,
+            wavelengths,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -608,6 +679,16 @@ private constructor(
         @ExcludeMissing
         fun _wavelengths(): JsonField<List<Double>> = wavelengths
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -650,6 +731,7 @@ private constructor(
             private var satNo: JsonField<Int> = JsonMissing.of()
             private var solarPhaseAngle: JsonField<Double> = JsonMissing.of()
             private var wavelengths: JsonField<MutableList<Double>>? = null
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -674,6 +756,7 @@ private constructor(
                 satNo = body.satNo
                 solarPhaseAngle = body.solarPhaseAngle
                 wavelengths = body.wavelengths.map { it.toMutableList() }
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1044,6 +1127,25 @@ private constructor(
                     }
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1082,6 +1184,7 @@ private constructor(
                     satNo,
                     solarPhaseAngle,
                     (wavelengths ?: JsonMissing.of()).map { it.toImmutable() },
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1336,7 +1439,8 @@ private constructor(
                 ratioWavelengths == other.ratioWavelengths &&
                 satNo == other.satNo &&
                 solarPhaseAngle == other.solarPhaseAngle &&
-                wavelengths == other.wavelengths
+                wavelengths == other.wavelengths &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1362,13 +1466,14 @@ private constructor(
                 satNo,
                 solarPhaseAngle,
                 wavelengths,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, absFluxes=$absFluxes, badWave=$badWave, createdAt=$createdAt, createdBy=$createdBy, fluxRatios=$fluxRatios, idOnOrbit=$idOnOrbit, lat=$lat, locationName=$locationName, lon=$lon, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, ratioWavelengths=$ratioWavelengths, satNo=$satNo, solarPhaseAngle=$solarPhaseAngle, wavelengths=$wavelengths}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, absFluxes=$absFluxes, badWave=$badWave, createdAt=$createdAt, createdBy=$createdBy, fluxRatios=$fluxRatios, idOnOrbit=$idOnOrbit, lat=$lat, locationName=$locationName, lon=$lon, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, ratioWavelengths=$ratioWavelengths, satNo=$satNo, solarPhaseAngle=$solarPhaseAngle, wavelengths=$wavelengths, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.port
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -15,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -209,33 +213,110 @@ private constructor(
      * and remarks.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("avgDuration") @ExcludeMissing private val avgDuration: JsonField<Double>,
-        @JsonProperty("countryCode") @ExcludeMissing private val countryCode: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("externalId") @ExcludeMissing private val externalId: JsonField<String>,
-        @JsonProperty("harborSize") @ExcludeMissing private val harborSize: JsonField<Double>,
-        @JsonProperty("harborType") @ExcludeMissing private val harborType: JsonField<String>,
-        @JsonProperty("idSite") @ExcludeMissing private val idSite: JsonField<String>,
-        @JsonProperty("lat") @ExcludeMissing private val lat: JsonField<Double>,
-        @JsonProperty("locode") @ExcludeMissing private val locode: JsonField<String>,
-        @JsonProperty("lon") @ExcludeMissing private val lon: JsonField<Double>,
-        @JsonProperty("maxDraught") @ExcludeMissing private val maxDraught: JsonField<Double>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("pilotReqd") @ExcludeMissing private val pilotReqd: JsonField<Boolean>,
-        @JsonProperty("portName") @ExcludeMissing private val portName: JsonField<String>,
-        @JsonProperty("shelter") @ExcludeMissing private val shelter: JsonField<String>,
-        @JsonProperty("tideRange") @ExcludeMissing private val tideRange: JsonField<Double>,
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val avgDuration: JsonField<Double>,
+        private val countryCode: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val externalId: JsonField<String>,
+        private val harborSize: JsonField<Double>,
+        private val harborType: JsonField<String>,
+        private val idSite: JsonField<String>,
+        private val lat: JsonField<Double>,
+        private val locode: JsonField<String>,
+        private val lon: JsonField<Double>,
+        private val maxDraught: JsonField<Double>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val pilotReqd: JsonField<Boolean>,
+        private val portName: JsonField<String>,
+        private val shelter: JsonField<String>,
+        private val tideRange: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("avgDuration")
+            @ExcludeMissing
+            avgDuration: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("countryCode")
+            @ExcludeMissing
+            countryCode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("externalId")
+            @ExcludeMissing
+            externalId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("harborSize")
+            @ExcludeMissing
+            harborSize: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("harborType")
+            @ExcludeMissing
+            harborType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSite") @ExcludeMissing idSite: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("locode") @ExcludeMissing locode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("maxDraught")
+            @ExcludeMissing
+            maxDraught: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("pilotReqd")
+            @ExcludeMissing
+            pilotReqd: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("portName")
+            @ExcludeMissing
+            portName: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("shelter") @ExcludeMissing shelter: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tideRange")
+            @ExcludeMissing
+            tideRange: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            id,
+            avgDuration,
+            countryCode,
+            createdAt,
+            createdBy,
+            externalId,
+            harborSize,
+            harborType,
+            idSite,
+            lat,
+            locode,
+            lon,
+            maxDraught,
+            origin,
+            origNetwork,
+            pilotReqd,
+            portName,
+            shelter,
+            tideRange,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -637,6 +718,16 @@ private constructor(
          */
         @JsonProperty("tideRange") @ExcludeMissing fun _tideRange(): JsonField<Double> = tideRange
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -679,6 +770,7 @@ private constructor(
             private var portName: JsonField<String> = JsonMissing.of()
             private var shelter: JsonField<String> = JsonMissing.of()
             private var tideRange: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -704,6 +796,7 @@ private constructor(
                 portName = body.portName
                 shelter = body.shelter
                 tideRange = body.tideRange
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1055,6 +1148,25 @@ private constructor(
              */
             fun tideRange(tideRange: JsonField<Double>) = apply { this.tideRange = tideRange }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1093,6 +1205,7 @@ private constructor(
                     portName,
                     shelter,
                     tideRange,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1350,7 +1463,8 @@ private constructor(
                 pilotReqd == other.pilotReqd &&
                 portName == other.portName &&
                 shelter == other.shelter &&
-                tideRange == other.tideRange
+                tideRange == other.tideRange &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1377,13 +1491,14 @@ private constructor(
                 portName,
                 shelter,
                 tideRange,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, avgDuration=$avgDuration, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, externalId=$externalId, harborSize=$harborSize, harborType=$harborType, idSite=$idSite, lat=$lat, locode=$locode, lon=$lon, maxDraught=$maxDraught, origin=$origin, origNetwork=$origNetwork, pilotReqd=$pilotReqd, portName=$portName, shelter=$shelter, tideRange=$tideRange}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, avgDuration=$avgDuration, countryCode=$countryCode, createdAt=$createdAt, createdBy=$createdBy, externalId=$externalId, harborSize=$harborSize, harborType=$harborType, idSite=$idSite, lat=$lat, locode=$locode, lon=$lon, maxDraught=$maxDraught, origin=$origin, origNetwork=$origNetwork, pilotReqd=$pilotReqd, portName=$portName, shelter=$shelter, tideRange=$tideRange, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

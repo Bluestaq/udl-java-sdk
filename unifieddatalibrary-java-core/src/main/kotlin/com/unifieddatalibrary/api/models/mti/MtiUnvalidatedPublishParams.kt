@@ -215,36 +215,101 @@ private constructor(
      * the reference time.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("dwells") @ExcludeMissing private val dwells: JsonField<List<Dwell>>,
-        @JsonProperty("freeTexts") @ExcludeMissing private val freeTexts: JsonField<List<FreeText>>,
-        @JsonProperty("hrrs") @ExcludeMissing private val hrrs: JsonField<List<Hrr>>,
-        @JsonProperty("jobDefs") @ExcludeMissing private val jobDefs: JsonField<List<JobDef>>,
-        @JsonProperty("jobRequests")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val dwells: JsonField<List<Dwell>>,
+        private val freeTexts: JsonField<List<FreeText>>,
+        private val hrrs: JsonField<List<Hrr>>,
+        private val jobDefs: JsonField<List<JobDef>>,
         private val jobRequests: JsonField<List<JobRequest>>,
-        @JsonProperty("missions") @ExcludeMissing private val missions: JsonField<List<Mission>>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("p10") @ExcludeMissing private val p10: JsonField<Int>,
-        @JsonProperty("p3") @ExcludeMissing private val p3: JsonField<String>,
-        @JsonProperty("p6") @ExcludeMissing private val p6: JsonField<String>,
-        @JsonProperty("p7") @ExcludeMissing private val p7: JsonField<String>,
-        @JsonProperty("p8") @ExcludeMissing private val p8: JsonField<String>,
-        @JsonProperty("p9") @ExcludeMissing private val p9: JsonField<Int>,
-        @JsonProperty("platformLocs")
-        @ExcludeMissing
+        private val missions: JsonField<List<Mission>>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val p10: JsonField<Int>,
+        private val p3: JsonField<String>,
+        private val p6: JsonField<String>,
+        private val p7: JsonField<String>,
+        private val p8: JsonField<String>,
+        private val p9: JsonField<Int>,
         private val platformLocs: JsonField<List<PlatformLoc>>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dwells")
+            @ExcludeMissing
+            dwells: JsonField<List<Dwell>> = JsonMissing.of(),
+            @JsonProperty("freeTexts")
+            @ExcludeMissing
+            freeTexts: JsonField<List<FreeText>> = JsonMissing.of(),
+            @JsonProperty("hrrs") @ExcludeMissing hrrs: JsonField<List<Hrr>> = JsonMissing.of(),
+            @JsonProperty("jobDefs")
+            @ExcludeMissing
+            jobDefs: JsonField<List<JobDef>> = JsonMissing.of(),
+            @JsonProperty("jobRequests")
+            @ExcludeMissing
+            jobRequests: JsonField<List<JobRequest>> = JsonMissing.of(),
+            @JsonProperty("missions")
+            @ExcludeMissing
+            missions: JsonField<List<Mission>> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("p10") @ExcludeMissing p10: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("p3") @ExcludeMissing p3: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("p6") @ExcludeMissing p6: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("p7") @ExcludeMissing p7: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("p8") @ExcludeMissing p8: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("p9") @ExcludeMissing p9: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("platformLocs")
+            @ExcludeMissing
+            platformLocs: JsonField<List<PlatformLoc>> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            id,
+            createdAt,
+            createdBy,
+            dwells,
+            freeTexts,
+            hrrs,
+            jobDefs,
+            jobRequests,
+            missions,
+            origin,
+            origNetwork,
+            p10,
+            p3,
+            p6,
+            p7,
+            p8,
+            p9,
+            platformLocs,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -606,6 +671,16 @@ private constructor(
         @ExcludeMissing
         fun _platformLocs(): JsonField<List<PlatformLoc>> = platformLocs
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -647,6 +722,7 @@ private constructor(
             private var p8: JsonField<String> = JsonMissing.of()
             private var p9: JsonField<Int> = JsonMissing.of()
             private var platformLocs: JsonField<MutableList<PlatformLoc>>? = null
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -671,6 +747,7 @@ private constructor(
                 p8 = body.p8
                 p9 = body.p9
                 platformLocs = body.platformLocs.map { it.toMutableList() }
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1091,6 +1168,25 @@ private constructor(
                     }
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1128,6 +1224,7 @@ private constructor(
                     p8,
                     p9,
                     (platformLocs ?: JsonMissing.of()).map { it.toImmutable() },
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -8407,7 +8504,8 @@ private constructor(
                 p7 == other.p7 &&
                 p8 == other.p8 &&
                 p9 == other.p9 &&
-                platformLocs == other.platformLocs
+                platformLocs == other.platformLocs &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -8433,13 +8531,14 @@ private constructor(
                 p8,
                 p9,
                 platformLocs,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, dwells=$dwells, freeTexts=$freeTexts, hrrs=$hrrs, jobDefs=$jobDefs, jobRequests=$jobRequests, missions=$missions, origin=$origin, origNetwork=$origNetwork, p10=$p10, p3=$p3, p6=$p6, p7=$p7, p8=$p8, p9=$p9, platformLocs=$platformLocs}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, createdAt=$createdAt, createdBy=$createdBy, dwells=$dwells, freeTexts=$freeTexts, hrrs=$hrrs, jobDefs=$jobDefs, jobRequests=$jobRequests, missions=$missions, origin=$origin, origNetwork=$origNetwork, p10=$p10, p3=$p3, p6=$p6, p7=$p7, p8=$p8, p9=$p9, platformLocs=$platformLocs, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

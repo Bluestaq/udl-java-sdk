@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.geostatus
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -15,6 +18,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -209,43 +213,124 @@ private constructor(
      * limits, and drift rates.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("confidenceLevel")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
         private val confidenceLevel: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("longitudeMax") @ExcludeMissing private val longitudeMax: JsonField<Double>,
-        @JsonProperty("longitudeMin") @ExcludeMissing private val longitudeMin: JsonField<Double>,
-        @JsonProperty("longitudeRate") @ExcludeMissing private val longitudeRate: JsonField<Double>,
-        @JsonProperty("lostFlag") @ExcludeMissing private val lostFlag: JsonField<Boolean>,
-        @JsonProperty("objectStatus") @ExcludeMissing private val objectStatus: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("planeChangeStatus")
-        @ExcludeMissing
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val idOnOrbit: JsonField<String>,
+        private val longitudeMax: JsonField<Double>,
+        private val longitudeMin: JsonField<Double>,
+        private val longitudeRate: JsonField<Double>,
+        private val lostFlag: JsonField<Boolean>,
+        private val objectStatus: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
         private val planeChangeStatus: JsonField<String>,
-        @JsonProperty("rawFileURI") @ExcludeMissing private val rawFileUri: JsonField<String>,
-        @JsonProperty("relativeEnergy")
-        @ExcludeMissing
+        private val rawFileUri: JsonField<String>,
         private val relativeEnergy: JsonField<Double>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("sc") @ExcludeMissing private val sc: JsonField<Double>,
-        @JsonProperty("semiAnnualCorrFlag")
-        @ExcludeMissing
+        private val satNo: JsonField<Int>,
+        private val sc: JsonField<Double>,
         private val semiAnnualCorrFlag: JsonField<Boolean>,
-        @JsonProperty("ss") @ExcludeMissing private val ss: JsonField<Double>,
-        @JsonProperty("troughType") @ExcludeMissing private val troughType: JsonField<String>,
+        private val ss: JsonField<Double>,
+        private val troughType: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("confidenceLevel")
+            @ExcludeMissing
+            confidenceLevel: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("longitudeMax")
+            @ExcludeMissing
+            longitudeMax: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("longitudeMin")
+            @ExcludeMissing
+            longitudeMin: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("longitudeRate")
+            @ExcludeMissing
+            longitudeRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("lostFlag")
+            @ExcludeMissing
+            lostFlag: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("objectStatus")
+            @ExcludeMissing
+            objectStatus: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("planeChangeStatus")
+            @ExcludeMissing
+            planeChangeStatus: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rawFileURI")
+            @ExcludeMissing
+            rawFileUri: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("relativeEnergy")
+            @ExcludeMissing
+            relativeEnergy: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sc") @ExcludeMissing sc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("semiAnnualCorrFlag")
+            @ExcludeMissing
+            semiAnnualCorrFlag: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("ss") @ExcludeMissing ss: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("troughType")
+            @ExcludeMissing
+            troughType: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            id,
+            confidenceLevel,
+            createdAt,
+            createdBy,
+            idOnOrbit,
+            longitudeMax,
+            longitudeMin,
+            longitudeRate,
+            lostFlag,
+            objectStatus,
+            origin,
+            origNetwork,
+            origObjectId,
+            planeChangeStatus,
+            rawFileUri,
+            relativeEnergy,
+            satNo,
+            sc,
+            semiAnnualCorrFlag,
+            ss,
+            troughType,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -681,6 +766,16 @@ private constructor(
         @ExcludeMissing
         fun _troughType(): JsonField<String> = troughType
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -725,6 +820,7 @@ private constructor(
             private var semiAnnualCorrFlag: JsonField<Boolean> = JsonMissing.of()
             private var ss: JsonField<Double> = JsonMissing.of()
             private var troughType: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -752,6 +848,7 @@ private constructor(
                 semiAnnualCorrFlag = body.semiAnnualCorrFlag
                 ss = body.ss
                 troughType = body.troughType
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1122,6 +1219,25 @@ private constructor(
              */
             fun troughType(troughType: JsonField<String>) = apply { this.troughType = troughType }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1162,6 +1278,7 @@ private constructor(
                     semiAnnualCorrFlag,
                     ss,
                     troughType,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -1425,7 +1542,8 @@ private constructor(
                 sc == other.sc &&
                 semiAnnualCorrFlag == other.semiAnnualCorrFlag &&
                 ss == other.ss &&
-                troughType == other.troughType
+                troughType == other.troughType &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -1454,13 +1572,14 @@ private constructor(
                 semiAnnualCorrFlag,
                 ss,
                 troughType,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, confidenceLevel=$confidenceLevel, createdAt=$createdAt, createdBy=$createdBy, idOnOrbit=$idOnOrbit, longitudeMax=$longitudeMax, longitudeMin=$longitudeMin, longitudeRate=$longitudeRate, lostFlag=$lostFlag, objectStatus=$objectStatus, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, planeChangeStatus=$planeChangeStatus, rawFileUri=$rawFileUri, relativeEnergy=$relativeEnergy, satNo=$satNo, sc=$sc, semiAnnualCorrFlag=$semiAnnualCorrFlag, ss=$ss, troughType=$troughType}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, id=$id, confidenceLevel=$confidenceLevel, createdAt=$createdAt, createdBy=$createdBy, idOnOrbit=$idOnOrbit, longitudeMax=$longitudeMax, longitudeMin=$longitudeMin, longitudeRate=$longitudeRate, lostFlag=$lostFlag, objectStatus=$objectStatus, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, planeChangeStatus=$planeChangeStatus, rawFileUri=$rawFileUri, relativeEnergy=$relativeEnergy, satNo=$satNo, sc=$sc, semiAnnualCorrFlag=$semiAnnualCorrFlag, ss=$ss, troughType=$troughType, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

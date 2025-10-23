@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.weatherreport
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -215,121 +219,388 @@ private constructor(
      * heights etc.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("lat") @ExcludeMissing private val lat: JsonField<Double>,
-        @JsonProperty("lon") @ExcludeMissing private val lon: JsonField<Double>,
-        @JsonProperty("obTime") @ExcludeMissing private val obTime: JsonField<OffsetDateTime>,
-        @JsonProperty("reportType") @ExcludeMissing private val reportType: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("actWeather") @ExcludeMissing private val actWeather: JsonField<String>,
-        @JsonProperty("agjson") @ExcludeMissing private val agjson: JsonField<String>,
-        @JsonProperty("alt") @ExcludeMissing private val alt: JsonField<Double>,
-        @JsonProperty("andims") @ExcludeMissing private val andims: JsonField<Long>,
-        @JsonProperty("area") @ExcludeMissing private val area: JsonField<String>,
-        @JsonProperty("asrid") @ExcludeMissing private val asrid: JsonField<Int>,
-        @JsonProperty("atext") @ExcludeMissing private val atext: JsonField<String>,
-        @JsonProperty("atype") @ExcludeMissing private val atype: JsonField<String>,
-        @JsonProperty("barPress") @ExcludeMissing private val barPress: JsonField<Double>,
-        @JsonProperty("ccEvent") @ExcludeMissing private val ccEvent: JsonField<Boolean>,
-        @JsonProperty("cloudCover") @ExcludeMissing private val cloudCover: JsonField<List<String>>,
-        @JsonProperty("cloudHght") @ExcludeMissing private val cloudHght: JsonField<List<Double>>,
-        @JsonProperty("contrailHghtLower")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val lat: JsonField<Double>,
+        private val lon: JsonField<Double>,
+        private val obTime: JsonField<OffsetDateTime>,
+        private val reportType: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val actWeather: JsonField<String>,
+        private val agjson: JsonField<String>,
+        private val alt: JsonField<Double>,
+        private val andims: JsonField<Long>,
+        private val area: JsonField<String>,
+        private val asrid: JsonField<Int>,
+        private val atext: JsonField<String>,
+        private val atype: JsonField<String>,
+        private val barPress: JsonField<Double>,
+        private val ccEvent: JsonField<Boolean>,
+        private val cloudCover: JsonField<List<String>>,
+        private val cloudHght: JsonField<List<Double>>,
         private val contrailHghtLower: JsonField<Double>,
-        @JsonProperty("contrailHghtUpper")
-        @ExcludeMissing
         private val contrailHghtUpper: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("dataLevel") @ExcludeMissing private val dataLevel: JsonField<String>,
-        @JsonProperty("dewPoint") @ExcludeMissing private val dewPoint: JsonField<Double>,
-        @JsonProperty("difRad") @ExcludeMissing private val difRad: JsonField<Double>,
-        @JsonProperty("dirDev") @ExcludeMissing private val dirDev: JsonField<Double>,
-        @JsonProperty("enRouteWeather")
-        @ExcludeMissing
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val dataLevel: JsonField<String>,
+        private val dewPoint: JsonField<Double>,
+        private val difRad: JsonField<Double>,
+        private val dirDev: JsonField<Double>,
         private val enRouteWeather: JsonField<String>,
-        @JsonProperty("externalId") @ExcludeMissing private val externalId: JsonField<String>,
-        @JsonProperty("externalLocationId")
-        @ExcludeMissing
+        private val externalId: JsonField<String>,
         private val externalLocationId: JsonField<String>,
-        @JsonProperty("forecastEndTime")
-        @ExcludeMissing
         private val forecastEndTime: JsonField<OffsetDateTime>,
-        @JsonProperty("forecastStartTime")
-        @ExcludeMissing
         private val forecastStartTime: JsonField<OffsetDateTime>,
-        @JsonProperty("geoPotentialAlt")
-        @ExcludeMissing
         private val geoPotentialAlt: JsonField<Double>,
-        @JsonProperty("hshear") @ExcludeMissing private val hshear: JsonField<Double>,
-        @JsonProperty("icao") @ExcludeMissing private val icao: JsonField<String>,
-        @JsonProperty("icingLowerLimit")
-        @ExcludeMissing
+        private val hshear: JsonField<Double>,
+        private val icao: JsonField<String>,
         private val icingLowerLimit: JsonField<Double>,
-        @JsonProperty("icingUpperLimit")
-        @ExcludeMissing
         private val icingUpperLimit: JsonField<Double>,
-        @JsonProperty("idAirfield") @ExcludeMissing private val idAirfield: JsonField<String>,
-        @JsonProperty("idGroundImagery")
-        @ExcludeMissing
+        private val idAirfield: JsonField<String>,
         private val idGroundImagery: JsonField<String>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("idSite") @ExcludeMissing private val idSite: JsonField<String>,
-        @JsonProperty("indexRefraction")
-        @ExcludeMissing
+        private val idSensor: JsonField<String>,
+        private val idSite: JsonField<String>,
         private val indexRefraction: JsonField<Double>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("precipRate") @ExcludeMissing private val precipRate: JsonField<Double>,
-        @JsonProperty("qnh") @ExcludeMissing private val qnh: JsonField<Double>,
-        @JsonProperty("radVel") @ExcludeMissing private val radVel: JsonField<Double>,
-        @JsonProperty("radVelBeam1") @ExcludeMissing private val radVelBeam1: JsonField<Double>,
-        @JsonProperty("radVelBeam2") @ExcludeMissing private val radVelBeam2: JsonField<Double>,
-        @JsonProperty("radVelBeam3") @ExcludeMissing private val radVelBeam3: JsonField<Double>,
-        @JsonProperty("radVelBeam4") @ExcludeMissing private val radVelBeam4: JsonField<Double>,
-        @JsonProperty("radVelBeam5") @ExcludeMissing private val radVelBeam5: JsonField<Double>,
-        @JsonProperty("rainHour") @ExcludeMissing private val rainHour: JsonField<Double>,
-        @JsonProperty("rawMETAR") @ExcludeMissing private val rawMetar: JsonField<String>,
-        @JsonProperty("rawTAF") @ExcludeMissing private val rawTaf: JsonField<String>,
-        @JsonProperty("refRad") @ExcludeMissing private val refRad: JsonField<Double>,
-        @JsonProperty("relHumidity") @ExcludeMissing private val relHumidity: JsonField<Double>,
-        @JsonProperty("senalt") @ExcludeMissing private val senalt: JsonField<Double>,
-        @JsonProperty("senlat") @ExcludeMissing private val senlat: JsonField<Double>,
-        @JsonProperty("senlon") @ExcludeMissing private val senlon: JsonField<Double>,
-        @JsonProperty("soilMoisture") @ExcludeMissing private val soilMoisture: JsonField<Double>,
-        @JsonProperty("soilTemp") @ExcludeMissing private val soilTemp: JsonField<Double>,
-        @JsonProperty("solarRad") @ExcludeMissing private val solarRad: JsonField<Double>,
-        @JsonProperty("srcIds") @ExcludeMissing private val srcIds: JsonField<List<String>>,
-        @JsonProperty("srcTyps") @ExcludeMissing private val srcTyps: JsonField<List<String>>,
-        @JsonProperty("surroundingWeather")
-        @ExcludeMissing
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origSensorId: JsonField<String>,
+        private val precipRate: JsonField<Double>,
+        private val qnh: JsonField<Double>,
+        private val radVel: JsonField<Double>,
+        private val radVelBeam1: JsonField<Double>,
+        private val radVelBeam2: JsonField<Double>,
+        private val radVelBeam3: JsonField<Double>,
+        private val radVelBeam4: JsonField<Double>,
+        private val radVelBeam5: JsonField<Double>,
+        private val rainHour: JsonField<Double>,
+        private val rawMetar: JsonField<String>,
+        private val rawTaf: JsonField<String>,
+        private val refRad: JsonField<Double>,
+        private val relHumidity: JsonField<Double>,
+        private val senalt: JsonField<Double>,
+        private val senlat: JsonField<Double>,
+        private val senlon: JsonField<Double>,
+        private val soilMoisture: JsonField<Double>,
+        private val soilTemp: JsonField<Double>,
+        private val solarRad: JsonField<Double>,
+        private val srcIds: JsonField<List<String>>,
+        private val srcTyps: JsonField<List<String>>,
         private val surroundingWeather: JsonField<String>,
-        @JsonProperty("temperature") @ExcludeMissing private val temperature: JsonField<Double>,
-        @JsonProperty("visibility") @ExcludeMissing private val visibility: JsonField<Double>,
-        @JsonProperty("vshear") @ExcludeMissing private val vshear: JsonField<Double>,
-        @JsonProperty("weatherAmp") @ExcludeMissing private val weatherAmp: JsonField<String>,
-        @JsonProperty("weatherDesc") @ExcludeMissing private val weatherDesc: JsonField<String>,
-        @JsonProperty("weatherId") @ExcludeMissing private val weatherId: JsonField<String>,
-        @JsonProperty("weatherInt") @ExcludeMissing private val weatherInt: JsonField<String>,
-        @JsonProperty("windChill") @ExcludeMissing private val windChill: JsonField<Double>,
-        @JsonProperty("windCov") @ExcludeMissing private val windCov: JsonField<List<Double>>,
-        @JsonProperty("windDir") @ExcludeMissing private val windDir: JsonField<Double>,
-        @JsonProperty("windDirAvg") @ExcludeMissing private val windDirAvg: JsonField<Double>,
-        @JsonProperty("windDirPeak") @ExcludeMissing private val windDirPeak: JsonField<Double>,
-        @JsonProperty("windDirPeak10") @ExcludeMissing private val windDirPeak10: JsonField<Double>,
-        @JsonProperty("windGust") @ExcludeMissing private val windGust: JsonField<Double>,
-        @JsonProperty("windGust10") @ExcludeMissing private val windGust10: JsonField<Double>,
-        @JsonProperty("windSpd") @ExcludeMissing private val windSpd: JsonField<Double>,
-        @JsonProperty("windSpdAvg") @ExcludeMissing private val windSpdAvg: JsonField<Double>,
-        @JsonProperty("windVar") @ExcludeMissing private val windVar: JsonField<Boolean>,
+        private val temperature: JsonField<Double>,
+        private val visibility: JsonField<Double>,
+        private val vshear: JsonField<Double>,
+        private val weatherAmp: JsonField<String>,
+        private val weatherDesc: JsonField<String>,
+        private val weatherId: JsonField<String>,
+        private val weatherInt: JsonField<String>,
+        private val windChill: JsonField<Double>,
+        private val windCov: JsonField<List<Double>>,
+        private val windDir: JsonField<Double>,
+        private val windDirAvg: JsonField<Double>,
+        private val windDirPeak: JsonField<Double>,
+        private val windDirPeak10: JsonField<Double>,
+        private val windGust: JsonField<Double>,
+        private val windGust10: JsonField<Double>,
+        private val windSpd: JsonField<Double>,
+        private val windSpdAvg: JsonField<Double>,
+        private val windVar: JsonField<Boolean>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("obTime")
+            @ExcludeMissing
+            obTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("reportType")
+            @ExcludeMissing
+            reportType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("actWeather")
+            @ExcludeMissing
+            actWeather: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("agjson") @ExcludeMissing agjson: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("alt") @ExcludeMissing alt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("andims") @ExcludeMissing andims: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("area") @ExcludeMissing area: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("asrid") @ExcludeMissing asrid: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("atext") @ExcludeMissing atext: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("atype") @ExcludeMissing atype: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("barPress")
+            @ExcludeMissing
+            barPress: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("ccEvent") @ExcludeMissing ccEvent: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("cloudCover")
+            @ExcludeMissing
+            cloudCover: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("cloudHght")
+            @ExcludeMissing
+            cloudHght: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("contrailHghtLower")
+            @ExcludeMissing
+            contrailHghtLower: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("contrailHghtUpper")
+            @ExcludeMissing
+            contrailHghtUpper: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataLevel")
+            @ExcludeMissing
+            dataLevel: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dewPoint")
+            @ExcludeMissing
+            dewPoint: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("difRad") @ExcludeMissing difRad: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("dirDev") @ExcludeMissing dirDev: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("enRouteWeather")
+            @ExcludeMissing
+            enRouteWeather: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("externalId")
+            @ExcludeMissing
+            externalId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("externalLocationId")
+            @ExcludeMissing
+            externalLocationId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("forecastEndTime")
+            @ExcludeMissing
+            forecastEndTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("forecastStartTime")
+            @ExcludeMissing
+            forecastStartTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("geoPotentialAlt")
+            @ExcludeMissing
+            geoPotentialAlt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("hshear") @ExcludeMissing hshear: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("icao") @ExcludeMissing icao: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("icingLowerLimit")
+            @ExcludeMissing
+            icingLowerLimit: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("icingUpperLimit")
+            @ExcludeMissing
+            icingUpperLimit: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idAirfield")
+            @ExcludeMissing
+            idAirfield: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idGroundImagery")
+            @ExcludeMissing
+            idGroundImagery: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSite") @ExcludeMissing idSite: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("indexRefraction")
+            @ExcludeMissing
+            indexRefraction: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("precipRate")
+            @ExcludeMissing
+            precipRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("qnh") @ExcludeMissing qnh: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("radVel") @ExcludeMissing radVel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("radVelBeam1")
+            @ExcludeMissing
+            radVelBeam1: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("radVelBeam2")
+            @ExcludeMissing
+            radVelBeam2: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("radVelBeam3")
+            @ExcludeMissing
+            radVelBeam3: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("radVelBeam4")
+            @ExcludeMissing
+            radVelBeam4: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("radVelBeam5")
+            @ExcludeMissing
+            radVelBeam5: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rainHour")
+            @ExcludeMissing
+            rainHour: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("rawMETAR")
+            @ExcludeMissing
+            rawMetar: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rawTAF") @ExcludeMissing rawTaf: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("refRad") @ExcludeMissing refRad: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("relHumidity")
+            @ExcludeMissing
+            relHumidity: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senalt") @ExcludeMissing senalt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlat") @ExcludeMissing senlat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlon") @ExcludeMissing senlon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("soilMoisture")
+            @ExcludeMissing
+            soilMoisture: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("soilTemp")
+            @ExcludeMissing
+            soilTemp: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("solarRad")
+            @ExcludeMissing
+            solarRad: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("srcIds")
+            @ExcludeMissing
+            srcIds: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("srcTyps")
+            @ExcludeMissing
+            srcTyps: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("surroundingWeather")
+            @ExcludeMissing
+            surroundingWeather: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("temperature")
+            @ExcludeMissing
+            temperature: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("visibility")
+            @ExcludeMissing
+            visibility: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("vshear") @ExcludeMissing vshear: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("weatherAmp")
+            @ExcludeMissing
+            weatherAmp: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("weatherDesc")
+            @ExcludeMissing
+            weatherDesc: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("weatherId")
+            @ExcludeMissing
+            weatherId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("weatherInt")
+            @ExcludeMissing
+            weatherInt: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("windChill")
+            @ExcludeMissing
+            windChill: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("windCov")
+            @ExcludeMissing
+            windCov: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("windDir") @ExcludeMissing windDir: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("windDirAvg")
+            @ExcludeMissing
+            windDirAvg: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("windDirPeak")
+            @ExcludeMissing
+            windDirPeak: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("windDirPeak10")
+            @ExcludeMissing
+            windDirPeak10: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("windGust")
+            @ExcludeMissing
+            windGust: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("windGust10")
+            @ExcludeMissing
+            windGust10: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("windSpd") @ExcludeMissing windSpd: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("windSpdAvg")
+            @ExcludeMissing
+            windSpdAvg: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("windVar") @ExcludeMissing windVar: JsonField<Boolean> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            lat,
+            lon,
+            obTime,
+            reportType,
+            source,
+            id,
+            actWeather,
+            agjson,
+            alt,
+            andims,
+            area,
+            asrid,
+            atext,
+            atype,
+            barPress,
+            ccEvent,
+            cloudCover,
+            cloudHght,
+            contrailHghtLower,
+            contrailHghtUpper,
+            createdAt,
+            createdBy,
+            dataLevel,
+            dewPoint,
+            difRad,
+            dirDev,
+            enRouteWeather,
+            externalId,
+            externalLocationId,
+            forecastEndTime,
+            forecastStartTime,
+            geoPotentialAlt,
+            hshear,
+            icao,
+            icingLowerLimit,
+            icingUpperLimit,
+            idAirfield,
+            idGroundImagery,
+            idSensor,
+            idSite,
+            indexRefraction,
+            origin,
+            origNetwork,
+            origSensorId,
+            precipRate,
+            qnh,
+            radVel,
+            radVelBeam1,
+            radVelBeam2,
+            radVelBeam3,
+            radVelBeam4,
+            radVelBeam5,
+            rainHour,
+            rawMetar,
+            rawTaf,
+            refRad,
+            relHumidity,
+            senalt,
+            senlat,
+            senlon,
+            soilMoisture,
+            soilTemp,
+            solarRad,
+            srcIds,
+            srcTyps,
+            surroundingWeather,
+            temperature,
+            visibility,
+            vshear,
+            weatherAmp,
+            weatherDesc,
+            weatherId,
+            weatherInt,
+            windChill,
+            windCov,
+            windDir,
+            windDirAvg,
+            windDirPeak,
+            windDirPeak10,
+            windGust,
+            windGust10,
+            windSpd,
+            windSpdAvg,
+            windVar,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1845,6 +2116,16 @@ private constructor(
          */
         @JsonProperty("windVar") @ExcludeMissing fun _windVar(): JsonField<Boolean> = windVar
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1955,6 +2236,7 @@ private constructor(
             private var windSpd: JsonField<Double> = JsonMissing.of()
             private var windSpdAvg: JsonField<Double> = JsonMissing.of()
             private var windVar: JsonField<Boolean> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -2044,6 +2326,7 @@ private constructor(
                 windSpd = body.windSpd
                 windSpdAvg = body.windSpdAvg
                 windVar = body.windVar
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -3432,6 +3715,25 @@ private constructor(
              */
             fun windVar(windVar: JsonField<Boolean>) = apply { this.windVar = windVar }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -3538,6 +3840,7 @@ private constructor(
                     windSpd,
                     windSpdAvg,
                     windVar,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -3987,7 +4290,8 @@ private constructor(
                 windGust10 == other.windGust10 &&
                 windSpd == other.windSpd &&
                 windSpdAvg == other.windSpdAvg &&
-                windVar == other.windVar
+                windVar == other.windVar &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -4078,13 +4382,14 @@ private constructor(
                 windSpd,
                 windSpdAvg,
                 windVar,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, lat=$lat, lon=$lon, obTime=$obTime, reportType=$reportType, source=$source, id=$id, actWeather=$actWeather, agjson=$agjson, alt=$alt, andims=$andims, area=$area, asrid=$asrid, atext=$atext, atype=$atype, barPress=$barPress, ccEvent=$ccEvent, cloudCover=$cloudCover, cloudHght=$cloudHght, contrailHghtLower=$contrailHghtLower, contrailHghtUpper=$contrailHghtUpper, createdAt=$createdAt, createdBy=$createdBy, dataLevel=$dataLevel, dewPoint=$dewPoint, difRad=$difRad, dirDev=$dirDev, enRouteWeather=$enRouteWeather, externalId=$externalId, externalLocationId=$externalLocationId, forecastEndTime=$forecastEndTime, forecastStartTime=$forecastStartTime, geoPotentialAlt=$geoPotentialAlt, hshear=$hshear, icao=$icao, icingLowerLimit=$icingLowerLimit, icingUpperLimit=$icingUpperLimit, idAirfield=$idAirfield, idGroundImagery=$idGroundImagery, idSensor=$idSensor, idSite=$idSite, indexRefraction=$indexRefraction, origin=$origin, origNetwork=$origNetwork, origSensorId=$origSensorId, precipRate=$precipRate, qnh=$qnh, radVel=$radVel, radVelBeam1=$radVelBeam1, radVelBeam2=$radVelBeam2, radVelBeam3=$radVelBeam3, radVelBeam4=$radVelBeam4, radVelBeam5=$radVelBeam5, rainHour=$rainHour, rawMetar=$rawMetar, rawTaf=$rawTaf, refRad=$refRad, relHumidity=$relHumidity, senalt=$senalt, senlat=$senlat, senlon=$senlon, soilMoisture=$soilMoisture, soilTemp=$soilTemp, solarRad=$solarRad, srcIds=$srcIds, srcTyps=$srcTyps, surroundingWeather=$surroundingWeather, temperature=$temperature, visibility=$visibility, vshear=$vshear, weatherAmp=$weatherAmp, weatherDesc=$weatherDesc, weatherId=$weatherId, weatherInt=$weatherInt, windChill=$windChill, windCov=$windCov, windDir=$windDir, windDirAvg=$windDirAvg, windDirPeak=$windDirPeak, windDirPeak10=$windDirPeak10, windGust=$windGust, windGust10=$windGust10, windSpd=$windSpd, windSpdAvg=$windSpdAvg, windVar=$windVar}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, lat=$lat, lon=$lon, obTime=$obTime, reportType=$reportType, source=$source, id=$id, actWeather=$actWeather, agjson=$agjson, alt=$alt, andims=$andims, area=$area, asrid=$asrid, atext=$atext, atype=$atype, barPress=$barPress, ccEvent=$ccEvent, cloudCover=$cloudCover, cloudHght=$cloudHght, contrailHghtLower=$contrailHghtLower, contrailHghtUpper=$contrailHghtUpper, createdAt=$createdAt, createdBy=$createdBy, dataLevel=$dataLevel, dewPoint=$dewPoint, difRad=$difRad, dirDev=$dirDev, enRouteWeather=$enRouteWeather, externalId=$externalId, externalLocationId=$externalLocationId, forecastEndTime=$forecastEndTime, forecastStartTime=$forecastStartTime, geoPotentialAlt=$geoPotentialAlt, hshear=$hshear, icao=$icao, icingLowerLimit=$icingLowerLimit, icingUpperLimit=$icingUpperLimit, idAirfield=$idAirfield, idGroundImagery=$idGroundImagery, idSensor=$idSensor, idSite=$idSite, indexRefraction=$indexRefraction, origin=$origin, origNetwork=$origNetwork, origSensorId=$origSensorId, precipRate=$precipRate, qnh=$qnh, radVel=$radVel, radVelBeam1=$radVelBeam1, radVelBeam2=$radVelBeam2, radVelBeam3=$radVelBeam3, radVelBeam4=$radVelBeam4, radVelBeam5=$radVelBeam5, rainHour=$rainHour, rawMetar=$rawMetar, rawTaf=$rawTaf, refRad=$refRad, relHumidity=$relHumidity, senalt=$senalt, senlat=$senlat, senlon=$senlon, soilMoisture=$soilMoisture, soilTemp=$soilTemp, solarRad=$solarRad, srcIds=$srcIds, srcTyps=$srcTyps, surroundingWeather=$surroundingWeather, temperature=$temperature, visibility=$visibility, vshear=$vshear, weatherAmp=$weatherAmp, weatherDesc=$weatherDesc, weatherId=$weatherId, weatherInt=$weatherInt, windChill=$windChill, windCov=$windCov, windDir=$windDir, windDirAvg=$windDirAvg, windDirPeak=$windDirPeak, windDirPeak10=$windDirPeak10, windGust=$windGust, windGust10=$windGust10, windSpd=$windSpd, windSpdAvg=$windSpdAvg, windVar=$windVar, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

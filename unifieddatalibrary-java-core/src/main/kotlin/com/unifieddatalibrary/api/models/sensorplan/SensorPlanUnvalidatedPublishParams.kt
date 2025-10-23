@@ -217,35 +217,106 @@ private constructor(
      * to the parent.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("recType") @ExcludeMissing private val recType: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("startTime") @ExcludeMissing private val startTime: JsonField<OffsetDateTime>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("collectRequests")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val recType: JsonField<String>,
+        private val source: JsonField<String>,
+        private val startTime: JsonField<OffsetDateTime>,
+        private val type: JsonField<String>,
+        private val id: JsonField<String>,
         private val collectRequests: JsonField<List<CollectRequest>>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("customer") @ExcludeMissing private val customer: JsonField<String>,
-        @JsonProperty("endTime") @ExcludeMissing private val endTime: JsonField<OffsetDateTime>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("name") @ExcludeMissing private val name: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("purpose") @ExcludeMissing private val purpose: JsonField<String>,
-        @JsonProperty("reqTotal") @ExcludeMissing private val reqTotal: JsonField<Int>,
-        @JsonProperty("senNetwork") @ExcludeMissing private val senNetwork: JsonField<String>,
-        @JsonProperty("status") @ExcludeMissing private val status: JsonField<String>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val customer: JsonField<String>,
+        private val endTime: JsonField<OffsetDateTime>,
+        private val idSensor: JsonField<String>,
+        private val name: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origSensorId: JsonField<String>,
+        private val purpose: JsonField<String>,
+        private val reqTotal: JsonField<Int>,
+        private val senNetwork: JsonField<String>,
+        private val status: JsonField<String>,
+        private val tags: JsonField<List<String>>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("recType") @ExcludeMissing recType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("startTime")
+            @ExcludeMissing
+            startTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("collectRequests")
+            @ExcludeMissing
+            collectRequests: JsonField<List<CollectRequest>> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("customer")
+            @ExcludeMissing
+            customer: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("endTime")
+            @ExcludeMissing
+            endTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("name") @ExcludeMissing name: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("purpose") @ExcludeMissing purpose: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("reqTotal") @ExcludeMissing reqTotal: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("senNetwork")
+            @ExcludeMissing
+            senNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("status") @ExcludeMissing status: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            recType,
+            source,
+            startTime,
+            type,
+            id,
+            collectRequests,
+            createdAt,
+            createdBy,
+            customer,
+            endTime,
+            idSensor,
+            name,
+            origin,
+            origNetwork,
+            origSensorId,
+            purpose,
+            reqTotal,
+            senNetwork,
+            status,
+            tags,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -627,6 +698,16 @@ private constructor(
          */
         @JsonProperty("tags") @ExcludeMissing fun _tags(): JsonField<List<String>> = tags
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -672,6 +753,7 @@ private constructor(
             private var senNetwork: JsonField<String> = JsonMissing.of()
             private var status: JsonField<String> = JsonMissing.of()
             private var tags: JsonField<MutableList<String>>? = null
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -697,6 +779,7 @@ private constructor(
                 senNetwork = body.senNetwork
                 status = body.status
                 tags = body.tags.map { it.toMutableList() }
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1048,6 +1131,25 @@ private constructor(
                     (tags ?: JsonField.of(mutableListOf())).also { checkKnown("tags", it).add(tag) }
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1089,6 +1191,7 @@ private constructor(
                     senNetwork,
                     status,
                     (tags ?: JsonMissing.of()).map { it.toImmutable() },
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -12968,6 +13071,8 @@ private constructor(
 
                         @JvmField val EFG_TDR = of("EFG/TDR")
 
+                        @JvmField val ECR_ECEF = of("ECR/ECEF")
+
                         @JvmField val TEME = of("TEME")
 
                         @JvmField val GCRF = of("GCRF")
@@ -12980,6 +13085,7 @@ private constructor(
                         J2000,
                         UVW,
                         EFG_TDR,
+                        ECR_ECEF,
                         TEME,
                         GCRF,
                     }
@@ -12999,6 +13105,7 @@ private constructor(
                         J2000,
                         UVW,
                         EFG_TDR,
+                        ECR_ECEF,
                         TEME,
                         GCRF,
                         /**
@@ -13020,6 +13127,7 @@ private constructor(
                             J2000 -> Value.J2000
                             UVW -> Value.UVW
                             EFG_TDR -> Value.EFG_TDR
+                            ECR_ECEF -> Value.ECR_ECEF
                             TEME -> Value.TEME
                             GCRF -> Value.GCRF
                             else -> Value._UNKNOWN
@@ -13039,6 +13147,7 @@ private constructor(
                             J2000 -> Known.J2000
                             UVW -> Known.UVW
                             EFG_TDR -> Known.EFG_TDR
+                            ECR_ECEF -> Known.ECR_ECEF
                             TEME -> Known.TEME
                             GCRF -> Known.GCRF
                             else ->
@@ -13879,7 +13988,8 @@ private constructor(
                 reqTotal == other.reqTotal &&
                 senNetwork == other.senNetwork &&
                 status == other.status &&
-                tags == other.tags
+                tags == other.tags &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -13906,13 +14016,14 @@ private constructor(
                 senNetwork,
                 status,
                 tags,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, recType=$recType, source=$source, startTime=$startTime, type=$type, id=$id, collectRequests=$collectRequests, createdAt=$createdAt, createdBy=$createdBy, customer=$customer, endTime=$endTime, idSensor=$idSensor, name=$name, origin=$origin, origNetwork=$origNetwork, origSensorId=$origSensorId, purpose=$purpose, reqTotal=$reqTotal, senNetwork=$senNetwork, status=$status, tags=$tags}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, recType=$recType, source=$source, startTime=$startTime, type=$type, id=$id, collectRequests=$collectRequests, createdAt=$createdAt, createdBy=$createdBy, customer=$customer, endTime=$endTime, idSensor=$idSensor, name=$name, origin=$origin, origNetwork=$origNetwork, origSensorId=$origSensorId, purpose=$purpose, reqTotal=$reqTotal, senNetwork=$senNetwork, status=$status, tags=$tags, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

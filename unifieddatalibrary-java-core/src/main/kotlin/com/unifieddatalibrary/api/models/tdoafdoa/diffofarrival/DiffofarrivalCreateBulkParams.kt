@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.tdoafdoa.diffofarrival
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -212,60 +216,195 @@ private constructor(
      * triangulation.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("obTime") @ExcludeMissing private val obTime: JsonField<OffsetDateTime>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("bandwidth") @ExcludeMissing private val bandwidth: JsonField<Double>,
-        @JsonProperty("collectionMode")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val obTime: JsonField<OffsetDateTime>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val bandwidth: JsonField<Double>,
         private val collectionMode: JsonField<String>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("deltaRange") @ExcludeMissing private val deltaRange: JsonField<Double>,
-        @JsonProperty("deltaRangeRate")
-        @ExcludeMissing
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val deltaRange: JsonField<Double>,
         private val deltaRangeRate: JsonField<Double>,
-        @JsonProperty("deltaRangeRateUnc")
-        @ExcludeMissing
         private val deltaRangeRateUnc: JsonField<Double>,
-        @JsonProperty("deltaRangeUnc") @ExcludeMissing private val deltaRangeUnc: JsonField<Double>,
-        @JsonProperty("descriptor") @ExcludeMissing private val descriptor: JsonField<String>,
-        @JsonProperty("fdoa") @ExcludeMissing private val fdoa: JsonField<Double>,
-        @JsonProperty("fdoaUnc") @ExcludeMissing private val fdoaUnc: JsonField<Double>,
-        @JsonProperty("frequency") @ExcludeMissing private val frequency: JsonField<Double>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("idSensor1") @ExcludeMissing private val idSensor1: JsonField<String>,
-        @JsonProperty("idSensor2") @ExcludeMissing private val idSensor2: JsonField<String>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("origSensorId1") @ExcludeMissing private val origSensorId1: JsonField<String>,
-        @JsonProperty("origSensorId2") @ExcludeMissing private val origSensorId2: JsonField<String>,
-        @JsonProperty("rawFileURI") @ExcludeMissing private val rawFileUri: JsonField<String>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("sen2alt") @ExcludeMissing private val sen2alt: JsonField<Double>,
-        @JsonProperty("sen2lat") @ExcludeMissing private val sen2lat: JsonField<Double>,
-        @JsonProperty("sen2lon") @ExcludeMissing private val sen2lon: JsonField<Double>,
-        @JsonProperty("senalt") @ExcludeMissing private val senalt: JsonField<Double>,
-        @JsonProperty("senlat") @ExcludeMissing private val senlat: JsonField<Double>,
-        @JsonProperty("senlon") @ExcludeMissing private val senlon: JsonField<Double>,
-        @JsonProperty("sensor1Delay") @ExcludeMissing private val sensor1Delay: JsonField<Double>,
-        @JsonProperty("sensor2Delay") @ExcludeMissing private val sensor2Delay: JsonField<Double>,
-        @JsonProperty("snr") @ExcludeMissing private val snr: JsonField<Double>,
-        @JsonProperty("sourceDL") @ExcludeMissing private val sourceDl: JsonField<String>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("taskId") @ExcludeMissing private val taskId: JsonField<String>,
-        @JsonProperty("tdoa") @ExcludeMissing private val tdoa: JsonField<Double>,
-        @JsonProperty("tdoaUnc") @ExcludeMissing private val tdoaUnc: JsonField<Double>,
-        @JsonProperty("transactionId") @ExcludeMissing private val transactionId: JsonField<String>,
-        @JsonProperty("uct") @ExcludeMissing private val uct: JsonField<Boolean>,
+        private val deltaRangeUnc: JsonField<Double>,
+        private val descriptor: JsonField<String>,
+        private val fdoa: JsonField<Double>,
+        private val fdoaUnc: JsonField<Double>,
+        private val frequency: JsonField<Double>,
+        private val idOnOrbit: JsonField<String>,
+        private val idSensor1: JsonField<String>,
+        private val idSensor2: JsonField<String>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val origSensorId1: JsonField<String>,
+        private val origSensorId2: JsonField<String>,
+        private val rawFileUri: JsonField<String>,
+        private val satNo: JsonField<Int>,
+        private val sen2alt: JsonField<Double>,
+        private val sen2lat: JsonField<Double>,
+        private val sen2lon: JsonField<Double>,
+        private val senalt: JsonField<Double>,
+        private val senlat: JsonField<Double>,
+        private val senlon: JsonField<Double>,
+        private val sensor1Delay: JsonField<Double>,
+        private val sensor2Delay: JsonField<Double>,
+        private val snr: JsonField<Double>,
+        private val sourceDl: JsonField<String>,
+        private val tags: JsonField<List<String>>,
+        private val taskId: JsonField<String>,
+        private val tdoa: JsonField<Double>,
+        private val tdoaUnc: JsonField<Double>,
+        private val transactionId: JsonField<String>,
+        private val uct: JsonField<Boolean>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("obTime")
+            @ExcludeMissing
+            obTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("bandwidth")
+            @ExcludeMissing
+            bandwidth: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("collectionMode")
+            @ExcludeMissing
+            collectionMode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("deltaRange")
+            @ExcludeMissing
+            deltaRange: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("deltaRangeRate")
+            @ExcludeMissing
+            deltaRangeRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("deltaRangeRateUnc")
+            @ExcludeMissing
+            deltaRangeRateUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("deltaRangeUnc")
+            @ExcludeMissing
+            deltaRangeUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("descriptor")
+            @ExcludeMissing
+            descriptor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("fdoa") @ExcludeMissing fdoa: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("fdoaUnc") @ExcludeMissing fdoaUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("frequency")
+            @ExcludeMissing
+            frequency: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor1")
+            @ExcludeMissing
+            idSensor1: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor2")
+            @ExcludeMissing
+            idSensor2: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId1")
+            @ExcludeMissing
+            origSensorId1: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId2")
+            @ExcludeMissing
+            origSensorId2: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("rawFileURI")
+            @ExcludeMissing
+            rawFileUri: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sen2alt") @ExcludeMissing sen2alt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sen2lat") @ExcludeMissing sen2lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sen2lon") @ExcludeMissing sen2lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senalt") @ExcludeMissing senalt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlat") @ExcludeMissing senlat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senlon") @ExcludeMissing senlon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sensor1Delay")
+            @ExcludeMissing
+            sensor1Delay: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sensor2Delay")
+            @ExcludeMissing
+            sensor2Delay: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("snr") @ExcludeMissing snr: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("sourceDL")
+            @ExcludeMissing
+            sourceDl: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("taskId") @ExcludeMissing taskId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tdoa") @ExcludeMissing tdoa: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("tdoaUnc") @ExcludeMissing tdoaUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("transactionId")
+            @ExcludeMissing
+            transactionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("uct") @ExcludeMissing uct: JsonField<Boolean> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            obTime,
+            source,
+            id,
+            bandwidth,
+            collectionMode,
+            createdAt,
+            createdBy,
+            deltaRange,
+            deltaRangeRate,
+            deltaRangeRateUnc,
+            deltaRangeUnc,
+            descriptor,
+            fdoa,
+            fdoaUnc,
+            frequency,
+            idOnOrbit,
+            idSensor1,
+            idSensor2,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId1,
+            origSensorId2,
+            rawFileUri,
+            satNo,
+            sen2alt,
+            sen2lat,
+            sen2lon,
+            senalt,
+            senlat,
+            senlon,
+            sensor1Delay,
+            sensor2Delay,
+            snr,
+            sourceDl,
+            tags,
+            taskId,
+            tdoa,
+            tdoaUnc,
+            transactionId,
+            uct,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1006,6 +1145,16 @@ private constructor(
          */
         @JsonProperty("uct") @ExcludeMissing fun _uct(): JsonField<Boolean> = uct
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1070,6 +1219,7 @@ private constructor(
             private var tdoaUnc: JsonField<Double> = JsonMissing.of()
             private var transactionId: JsonField<String> = JsonMissing.of()
             private var uct: JsonField<Boolean> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1116,6 +1266,7 @@ private constructor(
                 tdoaUnc = body.tdoaUnc
                 transactionId = body.transactionId
                 uct = body.uct
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -1773,6 +1924,25 @@ private constructor(
              */
             fun uct(uct: JsonField<Boolean>) = apply { this.uct = uct }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -1833,6 +2003,7 @@ private constructor(
                     tdoaUnc,
                     transactionId,
                     uct,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -2153,7 +2324,8 @@ private constructor(
                 tdoa == other.tdoa &&
                 tdoaUnc == other.tdoaUnc &&
                 transactionId == other.transactionId &&
-                uct == other.uct
+                uct == other.uct &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -2201,13 +2373,14 @@ private constructor(
                 tdoaUnc,
                 transactionId,
                 uct,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, id=$id, bandwidth=$bandwidth, collectionMode=$collectionMode, createdAt=$createdAt, createdBy=$createdBy, deltaRange=$deltaRange, deltaRangeRate=$deltaRangeRate, deltaRangeRateUnc=$deltaRangeRateUnc, deltaRangeUnc=$deltaRangeUnc, descriptor=$descriptor, fdoa=$fdoa, fdoaUnc=$fdoaUnc, frequency=$frequency, idOnOrbit=$idOnOrbit, idSensor1=$idSensor1, idSensor2=$idSensor2, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId1=$origSensorId1, origSensorId2=$origSensorId2, rawFileUri=$rawFileUri, satNo=$satNo, sen2alt=$sen2alt, sen2lat=$sen2lat, sen2lon=$sen2lon, senalt=$senalt, senlat=$senlat, senlon=$senlon, sensor1Delay=$sensor1Delay, sensor2Delay=$sensor2Delay, snr=$snr, sourceDl=$sourceDl, tags=$tags, taskId=$taskId, tdoa=$tdoa, tdoaUnc=$tdoaUnc, transactionId=$transactionId, uct=$uct}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, obTime=$obTime, source=$source, id=$id, bandwidth=$bandwidth, collectionMode=$collectionMode, createdAt=$createdAt, createdBy=$createdBy, deltaRange=$deltaRange, deltaRangeRate=$deltaRangeRate, deltaRangeRateUnc=$deltaRangeRateUnc, deltaRangeUnc=$deltaRangeUnc, descriptor=$descriptor, fdoa=$fdoa, fdoaUnc=$fdoaUnc, frequency=$frequency, idOnOrbit=$idOnOrbit, idSensor1=$idSensor1, idSensor2=$idSensor2, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId1=$origSensorId1, origSensorId2=$origSensorId2, rawFileUri=$rawFileUri, satNo=$satNo, sen2alt=$sen2alt, sen2lat=$sen2lat, sen2lon=$sen2lon, senalt=$senalt, senlat=$senlat, senlon=$senlon, sensor1Delay=$sensor1Delay, sensor2Delay=$sensor2Delay, snr=$snr, sourceDl=$sourceDl, tags=$tags, taskId=$taskId, tdoa=$tdoa, tdoaUnc=$tdoaUnc, transactionId=$transactionId, uct=$uct, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

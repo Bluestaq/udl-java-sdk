@@ -2,12 +2,15 @@
 
 package com.unifieddatalibrary.api.models.observations.ecpsdr
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.Enum
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkKnown
 import com.unifieddatalibrary.api.core.checkRequired
@@ -16,6 +19,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 import kotlin.jvm.optionals.getOrNull
@@ -210,65 +214,220 @@ private constructor(
      * SDR contains sensor status telemetry and raw dosimeter measurements of the space environment.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("msgTime") @ExcludeMissing private val msgTime: JsonField<OffsetDateTime>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("asl5VCurrMon") @ExcludeMissing private val asl5VCurrMon: JsonField<Int>,
-        @JsonProperty("cdsPlateVMon") @ExcludeMissing private val cdsPlateVMon: JsonField<Int>,
-        @JsonProperty("cdsRefVMon") @ExcludeMissing private val cdsRefVMon: JsonField<Int>,
-        @JsonProperty("cdsThreshold") @ExcludeMissing private val cdsThreshold: JsonField<Int>,
-        @JsonProperty("cdsThrottle") @ExcludeMissing private val cdsThrottle: JsonField<Int>,
-        @JsonProperty("checksum") @ExcludeMissing private val checksum: JsonField<Int>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("dosBias") @ExcludeMissing private val dosBias: JsonField<Int>,
-        @JsonProperty("dsl5VCurrMon") @ExcludeMissing private val dsl5VCurrMon: JsonField<Int>,
-        @JsonProperty("esdTrigCountH") @ExcludeMissing private val esdTrigCountH: JsonField<Int>,
-        @JsonProperty("esdTrigCountL") @ExcludeMissing private val esdTrigCountL: JsonField<Int>,
-        @JsonProperty("hiLetL") @ExcludeMissing private val hiLetL: JsonField<Int>,
-        @JsonProperty("hiLetM") @ExcludeMissing private val hiLetM: JsonField<Int>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("lowLetL") @ExcludeMissing private val lowLetL: JsonField<Int>,
-        @JsonProperty("lowLetM") @ExcludeMissing private val lowLetM: JsonField<Int>,
-        @JsonProperty("medLet1L") @ExcludeMissing private val medLet1L: JsonField<Int>,
-        @JsonProperty("medLet1M") @ExcludeMissing private val medLet1M: JsonField<Int>,
-        @JsonProperty("medLet2L") @ExcludeMissing private val medLet2L: JsonField<Int>,
-        @JsonProperty("medLet2M") @ExcludeMissing private val medLet2M: JsonField<Int>,
-        @JsonProperty("medLet3L") @ExcludeMissing private val medLet3L: JsonField<Int>,
-        @JsonProperty("medLet3M") @ExcludeMissing private val medLet3M: JsonField<Int>,
-        @JsonProperty("medLet4L") @ExcludeMissing private val medLet4L: JsonField<Int>,
-        @JsonProperty("medLet4M") @ExcludeMissing private val medLet4M: JsonField<Int>,
-        @JsonProperty("mpTemp") @ExcludeMissing private val mpTemp: JsonField<Int>,
-        @JsonProperty("obTime") @ExcludeMissing private val obTime: JsonField<OffsetDateTime>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("pd1SigLev") @ExcludeMissing private val pd1SigLev: JsonField<Int>,
-        @JsonProperty("pd2SigLev") @ExcludeMissing private val pd2SigLev: JsonField<Int>,
-        @JsonProperty("psTempMon") @ExcludeMissing private val psTempMon: JsonField<Int>,
-        @JsonProperty("retransmit") @ExcludeMissing private val retransmit: JsonField<Boolean>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("senMode") @ExcludeMissing private val senMode: JsonField<String>,
-        @JsonProperty("surfDosChargeH") @ExcludeMissing private val surfDosChargeH: JsonField<Int>,
-        @JsonProperty("surfDosChargeL") @ExcludeMissing private val surfDosChargeL: JsonField<Int>,
-        @JsonProperty("surfDosH") @ExcludeMissing private val surfDosH: JsonField<Int>,
-        @JsonProperty("surfDosL") @ExcludeMissing private val surfDosL: JsonField<Int>,
-        @JsonProperty("surfDosM") @ExcludeMissing private val surfDosM: JsonField<Int>,
-        @JsonProperty("surfDosStat") @ExcludeMissing private val surfDosStat: JsonField<Int>,
-        @JsonProperty("transientData")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val msgTime: JsonField<OffsetDateTime>,
+        private val source: JsonField<String>,
+        private val type: JsonField<String>,
+        private val id: JsonField<String>,
+        private val asl5VCurrMon: JsonField<Int>,
+        private val cdsPlateVMon: JsonField<Int>,
+        private val cdsRefVMon: JsonField<Int>,
+        private val cdsThreshold: JsonField<Int>,
+        private val cdsThrottle: JsonField<Int>,
+        private val checksum: JsonField<Int>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val dosBias: JsonField<Int>,
+        private val dsl5VCurrMon: JsonField<Int>,
+        private val esdTrigCountH: JsonField<Int>,
+        private val esdTrigCountL: JsonField<Int>,
+        private val hiLetL: JsonField<Int>,
+        private val hiLetM: JsonField<Int>,
+        private val idOnOrbit: JsonField<String>,
+        private val idSensor: JsonField<String>,
+        private val lowLetL: JsonField<Int>,
+        private val lowLetM: JsonField<Int>,
+        private val medLet1L: JsonField<Int>,
+        private val medLet1M: JsonField<Int>,
+        private val medLet2L: JsonField<Int>,
+        private val medLet2M: JsonField<Int>,
+        private val medLet3L: JsonField<Int>,
+        private val medLet3M: JsonField<Int>,
+        private val medLet4L: JsonField<Int>,
+        private val medLet4M: JsonField<Int>,
+        private val mpTemp: JsonField<Int>,
+        private val obTime: JsonField<OffsetDateTime>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val origSensorId: JsonField<String>,
+        private val pd1SigLev: JsonField<Int>,
+        private val pd2SigLev: JsonField<Int>,
+        private val psTempMon: JsonField<Int>,
+        private val retransmit: JsonField<Boolean>,
+        private val satNo: JsonField<Int>,
+        private val senMode: JsonField<String>,
+        private val surfDosChargeH: JsonField<Int>,
+        private val surfDosChargeL: JsonField<Int>,
+        private val surfDosH: JsonField<Int>,
+        private val surfDosL: JsonField<Int>,
+        private val surfDosM: JsonField<Int>,
+        private val surfDosStat: JsonField<Int>,
         private val transientData: JsonField<List<Int>>,
-        @JsonProperty("vRef") @ExcludeMissing private val vRef: JsonField<Int>,
+        private val vRef: JsonField<Int>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("msgTime")
+            @ExcludeMissing
+            msgTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("asl5VCurrMon")
+            @ExcludeMissing
+            asl5VCurrMon: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("cdsPlateVMon")
+            @ExcludeMissing
+            cdsPlateVMon: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("cdsRefVMon")
+            @ExcludeMissing
+            cdsRefVMon: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("cdsThreshold")
+            @ExcludeMissing
+            cdsThreshold: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("cdsThrottle")
+            @ExcludeMissing
+            cdsThrottle: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("checksum") @ExcludeMissing checksum: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dosBias") @ExcludeMissing dosBias: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("dsl5VCurrMon")
+            @ExcludeMissing
+            dsl5VCurrMon: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("esdTrigCountH")
+            @ExcludeMissing
+            esdTrigCountH: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("esdTrigCountL")
+            @ExcludeMissing
+            esdTrigCountL: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("hiLetL") @ExcludeMissing hiLetL: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("hiLetM") @ExcludeMissing hiLetM: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lowLetL") @ExcludeMissing lowLetL: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("lowLetM") @ExcludeMissing lowLetM: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("medLet1L") @ExcludeMissing medLet1L: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("medLet1M") @ExcludeMissing medLet1M: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("medLet2L") @ExcludeMissing medLet2L: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("medLet2M") @ExcludeMissing medLet2M: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("medLet3L") @ExcludeMissing medLet3L: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("medLet3M") @ExcludeMissing medLet3M: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("medLet4L") @ExcludeMissing medLet4L: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("medLet4M") @ExcludeMissing medLet4M: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("mpTemp") @ExcludeMissing mpTemp: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("obTime")
+            @ExcludeMissing
+            obTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("pd1SigLev") @ExcludeMissing pd1SigLev: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("pd2SigLev") @ExcludeMissing pd2SigLev: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("psTempMon") @ExcludeMissing psTempMon: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("retransmit")
+            @ExcludeMissing
+            retransmit: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("senMode") @ExcludeMissing senMode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("surfDosChargeH")
+            @ExcludeMissing
+            surfDosChargeH: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("surfDosChargeL")
+            @ExcludeMissing
+            surfDosChargeL: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("surfDosH") @ExcludeMissing surfDosH: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("surfDosL") @ExcludeMissing surfDosL: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("surfDosM") @ExcludeMissing surfDosM: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("surfDosStat")
+            @ExcludeMissing
+            surfDosStat: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("transientData")
+            @ExcludeMissing
+            transientData: JsonField<List<Int>> = JsonMissing.of(),
+            @JsonProperty("vRef") @ExcludeMissing vRef: JsonField<Int> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            msgTime,
+            source,
+            type,
+            id,
+            asl5VCurrMon,
+            cdsPlateVMon,
+            cdsRefVMon,
+            cdsThreshold,
+            cdsThrottle,
+            checksum,
+            createdAt,
+            createdBy,
+            dosBias,
+            dsl5VCurrMon,
+            esdTrigCountH,
+            esdTrigCountL,
+            hiLetL,
+            hiLetM,
+            idOnOrbit,
+            idSensor,
+            lowLetL,
+            lowLetM,
+            medLet1L,
+            medLet1M,
+            medLet2L,
+            medLet2M,
+            medLet3L,
+            medLet3M,
+            medLet4L,
+            medLet4M,
+            mpTemp,
+            obTime,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            pd1SigLev,
+            pd2SigLev,
+            psTempMon,
+            retransmit,
+            satNo,
+            senMode,
+            surfDosChargeH,
+            surfDosChargeL,
+            surfDosH,
+            surfDosL,
+            surfDosM,
+            surfDosStat,
+            transientData,
+            vRef,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1133,6 +1292,16 @@ private constructor(
          */
         @JsonProperty("vRef") @ExcludeMissing fun _vRef(): JsonField<Int> = vRef
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1207,6 +1376,7 @@ private constructor(
             private var surfDosStat: JsonField<Int> = JsonMissing.of()
             private var transientData: JsonField<MutableList<Int>>? = null
             private var vRef: JsonField<Int> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1262,6 +1432,7 @@ private constructor(
                 surfDosStat = body.surfDosStat
                 transientData = body.transientData.map { it.toMutableList() }
                 vRef = body.vRef
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -2021,6 +2192,25 @@ private constructor(
              */
             fun vRef(vRef: JsonField<Int>) = apply { this.vRef = vRef }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -2091,6 +2281,7 @@ private constructor(
                     surfDosStat,
                     (transientData ?: JsonMissing.of()).map { it.toImmutable() },
                     vRef,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -2438,7 +2629,8 @@ private constructor(
                 surfDosM == other.surfDosM &&
                 surfDosStat == other.surfDosStat &&
                 transientData == other.transientData &&
-                vRef == other.vRef
+                vRef == other.vRef &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -2495,13 +2687,14 @@ private constructor(
                 surfDosStat,
                 transientData,
                 vRef,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, msgTime=$msgTime, source=$source, type=$type, id=$id, asl5VCurrMon=$asl5VCurrMon, cdsPlateVMon=$cdsPlateVMon, cdsRefVMon=$cdsRefVMon, cdsThreshold=$cdsThreshold, cdsThrottle=$cdsThrottle, checksum=$checksum, createdAt=$createdAt, createdBy=$createdBy, dosBias=$dosBias, dsl5VCurrMon=$dsl5VCurrMon, esdTrigCountH=$esdTrigCountH, esdTrigCountL=$esdTrigCountL, hiLetL=$hiLetL, hiLetM=$hiLetM, idOnOrbit=$idOnOrbit, idSensor=$idSensor, lowLetL=$lowLetL, lowLetM=$lowLetM, medLet1L=$medLet1L, medLet1M=$medLet1M, medLet2L=$medLet2L, medLet2M=$medLet2M, medLet3L=$medLet3L, medLet3M=$medLet3M, medLet4L=$medLet4L, medLet4M=$medLet4M, mpTemp=$mpTemp, obTime=$obTime, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, pd1SigLev=$pd1SigLev, pd2SigLev=$pd2SigLev, psTempMon=$psTempMon, retransmit=$retransmit, satNo=$satNo, senMode=$senMode, surfDosChargeH=$surfDosChargeH, surfDosChargeL=$surfDosChargeL, surfDosH=$surfDosH, surfDosL=$surfDosL, surfDosM=$surfDosM, surfDosStat=$surfDosStat, transientData=$transientData, vRef=$vRef}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, msgTime=$msgTime, source=$source, type=$type, id=$id, asl5VCurrMon=$asl5VCurrMon, cdsPlateVMon=$cdsPlateVMon, cdsRefVMon=$cdsRefVMon, cdsThreshold=$cdsThreshold, cdsThrottle=$cdsThrottle, checksum=$checksum, createdAt=$createdAt, createdBy=$createdBy, dosBias=$dosBias, dsl5VCurrMon=$dsl5VCurrMon, esdTrigCountH=$esdTrigCountH, esdTrigCountL=$esdTrigCountL, hiLetL=$hiLetL, hiLetM=$hiLetM, idOnOrbit=$idOnOrbit, idSensor=$idSensor, lowLetL=$lowLetL, lowLetM=$lowLetM, medLet1L=$medLet1L, medLet1M=$medLet1M, medLet2L=$medLet2L, medLet2M=$medLet2M, medLet3L=$medLet3L, medLet3M=$medLet3M, medLet4L=$medLet4L, medLet4M=$medLet4M, mpTemp=$mpTemp, obTime=$obTime, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, pd1SigLev=$pd1SigLev, pd2SigLev=$pd2SigLev, psTempMon=$psTempMon, retransmit=$retransmit, satNo=$satNo, senMode=$senMode, surfDosChargeH=$surfDosChargeH, surfDosChargeL=$surfDosChargeL, surfDosH=$surfDosH, surfDosL=$surfDosL, surfDosM=$surfDosM, surfDosStat=$surfDosStat, transientData=$transientData, vRef=$vRef, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

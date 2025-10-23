@@ -220,100 +220,313 @@ private constructor(
      * other amplifying object data, if known.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("ts") @ExcludeMissing private val ts: JsonField<OffsetDateTime>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("acftSubType") @ExcludeMissing private val acftSubType: JsonField<String>,
-        @JsonProperty("alert") @ExcludeMissing private val alert: JsonField<String>,
-        @JsonProperty("angElev") @ExcludeMissing private val angElev: JsonField<Double>,
-        @JsonProperty("aouRptData") @ExcludeMissing private val aouRptData: JsonField<List<Double>>,
-        @JsonProperty("aouRptType") @ExcludeMissing private val aouRptType: JsonField<String>,
-        @JsonProperty("azCorr") @ExcludeMissing private val azCorr: JsonField<Double>,
-        @JsonProperty("boosting") @ExcludeMissing private val boosting: JsonField<Boolean>,
-        @JsonProperty("burnoutAlt") @ExcludeMissing private val burnoutAlt: JsonField<Double>,
-        @JsonProperty("callSign") @ExcludeMissing private val callSign: JsonField<String>,
-        @JsonProperty("containment") @ExcludeMissing private val containment: JsonField<Double>,
-        @JsonProperty("contextKeys")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
+        private val source: JsonField<String>,
+        private val ts: JsonField<OffsetDateTime>,
+        private val id: JsonField<String>,
+        private val acftSubType: JsonField<String>,
+        private val alert: JsonField<String>,
+        private val angElev: JsonField<Double>,
+        private val aouRptData: JsonField<List<Double>>,
+        private val aouRptType: JsonField<String>,
+        private val azCorr: JsonField<Double>,
+        private val boosting: JsonField<Boolean>,
+        private val burnoutAlt: JsonField<Double>,
+        private val callSign: JsonField<String>,
+        private val containment: JsonField<Double>,
         private val contextKeys: JsonField<List<String>>,
-        @JsonProperty("contextValues")
-        @ExcludeMissing
         private val contextValues: JsonField<List<String>>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("dropPtInd") @ExcludeMissing private val dropPtInd: JsonField<Boolean>,
-        @JsonProperty("emgInd") @ExcludeMissing private val emgInd: JsonField<Boolean>,
-        @JsonProperty("env") @ExcludeMissing private val env: JsonField<Env>,
-        @JsonProperty("impactAlt") @ExcludeMissing private val impactAlt: JsonField<Double>,
-        @JsonProperty("impactAouData")
-        @ExcludeMissing
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val dropPtInd: JsonField<Boolean>,
+        private val emgInd: JsonField<Boolean>,
+        private val env: JsonField<Env>,
+        private val impactAlt: JsonField<Double>,
         private val impactAouData: JsonField<List<Double>>,
-        @JsonProperty("impactAouType") @ExcludeMissing private val impactAouType: JsonField<String>,
-        @JsonProperty("impactConf") @ExcludeMissing private val impactConf: JsonField<Double>,
-        @JsonProperty("impactLat") @ExcludeMissing private val impactLat: JsonField<Double>,
-        @JsonProperty("impactLon") @ExcludeMissing private val impactLon: JsonField<Double>,
-        @JsonProperty("impactTime")
-        @ExcludeMissing
+        private val impactAouType: JsonField<String>,
+        private val impactConf: JsonField<Double>,
+        private val impactLat: JsonField<Double>,
+        private val impactLon: JsonField<Double>,
         private val impactTime: JsonField<OffsetDateTime>,
-        @JsonProperty("infoSource") @ExcludeMissing private val infoSource: JsonField<String>,
-        @JsonProperty("launchAlt") @ExcludeMissing private val launchAlt: JsonField<Double>,
-        @JsonProperty("launchAouData")
-        @ExcludeMissing
+        private val infoSource: JsonField<String>,
+        private val launchAlt: JsonField<Double>,
         private val launchAouData: JsonField<List<Double>>,
-        @JsonProperty("launchAouType") @ExcludeMissing private val launchAouType: JsonField<String>,
-        @JsonProperty("launchAz") @ExcludeMissing private val launchAz: JsonField<Double>,
-        @JsonProperty("launchAzUnc") @ExcludeMissing private val launchAzUnc: JsonField<Double>,
-        @JsonProperty("launchConf") @ExcludeMissing private val launchConf: JsonField<Double>,
-        @JsonProperty("launchLat") @ExcludeMissing private val launchLat: JsonField<Double>,
-        @JsonProperty("launchLon") @ExcludeMissing private val launchLon: JsonField<Double>,
-        @JsonProperty("launchTime")
-        @ExcludeMissing
+        private val launchAouType: JsonField<String>,
+        private val launchAz: JsonField<Double>,
+        private val launchAzUnc: JsonField<Double>,
+        private val launchConf: JsonField<Double>,
+        private val launchLat: JsonField<Double>,
+        private val launchLon: JsonField<Double>,
         private val launchTime: JsonField<OffsetDateTime>,
-        @JsonProperty("lostTrkInd") @ExcludeMissing private val lostTrkInd: JsonField<Boolean>,
-        @JsonProperty("maneuverEnd")
-        @ExcludeMissing
+        private val lostTrkInd: JsonField<Boolean>,
         private val maneuverEnd: JsonField<OffsetDateTime>,
-        @JsonProperty("maneuverStart")
-        @ExcludeMissing
         private val maneuverStart: JsonField<OffsetDateTime>,
-        @JsonProperty("msgCreateDate")
-        @ExcludeMissing
         private val msgCreateDate: JsonField<OffsetDateTime>,
-        @JsonProperty("msgSubType") @ExcludeMissing private val msgSubType: JsonField<String>,
-        @JsonProperty("msgType") @ExcludeMissing private val msgType: JsonField<String>,
-        @JsonProperty("mslStatus") @ExcludeMissing private val mslStatus: JsonField<String>,
-        @JsonProperty("muidSrc") @ExcludeMissing private val muidSrc: JsonField<String>,
-        @JsonProperty("muidSrcTrk") @ExcludeMissing private val muidSrcTrk: JsonField<String>,
-        @JsonProperty("name") @ExcludeMissing private val name: JsonField<String>,
-        @JsonProperty("objAct") @ExcludeMissing private val objAct: JsonField<String>,
-        @JsonProperty("objIdent") @ExcludeMissing private val objIdent: JsonField<ObjIdent>,
-        @JsonProperty("objPlat") @ExcludeMissing private val objPlat: JsonField<String>,
-        @JsonProperty("objType") @ExcludeMissing private val objType: JsonField<String>,
-        @JsonProperty("objTypeConf") @ExcludeMissing private val objTypeConf: JsonField<Int>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("parentTrackId") @ExcludeMissing private val parentTrackId: JsonField<String>,
-        @JsonProperty("polarSingLocLat")
-        @ExcludeMissing
+        private val msgSubType: JsonField<String>,
+        private val msgType: JsonField<String>,
+        private val mslStatus: JsonField<String>,
+        private val muidSrc: JsonField<String>,
+        private val muidSrcTrk: JsonField<String>,
+        private val name: JsonField<String>,
+        private val objAct: JsonField<String>,
+        private val objIdent: JsonField<ObjIdent>,
+        private val objPlat: JsonField<String>,
+        private val objType: JsonField<String>,
+        private val objTypeConf: JsonField<Int>,
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val parentTrackId: JsonField<String>,
         private val polarSingLocLat: JsonField<Double>,
-        @JsonProperty("polarSingLocLon")
-        @ExcludeMissing
         private val polarSingLocLon: JsonField<Double>,
-        @JsonProperty("senMode") @ExcludeMissing private val senMode: JsonField<String>,
-        @JsonProperty("spaceAmp") @ExcludeMissing private val spaceAmp: JsonField<String>,
-        @JsonProperty("spaceAmpConf") @ExcludeMissing private val spaceAmpConf: JsonField<Int>,
-        @JsonProperty("spaceSpecType") @ExcludeMissing private val spaceSpecType: JsonField<String>,
-        @JsonProperty("trackId") @ExcludeMissing private val trackId: JsonField<String>,
-        @JsonProperty("trkConf") @ExcludeMissing private val trkConf: JsonField<Double>,
-        @JsonProperty("trkQual") @ExcludeMissing private val trkQual: JsonField<Int>,
-        @JsonProperty("vectors") @ExcludeMissing private val vectors: JsonField<List<Vector>>,
+        private val senMode: JsonField<String>,
+        private val spaceAmp: JsonField<String>,
+        private val spaceAmpConf: JsonField<Int>,
+        private val spaceSpecType: JsonField<String>,
+        private val trackId: JsonField<String>,
+        private val trkConf: JsonField<Double>,
+        private val trkQual: JsonField<Int>,
+        private val vectors: JsonField<List<Vector>>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("ts") @ExcludeMissing ts: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("acftSubType")
+            @ExcludeMissing
+            acftSubType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("alert") @ExcludeMissing alert: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("angElev") @ExcludeMissing angElev: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("aouRptData")
+            @ExcludeMissing
+            aouRptData: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("aouRptType")
+            @ExcludeMissing
+            aouRptType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("azCorr") @ExcludeMissing azCorr: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("boosting")
+            @ExcludeMissing
+            boosting: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("burnoutAlt")
+            @ExcludeMissing
+            burnoutAlt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("callSign")
+            @ExcludeMissing
+            callSign: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("containment")
+            @ExcludeMissing
+            containment: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("contextKeys")
+            @ExcludeMissing
+            contextKeys: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("contextValues")
+            @ExcludeMissing
+            contextValues: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dropPtInd")
+            @ExcludeMissing
+            dropPtInd: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("emgInd") @ExcludeMissing emgInd: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("env") @ExcludeMissing env: JsonField<Env> = JsonMissing.of(),
+            @JsonProperty("impactAlt")
+            @ExcludeMissing
+            impactAlt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("impactAouData")
+            @ExcludeMissing
+            impactAouData: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("impactAouType")
+            @ExcludeMissing
+            impactAouType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("impactConf")
+            @ExcludeMissing
+            impactConf: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("impactLat")
+            @ExcludeMissing
+            impactLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("impactLon")
+            @ExcludeMissing
+            impactLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("impactTime")
+            @ExcludeMissing
+            impactTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("infoSource")
+            @ExcludeMissing
+            infoSource: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("launchAlt")
+            @ExcludeMissing
+            launchAlt: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("launchAouData")
+            @ExcludeMissing
+            launchAouData: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("launchAouType")
+            @ExcludeMissing
+            launchAouType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("launchAz")
+            @ExcludeMissing
+            launchAz: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("launchAzUnc")
+            @ExcludeMissing
+            launchAzUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("launchConf")
+            @ExcludeMissing
+            launchConf: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("launchLat")
+            @ExcludeMissing
+            launchLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("launchLon")
+            @ExcludeMissing
+            launchLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("launchTime")
+            @ExcludeMissing
+            launchTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("lostTrkInd")
+            @ExcludeMissing
+            lostTrkInd: JsonField<Boolean> = JsonMissing.of(),
+            @JsonProperty("maneuverEnd")
+            @ExcludeMissing
+            maneuverEnd: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("maneuverStart")
+            @ExcludeMissing
+            maneuverStart: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("msgCreateDate")
+            @ExcludeMissing
+            msgCreateDate: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("msgSubType")
+            @ExcludeMissing
+            msgSubType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("msgType") @ExcludeMissing msgType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("mslStatus")
+            @ExcludeMissing
+            mslStatus: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("muidSrc") @ExcludeMissing muidSrc: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("muidSrcTrk")
+            @ExcludeMissing
+            muidSrcTrk: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("name") @ExcludeMissing name: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("objAct") @ExcludeMissing objAct: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("objIdent")
+            @ExcludeMissing
+            objIdent: JsonField<ObjIdent> = JsonMissing.of(),
+            @JsonProperty("objPlat") @ExcludeMissing objPlat: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("objType") @ExcludeMissing objType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("objTypeConf")
+            @ExcludeMissing
+            objTypeConf: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("parentTrackId")
+            @ExcludeMissing
+            parentTrackId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("polarSingLocLat")
+            @ExcludeMissing
+            polarSingLocLat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("polarSingLocLon")
+            @ExcludeMissing
+            polarSingLocLon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("senMode") @ExcludeMissing senMode: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("spaceAmp")
+            @ExcludeMissing
+            spaceAmp: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("spaceAmpConf")
+            @ExcludeMissing
+            spaceAmpConf: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("spaceSpecType")
+            @ExcludeMissing
+            spaceSpecType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("trackId") @ExcludeMissing trackId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("trkConf") @ExcludeMissing trkConf: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("trkQual") @ExcludeMissing trkQual: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("vectors")
+            @ExcludeMissing
+            vectors: JsonField<List<Vector>> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            source,
+            ts,
+            id,
+            acftSubType,
+            alert,
+            angElev,
+            aouRptData,
+            aouRptType,
+            azCorr,
+            boosting,
+            burnoutAlt,
+            callSign,
+            containment,
+            contextKeys,
+            contextValues,
+            createdAt,
+            createdBy,
+            dropPtInd,
+            emgInd,
+            env,
+            impactAlt,
+            impactAouData,
+            impactAouType,
+            impactConf,
+            impactLat,
+            impactLon,
+            impactTime,
+            infoSource,
+            launchAlt,
+            launchAouData,
+            launchAouType,
+            launchAz,
+            launchAzUnc,
+            launchConf,
+            launchLat,
+            launchLon,
+            launchTime,
+            lostTrkInd,
+            maneuverEnd,
+            maneuverStart,
+            msgCreateDate,
+            msgSubType,
+            msgType,
+            mslStatus,
+            muidSrc,
+            muidSrcTrk,
+            name,
+            objAct,
+            objIdent,
+            objPlat,
+            objType,
+            objTypeConf,
+            origin,
+            origNetwork,
+            parentTrackId,
+            polarSingLocLat,
+            polarSingLocLon,
+            senMode,
+            spaceAmp,
+            spaceAmpConf,
+            spaceSpecType,
+            trackId,
+            trkConf,
+            trkQual,
+            vectors,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -1619,6 +1832,16 @@ private constructor(
          */
         @JsonProperty("vectors") @ExcludeMissing fun _vectors(): JsonField<List<Vector>> = vectors
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -1707,6 +1930,7 @@ private constructor(
             private var trkConf: JsonField<Double> = JsonMissing.of()
             private var trkQual: JsonField<Int> = JsonMissing.of()
             private var vectors: JsonField<MutableList<Vector>>? = null
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -1777,6 +2001,7 @@ private constructor(
                 trkConf = body.trkConf
                 trkQual = body.trkQual
                 vectors = body.vectors.map { it.toMutableList() }
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -3001,6 +3226,25 @@ private constructor(
                     }
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -3085,6 +3329,7 @@ private constructor(
                     trkConf,
                     trkQual,
                     (vectors ?: JsonMissing.of()).map { it.toImmutable() },
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -3993,7 +4238,7 @@ private constructor(
             fun cov(): Optional<List<Double>> = cov.getOptional("cov")
 
             /**
-             * The reference frame of the covariance elements (ECEF, J2000, UVW, EFG/TDR, TEME,
+             * The reference frame of the covariance elements (J2000, UVW, EFG/TDR, ECR/ECEF, TEME,
              * GCRF). If the referenceFrame is null it is assumed to be UVW.
              *
              * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected
@@ -4658,8 +4903,8 @@ private constructor(
                 }
 
                 /**
-                 * The reference frame of the covariance elements (ECEF, J2000, UVW, EFG/TDR, TEME,
-                 * GCRF). If the referenceFrame is null it is assumed to be UVW.
+                 * The reference frame of the covariance elements (J2000, UVW, EFG/TDR, ECR/ECEF,
+                 * TEME, GCRF). If the referenceFrame is null it is assumed to be UVW.
                  */
                 fun covReferenceFrame(covReferenceFrame: CovReferenceFrame) =
                     covReferenceFrame(JsonField.of(covReferenceFrame))
@@ -5116,7 +5361,7 @@ private constructor(
                     (vel.asKnown().getOrNull()?.size ?: 0)
 
             /**
-             * The reference frame of the covariance elements (ECEF, J2000, UVW, EFG/TDR, TEME,
+             * The reference frame of the covariance elements (J2000, UVW, EFG/TDR, ECR/ECEF, TEME,
              * GCRF). If the referenceFrame is null it is assumed to be UVW.
              */
             class CovReferenceFrame
@@ -5135,13 +5380,13 @@ private constructor(
 
                 companion object {
 
-                    @JvmField val ECEF = of("ECEF")
-
                     @JvmField val J2000 = of("J2000")
 
                     @JvmField val UVW = of("UVW")
 
                     @JvmField val EFG_TDR = of("EFG/TDR")
+
+                    @JvmField val ECR_ECEF = of("ECR/ECEF")
 
                     @JvmField val TEME = of("TEME")
 
@@ -5152,10 +5397,10 @@ private constructor(
 
                 /** An enum containing [CovReferenceFrame]'s known values. */
                 enum class Known {
-                    ECEF,
                     J2000,
                     UVW,
                     EFG_TDR,
+                    ECR_ECEF,
                     TEME,
                     GCRF,
                 }
@@ -5172,10 +5417,10 @@ private constructor(
                  * - It was constructed with an arbitrary value using the [of] method.
                  */
                 enum class Value {
-                    ECEF,
                     J2000,
                     UVW,
                     EFG_TDR,
+                    ECR_ECEF,
                     TEME,
                     GCRF,
                     /**
@@ -5194,10 +5439,10 @@ private constructor(
                  */
                 fun value(): Value =
                     when (this) {
-                        ECEF -> Value.ECEF
                         J2000 -> Value.J2000
                         UVW -> Value.UVW
                         EFG_TDR -> Value.EFG_TDR
+                        ECR_ECEF -> Value.ECR_ECEF
                         TEME -> Value.TEME
                         GCRF -> Value.GCRF
                         else -> Value._UNKNOWN
@@ -5214,10 +5459,10 @@ private constructor(
                  */
                 fun known(): Known =
                     when (this) {
-                        ECEF -> Known.ECEF
                         J2000 -> Known.J2000
                         UVW -> Known.UVW
                         EFG_TDR -> Known.EFG_TDR
+                        ECR_ECEF -> Known.ECR_ECEF
                         TEME -> Known.TEME
                         GCRF -> Known.GCRF
                         else ->
@@ -5425,7 +5670,8 @@ private constructor(
                 trackId == other.trackId &&
                 trkConf == other.trkConf &&
                 trkQual == other.trkQual &&
-                vectors == other.vectors
+                vectors == other.vectors &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -5497,13 +5743,14 @@ private constructor(
                 trkConf,
                 trkQual,
                 vectors,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, acftSubType=$acftSubType, alert=$alert, angElev=$angElev, aouRptData=$aouRptData, aouRptType=$aouRptType, azCorr=$azCorr, boosting=$boosting, burnoutAlt=$burnoutAlt, callSign=$callSign, containment=$containment, contextKeys=$contextKeys, contextValues=$contextValues, createdAt=$createdAt, createdBy=$createdBy, dropPtInd=$dropPtInd, emgInd=$emgInd, env=$env, impactAlt=$impactAlt, impactAouData=$impactAouData, impactAouType=$impactAouType, impactConf=$impactConf, impactLat=$impactLat, impactLon=$impactLon, impactTime=$impactTime, infoSource=$infoSource, launchAlt=$launchAlt, launchAouData=$launchAouData, launchAouType=$launchAouType, launchAz=$launchAz, launchAzUnc=$launchAzUnc, launchConf=$launchConf, launchLat=$launchLat, launchLon=$launchLon, launchTime=$launchTime, lostTrkInd=$lostTrkInd, maneuverEnd=$maneuverEnd, maneuverStart=$maneuverStart, msgCreateDate=$msgCreateDate, msgSubType=$msgSubType, msgType=$msgType, mslStatus=$mslStatus, muidSrc=$muidSrc, muidSrcTrk=$muidSrcTrk, name=$name, objAct=$objAct, objIdent=$objIdent, objPlat=$objPlat, objType=$objType, objTypeConf=$objTypeConf, origin=$origin, origNetwork=$origNetwork, parentTrackId=$parentTrackId, polarSingLocLat=$polarSingLocLat, polarSingLocLon=$polarSingLocLon, senMode=$senMode, spaceAmp=$spaceAmp, spaceAmpConf=$spaceAmpConf, spaceSpecType=$spaceSpecType, trackId=$trackId, trkConf=$trkConf, trkQual=$trkQual, vectors=$vectors}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, source=$source, ts=$ts, id=$id, acftSubType=$acftSubType, alert=$alert, angElev=$angElev, aouRptData=$aouRptData, aouRptType=$aouRptType, azCorr=$azCorr, boosting=$boosting, burnoutAlt=$burnoutAlt, callSign=$callSign, containment=$containment, contextKeys=$contextKeys, contextValues=$contextValues, createdAt=$createdAt, createdBy=$createdBy, dropPtInd=$dropPtInd, emgInd=$emgInd, env=$env, impactAlt=$impactAlt, impactAouData=$impactAouData, impactAouType=$impactAouType, impactConf=$impactConf, impactLat=$impactLat, impactLon=$impactLon, impactTime=$impactTime, infoSource=$infoSource, launchAlt=$launchAlt, launchAouData=$launchAouData, launchAouType=$launchAouType, launchAz=$launchAz, launchAzUnc=$launchAzUnc, launchConf=$launchConf, launchLat=$launchLat, launchLon=$launchLon, launchTime=$launchTime, lostTrkInd=$lostTrkInd, maneuverEnd=$maneuverEnd, maneuverStart=$maneuverStart, msgCreateDate=$msgCreateDate, msgSubType=$msgSubType, msgType=$msgType, mslStatus=$mslStatus, muidSrc=$muidSrc, muidSrcTrk=$muidSrcTrk, name=$name, objAct=$objAct, objIdent=$objIdent, objPlat=$objPlat, objType=$objType, objTypeConf=$objTypeConf, origin=$origin, origNetwork=$origNetwork, parentTrackId=$parentTrackId, polarSingLocLat=$polarSingLocLat, polarSingLocLon=$polarSingLocLon, senMode=$senMode, spaceAmp=$spaceAmp, spaceAmpConf=$spaceAmpConf, spaceSpecType=$spaceSpecType, trackId=$trackId, trkConf=$trkConf, trkQual=$trkQual, vectors=$vectors, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

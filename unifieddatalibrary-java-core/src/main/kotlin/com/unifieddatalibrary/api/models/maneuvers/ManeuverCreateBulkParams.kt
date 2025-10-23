@@ -214,167 +214,468 @@ private constructor(
      * confirmed maneuvers.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("dataMode") @ExcludeMissing private val dataMode: JsonField<DataMode>,
-        @JsonProperty("eventStartTime")
-        @ExcludeMissing
+        private val dataMode: JsonField<DataMode>,
         private val eventStartTime: JsonField<OffsetDateTime>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("algorithm") @ExcludeMissing private val algorithm: JsonField<String>,
-        @JsonProperty("characterization")
-        @ExcludeMissing
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val algorithm: JsonField<String>,
         private val characterization: JsonField<String>,
-        @JsonProperty("characterizationUnc")
-        @ExcludeMissing
         private val characterizationUnc: JsonField<Double>,
-        @JsonProperty("cov") @ExcludeMissing private val cov: JsonField<List<Double>>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("deltaMass") @ExcludeMissing private val deltaMass: JsonField<Double>,
-        @JsonProperty("deltaPos") @ExcludeMissing private val deltaPos: JsonField<Double>,
-        @JsonProperty("deltaPosU") @ExcludeMissing private val deltaPosU: JsonField<Double>,
-        @JsonProperty("deltaPosV") @ExcludeMissing private val deltaPosV: JsonField<Double>,
-        @JsonProperty("deltaPosW") @ExcludeMissing private val deltaPosW: JsonField<Double>,
-        @JsonProperty("deltaVel") @ExcludeMissing private val deltaVel: JsonField<Double>,
-        @JsonProperty("deltaVelU") @ExcludeMissing private val deltaVelU: JsonField<Double>,
-        @JsonProperty("deltaVelV") @ExcludeMissing private val deltaVelV: JsonField<Double>,
-        @JsonProperty("deltaVelW") @ExcludeMissing private val deltaVelW: JsonField<Double>,
-        @JsonProperty("description") @ExcludeMissing private val description: JsonField<String>,
-        @JsonProperty("descriptor") @ExcludeMissing private val descriptor: JsonField<String>,
-        @JsonProperty("eventEndTime")
-        @ExcludeMissing
+        private val cov: JsonField<List<Double>>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val deltaMass: JsonField<Double>,
+        private val deltaPos: JsonField<Double>,
+        private val deltaPosU: JsonField<Double>,
+        private val deltaPosV: JsonField<Double>,
+        private val deltaPosW: JsonField<Double>,
+        private val deltaVel: JsonField<Double>,
+        private val deltaVelU: JsonField<Double>,
+        private val deltaVelV: JsonField<Double>,
+        private val deltaVelW: JsonField<Double>,
+        private val description: JsonField<String>,
+        private val descriptor: JsonField<String>,
         private val eventEndTime: JsonField<OffsetDateTime>,
-        @JsonProperty("eventId") @ExcludeMissing private val eventId: JsonField<String>,
-        @JsonProperty("idOnOrbit") @ExcludeMissing private val idOnOrbit: JsonField<String>,
-        @JsonProperty("idSensor") @ExcludeMissing private val idSensor: JsonField<String>,
-        @JsonProperty("maneuverUnc") @ExcludeMissing private val maneuverUnc: JsonField<Double>,
-        @JsonProperty("mnvrAccels") @ExcludeMissing private val mnvrAccels: JsonField<List<Double>>,
-        @JsonProperty("mnvrAccelTimes")
-        @ExcludeMissing
+        private val eventId: JsonField<String>,
+        private val idOnOrbit: JsonField<String>,
+        private val idSensor: JsonField<String>,
+        private val maneuverUnc: JsonField<Double>,
+        private val mnvrAccels: JsonField<List<Double>>,
         private val mnvrAccelTimes: JsonField<List<Double>>,
-        @JsonProperty("mnvrAccelUncs")
-        @ExcludeMissing
         private val mnvrAccelUncs: JsonField<List<Double>>,
-        @JsonProperty("numAccelPoints") @ExcludeMissing private val numAccelPoints: JsonField<Int>,
-        @JsonProperty("numObs") @ExcludeMissing private val numObs: JsonField<Int>,
-        @JsonProperty("odFitEndTime")
-        @ExcludeMissing
+        private val numAccelPoints: JsonField<Int>,
+        private val numObs: JsonField<Int>,
         private val odFitEndTime: JsonField<OffsetDateTime>,
-        @JsonProperty("origin") @ExcludeMissing private val origin: JsonField<String>,
-        @JsonProperty("origNetwork") @ExcludeMissing private val origNetwork: JsonField<String>,
-        @JsonProperty("origObjectId") @ExcludeMissing private val origObjectId: JsonField<String>,
-        @JsonProperty("origSensorId") @ExcludeMissing private val origSensorId: JsonField<String>,
-        @JsonProperty("postApogee") @ExcludeMissing private val postApogee: JsonField<Double>,
-        @JsonProperty("postArea") @ExcludeMissing private val postArea: JsonField<Double>,
-        @JsonProperty("postBallisticCoeff")
-        @ExcludeMissing
+        private val origin: JsonField<String>,
+        private val origNetwork: JsonField<String>,
+        private val origObjectId: JsonField<String>,
+        private val origSensorId: JsonField<String>,
+        private val postApogee: JsonField<Double>,
+        private val postArea: JsonField<Double>,
         private val postBallisticCoeff: JsonField<Double>,
-        @JsonProperty("postDriftRate") @ExcludeMissing private val postDriftRate: JsonField<Double>,
-        @JsonProperty("postEccentricity")
-        @ExcludeMissing
+        private val postDriftRate: JsonField<Double>,
         private val postEccentricity: JsonField<Double>,
-        @JsonProperty("postEventElset")
-        @ExcludeMissing
         private val postEventElset: JsonField<PostEventElset>,
-        @JsonProperty("postEventIdElset")
-        @ExcludeMissing
         private val postEventIdElset: JsonField<String>,
-        @JsonProperty("postEventIdStateVector")
-        @ExcludeMissing
         private val postEventIdStateVector: JsonField<String>,
-        @JsonProperty("postEventStateVector")
-        @ExcludeMissing
         private val postEventStateVector: JsonField<PostEventStateVector>,
-        @JsonProperty("postGeoLongitude")
-        @ExcludeMissing
         private val postGeoLongitude: JsonField<Double>,
-        @JsonProperty("postInclination")
-        @ExcludeMissing
         private val postInclination: JsonField<Double>,
-        @JsonProperty("postMass") @ExcludeMissing private val postMass: JsonField<Double>,
-        @JsonProperty("postPerigee") @ExcludeMissing private val postPerigee: JsonField<Double>,
-        @JsonProperty("postPeriod") @ExcludeMissing private val postPeriod: JsonField<Double>,
-        @JsonProperty("postPosX") @ExcludeMissing private val postPosX: JsonField<Double>,
-        @JsonProperty("postPosY") @ExcludeMissing private val postPosY: JsonField<Double>,
-        @JsonProperty("postPosZ") @ExcludeMissing private val postPosZ: JsonField<Double>,
-        @JsonProperty("postRAAN") @ExcludeMissing private val postRaan: JsonField<Double>,
-        @JsonProperty("postRadiationPressCoeff")
-        @ExcludeMissing
+        private val postMass: JsonField<Double>,
+        private val postPerigee: JsonField<Double>,
+        private val postPeriod: JsonField<Double>,
+        private val postPosX: JsonField<Double>,
+        private val postPosY: JsonField<Double>,
+        private val postPosZ: JsonField<Double>,
+        private val postRaan: JsonField<Double>,
         private val postRadiationPressCoeff: JsonField<Double>,
-        @JsonProperty("postSigmaU") @ExcludeMissing private val postSigmaU: JsonField<Double>,
-        @JsonProperty("postSigmaV") @ExcludeMissing private val postSigmaV: JsonField<Double>,
-        @JsonProperty("postSigmaW") @ExcludeMissing private val postSigmaW: JsonField<Double>,
-        @JsonProperty("postSMA") @ExcludeMissing private val postSma: JsonField<Double>,
-        @JsonProperty("postVelX") @ExcludeMissing private val postVelX: JsonField<Double>,
-        @JsonProperty("postVelY") @ExcludeMissing private val postVelY: JsonField<Double>,
-        @JsonProperty("postVelZ") @ExcludeMissing private val postVelZ: JsonField<Double>,
-        @JsonProperty("preApogee") @ExcludeMissing private val preApogee: JsonField<Double>,
-        @JsonProperty("preBallisticCoeff")
-        @ExcludeMissing
+        private val postSigmaU: JsonField<Double>,
+        private val postSigmaV: JsonField<Double>,
+        private val postSigmaW: JsonField<Double>,
+        private val postSma: JsonField<Double>,
+        private val postVelX: JsonField<Double>,
+        private val postVelY: JsonField<Double>,
+        private val postVelZ: JsonField<Double>,
+        private val preApogee: JsonField<Double>,
         private val preBallisticCoeff: JsonField<Double>,
-        @JsonProperty("preDriftRate") @ExcludeMissing private val preDriftRate: JsonField<Double>,
-        @JsonProperty("preEccentricity")
-        @ExcludeMissing
+        private val preDriftRate: JsonField<Double>,
         private val preEccentricity: JsonField<Double>,
-        @JsonProperty("preEventElset")
-        @ExcludeMissing
         private val preEventElset: JsonField<PreEventElset>,
-        @JsonProperty("preEventIdElset")
-        @ExcludeMissing
         private val preEventIdElset: JsonField<String>,
-        @JsonProperty("preEventIdStateVector")
-        @ExcludeMissing
         private val preEventIdStateVector: JsonField<String>,
-        @JsonProperty("preEventStateVector")
-        @ExcludeMissing
         private val preEventStateVector: JsonField<PreEventStateVector>,
-        @JsonProperty("preGeoLongitude")
-        @ExcludeMissing
         private val preGeoLongitude: JsonField<Double>,
-        @JsonProperty("preInclination")
-        @ExcludeMissing
         private val preInclination: JsonField<Double>,
-        @JsonProperty("prePerigee") @ExcludeMissing private val prePerigee: JsonField<Double>,
-        @JsonProperty("prePeriod") @ExcludeMissing private val prePeriod: JsonField<Double>,
-        @JsonProperty("prePosX") @ExcludeMissing private val prePosX: JsonField<Double>,
-        @JsonProperty("prePosY") @ExcludeMissing private val prePosY: JsonField<Double>,
-        @JsonProperty("prePosZ") @ExcludeMissing private val prePosZ: JsonField<Double>,
-        @JsonProperty("preRAAN") @ExcludeMissing private val preRaan: JsonField<Double>,
-        @JsonProperty("preRadiationPressCoeff")
-        @ExcludeMissing
+        private val prePerigee: JsonField<Double>,
+        private val prePeriod: JsonField<Double>,
+        private val prePosX: JsonField<Double>,
+        private val prePosY: JsonField<Double>,
+        private val prePosZ: JsonField<Double>,
+        private val preRaan: JsonField<Double>,
         private val preRadiationPressCoeff: JsonField<Double>,
-        @JsonProperty("preSigmaU") @ExcludeMissing private val preSigmaU: JsonField<Double>,
-        @JsonProperty("preSigmaV") @ExcludeMissing private val preSigmaV: JsonField<Double>,
-        @JsonProperty("preSigmaW") @ExcludeMissing private val preSigmaW: JsonField<Double>,
-        @JsonProperty("preSMA") @ExcludeMissing private val preSma: JsonField<Double>,
-        @JsonProperty("preVelX") @ExcludeMissing private val preVelX: JsonField<Double>,
-        @JsonProperty("preVelY") @ExcludeMissing private val preVelY: JsonField<Double>,
-        @JsonProperty("preVelZ") @ExcludeMissing private val preVelZ: JsonField<Double>,
-        @JsonProperty("reportTime")
-        @ExcludeMissing
+        private val preSigmaU: JsonField<Double>,
+        private val preSigmaV: JsonField<Double>,
+        private val preSigmaW: JsonField<Double>,
+        private val preSma: JsonField<Double>,
+        private val preVelX: JsonField<Double>,
+        private val preVelY: JsonField<Double>,
+        private val preVelZ: JsonField<Double>,
         private val reportTime: JsonField<OffsetDateTime>,
-        @JsonProperty("satNo") @ExcludeMissing private val satNo: JsonField<Int>,
-        @JsonProperty("sourcedData")
-        @ExcludeMissing
+        private val satNo: JsonField<Int>,
         private val sourcedData: JsonField<List<String>>,
-        @JsonProperty("sourcedDataTypes")
-        @ExcludeMissing
         private val sourcedDataTypes: JsonField<List<SourcedDataType>>,
-        @JsonProperty("stateModel") @ExcludeMissing private val stateModel: JsonField<String>,
-        @JsonProperty("stateModelVersion")
-        @ExcludeMissing
+        private val stateModel: JsonField<String>,
         private val stateModelVersion: JsonField<Double>,
-        @JsonProperty("status") @ExcludeMissing private val status: JsonField<String>,
-        @JsonProperty("tags") @ExcludeMissing private val tags: JsonField<List<String>>,
-        @JsonProperty("totalBurnTime") @ExcludeMissing private val totalBurnTime: JsonField<Double>,
-        @JsonProperty("transactionId") @ExcludeMissing private val transactionId: JsonField<String>,
-        @JsonProperty("uct") @ExcludeMissing private val uct: JsonField<Boolean>,
+        private val status: JsonField<String>,
+        private val tags: JsonField<List<String>>,
+        private val totalBurnTime: JsonField<Double>,
+        private val transactionId: JsonField<String>,
+        private val uct: JsonField<Boolean>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("eventStartTime")
+            @ExcludeMissing
+            eventStartTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("algorithm")
+            @ExcludeMissing
+            algorithm: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("characterization")
+            @ExcludeMissing
+            characterization: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("characterizationUnc")
+            @ExcludeMissing
+            characterizationUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("cov") @ExcludeMissing cov: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("deltaMass")
+            @ExcludeMissing
+            deltaMass: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("deltaPos")
+            @ExcludeMissing
+            deltaPos: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("deltaPosU")
+            @ExcludeMissing
+            deltaPosU: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("deltaPosV")
+            @ExcludeMissing
+            deltaPosV: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("deltaPosW")
+            @ExcludeMissing
+            deltaPosW: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("deltaVel")
+            @ExcludeMissing
+            deltaVel: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("deltaVelU")
+            @ExcludeMissing
+            deltaVelU: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("deltaVelV")
+            @ExcludeMissing
+            deltaVelV: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("deltaVelW")
+            @ExcludeMissing
+            deltaVelW: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("description")
+            @ExcludeMissing
+            description: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("descriptor")
+            @ExcludeMissing
+            descriptor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("eventEndTime")
+            @ExcludeMissing
+            eventEndTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("eventId") @ExcludeMissing eventId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idOnOrbit")
+            @ExcludeMissing
+            idOnOrbit: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("idSensor")
+            @ExcludeMissing
+            idSensor: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("maneuverUnc")
+            @ExcludeMissing
+            maneuverUnc: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("mnvrAccels")
+            @ExcludeMissing
+            mnvrAccels: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("mnvrAccelTimes")
+            @ExcludeMissing
+            mnvrAccelTimes: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("mnvrAccelUncs")
+            @ExcludeMissing
+            mnvrAccelUncs: JsonField<List<Double>> = JsonMissing.of(),
+            @JsonProperty("numAccelPoints")
+            @ExcludeMissing
+            numAccelPoints: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("numObs") @ExcludeMissing numObs: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("odFitEndTime")
+            @ExcludeMissing
+            odFitEndTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origNetwork")
+            @ExcludeMissing
+            origNetwork: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origObjectId")
+            @ExcludeMissing
+            origObjectId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("origSensorId")
+            @ExcludeMissing
+            origSensorId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("postApogee")
+            @ExcludeMissing
+            postApogee: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postArea")
+            @ExcludeMissing
+            postArea: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postBallisticCoeff")
+            @ExcludeMissing
+            postBallisticCoeff: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postDriftRate")
+            @ExcludeMissing
+            postDriftRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postEccentricity")
+            @ExcludeMissing
+            postEccentricity: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postEventElset")
+            @ExcludeMissing
+            postEventElset: JsonField<PostEventElset> = JsonMissing.of(),
+            @JsonProperty("postEventIdElset")
+            @ExcludeMissing
+            postEventIdElset: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("postEventIdStateVector")
+            @ExcludeMissing
+            postEventIdStateVector: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("postEventStateVector")
+            @ExcludeMissing
+            postEventStateVector: JsonField<PostEventStateVector> = JsonMissing.of(),
+            @JsonProperty("postGeoLongitude")
+            @ExcludeMissing
+            postGeoLongitude: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postInclination")
+            @ExcludeMissing
+            postInclination: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postMass")
+            @ExcludeMissing
+            postMass: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postPerigee")
+            @ExcludeMissing
+            postPerigee: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postPeriod")
+            @ExcludeMissing
+            postPeriod: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postPosX")
+            @ExcludeMissing
+            postPosX: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postPosY")
+            @ExcludeMissing
+            postPosY: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postPosZ")
+            @ExcludeMissing
+            postPosZ: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postRAAN")
+            @ExcludeMissing
+            postRaan: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postRadiationPressCoeff")
+            @ExcludeMissing
+            postRadiationPressCoeff: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postSigmaU")
+            @ExcludeMissing
+            postSigmaU: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postSigmaV")
+            @ExcludeMissing
+            postSigmaV: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postSigmaW")
+            @ExcludeMissing
+            postSigmaW: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postSMA") @ExcludeMissing postSma: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postVelX")
+            @ExcludeMissing
+            postVelX: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postVelY")
+            @ExcludeMissing
+            postVelY: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("postVelZ")
+            @ExcludeMissing
+            postVelZ: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preApogee")
+            @ExcludeMissing
+            preApogee: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preBallisticCoeff")
+            @ExcludeMissing
+            preBallisticCoeff: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preDriftRate")
+            @ExcludeMissing
+            preDriftRate: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preEccentricity")
+            @ExcludeMissing
+            preEccentricity: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preEventElset")
+            @ExcludeMissing
+            preEventElset: JsonField<PreEventElset> = JsonMissing.of(),
+            @JsonProperty("preEventIdElset")
+            @ExcludeMissing
+            preEventIdElset: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("preEventIdStateVector")
+            @ExcludeMissing
+            preEventIdStateVector: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("preEventStateVector")
+            @ExcludeMissing
+            preEventStateVector: JsonField<PreEventStateVector> = JsonMissing.of(),
+            @JsonProperty("preGeoLongitude")
+            @ExcludeMissing
+            preGeoLongitude: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preInclination")
+            @ExcludeMissing
+            preInclination: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("prePerigee")
+            @ExcludeMissing
+            prePerigee: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("prePeriod")
+            @ExcludeMissing
+            prePeriod: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("prePosX") @ExcludeMissing prePosX: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("prePosY") @ExcludeMissing prePosY: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("prePosZ") @ExcludeMissing prePosZ: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preRAAN") @ExcludeMissing preRaan: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preRadiationPressCoeff")
+            @ExcludeMissing
+            preRadiationPressCoeff: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preSigmaU")
+            @ExcludeMissing
+            preSigmaU: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preSigmaV")
+            @ExcludeMissing
+            preSigmaV: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preSigmaW")
+            @ExcludeMissing
+            preSigmaW: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preSMA") @ExcludeMissing preSma: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preVelX") @ExcludeMissing preVelX: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preVelY") @ExcludeMissing preVelY: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("preVelZ") @ExcludeMissing preVelZ: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("reportTime")
+            @ExcludeMissing
+            reportTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("satNo") @ExcludeMissing satNo: JsonField<Int> = JsonMissing.of(),
+            @JsonProperty("sourcedData")
+            @ExcludeMissing
+            sourcedData: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("sourcedDataTypes")
+            @ExcludeMissing
+            sourcedDataTypes: JsonField<List<SourcedDataType>> = JsonMissing.of(),
+            @JsonProperty("stateModel")
+            @ExcludeMissing
+            stateModel: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("stateModelVersion")
+            @ExcludeMissing
+            stateModelVersion: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("status") @ExcludeMissing status: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("tags") @ExcludeMissing tags: JsonField<List<String>> = JsonMissing.of(),
+            @JsonProperty("totalBurnTime")
+            @ExcludeMissing
+            totalBurnTime: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("transactionId")
+            @ExcludeMissing
+            transactionId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("uct") @ExcludeMissing uct: JsonField<Boolean> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            dataMode,
+            eventStartTime,
+            source,
+            id,
+            algorithm,
+            characterization,
+            characterizationUnc,
+            cov,
+            createdAt,
+            createdBy,
+            deltaMass,
+            deltaPos,
+            deltaPosU,
+            deltaPosV,
+            deltaPosW,
+            deltaVel,
+            deltaVelU,
+            deltaVelV,
+            deltaVelW,
+            description,
+            descriptor,
+            eventEndTime,
+            eventId,
+            idOnOrbit,
+            idSensor,
+            maneuverUnc,
+            mnvrAccels,
+            mnvrAccelTimes,
+            mnvrAccelUncs,
+            numAccelPoints,
+            numObs,
+            odFitEndTime,
+            origin,
+            origNetwork,
+            origObjectId,
+            origSensorId,
+            postApogee,
+            postArea,
+            postBallisticCoeff,
+            postDriftRate,
+            postEccentricity,
+            postEventElset,
+            postEventIdElset,
+            postEventIdStateVector,
+            postEventStateVector,
+            postGeoLongitude,
+            postInclination,
+            postMass,
+            postPerigee,
+            postPeriod,
+            postPosX,
+            postPosY,
+            postPosZ,
+            postRaan,
+            postRadiationPressCoeff,
+            postSigmaU,
+            postSigmaV,
+            postSigmaW,
+            postSma,
+            postVelX,
+            postVelY,
+            postVelZ,
+            preApogee,
+            preBallisticCoeff,
+            preDriftRate,
+            preEccentricity,
+            preEventElset,
+            preEventIdElset,
+            preEventIdStateVector,
+            preEventStateVector,
+            preGeoLongitude,
+            preInclination,
+            prePerigee,
+            prePeriod,
+            prePosX,
+            prePosY,
+            prePosZ,
+            preRaan,
+            preRadiationPressCoeff,
+            preSigmaU,
+            preSigmaV,
+            preSigmaW,
+            preSma,
+            preVelX,
+            preVelY,
+            preVelZ,
+            reportTime,
+            satNo,
+            sourcedData,
+            sourcedDataTypes,
+            stateModel,
+            stateModelVersion,
+            status,
+            tags,
+            totalBurnTime,
+            transactionId,
+            uct,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -2102,6 +2403,16 @@ private constructor(
          */
         @JsonProperty("uct") @ExcludeMissing fun _uct(): JsonField<Boolean> = uct
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -2221,6 +2532,7 @@ private constructor(
             private var totalBurnTime: JsonField<Double> = JsonMissing.of()
             private var transactionId: JsonField<String> = JsonMissing.of()
             private var uct: JsonField<Boolean> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -2322,6 +2634,7 @@ private constructor(
                 totalBurnTime = body.totalBurnTime
                 transactionId = body.transactionId
                 uct = body.uct
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -3919,6 +4232,25 @@ private constructor(
              */
             fun uct(uct: JsonField<Boolean>) = apply { this.uct = uct }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -4034,6 +4366,7 @@ private constructor(
                     totalBurnTime,
                     transactionId,
                     uct,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -11777,6 +12110,8 @@ private constructor(
 
                     @JvmField val EFG_TDR = of("EFG/TDR")
 
+                    @JvmField val ECR_ECEF = of("ECR/ECEF")
+
                     @JvmField val TEME = of("TEME")
 
                     @JvmField val GCRF = of("GCRF")
@@ -11789,6 +12124,7 @@ private constructor(
                     J2000,
                     UVW,
                     EFG_TDR,
+                    ECR_ECEF,
                     TEME,
                     GCRF,
                 }
@@ -11808,6 +12144,7 @@ private constructor(
                     J2000,
                     UVW,
                     EFG_TDR,
+                    ECR_ECEF,
                     TEME,
                     GCRF,
                     /**
@@ -11829,6 +12166,7 @@ private constructor(
                         J2000 -> Value.J2000
                         UVW -> Value.UVW
                         EFG_TDR -> Value.EFG_TDR
+                        ECR_ECEF -> Value.ECR_ECEF
                         TEME -> Value.TEME
                         GCRF -> Value.GCRF
                         else -> Value._UNKNOWN
@@ -11848,6 +12186,7 @@ private constructor(
                         J2000 -> Known.J2000
                         UVW -> Known.UVW
                         EFG_TDR -> Known.EFG_TDR
+                        ECR_ECEF -> Known.ECR_ECEF
                         TEME -> Known.TEME
                         GCRF -> Known.GCRF
                         else ->
@@ -19818,6 +20157,8 @@ private constructor(
 
                     @JvmField val EFG_TDR = of("EFG/TDR")
 
+                    @JvmField val ECR_ECEF = of("ECR/ECEF")
+
                     @JvmField val TEME = of("TEME")
 
                     @JvmField val GCRF = of("GCRF")
@@ -19830,6 +20171,7 @@ private constructor(
                     J2000,
                     UVW,
                     EFG_TDR,
+                    ECR_ECEF,
                     TEME,
                     GCRF,
                 }
@@ -19849,6 +20191,7 @@ private constructor(
                     J2000,
                     UVW,
                     EFG_TDR,
+                    ECR_ECEF,
                     TEME,
                     GCRF,
                     /**
@@ -19870,6 +20213,7 @@ private constructor(
                         J2000 -> Value.J2000
                         UVW -> Value.UVW
                         EFG_TDR -> Value.EFG_TDR
+                        ECR_ECEF -> Value.ECR_ECEF
                         TEME -> Value.TEME
                         GCRF -> Value.GCRF
                         else -> Value._UNKNOWN
@@ -19889,6 +20233,7 @@ private constructor(
                         J2000 -> Known.J2000
                         UVW -> Known.UVW
                         EFG_TDR -> Known.EFG_TDR
+                        ECR_ECEF -> Known.ECR_ECEF
                         TEME -> Known.TEME
                         GCRF -> Known.GCRF
                         else ->
@@ -20760,7 +21105,8 @@ private constructor(
                 tags == other.tags &&
                 totalBurnTime == other.totalBurnTime &&
                 transactionId == other.transactionId &&
-                uct == other.uct
+                uct == other.uct &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -20863,13 +21209,14 @@ private constructor(
                 totalBurnTime,
                 transactionId,
                 uct,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, eventStartTime=$eventStartTime, source=$source, id=$id, algorithm=$algorithm, characterization=$characterization, characterizationUnc=$characterizationUnc, cov=$cov, createdAt=$createdAt, createdBy=$createdBy, deltaMass=$deltaMass, deltaPos=$deltaPos, deltaPosU=$deltaPosU, deltaPosV=$deltaPosV, deltaPosW=$deltaPosW, deltaVel=$deltaVel, deltaVelU=$deltaVelU, deltaVelV=$deltaVelV, deltaVelW=$deltaVelW, description=$description, descriptor=$descriptor, eventEndTime=$eventEndTime, eventId=$eventId, idOnOrbit=$idOnOrbit, idSensor=$idSensor, maneuverUnc=$maneuverUnc, mnvrAccels=$mnvrAccels, mnvrAccelTimes=$mnvrAccelTimes, mnvrAccelUncs=$mnvrAccelUncs, numAccelPoints=$numAccelPoints, numObs=$numObs, odFitEndTime=$odFitEndTime, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, postApogee=$postApogee, postArea=$postArea, postBallisticCoeff=$postBallisticCoeff, postDriftRate=$postDriftRate, postEccentricity=$postEccentricity, postEventElset=$postEventElset, postEventIdElset=$postEventIdElset, postEventIdStateVector=$postEventIdStateVector, postEventStateVector=$postEventStateVector, postGeoLongitude=$postGeoLongitude, postInclination=$postInclination, postMass=$postMass, postPerigee=$postPerigee, postPeriod=$postPeriod, postPosX=$postPosX, postPosY=$postPosY, postPosZ=$postPosZ, postRaan=$postRaan, postRadiationPressCoeff=$postRadiationPressCoeff, postSigmaU=$postSigmaU, postSigmaV=$postSigmaV, postSigmaW=$postSigmaW, postSma=$postSma, postVelX=$postVelX, postVelY=$postVelY, postVelZ=$postVelZ, preApogee=$preApogee, preBallisticCoeff=$preBallisticCoeff, preDriftRate=$preDriftRate, preEccentricity=$preEccentricity, preEventElset=$preEventElset, preEventIdElset=$preEventIdElset, preEventIdStateVector=$preEventIdStateVector, preEventStateVector=$preEventStateVector, preGeoLongitude=$preGeoLongitude, preInclination=$preInclination, prePerigee=$prePerigee, prePeriod=$prePeriod, prePosX=$prePosX, prePosY=$prePosY, prePosZ=$prePosZ, preRaan=$preRaan, preRadiationPressCoeff=$preRadiationPressCoeff, preSigmaU=$preSigmaU, preSigmaV=$preSigmaV, preSigmaW=$preSigmaW, preSma=$preSma, preVelX=$preVelX, preVelY=$preVelY, preVelZ=$preVelZ, reportTime=$reportTime, satNo=$satNo, sourcedData=$sourcedData, sourcedDataTypes=$sourcedDataTypes, stateModel=$stateModel, stateModelVersion=$stateModelVersion, status=$status, tags=$tags, totalBurnTime=$totalBurnTime, transactionId=$transactionId, uct=$uct}"
+            "Body{classificationMarking=$classificationMarking, dataMode=$dataMode, eventStartTime=$eventStartTime, source=$source, id=$id, algorithm=$algorithm, characterization=$characterization, characterizationUnc=$characterizationUnc, cov=$cov, createdAt=$createdAt, createdBy=$createdBy, deltaMass=$deltaMass, deltaPos=$deltaPos, deltaPosU=$deltaPosU, deltaPosV=$deltaPosV, deltaPosW=$deltaPosW, deltaVel=$deltaVel, deltaVelU=$deltaVelU, deltaVelV=$deltaVelV, deltaVelW=$deltaVelW, description=$description, descriptor=$descriptor, eventEndTime=$eventEndTime, eventId=$eventId, idOnOrbit=$idOnOrbit, idSensor=$idSensor, maneuverUnc=$maneuverUnc, mnvrAccels=$mnvrAccels, mnvrAccelTimes=$mnvrAccelTimes, mnvrAccelUncs=$mnvrAccelUncs, numAccelPoints=$numAccelPoints, numObs=$numObs, odFitEndTime=$odFitEndTime, origin=$origin, origNetwork=$origNetwork, origObjectId=$origObjectId, origSensorId=$origSensorId, postApogee=$postApogee, postArea=$postArea, postBallisticCoeff=$postBallisticCoeff, postDriftRate=$postDriftRate, postEccentricity=$postEccentricity, postEventElset=$postEventElset, postEventIdElset=$postEventIdElset, postEventIdStateVector=$postEventIdStateVector, postEventStateVector=$postEventStateVector, postGeoLongitude=$postGeoLongitude, postInclination=$postInclination, postMass=$postMass, postPerigee=$postPerigee, postPeriod=$postPeriod, postPosX=$postPosX, postPosY=$postPosY, postPosZ=$postPosZ, postRaan=$postRaan, postRadiationPressCoeff=$postRadiationPressCoeff, postSigmaU=$postSigmaU, postSigmaV=$postSigmaV, postSigmaW=$postSigmaW, postSma=$postSma, postVelX=$postVelX, postVelY=$postVelY, postVelZ=$postVelZ, preApogee=$preApogee, preBallisticCoeff=$preBallisticCoeff, preDriftRate=$preDriftRate, preEccentricity=$preEccentricity, preEventElset=$preEventElset, preEventIdElset=$preEventIdElset, preEventIdStateVector=$preEventIdStateVector, preEventStateVector=$preEventStateVector, preGeoLongitude=$preGeoLongitude, preInclination=$preInclination, prePerigee=$prePerigee, prePeriod=$prePeriod, prePosX=$prePosX, prePosY=$prePosY, prePosZ=$prePosZ, preRaan=$preRaan, preRadiationPressCoeff=$preRadiationPressCoeff, preSigmaU=$preSigmaU, preSigmaV=$preSigmaV, preSigmaW=$preSigmaW, preSma=$preSma, preVelX=$preVelX, preVelY=$preVelY, preVelZ=$preVelZ, reportTime=$reportTime, satNo=$satNo, sourcedData=$sourcedData, sourcedDataTypes=$sourcedDataTypes, stateModel=$stateModel, stateModelVersion=$stateModelVersion, status=$status, tags=$tags, totalBurnTime=$totalBurnTime, transactionId=$transactionId, uct=$uct, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {

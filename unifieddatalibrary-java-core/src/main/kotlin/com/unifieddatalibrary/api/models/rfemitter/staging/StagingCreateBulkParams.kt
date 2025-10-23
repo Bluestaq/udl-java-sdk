@@ -2,11 +2,14 @@
 
 package com.unifieddatalibrary.api.models.rfemitter.staging
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.unifieddatalibrary.api.core.ExcludeMissing
 import com.unifieddatalibrary.api.core.JsonField
 import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
 import com.unifieddatalibrary.api.core.Params
 import com.unifieddatalibrary.api.core.checkRequired
 import com.unifieddatalibrary.api.core.http.Headers
@@ -14,6 +17,7 @@ import com.unifieddatalibrary.api.core.http.QueryParams
 import com.unifieddatalibrary.api.core.toImmutable
 import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
 import java.time.OffsetDateTime
+import java.util.Collections
 import java.util.Objects
 import java.util.Optional
 
@@ -209,27 +213,72 @@ private constructor(
      * to stage RF emitter entities.
      */
     class Body
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        @JsonProperty("classificationMarking")
-        @ExcludeMissing
         private val classificationMarking: JsonField<String>,
-        @JsonProperty("name") @ExcludeMissing private val name: JsonField<String>,
-        @JsonProperty("source") @ExcludeMissing private val source: JsonField<String>,
-        @JsonProperty("id") @ExcludeMissing private val id: JsonField<String>,
-        @JsonProperty("altitude") @ExcludeMissing private val altitude: JsonField<Double>,
-        @JsonProperty("createdAt") @ExcludeMissing private val createdAt: JsonField<OffsetDateTime>,
-        @JsonProperty("createdBy") @ExcludeMissing private val createdBy: JsonField<String>,
-        @JsonProperty("extSysId") @ExcludeMissing private val extSysId: JsonField<String>,
-        @JsonProperty("lat") @ExcludeMissing private val lat: JsonField<Double>,
-        @JsonProperty("locationCountry")
-        @ExcludeMissing
+        private val name: JsonField<String>,
+        private val source: JsonField<String>,
+        private val id: JsonField<String>,
+        private val altitude: JsonField<Double>,
+        private val createdAt: JsonField<OffsetDateTime>,
+        private val createdBy: JsonField<String>,
+        private val extSysId: JsonField<String>,
+        private val lat: JsonField<Double>,
         private val locationCountry: JsonField<String>,
-        @JsonProperty("lon") @ExcludeMissing private val lon: JsonField<Double>,
-        @JsonProperty("ownerCountry") @ExcludeMissing private val ownerCountry: JsonField<String>,
-        @JsonProperty("subtype") @ExcludeMissing private val subtype: JsonField<String>,
-        @JsonProperty("type") @ExcludeMissing private val type: JsonField<String>,
+        private val lon: JsonField<Double>,
+        private val ownerCountry: JsonField<String>,
+        private val subtype: JsonField<String>,
+        private val type: JsonField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("name") @ExcludeMissing name: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("altitude")
+            @ExcludeMissing
+            altitude: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("createdAt")
+            @ExcludeMissing
+            createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+            @JsonProperty("createdBy")
+            @ExcludeMissing
+            createdBy: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("extSysId")
+            @ExcludeMissing
+            extSysId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lat") @ExcludeMissing lat: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("locationCountry")
+            @ExcludeMissing
+            locationCountry: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("lon") @ExcludeMissing lon: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("ownerCountry")
+            @ExcludeMissing
+            ownerCountry: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("subtype") @ExcludeMissing subtype: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("type") @ExcludeMissing type: JsonField<String> = JsonMissing.of(),
+        ) : this(
+            classificationMarking,
+            name,
+            source,
+            id,
+            altitude,
+            createdAt,
+            createdBy,
+            extSysId,
+            lat,
+            locationCountry,
+            lon,
+            ownerCountry,
+            subtype,
+            type,
+            mutableMapOf(),
+        )
 
         /**
          * Classification marking of the data in IC/CAPCO Portion-marked format.
@@ -471,6 +520,16 @@ private constructor(
          */
         @JsonProperty("type") @ExcludeMissing fun _type(): JsonField<String> = type
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -505,6 +564,7 @@ private constructor(
             private var ownerCountry: JsonField<String> = JsonMissing.of()
             private var subtype: JsonField<String> = JsonMissing.of()
             private var type: JsonField<String> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             @JvmSynthetic
             internal fun from(body: Body) = apply {
@@ -522,6 +582,7 @@ private constructor(
                 ownerCountry = body.ownerCountry
                 subtype = body.subtype
                 type = body.type
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             /** Classification marking of the data in IC/CAPCO Portion-marked format. */
@@ -732,6 +793,25 @@ private constructor(
              */
             fun type(type: JsonField<String>) = apply { this.type = type }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -762,6 +842,7 @@ private constructor(
                     ownerCountry,
                     subtype,
                     type,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -839,7 +920,8 @@ private constructor(
                 lon == other.lon &&
                 ownerCountry == other.ownerCountry &&
                 subtype == other.subtype &&
-                type == other.type
+                type == other.type &&
+                additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
@@ -858,13 +940,14 @@ private constructor(
                 ownerCountry,
                 subtype,
                 type,
+                additionalProperties,
             )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{classificationMarking=$classificationMarking, name=$name, source=$source, id=$id, altitude=$altitude, createdAt=$createdAt, createdBy=$createdBy, extSysId=$extSysId, lat=$lat, locationCountry=$locationCountry, lon=$lon, ownerCountry=$ownerCountry, subtype=$subtype, type=$type}"
+            "Body{classificationMarking=$classificationMarking, name=$name, source=$source, id=$id, altitude=$altitude, createdAt=$createdAt, createdBy=$createdBy, extSysId=$extSysId, lat=$lat, locationCountry=$locationCountry, lon=$lon, ownerCountry=$ownerCountry, subtype=$subtype, type=$type, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {
