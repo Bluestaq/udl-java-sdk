@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.1 (2025-11-13)
+
+Full Changelog: [v0.6.0...v0.6.1](https://github.com/Bluestaq/udl-java-sdk/compare/v0.6.0...v0.6.1)
+
+### Bug Fixes
+
+* **client:** multi-value header serialization ([60b9b6b](https://github.com/Bluestaq/udl-java-sdk/commit/60b9b6bd5dce17b686c060d69646964a6266a400))
+
 ## 0.6.0 (2025-10-21)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.5.0...v0.6.0)
