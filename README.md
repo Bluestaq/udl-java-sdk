@@ -2,7 +2,7 @@
 
 <!-- x-release-please-start-version -->
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.unifieddatalibrary.api/unifieddatalibrary-java)](https://central.sonatype.com/artifact/com.unifieddatalibrary.api/unifieddatalibrary-java/0.6.1)
+[![Maven Central](https://img.shields.io/maven-central/v/com.unifieddatalibrary.api/unifieddatalibrary-java)](https://central.sonatype.com/artifact/com.unifieddatalibrary.api/unifieddatalibrary-java/0.6.2)
 
 <!-- x-release-please-end -->
 
@@ -19,7 +19,7 @@ The REST API documentation can be found on [unifieddatalibrary.com](https://unif
 ### Gradle
 
 ```kotlin
-implementation("com.unifieddatalibrary.api:unifieddatalibrary-java:0.6.1")
+implementation("com.unifieddatalibrary.api:unifieddatalibrary-java:0.6.2")
 ```
 
 ### Maven
@@ -28,7 +28,7 @@ implementation("com.unifieddatalibrary.api:unifieddatalibrary-java:0.6.1")
 <dependency>
   <groupId>com.unifieddatalibrary.api</groupId>
   <artifactId>unifieddatalibrary-java</artifactId>
-  <version>0.6.1</version>
+  <version>0.6.2</version>
 </dependency>
 ```
 

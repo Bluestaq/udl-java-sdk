@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.2 (2025-12-02)
+
+Full Changelog: [v0.6.1...v0.6.2](https://github.com/Bluestaq/udl-java-sdk/compare/v0.6.1...v0.6.2)
+
+### Bug Fixes
+
+* **client:** cancel okhttp call when future cancelled ([f9e82f3](https://github.com/Bluestaq/udl-java-sdk/commit/f9e82f304c30a9dd01fac0d3e9fc266ebb521f02))
+
+
+### Documentation
+
+* remove `$` for better copy-pasteabality ([f128f11](https://github.com/Bluestaq/udl-java-sdk/commit/f128f1100e9020f13a4d8fcdfe33c60bdb70406a))
+
 ## 0.6.1 (2025-11-13)
 
 Full Changelog: [v0.6.0...v0.6.1](https://github.com/Bluestaq/udl-java-sdk/compare/v0.6.0...v0.6.1)
