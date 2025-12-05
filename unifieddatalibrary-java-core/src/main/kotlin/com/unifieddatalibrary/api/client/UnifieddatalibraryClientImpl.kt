@@ -56,6 +56,8 @@ import com.unifieddatalibrary.api.services.blocking.BusService
 import com.unifieddatalibrary.api.services.blocking.BusServiceImpl
 import com.unifieddatalibrary.api.services.blocking.ChannelService
 import com.unifieddatalibrary.api.services.blocking.ChannelServiceImpl
+import com.unifieddatalibrary.api.services.blocking.CloselyspacedobjectService
+import com.unifieddatalibrary.api.services.blocking.CloselyspacedobjectServiceImpl
 import com.unifieddatalibrary.api.services.blocking.CollectRequestService
 import com.unifieddatalibrary.api.services.blocking.CollectRequestServiceImpl
 import com.unifieddatalibrary.api.services.blocking.CollectResponseService
@@ -449,6 +451,10 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
     private val buses: BusService by lazy { BusServiceImpl(clientOptionsWithUserAgent) }
 
     private val channels: ChannelService by lazy { ChannelServiceImpl(clientOptionsWithUserAgent) }
+
+    private val closelyspacedobjects: CloselyspacedobjectService by lazy {
+        CloselyspacedobjectServiceImpl(clientOptionsWithUserAgent)
+    }
 
     private val collectRequests: CollectRequestService by lazy {
         CollectRequestServiceImpl(clientOptionsWithUserAgent)
@@ -1004,6 +1010,8 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
 
     override fun channels(): ChannelService = channels
 
+    override fun closelyspacedobjects(): CloselyspacedobjectService = closelyspacedobjects
+
     override fun collectRequests(): CollectRequestService = collectRequests
 
     override fun collectResponses(): CollectResponseService = collectResponses
@@ -1393,6 +1401,10 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
 
         private val channels: ChannelService.WithRawResponse by lazy {
             ChannelServiceImpl.WithRawResponseImpl(clientOptions)
+        }
+
+        private val closelyspacedobjects: CloselyspacedobjectService.WithRawResponse by lazy {
+            CloselyspacedobjectServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
         private val collectRequests: CollectRequestService.WithRawResponse by lazy {
@@ -2020,6 +2032,9 @@ class UnifieddatalibraryClientImpl(private val clientOptions: ClientOptions) :
         override fun buses(): BusService.WithRawResponse = buses
 
         override fun channels(): ChannelService.WithRawResponse = channels
+
+        override fun closelyspacedobjects(): CloselyspacedobjectService.WithRawResponse =
+            closelyspacedobjects
 
         override fun collectRequests(): CollectRequestService.WithRawResponse = collectRequests
 

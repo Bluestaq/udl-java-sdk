@@ -1,0 +1,3394 @@
+// File generated from our OpenAPI spec by Stainless.
+
+package com.unifieddatalibrary.api.models.closelyspacedobjects
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.unifieddatalibrary.api.core.Enum
+import com.unifieddatalibrary.api.core.ExcludeMissing
+import com.unifieddatalibrary.api.core.JsonField
+import com.unifieddatalibrary.api.core.JsonMissing
+import com.unifieddatalibrary.api.core.JsonValue
+import com.unifieddatalibrary.api.core.checkKnown
+import com.unifieddatalibrary.api.core.checkRequired
+import com.unifieddatalibrary.api.core.toImmutable
+import com.unifieddatalibrary.api.errors.UnifieddatalibraryInvalidDataException
+import java.time.OffsetDateTime
+import java.util.Collections
+import java.util.Objects
+import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
+
+/**
+ * This collection of services provides operations for manipulating and querying of closely spaced
+ * objects (on orbit) operations including docking, rendezvous, proximity and reporting of payload
+ * zone engagements observed and characterized over a period of time.
+ */
+class CloselyspacedobjectsAbridged
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
+private constructor(
+    private val classificationMarking: JsonField<String>,
+    private val csoState: JsonField<String>,
+    private val dataMode: JsonField<DataMode>,
+    private val eventStartTime: JsonField<OffsetDateTime>,
+    private val eventType: JsonField<String>,
+    private val source: JsonField<String>,
+    private val id: JsonField<String>,
+    private val actorSvEpoch: JsonField<OffsetDateTime>,
+    private val analysisDuration: JsonField<Double>,
+    private val analysisEpoch: JsonField<OffsetDateTime>,
+    private val compType: JsonField<String>,
+    private val createdAt: JsonField<OffsetDateTime>,
+    private val createdBy: JsonField<String>,
+    private val csoDetails: JsonField<List<CsoDetail>>,
+    private val deltaVTol: JsonField<Double>,
+    private val durationThreshold: JsonField<Double>,
+    private val eventEndTime: JsonField<OffsetDateTime>,
+    private val eventIntervalCoverage: JsonField<Double>,
+    private val extId: JsonField<String>,
+    private val hohmannDeltaV: JsonField<Double>,
+    private val idActorSv: JsonField<String>,
+    private val idOnOrbit1: JsonField<String>,
+    private val idOnOrbit2: JsonField<String>,
+    private val idTargetSv: JsonField<String>,
+    private val inclinationDeltaV: JsonField<Double>,
+    private val indicationSource: JsonField<String>,
+    private val lonTol: JsonField<Double>,
+    private val maxRange: JsonField<Double>,
+    private val minPlaneSepAngle: JsonField<Double>,
+    private val minPlaneSepEpoch: JsonField<OffsetDateTime>,
+    private val minRange: JsonField<Double>,
+    private val minRangeAnalysisDuration: JsonField<Double>,
+    private val minRangeEpoch: JsonField<OffsetDateTime>,
+    private val notes: JsonField<String>,
+    private val numSubIntervals: JsonField<Int>,
+    private val orbitAlignDel: JsonField<Double>,
+    private val orbitPlaneTol: JsonField<Double>,
+    private val origin: JsonField<String>,
+    private val origNetwork: JsonField<String>,
+    private val origObjectId1: JsonField<String>,
+    private val origObjectId2: JsonField<String>,
+    private val rangeThreshold: JsonField<Double>,
+    private val rangeTol: JsonField<Double>,
+    private val relPos: JsonField<List<Double>>,
+    private val relPosMag: JsonField<Double>,
+    private val relSpeedMag: JsonField<Double>,
+    private val relVel: JsonField<List<Double>>,
+    private val satNo1: JsonField<Int>,
+    private val satNo2: JsonField<Int>,
+    private val sourceDl: JsonField<String>,
+    private val stationLimLonTol: JsonField<Double>,
+    private val targetSvEpoch: JsonField<OffsetDateTime>,
+    private val totalDeltaV: JsonField<Double>,
+    private val additionalProperties: MutableMap<String, JsonValue>,
+) {
+
+    @JsonCreator
+    private constructor(
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        classificationMarking: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("csoState") @ExcludeMissing csoState: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("dataMode") @ExcludeMissing dataMode: JsonField<DataMode> = JsonMissing.of(),
+        @JsonProperty("eventStartTime")
+        @ExcludeMissing
+        eventStartTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("eventType") @ExcludeMissing eventType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("source") @ExcludeMissing source: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("actorSVEpoch")
+        @ExcludeMissing
+        actorSvEpoch: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("analysisDuration")
+        @ExcludeMissing
+        analysisDuration: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("analysisEpoch")
+        @ExcludeMissing
+        analysisEpoch: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("compType") @ExcludeMissing compType: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("createdAt")
+        @ExcludeMissing
+        createdAt: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("createdBy") @ExcludeMissing createdBy: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("csoDetails")
+        @ExcludeMissing
+        csoDetails: JsonField<List<CsoDetail>> = JsonMissing.of(),
+        @JsonProperty("deltaVTol") @ExcludeMissing deltaVTol: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("durationThreshold")
+        @ExcludeMissing
+        durationThreshold: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("eventEndTime")
+        @ExcludeMissing
+        eventEndTime: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("eventIntervalCoverage")
+        @ExcludeMissing
+        eventIntervalCoverage: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("extId") @ExcludeMissing extId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("hohmannDeltaV")
+        @ExcludeMissing
+        hohmannDeltaV: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("idActorSV") @ExcludeMissing idActorSv: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("idOnOrbit1")
+        @ExcludeMissing
+        idOnOrbit1: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("idOnOrbit2")
+        @ExcludeMissing
+        idOnOrbit2: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("idTargetSV")
+        @ExcludeMissing
+        idTargetSv: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("inclinationDeltaV")
+        @ExcludeMissing
+        inclinationDeltaV: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("indicationSource")
+        @ExcludeMissing
+        indicationSource: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("lonTol") @ExcludeMissing lonTol: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("maxRange") @ExcludeMissing maxRange: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("minPlaneSepAngle")
+        @ExcludeMissing
+        minPlaneSepAngle: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("minPlaneSepEpoch")
+        @ExcludeMissing
+        minPlaneSepEpoch: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("minRange") @ExcludeMissing minRange: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("minRangeAnalysisDuration")
+        @ExcludeMissing
+        minRangeAnalysisDuration: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("minRangeEpoch")
+        @ExcludeMissing
+        minRangeEpoch: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("notes") @ExcludeMissing notes: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("numSubIntervals")
+        @ExcludeMissing
+        numSubIntervals: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("orbitAlignDel")
+        @ExcludeMissing
+        orbitAlignDel: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("orbitPlaneTol")
+        @ExcludeMissing
+        orbitPlaneTol: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("origin") @ExcludeMissing origin: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origNetwork")
+        @ExcludeMissing
+        origNetwork: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origObjectId1")
+        @ExcludeMissing
+        origObjectId1: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("origObjectId2")
+        @ExcludeMissing
+        origObjectId2: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("rangeThreshold")
+        @ExcludeMissing
+        rangeThreshold: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("rangeTol") @ExcludeMissing rangeTol: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("relPos") @ExcludeMissing relPos: JsonField<List<Double>> = JsonMissing.of(),
+        @JsonProperty("relPosMag") @ExcludeMissing relPosMag: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("relSpeedMag")
+        @ExcludeMissing
+        relSpeedMag: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("relVel") @ExcludeMissing relVel: JsonField<List<Double>> = JsonMissing.of(),
+        @JsonProperty("satNo1") @ExcludeMissing satNo1: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("satNo2") @ExcludeMissing satNo2: JsonField<Int> = JsonMissing.of(),
+        @JsonProperty("sourceDL") @ExcludeMissing sourceDl: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("stationLimLonTol")
+        @ExcludeMissing
+        stationLimLonTol: JsonField<Double> = JsonMissing.of(),
+        @JsonProperty("targetSVEpoch")
+        @ExcludeMissing
+        targetSvEpoch: JsonField<OffsetDateTime> = JsonMissing.of(),
+        @JsonProperty("totalDeltaV")
+        @ExcludeMissing
+        totalDeltaV: JsonField<Double> = JsonMissing.of(),
+    ) : this(
+        classificationMarking,
+        csoState,
+        dataMode,
+        eventStartTime,
+        eventType,
+        source,
+        id,
+        actorSvEpoch,
+        analysisDuration,
+        analysisEpoch,
+        compType,
+        createdAt,
+        createdBy,
+        csoDetails,
+        deltaVTol,
+        durationThreshold,
+        eventEndTime,
+        eventIntervalCoverage,
+        extId,
+        hohmannDeltaV,
+        idActorSv,
+        idOnOrbit1,
+        idOnOrbit2,
+        idTargetSv,
+        inclinationDeltaV,
+        indicationSource,
+        lonTol,
+        maxRange,
+        minPlaneSepAngle,
+        minPlaneSepEpoch,
+        minRange,
+        minRangeAnalysisDuration,
+        minRangeEpoch,
+        notes,
+        numSubIntervals,
+        orbitAlignDel,
+        orbitPlaneTol,
+        origin,
+        origNetwork,
+        origObjectId1,
+        origObjectId2,
+        rangeThreshold,
+        rangeTol,
+        relPos,
+        relPosMag,
+        relSpeedMag,
+        relVel,
+        satNo1,
+        satNo2,
+        sourceDl,
+        stationLimLonTol,
+        targetSvEpoch,
+        totalDeltaV,
+        mutableMapOf(),
+    )
+
+    /**
+     * Classification marking of the data in IC/CAPCO Portion-marked format.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun classificationMarking(): String = classificationMarking.getRequired("classificationMarking")
+
+    /**
+     * Indicates the current state that characterizes Closely Spaced Objects (CSO) analysis steps
+     * and conclusions. Values include: ACTIVE, ACTUAL, CANCELED, CLOSED, COMPLETED, DETECTED,
+     * INDICATED, PENDING, PLANNED, POSSIBLE, PREDICTED, SEPARATED, UPDATED.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun csoState(): String = csoState.getRequired("csoState")
+
+    /**
+     * Indicator of whether the data is REAL, TEST, EXERCISE, or SIMULATED data:
+     *
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
+     *
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
+     *
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
+     *
+     * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun dataMode(): DataMode = dataMode.getRequired("dataMode")
+
+    /**
+     * Timestamp representing the events start time in ISO 8601 UTC format with millisecond
+     * precision.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun eventStartTime(): OffsetDateTime = eventStartTime.getRequired("eventStartTime")
+
+    /**
+     * The type of event associated with this record. Values include: DOCK, UNDOCK, SEPARATION,
+     * RENDEZVOUS, PROXIMITY, PEZ, WEZ.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun eventType(): String = eventType.getRequired("eventType")
+
+    /**
+     * Source of the data.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type or is
+     *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun source(): String = source.getRequired("source")
+
+    /**
+     * Unique identifier of the record, auto-generated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun id(): Optional<String> = id.getOptional("id")
+
+    /**
+     * State vector epoch time of the actor satellite in ISO 8601 UTC format with millisecond
+     * precision.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun actorSvEpoch(): Optional<OffsetDateTime> = actorSvEpoch.getOptional("actorSVEpoch")
+
+    /**
+     * Timespan of the rendezvous analysis in seconds.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun analysisDuration(): Optional<Double> = analysisDuration.getOptional("analysisDuration")
+
+    /**
+     * Epoch time of the beginning of the analysis period in ISO 8601 UTC format with millisecond
+     * precision.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun analysisEpoch(): Optional<OffsetDateTime> = analysisEpoch.getOptional("analysisEpoch")
+
+    /**
+     * Computation type, values (e.g. PLANARALIGNMENT, LONGITUDE).
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun compType(): Optional<String> = compType.getOptional("compType")
+
+    /**
+     * Time the row was created in the database, auto-populated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun createdAt(): Optional<OffsetDateTime> = createdAt.getOptional("createdAt")
+
+    /**
+     * Application user who created the row in the database, auto-populated by the system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun createdBy(): Optional<String> = createdBy.getOptional("createdBy")
+
+    /**
+     * A collection of orbital metrics for the event at the start and end times, and the mean values
+     * of the primary and secondary objects, as well as the deltas between the primary and secondary
+     * objects.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun csoDetails(): Optional<List<CsoDetail>> = csoDetails.getOptional("csoDetails")
+
+    /**
+     * The tolerance value for the DeltaV, in kilometers per second.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun deltaVTol(): Optional<Double> = deltaVTol.getOptional("deltaVTol")
+
+    /**
+     * The threshold of the event duration in seconds.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun durationThreshold(): Optional<Double> = durationThreshold.getOptional("durationThreshold")
+
+    /**
+     * Timestamp representing the events end time in ISO 8601 UTC format with millisecond precision.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun eventEndTime(): Optional<OffsetDateTime> = eventEndTime.getOptional("eventEndTime")
+
+    /**
+     * Percentage of the event interval that is within the plane tolerance specified as a percent
+     * value between 0 and 100.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun eventIntervalCoverage(): Optional<Double> =
+        eventIntervalCoverage.getOptional("eventIntervalCoverage")
+
+    /**
+     * Unique identifier of the record from the originating system. This field has no meaning within
+     * UDL and is provided as a convenience for systems that require tracking of an internal system
+     * generated ID.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun extId(): Optional<String> = extId.getOptional("extId")
+
+    /**
+     * The Hohmann DeltaV (kilometers per second) is the minimum delta velocity for the in-plane
+     * orbit change. The in-plane maneuvers change the semi-major axis (perigee and/or apogee). It
+     * is the minimum assuming two maneuvers; a lower delta velocity is possible with bi-elliptic
+     * transfers involving three maneuvers.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun hohmannDeltaV(): Optional<Double> = hohmannDeltaV.getOptional("hohmannDeltaV")
+
+    /**
+     * Optional ID of the UDL State Vector at epoch time of the actor satellite. When performing a
+     * create, this id will be ignored in favor of the UDL generated id of the actor state vector.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun idActorSv(): Optional<String> = idActorSv.getOptional("idActorSV")
+
+    /**
+     * Unique identifier of the primary satellite on-orbit object, if correlated. For rendezvous and
+     * proximity operations, this is the target on-orbit object. When the secondary object is on the
+     * rendezvous capable list, this can be any object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun idOnOrbit1(): Optional<String> = idOnOrbit1.getOptional("idOnOrbit1")
+
+    /**
+     * Unique identifier of the secondary satellite on-orbit object, if correlated. For rendezvous
+     * and proximity operations, this is the actor. When the primary object is a satellite being
+     * protected on the neighborhood watch list (NWL), this can be any object encroaching on the
+     * primary.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun idOnOrbit2(): Optional<String> = idOnOrbit2.getOptional("idOnOrbit2")
+
+    /**
+     * Optional ID of the UDL State Vector at epoch time of the target satellite. When performing a
+     * create, this id will be ignored in favor of the UDL generated id of the target state vector.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun idTargetSv(): Optional<String> = idTargetSv.getOptional("idTargetSV")
+
+    /**
+     * The Inclination DeltaV is the minimum delta velocity for the out-of-plane change, assuming
+     * alignment of the right ascensions measured in kilometers per second.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun inclinationDeltaV(): Optional<Double> = inclinationDeltaV.getOptional("inclinationDeltaV")
+
+    /**
+     * Identifies the source of the indication, if the latest event info was manually input, not
+     * computed.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun indicationSource(): Optional<String> = indicationSource.getOptional("indicationSource")
+
+    /**
+     * The tolerance value for the longitude in degrees.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun lonTol(): Optional<Double> = lonTol.getOptional("lonTol")
+
+    /**
+     * Maximum range (apogee and perigee differences) within the event interval measured in
+     * kilometers.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun maxRange(): Optional<Double> = maxRange.getOptional("maxRange")
+
+    /**
+     * Minimum angle between the target's position and the projection of the actor's position into
+     * the target's nominal orbit plane over the event interval measured in degrees.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun minPlaneSepAngle(): Optional<Double> = minPlaneSepAngle.getOptional("minPlaneSepAngle")
+
+    /**
+     * Epoch time of the minimum in-plane separation angle occurrence in ISO 8601 UTC format with
+     * millisecond precision.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun minPlaneSepEpoch(): Optional<OffsetDateTime> =
+        minPlaneSepEpoch.getOptional("minPlaneSepEpoch")
+
+    /**
+     * Minimum range (apogee and perigee differences) within the event interval measured in
+     * kilometers.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun minRange(): Optional<Double> = minRange.getOptional("minRange")
+
+    /**
+     * Timespan of satellites within the range tolerance in seconds.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun minRangeAnalysisDuration(): Optional<Double> =
+        minRangeAnalysisDuration.getOptional("minRangeAnalysisDuration")
+
+    /**
+     * Epoch time of the minimum range occurrence in ISO 8601 UTC format with millisecond precision.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun minRangeEpoch(): Optional<OffsetDateTime> = minRangeEpoch.getOptional("minRangeEpoch")
+
+    /**
+     * Contains other descriptive information associated with an indicated event.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun notes(): Optional<String> = notes.getOptional("notes")
+
+    /**
+     * The number of oscillations within the event interval which are within the plane tolerance.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun numSubIntervals(): Optional<Int> = numSubIntervals.getOptional("numSubIntervals")
+
+    /**
+     * The change in angle between the angular momentum vectors between the actor and target
+     * relative to plane orientation in degrees.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun orbitAlignDel(): Optional<Double> = orbitAlignDel.getOptional("orbitAlignDel")
+
+    /**
+     * The tolerance value for the difference in the orbital plane measured in degrees.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun orbitPlaneTol(): Optional<Double> = orbitPlaneTol.getOptional("orbitPlaneTol")
+
+    /**
+     * Originating system or organization which produced the data, if different from the source. The
+     * origin may be different than the source if the source was a mediating system which forwarded
+     * the data on behalf of the origin system. If null, the source may be assumed to be the origin.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origin(): Optional<String> = origin.getOptional("origin")
+
+    /**
+     * The originating source network on which this record was created, auto-populated by the
+     * system.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origNetwork(): Optional<String> = origNetwork.getOptional("origNetwork")
+
+    /**
+     * Optional place holder for an OnOrbit ID that does not exist in UDL.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origObjectId1(): Optional<String> = origObjectId1.getOptional("origObjectId1")
+
+    /**
+     * Optional place holder for an OnOrbit ID that does not exist in UDL.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun origObjectId2(): Optional<String> = origObjectId2.getOptional("origObjectId2")
+
+    /**
+     * The threshold of the event range in kilometers.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun rangeThreshold(): Optional<Double> = rangeThreshold.getOptional("rangeThreshold")
+
+    /**
+     * The tolerance value for the range in kilometers.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun rangeTol(): Optional<Double> = rangeTol.getOptional("rangeTol")
+
+    /**
+     * Indicates the relative position vector of the event occurrence measured in kilometers.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun relPos(): Optional<List<Double>> = relPos.getOptional("relPos")
+
+    /**
+     * Range of closest approach: relative position magnitude, in kilometers, of the difference in
+     * the physical position between the actor and target objects.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun relPosMag(): Optional<Double> = relPosMag.getOptional("relPosMag")
+
+    /**
+     * Indicates the closure rate specified as a relative velocity magnitude in kilometers per
+     * second of the difference in the velocities between the actor and target objects.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun relSpeedMag(): Optional<Double> = relSpeedMag.getOptional("relSpeedMag")
+
+    /**
+     * Indicates the relative velocity vector of the event occurrence measured in kilometers per
+     * second.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun relVel(): Optional<List<Double>> = relVel.getOptional("relVel")
+
+    /**
+     * Satellite/catalog number of the target on-orbit primary object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun satNo1(): Optional<Int> = satNo1.getOptional("satNo1")
+
+    /**
+     * Satellite/catalog number of the target on-orbit secondary object.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun satNo2(): Optional<Int> = satNo2.getOptional("satNo2")
+
+    /**
+     * The source data library from which this record was received. This could be a remote or
+     * tactical UDL or another data library. If null, the record should be assumed to have
+     * originated from the primary Enterprise UDL.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun sourceDl(): Optional<String> = sourceDl.getOptional("sourceDL")
+
+    /**
+     * The tolerance value for the optimal longitude for station-keeping in degrees.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun stationLimLonTol(): Optional<Double> = stationLimLonTol.getOptional("stationLimLonTol")
+
+    /**
+     * State vector epoch time of the target satellite in ISO 8601 UTC format with millisecond
+     * precision.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun targetSvEpoch(): Optional<OffsetDateTime> = targetSvEpoch.getOptional("targetSVEpoch")
+
+    /**
+     * The Total DeltaV is the sum of the Hohmann and Inclination DeltaVs measured in kilometers per
+     * second.
+     *
+     * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type (e.g.
+     *   if the server responded with an unexpected value).
+     */
+    fun totalDeltaV(): Optional<Double> = totalDeltaV.getOptional("totalDeltaV")
+
+    /**
+     * Returns the raw JSON value of [classificationMarking].
+     *
+     * Unlike [classificationMarking], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("classificationMarking")
+    @ExcludeMissing
+    fun _classificationMarking(): JsonField<String> = classificationMarking
+
+    /**
+     * Returns the raw JSON value of [csoState].
+     *
+     * Unlike [csoState], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("csoState") @ExcludeMissing fun _csoState(): JsonField<String> = csoState
+
+    /**
+     * Returns the raw JSON value of [dataMode].
+     *
+     * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+
+    /**
+     * Returns the raw JSON value of [eventStartTime].
+     *
+     * Unlike [eventStartTime], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("eventStartTime")
+    @ExcludeMissing
+    fun _eventStartTime(): JsonField<OffsetDateTime> = eventStartTime
+
+    /**
+     * Returns the raw JSON value of [eventType].
+     *
+     * Unlike [eventType], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("eventType") @ExcludeMissing fun _eventType(): JsonField<String> = eventType
+
+    /**
+     * Returns the raw JSON value of [source].
+     *
+     * Unlike [source], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("source") @ExcludeMissing fun _source(): JsonField<String> = source
+
+    /**
+     * Returns the raw JSON value of [id].
+     *
+     * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+
+    /**
+     * Returns the raw JSON value of [actorSvEpoch].
+     *
+     * Unlike [actorSvEpoch], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("actorSVEpoch")
+    @ExcludeMissing
+    fun _actorSvEpoch(): JsonField<OffsetDateTime> = actorSvEpoch
+
+    /**
+     * Returns the raw JSON value of [analysisDuration].
+     *
+     * Unlike [analysisDuration], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("analysisDuration")
+    @ExcludeMissing
+    fun _analysisDuration(): JsonField<Double> = analysisDuration
+
+    /**
+     * Returns the raw JSON value of [analysisEpoch].
+     *
+     * Unlike [analysisEpoch], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("analysisEpoch")
+    @ExcludeMissing
+    fun _analysisEpoch(): JsonField<OffsetDateTime> = analysisEpoch
+
+    /**
+     * Returns the raw JSON value of [compType].
+     *
+     * Unlike [compType], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("compType") @ExcludeMissing fun _compType(): JsonField<String> = compType
+
+    /**
+     * Returns the raw JSON value of [createdAt].
+     *
+     * Unlike [createdAt], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("createdAt")
+    @ExcludeMissing
+    fun _createdAt(): JsonField<OffsetDateTime> = createdAt
+
+    /**
+     * Returns the raw JSON value of [createdBy].
+     *
+     * Unlike [createdBy], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("createdBy") @ExcludeMissing fun _createdBy(): JsonField<String> = createdBy
+
+    /**
+     * Returns the raw JSON value of [csoDetails].
+     *
+     * Unlike [csoDetails], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("csoDetails")
+    @ExcludeMissing
+    fun _csoDetails(): JsonField<List<CsoDetail>> = csoDetails
+
+    /**
+     * Returns the raw JSON value of [deltaVTol].
+     *
+     * Unlike [deltaVTol], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("deltaVTol") @ExcludeMissing fun _deltaVTol(): JsonField<Double> = deltaVTol
+
+    /**
+     * Returns the raw JSON value of [durationThreshold].
+     *
+     * Unlike [durationThreshold], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("durationThreshold")
+    @ExcludeMissing
+    fun _durationThreshold(): JsonField<Double> = durationThreshold
+
+    /**
+     * Returns the raw JSON value of [eventEndTime].
+     *
+     * Unlike [eventEndTime], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("eventEndTime")
+    @ExcludeMissing
+    fun _eventEndTime(): JsonField<OffsetDateTime> = eventEndTime
+
+    /**
+     * Returns the raw JSON value of [eventIntervalCoverage].
+     *
+     * Unlike [eventIntervalCoverage], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("eventIntervalCoverage")
+    @ExcludeMissing
+    fun _eventIntervalCoverage(): JsonField<Double> = eventIntervalCoverage
+
+    /**
+     * Returns the raw JSON value of [extId].
+     *
+     * Unlike [extId], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("extId") @ExcludeMissing fun _extId(): JsonField<String> = extId
+
+    /**
+     * Returns the raw JSON value of [hohmannDeltaV].
+     *
+     * Unlike [hohmannDeltaV], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("hohmannDeltaV")
+    @ExcludeMissing
+    fun _hohmannDeltaV(): JsonField<Double> = hohmannDeltaV
+
+    /**
+     * Returns the raw JSON value of [idActorSv].
+     *
+     * Unlike [idActorSv], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("idActorSV") @ExcludeMissing fun _idActorSv(): JsonField<String> = idActorSv
+
+    /**
+     * Returns the raw JSON value of [idOnOrbit1].
+     *
+     * Unlike [idOnOrbit1], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("idOnOrbit1") @ExcludeMissing fun _idOnOrbit1(): JsonField<String> = idOnOrbit1
+
+    /**
+     * Returns the raw JSON value of [idOnOrbit2].
+     *
+     * Unlike [idOnOrbit2], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("idOnOrbit2") @ExcludeMissing fun _idOnOrbit2(): JsonField<String> = idOnOrbit2
+
+    /**
+     * Returns the raw JSON value of [idTargetSv].
+     *
+     * Unlike [idTargetSv], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("idTargetSV") @ExcludeMissing fun _idTargetSv(): JsonField<String> = idTargetSv
+
+    /**
+     * Returns the raw JSON value of [inclinationDeltaV].
+     *
+     * Unlike [inclinationDeltaV], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("inclinationDeltaV")
+    @ExcludeMissing
+    fun _inclinationDeltaV(): JsonField<Double> = inclinationDeltaV
+
+    /**
+     * Returns the raw JSON value of [indicationSource].
+     *
+     * Unlike [indicationSource], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("indicationSource")
+    @ExcludeMissing
+    fun _indicationSource(): JsonField<String> = indicationSource
+
+    /**
+     * Returns the raw JSON value of [lonTol].
+     *
+     * Unlike [lonTol], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("lonTol") @ExcludeMissing fun _lonTol(): JsonField<Double> = lonTol
+
+    /**
+     * Returns the raw JSON value of [maxRange].
+     *
+     * Unlike [maxRange], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("maxRange") @ExcludeMissing fun _maxRange(): JsonField<Double> = maxRange
+
+    /**
+     * Returns the raw JSON value of [minPlaneSepAngle].
+     *
+     * Unlike [minPlaneSepAngle], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("minPlaneSepAngle")
+    @ExcludeMissing
+    fun _minPlaneSepAngle(): JsonField<Double> = minPlaneSepAngle
+
+    /**
+     * Returns the raw JSON value of [minPlaneSepEpoch].
+     *
+     * Unlike [minPlaneSepEpoch], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("minPlaneSepEpoch")
+    @ExcludeMissing
+    fun _minPlaneSepEpoch(): JsonField<OffsetDateTime> = minPlaneSepEpoch
+
+    /**
+     * Returns the raw JSON value of [minRange].
+     *
+     * Unlike [minRange], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("minRange") @ExcludeMissing fun _minRange(): JsonField<Double> = minRange
+
+    /**
+     * Returns the raw JSON value of [minRangeAnalysisDuration].
+     *
+     * Unlike [minRangeAnalysisDuration], this method doesn't throw if the JSON field has an
+     * unexpected type.
+     */
+    @JsonProperty("minRangeAnalysisDuration")
+    @ExcludeMissing
+    fun _minRangeAnalysisDuration(): JsonField<Double> = minRangeAnalysisDuration
+
+    /**
+     * Returns the raw JSON value of [minRangeEpoch].
+     *
+     * Unlike [minRangeEpoch], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("minRangeEpoch")
+    @ExcludeMissing
+    fun _minRangeEpoch(): JsonField<OffsetDateTime> = minRangeEpoch
+
+    /**
+     * Returns the raw JSON value of [notes].
+     *
+     * Unlike [notes], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("notes") @ExcludeMissing fun _notes(): JsonField<String> = notes
+
+    /**
+     * Returns the raw JSON value of [numSubIntervals].
+     *
+     * Unlike [numSubIntervals], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("numSubIntervals")
+    @ExcludeMissing
+    fun _numSubIntervals(): JsonField<Int> = numSubIntervals
+
+    /**
+     * Returns the raw JSON value of [orbitAlignDel].
+     *
+     * Unlike [orbitAlignDel], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("orbitAlignDel")
+    @ExcludeMissing
+    fun _orbitAlignDel(): JsonField<Double> = orbitAlignDel
+
+    /**
+     * Returns the raw JSON value of [orbitPlaneTol].
+     *
+     * Unlike [orbitPlaneTol], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("orbitPlaneTol")
+    @ExcludeMissing
+    fun _orbitPlaneTol(): JsonField<Double> = orbitPlaneTol
+
+    /**
+     * Returns the raw JSON value of [origin].
+     *
+     * Unlike [origin], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origin") @ExcludeMissing fun _origin(): JsonField<String> = origin
+
+    /**
+     * Returns the raw JSON value of [origNetwork].
+     *
+     * Unlike [origNetwork], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origNetwork") @ExcludeMissing fun _origNetwork(): JsonField<String> = origNetwork
+
+    /**
+     * Returns the raw JSON value of [origObjectId1].
+     *
+     * Unlike [origObjectId1], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origObjectId1")
+    @ExcludeMissing
+    fun _origObjectId1(): JsonField<String> = origObjectId1
+
+    /**
+     * Returns the raw JSON value of [origObjectId2].
+     *
+     * Unlike [origObjectId2], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("origObjectId2")
+    @ExcludeMissing
+    fun _origObjectId2(): JsonField<String> = origObjectId2
+
+    /**
+     * Returns the raw JSON value of [rangeThreshold].
+     *
+     * Unlike [rangeThreshold], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("rangeThreshold")
+    @ExcludeMissing
+    fun _rangeThreshold(): JsonField<Double> = rangeThreshold
+
+    /**
+     * Returns the raw JSON value of [rangeTol].
+     *
+     * Unlike [rangeTol], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("rangeTol") @ExcludeMissing fun _rangeTol(): JsonField<Double> = rangeTol
+
+    /**
+     * Returns the raw JSON value of [relPos].
+     *
+     * Unlike [relPos], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("relPos") @ExcludeMissing fun _relPos(): JsonField<List<Double>> = relPos
+
+    /**
+     * Returns the raw JSON value of [relPosMag].
+     *
+     * Unlike [relPosMag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("relPosMag") @ExcludeMissing fun _relPosMag(): JsonField<Double> = relPosMag
+
+    /**
+     * Returns the raw JSON value of [relSpeedMag].
+     *
+     * Unlike [relSpeedMag], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("relSpeedMag") @ExcludeMissing fun _relSpeedMag(): JsonField<Double> = relSpeedMag
+
+    /**
+     * Returns the raw JSON value of [relVel].
+     *
+     * Unlike [relVel], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("relVel") @ExcludeMissing fun _relVel(): JsonField<List<Double>> = relVel
+
+    /**
+     * Returns the raw JSON value of [satNo1].
+     *
+     * Unlike [satNo1], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("satNo1") @ExcludeMissing fun _satNo1(): JsonField<Int> = satNo1
+
+    /**
+     * Returns the raw JSON value of [satNo2].
+     *
+     * Unlike [satNo2], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("satNo2") @ExcludeMissing fun _satNo2(): JsonField<Int> = satNo2
+
+    /**
+     * Returns the raw JSON value of [sourceDl].
+     *
+     * Unlike [sourceDl], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("sourceDL") @ExcludeMissing fun _sourceDl(): JsonField<String> = sourceDl
+
+    /**
+     * Returns the raw JSON value of [stationLimLonTol].
+     *
+     * Unlike [stationLimLonTol], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("stationLimLonTol")
+    @ExcludeMissing
+    fun _stationLimLonTol(): JsonField<Double> = stationLimLonTol
+
+    /**
+     * Returns the raw JSON value of [targetSvEpoch].
+     *
+     * Unlike [targetSvEpoch], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("targetSVEpoch")
+    @ExcludeMissing
+    fun _targetSvEpoch(): JsonField<OffsetDateTime> = targetSvEpoch
+
+    /**
+     * Returns the raw JSON value of [totalDeltaV].
+     *
+     * Unlike [totalDeltaV], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("totalDeltaV") @ExcludeMissing fun _totalDeltaV(): JsonField<Double> = totalDeltaV
+
+    @JsonAnySetter
+    private fun putAdditionalProperty(key: String, value: JsonValue) {
+        additionalProperties.put(key, value)
+    }
+
+    @JsonAnyGetter
+    @ExcludeMissing
+    fun _additionalProperties(): Map<String, JsonValue> =
+        Collections.unmodifiableMap(additionalProperties)
+
+    fun toBuilder() = Builder().from(this)
+
+    companion object {
+
+        /**
+         * Returns a mutable builder for constructing an instance of [CloselyspacedobjectsAbridged].
+         *
+         * The following fields are required:
+         * ```java
+         * .classificationMarking()
+         * .csoState()
+         * .dataMode()
+         * .eventStartTime()
+         * .eventType()
+         * .source()
+         * ```
+         */
+        @JvmStatic fun builder() = Builder()
+    }
+
+    /** A builder for [CloselyspacedobjectsAbridged]. */
+    class Builder internal constructor() {
+
+        private var classificationMarking: JsonField<String>? = null
+        private var csoState: JsonField<String>? = null
+        private var dataMode: JsonField<DataMode>? = null
+        private var eventStartTime: JsonField<OffsetDateTime>? = null
+        private var eventType: JsonField<String>? = null
+        private var source: JsonField<String>? = null
+        private var id: JsonField<String> = JsonMissing.of()
+        private var actorSvEpoch: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var analysisDuration: JsonField<Double> = JsonMissing.of()
+        private var analysisEpoch: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var compType: JsonField<String> = JsonMissing.of()
+        private var createdAt: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var createdBy: JsonField<String> = JsonMissing.of()
+        private var csoDetails: JsonField<MutableList<CsoDetail>>? = null
+        private var deltaVTol: JsonField<Double> = JsonMissing.of()
+        private var durationThreshold: JsonField<Double> = JsonMissing.of()
+        private var eventEndTime: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var eventIntervalCoverage: JsonField<Double> = JsonMissing.of()
+        private var extId: JsonField<String> = JsonMissing.of()
+        private var hohmannDeltaV: JsonField<Double> = JsonMissing.of()
+        private var idActorSv: JsonField<String> = JsonMissing.of()
+        private var idOnOrbit1: JsonField<String> = JsonMissing.of()
+        private var idOnOrbit2: JsonField<String> = JsonMissing.of()
+        private var idTargetSv: JsonField<String> = JsonMissing.of()
+        private var inclinationDeltaV: JsonField<Double> = JsonMissing.of()
+        private var indicationSource: JsonField<String> = JsonMissing.of()
+        private var lonTol: JsonField<Double> = JsonMissing.of()
+        private var maxRange: JsonField<Double> = JsonMissing.of()
+        private var minPlaneSepAngle: JsonField<Double> = JsonMissing.of()
+        private var minPlaneSepEpoch: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var minRange: JsonField<Double> = JsonMissing.of()
+        private var minRangeAnalysisDuration: JsonField<Double> = JsonMissing.of()
+        private var minRangeEpoch: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var notes: JsonField<String> = JsonMissing.of()
+        private var numSubIntervals: JsonField<Int> = JsonMissing.of()
+        private var orbitAlignDel: JsonField<Double> = JsonMissing.of()
+        private var orbitPlaneTol: JsonField<Double> = JsonMissing.of()
+        private var origin: JsonField<String> = JsonMissing.of()
+        private var origNetwork: JsonField<String> = JsonMissing.of()
+        private var origObjectId1: JsonField<String> = JsonMissing.of()
+        private var origObjectId2: JsonField<String> = JsonMissing.of()
+        private var rangeThreshold: JsonField<Double> = JsonMissing.of()
+        private var rangeTol: JsonField<Double> = JsonMissing.of()
+        private var relPos: JsonField<MutableList<Double>>? = null
+        private var relPosMag: JsonField<Double> = JsonMissing.of()
+        private var relSpeedMag: JsonField<Double> = JsonMissing.of()
+        private var relVel: JsonField<MutableList<Double>>? = null
+        private var satNo1: JsonField<Int> = JsonMissing.of()
+        private var satNo2: JsonField<Int> = JsonMissing.of()
+        private var sourceDl: JsonField<String> = JsonMissing.of()
+        private var stationLimLonTol: JsonField<Double> = JsonMissing.of()
+        private var targetSvEpoch: JsonField<OffsetDateTime> = JsonMissing.of()
+        private var totalDeltaV: JsonField<Double> = JsonMissing.of()
+        private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+        @JvmSynthetic
+        internal fun from(closelyspacedobjectsAbridged: CloselyspacedobjectsAbridged) = apply {
+            classificationMarking = closelyspacedobjectsAbridged.classificationMarking
+            csoState = closelyspacedobjectsAbridged.csoState
+            dataMode = closelyspacedobjectsAbridged.dataMode
+            eventStartTime = closelyspacedobjectsAbridged.eventStartTime
+            eventType = closelyspacedobjectsAbridged.eventType
+            source = closelyspacedobjectsAbridged.source
+            id = closelyspacedobjectsAbridged.id
+            actorSvEpoch = closelyspacedobjectsAbridged.actorSvEpoch
+            analysisDuration = closelyspacedobjectsAbridged.analysisDuration
+            analysisEpoch = closelyspacedobjectsAbridged.analysisEpoch
+            compType = closelyspacedobjectsAbridged.compType
+            createdAt = closelyspacedobjectsAbridged.createdAt
+            createdBy = closelyspacedobjectsAbridged.createdBy
+            csoDetails = closelyspacedobjectsAbridged.csoDetails.map { it.toMutableList() }
+            deltaVTol = closelyspacedobjectsAbridged.deltaVTol
+            durationThreshold = closelyspacedobjectsAbridged.durationThreshold
+            eventEndTime = closelyspacedobjectsAbridged.eventEndTime
+            eventIntervalCoverage = closelyspacedobjectsAbridged.eventIntervalCoverage
+            extId = closelyspacedobjectsAbridged.extId
+            hohmannDeltaV = closelyspacedobjectsAbridged.hohmannDeltaV
+            idActorSv = closelyspacedobjectsAbridged.idActorSv
+            idOnOrbit1 = closelyspacedobjectsAbridged.idOnOrbit1
+            idOnOrbit2 = closelyspacedobjectsAbridged.idOnOrbit2
+            idTargetSv = closelyspacedobjectsAbridged.idTargetSv
+            inclinationDeltaV = closelyspacedobjectsAbridged.inclinationDeltaV
+            indicationSource = closelyspacedobjectsAbridged.indicationSource
+            lonTol = closelyspacedobjectsAbridged.lonTol
+            maxRange = closelyspacedobjectsAbridged.maxRange
+            minPlaneSepAngle = closelyspacedobjectsAbridged.minPlaneSepAngle
+            minPlaneSepEpoch = closelyspacedobjectsAbridged.minPlaneSepEpoch
+            minRange = closelyspacedobjectsAbridged.minRange
+            minRangeAnalysisDuration = closelyspacedobjectsAbridged.minRangeAnalysisDuration
+            minRangeEpoch = closelyspacedobjectsAbridged.minRangeEpoch
+            notes = closelyspacedobjectsAbridged.notes
+            numSubIntervals = closelyspacedobjectsAbridged.numSubIntervals
+            orbitAlignDel = closelyspacedobjectsAbridged.orbitAlignDel
+            orbitPlaneTol = closelyspacedobjectsAbridged.orbitPlaneTol
+            origin = closelyspacedobjectsAbridged.origin
+            origNetwork = closelyspacedobjectsAbridged.origNetwork
+            origObjectId1 = closelyspacedobjectsAbridged.origObjectId1
+            origObjectId2 = closelyspacedobjectsAbridged.origObjectId2
+            rangeThreshold = closelyspacedobjectsAbridged.rangeThreshold
+            rangeTol = closelyspacedobjectsAbridged.rangeTol
+            relPos = closelyspacedobjectsAbridged.relPos.map { it.toMutableList() }
+            relPosMag = closelyspacedobjectsAbridged.relPosMag
+            relSpeedMag = closelyspacedobjectsAbridged.relSpeedMag
+            relVel = closelyspacedobjectsAbridged.relVel.map { it.toMutableList() }
+            satNo1 = closelyspacedobjectsAbridged.satNo1
+            satNo2 = closelyspacedobjectsAbridged.satNo2
+            sourceDl = closelyspacedobjectsAbridged.sourceDl
+            stationLimLonTol = closelyspacedobjectsAbridged.stationLimLonTol
+            targetSvEpoch = closelyspacedobjectsAbridged.targetSvEpoch
+            totalDeltaV = closelyspacedobjectsAbridged.totalDeltaV
+            additionalProperties = closelyspacedobjectsAbridged.additionalProperties.toMutableMap()
+        }
+
+        /** Classification marking of the data in IC/CAPCO Portion-marked format. */
+        fun classificationMarking(classificationMarking: String) =
+            classificationMarking(JsonField.of(classificationMarking))
+
+        /**
+         * Sets [Builder.classificationMarking] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.classificationMarking] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+            this.classificationMarking = classificationMarking
+        }
+
+        /**
+         * Indicates the current state that characterizes Closely Spaced Objects (CSO) analysis
+         * steps and conclusions. Values include: ACTIVE, ACTUAL, CANCELED, CLOSED, COMPLETED,
+         * DETECTED, INDICATED, PENDING, PLANNED, POSSIBLE, PREDICTED, SEPARATED, UPDATED.
+         */
+        fun csoState(csoState: String) = csoState(JsonField.of(csoState))
+
+        /**
+         * Sets [Builder.csoState] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.csoState] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun csoState(csoState: JsonField<String>) = apply { this.csoState = csoState }
+
+        /**
+         * Indicator of whether the data is REAL, TEST, EXERCISE, or SIMULATED data:
+         *
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
+         *
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
+         *
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
+         *
+         * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+         */
+        fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
+
+        /**
+         * Sets [Builder.dataMode] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.dataMode] with a well-typed [DataMode] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+
+        /**
+         * Timestamp representing the events start time in ISO 8601 UTC format with millisecond
+         * precision.
+         */
+        fun eventStartTime(eventStartTime: OffsetDateTime) =
+            eventStartTime(JsonField.of(eventStartTime))
+
+        /**
+         * Sets [Builder.eventStartTime] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.eventStartTime] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun eventStartTime(eventStartTime: JsonField<OffsetDateTime>) = apply {
+            this.eventStartTime = eventStartTime
+        }
+
+        /**
+         * The type of event associated with this record. Values include: DOCK, UNDOCK, SEPARATION,
+         * RENDEZVOUS, PROXIMITY, PEZ, WEZ.
+         */
+        fun eventType(eventType: String) = eventType(JsonField.of(eventType))
+
+        /**
+         * Sets [Builder.eventType] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.eventType] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun eventType(eventType: JsonField<String>) = apply { this.eventType = eventType }
+
+        /** Source of the data. */
+        fun source(source: String) = source(JsonField.of(source))
+
+        /**
+         * Sets [Builder.source] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.source] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun source(source: JsonField<String>) = apply { this.source = source }
+
+        /** Unique identifier of the record, auto-generated by the system. */
+        fun id(id: String) = id(JsonField.of(id))
+
+        /**
+         * Sets [Builder.id] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.id] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun id(id: JsonField<String>) = apply { this.id = id }
+
+        /**
+         * State vector epoch time of the actor satellite in ISO 8601 UTC format with millisecond
+         * precision.
+         */
+        fun actorSvEpoch(actorSvEpoch: OffsetDateTime) = actorSvEpoch(JsonField.of(actorSvEpoch))
+
+        /**
+         * Sets [Builder.actorSvEpoch] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.actorSvEpoch] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun actorSvEpoch(actorSvEpoch: JsonField<OffsetDateTime>) = apply {
+            this.actorSvEpoch = actorSvEpoch
+        }
+
+        /** Timespan of the rendezvous analysis in seconds. */
+        fun analysisDuration(analysisDuration: Double) =
+            analysisDuration(JsonField.of(analysisDuration))
+
+        /**
+         * Sets [Builder.analysisDuration] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.analysisDuration] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun analysisDuration(analysisDuration: JsonField<Double>) = apply {
+            this.analysisDuration = analysisDuration
+        }
+
+        /**
+         * Epoch time of the beginning of the analysis period in ISO 8601 UTC format with
+         * millisecond precision.
+         */
+        fun analysisEpoch(analysisEpoch: OffsetDateTime) =
+            analysisEpoch(JsonField.of(analysisEpoch))
+
+        /**
+         * Sets [Builder.analysisEpoch] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.analysisEpoch] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun analysisEpoch(analysisEpoch: JsonField<OffsetDateTime>) = apply {
+            this.analysisEpoch = analysisEpoch
+        }
+
+        /** Computation type, values (e.g. PLANARALIGNMENT, LONGITUDE). */
+        fun compType(compType: String) = compType(JsonField.of(compType))
+
+        /**
+         * Sets [Builder.compType] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.compType] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun compType(compType: JsonField<String>) = apply { this.compType = compType }
+
+        /** Time the row was created in the database, auto-populated by the system. */
+        fun createdAt(createdAt: OffsetDateTime) = createdAt(JsonField.of(createdAt))
+
+        /**
+         * Sets [Builder.createdAt] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.createdAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun createdAt(createdAt: JsonField<OffsetDateTime>) = apply { this.createdAt = createdAt }
+
+        /** Application user who created the row in the database, auto-populated by the system. */
+        fun createdBy(createdBy: String) = createdBy(JsonField.of(createdBy))
+
+        /**
+         * Sets [Builder.createdBy] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.createdBy] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun createdBy(createdBy: JsonField<String>) = apply { this.createdBy = createdBy }
+
+        /**
+         * A collection of orbital metrics for the event at the start and end times, and the mean
+         * values of the primary and secondary objects, as well as the deltas between the primary
+         * and secondary objects.
+         */
+        fun csoDetails(csoDetails: List<CsoDetail>) = csoDetails(JsonField.of(csoDetails))
+
+        /**
+         * Sets [Builder.csoDetails] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.csoDetails] with a well-typed `List<CsoDetail>` value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun csoDetails(csoDetails: JsonField<List<CsoDetail>>) = apply {
+            this.csoDetails = csoDetails.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [CsoDetail] to [csoDetails].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addCsoDetail(csoDetail: CsoDetail) = apply {
+            csoDetails =
+                (csoDetails ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("csoDetails", it).add(csoDetail)
+                }
+        }
+
+        /** The tolerance value for the DeltaV, in kilometers per second. */
+        fun deltaVTol(deltaVTol: Double) = deltaVTol(JsonField.of(deltaVTol))
+
+        /**
+         * Sets [Builder.deltaVTol] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.deltaVTol] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun deltaVTol(deltaVTol: JsonField<Double>) = apply { this.deltaVTol = deltaVTol }
+
+        /** The threshold of the event duration in seconds. */
+        fun durationThreshold(durationThreshold: Double) =
+            durationThreshold(JsonField.of(durationThreshold))
+
+        /**
+         * Sets [Builder.durationThreshold] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.durationThreshold] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun durationThreshold(durationThreshold: JsonField<Double>) = apply {
+            this.durationThreshold = durationThreshold
+        }
+
+        /**
+         * Timestamp representing the events end time in ISO 8601 UTC format with millisecond
+         * precision.
+         */
+        fun eventEndTime(eventEndTime: OffsetDateTime) = eventEndTime(JsonField.of(eventEndTime))
+
+        /**
+         * Sets [Builder.eventEndTime] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.eventEndTime] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun eventEndTime(eventEndTime: JsonField<OffsetDateTime>) = apply {
+            this.eventEndTime = eventEndTime
+        }
+
+        /**
+         * Percentage of the event interval that is within the plane tolerance specified as a
+         * percent value between 0 and 100.
+         */
+        fun eventIntervalCoverage(eventIntervalCoverage: Double) =
+            eventIntervalCoverage(JsonField.of(eventIntervalCoverage))
+
+        /**
+         * Sets [Builder.eventIntervalCoverage] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.eventIntervalCoverage] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun eventIntervalCoverage(eventIntervalCoverage: JsonField<Double>) = apply {
+            this.eventIntervalCoverage = eventIntervalCoverage
+        }
+
+        /**
+         * Unique identifier of the record from the originating system. This field has no meaning
+         * within UDL and is provided as a convenience for systems that require tracking of an
+         * internal system generated ID.
+         */
+        fun extId(extId: String) = extId(JsonField.of(extId))
+
+        /**
+         * Sets [Builder.extId] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.extId] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun extId(extId: JsonField<String>) = apply { this.extId = extId }
+
+        /**
+         * The Hohmann DeltaV (kilometers per second) is the minimum delta velocity for the in-plane
+         * orbit change. The in-plane maneuvers change the semi-major axis (perigee and/or apogee).
+         * It is the minimum assuming two maneuvers; a lower delta velocity is possible with
+         * bi-elliptic transfers involving three maneuvers.
+         */
+        fun hohmannDeltaV(hohmannDeltaV: Double) = hohmannDeltaV(JsonField.of(hohmannDeltaV))
+
+        /**
+         * Sets [Builder.hohmannDeltaV] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.hohmannDeltaV] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun hohmannDeltaV(hohmannDeltaV: JsonField<Double>) = apply {
+            this.hohmannDeltaV = hohmannDeltaV
+        }
+
+        /**
+         * Optional ID of the UDL State Vector at epoch time of the actor satellite. When performing
+         * a create, this id will be ignored in favor of the UDL generated id of the actor state
+         * vector.
+         */
+        fun idActorSv(idActorSv: String) = idActorSv(JsonField.of(idActorSv))
+
+        /**
+         * Sets [Builder.idActorSv] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.idActorSv] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun idActorSv(idActorSv: JsonField<String>) = apply { this.idActorSv = idActorSv }
+
+        /**
+         * Unique identifier of the primary satellite on-orbit object, if correlated. For rendezvous
+         * and proximity operations, this is the target on-orbit object. When the secondary object
+         * is on the rendezvous capable list, this can be any object.
+         */
+        fun idOnOrbit1(idOnOrbit1: String) = idOnOrbit1(JsonField.of(idOnOrbit1))
+
+        /**
+         * Sets [Builder.idOnOrbit1] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.idOnOrbit1] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun idOnOrbit1(idOnOrbit1: JsonField<String>) = apply { this.idOnOrbit1 = idOnOrbit1 }
+
+        /**
+         * Unique identifier of the secondary satellite on-orbit object, if correlated. For
+         * rendezvous and proximity operations, this is the actor. When the primary object is a
+         * satellite being protected on the neighborhood watch list (NWL), this can be any object
+         * encroaching on the primary.
+         */
+        fun idOnOrbit2(idOnOrbit2: String) = idOnOrbit2(JsonField.of(idOnOrbit2))
+
+        /**
+         * Sets [Builder.idOnOrbit2] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.idOnOrbit2] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun idOnOrbit2(idOnOrbit2: JsonField<String>) = apply { this.idOnOrbit2 = idOnOrbit2 }
+
+        /**
+         * Optional ID of the UDL State Vector at epoch time of the target satellite. When
+         * performing a create, this id will be ignored in favor of the UDL generated id of the
+         * target state vector.
+         */
+        fun idTargetSv(idTargetSv: String) = idTargetSv(JsonField.of(idTargetSv))
+
+        /**
+         * Sets [Builder.idTargetSv] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.idTargetSv] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun idTargetSv(idTargetSv: JsonField<String>) = apply { this.idTargetSv = idTargetSv }
+
+        /**
+         * The Inclination DeltaV is the minimum delta velocity for the out-of-plane change,
+         * assuming alignment of the right ascensions measured in kilometers per second.
+         */
+        fun inclinationDeltaV(inclinationDeltaV: Double) =
+            inclinationDeltaV(JsonField.of(inclinationDeltaV))
+
+        /**
+         * Sets [Builder.inclinationDeltaV] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.inclinationDeltaV] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun inclinationDeltaV(inclinationDeltaV: JsonField<Double>) = apply {
+            this.inclinationDeltaV = inclinationDeltaV
+        }
+
+        /**
+         * Identifies the source of the indication, if the latest event info was manually input, not
+         * computed.
+         */
+        fun indicationSource(indicationSource: String) =
+            indicationSource(JsonField.of(indicationSource))
+
+        /**
+         * Sets [Builder.indicationSource] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.indicationSource] with a well-typed [String] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun indicationSource(indicationSource: JsonField<String>) = apply {
+            this.indicationSource = indicationSource
+        }
+
+        /** The tolerance value for the longitude in degrees. */
+        fun lonTol(lonTol: Double) = lonTol(JsonField.of(lonTol))
+
+        /**
+         * Sets [Builder.lonTol] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.lonTol] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun lonTol(lonTol: JsonField<Double>) = apply { this.lonTol = lonTol }
+
+        /**
+         * Maximum range (apogee and perigee differences) within the event interval measured in
+         * kilometers.
+         */
+        fun maxRange(maxRange: Double) = maxRange(JsonField.of(maxRange))
+
+        /**
+         * Sets [Builder.maxRange] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.maxRange] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun maxRange(maxRange: JsonField<Double>) = apply { this.maxRange = maxRange }
+
+        /**
+         * Minimum angle between the target's position and the projection of the actor's position
+         * into the target's nominal orbit plane over the event interval measured in degrees.
+         */
+        fun minPlaneSepAngle(minPlaneSepAngle: Double) =
+            minPlaneSepAngle(JsonField.of(minPlaneSepAngle))
+
+        /**
+         * Sets [Builder.minPlaneSepAngle] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.minPlaneSepAngle] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun minPlaneSepAngle(minPlaneSepAngle: JsonField<Double>) = apply {
+            this.minPlaneSepAngle = minPlaneSepAngle
+        }
+
+        /**
+         * Epoch time of the minimum in-plane separation angle occurrence in ISO 8601 UTC format
+         * with millisecond precision.
+         */
+        fun minPlaneSepEpoch(minPlaneSepEpoch: OffsetDateTime) =
+            minPlaneSepEpoch(JsonField.of(minPlaneSepEpoch))
+
+        /**
+         * Sets [Builder.minPlaneSepEpoch] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.minPlaneSepEpoch] with a well-typed [OffsetDateTime]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
+         */
+        fun minPlaneSepEpoch(minPlaneSepEpoch: JsonField<OffsetDateTime>) = apply {
+            this.minPlaneSepEpoch = minPlaneSepEpoch
+        }
+
+        /**
+         * Minimum range (apogee and perigee differences) within the event interval measured in
+         * kilometers.
+         */
+        fun minRange(minRange: Double) = minRange(JsonField.of(minRange))
+
+        /**
+         * Sets [Builder.minRange] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.minRange] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun minRange(minRange: JsonField<Double>) = apply { this.minRange = minRange }
+
+        /** Timespan of satellites within the range tolerance in seconds. */
+        fun minRangeAnalysisDuration(minRangeAnalysisDuration: Double) =
+            minRangeAnalysisDuration(JsonField.of(minRangeAnalysisDuration))
+
+        /**
+         * Sets [Builder.minRangeAnalysisDuration] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.minRangeAnalysisDuration] with a well-typed [Double]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
+         */
+        fun minRangeAnalysisDuration(minRangeAnalysisDuration: JsonField<Double>) = apply {
+            this.minRangeAnalysisDuration = minRangeAnalysisDuration
+        }
+
+        /**
+         * Epoch time of the minimum range occurrence in ISO 8601 UTC format with millisecond
+         * precision.
+         */
+        fun minRangeEpoch(minRangeEpoch: OffsetDateTime) =
+            minRangeEpoch(JsonField.of(minRangeEpoch))
+
+        /**
+         * Sets [Builder.minRangeEpoch] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.minRangeEpoch] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun minRangeEpoch(minRangeEpoch: JsonField<OffsetDateTime>) = apply {
+            this.minRangeEpoch = minRangeEpoch
+        }
+
+        /** Contains other descriptive information associated with an indicated event. */
+        fun notes(notes: String) = notes(JsonField.of(notes))
+
+        /**
+         * Sets [Builder.notes] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.notes] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun notes(notes: JsonField<String>) = apply { this.notes = notes }
+
+        /**
+         * The number of oscillations within the event interval which are within the plane
+         * tolerance.
+         */
+        fun numSubIntervals(numSubIntervals: Int) = numSubIntervals(JsonField.of(numSubIntervals))
+
+        /**
+         * Sets [Builder.numSubIntervals] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.numSubIntervals] with a well-typed [Int] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun numSubIntervals(numSubIntervals: JsonField<Int>) = apply {
+            this.numSubIntervals = numSubIntervals
+        }
+
+        /**
+         * The change in angle between the angular momentum vectors between the actor and target
+         * relative to plane orientation in degrees.
+         */
+        fun orbitAlignDel(orbitAlignDel: Double) = orbitAlignDel(JsonField.of(orbitAlignDel))
+
+        /**
+         * Sets [Builder.orbitAlignDel] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.orbitAlignDel] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun orbitAlignDel(orbitAlignDel: JsonField<Double>) = apply {
+            this.orbitAlignDel = orbitAlignDel
+        }
+
+        /** The tolerance value for the difference in the orbital plane measured in degrees. */
+        fun orbitPlaneTol(orbitPlaneTol: Double) = orbitPlaneTol(JsonField.of(orbitPlaneTol))
+
+        /**
+         * Sets [Builder.orbitPlaneTol] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.orbitPlaneTol] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun orbitPlaneTol(orbitPlaneTol: JsonField<Double>) = apply {
+            this.orbitPlaneTol = orbitPlaneTol
+        }
+
+        /**
+         * Originating system or organization which produced the data, if different from the source.
+         * The origin may be different than the source if the source was a mediating system which
+         * forwarded the data on behalf of the origin system. If null, the source may be assumed to
+         * be the origin.
+         */
+        fun origin(origin: String) = origin(JsonField.of(origin))
+
+        /**
+         * Sets [Builder.origin] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origin] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun origin(origin: JsonField<String>) = apply { this.origin = origin }
+
+        /**
+         * The originating source network on which this record was created, auto-populated by the
+         * system.
+         */
+        fun origNetwork(origNetwork: String) = origNetwork(JsonField.of(origNetwork))
+
+        /**
+         * Sets [Builder.origNetwork] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origNetwork] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun origNetwork(origNetwork: JsonField<String>) = apply { this.origNetwork = origNetwork }
+
+        /** Optional place holder for an OnOrbit ID that does not exist in UDL. */
+        fun origObjectId1(origObjectId1: String) = origObjectId1(JsonField.of(origObjectId1))
+
+        /**
+         * Sets [Builder.origObjectId1] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origObjectId1] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun origObjectId1(origObjectId1: JsonField<String>) = apply {
+            this.origObjectId1 = origObjectId1
+        }
+
+        /** Optional place holder for an OnOrbit ID that does not exist in UDL. */
+        fun origObjectId2(origObjectId2: String) = origObjectId2(JsonField.of(origObjectId2))
+
+        /**
+         * Sets [Builder.origObjectId2] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.origObjectId2] with a well-typed [String] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun origObjectId2(origObjectId2: JsonField<String>) = apply {
+            this.origObjectId2 = origObjectId2
+        }
+
+        /** The threshold of the event range in kilometers. */
+        fun rangeThreshold(rangeThreshold: Double) = rangeThreshold(JsonField.of(rangeThreshold))
+
+        /**
+         * Sets [Builder.rangeThreshold] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.rangeThreshold] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun rangeThreshold(rangeThreshold: JsonField<Double>) = apply {
+            this.rangeThreshold = rangeThreshold
+        }
+
+        /** The tolerance value for the range in kilometers. */
+        fun rangeTol(rangeTol: Double) = rangeTol(JsonField.of(rangeTol))
+
+        /**
+         * Sets [Builder.rangeTol] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.rangeTol] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun rangeTol(rangeTol: JsonField<Double>) = apply { this.rangeTol = rangeTol }
+
+        /**
+         * Indicates the relative position vector of the event occurrence measured in kilometers.
+         */
+        fun relPos(relPos: List<Double>) = relPos(JsonField.of(relPos))
+
+        /**
+         * Sets [Builder.relPos] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.relPos] with a well-typed `List<Double>` value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun relPos(relPos: JsonField<List<Double>>) = apply {
+            this.relPos = relPos.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [Double] to [relPos].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addRelPo(relPo: Double) = apply {
+            relPos =
+                (relPos ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("relPos", it).add(relPo)
+                }
+        }
+
+        /**
+         * Range of closest approach: relative position magnitude, in kilometers, of the difference
+         * in the physical position between the actor and target objects.
+         */
+        fun relPosMag(relPosMag: Double) = relPosMag(JsonField.of(relPosMag))
+
+        /**
+         * Sets [Builder.relPosMag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.relPosMag] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun relPosMag(relPosMag: JsonField<Double>) = apply { this.relPosMag = relPosMag }
+
+        /**
+         * Indicates the closure rate specified as a relative velocity magnitude in kilometers per
+         * second of the difference in the velocities between the actor and target objects.
+         */
+        fun relSpeedMag(relSpeedMag: Double) = relSpeedMag(JsonField.of(relSpeedMag))
+
+        /**
+         * Sets [Builder.relSpeedMag] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.relSpeedMag] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun relSpeedMag(relSpeedMag: JsonField<Double>) = apply { this.relSpeedMag = relSpeedMag }
+
+        /**
+         * Indicates the relative velocity vector of the event occurrence measured in kilometers per
+         * second.
+         */
+        fun relVel(relVel: List<Double>) = relVel(JsonField.of(relVel))
+
+        /**
+         * Sets [Builder.relVel] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.relVel] with a well-typed `List<Double>` value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun relVel(relVel: JsonField<List<Double>>) = apply {
+            this.relVel = relVel.map { it.toMutableList() }
+        }
+
+        /**
+         * Adds a single [Double] to [Builder.relVel].
+         *
+         * @throws IllegalStateException if the field was previously set to a non-list.
+         */
+        fun addRelVel(relVel: Double) = apply {
+            this.relVel =
+                (this.relVel ?: JsonField.of(mutableListOf())).also {
+                    checkKnown("relVel", it).add(relVel)
+                }
+        }
+
+        /** Satellite/catalog number of the target on-orbit primary object. */
+        fun satNo1(satNo1: Int) = satNo1(JsonField.of(satNo1))
+
+        /**
+         * Sets [Builder.satNo1] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.satNo1] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun satNo1(satNo1: JsonField<Int>) = apply { this.satNo1 = satNo1 }
+
+        /** Satellite/catalog number of the target on-orbit secondary object. */
+        fun satNo2(satNo2: Int) = satNo2(JsonField.of(satNo2))
+
+        /**
+         * Sets [Builder.satNo2] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.satNo2] with a well-typed [Int] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun satNo2(satNo2: JsonField<Int>) = apply { this.satNo2 = satNo2 }
+
+        /**
+         * The source data library from which this record was received. This could be a remote or
+         * tactical UDL or another data library. If null, the record should be assumed to have
+         * originated from the primary Enterprise UDL.
+         */
+        fun sourceDl(sourceDl: String) = sourceDl(JsonField.of(sourceDl))
+
+        /**
+         * Sets [Builder.sourceDl] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.sourceDl] with a well-typed [String] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun sourceDl(sourceDl: JsonField<String>) = apply { this.sourceDl = sourceDl }
+
+        /** The tolerance value for the optimal longitude for station-keeping in degrees. */
+        fun stationLimLonTol(stationLimLonTol: Double) =
+            stationLimLonTol(JsonField.of(stationLimLonTol))
+
+        /**
+         * Sets [Builder.stationLimLonTol] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.stationLimLonTol] with a well-typed [Double] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun stationLimLonTol(stationLimLonTol: JsonField<Double>) = apply {
+            this.stationLimLonTol = stationLimLonTol
+        }
+
+        /**
+         * State vector epoch time of the target satellite in ISO 8601 UTC format with millisecond
+         * precision.
+         */
+        fun targetSvEpoch(targetSvEpoch: OffsetDateTime) =
+            targetSvEpoch(JsonField.of(targetSvEpoch))
+
+        /**
+         * Sets [Builder.targetSvEpoch] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.targetSvEpoch] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun targetSvEpoch(targetSvEpoch: JsonField<OffsetDateTime>) = apply {
+            this.targetSvEpoch = targetSvEpoch
+        }
+
+        /**
+         * The Total DeltaV is the sum of the Hohmann and Inclination DeltaVs measured in kilometers
+         * per second.
+         */
+        fun totalDeltaV(totalDeltaV: Double) = totalDeltaV(JsonField.of(totalDeltaV))
+
+        /**
+         * Sets [Builder.totalDeltaV] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.totalDeltaV] with a well-typed [Double] value instead.
+         * This method is primarily for setting the field to an undocumented or not yet supported
+         * value.
+         */
+        fun totalDeltaV(totalDeltaV: JsonField<Double>) = apply { this.totalDeltaV = totalDeltaV }
+
+        fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.clear()
+            putAllAdditionalProperties(additionalProperties)
+        }
+
+        fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+            additionalProperties.put(key, value)
+        }
+
+        fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+            this.additionalProperties.putAll(additionalProperties)
+        }
+
+        fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+        fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalProperty)
+        }
+
+        /**
+         * Returns an immutable instance of [CloselyspacedobjectsAbridged].
+         *
+         * Further updates to this [Builder] will not mutate the returned instance.
+         *
+         * The following fields are required:
+         * ```java
+         * .classificationMarking()
+         * .csoState()
+         * .dataMode()
+         * .eventStartTime()
+         * .eventType()
+         * .source()
+         * ```
+         *
+         * @throws IllegalStateException if any required field is unset.
+         */
+        fun build(): CloselyspacedobjectsAbridged =
+            CloselyspacedobjectsAbridged(
+                checkRequired("classificationMarking", classificationMarking),
+                checkRequired("csoState", csoState),
+                checkRequired("dataMode", dataMode),
+                checkRequired("eventStartTime", eventStartTime),
+                checkRequired("eventType", eventType),
+                checkRequired("source", source),
+                id,
+                actorSvEpoch,
+                analysisDuration,
+                analysisEpoch,
+                compType,
+                createdAt,
+                createdBy,
+                (csoDetails ?: JsonMissing.of()).map { it.toImmutable() },
+                deltaVTol,
+                durationThreshold,
+                eventEndTime,
+                eventIntervalCoverage,
+                extId,
+                hohmannDeltaV,
+                idActorSv,
+                idOnOrbit1,
+                idOnOrbit2,
+                idTargetSv,
+                inclinationDeltaV,
+                indicationSource,
+                lonTol,
+                maxRange,
+                minPlaneSepAngle,
+                minPlaneSepEpoch,
+                minRange,
+                minRangeAnalysisDuration,
+                minRangeEpoch,
+                notes,
+                numSubIntervals,
+                orbitAlignDel,
+                orbitPlaneTol,
+                origin,
+                origNetwork,
+                origObjectId1,
+                origObjectId2,
+                rangeThreshold,
+                rangeTol,
+                (relPos ?: JsonMissing.of()).map { it.toImmutable() },
+                relPosMag,
+                relSpeedMag,
+                (relVel ?: JsonMissing.of()).map { it.toImmutable() },
+                satNo1,
+                satNo2,
+                sourceDl,
+                stationLimLonTol,
+                targetSvEpoch,
+                totalDeltaV,
+                additionalProperties.toMutableMap(),
+            )
+    }
+
+    private var validated: Boolean = false
+
+    fun validate(): CloselyspacedobjectsAbridged = apply {
+        if (validated) {
+            return@apply
+        }
+
+        classificationMarking()
+        csoState()
+        dataMode().validate()
+        eventStartTime()
+        eventType()
+        source()
+        id()
+        actorSvEpoch()
+        analysisDuration()
+        analysisEpoch()
+        compType()
+        createdAt()
+        createdBy()
+        csoDetails().ifPresent { it.forEach { it.validate() } }
+        deltaVTol()
+        durationThreshold()
+        eventEndTime()
+        eventIntervalCoverage()
+        extId()
+        hohmannDeltaV()
+        idActorSv()
+        idOnOrbit1()
+        idOnOrbit2()
+        idTargetSv()
+        inclinationDeltaV()
+        indicationSource()
+        lonTol()
+        maxRange()
+        minPlaneSepAngle()
+        minPlaneSepEpoch()
+        minRange()
+        minRangeAnalysisDuration()
+        minRangeEpoch()
+        notes()
+        numSubIntervals()
+        orbitAlignDel()
+        orbitPlaneTol()
+        origin()
+        origNetwork()
+        origObjectId1()
+        origObjectId2()
+        rangeThreshold()
+        rangeTol()
+        relPos()
+        relPosMag()
+        relSpeedMag()
+        relVel()
+        satNo1()
+        satNo2()
+        sourceDl()
+        stationLimLonTol()
+        targetSvEpoch()
+        totalDeltaV()
+        validated = true
+    }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: UnifieddatalibraryInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    @JvmSynthetic
+    internal fun validity(): Int =
+        (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+            (if (csoState.asKnown().isPresent) 1 else 0) +
+            (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+            (if (eventStartTime.asKnown().isPresent) 1 else 0) +
+            (if (eventType.asKnown().isPresent) 1 else 0) +
+            (if (source.asKnown().isPresent) 1 else 0) +
+            (if (id.asKnown().isPresent) 1 else 0) +
+            (if (actorSvEpoch.asKnown().isPresent) 1 else 0) +
+            (if (analysisDuration.asKnown().isPresent) 1 else 0) +
+            (if (analysisEpoch.asKnown().isPresent) 1 else 0) +
+            (if (compType.asKnown().isPresent) 1 else 0) +
+            (if (createdAt.asKnown().isPresent) 1 else 0) +
+            (if (createdBy.asKnown().isPresent) 1 else 0) +
+            (csoDetails.asKnown().getOrNull()?.sumOf { it.validity().toInt() } ?: 0) +
+            (if (deltaVTol.asKnown().isPresent) 1 else 0) +
+            (if (durationThreshold.asKnown().isPresent) 1 else 0) +
+            (if (eventEndTime.asKnown().isPresent) 1 else 0) +
+            (if (eventIntervalCoverage.asKnown().isPresent) 1 else 0) +
+            (if (extId.asKnown().isPresent) 1 else 0) +
+            (if (hohmannDeltaV.asKnown().isPresent) 1 else 0) +
+            (if (idActorSv.asKnown().isPresent) 1 else 0) +
+            (if (idOnOrbit1.asKnown().isPresent) 1 else 0) +
+            (if (idOnOrbit2.asKnown().isPresent) 1 else 0) +
+            (if (idTargetSv.asKnown().isPresent) 1 else 0) +
+            (if (inclinationDeltaV.asKnown().isPresent) 1 else 0) +
+            (if (indicationSource.asKnown().isPresent) 1 else 0) +
+            (if (lonTol.asKnown().isPresent) 1 else 0) +
+            (if (maxRange.asKnown().isPresent) 1 else 0) +
+            (if (minPlaneSepAngle.asKnown().isPresent) 1 else 0) +
+            (if (minPlaneSepEpoch.asKnown().isPresent) 1 else 0) +
+            (if (minRange.asKnown().isPresent) 1 else 0) +
+            (if (minRangeAnalysisDuration.asKnown().isPresent) 1 else 0) +
+            (if (minRangeEpoch.asKnown().isPresent) 1 else 0) +
+            (if (notes.asKnown().isPresent) 1 else 0) +
+            (if (numSubIntervals.asKnown().isPresent) 1 else 0) +
+            (if (orbitAlignDel.asKnown().isPresent) 1 else 0) +
+            (if (orbitPlaneTol.asKnown().isPresent) 1 else 0) +
+            (if (origin.asKnown().isPresent) 1 else 0) +
+            (if (origNetwork.asKnown().isPresent) 1 else 0) +
+            (if (origObjectId1.asKnown().isPresent) 1 else 0) +
+            (if (origObjectId2.asKnown().isPresent) 1 else 0) +
+            (if (rangeThreshold.asKnown().isPresent) 1 else 0) +
+            (if (rangeTol.asKnown().isPresent) 1 else 0) +
+            (relPos.asKnown().getOrNull()?.size ?: 0) +
+            (if (relPosMag.asKnown().isPresent) 1 else 0) +
+            (if (relSpeedMag.asKnown().isPresent) 1 else 0) +
+            (relVel.asKnown().getOrNull()?.size ?: 0) +
+            (if (satNo1.asKnown().isPresent) 1 else 0) +
+            (if (satNo2.asKnown().isPresent) 1 else 0) +
+            (if (sourceDl.asKnown().isPresent) 1 else 0) +
+            (if (stationLimLonTol.asKnown().isPresent) 1 else 0) +
+            (if (targetSvEpoch.asKnown().isPresent) 1 else 0) +
+            (if (totalDeltaV.asKnown().isPresent) 1 else 0)
+
+    /**
+     * Indicator of whether the data is REAL, TEST, EXERCISE, or SIMULATED data:
+     *
+     * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+     * analysis.
+     *
+     * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+     * requirements, and for validating technical, functional, and performance characteristics.
+     *
+     * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+     * both real and simulated data.
+     *
+     * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+     */
+    class DataMode @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
+
+        /**
+         * Returns this class instance's raw value.
+         *
+         * This is usually only useful if this instance was deserialized from data that doesn't
+         * match any known member, and you want to know that value. For example, if the SDK is on an
+         * older version than the API, then the API may respond with new members that the SDK is
+         * unaware of.
+         */
+        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+        companion object {
+
+            @JvmField val REAL = of("REAL")
+
+            @JvmField val TEST = of("TEST")
+
+            @JvmField val SIMULATED = of("SIMULATED")
+
+            @JvmField val EXERCISE = of("EXERCISE")
+
+            @JvmStatic fun of(value: String) = DataMode(JsonField.of(value))
+        }
+
+        /** An enum containing [DataMode]'s known values. */
+        enum class Known {
+            REAL,
+            TEST,
+            SIMULATED,
+            EXERCISE,
+        }
+
+        /**
+         * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
+         *
+         * An instance of [DataMode] can contain an unknown value in a couple of cases:
+         * - It was deserialized from data that doesn't match any known member. For example, if the
+         *   SDK is on an older version than the API, then the API may respond with new members that
+         *   the SDK is unaware of.
+         * - It was constructed with an arbitrary value using the [of] method.
+         */
+        enum class Value {
+            REAL,
+            TEST,
+            SIMULATED,
+            EXERCISE,
+            /** An enum member indicating that [DataMode] was instantiated with an unknown value. */
+            _UNKNOWN,
+        }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
+         * if the class was instantiated with an unknown value.
+         *
+         * Use the [known] method instead if you're certain the value is always known or if you want
+         * to throw for the unknown case.
+         */
+        fun value(): Value =
+            when (this) {
+                REAL -> Value.REAL
+                TEST -> Value.TEST
+                SIMULATED -> Value.SIMULATED
+                EXERCISE -> Value.EXERCISE
+                else -> Value._UNKNOWN
+            }
+
+        /**
+         * Returns an enum member corresponding to this class instance's value.
+         *
+         * Use the [value] method instead if you're uncertain the value is always known and don't
+         * want to throw for the unknown case.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a not a
+         *   known member.
+         */
+        fun known(): Known =
+            when (this) {
+                REAL -> Known.REAL
+                TEST -> Known.TEST
+                SIMULATED -> Known.SIMULATED
+                EXERCISE -> Known.EXERCISE
+                else -> throw UnifieddatalibraryInvalidDataException("Unknown DataMode: $value")
+            }
+
+        /**
+         * Returns this class instance's primitive wire representation.
+         *
+         * This differs from the [toString] method because that method is primarily for debugging
+         * and generally doesn't throw.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if this class instance's value does not
+         *   have the expected primitive type.
+         */
+        fun asString(): String =
+            _value().asString().orElseThrow {
+                UnifieddatalibraryInvalidDataException("Value is not a String")
+            }
+
+        private var validated: Boolean = false
+
+        fun validate(): DataMode = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: UnifieddatalibraryInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return other is DataMode && value == other.value
+        }
+
+        override fun hashCode() = value.hashCode()
+
+        override fun toString() = value.toString()
+    }
+
+    /**
+     * A collection of orbital metrics for the event at the start and end times, and the mean values
+     * of the primary and secondary objects, as well as the deltas between the primary and secondary
+     * objects.
+     */
+    class CsoDetail
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
+    private constructor(
+        private val objectEvent: JsonField<String>,
+        private val objectType: JsonField<String>,
+        private val id: JsonField<String>,
+        private val apogee: JsonField<Double>,
+        private val classificationMarking: JsonField<String>,
+        private val dataMode: JsonField<DataMode>,
+        private val idCso: JsonField<String>,
+        private val inclination: JsonField<Double>,
+        private val longitude: JsonField<Double>,
+        private val perigee: JsonField<Double>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
+    ) {
+
+        @JsonCreator
+        private constructor(
+            @JsonProperty("objectEvent")
+            @ExcludeMissing
+            objectEvent: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("objectType")
+            @ExcludeMissing
+            objectType: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("id") @ExcludeMissing id: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("apogee") @ExcludeMissing apogee: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("classificationMarking")
+            @ExcludeMissing
+            classificationMarking: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("dataMode")
+            @ExcludeMissing
+            dataMode: JsonField<DataMode> = JsonMissing.of(),
+            @JsonProperty("idCSO") @ExcludeMissing idCso: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("inclination")
+            @ExcludeMissing
+            inclination: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("longitude")
+            @ExcludeMissing
+            longitude: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("perigee") @ExcludeMissing perigee: JsonField<Double> = JsonMissing.of(),
+        ) : this(
+            objectEvent,
+            objectType,
+            id,
+            apogee,
+            classificationMarking,
+            dataMode,
+            idCso,
+            inclination,
+            longitude,
+            perigee,
+            mutableMapOf(),
+        )
+
+        /**
+         * The type of object event the metrics apply. Values consist of START, END, MEAN.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
+         */
+        fun objectEvent(): String = objectEvent.getRequired("objectEvent")
+
+        /**
+         * The type of the object for which the metrics apply. Values include PRIMARY, SECONDARY,
+         * DELTA.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   or is unexpectedly missing or null (e.g. if the server responded with an unexpected
+         *   value).
+         */
+        fun objectType(): String = objectType.getRequired("objectType")
+
+        /**
+         * Unique identifier of the record, auto-generated by the system.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun id(): Optional<String> = id.getOptional("id")
+
+        /**
+         * The orbit point furthest from the center of the earth in kilometers.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun apogee(): Optional<Double> = apogee.getOptional("apogee")
+
+        /**
+         * Classification marking of the data in IC/CAPCO Portion-marked format.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun classificationMarking(): Optional<String> =
+            classificationMarking.getOptional("classificationMarking")
+
+        /**
+         * Indicator of whether the data is REAL, TEST, EXERCISE, or SIMULATED data:
+         *
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
+         *
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
+         *
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
+         *
+         * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun dataMode(): Optional<DataMode> = dataMode.getOptional("dataMode")
+
+        /**
+         * Unique identifier of the parent CSO record, auto-populated by the system.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun idCso(): Optional<String> = idCso.getOptional("idCSO")
+
+        /**
+         * The angle between the equator and the orbit when looking from the center of the Earth in
+         * degrees from 0 to 180.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun inclination(): Optional<Double> = inclination.getOptional("inclination")
+
+        /**
+         * The longitude degree of the object measured in degrees from -180 to 180.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun longitude(): Optional<Double> = longitude.getOptional("longitude")
+
+        /**
+         * The orbit point nearest to the center of the earth in kilometers.
+         *
+         * @throws UnifieddatalibraryInvalidDataException if the JSON field has an unexpected type
+         *   (e.g. if the server responded with an unexpected value).
+         */
+        fun perigee(): Optional<Double> = perigee.getOptional("perigee")
+
+        /**
+         * Returns the raw JSON value of [objectEvent].
+         *
+         * Unlike [objectEvent], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("objectEvent")
+        @ExcludeMissing
+        fun _objectEvent(): JsonField<String> = objectEvent
+
+        /**
+         * Returns the raw JSON value of [objectType].
+         *
+         * Unlike [objectType], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("objectType")
+        @ExcludeMissing
+        fun _objectType(): JsonField<String> = objectType
+
+        /**
+         * Returns the raw JSON value of [id].
+         *
+         * Unlike [id], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("id") @ExcludeMissing fun _id(): JsonField<String> = id
+
+        /**
+         * Returns the raw JSON value of [apogee].
+         *
+         * Unlike [apogee], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("apogee") @ExcludeMissing fun _apogee(): JsonField<Double> = apogee
+
+        /**
+         * Returns the raw JSON value of [classificationMarking].
+         *
+         * Unlike [classificationMarking], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("classificationMarking")
+        @ExcludeMissing
+        fun _classificationMarking(): JsonField<String> = classificationMarking
+
+        /**
+         * Returns the raw JSON value of [dataMode].
+         *
+         * Unlike [dataMode], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("dataMode") @ExcludeMissing fun _dataMode(): JsonField<DataMode> = dataMode
+
+        /**
+         * Returns the raw JSON value of [idCso].
+         *
+         * Unlike [idCso], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("idCSO") @ExcludeMissing fun _idCso(): JsonField<String> = idCso
+
+        /**
+         * Returns the raw JSON value of [inclination].
+         *
+         * Unlike [inclination], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("inclination")
+        @ExcludeMissing
+        fun _inclination(): JsonField<Double> = inclination
+
+        /**
+         * Returns the raw JSON value of [longitude].
+         *
+         * Unlike [longitude], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("longitude") @ExcludeMissing fun _longitude(): JsonField<Double> = longitude
+
+        /**
+         * Returns the raw JSON value of [perigee].
+         *
+         * Unlike [perigee], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("perigee") @ExcludeMissing fun _perigee(): JsonField<Double> = perigee
+
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
+        fun toBuilder() = Builder().from(this)
+
+        companion object {
+
+            /**
+             * Returns a mutable builder for constructing an instance of [CsoDetail].
+             *
+             * The following fields are required:
+             * ```java
+             * .objectEvent()
+             * .objectType()
+             * ```
+             */
+            @JvmStatic fun builder() = Builder()
+        }
+
+        /** A builder for [CsoDetail]. */
+        class Builder internal constructor() {
+
+            private var objectEvent: JsonField<String>? = null
+            private var objectType: JsonField<String>? = null
+            private var id: JsonField<String> = JsonMissing.of()
+            private var apogee: JsonField<Double> = JsonMissing.of()
+            private var classificationMarking: JsonField<String> = JsonMissing.of()
+            private var dataMode: JsonField<DataMode> = JsonMissing.of()
+            private var idCso: JsonField<String> = JsonMissing.of()
+            private var inclination: JsonField<Double> = JsonMissing.of()
+            private var longitude: JsonField<Double> = JsonMissing.of()
+            private var perigee: JsonField<Double> = JsonMissing.of()
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+            @JvmSynthetic
+            internal fun from(csoDetail: CsoDetail) = apply {
+                objectEvent = csoDetail.objectEvent
+                objectType = csoDetail.objectType
+                id = csoDetail.id
+                apogee = csoDetail.apogee
+                classificationMarking = csoDetail.classificationMarking
+                dataMode = csoDetail.dataMode
+                idCso = csoDetail.idCso
+                inclination = csoDetail.inclination
+                longitude = csoDetail.longitude
+                perigee = csoDetail.perigee
+                additionalProperties = csoDetail.additionalProperties.toMutableMap()
+            }
+
+            /** The type of object event the metrics apply. Values consist of START, END, MEAN. */
+            fun objectEvent(objectEvent: String) = objectEvent(JsonField.of(objectEvent))
+
+            /**
+             * Sets [Builder.objectEvent] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.objectEvent] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun objectEvent(objectEvent: JsonField<String>) = apply {
+                this.objectEvent = objectEvent
+            }
+
+            /**
+             * The type of the object for which the metrics apply. Values include PRIMARY,
+             * SECONDARY, DELTA.
+             */
+            fun objectType(objectType: String) = objectType(JsonField.of(objectType))
+
+            /**
+             * Sets [Builder.objectType] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.objectType] with a well-typed [String] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun objectType(objectType: JsonField<String>) = apply { this.objectType = objectType }
+
+            /** Unique identifier of the record, auto-generated by the system. */
+            fun id(id: String) = id(JsonField.of(id))
+
+            /**
+             * Sets [Builder.id] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.id] with a well-typed [String] value instead. This
+             * method is primarily for setting the field to an undocumented or not yet supported
+             * value.
+             */
+            fun id(id: JsonField<String>) = apply { this.id = id }
+
+            /** The orbit point furthest from the center of the earth in kilometers. */
+            fun apogee(apogee: Double) = apogee(JsonField.of(apogee))
+
+            /**
+             * Sets [Builder.apogee] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.apogee] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun apogee(apogee: JsonField<Double>) = apply { this.apogee = apogee }
+
+            /** Classification marking of the data in IC/CAPCO Portion-marked format. */
+            fun classificationMarking(classificationMarking: String) =
+                classificationMarking(JsonField.of(classificationMarking))
+
+            /**
+             * Sets [Builder.classificationMarking] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.classificationMarking] with a well-typed [String]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun classificationMarking(classificationMarking: JsonField<String>) = apply {
+                this.classificationMarking = classificationMarking
+            }
+
+            /**
+             * Indicator of whether the data is REAL, TEST, EXERCISE, or SIMULATED data:
+             *
+             * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events,
+             * and analysis.
+             *
+             * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+             * requirements, and for validating technical, functional, and performance
+             * characteristics.
+             *
+             * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may
+             * include both real and simulated data.
+             *
+             * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+             */
+            fun dataMode(dataMode: DataMode) = dataMode(JsonField.of(dataMode))
+
+            /**
+             * Sets [Builder.dataMode] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.dataMode] with a well-typed [DataMode] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun dataMode(dataMode: JsonField<DataMode>) = apply { this.dataMode = dataMode }
+
+            /** Unique identifier of the parent CSO record, auto-populated by the system. */
+            fun idCso(idCso: String) = idCso(JsonField.of(idCso))
+
+            /**
+             * Sets [Builder.idCso] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.idCso] with a well-typed [String] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun idCso(idCso: JsonField<String>) = apply { this.idCso = idCso }
+
+            /**
+             * The angle between the equator and the orbit when looking from the center of the Earth
+             * in degrees from 0 to 180.
+             */
+            fun inclination(inclination: Double) = inclination(JsonField.of(inclination))
+
+            /**
+             * Sets [Builder.inclination] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.inclination] with a well-typed [Double] value
+             * instead. This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun inclination(inclination: JsonField<Double>) = apply {
+                this.inclination = inclination
+            }
+
+            /** The longitude degree of the object measured in degrees from -180 to 180. */
+            fun longitude(longitude: Double) = longitude(JsonField.of(longitude))
+
+            /**
+             * Sets [Builder.longitude] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.longitude] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun longitude(longitude: JsonField<Double>) = apply { this.longitude = longitude }
+
+            /** The orbit point nearest to the center of the earth in kilometers. */
+            fun perigee(perigee: Double) = perigee(JsonField.of(perigee))
+
+            /**
+             * Sets [Builder.perigee] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.perigee] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun perigee(perigee: JsonField<Double>) = apply { this.perigee = perigee }
+
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
+            /**
+             * Returns an immutable instance of [CsoDetail].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             *
+             * The following fields are required:
+             * ```java
+             * .objectEvent()
+             * .objectType()
+             * ```
+             *
+             * @throws IllegalStateException if any required field is unset.
+             */
+            fun build(): CsoDetail =
+                CsoDetail(
+                    checkRequired("objectEvent", objectEvent),
+                    checkRequired("objectType", objectType),
+                    id,
+                    apogee,
+                    classificationMarking,
+                    dataMode,
+                    idCso,
+                    inclination,
+                    longitude,
+                    perigee,
+                    additionalProperties.toMutableMap(),
+                )
+        }
+
+        private var validated: Boolean = false
+
+        fun validate(): CsoDetail = apply {
+            if (validated) {
+                return@apply
+            }
+
+            objectEvent()
+            objectType()
+            id()
+            apogee()
+            classificationMarking()
+            dataMode().ifPresent { it.validate() }
+            idCso()
+            inclination()
+            longitude()
+            perigee()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: UnifieddatalibraryInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        @JvmSynthetic
+        internal fun validity(): Int =
+            (if (objectEvent.asKnown().isPresent) 1 else 0) +
+                (if (objectType.asKnown().isPresent) 1 else 0) +
+                (if (id.asKnown().isPresent) 1 else 0) +
+                (if (apogee.asKnown().isPresent) 1 else 0) +
+                (if (classificationMarking.asKnown().isPresent) 1 else 0) +
+                (dataMode.asKnown().getOrNull()?.validity() ?: 0) +
+                (if (idCso.asKnown().isPresent) 1 else 0) +
+                (if (inclination.asKnown().isPresent) 1 else 0) +
+                (if (longitude.asKnown().isPresent) 1 else 0) +
+                (if (perigee.asKnown().isPresent) 1 else 0)
+
+        /**
+         * Indicator of whether the data is REAL, TEST, EXERCISE, or SIMULATED data:
+         *
+         * REAL:&nbsp;Data collected or produced that pertains to real-world objects, events, and
+         * analysis.
+         *
+         * TEST:&nbsp;Specific datasets used to evaluate compliance with specifications and
+         * requirements, and for validating technical, functional, and performance characteristics.
+         *
+         * EXERCISE:&nbsp;Data pertaining to a government or military exercise. The data may include
+         * both real and simulated data.
+         *
+         * SIMULATED:&nbsp;Synthetic data generated by a model to mimic real-world datasets.
+         */
+        class DataMode @JsonCreator private constructor(private val value: JsonField<String>) :
+            Enum {
+
+            /**
+             * Returns this class instance's raw value.
+             *
+             * This is usually only useful if this instance was deserialized from data that doesn't
+             * match any known member, and you want to know that value. For example, if the SDK is
+             * on an older version than the API, then the API may respond with new members that the
+             * SDK is unaware of.
+             */
+            @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
+
+            companion object {
+
+                @JvmField val REAL = of("REAL")
+
+                @JvmField val TEST = of("TEST")
+
+                @JvmField val SIMULATED = of("SIMULATED")
+
+                @JvmField val EXERCISE = of("EXERCISE")
+
+                @JvmStatic fun of(value: String) = DataMode(JsonField.of(value))
+            }
+
+            /** An enum containing [DataMode]'s known values. */
+            enum class Known {
+                REAL,
+                TEST,
+                SIMULATED,
+                EXERCISE,
+            }
+
+            /**
+             * An enum containing [DataMode]'s known values, as well as an [_UNKNOWN] member.
+             *
+             * An instance of [DataMode] can contain an unknown value in a couple of cases:
+             * - It was deserialized from data that doesn't match any known member. For example, if
+             *   the SDK is on an older version than the API, then the API may respond with new
+             *   members that the SDK is unaware of.
+             * - It was constructed with an arbitrary value using the [of] method.
+             */
+            enum class Value {
+                REAL,
+                TEST,
+                SIMULATED,
+                EXERCISE,
+                /**
+                 * An enum member indicating that [DataMode] was instantiated with an unknown value.
+                 */
+                _UNKNOWN,
+            }
+
+            /**
+             * Returns an enum member corresponding to this class instance's value, or
+             * [Value._UNKNOWN] if the class was instantiated with an unknown value.
+             *
+             * Use the [known] method instead if you're certain the value is always known or if you
+             * want to throw for the unknown case.
+             */
+            fun value(): Value =
+                when (this) {
+                    REAL -> Value.REAL
+                    TEST -> Value.TEST
+                    SIMULATED -> Value.SIMULATED
+                    EXERCISE -> Value.EXERCISE
+                    else -> Value._UNKNOWN
+                }
+
+            /**
+             * Returns an enum member corresponding to this class instance's value.
+             *
+             * Use the [value] method instead if you're uncertain the value is always known and
+             * don't want to throw for the unknown case.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value is a
+             *   not a known member.
+             */
+            fun known(): Known =
+                when (this) {
+                    REAL -> Known.REAL
+                    TEST -> Known.TEST
+                    SIMULATED -> Known.SIMULATED
+                    EXERCISE -> Known.EXERCISE
+                    else -> throw UnifieddatalibraryInvalidDataException("Unknown DataMode: $value")
+                }
+
+            /**
+             * Returns this class instance's primitive wire representation.
+             *
+             * This differs from the [toString] method because that method is primarily for
+             * debugging and generally doesn't throw.
+             *
+             * @throws UnifieddatalibraryInvalidDataException if this class instance's value does
+             *   not have the expected primitive type.
+             */
+            fun asString(): String =
+                _value().asString().orElseThrow {
+                    UnifieddatalibraryInvalidDataException("Value is not a String")
+                }
+
+            private var validated: Boolean = false
+
+            fun validate(): DataMode = apply {
+                if (validated) {
+                    return@apply
+                }
+
+                known()
+                validated = true
+            }
+
+            fun isValid(): Boolean =
+                try {
+                    validate()
+                    true
+                } catch (e: UnifieddatalibraryInvalidDataException) {
+                    false
+                }
+
+            /**
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
+             *
+             * Used for best match union deserialization.
+             */
+            @JvmSynthetic internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
+            override fun equals(other: Any?): Boolean {
+                if (this === other) {
+                    return true
+                }
+
+                return other is DataMode && value == other.value
+            }
+
+            override fun hashCode() = value.hashCode()
+
+            override fun toString() = value.toString()
+        }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return other is CsoDetail &&
+                objectEvent == other.objectEvent &&
+                objectType == other.objectType &&
+                id == other.id &&
+                apogee == other.apogee &&
+                classificationMarking == other.classificationMarking &&
+                dataMode == other.dataMode &&
+                idCso == other.idCso &&
+                inclination == other.inclination &&
+                longitude == other.longitude &&
+                perigee == other.perigee &&
+                additionalProperties == other.additionalProperties
+        }
+
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                objectEvent,
+                objectType,
+                id,
+                apogee,
+                classificationMarking,
+                dataMode,
+                idCso,
+                inclination,
+                longitude,
+                perigee,
+                additionalProperties,
+            )
+        }
+
+        override fun hashCode(): Int = hashCode
+
+        override fun toString() =
+            "CsoDetail{objectEvent=$objectEvent, objectType=$objectType, id=$id, apogee=$apogee, classificationMarking=$classificationMarking, dataMode=$dataMode, idCso=$idCso, inclination=$inclination, longitude=$longitude, perigee=$perigee, additionalProperties=$additionalProperties}"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        return other is CloselyspacedobjectsAbridged &&
+            classificationMarking == other.classificationMarking &&
+            csoState == other.csoState &&
+            dataMode == other.dataMode &&
+            eventStartTime == other.eventStartTime &&
+            eventType == other.eventType &&
+            source == other.source &&
+            id == other.id &&
+            actorSvEpoch == other.actorSvEpoch &&
+            analysisDuration == other.analysisDuration &&
+            analysisEpoch == other.analysisEpoch &&
+            compType == other.compType &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            csoDetails == other.csoDetails &&
+            deltaVTol == other.deltaVTol &&
+            durationThreshold == other.durationThreshold &&
+            eventEndTime == other.eventEndTime &&
+            eventIntervalCoverage == other.eventIntervalCoverage &&
+            extId == other.extId &&
+            hohmannDeltaV == other.hohmannDeltaV &&
+            idActorSv == other.idActorSv &&
+            idOnOrbit1 == other.idOnOrbit1 &&
+            idOnOrbit2 == other.idOnOrbit2 &&
+            idTargetSv == other.idTargetSv &&
+            inclinationDeltaV == other.inclinationDeltaV &&
+            indicationSource == other.indicationSource &&
+            lonTol == other.lonTol &&
+            maxRange == other.maxRange &&
+            minPlaneSepAngle == other.minPlaneSepAngle &&
+            minPlaneSepEpoch == other.minPlaneSepEpoch &&
+            minRange == other.minRange &&
+            minRangeAnalysisDuration == other.minRangeAnalysisDuration &&
+            minRangeEpoch == other.minRangeEpoch &&
+            notes == other.notes &&
+            numSubIntervals == other.numSubIntervals &&
+            orbitAlignDel == other.orbitAlignDel &&
+            orbitPlaneTol == other.orbitPlaneTol &&
+            origin == other.origin &&
+            origNetwork == other.origNetwork &&
+            origObjectId1 == other.origObjectId1 &&
+            origObjectId2 == other.origObjectId2 &&
+            rangeThreshold == other.rangeThreshold &&
+            rangeTol == other.rangeTol &&
+            relPos == other.relPos &&
+            relPosMag == other.relPosMag &&
+            relSpeedMag == other.relSpeedMag &&
+            relVel == other.relVel &&
+            satNo1 == other.satNo1 &&
+            satNo2 == other.satNo2 &&
+            sourceDl == other.sourceDl &&
+            stationLimLonTol == other.stationLimLonTol &&
+            targetSvEpoch == other.targetSvEpoch &&
+            totalDeltaV == other.totalDeltaV &&
+            additionalProperties == other.additionalProperties
+    }
+
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            classificationMarking,
+            csoState,
+            dataMode,
+            eventStartTime,
+            eventType,
+            source,
+            id,
+            actorSvEpoch,
+            analysisDuration,
+            analysisEpoch,
+            compType,
+            createdAt,
+            createdBy,
+            csoDetails,
+            deltaVTol,
+            durationThreshold,
+            eventEndTime,
+            eventIntervalCoverage,
+            extId,
+            hohmannDeltaV,
+            idActorSv,
+            idOnOrbit1,
+            idOnOrbit2,
+            idTargetSv,
+            inclinationDeltaV,
+            indicationSource,
+            lonTol,
+            maxRange,
+            minPlaneSepAngle,
+            minPlaneSepEpoch,
+            minRange,
+            minRangeAnalysisDuration,
+            minRangeEpoch,
+            notes,
+            numSubIntervals,
+            orbitAlignDel,
+            orbitPlaneTol,
+            origin,
+            origNetwork,
+            origObjectId1,
+            origObjectId2,
+            rangeThreshold,
+            rangeTol,
+            relPos,
+            relPosMag,
+            relSpeedMag,
+            relVel,
+            satNo1,
+            satNo2,
+            sourceDl,
+            stationLimLonTol,
+            targetSvEpoch,
+            totalDeltaV,
+            additionalProperties,
+        )
+    }
+
+    override fun hashCode(): Int = hashCode
+
+    override fun toString() =
+        "CloselyspacedobjectsAbridged{classificationMarking=$classificationMarking, csoState=$csoState, dataMode=$dataMode, eventStartTime=$eventStartTime, eventType=$eventType, source=$source, id=$id, actorSvEpoch=$actorSvEpoch, analysisDuration=$analysisDuration, analysisEpoch=$analysisEpoch, compType=$compType, createdAt=$createdAt, createdBy=$createdBy, csoDetails=$csoDetails, deltaVTol=$deltaVTol, durationThreshold=$durationThreshold, eventEndTime=$eventEndTime, eventIntervalCoverage=$eventIntervalCoverage, extId=$extId, hohmannDeltaV=$hohmannDeltaV, idActorSv=$idActorSv, idOnOrbit1=$idOnOrbit1, idOnOrbit2=$idOnOrbit2, idTargetSv=$idTargetSv, inclinationDeltaV=$inclinationDeltaV, indicationSource=$indicationSource, lonTol=$lonTol, maxRange=$maxRange, minPlaneSepAngle=$minPlaneSepAngle, minPlaneSepEpoch=$minPlaneSepEpoch, minRange=$minRange, minRangeAnalysisDuration=$minRangeAnalysisDuration, minRangeEpoch=$minRangeEpoch, notes=$notes, numSubIntervals=$numSubIntervals, orbitAlignDel=$orbitAlignDel, orbitPlaneTol=$orbitPlaneTol, origin=$origin, origNetwork=$origNetwork, origObjectId1=$origObjectId1, origObjectId2=$origObjectId2, rangeThreshold=$rangeThreshold, rangeTol=$rangeTol, relPos=$relPos, relPosMag=$relPosMag, relSpeedMag=$relSpeedMag, relVel=$relVel, satNo1=$satNo1, satNo2=$satNo2, sourceDl=$sourceDl, stationLimLonTol=$stationLimLonTol, targetSvEpoch=$targetSvEpoch, totalDeltaV=$totalDeltaV, additionalProperties=$additionalProperties}"
+}

@@ -81,6 +81,7 @@ internal class ProGuardCompatibilityTest {
         assertThat(client.beamContours()).isNotNull()
         assertThat(client.buses()).isNotNull()
         assertThat(client.channels()).isNotNull()
+        assertThat(client.closelyspacedobjects()).isNotNull()
         assertThat(client.collectRequests()).isNotNull()
         assertThat(client.collectResponses()).isNotNull()
         assertThat(client.comm()).isNotNull()
