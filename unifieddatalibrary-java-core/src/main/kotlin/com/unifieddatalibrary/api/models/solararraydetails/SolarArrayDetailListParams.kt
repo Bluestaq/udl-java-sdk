@@ -33,8 +33,8 @@ private constructor(
 
     /**
      * (One or more of fields 'classificationMarking, dataMode, source' are required.) Indicator of
-     * whether the data is REAL, TEST, SIMULATED, or EXERCISE data. (REAL, TEST, SIMULATED, or
-     * EXERCISE)
+     * whether the data is REAL, TEST, EXERCISE, or SIMULATED data. (REAL, TEST, EXERCISE, or
+     * SIMULATED)
      */
     fun dataMode(): Optional<String> = Optional.ofNullable(dataMode)
 
@@ -105,8 +105,8 @@ private constructor(
 
         /**
          * (One or more of fields 'classificationMarking, dataMode, source' are required.) Indicator
-         * of whether the data is REAL, TEST, SIMULATED, or EXERCISE data. (REAL, TEST, SIMULATED,
-         * or EXERCISE)
+         * of whether the data is REAL, TEST, EXERCISE, or SIMULATED data. (REAL, TEST, EXERCISE, or
+         * SIMULATED)
          */
         fun dataMode(dataMode: String?) = apply { this.dataMode = dataMode }
 
