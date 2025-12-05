@@ -29,6 +29,7 @@ import com.unifieddatalibrary.api.services.async.BeamContourServiceAsync
 import com.unifieddatalibrary.api.services.async.BeamServiceAsync
 import com.unifieddatalibrary.api.services.async.BusServiceAsync
 import com.unifieddatalibrary.api.services.async.ChannelServiceAsync
+import com.unifieddatalibrary.api.services.async.CloselyspacedobjectServiceAsync
 import com.unifieddatalibrary.api.services.async.CollectRequestServiceAsync
 import com.unifieddatalibrary.api.services.async.CollectResponseServiceAsync
 import com.unifieddatalibrary.api.services.async.CommServiceAsync
@@ -258,6 +259,8 @@ interface UnifieddatalibraryClientAsync {
     fun buses(): BusServiceAsync
 
     fun channels(): ChannelServiceAsync
+
+    fun closelyspacedobjects(): CloselyspacedobjectServiceAsync
 
     fun collectRequests(): CollectRequestServiceAsync
 
@@ -618,6 +621,8 @@ interface UnifieddatalibraryClientAsync {
         fun buses(): BusServiceAsync.WithRawResponse
 
         fun channels(): ChannelServiceAsync.WithRawResponse
+
+        fun closelyspacedobjects(): CloselyspacedobjectServiceAsync.WithRawResponse
 
         fun collectRequests(): CollectRequestServiceAsync.WithRawResponse
 
