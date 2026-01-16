@@ -53,6 +53,7 @@ fun jsonMapper(): JsonMapper =
         }
         .withCoercionConfig(LogicalType.Integer) {
             it.setCoercion(CoercionInputShape.Boolean, CoercionAction.Fail)
+                .setCoercion(CoercionInputShape.Float, CoercionAction.Fail)
                 .setCoercion(CoercionInputShape.String, CoercionAction.Fail)
                 .setCoercion(CoercionInputShape.Array, CoercionAction.Fail)
                 .setCoercion(CoercionInputShape.Object, CoercionAction.Fail)
