@@ -2,13 +2,22 @@
 
 <!-- x-release-please-start-version -->
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.unifieddatalibrary.api/unifieddatalibrary-java)](https://central.sonatype.com/artifact/com.unifieddatalibrary.api/unifieddatalibrary-java/0.7.0)
+[![Maven Central](https://img.shields.io/maven-central/v/com.unifieddatalibrary.api/unifieddatalibrary-java)](https://central.sonatype.com/artifact/com.unifieddatalibrary.api/unifieddatalibrary-java/0.8.0)
 
 <!-- x-release-please-end -->
 
 The Unifieddatalibrary Java SDK provides convenient access to the [Unifieddatalibrary REST API](https://unifieddatalibrary.com/storefront/#/api-docs) from applications written in Java.
 
 It is generated with [Stainless](https://www.stainless.com/).
+
+## MCP Server
+
+Use the Unifieddatalibrary MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.
+
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=unified-data-library-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsInVuaWZpZWQtZGF0YS1saWJyYXJ5LW1jcCJdfQ)
+[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22unified-data-library-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22unified-data-library-mcp%22%5D%7D)
+
+> Note: You may need to set environment variables in your MCP client.
 
 The REST API documentation can be found on [unifieddatalibrary.com](https://unifieddatalibrary.com/storefront/#/api-docs).
 
@@ -19,7 +28,7 @@ The REST API documentation can be found on [unifieddatalibrary.com](https://unif
 ### Gradle
 
 ```kotlin
-implementation("com.unifieddatalibrary.api:unifieddatalibrary-java:0.7.0")
+implementation("com.unifieddatalibrary.api:unifieddatalibrary-java:0.8.0")
 ```
 
 ### Maven
@@ -28,7 +37,7 @@ implementation("com.unifieddatalibrary.api:unifieddatalibrary-java:0.7.0")
 <dependency>
   <groupId>com.unifieddatalibrary.api</groupId>
   <artifactId>unifieddatalibrary-java</artifactId>
-  <version>0.7.0</version>
+  <version>0.8.0</version>
 </dependency>
 ```
 
@@ -459,6 +468,8 @@ If the SDK threw an exception, but you're _certain_ the version is compatible, t
 
 > [!CAUTION]
 > We make no guarantee that the SDK works correctly when the Jackson version check is disabled.
+
+Also note that there are bugs in older Jackson versions that can affect the SDK. We don't work around all Jackson bugs ([example](https://github.com/FasterXML/jackson-databind/issues/3240)) and expect users to upgrade Jackson for those instead.
 
 ## Network options
 
