@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.8.0 (2026-01-16)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **client:** add `HttpRequest#url()` method ([df9007d](https://github.com/Bluestaq/udl-java-sdk/commit/df9007d90e689d271609bf12ff8253e829c348bb))
+* **client:** allow configuring dispatcher executor service ([72db58e](https://github.com/Bluestaq/udl-java-sdk/commit/72db58ef185c7ec18b6ccd0675e725a49b03c80c))
+
+
+### Bug Fixes
+
+* **client:** disallow coercion from float to int ([7fdceb8](https://github.com/Bluestaq/udl-java-sdk/commit/7fdceb80c1f90bf6c99ea898a8926a1d76f53601))
+* **client:** fully respect max retries ([da90298](https://github.com/Bluestaq/udl-java-sdk/commit/da9029896a1689833747a3b30d30ac9dddc16566))
+* **client:** send retry count header for max retries 0 ([da90298](https://github.com/Bluestaq/udl-java-sdk/commit/da9029896a1689833747a3b30d30ac9dddc16566))
+* date time deserialization leniency ([00b11fd](https://github.com/Bluestaq/udl-java-sdk/commit/00b11fd3cab6c4a80cf564c676074b049d7d57c5))
+
+
+### Chores
+
+* **ci:** upgrade `actions/setup-java` ([e099016](https://github.com/Bluestaq/udl-java-sdk/commit/e099016c97398fe16725e7edb0bfee3d7581fc4c))
+* **internal:** clean up maven repo artifact script and add html documentation to repo root ([faeff17](https://github.com/Bluestaq/udl-java-sdk/commit/faeff17a7ef6c558a73d47c7f2b6d1e65074c565))
+* **internal:** depend on packages directly in example ([da90298](https://github.com/Bluestaq/udl-java-sdk/commit/da9029896a1689833747a3b30d30ac9dddc16566))
+* **internal:** improve maven repo docs ([d9eceb7](https://github.com/Bluestaq/udl-java-sdk/commit/d9eceb7bcc63d5ea858716434cc7ec1d04e95464))
+* **internal:** support uploading Maven repo artifacts to stainless package server ([f3afe9c](https://github.com/Bluestaq/udl-java-sdk/commit/f3afe9c3079f9d5f4b2ffcd171544be8835972e1))
+* **internal:** update `actions/checkout` version ([df236cf](https://github.com/Bluestaq/udl-java-sdk/commit/df236cf1221185244ee1c2077a4a684d3c3cd692))
+* test on Jackson 2.14.0 to avoid encountering FasterXML/jackson-databind[#3240](https://github.com/Bluestaq/udl-java-sdk/issues/3240) in tests ([00b11fd](https://github.com/Bluestaq/udl-java-sdk/commit/00b11fd3cab6c4a80cf564c676074b049d7d57c5))
+
+
+### Documentation
+
+* prominently feature MCP server setup in root SDK readmes ([facd975](https://github.com/Bluestaq/udl-java-sdk/commit/facd97572299629a746e75f3c7d0c569e0f44fd3))
+
 ## 0.7.0 (2025-12-05)
 
 Full Changelog: [v0.6.2...v0.7.0](https://github.com/Bluestaq/udl-java-sdk/compare/v0.6.2...v0.7.0)
