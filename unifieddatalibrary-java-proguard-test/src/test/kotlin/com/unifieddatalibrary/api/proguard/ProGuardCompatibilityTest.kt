@@ -298,6 +298,8 @@ internal class ProGuardCompatibilityTest {
                         .unitLocName("ICAO:KXXQ")
                         .build()
                 )
+                .createdAt(OffsetDateTime.parse("2018-01-01T16:00:00.123Z"))
+                .createdBy("some.user")
                 .endTs(OffsetDateTime.parse("2023-10-27T12:00:00.123Z"))
                 .addGenText(
                     AirTaskingOrderFull.GenText.builder()
@@ -318,6 +320,8 @@ internal class ProGuardCompatibilityTest {
                         .build()
                 )
                 .origin("THIRD_PARTY_DATASOURCE")
+                .origNetwork("OPS1")
+                .sourceDl("AXE")
                 .build()
 
         val roundtrippedAirTaskingOrderFull =
